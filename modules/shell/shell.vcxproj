@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>iKnowShell</ProjectName>
+    <ProjectGuid>{1C10B62A-EE40-44D5-92FB-01A7733294F4}</ProjectGuid>
+    <RootNamespace>iKnowShell</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+    <Import Project="..\Dependencies.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+    <Import Project="..\Dependencies.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.21005.1</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\kit\$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\built\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\kit\$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\built\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalOptions>/Zm1000  %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>.\src\SDK\headers;.\src;..\core\src\headers;..\base\src\headers;..\aho;..\ali;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;CACHE_COM_DISABLE;_ISCDLL;SHELL_EXPORTS;_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DisableSpecificWarnings>4251;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0813</Culture>
+      <AdditionalIncludeDirectories>..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;iKnowCore.lib;iKnowBase.lib;iKnowModelDe.lib;iKnowModelEn.lib;iKnowModelEs.lib;iKnowModelFr.lib;iKnowModelNl.lib;iKnowModelPt.lib;iKnowModelRu.lib;iKnowModelJa.lib;iKnowModelUk.lib;iKnowModelSv.lib;iKnowModelCs.lib;iKnowModelDex.lib;iKnowModelEnx.lib;iKnowModelEsx.lib;iKnowModelFrx.lib;iKnowModelNlx.lib;iKnowModelPtx.lib;iKnowModelRux.lib;iKnowModelJax.lib;iKnowModelUkx.lib;iKnowModelSvx.lib;iKnowModelCsx.lib;iKnowModelCommon.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalOptions>/Zm1000  %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.\src\SDK\headers;.\src;..\core\src\headers;..\base\src\headers;..\aho;..\ali;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;_CRT_SECURE_NO_WARNINGS;CACHE_COM_DISABLE;_ISCDLL;SHELL_EXPORTS;_SECURE_SCL=0;_SCL_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BrowseInformation>true</BrowseInformation>
+      <WarningLevel>Level4</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;4099;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0813</Culture>
+      <AdditionalIncludeDirectories>..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;iKnowCore.lib;iKnowBase.lib;iKnowModelDe.lib;iKnowModelEn.lib;iKnowModelEs.lib;iKnowModelFr.lib;iKnowModelNl.lib;iKnowModelPt.lib;iKnowModelRu.lib;iKnowModelJa.lib;iKnowModelUk.lib;iKnowModelSv.lib;iKnowModelCs.lib;iKnowModelDex.lib;iKnowModelEnx.lib;iKnowModelEsx.lib;iKnowModelFrx.lib;iKnowModelNlx.lib;iKnowModelPtx.lib;iKnowModelRux.lib;iKnowModelJax.lib;iKnowModelUkx.lib;iKnowModelSvx.lib;iKnowModelCsx.lib;iKnowModelCommon.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <Version>1.1</Version>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\shared\Utility\utlCacheList.cpp" />
+    <ClCompile Include="..\..\shared\Utility\utlCountedByteArray.cpp" />
+    <ClCompile Include="src\DynamicModel.cpp" />
+    <ClCompile Include="src\CompiledKnowledgebase.cpp" />
+    <ClCompile Include="src\CompiledLanguagebase.cpp" />
+    <ClCompile Include="src\KernelInterface.cpp" />
+    <ClCompile Include="src\OffsetPtr.cpp" />
+    <ClCompile Include="src\Process.cpp" />
+    <ClCompile Include="src\SharedMemoryKnowledgebase.cpp" />
+    <ClCompile Include="src\SharedMemoryLanguagebase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CompiledKnowledgebase.h" />
+    <ClInclude Include="src\CompiledLanguagebase.h" />
+    <ClInclude Include="src\Kb.h" />
+    <ClInclude Include="src\KbAcronym.h" />
+    <ClInclude Include="src\KbAttribute.h" />
+    <ClInclude Include="src\KbAttributeMap.h" />
+    <ClInclude Include="src\KbFilter.h" />
+    <ClInclude Include="src\KbLabel.h" />
+    <ClInclude Include="src\KbLexrep.h" />
+    <ClInclude Include="src\KbRule.h" />
+    <ClInclude Include="src\SDK\headers\OutFunc.h" />
+    <ClInclude Include="src\Process.h" />
+    <ClInclude Include="src\RawBlock.h" />
+    <ClInclude Include="src\SharedMemoryKnowledgebase.h" />
+    <ClInclude Include="src\StaticHashTable.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="shell.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

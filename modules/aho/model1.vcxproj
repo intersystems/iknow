@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="winamd64 Debug|Win32">
+      <Configuration>winamd64 Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="winamd64 Debug|x64">
+      <Configuration>winamd64 Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="winamd64 Release|Win32">
+      <Configuration>winamd64 Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="winamd64 Release|x64">
+      <Configuration>winamd64 Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>iKnowModel$(IKLANG)x</ProjectName>
+    <ProjectGuid>{58CBEDEC-EB43-4808-8989-8D320D32E9E1}</ProjectGuid>
+    <RootNamespace>model_$(IKLANG)x</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v120_xp</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\..\..\kit\winx86\debug\bin\</OutDir>
+    <IntDir>..\..\..\built\winx86\debug\modules\iknow\model\$(IKLANG)x\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\..\..\kit\winx86\release\bin\</OutDir>
+    <IntDir>..\..\..\built\winx86\release\modules\iknow\model\$(IKLANG)x\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|Win32'">
+    <OutDir>..\..\..\kit\winamd64\debug\bin\</OutDir>
+    <IntDir>..\..\..\built\winamd64\debug\modules\iknow\model\$(IKLANG)x\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\..\..\kit\winamd64\Debug\bin\</OutDir>
+    <IntDir>..\..\..\built\winamd64\Debug\modules\iknow\model\$(IKLANG)x\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|Win32'">
+    <OutDir>..\..\..\kit\winamd64\release\bin\</OutDir>
+    <IntDir>..\..\..\built\winamd64\release\modules\iknow\model\$(IKLANG)x\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\kit\winamd64\release\bin\</OutDir>
+    <IntDir>..\..\..\built\winamd64\release\modules\iknow\model\$(IKLANG)x\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winx86\debug\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;_DEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuucd.lib;icuind.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winx86\debug\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;_DEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuucd.lib;icuind.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winx86\release\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;NDEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winx86\release\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;NDEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winamd64\debug\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;_DEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuucd.lib;icuind.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX64</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winamd64\debug\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;_DEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuucd.lib;icuind.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winamd64\release\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;NDEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader />
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <TargetMachine>MachineX64</TargetMachine>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='winamd64 Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;.\inl\$(IKLANG)_regex;.\lexrep;.\ali;..\base\src\headers;$(ProjectDir)..\..\..\shared\System\win32;$(ProjectDir)..\..\..\shared\Utility;$(ProjectDir)..\..\..\shared\System;..\..\..\kernel\common\h;..\..\ikhelper;..\shell\src\SDK\headers;..\shell\src;..\core\src\headers;..\ali;..\..\..\thirdparty\boost_1_55_0;$(ProjectDir)..\..\..\built\winamd64\release\thirdparty\icu-4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);MODELINDEX=1;WIN32;NDEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ALIModelData.cpp" />
+    <ClCompile Include="ali\ALIFailureTable.cpp" />
+    <ClCompile Include="ali\ALINextStateMap.cpp" />
+    <ClCompile Include="ali\ALIOneStateMap.cpp" />
+    <ClCompile Include="ali\ALIOutput.cpp" />
+    <ClCompile Include="ali\ALIStateMap.cpp" />
+    <ClCompile Include="ali\ALISymbolMap.cpp" />
+    <ClCompile Include="lexrep\FailureTable.cpp" />
+    <ClCompile Include="lexrep\MatchCount.cpp" />
+    <ClCompile Include="lexrep\Matches.cpp" />
+    <ClCompile Include="lexrep\MatchSet.cpp" />
+    <ClCompile Include="lexrep\Metadata.cpp" />
+    <ClCompile Include="lexrep\NextStateMap.cpp" />
+    <ClCompile Include="lexrep\OneStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexMap.cpp" />
+    <ClCompile Include="lexrep\RegexNextStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexOffsetMap.cpp" />
+    <ClCompile Include="lexrep\RegexOneStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexStateMap.cpp" />
+    <ClCompile Include="lexrep\StateMap.cpp" />
+    <ClCompile Include="lexrep\SymbolMap.cpp" />
+    <ClCompile Include="ModelData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AhoCorasick.h" />
+    <ClInclude Include="AhoExport.h" />
+    <ClInclude Include="AhoTypes.h" />
+    <ClInclude Include="ALIModelData.h" />
+    <ClInclude Include="ali\ALIData.h" />
+    <ClInclude Include="ali\ALIFunctions.h" />
+    <ClInclude Include="lexrep\LexrepData.h" />
+    <ClInclude Include="lexrep\LexrepFunctions.h" />
+    <ClInclude Include="ModelData.h" />
+    <ClInclude Include="ModelId.h" />
+    <ClInclude Include="ModelRegex.h" />
+    <ClInclude Include="ModelRegistry.h" />
+    <ClInclude Include="StaticModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(IKLANG)\resource.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

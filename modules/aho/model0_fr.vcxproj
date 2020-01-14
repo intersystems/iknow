@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>iKnowModelfr</ProjectName>
+    <ProjectGuid>{890C8121-D3EA-4E17-9A05-3F4689CFC46B}</ProjectGuid>
+    <RootNamespace>model_fr</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="fr\iklang.props" />
+    <Import Project="..\Dependencies.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="fr\iklang.props" />
+    <Import Project="..\Dependencies.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\kit\$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\built\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)..\..\kit\$(Platform)\$(Configuration)\bin\</OutDir>
+    <IntDir>$(ProjectDir)..\..\built\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>.;.\ali;.\lexrep;.\inl\$(IKLANG);..\base\src\headers;..\ali;..\core\src\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);WIN32;_DEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowModelCommon.lib;iKnowBase.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>.;.\ali;.\lexrep;.\inl\$(IKLANG);..\base\src\headers;..\ali;..\core\src\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>MODEL_EXPORTS;MODELID=$(IKLANG);WIN32;NDEBUG;_WINDOWS;_USRDLL;AHO_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DisableSpecificWarnings>4819;4800;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>..\..\build\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>iKnowBase.lib;iKnowModelCommon.lib;iKnowCore.lib;iKnowALI.lib;icuuc.lib;icuin.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="ALIModelData.cpp" />
+    <ClCompile Include="ali\ALIFailureTable.cpp" />
+    <ClCompile Include="ali\ALINextStateMap.cpp" />
+    <ClCompile Include="ali\ALIOneStateMap.cpp" />
+    <ClCompile Include="ali\ALIOutput.cpp" />
+    <ClCompile Include="ali\ALIStateMap.cpp" />
+    <ClCompile Include="ali\ALISymbolMap.cpp" />
+    <ClCompile Include="lexrep\FailureTable.cpp" />
+    <ClCompile Include="lexrep\MatchCount.cpp" />
+    <ClCompile Include="lexrep\Matches.cpp" />
+    <ClCompile Include="lexrep\MatchSet.cpp" />
+    <ClCompile Include="lexrep\Metadata.cpp" />
+    <ClCompile Include="lexrep\NextStateMap.cpp" />
+    <ClCompile Include="lexrep\OneStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexMap.cpp" />
+    <ClCompile Include="lexrep\RegexNextStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexOffsetMap.cpp" />
+    <ClCompile Include="lexrep\RegexOneStateMap.cpp" />
+    <ClCompile Include="lexrep\RegexStateMap.cpp" />
+    <ClCompile Include="lexrep\StateMap.cpp" />
+    <ClCompile Include="lexrep\SymbolMap.cpp" />
+    <ClCompile Include="ModelData.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AhoCorasick.h" />
+    <ClInclude Include="AhoExport.h" />
+    <ClInclude Include="AhoTypes.h" />
+    <ClInclude Include="ALIModelData.h" />
+    <ClInclude Include="ali\ALIData.h" />
+    <ClInclude Include="ali\ALIFunctions.h" />
+    <ClInclude Include="lexrep\LexrepData.h" />
+    <ClInclude Include="lexrep\LexrepFunctions.h" />
+    <ClInclude Include="ModelData.h" />
+    <ClInclude Include="ModelId.h" />
+    <ClInclude Include="ModelRegex.h" />
+    <ClInclude Include="ModelRegistry.h" />
+    <ClInclude Include="StaticModel.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(IKLANG)\resource.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

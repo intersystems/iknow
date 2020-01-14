@@ -1,0 +1,21 @@
+// IkDocumentPart.cpp: implementation of the IkDocumentPart class.
+//
+//////////////////////////////////////////////////////////////////////
+
+#include "IkDocumentPart.h"
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+using namespace iknow::core;
+
+IkDocumentPart::IkDocumentPart()  : m_summaryRelevance(0), m_summaryRelevanceComputed(false)
+{
+
+}
+
+IkDocumentPart::~IkDocumentPart()
+{
+
+}

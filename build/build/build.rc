@@ -1,0 +1,61 @@
+#ifndef BEGINCOPYRIGHT
+#define BEGINCOPYRIGHT "2000"
+#endif
+
+#ifndef FILEDESCRIPTION
+#define FILEDESCRIPTION "MISSING - FIXME"
+#endif
+
+#ifndef INTERNALNAME
+#define INTERNALNAME "MISSING - FIXME"
+#endif
+
+#ifndef ORIGINALFILENAME
+#define ORIGINALFILENAME "MISSING - FIXME"
+#endif
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+  FILEVERSION MAJORVERSION,MINORVERSION,MAINTVERSION,BUILDNUMBER
+  PRODUCTVERSION MAJORVERSION,MINORVERSION,MAINTVERSION,BUILDNUMBER
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "CompanyName",        COMPANYNAME "\0"
+            VALUE "FileDescription",    FILEDESCRIPTION "\0"
+            VALUE "FileVersion",        FILEVERSIONSTR "\0"
+            VALUE "InternalName",       INTERNALNAME "\0"
+#ifdef COPYRIGHTHOLDER
+            VALUE "LegalCopyright",     "Copyright " BEGINCOPYRIGHT "-" ENDCOPYRIGHT "\54 " COPYRIGHTHOLDER "\0"
+#else
+            VALUE "LegalCopyright",     "Copyright " BEGINCOPYRIGHT "-" ENDCOPYRIGHT "\54 " FULLCOMPANYNAME "\0"
+#endif
+            VALUE "LegalTrademarks",    "InterSystems IRIS (TM)\0"
+            VALUE "OriginalFilename",   ORIGINALFILENAME "\0"
+            VALUE "ProductName",        PRODUCTNAME "\0"
+            VALUE "ProductVersion",     PRODUCTVERSIONSTR "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
