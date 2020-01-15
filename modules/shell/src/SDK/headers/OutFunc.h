@@ -5,8 +5,6 @@
 #include "IkStemmer.h"
 
 typedef iknow::core::IkStemmer<iknow::base::String, iknow::base::String> Stemmer;
-
-//TRW: Removed the old IndexData restructuring.
-typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug*, void*, Stemmer*);
+typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug<TraceListType>*, void*, Stemmer*);
 
 #endif // YMCA_SHELL_OUTFUNC_H_

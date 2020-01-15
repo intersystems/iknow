@@ -18,7 +18,7 @@ namespace iknow {
     ALI_API iknow::base::String identify(const iknow::base::String::const_iterator start, iknow::base::String::const_iterator end, double& certainty);
 
     //Set the trace to get debugging output into the trace
-    ALI_API void SetTrace(iknow::base::IkTrace& trace);
+    ALI_API void SetTrace(iknow::base::IkTrace<TraceListType>& trace);
 
     //Clear the trace to turn it off
     ALI_API void ClearTrace();

@@ -32,7 +32,7 @@ namespace iknow
     public:
       static IkSummarizer* GetInstance() { return (!inst ? inst = new IkSummarizer() : inst); }
       void setSummaryWeight(const iknow::base::String& weights); // Influence the natural order of things...
-      void CalculateSummaryRelevance(IkIndexOutput& output, IkIndexDebug* debug) const; // Calculate summary values per sentence
+      void CalculateSummaryRelevance(IkIndexOutput& output, IkIndexDebug<TraceListType>* debug) const; // Calculate summary values per sentence
 
     private:
       static IkSummarizer* inst;

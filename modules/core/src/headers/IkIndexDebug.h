@@ -8,9 +8,11 @@
 #include "IkSentence.h"
 #include "IkPath.h"
 
+
 #include <map>
 namespace iknow {
   namespace core {
+    template<typename T>
     class CORE_API IkIndexDebug {
     public:
       void SwitchKnowledgebase(const iknow::base::String& old_language, const iknow::base::String& new_language, double certainty);
@@ -54,11 +56,11 @@ namespace iknow {
 	  void StartTimer(void);
 	  void TraceTheTime(const int action);
 
-      const iknow::base::IkTrace& GetTrace() const { return trace_; }
+      const iknow::base::IkTrace<T>& GetTrace() const ;
 
     private:
-      iknow::base::IkTrace trace_;
-	  
+      iknow::base::IkTrace<T> trace_;
+
     };
   }
 }

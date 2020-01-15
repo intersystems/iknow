@@ -220,7 +220,7 @@ void IkSummarizer::AdjustSummaryRelevanceOfSentences(IkIndexOutput& output) cons
     }
 }
 
-void IkSummarizer::CalculateSummaryRelevance(IkIndexOutput& output, IkIndexDebug* debug) const
+void IkSummarizer::CalculateSummaryRelevance(IkIndexOutput& output, IkIndexDebug<TraceListType>* debug) const
 {
   IkIndexOutput::WordCounts& wordCounts = output.m_wordCounts;
   ObtainWordCounts (output.SentencesBegin(), output.SentencesEnd(), wordCounts);  // gather counts of all words

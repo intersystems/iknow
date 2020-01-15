@@ -70,9 +70,9 @@ namespace iknow {
 
     }
     
-    static IkTrace* global_trace = 0;
+    static IkTrace<TraceListType>* global_trace = 0;
     
-    void SetTrace(IkTrace& trace) {
+    void SetTrace(IkTrace<TraceListType>& trace) {
       global_trace = &trace;
     }
 

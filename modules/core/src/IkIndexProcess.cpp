@@ -64,7 +64,7 @@ private:
 	void operator=(const IsNotConceptVector&);
 };
 
-void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDebug* pDebug, bool bMergeRelations, bool bBinaryMode, bool delimitedSentences, size_t max_concept_cluster_length, IkKnowledgebase* pUdct)
+void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDebug<TraceListType>* pDebug, bool bMergeRelations, bool bBinaryMode, bool delimitedSentences, size_t max_concept_cluster_length, IkKnowledgebase* pUdct)
 {
   m_pDebug = pDebug;
   pOut->SetTextPointer((pInput->GetString())->c_str()); // store pointer to input text data
@@ -226,9 +226,10 @@ struct TokenProcessor {
   TextRefVector& text_refs_;
   size_t literals_used_;
   size_t max_literal_;
-  IkIndexDebug* m_pDebug; //specially named so SEMANTIC_ACTION macro works
+  IkIndexDebug<TraceListType>* m_pDebug; //specially named so SEMANTIC_ACTION macro works
   const IkKnowledgebase& kb_;
-  TokenProcessor(Lexreps& result, TextRefVector& text_refs, FastLabelSet::Index concept_label, FastLabelSet::Index punctuation_label, IkIndexDebug* index_debug, const IkKnowledgebase& kb) :
+
+  TokenProcessor(Lexreps& result, TextRefVector& text_refs, FastLabelSet::Index concept_label, FastLabelSet::Index punctuation_label, IkIndexDebug<TraceListType>* index_debug, const IkKnowledgebase& kb) :
     result_(result),
     concept_label_(concept_label),
     punctuation_label_(punctuation_label),
@@ -1280,6 +1281,7 @@ void IkIndexProcess::SolveAmbiguous(Lexreps& lexreps)
   for (Lexreps::iterator i=lexreps.begin(); i != lexreps.end(); ++i) {
     IkLexrep& lexrep = *i;
     SEMANTIC_ACTION(RulesComplete(lexrep, *m_pKnowledgebase));
+
     size_t nbrLabels = lexrep.NumberOfLabels();
     bool bEqualType=true;
     //Find the first non-Attribute label.
@@ -1307,8 +1309,9 @@ void IkIndexProcess::SolveAmbiguous(Lexreps& lexreps)
     } else {   // Generalize the first type.
       switch (firstType) {
 	  case IkLabel::PathRelevant: {
-        if (m_pKnowledgebase->GetMetadata<kPathConstruction>() == kCRCSequence) lexrep_type = IkLabel::Nonrelevant; // old style
-        else lexrep_type = IkLabel::PathRelevant; // new style : kPathRelevant
+        // if (m_pKnowledgebase->GetMetadata<kPathConstruction>() == kCRCSequence) lexrep_type = IkLabel::Nonrelevant; // old style
+        // else lexrep_type = IkLabel::PathRelevant; // new style : kPathRelevant
+		lexrep_type = IkLabel::PathRelevant;
 	  } break;
       case IkLabel::Unknown:
 	  case IkLabel::Nonrelevant:
@@ -1898,7 +1901,7 @@ OutIterT BuildEVConceptExtr(size_t offset, OutIterT out) { // add on the right s
 //associated with the EVValue attribute. In the initial implementation, this is an offset from the
 //start of the sentence (always read L-R)
 template<typename InIterT, typename OutIterT, typename ValFunc>
-OutIterT BuildEVExprs(InIterT begin, InIterT end, OutIterT out, ValFunc val_func, const IkKnowledgebase& kb, IkIndexDebug* pDebug) {
+OutIterT BuildEVExprs(InIterT begin, InIterT end, OutIterT out, ValFunc val_func, const IkKnowledgebase& kb, IkIndexDebug<TraceListType>* pDebug) {
   //Get KB-specific attribute types for EVSlot() and EVValue();
   static const String kEVSlotTypeName = IkStringEncoding::UTF8ToBase("EVSlot");
   static const String kEVValueTypeName = IkStringEncoding::UTF8ToBase("EVValue");

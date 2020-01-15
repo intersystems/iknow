@@ -22,12 +22,12 @@ using namespace iknow::base;
 
 //For label sets
 
-iknow::base::String AttributeName(AttributeId id, const IkKnowledgebase& kb) {
+static inline iknow::base::String AttributeName(AttributeId id, const IkKnowledgebase& kb) {
   AttributeString s = kb.AttributeNameForId(id);
   return iknow::base::String(s.data, s.size);
 }
 
-CacheList ToList(FastLabelSet::Index label, size_t attribute_pos, const IkKnowledgebase& kb) {
+static CacheList ToList(FastLabelSet::Index label, size_t attribute_pos, const IkKnowledgebase& kb) {
   CacheList attribute;
   attribute += AttributeName(kb.GetAttributeType(label, attribute_pos), kb);
   for (const AttributeId* i = kb.GetAttributeParamsBegin(label, attribute_pos);
@@ -38,7 +38,7 @@ CacheList ToList(FastLabelSet::Index label, size_t attribute_pos, const IkKnowle
   return attribute;
 }
 
-CacheList ToList(const FastLabelSet& labels, const IkKnowledgebase& kb) {
+static CacheList ToList(const FastLabelSet& labels, const IkKnowledgebase& kb) {
   CacheList out;
   for (size_t i=0; i < static_cast<size_t>(labels.Size()); ++i) {
     FastLabelSet::Index index = labels.At(i);
@@ -88,23 +88,7 @@ static const char* TypeToString(IkLabel::Type t) {
   }
 }
 
-/*
-CacheList ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
-  CacheList out;
-  //TODO: Handle colons in values.
-  out += (int)lexrep.GetId();
-  out += TypeToString(lexrep.GetLexrepType());
-  out += lexrep.GetValue();
-  out += lexrep.GetNormalizedValue();
-  for (Phase p = 0; p < kPhaseCount; ++p) {
-    if (!lexrep.GetLabels(p).Empty())
-      out += ToList(lexrep.GetLabels(p), kb);
-  }
-  return out;
-}
-*/
-
-CacheList ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+static CacheList ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   CacheList out;
   //TODO: Handle colons in values.
   out += (int)lexrep.GetId();
@@ -139,7 +123,7 @@ CacheList ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 }
 
 //Without KB data
-CacheList ToList(const IkLexrep& lexrep) {
+static CacheList ToList(const IkLexrep& lexrep) {
   CacheList out;
   out += (int)lexrep.GetId();
   out += TypeToString(lexrep.GetLexrepType());
@@ -151,7 +135,7 @@ CacheList ToList(const IkLexrep& lexrep) {
 }
 
 //For lexreps
-CacheList ToList(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
+static CacheList ToList(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
   CacheList out;
   for (IkMergedLexrep::const_iterator i = lexrep.LexrepsBegin(); i != lexrep.LexrepsEnd(); ++i) {
     out += ToList(*i, kb);
@@ -161,7 +145,7 @@ CacheList ToList(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
 }
 
 //For lexreps without KB data
-CacheList ToList(const IkMergedLexrep& lexrep) {
+static CacheList ToList(const IkMergedLexrep& lexrep) {
   CacheList out;
   for (IkMergedLexrep::const_iterator i = lexrep.LexrepsBegin(); i != lexrep.LexrepsEnd(); ++i) {
     out += ToList(*i);
@@ -171,7 +155,7 @@ CacheList ToList(const IkMergedLexrep& lexrep) {
 }
 
 //For rule patterns
-CacheList ToList(const FastLabelSet::Index* begin, const FastLabelSet::Index* end, const IkKnowledgebase& kb) {
+static CacheList ToList(const FastLabelSet::Index* begin, const FastLabelSet::Index* end, const IkKnowledgebase& kb) {
   CacheList out;
   for (const FastLabelSet::Index* i=begin; i != end; ++i) {
     out += kb.GetAtIndex(*i).GetName();
@@ -179,7 +163,7 @@ CacheList ToList(const FastLabelSet::Index* begin, const FastLabelSet::Index* en
   return out;
 }
 
-String ToString(const IkRuleInputPattern& pattern, const IkKnowledgebase& kb) {
+static String ToString(const IkRuleInputPattern& pattern, const IkKnowledgebase& kb) {
   String out;
   if (pattern.IsVariable()) {
 	  out += (pattern.IsNullVariable() ? '.' : '*');
@@ -238,7 +222,7 @@ String ToString(const IkRuleInputPattern& pattern, const IkKnowledgebase& kb) {
 }
 
 //For rule input patterns
-CacheList ToList(const IkRuleInputPattern* begin, const IkRuleInputPattern* end, const IkKnowledgebase& kb) {
+static CacheList ToList(const IkRuleInputPattern* begin, const IkRuleInputPattern* end, const IkKnowledgebase& kb) {
   CacheList out;
   for (const IkRuleInputPattern* i=begin; i != end; ++i) {
     out += ToString(*i, kb);
@@ -246,7 +230,7 @@ CacheList ToList(const IkRuleInputPattern* begin, const IkRuleInputPattern* end,
   return out;
 }
 
-String ToString(const IkRuleOutputPattern& pattern, const IkKnowledgebase& kb) {
+static String ToString(const IkRuleOutputPattern& pattern, const IkKnowledgebase& kb) {
   String out;
   IkRuleOption option = pattern.GetOptions();
   for (const IkRuleOutputAction* i = pattern.ActionsBegin(); i != pattern.ActionsEnd(); ++i) {
@@ -270,7 +254,7 @@ String ToString(const IkRuleOutputPattern& pattern, const IkKnowledgebase& kb) {
   return out;
 }
 
-CacheList ToList(const IkRuleOutputPattern* begin, const IkRuleOutputPattern* end, const IkKnowledgebase& kb) {
+static CacheList ToList(const IkRuleOutputPattern* begin, const IkRuleOutputPattern* end, const IkKnowledgebase& kb) {
   CacheList out;
   for (const IkRuleOutputPattern* i = begin; i != end; ++i) {
     out += ToString(*i, kb);
@@ -280,7 +264,7 @@ CacheList ToList(const IkRuleOutputPattern* begin, const IkRuleOutputPattern* en
 
 //Now, the traces themselves.
 
-void IkIndexDebug::SwitchKnowledgebase(const String& old_language, const String& new_language, double certainty) {
+void IkIndexDebug<CacheList>::SwitchKnowledgebase(const String& old_language, const String& new_language, double certainty) {
   CacheList out;
   out += old_language;
   out += new_language;
@@ -288,7 +272,7 @@ void IkIndexDebug::SwitchKnowledgebase(const String& old_language, const String&
   trace_.Add("SwitchKnowledgebase", out);
 }
 
-void IkIndexDebug::ApplyRule(size_t rule_id, Lexreps::iterator match, size_t match_length, const IkKnowledgebase& kb)
+void IkIndexDebug<CacheList>::ApplyRule(size_t rule_id, Lexreps::iterator match, size_t match_length, const IkKnowledgebase& kb)
 {
   CacheList out;
   out += (int)rule_id;
@@ -303,7 +287,7 @@ void IkIndexDebug::ApplyRule(size_t rule_id, Lexreps::iterator match, size_t mat
   trace_.Add("RuleApplication", out);
 }
 
-void IkIndexDebug::RuleApplied(size_t rule_id, Lexreps::iterator match, size_t match_length, const IkKnowledgebase& kb)
+void IkIndexDebug<CacheList>::RuleApplied(size_t rule_id, Lexreps::iterator match, size_t match_length, const IkKnowledgebase& kb)
 {
   CacheList out;
   out += (int)rule_id;
@@ -314,16 +298,15 @@ void IkIndexDebug::RuleApplied(size_t rule_id, Lexreps::iterator match, size_t m
   trace_.Add("RuleApplicationResult", out);
 }
 
-
-void IkIndexDebug::RulesComplete(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::RulesComplete(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("RulesComplete", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::AmbiguityResolved(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::AmbiguityResolved(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("AmbiguityResolved", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::PreprocessToken(const String& original, const String& replacement) {
+void IkIndexDebug<CacheList>::PreprocessToken(const String& original, const String& replacement) {
   if (original == replacement) return;
   CacheList out;
   out += original;
@@ -331,7 +314,7 @@ void IkIndexDebug::PreprocessToken(const String& original, const String& replace
   trace_.Add("PreprocessToken", out);
 }
 
-void IkIndexDebug::NormalizeToken(const String& original, const String& replacement) {
+void IkIndexDebug<CacheList>::NormalizeToken(const String& original, const String& replacement) {
   if (original == replacement) return;
   CacheList out;
   out += original;
@@ -339,66 +322,68 @@ void IkIndexDebug::NormalizeToken(const String& original, const String& replacem
   trace_.Add("NormalizeToken", out);
 }
 
-void IkIndexDebug::LexrepCreated(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::LexrepCreated(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("LexrepCreated", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::LexrepIdentified(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
-	CacheList out = ToList(lexrep, kb);
-	if (lexrep.GetMetaData()) {
-		out += lexrep.GetMetaData();
-	}
-	trace_.Add("LexrepIdentified", out);
+void IkIndexDebug<CacheList>::LexrepIdentified(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+    CacheList out = ToList(lexrep, kb);
+    if (lexrep.GetMetaData()) {
+        out += lexrep.GetMetaData();
+    }
+    trace_.Add("LexrepIdentified", out);
 }
 
-void IkIndexDebug::UserDictionaryMatch(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::UserDictionaryMatch(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("UserDictionaryMatch", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::AttributeDetected(const std::string& attribute, const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::AttributeDetected(const std::string& attribute, const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   CacheList out;
   out += attribute;
   out += ToList(lexrep, kb);
   trace_.Add("AttributeDetected", out);
 }
 
-void IkIndexDebug::LexrepTypeAssignment(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::LexrepTypeAssignment(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("LexrepTypeAssignment", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::MergingRelations(Lexreps::const_iterator begin, Lexreps::const_iterator end, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergingRelations(Lexreps::const_iterator begin, Lexreps::const_iterator end, const IkKnowledgebase& kb) {
   for (Lexreps::const_iterator i = begin; i != end; ++i) {
     MergingRelation(*i, kb);
   }
 }
 
-void IkIndexDebug::MergingRelation(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+template<>
+void IkIndexDebug<CacheList>::MergingRelation(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergingRelation", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::MergedRelation(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergedRelation(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergedRelation", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::MergedRelationNonrelevant(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergedRelationNonrelevant(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergedRelationNonrelevant", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::MergingConcepts(Lexreps::const_iterator begin, Lexreps::const_iterator end, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergingConcepts(Lexreps::const_iterator begin, Lexreps::const_iterator end, const IkKnowledgebase& kb) {
   for (Lexreps::const_iterator i = begin; i != end; ++i) {
     MergingConcept(*i, kb);
   }
 }
 
-void IkIndexDebug::MergingConcept(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+template<>
+void IkIndexDebug<CacheList>::MergingConcept(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergingConcept", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::MergedConcept(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergedConcept(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergedConcept", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::ConceptFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::ConceptFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
   if (replacement == lexrep.GetNormalizedValue()) return;
   CacheList out;
   out += ToList(lexrep, kb);
@@ -406,7 +391,7 @@ void IkIndexDebug::ConceptFiltered(const IkLexrep& lexrep, const String& replace
   trace_.Add("ConceptFiltered", out);
 }
 
-void IkIndexDebug::RelationFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::RelationFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
   if (replacement == lexrep.GetNormalizedValue()) return;
   CacheList out;
   out += ToList(lexrep, kb);
@@ -414,7 +399,7 @@ void IkIndexDebug::RelationFiltered(const IkLexrep& lexrep, const String& replac
   trace_.Add("RelationFiltered", out);
 }
 
-void IkIndexDebug::PathRelevantFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::PathRelevantFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
 	if (replacement == lexrep.GetNormalizedValue()) return;
 	CacheList out;
 	out += ToList(lexrep, kb);
@@ -422,7 +407,7 @@ void IkIndexDebug::PathRelevantFiltered(const IkLexrep& lexrep, const String& re
 	trace_.Add("PathRelevantFiltered", out);
 }
 
-void IkIndexDebug::NonRelevantFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::NonRelevantFiltered(const IkLexrep& lexrep, const String& replacement, const IkKnowledgebase& kb) {
   if (replacement == lexrep.GetNormalizedValue()) return;
   CacheList out;
   out += ToList(lexrep, kb);
@@ -430,7 +415,7 @@ void IkIndexDebug::NonRelevantFiltered(const IkLexrep& lexrep, const String& rep
   trace_.Add("NonRelevantFiltered", out);
 }
 
-void IkIndexDebug::SentenceFound(const String& kb_name, double certainty, const String& language_code, const Lexreps& lexreps, const iknow::base::String& separator) {
+void IkIndexDebug<CacheList>::SentenceFound(const String& kb_name, double certainty, const String& language_code, const Lexreps& lexreps, const iknow::base::String& separator) {
   CacheList out;
   out += kb_name;
   out += certainty;
@@ -452,7 +437,7 @@ void IkIndexDebug::SentenceFound(const String& kb_name, double certainty, const 
   trace_.Add("SentenceFound", out);
 }
 
-void IkIndexDebug::SentenceComplete(const IkSentence& sentence, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::SentenceComplete(const IkSentence& sentence, const IkKnowledgebase& kb) {
   CacheList out;
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
     out += ToList(*i, kb);
@@ -460,7 +445,7 @@ void IkIndexDebug::SentenceComplete(const IkSentence& sentence, const IkKnowledg
   trace_.Add("SentenceComplete", out);
 }
 
-void IkIndexDebug::EntityVectors(const IkSentence& sentence) {
+void IkIndexDebug<CacheList>::EntityVectors(const IkSentence& sentence) {
   std::vector<iknow::base::String> entities; // first collect the entities
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
     entities.push_back(i->GetValue());
@@ -472,13 +457,13 @@ void IkIndexDebug::EntityVectors(const IkSentence& sentence) {
   if (out.size() != static_cast<size_t>(0)) trace_.Add("EntityVector", out); // only emit if we do have entity vectors
 }
 
-void IkIndexDebug::InvalidEntityVector(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::InvalidEntityVector(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("InvalidEntityVector", ToList(lexrep, kb));
 }
-void IkIndexDebug::MissingEntityVector(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MissingEntityVector(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("MissingEntityVector", ToList(lexrep, kb));
 }
-void IkIndexDebug::SentenceSummarizationComplete(const IkSentence& sentence)
+void IkIndexDebug<CacheList>::SentenceSummarizationComplete(const IkSentence& sentence)
 {
   CacheList out;
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
@@ -492,7 +477,7 @@ static String OffsetToValue(path::Offset offset, const MergedLexreps& lexreps) {
   return lexreps[offset].GetNormalizedValue();
 }
 
-void IkIndexDebug::CRC(const path::CRC& crc, const MergedLexreps& lexreps) {
+void IkIndexDebug<CacheList>::CRC(const path::CRC& crc, const MergedLexreps& lexreps) {
   CacheList out;
   out += OffsetToValue(crc.master, lexreps);
   out += OffsetToValue(crc.relation, lexreps);
@@ -500,44 +485,44 @@ void IkIndexDebug::CRC(const path::CRC& crc, const MergedLexreps& lexreps) {
   trace_.Add("CRC", out);
 }
 
-void IkIndexDebug::StemOccurence(const iknow::base::String& occurence, const iknow::base::String& stem) {
+void IkIndexDebug<CacheList>::StemOccurence(const iknow::base::String& occurence, const iknow::base::String& stem) {
   CacheList out;
   out += occurence;
   out += stem;
   trace_.Add("StemOccurence", out);
 }
 
-void IkIndexDebug::JoinResult(const Lexreps::iterator lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::JoinResult(const Lexreps::iterator lexrep, const IkKnowledgebase& kb) {
 	CacheList out;
 	out += ToList(*lexrep, kb);
 	trace_.Add("JoinResult", out);
 }
 
-void IkIndexDebug::SingleWordFreq(const iknow::base::String& word, size_t frequency) {
+void IkIndexDebug<CacheList>::SingleWordFreq(const iknow::base::String& word, size_t frequency) {
 	CacheList out;
 	out += word;
 	out += (int) frequency;
 	trace_.Add("SingleWordFreq", out);
 }
 
-void IkIndexDebug::TraceKeyDouble(const char* type, const iknow::base::String& name, double value) {
+void IkIndexDebug<CacheList>::TraceKeyDouble(const char* type, const iknow::base::String& name, double value) {
 	CacheList out;
 	out += name;
 	out += value;
 	trace_.Add(type, out);
 }
-void IkIndexDebug::Parameter(const iknow::base::String& name, double value) {
+void IkIndexDebug<CacheList>::Parameter(const iknow::base::String& name, double value) {
 	CacheList out;
 	out += name;
 	out += value;
 	trace_.Add("Parameter", out);
 }
 
-void IkIndexDebug::MergedKatakana(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::MergedKatakana(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("MergedKatakana", ToList(lexrep, kb));
 }
 
-void IkIndexDebug::LabelKatakana(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
+void IkIndexDebug<CacheList>::LabelKatakana(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("LabelKatakana", ToList(lexrep, kb));
 }
 
@@ -555,11 +540,11 @@ using std::chrono::milliseconds;
 using std::chrono::microseconds;
 static steady_clock::time_point time_point_now;
 
-void IkIndexDebug::StartTimer(void)
+void IkIndexDebug<CacheList>::StartTimer(void)
 {
 	time_point_now = steady_clock::now();
 }
-void IkIndexDebug::TraceTheTime(const int action) {
+void IkIndexDebug<CacheList>::TraceTheTime(const int action) {
 	auto d = steady_clock::now() - time_point_now;
 	size_t milli_seconds = static_cast<size_t>(duration_cast<milliseconds>(d).count());
 	size_t micro_seconds = static_cast<size_t>(duration_cast<microseconds>(d).count());
@@ -572,3 +557,5 @@ void IkIndexDebug::TraceTheTime(const int action) {
 }
 
 #endif //!AIX
+
+const iknow::base::IkTrace<CacheList>& IkIndexDebug<CacheList>::GetTrace() const { return trace_; }

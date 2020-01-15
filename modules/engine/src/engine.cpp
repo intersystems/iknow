@@ -26,7 +26,7 @@ inline void outMessage(const char* msg)
 #endif
 }
 
-typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug*, void*, Stemmer*);
+typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug<TraceListType>*, void*, Stemmer*);
 
 using iknow::shell::CProcess;
 using iknow::shell::SharedMemoryKnowledgebase;
@@ -96,7 +96,7 @@ static inline iknowdata::Entity::eType get_ent_type(const IkMergedLexrep *lexrep
 	}
 }
 
-static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::core::IkIndexDebug* debug, void* userdata, Stemmer* stemmer)
+static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::core::IkIndexDebug<TraceListType>* debug, void* userdata, Stemmer* stemmer)
 {
 	UData udata = *((UData*)userdata);
 
@@ -319,7 +319,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 		iknow::core::IkIndexInput Input(&text_input);
 		lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
-		process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true);
+		process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, true);
 		lck.unlock();
 
 		outMessage("Succesfull return of the iKnow Indexer");

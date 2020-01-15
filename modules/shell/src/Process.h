@@ -59,7 +59,7 @@ namespace iknow
 			          Stemmer *stemmer = NULL
       );
 	  // Now with text annotations...
-	  void IndexFunc(iknow::core::IkIndexInput& text_input, OutputFunc func, void *userdata, bool bDomAndProx=false);
+	  void IndexFunc(iknow::core::IkIndexInput& text_input, OutputFunc func, void *userdata, bool bDomAndProx=false, bool tracing_enabled=false);
 
     protected:
       iknow::core::IkCore* m_pCore;

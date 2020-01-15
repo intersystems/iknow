@@ -54,12 +54,12 @@ namespace iknow
 
       /*!
        *	Start the process
-       *	\param pInput: pointer to a input-object (must contain the text)
+       *	\param pInput: pointer to a input-object (must contain the text)en
        *	\param pOutput: pointer to the output-object
        *	\param nMaxConceptSize: the maximum conceptSize
        *	\exception IkException: UNKNOWN ERROR
        */
-      void Start(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug* pDebug, bool bMergeRelations, bool bBinaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
+      void Start(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug<TraceListType>* pDebug, bool bMergeRelations, bool bBinaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
 
       iknow::base::String NormalizeText(const iknow::base::String& input, const IkKnowledgebase* kb, const IkKnowledgebase* ud, bool bLowerCase=true, bool bStripPunct=true);
       
@@ -160,8 +160,7 @@ namespace iknow
 
       typedef std::map<iknow::base::String, IkKnowledgebase const *> KbMap;
       const KbMap& m_languageKbMap;
-      IkIndexDebug* m_pDebug;
-
+      IkIndexDebug<TraceListType>* m_pDebug;
       //No assignment operator.
       void operator=(const IkIndexProcess& other);
     };

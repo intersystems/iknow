@@ -64,7 +64,7 @@ namespace iknow
        *	\param nMaxConceptSize: the maximum concept-size
        *	\exception IkException: UNKNOWN ERROR
        */
-      void Index(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug* pDebug, bool mergeRelations, bool binaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
+      void Index(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug<TraceListType>* pDebug, bool mergeRelations, bool binaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
 
       // workaround for not being able to pass pointers inside std maps in vc6
       void AddToLanguageKbMap(iknow::base::String const & key, IkKnowledgebase const * const & value)
