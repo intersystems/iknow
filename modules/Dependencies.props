@@ -4,8 +4,6 @@
   <PropertyGroup Label="UserMacros">
     <ICU_INCLUDE>$(ICUDIR)\include</ICU_INCLUDE>
     <ICU_LIB>$(ICUDIR)\lib64</ICU_LIB>
-    <ISC_SHARED>$(SolutionDir)..\shared\</ISC_SHARED>
-    <ISC_KERNEL>$(SolutionDir)..\kernel\</ISC_KERNEL>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -15,16 +13,10 @@
     <BuildMacro Include="ICU_LIB">
       <Value>$(ICU_LIB)</Value>
     </BuildMacro>
-    <BuildMacro Include="ISC_SHARED">
-      <Value>$(ISC_SHARED)</Value>
-    </BuildMacro>
-    <BuildMacro Include="ISC_KERNEL">
-      <Value>$(ISC_KERNEL)</Value>
-    </BuildMacro>
   </ItemGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ICU_INCLUDE);$(ISC_SHARED)System/win32;$(ISC_SHARED)System;$(ISC_SHARED)Utility;$(ISC_KERNEL)common\h</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ICU_INCLUDE)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ICU_LIB)</AdditionalLibraryDirectories>

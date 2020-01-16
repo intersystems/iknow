@@ -26,7 +26,7 @@
 
 //Cache String types
 #define NO_UCHAR_TYPE
-#include "sysCommon.h"
+// #include "sysCommon.h"
 //Undefine this straggler from windows.h: StringHash also
 //has a "GetObject" member
 #ifdef GetObject

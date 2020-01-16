@@ -10,9 +10,6 @@
 #include <string>
 #include "IkStringEncoding.h"
 
-#include "utlCacheList.h"
-typedef std::list<std::string> Utf8List; // alternative for utlCacheList
-
 #ifdef ISC_IRIS
 #include "utlCacheList.h"
 typedef CacheList TraceListType;

@@ -431,9 +431,9 @@ void IkIndexDebug<Utf8List>::EntityVectors(const IkSentence& sentence) {
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
     entities.push_back(i->GetValue());
   }
-  CacheList out;
+  Utf8List out;
   for (IkSentence::EntityVector::const_iterator i = sentence.GetEntityVectorBegin(); i != sentence.GetEntityVectorEnd(); ++i) {
-      out += entities[*i];
+      out.push_back(IkStringEncoding::BaseToUTF8(entities[*i]));
   }
   if (out.size() != static_cast<size_t>(0)) trace_.Add("EntityVector", out); // only emit if we do have entity vectors
 }

@@ -318,8 +318,13 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 		outMessage("Calling the iKnow Indexer");
 
 		iknow::core::IkIndexInput Input(&text_input);
+#ifdef _DEBUG
+		bool b_generate_trace_file = true;
+#else
+		bool b_generate_trace_file = false;
+#endif
 		lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
-		process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, true);
+		process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_generate_trace_file);
 		lck.unlock();
 
 		outMessage("Succesfull return of the iKnow Indexer");

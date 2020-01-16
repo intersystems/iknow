@@ -1,7 +1,9 @@
 // Process.cpp: implementation of the CProcess class.
 //
 //////////////////////////////////////////////////////////////////////
+#ifdef ISC_IRIS
 #include "KernelInterface.h"
+#endif
 
 #include "Process.h"
 #include "IkStringAlg.h"
@@ -118,7 +120,11 @@ void CProcess::IndexFunc(IkIndexInput& text_input, OutputFunc func, void *userda
 #endif
 		}
 		catch (const std::bad_alloc& ba) {
+#ifdef ISC_IRIS
 			iKnowKernel::SetError("IKInternalEngineFault", ba.what()); // Notify memory problems to kernel
+#else
+			std::cerr << "IKInternalEngineFault" << ba.what();
+#endif
 			// Todo : give indication of text size 
 		}
 	}

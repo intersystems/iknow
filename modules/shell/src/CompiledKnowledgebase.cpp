@@ -5,7 +5,9 @@
 #include "AhoCorasick.h"
 #include "utlExceptionFrom.h"
 #include "IkStringAlg.h"
+#ifdef ISC_IRIS
 #include "DynamicModel.h"
+#endif
 
 using namespace iknow::shell;
 using iknow::core::IkLexrep;

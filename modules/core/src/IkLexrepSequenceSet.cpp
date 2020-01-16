@@ -6,12 +6,6 @@ using namespace iknow::core;
 using iknow::base::String;
 using iknow::base::SpaceString;
 
-#ifndef _WIN32
-//Visual C++ 2008 doesn't have these in std:: yet
-#define max std::max
-#define min std::min
-#endif //_WIN32
-
 IkLexrepSequences::~IkLexrepSequences() {
   //In the Ik model, containers of pointers are responsible for deleting
   //their contents
@@ -23,7 +17,7 @@ IkLexrepSequences::~IkLexrepSequences() {
 void IkLexrepSequences::Insert(const TokenVector& token_vector, const IkLexrep *lexrep) {
   //note we don't check if it actually belongs in this set (share a common prefix)
   //we assume IkLexrepSequenceSet is doing the right thing.
-  longest_sequence_length_ = max(longest_sequence_length_, token_vector.size());
+  longest_sequence_length_ = std::max(longest_sequence_length_, token_vector.size());
   //cache if there's only one lexrep here
   if (longest_sequence_length_ == 1) singular_lexrep_ = lexrep;
   //delete the existing Lexrep pointer if present.
@@ -36,7 +30,7 @@ void IkLexrepSequences::Insert(const TokenVector& token_vector, const IkLexrep *
 }
 
 std::pair<size_t, const IkLexrep*> IkLexrepSequences::FindLongestMatch(const TokenVector& token_vector) const {
-  size_t max_match_length = min(token_vector.size(), longest_sequence_length_);
+  size_t max_match_length = std::min(token_vector.size(), longest_sequence_length_);
 
   //TODO, TRW: use STL algorithms
   for(size_t i=max_match_length; i > 0; --i) {
@@ -81,7 +75,7 @@ void IkLexrepSequenceSet::Insert(const IkLexrep* lexrep) {
   }
   String prefix_token = tokens[0];
   prefix_map_[prefix_token].Insert(tokens, lexrep);
-  longest_sequence_length_ = max(longest_sequence_length_, tokens.size());
+  longest_sequence_length_ = std::max(longest_sequence_length_, tokens.size());
 }
 
 typedef std::pair<size_t, const IkLexrep*> MatchT;

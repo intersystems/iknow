@@ -21,7 +21,11 @@
 #include "KbInputFilter.h"
 #include "KbAttributeMap.h"
 #include "KbMetadata.h"
+#ifdef ISC_IRIS
 #include "utlCacheList.h"
+#else
+typedef std::list<std::string> CacheList;
+#endif
 #include <queue>
 #include <sstream>
 
