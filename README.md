@@ -52,11 +52,11 @@ iKnow supports the following attribute types:
 
 - **Sentiment**: based on a user-supplied list of marker terms, iKnow will identify spans with either a positive or negative sentiment (through separate attributes). Overlapping negation attributes will nullify the sentiment section.
 
-> <span style="color: green">*I* <u>liked</u> the **striped pijamas**</span>, <u>but</u> the **slippers** <u>didn't really fit with</u> *it*.
+  > <span style="color: green">*I* <u>liked</u> the **striped pijamas**</span>, <u>but</u> the **slippers** <u>didn't really fit with</u> *it*.
 
 - **Measurements**, **Time**, **Frequency** and **Duration**: all entities "participating" in an expression of something measurable or time-related will be tagged, enabling efficient recognition of facts in long stretches of natural language text.
 
-> *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
+  > *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
 
 - **Certainty**: this attribute is a work in progress. See the corresponding [Wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
 
