@@ -1,6 +1,6 @@
 # iKnow
 
-*iKnow* is a library for Natural Language Processing that identifies entities (phrases) and their semantic context in natural language text in English, German, Dutch, French, Spanish, Portuguese, Swedish, Russian, Ukrainian, Czech and Japanese. It was originally developed by [i.Know](https://www.linkedin.com/company/i.know/about/) in Belgium, acquired by [InterSystems](https://www.intersystems.com) in 2010 to be embedded in its Caché and [IRIS Data Platform](http://www.intersystems.com/iris) products. InterSystems published the iKnow engine as open source in 2020. 
+**iKnow** is a library for Natural Language Processing that identifies entities (phrases) and their semantic context in natural language text in English, German, Dutch, French, Spanish, Portuguese, Swedish, Russian, Ukrainian, Czech and Japanese. It was originally developed by [i.Know](https://www.linkedin.com/company/i.know/about/) in Belgium, acquired by [InterSystems](https://www.intersystems.com) in 2010 to be embedded in its Caché and [IRIS Data Platform](http://www.intersystems.com/iris) products. InterSystems published the iKnow engine as open source in 2020. 
 
 - [iKnow](#iknow)
 - [Understanding iKnow](#understanding-iknow)
@@ -16,9 +16,6 @@
 - [Building iKnow](#building-iknow)
   - [Dependencies](#dependencies)
   - [On Windows](#on-windows)
-    - [Step 1: Setting up the dependencies](#step-1-setting-up-the-dependencies)
-    - [Step 2: Building iKnow](#step-2-building-iknow)
-    - [Step 3: Testing the indexer](#step-3-testing-the-indexer)
   - [On Linux / Unix](#on-linux--unix)
 - [Contributing to iKnow](#contributing-to-iknow)
   - [List of Authors](#list-of-authors)
@@ -50,14 +47,20 @@ Beyond this simple phrase recognition, iKnow also captures the context of these 
 iKnow supports the following attribute types:
 
 - **Negation**: iKnow tags all entities participating in a negation, as opposed to an (implied) affirmative context.
-  > <u>After discussing</u> *his* **nausea**, the <span style="color: red">**patient** <u>didn't report suffering from</u> **chest pain**, **shortness** <u>of</u> **breath** <u>or</u> **tickling**</span>.
-- **Sentiment**: based on a user-supplied list of marker terms, iKnow will identify spans with either a positive or negative sentiment (through separate attributes). Overlapping negation attributes will nullify the sentiment section.
-  > <span style="color: green">*I* <u>liked</u> the **striped pijamas**</span>, <u>but</u> the **slippers** <u>didn't really fit with</u> *it*.
-- **Measurements**, **Time**, **Frequency** and **Duration**: all entities "participating" in an expression of something measurable or time-related will be tagged, enabling efficient recognition of facts in long stretches of natural language text.
-  > *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
-- **Certainty**: this attribute is a work in progress. See the corresponding Wiki section for more details.
 
-Some attributes are not available for all languages yet. See the wiki section for more details.
+  > <u>After discussing</u> *his* **nausea**, the <span style="color: red">**patient** <u>didn't report suffering from</u> **chest pain**, **shortness** <u>of</u> **breath** <u>or</u> **tickling**</span>.
+
+- **Sentiment**: based on a user-supplied list of marker terms, iKnow will identify spans with either a positive or negative sentiment (through separate attributes). Overlapping negation attributes will nullify the sentiment section.
+
+> <span style="color: green">*I* <u>liked</u> the **striped pijamas**</span>, <u>but</u> the **slippers** <u>didn't really fit with</u> *it*.
+
+- **Measurements**, **Time**, **Frequency** and **Duration**: all entities "participating" in an expression of something measurable or time-related will be tagged, enabling efficient recognition of facts in long stretches of natural language text.
+
+> *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
+
+- **Certainty**: this attribute is a work in progress. See the corresponding [Wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
+
+Some attributes are not available for all languages yet. See the [wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
 
 ## How it works
 
@@ -149,20 +152,5 @@ Coming soon!
 
 # Contributing to iKnow
 
-You are welcome to contribute to iKnow's engine code and language models. Check out the Wiki section for more details on how they work and the Issues section for any particular work on the horizon.
+You are welcome to contribute to iKnow's engine code and language models. Check out the [Wiki section](https://github.com/intersystems/iknow/wiki) for more details on how they work and the Issues section for any particular work on the horizon.
 
-## List of Authors
-
-The following authors have made :heart: contributions to the iKnow engine and language models over the years. The sorting is alphabetical, as our memory doesn't stretch far enough!
-- Benjamin De Boe
-- Chen-Chieh Hsu
-- Dirk Van Hyfte
-- Hugo Janssen
-- Jos Denys
-- Kris Peeters
-- Masako Ohira
-- Michael Brands
-- Mieke Van der Heyden
-- Naomi Leclerq
-- Saskia Debergh
-- Tom Woodfin
