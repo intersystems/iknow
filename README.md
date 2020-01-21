@@ -16,15 +16,8 @@
 - [Building iKnow](#building-iknow)
   - [Dependencies](#dependencies)
   - [On Windows](#on-windows)
-    - [Step 1: Setting up dependencies](#step-1-setting-up-dependencies)
-    - [Step 2: Building the solution](#step-2-building-the-solution)
-    - [Step 3: Testing the indexer](#step-3-testing-the-indexer)
   - [On Linux / Unix](#on-linux--unix)
-    - [Step 1: Setting up dependencies](#step-1-setting-up-dependencies-1)
-    - [Step 2: Build the solution](#step-2-build-the-solution)
   - [On Docker](#on-docker)
-    - [Step 1: Building the container](#step-1-building-the-container)
-    - [Step 2: Build iKnow inside the container](#step-2-build-iknow-inside-the-container)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Understanding iKnow
@@ -65,7 +58,7 @@ iKnow supports the following attribute types:
 
   > *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
 
-- **Certainty**: this attribute is a work in progress. See the corresponding [Wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
+- **Certainty**: this attribute is a work in progress. See the corresponding [wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
 
 Some attributes are not available for all languages yet. See the [wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
 
@@ -105,7 +98,7 @@ This part of the kit has not yet been added to the open source repository, but r
 
 # Building iKnow
 
-The source code is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix.
+The source code for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. See also [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
 
 ## Dependencies
 
@@ -127,7 +120,7 @@ The source code is written in C++ and includes .sln files for building with [Mic
   </PropertyGroup>
 ```
 
-### Step 2: Building the solution
+### Step 2: Building iKnow
 
 1. Open the Solution file ```<repo_root>\modules\iKnowEngineTest.sln``` in Visual Studio. We used Visual Studio Community 2019
 
@@ -159,7 +152,7 @@ The iKnow indexing demo program will index one sentence for each of the 11 langu
 2. Save the path you untarred the archive to a ```ICUDIR``` environment variable.
    Note that your ICU download may have a relative path inside the tar archive, so you may need to use ```--strip-components=4``` or manually reorganise to make sure the ```${ICUDIR}/include``` leads where you'd expect it to lead.
 
-### Step 2: Build the solution
+### Step 2: Building iKnow
 
 1. Set the ```IKNOWPLAT``` environment variable to the target platform of your choice: e.g. "lnxubuntux64", "lnxrhx64" or "macx64"
    
@@ -182,7 +175,7 @@ While primarily useful for build-testing convenience, we're also providing a Doc
   ```
    This will automatically download the ICU library of your choice and register its path for onward building.
 
-### Step 2: Build iKnow inside the container
+### Step 2: Building iKnow
 
 1. Start and step into the container using ```docker run```:
 
