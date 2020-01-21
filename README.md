@@ -18,7 +18,6 @@
   - [On Windows](#on-windows)
   - [On Linux / Unix](#on-linux--unix)
 - [Contributing to iKnow](#contributing-to-iknow)
-  - [List of Authors](#list-of-authors)
 
 # Understanding iKnow
 
@@ -64,7 +63,7 @@ Some attributes are not available for all languages yet. See the [wiki section](
 
 ## How it works
 
-See the Wiki section for more details (WIP). 
+See the [Wiki](https://github.com/intersystems/iknow/wiki) for more details. 
 
 Some InterSystems-era resources:
 - A recent [introductory video](https://www.youtube.com/watch?v=2pQur_PJn_w)
@@ -108,41 +107,38 @@ The source code is written in C++ and includes .sln files for building with [Mic
 
 ### Step 1: Setting up the dependencies
 
-1. Download the [ICU source code archive](https://github.com/unicode-org/icu/releases/tag/release-4-8-2) and unzip to ```<git_dir>/thirdparty/icu-4.0``` or a local folder of your choice.
-2. ICU is an elaborate library which requires building it before all of the header files and libraries used by iKnow are in place. Look for the ```<icu_dir>/source/allinone/allinone.sln``` file included in the archive and build it (using the Debug|x64 configuration), or see the ```readme.html``` file also included in the archive for details. 
-3. Edit the properties file ```<git_dir>\modules\Dependencies.props``` to represent your local configuration. This is how it looks after download, which should be OK if you used the directory paths suggested in previous steps:
+1. Download the Win64 archive for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and unzip to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice).
+
+2. If you chose a different folder for your ICU libraries, update ```<repo_root>\modules\Dependencies.props``` to represent your local configuration. This is how it looks after download, which should be OK if you used the suggested directory paths:
 
 ```
-    <ICU_DIR>$(SolutionDir)..\thirdparty\icu-4.0\</ICU_DIR>
-    <ISC_SHARED>$(SolutionDir)..\shared\</ISC_SHARED>
-    <ISC_KERNEL>$(SolutionDir)..\kernel\</ISC_KERNEL>
+  <PropertyGroup Label="UserMacros">
+    <ICU_DIR>$(SolutionDir)..\thirdparty\icu\</ICU_DIR>
+    <ICU_INCLUDE>$(ICU_DIR)\include</ICU_INCLUDE>
+    <ICU_LIB>$(ICU_DIR)\lib64</ICU_LIB>
+  </PropertyGroup>
 ```
-
-Make sure ```ICU_DIR``` point to the respective local installation directories.
-
-For your convenience, the libraries for icu-4.0 are part of this github distribution, they can be found in :
-* ```<git_dir>\kit\winamd64\debug\bin```: icuucd.lib icuucd.dll icuind.lib icuind.dll, the debug versions of the necessary ICU libraries
-* ```<git_dir>\kit\winamd64\release\bin```: icuuc.lib icuuc.dll icuin.lib icuin.dll, the release versions
-
-All binaries are put in these debug/release directories, there's no need to move them for deployment.
-
 
 ### Step 2: Building iKnow
 
-1. Open the Visual Studio Solution file ```<git_dir>\modules\iKnowEngineDriver.sln```
+1. Open the Solution file ```<repo_root>\modules\iKnowEngineTest.sln``` in Visual Studio. We used Visual Studio Community 2019
 
-2. In Solution Explorer, choose "iKnowEngineDriver" as "Set up as startup project", in "Solution Configurations", choose either "winamd64 Debug", or "winamd64 Release", depending on the kind of executable you prefer.
+2. In the Solution Explorer, choose "iKnowEngineTest" as "Set up as startup project"
 
-3. Build the solution, it will build all 29 projects.
+3. In Solution Configurations, choose either "Debug|x86", or "Release|x64", depending on the kind of executable you prefer.
 
-If all succeeds, you can run the test program :
-
-* ```<git_dir>\kit\winamd64\debug\bin\iKnowEngineDriver```: the debug version
-* ```<git_dir>\kit\winamd64\release\bin\iKnowEngineDriver```: the release version
-
-You can also start a debugging session in Visual Studio IDE, and walk through the code to inspect it.
+4. Build the solution, it will build all 29 projects.
 
 ### Step 3: Testing the indexer
+
+Once building has succeeded, you can run the test program, depending on which build config you chose:
+
+* ```<repo_root>\kit\x64\Debug\bin\iKnowEngineTest.exe```
+* ```<repo_root>\kit\x64\Release\bin\iKnowEngineTest.exe```
+
+:warning: Note that you'll have to add the ```$(ICU_DIR)/bin64``` directory to your PATH or copy its .dll files to this test folder in order to run the test executable.
+
+Alternatively, you can also start a debugging session in Visual Studio and walk through the code to inspect it.
 
 The iKnow indexing demo program will index one sentence for each of the 11 languages, and write out the sentence boundaries. That's of course not very spectacular by itself, but future iterations of this demo program will expose more of the entity and context information iKnow detects.
 
@@ -150,7 +146,8 @@ The iKnow indexing demo program will index one sentence for each of the 11 langu
 
 Coming soon!
 
+See also what's in the ```/build/make``` folder.
+
 # Contributing to iKnow
 
-You are welcome to contribute to iKnow's engine code and language models. Check out the [Wiki section](https://github.com/intersystems/iknow/wiki) for more details on how they work and the Issues section for any particular work on the horizon.
-
+You are welcome to contribute to iKnow's engine code and language models. Check out the [Wiki](https://github.com/intersystems/iknow/wiki) for more details on how they work and the [Issues](https://github.com/intersystems/iknow/issues) and [Projects](https://github.com/intersystems/iknow/wiki/Projects) sections for any particular work on the horizon.
