@@ -16,7 +16,15 @@
 - [Building iKnow](#building-iknow)
   - [Dependencies](#dependencies)
   - [On Windows](#on-windows)
+    - [Step 1: Setting up dependencies](#step-1-setting-up-dependencies)
+    - [Step 2: Building the solution](#step-2-building-the-solution)
+    - [Step 3: Testing the indexer](#step-3-testing-the-indexer)
   - [On Linux / Unix](#on-linux--unix)
+    - [Step 1: Setting up dependencies](#step-1-setting-up-dependencies-1)
+    - [Step 2: Build the solution](#step-2-build-the-solution)
+  - [On Docker](#on-docker)
+    - [Step 1: Building the container](#step-1-building-the-container)
+    - [Step 2: Build iKnow inside the container](#step-2-build-iknow-inside-the-container)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Understanding iKnow
@@ -105,21 +113,21 @@ The source code is written in C++ and includes .sln files for building with [Mic
 
 ## On Windows
 
-### Step 1: Setting up the dependencies
+### Step 1: Setting up dependencies
 
-1. Download the Win64 archive for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and unzip to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice).
+1. Download the Win64 binaries for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and unzip to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice).
 
 2. If you chose a different folder for your ICU libraries, update ```<repo_root>\modules\Dependencies.props``` to represent your local configuration. This is how it looks after download, which should be OK if you used the suggested directory paths:
 
 ```
   <PropertyGroup Label="UserMacros">
-    <ICU_DIR>$(SolutionDir)..\thirdparty\icu\</ICU_DIR>
+    <ICUDIR>$(SolutionDir)..\thirdparty\icu\</ICUDIR>
     <ICU_INCLUDE>$(ICU_DIR)\include</ICU_INCLUDE>
     <ICU_LIB>$(ICU_DIR)\lib64</ICU_LIB>
   </PropertyGroup>
 ```
 
-### Step 2: Building iKnow
+### Step 2: Building the solution
 
 1. Open the Solution file ```<repo_root>\modules\iKnowEngineTest.sln``` in Visual Studio. We used Visual Studio Community 2019
 
@@ -136,7 +144,7 @@ Once building has succeeded, you can run the test program, depending on which bu
 * ```<repo_root>\kit\x64\Debug\bin\iKnowEngineTest.exe```
 * ```<repo_root>\kit\x64\Release\bin\iKnowEngineTest.exe```
 
-:warning: Note that you'll have to add the ```$(ICU_DIR)/bin64``` directory to your PATH or copy its .dll files to this test folder in order to run the test executable.
+:warning: Note that you'll have to add the ```$(ICUDIR)/bin64``` directory to your PATH or copy its .dll files to this test folder in order to run the test executable.
 
 Alternatively, you can also start a debugging session in Visual Studio and walk through the code to inspect it.
 
@@ -144,9 +152,48 @@ The iKnow indexing demo program will index one sentence for each of the 11 langu
 
 ## On Linux / Unix
 
-Coming soon!
+### Step 1: Setting up dependencies
 
-See also what's in the ```/build/make``` folder.
+1. Download the proper binaries for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and untar to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice). 
+
+2. Save the path you untarred the archive to a ```ICUDIR``` environment variable.
+   Note that your ICU download may have a relative path inside the tar archive, so you may need to use ```--strip-components=4``` or manually reorganise to make sure the ```${ICUDIR}/include``` leads where you'd expect it to lead.
+
+### Step 2: Build the solution
+
+1. Set the ```IKNOWPLAT``` environment variable to the target platform of your choice: e.g. "lnxubuntux64", "lnxrhx64" or "macx64"
+   
+2. In the ```<repo_root>``` folder, run ```make all```
+
+
+
+## On Docker
+
+While primarily useful for build-testing convenience, we're also providing a Dockerfile that stuffs the code in a clean container with the required ICU libraries. If your Linux / Unix build doesn't seem to work, perhaps a quick look at this Dockerfile will help nail down where trouble starts.
+
+### Step 1: Building the container
+
+1. Optionally open the ```Dockerfile``` to change the ICU library version to use
+  
+2. Use the ```docker build``` command to package things up:
+
+  ```Shell
+  docker build --tag iknow .
+  ```
+   This will automatically download the ICU library of your choice and register its path for onward building.
+
+### Step 2: Build iKnow inside the container
+
+1. Start and step into the container using ```docker run```:
+
+```Shell
+docker run --rm -it iknow
+```
+   The ```--rm``` flag will make sure the container gets dropped after you're done exploring.
+
+2. Inside the container, use ```make all``` to kick off the build.
+
+
 
 # Contributing to iKnow
 
