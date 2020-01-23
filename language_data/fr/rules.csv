@@ -1,0 +1,552 @@
+516;1;CapitalInitial;^FRCapitalInitial;09-04-2015-nl
+517;1;CapitalAll;^FRCapitalAll;09-04-2015-nl
+518;1;CapitalMixed;^FRCapitalMixed;09-04-2015-nl
+519;1;Punctuation;FRPunctuation;09-04-2015-nl
+521;1;UDNegation;+FRNegation+FRNegBegin;09-04-2015-nl 
+522;1;UDPosSentiment;+FRPosSentiment+FRPosSentimentBegin;09-04-2015-nl
+523;1;UDNegSentiment;+FRNegSentiment+FRNegSentimentBegin;09-04-2015-nl 
+524;1;UDConcept;FRCon+FRUDConcept;09-04-2015-nl, removed UDConcept in right part in order to avoid conflicts with rules 166 and 43 20-04-2015-nl, added FRUDConcept to be able to modify r166, 2016-03-30-sde
+525;1;UDRelation;UDRelation+FRRelation;09-04-2015-nl
+526;1;UDNonRelevant;FRNonRelevant;09-04-2015-nl
+776;20;SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;2016-12-07-sde
+777;20;SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;2016-12-07-sde
+780;20;SBegin|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;2016-12-07-sde
+781;20;SBegin|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;2016-12-07-sde
+778;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;2016-12-07-sde, added ^pourquoi 2016-12-08-sde, added +^SBegin for JDN245 _sbse #6-jdn
+779;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;2016-12-07-sde, added ^pourquoi 2016-12-08-sde, added +^SBegin for JDN245 _sbse #6-jdn
+782;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais|^SEnd;*|*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal|*;2016-12-07-sde, added ^pourquoi 2016-12-08-sde, revised #34-sde, added +^SEnd for JDN245 _sbse #6-jdn, replaced ^SEnd+^SEnd by just ^SEnd _sbse #7-sde
+783;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;2016-12-07-sde, added ^pourquoi 2016-12-08-sde, extremely low-frequent, revised #34-sde
+786;20;SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;2016-12-08-sde
+787;20;SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;2016-12-08-sde, very low-frequent
+788;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;2016-12-08-sde, very low-frequent, added +^SBegin for JDN245 _sbse #6-jdn
+789;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;2016-12-08-sde, very low-frequent, added +^SBegin for JDN245 _sbse #6-jdn
+640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg;2016-02-02-sde, Pas->AdvNeg 2016-02-18-sde, added +Negation 2016-11-04-sde, added ^Postsubjpron 2016-12-07-sde
+639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg;2016-02-02-sde, Pas->AdvNeg 2016-02-18-sde, added +Negation 2016-11-04-sde, added ^Postsubjpron and ^NoNegWord 2016-12-07-sde
+638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg;2016-02-02-sde, Pas->AdvNeg 2016-02-18-sde, added +Negation 2016-11-04-sde, added ^Postsubjpron and ^NoNegWord 2016-12-07-sde
+637;20;FRNe|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;2016-02-02-sde, Pas->AdvNeg 2016-02-18-sde, added +Negation 2016-11-04-sde
+636;20;FRNe|FRPlus:FRPas;FRNe+FRAdvNeg+FRNegation|FRAdvNeg;2016-02-02-sde, adapted 2016-02-18-sde, adapted 2016-11-07-sde
+700;20;FRPas+^"pas"+^FRJamais+^"non";FRAdvNeg;make unambiguous negation markers AdvNeg 2016-02-18-sde, added ^non 2016-11-25-sde
+730;20;FRRien:FRNegWord:FRAucun:FRPersonne:FRNegation;+FRNegindicator;2016-11-08-sde
+785;20;FRNoNegWord;-FRNegindicator;2016-12-08-sde
+725;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|FRNegindicator+^FRSans|^FRQue+^SEnd;FRNe+FRNegation|*|*;2016-11-08-sde, added ^Sans and ^Que 2016-11-17-sde, added +^SEnd for JDN245 _sbse #6-jdn
+726;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|FRNegindicator+^FRSans;FRNe+FRNegation|*|*;2016-11-08-sde, added ^Sans 2016-11-17-sde
+727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;2016-11-08-sde, added ^AndOrBut 2016-11-10-sde, added ^Sans and ^Que 2016-11-17-sde
+728;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*;2016-11-08-sde, added ^AndOrBut 2016-11-10-sde, added ^Sans and ^Que 2016-11-17-sde
+729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*;2016-11-08-sde, added ^AndOrBut 2016-11-10-sde, added ^Sans and ^Que 2016-11-17-sde
+731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*;2016-11-08-sde, added ^AndOrBut 2016-11-10-sde, added ^Sans and ^Que #34-sde
+831;20;"nulle";-FRNegWord;#34-sde
+609;30;FRPrepAdv|FRComma;-FRPrep-FRPrepAdv|^FRComma;2016-01-25-sde, moved to phase 30 2016-02-04-sde
+610;30;FRPrepAdv|SEnd;-FRPrep-FRPrepAdv|*;2016-01-25-sde, moved to phase 30 2016-02-04-sde
+674;30;FRSRelAux|FRPrepAdv|FRPart;FRSRelAux|+FRAdv-FRPrepAdv|FRPart;2016-02-14-sde
+653;30;FRPrepAdv;FRPrep;2016-02-04-sde
+711;30;FRIndefart:FRDefart:FRPoss:FRDemonstr|FRAdvCon;*|FRCon;2016-03-15-sde
+713;30;FRAuDu:FRDe:FRMod|FRAdvCon;*|FRCon;2016-03-15-sde
+712;30;FRAdvCon;^FRAdv;default: result is Adv+AdvXxx 2016-03-15
+686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;FRAdvNR+FRAdv|Join|Join|^FRNum;"pas moins" not preceded by "ne", 2016-02-15-sde
+687;30;"pas"+FRPlus|"moins"|FRDe|FRCon;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" not preceded by "ne", 2016-02-15-sde, Pas->AdvNeg 2016-02-18-sde
+688;30;FRAdvNeg|"moins"|FRDe|FRCon+^FRNum;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" preceded by "ne", 2016-02-15-sde, Pas->AdvNeg 2016-02-18-sde
+689;30;"à"|"moins"|"de":"dµ"|FRInf;-FRPrep+FRSConj+FRNegation|Join|Join|^FRInf;cannot be done with a lexrep because of ambiguity, 2016-02-17-sde
+635;30;FRPlus|FRAdvManner:FRAdvTemp:FRAdvModal:FRAdvLoc;FRAdvDegree+FRAdv|*;2016-02-02-sde, replaces r298
+641;30;FRPlus|FRAdvDegree;FRPlus+FRAdvDegree+FRAdv|+Join;2016-02-02-sde, replaces r298, added Plus in right part 2016-02-15-sde
+623;30;FRAdvDegree|FRAdvManner;FRAdv+FRAdvManner|+Join;2016-01-29-sde
+624;30;FRAdvDegree|FRAdvTemp;FRAdv+FRAdvTemp|+Join;2016-01-29-sde
+625;30;FRAdvNR|FRAdvNR;FRAdv+FRAdvNR|+Join;2016-01-29-sde
+304;30;FRTres|FRAdvManner;FRAdv+FRAdvManner|+Join;2013.1, moved to new phase 2016-01-29-sde
+302;30;FRTres|FRAdvDegree;FRAdv+FRAdvDegree|+Join;2013.1, moved to new phase 2016-01-29-sde
+626;30;FRTres|FRAdvTemp;FRAdv+FRAdvTemp|+Join;2016-01-29-sde
+627;30;FRTres|FRAdvLoc;FRAdv+FRAdvLoc|+Join;2016-01-29-sde
+628;30;FRTres|FRAdvModal;FRAdv+FRAdvModal|+Join;2016-01-29-sde
+649;30;FRAdvNeg:FRPas+^FRJamais|FRAdvManner;FRAdvNeg|+Join;2016-02-02-sde, added AdvNeg 2016-02-18-sde, added ^Jamais 2016-11-18-sde
+299;30;FRAdvModal;+FRAdvCR;treat modal adverbs in the same way as time adverbs for now, 2013.1, moved from phase 40 and added "+" 2016-02-02-sde
+257;30;FRAdvManner;+FRAdvCR;treat adverbs expressing manner in the same way as time adverbs for now, 2013.1, moved from phase 40 and added "+" 2016-02-02-sde
+673;30;"il y a"|FRNum|FRTimeconcept;-FRSRel+FRAdvTime+FRAdv|+Join|+Join;2016-02-10-sde
+331;40;SBegin|FRLetter;*|-FRConIfAllCap;2013.1, discard capitalization of a letter at the beginning of a sentence
+670;40;FRCapitalAll|FRCapitalAll|FRCapitalAll;-FRCapitalAll|*|*;ignore capitalization when the whole sentence is in upper case 2016-02-10-sde
+671;40;FRCapitalAll|FRCapitalAll|SEnd;-FRCapitalAll|-FRCapitalAll|*;ignore capitalization when the whole sentence is in upper case 2016-02-10-sde
+332;40;FRConIfCap+FRCapitalInitial;FRCon+FRCapitalInitial;2013.1,replaced unified label by language specific label 09-04-2015-nl, added +CapitalInitial 2016-02-09-sde
+333;40;FRConIfAllCap+FRCapitalAll;FRCon;2013.1,replaced unified label by language specific label 09-04-2015-nl
+95;40;FRSRelCon|FRPostsubjpron;FRSRel|Join;ww met -t-il etc 2011.2, introduced Join 02-08-2013-sde
+96;40;FRSRelMod|FRPostsubjpron;FRSRel|Join;ww met -t-il etc 2011.2, introduced Join 02-08-2013-sde
+165;40;FRSRelConMod|FRPostsubjpron;FRSRel|Join;ww met -t-il etc 2012.1, introduced Join 02-08-2013-sde
+166;40;FRCon+^FRUDConcept|FRPostsubjpron;FRSRel|Join;onbekend ww met -t-il etc 2012.1, introduced Join 02-08-2013-sde
+97;40;FRSRel|FRPostsubjpron;FRSRel|Join;ww met -t-il etc 2011.2, introduced Join 02-08-2013-sde
+98;40;FRSRelAux|FRPostsubjpron;FRSRelAux|Join;ww met -t-il etc 2011.2, introduced Join 02-08-2013-sde
+484;40;FRConpart1|FRSRelCon;FRCon|FRCon;2013.2-sde
+485;40;FRConpart1|FRSRelMod;FRCon|FRCon;2013.2-sde
+486;40;FRConpart1|FRSRelConMod;FRCon|FRCon;2013.2-sde
+487;40;FRConpart1|FRPartCon;FRCon|FRCon;2013.2-sde
+488;40;FRConpart1|FRPartConMod;FRCon|FRCon;2013.2-sde
+495;40;FRSans|FRPartConMod;FRSans|FRCon;06-08-2013-sde
+708;40;FRSans|^FRInf|FRInf;FRSConj|*|^FRInf;2016-03-15-sde, removed +Negation because it is in the lexrep now 2016-11-17-sde
+430;40;FRSans;FRPrep;2013.1, changed 05-08-2013-sde, experiment 2016-03-14-sde, removed +Negation because it is in the lexrep now 2016-11-17-sde
+435;40;FRPersonne|FRNe;FRSubjpron+FRNegWord|FRNe;2013.1, personne ne, Con->subjpron 2016-02-05-sde, added +Negation 2016-11-04-sde, removed +Negation 2016-11-18-sde
+441;40;FRPersonne|FRAdv|FRNe;FRSubjpron+FRNegWord|^FRAdv|FRNe;2013.1, personne ne, Con->subjpron 2016-02-05-sde, added +Negation 2016-11-04-sde, removed +Negation 2016-11-18-sde
+436;40;FRVerb|FRPersonne;^FRVerb|FRObjpron+FRNegWord;2013.1, personne after verb form, Con->objpron, Rel->Verb 2016-02-05-sde
+440;40;FRSRelAux|FRPersonne;^FRSRelAux|FRObjpron+FRNegWord;2013.1, personne after auxiliary verb, Con->objpron 2016-02-05-sde
+437;40;FRPart|FRPersonne;^FRPart|FRObjpron+FRNegWord;2013.1, personne after participle, Con->objpron 2016-02-05-sde
+438;40;FRInf|FRPersonne;^FRInf|FRObjpron+FRNegWord;2013.1, personne after infinitive, Con->objpron 2016-02-05-sde
+439;40;FRPersonne;FRCon;2013.1, default
+168;40;FRDefart|FRPossCon;FRDefart|FRCon;article with ton or son 2013.1
+169;40;FRIndefart|FRPossCon;FRIndefart|FRCon;article with ton or son 2013.1
+408;40;FRAucun|FRPossCon;FRAucun|FRCon;aucun, aucune with ton or son, 2013.1
+633;40;FRPossCon;FRPoss;default, 2016-02-01-sde
+660;40;FRDefart:FRIndefart:FRPoss:FRDemonstr|"moi";*|FRCon;
+631;40;SBegin|"bien"|FRQue;*|FRSConj|Join;
+684;40;"près de":"près dµ":"près des"|FRNum;FRAdvDegree+FRAdv|^FRNum;2016-02-12-sde
+797;40;FRVerb:FRPart|FRSConj3;*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context #34-sde
+819;40;FRAdvNeg|FRPartCon:FRPartConMod:FRPartMod|FRSConj3;*|*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context #34-sde, extremely low-frequent
+810;40;"en"|"plus"|FRDe|FRNum;*|FRMod|Join|*;#34-sde
+811;40;typeConcept|"en"|"plus"|SEnd;*|FRCon|Join|*;#34-sde
+812;40;"en"|"plus"|FRDe:FRDes:"du";FRPrep|Join|Join;#34-sde
+813;40;"en"|"plus";FRAdv+FRAdvNR|Join;#34-sde
+814;40;FRPlus|FRDe|FRIndefart;FRMod|Join|FRNum;#34-sde
+101;40;FRDe|FRSRelCon;FRDe|FRCon;2011.2, de met dubbelzinnig, deze regel staat hier om avions te desambigueren vóór de regels met FRSRelAux
+184;40;FRPas:FRAdvNeg|FREte;FRAdvNeg|FRSRelAux;negatie met été, 2013.1, added AdvNeg 2016-02-18-sde
+667;40;FRPrep+^FRSRel|FRDefart|FREst;^FRPrep|+FRDefart|^FRCon-FRSRelAux;2016-02-09-sde
+669;40;FRDefart|FREst|FRDe|FRCapitalInitial;FRDefart|^FRCon-FRSRelAux|FRPrep|^FRCapitalInitial;very low-frequent, 2016-02-09-sde
+668;40;FRSubjpron:FRSubjpron2|FRDefart|FREst;*|FRDefart|FRSRelAux;2016-02-09-sde
+604;40;FRBeaucoup|FRDe|FRCon:FRPart:FRPartCon:FRPartConMod;FRMod|Join|FRCon;2016-01-22-sde
+611;40;FRBeaucoup|FRPartConMod;FRMod|+Join;2016-01-25-sde
+606;40;FRBeaucoup|FRVerb:FRSRelAux;FRQuantpron|*;2016-01-22-sde
+605;40;FRBeaucoup;FRAdv+FRAdvDegree;default rule 2016-01-22-sde
+307;40;FRAdvDegree|FRSRelMod;FRCon|FRCon;adverb of degree belongs to adjective, 2013.1
+308;40;FRAdvDegree|FRSRelConMod;FRCon|FRCon;adverb of degree belongs to adjective, 2013.1
+309;40;FRSRelAux|FRAdvDegree|FRCon;FRSRelAux|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary, 2013.1
+290;40;FRSRelAux|FRAdvDegree|FRPPart;FRSRelAux|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary, 2013.1
+289;40;FRAdvDegree|FRPPart;FRCon|FRCon;adverb of degree before present participle, 2013.1
+292;40;FREtre|FRAdvDegree|FRCon;FRInf|FRCon|FRCon;adverb of degree belongs to adjective after être, 2013.1
+291;40;FRSRel|FRAdvDegree|FRCon;FRSRel|FRCon|FRCon;adverb of degree belongs to adjective after FRSRel, 2013.1
+288;40;FRComma|FRAdvDegree|FRCon;FRComma|FRCon|FRCon;adverb of degree belongs to adjective after comma, 2013.1
+481;40;FRAdvDegree|FRNum;FRCon|FRCon;adverb of degree belongs to number after comma, 2013.2-sde, deleted context Comma 2016-01-25-sde
+285;40;FRAdvDegree|FRPlus;FRPlus|Join;adverb of degree can modify plus, 2013.1
+284;40;FRSRelAux|FRAdvCR|FRAdvDegree|FRCon;FRSRelAux|FRAdvCR|FRCon|FRCon;2013.1
+287;40;FRAdvDegree;FRAdvCR+FRAdvDegree;treat adverbs of degree in the same way as time adverbs for now, 2013.1, adapted 2016-02-03-sde
+286;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;modal adverb belongs to adjective after comma, 2013.1, AdvModal->AdvCR 2016-02-02-sde
+316;40;FRAdvCR|FRAndOrBut|FRAdvCR;^FRAdvCR|Join|+Join;merge adjoint adverbs, 2013.1, added ^2016-02-02-sde, added + 2016-03-30-sde
+297;40;FRDefart|FRAdvCR|FRCon;FRDefart|FRMod|FRCon;adverb preceded by article, 2013.1, very low-frequent pattern
+294;40;FRIndefart|FRAdvCR|FRCon;FRIndefart|FRMod|FRCon;adverb preceded by article, 2013.1
+293;40;FRPrep|FRAdvCR|FRCon;FRPrep|FRMod|FRCon;prep-advrelevant, 2013.1
+479;40;FRPrep|FRAdvCR|FRNum;FRPrep|FRMod|FRCon;adverb modifying a number 2013.2-sde, low-frequent since AdvDegree is covered by r481
+650;40;FRAdvCR;+FRAdv;2016-02-03-sde
+657;40;FRIndefart:FRPoss:FRDemonstr:FRMod|FRInfCon;*|FRCon;2016-02-04-sde
+658;40;FRDefart|FRInfCon+^FRAvoir;^FRDefart|FRCon;2016-02-04-sde
+666;40;FRAuDu|FRInfCon;^FRAuDu|FRCon;2016-02-09-sde
+659;40;FRInfCon;^FRInf;2016-02-04-sde
+433;40;FRRien|FRPart;FRRien|FRSRel;2013.1, participle preceded by rien
+442;40;FRRien|FRPartCon;FRRien|FRSRel;2013.1, participle preceded by rien
+444;40;FRRien|FRPartConMod;FRRien|FRSRel;2013.1, participle preceded by rien
+629;40;FREte|FRPart:FRPartCon:FRPartConMod;FRSRel|FRSRel;replaces 456, 457, 459, 259, 447, 449, 94, 453 and 455, 2016-01-29-sde
+654;40;FREtre|FRPart:FRPartCon:FRPartConMod;-FREtre|FRSRel;2016-02-04-sde
+656;40;FRAvoir|FRPart:FRPartCon:FRPartConMod;-FRAvoir|FRSRel;2016-02-04-sde
+1;40;FRSRelAux|FRPart;FRSRelAux|FRSRel;hulpww met part 2011.2
+11;40;FRSRelAux|FRPartCon;FRSRelAux|FRSRel;hulpww met part of concept 2011.2
+36;40;FRSRelAux|FRPartConMod;FRSRelAux|FRSRel;hulpww met dubbelzinnig 2011.2
+2;40;FRSRelAux|FRAdv|FRPart;FRSRelAux|^FRAdv|FRSRel;hulpww met adv en part 2011.2
+10;40;FRSRelAux|FRAdv|FRPartCon;FRSRelAux|^FRAdv|FRSRel;hulpww met adv en part of concept 2011.2
+37;40;FRSRelAux|FRAdv|FRPartConMod;FRSRelAux|^FRAdv|FRSRel;hulpww met adv en dubbelzinnig 2011.2
+248;40;FRSRelAux|FRAdv|FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRelAux|^FRAdv|^FRAdv|FRSRel;hulpww met 2 bijwoorden en participium, 2013.1, added ^ and PartCon and PartConMod 2016-02-03-sde
+53;40;FRSRelAux|FRSRel|FRPart;FRSRelAux|^FRSRel|FRSRel;gevallen die niet onder andere regels vallen 2011.2
+597;40;FRSRelAux|FRSubjpron|FRPart;FRSRelAux|FRSubjpron|FRSRel;2016-01-21-sde
+598;40;FRSRelAux|FRSubjpron|FRPartCon;FRSRelAux|FRSubjpron|FRSRel;2016-01-21-sde
+599;40;FRSRelAux|FRSubjpron|FRPartConMod;FRSRelAux|FRSubjpron|FRSRel;2016-01-21-sde
+83;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPart;FRSRel|FRAdvNeg|FRSRel;hulpww met negatie en dubbelzinnig, 2011.2, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde, added ^Jamais 2016-11-23-sde
+56;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPartCon;FRSRelAux|FRAdvNeg|FRSRel;hulpww met negatie en dubbelzinnig 2011.2, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde, added ^Jamais 2016-11-23-sde
+54;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPartConMod;FRSRel|FRAdvNeg|FRSRel;hulpww met negatie en dubbelzinnig, 2011.2, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde, added ^Jamais 2016-11-23-sde
+103;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPart;FRSRel|FRAdvNeg|^FRAdv|FRSRel;hulpww met negatie en bijwoord en participium, 2011.2, added ^ 2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+185;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPartCon;FRSRelAux|FRAdvNeg|^FRAdv|FRSRel;hulpww met negatie en dubbelzinnig, 2013.1, added ^2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+463;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPartConMod;FRSRelAux|FRAdvNeg|^FRAdv|FRSRel;hulpww met negatie en dubbelzinnig, 2013.1, probably very low-frequent, added ^2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+79;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPart;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;bijwoord tussen ww en negatie, 2011.2, adapted 2013.1, added ^ 2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+80;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPartCon;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;bijwoord tussen ww en negatie, 2011.2, adapted 2013.1, added ^ 2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+464;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPartConMod;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;bijwoord tussen ww en negatie, 2013.1, added ^ 2016-02-03-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+432;40;FRIndefart|FRCon|FRJamais|FRPart:FRPartCon:FRPartConMod;FRIndefart|FRCon|FRPas|FRCon;jamais + participle as an attribute to a noun, 2013.1, Pas->AdvNeg 2016-02-18-sde, back to Pas, and extended and moved up 2016-11-18-sde
+735;40;FRIndefart|FRCon|FRJamais|FRSRel;FRIndefart|FRCon|FRAdvNeg|^FRSRel;jamais modifying a verb 2016-11-18-sde
+323;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg;FRSRelAux|^FRAdv|FRAdvNeg;bijwoord tussen ww en negatie, 2013.1, moved down 2016-02-04-sde, adapted 2016-02-04-sde, added AdvNeg 2016-02-18-sde, Rel+Negation -> AdvNeg 2016-11-18-sde
+76;40;FRSRel|FRAdv|FRPas;FRSRel|^FRAdv|FRAdvNeg;bijwoord tussen ww en negatie, 2011.2, adapted 2013.1, added ^ 2016-02-03-sde, added AdvNeg 2016-02-18-sde, removed AdvNeg in input pattern, Rel+Negation->AdvNeg in right part 2016-11-18-sde
+16;40;FRNe|FRSRelAux;FRNe|FRSRel;ne voor ww, 2011.2
+60;40;FRNe|FRSRelCon;FRNe|FRSRel;ne met dubbelzinnig, 2011.2
+173;40;FRNe|FRObjpron|FRSRelCon;FRNe|FRObjpron|FRSRel;ne met leur en dubbelzinnig, 2013.1
+99;40;FRNe|FRSRelConMod;FRNe|FRSRel;ne met dubbelzinnig, 2011.2
+84;40;FRNe|FRSRelMod;FRNe|FRSRel;ne met dubbelzinnig, 2011.2
+85;40;FRNe|FRPPart;FRNe|FRSRel;ne met onvoltooid part., 2011.2
+691;40;FRNe|FRDefart:FRObjpron|FRPPart;FRNe|*|FRSRel;ne with object and present participle, 2016-02-18-sde
+734;40;FRPas:FRAdvNeg|FRDe|"autre":"autres";FRAdvNeg|Join|FRAutre;2016-11-17-sde
+204;40;FRNe|FRDefart|FRSRel|FRAdvNeg;^FRNe|FRObjpron|FRSRel|FRAdvNeg;ne-ww-plus, 2013.1, Plus->Pas 2016-02-04-sde, replaced Pas by AdvNeg 2016-02-18-sde, Rel+Negation->AdvNeg in right part 2016-11-18-sde, Rel+Negation->Ne in right part 2016-11-22-sde
+758;40;FRSRel|FRNon|^FRCon+^FRComma+^SEnd;FRSRel|FRAdvNeg|*;variant of r3, 2016-11-28-sde, added +^SEnd for JDN245 _sbse #6-jdn
+759;40;FRNon|typeRelation+^typeConcept;FRAdvNeg|*;2016-11-29-sde
+760;40;FRCon|FRNon|FRPart|^"par"+^SEnd;^FRCon|FRCon|FRCon|^FRDummy;2016-11-29-sde, added +^SEnd for JDN245 _sbse #6-jdn
+3;40;FRSRel|FRPas+^FRNon;FRSRel|FRAdvNeg;ww met negatie 2011.2, added AdvNeg 2016-02-18-sde, removed AdvNeg in input pattern, Rel+Negation->AdvNeg in right part 2016-11-18-sde, added ^non 2016-11-28-sde
+4;40;FRSRelAux|FRPas+^FRJamais;FRSRel|FRAdvNeg;hulpww met negatie 2011.2, added AdvNeg 2016-02-18-sde, removed AdvNeg in input pattern, Rel+Negation->AdvNeg in right part 2016-11-18-sde, added ^Jamais 2016-11-23-sde
+826;40;FRAdv|FRPas|^typeConcept+^SEnd;*|FRAdvNeg|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+51;40;FRTres|FRPart;FRCon|FRCon;na tr?s volgt een adjectief 2011.2
+632;40;FRAndOrBut|FRAdvCR|FRPart;^FRAndOrBut|FRMod|FRCon;2016-02-01-sde
+160;40;FRDefart|FRPart:FRPartCon:FRPartConMod;FRDefart|FRCon;lidwoord met dubbelzinnig, 2011.2, moved in 2012.1, added PartCon and PartConMod 2016-02-09-sde
+159;40;FRIndefart|FRPart:FRPartCon:FRPartConMod;FRIndefart|FRCon;lidwoord met dubbelzinnig, 2011.2, moved in 2012.1, added PartCon and PartConMod 2016-02-09-sde
+158;40;FRPoss|FRPart:FRPartCon:FRPartConMod;FRPoss|FRCon;poss-pron met dubbelzinnig, 2011.2, moved in 2012.1, added PartCon and PartConMod 2016-02-09-sde
+162;40;FRDes|FRPart:FRPartCon:FRPartConMod;FRDes|FRCon;des met dubbelzinnig, 2011.2, moved in 2012.1, added PartCon and PartConMod 2016-02-09-sde
+161;40;FRPrep|FRPart:FRPartCon;FRPrep|FRCon;prep met dubbelzinnig, 2011.2, moved in 2012.1, added PartCon 2016-02-09-sde (tested PartConMod, decided not to add it)
+151;40;FRDe|FRPart:FRPartCon:FRPartConMod;FRDe|FRCon;de maakt part tot con, 2011.2, moved in 2012.1, added PartCon and PartConMod 2016-02-09-sde
+663;40;FRNum|FRPartCon:FRPartConMod;^FRNum|FRCon;2016-02-09-sde
+664;40;FRQuantpron|FRPartCon:FRPartConMod;^FRQuantpron|FRCon;2016-02-09-sde
+662;40;FRPart:FRPartCon:FRPartConMod|"par";FRSRel|^FRPrep;2016-02-08-sde
+21;40;FRRefl|FRSRelCon;FRSRel|+Join;se voor dubbelzinnig 2011.2, adapted to Join 2013.1, added + 2016-03-30-sde
+67;40;FRRefl|FRSRelMod;FRSRel|+Join;se voor dubbelzinnig 2011.2, adapted to Join 2013.1, added + 2016-03-30-sde
+100;40;FRRefl|FRSRelConMod;FRSRel|Join;se voor dubbelzinnig, 2011.2, adapted to Join 2013.1, added + 2016-03-30-sde
+318;40;FRRefl|FRInf;FRInf|+Join;infinitive is merged with reflexive pronoun, 2013.1, added + 2016-03-30-sde
+19;40;FRRefl|FRSRel;FRSRel|+Join;se voor ww 2011.2, adapted to Join 2013.1, added + 2016-03-30-sde
+20;40;FRRefl|FRSRelAux;FRSRel|FRSRelAux;se voor hulpww 2011.2
+661;40;FRNe|FRDefart|FRSRelCon;^FRNe|FRObjpron|FRSRel;2016-02-05-sde
+28;40;FRDefart|FRSRelCon;FRDefart|FRCon;lidwoord met dubbelzinnig 2011.2
+27;40;FRIndefart|FRSRelCon;FRIndefart|FRCon;lidwoord met dubbelzinnig 2011.2
+410;40;FRAucun|FRSRelCon;FRAucun|FRCon;aucun, aucune met dubbelzinnig, 2013.1
+26;40;FRPoss|FRSRelCon;FRPoss|FRCon;poss-pron met dubbelzinnig 2011.2
+120;40;FRDes|FRSRelCon;FRDes|FRCon;des met dubbelzinnig 2011.2
+29;40;FRPrep|FRSRelCon;FRPrep|FRCon;prep met dubbelzinnig 2011.2
+180;40;FRMod|FRSRelCon;^FRMod|FRCon;2013.1, bepaling bij substantief, added ^ to save NegWord attribute 2016-11-21-sde
+761;40;FRQuantpron|FRSRelCon;^FRQuantpron|FRCon;2016-11-30-sde
+514;40;FRSRelCon+FRCapitalInitial;FRCon;03-11-2014-sde,replaced unified label by language specific label 09-04-2015-nl
+174;40;FRSubjpron|FRObjpron|FRSRelCon;FRSubjpron|FRObjpron|FRSRel;pron met leur en dubbelzinnig, moet voor 26 staan, 2013.1
+172;40;FRSubjpron2|FRObjpron|FRSRelCon;FRSubjpron2|FRObjpron|FRSRel;pron met leur en dubbelzinnig, moet voor 26 staan, 2013.1
+25;40;FRSRelCon|FRIndefart;FRSRel|FRIndefart;dubbelzinnig voor lidwoord 2011.2
+413;40;FRSRelCon|FRAucun;FRSRel|FRAucun;dubbelzinnig voor aucun, aucune, mostly for informal language where ne is missing, 2013.1
+24;40;FRSRelCon|FRDefart;FRSRel|FRDefart;dubbelzinnig voor lidwoord 2011.2
+32;40;FRSRelCon|FRAdv;FRSRel|^FRAdv;dubbelzinnig voor bijwoord 2011.2, added ^ 2016-02-03-sde
+42;40;FRSRelCon|FRPoss;FRSRel|FRPoss;dubbelzinnig voor posspron, 2011.2, changed Nonconcept into Poss in right part 2016-01-14-sde
+93;40;FRSRelCon|FREtre;FRSRel|FREtre;dubbelzinnig voor etre, 2011.2
+62;40;FRSRelCon|FRInf;FRSRel|FRInf;dubbelzinnig voor infinitief 2011.2
+59;40;FRSRelCon|FRPas:FRAdvNeg;FRSRel|FRAdvNeg;dubbelzinnig voor pas 2011.2, added AdvNeg 2016-02-18-sde
+148;40;FRSRelCon|FRSubjpron2;FRSRel|FRSubjpron2;dubbelzinnig voor celui, quelque un etc., 2011.2
+106;40;FRSRelCon|FRDe|FRInf;FRSRel|FRSRel|FRInf;dubbelzinnig voor de en infinitief, 2011.2
+31;40;FRSubjpron|FRSRelCon;FRSubjpron|FRSRel;pron met dubbelzinnig, 2011.2, verplaatst in 2013.1
+109;40;FRSubjpron2|FRSRelCon;FRSubjpron2|FRSRel;pron met dubbelzinnig, 2011.2, verplaatst in 2013.1
+61;40;FRDatpron|FRSRelCon;FRDatpron|FRSRel;lui met dubbelzinnig, 2011.2, verplaatst in 2013.1
+52;40;FRSConj|FRSRelCon;FRSConj|FRSRel;dubbelzinnig na voegwoord, 2011.2, verplaatst in 2013.1
+390;40;FRSRelconj|FRSRelCon;FRSRelconj|FRSRel;dubbelzinnig na voegwoord, verplaatst in 2013.1
+515;40;FRSRelCon+FRCapitalAll;FRCon;04-11-2014-sde, treat capitalized RelCons as Con, place this rule after disambiguation rules because if the whole text is capaitalized, the rules must get priority,replaced unified label by language specific label 09-04-2015-nl
+475;40;FRCon+FRCapitalInitial|FRSRelCon+^FRCapitalInitial;^FRCon|FRSRel;detect verb after name for prodlog 112984, 2013.2-sde,replaced unified label by language specific label 09-04-2015-nl
+499;40;FRCon+FRCapitalMixed|FRSRelCon+^FRCapitalInitial;^FRCon|FRSRel;detect verb after name for prodlog 112984, 07-08-2013-sde,replaced unified label by language specific label 09-04-2015-nl
+239;40;FRCon|FRPlus|FRCon;FRCon|FRMod|FRCon;plus na concept werkt als FRMod, 2013.1
+240;40;FRCon|FRPlus|FRPart;FRCon|FRMod|FRCon;plus na concept werkt als FRMod, 2013.1
+223;40;FRCon|FRAdv|FRPlus|FRCon;FRCon|FRMod|FRMod|FRCon;plus na concept werkt als FRMod, 2013.1
+224;40;FRCon|FRAdv|FRPlus|FRPart;FRCon|FRMod|FRMod|FRCon;plus na concept werkt als FRMod, 2013.1, very low-frequent
+225;40;FRCon|FRPlus|FRDe|FRCon;FREnd|FRMod|FRMod|FRCon;plus de na concept werkt als conceptgrens, 2013.1
+675;40;FRAdvDegree|FRPartMod;FRCon|FRCon;2016-02-11-sde
+483;40;FRCon|FRPartMod|FRDes;FRCon|FRCon|FRPrep;noun with adjective before des, 2013.2-sde
+496;40;FRCon|FRPartMod|"du";FRCon|FRCon|FRPrep;noun with adjective before du, 25-07-2013-sde
+683;40;FRMod|FRPart;^FRMod|FRCon;2016-02-12-sde
+92;40;FRPart|FREn;FRSRel|FREn;participium gevolgd door en, 2011.2
+5;40;FRPart|FRPrep;FRSRel|FRPrep;participium gevolgd door prepositie 2011.2
+312;40;FRCon|FRPart|FRAdvCR|FRAndOrBut;FRCon|FRCon|FRCon|FRAndOrBut;participium na concept, gevolgd door et of ou, 2013.1
+6;40;FRPart|FRAdv|FRPrep;FRSRel|^FRAdv|FRPrep;participium gevolgd door prepositie 2011.2, added ^ 2016-02-03-sde
+157;40;FRPart|FRDefart;FRSRel|FRDefart;part wordt rel voor een lidwoord, 2011.2
+411;40;FRPart|FRAucun;FRSRel|FRAucun;part wordt rel voor aucun, aucune, 2013.1
+149;40;FRPart|FRSubjpron2;FRSRel|FRSubjpron2;Part wordt relatie voor celui, cela etc., 2011.2, moved up 2016-02-11-sde
+682;40;FRPart+^FRPartMod|FRCon;FRSRel|^FRCon;Part is probably a relation before concept, 2016-02-11-sde
+104;40;FRComma|FRPart;FRComma|FRSRel;participium na komma, 2011.2
+46;40;FRSRelMod|FRDefart;FRSRel|FRDefart;dubbelzinnig voor lidwoord 2011.2
+48;40;FRSRelMod|FRIndefart;FRSRel|FRIndefart;dubbelzinnig voor lidwoord 2011.2
+47;40;FRSRelMod|FRAdv;FRSRel|^FRAdv;dubbelzinnig voor bijwoord 2011.2, added ^ 2016-02-03-sde
+49;40;FRSRelMod|FRPoss;FRSRel|FRPoss;dubbelzinnig voor posspron, 2011.2, changed Nonconcept into Poss in right part 2016-01-14-sde
+827;40;FRSRelMod|FRMod;FRSRel|*;#34-sde
+391;40;FRSRelconj|FRSRelConMod;FRSRelconj|FRSRel;dubbelzinnig na voegwoord 2013.1
+774;40;^FRDefart:FRIndefart+^SBegin|FRSRelConMod|FRDefart:FRIndefart|FRCon;*|FRSRel|*|^FRCon;2016-12-06-sde, added +^SBegin for JDN245 _sbse #6-jdn
+350;40;FRSRelConMod;FRCon;defaultherschrijving, 2013.1, moved up 2016-02-12-sde
+23;40;FRPartCon;FRCon;defaultherschrijving, 2011.2, moved in 2013.1 to position after r80 which is the last rule using FRPartCon and after r52 which is the last one using FRSRelCon for lexrep fait
+22;40;FRSRelCon;FRCon;defaultherschrijving, 2011.2, moved in 2013.1 to position after r52 which is the last one using FRSRelCon but before default rewriting of FRSRelAux for avions, must be after r92 and r5 for faits
+114;40;FRCon|FRDes|FRCon;^FRCon|FRPrep|^FRCon;2011.2, des tussen concepten, 2013.1, added ^ 2016-01-15-sde
+477;40;FRCon|FRDes|FRNum;FRCon|FRPrep|^FRNum;des tussen concept en getal 2013.2-sde, adapted 2016-01-15-sde
+171;40;FRPrep|FRObjpron|FRInf;FRSConj|FRObjpron|FRInf;prep en infinitief blijven over, objpron verdwijnt, moet voor 155 en 133 staan, 2013.1
+340;40;FRSRelAux;FRSRel+FRVerb;default rewriting for auxiliary verbs after the last rule that applies specifically to FRSRelAux, 2013.1, added Verb for further use #34-sde
+143;40;FRPPart|FRInf;FRSRel|FRInf;PPart wordt Rel voor infinitief, 2011.2
+767;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|^FRSConj+^SEnd;*|FRSConj+FRSConj2|FRInf|*;refining r33, 2016-12-01-sde, added +^SBegin for JDN245 _sbse #6-jdn
+773;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|FRSConj;*|*|FRInf|FRSConj+FRSConj2;refining r33 and 767, 2016-12-05-sde, added +^SBegin for JDN245 _sbse #6-jdn
+33;40;FRDe|FRInf;FRSConj|FRInf;de voor infinitief 2011.2
+112;40;FRDe|FRDemonstr;FRDe|FRDefart;de met demonstratief, 2011.2
+146;40;FRDe|FRSubjpron2;FRPrep|FRSubjpron2;de wordt prep voor cela, quelqu un etc., 2011.2
+170;40;FRDe|FRObjpron:FRDefart|FRInf;FRSConj|FRObjpron|FRInf;de en infinitief blijven over, objpron verdwijnt, 2013.1, added Defart #34-sde
+58;40;FRDe|FRRefl;FRSConj|FRRefl;2011.2, de se
+156;40;FRDe|FRSRel;FRSConj|FRSRel;de voor relatie, 2011.2
+63;40;FRDe|FRNe:FRAdvNeg;FRSConj|FRNe;de en negatie (voor infinitief), 2011.2, added AdvNeg for 'ne pas' 2016-02-18-sde
+121;40;FRDe|FRIndefart;FRPrep|FRIndefart;d un(e) tussen concepten, 2011.2
+419;40;FRDe|FRAucun;FRPrep|FRAucun;d un(e) tussen concepten, 2013.1
+123;40;FRDe|FRMod;FRPrep|FRMod;de met tous etc, 2011.2
+584;40;FRDe|FRQuantpron;FRPrep|FRQuantpron;2016-01-18-sde
+575;40;typeConcept|FRDe|FRIndefpron;*|FRPrep|FRIndefpron;2016-01-15-sde
+600;40;FRQuantpron|FRDe;FRQuantpron|FRPrep;2016-01-21-sde
+589;40;FREn|FRDefart:FREn:FRRefl|FRPPart;FRSConj|*|FRSRel;2016-01-19-sde
+117;40;FRDefart|FRPPart;FRDefart|FRCon;lidwoord voor part pres, 2011.2
+119;40;FRIndefart|FRPPart;FRIndefart|FRCon;lidwoord voor part pres, 2011.2
+415;40;FRAucun|FRPPart;FRAucun|FRCon;aucun voor part pres, 2013.1
+482;40;FRPoss+^FRObjpron|FRPPart;FRPoss|FRCon;present participles becomes concept after possessive pronoun 2013.2-sde
+178;40;FREn|FRDatpron|FRPPart;FRPrep|FRNonconcept|FRSRel;en lui met Ppart, moet voor 40 staan, 2013.1
+183;40;FREn|FRObjpron|FRPPart;FRPrep|FRNonconcept|FRSRel;en me, vous,... met Ppart, moet voor 40 staan, 2013.1
+40;40;FRPPart|FRDefart;FRSRel|FRDefart;part pres voor lidwoord 2011.2
+38;40;FRPPart|FRIndefart;FRSRel|FRIndefart;part pres voor lidwoord 2011.2
+416;40;FRPPart|FRAucun;FRSRel|FRAucun;part pres voor aucun, 2013.1
+39;40;FRPPart|FRPoss;FRSRel|FRPoss;part pres voor posspron, 2011.2, changed Nonconcept into Poss in right part 2016-01-14-sde
+164;40;FRPPart|FRMod;FRSRel|FRMod;part pres voor tout, celui etc., 2011.2
+593;40;FRPPart|FRQuantpron;FRSRel|^FRQuantpron;variant of r164, 2016-01-20-sde
+147;40;FRPPart|FRSubjpron2;FRSRel|FRSubjpron2;PPart wordt relatie voor celui, cela etc., 2011.2
+326;40;FRPPart|FRAdv;FRSRel|^FRAdv;part pres voor bijwoord, 2013.1, added ^ 2016-02-03-sde
+191;40;FRComma|FRPPartCon;FRComma|FRCon;commandant, dirigeant, tenant etc. na komma, moet na 149 staan, 2013.1
+189;40;FRComma|FRPPart;FRComma|FRSRel;Ppart na komma, 2013.1
+65;40;FREn|FRPPart;FRPrep|FRSRel;en met Ppart 2011.2
+66;40;FRRefl|FRPPart;FRSRel|Join;se met Ppart 2011.2, adapted to Join 2013.1
+118;40;FRPrep|FRPPart;FRPrep|FRCon;prep met PPart, 2011.2
+116;40;FRPPart|FRDes;FRSRel|FRDes;part pres voor des, 2011.2
+70;40;FRPrep|FRAvoir|FRSRel;FRPrep|FRSRel|FRSRel;avoir tussen prepositie en als relatie gelabeld participium, 2011.2
+746;40;typeRelation|FRPrep|FRNe:FRAdvNeg;*|FRSConj|FRNe;prep en negatie (voor infinitief) 2016-11-24-sde
+747;40;^typeRelation+^SBegin|FRPrep+^"à"|FRNe:FRAdvNeg;*|FRSConj|FRNe;prep en negatie (voor infinitief) 2016-11-24-sde, added +^SBegin for JDN245 _sbse #6-jdn
+44;40;FRCon|FRDefart;FREnd|FRDefart;conceptgrens tussen concept en lidwoord 2011.2
+43;40;FRCon|FRIndefart;FREnd|FRIndefart;conceptgrens tussen concept en lidwoord 2011.2
+418;40;FRCon|FRAucun;FREnd|FRAucun;conceptgrens tussen concept en aucun, 2013.1
+45;40;FRCon|FRPoss;FREnd|FRPoss;conceptgrens tussen concept en posspron, 2011.2, changed Nonconcept into Poss in right part 2016-01-14-sde
+113;40;FRDe|FRDefart;FRDe|FRNonconcept;na 3.1, de la, de l, 2011.2, aangepast in 2013.1: De werd herschreven naar Prep, must come after 117
+122;40;FRDe|FRPoss;FRPrep|FRPoss;de met poss pron, 2011.2, changed Nonconcept into Poss in right part 2016-01-14-sde
+142;40;FRInf|FRDe;FRInf|FRPrep;de wordt relatie na infinitief, 2011.2
+695;40;FRPas|FRInf;FRAdvNeg|FRInf;'pas' is negation marker before infinitive, 2016-02-18-sde
+762;40;"pour"|FRInf;FRSConj+FRSConj2|FRInf;information needed for attribute expansion, 2016-12-01-sde
+655;40;FRInf;FRInf+FRSRel;infinitive = Relation according to guidelines, 2016-02-04-sde, this rule also deletes the label Avoir, added Inf+ to allow further use of Inf label #34-sde
+127;40;FRRefl|FRSRel;FRSRel|FRSRel;se wordt relatie voor een infinitief die relatie geworden is, 2011.2, experiment met Join gaf geen goed resultaat
+150;40;FRSubjpron2|FRDes;FRSubjpron2|FRPrep;des wordt relatie na celui etc., 2011.2, aangepast op 2013.1 => NR, changed, since Subjpron2 is PR now 2016-01-14-sde
+194;40;FRSubjpron2|FRDe;FRSubjpron2|FRPrep;de wordt NR na celui etc., 2013.1 => NR, changed since Subjpron2 is PR now 2016-01-14-sde
+177;40;FRDe|FRDatpron;FRPrep|FRObjpron;de met lui wordt non-relevant, 2013.1, changed according to new guidelines 2016-01-14-sde
+342;40;FRIndefart|FRAndOrBut;FRCon|FRAndOrBut;2013.1
+343;40;FRIndefart|FRPas;FRCon|FRCon;2013.1
+344;40;FRIndefart|FRDes;FRCon|FRCon;2013.1
+345;40;FRIndefart|FRPrep;FRCon|FRPrep;2013.1
+373;40;FRIndefart|FRSRel;FRCon|^FRSRel;2013.1
+346;40;FRIndefart|SEnd;FRCon|*;2013.1
+347;40;FRIndefart|FRComma;FRCon|FRComma;2013.1
+376;40;FRPrep;+FRSRel;voorlopige toevoeging voor behandeling van bijwoorden 2013.1
+50;40;FRPartMod;FRCon;defaultherschrijving om resterende dubbellabels te vermijden 2011.2
+235;40;FRPlus|FRIndefart;FRSRel|FRIndefart;plus als (wiskundige) relatie of als voegwoord, 2013.1
+234;40;FRPlus|FRDefart;FRSRel|FRDefart;plus als (wiskundige) relatie of als voegwoord, 2013.1
+233;40;FRPlus|FRSubjpron;FRSRel|FRSubjpron;plus als (wiskundige) relatie of als voegwoord, 2013.1
+73;40;FRCon:"tout"|FRAdv|FRCon;FRCon|FRCon|FRCon;clusters met een modificerend bijwoord niet splitsen, 2011.2, added tout 2016-01-19-sde
+72;40;FRMod|FRAdv|FRCon;FRCon|FRCon|FRCon;clusters met een modificerend bijwoord niet splitsen, 2011.2
+74;40;FRCon|FRAdv|FRMod;FRCon|FRCon|FRCon;clusters met een modificerend bijwoord niet splitsen, 2011.2, limited use cases
+75;40;FRSRel|FRAdv|FRSRel;^FRSRel|^FRAdv|^FRSRel;bijwoord tussen relaties wordt relatie, 2011.2, added ^ before Adv 2016-02-03-sde
+715;40;FRCon|FRAdv|FRAdvCR|FRCon;FRCon|FRCon|FRCon|FRCon;bijwoorden tussen concepten worden concept, 2016-03-16-sde
+324;40;FRCon|FRAdv|FRPart:FRPartConMod;FRCon|FRCon|FRCon;bijwoord tussen concept en participium wordt concept, ook met AdvNR om het concept niet te splitsen, 2013.1, a	dded PartConMod 2016-02-10-sde
+325;40;FRAussi|FRCon|FRQue;FRSRel|FRCon|FRQue;aussi is not nonrelevant in aussi X que, 2013.1
+322;40;FRAussi|FRSRelMod|FRQue;FRSRel|FRCon|FRQue;aussi is not nonrelevant in aussi X que, 2013.1
+613;40;FRComma|"même";FRComma|FRSConj;2016-01-26-sde
+303;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;relevant adverb becomes part of concept between comma and concept, 2013.1
+306;40;FRComma|FRAdvCR|FRSRel;FRComma|^FRAdvCR|FRSRel;relevant adverb becomes part of relation between comma and relation, 2013.1, Rel -> ^AdvCR 2016-02-04-sde
+327;40;FRAdvNR|FRDe;FRAdvNR|FRPrep;de is mostly a relation after a NR adverb, 2013.1
+602;40;FRCon|"de"|"soi";^FRCon|Join|Join;2016-01-21-sde
+603;40;^typeConcept+^SBegin|"de"|"soi";*|FRAdvCR+FRAdv+FRAdvManner|Join;2016-01-21-sde, added labels 2016-02-04-sde, added +^SBegin for JDN245 _sbse #6-jdn
+351;40;FRPartConMod;FRCon;defaultherschrijving, 2013.1
+648;40;FRNum+FRCon;FRNum;remove Con-label 2016-02-02-sde
+352;40;FRIndefart;+FRNonconcept;added plus sign in 2013.1, so the label can still be used for negation
+105;40;FRSRel|FRDe;^FRSRel|FRSRel;2011.2, added ^ in 2013.1 to avoid that FRNegation is removed
+192;40;FRDe|FRNonconcept;FRSRel|FRNonconcept;2013.1
+353;40;FRDe|FRAdvCR;FRPrep|^FRAdvCR;2013.1, added ^ 2016-02-04-sde
+193;40;FRDe|FRSConj:FRSRelconj;FRSRel|FRSRel;2013.1, added Relconj 2016-03-23-sde
+480;40;^FRPlus+^SBegin|FRDe|FRNum;*|FRPrep|FRMod;2013.2-sde, added +^SBegin for JDN245 _sbse #6-jdn
+354;40;FRComma|FRDe;FRComma|FRSRel;2013.1
+377;40;FRPrep;FRPrep;2013.1, defaultherschrijving om resterende dubbellabels te vermijden
+685;40;FRDe|FRPrep;FRPrep|FRPrep;2016-02-12-sde
+111;40;FRDemonstr;FRDefart;defaultherschrijving, 2011.2
+402;40;FRDefart;+FRNonconcept;defaultherschrijving, 2013.1, added plus sign, so the label can be used in later phases 2016-12-01-sde
+167;40;FRComma;+FRPunctuation;2012.1 had in de vorige update toegevoegd moeten zijn maar was toen mislukt door ongeldig teken in commentaar,replaced unified label by language specific label 09-04-2015-nl, added + so that label Comma can be used in later phases
+330;40;SBegin|FRAndOrBut;*|FRAdvNR;et, ou, mais aussi, mais surtout are NonRelevant at the beginning of a sentence. 2013.1, Nonconcept->AdvNR because of r665 2016-02-09-sde
+355;40;FRConIfCap;-FRConIfCap;2013.1, avoid that words become NonRelevant because of double labels
+356;40;FRConIfAllCap;-FRConIfAllCap;2013.1, avoid that words become NonRelevant because of double labels
+357;40;FRLetter;-FRLetter;2013.1, avoid that words become NonRelevant because of double labels
+577;40;FRNum:FRMod|"autres";*|FRMod-FRAutre;2016-01-15-sde
+358;40;FRDe|FRPunctuation;FRSRel|FRPunctuation;2013.1,replaced unified label by language specific label 09-04-2015-nl
+500;40;SBegin|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;2014.2-sde, added +^SEnd for JDN245 _sbse #6-jdn
+501;40;SBegin|FRDes|FRNum;*|FRPrep|*;2014.2-sde
+505;40;^FRNum+^SBegin|FRDes|FRNum;*|FRPrep|*;2014.2-sde, added +^SBegin for JDN245 _sbse #6-jdn
+504;40;FRPunctuation|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;2014.2-sde,replaced unified label by language specific label 09-04-2015-nl, Punctuation->* #34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+502;40;FRPrep|FRDes;FRPrep|FRNonconcept;2014.2-sde
+608;40;FRQue|FRDes;FRQue|FRNonconcept;2016-01-22-sde
+503;40;FRSRel|FRDes;^FRSRel|FRNonconcept;2014.2-sde
+507;40;FRSConj|FRDes;^FRSConj|FRNonconcept;2014.2-sde
+508;40;FRSRelconj|FRDes;^FRSRelconj|FRPrep;2014.2-sde
+506;40;FRAdv|FRDes;^FRAdv|FRNonconcept;2014.2-sde
+692;40;typeRelation|FRDes;*|FRNonconcept;2016-02-18-sde
+576;40;typeConcept|FRDes|FRIndefpron;*|FRPrep|FRIndefpron;2016-01-15-sde
+510;40;SBegin|FRDe|FRCapitalInitial;*|FRPrep|^FRCapitalInitial;2014.2-sde,replaced unified label by language specific label 09-04-2015-nl
+512;40;SBegin|FRDe|FRNum;*|FRPrep|^FRNum;2014.2-sde
+511;40;SBegin|FRDe;*|FRAdvNR;2014.2-sde, Nonconcept->AdvNR because of r665
+716;40;^typeConcept+^FRPas+^FRBegin+^SBegin|FRDe|typeConcept;*|FRPrep|*;2016-03-24-sde, added +^SBegin for JDN245 _sbse #6-jdn, replaced ^SBegin+^SBegin by just ^SBegin _sbse #7-sde
+717;40;FRDe|"autres";FRAutre|+Join;2016-03-24-sde
+732;40;FRPrep|"lequel":"laquelle":"lesquels":"lesquelles";FRSConj+FRSConj2|+Join;2016-11-15-sde
+426;40;FRPunctuation|FRJamais;FRPunctuation|+FRNegation;2013.1,replaced unified label by language specific label 09-04-2015-nl
+427;40;SBegin|FRJamais;*|+FRNegation;2013.1
+428;40;FRJamais;FRAdvTemp+FRTime-FRPas-FRAdvNeg;2013.1, remove label Pas, added -AdvNeg 2016-02-18-sde, added AdvTemp+Time 2016-11-23-sde
+690;40;FRPas|FRDe;FRBegin+FRNegation|^FRDe;2016-02-18-sde
+693;40;FRPas|FRPlus;FRCon+FRNegation|^FRPlus;2016-02-18-sde, removed :AdvNeg 2016-11-18-sde, low-frequent
+696;40;FRAdvCR|FRPas;^FRAdvCR|FRAdvNeg;2016-02-18-sde
+736;40;FRIndefart|FRCon|FRPas|FRAdv;^FRIndefart|FRCon|FRCon+FRNegation|^FRAdv;2016-11-18-sde
+697;40;FRPas|FRAdv;FRAdvNeg|^FRAdv;2016-02-18-sde
+698;40;FRPunctuation|FRPas;^FRPunctuation|FRAdvNeg;2016-02-18-sde
+701;40;SBegin|FRPas;*|FRAdvNeg;2016-02-18-sde
+702;40;FRPas|FRCon;FRCon+FRNegation|^FRCon;2016-02-18-sde, AdvNeg->Pas 2016-11-18-sde
+694;40;FRAdvNeg;+FRNegation;replaces r359, 2016-02-18-sde
+699;40;FRPas;FRCon;2016-02-18-sde
+422;40;FRAucun;+FRNegation;2013.1
+706;40;FRRien|FRDe|FRCon;FRCon+FRNegWord|^FRDe|^FRCon;2016-03-10-sde
+707;40;FRRien|FRDe|FRPlus;FRCon+FRNegWord|^FRDe|^FRPlus;2016-03-10-sde
+434;40;FRRien;FRSubjpron+FRObjpron+FRNegWord;2013.1, Con->Subjpron+Objpron 2016-03-10-sde
+757;40;FRCon|"non"|FRCon;^FRCon|-FRNegation|^FRCon;2016-11-28-sde
+634;50;FRDe|FRAdvTime;FRPrep|FRAdvTime+FRAdv;2016-02-02-sde
+677;50;"ce"|FRDay|^typeConcept+^SEnd;FRAdvTime|+Join|*;2016-02-11-sde, added + 2016-03-30-sde, added +^SEnd for JDN245 _sbse #6-jdn
+678;50;"ce"|FRDay|SEnd;FRAdvTime|+Join|*;variant of 677, 2016-02-11-sde, added + 2016-03-30-sde
+833;50;^FRDaypart+^SBegin|FRDe|FRDay;*|FRPrep|*;needed after moving down r396, #34-sde, added +^SBegin for JDN245 _sbse #6-jdn
+834;50;FRDaypart|FRDe|FRDay;FRCon+FRDay|Join|Join;special case for r833, #34-sde
+679;50;"cette"|"semaine":"année"|^typeConcept+^SEnd;FRAdvTime|+Join|*;2016-02-11-sde, added + 2016-03-30-sde, added +^SEnd for JDN245 _sbse #6-jdn
+680;50;"cette"|"semaine":"année"|SEnd;FRAdvTime|+Join|*;variant of 677, 2016-02-11-sde, added + 2016-03-30-sde
+672;50;FRCon|FRAdvTime|FRCon;^FRCon|FRCon|^FRCon;make attribute part of concept, 2016-02-10-sde
+681;50;^FRMod+^SBegin|FRDay;*|FRBegin;2016-02-11-sde, added +^SBegin for JDN245 _sbse #6-jdn
+620;50;FRCon|FRAdvTemp|FRCon;^FRCon|FRCon|^FRCon;make attribute part of concept, 2016-01-28-sde
+619;50;FRAdvTemp;FRAdv+FRAdvTemp+FRTime;assign attribute, 2016-02-04-sde
+621;50;FRCon|FRAdvLoc|FRCon;^FRCon|FRCon|^FRCon;make attribute part of concept, 2016-01-28-sde
+622;50;FRAdvLoc;FRAdv+FRAdvLoc;delete conflicting labels, 2016-01-28-sde
+643;50;FRAdvModal+^FRAdv;-FRAdvModal;delete AdvModal when AdvCR has become something else via rules 2016-02-02-sde
+642;50;FRAdvModal+FRAdv;FRAdv+FRAdvModal;assure the right labels, 2016-02-02-sde
+646;50;FRAdvManner+^FRAdv;-FRAdvManner;2016-02-02-sde
+647;50;FRAdvManner+FRAdv|FRCon+FRCapitalInitial;FRAdvManner|*;don't add Adv here to avoid interference with r644, 2016-02-02-sde
+644;50;FRAdvManner+FRAdv|FRCon:FRPart:FREnd:FRSRelMod;FRMod|*;2016-02-02-sde
+645;50;FRAdvManner+FRAdv;FRAdv+FRAdvManner;assure correct labels, 2016-02-02-sde
+676;50;FRAdvDegree|typeConcept+^FRDe;FRCon|*;2016-02-11-sde, experiment 2016-02-19-sde
+614;50;"même"+FRSConj;FRSConj;2016-01-27-sde, Conj as a result from r613
+616;50;"même"+FRMod;FRAutre;2016-01-27-sde
+615;50;SBegin|"même":"mêmes"|FRCon;*|FRAutre|FRCon;2016-01-27-sde
+617;50;"mêmes"|FRCon;FRAutre|FRCon;overlap with r615 and with lexreps, 2016-01-27-sde
+569;50;FRAutre;FRAutre;2016-01-14-sde
+578;50;"entre"|"autres"|typeRelation;FRSRel|Join|*;2016-01-15-sde
+579;50;"entre"|"autres"|typeOther;FRSRel|Join|*;2016-01-15-sde
+570;50;FRIndefpron|typeRelation;FRSubjpron|*;2016-01-14-sde
+580;50;typeRelation|FRIndefpron|SEnd;*|FRSubjpron|*;2016-01-15-sde
+572;50;FRIndefpron|FRPunctuation;FRSubjpron|FRPunctuation;2016-01-15-sde
+595;50;FRCon|"chacun";^FRCon|Join;2016-01-20-sde
+596;50;FRCon|"chacune";^FRCon|Join;2016-01-20-sde
+574;50;FRQuantpron:FRDemonstr|typeRelation;FRSubjpron|*;2016-01-15-sde, added Demonstr 2016-01-21-sde
+581;50;typeRelation|FRQuantpron:FRDemonstr|SEnd;*|FRSubjpron|*;2016-01-15-sde, added Demonstr 2016-01-21-sde
+583;50;typeRelation|FRQuantpron:FRDemonstr|FRPunctuation;*|FRObjpron|^FRPunctuation;2016-01-15-sde, added Demonstr 2016-01-21-sde
+594;50;SBegin|FRQuantpron:FRDemonstr|FRPunctuation;*|FRSubjpron|^FRPunctuation;2016-01-20-sde, added Demonstr 2016-01-21-sde
+585;50;FRQuantpron|FRNonconcept;FRSubjpron|*;2016-01-18-sde
+587;50;typePathRelevant|FRDes;*|FRNonconcept;2016-01-19-sde
+590;50;"quelque chose"|"de"|typeConcept;FRMod|Join|*;2016-01-20-sde
+823;50;FRNonconcept|FRInf;FRObjpron|*;
+665;50;FRNonconcept|typeRelation;FRSubjpron+FRObjpron-FRIndefart|*;2016-02-09-sde, added -Indefart 2016-11-18-sde, added Subjpron #34-sde
+601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;2016-01-21-sde, very low frequent, mostly covered by other rules 
+766;60;"de"+^FRList|*FRCon|FRAndOr|"de"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, remark: does not always work because 'de' can be Joined in a Con because of rules 751-755, added * and moved up to position before r396 #34-sde
+396;60;FRCon|FRDe|FRCon+^"non";^FRCon|+Join|+Join;2013.1, merge concepts containing de, keep negation attribute, added + to Join 20-04-2015-nl, moved to phase 60 and added '+' to De to save List attribute #34-sde
+768;60;FRIndefart|*FRCon|FRComma|FRIndefart|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+769;60;FRDefart|*FRCon|FRComma|FRDefart|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+801;60;FRPoss|*FRCon|FRComma|FRPoss|*FRCon|FRAndOr|FRPoss|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;#34-sde
+770;60;"des"|*FRCon|FRComma|"des"|*FRCon|FRAndOr|"des"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+771;60;*FRCon|FRComma|*FRCon|FRAndOr|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+763;60;FRIndefart+^FRList|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+764;60;FRDefart+^FRList|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+802;60;FRPoss+^FRList|*FRCon|FRAndOr|FRPoss|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;#34-sde
+765;60;"des"+^FRList|*FRCon|FRAndOr|"des"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-01-sde, added * #34-sde
+772;60;"de":"dµ"|FRSRel|FRAndOr|"de":"dµ"|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-02-sde
+795;60;"de"|FRObjpron|FRSRel|FRAndOr|"de"|FRObjpron|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;2016-12-02-sde
+721;70;FRIgnoreNegation|^FRNegation|"ne":"n"+FRNegation;*|*|-FRNegation;2016-11-04-sde, very low-frequent
+722;70;FRIgnoreNegation|^FRNegation|^FRNegation|"ne":"n"+FRNegation;*|*|*|-FRNegation;2016-11-04-sde, very low-frequent
+723;70;FRIgnoreNegation|^FRNegation|^FRNegation|^FRNegation|"ne":"n"+FRNegation;*|*|*|*|-FRNegation;2016-11-04-sde, very low-frequent
+361;70;FRNegation;+FRNegBegin;2013.1
+741;70;FRSConj+^FRNegation|FRNegation+^FRAucun;+FRBeginrel|*;2016-11-23-sde
+737;70;FRSRel+^FRNegation|FRNe+FRNegation;*|+FRBeginrel;2016-11-23-sde
+398;70;FRPrep|FRNegation;+FRNegBegin|^FRNegation;2013.1, vervangen door typeRelation als dat mogelijk wordt
+400;70;FRSRelconj|FRNegation;+FRNegBegin|^FRNegation;2013.1, vervangen door typeRelation als dat mogelijk wordt
+405;70;FRSRelconj|FRSubjpron|FRNegation;+FRNegBegin|*|^FRNegation;2013.1, Subjpron->* #34-sde
+365;70;FRBegin:FRAutre|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;2013.1, adapted 2016-03-14-sde and 2016-03-16-sde, added ^sans 2016-11-03-sde, added Autre 2016-12-06-sde
+805;70;*FRCon|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;split r365 into r365 and r805, #34-sde
+375;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;2013.1, adapted 2016-03-16-sde, added * #34-sde, added ^non #34-sde
+743;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;2016-11-24-sde, added * #34-sde, added ^non #34-sde
+744;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;repetition of r375 after application of r743, 2016-11-24-sde, added * #34-sde, added ^non #34-sde
+745;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;repetition of r743, 2016-11-24-sde, added * #34-sde, added ^non #34-sde
+720;70;FRCon:"quelqu un"|"sans"+FRNegation|FRCon:FREnd|^SEnd;+FRNegBegin|*|*|*;2016-11-03-sde, added End 2016-11-10-sde
+394;70;FRCon|FRPunctuation|FRSRelconj+FRNegBegin;FRCon|FRPunctuation|^FRSRel;2013.1, avoid that rule 393 is applied when there is a comma between Con and Relconj,replaced unified label by language specific label 09-04-2015-nl
+393;70;FRCon|FRSRelconj+FRNegBegin;FRCon+FRNegBegin|FRSRel;2013.1
+714;70;FRSubjpron:FRSubjpron2:FRPoss|FRNegBegin+^FRPrep+^FRSConj;+FRNegBegin|*;2016-03-16-sde, added Subjpron2 and Poss, removed Objpron #34-sde
+775;70;FRCondition|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*;2016-12-06-sde
+794;70;FRCondition|^FRNegStop|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*|*;#34-sde
+800;70;*FRList+^FRNegBegin+^FRNegStop|FRList+FRNegBegin;+FRNegBegin|*;#34-sde
+710;70;FRPrep+FRNegation|typeConcept|typeRelation+^FRPrep+^"et"+^FRNegation+^FRNegBegin;*|*|+FRNegStop;2016-03-14-sde
+362;70;FRPunctuation|FRAndOrBut;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl
+363;70;FRPunctuation+^FRList|*FRCon;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added ^List 2016-12-02-sde, added * #34-sde
+364;70;FRPunctuation|FRSRel+^FRNegation;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added ^Negation #34-sde
+378;70;FRPunctuation+^FRList|FRPrep;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added ^List 2016-12-02-sde
+395;70;FRPunctuation|FRSRelconj;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl
+407;70;FRPunctuation|FRSConj;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, adapted 2016-02-19-sde, restored 2016-11-09-sde
+733;70;FRPunctuation|FRSubjpron:FRSubjpron2:FRObjpron;FRPunctuation|+FRNegStop;2016-11-15-sde
+704;70;^"ni"+^"non"+^SBegin|FRSConj+FRSConj2|^SEnd;*|-FRSConj+FRNegStop|*;make Conj BeginRelation, 2016-02-19-sde, added right context 2016-11-09-sde, added left context restrictions #34-sde, added +^SBegin for JDN245 _sbse #6-jdn
+406;70;FRPunctuation|FRQue;FRPunctuation|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl
+474;70;FRPunctuation|FRAdv|FRSRel;FRPunctuation|+FRNegStop|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, ^Adv->+NegStop since Adv can be in Path 2016-03-10-sde
+385;70;FRPunctuation+^FRList|FRNonconcept|*FRCon:FRMod;FRPunctuation|FRNonconcept|+FRNegStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added ^List 2016-12-02-sde, added * and Mod #34-sde
+387;70;FRPunctuation|FRSubjpron:FRObjpron:FRSubjpron2|FRSRel:FRObjpron;FRPunctuation|+FRNegStop|*;2013.1,replaced unified label by language specific label 09-04-2015-nl, added Objpron and moved NegStop to pronoun now it is PR 2016-03-10-sde, added Subjpron2 2016-03-14-sde, added option Objpron 2016-11-10-sde
+820;70;FRAdvTemp:FRAdvTime|FRPunctuation|^FRAdvTemp+^FRAdvTime+^SEnd;*|*|+FRNegStop;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+821;70;^FRAdvTemp+^FRAdvTime+^SBegin|FRPunctuation|FRAdvTemp:FRAdvTime|^SEnd;*|*|+FRNegStop|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+374;70;FRAndOrBut|FRAdvNR;+FRNegStop+FRBeginrel|*;2013.1, niet getest, added Beginrel, Adv->AdvNR #34-sde
+423;70;FRAndOrBut|FRMod;+FRNegStop|^FRMod;2013.1, niet goed getest
+379;70;FRAndOrBut|FRSubjpron:FRSubjpron2;+FRNegStop|*;2013.1, added Subjpron2 2016-03-14-sde, Subjpron->* #34-sde
+380;70;FRAndOrBut+^FRList|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;2013.1, made shorter 06-08-2013-sde, added ^Negation 2016-03-15-sde, added ^ before SConj 2016-11-24-sde, added +Beginrel and ^List 2016-12-02-sde, added Conj2 #34-sde
+796;70;"mais"|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;variant of r380, #34-sde
+709;70;FRAndOrBut|FRSRelconj;+FRNegStop+FRBeginrel|FRSRelconj;2016-03-14-sde, added Beginrel 2016-12-06-sde
+381;70;FRAndOrBut|FRNonconcept+^FRList;+FRNegStop|^FRNonconcept;2013.1, added ^List 2016-12-01-sde
+382;70;FRAndOrBut|FRIndefart+^FRList;+FRNegStop|^FRIndefart;2013.1, added ^List 2016-12-01-sde
+389;70;FRAndOrBut|FRPunctuation;+FRNegStop|FRPunctuation;2013.1,replaced unified label by language specific label 09-04-2015-nl
+424;70;FRCon|FRAndOrBut|FRSRel;^FRCon|+FRNegStop|^FRSRel;2013.1
+815;70;FRAdvNeg+^"non"|FRAndOrBut|^FRNegation+^SEnd;*|+FRNegStop+FRBeginrel|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+816;70;FRAdvNeg+^"non"|*FRSRel+^FRAndOrBut|"et"|^FRNegation+^SEnd;*|*|+FRNegStop+FRBeginrel|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+817;70;FRAdvNeg+^"non"|"de"|*typeConcept|"et"|^FRNegation+^SEnd;*|*|*|+FRNegStop+FRBeginrel|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+818;70;FRAdvNeg+^"non"|*^"et"+^FRNegStop|"et"|typeRelation+^FRPrep+^FRNegation;*|*|+FRNegStop+FRBeginrel|*;#34-sde
+790;70;FRAdvNeg+^"non"|FRQue|FRSRel;*|+FRBeginrel+FRNegStop|*;2016-12-06-sde
+791;70;FRAdvNeg+^"non"|FRQue:"si"|*FRCon|FRSRel;*|+FRBeginrel+FRNegStop|*|*;2016-12-06-sde, added * #34-sde
+792;70;FRAdvNeg+^"non"|FRQue:"si"|FRIndefart:FRNonconcept:FRPoss|*FRCon|FRSRel;*|+FRBeginrel+FRNegStop|*|*|*;2016-12-06-sde, added Poss #34-sde
+793;70;FRAdvNeg+^"non"|FRQue:"si":"sµ"|FRSubjpron;*|+FRBeginrel+FRNegStop|*;2016-12-08-sde
+822;70;FRAdvNeg+^"non"|FRSRel|FRQue:"si"|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+828;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|+FRBeginrel+FRNegStop;#34-sde
+829;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|*|+FRBeginrel+FRNegStop;#34-sde
+824;70;FRSConj:FRPrep+FRNegation|FRSRel|FRQue|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+825;70;FRSConj:FRPrep+FRNegation|typeRelation:typeOther|typeRelation|FRQue|^FRNegBegin+^SEnd;*|*|*|+FRBeginrel+FRNegStop|*;#34-sde, added +^SEnd for JDN245 _sbse #6-jdn
+798;70;FRNegation|*^FRCon|*FRCon+^FRNegation|FRSRelconj;*|*|*|+FRNegStop;#34-sde
+799;70;FRNegation|*^FRCon+^FRPunctuation|*FRCon|*^FRSRelconj+^FRNegation+^FRNegStop+^FRNegBegin+^FRPunctuation+^FRSubjpron2|FRSRelconj;*|*|*|*|+FRNegStop;#34-sde
+832;70;FRCon|FRSRelconj+^FRNegation+^FRNegBegin|FRVerb+^FRNegation+^FRNegBegin;*|+FRNegStop|*;#34-sde
+804;70;FRQue|*^FRVerb+^FRSRel+^FRNegation+^SEnd|SEnd;FRSRel|*|*;que=comparison, #34-sde, added ^SEnd to make the rule work again _sbse #7-sde
+803;70;FRNegation|*FRCon|FRQue;*|*|+FRNegStop;#34-sde
+830;70;FRCon|FRSubjpron+^FRNegWord+^"y";*|+FRNegStop;#34-sde
+740;70;^typeRelation+^SBegin|FRAndOrBut|FRBeginrel;*|*|-FRBeginrel;2016-11-23-sde, added +^SBegin for JDN245 _sbse #6-jdn
+386;70;FRNegation+FRNegStop;-FRNegStop;2013.1
+403;70;FRNegBegin;-FRNegStop;2013.1
+527;80;FRSRel|FRPosSentiment;+FRPosSentimentBegin|^FRPosSentiment;2013.1, 09-04-2015-nl
+528;80;FRSRel|FRNegSentiment;+FRNegSentimentBegin|^FRNegSentiment;2013.1, 09-04-2015-nl
+806;80;FRPunctuation|typeRelation;*|+FRPosSentimentStop+FRNegSentimentStop;replaces r529-530 + 533-542, #34-sde
+531;80;FRPunctuation|*FRCon;FRPunctuation|+FRPosSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added * #34-sde
+532;80;FRPunctuation|*FRCon;FRPunctuation|+FRNegSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added * #34-sde
+543;80;FRPunctuation|FRAdv|FRSRel;FRPunctuation|^FRAdv|+FRPosSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl
+544;80;FRPunctuation|FRAdv|FRSRel;FRPunctuation|^FRAdv|+FRNegSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl
+549;80;FRPunctuation|FRNonconcept|*FRCon;FRPunctuation|FRNonconcept|+FRPosSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added * #34-sde
+550;80;FRPunctuation|FRNonconcept|*FRCon;FRPunctuation|FRNonconcept|+FRNegSentimentStop;2013.1,replaced unified label by language specific label 09-04-2015-nl, added * #34-sde
+551;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;FRPunctuation|+FRPosSentimentStop|^FRSRel;2013.1,replaced unified label by language specific label 09-04-2015-nl, added Objpron and moved PosSentimentStop to the pronoun now it is PR 2016-03-10-sde
+552;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;FRPunctuation|+FRNegSentimentStop|^FRSRel;2013.1,replaced unified label by language specific label 09-04-2015-nl, added Objpron and moved PosSentimentStop to the pronoun now it is PR 2016-03-10-sde
+553;80;FRAndOrBut|FRAdv;+FRPosSentimentStop|^FRAdv;2013.1, niet getest
+554;80;FRAndOrBut|FRAdv;+FRNegSentimentStop|^FRAdv;2013.1, niet getest
+555;80;FRAndOrBut|FRMod;+FRPosSentimentStop|^FRMod;2013.1, niet goed getest
+556;80;FRAndOrBut|FRMod;+FRNegSentimentStop|^FRMod;2013.1, niet goed getest
+557;80;FRAndOrBut|FRSubjpron;+FRPosSentimentStop|FRSubjpron;2013.1
+558;80;FRAndOrBut|FRSubjpron;+FRNegSentimentStop|FRSubjpron;2013.1
+559;80;FRAndOrBut|FRSConj;+FRPosSentimentStop|FRSConj;2013.1, made shorter 06-08-2013-sde
+560;80;FRAndOrBut|FRSConj;+FRNegSentimentStop|FRSConj;2013.1, made shorter 06-08-2013-sde
+561;80;FRAndOrBut|FRNonconcept;+FRPosSentimentStop|^FRNonconcept;2013.1
+562;80;FRAndOrBut|FRNonconcept;+FRNegSentimentStop|^FRNonconcept;2013.1
+563;80;FRAndOrBut|FRIndefart;+FRPosSentimentStop|^FRIndefart;2013.1
+564;80;FRAndOrBut|FRIndefart;+FRNegSentimentStop|^FRIndefart;2013.1
+565;80;FRAndOrBut|FRPunctuation;+FRPosSentimentStop|FRPunctuation;2013.1,replaced unified label by language specific label 09-04-2015-nl
+566;80;FRAndOrBut|FRPunctuation;+FRNegSentimentStop|FRPunctuation;2013.1,replaced unified label by language specific label 09-04-2015-nl
+567;80;FRCon|FRAndOrBut|FRSRel;^FRCon|+FRPosSentimentStop|^FRSRel;2013.1
+568;80;FRCon|FRAndOrBut|FRSRel;^FRCon|+FRNegSentimentStop|^FRSRel;2013.1
+703;90;FRSConj+FRSConj2;-FRSConj2;default to avoid conflicting labels, 2016-02-19-sde, moved to phase 90 2016-12-06-sde
+705;90;FRSConj2+FRSRel;-FRSConj2;default to avoid conflicting labels, 2016-02-19-sde, moved to phase 90 2016-12-06-sde
+742;90;FRBeginrel|FRBeginrel;^FRBeginrel|-FRBeginrel;2016-11-23-sde
+738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase) 2016-11-23-sde
+718;$;FRAdv+FRAdvManner:FRAdvDegree:FRAdvTime:FRAdvModal;-FRAdv;2016-09-08-sde
+719;$;FRAdv+FRAdvTemp:FRAdvLoc:FRMod;-FRAdv;2016-09-08-sde
+520;$;FRPunctuation;Punctuation;09-04-2015-nl

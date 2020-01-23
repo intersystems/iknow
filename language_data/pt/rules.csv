@@ -1,0 +1,571 @@
+375;1;CapitalInitial;^PTCapitalInitial;23-03-2015-nl
+730;1;CapitalMixed;^PTCapitalMixed+PTCapitalInitial;relevant in rules for names, #22-sde
+376;1;CapitalAll;^PTCapitalAll;23-03-2015-nl
+377;1;Punctuation;PTPunctuation;23-03-2015-nl
+379;1;UDNegation;+PTNegation+PTNegBegin;23-03-2015-nl 
+380;1;UDPosSentiment;+PTPosSentiment+PTPosSentimentBegin;23-03-2015-nl
+381;1;UDNegSentiment;+PTNegSentiment+PTNegSentimentBegin;23-03-2015-nl 
+382;1;UDConcept;PTUDConcept+PTCon;23-03-2015-nl, added '+' to avoid overwriting other UD labels 25-03-2015-nl,replaced udconcept in righthand part 04-04-2016-nl (User dictionary labels get priority over lexrep labels now)
+383;1;UDRelation;PTRelation;23-03-2015-nl, added '+' to avoid overwriting other UD labels 25-03-2015-nl,removed udrelation in righthand part 04-04-2016-nl (User dictionary labels get priority over lexrep labels now)
+384;1;UDNonRelevant;PTNonRelevant;23-03-2015-nl
+737;40;PTGeoType|PTDe:PTDo|PTCapitalInitial;PTCon+PTCapitalInitial+PTCapitalMixed|+Join|+Join;#22-sde
+738;40;PTGeoType|PTAdj|PTDe:PTDo|PTCapitalInitial;PTCon+PTCapitalInitial+PTCapitalMixed|+Join|+Join|+Join;#22-sde
+735;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|PTDe|*PTCapitalInitial;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join;
+733;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|"e"|*PTCapitalInitial;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join;
+734;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|"e"|PTDo|*PTCapitalInitial+^PTOrgUnit+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join|Join;
+731;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|+Join|+Join;Join->+Join  #23-sde
+739;40;PTCon+PTCapitalMixed|PTDe:PTDo|*PTCapitalInitial|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|Join|*|*;#22-sde
+741;40;PTOrgUnit+PTCapitalMixed|*PTDe:PTDo:PTPrepart:PTPrep:PTEm:"e":PTCapitalInitial+^PTOrgUnit+^PTConPlusDe|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|*|*;#22-sde
+740;40;PTCon+PTCapitalInitial|PTCon+PTCapitalInitial|PTDe:PTDo:PTPrepart|*PTCapitalInitial|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|Join|Join|*|*;#22-sde
+732;40;PTOrgUnit;-PTOrgUnit;#22-sde
+742;40;PTName|PTDe:PTDo|*PTCapitalInitial;PTCon+PTCapitalInitial|Join|Join;detect names with 'de' or 'da' based on first names #22-sde
+273;40;SBegin|PTCapitalInitial|^PTCapitalInitial;*|-PTCapitalInitial|*;to ignore capital letters when at the beginning of a sentence 08-09-2012-mvdh
+274;40;SBegin|PTCapitalAll;*|-PTCapitalAll;to ignore capital letters when at the beginning of a sentence 08-09-2012-mvdh
+278;40;PTCapitalInitial|PTConIfCapsL&R|PTCapitalInitial;^PTCon|PTCon|PTCon;to make some words part of a name 08-09-2012-mvdh,removed ^ from 2nd Con 26-Sep-2016-nl
+280;40;PTConIfCap+PTCapitalInitial;PTCon+PTConIfCap;to convert certain words to concepts when capitalized as the names rose, don and will. 08-09-2012-mvdh,added conifcap to second part 20-06-2016-nl
+281;40;PTConIfCapAll+PTCapitalAll;PTCon;to convert e.g. AS and INCUBA to concepts. 08-09-2012-mvdh
+283;40;PTConIfCap;-PTConIfCap;to get rid of this secondary label 08-09-2012-mvdh
+284;40;PTConIfCapAll;-PTConIfCapAll;to get rid of this secondary label 08-09-2012-mvdh
+285;40;PTConIfCapsL&R;-PTConIfCapsL&R;to get rid of this secondary label 08-09-2012-mvdh
+288;40;PTNaoPrefix|PTAdj;PTAdj+PTNegation|+Join;changed naoadj to naoprefix 06-06-2016-nl
+289;40;PTNaoPrefix|PTCon;PTCon+PTNegation|+Join;to recognise adjectives with negative part as negational entities 13-09-2012-mvdh,changed naoadj to naoprefix 06-06-2016-nl
+290;40;PTNaoPrefix|PTPart;PTAdj+PTNegation|+Join;to recognise adjectives with negative part as negational entities 13-09-2012-mvdh,changed naoadj to naoprefix 06-06-2016-nl
+291;40;PTNaoPrefix|PTConVerb:PTAdjVerb;PTCon+PTNegation|+Join;to recognise adjectives with negative part as negational entities 13-09-2012-mvdh,added adjverb 09-05-2016-nl,changed naoadj to naoprefix 06-06-2016-nl
+826;40;PTAux:PTVerb:PTAuxCon:PTPart|"ou"|"não"|^PTAux+^PTVerb;*|PTAdv+PTOuNao+PTNegation|Join|*;#23-sde
+830;40;"ou"|"não"|SEnd:PTPunctuation;PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;-NegStop needed because NegStop is removed from from phase 40 #23-sde
+833;40;"ou"|"não"|PTDe:PTComma;PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;-NegStop needed because NegStop is removed from from phase 40 #23-sde
+838;40;PTCon:PTAdj|"ou"|"não"|PTPrep:PTPrepart+^PTDe;*|PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;#23-sde
+865;40;PTMesmo:PTMaismenos:PTComparadj|.PTAdj|PTComprel|^PTVerb+^PTAux;*|*|-PTRelpron|*;#23-sde
+919;40;^PTPronsuffix|PTPronsuffix|PTPronsuffix;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon|Join|Join;#23-sde
+920;40;^PTPronsuffix|PTPronsuffix+PTInf;+PTInf+PTWithSuffix-PTVerb-PTCon-PTConVerb-PTInfCon-PTAuxCon|Join;#23-sde
+921;40;^PTPronsuffix|PTPronsuffix+PTVerb;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon-PTAdjVerb-PTPart|Join;#23-sde
+918;40;PTA:"para":PTDefart|PTVerb|PTPronsuffix;*|^PTInf+PTWithSuffix|+Join;exception to r922, #23-sde
+922;40;PTVerb:PTInf:PTGer:PTAux:PTSer|PTPronsuffix;+PTWithSuffix-PTConVerb-PTInfCon|Join;#23-sde
+924;40;PTConVerb|PTPronsuffix;^PTVerb+PTWithSuffix|Join;#23-sde
+923;40;^PTPronsuffix|PTPronsuffix;PTInf+PTWithSuffix|Join;for unknown verb forms, especially personal infinitives with -se, #23-sde
+15;40;PTDefart:PTIndefart|PTSer+^PTWithSuffix;*|PTCon;maakt CONCEPT van het woord ser na bepaald lidwoord,added indefart 23-05-2016-nl, added ^WithSuffix to avoid the rule to affect lexreps with suffixes #23-sde
+16;40;PTIndefpronPRNR|PTSer+^PTWithSuffix;*|PTCon;maakt CONCEPT van het woord ser na onbepaald lidwoord,replaced indefart by indefpron 23-05-2016-nl, added ^WithSuffix to avoid the rule to affect lexreps with suffixes #23-sde
+479;40;PTSer;^PTAux+PTInf+PTLinkingverb;13-04-2016-nl,added linkingverb 11-05-2016-nl, added ^to keep WithSuffix #23-sde
+690;40;PTConVerb+PTPrep|PTCon;PTPrep|*;06-06-2016-nl
+691;40;PTRelpron|PTDefart:PTA|PTConVerb+PTPrep;*|*|PTVerb;06-06-2016-nl
+751;40;PTNos|PTVerb:PTAux;PTPerspron|*;#23-sde
+752;40;PTNos;-PTNos;default=Prepart #23-sde
+496;40;PTAdv:PTMaismenos|PTAdjInPrep|PTPrep;PTPrep|+Join|+Join;18-04-2016-nl
+497;40;PTAdv:PTMaismenos:PTAdjAdv|PTAdjInPrep|PTPrepart;PTPrepart|+Join|+Join;18-04-2016-nl
+835;40;PTAdjInPrep|PTPrep|PTInf:PTRefl:PTPerspron;PTConj|Join|*;#23-sde
+494;40;PTAdjInPrep|PTPrep;PTPrep|+Join;18-04-2016-nl
+495;40;PTAdjInPrep|PTPrepart;PTPrepart|+Join;18-04-2016-nl
+716;40;PTConPlusDe|PTAdj|PTDe:PTDo|PTConVerb:PTAdjVerb:PTConPart:PTPoder;PTCon|+Join|+Join|+Join;20-06-2016-nl
+726;40;PTConPlusDe|PTDe|PTPart;PTCon|+Join|+Join;22-06-2016-nl
+709;40;PTConPlusDe|PTDe:PTDo|PTConVerb:PTAdjVerb:PTConPart:PTPoder;PTCon|+Join|+Join;13-06-2016-nl
+715;40;PTConPlusDe|PTAdj|PTDe:PTDo|typeConcept;PTCon|+Join|+Join|*;20-06-2016-nl
+708;40;PTConPlusDe|PTDe:PTDo|typeConcept;PTCon|+Join|*;13-06-2016-nl
+710;40;PTConPlusDe+PTConVerb|^PTDe;PTConVerb|*;13-06-2016-nl
+876;40;PTConjAdv|PTComma:PTPunctuation:PTAndOrBut:SEnd;^PTAdv|*;#23-sde
+877;40;PTLinkingverb|PTConjAdv;*|-PTConjAdv;#23-sde
+878;40;PTConjAdv;PTConj;default, #23-sde
+698;40;PTIndefart:PTDefart|PTInfCon;*|PTCon;06-06-2016-nl
+699;40;PTIndefart:PTDefart:PTPrep:PTPrepart|PTAdjVerb:PTNum|PTInfCon;*|PTAdj|PTCon;08-06-2016-nl
+694;40;PTAdj:PTIndefpron:PTPrepart|PTInfCon;*|PTCon;06-06-2016-nl
+696;40;^PTCon|PTA|PTInfCon;*|^PTA|PTCon;06-06-2016-nl
+695;40;PTInfCon;^PTInf;06-06-2016-nl
+39;40;PTA|PTAuxCon;PTDefart|PTCon;maakt CONCEPT van koppelwerkwoorden era
+40;40;PTIndefart:PTPosspron:PTDemonstr:PTPrepart:PTMaismenos|PTAuxCon;*|PTCon;maakt CONCEPT van koppelwerkwoorden era, included patterns of r41, r42, r43 and partly r131 #21-sde
+44;40;PTPrep+^PTComo|PTAuxCon|^PTPart;*|PTCon|*;maakt CONCEPT van koppelwerkwoorden era, haya en son na voorzetsel,added ^part 06-04-2016-nl,added ^como 02-05-2016-nl
+66;40;PTAuxCon|PTPart;PTAux+PTVerb|PTPartrel;maakt RELATIE van voltooid deelwoord na hulpwerkwoord dat ook concept zou kunnen zijn,replaced auxcon in righthand part 26-04-2016-nl
+234;40;PTAuxCon|PTAdv:PTAdjAdv|PTPart;PTAux+PTVerb|PTAdv|PTPartrel;maakt RELATIE van voltooid deelwoord na hulpwerkwoord dat ook concept zou kunnen zijn en bijwoord,replaced auxcon in righthand part 26-04-2016-nl
+530;40;PTAuxCon+PTLinkingverb;PTAux+PTVerb+PTLinkingverb;26-04-2016-nl
+531;40;PTAuxCon;PTAux+PTVerb;26-04-2016-nl
+834;40;PTConj:PTRelpron:PTNao|PTRefl|PTAux;*|-PTConj-PTCondition|*;disambiguate 'se', #23-sde
+872;40;PTAux|.PTAdv:PTAdvstruct|PTRefl|PTPart;*|*|-PTConj-PTCondition|*;#23-sde
+928;40;PTRefl+^PTConj|PTAux+PTInf;PTAux+PTInf|Join;avoid that one of the labels gets lost, #23-sde
+507;40;PTRefl+^PTConj|PTAux;PTAux|Join;21-04-2016-nl, added ^Conj and removed + from Join #23-sde
+508;40;PTRefl|PTVerb+^PTAux;PTVerb|+Join;21-04-2016-nl, added ^Aux after adapting r507 #23-sde
+506;40;PTRefl|PTInf;PTInf|+Join;21-04-2016-nl
+240;40;PTEm|PTSegundo;PTEm|PTAdj;moet voor alle regels met preposities staan, moet samenblijven met 2 volgende regels, maakt CONCEPT van segundo na em
+1;40;PTMaismenos|PTPart|PTEm;PTCon|PTCon|PTPrep;moet voor alle regels met preposities staan, moet samenblijven met volgende regel, maakt CONCEPT van voltooid deelwoord en mas
+2;40;PTEm;PTPrep;moet meteen na vorige regel staan, moet voor alle regels met preposities staan
+678;40;PTNum:PTNumber+^PTRoman|PTAo;PTNumber|PTCon;01-06-2016-nl
+679;40;PTAo;PTPrepart;01-06-2016-nl
+159;40;PTA|PTInf;PTPrep|*;herschrijft A tot gewoon voorzetsel voor infinitief
+192;40;PTA|PTNumber;PTPrep|*;herschrijft A tot gewoon voorzetsel voor getal,added ^ 30-05-2016-nl
+191;40;PTNum:PTIndefart|PTA|PTNum;PTNum|PTPrep|PTNum;herschrijft A tot gewoon voorzetsel tussen telwoorden, included pattern of r272 #21-sde
+190;40;PTA|PTDefart:PTIndefart:PTDemonstr:PTIndefpron;PTPrep|*;herschrijft A tot gewoon voorzetsel voor bepaald lidwoord, included patterns from r195, r194 and r193 #21-sde
+196;40;PTA|PTMonth;PTPrep|PTMonth;herschrijft A tot gewoon voorzetsel voor maand,removed attr. time 25-05-2016-nl
+199;40;PTA|PTPart:PTConPart;PTDefart|PTCon;herschrijft A tot bepaald lidwoord en voltooid deelwoord tot concept,added conpart 09-05-2016-nl
+574;40;PTComma|PTPart|PTA;*|PTPartrel|*;04-05-2016-nl
+598;40;PTPart+^PTAux|PTA|PTAdj;*|PTPrep|*;09-05-2016-nl,added ^aux 11-05-2016-nl
+358;40;PTA|PTNao|PTCon;PTDefart|PTNaoAdj+PTNegation-PTNegBegin|PTCon;temporary change to imitate old behavior 26-03-2015-sde
+624;40;PTLinkingverb|PTCerto;*|PTAdj;23-05-2016-nl
+629;40;PTCerto|PTLinkingverb;PTAdj|*;23-05-2016-nl
+630;40;PTVerb|PTCerto|PTRelpron;*|PTAdv|*;23-05-2016-nl
+626;40;PTCon:PTConVerb|PTCerto|PTPrep:PTPrepart:PTConj;*|PTAdj|*;23-05-2016-nl
+628;40;PTCerto|PTComma:PTAndOrBut:PTPunctuation;PTAdj|*;23-05-2016-nl
+631;40;PTCon:PTConVerb|PTCerto|SEnd;*|PTAdj|*;23-05-2016-nl
+456;40;PTLinkingverb|PTSalvo;*|PTAdj;13-04-2016-nl
+458;40;PTPrep:PTA|PTSalvo;^PTPrep|PTAdj;13-04-2016-nl
+457;40;PTSalvo;PTPrep;13-04-2016-nl
+3;40;PTDefart:PTPrepart|PTEste;*|PTCon;maakt ESTE tot concept als het niet met hoofdletter geschreven staat maar wel een lidwoord heeft, included pattern of r4 #21-sde
+5;40;PTEste;PTDemonstr;moet meteen na vorige twee regels staan, moet voor alle regels met aanwijzende voornaamwoorden staan
+912;40;PTPoder|.PTAdv:PTAdvPR:PTAdvstruct|PTInf;PTAux+PTInf|*|*;#23-sde
+914;40;PTNao+^"nem"|PTPoder;*|PTAux+PTInf;#23-sde
+926;40;PTPoder+PTVerb;-PTPoder;possible side-effect of rules for Pronsuffix #23-sde
+913;40;PTPoder;PTCon;#23-sde   
+637;40;PTComma|PTConVerb|PTIndefpron;PTComma|PTVerb|*;copy of 324 further in rules file so it would work for 'todo o' 23-05-2016-nl
+617;40;PTCon|PTTodo|PTIndefart:PTDefart:PTDemonstr:PTA|PTCon;PTCon|PTBeginconcept|PTCon|+Join;11-05-2016-nl
+618;40;PTTodo|PTDefart|PTPosspron;PTAdj|+Join|+Join;18-05-2016-nl
+620;40;PTTodo|PTDefart|PTIndefpron;PTTodo+PTIndefpron+PTIndefpronPRCon|+Join|+Join;18-05-2016-nl
+615;40;PTTodo|PTIndefart:PTDefart:PTPosspron|^PTVerb+^PTRelpron;PTAdj|+Join|*;11-05-2016-nl
+621;40;PTTodo|PTDemonstr:PTDemonstrPR|^PTVerb+^PTRelpron;PTAdj|+Join|*;11-05-2016-nl
+616;40;PTTodo|PTA:PTNum;PTAdj|+Join;11-05-2016-nl
+722;40;PTNum:PTMaismenos|PTDe|PTNum:PTPercent;PTNum|+Join|+Join;20-06-2016-nl
+327;40;PTNum|PTConVerb;PTNum|PTCon;maakt CONCEPT van PTConVerb na telwoord 03-10-2012-mvdh
+720;40;PTNum:PTPercent|PTDe|PTCon:PTConVerb:PTConPart:PTPart;PTCon|+Join|+Join;20-06-2016-nl
+721;40;PTNum:PTPercent|PTDe|PTAdj:PTAdjVerb;PTAdj|+Join|+Join;20-06-2016-nl
+460;40;PTPrep:PTPrepart|PTAdvCon;*|PTCon;13-04-2016-nl
+461;40;PTIndefart:PTDefart|PTAdvCon;*|PTCon;13-04-2016-nl
+462;40;PTAdvCon;PTAdvmanner+PTAdv;13-04-2016-nl
+554;40;PTAux|PTPart+PTAdj;*|PTPartrel;02-05-2016-nl
+555;40;PTComma|PTPart+PTAdj|PTPrepart;*|PTPartrel|*;02-05-2016-nl
+553;40;PTPart+PTAdj;PTAdj;02-05-2016-nl
+842;40;PTIndefart:PTDefart:PTPosspron:PTPrepart:PTPrep|PTAdjCon|typeRelation;*|PTCon|*;#23-sde
+570;40;PTIndefart:PTDefart|PTAdjCon|PTConVerb|"a"|PTInf;*|PTCon|PTVerb|*|^PTInf;04-05-2016-nl
+575;40;PTIndefpron:PTIndefart:PTDefart:PTPosspron|PTAdjCon|PTPart:PTVerb;*|PTCon|*;04-05-2016-nl
+577;40;PTIndefpron|PTAdjCon|PTRelpron:PTComma;*|PTCon|*;04-05-2016-nl
+579;40;PTIndefpron|PTAdjCon|SEnd;*|PTCon|*;04-05-2016-nl
+576;40;PTPrepart:PTPrep|PTAdjCon|PTPart;*|PTCon|*;04-05-2016-nl
+884;40;PTVerb:PTGer+^PTLinkingverb|PTAdjCon|typeRelation;*|PTCon|*;#23-sde
+587;40;PTAdjVerb+PTVerb|PTAdv|PTInf;PTVerb|*|*;09-05-2016-nl
+586;40;PTAdjVerb+PTVerb|PTInf;PTVerb|*;09-05-2016-nl
+572;40;PTIndefart:PTDefart|PTCon|PTAdjVerb;*|*|PTAdj;04-05-2016-nl
+583;40;PTInf|PTA|PTCon:PTConVerb|PTAdjVerb;*|*|*|PTAdj;09-05-2016-nl
+585;40;PTPrep|PTConVerb|PTAdv:PTMaismenos|PTAdjVerb;*|PTCon|PTAdj|+Join;09-05-2016-nl
+584;40;PTAux:PTCon:PTAndOrBut:PTComma|PTAdv:PTMaismenos|PTAdjVerb;*|PTAdj|+Join;09-05-2016-nl
+605;40;PTCon|PTAdjVerb|PTIndefpronPRCon;*|PTAdj|+Join;11-05-2016-nl
+671;40;PTCon:PTAdjCon|PTAdvPR|PTAdjVerb;PTCon|PTAdj|+Join;30-05-2016-nl
+582;40;PTAdjVerb+PTVerb;PTVerb;09-05-2016-nl
+702;40;PTCon:PTConVerb|PTAdvstruct|PTAdv:PTMaismenos|PTAdj:PTAdjVerb;PTCon|PTAdj|+Join|+Join;08-06-2016-nl
+794;40;PTAdj|PTAndOrBut|PTAdjVerb;*|*|PTAdj;#23-sde
+573;40;PTAdjVerb;PTConVerb;04-05-2016-nl
+588;40;PTAdj|PTConPart;*|PTCon;09-05-2016-nl
+590;40;PTPrep|PTAdjAdv|PTConPart;*|PTAdj|PTCon;09-05-2016-nl
+594;40;PTPrep:PTDemonstr|PTConPart;*|PTCon;09-05-2016-nl
+591;40;PTCon|PTAndOrBut|PTConPart;*|PTAndOrBut|PTCon;09-05-2016-nl
+592;40;SBegin|PTConPart|PTDe|.PTDefart:PTIndefart:PTPosspron|PTCon:PTNumber:PTNum:PTAdj;*|PTCon|*|*|*;09-05-2016-nl, added Defart:Indefart:Posspron #23-sde
+595;40;PTComma|PTConPart|PTDe|PTCon:PTNumber:PTNum:PTAdj;PTComma|PTCon|*|*;09-05-2016-nl
+593;40;PTVerb+^PTAux|PTConPart|PTPrep:PTPrepart;*|PTCon|*;09-05-2016-nl
+603;40;PTVerb|PTConPart|PTIndefpronPRCon;*|PTCon|PTAdj;11-05-2016-nl
+619;40;PTIndefpron:PTNaoAdj|PTConPart;*|PTCon;18-05-2016-nl,added naoadj 06-06-2016-nl
+718;40;PTMaismenos|PTPart|PTConPart;PTAdj|+Join|PTCon;20-06-2016-nl
+589;40;PTConPart;PTPart;09-05-2016-nl
+674;40;PTAntes|PTPart;PTAdv|*;01-06-2016-nl
+646;40;PTAdvdegree:PTMaismenos|PTIndefart:PTDefart:PTA|PTIndefpronPR;PTIndefpronPR|+Join|+Join;25-05-2016-nl
+611;40;PTAdvdegree:PTMaismenos|PTIndefpronPR;PTIndefpronPR|+Join;11-05-2016-nl
+612;40;PTAdvdegree:PTMaismenos|PTIndefpronPRNR;PTIndefpronPRNR|+Join;11-05-2016-nl - 
+604;40;PTAdvdegree:PTMaismenos|PTIndefpronPRCon;PTIndefpronPRCon|+Join;11-05-2016-nl
+669;40;PTAdvdegree:PTMaismenos|PTAdvPR+PTTime;PTAdvPR+PTTime|+Join;30-05-2016-nl
+675;40;PTAdvdegree:PTMaismenos|PTAdvPR;PTAdvPR|+Join;01-06-2016-nl
+656;40;PTConTime:PTTempBeginEnd:PTDay|PTDe:PTPrepartTime|PTConTime:PTDay:PTTempBeginEnd;PTConTime+PTTempEnd|+Join|+Join;25-05-2016-nl
+663;40;PTAdjtemp|PTConTime|PTAdj;PTAdj|PTCon|PTAdj;30-05-2016-nl
+650;40;^PTConTime|PTAdjtemp|PTConTime;*|PTConTime+PTTempBeginEnd|+Join;25-05-2016-nl
+648;40;PTConTime|PTAdjtemp;PTConTime|+Join;25-05-2016-nl
+657;40;PTDemonstr:PTIndefpron|PTConTime:PTDay;PTTempBeginEnd|+Join;25-05-2016-nl,added indefpron 30-05-2016-nl,replaced tempbeginend 30-05-2016-nl
+649;40;PTConTime|PTNumber:PTNum;PTConTime|+Join;25-05-2016-nl
+54;40;PTNumber:PTNum|PTDe|PTMonth:PTConTime;PTMonth|+Join|+Join;maakt CONCEPT van de tussen getal en maand,added num from r.270 and added contime, removed attr. time 25-05-2016-nl
+53;40;PTMonth:PTConTime:PTTempBeginEnd|PTDe:PTPrepartTime|PTNumber:PTConTime;PTMonth|PTCon|PTEndconcept;maakt CONCEPT van de tussen maand en getal - endconcept gewijzigd 15-12-2011, removed attr. time 25-05-2016-nl,added contime,tempbeginend,preparttime 30-05-2016-nl
+659;40;PTConTime|PTDe|PTMonth;PTMonth|+Join|+Join;25-05-2016-nl
+704;40;PTIndefpron|PTDefart|PTConTime:PTDay;PTTempBeginEnd|+Join|+Join;13-06-2016-nl
+723;40;PTIndefpronPRCon|PTMonth;PTAdj|PTMonth;20-06-2016-nl
+653;40;PTNumber:PTNum|PTPrepartTime|PTConTime;PTTempBeginEnd|+Join|+Join;25-05-2016-nl
+668;40;PTConTime|PTAdjtempAfter;PTConTime|+Join;30-05-2016-nl
+651;40;PTConTime+^PTTempBeginEnd+^PTTempEnd+^PTNumber;PTCon;25-05-2016-nl
+655;40;PTConTime+PTTempBeginEnd;PTTempBeginEnd;25-05-2016-nl
+661;40;PTConTime+PTTempEnd;PTTempEnd;25-05-2016-nl
+207;40;PTNumber:PTNum|PTCon|PTAndOrBut|PTMeio;PTNum|PTCon|PTCon|PTCon;maakt CONCEPT van e tussen concept voorafgegaan door telwoord en gevolgd door meio
+705;40;PTTempBeginEnd|PTDateBrackets;PTTempBeginEnd|+Join;13-06-2016-nl
+725;40;PTTempEnd|PTDateBrackets;PTTempEnd|+Join;22-06-2016-nl
+707;40;PTDay|PTDateBrackets;PTDay+PTCon|+Join;13-06-2016-nl
+543;40;PTAdvdegree|PTAdvdegree;PTAdvdegree|+Join;26-04-2016-nl
+724;40;PTNum|PTPart|"pelo":"pela":"no":"por";PTNum|PTPartrel|*;20-06-2016-nl
+514;40;PTNum;PTNumber;25-04-2016-nl
+513;40;PTAdvdegree|PTNumber;PTNumber|+Join;25-04-2016-nl
+82;40;PTCon|PTConVerb|PTNumber;*|PTVerb|PTNumber;maakt RELATIE van PTConVerb na concept en gevolgd door getal
+28;40;PTNumber+^PTPercent|PTPart;PTNumber|PTCon;maakt CONCEPT van voltooid deelwoord na getal
+515;40;PTNumber|PTIndefpron|PTCon:PTAdjCon;PTAdj|+Join|PTCon;25-04-2016-nl,added adjcon 09-05-2016-nl
+516;40;PTNumber|PTAdvstruct|PTAdj:PTPart;PTAdj|+Join|+Join;25-04-2016-nl
+527;40;PTMaismenos|PTDe|PTNumber:PTUm|PTSegundo;PTAdj|+Join|+Join|PTCon;25-04-2016-nl
+525;40;PTMaismenos|PTDe|PTNumber:PTUm;PTAdj|+Join|+Join;25-04-2016-nl
+519;40;PTCon|PTAdvstruct|PTAdj:PTPart|SEnd;PTCon|PTAdj|+Join|*;25-04-2016-nl
+517;40;PTCon|PTAdvstruct|PTAdj:PTPart|^PTPrepart;PTCon|PTAdj|+Join|*;25-04-2016-nl
+178;40;PTIndefart|PTCon|PTConforme;*|*|PTAdj;maakt CONCEPT (adjectief) van segundo indien voorafgegaan door bepaald lidwoord
+157;40;PTDefart:PTIndefart:PTDemonstr:PTPrepart|PTSegundo;*|PTAdj;maakt CONCEPT (adjectief) van segundo indien voorafgegaan door bepaald lidwoord,  included patterns of r161, r158 and r163 #21-sde
+162;40;PTPrep|PTSegundo|PTAndOrBut;^PTPrep|PTAdj|PTAndOrBut;maakt CONCEPT (adjectief) van segundo indien voorafgegaan door bepaald lidwoord
+165;40;SBegin|PTSegundo|PTComma;*|PTAdv|PTComma;om van SEGUNDO bijwoord te maken aan het begin van een zin
+239;40;PTSegundo|PTPerspron;PTAdv|PTPerspron;om van SEGUNDO bijwoord te maken voor een persoonlijk voornaamwoord
+565;40;PTComma:PTAndOrBut|PTMesmo|PTVerb:PTPart;*|PTNonrel|*;04-05-2016-nl
+564;40;^PTDemonstr+^PTDefart|PTMesmo|PTPrep:PTPrepart:PTConj:PTRelpron;*|PTNonrel|*;04-05-2016-nl
+681;40;PTAux|PTMesmo|PTInf;*|PTNonrel|*;01-06-2016-nl
+566;40;PTPrep:PTPrepart|PTMinha|SEnd;*|PTCon|*;04-05-2016-nl
+568;40;PTMinha|PTDe;PTCon|*;04-05-2016-nl
+567;40;PTMinha;PTPosspron;04-05-2016-nl
+687;40;PTNaoAdj|PTIndefpronPR|PTCon;^PTNaoAdj|+Join|*;06-06-2016-nl
+688;40;PTNaoAdj|PTIndefpronPR;PTNegPR+PTNegBegin+PTNegation|+Join;06-06-2016-nl
+541;40;"pouco"|PTDe|^"que";PTAdvdegree+PTAdv|+Join|*;26-04-2016-nl,added restriction 21-Sep-2016-nl
+448;40;PTCon:PTConVerb|PTAdvdegree|PTPart;PTCon|PTAdj|+Join;11-04-2016-nl
+447;40;PTAdvdegree|PTPart;PTPart|+Join;11-04-2016-nl
+523;40;PTAdvdegree|PTMaismenos;PTMaismenos|+Join;25-04-2016-nl
+520;40;PTAdvdegree+^PTPrep|PTCon;PTCon|+Join;25-04-2016-nl
+512;40;PTAdj:PTAdjAdv|PTAdvdegreeAfter;PTAdj|+Join;21-04-2016-nl
+529;40;PTAdvdegree|"do":"da":"dos":"das";PTAdj|+Join;26-04-2016-nl
+544;40;PTAdvdegree|PTDe|PTCon:PTNumber:PTIndefpron:PTAdj;PTAdj|+Join|*;26-04-2016-nl
+532;40;PTAdvdegree|PTConVerb|PTVerb;PTCon|+Join|^PTVerb;26-04-2016-nl
+682;40;PTAdvdegree|PTNegPR;PTNegPR|+Join;01-06-2016-nl
+484;40;PTLinkingverb|PTAdv+^PTAdvdegree|PTComma;*|PTAdj|*;18-04-2016-nl
+485;40;PTLinkingverb|PTAdv|PTNao|PTAdj;*|PTAdj|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;18-04-2016-nl
+549;40;PTPrep|PTDemonstr|PTPart|PTComma:PTPrep:PTPrepart:PTA;*|PTDemonstrPR|PTPartrel|*;02-05-2016-nl
+440;40;PTIndefart:PTDefart:PTPosspron:PTDemonstr:PTIndefpron|PTPart;*|PTCon;06-04-2016-nl, added Indefpron and deleted r21 now that > 4 options are allowed #21-sde
+560;40;PTAlgo:PTNegPR|PTConVerb;*|PTVerb;04-05-2016-nl,should be before rule 9 (now r6),added negpr 06-06-2016-nl, moved up #21-sde
+6;40;PTDefart:PTIndefart:PTPosspron:PTDemonstr:PTMaismenos:PTIndefpron:PTIndefpronconcept:PTCujo|PTConVerb;*|PTCon;maakt CONCEPT van PTConVerb na bepaald lidwoord, included patterns from r131, r7, r8, r9, r370, r164 and r10 #21-sde
+183;40;PTA:PTPrepart:PTPrep|PTConVerb;*|PTCon;maakt CONCEPT van converb na A, included patterns from r11 and r12 #21-sde
+326;40;PTDemonstr:PTDefart:PTIndefart|PTAdj|PTConVerb;PTDemonstr|^PTAdj|PTCon;maakt CONCEPT van PTConVerb na aanwijzend voornaamwoord en adjectief 03-10-2012-mvdh,added defart and indefart 04-05-2016-nl
+14;40;PTPosspron|PTAdj|PTConVerb;*|*|PTCon;maakt CONCEPT van PTConVerb na bezittelijk voornaamwoord + adjectief
+184;40;PTTanto|PTConVerb|PTComo;PTTanto|PTCon|PTComo;maakt CONCEPT van converb na A
+305;40;PTInf:PTPrep|PTAdj+^PTAdjCon|PTConVerb;*|^PTAdj|PTCon;changed from verb 06-04-2016-nl, added prep and ^adjcon 04-05-2016-nl
+323;40;PTInf+^PTAux|PTConVerb;*|PTCon;maakt RELATIE van infintief voor converb 03-10-2012-mvdh,changed from verb 06-04-2016-nl, added ^aux 13-14-2016-nl
+521;40;PTVerb|PTAdvdegree|PTConVerb;*|PTCon|+Join;25-04-2016-nl
+909;40;PTNumber|PTConVerb+^PTVerb|^PTDefart+^PTIndefart+^PTPosspron+^PTDemonstr;*|PTCon|*;#23-sde
+73;40;PTPerspron|PTConVerb|PTCon;PTPerspron|PTVerb|*;maakt RELATIE van PTConVerb na persoonlijk voornaamwoord en gevolgd door concept
+693;40;PTPerspron|PTConVerb|PTAdj|PTComma:PTPrep;^PTPerspron|PTCon|^PTAdj|*;should be before rule 75, 06-06-2016-nl
+75;40;PTPerspron|.PTNao|PTConVerb;PTPerspron|*|PTVerb;maakt RELATIE van PTConVerb na persoonlijk voornaamwoord, added .Nao #23-sde
+74;40;PTRelpron|PTConVerb;PTRelpron|PTVerb;maakt RELATIE van PTConVerb na betrekkelijk voornaamwoord
+83;40;PTRefl|PTConVerb;^PTVerb|+Join;maakt RELATIE van PTConVerb na wederkerig voornaamwoord
+76;40;PTCon:PTNumber|PTConVerb|PTDefart:PTA|^PTVerb;^PTCon|PTVerb|*|*;maakt RELATIE van PTConVerb na concept en gevolgd door bepaald lidwoord,added a and number 25-04-2016-nl
+77;40;PTCon|PTAdj|PTConVerb|PTDefart:PTIndefart;*|*|PTVerb|*;maakt RELATIE van PTConVerb na concept en adjectief en gevolgd door bepaald lidwoord, included pattern of r78 #21-sde
+79;40;PTCon|PTConVerb|PTIndefart;*|PTVerb|*;maakt RELATIE van PTConVerb na concept en gevolgd door onbepaald lidwoord
+87;40;PTCon|PTConVerb|PTInf+^PTAux;^PTCon|PTVerb|^PTInf;maakt RELATIE van PTConVerb na concept en voor infinitief, added ^aux 13-04-2016-nl
+185;40;PTCon|PTConVerb|PTCon:PTTempEnd;^PTCon|PTVerb|^PTCon;maakt RELATIE van PTConVerb tussen twee concepten,added tempend 30-05-2016-nl
+259;40;PTA|PTCon|PTAdj|PTConVerb|PTA|PTCon;PTA|^PTCon|^PTAdj|PTVerb|PTA|PTCon;maakt RELATIE van PTConVerb tussen twee concepten 05-01-2012
+86;40;PTNao|PTConVerb|PTAdv:PTAdvstruct:PTPrepart:PTDefart:PTNao;*|PTVerb|*;maakt RELATIE van PTConVerb na nao en voor bijwoord,added context 21-Sep-2016-nl, included patterns of r179, r143 and r149 #21-sde
+748;40;PTCon|PTNao+^"nem"|PTConVerb;*|*|PTVerb;#23-sde
+526;40;PTConVerb|PTAdvdegree|PTPrep:PTPrepart;PTVerb|PTAdv|PTPrep;
+180;40;PTConVerb|PTComo|PTDefart:PTIndefart;PTVerb|PTComo|*;maakt RELATIE van PTConVerb voor como en bepaald lidwoord, included pattern of r181 #21-sde
+88;40;PTConVerb|PTIndefart|PTCon:PTNum;PTVerb|*|*;maakt RELATIE van PTConVerb voor onbepaald lidwoord en concept, added Num #23-sde
+80;40;PTConVerb|PTPosspron;PTVerb|^PTPosspron;maakt RELATIE van PTConVerb na concept en gevolgd door bezittelijk voornaamwoord
+569;40;PTConVerb|"a"|PTInf;PTVerb|*|*;04-05-2016-nl, moved to be close to r85 #21-sde
+85;40;PTConj:SBegin:PTNao|PTConVerb|"a";*|PTVerb|*;maakt RELATIE van PTConVerb na nao en voor A  - moet voor regels A 159 -196 staan, included pattern of r84 and r187, not necessary anymore to be before r159-196 thanks to literal label, #21-sde
+89;40;PTConj:PTAndOrBut|PTConVerb|PTDefart:PTIndefart:PTDemonstr:PTIndefpron;*|PTVerb|*;maakt RELATIE van PTConVerb voor bepaald lidwoord en concept, included patterns of r90, r91 and r93 #21-sde, added AndOrBut #23-sde
+94;40;SBegin:PTComma|PTConVerb|PTDefart:PTIndefart;*|PTVerb|*;maakt RELATIE van PTConVerb als eerste woord van een zin gevolgd door een bepaald lidwoord, included patterns of r95, r98 and r99 #21-sde
+262;40;SBegin|PTConVerb|PTInf;*|PTVerb|^PTInf;maakt RELATIE van PTConVerb als eerste woord van een zin en voor een infinitief 13-01-2012
+903;40;SBegin:PTComma|PTConVerb|PTRelpron|PTNao;*|PTVerb|*|*;#23-sde
+665;40;PTTempBeginEnd|PTAdjtempAfter;PTTempBeginEnd|+Join;30-05-2016-nl
+673;40;PTAdjtempAfter+PTAdvdir;PTAdv+PTAdvdir;01-06-2016-nl
+667;40;PTAdjtempAfter;PTAdvPR+PTTime;30-05-2016-nl
+664;40;PTCon:PTAdjCon:PTAdj|PTAdvPR+PTTime|PTAdj:PTPart;PTCon|PTAdj|+Join;30-05-2016-nl
+677;40;PTCon:PTAdjCon:PTAdj|PTAdvPR|PTAdj;PTCon|PTAdj|+Join;01-06-2016-nl
+498;40;PTAdvdegree:PTMaismenos|PTAdjAdv;PTAdjAdv|+Join;18-04-2016-nl
+463;40;PTInf+^PTAux|PTAdjAdv|^PTCon;*|PTAdv|*;13-04-2016-nl
+468;40;PTAux|PTAdjAdv|PTPart;*|PTAdv|PTPartrel;13-04-2016-nl
+692;40;PTPunctuation|PTAdjAdv|PTVerb;*|PTAdv|*;06-06-2016-nl
+511;40;PTA:PTPrep|PTAdjAdv|PTInf;*|PTAdv|*;21-04-2016-nl
+480;40;PTAux:PTRefl:PTAdj|PTAdjAdv|PTInf;*|PTAdv|*;18-04-2016-nl
+504;40;PTAdjAdv|PTAux|PTInf+^PTAux;PTAdv|*|*;18-04-2016-nl,added ^aux 11-05-2016-nl
+469;40;PTAdjAdv|PTPart|"pelo":"pelos":"pela":"pelas";PTAdv|PTPartrel|*;13-04-2016-nl
+470;40;PTAux|PTAdv:PTAdvPR|PTAdjAdv|PTPart;*|^PTAdv|+Join|PTPartrel;13-04-2016-nl
+471;40;PTAdjAdv|PTPart|PTPrepart;PTAdj|+Join|*;13-04-2016-nl
+472;40;PTComma:PTAndOrBut|PTAdjAdv|PTPart:PTGer;*|PTAdv|*;13-04-2016-nl
+473;40;PTAdj|PTAdjAdv|PTPart;^PTAdj|+Join|+Join;13-04-2016-nl
+474;40;PTVerb+^PTLinkingverb|PTAdjAdv|PTDefart:PTIndefart:PTA;*|PTAdv|*;13-04-2016-nl
+499;40;PTVerb+^PTLinkingverb|PTAdjAdv|PTPrep:PTPrepart:PTRelpron:PTPunctuation;*|PTAdv|*;18-04-2016-nl
+505;40;^PTCon+^PTIndefart+^PTDefart|PTAdjAdv|PTVerb|PTPrepart:PTPrep;*|PTAdv|*|*;18-04-2016-nl
+509;40;^PTCon+^PTIndefart+^PTDefart|PTAdjAdv|PTVerb|PTPosspron:PTIndefart:PTDefart;*|PTAdv|*|*;21-04-2016-nl
+482;40;PTVerb+^PTLinkingverb:PTPart|PTAdjAdv|PTComma:PTAndOrBut;*|PTAdv|*;18-04-2016-nl
+481;40;PTVerb+^PTLinkingverb|PTAdjAdv|SEnd;*|PTAdv|*;18-04-2016-nl
+545;40;PTRelpron|PTAdjAdv|PTVerb;*|PTAdv|*;26-04-2016-nl
+475;40;PTPart:PTGer|PTTao:PTAdvdegree|PTAdjAdv;*|PTAdv|+Join;13-04-2016-nl
+476;40;PTCon|PTAdjAdv|PTPart|PTPrep;*|PTAdv|PTPartrel|*;13-04-2016-nl
+483;40;PTAdjAdv|PTAdv;PTAdv|+Join;18-04-2016-nl
+546;40;PTPrep|PTAdjAdv|PTVerb;*|PTAdv|*;02-05-2016-nl
+464;40;PTAdjAdv;PTAdj;13-04-2016-nl
+286;40;PTAdvmanner:PTAdvdegree|PTAdj;PTAdj|PTAdj;to make adverbs of degree adjectives with attibute modifier 11-09-2012-mvdh,added degree 11-04-2016-nl,removed mod 26-04-2016-nl
+292;40;PTDefart:PTIndefart:PTDemonstr|PTAdj;*|PTAdj;to let words that can be both adjective and adverb lose the adverb label 14-09-2012-mvdh, included patterns of r293 and r294 #21-sde
+454;40;PTNao|PTTao|PTAdj;PTNaoAdj+PTNegation|PTAdj|+Join;11-04-2016-nl
+451;40;^PTCon|PTTao|PTAdj|"que":"quanto":"como";*|PTPrep|*|*;11-04-2016-nl
+453;40;^PTCon|PTTao|PTAdj|PTComma|"que":"quanto":"como";*|PTPrep|*|*|*;11-04-2016-nl
+455;40;PTCon:PTAdj|"tão":"acima":"assim"|PTPart:PTAdj;^PTCon|PTAdj|+Join;11-04-2016-nl
+452;40;PTTao;PTAdvstruct;11-04-2016-nl
+450;40;PTCon|PTAdvstruct|PTAdj;*|PTAdj|+Join;11-04-2016-nl
+57;40;PTCon+^PTEndconcept|PTMaismenos:PTAdvdegree|PTAdj;PTCon|PTCon|PTCon;maakt deel van CONCEPT van mas-menos na concept en gevolgd door adjectief,added degree 11-04-2016-nl,added ^endconcept 25-05-2016-nl
+537;40;PTPrep|PTMaismenos:PTAdvdegree|PTConVerb;^PTPrep|PTAdj|PTCon;26-04-2016-nl
+524;40;PTVerb+^PTAux+^PTLinkingverb|PTMaismenos|PTPrep;^PTVerb|PTAdv|^PTPrep;25-04-2016-nl
+535;40;PTVerb|PTMaismenos|PTPrep:PTPrepart:PTDefart:PTIndefart;^PTVerb|PTAdv|*;26-04-2016-nl
+867;40;PTVerb+^PTAux|PTMaismenos|PTComprel;^PTVerb|PTAdv|*;adapting r535 has side-effects -> new rule for Comprel #23-sde
+925;40;PTInf+^PTAux|PTMaismenos|PTComprel;^PTInf|PTAdv|*;#23-sde
+536;40;PTVerb|PTMaismenos|SEnd;^PTVerb|PTAdv|*;26-04-2016-nl
+538;40;PTInf|PTMaismenos|PTDefart:PTIndefart:PTPrepart;^PTInf|PTAdv|*;26-04-2016-nl
+602;40;^PTCon|PTPart|PTMaismenos|PTPrep:PTPrepart:PTComprel;*|^PTPart|PTAdv|*;11-05-2016-nl, added Comprel #23-sde
+130;40;PTMaismenos|PTAdvVerb;PTAdv|PTAdv;maakt RELATIE van PTAdvVerb na mais
+253;40;PTMaismenos|PTAdv;PTAdv|PTAdv;maakt RELATIE van PTMaismenos voor bijwoord
+132;40;PTMaismenos|PTPart;PTMaismenos|PTCon;maakt CONCEPT van voltooid deelwoord na concept en mais
+533;40;PTMaismenos|PTVerb:PTInf;PTAdv|^PTVerb;26-04-2016-nl, added Inf #23-sde
+534;40;PTMaismenos|PTAdj;PTAdj|+Join;26-04-2016-nl
+444;40;PTAdvdegree;PTAdvmanner+PTAdv; 
+819;40;"mais":"maior":"maiores"|*{1,5}^"jamais"|"jamais"|PTPart;*|*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;#23-sde
+788;40;"mais":"maior":"maiores"|"jamais"|PTPart;*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;#23-sde
+790;40;"não menos"|PTDe|PTNum:PTNumber;PTAdvdegree-PTNegation-PTNegBegin|Join|*;#23-sde
+638;40;PTVerb|PTRecipr1|PTPrep:PTPrepart|PTRecipr2;^PTVerb|+Join|+Join|+Join;23-05-2016-nl
+640;40;PTVerb|PTRecipr1|PTPrep:PTPrepart|PTDefart|PTRecipr2;^PTVerb|+Join|+Join|+Join|+Join;23-05-2016-nl
+645;40;PTRecipr1|PTPrep:PTPrepart|PTRecipr2;PTIndefpronPR|*|PTIndefpronPR;23-05-2016-nl
+642;40;PTIndefart|"dos":"das"|typeConcept;PTBeginconcept|+Join|+Join;23-05-2016-nl
+641;40;PTIndefart|"dos":"das"|"de"|typeConcept;PTBeginconcept|+Join|+Join|+Join;23-05-2016-nl
+643;40;PTIndefart|"dos":"das":"de"|PTPosspron|typeConcept;PTBeginconcept|+Join|+Join|+Join;23-05-2016-nl
+636;40;PTIndefart|"dentre"|PTDefart|typeConcept;PTBeginconcept|+Join|+Join|+Join;23-05-2016-nl
+644;40;PTIndefart|"para";PTBeginconcept|+Join;23-05-2016-nl
+639;40;PTUns|^typeConcept;PTIndefpronPR|*;23-05-2016-nl
+559;40;PTAlgo|PTDe|PTAdj;PTBeginconcept|PTAdj|+Join;04-05-2016-nl
+558;40;PTAlgo|PTAdj:PTMaismenos;PTBeginconcept|PTAdj;04-05-2016-nl
+685;40;PTNegPR|PTDe|PTAdj:PTMaismenos;PTCon|PTAdj|+Join;06-06-2016-nl
+683;40;PTNegPR|PTAdj:PTMaismenos;PTCon|PTAdj;06-06-2016-nl
+561;40;"entre":"dentre"|PTOutros|^PTAdj+^PTCon+^PTIndefpron;PTAdvstruct|+Join|*;04-05-2016-nl
+188;40;PTDefart|PTInterpron;PTDefart|PTCon; maakt CONCEPT van vragend voornaamwoord voorafgegaan door bepaald lidwoord, 'the reason'
+200;40;^PTConj+^"de"+^"para"|"o"|PTInf+^PTLinkingverb+^PTWithSuffix;*|PTDefart|^PTCon;maakt een CONCEPT van een infinitief voorafgegaan door een bepaald lidwoord,added ^linkingverb 08-06-2016-nl, added left context, added ^Conj+^para + right context #23-sde
+201;40;PTIndefart|PTInf;*|^PTCon;maakt een CONCEPT van een infinitief voorafgegaan door een onbepaald lidwoord
+371;40;PTIndefpronconcept|PTPart;*|PTCon;maakt CONCEPT van PART na onbepaald voornaamwoord 12-11-2012-mvdh
+23;40;PTPrepart|PTPart;PTPrepart|PTCon;maakt CONCEPT van voltooid deelwoord na samentrekking voorzetsel+bepaald lidwoord
+25;40;PTPrep+^PTConforme+^PTComo|PTPart;^PTPrep|PTCon;maakt CONCEPT van voltooid deelwoord na voorzetsel, added ^conforme 06-04-2016-nl,added ^como 02-05-2016-nl
+29;40;PTDefart:PTIndefart:PTPosspron:PTIndefpron:PTDemonstr|PTAdj|PTPart;*|*|PTCon;maakt CONCEPT van voltooid deelwoord na bepaald lidwoord en adjectief, included patterns of r30, r31, r32 and r33 #21-sde
+34;40;PTPrepart|PTAdj|PTPart;PTPrepart|^PTAdj|PTCon;maakt CONCEPT van voltooid deelwoord na samentrekking voorzetsel+bepaald lidwoord en adjectief
+35;40;PTPrep+^PTDe|PTAdj|PTPart;^PTPrep|^PTAdj|PTCon;maakt CONCEPT van voltooid deelwoord na voorzetsel en adjectief,added ^ and ^de 06-04-2016-nl
+502;40;PTAux|PTAdv:PTAdj|PTAndOrBut|PTAdv|PTPart;^PTAux|PTAdv|^PTAndOrBut|^PTAdv|PTPartrel;18-04-2016-nl
+501;40;PTAdj|PTAndOrBut|PTAdv|PTPart;^PTAdj|^PTAndOrBut|PTAdj|+Join;18-04-2016-nl
+798;40;PTCon|PTAdj|PTAndOrBut|PTPart|^PTPrepart+^"em"+^"por";*|*|*|PTAdj|*;generally good but not always, #23-sde
+800;40;PTCon|PTAdj|PTAndOrBut|PTPart|PTDo;*|*|*|PTAdj|*;Do is also Prepart -> not covered by r798, generally good but not always correct, #23-sde
+849;40;PTCon:PTAdj|PTPart|PTPunctuation:SEnd;*|PTAdj|*;#23-sde
+887;40;^typeConcept|PTNaoAdj|PTPart;*|*|PTCon;#23-sde
+297;40;PTAux|PTAdvmanner|PTPart;^PTAux|PTPartrel|+Join;changed to relation 11-04-2016-nl,removed Ser 30-05-2016-nl
+449;40;PTAux|PTAdvstruct|PTPart;^PTAux|^PTAdvstruct|PTPartrel;11-04-2016-nl,removed Ser 30-05-2016-nl
+610;40;PTAux|PTPart+PTAux;^PTAux|PTPartrel+PTAux;11-05-2016-nl
+65;40;PTAux|PTPart;^PTAux|PTPartrel;maakt RELATIE van voltooid deelwoord na hulpwerkwoord,added ^ 11-05-2016-nl
+670;40;PTAux|PTAdvPR:PTNegPR:PTAdv|PTPart;*|*|PTPartrel;30-05-2016-nl, included patterns of r684 and r233 #21-sde
+689;40;PTCon|PTInf|PTPart;^PTCon|^PTInf|PTPartrel;06-06-2016-nl
+466;40;PTCon:PTConVerb|PTAdv|PTPart|PTComma:PTVerb:PTNao;^PTCon|PTAdj|+Join|*;13-04-2016-nl,added converb 20-06-2016-nl
+467;40;PTCon|PTAdv|PTPart|SEnd;^PTCon|PTAdj|+Join|*;13-04-2016-nl
+465;40;PTCon|PTAdv|PTPart;^PTCon|^PTAdv|PTPartrel;13-04-2016-nl
+67;40;PTCon|PTPart|PTAdv|PTPrep|PTCon;^PTCon|PTPartrel|PTAdv|^PTPrep|^PTCon;maakt RELATIE van voltooid deelwoord na concept en gevolgd door bijwoord + voorzetsel + concept
+68;40;PTPart|PTPrep:PTPrepart:PTComo+^PTDe;PTPartrel|*;maakt RELATIE van voltooid deelwoord gevolgd door voorzetsel, included patterns of r209 and r263 #21-sde, added ^De #23-sde
+840;40;PTPart|PTDe|PTNumber;PTPartrel|*|*;#23-sde
+847;40;SBegin:PTPunctuation:PTComma:PTAdv:PTAdvstruct:PTAdvPR|PTPart|PTDe;*|PTPartrel|*;#23-sde
+246;40;PTPart|PTAdv|PTPrepart;PTPartrel|*|*;maakt RELATIE van voltooid deelwoord gevolgd door bijwoord en voorzetsel en lidwoord
+672;40;PTPart|PTAdvPR|PTPrep;PTPartrel|*|*;30-05-2016-nl
+70;40;PTPart|PTAdv|PTPrep;PTPartrel|*|*;maakt voltooid deelwoord tot RELATIE voor bijwoord gevolgd door voorzetsel
+72;40;PTComma|PTPart|PTIndefpron:PTDefart:PTIndefart:PTBeginconcept:PTTempEnd:PTTempBeginEnd;PTComma|PTPartrel|*;maakt RELATIE van voltooid deelwoord na komma en gevolgd door onbepaald voornaamwoord, included patterns of r128, r129 and r635 #21-sde
+676;40;PTComma|PTAdvPR:PTAdv|PTPart;*|*|PTPartrel;01-06-2016-nl, included pattern of r459 #21-sde
+680;40;PTConj|PTPart|PTComma;^PTConj|PTPartrel|PTComma;01-06-2016-nl
+232;40;PTPart|PTAndOrBut|PTPartrel|PTPrep;PTPartrel|PTAndOrBut|PTPartrel|^PTPrep;laat twee participia verbonden door voegwoord zich op dezelfde wijze gedragen
+231;40;PTPart|PTAndOrBut|PTPartrel|PTPrepart;PTPartrel|PTAndOrBut|PTPartrel|PTPrep;laat twee participia verbonden door voegwoord zich op dezelfde wijze gedragen
+229;40;PTPart|PTAndOrBut|PTPartrel;PTPart|PTAndOrBut|PTPart;laat twee participia verbonden door voegwoord zich op dezelfde wijze gedragen
+230;40;PTPartrel|PTAndOrBut|PTPart;PTPartrel|PTAndOrBut|PTPartrel;laat twee participia verbonden door voegwoord zich op dezelfde wijze gedragen
+500;40;PTPartrel|PTAndOrBut|PTAdv|PTPart;^PTPartrel|^PTAndOrBut|^PTAdv|PTPartrel;18-04-2016-nl
+503;40;PTAdj|PTPart|PTAndOrBut|PTAdv|PTPart;^PTAdj|+Join|^PTAndOrBut|PTAdj|+Join;18-04-2016-nl
+522;40;PTAndOrBut|PTAdv|PTPart;^PTAndOrBut|PTAdj|+Join;25-04-2016-nl
+795;40;PTDe|PTNao|PTCon;*|PTNaoAdj+PTNegation-PTNegBegin|PTCon;#23-sde
+58;40;PTCon|PTNao+^"nem"|PTCon;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon;maakt nao tot deel van CONCEPT tussen twee concepten, temporary change to simulate old behavior 26-03-2015-sde, added ^nem #23-sde
+622;40;PTCon|PTNao+^"nem"|PTPart|PTAdv;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon|+Join;18-05-2016-nl, added ^nem #23-sde
+59;40;PTCon|PTNao+^"nem"|PTPart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon;maakt nao tot deel van CONCEPT tussen een concept en een voltooid deelwoord dat zich als concept gedraagt, temporary change to simulate old behavior 26-03-2015-sde, added ^nem #23-sde
+789;40;PTAdj|PTNao+^"nem"|PTPart|^PTPrep+^PTPrepart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon|*;maakt nao tot deel van CONCEPT tussen een concept en een voltooid deelwoord dat zich als concept gedraagt, #23-sde
+60;40;PTCon|.PTAdj|PTNao+^"nem"|PTAdj;PTCon|*|PTNaoAdj+PTNegation-PTNegBegin|^PTAdj;maakt nao tot deel van CONCEPT tussen concept en adjectief, temporary change to simulate old behavior 26-03-2015-sde, added .Adj and ^nem #23-sde
+366;40;PTConVerb|PTNao+^"nem"|PTAdj;PTCon|PTNaoAdj+PTNegation-PTNegBegin|^PTAdj;maakt nao tot deel van CONCEPT tussen concept en adjectief 12-11-2012-mvdh, temporary change to simulate old behavior 26-03-2015-sde, added ^nem #23-sde
+367;40;PTConVerb|PTNao+^"nem"|PTPart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;maakt nao tot deel van CONCEPT tussen concept en adjectief 12-11-2012-mvdh, temporary change to simulate old behavior 26-03-2015-sde, added ^nem #23-sde
+243;40;PTDefart:PTIndefart:PTPrepart:PTPosspron|PTNao+^"nem"|PTCon:PTAdj;*|PTNaoAdj+PTNegation-PTNegBegin|*;maakt nao tot deel van CONCEPT voor tussen lidwoord en concept, temporary change to simulate old behavior 26-03-2015-sde, included patterns of r244, r363, r359 and r364 #21-sde, added Posspron and ^nem #23-sde
+361;40;PTDefart:PTIndefart:PTPrepart|PTNao+^"nem"|PTPart;*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;maakt nao tot deel van CONCEPT voor tussen lidwoord en concept 12-11-2012-mvdh, temporary change to simulate old behavior 26-03-2015-sde, included patterns of r362 and r365 #21-sde, added ^nem #23-sde
+791;40;PTNaoAdj|PTCon|"nem"|PTPart;*|*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;#23-sde
+299;40;PTDefart:PTIndefart|PTAdvPR|PTAdj;*|PTAdj|+Join;maakt CONCEPT van bijwoord na bepaald lidwoord,removed attr. time 25-05-2016-nl,changed from advtimefreq and added context 21-Sep-2016-nl
+48;40;PTDefart:PTIndefart|PTAdvmanner;*|PTAdj;maakt CONCEPT van bijwoord na onbepaald lidwoord,removed mod 26-04-2016-nl, included pattern of r47 #21-sde
+198;40;PTCon|PTAdv|PTAdj;*|PTAdj|*;maakt CONCEPT van bijwoord tussen concept en adjectief,removed mod 26-04-2016-nl
+547;40;PTDemonstr|PTNao|PTCon:PTPart;PTNonrel|PTNaoAdj+PTNegation-PTNegBegin|*;02-05-2016-nl, added -NegBegin #23-sde
+548;40;PTDemonstr|PTCon:PTAdjCon;PTNonrel|*;02-05-2016-nl, added AdjCon #23-sde
+551;40;PTDemonstr|PTAdj:PTNumber;PTNonrel|^PTAdj;02-05-2016-nl
+556;40;^PTPrepart+^PTRelpron|PTCon|PTDemonstr|"que";*|*|PTNonrel|*;02-05-2016-nl
+550;40;PTDemonstr;PTDemonstrPR;02-05-2016-nl
+441;40;PTPrep:PTA|PTRecipr;^PTPrep|PTPerspron;06-04-2016-nl
+150;40;PTCon|PTIndefpron|PTCon;PTCon|PTBeginconcept|*;maakt BEGIN CONCEPT van onbepaald voornaamwoord tussen 2 concepten
+613;40;PTAdj:PTIndefpronPRCon|PTIndefpronPR|PTCon;^PTAdj|+Join|^PTCon;11-05-2016-nl
+703;40;^PTPrep|PTIndefpronPRCon|PTIndefart:PTDefart:PTPosspron|PTCon:PTAdj;*|PTAdj|+Join|*;13-06-2016-nl
+596;40;PTIndefpronPRCon|PTCon:PTAdj:PTMaismenos;PTAdj|*;09-05-2016-nl
+608;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRCon|^PTAdj+^PTCon;*|PTAdj|*;11-05-2016-nl
+597;40;PTIndefpronPRCon;PTIndefpronPR;09-05-2016-nl
+623;40;PTIndefpronPRNR|PTCon:PTBeginconcept:PTAdj:PTIndefpronPR;PTNonrel|*;23-05-2016-nl
+632;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|SEnd;^PTCon|PTNonrel|*;23-05-2016-nl
+633;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|^PTAdj+^PTCon;*|PTNonrel|*;23-05-2016-nl
+625;40;PTIndefpronPRNR;PTIndefpronPR;23-05-2016-nl
+614;40;PTIndefpronconcept+PTAdj|PTIndefpronPR;PTIndefpronPR|+Join;11-05-2016-nl
+686;40;PTNaoAdj|PTPrepart|PTPosspron;^PTNaoAdj|+Join|+Join;06-06-2016-nl
+853;40;"nunhum":"nenhuma"|PTVerb:PTAux;PTPerspron+PTNegation-PTNegBegin|*;#23-sde
+803;40;PTDefart|PTInf;PTPerspron|*;#23-sde
+433;40;PTTanto|^PTComo|PTComo;^PTConj|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+434;40;PTTanto|^PTComo|^PTComo|PTComo;^PTConj|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+435;40;PTTanto|^PTComo|^PTComo|^PTComo|PTComo;^PTConj|*|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+436;40;PTTanto|^PTComo|^PTComo|^PTComo|^PTComo|PTComo;^PTConj|*|*|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+437;40;PTTanto|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|PTComo;^PTConj|*|*|*|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+438;40;PTTanto|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|PTComo;^PTConj|*|*|*|*|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+439;40;PTTanto|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|^PTComo|PTComo;^PTConj|*|*|*|*|*|*|*|PTComo;maakt RELATIE van tanto in de combinatie tanto...como, 18-08-2015-sde
+896;40;PTA|"não"|"ser"|PTAdj:PTPart:PTPartrel:PTAdv:PTComma;PTConj|*|*|*;#23-sde
+897;40;PTA|"não"|"ser";PTPrep+PTNegStop|Join|Join;#23-sde
+241;40;PTVerb+^PTAux;PTVerb;om woorden met een dubbel label het label verb te doen krijgen, added ^Aux #23-sde
+700;40;PTCon;PTCon;to remove all other labels 08-06-2016-nl
+885;40;PTAdjCon;PTAdj+PTCon;default, #23-sde
+325;40;PTConj+PTConVerb;-PTConVerb;om dubbel label te laten vuren (bv. caso)
+701;40;PTConVerb;PTCon;default 08-06-2016-nl
+307;40;PTAdvmanner;PTAdv;removed mod 26-04-2016-nl
+308;40;PTAdv;PTAdv-PTNegBegin;temporary ^ to partly simulate old behavior 26-03-2015-sde,removed mod 26-04-2016-nl
+309;40;PTIndefpronconcept;PTIndefpronconcept;removed mod 26-04-2016-nl
+254;40;PTComma;+PTPunctuation;om een komma het label PTPunctuation te doen krijgen, added + to keep Comma label #23-sde
+906;40;"para"|PTInf;PTConj|*;#23-sde
+443;40;PTPrep+^PTDe+^PTComo;PTPrep;added restriction for 'de' 21-Sep-2016-nl, added restriction for como #23-sde
+478;40;PTAux;-PTPart;to make sure the auxiliary verb becomes a relation 13-04-2016-nl, changed to keep Inf label for further processing #23-sde
+557;40;PTIndefpronPR;PTIndefpronPR;to make sure the pathrelevant indefinite pronoun becomes pathrelevant 04-05-2016-nl
+652;40;PTEndconcept;PTEndconcept;to remove all other labels 25-05-2016-nl
+706;40;PTLayout;PTLayout;to remove all other labels 13-06-2016-nl
+773;40;PTA;PTDefart;default, #23-sde
+866;40;PTRelpron+PTComprel;-PTComprel;#23-sde
+890;40;PTPrepartTime;-PTPrepartTime;cleanup irrelevant label, #23-sde
+753;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;#23-sde
+754;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;#23-sde
+755;60;*PTCon:PTAdj+^PTList|PTComma|*PTCon:PTAdj+PTList;+PTList|+PTList|*;for longer enumerations, #23-sde
+756;60;*PTCon:PTAdj+^PTList|PTComma|*PTCon:PTAdj+PTList;+PTList|+PTList|*;for longer enumerations, #23-sde
+757;60;*PTCon:PTAdj+^PTList|PTAndOrBut:"nem"|*PTCon:PTAdj|SEnd;+PTList|+PTList-PTNegStop|+PTList|*;#23-sde
+758;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+759;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+760;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTComma|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+761;60;PTDefart|*PTCon:PTAdj+^PTList|PTComma|PTDefart+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations, #23-sde
+762;60;PTIndefart|*PTCon:PTAdj|PTComma|PTIndefart|*PTCon:PTAdj|PTAndOrBut|PTIndefart:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+763;60;PTIndefart|*PTCon:PTAdj+^PTList|PTComma|PTIndefart+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations, #23-sde
+764;60;PTPosspron|*PTCon:PTAdj|PTComma|PTPosspron|*PTCon:PTAdj|PTAndOrBut:"nem"|PTPosspron|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+765;60;PTPosspron|*PTCon:PTAdj+^PTList|PTComma|PTPosspron+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations, #23-sde
+859;60;PTMonth|PTComma|PTMonth|PTComma|PTMonth|PTAndOrBut|PTMonth;+PTList|+PTList|+PTList|+PTList|+PTList|-PTNegStop|+PTList;#23-sde
+860;60;PTMonth|PTComma|PTMonth|PTAndOrBut|PTMonth;+PTList|+PTList|+PTList|-PTNegStop|+PTList;#23-sde
+861;60;PTMonth|PTAndOrBut|PTMonth;+PTList|-PTNegStop|+PTList;#23-sde
+766;60;PTDefart|*PTCon:PTAdj|PTAndOrBut|PTDefart|PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+767;60;PTIndefart|*PTCon:PTAdj|PTAndOrBut|PTIndefart|PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+778;60;PTNumber|PTAndOrBut|PTNumber;+PTList|+PTList-PTNegStop|+PTList;#23-sde
+796;60;PTDemonstrPR|PTAndOrBut|PTIndefpronPR|PTCon;+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+799;60;PTCon|PTAdj|PTAndOrBut|PTAdj:PTIndefpronPR;*|+PTList|+PTList-PTNegStop|+PTList;#23-sde
+895;60;PTDo|*PTCon:PTAdj|PTAndOrBut|PTDo|*PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+927;60;PTPrepart|*PTCon:PTAdj|PTAndOrBut|PTPrepart|*PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+908;60;PTDe|PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon:PTAdj|PTAndOrBut|PTDe|PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList|+PTList;#23-sde
+768;60;SBegin:PTColon:PTConj:"como"|*PTCon:PTAdj|PTAndOrBut|*PTCon:PTAdj;*|+PTList|+PTList-PTNegStop|+PTList;#23-sde
+816;60;SBegin:PTColon|PTDefart:PTIndefart:PTPosspron|*PTCon:PTAdj|PTAndOrBut|.PTDefart:PTIndefart:PTPosspron|*PTCon:PTAdj;*|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;#23-sde
+892;60;SBegin:PTColon:PTConj:"como"|PTDefart|PTPosspron|*PTCon:PTAdj|PTAndOrBut|*PTCon:PTAdj;*|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;#23-sde
+882;60;"entre"|*{1,5}^PTAndOrBut|"e"|*^PTPunctuation+^PTComma+^PTVerb+^PTConj+^SEnd;*|+PTList|-PTNegStop+PTList|+PTList;#23-sde
+804;60;PTComma|PTAndOrBut;*|^PTConj;#23-sde
+841;60;SBegin|PTAndOrBut;*|PTConj;#23-sde
+879;60;PTInf|PTAndOrBut|PTInf;+PTRList|+PTRList-PTNegStop|+PTRList;#23-sde
+880;60;PTPartrel|PTAndOrBut|PTPartrel;+PTRList|+PTRList-PTNegStop|+PTRList;#23-sde
+345;70;PTAdj;+PTCon;^Con->+Con in order not to lose the original label #23-sde
+848;70;PTPart+PTPreferRel;PTPartrel;#23-sde
+356;70;PTPart;^PTCon;
+898;70;PTInf:PTVerb:PTRefl+PTNegStop;-PTNegStop;remove attribute that came from lexrep "se" #23-sde
+899;70;PTAdv+PTNegation+^PTOuNao;PTNao+PTNegation+PTNegBegin-PTNaoAdj;for "dificilmente", #23-sde
+929;70;PTNao+^PTNegation2|PTVerb:PTAux:PTInf:PTPartrel|PTAdvrestrict|^PTNumber;PTAdv|*|PTAdv|*;removing negation from Nao and making Advrestrict Relation when both occur together with a verb in between #23-sde
+780;70;PTComma|PTAdvstruct|PTComma;+PTNonrel|+PTNonrel|+PTNonrel;preliminary labeling, to be confirmed by r779 later, #23-sde
+747;70;PTDefart:PTIndefart:PTNonrel:PTPosspron:PTCon:PTNumber:PTIndefpronPR;+PTNPC;adding label to diminish number of options in following rules #23-sde
+843;70;PTAdv:PTAdvPR:PTAdvstruct;+PTAdv70;#23-sde
+820;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|"apesar"|PTDo;*|PTConj|Join;#23-sde
+821;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|PTComo+PTPrep;*|PTConj;#23-sde
+839;70;PTVerb:PTAux:PTInf|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|"e"|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|^PTInf;*|*|-PTAndOrBut+PTConj|*|*|*;#23-sde
+881;70;PTVerb|"e"|^PTVerb;*|+PTConj|*;#23-sde
+845;70;PTVerb:PTAux:PTInf:PTPartrel:PTPunctuation|.PTAdv70|"não"|PTPunctuation:SEnd;*|*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' at the end of a sentence, #23-sde
+846;70;PTDefart|"não"|PTDo:PTRelpron:SEnd;*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' in specific contexts, very rare!, #23-sde
+745;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;#23-sde
+750;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop|*;#23-sde
+771;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*;#23-sde
+772;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|+PTNegBegin|*|*;#23-sde
+792;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|*|+PTNegBegin|-PTNegStop;#23-sde
+805;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*;variant of r792, #23-sde
+822;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*|-PTNegStop;#23-sde
+824;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*|*;#23-sde
+801;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;#23-sde
+817;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;#23-sde
+818;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;#23-sde
+809;70;^PTRelpron+^PTPrep|PTRelpron|.PTPerspron:PTDemonstrPR|PTAdvPR:PTAdv:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin+PTBeginrel|*|*|+PTNegBegin|*;#23-sde
+812;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;#23-sde
+813;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;#23-sde
+814;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;#23-sde
+837;70;PTCon|.PTAdvstruct|PTNao|.PTAdv|PTPartrel;+PTNegBegin|*|+PTNegBegin|*|*;#23-sde
+852;70;PTCon|PTAux|PTPrep+PTNegBegin;+PTNegBegin|*|*;#23-sde
+850;70;^PTDo|PTCon|PTPrep+PTNegation|PTNPC;*|+PTNegBegin|*|*;#23-sde
+856;70;"nenhum":"nenhuma"|"das":"dos"|.PTIndefpronPR|PTCon;+PTBeginconcept-PTNaoAdj|PTAdj|PTAdj|*;#23-sde
+857;70;"nenhum":"nenhuma"|PTDe|PTPerspron;PTPerspron+PTNegation-PTNaoAdj|Join|Join;#23-sde
+900;70;^PTPrep+^PTPrepart|*PTCon+^PTAdj+^PTNegBegin|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|-PTBeginrel|*;#23-sde
+901;70;^PTPrep+^PTPrepart|PTCon+^PTAdj|.PTCon|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|+PTNegBegin|-PTBeginrel|*;#23-sde
+769;70;PTCondition|PTNegBegin;+PTBeginrel+PTNegBegin|*;Include conditional conjunction #23-sde
+797;70;SBegin:PTColon:PTConj:PTRelpron:PTComma+^PTList+^"para"|PTInf|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;Infinitive as subject #23-sde
+774;70;typeRelation+^PTAndOrBut+^PTPrep+^PTPrepart+^PTRelpron+^PTNegation+^PTNegBegin|PTRelpron:"e"|.PTAdv70|typeRelation+PTNegBegin;*|+PTBeginrel|*|*;split relation when negation only applies to part of it #23-sde
+775;70;typeRelation+^PTAndOrBut+^PTPrep+^PTPrepart+^PTRelpron+^PTNegation+^PTNegBegin|PTAndOrBut|PTRelpron|.PTAdv70|typeRelation+PTNegBegin;*|+PTBeginrel|*|*|*;split relation when negation only applies to part of it #23-sde
+844;70;PTVerb:PTPartrel+^PTAux|.PTPrep:PTPrepart|PTNao|PTInf;*|*|+PTNegBegin+PTBeginrel|*;split relation before an infinitive clause with negation #23-sde
+777;70;PTAndOrBut|PTBeginrel;+PTBeginrel|-PTBeginrel;#23-sde
+776;70;PTDefart|PTRelpron|typeRelation+PTNegBegin;*|+PTBeginrel|*;#23-sde
+808;70;PTVerb+^PTAux|"não"+PTNegBegin;*|+PTNegBegin+PTBeginrel;split relation when negation only applies to part of it #23-sde
+851;70;PTVerb:PTPartrel:PTInf+^PTAux|.PTAdv70|PTPrep+PTNegBegin;*|*|+PTNegBegin+PTBeginrel;split relation before "sem" #23-sde
+893;70;PTVerb:PTPartrel:PTInf|PTConj+PTNegation;*|+PTBeginrel;split relation before "sem que" #23-sde
+854;70;PTNegation|.typeRelation+^PTNegBegin+^PTNegStop|PTNegBegin;+PTNegBegin|*|*;include negation marker in immediately following negation span #23-sde
+746;70;PTNegBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegBegin;move NegBegin from nonrelevant to relevant lexrep, #23-sde
+779;70;PTComma|PTAdvstruct+^PTNegBegin|PTComma;PTNonrel|*|PTNonrel;#23-sde
+911;70;PTNao|.PTComma|*PTVerb:PTAux:PTInf|.PTComma|PTNegation2+^"nem";*|*|*|*|+PTAdv70-PTNegBegin;a negation marker that enforces a preceding negation marker must not act as NegBegin, #23-sde
+858;70;^PTNegation2+^"sem"|PTPunctuation+^PTList|^PTNegBegin+^PTNegation+^PTNegation2;*|*|+PTNegStop;stop the right expansion at a punctuation mark, except when it concerns a comma in an enumeration, #23-sde
+863;70;PTNegation2|PTPunctuation|PTConj+^PTNegBegin;*|*|+PTNegStop;cover cases that are excluded by r858, #23-sde
+864;70;^typeRelation+^PTNegBegin|PTRelpron+^PTNegBegin;*|+PTNegStop;stop expansion at Relpron #23-sde
+874;70;^typeRelation|PTDe|PTRelpron+^PTNegBegin;*|+PTNegStop|*;stop expansion at de+Relpron #23-sde
+869;70;^PTNao|PTConj+^PTNegBegin+^PTNegation+^"de"|^PTNegBegin+^PTNegation;*|+PTNegStop|*;stop expansion at conjunction (not "de"), #23-sde
+870;70;PTConj+"de"+^PTNegBegin+^PTNegation|PTDefart+^PTNegBegin+^PTNegation;+PTNegStop|*;stop expansion at conjunction "de" #23-sde
+883;70;PTCon+^PTAdj+^PTNegation+^PTNegBegin|PTDe:PTPrep|PTInf;*|^PTConj+PTNegStop|*;stop expansion at conjunction labeled as Prep before infinitive #23-sde
+888;70;^PTNegation+^PTNegBegin|PTPrep:PTPrepart|PTRelpron:PTComo|^PTNegBegin;*|+PTNegStop|*|*;stop expansion at prep(art)+Relpron or Como #23-sde
+889;70;PTNegBegin|*^PTNegStop|PTNegStop+PTPrep:PTPrepart|PTRelpron:PTComo;*|*|+PTBeginrel|*;adding Beginrel to result of r888 in case of negation, #23-sde
+891;70;PTNao|PTVerb+^PTAux|.PTAdv70|PTRelpron:PTAux+^PTInf;*|*|*|+PTNegStop+PTBeginrel;stop expansion at beginning of subordinate clause #23-sde
+904;70;PTNao|PTAux|PTInf|PTRelpron;*|*|*|+PTNegStop+PTBeginrel;stop expansion at beginning of subsordinate clause #23-sde
+875;70;PTNegPR|PTRelpron+PTNegStop|typeRelation;*|-PTNegStop|*;#23-sde
+871;70;PTNegBegin|*^PTNegStop|PTConj:PTAndOrBut+PTNegStop+^PTNegBegin+^PTRList;*|*|+PTBeginrel;split relation at conjunction in negation span #23-sde
+873;70;PTConj:PTRelpron:PTPrep|PTBeginrel+PTNegStop;+PTNegStop|*;move Beginrel to conjunction to exclude the conjunction from the expansion #23-sde
+886;70;PTPartrel|*^PTVerb+^PTAux+^PTNegBegin|PTVerb:PTAux+^PTNegBegin+^PTNegation;*|*|+PTNegStop;stop expansion on conjugated verb after Partrel #23-sde
+907;70;PTNegation+PTNegBegin+^PTNaoAdj|PTPunctuation|*{1,3}^PTPunctuation|PTPunctuation|^PTAndOrBut+^PTConj;*|+PTNegBegin|+PTNegBegin|+PTNegBegin|+PTNegBegin;don't let an adverbial expression between commas interrupt the expansion #23-sde
+894;70;PTPrep+PTNegation|*PTNPC:PTDe:PTPrep:PTPrepart:PTList|PTVerb:PTPartrel;*|*|+PTNegStop;#23-sde
+910;70;PTPrep+PTNegation|.PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon|PTDefart:PTIndefart:PTNonrel:PTPosspron;*|*|*|+PTNegStop;stop at concept after concept, #23-sde
+862;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep, #23-sde
+905;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep, #23-sde
+385;70;PTCon|PTPunctuation|PTVerb;^PTCon|PTPunctuation|^PTVerb+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+386;70;PTCon|PTPunctuation|PTVerb;^PTCon|PTPunctuation|^PTVerb+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+387;70;PTCon|PTPunctuation|PTPrep;^PTCon|PTPunctuation|^PTPrep+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+388;70;PTCon|PTPunctuation|PTPrep;^PTCon|PTPunctuation|^PTPrep+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+389;70;PTCon|PTPunctuation|PTPrepart;^PTCon|PTPunctuation|^PTPrepart+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+390;70;PTCon|PTPunctuation|PTPrepart;^PTCon|PTPunctuation|^PTPrepart+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+391;70;PTCon|PTPunctuation|PTPartrel;^PTCon|PTPunctuation|^PTPartrel+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+392;70;PTCon|PTPunctuation|PTPartrel;^PTCon|PTPunctuation|^PTPartrel+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+395;70;PTCon|PTPunctuation|PTConj;^PTCon|PTPunctuation|^PTConj+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+396;70;PTCon|PTPunctuation|PTConj;^PTCon|PTPunctuation|^PTConj+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+397;70;PTCon|PTPunctuation|PTComo;^PTCon|PTPunctuation|^PTComo+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+398;70;PTCon|PTPunctuation|PTComo;^PTCon|PTPunctuation|^PTComo+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+399;70;PTCon|PTPunctuation|PTCujo;^PTCon|PTPunctuation|^PTCujo+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+400;70;PTCon|PTPunctuation|PTCujo;^PTCon|PTPunctuation|^PTCujo+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+401;70;PTCon|PTPunctuation|PTAdv;^PTCon|PTPunctuation|^PTAdv+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+402;70;PTCon|PTPunctuation|PTAdv;^PTCon|PTPunctuation|^PTAdv+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+403;70;PTInf|PTPunctuation|PTAux;^PTInf|PTPunctuation|^PTAux+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+404;70;PTInf|PTPunctuation|PTAux;^PTInf|PTPunctuation|^PTAux+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+405;70;PTVerb|PTPunctuation|PTCon;^PTVerb|PTPunctuation|^PTCon+PTPosSentimentStop;moet vóór regels sentimentbegin staan
+406;70;PTVerb|PTPunctuation|PTCon;^PTVerb|PTPunctuation|^PTCon+PTNegSentimentStop;moet vóór regels sentimentbegin staan
+409;70;PTCon|PTAndOrBut|PTCon;^PTCon|-PTPosSentimentStop|^PTCon;to NOT make AndOrBut a sentimentstopper between two concepts
+410;70;PTCon|PTAndOrBut|PTCon;^PTCon|-PTNegSentimentStop|^PTCon;to NOT make AndOrBut a sentimentstopper between two concepts
+415;70;PTCon|PTCon|PTCon|PTPosSentiment;+PTPosSentimentBegin|^PTCon|^PTCon|^PTPosSentiment;
+416;70;PTCon|PTCon|PTCon|PTNegSentiment;+PTNegSentimentBegin|^PTCon|^PTCon|^PTNegSentiment;
+417;70;PTCon|PTCon|PTPosSentiment;+PTPosSentimentBegin|^PTCon|^PTPosSentiment;
+418;70;PTCon|PTCon|PTNegSentiment;+PTNegSentimentBegin|^PTCon|^PTNegSentiment;
+419;70;PTCon|PTPosSentiment;+PTPosSentimentBegin|^PTPosSentiment;
+420;70;PTCon|PTNegSentiment;+PTNegSentimentBegin|^PTNegSentiment;
+423;70;PTCon|PTRelpron|PTPosSentiment;+PTPosSentimentBegin|PTRelpron|^PTPosSentiment;
+424;70;PTCon|PTRelpron|PTNegSentiment;+PTNegSentimentBegin|PTRelpron|^PTNegSentiment;
+425;70;PTCon|PTAndOrBut|PTCon|PTPosSentiment;+PTPosSentimentBegin|PTAndOrBut|^PTCon|^PTPosSentiment;
+426;70;PTCon|PTAndOrBut|PTCon|PTNegSentiment;+PTNegSentimentBegin|PTAndOrBut|^PTCon|^PTNegSentiment;
+427;70;PTCon|PTDe|PTCon|PTPosSentiment;+PTPosSentimentBegin|PTDe|^PTCon|^PTPosSentiment;
+428;70;PTCon|PTDe|PTCon|PTNegSentiment;+PTNegSentimentBegin|PTDe|^PTCon|^PTNegSentiment;
+431;70;PTCon|PTDe|PTPosspron|PTCon|PTPosSentiment;+PTPosSentimentBegin|PTDe|^PTPosspron|^PTCon|^PTPosSentiment;
+432;70;PTCon|PTDe|PTPosspron|PTCon|PTNegSentiment;+PTNegSentimentBegin|PTDe|^PTPosspron|^PTCon|^PTNegSentiment;
+770;95;PTBeginrel;PTBeginrel;deletes Conj, Refl, etc. #23-sde
+378;$;PTPunctuation;Punctuation;23-03-2015-nl

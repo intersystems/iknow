@@ -1,0 +1,418 @@
+345;1;Punctuation;^DEPunctuation;rewriting mandatory label to a language-specific copy, 20-05-2014-sde
+346;1;CapitalInitial;^DECapitalInitial;rewriting mandatory label to a language-specific copy, 20-05-2014-sde
+609;1;CapitalMixed;^DECapitalInitial;treat CapitalMixed in the same way as CapitalInitial, #24-sde
+350;1;UDNegation;+DENegation;27-11-2014-sde, moved up and changed ^ into + to avoid overwriting other UD-labels 19-03-2015-sde
+348;1;UDPosSentiment;+DEPosSentiment+DEPosSentimentBegin;20-11-2014-sde, moved up and changed ^ into + to avoid overwriting other UD-labels 19-03-2015-sde
+349;1;UDNegSentiment;+DENegSentiment+DENegSentimentBegin;27-11-2014-sde, moved up and changed ^ into + to avoid overwriting other UD-labels 19-03-2015-sde
+351;1;UDConcept;UDConcept+DECon;27-11-2014-sde, changed 19-03-2015-sde
+352;1;UDRelation;UDRelation+DERel;27-11-2014-sde, changed 19-03-2015-sde
+353;1;UDNonRelevant;NonRelevant;27-11-2014-sde, corrected 19-03-2015-sde
+254;20;DEWeder|^DENoch|DENoch;DENegRel|*|DENegRel;2013.1-sde
+255;20;DEWeder|^DENoch|^DENoch|DENoch;DENegRel|*|*|DENegRel;2013.1-sde
+256;20;DEWeder|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|DENegRel;2013.1-sde
+257;20;DEWeder|^DENoch|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|*|DENegRel;2013.1-sde
+258;20;DEWeder|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|*|*|DENegRel;2013.1-sde
+259;20;DEWeder|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|*|*|*|DENegRel;2013.1-sde
+260;20;DEWeder|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|*|*|*|*|DENegRel;2013.1-sde
+261;20;DEWeder|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|^DENoch|DENoch;DENegRel|*|*|*|*|*|*|*|*|DENegRel;2013.1-sde
+262;20;DEWeder;DENegRel;default if no noch is found, 2013.1-sde
+648;20;DENicht:DEKein:DENegWord|*^DEKomma|DEKomma|DENoch|DERel:DERelAux;*|*|*|DENegRel|*;#24-sde
+263;20;DENoch;DEAdv+DEAdvNonrelevant;2013.1-sde
+318;30;DEAdvDegree|DEAdvTime;DEAdvTime|+Join;2014.2-sde, added + 2016-03-31-sde
+425;30;DEAdvDegree|DEAdvTemp;DEAdvTemp|+Join;03-12-2015-sde, added + 2016-03-31-sde
+466;30;DEAdvDegree|DEAdvPlace;DEAdvPlace|+Join;14-12-2015-sde, added + 2016-03-31-sde
+479;30;DEAdvDegree|DEAdvManner;DEAdvManner|+Join;16-12-2015-sde, added + 2016-03-31-sde
+316;30;DEAdvDegree|DEAdvDegree;DEAdvDegree|+Join;2014.2-sde, added + 2016-03-31-sde
+343;30;"mehr"|"als"|DENum;DEAdvDegree+DEAdv-DEAdj|Join|^DENum;2014.2-sde
+344;30;"mehr"|"als"|^DENum;DEPrep-DEAdj|Join|*;2014.2-sde
+633;40;"im"|"übrigen"|DECon+DECapitalInitial;*|DEAttradj|*;#24-sde
+634;40;"im"|"übrigen";DEAdv+DEAdvNonrelevant|Join;#24-sde
+288;40;SBegin|DECapitalInitial;*|-DECapitalInitial;2014.2-sde, ignore capital at beginning of sentence
+224;40;^DEDoppelpunkt+^DELayout+^SBegin|DEConIfCap+DECapitalInitial;*|DECon;2013.1-sde, added left context 11-12-2015-sde, added ^SBegin for JDN245, _sbse #5-sde
+416;40;^DEPunctuation+^DELayout+^SBegin|DEInf+DECapitalInitial;*|DECon;02-12-2015-sde, added ^Layout 2016-06-22-sde, added ^SBegin for JDN245, _sbse #5-sde
+422;40;DEDoppelpunkt|DEInf|typeRelation;*|DECon|*;03-12-2015-sde, Doppelpunkt->* #23-sde
+513;40;DEConpart1|DECapitalInitial;DECon|+Join;2016-10-10-sde
+514;40;DEConpart1;^DECon;2016-10-10-sde
+610;40;DEOrgUnit|"für"|*typeConcept|DEKomma|*typeConcept|"und"|DECapitalInitial;^DECon|+Join|+Join|+Join|+Join|+Join|+Join;#24-sde
+611;40;DEOrgUnit|"für"|*typeConcept|"und"|*typeConcept;^DECon|+Join|+Join|+Join|+Join;#24-sde
+612;40;DEOrgUnit|"für"|*typeConcept;^DECon|+Join|+Join;#24-sde
+613;40;DEOrgUnit;^DECon;#24-sde
+40;40;DENumadj;DEAttradj;2011.2
+486;40;"etwas"|DEAdj:DEPredadj:DECon;DEAdv+DEAdvDegree|*;21-12-2015-sde
+487;40;"etwas":"nichts":"alles"|DEAttradj:DECapitalInitial;DEBeginadj|^DECon;21-12-2015-sde, added 'nichts' and CapitalInitial 2016-01-12-sde
+492;40;"etwas"|DEVielWenig;DEBeginadj|DEAttradj;2016-01-04-sde
+490;40;DEVielWenig|DECon;DEAttradj|*;2016-01-04-sde, Con->* #23-sde
+491;40;DEVielWenig|DEAttradj;DEAttradj|*;2016-01-04-sde, Attradj->* #23-sde
+540;40;"keines":"keiner"|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|*;_sbse #4-sde
+541;40;"keiner"|DEVerbAdj|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|DEAttradj|*;_sbse #4-sde
+551;40;DEKomma|"aber";*|DEAndOrBut;_sbse #4-sde
+552;40;"aber"+^DEAndOrBut;DEAdvModality+DEAdv;actually AdvNonRelevant, but I want to avoid too many differences for now, _sbse #4-sde
+112;40;DEVerbteil|DEKomma:DEDoppelpunkt:SEnd;DEVerbteil|*;2011.2, merged with r197 and r114 #23-sde
+123;40;SBegin|DEPrep|DEDer:DEDefart|DECon|DEVerbAdj;*|DEPrep|*|*|DERel;2011.2, Der->*, Con->*, merged with r124 #23-sde
+139;40;SBegin|DEVerbAdj;*|DEAttradj;2011.2
+508;40;DEVerbAdj|DEKomma|"dass";DERel|*|DEConj;2016-01-07-sde
+192;40;DEDer|DEPrep|DECon|DEVerbAdj;*|DEAdj|DECon|DEAttradj;2011.2, Der->* #23-sde
+125;40;DEPrep|DEDer:DEDefart|DECon|DEVerbAdj|DECon;DEPrep|*|DECon|DEAttradj|DECon;2011.2, Der->*, merged with r126 #23-sde
+128;40;DEPrep|DEEiner|DEVerbAdj;DEPrep|*|DEAttradj;2011.2
+141;40;DEPrep|DEAdv|DEVerbAdj;DEPrep|DEAdv|DEAttradj;2011.2, aangepast in 2011.2
+145;40;DEPrep|DEZeit|DEVerbAdj;DEPrep|DEAttradj|DEAttradj;2011.2
+506;40;DEEiner:DEEines|DEPrep|DECon|DEVerbAdj;DEGenitiv|DEAttradj|DEAttradj|DEAttradj;2016-01-07
+507;40;DEEiner:DEEines|DEPrep|typeConcept|typeConcept|DEVerbAdj;DEGenitiv|DEAttradj|DEAttradj|DEAttradj|DEAttradj;2016-01-07
+14;40;DEDefart:DEIndefart|DEVerbAdj;*|DEAttradj;2011.2, Defart->*, merged with r15 #23-sde
+121;40;DEDefart|DEPredadj|DEVerbAdj;DEDefart|DEPredadj|DEAttradj;2011.2
+135;40;DEDefart:DEIndefart|DEAdv|DEVerbAdj|DECon;*|DEAdv|DEAttradj|DECon;2011.2, Defart->*, merged with r137 #23-sde
+146;40;DEDefart:DEIndefart|DEZeit|DEVerbAdj|DECon;*|DEAttradj|DEAttradj|DECon;2011.2, Defart->*, merged with r144 #23-sde
+18;40;DEPrepart:DEGenitiv:DEEiner:DEDer|DEVerbAdj;*|DEAttradj;2011.2, Prepart->*, merged with r91, r404 and r118 #23-sde
+140;40;DEPosspron|DEVerbAdj;DEPosspron|DEAttradj;2011.2
+122;40;DEPredadj|DEVerbAdj|DECon;DEPredadj|DEAttradj|DECon;2011.2
+103;40;DEPrep|DEVerbAdj|DECon;DEPrep|DEAttradj|DECon;2011.2
+133;40;DEPrep|DEVerbAdj|DEPrep;DEPrep|DECon|DEPrep;2011.2
+131;40;DENum|DEVerbAdj|DECon;DENum|DEAttradj|DECon;2011.2
+132;40;DEKein|DEVerbAdj;DEKein|DEAttradj;2011.2
+138;40;DEVerbAdj|DERelCon;DEAttradj|DECon;2011.2
+86;40;DEZu|DEVerbAdj;DEZu|DEAttradj;2011.2
+37;40;DEPrep|DENicht|DEVerbAdj|DECon;DEPrep|DENicht|DEAttradj|DECon;2011.2
+327;40;DEVerbAdj+DECapitalInitial;DECon;for substantivierte Adjektive, 2014.2-sde, moved up 04-12-2015-sde
+417;40;DEDemonstrativ:DEAttradj:DEAttrpron|DEVerbAdj|DECon;*|DEAttradj|DECon;02-12-2015-sde, added Attradj and Attrpron 04-12-2015-sde
+493;40;DEVielWenig|DEVerbAdj|DECon;DEAttradj|DEAttradj|DECon;2016-01-04-sde
+645;40;DEVerbAdj|DERefl;DERel|*;don't wait until default rule for this case, #24-sde
+226;40;SBegin|DEInfAttradj|DEObjpron;*|DERel|DEObjpron;2013.1-sde imperative at the beginning of a sentence
+227;40;DEInfAttradj+DECapitalInitial;DECon;2013.1-sde
+89;40;DEDefart:DEIndefart:DEPrepart:DEPrep|DEInfAttradj;*|DEAttradj;2011.2, Defart->*, merged with r88, r90 and r509 #23-sde
+93;40;DEPrep|DENicht|DEInfAttradj|DECon;DEPrep|DENicht|DEAttradj|DECon;2011.2
+271;40;DEGenitiv:DEDer|DEInfAttradj;^DEGenitiv|DEAttradj;2013.1-sde, added ^ to keep Posspron for ambiguous words, 02-12-2015-sde, added Der 2016-01-04-sde, moved down 2016-01-06-sde
+500;40;DEEiner|DEInfAttradj;DEGenitiv+DEIndefart|DEAttradj;2016-01-06-sde
+50;40;DEEin:DEKein:DEPrepart|DEInf;*|DECon;2011.2 (covered by 416 when capital is present), Ein->*, merged with r51 and r80 #23-sde
+73;40;DEDefart|DEInf|^DERelAux+^SEnd;DEDefart|DECon|*;2011.2 (covered by 416 when capital is present), added right context _sbse #4-sde, added ^SEnd for JDN245, _sbse #5-sde
+104;40;DENum|DEInf;DECon|DERel;2011.2
+325;40;"alle"|DEInf;DECon|DERel;2014.2-sde
+221;40;DEPosspron+^DESubjpron|DEInf;DEPosspron|DECon;2011.2
+228;40;SBegin|DERelCon|DEObjpron;*|DERel|DEObjpron;2013.1-sde imperative at the beginning of a sentence
+291;40;SBegin|DERelCon;*|DECon;2014.2-sde
+229;40;DERelCon+DECapitalInitial;DECon;2013.1-sde, moet na 138 staan
+54;40;DERelCon|DERel:DEInf;DECon|*;2011.2, Rel->*, merged with r55 #23-sde
+56;40;DESubjpron|DERelCon;DESubjpron|DERel;2011.2
+59;40;DEZu|DERelCon;DEZu|DERel;2011.2
+60;40;DERelCon|DESubjpron;DERel|DESubjpron;2011.2
+62;40;SBegin|DEObjpron|DERelCon;*|DEObjpron|DERel;2011.2
+65;40;DEIndefart:DEDefart:DEAttradj:DEPosspron:DEPrep:DEEin|DERelCon;*|DECon;2011.2, Indefart->*, merged with r67, r71, r100, r119 and r69 #23-sde
+72;40;DENicht|DERelCon;DENicht|DERel;2011.2
+64;40;DERelCon|DERelCon;DECon|DERel;2011.2
+115;40;DECon|DERelCon;DECon|DERel;2011.2
+169;40;DEPrep|DEDemonstrativ|DERelCon;DEPrep|DEDemonstrativ|DECon;2011.2
+68;40;DERelCon|DEIndefart;DERel|DEIndefart;2011.2
+74;40;DERelCon|DERefl;DERel|DERefl;2011.2
+81;40;DEPredadj|DERelCon;DEPredadj|DERel;2011.2
+120;40;DEAdv|DERelCon|DERelAux;DEAdv|DERel|DERelAux;2011.2
+142;40;DEZeit|DERelCon|DERelAux;DEZeit|DERel|DERelAux;2011.2
+193;40;DERelAux|DERelCon|SEnd;DERelAux|DERel|*;2011.2
+494;40;DEVielWenig|DERelCon;DEBeginadj|DECon;2016-01-04-sde
+70;40;DERelCon;DERel;2011.2, defaultregel, changed DECon into DERel after insertion of rule 229
+110;40;DEPrep:DEDefart:DEIndefart|DERelConMod;*|^DEAttradj;2011.2, added ^ to keep CapitalInitial 10-12-2015-sde, Prep->*, merged with r108 and r107 #23-sde
+187;40;DECon|DEGenitiv|DERelConMod;^DECon|DEGenitiv|^DECon;2011.2, note: Posspron gets overwritten, added ^ to keep CapitalInitial 10-12-2015-sde
+183;40;DEAttradj|DERelConMod;DEAttradj|^DECon;aangepast in 2011.2, added ^ to keep CapitalInitial 10-12-2015-sde
+181;40;DERelConMod|DERelAux:DEDefart:DEObjpron:DEDemonstrativ;DERel|*;2011.2, RelAux->*, merged with r184, r185 and r186 #23-sde
+188;40;DESubjpron|DERelConMod;DESubjpron|DERel;2011.2
+182;40;DERelConMod;^DECon;2011.2, added ^ to keep CapitalInitial 10-12-2015-sde
+495;40;DEVielWenig|DEPredadj;DEAdv+DEAdvDegree|^DEPredadj;2016-01-04-sde
+496;40;DEVielWenig;DEBeginadj+DEIndefpron;temporary default
+413;40;SBegin|DEPosspron+DEGenitiv;*|DEPosspron;02-12-2015-sde
+414;40;^DEPrep+^DEZu+^DEPunctuation+^SBegin|DEPosspron+DEGenitiv;*|-DEPosspron;02-12-2015-sde, added ^SBegin for JDN245, _sbse #5-sde
+167;40;DECon|DEGenitiv|DECon:DENum;DECon|DEGenitiv|DECon;2011.2, dieses, moved up 10-12-2015-sde, merged with r178 #23-sde
+175;40;DECon|DEGenitiv|DEAttradj|DECon;DECon|DEGenitiv|DEAttradj|DECon;2011.2, moved up 10-12-2015-sde
+177;40;DENum|DEGenitiv|DECon;DECon|DEGenitiv|DECon;2011.2, moved up 10-12-2015-sde
+443;40;DECon|DEGenitiv|DECapitalInitial;DECon|DEGenitiv|DECon+DECapitalInitial;10-12-2015-sde
+189;40;DECon|DEDer;DECon|DEGenitiv;2011.2
+191;40;DENum|DEDer:DEEiner:DEEines;DENum|DEGenitiv;2011.2, merged with r77 and r78 #23-sde
+190;40;DEDer;DEDefart;2011.2
+3;40;DECon|DEEiner|DECon;DECon|DEGenitiv|DECon;2011.2
+46;40;DECon|DEEines:DEEiner|DEAdv:DENicht|DECon:DEAttradj;DECon|DEGenitiv|*|*;2011.2, aangepast in 2011.2, added Nicht and adapted right part 2016-01-07-sde, Con->*, merged with r45, r48 and r47 #23-sde
+21;40;DECon|DEEiner:DEEines|DEAttradj:DEBeginadj:DEGeoadj;DECon|DEGenitiv|*;2011.2, added Beginadj and adapted right part 2016-01-07-sde, merged with r24, r29 and part of r22 #23-sde
+22;40;DECon|DEEines|DEPredadj;DECon|DEGenitiv|*;2011.2, added Predadj and Beginadj and adapted right part 2016-01-07-sde, partly integrated in r21, removed labels covered by r21 #23-sde
+554;40;"deren";+DEDefart;treat 'deren' like a Defart in order to detect it as a relative pronoun, _sbse #4-sde
+195;40;DEKomma|DEDefart|DEPrep:DEPart:DEConj:DENegRel:DENicht;DEKomma|DEConj+DERelconj|*;2011.2, added options and Relconj _sbse #4
+543;40;DEKomma|DEDefart|DESubjpron:DEObjpron:DEDefart:DEBeginadj:DEEin:DEIndefart:DEKein:DEPosspron;*|DEConj+DERelconj|*;_sbse #4-sde
+546;40;DEKomma+^DEHyphen|DEDefart|DEAdv:DEPredadj;*|DEConj+DERelconj|*;_sbse #4-sde, stricter rule for context with adverb
+547;40;DEKomma|DEDefart|*DERel:DERelAux:DEZuInf:DEInf|DEKomma:DEAndOrBut:DEPunctuation;*|DEConj+DERelconj|*|*;_sbse #4-sde
+544;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|*DEInf:DERel:DERelAux+^DEZu|DEKomma:DEAndOrBut;*|*|DEConj+DERelconj|*|*|*;_sbse #4-sde, added ^SBegin for JDN245, _sbse #5-sde
+548;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEPart|*DEInf:DERel:DERelAux+^DEZu|DEKomma:DEAndOrBut;*|*|DEConj+DERelconj|*|*|*|*;variant of 544, _sbse #4-sde, added ^SBegin for JDN245, _sbse #5-sde
+545;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|*DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*;_sbse #4-sde, added ^SBegin and changed part with SEnd for JDN245, _sbse #5-sde
+606;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEInf:DERel:DERelAux:DEPart+^DEZu|*DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*|*;extra rule needed to cover the original r545, _sbse #5
+607;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEInf:DERel:DERelAux:DEPart+^DEZu|DEInf:DERel:DERelAux:DEPart+^DEZu|DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*|*|*;extra rule needed for 'worden' to cover the original r545, _sbse #5-sde
+549;40;DEKomma+^DEHyphen|DEDefart|DEZu|^typeRelation;*|DEConj+DERelconj|*|*;_sbse #4-sde
+550;40;DEKomma+^DEHyphen|DEDefart|DEKomma;*|DEConj+DERelconj|*;_sbse #4-sde
+553;40;DEDefart+DEPosspron;-DEDefart;cleaning rule for 'deren' _sbse #4-sde
+2;40;DEDefart|DERefl:DEDemonstrativ;DEConj+DERelconj|*;2011.2, Refl->*, merged with r6 #23-sde
+222;40;DEPredadj|DEPredadj;DEPredadj|DEAdj;2011.2, has to preceed rule 214
+214;40;DEWie|DEPredadj;DEConj|DEAdj;2011.2
+212;40;DEDefart|DEConj;DEDefart|DEPrep;2011.2
+488;40;DEKomma|DEPrep|DEDefart:DEDenen|DEDefart:DEDer;*|DEConj+DERelconj|Join|*;29-12-2015-sde, added +Relconj _sbse #4-sde, added Denen #24-sde
+215;40;DEConj;DEConj;2011.2
+211;40;DEDefart|DEPrep|DEObjpron;DEDefart|DEPrep|DECon;2011.2
+52;40;DEDefart|DEPrepart|DECon|DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DECon|DEAttradj;2011.2, has to be after rule 190, merged with r94 #23-sde
+180;40;DEDefart|DEPrep|DEDefart|DECon|DEAttradj:DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DEAttradj|DECon|DEAttradj;2011.2, merged with r53 and r95 #23-sde
+134;40;DEDefart|DEPrep|DECon|DEVerbAdj:DEAttradj|DECon;DEDefart|DEAttradj|DECon|DEAttradj|DECon;2011.2, merged with r210 #23-sde
+194;40;DEDefart|DEPrep|DEAdv|DEAttradj|DECon;DEDefart|DEAttradj|DECon|DEAttradj|DECon;2011.2
+136;40;DEDefart|DEPrep|DECon:DENum|DECon|DEVerbAdj|DECon;DEDefart|DEAttradj|DECon|DECon|DEAttradj|DECon;2011.2, merged with r179 #23-sde
+219;40;DEPrep|DEPrep|DECon|DEVerbAdj:DEAttradj|DECon;DEPrep|DECon|DECon|DEAttradj|DECon;2011.2, merged with r220 #23-sde
+301;40;DEIndefart|DEAdv|DEPredadj:DEAttradj;DEIndefart|DEAttradj|DEAttradj;2014.2-sde, merged with r303 #23-sde
+426;40;DEIndefart:DEEin|DEAdv|DECon;DEIndefart|DEAttradj|DECon;03-12-2015-sde
+9;40;DESein|DEKomma:DEPunctuation:SEnd;DERel|*;2011.2, extended and adapted 03-12-2015-sde, merged with r8 #23-sde
+11;40;DEPart|DESein;DEPart|DERel;2011.2
+218;40;DEZu|DESein;DEZu|DERel;2011.2
+420;40;DESein|DEPrep;DEPosspron|DEPrep;03-12-2015-sde
+419;40;DESein|typeRelation;DERel|*;03-12-2015-sde
+418;40;DESein;DEPosspron;default for remaining cases, 03-12-2015-sde
+562;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+559;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+555;40;DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join;_sbse #4-sde
+563;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+564;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+556;40;DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|+Join;_sbse #4-sde
+565;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+566;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|+Join|Join|Join|+Join;_sbse #4-sde
+561;40;DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|+Join;_sbse #4-sde
+557;40;DECon|"@connect@"|DEAndOrBut|DERel:DEInf;DERel|Join|Join|+Join;_sbse #4-sde
+560;40;DECon|"@connect@"|DEAndOrBut|DEZuInf;DEZuInf|Join|Join|+Join;_sbse #4-sde
+558;40;DECon|"@connect@";^DECon|Join;to avoid that @connect@ disturbs other rules, _sbse #4-sde
+96;40;DEPrep|DEIndefart:DEEiner|DEPredadj|DEVerbAdj;DEPrep|*|DEPredadj|DEAttradj;2011.2, Indefart->*, merged with r98 #23-sde
+158;40;DESo|DEPredadj;DESo|DECon;2011.2
+161;40;DEZu|DEPredadj|DEAttradj;DEPrep|DEAttradj|DEAttradj;2011.2
+160;40;DENicht|DEZu|DEPredadj;DEBeginadj+DENegation|DEAdj|DEAdj;2011.2, added DENegation 2013.1-sde
+159;40;DEZu|DEPredadj;DEBeginadj|DEAdj;2011.2
+155;40;DEPredadj|DENicht;DEAdv|DENicht;2011.2
+35;40;DENicht|DEPredadj;DEBeginadj+DENegation|DEAdj;2011.2, added DENegation 2013.1-sde
+156;40;DEPredadj|DEDefart:DEIndefart;DEAdv|*;2011.2, Defart->*, merged with r157 #23-sde
+82;40;DECon|DEPredadj|DERel:DEPart;DECon|DERel|DERel;2011.2, merged with r87 #23-sde
+49;40;DECon|DEPredadj;DECon|DEBeginadj;aangepast in 2011.2
+439;40;DEBeginadj|DEPredadj|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;04-12-2015-sde
+83;40;DESo|DEBeginadj;DESo|DEAdj;2011.2
+84;40;DESo|DERel:DERelAux;DEAdv|DERel;2011.2, merged with r117 #23-sde
+85;40;DESo|DEPart;DEAdv|DEPart;2011.2
+608;40;DEKomma|DESo|DECon+DECapitalInitial;*|DEAndOrBut|*;#24-sde
+644;40;SBegin:DEDoppelpunkt|"da"|^typeRelation;*|DEConj|*;new rule to replace r467-469 and r471-478
+470;40;SBegin:DEDoppelpunkt|"da"|DEPrep:DEPrepart:DERefl;*|DEConj|*;15-12-2015-sde, moved label Refl from r472 to group Relation labels in one rule #23-sde, added Doppelpunkt to merge this rule with r476
+510;40;"meinen"+DEAttradj;DEPosspron;remove conflicting relation label
+201;40;DEInfAttradj;DERel;default
+202;40;DEVerbAdj;DERel;default
+205;40;DEInf;DERel;default
+620;40;DEZu|^DERel+^DERelAux;DEPrep|*;zu->prep when no infinitive follows #24-sde
+621;40;DEPrep|SEnd;DEVerbteil|*;#24-sde
+5;40;DEIndefart;DENonRelevant;2011.2
+7;40;DEDefart;DENonRelevant;2011.2
+113;40;DEPredadj;DEPredadj;2011.2
+641;40;DEPrep|DEAdj|DEAttradj:DECon;*|^DEAttradj|*;#24-sde
+415;40;DEDemonstrativ|typeRelation;DESubjpron+DEObjpron|*;replaces and extends r165, r168 and r170, 02-12-2015-sde
+171;40;DEDemonstrativ|DEKomma:DEDoppelpunkt:DENonRelevant;DESubjpron|*;2011.2, changed Con into Subjpron 02-12-2015-sde, merged with r199 and r428 #23-sde
+646;40;DEDemonstrativ;DENonRelevant;reduces the number of labels to take into account in phase 70, #24-sde
+497;40;DEPosspron;DEPosspron;remove conflicting Genitiv label, 2016-01-05-sde
+223;40;DEKomma;+DEPunctuation;2012.1-sde, added '+' _sbse #4-sde
+238;40;DEDoppelpunkt;+DEPunctuation;2013.1-sde, added '+' _sbse #4-sde
+225;40;DEConIfCap;-DEConIfCap;2013.1-sde
+342;40;DEVerbteil+DEAdv;DEVerbteil;for Adv+Verbteil, 2014.2-sde
+512;40;"*"|DENum;DERel|^DENum;make * relation before number 2016-06-22-sde
+33;40;DENicht|DERel;DERel+DENegation|DERel;2011.2, added DENegation on 2013.1-sde
+32;40;DENicht|DECon;DEBeginadj+DENegation|DECon;2011.2, added DENegation on 2013.1-sde
+34;40;DENicht|DEAttradj;DEBeginadj+DENegation|DEAttradj;2011.2, added DENegation on 2013.1-sde
+36;40;DENicht|DEAdj;DEBeginadj+DENegation|DEAdj;2011.2, added DENegation on 2013.1-sde
+296;50;DEAdvDirection+^DEAdv;-DEAdvDirection;2014.2-sde
+297;50;DEAdvManner+^DEAdv;-DEAdvManner;2014.2-sde
+299;50;DEAdvModality+^DEAdv;-DEAdvModality;2014.2-sde
+304;50;DEAdvPlace+^DEAdv;-DEAdvPlace;2014.2-sde
+310;50;DEAdvDegree+^DEAdv;-DEAdvDegree;2014.2-sde
+427;50;DEAdvTemp+^DEAdv;-DEAdvTemp;03-12-2015-sde
+454;50;DEAdvTime+^DEAdv;-DEAdvTime;11-12-2015-sde
+307;50;"von"|DEAdvPlace;DEAdvDirection|+Join;2014.2-sde, added + 2016-03-31-sde
+306;50;"nach"|DEAdvPlace;DEAdvDirection|+Join;2014.2-sde, added + 2016-03-31-sde
+405;50;DEAdvDegree|DENicht:DEKein;DERAdv|*;Rule needed from 2016.2 because r311 comes before negation detection now, 01-12-2015-sde, ^Nicht->*, merged with r406 #23-sde
+511;50;DEAdvDegree|"nichts"+DESubjpron;DESubjpron+DEObjpron|+Join;2016-01-12-sde
+311;50;DEAdvDegree|DERel:DERelAux:DEPart:DEPrep:DEPrepart:DEConj;DERAdv|*;2014.2-sde, ^Rel->*, merged with r315, r321, r313, r317 and r323 #23-sde
+452;50;DEAdvDegree|DEEin;DEAdvDegree|DENum;11-12-2015-sde
+451;50;DEAdvDegree|DEVerbteil;DERAdv|^DEVerbteil;11-12-2015-sde
+319;50;DEAdvDegree|DENonRelevant:DEAdvNonrelevant;DERAdv|*;2014.2-sde, ^Nonrelevant->*, merged with r322 #32-sde
+314;50;DEAdvDegree|DENegation;DEBeginadj|-DEBeginadj-DEKein+DEAttradj;adverb of degree with non-DERel negation 2014.2-sde
+326;50;DEAdvDegree|DEBeginadj;DEAdvDegree|DEAdj;2014.2-sde, deleted ^ before Adj in right part 04-12-2015-sde
+483;50;DEAdvDegree|DEAnder;DEAdvDegree|DEAttradj;16-12-2015-sde
+335;50;DENonRelevant|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DENonRelevant|DEAttradj|*;2014.2-sde, merged with r445 and r446 #23-sde
+339;50;DEEin|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEEin|DEAttradj|*;2014.2-sde, merged with r446 and r457 #23-sde
+337;50;DEPrepart|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEPrepart|DEAttradj|*;2014.2-sde, merged with r444 and r458 #23-sde
+336;50;DENonRelevant|DEAdvTime:DEAdvTemp:DEAdvPlace|DECon;^DENonRelevant|DEAttradj|*;2014.2-sde, merged with r447 and r459 #23-sde
+338;50;DEPrepart|DEAdvTime:DEAdvTemp:DEAdvPlace|DECon;^DEPrepart|DEAttradj|*;2014.2-sde, merged with r449 and r461 #23-sde
+463;50;DEGenitiv|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEGenitiv|DEAttradj|*;14-12-2015-sde, merged with r464 and r465
+450;50;DENicht|DEAdvTemp;^DENicht|+Join;10-12-2015-sde, added + 2016-03-31-sde
+440;50;DEBeginadj|DEAdvNonrelevant:DEAdvModality|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;04-12-2015-sde, merged with r441 #23-sde
+285;50;DEAdvDirection;DEAdvDirection;preliminary rule, 2014.2-sde
+286;50;DEAdvManner;DEAdvManner;preliminary rule, 2014.2-sde
+287;50;DEAdvModality;DEAdvModality;preliminary rule, 2014.2-sde
+294;50;DEAdvNonrelevant;DEAdvNonrelevant;has to be before 305 because of dort, 2014.2-sde
+305;50;DEAdvPlace;DEAdvPlace;2014.2-sde
+292;50;DEAdvDegree;DECAdv;2014.2-sde
+334;50;DEAdvTime;DEAdvTime;2014.2-sde, replace RAdv by repetition of AdvTime 11-12-2015-sde
+423;50;DEAdvTemp;DEAdvTemp+DETime;03-12-2015-sde, added Time 16-12-2015-sde
+312;50;DERAdv;DERAdv;2014.2-sde
+453;50;DEJe;DERAdv;make 'je' relation (RAdv is not used in lexreps), 11-12-2015-sde
+284;50;DEAdv;DEAdvNonrelevant;2014.2-sde, Adv->AdvNonrelevant since Adv is typeOther anyway #24-sde
+615;50;DEAdvDirection:DEAdvManner:DEAdvModality:DEAdvNonrelevant:DEAdvPlace:DEAdvTime:DEAdvTemp:DERAdv;+DEAdv;add Adv label again for use in following phases, #24-sde
+429;50;DEIndefpron|typeRelation;DESubjpron|*;05-11-2015-sde, changed Rel into typeRelation 26-11-2015-sde
+434;50;DEIndefpron|DEPredadj;DESubjpron|^DEPredadj;05-11-2015-sde
+436;50;DEIndefpron|DEAdvTemp;DESubjpron|DEAdvTemp+DETime;04-12-2015-sde, added Time 16-12-2015-sde
+437;50;DEIndefpron|DEAdvTime;DESubjpron|DEAdvTime;04-12-2015-sde
+430;50;DEIndefpron|DEAdvNonrelevant:DENonRelevant:DEPunctuation:SEnd;DESubjpron|*;05-11-2015-sde, merged with r431, r433 and r480 #23-sde
+432;50;DEIndefpron;-DEIndefpron;remove to avoid conflicts, 04-12-2015-sde
+482;50;DEAnder+DECon;DECon;16-12-2015-sde
+484;50;typeConcept|"anderer":"derselben":"desselben"|typeConcept;*|DECon|*;21-12-2015-sde, added derselben and desselben 2016-01-11-sde
+485;50;DENum|DEAnder;DEAttradj|DEAttradj;21-12-2015-sde
+481;50;DEAnder;DEAnder;16-12-2015-sde
+442;50;DEAttradj+DEGenitiv;DEAttradj;clean up unused Genitiv label, 04-12-2015-sde
+438;50;DEAdjpron+^DEGenitiv;DEBeginadj;04-12-2015-sde
+489;50;DENonRelevant|DERelAux:DERel+^"zu";DESubjpron|*;2016-01-04-sde
+630;50;DENonRelevant|DEDoppelpunkt:SEnd;DEObjpron|*;#24-sde
+499;50;DEEiner|DEPrep:DEPrepart;DENonRelevant|*;exception to r498, 2016-01-06-sde
+501;50;DEPrep|DEEiner|^DEGenitiv+^DEAndOrBut;^DEPrep|DENonRelevant|*;2016-01-06-sde
+498;50;DEEiner|typeRelation;DESubjpron|*;2016-01-06-sde
+502;50;DEEines|SEnd:DEPunctuation;DEObjpron|*;2016-01-07-sde, merged with r503 #23-sde
+505;50;DEEines|DEPrep:DEPrepart;DEGenitiv|*;2016-01-07-sde
+504;50;DEEines|typeRelation;DESubjpron|*;2016-01-07-sde
+176;50;DENum;DECon;moved from phase 40 21-12-2015-sde
+529;60;DEHyphen;-DEKomma;_sbse #4-sde
+533;60;*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;4-element enumeration, _sbse #4-sde
+520;60;DEIndefart:DEEin|*DEAttradj:DECon|DEKomma|DEIndefart:DEEin|*DEAttradj:DECon|DEAndOr|DEIndefart:DEEin|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration, _sbse #4-sde
+521;60;DENonRelevant|*DEAttradj:DECon|DEKomma|DENonRelevant|*DEAttradj:DECon|DEAndOr|DENonRelevant|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration, _sbse #4-sde
+522;60;DEPosspron|*DEAttradj:DECon|DEKomma|DEPosspron|*DEAttradj:DECon|DEAndOr|DEPosspron|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration, _sbse #4-sde
+523;60;*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration, _sbse #4-sde
+524;60;DEIndefart:DEEin+^DEList|*DEAttradj:DECon|DEAndOr|DEIndefart:DEEin|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration, _sbse #4-sde
+525;60;DENonRelevant+^DEList|*DEAttradj:DECon|DEAndOr|DENonRelevant|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration, _sbse #4-sde
+526;60;DEPosspron+^DEList|*DEAttradj:DECon|DEAndOr|DEPosspron|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration, _sbse #4-sde
+623;60;DERel:DERelAux:DEPrep|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon|^DERel+^DERelAux;*|+DEList|+DEList|+DEList|*;#24-sde
+625;60;DEAttradj|DEKomma|DEAttradj|DECon;+DEList|+DEList|+DEList|+DEList;#24-sde
+629;60;*typeConcept|"zwischen"|*^typeRelation|"und"|*^typeRelation+^DEPunctuation+^DEKein;+DEList|+DEList|+DEList|+DEList|+DEList;#24-sde
+647;70;DEGeoadj;+DEAttradj;tijdelijke regel in afwachting van disambiguering Con-Attradj #24-sde
+206;70;DENicht;DERel+DENegation;default, added DENegation on 2013.1-sde
+232;70;DEKein;+DENegation;2013.1-sde
+264;70;DENegRel;DERel+DENegation;2013.1-sde
+587;70;DERelconj+DENegation;DEConj+DENegWord;for Relconj created by r513, _sbse #4-sde
+283;70;SBegin:DEKomma:DEAndOr|"ohne"|.^"zu"|"zu"|DERel:DERelAux;*|+DERel|*|*|*;for ohne, 2014.2-sde, extended _sbse #4-sde, extended #24-sde
+631;70;SBegin:DEKomma|DEAdv|"ohne"|.^"zu"|"zu"|DERel:DERelAux;*|*|+DERel|*|*|*;variant of r283, #24-sde
+588;70;"ohne"|.^"zu"+^DEZuInf|DEZuInf;+DERel|*|*;for ohne, variant of r283, _sbse #4-sde
+589;70;"ohne dass";+DERel;_sbse #4-sde
+590;70;"ohne"+^DERel;DEPrep+DENegation;(assign NegBegin later to avoid that expansion rules are applied), _sbse #4-sde
+233;70;DEKein;+DENegBegin;2013.1-sde
+239;70;DEBeginadj+DENegation;+DENegBegin;2013.1-sde
+234;70;DERel+DENegation;+DENegBegin;2013.1-sde
+235;70;DERel:DERelAux|DERel:DEBeginadj+DENegation;+DENegBegin|*;2013.1-sde, added RelAux and Beginadj _sbse #4-sde
+614;70;DERel:DERelAux|*DEAdv|DERel:DEBeginadj+DENegation;+DENegBegin|*|*;#24-sde
+616;70;DERel:DERelAux|*^DEPunctuation+^DEAndOrBut+^DERel|DERel+DENegation|SEnd:DEKomma;+DENegBegin|*|*|*;#24-sde
+619;70;DERelAux|*^DEPunctuation+^DEAndOrBut+^DERel|DERel+DENegation|DEPart:DERel:DEVerbteil|SEnd:DEKomma;+DENegBegin|*|*|*|*;#24-sde
+574;70;*DESubjpron:DEObjpron:DERefl|DERel:DERelAux+DENegBegin;+DENegBegin|*;variant of r236, _sbse #4-sde
+236;70;*DEAttradj:DECon|DERel:DERelAux:DERefl+DENegBegin;+DENegBegin|*;2013.1-sde, added Subjpron, Objpron and RelAux, replaced -NegBegin by *, _sbse #4-sde, added * and Attradj and Refl #24-sde
+583;70;DENegBegin|DEConj+DENegation|DEZuInf;-DENegBegin|*|*;restriction for r236, _sbse #4-sde
+584;70;DEConj+DENegation|"zu"|DERel|^DENegation;*|*|*|+DENegStop;restriction for r236, _sbse #4-sde
+585;70;DEConj+DENegation|DEZuInf|^DENegation;*|*|+DENegStop;restriction for r236, _sbse #4-sde
+266;70;*DEAttradj:DECon|DERelAux|DENegBegin+^DEKein;+DENegBegin|DERelAux|*;2013.1-sde, added ^Kein, replaced -NegBegin by *, _sbse #4-sde, Con->*Con and Attradj #24-sde
+636;70;*DECon|DEGenitiv:DEPrepart:DEPrep|DEAttradj|DECon+DENegBegin;+DENegBegin|*|*|*;combination of r272, r273 and r279 #24-sde
+626;70;*DEAttradj:DECon:DEGenitiv:DEPrepart:DEPrep:DENonRelevant:DEPosspron:DEAnder+^DENegBegin|DECon+DENegBegin;+DENegBegin|*;replacement for r267 r268 r269 r270 r277 and r278 #24-sde
+237;70;DECon|DEAndOrBut|DECon+DENegBegin;+DENegBegin|DERel|DECon;2013.1-sde
+572;70;*DERelAux:DERel:DESubjpron:DEObjpron+^DENegBegin|DENegBegin+^DEKein;+DENegBegin|*;_sbse #4-sde
+639;70;*DERelAux:DERel+^DENegBegin|*DEAdv|DENegBegin+^DEKein;+DENegBegin|*|*;#24-sde
+642;70;SBegin|*DEPosspron:DEAttradj:DECon:DEGenitiv|DERelAux:DERel+DENegBegin;*|+DENegBegin|*;#24-sde
+643;70;SBegin|^DEPrep|*DEPosspron:DEAttradj:DECon:DEGenitiv|DERelAux:DERel+DENegBegin;*|*|+DENegBegin|*;#24-sde
+573;70;DEConj|DENegBegin;+DENegBegin|-DENegBegin;_sbse #4-sde
+580;70;DEConj|DENonRelevant|DENegBegin;+DENegBegin|*|-DENegBegin;_sbse #4-sde, removed Demonstrativ: after introduction of r646 #24-sde
+649;70;DEConj|DERefl|DENonRelevant|DENegBegin;+DENegBegin|*|*|-DENegBegin;#24-sde
+577;70;*DECon|DEKomma|DERelconj+DENegBegin;+DENegBegin|*|*;include antecedent of relative clause, _sbse #4-sde
+578;70;DEList|.DEList+^DENegBegin|DEList+DENegBegin;+DENegBegin|*|*;_sbse #4-sde
+627;70;SBegin:DEDoppelpunkt:DEHyphen|DEPrep|DENegBegin;*|+DENegBegin|*;#24-sde
+628;70;SBegin:DEDoppelpunkt:DEHyphen|DEPrep+^DENegBegin|*DENonRelevant|DENegBegin;*|+DENegBegin|*|*;#24-sde
+632;70;SBegin:DEDoppelpunkt:DEHyphen|DEAdv|DEPrep|DENegBegin;*|*|+DENegBegin|*;#24-sde
+534;70;DENegBegin:DEInNegspan|^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, _sbse #4-sde
+600;70;DENegBegin:DEInNegspan|DEPrep+DENegation;*|+DEInNegspan;_sbse #4-sde
+601;70;DENegBegin:DEInNegspan|^DEInNegspan+^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, repetition of r534 for cases where rxxx has fired, _sbse #4-sde
+591;70;*DEAttradj:DECon|DEPrep+DENegation;+DENegBegin|*;_sbse #4-sde, has to be after r534-600-601 to avoid interference, added Attradj #24-sde
+602;70;DEList|.DEList+^DENegBegin|DEList+DENegBegin;+DENegBegin|*|*;repetition of r596 for results of r591
+567;70;DEDoppelpunkt|^DENegation;*|+DENegStop;_sbse #4-sde
+240;70;DEPunctuation|DEAndOrBut;*|+DENegStop;2013.1-sde
+618;70;DEKomma:DEDoppelpunkt|DEConj+^DENegBegin|DESubjpron;*|+DENegStop|*;#24-sde
+622;70;DEKomma+^DEList;+DENegStop;#24-sde
+624;70;SBegin:DEKomma:DEHyphen|DERel+DENegation|DEKomma+DENegStop;*|*|-DENegStop;correction of r622 #24-sde
+527;70;typeRelation|DEKomma+^DEList|DECon:DEAttradj;*|*|+DENegStop;specific case of r241, _sbse #4-sde
+241;70;DEPunctuation+^DEList|DECon;DEPunctuation|+DENegStop;2013.1-sde, adapted _sbse #4-sde
+528;70;DEPunctuation+^DEKomma|DECon:DEAttradj;DEPunctuation|+DENegStop;variant of r241 _sbse #4-sde
+246;70;DEPunctuation|DENonRelevant|DECon;DEPunctuation|DENonRelevant|+DENegStop;2013.1-sde, DENonRelevant covers DEIndefart, DEDefart and DEPosspron, Posspron not covered anymore since 02-12-2015-sde
+410;70;DEPunctuation|DEPosspron|DECon;DEPunctuation|+DENegStop|*;variant of 246 for Posspron 02-12-2015-sde, moved NegStop to pronoun _sbse #4-sde
+247;70;DEPunctuation|DEEin|DECon;DEPunctuation|DEEin|+DENegStop;2013.1-sde
+248;70;DEPunctuation|DEEiner|DECon;DEPunctuation|DEEiner|+DENegStop;2013.1-sde
+249;70;DEPunctuation|DEEines|DECon;DEPunctuation|DEEines|+DENegStop;2013.1-sde
+250;70;DEPunctuation|DERel:DERelAux;*|+DENegStop;2013.1-sde, added RelAux _sbse #4-sde, Punctuation->* #24-sde
+519;70;^DENegation+^SBegin|DEPunctuation|DEConj;*|DEPunctuation|+DENegStop;2007-02-23-sde, added ^SBegin for JDN245, _sbse #5-sde
+571;70;DERel+^DENegation|DENegation+^"weder"+^"noch"|DEPunctuation|DEConj;*|*|*|+DENegStop;_sbse #4-sde
+251;70;DEPunctuation+^DEDoppelpunkt|DEAdv|DERel;DEPunctuation|*|+DENegStop;2013.1-sde, Adv->*, added ^Doppelpunkt because r567 deals with it #24-sde
+252;70;DEPunctuation|DESubjpron:DEObjpron|DERel;DEPunctuation|+DENegStop|*;2013.1-sde, added Objpron for 'sie', moved NegStop to pronoun _sbse #4-sde
+265;70;DEPunctuation|DESo;DEPunctuation|+DENegStop;2013.1-sde
+253;70;DECon+^DENegWord|DEAndOrBut|DERel;DECon|+DENegStop|^DERel;2013.1-sde
+518;70;DEKein|*DECon:DEPrep:DEPrepart:DENonRelevant|DEPunctuation|typeRelation:typePathRelevant;*|*|*|+DENegStop;_sbse #4-sde
+537;70;DEKein|*DEAttradj:DECon|*DERelAux:DERel|DEAndOr|^SEnd|^SEnd;*|*|*|+DENegStop+DEBeginrel|*|*;_sbse #4-sde, added extra ^SEnd for JDN245, _sbse #5-sde
+542;70;DEKein|*DEAttradj:DECon:DEPrep:DEPrepart:DENonRelevant|*DERelAux:DERel|DEAndOr|^SEnd|^SEnd;*|*|*|+DENegStop+DEBeginrel|*|*;_sbse #4-sde, added extra ^SEnd for JDN245, _sbse #4-sde, removed Demonstrativ: after introduction of r646 #24-sde
+538;70;DEKein|*DEAttradj:DECon|*DERelAux:DERel:DEPart|DEKomma|^DENegBegin;*|*|*|*|+DENegStop;_sbse #4-sde
+539;70;DEKein|*DEAttradj:DECon|DEKomma+^DEList;*|*|+DENegStop;_sbse #4-sde
+536;70;DENegStop|*DEInNegspan+^DENegation+^DENegBegin;-DEInNegspan|-DEInNegspan;remove InNegspan markers outside span, _sbse #4-sde
+568;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|DERel:DERelAux|^DEPunctuation+^DEAndOrBut;*|+DENegStop+DEBeginrel|*|*;_sbse #4-sde
+581;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|*DEAdv|DERel:DERelAux|^DEPunctuation+^DEAndOrBut;*|+DENegStop+DEBeginrel|*|*|*;_sbse #4-sde
+640;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|*DEAdv|^DERel+^DERelAux+^DENegBegin;*|+DENegStop+DEBeginrel|*|*;#24-sde
+595;70;typeRelation+^DEInNegspan|DEAndOrBut|DEPrep+DENegation;*|+DEBeginrel|*;_sbse #4-sde
+569;70;DERel:DERelAux+DEInNegspan|DEAndOrBut+DENegStop|*DERel:DERelAux:DEZuInf+^SEnd|SEnd;*|-DENegStop-DEBeginrel|*|*;correction of the result of r568, _sbse #4-sde, adapted format _sbse #5-sde
+570;70;DERel:DERelAux+DEInNegspan|DEAndOrBut+DENegStop|*DERel:DERelAux:DEZuInf+^DENegation|DEPunctuation;*|-DENegStop-DEBeginrel|*|*;correction of the result of r568, rare, _sbse #4-sde
+638;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|DESubjpron;*|+DENegStop+DEBeginrel|*;#24-sde
+575;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;_sbse #4-sde
+637;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|*^typeConcept+^typeRelation|DENegBegin;*|+DENegStop+DEBeginrel|*|*;#24-sde
+635;70;DEAdv+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;#24-sde
+596;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|^DEInNegspan;+DENegBegin|*|*|+DENegStop;_sbse #4-sde, removed Demonstrativ: after introduction of r646 #24-sde
+599;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|DEInNegspan;+DENegBegin|*|*|*;_sbse #4-sde, removed Demonstrativ: after introduction of r646 #24-sde
+598;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv+^DENegBegin|DENegation:DENegBegin;+DENegBegin|*|*|*;_sbse #4-sde, removed Demonstrativ: after introduction of r646 #24-sde
+605;70;DEPrep+DENegation|DEObjpron|^DEInNegspan;+DENegBegin|*|+DENegStop;_sbse #4-sde
+597;70;DEPrep+DENegation|DENegBegin;+DENegBegin|*;_sbse #4-sde
+242;70;DENegStop+DENegBegin;-DENegStop;2013.1-sde, clean conflicting attributes
+243;70;DENegation+DENegStop;-DENegStop;2013.1-sde, no example found, but kept for security
+586;70;typeRelation+DENegation|.typeRelation+^DENegation+^DENegBegin+^DENegStop|typeRelation+DENegStop|.typeRelation+^DENegation+^DENegBegin|^typeRelation+^DENegBegin+^DENegation;*|*|*|*|+DENegStop;relation entity with negation marker and NegStop -> move NegStop to following entity, _sbse #4-sde
+594;70;typeRelation+DENegStop|.typeRelation+^DENegation+^DENegBegin+^DENegStop|DEPrep+DENegation;-DENegStop|*|*;relation entity with NegStop and negation marker -> remove NegStop, _sbse #4-sde
+244;70;DENegBegin|DENegBegin;^DENegBegin|-DENegBegin;2013.1-sde
+245;70;DENegBegin;-DENegStop;2013.1-sde
+530;70;DENegStop+^typeRelation+^typeConcept|^DENegation+^DENegBegin;*|+DENegStop;_sbse #4-sde
+579;70;DENegBegin+^typeRelation+^typeConcept+^typePathRelevant|^DENegBegin+^DENegStop;*|+DENegBegin;_sbse #4-sde
+354;80;DECon|DERel+DEPosSentiment;+DEPosSentimentBegin|-DEPosSentimentBegin;27-11-2014-sde
+355;80;DECon|DERel+DENegSentiment;+DENegSentimentBegin|-DENegSentimentBegin;27-11-2014-sde
+356;80;DECon|DERelAux|DEPosSentimentBegin;+DEPosSentimentBegin|DERelAux|-DEPosSentimentBegin;27-11-2014-sde
+357;80;DECon|DERelAux|DENegSentimentBegin;+DENegSentimentBegin|DERelAux|-DENegSentimentBegin;27-11-2014-sde
+358;80;DECon|DEGenitiv|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|-DEPosSentimentBegin;27-11-2014-sde
+359;80;DECon|DEGenitiv|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|-DENegSentimentBegin;27-11-2014-sde
+360;80;DECon|DEGenitiv|DECon|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|DECon|-DEPosSentimentBegin;27-11-2014-sde
+361;80;DECon|DEGenitiv|DECon|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|DECon|-DENegSentimentBegin;27-11-2014-sde
+362;80;DECon|DEGenitiv|DEAttradj|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|DEAttradj|-DEPosSentimentBegin;27-11-2014-sde
+363;80;DECon|DEGenitiv|DEAttradj|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|DEAttradj|-DENegSentimentBegin;27-11-2014-sde
+364;80;DECon|DEPrepart|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEPrepart|-DEPosSentimentBegin;27-11-2014-sde
+365;80;DECon|DEPrepart|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEPrepart|-DENegSentimentBegin;27-11-2014-sde
+366;80;DECon|DEPrepart|DECon|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEPrepart|DECon|-DEPosSentimentBegin;27-11-2014-sde
+367;80;DECon|DEPrepart|DECon|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEPrepart|DECon|-DENegSentimentBegin;27-11-2014-sde
+368;80;DECon|DEPrepart|DEAttradj|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEPrepart|DEAttradj|-DEPosSentimentBegin;27-11-2014-sde
+369;80;DECon|DEPrepart|DEAttradj|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEPrepart|DEAttradj|-DENegSentimentBegin;27-11-2014-sde
+370;80;DECon|DEPrep|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|^DEPrep|-DEPosSentimentBegin;27-11-2014-sde
+371;80;DECon|DEPrep|DECon+DENegSentimentBegin;+DENegSentimentBegin|^DEPrep|-DENegSentimentBegin;27-11-2014-sde
+372;80;DECon|DEPrep|DECon|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|^DEPrep|DECon|-DEPosSentimentBegin;27-11-2014-sde
+373;80;DECon|DEPrep|DECon|DECon+DENegSentimentBegin;+DENegSentimentBegin|^DEPrep|DECon|-DENegSentimentBegin;27-11-2014-sde
+374;80;DECon|DEPrep|DEAttradj|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|^DEPrep|DEAttradj|-DEPosSentimentBegin;27-11-2014-sde
+375;80;DECon|DEPrep|DEAttradj|DECon+DENegSentimentBegin;+DENegSentimentBegin|^DEPrep|DEAttradj|-DENegSentimentBegin;27-11-2014-sde
+376;80;DECon|DEGenitiv|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|-DEPosSentimentBegin;27-11-2014-sde, repetition of rule ...
+377;80;DECon|DEGenitiv|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|-DENegSentimentBegin;27-11-2014-sde, repetition of rule ...
+378;80;DECon|DEGenitiv|DECon|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|DECon|-DEPosSentimentBegin;27-11-2014-sde, repetition of rule ...
+379;80;DECon|DEGenitiv|DECon|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|DECon|-DENegSentimentBegin;27-11-2014-sde, repetition of rule ...
+380;80;DECon|DEAndOrBut|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DERel|DECon;27-11-2014-sde
+381;80;DECon|DEAndOrBut|DECon+DENegSentimentBegin;+DENegSentimentBegin|DERel|DECon;27-11-2014-sde
+382;80;DEPunctuation|DEAndOrBut;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+384;80;DEPunctuation|DECon;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+386;80;DEPunctuation|DENonRelevant:DEPosspron:DEEin:DEEiner:DEEines|DECon;DEPunctuation|*|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, DENonRelevant covers DEIndefart, DEDefart and DEPosspron, Posspron not covered anymore since 02-12-2015-sde, merged with r387, r411, r412, r388, r389, r390, r391, r392 and r393 #23-sde
+394;80;DEPunctuation|DERel;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+396;80;DEPunctuation|DEAdv|DERel;DEPunctuation|DEAdv|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+398;80;DEPunctuation|DESubjpron|DERel;DEPunctuation|DESubjpron|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+400;80;DEPunctuation|DESo;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;27-11-2014-sde, added NegSentimentStop  #23-sde
+402;80;DECon+^DEPosSentiment|DEAndOrBut|DERel;DECon|+DEPosSentimentStop+DENegSentimentStop|^DERel;27-11-2014-sde, added NegSentimentStop  #23-sde
+532;$;DEAndOr:DEAndOrBut+DEBeginrel;^DEBeginrel-DEAndOrBut;_sbse #4-sde
+347;$;DEPunctuation;^Punctuation;20-05-2014-sde

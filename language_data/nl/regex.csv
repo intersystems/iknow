@@ -1,0 +1,58 @@
+﻿/*number;\d+;
+/*dt-verb;[\p{Letter}]+dt;
+
+/*number-all;(\d+\-)?(\d+([\.\,]\d+)?)|((\d{1,3}[\,])?(\d{1,3}[\,])?\d+([\.\,]\d+)|(\.?\d+))
+number-all;[\-\<\>\+]?(\d+([\.\,]\d+)?)|((\d{1,3}[\,])?(\d{1,3}[\,])?\d+([\.\,]\d+)|(\.?\d+))
+number-simple;\d+
+
+/*number-big1;\d\d\d\d\d+ - not needed anymore: covered by number-all #6-sde
+/*number-big2;\d{1,3}[\.]\d\d\d - not needed anymore: covered by number-all #6-sde
+/*number-big3;\d{1,3}[\.]\d\d\d[\.]\d\d\d - not needed anymore: covered by number-all #6-sde
+number-ordinal1;\d+(de|-ste|ste)
+/*number-ordinal2;\d+-ste - integrated in number_ordinal1 2 #6-sde
+/*number-ordinal3;\d+de - integrated in number_ordinal1 2 #6-sde
+/*number-decimal;\d+[,]\d+ - not needed anymore: covered by number-all #6-sde
+number-percentage1;(\-|)\d+([\.\,]\d+)?(%|)?(\-\d+)?%
+/*number-percentage1;\d+%
+/*number-percentage2;\d+[,]\d+%
+/*number-percentage3;\d+[\.]\d+%
+/*number-range1;\d[\-]\d - replaced by lexrep #6-sde
+/*number-range2;\d[\-]\d\d - replaced by lexrep #6-sde
+/*number-range3;\d\d[\-]\d\d - replaced by lexrep #6-sde
+/*number-roman;(cm|cd|d?c{0,3})(xc|xl|x{0,3})(ix|iv|v?i{0,3})$ - tried and rejected: too many side-effects #6-sde
+
+date;([1-9]|0[1-9]|[1,2]\d|3[0,1])((-([1-9]|0[1-9]|[1][0-2])-)|(/([1-9]|0[1-9]|[1][0-2])/)|(\.([1-9]|0[1-9]|[1][0-2])\.))[0-9][0-9]([0-9][0-9])?
+
+/* Año con formato dd/mm/yyyy permitiendo también d/m/yyyy o dd/m/yyyy y d/mm/yyyy. Además controla los meses con 31 y 30 días y si es año bisiesto o no para el mes de febrero.
+/* Matches 	29/12/2006 | 29.12.2006 | 29-12-2006 | 1/1/2006 | 01/01/2006 | 29/2/2004
+/* Non-Matches 	29.12/2006 | 12/29/2006 | 29/2/2006
+/* Author Manuel Llavador
+/* doesn't work (makes Terminal crash): too long???: date;^((((0[13578]|10|12)([-./])(0[1-9]|[12][0-9]|3[01])([-./])(\d{4}))|((0[469]|1­1)([-./])([0][1-9]|[12][0-9]|30)([-./])(\d{4}))|((2)([-./])(0[1-9]|1[0-9]|2­[0-8])([-./])(\d{4}))|((2)(\.|-|\/)(29)([-./])([02468][048]00))|((2)([-./])­(29)([-./])([13579][26]00))|((2)([-./])(29)([-./])([0-9][0-9][0][48]))|((2)­([-./])(29)([-./])([0-9][0-9][2468][048]))|((2)([-./])(29)([-./])([0-9][0-9­][13579][26]))))$
+
+
+digitaltime1;([0-1]\d|[2][0-3])\:[0-5]\d(\:[0-5]\d)?
+digitaltime2;([0-1]\d|[2][0-3]|\d)[\:\.]([0-5]\d|\d)u
+digitaltime3;([0-1]\d|[2][0-3]|\d)u([0-5]\d|\d)
+
+
+footnote;\[\d{1,2}\]
+layout01;[#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=]+
+
+adj01;\d+-daags[e]?
+/*adj02;\d-daagse - integrated in adj01 #6-sde
+adj03;\d+-jarig[e]?
+/*adj04;\d-jarige - integrated in adj03 #6-sde
+adj05;\d+-koppig[e]?
+/*adj06;\d-koppige - integrated in adj05 #6-sde
+
+part01;aange.{3,}[rsflmb]d
+part02;aange.{3,}[kfshp]t
+part03;afge.{3,}[rsflmb]d
+part04;afge.{3,}[kfshp]t
+part05;bijeenge.{3,}[rsflmb]d
+part06;bijeenge.{3,}[kfshp]t
+part07;bijge.{3,}[rsflmb]d
+part08;bijge.{3,}[kfshp]t
+part09;doorge.{3,}[rsflmb]d
+part10;doorge.{3,}[kfshp]t
+part11;ge.{3,}eerd

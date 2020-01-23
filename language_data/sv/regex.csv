@@ -1,0 +1,122 @@
+﻿/* SWEDISH REGEX FILE
+
+/* Extra numbers
+numberdecimal;\d+[,]\d+
+
+/* Ordinal numbers
+numberordinal;\d+:e
+
+/* Year
+/*year01;[1-9][0-9]([0-9])([0-9])-talet  (doesn't work)
+year01;[1-9][0-9]{1,3}-talet
+
+/* Layout
+layout01;[#*\-+=][#*\-+=][#*\-+=][#*\-+=]+
+footnote;\[\d{1,2}\]
+
+/* S-FORMS
+sform00;.*s
+sform04;.*:s
+sform01;.*ernas
+sform06;.*ers
+sform03;.*ets
+sform05;.*ings
+sform02;.*ns
+sform07;.*res
+sform08;.*ors
+sform09;.*ndes
+sform10;[^o][a-zäöå]+ades
+
+
+/* OTHER ADJ
+adj01;.*ella
+adj02;.*iga
+adj03;.*iska
+adj04;.*åa
+adj05;.*bara
+adj06;.*ösa
+adj07;o.*ad
+adj08;.*åe
+adj09;.*ade
+adj10;.*ige
+adj11;.*sk
+adj12;.*ig
+adj13;.*samma
+adj14;.*gaste
+adj15;.*liknande
+adj16;.*iell
+adj19;.*[^b]bar
+adj20;.*dde
+adj21;.*frie
+adj22;.*ske
+adj23;.*ale
+adj24;.*ale
+/*adj25;.*ielle
+/*adj26;.*nelle
+/*adj27;.*uelle
+adj25;[a-zäöå].[inu]elle
+adj28;.*samme
+adj29;.*bare
+adj30;.*öse
+adj31;.*ive
+adj32;.*fria
+adj33;...+da
+adj35a;lära
+adj35b;.*llära
+adj35c;.*ulära
+adj35d;..*[^l]ära
+/* -lära -> noun (mentioned here to keep the alphabetical order of execution), -llära/-ulara -> adj, -ära -> adj, exceptions in lexreps
+adj36a;.*ala
+adj36b;.*skala
+adj36c;.*vala
+/* -skala - noun (mentioned here to keep the alphabetical order of execution), -vala - noun, [^kv]ala - adj
+adj37;.*enta
+/*adj38;..*siva
+/*adj39;..*tiva
+adj38;[a-zäöå]*[st]iva
+adj40;.*drivna
+adj41;.*iell
+adj42;.*inell
+adj43;.*onell
+adj44;..+urell
+adj45;..+uell
+
+
+/* ADVADJ
+/*advadj01;.*ellt
+/*advadj02;.*igt
+/*advadj03;.*iskt
+/*advadj01;([a-zäöå]+ellt|[a-zäöå]+igt|[a-zäöå]+iskt)
+/*advadj04;..+vt
+/*advadj05;.*elt
+/*advadj06;.*bart
+/*advadj07;.*löst
+/*advadj08;.*ckt
+/*advadj09;.*änkt
+/*advadj10;.*rkt
+/*advadj11;.*skt
+/*advadj12;.*fritt
+/*advadj13;.*samt
+/*advadj05;([a-zäöå]+elt|[a-zäöå]+bart|[a-zäöå]+löst|[a-zäöå]+ckt|[a-zäöå]+änkt|[a-zäöå]+rkt|[a-zäöå]+skt|[a-zäöå].fritt|[a-zäöå]+samt)
+
+advadj01;[a-zäöå-]*ellt
+advadj02;[a-zäöå-]*igt
+advadj03;[a-zäöå-]*iskt
+advadj04;[a-zäöå][a-zäöå-]+vt
+advadj05;[a-zäöå-]*elt
+advadj06;[a-zäöå-]*bart
+advadj07;[a-zäöå-]*löst
+advadj08;[a-zäöå-]*ckt
+advadj09;[a-zäöå-]*änkt
+advadj10;[a-zäöå-]*rkt
+advadj11;[a-zäöå-]*skt
+advadj12;[a-zäöå-]*fritt
+advadj13;[a-zäöå-]*samt
+
+/* CON
+/*noun01;.*arna
+/*noun02;.*erna
+/*noun03;.*orna
+/*noun04;.+/*tioner
+noun01;[a-zäöå]+[aeo]rna
+

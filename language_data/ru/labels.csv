@@ -1,0 +1,275 @@
+﻿/* Mandatory labels, now hard-coded into the engine
+/*;;Concept;typeConcept;mandatory label;0;2011.2;
+/*;;Join;typeOther;mandatory label since 2013.1 build 175;0;;
+/*;;Numeric;typeConcept;mandatory label since 2014.2 build 241;0;;
+/*;;Punctuation;typeEndConcept;mandatory label;0;2011.2;
+/*;;Relation;typeRelation;mandatory label;0;2011.2;
+/*;;SBegin;typeOther;mandatory label, beginning of sentence;0;2011.2;
+/*;;SEnd;typeOther;mandatory label, end of sentence;0;2011.2;
+/*;;Unknown;typeOther;mandatory label;0;2011.2;
+/*;;CapitalInitial;typeAttribute;mandatory label;0;2013.1;
+/*;;CapitalMixed;typeAttribute;mandatory label;0;2013.1;
+/*;;CapitalAll;typeAttribute;mandatory label;0;2013.1;
+/*;;NonSemantic;typeAttribute;garbage;0;2013.1;Entity(NonSemantic);
+/*;;NonRelevant;typeOther;voor CRC-detectie in testframework;0;20111219;
+
+/*PHASES
+/* PHASE 1: unified labels and user dictionary labels
+/* PHASE 38: idiomatic expressions, initials and names, disambiguation of Sreda
+/* PHASE 39: ambiguous endings of adjectives and nouns
+/* PHASE 40: all specific labels for adjectives and nouns are disambiguated in previous phases / general rules
+/* PHASE 50: attribute modifier / pathrelevant entities
+/* PHASE 70: negation
+/* PHASE 80: sentiment
+
+
+/* Variants of unified labels
+233;38,39,40,$;RUCapitalInitial;typeAttribute;language specific variant of unified label for capital initial;0;19-01-2015-nl;
+256;38,40,$;RUCapitalAll;typeAttribute;language specific variant of unified label for capital all;0;17-06-2015-nl;
+234;38,39,40,65,66,70,80,$;RUPunctuation;typeEndConcept;language specific variant of unified label for punctuation;0;19-01-2015-nl,used in rule with RUNegation,added phase 38,39,65 #63-nl,added phase 66 #65-nl;
+235;40,$;RURelation;typeRelation;language specific variant of unified label for general relation;0;19-01-2015-nl;
+236;40,$;RUNonRelevant;typeOther;language specific variant of unified label for general nonrelevant;0;19-01-2015-nl;
+
+/* Variant of user dictionary labels
+
+/* Mandatory attributes (Currently only Japanese)
+170;;Subject;typeAttribute;mandatory attribute;0;2013.1;
+171;;Object;typeAttribute;mandatory attribute;0;2013.1;
+172;;PrimaryRelation;typeAttribute;mandatory attribute;0;2013.1;
+
+/* Default label
+28;1,38,39,40,60,65,66,70,80,$;RUCon;typeConcept;default label;1;used in rule with RUNegation,added phase 38,60,65 #63-nl,added phase 66 #65-nl;
+
+/* RU labels
+277;1,40,66,$;RUAdvTime;typeAmbiguous;to make rules for advPR+time without using attribute time in phase 40;0;16-12-2015-nl,added phase 66 #65-nl;
+188;1,40,50,$;RUActobj;typeAmbiguous;personal pronoun as acting object;0;19-06-2013-nl;
+31;1,38,40,50,60,65,66,70,80,$;RUAdj;typeConcept;adjective;0;used in rule with RUNegation, added phase 60,65 #63-nl,added phase 66 #65-nl;
+212;1,39;RUAdjAccF;typeConcept;adjective accusative feminine;0;29-12-2014-nl,removed phase 40,$ #63-nl;
+222;1,39;RUAdjDatMN;typeConcept;adjective dative masculine/neuter;0;05-01-2015-nl,removed phase 40,$ #63-nl;
+208;1,38,39;RUAdjGDPIF;typeConcept;adjective genitive/dative/prepositional/instrumental feminine;0;15-12-2014-nl,removed phase 40,$ #63-nl;
+245;1,38,39,40,65,$;RUAdjGen;typeConcept;general label for genitive adjectives;0;13-05-2015-nl, added phase 65 #63-nl;
+203;1,39;RUAdjGenMN;typeConcept;adjective genitive masculine/neuter;0;03-12-2014-nl,removed phase 40,$ #63-nl;
+232;1,39;RUAdjGenPl;typeConcept;adjective genitive plural;0;19-01-2015-nl,removed phase 40,$ #63-nl;
+189;1,40,$;RUAdjInstr;typeConcept;adjective intstrumental;0;28-08-2013-nl,replaced by more specific label;
+223;1,39,40;RUAdjInstrMN/DatPl;typeConcept;adjective instrumental masculine/neuter or dative plural;0;12-01-2015-nl,removed phase $ #63-nl;
+/*224;1,39,40,$;RUAdjInstrMN;typeConcept;adjective instrumental masculine/neuter;0;12-01-2015-nl; -> deleted #63-nl, label not used
+206;1,39;RUAdjInstrPl;typeConcept;adjective instrumental plural;0;08-12-2014-nl,removed phase 40,$ #63-nl;
+215;1,39;RUAdjNomAccPl;typeConcept;adjective nominative/accusative plural;0;29-12-2014-nl,removed phase 40,$ #63-nl;
+200;1,39;RUAdjNomF;typeConcept;adjective nominative feminine;0;26-11-2014-nl,removed phase 40,$ #63-nl;
+209;1,39;RUAdjNomM;typeConcept;adjective nominative masculine;0;17-12-2014-nl,removed phase 40,$ #63-nl;
+198;1,39;RUAdjNomN;typeConcept;adjective nominative neuter;0;26-11-2014-nl,removed phase 40,$ #63-nl;
+244;1,40,65,$;RUAdjPossibleBCon;typeConcept;adjective in nominative or accusative case, possibly BeginConcept;0;13-05-2015-nl,AdjNonGen->AdjBCon,added phase 65 #63-nl;
+226;1,39;RUAdjPreposMN;typeConcept;adjective prepositional masculine/neuter;0;14-01-2015-nl, renamed: RUAdjPrepMN->RUAdjPreposMN,removed phase 40,$ #63-nl;
+/*186;1,40,$;RUAdjsubobj;typeConcept;adjective with function of subject or object;0;03-06-2013-nl; -> deleted #63-nl, replaced by RUAdjPossibleBCon
+103;1,40,$;RUAdjtemp;typeConcept;adjective used in time expressions;0;;
+34;1,38,40,$;RUAdv;typeAmbiguous;adverb of manner;0;;
+270;1,38,40,50,60,65,66,70,$;RUAdvPR;typePathRelevant;pathrelevant adverbs of time and place;0;24-08-2015-nl,changed into PR 16-12-2015-nl, added phase 38,60,65,70 #63-nl,added phase 66 #65-nl;
+156;1,40,$;RUAdvaux;typeAmbiguous;modal adverb;0;;
+70;1,38,40,$;RUAdvdegree;typeAmbiguous;adverb of degree;0;Advgr->Advdegree #63-nl;
+73;1,38,40,$;RUAdvdegreeNR;typeAmbiguous;adverb of degree which sometimes becomes nonrelevant;0;AdvgrNR->AdvdegreeNR,added phase 38 #63-nl;
+56;1,40,$;RUAdvPred;typeAmbiguous;adverb or predicate;0;;
+159;1,40,$;RUAdvRefl;typeAmbiguous;adverb or reflexive pronoun;0;;
+6;1,39,40,60,65,66,70,80,$;RUAdvStruct;typeOther;nonrelevant adverb;0;renamed label for consistency with other KBs, NRAdv->AdvStruct,added phase 39,65, typeNonRelevant->typeOther #63-nl,added phase 60,66 #65-nl;
+/*77;1,40,$;RUAdvtemp;typeAmbiguous;adverb of time;0;; -> deleted #63-nl, not used anymore
+281;1,40,65,70,80,$;RUAndOrBut;typeRelation;'and'/'or'/'but';0;#63-nl;
+54;1,39,40,60,66,70,80,$;RUAndOr;typeRelation;'and'/'or';0;added phase 60,70 #63-nl,added phase 66 #65-nl;
+298;1,70;RUAntecedent;typeOther;extra label to limit expansion for antecedents;0;#63-nl;
+47;1,39,40,60,65,70,80,$;RUAux;typeRelation;auxiliary verb;0;used in rule with RUNegation, added phase 65 #63-nl,added phase 60 #65-nl;
+107;1,40,60,65,66,70,80,$;RUBCon;typeBeginConcept;begin concept;0;added phase 60,65,70 #63-nl,added phase 66 #65-nl;
+50;1,40,60,65,66,70,80,$;RUCAdv;typeConcept;adverb as concept;0;used in rule with RUNegation,added phase 65 #63-nl,added phase 66 #65-nl;
+227;1,39,40,70,$;RUBeginendconcept;typeBeginEndConcept;beginconcept plus endconcept;0;14-01-2015-nl, added phase 70 #63-nl;
+300;70,80,$;RUBeginrel;typeBeginRelation;used to manage attribute expansion;0;#63-nl;
+255;1,40,$;RUCapitalInitial2;typeAttribute;to use label in phase 40 without the risk that it is overwritten in phase 39;0;17-06-2015-nl;
+106;1,39,40,$;RUCent;typeAmbiguous;century;0;added phase 39 #63-nl;
+102;1,38,40,$;RUCfr;typeConcept;ranking number not used in time expressions;0;;
+194;1,38,40,$;RUCfrYear;typeConcept;cardinal number used as year;0;15-10-2014-nl,added phase 38 #64-nl;
+/*64;1,40,$;RUCInf;typeConcept;No Description;0;deleted label because of new approach for infinitives 21-10-2013-nl;
+53;1,38,40,60,65,66,70,80,$;RUComma;typeEndConcept;comma;0;Komma->Comma #63-nl, added phase 60,65,70,80 #64-nl,added phase 66 #65-nl;
+116;1,38,40,70;RUComp;typeRelation;comparative, not 'more'/'less';0;added phase 38,70, removed phase $ #63-nl;
+95;1,38,40,$;RUCompgr;typeAmbiguous;'more'/'less';0;added phase 38 #63-nl;
+/*213;1,39,40,$;RUConAccF/DatMN;typeConcept;noun accusative feminine or dative masculine/neuter;0;29-12-2014-nl;
+287;1,65,70;RUCond;typeAmbiguous;for lexreps containing the conditional 'бы' after which 'ни' doesn't express negation;0;#63-nl;
+246;1,39,40,65,$;RUConGen;typeConcept;general label for genitive nouns;0;13-05-2015-nl,added phase 65 #64-nl;
+217;1,39;RUConGenF/NomAccPl;typeConcept;noun genitive feminine or nominative/accusative plural;0;31-12-2014-nl,removed phase 40,$ #63-nl;
+202;1,39;RUConGenMN;typeConcept;noun genitive masculine/neuter;0;26-11-2014-nl,removed phase 40,$ #63-nl;
+/*218;1,39,40,$;RUConGenN;typeConcept;noun genitive neuter;0;31-12-2014-nl; -> deleted #63-nl, not used anymore
+207;1,39;RUConGenF;typeConcept;noun genitive feminine;0;15-12-2014-nl,removed phase 40,$ #63-nl;
+254;1,39;RUConGenPl;typeConcept;noun genitive plural;0;08-06-2015-nl,removed phase 40,$ #63-nl;
+174;1,40,$;RUConIfCap;typeConcept;make concept if capitalized;0;10-4-13-nl;
+175;1,40,$;RUConIfCap1;typeConcept;make concept if capitalized - for one-letter-words;0;11-4-13-nl;
+225;1,39;RUConInstrMN;typeConcept;noun instrumental masculine/neuter;0;12-01-2015-nl,removed phase 40,$ #63-nl;
+197;1,39;RUConInstrPl;typeConcept;noun instrumental plural;0;19-11-2014-nl,removed phase 40,$ #63-nl;
+243;1,40,70,$;RUConPossibleBCon;typeConcept;noun no genitive;0;13-05-2015-nl,ConNonGen->ConPossibleBCon,added phase 70 #63-nl;
+228;1,39,40;RUConPrepos;typeConcept;noun prepositional masculine/neuter;0;19-01-2015-nl,ConPrepMN->ConPrepos,$ #63-nl;
+295;1,40;RUConPreposPl;typeConcept;noun prepositional plural;0;#63-nl;
+/*231;1,39,40,$;RUConPrepN;typeConcept;not used;0;19-01-2015-nl;
+27;1,40,65,66,70,80,$;RUConj;typeRelation;conjunction;0;added phase 65,70 #63-nl,added phase 66 #65-nl;
+164;1,40,$;RUConjNR;typeAmbiguous;conjunction, can be nonrelevant;0;;
+/*229;1,40,$;RUConGDPF/PrepN/NomAccPl;typeConcept;No Description;0;19-01-2015-nl;
+/*230;1,40,$;RUConGDPF;typeConcept;noun genitive/dative/prepositional feminine;0;19-01-2015-nl;
+292;1,39;RUConGDP/NomAccPl;typeConcept;noun genitive/dative/prepositional sg. or nominative/accusative pl;0;#63-nl;
+293;1,39;RUConGDP;typeConcept;noun genitive/dative/prepositional sg.;0;#63-nl;
+130;1,40,70,80,$;RUConMod;typeConcept;concept with attribute modifier;0;used in rule with RUNegation;
+/*247;1,40,$;RUNoBCon;typeConcept;label to prevent from becoming beginconcept;0;13-05-2015-nl;
+/*251;1,40,$;RUConInstr;typeConcept;general noun instrumental;0;18-05-2015-nl; -> deleted #63-nl, not used anymore
+/*252;1,39,40,$;RUConNom;typeConcept;general noun nominative;0;27-05-2015-nl, added phase 39 #63-nl; -> deleted #63-nl, not used anymore
+/*250;1,39,40,$;RUConNomAccM;typeConcept;noun nominative/accusative masculine;0;13-05-2015-nl;
+216;1,39;RUConNomAccPl;typeConcept;noun nominative/accusative plural;0;31-12-2014-nl,removed phase 40,$ #63-nl;
+294;1,39;RUConNomAccPl_ambig;typeConcept;general label for ambiguous words that could be NomAccPl;0;#63-nl;
+214;1,39;RUConNomF/AccF;typeConcept;noun nominative/accusative feminine;0;29-12-2014-nl,removed phase 40,$ #63-nl;
+201;1,39;RUConNomF/GenMN/NomAccPl;typeConcept;noun nominative feminine or genitive masculine/neuter or nominative/accusative plural;0;26-11-2014-nl,removed phase 40,$ #63-nl;
+/*219;1,39,40,$;RUConNomF/GenN/NomAccPl;typeConcept;noun nominative feminine or genitive neuter or nominative/accusative plural;0;31-12-2014-nl; -> deleted #63-nl, covered by ConNomF/GenMN/NomAccPl
+211;1,39;RUConNomF/NomM;typeConcept;noun nominative feminine or masculine;0;29-12-2014-nl,removed phase 40,$ #63-nl;
+199;1,39;RUConNomF;typeConcept;noun nominative feminine;0;26-11-2014-nl,removed phase 40,$ #63-nl;
+210;1,39;RUConNom/AccM;typeConcept;noun nominative or accusative masculine;0;29-12-2014-nl, renamed ConNomM->ConNom/AccM,removed phase 40,$ #63-nl;
+290;1,39;RUConNomM/GenPl;typeConcept;noun nominative masculine / genitive plural;0;#63-nl;
+/*248;1,39,40,$;RUConNomAccM/GenPl;typeConcept;noun nominative/accusative masculine or genitive plural;0;13-05-2015-nl;
+196;1,39;RUConNomN;typeConcept;noun nominative neuter;0;19-11-2014-nl,removed phase 40,$ #63-nl;
+93;1,40,$;RUConVerb;typeAmbiguous;noun or conjugated verb;0;;
+165;1,40,$;RUDam;typeAmbiguous;specific word 'dam' (I give, dames);0;;
+100;1,40,$;RUDay;typeAmbiguous;days of the week;0;;
+43;1,38,39,40,50,65,70,80,$;RUDempron;typePathRelevant;demonstrative pronoun;0;changed type 16-12-2015-nl,added phase 38,39,65 #63-nl;
+/*265;1,40,$;RUDnem;typeConcept;specific word 'dnem';0;17-08-2015-nl;
+154;1,40,$;RUDostatotsjno;typeAmbiguous;specific word 'dostatotchno' (enough);0;;
+91;1,40,$;RUDrug;typeAmbiguous;part of reciprocal pronoun or noun, specific word 'drug' (friend, [part of] each other;0;;
+96;1,40,65,70,$;RUECon;typeEndConcept;end concept;0;added phase 65,70 #63-nl;
+193;1,40,$;RUEdva;typeAmbiguous;specific word 'edva' (barely);0;02-10-2014-nl;
+157;1,40,$;RUEto;typeAmbiguous;specific word 'eto' (this, this is);0;;
+115;1,38,40,66,70;RUHyphen;typeAmbiguous;hyphen;0;added phase 38,70, removed $ #63-nl,added phase 66 #65-nl;
+261;1,38,39,40,50,70,80,$;RUIndefpron;typeAmbiguous;general label for ALL indefinite pronouns;0;03-08-2015-nl,added phase 38,39,70 #63-nl;
+272;1,40,$;RUIndefpronAdvdegree;typeAmbiguous;for 'many' and 'little':adverb of degree OR indefinite pronoun;0;21-09-2015-nl;
+/*257;1,40,$;RUIndefpronNR;typeAmbiguous;indefinite pronoun,always nonrelevant except after preposition;0;03-08-2015-nl; -> deleted #63-nl, label is not used anymore
+258;1,40,50,65,70,$;RUIndefpronPR;typePathRelevant;indefinite pronoun,always pathrelevant or rewritten to pathrelevant pronoun;0;03-08-2015-nl,changed type 16-12-2015-nl, added phase 65 #63-nl;
+259;1,40,50,$;RUIndefpronPRNR;typeAmbiguous;indefinite pronoun,pathrelevant or nonrelevant;0;03-08-2015-nl;
+260;1,40,$;RUIndefpronPRCon;typeAmbiguous;indefinite pronoun,pathrelevant or concept;0;03-08-2015-nl;
+48;1,38,39,40,60,66,70,80,$;RUInf;typeRelation;infinitive;0;changed type to relation 21-10-2013-nl,used in rule with RUNegation, added phase 39,60 #63-nl,added phase 66 #65-nl;
+205;1,38,40,$;RUInitial;typeConcept;initial;0;06-12-2014-nl;
+134;1,40,65,$;RUIz;typeAmbiguous;specific word 'iz' (out);0;added phase 65 #63-nl;
+158;1,38,40,60,65,$;RUKAdj;typeAmbiguous;short adjective;0;added phase 38,60,65, removed phase 80 #63-nl;
+108;1,40,$;RUKazjdyj;typeConcept;specific word 'kazhdyj' (each);0;typeAmbiguous->typeConcept #63-nl;
+296;1,66,70;RUKotory;typeRelation;specific word 'kotory' (which);0;#63-nl,added phase 66 #65-nl;
+137;1,40,$;RUKoe;typeOther;specific word 'koe' (which);0;typeNonRelevant->typeOther #63-nl;
+280;1,40,66,$;RULayout;typeBeginEndConcept;for numbered lists;0;27-06-2016-nl,2016.4,added phase 66 #65-nl;
+23;1,39,40,60,70,$;RUmAux;typeRelation;modal auxiliary verb;0;#63-nl,added phase 60 #65-nl;
+99;1,40,$;RUMonth;typeAmbiguous;name of months;0;;
+264;1,40,$;RUMonthNom;typeConcept;name of months,nominative;0;17-08-2015-nl;
+268;1,40,$;RUNazad;typeConcept;nazad or cpustya;0;19-08-2015-nl;
+62;1,38,39,40,60,65,66,$;RUNe;typeAmbiguous;specific word 'ne' (not);0;added phase 38,39,65 #63-nl,added phase 60,66 #65-nl;
+286;1,70,$;RUNegBCon;typeBeginConcept;BeginConcept as Negation marker,extra label next to BCon;0;#63-nl,added phase $ #64-nl;
+301;1,65,70;RUNegComp;typeAmbiguous;extra label for comparative after 'ne';0;#64-nl;
+182;1,40,70,$;RUNegCon;typeConcept;negation marker as concept;0;28-05-2013-nl, added phase 70 #63-nl;
+278;1,38,40,66,70,$;RUNegPR;typePathRelevant;negation marker as pathrelevant;0;21-12-2015-nl,added phase 38,70 #63-nl,added phase 66 #65-nl;
+283;1,70;RUNegPR_part;typeAmbiguous;part of negation marker as pathrelevant;0;#63-nl;
+284;1,60,66,70;RUNegPred;typeRelation;predicate as Negation marker;0;#63-nl,added phase 60,66 #65-nl;
+285;1,70;RUNegPrep;typeRelation;preposition as Negation marker: 'without';0;#63-nl;
+183;1,38,60,65,66,70,80,$;RUNegRel;typeRelation;negation marker as relation;0;28-05-2013-nl,added NegRel, added phase 65,70, removed phase 40 #63-nl,added phase 60,66 #65-nl;
+184;1,8,40,70,80,$;RUNegRelpron;typeRelation;relative pronouns that serve as negation stop;0;28-05-2013-nl, added phase 70 #63-nl;
+11;1,40,$;RUNem;typeAmbiguous;specific word 'nem' (about him, mute);0;;
+84;1,40,$;RUNeskolko;typeAmbiguous;specific word 'neskolko' (some, a bit);0;;
+67;1,38,40,65,70,$;RUNi;typeAmbiguous;specific word 'ni' (nor);0;added phase 65,70 #63-nl;
+163;1,38,39,40,65,70,$;RUNikakoy;typeBeginConcept;specific word 'nikakoy' (not any);0;added phase 38,39,65,70,Ambiguous->Beginconcept #63-nl;
+267;1,40,65,$;RUNoBCon;typeConcept;this word cannot be bcon;0;19-08-2015-nl, added phase 65 #63-nl;
+263;1,40,$;RUNoECon;typeConcept;word preceding cannot be econ;0;17-08-2015-nl;
+127;1,40,70,80,$;RUNRCon;typeOther;nonrelevant with attribute pathrelevant object;0;used in rule with RUNegation, typeNonRelevant->typeOther #63-nl;
+138;1,40,$;RUNRConIz;typeOther;nonrelevant indefinite pronoun independently used, can be used before 'iz' (eg. some of ...);0;typeNonRelevant->typeOther #63-nl;
+126;1,40,60,65,66,70,$;RUNRPron;typeAmbiguous;nonrelevant pronouns;0;NRIndefpron->NRPron,added phase 60,65,70 #63-nl,added phase 66 #65-nl;
+/*133;1,40,$;RUNRIndefpronIz;typeAmbiguous;nonrelevant indefinite pronoun, can be used before 'iz' (eg. some of ...);0;; -> deleted #64-nl, not used anymore
+124;1,40,70,80,$;RUNRMod;typeOther;nonrelevant with attribute modifier;0;used in rule with RUNegation, typeNonRelevant->typeOther #63-nl;
+89;1,40,70,80,$;RUNRPrep;typeOther;preposition which has become nonrelevant;0;used in rule with RUNegation, typeNonRelevant->typeOther #63-nl;
+131;1,38,40,65,70,$;RUNum;typeConcept;cardinal number;0;added phase 38,65,70 #63-nl;
+161;1,39,40,$;RUObrazom;typeAmbiguous;specific word 'obrazom' (in ... way -> adverb);0;;
+71;1,40,$;RUOchota;typeAmbiguous;specific word 'okhota' (feel like, hunting);0;;
+271;1,40,65,$;RUOdin;typeAmbiguous;specific word 'odin,odnogo,...';0;21-09-2015-nl, added phase 65 #63-nl;
+/*192;1,40,$;RUOdinIz;typeAmbiguous;specifc word group 'odin iz' (one of);0;02-10-2014-nl; -> deleted #63-nl, label not used anymore
+141;1,40,$;RUOkolo;typeAmbiguous;specific word 'okolo' (close to, almost);0;;
+119;1,40,$;RUOsobenno;typeAmbiguous;specific word 'osobenno' (especially);0;;
+139;1,40,$;RUOtnositelno;typeAmbiguous;specific word 'otnositelno' (relatively, concerning);0;;
+1;1,40,60,65,66,70,$;RUPart;typeRelation;participle;0;added phase 65,70 #63-nl,added phase 60,66 #65-nl;
+142;1,38,40,50,$;RUPartActpf;typeAmbiguous;participle active perfectum;0;added phase 38 #63-nl;
+3;1,38,40,$;RUPartAdj;typeAmbiguous;participle or adjective;0;added phase 38 #63-nl;
+143;1,40,$;RUPartAdjSubst;typeAmbiguous;participle or adjective or noun;0;;
+104;1,40,$;RUPartAdjtemp;typeConcept;participle or adjective which can be used in time expressions;0;;
+/*276;1,50,$;RUPathRelevant;typePathRelevant;test;0;;
+5;1,38,40,50,65,66,70,80,$;RUPerspron;typePathRelevant;personal pronoun;0;changed type 16-12-2015-nl,added phase 65,70 #63-nl,added phase 66 #65-nl;
+291;1,39;RUPlusAcc;typeRelation;word that is followed by an accusative case;0;#63-nl;
+221;1,39;RUPlusAcc/Prepos;typeAmbiguous;word that is followed by an accusative or prepostional case;0;05-01-2015-nl, removed phase 40,$, renamed: RUPlusAcc/Prep->RUPlusAcc/Prepos #63-nl;
+220;1,39;RUPlusGen;typeAmbiguous;word that is followed by a genitive;0;05-01-2015-nl, removed phase 40,50,$ #63-nl;
+/*249;1,39,40,$;RUPlusNonGen;typeAmbiguous;word that cannot by followed by a genitive;0;13-05-2015-nl;
+162;1,40,$;RUPoka;typeAmbiguous;specific word 'poka' (bye, still);0;;
+19;1,38,39,40,50,60,65,70,80,$;RUPosspron;typePathRelevant;possessive pronoun;0;used in rule with RUNegation,changed type 16-12-2015-nl,added phase 38,39,60,65 #63-nl;
+204;1,40,$;RUPosspronGenMN;typeOther;possessive pronoun genitive masculine/neuter;0;03-12-2014-nl, typeNonRelevant->typeOther #63-nl;
+22;1,40,$;RUPravda;typeAmbiguous;specific word 'pravda' (truth, it is true);0;;
+46;1,40,60,65,66,70,80,$;RUPred;typeRelation;predicate;0;used in rule with RUNegation,added phase 65 #63-nl,added phase 60,66 #65-nl;
+18;1,38,39,40,65,66,70,80,$;RUPrep;typeRelation;preposition;0;changed from ambiguous 12-08-2015-nl,added phase 65 #63-nl,added phase 66 #65-nl;
+/*262;1,40,$;RUPrepTime;typeRelation;prepositions 'ago';0;12-08-2015-nl;
+80;1,40,$;RUPribyli;typeAmbiguous;specific word: noun or verb 'pribyli' (arrived, profit);0;;
+289;1,40,50,60,65,66,70,80,$;RUPRPron;typePathRelevant;pathrelevant pronouns;0;#63-nl,added phase 66 #65-nl;
+21;1,40,$;RUPtclVerb;typeAmbiguous;conjugated verb or particle;0;;
+86;1,39,40,$;RUPutjom;typeAmbiguous;specific word: noun or preposition 'putyom' (road, through);0;;
+51;1,40,50,60,65,66,70,80,$;RURAdv;typeRelation;adverb as relation;0;used in rule with RUNegation, added phase 65 #63-nl,added phase 60,66 #65-nl;
+269;1,40,$;RURanee;typeAmbiguous;specific word 'ranee';0;24-08-2015-nl;
+195;1,38,40,$;RURanking;typeConcept;ranking number in time expressions;0;15-10-2014-nl,added phase,removed phase 39 #63-nl;
+160;1,40,$;RURaz;typeAmbiguous;specific word 'raz' (time, times);0;;
+/*97;1,40,$;RURDempron;typeAmbiguous;demonstrative pronoun as relation;0;; -> deleted #63-nl, covered by Dempron
+151;1,40,$;RUDempronConj;typeAmbiguous;demonstrative pronoun or conjunction as relation;0;RDempronConj->DempronConj #63-nl;
+13;1,40,66,$;RURefl;typeAmbiguous;reflexive pronoun;0;added phase 66 #65-nl;
+12;1,40,60,65;RURelpron;typeRelation;relative pronoun;0;added phase 65,70 #63-nl,removed phase 70 and $ #64-nl,added phase 60 #65-nl;
+/*273;1,40,$;RURelpronPart1;typeRelation;1st part of relative pronoun;0;26-10-2015-nl; -> deleted #63-nl, commas are no longer part of relation in relpron
+/*274;1,40,$;RURelpronPart2;typeRelation;2nd part of relative pronoun;0;26-10-2015-nl; -> deleted #63-nl, commas are no longer part of relation in relpron
+/*275;1,40,$;RURelpronPart3;typeRelation;3rd part of relative pronoun;0;26-10-2015-nl; -> deleted #63-nl, commas are no longer part of relation in relpron
+155;1,40,70,$;RURepr;typeRelation;reciprocal pronoun;0;typeambiguous->typerelation, added phase 70 #63-nl;
+/*65;1,40,$;RURInf;typeRelation;No Description;0;deleted label because of new approach for infinitives 21-10-2013-nl;
+113;1,40,70,80,$;RURPrep;typeRelation;preposition as relation;0;used in rule with RUNegation;
+87;1,40,$;RUSamyj;typeAmbiguous;specific word 'samyj' (part of superlative);0;;
+279;1,40,$;RUSjtoto;typeAmbiguous;specific word 'sjto-to'(for combination with adjective);0;;
+190;1,38,$;RUSos;typeAmbiguous;specific word group 'v sostoyanii' (capable);0;02-10-2014-nl;
+253;1,38,40,$;RUSreda;typeAmbiguous;specific word 'sreda' (Wednesday or environment);0;27-05-2015-nl;
+121;1,40,$;RUSuffix;typeOther;suffix;0;typeNonRelevant->typeOther #63-nl;
+118;1,40,$;RUTak;typeAmbiguous;specific word 'tak' (so);0;;
+153;1,38,39,40,$;RUTakoj;typeAmbiguous;specific word 'takoy' (so);0;added phase 38,39 #63-nl;
+110;1,39,40,$;RUTemp;typeAmbiguous;expression of time, endconcept;0;;
+266;1,39,40,$;RUTempBeginEnd;typeConcept;expression of time, beginendconcept;0;17-08-2015-nl;
+16;1,40,$;RUTom;typeAmbiguous;specific word 'tom' (chapter, that);0;;
+33;1,40,$;RUTsjasje;typeAmbiguous;specific word: noun or adverb 'tshashtshe' (bush, more often);0;;
+187;1,38,$;RUTsjasti;typeAmbiguous;specific word 'chasti' (part, part of) ;0;10-06-2013-nl;
+15;1,38,39,40,60,65,66,70,80,$;RUVerb;typeRelation;conjugated verb;0;used in rule with RUNegation,added phase 65 #63-nl,added phase 60,66 #65-nl;
+/*237;1,40,$;RUVerbCapital;typeAmbiguous;No Description;0;;
+41;1,40,$;RUVerbCon;typeAmbiguous;conjugated verb or noun;0;;
+85;1,40,$;RUVesti;typeAmbiguous;specific word: noun or verb 'vesti' (news, lead);0;;
+136;1,40,$;RUVsego;typeAmbiguous;specific word 'vsego' (in total, of the entire);0;;
+79;1,40,$;RUVsjo;typeAmbiguous;specific word 'vsyo' (whole/entire, ever [more]);0;;
+191;1,38,$;RUV;typeAmbiguous;preposition 'v' (in, to);0;02-10-2014-nl;
+112;1,39,40,$;RUWeek;typeAmbiguous;words for 'week' or 'month';0;;
+101;1,39,40,$;RUYear;typeAmbiguous;words for 'year';0;added phase 39 #63-nl;
+
+/* RU attributes
+176;70,$;RUNegBegin;typeAttribute;to begin the negation path;0;16-04-13-nl;Path(Begin,Negation)
+177;70,$;RUNegation;typeAttribute;to mark certain entities as negation;0;16-04-13-nl,removed phase 80 #65-nl;Entity(Negation)
+179;70,$;RUNegStop;typeAttribute;to end the negation path;0;17-04-13-nl,removed phase 40, added phase 70 #63-nl;Path(End,Negation)
+288;70,80;RUNoExpansion;typeAttribute;to mark certain entities for which there shouldn't be expansion;0;#63-nl,added phase 80 #64-nl;
+299;70;RUInNegspan;typeAttribute;temporary marker for entities in a negation span;0;#63-nl;
+302;70;RUInBezNegspan;typeAttribute;temporary marker for entities in a negation span after 'bez';0;#64-nl;
+297;60,66,70,80;RUList;typeAttribute;attribute for items in an enumeration;0;#63-nl, added phase 80 #64-nl,added phase 66 #65-nl;
+
+181;70,$;RUTime;typeAttribute;modifier;0;17-04-13-nl,test 70 to be removed again;Entity(DateTime)
+185;40,$;RUDummy;typeAttribute;23-04-13, meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;;
+237;80,$;RUPosSentiment;typeAttribute;for sentiment markers;0;16-03-2015-nl;Entity(PositiveSentiment)
+238;80,$;RUPosSentimentBegin;typeAttribute;for sentiment markers;0;16-03-2015-nl;Path(Begin,PositiveSentiment)
+239;80,$;RUPosSentimentStop;typeAttribute;for sentiment markers;0;16-03-2015-nl,added phase 80 #64-nl;Path(End,PositiveSentiment)
+240;80,$;RUNegSentiment;typeAttribute;for sentiment markers;0;16-03-2015-nl;Entity(NegativeSentiment)
+241;80,$;RUNegSentimentBegin;typeAttribute;for sentiment markers;0;16-03-2015-nl;Path(Begin,NegativeSentiment)
+242;80,$;RUNegSentimentStop;typeAttribute;for sentiment markers;0;16-03-2015-nl,added phase 80 #64-nl;Path(End,NegativeSentiment)
+
+304;66,70;RUBracket1;typeAttribute;opening bracket, defined as attribute to avoid interference with punctuation label;0;#65-nl;
+305;66,70;RUBracket2;typeAttribute;closing bracket, defined as attribute to avoid interference with punctuation label;0;#65-nl;
+308;66;RUInclPunct;typeAttribute;structural adverb starting with a comma, which makes difference in pattern for sentence structure detection;0;#65-nl;
+
+303;1,66,70,$;RUPBegin;typeAttribute;to mark entities starting a phrase;0;#65-nl;
+306;1,66;RUPossiblePBegin;typeAttribute;to mark candidates for the 'phrase begin' attribute;0;#65-nl;
+307;1,66;RUNotMarkerPB;typeAttribute;to mark punctuation (hyphen) which is NOT followed by a phrase-begin;0;#65-nl;
+
+/*LABELS NOT USED
+/*180;40,$;RUPathRelObj;typeAttribute;to mark certain non-relevant as relevant for a path;0;17-04-13-nl;Entity(PathRelevant)
+/*178;50,$;RUMod;typeAttribute;modifier,used to mark PathRelevant entities;0;17-04-13-nl;Entity(Modifier)-replaced by pathrelevant label 16-12-2015-nl
+/*132;1,40,$;RUNRIndefpronNR;typeAmbiguous;nonrelevant indefinite pronoun or nonrelevant adverb;0;;
+/*125;1,40,$;RUCIndefpron;typeAmbiguous;indefinite pronoun which can be a concept;0;;removed 05-08-2015-nl

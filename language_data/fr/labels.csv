@@ -1,0 +1,138 @@
+﻿/* Mandatory labels and attributes are unified (TRW1207)
+/* Mandatory labels: Concept, Relation, Unknown, NonRelevant, Punctuation, SBegin, SEnd, Numeric
+/* Mandatory attributes: CapitalAll, CapitalInitial, CapitalMixed, NonSemantic
+
+/*PHASES
+/*40: general
+/*70: negation
+/*80: sentiment
+
+/* Variants of unified labels
+89;40,50,60,$;FRCapitalInitial;typeAttribute;No Description;0;09-04-2015-nl;
+90;40,60,$;FRCapitalAll;typeAttribute;No Description;0;09-04-2015-nl;
+94;40,60,$;FRCapitalMixed;typeAttribute;No Description;0;09-04-2015-nl;
+91;40,50,60,70,80,$;FRPunctuation;typeEndConcept;No Description;0;09-04-2015-nl;
+92;40,60,$;FRRelation;typeRelation;No Description;0;09-04-2015-nl;
+93;40,60,$;FRNonRelevant;typeOther;No Description;0;09-04-2015-nl;
+118;40;FRUDConcept;typeConcept;;0;2016-03-30-sde;
+
+/* Required labels (TRW1207)
+84;1,$;Subject;typeAttribute;;0;2013.1;
+85;1,$;Object;typeAttribute;;0;2013.1;
+86;1,$;PrimaryRelation;typeAttribute;;0;2013.1;
+
+/* Default label
+3;1,30,40,50,60,70,80,$;FRCon;typeConcept;default, 2011.2;1;;
+
+/* FR labels
+49;1,40,$;-;typeOther;symbol for composite labels;0;2013.1-sde;
+6;1,20,40,50,70,80,$;FRAdv;typeOther;bijwoorden;0;2011.2, added phase 20 2016-12-07-sde;
+116;1,30,40;FRAdvCon;typeOther;adverb or noun;0;2016-03-15-sde;
+63;1,40;FRAdvCR;typeRelation;adverb that becomes a concept or relation;0;2013.1-sde, changed from typeRelation for an experiment 2016-02-02-sde;
+57;1,30,40,50,60,$;FRAdvDegree;typeRelation;adverb of degree;0;2013.1-sde;
+53;1,30,50,60,$;FRAdvLoc;typePathRelevant;location;0;2013.1-sde, changed type from relation 2016-01-28-sde;
+56;1,30,50,60,$;FRAdvManner;typeRelation;manner;0;2013.1-sde;
+59;1,20,30,50,60,$;FRAdvModal;typeRelation;modal adverb;0;2013.1-sde, added phase 20 #35-sde;
+114;1,20,30,40,50,60,70,90,$;FRAdvNeg;typeRelation;negation adverb;0;2016-02-18-sde, added phase 90 2016-11-24-sde, added phase 70 2016-12-06-sde;
+60;1,30,40,50,60,70,$;FRAdvNR;typeOther;NonRelevant adverbs;0;2013.1-sde, added phase 70 #35-de;
+54;1,30,50,60,70,$;FRAdvTemp;typePathRelevant;vague time or frequency;0;2013.1-sde, renamed from AdvTime and changed type from relation 2016-01-27-sde, added phase 70 #35-sde;
+106;1,50,60,70,$;FRAdvTime;typeBeginEndConcept;more or less concrete time or frequency;0;2016-01-27-sde, added phase 70 #35-sde;
+76;1,20,40,60,70,$;FRAucun;typeConcept;aucun, aucune, 2013.1-sde;0;added phase 70 2016-11-03-sde, added phase 20 2016-11-08-sde;
+110;1,30,40;FRAuDu;typeRelation;au, du, 2016-02-09-sde;0;;
+61;1,40,60,$;FRAussi;typeOther;aussi, separate label because of aussi X que;0;2013.1-sde;
+101;1,50,60,70,$;FRAutre;typePathRelevant;autre(s);0;2016-01-14-sde, added phase 70 2016-12-06-sde;
+31;1,40,60,$;FRAvoir;typeConcept;avoir;0;2011.2;
+103;1,40,50;FRBeaucoup;typeConcept;beaucoup, peu;0;2016-01-22-sde;
+32;1,40,60,70,80,$;FRBegin;typeBeginConcept;;0;2011.2;
+122;1,70,90,$;FRBeginrel;typeBeginRelation;;0;2016-11-23-sde;
+37;1,30,40,60,70;FRComma;typeEndConcept;komma;0;2011.2, removed phase $ 2016-12-02-sde, added phase 70 #35-sde;
+68;1,40,60,$;FRConIfCap;typeOther;concept if capitalized, 2013.1-sde;0;;
+69;1,40,60,$;FRConIfAllCap;typeOther;concept if capitalized, 2013.1-sde;0;;
+88;1,40,60,$;FRConpart1;typeConcept;1st part of a concept;0;2014.1-sde;
+29;1,40,60,$;FRDatpron;typePathRelevant;lui;0;2011.2, changed type from Other 2016-01-14-sde;
+113;1,50;FRDay;typeConcept;names of days;0;2016-02-11-sde;
+130;1,50;FRDaypart;typeConcept;matin, soir etc.;0;#35-sde;
+17;1,30,40,50,60,$;FRDe;typeConcept;de en d;0;2011.2;
+13;1,30,40,60;FRDefart;typeOther;le, la, l, 2011.2, veranderd van typeConcept 2013.1-sde;0;removed phase $ 2016-12-01-sde;
+39;1,30,40,50,60,$;FRDemonstr;typeConcept;ce(t)(te), ces;0;2011.2;
+40;1,40,50,60,$;FRDes;typeConcept;des, na 3.1;0;2011.2;
+30;1,40,50,60,$;FREn;typeRelation;en;0;2011.2;
+16;1,40,50,60,70,$;FREnd;typeEndConcept;conceptgrens;0;2011.2, added phase 70 2016-11-10-sde;
+111;1,40;FREst;typeOther;est;0;2016-02-09-sde;
+35;1,40,60,$;FREte;typeOther;été;0;2011.2;
+33;1,40,60,$;FREtre;typeConcept;être;0;2011.2;
+14;1,30,40,60,70,80,$;FRIndefart;typeConcept;un, une, des;0;changed type from Concept to Other and back on 2013.1-sde;
+64;1,40,50,60,$;FRIndefpron;typeOther;indefinite pronouns;0;2013.1-sde, changed type from Concept 2016-01-14-sde;
+26;1,30,40,50,60,$;FRInf;typeRelation;infinitief;0;2011.2, changed type from Concept 2016-01-13-sde;
+109;1,40;FRInfCon;typeOther;infinitive or noun;0;2016-02-04-sde;
+117;1,40,60,$;FRInterjPR;typePathRelevant;PathRelevant interjection;0;2016-03-21-sde;
+78;1,20,30,40,60,$;FRJamais;typeConcept;jamais, 2013.1-sde;0;added phase 30 2016-11-18-sde;
+70;1,40,60,$;FRLetter;typeConcept;letters, 2013.1-sde;0;;
+123;60;FRMergedconcept;typeConcept;temporary label for successive concepts, see rules;0;2016-11-25-sde;
+9;1,30,40,50,60,70,80,$;FRMod;typeConcept;adjectieven en aanverwanten;0;2011.2;
+10;1,20,40,50,60,70,90,$;FRNe;typeRelation;ne en varianten;0;2011.2, added phase 70 and 90 2016-11-23-sde;
+124;1,40;FRNon;typeOther;to avoid literal label for 'non';0;2016-11-29-sde;
+2;1,40,50,60,70,80,$;FRNonconcept;typeOther;No Description;0;2011.2;
+71;1,30,40,60,$;FRNum;typeConcept;numbers, 2013.1-sde;0;;
+119;1,40,60,$;FRNumberwithbrackets;typeBeginEndConcept;one or two digits between brackets;0;2016-06-23-sde;
+48;1,40,50,60,70,80,$;FRObjpron;typePathRelevant;me, leur;0;2013.1-sde, changed type from Other 2016-01-14-sde;
+5;1,30,40,50,60,$;FRPart;typeConcept;participium;0;2011.2;
+12;1,40,60,$;FRPartCon;typeOther;participium of concept;0;2011.2;
+23;1,40,60,$;FRPartConMod;typeConcept;participium, substantief of adjectief;0;2011.2;
+22;1,40,60,$;FRPartMod;typeConcept;participium of adjectief;0;2011.2;
+7;1,20,30,40,60,$;FRPas;typeRelation;pas;0;2011.2, changed from typeConcept 2016-02-17-sde;
+82;1,20,40,60,$;FRPersonne;typeConcept;personne;0;2013.1-sde, added phase 20 2016-11-08-sde;
+55;1,20,30,40,50,60,$;FRPlus;typeConcept;plus;0;2013.1-sde;
+15;1,30,40,60,70,$;FRPoss;typePathRelevant;poss pron;0;2011.2 type aangepast van typeConcept, changed type from Other 2016-01-14-sde, added phase 70 #35-sde;
+47;1,40,60,$;FRPossCon;typeOther;ton, son;0;2013.1-sde;
+36;1,20,40,60,$;FRPostsubjpron;typePathRelevant;-t-il etc;0;2011.2, changed type from Relation 2016-03-30-sde, added phase 20 2016-12-07-sde;
+27;1,40,60,$;FRPPart;typeConcept;part presens;0;2011.2;
+50;1,40,60,$;FRPPartCon;typeConcept;part presens of substantief;0;2013.1-sde;
+105;1,30,40;FRPrepAdv;typeOther;preposition or adverb;0;2016-01-25-sde;
+102;1,40,50,60,$;FRQuantpron;typeConcept;pronoun-like word that can be PR or part of C;0;2016-01-15-sde;
+62;1,20,40,50,60,70,80,90,$;FRQue;typeRelation;que, qu, separate label because of aussi X que;0;2013.1-sde, added phase 90 2016-11-24-sde;
+129;20;FRQuestion;typeRelation;extra label for question words;0;#35-sde;
+52;1,40,50,60,$;FRRefl;typeRelation;reflexieve voornaamwoorden;0;2013.1-sde, changed type from Concept 2016-01-14-sde;
+80;1,20,40,60,$;FRRien;typeConcept;rien, 2013.1-sde, added phase 20 2016-11-08-sde;0;;
+125;1,60;FRAndOr;typeRelation;et, ou;0;2016-12-01-sde;
+21;1,20,40,50,60,70,80,90,$;FRAndOrBut;typeRelation;nevenschikkende voegwoorden;0;2011.2, renamed from FRSAndOrBut and added phase 20 2016-11-10-sde, added phase 90 2016-12-02-sde;
+20;1,40,50,60,70,80,90,$;FRSConj;typeRelation;onderschikkende voegwoorden en dergelijke;0;2011.2, added phase 90 2016-11-24-sde;
+115;1,60,70,80,90,$;FRSConj2;typeBeginRelation;onderschikkende voegwoorden en dergelijke;0;2016-02-19-sde, added phase 90 2016-11-24-sde;
+128;1,40;FRSConj3;typeBeginRelation;extra label for 'parce que';0;#35-sde;
+/*18;1,40,$;FRSe;typeConcept;se en s;0;2011.2; - renamed to Refl years ago, deleted 2016-11-07-sde
+8;1,40,50,60,70,80,$;FRPrep;typeRelation;preposities;0;2011.2;
+79;1,20,40,50,60,$;FRSans;typeRelation;sans, 2013.1-sde;0;added phase 20 2016-11-17-sde;
+1;1,40,50,60,70,80,90,$;FRSRel;typeRelation;No Description;0;2011.2, added phase 90 2016-11-24-sde;
+4;1,30,40,50,60,$;FRSRelAux;typeRelation;hulpww dat door Part gevolgd kan worden;0;2011.2;
+11;1,40,60,$;FRSRelCon;typeOther;relatie of concept;0;2011.2;
+75;1,40,50,60,70,80,90,$;FRSRelconj;typeRelation;relative conjunctions;0;2013.1-sde, added phase 90 2016-12-02-sde;
+24;1,40,60,$;FRSRelConMod;typeConcept;ww-vorm, substantief of adjectief;0;2011.2;
+25;1,40,50,60,$;FRSRelMod;typeConcept;ww-vorm of adjectief;0;2011.2;
+19;1,40,50,60,70,80,$;FRSubjpron;typePathRelevant;pers pron;0;van typeRelation naar typeOther 2011.2, changed type from Other 2016-01-04-sde;
+38;1,40,50,60,70,80,$;FRSubjpron2;typePathRelevant;celui, ça etc;0;na 2011.2, type aangepast 2013.1-sde, changed type from Other 2016-01-14-sde;
+112;1,30;FRTimeconcept;typeConcept;jour, semaine etc.;0;2016-02-10-sde;
+28;1,30,40,50,60,$;FRTres;typeConcept;très;0;2011.2;
+104;1,40,50,60,70,80,$;FRVerb;typeRelation;verb form;0;2011.2;
+
+
+/* FR attributes
+72;20,60,70,$;FRNegation;typeAttribute;to mark certain entities as negation;0;2013.1, added phase 20 2016-11-08-sde;Entity(Negation)
+77;20,40,70,$;FRNegWord;typeAttribute;to mark certain entities as negation, not to be expanded;0;2013.1, added phase 20 2016-11-08-sde, added phase 70 #35-sde;Entity(Negation)
+83;20,40,$;FRNoNegWord;typeAttribute;contra-indicator for negation;0;2013.1, added phase 20 2016-12-07-sde;
+73;70,$;FRNegBegin;typeAttribute;to begin the negation path;0;2013.1;Path(Begin,Negation)
+74;40,70,$;FRNegStop;typeAttribute;to end the negation path;0;2013.1;Path(End,Negation)
+120;70;FRIgnoreNegation;typeAttribute;contra-indicator for negation;0;2016-11-04-sde;
+121;20;FRNegindicator;typeAttribute;marker for rien, aucun etc.;0;2016-11-08-sde;
+
+81;40,$;FRDummy;typeAttribute;2013.1, meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;;
+107;50,$;FRTime;typeAttribute;attribute for vague time and frequency indications;0;2016-01-29-sde;Entity(DateTime)
+
+95;80,$;FRPosSentiment;typeAttribute;for sentiment markers;0;09-04-2015-nl;Entity(PositiveSentiment)
+96;80,$;FRPosSentimentBegin;typeAttribute;for sentiment markers;0;09-04-2015-nl;Path(Begin,PositiveSentiment)
+97;$;FRPosSentimentStop;typeAttribute;for sentiment markers;0;09-04-2015-nl;Path(End,PositiveSentiment)
+98;80,$;FRNegSentiment;typeAttribute;for sentiment markers;0;09-04-2015-nl;Entity(NegativeSentiment)
+99;80,$;FRNegSentimentBegin;typeAttribute;for sentiment markers;0;09-04-2015-nl;Path(Begin,NegativeSentiment)
+100;$;FRNegSentimentStop;typeAttribute;for sentiment markers;0;09-04-2015-nl;Path(End,NegativeSentiment)
+
+126;60,70,$;FRList;typeAttribute;attribute for items in an enumeration;0;2016-12-01-sde, added phase $ to make r396 work #35-sde;
+127;70;FRCondition;typeAttribute;for 'si';0;2016-12-06-sde;

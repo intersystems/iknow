@@ -1,0 +1,64 @@
+﻿/* SPANISH REGEX FILE
+
+/*REMARK !!! make sure longer regex's preceed shorter ones which overlap !!! 
+/*REMARK: names of regex starting with the first letter of the alphabet will be treated last
+
+/*reduced number of regex #7-nl
+
+/*GENERAL REG EX
+/*==============
+number-all;[\-\<\>\+]?(\d+([\.\,]\d+)?)|((\d{1,3}[\,])?(\d{1,3}[\,])?\d+([\.\,]\d+)|(\.?\d+))
+/*digit;[0-9]
+year1;1\d{3}([-|−]1\d{3})?
+year2;2[01]\d{2}([-|−]2[01]\d{2})?
+/*year3;1\d{3}([-|−]1\d{3})?
+/*year4;2[01]\d{2}([-|−]2[01]\d{2})?
+/*year5;1\d{3}[−]1\d{3}
+/*year6;2[01]\d{2}[−]2[01]\d{2}
+/*number;\.?\d+
+number-percentage;(\-|)\d+([\.\,]\d+)?(%|)?(\-\d+)?%
+/*percent;(\d+)%
+/*percentdecimal_range;\d+[,|-]\d+%
+/*percentrange;\d+[-]\d+%
+/*number-hyphen;\d+[-]\d+
+number-decimal;\d+[,|.]\d+
+/*number-period;\d+[.]\d+
+footnote;\[\d{1,2}\]
+
+numberroman;(cm|cd|d?c{0,3})(xc|xl|x{0,3})(ix|iv|v?i{0,3})$
+
+*REGEX FOR SPANISH
+*/================
+INFINITIVES WITH PRONOUNS
+infwithpron;[a-zíñ]{3,}(arlas|arles|arlos|arnos|erlas|erles|erlos|irlas|irles|irlos|irnos|arla|arle|arlo|arme|arse|erla|erle|erlo|erme|erse|irla|irle|irlo|irme|irse)
+
+/*infwithpron01;[a-zíñ]{3,}arme
+/*infwithpron02;[a-zíñ]{3,}arse
+/*infwithpron03;[a-zíñ]{3,}arla
+/*infwithpron04;[a-zíñ]{3,}arle
+/*infwithpron05;[a-zíñ]{3,}arlo
+/*infwithpron06;[a-zíñ]{3,}arlas
+/*infwithpron07;[a-zíñ]{3,}arles
+/*infwithpron08;[a-zíñ]{3,}arlos
+/*infwithpron09;[a-zíñ]{3,}arnos
+/*infwithpron10;[a-zíñ]{3,}erme
+/*infwithpron11;[a-zíñ]{3,}erla
+/*infwithpron12;[a-zíñ]{3,}erle
+/*infwithpron13;[a-zíñ]{3,}erlo
+/*infwithpron14;[a-zíñ]{3,}erlas
+/*infwithpron15;[a-zíñ]{3,}erles
+/*infwithpron16;[a-zíñ]{3,}erlos
+infwithpron17;[a-zíñ]{2,}[^i]ernos
+/*infwithpron18;[a-zíñ]{3,}erse
+/*infwithpron19;[a-zíñ]{3,}irme
+/*infwithpron20;[a-zíñ]{3,}irla
+/*infwithpron21;[a-zíñ]{3,}irle
+/*infwithpron22;[a-zíñ]{3,}irlo
+/*infwithpron23;[a-zíñ]{3,}irlas
+/*infwithpron24;[a-zíñ]{3,}irles
+/*infwithpron25;[a-zíñ]{3,}irlos
+/*infwithpron26;[a-zíñ]{3,}irnos
+/*infwithpron27;[a-zíñ]{3,}irse
+
+/*VERBS WITH PRONOUNS
+verbwithpron01;[a-záéíóñ]{3,}moslo
