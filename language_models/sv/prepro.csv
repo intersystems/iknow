@@ -1,16 +1,16 @@
-﻿1;;“;";;herschrijft rechtsgekrulde dubbele aanhalingstekens naar rechte dubbele aanhalingstekens
-2;;”;";;herschrijft linksgekrulde dubbele aanhalingstekens naar rechte dubbele aanhalingstekens
-3;;‘;';;herschrijft rechtsgekruld aanhalingsteken naar recht aanhalingsteken
-4;;’;';;herschrijft linksgekruld aanhalingsteken naar recht aanhalingsteken
-5;;—; — ;;emdash wordt in de new yorker gebruikt zonder spaties errond 15-02-2012-mvdh
-6;;…; … ;;inserts spaces around … 10-09-2014-sde
-8;;\-\;@hyphen@;;temporary rewriting to avoid that 7 is applied on freestanding hyphen 16-03-2015-sde
-7;;-\;- @connect@;;marks words ending in hyphen for further processing 16-03-2015-sde
-9;;@hyphen@;-;;undo temporary rewriting 16-03-2015-sde
-10;;­;;;delete invisible hyphen that disturbs lexrep detection, 21-10-2015-sde
-11;;.[;. [;;for footnotes, 2016-06-24-sde
-12;;."[;." [;;for footnotes, 2016-06-24-sde
-13;;,[; [;;for footnotes, 2016-06-24-sde
-14;;–;-;;#8-sde
-15;;icke-;icke- ;;mark words with prefix icke- with negation, #9-sde
-16;;Icke-;icke- ;;mark words with prefix icke- with negation, also when capitalised, #9-sde
+﻿;;“;";;rewrites curly quotes to straight quotes
+;;”;";;rewrites curly quotes to straight quotes
+;;‘;';;rewrites curly apostrophe to straight apostrophe
+;;’;';;rewrites curly apostrophe to straight apostrophe
+;;—; — ;;rewrite to treat different hyphen characters in the same way
+;;…; … ;;inserts spaces around …
+;;\-\;@hyphen@;;temporary rewriting to avoid that 7 is applied on freestanding hyphen
+;;-\;- @connect@;;marks words ending in hyphen for further processing
+;;@hyphen@;-;;undo temporary rewriting
+;;­;;;delete invisible hyphen that disturbs lexrep detection
+;;.[;. [;;for footnotes
+;;."[;." [;;for footnotes
+;;,[; [;;for footnotes
+;;–;-;;rewrite to treat different hyphen characters in the same way
+;;icke-;icke- ;;to allow marking words with prefix icke- with negation
+;;Icke-;icke- ;;to allow marking words with prefix icke- with negation, also when capitalised

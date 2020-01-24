@@ -1,196 +1,177 @@
-﻿/* Mandatory labels and attributes are unified (TRW1207)
-/* Mandatory labels: Concept, Relation, Unknown, NonRelevant, Punctuation, SBegin, SEnd, Numeric
-/* Mandatory attributes: CapitalAll, CapitalInitial, CapitalMixed, NonSemantic
+﻿
 
-/* renamed phases (see documentation for details) #37-sde
-
-/* Required labels (TRW1207)
-12;1,$;Subject;typeAttribute;;0;2013.1;
-13;1,$;Object;typeAttribute;;0;2013.1;
-14;1,$;PrimaryRelation;typeAttribute;;0;2013.1;
+/* Required labels
+;1,$;Subject;typeAttribute;;0;;
+;1,$;Object;typeAttribute;;0;;
+;1,$;PrimaryRelation;typeAttribute;;0;;
 
 /* SV Equivalents of mandatory labels
-54;40,60,65,70,80,$;SVPunctuation;typeEndConcept;copy of mandatory label;0;;
+;40,60,65,70,80,$;SVPunctuation;typeEndConcept;copy of mandatory label;0;;
 
 /* SV Equivalents of mandatory attributes
-51;1,40,45,$;SVCapitalAll;typeAttribute;copy of mandatory label;0;;
-52;1,40,45,$;SVCapitalInitial;typeAttribute;copy of mandatory label;0;;
-53;1,40,$;SVCapitalMixed;typeAttribute;copy of mandatory label;0;;
+;1,40,45,$;SVCapitalAll;typeAttribute;copy of mandatory label;0;;
+;1,40,45,$;SVCapitalInitial;typeAttribute;copy of mandatory label;0;;
+;1,40,$;SVCapitalMixed;typeAttribute;copy of mandatory label;0;;
 
 /* Default label
-1;1,40,45,50,60,65,70,80,$;SVCon;typeConcept;default label;1;;
+;1,40,45,50,60,65,70,80,$;SVCon;typeConcept;default label;1;;
 
 /* Structural labels
-16;40,$;-;typeOther;symbol for composite labels;0;;
+;40,$;-;typeOther;symbol for composite labels;0;;
 
 /* Other labels
-37;1,40,45,50,60,65,70,80,$;SVAdj;typeConcept;adjective;0;01-07-2014-sde, added phase 50 14-01-2015-sde, added phase 80 #38-sde;
-58;1,40,60,65,70,$;SVAdjCon;typeConcept;adjective or noun;0;04-07-2014-sde, added phase 70 #37-sde;
-107;1,45,60,65,70,80,$;SVAdjpron;typeConcept;attributive pronoun used as an adjective;0;08-10-2014-sde CHANGE TYPE INTO BEGINCONCEPT LATER: RULES NEEDED;
+;1,40,45,50,60,65,70,80,$;SVAdj;typeConcept;adjective;0;;
+;1,40,60,65,70,$;SVAdjCon;typeConcept;adjective or noun;0;;
+;1,45,60,65,70,80,$;SVAdjpron;typeConcept;attributive pronoun used as an adjective;0;;
 
-/*22;1,40,50,60,$;SVAdv;typeConcept;adverb;0;29-04-2014-sde;
-22;1,40,45,50,65,$;SVAdv;typeRelation;adverb;0;29-04-2014-sde, Concept->Relation #37-sde;
-59;1,40,$;SVAdvAdj;typeAmbiguous;adjective or adverb;0;04-07-2014-sde;
-86;1,40,$;SVAdvAdjCon;typeAmbiguous;adverb, adjective or noun;0;05-08-2014-sde;
-60;1,40,$;SVAdvCon;typeAmbiguous;adverb or noun;0;04-07-2014-sde;
-125;1,40,50,65,$;SVAdvC;typeBeginEndConcept;concept adverb;0;19-01-2015-sde;
-/*61;1,40,$;SVAdvPrespart;typeAmbiguous;adverb or present participle;0;04-07-2014-sde; deleted 15-10-2015-sde
-29;1,40,65,$;SVAdvAmount;typeOther;adverb indicating an amount;0;01-07-2014-sde;
-30;1,40,45,50,60,65,70;SVAdvDegree;typeOther;adverb of degree;0;01-07-2014-sde, added phase 70, removed phase $ #37-sde;
-31;1,40,65,$;SVAdvDirection;typeRelation;adverb of direction;0;01-07-2014-sde, changed type 28-10-2014-sde;
-149;1,40,50,65,$;SVAdvFreq;typePathRelevant;adverb of frequency;0;20-05-2015-sde;
-32;1,40,65,$;SVAdvManner;typeOther;adverb of manner;0;01-07-2014-sde;
-33;1,40,45,60,65,70,$;SVAdvModal;typeRelation;modal adverb;0;01-07-2014-sde, changed type 28-10-2014-sde;
-/*33;60,$;SVAdvModal;typeRelation;modal adverb;0;01-07-2014-sde, changed type and phase 28-10-2014-sde;
-34;1,40,50,65,$;SVAdvPlace;typePathRelevant;adverb of place;0;01-07-2014-sde, changed type from Other 10-02-2015-sde, changed again from BeginEndConcept 29-10-2015-sde;
-/* 114;1,50,65,$;SVAdvPlaceNR;typePathRelevant;adverb of place;0;23-10-2014-sde; - not used anymore - deleted #38-sde
-129;1,40,60,65,70;SVAdvRestrict;typeOther;restricting adverb: bara, endast, enbart;0;20-01-2015-sde, changed phase 40 -> 70 #37-sde, added phase 40 2017-07-26-sde;
-35;1,40,60,65,70,80,$;SVAdvStruct;typeOther;adverb of structure;0;01-07-2014-sde;
-134;1,40,50,65,70,$;SVAdvTemp;typePathRelevant;time-related adverbs but no real time indications, e.g. suddenly, immediately;0;04-03-2015-sde, added phase 70 #37-sde;
-/*36;1,40,45,60,$;SVAdvTime;typeOther;adverb of time;0;01-07-2014-sde, changed phase 21-10-2014-sde, added phase 40 30-01-2015-sde;
-36;1,40,50,65,$;SVAdvTime;typeBeginEndConcept;adverb of time;0;01-07-2014-sde, changed phase 21-10-2014-sde, added phase 40 30-01-2015-sde, changed type 20-08-2015-sde;
+;1,40,45,50,65,$;SVAdv;typeRelation;adverb;0;;
+;1,40,$;SVAdvAdj;typeAmbiguous;adjective or adverb;0;;
+;1,40,$;SVAdvAdjCon;typeAmbiguous;adverb, adjective or noun;0;;
+;1,40,$;SVAdvCon;typeAmbiguous;adverb or noun;0;;
+;1,40,50,65,$;SVAdvC;typeBeginEndConcept;concept adverb;0;;
+;1,40,65,$;SVAdvAmount;typeOther;adverb indicating an amount;0;;
+;1,40,45,50,60,65,70;SVAdvDegree;typeOther;adverb of degree;0;;
+;1,40,65,$;SVAdvDirection;typeRelation;adverb of direction;0;;
+;1,40,50,65,$;SVAdvFreq;typePathRelevant;adverb of frequency;0;;
+;1,40,65,$;SVAdvManner;typeOther;adverb of manner;0;;
+;1,40,45,60,65,70,$;SVAdvModal;typeRelation;modal adverb;0;;
+;1,40,50,65,$;SVAdvPlace;typePathRelevant;adverb of place;0;;
+;1,40,60,65,70;SVAdvRestrict;typeOther;restricting adverb: bara, endast, enbart;0;;
+;1,40,60,65,70,80,$;SVAdvStruct;typeOther;adverb of structure;0;;
+;1,40,50,65,70,$;SVAdvTemp;typePathRelevant;time-related adverbs but no real time indications, e.g. suddenly, immediately;0;;
+;1,40,50,65,$;SVAdvTime;typeBeginEndConcept;adverb of time;0;;
 
-148;1,40;SVAnnan;typeAmbiguous;annan, annat, helt annat;0;30-06-2015-sde, removed phase $ #37-sde;
-159;1,60,65,70;SVAndOr;typeRelation;eller, och, eller/och, och/eller;0;#37-sde, added phase 70 #37-sde;
-78;1,40,60,65,70,80,85,$;SVAndOrBut;typeRelation;coordinate conjunction;0;04-07-2014-sde, added phase 85 #38-sde;
-/*82;1,40,$;SVAndra;typeAmbiguous;conjugated verb, infinitive or ordinal number;0;10-07-2014-sde; - not used anymore, deleted #37-sde
-79;1,40,45,60,65,70,80,85,$;SVAtt;typeRelation;the word att;0;04-07-2014-sde, added phase 85 #38-sde;
-/*156;1,70;SVattAux;typeRelation;words that are used with att+inf;0;#37-sde; - eventually not used - deleted #39-sde
-93;1,40,45,60,65,70,80,$;SVAttrpron;typeOther;attributively used pronouns;0;28-08-2014-sde, changed type from Concept 15-10-2014-sde;
-98;1,40;SVAttrRelpron;typeAmbiguous;vilka, vilken, vilket;0;09-09-2014-sde, removed phase $ #37-sde;
-50;1,40,65;SVAux;typeRelation;auxiliary verb;0;01-07-2014-sde, removed phase $ #37-sde;
-106;1,40;SVAv;typeRelation;av;0;03-10-2014-sde NOT SURE IF WE REALLY NEED THIS -> CHECK BEFORE RELEASE, removed phases 70 and $ #37-sde;
-100;1,40,45,65,70,80,$;SVbCon;typeBeginConcept;first word of a Concept;0;11-09-2014-sde, added phase 70 208-06-05-sde, added phase 80 #38-sde;
-/*124;1,50,65,$;SVbeCon;typeBeginEndConcept;complete Concept;0;19-01-2015-sde; - not used anymore - deleted #38-sde
-118;1,65,70,80,85,$;SVbRel;typeBeginRelation;first word of a Relation;0;21-11-2014-sde, added phase 85 #38-sde;
-132;40,60,65,70,$;SVComma;typeOther;comma;0;18-02-2015-sde, added phase 70 #37-sde;
-/* Warning: don't define SVComma in phase 1, since it must not get overwritten by SVPunctuation!
-38;1,40,$;SVConIfCap;typeConcept;capitalized noun or name;0;01-07-2014-sde;
-97;1,40,$;SVConIfAllCap;typeConcept;acronym in upper case;0;05-09-2014-sde;
-102;1,40,45,$;SVConpart1;typeConcept;first part of a concept;0;22-09-2014-sde, added phase 50(=45) 11-02-2015-sde;
-19;1,40,60,65,70,80,85,$;SVConj;typeRelation;conjunction;0;29-04-2014-sde, added phase 85 #38-sde;
-109;1,45,60,65,70,$;SVCPron;typeConcept;extra label for Concept-pronouns;0;10-10-2014-sde;
-152;1,45,$;SVDay;typeConcept;name of day;0;22-10-2015-sde;
-128;1,40,$;SVDecinum;typeConcept;extra label for decimal numbers;0;20-01-2015-sde;
-56;1,40,45,60,65,70,$;SVDefart;typeOther;definite article;0;02-07-2014-sde;
-24;1,40,65,$;SVDemonstr;typeOther;demonstrative pronoun;0;29-04-2014-sde;
-94;1,40,65,$;SVeCon;typeEndConcept;last word of a Concept;0;28-08-2014-sde;
-131;1,40,60;SVExample;typeAmbiguous;for example, amongst other, more specifically,..., R or NR;0;10-02-2015-sde, added phase 60 #38-sde;
-126;1,40;SVFast;typeAmbiguous;fast: verb particle or adjective;0;20-01-2015-sde;
-176;1,40;SVFoerstaas;typeRelation;förstås: modal adverb, inf or verb;0;#38-sde;
-123;1,40,45,65,$;SVGen;typeConcept;genitive form of noun;0;30-12-2014-sde;
-/*90;1,40,$;SVIcke;typeConcept;icke;0;12-08-2014-sde;  - not used -> deleted 02-11-2015-sde
-77;1,40,$;SVIgnoreCap;typeOther;label to avoid that relation words get concepts when written with a capital;0;04-07-2014-sde;
-28;1,40,60,65,70,$;SVIndefart;typeOther;indefinite article;0;30-04-2014-sde, added phase 70 #37-sde;
-95;1,40;SVImpCon;typeAmbiguous;imperative or noun;0;01-09-2014-sde, removed phase $  #37-sde;
+;1,40;SVAnnan;typeAmbiguous;annan, annat, helt annat;0;;
+;1,60,65,70;SVAndOr;typeRelation;eller, och, eller/och, och/eller;0;;
+;1,40,60,65,70,80,85,$;SVAndOrBut;typeRelation;coordinate conjunction;0;;
+;1,40,45,60,65,70,80,85,$;SVAtt;typeRelation;the word att;0;;
+;1,40,45,60,65,70,80,$;SVAttrpron;typeOther;attributively used pronouns;0;;
+;1,40;SVAttrRelpron;typeAmbiguous;vilka, vilken, vilket;0;;
+;1,40,65;SVAux;typeRelation;auxiliary verb;0;;
+;1,40;SVAv;typeRelation;av;0;;
+;1,40,45,65,70,80,$;SVbCon;typeBeginConcept;first word of a Concept;0;;
+;1,65,70,80,85,$;SVbRel;typeBeginRelation;first word of a Relation;0;;
+;40,60,65,70,$;SVComma;typeOther;comma;0;;
+;1,40,$;SVConIfCap;typeConcept;capitalized noun or name;0;;
+;1,40,$;SVConIfAllCap;typeConcept;acronym in upper case;0;;
+;1,40,45,$;SVConpart1;typeConcept;first part of a concept;0;;
+;1,40,60,65,70,80,85,$;SVConj;typeRelation;conjunction;0;;
+;1,45,60,65,70,$;SVCPron;typeConcept;extra label for Concept-pronouns;0;;
+;1,45,$;SVDay;typeConcept;name of day;0;;
+;1,40,$;SVDecinum;typeConcept;extra label for decimal numbers;0;;
+;1,40,45,60,65,70,$;SVDefart;typeOther;definite article;0;;
+;1,40,65,$;SVDemonstr;typeOther;demonstrative pronoun;0;;
+;1,40,65,$;SVeCon;typeEndConcept;last word of a Concept;0;;
+;1,40,60;SVExample;typeAmbiguous;for example, amongst other, more specifically,..., R or NR;0;;
+;1,40;SVFast;typeAmbiguous;fast: verb particle or adjective;0;;
+;1,40;SVFoerstaas;typeRelation;förstås: modal adverb, inf or verb;0;;
+;1,40,45,65,$;SVGen;typeConcept;genitive form of noun;0;;
+;1,40,$;SVIgnoreCap;typeOther;label to avoid that relation words get concepts when written with a capital;0;;
+;1,40,60,65,70,$;SVIndefart;typeOther;indefinite article;0;;
+;1,40;SVImpCon;typeAmbiguous;imperative or noun;0;;
 
-39;1,40,60,65,70;SVInf;typeRelation;infinitive;0;01-07-2014-sde, removed phase $, added phase 70 #37-sde;
-62;1,40,$;SVInfAdj;typeAmbiguous;infinitive or adjective;0;04-07-2014-sde;
-/*84;1,40,$;SVInfAdjCon;typeAmbiguous;infinitive, adjective or noun;0;10-07-2014-sde; - not used anymore - deleted #38-sde
-40;1,40,$;SVInfCon;typeAmbiguous;infinitive or noun;0;01-07-2014-sde;
-63;1,40,$;SVInfPart;typeAmbiguous;infinitive or participle;0;04-07-2014-sde;
+;1,40,60,65,70;SVInf;typeRelation;infinitive;0;;
+;1,40,$;SVInfAdj;typeAmbiguous;infinitive or adjective;0;;
+;1,40,$;SVInfCon;typeAmbiguous;infinitive or noun;0;;
+;1,40,$;SVInfPart;typeAmbiguous;infinitive or participle;0;;
 
-87;1,40,$;SVInte;typeAmbiguous;inte;0;09-08-2014-sde;
+;1,40,$;SVInte;typeAmbiguous;inte;0;;
 
-151;40,$;SVLayout;typeBeginEndConcept;* and string of 4 or more #*-+=;0;21-10-2015-sde, changed type from concept 2016-06-24-sde;
-147;1,40,$;SVMascgenpart;typeAmbiguous;masc gen past participle;0;22-06-2015-sde;
-80;1,40,60,65,70;SVmAux;typeRelation;modal auxiliary verb;0;04-07-2014-sde, removed phase $ and added phase 70, #37-sde;
-177;1,40;SVmAuxCon;typeAmbiguous;vilja;0;#38-sde;
-144;1,40,45,$;SVMonth;typeConcept;name of month;0;03-06-2015-sde;
-174;1,70;SVNegadj;typeConcept;extra label for ingen, inga, inget;0;#37-sde;
-89;1,10,40,60,65,70,80,85,$;SVNegrel;typeRelation;relation with negation;0;09-08-2014-sde, added phase 80 #37-sde, added phase 85 #38-sde;
-57;1,40,45,65,70,80,$;SVNum;typeConcept;number written in digits;0;02-07-2014-sde, added phase 70 #37-sde, added phase 80 #39-sde;
-41;1,40,45,65,$;SVNumber;typeConcept;number;0;01-07-2014-sde;
-25;1,40,45,60,65,70,80,$;SVObjpron;typePathRelevant;object form of personal pronoun;0;29-04-2014-sde;
-42;1,40,45,$;SVOrdnumber;typeConcept;ordinal number;0;01-07-2014-sde;
+;40,$;SVLayout;typeBeginEndConcept;* and string of 4 or more #*-+=;0;;
+;1,40,$;SVMascgenpart;typeAmbiguous;masc gen past participle;0;;
+;1,40,60,65,70;SVmAux;typeRelation;modal auxiliary verb;0;;
+;1,40;SVmAuxCon;typeAmbiguous;vilja;0;;
+;1,40,45,$;SVMonth;typeConcept;name of month;0;;
+;1,70;SVNegadj;typeConcept;extra label for ingen, inga, inget;0;;
+;1,10,40,60,65,70,80,85,$;SVNegrel;typeRelation;relation with negation;0;;
+;1,40,45,65,70,80,$;SVNum;typeConcept;number written in digits;0;;
+;1,40,45,65,$;SVNumber;typeConcept;number;0;;
+;1,40,45,60,65,70,80,$;SVObjpron;typePathRelevant;object form of personal pronoun;0;;
+;1,40,45,$;SVOrdnumber;typeConcept;ordinal number;0;;
 
-43;1,40,$;SVPart;typeAmbiguous;past participle;0;01-07-2014-sde;
-44;1,40,$;SVPartCon;typeAmbiguous;past participle or noun;0;01-07-2014-sde;
-64;1,40,$;SVPartSup;typeAmbiguous;past participle or supinum;0;04-07-2014-sde;
-65;1,40,$;SVPartSupCon;typeAmbiguous;past participle, supinum or noun;0;04-07-2014-sde;
+;1,40,$;SVPart;typeAmbiguous;past participle;0;;
+;1,40,$;SVPartCon;typeAmbiguous;past participle or noun;0;;
+;1,40,$;SVPartSup;typeAmbiguous;past participle or supinum;0;;
+;1,40,$;SVPartSupCon;typeAmbiguous;past participle, supinum or noun;0;;
 
-/*113;1,45,$;SVPathRelevant;typeOther;for NonRelevant entities that are PathRelevant;0;22-10-2014-sde; - not used anymore - deleted #38-sde
-88;1,40,45,65,80;SVpAux;typeRelation;passive auxiliary;0;09-08-2014-sde, removed phase $ #37-sde, added phase 80 #38-sde;
-133;1,40,45,$;SVPluralnoun;typeConcept;plural noun;0;04-03-2015-sde;
-150;1,40,$;SVPlussign;typeConcept;plus sign (cannot be used as literal);0;03-09-2015-sde;
-26;1,40,60,65,70,$;SVPosspron;typePathRelevant;possessive pronoun;0;29-04-2014-sde, added phase 70 #37-sde;
-85;1,40,$;SVPossCon;typeAmbiguous;possessive pronoun or noun;0;10-07-2014-sde;
-135;1,40,$;SVPossibleGennoun;typeConcept;unknown word ending in -s;0;23-03-2015-sde;
-146;1,40,$;SVPreferRelation;typeAmbiguous;extra label for ambiguous words that are more often relations than concepts;0;04-06-2015-sde;
+;1,40,45,65,80;SVpAux;typeRelation;passive auxiliary;0;;
+;1,40,45,$;SVPluralnoun;typeConcept;plural noun;0;;
+;1,40,$;SVPlussign;typeConcept;plus sign (cannot be used as literal);0;;
+;1,40,60,65,70,$;SVPosspron;typePathRelevant;possessive pronoun;0;;
+;1,40,$;SVPossCon;typeAmbiguous;possessive pronoun or noun;0;;
+;1,40,$;SVPossibleGennoun;typeConcept;unknown word ending in -s;0;;
+;1,40,$;SVPreferRelation;typeAmbiguous;extra label for ambiguous words that are more often relations than concepts;0;;
 
-20;1,40,45,60,65,70,80,85,$;SVPrep;typeRelation;preposition;0;29-04-2014-sde, added phase 85 #38-sde;
-66;1,40,$;SVPrepAdv;typeAmbiguous;preposition or adverb;0;04-07-2014-sde;
-67;1,40,$;SVPrepCon;typeAmbiguous;preposition or noun;0;04-07-2014-sde;
+;1,40,45,60,65,70,80,85,$;SVPrep;typeRelation;preposition;0;;
+;1,40,$;SVPrepAdv;typeAmbiguous;preposition or adverb;0;;
+;1,40,$;SVPrepCon;typeAmbiguous;preposition or noun;0;;
 
-45;1,40,$;SVPrespart;typeAmbiguous;present participle;0;01-07-2014-sde;
-/*110;1,40,$;SVPron;typeAmbiguous;extra label for pronouns that can be used independant or attributively;0;13-10-2014-sde; - not used -> deleted 02-11-2015-sde
-/*157;1,70;SVQuest;typeRelation;question words;0;#37-sde; - not used -> deleted #38-sde
-27;1,40,60,65,70,$;SVRefl;typeRelation;reflexive pronoun;0;29-04-2014-sde, added phase 70 #37-sde;
-112;1,40,60,65,70,80,85,$;SVRel;typeRelation;relation that doesn't fit in any more specific category;0;15-10-2014-sde, added phase 70 and 80 #37-sde, added phase 85 #38-sde;
-171;1,40;SVRelpart;typeRelation;passive participle = relation;0;#37-sde;
-96;1,40,60,65,70,80,85,$;SVRelpron;typeRelation;relative pronoun, including question words;0;02-09-2014-sde, added phase 85 #38-sde;
-127;1,40,$;SVRunt;typeAmbiguous;runt: verb particle, preposition, adjective or adverb of degree;0;20-01-2014-sde;
-99;1,40,$;SVSaa;typeAmbiguous;så;0;10-09-2014-sde;
-104;1,40,$;SVSedan;typeAmbiguous;sedan;0;02-10-2014-sde;
-145;1,40,$;SVSInfCon;typeAmbiguous;s-form infinitive, used as a second label next to InfCon;0;04-06-2015-sde;
-111;1,40,65,70,80,85,$;SVSom;typeRelation;som;0;13-10-2014-sde, removed phase $, added phase 70, re-added phase $, added phase 80 #37-sde;
-103;1,40,$;SVsVerbPart;typeAmbiguous;extra label for s-form of VerbPart;0;29-09-2014-sde;
-23;1,40,45,60,65,70,80,$;SVSubjpron;typePathRelevant;personal pronoun subject form;0;29-04-2014-sde, renamed from Perspron 07-10-2014-sde;
+;1,40,$;SVPrespart;typeAmbiguous;present participle;0;;
+;1,40,60,65,70,$;SVRefl;typeRelation;reflexive pronoun;0;;
+;1,40,60,65,70,80,85,$;SVRel;typeRelation;relation that doesn't fit in any more specific category;0;;
+;1,40;SVRelpart;typeRelation;passive participle = relation;0;;
+;1,40,60,65,70,80,85,$;SVRelpron;typeRelation;relative pronoun, including question words;0;;
+;1,40,$;SVRunt;typeAmbiguous;runt: verb particle, preposition, adjective or adverb of degree;0;;
+;1,40,$;SVSaa;typeAmbiguous;så;0;;
+;1,40,$;SVSedan;typeAmbiguous;sedan;0;;
+;1,40,$;SVSInfCon;typeAmbiguous;s-form infinitive, used as a second label next to InfCon;0;;
+;1,40,65,70,80,85,$;SVSom;typeRelation;som;0;;
+;1,40,$;SVsVerbPart;typeAmbiguous;extra label for s-form of VerbPart;0;;
+;1,40,45,60,65,70,80,$;SVSubjpron;typePathRelevant;personal pronoun subject form;0;;
 
-46;1,40,65;SVSup;typeRelation;supinum;0;01-07-2014-sde, removed phase $ #37-sde;
-68;1,40,$;SVSupAdj;typeAmbiguous;supinum or adjective;0;04-07-2014-sde;
-69;1,40,$;SVSupCon;typeAmbiguous;supinum or noun;0;04-07-2014-sde;
+;1,40,65;SVSup;typeRelation;supinum;0;;
+;1,40,$;SVSupAdj;typeAmbiguous;supinum or adjective;0;;
+;1,40,$;SVSupCon;typeAmbiguous;supinum or noun;0;;
 
-105;1,40,45,$;SVTimeconcept;typeBeginEndConcept;time indication;0;02-10-2014-sde, adapted phase 03-06-2015-sde;
-119;1,65,70,80,85,$;SVUtan;typeRelation;utan;0;24-11-2014-sde, added phase 80 #37-sde, added phase 85 #38-sde;
-92;1,40,$;SVVara;typeAmbiguous;vara: passive aux. or main verb as verb or infinitive, noun;0;13-08-2014-sde;
+;1,40,45,$;SVTimeconcept;typeBeginEndConcept;time indication;0;;
+;1,65,70,80,85,$;SVUtan;typeRelation;utan;0;;
+;1,40,$;SVVara;typeAmbiguous;vara: passive aux. or main verb as verb or infinitive, noun;0;;
 
-21;1,40,65;SVVerb;typeRelation;conjugated verb;0;29-04-2014-sde, removed phase $ #37-sde;
-47;1,40,$;SVVerbAdj;typeAmbiguous;conjugated verb or adjective;0;01-07-2014-sde;
-70;1,40,$;SVVerbAdjCon;typeAmbiguous;conjugated verb or adjective or noun;0;04-07-2014-sde;
-48;1,40,$;SVVerbCon;typeAmbiguous;conjugated verb or noun;0;01-07-2014-sde;
-71;1,40,65;SVVerbInf;typeRelation;conjugated verb or infinitive;0;04-07-2014-sde, removed phase $ #37-sde;
-72;1,40,$;SVVerbInfAdj;typeAmbiguous;conjugated verb, infinitive or adjective;0;04-07-2014-sde;
-73;1,40,$;SVVerbInfAdjCon;typeAmbiguous;conjugated verb, infinitive, adjective or noun;0;04-07-2014-sde;
-74;1,40,$;SVVerbInfCon;typeAmbiguous;conjugated verb, infinitive or noun;0;04-07-2014-sde;
-81;1,40,$;SVVerbInfPart;typeAmbiguous;past participle, infinitive or other conjugated verb form;0;08-07-2014-sde;
-75;1,40,$;SVVerbPart;typeAmbiguous;past participle or other conjugated verb form;0;04-07-2014-sde;
-76;1,40,$;SVVerbPartSup;typeAmbiguous;past participle, supinum or other conjugated verb form;0;04-07-2014-sde;
+;1,40,65;SVVerb;typeRelation;conjugated verb;0;;
+;1,40,$;SVVerbAdj;typeAmbiguous;conjugated verb or adjective;0;;
+;1,40,$;SVVerbAdjCon;typeAmbiguous;conjugated verb or adjective or noun;0;;
+;1,40,$;SVVerbCon;typeAmbiguous;conjugated verb or noun;0;;
+;1,40,65;SVVerbInf;typeRelation;conjugated verb or infinitive;0;;
+;1,40,$;SVVerbInfAdj;typeAmbiguous;conjugated verb, infinitive or adjective;0;;
+;1,40,$;SVVerbInfAdjCon;typeAmbiguous;conjugated verb, infinitive, adjective or noun;0;;
+;1,40,$;SVVerbInfCon;typeAmbiguous;conjugated verb, infinitive or noun;0;;
+;1,40,$;SVVerbInfPart;typeAmbiguous;past participle, infinitive or other conjugated verb form;0;;
+;1,40,$;SVVerbPart;typeAmbiguous;past participle or other conjugated verb form;0;;
+;1,40,$;SVVerbPartSup;typeAmbiguous;past participle, supinum or other conjugated verb form;0;;
 
-91;1,40,65,70,$;SVVerbpt2;typeRelation;particle that belongs to a verb;0;13-08-2014-sde, added phase 70 #37-sde;
-117;1,40,45,60,65,70,80,85,$;SVvRel;typeRelation;verbal relation, only used in rules;0;21-11-2014-sde;
-155;70;SVVidare;typeAmbiguous;the word 'vidare', Literal label is not possible because of lexrep '( se vidare';0;#37-sde;
-49;1,40,45,60,80,$;SVYear;typeConcept;year number;0;01-07-2014-sde, added phase 60 and 80 #38-sde;
+;1,40,65,70,$;SVVerbpt2;typeRelation;particle that belongs to a verb;0;;
+;1,40,45,60,65,70,80,85,$;SVvRel;typeRelation;verbal relation, only used in rules;0;;
+;70;SVVidare;typeAmbiguous;the word 'vidare', Literal label is not possible because of lexrep '( se vidare';0;;
+;1,40,45,60,80,$;SVYear;typeConcept;year number;0;;
 
 /* SV attributes
-160;1,70;SVCondition;typeAttribute;om and även om;0;#37-sde;
-153;45,$;SVDate;typeAttribute;used within the rules file to mark detected dates;0;02-11-2015-sde;
-55;40,70,80;SVDummy;typeAttribute;meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;added phase 70, removed phase $ #37-sde, added phase 80 #38-sde;
-/*108;45,99;SVMod;typeAttribute;modifier;0;10-10-2014-sde;Entity(Modifier) - not used anymore
-137;40,$;SVEttform;typeAttribute;to mark pronouns that can be used attributively with an AdvAdj;0;11-05-2015-sde;
-122;40,$;SVSForm;typeAttribute;to mark s-forms;0;28-11-2014-sde;
-130;40,$;SVRegex;typeAttribute;to mark lexreps that are labeled via regular expressions;0;22-01-2015-sde;
-136;50,$;SVTime;typeAttribute;mark time indications;0;26-03-2015-sde;Entity(DateTime)
-158;60,65,70,80;SVList;typeAttribute;mark enumerations;0;#37-sde, added phase 80 #38-sde;
-175;60;SVListEnd;typeAttribute;och så vidare, etc.;0;#38-sde;
+;1,70;SVCondition;typeAttribute;om and även om;0;;
+;45,$;SVDate;typeAttribute;used within the rules file to mark detected dates;0;;
+;40,70,80;SVDummy;typeAttribute;meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;;
+;40,$;SVEttform;typeAttribute;to mark pronouns that can be used attributively with an AdvAdj;0;;
+;40,$;SVSForm;typeAttribute;to mark s-forms;0;;
+;40,$;SVRegex;typeAttribute;to mark lexreps that are labeled via regular expressions;0;;
+;50,$;SVTime;typeAttribute;mark time indications;0;;Entity(DateTime)
+;60,65,70,80;SVList;typeAttribute;mark enumerations;0;;
+;60;SVListEnd;typeAttribute;och så vidare, etc.;0;;
 
-101;70,$;SVNegation;typeAttribute;to mark certain entities as negation;0;12-09-2014-sde;Entity(Negation)
-115;70,$;SVNegBegin;typeAttribute;to begin the negation path, movable;0;21-11-2014-sde;Path(Begin,Negation)
-120;70,$;SVNegStart;typeAttribute;first element of negation path, not movable;0;24-11-2014-sde;Path(Begin,Negation)
-116;70,$;SVNegStop;typeAttribute;to end the negation path;0;21-11-2014-sde;Path(End,Negation)
-121;70,$;SVNegWord;typeAttribute;to mark certain entities as negation, not to be expanded;0;28-11-2014-sde;Entity(Negation)
-154;70;SVInNegspan;typeAttribute;to mark lexreps that are part of the negation span;0;#37-sde;
+;70,$;SVNegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
+;70,$;SVNegBegin;typeAttribute;to begin the negation path, movable;0;;Path(Begin,Negation)
+;70,$;SVNegStart;typeAttribute;first element of negation path, not movable;0;;Path(Begin,Negation)
+;70,$;SVNegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
+;70,$;SVNegWord;typeAttribute;to mark certain entities as negation, not to be expanded;0;;Entity(Negation)
+;70;SVInNegspan;typeAttribute;to mark lexreps that are part of the negation span;0;;
 
-138;80,$;SVPosSentiment;typeAttribute;for sentiment markers;0;28-05-2015-sde;Entity(PositiveSentiment)
-139;80,$;SVPosSentimentBegin;typeAttribute;for sentiment markers;0;28-05-2015-sde;Path(Begin,PositiveSentiment)
-140;80,$;SVPosSentimentStop;typeAttribute;for sentiment markers;0;28-05-2015-sde, added phase 80 #38-sde;Path(End,PositiveSentiment)
-141;80,$;SVNegSentiment;typeAttribute;for sentiment markers;0;28-05-2015-sde;Entity(NegativeSentiment)
-142;80,$;SVNegSentimentBegin;typeAttribute;for sentiment markers;0;28-05-2015-sde;Path(Begin,NegativeSentiment)
-143;80,$;SVNegSentimentStop;typeAttribute;for sentiment markers;0;28-05-2015-sde, added phase 80 #38-sde;Path(End,NegativeSentiment)
+;80,$;SVPosSentiment;typeAttribute;for sentiment markers;0;;Entity(PositiveSentiment)
+;80,$;SVPosSentimentBegin;typeAttribute;for sentiment markers;0;;Path(Begin,PositiveSentiment)
+;80,$;SVPosSentimentStop;typeAttribute;for sentiment markers;0;;Path(End,PositiveSentiment)
+;80,$;SVNegSentiment;typeAttribute;for sentiment markers;0;;Entity(NegativeSentiment)
+;80,$;SVNegSentimentBegin;typeAttribute;for sentiment markers;0;;Path(Begin,NegativeSentiment)
+;80,$;SVNegSentimentStop;typeAttribute;for sentiment markers;0;;Path(End,NegativeSentiment)
 
-169;40,65,70,80;SVPBegin;typeAttribute;start of clause;0;#37-sde, added phase 80 #38-sde;
-170;40,65,70;SVPVerb;typeAttribute;verb;0;#37-sde;
+;40,65,70,80;SVPBegin;typeAttribute;start of clause;0;;
+;40,65,70;SVPVerb;typeAttribute;verb;0;;
 
-172;40,65;SVBracket1;typeAttribute;opening bracket, defined as attribute to avoid interference with punctuation label;0;#37-sde;
-173;40,65;SVBracket2;typeAttribute;closing bracket, defined as attribute to avoid interference with punctuation label;0;#37-sde;
+;40,65;SVBracket1;typeAttribute;opening bracket, defined as attribute to avoid interference with punctuation label;0;;
+;40,65;SVBracket2;typeAttribute;closing bracket, defined as attribute to avoid interference with punctuation label;0;;
 

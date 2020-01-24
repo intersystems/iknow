@@ -1,573 +1,567 @@
-819;1;CapitalInitial;^RUCapitalInitial;19-01-2015-nl
-957;1;CapitalAll;^RUCapitalAll;17-06-2015-nl
-820;1;Punctuation;RUPunctuation;19-01-2015-nl
-825;1;UDNegation;+RUNegation+RUNegBegin;19-01-2015-nl, moved up and changed ^ into + to avoid overwriting other UD-labels 23-03-2015-nl 
-829;1;UDPosSentiment;+RUPosSentiment+RUPosSentimentBegin;16-03-2015-nl, moved up and changed ^ into + to avoid overwriting other UD-labels 23-03-2015-nl
-830;1;UDNegSentiment;+RUNegSentiment+RUNegSentimentBegin;16-03-2015-nl, moved up and changed ^ into + to avoid overwriting other UD-labels 23-03-2015-nl 
-821;1;UDConcept;RUCon;19-01-2015-nl, added '+' to avoid overwriting other UD labels 25-03-2015-nl,removed udconcept from second part 30-03-2016-nl
-823;1;UDRelation;RURelation;19-01-2015-nl, added '+' to avoid overwriting other UD labels 25-03-2015-nl,removed udrelation from second part 30-03-2016-nl
-824;1;UDNonRelevant;RUNonRelevant;19-01-2015-nl
-691;38;RUPrep+RUAdvdegree|RUAdvdegree|RUAdj;RUPrep|RURAdv|*;to make a relation of 'в' in 'в среднем' 31-05-2013-nl, ^Adj->* #75-nl
-696;38;"в"|"части"|^RURanking:RUCfr;RUPrep|+Join|*;to join 'части' with 'в' 10-06-2013-nl, RUTsjasti->'части',added ^Ranking #75-nl
-1082;38;RUV|RUSos|RUInf:RUComma:SEnd;RUPred|+Join|*;#75-nl, merged rules to make 'v sostojanii' Pred
-723;38;RUV|RUSos|RUAdv|RUInf;RUPred|+Join|*|*;02-10-2014-nl, replaced unaltered labels by * #75-nl
-724;38;RUV|RUSos;RUPrep|RUCon;02-10-2014-nl
-826;38;RUCapitalInitial|RUVerb+RUCapitalInitial;*|RUCon;09-02-2015-nl
-763;38;RUInitial|RUAdj+RUCapitalInitial;RUAdj|+Join;08-12-2014-nl
-764;38;RUInitial;RUCon;08-12-2014-nl
-941;38;RUSreda|RUAdjGDPIF:RUAdjGen;RUCon|*;27-05-2015-nl, merged rules to make Sreda Concept, * #75-nl
-1067;38;RUAdvdegree|"нет";RUPred+RUNegPred|+Join;#75-nl
-1063;38;RUAdvdegree|RUNe;RUNe|+Join;#75-nl
-1069;38;RUAdvdegree|RUNegRel;RUNegRel|+Join;#75-nl
-1073;38;RUAdvdegree|RUNi;RUNi|+Join;#75-nl
-1068;38;RUNe+^RUNegRel|RUTakoj;RUNe|+Join;#75-nl
-1065;38;RUNe+^RUNegRel|"все":"всех":"всем":"всеми":"всего":"всему";RUBCon+RUNegBCon|+Join;#75-nl
-1188;38;RUPrep|RUNe:RUNegRel|RUAdvPR|RUPartAdj;*|RUNegCon|+Join|RUAdj;#75-nl
-1249;38;RUNe|RUComp;*|+RUNegComp;#76-nl
-1064;38;RUNe:RUNegRel|RUAdvPR:"везде";RUNegRel|+Join;#75-nl, join with time indication
-1066;38;RUNikakoy|"из"|RUDempron;RUNikakoy|+Join|+Join;#75-nl
-506;38;RUHyphen|RUNe:RUNegRel|RUCon:RUAdj:RUIndefpron;^RUConj|RUNegRel|*;Ne tussen Koppelteken en Substantief wordt RELATIE,^toegevoegd 16-04-13-nl,added ^ 23-09-2015-nl, *, removed ^, merged rules to make hyphen Relation #75-nl, moved rule up to phase 38, NegRel,Indefpron, added ^ #75-nl
-562;38;RUAdvdegree:RUAdvdegreeNR|RUNikakoy;RUBCon+RUNegBCon|+Join;Bijwoord van graad plus Nikto wordt BEGINCONCEPT plus CONCEPT,^toegevoegd 16-04-13-nl, moved rule up to phase 38, ^Con->+Join, added NegBCon #75-nl
-634;38;RUNikakoy:RUNegPR|RUNe|RUPartActpf|RUCon;RUBCon+RUNegBCon|RUNegCon|RUCon|*;29-04-13-nl,added ^ 23-09-2015-nl, *, moved rule up to phase 38, removed ^ before BCon and Con, added NegBCon, Con->NegCon #76-nl
-1057;38;RUAdvdegree:RUAdvdegreeNR:RUCompgr|RUNegPR;RUNegPR|+Join;21-12-2015-nl, moved rule up to phase 38, added Compgr #75-nl
-954;39;RUCapitalInitial;+RUCapitalInitial2;17-06-2015-nl
-1144;39;RUAdjNomF|RUConInstrPl|RUAdjNomF;*|*|RUAdj+RUNoBCon;#75-nl
-789;39;RUAdjNomF|RUConNomF/GenMN/NomAccPl;*|RUConNomF+RUConPossibleBCon+RUCon;31-12-2014-nl, *,GenN->GenMN,added ConNonGen #75-nl
-798;39;RUPlusGen|RUConGenF/NomAccPl:RUConGDP/NomAccPl:RUConGDP;*|RUConGenF+RUConGen+RUCon;05-01-2015-nl,added congen 13-05-2015-nl, *,added ConGDP/NomAccPl:ConGDP #75-nl
-761;39;RUPlusGen|RUConNomF/GenMN/NomAccPl;*|RUConGenMN+RUConGen+RUCon;03-12-2014-nl,added congen 13-05-2015-nl, * #75-nl
-802;39;RUPlusAcc/Prepos|RUConGenF/NomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon;05-01-2015-nl,added congen 13-05-2015-nl, ConGenF+ConGen->ConNomAccPl+ConNonGen #75-nl
-1126;39;RUPlusAcc/Prepos|RUConGDP/NomAccPl:RUConGDP;*|RUConPossibleBCon+RUCon;prepositive/accusative #75-nl
-786;39;RUAdjGDPIF|RUConGenF/NomAccPl:RUConGDP/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGen+RUCon;31-12-2014-nl, added ConGDP/NomAccPl,added AdjGen,added ConGen,NoBCon #75-nl
-760;39;RUAdjGenMN|RUConNomF/GenMN/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGenMN+RUConGen+RUCon;03-12-2014-nl,added adjgen and congen 13-05-2015-nl,added NoBCon #75-nl
-800;39;RUAdjNomAccPl|RUConNomAccPl_ambig;RUAdjNomAccPl+RUAdj+RUAdjPossibleBCon|RUConNomAccPl+RUConPossibleBCon+RUCon;05-01-2015-nl,added Adj,ConNonGen,ConNomF/GenMN/NomAccPl->ConNomAccPl_ambig  #75-nl
-804;39;RUConNomF/GenMN/NomAccPl|RUAdjNomAccPl|RUAndOr|RUAdjNomAccPl;*|RUAdj+RUAdjPossibleBCon|*|*;05-01-2015-nl, *,GenN->GenMN,added Adj #75-nl
-1127;39;^RUConNomAccPl_ambig|RUConNomAccPl_ambig|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;#75-nl
-782;39;RUConNomF/AccF|RUAdjAccF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;29-12-2014-nl,added ConNonGen,NoBCon #75-nl
-783;39;RUConNomF/AccF;RUConNomF+RUConPossibleBCon+RUCon;29-12-2014-nl,added ConNonGen #75-nl
-1129;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|^RUConNomF:RUAdjNomF;RUConNomF+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;#75-nl
-762;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUAdjNomF|RUCon;RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|RUAdj+RUNoBCon|*;03-12-2014-nl,added congen 13-05-2015-nl, *,added Adj,NoBCon #75-nl
-758;39;RUCon|RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUCon;*|RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|*;26-11-2014-nl,added congen 13-05-2015-nl, *,added Adj #75-nl
-1128;39;RUCon|RUPrep|RUCon|RUConNomF/GenMN/NomAccPl|RUNe:RUVerb;*|*|*|RUConGenMN+RUConGen+RUCon|*;#75-nl
-779;39;RUCapitalInitial|RUAdjNomF+RUCapitalInitial|^RUConNomF:RUAdjNomF;*|RUAdj+RUNoBCon|*;29-12-2014-nl, added ^SEnd for JDN245 _sbse #5-jdn, removed ^SEnd - should also fire at sentence ending, added NoBCon #75-nl
-778;39;RUConNomF/NomM|RUAdjNomF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;29-12-2014-nl,added ConNonGen,NoBCon #75-nl
-752;39;RUConNomF|RUAdjNomF|^RUConNomF+^RUAdjNomF+^SEnd;*|RUAdj+RUNoBCon|*;to prevent concept split, 26-11-2014-nl,added ^adjnomf 29-12-2014-nl, added ^SEnd for JDN245 _sbse #5-jdn, *,removed SEnd - should also fire at sentence ending,added NoBCon #75-nl
-759;39;RUAdjGenMN;RUAdj+RUAdjGen+RUNoBCon;03-12-2014-nl,added adjgen 13-05-2015-nl,added NoBCon #75-nl
-754;39;RUAdjNomF;RUAdj+RUAdjPossibleBCon;26-11-2014-nl
-753;39;RUConNomF;RUConPossibleBCon+RUCon;26-11-2014-nl,added ConNonGen #75-nl
-1120;39;SBegin:RUAdjNomM:RUPlusAcc|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;#75-nl, to be added: PartAdjNomM
-1122;39;RUIndefpron:RUPosspron:RUDempron:RUTakoj:RUNikakoy+^RUPlusGen|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;#75-nl
-1123;39;^RUCon:RUPlusGen:RUAdjGenPl|RUConNomM/GenPl|RUNe:RUVerb:RUmAux;*|RUConNom/AccM+RUCon+RUConPossibleBCon|*;#75-nl
-1124;39;RUVerb:RUInf:RUAdvStruct|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;#75-nl
-1125;39;RUConNomM/GenPl|RUAdjNomM|^RUConNom/AccM;RUConNom/AccM+RUCon+RUConPossibleBCon|*|*;#75-nl
-1132;39;RUAdjGDPIF|RUConNom/AccM;RUAdj+RUAdjPossibleBCon|*;rewrite word with GDPI ending to nominative when noun in nom case masculine follows, #75-nl
-1121;39;RUConNomM/GenPl:RUConGDP/NomAccPl:RUConNomF/GenMN/NomAccPl:RUConGenF/NomAccPl;RUConGen+RUCon;#75-nl
-757;39;RUConGenMN:RUConGenF:RUConGenPl:RUConGDP;RUConGen+RUCon;26-11-2014-nl,added congen 13-05-2015-nl,merged with r792 and r799,added ConGenPl,ConGDP #75-nl
-1145;39;RUAdjNomM|RUConInstrPl|RUAdjNomM;*|*|RUAdj+RUNoBCon;#75-nl
-775;39;RUCapitalInitial+^RUConGen:RUConInstrMN:RUConInstrPl|RUAdjNomM+RUCapitalInitial;*|RUAdj+RUNoBCon;default rules for ConGen should precede this rule 29-12-2014-nl,added NoBCon #75-nl
-777;39;RUConNomF/NomM|RUAdjNomM;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;29-12-2014-nl,added NoBCon,added ConNonGen #75-nl
-776;39;RUConNom/AccM|RUAdjNomM|^RUConNom/AccM+^SEnd;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;29-12-2014-nl, added ^SEnd for JDN245 _sbse #5-jdn,added NoBCon,ConNonGen #75-nl
-774;39;RUAdjNomM;RUAdj+RUAdjPossibleBCon;17-12-2014-nl
-947;39;RUConNom/AccM:RUConNomF/NomM;RUConPossibleBCon+RUCon;17-12-2014-nl,ConNom->ConNonGen,added RUConNomF/NomM #75-nl
-1143;39;RUAdjNomN|RUConInstrPl|RUAdjNomN;*|*|RUAdj+RUNoBCon;#75-nl
-746;39;RUConNomN|RUAdjNomN;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;19-11-2014-nl,added NoBCon,ConNonGen #75-nl
-747;39;RUConNomN;RUCon+RUConPossibleBCon;19-11-2014-nl,added ^capitalinitial 15-06-2015-nl, removed ^capitalinitial #75-nl
-751;39;RUAdjNomN;RUAdj+RUAdjPossibleBCon;26-11-2014-nl
-781;39;RUCapitalInitial|RUAdjAccF+RUCapitalInitial;*|RUAdj+RUNoBCon;29-12-2014-nl,added NoBCon #75-nl
-780;39;RUAdjAccF;RUAdj+RUAdjPossibleBCon;29-12-2014-nl,added adjnongen 15-06-2015-nl
-1151;39;"при"|"этом"|^RUConPrepos:RUAdjPreposMN;RUAdvStruct|+Join|*;#75-nl
-1130;39;RUAdjPreposMN+RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;RUConInstrMN+RUCon-RUAdj|*;correct adjective in prep case to noun (name) in instr case #75-nl
-815;39;RUAdjPreposMN+RUCapitalInitial|^RUAdjPreposMN:RUConPrepos;RUConInstrMN+RUCon-RUAdj|*;correct adjective in prep case to noun (name) in instr case 14-01-2015-nl,Adj->ConInstrMN+Con-Adj, added ^AdjPreposMN #75-nl
-817;39;RUConPrepos|RUAdjPreposMN;*|RUAdj+RUNoBCon;19-01-2015-nl,ConPrepMN->ConPrepos,added NoBCon,* #75-nl
-1119;39;RUPrep|.RUAdjGDPIF:RUAdjPreposMN|RUConPrepos|RUCon+^RUConGen|*RUNe:RUVerb|SEnd:RUPunctuation;*|*|*|^RUBCon|*|*;#75-nl, exception for nouns in genitive (all ambiguous nouns with genitive must be rewritten to the default before this rule)
-816;39;RUAdjPreposMN;RUAdj;14-01-2015-nl, removed AdjNonGen #76-nl
-808;39;RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;*|RUAdj+RUNoBCon;12-01-2015-nl,added NoBCon #75-nl
-809;39;RUConInstrMN|RUAdjInstrMN/DatPl;*|RUAdj+RUNoBCon;12-01-2015-nl,added NoBCon,* #75-nl
-814;39;RUAdjInstrMN/DatPl|RUPutjom;*|RUCon;14-01-2015-nl, * #75-nl
-1142;39;RUAdjNomAccPl|RUConInstrPl|RUAdjNomAccPl;*|*|RUAdj+RUNoBCon;#75-nl
-785;39;RUConNomAccPl|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;31-12-2014-nl, added ^SEnd for JDN245 _sbse #5-jdn, added RUConNomAccPl_ambig,removed ^SEnd - rule should also fire at sentence ending,added NoBCon,ConNonGen #75-nl
-784;39;RUAdjNomAccPl;RUAdj+RUAdjPossibleBCon;29-12-2014-nl
-788;39;RUConNomAccPl;RUCon+RUConPossibleBCon;31-12-2014-nl,added ConPossibleBCon #75-nl
-1008;39;RUAdjGDPIF|"зимой";RUAdj+RUNoBCon|RUTemp+RUNoBCon;19-08-2015-nl,added NoBCon #75-nl
-1009;39;RUAdjGDPIF|"весной";RUAdj+RUNoBCon|RUTemp+RUNoBCon;19-08-2015-nl,added NoBCon #75-nl
-772;39;RUAdjGDPIF;RUAdj+RUAdjGen+RUNoBCon;15-12-2014-nl, not necessarily Genitive, but this default prevents unwanted Concept splits
-818;39;RUAdjGenPl;RUAdj+RUAdjGen+RUNoBCon;19-01-2015-nl,added adjgen 13-05-2015-nl, added NoBCon #75-nl
-806;39;RUCapitalInitial|RUAdjDatMN+RUCapitalInitial;*|RUAdj+RUNoBCon;12-01-2015-nl,added NoBCon #75-nl
-1140;39;RUCon|RUAdjDatMN|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;#75-nl, adjective Dative should not become BeginConcept
-1135;39;RUCon|RUAdjDatMN|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;#75-nl, adjective Dative should not become BeginConcept
-805;39;RUAdjDatMN;RUAdj+RUAdjPossibleBCon;05-01-2015-nl, AdjNonGen->PossibleBCon #75-nl
-773;39;RUConInstrPl|RUAdjInstrPl;*|RUAdj+RUNoBCon;17-12-2014-nl,added NoBCon,* #75-nl
-767;39;RUAdjInstrPl|RUPrep|^RUPrep|^RUPrep|RUAdjInstrPl;RUBCon|+Join|+Join|+Join|+Join;15-12-2014-nl,changed to bcon 17-12-2014-nl
-768;39;RUAdjInstrPl|RUPrep|^RUPrep|RUAdjInstrPl;RUAdj+RUNoBCon|+Join|+Join|+Join;15-12-2014-nl,added NoBCon #75-nl
-1139;39;RUCon|RUAdjInstrPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;#75-nl, adjective Instr should not become BeginConcept
-1137;39;RUCon|RUAdjInstrPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;#75-nl, adjective Instr should not become BeginConcept
-765;39;RUAdjInstrPl;RUAdj+RUAdjPossibleBCon;17-12-2014-nl, AdjNonGen->AdjPossibleBCon #75-nl
-992;39;RUWeek:"этот же год":"этот год":"год":"годы"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;17-08-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, removed ^SEnd - the rule should also fire at sentence ending,added ConGen,moved rule down,below default rules, replaced ambiguous labels by ConGen, added Year #75-nl
-1133;39;"день":"дня":"столетие":"столетие":"годы":"день":"дня"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;17-08-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, removed ^SEnd - the rule should also fire at sentence ending,added ConGen,moved rule down,below default rules, replaced ambiguous labels by ConGen, added Year #75-nl
-1020;40;RURanee|RUPartAdj;^RUPartAdj|+Join;24-08-2015-nl
-1021;40;RURanee|RUPartAdjSubst;^RUPartAdjSubst|+Join;24-08-2015-nl
-1023;40;RURanee;RUTime+RUAdvPR;24-08-2015-nl,replaced mod by PR 16-12-2015-nl
-812;40;RUAdjInstrMN/DatPl|RUAndOr|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv|RUAdv|+Join;14-01-2015-nl
-810;40;RUSamyj|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|+Join|RUAdv;14-01-2015-nl, removed ^, so case specific adjective label is NOT kept #75-nl
-811;40;RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv;14-01-2015-nl
-1006;40;RUAdjInstrMN/DatPl|"летом";RUAdj|RUTemp+RUNoBCon;19-08-2015-nl, phase 39->40 #75-nl
-1007;40;RUAdjInstrMN/DatPl|"осенью";RUAdj|RUTemp+RUNoBCon;19-08-2015-nl, phase 39->40 #75-nl
-1138;40;RUCon|RUAdjInstrMN/DatPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;#75-nl, adjective Instr/Dat should not become BeginConcept
-1136;40;RUCon|RUAdjInstrMN/DatPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;#75-nl, adjective Instr/Dat should not become BeginConcept
-807;40;RUAdjInstrMN/DatPl;^RUAdj+RUAdjPossibleBCon;12-01-2015-nl, added ^ to keep PartAdjSubst label,AdjNonGen->AdjPossibleBCon #75-nl
-1134;40;RUPartAdjSubst:RUPartAdjtemp:RUPartAdj:RUPartActpf:RUSamyj+RUAdj;-RUAdj;remove general Adj which is added as default next to case specific labels, so it doesn't hinder the disambiguation of PartAdjSubst,PartAdjtemp,PartAdj,PartActpf,Samyj #75-nl
-766;40;RUAdjPossibleBCon+^RUPartAdj|RUVerbCon;*|RUCon;08-12-2014-nl, *, added ^PartAdj #75-nl
-565;40;RUNum|RUIz|RUNum;RUBCon|RUCon|RUCon;Nummer voor Iz plus Nummer wordt BEGINCONCEPT, changed prep to con 18-09-2014-nl
-455;40;RUNum|RUDempron|RUAdj;RUCon|RUCAdv|*;Aanwijzend vnw. tussen Nummer en Adjectief wordt CONCEPT, * #75-nl
-705;40;RUCon|RUAdjPossibleBCon|SEnd:RUComma;*|RUAdj+RUNoBCon|*;to not split up adjective from preceding noun at end of sentence, before comma 19-06-2013-nl,added ^ 23-09-2015-nl, *,merged r705 and r706,added NoBCon #75-nl
-999;40;RUBeginendconcept:RUTempBeginEnd|RUPartAdj|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;17-08-2015-nl,added con 23-09-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, rule should precede r692, added TempBeginEnd #76-nl
-392;40;RUECon|RUPartAdj:RUPartActpf|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;Participium lange vorm na Eindtijdsconcept wordt RELATIE,added ^con 17-08-2015-nl,added con 23-09-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn,added PartActpf #75-nl
-1150;40;RUCon|RUPartAdj:RUPartActpf+RUAdjPossibleBCon+^RUNoBCon|^RUInf;*|^RUBCon+RUAdj|*;to split up concepts with different cases, separate rule for participles - if infinitive follows they become Relation, #75-nl
-692;40;RUCon|RUAdjPossibleBCon+^RUNoBCon:RUPartAdj:RUPartActpf;*|^RUBCon+RUAdj;to split up concepts with different cases (exception: participles, see r) 03-06-2013-nl,added ^ranking 17-12-2014-nl,added ^ 23-09-2015-nl, *,added 'samy','samoe','samaya',^NoBCon:PartAdj:PartActpf, removed ^Ranking, added Adj, ^ to BCon+Adj #75-nl
-715;40;RUCon|RUAdv|RUAdj|SEnd;*|RUBCon|*|*;28-08-2013-nl,added ^ 23-09-2015-nl, *, removed ^ before BCon #75-nl
-951;40;RUConPossibleBCon+RUCapitalInitial2;-RUConPossibleBCon;don't split Concept when NonGen noun is capitalized,15-06-2015-nl, removed -ConNom #75-nl
-958;40;RUConPossibleBCon+RUCapitalAll;-RUConPossibleBCon;don't split Concept when NonGen noun is allcaps,17-06-2015-nl, removed -ConNom #75-nl -> deleted #76-nl, used to be regex, but they're more strict now
-1118;40;RUPrep|RUCon|.RUTakoj|RUConGen|RUConPossibleBCon;*|*|*|*|^RUBCon;#75-nl
-931;40;RUPrep|.RUPosspron:RUDempron:RUDempronConj:RUIndefpron|RUCon+^RUNum|RUConPossibleBCon;*|*|^RUCon|^RUBCon;13-05-2015-nl, *,added Posspron,Dempron,DempronConj,Indefpron #76-nl
-1154;40;RUPrep|*RUCon|RUAdjGen|RUCon|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*|*;#75-nl
-1155;40;RUPrep|*RUCon+^RUConGen|RUConGen|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*;#75-nl
-1152;40;RUConGen:RUConPreposPl|RUConPossibleBCon;*|^RUBCon;#75-nl
-938;40;RUAdj|RUSreda;*|RUCon;27-05-2015-nl, * #75-nl
-939;40;RUSreda|RUConGen:RUAdjGen;RUCon|*;27-05-2015-nl, merged rules to make 'sreda' Concept, * #75-nl
-940;40;RUSreda;RUDay+RUCon;27-05-2015-nl,added label 17-06-2015-nl
-956;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;Voorzetsel plus Persoonlijk vnw. tussen Adjectief en Substantief worden CONCEPTEN,added ^ 23-09-2015-nl, *,added ^Posspron #75-nl
-371;40;RUKoe|RUPrep|RURelpron;RUIndefpronPR|+Join|+Join;to look into 02-05-13-nl,changed into pr 12-08-2015-nl,replaced mod by PR 16-12-2015-nl, *,IndefpronPR|*|IndefpronPR->IndefpronPR|+Join|+Join #75-nl
-1131;40;RUAdj+RUBCon+^RUOdin;RUBCon;#75-nl
-1304;40;RUCfr:RUNum|"см."+^RUCapitalInitial;*|RUCon;#78-nl (measurement)
-742;40;RUCfr|RURanking;RURanking|+Join;20-10-2014-nl
-293;40;RUPrep|RUWeek;*|RUECon+RUCon;Week na Voorzetsel wordt ENDCONCEPT, VOOR RULES YEAR,30-04-13-nl,removed rprep 12-08-2015-nl,added con 21-09-2015-nl, * #75-nl
-987;40;RUWeek|RUMonth:RUMonthNom;RUCon|RUCon;17-08-2015-nl, merged rules to make Week Concept #75-nl
-997;40;RUWeek|RUYear;RUCon|RUECon+RUCon;17-08-2015-nl,added con 21-09-2015-nl
-998;40;RUWeek|RUCfrYear;RUCon|RUCon;17-08-2015-nl
-292;40;RUWeek;RUECon+RUCon;Week wordt DEFAULT JAAR,replaced year 17-08-2015-nl
-274;40;RURanking|RUYear|RUAdjtemp:RUPartAdjtemp:RURanking|RUCent;RUCfr|RUCon|RUAdj|RUECon+RUCon;Eeuw na Cijfer plus Jaar plus Tijdsadjectief wordt ENDCONCEPT,added con 21-09-2015-nl, merged rules to detect time indication #75-nl
-277;40;RUCent;RUYear;Eeuw wordt DEFAULT JAAR
-276;40;RUCfrYear:RURanking|RUYear;*|RUECon+RUCon;Jaar na Cijfer wordt ENDCONCEPT,changed to cfryear 15-10-2014-nl,added con 21-09-2015-nl, merged rules to detect time indication #75-nl
-272;40;RUAdjtemp:RUPartAdjtemp|RUYear;RUAdj|RUECon+RUCon;Jaar na Tijdsadjectief wordt ENDCONCEPT,added con 21-09-2015-nl, merged rules to detect time indication #75-nl
-267;40;RUKazjdyj|RUYear;RUBeginendconcept+RUCon|+Join;Kazjdyj plus Jaar wordt BEGINCONCEPT plus ENDCONCEPT,replaced bcon+econ,added con 23-09-2015-nl
-279;40;RUDay:RUTemp|RUCfr;RUBCon|*;Dag voor Cijfer wordt CONCEPT,30-04-13-nl, merged rules to detect time indications #75-nl, Con->* #76-nl
-738;40;^RUBCon|RUCfr|RUMonth;*|+RUBCon|RUMonth;15-10-2014-nl, added ^BCon on left side, added + to BCon on right side to keep Cfr label #76-nl
-1015;40;RUNum|RUYear|RUNazad;RUBCon|RUCon|RUECon+RUCon;19-08-2015-nl,added con 21-09-2015-nl
-282;40;RUMonth|RUCfrYear;RUCon|RUCfr;Maand voor Cijfer wordt CONCEPT,changed to cfryear 15-10-2014-nl
-741;40;RUMonth|RURanking;RUCon|*;20-10-2014-nl, * #75-nl
-283;40;RUMonth|.RUAdj|RUECon;RUCon|*|RUECon+RUCon;Maand voor Adjectief plus Eindtijdsconcept wordt CONCEPT,added con 21-09-2015-nl, merged rules to detect time indications #75-nl
-281;40;RUMonth|RUYear;RUCon|RUYear;Maand voor Jaar wordt CONCEPT
-1010;40;RUTemp+RUNoBCon|RUCfrYear;RUCon|RUCon;19-08-2015-nl
-289;40;RUTemp|RUCfrYear:RURanking;RUBCon|RUCon;Tijdstip voor Cijfer wordt BEGINCONCEPT,changed to cfryear 15-10-2014-nl, merged rules to detect time indications #75-nl
-290;40;RUTemp|RUAdj|RUECon;RUCon|*|RUECon+RUCon;Tijdstip voor Adjectief plus ENDCONCEPT wordt CONCEPT,added con 21-09-2015-nl, * #75-nl
-288;40;RUDay;RUECon+RUCon;Dag wordt DEFAULT ENDCONCEPT,added +con 22-06-2015-nl
-285;40;RUMonth;RUECon+RUCon;Maand wordt DEFAULT ENDCONCEPT,added con 23-09-2015-nl
-286;40;RUPartAdjtemp;RUPartAdj;Tijdsparticipium wordt DEFAULT Participium
-287;40;RUAdjtemp;RUAdj;Tijdsadjectief wordt DEFAULT Adjectief
-270;40;RUYear;RUCon;Jaar wordt DEFAULT CONCEPT
-381;40;RUOkolo|RUCfr;RUBCon|*;Okolo voor Cijfer wordt Bijwoord van graad,Con->* #76-nl
-744;40;RUCfrYear;RUCfr;20-10-2014-nl
-1011;40;RUBeginendconcept|RUNazad;RUBeginendconcept+RUCon|+Join;19-08-2015-nl,added con 23-09-2015-nl,replaced bcon+econ,added con 23-09-2015-nl
-1017;40;RUVerb|RUNazad;*|RURAdv;19-08-2015-nl, * #75-nl
-1012;40;RUECon|RUNazad;RUBeginendconcept+RUCon|+Join;19-08-2015-nl,replaced bcon+econ,added con 23-09-2015-nl
-1034;40;RUIndefpronAdvdegree|RUPosspron|^RUVerb+^RUPart+^RUInf+^RUAux+^SEnd;RUCon|RUCon|*;21-09-2015-nl,replaced mod by PR 16-12-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn
-1036;40;RUIndefpronAdvdegree|RUDempron|RUCon:RUAdj;RUCon|RUCon|*;21-09-2015-nl, * #75-nl, merged rules to make IndefpronAdvdegree Concept #75-nl
-1038;40;RUIndefpronAdvdegree|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;21-09-2015-nl,replaced mod by PR 16-12-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn
-1039;40;RUIndefpronAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;21-09-2015-nl,replaced mod by PR 16-12-2015-nl
-1035;40;RUIndefpronAdvdegree;RUAdvdegree;21-09-2015-nl
-1189;40;RUPrep|RUAdvPR|RUPartAdj;*|RUCAdv|RUAdj;#75-nl
-1018;40;RUAdvdegree|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;19-08-2015-nl,replaced bcon+econ,added con 23-09-2015-nl
-1019;40;RUAdj|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;19-08-2015-nl,added con 23-09-2015-nl,replaced bcon+econ,added con 23-09-2015-nl
-1016;40;RUNazad;RUECon+RUCon;19-08-2015-nl,added con 23-09-2015-nl
-1003;40;RUTemp+RUTempBeginEnd;RUBeginendconcept;17-08-2015-nl
-291;40;RUTemp;RUECon+RUCon;Tijdstip wordt DEFAULT ENDCONCEPT, DEFAULTRULES TIME NA RULES TIME (290),added con 23-09-2015-nl
-329;40;RUNeskolko|RUIz;RUIndefpronPR|RUPrep;Neskolko plus Iz wordt NR, attr. Modifier plus NR, attr. PR Predicate,removed rprep 12-08-2015-nl,replaced mod by PR 16-12-2015-nl
+819;1;CapitalInitial;^RUCapitalInitial;
+957;1;CapitalAll;^RUCapitalAll;
+820;1;Punctuation;RUPunctuation;
+825;1;UDNegation;+RUNegation+RUNegBegin;
+829;1;UDPosSentiment;+RUPosSentiment+RUPosSentimentBegin;
+830;1;UDNegSentiment;+RUNegSentiment+RUNegSentimentBegin;
+821;1;UDConcept;RUCon;
+823;1;UDRelation;RURelation;
+824;1;UDNonRelevant;RUNonRelevant;
+691;38;RUPrep+RUAdvdegree|RUAdvdegree|RUAdj;RUPrep|RURAdv|*;to make a relation of 'в' in 'в среднем'
+696;38;"в"|"части"|^RURanking:RUCfr;RUPrep|+Join|*;to join 'части' with 'в'
+1082;38;RUV|RUSos|RUInf:RUComma:SEnd;RUPred|+Join|*;
+723;38;RUV|RUSos|RUAdv|RUInf;RUPred|+Join|*|*;
+724;38;RUV|RUSos;RUPrep|RUCon;
+826;38;RUCapitalInitial|RUVerb+RUCapitalInitial;*|RUCon;
+763;38;RUInitial|RUAdj+RUCapitalInitial;RUAdj|+Join;
+764;38;RUInitial;RUCon;
+941;38;RUSreda|RUAdjGDPIF:RUAdjGen;RUCon|*;
+1067;38;RUAdvdegree|"нет";RUPred+RUNegPred|+Join;
+1063;38;RUAdvdegree|RUNe;RUNe|+Join;
+1069;38;RUAdvdegree|RUNegRel;RUNegRel|+Join;
+1073;38;RUAdvdegree|RUNi;RUNi|+Join;
+1068;38;RUNe+^RUNegRel|RUTakoj;RUNe|+Join;
+1065;38;RUNe+^RUNegRel|"все":"всех":"всем":"всеми":"всего":"всему";RUBCon+RUNegBCon|+Join;
+1188;38;RUPrep|RUNe:RUNegRel|RUAdvPR|RUPartAdj;*|RUNegCon|+Join|RUAdj;
+1249;38;RUNe|RUComp;*|+RUNegComp;
+1064;38;RUNe:RUNegRel|RUAdvPR:"везде";RUNegRel|+Join;
+1066;38;RUNikakoy|"из"|RUDempron;RUNikakoy|+Join|+Join;
+506;38;RUHyphen|RUNe:RUNegRel|RUCon:RUAdj:RUIndefpron;^RUConj|RUNegRel|*;'ne' between dash and noun/adjective/indefinite pronoun becomes Relation
+562;38;RUAdvdegree:RUAdvdegreeNR|RUNikakoy;RUBCon+RUNegBCon|+Join;adverb of degree before 'nikakoy' becomes beginconcept
+634;38;RUNikakoy:RUNegPR|RUNe|RUPartActpf|RUCon;RUBCon+RUNegBCon|RUNegCon|RUCon|*;
+1057;38;RUAdvdegree:RUAdvdegreeNR:RUCompgr|RUNegPR;RUNegPR|+Join;
+954;39;RUCapitalInitial;+RUCapitalInitial2;
+1144;39;RUAdjNomF|RUConInstrPl|RUAdjNomF;*|*|RUAdj+RUNoBCon;
+789;39;RUAdjNomF|RUConNomF/GenMN/NomAccPl;*|RUConNomF+RUConPossibleBCon+RUCon;
+798;39;RUPlusGen|RUConGenF/NomAccPl:RUConGDP/NomAccPl:RUConGDP;*|RUConGenF+RUConGen+RUCon;
+761;39;RUPlusGen|RUConNomF/GenMN/NomAccPl;*|RUConGenMN+RUConGen+RUCon;
+802;39;RUPlusAcc/Prepos|RUConGenF/NomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon;
+1126;39;RUPlusAcc/Prepos|RUConGDP/NomAccPl:RUConGDP;*|RUConPossibleBCon+RUCon;prepositive/accusative
+786;39;RUAdjGDPIF|RUConGenF/NomAccPl:RUConGDP/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGen+RUCon;
+760;39;RUAdjGenMN|RUConNomF/GenMN/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGenMN+RUConGen+RUCon;
+800;39;RUAdjNomAccPl|RUConNomAccPl_ambig;RUAdjNomAccPl+RUAdj+RUAdjPossibleBCon|RUConNomAccPl+RUConPossibleBCon+RUCon;
+804;39;RUConNomF/GenMN/NomAccPl|RUAdjNomAccPl|RUAndOr|RUAdjNomAccPl;*|RUAdj+RUAdjPossibleBCon|*|*;
+1127;39;^RUConNomAccPl_ambig|RUConNomAccPl_ambig|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;
+782;39;RUConNomF/AccF|RUAdjAccF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;
+783;39;RUConNomF/AccF;RUConNomF+RUConPossibleBCon+RUCon;
+1129;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|^RUConNomF:RUAdjNomF;RUConNomF+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;
+762;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUAdjNomF|RUCon;RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|RUAdj+RUNoBCon|*;
+758;39;RUCon|RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUCon;*|RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|*;
+1128;39;RUCon|RUPrep|RUCon|RUConNomF/GenMN/NomAccPl|RUNe:RUVerb;*|*|*|RUConGenMN+RUConGen+RUCon|*;
+779;39;RUCapitalInitial|RUAdjNomF+RUCapitalInitial|^RUConNomF:RUAdjNomF;*|RUAdj+RUNoBCon|*;
+778;39;RUConNomF/NomM|RUAdjNomF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;
+752;39;RUConNomF|RUAdjNomF|^RUConNomF+^RUAdjNomF+^SEnd;*|RUAdj+RUNoBCon|*;to prevent concept split
+759;39;RUAdjGenMN;RUAdj+RUAdjGen+RUNoBCon;
+754;39;RUAdjNomF;RUAdj+RUAdjPossibleBCon;
+753;39;RUConNomF;RUConPossibleBCon+RUCon;
+1120;39;SBegin:RUAdjNomM:RUPlusAcc|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+1122;39;RUIndefpron:RUPosspron:RUDempron:RUTakoj:RUNikakoy+^RUPlusGen|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+1123;39;^RUCon:RUPlusGen:RUAdjGenPl|RUConNomM/GenPl|RUNe:RUVerb:RUmAux;*|RUConNom/AccM+RUCon+RUConPossibleBCon|*;
+1124;39;RUVerb:RUInf:RUAdvStruct|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+1125;39;RUConNomM/GenPl|RUAdjNomM|^RUConNom/AccM;RUConNom/AccM+RUCon+RUConPossibleBCon|*|*;
+1132;39;RUAdjGDPIF|RUConNom/AccM;RUAdj+RUAdjPossibleBCon|*;rewrite word with GDPI ending to nominative when noun in nom case masculine follows
+1121;39;RUConNomM/GenPl:RUConGDP/NomAccPl:RUConNomF/GenMN/NomAccPl:RUConGenF/NomAccPl;RUConGen+RUCon;
+757;39;RUConGenMN:RUConGenF:RUConGenPl:RUConGDP;RUConGen+RUCon;
+1145;39;RUAdjNomM|RUConInstrPl|RUAdjNomM;*|*|RUAdj+RUNoBCon;
+775;39;RUCapitalInitial+^RUConGen:RUConInstrMN:RUConInstrPl|RUAdjNomM+RUCapitalInitial;*|RUAdj+RUNoBCon;default rules for ConGen should precede this rule
+777;39;RUConNomF/NomM|RUAdjNomM;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;
+776;39;RUConNom/AccM|RUAdjNomM|^RUConNom/AccM+^SEnd;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;
+774;39;RUAdjNomM;RUAdj+RUAdjPossibleBCon;
+947;39;RUConNom/AccM:RUConNomF/NomM;RUConPossibleBCon+RUCon;
+1143;39;RUAdjNomN|RUConInstrPl|RUAdjNomN;*|*|RUAdj+RUNoBCon;
+746;39;RUConNomN|RUAdjNomN;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;
+747;39;RUConNomN;RUCon+RUConPossibleBCon;
+751;39;RUAdjNomN;RUAdj+RUAdjPossibleBCon;
+781;39;RUCapitalInitial|RUAdjAccF+RUCapitalInitial;*|RUAdj+RUNoBCon;
+780;39;RUAdjAccF;RUAdj+RUAdjPossibleBCon;
+1151;39;"при"|"этом"|^RUConPrepos:RUAdjPreposMN;RUAdvStruct|+Join|*;
+1130;39;RUAdjPreposMN+RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;RUConInstrMN+RUCon-RUAdj|*;correction: capitalized adjective in preposition case becomes noun (name) in instrumental case
+815;39;RUAdjPreposMN+RUCapitalInitial|^RUAdjPreposMN:RUConPrepos;RUConInstrMN+RUCon-RUAdj|*;correction: adjective in preposition case becomes noun (name) in instrumental case
+817;39;RUConPrepos|RUAdjPreposMN;*|RUAdj+RUNoBCon;
+1119;39;RUPrep|.RUAdjGDPIF:RUAdjPreposMN|RUConPrepos|RUCon+^RUConGen|*RUNe:RUVerb|SEnd:RUPunctuation;*|*|*|^RUBCon|*|*;exception for nouns in genitive (all ambiguous nouns with genitive must be rewritten to the default before this rule)
+816;39;RUAdjPreposMN;RUAdj;
+808;39;RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;*|RUAdj+RUNoBCon;
+809;39;RUConInstrMN|RUAdjInstrMN/DatPl;*|RUAdj+RUNoBCon;
+814;39;RUAdjInstrMN/DatPl|RUPutjom;*|RUCon;
+1142;39;RUAdjNomAccPl|RUConInstrPl|RUAdjNomAccPl;*|*|RUAdj+RUNoBCon;
+785;39;RUConNomAccPl|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;
+784;39;RUAdjNomAccPl;RUAdj+RUAdjPossibleBCon;
+788;39;RUConNomAccPl;RUCon+RUConPossibleBCon;
+1008;39;RUAdjGDPIF|"зимой";RUAdj+RUNoBCon|RUTemp+RUNoBCon;
+1009;39;RUAdjGDPIF|"весной";RUAdj+RUNoBCon|RUTemp+RUNoBCon;
+772;39;RUAdjGDPIF;RUAdj+RUAdjGen+RUNoBCon;not necessarily Genitive, but this default prevents unwanted Concept splits
+818;39;RUAdjGenPl;RUAdj+RUAdjGen+RUNoBCon;
+806;39;RUCapitalInitial|RUAdjDatMN+RUCapitalInitial;*|RUAdj+RUNoBCon;
+1140;39;RUCon|RUAdjDatMN|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Dative should not become BeginConcept
+1135;39;RUCon|RUAdjDatMN|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Dative should not become BeginConcept
+805;39;RUAdjDatMN;RUAdj+RUAdjPossibleBCon;
+773;39;RUConInstrPl|RUAdjInstrPl;*|RUAdj+RUNoBCon;
+767;39;RUAdjInstrPl|RUPrep|^RUPrep|^RUPrep|RUAdjInstrPl;RUBCon|+Join|+Join|+Join|+Join;
+768;39;RUAdjInstrPl|RUPrep|^RUPrep|RUAdjInstrPl;RUAdj+RUNoBCon|+Join|+Join|+Join;
+1139;39;RUCon|RUAdjInstrPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr should not become BeginConcept
+1137;39;RUCon|RUAdjInstrPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr should not become BeginConcept
+765;39;RUAdjInstrPl;RUAdj+RUAdjPossibleBCon;
+992;39;RUWeek:"этот же год":"этот год":"год":"годы"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;
+1133;39;"день":"дня":"столетие":"столетие":"годы":"день":"дня"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;
+1020;40;RURanee|RUPartAdj;^RUPartAdj|+Join;
+1021;40;RURanee|RUPartAdjSubst;^RUPartAdjSubst|+Join;
+1023;40;RURanee;RUTime+RUAdvPR;
+812;40;RUAdjInstrMN/DatPl|RUAndOr|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv|RUAdv|+Join;
+810;40;RUSamyj|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|+Join|RUAdv;
+811;40;RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv;
+1006;40;RUAdjInstrMN/DatPl|"летом";RUAdj|RUTemp+RUNoBCon;
+1007;40;RUAdjInstrMN/DatPl|"осенью";RUAdj|RUTemp+RUNoBCon;
+1138;40;RUCon|RUAdjInstrMN/DatPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr/Dat should not become BeginConcept
+1136;40;RUCon|RUAdjInstrMN/DatPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr/Dat should not become BeginConcept
+807;40;RUAdjInstrMN/DatPl;^RUAdj+RUAdjPossibleBCon;
+1134;40;RUPartAdjSubst:RUPartAdjtemp:RUPartAdj:RUPartActpf:RUSamyj+RUAdj;-RUAdj;remove general Adj which is added as default next to case specific labels, so it doesn't hinder the disambiguation of PartAdjSubst,PartAdjtemp,PartAdj,PartActpf,Samyj
+766;40;RUAdjPossibleBCon+^RUPartAdj|RUVerbCon;*|RUCon;
+565;40;RUNum|RUIz|RUNum;RUBCon|RUCon|RUCon;number before 'iz' plus number becomes beginconcept
+455;40;RUNum|RUDempron|RUAdj;RUCon|RUCAdv|*;demonstrative pronoun between number and adjective becomes concept
+705;40;RUCon|RUAdjPossibleBCon|SEnd:RUComma;*|RUAdj+RUNoBCon|*;to not split up adjective from preceding noun at end of sentence or before comma
+999;40;RUBeginendconcept:RUTempBeginEnd|RUPartAdj|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;
+392;40;RUECon|RUPartAdj:RUPartActpf|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;long participle after time expression as endconcept becomes relation
+1150;40;RUCon|RUPartAdj:RUPartActpf+RUAdjPossibleBCon+^RUNoBCon|^RUInf;*|^RUBCon+RUAdj|*;to split up concepts with different cases, separate rule for participles with exception for following infinitive, then participle should become Relation
+692;40;RUCon|RUAdjPossibleBCon+^RUNoBCon:RUPartAdj:RUPartActpf;*|^RUBCon+RUAdj;to split up concepts with different cases (exception: participles, see r1150)
+715;40;RUCon|RUAdv|RUAdj|SEnd;*|RUBCon|*|*;
+951;40;RUConPossibleBCon+RUCapitalInitial2;-RUConPossibleBCon;don't split Concept when possible beginconcept is capitalized
+958;40;RUConPossibleBCon+RUCapitalAll;-RUConPossibleBCon;don't split Concept when possible beginconcept is allcaps
+1118;40;RUPrep|RUCon|.RUTakoj|RUConGen|RUConPossibleBCon;*|*|*|*|^RUBCon;
+931;40;RUPrep|.RUPosspron:RUDempron:RUDempronConj:RUIndefpron|RUCon+^RUNum|RUConPossibleBCon;*|*|^RUCon|^RUBCon;
+1154;40;RUPrep|*RUCon|RUAdjGen|RUCon|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*|*;
+1155;40;RUPrep|*RUCon+^RUConGen|RUConGen|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*;
+1152;40;RUConGen:RUConPreposPl|RUConPossibleBCon;*|^RUBCon;
+938;40;RUAdj|RUSreda;*|RUCon;
+939;40;RUSreda|RUConGen:RUAdjGen;RUCon|*;
+940;40;RUSreda;RUDay+RUCon;
+956;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;preposition plus personal pronoun between adjective and noun become concepts
+371;40;RUKoe|RUPrep|RURelpron;RUIndefpronPR|+Join|+Join;
+1131;40;RUAdj+RUBCon+^RUOdin;RUBCon;
+1304;40;RUCfr:RUNum|"см."+^RUCapitalInitial;*|RUCon;
+742;40;RUCfr|RURanking;RURanking|+Join;
+293;40;RUPrep|RUWeek;*|RUECon+RUCon;week/month after preposition becomes endconcept, before rules 'year'
+987;40;RUWeek|RUMonth:RUMonthNom;RUCon|RUCon;
+997;40;RUWeek|RUYear;RUCon|RUECon+RUCon;
+998;40;RUWeek|RUCfrYear;RUCon|RUCon;
+292;40;RUWeek;RUECon+RUCon;week/month becomes endconcept
+274;40;RURanking|RUYear|RUAdjtemp:RUPartAdjtemp:RURanking|RUCent;RUCfr|RUCon|RUAdj|RUECon+RUCon;century after ranking number+year+time adjective becomes endconcept
+277;40;RUCent;RUYear;century behaves as year
+276;40;RUCfrYear:RURanking|RUYear;*|RUECon+RUCon;year after number becomes endconcept
+272;40;RUAdjtemp:RUPartAdjtemp|RUYear;RUAdj|RUECon+RUCon;year after adjective of time adjective becomes endconcept
+267;40;RUKazjdyj|RUYear;RUBeginendconcept+RUCon|+Join;'kazhdy' plus year becomes beginendconcept
+279;40;RUDay:RUTemp|RUCfr;RUBCon|*;days of the week/expression of time before number become beginconcept
+738;40;^RUBCon|RUCfr|RUMonth;*|+RUBCon|RUMonth;
+1015;40;RUNum|RUYear|RUNazad;RUBCon|RUCon|RUECon+RUCon;
+282;40;RUMonth|RUCfrYear;RUCon|RUCfr;month before number year becomes concept
+741;40;RUMonth|RURanking;RUCon|*;
+283;40;RUMonth|.RUAdj|RUECon;RUCon|*|RUECon+RUCon;month before (time adjective plus) time indication as endconcept becomes concept
+281;40;RUMonth|RUYear;RUCon|RUYear;month before year becomes concept
+1010;40;RUTemp+RUNoBCon|RUCfrYear;RUCon|RUCon;
+289;40;RUTemp|RUCfrYear:RURanking;RUBCon|RUCon;expression of time before number year/ranking number necomes beginconcept
+290;40;RUTemp|RUAdj|RUECon;RUCon|*|RUECon+RUCon;expression of time before adjective plus time indication as endconcept becomes concept
+288;40;RUDay;RUECon+RUCon;default for day: becomes endconcept
+285;40;RUMonth;RUECon+RUCon;default for month: becomes endconcept
+286;40;RUPartAdjtemp;RUPartAdj;default for time participle: becomes participle
+287;40;RUAdjtemp;RUAdj;default for time adjective: becomes adjective
+270;40;RUYear;RUCon;default for year: becomes concept
+381;40;RUOkolo|RUCfr;RUBCon|*;'okolo' before number becomes beginconcept
+744;40;RUCfrYear;RUCfr;
+1011;40;RUBeginendconcept|RUNazad;RUBeginendconcept+RUCon|+Join;
+1017;40;RUVerb|RUNazad;*|RURAdv;
+1012;40;RUECon|RUNazad;RUBeginendconcept+RUCon|+Join;
+1034;40;RUIndefpronAdvdegree|RUPosspron|^RUVerb+^RUPart+^RUInf+^RUAux+^SEnd;RUCon|RUCon|*;
+1036;40;RUIndefpronAdvdegree|RUDempron|RUCon:RUAdj;RUCon|RUCon|*;
+1038;40;RUIndefpronAdvdegree|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;
+1039;40;RUIndefpronAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;
+1035;40;RUIndefpronAdvdegree;RUAdvdegree;
+1189;40;RUPrep|RUAdvPR|RUPartAdj;*|RUCAdv|RUAdj;
+1018;40;RUAdvdegree|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
+1019;40;RUAdj|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
+1016;40;RUNazad;RUECon+RUCon;
+1003;40;RUTemp+RUTempBeginEnd;RUBeginendconcept;
+291;40;RUTemp;RUECon+RUCon;time expression becomes endconcept
+329;40;RUNeskolko|RUIz;RUIndefpronPR|RUPrep;'neskolko' plus 'iz' becomes nonrelevant
 1033;40;RUCfr|RUNum;RUNum|+Join;
-408;40;RUTakoj;RUIndefpronPRNR+RUIndefpron;Takoj wordt DEFAULT NR-Onbepaald vnw.,changed default 03-08-2015-nl
-324;40;RUNum|RUIndefpron|RUCon;RUCon|RUAdj|*;NR-Onbepaald vnw. tussen Nummer en Substantief wordt CONCEPT,replaced nrindefpron by general label indefpron 05-08-2015-nl,remove pathrelevant 05-08-2015-nl,added ^ 23-09-2015-nl,replaced mod by PR 16-12-2015-nl, * #75-nl
-451;40;RUNum|RUDempron|RUCon;RUCon|RUCAdv|*;Aanwijzend vnw. tussen Nummer en Substantief wordt CONCEPT,added ^ 23-09-2015-nl, * #75-nl
-323;40;RUAdj|RUIndefpron|RUCon;*|RUAdj|*;NR-Onbepaald vnw. tussen Adjectief en Substantief wordt CONCEPT,replaced nrindefpron by general label indefpron 05-08-2015-nl,added ^ 23-09-2015-nl, * #75-nl
-382;40;RUOkolo|RUNum;RUBCon|RUCon;Okolo plus Nummer wordt BEGINCONCEPT plus CONCEPT
-383;40;RUOkolo;RUPrep;Okolo wordt DEFAULT Voorzetsel
-530;40;RURaz|RUCompgr|RUComma|RURelpron;RUCon|RUCon|*|*;Raz plus Meer/minder voor Comma plus Betrekkelijk vnw. worden CONCEPTEN, * #75-nl
-529;40;RURaz|RUCompgr;RUCon|RUCon;Raz plus Meer/minder wordt CONCEPT plus RELATIE - changed approach: concept 01-09-2014-nl
-532;40;RUCompgr|RUPrep;RUAdv|*;Meer/minder voor Voorzetsel wordt Bijwoord, * #75-nl
-531;40;RUCompgr|RUIndefpron;RUAdv|*;Meer/minder voor NR-Onbepaald vnw. wordt Bijwoord,replaced nrindefpron by general label indefpron 05-08-2015-nl, * #75-nl
-572;40;RUNe|RUDam;*|RUVerb;Ne plus Dam wordt tweemaal RELATIE,^toegevoegd 16-04-13-nl, NegRel->* #75-nl
-571;40;RUPerspron|RUDam;*|RUVerb;Dam na Persoonlijk vnw. wordt RELATIE, * #75-nl
-570;40;RUDam;RUCon;Dam wordt DEFAULT CONCEPT
-526;40;RUNe|RUVerb|RUCompgr;*|*|RURAdv;Meer/minder na Ne plus Vervoegd werkwoord wordt RELATIE,^toegevoegd 16-04-13-nl, * #75-nl, NegRel->* #75-nl
-525;40;RUCompgr;RUAdvdegree;Meer/minder wordt DEFAULT Bijwoord van graad
-828;40;RUNum|RUAdvStruct|RUVerbCon;*|*|RUCon;02-03-2015-nl, * #75-nl
-528;40;RURaz|RUAdvdegree;RUCon|RUCon;Raz plus Bijwoord van graad worden CONCEPTEN
-721;40;RUNum|RURaz|RUComp;RUCon|+Join|+Join;21-08-2014-nl
-527;40;RURaz|RUNum;RUBCon|RUCon;Raz plus Nummer wordt BEGINCONCEPT plus CONCEPT
-582;40;RUAdvdegree|RURaz;RUBeginendconcept+RUCon|+Join;Bijwoord van graad voor Raz wordt CONCEPT plus ENDCONCEPT,replaced con by bcon 28-08-2013-nl,replaced bcon+econ,added con 23-09-2015-nl
-533;40;RURaz;RUECon+RUCon;Raz wordt DEFAULT ENDCONCEPT,added con 23-09-2015-nl
-640;40;RUNum|RUAndOr|RUAdvdegree;RUCon|RUCon|RUCon;30-04-13-nl - changed andor to concept 01-09-2014-nl
-720;40;RUNum|"с"|"лишним";RUCon|RUCon|+Join;28-08-2013-nl
-328;40;RUNum+^RUOdin;^RUCon;Cijfer wordt DEFAULT CONCEPT, VOOR RULES CON,added ^, ^Odin #75-nl
-191;40;RUPrep|RUVesti;*|RUCon;Vesti na Voorzetsel wordt CONCEPT, VOOR RULES ADVPRED,removed rprep 12-08-2015-nl, * #75-nl
-192;40;RUVesti;RUInf;Vesti wordt DEFAULT Infinitief
-410;40;RUDostatotsjno|RUCon;RUCAdv|*;Dostatotsjno voor Substantief wordt CONCEPT, VOOR RULES ADVPRED, Con|CAdv->CAdv|* #75-nl
-411;40;RUDostatotsjno;RUAdvPred;Dostatotsjno wordt DEFAULT Bijwoord/Predicaat
-327;40;RUAdvPred|RUAdj;RUAdj|*;Bijwoord/Predicaat voor Adjectief wordt CONCEPT, 1ste RULE ADVPRED, * #75-nl
-479;40;RUAdvPred|RUKAdj;RUAdv|RUKAdj;Bijwoord/Predicaat voor Kort Adjectief wordt Bijwoord
-6;40;RUAdvPred|RUInf;RUPred|*;Bijwoord/Predicaat voor Infinitief wordt RELATIE, * #75-nl
-42;40;RUInf:RUNe|RUAdvPred;*|RUPred;Bijwoord/Predicaat na Infinitief wordt RELATIE, * #75-nl,added Ne #78-nl
-250;40;RUAux|RUAdvPred|RUCon;*|RUPred|*;Bijwoord/Predicaat tussen Koppelwerkwoord en Substantief wordt RELATIE,added ^ 23-09-2015-nl, * #75-nl
-9;40;RUAdvPred;RUAdv;Bijwoord/Predicaat wordt DEFAULT Bijwoord, VOOR RULE 5
-413;40;RUInf|RUOchota;*|RUPred;Ochota na Infinitief wordt RELATIE, * #75-nl
-414;40;RUOchota|RUInf;RUPred|*;Ochota voor Infinitief wordt RELATIE, * #75-nl
-130;40;RUOchota;RUCon;Ochota wordt DEFAULT CONCEPT
-1062;40;"не так"|RUComma:RUAux:SEnd;RUCAdv|*;#75-nl, merged rules to make 'ne tak' Concept
-257;40;RUAdvdegreeNR|RUAdvStruct;RUAdvStruct|*;Bijwoord van graad/NonRelevant voor NonRelevantBijwoord wordt NONRELEVANT, * #75-nl
-258;40;RUAdvdegreeNR;RUAdvdegree;Bijwoord van graad/NonRelevant wordt DEFAULT Bijwoord van graad
-557;40;RUCon|RUAdvdegree|RUCon;*|RUBCon|*;Bijwoord van graad tussen twee Substantieven wordt BEGINCONCEPT,added ^ 23-09-2015-nl, * #75-nl
-568;40;SBegin|RUConjNR;*|^RUAdvStruct;Voegwoord/NR begin zin wordt NONRELEVANT
-569;40;RUConjNR;^RUConj;Voegwoord/NR wordt DEFAULT Voegwoord
-1175;40;RUEdva|*^"как":RUComma|RUComma|"как";RUConj|*|*|*;#75-nl
-1259;40;RUEdva|*^"сразу":RUComma|RUComma|"сразу";RUConj|*|*|*;#76-nl
-730;40;RUEdva;RUNe+RUNegation+RUNegBegin;02-10-2014-nl,added negation 26-10-2015-nl, AdvDegree->Ne #75-nl
-416;40;RUOsobenno|RUCon:RUPrep;RUAdvStruct|*;Osobenno voor Substantief wordt NONRELEVANT, VOOR RULES ADVGR,added ^ 23-09-2015-nl, merged rules to make 'osobenno' NonRelevant, * #75-nl
-417;40;RUOsobenno|RURelpron:RUConj;RUAdvStruct|*;Osobenno voor Betrekkelijk vnw. wordt NONRELEVANT, merged rules to make 'osobenno' NonRelevant, * #75-nl
-418;40;RUOsobenno;RUAdvdegree;Osobenno wordt DEFAULT Bijwoord van graad
-131;40;RUPrep|RUTsjasje;*|RUCon;Tsjasje na Voorzetsel wordt CONCEPT, VOOR RULES ADVTEMP,removed rprep 12-08-2015-nl, * #75-nl
-482;40;RUTsjasje;RUAdvPR;replaced mod by PR 16-12-2015-nl
-464;40;RUAdvdegree:RUAdvaux|RUAux;RURAdv|*;Bijwoord van graad voor Koppelwerkwoord wordt RELATIE, merged rules to make adverb Relation, * #75-nl
-466;40;RUAdvaux;RUAdv;BijwoordAux wordt DEFAULT Bijwoord
-1176;40;RUCfr|RUHyphen|RUCfr;*|RUPrep|*;#75-nl
-1231;40;RUCfr+RUBCon;RUBCon;#76-nl
-271;40;RUCfr;RUCon;Cijfer wordt DEFAULT CONCEPT, VOOR RULES CON
-309;40;RUAdvdegree|RUCon:RUOdin;RUAdj|*;Bijwoord van graad voor Substantief wordt CONCEPT,added ^ 23-09-2015-nl, *,added Odin #75-nl
-365;40;RUComp|RUVsego;*|RUAdv;Vsego na Comparatief wordt Bijwoord, * #75-nl
-1045;40;RUVsego|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;23-09-2015-nl
-1046;40;RUVsego|RUBCon;RUBCon+RUCon|+Join;23-09-2015-nl
-364;40;RUVsego;RUIndefpronPRCon+RUIndefpron;Vsego wordt DEFAULT Concept-Onbepaald vnw.,changed label from cindefpron 05-08-2015-nl
-379;40;RUOtnositelno|RUAdj;RUAdvdegree|*;Otnositelno voor Adjectief wordt Bijwoord van graad, * #75-nl
-377;40;RUOtnositelno;RUPrep;Otnositelno wordt DEFAULT Voorzetsel
-1227;40;"все"|"же"|^RUAdj:RUCon;RUAdvStruct|+Join|*;#75-nl
-242;40;RUAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;Bijwoord van Graad voor NR-Onbepaald vnw. wordt NR, attr. Modifier, RULES ADVGR TOT VSJO VOOR RULES ADVTEMP,changed to indefpronpr 05-08-2015-nl,replaced mod by PR 16-12-2015-nl
-979;40;RUAdvdegree|RUIndefpronPRNR;RUNRPron|+Join;Bijwoord van Graad voor NR-Onbepaald vnw. wordt NR, attr. Modifier, RULES ADVGR TOT VSJO VOOR RULES ADVTEMP,changed to indefpronprnr 05-08-2015-nl, NRAdv->NRPron #75-nl
-1025;40;RUAdvdegree|RUAdvTime;RUAdvPR+RUTime|+Join;26-08-2015-nl,replaced mod by PR 16-12-2015-nl
-1026;40;RUAdvdegree|RUAdvPR;RUAdvPR|+Join;26-08-2015-nl,replaced mod by PR 16-12-2015-nl
-356;40;RUAdvdegree|RUIndefpronPRCon;RUIndefpronPRCon+RUIndefpron|+Join;Bijwoord van graad voor Concept-Onbepaald vnw wordt Concept-Onbepaald vnw.,changed label from cindefpron 05-08-2015-nl
-349;40;RUAdvdegree|RUVsjo;RUBCon|*;Bijwoord van graad voor Vsjo wordt BEGINCONCEPT, * #75-nl
-253;40;RUAdvdegree|RUPrep;RUPrep|*;Bijwoord van graad voor Voorzetsel wordt RELATIE, * #75-nl
-1103;40;RUAux|RUAdvdegree|RURelpron;*|RURAdv|*;#75-nl
-243;40;RUAdvdegree;RUAdv;Bijwoord van graad wordt DEFAULT Bijwoord
-306;40;RUVsjo|RUComp;RUAdvdegree|*;Vsjo voor Comparatief wordt Comparatief, NA RULE 102, * #75-nl
-711;40;RUCon|RUVsjo|^RUVerb+^RUPart+^RUAux+^RUInf+^RUIndefpron+^SEnd;*|RUBCon|*;26-08-2013-nl,added ^,added ^verb etc. 23-09-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, * #75-nl
-712;40;^RUBCon+^SBegin|RUVsjo|RUCon;*|RUBCon|^RUCon-RUBCon;26-08-2013-nl,added ^ 23-09-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn
-162;40;RUVsjo;RUIndefpronPRCon+RUIndefpron;Vsjo wordt DEFAULT Concept-Onbepaald vnw., changed default from cindefpron 05-08-2015-nl
-481;40;RUAux|RUComp|RUCon;*|RURAdv|*;Comparatief tussen Koppelwerkwoord en Substantief wordt RELATIE,added ^ 23-09-2015-nl, * #75-nl
-714;40;"тем"|RUComp;RUComp|+Join;26-08-2013-nl
-1252;40;RUNe|RUComp|RUCon:RUAdj;RUNegCon-RUNegBegin|RUCAdv|*;#76-nl, no expansion
-1253;40;RUNe|RUComp|RUBCon;RUNegCon-RUNegBegin|RUCAdv|RUCon;#76-nl, no expansion
-307;40;RUComp;+RUAdv;Comparatief wordt DEFAULT Bijwoord, VOOR RULES ADVTEMP 247, added + #75-nl, keep Comp for Negation expansion
-522;40;RUmAux;+RUVerb;Modaal werkwoord wordt DEFAULT Vervoegd werkwoord, NA RULE 224,added + #75-nl
-468;40;RUHyphen|RUEto|RUCon:RUBCon:RUAdj:RUIndefpron:RUPosspron;+RUNotMarkerPB|RUPred|*;Eto tussen Koppelteken en Substantief wordt RELATIE,added ^ 23-09-2015-nl, merged rules to make hyphen Relation, * #75-nl,added Indefpron,Posspron #78-nl
-499;40;^RUVerb+^SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;changed Eto to PathRelevant and Adverb to relation 29-07-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn
-971;40;SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;29-07-2015-nl
-500;40;^RUVerb+^SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;changed Eto to PathRelevant and Adverb to relation 29-07-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn, * #75-nl
-972;40;SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;29-07-2015-nl, * #75-nl
-968;40;RUEto|RUAdv|RUCon;RUPred|*|*;make Eto relation 29-07-2015-nl, * #75-nl
-962;40;^RUPrep+^RUVerb+^RUPerspron+^RUPartActpf+^RUPartAdj+^RUInf+^RUPart+^SBegin|RUEto|RUPrep;*|RUPred|*;make Eto relation 27-07-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn, * #75-nl
-969;40;SBegin|RUEto|RUPrep;*|RUPred|*;make Eto relation 29-07-2015-nl, * #75-nl
-964;40;^RUVerb+^RUAux+^RUmAux+^SBegin|RUEto|RUAdvStruct:RURAdv|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make Eto relation 29-07-2015-nl, added ^SBegin and ^SEnd for JDN245 _sbse #5-jdn, * #75-nl, added RAdv #76-nl
-973;40;SBegin|RUEto|RUAdvStruct|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make Eto relation 29-07-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, * #75-nl
-965;40;RUEto|RUNe:RUNegCon|^RUVerb:RUAux:RUmAux:RUPrep:RUPred:SEnd:RUIndefpron;RUPred|*|*;make Eto relation 29-07-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn, *, added Indefpron #75-nl, #76-nl
-966;40;^RUVerb|RUEto|RURelpron:RUDempronConj;*|RUPred|*;make Eto relation 29-07-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn, * #75-nl, removed ^SBegin again, added DempronConj #76-nl
-470;40;RUEto;RUPRPron;Eto wordt DEFAULT PathRelevant, Dempron->PRPron #75-nl
-394;40;RUNe|.RUAdv|RUPartActpf;*|RURAdv|RUPart;Participium act. pf. na Ne plus Bijwoord wordt RELATIE,^toegevoegd 16-04-13-nl, added . to Adv, NegRel->* #75-nl
-385;40;RUAdv|RUAdvPR|RUPartActpf;RURAdv|RURAdv|RUPart;Participium act. pf. na Bijwoord van tijd wordt RELATIE,removed 24-08-2015-nl,changed from advtemp to adv + mod 24-08-2015-nl
-391;40;RUPartActpf;RUPartAdj;Participium act. pf. wordt DEFAULT Participium lange vorm
-727;40;RUVerb|RUPartAdj|RUAdv|^RUCon+^SEnd;*|RUPart|RURAdv|*;02-10-2014-nl, added ^SEnd for JDN245 _sbse #5-jdn, * #75-nl
-388;40;RUPartAdj|RUInf;RUPart|*;Participium lange vorm voor Infinitief wordt RELATIE, 1ste RULE PARTADJ, * #75-nl
-389;40;RUPartAdjSubst;RUPartAdj;Participium lange vorm/Substantief wordt DEFAULT Participium lange vorm, NA RULE 392
-8;40;RUComma|RUPartAdj;*|RUPart;Participium lange vorm na Comma wordt RELATIE, * #75-nl
-45;40;RUComma|RUAdv|RUPartAdj;*|RURAdv|RUPart;Participium lange vorm na Comma plus Bijwoord wordt RELATIE, * #75-nl
-1141;40;RUComma|RUAdvPR|RUPartAdj|^RUCon;*|*|RUPart|*;#75-nl
-1085;40;RUComma|RUAdvStruct:RUConj|RUPartAdj|RUPrep;*|*|RUPart|*;#75-nl
-1086;40;RUComma|.RUAdvStruct|RUNe|RUPartAdj;*|*|*|RUPart;#75-nl
-440;40;RUComma|.RUAdv|RUNe|RUPartAdj;*|RURAdv|*|RUPart;Participium lange vorm na Comma plus Bijwoord plus Ne wordt RELATIE,^toegevoegd 16-04-13-nl, *, NegRel->*, added . to Adv #75-nl
-1087;40;RUComma|RUAndOrBut:"как"|RUPartAdj|.RUComma|RUAndOrBut:"как"|RUNe|RUPartAdj;*|*|RUPart|*|*|*|RUPart;#75-nl
-1040;40;RUECon|RUPartAdj|^RUCon+^RUAdj+^SEnd;^RUECon+RUCon|RUPart|*;23-09-2015-nl,added con 23-09-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn
-635;40;RUPart|RUCon|RUAndOr|RUPartAdj;*|*|*|RUPart;29-04-13-nl,added ^ 23-09-2015-nl, * #75-nl
-393;40;RUPart|RUAndOr|RUPartAdj;*|*|RUPart;Participium lange vorm na Voltooid deelwoord plus En/of wordt RELATIE, * #75-nl
-52;40;.RUNegPR|RUNe|RUPartAdj;RUAdj-RUNegBegin|RUAdj-RUNegBegin|RUAdj;Ne plus Participium lange vorm worden 2 CONCEPTEN,^toegevoegd 16-04-13-nl, ^Adj->Adj-NegBegin, added NegPR #76-nl
-43;40;RUPartAdj;RUAdj;Participium lange vorm wordt DEFAULT Adjectief
-1058;40;RUSjtoto|RUAdv|RUAdj;RUBCon|RUCAdv|*;21-12-2015-nl, other rule for NegPR #76-nl
-1269;40;RUNegPR|RUAdv|RUAdj;RUBCon+RUNegBCon|RUCAdv|*;#76-nl
-1056;40;RUSjtoto|.RUNe|RUAdj;RUBCon|*|*;21-12-2015-nl, other rule for NegPR #76-nl
-1268;40;RUNegPR|.RUNe|RUAdj;RUBCon+RUNegBCon|*|*;#76-nl
-655;40;"действительно"|RUAdj;RUCAdv|*;07-05-13-nl, * #75-nl
-652;40;RUAdj:RUBCon|RUPosspron:RUActobj|RUAdj;*|RUAdj|*;Pronoun between two Adjectives becomes CONCEPT, 02-05-13-nl, *,added Actobj,BCon #75-nl
-959;40;RUAdj:RUBCon|*RUActobj:"только":"же":"лишь":"еще":"уже"|RUCon;*|RUAdj|*;Personal pronoun as acting object plus NonRelevant between Adjective and Substantive becomes CONCEPT, 27-07-2015-nl,added ^ 23-09-2015-nl, Actobj|NRAdv->*Actobj:NRAdv, *,added BCon,AdvStruct->literals #75-nl
-555;40;RUIndefpronPR|RUObrazom;RUIndefpronPR|+Join;NR-Onbepaald vnw. plus Obrazom wordt NR, attr. Modifier plus NR, attr. PR Object,replaced nrindefpron by indefpronpr 05-08-2015-nl,replaced mod by PR 16-12-2015-nl
-980;40;RUIndefpronPRNR|RUObrazom;RUAdvStruct|+Join;NR-Onbepaald vnw. plus Obrazom wordt NR, attr. Modifier plus NR, attr. PR Object,replaced nrindefpron by indefpronprnr 05-08-2015-nl
-556;40;RUObrazom;RUCon;Obrazom wordt DEFAULT CONCEPT
-182;40;RUNeskolko|RUInf:RUPart:RUVerb:RUAdv;RUAdvdegree|*;Neskolko voor Infinitief wordt Bijwoord van graad, NA RULES PARTADJ, merged rules to make 'neskolko' adverb of degree, replaced unaltered labels by * #75-nl
-975;40;RUNeskolko|SEnd:RUComma;RUIndefpronPR|*;replaced mod by PR 16-12-2015-nl, merged rules to make 'neskolko' PathRelevant, replaced unaltered labels by *
-348;40;RUAdvdegree;RUAdv;Bijwoord van graad wordt DEFAULT Bijwoord
-977;40;RUCon|RUNeskolko;*|RUBCon;03-08-2015-nl, * #75-nl
-1157;40;RUNeskolko|RUIndefpronPR|.RUNe:RUAdv:RUNegCon|RUAdj:RUCon:RUCAdv;RUAdj|RUAdj|*|*;#75-nl, #76-nl
-181;40;RUNeskolko;RUCon;Neskolko wordt DEFAULT Onbepaald voornaamwoord,changed default from nrindefpron 03-08-2015-nl
-203;40;RUPrep|RUNem;*|RUPerspron;Nem na Voorzetsel wordt NR, attr. PathRelevant Object,added mod 27-07-2015-nl, * #75-nl
-208;40;RUNem;RUAdj;Nem wordt DEFAULT Adjectief
-431;40;RUPrep|RUTom;*|RUPRPron;Tom na Voorzetsel wordt Relatie-Aanwijzend vnw., *, RDempron->PRPron #75-nl
-202;40;RUTom;RUCon;Tom wordt DEFAULT CONCEPT
-189;40;RUSamyj|.RUAdv|RUAdj;RUAdj|^RUCAdv|*;Samyj voor Bijwoord plus Adjectief wordt Adjectief, * #75-nl
-197;40;RUSamyj;RUAdvStruct;Samyj wordt DEFAULT NONRELEVANT
-198;40;RUAdj:RUPosspron|RUPutjom;*|RUCon;Putjom na Adjectief wordt CONCEPT, merged rules to make 'putjom' Concept, * #75-nl
-195;40;RUPutjom;RUPrep;Putjom wordt DEFAULT Voorzetsel
-212;40;SBegin|.RUAndOr|RUPravda|RUComma;*|RUAdvStruct|RUAdvStruct|*;Pravda na En/of begin zin en voor Comma wordt NONRELEVANT, added . to AndOr, * #75-nl
-214;40;RUPravda;RUCon;Pravda wordt DEFAULT CONCEPT
-567;40;SBegin|RUAndOr;*|RUAdvStruct;En/of begin zin wordt NONRELEVANT
-445;40;RUAdj|RUDrug|RUPrep|RUDrug;*|RUAdj|RUAdj|RUAdj;Wederkerig vnw. met Voorzetsel na Adjectief wordt CONCEPT, * #75-nl
-222;40;RUDrug|RUPrep|RUDrug;RURAdv|+Join|+Join;Wederkerig vnw. met Voorzetsel wordt Persoonlijk vnw.,changed from nonrelevant 05-08-2015-nl
-226;40;RUPrep|RUDrug|RUCon;*|RUIndefpronPR|*;05-08-2015-nl,removed rprep 12-08-2015-nl,added ^ 23-09-2015-nl,replaced mod by PR 16-12-2015-nl, * #75-nl
-176;40;RUDrug;RUCon;Wederkerig vnw. wordt DEFAULT CONCEPT
-487;40;RUAdj:RUPosspron|RUConVerb;*|RUCon;Substantief/Werkwoord na Adjectief wordt CONCEPT, merged rules to make ConVerb Concept, * #75-nl
-736;40;^RUCon+^SBegin|RUConVerb|RUPosspron|RUCon;*|RUCon|^RUPosspron|^RUCon;06-10-2014-nl, added ^SBegin for JDN245 _sbse #5-jdn
-737;40;RUConVerb|RUVerb;RUCon|*;06-10-2014-nl, * #75-nl
-486;40;RUPrep:RUVerb|RUConVerb;*|RUCon;Substantief/Werkwoord na Voorzetsel wordt CONCEPT,removed rprep 12-08-2015-nl, merged rules to make ConVerb Concept, * #75-nl
-492;40;RUConVerb|RUAdj:RUCon;RUCon|*;Substantief/Werkwoord voor Adjectief wordt CONCEPT, merged rules to make ConVerb Concept, * #75-nl
-490;40;RUConVerb;RUVerb;Substantief/Werkwoord wordt DEFAULT RELATIE
-432;40;RUPribyli|RUCon+^RUBeginendconcept;RUVerb|*;Pribyli voor Substantief wordt RELATIE,added ^ 23-09-2015-nl,added ^beginend 23-09-2015-nl, * #75-nl
-167;40;RUCon|RUPribyli;*|RUCon;Pribyli na Substantief wordt CONCEPT, VOOR RULES VERBCON,added ^ 23-09-2015-nl, * #75-nl
-166;40;RUPribyli;RUVerbCon;Pribyli wordt DEFAULT Werkwoord/Substantief
-646;40;RUVerbCon|RUAdvStruct;RUVerb|*;02-05-13-nl, * #75-nl
-648;40;RUAdj|"стали";*|RUVerb;02-05-13-nl, * #75-nl
-165;40;RUAdj:RUPrep:RUVerb|RUVerbCon;*|RUCon;Werkwoord/Substantief na Adjectief wordt CONCEPT, RULES CONVERB VOOR RULES REFL VNW, * #75-nl
-651;40;RUVerbCon|.RUNe|RUVerb;RUCon|*|*;02-05-13-nl, * #75-nl
-1230;40;RUVerbCon|RUPrep|*RUAdj:RUCon|.RUNe|RUVerb;RUCon|*|*|*|*;#75-nl
-169;40;RUVerbCon;RUVerb;Werkwoord/Substantief wordt DEFAULT RELATIE
-178;40;RUPtclVerb|RUComma|RURelpron;RUVerb|*|*;Partikel/Werkwoord voor Comma plus Betrekkelijk vnw. wordt RELATIE, * #75-nl
-179;40;SBegin|RUPtclVerb|RUComma;*|RUAdvStruct|*;Partikel/Werkwoord begin zin voor Comma wordt NONRELEVANT, * #75-nl
-177;40;RUPtclVerb;RUVerb;Partikel/Werkwoord wordt DEFAULT RELATIE
-1048;40;RUAdj|RURepr|RUCon;*|RUAdj|*;26-10-2015-nl 2016.2, * #75-nl
-1049;40;RUPrep|RURepr;*|RUPerspron;26-10-2015-nl 2016.2, * #75-nl
-447;40;RURepr;+RUVerb;Wederkerig vnw. wordt DEFAULT NONRELEVANT, attr. PathRelevant Object,changed from Perspron into verb 26-10-2015-nl 2016.2,added + to keep Repr #75-nl
-483;40;RUVerb|RUAdvRefl;*|RURAdv;Sam sebja na Vervoegd werkwoord wordt RELATIE, * #75-nl
-484;40;RUPrep|RUAdvRefl;*|RUPerspron;Voorzetsel plus Sam sebja wordt NR, attr. PR Predicate plus NR, attr. PR Object,replaced nrprep 12-08-2015-nl, * #75-nl
-485;40;RUAdvRefl;RUAdv;Sam sebja wordt DEFAULT Bijwoord
-137;40;RUPrep|RURefl;*|RUPerspron;Reflexief vnw. na Voorzetsel wordt NR, attr. PR Object, * #75-nl
-458;40;RUPart|RURefl;RUPart|+Join;Reflexief vnw. na Voltooid deelwoord wordt RELATIE
-644;40;RUInf|RURefl;RUInf|+Join;02-05-13-nl
-645;40;RURefl|RUInf;RUInf|+Join;02-05-13-nl
-139;40;RURefl|RUVerb;RUVerb|+Join;Reflexief vnw. voor Vervoegd werkwoord wordt RELATIE
-138;40;RURefl|RUAdv|RUVerb;RUVerb|RURAdv|*;Reflexief vnw. voor Bijwoord plus Vervoegd werkwoord wordt RELATIE, *, removed ^ before RAdv #75-nl
-1228;40;RURefl|RUNe|RUVerb:RUInf;RURAdv|*|*;#75-nl
-154;40;RUCon|RURefl;*|+Join;Reflexief vnw. na Substantief wordt CONCEPT,added ^ 23-09-2015-nl, * #75-nl
-156;40;RUAdj|RURefl;^RUAdj|RUAdj;Reflexief vnw. na Adjectief wordt Adjectief
-1044;40;RUAdj|"тем";*|RUCon;23-09-2015-nl, * #75-nl
-402;40;^SBegin|RUComma:RUHyphen|RUDempronConj;*|*|RUConj;Tem/to na Comma wordt RELATIE, *,RDempronConj->DempronConj #75-nl,added ^sbegin,^Hyphen #78-nl
-401;40;RUDempronConj;RUPRPron;Tem/to wordt DEFAULT Relatie-Aanwijzend vnw., RDempron->PRPron, RDempronConj->DempronConj #75-nl
-1043;40;RUIndefpronPRCon|RUIndefpronPRNR;^RUIndefpronPRCon|+Join;23-09-2015-nl
-1060;40;RUIndefpronPRNR|.RUAdvStruct:RUAdv|RUAdj:RUPosspron:RUCon:RUIndefpronPR;RUNRPron|*|*;merged rules to make indefpron NR, NRAdv->NRPron #75-nl
-335;40;RUIndefpronPRNR;RUIndefpronPR;NR-Onbepaald vnw. wordt DEFAULT NONRELEVANT, attr. PathRelevant Object,replaced nrindefpron by indefpronprnr and nrcon by indefpronpr 03-08-2015-nl,replaced mod by PR 16-12-2015-nl
-357;40;RUIndefpronPRCon|RUPosspron;RUCon|RUCon;Concept-Onbepaald vnw. voor Bezittelijk vnw. wordt 2 maal CONCEPT, attr. Modifier,changed from Cindefpron,remove pathrelevant 05-08-2015-nl,replaced mod by PR 16-12-2015-nl
-981;40;RUIndefpronPRCon|.RUAdv|RUAdj;RUAdj|RUAdj|*;05-08-2015-nl, added . to Adv, * #75-nl
-1042;40;RUIndefpronPRCon|RUECon;RUBeginendconcept+RUCon|+Join;23-09-2015-nl
-362;40;RUIndefpronPRCon|RUCon;RUCon|*;Concept-Onbepaald vnw. voor Substantief wordt CONCEPT, attr. Modifier,changed from cindefpron,conmod 05-08-2015-nl,added ^23-09-2015-nl, * #75-nl
-360;40;RUIndefpronPRCon|RUDempron:RUPRPron|RUCon;RUCon|RUCon|*;Concept-Onbepaald vnw. voor Aanwijzend vnw. plus Substantief wordt 2 maal CONCEPT, attr. Modifier,replaced cindefpron 05-08-2015-nl,added ^ 23-09-2015-nl, *, added PRPron #75-nl
-361;40;RUIndefpronPRCon|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;Concept-Onbepaald vnw. voor NR-Onbepaald vnw. bijvoeglijk wordt CONCEPT, attr. Modifier,replaced label from cindefpron,conmod (adj)05-08-2015-nl,replaced mod by PR 16-12-2015-nl, added ^SEnd for JDN245 _sbse #5-jdn
-358;40;RUIndefpronPRCon|RUIndefpronPR;RUIndefpronPR|+Join;Concept-Onbepaald vnw. voor NR-Onbepaald vnw. zelfstandig wordt CONCEPT, attr. Modifier,replaced label from cindefpron,nrcon (noun)05-08-2015-nl,replaced mod by PR 16-12-2015-nl
-359;40;RUIndefpronPRCon;RUIndefpronPR;Concept-Onbepaald vnw. wordt DEFAULT CONCEPT,changed from cindefpron,con 05-08-2015-nl,replaced mod by PR 16-12-2015-nl
-690;40;^RUCon+^SBegin|RUPrep|RUAdj|RUCon|RUCon|RUNe|RUPart;*|*|*|*|RUBCon|*|*;1 result,testing concept clusters 31-05-2013-nl,replaced negbegin by ne 26-01-2015-nl,added ^ 23-09-2015-nl, added ^SBegin for JDN245 _sbse #5-jdn, * #75-nl
-544;40;RUComma:RUVerb|RUPoka;*|RUConj;Poka na Comma wordt RELATIE, *,added Verb #75-nl
-549;40;RUPoka;RUAdvStruct;Poka wordt DEFAULT NONRELEVANT
-1061;40;RUDempron:RUPRPron|.RUAdv:RUNe|RUAdj:RUPosspron:RUCon;RUNRPron|*|*;merged rules to make dempron NR, NRAdv->NRPron, added PRPron #75-nl
-1166;40;RUCon:RUPrep:RURelpron|RUPerspron+RUPosspron|RUAdj:RUCon;*|RUPosspron|*;#75-nl
-474;40;RUCon|RUAdv|RUKAdj;RUCon|RURAdv|RUPred;Kort Adjectief na Substantief plus Bijwoord wordt RELATIE,added ^ 23-09-2015-nl, removed ^ before Con and RAdv #75-nl
-473;40;RUCon:RUNum|RUKAdj;^RUCon|RUPred;Kort Adjectief na Substantief wordt RELATIE,added ^ 23-09-2015-nl,added Num #75-nl
-472;40;RUKAdj|RUCon:RUBCon:RUAdj;RUPred|*;Kort Adjectief voor Substantief wordt RELATIE,added ^ 23-09-2015-nl, merged rules to make short adjective Relation, * #75-nl
-478;40;RUPred|RUAndOr|RUKAdj;*|*|RUPred;Kort Adjectief na Predicaat plus En/of wordt RELATIE, * #75-nl
-477;40;RUKAdj|RUAndOr|RUPred;RUPred|*|*;Kort Adjectief voor En/of plus Predicaat wordt RELATIE, * #75-nl
-734;40;RUKAdj|SEnd;RUPred|*;02-10-2014-nl
-476;40;RUKAdj;+RUAdj;Kort Adjectief wordt DEFAULT Adjectief, added + to Adj #75-nl
-564;40;RUAdj|RUAdvPR|RUAdj:RUCon;*|RUCAdv|*;adverb time/place between two adjectives becomes CONCEPT,adapted rule: no longer advtemp 24-08-2015-nl,replaced mod by PR 16-12-2015-nl, merged rules to make AdvPR Concept, * #75-nl
-155;40;RURefl;RURAdv;Reflexief vnw. wordt DEFAULT RELATIE
-5;40;RUAdv|RUVerb:RUPart;RURAdv|*;Bijwoord voor Vervoegd werkwoord wordt RELATIE, 1ste RULE ADV, merged rules to make Adv Relation, *, removed ^ before RAdv #75-nl
-19;40;RUAdv|RUPred;^RURAdv|*;Bijwoord voor Predicaat wordt RELATIE, * #75-nl
-2;40;RUAdv|RUAdj+^RUNum;RUCAdv|RUAdj-RUBCon;Bijwoord voor Adjectief wordt CONCEPT,added ^bcon 21-09-2015-nl, removed ^ before CAdv and Adj,added ^Num #75-nl
-70;40;RUAdv|RUInf;RURAdv|*;Bijwoord voor RelatieInfinitief wordt RELATIE,replaced RInf by Inf 21-10-2013-nl, *, removed ^ before RAdv #75-nl
-3;40;RUAdv|RUCAdv;RUCAdv|*;Bijwoord voor ConceptBijwoord wordt CONCEPT, LAATSTE VOOR RULE 20, *, removed ^ before CAdv #75-nl
-713;40;RUCon|RUCAdv|RUCAdv;*|^RUBCon|^RUCon;26-08-2013-nl,added ^ 23-09-2015-nl, * #75-nl
-4;40;RUAdv|RURAdv;RURAdv|*;Bijwoord voor RelatieBijwoord wordt RELATIE, LAATSTE VOOR RULE 20, *, removed ^ before RAdv #75-nl
-20;40;RUAdv|RUAndOr|RURAdv;RURAdv|+RUList|*;Bijwoord voor En/of plus RelatieBijwoord wordt RELATIE, NA RULE 4, *, removed ^ before RAdv #75-nl,added List #78-nl
-21;40;RUAdv|RUAndOr|RUCAdv;RUCAdv|*|*;Bijwoord voor En/of plus ConceptBijwoord wordt CONCEPT, NA RULE 4, *, removed ^ before CAdv #75-nl
-33;40;RUAdj|RUAdv|RUCon;*|RUCAdv|*;Bijwoord na Adjectief wordt CONCEPT,added con 02-10-2014-nl, *, removed ^ before CAdv #75-nl
-17;40;^RUPart|RUAux|.RUAdvStruct:RUAdvPR|*RUAdv;*|*|*|RUCAdv;Bijwoord na Koppelwerkwoord wordt CONCEPT, NA RULE 21 - different approach: relation 01-09-2014-nl, *,^RAdv->CAdv,added ^Part,.AdvStruct:AdvPR #75-nl
-319;40;RUCAdv|RUAndOr|RUAdv;^RUCAdv|RUAndOr|^RUCAdv;Bijwoord na ConceptBijwoord plus En/of wordt CONCEPT
-34;40;RUAdv|RUCAdv;RUCAdv|*;Bijwoord voor ConceptBijwoord wordt CONCEPT, NA 35 en 39, *, removed ^ before CAdv #75-nl
-38;40;RUAdv;RURAdv;Bijwoord wordt DEFAULT RELATIE, removed ^ before RAdv #75-nl
-493;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;Voorzetsel plus Persoonlijk vnw. tussen Adjectief en Substantief worden CONCEPTEN,remove pathrelevant 05-08-2015-nl,added ^ 23-09-2015-nl,replaced mod by PR 16-12-2015-nl, *,added ^Posspron #75-nl
-340;40;RUPrep|RUIndefpron|RUAdj;*|RUIndefpronPR|*;Voorzetsel voor NR-Onbepaald vnw. zelfstandig plus Adjectief wordt RELATIE, NA RULES NRINDEFPRON 335,replaced nrcon 12-08-2015-nl,removed rprep 12-08-2015-nl,replaced mod by PR 16-12-2015-nl, * #75-nl
-573;40;RURelpron;+RUConj;Betrekkelijk vnw. wordt DEFAULT Voegwoord,verplaatst 23-04-13-nl, added + before Conj #75-nl
-581;40;RUECon|RUHyphen|RUCon;RUECon+RUCon|^RUConj|*;Koppelteken tussen EndConcept en Substantief wordt RELATIE,added con 23-09-2015-nl,added ^ 23-09-2015-nl, *, added ^ #75-nl
-1004;40;RUBeginendconcept|RUHyphen|RUCon:RUBeginendconcept;RUBeginendconcept|^RUConj|*;17-08-2015-nl,added ^ 23-09-2015-nl, *,Beginendconcept, added ^ #75-nl
-580;40;RUCon:RUIndefpronPR|RUHyphen|RUBCon:RUCAdv:RUAdj:RUCon:RUNikakoy:RUNRPron;*|^RUConj|*;Koppelteken tussen Substantief en BeginConcept wordt RELATIE,added ^ 23-09-2015-nl, added Nikakoy,^ #75-nl,added IndefpronPR,NRPron  #78-nl
-745;40;RUAdj|RUHyphen|RUCon:RUAdj;*|^RUConj|*;20-10-2014-nl,added ^ 23-09-2015-nl, merged rules to make hyphen Relation, *, added + #75-nl, ^ instead of +Conj #78-nl
-647;40;RUConIfCap;RUConIfCap;02-05-13-nl
-400;40;RUComma;+RUPunctuation;Comma wordt DEFAULT PUNCTUATION,added +, to keep Comma label #75-nl
-932;40;RUBCon+^RUOdin;RUBCon;to remove all other labels than BCon, to prevent it from becoming NonRelevant 13-05-2015-nl, added ^Odin #75-nl
-949;40;RUECon;RUECon;to remove all other labels than ECon, to prevent it from becoming NonRelevant 15-06-2015-nl
-1041;40;RUBeginendconcept;RUBeginendconcept;23-09-2015-nl
-988;40;RUECon|RUNoECon;RUCon|RUECon;17-08-2015-nl
-1051;40;RUIndefpronPR;RUPRPron;to remove all other labels so PathRelevancy is not lost 16-12-2015-nl, IndefpronPR->PRPron #75-nl
-1052;40;RUAdvPR;RUAdvPR;to remove all other labels so PathRelevancy is not lost 16-12-2015-nl
-1053;40;RUDempron;RUPRPron;to remove all other labels so PathRelevancy is not lost 16-12-2015-nl, Dempron->PRPron #75-nl
-1162;40;RUPerspron+RUPosspron;RUPerspron+RUPosspron;to remove all other labels so PathRelevancy is not lost #75-nl
-1054;40;RUPerspron+^RUPosspron;RUPerspron;to remove all other labels so PathRelevancy is not lost 16-12-2015-nl, added +^Posspron #75-nl
-1055;40;RUPosspron+^RUPerspron;RUPosspron;to remove all other labels so PathRelevancy is not lost 16-12-2015-nl, added +^Perspron #75-nl
-1183;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;4-element enumeration, #75-nl
-1182;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;3-element enumeration, #75-nl
-1179;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron:RUNRPron:RUCAdv|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration, #75-nl
-1181;60;*RUBCon|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration, #75-nl
-1195;60;*RUAdj|RUAndOr|.RUCAdv|*RUAdj;+RUList|+RUList|+RUList|+RUList;2-element enumeration of adjectives #75-nl
-1196;60;*RUInf|RUAndOr|*RUInf;+RUList|+RUList|+RUList;2-element enumeration of infinitives #75-nl
-1292;60;*RUVerb:RUNegPred|.RUInf|RUAndOr|.RUAdvStruct:RURAdv:RUNe:RUNegRel:RUInf|*RUVerb|^"ли";+RUList|+RUList|+RUList|+RUList|+RUList|*;2-element enumeration of verbs #78-nl, two verbs shouldn't get split in sentence structure detection
-1301;60;RUNe|RUVerb|RUAndOr|.RUAdvStruct:RURAdv:RUInf|RUVerb|^SEnd;-RUList|-RUList|-RUList|-RUList|-RUList|*;#78-nl, correction to r1292: should be split here
-1288;60;RUNe:RUNegRel|RUPart:RUPred:RUKAdj|RUAndOr|RUNe:RUNegRel|RUVerb;+RUList|+RUList|+RUList|+RUList|+RUList;#78-nl, negated participle/predicate and negated verb should stay together
-1295;60;RUPred|RUAndOr|.RURAdv|RUPred;+RUList|+RUList|+RUList|+RUList;#78-nl
-1303;60;RURelpron|RUAux:RUmAux|RUAndOr|RURelpron|RUAux:RUmAux;+RUList|+RUList|+RUList|+RUList|+RUList;#78-nl
-1305;60;RUVerb|"ли"|RUAndOr|RUVerb|"ли";+RUList|+RUList|+RUList|+RUList|+RUList;#78-nl
-1093;65;RUVerb:RUPred:RUPart+^RUAux|RUNe|RUAdj:RUCon;*|RUNegRel|*;#75-nl
-1097;65;^RUAdj|RUAndOrBut|RUNe|.RUAdj|RUCon;*|*|RUNegRel|*|*;#75-nl
-1101;65;RUCon|RUNe|RUKAdj;*|RUNegRel|RUPred;#75-nl
-1100;65;RUCon|RUNe|RUCAdv:RUCon:RUNum:RUAdj+^RUNoBCon:RUNegComp;*|RUBCon+RUNegBCon|*;#75-nl, added ^NegComp #76-nl
-1099;65;RUNe|RUAdj:RUCAdv:RUCon:RUNum;RUNegCon|*;#75-nl
-1098;65;RUNe;RUNegRel;#75-nl
-1084;65;RUNikakoy|RUNegRel;RUNegPR|*;#75-nl
-1254;65;RUConGen|RUNikakoy|SEnd:RUPunctuation;*|RUNegCon|*;#76-nl
-561;65;RUNikakoy;RUBCon+RUNegBCon;Nikto wordt DEFAULT BEGINCONCEPT,^toegevoegd 16-04-13-nl, removed ^ before BCon,added NegBCon,moved down to phase 65 #75-nl
-96;65;RUNi|RUPrep|RURelpron|RUAdj:RUCon;RUBCon+RUNegBCon|+Join|+Join|*;Ni voor Voorzetsel, en Betrekkelijk vnw. erna worden CONCEPT,^toegevoegd 16-04-13-nl,changed prep to concept 26-08-2013-nl, ^NegCon|Con|Con+Negation->RUBCon+RUNegBCon|+Join|+Join, added Adj:Con, moved down to phase 65 #75-nl
-1074;65;RUNi|.RUPrep|RUOdin|.RUIz|.RUNRPron:RUPRPron|*RUAdj:RUCon:RUECon;RUBCon+RUNegBCon|+Join|+Join|RUAdj|RUAdj|*;#75-nl
-1083;65;RUNi|.RUPrep|RUOdin|RUPunctuation:SEnd:RUNegRel:RUPrep;RUNegPR|+Join|+Join|*;#75-nl
-1104;65;RUCond|."то"|RUNi;*|RURAdv|RURAdv-RUNegation-RUNegBegin;#75-nl, no negation
-1117;65;RUCond:RUConj|*RUAdj:RUCon:RUPrep:RUPerspron:RUPRPron:RUNRPron:RUAdvStruct:RURAdv|RUNi;*|*|RURAdv-RUNegation-RUNegBegin;#75-nl, no negation
-1075;65;RUOdin+RUNoBCon|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUAdj|RUAdj|RUAdj|*;#75-nl
-1076;65;RUOdin|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUBCon-RUNum|RUAdj|RUAdj|*;#75-nl
-1081;65;RUOdin|RUIz|RUAdj;RUBCon-RUNum|RUAdj|*;#75-nl
-1078;65;RUOdin|RUIz|RUPRPron;RUPRPron-RUNum|+Join|+Join;#75-nl
-1149;65;RUOdin+RUBCon;RUBCon;#75-nl
-1077;65;RUOdin;RUAdj;#75-nl
-985;65;RUPrep;RUPrep;12-08-2015-nl, moved down to phase 65 #75-nl
-1102;65;RUKAdj;RUAdj;#75-nl
-1273;66;SBegin:RUHyphen:":"+^RUNotMarkerPB|^SBegin+^RUPunctuation;*|+RUPBegin;#78-nl, first word sentence or hyphen, colon
-1275;66;SBegin|RULayout:RUPunctuation|^RULayout;*|*|+RUPBegin;#78-nl
-1276;66;*{2}RUPunctuation|^RUPunctuation;*|+RUPBegin;#78-nl
-1278;66;RUBracket1|*{1,2}^RUPunctuation|RUBracket2|^SEnd+^RUPunctuation;-RUPunctuation|*|-RUPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence, #78-nl
-1277;66;RUBracket1:RUBracket2+RUPunctuation|^SEnd:RUPunctuation;*|+RUPBegin;#78-nl isolate part of sentence between ()
-1299;66;RUComma|RUAdvStruct|RUComma;*|*|+RUNotMarkerPB;#78-nl, preparation, mark comma after advstruct so it's NOT followed by a PB
-1280;66;RUComma|RUPrep:RURAdv|RUConj;*|+RUPBegin|*;#78-nl, after comma: preposition/adverb + conjunction or relative pronoun
-1296;66;RUComma|RUNegPR|RUNegRel;*|+RUPBegin|*;#78-nl, after comma: negation pronoun
-1279;66;RUComma|RUConj:RUPart;*|+RUPBegin;#78-nl, after comma: conjunction, relative pronoun or participle
-1300;66;RUComma+^RUNotMarkerPB|RUVerb:RUPred:RUNegRel;*|+RUPBegin;#78-nl, after comma: verb, unless preceded by advstruct in between commas
-1281;66;RUVerb:RUPred|.^RUPunctuation|RUComma|RUAndOr|.^RUVerb:RUPred:RUNegRel:RUComma|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*|*;#78-nl, after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
-1282;66;RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron:RURAdv:RUAdvStruct:RUAdvPR;+RUPossiblePBegin;#78-nl, preparation for various patterns concerning phrase begin
-1284;66;RUPrep:RUNegRel:RUNegPR:RUBCon;+RUPossiblePBegin;#78-nl, preparation for various patterns concerning phrase begin
-1283;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*;#78-nl
-1306;66;RUAndOr|.RUPrep|RUKotory|*RUPossiblePBegin;+RUBeginrel+RUPBegin|*|*|*;#78-nl, and followed by 'kotory' (less restrictions than other relpron/conj)
-1289;66;^RUConj:RUInf|RUAndOr|.RUPrep|RUConj|*RUPossiblePBegin;*|+RUBeginrel+RUPBegin|*|*|*;#78-nl, and followed by conjunction
-1287;66;RUPart:RUPred|RUAndOr+^RUList|*RUPossiblePBegin|RUVerb:RUPred+^RUInf|^SEnd;*|+RUBeginrel+RUPBegin|*|*|*;#78-nl
-1290;66;RUVerb:RUPred|.^RUPunctuation:RUAndOr|RUAndOr+^RUList|.^RUPunctuation:RUInclPunct:RUVerb:RUPred:RUInf:RUAndOr|RUVerb:RUPred+^RUInf:RUNegPred;*|*|+RUBeginrel+RUPBegin|*|*;#78-nl, added ^InclPunct:AndOr #78-nl
-1297;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUAndOr|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation:RUInclPunct:RUAndOr|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*|*;#78-nl, and/or after comma, added ^InclPunct:AndOr #78-nl
-1298;66;RUVerb:RUPart:RUPred|.^RUVerb:RUComma|RUComma|RUAndOr|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*;#78-nl, and/or after comma
-1072;70;RUNi|RUPrep|RUNegPR_part|^RUNegRel:"нет";RUNegPR+RUNegation|+Join|+Join|*;PathRelevant when used independently, no expansion if no NegRel follows #75-nl
-1092;70;RUNi|RUPrep|RUNegPR_part;RUNegPR+RUNegation+RUNegBegin|+Join|+Join;PathRelevant when used independently, plus expansion if NegRel follows #75-nl
-1091;70;.RUNegBCon|RUNegCon|.RUCAdv+^RUNegComp|RUAdj|RUCon+^RUList;-RUNegBegin|-RUNegBegin|*|*|*;#75-nl, added ^NegComp #76-nl
-682;70;RUNegRel|RUPrep|RUAdj|RUCon|RUVerb;*|*|*|*|+RUNegStop;To stop negation at the end of negated concept after preposition 29-05-2013-nl,removed rprep 12-08-2015-nl,added ^ 23-09-2015-nl, Negation->NegRel, replaced unaltered labels by * #75-nl
-98;70;RUNi;^RUNegRel;Ni wordt DEFAULT Ne,^toegevoegd 18-04-13-nl, ^Ne->^NegRel, moved down to phase 70 #75-nl
-1193;70;RUNegPR_part;-RUNegPR_part;#75-nl, clean-up
-1255;70;"некогда"|RUVerb;RUAdvPR+RUTime|*;#76-nl
-1216;70;RUVerb+^RUCond:RURepr|RUNegRel|RUVerb;*|^RUBeginrel|*;#75-nl,remove NegRel so there won't be expansion for this pattern
-1246;70;RUVerb|RUAdvStruct|RUConj;*|*|+RUBeginrel;#76-nl
-1168;70;^RUCon|RUPrep|RUCon|"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|*|*|+RUNoExpansion;#75-nl, no expansion to noun after 'у' if prep+con precedes
-1109;70;^RUCon|RUPrep+^"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|+RUNoExpansion;#75-nl
-1116;70;^RUCon|RUPrep+^"у"|RUPRPron:RUPerspron;*|*|+RUNoExpansion;#75-nl
-1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUECon|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to con/perspron/indefpron-prep-con, +NegBegin to avoid expansion for Negation Concepts without expansion
-1153;70;RUBCon:RUCon+^RUNoExpansion|RUNRPron|*RUAdj:RUCon+^RUNoExpansion|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to con
-1165;70;RUPred|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to predicate before con/indefpron
-1214;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|*|*|*;#75-nl, expansion to con/indefpron before ne+inf
-1105;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon:RUNegPR|^RUInf;+RUNegBegin|+RUNegBegin|*|*;#75-nl, expansion to con/indefpron
-1163;70;RUConPossibleBCon|RUBCon|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl
-1112;70;^RUCon:RUAdj|RUAndOrBut|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to object-perspron
-1111;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to object-perspron
-1114;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPerspron|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to perspron-object
-1115;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPRPron|RUNegRel;*|*|+RUNegBegin|*;#75-nl, expansion to dempron
-1167;70;*RUPerspron:RUCon+^RUNoExpansion|.RUAdvStruct|RUPunctuation+RUConj|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, expansion to subject before hyphen + 'ne'
-1215;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart|.RUCon|RUNegRel:RUNegCon:RUNegBCon+RUNegBegin|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*|*;#75-nl, expansion to object before ne+inf
-1110;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart:RUAdvPR+^RUNegPred|.RUCon|RUNegRel:RUNegCon:RUNegBCon:RUNegPR+RUNegBegin|^RUInf;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*;#75-nl, expansion to subject, with possibly a relation preceding 'ne', +NegBegin to avoid expansion for Negation Concepts without expansion, exception: NegPred #76-nl
-1106;70;RUBCon|RUNegRel;+RUNegBegin|*;#75-nl, expansion to beginconcept
-1169;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl
-1170;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, copy of r1169 for further expansion to Concept-Preposition-Concept pattern
-1171;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl, copy of r1169 for further expansion to Concept-Preposition-Concept pattern
-1164;70;.RUPosspron:RUCon:RUPRPron|RUVerb|RUPerspron+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl
-1177;70;RUVerb|.RUAdvStruct:RURAdv|RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl, added NegBegin #76-nl
-1186;70;RUCon+^RUNoExpansion|RUAux|RUNegCon:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl, added NegBegin #76-nl
-1213;70;RUInf:RUPred|.RUAdvPR:RUAdvStruct|RUNegRel:RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl, added NegBegin #76-nl
-1156;70;RUBCon:RUCon|.RUAdvPR|RUNegPred|SEnd:RUPunctuation:RUPrep:RUAndOr;+RUNegBegin|*|*|*;#75-nl, added AdvPR #76-nl
-1059;70;*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj:RUPrep+^RUNoExpansion|.RURAdv|RUNegPred|SEnd:RUPunctuation:RUPrep;+RUNegBegin|+RUNegBegin|*|*;#75-nl
-1197;70;"у"|*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj|.RURAdv|RUNegPred;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl
-1113;70;"у"|RUPerspron|*RUAdj:RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;#75-nl, for expression of negation: 'у' + perspron + noun + negation marker
-1107;70;"у"|RUAdj:RUPerspron:RUCon+RUNegBegin;+RUNegBegin|*;#75-nl, for expression of negation: 'у' + perspron/noun + negation marker
-1158;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|RUPrep|RUCon|.RUAdvStruct|RUPred:RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl,added 'kto' in all forms
-1174;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl,added 'kto' in all forms
-1159;70;RUCon:RUPRPron|.RUComma|RUKotory+typeRelation|.RUAdvPR:RUVerb|RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;#75-nl,added 'kto' in all forms
-1270;70;RUPRPron|.RUComma:RUPrep|"кто":"кого":"кому":"чего":"чему"+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron:RUVerb|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;relative pronoun with PathRelevant as antecedent, #76-nl
-1160;70;RUCon|RUComma|.RUAdvStruct|RUNegRel|RUPart;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*|*;#76-nl
-1161;70;RUCon|RUComma|RUPart|RUNegRel;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*;#75-nl
-673;70;RUInf|RUCon|RUVerb|RUPred+RUNegation;+RUNegBegin|^RUCon|RUVerb|+RUNegStop;to make infinitive before 'nechego' NegBegin 28-05-2013-nl,replaced RInf by Inf 21-10-2013-nl,added ^ 23-09-2015-nl
-1180;70;RUList|.RUList+^RUNegBegin|RUList+RUNegBegin+^RUAntecedent;+RUNegBegin|+RUNegBegin|*;#75-nl
-1172;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUAdvStruct:RUInf:RUCond:RUNRPron|RUCon:RUPerspron:RUPosspron:RUPRPron:RUNRPron+RUNegBegin;+RUNegBegin|*|*;#75-nl
-1260;70;RUConj+^RUAndOrBut:RUPunctuation|RUNegPR:RUNegBCon+RUNegBegin;+RUNegBegin|*;#76-nl
-1178;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|*|*;#75-nl
-1184;70;RUPunctuation+RUList|*RUList|.RUPrep:RUNRPron:RUAdj:RUCon:RURAdv|RUVerb;-RUList|-RUList|*|*;#75-nl,Comma->Punctuation #76-nl
-674;70;^RUPrep|RUConj+^RUNegRelpron:RUList:RUNegBegin;*|+RUNegStop;Specific conjunctions become NegStop 28-05-2013-nl, added ^NegPR_part+List, moved to phase 70, removed NegPR_part,added ^Prep #76-nl
-1190;70;RUPunctuation+^RUList;+RUNegStop;#76-nl - comment: don't restrict to InNegspan, because negspan is not detected when a NegStop is part of the relation with Negation marker and therefor doesn't function as NegStop, but the NegStop prevents it from being detected as NegSpan
-1212;70;RUNegPred|RUAdvPR|"и";*|*|RUAdvStruct;#75-nl
-1258;70;RUNegRel|.RUPerspron|RUInf|"и"|*RUAdj:RUCon;*|*|*|RUAdvStruct|*;#76-nl
-1302;70;^"как"|RUVerb|"и"|"как";*|*|RUAdvStruct|*;#78-nl
-1223;70;RUNegRel|^RUVerb:RUConj|"и"+^RUAdvStruct|RUVerb|^SEnd;*|*|+RUBeginrel|*|*;#75-nl, split at 'and' when verb follows
-1225;70;RUNegRel|*RUPart:RUVerb:RUInf:RUAux|.RURAdv|"и"+^RUAdvStruct|*RUPrep:RUAdj:RUCon:RUAdvStruct:RUBeginendconcept:RURAdv:RUAdvPR|RUVerb;*|*|*|+RUBeginrel|*|*;#75-nl, split at 'and' when verb follows
-1226;70;RUNegRel|RUVerb+^RUmAux:RUAux|"и"+^RUAdvStruct|RUAux:RUmAux;*|*|+RUBeginrel|*;#75-nl, split at 'and' when verb follows
-1221;70;^RUConj|"и"+^RUAdvStruct|RUConj+^"как";*|+RUBeginrel|*;#75-nl, split at 'and' when conjunction follows
-1256;70;RUNegPR|RUNegRel|RUInf|"и"+^RUAdvStruct;*|*|*|+RUBeginrel+RUNegStop;#76-nl
-1194;70;"и"+^RUList:RUAdvStruct|^RUNegation;+RUNegStop|*;#75-nl
-1198;70;^RUVerb|"или"|RUVerb;*|+RUNegStop|*;#75-nl
-1201;70;RUNegBegin:RUInNegspan|^RUNegStop;*|+RUInNegspan;assign a temp marker to all words in a negation span, #75-nl - test: time instead of innegspan
-1211;70;RUCon|RUNegPrep;+RUNegBegin|*;#75-nl
-1210;70;RUNegPrep;+RUNegBegin;#75-nl
-1205;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron|RUVerb+^RUInNegspan;*|*|+RUNegStop|*|*;#75-nl
-1206;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|RUPrep+^RUInNegspan;*|*|+RUNegStop|*;#75-nl
-1204;70;RUNegPrep|*^RUBCon:RUVerb:RUInf:RUPrep|RUBCon:RUVerb:RUInf:RUPrep+^RUInNegspan:RUNegation;+RUNegBegin|*|+RUNegStop;#75-nl
-1207;70;RUNegPrep|RUAdj|RUPrep|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|+RUNegStop;#75-nl, exception to r1204
-1209;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUNRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|RUPRPron|*|+RUNegStop;#75-nl, copy of r1208 for NRPron that should be PRPron
-1208;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUPerspron:RUPRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|*|+RUNegStop;#75-nl, exception to r1204
-1203;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron|RUPrep:RUVerb+^RUInNegspan;*|*|*|*|+RUNegStop;#75-nl
-1266;70;RUNegRel|*typeRelation+^RUNegRel:RUNegStop:RUPrep|RUConj+RUNegStop|^RUNegation;*|*|+RUBeginrel|*;to split off NegStop from relation with Negation marker #76-nl
-1267;70;RUNegRel|RUAndOr+RUNegStop|^RUNegation;*|+RUBeginrel|*;to split off NegStop from relation with Negation marker #76-nl
-1192;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|*|+RUNegStop;move NegStop from nonrelevant to next lexrep #75-nl, added ^NegBegin #76-nl
-1191;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|+RUNegStop;move NegStop from nonrelevant to next lexrep #75-nl,added ^NegBegin #76-nl
-1229;70;RUConj+RUPunctuation;-RUPunctuation;#75-nl
-1238;80;RUPunctuation+^RUList;+RUNegSentimentStop;merged old rules for sentimentstop at punctuation, #76-nl
-1239;80;RUPunctuation+^RUList;+RUPosSentimentStop;merged old rules for sentimentstop at punctuation, #76-nl
-1244;80;"и"+^RUList:RUAdvStruct|^RUNegSentiment;+RUNegSentimentStop|*;merged old rules for sentimentstop at 'and', #76-nl
-1245;80;"и"+^RUList:RUAdvStruct|^RUPosSentiment;+RUPosSentimentStop|*;merged old rules for sentimentstop at 'and', #76-nl
-879;80;RUConj+^RUNegRelpron;+RUNegSentimentStop;Specific conjunctions become SentimentStop 16-03-2015-nl, * #75-nl -> deleted #76-nl, covered by r1244
-880;80;RUConj+^RUNegRelpron;+RUPosSentimentStop;Specific conjunctions become SentimentStop 16-03-2015-nl, * #75-nl -> deleted #76-nl, covered by r1245
-1242;80;RUNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegSentiment;*|*|+RUNegSentimentStop;#76-nl
-1243;80;RUPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUPosSentiment;*|*|+RUPosSentimentStop;#76-nl
-1240;80;RUNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegSentiment;*|+RUNegSentimentStop;#76-nl
-1241;80;RUPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUPosSentiment;*|+RUPosSentimentStop;#76-nl
-1236;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*|*|*|*|*;merged several old rules for predicate+negsentiment, con-prep-con-prep-con #76-nl
-1237;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*|*|*|*|*;merged several old rules for predicate+possentiment, con-prep-con-prep-con #76-nl
-1234;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*|*|*;merged several old rules for predicate+negsentiment, con-prep-con #76-nl
-1235;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*|*|*;merged several old rules for predicate+possentiment, con-prep-con #76-nl
-1232;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*;merged several old rules for predicate+negsentiment #76-nl
-1233;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*;merged several old rules for predicate+possentiment #76-nl
-1248;80;RUConj+RUBeginrel;RUBeginrel;#76-nl, to make conjunction beginrelation in case there's a comma included in the lexrep preceding
-1257;80;RUAndOr+RUBeginrel;RUBeginrel;#76-nl, give beginrelation its final label
-822;$;RUPunctuation;Punctuation;19-01-2015-nl
+408;40;RUTakoj;RUIndefpronPRNR+RUIndefpron;'takoy' becomes indefinite pronoun pathrelevant/nonrelevant
+324;40;RUNum|RUIndefpron|RUCon;RUCon|RUAdj|*;indefinite pronoun between number and noun becomes part concept
+451;40;RUNum|RUDempron|RUCon;RUCon|RUCAdv|*;demonstrative pronoun between number and noun becomes part concept
+323;40;RUAdj|RUIndefpron|RUCon;*|RUAdj|*;indefinite pronoun between adjective and noun becomes part concept
+382;40;RUOkolo|RUNum;RUBCon|RUCon;'okolo' plus number becomes beginconcept
+383;40;RUOkolo;RUPrep;default for 'okolo': preposition
+529;40;RURaz|RUCompgr;RUCon|RUCon;'raz' plus 'more/less' become concepts
+532;40;RUCompgr|RUPrep:RUIndefpron;RUAdv|*;'more/less/ before preposition behaves as other adverbs
+572;40;RUNe:RUPerspron|RUDam;*|RUVerb;'dam' after 'ne' becomes relation
+570;40;RUDam;RUCon;default for 'dam': becomes concept
+526;40;RUNe|RUVerb|RUCompgr;*|*|RURAdv;'more/less' after 'ne' plus verb becomes relation
+525;40;RUCompgr;RUAdvdegree;default for 'more/less': adverb of degree
+828;40;RUNum|RUAdvStruct|RUVerbCon;*|*|RUCon;
+528;40;RURaz|RUAdvdegree;RUCon|RUCon;'raz' plus adverb of degree become concepts
+721;40;RUNum|RURaz|RUComp;RUCon|+Join|+Join;
+527;40;RURaz|RUNum;RUBCon|RUCon;'raz' plus number becomes beginconcept
+582;40;RUAdvdegree|RURaz;RUBeginendconcept+RUCon|+Join;adverb of degree plus 'raz' becomes beginendconcept
+533;40;RURaz;RUECon+RUCon;default for 'raz': endconcept
+640;40;RUNum|RUAndOr|RUAdvdegree;RUCon|RUCon|RUCon;
+720;40;RUNum|"с"|"лишним";RUCon|RUCon|+Join;
+328;40;RUNum+^RUOdin;^RUCon;default for number: concept
+191;40;RUPrep|RUVesti;*|RUCon;'vesti' after preposition becomes concept
+192;40;RUVesti;RUInf;default for 'vesti': infinitive
+410;40;RUDostatotsjno|RUCon;RUCAdv|*;'dostatochno' before noun becomes concept
+411;40;RUDostatotsjno;RUAdvPred;default for 'dostatochno': adverb/predicate
+327;40;RUAdvPred|RUAdj;RUAdj|*;adverb/predicate before adjective becomes concept
+479;40;RUAdvPred|RUKAdj;RUAdv|RUKAdj;adverb/predicate before short adjective becomes adverb
+6;40;RUAdvPred|RUInf;RUPred|*;adverb/predicate before infinitive becomes relation
+42;40;RUInf:RUNe|RUAdvPred;*|RUPred;adverb/predicate after infinitive/'ne' becomes relation
+250;40;RUAux|RUAdvPred|RUCon;*|RUPred|*;adverb/predicate between linking verb and concept becomes relation
+9;40;RUAdvPred;RUAdv;default for adverb/predicate: adverb
+413;40;RUInf|RUOchota;*|RUPred;'okhota' after infinitive becomes relation
+414;40;RUOchota|RUInf;RUPred|*;'okhota' before infinitive becomes relation
+130;40;RUOchota;RUCon;default for 'okhota': concept
+1062;40;"не так"|RUComma:RUAux:SEnd;RUCAdv|*;
+257;40;RUAdvdegreeNR|RUAdvStruct;RUAdvStruct|*;adverb of degree OR structural adverb becomes nonrelevant before structural adverb
+258;40;RUAdvdegreeNR;RUAdvdegree;default for adverb of degree OR structural adverb: adverb of degree
+557;40;RUCon|RUAdvdegree|RUCon;*|RUBCon|*;adverb of degree between two concepts becomes beginconcept
+568;40;SBegin|RUConjNR;*|^RUAdvStruct;conjunction OR structural adverb at beginning sentence becomes structural adverb
+569;40;RUConjNR;^RUConj;
+1175;40;RUEdva|*^"как":RUComma|RUComma|"как";RUConj|*|*|*;
+1259;40;RUEdva|*^"сразу":RUComma|RUComma|"сразу";RUConj|*|*|*;
+730;40;RUEdva;RUNe+RUNegation+RUNegBegin;
+416;40;RUOsobenno|RUCon:RUPrep:RURelpron:RUConj;RUAdvStruct|*;'osobenno' before noun, preposition, conjunction or relative pronoun becomes structural adverb
+418;40;RUOsobenno;RUAdvdegree;default for 'osobenno': adverb of degree
+131;40;RUPrep|RUTsjasje;*|RUCon;'chashtshe' after preposition becomes concept
+482;40;RUTsjasje;RUAdvPR;
+464;40;RUAdvdegree:RUAdvaux|RUAux;RURAdv|*;adverb of degree or modal adverb before linking verb becomes relatio
+466;40;RUAdvaux;RUAdv;default for modal adverb: adverb
+1176;40;RUCfr|RUHyphen|RUCfr;*|RUPrep|*;
+1231;40;RUCfr+RUBCon;RUBCon;
+271;40;RUCfr;RUCon;default for number: concept
+309;40;RUAdvdegree|RUCon:RUOdin;RUAdj|*;adverb of degree before noun or 'odin' becomes concept
+365;40;RUComp|RUVsego;*|RUAdv;'vsego' after comparative becomes adverb
+1045;40;RUVsego|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
+1046;40;RUVsego|RUBCon;RUBCon+RUCon|+Join;
+364;40;RUVsego;RUIndefpronPRCon+RUIndefpron;default for 'vsego': indefinite pronoun concept or pathrelevant
+379;40;RUOtnositelno|RUAdj;RUAdvdegree|*;'otnositelno' before adjective becomes adverb of degree
+377;40;RUOtnositelno;RUPrep;default for 'otnositelno': preposition
+1227;40;"все"|"же"|^RUAdj:RUCon;RUAdvStruct|+Join|*;
+242;40;RUAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;adverb of degree plus pathrelevant indefinite pronoun are joined as one pathrelevant indefinite pronoun
+979;40;RUAdvdegree|RUIndefpronPRNR;RUNRPron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or nonrelevant are joined as nonrelevant pronoun
+1025;40;RUAdvdegree|RUAdvTime;RUAdvPR+RUTime|+Join;
+1026;40;RUAdvdegree|RUAdvPR;RUAdvPR|+Join;
+356;40;RUAdvdegree|RUIndefpronPRCon;RUIndefpronPRCon+RUIndefpron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or concept are joined as indefinite pronoun as pathrelevant or concept
+349;40;RUAdvdegree|RUVsjo;RUBCon|*;adverb of degree before 'vsjo' becomes beginconcept
+253;40;RUAdvdegree|RUPrep;RURAdv|*;adverb of degree before preposition becomes relation
+1103;40;RUAux|RUAdvdegree|RURelpron;*|RURAdv|*;
+243;40;RUAdvdegree;RUAdv;default for adverb of degree: adverb
+306;40;RUVsjo|RUComp;RUAdvdegree|*;'vsjo' before comparative becomes adverb of degree
+711;40;RUCon|RUVsjo|^RUVerb+^RUPart+^RUAux+^RUInf+^RUIndefpron+^SEnd;*|RUBCon|*;
+712;40;^RUBCon+^SBegin|RUVsjo|RUCon;*|RUBCon|^RUCon-RUBCon;
+162;40;RUVsjo;RUIndefpronPRCon+RUIndefpron;default for 'vsjo': indefinite pronoun as pathrelevant or concept
+481;40;RUAux|RUComp|RUCon;*|RURAdv|*;comparative between linking verb and noun becomes relation
+714;40;"тем"|RUComp;RUComp|+Join;
+1252;40;RUNe|RUComp|RUCon:RUAdj;RUNegCon-RUNegBegin|RUCAdv|*;
+1253;40;RUNe|RUComp|RUBCon;RUNegCon-RUNegBegin|RUCAdv|RUCon;
+307;40;RUComp;+RUAdv;extra label adverb is added to comparative
+522;40;RUmAux;+RUVerb;extra label verb is added to modal verb
+468;40;RUHyphen|RUEto|RUCon:RUBCon:RUAdj:RUIndefpron:RUPosspron;+RUNotMarkerPB|RUPred|*;'eto' between dash and noun, beginconcept, adjective, indefinite pronoun or possessive pronoun becomes relation
+499;40;^RUVerb+^SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;
+971;40;SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;
+500;40;^RUVerb+^SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;
+972;40;SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;
+968;40;RUEto|RUAdv|RUCon;RUPred|*|*;make 'eto' relation
+962;40;^RUPrep+^RUVerb+^RUPerspron+^RUPartActpf+^RUPartAdj+^RUInf+^RUPart+^SBegin|RUEto|RUPrep;*|RUPred|*;make 'eto' relation
+969;40;SBegin|RUEto|RUPrep;*|RUPred|*;make 'eto' relation
+964;40;^RUVerb+^RUAux+^RUmAux+^SBegin|RUEto|RUAdvStruct:RURAdv|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make 'eto' relation
+973;40;SBegin|RUEto|RUAdvStruct|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make 'eto' relation
+965;40;RUEto|RUNe:RUNegCon|^RUVerb:RUAux:RUmAux:RUPrep:RUPred:SEnd:RUIndefpron;RUPred|*|*;make 'eto' relation
+966;40;^RUVerb|RUEto|RURelpron:RUDempronConj;*|RUPred|*;make 'eto'
+470;40;RUEto;RUPRPron;default for 'eto': pathrelevant pronoun
+394;40;RUNe|.RUAdv|RUPartActpf;*|RURAdv|RUPart;active past participle after 'ne' (+adverb) becomes relation
+385;40;RUAdv|RUAdvPR|RUPartActpf;RURAdv|RURAdv|RUPart;active past participle after adverb plus pathrelevant adverb becomes relation
+391;40;RUPartActpf;RUPartAdj;default for active past participle: long participle
+727;40;RUVerb|RUPartAdj|RUAdv|^RUCon+^SEnd;*|RUPart|RURAdv|*;
+388;40;RUPartAdj|RUInf;RUPart|*;long participle before infinitive becomes relation
+389;40;RUPartAdjSubst;RUPartAdj;default for long participle OR noun: long participle
+8;40;RUComma|RUPartAdj;*|RUPart;long participle after comma becomes relation
+45;40;RUComma|RUAdv|RUPartAdj;*|RURAdv|RUPart;
+1141;40;RUComma|RUAdvPR|RUPartAdj|^RUCon;*|*|RUPart|*;
+1085;40;RUComma|RUAdvStruct:RUConj|RUPartAdj|RUPrep;*|*|RUPart|*;
+1086;40;RUComma|.RUAdvStruct|RUNe|RUPartAdj;*|*|*|RUPart;
+440;40;RUComma|.RUAdv|RUNe|RUPartAdj;*|RURAdv|*|RUPart;long participle after comma (plus adverb) plus 'ne' becomes relation
+1087;40;RUComma|RUAndOrBut:"как"|RUPartAdj|.RUComma|RUAndOrBut:"как"|RUNe|RUPartAdj;*|*|RUPart|*|*|*|RUPart;
+1040;40;RUECon|RUPartAdj|^RUCon+^RUAdj+^SEnd;^RUECon+RUCon|RUPart|*;
+635;40;RUPart|RUCon|RUAndOr|RUPartAdj;*|*|*|RUPart;
+393;40;RUPart|RUAndOr|RUPartAdj;*|*|RUPart;long participle after past participle plus and/or becomes relation
+52;40;.RUNegPR|RUNe|RUPartAdj;RUAdj-RUNegBegin|RUAdj-RUNegBegin|RUAdj;'ne' before long participle both become concept
+43;40;RUPartAdj;RUAdj;default for long participle: adjective
+1058;40;RUSjtoto|RUAdv|RUAdj;RUBCon|RUCAdv|*;
+1269;40;RUNegPR|RUAdv|RUAdj;RUBCon+RUNegBCon|RUCAdv|*;
+1056;40;RUSjtoto|.RUNe|RUAdj;RUBCon|*|*;
+1268;40;RUNegPR|.RUNe|RUAdj;RUBCon+RUNegBCon|*|*;
+655;40;"действительно"|RUAdj;RUCAdv|*;
+652;40;RUAdj:RUBCon|RUPosspron:RUActobj|RUAdj;*|RUAdj|*;possessive pronoun or acting object between adjective or beginconcept and adjective becomes concept
+959;40;RUAdj:RUBCon|*RUActobj:"только":"же":"лишь":"еще":"уже"|RUCon;*|RUAdj|*;Personal pronoun as acting object or literals between adjective or beginconcept and noun becomes concept
+555;40;RUIndefpronPR|RUObrazom;RUIndefpronPR|+Join;pathrelevant pronoun plus 'obrazom' are joined as pathrelevant pronoun
+980;40;RUIndefpronPRNR|RUObrazom;RUAdvStruct|+Join;pathrelevant or nonrelevant pronoun plus 'obrazom' are joined as structural adverb
+556;40;RUObrazom;RUCon;default for 'obrazom': concept
+182;40;RUNeskolko|RUInf:RUPart:RUVerb:RUAdv;RUAdvdegree|*;'neskolko' before infinitive, past participle, verb or adverb becomes adverb of degree
+975;40;RUNeskolko|SEnd:RUComma;RUIndefpronPR|*;
+348;40;RUAdvdegree;RUAdv;default for adverb of degree: adverb
+977;40;RUCon|RUNeskolko;*|RUBCon;
+1157;40;RUNeskolko|RUIndefpronPR|.RUNe:RUAdv:RUNegCon|RUAdj:RUCon:RUCAdv;RUAdj|RUAdj|*|*;
+181;40;RUNeskolko;RUCon;default for 'neskolko': concept
+203;40;RUPrep|RUNem;*|RUPerspron;'nem' after preposition becomes personal pronoun
+208;40;RUNem;RUAdj;default for 'nem': adjective
+431;40;RUPrep|RUTom;*|RUPRPron;'tom' after preposition become pathrelevant
+202;40;RUTom;RUCon;default for 'tom': concept
+189;40;RUSamyj|.RUAdv|RUAdj;RUAdj|^RUCAdv|*;'samy' before (adverb plus) adjective becomes adjective
+197;40;RUSamyj;RUAdvStruct;default for 'samy': structural adverb
+198;40;RUAdj:RUPosspron|RUPutjom;*|RUCon;'putjom' after adjective or possessive pronoun becomes concept
+195;40;RUPutjom;RUPrep;default for 'putjom': preposition
+212;40;SBegin|.RUAndOr|RUPravda|RUComma;*|RUAdvStruct|RUAdvStruct|*;'pravda' at beginning sentence (after and/or) and before comma becomes nonrelevant
+214;40;RUPravda;RUCon;default for 'pravda': concept
+567;40;SBegin|RUAndOr;*|RUAdvStruct;and/or at beginning sentence becomes nonrelevant
+445;40;RUAdj|RUDrug|RUPrep|RUDrug;*|RUAdj|RUAdj|RUAdj;reciprocal pronoun with preposition after adjective becomes concept
+222;40;RUDrug|RUPrep|RUDrug;RURAdv|+Join|+Join;reciprocal pronoun with preposition becomes relation
+226;40;RUPrep|RUDrug|RUCon;*|RUIndefpronPR|*;
+176;40;RUDrug;RUCon;default for reciprocal pronoun OR noun: noun
+487;40;RUAdj:RUPosspron|RUConVerb;*|RUCon;verb OR noun after adjective or possessive pronoun becomes concept
+736;40;^RUCon+^SBegin|RUConVerb|RUPosspron|RUCon;*|RUCon|^RUPosspron|^RUCon;
+737;40;RUConVerb|RUVerb;RUCon|*;
+486;40;RUPrep:RUVerb|RUConVerb;*|RUCon;verb OR noun after preposition or verb becomes concept
+492;40;RUConVerb|RUAdj:RUCon;RUCon|*;verb OR noun before adjective or noun becomes concept
+490;40;RUConVerb;RUVerb;default for verb OR noun (label ConVerb): relation
+432;40;RUPribyli|RUCon+^RUBeginendconcept;RUVerb|*;'pribyli' before noun becomes relation
+167;40;RUCon|RUPribyli;*|RUCon;'pribyli' after noun becomes concept
+166;40;RUPribyli;RUVerbCon;default for 'pribyli': label VerbCon
+646;40;RUVerbCon|RUAdvStruct;RUVerb|*;
+648;40;RUAdj|"стали";*|RUVerb;
+165;40;RUAdj:RUPrep:RUVerb|RUVerbCon;*|RUCon;verb OR noun after adjective, preposition or verb becomes concept
+651;40;RUVerbCon|.RUNe|RUVerb;RUCon|*|*;
+1230;40;RUVerbCon|RUPrep|*RUAdj:RUCon|.RUNe|RUVerb;RUCon|*|*|*|*;
+169;40;RUVerbCon;RUVerb;default for verb OR noun (label VerbCon): relation
+178;40;RUPtclVerb|RUComma|RURelpron;RUVerb|*|*;particle OR verb before comma plus relative pronoun becomes relation
+179;40;SBegin|RUPtclVerb|RUComma;*|RUAdvStruct|*;particles OR verb at beginning sentence before comma becomes nonrelevant
+177;40;RUPtclVerb;RUVerb;default for particle OR verb: relation
+1048;40;RUAdj|RURepr|RUCon;*|RUAdj|*;
+1049;40;RUPrep|RURepr;*|RUPerspron;
+447;40;RURepr;+RUVerb;extra label for reciprocal pronoun: verb
+483;40;RUVerb|RUAdvRefl;*|RURAdv;'sam sebya' after verb becomes relation
+484;40;RUPrep|RUAdvRefl;*|RUPerspron;'sam sebya' after preposition becomes pathrelevant
+485;40;RUAdvRefl;RUAdv;default for 'sam sebya': adverb
+137;40;RUPrep|RURefl;*|RUPerspron;reflexive pronoun after preposition becomes pathrelevant
+458;40;RUPart|RURefl;RUPart|+Join;participle plus reflexive pronoun are joined to participle
+644;40;RUInf|RURefl;RUInf|+Join;infinitive plus reflexive pronoun are joined to infinitive
+645;40;RURefl|RUInf;RUInf|+Join;reflexive pronoun plus infinitive are joined to infinitive
+139;40;RURefl|RUVerb;RUVerb|+Join;reflexive pronoun plus verb are joined to verb
+138;40;RURefl|RUAdv|RUVerb;RUVerb|RURAdv|*;reflexive pronoun plus adverb before verb become relation
+1228;40;RURefl|RUNe|RUVerb:RUInf;RURAdv|*|*;
+154;40;RUCon|RURefl;*|+Join;noun plus reflexive pronoun are joined to noun
+156;40;RUAdj|RURefl;*|RUAdj;reflexive pronoun after adjective becomes concept
+1044;40;RUAdj|"тем";*|RUCon;
+402;40;^SBegin|RUComma:RUHyphen|RUDempronConj;*|*|RUConj;'tem/to' after comma or dash becomes relation
+401;40;RUDempronConj;RUPRPron;default for 'tem/to': pathrelevant pronoun
+1043;40;RUIndefpronPRCon|RUIndefpronPRNR;^RUIndefpronPRCon|+Join;
+1060;40;RUIndefpronPRNR|.RUAdvStruct:RUAdv|RUAdj:RUPosspron:RUCon:RUIndefpronPR;RUNRPron|*|*;
+335;40;RUIndefpronPRNR;RUIndefpronPR;default for pathrelevant OR nonrelevant indefinite pronoun is pathrelevant pronoun
+357;40;RUIndefpronPRCon|RUPosspron;RUCon|RUCon;indefinite pronoun as pathrelevant OR as concept plus possessive pronoun both become concepts
+981;40;RUIndefpronPRCon|.RUAdv|RUAdj;RUAdj|RUAdj|*;
+1042;40;RUIndefpronPRCon|RUECon;RUBeginendconcept+RUCon|+Join;
+362;40;RUIndefpronPRCon|RUCon;RUCon|*;indefinite pronoun as pathrelevant OR as concept after noun becomes concept
+360;40;RUIndefpronPRCon|RUDempron:RUPRPron|RUCon;RUCon|RUCon|*;indefinite pronoun as pathrelevant OR as concept plus demonstrative or patherelevant pronoun before noun both become concept
+361;40;RUIndefpronPRCon|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;indefinite pronoun as pathrelevant OR as concept plus pathrelevant indefinite pronoun both become concepts
+358;40;RUIndefpronPRCon|RUIndefpronPR;RUIndefpronPR|+Join;indefinite pronoun as pathrelevant OR as concept plus pathrelevant indefinite pronoun are joined as pathrelevant indefinite pronoun
+359;40;RUIndefpronPRCon;RUIndefpronPR;default for indefinite pronoun as pathrelevant OR as concept: pathrelevant indefinite pronoun
+690;40;^RUCon+^SBegin|RUPrep|RUAdj|RUCon|RUCon|RUNe|RUPart;*|*|*|*|RUBCon|*|*;
+544;40;RUComma:RUVerb|RUPoka;*|RUConj;'poka' after comma or verb becomes conjunction
+549;40;RUPoka;RUAdvStruct;default for 'poka': nonrelevant
+1061;40;RUDempron:RUPRPron|.RUAdv:RUNe|RUAdj:RUPosspron:RUCon;RUNRPron|*|*;
+1166;40;RUCon:RUPrep:RURelpron|RUPerspron+RUPosspron|RUAdj:RUCon;*|RUPosspron|*;
+474;40;RUCon|RUAdv|RUKAdj;RUCon|RURAdv|RUPred;short adjective after noun plus adverb becomes relation
+473;40;RUCon:RUNum|RUKAdj;^RUCon|RUPred;short adjective after noun or number becomes relation
+472;40;RUKAdj|RUCon:RUBCon:RUAdj;RUPred|*;short adjective before noun, beginconcept or adjective becomes relation
+478;40;RUPred|RUAndOr|RUKAdj;*|*|RUPred;short adjective after predicate plus and/or becomes relation
+477;40;RUKAdj|RUAndOr|RUPred;RUPred|*|*;short adjective before and/or plus predicate becomes relation
+734;40;RUKAdj|SEnd;RUPred|*;
+476;40;RUKAdj;+RUAdj;Adj label is added to short adjective
+564;40;RUAdj|RUAdvPR|RUAdj:RUCon;*|RUCAdv|*;adverb time/place between two adjectives becomes CONCEPT
+155;40;RURefl;RURAdv;default for reflexive pronoun: adverb as relation
+5;40;RUAdv|RUVerb:RUPart:RUPred;RURAdv|*;adverb before verb, participle or verb becomes relation
+2;40;RUAdv|RUAdj+^RUNum;RUCAdv|RUAdj-RUBCon;adverb before adjective becomes concept
+70;40;RUAdv|RUInf;RURAdv|*;adverb before infinitive becomes relation
+3;40;RUAdv|RUCAdv;RUCAdv|*;adverb before adverb as concept becomes concept
+713;40;RUCon|RUCAdv|RUCAdv;*|^RUBCon|^RUCon;
+4;40;RUAdv|RURAdv;RURAdv|*;adverb before adverb as relation becomes relation
+20;40;RUAdv|RUAndOr|RURAdv;RURAdv|+RUList|*;adverb before and/or plus adverb as relation becomes relation
+21;40;RUAdv|RUAndOr|RUCAdv;RUCAdv|*|*;adverb before and/or plus adverb as concept becomes concept
+33;40;RUAdj|RUAdv|RUCon;*|RUCAdv|*;adverb between adjective and noun becomes concept
+17;40;^RUPart|RUAux|.RUAdvStruct:RUAdvPR|*RUAdv;*|*|*|RUCAdv;adverb after linking verb (plus structural adverb or pathrelevant aderb) becomes concept
+319;40;RUCAdv|RUAndOr|RUAdv;*|*|^RUCAdv;adverb after adverb as concept plus and/or becomes concept
+34;40;RUAdv|RUCAdv;RUCAdv|*;adverb before adverb as concept becomes concept
+38;40;RUAdv;RURAdv;default for adverb: relation
+493;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;preposition plus personal pronoun between adjective and noun become part of concept
+340;40;RUPrep|RUIndefpron|RUAdj;*|RUIndefpronPR|*;indefinite pronoun between preposition and adjective becomes pathrelevant indefinite pronoun
+573;40;RURelpron;+RUConj;extra label is added to relative pronoun: conjunction
+581;40;RUECon|RUHyphen|RUCon;RUECon+RUCon|^RUConj|*;dash between endoncept and concept becomes relation
+1004;40;RUBeginendconcept|RUHyphen|RUCon:RUBeginendconcept;RUBeginendconcept|^RUConj|*;
+580;40;RUCon:RUIndefpronPR|RUHyphen|RUBCon:RUCAdv:RUAdj:RUCon:RUNikakoy:RUNRPron;*|^RUConj|*;dash between concept or pathrelevant indefinite pronoun and beginconcept, adverb as concept, adjective, noun, 'nikakoy' or pathrelevant pronoun becomes relation
+745;40;RUAdj|RUHyphen|RUCon:RUAdj;*|^RUConj|*;
+647;40;RUConIfCap;RUConIfCap;
+400;40;RUComma;+RUPunctuation;extra label for comma: punctuation
+932;40;RUBCon+^RUOdin;RUBCon;to remove all other labels than BCon, to prevent it from becoming NonRelevant
+949;40;RUECon;RUECon;to remove all other labels than ECon, to prevent it from becoming NonRelevant
+1041;40;RUBeginendconcept;RUBeginendconcept;to remove all other labels than beginconcept
+988;40;RUECon|RUNoEConBefore;RUCon|RUECon;
+1051;40;RUIndefpronPR;RUPRPron;to remove all other labels so PathRelevancy is not lost
+1052;40;RUAdvPR;RUAdvPR;to remove all other labels so PathRelevancy is not lost
+1053;40;RUDempron;RUPRPron;to remove all other labels so PathRelevancy is not lost
+1162;40;RUPerspron+RUPosspron;RUPerspron+RUPosspron;to remove all other labels so PathRelevancy is not lost
+1054;40;RUPerspron+^RUPosspron;RUPerspron;to remove all other labels so PathRelevancy is not lost
+1055;40;RUPosspron+^RUPerspron;RUPosspron;to remove all other labels so PathRelevancy is not lost
+1183;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;4-element enumeration
+1182;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;3-element enumeration
+1179;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron:RUNRPron:RUCAdv|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration
+1181;60;*RUBCon|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration
+1195;60;*RUAdj|RUAndOr|.RUCAdv|*RUAdj;+RUList|+RUList|+RUList|+RUList;2-element enumeration of adjectives
+1196;60;*RUInf|RUAndOr|*RUInf;+RUList|+RUList|+RUList;2-element enumeration of infinitives
+1292;60;*RUVerb:RUNegPred|.RUInf|RUAndOr|.RUAdvStruct:RURAdv:RUNe:RUNegRel:RUInf|*RUVerb|^"ли";+RUList|+RUList|+RUList|+RUList|+RUList|*;2-element enumeration of verbs
+1301;60;RUNe|RUVerb|RUAndOr|.RUAdvStruct:RURAdv:RUInf|RUVerb|^SEnd;-RUList|-RUList|-RUList|-RUList|-RUList|*;correction to r1292: should be split here
+1288;60;RUNe:RUNegRel|RUPart:RUPred:RUKAdj|RUAndOr|RUNe:RUNegRel|RUVerb;+RUList|+RUList|+RUList|+RUList|+RUList;negated participle/predicate and negated verb should stay together
+1295;60;RUPred|RUAndOr|.RURAdv|RUPred;+RUList|+RUList|+RUList|+RUList;
+1303;60;RURelpron|RUAux:RUmAux|RUAndOr|RURelpron|RUAux:RUmAux;+RUList|+RUList|+RUList|+RUList|+RUList;
+1305;60;RUVerb|"ли"|RUAndOr|RUVerb|"ли";+RUList|+RUList|+RUList|+RUList|+RUList;
+1093;65;RUVerb:RUPred:RUPart+^RUAux|RUNe|RUAdj:RUCon;*|RUNegRel|*;
+1097;65;^RUAdj|RUAndOrBut|RUNe|.RUAdj|RUCon;*|*|RUNegRel|*|*;
+1101;65;RUCon|RUNe|RUKAdj;*|RUNegRel|RUPred;
+1100;65;RUCon|RUNe|RUCAdv:RUCon:RUNum:RUAdj+^RUNoBCon:RUNegComp;*|RUBCon+RUNegBCon|*;
+1099;65;RUNe|RUAdj:RUCAdv:RUCon:RUNum;RUNegCon|*;
+1098;65;RUNe;RUNegRel;
+1084;65;RUNikakoy|RUNegRel;RUNegPR|*;
+1254;65;RUConGen|RUNikakoy|SEnd:RUPunctuation;*|RUNegCon|*;
+561;65;RUNikakoy;RUBCon+RUNegBCon;default for 'nikakoy': becomes beginconcept
+96;65;RUNi|RUPrep|RURelpron|RUAdj:RUCon;RUBCon+RUNegBCon|+Join|+Join|*;'ni' plus preposition plus relative pronoun before adjective or noun together become one beginconcept
+1074;65;RUNi|.RUPrep|RUOdin|.RUIz|.RUNRPron:RUPRPron|*RUAdj:RUCon:RUECon;RUBCon+RUNegBCon|+Join|+Join|RUAdj|RUAdj|*;
+1083;65;RUNi|.RUPrep|RUOdin|RUPunctuation:SEnd:RUNegRel:RUPrep;RUNegPR|+Join|+Join|*;
+1104;65;RUCond|."то"|RUNi;*|RURAdv|RURAdv-RUNegation-RUNegBegin;no negation
+1117;65;RUCond:RUConj|*RUAdj:RUCon:RUPrep:RUPerspron:RUPRPron:RUNRPron:RUAdvStruct:RURAdv|RUNi;*|*|RURAdv-RUNegation-RUNegBegin;no negation
+1075;65;RUOdin+RUNoBCon|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUAdj|RUAdj|RUAdj|*;
+1076;65;RUOdin|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUBCon-RUNum|RUAdj|RUAdj|*;
+1081;65;RUOdin|RUIz|RUAdj;RUBCon-RUNum|RUAdj|*;
+1078;65;RUOdin|RUIz|RUPRPron;RUPRPron-RUNum|+Join|+Join;
+1149;65;RUOdin+RUBCon;RUBCon;
+1077;65;RUOdin;RUAdj;
+985;65;RUPrep;RUPrep;
+1102;65;RUKAdj;RUAdj;
+1273;66;SBegin:RUHyphen:":"+^RUNotMarkerPB|^SBegin+^RUPunctuation;*|+RUPBegin;first word sentence or hyphen, colon
+1275;66;SBegin|RULayout:RUPunctuation|^RULayout;*|*|+RUPBegin;
+1276;66;*{2}RUPunctuation|^RUPunctuation;*|+RUPBegin;
+1278;66;RUBracket1|*{1,2}^RUPunctuation|RUBracket2|^SEnd+^RUPunctuation;-RUPunctuation|*|-RUPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
+1277;66;RUBracket1:RUBracket2+RUPunctuation|^SEnd:RUPunctuation;*|+RUPBegin;isolate part of sentence between ()
+1299;66;RUComma|RUAdvStruct|RUComma;*|*|+RUNotMarkerPB;preparation: mark comma after advstruct so it's NOT followed by a PB
+1280;66;RUComma|RUPrep:RURAdv|RUConj;*|+RUPBegin|*;PB after comma: preposition/adverb + conjunction or relative pronoun
+1296;66;RUComma|RUNegPR|RUNegRel;*|+RUPBegin|*;PB after comma: negation pronoun
+1279;66;RUComma|RUConj:RUPart;*|+RUPBegin;PB after comma: conjunction or participle
+1300;66;RUComma+^RUNotMarkerPB|RUVerb:RUPred:RUNegRel;*|+RUPBegin;
+1281;66;RUVerb:RUPred|.^RUPunctuation|RUComma|RUAndOr|.^RUVerb:RUPred:RUNegRel:RUComma|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*|*;after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
+1282;66;RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron:RURAdv:RUAdvStruct:RUAdvPR;+RUPossiblePBegin;preparation for various patterns concerning phrase begin
+1284;66;RUPrep:RUNegRel:RUNegPR:RUBCon;+RUPossiblePBegin;preparation for various patterns concerning phrase begin
+1283;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*;
+1306;66;RUAndOr|.RUPrep|RUKotory|*RUPossiblePBegin;+RUBeginrel+RUPBegin|*|*|*;'and' followed by 'kotory' (less restrictions than other relpron/conj)
+1289;66;^RUConj:RUInf|RUAndOr|.RUPrep|RUConj|*RUPossiblePBegin;*|+RUBeginrel+RUPBegin|*|*|*;'and' followed by conjunction
+1287;66;RUPart:RUPred|RUAndOr+^RUList|*RUPossiblePBegin|RUVerb:RUPred+^RUInf|^SEnd;*|+RUBeginrel+RUPBegin|*|*|*;
+1290;66;RUVerb:RUPred|.^RUPunctuation:RUAndOr|RUAndOr+^RUList|.^RUPunctuation:RUInclPunct:RUVerb:RUPred:RUInf:RUAndOr|RUVerb:RUPred+^RUInf:RUNegPred;*|*|+RUBeginrel+RUPBegin|*|*;
+1297;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUAndOr|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation:RUInclPunct:RUAndOr|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*|*;and/or after comma
+1298;66;RUVerb:RUPart:RUPred|.^RUVerb:RUComma|RUComma|RUAndOr|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*;and/or after comma
+1072;70;RUNi|RUPrep|RUNegPR_part|^RUNegRel:"нет";RUNegPR+RUNegation|+Join|+Join|*;PathRelevant when used independently, no expansion if no NegRel follows
+1092;70;RUNi|RUPrep|RUNegPR_part;RUNegPR+RUNegation+RUNegBegin|+Join|+Join;PathRelevant when used independently, plus expansion if NegRel follows
+1091;70;.RUNegBCon|RUNegCon|.RUCAdv+^RUNegComp|RUAdj|RUCon+^RUList;-RUNegBegin|-RUNegBegin|*|*|*;
+682;70;RUNegRel|RUPrep|RUAdj|RUCon|RUVerb;*|*|*|*|+RUNegStop;to stop negation at the end of negated concept after preposition
+98;70;RUNi;^RUNegRel;
+1193;70;RUNegPR_part;-RUNegPR_part;clean-up
+1255;70;"некогда"|RUVerb;RUAdvPR+RUTime|*;
+1216;70;RUVerb+^RUCond:RURepr|RUNegRel|RUVerb;*|^RUBeginrel|*;
+1246;70;RUVerb|RUAdvStruct|RUConj;*|*|+RUBeginrel;
+1168;70;^RUCon|RUPrep|RUCon|"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|*|*|+RUNoExpansion;no expansion to noun after 'у' if prep+con precedes
+1109;70;^RUCon|RUPrep+^"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|+RUNoExpansion;
+1116;70;^RUCon|RUPrep+^"у"|RUPRPron:RUPerspron;*|*|+RUNoExpansion;
+1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUECon|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to bcon/con/perspron/posspron/indefpron-prep-con, '+NegBegin' as condition to avoid expansion for Negation Concepts without expansion
+1153;70;RUBCon:RUCon+^RUNoExpansion|RUNRPron|*RUAdj:RUCon+^RUNoExpansion|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to con
+1165;70;RUPred|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to predicate before adj/posspron/indefpron/con
+1214;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|*|*|*;expansion to adj/posspron/indefpron/con before ne+inf
+1105;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon:RUNegPR|^RUInf;+RUNegBegin|+RUNegBegin|*|*;expansion to adj/posspron/indefpron/con
+1163;70;RUConPossibleBCon|RUBCon|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1112;70;^RUCon:RUAdj|RUAndOrBut|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+1111;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+1114;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPerspron|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+1115;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPRPron|RUNegRel;*|*|+RUNegBegin|*;expansion to pathrelevant pronoun
+1167;70;*RUPerspron:RUCon+^RUNoExpansion|.RUAdvStruct|RUPunctuation+RUConj|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to subject before dash + 'ne'
+1215;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart|.RUCon|RUNegRel:RUNegCon:RUNegBCon+RUNegBegin|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*|*;expansion to object before ne+inf
+1110;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart:RUAdvPR+^RUNegPred|.RUCon|RUNegRel:RUNegCon:RUNegBCon:RUNegPR+RUNegBegin|^RUInf;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*;expansion to subject, with possibly a relation preceding 'ne', +NegBegin as condition to avoid expansion for Negation Concepts without expansion, exception: NegPred
+1106;70;RUBCon|RUNegRel;+RUNegBegin|*;expansion to beginconcept
+1169;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1170;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1171;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1164;70;.RUPosspron:RUCon:RUPRPron|RUVerb|RUPerspron+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1177;70;RUVerb|.RUAdvStruct:RURAdv|RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1186;70;RUCon+^RUNoExpansion|RUAux|RUNegCon:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1213;70;RUInf:RUPred|.RUAdvPR:RUAdvStruct|RUNegRel:RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1156;70;RUBCon:RUCon|.RUAdvPR|RUNegPred|SEnd:RUPunctuation:RUPrep:RUAndOr;+RUNegBegin|*|*|*;
+1059;70;*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj:RUPrep+^RUNoExpansion|.RURAdv|RUNegPred|SEnd:RUPunctuation:RUPrep;+RUNegBegin|+RUNegBegin|*|*;
+1197;70;"у"|*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj|.RURAdv|RUNegPred;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1113;70;"у"|RUPerspron|*RUAdj:RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;for expansion of negation: 'у' + perspron + concept + negation marker
+1107;70;"у"|RUAdj:RUPerspron:RUCon+RUNegBegin;+RUNegBegin|*;for expansion of negation: 'у' + perspron/noun + negation marker
+1158;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|RUPrep|RUCon|.RUAdvStruct|RUPred:RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1174;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1159;70;RUCon:RUPRPron|.RUComma|RUKotory+typeRelation|.RUAdvPR:RUVerb|RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+1270;70;RUPRPron|.RUComma:RUPrep|"кто":"кого":"кому":"чего":"чему"+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron:RUVerb|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;relative pronoun with PathRelevant as antecedent
+1160;70;RUCon|RUComma|.RUAdvStruct|RUNegRel|RUPart;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*|*;
+1161;70;RUCon|RUComma|RUPart|RUNegRel;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*;
+673;70;RUInf|RUCon|RUVerb|RUPred+RUNegation;+RUNegBegin|^RUCon|RUVerb|+RUNegStop;to make infinitive before 'nechego' NegBegin
+1180;70;RUList|.RUList+^RUNegBegin|RUList+RUNegBegin+^RUAntecedent;+RUNegBegin|+RUNegBegin|*;
+1172;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUAdvStruct:RUInf:RUCond:RUNRPron|RUCon:RUPerspron:RUPosspron:RUPRPron:RUNRPron+RUNegBegin;+RUNegBegin|*|*;
+1260;70;RUConj+^RUAndOrBut:RUPunctuation|RUNegPR:RUNegBCon+RUNegBegin;+RUNegBegin|*;
+1178;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|*|*;
+1184;70;RUPunctuation+RUList|*RUList|.RUPrep:RUNRPron:RUAdj:RUCon:RURAdv|RUVerb;-RUList|-RUList|*|*;
+674;70;^RUPrep|RUConj+^RUNegRelpron:RUList:RUNegBegin;*|+RUNegStop;Specific conjunctions become NegStop
+1190;70;RUPunctuation+^RUList;+RUNegStop;
+1212;70;RUNegPred|RUAdvPR|"и";*|*|RUAdvStruct;
+1258;70;RUNegRel|.RUPerspron|RUInf|"и"|*RUAdj:RUCon;*|*|*|RUAdvStruct|*;
+1302;70;^"как"|RUVerb|"и"|"как";*|*|RUAdvStruct|*;
+1223;70;RUNegRel|^RUVerb:RUConj|"и"+^RUAdvStruct|RUVerb|^SEnd;*|*|+RUBeginrel|*|*;split at 'and' when verb follows
+1225;70;RUNegRel|*RUPart:RUVerb:RUInf:RUAux|.RURAdv|"и"+^RUAdvStruct|*RUPrep:RUAdj:RUCon:RUAdvStruct:RUBeginendconcept:RURAdv:RUAdvPR|RUVerb;*|*|*|+RUBeginrel|*|*;split at 'and' when verb follows
+1226;70;RUNegRel|RUVerb+^RUmAux:RUAux|"и"+^RUAdvStruct|RUAux:RUmAux;*|*|+RUBeginrel|*;split at 'and' when verb follows
+1221;70;^RUConj|"и"+^RUAdvStruct|RUConj+^"как";*|+RUBeginrel|*;split at 'and' when conjunction follows
+1256;70;RUNegPR|RUNegRel|RUInf|"и"+^RUAdvStruct;*|*|*|+RUBeginrel+RUNegStop;
+1194;70;"и"+^RUList:RUAdvStruct|^RUNegation;+RUNegStop|*;
+1198;70;^RUVerb|"или"|RUVerb;*|+RUNegStop|*;
+1201;70;RUNegBegin:RUInNegspan|^RUNegStop;*|+RUInNegspan;assign a temp marker to all words in a negation span
+1211;70;RUCon|RUNegPrep;+RUNegBegin|*;
+1210;70;RUNegPrep;+RUNegBegin;
+1205;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron|RUVerb+^RUInNegspan;*|*|+RUNegStop|*|*;
+1206;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|RUPrep+^RUInNegspan;*|*|+RUNegStop|*;
+1204;70;RUNegPrep|*^RUBCon:RUVerb:RUInf:RUPrep|RUBCon:RUVerb:RUInf:RUPrep+^RUInNegspan:RUNegation;+RUNegBegin|*|+RUNegStop;
+1207;70;RUNegPrep|RUAdj|RUPrep|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|+RUNegStop;exception to r1204
+1209;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUNRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|RUPRPron|*|+RUNegStop;copy of r1208 for NRPron that should be PRPron
+1208;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUPerspron:RUPRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|*|+RUNegStop;exception to r1204
+1203;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron|RUPrep:RUVerb+^RUInNegspan;*|*|*|*|+RUNegStop;
+1266;70;RUNegRel|*typeRelation+^RUNegRel:RUNegStop:RUPrep|RUConj+RUNegStop|^RUNegation;*|*|+RUBeginrel|*;to split off NegStop from relation with Negation marker
+1267;70;RUNegRel|RUAndOr+RUNegStop|^RUNegation;*|+RUBeginrel|*;to split off NegStop from relation with Negation marker
+1192;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|*|+RUNegStop;move NegStop from nonrelevant to next relevant lexrep
+1191;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|+RUNegStop;move NegStop from nonrelevant to next relevant lexrep
+1229;70;RUConj+RUPunctuation;-RUPunctuation;
+1238;80;RUPunctuation+^RUList;+RUNegSentimentStop;
+1239;80;RUPunctuation+^RUList;+RUPosSentimentStop;
+1244;80;"и"+^RUList:RUAdvStruct|^RUNegSentiment;+RUNegSentimentStop|*;
+1245;80;"и"+^RUList:RUAdvStruct|^RUPosSentiment;+RUPosSentimentStop|*;
+879;80;RUConj+^RUNegRelpron;+RUNegSentimentStop;Specific conjunctions become SentimentStop
+880;80;RUConj+^RUNegRelpron;+RUPosSentimentStop;Specific conjunctions become SentimentStop
+1242;80;RUNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegSentiment;*|*|+RUNegSentimentStop;
+1243;80;RUPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUPosSentiment;*|*|+RUPosSentimentStop;
+1240;80;RUNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegSentiment;*|+RUNegSentimentStop;
+1241;80;RUPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUPosSentiment;*|+RUPosSentimentStop;
+1236;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*|*|*|*|*;
+1237;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*|*|*|*|*;con-prep-con-prep-con
+1234;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*|*|*;con-prep-con
+1235;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|RUPrep|*RUCon:RUPerspron:RUPosspron:RUPRPron:RUAdj|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*|*|*;con-prep-con
+1232;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RURAdv|RUPred+RUNegSentiment|RUPrep:RUPunctuation:SEnd;+RUNegSentimentBegin|*|*|*;
+1233;80;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RURAdv|RUPred+RUPosSentiment|RUPrep:RUPunctuation:SEnd;+RUPosSentimentBegin|*|*|*;
+1248;80;RUConj:RUAndOr+RUBeginrel;RUBeginrel;give beginrelation its final label
+822;$;RUPunctuation;Punctuation;

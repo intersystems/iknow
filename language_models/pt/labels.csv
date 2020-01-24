@@ -1,190 +1,155 @@
-﻿/* Mandatory labels, now hardcoded into the engine
+﻿
 
-/*;;Concept;typeConcept;mandatory label;0;;
-/*;;Join;typeOther;mandatory label since 2013.1 build 175;0;;
-/*;;Numeric;typeConcept;mandatory label since 2014.2 build 241;0;;
-/*;;Punctuation;typeEndConcept;mandatory label;0;;
-/*;;Relation;typeRelation;mandatory label;0;;
-/*;;SBegin;typeNonRelevant;geeft het begin van een zin aan;0;;
-/*;;SEnd;typeNonRelevant;geeft het einde van een zin aan;0;;
-/*;;Unknown;typeOther;mandatory label;0;;
-/*;;CapitalInitial;typeAttribute;mandatory label;0;2013.1-mvdh;
-/*;;CapitalMixed;typeAttribute;mandatory label;0;2013.1-mvdh;
-/*;;CapitalAll;typeAttribute;mandatory label;0;2013.1-mvdh;
-/*;;NonSemantic;typeAttribute;mandatory attribute, garbage;0;2014.1-jdn;Entity(NonSemantic)
-/*;1,$;NonRelevant;typeOther;;0;",
-
-/*PHASES
-/*40: general
-/*70: negation
-/*80: sentiment
 
 /* Variants of unified labels
-92;1,40,$;PTCapitalInitial;typeAttribute;No Description;0;23-03-2015-nl, added phase 1 22-04-2015-nl;
-94;40,$;PTCapitalAll;typeAttribute;No Description;0;23-03-2015-nl;
-153;40;PTCapitalMixed;typeAttribute;;0;#20-sde;
-93;40,60,70,80,$;PTPunctuation;typeEndConcept;No Description;0;23-03-2015-nl, added phase 60 #21-sde;
-101;40,$;PTRelation;typeRelation;No Description;0;23-03-2015-nl;
-102;40,$;PTNonRelevant;typeOther;No Description;0;23-03-2015-nl;
+;1,40,$;PTCapitalInitial;typeAttribute;language specific variant of unified label for capital initial;0;;
+;40,$;PTCapitalAll;typeAttribute;language specific variant of unified label for capital all;0;;
+;40;PTCapitalMixed;typeAttribute;language specific variant of unified label for capital mixed;0;;
+;40,60,70,80,$;PTPunctuation;typeEndConcept;language specific variant of unified label for punctuation;0;;
+;40,$;PTRelation;typeRelation;language specific variant of unified label for general relation;0;;
+;40,$;PTNonRelevant;typeOther;language specific variant of unified label for general nonrelevant;0;;
 
-/* Mandatory attributes (Currently only Japanese)
-89;;Subject;typeAttribute;mandatory attribute;0;2014.1-sde;
-90;;Object;typeAttribute;mandatory attribute;0;2014.1-sde;
-91;;PrimaryRelation;typeAttribute;mandatory attribute;0;2014.1-sde;
+/* Mandatory attributes
+;;Subject;typeAttribute;mandatory attribute;0;;
+;;Object;typeAttribute;mandatory attribute;0;;
+;;PrimaryRelation;typeAttribute;mandatory attribute;0;;
 
-/*;;-;typeOther;symbol for composite labels 2013.1-mvdh;0;;
-		
 /* Default label
-29;1,40,60,70,$;PTCon;typeConcept;substantieven (of gesubstantiveerde woordgroepen, eigennamen,...);1;2012.2-mvdh, added phase 60 #21-sde;
+;1,40,60,70,$;PTCon;typeConcept;nouns (or noun phrases, proper names, ...);1;;
 
 /* PT labels
-46;1,40,$;PTA;typeNonRelevant;lidwoord-voorzetsel;0;2012.2-mvdh;
-28;1,40,60,70,$;PTAdj;typeConcept;adjectieven;0;2012.2-mvdh, added phase 60 #21-sde;
-32;1,40,$;PTAdjAdv;typeAmbiguous;ambivalent:adjective/adverb, default Adj;0;2012.2-mvdh;
-121;1,40,$;PTAdjCon;typeConcept;ambivalent:adjective/noun;0;04-05-2016-nl;
-112;1,40,$;PTAdjInPrep;typeAmbiguous;adjective as part of preposition, merged in other label;0;18-04-2016-nl;
-172;1,70;PTAdvrestrict;typeRelation;só, meramente, apenas;0;#21-sde;
-132;1,40,$;PTAdjtemp;typeConcept;adjectives as part of time expression;0;25-05-2016-nl;
-122;1,40,$;PTAdjVerb;typeAmbiguous;ambivalent:adjective/verb, default ConVerb;0;04-05-2016-nl;
-30;1,40,70,95,$;PTAdv;typeRelation;general label for adverbs, to be added to specific label;0;2012.2-mvdh, added phase 95 #21-sde;
-107;1,40,70,$;PTAdvdegree;typeRelation;label for adverbs of degree;0;11-04-2016-nl;
-113;1,40,$;PTAdvdegreeAfter;typeAmbiguous;label for adverbs of degree which come after adjective;0;21-04-2016-nl;
-111;1,40,$;PTAdvCon;typeAmbiguous;ambivalent:adverb or noun, default Advmanner+Adv;0;13-04-2016-nl;
-66;1,40,$;PTAdvdir;typeRelation;bijwoorden van richting;0;2013.1-mvdh;
-69;1,40,$;PTAdvloc;typeRelation;adverbs of place;0;2013.1-mvdh;
-70;1,40,$;PTAdvmanner;typeConcept;adverbs of manner;0;2013.1-mvdh,changed from mandeg 02-05-2016-nl;
-71;1,40,$;PTAdvmodal;typeRelation;adverbs of modality;0;2013.1-mvdh;
-124;1,40,70,$;PTAdvPR;typePathRelevant;pathrelevant adverbs;0;09-05-2016-nl, added phase 70 #21-sde;
-72;1,40,70,$;PTAdvstruct;typeOther;adverbs of structure;0;2013.1-mvdh, added phase 70 #21-sde;
-/*73;1,40,$;PTAdvtimefreq;typeRelation;adverbs of time and frequency;0;2013.1-mvdh; -> deleted 21-Sep-2016-nl, label isn't used anymore
-31;1,40,$;PTAdvVerb;typeRelation;ambivalent : bijwoord / werkwoord;0;2012.2-mvdh;
-163;70;PTAdv70;typeOther;adverb in phase 70;0;#21-sde;
-117;1,40,$;PTAlgo;typeAmbiguous;for 'something' and 'someone':concept before adjective;0;04-05-2016-nl;
-24;1,40,60,70,95,$;PTAndOrBut;typeRelation;de voegwoorden ‘y’, ‘e’, ‘o’ en ‘u’ en ‘y/o’ ;0;2012.2-mvdh, added phase 60 and 95 #21-sde;
-139;1,40,$;PTAntes;typeAmbiguous;for 'antes': preposition or adverb;0;01-06-2016-nl;
-141;1,40,$;PTAo;typeAmbiguous;for 'ao' when used as part of Concept;0;01-06-2016-nl;
-/*54;1,40,$;PTAqui;typeNonRelevant;bijwoord 'daar' moet concept worden indien voorafgegaan door voorzetsel;0;2012.2-mvdh; -> deleted 01-06-2016-nl
-23;1,40,70,95,$;PTAux;typeRelation;koppelwerkwoorden en hulpwerkwoorden;0;2012.2-mvdh, added phase 95 #21-sde;
-25;1,40,$;PTAuxCon;typeRelation;ambivalent : koppelwerkwoord / concept;0;2012.2-mvdh;
-27;1,40,70,$;PTBeginconcept;typeBeginConcept;hiermee begint een nieuw concept;0;2012.2-mvdh, added phase 70 #21-sde;
-159;70,95,$;PTBeginrel;typeBeginRelation;used to split relations to optimize negation expansion;0;#21-sde;
-128;1,40,$;PTCerto;typeAmbiguous;ambivalent: indefinite pronoun or adjective;0;23-05-2016-nl;
-155;1,60,70;PTColon;typeEndConcept;colon;0;#21-sde;
-26;1,40,60,70,$;PTComma;typeEndConcept;leesteken ‘komma’;0;2012.2-mvdh, added phase 70 and 60 #21-sde;
-44;1,40,70,$;PTComo;typeRelation;om 'tanto' te desambigueren;0;2012.2-mvdh;
-166;1,40;PTComparadj;typeConcept;comparative;0;#21-sde;
-167;1,40,70,$;PTComprel;typeRelation;relation for comparison;0;#21-sde;
-160;1,40,70;PTCondition;typeRelation;conditional conjunction to be included in negation expansion;0;#21-sde;
-52;1,40,$;PTConforme;typeRelation;het woord 'conforme', ambivalent : voorzetsel / voegwoord / adjectief / werkwoord;0;2012.2-mvdh;
-33;1,40,60,70,95,$;PTConj;typeRelation;voegwoorden;0;2012.2-mvdh, added phase 95 and 60 #21-sde;
-168;1,40;PTConjAdv;typeRelation;conjunction or adverb;0;#21-sde;
-123;1,40,$;PTConPart;typeAmbiguous;ambivalent: concept/participle;0;09-05-2016-nl;
-148;1,40,$;PTConPlusDe;typeConcept;concept makes following 'de' part of Concept;0;13-06-2016-nl;
-/*149;1,40,$;PTConPlusDeCap;typeConcept;concept makes following 'de' part of Concept when capitalized noun follows;0;20-06-2016-nl; - replaced by PTOrgUnit #20-sde
-133;1,40,$;PTConTime;typeConcept;for hour,day,week, etc. as part of expression of time;0;25-05-2016-nl;
-40;1,40,$;PTConVerb;typeConcept;ambivalent : concept / werkwoord;0;2012.2-mvdh;
-49;1,40,70,$;PTCujo;typeRelation;de woorden wier/wiens om ConVerb te kunnen desambigueren;0;2012.2-mvdh;
-147;1,40,$;PTDateBrackets;typeConcept;for dates between brackets;0;13-06-2016-nl;
-134;1,40,$;PTDay;typeConcept;for the days of the week;0;25-05-2016-nl;
-39;1,40,60,70,95,$;PTDe;typeRelation;voorzetsel ‘van’;0;2012.2-mvdh, added phase 95 and 60 #21-sde;
-41;1,40,60,70,$;PTDefart;typeNonRelevant;bepaalde lidwoorden;0;2012.2-mvdh, added phase 60 #21-sde;
-43;1,40,$;PTDemonstr;typeAmbiguous;aanwijzende voornaamwoorden;0;2012.2-mvdh,changed type 02-05-2016-nl;
-115;1,40,60,70,$;PTDemonstrPR;typePathRelevant;demonstrative pronouns as noun;0;02-05-2016-nl, added phase 70 and 60 #21-sde;
-150;1,40,60,70,95,$;PTDo;typeRelation;prepositions 'do', 'da', 'dos', 'das';0;20-06-2016-nl, added phase 95 and 60 #21-sde;
-138;1,40,$;PTAdjtempAfter;typeAmbiguous;for 'depois':PathRelevant plus Time OR part of concrete time;0;30-05-2016-nl;
-45;1,40,$;PTEm;typeRelation;voorzetsel 'em';0;2012.2-mvdh;
-64;1,40,$;PTEndconcept;typeEndConcept;om bv jaartallen als eindeconcept te kunnen labelen;0;2013.1-mvdh;
-/*59;1,40,$;PTEndofclusterobj;typeRelation;deel van ww-vorm met object;0;2012.2-mvdh; - replaced by PTPronsuffix #21-sde
-/*56;1,40,$;PTEndofclusterrefl;typeRelation;deel van reflexief ww-vorm;0;2012.2-mvdh; - replaced by PTPronsuffix #21-sde
-162;95,$;PTEndrelation;typeEndRelation;used to split relations to optimize negation expansion;0;#21-sde;
-42;1,40,$;PTEste;typeNonRelevant;ambivalent : substantief / aanwijzend voornaamwoord (deze / oosten);0;2012.2-mvdh;
-152;1,40;PTGeoType;typeConcept;estado, ilha, serra;0;#20-sde;
-35;1,40,70,$;PTGer;typeRelation;gerundia;0;2012.2-mvdh;
-34;1,40,60,70,$;PTIndefart;typeNonRelevant;onbepaalde lidwoorden;0;2012.2-mvdh, added phase 70 and 60 #21-sde;
-36;1,40,$;PTIndefpron;typeConcept;onbepaalde voornaamwoorden;0;2012.2-mvdh;
-/*74;1,40,$;PTIndefpronnonrel;typeNonRelevant;onbepaalde voornaamwoorden;0;2013.1-mvdh; -> deleted 21-Sep-2016-nl, label isn't used anymore
-75;1,40,80,$;PTIndefpronconcept;typeConcept;indefinite pronouns: concept except in combination with other pronoun;0;2013.1-mvdh,changed definition 11-05-2016-nl;
-116;1,40,60,70,$;PTIndefpronPR;typePathRelevant;indefinite pronouns: pathrelevant;0;04-05-2016-nl, added phase 70 and 60 #21-sde;
-125;1,40,$;PTIndefpronPRCon;typeAmbiguous;indefinite pronoun, ambivalent:concept or pathrelevant;0;09-05-2016-nl;
-126;1,40,$;PTIndefpronPRNR;typeAmbiguous;indefinite pronoun, ambivalent:nonrelevant or pathrelevant;0;11-05-2016-nl;
-38;1,40,60,70,$;PTInf;typeRelation;infinitieven;0;2012.2-mvdh,changed from beginconcept 06-04-2016-nl, added phase 60 #21-sde;
-145;1,40,$;PTInfCon;typeAmbiguous;ambivalent:infinitive or noun;0;06-06-2016-nl;
-/*58;1,40,$;PTInfrefl;typeConcept;reflexief deel infinitief;0;2012.2-mvdh; - not used -> deleted 19-08-2015-sde
-37;1,40,$;PTInterpron;typeRelation;vragende voornaamwoorden;0;2012.2-mvdh;
-146;1,40,$;PTLayout;typeBeginEndConcept;for numbered lists;0;13-06-2016-nl;
-109;1,40;PTLinkingverb;typeRelation;linking verbs;0;13-04-2016-nl, removed phase $ #21-sde;
-22;1,40,$;PTMaismenos;typeConcept;de woorden ‘mas’ en ‘menos’ (meer / minder);0;2012.2-mvdh;
-50;1,40,$;PTmAux;typeRelation;modele hulpwerkwoorden zoals dever;0;2012.2-mvdh;
-57;1,40,$;PTMeio;typeConcept;het woord ‘meio’, om constructies als anderhalf - um ano e meio - te herkennen;0;2012.2-mvdh;
-119;1,40,$;PTMesmo;typeAmbiguous;for 'mesmo': nonrelevant or indefinite pronoun;0;04-05-2016-nl;
-120;1,40,$;PTMinha;typeAmbiguous;for 'minha': possessive pronoun or noun;0;04-05-2016-nl;
-7;1,40,60,$;PTMonth;typeConcept;de maanden van het jaar;0;2012.2-mvdh, added phase 60 #21-sde;
-/*6;1,40,$;PTMui;typeNonRelevant;het versterkend bijwoord ‘mui’ (erg);0;2012.2-mvdh; -> deleted 02-05-2016-nl
-154;1,40;PTName;typeConcept;person name;0;#20-sde;
-8;1,40,70,95,$;PTNao;typeRelation;het ontkennend bijwoord ‘no’ (nee, niet);0;2012.2-mvdh, added phase 95 #21-sde;
-76;1,40,70,$;PTNaoAdj;typeConcept;to mark adjectives as negation;0;2013.1-mvdh,changed definition:made difference between prefix 'não-' and naoadj 06-06-2016-nl, added phase 70 #21-sde;
-144;1,40,$;PTNaoPrefix;typeConcept;to recognize não- as negation;0;06-06-2016-nl;
-143;1,40,70,$;PTNegPR;typePathRelevant;for negation plus pathrelevant;0;16-03-2016-nl, added phase 70 #21-sde;
-103;1,40,$;PTNoMod;typeOther;to prevent negative pronoun to become Mod and to avoid using negation label in phase 40;0;25-03-2015-nl;
-10;1,40,60,70,$;PTNonrel;typeNonRelevant;om woorden niet relevant te kunnen maken;0;2012.2-mvdh, added phase 70 #20-sde, added phase 60 #21-sde;
-157;1,40;PTNos;typeAmbiguous;the word 'nos';0;#21-sde;
-9;1,40,$;PTNum;typeConcept;telwoorden;0;2012.2-mvdh;
-2;1,40,60,70,$;PTNumber;typeConcept;cijfers en getallen;0;2012.2-mvdh, added phase 70 and 60 #21-sde;
-151;1,40;PTOrgUnit;typeConcept;"instituto", "conselho", etc.;0;#20-sde;
-161;70;PTOuNao;typeRelation;label for 'ou não', gets assigned by a rule;0;#21-sde;
-118;1,40,$;PTOutros;typeAmbiguous;for 'outros' and 'outras';0;04-05-2016-nl;
-1;1,40,70,$;PTPart;typeConcept;voltooid deelwoord;0;2012.2-mvdh;
-3;1,40,60,70,$;PTPartrel;typeRelation;voltooid deelwoord geherdefinieerd door regels als relatie;0;2012.2-mvdh, added phase 60 #21-sde;
-140;1,40,$;PTPercent;typeConcept;for '%' when differently used than ptnumber;0;01-06-2016-nl;
-5;1,40,70,$;PTPerspron;typePathRelevant;persoonlijk voornaamwoord;0;2012.2-mvdh,changed type 02-05-2016-nl, added phase 70 #21-sde;
-51;1,40,$;PTPoder;typeRelation;het modale werkwoord / substantief ‘poder’ (kunnen / macht);0;2012.2-mvdh;
-11;1,40,60,70,$;PTPosspron;typePathRelevant;bezittelijke voornaamwoorden;0;2012.2-mvdh,changed type 02-05-2016-nl, added phase 60 #21-sde;
-/*4;1,40,$;PTPouco;typeNonRelevant;woorden als ‘pouco’ (weinig) (adjectief / bijwoord);0;2012.2-mvdh;replaced by advdegree 26-04-2016-nl
-164;1,40,70;PTPreferRel;typeOther;extra label for ambiguous words that in case of doubt will be labeled as relations;0;#21-sde;
-18;1,40,70,95,$;PTPrep;typeRelation;voorzetsels;0;2012.2-mvdh, added phase 95 #21-sde;
-17;1,40,60,70,95,$;PTPrepart;typeRelation;preposition (group) + article;0;2012.2-mvdh, added phase 95 and 60 #21-sde;
-136;1,40,$;PTPrepartTime;typeRelation;prepositional articles in dates;0;25-05-2016-nl;
-170;1,40;PTPronsuffix;typeRelation;pronoun as suffix to a verb form;0;#21-sde;
-106;1,40,$;PTRecipr;typeRelation;reciprocal pronouns;0;06-04-2016-nl,changed type from ambiguous to replace default rule 21-Sep-2016-nl;
-129;1,40,$;PTRecipr1;typeAmbiguous;first part of reciprocal pronoun:relation or pathrelevant;0;23-05-2016-nl;
-130;1,40,$;PTRecipr2;typeAmbiguous;second part of reciprocal pronoun:relation or pathrelevant;0;23-05-2016-nl;
-19;1,40,60,70,95,$;PTRefl;typeRelation;het woord ‘se’ (reflexief voornaamwoord);0;2012.2-mvdh, added phase 70, 60 and 95 #21-sde;
-21;1,40,70,$;PTRel;typeRelation;om zaken als 'capaz de' te herschrijven tot relatie;0;2012.2-mvdh;
-20;1,40,70,95,$;PTRelpron;typeRelation;betrekkelijke voornaamwoorden;0;2012.2-mvdh, added phase 95 2107-12-08-sde;
-142;1,40,$;PTRoman;typeConcept;for roman numbers to differentiate from other numbers;0;01-06-2016-nl;
-110;1,40,$;PTSalvo;typeAmbiguous;ambivalent:adjective,participle,verb,preposition;0;13-04-2016-nl;
-/*65;1,40,$;PTSao;typeRelation;om het woord werkwoord 'sao' te onderscheiden van sub/adj 13-01-2012;0;;not used -> deleted 02-05-2016-nl
-48;1,40,$;PTSegundo;typeRelation;om segundo te desambigueren : telwoord / voorzetsel;0;2012.2-mvdh;
-13;1,40,$;PTSer;typeRelation;het woord ‘ser’, ambivalent : infinitief / substantief (zijn / het wezen);0;2012.2-mvdh;
-12;1,40,$;PTTanto;typeConcept;het woord ‘tanto’, ambivalent : adjectief / bijwoord (zoveel/ zowel);0;2012.2-mvdh;
-108;1,40,$;PTTao;typeAmbiguous;the word 'tão', ambivalent: relation / nonrelevan;0;11-04-2016-nl;
-135;1,40,$;PTTempBeginEnd;typeBeginEndConcept;more or less concrete point in time or period;0;25-05-2016-nl;
-137;1,40,$;PTTempEnd;typeEndConcept;more or less concrete point in time or period, end of Concept;0;25-05-2016-nl;
-127;1,40,$;PTTodo;typeAmbiguous;for specific rules for todo/a(s) plus articles etc.;0;11-05-2016-nl;
-105;1,40,$;PTUDConcept;typeConcept;to use in rules to prevent UDConcept to be overwritten;0;04-04-2016-nl;
-114;1,40,$;PTUm;typeNonRelevant;ambivalent word 'um': 'one' or 'a';0;26-04-2016-nl;
-131;1,40,$;PTUns;typeAmbiguous;ambivalent word 'uns': indefinite article or pronoun, or part of reciprocal pronoun;0;23-05-2016-nl;
-14;1,40,60,70,95,$;PTVerb;typeRelation;werkwoorden;0;2012.2-mvdh, added phase 60 and 95 #21-sde;
-83;1,40,70,$;PTConIfCap;typeConcept;make concept if capitalized;0;2013.1-mvdh;
-84;1,40,$;PTConIfCapAll;typeConcept;make concept if capitalized;0;2013.1-mvdh;
-/*85;1,40,$;PTConIfCap1;typeConcept;make concept if capitalized - for one-letter-words;0;2013.1-mvdh; - not used -> deleted 19-08-2015-sde
-86;1,40,$;PTConIfCapsL&R;typeConcept;make concept if words left and right are capitalized;0;2013.1-mvdh;
+;1,40,$;PTA;typeNonRelevant;ambivalent: article/preposition;0;;
+;1,40,60,70,$;PTAdj;typeConcept;adjectives;0;;
+;1,40,$;PTAdjAdv;typeAmbiguous;ambivalent:adjective/adverb, default Adj;0;;
+;1,40,$;PTAdjCon;typeConcept;ambivalent:adjective/noun;0;;
+;1,40,$;PTAdjInPrep;typeAmbiguous;adjective as part of preposition;0;;
+;1,70;PTAdvrestrict;typeRelation;'só', 'meramente', 'apenas';0;;
+;1,40,$;PTAdjtemp;typeConcept;adjectives as part of time expression;0;;
+;1,40,$;PTAdjVerb;typeAmbiguous;ambivalent:adjective/verb;0;;
+;1,40,70,95,$;PTAdv;typeRelation;general label for adverbs, to be added to specific label;0;;
+;1,40,70,$;PTAdvdegree;typeRelation;label for adverbs of degree;0;;
+;1,40,$;PTAdvdegreeAfter;typeAmbiguous;label for adverbs of degree which come after adjective;0;;
+;1,40,$;PTAdvCon;typeAmbiguous;ambivalent:adverb or noun;0;;
+;1,40,$;PTAdvdir;typeRelation;adverbs of direction;0;;
+;1,40,$;PTAdvloc;typeRelation;adverbs of place;0;;
+;1,40,$;PTAdvmanner;typeConcept;adverbs of manner;0;;
+;1,40,$;PTAdvmodal;typeRelation;adverbs of modality;0;;
+;1,40,70,$;PTAdvPR;typePathRelevant;pathrelevant adverbs;0;;
+;1,40,70,$;PTAdvstruct;typeOther;adverbs of structure;0;;
+;1,40,$;PTAdvVerb;typeRelation;ambivalent: adverb/verb;0;;
+;70;PTAdv70;typeOther;adverb in phase 70;0;;
+;1,40,$;PTAlgo;typeAmbiguous;for 'something' and 'someone':concept before adjective;0;;
+;1,40,60,70,95,$;PTAndOrBut;typeRelation;conjunctions ‘y’, ‘e’, ‘o’, ‘u’ and ‘y/o’ ;0;;
+;1,40,$;PTAntes;typeAmbiguous;for 'antes': preposition or adverb;0;;
+;1,40,$;PTAo;typeAmbiguous;for 'ao' when used as part of Concept;0;;
+;1,40,70,95,$;PTAux;typeRelation;linking verbs and auxiliary verbs;0;;
+;1,40,$;PTAuxCon;typeRelation;ambivalent: linking verb/concept;0;;
+;1,40,70,$;PTBeginconcept;typeBeginConcept;starts a new concept;0;;
+;70,95,$;PTBeginrel;typeBeginRelation;used to split relations to optimize negation expansion;0;;
+;1,40,$;PTCerto;typeAmbiguous;ambivalent: indefinite pronoun/adjective;0;;
+;1,60,70;PTColon;typeEndConcept;colon;0;;
+;1,40,60,70,$;PTComma;typeEndConcept;punctuation mark ‘comma’;0;;
+;1,40,70,$;PTComo;typeRelation;to disambiguate 'tanto';0;;
+;1,40;PTComparadj;typeConcept;comparative;0;;
+;1,40,70,$;PTComprel;typeRelation;relation for comparison;0;;
+;1,40,70;PTCondition;typeRelation;conditional conjunction to be included in negation expansion;0;;
+;1,40,$;PTConforme;typeRelation;'conforme', ambivalent: preposition/conjunction/adjective/verb;0;;
+;1,40,60,70,95,$;PTConj;typeRelation;conjunctions;0;;
+;1,40;PTConjAdv;typeRelation;ambivalent: conjunction/adverb;0;;
+;1,40,$;PTConPart;typeAmbiguous;ambivalent: concept/participle;0;;
+;1,40,$;PTConPlusDe;typeConcept;concept makes following 'de' part of Concept;0;;
+;1,40,$;PTConTime;typeConcept;for hour, day, week etc. as part of expression of time;0;;
+;1,40,$;PTConVerb;typeConcept;ambivalent: concept/verb;0;;
+;1,40,70,$;PTCujo;typeRelation;'cujo(s)'/'cuja(s)' (meaning 'whose') to disambiguate ConVerb;0;;
+;1,40,$;PTDateBrackets;typeConcept;for dates between brackets;0;;
+;1,40,$;PTDay;typeConcept;for the days of the week;0;;
+;1,40,60,70,95,$;PTDe;typeRelation;preposition ‘of’;0;;
+;1,40,60,70,$;PTDefart;typeNonRelevant;definite articles;0;;
+;1,40,$;PTDemonstr;typeAmbiguous;demonstrative pronouns;0;;
+;1,40,60,70,$;PTDemonstrPR;typePathRelevant;demonstrative pronouns as noun;0;;
+;1,40,60,70,95,$;PTDo;typeRelation;prepositions 'do', 'da', 'dos', 'das';0;;
+;1,40,$;PTAdjtempAfter;typeAmbiguous;for 'depois':PathRelevant plus Time OR part of concrete time;0;;
+;1,40,$;PTEm;typeRelation;preposition 'em';0;;
+;1,40,$;PTEndconcept;typeEndConcept;to end a concept;0;;
+;95,$;PTEndrelation;typeEndRelation;used to split relations to optimize negation expansion;0;;
+;1,40,$;PTEste;typeNonRelevant;ambivalent: noun / demonstrative pronoun (meaning 'east'/'this');0;;
+;1,40;PTGeoType;typeConcept;'estado', 'ilha', 'serra';0;;
+;1,40,70,$;PTGer;typeRelation;gerundia;0;;
+;1,40,60,70,$;PTIndefart;typeNonRelevant;indefinite articles;0;;
+;1,40,$;PTIndefpron;typeConcept;indefinite pronouns;0;;
+;1,40,80,$;PTIndefpronconcept;typeConcept;indefinite pronouns: concept except in combination with other pronoun;0;;
+;1,40,60,70,$;PTIndefpronPR;typePathRelevant;indefinite pronouns: pathrelevant;0;;
+;1,40,$;PTIndefpronPRCon;typeAmbiguous;indefinite pronoun, ambivalent:concept or pathrelevant;0;;
+;1,40,$;PTIndefpronPRNR;typeAmbiguous;indefinite pronoun, ambivalent:nonrelevant or pathrelevant;0;;
+;1,40,60,70,$;PTInf;typeRelation;infinitives;0;;
+;1,40,$;PTInfCon;typeAmbiguous;ambivalent:infinitive or noun;0;;
+;1,40,$;PTInterpron;typeRelation;interrogative pronouns;0;;
+;1,40,$;PTLayout;typeBeginEndConcept;for numbered lists;0;;
+;1,40;PTLinkingverb;typeRelation;linking verbs;0;;
+;1,40,$;PTMaismenos;typeConcept;‘mais’ and ‘menos’ (meaning 'more'/'less');0;;
+;1,40,$;PTMeio;typeConcept;‘meio’, to recognize '... and a half', eg. 'um ano e meio';0;;
+;1,40,$;PTMesmo;typeAmbiguous;for 'mesmo': nonrelevant/indefinite pronoun;0;;
+;1,40,$;PTMinha;typeAmbiguous;for 'minha': possessive pronoun/noun;0;;
+;1,40,60,$;PTMonth;typeConcept;the months;0;;
+;1,40;PTName;typeConcept;person name;0;;
+;1,40,70,95,$;PTNao;typeRelation;negation marker ‘não’ (meaning 'no', 'not');0;;
+;1,40,70,$;PTNaoAdj;typeConcept;to mark adjectives as negation marker;0;;
+;1,40,$;PTNaoPrefix;typeConcept;to recognize não- as negation marker;0;;
+;1,40,70,$;PTNegPR;typePathRelevant;for negation marker as pathrelevant;0;;
+;1,40,60,70,$;PTNonrel;typeNonRelevant;for nonrelevant lexreps;0;;
+;1,40;PTNos;typeAmbiguous;the word 'nos';0;;
+;1,40,$;PTNum;typeConcept;numerals;0;;
+;1,40,60,70,$;PTNumber;typeConcept;numbers;0;;
+;1,40;PTOrgUnit;typeConcept;organization names like 'instituto', 'conselho' etc.;0;;
+;70;PTOuNao;typeRelation;label for 'ou não', gets assigned by a rule;0;;
+;1,40,$;PTOutros;typeAmbiguous;for 'outros' and 'outras';0;;
+;1,40,70,$;PTPart;typeConcept;past participle;0;;
+;1,40,60,70,$;PTPartrel;typeRelation;past participle disambiguated by the rules as relation;0;;
+;1,40,$;PTPercent;typeConcept;for '%' when differently used than ptnumber;0;;
+;1,40,70,$;PTPerspron;typePathRelevant;personal pronoun;0;;
+;1,40,$;PTPoder;typeRelation;modal verb/noun ‘poder’ (meaning 'can' / 'power');0;;
+;1,40,60,70,$;PTPosspron;typePathRelevant;possessive pronouns;0;;
+;1,40,70;PTPreferRel;typeOther;extra label for ambiguous words that in case of doubt will be labeled as relations;0;;
+;1,40,70,95,$;PTPrep;typeRelation;prepositions;0;;
+;1,40,60,70,95,$;PTPrepart;typeRelation;preposition (group) + article;0;;
+;1,40;PTPrepartTime;typeRelation;prepositional articles in dates;0;;
+;1,40;PTPronsuffix;typeRelation;pronoun as suffix to a verb form;0;;
+;1,40,$;PTRecipr;typeRelation;reciprocal pronouns;0;;
+;1,40,$;PTRecipr1;typeAmbiguous;first part of reciprocal pronoun:relation or pathrelevant;0;;
+;1,40,$;PTRecipr2;typeAmbiguous;second part of reciprocal pronoun:relation or pathrelevant;0;;
+;1,40,60,70,95,$;PTRefl;typeRelation;‘se’, reflexive pronoun;0;;
+;1,40,70,$;PTRel;typeRelation;for unspecified relations;0;;
+;1,40,70,95,$;PTRelpron;typeRelation;relative pronouns;0;;
+;1,40,$;PTRoman;typeConcept;for roman numbers, to differentiate from other numbers;0;;
+;1,40,$;PTSalvo;typeAmbiguous;ambivalent:adjective/participle/verb/preposition;0;;
+;1,40,$;PTSegundo;typeRelation;'segundo': numeral/preposition;0;;
+;1,40,$;PTSer;typeRelation;‘ser’, ambivalent: infinitive/noun (meaning 'to be'/'existence');0;;
+;1,40,$;PTTanto;typeConcept;‘tanto’, ambivalent: adjective/adverb (meaing 'so much'/'both' in 'both... and...');0;;
+;1,40,$;PTTao;typeAmbiguous;'tão', ambivalent: relevant/nonrelevant adverb;0;;
+;1,40,$;PTTempBeginEnd;typeBeginEndConcept;more or less concrete point in time or period;0;;
+;1,40,$;PTTempEnd;typeEndConcept;more or less concrete point in time or period, end of Concept;0;;
+;1,40,$;PTTodo;typeAmbiguous;for specific rules for todo/a(s) plus articles etc.;0;;
+;1,40,$;PTUm;typeNonRelevant;ambivalent word 'um': 'one' or 'a';0;;
+;1,40,$;PTUns;typeAmbiguous;ambivalent word 'uns': indefinite article or pronoun, or part of reciprocal pronoun;0;;
+;1,40,60,70,95,$;PTVerb;typeRelation;verbs;0;;
+;1,40,70,$;PTConIfCap;typeConcept;make concept if capitalized;0;;
+;1,40,$;PTConIfCapAll;typeConcept;make concept if all letters capitalized;0;;
+;1,40,$;PTConIfCapsL&R;typeConcept;make concept if words left and right are capitalized;0;;
 
 /* PT attributes
-80;60,70,$;PTNegStop;typeAttribute;to end the negation path;0;2013.1-mvdh, added phase 60 #21-sde, added phase 70, removed phase 40 #21-sde;Path(End,Negation)
-81;70,$;PTNegBegin;typeAttribute;to begin the negation path;0;2013.1-mvdh;Path(Begin,Negation)
-82;70,80,$;PTNegation;typeAttribute;to mark certain entities as negation;0;2013.1-mvdh;Entity(Negation)
-165;70;PTNegation2;typeAttribute;extra label for markers that are often used in combination with another marker;0;#21-sde;
-87;40,$;PTMod;typeAttribute;modifier;0;2013.1-mvdh;Entity(Modifier)
-88;40,$;PTTime;typeAttribute;modifier;0;2013.1-mvdh;Entity(DateTime)
-95;70,$;PTPosSentiment;typeAttribute;for sentiment markers;0;23-03-2015-nl;Entity(PositiveSentiment)
-96;70,$;PTPosSentimentBegin;typeAttribute;for sentiment markers;0;23-03-2015-nl;Path(Begin,PositiveSentiment)
-97;$;PTPosSentimentStop;typeAttribute;for sentiment markers;0;23-03-2015-nl;Path(End,PositiveSentiment)
-98;70,$;PTNegSentiment;typeAttribute;for sentiment markers;0;23-03-2015-nl;Entity(NegativeSentiment)
-99;70,$;PTNegSentimentBegin;typeAttribute;for sentiment markers;0;23-03-2015-nl;Path(Begin,NegativeSentiment)
-100;$;PTNegSentimentStop;typeAttribute;for sentiment markers;0;23-03-2015-nl;Path(End,NegativeSentiment)
-104;40,$;PTDummy;typeAttribute;meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;18-08-2015-sde;
-156;1,70;PTNPC;typeAttribute;noun phrase component: common label for determiners and nouns;0;#21-sde;
-158;1,60,70;PTList;typeAttribute;marker for elements of enumerations;0;#21-sde;
-169;1,60,70;PTRList;typeAttribute;marker for elements of enumerations;0;#21-sde;
-171;40;PTWithSuffix;typeAttribute;marker for verbs with suffixes after merging verb and suffix(es) via rules;0;#21-sde;
+;60,70,$;PTNegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
+;70,$;PTNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
+;70,80,$;PTNegation;typeAttribute;to mark certain entities as negation marker;0;;Entity(Negation)
+;70;PTNegation2;typeAttribute;extra label for negation markers that are often used in combination with another marker;0;;
+;40,$;PTTime;typeAttribute;attribute for time indications;0;;Entity(DateTime)
+;70,$;PTPosSentiment;typeAttribute;for positive sentiment markers;0;;Entity(PositiveSentiment)
+;70,$;PTPosSentimentBegin;typeAttribute;to start the positive sentiment span;0;;Path(Begin,PositiveSentiment)
+;$;PTPosSentimentStop;typeAttribute;to end the positive sentiment span;0;;Path(End,PositiveSentiment)
+;70,$;PTNegSentiment;typeAttribute;for negative sentiment markers;0;;Entity(NegativeSentiment)
+;70,$;PTNegSentimentBegin;typeAttribute;to start the negative sentiment span;0;;Path(Begin,NegativeSentiment)
+;$;PTNegSentimentStop;typeAttribute;to end the negative sentiment span;0;;Path(End,NegativeSentiment)
+;40,$;PTDummy;typeAttribute;meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;;
+;1,70;PTNPC;typeAttribute;noun phrase component: common label for determiners and nouns;0;;
+;1,60,70;PTList;typeAttribute;marker for elements of enumerations;0;;
+;1,60,70;PTRList;typeAttribute;marker for elements of enumerations;0;;
+;40;PTWithSuffix;typeAttribute;marker for verbs with suffixes after merging verb and suffix(es) via rules;0;;

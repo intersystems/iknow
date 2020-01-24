@@ -1,84 +1,88 @@
-﻿45;;’;';;2011.2
-67;;`;';;2011.2
-68;;´;';;2011.2
-69;;′;';;2011.2
-99;;\s\;sµ;;alternative with missing apostroph, place before rules that insert spaces to avoid it works on english genitives, 2016-03-21-sde
-4;;C';Cµ ;;2011.2, adapted for 2013.1
-6;;D';Dµ ;;2011.2, adapted for 2013.1
-8;;J';Jµ ;;2011.2, adapted for 2013.1
-10;;L';lµ ;;2011.2, adapted for 2013.1
-12;;\M';Mµ ;;2011.2, adapted for 2013.1
-14;;N';N' ;;2011.2
-21;;QU';QU' ;;2011.2
-20;;Qu';Qu' ;;2011.2
-16;;S';Sµ ;;2011.2, adapted for 2013.1
-18;;\T';Tµ ;;2011.2, adapted for 2013.1
-3;;c';cµ ;;2011.2, adapted for 2013.1
-5;;d';dµ ;;2011.2, adapted for 2013.1
-7;;j';jµ ;;2011.2, adapted for 2013.1
-9;;l';lµ ;;2011.2, adapted for 2013.1
-11;;\m';mµ ;;2011.2, adapted for 2013.1
-15;;s';sµ ;;2011.2, adapted for 2013.1
-13;;n';n' ;;2011.2
-19;;qu';qu' ;;2011.2
-17;;\t';tµ ;;2011.2, adapted for 2013.1
-42;;“;";;2011.2
-95;;”;";;2016-03-10-sde
-96;;„;";;2016-03-10-sde
-41;;…; … ;;2011.2
-92;;...; ... ;;2016-02-04-sde
-46;;-t-il; -t-il;;2011.2
-78;;-T-IL; -T-IL;;02-08-2013-sde
-47;;-t-elle; -t-elle;;2011.2
-79;;-T-ELLE; -T-ELLE;;02-08-2013-sde
-48;;-t-on; -t-on;;2011.2
-80;;-T-ON; -T-ON;;02-08-2013-sde
-49;;-ils; -ils;;2011.2
-81;;-ILS; -ILS;;02-08-2013-sde
-50;;-elles; -elles;;2011.2
-82;;-ELLES; -ELLES;;02-08-2013-sde
-97;;-je\; -je;;2016-03-21-sde
-98;;-JE\; -JE;;2016-03-21-sde
-66;;-nous; -nous;;2012.1
-83;;-NOUS; -NOUS;;02-08-2013-sde
-93;;-tu\; -tu;;2016-02-05-sde
-94;;-TU\; -TU;;2016-02-05-sde
-70;;-vous; -vous;;2012.1
-84;;-VOUS; -VOUS;;02-08-2013-sde
-71;;t-il;t -il;;2013.1
-85;;T-IL;T -IL;;02-08-2013-sde
-107;;d-il;d -il;;#21-sde
-108;;D-IL;D -IL;;#21-sde
-72;;t-elle;t -elle;;2013.1
-86;;T-ELLE;T -ELLE;;02-08-2013-sde
-109;;d-elle;d -elle;;#21-sde
-110;;D-ELLE;D -ELLE;;#21-sde
-74;;t-on\;t -on;;02-08-2013-sde
-87;;T-ON\;T -ON;;02-08-2013-sde
-76;;t-on,\;t -on,;;02-08-2013-sde
-88;;T-ON,\;T -ON,;;02-08-2013-sde
-77;;t-on.\;t -on.;;02-08-2013-sde
-89;;T-ON.\;T -ON.;;02-08-2013-sde
-111;;d-on\;d -on;;#21-sde
-112;;D-ON\;D -ON;;#21-sde
-113;;d-on,\;d -on,;;#21-sde
-114;;D-ON,\;D -ON,;;#21-sde
-115;;d-on.\;d -on.;;#21-sde
-116;;D-ON.\;D -ON.;;#21-sde
-75;;-t -on;-t-on;;undo effect of 74 on result of 48 02-08-2013-sde
-90;;-T -ON;-T-ON;;undo effect of 87 on result of 80 02-08-2013-sde
-117;;t-ce\;t -ce;;#21-sde
-118;;T-CE\;T -CE;;#21-sde
-119;;t-ce,\;t -ce,;;#21-sde
-120;;T-CE,\;T -CE,;;#21-sde
-121;;t-ce.\;t -ce.;;#21-sde
-122;;T-CE.\;T -CE.;;#21-sde
-103;;-moi\; -moi;;#20-sde
-104;;-MOI\; -MOI;;#20-sde
-105;;-toi\; -toi;;#20-sde
-106;;-TOI\; -TOI;;#20-sde
-73;;–;-;;2013.1
-91;;—;-;;2016-01-21-sde
-100;;\j\;jµ;;alternative with missing apostroph, 2016-03-22-sde
-101;;\c\;cµµ;;alternative with missing apostroph, 2016-03-22-sde
-102;;[\; [;;for footnotes, 2016-06-23-sde
+﻿;;’;';;rewrite curly to straight apostrophe
+;;`;';;rewrite curly to straight apostrophe
+;;´;';;rewrite curly to straight apostrophe
+;;′;';;rewrite curly to straight apostrophe
+;;\s\;sµ;;alternative with missing apostrophe, place before rules that insert spaces to avoid it works on english genitives
+/* Strip off attached pronouns.
+/* The character “µ” is inserted to be able to distinguish the split off single letter words from single characters, since the apostrophe is removed by the engine in the normalization phase.
+/* The “C” in “C’est” would look the same as the C in “niveau C” or in “C)” when no special character would be added.
+;;C';Cµ ;;
+;;D';Dµ ;;
+;;J';Jµ ;;
+;;L';lµ ;;
+;;\M';Mµ ;;
+;;N';N' ;;
+;;QU';QU' ;;
+;;Qu';Qu' ;;
+;;S';Sµ ;;
+;;\T';Tµ ;;
+;;c';cµ ;;
+;;d';dµ ;;
+;;j';jµ ;;
+;;l';lµ ;;
+;;\m';mµ ;;
+;;s';sµ ;;
+;;n';n' ;;
+;;qu';qu' ;;
+;;\t';tµ ;;
+;;“;";;rewrite curly quotes to straight quotes
+;;”;";;rewrite curly quotes to straight quotes
+;;„;";;rewrite curly quotes to straight quotes
+;;…; … ;;
+;;...; ... ;;
+/* Strip off pronouns to allow the first part to be recognized as a lexrep
+;;-t-il; -t-il;;
+;;-T-IL; -T-IL;;
+;;-t-elle; -t-elle;;
+;;-T-ELLE; -T-ELLE;;
+;;-t-on; -t-on;;
+;;-T-ON; -T-ON;;
+;;-ils; -ils;;
+;;-ILS; -ILS;;
+;;-elles; -elles;;
+;;-ELLES; -ELLES;;
+;;-je\; -je;;
+;;-JE\; -JE;;
+;;-nous; -nous;;
+;;-NOUS; -NOUS;;
+;;-tu\; -tu;;
+;;-TU\; -TU;;
+;;-vous; -vous;;
+;;-VOUS; -VOUS;;
+;;t-il;t -il;;
+;;T-IL;T -IL;;
+;;d-il;d -il;;
+;;D-IL;D -IL;;
+;;t-elle;t -elle;;
+;;T-ELLE;T -ELLE;;
+;;d-elle;d -elle;;
+;;D-ELLE;D -ELLE;;
+;;t-on\;t -on;;
+;;T-ON\;T -ON;;
+;;t-on,\;t -on,;;
+;;T-ON,\;T -ON,;;
+;;t-on.\;t -on.;;
+;;T-ON.\;T -ON.;;
+;;d-on\;d -on;;
+;;D-ON\;D -ON;;
+;;d-on,\;d -on,;;
+;;D-ON,\;D -ON,;;
+;;d-on.\;d -on.;;
+;;D-ON.\;D -ON.;;
+;;-t -on;-t-on;;
+;;-T -ON;-T-ON;;
+;;t-ce\;t -ce;;
+;;T-CE\;T -CE;;
+;;t-ce,\;t -ce,;;
+;;T-CE,\;T -CE,;;
+;;t-ce.\;t -ce.;;
+;;T-CE.\;T -CE.;;
+;;-moi\; -moi;;
+;;-MOI\; -MOI;;
+;;-toi\; -toi;;
+;;-TOI\; -TOI;;
+;;–;-;;
+;;—;-;;
+;;\j\;jµ;;alternative with missing apostrophe
+;;\c\;cµµ;;alternative with missing apostrophe
+;;[\; [;;for footnotes
