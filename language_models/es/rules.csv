@@ -1,13 +1,25 @@
+
+/*PHASE 1: PREPARATION
+/*====================
+
 702;1;CapitalInitial;^ESCapitalInitial;
 947;1;CapitalMixed;^ESCapitalInitial;
 617;1;CapitalAll;^ESCapitalAll;
 618;1;Punctuation;ESPunctuation;
+
+/*Rewrite user dictionary labels
+
 620;1;UDNegation;+ESNegation+ESNegBegin;
 621;1;UDPosSentiment;+ESPosSentiment+ESPosSentimentBegin;
 622;1;UDNegSentiment;+ESNegSentiment+ESNegSentimentBegin;
 623;1;UDConcept;ESCon;
 624;1;UDRelation;ESRelation;
 625;1;UDNonRelevant;ESNonRelevant;
+
+/*PHASE 40: DISAMBIGUATION AND PREPARATION FOR ATTRIBUTE ASSIGNMENT
+/*=================================================================
+/*CAPITALISATION
+
 906;40;ESConPlusDeCap|.ESAdj|ESDe|ESCapitalInitial;ESCon|+Join|+Join|+Join;
 242;40;SBegin|ESCapitalInitial;*|-ESCapitalInitial;to ignore capital letters when at the beginning of a sentence
 972;40;SBegin:ESPunctuation|ESA+ESCapitalAll|^ESPunctuation+^ESComma;*|-ESCapitalAll|*;to ignore the capitalization of "a" at the beginning of a sentence
@@ -19,16 +31,28 @@
 244;40;ESDefart:ESPrepart+ESCapitalInitial|ESCapitalInitial;ESCon|ESCon;to make the article part of a name when capitalized
 245;40;ESEste+ESCapitalInitial;ESConLoc;to differentiate Este (the East) from este (this)
 1054;40;ESDe+ESCapitalInitial|ESCon+ESCapitalInitial;ESCon+ESCapitalInitial|+Join;
+
+/*vi VERSUS ROMAN NUMERAL VI
+
 887;40;ESCon+ESCapitalInitial|ESVi;^ESCon|ESCon;
 888;40;"siglo"|ESVi;ESConTime+ESCon|+Join;
 890;40;ESVi+ESCapitalAll;ESCon;
 889;40;ESVi;ESVerb;
+
+/*ESTE: CONCEPT OR PRONOUN
+
 73;40;ESPrepart|ESEste;ESPrepart|ESConLoc;makes Concept of ESTE when it's not capitalized, but preceded by an article
 754;40;ESEste|ESDe;ESConLoc|^ESDe;
 211;40;ESEste;ESDemonstr;should directly follow rule 73 and 754, should precede all rules for demonstrative pronouns
+
+/*NORTE,SUR,ESTE,OESTE
+
 753;40;ESConLoc|ESDe|ESDefart|^ESRelpron+^SEnd;ESCon|+Join|+Join|*;
 751;40;ESConLoc|ESDe:"del"|^ESDemonstr+^SEnd;ESCon|+Join|*;
 752;40;ESConLoc;ESCon;
+
+/*CONCEPT PLUS DE and NAMES OF ORGANIZATIONS
+
 930;40;ESOrgUnit|"de"|*ESCapitalInitial|ESComma|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|ESCapitalInitial:ESCon;^ESCon|+Join|+Join|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
 931;40;ESOrgUnit+ESCapitalInitial|"de"|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|*ESCapitalInitial:ESCon:ESAdj;^ESOrgUnit+ESCapitalInitial|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
 944;40;ESOrgUnit+ESCapitalInitial|*ESAdj:ESCapitalInitial|"de"|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|*ESCapitalInitial:ESCon:ESAdj;^ESCon|+Join|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
@@ -43,6 +67,9 @@
 907;40;ESConPlusDe|ESDe|ESLo:ESDefart|ESConVerb:ESAdjVerb:ESConPart:ESmAuxCon;ESCon|+Join|+Join|+Join;
 908;40;ESConPlusDe|ESAdj|ESDe:"del"|.ESLo:ESDefart|typeConcept+^ESIndefpron;ESCon|+Join|+Join|+Join|*;
 909;40;ESConPlusDe|ESDe:"del"|.ESLo:ESDefart|typeConcept+^ESIndefpron;ESCon|+Join|+Join|*;
+
+/*MAS/MENOS
+
 892;40;ESNum+^ESConTime|ESAndOrBut|ESMasmenos|^ESAdj+^SEnd;ESNum|+Join|+Join|*;
 828;40;^ESNum+^ESNumber+^SBegin|ESMasmenos|ESDe|ESLo;*|ESAdv|^ESDe|^ESLo;
 675;40;ESBeforeNum|ESDe:ESPrepart|ESNum;ESNum|+Join|+Join;
@@ -50,14 +77,35 @@
 677;40;ESBeforeNum|ESDe:ESPrepart|ESUn;ESNum|+Join|+Join;
 827;40;ESVerb:ESInf|ESMasmenos|"que";*|+Join|ESRelpron;mainly comparisons
 674;40;ESNum:ESNumber|ESAfterBCon;ESBeginconcept|ESCon;veces más/menos
+
+/*NEGATION OR NO NEGATION?
+/* MÁS XXX QUE NUNCA
+/*remark: "más que nunca" = lexrep
+
 917;40;ESMasmenos:"mejor":"mayor"|^"que"|"que"|ESNunca;*|*|*|ESAdvPR-ESNegation-ESNegBegin;
+
+/* COMPARATIVE/SUPERLATIVE ... JAMÁS
+
 924;40;ESMasmenos:"mayor":"peor":"mejor":"mejores"|*{1,7}^"jamás"|"jamás";*|*|ESAdvPR+ESTime-ESNegation-ESNegBegin;
+
+/* APENAS WITHOUT NEGATION
+
 926;40;"apenas":"apenas si"|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron;+ESAdvdeg-ESNegation-ESNegBegin|*;
 927;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*;
 928;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*;
 1031;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESTempBeginEnd;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*|*;
+
+/*ADVERBS - part 1
+/* adverb of modality
+
 796;40;ESAdvmodal|ESNum;-ESAdv|^ESNum;
+
+/* adverb manner
+
 794;40;typeRelation|ESAdvmanner|ESNum;*|+Join|^ESNum;
+
+/* adverb degree -> join - 'todo menos' + concept -> advdegree
+
 782;40;ESAdvdeg|ESTodo|ESDefart;ESAdj|+Join|+Join;
 884;40;ESAdvdeg|ESNegPR;ESNegPR|+Join;
 781;40;ESAdvdeg|ESIndefpronPRCon;ESIndefpronPRCon|+Join;
@@ -67,6 +115,9 @@
 661;40;ESAdvdeg|ESDefart|ESNum;ESNum|+Join|+Join;
 1098;40;"todo"|"menos"|ESCon:ESAdj:ESConVerb:ESAdjVerb;ESAdv+ESAdvdeg|+Join|ESAdj;
 1099;40;"todo"|"menos"|ESAdv;ESAdv+ESAdvdeg|+Join|*;
+
+/*TIME: CONCRETE POINT IN TIME
+
 914;40;"día"|ESNum|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join|+Join;rule should precede rule 45
 45;40;ESNumber+^ESNumberNotyear|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
 281;40;ESNum:"uno"|ESDe:"del"|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
@@ -89,6 +140,9 @@
 873;40;ESConTime|"del":"al"|ESConTime+^ESNum;ESConTime|+Join|+Join;
 863;40;ESDemonstr|ESConTime+^ESNum|^ESAdj;ESTempBeginEnd|+Join|*;
 849;40;ESDay;ESCon+ESEndCon;
+
+/*TIME - AMBIGUOUS: CONCRETE OR VAGUE TIME INDICATION
+
 946;40;ESDefart:ESPrepart|ESAdvPR|ESCon;*|ESAdj|*;
 870;40;ESCon|ESAdvPR|ESAdj|^ESPrep+^ESComo;^ESCon|ESAdj-ESTime|^ESAdj|*;
 872;40;ESCon|ESAdvPR|ESPart|ESPunctuation:ESComma;^ESCon|ESAdj-ESTime|ESAdj|*;
@@ -101,6 +155,9 @@
 881;40;ESCon|ESNum|ESConTime;^ESCon|ESTempBeginEnd|+Join;
 859;40;ESTimePRCon;ESAdvPR+ESTime;
 861;40;ESConTime+ESNum;-ESConTime;
+
+/*BAJO - PREPOSITION
+
 214;40;ESBajo|ESConVerb:ESConPart;ESBajo|ESCon;makes ConVerb Concept after 'bajo'
 802;40;ESBajo|ESPunctuation:ESComma;ESAdj|*;
 725;40;ESAdvdeg:ESMasmenos|ESBajo;ESAdj|+Join;
@@ -112,12 +169,21 @@
 806;40;ESAndOrBut|ESBajo|ESCon;*|ESAdj|*;
 807;40;ESVerb|ESConVerb:ESConPart|ESBajo;*|ESCon|ESAdj;
 797;40;ESBajo;ESPrep;
+
+/*NUMBER: ESNUMBER
+
 293;40;ESConceptbeforenumber|ESNumber;ESCon|ESNumber;makes a concept of several INfCons and Converbs before numbers
 891;40;ESIndefart:ESDefart:ESPrepart:ESPrep|ESPercent;*|ESCon;
 110;40;^ESCon+^SBegin|ESNum:ESNumber|ESPart;*|ESNum|ESCon;makes Concept of participle if preceded by numeral
 808;40;ESNumber;ESAdj;
+
+/*'DE'
+
 98;40;ESDe|ESPart:ESConVerb;*|ESCon;makes Concept of participle after 'de'
 812;40;ESIndefpronPRCon|ESDe|ESIndefpron:ESDemonstr|ESCon;ESAdj|+Join|+Join|*;
+
+/*ESNUM
+
 152;40;ESNum|ESDe|ESNum;ESNum|ESNum|ESNum;
 856;40;ESNum|ESEndCon;ESTempBeginEnd|+Join;
 853;40;ESAdjtemp:ESIndefpronPRCon|ESTempBeginEnd;ESTempBeginEnd|+Join;
@@ -125,14 +191,26 @@
 795;40;ESNum|ESDe|ESIndefpron;ESAdj|ESAdj|*;
 716;40;ESCon|ESAdjVerb|ESNum;^ESCon|ESVerb|*;
 792;40;ESNum;ESAdj;
+
+/*1st TAN
+
 735;40;ESCon|ESTan|ESAdj;*|ESAdj|+Join;
 734;40;ESDemodo|ESDemodo|ESTan|ESAdj:ESPart;ESAdvmanner+ESAdv|+Join|+Join|+Join;
+
+/*DE MODO, DE FORMA
+
 893;40;ESDemodo|ESDemodo|ESAdv|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join|+Join;
 1073;40;ESDemodo|ESDemodo|ESAdj:ESPart:ESAdjVerb:ESConPart|ESAndOrBut|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join|+Join|+Join;extension of r893
 733;40;ESDemodo|ESDemodo|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join;
 894;40;ESDemodo|ESDemodo;ESPrep|ESCon;
+
+/*ADJECTIVE OR NOUN
+
 711;40;ESIndefart:ESDefart:ESDemonstr|ESAdjCon;*|ESCon;
 712;40;ESAdjCon;ESAdj;
+
+/*ADJECTIVE OR ADVERB
+
 706;40;ESAdv:ESMasmenos|ESAdvAdj;ESAdvAdj|+Join;
 681;40;ESLinkingverb|ESAdvAdj|ESAdv;*|ESAdj|ESAdj;
 678;40;ESLinkingverb|ESAdvAdj|^ESPart+^ESRefl;^ESLinkingverb|ESAdj|*;
@@ -147,7 +225,13 @@
 757;40;ESAdj|ESAndOrBut|ESAdvAdj;*|ESAndOrBut|ESAdj;
 822;40;ESIndefpron:ESNoAdj|ESAdvAdj;*|ESAdj;
 679;40;ESAdvAdj;ESAdvmanner+ESAdv;
+
+/*PARTICIPLES OR NOUNS BECOME NOUN
+
 721;40;ESIndefart:ESDefart:ESDemonstr|ESPart;*|ESCon;
+
+/*ADJECTIVE OR VERB
+
 667;40;ESRefl:ESPerspron|ESAdjVerb;*|ESVerb;
 722;40;ESNo|ESAdjVerb|ESPrep:ESNegPR;*|ESVerb|*;
 713;40;ESCon:ESAdj:ESComma|ESAdjVerb|ESDefart:ESIndefart:ESPosspron|ESCon:ESConVerb|^ESVerb+^SEnd;*|ESVerb|*|^ESCon|*;
@@ -155,17 +239,32 @@
 720;40;ESRelpron|ESAdjVerb|ESIndefpron:ESDefart:ESIndefart:ESPrep:ESComma;*|ESVerb|*;
 793;40;ESAdj|ESAdjVerb|ESPosspron;*|ESVerb|*;
 668;40;ESAdjVerb;ESAdj;
+
+/*DICHO
+
 660;40;ESDicho|ESPrep:ESDe:ESEn;ESPartrel|^ESPrep;
 689;40;ESAdv|ESDicho;*|ESPartrel;
 765;40;ESDicho|ESDemonstr|ESComma;ESPartrel|*|*;
+
+/*mAUXCON: PODER, DEBER
+
 120;40;ESDefart:ESIndefart:ESPosspron:ESIndefpron:ESDemonstr:ESPrepart:ESAdj|ESmAuxCon;*|ESCon;makes Concept of 'poder'
 118;40;ESDe|ESmAuxCon|ESInf;*|ESmAux|*;makes 'poder' behave like infinitive 'ser' if followed by infinitive and preceded by 'de'
 133;40;ESDe|ESmAuxCon;*|ESCon;makes Concept of 'poder' after preposition 'de'
 750;40;ESmAuxCon;ESInf+ESmAux;
+
+/*AUXCON
+
 916;40;ESIndefart:ESPosspron:ESPrepart|ESAuxCon;*|ESCon;
 1095;40;ESDefart|ESAuxCon+ESLinkingverb;*|ESCon;
+
+/*TANTO - RELATION
+
 829;40;ESTanto|*{1,7}^ESComo|ESComo;^ESConj|*|ESComo;makes RELATION of tanto in combination with como
 836;40;ESTanto;ESAdvdeg+ESAdv;
+
+/*NOUN OR PARTICIPLE
+
 810;40;ESRefl|ESVerb|ESConPart;*|*|ESPartrel;
 748;40;ESmAux|ESLinkingverb|ESConPart;*|*|ESPartrel;
 809;40;ESAux|ESConPart+ESRelAfterLinkingverb;*|ESPartrel;
@@ -174,18 +273,33 @@
 811;40;ESAdv|ESConPart|ESPrep;*|ESPartrel|*;
 969;40;ESDicho;ESAdj;
 656;40;ESConPart;ESCon;
+
+/*ADVERB AFTER LINKING VERB
+
 730;40;ESLinkingverb|ESAdv+^ESAdvdeg+^"así"|ESPrep:ESComma;*|ESAdj|*;
 731;40;ESLinkingverb|ESAdv|ESNo|ESAdj;*|ESAdj|ESNoInCon+ESNegation-ESNegBegin|ESAdj;
+
+/*CONCEPT OR VERB -> CONCEPT
+
 885;40;ESRefl|ESDefart|ESConVerb;*|*|ESVerb;
 185;40;ESDefart:ESIndefart:ESPosspron:ESIndefpron:ESDemonstr:ESPrepart:ESPrep|ESConVerb;*|ESCon;makes Concept of ConVerb
 209;40;ESPosspron|ESAdj|ESConVerb;*|ESAdj|ESCon;makes Concept of ConVerb after possessive pronoun + adjective
 270;40;ESVerb|ESConVerb;ESVerb|ESCon;
 312;40;ESInf:ESNoAdj|ESConVerb;*|ESCon;
+
+/*CONCEPT OR VERB -> VERB - part 1
+
 823;40;ESCon|ESConVerb|ESIndefpron:ESIndefart:ESDefart:ESDemonstr;*|ESVerb|*;
 968;40;ESConVerb+ESVerbCon;^ESVerb;
 1045;40;ESCon|ESConVerb|ESNo:ESAdvdeg:ESAdv|typeConcept;*|ESVerb|*|*;
+
+/*ADVERB DEGREE OR NONRELEVANT
+
 669;40;ESAdvdegNonrel|ESAdj;ESAdj|ESAdj;
 670;40;ESAdvdegNonrel;ESNonrel;
+
+/*ADVERBS DEGREE
+
 663;40;ESAdvdeg|ESAdvdeg;ESAdvdeg|+Join;
 672;40;ESAdvdeg|ESAdv;ESAdv|+Join;
 709;40;ESAdvdeg:ESAdvmanner|ESMasmenos;ESMasmenos|+Join;
@@ -199,36 +313,69 @@
 684;40;ESAux|ESAdvdeg|ESAdj;*|ESAdj|ESAdj;
 707;40;ESCon|ESAdvdeg|ESPart;ESCon|ESAdj|ESCon;
 651;40;ESAdvdeg;ESAdv+ESAdvmanner;
+
+/*JOIN ADVERBS WITH INFINITIVES
+
 250;40;ESInf|ESAdvmanner:ESAdv|^ESAdj+^SEnd;^ESInf|+Join|*;to change adverb of degree together with infinitive
 251;40;ESInf|ESMasmenos|ESAdvmanner;^ESInf|+Join|+Join;to change adverb of degree together with infinitive
+
+/*JOINS WITH MASMENOS
+
 53;40;ESMasmenos|ESAdvVerb;ESAdv|+Join;
 52;40;ESMasmenos|ESAuxCon;ESCon|+Join;
 54;40;ESMasmenos|ESPart;ESAdj|+Join;
+
+/*QUANTITY: UN DE LAS
+
 895;40;"una":"uno"|"de"|"las":"los":"cada"|typeConcept;ESBeginconcept|+Join|+Join|+Join;
 896;40;ESIndefart|"de"|"las":"los"|"de"|typeConcept;ESBeginconcept|+Join|+Join|+Join|+Join;
+
+/*NEGATION
+
 252;40;ESNoAdj|ESAdj;ESNoInCon+ESNegation|*;
 253;40;"no-"|ESCon;-ESNoAdj+ESNoInCon+ESNegation|*;to recognise adjectives with negative part as negational entities
 254;40;ESNoAdj|ESPart;ESNoInCon+ESNegation|ESAdj;to recognise adjectives with negative part as negational entities
 1090;40;ESNoInCon|ESInf+ESmAux|ESInf;*|ESCon|ESCon;
 1089;40;ESNoInCon|ESInf;*|ESCon;
+
+/*ADVERB MODAL
+
 701;40;ESLinkingverb|ESAdvmodal;ESLinkingverb|+Join;
+
+/*ADVERB MANNER
+
 673;40;ESAdv:"nada"|ESAdj;ESAdj-ESNegBegin|*;same as rule 259 to cover subsequent adverbs
 259;40;ESAdv|ESAdj;ESAdj|*;
 715;40;ESCon|ESAdv|ESNo|ESAdj;*|ESAdj|ESNoInCon+ESNegation|*;
 705;40;ESComma|ESAdvmanner:ESAdvPR|ESPart|^ESCon+^SEnd;ESComma|*|ESPartrel|*;
 262;40;^ESLinkingverb+^SBegin|ESAdvmanner|ESPart;*|ESAdj|ESAdj;to make adverb of degree followed by participle both Concepts
 680;40;SBegin|ESAdvmanner|ESPart;*|ESAdv|ESPartrel;
+
+/*MAS,MENOS
+
 20;40;ESCon|ESMasmenos|ESAdj;*|ESCon|ESCon;makes mas-menos part of the Concept after Concept and followed by adjective
 729;40;ESMasmenos|ESAdv;ESAdv|+Join;
+
+/*BIEN
+
 266;40;ESAndOrBut|ESBien|ESPart;*|ESAdj|ESCon;Bien with past participle is adjective + concept
 267;40;ESAndOrBut|ESBien;ESAndOrBut|+Join+ESNegStop;
+
+/*2nd TAN
+
 745;40;ESIndefart:ESDefart|ESCon|ESTan|ESPart;*|*|ESAdj|+Join;
 747;40;ESCon:ESConVerb:ESIndefpron|.ESAdj|ESTan|ESAdj;*|*|ESAdj|+Join;
 744;40;ESNo|ESTan|ESAdj;ESNoInCon+ESNegation|ESAdj|+Join;
 746;40;ESTan|ESAdj|ESCon:ESComma|"que":"como";ESPrep|*|*|ESRelpron;
 742;40;ESTan|ESAdj:ESIndefpron:ESCon|"que":"como";ESPrep|*|ESRelpron;
 741;40;ESTan;ESNonrel;
+
+/*INFINITIVES: CONCEPT OR VERB
+
 122;40;ESDefart:ESIndefart|ESInf;*|ESCon;makes Concept of 'ser' after article
+
+/*DEMONSTRATIVE PRONOUN: ADJECTIVAL USE = NonRel
+
 768;40;ESIndefpronPRCon|ESDemonstr|ESIndefpronPR;ESAdj|+Join|+Join;
 915;40;ESDefart:ESDemonstr|ESNo|ESCon:ESPart;ESDefart|^ESCon-ESNegBegin|ESCon;'no' becomes a Concept after article or dem. pronoun
 777;40;ESIndefpronPRCon|ESDemonstr|ESCon:ESAdj;ESAdj|+Join|*;
@@ -237,7 +384,13 @@
 839;40;ESIndefpronPRCon|ESDe|ESDemonstr|ESAdj:ESCon;ESIndefpronPRCon|+Join|+Join|*;
 762;40;ESDemonstr|ESAdj;ESNonrel|*;
 766;40;ESIndefpronPRCon|ESDemonstr;ESIndefpronPR|+Join;
+
+/*INDEFINITE PRONOUNS: GENERAL
+
 21;40;ESCon+^ESDe|ESIndefpron|ESCon;*|ESBeginconcept|*;makes BeginConcept of indefinite pronoun between two Concepts
+
+/*INDEFINITE PRONOUNS: PATHRELEVANT OR CONCEPT
+
 127;40;ESIndefpron|ESPart;*|ESAdj;makes Concept of participle after indefinite pronoun
 776;40;ESIndefpronPRCon|ESIndefpronPR:ESIndefpronPRCon;ESIndefpronPRCon|+Join;
 837;40;ESIndefpronPRCon|ESDe|ESDefart|ESIndefpron;ESAdj|+Join|+Join|+Join;
@@ -250,25 +403,46 @@
 786;40;ESIndefpronPRCon|ESConVerb;ESAdj|ESCon;
 773;40;ESIndefpronPRCon|ESPosspron;ESAdj|ESAdj;
 774;40;ESCon|ESIndefpronPRCon|ESRelpron;*|ESAdj|*;
+
+/*ARTICLE -> PERSPRON
+
 966;40;ESDefart:ESNoAdj|ESVerb;ESPerspron-ESNegBegin|*;
 1088;40;^ESPrep|ESDefart:ESNoAdj|typeRelation+^typeConcept;*|ESPerspron-ESNegBegin|*;
+
+/*CIERTO
+
 816;40;ESCierto|ESAndOrBut|ESAdj;ESAdj|*|*;
 817;40;ESIndefart:ESDefart:ESPrep|ESCon|ESCierto;*|*|ESAdj;
 820;40;ESIndefart:ESDefart:ESPrep|ESCon|ESAdj|ESCierto|^ESCon+^SEnd;*|*|ESAdj|ESAdj|*;
 818;40;ESLinkingverb|ESCierto;*|ESAdj;
 819;40;ESCierto|ESLinkingverb;ESAdj|*;
+
+/*INDEFINITE PRONOUNS: PATHRELEVANT OR NONRELEVANT
+
 815;40;ESIndefpronPRNR|ESCon:ESAdj:ESIndefpronPR;ESNonrel|*;
 814;40;ESIndefpronPRNR;ESIndefpronPR;
+
+/*SOMETHING/SOMEONE - NO ONE PLUS ADJECTIVE, NO <SER> (NADA) MÁS QUE
+
 770;40;ESAlgo|ESAdj;ESBeginconcept|*;
 958;40;ESNo|ESLinkingverb|"nada"|ESMasmenos|"que";-ESNegation-ESNegBegin|^ESLinkingverb|Join|Join|ESPrep;
 959;40;ESNo|ESLinkingverb|ESMasmenos|"que";-ESNegation-ESNegBegin|^ESLinkingverb|Join|ESPrep;
 956;40;"nada"|ESMasmenos|"que"|ESInf;*|*|ESPrep|*;
 883;40;ESNegPR|ESAdj:ESMasmenos;ESAdj|ESAdj;
+
+/*PARTICIPLES - CONCEPT
+
 128;40;ESPosspron:ESPrepart:ESPrep:ESLo|ESPart;*|ESCon;makes Concept of participle
 109;40;ESDefart:ESIndefart:ESPosspron:ESDemonstr:ESPrepart:ESPrep|ESAdj|ESPart;*|*|ESCon;makes Concept of participle
 277;40;ESInf+^ESAux|ESPart|ESPrep:ESPrepart:ESDe;*|ESCon|*;makes CONCEPT of past participle after infinitive and before preposition
+
+/*ADVERBS - CONCEPT
+
 146;40;ESDefart:ESIndefart|ESAdv;*|ESCon;makes Concept of adverb after article
 138;40;ESIndefpron+^ESAlgo|ESAdv+^ESAdvmodal;*|ESCon;makes Concept of adverb after indefinite pronoun
+
+/*NO - CONCEPT
+
 17;40;ESCon|ESNo:"nada"|ESCon;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept if between Concepts
 13;40;ESCon|ESNo|ESPart;*|ESNoInCon+ESNegation-ESNegBegin|ESCon;makes 'no' part of the Concept between Concept and past participle which behaves as Concept
 69;40;ESCon|ESNo:"nada"|ESAdj;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between Concept and adjective
@@ -277,6 +451,9 @@
 714;40;"no"|ESAdj;ESNoInCon+ESNegation-ESNegBegin|*;
 929;40;ESUn:ESDefart:"del"|ESNo:ESNoInCon;*|^ESNoInCon-ESNegBegin;
 975;40;"de"|ESNo|ESCon;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between 'de' and Concept
+
+/*PARTICIPLES - RELATION
+
 671;40;ESAux:ESLinkingverb|.ESAdv:ESAdvPR|ESPart;ESAux|*|ESPartrel;makes Relation of past participle after auxiliary verb (plus adverb)
 724;40;ESPartrel|ESAndOrBut|ESAdv|ESPart;*|*|*|ESPartrel;
 179;40;ESAuxCon|ESPart;*|ESPartrel;makes Relation of past participle after ambiguous auxiliary verb which can be Concept
@@ -291,6 +468,9 @@
 22;40;ESComma|ESPart|ESIndefpron:ESNonrel:ESDefart:ESIndefart;+ESComma|ESPartrel|*;makes Relation of past participle after comma and before indefinite pronoun, article or NonRelevant
 727;40;ESCon|ESAdv|ESPart;*|ESAdj|+Join;
 726;40;ESAdv|ESPart;ESPartrel|+Join;
+
+/*CONCEPT OR VERB - RELATION
+
 129;40;ESPerspron|ESConVerb|ESCon;*|ESVerb|*;makes Relation of ConVerb after personal pronoun and before Concept
 157;40;"que"|ESConVerb;ESRelpron|ESVerb;makes Relation of ConVerb after relative pronoun 'que'
 1043;40;ESRelpron|ESTempBeginEnd|ESConVerb;*|*|ESVerb;
@@ -306,16 +486,31 @@
 200;40;ESConj|ESConVerb|ESDefart:ESIndefart:ESDemonstr:ESIndefpron;*|ESVerb|*;
 215;40;SBegin|.ESAdv|ESConVerb|ESDefart:ESIndefart:ESNonrel;*|ESRel|ESVerb|*;
 220;40;ESComma|.ESAdv|ESConVerb|ESDefart:ESIndefart;*|ESRel|ESVerb|*;
+
+/*NADA QUE + INF
+
 960;40;"nada"|"que"|ESInf;*|ESRel|*;
+
+/*MUY, MAS, MENOS
+
 710;40;ESMasmenos|ESAdj;ESAdj|+Join;
+
+/*RECIPROCAL PRONOUN
+
 648;40;ESPrep:ESDe|ESRecipr;^ESPrep|ESPerspron;
 649;40;ESRecipr;ESVerb;
+
+/*MISCELLANEOUS
+
 300;40;SBegin|ESAndOrBut;*|ESNonrel;to make the conjunction at the beginning of a sentence non-relevant
 971;40;ESPrep|ESInf;^ESConj|*;
 981;40;ESPrep|"cómo";*|-ESConj2;
 1056;40;ESNo|.ESRefl|typeRelation|"solo":"sólo":"solamente"|^SEnd+^ESPunctuation|*^"sino también"+^"sino que"+^"sino"|"sino también":"sino que":"sino";ESAdv-ESNegation-ESNegBegin|*|*|ESAdv-ESAdvstruct-ESNonrel|*|*|*;
 991;40;ESNo|typeRelation|"solo":"sólo":"solamente";*|*|ESAdv-ESAdvstruct-ESNonrel;
 1057;40;ESNo|ESRefl|typeRelation|"solo":"sólo":"solamente";*|*|*|ESAdv-ESAdvstruct-ESNonrel;
+
+/*LABELS DEFAULTS AND CLEAN-UP
+
 767;40;ESIndefpronPRCon:ESIndefpronPR;ESIndefpronPR;
 1080;40;ESmAux|ESConj:ESRelpron;ESVerb|*;
 204;40;ESVerb;ESVerb;to remove all other labels than Verb
@@ -329,6 +524,10 @@
 844;40;ESPerspron;ESPerspron;to remove all other labels than personal pronoun
 846;40;ESConIfCap;-ESConIfCap;
 1060;40;ESAuxCon;^ESAux;treat default Auxcon as Aux
+
+/*PHASE 60: DETECT ENUMERATIONS
+/*=============================
+
 982;60;*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESAndOrBut:"ni"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
 983;60;*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESAndOrBut:"ni"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
 993;60;*ESCon:ESAdj+^ESList|ESComma|*ESCon:ESAdj+ESList;+ESList|+ESList|*;for longer enumerations
@@ -350,12 +549,30 @@
 1070;60;*ESRefl:ESInf|ESComma|*ESRefl:ESInf|ESComma|*ESRefl:ESInf|ESAndOrBut|ESRefl:ESInf;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
 1071;60;*ESRefl:ESInf|ESComma:ESAndOrBut|*ESRefl:ESInf|ESAndOrBut|*ESRefl:ESInf;+ESList|+ESList-ESNegStop|+ESList|+ESList-ESNegStop|+ESList;
 1072;60;*ESRefl:ESInf|ESAndOrBut|*ESRefl:ESInf;+ESList|+ESList-ESNegStop|+ESList;
+
+/*PHASE 70: NEGATION
+/*==================
+/*PREPARATION
+
 1040;70;ESNo2+^ESAdj;^ESNo+ESNegBegin;
+
+/* O NO with or without negation/*
+
 1033;70;"si":"sí"|*^"o"|"o"|"no"|SEnd;*|*|ESAdvstruct|Join|*;make 'o no' NO at the end of a sentence when 'si' or 'sí' precedes
 1034;70;"o"|"no"|SEnd:ESPunctuation:ESIndefart:ESDefart;+ESBeginrel|*|+ESNegStop;preliminary rule: avoid expansion to the left within relation
 1039;70;ESVerb:ESAux:ESInf:ESPartrel:ESColon|"no"|SEnd;*|-ESNo+ESNoInCon-ESNegBegin|*;'no' as opposite of 'sí' at the end of a sentence
+
+/* NO x SINO inf without negation/*
+
 1061;70;"no"|ESVerb:ESAux:ESmAux|"sino"|^ESVerb;-ESNegation-ESNegBegin|*|*|*;
+
+/* No negation in questions without interrogative
+
 1096;70;SBegin:ESPunctuation|"¿"|ESNo;*|*|-ESNegation-ESNegBegin;
+
+/*ADD NEGATIONSTOPPERS
+/* based on punctuation
+
 961;70;ESColon:ESHyphen|^ESNegation+^SEnd;*|+ESNegStop;
 998;70;ESPunctuation|ESPunctuation|^ESNegation+^ESNegBegin;*|*|+ESNegStop;
 1048;70;typeConcept|ESPunctuation+^ESList|^ESNegation+^ESNegBegin;*|*|+ESNegStop;
@@ -369,6 +586,9 @@
 992;70;ESPunctuation+^ESList|ESDefart+^ESNegation+^ESNegBegin|^ESNegation+^ESNegBegin|*^ESVerb+^ESAux+^ESLinkingverb+^ESPunctuation+^SEnd|ESVerb:ESAux:ESLinkingverb;*|+ESNegStop|+ESNegStop|*|*;special case of r965: add NegStop on lexrep after nonrelevant Defart
 978;70;ESPunctuation|ESmAux:ESAux+^ESNegation+^ESNegBegin|^ESNegation+^ESNegBegin;*|+ESNegStop|*;variant of r965
 976;70;ESPunctuation|ESAndOrBut:ESPrep+^ESNegation+^ESNegBegin+^ESList;*|+ESNegStop;
+
+/* rules for 'sin'
+
 1064;70;ESConj+ESNegation|"dudar":"dudarlo"|^SEnd;*|*|+ESNegStop;
 1001;70;ESPrep:ESConj+ESNegation|*^ESPunctuation+^ESNegation|ESPunctuation|^ESList;*|+ESAfterSin|*|+ESNegStop;
 1002;70;ESPrep+ESNegation|*typeConcept+^ESNegation|ESVerb:ESAux:ESmAux:ESInf:ESPartrel:ESRefl;*|+ESAfterSin|+ESNegStop;
@@ -385,6 +605,9 @@
 1010;70;ESConj+ESNegation|*ESInf|*typeConcept|ESPosspron:"en":ESComo;*|*|+ESAfterSin|+ESNegStop;extension of r1005
 1000;70;ESPrep+ESNegation|*^ESConj+^ESNegation|ESConj+^ESNegation;*|*|+ESNegStop;
 1036;70;ESNegation|*^ESPunctuation|ESPunctuation|ESVerb+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop|*;
+
+/* NegStop on conjunctions
+
 950;70;ESNegation|*^ESPunctuation|ESPunctuation|ESConj:ESRelpron+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop|*;
 1063;70;ESNegation|^ESConj|*^ESConj+^ESRelpron|ESConj+^ESNegation+^ESRelpron|ESInf|^ESPunctuation+^SEnd;*|*|*|+ESNegStop+ESBeginrel-ESA-ESEn-ESDe+ESDummy|*|*;stop negation before infinitive clause
 1091;70;ESNegBegin|^ESConj2|*^ESConj2+^ESRelpron+^ESNegStop+^ESNegBegin|ESConj2+^ESNegation|^ESNegation;*|*|*|+ESNegStop+ESBeginrel|*;
@@ -404,16 +627,28 @@
 953;70;ESNegation|*^ESRelpron+^ESNegPR+^ESColon|ESRelpron+^ESNegation+^ESNegStop|^ESNegation+^ESNegBegin;*|*|+ESNegStop|*;
 1093;70;ESNegation|"lo":ESDemonstr|"que"+ESNegStop;*|*|-ESNegStop;correction of output of previous rules
 1092;70;"lo":ESDemonstr|"que"+ESNegStop|ESInf;*|-ESNegStop|*;correction of output of previous rules
+
+/* detect end-of-phrase without punctuation or conjunction
+
 1081;70;ESNegation|*^ESInf+^ESPunctuation|ESInf|ESVerb:ESAux:ESmAux;*|*|*|+ESNegStop+ESBeginrel;
 1097;70;typeRelation+^ESPrep|ESPrep+ESNegStop|^"lo";*|+ESBeginrel|*;
+
+/* correct (position of) NegStop
+
 1006;70;ESNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept;*|+ESNegStop;move NegStop from nonrelevant to next lexrep
 1055;70;ESNegStop+^typeConcept+^typeRelation+^typePathRelevant|*^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept;*|*|+ESNegStop;move NegStop from nonrelevant to next lexrep
 321;70;ESAdj|ESAndOrBut|ESAdj;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two adjectives
 308;70;ESCon|ESAndOrBut|ESCon;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two concepts
 322;70;ESPart|ESAndOrBut|ESPart;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two present participles
 323;70;ESCon|ESAndOrBut|ESAdj;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between Concept and adjective
+
+/*INTERMEDIATE PREPARATIONS
+
 612;70;ESAdj;^ESCon;
 1037;70;ESPart;+ESCon;make rules for adjectives also work for participles that are used as adjectives
+
+/*EXPANSION TO THE LEFT
+
 1030;70;^ESPrep+^ESPrepart+^ESPerspron+^ESDemonstr|ESPerspron:ESDemonstr:ESIndefpronPR|ESNo+ESNegation;*|+ESNegBegin|*;
 1018;70;*ESCon+^ESNegBegin|ESNo+ESNegation;+ESNegBegin|*;
 606;70;*ESCon|ESRelpron|ESNo+ESNegation;+ESNegBegin|ESRelpron|*;
@@ -423,15 +658,33 @@
 1026;70;*ESDe:ESDefart:ESPosspron:ESCon+ESNegBegin|ESCon+ESNegStop;-ESNegBegin|*;
 1086;70;ESCon|ESPrep+ESNegation;+ESNegBegin|*;
 1019;70;*ESList+^ESNegBegin|ESList+ESNegBegin+^ESNegation;+ESNegBegin|*;
+
+/* prepositional phrase not included in left expansion
+
 1023;70;ESPrep:ESPrepart:ESComo+^ESNegation|*ESCon:ESDefart:ESPosspron:ESIndefart:ESIndefpronPR:ESDe+^ESNegStop|ESNegation;-ESNegBegin|-ESNegBegin|*;
 1074;70;ESPrep:ESPrepart:ESComo+^ESNegation|ESNonrel|*ESCon+^ESNegStop|ESNegation;-ESNegBegin|-ESNegBegin|-ESNegBegin|*;extension of r1023
 1050;70;ESPrep:ESPrepart:ESComo+^ESNegation|*ESCon:ESDefart:ESPosspron:ESDe+^ESNegStop|ESRelpron;*|-ESNegBegin|*;
 1028;70;SBegin|"en"|.ESDefart|*ESCon|ESNegation+ESNegBegin;*|+ESNegBegin|*|*|*;restore negation on prepositional phrase with 'en' at beginning of sentence
+
+/* include conditional conjunction
+
 1051;70;ESCondition|ESNegBegin;-ESNegStop+ESNegBegin+ESBeginrel|*;
 1052;70;ESCondition|^ESNegStop|ESNegBegin;-ESNegStop+ESNegBegin+ESBeginrel|*|*;
 1053;70;ESPrep:ESAndOrBut|ESCondition+ESNegBegin;+ESNegBegin|-ESBeginrel;
+
+/*PHASE 80 SENTIMENT
+/*==================
+/*restriction of the scope
+
 1076;80;ESCon|ESPunctuation|ESVerb:ESPrep:ESPrepart:ESPartrel:ESConj:ESComo;*|*|+ESPosSentimentStop+ESNegSentimentStop;
 1078;80;ESInf|ESPunctuation|ESAux;*|*|+ESPosSentimentStop+ESNegSentimentStop;
 1079;80;ESVerb|ESPunctuation|ESCon;*|*|+ESPosSentimentStop+ESNegSentimentStop;
+
+/*Apply typeBeginRelation
+
 1087;95;ESBeginrel;ESBeginrel;delete Relpron, Conj, Conj2, Como, AndOrBut, Aux, Linkingverb, mAux and Inf from lexreps with Beginrel label
+
+/*Rewrite language specific labels to unified labels
+/*===================================================
+
 619;$;ESPunctuation;Punctuation;

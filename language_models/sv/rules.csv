@@ -1,16 +1,38 @@
+
+/* ===================================================
+/* PHASE 1: MANDATORY LABELS AND USER DICTIONARY ITEMS
+/* ===================================================
+/* REWRITE MANDATORY LABELS to language-specific labels
+
 10;1;CapitalInitial;^SVCapitalInitial;
 11;1;CapitalMixed;^SVCapitalMixed;
 12;1;CapitalAll;^SVCapitalAll;
 336;1;Punctuation;SVPunctuation;
+
+/* RELABEL USER DICTIONARY ITEMS
+
 727;1;UDNegation;+SVNegation;place before 730 and use + to avoid overwriting other UD-labels
 728;1;UDPosSentiment;+SVPosSentiment;place before 730 and use + to avoid overwriting other UD-labels
 729;1;UDNegSentiment;+SVNegSentiment;place before 730 and use + to avoid overwriting other UD-labels
 730;1;UDConcept;UDConcept+SVCon;
 731;1;UDRelation;UDRelation+SVRel;
 732;1;UDNonRelevant;NonRelevant;
+
+/* ==========================
+/* PHASE 10: THE WORD 'ELLER'
+/* ==========================
+/* eller is a negative conjunction after varken; detection of varken...eller with up to 8 elements in between them
+
 931;10;"varken"|*{1,9}^"eller"|"eller";SVNegrel+SVNegation|+SVList|SVNegrel+SVNegation+SVNegStart+SVAndOrBut;
 546;10;"varken"+^SVNegrel;SVInte+SVNegation;default for varken if no eller is found
 547;10;"eller"+^SVNegrel;SVAndOrBut+SVAndOr;default for eller if not preceded by varken
+
+/* ========================
+/* PHASE 40: DISAMBIGUATION
+/* ========================
+/* Disambiguate through capitalization
+/* -----------------------------------
+
 16;40;SBegin|SVCapitalInitial;*|-SVCapitalInitial;ignore capital at beginning of sentence
 17;40;":"|SVCapitalInitial+^SVConIfCap;SVPunctuation|-SVCapitalInitial;ignore capital after colon
 18;40;"-"|SVCapitalInitial;*|-SVCapitalInitial;ignore capital after -
@@ -23,6 +45,10 @@
 616;40;SVCapitalInitial|"&"|SVCapitalInitial;SVCon|Join|+Join;recognize names with &
 14;40;":";+SVPunctuation;Punctuation is not assigned automatically since ":" is used in rules
 1089;40;"-";+SVPunctuation;Punctuation is not assigned automatically since "-" is used in rules
+
+/* Make multiword time indications one entity
+/* ------------------------------------------
+
 860;40;"den"|SVOrdnumber|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
 861;40;"den"|SVNum|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
 862;40;"den"|SVOrdnumber|SVMonth|"år"|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join|Join;
@@ -37,21 +63,43 @@
 915;40;SVMonth|"och"|"framåt";SVMonth|Join|Join;
 735;40;^SVMonth+^SVbCon+^SBegin|"år"|SVYear;*|SVAdvTime+SVAdv+SVDate|Join;
 922;40;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
+
+/* Disambiguate specific words
+/* ---------------------------
+/* *** plus and + ***
+
 25;40;SVNumber|"plus";SVNumber|Join;
 864;40;^SVNum+^SVDecinum+^SBegin|SVPlussign|^SVNum+^SVDecinum+^SVPlussign+^SEnd;*|SVAndOrBut|*;
+
+/* *** man ***
+
 119;40;SVIndefart:SVAttrpron:SVOrdnumber|"man";*|SVCon;
 122;40;SVIndefart|SVAdj:SVCon|"man";*|SVAdj|SVCon;
+
+/* Remark 1: this rule uses SVCon because adjectives are not labeled as SVAdj
+/* Remark 2: similar rule with SVDemonstr gave bad results
+/* *** avseende ***
+
 144;40;"avseende"|SVCon;SVPrep|*;
 529;40;"avseende"|SVAdj;SVPrep|SVAdj;
 145;40;"avseende"|SVIndefart;SVPrep|*;
 147;40;"avseende"|SVPrespart;SVPrep|SVCon;
 146;40;"avseende"+^SVPrep;SVCon;
+
+/* *** en+prep+number ***
+
 169;40;"en"|SVPrep|SVNumber;SVNumber|SVPrep|SVNumber;
+
+/* *** de ***
+
 954;40;"de"|SVAux:SVpAux:SVmAux:SVVerb;SVSubjpron|*;
 386;40;"de"|SVVerbInf;SVSubjpron|SVVerb;
 907;40;SVPrep|"de"|SVSom;SVPrep|SVObjpron|*;
 289;40;SVPrep|"de"+SVDefart|^SVSom+^SEnd+^SVInte;SVPrep|SVDemonstr+SVDefart|*;
 288;40;SVConj|"de"|^SVCon+^SVAdj+^SVPart+^SVOrdnumber+^SEnd;SVConj|SVSubjpron|*;
+
+/* *** annan / annat / andra ***
+
 827;40;SVIndefart|SVAnnan|SVCon;*|SVAdj|*;
 828;40;SVIndefart|SVAnnan|SVAdj;*|SVAdj|^SVCon;
 838;40;SVIndefart|SVAnnan|SVAdvAdj;*|SVAttrpron+SVAdjpron|SVAdj;
@@ -77,13 +125,25 @@
 825;40;SVNumber|"andra";^SVNumber|SVAdj;
 821;40;"andra"|SVAndOrBut|SVOrdnumber;SVOrdnumber|^SVAndOrBut|^SVOrdnumber;
 819;40;"andra"+^SVAdj+^SVOrdnumber;SVSubjpron+SVObjpron+SVAttrpron+SVAdjpron;default
+
+/* *** någon ***
+
 1184;40;SVInte|*{1,2}^"någon"+^SVAtt|"någon"|^SVVerb+^SVVerbInf+^SVInf+^SVAtt+^SVConj+^SVComma;*|*|SVIndefart|*;
+
+/* *** respektive ***
+
 299;40;SVPrep|"respektive"|^SVPrep+^SVPrepAdv+^SEnd;SVPrep|SVAdj|*;
 302;40;SVConj|"respektive";SVPrep|SVAdj;
 300;40;SVPosspron|"respektive";SVPosspron|SVAdj;
 362;40;SVAttrpron+^SVSubjpron+^SVObjpron|"respektive";SVAttrpron|SVAdj;
 301;40;"respektive"+^SVAdj;SVAndOrBut;
+
+/* *** var ***
+
 500;40;"var"|SVOrdnumber+^"första";+SVAttrpron+SVAdjpron|^SVOrdnumber;
+
+/* *** senare ***
+
 565;40;SVAdvDegree|SVNumber:SVNum:SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join|Join;
 562;40;SVNumber:SVNum|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
 569;40;SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
@@ -91,10 +151,19 @@
 851;40;SVTimeconcept|"senare";SVAdvTime+SVAdv|Join;
 847;40;SVDefart|"senare"|SVmAux:SVAux:SVVerb;SVSubjpron+SVObjpron|Join|*;
 564;40;"senare";SVAdvAdj+SVAdvTemp;
+
+/* *** (för ...) sedan ***
+
 852;40;"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|Join|Join;
 932;40;"för"|*{1,4}^SVTimeconcept+^"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|+Join|Join|Join;
+
+/* *** sedan ... tillbaka ***
+
 916;40;"sedan"|SVTimeconcept|"tillbaka";SVAdvTime|Join|Join;
 933;40;"sedan"|*{1,3}^SVTimeconcept|SVTimeconcept|"tillbaka";SVAdvTime+SVAdv|+Join|Join|Join;
+
+/* *** sedan: other cases ***
+
 309;40;SVSedan|SVCon:SVAdj:SVYear:SVAdvTime;SVPrep|*;
 323;40;SVSedan|SVSubjpron+^SVAttrpron;SVConj|*;
 325;40;SVPunctuation|SVSedan|SVIndefart;SVPunctuation|SVAdvStruct+SVAdv|*;
@@ -103,18 +172,33 @@
 330;40;SVSedan|"slutet";SVPrep|SVCon;
 331;40;SVSedan|"i";SVPrep|SVPrep;
 311;40;SVSedan+^SVPrep+^SVAdv;SVAdvStruct+SVAdv;
+
+/* *** dagen efter ***
+
 476;40;"dagen"|"efter"|SVVerb:SVVerbPart:SEnd;SVAdvTime+SVAdv|Join|*;
 479;40;"dagen";SVCon;
+
+/* *** nå(go)nting ***
+
 340;40;"någonting"|SVAdvAdj:SVPart:SVAdvAdj;SVAttrpron|SVAdj;to avoid that prep-någonting becomes NR when någonting belongs to an adjective
 341;40;"någonting":"nånting"|SVCon;SVAttrpron|SVCon;same as previous rule: most adjectives are not labeled as such
+
+/* *** detsamma ***
+
 344;40;SVPrep|"detsamma";*|SVObjpron;
 934;40;"detsamma"|SVVerb:SVAux:SVpAux:SVmAux;SVSubjpron|*;
 349;40;"detsamma"|SVVerbPart;SVSubjpron|SVVerb;
+
+/* *** förstås ***
+
 1152;40;SVmAux|SVFoerstaas|.SVAdv|SVInf:SVVerbInf:SVVerbInfAdj:SVVerbInfAdjCon:SVVerbInfCon:SVVerbInfPart:SVVara;*|SVAdvModal+SVAdv|*|*;
 1150;40;SVmAux|SVFoerstaas|^SVInf+^SVVerbInf+^SVVerbInfAdj+^SVVerbInfAdjCon+^SVVerbInfCon+^SVVerbInfPart+^SVVara+^SVInte;*|SVInf|*;
 1154;40;SVInte|SVFoerstaas;*|SVVerbInf;
 1153;40;^SVVerb+^SVpAux+^SVAux|SVFoerstaas|SVPrep:SVSom;*|SVVerbInf|*;
 1151;40;SVFoerstaas;SVAdvModal+SVAdv;
+
+/* *** other specific words ***
+
 363;40;SVSom|"sådan":"sådant"|^SVCon+^SEnd;SVCon+NonRelevant|Join|*;
 502;40;"omkring"|SVNum|SVCon;SVAdvDegree+SVAdv|*|*;
 497;40;"omkring"|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|*;
@@ -149,6 +233,9 @@
 481;40;"inte"|"ens"|SVNum:SVNumber;SVAdvDegree+SVAdv+SVNegation|Join|*;
 483;40;"ens"|SVCon;SVPosspron|*;
 484;40;"ens";SVAdvStruct+SVAdv;
+
+/* NOTE: the rules above may not (always?) apply to 'inte ens' -> TO BE CHECKED
+
 602;40;SVPrep:SVAttrpron:SVIndefart|SVFast;*|SVAdj;
 605;40;SVDefart|SVFast;SVDefart|SVAdj;implicitly deletes other labels from Defart
 606;40;SVpAux|SVFast;SVpAux|SVAdvAdj+SVAdvManner;
@@ -171,20 +258,47 @@
 734;40;"§"+^SVeCon;SVCon;default
 22;40;SVNum|"-"|SVNum;SVCon|Join|Join;avoid that hyphen becomes nonrelevant between numbers
 13;40;SVPrepCon;SVPrep;preliminary default
+
+/* Detect real Gennouns
+/* --------------------
+
 721;40;SVPossibleGennoun|SVCon;SVAdj+SVGen|*;
+
+/* Disambiguate SVPrepAdv
+/* ----------------------
+/* Basic idea: prep before noun or noun phrase, adv before relation or comma.
+
 910;40;SVPrepAdv|SVComma;^SVAdv|*;
 930;40;SVPrepAdv|SEnd;+SVDummy|*;extension of r35 (^SEnd cannot be added to r35 because the max number of options is reached)
 35;40;SVPrepAdv+^SVDummy|^SVmAux+^SVSup+^SVAndOrBut+^SVInf+^SVVerb+^SVVerbInf+^SVAux+^SVpAux;SVPrep|*;preliminary default
 925;40;SVPrepAdv;-SVPrepAdv;to avoid conflicting labels in output
+
+/* Disambiguate SVPossCon
+/* ----------------------
+
 593;40;SVIndefart:SVAdj|SVPossCon;*|SVCon;
 880;40;SVNum|"min";*|SVCon;
 881;40;SVPossCon|SVPrep;SVCon|*;
 879;40;SVPossCon;SVPosspron;default
+
+/* Disambiguate SVmAuxCon
+/* ----------------------
+
 1155;40;SVIndefart:SVPosspron:SVGen:SVAdj:SVAttrpron:SVPossibleGennoun|SVmAuxCon;*|SVCon;
 1157;40;^SVmAux|SVDefart|SVmAuxCon;*|*|SVCon;
 1156;40;SVmAuxCon;SVmAux+SVInf;
+
+/* Disambiguate SVVerbInf
+/* ----------------------
+/* Note: Although these lexreps are Relations anyway, disambiguation is done to know the exact label,
+/*       so that it can be used in further processing.                                               
+
 56;40;SVmAux|.^SVVerbInfCon+^SVVerbInf+^SVInf+^SVmAux+^SVConj|SVVerbInf;*|*|SVInf;
 1111;40;SVAtt|SVVerbInf;*|SVInf;
+
+/* DISAMBIGUATE SVVerbInfAdjCon
+/* ----------------------------
+
 24;40;SBegin|SVVerbInfAdjCon;*|SVAdj;
 26;40;SVAtt|SVVerbInfAdjCon;*|SVInf;
 27;40;SVmAux|SVVerbInfAdjCon;SVmAux|SVInf;
@@ -200,6 +314,10 @@
 47;40;SVVerbInfAdjCon|SVIndefart;SVVerb|*;
 73;40;SVVerbInfAdjCon|SVVerbpt2;SVInf|SVVerbpt2;
 59;40;SVVerbInfAdjCon;SVAdjCon;
+
+/* DISAMBIGUATE SVVerbInfCon
+/* -------------------------
+
 76;40;SVAtt|SVVerbInfCon;*|SVInf;
 594;40;SVAtt|SVInte|SVVerbInfCon;*|*|SVInf;
 77;40;SVmAux|SVVerbInfCon;SVmAux|SVInf;
@@ -226,10 +344,18 @@
 807;40;^SVpAux+^SVVerb+^SVInf+^SVVerbInf+^SVAux+^SVComma+^SBegin|SVAdv|SVVerbInfCon;*|*|SVVerb;
 551;40;SVVerbInfCon+SVSForm;SVVerb;
 89;40;SVVerbInfCon;SVCon;
+
+/* Disambiguate vara
+/* -----------------
+
 106;40;SVmAux|SVVara;SVmAux|SVpAux;
 527;40;"en"|SVAdj|SVVara;SVIndefart|SVAdj|SVCon;
 771;40;"en"|SVAdvDegree|SVAdj|SVVara;SVIndefart|*|SVAdj|SVCon;
 578;40;SVVara;SVpAux+SVInf;default
+
+/* Disambiguate SVVerbInfPart
+/* --------------------------
+
 260;40;SVAtt|SVVerbInfPart;*|SVInf;
 261;40;SVmAux|SVVerbInfPart;SVmAux|SVInf;
 262;40;SVmAux|SVInte|SVVerbInfPart;SVmAux|SVNegrel|SVInf;
@@ -244,6 +370,10 @@
 271;40;SVAux|SVVerbInfPart;SVAux|SVPart;
 272;40;SVVerbInfPart|SVVerbpt2;SVVerbInf|SVVerbpt2;
 273;40;SVVerbInfPart;SVVerbPart;
+
+/* Disambiguate SVInfPart
+/* ----------------------
+
 31;40;SVAtt|SVInfPart;*|SVInf;
 32;40;SVmAux|SVInfPart;*|SVInf;
 33;40;SVmAux|SVSubjpron+^SVAttrpron|.SVInte|SVInfPart;SVmAux|SVSubjpron|*|SVInf;
@@ -255,6 +385,10 @@
 108;40;SVPrep|SVInfPart;SVPrep|SVAdj;
 142;40;SVAttrpron|SVInfPart;*|SVAdj;
 36;40;SVInfPart;SVVerb;default
+
+/* Disambiguate SVInfCon
+/* ---------------------
+
 51;40;SVAtt|SVInfCon;*|SVInf;
 49;40;SVmAux|SVInfCon;SVmAux|SVInf;
 50;40;SVmAux|SVSubjpron+^SVAttrpron|SVInfCon;SVmAux|SVSubjpron|SVInf;
@@ -275,6 +409,10 @@
 742;40;SVSInfCon;SVInf;default for s-forms
 773;40;SVInfCon+SVPreferRelation;SVInf;default for selected words, see lexreps
 57;40;SVInfCon;SVCon;general default
+
+/* Disambiguate SVVerbInfAdj
+/* -------------------------
+
 98;40;SVmAux|SVVerbInfAdj;SVmAux|SVInf;
 99;40;SVmAux|SVSubjpron+^SVAttrpron|.SVInte|SVVerbInfAdj;SVmAux|SVSubjpron|*|SVInf;
 100;40;SVmAux|SVAdv|SVVerbInfAdj;SVmAux|*|SVInf;
@@ -302,6 +440,10 @@
 1158;40;SVSom|SVVerbInfAdj+^SVSForm;*|SVAdj;
 952;40;SBegin|SVVerbInfAdj;*|SVAdj;default for beginning of sentence (not always correct)
 137;40;SVVerbInfAdj;SVVerb;general default
+
+/* Disambiguate SVInfAdj
+/* ---------------------
+
 279;40;SVmAux|SVInfAdj;SVmAux|SVInf;
 282;40;SVmAux|SVSubjpron+^SVAttrpron|SVInfAdj;SVmAux|SVSubjpron|SVInf;
 283;40;SVmAux|SVAdv|SVInfAdj;SVmAux|*|SVInf;
@@ -312,6 +454,10 @@
 647;40;SVPrep|SVInfAdj;*|SVAdj;
 281;40;SVInfAdj|SVCon;SVAdj|SVCon;default
 287;40;SVInfAdj;SVInf;default
+
+/* Disambiguate SVPartSupCon
+/* -------------------------
+
 314;40;SVAux|SVPartSupCon;SVAux|SVSup;
 318;40;SVAux|SVAdv|SVPartSupCon;SVAux|*|SVSup;
 708;40;SVAux|SVAdvAdj+SVAdvTemp|SVPartSupCon;SVAux|*|SVSup;
@@ -322,15 +468,27 @@
 317;40;SVPrep|SVPartSupCon;SVPrep|SVCon;
 321;40;SVConj|SVPartSupCon;SVConj|SVVerb;
 334;40;SVPartSupCon;SVCon;default
+
+/* Disambiguate SVPartCon
+/* ----------------------
+
 275;40;SVIndefart|SVPartCon;*|SVCon;
 276;40;SVPrep|SVPartCon;SVPrep|SVCon;
 277;40;SVPosspron|SVPartCon;SVPosspron|SVCon;
 278;40;SVPartCon;SVCon;PRELIMINARY DEFAULT
+
+/* Disambiguate SVVerbAdjCon via SVVerbCon
+/* ---------------------------------------
+
 466;40;SVInf|SVVerbAdjCon;^SVVerb|SVCon;
 467;40;SVVerb|SVInte|SVVerbAdjCon;^SVVerb|*|SVCon;
 764;40;SVPrep+^SVConj|SVDefart+^SVObjpron|SVVerbAdjCon;SVPrep|SVDefart|SVAdj;
 765;40;SVGen|SVVerbAdjCon;*|SVAdjCon;
 457;40;SVVerbAdjCon;+SVVerbCon;
+
+/* Disambiguate SVVerbCon
+/* ----------------------
+
 148;40;SVSubjpron+^SVAttrpron|SVVerbCon;SVSubjpron|SVVerb;
 149;40;SVVerbCon|SVRefl;SVVerb|SVRefl;
 162;40;SVAttrpron+^SVSubjpron|SVVerbCon;*|SVCon;
@@ -359,6 +517,10 @@
 756;40;^SVComma+^SBegin|^SVComma|SVComma|SVVerbCon+^SVImpCon|^SVCon+^SVAndOrBut+^SVAux+^SVComma+^SVAv+^SEnd;*|*|*|SVVerb|*;for verb in the main clause after a subordinate clause
 1218;40;^SVDefart+^SVAttrpron+^SVAdj+^SVGen+^SVPrep|SVVerbCon|SVAdvManner;*|SVVerb|*;
 151;40;SVVerbCon+^SVImpCon+^SVVerbAdjCon;SVCon;default
+
+/* Disambiguate SVImpCon
+/* ---------------------
+
 153;40;SBegin|SVImpCon|SVRefl;*|SVVerb|SVRefl;
 155;40;SBegin|SVImpCon|SVObjpron;*|SVVerb|SVObjpron;
 154;40;SBegin|SVImpCon|SVAdv;*|SVVerb|*;
@@ -372,9 +534,17 @@
 649;40;SVImpCon+SVSForm;SVVerb;
 763;40;SVImpCon+SVPreferRelation;SVVerb;default for selected forms, see lexreps
 159;40;SVImpCon+^SVVerbAdjCon;SVCon;default
+
+/* Disambiguate remaining SVVerbAdjCon
+/* -----------------------------------
+
 462;40;SVAdvDegree|SVVerbAdjCon;*|SVAdj;very low-frequent, may not be relevant
 463;40;SVVerbAdjCon+SVSForm;SVVerb;
 459;40;SVVerbAdjCon;SVCon;default
+
+/* Disambiguate SVVerbAdj
+/* ----------------------
+
 226;40;SVIndefart|SVVerbAdj;*|SVAdj;
 227;40;SVPrep|SVVerbAdj;SVPrep|SVAdj;
 228;40;SVAdvDegree|SVVerbAdj;SVAdj|SVAdj;
@@ -396,8 +566,16 @@
 244;40;SVVerbAdj|SVCon;SVAdj|*;
 554;40;SVVerbAdj|SVAdj;SVAdj|SVAdj;
 231;40;SVVerbAdj+^SVVerbAdjCon;SVVerb;default
+
+/* Disambiguate SVVerbPartSup
+/* --------------------------
+
 1216;40;SVAux|.SVAdv|SVVerbPartSup;*|*|SVSup;
 274;40;SVVerbPartSup;SVVerb;default
+
+/* Disambiguate SVPartSup
+/* ----------------------
+
 111;40;SVpAux|SVPartSup;*|SVAdj;
 572;40;SVpAux|SVAdvDegree|SVPartSup;*|*|SVAdj;
 573;40;SVpAux|SVAdvManner|SVPartSup|^SVPrep;*|*|SVAdj|*;
@@ -413,6 +591,10 @@
 760;40;SVPunctuation|SVPartSup|SVCon+^SVPluralnoun;*|SVAdj|*;
 1098;40;"icke"|SVPartSup|typeConcept;*|SVAdj|*;
 115;40;SVPartSup;SVSup;default
+
+/* Disambiguate SVVerbPart
+/* -----------------------
+
 814;40;SVDefart+^"det"|SVsVerbPart|SVCon;SVDefart|SVAdj|*;
 536;40;SVsVerbPart;SVVerb;default for s-forms
 290;40;SVpAux|SVVerbPart+^SVAdj|SVPrep;*|SVRelpart|SVPrep;
@@ -457,24 +639,51 @@
 902;40;SVSubjpron|SVVerb|SVAndOrBut|SVVerbPart;SVSubjpron|SVVerb|SVAndOrBut|SVVerb;
 903;40;SVVerbPart|SVAndOrBut|SVVerb;SVVerb|SVAndOrBut|SVVerb;don't move up: fallback rule
 129;40;SVVerbPart;SVCon;default
+
+/* Disambiguate SVSupAdj
+/* ---------------------
+
 503;40;SVpAux|SVSupAdj;SVpAux|SVAdj;
 504;40;SVIndefart|SVSupAdj;*|SVAdj;
 505;40;SVIndefart|SVAdvDegree|SVSupAdj;*|SVAdj|SVAdj;
 506;40;SVSupAdj;SVSup;default
+
+/* Disambiguate SVSupCon
+/* ---------------------
+
 514;40;SVAux|SVSupCon;SVAux|SVSup;
 515;40;SVAux|SVAdv|SVSupCon;SVAux|*|SVSup;
 517;40;SVAux|SVInte|SVSupCon;SVAux|SVInte|SVSup;
 518;40;SVAux|SVAdv|SVInte|SVSupCon;SVAux|*|SVInte|SVSup;
 758;40;SVAux|SVCon+^SVAdj+^SVGen+^SVConpart1|SVSupCon;*|*|SVSup;inversion
 516;40;SVSupCon;SVCon;default
+
+/* Disambiguate SVPart
+/* -------------------
+
 553;40;SVConpart1|SVPart;SVCon|SVCon;
 109;40;SVpAux|SVPart;SVpAux|SVeCon;
 117;40;SVCon|SVPart|SVPrep;*|SVRelpart|SVPrep;
 110;40;SVPart;SVAdj;default
+
+/* Disambiguate SVPrespart
+/* -----------------------
+
 116;40;SVPrespart;SVAdj;default
+
+/* Miscellaneous
+/* -------------
+/* Disambiguate 'bort'
+
 1069;40;SVVerb:SVInf:SVVerbInf:SVSup|SVVerbpt2;*|SVVerbpt2;must be before r423 to avoid that vRel gets deleted
+
+/* Add basic labels
+
 423;40;SVVerb:SVVerbInf:SVInf:SVSup:SVAux:SVmAux:SVpAux:SVVerbpt2;+SVvRel;
 1070;40;SVRelpart;+SVvRel;like r423, but the maximum number of options is reached in r423
+
+/* Pronouns
+
 365;40;SVPosspron|SVCon;SVPosspron|SVCon;
 339;40;SVPrep|SVObjpron|SVSom;SVPrep|SVObjpron|SVRelpron;
 171;40;SVPrep|SVObjpron+^SVDefart+^SVSubjpron|^SVRelpron+^SEnd;SVPrep|SVObjpron|*;
@@ -503,6 +712,10 @@
 217;40;SVSubjpron+SVAttrpron|SVAtt;SVSubjpron|SVAtt;
 219;40;SVSubjpron+SVAttrpron|SVAndOrBut;SVSubjpron|SVAndOrBut;
 223;40;SVSubjpron+SVAttrpron|SVIndefart;SVSubjpron|SVIndefart;
+
+/* Disambiguate AdvAdj
+/* -------------------
+
 924;40;"något"|SVAdvDegree|SVAdvAdj+SVAdvManner;SVIndefart|SVAdj+SVCon|+Join;
 740;40;"något"|SVAdvAdj|^SVCon;SVbCon|+Join|*;
 712;40;SVCon|SVAdvDegree|SVAdvAdj+SVAdvManner;*|SVAdvAdj+SVAdvManner+SVbCon|+Join;
@@ -548,8 +761,16 @@
 725;40;SVAdvAdj|SVSubjpron+^SVEttform;^SVAdv|*;
 938;40;^SVpAux|*SVAdvAdj|SVInte;*|^SVAdv|*;
 939;40;SVpAux|SVAdvAdj|SVInte|^SVvRel;*|^SVAdv|*|*;
+
+/* Disambiguate AdvCon
+/* -------------------
+
 744;40;SVConpart1|SVAdvCon;SVCon|SVCon;
 911;40;SVCon+^SVAdj|"akter"|"om";*|SVPrep|Join;
+
+/* Så
+/* --
+
 175;40;SVSaa|SVSubjpron+^SVAttrpron;SVConj|SVSubjpron;
 196;40;SVInte|SVSaa|SVmAux;SVInte|SVConj|*;
 197;40;SVInte|SVSaa;SVbCon|Join;
@@ -564,6 +785,10 @@
 959;40;SVvRel|SVSaa|SVvRel+^SVSup;*|SVConj+SVbRel|*;not a real conjunction, but this probably works best
 186;40;SVPunctuation|SVSaa;SVPunctuation|SVConj;
 174;40;SVSaa;SVAdvStruct;default
+
+/* Inte
+/* ----
+
 1139;40;SVInte|SVAdvRestrict;*|SVAdv+SVAdvRestrict;make advrestrict relation after negation (except in fixed lexreps like 'inte bara' etc.)
 1140;40;SVInte|*{1,3}^SVAdvRestrict+^SVConj+^SVAndOrBut|SVAdvRestrict;*|*|SVAdv+SVAdvRestrict;make advrestrict relation after negation
 620;40;SVIndefart|SVInte|SVAdvDegree;SVIndefart|SVAdvDegree+SVNegWord|+Join;
@@ -580,17 +805,29 @@
 192;40;SVpAux:SVVerb|SVInte;*|SVNegrel;
 199;40;SVInte|SVAdj+^SVCon;SVbCon|SVCon;
 857;40;SVInte|SVAdvTemp;SVNegrel|SVAdvManner;
+
+/* SVExample
+/* ---------
+
 659;40;SVPunctuation|SVExample|^SVvRel+^SVPrep+^SVConj+^SEnd;SVPunctuation|SVConj|*;
 660;40;SVExample|SEnd;SVAdvStruct|*;
 661;40;SBegin|SVExample;*|SVAdvStruct;
 656;40;^SVCon+^SBegin|SVExample;*|-SVAdv+SVAdvStruct;
 657;40;SVExample+^SVAdvStruct|^SVCon+^SVAdj+^SVIndefart+^SVDefart+^SEnd;-SVAdv+SVAdvStruct|*;
 658;40;SVExample+^SVAdvStruct;SVConj;default
+
+/* Connections with partial words
+/* ------------------------------
+
 717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;SVCon|Join|Join|+Join;e.g. läs- och skrivsvårigheter
 748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;SVAdj|Join|Join|+Join;
 923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;SVYear|Join|Join|+Join;
 718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;SVvRel|Join|Join|+Join;Does it make sense to keep this rule?
 719;40;"@connect@";SVCon;to avoid that concepts get split if no AndOrBut is present
+
+/* Defaults part 2
+/* ---------------
+
 711;40;SVAdvAdj+SVbCon;SVbCon;
 37;40;SVAdvAdj;SVAdj;
 38;40;SVAdvCon;SVCon;
@@ -655,6 +892,10 @@
 475;40;SVAdvDegree|SVNumber;SVbCon|SVNumber;
 480;40;SVAdvDegree|SVIndefart;SVbCon|SVNumber;
 757;40;SVGen|SVbCon;SVAdj|SVCon;
+
+/* Cleanup
+/* -------
+
 23;40;SVIgnoreCap;-SVIgnoreCap;
 44;40;SVConIfCap;-SVConIfCap;
 555;40;SVConIfAllCap;-SVConIfAllCap;
@@ -663,12 +904,23 @@
 865;40;"-";SVPunctuation;
 883;40;SBegin|SVLayout;*|NonRelevant;
 889;40;SBegin|SVAndOrBut;*|NonRelevant-SVNegStop;
+
+/* Disambiguate de, den, det
+/* -------------------------
+
 495;45;SVpAux|SVSubjpron|^SVvRel+^SVPrep|SVAtt;*|SVSubjpron|*|*;
 496;45;^SVSubjpron+^SBegin|SVpAux|"det"|^SVvRel+^SVPrep|^SVvRel+^SVPrep|SVAtt;*|*|SVSubjpron|*|*|*;
 352;45;SVSubjpron+SVDefart|SVCon;-SVSubjpron|SVCon;
 353;45;SVObjpron+SVDefart|SVCon;-SVObjpron|SVCon;
 559;45;SVPrep|SVSubjpron+SVDefart|SVAdj;SVPrep|-SVSubjpron|SVAdj;
 560;45;SVPrep|SVObjpron+SVDefart|SVAdj;SVPrep|-SVObjpron|SVAdj;
+
+/* ======================================================
+/* PHASE 45: CONCEPT BOUNDARIES AND PATHRELEVANT PRONOUNS
+/* ======================================================
+/* Concept boundaries
+/* ------------------
+
 663;45;SVCon+^SVConpart1|SVAdjpron;SVCon|SVbCon;
 487;45;SVAdvDegree|SVAdjpron;SVbCon-SVAdv|SVAdjpron;
 488;45;SVAdvDegree|SVOrdnumber;SVbCon-SVAdv|SVAdj;
@@ -680,9 +932,18 @@
 772;45;SVPluralnoun|SVAdj;SVeCon|SVAdj;
 928;45;SVCPron|SVbCon;SVbCon|SVCon;
 1018;45;SVOrdnumber;+SVAdj;treat ordinal numbers like adjectives in following phases
+
+/* PathRelevant pronouns
+/* ---------------------
+
 351;45;SVSubjpron;SVSubjpron;
 354;45;SVObjpron;SVObjpron;
 335;45;SVAdjpron+SVAttrpron;SVAdjpron;
+
+/* =============================================
+/* PHASE 50: ADVERBS AND PATHRELEVANT ATTRIBUTES
+/* =============================================
+
 374;50;SVAdvPlace+^SVAdvC;SVAdvPlace;remove non-applicable labels for PathRelevant place adverbs
 1219;50;SVAdvDegree|SVAdvTime:SVAdvTemp:SVAdvFreq:SVAdvC;+JoinReverse|*;
 485;50;SVAdvDegree+^"särskilt";SVRel+SVAdvDegree;
@@ -696,6 +957,11 @@
 891;50;SVAdvPlace;SVAdvPlace;default
 912;50;^SVCon+^SBegin|"framme";*|SVeCon;default for framme
 913;50;^SVCon+^SBegin|"borta";*|SVeCon;default for borta
+
+/* =============================
+/* PHASE 60: DETECT ENUMERATIONS
+/* =============================
+
 1054;60;SVRelpron;+SVConj;
 1128;60;SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVAndOr|SVIndefart|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList;
 1129;60;SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVAndOr|SVIndefart|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList;
@@ -714,6 +980,11 @@
 1214;60;SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SVComma|SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SVAndOr|SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SEnd;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|*;
 1016;60;SVvRel|*SVList|SVvRel;*|-SVList|*;rough correction of previous rules
 1124;60;"mellan":"både"|*^"och"|"och";*|*|+SVList;
+
+/* ===================================
+/* PHASE 65: DETECT SENTENCE STRUCTURE
+/* ===================================
+
 1072;65;SBegin:":":"-"|^SVvRel;*|+SVPBegin;
 1073;65;SBegin:":":"-":SVComma|SVvRel;*|+SVPBegin+SVPVerb;
 1077;65;SBegin:SVPunctuation:SVAndOrBut|SVSubjpron;*|+SVPBegin;
@@ -760,6 +1031,13 @@
 1141;65;SVvRel|SVAndOrBut+^"än"+^SVList|SVCon;*|+SVPBegin|*;
 1148;65;SVvRel|SVvRel:SVNegrel+SVPBegin;*|+SVbRel;
 1213;65;SVComma+^SVList|SVPrep;*|+SVPBegin;
+
+/* ==================
+/* PHASE 70: NEGATION
+/* ==================
+/* Expansion of negation scope
+/* ---------------------------
+
 625;70;SVNegWord+SVNegation;-SVNegation;avoid expansion for NegWord
 1096;70;SVbCon:SVCon+"icke";-SVNegation+SVNegWord;
 448;70;SVAdjpron+SVNegation;+SVNegStart;
@@ -769,30 +1047,60 @@
 1137;70;SVAndOrBut|SVbCon+SVNegation;+SVNegStart|*;
 431;70;^SVSubjpron+^SVObjpron+^SVAdj+SVNegation+^SVNegStart;+SVNegBegin;
 1088;70;"nej";+SVNegation;
+
+/* Utan
+/* ----
+/* utan = SVConj+SVUtan+SVNegStop
+/* First remove SVConj and make utan a negation marker when there is nothing like 'inte bara' in the sentence.
+
 975;70;SBegin:SVUtan|.^SVAdvRestrict+^SVUtan|SVUtan|^typeRelation;*|*|-SVConj+SVNegation+SVNegStart|*;
 990;70;SVRefl:SVObjpron|SVNegrel+SVNegation|SVUtan|^SVvRel;*|*|-SVConj+SVNegation+SVNegStart|*;
+
+/* Then correct the output: no negation marker in 'utan vidare' (when 'vidare' is not an adj) or when preceded by another negation marker.
+
 979;70;SVUtan|SVVidare+^SVAdj;-SVUtan-SVNegation-SVNegStart+SVPrep|*;
 1136;70;SVUtan|SVVidare|SVComma:SEnd;-SVUtan-SVNegation-SVNegStart+SVAdv|Join|*;
 974;70;SVNegation+^SVUtan|*^SVNegation+^SVUtan|SVUtan|^SVAtt+^SEnd;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel|*;
 989;70;"eller"|SVNegrel+SVNegation|SVUtan;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel;
 991;70;"men"|"inte"|SVUtan;-SVNegBegin|-SVNegation-SVNegBegin|-SVNegation-SVNegStart-SVUtan+SVConj;
 988;70;^SVRefl+^SVObjpron|SVNegrel+SVNegation|SVUtan|SVvRel:SVSubjpron;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel|*;
+
+/* More finetuning: correction of the correction
+
 980;70;SVUtan+^SVNegStart|SVCon:SVAdj|SVPunctuation;+SVNegation+SVNegStart-SVConj+SVPrep|*|*;
 981;70;SVvRel:SVRefl|SVUtan+^SVNegStart|SVCon:SVAdj;*|+SVNegation+SVNegStart-SVConj+SVPrep|*;
 983;70;SVPrep|*typeConcept|SVUtan+^SVNegStart|SVCon;*|*|+SVNegation+SVNegStart-SVConj+SVPrep|*;
+
+/* Split Relations
+
 976;70;typeRelation+^SVAdvDegree+^SVNegation|SVUtan+SVNegStart;*|+SVbRel;
 985;70;SVAdvDegree|SVUtan+SVNegStart;+SVbRel|*;
 986;70;SVAdvStruct|SVUtan+SVNegStart;*|+SVbRel;
+
+/* Restrict or extend expansion
+
 977;70;SVUtan+SVNegStart|*^SVvRel|SVvRel;*|*|+SVNegStop;
 982;70;SVUtan+SVNegStart|SVCon|"mest";*|*|+SVNegStop+SVbCon-SVAdj;
 978;70;SVUtan+SVNegStart|*^SVPunctuation|SVPunctuation+^SVList|^SVNegation;*|*|+SVNegStop|+SVNegStop;
 987;70;^SVUtan|SVUtan+SVNegStart|SEnd;+SVNegBegin|-SVNegStart|*;
+
+/* assign InNegspan attribute
+/* --------------------------
+
 968;70;SVNegBegin:SVNegStart|*^SVNegStop;+SVInNegspan|+SVInNegspan;
+
+/* utan att
+/* --------
+
 971;70;SVUtan+^SVInNegspan|SVAtt;+SVNegation+SVNegBegin+SVbRel-SVNegStop|+SVNegation;
 993;70;SVNegrel|SVUtan+SVInNegspan|SVAtt;*|+SVNegation|*;
 972;70;SVInNegspan+^SVNegrel|.SVPunctuation|SVUtan|SVAtt;*|*|+SVNegStop-SVNegation-SVNegBegin|-SVNegation;
 973;70;SVAdvRestrict|*^SVUtan|SVUtan|SVAtt;*|*|+SVNegStop-SVNegation-SVNegBegin|-SVNegation;
 992;70;SVUtan+^SVNegation+^SVNegBegin+^SVNegStart;+SVNegStop+SVbRel;
+
+/* More expansion-related rules
+/* ----------------------------
+
 1087;70;SVComma|SVNegrel|.^typeConcept+^typeRelation+^typePathRelevant|SVConj:SVPrep;*|*|*|-SVPBegin-SVNegStop;
 1061;70;SVPBegin|.^SVPBegin+^SVNegBegin+^SVNegStart|^SVPBegin+^SVNegStart+SVNegation;+SVNegBegin|*|*;
 1062;70;SVPBegin+^SVNegBegin+^SVNegStart+^SVNegation;+SVNegStop;
@@ -804,33 +1112,68 @@
 1131;70;SVNegBegin+SVbRel:SVAndOr|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;ad hoc rule for men and och
 1090;70;SVNegBegin+SVbRel:SVAndOr|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|+SVNegBegin;ad hoc rule for men and och
 1133;70;SVComma|SVPrep|SVNegStop+^SVComma;*|+SVNegStop|*;
+
+/* delete unnecessary relation splits
+/* ----------------------------------
+
 1080;70;SVInNegspan;-SVInNegspan;
 1081;70;SVNegBegin:SVNegStart|.^SVNegStop+^SVPBegin|SVNegStop;+SVInNegspan|+SVInNegspan|*;
 1082;70;SVbRel+^SVInNegspan+^SVNegStop+^SVNegBegin;-SVbRel;
 946;70;SVInNegspan+^SVAndOrBut|SVAndOrBut:SVConj+SVNegStop+^"eller";*|+SVbRel;
 942;70;SVNegStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegStop;move NegStop from nonrelevant to relevant lexrep
 941;70;SVNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegStop;move NegStop from nonrelevant to relevant lexrep
+
+/* add negation to prefix icke- on word (-> Concept) level
+/* -------------------------------------------------------
+
 1134;70;"icke-";+SVNegation;
+
+/* ===================
+/* PHASE 80: SENTIMENT
+/* ===================
+/* Sentiment attributes get assigned via the user dictionary
+/* Expansion of sentiment scope
+/* ----------------------------
+/* Sentiment attribute on verb -> expand to phrase
+
 1161;80;SVPBegin|.^SVPBegin+^SVPosSentiment|SVvRel+SVPosSentiment+^SVPBegin;+SVPosSentimentBegin|*|*;
 1163;80;SVPBegin|.^SVPBegin+^SVNegSentiment|SVvRel+SVNegSentiment+^SVPBegin;+SVNegSentimentBegin|*|*;
 1191;80;SVPBegin+SVPosSentiment;+SVPosSentimentBegin;
 1192;80;SVPBegin+SVNegSentiment;+SVNegSentimentBegin;
+
+/* Sentiment attribute on adjective preceded by a form of 'vara' -> expansion to the left
+
 1167;80;typeConcept+^SVAdj|SVpAux+^SVPBegin|SVAdj:SVCon+SVPosSentiment;+SVPosSentimentBegin|*|*;
 1178;80;SVSubjpron|SVpAux|SVAdj:SVCon+SVPosSentiment;+SVPosSentimentBegin|-SVPBegin|*;
 1180;80;typeConcept+^SVAdj|SVpAux+^SVPBegin|SVAdj:SVCon+SVNegSentiment;+SVNegSentimentBegin|*|*;
 1181;80;SVSubjpron|SVpAux|SVAdj:SVCon+SVNegSentiment;+SVNegSentimentBegin|-SVPBegin|*;
+
+/* Sentiment attribute on concept word -> expand to the right, no expansion to the left
+
 1182;80;typeConcept:typeBeginConcept+SVPosSentiment;+SVPosSentimentBegin;
 1209;80;typeConcept:typeBeginConcept+SVNegSentiment;+SVNegSentimentBegin;
+
+/* Sentiment attribute on type(Begin)Concept -> expand to the right until next verb form, beginning of phrase or att (for typeBeginConcept)
+
 1211;80;typeBeginConcept+SVPosSentiment|*^SVvRel+^SVPBegin+^SVAtt|SVvRel:SVPBegin:SVAtt;+SVPosSentimentBegin|*|+SVPosSentimentStop;
 1212;80;typeBeginConcept+SVNegSentiment|*^SVvRel+^SVPBegin+^SVAtt|SVvRel:SVPBegin:SVAtt;+SVNegSentimentBegin|*|+SVNegSentimentStop;
 1195;80;typeConcept+SVPosSentiment|.^SVPBegin+^SVvRel+^SVSubjpron+^SVPosSentimentBegin|SVPBegin:SVvRel:SVSubjpron+^SVPosSentiment+^SVPosSentimentBegin;*|*|+SVPosSentimentStop+SVDummy;
 1196;80;typeConcept+SVNegSentiment|.^SVPBegin+^SVvRel+^SVSubjpron+^SVNegSentimentBegin|SVPBegin:SVvRel:SVSubjpron+^SVNegSentiment+^SVNegSentimentBegin;*|*|+SVNegSentimentStop+SVDummy;
+
+/* Sentiment attribute on remaining words (mainly adverbs) -> expansion = phrase
+
 1204;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVPosSentiment+^SVPosSentimentBegin|SVPosSentiment+^SVPosSentimentBegin;+SVPosSentimentBegin|*|*;
 1210;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVNegSentiment+^SVNegSentimentBegin|SVNegSentiment+^SVNegSentimentBegin;+SVNegSentimentBegin|*|*;
+
+/* Sentiment attribute after 'och' or 'genom att' -> start expansion at 'och' or 'genom att' instead of earlier at PBegin
+
 1185;80;SVPosSentimentBegin+^SVPosSentiment|*^SVAndOrBut+^SVPosSentiment|SVAndOrBut+^"än"+^SVList+^SVPosSentimentStop;-SVPosSentimentBegin|*|+SVPosSentimentBegin+SVbRel;
 1186;80;SVNegSentimentBegin+^SVNegSentiment|*^SVAndOrBut+^SVNegSentiment|SVAndOrBut+^"än"+^SVList+^SVNegSentimentStop;-SVNegSentimentBegin|*|+SVNegSentimentBegin+SVbRel;
 1187;80;SVPosSentimentBegin+^SVPosSentiment|*^"genom"+^"än"+^SVPosSentiment|"genom":"än"|SVAtt;-SVPosSentimentBegin|*|+SVPosSentimentBegin|*;
 1188;80;SVNegSentimentBegin+^SVNegSentiment|*^"genom"+^"än"+^SVNegSentiment|"genom":"än"|SVAtt;-SVNegSentimentBegin|*|+SVNegSentimentBegin|*;
+
+/* Restriction of sentiment scope: stop at end of phrase
+
 1164;80;typeRelation+SVPosSentiment|.^SVPBegin+^SVPosSentimentBegin|SVPBegin+^SVPosSentimentBegin;*|*|+SVPosSentimentStop;
 1165;80;typeRelation+SVNegSentiment|.^SVPBegin+^SVNegSentimentBegin|SVPBegin+^SVNegSentimentBegin;*|*|+SVNegSentimentStop;
 1193;80;"utan"+SVbRel;+SVPosSentimentStop+SVNegSentimentStop;
@@ -841,6 +1184,9 @@
 1198;80;SVDummy;-SVDummy;
 1199;80;SVPosSentimentBegin|.^SVPBegin+^SVPosSentimentStop|SVPBegin+^SVPosSentiment+^SVPosSentimentBegin;*|*|+SVPosSentimentStop;
 1200;80;SVNegSentimentBegin|.^SVPBegin+^SVNegSentimentStop|SVPBegin+^SVNegSentiment+^SVNegSentimentBegin;*|*|+SVNegSentimentStop;
+
+/* Move attribute markers to relevant entity
+
 1176;80;SBegin|"men"+SVPosSentimentBegin|^SEnd;*|*|+SVPosSentimentBegin;
 1177;80;SBegin|"men"+SVNegSentimentBegin|^SEnd;*|*|+SVNegSentimentBegin;
 1168;80;SVPosSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVPosSentimentBegin;
@@ -851,7 +1197,15 @@
 1173;80;SVPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVPosSentimentStop;
 1174;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentStop;
 1175;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegSentimentStop;
+
+/* Split relations with a SentimentBegin or SentimentStop attribute
+
 1189;80;typeRelation+^SVAtt+^SVPosSentimentBegin+^SVPosSentimentStop|typeRelation+SVPosSentimentBegin:SVPosSentimentStop;*|+SVbRel;
 1190;80;typeRelation+^SVAtt+^SVNegSentiment+^SVNegSentimentBegin+^SVNegSentimentStop|typeRelation+SVNegSentimentBegin:SVNegSentimentStop;*|+SVbRel;
+
+/* =============================
+/* PHASE 80 and PHASE $: CLEANUP
+/* =============================
+
 947;85;SVbRel;SVbRel;remove conflicting labels
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default

@@ -1,16 +1,33 @@
+
+/* PREPARATION
+/*============
+
 345;1;Punctuation;^DEPunctuation;rewriting mandatory label to a language-specific copy
 346;1;CapitalInitial;^DECapitalInitial;rewriting mandatory label to a language-specific copy
 609;1;CapitalMixed;^DECapitalInitial;treat CapitalMixed in the same way as CapitalInitial
+
+/* RELABEL USER DICTIONARY ITEMS        
+/*======================================
+
 350;1;UDNegation;+DENegation;
 348;1;UDPosSentiment;+DEPosSentiment+DEPosSentimentBegin;
 349;1;UDNegSentiment;+DENegSentiment+DENegSentimentBegin;
 351;1;UDConcept;UDConcept+DECon;
 352;1;UDRelation;UDRelation+DERel;
 353;1;UDNonRelevant;NonRelevant;
+
+/* DISAMBIGUATE THE WORD noch
+/* --------------------------
+/* noch is a negative conjunction after weder; detection of weder...noch with up to 8 elements in between them
+
 254;20;DEWeder|*{1,8}^DENoch|DENoch;DENegRel|*|DENegRel;
 262;20;DEWeder;DENegRel;default if no noch is found
 648;20;DENicht:DEKein:DENegWord|*^DEKomma|DEKomma|DENoch|DERel:DERelAux;*|*|*|DENegRel|*;
 263;20;DENoch;DEAdv+DEAdvNonrelevant;
+
+/* OPERATIONS ON ADVERBS
+/* ---------------------
+
 318;30;DEAdvDegree|DEAdvTime;DEAdvTime|+Join;
 425;30;DEAdvDegree|DEAdvTemp;DEAdvTemp|+Join;
 466;30;DEAdvDegree|DEAdvPlace;DEAdvPlace|+Join;
@@ -18,29 +35,71 @@
 316;30;DEAdvDegree|DEAdvDegree;DEAdvDegree|+Join;
 343;30;"mehr"|"als"|DENum;DEAdvDegree+DEAdv-DEAdj|Join|^DENum;
 344;30;"mehr"|"als"|^DENum;DEPrep-DEAdj|Join|*;
+
+/* DISAMBIGUATE THROUGH CAPITALIZATION
+/* -----------------------------------
+/* im übrigen
+/* Note: These rules have to be higher than the rules that rewrite Conpart1 to Con.
+
 633;40;"im"|"übrigen"|DECon+DECapitalInitial;*|DEAttradj|*;
 634;40;"im"|"übrigen";DEAdv+DEAdvNonrelevant|Join;
+
+/* other cases
+
 288;40;SBegin|DECapitalInitial;*|-DECapitalInitial;ignore capital at beginning of sentence
 224;40;^DEDoppelpunkt+^DELayout+^SBegin|DEConIfCap+DECapitalInitial;*|DECon;
 416;40;^DEPunctuation+^DELayout+^SBegin|DEInf+DECapitalInitial;*|DECon;
 422;40;DEDoppelpunkt|DEInf|typeRelation;*|DECon|*;
 513;40;DEConpart1|DECapitalInitial;DECon|+Join;
 514;40;DEConpart1;^DECon;
+
+/* IDENTIFICATION OF PHRASES THAT INDICATE ORGANIZATIONAL UNITS
+
 610;40;DEOrgUnit|"für"|*typeConcept|DEKomma|*typeConcept|"und"|DECapitalInitial;^DECon|+Join|+Join|+Join|+Join|+Join|+Join;
 611;40;DEOrgUnit|"für"|*typeConcept|"und"|*typeConcept;^DECon|+Join|+Join|+Join|+Join;
 612;40;DEOrgUnit|"für"|*typeConcept;^DECon|+Join|+Join;
 613;40;DEOrgUnit;^DECon;
+
+/* ORDINAL NUMBERS
+/* ---------------
+
 40;40;DENumadj;DEAttradj;
+
+/* ETWAS, NICHTS, ALLES
+/* --------------------
+
 486;40;"etwas"|DEAdj:DEPredadj:DECon;DEAdv+DEAdvDegree|*;
 487;40;"etwas":"nichts":"alles"|DEAttradj:DECapitalInitial;DEBeginadj|^DECon;
 492;40;"etwas"|DEVielWenig;DEBeginadj|DEAttradj;
+
+/* (default = Subjpron + Objpron via lexreps)
+/* VIEL, WENIG
+/* -----------
+
 490;40;DEVielWenig|DECon;DEAttradj|*;
 491;40;DEVielWenig|DEAttradj;DEAttradj|*;
+
+/* KEINES, KEINER
+/* --------------
+/* Lexreps: keines der, keines dieser, keines
+
 540;40;"keines":"keiner"|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|*;
 541;40;"keiner"|DEVerbAdj|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|DEAttradj|*;
+
+/* ABER
+/* ----
+
 551;40;DEKomma|"aber";*|DEAndOrBut;
 552;40;"aber"+^DEAndOrBut;DEAdvModality+DEAdv;
+
+/* DEVerbteil: rules for words that have DEVerbteil and other labels
+/* -----------------------------------------------------------------
+
 112;40;DEVerbteil|DEKomma:DEDoppelpunkt:SEnd;DEVerbteil|*;
+
+/* DISAMBIGUATE DEVerbAdj
+/* ----------------------
+
 123;40;SBegin|DEPrep|DEDer:DEDefart|DECon|DEVerbAdj;*|DEPrep|*|*|DERel;
 139;40;SBegin|DEVerbAdj;*|DEAttradj;
 508;40;DEVerbAdj|DEKomma|"dass";DERel|*|DEConj;
@@ -69,17 +128,29 @@
 417;40;DEDemonstrativ:DEAttradj:DEAttrpron|DEVerbAdj|DECon;*|DEAttradj|DECon;
 493;40;DEVielWenig|DEVerbAdj|DECon;DEAttradj|DEAttradj|DECon;
 645;40;DEVerbAdj|DERefl;DERel|*;don't wait until default rule for this case
+
+/* DEInfAttradj
+/* ------------
+
 226;40;SBegin|DEInfAttradj|DEObjpron;*|DERel|DEObjpron;imperative at the beginning of a sentence
 227;40;DEInfAttradj+DECapitalInitial;DECon;
 89;40;DEDefart:DEIndefart:DEPrepart:DEPrep|DEInfAttradj;*|DEAttradj;
 93;40;DEPrep|DENicht|DEInfAttradj|DECon;DEPrep|DENicht|DEAttradj|DECon;
 271;40;DEGenitiv:DEDer|DEInfAttradj;^DEGenitiv|DEAttradj;
 500;40;DEEiner|DEInfAttradj;DEGenitiv+DEIndefart|DEAttradj;
+
+/* DEInf
+/* -----
+
 50;40;DEEin:DEKein:DEPrepart|DEInf;*|DECon;
 73;40;DEDefart|DEInf|^DERelAux+^SEnd;DEDefart|DECon|*;
 104;40;DENum|DEInf;DECon|DERel;
 325;40;"alle"|DEInf;DECon|DERel;
 221;40;DEPosspron+^DESubjpron|DEInf;DEPosspron|DECon;
+
+/* DERelCon
+/* --------
+
 228;40;SBegin|DERelCon|DEObjpron;*|DERel|DEObjpron;
 291;40;SBegin|DERelCon;*|DECon;
 229;40;DERelCon+DECapitalInitial;DECon;has to come after r138
@@ -101,14 +172,26 @@
 193;40;DERelAux|DERelCon|SEnd;DERelAux|DERel|*;
 494;40;DEVielWenig|DERelCon;DEBeginadj|DECon;
 70;40;DERelCon;DERel;default
+
+/* DERelConMod
+/* -----------
+
 110;40;DEPrep:DEDefart:DEIndefart|DERelConMod;*|^DEAttradj;
 187;40;DECon|DEGenitiv|DERelConMod;^DECon|DEGenitiv|^DECon;note: Posspron gets overwritten, ^ is to keep CapitalInitial
 183;40;DEAttradj|DERelConMod;DEAttradj|^DECon;
 181;40;DERelConMod|DERelAux:DEDefart:DEObjpron:DEDemonstrativ;DERel|*;
 188;40;DESubjpron|DERelConMod;DESubjpron|DERel;
 182;40;DERelConMod;^DECon;
+
+/* VIEL, WENIG, part 2
+/* -------------------
+
 495;40;DEVielWenig|DEPredadj;DEAdv+DEAdvDegree|^DEPredadj;
 496;40;DEVielWenig;DEBeginadj+DEIndefpron;
+
+/* DETECT GENITIVE ARTICLES AND PRONOUNS
+/* -------------------------------------
+
 413;40;SBegin|DEPosspron+DEGenitiv;*|DEPosspron;
 414;40;^DEPrep+^DEZu+^DEPunctuation+^SBegin|DEPosspron+DEGenitiv;*|-DEPosspron;
 167;40;DECon|DEGenitiv|DECon:DENum;DECon|DEGenitiv|DECon;
@@ -122,6 +205,10 @@
 46;40;DECon|DEEines:DEEiner|DEAdv:DENicht|DECon:DEAttradj;DECon|DEGenitiv|*|*;
 21;40;DECon|DEEiner:DEEines|DEAttradj:DEBeginadj:DEGeoadj;DECon|DEGenitiv|*;
 22;40;DECon|DEEines|DEPredadj;DECon|DEGenitiv|*;
+
+/*  DETECT CONJUNCTIONS
+/*  -------------------
+
 554;40;"deren";+DEDefart;treat 'deren' like a Defart in order to detect it as a relative pronoun
 195;40;DEKomma|DEDefart|DEPrep:DEPart:DEConj:DENegRel:DENicht;DEKomma|DEConj+DERelconj|*;
 543;40;DEKomma|DEDefart|DESubjpron:DEObjpron:DEDefart:DEBeginadj:DEEin:DEIndefart:DEKein:DEPosspron;*|DEConj+DERelconj|*;
@@ -135,12 +222,20 @@
 549;40;DEKomma+^DEHyphen|DEDefart|DEZu|^typeRelation;*|DEConj+DERelconj|*|*;
 550;40;DEKomma+^DEHyphen|DEDefart|DEKomma;*|DEConj+DERelconj|*;
 553;40;DEDefart+DEPosspron;-DEDefart;cleaning rule for 'deren'
+
+/* CONJUNCTIONS
+/* ------------
+
 2;40;DEDefart|DERefl:DEDemonstrativ;DEConj+DERelconj|*;
 222;40;DEPredadj|DEPredadj;DEPredadj|DEAdj;
 214;40;DEWie|DEPredadj;DEConj|DEAdj;
 212;40;DEDefart|DEConj;DEDefart|DEPrep;
 488;40;DEKomma|DEPrep|DEDefart:DEDenen|DEDefart:DEDer;*|DEConj+DERelconj|Join|*;
 215;40;DEConj;DEConj;
+
+/* LONGER CONCEPTS WITH ARTICLE + PREPOSITION
+/* ------------------------------------------
+
 211;40;DEDefart|DEPrep|DEObjpron;DEDefart|DEPrep|DECon;
 52;40;DEDefart|DEPrepart|DECon|DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DECon|DEAttradj;
 180;40;DEDefart|DEPrep|DEDefart|DECon|DEAttradj:DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DEAttradj|DECon|DEAttradj;
@@ -148,14 +243,26 @@
 194;40;DEDefart|DEPrep|DEAdv|DEAttradj|DECon;DEDefart|DEAttradj|DECon|DEAttradj|DECon;
 136;40;DEDefart|DEPrep|DECon:DENum|DECon|DEVerbAdj|DECon;DEDefart|DEAttradj|DECon|DECon|DEAttradj|DECon;
 219;40;DEPrep|DEPrep|DECon|DEVerbAdj:DEAttradj|DECon;DEPrep|DECon|DECon|DEAttradj|DECon;
+
+/* OTHER LONGER CONCEPTS
+/* ---------------------
+
 301;40;DEIndefart|DEAdv|DEPredadj:DEAttradj;DEIndefart|DEAttradj|DEAttradj;
 426;40;DEIndefart:DEEin|DEAdv|DECon;DEIndefart|DEAttradj|DECon;
+
+/* SEIN
+/* ----
+
 9;40;DESein|DEKomma:DEPunctuation:SEnd;DERel|*;
 11;40;DEPart|DESein;DEPart|DERel;
 218;40;DEZu|DESein;DEZu|DERel;
 420;40;DESein|DEPrep;DEPosspron|DEPrep;
 419;40;DESein|typeRelation;DERel|*;
 418;40;DESein;DEPosspron;default for remaining cases
+
+/* Connections with partial words
+/* ------------------------------
+
 562;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;
 559;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join|Join|Join|+Join;
 555;40;DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join;
@@ -168,6 +275,10 @@
 557;40;DECon|"@connect@"|DEAndOrBut|DERel:DEInf;DERel|Join|Join|+Join;
 560;40;DECon|"@connect@"|DEAndOrBut|DEZuInf;DEZuInf|Join|Join|+Join;
 558;40;DECon|"@connect@";^DECon|Join;to avoid that @connect@ disturbs other rules
+
+/* RULES RELATED TO DEPredadj
+/* --------------------------
+
 96;40;DEPrep|DEIndefart:DEEiner|DEPredadj|DEVerbAdj;DEPrep|*|DEPredadj|DEAttradj;
 158;40;DESo|DEPredadj;DESo|DECon;
 161;40;DEZu|DEPredadj|DEAttradj;DEPrep|DEAttradj|DEAttradj;
@@ -179,12 +290,24 @@
 82;40;DECon|DEPredadj|DERel:DEPart;DECon|DERel|DERel;
 49;40;DECon|DEPredadj;DECon|DEBeginadj;
 439;40;DEBeginadj|DEPredadj|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;
+
+/* SO
+/* --
+
 83;40;DESo|DEBeginadj;DESo|DEAdj;
 84;40;DESo|DERel:DERelAux;DEAdv|DERel;
 85;40;DESo|DEPart;DEAdv|DEPart;
 608;40;DEKomma|DESo|DECon+DECapitalInitial;*|DEAndOrBut|*;
+
+/* DA
+/* --
+
 644;40;SBegin:DEDoppelpunkt|"da"|^typeRelation;*|DEConj|*;
 470;40;SBegin:DEDoppelpunkt|"da"|DEPrep:DEPrepart:DERefl;*|DEConj|*;
+
+/* DEFAULTS
+/* --------
+
 510;40;"meinen"+DEAttradj;DEPosspron;
 201;40;DEInfAttradj;DERel;
 202;40;DEVerbAdj;DERel;
@@ -204,10 +327,19 @@
 225;40;DEConIfCap;-DEConIfCap;
 342;40;DEVerbteil+DEAdv;DEVerbteil;for Adv+Verbteil
 512;40;"*"|DENum;DERel|^DENum;
+
+/* RULES FOR NEGATION, part 1
+/*===========================
+/* Assign negation attribute
+
 33;40;DENicht|DERel;DERel+DENegation|DERel;
 32;40;DENicht|DECon;DEBeginadj+DENegation|DECon;
 34;40;DENicht|DEAttradj;DEBeginadj+DENegation|DEAttradj;
 36;40;DENicht|DEAdj;DEBeginadj+DENegation|DEAdj;
+
+/* Give adverbs their lexrep-type
+/* ------------------------------
+
 296;50;DEAdvDirection+^DEAdv;-DEAdvDirection;
 297;50;DEAdvManner+^DEAdv;-DEAdvManner;
 299;50;DEAdvModality+^DEAdv;-DEAdvModality;
@@ -215,6 +347,9 @@
 310;50;DEAdvDegree+^DEAdv;-DEAdvDegree;
 427;50;DEAdvTemp+^DEAdv;-DEAdvTemp;
 454;50;DEAdvTime+^DEAdv;-DEAdvTime;
+
+/* Define type for ambiguous labels
+
 307;50;"von"|DEAdvPlace;DEAdvDirection|+Join;
 306;50;"nach"|DEAdvPlace;DEAdvDirection|+Join;
 405;50;DEAdvDegree|DENicht:DEKein;DERAdv|*;
@@ -234,6 +369,9 @@
 463;50;DEGenitiv|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEGenitiv|DEAttradj|*;
 450;50;DENicht|DEAdvTemp;^DENicht|+Join;
 440;50;DEBeginadj|DEAdvNonrelevant:DEAdvModality|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;
+
+/* Remove superfluous labels
+
 285;50;DEAdvDirection;DEAdvDirection;
 286;50;DEAdvManner;DEAdvManner;
 287;50;DEAdvModality;DEAdvModality;
@@ -246,6 +384,10 @@
 453;50;DEJe;DERAdv;make 'je' relation (RAdv is not used in lexreps)
 284;50;DEAdv;DEAdvNonrelevant;
 615;50;DEAdvDirection:DEAdvManner:DEAdvModality:DEAdvNonrelevant:DEAdvPlace:DEAdvTime:DEAdvTemp:DERAdv;+DEAdv;add Adv label again for use in following phases
+
+/* Give pronouns their lexrep-type
+/* -------------------------------
+
 429;50;DEIndefpron|typeRelation;DESubjpron|*;
 434;50;DEIndefpron|DEPredadj;DESubjpron|^DEPredadj;
 436;50;DEIndefpron|DEAdvTemp;DESubjpron|DEAdvTemp+DETime;
@@ -267,6 +409,10 @@
 505;50;DEEines|DEPrep:DEPrepart;DEGenitiv|*;
 504;50;DEEines|typeRelation;DESubjpron|*;
 176;50;DENum;DECon;
+
+/* DETECT ENUMERATIONS
+/* ===================
+
 529;60;DEHyphen;-DEKomma;
 533;60;*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;4-element enumeration
 520;60;DEIndefart:DEEin|*DEAttradj:DECon|DEKomma|DEIndefart:DEEin|*DEAttradj:DECon|DEAndOr|DEIndefart:DEEin|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration
@@ -279,6 +425,10 @@
 623;60;DERel:DERelAux:DEPrep|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon|^DERel+^DERelAux;*|+DEList|+DEList|+DEList|*;
 625;60;DEAttradj|DEKomma|DEAttradj|DECon;+DEList|+DEList|+DEList|+DEList;
 629;60;*typeConcept|"zwischen"|*^typeRelation|"und"|*^typeRelation+^DEPunctuation+^DEKein;+DEList|+DEList|+DEList|+DEList|+DEList;
+
+/* RULES FOR NEGATION, part 2
+/*===========================
+
 647;70;DEGeoadj;+DEAttradj;
 206;70;DENicht;DERel+DENegation;default
 232;70;DEKein;+DENegation;
@@ -289,6 +439,9 @@
 588;70;"ohne"|.^"zu"+^DEZuInf|DEZuInf;+DERel|*|*;for ohne, variant of r283
 589;70;"ohne dass";+DERel;
 590;70;"ohne"+^DERel;DEPrep+DENegation;(assign NegBegin later to avoid that expansion rules are applied)
+
+/* Expansion of negation scope
+
 233;70;DEKein;+DENegBegin;
 239;70;DEBeginadj+DENegation;+DENegBegin;
 234;70;DERel+DENegation;+DENegBegin;
@@ -322,6 +475,9 @@
 601;70;DENegBegin:DEInNegspan|^DEInNegspan+^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, repetition of r534 for cases where rxxx has fired
 591;70;*DEAttradj:DECon|DEPrep+DENegation;+DENegBegin|*;has to be after r534-600-601 to avoid interference
 602;70;DEList|.DEList+^DENegBegin|DEList+DENegBegin;+DENegBegin|*|*;
+
+/* Restriction of negation scope
+
 567;70;DEDoppelpunkt|^DENegation;*|+DENegStop;
 240;70;DEPunctuation|DEAndOrBut;*|+DENegStop;
 618;70;DEKomma:DEDoppelpunkt|DEConj+^DENegBegin|DESubjpron;*|+DENegStop|*;
@@ -358,11 +514,17 @@
 575;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;
 637;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|*^typeConcept+^typeRelation|DENegBegin;*|+DENegStop+DEBeginrel|*|*;
 635;70;DEAdv+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;
+
+/* Expansion for 'ohne' as a preposition; try not to interupt the span of other negation markers
+
 596;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|^DEInNegspan;+DENegBegin|*|*|+DENegStop;
 599;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|DEInNegspan;+DENegBegin|*|*|*;
 598;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv+^DENegBegin|DENegation:DENegBegin;+DENegBegin|*|*|*;
 605;70;DEPrep+DENegation|DEObjpron|^DEInNegspan;+DENegBegin|*|+DENegStop;
 597;70;DEPrep+DENegation|DENegBegin;+DENegBegin|*;
+
+/* Clean conflicting negation parameters
+
 242;70;DENegStop+DENegBegin;-DENegStop;
 243;70;DENegation+DENegStop;-DENegStop;
 586;70;typeRelation+DENegation|.typeRelation+^DENegation+^DENegBegin+^DENegStop|typeRelation+DENegStop|.typeRelation+^DENegation+^DENegBegin|^typeRelation+^DENegBegin+^DENegation;*|*|*|*|+DENegStop;relation entity with negation marker and NegStop -> move NegStop to following entity
@@ -371,6 +533,10 @@
 245;70;DENegBegin;-DENegStop;
 530;70;DENegStop+^typeRelation+^typeConcept|^DENegation+^DENegBegin;*|+DENegStop;
 579;70;DENegBegin+^typeRelation+^typeConcept+^typePathRelevant|^DENegBegin+^DENegStop;*|+DENegBegin;
+
+/* RULES FOR SENTIMENT EXPANSION
+/* Expansion of sentiment scope 
+
 354;80;DECon|DERel+DEPosSentiment;+DEPosSentimentBegin|-DEPosSentimentBegin;
 355;80;DECon|DERel+DENegSentiment;+DENegSentimentBegin|-DENegSentimentBegin;
 356;80;DECon|DERelAux|DEPosSentimentBegin;+DEPosSentimentBegin|DERelAux|-DEPosSentimentBegin;
@@ -399,6 +565,9 @@
 379;80;DECon|DEGenitiv|DECon|DECon+DENegSentimentBegin;+DENegSentimentBegin|DEGenitiv|DECon|-DENegSentimentBegin;
 380;80;DECon|DEAndOrBut|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DERel|DECon;
 381;80;DECon|DEAndOrBut|DECon+DENegSentimentBegin;+DENegSentimentBegin|DERel|DECon;
+
+/* Restriction of sentiment scope
+
 382;80;DEPunctuation|DEAndOrBut;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;
 384;80;DEPunctuation|DECon;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;
 386;80;DEPunctuation|DENonRelevant:DEPosspron:DEEin:DEEiner:DEEines|DECon;DEPunctuation|*|+DEPosSentimentStop+DENegSentimentStop;
@@ -407,5 +576,11 @@
 398;80;DEPunctuation|DESubjpron|DERel;DEPunctuation|DESubjpron|+DEPosSentimentStop+DENegSentimentStop;
 400;80;DEPunctuation|DESo;DEPunctuation|+DEPosSentimentStop+DENegSentimentStop;
 402;80;DECon+^DEPosSentiment|DEAndOrBut|DERel;DECon|+DEPosSentimentStop+DENegSentimentStop|^DERel;
+
+/* Remove conflicting labels
+
 532;$;DEAndOr:DEAndOrBut+DEBeginrel;^DEBeginrel-DEAndOrBut;
+
+/* Rewrite language-specific label to general mandatory label
+
 347;$;DEPunctuation;^Punctuation;

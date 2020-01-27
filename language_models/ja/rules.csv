@@ -1,3 +1,7 @@
+
+/* ---------- PHASE 1 ----------
+/* ---------- REWRITE MANDATORY LABELS TO LANGUAGE-SPECIFIC LABELS
+
 3119;1;Punctuation;^JPPunctuation;
 3120;1;Relation;^JPRelation;
 3176;1;NonRelevant;^JPNonRelevant;
@@ -8,6 +12,10 @@
 3688;1;Katakana;^JPKatakana;
 4548;1;UDConcept;^UDConcept+JPCon;
 4549;1;UDNegation;^UDNegation+JPNegation;
+
+/* ---------- PHASE 3 ----------
+/* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
+
 4227;3;"+";JPCon;
 3368;3;SBegin|JPFurigana;*|JPNonRelevant;
 4239;3;SBegin|"の"|"どの";*|JPAttributive-JPno|Join;
@@ -113,6 +121,10 @@
 4268;3;JPAlphabet|JPSuruNoun|"せず"|"・";JPEndConcept+JPNegation-JPCon|Join|Join|+Dummy;
 4218;3;JPAlphabet|JPSuruNoun+^"対応"|"し":JPSuruVerb;JPCon|Join|JPVerb;
 4458;5;JPAttributiveNR|"人";JPAttributive|*;
+
+/* ---------- PHASE 5: PART 1 ----------
+/* ---------- Initial Processing ----------
+
 4461;5;JPna|JPshi;JPAdjVBase+JPNegation+JPHiragana+JPnashi|Join;
 4464;5;typeConcept+^JPHiragana|"っけ";JPCon|Join;
 4465;5;"っけ";Join;
@@ -3931,6 +3943,10 @@
 3653;5;JPni|JPVerbNoun+^"いい"+^"買い"+^"強い"|^JPParticleKA+^JPAdv+^JPSuffixVerb+^JPLinkV+^JPVerbNoun+^JPExpressionNR+^JPNonRelevant+^SEnd;JPParticleNI+JPEndRelation|JPVerb|+Dummy;
 4261;5;SBegin|JPAdvTime|JPVerbNoun+^JPRule289|^JPLinkV+^JPno+^JPParticleNO+^SEnd;*|^JPAdvTime|JPVerb|+Dummy;
 3856;5;JPmu_kanji_1;JPCon;
+
+/* ---------- PHASE 5: PART 2 ----------
+/* ---------- CLEANING UP HIRAGANA EXPRESSIONS BEFORE MERGE ----------
+
 4064;5;JPuchi|^JPNumber+^SEnd;JPHiragana|+Dummy;
 3797;5;JPVerb|JPka|"な";^JPVerb|JPParticleKA|JPNonRelevant;
 3759;5;JPVerbBase|JPshi|^JPHiragana+^SEnd;^JPVerb+JPEndRelation|Join|+Dummy;
@@ -3992,6 +4008,9 @@
 4489;5;JPAdvTime+JPCon+JPSeparateDate|^JPCon;-JPAdvTime-JPCon|*;
 4491;5;JPAdvTime+JPCon+JPSeparateDate|JPCon:JPSuruNoun|"の";-JPAdvTime-JPSeparateDate|*|*;
 4498;5;JPNumber:JPKatakana+JPCon|"の"|JPCon|"が":"で":"を";*|Join|Join|*;
+
+/* ---------- DISAMBIGUATION OF TIME-RELATED WORDS ----------
+
 4492;5;JPCon+JPSeparateDate|JPCon:JPSuruNoun+^JPYear|"が":"で";-JPAdvTime-JPCon|*|*;
 4490;5;JPAdvTime+JPCon+JPSeparateDate|JPCon;-JPAdvTime-JPSeparateDate|*;
 4544;5;JPCon+JPSeparateDate|JPVerbBase|JPCon|^"や";-JPSeparateDate|JPCon|JPCon|*;
@@ -4001,12 +4020,20 @@
 4488;5;JPCon+JPSeparateDate|JPCon:JPDate+^JPKatakana+^"旬"+^JPAdjNoun+^"朝";-JPSeparateDate|*;
 4497;5;JPCon+JPSeparateDate|JPCon+JPKatakana:"旬":JPAdjNoun:"朝";-JPCon|-JPAdjNoun;
 4487;5;JPAdvTime+JPSeparateDate;-JPAdvTime;
+
+/* ---------- PHASE 7 ----------
+/* ---------- Identifying Predicates ----------
+
 2752;7;JPPredPhrase+JPBeginRelation;Predicate+JPBeginRelation;
 2796;7;JPVerb+JPBeginRelation;+Predicate;
 2749;7;JPVerbBase+JPEndRelation;Predicate+JPEndRelation;
 2812;7;JPAdjVBase|Dummy|JPLinkV+JPBeginRelation|JPPunctuation;JPAdj+Object|-Dummy|JPLinkV+JPBeginRelation|JPPunctuation;
 2792;7;JPtoshita|JPPunctuation;^PrimaryRelation|JPPunctuation;
 2793;7;JPtoshita;^JPParticlePREPO;
+
+/* ---------- PHASE 10: PART 1 ----------
+/* ---------- Additional Processing of AlphaNumeric Characters and Furigana AFTER disambiguation of other entities ----------
+
 3399;10;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
 3389;10;JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join;
 3398;10;JPAlphabet|JPSingleSpace|JPCon;JPCon|Join|Join;
@@ -4023,6 +4050,10 @@
 3527;10;JPCon|"×"|JPCon;JPCon|Join|Join;
 2767;10;JPAttributive|JPCon+DateTime;JPCon+DateTime|Join;
 4538;10;SBegin|JPAdvTime|JPRule289|DateTime;*|^JPAdvTime|JPVerb|*;
+
+/* ---------- PHASE 10: PART 2 ----------
+/* ---------- Merging Hiragana characters if they have not been processed -----------
+
 4456;10;JPHiragana|JPHiragana|JPHiragana|JPHiragana|JPHiragana|JPHiragana|JPHiragana;JPCon|Join|Join|Join|Join|Join|Join;
 3831;10;JPHiragana|JPHiragana|JPHiragana|JPHiragana|JPHiragana|JPHiragana;JPCon|Join|Join|Join|Join|Join;
 3790;10;JPHiragana+^JPto|JPHiragana|JPHiragana|JPHiragana|JPHiragana;JPCon|Join|Join|Join|Join;
@@ -4055,6 +4086,9 @@
 3681;10;JPCon|JPnakaguro+^"/"|^BracketOpen+^JPAdv+^JPFurigana+^JPEndRelation+^JPNonRelevant+^JPVerb+^SEnd;JPCon|Join|+Dummy;
 3808;10;JPAdjNoun|JPnakaguro|JPCon;JPCon|Join|Join;
 3682;10;JPVerbNoun|JPnakaguro|JPCon;JPCon|Join|Join;
+
+/* ---------- Finalizing Relations and Concepts ----------
+
 2593;10;JPBeginEndRelation;JPBeginEndRelation;
 2594;10;JPBeginRelation+JPEndRelation;JPBeginEndRelation;
 2595;10;JPBeginRelation;JPBeginRelation;
@@ -4078,6 +4112,10 @@
 3939;10;"あれ"+^JPEndRelation;JPPronDemon;
 4062;10;^"で"+^"と"+^"は"+^JPComma+^SBegin|"うち";*|JPPartAdvNOUN;
 4034;10;JPchou_kanji_1|JPCon;JPCon|Join;
+
+/* ---------- PHASE 13 ----------
+/* ---------- Entity Vector Attributes ----------
+
 2771;13;JPCon|JPParticleYA|JPCon;^JPCon|+AndOr|^JPCon;
 1396;13;JPCon|JPga;+Subject-DateTime|^JPga;
 1400;13;JPCon|JPParticleGA;+Subject-DateTime|^JPParticleGA;
@@ -4158,6 +4196,10 @@
 3988;13;typeOther+^BracketOpen|"あ";+Dummy|Join;
 4045;13;"ぁ";Join;
 4047;13;"ぜ";Join;
+
+/* ---------- PHASE 20 ----------
+/* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS
+
 3121;20;JPPunctuation;^Punctuation;
 3122;20;JPRelation;^Relation;
 3177;20;JPNonRelevant;^NonRelevant;

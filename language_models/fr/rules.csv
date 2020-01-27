@@ -1,13 +1,27 @@
+
+/*Rewrite unified labels to language specific labels
+/*==================================================
+
 516;1;CapitalInitial;^FRCapitalInitial;
 517;1;CapitalAll;^FRCapitalAll;
 518;1;CapitalMixed;^FRCapitalMixed;
 519;1;Punctuation;FRPunctuation;
+
+/*Rewrite user dictionary labels
+/*==============================
+
 521;1;UDNegation;+FRNegation+FRNegBegin;
 522;1;UDPosSentiment;+FRPosSentiment+FRPosSentimentBegin;
 523;1;UDNegSentiment;+FRNegSentiment+FRNegSentimentBegin;
 524;1;UDConcept;FRCon+FRUDConcept;
 525;1;UDRelation;UDRelation+FRRelation;
 526;1;UDNonRelevant;FRNonRelevant;
+
+/* DETECT NEGATION WITH ne + 2nd NEGATION MARKER
+/* Don't mark negation in questions with inversion
+/* Note: long context needed, since inversion (with 'real' negation) can occur after certain adverbs, "Peut-être ne s'agit-il pas d'un énorme problème".
+/*       for more information, see http://forum.wordreference.com/threads/inversion-sujet-verbe-dans-la-phrase-affirmative.538175/
+
 776;20;SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;
 777;20;SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
 780;20;SBegin|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
@@ -16,10 +30,18 @@
 779;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
 782;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais|^SEnd;*|*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal|*;
 783;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;
+
+/* Special case: form of pouvoir without 'pas' etc.
+
 786;20;SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
 787;20;SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
 788;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
 789;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
+
+/* 2nd marker gets label FRAdvNeg. If no 'ne' is found, all lexreps labeled FRPas (except for 'pas' itself) get the label FRAdvNeg anyway.
+/* The words 'pas', 'plus' and 'jamais' are disambiguated further in the next phases.
+/* note: pas moins = FRPlus;-;FRAdvDegree;FRAdv
+
 640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg;
 639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg;
 638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg;
@@ -35,13 +57,22 @@
 729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*;
 731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*;
 831;20;"nulle";-FRNegWord;
+
+/* PrepAdv
+
 609;30;FRPrepAdv|FRComma;-FRPrep-FRPrepAdv|^FRComma;
 610;30;FRPrepAdv|SEnd;-FRPrep-FRPrepAdv|*;
 674;30;FRSRelAux|FRPrepAdv|FRPart;FRSRelAux|+FRAdv-FRPrepAdv|FRPart;
 653;30;FRPrepAdv;FRPrep;
+
+/* AdvCon
+
 711;30;FRIndefart:FRDefart:FRPoss:FRDemonstr|FRAdvCon;*|FRCon;
 713;30;FRAuDu:FRDe:FRMod|FRAdvCon;*|FRCon;
 712;30;FRAdvCon;^FRAdv;default: result is Adv+AdvXxx
+
+/* ADVERBS (PART 1)
+
 686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;FRAdvNR+FRAdv|Join|Join|^FRNum;"pas moins" not preceded by "ne"
 687;30;"pas"+FRPlus|"moins"|FRDe|FRCon;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" not preceded by "ne"
 688;30;FRAdvNeg|"moins"|FRDe|FRCon+^FRNum;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" preceded by "ne"
@@ -59,44 +90,92 @@
 649;30;FRAdvNeg:FRPas+^FRJamais|FRAdvManner;FRAdvNeg|+Join;
 299;30;FRAdvModal;+FRAdvCR;treat modal adverbs in the same way as time adverbs for now
 257;30;FRAdvManner;+FRAdvCR;treat adverbs expressing manner in the same way as time adverbs for now
+
+/* TIME EXPRESSIONS
+
 673;30;"il y a"|FRNum|FRTimeconcept;-FRSRel+FRAdvTime+FRAdv|+Join|+Join;
+
+/* DISAMBIGUATION RULES
+/* ====================
+/* DISAMBIGUATE THROUGH CAPITALIZATION
+
 331;40;SBegin|FRLetter;*|-FRConIfAllCap;discard capitalization of a letter at the beginning of a sentence
 670;40;FRCapitalAll|FRCapitalAll|FRCapitalAll;-FRCapitalAll|*|*;ignore capitalization when the whole sentence is in upper-case
 671;40;FRCapitalAll|FRCapitalAll|SEnd;-FRCapitalAll|-FRCapitalAll|*;ignore capitalization when the whole sentence is in upper-case
 332;40;FRConIfCap+FRCapitalInitial;FRCon+FRCapitalInitial;
 333;40;FRConIfAllCap+FRCapitalAll;FRCon;
+
+/* HANDLE PERSONAL PRONOUNS THAT ARE ATTACHED TO A VERB FORM
+
 95;40;FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel|FRPostsubjpron;FRSRel|Join;verb with -t-il etc.
 166;40;FRCon+^FRUDConcept|FRPostsubjpron;FRSRel|Join;unknown verb with -t-il etc.
 98;40;FRSRelAux|FRPostsubjpron;FRSRelAux|Join;auxiliary verb with -t-il etc.
+
+/* DISAMBIGUATE 2ND PART OF CONCEPT
+
 484;40;FRConpart1|FRSRelCon:FRSRelMod:FRSRelConMod:FRPartCon:FRPartConMod;FRCon|FRCon;
+
+/* RULES FOR SPECIFIC WORDS
+/* sans (+ disambiguate using 'sans')
+
 495;40;FRSans|FRPartConMod;FRSans|FRCon;
 708;40;FRSans|^FRInf|FRInf;FRSConj|*|^FRInf;
 430;40;FRSans;FRPrep;
+
+/* personne
+
 435;40;FRPersonne|FRNe;FRSubjpron+FRNegWord|FRNe;personne ne
 441;40;FRPersonne|FRAdv|FRNe;FRSubjpron+FRNegWord|^FRAdv|FRNe;personne ne
 436;40;FRVerb:FRSRelAux:FRPart:FRInf|FRPersonne;^FRVerb|FRObjpron+FRNegWord;personne after verb form
 439;40;FRPersonne;FRCon;default
+
+/* detect SON and TON used as nouns
+
 168;40;FRDefart:FRIndefart:FRAucun|FRPossCon;*|FRCon;article with ton or son
 633;40;FRPossCon;FRPoss;default
+
+/* moi AS A NOUN
+
 660;40;FRDefart:FRIndefart:FRPoss:FRDemonstr|"moi";*|FRCon;
+
+/* bien que
+
 631;40;SBegin|"bien"|FRQue;*|FRSConj|Join;
+
+/* près de
+
 684;40;"près de":"près dµ":"près des"|FRNum;FRAdvDegree+FRAdv|^FRNum;
+
+/* Conj3 (parce que)
+
 797;40;FRVerb:FRPart|FRSConj3;*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context
 819;40;FRAdvNeg|FRPartCon:FRPartConMod:FRPartMod|FRSConj3;*|*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context, extremely low-frequent
+
+/* en plus (d..), plus d'un(e)
+
 810;40;"en"|"plus"|FRDe|FRNum;*|FRMod|Join|*;
 811;40;typeConcept|"en"|"plus"|SEnd;*|FRCon|Join|*;
 812;40;"en"|"plus"|FRDe:FRDes:"du";FRPrep|Join|Join;
 813;40;"en"|"plus";FRAdv+FRAdvNR|Join;
 814;40;FRPlus|FRDe|FRIndefart;FRMod|Join|FRNum;
+
+/* DISAMBIGUATION AMBIGUOUS AUXILIARIES
+
 101;40;FRDe|FRSRelCon;FRDe|FRCon;disambiguate 'avions' before rules for FRSRelAux can fire
 184;40;FRPas:FRAdvNeg|FREte;FRAdvNeg|FRSRelAux;negation with été
 667;40;FRPrep+^FRSRel|FRDefart|FREst;^FRPrep|+FRDefart|^FRCon-FRSRelAux;
 669;40;FRDefart|FREst|FRDe|FRCapitalInitial;FRDefart|^FRCon-FRSRelAux|FRPrep|^FRCapitalInitial;very low-frequent
 668;40;FRSubjpron:FRSubjpron2|FRDefart|FREst;*|FRDefart|FRSRelAux;
+
+/* beaucoup AND peu
+
 604;40;FRBeaucoup|FRDe|FRCon:FRPart:FRPartCon:FRPartConMod;FRMod|Join|FRCon;
 611;40;FRBeaucoup|FRPartConMod;FRMod|+Join;
 606;40;FRBeaucoup|FRVerb:FRSRelAux;FRQuantpron|*;
 605;40;FRBeaucoup;FRAdv+FRAdvDegree;default rule
+
+/* ADVERBS
+
 307;40;FRAdvDegree|FRSRelMod:FRSRelConMod;FRCon|FRCon;adverb of degree belongs to adjective
 309;40;FRSRelAux|FRAdvDegree|FRCon:FRPPart;FRSRelAux|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary
 289;40;FRAdvDegree|FRPPart;FRCon|FRCon;adverb of degree before present participle
@@ -113,6 +192,9 @@
 293;40;FRPrep|FRAdvCR|FRCon;FRPrep|FRMod|FRCon;
 479;40;FRPrep|FRAdvCR|FRNum;FRPrep|FRMod|FRCon;adverb modifying a number, low-frequent since AdvDegree is covered by r481
 650;40;FRAdvCR;+FRAdv;
+
+/* INFCON
+
 657;40;FRIndefart:FRPoss:FRDemonstr:FRMod|FRInfCon;*|FRCon;
 658;40;FRDefart|FRInfCon+^FRAvoir;^FRDefart|FRCon;
 666;40;FRAuDu|FRInfCon;^FRAuDu|FRCon;
@@ -124,17 +206,27 @@
 1;40;FRSRelAux|.FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRelAux|*|FRSRel;auxiliary with met participle
 53;40;FRSRelAux|FRSRel|FRPart;FRSRelAux|^FRSRel|FRSRel;remaining cases
 597;40;FRSRelAux|FRSubjpron|FRPart:FRPartCon:FRPartConMod;FRSRelAux|FRSubjpron|FRSRel;
+
+/* PAST PARTICIPLES WITH NEGATION
+
 83;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|FRSRel;auxiliary with negation and potential participle
 103;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|*|FRSRel;auxiliary with negation, adverb and potential participle
 79;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPart:FRPartCon:FRPartConMod;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;adverb between verb and negation
 432;40;FRIndefart|FRCon|FRJamais|FRPart:FRPartCon:FRPartConMod;FRIndefart|FRCon|FRPas|FRCon;jamais + participle as an attribute to a noun
 735;40;FRIndefart|FRCon|FRJamais|FRSRel;FRIndefart|FRCon|FRAdvNeg|^FRSRel;jamais modifying a verb
 323;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg;FRSRelAux|^FRAdv|FRAdvNeg;adverb between verb and negation
+
+/* OTHER STRUCTURES WITH POSSIBLE NEGATION MARKERS
+/* Negation marker with negation
+
 76;40;FRSRel|FRAdv|FRPas;FRSRel|^FRAdv|FRAdvNeg;adverb between verb and negation
 16;40;FRNe|FRSRelAux:FRSRelCon:FRSRelConMod:FRSRelMod:FRPPart;FRNe|FRSRel;ne preceeds verb
 173;40;FRNe|FRObjpron|FRSRelCon;FRNe|FRObjpron|FRSRel;
 691;40;FRNe|FRDefart:FRObjpron|FRPPart;FRNe|*|FRSRel;ne with object and present participle
 734;40;FRPas:FRAdvNeg|FRDe|"autre":"autres";FRAdvNeg|Join|FRAutre;
+
+/* Negation marker with negation
+
 204;40;FRNe|FRDefart|FRSRel|FRAdvNeg;^FRNe|FRObjpron|FRSRel|FRAdvNeg;
 758;40;FRSRel|FRNon|^FRCon+^FRComma+^SEnd;FRSRel|FRAdvNeg|*;variant of r3
 759;40;FRNon|typeRelation+^typeConcept;FRAdvNeg|*;
@@ -142,20 +234,39 @@
 3;40;FRSRel|FRPas+^FRNon;FRSRel|FRAdvNeg;verb without 'ne' but with negation
 4;40;FRSRelAux|FRPas+^FRJamais+^FRNon;FRSRel|FRAdvNeg;
 826;40;FRAdv|FRPas|^typeConcept+^SEnd;*|FRAdvNeg|*;
+
+/* FURTHER DISAMBIGUATION OF PAST PARTICIPLES
+
 51;40;FRTres|FRPart;FRCon|FRCon;très must be followed by an adjective
 632;40;FRAndOrBut|FRAdvCR|FRPart;^FRAndOrBut|FRMod|FRCon;
 160;40;FRDefart:FRIndefart:FRPoss:FRDes:FRDe|FRPart:FRPartCon:FRPartConMod;*|FRCon;
 161;40;FRPrep|FRPart:FRPartCon;FRPrep|FRCon;(tested PartConMod, decided not to add it)
 663;40;FRNum:FRQuantpron|FRPartCon:FRPartConMod;*|FRCon;
 662;40;FRPart:FRPartCon:FRPartConMod|"par";FRSRel|^FRPrep;
+
+/* JOIN REFLEXIVE PRONOUN AND VERB
+
 21;40;FRRefl|FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel;FRSRel|+Join;merge reflexive pronoun with verb
 318;40;FRRefl|FRInf;FRInf|+Join;infinitive is merged with reflexive pronoun
 20;40;FRRefl|FRSRelAux;FRSRel|FRSRelAux;don't merge se with auxiliary verb
+
+/* DISAMBIGUATION OF FRSRelCon
+/* to FRSRel
+
 661;40;FRNe|FRDefart|FRSRelCon;^FRNe|FRObjpron|FRSRel;
+
+/* to FRSRel
+
 174;40;FRSubjpron|FRObjpron|FRSRelCon;FRSubjpron|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
 172;40;FRSubjpron2|FRObjpron|FRSRelCon;FRSubjpron2|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
+
+/* to FRCon
+
 28;40;FRDefart:FRIndefart:FRAucun:FRPoss:FRDes:FRPrep:FRMod:FRQuantpron|FRSRelCon;*|FRCon;
 514;40;FRSRelCon+FRCapitalInitial;FRCon;
+
+/* to FRSRel
+
 25;40;FRSRelCon|FRIndefart:FRAucun:FRDefart:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
 59;40;FRSRelCon|FRPas:FRAdvNeg;FRSRel|FRAdvNeg;
 106;40;FRSRelCon|FRDe|FRInf;FRSRel|FRSRel|FRInf;
@@ -163,9 +274,16 @@
 52;40;FRSConj:FRSRelconj|FRSRelCon;*|FRSRel;after conjunction
 515;40;FRSRelCon+FRCapitalAll;FRCon;treat capitalized RelCons as Con, place this rule after disambiguation rules because if the whole text is capaitalized, the rules must get priority
 475;40;FRCapitalInitial:FRCapitalMixed+FRCon|FRSRelCon+^FRCapitalInitial;^FRCon|FRSRel;detect verb after name
+
+/* THE WORD 'plus' WITH AN ADJECTIVE AFTER A NOUN
+
 239;40;FRCon|FRPlus|FRCon:FRPart;FRCon|FRMod|FRCon;'plus' becomes part of the concept after a noun
 223;40;FRCon|FRAdv|FRPlus|FRCon:FRPart;FRCon|FRMod|FRMod|FRCon;'plus' becomes part of the concept after a noun
 225;40;FRCon|FRPlus|FRDe|FRCon;FREnd|FRMod|FRMod|FRCon;'plus de' after a noun starts a new concept
+
+/* FURTHER DISAMBIGUATION OF PAST PARTICIPLES
+/* These rules must come after 239 and 223 (noun - plus - participle).
+
 675;40;FRAdvDegree|FRPartMod;FRCon|FRCon;
 483;40;FRCon|FRPartMod|FRDes:"du";FRCon|FRCon|FRPrep;noun with adjective before des or du
 683;40;FRMod|FRPart;*|FRCon;
@@ -176,16 +294,34 @@
 157;40;FRPart|FRDefart:FRAucun:FRSubjpron2;FRSRel|*;participle becomes relation before article, aucun, celui etc.
 682;40;FRPart+^FRPartMod|FRCon;FRSRel|^FRCon;Part is probably a relation before a concept
 104;40;FRComma|FRPart;FRComma|FRSRel;participle after comma is probably relation
+
+/* DISAMBIGUATION OF FRSRelMod
+
 46;40;FRSRelMod|FRDefart:FRIndefart:FRAdv:FRPoss:FRMod;FRSRel|*;
+
+/* DISAMBIGUATION OF FRSRelConMod
+
 391;40;FRSRelconj|FRSRelConMod;FRSRelconj|FRSRel;
 774;40;^FRDefart:FRIndefart+^SBegin|FRSRelConMod|FRDefart:FRIndefart|FRCon;*|FRSRel|*|^FRCon;
 350;40;FRSRelConMod;FRCon;default
+
+/* DEFAULTS
+
 23;40;FRPartCon;FRCon;default
 22;40;FRSRelCon;FRCon;default
+
+/* des BETWEEN CONCEPTS
+
 114;40;FRCon|FRDes|FRCon:FRNum;^FRCon|FRPrep|*;
+
+/* MISCELLANEOUS
+
 171;40;FRPrep|FRObjpron|FRInf;FRSConj|FRObjpron|FRInf;'pour' and 'à' with pronoun and infinitive
 340;40;FRSRelAux;FRSRel+FRVerb;default rewriting for auxiliary verbs after the last rule that applies specifically to FRSRelAux
 143;40;FRPPart|FRInf;FRSRel|FRInf;present participle followed by infinitive
+
+/* De
+
 767;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|^FRSConj+^SEnd;*|FRSConj+FRSConj2|FRInf|*;refining r33
 773;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|FRSConj;*|*|FRInf|FRSConj+FRSConj2;refining r33 and 767
 33;40;FRDe|FRInf;FRSConj|FRInf;'de' with infinitive
@@ -198,6 +334,9 @@
 121;40;FRDe|FRIndefart:FRAucun:FRMod:FRQuantpron;FRPrep|*;'d un(e)' between concepts
 575;40;typeConcept|FRDe|FRIndefpron;*|FRPrep|FRIndefpron;
 600;40;FRQuantpron|FRDe;FRQuantpron|FRPrep;
+
+/* DISAMBIGUATION OF PRESENT PARTICIPLES
+
 589;40;FREn|FRDefart:FREn:FRRefl|FRPPart;FRSConj|*|FRSRel;
 117;40;FRDefart:FRIndefart:FRAucun:FRPoss+^FRObjpron|FRPPart;*|FRCon;after article or FRAucun
 178;40;FREn|FRDatpron:FRObjpron|FRPPart;FRPrep|FRNonconcept|FRSRel;en lui/me/vous etc., has to come before r40
@@ -208,25 +347,46 @@
 66;40;FRRefl|FRPPart;FRSRel|Join;
 118;40;FRPrep|FRPPart;FRPrep|FRCon;
 116;40;FRPPart|FRDes;FRSRel|FRDes;
+
+/* MISCELLANEOUS
+
 70;40;FRPrep|FRAvoir|FRSRel;FRPrep|FRSRel|FRSRel;'avoir' between preposition and past participle (labeled as Rel by now)
 746;40;typeRelation|FRPrep|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
 747;40;^typeRelation+^SBegin|FRPrep+^"à"|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
 44;40;FRCon|FRDefart:FRIndefart:FRAucun:FRPoss;FREnd|*;detect concept boundaries
 113;40;FRDe|FRDefart;FRDe|FRNonconcept;must come after r117
 122;40;FRDe|FRPoss;FRPrep|FRPoss;
+
+/* INFINITIVES
+
 142;40;FRInf|FRDe;FRInf|FRPrep;
 695;40;FRPas|FRInf;FRAdvNeg|FRInf;
 762;40;"pour"|FRInf;FRSConj+FRSConj2|FRInf;add Conj2 for attribute expansion
 655;40;FRInf;FRInf+FRSRel;this rule implicitly deletes the label Avoir
 127;40;FRRefl|FRSRel;FRSRel|FRSRel;'se' becomes a relation when followed by an infinitive that has become relation
+
+/* PERSONAL PRONOUNS: SPECIAL CASES
+
 150;40;FRSubjpron2|FRDes:FRDe;FRSubjpron2|FRPrep;
 177;40;FRDe|FRDatpron;FRPrep|FRObjpron;
+
+/* Un(e) AS A NUMERAL (CONCEPT)
+
 342;40;FRIndefart|FRAndOrBut:FRPrep:FRSRel:FRComma:SEnd;FRCon|*;
 343;40;FRIndefart|FRPas;FRCon|FRCon;
 344;40;FRIndefart|FRDes;FRCon|FRCon;
+
+/* MISCELLANEOUS
+
 376;40;FRPrep;+FRSRel;
 50;40;FRPartMod;FRCon;default to implicitly delete conflicting labels
+
+/* plus AS A RELATION
+
 235;40;FRPlus|FRIndefart:FRDefart:FRSubjpron;FRSRel|*;plus as a (mathematical) relation or as a conjunction
+
+/* ADVERBS
+
 73;40;FRCon:"tout"|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
 72;40;FRMod|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
 74;40;FRCon|FRAdv|FRMod;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
@@ -238,8 +398,14 @@
 303;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;relevant adverb becomes part of concept between comma and concept
 306;40;FRComma|FRAdvCR|FRSRel;FRComma|^FRAdvCR|FRSRel;relevant adverb becomes part of relation between comma and relation
 327;40;FRAdvNR|FRDe;FRAdvNR|FRPrep;de is mostly a relation after a NonRelevant adverb
+
+/* de soi
+
 602;40;FRCon|"de"|"soi";^FRCon|Join|Join;merge 'de soi' with preceding concept
 603;40;^typeConcept+^SBegin|"de"|"soi";*|FRAdvCR+FRAdv+FRAdvManner|Join;merge 'de soi', but not the preceding lexrep in other cases
+
+/* DEFAULTS ETC.
+
 351;40;FRPartConMod;FRCon;default
 648;40;FRNum+FRCon;FRNum;remove Con-label
 352;40;FRIndefart;+FRNonconcept;don't remove Indefart label: needed later
@@ -276,6 +442,10 @@
 716;40;^typeConcept+^FRPas+^FRBegin+^SBegin|FRDe|typeConcept;*|FRPrep|*;
 717;40;FRDe|"autres";FRAutre|+Join;
 732;40;FRPrep|"lequel":"laquelle":"lesquels":"lesquelles";FRSConj+FRSConj2|+Join;
+
+/* RULES WITH REGARD TO NEGATION ATTRIBUTES
+/* Assign negation attribute to labels
+
 426;40;SBegin:FRPunctuation|FRJamais;*|+FRNegation;
 428;40;FRJamais;FRAdvTemp+FRTime-FRPas-FRAdvNeg;remove label Pas
 690;40;FRPas|FRDe;FRBegin+FRNegation|*;
@@ -291,6 +461,12 @@
 706;40;FRRien|FRDe|FRCon:FRPlus;FRCon+FRNegWord|*|*;
 434;40;FRRien;FRSubjpron+FRObjpron+FRNegWord;
 757;40;FRCon|"non"|FRCon;*|-FRNegation|*;remove negation attribute within concepts, e.g. organisation non gouvernementale
+
+/* ADVERBS
+/* =======
+/* Give adverbs their label type and make sure they keep the label Adv for later phases.
+/* (FRAdv and FRAdvCR are not defined in the last phase -> no risk for conflicting labels.)
+
 634;50;FRDe|FRAdvTime;FRPrep|FRAdvTime+FRAdv;
 677;50;"ce"|FRDay|^typeConcept;FRAdvTime|+Join|*;
 833;50;^FRDaypart+^SBegin|FRDe|FRDay;*|FRPrep|*;
@@ -309,6 +485,11 @@
 644;50;FRAdvManner+FRAdv|FRCon:FRPart:FREnd:FRSRelMod;FRMod|*;
 645;50;FRAdvManner+FRAdv;FRAdv+FRAdvManner;assure correct labels
 676;50;FRAdvDegree|typeConcept+^FRDe;FRCon|*;
+
+/* PATHRELEVANT ENTITIES
+/* =====================
+/* même(s), autre(s), other pronouns
+
 614;50;"même"+FRSConj;FRSConj;(Conj as a result of r613)
 616;50;"même"+FRMod;FRAutre;
 615;50;SBegin|"même":"mêmes"|FRCon;*|FRAutre|FRCon;
@@ -329,6 +510,10 @@
 823;50;FRNonconcept|FRInf;FRObjpron|*;
 665;50;FRNonconcept|typeRelation;FRSubjpron+FRObjpron-FRIndefart|*;
 601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;very low frequent, mostly covered by other rules 
+
+/* DETECT ENUMERATIONS
+/* ===================
+
 766;60;"de"+^FRList|*FRCon|FRAndOr|"de"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 396;60;FRCon|FRDe|FRCon+^"non";^FRCon|+Join|+Join;merge concepts containing de, keep negation attribute
 768;60;FRIndefart|*FRCon|FRComma|FRIndefart|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
@@ -342,7 +527,15 @@
 765;60;"des"+^FRList|*FRCon|FRAndOr|"des"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 772;60;"de":"dµ"|FRSRel|FRAndOr|"de":"dµ"|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList;
 795;60;"de"|FRObjpron|FRSRel|FRAndOr|"de"|FRObjpron|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/* NEGATION
+/* ========
+/* Remove negation attribute from 'ne explétif'
+
 721;70;FRIgnoreNegation|*{1,3}^FRNegation|"ne":"n"+FRNegation;*|*|-FRNegation;very low-frequent
+
+/* Expansion of negation to the left-hand part of the path
+
 361;70;FRNegation;+FRNegBegin;
 741;70;FRSConj+^FRNegation|FRNegation+^FRAucun;+FRBeginrel|*;
 737;70;FRSRel+^FRNegation|FRNe+FRNegation;*|+FRBeginrel;
@@ -361,6 +554,9 @@
 775;70;FRCondition|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*;
 794;70;FRCondition|^FRNegStop|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*|*;
 800;70;*FRList+^FRNegBegin+^FRNegStop|FRList+FRNegBegin;+FRNegBegin|*;
+
+/* Stop negation in the right-hand part of the path
+
 710;70;FRPrep+FRNegation|typeConcept|typeRelation+^FRPrep+^"et"+^FRNegation+^FRNegBegin;*|*|+FRNegStop;
 362;70;FRPunctuation|FRAndOrBut;FRPunctuation|+FRNegStop;
 363;70;FRPunctuation+^FRList|*FRCon;FRPunctuation|+FRNegStop;
@@ -402,11 +598,22 @@
 804;70;FRQue|*^FRVerb+^FRSRel+^FRNegation+^SEnd|SEnd;FRSRel|*|*;
 803;70;FRNegation|*FRCon|FRQue;*|*|+FRNegStop;
 830;70;FRCon|FRSubjpron+^FRNegWord+^"y";*|+FRNegStop;
+
+/* Cleaning
+
 740;70;^typeRelation+^SBegin|FRAndOrBut|FRBeginrel;*|*|-FRBeginrel;
 386;70;FRNegation+FRNegStop;-FRNegStop;
 403;70;FRNegBegin;-FRNegStop;
+
+/* SENTIMENT
+/* =========
+/* Expansion of sentiment to the left-hand part of the path
+
 527;80;FRSRel|FRPosSentiment;+FRPosSentimentBegin|^FRPosSentiment;
 528;80;FRSRel|FRNegSentiment;+FRNegSentimentBegin|^FRNegSentiment;
+
+/* Stop sentiment in the right-hand part of the path
+
 806;80;FRPunctuation|typeRelation;*|+FRPosSentimentStop+FRNegSentimentStop;
 531;80;FRPunctuation|*FRCon;FRPunctuation|+FRPosSentimentStop;
 532;80;FRPunctuation|*FRCon;FRPunctuation|+FRNegSentimentStop;
@@ -426,10 +633,18 @@
 562;80;FRAndOrBut|FRNonconcept:FRIndefart:FRPunctuation:FRSubjpron;+FRNegSentimentStop|*;
 567;80;FRCon|FRAndOrBut|FRSRel;*|+FRPosSentimentStop|*;
 568;80;FRCon|FRAndOrBut|FRSRel;*|+FRNegSentimentStop|*;
+
+/* Clean-up conflicting labels
+/*============================
+
 703;90;FRSConj+FRSConj2;-FRSConj2;default to avoid conflicting labels
 705;90;FRSConj2+FRSRel;-FRSConj2;default to avoid conflicting labels
 742;90;FRBeginrel|FRBeginrel;^FRBeginrel|-FRBeginrel;
 738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase)
 718;$;FRAdv+FRAdvManner:FRAdvDegree:FRAdvTime:FRAdvModal;-FRAdv;
 719;$;FRAdv+FRAdvTemp:FRAdvLoc:FRMod;-FRAdv;
+
+/* Rewrite language specific labels to unified labels
+/*===================================================
+
 520;$;FRPunctuation;Punctuation;

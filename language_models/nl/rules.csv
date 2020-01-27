@@ -1,3 +1,7 @@
+
+/*============================================================
+/* Rewrite mandatory labels to language-specific labels
+
 428;1;Punctuation;^NLPunctuation;
 429;1;CapitalInitial;^NLCapitalInitial;
 430;1;CapitalMixed;^NLCapitalMixed;
@@ -8,6 +12,9 @@
 436;1;UDConcept;NLUDConcept+NLCon;
 437;1;UDRelation;NLUDRelation+NLRel;
 438;1;UDNonRelevant;NonRelevant;
+
+/* =================================
+
 1217;30;"ca."|NLNum;NLAdvDegree|*;
 1083;30;"op"|NLNum:"een"|"na";NLNum-NLPrep-NLPrep2|+Join-NLArt-NLEen|+Join-NLPrep-NLPrep2;
 578;30;NLDay|NLNum|NLMonth|NLJaar;NLAdvTime|Join|Join|Join;
@@ -28,21 +35,40 @@
 394;30;NLAdvDegree|NLEnd+^NLHyphen;NLAdvTime|Join;
 1216;30;NLNum+^NLJaar|NLNum|NLEnd+^NLHyphen;NLAdvTime|Join|Join;
 1214;30;NLNum|NLEnd+^NLHyphen;NLAdvTime|Join;
+
+/*===============================
+/* Preparation
+
 359;40;":";+NLPunctuation;Punctuation is not assigned automatically since ":" is used in rules
 488;40;NLNum|NLProcent;*|Join;
+
+/* Disambiguate the words WAAR, WEL
+
 1088;40;"niet"|"waar"|NLSubjpron:NLArt:"ze";NLRel|NLOndvw|*;
 1089;40;"niet"+^NLRel|"waar";*|NLAttradj;
 1095;40;NLLinkingverb|"waar"|"dat";*|NLAttradj|NLOndvw;
 1277;40;"waar"|.NLLinkingverb|NLPunctuation:SEnd;NLAttradj|*|*;
 1099;40;"maar":NLComma|"wel";*|NLRAdv;
+
+/* Disambiguate the word GEHEEL: adverb of degree OR noun
+
 1145;40;NLArt:"één":"als"|.NLAdvDegree:NLAdj:NLRelAdj:NLAttradj+^"geheel"|"geheel";*|NLAttradj|NLCon;
 1146;40;NLPrep|NLPoss:"zijn":"haar":NLDempron|"geheel";*|*|NLCon;
+
+/* Negation: Join negation markers
+
 1173;40;"niet-"|NLPart:NLAdj:NLConAttradj:NLRelAdj:NLInf:NLRelConAdj;NLAttradj+NLNegWord|+Join;
 736;40;NLAdvDegree|NLNooit;NLNooit+NLNiet|+Join;
 694;40;NLAdvDegree+^"genoeg"|NLNiet;NLNiet|+Join;
 695;40;"nog"|NLNiet;NLNiet|+Join;
 737;40;NLAdvDegree|NLSubjpron+NLObjpron;NLSubjpron+NLObjpron|+Join;
+
+/* Join 'genoeg'
+
 1124;40;NLAdj|"genoeg";NLAdj|+Join;
+
+/* Disambiguate through capitalization
+
 195;40;NLVan+NLCapitalInitial|NLCapitalInitial;NLCon+NLCapitalInitial|Join;for names with 'Van'
 196;40;NLVan+NLCapitalInitial|NLDe|NLCapitalInitial;NLCon+NLCapitalInitial|Join|Join;for names with 'Van De' or 'Van de'
 482;40;NLFirstname+NLCapitalInitial|NLDe:NLVan|NLCapitalInitial;NLCon+NLCapitalInitial|Join|Join;for names with 'van'
@@ -57,6 +83,9 @@
 198;40;NLConIfAllCap+NLCapitalAll;NLCon;
 200;40;NLConIfCap+NLCapitalInitial;NLCon+NLCapitalInitial;
 483;40;NLFirstname;-NLFirstname;avoid conflicting labels
+
+/* Disambiguate ambiguous past participle OR conjugated verb (OR infinitive)
+
 1132;40;"te"|NLPartVerbInf;*|NLVerb+NLInf;
 1298;40;NLDie:NLRelConModOth|NLZe:NLJe:NLSubjpron+NLPlural|NLPartVerbInf|^NLRelAux;*|*|NLVerb|*;
 1297;40;NLmAux|.^NLInf+^NLInfCon+^NLPartVerbInf+^NLRelAux+^NLAux+^NLOndvw|NLPartVerbInf;*|*|NLInf;
@@ -68,16 +97,28 @@
 1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep;*|*|NLAttradj|*;
 1290;40;SBegin|.^NLRelAux+^NLLinkingverb+^NLAux+^NLmAux+^NLPartVerb|NLPartVerb+^NLRelCon;*|*|NLVerb;
 1034;40;NLPartVerb+^NLRelCon;NLPart;
+
+/* Idioms
+
 1052;40;^NLGeen:NLArt:NLAttradj:NLConAttradj:NLPoss|"gebruik":"plaats":"baat"|NLmAux|NLInf;*|NLVerb|*|*;
+
+/* Disambiguate the word JE: possessive OR personal pronoun
+
 339;40;NLStemCon|NLJe;NLVerb|NLSubjpron;
 129;40;NLJe|NLJe;NLSubjpron|NLPoss;
 2;40;NLJe|NLArt:NLEr:NLPrep:NLVerb:NLmAux:NLRelConModOth;NLSubjpron|*;
 1365;40;NLPrep+^NLOndvw+^NLConj|NLJe|NLAttradj:NLCon;*|NLPoss|*;
+
+/* Disambiguate the words ONS and HUN: possessive or personal pronouns
+
 934;40;NLSubjpron|NLPoss+NLObjpron|NLNiet:NLVerb:NLPartrel;*|NLObjpron|*;
 1061;40;NLPoss+NLObjpron|NLPart:NLRelAdj:NLAttradj|NLAndOr|NLAttradj|NLCon:NLAdjCon;NLPoss|NLAttradj|*|*|*;
 1060;40;NLPoss+NLObjpron|NLPart:NLRelAdj:NLAttradj|NLCon:NLAdjCon;NLPoss|NLAttradj|*;
 135;40;NLPoss+NLObjpron|NLCon;NLPoss|*;
 136;40;NLPoss|NLAttradj;NLPoss|NLAttradj;
+
+/* Disambiguate the word BIJ: preposition or noun
+
 310;40;NLBij|NLDe|NLCon|NLTe|NLInf:NLInfCon|NLCon;NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLCon;
 265;40;NLArt|NLBij|NLArt|NLCon|NLPart;*|NLPrep|*|*|*;
 312;40;NLArt|NLBij|NLArt|NLRelCon|NLPart;*|NLPrep|*|NLCon|*;
@@ -85,6 +126,9 @@
 313;40;NLArt|NLBij|NLArt|NLRelCon|NLRelAdj;*|NLAttradj|NLAttradj|NLCon|NLAttradj;
 10;40;NLDe:NLEen:NLAttradj|NLBij;*|NLCon;
 15;40;NLBij;NLPrep;
+
+/* Disambiguate some other specific words
+
 1326;40;"zowel"|*^"als"|"als";*|*|NLAndOrBut;
 16;40;NLPoss:NLArt:NLPrep+^NLPrep2|NLWilde;*|NLAttradj;
 19;40;NLWilde;NLVerb+NLmAux;
@@ -105,6 +149,9 @@
 1302;40;SBegin:NLOndvw|*^NLVerb+^NLLinkingverb+^NLRelCon+^NLNiet+^NLGeen+^NLPunctuation+^NLHyphen+^NLMaar|NLMaar|^NLEr+^NLNiet+^NLGeen;*|*|NLRAdv|*;
 1304;40;NLOndvw:SBegin|NLMaar|^NLEr+^NLNiet+^NLGeen;*|NLAdvStruct|*;
 953;40;"in"|"het"|"niet"|SEnd:NLComma:NLPrep;*|NLVerb|Join|*;
+
+/* Disambiguate the word ZIJN: possessive pronoun OR copula
+
 257;40;SBegin|NLEr|NLZijn|NLInfCon;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|NLCon;
 258;40;SBegin|NLOndvw:NLVerb|NLZijn;*|*|NLPoss;
 256;40;SBegin|^NLPrep+^NLAndOrBut|NLZijn;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf;
@@ -123,16 +170,25 @@
 668;40;NLZijn|NLAdvTime:NLEnd:NLDay:NLWeek:NLMonth;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 1070;40;NLRAdv|NLZijn|^typeConcept;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 1253;40;NLZijn|NLAndOrBut|^NLPoss;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|*;
+
+/* Disambiguate the word GEZIEN: participle or preposition
+
 1143;40;SBegin|"gezien";*|NLPrep;
 1142;40;^NLPart|NLAndOrBut:NLComma|"gezien";*|*|NLOndvw;
 1144;40;"gezien"+^NLPrep|"zijn"|^NLArt:NLSubjpron:NLZe;*|NLPoss|*;
 1141;40;"gezien"+^NLPrep|NLArt;NLOndvw|*;
+
+/* Disambiguate the word MEER: noun or adverb
+
 318;40;NLHet|NLMeer|NLZijn;*|NLCon|NLRelAux+NLAux+NLLinkingverb+NLVerb;
 289;40;NLMeer|NLZijn;NLRAdv|NLRelAux+NLAux+NLLinkingverb+NLVerb;
 351;40;NLArt|NLMeer|NLRelAdj|NLCon;*|NLAttradj|NLAttradj|NLCon;
 352;40;NLArt|NLMeer|NLRelAdj+^NLPart;*|NLCon|NLVerb;
 1062;40;"niet"|"veel"|*NLAttradj:NLCon|"meer";*|*|*|NLCon;
 1147;40;"geen"|.NLAdj:NLAttradj|NLCon:"geheel"|"meer";*|NLAttradj|NLCon|NLCon;
+
+/* Disambiguate the words NU, EENS, TELKENS, TOEN: adverb of time or conjunction
+
 729;40;"toen"|NLArt:NLPoss:NLCon;NLOndvw|*;
 608;40;SBegin:NLPart|NLAdvTempConj|typeConcept;*|NLOndvw|*;
 609;40;SBegin|NLAdvTempConj|NLArt:NLDit;*|NLOndvw|*;
@@ -142,7 +198,13 @@
 1239;40;NLPart|NLAdvTempConj|NLPrep;*|NLOndvw|*;
 611;40;NLAdvTempConj;-NLAdvTempConj;
 1008;40;SBegin:NLPunctuation|NLAdj|NLOndvw;*|NLOndvw|+Join;
+
+/* Disambiguate the words DAN WEL
+
 1013;40;NLAdj:NLAttradj|"dan wel"|NLAdj:NLAttradj;*|NLConj|*;
+
+/* Disambiguate the words NIET ALLEEN, ALLEEN, ENKEL
+
 239;40;NLNiet|"alleen"|SEnd:NLPunctuation;*|NLAdj|*;
 977;40;"niet enkel":"niet enkel en alleen"|*^"maar ook"+^"maar tevens"+^"maar eveneens"+^"maar"|"maar ook":"maar tevens":"maar eveneens":"maar";NLRAdv-NLNegation-NLNegBegin|*|*;
 973;40;NLNiet|"alleen"+^NLAdj|*^"maar ook"+^"maar tevens"+^"maar eveneens"+^"maar"|"maar ook":"maar tevens":"maar eveneens":"maar";NLRAdv-NLNegation-NLNegBegin|NLRAdv|*|*;
@@ -157,15 +219,27 @@
 859;40;NLNooit|NLAdj|NLPrep;*|NLRAdv|*;
 505;40;NLPoss:NLAttradj|"enkel";*|NLCon;
 507;40;NLDe:NLEen|NLPart|"enkel";*|NLAttradj|NLCon;
+
+/* Disambiguate indefinite pronoun ANDERE(N)
+
 515;40;NLNum|NLAnderen;*|NLCon;
 516;40;NLDe|NLAnderen;NLSubjpron+NLObjpron|Join;
 517;40;NLMeasure|NLAnderen;*|NLCon;
 518;40;NLAnderen;NLSubjpron+NLObjpron;
 525;40;"onder"|"andere"|^NLCon+^SEnd;NLAdvStruct|Join|*;
+
+/* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
+
 1196;40;"bepaalde"|NLConj:NLPoss:NLArt:"haar":"dat";NLVerb|*;
 1199;40;NLNum|"bepaalde";*|NLCon;
 1200;40;NLArt|.NLAdvTemp|"bepaalde"|^NLAttradj:NLConAttradj:NLCon:NLRelCon;*|*|NLAttradj|*;
+
+/* Disambiguate the words WELKE ... OOK
+
 1140;40;"welke":"welk"|.NLAdj:NLAttradj:NLConAttradj:NLSubjpron|NLCon|"ook";NLSubjpron+NLObjpron|*|*|NLSubjpron+NLObjpron;
+
+/* Disambiguate the words NET, PAS: adverb of time or noun
+
 321;40;NLAdvTempCon|NLPart;NLPart|+Join;
 326;40;NLPrep|NLArt|NLAdvTempCon;*|*|NLCon;
 322;40;NLPrep:NLVerb:NLRelAdj|NLPoss|NLAdvTempCon;*|*|NLCon;
@@ -174,6 +248,9 @@
 1188;40;NLAdvTempCon|NLAdvStruct;NLAdvStruct|+Join;
 1185;40;NLAdvTempCon|NLPrep;NLPrep|+Join;
 319;40;NLAdvTempCon;NLAdvTemp;
+
+/* Disambiguate the word ZO
+
 382;40;NLZo|^NLZo|"mogelijk";NLAdj|+Join|Join;
 389;40;NLZo|NLAdj;NLAdvDegree|NLAdj+NLWithZo;
 390;40;NLOm|NLZo|^NLPart+^NLTe+^SEnd;*|NLAdvStruct|*;
@@ -187,16 +264,31 @@
 81;40;"zolang"|NLArt:NLEr:NLSubjpron:NLJe:NLZe:NLDempron;NLOndvw|*;
 427;40;NLAdvDegree|NLAdvTime;NLAdvTime|+Join;
 576;40;NLAdvDegree:"iets"|NLAdvTemp;NLAdvTemp|+Join;
+
+/* Disambiguate ZOALS: comparison or explanatory
+
 1283;40;NLZoals|NLSubjpron:NLEr;NLConj|*;
 1285;40;NLZoals|NLHet|NLVerb:NLmAux:NLAux:NLRelAux+^NLInf;NLConj|*|*;
 1284;40;NLZoals;NLRel;
+
+/* Disambiguate the words KAN, WIL: auxiliary verb or noun
+
 78;40;NLDe|NLAuxCon;*|NLCon;
 80;40;NLAuxCon;NLmAux+NLVerb;
+
+/* Disambiguate the word WAS: (linking) verb or noun
+
 77;40;NLDe|NLRelAuxCon;*|NLCon;
 79;40;NLRelAuxCon;NLRelAux+NLLinkingverb;
+
+/* Linking verbs
+
 1128;40;NLmAux|"worden"|NLPart;*|-NLLinkingverb|*;
 1111;40;NLmAux|NLLinkingverb|^NLPart;+NLLinkingverb|*|*;
 1046;40;NLmAux|NLZijn|typeRelation+^NLPart;+NLLinkingverb|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+
+/* Disambiguate the word DAT: demonstrative pronoun or subordinate conjunction
+
 531;40;"dat"|NLRelAux|^NLPart+^SEnd;NLSubjpron+NLObjpron-NLRelpron|*|*;
 847;40;SBegin|NLRelAux|"dat"|NLGeen:NLArt:NLPoss:NLNiet;*|*|NLSubjpron+NLObjpron-NLRelpron|*;
 534;40;SBegin:"maar":"en"|"dat"|NLRelAux;*|NLSubjpron+NLObjpron-NLRelpron|*;
@@ -224,6 +316,9 @@
 1207;40;SBegin:NLAndOrBut|"dat"+^NLOndvw|NLCon:NLRelCon|NLVerb;*|NLArt|NLCon|*;
 1280;40;NLComma|NLPrep|"wie";*|NLConj|Join;
 1281;40;NLPrep|"wie";+NLRelpron|*;
+
+/* Disambiguate RelAdj and Part
+
 426;40;NLJaar|NLRelAdj|NLCon;NLNum|NLVerb|*;
 199;40;NLPart+^NLRelPrepAdj;+NLRelAdj;
 379;40;NLHet|NLRelAdj|NLCon;*|NLAttradj|*;
@@ -256,6 +351,9 @@
 1051;40;NLGeen|NLAdj+NLAdvTemp|NLAdj:NLCon;*|NLAttradj|NLAttradj;
 1274;40;NLAttradj|NLCon:NLRelCon|NLAndOrBut|NLRelAdj|NLCon:NLRelCon;*|*|*|NLAttradj|*;
 1275;40;NLAttradj|NLAndOrBut|NLRelAdj|NLCon:NLRelCon;*|*|NLAttradj|*;
+
+/* Disambiguate RelCon and InfCon
+
 529;40;SBegin|NLRelCon|SEnd:NLVerb;*|NLCon|*;
 298;40;NLCon|NLAdj|NLRelCon|NLRelAux;*|NLAttradj|NLCon|*;
 303;40;NLAdj|NLRelCon|NLPart;NLAttradj|NLCon|NLPartrel;
@@ -309,6 +407,9 @@
 1149;40;NLCon|NLComma|NLRelCon|NLComma:NLAndOr:"enzovoort":"etcetera";*|*|NLCon|*;
 1255;40;^NLPrep+^NLAndOrBut|NLInfCon|SEnd;*|NLVerb+NLInf|*;
 1271;40;NLPrep:NLPunctuation|.NLPoss|*typeConcept|NLAndOr|NLRelCon|^NLSubjpron+^NLJe+^NLCon+^NLAdvStruct+^NLAdvTemp+^NLAdvTime;*|*|*|*|NLCon|*;
+
+/* Disambiguate StemCon
+
 341;40;NLStemCon|NLIk;NLVerb|NLSubjpron;
 331;40;NLPrep:NLCon:NLVerb|NLStemCon;*|NLCon;
 332;40;NLAdj|NLStemCon;NLBegin|NLCon;
@@ -318,11 +419,20 @@
 372;40;NLAdvStruct|NLPunctuation|NLStemCon;*|*|NLVerb;
 330;40;NLStemCon;+NLRelCon;
 1256;40;NLCon|NLRelCon+^NLCapitalInitial|NLPunctuation:SEnd;*|NLVerb|*;can be non-conjugated verb form!
+
+/* Defaults
+
 108;40;NLZe;NLSubjpron;
 402;40;NLJe;NLSubjpron;
+
+/* Disambiguate Verb+Inf (for later detection of sentence structure)
+
 1260;40;NLmAux|*^NLmAux+^NLVerb+^NLInf+^NLTe|NLVerb+NLInf;*|*|-NLVerb;
 1313;40;^NLVerb+^NLRelAux+^NLTe|NLInf+^NLRelAux+^NLAux+^NLmAux+^NLLinkingverb|NLVerb+NLInf+^NLRelAux+^NLAux+^NLLinkingverb;*|*|-NLInf;
 1316;40;"het"|.NLAdvDirection:NLAdvManner:NLAdvStruct:NLAdvTemp|NLVerb+NLInf+^NLAux|"van";*|*|NLRel+NLNominf|*;preliminary solution for infinitives used as nouns
+
+/* Disambiguate RelConAdj
+
 45;40;NLAttradj:NLGeen|NLRelConAdj;*|NLAdjCon;
 365;40;NLRelConAdj|NLRelCon;NLAttradj|NLCon;
 43;40;NLDe:NLEen|NLRelConAdj;*|NLAdjCon;
@@ -333,8 +443,14 @@
 652;40;NLPrep|NLRelConAdj;*|NLAdjCon;
 653;40;NLVerb+^NLRelAux+^NLmAux|NLPartCon|NLPrep;*|NLAdjCon|*;
 657;40;NLSubjpron|NLRelConAdj+^NLPartCon|NLArt;*|NLVerb|*;
+
+/* Disambiguate the word ZELF
+
 1071;40;NLCon|"zelf"|SEnd:NLVerb:NLPunctuation:NLLinkingverb:NLAdvDegree:NLAndOr;*|NLAdvStruct|*;
 1072;40;NLCon|"zelf"|"die":"dat"|^NLCon+^NLEnd;*|NLAdvStruct|NLOndvw|*;
+
+/* Disambiguate the words DAT, WAT, WIE
+
 546;40;NLRelConModOth|NLDie:NLDit;NLOndvw|NLDempron-NLRelpron;
 1259;40;NLVerb+^NLRelAux+^NLAux|NLRelConModOth|NLNiet|NLCon;*|NLOndvw|*|*;
 1252;40;NLVerb|NLRelConModOth|^NLSubjpron+^NLVerb+^NLRelAux+^NLRelCon|.^NLVerb+^NLRelAux+^NLRelCon+^NLOndvw+^SEnd|SEnd:NLOndvw+^NLRelOndvwPrep;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
@@ -347,6 +463,9 @@
 645;40;NLOndvw:NLConj+^"gezien"|"dat";*|NLDempron-NLRelpron;
 936;40;NLPunctuation:NLHyphen:NLAndOrBut|NLNiet|"dat"|NLPrep;*|*|NLDempron|*;
 1294;40;NLRelConModOth:NLDie|NLSubjpron|NLInf;*|*|-NLInf+NLVerb;
+
+/* Further disambiguate the word DIE
+
 1264;40;SBegin|.NLAdvDirection:NLAdvManner:NLAdvModality:NLAdvPlace:NLAdvStruct:NLAdvTemp:NLAdvTime|NLVerb:NLInf:NLRelCon|NLDie;*|*|^NLVerb-NLInfCon|-NLDie-NLRelpron;
 555;40;SBegin|NLDie|typeRelation;*|NLSubjpron+NLObjpron|*;
 557;40;SBegin|NLDie|typeConcept;*|NLDempron|*;
@@ -374,6 +493,9 @@
 935;40;NLNiet:NLRel|"die"|NLPrep:NLAttradj:NLCon;*|NLDempron|*;
 937;40;"noch"|"die":"dat"|NLPrep;*|NLDempron|*;
 1267;40;NLVerb|NLDie|.^NLVerb+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|NLDempron-NLRelpron|*|*;
+
+/* Disambiguation of and with TE
+
 65;40;^"er"|NLEen:NLDe|NLTe|NLVerb:NLRelCon:NLRelAdj+^NLUDRelation;*|*|NLAdj|NLAdj;
 167;40;NLTe|NLCapitalInitial:NLCapitalMixed;NLPrep|NLCon;
 267;40;NLPrep|NLDe|NLCon|NLTe|NLInf:NLInfCon|NLCon;NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
@@ -385,17 +507,33 @@
 663;40;NLTe|NLAdjCon;NLAdvDegree|NLAdj;
 631;40;NLTe|NLCon+^NLUDConcept;NLAdj|+Join;
 632;40;NLTe;NLAdvDegree;
+
+/* Indefinite pronouns (with and without Negation)
+/*	MINDER
+
 987;40;NLMeer:"minder"|"dan"|NLNum;NLBegin|+Join|*;
 989;40;"minder"+^NLBegin|NLCon;NLAttradj|*;
+
+/* NIET ALLE, NIET VEEL
+
 701;40;NLNiet+^NLNooit|"alle";NLBegin+NLNegation|+Join;
 702;40;NLNiet+^NLNooit|"veel"|NLCon:NLAdj:NLBegin;NLBegin+NLNegation|+Join|NLCon;
 703;40;NLNiet+^NLNooit|"veel";NLNiet|+Join;
+
+/* NIET ALLES, NIET ALLEMAAL, NIET IEDEREEN
+
 708;40;NLNiet+^NLNooit|"alles":"allemaal":"iedereen";NLPathRelevant+NLNegation|+Join;
+
+/* NIET DEZELFDE, NIET HETZELFDE
+
 706;40;NLNiet+^NLNooit|NLAdvDegree|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant+NLNegation|+Join|+Join|*;
 721;40;NLNiet|NLAdvDegree|NLHetzelfde|"te"|NLInf;NLPathRelevant+NLNegation|+Join|+Join|*|*;
 720;40;NLNiet|NLHetzelfde|"te"|NLInf;NLPathRelevant+NLNegation|+Join|*|*;
 705;40;NLNiet|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant+NLNegation|+Join|*;
 704;40;NLNiet|.NLAdvDegree|NLHetzelfde;NLRel+NLNegation|+Join|+Join;
+
+/*	HETZELFDE
+
 724;40;NLAdvDegree|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLSubjpron|+Join|*;
 722;40;NLAdvDegree|NLHetzelfde|"te"|NLInf;NLSubjpron|+Join|*|*;
 625;40;NLAdvDegree|NLHetzelfde;NLHetzelfde+NLBeginpron|Join;
@@ -403,10 +541,16 @@
 725;40;NLHetzelfde|NLPart:NLPartrel;NLSubjpron|*;
 723;40;NLHetzelfde|"te"|NLInf;NLSubjpron|*|*;
 622;40;"hetzelfde"+^NLSubjpron;NLRAdv;
+
+/*	IETS
+
 627;40;"iets"|typeRelation;NLSubjpron+NLObjpron|*;
 634;40;"iets"|NLPart;NLSubjpron+NLObjpron|*;
 628;40;"iets"+^NLSubjpron;NLAdvDegree;
 1189;40;"net"+^NLCon|NLAdvDegree;NLAdvDegree|+Join;
+
+/* Miscellaneous
+
 76;40;NLEen|NLRelPrepAdj;*|NLAdj;
 87;40;NLInf|NLRelAdj|NLEr;*|NLVerb|*;
 139;40;NLVerb|NLRelAdj+^NLPart|NLSubjpron;*|NLVerb|*;
@@ -419,11 +563,24 @@
 481;40;NLCon+^NLMeasure+^NLProcent|.NLAdvDegree:NLVeelWeinig|NLAdj|^NLCon+^SEnd;+NLEnd|*|*|*;
 393;40;SBegin|NLAndOrBut;*|NLAdvStruct;
 1118;40;"daar"|NLSubjpron|NLRel:NLNiet;NLOndvw|*|*;
+
+/* Adverbs
+/*	WEL
+
 1004;40;"het"|"wel"|NLVerb:NLInf;*|NLRAdv|*;
+
+/*	VEEL, WEINIG
+
 826;40;NLAdvDegree|NLVeelWeinig;NLAdvDegree|+Join;
 640;40;NLVeelWeinig;NLAdvDegree;
+
+/* Adverbs of direction
+
 595;40;NLArt|NLAdvDirection|NLAttradj;*|NLAttradj|*;
 235;40;NLAdvDirection;NLRAdv;
+
+/*	Adverbs: degree and manner (label Adj)
+
 305;40;NLNiet+^NLNooit|NLAdvDegree|NLCon;NLBegin|NLAttradj|*;
 664;40;NLNiet|NLAdvDegree|NLAdvTemp;*|NLAdj|Join;
 417;40;NLNiet|NLAdvDegree|NLAttradj:NLStemCon:NLConAttradj;*|NLAttradj|*;
@@ -459,6 +616,9 @@
 920;40;^NLConj+^NLArt|NLAdj+^NLAdvTemp|NLPoss;*|NLRAdv|*;
 1085;40;"jaren"|NLNum;*|+NLJaar;
 1084;40;NLNum+^NLJaar|NLBegin;NLBegin|NLAttradj;
+
+/*	Adverbs: time - place
+
 1022;40;"een":"de"|NLAdvTemp|NLCon:NLRelCon;*|NLAttradj|NLCon;
 603;40;NLArt|NLAdvTemp:NLAdvTime:NLAdvPlace|NLAttradj:NLRelAdj;*|NLAttradj|*;
 613;40;NLArt|NLAdj+NLAdvTemp|typeConcept;*|NLAttradj|*;
@@ -467,8 +627,14 @@
 1024;40;NLNiet|NLAdvTemp:"overal"|NLAndOr|NLAdvTemp:"overal";NLNiet|Join|Join|Join;
 644;40;NLNiet|NLAdvTemp:"overal";NLNiet|Join;
 614;40;NLAdj+NLAdvTemp;NLAdvTemp;
+
+/*	Adverbs: manner
+
 699;40;NLArt|NLAdjCon|NLPart;*|NLCon|*;
 1093;40;NLVerb:NLInf+^NLLinkingverb|NLAdj|NLConj:NLPrep:NLPunctuation:SEnd;*|NLRAdv|*;
+
+/*	Adverbs: modality
+
 213;40;NLDe:NLEen|NLAdvModality:NLAdvManner;*|NLAttradj;
 349;40;NLHet|NLAdvModality:NLAdvManner|NLAttradj;*|NLAttradj|*;
 1037;40;NLLinkingverb:NLRelAux|.NLSubjpron:NLCon|NLAdj|NLAdvModality:NLAdvManner|*NLAdj|^NLInf:NLPart;*|*|NLAttradj|NLAttradj|NLAttradj|*;
@@ -477,6 +643,9 @@
 215;40;NLAdvModality;NLRAdv+NLAdvModality;
 1482;40;NLAdvManner;NLRAdv;default
 1190;40;"net"+^NLCon|NLRAdv;NLRAdv|+Join;
+
+/* Participle as part of noun phrase
+
 380;40;NLDe|NLAttradj|NLPart;*|*|NLAttradj;
 277;40;NLDe|NLHaar|NLPart;*|NLPoss|NLAttradj;
 278;40;NLDe|NLObjpron|NLPart;*|NLObjpron|NLAttradj;
@@ -490,6 +659,9 @@
 273;40;"de":"een van de"|.NLAdvStruct:NLNiet|NLPrep|*NLArt:NLCon:NLNum:NLPrep+^NLAdvStruct|NLPart|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj|*;
 262;40;NLArt:NLDempron:"andere"|.NLRAdv|NLPrep|NLDe|NLCon|NLPart|NLCon+^NLAdvStruct;*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
 218;40;NLDe|NLCon|NLPart|NLCon+^NLAdvStruct;*|NLAttradj|NLAttradj|*;
+
+/*	Adverbs: manner
+
 422;40;NLAdj|NLAdj;NLAdj|+Join;
 145;40;NLRelAux+^NLPartrel;+NLVerb;a.o. for 'was', reduce irrelevant variety in labels
 910;40;NLAdj|NLmAux|NLArt:NLSubjpron;NLRAdv|*|*;
@@ -510,9 +682,15 @@
 421;40;NLAdj|.NLPrep:NLRefl|NLPart:NLPartrel:NLVerb:NLInf+^NLLinkingverb;NLRAdv|*|*;
 1364;40;NLVerb+^NLLinkingverb|"het"|NLAdj|^typeConcept;*|*|NLRAdv|*;
 947;40;NLPrep|NLAdj|NLArt;*|NLRAdv|*;
+
+/* Defaults
+
 486;40;NLMeer+^NLAttradj;NLAdj;
 98;40;NLDan;NLPrep;
 99;40;NLRelPrepAdj;NLPrep;
+
+/* Defaults for Part and RelAdj
+
 571;40;SBegin|NLRelAdj|NLCon;*|NLAttradj|*;
 709;40;NLAux|NLRAdv|NLPart;*|*|NLPartrel;
 846;40;NLArt|"door"|*NLArt:NLAttradj:NLCon:NLObjpron|NLRelAdj|NLAttradj:NLCon;*|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|*;
@@ -522,6 +700,9 @@
 572;40;^NLCon+^NLRelAux+^SBegin|NLPart+^NLInf|NLCon;*|NLAttradj|*;
 711;40;NLRelAdj+NLPart;NLPartrel;
 92;40;NLRelAdj;NLVerb;
+
+/* other defaults
+
 1029;40;"wees":"lijken":"bleek":"leek":"leken"+^NLCon+^NLAdj;NLRelAux+NLAux+NLLinkingverb+NLVerb;
 335;40;NLStemCon;NLCon;
 1317;40;"dat"+NLOndvw|NLInfCon;*|NLCon;
@@ -552,15 +733,27 @@
 981;40;NLmAux|NLNiet|NLAndOr|NLmAux|NLNiet;*|*|+NLList|*|*;
 877;40;NLmAux|NLAndOr|NLmAux;*|+NLList|*;
 1094;40;"welk":"welke"|.NLPathRelevant|NLCon|"dan ook";*|*|*|NLRAdv;
+
+/* Reflexive pronoun
+
 124;40;NLRefl|NLVerb;NLVerb|+Join;
 157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
 125;40;NLVerb|NLRefl;NLVerb|+Join;
 500;40;"ik"|NLVerb|"me":"mij";NLSubjpron|NLVerb|+Join;
+
+/* Relation adverbs
+
 1097;40;NLVerb+^NLLinkingverb|."het":NLSubjpron|NLRAdv|NLAdj;*|*|*|NLRAdv;
 1098;40;NLRAdv|NLAdj|NLPunctuation:NLConj:NLOndvw:NLArt:NLRAdv:NLBegin:NLAdvStruct;*|NLRAdv|*;
 1100;40;^NLLinkingverb|NLAdj|NLAndOr|NLRAdv;*|NLRAdv|*|*;
+
+/* Disambiguate the word DUS
+
 726;40;NLComma|NLDus;*|NLConj;
 727;40;NLDus;NLAdvStruct;
+
+/* Defaults
+
 138;40;NLHaar;NLPoss;
 171;40;NLGeen;NLGeen;
 140;40;NLNum|NLHyphen|NLNum;NLCon|Join|Join;
@@ -571,6 +764,9 @@
 1148;40;NLConAttradj;NLAttradj;
 1166;40;NLVerb|"en"|NLPartrel;*|*|NLVerb;
 1405;40;NLAdj|NLCon;NLAttradj|*;
+
+/* ========================================================
+
 526;50;NLIndefpron+NLCon;NLCon;let capitalization overrule Indefpron
 509;50;NLIndefpron|typeRelation;NLSubjpron|*;
 511;50;NLIndefpron|NLAdvStruct:NLArt:SEnd;NLSubjpron|*;
@@ -589,13 +785,22 @@
 670;50;NLCon+^"maand"+^"maanden"|NLDay:NLMonth;*|NLBegin;
 498;50;NLSubjpron;NLSubjpron-NLRelpron;
 677;50;NLAdvTemp;+NLTime;
+
+/* Disambiguate the word EENS
+
 807;50;"met"|*NLArt:NLAttradj:NLBeginpron:NLCon|"eens";*|*|NLVerb;
 804;50;"met"|NLSubjpron:NLObjpron:NLPoss|"eens";*|*|NLVerb;
 805;50;"het"|NLNiet|"eens";*|*|NLVerb;
 806;50;"het"|"eens";*|NLVerb;
+
+/* Some more Concept boundaries
+
 1366;50;typeRelation|.NLArt:NLPoss|NLBegin;*|*|^NLCon;
 1367;50;NLCon|.NLAdvStruct:NLPunctuation|NLArt:NLPoss|NLAttradj:NLCon;*|*|+NLCBegin|*;
 1373;50;NLEnd|typeConcept;*|+NLCBegin;
+
+/* ===============================
+
 784;60;*NLArt:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLAdjCon:NLCon:NLNum|NLAndOr|.NLArt:NLPoss:NLAdvStruct|NLAttradj:NLAdjCon:NLNum:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;4-element enumeration
 785;60;*NLArt:NLPathRelevant:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPathRelevant:NLAdvStruct:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|.NLComma|NLAndOr|.NLArt:NLPathRelevant:NLAdvStruct:NLPoss|NLAttradj:NLAdjCon:NLNum:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;3-element enumeration
 1007;60;*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|NLComma|.NLArt|*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|NLComma|.NLArt|*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|^NLVerb;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|*;3-element enumeration, only commas, no AndOr
@@ -618,6 +823,9 @@
 1270;60;NLInf|NLPrep|NLAndOr|NLInf|NLPrep;+NLList|+NLList|+NLList|+NLList|+NLList;
 1324;60;*NLCon|NLInf|NLComma|*NLCon|NLInf|NLAndOr|*NLCon|NLInf;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;
 1325;60;*NLCon|NLInf|NLAndOr|*NLCon|NLInf;+NLList|+NLList|+NLList|+NLList|+NLList;
+
+/* =====================================
+
 1247;63;SBegin:NLColon:"-"|^NLVerb;*|+NLPBegin;
 1249;63;SBegin:NLColon:"-":NLComma|NLVerb;*|+NLPBegin;
 1263;63;NLComma:NLAndOrBut+^NLList|NLSubjpron|^"van";*|+NLPBegin|*;
@@ -644,10 +852,20 @@
 1384;63;NLPartrel|NLPunctuation|NLDummy|*^NLVerb+^NLInf+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|*|-NLPBegin|*|*;
 1386;63;NLDummy;-NLDummy;
 1392;63;NLRelAux|NLPartrel|NLVerb+^NLRelAux+^NLmAux;*|*|+NLPBegin;
+
+/*================================
+/* NAUWELIJKS
+
 1212;65;"nauwelijks"|.NLAttradj|NLCon;NLGeen|*|*;
+
+/* Negation + Adverb
+
 962;65;"dan"|NLNiet:NLRel;NLAdvStruct|*;
 967;65;NLVerb+^NLLinkingverb|.NLSubjpron:NLObjpron:"het":NLAdvStruct:NLRAdv:NLAdvTemp:"er"|NLNiet|NLAdj|^NLLinkingverb;*|*|*|NLRAdv|*;
 969;65;NLVerb+^NLLinkingverb|*NLArt:NLAttradj:NLCon:NLPrep:NLAdvStruct|NLNiet|NLAdj|SEnd:NLPunctuation;*|*|*|NLRAdv|*;
+
+/* Assign negation attribute
+
 104;65;NLNiet|NLVerb:NLRTe;NLRel|*;
 366;65;NLNiet+^NLNooit:"nauwelijks"|NLNum:NLBeginEnd:NLAdvTime;NLBegin|NLCon;
 659;65;NLAdj|NLNiet+^NLNooit|NLAdj:NLAttradj;NLBegin|NLCon|NLAttradj;
@@ -661,19 +879,32 @@
 119;65;NLNiet;NLRel;
 284;65;NLAdjCon;NLCon;
 1119;65;NLVerb|NLAdj|NLRel;*|NLRAdv|*;
+
+/* ============================================
+
 1331;70;"zoals"+NLRel;+NLConj;
 1332;70;NLNominf;+NLVerb;
+
+/* Don't mark negation in questions with inversion
+
 955;70;SBegin:NLColon|NLVerb|*NLCon:NLSubjpron|"niet"|"dan";*|*|*|+NLDummy|^NLConj2+NLNegStop;
 956;70;SBegin:NLColon|NLVerb|NLSubjpron|"niet"|.NLRAdv:NLVerb|NLComma|"dan";*|*|*|+NLDummy|*|*|*;
 1202;70;SBegin:NLColon|NLVerb|NLSubjpron|.NLAdvStruct|"niet"+^NLDummy|"dat"+NLOndvw;*|*|*|*|NLRAdv|*;
 960;70;SBegin:NLColon|NLVerb+^"laat":"laten"|*NLArt:NLAttradj:NLCon|.NLAdvStruct|"niet"+^NLDummy|"dat":NLAdj:NLRAdv;*|*|*|*|NLRAdv|*;
 961;70;SBegin:NLColon|NLLinkingverb:NLmAux:"gaat"+^"mocht":"mochten":"laat":"laten"|NLSubjpron:"het"|.NLAdvStruct:NLRAdv|"niet":NLGeen+^NLDummy|^SEnd;*|*|*|*|NLRAdv|*;
+
+/* EXPANSION OF NEGATION SCOPE
+/* Preparation: miscellaneous issues
+
 1014;70;NLVerb|*NLArt:NLSubjpron:NLCon|"dat"|NLRel+NLNegation|SEnd:NLComma:"dan";*|*|NLSubjpron|*|*;
 1243;70;NLAux:"was"|"niet"|"zonder"|NLCon;*|NLPrep-NLNegation-NLNegBegin|Join|*;'niet zonder' doesn't express negation when preceded by forms of 'zijn' and followed by a noun
 1242;70;^NLVerb|"niet"|"zonder"|NLCon|^"kan":"kunnen":"kon":"konden";*|NLPrep-NLNegation-NLNegBegin|Join|*|*;'niet zonder' doesn't express negation when followed by a noun, unless preceded by a verb or reflexive pronoun, or unless the noun is followed by a form of 'kunnen'
 439;70;NLNegation+^"zonder"+^"zonder te"+^"zonder dat";+NLNegBegin;
 750;70;NLRelpron+^NLOndvw;-NLRelpron;
 1237;70;NLNegation|*NLPrep:NLArt:NLAdj:NLCon:NLAttradj:NLVerb:NLPartrel+^"sinds"|"sinds";*|*|NLConj;
+
+/* verb: Relation split
+
 1105;70;NLRelAux|NLPartrel|NLVerb;*|*|NLBeginrel;
 1220;70;NLRelAux|NLInf+^NLRelAux:NLmAux|NLVerb+^NLInf;*|*|NLBeginrel;
 1184;70;NLPartrel|NLRelAux|NLmAux+NLInf|NLInf;*|*|-NLVerb|*;
@@ -682,50 +913,107 @@
 1175;70;NLRTe|NLInf|NLmAux|^NLInf;*|*|NLBeginrel|*;
 1224;70;NLRTe:NLmAux|NLInf|NLRelAux:NLmAux|NLRel:NLObjpron;*|*|NLBeginrel|*;
 1225;70;NLRelAux|NLPartrel|NLRel+^"noch";*|*|^NLBeginrel;
+
+/* negation on Concept / Time indication only: no expansion
+
 810;70;NLPoss:NLArt:NLPrep:NLBeginpron:NLBegin:NLAttradj|.NLAdvStruct|NLBegin:NLCon:"nauwelijks"+NLNegation+NLNegBegin|*NLAttradj:NLAdj|*NLCon;*|*|NLAttradj+NLNegation-NLNegBegin|*|*;
 1117;70;^NLVerb:NLCon:NLAdvStruct|"niet"|NLPrep|NLArt|NLCon|NLAttradj;*|NLCon+NLNegation-NLNegBegin|NLCon|NLCon|*|*;
 1213;70;"nauwelijks"|NLNum;NLBegin-NLNegation-NLNegBegin|*;
 1215;70;NLGeen:"nauwelijks"|NLAdvTime;NLBegin+NLNegation|NLEnd;
+
+/* expansion to conjunction before GEEN
+
 843;70;*NLRelpron:NLOndvw|.typeOther:typeAmbiguous|NLGeen;+NLNegBegin|*|*;
+
+/* expansion to verb
+/* assign Expansion for labels to be included in left expansion to verb
+
 1231;70;NLNum:NLAdj:NLAttradj:NLPrep:NLArt:NLPoss:"er"+^NLConj;+NLExpansion;
 1232;70;NLAdvStruct:NLAdvTemp:NLAdvTime:NLRAdv:NLSubjpron:NLObjpron:"zich";+NLExpansion;
 1233;70;NLCon:NLPathRelevant:NLBeginpron:NLAdvRestriction:NLBegin:NLEnd:NLNum+^NLNegation;+NLExpansion;
+
+/* expansion to preceding verb
+
 1193;70;NLVerb|*NLArt:NLCon:NLList|NLRel+NLNegation;+NLNegBegin|*|*;
 782;70;NLVerb:NLPartrel:NLRTe:NLBeginrel|.NLExpansion|NLRel:NLBegin:NLPathRelevant:NLCon+NLNegation+NLNegBegin;+NLNegBegin+NLNoExpansion|*|*;
+
+/* expansion to concept, first part: before negation marker as Relation or PathRelevant
+
 1227;70;*NLBegin:NLCon:NLNum:NLAttradj:NLArt:NLPoss|NLPrep+^"om"|*NLBegin:NLCon:NLNum:NLAttradj:NLAdj:NLArt:NLAdvRestriction:NLPoss|.NLRAdv:NLAdvTemp|NLRel:NLPathRelevant+NLNegation;+NLNegBegin|*|*|*|*;
 164;70;*NLBegin:NLCon:NLNum:NLAttradj:"als":NLBeginpron:NLArt:NLPoss|.NLAdvTemp:NLAdvStruct:NLRAdv:"het":"er"|NLRel:NLPathRelevant+NLNegation;+NLNegBegin|*|*;
+
+/* expansion to personal pronoun
+
 740;70;*NLSubjpron:NLObjpron:NLRefl|.NLRAdv:NLAdvStruct|NLRel:NLBegin:NLCon:NLPathRelevant+NLNegation+NLNegBegin;+NLNegBegin|*|*;
 739;70;^NLPrep|*NLSubjpron:NLObjpron|NLVerb:NLPartrel:NLAdvRestriction+NLNegBegin|^NLAux;*|+NLNegBegin|*|*;
+
+/* expansion to conjunction, first part
+
 1009;70;NLConj:NLOndvw+^"dus"|.NLSubjpron:NLAdvTemp:NLAdvStruct:NLRAdv|.NLPrep:NLCon:NLNum:NLAttradj:NLAdj:NLArt:NLPoss:NLPathRelevant|.NLRAdv:NLAdvStruct:NLAdvTemp|NLNegBegin+^NLGeen:NLConj:NLOndvw:"zonder":"die":"dat":NLNoExpansion|^"die":"dat";+NLNegBegin|*|*|*|*|*;
 796;70;NLConj:NLOndvw+^"dus"|*NLAdvStruct:NLCon:NLNum:NLAttradj:NLArt:NLPoss:NLBegin+^NLNegation|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder":"die":"dat"|^"die":"dat";+NLNegBegin|*|*|*;
 748;70;NLConj:NLOndvw+^"dus"|*NLSubjpron:"er":NLPrep:NLAdvStruct:NLRAdv|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder"|^"die":"dat";+NLNegBegin|*|*|*;
 1235;70;NLConj:NLOndvw+^"dus"|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder":"die":"dat"|^"die":"dat";+NLNegBegin|*|*;
+
+/* expansion to antecedent
+
 749;70;*NLCon:NLNum:NLAttradj|.NLAdvStruct|NLConj:NLRelpron+NLNegBegin+^"om"+^"wanneer"+^"zonder dat"+^"zonder te";+NLNegBegin+NLAntecedent|*|*;
 996;70;"zij":"degenen":"diegenen"|"die"+NLNegBegin;+NLNegBegin+NLAntecedent|*;
 753;70;*NLCon:NLNum:NLAttradj|NLComma|"die":"dewelke"+NLNegBegin+^typePathRelevant;+NLNegBegin+NLAntecedent|*|*;
 755;70;*NLCon:NLNum:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|NLNegation;+NLNegBegin+NLAntecedent|*|*|*;
 754;70;*NLCon:NLNum:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|*NLCon:NLNum:NLAttradj:NLPrep:NLArt:NLPoss|NLNegation;+NLNegBegin+NLAntecedent|*|*|*|*;
+
+/* expansion to concept, second part
+/* assign NoExpansion for preposition-concept patterns
+
 1218;70;^NLCon|NLPrep+^"van"|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPrep;*|*|+NLNoExpansion;
 1219;70;^NLCon|NLPrep+^"van"|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLPathRelevant:NLAdvRestriction:NLPrep;*|*|+NLNoExpansion;
 1234;70;^NLCon|NLPrep+^"van"|*NLPoss:NLSubjpron:NLObjpron:NLBeginpron:NLCon:NLAdj:NLAttradj;*|*|+NLNoExpansion;
 1236;70;^NLCon|NLPrep+^"van"|*NLArt:NLPoss:NLCon:NLAdj:NLAttradj:NLList:NLPrep;*|*|+NLNoExpansion;
 983;70;NLCon|.NLRAdv|NLBegin+NLNegation+NLNegBegin;+NLNegBegin|*|*;
+
+/* expansion to concept before verb+NegationBegin
+
 1222;70;*NLCon:NLBegin:NLNum+^NLNoExpansion|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLPoss|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLPoss|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*|*|*|*|*;
 1221;70;*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction+^NLNoExpansion|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPoss|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*|*|*;
 760;70;*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPoss+^NLNoExpansion|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*;
 1223;70;SBegin|.NLAdvStruct|"van"|NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction+NLNegBegin;*|*|+NLNegBegin|*;
 1226;70;NLNum:NLCon|NLPrep|NLObjpron:NLSubjpron|NLVerb:NLPartrel:NLRTe+NLNegBegin;+NLNegBegin|*|*|*;
+
+/* concept as object before subjpron
+
 770;70;*NLCon:NLNum:NLAttradj|NLSubjpron:NLObjpron+NLNegBegin;+NLNegBegin|*;
 801;70;SBegin:NLAndOrBut:NLPunctuation|.NLAdvStruct|*NLArt:NLNum:NLCon:NLBegin:NLAdj:NLAttradj:NLPoss:"van"+^NLNoExpansion|NLVerb:NLPartrel+NLNegBegin|NLSubjpron;*|*|+NLNegBegin|*|*;
 802;70;SBegin:NLAndOrBut|.NLAdvStruct|.NLArt:NLAdj:NLAttradj:NLPathRelevant|NLCon+^NLNoExpansion|NLVerb:NLPartrel+NLNegBegin|NLSubjpron|.NLAdvStruct:NLAdvTemp|NLRel+NLNegation;*|*|+NLNegBegin|+NLNegBegin|*|*|*|*;
+
+/* concept, enumeration with "noch"
+
 1109;70;NLCon|NLComma|*NLCon:NLAttradj:NLArt:NLPoss|"noch";+NLNegBegin|*|*|*;
+
+/* expansion to pattern concept-'als'-concept
+
 798;70;NLCon|"als"|NLCon|NLVerb+NLNegBegin;+NLNegBegin|*|*|*;
+
+/* expansion to enumeration patterns
+
 787;70;.NLSubjpron|NLList|.NLList+^NLNegBegin|NLList+NLNegBegin+^NLAntecedent:NLNoExpansion;+NLNegBegin|+NLNegBegin|*|*;
+
+/* expansion to conjunction, second part: for enumerations
+
 781;70;NLConj:NLOndvw:"die":"dat"+^typePathRelevant|NLPoss:NLArt:NLCon:NLNum:NLAttradj+NLNegBegin+^"zonder"+^NLAntecedent;+NLNegBegin|*;
+
+/* expansion to PathRelevant
+
 1108;70;NLPathRelevant|typeConcept+NLNegBegin;+NLNegBegin|*;
+
+/* RESTRICTION OF NEGATION SCOPE
+/* Punctuation
+
 864;70;NLColon|^NLNegation;*|+NLNegStop;
 865;70;NLComma+^NLList;+NLNegStop;
 870;70;NLPunctuation+^NLComma|^NLNegBegin;*|+NLNegStop;
+
+/* EN
+
 1153;70;NLRel+NLNegation|"en"|NLVerb+^NLNegBegin;*|^NLConj2+NLNegStop|*;restriction of expansion
 1155;70;SBegin:NLAndOr:NLPunctuation|*NLArt:NLAttradj:NLCon:NLRAdv:NLSubjpron:NLAdvStruct|NLVerb|"en"|NLVerb;*|*|*|+NLList|*;
 1169;70;SBegin:NLAndOr:NLPunctuation|NLVerb|"en"|NLVerb;*|*|+NLList|*;
@@ -741,8 +1029,17 @@
 1162;70;NLInf|"en"|NLRAdv|NLInf;*|+NLList|*|*;exception to r1150
 1167;70;NLConj|"en"|NLConj;*|+NLList|*;exception to r1150
 1150;70;"en"+^NLList;^NLConj2+NLNegStop;restriction of expansion
+
+/* Conjunction
+
 686;70;^NLOndvw+^SBegin|^NLAndOrBut|NLOndvw+^"dat"+^"als"+^"wat"+^"wie"+^"die";*|*|^NLConj2+NLNegStop;
+
+/*	MAAR
+
 682;70;NLNegBegin|.^"maar":"maar ook":"doch":NLPunctuation|"maar":"maar ook":"doch"+^NLAdvStruct;*|*|^NLConj2+NLNegStop;
+
+/* OF
+
 984;70;NLRel+NLNegation|*NLRTe:NLVerb:NLInf:NLRAdv|"of"|^typeRelation+^NLAdvStruct;*|*|^NLConj2+NLNegStop|*;
 1171;70;NLCon:NLBegin+NLNegation+NLNegBegin|*NLAdj:NLAttradj|.NLAux|"of"+^NLList;*|*|*|^NLConj2+NLNegStop;
 898;70;NLVerb:NLInf:NLPartrel:NLNegation|"of"|NLSubjpron:NLObjpron:NLPoss;*|^NLConj2+NLNegStop|*;
@@ -750,12 +1047,24 @@
 931;70;NLPartrel:NLNegation|"of"|NLVerb|NLArt:NLSubjpron;*|^NLConj2+NLNegStop|*|*;
 912;70;NLVerb:NLInf:NLPartrel:NLNegation|"of"|NLOndvw:NLConj:NLComma;*|^NLConj2+NLNegStop|*;
 1003;70;typeRelation+^NLConj+^NLOndvw+^NLInNegspan|"of"+^NLInNegspan|*^typeConcept+^typeRelation+^NLAdvTemp|NLNegBegin;*|^NLConj2+NLNegStop|*|*;
+
+/* Assign a temp marker to all words in a negation span
+
 881;70;NLNegBegin:NLInNegspan|^NLNegStop:NLNegation:NLNegWord:NLConj:NLOndvw;*|+NLInNegspan;
 882;70;NLNegBegin:NLInNegspan|"zonder":"zonder te":"zonder dat";*|+NLInNegspan;
 1240;70;"zonder te":"zonder dat"|*^NLNegStop:NLNegation:NLNegWord:NLConj:NLOndvw;*|+NLInNegspanZonderconj;
+
+/* Verbs
+
 1176;70;NLVerb:NLInf+NLInNegspan|NLBeginrel+^NLNegBegin;*|+NLNegStop;
+
+/* DOOR
+
 993;70;^NLNegation:NLNegBegin:NLArt|"door"+NLInNegspan|*^NLPunctuation:NLAndOrBut:NLNegBegin:NLCon|NLCon|.NLPrep|NLRTe|*^NLNegation;*|^NLConj2+NLNegStop|*|*|*|*|*;
 1012;70;^NLNegation:NLNegBegin:NLArt|"door"+NLInNegspan|.NLPoss:NLObjpron:NLSubjpron|*NLPrep:NLArt:NLCon:NLNum:NLAttradj:NLAdj|NLRTe|*^NLNegation;*|^NLConj2+NLNegStop|*|*|*|*;
+
+/* Conjunction
+
 963;70;^NLSubjpron|NLVerb:NLPartrel+^NLInNegspan|"maar":"maar ook"|NLNegation+typeRelation;*|*|^NLConj2|*;
 1091;70;NLInNegspan|NLPrep|"welk":"welke":"hoe":"wat":"wie":"hoeveel"+^NLNegBegin+^NLNegation;*|NLConj+NLConj2+NLNegStop-NLInNegspan+NLPBegin|+Join;
 932;70;NLInNegspan|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
@@ -766,9 +1075,16 @@
 951;70;NLNegation|*NLRAdv:NLVerb:NLAttradj:NLCon:NLPartrel|"dan";*|*|^NLConj2+NLNegStop;
 991;70;NLNegation+^"zonder"|*^"dan":NLNegStop|"dan"|NLPrep;*|*|^NLConj2+NLNegStop|*;
 1015;70;NLNegation+^"zonder"|.^"dan":NLNegStop|"dan"|NLVerb;*|*|^NLConj2+NLNegStop|*;
+
+/* Second conjunction
+
 942;70;NLNegation|NLConj:NLOndvw;*|+NLInNegspan;
 943;70;NLInNegspan|^NLNegStop+^NLNegation+^NLNegWord+^NLInNegspan;*|+NLInNegspan;
 944;70;NLInNegspan+^NLNegBegin|NLOndvw:NLConj+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
+
+/* Expansion for ZONDER
+/*	Expansion after 'zonder'
+
 1026;70;NLPrep+NLNegation|.NLArt:NLAttradj:NLAdj:NLCon:NLPrep:NLAdvStruct|.NLRAdv:NLPartrel:NLAdvTemp|.NLPrep|NLRTe|*typeRelation:typeOther+^NLNegation:NLNegStop:NLOndvw:NLConj|NLOndvw:NLConj+^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLNegStop;+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|NLBeginrel+NLNegStop;
 894;70;NLPrep+NLNegation|.NLArt:NLAttradj:NLAdj:NLCon:NLPrep:NLAdvStruct|.NLRAdv:NLPartrel|NLRTe|*typeRelation:typeOther+^NLNegation+^NLNegStop|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegStop;
 1028;70;"zonder"|*NLVerb|*"en":NLPrep|^NLVerb;*|*|NLBeginrel+NLNegStop|*;
@@ -776,6 +1092,9 @@
 1011;70;NLVerb:NLPartrel+NLInNegspanZonder|*NLArt:NLAttradj:NLAdj:NLCon:NLPrep;*|+NLInNegspanZonder;
 1010;70;NLInNegspanZonder|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
 1238;70;"zonder dat";NLConj2+NLNegation+NLNegBegin+NLPBegin;
+
+/*	Expansion before 'zonder' plus noun phrase
+
 852;70;*NLAttradj:NLCon:NLNum|NLPrep+NLNegation|*NLArt:NLAttradj:NLAdj:NLCon:"welke"|^"te";+NLNegBegin|*|*|*;
 888;70;NLPrep+NLNegation+^NLInNegspan|.NLArt|*NLAttradj:NLAdj:NLCon:NLAndOr|"van"|.NLArt|*NLAttradj:NLAdj:NLCon:NLBeginpron:NLPathRelevant|"van"+^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|*|*|+NLInNegspan|*|*|+NLInNegspanZonder;
 887;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLAdj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLAdj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|+NLInNegspan|*|+NLNegStop;
@@ -784,6 +1103,9 @@
 890;70;NLInNegspanZonder+^NLInNegspan|NLPartrel:NLVerb+^NLNegBegin;*|+NLNegStop;
 891;70;^typeRelation|NLAndOr+^NLNegBegin|NLNegStop;*|+NLNegStop|*;
 886;70;NLPrep:NLConj+NLNegation;+NLNegBegin;
+
+/* Clean conflicting negation parameters
+
 156;70;NLNegStop+NLNegBegin;-NLNegStop;
 159;70;NLNegation+NLNegStop;-NLNegStop;the combination of both labels does not occur with the current rules
 751;70;NLRelpron+NLConj2;-NLRelpron;
@@ -791,19 +1113,40 @@
 818;70;NLNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant+^NLNegation;*|+NLNegStop;move NegStop from nonrelevant to next lexrep
 1451;70;SBegin|*typeOther:typeAmbiguous|NLNegBegin;*|+NLNegBegin|*;copy NegBegin on nonrelevant first word(s) of the sentence to avoid problems in phase 85
 1368;70;NLDummy:NLInNegspan:NLExpansion;-NLDummy-NLInNegspan-NLExpansion;cleanup
+
+/* Make negation span recognizable in next phases
+
 1426;70;NLNegBegin+^NLNietAlleen+^NLInNegspan|.^NLNegStop+^NLNietAlleen+^SEnd|NLNegStop:SEnd;+NLInNegspan|+NLInNegspan|*;
+
+/* =========================================
+/* Sentiment attributes get assigned via the user dictionary
+
 1381;80;NLConj2;+NLPBegin;
+
+/* Expansion of sentiment scope
+/* Sentiment attribute on verb -> expand to "phrase"
+
 1334;80;NLPBegin|.^NLPBegin+^NLPosSentiment|NLVerb+NLPosSentiment+^NLPBegin;+NLPosSentimentBegin|*|*;
 1335;80;NLPBegin|.^NLPBegin+^NLNegSentiment|NLVerb+NLNegSentiment+^NLPBegin;+NLNegSentimentBegin|*|*;
 1342;80;NLPBegin+NLPosSentiment+^typeConcept;+NLPosSentimentBegin;
 1343;80;NLPBegin+NLNegSentiment+^typeConcept;+NLNegSentimentBegin;
+
+/*/* Sentiment attribute on concept word -> expand to the right, no expansion to the left
+
 1354;80;typeConcept:typeBeginConcept+NLPosSentiment;+NLPosSentimentConceptBegin;
 1355;80;typeConcept:typeBeginConcept+NLNegSentiment;+NLNegSentimentConceptBegin;
+
+/*/* Sentiment attribute on type(Begin)Concept -> expand to the right until next verb form, negation marker or beginning of phrase
+/* preparation
+
 1369;80;typeRelation+^NLPrep+^NLAndOrBut+^NLSentimentconvertor;+NLDummy;
 1404;80;NLLinkingverb+NLPartrel+NLDummy;-NLDummy;correction of r1369
 1372;80;NLPrep|NLPunctuation:SEnd;+NLDummy|*;use dummy to mark a preposition at the end of a sentence or before punctuation
 1374;80;NLPrep2:NLPunctuation:NLAndOrBut|NLPrep;+NLDummy|*;Prep2 usually splittable verb part
 1457;80;NLRel:NLPrep:NLGeen+NLNegation;+NLDummy;
+
+/* add Stop-markers
+
 1417;80;NLPosSentiment+NLPosSentimentConceptBegin|NLAndOr:NLPunctuation|NLNegSentiment;*|+NLPosSentimentConceptStop+NLDummy|*;
 1418;80;NLNegSentiment+NLNegSentimentConceptBegin|NLAndOr:NLPunctuation|NLPosSentiment;*|+NLNegSentimentConceptStop+NLDummy|*;
 1397;80;NLPosSentiment+NLPosSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLDummy+^NLPunctuation|NLComma+^NLList;*|*|+NLPosSentimentConceptStop;
@@ -815,16 +1158,25 @@
 1420;80;NLAdj+NLPosSentiment+NLPosSentimentConceptBegin+^NLWithZo|NLRelpron+^"die"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLPosSentimentConceptStop|*|+NLPosSentimentConceptStop;
 1421;80;NLAdj+NLNegSentiment+NLNegSentimentConceptBegin+^NLWithZo|NLRelpron+^"die"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLNegSentimentConceptStop|*|+NLNegSentimentConceptStop;
 1406;80;NLDummy;-NLDummy;
+
+/* Sentiment attribute on adjective preceded by a linking verb in main clause -> expansion to the left
+
 1360;80;typeConcept+^NLAdj|NLLinkingverb+^NLPBegin|.NLAdvStruct:NLAdvTemp|NLAdj:NLAttradj:NLCon+NLPosSentiment;+NLPosSentimentConceptBegin+NLDummy|-NLPosSentimentConceptStop|*|*;
 1361;80;NLSubjpron|NLLinkingverb|NLAdj:NLCon+NLPosSentiment;+NLPosSentimentBegin|-NLPBegin|*;
 1362;80;typeConcept+^NLAdj|NLLinkingverb+^NLPBegin|.NLAdvStruct:NLAdvTemp|NLAdj:NLAttradj:NLCon+NLNegSentiment;+NLNegSentimentConceptBegin+NLDummy|-NLNegSentimentConceptStop|*|*;
 1363;80;NLSubjpron|NLLinkingverb|NLAdj:NLCon+NLNegSentiment;+NLNegSentimentBegin|-NLPBegin|*;
+
+/* Sentiment attribute on adjective with linkingverb in subordinate clause (subject - adj-predicate - verb)
+
 1458;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|SEnd;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|*;
 1459;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|NLPrep+^"dan"+^NLPBegin|*^NLPBegin+^SEnd|NLPBegin:SEnd;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|*|*|+NLPosSentimentConceptStop;
 1460;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|typeRelation+^NLPrep;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|+NLPosSentimentConceptStop+NLBeginrel;
 1461;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|SEnd;+NLNegSentimentConceptBegin+NLDummy|*|-NLNegSentimentConceptBegin|-NLNegSentimentConceptStop|*;
 1462;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|NLPrep+^"dan"+^NLPBegin|*^NLPBegin+^SEnd|NLPBegin:SEnd;+NLNegSentimentConceptBegin+NLDummy|*|-NLNegSentimentConceptBegin|-NLNegSentimentConceptStop|*|*|+NLNegSentimentConceptStop;
 1463;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|typeRelation+^NLPrep;+NLNegSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLNegSentimentConceptStop|+NLNegSentimentConceptStop+NLBeginrel;
+
+/* Further expansion to the left
+
 1407;80;NLArt:NLPoss:NLBeginpron:NLAttradj:NLCon;+NLNPcomp;
 1408;80;NLPrep+NLPBegin|.NLPrep:NLAndOr:NLNPcomp+^NLDummy|NLDummy;*|*|-NLDummy;
 1409;80;^NLNPcomp|NLNPcomp+^NLDummy|.NLNPcomp+^NLDummy|NLDummy+NLPosSentimentConceptBegin;*|+NLPosSentimentConceptBegin+NLDummy|*|-NLDummy-NLPosSentimentConceptBegin;
@@ -834,20 +1186,32 @@
 1470;80;NLPrep|NLDummy+NLPosSentimentConceptBegin;+NLDummy+NLPosSentimentConceptBegin|-NLDummy-NLPosSentimentConceptBegin;
 1471;80;NLPrep|NLDummy+NLNegSentimentConceptBegin;+NLDummy+NLNegSentimentConceptBegin|-NLDummy-NLNegSentimentConceptBegin;
 1419;80;NLDummy;-NLDummy;
+
+/*/* Sentiment attribute on remaining words (mainly adverbs) -> expansion = phrase
+
 1401;80;NLPosSentiment+^NLPosSentimentConceptBegin;+NLPosSentimentBegin;
 1402;80;NLNegSentiment+^NLNegSentimentConceptBegin;+NLNegSentimentBegin;
 1375;80;NLPBegin|.^NLPBegin+^NLPosSentimentBegin|NLPosSentiment+NLPosSentimentBegin+^NLPosSentimentConceptBegin+^NLPBegin;+NLPosSentimentBegin|*|-NLPosSentimentBegin;
 1376;80;NLPBegin|.^NLPBegin+^NLNegSentimentBegin|NLNegSentiment+NLNegSentimentBegin+^NLNegSentimentConceptBegin+^NLPBegin;+NLNegSentimentBegin|*|-NLNegSentimentBegin;
 1479;80;NLPosSentimentBegin|NLPosSentimentConceptBegin;*|-NLPosSentimentConceptBegin;
 1480;80;NLNegSentimentBegin|NLNegSentimentConceptBegin;*|-NLNegSentimentConceptBegin;
+
+/*/* Restriction of sentiment scope: stop at end of phrase
+
 1339;80;typeRelation+NLPosSentiment|.^NLPBegin+^SEnd+^NLPosSentimentBegin|SEnd:NLPBegin+^NLPosSentimentBegin;*|*|+NLPosSentimentStop;
 1340;80;typeRelation+NLNegSentiment|.^NLPBegin+^SEnd+^NLNegSentimentBegin|SEnd:NLPBegin+^NLNegSentimentBegin;*|*|+NLNegSentimentStop;
 1344;80;NLPosSentimentBegin|.^NLPBegin+^SEnd+^NLPosSentimentStop|SEnd:NLPBegin+^NLPosSentiment+^NLPosSentimentBegin;*|*|+NLPosSentimentStop;
 1345;80;NLNegSentimentBegin|.^NLPBegin+^SEnd+^NLNegSentimentStop|SEnd:NLPBegin+^NLNegSentiment+^NLNegSentimentBegin;*|*|+NLNegSentimentStop;
 1424;80;NLRAdv+NLPosSentiment+^NLWithZo|"dat"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLPosSentimentStop|*|+NLPosSentimentStop;
 1425;80;NLRAdv+NLNegSentiment+^NLWithZo|"dat"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLNegSentimentStop|*|+NLNegSentimentStop;
+
+/* Remove SentimentConcept markers in larger Sentiment span
+
 1395;80;NLPosSentimentConceptStop|.^NLPosSentimentStop+^NLPosSentimentBegin+^NLPosSentimentConceptStop|NLPosSentimentStop;-NLPosSentimentConceptStop|*|*;
 1396;80;NLNegSentimentConceptStop|.^NLNegSentimentStop+^NLNegSentimentBegin+^NLNegSentimentConceptStop|NLNegSentimentStop;-NLNegSentimentConceptStop|*|*;
+
+/* Move attribute markers to relevant entity
+
 1346;80;NLPosSentimentBegin:NLPosSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLPosSentimentBegin|*|+NLPosSentimentBegin;
 1347;80;NLPosSentimentBegin:NLPosSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLPosSentimentBegin|+NLPosSentimentBegin;
 1348;80;NLNegSentimentBegin:NLNegSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLNegSentimentBegin|*|+NLNegSentimentBegin;
@@ -856,8 +1220,14 @@
 1351;80;NLPosSentimentStop:NLPosSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+NLPosSentimentStop;
 1352;80;NLNegSentimentStop:NLNegSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;
 1353;80;NLNegSentimentStop:NLNegSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+NLNegSentimentStop;
+
+/* Remove conflicting attributes
+
 1399;80;NLPosSentimentStop:NLPosSentimentConceptStop+NLPosSentiment:NLPosSentimentBegin:NLPosSentimentConceptBegin;-NLPosSentimentStop-NLPosSentimentConceptStop;
 1400;80;NLNegSentimentStop:NLNegSentimentConceptStop+NLNegSentiment:NLNegSentimentBegin:NLNegSentimentConceptBegin;-NLNegSentimentStop-NLNegSentimentConceptStop;
+
+/* Split relations with a SentimentBegin or SentimentStop attribute
+
 1336;80;typeRelation+^NLPosSentimentBegin+^NLPosSentiment|typeRelation+NLPosSentimentBegin;*|+NLBeginrel;
 1338;80;typeRelation+^NLNegSentimentBegin+^NLNegSentiment|typeRelation+NLNegSentimentBegin;*|+NLBeginrel;
 1377;80;typeRelation+^NLPrep|typeRelation+NLPBegin+NLPosSentimentStop;*|+NLBeginrel;
@@ -870,12 +1240,19 @@
 1433;80;NLPosSentimentConceptStop;^NLPosSentimentStop;
 1434;80;NLNegSentimentConceptBegin;^NLNegSentimentBegin;
 1435;80;NLNegSentimentConceptStop;^NLNegSentimentStop;
+
+/* CLEANUP
+
 783;80;NLAndOr;-NLAndOr;
 795;80;NLCon+NLEnd;-NLCon;
 1069;80;NLConj2+^NLAdvStruct;^NLConj2-NLOndvw-NLConj-NLRelpron-NLRelOndvwPrep-NLAndOrBut-NLPrep-NLCon;
 1403;80;NLAndOrBut|NLBeginrel;+NLBeginrel|-NLBeginrel;
 1337;80;NLBeginrel;-NLOndvw-NLRelpron-NLVerb-NLAux-NLRelAux-NLLinkingverb-NLAndOrBut;
 1341;80;NLBeginrel;-NLPrep-NLOm-NLRelOndvwPrep;
+
+/* ================================
+/* Detect sentiment markers in negation span
+
 1448;85;NLPrep+NLInNegspan|NLPrep+NLInNegspan;*|-NLInNegspan;preparation for r1446 and r1447
 1427;85;^NLNegation|NLNegation|NLPosSentiment+NLInNegspan;*|*|+NLNegPosSent;mark sentiment markers in negation span
 1428;85;^NLNegation|NLNegation|NLNegSentiment+NLInNegspan;*|*|+NLNegNegSent;mark sentiment markers in negation span
@@ -885,6 +1262,9 @@
 1430;85;^NLNegation|NLNegation+^NLPEnd+^NLRel|NLPosSentiment+^NLPBegin;*|*|+NLNegPosSent;mark sentiment marker in negated concept without expansion
 1452;85;*NLPosSentimentBegin|.^NLPosSentimentBegin+^NLPosSentimentStop+^NLNegPosSent|NLNegPosSent+^NLPosSentimentBegin;-NLPosSentimentBegin|*|*;remove original SentimentBegin
 1453;85;*NLNegSentimentBegin|.^NLNegSentimentBegin+^NLNegSentimentStop+^NLNegNegSent|NLNegNegSent+^NLNegSentimentBegin;-NLNegSentimentBegin|*|*;remove original SentimentBegin
+
+/* Deal with non-negation words that reverse Sentiment: weinig, minder
+
 1464;85;"weinig":"minder"|NLPosSentiment|.typeConcept|^typeConcept;+NLNegSentimentBegin+NLDummy|-NLPosSentimentBegin|*|+NLNegSentimentStop;reverse Sentiment after "weinig" or "minder"
 1475;85;NLPosSentimentBegin|.^NLPosSentimentBegin+^NLPosSentiment+^NLNegSentimentBegin+^NLNegSentiment|NLPosSentiment+NLSentimentconvertor|.^NLPosSentimentStop|NLPosSentimentStop;+NLNegSentimentBegin+NLDummy-NLPosSentimentBegin|*|*|*|-NLPosSentimentStop+NLNegSentimentStop;
 1473;85;NLPosSentiment+NLSentimentconvertor+NLPosSentimentBegin|.typeConcept|^typeConcept;+NLNegSentimentBegin+NLDummy-NLPosSentimentBegin|*|+NLNegSentimentStop;reverse Sentiment after "weinig" or "minder"
@@ -895,10 +1275,18 @@
 1474;85;NLNegSentiment+NLSentimentconvertor+NLNegSentimentBegin|.typeConcept|^typeConcept;+NLPosSentimentBegin+NLDummy-NLNegSentimentBegin|*|+NLPosSentimentStop;reverse Sentiment after "weinig" or "minder"
 1468;85;NLNegSentimentBegin+^NLDummy|.^NLNegSentimentBegin+^NLNegSentimentStop+^NLDummy+^NLPosSentimentBegin|NLPosSentimentBegin+NLDummy;-NLNegSentimentBegin|*|*;very rare, remove obsolete NegSentimentBegin after reversion of Sentiment
 1469;85;NLDummy;-NLDummy;cleanup
+
+/* Reverse sentiment
+
 1436;85;^NLInNegspan|NLInNegspan+^NLNegPosSent|.NLInNegspan+^NLNegPosSent|NLInNegspan+NLNegPosSent|.^NLNegStop+^SEnd|*NLNegStop:SEnd;*|+NLNegSentimentBegin-NLPosSentimentBegin|-NLPosSentimentBegin-NLNegSentimentStop|-NLNegPosSent-NLPosSentimentBegin-NLNegSentimentStop|-NLPosSentimentBegin-NLNegSentimentStop|-NLPosSentimentStop+NLNegSentimentStop;reverse sentiment
 1449;85;^NLInNegspan|NLInNegspan+^NLNegNegSent|.NLInNegspan+^NLNegNegSent|NLInNegspan+NLNegNegSent|.^NLNegStop+^SEnd|*NLNegStop:SEnd;*|+NLPosSentimentBegin-NLNegSentimentBegin|-NLNegSentimentBegin-NLPosSentimentStop|-NLNegNegSent-NLNegSentimentBegin-NLPosSentimentStop|-NLNegSentimentBegin-NLPosSentimentStop|-NLNegSentimentStop+NLPosSentimentStop;reverse sentiment
 1455;85;^NLInNegspan|NLInNegspan+^NLNegPosSent|.NLInNegspan+^NLNegPosSent|NLInNegspan+NLNegPosSent|SEnd;*|+NLNegSentimentBegin-NLPosSentimentBegin|-NLPosSentimentBegin|-NLNegPosSent-NLPosSentimentBegin|-NLPosSentimentStop+NLNegSentimentStop;shorter version of r1436
 1456;85;^NLInNegspan|NLInNegspan+^NLNegNegSent|.NLInNegspan+^NLNegNegSent|NLInNegspan+NLNegNegSent|SEnd;*|+NLPosSentimentBegin-NLNegSentimentBegin|-NLNegSentimentBegin|-NLNegNegSent-NLNegSentimentBegin|-NLNegSentimentStop+NLPosSentimentStop;shorter version of r1449
+
+/* PHASE 99: FINAL CLEANUP
+/* =======================
+/* Move attribute markers to relevant entity (in final phase, because only a few labels are defined in phase 85)
+
 1437;$;NLPosSentimentBegin+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentBegin;move sentiment attribute from nonrelevant to relevant lexrep
 1438;$;NLPosSentimentBegin+NLPunctuation|.typeAmbiguous:typeOther|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentBegin;
 1439;$;NLNegSentimentBegin+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentBegin;move sentiment attribute from nonrelevant to relevant lexrep
@@ -907,6 +1295,9 @@
 1442;$;NLPosSentimentStop+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentStop;
 1443;$;NLNegSentimentStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;move sentiment attribute from nonrelevant to relevant lexrep
 1444;$;NLNegSentimentStop+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;move sentiment attribute from nonrelevant to relevant lexrep
+
+/* Rewrite language-specific label to general mandatory label
+
 432;$;NLPunctuation;^Punctuation;
 1333;$;NLBeginrel+NLConj;-NLConj;
 1295;$;"allemaal";-NLAdvStruct+NLObjpron;force 'allemaal' to become PR for the moment

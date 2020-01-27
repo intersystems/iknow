@@ -1,14 +1,31 @@
+
+/* PHASE 1: PREPARATION
+/*=====================
+/* REWRITE UNIFIED LABELS TO LANGUAGE SPECIFIC LABELS
+
 375;1;CapitalInitial;^PTCapitalInitial;
 730;1;CapitalMixed;^PTCapitalMixed+PTCapitalInitial;relevant in rules for names
 376;1;CapitalAll;^PTCapitalAll;
 377;1;Punctuation;PTPunctuation;
+
+/* REWRITE USER DICTIONARY LABELS
+
 379;1;UDNegation;+PTNegation+PTNegBegin;
 380;1;UDPosSentiment;+PTPosSentiment+PTPosSentimentBegin;
 381;1;UDNegSentiment;+PTNegSentiment+PTNegSentimentBegin;
 382;1;UDConcept;+PTCon;
 383;1;UDRelation;PTRelation;
 384;1;UDNonRelevant;PTNonRelevant;
+
+/* PHASE 40: GENERAL DISAMBIGUATION
+/*=================================
+/* CAPITALISATION
+/* Geographical names
+
 738;40;PTGeoType|.PTAdj|PTDe:PTDo|PTCapitalInitial;PTCon+PTCapitalInitial+PTCapitalMixed|+Join|+Join|+Join;
+
+/* Names of organizations etc.
+
 735;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|PTDe:"e"|*PTCapitalInitial;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join;
 734;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|"e"|PTDo|*PTCapitalInitial+^PTOrgUnit+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join|Join;
 731;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|+Join|+Join;
@@ -16,7 +33,13 @@
 741;40;PTOrgUnit+PTCapitalMixed|*PTDe:PTDo:PTPrepart:PTPrep:PTEm:"e":PTCapitalInitial+^PTOrgUnit+^PTConPlusDe|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|*|*;
 740;40;PTCon+PTCapitalInitial|PTCon+PTCapitalInitial|PTDe:PTDo:PTPrepart|*PTCapitalInitial|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|Join|Join|*|*;
 732;40;PTOrgUnit;-PTOrgUnit;
+
+/* Person names
+
 742;40;PTName|PTDe:PTDo|*PTCapitalInitial;PTCon+PTCapitalInitial|Join|Join;detect names with 'de' or 'da' based on first names
+
+/* GENERAL RULES
+
 273;40;SBegin|PTCapitalInitial|^PTCapitalInitial;*|-PTCapitalInitial|*;to ignore capital letters when at the beginning of a sentence
 274;40;SBegin|PTCapitalAll;*|-PTCapitalAll;to ignore capital letters when at the beginning of a sentence
 278;40;PTCapitalInitial|PTConIfCapsL&R|PTCapitalInitial;^PTCon|PTCon|PTCon;to make some words part of a name
@@ -25,14 +48,26 @@
 283;40;PTConIfCap;-PTConIfCap;to get rid of this secondary label
 284;40;PTConIfCapAll;-PTConIfCapAll;to get rid of this secondary label
 285;40;PTConIfCapsL&R;-PTConIfCapsL&R;to get rid of this secondary label
+
+/* "Não-": PREFIX
+
 288;40;PTNaoPrefix|PTAdj;PTAdj+PTNegation|+Join;
 289;40;PTNaoPrefix|PTCon;PTCon+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
 290;40;PTNaoPrefix|PTPart;PTAdj+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
 291;40;PTNaoPrefix|PTConVerb:PTAdjVerb;PTCon+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
+
+/* "ou não: distinguish between negation-or-no-negation (via label PTOuNao) and ...-or-negation
+
 826;40;PTAux:PTVerb:PTAuxCon:PTPart|"ou"|"não"|^PTAux+^PTVerb;*|PTAdv+PTOuNao+PTNegation|Join|*;
 830;40;"ou"|"não"|SEnd:PTPunctuation:PTDe:PTComma;PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
 838;40;PTCon:PTAdj|"ou"|"não"|PTPrep:PTPrepart+^PTDe;*|PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
+
+/* Detect comparisons
+
 865;40;PTMesmo:PTMaismenos:PTComparadj|.PTAdj|PTComprel|^PTVerb+^PTAux;*|*|-PTRelpron|*;
+
+/* VERBS PLUS PRONOUN - CLUSTER
+
 919;40;^PTPronsuffix|PTPronsuffix|PTPronsuffix;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon|Join|Join;
 920;40;^PTPronsuffix|PTPronsuffix+PTInf;+PTInf+PTWithSuffix-PTVerb-PTCon-PTConVerb-PTInfCon-PTAuxCon|Join;
 921;40;^PTPronsuffix|PTPronsuffix+PTVerb;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon-PTAdjVerb-PTPart|Join;
@@ -40,29 +75,53 @@
 922;40;PTVerb:PTInf:PTGer:PTAux:PTSer|PTPronsuffix;+PTWithSuffix-PTConVerb-PTInfCon|Join;
 924;40;PTConVerb|PTPronsuffix;^PTVerb+PTWithSuffix|Join;
 923;40;^PTPronsuffix|PTPronsuffix;PTInf+PTWithSuffix|Join;for unknown verb forms, especially personal infinitives with -se
+
+/* SER: NOUN or AUXILIARY INFINITIVE
+
 15;40;PTDefart:PTIndefart:PTIndefpronPRNR|PTSer+^PTWithSuffix;*|PTCon;makes Concept of 'ser'after articel or indefinite pronoun
 479;40;PTSer;^PTAux+PTInf+PTLinkingverb;
+
+/* CERCA: PREPOSITION OR NOUN OR VERB
+
 690;40;PTConVerb+PTPrep|PTCon;PTPrep|*;
 691;40;PTRelpron|PTDefart:PTA|PTConVerb+PTPrep;*|*|PTVerb;
+
+/* NOS: PREPART or PERSPRON
+
 751;40;PTNos|PTVerb:PTAux;PTPerspron|*;
 752;40;PTNos;-PTNos;
+
+/* MULTIWORD PREPOSITION: JOIN
+
 496;40;PTAdv:PTMaismenos|PTAdjInPrep|PTPrep;PTPrep|+Join|+Join;
 497;40;PTAdv:PTMaismenos:PTAdjAdv|PTAdjInPrep|PTPrepart;PTPrepart|+Join|+Join;
 835;40;PTAdjInPrep|PTPrep|PTInf:PTRefl:PTPerspron;PTConj|Join|*;
 494;40;PTAdjInPrep|PTPrep;PTPrep|+Join;
 495;40;PTAdjInPrep|PTPrepart;PTPrepart|+Join;
+
+/* CONCEPT PLUS DE
+
 716;40;PTConPlusDe|.PTAdj|PTDe:PTDo|PTConVerb:PTAdjVerb:PTConPart:PTPoder;PTCon|+Join|+Join|+Join;
 726;40;PTConPlusDe|PTDe|PTPart;PTCon|+Join|+Join;
 715;40;PTConPlusDe|.PTAdj|PTDe:PTDo|typeConcept;PTCon|+Join|+Join|*;
 710;40;PTConPlusDe+PTConVerb|^PTDe;PTConVerb|*;
+
+/* CONJUNCTION OR ADVERB
+
 876;40;PTConjAdv|PTComma:PTPunctuation:PTAndOrBut:SEnd;^PTAdv|*;
 877;40;PTLinkingverb|PTConjAdv;*|-PTConjAdv;
 878;40;PTConjAdv;PTConj;
+
+/* INFINITIVE or NOUN
+
 698;40;PTIndefart:PTDefart|PTInfCon;*|PTCon;
 699;40;PTIndefart:PTDefart:PTPrep:PTPrepart|PTAdjVerb:PTNum|PTInfCon;*|PTAdj|PTCon;
 694;40;PTAdj:PTIndefpron:PTPrepart|PTInfCon;*|PTCon;
 696;40;^PTCon|PTA|PTInfCon;*|^PTA|PTCon;
 695;40;PTInfCon;^PTInf;
+
+/* AUXILIARY VERB or NOUN
+
 39;40;PTA|PTAuxCon;PTDefart|PTCon;makes Concept of ambiguous linking verb which can also be concept
 40;40;PTIndefart:PTPosspron:PTDemonstr:PTPrepart:PTMaismenos|PTAuxCon;*|PTCon;makes Concept of ambiguous linking verb which can also be concept
 44;40;PTPrep+^PTComo|PTAuxCon|^PTPart;*|PTCon|*;makes Concept of ambiguous linking verb which can also be concept, after preposition
@@ -70,17 +129,29 @@
 234;40;PTAuxCon|PTAdv:PTAdjAdv|PTPart;PTAux+PTVerb|PTAdv|PTPartrel;makes Relation of past participle after ambiguous auxiliary verb which can be concept + adverb
 530;40;PTAuxCon+PTLinkingverb;PTAux+PTVerb+PTLinkingverb;
 531;40;PTAuxCon;PTAux+PTVerb;
+
+/* REFLEXIVE VERBS
+
 834;40;PTConj:PTRelpron:PTNao|PTRefl|PTAux;*|-PTConj-PTCondition|*;disambiguate 'se'
 872;40;PTAux|.PTAdv:PTAdvstruct|PTRefl|PTPart;*|*|-PTConj-PTCondition|*;
 928;40;PTRefl+^PTConj|PTAux+PTInf;PTAux+PTInf|Join;avoid that one of the labels gets lost
 507;40;PTRefl+^PTConj|PTAux;PTAux|Join;
 508;40;PTRefl|PTVerb+^PTAux;PTVerb|+Join;
 506;40;PTRefl|PTInf;PTInf|+Join;
+
+/* EM: PREPOSITION
+
 240;40;PTEm|PTSegundo;PTEm|PTAdj;makes Concept of 'segundo' after 'em'
 1;40;PTMaismenos|PTPart|PTEm;PTCon|PTCon|PTPrep;makes Concept of past participle and 'mais'
 2;40;PTEm;PTPrep;
+
+/* AO: PREPOSITION AS PART OF CONCEPT
+
 678;40;PTNum:PTNumber+^PTRoman|PTAo;PTNumber|PTCon;
 679;40;PTAo;PTPrepart;
+
+/* A = PREPOSIION or DEFINITE ARTICLE
+
 159;40;PTA|PTInf:PTNumber;PTPrep|*;rewrites 'a' to preposition before infinitive or number
 191;40;PTNum:PTIndefart|PTA|PTNum;PTNum|PTPrep|PTNum;rewrites 'a' to preposition between numerals
 190;40;PTA|PTDefart:PTIndefart:PTDemonstr:PTIndefpron;PTPrep|*;rewrites 'a' to preposition before article, demonstrative and indefinite pronoun
@@ -89,42 +160,72 @@
 574;40;PTComma|PTPart|PTA;*|PTPartrel|*;
 598;40;PTPart+^PTAux|PTA|PTAdj;*|PTPrep|*;
 358;40;PTA|PTNao|PTCon;PTDefart|PTNaoAdj+PTNegation-PTNegBegin|PTCon;
+
+/* CERTO
+
 624;40;PTLinkingverb|PTCerto;*|PTAdj;
 629;40;PTCerto|PTLinkingverb;PTAdj|*;
 630;40;PTVerb|PTCerto|PTRelpron;*|PTAdv|*;
 626;40;PTCon:PTConVerb|PTCerto|PTPrep:PTPrepart:PTConj;*|PTAdj|*;
 628;40;PTCerto|PTComma:PTAndOrBut:PTPunctuation;PTAdj|*;
 631;40;PTCon:PTConVerb|PTCerto|SEnd;*|PTAdj|*;
+
+/* SALVO: ADJECTIVE, PARTICIPLE or PREPOSITION
+
 456;40;PTLinkingverb|PTSalvo;*|PTAdj;
 458;40;PTPrep:PTA|PTSalvo;^PTPrep|PTAdj;
 457;40;PTSalvo;PTPrep;
+
+/* ESTE: NOUN or ARTICLE
+
 3;40;PTDefart:PTPrepart|PTEste;*|PTCon;makes Concept of 'este' if preceded by article
 5;40;PTEste;PTDemonstr;
+
+/* PODER: AUXILIARY INFINITIVE OR NOUN
+
 912;40;PTPoder|.PTAdv:PTAdvPR:PTAdvstruct|PTInf;PTAux+PTInf|*|*;
 914;40;PTNao+^"nem"|PTPoder;*|PTAux+PTInf;
 926;40;PTPoder+PTVerb;-PTPoder;
 913;40;PTPoder;PTCon;
+
+/* TODO/A(S): makes some following nonrelevants part of Concept
+
 637;40;PTComma|PTConVerb|PTIndefpron;PTComma|PTVerb|*;
 617;40;PTCon|PTTodo|PTIndefart:PTDefart:PTDemonstr:PTA|PTCon;PTCon|PTBeginconcept|PTCon|+Join;
 618;40;PTTodo|PTDefart|PTPosspron;PTAdj|+Join|+Join;
 620;40;PTTodo|PTDefart|PTIndefpron;PTTodo+PTIndefpron+PTIndefpronPRCon|+Join|+Join;
 615;40;PTTodo|PTIndefart:PTDefart:PTPosspron:PTDemonstr:PTDemonstrPR|^PTVerb+^PTRelpron;PTAdj|+Join|*;
 616;40;PTTodo|PTA:PTNum;PTAdj|+Join;
+
+/* NUMBERS PLUS 'DE'
+
 722;40;PTNum:PTMaismenos|PTDe|PTNum:PTPercent;PTNum|+Join|+Join;
 327;40;PTNum|PTConVerb;PTNum|PTCon;makes Concept of ConVerb after numeral
 720;40;PTNum:PTPercent|PTDe|PTCon:PTConVerb:PTConPart:PTPart;PTCon|+Join|+Join;
 721;40;PTNum:PTPercent|PTDe|PTAdj:PTAdjVerb;PTAdj|+Join|+Join;
+
+/* ADVERB or NOUN
+
 460;40;PTPrep:PTPrepart:PTIndefart:PTDefart|PTAdvCon;*|PTCon;
 462;40;PTAdvCon;PTAdvmanner+PTAdv;
+
+/* PARTICIPLE or ADJECTIVE
+
 554;40;PTAux|PTPart+PTAdj;*|PTPartrel;
 555;40;PTComma|PTPart+PTAdj|PTPrepart;*|PTPartrel|*;
 553;40;PTPart+PTAdj;PTAdj;
+
+/* ADJECTIVE or NOUN
+
 842;40;PTIndefart:PTDefart:PTPosspron:PTPrepart:PTPrep|PTAdjCon|typeRelation;*|PTCon|*;
 570;40;PTIndefart:PTDefart|PTAdjCon|PTConVerb|"a"|PTInf;*|PTCon|PTVerb|*|^PTInf;
 575;40;PTIndefpron:PTIndefart:PTDefart:PTPosspron|PTAdjCon|PTPart:PTVerb;*|PTCon|*;
 577;40;PTIndefpron|PTAdjCon|PTRelpron:PTComma:SEnd;*|PTCon|*;
 576;40;PTPrepart:PTPrep|PTAdjCon|PTPart;*|PTCon|*;
 884;40;PTVerb:PTGer+^PTLinkingverb|PTAdjCon|typeRelation;*|PTCon|*;
+
+/* ADJECTIVE or VERB
+
 587;40;PTAdjVerb+PTVerb|.PTAdv|PTInf;PTVerb|*|*;
 572;40;PTIndefart:PTDefart|PTCon|PTAdjVerb;*|*|PTAdj;
 583;40;PTInf|PTA|PTCon:PTConVerb|PTAdjVerb;*|*|*|PTAdj;
@@ -136,6 +237,9 @@
 702;40;PTCon:PTConVerb|PTAdvstruct|PTAdv:PTMaismenos|PTAdj:PTAdjVerb;PTCon|PTAdj|+Join|+Join;
 794;40;PTAdj|PTAndOrBut|PTAdjVerb;*|*|PTAdj;
 573;40;PTAdjVerb;PTConVerb;
+
+/* PARTICIPLE or NOUN
+
 588;40;PTAdj|PTConPart;*|PTCon;
 590;40;PTPrep|PTAdjAdv|PTConPart;*|PTAdj|PTCon;
 594;40;PTPrep:PTDemonstr|PTConPart;*|PTCon;
@@ -147,13 +251,22 @@
 619;40;PTIndefpron:PTNaoAdj|PTConPart;*|PTCon;
 718;40;PTMaismenos|PTPart|PTConPart;PTAdj|+Join|PTCon;
 589;40;PTConPart;PTPart;
+
+/* ANTES: PREPOSITION / ADVERB
+
 674;40;PTAntes|PTPart;PTAdv|*;
+
+/* ADVERBS OF DEGREE plus INDEFINITE PRONOUNS / plus PATHRELEVANT TIME EXPRESSIONS
+
 646;40;PTAdvdegree:PTMaismenos|PTIndefart:PTDefart:PTA|PTIndefpronPR;PTIndefpronPR|+Join|+Join;
 611;40;PTAdvdegree:PTMaismenos|PTIndefpronPR;PTIndefpronPR|+Join;
 612;40;PTAdvdegree:PTMaismenos|PTIndefpronPRNR;PTIndefpronPRNR|+Join;
 604;40;PTAdvdegree:PTMaismenos|PTIndefpronPRCon;PTIndefpronPRCon|+Join;
 669;40;PTAdvdegree:PTMaismenos|PTAdvPR+PTTime;PTAdvPR+PTTime|+Join;
 675;40;PTAdvdegree:PTMaismenos|PTAdvPR;PTAdvPR|+Join;
+
+/*TIME: CONCRETE POINT IN TIME
+
 656;40;PTConTime:PTTempBeginEnd:PTDay|PTDe:PTPrepartTime|PTConTime:PTDay:PTTempBeginEnd;PTConTime+PTTempEnd|+Join|+Join;
 663;40;PTAdjtemp|PTConTime|PTAdj;PTAdj|PTCon|PTAdj;
 650;40;^PTConTime|PTAdjtemp|PTConTime;*|PTConTime+PTTempBeginEnd|+Join;
@@ -174,6 +287,9 @@
 705;40;PTTempBeginEnd|PTDateBrackets;PTTempBeginEnd|+Join;
 725;40;PTTempEnd|PTDateBrackets;PTTempEnd|+Join;
 707;40;PTDay|PTDateBrackets;PTDay+PTCon|+Join;
+
+/* NUMBERS
+
 543;40;PTAdvdegree|PTAdvdegree;PTAdvdegree|+Join;
 724;40;PTNum|PTPart|"pelo":"pela":"no":"por";PTNum|PTPartrel|*;
 514;40;PTNum;PTNumber;
@@ -184,20 +300,41 @@
 516;40;PTNumber|PTAdvstruct|PTAdj:PTPart;PTAdj|+Join|+Join;
 527;40;PTMaismenos|PTDe|PTNumber:PTUm|PTSegundo;PTAdj|+Join|+Join|PTCon;
 525;40;PTMaismenos|PTDe|PTNumber:PTUm;PTAdj|+Join|+Join;
+
+/* CONCEPT CLUSTER WITH NONRELEVANT
+
 517;40;PTCon|PTAdvstruct|PTAdj:PTPart|^PTPrepart;PTCon|PTAdj|+Join|*;
+
+/* CONFORME: ADJECTIVE or VERB or PREPOSITION
+
 178;40;PTIndefart|PTCon|PTConforme;*|*|PTAdj;makes adjective of 'conforme' after article + Concept
+
+/* SEGUNDO: ADJECTIVE or PREPOSITION
+
 157;40;PTDefart:PTIndefart:PTDemonstr:PTPrepart|PTSegundo;*|PTAdj;makes adjective of 'segundo' if preceded by article, demonstrative pronoun or preposition+article
 162;40;PTPrep|PTSegundo|PTAndOrBut;^PTPrep|PTAdj|PTAndOrBut;makes adjective of 'segundo' between preposition and AndOrBut
 165;40;SBegin|PTSegundo|PTComma;*|PTAdv|PTComma;to make adverb of 'segundo' at beginning sentence
 239;40;PTSegundo|PTPerspron;PTAdv|PTPerspron;to make adverb of 'segundo' before personal pronoun
+
+/* MESMO: NONRELEVANT or INDEFINITE PRONOUN
+
 565;40;PTComma:PTAndOrBut|PTMesmo|PTVerb:PTPart;*|PTNonrel|*;
 564;40;^PTDemonstr+^PTDefart|PTMesmo|PTPrep:PTPrepart:PTConj:PTRelpron;*|PTNonrel|*;
 681;40;PTAux|PTMesmo|PTInf;*|PTNonrel|*;
+
+/* MINHA: POSSESSIVE PRONOUN or NOUN
+
 566;40;PTPrep:PTPrepart|PTMinha|SEnd;*|PTCon|*;
 568;40;PTMinha|PTDe;PTCon|*;
 567;40;PTMinha;PTPosspron;
+
+/* NEGATION PLUS INDEFINITE PRONOUN
+
 687;40;PTNaoAdj|PTIndefpronPR|PTCon;^PTNaoAdj|+Join|*;
 688;40;PTNaoAdj|PTIndefpronPR;PTNegPR+PTNegBegin+PTNegation|+Join;
+
+/* ADVERBS OF DEGREE: JOINS
+
 541;40;"pouco"|PTDe|^"que";PTAdvdegree+PTAdv|+Join|*;
 448;40;PTCon:PTConVerb|PTAdvdegree|PTPart;PTCon|PTAdj|+Join;
 447;40;PTAdvdegree|PTPart;PTPart|+Join;
@@ -208,10 +345,19 @@
 544;40;PTAdvdegree|PTDe|PTCon:PTNumber:PTIndefpron:PTAdj;PTAdj|+Join|*;
 532;40;PTAdvdegree|PTConVerb|PTVerb;PTCon|+Join|^PTVerb;
 682;40;PTAdvdegree|PTNegPR;PTNegPR|+Join;
+
+/* ADVERB AFTER LINKING VERB
+
 484;40;PTLinkingverb|PTAdv+^PTAdvdegree|PTComma;*|PTAdj|*;
 485;40;PTLinkingverb|PTAdv|PTNao|PTAdj;*|PTAdj|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;
+
+/* PARTICIPLES: CONCEPT (before rules converb)
+
 549;40;PTPrep|PTDemonstr|PTPart|PTComma:PTPrep:PTPrepart:PTA;*|PTDemonstrPR|PTPartrel|*;
 440;40;PTIndefart:PTDefart:PTPosspron:PTDemonstr:PTIndefpron|PTPart;*|PTCon;
+
+/* NOUN or VERB: CONCEPT
+
 560;40;PTAlgo:PTNegPR|PTConVerb;*|PTVerb;
 6;40;PTDefart:PTIndefart:PTPosspron:PTDemonstr:PTMaismenos:PTIndefpron:PTIndefpronconcept:PTCujo|PTConVerb;*|PTCon;makes Concept of ConVerb after article, possessive, demonstrative, indefinite pronouns and some other cases
 183;40;PTA:PTPrepart:PTPrep|PTConVerb;*|PTCon;makes Concept of ConVerb after 'a', preposition or preposition+article
@@ -222,6 +368,9 @@
 323;40;PTInf+^PTAux|PTConVerb;*|PTCon;
 521;40;PTVerb|PTAdvdegree|PTConVerb;*|PTCon|+Join;
 909;40;PTNumber|PTConVerb+^PTVerb|^PTDefart+^PTIndefart+^PTPosspron+^PTDemonstr;*|PTCon|*;
+
+/* NOUN or VERB: RELATION
+
 73;40;PTPerspron|PTConVerb|PTCon;PTPerspron|PTVerb|*;makes Relation of ConVerb between personal pronoun and Concept
 693;40;PTPerspron|PTConVerb|PTAdj|PTComma:PTPrep;*|PTCon|*|*;should be before r75
 75;40;PTPerspron|.PTNao|PTConVerb;PTPerspron|*|PTVerb;makes Relation of ConVerb after personal pronoun (+ 'nao')
@@ -244,11 +393,17 @@
 94;40;SBegin:PTComma|PTConVerb|PTDefart:PTIndefart;*|PTVerb|*;makes Relation of ConVerb between beginning sentence/comma and article
 262;40;SBegin|PTConVerb|PTInf;*|PTVerb|*;makes Relation of ConVerb as first word sentence and before infinitive
 903;40;SBegin:PTComma|PTConVerb|PTRelpron|PTNao;*|PTVerb|*|*;
+
+/* TIME: PATHRELEVANT PLUS TIME AS PART OF CONCEPT
+
 665;40;PTTempBeginEnd|PTAdjtempAfter;PTTempBeginEnd|+Join;
 673;40;PTAdjtempAfter+PTAdvdir;PTAdv+PTAdvdir;
 667;40;PTAdjtempAfter;PTAdvPR+PTTime;
 664;40;PTCon:PTAdjCon:PTAdj|PTAdvPR+PTTime|PTAdj:PTPart;PTCon|PTAdj|+Join;
 677;40;PTCon:PTAdjCon:PTAdj|PTAdvPR|PTAdj;PTCon|PTAdj|+Join;
+
+/* ADVERB OR ADJECTIVE
+
 498;40;PTAdvdegree:PTMaismenos|PTAdjAdv;PTAdjAdv|+Join;
 463;40;PTInf+^PTAux|PTAdjAdv|^PTCon;*|PTAdv|*;
 468;40;PTAux|PTAdjAdv|PTPart;*|PTAdv|PTPartrel;
@@ -271,13 +426,25 @@
 483;40;PTAdjAdv|PTAdv;PTAdv|+Join;
 546;40;PTPrep|PTAdjAdv|PTVerb;*|PTAdv|*;
 464;40;PTAdjAdv;PTAdj;
+
+/* ADVERBS: ADJECTIVES
+
 286;40;PTAdvmanner:PTAdvdegree|PTAdj;PTAdj|PTAdj;to make adverbs of manner or degree adjectives before an adjective
 292;40;PTDefart:PTIndefart:PTDemonstr|PTAdj;*|PTAdj;to let words that can be both adjective and adverb lose the adverb label
+
+/* TAO
+
 454;40;PTNao|PTTao|PTAdj;PTNaoAdj+PTNegation|PTAdj|+Join;
 453;40;^PTCon|PTTao|PTAdj|.PTComma|"que":"quanto":"como";*|PTPrep|*|*|*;
 455;40;PTCon:PTAdj|"tão":"acima":"assim"|PTPart:PTAdj;^PTCon|PTAdj|+Join;
 452;40;PTTao;PTAdvstruct;
+
+/* ADVERBS OF STRUCTURE
+
 450;40;PTCon|PTAdvstruct|PTAdj;*|PTAdj|+Join;
+
+/* MAIS / MENOS - ADVERBS OF DEGREE
+
 57;40;PTCon+^PTEndconcept|PTMaismenos:PTAdvdegree|PTAdj;PTCon|PTCon|PTCon;makes mais-menos part of Concept between Concept and adjective
 537;40;PTPrep|PTMaismenos:PTAdvdegree|PTConVerb;*|PTAdj|PTCon;
 524;40;PTVerb+^PTAux+^PTLinkingverb|PTMaismenos|PTPrep;*|PTAdv|*;
@@ -291,24 +458,54 @@
 533;40;PTMaismenos|PTVerb:PTInf;PTAdv|*;
 534;40;PTMaismenos|PTAdj;PTAdj|+Join;
 444;40;PTAdvdegree;PTAdvmanner+PTAdv;
+
+/* JAMAIS WITHOUT NEGATION
+
 819;40;"mais":"maior":"maiores"|*{1,5}^"jamais"|"jamais"|PTPart;*|*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;
 788;40;"mais":"maior":"maiores"|"jamais"|PTPart;*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;
+
+/* NAO MENOS WITHOUT NEGATION
+
 790;40;"não menos"|PTDe|PTNum:PTNumber;PTAdvdegree-PTNegation-PTNegBegin|Join|*;
+
+/* RECIPROCAL PRONOUN IN TWO PARTS
+
 640;40;PTVerb|PTRecipr1|PTPrep:PTPrepart|.PTDefart|PTRecipr2;^PTVerb|+Join|+Join|+Join|+Join;
 645;40;PTRecipr1|PTPrep:PTPrepart|PTRecipr2;PTIndefpronPR|*|PTIndefpronPR;
+
+/* UM/UMA IN QUANTITY
+
 641;40;PTIndefart|"dos":"das"|."de"|typeConcept;PTBeginconcept|+Join|+Join|+Join;
 643;40;PTIndefart|"dos":"das":"de"|PTPosspron|typeConcept;PTBeginconcept|+Join|+Join|+Join;
 636;40;PTIndefart|"dentre"|PTDefart|typeConcept;PTBeginconcept|+Join|+Join|+Join;
 644;40;PTIndefart|"para";PTBeginconcept|+Join;
+
+/* UNS AS INDEFINITE PRONOUN
+
 639;40;PTUns|^typeConcept;PTIndefpronPR|*;
+
+/* SOMETHING/SOMEONE - NO ONE PLUS ADJECTIVE
+
 559;40;PTAlgo|PTDe|PTAdj;PTBeginconcept|PTAdj|+Join;
 558;40;PTAlgo|PTAdj:PTMaismenos;PTBeginconcept|PTAdj;
 685;40;PTNegPR|PTDe|PTAdj:PTMaismenos;PTCon|PTAdj|+Join;
 683;40;PTNegPR|PTAdj:PTMaismenos;PTCon|PTAdj;
+
+/* OUTROS/OUTRAS
+
 561;40;"entre":"dentre"|PTOutros|^PTAdj+^PTCon+^PTIndefpron;PTAdvstruct|+Join|*;
+
+/* SUBSTANTIVATED INTERROGATIVE PRONOUNS
+
 188;40;PTDefart|PTInterpron;PTDefart|PTCon;makes Concept of interrogative pronoun after definite article, 'the reason'
+
+/* SUBSTANTIVATED INFINITIVES
+
 200;40;^PTConj+^"de"+^"para"|"o"|PTInf+^PTLinkingverb+^PTWithSuffix;*|PTDefart|^PTCon;makes Concept of infinitive preceded by definite article
 201;40;PTIndefart|PTInf;*|^PTCon;makes Concept of infinitive preceded by indefinite pronoun
+
+/* PARTICIPLES: CONCEPT
+
 371;40;PTIndefpronconcept|PTPart;*|PTCon;makes Concept of past participle after indefinite pronoun
 23;40;PTPrepart|PTPart;PTPrepart|PTCon;makes Concept of past participle after preposition+article
 25;40;PTPrep+^PTConforme+^PTComo|PTPart;*|PTCon;makes Concept of past participle after preposition
@@ -321,6 +518,9 @@
 800;40;PTCon|PTAdj|PTAndOrBut|PTPart|PTDo;*|*|*|PTAdj|*;
 849;40;PTCon:PTAdj|PTPart|PTPunctuation:SEnd;*|PTAdj|*;
 887;40;^typeConcept|PTNaoAdj|PTPart;*|*|PTCon;
+
+/* PARTICIPLES: RELATION
+
 297;40;PTAux|PTAdvmanner|PTPart;*|PTPartrel|+Join;
 449;40;PTAux|PTAdvstruct|PTPart;*|*|PTPartrel;
 610;40;PTAux|PTPart+PTAux;*|PTPartrel+PTAux;
@@ -346,6 +546,9 @@
 500;40;PTPartrel|PTAndOrBut|PTAdv|PTPart;*|*|*|PTPartrel;
 503;40;PTAdj|PTPart|PTAndOrBut|PTAdv|PTPart;^PTAdj|+Join|*|PTAdj|+Join;
 522;40;PTAndOrBut|PTAdv|PTPart;*|PTAdj|+Join;
+
+/* NAO
+
 795;40;PTDe|PTNao|PTCon;*|PTNaoAdj+PTNegation-PTNegBegin|PTCon;
 58;40;PTCon|PTNao+^"nem"|PTCon;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon;makes 'nao' part of Concept between two Concepts
 622;40;PTCon|PTNao+^"nem"|PTPart|PTAdv;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon|+Join;
@@ -357,32 +560,68 @@
 243;40;PTDefart:PTIndefart:PTPrepart:PTPosspron|PTNao+^"nem"|PTCon:PTAdj;*|PTNaoAdj+PTNegation-PTNegBegin|*;makes 'nao' part of Concept between article/preposition+article/possesive pronoun and Concept or adjective
 361;40;PTDefart:PTIndefart:PTPrepart|PTNao+^"nem"|PTPart;*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;makes 'nao' part of Concept between article/preposition+article and past participle as Concept
 791;40;PTNaoAdj|PTCon|"nem"|PTPart;*|*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;
+
+/* ADVERBS: CONCEPT
+
 299;40;PTDefart:PTIndefart|PTAdvPR|PTAdj;*|PTAdj|+Join;makes Concept of adverb between article and adjective
 48;40;PTDefart:PTIndefart|PTAdvmanner;*|PTAdj;makes Concept of adverb after article
 198;40;PTCon|PTAdv|PTAdj;*|PTAdj|*;makes Concept of adverb between Concept and adjective
+
+/* DEMONSTRATIVE PRONOUN: ADJECTIVAL USE = NonRel
+
 547;40;PTDemonstr|PTNao|PTCon:PTPart;PTNonrel|PTNaoAdj+PTNegation-PTNegBegin|*;
 548;40;PTDemonstr|PTCon:PTAdjCon;PTNonrel|*;
 551;40;PTDemonstr|PTAdj:PTNumber;PTNonrel|^PTAdj;
 556;40;^PTPrepart+^PTRelpron|PTCon|PTDemonstr|"que";*|*|PTNonrel|*;
 550;40;PTDemonstr;PTDemonstrPR;
+
+/* RECIPROCAL PRONOUNS
+
 441;40;PTPrep:PTA|PTRecipr;^PTPrep|PTPerspron;
+
+/* INDEFINITE PRONOUNS AS BEGINCONCEPT or AS PART OF CONCEPT CLUSTER 
+
 150;40;PTCon|PTIndefpron|PTCon;PTCon|PTBeginconcept|*;makes BeginConcept of indefinite pronoun between two Concepts
 613;40;PTAdj:PTIndefpronPRCon|PTIndefpronPR|PTCon;^PTAdj|+Join|*;
+
+/* INDEFINITE PRONOUNS: ADJECTIVAL USE = Concept
+
 703;40;^PTPrep|PTIndefpronPRCon|PTIndefart:PTDefart:PTPosspron|PTCon:PTAdj;*|PTAdj|+Join|*;
 596;40;PTIndefpronPRCon|PTCon:PTAdj:PTMaismenos;PTAdj|*;
 608;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRCon|^PTAdj+^PTCon;*|PTAdj|*;
 597;40;PTIndefpronPRCon;PTIndefpronPR;
+
+/* INDEFINITE PRONOUNS: ADJECTIVAL USE = NonRelevant
+
 623;40;PTIndefpronPRNR|PTCon:PTBeginconcept:PTAdj:PTIndefpronPR;PTNonrel|*;
 632;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|SEnd;^PTCon|PTNonrel|*;
 633;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|^PTAdj+^PTCon;*|PTNonrel|*;
 625;40;PTIndefpronPRNR;PTIndefpronPR;
+
+/* INDEFINITE PRONOUNS CONCEPT AS PART OF PATHRELEVANT INDEFINITE PRONOUN
+
 614;40;PTIndefpronconcept+PTAdj|PTIndefpronPR;PTIndefpronPR|+Join;
+
+/* INDEFINITE PRONOUNS AS NEGATION
+
 686;40;PTNaoAdj|PTPrepart|PTPosspron;^PTNaoAdj|+Join|+Join;
 853;40;"nunhum":"nenhuma"|PTVerb:PTAux;PTPerspron+PTNegation-PTNegBegin|*;
+
+/* DEFART AS PERSONAL PRONOUN
+
 803;40;PTDefart|PTInf;PTPerspron|*;
+
+/* TANTO COMO
+
 433;40;PTTanto|*{1,7}^PTComo|PTComo;^PTConj|*|PTComo;makes Relation of 'tanto' in expression 'tanto...como'
+
+/* A NÃO SER
+
 896;40;PTA|"não"|"ser"|PTAdj:PTPart:PTPartrel:PTAdv:PTComma;PTConj|*|*|*;
 897;40;PTA|"não"|"ser";PTPrep+PTNegStop|Join|Join;
+
+/* LABELS CLEAN-UP
+
 241;40;PTVerb+^PTAux;PTVerb;to remove all other labels than Verb
 700;40;PTCon;PTCon;to remove all other labels than Con
 885;40;PTAdjCon;PTAdj+PTCon;default
@@ -400,6 +639,11 @@
 706;40;PTLayout;PTLayout;to remove all other labels than Layout
 773;40;PTA;PTDefart;default
 866;40;PTRelpron+PTComprel;-PTComprel;
+
+/*890;40;PTPrepartTime;-PTPrepartTime;;cleanup irrelevant label
+/* PHASE 60: DETECTION OF ENUMERATIONS
+/*====================================
+
 753;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;
 754;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;
 755;60;*PTCon:PTAdj+^PTList|PTComma|*PTCon:PTAdj+PTList;+PTList|+PTList|*;for longer enumerations
@@ -432,43 +676,95 @@
 841;60;SBegin|PTAndOrBut;*|PTConj;
 879;60;PTInf|PTAndOrBut|PTInf;+PTRList|+PTRList-PTNegStop|+PTRList;
 880;60;PTPartrel|PTAndOrBut|PTPartrel;+PTRList|+PTRList-PTNegStop|+PTRList;
+
+/* PHASE 70: NEGATION
+/*===================
+/* PREPARATION
+/* add/remove labels that are needed for the expansion rules
+
 345;70;PTAdj;+PTCon;
 848;70;PTPart+PTPreferRel;PTPartrel;
 356;70;PTPart;^PTCon;
 898;70;PTInf:PTVerb:PTRefl+PTNegStop;-PTNegStop;remove attribute that came from lexrep "se"
 899;70;PTAdv+PTNegation+^PTOuNao;PTNao+PTNegation+PTNegBegin-PTNaoAdj;for "dificilmente"
+
+/* não só/meramente/apenas
+
 929;70;PTNao+^PTNegation2|PTVerb:PTAux:PTInf:PTPartrel|PTAdvrestrict|^PTNumber;PTAdv|*|PTAdv|*;removing negation from Nao and making Advrestrict Relation when both occur together with a verb in between
+
+/* add labels that are used in the expansion rules
+
 780;70;PTComma|PTAdvstruct|PTComma;+PTNonrel|+PTNonrel|+PTNonrel;
 747;70;PTDefart:PTIndefart:PTNonrel:PTPosspron:PTCon:PTNumber:PTIndefpronPR;+PTNPC;adding label to diminish number of options in following rules
 843;70;PTAdv:PTAdvPR:PTAdvstruct;+PTAdv70;
+
+/* disambiguate conjunctions
+
 820;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|"apesar"|PTDo;*|PTConj|Join;
 821;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|PTComo+PTPrep;*|PTConj;
 839;70;PTVerb:PTAux:PTInf|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|"e"|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|^PTInf;*|*|-PTAndOrBut+PTConj|*|*|*;
 881;70;PTVerb|"e"|^PTVerb;*|+PTConj|*;
+
+/* NÃO as the opposite of SIM
+
 845;70;PTVerb:PTAux:PTInf:PTPartrel:PTPunctuation|.PTAdv70|"não"|PTPunctuation:SEnd;*|*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' at the end of a sentence
 846;70;PTDefart|"não"|PTDo:PTRelpron:SEnd;*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' in specific contexts, very rare!
+
+/* EXPANSION TO THE LEFT
+/* basic structure: (subject) - não - verb
+
 745;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
 750;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop|*;
 771;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*;
 772;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|+PTNegBegin|*|*;
+
+/* variations
+
 792;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|*|+PTNegBegin|-PTNegStop;
 805;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*;variant of r792
+
+/* variation 2: (subject) - não - pronominal object- verb
+
 822;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*|-PTNegStop;
 824;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*|*;
+
+/* variation 3: adverb - (subject) - não - verb
+
 801;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
 817;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;
 818;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;
+
+/* subclause with "que"
+
 809;70;^PTRelpron+^PTPrep|PTRelpron|.PTPerspron:PTDemonstrPR|PTAdvPR:PTAdv:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin+PTBeginrel|*|*|+PTNegBegin|*;
+
+/* negation span starts after a Concept
+
 812;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;
 813;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;
 814;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
+
+/* negation with Partrel
+
 837;70;PTCon|.PTAdvstruct|PTNao|.PTAdv|PTPartrel;+PTNegBegin|*|+PTNegBegin|*|*;
+
+/* sem
+
 852;70;PTCon|PTAux|PTPrep+PTNegBegin;+PTNegBegin|*|*;
 850;70;^PTDo|PTCon|PTPrep+PTNegation|PTNPC;*|+PTNegBegin|*|*;
+
+/* nenhum(a) dos/das
+
 856;70;"nenhum":"nenhuma"|"das":"dos"|.PTIndefpronPR|PTCon;+PTBeginconcept-PTNaoAdj|PTAdj|PTAdj|*;
 857;70;"nenhum":"nenhuma"|PTDe|PTPerspron;PTPerspron+PTNegation-PTNaoAdj|Join|Join;
+
+/* Include antecedent of relative clause with negation
+
 900;70;^PTPrep+^PTPrepart|*PTCon+^PTAdj+^PTNegBegin|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|-PTBeginrel|*;
 901;70;^PTPrep+^PTPrepart|PTCon+^PTAdj|.PTCon|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|+PTNegBegin|-PTBeginrel|*;
+
+/* Miscellaneous
+
 769;70;PTCondition|PTNegBegin;+PTBeginrel+PTNegBegin|*;include conditional conjunction
 797;70;SBegin:PTColon:PTConj:PTRelpron:PTComma+^PTList+^"para"|PTInf|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;infinitive as subject
 774;70;typeRelation+^PTAndOrBut+^PTPrep+^PTPrepart+^PTRelpron+^PTNegation+^PTNegBegin|PTRelpron:"e"|.PTAdv70|typeRelation+PTNegBegin;*|+PTBeginrel|*|*;split relation when negation only applies to part of it
@@ -480,8 +776,18 @@
 851;70;PTVerb:PTPartrel:PTInf+^PTAux|.PTAdv70|PTPrep+PTNegBegin;*|*|+PTNegBegin+PTBeginrel;
 893;70;PTVerb:PTPartrel:PTInf|PTConj+PTNegation;*|+PTBeginrel;split relation before "sem que"
 854;70;PTNegation|.typeRelation+^PTNegBegin+^PTNegStop|PTNegBegin;+PTNegBegin|*|*;include negation marker in immediately following negation span
+
+/* move NegBegin from nonrelevant to relevant lexrep
+
 746;70;PTNegBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegBegin;move NegBegin from nonrelevant to relevant lexrep
+
+/* post-processing Advstruct between commas
+
 779;70;PTComma|PTAdvstruct+^PTNegBegin|PTComma;PTNonrel|*|PTNonrel;
+
+/* EXPANSION TO THE RIGHT
+/* general rules
+
 911;70;PTNao|.PTComma|*PTVerb:PTAux:PTInf|.PTComma|PTNegation2+^"nem";*|*|*|*|+PTAdv70-PTNegBegin;a negation marker that enforces a preceding negation marker must not act as NegBegin
 858;70;^PTNegation2+^"sem"|PTPunctuation+^PTList|^PTNegBegin+^PTNegation+^PTNegation2;*|*|+PTNegStop;stop the right expansion at a punctuation mark, except when it concerns a comma in an enumeration
 863;70;PTNegation2|PTPunctuation|PTConj+^PTNegBegin;*|*|+PTNegStop;cover cases that are excluded by r858
@@ -499,10 +805,20 @@
 873;70;PTConj:PTRelpron:PTPrep|PTBeginrel+PTNegStop;+PTNegStop|*;move Beginrel to conjunction to exclude the conjunction from the expansion
 886;70;PTPartrel|*^PTVerb+^PTAux+^PTNegBegin|PTVerb:PTAux+^PTNegBegin+^PTNegation;*|*|+PTNegStop;stop expansion on conjugated verb after Partrel
 907;70;PTNegation+PTNegBegin+^PTNaoAdj|PTPunctuation|*{1,3}^PTPunctuation|PTPunctuation|^PTAndOrBut+^PTConj;*|+PTNegBegin|+PTNegBegin|+PTNegBegin|+PTNegBegin;don't let an adverbial expression between commas interrupt the expansion
+
+/* sem
+
 894;70;PTPrep+PTNegation|*PTNPC:PTDe:PTPrep:PTPrepart:PTList|PTVerb:PTPartrel;*|*|+PTNegStop;
 910;70;PTPrep+PTNegation|.PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon|PTDefart:PTIndefart:PTNonrel:PTPosspron;*|*|*|+PTNegStop;stop at concept after concept
+
+/* move NegStop from nonrelevant to relevant lexrep
+
 862;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep
 905;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep
+
+/* SENTIMENT SCOPE
+/* Restriction of scope
+
 385;70;PTCon|PTPunctuation|PTVerb;^PTCon|PTPunctuation|^PTVerb+PTPosSentimentStop;
 386;70;PTCon|PTPunctuation|PTVerb;^PTCon|PTPunctuation|^PTVerb+PTNegSentimentStop;
 387;70;PTCon|PTPunctuation|PTPrep;^PTCon|PTPunctuation|^PTPrep+PTPosSentimentStop;
@@ -525,6 +841,9 @@
 406;70;PTVerb|PTPunctuation|PTCon;^PTVerb|PTPunctuation|^PTCon+PTNegSentimentStop;
 409;70;PTCon|PTAndOrBut|PTCon;^PTCon|-PTPosSentimentStop|^PTCon;to NOT make AndOrBut a sentimentstopper between two concepts
 410;70;PTCon|PTAndOrBut|PTCon;^PTCon|-PTNegSentimentStop|^PTCon;to NOT make AndOrBut a sentimentstopper between two concepts
+
+/* Expansion of scope
+
 415;70;PTCon|PTCon|PTCon|PTPosSentiment;+PTPosSentimentBegin|^PTCon|^PTCon|^PTPosSentiment;
 416;70;PTCon|PTCon|PTCon|PTNegSentiment;+PTNegSentimentBegin|^PTCon|^PTCon|^PTNegSentiment;
 417;70;PTCon|PTCon|PTPosSentiment;+PTPosSentimentBegin|^PTCon|^PTPosSentiment;
@@ -539,5 +858,12 @@
 428;70;PTCon|PTDe|PTCon|PTNegSentiment;+PTNegSentimentBegin|PTDe|^PTCon|^PTNegSentiment;
 431;70;PTCon|PTDe|PTPosspron|PTCon|PTPosSentiment;+PTPosSentimentBegin|PTDe|^PTPosspron|^PTCon|^PTPosSentiment;
 432;70;PTCon|PTDe|PTPosspron|PTCon|PTNegSentiment;+PTNegSentimentBegin|PTDe|^PTPosspron|^PTCon|^PTNegSentiment;
+
+/* PHASE 95: APPLY PTBeginrel
+/*===========================
+
 770;95;PTBeginrel;PTBeginrel;deletes Conj, Refl, etc. to avoid conflict with Beginrel
+
+/* REWRITE LANGUAGE SPECIFIC LABELS TO UNIFIED LABELS
+
 378;$;PTPunctuation;Punctuation;

@@ -1,13 +1,29 @@
+
+/*PHASE 1: unified labels and user dictionary labels
+/* = = = = = = = = = = = = = = = = = = = = = = = = =
+/*Rewrite unified labels to language specific labels
+/*==================================================
+
 920;1;CapitalInitial;^UKCapitalInitial;
 1126;1;CapitalMixed;^UKCapitalMixed;
 1158;1;CapitalAll;^UKCapitalAll;rewriting mandatory label to a language-specific label
 921;1;Punctuation;UKPunctuation;
+
+/*Rewrite user dictionary labels
+/*==============================
+
 926;1;UDNegation;+UKNegation+UKNegBegin;
 927;1;UDPosSentiment;+UKPosSentiment+UKPosSentimentBegin;
 928;1;UDNegSentiment;+UKNegSentiment+UKNegSentimentBegin;
 923;1;UDConcept;UKCon;
 924;1;UDRelation;UKRelation;
 925;1;UDNonRelevant;UKNonRelevant;
+
+/*PHASE 38: prepare negation
+/* = = = = = = = = = = = = =
+/*join negation markers
+/*=====================
+
 1302;38;UKNe|UKNe;UKNe|+Join;
 1201;38;UKAdvdegree|UKNe;JoinReverse|+UKNe;
 506;38;UKHyphen|UKNe|UKCon:UKAdj:UKIndefpron;UKConj|^UKNegRel|*;'ne' between dash and noun becomes relatio
@@ -15,14 +31,32 @@
 1203;38;UKNe|UKVsje;UKBCon+UKNegIndefpronCon+UKNegBCon|+Join;
 562;38;UKAdvdegree:UKAdvdegNR|UKNiyaki;JoinReverse|+UKBCon+UKNegBCon;adverb of degree plus Niyaki are joined to negation marker as beginconcept
 1154;38;UKAdvdegree:UKAdvdegNR|UKNegPR;JoinReverse|+UKNegPR;
+
+/*add label to negation marker for later processing of negated indefinite pronoun
+/*===============================================================================
+
 1333;38;UKNe|UKIndefpronPRCon;+UKNegIndefpronCon|*;
+
+/*PHASE 39: Case specific labels for adjectives and nouns
+/* = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+/*Preparation: add general labels to specific case labels
+/*=======================================================
+
 1287;39;UKConInstrMN:UKConInstrF:UKConInstrPl;+UKConInstr;
 1288;39;UKAdjInstrMN:UKAdjInstrF:UKAdjInstrPl;+UKAdjInstr;
 1289;39;UKAdjGenMN:UKAdjGenF:UKAdjGenPl;+UKAdjGen;
 1290;39;UKConGenMN:UKConGenF:UKConGenPl;+UKConGen;
 1293;39;UKAdjDatLocF:UKAdjDatLocMN;+UKAdjDatLoc;
+
+/*Preparation: disambiguate adjcon
+/*================================
+
 1296;39;UKAdjCon+UKAdjNomPl|UKConNomPl;-UKAdjCon+UKAdj|*;
 1314;39;UKAdjNomF|UKAdjCon+UKConNomF;*|-UKAdjCon-UKAdjNomF+UKCon;
+
+/*Preparation: add NoBCon for noun+adjective in same case
+/*=======================================================
+
 1273;39;UKConNomN|UKAdjNomN|^UKConNomN;*|+UKNoBCon|*;Adj follows Con in same case
 1277;39;UKConNomM|UKAdjNomM|^UKConNomM;*|+UKNoBCon|*;Adj follows Con in same case
 1278;39;UKConNomF|UKAdjNomF|^UKConNomF;*|+UKNoBCon|*;Adj follows Con in same case
@@ -36,65 +70,158 @@
 1285;39;UKAdjNomPl|*UKAdjInstr:UKConInstr|UKAdjNomPl:UKConNomPl;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
 1276;39;UKAdjAccF|*UKAdjInstr:UKConInstr|UKAdjAccF:UKConAccF;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
 1313;39;UKAdjInstr:UKConInstr|UKAdjInstr:UKConInstr;*|+UKNoBCon;
+
+/*Preparation: only Possessive if capitalized
+/*===========================================
+
 1292;39;UKPossessive+^UKCapitalInitial;-UKPossessive;
+
+/*Preparation: add PossibleBCon label to relevant cases
+/*=====================================================
+
 1281;39;UKAdj:UKPartAdj:UKPartadjPart:UKAdjCon+UKAdjNomM:UKAdjNomN:UKAdjNomF:UKAdjNomPl:UKAdjAccF:UKAdjDatLoc:UKAdjInstr+^UKNoBCon:UKAdjGen:UKConGen;+UKAdjPossibleBCon;
 1282;39;UKConNomM:UKConNomN:UKConNomF:UKConAccF:UKConNomPl:UKConDatPl:UKConInstr+^UKConGen;+UKConPossibleBCon;
+
+/*Join concept clusters
+/*=====================
+
 1319;39;UKAdjNomF|UKPosspron+UKAdjNomF|UKConNomF;*|UKAdj|*;
 1320;39;UKAdjNomM|UKPosspron+UKAdjNomM|UKConNomM;*|UKAdj|*;
 1321;39;UKAdjNomN|UKPosspron+UKAdjNomN|UKConNomN;*|UKAdj|*;
+
+/*Split concept cluster using adjectives in Dative and Instrumental cases
+/*=======================================================================
+
 1127;39;UKVerb+UKPlusDatInstr|.UKAdj|UKCon+^UKConInstr|UKAdjDatLoc:UKAdjInstr:UKAdjDatPl+^UKCapitalInitial+^UKCapitalMixed;*|*|*|UKBCon;
 1130;39;UKVerb+UKPlusDatInstr|UKCon|UKCon+^UKConInstr|UKAdjDatLoc:UKAdjInstr:UKAdjDatPl;*|*|*|UKBCon;
 1323;39;UKCon:UKVerbCon+^UKConNomM|UKNe|UKAdj+UKAdjNomM;*|UKBCon+UKNegBCon-UKNegBegin|*;
 1325;39;UKCon:UKVerbCon+^UKConNomF|UKNe|UKAdj+UKAdjNomF;*|UKBCon+UKNegBCon-UKNegBegin|*;
 1326;39;UKCon:UKVerbCon+^UKConNomN|UKNe|UKAdj+UKAdjNomN;*|UKBCon+UKNegBCon-UKNegBegin|*;
 1327;39;UKCon:UKVerbCon+^UKConNomPl|UKNe|UKAdj+UKAdjNomPl;*|UKBCon+UKNegBCon-UKNegBegin|*;
+
+/*Split concept cluster using adjectives in Nominative and Accusative cases
+/*=========================================================================
+
 1267;39;UKCon+^UKNum:UKCapitalAll:UKPossessive:UKNoBConAfter|UKAdjPossibleBCon:UKConPossibleBCon+^UKCapitalInitial:UKCapitalMixed:UKCapitalAll:UKNoBCon;*|^UKBCon;
+
+/*More/less
+/*=========
+
 1250;39;UKDigit|UKMoreLess|UKThan;UKNum+UKCon|Join|UKRelpron;
 1248;39;UKNe|UKMoreLess|.UKThan|UKNum+UKConPossibleBCon;UKBCon-UKNegation-UKNegBegin|Join|Join|*;
 1249;39;UKNe|UKMoreLess|UKThan;UKCAdv-UKNegation-UKNegBegin|Join|Join;
 1252;39;UKNe|UKMoreLess|UKNum;UKCAdv-UKNegation-UKNegBegin|Join|*;
 1251;39;UKMoreLess|UKThan;UKAdvdegree|Join;
+
+/*participles
+/*===========
+
 1315;39;UKComma|.UKNe|UKPartAdj:UKPartadjPart|UKConInstr:UKAdjInstr;*|*|UKPart|*;
+
+/*verbadj
+/*=======
+
 1324;39;UKVerbAdj+UKAdjAccF|UKAdj+UKAdjAccF;^UKAdj+UKAdjAccF|*;
 1329;39;UKVerbAdj+UKAdjDatPl+UKAdjInstrMN|UKAdj+UKAdjDatPl+UKAdjInstrMN;^UKAdj+UKAdjDatPl+UKAdjInstrMN|*;
+
+/*PHASE 40: General phase
+/* = = = = = = = = = = = 
+/*Conifcap
+/*========
+
 867;40;UKConIfCap+UKCapitalInitial;UKCon;
 1159;40;^SBegin|"i"+UKCapitalAll;*|UKCon;for Latin 'i'
+
+/*Multiword as preposition
+/*========================
+
 871;40;UKPrepMultiword|UKPrepMultiword|SEnd;UKPrep|UKCon|*;
 872;40;UKPrepMultiword|UKPrepMultiword;UKPrep|+Join;
+
+/*Adjective / Noun
+/*================
+
 1110;40;UKPrep|UKAdj|UKAdjCon;*|*|UKCon;
 1111;40;UKAdvStruct|UKPartadjPart|UKAdjCon;*|UKAdj|UKCon;
 1109;40;UKAdjCon;^UKAdj;
+
+/*Verb / adverb degree
+/*====================
+
 854;40;UKCon|UKMalo;*|UKVerb+UKButi;
 902;40;UKComma|UKMalo|UKAdj;*|UKVerb|*;
 855;40;UKMalo;UKAdvdegree;
+
+/*Preposition / noun
+/*==================
+
 857;40;UKPrep|UKPrepCon;*|UKCon;
 859;40;UKPrepCon;UKPrep;
+
+/*Conditional verb
+/*================
+
 911;40;UKButi|UKBi;^UKButi|+Join;
 912;40;UKBi|UKButi;^UKButi|+Join;
 910;40;UKBi;^UKVerb;
+
+/*Idiomatic expressions
+/*=====================
+
 898;40;UKPo|UKSuti|UKVerb;UKPrep|UKCon|*;
 899;40;UKPo|UKSuti;UKAdvStruct|+Join;
+
+/*Concept clusters
+/*================
+
 715;40;UKCon|UKAdv|UKAdj|SEnd;*|^UKBCon+UKCon|*|*;
 822;40;UKVerb|UKRefl;UKVerb|+Join;
+
+/*'шкода'
+
 1141;40;UKShkoda|UKInf;UKPred|^UKInf;
 1142;40;UKShkoda;UKCon;
+
+/*'коло'
+
 814;40;UKAdj|UKKolo;*|UKCon;
 816;40;UKKolo|UKPosspron;UKPrep|*;
 818;40;UKKolo;UKCon;
+
+/*'власне'
+
 826;40;UKPosspron|UKVlasne;*|UKAdj;
 828;40;UKVerb|UKVlasne|UKCon;*|UKAdj|*;
 829;40;UKInf|UKVlasne|UKCon;*|UKAdj|*;
 852;40;UKVlasne|UKAdj;UKAdvdegree|*;
 827;40;UKVlasne;UKAdvStruct;
+
+/*'ніж'
+
 834;40;UKNizh|UKPrep;UKPrep|*;
 836;40;UKNizh|UKAdj:UKCon;UKRelpron|*;
 914;40;UKNizh|UKPartadjPart|UKCon;UKRelpron|UKAdj|*;
 838;40;UKComma:UKAdjAdvComp|UKNizh;*|UKRelpron;
 835;40;UKNizh;UKCon;
+
+/*Time OR comparative
+/*===================
+
 1256;40;UKTimePRCon+UKComp|UKNum:UKThan;UKCAdv|*;
 1257;40;UKTimePRCon+UKComp;-UKComp;
+
+/*'як такий'
+
 1262;40;"як"|UKTakij|UKComma|^UKRelpron:UKConj:UKPrep;UKAdvStruct|Join|*|*;
+
+/*Dash
+/*====
+
 868;40;UKHyphen|UKAdvdegree|UKPartadjPart;UKConj|UKCAdv|UKAdj;
+
+/*Expressions of time
+/*===================
+
 1099;40;UKAdj|UKSeason;*|UKCon;
 1096;40;UKSeason|UKECon+UKYear;UKBeginendconcept|+Join;
 1098;40;^UKDigit:UKOrdNum:SBegin|UKMonth|UKECon+UKYear;*|UKBeginendconcept|+Join;
@@ -135,6 +262,10 @@
 798;40;UKIndefpron|UKECon;UKAdj|UKECon+UKCon;
 381;40;UKPrepAdvdeg|UKDigit;UKBCon+UKCon|*;adverb of degree (which can be preposition) before digit becomes beginconcept
 1068;40;UKNum|UKBeginendconcept;*|UKECon;
+
+/*PathRelevant time / Concept
+/*===========================
+
 1073;40;UKTimePRCon|UKPartAdj;^UKPartAdj|+Join;
 1075;40;UKTimePRCon|UKPartAdjSubst;^UKPartAdjSubst|+Join;
 1079;40;UKTimePRCon|UKECon;UKCon|*;
@@ -142,17 +273,33 @@
 1080;40;UKTimePRCon|UKAdvtempPart1|UKOrdNum;UKCon|^UKAdvtempPart1|*;
 1078;40;UKAdvdegree|UKTimePRCon;UKTime+UKAdvPR|+Join;
 1074;40;UKTimePRCon;UKTime+UKAdvPR;
+
+/*Pathrelevant time part of Concept
+/*=================================
+
 1092;40;UKAdvPR|UKPartAdj;UKAdv|*;
 1093;40;UKAdj|UKAdvPR|UKCon;*|UKAdj|*;
 1094;40;UKKAdj|UKAdvPR|UKCon;UKAdj|UKAdj|*;
+
+/*Preposition + noun possible as adverb
+/*=====================================
+
 789;40;UKAdvPart1|UKAdvPart2|UKVerb;UKRAdv|+Join|*;
 792;40;UKPartadjPart|UKAdvPart1|UKAdvPart2;*|UKRAdv|+Join;
 791;40;UKAdvPart2;UKCon;
+
+/*Verb or noun
+/*============
+
 896;40;UKVerbCon|UKOdyn;UKVerb|*;
 897;40;UKPrep:UKNum|UKVerbCon;*|UKCon;
 1104;40;UKVerb|UKPrep|UKCon|UKVerbCon;*|*|*|UKCon;
 1105;40;UKPrep|UKCon|UKVerbCon|UKAndOrBut;*|*|UKCon|*;
 1144;40;UKCon|UKAndOrBut|UKVerbCon;*|*|UKCon;
+
+/*Preposition 'из'
+/*================
+
 1035;40;UKTakij|UKSamyj;UKIndefpronPR|+Join;
 1039;40;UKTakij|UKJak;UKRelpron|+Join;
 1040;40;UKTakij|UKComma|UKJak;UKRelpron|+Join|+Join;
@@ -162,22 +309,49 @@
 1056;40;UKOdyn:UKKozhen|UKIz|UKPerspron:UKRelpron;UKPerspron|+Join|+Join;
 1051;40;UKOdyn:UKKozhen+^UKGen|UKIz;UKBCon+UKAdj|+Join;
 1058;40;UKOdyn:UKKozhen|UKIz;UKAdj|+Join;
+
+/*Adverb time/Noun
+/*================
+
 765;40;UKPrep|UKAdvtempCon;*|UKCon;
 1087;40;UKPrep|UKCon|UKAndOrBut|UKAdvtempCon;*|*|*|UKCon;
 879;40;UKAdj|UKAdvtempCon;*|UKCon;
 1086;40;UKButi|UKAdvtempCon;*|UKCon;
 766;40;UKAdvtempCon;UKAdvPR;
+
+/*Adverb time: beginendconcept
+/*============================
+
 1088;40;UKNum|.UKCon|UKAdvBeginendconcept;*|*|UKECon;
 1089;40;UKAdvBeginendconcept;UKBeginendconcept;
+
+/*Negation: 'не' relation
+/*=======================
+
 1083;40;"не"|UKAdvPR;^UKNegRel|UKRAdv;
+
+/*Combination number and pronoun; indefinite pronoun as part of noun group
+/*========================================================================
+
 1253;40;^typeConcept|UKDigit|UKIndefpron|UKCon;*|*|UKAdj|*;
 324;40;UKNum+^UKDigit|UKIndefpron|UKCon;*|UKAdj|*;indefinite pronoun between number and noun becomes concept
 451;40;UKNum+^UKDigit|UKDempron|UKCon:UKAdj;*|UKCAdv|*;demonstrative pronoun between number and adjective or noun becomes concept
 323;40;UKAdj|UKIndefpron|UKCon+^UKNum;*|UKAdj|*;indefinite pronoun between adjective and noun becomes concept
+
+/*Rules for specific words
+/*========================
+/* 'біля', 'згідно', 'близько'
+
 382;40;UKPrepAdvdeg|UKNum;UKBCon+UKCon|*;adverb of degree which can be preposition before number becomes concept
 383;40;UKPrepAdvdeg;UKPrep;default for adverb of degree which can be preposition: preposition
+
+/* ('раз' combined with) comparative
+
 530;40;UKRaz|UKCompgr|UKComma|UKRelpron;UKCon|UKCon|*|*;'raz' plus 'more/less' before relative pronoun both become concept
 531;40;UKCompgr|UKIndefpron;UKAdv|*;'more/less' before indefinite pronoun becomes adverb
+
+/* 'больше','меньше'
+
 831;40;UKAdvdegree|UKCompgr;UKCompgr|+Join;
 526;40;UKNe|UKVerb|UKCompgr;*|*|UKRAdv;'more/less' after 'ne' plus verb becomes relation
 771;40;UKCompgr|UKNum;UKAdj|*;
@@ -187,7 +361,15 @@
 878;40;UKNum|UKCompgr;*|UKAdj;
 1065;40;UKCompgr|"за"|"все";UKCompgr|+Join|+Join;
 525;40;UKCompgr;UKAdvdegree+UKAdvdegreeCon;default for 'more/less': adverb of degree plus adverb of degree which can be concept
+
+/* something + adjective
+/*======================
+
 1155;40;UKShtshos|.UKAdv|UKAdj;UKBCon|UKCAdv|*;
+
+/* 'раз'; number
+/*==============
+
 528;40;UKRaz|UKAdvdegree:UKAdjAdvComp:UKAdjComp;UKCon|UKCon;'raz' plus adverb of degree or comparative both become concepts
 917;40;UKAdjComp;+UKAdj;
 527;40;UKRaz|UKNum;UKBCon+UKCon|*;'raz' before number becomes beginconcept
@@ -196,24 +378,51 @@
 640;40;UKNum|UKAndOrBut|UKAdvdegree;^UKNum|+Join|+Join;
 731;40;UKNum+^UKDigit|UKPartadjPart;*|UKAdj;
 738;40;UKOrdNum:UKDigit|UKPartadjPart|UKAdj;*|UKAdj|*;
+
+/*Adverb/adjective
+/*================
+
 762;40;UKComma|UKAdjAdv|UKCon;*|UKAdj|*;
 760;40;UKAdjAdv;UKAdv;
+
+/*Adverb/predicate
+/*================
+
 327;40;UKAdvPred|UKAdj+^UKOrdNum;UKAdj|*;adverb/predicate before adjective becomes concept
 250;40;UKButi|UKAdvPred|UKCon;*|UKPred|*;adverb/predicate between 'to be' and noun becomes relation
 749;40;UKAdvPred|UKNum:UKOrdNum;UKPred|*;
 758;40;UKAdvPred|UKComma|UKConj;UKPred|*|*;
 9;40;UKAdvPred:UKAdvaux;UKAdv;default for adverb/predicate: adverb
+
+/*Adverb degree: part of nonrelevant or not
+/*=========================================
+
 257;40;UKAdvdegNR|UKAdvStruct;UKAdvStruct|*;adverb of degree/structure before structural adverb becomes nonrelevant
 258;40;UKAdvdegNR;+UKAdvdegree;extra label for adverb of degree/structure: adverb of degree
+
+/*Conjunction/nonrelevant
+/*=======================
+
 568;40;SBegin|UKConjNR;*|^UKAdvStruct;conjunction/nonrelevant at beginning sentence becomes nonrelevant
 851;40;SBegin|UKAdvStruct|UKComma|UKConjNR;*|*|*|UKAdvStruct;
 784;40;UKComma|UKConjNR|UKComma;*|UKAdvStruct|*;
 569;40;UKConjNR;^UKConj;default for conjunction/nonrelevant: conjunction
+
+/* 'особливо'
+
 846;40;UKOsoblyvo|UKAdv;UKAdv|+Join;
 843;40;UKOsoblyvo|UKAdj;UKAdvdegree|*;
 418;40;UKOsoblyvo;UKAdvStruct;
+
+/*Nonrelevant with conditions
+/*===========================
+
 803;40;SBegin|UKNRIfBegin;*|UKAdvStruct;
 794;40;SBegin|UKNRIfComma|UKComma;*|UKAdvStruct|*;
+
+/*Verb / adjective
+/*================
+
 870;40;UKVerbAdj|UKCon|.UKNe|UKVerb;UKBCon+UKCon|*|*|*;
 1102;40;UKVerb|UKVerbAdj|UKCon;*|UKAdj|*;
 1106;40;UKVerb|UKIndefpron|UKVerbAdj;*|*|UKAdj;
@@ -223,16 +432,31 @@
 1330;40;UKVerbAdj|UKButi;UKAdj|*;
 1331;40;UKButi|UKVerbAdj;*|UKAdj;
 806;40;UKVerbAdj;UKVerb;
+
+/*Comparative adjective/comparative adverb
+/*========================================
+
 804;40;UKVsje|UKPartadjPart|UKAdjAdvComp|UKCon;UKAdj|UKAdj|UKAdj|*;
 767;40;UKCon|UKAdjAdvComp|UKCon|UKVerb;*|UKBCon+UKCon|*|*;
 770;40;UKAdjAdvComp|UKCon|UKVerb;UKAdj|*|*;
 1255;40;UKAdjAdvComp|UKNum;UKCAdv|*;
 769;40;UKAdjAdvComp;UKComp+UKAdvdegreeCon;
 866;40;UKComp|UKSup|UKSup;UKComp|+Join|+Join;
+
+/*digit in context
+/*================
+
 754;40;UKPartadjPart|UKOrdNum:UKDigit;UKPart|*;
 755;40;UKOrdNum:UKDigit|UKHyphen|UKOrdNum:UKDigit;*|UKConj|*;
+
+/*Adverb degree (combined with negation)
+/*======================================
+
 309;40;UKAdvdegreeCon|UKCon:UKBeginendconcept;UKAdj|UKCon;noun/adverb of degree before noun or beginendconcept becomes concept
 787;40;UKAdvdegreeCon+^UKComp;UKAdvdegree;
+
+/* 'дещо'
+
 1310;40;UKDeshtsho|UKRAdv;UKRAdv|+Join;
 1041;40;UKDeshtsho|UKAdvdegree;UKAdvdegree|+Join;
 1044;40;UKDeshtsho|UKAdjComp;UKAdj|+Join;
@@ -241,7 +465,15 @@
 1047;40;UKDeshtsho|UKPartAdj;UKPartAdj|+Join;
 1049;40;UKDeshtsho|UKPartadjPart;UKPartadjPart|+Join;
 1042;40;UKDeshtsho;UKIndefpronPR+UKIndefpron;
+
+/*Indefinite pronoun OR adverb degree
+/*===================================
+
 1053;40;UKIndefpronAdvdegree|UKVerb:UKInf:UKPart;UKRAdv|^UKVerb;
+
+/*Adverb degree
+/*=============
+
 242;40;UKAdvdegree|UKIndefpronPR;UKIndefpronPR|+Join;adverb of degree before pathrelevant indefinite pronoun becomes pathrelevant
 1133;40;UKAdvdegree|UKIndefpronPRCon|UKPartadjPart;UKBCon+UKCon|UKAdj|UKAdj;
 356;40;UKAdvdegree|UKIndefpronPRCon;UKBCon+UKCon|UKCon;adverb of degree plus indefinite pronoun as pathrelevant or concept becomes beginconcept plus concept
@@ -251,16 +483,35 @@
 1085;40;UKAdvdegree|UKAdvPR;UKAdvPR|+Join;
 1254;40;UKAdvdegree|UKNum;UKCAdv|*;
 243;40;UKAdvdegree;UKAdv;default for adverb of degree: adverb
+
+/* 'всё' (combined with comparative)
+
 365;40;UKComp|"за"|"все";UKComp|+Join|+Join;
 306;40;"все":"усе"|UKComp;UKAdv|*;'vsjo' before comparative becomes adverb
+
+/*Comparative
+/*===========
+
 793;40;UKPrep|UKComp|UKCon;*|UKAdj|*;
 307;40;UKComp;UKAdv;default for comparative: adverb
+
+/*Adverb time
+/*===========
+
 881;40;UKAdj|UKAdv|UKPrep;*|UKAdj|*;
+
+/*InfCon
+/*======
+
 777;40;UKmAux:UKAux|UKInfCon;*|UKVerb;
 903;40;UKComma|UKInfCon|UKComma;*|UKCon|*;
 1107;40;UKVerb|UKInfAfterVerb;*|UKInf;
 1108;40;UKButi|UKPartadjPart|UKInfCon;*|UKPart|UKInf;
 778;40;UKInfCon;+UKVerbCon;
+
+/*Participles: predicative / attributive
+/*======================================
+
 170;40;UKVerb|UKVerbCon;*|UKCon;verb/noun after verb becomes concept
 802;40;UKButi|UKPartadjPart;*|UKPart;
 720;40;UKPrep|UKPartadjPart|UKCon;*|UKAdj|*;
@@ -296,6 +547,10 @@
 1145;40;UKHyphen|UKTse|UKCon|UKPartadjPart;*|*|*|UKAdj;
 1264;40;UKNegPR|UKNe|UKPartadjPart|.UKAdv:UKCAdv|UKAdj;UKAdj|UKNegCon-UKNegBegin|UKAdj|*|*;
 730;40;UKPartadjPart;UKPart;
+
+/*Participle (+defaults other labels into present participle)
+/*===========================================================
+
 1140;40;UKPartAdjSubst|UKAndOrBut|UKPartAdjSubst;UKAdj|*|UKAdj;
 389;40;UKPartAdjSubst;UKPartAdj;default for long participle/noun: long participle
 833;40;UKButi|.UKAdv|UKPartAdj;*|UKRAdv|UKPart;
@@ -308,38 +563,74 @@
 393;40;UKPart|UKAndOrBut|UKPartAdj;*|*|UKPart;long participle after past participle plus and/or/but becomes relation
 52;40;UKNe|UKPartAdj;*|UKAdj;long participle after 'ne' becomes concept
 43;40;UKPartAdj;^UKAdj;default for long participle: adjective
+
+/* 'відносно': adverb degree OR preposition
+
 1059;40;UKVerb:UKPart:UKInf:UKPrep|UKVidnosno;*|UKAdv;
 1060;40;UKVidnosno;UKPrep;
+
+/*Nonrelevant part of noun group
+/*==============================
+
 652;40;UKAdj:UKNum|UKPosspron|UKAdj:UKNum;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
 701;40;UKAdj|UKActobj:"ж":"же"|UKCon;*|UKAdj|*;personal pronoun as acting object or 'ж(е)' between adjective and noun becomes concept
+
+/* 'чином'
+
 710;40;UKAdj|UKAndOrBut|UKAdj|UKChinom;UKAdv|+Join|+Join|+Join;adjective plus and/or/but plus adjective plus 'chinom' are joined to one adverb
 558;40;UKAdj|UKChinom;UKAdv|UKAdv;adjective plus 'chinom' both become adverb
 555;40;UKIndefpronPR|UKChinom;UKIndefpronPR|+Join;pathrelevant indefinite pronoun plus 'chinom' are joined to pathrelevant indefinite pronoun
 1031;40;UKIndefpronPRNR|UKChinom;UKAdvStruct|+Join;
 556;40;UKChinom;UKCon;default for 'chinom': concept
+
+/* 'самый'
+
 188;40;UKSamyj|UKAdj+^UKCapitalInitial;UKAdj|*;'samy' before adjective becomes concept
 189;40;UKSamyj|UKAdv|UKAdj;UKAdj|^UKCAdv|*;'samy' before adverb plus adjective becomes concept
 197;40;UKSamyj;UKAdvStruct;default for 'samy': structural adverb
+
+/* 'шляхом'
+
 198;40;UKAdj|UKShliachom;*|UKCon;'shliakhom' after adjective becomes concept
 869;40;UKShliachom|SEnd;UKCon|*;
 195;40;UKShliachom;UKPrep;default for 'shliakhom': preposition
+
+/*Reciprocal pronoun/number 'один'
+/*================================
+
 222;40;UKOdyn|UKPrep|UKOdyn;UKVerb|+Join|+Join;reciprocal pronoun plus preposition plus reciprocal pronoun is joined to verb
 1036;40;UKOdyn|UKAndOrBut|UKIndefpronPR;UKIndefpronPR|+Join|+Join;
 176;40;UKOdyn+^UKIndefpron;UKAdj;default for reciprocal pronoun: adjective
+
+/*Indefinite pronoun before adjective, possessive pronoun
+/*=======================================================
+
 1215;40;UKVsjeGen|UKAdj:UKNum;UKCon|*;
 353;40;UKVsje|UKAdj:UKNum;UKBCon+UKCon|*;'vsyo' before adjective or number becomes beginconcept
 341;40;UKIndefpronPRCon|UKAdj;UKAdj|*;indefinite pronoun as pathrelevant or concept before adjective becomes concept
 1032;40;UKIndefpronPRNR|.UKNe|UKAdj:UKPosspron;UKNRPron|*|*;
 357;40;UKIndefpronPRCon|UKPosspron|^UKVerb+^SEnd;UKCon|UKCon|*;indefinite pronoun as pathrelevant or concept plus possessive pronoun both become concepts
+
+/* 'правда' and 'и'
+
 217;40;SBegin|UKPravda|UKComma;*|UKAdvStruct|*;'pravda' at beginning sentence before comma becomes nonrelevant
 214;40;UKPravda;UKCon;default for 'pravda': concept
 779;40;SBegin|UKAdvStruct|UKAndOrBut;*|UKAdvStruct|+Join;
 567;40;SBegin|UKAndOrBut;*|UKAdvStruct;and/or at beginning sentence becomes nonrelevant
 786;40;SBegin|UKAdvStruct|UKComma|UKAndOrBut;*|*|*|UKAdvStruct;
+
+/*noun/verb
+/*=========
+
 775;40;UKConVerb|UKInf;UKVerb|*;
 487;40;UKAdj:UKPrep:UKVerb|UKConVerb;*|UKCon;noun/verb after adjective becomes concept
 492;40;UKConVerb|UKAdj:UKCon;UKCon|*;noun/verb before adjective or noun becomes concept
 490;40;UKConVerb;UKVerb;default for noun/verb: verb
+
+/*Verb/noun
+/*=========
+/*NOTE: InfCon has extra label VerbCon (r778), make sure Inf is not lost when it becomes a Relation
+
 165;40;UKAdj|UKVerbCon;*|UKCon;verb/noun after adjective becomes concept
 747;40;UKIndefpronPRCon|UKVerbCon;UKAdj|UKCon;
 1030;40;UKIndefpronPRNR|UKVerbCon;UKNRPron|UKCon;
@@ -353,16 +644,36 @@
 904;40;UKVerbCon|UKCon|UKVerb;UKCon|*|*;
 1197;40;UKInfCon;UKInf;
 169;40;UKVerbCon;UKVerb;default for verb/noun: verb
+
+/*Indefinite pronoun before concept
+/*=================================
+
 1057;40;UKIndefpronPRCon|UKIndefpronPRNR;UKIndefpronPRCon|+Join;
 338;40;UKIndefpronPRNR|UKCon;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before noun becomes nonrelevant pronoun
 362;40;UKIndefpronPRCon|UKCon;UKCon|*;indefinite pronoun as pathrelevant or concept before concept becomes concept
+
+/*Particle/verb
+/*=============
+
 918;40;UKPtclVerb|UKComma|UKConj;UKVerb|*|*;
 179;40;SBegin|UKPtclVerb|UKComma;*|UKAdvStruct|*;partcicle/verb at beginning sentence before comma becomes nonrelevant
 177;40;UKPtclVerb;UKVerb;default for particle/verb: verb
+
+/*Reciprocal pronoun
+/*==================
+
 1147;40;UKPrep|UKRepr;*|UKPerspron;
 447;40;UKRepr;UKVerb;default for reciprocal pronoun: verb
+
+/*Emphasized reflexive pronoun
+/*============================
+
 484;40;UKPrep|UKAdvRefl;*|UKPerspron;'sam sebe' after preposition becomes pathrelevant
 485;40;UKAdvRefl;UKAdv;default for 'sam sebe': adverb
+
+/*Reflexive pronoun
+/*=================
+
 137;40;UKVerb|UKPrep|UKRefl;UKVerb|+Join|+Join;verb plus preposition plus reflexive pronoun are joined to verb
 1029;40;UKPart|UKPrep|UKRefl;UKPart|+Join|+Join;
 1027;40;UKInf|UKPrep|UKRefl;UKInf|+Join|+Join;
@@ -372,10 +683,20 @@
 139;40;UKRefl|UKVerb;UKVerb|+Join;reflexive pronoun plus verb are joined to verb
 138;40;UKRefl|UKAdv|UKVerb;UKVerb|*|*;reflexive pronoun before adverb plus verb becomes relation
 154;40;UKCon|UKRefl;UKCon|+Join;
+
+/* 'тем','то'
+
 402;40;UKComma|UKDempronConj;*|UKConj;'tim/to' after comma becomes relation
 401;40;UKDempronConj;UKDempron;default for 'tim/to': demonstrative pronoun
+
+/* 'це' indefinite pronoun/verb
+
 468;40;UKHyphen|UKTse|UKCon:UKAdj:UKAdv:UKAndOrBut;*|UKPred|*;'tse' between dash and adjective, noun, adverb or and/or/but becomes relation
 470;40;UKTse;UKDempron;default for 'tse': demonstrative pronoun
+
+/*Indefinite pronoun
+/*==================
+
 360;40;UKIndefpronPRCon|UKDempron|UKCon;UKBCon+UKCon|UKCon|*;indefinite pronoun as pathrelevant or concept plus demonstrative pronoun before noun become beginconcept plus concept
 337;40;UKIndefpronPRNR|UKIndefpronPR;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before pathrelevant indefinite pronoun becomes nonrelevant
 1034;40;UKIndefpronPRNR|UKKAdj|UKCon;UKNRPron|UKAdj|*;
@@ -385,9 +706,21 @@
 358;40;UKIndefpronPRCon|UKIndefpronPR;UKIndefpronPR|+Join;indefinite pronoun as pathrelevant or concept plus pathrelevant indefinite pronoun are joined to pathrelevant pronoun
 862;40;UKIndefpronPRCon|^UKAdj+^UKCon+^SEnd;UKIndefpronPR|*;
 864;40;UKIndefpronPRCon|SEnd;UKIndefpronPR|*;
+
+/*Relative pronoun: default conjunction
+/*=====================================
+
 573;40;UKRelpron;+UKConj;extra label for relative pronoun: conjunction
+
+/*Demonstrative pronoun
+/*=====================
+
 449;40;UKDempron|UKAdv|UKAdj;UKNRPron|^UKCAdv|*;demonstrative pronoun plus adverb before adjective becomes nonrelevant plus concept
 453;40;UKDempron|UKCon:UKAdj;UKNRPron|*;demonstrative pronoun before noun or adjective becomes nonrelevant pronoun
+
+/*Short form adjective
+/*====================
+
 882;40;UKInf+^UKButi|UKKAdj;*|UKAdj;
 474;40;UKCon|UKAdv|UKKAdj;*|^UKRAdv|UKPred;adverb plus short adjective after noun  both become relation
 1202;40;UKCon|UKNe|UKKAdj;*|*|UKPred;
@@ -407,10 +740,22 @@
 907;40;UKKAdj|UKConj+^UKAndOr;UKPred|*;
 908;40;UKPunctuation|UKKAdj|SEnd;*|UKPred|*;
 476;40;UKKAdj;UKAdj;default for short adjective: adjective
+
+/*Reflexive pronoun pt2
+/*=====================
+
 155;40;UKRefl;UKPerspron;default for reflexive pronoun: personal pronoun
+
+/*Adverb-suffix
+/*=============
+
 751;40;UKCon|UKAdvSuffix;*|UKCon;
 752;40;UKVerb|UKAdvSuffix;*|UKVerb;
 753;40;UKAdvSuffix;UKVerb;
+
+/*Adverb
+/*======
+
 5;40;UKAdv|UKVerb:UKPart:UKPred;^UKRAdv|*;adverb before verb, participle or predicate becomes relation
 2;40;UKAdv|.UKNe|UKAdj;^UKCAdv|*|*;adverb before (ne plus) adjective becomes concept
 70;40;UKAdv|UKInf:UKRAdv;^UKRAdv|*;adverb before infinitive or adverb as relation becomes relation
@@ -420,8 +765,20 @@
 33;40;UKAdj|UKAdv:UKBeginendconcept|UKCon;*|^UKCAdv|*;adverb or beginendconcept between adjective and noun becomes concept
 880;40;UKAdj|UKAdv|SEnd;*|UKAdj|*;
 38;40;UKAdv;^UKRAdv;default for adverb: relation
+
+/*Preposition: nonrelevant/relation
+/*=================================
+
 493;40;UKAdj|UKPrep|UKPerspron|UKCon;*|UKAdj|UKAdj|*;preposition plus personal pronoun between adjective and noun both become part of the concept
+
+/*Dash
+/*====
+
 428;40;UKCon:UKAdj|UKHyphen|UKCAdv:UKAdj:UKCon:UKNegCon;*|UKConj|*;dash between adjective or noun and adverb as concept, adjective, noun or 'ne' as concept becomes relation
+
+/*Defaults
+/*========
+
 610;40;UKButi+^UKInf;^UKVerb;
 400;40;UKComma;+UKPunctuation;extra label for comma: punctuation
 1038;40;UKECon;UKECon;to remove other labels than econ
@@ -432,6 +789,10 @@
 1151;40;UKDempron;UKPRPron;default for demonstrative pronoun: pathrelevant pronoun
 1152;40;UKPerspron;UKPerspron;to remove all other labels so PathRelevancy is not lost
 1237;40;UKBCon;UKBCon;to remove all other labels than BCon, to prevent it from becoming nonrelevant
+
+/*PHASE 60: detect enumerations
+/* = = = = = = = = = = = = = = 
+
 1180;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;4-element enumeration
 1181;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration
 1182;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron:UKNRPron:UKCAdv|*UKCon;+UKList|+UKList|+UKList|+UKList;2-element enumeration
@@ -451,28 +812,57 @@
 1241;60;UKNe|UKAdj|UKAndOrBut|.UKNe|UKAdj;+UKList|+UKList|+UKList|+UKList|+UKList;
 1263;60;UKInf|UKComma|UKInf|.UKComma|UKAndOr|UKInf;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;
 1306;60;.UKPosspron:UKPRPron:UKNRPron:UKCAdv|UKAdj|UKComma|.UKCAdv|UKAdj|UKAndOrBut|.UKCAdv|*UKAdj|.UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration of adjectives with AndOrBut
+
+/*PHASE 65: negation markers
+/* = = = = = = = = = = = = =
+/*Default labels - negation markers
+/*=================================
+/*'none of'
+
 1216;65;UKNegPR:UKNiyaki|UKIz|"них":"нас":"вас";UKNegPR|+Join|+Join;
 1218;65;UKNiyaki+UKGen|UKIz|UKPosspron:UKPRPron:UKNRPron;UKNegCon-UKNegBegin|UKAdj|UKAdj;
 1217;65;UKNiyaki|UKIz|UKPosspron:UKPRPron:UKNRPron;UKBCon+UKNegBCon|UKAdj|UKAdj;
 1220;65;UKNiyaki+UKGen|UKIz;UKNegCon|UKAdj;
 1219;65;UKNiyaki|UKIz;UKBCon+UKNegBCon|UKAdj;
 1024;65;UKPrep;UKPrep;26-08-2015-nl,make sure prepositions don't become nonrelevant
+
+/* nothing + adjective
+
 1205;65;UKNegPR:UKNiyaki|.UKCAdv|UKAdj;UKBCon+UKNegBCon|UKCAdv|*;
+
+/*'ни'
+
 1204;65;UKNi|UKPrep|UKRelpron|UKAdj:UKCon;UKBCon+UKNegBCon-UKNegBegin|+Join|+Join|*;
 96;65;UKNi|UKPrep|UKNegPR_part;UKNegPR+UKNegation-UKNegBegin|+Join|+Join;'ni' plus preposition plus part of negation marker as pathrelevant are joined to negation marker as pathrelevant
 861;65;SBegin|UKNi|UKComma;*|UKAdvStruct|*;
 98;65;UKNi;^UKNegRel;default for 'ni': negation marker as relation
+
+/*disambiguate 'не'
+
 1334;65;UKNe+UKNegIndefpronCon|UKAdj;UKNegCon|*;
 1200;65;UKNe|.UKAdj:UKCAdv:UKCon:UKECon;UKNegCon-UKNegBegin|*;no expansion for negation on noun
 541;65;UKNe;UKNegRel;default for 'ne': negation marker as relation
+
+/*'жоден' and 'ніякий'
+
 1337;65;UKNiyaki+UKAdjGen;UKNegCon;
 561;65;UKNiyaki;UKBCon+UKNegBCon;default for 'niyaki': negation marker as beginconcept
+
+/*PHASE 66: sentence structure detection
+/* = = = = = = = = = = = = = = = = = = =
+/*after punctuation
+/*=================
+
 1163;66;SBegin:":"|^SBegin+^UKPunctuation;*|+UKPBegin;first word sentence or hyphen, colon
 1164;66;SBegin|UKPunctuation|^UKPunctuation;*|*|+UKPBegin;
 1317;66;SBegin|UKPunctuation|UKDigit|UKPunctuation|^UKPunctuation;*|*|*|*|+UKPBegin;
 1165;66;*{2}UKPunctuation|^UKPunctuation;*|+UKPBegin;
 1166;66;UKBracket1|*{1,2}^UKPunctuation|UKBracket2|^SEnd:UKPunctuation;-UKPunctuation|*|-UKPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
 1167;66;UKBracket1:UKBracket2+UKPunctuation|^SEnd:UKPunctuation;*|+UKPBegin;isolate part of sentence between ()
+
+/*after comma
+/*===========
+
 1173;66;UKComma|UKAdvStruct|UKComma;*|*|+UKNotMarkerPB;preparation, mark comma after advstruct so it's NOT followed by a PB
 1170;66;UKComma|UKPrep:UKRAdv|UKConj;*|+UKPBegin|*;after comma: preposition/adverb + conjunction
 1171;66;UKComma|UKNegPR|UKNegRel;*|+UKPBegin|*;after comma: negation pronoun
@@ -487,6 +877,10 @@
 1195;66;SBegin:UKPunctuation|*UKConj:UKAdvStruct:UKRAdv|UKComma|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
 1303;66;SBegin:UKPunctuation|*UKPossiblePBegin+^UKList|UKComma:UKHyphen|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
 1311;66;UKConj|*UKPossiblePBegin+^UKList|UKComma|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
+
+/*after conjunction / and/or
+/*==========================
+
 1212;66;^UKPBegin|UKConjPB;*|+UKBeginrel+UKPBegin;
 1178;66;^UKConj|UKAndOr|.UKPrep|UKConj:UKPunctuation|*UKPossiblePBegin;*|+UKBeginrel+UKPBegin|*|*|*;'and/or' followed by conjunction or punctuation
 1184;66;UKVerb:UKPart:UKPred+^UKCond|.<^UKPunctuation|UKAndOr+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;
@@ -497,20 +891,55 @@
 1192;66;UKVerb:UKPart:UKPred+^UKCond|*<^UKPunctuation:UKPBegin|UKConj|.<^UKPBegin:UKPunctuation:UKAndOr:UKAndOrBut|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;start phrase at conjunction
 1243;66;typeConcept|UKAndOr|UKVerb;*|+UKPBegin|*;
 1194;66;UKPrep|UKConj+UKPBegin;+UKBeginrel+UKPBegin|-UKBeginrel-UKPBegin;correction for r1192 so preposition + conjunction don't get split up
+
+/*relative clause
+/*===============
+
 1245;66;UKCon|UKNegRel|UKPart+UKAttributive;*|+UKPBegin|*;participle as relation after noun starts new phrase
 1261;66;UKCon|UKPrep|UKKotry;*|*|+UKPBegin;
+
+/*main verb after participle / subclause
+/*======================================
+
 1246;66;UKCon|.UKComma|UKNegRel|UKPart|*<^UKComma:UKPBegin|UKVerb:UKInf;*|*|*|*|*|+UKPBegin;look for main verb after participle as phrase begin
 1259;66;UKComma|UKRelpron|.UKNegRel|UKVerb+^UKCond|*<^UKVerb:UKPunctuation:UKPBegin|UKAdvPR:UKRAdv|UKVerb;*|*|*|*|*|+UKPBegin|*;
 1260;66;UKComma|UKRelpron|.UKNegRel|UKVerb+^UKCond|*^UKVerb:UKPunctuation:UKPBegin|UKVerb;*|*|*|*|*|+UKPBegin;
+
+/*move PBegin on dash to next entity
+/*==================================
+
 1196;66;"-":"–":"—"+UKPBegin|^UKPBegin;-UKPBegin|+UKPBegin;
+
+/*PHASE 70: negation expansion
+/* = = = = = = = = = = = = = =
+/* expansion to left
+/*==================
+/* preparation: assign NoExpansion for preposition-concept patterns
+
 1239;70;^UKCon:UKECon|UKPrep|.UKNRPron:UKPRPron:UKPosspron|*UKCAdv:UKAdj:UKCon+^UKBCon;*|*|*|+UKNoExpansion;
+
+/*expansion to 'у'
+/*================
+
 1295;70;"у"|*UKNRPron:UKPRPron:UKPosspron:UKCAdv:UKAdj:UKCon+^UKBCon|UKNegRel:UKNegPred;+UKNegBegin|*|*;
+
+/*expansion for adjective/adverb as concept
+/*=========================================
+
 1240;70;typeConcept:typePathRelevant+^UKNoExpansion|UKPrep|*typeConcept:typePathRelevant:typeAmbiguous|.UKmAux|UKCopula|.UKCAdv|UKNegCon|.UKCAdv|UKAdj|^UKCAdv:UKAdj:UKCon+^UKNegation:UKNegBegin;+UKNegBegin|*|*|*|*|*|*|*|*|+UKNegStop;expansion to subject before copula + negated adjective
 1238;70;typeConcept:typePathRelevant+^UKNoExpansion|.UKmAux|UKCopula|.UKCAdv|UKNegCon|.UKCAdv|UKAdj|^UKCAdv:UKAdj:UKCon+^UKNegation:UKNegBegin;+UKNegBegin|*|*|*|*|*|*|+UKNegStop;expansion to subject before copula + negated adjective
 1242;70;UKNegCon|*UKAdj:UKCon:UKCAdv|UKAndOr|.UKNegCon:UKPosspron|*UKCAdv:UKAdj:UKCon|^UKNegation:UKNegBegin;+UKNegBegin|*|-UKNegStop|*|*|+UKNegStop;expansion for negated adjective in list
 1332;70;UKNegCon|*UKCAdv:UKAdj|"від"|*UKPrep:UKAdvStruct:UKNRPron:UKPRPron:UKAdj:UKCon|^UKNegation;+UKNegBegin|-UKNegStop|-UKNegStop|-UKNegStop|+UKNegStop;expansion for negated adjective to 'than+...' in comparison 
 1322;70;UKCon+^UKNoExpansion|UKHyphen|UKNegCon|*UKCAdv:UKAdj:UKCon|^UKNegation:UKNegBegin;+UKNegBegin|UKConj|*|*|+UKNegStop;expansion to subject before dash + negated adjective
+
+/*expansion for negated indefinite pronoun
+/*========================================
+
 1335;70;UKPBegin|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegIndefpronCon+^UKPBegin;+UKNegBegin|*|*;
+
+/*verb/predicate
+/*==============
+
 1206;70;UKPBegin|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegPred:UKNegRel+^UKPBegin|^UKInf:UKAttributive;+UKNegBegin|*|*|*;exception: no left expansion for 'ne+inf' or 'ne+attributive participle'
 1305;70;UKPBegin|*UKList+^UKNoExpansion|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegPred:UKNegRel+^UKPBegin;+UKNegBegin|*|*|*;
 1223;70;UKPBegin+^UKVerb|.UKPossiblePBegin:UKmAux+^UKNoExpansion|UKNegRel|UKInf;+UKNegBegin|*|*|*;
@@ -519,24 +948,57 @@
 1318;70;^UKPrep|"вона":"ви":"ми":"вони":"ти":"він":"я":"воно"|UKNegRel;*|+UKNegBegin|*;
 1271;70;UKECon|UKCAdv:UKAdj:UKCon|.UKCAdv:UKAdj:UKCon:UKPrep|UKNegRel:UKNegPred;*|+UKNegBegin|*|*;left expansion to word after time indication
 1312;70;UKCon+UKNoExpansion|*UKAdvStruct:UKNRPron:UKRAdv|UKCAdv:UKAdj:UKCon|.UKCAdv:UKAdj:UKCon:UKPrep|UKNegRel:UKNegPred;*|*|+UKNegBegin|*|*;left expansion to concept after prep+concept+nonRelevant
+
+/*participle
+/*==========
+
 1244;70;UKCon|UKNegRel|UKPart+UKAttributive;+UKNegBegin|*|*;
+
+/* stop negation expansion
+/*========================
+
 1208;70;UKNegPred:UKNegRel:UKNegBCon:UKNegCon+UKNegBegin|.<^UKPBegin|UKPunctuation+^UKList;*|*|+UKNegStop;
 1210;70;UKNegPred:UKNegRel:UKNegBCon:UKNegCon+UKNegBegin|.<^UKPBegin:UKNegStop|UKPBegin+^UKNegation:UKNegBegin;*|*|+UKNegStop;
 1336;70;UKNegRel+UKPBegin|UKPunctuation+UKNegStop|UKConj|.^UKPBegin|UKPBegin+^UKNegation:UKNegBegin;*|-UKNegStop|-UKNegStop|*|+UKNegStop;correction: not negstop directly after negation marker
 1211;70;UKBracket1|UKNegBegin|.^UKBracket2|UKBracket2;*|*|*|+UKNegStop;limit negation span for one or two entities between brackets
+
+/* left expansion to antecedent
+/*=============================
+
 1227;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKKotry+UKNegBegin;+UKNegBegin|*|*|*;
 1247;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKNegRel|UKPart+UKAttributive;+UKNegBegin|*|*|*|*;
 1316;70;UKCon|UKKotry|.UKNRPron:UKPRPron:UKPosspron:UKCAdv:UKAdj|UKCon|UKNegRel;+UKNegBegin|+UKNegBegin-UKNegStop|*|*|*;
+
+/* expansion 'без'
+/*================
+/* preparation: assign a temp marker to all words in a negation span
+
 1229;70;UKNegBegin:UKInNegspan|^UKNegStop;*|+UKInNegspan;assign a temp marker to all words in a negation span
 1234;70;UKPrep|UKBCon;*|+UKCon;
+
+/*stop negation expansion
+
 1266;70;UKGerund+UKInNegspan;+UKNegStop;
+
+/*Expansion after 'без'
+
 1228;70;UKNegPrep;+UKNegBegin;
 1230;70;UKAdj:UKCAdv:UKCon:UKPRPron:UKNRPron:UKPosspron:UKPerspron;+UKPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
 1231;70;UKPrep:UKList:UKECon:UKAdvPR;+UKPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
 1233;70;UKNegPrep|*UKPossibleNegSpanBez+^UKPBegin:UKInNegspan|^typeConcept:UKNegation:UKNegBegin:UKInNegspan;*|*|+UKNegStop;
 1338;70;UKNegPrep|.<^UKPBegin:UKNegStop:UKInNegspan|UKPBegin+^UKNegation:UKNegBegin;*|*|+UKNegStop;
+
+/* clean conflicting negation parameters
+/*======================================
+
 1207;70;UKNegBegin+^typeConcept:typeBeginConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^UKNegBegin;*|+UKNegBegin;
 1209;70;UKNegStop+^typeConcept:typeBeginConcept:typeRelation:typePathRelevant|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^UKNegation:UKNegBegin;*|*|+UKNegStop;
+
+/*PHASE 80: sentiment
+/* = = = = = = =  = =
+/* Stop sentiment scope in the right-hand part of the path
+/*========================================================
+
 929;80;UKPunctuation|UKConj;UKPunctuation|+UKNegSentimentStop;Specific conjunctions after punctuation become SentimentStop
 930;80;UKPunctuation|UKConj;UKPunctuation|+UKPosSentimentStop;Specific conjunctions after punctuation become SentimentStop
 931;80;UKConj|UKPunctuation;+UKNegSentimentStop|UKPunctuation;Conjunctions before punctuation become SentimentStop
@@ -581,11 +1043,23 @@
 982;80;UKAndOrBut|UKPosspron|UKCon|UKVerb;+UKPosSentimentStop|UKPosspron|UKCon|UKVerb;And/Or before Concept plus Verb becomes SentimentStop
 983;80;UKAndOrBut|UKCon|UKCon|UKVerb;+UKNegSentimentStop|UKCon|UKCon|UKVerb;And/Or before Concept plus Verb becomes SentimentStop
 984;80;UKAndOrBut|UKCon|UKCon|UKVerb;+UKNegSentimentStop|UKCon|UKCon|UKVerb;And/Or before Concept plus Verb becomes SentimentStop
+
+/* Expansion of sentiment scope to the left-hand part of the path
+/*===============================================================
+
 1016;80;UKCon|UKPosspron|UKPred+UKNegSentiment;+UKNegSentimentBegin|UKPosspron|^UKPred+UKNegSentiment;to make subject of negation before 'net' NegSentimentBegin
 1017;80;UKCon|UKPosspron|UKPred+UKPosSentiment;+UKPosSentimentBegin|UKPosspron|^UKPred+UKPosSentiment;to make subject of negation before 'net' NegSentimentBegin
 1018;80;UKCon|UKPosspron|UKRAdv|UKPred+UKNegSentiment;+UKNegSentimentBegin|UKPosspron|UKRAdv|^UKPred+UKNegSentiment;to make subject of negation before 'net' NegSentimentBegin
 1019;80;UKCon|UKPosspron|UKRAdv|UKPred+UKPosSentiment;+UKPosSentimentBegin|UKPosspron|UKRAdv|^UKPred+UKPosSentiment;to make subject of negation before 'net' NegSentimentBegin
+
+/* Clean-up
+/*=========
+
 1153;80;UKPosspron;UKPosspron;to remove all other labels so PathRelevancy is not lost
 1179;80;UKAndOr:UKAndOrBut:UKConj:UKPrep+UKBeginrel;UKBeginrel;give beginrelation its final label
 1235;80;UKCon+UKBCon;UKBCon;
+
+/*PHASE $: Rewrite language specific labels to unified labels
+/*= = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 922;$;UKPunctuation;Punctuation;
