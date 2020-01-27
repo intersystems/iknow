@@ -2,7 +2,8 @@
 
 **iKnow** is a library for Natural Language Processing that identifies entities (phrases) and their semantic context in natural language text in English, German, Dutch, French, Spanish, Portuguese, Swedish, Russian, Ukrainian, Czech and Japanese. It was originally developed by [i.Know](https://www.linkedin.com/company/i.know/about/) in Belgium, acquired by [InterSystems](https://www.intersystems.com) in 2010 to be embedded in its Caché and [IRIS Data Platform](http://www.intersystems.com/iris) products. InterSystems published the iKnow engine as open source in 2020. 
 
-- [iKnow](#iknow)
+This readme file has the basic pointers to get started, but make sure you click through to the **[wiki](https://github.com/intersystems/iknow/wiki)** for more details on any of these subjects.
+
 - [Understanding iKnow](#understanding-iknow)
   - [Entities](#entities)
   - [Attributes](#attributes)
@@ -23,7 +24,8 @@
 # Understanding iKnow
 
 ## Entities
-In those languages, it identifies phrase boundaries that define **Entities**, entirely based on the syntactic structure of the sentences, rather than relying on an upfront dictionary or pretrained model. This makes iKnow well-suited for initial exploration of a new corpus. 
+
+iKnow identifies phrase boundaries that define **Entities**, entirely based on the syntactic structure of the sentences, rather than relying on an upfront dictionary or pretrained model. This makes iKnow well-suited for initial exploration of a new corpus. 
 iKnow Entities are not [Named Entities](https://en.wikipedia.org/wiki/Named_entity) in the NER sense, but rather the word groups that need to be considered together, representing a concept or relationship as coined by the text author in its entirety. The following examples clearly show the importance of this phrase level to fully capture what the author meant:
 
 | iKnow Entity | Meaning |
@@ -39,6 +41,8 @@ iKnow will label every entity with a simple role that is either *concept* (usual
 In the following sample sentence, we've highlighted **concepts**, <u>relations</u> and *path-relevants* separately.
 
 > **Belgian geuze** <u>is</u> **well-known** <u>across</u> the **continent** <u>for</u> *its* **delicate balance**.
+
+[Read more...](https://github.com/intersystems/iknow/wiki/Entities)
 
 ## Attributes
 
@@ -64,15 +68,17 @@ Some attributes are not available for all languages yet. See the [wiki section](
 
 ## How it works
 
-See the [Wiki](https://github.com/intersystems/iknow/wiki) for more details. 
-
-Some InterSystems-era resources:
+Some InterSystems-era resources on how iKnow works:
 - A recent [introductory video](https://www.youtube.com/watch?v=2pQur_PJn_w)
 - A not-so-recent [playlist](https://www.youtube.com/watch?v=QfbqISDFC1s&list=PLp4xNHWZ7IQmUwbtvHsiZnn2nblxjug15&index=1) on our video channel
 - A fun animation of our unique bottom-up approach in [Japanese](https://www.youtube.com/watch?v=yOVP6visOfo) and [Russian](https://www.youtube.com/watch?v=dNJHWxgVr5I) (English version embedded [here](https://learning.intersystems.com/course/view.php?id=114))
 
+[Read more...](https://github.com/intersystems/iknow/wiki/Approach)
+
 
 # Using iKnow
+
+Read more on the [APIs](https://github.com/intersystems/iknow/wiki/APIs) here.
 
 ## Directly
 
@@ -98,7 +104,7 @@ This part of the kit has not yet been added to the open source repository, but r
 
 # Building iKnow
 
-The source code for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. See also [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
+The [source code](https://github.com/intersystems/iknow/wiki/Source-Code) for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. See also [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
 
 ## Dependencies
 
