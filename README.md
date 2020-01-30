@@ -52,19 +52,19 @@ iKnow supports the following attribute types:
 
 - **Negation**: iKnow tags all entities participating in a negation, as opposed to an (implied) affirmative context.
 
-  > <u>After discussing</u> *his* **nausea**, the <span style="color: red">**patient** <u>didn't report suffering from</u> **chest pain**, **shortness** <u>of</u> **breath** <u>or</u> **tickling**</span>.
+  > <u>After discussing</u> *his* **nausea**, the **\[**<span style="color: red">**patient** <u>didn't report suffering from</u> **chest pain**, **shortness** <u>of</u> **breath** <u>or</u> **tickling\]**</span>.
 
-- **Sentiment**: based on a user-supplied list of marker terms, iKnow will identify spans with either a positive or negative sentiment (through separate attributes). Overlapping negation attributes will nullify the sentiment section.
+- **Sentiment**: based on a user-supplied list of marker terms, iKnow will identify spans with either a positive or negative sentiment (through separate attributes). Overlapping negation attributes will reverse the sentiment in some language models.
 
-  > <span style="color: green">*I* <u>liked</u> the **striped pijamas**</span>, <u>but</u> the **slippers** <u>didn't really fit with</u> *it*.
+  > <span style="color: green">**\[** *I* <u>liked</u> *the* **striped pijamas\]**</span>, <u>but</u> the **\[slippers** <u>didn't really fit with</u> *it* **\]**.
 
 - **Measurements**, **Time**, **Frequency** and **Duration**: all entities "participating" in an expression of something measurable or time-related will be tagged, enabling efficient recognition of facts in long stretches of natural language text.
 
-  > *He* <u>sustained</u> <span style="color: purple">**less than 5 BED**</span> <u>while inspecting</u> the **nuclear waste facilities** <span style="color: orange">**last year**</span>.
+  > Upon **exam** **\[two weeks ago\]** *the* **\[patient's weight** was **146.5 pounds\]**.
 
 - **Certainty**: this attribute is a work in progress. See the corresponding [wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
 
-Some attributes are not available for all languages yet. See the [wiki section](https://github.com/intersystems/iknow/wiki/Attributes) for more details.
+Some attributes are not available for all languages yet. See the [wiki section](https://github.com/intersystems/iknow/wiki/Language-model-guidelines) for more details.
 
 ## How it works
 
