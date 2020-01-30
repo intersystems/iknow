@@ -36,9 +36,9 @@ iKnow Entities are not [Named Entities](https://en.wikipedia.org/wiki/Named_enti
 | *Dopamine receptor gene* | gene, molecular sequence |
 | *Dopamine receptor gene mutation* | physiological process |
 
-iKnow will label every entity with a simple role that is either *concept* (usually corresponding to Noun Phrases in POS lingo) or *relation* (verbs, prepositions, ...). Typical stop words that have little meaning of their own get categorized as *path-relevant* (e.g. pronouns) or *non-relevant* parts, depending on whether they play a role in the sentence structure or are just linguistic fodder.
+iKnow will label every entity with a simple role that is either *concept* (usually corresponding to Noun Phrases in POS lingo) or *relation* (verbs, prepositions, ...). Typical stop words that have little meaning of their own get categorized as *PathRelevant* (e.g. pronouns) or *NonRelevant* parts, depending on whether they play a role in the sentence structure or are just linguistic fodder.
 
-In the following sample sentence, we've highlighted **concepts**, <u>relations</u> and *path-relevants* separately.
+In the following sample sentence, we've highlighted **concepts**, <u>relations</u> and *PathRelevants* separately.
 
 > **Belgian geuze** <u>is</u> **well-known** <u>across</u> the **continent** <u>for</u> *its* **delicate balance**.
 
