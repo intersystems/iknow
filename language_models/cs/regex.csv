@@ -1,6 +1,4 @@
-﻿/* CZECH REGEX FILE
-
-/*REMARK: regex starting with 2 overwrites regex starting with 1, so final label = 2xxx
+﻿
 
 /* numbers
 /*--------
@@ -26,7 +24,6 @@ ordnum_accinstr_f;[a-záčďéěíňóřšťúůýž]{2,}(desátou|cátou)
 ordnum_loc_mn;[a-záčďéěíňóřšťúůýž]{2,}(desátém|cátém)
 ordnum_instr_pl;[a-záčďéěíňóřšťúůýž]{2,}(desátými|cátými)
 po_ordnum;(po)[a-záčďéěíňóřšťúůýž]{2,}(desáté|cáté)
-/*  V Prostějově se letos světový šampionát týmů do 14 let koná už podvacáté za sebou, celkově jde o 28. ročník soutěže. 
 
 /* cardinal numbers
 cardnum;[a-záčďéěíňóřšťúůýž]{2,}(bilionech|bilionům|milionech|milionům|tisících|biliony|miliony|tisícům|tisíce|tisíci|desát)
@@ -37,19 +34,12 @@ footnote;\[\d{1,3}\]
 
 /* time
 number-year;\d{4}([\-|–]\d{1,4})?
-/* v letech 1938-1940. v letech 1938-9.
 zdigitaltime1;([0-1]\d|[2][0-3])[\:\.][0-5]\d(\:[0-5]\d)?
-/* dnes ve 14.00. 18:00 SEČ.
 zdigitaltime2;(\d)\:[0-5]\d(\:[0-5]\d)?
-/* od 6:50 - 6:55 hodin.
 date;\d{1,2}[\.]\d{1,2}[\.]\d{4}
-/* ze dne 3.3.1956
 date_month;([1-3]\d|\d)\.([0-1]\d|\d)\.
-/* 1.1. 2008. Čtvrtek 12.1..
 date_range;([1-3]\d|\d)\.([0-1]\d|\d)\.[\-|–]\d{1,2}[\.]\d{1,2}[\.](\d{4})?
-/* 29.8.-13.9.2017
 z_date_month_year;([1][0-2]|[0]?\d{1})[\/]([1-2]\d{3})
-/* 7/2018; 02/2006
 
 /* acronym
 acro;[a-záčďéěíňóřšťúůýž]{1,}\.
@@ -63,21 +53,17 @@ adj/name_nom_m;[a-záčďéěíňóřšťúůýžü\-]{2,}(letý|vitý|nsný|bn�
 adj/name_nom_f;[a-záčďéěíňóřšťúůýžü\-]{1,}(ádná|havá|istá|kavá|letá|mavá|navá|odná|pavá|ravá|vavá|vitá|bná|cká|čká|cná|čná|iná|ivá|jná|kná|lná|mná|nná|oká|ová|pná|rná|ská|šná|sná|tná|vná|žná)
 adj/name_nom_n;[a-záčďéěíňóřšťúůýžü\-]{2,}(ino)
 adj/name_ambige;[a-záčďéěíňóřšťúůýžü\-]{2,}(leté|naté|nsné|vité|avé|bné|cné|čné|dné|iné|ivé|jné|kné|lné|mné|nné|odé|ové|pné|rné|ské|šné|sné|tné|vné|zné|žné|bé|ké|mé)
-/*isté -> overlap with noun policisté
 adj/name_gen_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(letého|vitého|bného|ckého|čkého|cného|čného|dného|iného|jného|kného|lného|mného|nného|odého|okého|pného|rného|ského|stého|sného|šného|tného|vného|zného|žného|bého|lého|mého|vého)
 adj/name_accinstr_f;[a-záčďéěíňóřšťúůýžü\-]{2,}(bočnou|ratnou|sobnou|tupnou|vědnou|četnou|trovou|avnou|ebnou|ečnou|elnou|evnou|hetou|isnou|kavou|letou|livou|mavou|natou|ornou|ovnou|rodou|slnou|ůrnou|ckou|jnou|nnou|okou|ovou|skou|šnou|žnou)
 adj/name_dat_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(istému|letému|vitému|bnému|ckému|čkému|cnému|čnému|dnému|inému|jnému|knému|lnému|mnému|nnému|odému|okému|pnému|rnému|skému|snému|šnému|tnému|vnému|znému|žnému|bému|lému|mému|vému)
 adj/name_loc_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(istém|letém|milém|vitém|avém|bném|ckém|čkém|cném|čném|dném|iném|ivém|jném|kném|lném|mném|nném|odém|okém|pném|rném|ském|sném|šném|ovém|tném|vném|zném|žném|mém)
-/*stém and stému -> overlap with noun systém(u)
 adj/name_instr_mn_dat_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(letým|vitým|bným|cným|čným|dným|iným|jným|kným|lným|mným|nným|odým|pným|rným|stým|sným|šným|stým|tným|vným|zným|žným|bým|dým|lým|kým|mým|vým)
-/*longer regex in -kým: ckým|čkým|okým|ským
 adj/name_genloc_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(letých|natých|vitých|bných|ckých|čkých|cných|čných|dných|iných|jných|kných|lných|mných|nných|odých|pných|okých|rných|ských|sných|šných|stých|tných|vných|zných|žných|bých|lých|mých|vých)
 adj/name_instr_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(letými|vitými|bnými|ckými|čkými|cnými|čnými|dnými|inými|jnými|knými|lnými|mnými|nnými|odými|okými|pnými|rnými|skými|stými|snými|šnými|tnými|vnými|znými|žnými|bými|lými|mými|vými)
 adj/name_nommanim_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(baloví|tiletí|čští|elní|toví|čtí|ini|ští)
 
 /* age
 adj_age_name_nom_m;[-0-9]{1,}(letý)
-/* smířený 41letý bývalý útočník
 adj_age_nom_f;[-0-9]{1,}(letá)
 adj_age_ambige;[-0-9]{1,}(leté)
 adj_age_gen_mn;[-0-9]{1,}(letého)
@@ -90,7 +76,6 @@ adj_age_instr_pl;[-0-9]{1,}(letými)
 
 /* hard adjectives
 adj_nom_m;[a-záčďéěíňóřšťúůýžü\-]{2,}(elný|onin|ský)
-/* schleiermacherův slavný výrok
 adj_ambige;[a-záčďéěíňóřšťúůýžü\-]{2,}(ské)
 adj_accinstr_f;[a-záčďéěíňóřšťúůýžü\-]{2,}(skou)
 adj_loc_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(ském)
@@ -98,34 +83,22 @@ adj_instr_mn_dat_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(ským)
 
 /* soft / hard adjectives
 adj_gen_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(acího|ecího|ěcího|icího|jšího|všího|ského|ního)
-/*longer regex in -ního: tivního|álního|rzního|čního|dního|kního|mního|nního|tního|rního|vního|xního|zního|žního
 adj_dat_mn;[a-záčďéěíňóřšťúůýžü\-]{2,}(tivnímu|álnímu|rznímu|čnímu|acímu|ecímu|ěcímu|icímu|jšímu|skému|bnímu|dnímu|knímu|mnímu|nnímu|tnímu|rnímu|vnímu|xnímu|znímu|žnímu)
 adj_genloc_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(tivních|álních|rzních|čních|ecích|ěcích|jších|ských|bních|dních|kních|mních|nních|tních|rních|vních|xních|zních|žních)
-/*acích can be noun too
 adj_instr_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(tivními|rzními|acími|cními|čními|ecími|ěcími|icími|jšími|bními|lními|skými|dními|kními|lními|mními|nními|pními|sními|tními|rními|vními|xními|ycími|zními|žními|čími|lími)
 
 /* soft adjectives
 adj_ambigi;[a-záčďéěíňóřšťúůýžü\-]{2,}(střední|chodní|ailní|ávací|bilní|cilní|delní|dolní|filní|gilní|iskní|nilní|ostní|remní|rilní|robní|tilní|tivní|vilní|vozní|žilní|ační|amní|ální|ární|átní|ébní|ědní|erní|ěrní|etní|étní|ětní|iční|isní|itní|ižní|kční|ktní|ltní|nční|ntní|nzní|ovní|ótní|ptní|rtní|rzní|urní|utní|ýtní|ytní|ecí|ěcí|jší|nní|xní)
-/*ací can be noun too
 adj_locinstr_mn_dat_pl;[a-záčďéěíňóřšťúůýžü\-]{2,}(chodním|bilním|covním|delním|horním|hovním|iskním|iózním|kovním|lovním|movním|ostním|remním|robním|tivním|tovním|zemním|ačním|amním|álním|árním|átním|ebním|ědním|erním|ěrním|icním|ičním|isním|itním|izním|ižním|kčním|ktním|nčním|ntním|nzním|rmním|rtním|rzním|ržním|urním|vacím|ecím|ěcím|jším|nním|xním)
-/*acím can be noun too
 
-/* remark: overlap with noun: ové,lé,lém
-/* remark: overlap with verb: ští,ská,čnou,ční,vní,čním,vním,ivou,tnou,tní,vá,bá,bou,lá,dná
 
 /* possessive adjectives
 possessive_adj;[a-záčďéěíňóřšťúůýž\-]{2,}(iho|yho|ovo|ův)
-/*na Berkeleyho pragmatickou interpretaci poznání. 
 possessive_adj_con_gen_f_instr_pl_ambig;[a-záčďéěíňóřšťúůýž\-]{2,}(ovy)
-/*Maříkovy or budovy
 possessive_adj_con_nom_f_ambig;[a-záčďéěíňóřšťúůýž\-]{2,}(ova)
-/*'Trumpova křižácká výprava' or budova
 possessive_adj_con_acc_f_ambig;[a-záčďéěíňóřšťúůýž\-]{2,}(ovu)
-/*'na Heideggerovu kritiku'
 possessive_adj_con_datloc_mn;[a-záčďéěíňóřšťúůýž\-]{2,}(ovi)
-/*eg. noun: poplatníkovi; possessive: Hejlovi výjimečný trest
 0possessive_adj_if_cap;[a-záčďéěíňóřšťúůýž\-]{2,}(ího|ově)
-/*starts with '0' because other regex (like '1cipart...') should take precedence
 }}
 
 /* participles
@@ -161,14 +134,12 @@ possessive_adj_con_datloc_mn;[a-záčďéěíňóřšťúůýž\-]{2,}(ovi)
 
 /* ci-participles
 1cipart_genloc_pl;[a-záčďéěíňóřšťúůýž]{2,}(bících|čících|dících|jících|lících|mících|oucích|pících|řících|šících|tících|vících|zících)
-/*ících can also be a noun ending (with consonant alternation)
 1cipart_genmn;[a-záčďéěíňóřšťúůýž]{2,}(oucího|ácího|ícího)
 1cipart_instr_pl;[a-záčďéěíňóřšťúůýž]{2,}(oucími|ácími|ícími)
 1cipart_dat_mn;[a-záčďéěíňóřšťúůýž]{2,}(oucímu|ácímu|ícímu)
 1cipart_locinstr_mn_dat_pl;[a-záčďéěíňóřšťúůýž]{1,}(lnícím|bícím|čícím|jícím|mícím|oucím|pícím|řícím|sícím|šícím|vícím|zícím|žícím)
 1cipart_ambigi;[a-záčďéěíňóřšťúůýž]{2,}(bící|čící|jící|lící|mící|nící|oucí|pící|řící|sící|šící|tící|vící|zící|žící)
 2cipart_neg_genloc_pl;(ne)[a-záčďéěíňóřšťúůýž]{2,}(bících|čících|dících|jících|lících|mících|oucích|pících|řících|šících|tících|vících|zících)
-/*ících can also be a noun ending (with consonant alternation)
 2cipart_neg_genmn;(ne)[a-záčďéěíňóřšťúůýž]{2,}(oucího|ácího|ícího)
 2cipart_neg_instr_pl;(ne)[a-záčďéěíňóřšťúůýž]{2,}(oucími|ácími|ícími)
 2cipart_neg_dat_mn;(ne)[a-záčďéěíňóřšťúůýž]{2,}(oucímu|ácímu|ícímu)
@@ -202,54 +173,36 @@ adverb;[a-záčďéěíňóřšťúůýž]{1,}(atelně|torově|ulárně|iosně|o
 /*nouns
 /*-----
 {{
-/* remark: regex for nouns should fire in case of no overlap 
+/* remark: regex for nouns should fire in case of no overlap
 /* regex starting with 0 and 1 -> processed first: overwritten by all other overlapping regex
 1con_instr_mn_ambig;[a-záčďéěíňóřšťúůýž]{2,}(oláním|ováním|ctvím|dáním|káním|stěm|uži)
 1con_instr_f;[a-záčďéěíňóřšťúůýž]{2,}(dinou|sedou|zitou|ádou|ěrou|énou|érou|erou|ínou|mbou|ndou|obou|otou|ózou|rmou|urou|uvou|vbou|kou)
 0con_nom_instr_gensg_ambig;[a-záčďéěíňóřšťúůýž]{1,}(áčky|enty|íčky|isty|ochy|šály|aby|ači|ady|áky|ány|aři|any|aty|áty|bky|chy|čky|dky|edy|ény|éry|ěry|idy|iky|íny|ity|kty|lky|mky|mny|nky|ody|ory|pky|sty|uky|uty|uvy|vky|yty|zky|žky|gy|hy|sy)
-/*0con_nom_instr_gensg_ambig -> 1con_nom_instr_pl_ambig has longer overlapping endings and has precedence
 1con_nom_instr_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(klady|azky|díly|ízky|níky|ozky|pisy|ržky|užky|vady|tory|ěty)
 1con_instr_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(emci|teli)
 1con_gen_dat_nom_pl;[a-záčďéěíňóřšťúůýž]{2,}(lesti|nosti)
-/*eg. bolesti
 1con_genpl_instr_ambig;[a-záčďéěíňóřšťúůýž]{1,}(častí|dostí|ikací|mostí|ností|tostí|ctví|toří|bcí|kcí|ncí|yní|ií|oí|xí)
-/*činností
 1con_instr_pl;[a-záčďéěíňóřšťúůýž]{2,}(aleními|áleními|ářeními|aženími|dleními|dřeními|ěleními|ěřeními|ileními|íleními|ířeními|íženími|oleními|přeními|rženími|šleními|tleními|třeními|uměními|uřeními|uženími|vřeními|zřeními|beními|čeními|deními|děními|jeními|něními|peními|seními|šeními|teními|těními|veními|věními|zeními|nostmi|isky|níky|stmi|tipy|ami|ěmi|emi|oji|tci)
 1con_nomacc_m;[a-záčďéěíňóřšťúůýž]{1,}(átor|klad|běr|ent|ita|las|lez|log|kon|nát|pas|pis|voz|ač|ák|ář|ec|ík|ír|íř|rh|tr|ůl|yt)
-/*eg. překlad (eg. shorter ending ambiguous: zásada, gen pl. zásad)
 1con_nom_f;[a-záčďéěíňóřšťúůýž]{1,}(telka|ačka|ilka|inka|láda|ovna|řina|ulka|vina|ěra|moc|noc|oba|řka|rna|vba|vka|zva)
 1con_acc_f;[a-záčďéěíňóřšťúůýž]{1,}(obnu|šinu|ézu)
 1con_nom_acc_f;[a-záčďéěíňóřšťúůýž]{2,}(kost|most|nost|beň|čeň|deň|heň|leň|peň|řeň|seň|šeň|veň|zeň)
 1con_nomacc_n;[a-záčďéěíňóřšťúůýž]{1,}(tadlo|isko|íčko|ítko|cho|tvo)
-/* letadlo
 1con_dat_f;[a-záčďéěíňóřšťúůýž]{2,}(aze|čce|idě|ině|uře)
-/*ambiguous: dative or genitive -> better not to split: (bě|dě|tě); eg. Praze (nom f. Praha)
 1con_datacc_f;[a-záčďéěíňóřšťúůýž]{2,}(aci|ici|kci|ii)
-/*eg. dat/acc/loc: teorii (nom. teorie); funkci (nom. funkce); inflaci (nom. inflace); distribuci (nom. distribuce)
 1con_datacclocf_datlocmn_nominstrpl;[a-záčďéěíňóřšťúůýž]{2,}(áci|nci|uci)
-/*eg. dat/acc/loc f: evidenci,práci (nom. evidence,práce); dat/loc sg nom/instr pl m	cizinci (nom. cizinec);dat/loc sg instr pl paláci (nom. palác); nom pl diváci (nom. divák)
 1con_datlocmn_nominstrpl;[a-záčďéěíňóřšťúůýž]{2,}(rci)
-/* eg. dat/loc sg instr pl koberci; nom pl: odpůrci
 1con_locmn;[a-záčďéěíňóřšťúůýž]{2,}(ětě|otě|stě)
-/* eg. světě (nom m svět)
 1con_datlocf_locmn;[a-záčďéěíňóřšťúůýž]{2,}(adě|ádě|ědě)
-/* eg. případě (nom m případ); metodě (nom f metoda)
 1con_gendatloc_mn_acc_f_ambig;[a-záčďéěíňóřšťúůýž]{1,}(toru|ádu|ahu|alu|álu|ánu|anu|asu|atu|avu|chu|dlu|epu|esu|ětu|ilu|isu|ílu|íru|ktu|ndu|ntu|obu|odu|ogu|olu|oru|osu|ozu|rhu|tvu|umu|uru|uvu|ytu|zdu|iu|ku|xu)
-/* eg. gen/dat/loc m obsahu (nom. obsah); acc f Prahu (nom. Praha); gen/dat/loc m důchodu (důchod) acc f metodu (nom. metoda); gen/dat/loc m trhu (nom. trh)
 1con_nomgendat_n_nomgen_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(lství|nství|žství|olání|kání|ředí|vání)
-/*eg. velitelství 
 1con_nomgendat_f_nomacc_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(ace|ece|ice|kce|ie)
-/*eg. dat matematice (nom. matematika); eg. nomgen/nomaccpl: kolekce,studie,dotace,tradice
 1con_genacc_m_acc_pl;[a-záčďéěíňóřšťúůýž]{2,}(tele|dce)
-/*eg. jezdce (nom m. jezdec)
 1con_gen_m_nomgen_f_nomacc_pl;[a-záčďéěíňóřšťúůýž]{1,}(íle)
-/*eg. cíle (nom m. cíl); chvíle (nom f. chvíle)
 1con_genacc_m_gen_f_nomacc_pl;[a-záčďéěíňóřšťúůýž]{1,}(áře|nce|oče)
-/*eg. poslance (nom. poslanec); bance (nom f. bank)
 1adj_con_instr_f_ambig;[a-záčďéěíňóřšťúůýž]{2,}(řelou|řinou|avou|olou|tvou)
 1adj_ambige_con_nom_pl;[a-záčďéěíňóřšťúůýž]{2,}(isté)
 1con_nom_m_gen_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(lad|lek|lin|nek|něk|ret|tel|ik|ín|od|sk)
-/*eg. gen pl nálad (nom. nálada); eg. nom m stín <> gen pl disciplín (nom f. disciplína); eg. nom m  <> gen pl rostlin (nom f. rostlina); obyvatel (nom m/gen pl)
 1con_nom_f_gen_mn_ambig;[a-záčďéěíňóřšťúůýž]{2,}(ava|era|ina|ola|ora|ha|ka|sa)
 1con_instr_mn_gen_pl_ambig;[a-záčďéěíňóřšťúůýž]{2,}(em)
 1con_nom_pl;[a-záčďéěíňóřšťúůýž]{1,}(čané|níci|telé|émy|íni|oři|oši|nti|uži)
@@ -257,12 +210,10 @@ adverb;[a-záčďéěíňóřšťúůýž]{1,}(atelně|torově|ulárně|iosně|o
 1con_dat_pl;[a-záčďéěíňóřšťúůýž]{2,}(enkám|inám|rmám|iím|ům)
 1con_loc_pl;[a-záčďéěíňóřšťúůýž]{2,}(ách|ech)
 1con_datacc_f_loc_pl;[a-záčďéěíňóřšťúůýž]{1,}(emi)
-/*eg. zemi (nom f. země); ulicemi (nom f. ulica)
 1con_gen_pl;[a-záčďéěíňóřšťúůýž]{3,}(ů)
 
 /* regex starting with 2: takes precedence over [1con]
 2con_gen_n;[a-záčďéěíňóřšťúůýž]{2,}(iště)
 2con_instr_mn;[a-záčďéěíňóřšťúůýž]{1,}(alením|álením|ářením|ažením|dlením|dřením|ělením|ěřením|ilením|ílením|ířením|ížením|olením|přením|ržením|šlením|tlením|třením|uměním|uřením|užením|vřením|zřením|bením|čením|dením|děním|jením|něním|nicím|nutím|pením|rubím|sením|šením|tením|těním|torem|vením|stvím|věním|zením|adem|átem|elem|ětem|itím|ntem|olem|onem|smem|stem|tlem|trem|usem|utem|bem|cem|hem|iem|mím|řím|šem|nem|pem|vem|ěm)
 2con_instr_pl;[a-záčďéěíňóřšťúůýž]{3,}(ndii)
-/*eg. instr stipendii (nom. stipendium) (preference over 1con_datacc_f 'ii')
 }}

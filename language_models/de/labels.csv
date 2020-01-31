@@ -1,149 +1,125 @@
 ﻿
-/* Phases are in use since 2014.2.
 
-/* Mandatory labels are unified from 2015.2
-/* 57;1,$;Concept;typeConcept;mandatory label;0;;
-/* 60;4,7,$;Join;typeOther;mandatory label since 2013.1 build 175;0;;
-/* 87;1,$;Numeric;typeConcept;mandatory label since 2014.2 build 241;0;;
-/* 58;1,$;Punctuation;typeEndConcept;mandatory label;0;;
-/* 56;1,$;Relation;typeRelation;mandatory label;0;;
-/* 25;1,4,$;SBegin;typeOther;mandatory label, beginning of sentence;0;2011.2;
-/* 26;1,4,$;SEnd;typeOther;mandatory label, end of sentence;0;2011.2;
-/* 59;1,$;Unknown;typeOther;mandatory label;0;;
 
-/* Mandatory attributes are unified from 2015.2
-/* 63;1,$;CapitalAll;typeAttribute;mandatory label;0;2013.1;
-/* 61;1,$;CapitalInitial;typeAttribute;mandatory label;0;2013.1;
-/* 62;1,$;CapitalMixed;typeAttribute;mandatory label;0;2013.1;
-/* 76;1,$;NonSemantic;typeAttribute;garbage;0;2013.1;Entity(NonSemantic)
 
-/* User dictionary labels are new and unified from 2015.2
-/*98;1,$;UDNegation;typeAttribute;to mark certain entities as negation;0;17-11-2014-sde;Entity(Negation)
-/*99;1,$;UDPosSentiment;typeAttribute;for sentiment markers;0;17-11-2014-sde;Entity(PositiveSentiment)
-/*100;1,$;UDNegSentiment;typeAttribute;for sentiment markers;0;17-11-2014-sde;Entity(NegativeSentiment)
 
 
 /* Required labels
-73;1,$;Subject;typeAttribute;;0;2013.1;
-74;1,$;Object;typeAttribute;;0;2013.1;
-75;1,$;PrimaryRelation;typeAttribute;;0;2013.1;
+;1,$;Subject;typeAttribute;;0;;
+;1,$;Object;typeAttribute;;0;;
+;1,$;PrimaryRelation;typeAttribute;;0;;
 
 /* DE Equivalents of mandatory labels
-88;40,70,80,50,60,$;DEPunctuation;typeEndConcept;copy of mandatory label;0;added phase 60 #22-sde;
+;40,70,80,50,60,$;DEPunctuation;typeEndConcept;copy of mandatory label;0;;
 
 /* DE Equivalents of mandatory attributes
-89;40;DECapitalAll;typeAttribute;mandatory label;0;2013.1;
-90;40;DECapitalInitial;typeAttribute;mandatory label;0;2013.1;
-91;40;DECapitalMixed;typeAttribute;mandatory label;0;2013.1;
+;40;DECapitalAll;typeAttribute;mandatory label;0;;
+;40;DECapitalInitial;typeAttribute;mandatory label;0;;
+;40;DECapitalMixed;typeAttribute;mandatory label;0;;
 
 
 /* Default label
-1;1,40,50,60,70,80,$;DECon;typeConcept;defaultwaarde;1;added phase 60 #21-sde;
+;1,40,50,60,70,80,$;DECon;typeConcept;default label;1;;
 
-/* Group Labels
-/*55;40,70,$;NonRelevant;typeNonRelevant;voor CRC-detectie in testframework;0;;  deleted 25-04-2014-sde: not needed anymore
-2;1,40,50,70,80;DEAdv;typeNonRelevant;changed from nonrelevant 18-12-2009;0;removed phase $ #22-sde;
-77;1,30,50,$;DEAdvDegree;typeAmbiguous;adverb of degree, 2014.2-sde;0;;
-78;1,50,$;DEAdvDirection;typeRelation;adverb of direction, 2014.2-sde;0;;
-/*79;1,50,$;DEAdvFreq;typeRelation;adverb expressing frequency, 2014.2-sde;0;; deleted 2016-01-12-sde
-80;1,30,50,$;DEAdvManner;typeRelation;adverb of manner, 2014.2-sde;0;;
-81;1,50,$;DEAdvModality;typeRelation;modal adverb, 2014.2-sde;0;;
-82;1,50,$;DEAdvNonrelevant;typeOther;nonrelevant adverb, 2014.2-sde;0;;
-83;1,30,50,$;DEAdvPlace;typePathRelevant;adverb of place, 2014.2-sde, changed type from typeConcept 14-12-2015-sde;0;;
-99;1,30,50,$;DEAdvTemp;typePathRelevant;time-related adverb, 03-12-2015-sde;0;;
-84;1,30,50,$;DEAdvTime;typeBeginEndConcept;adverb of time, 2014.2-sde, changed type from Ambiguous 11-12-2015-sde;0;;
-86;1,50,$;DECAdv;typeBeginConcept;adverb that has become a concept, this label is only used in rules, 2014.2-sde;0;;
-85;1,50,$;DERAdv;typeRelation;adverb that has to become a relation 2014.2-sde, also used in lexreps since #22-sde;0;;
+/* Syntactic labels
+;1,40,50,70,80;DEAdv;typeNonRelevant;adverb;0;;
+;1,30,50,$;DEAdvDegree;typeAmbiguous;adverb of degree;0;;
+;1,50,$;DEAdvDirection;typeRelation;adverb of direction;0;;
+;1,30,50,$;DEAdvManner;typeRelation;adverb of manner;0;;
+;1,50,$;DEAdvModality;typeRelation;modal adverb;0;;
+;1,50,$;DEAdvNonrelevant;typeOther;nonrelevant adverb;0;;
+;1,30,50,$;DEAdvPlace;typePathRelevant;adverb of place;0;;
+;1,30,50,$;DEAdvTemp;typePathRelevant;time-related adverb;0;;
+;1,30,50,$;DEAdvTime;typeBeginEndConcept;adverb of time;0;;
+;1,50,$;DECAdv;typeBeginConcept;adverb that has become a concept, this label is only used in rules;0;;
+;1,50,$;DERAdv;typeRelation;adverb that has to become a relation;0;;
 
-39;1,40,70,$;DEAdj;typeConcept;dubbelzinnig Attradj of Predadj, changed name from DEMod 2014.2-sde;0;;
-102;1,50;DEAdjpron;typeConcept;pronouns that become part of a Concept when used attributively, 04-12-2015-sde;0;;
-29;1,40,70,80,50,60,$;DEAttradj;typeConcept;verbogen adjectieven en gelijkwaardige woorden;0;changed name from DEAttrmod 2014.2-sde, added phase 60 #21-sde;
-101;1,40,50,$;DEAttrpron;typeOther;pronouns that can be used attributively, 04-12-2015-sde;0;;
-52;1,40,70,$;DEBeginCon;typeBeginConcept;No Description;0;;
-43;1,40,50,70,$;DEBeginadj;typeBeginConcept;No Description, changed name from DEBeginMod 2014.2-sde;0;;
-64;1,40,70,$;DEConIfCap;typeOther;concept if capitalized;0;;
-107;1,40;DEConpart1;typeConcept;first part of a concept;0;2016-10-10-sde;
-17;1,40,50,70,$;DEDefart;typeBeginConcept;das;0;;
-31;1,40,70,$;DEDemonstrativ;typeNonRelevant;dies-;0;;
-41;1,40,70,$;DEGeoadj;typeConcept;geografische Attrmod, changed name from DEGeoMod 2014.2-sde;0;;
-16;1,40,50,60,70,$;DEIndefart;typeBeginConcept;eine, einen, einem, einer der;0;added phase 60 #21-sde;
-100;1,40,50,$;DEIndefpron;typeAmbiguous;pronoun that can be PR or part of C;0;04-12-2015-sde;
-24;1,40,50,60,70,80,$;DENonRelevant;typeNonRelevant;only used in rules;0;added phase 60 #21-sde;
-44;1,30,40,50,70,$;DENum;typeConcept;getallen in cijfers of letters;0;;
-40;1,40,70,$;DENumadj;typeConcept;attributive ordinal number, changed name from DENumMod;0;;
-33;1,40,50,70,$;DEObjpron;typePathRelevant;es, sie, ihn, ihm, uns, dich, euch, in KB16 van Relation in Other veranderd, added jemanden on 20121107, changed type from Other 15-12-2015-sde;0;;
-115;1,40;DEOrgUnit;typeConcept;first part of organisation name;0;#22-sde;
-3;1,40,70,50,60,$;DEPart;typeRelation;participium;0;added phase 60 #22-sde;
-/* 49;4,7,$;DEPartMod;typeOther;No Description;0;in KB16 van Relation in Other veranderd; removed 2014.2-sde
-21;1,40,60,70,80,$;DEPosspron;typePathRelevant;possesiefpronomina op -e, -en en -em;0;changed type from BeginConcept 02-12-2015-sde, added phase 60 #21-sde;
-38;1,40,50,70,$;DEPredadj;typeConcept;predicative adjective, can be used as an adverb, changed name from DEPredmod 2014.2-sde;0;;
-32;1,40,50,70,80,$;DESubjpron;typePathRelevant;ich, du, er, man, wir;0;changed type from Nonrelevant 15-12-2015-sde;
-48;1,40,70,$;DEZeit;typeBeginConcept;tijdsaanduidingen;0;;
-51;1,40,70,$;DEZeit2;typeEndConcept;tijdsaanduidingen;0;;
+;1,40,70,$;DEAdj;typeConcept;ambiguous: Attradj of Predadj;0;;
+;1,50;DEAdjpron;typeConcept;pronouns that become part of a Concept when used attributively;0;;
+;1,40,70,80,50,60,$;DEAttradj;typeConcept;declined adjective or equivalent;0;;
+;1,40,50,$;DEAttrpron;typeOther;pronouns that can be used attributively;0;;
+;1,40,70,$;DEBeginCon;typeBeginConcept;first word of a Concept;0;;
+;1,40,50,70,$;DEBeginadj;typeBeginConcept;adjective as first word of a Concept;0;;
+;1,40,70,$;DEConIfCap;typeOther;concept if capitalized;0;;
+;1,40;DEConpart1;typeConcept;first part of a multiword concept;0;;
+;1,40,50,70,$;DEDefart;typeBeginConcept;das;0;;
+;1,40,70,$;DEDemonstrativ;typeNonRelevant;dies-;0;;
+;1,40,70,$;DEGeoadj;typeConcept;geografic Attrmod;0;;
+;1,40,50,60,70,$;DEIndefart;typeBeginConcept;eine, einen, einem, einer der;0;;
+;1,40,50,$;DEIndefpron;typeAmbiguous;pronoun that can be PR or part of C;0;;
+;1,40,50,60,70,80,$;DENonRelevant;typeNonRelevant;only used in rules;0;;
+;1,30,40,50,70,$;DENum;typeConcept;number written in digits or letters;0;;
+;1,40,70,$;DENumadj;typeConcept;attributive ordinal number;0;;
+;1,40,50,70,$;DEObjpron;typePathRelevant;es, sie, ihn, ihm, uns, dich, euch;0;;
+;1,40;DEOrgUnit;typeConcept;first part of organisation name;0;;
+;1,40,70,50,60,$;DEPart;typeRelation;past participle;0;;
+;1,40,60,70,80,$;DEPosspron;typePathRelevant;possessive pronoun ending in -e, -en or -em;0;;
+;1,40,50,70,$;DEPredadj;typeConcept;predicative adjective, can be used as an adverb;0;;
+;1,40,50,70,80,$;DESubjpron;typePathRelevant;ich, du, er, man, wir;0;;
+;1,40,70,$;DEZeit;typeBeginConcept;time indication;0;;
+;1,40,70,$;DEZeit2;typeEndConcept;time indication;0;;
 
-109;1,60,70,$;DEAndOr;typeRelation;and, or;0;#21-sde;
-5;1,40,50,70,80,$;DEAndOrBut;typeRelation;coordinate conjunction, changed name from DESAndOrBut 2014.2-sde;0;;
-111;70,$;DEBeginrel;typeBeginRelation;used to manage attribute expansion;0;#21-02-24-sde;
-6;1,40,50,60,70,$;DEConj;typeRelation;subordinate conjunction, renamed from DESConj 2014.2-sde, added phase 60 #22-sde;0;;
-23;1,40,50,70,80,$;DEGenitiv;typeRelation;des, ihres etc., renamed from DESGenitiv 2014.2-sde;0;;
-7;1,40,50;DEInf;typeRelation;infinitief, in KB16 van Relation in Other veranderd, renamed from DESInf 2014.2-sde, changed back type from Other 02-12-2015-sde, deleted phase 70 and $ (Inf->Rel in p40) #22-sde;0;;
-/*7;1,40,70,$;DEInf;typeOther;infinitief, in KB16 van Relation in Other veranderd, renamed from DESInf 2014.2-sde;0;;
-46;1,40;DEInfAttradj;typeOther;dubbelzinnig, in KB16 van Relation in Other veranderd, renamed from DESInfMod 2014.2-sde, deleted phase 70 (InfAttradj->Rel in p40) #22-sde;0;;
-72;1,40,70,$;DENegRel;typeRelation;20121114;0;;
-8;1,40,70,80,50,60,$;DEPrep;typeRelation;preposition, renamed from DESPrep 2014.2-sde, added phase 8 for rule 306 and 307 2014.2-sde, added phase 60 #22-sde;0;;
-36;1,40,70,80,50,60,$;DEPrepart;typeRelation;preposition+article, renamed from DESPrepart 2014.2-sde, added phase 60 #22-sde;0;;
-4;1,40,50,60,70,$;DERefl;typeRelation;reflexive pronoun;0;added phase 60 #22-sde;
-9;1,20,40,70,80,50,60,$;DERel;typeRelation;verb, renamed from DESRel 2014.2-sde;0;added phase 60 #22-sde, added phase 20 #22-sde;
-10;1,20,40,70,80,50,60,$;DERelAux;typeRelation;auxiliary verb, renamed from DESRelAux 2014.2-sde;0;added phase 60 and 20 #22-sde;
-11;1,40;DERelCon;typeOther;conjugated verb, infinitive or noun, in KB16 van Concept in Other veranderd, renamed from DESRelCon 2014.2-sde, deleted phase 70 (RelCon->Rel in p40) #22-sde;0;;
-114;1,70;DERelconj;typeRelation;relative pronoun;0;#21-sde;
-13;1,40;DERelConMod;typeOther;conjugated verb, infinitive or noun, in KB16 van Concept in Other veranderd, renamed from DESRelConMod 2014.2-sde, deleted phase 70 and $ (RelConMod->Con in p40) #22-sde;0;;
-12;1,40;DEVerbAdj;typeOther;conjugated verb or (attributive or predicative) adjective, in KB16 van Relation in Other veranderd, renamed from DESRelMod 2014.2-sde, deleted phase 70 and $ (VerbAdj->Rel in p40) #22-sde;0;;
-47;1,40,50,60,70,$;DEVerbteil;typeRelation;part of splittable verb, renamed from DESVerbteil 2014.2-sde;0;added phase 60 #22-sde;
-14;1,40,50,60,70,$;DEZuInf;typeRelation;infinitive with zu, renamed from DESZuInf 2014.2-sde;0;added phase 60 #22-sde;
+;1,60,70,$;DEAndOr;typeRelation;and, or;0;;
+;1,40,50,70,80,$;DEAndOrBut;typeRelation;coordinate conjunction;0;;
+;70,$;DEBeginrel;typeBeginRelation;used to manage attribute expansion;0;;
+;1,40,50,60,70,$;DEConj;typeRelation;subordinate conjunction;0;;
+;1,40,50,70,80,$;DEGenitiv;typeRelation;des, ihres etc.;0;;
+;1,40,50;DEInf;typeRelation;infinitive;0;;
+;1,40;DEInfAttradj;typeOther;infinitive or attributive adjective;0;;
+;1,40,70,$;DENegRel;typeRelation;negated relation;0;;
+;1,40,70,80,50,60,$;DEPrep;typeRelation;preposition;0;;
+;1,40,70,80,50,60,$;DEPrepart;typeRelation;preposition+article;0;;
+;1,40,50,60,70,$;DERefl;typeRelation;reflexive pronoun;0;;
+;1,20,40,70,80,50,60,$;DERel;typeRelation;verb;0;;
+;1,20,40,70,80,50,60,$;DERelAux;typeRelation;auxiliary verb;0;;
+;1,40;DERelCon;typeOther;conjugated verb, infinitive or noun;0;;
+;1,70;DERelconj;typeRelation;relative pronoun;0;;
+;1,40;DERelConMod;typeOther;conjugated verb, infinitive or noun;0;;
+;1,40;DEVerbAdj;typeOther;conjugated verb or (attributive or predicative) adjective;0;;
+;1,40,50,60,70,$;DEVerbteil;typeRelation;part of splittable verb;0;;
+;1,40,50,60,70,$;DEZuInf;typeRelation;infinitive with zu;0;;
 
 /* Labels for specific words; some of them cover small sets of words
-105;1,50,70,$;DEAnder;typePathRelevant;andere, forms of derselbe, selben;0;added phase 70 #22-sde;
-37;1,40,50,70,$;DEDenen;typeRelation;denen;0;;
-27;1,40,70,$;DEDer;typeNonRelevant;der;0;;
-54;1,40,50,70,$;DEDoppelpunkt;typeOther;No Description;0;changed non-existing typePunctuation into Other 16-12-2015-sde;
-22;1,40,60,70,80,50,$;DEEin;typeNonRelevant;ein;0;added phase 60 #21-sde;
-28;1,40,50,70,80,$;DEEiner;typeNonRelevant;einer;0;;
-30;1,40,50,70,80,$;DEEines;typeNonRelevant;eines;0;;
-110;1,40,60,70;DEHyphen;typeBeginConcept;extra label for hyphen;0;#21-sde, added phase 40 #21-sde;
-103;1,50;DEJe;typeAmbiguous;je;0;11-12-2015-sde;
-19;1,20,40,50,60,70,$;DEKein;typeBeginConcept;kein, keine, keinen, keinem;0;added phase 60 and 20 #22-sde;
-35;1,20,40,50,60,70,$;DEKomma;typeEndConcept;komma;0;added phase 60 #21-sde, added phase 20 #22-sde;
-20;1,40,70,$;DELayout;typeBeginEndConcept;No Description;0;BeginConcept->BeginEndConcept 2016-05-11-sde;
-113;1,40,$;DENein;typeBeginEndConcept;for nein without capital;0;#21-sde;
-42;1,20,40,50,70,$;DENicht;typeOther;KB09, in KB16 van Relation in Other veranderd;0;added phase 20 #22-sde;
-70;1,20;DENoch;typeRelation;noch;0;20121114;
-53;1,40,70,$;DESehr;typeOther;sehr;0;;
-34;1,40,70,$;DESein;typeNonRelevant;sein;0;;
-45;1,40,70,80,$;DESo;typeBeginConcept;so;0;;
-106;1,40,$;DEVielWenig;typeAmbiguous;viel, wenig;0;;
-69;1,20;DEWeder;typeRelation;weder;0;2012114;
-50;1,40,70,$;DEWie;typeOther;wie;0;;
-15;1,40,70,$;DEZu;typeRelation;zu;0;in KB16 van Relation in Other veranderd, changed back to Relation #22-sde;
+;1,50,70,$;DEAnder;typePathRelevant;andere, forms of derselbe, selben;0;;
+;1,40,50,70,$;DEDenen;typeRelation;denen;0;;
+;1,40,70,$;DEDer;typeNonRelevant;der;0;;
+;1,40,50,70,$;DEDoppelpunkt;typeOther;colon;0;;
+;1,40,60,70,80,50,$;DEEin;typeNonRelevant;ein;0;;
+;1,40,50,70,80,$;DEEiner;typeNonRelevant;einer;0;;
+;1,40,50,70,80,$;DEEines;typeNonRelevant;eines;0;;
+;1,40,60,70;DEHyphen;typeBeginConcept;extra label for hyphen;0;;
+;1,50;DEJe;typeAmbiguous;je;0;;
+;1,20,40,50,60,70,$;DEKein;typeBeginConcept;kein, keine, keinen, keinem;0;;
+;1,20,40,50,60,70,$;DEKomma;typeEndConcept;comma;0;;
+;1,40,70,$;DELayout;typeBeginEndConcept;item used to visually structure a text;0;;
+;1,40,$;DENein;typeBeginEndConcept;for nein without capital;0;;
+;1,20,40,50,70,$;DENicht;typeOther;nicht;0;;
+;1,20;DENoch;typeRelation;noch;0;;
+;1,40,70,$;DESehr;typeOther;sehr;0;;
+;1,40,70,$;DESein;typeNonRelevant;sein;0;;
+;1,40,70,80,$;DESo;typeBeginConcept;so;0;;
+;1,40,$;DEVielWenig;typeAmbiguous;viel, wenig;0;;
+;1,20;DEWeder;typeRelation;weder;0;;
+;1,40,70,$;DEWie;typeOther;wie;0;;
+;1,40,70,$;DEZu;typeRelation;zu;0;;
 
-/* DE attributes
-71;70,$;DEDummy;typeAttribute;20121114, meaningless attribute, usable in rules when ^LabelA in the left part has to remain untouched;0;;
-/*98;55,$;DEMod;typeAttribute;temporary label for PathRelevants;0;02-12-2015-sde;Entity(Modifier) - replaced by typePathRelevant labels 16-12-2015-sde
-104;50,$;DETime;typeAttribute;attribute for vague time and frequency indications;0;16-12-2015-sde;Entity(DateTime)
+/* Attributes and semantic feature labels
+;70,$;DEDummy;typeAttribute;meaningless attribute, usable as a temporary marker in rules;0;;
+;50,$;DETime;typeAttribute;attribute for vague time and frequency indications;0;;Entity(DateTime)
 
-65;70,50,$;DENegation;typeAttribute;to mark certain entities as negation;0;20120924;Entity(Negation)
-66;70,$;DENegBegin;typeAttribute;to begin the negation path;0;20120925;Path(Begin,Negation)
-67,$;70,$;DENegStop;typeAttribute;to end the negation path;0;20120925;Path(End,Negation)
-68;20,70,$;DENegWord;typeAttribute;to mark certain entities as negation, not to be expanded, added phase 20 #22-sde;0;20121107;Entity(Negation)
-112;70;DEInNegspan;typeAttribute;temporary marker for entities in a negation span;0;#21-sde;
+;70,50,$;DENegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
+;70,$;DENegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
+;70,$;DENegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
+;20,70,$;DENegWord;typeAttribute;to mark certain entities as negation, not to be expanded;0;;Entity(Negation)
+;70;DEInNegspan;typeAttribute;temporary marker for entities in a negation span;0;;
 
-92;80,$;DEPosSentiment;typeAttribute;for sentiment markers;0;17-11-2014-sde;Entity(PositiveSentiment)
-93;80,$;DEPosSentimentBegin;typeAttribute;for sentiment markers;0;17-11-2014-sde;Path(Begin,PositiveSentiment)
-94;$;DEPosSentimentStop;typeAttribute;for sentiment markers;0;17-11-2014-sde;Path(End,PositiveSentiment)
-95;80,$;DENegSentiment;typeAttribute;for sentiment markers;0;17-11-2014-sde;Entity(NegativeSentiment)
-96;80,$;DENegSentimentBegin;typeAttribute;for sentiment markers;0;17-11-2014-sde;Path(Begin,NegativeSentiment)
-97;$;DENegSentimentStop;typeAttribute;for sentiment markers;0;17-11-2014-sde;Path(End,NegativeSentiment)
+;80,$;DEPosSentiment;typeAttribute;for sentiment markers;0;;Entity(PositiveSentiment)
+;80,$;DEPosSentimentBegin;typeAttribute;for sentiment markers;0;;Path(Begin,PositiveSentiment)
+;$;DEPosSentimentStop;typeAttribute;for sentiment markers;0;;Path(End,PositiveSentiment)
+;80,$;DENegSentiment;typeAttribute;for sentiment markers;0;;Entity(NegativeSentiment)
+;80,$;DENegSentimentBegin;typeAttribute;for sentiment markers;0;;Path(Begin,NegativeSentiment)
+;$;DENegSentimentStop;typeAttribute;for sentiment markers;0;;Path(End,NegativeSentiment)
 
-108;60,70;DEList;typeAttribute;attribute for items in an enumeration;0;#21-sde;
+;60,70;DEList;typeAttribute;attribute for items in an enumeration;0;;
 
 

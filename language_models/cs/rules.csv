@@ -1,667 +1,1271 @@
-1;1;CapitalInitial;^CSCapitalInitial;#3-nl
-122;1;CapitalAll;^CSCapitalAll;#6-nl
-525;1;CapitalMixed;^CSCapitalMixed;#20-nl
-177;1;Punctuation;+CSPunctuation;#8-nl
-369;1;UDNegation;+CSNegation+CSNegBegin;#15-nl
-370;1;UDPosSentiment;+CSPosSentiment;#15-nl, removed PosSentimentBegin #23-nl
-371;1;UDNegSentiment;+CSNegSentiment;#15-nl, removed NegSentimentBegin #23-nl
-372;1;UDConcept;CSCon;#15-nl
-373;1;UDRelation;CSRelation;#15-nl
-374;1;UDNonRelevant;CSNonRelevant;#15-nl
-585;38;CSAdjLocInstrMN/DatPl;+CSAdjInstrMN/DatPl;#21-nl
-588;38;CSConInstrPl:CSConInstrMN:CSConInstrF;+CSConInstr;#21-nl
-640;38;CSLongNTLPartCon+CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdj+CSAdjNomPl-CSLongNTLPartCon|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;#22-nl, version of r519 for LongNTLPartCon
-824;38;CSAdjAmbigE+CSConNomPl|CSConNomPl;^CSAdj+CSAdjAmbigE-CSCon|*;#26-nl
-519;38;CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdjNomPl|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;#20-nl
-520;38;CSAdjAmbigI|CSConInstrF+^CSConInstrAmbig;^CSAdjInstrF|*;#20-nl, added ConInstrAmbig #21-nl
-838;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConNomF+^CSConGenF:CSConAccF;^CSAdjNomF|*;#26-nl
-839;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConAccF+^CSConGenF;^CSAdjAccF|*;#26-nl
-828;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSAdjAcc/InstrF:CSAdjAccF;^CSAdjAccF|^CSAdjAccF;#26-nl
-800;38;CSAdjAmbigI+^CSLongPart|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSAdjNomM|*;#25-nl, added ^ConGenMN:ConGenF,AdjNomM #26-nl
-817;38;CSAdjAmbigI+CSBeginTime|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSBeginTime+CSAdjNomM-CSGen|*;#26-nl
-535;38;CSAdjAcc/InstrF|CSConDatF+CSConAccF;^CSAdjAccF|^CSConAccF;#20-nl, ConNomAccF->ConAccF #21-nl
-603;38;CSAdjAcc/InstrF+^CSLongPart|CSConInstrF+CSConGenPl;^CSAdjInstrF|^CSConInstrF;#22-nl
-534;38;CSAdjAmbigE|CSConDatF+^CSConGenF;^CSAdjDatF|*;#20-nl
-551;38;CSConInstrMN+CSConGenPl|CSConInstrMN;-CSConGenPl+CSConPossibleBCon|-CSConGenPl-CSConPossibleBCon;#20-nl
-565;38;CSAdjGen/LocPl|CSConGenPl+CSConInstr:CSConNomAccM;*|-CSConInstr-CSConNomAccM;#21-nl, added ConNomAccM #22-nl
-569;38;^SBegin|CSCapitalInitial|CSCapitalInitial+CSConInstrAmbig;*|*|-CSConInstrAmbig-CSConInstrPl-CSConInstr;#21-nl
-589;38;CSAdjNomF|CSConDatF+CSConNomF;*|-CSConGenMN-CSConNomPl-CSConDatF;#21-nl
-596;38;CSAdjAcc/InstrF|CSConNomF+CSConAccF;^CSAdjAccF|-CSConNomF;#21-nl
-609;38;CSAdjGenMN|CSAdjNomMAnimPl+CSLongNTLPartCon;*|CSCon+CSConGenMN;#22-nl, CongGenSg->ConGenMN #22-nl
-606;38;CSAdjNomMAnimPl+CSLongNTLPartCon|CSConNomPl+^CSConGenMN:CSConGenF;^CSAdjNomMAnimPl+CSAdj|*;#22-nl
-615;38;CSAdjLocMN+CSLongNTLPartCon|CSConDatMN;^CSAdj+CSAdjLocMN|*;#22-nl
-826;38;CSAdjLocMN|CSConLocMN+CSConAccF;*|-CSConAccF;#26-nl
+
+/*PHASE 1: unified labels and user dictionary labels
+/*==================================================
+/* rewrite unified labels to language specific labels
+/*---------------------------------------------------
+
+1;1;CapitalInitial;^CSCapitalInitial;
+122;1;CapitalAll;^CSCapitalAll;
+525;1;CapitalMixed;^CSCapitalMixed;
+177;1;Punctuation;+CSPunctuation;
+
+/* rewrite user dictionary labels
+/*-------------------------------
+
+369;1;UDNegation;+CSNegation+CSNegBegin;
+370;1;UDPosSentiment;+CSPosSentiment;
+371;1;UDNegSentiment;+CSNegSentiment;
+372;1;UDConcept;CSCon;
+373;1;UDRelation;CSRelation;
+374;1;UDNonRelevant;CSNonRelevant;
+
+/*PHASE 38: disambiguation participles, adjectives and nouns - using case information
+/*===================================================================================
+/* preparation
+/*------------
+/* add AdjInstrMN/DatPl-label to AdjLocInstrMN/DatPl-lexreps, they behave the same in this context
+
+585;38;CSAdjLocInstrMN/DatPl;+CSAdjInstrMN/DatPl;
+
+/* add general ConInstr label to specific ConInstr labels
+
+588;38;CSConInstrPl:CSConInstrMN:CSConInstrF;+CSConInstr;
+
+/* disambiguate ambiguous endings
+
+640;38;CSLongNTLPartCon+CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdj+CSAdjNomPl-CSLongNTLPartCon|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;version of r519 for LongNTLPartCon
+824;38;CSAdjAmbigE+CSConNomPl|CSConNomPl;^CSAdj+CSAdjAmbigE-CSCon|*;
+519;38;CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdjNomPl|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;
+520;38;CSAdjAmbigI|CSConInstrF+^CSConInstrAmbig;^CSAdjInstrF|*;
+838;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConNomF+^CSConGenF:CSConAccF;^CSAdjNomF|*;
+839;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConAccF+^CSConGenF;^CSAdjAccF|*;
+828;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSAdjAcc/InstrF:CSAdjAccF;^CSAdjAccF|^CSAdjAccF;
+800;38;CSAdjAmbigI+^CSLongPart|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSAdjNomM|*;
+817;38;CSAdjAmbigI+CSBeginTime|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSBeginTime+CSAdjNomM-CSGen|*;
+535;38;CSAdjAcc/InstrF|CSConDatF+CSConAccF;^CSAdjAccF|^CSConAccF;
+603;38;CSAdjAcc/InstrF+^CSLongPart|CSConInstrF+CSConGenPl;^CSAdjInstrF|^CSConInstrF;
+534;38;CSAdjAmbigE|CSConDatF+^CSConGenF;^CSAdjDatF|*;
+551;38;CSConInstrMN+CSConGenPl|CSConInstrMN;-CSConGenPl+CSConPossibleBCon|-CSConGenPl-CSConPossibleBCon;
+565;38;CSAdjGen/LocPl|CSConGenPl+CSConInstr:CSConNomAccM;*|-CSConInstr-CSConNomAccM;
+569;38;^SBegin|CSCapitalInitial|CSCapitalInitial+CSConInstrAmbig;*|*|-CSConInstrAmbig-CSConInstrPl-CSConInstr;
+589;38;CSAdjNomF|CSConDatF+CSConNomF;*|-CSConGenMN-CSConNomPl-CSConDatF;
+596;38;CSAdjAcc/InstrF|CSConNomF+CSConAccF;^CSAdjAccF|-CSConNomF;
+609;38;CSAdjGenMN|CSAdjNomMAnimPl+CSLongNTLPartCon;*|CSCon+CSConGenMN;
+606;38;CSAdjNomMAnimPl+CSLongNTLPartCon|CSConNomPl+^CSConGenMN:CSConGenF;^CSAdjNomMAnimPl+CSAdj|*;
+615;38;CSAdjLocMN+CSLongNTLPartCon|CSConDatMN;^CSAdj+CSAdjLocMN|*;
+826;38;CSAdjLocMN|CSConLocMN+CSConAccF;*|-CSConAccF;
 628;38;CSCiPartCon+CSAdjDatMN|CSConDatMN;^CSAdj+CSAdjDatMN|CSCon+CSConDatMN;
-818;38;CSNum+CSConGenPl+CSConDatPl|CSConDatPl;-CSConGenPl-CSGen|*;#26-nl
-754;38;CSAdjAmbigE:CSAdjAmbigI|CSConNomPl:CSConNomAccN:CSLongNTLPartCon+^CSConGenF;+CSAdjPossibleBCon|*;#23-nl, '-é' can only be genitive for feminine, added ConNomAccN #26-nl
+818;38;CSNum+CSConGenPl+CSConDatPl|CSConDatPl;-CSConGenPl-CSGen|*;
+
+/* disambiguate possible genitive adjective as not genitive and possible beginconcept
+
+754;38;CSAdjAmbigE:CSAdjAmbigI|CSConNomPl:CSConNomAccN:CSLongNTLPartCon+^CSConGenF;+CSAdjPossibleBCon|*;'-é' can only be genitive for feminine
+
+/* disambiguate possible possessive adjective
+
 544;38;CSAdjAmbigI:CSAdjAmbigE|CSCon+CSPossessive+CSConGenF;*|-CSPossessive;ambiguous possessive adjective or feminine noun -> feminine noun
-552;38;CSPossessive+CSConIfCap+^CSCapitalInitial:CSCapitalMixed;-CSPossessive-CSConIfCap;#20-nl, remove 'possessive adj' label when NOT capitalized or capital mixed (for hyphenated names)
-825;38;CSPossessive+CSConDatMN|CSAdj+^CSAdjNomPl;-CSPossessive|*;#26-nl
-553;38;CSLongNTLPartCon:CSCiPartCon+CSAdjNomM|CSAdj+CSAdjNomM;CSAdj+CSAdjNomM|*;#21-nl
-555;38;CSLongNTLPartCon:CSCiPartCon+CSAdjInstrMN/DatPl|CSConInstrMN;CSAdj+CSAdjInstrMN/DatPl|*;#21-nl
-590;38;CSAdjGenMN|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenMN;#21-nl
-591;38;CSAdjGen/LocPl|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenPl;#21-nl
-592;38;CSAdjAmbigE|CSLongNTLPartCon+CSAdjNomMAnimPl|^CSCon;*|CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl|*;#21-nl
-655;38;CSAdjVerb+CSAdjAcc/InstrF|CSAdjNomPl:CSConNomPl;CSVerb|*;#22-nl
-632;38;CSLongPart:CSAdj+CSAdjInstrMN/DatPl+CSConIfCap|CSConInstrMN:CSConDatPl;-CSConIfCap|*;#22-nl
-633;38;CSLongPart:CSAdj+CSAdjNomF+CSConIfCap|CSConNomF;-CSConIfCap|*;#22-nl
-618;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomM+CSCapitalInitial|^CSConNomAccM;*|*|CSCon+CSConNomAccM+CSCapitalInitial|*;#22-nl
-619;38;^SBegin|CSCon+CSCapitalInitial|CSAdjGenMN+CSCapitalInitial;*|*|CSCon+CSConGenMN+CSCapitalInitial;#22-nl
-617;38;^SBegin|CSCon+CSCapitalInitial|CSAdjDatMN+CSCapitalInitial|^CSConDatMN;*|*|CSCon+CSConDatMN+CSCapitalInitial|*;#22-nl
-620;38;^SBegin|CSCon+CSCapitalInitial|CSAdjLocMN+CSCapitalInitial|^CSConLocMN;*|*|CSCon+CSConLocMN+CSCapitalInitial|*;#22-nl
-621;38;^SBegin|CSCon+CSCapitalInitial|CSAdjInstrMN/DatPl+CSCapitalInitial|CSConInstrMN:CSConDatPl;*|*|CSCon+CSConInstrMN+CSCapitalInitial|*;#22-nl
-622;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomF+CSCapitalInitial|^CSConNomF;*|*|CSCon+CSConNomF+CSCapitalInitial|*;#22-nl
-623;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAcc/InstrF+CSCapitalInitial|^CSConAccF:CSConInstrF;*|*|CSCon+CSConAccF+CSConInstrF+CSCapitalInitial|*;#22-nl
-624;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAmbigE+CSCapitalInitial;*|*|CSCon+CSConGenF+CSConDatF+CSCapitalInitial;#22-nl
-644;38;CSCon:CSLongNTLPartCon|"místo"|CSAdjGenMN:CSAdjGen/LocPl:CSConGenPl:CSConGenF:CSConGenMN:CSNum;*|CSPrep|*;#22-nl
-563;38;^CSPrepInstr|CSConInstrAmbig+CSConNomPl+^CSConDatF|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAmbigI|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjAmbigI:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*;#21-nl, agent instr + longpart not instr + concept (group) not instr - separate rule for noun with ambiguous instr/nompl ending: longpart cannot be nompl
-562;38;^CSPrepInstr|CSConInstr+^CSConInstrAmbig|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAcc/InstrF|.CSAdv|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*|*;#21-nl, longpart not instr preceded by agent in instr and followed by concept (group) not instr, AdjAmbigI can be in last position #21-nl
-656;38;^CSPrepInstr|CSConInstrMN+^CSConInstrAmbig|CSLongPart+CSAdjInstrPl|CSCon+CSConInstrPl;*|+CSAgent|-CSLongPart+CSAdj|*;#22-nl
-600;38;CSNum|CSAdvTemp:CSAdvCon|CSLongPart|CSCon;*|^CSAdj-CSTime|^CSAdj|*;#22-nl
-598;38;^CSConInstr|CSLongPart|CSComma:CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSAdj;*|^CSAdj|*|*|*;exception to r597, longpart becomes adj in enumeration, added ^ConInstr #22-nl
-601;38;CSCopula:CSJe|.CSPrep|*CSAdj:CSCon:CSPosspron|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|*|*|^CSPart|*;#22-nl, no concept after longpart, ^Part #22-nl, added AdjAdv,AdvStruct #24-nl
-597;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|^CSPart|*;#22-nl, no concept after longpart, ^Part #22-nl, added AdjAdv,AdvStruct #24-nl
-602;38;SBegin|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|CSCopula:CSJe;*|*|^CSPart|*;#22-nl, longpart before copula at beginning sentence, ^Part #22-nl, added AdjAdv,AdvStruct #24-nl
-549;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;#20-nl, longpart before instrumental, ^Part #22-nl, added AdjAdv,AdvStruct #24-nl
-641;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenF;*|*|^CSPart|*|*;#22-nl, longpartcon before instrumental, ^Part #22-nl, added AdjAdv,AdvStruct #24-nl, added ^ConGenF #26-nl
-599;38;CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;^CSPart|*|*|^CSPart|*;#22-nl, part-and-part before instr, ^Part #22-nl
-275;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;#15-nl, noun instr follows longpart, no exceptions - not for AdvModal,added AdvTemp,Comma #20-nl,added Se #21-nl,added AdvTemp,AdvCon #22-nl, removed +^AdvModal TEST #22-nl, ^Part #22-nl
-616;38;CSBracket2|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|^CSPart|*|*;#22-nl, longpart after closing brackets, ^Part #22-nl
-637;38;CSCon:CSLongNTLPartCon|CSComma|CSAndOr|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|*|^CSPart|*|*;#22-nl, variation on r275 for pattern concept-comma-and-part, ^Part #22-nl
-310;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGen/LocPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenPl;*|*|^CSPart|*|*;#15-nl, noun instr (except for ConGen) follows longpart AdjGen/LocPl -> relation, ^AdvModal,AdjInstrF,Comma #20-nl,added Se #21-nl,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-307;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConInstrF;*|*|^CSPart|*|*;#15-nl, noun instr (except for ConGen,ConInstrF) follows longpart AdjAcc/InstrF -> relation, ^AdvModal,AdjInstrF,Comma #20-nl,added Se #21-nl,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-513;38;CSCon:CSLongNTLPartCon+CSConInstrMN|CSLongPart+CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|^CSPart|*;#18-nl, exception to r311: longpart should be relation when preceding AND following noun are in instrumental, ^Part #22-nl
-311;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrPl+^CSConInstrMN;*|*|^CSPart|*|*;#15-nl, noun instr (except for ConInstrMN) follows longpart AdjInstrMN/DatPl, ^AdvModal,Comma #20-nl, Adv,added Se #21-nl,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-312;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl+^CSConInstrPl;*|*|^CSPart|*|*;#15-nl, noun instr (except for ConInstrPl) follows longpart AdjInstrPll -> relation, ^AdvModal,Comma #20-nl,added Se #21-nl,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-560;38;CSCon:CSLongNTLPartCon+^CSConInstrMN|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAmbigI|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl+^CSConGenF:CSConNomPl;*|*|^CSPart|*|*;#21-nl, noun instr (no exception for ConInstrF, better results this way since the ending is ambiguous) follows longpart AdjAmbigI -> relation, added exception for InstrMN #21-nl,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-561;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSSe|CSAdvCon+CSConInstrMN;*|*|^CSPart|*|CSCon+CSConInstrMN;#21-nl, for adverb/noun,added AdvTemp,AdvCon #22-nl, ^Part #22-nl
-789;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSAndOr|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSConInstrF:CSAdjAcc/InstrF:CSAdjInstrF;*|*|^CSPart|*|^CSPart|*;#25-nl, last position InstrF
-790;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|CSAndOr|CSLongPart+^CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|*|^CSPart|*|^CSPart|*;#25-nl, last position InstrMN
-791;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrPl|CSAndOr|CSLongPart+^CSAdjInstrPl|CSConInstrPl:CSAdjInstrPl;*|*|^CSPart|*|^CSPart|*;#25-nl, last position InstrPl
-531;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSConDatF+^CSConInstrPl;*|*|^CSPart|*|*;#20-nl, relation before noun in dative, exception: longpart as AmbigE is not relation, exception for ambiguous ending which can be genitive,added Se #21-nl, added ^ConInstrPl #22-nl, ^Part #22-nl
-532;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConDatPl;*|*|^CSPart|*|*;#20-nl, relation before noun in dative, exception: longpart as DatPl is not relation,added Se #21-nl, ^Part #22-nl
-533;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjDatMN|.CSAdv:CSAdvTemp:CSSe|CSAdjDatMN:CSConDatMN+^CSConGenMN;*|*|^CSPart|*|*;#20-nl, relation before AdjDatMN (if longpart is not in same case),added Se #21-nl,added ConDatMN #22-nl, ^Part #22-nl
-536;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSAdjDatF;*|*|^CSPart|*|*;#20-nl, relation before AdjDatF (if longpart is not in same case),added Se #21-nl, ^Part #22-nl
-540;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomM|.CSAdvTemp:CSAdv|CSAdjNomM:CSConNomAccM+^CSConGenPl:CSConGenF:CSConGenMN;*|*|^CSPart|*|*;#20-nl, relation before nom m sg (if longpart is not in same case), better results if AdjAmbigI is not an exception,added Se,Adv #21-nl, added ^ConGenPl #22-nl, ^Part #22-nl, added ^ConGenPl #25-nl, added ^ConGenF:CSConGenMN, not Se #26-nl
-541;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomF|.CSAdvTemp:CSAdv|CSAdjNomF:CSConNomF+^CSConGenF:CSConGenMN;*|*|^CSPart|*|*;#20-nl, relation before nom f sg (if longpart is not in same case), better results if AdjAmbigI is not an exception,added Se,Adv #21-nl, ^Part #22-nl,removed Se #26-nl
-587;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAccF|.CSAdvTemp:CSAdv|CSAdjAccF:CSConAccF+^CSConGenF:CSConGenMN:CSConNomF:CSConInstrPl;*|*|^CSPart|*|*;#21-nl, added ^ConInstrPl #22-nl, better results if AdjAmbigI is not an exception, ^Part #22-nl,removed Se #26-nl
-542;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomMAnimPl:CSAdjNomPl|.CSAdvTemp:CSAdv|CSAdjNomMAnimPl:CSConNomPl+^CSConInstrPl:CSConNomF:CSConGenF:CSConGenMN:CSConGenPl;*|*|^CSPart|*|*;#20-nl, relation before nom pl (if longpart is not in same case), better results if AdjAmbigI is not an exception,added Se,^ConInstrPl,Adv,^ConGenF:ConGenMN #21-nl, added ^ConGenPl #22-nl, ^Part #22-nl,removed Se #26-nl
-543;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGenMN|.CSAdvTemp:CSAdv|CSAdjGenMN+^CSConInstr;*|*|^CSPart|*|*;#20-nl, relation before gen sg (if longpart is not in same case), better results if AdjAmbigI is not an exception,added Se,Adv #21-nl, ^Part #22-nl,removed Se #26-nl
-545;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGen/LocPl|.CSAdvTemp:CSAdv|CSAdjGen/LocPl;*|*|^CSPart|*|*;#20-nl, relation before gen sg (if longpart is not in same case),added Se,Adv #21-nl, ^Part #22-nl,removed Se #26-nl
-546;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl|.CSAdvTemp:CSAdv|CSAdjAmbigI;*|*|^CSPart|*|*;#20-nl, relation before ambiguous -í (if longpart is in case without overlap with -í),added Se,Adv #21-nl, ^Part #22-nl,removed Se #26-nl
-547;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF/LocSg:CSAdjDatF:CSAdjNomPl:CSAdjNomN|.CSAdvTemp:CSAdv|CSAdjAmbigE:CSAdjNomPl;*|*|^CSPart|*|*;#20-nl, relation before ambiguous -í (if longpart is not in case with overlap with -é),added Se,Adv #21-nl, ^Part #22-nl,removed Se #26-nl
-537;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjNomMAnimPl:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjGen/LocPl|.CSAdvTemp:CSSe:CSAdv|CSConGenMN+CSConAccF;*|*|^CSPart|*|*;#20-nl, relation before ambiguous gen/dat/loc mn or acc f (if longpart is not in one of these cases),added Se,Adv #21-nl, ^Part #22-nl
-571;38;CSCon+CSConDatPl:CSConInstrMN+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjInstrMN/DatPl;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-572;38;CSCon+CSConInstrPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-573;38;CSCon+CSConNomAccM+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomM|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-586;38;CSCon:CSLongNTLPartCon+CSConNomF:CSAdjNomMAnimPl:CSConNomPlN+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl,added ConNomPlN #25-nl
-594;38;CSCon+CSConAccF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-595;38;CSCon+CSConInstrF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-613;38;CSCon+CSConLocPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjGen/LocPl+^CSLongLPart|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjGen/LocPl:CSConGenPl;*|*|^CSPart|*|*;#22-nl, ^Part #22-nl
-593;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSCiPart+CSAdjAmbigI|.CSAdvTemp:CSSe:CSAdv|CSAdj:CSNum;*|*|CSCiPart+CSPart|*|*;#21-nl, keep CiPart #22-nl
-607;38;^CSNum|CSCiPart+CSAdjAmbigI|CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl;*|CSCiPart+CSPart|*;#22-nl, ci-part in -í before adj in other case, keep CiPart #22-nl
-608;38;^CSNum|CSCiPart+CSAdjAmbigI|CSConDatMN:CSConDatPl:CSConGenPl:CSConInstrMN:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomAccN:CSConNomF:CSConInstrF;*|CSCiPart+CSPart|*;#22-nl, ci-part in -í before noun in other case, keep CiPart #22-nl
-611;38;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSNum|CSCiPart:CSCiPartCon+CSAdjAmbigI|CSAdjAccF:CSConAccF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSConGenF;*|CSCiPart+CSPart|*;#22-nl, cipart in between nom (subject) and acc (object), keep CiPart #22-nl,added CiPartCon,AdjAccF #26-nl
-614;38;CSCon:CSLongNTLPartCon|CSCiPart|CSComma|"že";*|CSCiPart+CSPart|*|*;#22-nl, keep CiPart #22-nl
-625;38;CSPart|CSAndOr|CSLongPart|CSPunctuation:SEnd;*|*|^CSPart|*;#22-nl, ^Part #22-nl
-626;38;CSCon|CSLongPart|.CSSe|CSInf;*|^CSPart|+Join|*;#22-nl, ^Part #22-nl
-643;38;CSCon+CSConGenPl|CSLongNTLPartCon+CSAdjGen/LocPl|CSPrep;*|^CSPart|*;#22-nl, ^Part #22-nl
-583;38;CSConNomPl|.CSAdv:CSComma+^CSAdvModal|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdj+CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF|CSConInstr+^CSConNomPl;*|*|^CSPart|*|*;#21-nl, ^Part #22-nl
-559;38;CSCon:CSLongNTLPartCon:CSPrep:CSConj:CSPosspron:SBegin:CSAndOr:CSPunctuation+^CSComma|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon:CSAdj;*|CSCAdv|^CSAdj|+Join|*;#21-nl, added left context #22-nl, added Adj in final position #25-nl
-685;38;CSVerb:CSSe|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon;*|CSCAdv|^CSAdj|+Join|*;#21-nl, added left context #22-nl
-627;38;CSCiPart|CSSe|CSAndOr|CSAdj;^CSAdj|+Join|*|*;#22-nl
-566;38;CSCon|CSAdj+^CSAdjInstrMN/DatPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrMN/DatPl;*|^CSAdj+CSBCon|*;#21-nl, added Adj #22-nl, keep Adj: added ^Adj #23-nl
-567;38;CSCon|CSAdj+^CSAdjInstrPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrPl;*|^CSAdj+CSBCon|*;#21-nl, added Adj #22-nl, keep Adj: added ^Adj #23-nl
-804;38;CSCopula:CSJe|.CSAdvStruct|CSCon|CSAdvDegree|CSAdj+CSAdjNomN:CSAdjNomM:CSAdjNomF:CSAdjInstrMN:CSAdjAcc/InstrF;*|*|*|CSCAdv+CSBCon|*;#25-nl
-661;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj,Prep #26-nl
-739;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;keep Adj #23-nl, added ^capitalinitial #26-nl
-662;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj,Prep #26-nl
-740;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;keep Adj #23-nl, added ^capitalinitial #26-nl
-823;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#26-nl
-663;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-664;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ConNomPl #24-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-665;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-666;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-667;38;CSCon+CSConNomF:CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-668;38;CSCon+CSConInstrMN:CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;#22-nl, keep Adj: added ^Adj #23-nl, added ^capitalinitial #26-nl, added Conj #26-nl
-813;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;#26-nl
-814;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;#26-nl
-815;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;#26-nl
-816;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;#26-nl
-821;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;#26-nl
-822;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;#26-nl
-833;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|CSCAdv+CSBCon|*|*;#26-nl
-834;38;CSAdj|CSCon+CSConNomF|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;#26-nl
-835;38;CSAdj|CSCon+CSConNomAccM|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;#26-nl
-836;38;CSAdj|CSCon+CSConNomPl|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|*|CSCAdv+CSBCon|*|*;#26-nl
-837;38;CSAdj|CSCon+CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|*|CSCAdv+CSBCon|*|*;#26-nl
-306;38;CSAdjAcc/InstrF|CSAdjAcc/InstrF+CSConIfCap+CSCapitalInitial;*|-CSConIfCap;capitalized adjective, exception to r236 #15-nl
-539;38;CSAdjAcc/InstrF+CSConInstrF;-CSAdjAcc/InstrF;#20-nl
-558;38;CSConPossibleBCon+CSConGenF:CSConGenMN:CSConGenPl;-CSConPossibleBCon;#21-nl
-514;38;CSCiPartCon:CSLongNTLPartCon+CSAdjInstrMN/DatPl|CSAdj+CSAdjInstrMN/DatPl;CSAdj+CSAdjInstrMN/DatPl|*;#18-nl
-808;38;CSLongNTLPartCon+CSAdjNomMAnimPl;+CSGerund;#25-nl
-812;38;CSPossessive|CSVerbCon;*|CSCon;#25-nl
-652;38;CSConGenPl:CSConGenF:CSConGenMN+^CSConNomAccM;+CSGen;#22-nl
-476;39;CSAdj:CSIndefpron:CSDempron+CSBeginTime|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;#18-nl
-460;39;CSAdj+^CSOrdNum|CSAdvTime+CSCon;*|CSCon-CSTime;#18-nl
-462;39;^CSBeginTime:CSOrdNum|CSAdvTime+CSCon|CSAdj|^CSAdj:CSCon;*|CSCon-CSTime|*|*;#18-nl
-463;39;CSAdvTemp|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;#18-nl
-461;39;CSAdvTime+CSCon;-CSCon;#18-nl
-145;39;"středu"|CSCon+^CSConPossibleBCon;CSCon-CSTime|*;#6-nl, added -Time #18-nl,added ^ConPossibleBCon #25-nl
-147;39;"dubna"+CSCapitalInitial;CSCon;#6-nl, to discern the place name Dubna from the month
-163;39;"se":CSAux|"časem"|CSVerb:CSPart;*|CSAdvTemp+CSTime|*;#6-nl
-165;39;CSTimeConcept|CSNum:CSDigit|CSHyphen:CSAndOr:"až":"do"|CSNum:CSDigit;CSECon+CSTime|+Join|*|+CSTime;#18-nl,Num instead of YearNum is ok, added Digit
-168;39;CSTimeConcept|CSYearNum|CSComma|CSYearNum|.CSComma|.CSYearNum|CSAndOr|CSYearNum;CSECon+CSTime|+Join|*|+CSTime|*|+CSTime|*|+CSTime;#6-nl,Num->YearNum #18-nl
-166;39;CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSOrdNum|CSYear:CSCentury;^CSBCon+CSTime+CSList|+CSList|CSECon+CSTime+CSList|+Join;#6-nl, added ^,+List #24-nl
-786;39;CSJedno:CSJednou:CSJedenPart:CSJeden|*CSAdj:CSCon|CSPrep|CSDruhy|^CSAdj:CSCon;*|*|*|CSPRPron|*;#24-nl, if concept after 'jeden', only 'druhý' becomes PR, added ^Adj:Con #25-nl
-281;39;CSJedno:CSJednou:CSJedenPart:CSJeden|CSPrep|CSDruhy;CSPRPron|*|CSPRPron;#14-nl, removed .Adj:Con #24-nl
-286;39;CSJedno:CSJednou:CSJedenPart:CSJeden|"druhému":"druhého";CSPRPron|CSPRPron;#14-nl
-287;39;"ani"|CSJedno:CSJednou:CSJedenPart:CSJeden|CSComma|"ani"|CSDruhy;*|CSPRPron|*|*|CSPRPron;#14-nl
-280;39;CSDruhy;^CSOrdNum+CSAdj;#14-nl,added ^ to keep the case-specific label
-457;39;CSJednou|CSAdvTime+CSAdv;CSAdvTime+CSAdv+CSTime|+Join;#18-nl
-180;39;CSAux|CSJedenPart|CSAdv;*|CSPart+CSNTPart|*;#8-nl,added NTPart #15-nl
-27;39;CSJedenPart;^CSCon+CSNum+CSJeden;#8-nl, added ^ to keep possible Capitalinitial #22-nl
-83;39;CSJedno;CSCon+CSNum+CSJeden;#8-nl
-273;39;CSPosspron:CSIndefpron:CSDempron|CSInfCon:CSVerbCon;*|CSCon;copy part of r12, #13-nl
-97;39;CSJeden:CSJednou:CSIndefpron|"z"|"nich":"nás":"vás";CSPerspron|+Join|+Join;#13-nl
-204;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSCon|+Join|+Join;#13-nl
-99;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSBCon|+Join|+Join;#13-nl
-211;39;CSJeden+CSGen|"z":"ze"|CSVerbCon;CSCon|+Join|+Join;#8-nl, to prevent Gen to be split off in following r210
-210;39;CSJeden:CSJednou|"z":"ze"|CSVerbCon;CSBCon|+Join|+Join;#8-nl
-212;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|.CSNRPron|^CSNum;CSAdj|+Join|CSAdj|*;#13-nl,Adj instead of Con #20-nl
-503;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;#18-nl
-98;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|.CSNRPron|^CSNum;CSBCon|+Join|CSAdj|*;#13-nl
-203;39;CSJednou|"z":"ze"|CSNum;CSCon+CSNum+CSJeden|CSPrep|*;#8-nl
-201;39;CSJednou|CSAdj:CSCon;CSCon+CSNum+CSJeden|*;#8-nl
-202;39;CSJednou;CSAdvTemp+CSTime;#18-nl
-489;39;CSNum|"a"|"půl";^CSNum|+Join|+Join;#18-nl
-471;39;"až"|.CSNum:CSOrdNum|CSTimeConcept;CSPrep|*|*;#18-nl
-439;39;CSAdvTime+CSAdv|CSAdj|CSAdj:CSCon;CSCAdv|*|*;#18-nl
-440;39;CSAdvTime+CSAdv;-CSAdv;#18-nl
-480;39;CSDempron:CSBeginTime:CSTu:CSTen:"co"|CSAdvTempCon;CSAdvTemp+CSMultiwordAdverb+CSTime|+Join;#18-nl
-481;39;CSPrep|CSAdvTempCon;*|CSAdvTemp+CSTime;#18-nl
-482;39;CSAdvTempCon;CSCon;#18-nl
-475;39;CSAdvTime+CSSingleWord|CSAdvTime+CSSingleWord;CSAdvTime+CSTime|+Join;#18-nl
-448;39;CSPrep+^"před":"po":"za"|CSNum+^CSPartTime|CSYear|^CSEndTime;*|*|-CSTimeConcept-CSTime|*;#18-nl
-497;39;^CSNum:CSAdvTime:CSOrdNum|CSHour|CSDempron:CSAdj:CSCon+^CSNum;*|CSCon|*;#18-nl
-500;39;CSBeginTime:CSOrdNum:CSIndefpron+CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE;+CSGen;#18-nl
-505;39;CSBeginTime+CSIndefpron+CSGen;-CSGen;#18-nl, exception for 'každé' as BeginConcept
-502;39;"co"|CSTimeConcept;CSAdvTime+CSTime|+Join;#18-nl
-574;39;CSAdvTemp|"dopředu";^CSAdvTemp|+Join;#21-nl
-484;39;"v"|CSNum|.CSOrdNum|"ráno":"odpoledne":"večer";*|CSAdvTime|+Join|+Join;#18-nl
-485;39;CSPartTime:CSNum|."hodiny":CSMinute|"před":"po"|CSOrdNum|^CSCon;CSAdvTime+CSTime|+Join|+Join|+Join|*;#18-nl,added ^Con #26-nl
-491;39;CSNum|CSHour|."a"|CSNum|CSMinute;CSAdvTime+CSTime|+Join|+Join|+Join|+Join;#18-nl
-492;39;CSNum|CSHour;CSTimeConcept+CSTime|+Join;#18-nl
-452;39;CSBeginTime:CSOrdNum:CSTimeConcept:CSDen|CSMonth;CSMonth+CSTimeConcept+CSCon+CSTime|+Join;#18-nl, add TimeConcept to make it BeginEndConcept+Time in r454
-144;39;CSDay:CSDen|CSOrdNum|CSMonth:CSOrdNum;CSMonth+CSCon+CSTime|+Join|+Join;#9-nl
-464;39;CSOrdNum+CSDigit|CSOrdNum+CSDigit;CSMonth+CSCon+CSTime|+Join;#18-nl, two consecuctive ordinal numbers in digits express date
-483;39;CSOrdNum|CSBeginTime|CSDay;CSAdvTime+CSTime|*|*;#18-nl
-455;39;^CSPartTime:CSOrdNum|CSBeginTime+^CSGen|.CSOrdNum:CSNum|CSTimeConcept:CSPartTime|^CSYearNum;*|CSAdvTime+CSTime|+Join|+Join|*;#18-nl, concept split except in case of surrounding time-related words or genitive forms
-458;39;CSBeginTime+CSGen|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;#18-nl, no split because of genitive form 
-501;39;CSBeginTime+CSGen:CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;#18-nl, no split because of genitive form -> 2 consecutive adjectives
-441;39;CSOrdNum|.CSNum|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;#18-nl
-468;39;^CSOrdNum|CSPartTime|CSTimeConcept;*|CSTimeConcept+CSCon+CSTime|+Join;#18-nl, exception for preceding ordinal number, here r443 should fire
-442;39;CSYear|CSYearNum;CSECon+CSTime|+Join;#18-nl
-469;39;CSOrdNum:CSBeginTime+CSGen|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth:CSAdvTime;CSTimeConcept+CSCon+CSTime|+Join|+Join;#18-nl, before r443 no split when begin time indication can be genitive
-443;39;CSOrdNum:CSBeginTime|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth;CSAdvTime+CSTime|+Join|+Join;#18-nl
-446;39;CSTimeConcept+^CSMonth|CSECon:CSYearNum;CSECon+CSTime|+Join;#18-nl, exception for Month which should be BeginEndConcept
-799;39;CSAdvDegree|CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join|+Join;#25-nl
-498;39;CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join;#18-nl,added Gen #18-nl
-512;39;CSAdvDegree|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;CSBCon+CSTime|+Join|CSTimeConcept+CSCon+CSTime|*;#18-nl
-511;39;^CSNum:CSAdj:CSLongPart|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;*|CSBCon+CSNum+CSTime|CSTimeConcept+CSCon+CSTime|*;#18-nl, keep Num label
-645;39;"před":"po":"za"|CSNum+^CSPartTime|CSYear;*|CSECon+CSTime|+Join;#22-nl
-509;39;CSIndefpron+CSGen|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join;#18-nl
-510;39;CSIndefpron|CSTimeConcept|^CSEndTime;CSBCon+CSTime+CSNoSplit|CSTimeConcept+CSCon+CSTime|*;#18-nl, added NoSplit to avoid split in phase45 #25-nl
-453;39;CSMonth:CSPossibleMonth|CSECon:CSYearNum;CSAdvTime+CSTime|+Join;#18-nl
-467;39;CSMonth|CSNum|^CSAdj:CSCon;CSAdvTime+CSTime|+Join|*;#18-nl, for other numbers than YearNum
-454;39;^CSAdj|CSMonth+CSTimeConcept;*|CSAdvTime+CSTime;#18-nl, added ^Adj #26-nl
-167;39;CSYearNum:CSPossibleMonth|CSHyphen|CSAdvTime:CSYearNum:CSPossibleMonth;+CSTime|*|+CSTime;#6-nl, added PossibleMonth #26-nl
-495;39;CSDay|CSPossibleMonth;CSAdvTime+CSTime|+Join;#18-nl
-486;39;*CSNum:CSIndefpron|CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|+Join|-CSEndTime;#18-nl, for 'after' as conjunction
-487;39;CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|-CSEndTime;#18-nl, for 'after' as conjunction
-488;39;CSEndTime+CSRelpron;-CSEndTime;#18-nl, clean-up 'after' as conjunction
-450;39;*CSNum:CSIndefpron|CSTimeConcept|CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join|+Join;#18-nl
-449;39;CSTimeConcept|*CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join;#18-nl
-445;39;CSTimeConcept|CSTimeConcept:CSMonth;^CSTimeConcept|+Join;#18-nl
-153;39;CSYear|CSNum+^CSBCon;CSECon+CSTime|+Join;#6-nl, not BeginConcept, for all numbers since Year is explicit, added ^BCon #22-nl
-451;39;CSAdvTime:CSMonth:CSBeginTime:CSECon|CSTimeConcept:CSECon:CSAdvTime:CSEndTime+^CSSingleWord;CSAdvTime+CSTime|+Join;#18-nl,exception for single word adverbs of time from lexreps
-494;39;CSPrep|CSDigitalTime|CSAdj:CSCon;*|CSCon+CSTime|*;#18-nl, overwrite AdvTime so it won't be split from following time indication eg. Central European Time
-447;39;CSPrep|*CSNum:CSPartTime:CSIndefpron:CSOrdNum|CSTimeConcept:CSMonth|^"méně":"míň":"víc":"více":CSGen;*|CSAdvTime+CSTime|+Join|*;#18-nl, added exception for 'more' and 'less' #22-nl
-659;39;CSPrep|CSTimeConcept:CSMonth|CSGen:CSAdjGenMN;*|+CSTime|*;#22-nl, not AdvTime when genitive follows
-444;39;CSPrep|CSTimeConcept:CSMonth|^CSGen:CSAdjGenMN:CSBeginTime:CSOrdNum;*|CSAdvTime+CSTime|*;#18-nl,added ^Gen #20-nl
-515;39;CSPrep|CSTimeConcept:CSMonth|CSBeginTime:CSOrdNum+^CSPartTime:CSDempron|^typeConcept;*|CSTimeConcept+CSTime|+Join|*;#20-nl, added ^typeconcept #25-nl
-504;39;CSAdj|CSTimeConcept+CSYear;*|+CSTime;#18-nl
-499;39;*CSNum:CSAdj|CSTimeConcept+^CSYear;*|+CSTime;#18-nl, to catch a large variety in expressions eg. 'working week', 'holiday month', 'business days', some are not actually time indications though: 'it's been a hard day'
-470;39;CSAdvTime|CSAndOr:CSHyphen|CSTimeConcept;*|*|CSAdvTime+CSTime;#18-nl
-479;39;CSNum|CSNum|CSTimeConcept|"v"|CSAdvTime;CSAdvTime+CSTime|+Join|+Join|*|*;#18-nl
-206;39;CSBeginTime:CSAdvTime|CSAdvTime+^CSSingleWord;CSAdvTime+CSTime|+Join;#18-nl,exception for single word adverbs of time from lexreps
-169;39;CSBeginTime:CSPartTime|CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSAdvTime;CSBCon+CSTime|+Join|*|*;#6-nl,added PartTime #18-nl
-474;39;"mezi":"od":"před"|*CSNum|"a":"do":"až"|CSAdvTime;*|+CSTime|*|*;#18-nl
-788;39;CSBeforeNumber|CSNum+CSAdvTime;*|+CSCon-CSAdvTime-CSTime;#25-nl
-59;40;CSNum:CSOrdNum:CSAdvTime:CSYearNum:CSECon:CSBCon|CSHyphen|CSNum:CSOrdNum:CSECon:CSAdvTime;*|CSPrep-Punctuation|*;#6-nl
-178;40;SBegin|"a"|CSPunctuation;*|CSCon|*;#8-nl
-400;40;"na"|"rozdíl"|CSAdvStruct:CSAdv:CSRAdv|"od":"ode";CSPrep|+Join|*|CSPrep;#16-nl
-435;40;"do"|CSAdj:CSIndefpron:CSDempron|"míry";CSRAdv|+Join|+Join;#17-nl
-785;40;CSPRPronPlusAdj|"jiný":"jiného":"jiném":"jinému":"jiným";CSPRPron|+Join;#24-nl
-784;40;CSPRPronPlusAdj|CSAdj|^CSAdj:CSCon;CSBCon|*|*;#24-nl
-237;40;CSAdj+CSConIfCap|CSVerbCon:CSInfCon;CSAdj|CSCon;#11-nl
-236;40;^SBegin:CSPunctuation:CSListnumber|CSConIfCap+CSCapitalInitial+^CSAdj;*|CSCon+CSCapitalInitial;make capitalized words Concept, exception for adjectives because this gives better results for surrounding ambiguous words #17-nl
-171;40;CSDempron:CSAdj:CSInf+CSConIfCap+CSCapitalInitial|CSCon+CSCapitalInitial;CSCon+CSCapitalInitial|*;make capitalized ambiguous names Concept before capitalized Concept - remove Negation attribute for negated verb forms #7-nl,added capitalinitial #20-nl
-123;40;CSConIfAllcaps+CSCapitalAll;CSCon;#17-nl
-176;40;^SBegin|"i"+CSCapitalAll;*|CSCon;#8-nl, for Latin 'i'
-193;40;CSRelpron:CSConj:CSPerspron|CSPrepVerb;*|CSVerb;#8-nl
-90;40;CSPrepVerb;CSPrep;#4-nl
-279;40;CSOrdNum:CSNum|CSCon|"až"|CSOrdNum:CSNum:CSJednou|CSCon;*|*|CSPrep|*|*;#13-nl
-272;40;CSOrdNum:CSNum:CSECon:CSAdvTime|"až"|CSOrdNum:CSNum:CSJednou:CSAdvTime;*|CSPrep|*;#13-nl,added TimeConcept #18-nl
-344;40;CSBud|*^CSBud:"nebo":"neboli":"anebo"|"nebo":"neboli":"anebo";CSConj|*|*;#15-nl, 'either' when 'nebo' follows
-345;40;CSBud;CSAux+CSVerb+CSCopula;#15-nl
-191;40;CSAdj|CSHlavne;*|CSCon;#8-nl
-256;40;CSHlavne|CSConj:CSPrep;CSAdvStruct|*;#17-nl
-192;40;CSHlavne;CSRAdv;#8-nl, AdvStruct->RAdv #13-nl
-268;40;CSHodne|CSAdv:CSAdvTemp:CSAdjAdv:CSAdvConj;CSAdvDegree+CSAdv|*;#13-nl
-270;40;CSHodne|*CSPerspron:"se":CSPRPron|CSVerb;CSRAdv|*|*;#13-nl
-271;40;CSVerb|CSHodne|^CSAdj:CSLongPart:CSPosspron:CSCon:CSLongNTLPartCon;*|CSRAdv|*;#13-nl
-269;40;CSHodne;CSAdvDegree+CSAdjAdv;#13-nl
-150;40;CSAux|"potřeba";*|CSAdvModal+CSAdv;#6-nl
-189;40;CSNum|CSJen;*|CSCon;#8-nl
-190;40;CSJen;CSAdvStruct;#8-nl
-215;40;CSJe|CSPart;CSAux+CSVerb+CSCopula|*;#9-nl
-214;40;CSVerb|CSJe;*|CSPerspron;#9-nl
-148;40;CSAdvStruct:CSAdvTemp:CSAdv|CSJe|CSInf;*|CSPerspron|*;#6-nl
-149;40;CSJe|.CSAdv:CSAdjAdv:CSAdvStruct|CSVerb+^CSInf;CSPerspron|*|*;#8-nl
-4;40;CSJe;CSAux+CSVerb+CSCopula;#5-nl
-18;40;CSJak;CSRelpron;#3-nl
-37;40;CSComma|"již";*|CSRelpron;#4-nl,changed to literal #22-nl, otherwise: AdvStruct
-43;40;CSPosspron:CSAdj:CSNum:CSPrep|CSKolem;*|CSCon;#4-nl
-96;40;CSKolem|CSAdj:CSAdjVerb:CSCon:CSAdvTime:CSTimeConcept+^CSNum;CSPrep|*;#5-nl,added AdvTime,TimeConcept #18-nl,added AdjVerb #21-nl
-29;40;CSKolem;CSAdvDegree+CSAdv;#3-nl
-182;40;CSPrep:CSVerb+^CSInf|CSMa;*|CSPosspron;#8-nl
-183;40;SBegin|CSMa|.CSAdj|CSCon|CSVerb;*|CSPosspron|*|*|*;#8-nl
-48;40;CSMa;CSAux+CSVerb;#4-nl
-185;40;CSNum:CSZadny|.CSCon|CSNavic;*|*|CSCAdv;#8-nl
-186;40;CSNavic;CSAdvStruct+CSAlso;#13-nl
-32;40;CSPrep|CSNiz;*|CSRelpron;#8-nl
-184;40;CSNiz;CSAdvDir+CSAdv;#8-nl
-102;40;^CSComma:SBegin|"naopak"|CSComma:SEnd;*|CSRAdv|*;#5-nl
-86;40;"okolo":"min.":"max.":CSAdvDegree|CSNum;CSNum+CSCon|+Join;#4-nl, added 'min.','max.' #25-nl
-159;40;"okolo":"min.":"max.":CSAdvDegree|CSAdvTime:CSTimeConcept;CSAdvTime+CSTime|+Join;#6-nl,added TimeConcept #18-nl, added 'min.','max.' #25-nl
-65;40;CSSam|.CSPrep|CSSobe;CSRefl|+Join|+Join;#4-nl
-67;40;CSSobe|CSSam;CSRefl|+Join;#4-nl
-66;40;CSTen:CSTu|CSSam;CSPRPron|+Join;#5-nl
-743;40;CSTu;CSPRPron;#23-nl
-49;40;^CSVerb|CSSam|CSCon:CSAdj;*|CSAdvStruct|*;#4-nl
-33;40;CSSam;CSRefl;#3-nl
-578;40;CSTak|CSAdj|.CSComma|CSConj:"jako":"až";CSCAdv|*|*|*;#21-nl
-580;40;CSTak|CSAdvTemp|.CSComma:CSVerb|CSConj:"jako":"až";CSAdvTemp+CSTime|+Join|*|*;#21-nl
-579;40;CSTak|CSAdvTemp:CSNum;CSRAdv|*;#21-nl
-582;40;SBegin:CSComma|CSVerb|CSTak;*|*|CSRAdv;#21-nl
-576;40;"a"|.CSAdj:CSCon|CSVerb|CSTak;*|*|*|CSRAdv;#21-nl
-47;40;CSTak|CSComma;CSRAdv|*;#4-nl, Conj->CSRAdv #23-nl
-375;40;"jak"|*^"jak":CSComma|CSComma|CSTak;*|*|*|CSAndOr;#16-nl
-46;40;CSComma|CSTak;*|CSConj;#4-nl
-44;40;CSTak|CSAdj+^CSOrdNum;CSCAdv|*;#4-nl
-196;40;CSTak;CSAdvDegree+CSAdv;#8-nl
-187;40;CSCon|CSVila|.CSAdj|CSCon;*|CSVerb|*|*;#8-nl
-188;40;CSVila;CSCon;#8-nl
-251;40;CSAdjCon|CSAdj:CSLongPart:CSCon;CSAdj|*;#13-nl,added LongPart #20-nl
-71;40;CSAdjCon;CSCon;#4-nl
-277;40;"něco":"ještě"|CSAdjAdv+CSComp+CSAdvDegree;CSAdjAdv+CSComp+CSAdvDegree|+Join;#13-nl
-135;40;"něco":"ještě":"stále"|CSComp;CSAdvDegree-CSTime|*;#6-nl, added ještě,stále, remove time from stále #13-nl
-346;40;"co"|CSAdj+CSSuper;JoinReverse|+CSAdj;#15-nl,join->joinreverse #26-nl
-827;40;CSNum|*<CSAdj:CSCon|CSComp:CSSuper+CSBCon;*|*|-CSBCon;#26-nl
-8;40;CSAdj+CSComp:CSSuper+^CSBCon;CSAdj;#4-nl, added ^BCon #26-nl
-76;40;CSNum|"nebo":"či"|CSAdjAdv+CSComp;CSNum+CSCon|+Join|+Join;#9-nl
-653;40;CSAdj|CSAdjAdv+CSComp|"než":"jak"|CSNum;*|CSNum+CSCon|+Join|+Join;#22-nl
-660;40;CSAdjAdv+CSComp|"než":"jak"|CSNum|^CSGen;CSNum+CSBCon|+Join|+Join|*;#22-nl, beginconcept if NOT followed by a noun in genitive
-77;40;CSAdjAdv+CSComp|"než":"jak"|CSNum;CSNum+CSCon|+Join|+Join;#9-nl
-493;40;CSAdjAdv+CSComp|"než":"jak"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;#18-nl
-347;40;"co"|CSAdjAdv+CSSuper|CSCon;CSAdj|+Join|*;#15-nl
-78;40;CSAdjAdv+CSComp:CSSuper|CSCon;CSAdj|*;#6-nl
-111;40;CSComp:CSSuper+CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;#5-nl, for combinations with 'less' and 'more'
-112;40;CSComp:CSSuper+CSAdvDegree|CSAdvManner;CSAdv+CSAdvManner|+Join;#5-nl, for combinations with 'less' and 'more'
-82;40;CSAdvTemp+CSComp:CSSuper;CSAdvTemp;#4-nl
-348;40;"co"|CSSuper+^CSAdjVerb:CSCAdv;CSAdv+CSAdvDegree|^CSAdv;keep specific labels for adverbs #15-nl
-26;40;CSComp:CSSuper+^CSAdjVerb:CSCAdv;^CSAdv;keep specific labels for adverbs #12-nl
-101;40;^CSVerb|CSPerspron+^CSPosspron|CSAdjVerb;*|*|^CSVerb;#5-nl,added ^Verb #21-nl
-581;40;CSKtery|.CSAdv:CSAdvStruct|CSAdjVerb;*|*|^CSVerb;#21-nl
-56;40;CSAdjVerb|CSCondSuffix;^CSVerb|Join;2018-06-26-nl,removed Prep and made r313 #15-nl
-376;40;CSAdjVerb|CSPrep;^CSVerb|*;2018-11-06-nl
-658;40;CSRelpron:CSConj|.CSAdvStruct:CSAdj:CSLongPart:CSCon:CSPerspron:CSPrep:CSSe|CSAdjVerb|CSComma:CSAndOr:SEnd;*|*|CSVerb|*;#22-nl
-23;40;CSAdjVerb;CSAdj;#4-nl
-128;40;CSAdjAdv+CSAdvDegree|"z"|CSPerspron;CSPerspron|+Join|+Join;#6-nl
-795;40;"mnozí":"mnohých":"mnohým":"mnohé":"mnohými"|"z"|CSPerspron;CSPerspron|+Join|+Join;#25-nl
-129;40;CSAdjAdv+CSAdvDegree|."z"|CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|CSAdj|*;#6-nl
-110;40;CSAdjAdv|.CSSe|CSVerb:CSPart;^CSAdv|*|*;#6-nl, keep specific adverb label
-121;40;CSAdjAdv|CSLongPart|CSPrep;CSRAdv|^CSPart|*;#6-nl, removed PartAdj (covered by general label LongPart) #21-nl, ^Part #22-nl
-636;40;CSLongPart|CSAdjAdv|CSPrep;^CSPart|CSRAdv|*;#22-nl
-136;40;CSVerb:CSPart+^CSCopula|CSAdjAdv|CSPrep:CSConj:CSAndOr:SEnd;*|CSRAdv|*;#13-nl
-657;40;CSCon|CSAdjAdv+CSAdvDegree|CSPrep;*|CSRAdv|*;#22-nl
-278;40;CSRAdv|CSAndOr|CSAdjAdv;*|*|CSRAdv;#13-nl
-675;40;CSAdjAdv|CSRAdv;CSRAdv|*;#22-nl
-756;40;CSAdjAdv|CSAdj;CSCAdv|*;#23-nl
-758;40;CSAdjAdv|CSLongPart;^CSAdv|*;#23-nl
-22;40;CSAdjAdv;CSAdj;#3-nl, deleted AdjConVerb #22-nl
-173;40;CSShAdj|CSAdj:CSIndefpron:CSCon;*|^CSAdj+CSBCon;#8-nl, keep Adj: added ^Adj #23-nl
-651;40;CSCon|CSAdvCon|CSPart;*|^CSAdv|*;#22-nl
-649;40;CSAdvCon+CSAdvDir|CSLongPart;^CSAdv+CSAdvDir|*;#22-nl
-650;40;CSVerb|"výše"|CSAdj;*|CSCAdv|*;#22-nl
-238;40;CSAdj:CSLongPart|CSAdvCon;^CSAdj|CSCon;#16-nl
-407;40;CSPrep:CSPosspron|CSAdvCon;*|CSCon;#16-nl
-414;40;CSAdvCon+CSAdvManner|CSAdj;CSCAdv|*;#16-nl
-406;40;CSAdvCon+CSAdvDegree;CSAdv+CSAdvDegree;#16-nl
-413;40;CSDempron+CSInstr|CSAdvCon;CSNRPron|CSCon;#16-nl
-408;40;CSAdvCon+CSAdvDir;CSAdv+CSAdvDir;#16-nl
-416;40;"skokem"+^CSCon|CSVerb;CSRAdv|*;#16-nl
-417;40;CSVerb|"skokem"+^CSCon;*|CSRAdv;#16-nl
-409;40;"právem":"náhodou":"málem"+^CSCon;CSAdv+CSAdvManner;#16-nl
-60;40;CSAdvCon+CSAdvTemp;CSAdvTemp+CSTime;#16-nl
-24;40;CSAdvCon;CSCon;#3-nl
-61;40;SBegin:CSComma|CSAdvConj;*|CSConj-CSTime;#4-nl
-62;40;CSAdvConj+CSAdvStruct;CSAdvStruct;#4-nl
-63;40;CSAdvConj+CSAdvTemp;CSAdvTemp;#4-nl
-194;40;CSAdvConj+CSAdvManner;CSAdvManner+CSAdv;#8-nl
-72;40;CSInf|CSRefl+CSAdvManner;*|CSRefl;#4-nl
-73;40;CSRefl+CSAdvManner|.CSAdv:CSAdvStruct|CSVerb:CSCiPart;CSRefl|*|*;#4-nl
-793;40;CSPrep|CSAdvModal+CSAdvManner|CSAdj;*|CSCAdv|*;#25-nl
-794;40;CSAdvModal+CSAdvManner;-CSAdvManner;#25-nl
-81;40;CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;#4-nl
-95;40;CSAdvManner|CSAdvDegree;^CSAdvDegree|+Join;#5-nl
-197;40;"tak"|CSOrdNum;CSRAdv|*;#8-nl, exception to r7
-7;40;CSAdvDegree|CSAdj:CSTimeConcept;CSCAdv|*;#11-nl
-120;40;CSAdvManner:CSAdvDir|CSOrdNum:CSIndefpron|^CSAdj;CSRAdv|*|*;#7-nl
-89;40;CSAdvManner|.CSLongPart|CSAdj;CSCAdv|*|*;#7-nl,removed AdvDir #16-nl
-832;40;CSAdvManner|CSCon+CSAcro;CSCAdv|*;#26-nl
-93;40;CSAdvDegree|CSCAdv;CSCAdv|+Join;#5-nl
-41;40;CSAdvDegree|CSNum;CSNum|+Join;#4-nl
-255;40;CSAdvManner:CSAdvDir|CSAndOr|CSCAdv;CSCAdv|*|*;#13-nl
-198;40;CSAdj:CSPrep|CSCon:CSInfCon:CSVerbCon|CSAndOr|CSInfCon:CSVerbCon|^CSInf;*|CSCon|*|CSCon|*;#8-nl, added ^Inf #22-nl, added Prep #25-nl
-12;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep|CSInfCon:CSVerbCon;*|CSCon;#5-nl
-133;40;CSAux|CSVerbCon:CSInfCon+CSmAux;*|CSVerb+CSmAux;#6-nl
-134;40;CSmAux|CSInfCon;*|CSInf+CSVerb;#6-nl
-132;40;CSVerb|CSVerbCon:CSInfCon;*|CSCon;#6-nl
-759;40;CSVerbCon|.CSAdvTemp:CSAdvStruct:CSAdv|CSVerb+^CSInf;CSCon|*|*;#23-nl
-648;40;CSInfCon+CSAux:CSmAux|CSInf;^CSInf+CSVerb|*;#22-nl, for InfCon as auxiliary verb, to prevent r175 from making it concept
-797;40;CSmAux|.CSAux:CSSe|*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|*|*|^CSInf+CSVerb;#25-nl
-798;40;*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|CSCon;#25-nl
-175;40;CSVerbCon:CSInfCon|.CSPerspron:CSAdvStruct|CSVerb;CSCon|*|*;#8-nl
-231;40;CSVerbCon:CSInfCon|CSSe|.CSAdvStruct|CSVerb;CSCon|CSRefl|*|*;#11-nl
-115;40;CSLongPart|CSVerbCon:CSInfCon;CSAdj|CSCon;#5-nl,remove Negation attribute - only meant for verb #6-nl
-174;40;CSVerbCon:CSInfCon|CSAdj|^CSAdj:CSCon;CSCon|*|*;#8-nl
-304;40;CSLongNTLPartCon|CSInfCon;CSCon|CSCon;#15-nl
-11;40;CSInfCon;^CSInf+CSVerb;keep other labels eg. Aux #3-nl
-224;40;CSCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|*|CSCon|*|*;#10-nl
-247;40;CSAdj|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|CSCon|*|CSCon|*|*;#12-nl
-225;40;SBegin:CSPunctuation|CSVerbCon:CSNTPartCon|CSComma:CSAndOr|CSCon;*|CSCon|*|*;#10-nl
-13;40;CSVerbCon;^CSVerb;keep other labels eg. Aux #3-nl
+552;38;CSPossessive+CSConIfCap+^CSCapitalInitial:CSCapitalMixed;-CSPossessive-CSConIfCap;remove 'possessive adj' label when NOT capitalized or capital mixed (for hyphenated names)
+825;38;CSPossessive+CSConDatMN|CSAdj+^CSAdjNomPl;-CSPossessive|*;
+
+/* disambiguate long participle/noun and ci-participle/noun
+
+553;38;CSLongNTLPartCon:CSCiPartCon+CSAdjNomM|CSAdj+CSAdjNomM;CSAdj+CSAdjNomM|*;
+555;38;CSLongNTLPartCon:CSCiPartCon+CSAdjInstrMN/DatPl|CSConInstrMN;CSAdj+CSAdjInstrMN/DatPl|*;
+590;38;CSAdjGenMN|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenMN;
+591;38;CSAdjGen/LocPl|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenPl;
+592;38;CSAdjAmbigE|CSLongNTLPartCon+CSAdjNomMAnimPl|^CSCon;*|CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl|*;
+
+/* disambiguate verb/adjective
+
+655;38;CSAdjVerb+CSAdjAcc/InstrF|CSAdjNomPl:CSConNomPl;CSVerb|*;
+
+/* disambiguate capitalized longparts used as adjectives
+
+632;38;CSLongPart:CSAdj+CSAdjInstrMN/DatPl+CSConIfCap|CSConInstrMN:CSConDatPl;-CSConIfCap|*;
+633;38;CSLongPart:CSAdj+CSAdjNomF+CSConIfCap|CSConNomF;-CSConIfCap|*;
+
+/* disambiguate names with adjective ending -> noun with case specific label
+
+618;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomM+CSCapitalInitial|^CSConNomAccM;*|*|CSCon+CSConNomAccM+CSCapitalInitial|*;
+619;38;^SBegin|CSCon+CSCapitalInitial|CSAdjGenMN+CSCapitalInitial;*|*|CSCon+CSConGenMN+CSCapitalInitial;
+617;38;^SBegin|CSCon+CSCapitalInitial|CSAdjDatMN+CSCapitalInitial|^CSConDatMN;*|*|CSCon+CSConDatMN+CSCapitalInitial|*;
+620;38;^SBegin|CSCon+CSCapitalInitial|CSAdjLocMN+CSCapitalInitial|^CSConLocMN;*|*|CSCon+CSConLocMN+CSCapitalInitial|*;
+621;38;^SBegin|CSCon+CSCapitalInitial|CSAdjInstrMN/DatPl+CSCapitalInitial|CSConInstrMN:CSConDatPl;*|*|CSCon+CSConInstrMN+CSCapitalInitial|*;
+622;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomF+CSCapitalInitial|^CSConNomF;*|*|CSCon+CSConNomF+CSCapitalInitial|*;
+623;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAcc/InstrF+CSCapitalInitial|^CSConAccF:CSConInstrF;*|*|CSCon+CSConAccF+CSConInstrF+CSCapitalInitial|*;
+624;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAmbigE+CSCapitalInitial;*|*|CSCon+CSConGenF+CSConDatF+CSCapitalInitial;
+
+/* disambiguate 'místo' using case information
+
+644;38;CSCon:CSLongNTLPartCon|"místo"|CSAdjGenMN:CSAdjGen/LocPl:CSConGenPl:CSConGenF:CSConGenMN:CSNum;*|CSPrep|*;
+
+/* participles as concept
+/* ----------------------
+/* preceded by agent
+
+563;38;^CSPrepInstr|CSConInstrAmbig+CSConNomPl+^CSConDatF|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAmbigI|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjAmbigI:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*;agent instr + longpart not instr + concept (group) not instr - separate rule for noun with ambiguous instr/nompl ending: longpart cannot be nompl
+562;38;^CSPrepInstr|CSConInstr+^CSConInstrAmbig|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAcc/InstrF|.CSAdv|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*|*;longpart not instr preceded by agent in instr and followed by concept (group) not instr, AdjAmbigI can be in last position
+656;38;^CSPrepInstr|CSConInstrMN+^CSConInstrAmbig|CSLongPart+CSAdjInstrPl|CSCon+CSConInstrPl;*|+CSAgent|-CSLongPart+CSAdj|*;
+
+/* other cases
+
+600;38;CSNum|CSAdvTemp:CSAdvCon|CSLongPart|CSCon;*|^CSAdj-CSTime|^CSAdj|*;
+598;38;^CSConInstr|CSLongPart|CSComma:CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSAdj;*|^CSAdj|*|*|*;exception to r597, longpart becomes adj in enumeration
+
+/* long participles as relation
+/*-----------------------------
+/* long nt-participle after copula (not for ci-participles and long l-participles) becomes relation
+
+601;38;CSCopula:CSJe|.CSPrep|*CSAdj:CSCon:CSPosspron|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|*|*|^CSPart|*;no concept after longpart
+597;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|^CSPart|*;no concept after longpart
+602;38;SBegin|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|CSCopula:CSJe;*|*|^CSPart|*;longpart before copula at beginning sentence
+549;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;longpart before instrumental
+641;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenF;*|*|^CSPart|*|*;longpartcon before instrumental
+
+/* long participles before Instrumental
+
+599;38;CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;^CSPart|*|*|^CSPart|*;part-and-part before instr
+275;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;noun instr follows longpart
+616;38;CSBracket2|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|^CSPart|*|*;longpart after closing brackets
+637;38;CSCon:CSLongNTLPartCon|CSComma|CSAndOr|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|*|^CSPart|*|*;variation on r275 for pattern concept-comma-and-part
+310;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGen/LocPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenPl;*|*|^CSPart|*|*;noun instr (except for ConGen) follows longpart AdjGen/LocPl -> relation
+307;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConInstrF;*|*|^CSPart|*|*;noun instr (except for ConGen,ConInstrF) follows longpart AdjAcc/InstrF -> relation
+513;38;CSCon:CSLongNTLPartCon+CSConInstrMN|CSLongPart+CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|^CSPart|*;exception to r311: longpart should be relation when preceding AND following noun are in instrumental
+311;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrPl+^CSConInstrMN;*|*|^CSPart|*|*;noun instr (except for ConInstrMN) follows longpart AdjInstrMN/DatPl -> relation
+312;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl+^CSConInstrPl;*|*|^CSPart|*|*;noun instr (except for ConInstrPl) follows longpart AdjInstrPl -> relation
+560;38;CSCon:CSLongNTLPartCon+^CSConInstrMN|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAmbigI|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl+^CSConGenF:CSConNomPl;*|*|^CSPart|*|*;noun instr (no exception for ConInstrF, better results this way since the ending is ambiguous) follows longpart AdjAmbigI -> relation
+561;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSSe|CSAdvCon+CSConInstrMN;*|*|^CSPart|*|CSCon+CSConInstrMN;for adverb/noun
+
+/* long participles before Instrumental, pattern with longpart-and-longpart
+
+789;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSAndOr|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSConInstrF:CSAdjAcc/InstrF:CSAdjInstrF;*|*|^CSPart|*|^CSPart|*;last position InstrF
+790;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|CSAndOr|CSLongPart+^CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|*|^CSPart|*|^CSPart|*;last position InstrMN
+791;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrPl|CSAndOr|CSLongPart+^CSAdjInstrPl|CSConInstrPl:CSAdjInstrPl;*|*|^CSPart|*|^CSPart|*;last position InstrPl
+
+/* long participles before Dative
+
+531;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSConDatF+^CSConInstrPl;*|*|^CSPart|*|*;relation before noun in dative, exception: longpart as AmbigE is not relation, exception for ambiguous ending which can be genitive
+532;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConDatPl;*|*|^CSPart|*|*;relation before noun in dative, exception: longpart as DatPl is not relation
+533;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjDatMN|.CSAdv:CSAdvTemp:CSSe|CSAdjDatMN:CSConDatMN+^CSConGenMN;*|*|^CSPart|*|*;relation before AdjDatMN (if longpart is not in same case)
+536;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSAdjDatF;*|*|^CSPart|*|*;relation before AdjDatF (if longpart is not in same case)
+
+/* long participles before other cases
+
+540;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomM|.CSAdvTemp:CSAdv|CSAdjNomM:CSConNomAccM+^CSConGenPl:CSConGenF:CSConGenMN;*|*|^CSPart|*|*;relation before nom m sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+541;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomF|.CSAdvTemp:CSAdv|CSAdjNomF:CSConNomF+^CSConGenF:CSConGenMN;*|*|^CSPart|*|*;relation before nom f sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+587;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAccF|.CSAdvTemp:CSAdv|CSAdjAccF:CSConAccF+^CSConGenF:CSConGenMN:CSConNomF:CSConInstrPl;*|*|^CSPart|*|*;better results if AdjAmbigI is not an exception
+542;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomMAnimPl:CSAdjNomPl|.CSAdvTemp:CSAdv|CSAdjNomMAnimPl:CSConNomPl+^CSConInstrPl:CSConNomF:CSConGenF:CSConGenMN:CSConGenPl;*|*|^CSPart|*|*;relation before nom pl (if longpart is not in same case), better results if AdjAmbigI is not an exception
+543;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGenMN|.CSAdvTemp:CSAdv|CSAdjGenMN+^CSConInstr;*|*|^CSPart|*|*;relation before gen sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+545;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGen/LocPl|.CSAdvTemp:CSAdv|CSAdjGen/LocPl;*|*|^CSPart|*|*;relation before gen sg (if longpart is not in same case)
+546;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl|.CSAdvTemp:CSAdv|CSAdjAmbigI;*|*|^CSPart|*|*;relation before ambiguous -í (if longpart is in case without overlap with -í)
+547;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF/LocSg:CSAdjDatF:CSAdjNomPl:CSAdjNomN|.CSAdvTemp:CSAdv|CSAdjAmbigE:CSAdjNomPl;*|*|^CSPart|*|*;relation before ambiguous -í (if longpart is not in case with overlap with -é)
+
+/* long participles before ambiguous ending
+
+537;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjNomMAnimPl:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjGen/LocPl|.CSAdvTemp:CSSe:CSAdv|CSConGenMN+CSConAccF;*|*|^CSPart|*|*;relation before ambiguous gen/dat/loc mn or acc f (if longpart is not in one of these cases)
+
+/* long participles same case as preceding noun
+
+571;38;CSCon+CSConDatPl:CSConInstrMN+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjInstrMN/DatPl;*|*|^CSPart|*|*;
+572;38;CSCon+CSConInstrPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+573;38;CSCon+CSConNomAccM+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomM|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+586;38;CSCon:CSLongNTLPartCon+CSConNomF:CSAdjNomMAnimPl:CSConNomPlN+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+594;38;CSCon+CSConAccF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+595;38;CSCon+CSConInstrF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+613;38;CSCon+CSConLocPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjGen/LocPl+^CSLongLPart|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjGen/LocPl:CSConGenPl;*|*|^CSPart|*|*;
+
+/* ambiguous ci-participles in -í as relation
+
+593;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSCiPart+CSAdjAmbigI|.CSAdvTemp:CSSe:CSAdv|CSAdj:CSNum;*|*|CSCiPart+CSPart|*|*;
+607;38;^CSNum|CSCiPart+CSAdjAmbigI|CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl;*|CSCiPart+CSPart|*;ci-part in -í before adj in other case
+608;38;^CSNum|CSCiPart+CSAdjAmbigI|CSConDatMN:CSConDatPl:CSConGenPl:CSConInstrMN:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomAccN:CSConNomF:CSConInstrF;*|CSCiPart+CSPart|*;ci-part in -í before noun in other case
+611;38;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSNum|CSCiPart:CSCiPartCon+CSAdjAmbigI|CSAdjAccF:CSConAccF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSConGenF;*|CSCiPart+CSPart|*;cipart in between nom (subject) and acc (object)
+614;38;CSCon:CSLongNTLPartCon|CSCiPart|CSComma|"že";*|CSCiPart+CSPart|*|*;
+
+/* other patterns
+
+625;38;CSPart|CSAndOr|CSLongPart|CSPunctuation:SEnd;*|*|^CSPart|*;
+626;38;CSCon|CSLongPart|.CSSe|CSInf;*|^CSPart|+Join|*;
+643;38;CSCon+CSConGenPl|CSLongNTLPartCon+CSAdjGen/LocPl|CSPrep;*|^CSPart|*;
+
+/* specific cases and clean-up
+/*----------------------------
+/* longpart/gerund
+
+583;38;CSConNomPl|.CSAdv:CSComma+^CSAdvModal|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdj+CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF|CSConInstr+^CSConNomPl;*|*|^CSPart|*|*;
+
+/* ci-particple + 'se' as Concept 
+
+559;38;CSCon:CSLongNTLPartCon:CSPrep:CSConj:CSPosspron:SBegin:CSAndOr:CSPunctuation+^CSComma|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon:CSAdj;*|CSCAdv|^CSAdj|+Join|*;
+685;38;CSVerb:CSSe|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon;*|CSCAdv|^CSAdj|+Join|*;
+627;38;CSCiPart|CSSe|CSAndOr|CSAdj;^CSAdj|+Join|*|*;
+
+/* non-instrumental adjective as beginconcept when instrumental adjective follows; adverb+adjective after copula+noun
+
+566;38;CSCon|CSAdj+^CSAdjInstrMN/DatPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrMN/DatPl;*|^CSAdj+CSBCon|*;
+567;38;CSCon|CSAdj+^CSAdjInstrPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrPl;*|^CSAdj+CSBCon|*;
+804;38;CSCopula:CSJe|.CSAdvStruct|CSCon|CSAdvDegree|CSAdj+CSAdjNomN:CSAdjNomM:CSAdjNomF:CSAdjInstrMN:CSAdjAcc/InstrF;*|*|*|CSCAdv+CSBCon|*;
+
+/* nominative adjective as beginconcept after noun other case/number/gender
+
+661;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+739;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;
+662;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+740;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;
+823;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+663;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+664;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+665;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+666;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+667;38;CSCon+CSConNomF:CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+668;38;CSCon+CSConInstrMN:CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+
+/* adverb + nominative adjective as beginconcept after noun other case/number/gender
+
+813;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+814;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+815;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+816;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+821;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;
+822;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;
+833;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|CSCAdv+CSBCon|*|*;
+
+/* nominative adjective as beginconcept after adjective+noun in nominative
+
+834;38;CSAdj|CSCon+CSConNomF|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;
+835;38;CSAdj|CSCon+CSConNomAccM|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;
+836;38;CSAdj|CSCon+CSConNomPl|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|*|CSCAdv+CSBCon|*|*;
+837;38;CSAdj|CSCon+CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|*|CSCAdv+CSBCon|*|*;
+
+/* correction: capitalized longpart is not name
+
+306;38;CSAdjAcc/InstrF|CSAdjAcc/InstrF+CSConIfCap+CSCapitalInitial;*|-CSConIfCap;capitalized adjective, exception to r236
+
+/* clean-up ambiguous ending
+
+539;38;CSAdjAcc/InstrF+CSConInstrF;-CSAdjAcc/InstrF;
+558;38;CSConPossibleBCon+CSConGenF:CSConGenMN:CSConGenPl;-CSConPossibleBCon;
+
+/* disambiguate cipart/noun and longpart/noun using case info
+
+514;38;CSCiPartCon:CSLongNTLPartCon+CSAdjInstrMN/DatPl|CSAdj+CSAdjInstrMN/DatPl;CSAdj+CSAdjInstrMN/DatPl|*;
+
+/* default for gerund/longpart in í
+
+808;38;CSLongNTLPartCon+CSAdjNomMAnimPl;+CSGerund;
+
+/* disambiguate VerbCon before possessive adjective
+
+812;38;CSPossessive|CSVerbCon;*|CSCon;
+
+/* add general 'genitive' label to genitive noun label (to avoid splitting the time concept in phase 39)
+
+652;38;CSConGenPl:CSConGenF:CSConGenMN+^CSConNomAccM;+CSGen;
+
+/*PHASE 39: time indications
+/*==========================
+/* preparation and clean-up
+/*-------------------------
+/* 'ráno' and 'večer'
+
+476;39;CSAdj:CSIndefpron:CSDempron+CSBeginTime|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;
+460;39;CSAdj+^CSOrdNum|CSAdvTime+CSCon;*|CSCon-CSTime;
+462;39;^CSBeginTime:CSOrdNum|CSAdvTime+CSCon|CSAdj|^CSAdj:CSCon;*|CSCon-CSTime|*|*;
+463;39;CSAdvTemp|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;
+
+/* clean-up
+
+461;39;CSAdvTime+CSCon;-CSCon;
+
+/* 'středu'
+
+145;39;"středu"|CSCon+^CSConPossibleBCon;CSCon-CSTime|*;
+
+/* 'dubna'
+
+147;39;"dubna"+CSCapitalInitial;CSCon;to discern the place name Dubna from the month
+
+/* 'časem'
+
+163;39;"se":CSAux|"časem"|CSVerb:CSPart;*|CSAdvTemp+CSTime|*;
+
+/* range (first part)
+
+165;39;CSTimeConcept|CSNum:CSDigit|CSHyphen:CSAndOr:"až":"do"|CSNum:CSDigit;CSECon+CSTime|+Join|*|+CSTime;
+168;39;CSTimeConcept|CSYearNum|CSComma|CSYearNum|.CSComma|.CSYearNum|CSAndOr|CSYearNum;CSECon+CSTime|+Join|*|+CSTime|*|+CSTime|*|+CSTime;
+166;39;CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSOrdNum|CSYear:CSCentury;^CSBCon+CSTime+CSList|+CSList|CSECon+CSTime+CSList|+Join;
+
+/* 'druhý'
+
+786;39;CSJedno:CSJednou:CSJedenPart:CSJeden|*CSAdj:CSCon|CSPrep|CSDruhy|^CSAdj:CSCon;*|*|*|CSPRPron|*;if concept after 'jeden', only 'druhý' becomes PR
+281;39;CSJedno:CSJednou:CSJedenPart:CSJeden|CSPrep|CSDruhy;CSPRPron|*|CSPRPron;
+286;39;CSJedno:CSJednou:CSJedenPart:CSJeden|"druhému":"druhého";CSPRPron|CSPRPron;
+287;39;"ani"|CSJedno:CSJednou:CSJedenPart:CSJeden|CSComma|"ani"|CSDruhy;*|CSPRPron|*|*|CSPRPron;
+280;39;CSDruhy;^CSOrdNum+CSAdj;
+
+/* 'jednou' (further disambiguation in phase 40)
+
+457;39;CSJednou|CSAdvTime+CSAdv;CSAdvTime+CSAdv+CSTime|+Join;
+
+/* 'jeden'
+
+180;39;CSAux|CSJedenPart|CSAdv;*|CSPart+CSNTPart|*;
+27;39;CSJedenPart;^CSCon+CSNum+CSJeden;
+
+/* 'jedno'
+
+83;39;CSJedno;CSCon+CSNum+CSJeden;
+
+/* 'jeden z/ze'
+
+273;39;CSPosspron:CSIndefpron:CSDempron|CSInfCon:CSVerbCon;*|CSCon;copy part of r12
+97;39;CSJeden:CSJednou:CSIndefpron|"z"|"nich":"nás":"vás";CSPerspron|+Join|+Join;
+204;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSCon|+Join|+Join;
+99;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSBCon|+Join|+Join;
+211;39;CSJeden+CSGen|"z":"ze"|CSVerbCon;CSCon|+Join|+Join;to prevent Gen to be split off in following r210
+210;39;CSJeden:CSJednou|"z":"ze"|CSVerbCon;CSBCon|+Join|+Join;
+212;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|.CSNRPron|^CSNum;CSAdj|+Join|CSAdj|*;
+503;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;
+98;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|.CSNRPron|^CSNum;CSBCon|+Join|CSAdj|*;
+
+/* 'jednou'
+
+203;39;CSJednou|"z":"ze"|CSNum;CSCon+CSNum+CSJeden|CSPrep|*;
+201;39;CSJednou|CSAdj:CSCon;CSCon+CSNum+CSJeden|*;
+202;39;CSJednou;CSAdvTemp+CSTime;
+
+/* join numbers with 'and a half'
+
+489;39;CSNum|"a"|"půl";^CSNum|+Join|+Join;
+
+/* 'až'
+
+471;39;"až"|.CSNum:CSOrdNum|CSTimeConcept;CSPrep|*|*;
+
+/* AdvTime+Adv
+
+439;39;CSAdvTime+CSAdv|CSAdj|CSAdj:CSCon;CSCAdv|*|*;
+440;39;CSAdvTime+CSAdv;-CSAdv;
+
+/* while / moment
+
+480;39;CSDempron:CSBeginTime:CSTu:CSTen:"co"|CSAdvTempCon;CSAdvTemp+CSMultiwordAdverb+CSTime|+Join;
+481;39;CSPrep|CSAdvTempCon;*|CSAdvTemp+CSTime;
+482;39;CSAdvTempCon;CSCon;
+
+/* single-word adverbs of time
+
+475;39;CSAdvTime+CSSingleWord|CSAdvTime+CSSingleWord;CSAdvTime+CSTime|+Join;
+
+/* differentiate age from time
+
+448;39;CSPrep+^"před":"po":"za"|CSNum+^CSPartTime|CSYear|^CSEndTime;*|*|-CSTimeConcept-CSTime|*;
+
+/* differentiate 'hour/lesson' as noun from time indication
+
+497;39;^CSNum:CSAdvTime:CSOrdNum|CSHour|CSDempron:CSAdj:CSCon+^CSNum;*|CSCon|*;
+
+/* add general 'genitive' label to different specific genitive labels (to avoid splitting the concept)
+
+500;39;CSBeginTime:CSOrdNum:CSIndefpron+CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE;+CSGen;
+505;39;CSBeginTime+CSIndefpron+CSGen;-CSGen;
+
+/* time indications
+/*-----------------
+/* idiom with 'co'
+
+502;39;"co"|CSTimeConcept;CSAdvTime+CSTime|+Join;
+
+/* multiword with 'dopředu'
+
+574;39;CSAdvTemp|"dopředu";^CSAdvTemp|+Join;
+
+/* time of day
+
+484;39;"v"|CSNum|.CSOrdNum|"ráno":"odpoledne":"večer";*|CSAdvTime|+Join|+Join;
+485;39;CSPartTime:CSNum|."hodiny":CSMinute|"před":"po"|CSOrdNum|^CSCon;CSAdvTime+CSTime|+Join|+Join|+Join|*;
+491;39;CSNum|CSHour|."a"|CSNum|CSMinute;CSAdvTime+CSTime|+Join|+Join|+Join|+Join;
+492;39;CSNum|CSHour;CSTimeConcept+CSTime|+Join;
+
+/* join dates
+
+452;39;CSBeginTime:CSOrdNum:CSTimeConcept:CSDen|CSMonth;CSMonth+CSTimeConcept+CSCon+CSTime|+Join;
+144;39;CSDay:CSDen|CSOrdNum|CSMonth:CSOrdNum;CSMonth+CSCon+CSTime|+Join|+Join;
+464;39;CSOrdNum+CSDigit|CSOrdNum+CSDigit;CSMonth+CSCon+CSTime|+Join;two consecutive ordinal numbers in digits express date
+483;39;CSOrdNum|CSBeginTime|CSDay;CSAdvTime+CSTime|*|*;
+
+/* join time indications
+
+455;39;^CSPartTime:CSOrdNum|CSBeginTime+^CSGen|.CSOrdNum:CSNum|CSTimeConcept:CSPartTime|^CSYearNum;*|CSAdvTime+CSTime|+Join|+Join|*;concept split, except in case of surrounding time-related words or genitive forms
+458;39;CSBeginTime+CSGen|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;no split because of genitive form
+501;39;CSBeginTime+CSGen:CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;no split because of genitive form -> 2 consecutive adjectives
+441;39;CSOrdNum|.CSNum|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;
+468;39;^CSOrdNum|CSPartTime|CSTimeConcept;*|CSTimeConcept+CSCon+CSTime|+Join;exception for preceding ordinal number, here r443 should fire
+442;39;CSYear|CSYearNum;CSECon+CSTime|+Join;
+469;39;CSOrdNum:CSBeginTime+CSGen|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth:CSAdvTime;CSTimeConcept+CSCon+CSTime|+Join|+Join;before r443, no split when begin time indication can be genitive
+443;39;CSOrdNum:CSBeginTime|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth;CSAdvTime+CSTime|+Join|+Join;
+446;39;CSTimeConcept+^CSMonth|CSECon:CSYearNum;CSECon+CSTime|+Join;exception for Month which should be BeginEndConcept
+799;39;CSAdvDegree|CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join|+Join;
+498;39;CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join;
+512;39;CSAdvDegree|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;CSBCon+CSTime|+Join|CSTimeConcept+CSCon+CSTime|*;
+511;39;^CSNum:CSAdj:CSLongPart|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;*|CSBCon+CSNum+CSTime|CSTimeConcept+CSCon+CSTime|*;
+645;39;"před":"po":"za"|CSNum+^CSPartTime|CSYear;*|CSECon+CSTime|+Join;
+509;39;CSIndefpron+CSGen|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join;
+510;39;CSIndefpron|CSTimeConcept|^CSEndTime;CSBCon+CSTime+CSNoSplit|CSTimeConcept+CSCon+CSTime|*;NoSplit to avoid split in phase 45
+
+/* further join dates
+
+453;39;CSMonth:CSPossibleMonth|CSECon:CSYearNum;CSAdvTime+CSTime|+Join;
+467;39;CSMonth|CSNum|^CSAdj:CSCon;CSAdvTime+CSTime|+Join|*;for other numbers than YearNum
+454;39;^CSAdj|CSMonth+CSTimeConcept;*|CSAdvTime+CSTime;
+167;39;CSYearNum:CSPossibleMonth|CSHyphen|CSAdvTime:CSYearNum:CSPossibleMonth;+CSTime|*|+CSTime;
+495;39;CSDay|CSPossibleMonth;CSAdvTime+CSTime|+Join;
+
+/* join combinations of time indications
+
+486;39;*CSNum:CSIndefpron|CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|+Join|-CSEndTime;for 'after' as conjunction
+487;39;CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|-CSEndTime;for 'after' as conjunction
+488;39;CSEndTime+CSRelpron;-CSEndTime;clean-up 'after' as conjunction
+450;39;*CSNum:CSIndefpron|CSTimeConcept|CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join|+Join;
+449;39;CSTimeConcept|*CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join;
+445;39;CSTimeConcept|CSTimeConcept:CSMonth;^CSTimeConcept|+Join;
+153;39;CSYear|CSNum+^CSBCon;CSECon+CSTime|+Join;for all numbers since Year is explicit
+451;39;CSAdvTime:CSMonth:CSBeginTime:CSECon|CSTimeConcept:CSECon:CSAdvTime:CSEndTime+^CSSingleWord;CSAdvTime+CSTime|+Join;exception for single word adverbs of time from lexreps
+
+/* timeconcepts after preposition get time attribute
+
+494;39;CSPrep|CSDigitalTime|CSAdj:CSCon;*|CSCon+CSTime|*;overwrite AdvTime so it won't be split from following time indication eg. Central European Time (ve 20:18 středoevropského letního času)
+447;39;CSPrep|*CSNum:CSPartTime:CSIndefpron:CSOrdNum|CSTimeConcept:CSMonth|^"méně":"míň":"víc":"více":CSGen;*|CSAdvTime+CSTime|+Join|*;
+659;39;CSPrep|CSTimeConcept:CSMonth|CSGen:CSAdjGenMN;*|+CSTime|*;not AdvTime when genitive follows
+444;39;CSPrep|CSTimeConcept:CSMonth|^CSGen:CSAdjGenMN:CSBeginTime:CSOrdNum;*|CSAdvTime+CSTime|*;
+515;39;CSPrep|CSTimeConcept:CSMonth|CSBeginTime:CSOrdNum+^CSPartTime:CSDempron|^typeConcept;*|CSTimeConcept+CSTime|+Join|*;
+504;39;CSAdj|CSTimeConcept+CSYear;*|+CSTime;
+499;39;*CSNum:CSAdj|CSTimeConcept+^CSYear;*|+CSTime;to catch a large variety in expressions eg. 'working week', 'holiday month', 'business days', some are not actually time indications though: 'it's been a hard day'
+470;39;CSAdvTime|CSAndOr:CSHyphen|CSTimeConcept;*|*|CSAdvTime+CSTime;
+
+/* further joining time indications
+
+479;39;CSNum|CSNum|CSTimeConcept|"v"|CSAdvTime;CSAdvTime+CSTime|+Join|+Join|*|*;
+206;39;CSBeginTime:CSAdvTime|CSAdvTime+^CSSingleWord;CSAdvTime+CSTime|+Join;exception for single word adverbs of time from lexreps
+
+/* range (2nd part)
+
+169;39;CSBeginTime:CSPartTime|CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSAdvTime;CSBCon+CSTime|+Join|*|*;
+474;39;"mezi":"od":"před"|*CSNum|"a":"do":"až"|CSAdvTime;*|+CSTime|*|*;
+
+/* clean-up
+
+788;39;CSBeforeNumber|CSNum+CSAdvTime;*|+CSCon-CSAdvTime-CSTime;
+
+/*PHASE 40: disambiguate ambiguous labels
+/*=======================================
+/* preparation
+/*------------
+/* disambiguate hyphen
+
+59;40;CSNum:CSOrdNum:CSAdvTime:CSYearNum:CSECon:CSBCon|CSHyphen|CSNum:CSOrdNum:CSECon:CSAdvTime;*|CSPrep-Punctuation|*;
+
+/* listnumber
+/*'a' as Concept in enumeration before bracket
+
+178;40;SBegin|"a"|CSPunctuation;*|CSCon|*;
+
+/* join multiwords
+
+400;40;"na"|"rozdíl"|CSAdvStruct:CSAdv:CSRAdv|"od":"ode";CSPrep|+Join|*|CSPrep;
+435;40;"do"|CSAdj:CSIndefpron:CSDempron|"míry";CSRAdv|+Join|+Join;
+785;40;CSPRPronPlusAdj|"jiný":"jiného":"jiném":"jinému":"jiným";CSPRPron|+Join;
+784;40;CSPRPronPlusAdj|CSAdj|^CSAdj:CSCon;CSBCon|*|*;
+
+/* disambiguate names / other ConIfCap
+/*------------------------------------
+
+237;40;CSAdj+CSConIfCap|CSVerbCon:CSInfCon;CSAdj|CSCon;
+236;40;^SBegin:CSPunctuation:CSListnumber|CSConIfCap+CSCapitalInitial+^CSAdj;*|CSCon+CSCapitalInitial;make capitalized words concept, exception for adjectives because this gives better results for surrounding ambiguous words
+171;40;CSDempron:CSAdj:CSInf+CSConIfCap+CSCapitalInitial|CSCon+CSCapitalInitial;CSCon+CSCapitalInitial|*;make capitalized ambiguous names concept before capitalized concept - remove Negation attribute for negated verb forms
+123;40;CSConIfAllcaps+CSCapitalAll;CSCon;
+176;40;^SBegin|"i"+CSCapitalAll;*|CSCon;for Latin 'i'
+
+/* disambiguate specific ambiguous words
+/*--------------------------------------
+/* Preposition or Verb
+
+193;40;CSRelpron:CSConj:CSPerspron|CSPrepVerb;*|CSVerb;
+90;40;CSPrepVerb;CSPrep;
+
+/* 'až'
+
+279;40;CSOrdNum:CSNum|CSCon|"až"|CSOrdNum:CSNum:CSJednou|CSCon;*|*|CSPrep|*|*;
+272;40;CSOrdNum:CSNum:CSECon:CSAdvTime|"až"|CSOrdNum:CSNum:CSJednou:CSAdvTime;*|CSPrep|*;
+
+/* 'buď'
+
+344;40;CSBud|*^CSBud:"nebo":"neboli":"anebo"|"nebo":"neboli":"anebo";CSConj|*|*;'either' when 'nebo' follows
+345;40;CSBud;CSAux+CSVerb+CSCopula;
+
+/* 'hlavně'
+
+191;40;CSAdj|CSHlavne;*|CSCon;
+256;40;CSHlavne|CSConj:CSPrep;CSAdvStruct|*;
+192;40;CSHlavne;CSRAdv;
+
+/* 'hodně'
+
+268;40;CSHodne|CSAdv:CSAdvTemp:CSAdjAdv:CSAdvConj;CSAdvDegree+CSAdv|*;
+270;40;CSHodne|*CSPerspron:"se":CSPRPron|CSVerb;CSRAdv|*|*;
+271;40;CSVerb|CSHodne|^CSAdj:CSLongPart:CSPosspron:CSCon:CSLongNTLPartCon;*|CSRAdv|*;
+269;40;CSHodne;CSAdvDegree+CSAdjAdv;
+
+/* 'potřeba'
+
+150;40;CSAux|"potřeba";*|CSAdvModal+CSAdv;
+
+/* 'jen'
+
+189;40;CSNum|CSJen;*|CSCon;
+190;40;CSJen;CSAdvStruct;
+
+/* 'je'
+
+215;40;CSJe|CSPart;CSAux+CSVerb+CSCopula|*;
+214;40;CSVerb|CSJe;*|CSPerspron;
+148;40;CSAdvStruct:CSAdvTemp:CSAdv|CSJe|CSInf;*|CSPerspron|*;
+149;40;CSJe|.CSAdv:CSAdjAdv:CSAdvStruct|CSVerb+^CSInf;CSPerspron|*|*;
+4;40;CSJe;CSAux+CSVerb+CSCopula;
+
+/* 'jak'
+
+18;40;CSJak;CSRelpron;
+
+/* 'již'
+
+37;40;CSComma|"již";*|CSRelpron;otherwise: AdvStruct
+
+/* 'kolem'
+
+43;40;CSPosspron:CSAdj:CSNum:CSPrep|CSKolem;*|CSCon;
+96;40;CSKolem|CSAdj:CSAdjVerb:CSCon:CSAdvTime:CSTimeConcept+^CSNum;CSPrep|*;
+29;40;CSKolem;CSAdvDegree+CSAdv;
+
+/* 'má'
+
+182;40;CSPrep:CSVerb+^CSInf|CSMa;*|CSPosspron;
+183;40;SBegin|CSMa|.CSAdj|CSCon|CSVerb;*|CSPosspron|*|*|*;
+48;40;CSMa;CSAux+CSVerb;
+
+/* 'navíc'
+
+185;40;CSNum:CSZadny|.CSCon|CSNavic;*|*|CSCAdv;
+186;40;CSNavic;CSAdvStruct+CSAlso;
+
+/* 'níž'
+
+32;40;CSPrep|CSNiz;*|CSRelpron;
+184;40;CSNiz;CSAdvDir+CSAdv;
+
+/* 'naopak'
+
+102;40;^CSComma:SBegin|"naopak"|CSComma:SEnd;*|CSRAdv|*;
+
+/* 'okolo', 'min.', 'max.'
+
+86;40;"okolo":"min.":"max.":CSAdvDegree|CSNum;CSNum+CSCon|+Join;
+159;40;"okolo":"min.":"max.":CSAdvDegree|CSAdvTime:CSTimeConcept;CSAdvTime+CSTime|+Join;
+
+/* 'sám', 'sobě', 'ten', 'tu', 'ty'
+
+65;40;CSSam|.CSPrep|CSSobe;CSRefl|+Join|+Join;
+67;40;CSSobe|CSSam;CSRefl|+Join;
+66;40;CSTen:CSTu|CSSam;CSPRPron|+Join;
+743;40;CSTu;CSPRPron;
+49;40;^CSVerb|CSSam|CSCon:CSAdj;*|CSAdvStruct|*;
+33;40;CSSam;CSRefl;
+
+/* 'tak'
+
+578;40;CSTak|CSAdj|.CSComma|CSConj:"jako":"až";CSCAdv|*|*|*;
+580;40;CSTak|CSAdvTemp|.CSComma:CSVerb|CSConj:"jako":"až";CSAdvTemp+CSTime|+Join|*|*;
+579;40;CSTak|CSAdvTemp:CSNum;CSRAdv|*;
+582;40;SBegin:CSComma|CSVerb|CSTak;*|*|CSRAdv;
+576;40;"a"|.CSAdj:CSCon|CSVerb|CSTak;*|*|*|CSRAdv;
+47;40;CSTak|CSComma;CSRAdv|*;
+375;40;"jak"|*^"jak":CSComma|CSComma|CSTak;*|*|*|CSAndOr;
+46;40;CSComma|CSTak;*|CSConj;
+44;40;CSTak|CSAdj+^CSOrdNum;CSCAdv|*;
+196;40;CSTak;CSAdvDegree+CSAdv;
+
+/* 'vila'
+
+187;40;CSCon|CSVila|.CSAdj|CSCon;*|CSVerb|*|*;
+188;40;CSVila;CSCon;
+
+/* adjectives
+/*- - - - - -
+/* Adjective or Noun
+
+251;40;CSAdjCon|CSAdj:CSLongPart:CSCon;CSAdj|*;
+71;40;CSAdjCon;CSCon;
+
+/* Comparatives and Superlatives
+
+277;40;"něco":"ještě"|CSAdjAdv+CSComp+CSAdvDegree;CSAdjAdv+CSComp+CSAdvDegree|+Join;
+135;40;"něco":"ještě":"stále"|CSComp;CSAdvDegree-CSTime|*;remove time from stále
+346;40;"co"|CSAdj+CSSuper;JoinReverse|+CSAdj;
+827;40;CSNum|*<CSAdj:CSCon|CSComp:CSSuper+CSBCon;*|*|-CSBCon;
+8;40;CSAdj+CSComp:CSSuper+^CSBCon;CSAdj;
+76;40;CSNum|"nebo":"či"|CSAdjAdv+CSComp;CSNum+CSCon|+Join|+Join;
+653;40;CSAdj|CSAdjAdv+CSComp|"než":"jak"|CSNum;*|CSNum+CSCon|+Join|+Join;
+660;40;CSAdjAdv+CSComp|"než":"jak"|CSNum|^CSGen;CSNum+CSBCon|+Join|+Join|*;beginconcept if NOT followed by a noun in genitive
+77;40;CSAdjAdv+CSComp|"než":"jak"|CSNum;CSNum+CSCon|+Join|+Join;
+493;40;CSAdjAdv+CSComp|"než":"jak"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;
+347;40;"co"|CSAdjAdv+CSSuper|CSCon;CSAdj|+Join|*;
+78;40;CSAdjAdv+CSComp:CSSuper|CSCon;CSAdj|*;
+111;40;CSComp:CSSuper+CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;for combinations with 'less' and 'more'
+112;40;CSComp:CSSuper+CSAdvDegree|CSAdvManner;CSAdv+CSAdvManner|+Join;for combinations with 'less' and 'more'
+82;40;CSAdvTemp+CSComp:CSSuper;CSAdvTemp;
+348;40;"co"|CSSuper+^CSAdjVerb:CSCAdv;CSAdv+CSAdvDegree|^CSAdv;keep specific labels for adverbs
+26;40;CSComp:CSSuper+^CSAdjVerb:CSCAdv;^CSAdv;keep specific labels for adverbs
+
+/* Adjectives or Verbs
+
+101;40;^CSVerb|CSPerspron+^CSPosspron|CSAdjVerb;*|*|^CSVerb;
+581;40;CSKtery|.CSAdv:CSAdvStruct|CSAdjVerb;*|*|^CSVerb;
+56;40;CSAdjVerb|CSCondSuffix;^CSVerb|Join;
+376;40;CSAdjVerb|CSPrep;^CSVerb|*;
+658;40;CSRelpron:CSConj|.CSAdvStruct:CSAdj:CSLongPart:CSCon:CSPerspron:CSPrep:CSSe|CSAdjVerb|CSComma:CSAndOr:SEnd;*|*|CSVerb|*;
+23;40;CSAdjVerb;CSAdj;
+
+/* combinations of 'many', 'few', 'more', 'less', 'most', 'least' with pronouns
+
+128;40;CSAdjAdv+CSAdvDegree|"z"|CSPerspron;CSPerspron|+Join|+Join;
+795;40;"mnozí":"mnohých":"mnohým":"mnohé":"mnohými"|"z"|CSPerspron;CSPerspron|+Join|+Join;
+129;40;CSAdjAdv+CSAdvDegree|."z"|CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|CSAdj|*;
+
+/* adverbs
+/*- - - - 
+/* Adjectives or Adverbs (or Nouns)
+
+110;40;CSAdjAdv|.CSSe|CSVerb:CSPart;^CSAdv|*|*;keep specific adverb label
+121;40;CSAdjAdv|CSLongPart|CSPrep;CSRAdv|^CSPart|*;
+636;40;CSLongPart|CSAdjAdv|CSPrep;^CSPart|CSRAdv|*;
+136;40;CSVerb:CSPart+^CSCopula|CSAdjAdv|CSPrep:CSConj:CSAndOr:SEnd;*|CSRAdv|*;
+657;40;CSCon|CSAdjAdv+CSAdvDegree|CSPrep;*|CSRAdv|*;
+278;40;CSRAdv|CSAndOr|CSAdjAdv;*|*|CSRAdv;
+675;40;CSAdjAdv|CSRAdv;CSRAdv|*;
+756;40;CSAdjAdv|CSAdj;CSCAdv|*;
+758;40;CSAdjAdv|CSLongPart;^CSAdv|*;
+22;40;CSAdjAdv;CSAdj;
+
+/* Short adjectives
+
+173;40;CSShAdj|CSAdj:CSIndefpron:CSCon;*|^CSAdj+CSBCon;
+
+/* Adverbs or Nouns
+
+651;40;CSCon|CSAdvCon|CSPart;*|^CSAdv|*;
+649;40;CSAdvCon+CSAdvDir|CSLongPart;^CSAdv+CSAdvDir|*;
+650;40;CSVerb|"výše"|CSAdj;*|CSCAdv|*;
+238;40;CSAdj:CSLongPart|CSAdvCon;^CSAdj|CSCon;
+407;40;CSPrep:CSPosspron|CSAdvCon;*|CSCon;
+414;40;CSAdvCon+CSAdvManner|CSAdj;CSCAdv|*;
+406;40;CSAdvCon+CSAdvDegree;CSAdv+CSAdvDegree;
+413;40;CSDempron+CSInstr|CSAdvCon;CSNRPron|CSCon;
+408;40;CSAdvCon+CSAdvDir;CSAdv+CSAdvDir;
+416;40;"skokem"+^CSCon|CSVerb;CSRAdv|*;
+417;40;CSVerb|"skokem"+^CSCon;*|CSRAdv;
+409;40;"právem":"náhodou":"málem"+^CSCon;CSAdv+CSAdvManner;
+60;40;CSAdvCon+CSAdvTemp;CSAdvTemp+CSTime;
+24;40;CSAdvCon;CSCon;
+
+/* Adverb or Conjunction
+
+61;40;SBegin:CSComma|CSAdvConj;*|CSConj-CSTime;
+62;40;CSAdvConj+CSAdvStruct;CSAdvStruct;
+63;40;CSAdvConj+CSAdvTemp;CSAdvTemp;
+194;40;CSAdvConj+CSAdvManner;CSAdvManner+CSAdv;
+
+/* Adverb or Reflexive pronoun
+
+72;40;CSInf|CSRefl+CSAdvManner;*|CSRefl;
+73;40;CSRefl+CSAdvManner|.CSAdv:CSAdvStruct|CSVerb:CSCiPart;CSRefl|*|*;
+
+/* modal adverb as part of Concept
+
+793;40;CSPrep|CSAdvModal+CSAdvManner|CSAdj;*|CSCAdv|*;
+794;40;CSAdvModal+CSAdvManner;-CSAdvManner;
+
+/* join adverbs
+
+81;40;CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;
+95;40;CSAdvManner|CSAdvDegree;^CSAdvDegree|+Join;
+
+/* Adverbs as part of Concept
+
+197;40;"tak"|CSOrdNum;CSRAdv|*;exception to r7
+7;40;CSAdvDegree|CSAdj:CSTimeConcept;CSCAdv|*;
+120;40;CSAdvManner:CSAdvDir|CSOrdNum:CSIndefpron|^CSAdj;CSRAdv|*|*;
+89;40;CSAdvManner|.CSLongPart|CSAdj;CSCAdv|*|*;
+832;40;CSAdvManner|CSCon+CSAcro;CSCAdv|*;
+93;40;CSAdvDegree|CSCAdv;CSCAdv|+Join;
+41;40;CSAdvDegree|CSNum;CSNum|+Join;
+255;40;CSAdvManner:CSAdvDir|CSAndOr|CSCAdv;CSCAdv|*|*;
+
+/* relation OR noun, plus various
+/*- - - - - - - - - - - - - - - -
+/* Infinitive or Noun / Conjugated verb or Noun
+
+198;40;CSAdj:CSPrep|CSCon:CSInfCon:CSVerbCon|CSAndOr|CSInfCon:CSVerbCon|^CSInf;*|CSCon|*|CSCon|*;
+12;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep|CSInfCon:CSVerbCon;*|CSCon;
+133;40;CSAux|CSVerbCon:CSInfCon+CSmAux;*|CSVerb+CSmAux;
+134;40;CSmAux|CSInfCon;*|CSInf+CSVerb;
+132;40;CSVerb|CSVerbCon:CSInfCon;*|CSCon;
+759;40;CSVerbCon|.CSAdvTemp:CSAdvStruct:CSAdv|CSVerb+^CSInf;CSCon|*|*;
+648;40;CSInfCon+CSAux:CSmAux|CSInf;^CSInf+CSVerb|*;for InfCon as auxiliary verb, to prevent r175 from making it concept
+797;40;CSmAux|.CSAux:CSSe|*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|*|*|^CSInf+CSVerb;
+798;40;*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|CSCon;
+175;40;CSVerbCon:CSInfCon|.CSPerspron:CSAdvStruct|CSVerb;CSCon|*|*;
+231;40;CSVerbCon:CSInfCon|CSSe|.CSAdvStruct|CSVerb;CSCon|CSRefl|*|*;
+115;40;CSLongPart|CSVerbCon:CSInfCon;CSAdj|CSCon;
+174;40;CSVerbCon:CSInfCon|CSAdj|^CSAdj:CSCon;CSCon|*|*;
+304;40;CSLongNTLPartCon|CSInfCon;CSCon|CSCon;
+11;40;CSInfCon;^CSInf+CSVerb;keep other labels eg. Aux
+224;40;CSCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|*|CSCon|*|*;
+247;40;CSAdj|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|CSCon|*|CSCon|*|*;
+225;40;SBegin:CSPunctuation|CSVerbCon:CSNTPartCon|CSComma:CSAndOr|CSCon;*|CSCon|*|*;
+13;40;CSVerbCon;^CSVerb;keep other labels eg. Aux
+
+/* 'a to'
+
 337;40;"a"|"to"|CSVerb+^CSInf;CSAndOr+CSConjPB|CSPRPron+CSTen|*;#16-nl, exception to lexrep 'a to' as advstruct
-605;40;"a"|"to"|CSComma|CSConj;CSAndOr+CSConjPB|CSPRPron+CSTen|*|*;#22-nl
-207;40;CSPrep|CSLongPart|CSNTPartCon:CSCiPartCon;*|CSAdj|CSCon;#8-nl
-9;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep:CSVerb+^CSAux|CSNTPartCon:CSCiPartCon;*|CSCon;#3-nl,added Verb,Indefpron,NRPron #6-nl, added ^Aux #22-nl
-227;40;CSCiPartCon|CSPunctuation:SEnd:CSVerb:CSPart;CSCon|*;#11-nl
-263;40;CSCon|CSAndOr|CSCiPartCon;*|*|CSCon;#13-nl
-506;40;^CSVerb|CSAdvDegree:CSAdvManner:CSAdvDir|CSLongNTLPartCon;*|*|CSLongPart;#18-nl
-10;40;CSNTPartCon;CSPart+CSNTPart;#4-nl,added NTPart #15-nl
-87;40;CSCiPartCon;CSCiPart+CSLongPart;#13-nl
-809;40;CSLongNTLPartCon+CSGerund;CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl+CSGen;#25-nl
-113;40;CSLongNTLPartCon;CSCon;#5-nl
-684;40;CSSe|*CSAdj:CSCon:CSPrep:CSAndOr:CSAni:CSAdv|CSVerb;CSRefl|*|*;#22-nl
-19;40;CSSe|.CSAdvTime:CSAdvTemp|CSVerb:CSPrep;CSRefl|*|*;#16-nl
-20;40;CSVerb|CSSe;*|CSRefl;#3-nl
-554;40;SBegin:CSPrep:CSConj:CSVerb:CSAdj:CSIndefpron:CSRefl|.CSAdv|CSCiPart|CSSe|CSCon;*|*|^CSAdj|+Join|*;#21-nl
-21;40;CSSe;CSPrep;#3-nl
-274;40;"ale"|*CSVerb:CSPrep:CSPRPron:CSCon:"se"|CSAlso;*|*|CSRAdv;#13-nl
-292;40;^CSAdj:CSPrep|"místo"|CSConj;*|CSPrep|*;#14-nl
-293;40;"místo"|CSDempron:CSPerspron;CSPrep|*;#14-nl
-294;40;CSCon|"místo"|*CSAdj:CSCon;*|CSPrep|*;#14-nl
-295;40;CSPerspron+^CSPosspron|"místo";*|CSPrep;#14-nl
-222;40;CSPrep:CSConPrep|CSAdvTemp+^CSMultiwordAdverb|CSLongPart;CSPrep|CSCAdv-CSTime|CSAdj;#9-nl, added ^MultiwordAdverb #25-nl
-80;40;CSAdj|CSConPrep|^CSAdj:CSCon:CSPosspron:CSNum;*|CSCon|*;#4-nl
-179;40;CSPrep+^"se"|CSConPrep;*|CSCon;#8-nl
-220;40;CSConPrep|CSAdj:CSCon:CSBCon:CSECon:CSAdvTime:CSConj;CSPrep|*;#9-nl
-218;40;CSConPrep|CSRefl:CSPerspron:CSDempron:CSPosspron:CSPRPron:CSNRPron:CSIndefpron:CSRelpron;CSPrep|*;#9-nl
-54;40;CSVerb|CSCondSuffix;^CSVerb|Join;#4-nl
-57;40;^SBegin|CSCon+CSCapitalInitial|CSCondSuffix;*|^CSCon|Join;#4-nl
-55;40;CSCon|CSCondSuffix;^CSVerb|Join;#4-nl
-58;40;^CSCondSuffix|CSCondSuffix;CSVerb|Join;#4-nl, default rule to make sure suffix doesn't become NonRelevant (combined with word that is neither verb nor concept)
-522;40;"se":"si"|CSVerb|.CSAdj:CSCon:CSAdvStruct:CSAdv+^"stát"|"stát";CSRefl|*|*|CSVerb+CSInf+CSCopula;#20-nl
-523;40;CSVerb|"se":"si"|.CSAdvStruct:CSAdv:CSCon+^"stát"|"stát";*|CSRefl|*|CSVerb+CSInf+CSCopula;#20-nl,added Con #21-nl
-524;40;CSmAux:CSAux+^CSCopula|.CSAdvStruct:CSAdv|"stát";*|*|CSVerb+CSInf;#20-nl, added Aux #22-nl
-125;40;"za"|"prvé":"druhé":"třetí"|CSVerb:CSRefl;CSAdvStruct|+Join|*;#6-nl
-377;40;"jako"|CSVerb+^CSInf;CSConj+CSConjPB|*;#16-nl
-508;40;CSCopula|*{1,3}CSAdv:CSAdvStruct:CSAdvTemp:CSAdj:CSCon:CSPrep|CSLongPart+CSLongLPart;*|*|^CSAdj;#18-nl
-507;40;CSCopula|CSLongPart+CSLongLPart:CSCiPart;*|^CSAdj;#18-nl,added PartAdj #21-nl
-216;40;CSAdv|"se"|CSLongPart|CSAdj:CSCon;CSCAdv|CSAdj|+Join|*;#13-nl
-262;40;CSAdvStruct|CSLongPart|"se"|CSAdj:CSCon;*|CSAdj|+Join|*;#13-nl
-261;40;CSAdj|CSAdvStruct|CSLongPart|CSAdj;*|CSAdj|CSAdj|*;#13-nl
-260;40;CSAdj:CSPrep|.CSAdvStruct|CSLongPart|CSAdj:CSCon;*|*|CSAdj|*;#13-nl
-124;40;CSIndefpron|CSLongPart|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;#13-nl
-229;40;^CSComma:CSCon|CSAdv:CSAdvGeo|CSLongPart|CSAdj;*|CSCAdv|CSAdj|*;#13-nl
-303;40;CSComma|CSCiPart|CSCon|CSAndOr|CSAdj|CSCon;*|CSAdj|*|*|*|*;exception to r200,#15-nl
-792;40;CSLongPart|CSAndOr|CSLongPart|CSAdj:CSCon;CSAdj|*|CSAdj|*;#25-nl
-681;40;CSPrep|CSPerspron|.CSAdv|CSLongPart|^CSAdj:CSCon;*|*|*|^CSPart|*;#22-nl, variant of r117, in case of perspron: adverb also possible in pattern 
-117;40;CSPrep|CSDempron:CSPRPron|CSLongPart|^CSAdj:CSCon;*|*|^CSPart|*;#6-nl, ^Part #22-nl
-118;40;CSLongPart|.CSAdvTime:CSAdv:CSAdvStruct:CSRefl:CSNe|CSPrep:"jak";^CSPart|*|*;#16-nl, ^Part #22-nl
-119;40;^CSPrep|CSLongPart|."i"|CSInf:CSECon:CSDempron:CSPosspron:CSIndefpron:CSBCon;*|^CSPart|*|*;#13-nl, ^Part #22-nl
-230;40;CSLongPart|CSAndOr|CSPart;^CSPart|*|*;#11-nl, ^Part #22-nl
-208;40;CSAux|.CSAdj|*CSCon|CSLongPart+^CSLongLPart:CSCiPart|CSAndOr:CSComma:SEnd;*|*|*|^CSPart|*;#13-nl, ^LongLPart:CiPart,^Part #22-nl
-248;40;CSCon|.CSComma|CSLongPart|CSAdv|^CSAdj:CSLongPart;*|*|^CSPart|*|*;#12-nl, ^Part #22-nl
-548;40;CSCon|.CSComma|CSLongPart|CSAdvTime:CSAdvTemp;*|*|^CSPart|*;#20-nl, ^Part #22-nl
-249;40;CSCon|CSComma|CSLongPart|CSAdvStruct;*|*|^CSPart|*;#12-nl, ^Part #22-nl
-642;40;CSVerb|CSAdvDir|^CSLongPart;*|CSRAdv|*;#22-nl
-114;40;CSLongPart;CSAdj;#5-nl
-226;40;CSAdvGeo|CSAdj;CSCAdv|*;#11-nl
-288;40;CSConPrep|CSAdj;CSPrep|*;#14-nl, when preceding longparts turned adjective
-219;40;CSConPrep;CSCon;#9-nl
-213;40;"a"|"tím"|^CSCAdv:CSAdj:CSCon;CSConj+CSConjPB|+Join|*;#8-nl, added ConjPB #22-nl
-107;40;CSIndefpron|CSAdvTemp:CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;#6-nl
-103;40;CSIndefpron|.CSAdv|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;#5-nl
-104;40;CSIndefpron;CSPRPron;#5-nl
-217;40;SBegin:CSComma:CSConj|CSZadny|CSVerb;*|CSPRPron|*;#9-nl
-130;40;CSDempron+CSPerspron|CSCAdv:CSAdj:CSCon;CSNRPron|*;#6-nl, added CAdv #24-nl
-131;40;CSDempron+CSPerspron;CSPerspron;#6-nl
-109;40;CSAux+CSCopula|"to";*|CSPRPron;#5-nl
-108;40;CSDempron+^"tím":"toho"|CSAdvTemp|CSCAdv:CSAdj:CSCon;*|CSAdj|*;#5-nl. added ^tím #22-nl, added ^toho #23-nl
-105;40;CSDempron|CSCAdv:CSAdj:CSCon;CSNRPron|*;#5-nl
-106;40;CSDempron;CSPRPron;#5-nl
-671;40;CSPrep|CSRefl|CSPunctuation:SEnd;*|CSPRPron|*;#22-nl
-137;40;CSCopula|.CSAdj|*CSAdvManner|CSPrep:SEnd:CSComma:CSHyphen;*|*|CSCAdv|*;#13-nl
-100;40;CSAdvDegree:CSAdvManner:CSAdvDir|CSAdj;CSCAdv|*;#5-nl
-116;40;*CSAdvDegree:CSAdvManner:CSAdvDir|.CSAndOr|CSCAdv;CSCAdv|*|*;#13-nl
-411;40;CSAdj|CSComma|CSAdvTemp|CSAdj:CSCAdv;*|*|CSCAdv|*;#16-nl
-410;40;CSPrep:CSPart|CSAdvTemp+^"pak":CSMultiwordAdverb|CSAdj:CSCAdv;*|CSCAdv|*;#16-nl,added MultiwordAdverb #18-nl
-138;40;CSAdj:CSLongPart+^CSCiPart|CSAdvTemp+^"pak"|CSCAdv:CSAdj;*|CSAdj|CSAdj;#6-nl, only before longpart #20-nl, only for longparts (not for ciparts), added CAdv #23-nl
-6;40;CSAdvDegree:CSAdvDir:CSAdvManner:CSAdvModal;CSRAdv;default #3-nl
-364;40;"se"|CSRAdv|CSVerb:CSPrep;CSRefl|*|*;#16-nl
-367;40;"se"|"i"|CSVerb;CSRefl|CSAdvStruct|*;#16-nl
-394;40;CSComma|CSVerb|"i"|CSPrep;*|*|CSAdvStruct|*;#16-nl
-734;40;CSPart;-CSAdjNomF-CSAdjNomM-CSAdjNomN-CSAdjNomMAnimPl-CSAdjNomPl;#23-nl - remove specific adj labels, used in phase 80, for participles as relation
-737;40;CSRAdv:CSNRPron;-CSConNomF-CSConNomAccM-CSConNomAccN-CSConNomPl;#23-nl - remove specific noun labels, used in phase 80, for adverbs as relation, and non-relevant pronouns #24-nl
-762;40;CSPrep|CSBCon;*|^CSCon;#24-nl, correction: rewrite BCon after preposition to Con, to prevent BCon functioning as sentimentstop and sentiment span ending in preposition
-253;40;CSRelpron:CSRAdv:CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSPRPron;*|CSVerb-CSNegation|*;#12-nl, added ničím #22-nl
-254;40;CSCon|CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSIndefpron;*|*|CSVerb-CSNegation|*;#12-nl, added ničím #22-nl
-252;45;"bez"|CSAdjNomM;CSCon-CSNegation|*;#12-nl
-634;45;CSBeforeNumber|CSNum+CSConNomPl;+CSOrgUnit|+CSConNomAccM;#22-nl, adding the nom singular label so OrgUnit can prevent split in rules after r577
-810;45;CSCon+CSAdjAmbigI:CSAdjLocInstrMN/DatPl:CSAdjInstrPl:CSAdjDatMN;+CSConPossibleBCon;#25-nl
-811;45;CSCon+CSAdjGenMN:CSAdjAmbigI;+CSGen;#25-nl
-570;45;CSAdjNomM:CSAdjNomF:CSAdjNomMAnimPl:CSAdjDatMN:CSAdjAcc/InstrF:CSAdjAccF:CSAdjInstrMN/DatPl:CSAdjInstrPl;+CSAdjPossibleBCon;preparation for r264, #21-nl
-604;45;CSAdjInstrF;+CSAdjPossibleBCon;preparation for r264, #22-nl
-584;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent|CSCAdv+^CSCapitalInitial|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|CSCAdv+CSBCon|*|*;#21-nl, split at adverb before AdjPossibleBCon, added ^capitalinitial #24-nl
-264;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent:CSNoSplit:CSAcro|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|^CSAdj+CSBCon|*;#13-nl, not: Possessive (eg. Berkeleyho), Agent (Úspěchy nabitou hokejovou kariéru), added ^NoSplit #22-nl, capitalall ok (mostly): je MŠMT ústředním orgánem. capitalall not ok: s SLC membránovými transportními systémemy.
-755;45;CSCopula|CSAdj+CSAdjAmbigI|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjInstrF:CSAdjAcc/InstrF:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;#23-nl, added ^AdjAmbigE #24-nl
-757;45;CSCopula|CSAdj+CSAdjAmbigE|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjAmbigI:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;#23-nl
-805;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomAccM:CSAgent|CSAdj+CSAdjNomM+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;#25-nl, noun with case label not NomM, added ^capitalinitial #26-nl,added minimal con #26-nl
-819;45;CSPrep|CSAdj+^CSAdjNomM:CSAdjAmbigI|CSAdj+CSAdjNomM;*|*|^CSAdj+CSBCon;adj not NomM before adj NomM #26-nl
-806;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomF:CSAgent|CSAdj+CSAdjNomF+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;#25-nl, noun with case label not NomF, added ^capitalinitial #26-nl,added minimal con #26-nl
-820;45;CSPrep|CSAdj+^CSAdjNomF:CSAdjAmbigI|CSAdj+CSAdjNomF;*|*|^CSAdj+CSBCon;adj not NomF before adj NomF #26-nl
-630;45;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl:CSConAccF:CSConInstr+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;#22-nl, preparation for splitting concept clusters, Gen
-635;45;CSConDatF:CSConDatMN:CSConDatPl+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;#22-nl, preparation for splitting concept clusters
-646;45;CSTimeConcept|CSNum|^typeConcept;*|-CSConPossibleBCon|*;#22-nl
-577;45;CSCon+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSAcro|CSConPossibleBCon+^CSConNomAccM:CSConNomF:CSConNomAccN:CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|CSBCon;#21-nl, if not Nom singular less context on left side needed, added NoSplit, added ^Acro #26-nl
-526;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon+^CSPossessive:CSNum:CSOrgUnit:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|CSBCon;#20-nl, split in case of 2 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept, added ^OrgUnit #22-nl, added Conj #26-nl
-556;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon|CSConPossibleBCon+^CSPossessive:CSNum:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;#21-nl, split in case of 3 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept, added Conj #26-nl
-527;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|*CSConPossibleBCon|CSCon+^CSNum:CSOrgUnit:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;#20-nl, split in case of ConPossibleBCon preceding another one in a concept cluster, no split if capital because it can be name of previous concept, added Conj #26-nl
-518;45;CSPrep:CSVerb:CSPart|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;#20-nl, no split if capital, can be name, Gen or Loc because noun has to be labeled, otherwise abbr. as adjectives also get split off #25-nl
-840;45;CSConj|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;#26-nl
-807;45;CSPrep:CSVerb:CSPart|*CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|CSBCon;copy r518 so pattern without preceding word(s) work (minimal .?) #25-nl, added ConLocPl:ConLocMN #26-nl
-550;45;CSPrep:CSVerb|CSCon|CSAdj|*CSCon+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;#20-nl, for pattern with adjective in second position, no split if capital because it can be name of previous concept
-516;45;^CSCon:CSPRPron:CSAdj|CSCopula|CSCon+^CSNum:CSPossessive:CSAgent|CSAdj+CSAdjNomM:CSAdjNomF:CSAdjNomN+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;#20-nl, don't split after number or possessive noun
-682;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod":"apod."|"apod":"apod.";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration, with 'apod, #22-nl
-683;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod"|"apod";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration, with 'apod, #22-nl
-357;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;5-element enumeration, #16-nl
-354;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration, #16-nl
-355;60;^CSAndOr:CSCon:CSPosspron:CSAdj:CSPRPron|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;*|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration, #17-nl
-356;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSNRPron:CSCAdv:CSCon+^CSBCon;+CSList|+CSList|+CSList;2-element enumeration, #16-nl, added ^BCon #23-nl
-363;60;CSAdj|CSComma|*CSAdj|CSCon;+CSList|+CSList|+CSList|+CSList;2-element enumeration without 'and/or', #16-nl
-402;60;*CSAdj:CSCon|CSComma|*CSAdj:CSCon|CSComma|*CSAdj:CSCon|.CSAdvStruct|SEnd;+CSList|+CSList|+CSList|+CSList|+CSList|*|*;#16-nl, 3-element enumeration at sentence end
-240;65;CSZadny|"z"|"nich":"nás":"vás";CSNegPR|+Join|+Join;#8-nl
-241;65;CSZadny+CSGen|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegCon|CSAdj|CSAdj;#8-nl
-242;65;CSZadny|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegBCon|CSAdj|CSAdj;#8-nl
-239;65;CSZadny+CSGen|"z":"ze";CSNegCon|CSAdj;#11-nl
-245;65;CSZadny|"z":"ze";CSNegBCon|CSAdj;#11-nl
-803;65;CSCopula|CSShAdj|CSZadny;*|*|CSNegBCon;#25-nl
-92;65;CSPrep:CSAdj|.CSAdvStruct:CSAdvTemp|CSNe|CSCAdv:CSAdj;*|*|^CSNegCon|*;#16-nl, keep the Negation attribute
-378;65;CSNe;CSNegRel;#15-nl
-676;66;CSVerb:CSPart|*^CSVerb:CSPart:CSComma:"jako"|"jako"|*^CSPunctuation:CSVerb|CSVerb+^CSInf;*|*|CSConj+CSConjPB|*|*;#22-nl
-314;66;SBegin:CSHyphen:":"|^SBegin+^CSPunctuation;*|+CSPBegin;#16-nl, first word sentence or hyphen, colon
-349;66;SBegin|CSListnumber:CSPunctuation|^CSListnumber;*|*|+CSPBegin;#16-nl
-338;66;*{2}CSPunctuation:":":CSListnumber|^CSPunctuation;*|+CSPBegin;#16-nl
-334;66;^SBegin:CSPunctuation:":":CSListnumber|CSBracket1|*{1,2}^CSPunctuation|CSBracket2|^SEnd+^CSPunctuation;*|-CSPunctuation|*|-CSPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence, #16-nl
-399;66;CSBracket1|CSNegRel|.^CSBracket2|CSBracket2;*|+CSPBegin|*|*;isolate 1 or 2 entities with negation marker between (), #16-nl
-333;66;CSBracket1:CSBracket2+CSPunctuation|^SEnd:CSPunctuation;*|+CSPBegin;isolate part of sentence between (), #16-nl
-654;66;CSVerb|"není";*|+CSBeginrel+CSPBegin;#22-nl
-680;66;CSPart|"není"|.^CSPart:CSPunctuation|CSPart;*|+CSBeginrel+CSPBegin|*|*;#22-nl
-326;66;CSComma|CSPrep:CSRAdv|CSConj:CSRelpron;*|+CSPBegin|*;#16-nl, after comma: preposition/adverb + conjunction or relative pronoun
-315;66;CSComma|CSConj:CSRelpron:CSExample:CSPart:CSVerb;*|+CSPBegin;#16-nl, after comma: conjunction, relative pronoun or 'for example', added Verb #23-nl
-325;66;CSVerb|.^CSPunctuation|CSComma|CSAndOr|.^CSVerb:CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin|*|*;#16-nl, after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
-358;66;CSAdj:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSZadny:CSCAdv;+CSPossiblePBegin;#16-nl, preparation for various patterns concerning phrase begin
-359;66;CSRAdv:CSAdvTemp:CSAdvStruct:CSAdvTemp:CSPrep:CSRefl:CSAdvPlace:CSNegCon;+CSPossiblePBegin;#16-nl, preparation for various patterns concerning phrase begin, added NegCon #23-nl
-477;66;CSAdvTime:CSECon:CSBCon;+CSPossiblePBegin;#18-nl, preparation for various patterns concerning phrase begin
-423;66;CSNegPR:"než";+CSPossiblePBegin;#16-nl, preparation for various patterns concerning phrase begin
-360;66;CSComma+^CSList|CSPossiblePBegin|CSVerb;*|+CSPBegin|*;#16-nl
-361;66;CSComma+^CSList|CSPossiblePBegin|*^CSVerb:CSPBegin|CSVerb+^CSPBegin;*|+CSPBegin|*|*;#16-nl, try first when verb follows, then look for next comma (no list)
-362;66;CSComma+^CSList|CSPossiblePBegin+typeRelation|*^CSPBegin:SEnd:CSComma|SEnd;*|+CSPBegin|*|*;#16-nl
-321;66;CSVerb:CSPart|.^CSVerb:CSComma|CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin;#16-nl, after comma: second verb, also PBegin in case of other Punctuation than comma after verb (brackets)
-422;66;CSAndOr+CSList|*CSList+^CSAndOr|"a"|*CSList+^CSAndOr|CSVerb;*|*|+CSBeginrel+CSPBegin-CSList|*|*;#16-nl, for "a" as phrase begin after a list
-318;66;CSVerb:CSPart|CSAndOr|.CSAdvTime|*CSAdj:CSCon:CSPrep|.CSRAdv:CSRefl|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*|*|*|*;#16-nl, after andor: second verb
-351;66;CSVerb:CSPart+^CSInf:"by"|.CSPossiblePBegin:CSInf|CSAndOr+^"či"|*CSPossiblePBegin:CSList:CSInf:CSNegRel|CSVerb+^CSInf;*|*|+CSBeginrel+CSPBegin-CSList|*|*;#16-nl, andor as phrase begin loses the list label, added ^'by' #24-nl
-323;66;^CSPBegin:CSConj:CSRelpron|CSAndOr|.CSPrep|CSConj:CSRelpron;*|+CSBeginrel+CSPBegin|*|*;#16-nl, and followed by conjunction or relpron
-316;66;^CSPBegin|CSAndOr|.CSAdvStruct|CSVerb:CSNegRel+^CSInf;*|+CSBeginrel+CSPBegin|*|*;#16-nl, and/or + verb / negation marker starts new phrase
-393;66;CSVerb:CSPart+^CSInf|."ani"|*CSList|CSAndOr|.CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|+CSBeginrel+CSPBegin|*|*|*;#16-nl, and/or after enumeration
-687;66;CSVerb:CSPart+^CSInf|*CSPrep:CSAdj:CSCon:CSComma|"ani"|*CSPrep:CSAdj:CSCon|CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|*|+CSBeginrel+CSPBegin|*|*;#22-nl
+605;40;"a"|"to"|CSComma|CSConj;CSAndOr+CSConjPB|CSPRPron+CSTen|*|*;
+
+/* Participle or Noun
+
+207;40;CSPrep|CSLongPart|CSNTPartCon:CSCiPartCon;*|CSAdj|CSCon;
+9;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep:CSVerb+^CSAux|CSNTPartCon:CSCiPartCon;*|CSCon;
+227;40;CSCiPartCon|CSPunctuation:SEnd:CSVerb:CSPart;CSCon|*;
+263;40;CSCon|CSAndOr|CSCiPartCon;*|*|CSCon;
+506;40;^CSVerb|CSAdvDegree:CSAdvManner:CSAdvDir|CSLongNTLPartCon;*|*|CSLongPart;
+10;40;CSNTPartCon;CSPart+CSNTPart;
+87;40;CSCiPartCon;CSCiPart+CSLongPart;
+809;40;CSLongNTLPartCon+CSGerund;CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl+CSGen;
+113;40;CSLongNTLPartCon;CSCon;
+
+/* 'se'
+
+684;40;CSSe|*CSAdj:CSCon:CSPrep:CSAndOr:CSAni:CSAdv|CSVerb;CSRefl|*|*;
+19;40;CSSe|.CSAdvTime:CSAdvTemp|CSVerb:CSPrep;CSRefl|*|*;
+20;40;CSVerb|CSSe;*|CSRefl;
+554;40;SBegin:CSPrep:CSConj:CSVerb:CSAdj:CSIndefpron:CSRefl|.CSAdv|CSCiPart|CSSe|CSCon;*|*|^CSAdj|+Join|*;
+21;40;CSSe;CSPrep;
+
+/* 'ale' + [also]
+
+274;40;"ale"|*CSVerb:CSPrep:CSPRPron:CSCon:"se"|CSAlso;*|*|CSRAdv;
+
+/* 'místo': preposition or noun (different from ConPrep)
+
+292;40;^CSAdj:CSPrep|"místo"|CSConj;*|CSPrep|*;
+293;40;"místo"|CSDempron:CSPerspron;CSPrep|*;
+294;40;CSCon|"místo"|*CSAdj:CSCon;*|CSPrep|*;
+295;40;CSPerspron+^CSPosspron|"místo";*|CSPrep;
+
+/* Preposition or Noun - first part
+
+222;40;CSPrep:CSConPrep|CSAdvTemp+^CSMultiwordAdverb|CSLongPart;CSPrep|CSCAdv-CSTime|CSAdj;
+80;40;CSAdj|CSConPrep|^CSAdj:CSCon:CSPosspron:CSNum;*|CSCon|*;
+179;40;CSPrep+^"se"|CSConPrep;*|CSCon;
+220;40;CSConPrep|CSAdj:CSCon:CSBCon:CSECon:CSAdvTime:CSConj;CSPrep|*;
+218;40;CSConPrep|CSRefl:CSPerspron:CSDempron:CSPosspron:CSPRPron:CSNRPron:CSIndefpron:CSRelpron;CSPrep|*;
+
+/* conditional suffix '-li'
+
+54;40;CSVerb|CSCondSuffix;^CSVerb|Join;
+57;40;^SBegin|CSCon+CSCapitalInitial|CSCondSuffix;*|^CSCon|Join;
+55;40;CSCon|CSCondSuffix;^CSVerb|Join;
+58;40;^CSCondSuffix|CSCondSuffix;CSVerb|Join;default rule to make sure suffix doesn't become nonrelevant (combined with word that is neither verb nor concept)
+
+/*stát: infinitive or noun
+
+522;40;"se":"si"|CSVerb|.CSAdj:CSCon:CSAdvStruct:CSAdv+^"stát"|"stát";CSRefl|*|*|CSVerb+CSInf+CSCopula;
+523;40;CSVerb|"se":"si"|.CSAdvStruct:CSAdv:CSCon+^"stát"|"stát";*|CSRefl|*|CSVerb+CSInf+CSCopula;
+524;40;CSmAux:CSAux+^CSCopula|.CSAdvStruct:CSAdv|"stát";*|*|CSVerb+CSInf;
+
+/*'za prvé', 'za druhé', 'za třetí'
+
+125;40;"za"|"prvé":"druhé":"třetí"|CSVerb:CSRefl;CSAdvStruct|+Join|*;
+
+/*'jako'
+
+377;40;"jako"|CSVerb+^CSInf;CSConj+CSConjPB|*;
+
+/* disambiguate ambiguous parts of speech
+/*---------------------------------------
+/* long nt- and l-participles and ci-participles = Participle or Adjective
+/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+/* long l-participles and ci-participles after copula become concepts
+
+508;40;CSCopula|*{1,3}CSAdv:CSAdvStruct:CSAdvTemp:CSAdj:CSCon:CSPrep|CSLongPart+CSLongLPart;*|*|^CSAdj;
+507;40;CSCopula|CSLongPart+CSLongLPart:CSCiPart;*|^CSAdj;
+
+/* long l-participles, nt-participles and ci-participles
+
+216;40;CSAdv|"se"|CSLongPart|CSAdj:CSCon;CSCAdv|CSAdj|+Join|*;
+262;40;CSAdvStruct|CSLongPart|"se"|CSAdj:CSCon;*|CSAdj|+Join|*;
+261;40;CSAdj|CSAdvStruct|CSLongPart|CSAdj;*|CSAdj|CSAdj|*;
+260;40;CSAdj:CSPrep|.CSAdvStruct|CSLongPart|CSAdj:CSCon;*|*|CSAdj|*;
+124;40;CSIndefpron|CSLongPart|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+229;40;^CSComma:CSCon|CSAdv:CSAdvGeo|CSLongPart|CSAdj;*|CSCAdv|CSAdj|*;
+303;40;CSComma|CSCiPart|CSCon|CSAndOr|CSAdj|CSCon;*|CSAdj|*|*|*|*;
+792;40;CSLongPart|CSAndOr|CSLongPart|CSAdj:CSCon;CSAdj|*|CSAdj|*;
+681;40;CSPrep|CSPerspron|.CSAdv|CSLongPart|^CSAdj:CSCon;*|*|*|^CSPart|*;variant of r117, in case of perspron: adverb also possible in pattern
+117;40;CSPrep|CSDempron:CSPRPron|CSLongPart|^CSAdj:CSCon;*|*|^CSPart|*;
+118;40;CSLongPart|.CSAdvTime:CSAdv:CSAdvStruct:CSRefl:CSNe|CSPrep:"jak";^CSPart|*|*;
+119;40;^CSPrep|CSLongPart|."i"|CSInf:CSECon:CSDempron:CSPosspron:CSIndefpron:CSBCon;*|^CSPart|*|*;
+230;40;CSLongPart|CSAndOr|CSPart;^CSPart|*|*;
+208;40;CSAux|.CSAdj|*CSCon|CSLongPart+^CSLongLPart:CSCiPart|CSAndOr:CSComma:SEnd;*|*|*|^CSPart|*;
+248;40;CSCon|.CSComma|CSLongPart|CSAdv|^CSAdj:CSLongPart;*|*|^CSPart|*|*;
+548;40;CSCon|.CSComma|CSLongPart|CSAdvTime:CSAdvTemp;*|*|^CSPart|*;
+249;40;CSCon|CSComma|CSLongPart|CSAdvStruct;*|*|^CSPart|*;
+642;40;CSVerb|CSAdvDir|^CSLongPart;*|CSRAdv|*;
+114;40;CSLongPart;CSAdj;
+
+/* various
+/*- - - - 
+/* Geographic adverbs
+
+226;40;CSAdvGeo|CSAdj;CSCAdv|*;
+
+/* Preposition or Noun - second part
+
+288;40;CSConPrep|CSAdj;CSPrep|*;
+219;40;CSConPrep;CSCon;
+
+/* Conjunction as multiword or separate conjunction + demonstrative pronoun
+
+213;40;"a"|"tím"|^CSCAdv:CSAdj:CSCon;CSConj+CSConjPB|+Join|*;
+
+/* pronouns
+/*- - - - -
+/* Indefinite pronouns + Adverb of Time as part of Concept
+
+107;40;CSIndefpron|CSAdvTemp:CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+103;40;CSIndefpron|.CSAdv|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+104;40;CSIndefpron;CSPRPron;
+
+/* žádný
+
+217;40;SBegin:CSComma:CSConj|CSZadny|CSVerb;*|CSPRPron|*;
+
+/* Demonstrative pronoun OR personal pronoun
+
+130;40;CSDempron+CSPerspron|CSCAdv:CSAdj:CSCon;CSNRPron|*;
+131;40;CSDempron+CSPerspron;CSPerspron;
+
+/* Demonstrative pronouns
+
+109;40;CSAux+CSCopula|"to";*|CSPRPron;
+108;40;CSDempron+^"tím":"toho"|CSAdvTemp|CSCAdv:CSAdj:CSCon;*|CSAdj|*;
+105;40;CSDempron|CSCAdv:CSAdj:CSCon;CSNRPron|*;
+106;40;CSDempron;CSPRPron;
+
+/* Reflexive pronouns
+
+671;40;CSPrep|CSRefl|CSPunctuation:SEnd;*|CSPRPron|*;
+
+/* adverbs as concept
+/*- - - - - - - - - -
+
+137;40;CSCopula|.CSAdj|*CSAdvManner|CSPrep:SEnd:CSComma:CSHyphen;*|*|CSCAdv|*;
+100;40;CSAdvDegree:CSAdvManner:CSAdvDir|CSAdj;CSCAdv|*;
+116;40;*CSAdvDegree:CSAdvManner:CSAdvDir|.CSAndOr|CSCAdv;CSCAdv|*|*;
+411;40;CSAdj|CSComma|CSAdvTemp|CSAdj:CSCAdv;*|*|CSCAdv|*;
+410;40;CSPrep:CSPart|CSAdvTemp+^"pak":CSMultiwordAdverb|CSAdj:CSCAdv;*|CSCAdv|*;
+138;40;CSAdj:CSLongPart+^CSCiPart|CSAdvTemp+^"pak"|CSCAdv:CSAdj;*|CSAdj|CSAdj;only for longparts (not for ciparts)
+
+/* defaults and clean-up
+/*- - - - - - - - - - - 
+
+6;40;CSAdvDegree:CSAdvDir:CSAdvManner:CSAdvModal;CSRAdv;default
+364;40;"se"|CSRAdv|CSVerb:CSPrep;CSRefl|*|*;
+367;40;"se"|"i"|CSVerb;CSRefl|CSAdvStruct|*;
+394;40;CSComma|CSVerb|"i"|CSPrep;*|*|CSAdvStruct|*;
+734;40;CSPart;-CSAdjNomF-CSAdjNomM-CSAdjNomN-CSAdjNomMAnimPl-CSAdjNomPl;remove specific adj labels, used in phase 80, for participles as relation
+737;40;CSRAdv:CSNRPron;-CSConNomF-CSConNomAccM-CSConNomAccN-CSConNomPl;remove specific noun labels, used in phase 80, for adverbs as relation, and non-relevant pronouns
+762;40;CSPrep|CSBCon;*|^CSCon;correction: rewrite BCon after preposition to Con, to prevent BCon functioning as sentimentstop and sentiment span ending in preposition
+
+/* disambiguate ambiguous negation markers
+
+253;40;CSRelpron:CSRAdv:CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSPRPron;*|CSVerb-CSNegation|*;
+254;40;CSCon|CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSIndefpron;*|*|CSVerb-CSNegation|*;
+
+/*PHASE 45: splitting concept clusters
+/*====================================
+/* preparation
+/*------------
+
+252;45;"bez"|CSAdjNomM;CSCon-CSNegation|*;
+634;45;CSBeforeNumber|CSNum+CSConNomPl;+CSOrgUnit|+CSConNomAccM;OrgUnit can prevent split in rules after r577
+810;45;CSCon+CSAdjAmbigI:CSAdjLocInstrMN/DatPl:CSAdjInstrPl:CSAdjDatMN;+CSConPossibleBCon;
+811;45;CSCon+CSAdjGenMN:CSAdjAmbigI;+CSGen;
+
+/* split concept clusters
+/*-----------------------
+/*split Concept clusters according to adjective case
+/*- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+570;45;CSAdjNomM:CSAdjNomF:CSAdjNomMAnimPl:CSAdjDatMN:CSAdjAcc/InstrF:CSAdjAccF:CSAdjInstrMN/DatPl:CSAdjInstrPl;+CSAdjPossibleBCon;preparation for r264
+604;45;CSAdjInstrF;+CSAdjPossibleBCon;preparation for r264
+584;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent|CSCAdv+^CSCapitalInitial|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|CSCAdv+CSBCon|*|*;split at adverb before AdjPossibleBCon
+264;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent:CSNoSplit:CSAcro|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|^CSAdj+CSBCon|*;no split in case of preceding possessive adjective, agent, number or other 'no split' words
+755;45;CSCopula|CSAdj+CSAdjAmbigI|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjInstrF:CSAdjAcc/InstrF:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;
+757;45;CSCopula|CSAdj+CSAdjAmbigE|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjAmbigI:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;
+805;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomAccM:CSAgent|CSAdj+CSAdjNomM+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;adj is split after noun with case label which is not NomM or agent
+819;45;CSPrep|CSAdj+^CSAdjNomM:CSAdjAmbigI|CSAdj+CSAdjNomM;*|*|^CSAdj+CSBCon;adj NomM is split after adj which is not NomM
+806;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomF:CSAgent|CSAdj+CSAdjNomF+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;adj is split after noun with case label which is not NomF or agent
+820;45;CSPrep|CSAdj+^CSAdjNomF:CSAdjAmbigI|CSAdj+CSAdjNomF;*|*|^CSAdj+CSBCon;adj NomF is split after adj which is not NomF
+
+/*split Concept clusters according to noun case
+/*- - - - - - - - - - - - - - - - - - - - - - -
+
+630;45;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl:CSConAccF:CSConInstr+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;preparation for splitting concept clusters
+635;45;CSConDatF:CSConDatMN:CSConDatPl+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;preparation for splitting concept clusters
+
+/*correction: don't split in case of 'timeconcept' + number
+
+646;45;CSTimeConcept|CSNum|^typeConcept;*|-CSConPossibleBCon|*;
+577;45;CSCon+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSAcro|CSConPossibleBCon+^CSConNomAccM:CSConNomF:CSConNomAccN:CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|CSBCon;if not Nom singular less context on left side needed
+526;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon+^CSPossessive:CSNum:CSOrgUnit:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|CSBCon;split in case of 2 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept
+556;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon|CSConPossibleBCon+^CSPossessive:CSNum:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;split in case of 3 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept
+527;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|*CSConPossibleBCon|CSCon+^CSNum:CSOrgUnit:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;split in case of ConPossibleBCon preceding another one in a concept cluster, no split if capital because it can be name of previous concept
+518;45;CSPrep:CSVerb:CSPart|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;no split if capital, can be name - Gen or Loc because noun has to be labeled, otherwise abbr. as adjectives also get split off
+840;45;CSConj|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;
+807;45;CSPrep:CSVerb:CSPart|*CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|CSBCon;copy r518 so pattern without preceding word(s) works
+550;45;CSPrep:CSVerb|CSCon|CSAdj|*CSCon+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;for pattern with adjective in second position, no split if capital because it can be name of previous concept
+
+/*split adjective after copula plus noun
+/*- - - - - - - - - - - - - - - - - - - 
+
+516;45;^CSCon:CSPRPron:CSAdj|CSCopula|CSCon+^CSNum:CSPossessive:CSAgent|CSAdj+CSAdjNomM:CSAdjNomF:CSAdjNomN+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;don't split after number or possessive adjective
+
+/*PHASE 60: detect enumerations
+/* ============================
+
+682;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod":"apod."|"apod":"apod.";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration, with 'apod'
+683;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod"|"apod";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration, with 'apod'
+357;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;5-element enumeration
+354;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration
+355;60;^CSAndOr:CSCon:CSPosspron:CSAdj:CSPRPron|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;*|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration
+356;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSNRPron:CSCAdv:CSCon+^CSBCon;+CSList|+CSList|+CSList;2-element enumeration
+363;60;CSAdj|CSComma|*CSAdj|CSCon;+CSList|+CSList|+CSList|+CSList;2-element enumeration without 'and/or'
+402;60;*CSAdj:CSCon|CSComma|*CSAdj:CSCon|CSComma|*CSAdj:CSCon|.CSAdvStruct|SEnd;+CSList|+CSList|+CSList|+CSList|+CSList|*|*;3-element enumeration at sentence end
+
+/*PHASE 65: negation markers
+/*==========================
+/* 'žádný z/ze'
+
+240;65;CSZadny|"z"|"nich":"nás":"vás";CSNegPR|+Join|+Join;
+241;65;CSZadny+CSGen|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegCon|CSAdj|CSAdj;
+242;65;CSZadny|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegBCon|CSAdj|CSAdj;
+239;65;CSZadny+CSGen|"z":"ze";CSNegCon|CSAdj;
+245;65;CSZadny|"z":"ze";CSNegBCon|CSAdj;
+803;65;CSCopula|CSShAdj|CSZadny;*|*|CSNegBCon;
+
+/* 'ne'
+
+92;65;CSPrep:CSAdj|.CSAdvStruct:CSAdvTemp|CSNe|CSCAdv:CSAdj;*|*|^CSNegCon|*;keep the Negation attribute
+378;65;CSNe;CSNegRel;
+
+/*PHASE 66: sentence structure detection
+/*======================================
+/* 'jako'
+
+676;66;CSVerb:CSPart|*^CSVerb:CSPart:CSComma:"jako"|"jako"|*^CSPunctuation:CSVerb|CSVerb+^CSInf;*|*|CSConj+CSConjPB|*|*;
+
+/* after punctuation
+
+314;66;SBegin:CSHyphen:":"|^SBegin+^CSPunctuation;*|+CSPBegin;first word sentence or hyphen, colon
+349;66;SBegin|CSListnumber:CSPunctuation|^CSListnumber;*|*|+CSPBegin;
+338;66;*{2}CSPunctuation:":":CSListnumber|^CSPunctuation;*|+CSPBegin;
+334;66;^SBegin:CSPunctuation:":":CSListnumber|CSBracket1|*{1,2}^CSPunctuation|CSBracket2|^SEnd+^CSPunctuation;*|-CSPunctuation|*|-CSPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
+399;66;CSBracket1|CSNegRel|.^CSBracket2|CSBracket2;*|+CSPBegin|*|*;isolate 1 or 2 entities with negation marker between ()
+333;66;CSBracket1:CSBracket2+CSPunctuation|^SEnd:CSPunctuation;*|+CSPBegin;isolate part of sentence between ()
+
+/* verb starts new phrase
+
+654;66;CSVerb|"není";*|+CSBeginrel+CSPBegin;
+680;66;CSPart|"není"|.^CSPart:CSPunctuation|CSPart;*|+CSBeginrel+CSPBegin|*|*;
+
+/* after comma
+
+326;66;CSComma|CSPrep:CSRAdv|CSConj:CSRelpron;*|+CSPBegin|*;after comma: preposition/adverb + conjunction or relative pronoun
+315;66;CSComma|CSConj:CSRelpron:CSExample:CSPart:CSVerb;*|+CSPBegin;after comma: conjunction, relative pronoun or 'for example'
+325;66;CSVerb|.^CSPunctuation|CSComma|CSAndOr|.^CSVerb:CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin|*|*;after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
+358;66;CSAdj:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSZadny:CSCAdv;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+359;66;CSRAdv:CSAdvTemp:CSAdvStruct:CSAdvTemp:CSPrep:CSRefl:CSAdvPlace:CSNegCon;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+477;66;CSAdvTime:CSECon:CSBCon;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+423;66;CSNegPR:"než";+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+360;66;CSComma+^CSList|CSPossiblePBegin|CSVerb;*|+CSPBegin|*;
+361;66;CSComma+^CSList|CSPossiblePBegin|*^CSVerb:CSPBegin|CSVerb+^CSPBegin;*|+CSPBegin|*|*;
+362;66;CSComma+^CSList|CSPossiblePBegin+typeRelation|*^CSPBegin:SEnd:CSComma|SEnd;*|+CSPBegin|*|*;
+321;66;CSVerb:CSPart|.^CSVerb:CSComma|CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin;after comma: second verb, also PBegin in case of other Punctuation than comma after verb (brackets)
+
+/* and/or
+
+422;66;CSAndOr+CSList|*CSList+^CSAndOr|"a"|*CSList+^CSAndOr|CSVerb;*|*|+CSBeginrel+CSPBegin-CSList|*|*;for "a" as phrase begin after a list
+318;66;CSVerb:CSPart|CSAndOr|.CSAdvTime|*CSAdj:CSCon:CSPrep|.CSRAdv:CSRefl|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*|*|*|*;after andor: second verb
+351;66;CSVerb:CSPart+^CSInf:"by"|.CSPossiblePBegin:CSInf|CSAndOr+^"či"|*CSPossiblePBegin:CSList:CSInf:CSNegRel|CSVerb+^CSInf;*|*|+CSBeginrel+CSPBegin-CSList|*|*;andor as phrase begin loses the list label
+323;66;^CSPBegin:CSConj:CSRelpron|CSAndOr|.CSPrep|CSConj:CSRelpron;*|+CSBeginrel+CSPBegin|*|*;and followed by conjunction or relpron
+316;66;^CSPBegin|CSAndOr|.CSAdvStruct|CSVerb:CSNegRel+^CSInf;*|+CSBeginrel+CSPBegin|*|*;and/or + verb / negation marker starts new phrase
+393;66;CSVerb:CSPart+^CSInf|."ani"|*CSList|CSAndOr|.CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|+CSBeginrel+CSPBegin|*|*|*;and/or after enumeration
+687;66;CSVerb:CSPart+^CSInf|*CSPrep:CSAdj:CSCon:CSComma|"ani"|*CSPrep:CSAdj:CSCon|CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|*|+CSBeginrel+CSPBegin|*|*;
 688;66;CSVerb:CSPart+^CSInf|*^CSPBegin:CSAndOr|CSAndOr|"ani";*|*|+CSBeginrel+CSPBegin|*;
-365;66;CSVerb+^CSAux|CSConj:CSRelpron|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*;#16-nl
-336;66;^CSPBegin|CSConjPB;*|+CSBeginrel+CSPBegin;#16-nl ***Beginrel ok?
-426;66;CSCon|CSPrep|CSRelpron;*|+CSPBegin|*;#16-nl
-342;66;^CSAux|CSCon|CSPart+^CSNTPart;*|*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase #16-nl,exception for Aux -> some more exceptions might be needed
-670;66;CSCon|CSPart+^CSNTPart;*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase #16-nl,exception for Aux -> some more exceptions might be needed
-368;66;CSCon|.CSComma|CSPart+CSPBegin|*^CSVerb:CSComma:CSPBegin|CSVerb+^CSInf;*|*|*|*|+CSPBegin;#16-nl, look for main verb after participle as phrase begin
-397;70;CSVerb:CSPart+CSNegation;+CSNegVerb;#16-nl, adding label for negated verb to be used to detect the negation span, added Part #17-nl
-250;70;CSCon:CSRAdv+CSNegation;-CSNegation;#12-nl, remove Negation from Con or RAdv meant for the other option in case of ambiguity (eg. VerbCon+Negation, LongPartCon+Negation, AdjAdv+Negation ...)
-301;70;CSPart+CSNegation|CSAndOr|CSPart+^CSNegation;*|+CSBeginrel|*;#15-nl - for medical data, no difference in corpus
-674;70;CSPunctuation:SBegin:CSListnumber:CSConj|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon|CSAndOr|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion|*|+CSNoExpansion;#22-nl
-380;70;^CSCon:CSECon:CSPRPron:CSPerspron:CSAdj:CSAdvTime:CSAdvTemp|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon+^CSBCon;*|*|*|+CSNoExpansion;#17-nl, added ^BCon #23-nl
-431;70;CSCon+CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion;#17-nl, 
-672;70;^CSPrep|CSCon:CSECon:CSPRPron:CSPerspron|CSAdvStruct|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|*|*|-CSNoExpansion;correction for noun-advstruct-prep: remove NoExpansion, #22-nl
-678;70;CSPRPron:CSPerspron|typeConcept:typePathRelevant+^CSNoExpansion|CSAux+CSCopula|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|+CSNegStop;#22-nl
-379;70;typeConcept:typePathRelevant+^CSNoExpansion|.CSAux+^CSCopula|CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|*|+CSNegStop;#16-nl, added typePathRelevant,.Aux #22-nl
-677;70;CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|+CSNegStop;#22-nl
-679;70;CSKtery|CSCopula+CSNegBegin;+CSNegBegin|*;#22-nl
-382;70;CSCon:CSPRPron+^CSNoExpansion|*CSPrep:CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*;#16-nl, many prepositions
-381;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*|*;#16-nl, one preposition
-383;70;SBegin:CSConj|*typeConcept|CSAndOr|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon+^CSNegBegin|typeConcept+CSNegBegin;*|+CSNegBegin|*|*|*;#16-nl, one preposition
-686;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegVerb:CSNegRel:CSPunctuation:CSAni|CSAni+^CSPBegin;+CSNegBegin|*|*;#22-nl
-389;70;CSPBegin+CSList|*CSList|CSNegVerb:CSNegRel;+CSNegBegin|*|*;#16-nl - expansion to enumeration
-689;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel:CSNoExpansion|"není"+^CSPBegin;+CSNegBegin|*|*;#22-nl, variant r385 for 'není': no left expansion for prep-noun pattern
-385;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel:CSAni+^CSPBegin:"není";+CSNegBegin|*|*;#16-nl, test: removed NoExpansion, added ^'není' #22-nl
-673;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|*CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon:CSAdvTime+^CSNegBegin|CSNegVerb;+CSNegBegin|*|*|*;#22-nl, for pattern noun-preposition-noun
-429;70;typeConcept+^CSNoExpansion|.CSInf+^CSNegVerb|CSNegVerb:CSNegRel;+CSNegBegin|*|*;#16-nl, added Inf #22-nl, removed * first position #23-nl
-403;70;*CSList+^CSNegBegin|CSList+CSNegBegin;+CSNegBegin|*;#16-nl - further expansion to enumeration
-424;70;CSConj|CSList+CSNegBegin;+CSNegBegin|*;#16-nl
-387;70;CSNegVerb:CSAni:CSNegRel;+CSNegBegin;#16-nl, always add NegBegin to negverb, added Ani and NegRel #17-nl
-432;70;*CSPrep:CSAdj:CSCon:CSRefl|CSAni;+CSNegBegin|*;#17-nl, added Refl #22-nl
-390;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;#16-nl - expansion up to punctuation, changed negstop from position after punctuation to punctuation #24-nl
-391;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:SEnd:CSNegStop|CSPBegin:SEnd+^CSNegation:CSNegBegin;*|*|+CSNegStop;#16-nl - expansion up to next phrase begin or sentence end
-398;70;CSBracket1|CSNegBegin|.^CSBracket2|CSBracket2;*|*|*|+CSNegStop;#16-nl, limit negation span for one or two entities between brackets (see r334)
-405;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;assign a temp marker to all words in a negation span, #16-nl
-420;70;CSNegPrep;+CSNegBegin;#16-nl
-418;70;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron;+CSPossibleNegSpanBez;#16-nl, preparatory rule to detect the negation span after 'bez'
-419;70;CSPrep:CSList:CSAdvTemp;+CSPossibleNegSpanBez;#16-nl, preparatory rule to detect the negation span after 'bez'
-421;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|CSPBegin;*|*|+CSNegStop;#16-nl, +NegBegin->* #22-nl
-296;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|^typeConcept:CSNegation:CSNegBegin:CSInNegspan;*|*|+CSNegStop;#16-nl, +NegBegin->* #22-nl
-298;70;CSCon|"bez":"beze"+^CSNoExpansion|^"toho";+CSNegBegin|*|*;#17-nl, not for multiwords with 'bez(e)', not with subclause
-427;70;CSCon|.CSComma|CSPrep+CSNegBegin|CSRelpron;+CSNegBegin|*|*|*;#16-nl
-434;70;CSVerb+^CSInf|*CSPosspron:CSAdj:CSCAdv:CSCon:CSBCon|CSPrep|*CSAdj:CSCon|CSComma|CSKtery+CSNegBegin;*|+CSNegBegin|*|*|*|*;#17-nl
-428;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery+CSNegBegin;+CSNegBegin|*|*;#16-nl,added BCon #20-nl, added PRPron #22-nl
-669;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery|.^CSPBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel+^CSPBegin;+CSNegBegin|*|*|*|*;#22-nl
-430;70;CSNegPrep|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;#16-nl - expansion up to punctuation, moved stop from position after punctuation to punctuation #24-nl
-404;70;CSNegPrep|"toho"|CSComma|CSConj|.^CSPBegin:SEnd:CSPunctuation:CSNegStop|CSPBegin:SEnd:CSPunctuation+^CSNegation:CSNegBegin;+CSNoExpansion|*|-CSNegStop|-CSNegStop|*|+CSNegStop;#17-nl, 'bez' plus subclause 
-388;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|*|+CSNegStop;move NegStop from nonrelevant to next lexrep, in case of several NonRelevants #16-nl, added typeendconcept,typebeginndoncept #24-nl
-297;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegStop;move NegStop from nonrelevant to next lexrep #15-nl (remark: make sure all labels covered by the types are in phase 70), added typebeginndoncept #24-nl
-386;70;CSNegBegin+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegBegin;move NegBegin from nonrelevant to next lexrep #16-nl (remark: make sure all labels covered by the types are in phase 70), added typebeginndoncept #24-nl
-783;70;CSNegBegin+typeOther:typeAmbiguous;-CSNegBegin;#24-nl
-775;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;#24-nl, copy of r405 so all words in negation span get InNegspan label
-748;80;CSVerb:CSPart:CSRAdv+CSPosSentiment+CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSPosSentimentStop;#23-nl
-749;80;CSVerb:CSPart:CSRAdv+CSNegSentiment+CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSNegSentimentStop;#23-nl
-746;80;CSPBegin|.^CSPBegin:CSPosSentiment|CSVerb:CSPart:CSRAdv+CSPosSentiment+^CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSPosSentimentStop;#23-nl
-747;80;CSPBegin|.^CSPBegin:CSNegSentiment|CSVerb:CSPart:CSRAdv+CSNegSentiment+^CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSNegSentimentStop;#23-nl
-692;80;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSPrep+^CSBCon;+CSPossibleSentimentConceptSpan;#23-nl, add label to entities possible in sentiment span for concepts, added ^BCon #23-nl
-711;80;CSAdvStruct:CSAdvTime:CSECon;+CSPossibleSentimentConceptSpan;#23-nl, add label to entities possible in sentiment span for concepts, added AdvTime,ECon #23-nl
-724;80;typeConcept:typeBeginConcept+CSPosSentiment;+CSPosSentimentConceptBegin;#23-nl, added ^typeRelation #23-nl
-725;80;typeConcept:typeBeginConcept+CSNegSentiment;+CSNegSentimentConceptBegin;#23-nl, added ^typeRelation #23-nl
-782;80;CSCon:CSAdj:CSCAdv:CSNegCon:CSNum:CSOrdNum:CSShAdj:CSZadny;+CSTypeConcept;#24-nl, add extra label to entities with typeconcept, so it can be used with OR together with other labels 
-738;80;CSAdj|.CSAdj:CSComma|CSAndOr|.CSCAdv|CSAdj|CSCon;*|+CSPossibleSentimentConceptSpan|+CSPossibleSentimentConceptSpan|*|*|*;#23-nl, preparation: so span doesn't stop in enumeration of adjectives
-732;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSPosSentimentConceptStop;#23-nl - stop at BeginConcept in nominative case
-733;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSNegSentimentConceptStop;#23-nl - stop at BeginConcept in nominative case
-801;80;typeConcept:typeBeginConcept+CSPosSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSPosSentimentConceptStop;#24-nl - stop at Posspron in nominative case
-802;80;typeConcept:typeBeginConcept+CSNegSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSNegSentimentConceptStop;#24-nl - stop at Posspron in nominative case
-730;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#23-nl - pattern noun-preposition-noun includes a beginconcept
-731;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#23-nl - pattern noun-preposition-noun includes a beginconcept
-728;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSPosSentiment;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#23-nl - basic pattern noun-preposition-noun, typeconcept:typeendconcept->TypeConcept:ECon #24-nl
-729;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSNegSentiment;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#23-nl - basic pattern noun-preposition-noun, typeconcept:typeendconcept->TypeConcept:ECon #24-nl
-741;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#23-nl - stop at punctuation
-742;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#23-nl - stop at punctuation
-760;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#24-nl, so span doesn't stop in enumeration of adjectives
-761;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#24-nl, so span doesn't stop in enumeration of adjectives
-763;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#24-nl, so span doesn't stop in enumeration of adjectives
-764;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#24-nl, so span doesn't stop in enumeration of adjectives
-709;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSPosSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;#23-nl, left expansion for adjective in sentiment span - don't add sentiment stop
-710;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSNegSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;#23-nl, left expansion for adjective in sentiment span - don't add sentiment stop
-707;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSPosSentiment|CSAdj+CSPosSentiment|^CSCon:CSAdj:CSPosSentiment:CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#23-nl, left expansion for adjective not yet in sentiment span - add sentiment stop
-708;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSNegSentiment|CSAdj+CSNegSentiment|^CSCon:CSAdj:CSNegSentiment:CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#23-nl, left expansion for adjective not yet in sentiment span - add sentiment stop
-765;80;CSList|*CSList+^CSPosSentimentConceptBegin|CSPosSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptBegin|*;#24-nl, expansion to beginning of list
-766;80;CSList|*CSList+^CSNegSentimentConceptBegin|CSNegSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptBegin|*;#24-nl, expansion to beginning of list
-712;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|*;#23-nl, right expansion for adjective in sentiment span - don't add sentiment stop
-713;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|*;#23-nl, right expansion for adjective in sentiment span - don't add sentiment stop
-716;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;#23-nl, right expansion for adjective not yet in sentiment span - add sentiment stop
-717;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;#23-nl, right expansion for adjective not yet in sentiment span - add sentiment stop
-714;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;#23-nl, right expansion for adjective not yet in sentiment span - add sentiment stop
-715;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;#23-nl, right expansion for adjective not yet in sentiment span - add sentiment stop
-721;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;#23-nl, left expansion for sentiment adjective after copula + subject
-720;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;#23-nl, left expansion for sentiment adjective after copula + subject
-722;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;#23-nl, left expansion for sentiment adjective after copula + subject
-723;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;#23-nl, left expansion for sentiment adjective after copula + subject
-699;80;typeOther+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #23-nl, added typebeginendconcept #24-nl
-700;80;typeOther+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #23-nl, added typebeginendconcept #24-nl
-718;80;CSBracket1:CSBracket2+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #23-nl (separate rule next to r699 because labels and types can't be combined with OR)
-719;80;CSBracket1:CSBracket2+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #23-nl (separate rule next to r700 because labels and types can't be combined with OR)
-750;80;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep #23-nl
-751;80;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep #23-nl
-752;80;CSPosSentimentStop:CSPosSentimentConceptStop+CSPosSentiment:CSPosSentimentBegin:CSPosSentimentConceptBegin;-CSPosSentimentStop-CSPosSentimentConceptStop;#23-nl
-753;80;CSNegSentimentStop:CSNegSentimentConceptStop+CSNegSentiment:CSNegSentimentBegin:CSNegSentimentConceptBegin;-CSNegSentimentStop-CSNegSentimentConceptStop;#23-nl
-771;80;CSPosSentimentConceptBegin;-CSPosSentimentConceptBegin+CSPosSentimentBegin;#24-nl
-772;80;CSNegSentimentConceptBegin;-CSNegSentimentConceptBegin+CSNegSentimentBegin;#24-nl
-773;80;CSPosSentimentConceptStop;-CSPosSentimentConceptStop+CSPosSentimentStop;#24-nl
-774;80;CSNegSentimentConceptStop;-CSNegSentimentConceptStop+CSNegSentimentStop;#24-nl
-767;85;^CSNegation|CSNegation|CSPosSentiment+CSInNegspan;*|*|+CSNegPosSent;mark sentiment markers in negation span #24-nl
-768;85;^CSNegation|CSNegation|CSNegSentiment+CSInNegspan;*|*|+CSNegNegSent;mark sentiment markers in negation span #24-nl
-769;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegPosSent|.CSInNegspan+^CSNegPosSent|CSInNegspan+CSNegPosSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSNegSentimentBegin-CSPosSentimentBegin|-CSPosSentimentBegin-CSNegSentimentStop|-CSNegPosSent-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentStop+CSNegSentimentStop;reverse sentiment, #24-nl
-770;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegNegSent|.CSInNegspan+^CSNegNegSent|CSInNegspan+CSNegNegSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSPosSentimentBegin-CSNegSentimentBegin|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegNegSent-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentStop+CSPosSentimentStop;reverse sentiment, #24-nl
-776;85;typeOther+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #24-nl
-777;85;typeOther+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #24-nl
-778;85;CSBracket1:CSBracket2+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #24-nl (separate rule next to rxxx because labels and types can't be combined with OR)
-779;85;CSBracket1:CSBracket2+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep #24-nl (separate rule next to rxxx because labels and types can't be combined with OR)
-780;85;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep #24-nl
-781;85;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep #24-nl
-234;90;CSAdj:CSCAdv:CSNum+CSBCon;CSBCon;#11-nl,added CAdv #21-nl,added Num #22-nl, moved from phase 45
-302;90;CSAndOr:CSConj:CSRelpron:CSCopula+CSBeginrel;CSBeginrel;#16-nl, added Copula #22-nl, moved from phase 80 #23-nl
-787;90;CSNum+CSAdvTime;-CSNum;#25-nl
+
+/* conjunctions
+
+365;66;CSVerb+^CSAux|CSConj:CSRelpron|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*;
+336;66;^CSPBegin|CSConjPB;*|+CSBeginrel+CSPBegin;
+426;66;CSCon|CSPrep|CSRelpron;*|+CSPBegin|*;
+
+/* participles
+
+342;66;^CSAux|CSCon|CSPart+^CSNTPart;*|*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase
+670;66;CSCon|CSPart+^CSNTPart;*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase
+
+/* main verb after relative clause
+
+368;66;CSCon|.CSComma|CSPart+CSPBegin|*^CSVerb:CSComma:CSPBegin|CSVerb+^CSInf;*|*|*|*|+CSPBegin;look for main verb after participle as phrase begin
+
+/*PHASE 70: negation
+/*==================
+/* preparation
+/*------------
+
+397;70;CSVerb:CSPart+CSNegation;+CSNegVerb;adding label for negated verb to be used to detect the negation span
+250;70;CSCon:CSRAdv+CSNegation;-CSNegation;remove Negation from Con or RAdv meant for the other option in case of ambiguity (eg. VerbCon+Negation, LongPartCon+Negation, AdjAdv+Negation ...)
+
+/* split relations
+
+301;70;CSPart+CSNegation|CSAndOr|CSPart+^CSNegation;*|+CSBeginrel|*;for medical data
+
+/* negative adjectives: assign NoExpansion for preposition-concept patterns
+
+674;70;CSPunctuation:SBegin:CSListnumber:CSConj|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon|CSAndOr|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion|*|+CSNoExpansion;
+380;70;^CSCon:CSECon:CSPRPron:CSPerspron:CSAdj:CSAdvTime:CSAdvTemp|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon+^CSBCon;*|*|*|+CSNoExpansion;
+431;70;CSCon+CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion;
+672;70;^CSPrep|CSCon:CSECon:CSPRPron:CSPerspron|CSAdvStruct|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|*|*|-CSNoExpansion;correction for noun-advstruct-prep: remove NoExpansion
+
+/* expansion of negation scope
+/*----------------------------
+/* expansion to left
+/*- - - - - - - - - 
+/* for pattern with 'to be'
+
+678;70;CSPRPron:CSPerspron|typeConcept:typePathRelevant+^CSNoExpansion|CSAux+CSCopula|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|+CSNegStop;
+379;70;typeConcept:typePathRelevant+^CSNoExpansion|.CSAux+^CSCopula|CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|*|+CSNegStop;
+677;70;CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|+CSNegStop;
+679;70;CSKtery|CSCopula+CSNegBegin;+CSNegBegin|*;
+
+/* for concept-preposition-concept pattern
+
+382;70;CSCon:CSPRPron+^CSNoExpansion|*CSPrep:CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*;many prepositions
+381;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*|*;one preposition
+
+/* for concept-andor-concept pattern
+
+383;70;SBegin:CSConj|*typeConcept|CSAndOr|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon+^CSNegBegin|typeConcept+CSNegBegin;*|+CSNegBegin|*|*|*;one preposition
+
+/* for 'ani'
+
+686;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegVerb:CSNegRel:CSPunctuation:CSAni|CSAni+^CSPBegin;+CSNegBegin|*|*;
+
+/* for negative verbs
+
+389;70;CSPBegin+CSList|*CSList|CSNegVerb:CSNegRel;+CSNegBegin|*|*;expansion to enumeration
+689;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel:CSNoExpansion|"není"+^CSPBegin;+CSNegBegin|*|*;variant r385 for 'není': no left expansion for prep-noun pattern
+385;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel:CSAni+^CSPBegin:"není";+CSNegBegin|*|*;
+673;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|*CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon:CSAdvTime+^CSNegBegin|CSNegVerb;+CSNegBegin|*|*|*;for pattern noun-preposition-noun
+429;70;typeConcept+^CSNoExpansion|.CSInf+^CSNegVerb|CSNegVerb:CSNegRel;+CSNegBegin|*|*;
+403;70;*CSList+^CSNegBegin|CSList+CSNegBegin;+CSNegBegin|*;further expansion to enumeration
+424;70;CSConj|CSList+CSNegBegin;+CSNegBegin|*;
+
+/* general expansion to right
+/*- - - - - - - - - - - - - -
+
+387;70;CSNegVerb:CSAni:CSNegRel;+CSNegBegin;
+
+/* expansion for 'ani'
+/*- - - - - - - - - - 
+/* left expansion
+
+432;70;*CSPrep:CSAdj:CSCon:CSRefl|CSAni;+CSNegBegin|*;
+
+/* stop negation expansion
+
+390;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;expansion up to punctuation
+391;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:SEnd:CSNegStop|CSPBegin:SEnd+^CSNegation:CSNegBegin;*|*|+CSNegStop;expansion up to next phrase begin or sentence end
+398;70;CSBracket1|CSNegBegin|.^CSBracket2|CSBracket2;*|*|*|+CSNegStop;limit negation span for one or two entities between brackets (see r334)
+
+/* assign a temp marker to all words in a negation span, first part
+/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+405;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;assign a temp marker to all words in a negation span
+
+/* expansion for 'bez(e)' (1st part)
+/*- - - - - - - - - - - - - - - - - 
+/* right expansion
+
+420;70;CSNegPrep;+CSNegBegin;
+418;70;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron;+CSPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+419;70;CSPrep:CSList:CSAdvTemp;+CSPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+421;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|CSPBegin;*|*|+CSNegStop;
+296;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|^typeConcept:CSNegation:CSNegBegin:CSInNegspan;*|*|+CSNegStop;
+
+/* left expansion
+
+298;70;CSCon|"bez":"beze"+^CSNoExpansion|^"toho";+CSNegBegin|*|*;not for multiwords with 'bez(e)', not with subclause
+
+/* left expansion to antecedent
+/*- - - - - - - - - - - - - - -
+
+427;70;CSCon|.CSComma|CSPrep+CSNegBegin|CSRelpron;+CSNegBegin|*|*|*;
+434;70;CSVerb+^CSInf|*CSPosspron:CSAdj:CSCAdv:CSCon:CSBCon|CSPrep|*CSAdj:CSCon|CSComma|CSKtery+CSNegBegin;*|+CSNegBegin|*|*|*|*;
+428;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery+CSNegBegin;+CSNegBegin|*|*;
+669;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery|.^CSPBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel+^CSPBegin;+CSNegBegin|*|*|*|*;
+
+/* expansion for 'bez(e)' (2nd part)
+/*- - - - - - - - - - - - - - - - - 
+/* stop negation expansion after 'bez'
+
+430;70;CSNegPrep|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;expansion up to punctuation
+
+/* right expansion for 'bez' + subclause
+
+404;70;CSNegPrep|"toho"|CSComma|CSConj|.^CSPBegin:SEnd:CSPunctuation:CSNegStop|CSPBegin:SEnd:CSPunctuation+^CSNegation:CSNegBegin;+CSNoExpansion|*|-CSNegStop|-CSNegStop|*|+CSNegStop;'bez' plus subclause 
+
+/* clean conflicting negation parameters
+/*--------------------------------------
+
+388;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|*|+CSNegStop;move NegStop from nonrelevant to next lexrep, in case of several NonRelevants
+297;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegStop;move NegStop from nonrelevant to next lexrep
+386;70;CSNegBegin+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegBegin;move NegBegin from nonrelevant to next lexrep (remark: make sure all labels covered by the types are in phase 70)
+783;70;CSNegBegin+typeOther:typeAmbiguous;-CSNegBegin;
+
+/* assign a temp marker to all words in a negation span, second part
+/*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+775;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;copy of r405 so all words in negation span get InNegspan label
+
+/*PHASE 80: sentiment
+/*===================
+/*Remarks:
+/* - Sentiment attributes get assigned via the user dictionary
+/* - typeConcept etc. only works for the labels of this type which are defined in phase 80
+/* Expansion for sentiment attribute on verb, participle or adverb
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*  Add SentimentBegin and SentimentStop for expansion to the whole phrase
+
+748;80;CSVerb:CSPart:CSRAdv+CSPosSentiment+CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSPosSentimentStop;
+749;80;CSVerb:CSPart:CSRAdv+CSNegSentiment+CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSNegSentimentStop;
+746;80;CSPBegin|.^CSPBegin:CSPosSentiment|CSVerb:CSPart:CSRAdv+CSPosSentiment+^CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSPosSentimentStop;
+747;80;CSPBegin|.^CSPBegin:CSNegSentiment|CSVerb:CSPart:CSRAdv+CSNegSentiment+^CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSNegSentimentStop;
+
+/* Expansion for sentiment attribute on type(Begin)Concept
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+/*  Preparation
+
+692;80;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSPrep+^CSBCon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
+711;80;CSAdvStruct:CSAdvTime:CSECon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
+
+/*  Add SentimentBegin to sentiment marker as Concept
+
+724;80;typeConcept:typeBeginConcept+CSPosSentiment;+CSPosSentimentConceptBegin;
+725;80;typeConcept:typeBeginConcept+CSNegSentiment;+CSNegSentimentConceptBegin;
+782;80;CSCon:CSAdj:CSCAdv:CSNegCon:CSNum:CSOrdNum:CSShAdj:CSZadny;+CSTypeConcept;add extra label to entities with typeconcept, so it can be used with OR together with other labels
+
+/*  Add SentimentStop to sentiment marker as Concept -> expand to the right until next verb form, negation marker or beginning of phrase, include lists
+
+738;80;CSAdj|.CSAdj:CSComma|CSAndOr|.CSCAdv|CSAdj|CSCon;*|+CSPossibleSentimentConceptSpan|+CSPossibleSentimentConceptSpan|*|*|*;preparation: so span doesn't stop in enumeration of adjectives
+732;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSPosSentimentConceptStop;stop at BeginConcept in nominative case
+733;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSNegSentimentConceptStop;stop at BeginConcept in nominative case
+801;80;typeConcept:typeBeginConcept+CSPosSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSPosSentimentConceptStop;stop at Posspron in nominative case
+802;80;typeConcept:typeBeginConcept+CSNegSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSNegSentimentConceptStop;stop at Posspron in nominative case
+730;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;pattern noun-preposition-noun includes a beginconcept
+731;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;pattern noun-preposition-noun includes a beginconcept
+728;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSPosSentiment;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;basic pattern noun-preposition-noun
+729;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSNegSentiment;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;basic pattern noun-preposition-noun
+741;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;stop at punctuation
+742;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;stop at punctuation
+760;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+761;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+763;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+764;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+
+/*  Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
+
+709;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSPosSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
+710;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSNegSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
+707;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSPosSentiment|CSAdj+CSPosSentiment|^CSCon:CSAdj:CSPosSentiment:CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;left expansion for adjective not yet in sentiment span - add sentiment stop
+708;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSNegSentiment|CSAdj+CSNegSentiment|^CSCon:CSAdj:CSNegSentiment:CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;left expansion for adjective not yet in sentiment span - add sentiment stop
+765;80;CSList|*CSList+^CSPosSentimentConceptBegin|CSPosSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptBegin|*;expansion to beginning of list
+766;80;CSList|*CSList+^CSNegSentimentConceptBegin|CSNegSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptBegin|*;expansion to beginning of list
+712;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|*;right expansion for adjective in sentiment span - don't add sentiment stop
+713;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|*;right expansion for adjective in sentiment span - don't add sentiment stop
+716;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+717;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+714;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+715;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+721;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+720;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+722;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+723;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+
+/* Clean-up: move SentimentStop and SentimentBegin to next relevant entity
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+699;80;typeOther+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+700;80;typeOther+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+718;80;CSBracket1:CSBracket2+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep (separate rule next to r699 because labels and types can't be combined with OR)
+719;80;CSBracket1:CSBracket2+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep (separate rule next to r700 because labels and types can't be combined with OR)
+750;80;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+751;80;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+
+/* Remove conflicting attributes
+
+752;80;CSPosSentimentStop:CSPosSentimentConceptStop+CSPosSentiment:CSPosSentimentBegin:CSPosSentimentConceptBegin;-CSPosSentimentStop-CSPosSentimentConceptStop;
+753;80;CSNegSentimentStop:CSNegSentimentConceptStop+CSNegSentiment:CSNegSentimentBegin:CSNegSentimentConceptBegin;-CSNegSentimentStop-CSNegSentimentConceptStop;
+
+/* Add general begin and stop labels
+
+771;80;CSPosSentimentConceptBegin;-CSPosSentimentConceptBegin+CSPosSentimentBegin;
+772;80;CSNegSentimentConceptBegin;-CSNegSentimentConceptBegin+CSNegSentimentBegin;
+773;80;CSPosSentimentConceptStop;-CSPosSentimentConceptStop+CSPosSentimentStop;
+774;80;CSNegSentimentConceptStop;-CSNegSentimentConceptStop+CSNegSentimentStop;
+
+/* PHASE 85: NEGATION + SENTIMENT
+/* Detect sentiment markers in negation span
+
+767;85;^CSNegation|CSNegation|CSPosSentiment+CSInNegspan;*|*|+CSNegPosSent;mark sentiment markers in negation span
+768;85;^CSNegation|CSNegation|CSNegSentiment+CSInNegspan;*|*|+CSNegNegSent;mark sentiment markers in negation span
+
+/* Reverse sentiment
+
+769;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegPosSent|.CSInNegspan+^CSNegPosSent|CSInNegspan+CSNegPosSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSNegSentimentBegin-CSPosSentimentBegin|-CSPosSentimentBegin-CSNegSentimentStop|-CSNegPosSent-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentStop+CSNegSentimentStop;reverse sentiment
+770;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegNegSent|.CSInNegspan+^CSNegNegSent|CSInNegspan+CSNegNegSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSPosSentimentBegin-CSNegSentimentBegin|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegNegSent-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentStop+CSPosSentimentStop;reverse sentiment
+
+/* Clean-up: move SentimentStop and SentimentBegin to next relevant entity, 2nd part
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+776;85;typeOther+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+777;85;typeOther+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+778;85;CSBracket1:CSBracket2+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+779;85;CSBracket1:CSBracket2+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+780;85;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+781;85;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+
+/*PHASE 90: clean-up
+/*------------------
+
+234;90;CSAdj:CSCAdv:CSNum+CSBCon;CSBCon;
+302;90;CSAndOr:CSConj:CSRelpron:CSCopula+CSBeginrel;CSBeginrel;
+787;90;CSNum+CSAdvTime;-CSNum;
