@@ -8,7 +8,7 @@ CPP_LANGUAGE = 14
 
 STRICT = 1
 
-INCLUDEDIRS = $(ROOT_DIR)/modules/shell/src $(ROOT_DIR)/modules/core/src/headers $(ICUDIR)/include $(ROOT_DIR)/modules/base/src/headers $(ROOT_DIR)/modules/ali $(ROOT_DIR)/shared/System/unix $(ROOT_DIR)/shared/System $(ROOT_DIR)/shared/Utility $(ROOT_DIR)/kernel/common/h
+INCLUDEDIRS = $(ROOT_DIR)/modules/core/src/headers $(ICUDIR)/include $(ROOT_DIR)/modules/base/src/headers $(ROOT_DIR)/modules/ali $(ROOT_DIR)/shared/System/unix $(ROOT_DIR)/shared/System $(ROOT_DIR)/shared/Utility $(ROOT_DIR)/kernel/common/h
 
 SOURCES = $(ROOT_DIR)/modules/core/src/*.cpp $(ROOT_DIR)/shared/Utility/utlCacheList.cpp $(ROOT_DIR)/shared/Utility/utlCountedByteArray.cpp
 LOCATION = bin
