@@ -3,6 +3,7 @@
 #include "IkLabel.h"
 #include "utlExceptionFrom.h"
 #include <algorithm>
+#include <limits.h>
 
 namespace iknow {
   namespace core {

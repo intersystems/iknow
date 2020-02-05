@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <functional>
 #include <stdio.h>
+#include <string.h>
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
