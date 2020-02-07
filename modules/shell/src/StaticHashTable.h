@@ -112,7 +112,7 @@ namespace iknow {
 	template<typename It>
 	const BucketT* FindBucket(const It begin, const It end) const {
 	  if (Begin() == End()) return End(); //empty table
-	  return Begin() + (hash_range(begin, end) % (End() - Begin()));
+	  return Begin() + (stable_hash::hash_range(begin, end) % (End() - Begin()));
 	}
         const BucketT* FindBucket(const KeyT& key) const {
           return FindBucket(key.begin(), key.end());
@@ -134,7 +134,7 @@ namespace iknow {
 	typedef Table<KeyT,ValueT> TableT;
 	Builder(size_t bucket_count) : bucket_count_(bucket_count) {}
 	void Insert(const CountedStringT* key, const ValueT* value) {
-	  map_.insert(typename Map::value_type(std::hash<std::basic_string<char_t>>()(std::basic_string<char_t>(*key)) % bucket_count_, std::make_pair(key, value)));
+		map_.insert(typename Map::value_type(stable_hash::hash_range(key->begin(), key->end()) % bucket_count_, std::make_pair(key, value)));
 	}
 	TableT Build(RawAllocator& allocator) {
 	  std::vector<PairT> pairs_vector;

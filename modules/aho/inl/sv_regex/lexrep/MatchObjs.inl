@@ -11,6 +11,4 @@ static const LabelId Labels9[] = {108,34,} /* SVPossibleGennoun;SVCon */ ;
 static const LabelId Labels10[] = {140,123,151,} /* SVVerbPart;SVsVerbPart;SVRegex */ ;
 static const LabelId Labels11[] = {145,} /* SVYear */ ;
 
-static const char* const metalist[] = { 
-" ",
-};
+static const char* metalist0 = " ";

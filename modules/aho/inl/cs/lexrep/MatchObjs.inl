@@ -1118,6 +1118,4 @@ static const LabelId Labels1116[] = {273,} /* Lit_mÃ­ry */ ;
 static const LabelId Labels1117[] = {326,-1,4,} /* SBegin;-;Punctuation */ ;
 static const LabelId Labels1118[] = {326,-1,74,-1,90,33,} /* SBegin;-;CSAdvStruct;-;CSComma;CSPunctuation */ ;
 
-static const char* const metalist[] = { 
-" ",
-};
+static const char* metalist0 = " ";

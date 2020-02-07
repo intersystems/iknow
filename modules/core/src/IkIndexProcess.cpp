@@ -1309,9 +1309,8 @@ void IkIndexProcess::SolveAmbiguous(Lexreps& lexreps)
     } else {   // Generalize the first type.
       switch (firstType) {
 	  case IkLabel::PathRelevant: {
-        // if (m_pKnowledgebase->GetMetadata<kPathConstruction>() == kCRCSequence) lexrep_type = IkLabel::Nonrelevant; // old style
-        // else lexrep_type = IkLabel::PathRelevant; // new style : kPathRelevant
-		lexrep_type = IkLabel::PathRelevant;
+        if (m_pKnowledgebase->GetMetadata<kPathConstruction>() == kCRCSequence) lexrep_type = IkLabel::Nonrelevant; // old style
+        else lexrep_type = IkLabel::PathRelevant; // new style : kPathRelevant
 	  } break;
       case IkLabel::Unknown:
 	  case IkLabel::Nonrelevant:
