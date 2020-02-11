@@ -28,7 +28,6 @@ using std::transform;
 
 SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(RawKBData* kb_data) : kb_data_(kb_data) {}
 SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(unsigned char* kb_data) : kb_data_(reinterpret_cast<RawKBData*>(kb_data)) {}
-SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(RawAllocator& allocator, AbstractKnowledgebase& kb, bool is_compiled) {}
   
 void SharedMemoryKnowledgebase::FilterInput(iknow::base::String& input) const {
   OFFSETPTRGUARD;

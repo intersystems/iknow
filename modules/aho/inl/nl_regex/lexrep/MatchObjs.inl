@@ -6,6 +6,4 @@ static const LabelId Labels4[] = {75,} /* NLLayout */ ;
 static const LabelId Labels5[] = {82,} /* NLNum */ ;
 static const LabelId Labels6[] = {85,} /* NLPart */ ;
 
-static const char* const metalist[] = { 
-" ",
-};
+static const char* metalist0 = " ";

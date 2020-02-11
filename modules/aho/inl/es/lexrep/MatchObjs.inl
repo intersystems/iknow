@@ -276,3 +276,5 @@ static const LabelId Labels274[] = {202,-1,91,29,-1,107,144,184,-1,66,} /* SBegi
 static const LabelId Labels275[] = {202,-1,107,144,-1,203,} /* SBegin;-;ESNo;ESNegation;-;SEnd */ ;
 static const LabelId Labels276[] = {202,-1,107,144,184,-1,66,} /* SBegin;-;ESNo;ESNegation;Lit_no;-;ESComma */ ;
 
+static const char* metalist0 = "40";
+static const char* metalist1 = " ";

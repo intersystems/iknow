@@ -136,6 +136,4 @@ static const LabelId Labels134[] = {203,99,} /* CSVerb;CSConIfCap */ ;
 static const LabelId Labels135[] = {203,99,209,} /* CSVerb;CSConIfCap;CSNegation */ ;
 static const LabelId Labels136[] = {203,209,} /* CSVerb;CSNegation */ ;
 
-static const char* const metalist[] = { 
-" ",
-};
+static const char* metalist0 = " ";

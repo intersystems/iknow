@@ -25,4 +25,26 @@ std::size_t hash_range(TIter begin, TIter end) {
 template <typename TKey, typename TValue>
 using PairUnorderedMap = std::unordered_map<TKey, TValue, pair_hash>;
 
+namespace stable_hash {
+
+	//see http://www.cse.yorku.ca/~oz/hash.html
+	template<typename It>
+	size_t dbm_hash(const It begin, const It end)
+	{
+		size_t hash = 5381;
+		for (It i = begin; i != end; ++i) {
+			hash = ((hash << 5) + hash) + *i;
+		}
+		return hash;
+	}
+	//Currently we only need short hash functions
+	template<typename It>
+	size_t hash_range(const It begin, const It end) {
+		return dbm_hash(begin, end);
+	}
+	template<typename T>
+	size_t hash_value(const T& t) {
+		return hash_range(t.begin(), t.end());
+	}
+}
 #endif //IKNOW_BASE_UTILITY_H_

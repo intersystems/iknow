@@ -464,6 +464,4 @@ static const LabelId Labels462[] = {335,-1,62,153,154,1,} /* SBegin;-;NLConj;NLN
 static const LabelId Labels463[] = {335,-1,84,1,} /* SBegin;-;NLOndvw;Join */ ;
 static const LabelId Labels464[] = {335,-1,95,1,1,} /* SBegin;-;NLRAdv;Join;Join */ ;
 
-static const char* const metalist[] = { 
-" ",
-};
+static const char* metalist0 = " ";

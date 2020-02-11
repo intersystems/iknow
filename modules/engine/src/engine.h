@@ -10,93 +10,122 @@
 #define IKNOW_API
 #endif
 
+//
+// stl library includes
+//
 #include <string>
 #include <vector>
 #include <map>
 
+// 
+// ICU dependency, engine is build with release 65-1, look for headers and binaries on github :
+// https://github.com/unicode-org/icu/releases/tag/release-65-1
+//
+// Unzip the files in a directory, store that directory name into environment variable ICUDIR (eg: ICUDIR=C:\thirdparty\icu4c-65_1-Win64-MSVC2017)
+// Dependencies file for Visual Studio 2019 solution (modules\Dependencies.props) uses this variable to set correct ICU include and library directories.
+//
 #include "unicode/utypes.h"
 #include "unicode/unistr.h"
 
+//
+// includes from the iKnow sources : "..\engine\src, ..\base\src\headers, ..\shell\src, ..\core\src\headers"
+//
 #include "IkTypes.h"
-#include "IkLabel.h"
 #include "IkIndexInput.h"
 #include "IkIndexOutput.h"
 
-// iknowdata collects the output of the text indexer.
-namespace iknowdata {
-	// after indexing, a document is a list of sentence data, the latter is a list of "struct Entity" objects.
+namespace iknowdata { // to bundle all generated data
+
+	typedef unsigned short Entity_Ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
+	typedef unsigned short Attribute_Ref; // reference to sentence attribute vector, is less (or equal) Entity_Ref.
+
+	//
+	// Basic functionality of iknow indexing is splitup of text in entities : 4
+	//
 	struct Entity
 	{
-		enum eType { NonRelevant = 0, Concept, Relation, PathRelevant }; // The 4 entity base types
+		static const size_t kNoConcept = static_cast<size_t>(-1);	// An concept entity receives a unique index in the text source, the others: kNoConcept
+		enum eType { NonRelevant = 0, Concept, Relation, PathRelevant }; // The 4 base entity base types : concept, relation, path-relevant and non-relevant
 
-		// the constructors are invoked by the indexer, to store linguistic data, for the client to "read" 
-		Entity() : type_(NonRelevant) // The default one, for historical reasons
-		{}
-		Entity(eType type, size_t start, size_t stop, std::string& index) : type_(type), offset_start_(start), offset_stop_(stop), index_value_(index), entity_id_(NonRelevant)
-		{}
-		Entity(eType type, size_t start, size_t stop, std::string& index, double dominance) : type_(type), offset_start_(start), offset_stop_(stop), index_value_(index), dominance_value_(dominance), entity_id_(NonRelevant)
-		{}
-		Entity(eType type, size_t start, size_t stop, std::string& index, double dominance, size_t entity_id) : type_(type), offset_start_(start), offset_stop_(stop), index_value_(index), dominance_value_(dominance), entity_id_(entity_id)
-		{}
+		Entity(eType type, 
+			size_t start, size_t stop, 
+			std::string& index, 
+			double dominance = 0.0, 
+			size_t entity_id = kNoConcept
+		) : type_(type), offset_start_(start), offset_stop_(stop), index_(index), dominance_value_(dominance), entity_id_(entity_id) {}
 
-		eType type_;	// type of entity, see eType definition
-		size_t offset_start_;	// text offset of entity start position
-		size_t offset_stop_;	// text offset of entity stop position
-		// the index_value is the normalized form of the entity text
-		std::string /*const*/ index_value_; // utf8 encoded, g++ refuses 'const' because of needed copy constructor in vector
-		double dominance_value_;
-		size_t entity_id_; // if not concept, this value equals -1
+		eType type_; // defines the entity type
+		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
+		std::string index_; // the normalized entity textual representation, utf8 encoded
+		double dominance_value_; // a dominance value for each concept in the source document is calculated, most important concepts have highest score.
+		size_t entity_id_; // unique concept index in the source document, if not concept, this value equals kNoConcept
 	};
-
-	// the definition of a sentence : a vector of entities
-	typedef std::vector<Entity> iKnow_Sentence;
-
-	// utility functions to retrieve the starting and end offset of a sentence
-	inline size_t sentence_offset_start(iKnow_Sentence& sentence) { return sentence.begin()->offset_start_; }
-	inline size_t sentence_offset_stop(iKnow_Sentence& sentence) { return (sentence.end() - 1)->offset_stop_; }
-
-	// the text source (document) after indexing : a vector of iKnow_Sentence objects
-	typedef std::vector<iKnow_Sentence> iKnow_Sentences;
-	// the definition of a path : a (reduced) vector of entities : non-relevants are filtered
-	typedef std::vector<Entity> iKnow_Path;
-	// the text document as a collection of iKnow_Path objects
-	typedef std::vector<iKnow_Path> iKnow_Paths;
-	// the text document as a collection of a per sentence CRC list
-	typedef std::vector<std::vector<Entity> > iKnow_CRCs;
-}
-
-	struct Attribute
-	{
-		enum aType { Negation, PositiveSentiment, NegativeSentiment, Measurement, Other };
-
-		Attribute(aType att_type, size_t start, size_t stop, std::string& level) : type_(att_type), offset_start_(start), offset_stop_(stop), level_(level), is_marker_(true), SCOPE(0)
-		{}
-		Attribute(aType att_type, size_t start, size_t stop) : type_(att_type), offset_start_(start), offset_stop_(stop), is_marker_(false), SCOPE(0)
-		{}
-		aType type_;
-		size_t offset_start_;
-		size_t offset_stop_;
-		std::string level_; // the attribute lexreps
-		bool is_marker_;
-		size_t ID; // id number
-		size_t SCOPE; // scope id, if any, otherwise 0
-		std::string value_, unit_, value2_, unit2_; // properties for measurement attributes
-	};
-
 	
-	typedef std::vector<Attribute> iKnow_Attributes; // document based, not per sentence
-// }
+	struct Sent_Attribute // sentence attribute
+	{
+		enum aType { Negation=1, DateTime=2, PositiveSentiment=5, NegativeSentiment=6, Frequency=8, Duration=9, Measurement=10, Certainty=11, Other }; // Supported attributes : negation marker, sentiment marker & measurement
+
+		Sent_Attribute(aType att_type, 
+			size_t start, size_t stop, 
+			std::string& marker
+		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
+
+		aType type_;
+		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
+		std::string marker_; // the normalized attribute textual representation, utf8 encoded
+		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
+
+		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
+	};
+
+	struct Path_Attribute_Span // path attribute span : expresses range of attribute
+	{
+		Attribute_Ref sent_attribute_ref; // reference to sentence attribute
+		Entity_Ref entity_start_ref, entity_stop_ref; // reference to entity vector range, expressing the attribute expansion.
+	};
+
+	struct Sentence
+	{
+		typedef std::vector<Entity> Entities;
+		typedef std::vector<Sent_Attribute> Sent_Attributes;
+		typedef std::vector<Entity_Ref> Path;	// unsigned short indexes the Entity in the iKnow_Entities vector 
+		typedef std::vector<Path_Attribute_Span> Path_Attributes;	// expanded 
+
+		Entities			entities;	// the sentence entities
+		Sent_Attributes		sent_attributes;	// the sentence attributes
+		Path				path;		// the sentence path
+		Path_Attributes		path_attributes;	// expanded attributes in the sentence
+
+		// utility functions : return text source offsets of the sentence : start and stop.
+		size_t offset_start() const { return entities.begin()->offset_start_; }
+		size_t offset_stop() const { return (entities.end() - 1)->offset_stop_; }
+	};
+
+	struct Text_Source
+	{
+		typedef iknow::core::IkConceptProximity::ProximityPairVector_t Proximity;
+		typedef std::vector<Sentence> Sentences;
+
+		Sentences	sentences;	// All sentence data collected from the text source
+		Proximity	proximity;	// Proximity data collected
+	};
+
+	typedef Text_Source::Sentences::const_iterator SentenceIterator;
+	typedef Sentence::Entities::const_iterator	EntityIterator;
+	typedef Sentence::Sent_Attributes::const_iterator AttributeMarkerIterator;
+	typedef Sentence::Path::const_iterator PathIterator;
+	typedef Sentence::Path_Attributes::const_iterator PathAttributeIterator;
+
+}
 
 class IKNOW_API iKnowEngine
 {
 public:
-	// Utility function : retrieves the set of supported languages : ("en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs")
 	static const std::set<std::string>& GetLanguagesSet(void);
 
 	enum errcodes {
 		iknow_language_not_supported = -1 // unsupported language
 	};
-	// Constructor and destructor
 	iKnowEngine();
 	~iKnowEngine();
 	
@@ -107,20 +136,15 @@ public:
 	//	- works synchronous : the complete text_source is indexed, after return, use iKnowEngine methods to retrieve indexing information.
 	//	- works single threaded : a mutex protects multithread functioning. Use multiprocess to bypass this (current) limitation.
 	void index(iknow::base::String& text_source, const std::string& language);
-
+	
 	// Adds User Dictionary annotations for customizing purposes
 	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
-		// std::cout << start << ":" << stop << ":" << UdctLabel << std::endl;
 		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
 	}
-	iknowdata::iKnow_Sentences& sentences() { return m_sentences; }
-	iknowdata::iKnow_Paths m_paths;
-	iknowdata::iKnow_CRCs m_crcs;
-	iKnow_Attributes m_attributes;
-	iknow::core::IkConceptProximity::ProximityPairVector_t m_proximity;
+
+	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 
 private:
-	iknowdata::iKnow_Sentences m_sentences;
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
 
 };
