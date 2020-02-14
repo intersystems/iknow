@@ -18,7 +18,7 @@ PROJECT = iknowenginetest
 
 OBJECTFLAGS = -D_DOUBLEBYTE -DCACHE_COM_DISABLE
 
-LIBRARIES = iknowengine
+LIBRARIES = iknowengine iknowbase
 
 LIBRARYDIRS = $(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin
 

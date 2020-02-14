@@ -13,7 +13,10 @@
 namespace iknow {
   namespace core {
     template<typename T>
-    class CORE_API IkIndexDebug {
+    class CORE_API IkIndexDebug {};
+
+    template<>
+    class CORE_API IkIndexDebug<Utf8List> {
     public:
       void SwitchKnowledgebase(const iknow::base::String& old_language, const iknow::base::String& new_language, double certainty);
       void ApplyRule(size_t rule_id, Lexreps::iterator match, size_t match_length, const IkKnowledgebase& kb);
@@ -56,10 +59,10 @@ namespace iknow {
 	  void StartTimer(void);
 	  void TraceTheTime(const int action);
 
-      const iknow::base::IkTrace<T>& GetTrace() const ;
+      const iknow::base::IkTrace<Utf8List>& GetTrace() const ;
 
     private:
-      iknow::base::IkTrace<T> trace_;
+      iknow::base::IkTrace<Utf8List> trace_;
 
     };
   }
