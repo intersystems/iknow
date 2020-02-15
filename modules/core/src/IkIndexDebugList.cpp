@@ -99,7 +99,7 @@ static Utf8List ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
         if (attribute_count) {
             std::string attr_data("(a:");
             for (size_t j = 0; j < attribute_count; ++j) {
-                Utf8List &trace = ToList(idx, j, kb);
+                Utf8List trace = ToList(idx, j, kb);
                 std::for_each(trace.begin(), trace.end(), [&attr_data](std::string& s) mutable { attr_data+=s+","; });
             }
             attr_data += ")";
@@ -128,7 +128,7 @@ static Utf8List ToList(const IkLexrep& lexrep) {
 static Utf8List ToList(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
     Utf8List out;
     for (IkMergedLexrep::const_iterator i = lexrep.LexrepsBegin(); i != lexrep.LexrepsEnd(); ++i) {
-        Utf8List& trace = ToList(*i, kb);
+        Utf8List trace = ToList(*i, kb);
         std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
     }
     out.push_back("sum="+std::to_string(lexrep.GetSummaryRelevance()));
@@ -139,7 +139,7 @@ static Utf8List ToList(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) 
 static Utf8List ToList(const IkMergedLexrep& lexrep) {
     Utf8List out;
     for (IkMergedLexrep::const_iterator i = lexrep.LexrepsBegin(); i != lexrep.LexrepsEnd(); ++i) {
-        Utf8List& trace = ToList(*i);
+        Utf8List trace = ToList(*i);
         std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
     }
     out.push_back("sum="+std::to_string(lexrep.GetSummaryRelevance()));
@@ -261,7 +261,7 @@ void IkIndexDebug<Utf8List>::ApplyRule(size_t rule_id, Lexreps::iterator match, 
     out.push_back("match_length="+ std::to_string((int)match_length));
     out.push_back("lexrep_match=");
     for (size_t i = 0; i < match_length; ++i) {
-        Utf8List& trace = ToList(*match++, kb);
+        Utf8List trace = ToList(*match++, kb);
         std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
     }
     IkRule rule = kb.GetRule(rule_id);
@@ -278,7 +278,7 @@ void IkIndexDebug<Utf8List>::RuleApplied(size_t rule_id, Lexreps::iterator match
     out.push_back("rule_id=" + std::to_string((int)rule_id));
     out.push_back("match_length=" + std::to_string((int)match_length));
     for (size_t i = 0; i < match_length; ++i) {
-        Utf8List& trace = ToList(*match++, kb);
+        Utf8List trace = ToList(*match++, kb);
         std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
     }
     trace_.Add("RuleApplicationResult", out);
@@ -325,7 +325,7 @@ void IkIndexDebug<Utf8List>::UserDictionaryMatch(const IkLexrep& lexrep, const I
 void IkIndexDebug<Utf8List>::AttributeDetected(const std::string& attribute, const IkLexrep& lexrep, const IkKnowledgebase& kb) {
     Utf8List out;
     out.push_back(attribute);
-    Utf8List& trace = ToList(lexrep, kb);
+    Utf8List trace = ToList(lexrep, kb);
     std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
     trace_.Add("AttributeDetected", out);
 }
@@ -340,7 +340,6 @@ void IkIndexDebug<Utf8List>::MergingRelations(Lexreps::const_iterator begin, Lex
   }
 }
 
-template<>
 void IkIndexDebug<Utf8List>::MergingRelation(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergingRelation", ToList(lexrep, kb));
 }
@@ -359,7 +358,6 @@ void IkIndexDebug<Utf8List>::MergingConcepts(Lexreps::const_iterator begin, Lexr
   }
 }
 
-template<>
 void IkIndexDebug<Utf8List>::MergingConcept(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
   trace_.Add("MergingConcept", ToList(lexrep, kb));
 }
@@ -420,7 +418,7 @@ void IkIndexDebug<Utf8List>::SentenceFound(const String& kb_name, double certain
 void IkIndexDebug<Utf8List>::SentenceComplete(const IkSentence& sentence, const IkKnowledgebase& kb) {
   Utf8List out;
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
-    Utf8List &trace = ToList(*i, kb);
+    Utf8List trace = ToList(*i, kb);
     std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
   }
   trace_.Add("SentenceComplete", out);
@@ -441,14 +439,16 @@ void IkIndexDebug<Utf8List>::EntityVectors(const IkSentence& sentence) {
 void IkIndexDebug<Utf8List>::InvalidEntityVector(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("InvalidEntityVector", ToList(lexrep, kb));
 }
+
 void IkIndexDebug<Utf8List>::MissingEntityVector(const IkMergedLexrep& lexrep, const IkKnowledgebase& kb) {
 	trace_.Add("MissingEntityVector", ToList(lexrep, kb));
 }
+
 void IkIndexDebug<Utf8List>::SentenceSummarizationComplete(const IkSentence& sentence)
 {
   Utf8List out;
   for (MergedLexreps::const_iterator i = sentence.GetLexrepsBegin(); i != sentence.GetLexrepsEnd(); ++i) {
-    Utf8List &trace = ToList(*i);
+    Utf8List trace = ToList(*i);
     std::for_each(trace.begin(), trace.end(), [&out](std::string& s) mutable { out.push_back(s); });
   }
   trace_.Add("SentenceSummarizationComplete", out);
@@ -492,6 +492,7 @@ void IkIndexDebug<Utf8List>::TraceKeyDouble(const char* type, const iknow::base:
 	out.push_back(std::to_string(value));
 	trace_.Add(type, out);
 }
+
 void IkIndexDebug<Utf8List>::Parameter(const iknow::base::String& name, double value) {
     Utf8List out;
 	out.push_back(IkStringEncoding::BaseToUTF8(name));
@@ -525,6 +526,7 @@ void IkIndexDebug<Utf8List>::StartTimer(void)
 {
 	time_point_now = steady_clock::now();
 }
+
 void IkIndexDebug<Utf8List>::TraceTheTime(const int action) {
 	auto d = steady_clock::now() - time_point_now;
 	size_t milli_seconds = static_cast<size_t>(duration_cast<milliseconds>(d).count());

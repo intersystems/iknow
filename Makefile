@@ -12,7 +12,7 @@ all : engine
 test : enginetest
 	$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
 
-enginetest : engine
+enginetest : engine base
 	$(MAKE) -f $(ROOT_DIR)/modules/enginetest/enginetest.mak
 engine : base shell core icu
 	$(MAKE) -f $(ROOT_DIR)/modules/engine/engine.mak
