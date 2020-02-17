@@ -82,17 +82,17 @@ Read more on the [APIs](https://github.com/intersystems/iknow/wiki/APIs) here.
 
 ## Directly
 
-The C++ API file is "engine.h" (modules\engine\src), it defines the class "iKnowEngine", and it's main method : "index(TextSource, language)". After indexing all data is stored in "iknowdata::Text_Source m_index". "iknowdata" is the namespace used for all classes that contain meaningfull data :
-- "iknowdata::struct Entity" : represents a text entity after indexing.
-- "iknowdata::struct Sent_Attribute" : represents an attribute sentence marker.
-- "iknowdata::struct Path_Attribute_Span" : represents a span in the sentence' path after attribute expansion.
-- "iknowdata::struct Sentence" : represents a sentence in the text source after indexing.
-- "iknowdata::Sentence::Path" : represents a path in a sentence.
-- "iknowdata::struct Text_Source" : represents the whole text after indexing.
+The C++ API file is "engine.h" (modules\engine\src), it defines the class "iKnowEngine", and it's main method : `index(TextSource, language)`. After indexing all data is stored in `iknowdata::Text_Source m_index`. "iknowdata" is the namespace used for all classes that contain meaningfull data :
+- `iknowdata::struct Entity` : represents a text entity after indexing.
+- `iknowdata::struct Sent_Attribute` : represents an attribute sentence marker.
+- `iknowdata::struct Path_Attribute_Span` : represents a span in the sentence' path after attribute expansion.
+- `iknowdata::struct Sentence` : represents a sentence in the text source after indexing.
+- `iknowdata::Sentence::Path` : represents a path in a sentence.
+- `iknowdata::struct Text_Source` : represents the whole text after indexing.
 
-"enginetest.cpp" (modules\enginetest\enginetest.cpp) has a demo function ("void a_short_demo(void)") that explains every step from indexing to retrieving the results.
+`enginetest.cpp` (modules\enginetest\enginetest.cpp) has a demo function (`void a_short_demo(void)`) that explains every step from indexing to retrieving the results.
 
-The main "iKnowEngine::index()" method has currently 2 limitations : it only works synchronously and single threaded. A mutex is used to synchronize threads internally, no protection is needed from the side of the client.
+The main `iKnowEngine::index()` method has currently 2 limitations : it only works synchronously and single threaded. A mutex is used to synchronize threads internally, no protection is needed from the side of the client.
 
 ## From Python
 
@@ -200,9 +200,12 @@ docker run --rm -it iknow
 ```
    The ```--rm``` flag will make sure the container gets dropped after you're done exploring.
 
-2. Inside the container, use ```make all``` to kick off the build.
+2. Inside the container, use ```make all``` to kick off the build:
 
-
+```Shell
+cd /usr/src/iknow
+make all
+```
 
 # Contributing to iKnow
 
