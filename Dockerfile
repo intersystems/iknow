@@ -3,6 +3,7 @@ FROM gcc:8
 ENV ICU_VERSION 65.1
 
 ENV ICUDIR /usr/src/iknow/thirdparty/icu/
+ENV LD_LIBRARY_PATH /usr/src/iknow/kit/lnxubuntux64/release/bin
 ENV IKNOWPLAT lnxubuntux64
 
 COPY . /usr/src/iknow/
@@ -11,4 +12,6 @@ RUN echo "http://github.com/unicode-org/icu/releases/download/release-${ICU_VERS
     && mkdir /usr/src/iknow/thirdparty \
     && mkdir /usr/src/iknow/thirdparty/icu \
     && tar -xzf /tmp/icu.tgz -C /usr/src/iknow/thirdparty/icu --strip-components=4 ./icu/usr/local/ \
-    && rm /tmp/icu.tgz
+    && rm /tmp/icu.tgz \
+    && cp /usr/src/iknow/thirdparty/icu/lib/*.so* /usr/local/lib64 \
+    && ldconfig

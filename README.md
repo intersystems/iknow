@@ -202,6 +202,10 @@ docker run --rm -it iknow
 
 2. Inside the container, use ```make all``` to kick off the build.
 
+### Step 3: Testing iKnow
+
+3. ```make test``` will build and run the testprogram ("iknowenginetest"). You will find the testprogram in /usr/src/iknow/kit/lnxubuntux64/release/bin
+
 
 
 # Contributing to iKnow
