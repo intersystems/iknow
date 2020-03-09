@@ -200,11 +200,20 @@ docker run --rm -it iknow
 ```
    The ```--rm``` flag will make sure the container gets dropped after you're done exploring.
 
-2. Inside the container, use ```make all``` to kick off the build:
+2. Inside the container, use ```make all``` to kick off the build.
 
 ```Shell
 cd /usr/src/iknow
 make all
+```
+
+### Step 3: Testing iKnow
+
+3. ```make test``` will build and run the testprogram ("iknowenginetest"). You will find the testprogram in /usr/src/iknow/kit/lnxubuntux64/release/bin
+
+```Shell
+cd /usr/src/iknow
+make test
 ```
 
 # Contributing to iKnow
