@@ -99,6 +99,7 @@ namespace iknowdata { // to bundle all generated data
 		// utility functions : return text source offsets of the sentence : start and stop.
 		size_t offset_start() const { return entities.begin()->offset_start_; }
 		size_t offset_stop() const { return (entities.end() - 1)->offset_stop_; }
+
 	};
 
 	struct Text_Source
@@ -142,11 +143,21 @@ public:
 		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
 	}
 
+	// Adds User Dictionary measurement for customizing purposes
+	void addUdctMeasurement(size_t start, size_t stop, iknow::base::String value, iknow::base::String unit, iknow::base::String value2, iknow::base::String unit2, std::string marker) {
+		m_vector_udct_measurements.push_back(iknowdata::Sent_Attribute(iknowdata::Sent_Attribute::Measurement, start, stop, marker));
+
+		if (value.length()) m_vector_udct_measurements.back().value_ = iknow::base::IkStringEncoding::BaseToUTF8(value);
+		if (unit.length()) m_vector_udct_measurements.back().unit_ = iknow::base::IkStringEncoding::BaseToUTF8(unit);
+		if (value2.length()) m_vector_udct_measurements.back().value2_ = iknow::base::IkStringEncoding::BaseToUTF8(value2);
+		if (unit2.length()) m_vector_udct_measurements.back().unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(unit2);
+	}
+	
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
-
+	iknowdata::Sentence::Sent_Attributes m_vector_udct_measurements;
 };
 
 
