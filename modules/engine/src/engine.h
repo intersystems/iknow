@@ -99,7 +99,6 @@ namespace iknowdata { // to bundle all generated data
 		// utility functions : return text source offsets of the sentence : start and stop.
 		size_t offset_start() const { return entities.begin()->offset_start_; }
 		size_t offset_stop() const { return (entities.end() - 1)->offset_stop_; }
-
 	};
 
 	struct Text_Source
