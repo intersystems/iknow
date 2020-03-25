@@ -137,6 +137,10 @@ public:
 	//	- works single threaded : a mutex protects multithread functioning. Use multiprocess to bypass this (current) limitation.
 	void index(iknow::base::String& text_source, const std::string& language);
 	
+	// Wrapper for indexing function that accepts UTF-8 encoded string instead. The offsets generated will be Unicode character
+	// offsets, not byte offsets in text_source.
+	void index(const std::string& text_source, const std::string& language);
+
 	// Adds User Dictionary annotations for customizing purposes
 	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
 		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
