@@ -3,9 +3,9 @@ import sys
 import pprint
 import traceback
 
-if sys.version_info >= (3, 8):
-	# On Python >= 3.8, we can specify where the iknowpy dependencies are if they are not in the same directory as the
-	# iknowpy module.
+# On Python >= 3.8 on Windows, we can specify where the iknowpy dependencies are if they are not in the same directory
+# as the iknowpy module.
+if sys.version_info >= (3, 8) and os.name == 'nt':
 	if 'ICUDIR' in os.environ:
 		icudir = os.environ['ICUDIR']
 	else:
