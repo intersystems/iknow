@@ -286,7 +286,7 @@ namespace iknow {
 				size_t closing_pattern_position = utf8_label_pattern.find('}');
 				if (closing_pattern_position == std::string::npos) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
 				// char pattern2[] = "{ 5, 10 }";
-				int count_tokens = sscanf(begin_pattern, "{%d,%d}", &var_length_limits.min_match, &var_length_limits.max_match);
+				int count_tokens = sscanf_s(begin_pattern, "{%d,%d}", &var_length_limits.min_match, &var_length_limits.max_match);
 				if (count_tokens == 0) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
 				if (count_tokens == 1) var_length_limits.max_match = var_length_limits.min_match; // equal min & max = fixed length : "{ 12 }"
 
