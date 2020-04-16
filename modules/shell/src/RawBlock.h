@@ -145,11 +145,11 @@ namespace iknow {
       size_t BytesRemaining() { return raw_.Size() - BytesUsed(); };
 	
 #ifdef INCLUDE_GENERATE_IMAGE_CODE
-	  void generate_image(std::string kb_name) { // data logging
+	  void generate_image(std::string& dir_name, std::string kb_name) { // data logging
 		  errno_t err;
 		  FILE *stream;
 			  
-		  std::string file_name = "kb_" + kb_name + "_data.h";
+		  std::string file_name = dir_name + "/kb_" + kb_name + "_data.h";
 		  if ((err = fopen_s(&stream, file_name.c_str(), "wt")) == 0) {
 			  std::string data_name = "kb_" + kb_name + "_data[]";
 			  fprintf(stream, "const unsigned char %s = { // memory block representing KB data", data_name.c_str());
