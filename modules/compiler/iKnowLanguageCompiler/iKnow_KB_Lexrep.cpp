@@ -113,6 +113,11 @@ kill:$$$IKISDEVBUILD ^lexreps(kb.Name) // temporary storage for double lexrep ch
 */
 void iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 {
+	kb.kb_lexreps.clear();
+	kb.lexrep_index.clear();
+
+	cout << "Reading lexrep data..." << endl;
+
 	ifstream ifs = ifstream(lexreps_csv, ifstream::in);
 	if (ifs.is_open()) {
 		kb.handle_UTF8_BOM(ifs);
@@ -145,19 +150,11 @@ void iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 				kb.lexrep_index[lexrep.Token] = (int) kb.kb_lexreps.size(); // index on Token for fast retrieval
 				kb.kb_lexreps.push_back(lexrep); // Set lexrep.Knowledgebase = kb
 			}
+			if (!(kb.kb_lexreps.size() % 2048)) cout << char(9) << kb.kb_lexreps.size();
 		}
 	}
 	else {
 		cerr << "Error opening file: " << lexreps_csv << " Language=\"" << kb.GetName() << "\"" << endl;
 	}
 	ifs.close();
-}
-
-iKnow_KB_Lexrep::iKnow_KB_Lexrep()
-{
-}
-
-
-iKnow_KB_Lexrep::~iKnow_KB_Lexrep()
-{
 }

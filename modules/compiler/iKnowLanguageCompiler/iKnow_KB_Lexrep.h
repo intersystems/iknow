@@ -34,8 +34,11 @@ namespace iknow {
 
 			// Index KnowledgebaseIndex On Knowledgebase;
 
-			iKnow_KB_Lexrep();
-			~iKnow_KB_Lexrep();
+			iKnow_KB_Lexrep() : isRegex(false) {}
+			~iKnow_KB_Lexrep() {}
+
+		//private:
+			bool isRegex;
 		};
 
 		// static std::list<iknow::base::String> ParseAlternatives(iknow::base::String& input);

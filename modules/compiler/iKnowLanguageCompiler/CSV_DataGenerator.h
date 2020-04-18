@@ -64,7 +64,7 @@ namespace iknow {
 			static std::vector<iKnow_KB_PreprocessFilter> kb_prepro;
 			static std::vector<iKnow_KB_Rule> kb_rules;
 			static const std::vector<std::pair<int, std::string>> kb_properties;
-			typedef std::map<std::string, int>	labelIndexTable_type;
+			typedef std::unordered_map<std::string, int>	labelIndexTable_type;
 			labelIndexTable_type labelIndexTable; // mapping of labels to indexes
 
 			size_t LabelCount() {
@@ -85,8 +85,8 @@ namespace iknow {
 			std::string csv_path_;
 			std::string aho_path_; 
 			std::string language_data_path_; // C:\P4\projects\ikNLP_DEV\modules\iknow\standalone\language_data
-			void CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ std::string phase, Predicate *phasePredicate, std::string& outputDir_);
-			std::vector<int> CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, std::map<std::string, int>& table);
+			void CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ std::string phase, bool phasePredicate /*Predicate *phasePredicate*/, std::string& outputDir_);
+			std::vector<int> CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, std::unordered_map<std::string, int>& table);
 		};
 
 		class testje {

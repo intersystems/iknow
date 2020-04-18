@@ -288,7 +288,7 @@ namespace iknow {
 				if (closing_pattern_position == std::string::npos) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
 
 				// char pattern2[] = "{ 5, 10 }";
-				std::istringstream iss_pattern(std::string(begin_pattern + 1, utf8_label_pattern.c_str() + closing_pattern_position - 1));
+				std::istringstream iss_pattern(std::string(begin_pattern + 1, utf8_label_pattern.c_str() + closing_pattern_position));
 				iss_pattern >> var_length_limits.min_match;
 				if ((iss_pattern.rdstate() & std::istringstream::failbit) != 0) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
 				char ch_separator;
