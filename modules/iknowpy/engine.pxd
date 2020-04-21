@@ -42,17 +42,17 @@ cdef extern from "../engine/src/engine.h" namespace "iknowdata::Text_Source" nog
 
 cdef extern from "../engine/src/engine.h" namespace "iknowdata" nogil:
 	struct Entity:
-		eType type_
-		size_t offset_start_, offset_stop_
-		string index_
-		double dominance_value_
-		size_t entity_id_
+		eType type "type_"
+		size_t offset_start "offset_start_", offset_stop "offset_stop_"
+		string index "index_"
+		double dominance_value "dominance_value_"
+		size_t entity_id "entity_id_"
 
 	struct Sent_Attribute:
-		aType type_
-		size_t offset_start_, offset_stop_
-		string marker_
-		string value_, unit_, value2_, unit2_
+		aType type "type_"
+		size_t offset_start "offset_start_", offset_stop "offset_stop_"
+		string marker "marker_"
+		string value "value_", unit "unit_", value2 "value2_", unit2 "unit2_"
 		Entity_Ref entity_ref
 
 	struct Path_Attribute_Span:
