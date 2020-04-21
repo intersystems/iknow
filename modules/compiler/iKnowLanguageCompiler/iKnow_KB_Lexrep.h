@@ -12,7 +12,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string lexrep_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string lexrep_csv, CSV_DataGenerator& kb);
 
 			iKnow_KB_Lexrep(std::vector<std::string>& row_lexrep) {
 				Meta = row_lexrep[2 - 1];

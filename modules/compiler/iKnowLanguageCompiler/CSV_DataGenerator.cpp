@@ -1,3 +1,11 @@
+/*
+** CSV_DataGenerator.cpp
+*/
+
+#ifdef WIN32
+#pragma warning (disable: 4251)
+#endif
+
 #include "CSV_DataGenerator.h"
 #include "Util.h"
 #include "IkStringEncoding.h"
@@ -188,7 +196,8 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	kb_labels.clear();
 	cap = kb_labels.capacity();
 	cout << "Reading label data..." << endl;
-	iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "\\" + "labels.csv", *this);
+	if (!iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "\\" + "labels.csv", *this))
+		throw ExceptionFrom<CSV_DataGenerator>("Cannot build a language model without external labels !!!");
 	cout << kb_labels.size() << " label items (reserved=" << cap << ")" << endl;
 
 	if (!IsCompiled) {
@@ -246,7 +255,7 @@ static const size_t kRawSize = 48000000;
 #include "KbMetadata.h"
 
 // static definition:
-const IkLabel::LabelTypeMap IkLabel::label_type_map_;
+// const IkLabel::LabelTypeMap IkLabel::label_type_map_;
 
 using namespace iknow::shell;
 
@@ -641,7 +650,7 @@ void CSV_DataGenerator::generateRAW(void)
 	allocator.generate_image(language_data_path_, GetName());
 #endif
 
-	delete buf_;
+	delete[] buf_;
 }
 
 

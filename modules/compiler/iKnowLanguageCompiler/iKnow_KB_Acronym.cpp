@@ -11,7 +11,7 @@ using namespace iknow::csvdata;
 using namespace std;
 
 // ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-void iKnow_KB_Acronym::ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Acronym::ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(acro_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -33,18 +33,9 @@ void iKnow_KB_Acronym::ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb
 			kb.kb_acronyms.push_back(acronym); // Set sc = acronym.%Save()
 			// $$$IKModelCheck(sc, stream.Filename, count, line)
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << acro_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
-}
-
-iKnow_KB_Acronym::iKnow_KB_Acronym()
-{
-}
-
-
-iKnow_KB_Acronym::~iKnow_KB_Acronym()
-{
+	cerr << "Error opening file: " << acro_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

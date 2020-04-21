@@ -16,7 +16,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string rule_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string rule_csv, CSV_DataGenerator& kb);
 
 			std::string TransformRulePattern(std::string& csv_rule_input, std::string& csv_phase, CSV_DataGenerator& kb, newLabels_type &newLabels, newLabelsIndex_type &newLabelsIndex, SPhases_type& SBegin, SPhases_type& SEnd);
 
@@ -32,8 +32,8 @@ namespace iknow {
 			int Precedence;
 			std::string Phase;
 
-			iKnow_KB_Rule();
-			~iKnow_KB_Rule();
+			iKnow_KB_Rule() {}
+			~iKnow_KB_Rule() {}
 		};
 	}
 }

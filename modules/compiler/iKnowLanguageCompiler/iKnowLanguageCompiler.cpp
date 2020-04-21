@@ -19,7 +19,11 @@ int main(int argc, char* argv[])
 	string repo_root("C:/Users/jdenys/source/repos/iknow/");
 
 	string exe_path(argv[0]);
+#ifdef WIN32
 	size_t kit_pos = exe_path.find("\\kit\\");
+#else
+	size_t kit_pos = exe_path.find("/kit/");
+#endif
 	if (kit_pos != string::npos) {
 		repo_root = string(exe_path.begin(), exe_path.begin() + kit_pos + 1);
 	}

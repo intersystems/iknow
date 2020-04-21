@@ -7,7 +7,7 @@ using namespace iknow::csvdata;
 using namespace std;
 
 // ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-void iKnow_KB_PreprocessFilter::ImportFromCSV(string prepro_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_PreprocessFilter::ImportFromCSV(string prepro_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(prepro_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -33,18 +33,9 @@ void iKnow_KB_PreprocessFilter::ImportFromCSV(string prepro_csv, CSV_DataGenerat
 			kb.kb_prepro.push_back(filter); //	Set sc = filter.%Save()
 			//	$$$IKModelCheck(sc, stream.Filename, count, line)
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << prepro_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
-}
-
-iKnow_KB_PreprocessFilter::iKnow_KB_PreprocessFilter()
-{
-}
-
-
-iKnow_KB_PreprocessFilter::~iKnow_KB_PreprocessFilter()
-{
+	cerr << "Error opening file: " << prepro_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

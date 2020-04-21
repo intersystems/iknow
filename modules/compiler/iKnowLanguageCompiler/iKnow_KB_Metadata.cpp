@@ -7,7 +7,7 @@
 using namespace iknow::csvdata;
 using namespace std;
 
-void iKnow_KB_Metadata::ImportFromCSV(std::string metadata_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Metadata::ImportFromCSV(std::string metadata_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(metadata_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -29,20 +29,9 @@ void iKnow_KB_Metadata::ImportFromCSV(std::string metadata_csv, CSV_DataGenerato
 			kb.kb_metadata.push_back(metadata); //	Set sc = metadata.%Save()
 			//	$$$IKModelCheck(sc, stream.Filename, count, line)
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << metadata_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-
-	ifs.close();
-
-}
-
-iKnow_KB_Metadata::iKnow_KB_Metadata()
-{
-}
-
-
-iKnow_KB_Metadata::~iKnow_KB_Metadata()
-{
+	cerr << "Error opening file: " << metadata_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

@@ -7,7 +7,7 @@ using namespace iknow::csvdata;
 using namespace std;
 
 // ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-void iKnow_KB_Filter::ImportFromCSV(string filter_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Filter::ImportFromCSV(string filter_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(filter_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -52,19 +52,9 @@ void iKnow_KB_Filter::ImportFromCSV(string filter_csv, CSV_DataGenerator& kb)
 			kb.kb_filter.push_back(filter); //	Set sc = filter.%Save()
 			//	$$$IKModelCheck(sc, stream.Filename, count, line)
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << filter_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
-}
-
-
-iKnow_KB_Filter::iKnow_KB_Filter()
-{
-}
-
-
-iKnow_KB_Filter::~iKnow_KB_Filter()
-{
+	cerr << "Error opening file: " << filter_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

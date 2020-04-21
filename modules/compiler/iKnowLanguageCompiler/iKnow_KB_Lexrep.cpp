@@ -111,7 +111,7 @@ kill:$$$IKISDEVBUILD ^lexreps(kb.Name) // temporary storage for double lexrep ch
 // Set:$$$IKISDEVBUILD hasUpper = ""
 }
 */
-void iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 {
 	kb.kb_lexreps.clear();
 	kb.lexrep_index.clear();
@@ -147,14 +147,14 @@ void iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 				lexrep.Token = tokens[i]; // Set lexrep.Token = tokens(i)
 				lexrep.Meta = meta; // Set lexrep.Meta = meta
 				lexrep.Labels = labels; // Set lexrep.Labels = labels
-				kb.lexrep_index[lexrep.Token] = (int) kb.kb_lexreps.size(); // index on Token for fast retrieval
+				kb.lexrep_index[lexrep.Token] = (int)kb.kb_lexreps.size(); // index on Token for fast retrieval
 				kb.kb_lexreps.push_back(lexrep); // Set lexrep.Knowledgebase = kb
 			}
 			if (!(kb.kb_lexreps.size() % 2048)) cout << char(9) << kb.kb_lexreps.size();
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << lexreps_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
+	cerr << "Error opening file: " << lexreps_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

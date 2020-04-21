@@ -1,4 +1,8 @@
 #pragma once
+#ifdef WIN32
+#pragma warning (disable: 4251)
+#endif
+
 #include "iKnow_KB_Metadata.h"
 #include "iKnow_KB_Acronym.h"
 #include "iKnow_KB_Regex.h"
@@ -88,14 +92,6 @@ namespace iknow {
 			void CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ std::string phase, bool phasePredicate /*Predicate *phasePredicate*/, std::string& outputDir_);
 			std::vector<int> CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, std::unordered_map<std::string, int>& table);
 		};
-
-		class testje {
-		public:
-			testje(void) {}
-
-
-		};
-
 	}
 }
 

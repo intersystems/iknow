@@ -1,4 +1,8 @@
 #pragma once
+#ifdef WIN32
+#pragma warning (disable: 4251)
+#endif
+
 #include "IkTypes.h"
 
 namespace iknow {

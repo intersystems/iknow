@@ -10,7 +10,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string regex_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string regex_csv, CSV_DataGenerator& kb);
 
 			/*
 			Set name = $PIECE(line, ";", 1)
@@ -22,8 +22,8 @@ namespace iknow {
 			}
 			std::string name, Pattern;
 
-			iKnow_KB_Regex();
-			~iKnow_KB_Regex();
+			iKnow_KB_Regex() {}
+			~iKnow_KB_Regex() {}
 		};
 	}
 }
