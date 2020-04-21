@@ -12,6 +12,8 @@ all : engine
 test : enginetest
 	$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
 
+languagecompiler : base core shell
+	$(MAKE) -f $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler/languagecompiler.mak
 enginetest : engine base
 	$(MAKE) -f $(ROOT_DIR)/modules/enginetest/enginetest.mak
 engine : base shell core icu
@@ -33,6 +35,7 @@ icu :
 	test -d $(ICUDIR)/include/unicode && (ls $(ICUDIR)/lib/libicu* > /dev/null)
 
 clean :
+	$(MAKE) -f $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler/languagecompiler.mak clean
 	$(MAKE) -f $(ROOT_DIR)/modules/enginetest/enginetest.mak clean
 	$(MAKE) -f $(ROOT_DIR)/modules/engine/engine.mak clean
 	$(MAKE) -f $(ROOT_DIR)/modules/shell/shell.mak clean

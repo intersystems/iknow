@@ -12,7 +12,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string lexrep_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string lexrep_csv, CSV_DataGenerator& kb);
 
 			iKnow_KB_Lexrep(std::vector<std::string>& row_lexrep) {
 				Meta = row_lexrep[2 - 1];
@@ -34,8 +34,11 @@ namespace iknow {
 
 			// Index KnowledgebaseIndex On Knowledgebase;
 
-			iKnow_KB_Lexrep();
-			~iKnow_KB_Lexrep();
+			iKnow_KB_Lexrep() : isRegex(false) {}
+			~iKnow_KB_Lexrep() {}
+
+		//private:
+			bool isRegex;
 		};
 
 		// static std::list<iknow::base::String> ParseAlternatives(iknow::base::String& input);

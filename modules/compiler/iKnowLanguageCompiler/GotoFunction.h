@@ -4,7 +4,7 @@
 #include <map>
 #include <vector>
 
-#include "ikTypes.h"
+#include "IkTypes.h"
 #include "StateOutputFunction.h"
 #include "KnowledgebaseRegexDictionary.h"
 

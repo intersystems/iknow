@@ -9,7 +9,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string filter_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string filter_csv, CSV_DataGenerator& kb);
 
 			std::string InputToken; // InputToken As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
 
@@ -27,8 +27,8 @@ namespace iknow {
 
 			// Index KnowledgebaseIndex On Knowledgebase;
 
-			iKnow_KB_Filter();
-			~iKnow_KB_Filter();
+			iKnow_KB_Filter() {}
+			~iKnow_KB_Filter() {}
 		};
 	}
 }

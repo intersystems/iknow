@@ -6,7 +6,7 @@
 using namespace iknow::csvdata;
 using namespace std;
 
-void iKnow_KB_Regex::ImportFromCSV(string regex_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Regex::ImportFromCSV(string regex_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(regex_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -33,20 +33,10 @@ void iKnow_KB_Regex::ImportFromCSV(string regex_csv, CSV_DataGenerator& kb)
 			}
 			Set regex.Pattern = $PIECE(line, ";", 2)
 			*/
-
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << regex_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
-}
-
-iKnow_KB_Regex::iKnow_KB_Regex()
-{
-}
-
-
-iKnow_KB_Regex::~iKnow_KB_Regex()
-{
+	cerr << "Error opening file: " << regex_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }

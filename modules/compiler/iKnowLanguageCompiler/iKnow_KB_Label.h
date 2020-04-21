@@ -11,7 +11,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string label_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string label_csv, CSV_DataGenerator& kb);
 
 			std::string Name; // Name As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
 

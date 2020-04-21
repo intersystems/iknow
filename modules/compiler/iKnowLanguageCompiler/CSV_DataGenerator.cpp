@@ -1,5 +1,14 @@
+/*
+** CSV_DataGenerator.cpp
+*/
+
+#ifdef WIN32
+#pragma warning (disable: 4251)
+#endif
+
 #include "CSV_DataGenerator.h"
 #include "Util.h"
+#include "IkStringEncoding.h"
 
 #include <fstream>
 #include <sstream>
@@ -7,6 +16,9 @@
 
 using namespace iknow::csvdata;
 using namespace std;
+using iknow::base::IkStringEncoding;
+using iknow::base::String;
+using namespace iknow::core;
 
 vector<iKnow_KB_Metadata> CSV_DataGenerator::kb_metadata;
 vector<iKnow_KB_Acronym> CSV_DataGenerator::kb_acronyms;
@@ -38,10 +50,6 @@ CSV_DataGenerator::~CSV_DataGenerator()
 {
 }
 
-#include "IkStringEncoding.h"
-using iknow::base::IkStringEncoding;
-using iknow::base::String;
-using namespace iknow::core;
 
 iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 	switch (label) {
@@ -159,7 +167,7 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	*/
 	kb_language = language;
 	Hash = language; // just a unique string per KB
-	cout << "Loading CSV data for language \"" << language << "\"";
+	cout << "Loading CSV data for language \"" << language << "\"" << endl;;
 
 	kb_metadata.clear();
 	size_t cap = kb_metadata.capacity();
@@ -188,16 +196,14 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	kb_labels.clear();
 	cap = kb_labels.capacity();
 	cout << "Reading label data..." << endl;
-	iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "\\" + "labels.csv", *this);
+	if (!iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "\\" + "labels.csv", *this))
+		throw ExceptionFrom<CSV_DataGenerator>("Cannot build a language model without external labels !!!");
 	cout << kb_labels.size() << " label items (reserved=" << cap << ")" << endl;
 
 	if (!IsCompiled) {
-		kb_lexreps.clear();
-		lexrep_index.clear();
 		cap = kb_lexreps.capacity();
-		cout << "Reading lexrep data..." << endl;
 		iKnow_KB_Lexrep::ImportFromCSV(csv_path_ + language + "\\" + "lexreps.csv", *this);
-		cout << kb_lexreps.size() << " lexrep items (reserved=" << cap << ")" << endl;
+		cout << endl << kb_lexreps.size() << " lexrep items (reserved=" << cap << ")" << endl;
 	}
 	kb_prepro.clear();
 	cap = kb_prepro.capacity();
@@ -249,7 +255,7 @@ static const size_t kRawSize = 48000000;
 #include "KbMetadata.h"
 
 // static definition:
-const IkLabel::LabelTypeMap IkLabel::label_type_map_;
+// const IkLabel::LabelTypeMap IkLabel::label_type_map_;
 
 using namespace iknow::shell;
 
@@ -644,16 +650,17 @@ void CSV_DataGenerator::generateRAW(void)
 	allocator.generate_image(language_data_path_, GetName());
 #endif
 
-	delete buf_;
+	delete[] buf_;
 }
+
 
 class RegexPredicate : public Predicate // Class %iKnow.Compiler.RegexPredicate Extends %iKnow.Compiler.Predicate[Hidden, System = 4]
 {
 public:
-	bool MatchRegex; // Property MatchRegex As %Boolean; /// If true, matches regex lexreps. If false, matches non-regex lexreps
+	static bool MatchRegex; // Property MatchRegex As %Boolean; /// If true, matches regex lexreps. If false, matches non-regex lexreps
 
-	bool Check(iKnow_KB_Lexrep& obj) { // Method Check(obj As %iKnow.KB.Lexrep) As %Boolean
-		string token = obj.Token; // Set token = obj.Token
+	static bool Check(iKnow_KB_Lexrep& obj) { // Method Check(obj As %iKnow.KB.Lexrep) As %Boolean
+		const string &token = obj.Token; // Set token = obj.Token
 		// bool foundOutput = MatchRegex; // Set foundOutput = ..MatchRegex
 		bool escaping = false; // Set escaping = 0
 		// Set len = $L(token)
@@ -665,30 +672,27 @@ public:
 		}
 		return !MatchRegex; // Quit '..MatchRegex
 	}
+	void operator()(iKnow_KB_Lexrep& lexrep) {
+		lexrep.isRegex = Check(lexrep);
+	}
 };
+bool RegexPredicate::MatchRegex = true; // scan for regular expressions.
 
 void CSV_DataGenerator::generateAHO(void) 
 {
-	/*
-	std::ofstream ofs = std::ofstream("C:/tmp/output_state1.csv", std::ofstream::trunc); // clean session logging file
-	if (ofs.is_open())
-		ofs.close();
-	ofs = std::ofstream("C:/tmp/output_failure.csv", std::ofstream::trunc);
-	if (ofs.is_open())
-		ofs.close();
-	*/
-
 	cout << "Compiling " << GetName() << " outputDir=\"" << aho_path_ << "\"" << std::endl;
 	string outputDir = aho_path_ + "/inl/" + GetName() + "/lexrep";
 
-	RegexPredicate *predicate = new RegexPredicate; // // Set predicate = ##class(RegexPredicate).%New()
+	for_each(kb_lexreps.begin(), kb_lexreps.end(), RegexPredicate());
+	
+	//RegexPredicate *predicate = new RegexPredicate; // // Set predicate = ##class(RegexPredicate).%New()
 	//First the non-regexes
-	predicate->MatchRegex = false;
+	bool predicate = false; //predicate->MatchRegex = false;
 	CompileLexrepDictionaryPhase(/*kb,*/ "", predicate, outputDir); // Do ..CompileLexrepDictionaryPhase(kb, "", predicate, outputDir)
 	//Now the regexes
-	predicate->MatchRegex = true; // Set predicate.MatchRegex = 1
+	predicate = true; //predicate->MatchRegex = true; // Set predicate.MatchRegex = 1
 	CompileLexrepDictionaryPhase(/*kb,*/ "_regex", predicate, outputDir); // Do ..CompileLexrepDictionaryPhase(kb, "_regex", predicate, outputDir)
-	delete predicate;
+	// delete predicate;
 }
 
 #include "GotoFunction.h"
@@ -698,7 +702,7 @@ void CSV_DataGenerator::generateAHO(void)
 #include "LexrepStateOutputFunc.h"
 #include "MetadataTable.h"
 
-vector<int> CSV_DataGenerator::CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, std::map<string, int>& table) // ClassMethod CreateLabelsIndexVector(lexrep As %iKnow.KB.Lexrep, ByRef table As %String) As %List[Private]
+vector<int> CSV_DataGenerator::CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, std::unordered_map<string, int>& table) // ClassMethod CreateLabelsIndexVector(lexrep As %iKnow.KB.Lexrep, ByRef table As %String) As %List[Private]
 {
 	vector<string> labelList = split_row(lexrep.Labels, ';'); // Set labelList = lexrep.GetLabels()
 	int labelListLen = (int)labelList.size(); // Set labelListLen = $Length(labelList, ";")
@@ -716,7 +720,7 @@ vector<int> CSV_DataGenerator::CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, 
 	return indexList;
 }
 
-void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ string phase, Predicate *phasePredicate, string& outputDir_)
+void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ string phase, bool phase_switch /*Predicate *phasePredicate*/, string& outputDir_)
 {
 	cout << "ComileLexepDictionaryPhase " << phase << endl;
 
@@ -729,8 +733,8 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	bool hasRegex = (phase == "_regex"); // Set hasRegex = (phase = "_regex")
 
 	iknow::AHO::GotoFunction *gotoFunc = new iknow::AHO::GotoFunction; // Set gotoFunc = ##class(GotoFunction).%New()
-	RegexPredicate *regex_predicate = dynamic_cast<RegexPredicate*>(phasePredicate);
-	gotoFunc->RegexEnabled = regex_predicate->MatchRegex;
+	// RegexPredicate *regex_predicate = dynamic_cast<RegexPredicate*>(phasePredicate);
+	gotoFunc->RegexEnabled = false; // regex_predicate->MatchRegex;
 	gotoFunc->RegexDictionary = new iknow::AHO::KnowledgebaseRegexDictionary; // Set gotoFunc.RegexDictionary = ##class(KnowledgebaseRegexDictionary).%New()
 	gotoFunc->RegexDictionary->Knowledgebase = this; // Set gotoFunc.RegexDictionary.Knowledgebase = kb
 
@@ -742,8 +746,9 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	cout << "Building goto and first output table..." << endl;
 	lexreps_Type::iterator key = kb_lexreps.begin(); // Set key = kb.NextLexrep("")
 	while (key != kb_lexreps.end()) { // While key '= ""
-		iKnow_KB_Lexrep lexrep = *key; // Set lexrep = kb.GetLexrep(key)
-		if (!regex_predicate->Check(lexrep)) { ++key; continue; } // If 'phasePredicate.Check(lexrep) Goto SkipLexrep
+		iKnow_KB_Lexrep &lexrep = *key; // Set lexrep = kb.GetLexrep(key)
+		// if (!regex_predicate->Check(lexrep)) { ++key; continue; } // If 'phasePredicate.Check(lexrep) Goto SkipLexrep
+		if (!(lexrep.isRegex == phase_switch)) { ++key; continue; } // If 'phasePredicate.Check(lexrep) Goto SkipLexrep
 		vector<int> labels = CreateLabelsIndexVector(lexrep, labelIndexTable); // Set labels = ..CreateLabelsIndexVector(lexrep, .labelIndexTable)
 
 		iknow::base::String token = IkStringEncoding::UTF8ToBase(lexrep.Token); // Set token = $ZCONVERT(lexrep.Token, "I", "UTF8")

@@ -5,6 +5,7 @@
 #include "KbLabel.h"
 #include "IkStringAlg.h"
 #include <string>
+#include <sstream>
 #include <vector>
 #include "RawBlock.h"
 #include "OffsetPtr.h"
@@ -285,10 +286,14 @@ namespace iknow {
 			if (*begin_pattern == '{') { // optional min and max specification
 				size_t closing_pattern_position = utf8_label_pattern.find('}');
 				if (closing_pattern_position == std::string::npos) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
+
 				// char pattern2[] = "{ 5, 10 }";
-				int count_tokens = sscanf_s(begin_pattern, "{%d,%d}", &var_length_limits.min_match, &var_length_limits.max_match);
-				if (count_tokens == 0) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
-				if (count_tokens == 1) var_length_limits.max_match = var_length_limits.min_match; // equal min & max = fixed length : "{ 12 }"
+				std::istringstream iss_pattern(std::string(begin_pattern + 1, utf8_label_pattern.c_str() + closing_pattern_position));
+				iss_pattern >> var_length_limits.min_match;
+				if ((iss_pattern.rdstate() & std::istringstream::failbit) != 0) throw ExceptionFrom<KbRule>("missing closing '}' found in rule.");// error : no closing symbol '}'
+				char ch_separator;
+				iss_pattern >> ch_separator >> var_length_limits.max_match;
+				if ((iss_pattern.rdstate() & std::istringstream::failbit) != 0) var_length_limits.max_match = var_length_limits.min_match; // equal min & max = fixed length : "{ 12 }"
 
 				begin_pattern = utf8_label_pattern.c_str() + closing_pattern_position +1;
 				hasVariableLimits = true;

@@ -10,7 +10,7 @@
 using namespace iknow::csvdata;
 using namespace std;
 
-void iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(rules_csv, ifstream::in);
 	if (ifs.is_open()) {
@@ -77,7 +77,7 @@ void iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		SBeginObj.Type = "typeAttribute"; // Set labelObj.Type = "typeAttribute"
 		SBeginObj.Attributes = ""; // Set labelObj.Attributes = ""
 		// Set phaselist = ""
-		for_each(SBeginPhases.begin(), SBeginPhases.end(), [&SBeginObj](string phase){ SBeginObj.PhaseList += (SBeginObj.PhaseList.size() ? "," + phase : phase); }); // For idxPhases = $listlength(SBeginPhases) :-1 : 1 Set phaselist = $list(SBeginPhases, idxPhases)_$Select($Length(phaselist) : ","_phaselist, 1 : "")
+		for_each(SBeginPhases.begin(), SBeginPhases.end(), [&SBeginObj](string phase) { SBeginObj.PhaseList += (SBeginObj.PhaseList.size() ? "," + phase : phase); }); // For idxPhases = $listlength(SBeginPhases) :-1 : 1 Set phaselist = $list(SBeginPhases, idxPhases)_$Select($Length(phaselist) : ","_phaselist, 1 : "")
 		// Set labelObj.PhaseList = phaselist
 		kb.kb_labels.push_back(SBeginObj); // Set sc = labelObj.%Save()
 		// If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
@@ -86,14 +86,13 @@ void iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		SEndObj.Name = "SEnd";
 		SEndObj.Type = "typeAttribute";
 		SEndObj.Attributes = "";
-		for_each(SEndPhases.begin(), SEndPhases.end(), [&SEndObj](string phase){ SEndObj.PhaseList += (SEndObj.PhaseList.size() ? "," + phase : phase); });
+		for_each(SEndPhases.begin(), SEndPhases.end(), [&SEndObj](string phase) { SEndObj.PhaseList += (SEndObj.PhaseList.size() ? "," + phase : phase); });
 		kb.kb_labels.push_back(SEndObj);
-
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << rules_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
+	cerr << "Error opening file: " << rules_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }
 
 void str_subsitute(string& text, const string str_find, const string str_replace)
@@ -145,7 +144,7 @@ void AddLabelToLexrep(CSV_DataGenerator& kb, string& token, string& label)
 		lexrep.Token = token; // Set lexrep.Token = token
 		lexrep.Labels = label + ";"; // Set lexrep.Labels = label _ ";"
 		// Set lexrep.Knowledgebase = kb
-		kb.lexrep_index[lexrep.Token] = kb.kb_lexreps.size(); // new index for lexrep
+		kb.lexrep_index[lexrep.Token] = (int) kb.kb_lexreps.size(); // new index for lexrep
 		kb.kb_lexreps.push_back(lexrep); // Set sc = lexrep.%Save()
 		// If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 	}
@@ -220,13 +219,4 @@ std::string iKnow_KB_Rule::TransformRulePattern(string& pattern, string& phase, 
 		transformed_pattern += *it;
 	}
 	return transformed_pattern;
-}
-
-iKnow_KB_Rule::iKnow_KB_Rule()
-{
-}
-
-
-iKnow_KB_Rule::~iKnow_KB_Rule()
-{
 }

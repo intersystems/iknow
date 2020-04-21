@@ -8,7 +8,7 @@ namespace iknow {
 		{
 		public:
 			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
-			static void ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb);
+			static bool ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb);
 
 			std::string Token; // Property Token As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
 
@@ -18,8 +18,8 @@ namespace iknow {
 
 			// Index KnowledgebaseIndex On Knowledgebase;
 
-			iKnow_KB_Acronym();
-			~iKnow_KB_Acronym();
+			iKnow_KB_Acronym() {}
+			~iKnow_KB_Acronym() {}
 		};
 	}
 }

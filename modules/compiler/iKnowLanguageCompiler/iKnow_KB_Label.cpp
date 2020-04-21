@@ -56,7 +56,7 @@ void iKnow_KB_Label::LoadSpecialLabels(CSV_DataGenerator& kb)
 
 }
 
-void iKnow_KB_Label::ImportFromCSV(string labels_csv, CSV_DataGenerator& kb)
+bool iKnow_KB_Label::ImportFromCSV(string labels_csv, CSV_DataGenerator& kb)
 {
 	LoadSpecialLabels(kb); // Do ..LoadSpecialLabels(kb)
 	int count = 0;
@@ -78,11 +78,11 @@ void iKnow_KB_Label::ImportFromCSV(string labels_csv, CSV_DataGenerator& kb)
 			if (isDefault[0]=='1') kb.kb_concept_label = &kb.kb_labels.back(); // If isDefault Set kb.ConceptLabel = label
 			// $$$IKModelCheck(sc,stream.Filename,count,line)
 		}
+		ifs.close();
+		return true;
 	}
-	else {
-		cerr << "Error opening file: " << labels_csv << " Language=\"" << kb.GetName() << "\"" << endl;
-	}
-	ifs.close();
+	cerr << "Error opening file: " << labels_csv << " Language=\"" << kb.GetName() << "\"" << endl;
+	return false;
 }
 
 iKnow_KB_Label iKnow_KB_Label::LabelFromString(vector<string>& row_label, string &isDefault) // ClassMethod LabelFromString(line As %String, ByRef isDefault = "") As Label
