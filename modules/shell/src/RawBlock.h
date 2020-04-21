@@ -124,43 +124,43 @@ namespace iknow {
       
       template<typename CharT>
       size_t SpaceRequiredForString(size_t length) {
-	typedef CountedString<CharT> CountedStringT;
-	if (length == 0) return AlignmentNeeded<typename CountedStringT::size_t>() + sizeof(CountedStringT);
-	return AlignmentNeeded<typename CountedStringT::size_t>() + sizeof(CountedStringT) - (sizeof(CountedStringT().c)) + (sizeof(CountedStringT().c) * length);
+		typedef CountedString<CharT> CountedStringT;
+		if (length == 0) return AlignmentNeeded<typename CountedStringT::size_t>() + sizeof(CountedStringT);
+		return AlignmentNeeded<typename CountedStringT::size_t>() + sizeof(CountedStringT) - (sizeof(CountedStringT().c)) + (sizeof(CountedStringT().c) * length);
       }
-
-
       template<typename T>
       size_t SpaceRequired() {
-	return sizeof(T);
+		return sizeof(T);
       }
-
       template<typename T>
       size_t AlignmentNeeded() {
-	size_t alignment = alignof(T);
-	return allocated_ % alignment ? alignment - allocated_ % alignment : 0;
+		size_t alignment = alignof(T);
+		return allocated_ % alignment ? alignment - allocated_ % alignment : 0;
       }
 
       size_t BytesUsed() { return allocated_; }
       size_t BytesRemaining() { return raw_.Size() - BytesUsed(); };
 	
 #ifdef INCLUDE_GENERATE_IMAGE_CODE
-	  void generate_image(std::string kb_name) { // data logging
-		  errno_t err;
-		  FILE *stream;
-			  
-		  std::string file_name = "kb_" + kb_name + "_data.h";
-		  if ((err = fopen_s(&stream, file_name.c_str(), "wt")) == 0) {
+	  void generate_image(std::string& dir_name, std::string kb_name) { // data logging
+		  std::string image_file(dir_name + "/kb_" + kb_name + "_data.h");
+		  std::ofstream ofs = std::ofstream(image_file); // Do ##class(Util).OutputToFile(dir _ "/OneStateMap.inl")
+		  if (ofs.is_open()) {
 			  std::string data_name = "kb_" + kb_name + "_data[]";
-			  fprintf(stream, "const unsigned char %s = { // memory block representing KB data", data_name.c_str());
+			  ofs << "const unsigned char " << data_name << " = { // memory block representing KB data"; // fprintf(stream, "const unsigned char %s = { // memory block representing KB data", data_name.c_str());
+			  ofs << hex; // change to hexadecimal format for writing
 			  size_t data_size = BytesUsed();
 			  size_t cnt = static_cast<size_t>(0);
 			  for (; cnt < data_size - static_cast<size_t>(1); ++cnt) {
-				  if (!(cnt % static_cast<size_t>(8))) fprintf(stream, "\n\t");
-				  fprintf(stream, "0x%x, ", *(raw_.Begin()+cnt));
+				  if (!(cnt % static_cast<size_t>(8))) ofs << "\n\t"; // fprintf(stream, "\n\t");
+				  ofs << "0x" << (int)(*(raw_.Begin() + cnt)) << ", "; // fprintf(stream, "0x%x, ", *(raw_.Begin() + cnt));
 			  }
-			  fprintf(stream, "0x%x\n};\n", *(raw_.Begin() + cnt));
-			  fclose(stream);
+			  ofs << "0x" << (int)(*(raw_.Begin() + cnt)) << "\n};\n"; // fprintf(stream, "0x%x\n};\n", *(raw_.Begin() + cnt));
+			  ofs.close();
+		  } else {
+			  std::string error_message("Cannot open " + image_file + " for writing !");
+			  std::cerr << error_message << std::endl;
+			  throw ExceptionFrom<RawAllocator>(error_message);
 		  }
 	}
 #endif
