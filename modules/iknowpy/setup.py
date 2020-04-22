@@ -26,6 +26,9 @@ else:
 		extra_compile_args = []
 
 setup(
+	name='iknowpy',
+	description='Python interface to the InterSystems iKnow engine',
+	url='https://github.com/intersystems/iknow',
 	ext_modules=cythonize(
 		[Extension(
 			'iknowpy',
