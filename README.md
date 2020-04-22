@@ -96,7 +96,9 @@ The main `iKnowEngine::index()` method has currently 2 limitations : it only wor
 
 ## From Python
 
-WIP
+The `iknowpy` module provides a Python 3 interface to the iKnow engine and offers a one-to-one mapping from Python data types to C++ data types. In particular, `iknowpy` contains the `iKnowEngine` Python class, which behaves in much the same way as the C++ `iKnowEngine` class defined in "engine.h" (modules\engine\src).
+
+`test.py` (modules\iknowpy) contains an example of how to use the module.
 
 ## From SpaCy
 
@@ -112,7 +114,7 @@ The [InterSystems IRIS Community Edition](https://docs.intersystems.com/irislate
 
 This part of the kit has not yet been added to the open source repository, but relevant documentation can be found [here](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GUIMA).
 
-# Building iKnow
+# Building the iKnow Engine
 
 The [source code](https://github.com/intersystems/iknow/wiki/Source-Code) for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. See also [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
 
@@ -239,6 +241,50 @@ make all
 cd /usr/src/iknow
 make test
 ```
+
+
+# Building the Python Interface
+
+The `iknowpy` module provides a Python 3 interface to the iKnow engine. The following directions refer to the commands `pip` and `python`. On some platforms, these commands use Python 2 by default, in which case you should execute `pip3` and `python3` instead to ensure that you are using Python 3.
+
+### Step 1: Build the iKnow engine
+
+Build the iKnow Engine following the above directions. If you are Windows, choose the "Release|x64" configuration.
+
+### Step 2: Setting up dependencies
+
+1. Install any version of Python 3 64-bit. Ensure that the installation includes Python header files.
+
+2. Install Cython. You can do this by having a Python distribution that already includes Cython or by executing `pip install cython`.
+
+### Step 3: Building iknowpy
+
+Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the build script.
+
+```Shell
+   python setup.py build_ext --inplace
+```
+
+   If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
+
+### Step 4: Testing iknowpy
+
+1. Set up the shared libraries so that the runtime linker can find them.
+   - Windows: If your Python version is less than 3.8, then copy the iKnow engine DLLs (`<repo_root>\kit\x64\Release\bin\*.dll`) and ICU DLLs (`<repo_root>\thirdparty\icu\bin64\*.dll`) to `<repo_root>\modules\iknowpy`. Otherwise, keep these shared libraries where they are.
+   - Linux: Set the `LD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+```Shell
+     export LD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
+```
+   - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+```Shell
+     export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
+```
+
+2. The test script at `<repo_root>/modules/iknowpy/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
+```Shell
+   python test.py
+```
+
 
 # Contributing to iKnow
 
