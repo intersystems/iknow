@@ -54,12 +54,6 @@ FailureFunction* FailureFunction::Create(GotoFunction *gotoFunc, OutputFunction 
 			}
 		}
 		failFunc->Set(nextState, failState); // Do failFunc.Set(nextState, failState)
-		std::ofstream ofs = std::ofstream("C:/tmp/output_failure.csv", std::ofstream::app);
-		if (ofs.is_open()) {
-			ofs << "S" << nextState << "F" << failState << endl;
-		}
-		ofs.close();
-
 		outputFunc->Merge(nextState, failState); // Do outputFunc.Merge(nextState, failState)
 
 		// Do gotoFunc.DepthOrder(.depth, .state, .input, .nextState)
