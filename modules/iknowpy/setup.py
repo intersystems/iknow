@@ -4,6 +4,9 @@ from distutils.core import setup
 from distutils.extension import Extension
 from Cython.Build import cythonize
 
+if sys.version_info.major < 3:
+	raise RuntimeError('Python 3 or higher is required')
+
 if 'ICUDIR' in os.environ:
 	icudir = os.environ['ICUDIR']
 else:
