@@ -5,21 +5,36 @@
 MKDIR = test -e $(dir $@) || mkdir -p $(dir $@)
 DELETE = rm -f
 
+#CLANG_MODE = 1
+STDLIB=libc++
+CPPLANGFLAG=-std=c++11 -Wno-non-template-friend
+
 ###Stage 1: Source->Objects
+ifeq ($(CLANG_MODE),1)
+C_COMPILER = clang
+CPP_COMPILER = clang++ $(CPPLANGFLAG)
+else
 C_COMPILER = gcc
-CPP_COMPILER = g++
+CPP_COMPILER = g++ $(CPPLANGFLAG)
+endif
+###C vs. C++
+GNUTOOL = $(if $(CMODE),$(C_COMPILER),$(CPP_COMPILER))
+
+COMPILER = $(GNUTOOL)
+
 HEADERINCLUDEFLAG = -I
 OBJECTOUTPUTFLAG = -o
 OBJECTSUFFIX = .o
 LIBFLAGS = -fPIC
-OBJECTFLAGS += -c -O2 -DBIT64PLAT -DSIZEOF_LONG=8 -std=c++11 -Wno-deprecated-declarations -Wno-non-template-friend -DLINUX -DUNIX $(if $(CREATELIBRARY),$(LIBFLAGS))
+OBJECTFLAGS += -c -O2 -DBIT64PLAT -DSIZEOF_LONG=8 -Wno-deprecated-declarations  -DLINUX -DUNIX $(if $(CREATELIBRARY),$(LIBFLAGS)) 
+
+###Japanese language model is optimized forever...
+ifeq ($(UNOPTIMIZED), 1)
+OBJECTFLAGS += -O0
+endif
 
 ###Stage 2a: Objects->Library
-ifeq ($(USE_LIBRARIAN_LD),1)
-LIBRARIAN = ld
-else
-LIBRARIAN = g++
-endif
+LIBRARIAN = $(GNUTOOL)
 
 LIBRARYDIRFLAG = -L
 LIBRARYSEARCHFLAG = -l
@@ -32,7 +47,7 @@ LIBRARYOUTPUTFLAG = -o
 LIBRARYSUFFIX = .so
 
 ###Stage 2b: Objects->Executable
-LINKER = g++
+LINKER = $(GNUTOOL)
 EXECUTABLEDIRFLAG = -L
 EXECUTABLESEARCHFLAG = -l
 EXECUTABLEFLAGS += -ldl -Wno-non-template-friend -DLINUX 

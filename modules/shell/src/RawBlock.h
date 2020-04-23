@@ -143,7 +143,7 @@ namespace iknow {
 	
 #ifdef INCLUDE_GENERATE_IMAGE_CODE
 	  void generate_image(std::string& dir_name, std::string kb_name) { // data logging
-		  std::string image_file(dir_name + "/kb_" + kb_name + "_data.h");
+		  std::string image_file(dir_name + "/kb_" + kb_name + "_data.c");
 		  std::ofstream ofs = std::ofstream(image_file); // Do ##class(Util).OutputToFile(dir _ "/OneStateMap.inl")
 		  if (ofs.is_open()) {
 			  std::string data_name = "kb_" + kb_name + "_data[]";

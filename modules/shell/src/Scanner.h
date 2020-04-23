@@ -195,7 +195,7 @@ namespace iknow {
 				s = model->GotoWord(s, token.data(), token.data() + token.size());
 				// If we fail to match a word, that means we're not continuing an existing match, and need to
 				// check as if this is a new word from the "reset state".
-				if (s == 0 || s == kFailState && orig_s != reset_state) s = model->GotoWord(reset_state, token.data(), token.data() + token.size());
+				if ((s == 0 || s == kFailState) && orig_s != reset_state) s = model->GotoWord(reset_state, token.data(), token.data() + token.size());
 
 				if (s == 0 || s == kFailState) { // Still failing? Reset and go to the next word
 					s = reset_state;
