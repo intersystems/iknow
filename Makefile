@@ -12,7 +12,7 @@ all : engine
 test : enginetest
 	$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
 
-languagecompiler : base core shell
+languagecompiler : base core
 	$(MAKE) -f $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler/languagecompiler.mak
 enginetest : engine base
 	$(MAKE) -f $(ROOT_DIR)/modules/enginetest/enginetest.mak
@@ -45,4 +45,4 @@ clean :
 	$(MAKE) -f $(ROOT_DIR)/modules/ali/ali.mak clean
 	$(MAKE) -f $(ROOT_DIR)/modules/base/base.mak clean
 
-.PHONY : all clean test enginetest engine shell models modelcommon core ali base icu
+.PHONY : all clean test enginetest languagecompiler engine shell models modelcommon core ali base icu
