@@ -733,8 +733,7 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	bool hasRegex = (phase == "_regex"); // Set hasRegex = (phase = "_regex")
 
 	iknow::AHO::GotoFunction *gotoFunc = new iknow::AHO::GotoFunction; // Set gotoFunc = ##class(GotoFunction).%New()
-	// RegexPredicate *regex_predicate = dynamic_cast<RegexPredicate*>(phasePredicate);
-	gotoFunc->RegexEnabled = false; // regex_predicate->MatchRegex;
+	gotoFunc->RegexEnabled = phase_switch; // regex_predicate->MatchRegex;
 	gotoFunc->RegexDictionary = new iknow::AHO::KnowledgebaseRegexDictionary; // Set gotoFunc.RegexDictionary = ##class(KnowledgebaseRegexDictionary).%New()
 	gotoFunc->RegexDictionary->Knowledgebase = this; // Set gotoFunc.RegexDictionary.Knowledgebase = kb
 
