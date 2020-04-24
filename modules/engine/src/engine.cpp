@@ -227,17 +227,20 @@ iKnowEngine::~iKnowEngine() // Destructor
 
 typedef std::map<iknow::base::String, iknow::core::IkKnowledgebase*> KnowledgebaseMap;
 
-#include "../language_data/kb_en_data.h"
-#include "../language_data/kb_de_data.h"
-#include "../language_data/kb_ru_data.h"
-#include "../language_data/kb_es_data.h"
-#include "../language_data/kb_fr_data.h"
-#include "../language_data/kb_ja_data.h"
-#include "../language_data/kb_nl_data.h"
-#include "../language_data/kb_pt_data.h"
-#include "../language_data/kb_sv_data.h"
-#include "../language_data/kb_uk_data.h"
-#include "../language_data/kb_cs_data.h"
+// 
+extern "C" {
+	extern const unsigned char kb_en_data[];
+	extern const unsigned char kb_de_data[];
+	extern const unsigned char kb_ru_data[];
+	extern const unsigned char kb_es_data[];
+	extern const unsigned char kb_fr_data[];
+	extern const unsigned char kb_ja_data[];
+	extern const unsigned char kb_nl_data[];
+	extern const unsigned char kb_pt_data[];
+	extern const unsigned char kb_sv_data[];
+	extern const unsigned char kb_uk_data[];
+	extern const unsigned char kb_cs_data[];
+}
 
 struct LanguageCodeMap {
 	LanguageCodeMap() {
