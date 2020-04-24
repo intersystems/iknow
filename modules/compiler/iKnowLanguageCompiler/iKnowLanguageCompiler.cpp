@@ -12,16 +12,34 @@
 using namespace std;
 using namespace iknow::csvdata;
 
+#ifndef WIN32	// works on Linux
+#include <unistd.h>
+#include <stdio.h>
+#include <limits.h>
+
+void workingdir(string& work_dir) {
+   char cwd[PATH_MAX];
+   if (getcwd(cwd, sizeof(cwd)) != NULL) {
+	work_dir = string(cwd);
+   } else {
+       work_dir = "";
+   }
+}
+#endif
+
 set<string> SetOfLanguages = { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 
 int main(int argc, char* argv[])
 {
-	string repo_root("C:/Users/jdenys/source/repos/iknow/");
-
 	string exe_path(argv[0]);
+	cout << "exe_path: " << exe_path << endl;
+	
 #ifdef WIN32
+	string repo_root("C:/Users/jdenys/source/repos/iknow/");
 	size_t kit_pos = exe_path.find("\\kit\\");
 #else
+	string repo_root("/home/jdenys/iknow/");
+	workingdir(exe_path);
 	size_t kit_pos = exe_path.find("/kit/");
 #endif
 	if (kit_pos != string::npos) {

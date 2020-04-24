@@ -172,49 +172,49 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	kb_metadata.clear();
 	size_t cap = kb_metadata.capacity();
 	cout << "Reading metadata..." << endl;
-	iKnow_KB_Metadata::ImportFromCSV(csv_path_ + language + "\\" + "metadata.csv", *this);
+	iKnow_KB_Metadata::ImportFromCSV(csv_path_ + language + "/" + "metadata.csv", *this);
 	cout << kb_metadata.size() << " metadata items (reserved=" << cap << ")" << endl;
 
 	kb_acronyms.clear();
 	cap = kb_acronyms.capacity();
 	cout << "Reading acronym data..." << endl;
-	iKnow_KB_Acronym::ImportFromCSV(csv_path_ + language + "\\" + "acro.csv", *this);
+	iKnow_KB_Acronym::ImportFromCSV(csv_path_ + language + "/" + "acro.csv", *this);
 	cout << kb_acronyms.size() << " acronym items (reserved=" << cap << ")" << endl;
 
 	kb_regex.clear();
 	cap = kb_regex.capacity();
 	cout << "Reading regex data..." << endl;
-	iKnow_KB_Regex::ImportFromCSV(csv_path_ + language + "\\" + "regex.csv", *this);
+	iKnow_KB_Regex::ImportFromCSV(csv_path_ + language + "/" + "regex.csv", *this);
 	cout << kb_regex.size() << " regex items (reserved=" << cap << ")" << endl;
 
 	kb_filter.clear();
 	cap = kb_filter.capacity();
 	cout << "Reading filter data..." << endl;
-	iKnow_KB_Filter::ImportFromCSV(csv_path_ + language + "\\" + "filter.csv", *this);
+	iKnow_KB_Filter::ImportFromCSV(csv_path_ + language + "/" + "filter.csv", *this);
 	cout << kb_filter.size() << " filter items (reserved=" << cap << ")" << endl;
 
 	kb_labels.clear();
 	cap = kb_labels.capacity();
 	cout << "Reading label data..." << endl;
-	if (!iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "\\" + "labels.csv", *this))
+	if (!iKnow_KB_Label::ImportFromCSV(csv_path_ + language + "/" + "labels.csv", *this))
 		throw ExceptionFrom<CSV_DataGenerator>("Cannot build a language model without external labels !!!");
 	cout << kb_labels.size() << " label items (reserved=" << cap << ")" << endl;
 
 	if (!IsCompiled) {
 		cap = kb_lexreps.capacity();
-		iKnow_KB_Lexrep::ImportFromCSV(csv_path_ + language + "\\" + "lexreps.csv", *this);
+		iKnow_KB_Lexrep::ImportFromCSV(csv_path_ + language + "/" + "lexreps.csv", *this);
 		cout << endl << kb_lexreps.size() << " lexrep items (reserved=" << cap << ")" << endl;
 	}
 	kb_prepro.clear();
 	cap = kb_prepro.capacity();
 	cout << "Reading prepro data..." << endl;
-	iKnow_KB_PreprocessFilter::ImportFromCSV(csv_path_ + language + "\\" + "prepro.csv", *this);
+	iKnow_KB_PreprocessFilter::ImportFromCSV(csv_path_ + language + "/" + "prepro.csv", *this);
 	cout << kb_prepro.size() << " prepro items (reserved=" << cap << ")" << endl;
 
 	kb_rules.clear();
 	cap = kb_rules.capacity();
 	cout << "Reading rules data..." << endl;
-	iKnow_KB_Rule::ImportFromCSV(csv_path_ + language + "\\" + "rules.csv", *this);
+	iKnow_KB_Rule::ImportFromCSV(csv_path_ + language + "/" + "rules.csv", *this);
 	cout << kb_rules.size() << " rule items (reserved=" << cap << ")" << endl;
 
 	labelIndexTable_type &label_index_table = labelIndexTable;
@@ -659,7 +659,7 @@ class RegexPredicate : public Predicate // Class %iKnow.Compiler.RegexPredicate 
 public:
 	static bool MatchRegex; // Property MatchRegex As %Boolean; /// If true, matches regex lexreps. If false, matches non-regex lexreps
 
-	static bool Check(iKnow_KB_Lexrep& obj) { // Method Check(obj As %iKnow.KB.Lexrep) As %Boolean
+  /*static*/ bool Check(iKnow_KB_Lexrep& obj) { // Method Check(obj As %iKnow.KB.Lexrep) As %Boolean
 		const string &token = obj.Token; // Set token = obj.Token
 		// bool foundOutput = MatchRegex; // Set foundOutput = ..MatchRegex
 		bool escaping = false; // Set escaping = 0

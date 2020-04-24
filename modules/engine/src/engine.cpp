@@ -227,7 +227,6 @@ iKnowEngine::~iKnowEngine() // Destructor
 
 typedef std::map<iknow::base::String, iknow::core::IkKnowledgebase*> KnowledgebaseMap;
 
-// 
 extern "C" {
 	extern const unsigned char kb_en_data[];
 	extern const unsigned char kb_de_data[];
