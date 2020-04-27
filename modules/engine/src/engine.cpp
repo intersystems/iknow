@@ -291,3 +291,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	lck.unlock();
 }
 
+void iKnowEngine::index(const std::string& text_source, const std::string& language) {
+	String text_source_ucs2(IkStringEncoding::UTF8ToBase(text_source));
+	index(text_source_ucs2, language);
+}
