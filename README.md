@@ -261,11 +261,11 @@ Build the iKnow Engine following the above directions. If you are Windows, choos
 
 Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the build script.
 
-    ```Shell
-    python setup.py build_ext --inplace
-    ```
+```Shell
+python setup.py build_ext --inplace
+```
 
-   If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
+If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
 
 ### Step 4: Testing iknowpy
 
