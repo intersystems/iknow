@@ -261,29 +261,29 @@ Build the iKnow Engine following the above directions. If you are Windows, choos
 
 Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the build script.
 
-```Shell
-   python setup.py build_ext --inplace
-```
+    ```Shell
+    python setup.py build_ext --inplace
+    ```
 
    If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
 
 ### Step 4: Testing iknowpy
 
 1. Set up the shared libraries so that the runtime linker can find them.
-   - Windows: If your Python version is less than 3.8, then copy the iKnow engine DLLs (`<repo_root>\kit\x64\Release\bin\*.dll`) and ICU DLLs (`<repo_root>\thirdparty\icu\bin64\*.dll`) to `<repo_root>\modules\iknowpy`. Otherwise, keep these shared libraries where they are.
-   - Linux: Set the `LD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
-```Shell
-     export LD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
-```
-   - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
-```Shell
-     export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
-```
+    - Windows: If your Python version is less than 3.8, then copy the iKnow engine DLLs (`<repo_root>\kit\x64\Release\bin\*.dll`) and ICU DLLs (`<repo_root>\thirdparty\icu\bin64\*.dll`) to `<repo_root>\modules\iknowpy`. Otherwise, keep these shared libraries where they are.
+    - Linux: Set the `LD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+        ```Shell
+        export LD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
+        ```
+    - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+        ```Shell
+        export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
+        ```
 
 2. The test script at `<repo_root>/modules/iknowpy/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
-```Shell
-   python test.py
-```
+    ```Shell
+    python test.py
+    ```
 
 
 # Contributing to iKnow
