@@ -289,12 +289,13 @@ If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd`
         ```
 
     - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
-    
+
         ```Shell
         export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
         ```
 
 2. The test script at `<repo_root>/modules/iknowpy/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
+
     ```Shell
     python test.py
     ```
