@@ -269,6 +269,9 @@ static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language)
 {
+	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
+		throw ExceptionFrom<iKnowEngine>("Language not supported");
+
 	std::unique_lock<std::mutex> lck(mtx, std::defer_lock);
 
 	m_index.sentences.clear();
@@ -276,6 +279,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	UData udata(m_index.sentences, m_index.proximity);
 
 	SharedMemoryKnowledgebase skb = language_code_map.Lookup(utf8language);
+
 	CompiledKnowledgebase ckb(&skb, utf8language);
 	CProcess::type_languageKbMap temp_map;
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
