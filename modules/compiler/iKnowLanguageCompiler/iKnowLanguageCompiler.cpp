@@ -12,7 +12,14 @@
 using namespace std;
 using namespace iknow::csvdata;
 
-#ifndef WIN32	// works on Linux
+#ifdef WIN32 // current working directory on Windows
+#include <Windows.h>
+void workingdir(string& work_dir) {
+	char buffer[MAX_PATH];
+	GetCurrentDirectoryA(MAX_PATH, buffer);
+	work_dir = std::string(buffer) + '\\';
+}
+#else // on Linux
 #include <unistd.h>
 #include <stdio.h>
 #include <limits.h>
@@ -36,6 +43,7 @@ int main(int argc, char* argv[])
 	
 #ifdef WIN32
 	string repo_root("C:/Users/jdenys/source/repos/iknow/");
+	workingdir(exe_path); 
 	size_t kit_pos = exe_path.find("\\kit\\");
 #else
 	string repo_root("/home/jdenys/iknow/");
@@ -44,6 +52,10 @@ int main(int argc, char* argv[])
 #endif
 	if (kit_pos != string::npos) {
 		repo_root = string(exe_path.begin(), exe_path.begin() + kit_pos + 1);
+	}
+	else {
+		std::cerr << "Run the Language Compiler from the /kit/ directory" << endl;
+		exit(-1);
 	}
 	std::string csv_path = repo_root + "language_models/";
 	std::string aho_path = repo_root + "modules/aho/";
