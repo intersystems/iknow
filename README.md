@@ -19,6 +19,7 @@ This readme file has the basic pointers to get started, but make sure you click 
   - [On Windows](#on-windows)
   - [On Linux / Unix](#on-linux--unix)
   - [On Docker](#on-docker)
+  - [Building the Python interface](#building-the-python-interface)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Understanding iKnow
@@ -96,9 +97,9 @@ The main `iKnowEngine::index()` method has currently 2 limitations : it only wor
 
 ## From Python
 
-The `iknowpy` module provides a Python 3 interface to the iKnow engine and offers a one-to-one mapping from Python data types to C++ data types. In particular, `iknowpy` contains the `iKnowEngine` Python class, which behaves in much the same way as the C++ `iKnowEngine` class defined in "engine.h" (modules\engine\src).
+The `iknowpy` module provides a Python 3 interface to the iKnow engine and offers a one-to-one mapping from Python data types to C++ data types. In particular, `iknowpy` contains the `iKnowEngine` Python class, which behaves in much the same way as the C++ `iKnowEngine` class defined in `<repo_root>/modules/engine/src/engine.h`.
 
-`test.py` (modules\iknowpy) contains an example of how to use the module.
+`<repo_root>/modules/iknowpy/test.py` contains an example of how to use the module.
 
 ## From SpaCy
 
@@ -133,8 +134,8 @@ The [source code](https://github.com/intersystems/iknow/wiki/Source-Code) for th
 ```
   <PropertyGroup Label="UserMacros">
     <ICUDIR>$(SolutionDir)..\thirdparty\icu\</ICUDIR>
-    <ICU_INCLUDE>$(ICU_DIR)\include</ICU_INCLUDE>
-    <ICU_LIB>$(ICU_DIR)\lib64</ICU_LIB>
+    <ICU_INCLUDE>$(ICUDIR)\include</ICU_INCLUDE>
+    <ICU_LIB>$(ICUDIR)\lib64</ICU_LIB>
   </PropertyGroup>
 ```
 
@@ -161,28 +162,31 @@ Alternatively, you can also start a debugging session in Visual Studio and walk 
 
 The iKnow indexing demo program will index one sentence for each of the 11 languages, and write out the sentence boundaries. That's of course not very spectacular by itself, but future iterations of this demo program will expose more of the entity and context information iKnow detects.
 
-### Optional : Change the language models.
+### Optional: Compiling the language models.
 
-Next to the "iKnowEngineTest" project, an extra one has been added: "iKnowLanguageCompiler", that let's you compile changes to the existing language models. First, build the test program as described above, since the language compiler relies on common parts, and then build the compiler project. That will result in a new executable :
+The `iKnowLanguageCompiler` project lets you compile the [language models](https://github.com/intersystems/iknow/wiki/Language-Models) themselves to pick up any changes you may have made to the source .csv files. First, build the `iKnowEngineTest` program as described above, since the language compiler relies on common parts, and then build `iKnowLanguageCompiler`. This should result in a new executable:
 
 * ```<repo_root>\kit\x64\(Debug|Release)\bin\iKnowLanguageCompiler.exe```
 
-Open a command window, change directory to ```<repo_root>\kit\x64\(Debug|Release)\bin\```, and run the program with the requested language code (eg: "IKnowLanguageCompiler en" for building the English language model data). If no language parameter is passed, all language models will be rebuilt. After the build process, you must rebuild the test program, that will automatically pick up the language model changes, and result in modified language models.
-It is important to understand the in- and output of this proces. The input are a collection of csv-files, representing the language model as assembled by a qualified linguist :
+Open a command window, change directory to ```<repo_root>\kit\x64\(Debug|Release)\bin\```, and run the program with the requested language code (eg: `IKnowLanguageCompiler en` for building the English language model). If no language parameter is supplied, all language models will be rebuilt. After the build process, you must rebuild the test program to pick up the new language models.
+
+It is important to understand the in- and output of this proces. The input consists of a collection of csv-files, representing the language model as assembled by a qualified linguist:
 
 * ```<repo_root>\language_models\(cd|de|en|es|fr|ja|nl|pt|ru|sv|uk)\```
 
-Each language directory contains 8 (or less) csv-files : "acro", "filter", "labels", "lexreps", "metadata", "prepro", "regex" and "rules". See ```<repo_root>\docs\KB-file-formats.doxc``` for a detailed description. These are **input** for the language model builder.
+  Each language directory contains 8 (or less) csv-files : "acro", "filter", "labels", "lexreps", "metadata", "prepro", "regex" and "rules". See ```<repo_root>\docs\KB-file-formats.docx``` for a detailed description. These are **input** for the language model builder.
 
 * ```<repo_root>\modules\engine\language_data\```
 
-This directory contains, per language, the binary representation of the linguistic data, in the form of a header file (kb_<language>_data.h), this is **output**, generated by the language compiler, *do not edit* !
+  This directory contains, per language, the binary representation of the linguistic data, in the form of a header file (`kb_<language>_data.h`), this is **output**, generated by the language compiler, *do not edit*!
 
 * ```<repo_root>\modules\aho\inl\(cd|de|en|es|fr|ja|nl|pt|ru|sv|uk)\```
 
-This is the place where, per language, AHO state machine data is written, this is **output**, also the result of the language compilation proces, *do not edit* !
+  This is the place where, per language, AHO state machine data is written, this is **output**, also the result of the language compilation proces, *do not edit*!
 
-The language compiler must be run from it's 'bin' directory, and knows the input and output directories, no need for any configuration. If you would like to change these, you'll have to edit the source code. After rebuilding a languge model data, a new build of the language module itself is needed, since this binary data is hard coded, for maximum speed.
+The language compiler must be run from its `/bin` directory, and knows the input and output directories, no need for any configuration. If you would like to change these, you'll have to edit the source code. After rebuilding a languge model data, a new build of the language module itself is needed, since this binary data is hard coded for maximum speed.
+
+Please refer to the corresponding wiki section for more on our [language models](https://github.com/intersystems/iknow/wiki/Language-Models).
 
 
 ## On Linux / Unix
@@ -243,19 +247,25 @@ make test
 ```
 
 
-# Building the Python Interface
+## Building the Python Interface
 
 The `iknowpy` module provides a Python 3 interface to the iKnow engine. The following directions refer to the commands `pip` and `python`. On some platforms, these commands use Python 2 by default, in which case you should execute `pip3` and `python3` instead to ensure that you are using Python 3.
 
+:warning: We are currently looking at packaging our work in a way that would enable a simple pip-wise installation. Stay tuned (or just follow the steps below in the interim) :-)
+
 ### Step 1: Build the iKnow engine
 
-Build the iKnow Engine following the above directions. If you are Windows, choose the "Release|x64" configuration.
+Build the iKnow engine following the above directions. If you are Windows, choose the "Release|x64" configuration.
 
 ### Step 2: Setting up dependencies
 
 1. Install any version of Python 3 64-bit. Ensure that the installation includes Python header files.
 
-2. Install Cython. You can do this by having a Python distribution that already includes Cython or by executing `pip install cython`.
+2. Install Cython. You can do this by having a Python distribution that already includes Cython or by running 
+
+   ```Shell
+   pip install cython
+   ```
 
 ### Step 3: Building iknowpy
 
@@ -271,11 +281,15 @@ If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd`
 
 1. Set up the shared libraries so that the runtime linker can find them.
     - Windows: If your Python version is less than 3.8, then copy the iKnow engine DLLs (`<repo_root>\kit\x64\Release\bin\*.dll`) and ICU DLLs (`<repo_root>\thirdparty\icu\bin64\*.dll`) to `<repo_root>\modules\iknowpy`. Otherwise, keep these shared libraries where they are.
+
     - Linux: Set the `LD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+
         ```Shell
         export LD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
         ```
+
     - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+    
         ```Shell
         export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
         ```
