@@ -33,6 +33,7 @@ setup(
 	packages=['iknowpy'],
 	install_requires=['cython'],
 	version='0.1',
+	python_requires='>=3',
 	ext_modules=cythonize(
 		[Extension(
 			'iknowpy',
