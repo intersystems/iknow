@@ -272,7 +272,7 @@ Build the iKnow engine following the above directions. If you are Windows, choos
 Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the build script.
 
 ```Shell
-python setup.py build_ext --inplace
+python setup.py build_ext -i
 ```
 
 If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
@@ -294,7 +294,7 @@ If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd`
         export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
         ```
 
-2. The test script at `<repo_root>/modules/iknowpy/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
+2. The test script at `<repo_root>/modules/iknowpy/tests/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
 
     ```Shell
     python test.py
