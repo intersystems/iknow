@@ -722,7 +722,7 @@ vector<int> CSV_DataGenerator::CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, 
 
 void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledgebase,*/ string phase, bool phase_switch /*Predicate *phasePredicate*/, string& outputDir_)
 {
-	cout << "ComileLexepDictionaryPhase " << phase << endl;
+	cout << "CompileLexrepDictionaryPhase " << phase << endl;
 
 	string language = GetName();
 	vector<string> pieces = split_row(outputDir_, '/');
