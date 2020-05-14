@@ -1,11 +1,8 @@
 import os
 import sys
-from distutils.core import setup
-from distutils.extension import Extension
+from setuptools import setup, Extension
 from Cython.Build import cythonize
 
-if sys.version_info.major < 3:
-	raise RuntimeError('Python 3 or higher is required')
 
 if 'ICUDIR' in os.environ:
 	icudir = os.environ['ICUDIR']
@@ -30,12 +27,16 @@ else:
 
 setup(
 	name='iknowpy',
-	description='Python interface to the InterSystems iKnow engine',
+	description='iKnow natural language processing engine',
+	long_description='iKnow natural language processing engine',
 	url='https://github.com/intersystems/iknow',
+	packages=['iknowpy'],
+	install_requires=['cython'],
+	version='0.1',
 	ext_modules=cythonize(
 		[Extension(
 			'iknowpy',
-			sources=['iknowpy.pyx'],
+			sources=['iknowpy/iknowpy.pyx'],
 			include_dirs=['../engine/src', '../core/src/headers', '../base/src/headers', os.path.join(icudir, 'include')],
 			library_dirs=library_dirs,
 			libraries=['iknowengine'],

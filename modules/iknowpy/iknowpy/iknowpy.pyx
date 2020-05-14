@@ -2,7 +2,7 @@
 # cython: c_string_type=unicode, c_string_encoding=utf8
 
 from cython.operator cimport dereference as deref, postincrement as postinc
-from engine cimport *
+from iknowpy.engine cimport *
 
 
 cdef char* eType_to_str(eType t) except NULL:
