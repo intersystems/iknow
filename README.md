@@ -275,7 +275,6 @@ Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute 
 python setup.py install
 ```
 
-
 ### Step 4: Testing iknowpy
 
 The test script at `<repo_root>/modules/iknowpy/tests/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
@@ -285,7 +284,8 @@ cd <repo_root>/modules/iknowpy/tests
 python test.py
 ```
 
-:warning: Do not execute this test script from the `<repo_root>/modules/iknowpy` working directory. Due to how Python resolves package names, importing `iknowpy` with this working directory will cause Python to load the source folder `<repo_root>/modules/iknowpy/iknowpy` instead of the installed package.
+:warning: If you are testing `iknowpy` via the Python interactive console, do not do so in the `<repo_root>/modules/iknowpy` working directory. Because of how Python resolves module names, importing `iknowpy` will cause Python to try importing the source package `<repo_root>/modules/iknowpy/iknowpy` instead of the installed package, resulting in an import error.
+
 
 # Contributing to iKnow
 
