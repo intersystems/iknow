@@ -3,10 +3,10 @@
 from libcpp.string cimport string
 from libcpp.set cimport set
 from libcpp.vector cimport vector
-from iknowpy cimport IkConceptProximity
+cimport IkConceptProximity
 
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
 	const size_t kNoConcept = <size_t>(-1)
 	enum eType:
 		NonRelevant = 0,
@@ -14,7 +14,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil
 		Relation
 		PathRelevant
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sent_Attribute" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata::Sent_Attribute" nogil:
 	enum aType:
 		Negation = 1
 		DateTime = 2
@@ -26,21 +26,21 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sent_Attribut
 		Certainty = 11
 		Other
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata" nogil:
 	ctypedef unsigned short Entity_Ref
 	ctypedef unsigned short Attribute_Ref
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sentence" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata::Sentence" nogil:
 	ctypedef vector[Entity] Entities
 	ctypedef vector[Sent_Attribute] Sent_Attributes
 	ctypedef vector[Entity_Ref] Path
 	ctypedef vector[Path_Attribute_Span] Path_Attributes
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Text_Source" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata::Text_Source" nogil:
 	ctypedef IkConceptProximity.ProximityPairVector_t Proximity
 	ctypedef vector[Sentence] Sentences
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
+cdef extern from "../engine/src/engine.h" namespace "iknowdata" nogil:
 	struct Entity:
 		eType type "type_"
 		size_t offset_start "offset_start_", offset_stop "offset_stop_"
@@ -70,7 +70,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		Proximity proximity
 
 
-cdef extern from "../../engine/src/engine.h" nogil:
+cdef extern from "../engine/src/engine.h" nogil:
 	cdef cppclass CPPiKnowEngine "iKnowEngine":
 		Text_Source m_index
 
