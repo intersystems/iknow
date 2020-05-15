@@ -59,6 +59,11 @@ cdef class iKnowEngine:
 		return self.engine.addUdctAnnotation(start, stop, UdctLabel)
 
 	@property
+	def _m_index_raw(self):
+		"""Return a raw representation of the index following Cython default type coercions. For debug use only."""
+		return self.engine.m_index
+
+	@property
 	def m_index(self):
 		"""Build a Python representation of the index. The Python representation follows the Cython default type
 		coercions with the exception of C++ enums, which are converted to Python strings."""
