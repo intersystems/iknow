@@ -74,7 +74,7 @@ try:
 		packages=['iknowpy'],
 		package_data={'iknowpy': [lib_ext_pattern]},
 		version='0.0.1',
-		python_requires='>=3',
+		python_requires='>=3.5',
 		setup_requires=['cython', 'wheel'],
 		zip_safe=False,
 		ext_modules=cythonize(
