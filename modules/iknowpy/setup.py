@@ -53,42 +53,46 @@ for lib in iculibs_list:
 for lib in enginelibs_list:
 	shutil.copy2(lib, 'iknowpy')
 
-setup(
-	name='iknowpy',
-	description='iKnow natural language processing engine',
-	long_description='iKnow natural language processing engine',
-	url='https://github.com/intersystems/iknow',
-	author='InterSystems Corporation',
-	license='MIT',
-	classifiers=[
-		'Development Status :: 3 - Alpha',
-		'License :: OSI Approved :: MIT License',
-		'Programming Language :: Python :: 3',
-	],
-	keywords='NLP',
-	project_urls={
-		'Source': 'https://github.com/intersystems/iknow',
-		'Tracker': 'https://github.com/intersystems/iknow/issues',
-	},
-	packages=['iknowpy'],
-	package_data={'iknowpy': [lib_ext_pattern]},
-	version='0.0.1',
-	python_requires='>=3',
-	setup_requires=['cython'],
-	zip_safe=False,
-	ext_modules=cythonize(
-		[Extension(
-			'iknowpy.engine',
-			sources=['iknowpy/engine.pyx'],
-			include_dirs=['../engine/src', '../core/src/headers', '../base/src/headers', os.path.join(icudir, 'include')],
-			library_dirs=library_dirs,
-			libraries=['iknowengine'],
-			extra_compile_args=extra_compile_args
-		)],
-		compiler_directives={'language_level': '3'}
+try:
+	setup(
+		name='iknowpy',
+		description='iKnow natural language processing engine',
+		long_description='iKnow natural language processing engine',
+		url='https://github.com/intersystems/iknow',
+		author='InterSystems Corporation',
+		license='MIT',
+		classifiers=[
+			'Development Status :: 3 - Alpha',
+			'License :: OSI Approved :: MIT License',
+			'Programming Language :: Python :: 3',
+		],
+		keywords='NLP',
+		project_urls={
+			'Source': 'https://github.com/intersystems/iknow',
+			'Tracker': 'https://github.com/intersystems/iknow/issues',
+		},
+		packages=['iknowpy'],
+		package_data={'iknowpy': [lib_ext_pattern]},
+		version='0.0.1',
+		python_requires='>=3',
+		setup_requires=['cython', 'wheel'],
+		zip_safe=False,
+		ext_modules=cythonize(
+			[Extension(
+				'iknowpy.engine',
+				sources=['iknowpy/engine.pyx'],
+				include_dirs=['../engine/src', '../core/src/headers', '../base/src/headers', os.path.join(icudir, 'include')],
+				library_dirs=library_dirs,
+				libraries=['iknowengine'],
+				extra_compile_args=extra_compile_args
+			)],
+			compiler_directives={'language_level': '3'}
+		)
 	)
-)
-
-# remove ICU and iKnow engine libraries from package source
-for lib in glob.iglob(os.path.join('iknowpy', lib_ext_pattern)):
-	os.remove(lib)
+finally:
+	# remove ICU and iKnow engine libraries from package source
+	for lib in glob.iglob(os.path.join('iknowpy', lib_ext_pattern)):
+		try:
+			os.remove(lib)
+		except FileNotFoundError:
+			pass
