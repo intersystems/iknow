@@ -1,3 +1,19 @@
+"""Setup script for iknowpy.
+
+python setup.py build_ext -i
+	Build the extension module in the ./iknowpy directory.
+python setup.py build_ext -i -f
+	Rebuild the extension module in the ./iknowpy directory.
+python setup.py install
+	Build and install the module.
+python setup.py bdist_wheel
+	Create a wheel package containing the extension with dependencies.
+python setup.py bdist_wheel --no-dependencies
+	Create a wheel package without the dependencies. (Useful if you are creating
+	a manylinux package, in which case auditwheel takes care of the
+	dependencies)
+"""
+
 import glob
 import os
 import shutil
@@ -40,18 +56,21 @@ else:
 		enginelibs_pattern = '../../kit/{}/release/bin/libiknow*.so'.format(iknowplat)
 		extra_compile_args = []
 
-# temporarily copy ICU and iKnow engine libraries into package source to include
-# in distribution
-iculibs_list = glob.glob(iculibs_pattern)
-enginelibs_list = glob.glob(enginelibs_pattern)
-if not iculibs_list:
-	raise BuildError('ICU libraries not found: {}'.format(iculibs_pattern))
-if not enginelibs_list:
-	raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_pattern))
-for lib in iculibs_list:
-	shutil.copy2(lib, 'iknowpy')
-for lib in enginelibs_list:
-	shutil.copy2(lib, 'iknowpy')
+# Unless the '--no-dependencies' flag is specified, temporarily copy ICU and
+# iKnow engine libraries into package source to include in distribution
+if '--no-dependencies' in sys.argv:
+	sys.argv.remove('--no-dependencies')
+else:
+	iculibs_list = glob.glob(iculibs_pattern)
+	enginelibs_list = glob.glob(enginelibs_pattern)
+	if not iculibs_list:
+		raise BuildError('ICU libraries not found: {}'.format(iculibs_pattern))
+	if not enginelibs_list:
+		raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_pattern))
+	for lib in iculibs_list:
+		shutil.copy2(lib, 'iknowpy')
+	for lib in enginelibs_list:
+		shutil.copy2(lib, 'iknowpy')
 
 try:
 	setup(
