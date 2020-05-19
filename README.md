@@ -309,7 +309,7 @@ To upload to PyPI, you need the twine package. You also need an account at PyPI.
 pip install -U twine
 ```
 
-## On Windows
+#### On Windows
 
 1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
 
@@ -325,7 +325,7 @@ pip install -U twine
    twine upload dist/iknowpy-0.0.2-cp38-cp38-win_amd64.whl
    ```
 
-## On Linux
+#### On Linux
 
 In general, binaries built on one Linux distribution might not be directly runnable on another Linux distribution. If all you want is a wheel that is compatible with the build platform and its binary compatible platforms, simply execute the following in the directory `<repo_root>/modules/iknowpy`.
 
