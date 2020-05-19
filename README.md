@@ -19,7 +19,7 @@ This readme file has the basic pointers to get started, but make sure you click 
   - [On Windows](#on-windows)
   - [On Linux / Unix](#on-linux--unix)
   - [On Docker](#on-docker)
-  - [Building the Python interface](#building-the-python-interface)
+  - [Building the Python Module](#building-the-python-module)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Understanding iKnow
