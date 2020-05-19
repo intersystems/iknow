@@ -110,7 +110,7 @@ The `iknowpy` wrapper module provides a Python interface to the iKnow engine. It
 
 See `<repo_root>/modules/iknowpy/tests/test.py` for a basic example of how to use the module.
 
-To install a pre-built release of `iknowpy`, execute `pip install iknowpy` (`pip3 install iknowpy` on some platforms). Installation via pip is currently supported on Windows and Linux for x86_64. On Linux, pip >= 19.0 is required.
+To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via pip is currently supported on Windows and Linux for x86_64. On Linux, pip >= 19.0 is required.
 
 ## From SpaCy
 
@@ -297,7 +297,7 @@ python test.py
 
 ### Step 5: (Optional) Building a Wheel and Uploading to PyPI
 
-A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using `pip install iknowpy`. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels were built for `iknowpy 0.0.2` for Python 3.8. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions. To build a wheel, you first need the `wheel` package.
+A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels were built for `iknowpy 0.0.2` for Python 3.8. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions. To build a wheel, you first need the `wheel` package.
 
 ```Shell
 pip install -U wheel
