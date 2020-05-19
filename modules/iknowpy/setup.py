@@ -92,7 +92,7 @@ try:
 		},
 		packages=['iknowpy'],
 		package_data={'iknowpy': [lib_ext_pattern]},
-		version='0.0.1',
+		version='0.0.2',
 		python_requires='>=3.5',
 		setup_requires=['cython', 'wheel'],
 		zip_safe=False,
