@@ -335,7 +335,7 @@ python setup.py bdist_wheel
 
 Wheels built this way cannot be uploaded to PyPI, as PyPI does not allow wheels that are specific to a particular Linux distribution.
 
-To build a wheel that is compatible with the vast majority of modern Linux distributions, we leverage the manylinux project, which is the standard way to distribute pre-built Python extension modules on Linux. In particular, we use the manylinux2010 Docker image as a build platform, which produces wheels that are compatible with most Linux distributions that are at least as new as CentOS 6.
+To build a wheel that is compatible with the vast majority of modern Linux distributions, we leverage the manylinux project, which is the standard way to distribute pre-built Python extension modules on Linux. In particular, we use the manylinux2010_x86_64 Docker image as a build platform, which produces wheels that are compatible with most Linux x86_64 distributions that are at least as new as CentOS 6.
 
 1. Obtain the manylinux2010 docker image and run it interactively.
 
@@ -355,7 +355,7 @@ To build a wheel that is compatible with the vast majority of modern Linux distr
    cd icu/source
    mv /usr/bin/python /usr/bin/python.backup
    ln -s /opt/python/cp27-cp27m/bin/python /usr/bin/python
-   dos2unix *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
+   dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
    export CXXFLAGS="-std=c++11"
    export ICUDIR=/home/iknow/thirdparty/icu
    ./runConfigureICU Linux --prefix=$ICUDIR
