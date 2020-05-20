@@ -247,9 +247,9 @@ make test
 ```
 
 
-## Building the Python Interface
+## Building the Python Module
 
-The `iknowpy` module provides a Python 3 interface to the iKnow engine. The following directions refer to the commands `pip` and `python`. On some platforms, these commands use Python 2 by default, in which case you should execute `pip3` and `python3` instead to ensure that you are using Python 3.
+The `iknowpy` module brings the iKnow engine capabilities to Python 3. The following directions refer to the commands `pip` and `python`. On some platforms, these commands use Python 2 by default, in which case you should execute `pip3` and `python3` instead to ensure that you are using Python 3.
 
 :warning: We are currently looking at packaging our work in a way that would enable a simple pip-wise installation. Stay tuned (or just follow the steps below in the interim) :-)
 
@@ -261,44 +261,30 @@ Build the iKnow engine following the above directions. If you are Windows, choos
 
 1. Install any version of Python 3 64-bit. Ensure that the installation includes Python header files.
 
-2. Install Cython. You can do this by having a Python distribution that already includes Cython or by running 
+2. Install Cython and setuptools. You can do this by having a Python distribution that already includes these modules or by running 
 
    ```Shell
-   pip install cython
+   pip install cython setuptools
    ```
 
-### Step 3: Building iknowpy
+### Step 3: Building and installing iknowpy
 
-Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the build script.
+Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the setup script. This builds `iknowpy`, creates a package containing `iknowpy` and its dependencies, and installs the package.
 
 ```Shell
-python setup.py build_ext -i
+python setup.py install
 ```
-
-If the build succeeds, a file with the name matching the pattern `iknowpy.*.pyd` appears in the directory. The name of the file will depend on the platform and version of Python you are using.
 
 ### Step 4: Testing iknowpy
 
-1. Set up the shared libraries so that the runtime linker can find them.
-    - Windows: If your Python version is less than 3.8, then copy the iKnow engine DLLs (`<repo_root>\kit\x64\Release\bin\*.dll`) and ICU DLLs (`<repo_root>\thirdparty\icu\bin64\*.dll`) to `<repo_root>\modules\iknowpy`. Otherwise, keep these shared libraries where they are.
+The test script at `<repo_root>/modules/iknowpy/tests/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
 
-    - Linux: Set the `LD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
+```Shell
+cd <repo_root>/modules/iknowpy/tests
+python test.py
+```
 
-        ```Shell
-        export LD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
-        ```
-
-    - Mac OS: Set the `DYLD_LIBRARY_PATH` environment variable to indicate where the iKnow engine and ICU shared libraries are.
-
-        ```Shell
-        export DYLD_LIBRARY_PATH = "<repo_root>/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
-        ```
-
-2. The test script at `<repo_root>/modules/iknowpy/tests/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
-
-    ```Shell
-    python test.py
-    ```
+:warning: If you are testing `iknowpy` via the Python interactive console, do not do so in the `<repo_root>/modules/iknowpy` working directory. Because of how Python resolves module names, importing `iknowpy` will cause Python to try importing the source package `<repo_root>/modules/iknowpy/iknowpy` instead of the installed package, resulting in an import error.
 
 
 # Contributing to iKnow

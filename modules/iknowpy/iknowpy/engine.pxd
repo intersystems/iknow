@@ -3,7 +3,7 @@
 from libcpp.string cimport string
 from libcpp.set cimport set
 from libcpp.vector cimport vector
-from iknowpy cimport IkConceptProximity
+from .IkConceptProximity cimport ProximityPairVector_t
 
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
@@ -37,7 +37,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sentence" nog
 	ctypedef vector[Path_Attribute_Span] Path_Attributes
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Text_Source" nogil:
-	ctypedef IkConceptProximity.ProximityPairVector_t Proximity
+	ctypedef ProximityPairVector_t Proximity
 	ctypedef vector[Sentence] Sentences
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
