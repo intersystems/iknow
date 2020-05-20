@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <iostream>
+#include <map>
 
 using namespace testing;
 using namespace std;
@@ -48,30 +49,24 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	if (engine.m_index.sentences[0].path.empty()) {
 		throw std::runtime_error(std::string(pMessage));
 	}
-	/*
+	map<size_t, string> mapTextSource;
 	for (SentenceIterator it_sent = engine.m_index.sentences.begin(); it_sent != engine.m_index.sentences.end(); ++it_sent) { // loop over the sentences
-		const Sentence& sent = *it_sent; // get a sentence reference
-
-		// The sentence
-		std::cout << "The sentence: " << std::endl;
-		for (EntityIterator it_entity = sent.entities.begin(); it_entity != sent.entities.end(); ++it_entity) { // loop over the entities
-			const Entity& entity = *it_entity;
-
-			// translate the entity type to 'c' for concept, 'r' for relation, 'p' for path-relevant and 'n' for non-relevant
-			char t = entity.type_ == Entity::Concept ? 'c' : (entity.type_ == Entity::Relation ? 'r' : (entity.type_ == Entity::PathRelevant ? 'p' : 'n'));
-
-			std::cout << " " << t << ":\"" << entity.index_ << "\"" << std::endl; // send type and normalized lexical representation to the console
-		}
-		std::cout << std::endl;
-
-		// Entity Vectors
-		std::cout << "Sentence entity vectors: ";
-		for (PathIterator it_path = sent.path.begin(); it_path != sent.path.end(); ++it_path) { // iterate over the sentence path
-			const Entity& path_entity = sent.entities[*it_path];
-
-			std::cout << "\"" << path_entity.index_ << "\" ";
-		}
-		std::cout << std::endl << std::endl;
+		for_each(it_sent->entities.begin(), it_sent->entities.end(), [&mapTextSource](const Entity& entity) { mapTextSource[entity.entity_id_] = entity.index_; }); // collect the entities
 	}
-	*/
+	// cout << "Text Source Proximity Overview :" << endl;
+	// typedef std::pair<std::pair<EntityId, EntityId>, Proximity> ProximityPair_t; // single proximity pair
+	if (engine.m_index.proximity.empty())
+		throw std::runtime_error(string("*** Missing Proximity data ***"));
+
+	for (Text_Source::Proximity::iterator itProx = engine.m_index.proximity.begin(); itProx != engine.m_index.proximity.end(); ++itProx) {
+		size_t id1 = itProx->first.first;
+		size_t id2 = itProx->first.second;
+		double proximity = itProx->second;
+
+		// cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
+
+		if (itProx - engine.m_index.proximity.begin() > 12) // limit proximity output
+			break;
+	}
+
 }

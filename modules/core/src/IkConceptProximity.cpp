@@ -39,7 +39,9 @@ IkConceptProximity::ProximityPairVector_t IkConceptProximity::GetSortedProximity
 		proximity_pairs.push_back(IkConceptProximity::ProximityPair_t(it->first, it->second));
 		// TODO: trace the list
 	}
-	std::sort(proximity_pairs.begin(), proximity_pairs.end());
+	std::sort(proximity_pairs.begin(), proximity_pairs.end(), 
+		[](const IkConceptProximity::ProximityPair_t& a, const IkConceptProximity::ProximityPair_t& b) { return a.second > b.second; });
+
 	return proximity_pairs; // uses move semantics
 }
 

@@ -541,56 +541,73 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 		using iknow::core::path::CRCs;
 		using iknow::core::path::Offsets;
 
-		// calculate proximity out of path info
-		for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
-			const IkPath* path = &(*j);
-			DirectOutputPath output_path;
-			output_path.offsets.reserve(path->Size());
-			/*
-			DirectOutputPath output_path_extra;
-			if (entity_extra_info) output_path_extra.offsets.reserve(path->Size());
-			*/
+		//
+		// calculate proximity
+		//
+		if (bIsIdeographic && entity_extra_info) { // no paths for Japanese, calculate proximity out of Entity Vectors...
+			MergedLexreps& merged_lexrep_vector = const_cast<IkSentence*>(sentence)->GetLexreps();
 			IkConceptProximity::ProxPoints_t concept_proximity;
-			concept_proximity.reserve(path->Size()); // will be a little smaller though...
+			concept_proximity.reserve(const_cast<IkSentence*>(sentence)->GetEntityVector().size());
 
-			//A valid path must have both a relation and a concept.
-			bool path_has_relation = false;
-			bool path_has_concept = false;
-			for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
-				const IkMergedLexrep* lexrep = &(*(sentence->GetLexrepsBegin()+(*k)));
-				path_has_relation |= lexrep->IsRelation();
-				path_has_concept |= lexrep->IsConcept();
+			for (IkSentence::EntityVector::const_iterator itEV = sentence->GetEntityVectorBegin(); itEV != sentence->GetEntityVectorEnd(); ++itEV) { // scroll over the sentence entity vectors
+				IkMergedLexrep* lexrep = &(merged_lexrep_vector[*itEV]);
 				OccurrenceId occurrence_id = offset_map[lexrep];
-				output_path.offsets.push_back(lexrep);
-				DetectPathAttributes(*lexrep, output_path.offsets.size() - 1, output_path.attributes); // Detect path attributes
-				if (entity_extra_info) {
-					// output_path_extra.offsets.push_back(*k); // we need to preserve the sentence offsets
-					EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator))); // get the entity id
-					EntityFrequencyInfo& ent_freq = entity_map.GetMetadata(entity_id); // entity_id is part of path, count path frequency
-					if (lexrep->IsConcept()) {
-						++ent_freq.concept_in_path;
-						concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
-					}
-					if (lexrep->IsRelation()) {
-						++ent_freq.relation_in_path;
-					}
-					// if (lexrep->IsPathRelevant) TODO ?
-				}
+				EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator)));
+				concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
 			}
-			//Set the end of unfinished begin path attributes to the end of the path
-			for (DirectOutputPathAttributeMap::iterator k = output_path.attributes.begin(); k != output_path.attributes.end(); ++k) {
-				DirectOutputPathAttribute& last_attribute = k->second.back();
-				if (last_attribute.end == DirectOutputPathAttribute::kUnknown) {
-					EndPathAttribute(last_attribute, output_path.offsets.size()); // force path attribute end
-				}
-			}
+			m_concept_proximity(concept_proximity); // calculate concept proximity
+		}
+		else { // calculate proximity out of path info
+			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
+				const IkPath* path = &(*j);
+				DirectOutputPath output_path;
+				output_path.offsets.reserve(path->Size());
+				/*
+				DirectOutputPath output_path_extra;
+				if (entity_extra_info) output_path_extra.offsets.reserve(path->Size());
+				*/
+				IkConceptProximity::ProxPoints_t concept_proximity;
+				concept_proximity.reserve(path->Size()); // will be a little smaller though...
 
-			if ((path_has_relation && path_has_concept) || (sentence->GetPathConstruction() == iknow::core::kPathRelevant)) { // if kPathRelevant, always emit path info
-				++path_count;
-				path_vector.push_back(output_path);
-				if (entity_extra_info) {
-					// path_vector_extra.push_back(output_path_extra); // store extra dominance information
-					m_concept_proximity(concept_proximity); // calculate concept proximity
+				//A valid path must have both a relation and a concept.
+				bool path_has_relation = false;
+				bool path_has_concept = false;
+				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
+					const IkMergedLexrep* lexrep = &(*(sentence->GetLexrepsBegin() + (*k)));
+					path_has_relation |= lexrep->IsRelation();
+					path_has_concept |= lexrep->IsConcept();
+					OccurrenceId occurrence_id = offset_map[lexrep];
+					output_path.offsets.push_back(lexrep);
+					DetectPathAttributes(*lexrep, output_path.offsets.size() - 1, output_path.attributes); // Detect path attributes
+					if (entity_extra_info) {
+						// output_path_extra.offsets.push_back(*k); // we need to preserve the sentence offsets
+						EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator))); // get the entity id
+						EntityFrequencyInfo& ent_freq = entity_map.GetMetadata(entity_id); // entity_id is part of path, count path frequency
+						if (lexrep->IsConcept()) {
+							++ent_freq.concept_in_path;
+							concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
+						}
+						if (lexrep->IsRelation()) {
+							++ent_freq.relation_in_path;
+						}
+						// if (lexrep->IsPathRelevant) TODO ?
+					}
+				}
+				//Set the end of unfinished begin path attributes to the end of the path
+				for (DirectOutputPathAttributeMap::iterator k = output_path.attributes.begin(); k != output_path.attributes.end(); ++k) {
+					DirectOutputPathAttribute& last_attribute = k->second.back();
+					if (last_attribute.end == DirectOutputPathAttribute::kUnknown) {
+						EndPathAttribute(last_attribute, output_path.offsets.size()); // force path attribute end
+					}
+				}
+
+				if ((path_has_relation && path_has_concept) || (sentence->GetPathConstruction() == iknow::core::kPathRelevant)) { // if kPathRelevant, always emit path info
+					++path_count;
+					path_vector.push_back(output_path);
+					if (entity_extra_info) {
+						// path_vector_extra.push_back(output_path_extra); // store extra dominance information
+						m_concept_proximity(concept_proximity); // calculate concept proximity
+					}
 				}
 			}
 		}

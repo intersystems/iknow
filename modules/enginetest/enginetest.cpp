@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <map>
 
 #include "engine.h"
 #include "iKnowUnitTests.h"
@@ -160,7 +161,7 @@ void a_short_demo(void)
 		std::cout << std::endl;
 		for (EntityIterator it_entity = sent.entities.begin(); it_entity != sent.entities.end(); ++it_entity) { // loop over the entities
 			const Entity& entity = *it_entity;
-			
+
 			// translate the entity type to 'c' for concept, 'r' for relation, 'p' for path-relevant and 'n' for non-relevant
 			char t = entity.type_ == Entity::Concept ? 'c' : (entity.type_ == Entity::Relation ? 'r' : (entity.type_ == Entity::PathRelevant ? 'p' : 'n'));
 			
@@ -247,4 +248,23 @@ void a_short_demo(void)
 		}
 		std::cout << std::endl;
 	}
+	//
+	// proximity values
+	//
+	cout << "Text Source Proximity Overview :" << endl;
+	// make a map of entity_id versus index string
+	map<size_t, string> mapTextSource;
+	for (SentenceIterator it_sent = engine.m_index.sentences.begin(); it_sent != engine.m_index.sentences.end(); ++it_sent) { // loop over the sentences
+		for_each(it_sent->entities.begin(), it_sent->entities.end(), [&mapTextSource](const Entity& entity) { mapTextSource[entity.entity_id_] = entity.index_; }); // collect the entities
+	}
+	// plot the concept proximities
+	// typedef std::pair<std::pair<EntityId, EntityId>, Proximity> ProximityPair_t; // single proximity pair
+	for (Text_Source::Proximity::iterator itProx = engine.m_index.proximity.begin(); itProx != engine.m_index.proximity.end(); ++itProx) {
+		size_t id1 = itProx->first.first;
+		size_t id2 = itProx->first.second;
+		double proximity = itProx->second;
+
+		cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
+	}
+
 }
