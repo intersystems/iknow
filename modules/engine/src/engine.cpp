@@ -68,6 +68,7 @@ static const String kNegativeSentimentString = IkStringEncoding::UTF8ToBase("Neg
 static const String kMeasurementString = IkStringEncoding::UTF8ToBase("Measurement"); // Entity(Measurement, Value, Unit), "Value", "Unit", "Value"+"Unit"
 static const String kMeasurementValueString = IkStringEncoding::UTF8ToBase("Value");
 static const String kMeasurementUnitString = IkStringEncoding::UTF8ToBase("Unit");
+static const String kEntityVectorTypeName = IkStringEncoding::UTF8ToBase("EntityVector");
 
 // 
 // helper function translates internal iknow::core::IkLabel::Type to iknowdata::Entity::eType
@@ -178,12 +179,26 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			sentence_data.entities.push_back(Entity(e_type, text_start, text_stop, index_value, data->GetEntityDominance(lexrep), ent_id));
 		}
 		// collect sentence path data
-		for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
-			const IkPath* path = &(*j);
-			for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
-				IkMergedLexrep* lexrep = iknow::core::path::CRC::OffsetToLexrep(*k, sentence->GetLexrepsBegin()); // Sentence offset to lexrep.
-				unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
-				sentence_data.path.push_back(entity_id); // reference to sentence entities
+		if (bIsIdeographic) { // handle entity vectors
+			// iknow::core::PropertyId entity_vector_prop_id = kb->PropertyIdForName(kEntityVectorTypeName); // entity vector property
+			IkSentence::EntityVector& entity_vector = sentence->GetEntityVector();
+			if (!entity_vector.empty()) { // emit entity vectors
+				// Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(entity_vector_prop_id);
+
+				for (IkSentence::EntityVector::const_iterator i = entity_vector.begin(); i != entity_vector.end(); ++i) { // collect entity id's
+					// (*this)(*i + 1); //occurrence ids are 1-based
+					sentence_data.path.push_back(*i); 
+				}
+			}
+		}
+		else { // normal path
+			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
+				const IkPath* path = &(*j);
+				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
+					IkMergedLexrep* lexrep = iknow::core::path::CRC::OffsetToLexrep(*k, sentence->GetLexrepsBegin()); // Sentence offset to lexrep.
+					unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
+					sentence_data.path.push_back(entity_id); // reference to sentence entities
+				}
 			}
 		}
 		udata.iknow_sentences.push_back(sentence_data); // Collect single sentence data

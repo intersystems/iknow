@@ -6,6 +6,7 @@
 #include <fstream>
 
 #include "engine.h"
+#include "iKnowUnitTests.h"
 
 using iknow::base::String;
 using iknow::base::IkStringEncoding;
@@ -90,6 +91,8 @@ void a_short_demo(void);
 
 int main(int argc, char* argv[])
 {
+	testing::iKnowUnitTests::runUnitTests(); // first, verify the quality
+	
 	// currently supported languages : { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 	const std::set<std::string> languages_set = iKnowEngine::GetLanguagesSet();
 
