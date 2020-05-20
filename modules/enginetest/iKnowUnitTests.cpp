@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <iostream>
 #include <map>
+#include <vector>
 
 using namespace testing;
 using namespace std;
@@ -50,8 +51,10 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 		throw std::runtime_error(std::string(pMessage));
 	}
 	map<size_t, string> mapTextSource;
+	map<size_t, double> mapDominantConcepts;
 	for (SentenceIterator it_sent = engine.m_index.sentences.begin(); it_sent != engine.m_index.sentences.end(); ++it_sent) { // loop over the sentences
-		for_each(it_sent->entities.begin(), it_sent->entities.end(), [&mapTextSource](const Entity& entity) { mapTextSource[entity.entity_id_] = entity.index_; }); // collect the entities
+		for_each(it_sent->entities.begin(), it_sent->entities.end(), 
+			[&mapTextSource, &mapDominantConcepts](const Entity& entity) { mapTextSource[entity.entity_id_] = entity.index_; mapDominantConcepts[entity.entity_id_] = entity.dominance_value_; }); // collect the entities
 	}
 	// cout << "Text Source Proximity Overview :" << endl;
 	// typedef std::pair<std::pair<EntityId, EntityId>, Proximity> ProximityPair_t; // single proximity pair
@@ -68,5 +71,18 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 		if (itProx - engine.m_index.proximity.begin() > 12) // limit proximity output
 			break;
 	}
+	// cout << "Text Source Proximity Overview :" << endl;
+	// Top 10 dominant terms :
+	typedef pair<int, double> EntDomType;
+	vector<EntDomType> vecDominantConcepts;
+	for_each(mapDominantConcepts.begin(), mapDominantConcepts.end(), [&vecDominantConcepts](pair<const size_t,double>& ent_par) { vecDominantConcepts.push_back(make_pair(ent_par.first, ent_par.second)); });
+	sort(vecDominantConcepts.begin(), vecDominantConcepts.end(), [](EntDomType& a, EntDomType& b) { return a.second > b.second;  });
+	for (vector<EntDomType>::iterator itDom = vecDominantConcepts.begin(); itDom != vecDominantConcepts.end(); ++itDom) {
+		// cout << "\"" << mapTextSource[itDom->first] << "\" DOM=" << itDom->second << endl;
 
+		if (itDom - vecDominantConcepts.begin() == (10 - 1)) // limit to 10
+			break;
+	}
+	if (vecDominantConcepts.empty())
+		throw std::runtime_error(string("*** Missing Dominance data ***"));
 }
