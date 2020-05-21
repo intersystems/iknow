@@ -7,11 +7,10 @@ python setup.py build_ext -i -f
 python setup.py install
 	Build and install the module.
 python setup.py bdist_wheel
-	Create a wheel package containing the extension with dependencies.
+	Create a wheel containing the extension with dependencies.
 python setup.py bdist_wheel --no-dependencies
-	Create a wheel package without the dependencies. (Useful if you are creating
-	a manylinux package, in which case auditwheel takes care of the
-	dependencies)
+	Create a wheel without the dependencies. (Useful if you are using other
+	tools to take care of dependencies)
 """
 
 import glob
@@ -49,6 +48,7 @@ else:
 		iculibs_pattern = os.path.join(icudir, 'lib/libicu*.dylib')
 		enginelibs_pattern = '../../kit/{}/release/bin/libiknow*.dylib'.format(iknowplat)
 		os.environ['CC'] = 'clang++'
+		os.environ['CXX'] = 'clang++'
 		extra_compile_args = ['-std=c++11']
 	else:
 		lib_ext_pattern = '*.so*'
