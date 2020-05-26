@@ -302,7 +302,7 @@ finally:
 	for lib in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
 		os.remove(lib)
 
-if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
+if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform == 'linux':
 	print('repairing wheel')
 	patchelf_check_version()
 	patch_wheel(find_wheel())
