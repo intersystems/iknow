@@ -145,7 +145,7 @@ void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDeb
         SEMANTIC_ACTION(EntityVectors(sentence));
       }
     }
-	TIMER_ACTION(TraceTheTime(1)); // we'll use codes instead of names, for this is for inernal use.
+	TIMER_ACTION(TraceTheTime(1)); // we'll use codes instead of names, for this is for internal use.
 }
 
 void FilterAll(iknow::base::String& word, const IkKnowledgebase* kb) {
