@@ -242,7 +242,7 @@ def patch_wheel(whl_path):
         os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
 
     # update record file
-    record_filepath = os.path.join(tmp_dir, 'iknowpy-{}.dist-info'.format(version), 'RECORD')
+    record_filepath = os.path.join(tmp_dir, 'iknowpy-{}.dist-info'.format(VERSION), 'RECORD')
     print('updating {}'.format(record_filepath))
     record_file = open(record_filepath, 'w')
     filepath_list = []
@@ -274,7 +274,7 @@ def patch_wheel(whl_path):
 def find_wheel():
     """Return the path to the wheel file that this script created. Raise
     exception if wheel cannot be found."""
-    wheel_pattern = 'dist/iknowpy-{}-*{}{}-*.whl'.format(version, sys.version_info.major, sys.version_info.minor)
+    wheel_pattern = 'dist/iknowpy-{}-*{}{}-*.whl'.format(VERSION, sys.version_info.major, sys.version_info.minor)
     wheel_pattern_matches = glob.glob(wheel_pattern)
     if len(wheel_pattern_matches) == 0:
         raise BuildError('Unable to find wheel matching pattern {!r}'.format(wheel_pattern))
@@ -290,7 +290,7 @@ if 'ICUDIR' in os.environ:
 else:
     icudir = '../../thirdparty/icu'
 
-version = '0.0.2'
+VERSION = '0.0.3'
 
 # platform-specific settings
 install_wheel = False
@@ -368,7 +368,7 @@ try:
         },
         packages=['iknowpy'],
         package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},
-        version=version,
+        version=VERSION,
         python_requires='>=3.5',
         setup_requires=['cython', 'wheel'],
         zip_safe=False,
