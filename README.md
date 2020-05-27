@@ -97,7 +97,7 @@ The main `iKnowEngine::index()` method has currently 2 limitations : it only wor
 
 ## From Python
 
-Requires Python >= 3.5.
+Requires Python $\ge$3.5.
 
 The `iknowpy` wrapper module provides a Python interface to the iKnow engine. It defines the class "iKnowEngine" and its main method, `iKnowEngine.index()`. After indexing, all data is stored in the `m_index` property, represented as nested dictionaries and lists.
 - `m_index['sentences']` : a list of sentences in the text source after indexing.
@@ -110,7 +110,12 @@ The `iknowpy` wrapper module provides a Python interface to the iKnow engine. It
 
 See `<repo_root>/modules/iknowpy/tests/test.py` for a basic example of how to use the module.
 
-To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via pip is currently supported on Windows and Linux for x86_64. On Linux, pip >= 19.0 is required.
+To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via `pip` is supported on the following platforms.
+- Windows for x86_64
+- Mac OS X 10.9 or higher for x86_64
+- Linux for x86_64 (pip $\ge$19.0 is required)
+- Linux for i686 (pip $\ge$19.0 is required)
+- Linux for ppc64le (pip $\ge$19.3 is required)
 
 ## From SpaCy
 
@@ -260,7 +265,7 @@ make test
 
 ## Building the Python Module
 
-The `iknowpy` module brings the iKnow engine capabilities to Python >= 3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
+The `iknowpy` module brings the iKnow engine capabilities to Python $\ge$3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
 
 ### Step 1: Build the iKnow engine
 
@@ -268,7 +273,7 @@ Build the iKnow engine following the above directions. If you are on Windows, ch
 
 ### Step 2: Setting up dependencies
 
-1. Install Python >= 3.5 64-bit. Ensure that the installation includes Python header files.
+1. Install Python $\ge$3.5 64-bit. Ensure that the installation includes Python header files.
 
 2. Install `Cython`, `setuptools`, and `wheel`. You can do this by having a Python distribution that already includes these modules or by running 
 
@@ -300,7 +305,7 @@ python test.py
 
 ### Step 5: (Optional) Building a Wheel and Uploading to PyPI
 
-A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels for `iknowpy 0.0.2` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
+A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels for `iknowpy 0.0.3` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
 
 To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project.
 
@@ -321,7 +326,7 @@ pip install -U twine
 3. Upload the wheel.
 
    ```Shell
-   twine upload dist/iknowpy-0.0.2-cp38-cp38-win_amd64.whl
+   twine upload dist/iknowpy-0.0.3-cp38-cp38-win_amd64.whl
    ```
 
 #### On Mac OS
@@ -340,7 +345,7 @@ Decide the minimum version of Mac OS that the wheel will support. Ensure that th
 3. Upload the wheel.
 
    ```Shell
-   twine upload dist/iknowpy-0.0.2-cp38-cp38-macosx_10_9_x86_64.whl
+   twine upload dist/iknowpy-0.0.3-cp38-cp38-macosx_10_9_x86_64.whl
    ```
 
 #### On Linux
@@ -365,7 +370,7 @@ To build a wheel that is compatible with the vast majority of modern Linux distr
 2. Inside the container, build the ICU and iKnow engine dependencies. The following commands are for ICU version 67.1, but you can adapt them as necessary for other ICU versions.
 
    ```Shell
-   yum install -y dos2unix
+   yum install -y dos2unix openssl-devel
    cd /home
    curl -L -O https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
    unzip icu4c-67_1-src.zip
@@ -393,8 +398,8 @@ To build a wheel that is compatible with the vast majority of modern Linux distr
    /opt/python/cp38-cp38/bin/python -m pip install -U cython setuptools wheel twine
    /opt/python/cp38-cp38/bin/python setup.py bdist_wheel --no-dependencies
    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
-   auditwheel repair dist/iknowpy-0.0.2-cp38-cp38-linux_x86_64.whl -w dist2/
-   /opt/python/cp38-cp38/bin/python -m twine upload dist2/iknowpy-0.0.2-cp38-cp38-manylinux2010_x86_64.whl
+   auditwheel repair dist/iknowpy-0.0.3-cp38-cp38-linux_x86_64.whl -w dist2/
+   /opt/python/cp38-cp38/bin/python -m twine upload dist2/iknowpy-0.0.3-cp38-cp38-manylinux2010_x86_64.whl
    ```
 
 
