@@ -20,6 +20,7 @@ import fnmatch
 import glob
 import hashlib
 import os
+import platform
 import random
 import shutil
 import string
@@ -316,10 +317,11 @@ else:
         enginelibs_name_pattern = 'libiknow*.dylib'
         os.environ['CC'] = 'clang++'
         os.environ['CXX'] = 'clang++'
-        os.environ['MACOSX_DEPLOYMENT_TARGET'] = '10.9'
+        if install_wheel:
+            macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
+            os.environ['MACOSX_DEPLOYMENT_TARGET'] = macosx_version
+            sys.argv.append('--plat-name=macosx-{}-x86_64'.format(macosx_version))
         extra_compile_args = ['-std=c++11']
-        if not any(arg.startswith('--plat-name=') for arg in sys.argv):
-            sys.argv.append('--plat-name=macosx-10.9-x86_64')
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'

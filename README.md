@@ -325,6 +325,25 @@ pip install -U twine
    twine upload dist/iknowpy-0.0.2-cp38-cp38-win_amd64.whl
    ```
 
+#### On Mac OS
+
+Decide the minimum version of Mac OS that the wheel will support. Ensure that the iKnow engine, ICU, and Python were built with support for this version. Python distributions from https://www.python.org/downloads/mac-osx are the best to use for building extensions, as they tend to be the distributions that are maximally compatible with different Mac OS versions. The following directions assume a minimum version of Mac OS X 10.9, but you can adapt them to suit your needs.
+
+1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
+
+2. Build the wheel. If you do not specify MACOSX_DEPLOYMENT_TARGET or --plat-name, then the minimum supported Mac OS version defaults to that of the Python distribution used to build the wheel.
+
+   ```Shell
+   export MACOSX_DEPLOYMENT_TARGET=10.9
+   python setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
+   ```
+
+3. Upload the wheel.
+
+   ```Shell
+   twine upload dist/iknowpy-0.0.2-cp38-cp38-win_amd64.whl
+   ```
+
 #### On Linux
 
 In general, binaries built on one Linux distribution might not be directly runnable on another Linux distribution. If all you want is a wheel that is compatible with the build platform and its binary compatible platforms, simply execute the following in the directory `<repo_root>/modules/iknowpy`.
