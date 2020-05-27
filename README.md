@@ -376,16 +376,12 @@ To build a wheel that is compatible with the vast majority of modern Linux distr
    unzip icu4c-67_1-src.zip
    git clone https://github.com/intersystems/iknow.git
    cd icu/source
-   mv /usr/bin/python /usr/bin/python.backup
-   ln -s /opt/python/cp27-cp27m/bin/python /usr/bin/python
    dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
    export CXXFLAGS="-std=c++11"
    export ICUDIR=/home/iknow/thirdparty/icu
    ./runConfigureICU Linux --prefix=$ICUDIR
    gmake
    gmake install
-   rm -f /usr/bin/python
-   mv /usr/bin/python.backup /usr/bin/python
    cd /home/iknow
    export IKNOWPLAT=lnxrhx64
    make
