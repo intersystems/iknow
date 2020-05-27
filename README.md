@@ -97,7 +97,7 @@ The main `iKnowEngine::index()` method has currently 2 limitations : it only wor
 
 ## From Python
 
-Requires Python $\ge$3.5.
+Requires Python ≥3.5.
 
 The `iknowpy` wrapper module provides a Python interface to the iKnow engine. It defines the class "iKnowEngine" and its main method, `iKnowEngine.index()`. After indexing, all data is stored in the `m_index` property, represented as nested dictionaries and lists.
 - `m_index['sentences']` : a list of sentences in the text source after indexing.
@@ -113,9 +113,9 @@ See `<repo_root>/modules/iknowpy/tests/test.py` for a basic example of how to us
 To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via `pip` is supported on the following platforms.
 - Windows for x86_64
 - Mac OS X 10.9 or higher for x86_64
-- Linux for x86_64 (pip $\ge$19.0 is required)
-- Linux for i686 (pip $\ge$19.0 is required)
-- Linux for ppc64le (pip $\ge$19.3 is required)
+- Linux for x86_64 (pip ≥19.0 is required)
+- Linux for i686 (pip ≥19.0 is required)
+- Linux for ppc64le (pip ≥19.3 is required)
 
 ## From SpaCy
 
@@ -265,7 +265,7 @@ make test
 
 ## Building the Python Module
 
-The `iknowpy` module brings the iKnow engine capabilities to Python $\ge$3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
+The `iknowpy` module brings the iKnow engine capabilities to Python ≥3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
 
 ### Step 1: Build the iKnow engine
 
@@ -273,7 +273,7 @@ Build the iKnow engine following the above directions. If you are on Windows, ch
 
 ### Step 2: Setting up dependencies
 
-1. Install Python $\ge$3.5 64-bit. Ensure that the installation includes Python header files.
+1. Install Python ≥3.5. Ensure that the installation includes Python header files.
 
 2. Install `Cython`, `setuptools`, and `wheel`. You can do this by having a Python distribution that already includes these modules or by running 
 
