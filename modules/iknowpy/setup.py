@@ -102,7 +102,7 @@ def patchlib_check():
 
 def patchelf_setrpath(lib_path):
     """Given the path to a shared library, set its rpath to '$ORIGIN' so that it
-    can find libraries in its own directory."""
+    can find libraries in its own directory. Linux only."""
     subprocess.run(['patchelf', '--set-rpath', '$ORIGIN', lib_path], check=True)
 
 

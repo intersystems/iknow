@@ -260,7 +260,7 @@ make test
 
 ## Building the Python Module
 
-The `iknowpy` module brings the iKnow engine capabilities to Python >= 3.5. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
+The `iknowpy` module brings the iKnow engine capabilities to Python >= 3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
 
 ### Step 1: Build the iKnow engine
 
@@ -270,11 +270,14 @@ Build the iKnow engine following the above directions. If you are on Windows, ch
 
 1. Install Python >= 3.5 64-bit. Ensure that the installation includes Python header files.
 
-2. Install `Cython` and `setuptools`. You can do this by having a Python distribution that already includes these modules or by running 
+2. Install `Cython`, `setuptools`, and `wheel`. You can do this by having a Python distribution that already includes these modules or by running 
 
    ```Shell
-   pip install -U cython setuptools
+   pip install -U cython setuptools wheel
    ```
+
+3. If you are on Mac OS, ensure that the `otool` and `install_name_path` command-line tools are present. They should be available if you have XCode installed with command-line developer tools.
+   If you are on Linux, ensure that the `patchelf` tool is present. You can install it using the package manager on your machine.
 
 ### Step 3: Building and installing iknowpy
 
@@ -297,11 +300,7 @@ python test.py
 
 ### Step 5: (Optional) Building a Wheel and Uploading to PyPI
 
-A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels were built for `iknowpy 0.0.2` for Python 3.8. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions. To build a wheel, you first need the `wheel` package.
-
-```Shell
-pip install -U wheel
-```
+A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels for `iknowpy 0.0.2` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
 
 To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project.
 
@@ -327,11 +326,11 @@ pip install -U twine
 
 #### On Mac OS
 
-Decide the minimum version of Mac OS that the wheel will support. Ensure that the iKnow engine, ICU, and Python were built with support for this version. Python distributions from https://www.python.org/downloads/mac-osx are the best to use for building extensions, as they tend to be the distributions that are maximally compatible with different Mac OS versions. The following directions assume a minimum version of Mac OS X 10.9, but you can adapt them to suit your needs.
+Decide the minimum version of Mac OS that the wheel will support. Ensure that the iKnow engine, ICU, and Python were built with support for this version. Python distributions from https://www.python.org/downloads/mac-osx are the best for this situation, as they tend to be the distributions that are maximally compatible with different Mac OS versions. The following directions assume a minimum target version of Mac OS X 10.9, but you can adapt them to suit your preferences.
 
 1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
 
-2. Build the wheel. If you do not specify MACOSX_DEPLOYMENT_TARGET or --plat-name, then the minimum supported Mac OS version defaults to that of the Python distribution used to build the wheel.
+2. Build the wheel. If you do not specify `MACOSX_DEPLOYMENT_TARGET` or `--plat-name`, then the minimum supported Mac OS version defaults to that of the Python distribution used to build the wheel.
 
    ```Shell
    export MACOSX_DEPLOYMENT_TARGET=10.9
@@ -341,7 +340,7 @@ Decide the minimum version of Mac OS that the wheel will support. Ensure that th
 3. Upload the wheel.
 
    ```Shell
-   twine upload dist/iknowpy-0.0.2-cp38-cp38-win_amd64.whl
+   twine upload dist/iknowpy-0.0.2-cp38-cp38-macosx_10_9_x86_64.whl
    ```
 
 #### On Linux
