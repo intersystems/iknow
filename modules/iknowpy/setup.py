@@ -11,6 +11,8 @@ python setup.py bdist_wheel
 python setup.py bdist_wheel --no-dependencies
     Create a wheel without the dependencies. (Useful if you are using other
     tools to take care of dependencies)
+python setup.py clean
+    Clean all build files.
 """
 
 import base64
@@ -24,12 +26,51 @@ import string
 import subprocess
 import sys
 import zipfile
-from setuptools import setup, Extension
+from setuptools import setup, Extension, Command
 from Cython.Build import cythonize
 
 
 class BuildError(Exception):
     pass
+
+
+class CleanCommand(Command):
+    """Command for cleaning all build files"""
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        rmtree('build')
+        rmtree('dist')
+        rmtree('iknowpy.egg-info')
+        remove('iknowpy/engine.cpp')
+        if sys.platform == 'win32':
+            module_pattern = 'iknowpy/engine.*.pyd'
+        else:
+            module_pattern = 'iknowpy/engine.*.so'
+        for p in glob.iglob(module_pattern):
+            remove(p)
+
+
+def rmtree(path):
+    """Like shutil.rmtree() but is silent if path does not exist."""
+    try:
+        shutil.rmtree(path)
+    except FileNotFoundError:
+        pass
+
+
+def remove(path):
+    """Like os.remove() but is silent if path does not exist."""
+    try:
+        os.remove(path)
+    except FileNotFoundError:
+        pass
 
 
 def patchlib_check():
@@ -162,10 +203,7 @@ def patch_wheel(whl_path):
     tmp_dir = 'dist/temp'
     print('extracting {} to {}'.format(whl_path, tmp_dir))
     whl_file = zipfile.ZipFile(whl_path)
-    try:
-        shutil.rmtree(tmp_dir)
-    except FileNotFoundError:
-        pass
+    rmtree(tmp_dir)
     os.mkdir(tmp_dir)
     whl_file.extractall(tmp_dir)
     whl_file.close()
@@ -229,7 +267,7 @@ def patch_wheel(whl_path):
 
     # remove temporary files
     print('removing {}'.format(tmp_dir))
-    shutil.rmtree(tmp_dir)
+    rmtree(tmp_dir)
 
 
 def find_wheel():
@@ -264,6 +302,8 @@ if sys.platform == 'win32':
     extra_compile_args = []
 else:
     if len(sys.argv) > 1 and sys.argv[1] == 'install':
+        # On Unix, we do not support direct installation. Create a wheel instead
+        # and install the wheel.
         sys.argv[1] = 'bdist_wheel'
         install_wheel = True
     if 'IKNOWPLAT' in os.environ:
@@ -287,12 +327,11 @@ else:
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
-# Unless the '--no-dependencies' flag is specified, temporarily copy ICU and
-# iKnow engine libraries into package source to include in distribution
+# Copy ICU and iKnow engine libraries into package source if appropriate
 if '--no-dependencies' in sys.argv:
     no_dependencies = True
     sys.argv.remove('--no-dependencies')
-else:
+elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
     no_dependencies = False
     iculibs_list = glob.glob(iculibs_path_pattern)
     enginelibs_list = glob.glob(enginelibs_path_pattern)
@@ -304,6 +343,8 @@ else:
         shutil.copy2(lib, 'iknowpy')
     for lib in enginelibs_list:
         shutil.copy2(lib, 'iknowpy')
+else:
+    no_dependencies = True
 
 try:
     setup(
@@ -339,14 +380,17 @@ try:
                 extra_compile_args=extra_compile_args
             )],
             compiler_directives={'language_level': '3'}
-        )
+        ),
+        cmdclass={
+            'clean': CleanCommand
+        }
     )
 finally:
     # remove ICU and iKnow engine libraries from package source
     for lib in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
-        os.remove(lib)
+        remove(lib)
     for lib in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
-        os.remove(lib)
+        remove(lib)
 
 if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
     print('repairing wheel')
