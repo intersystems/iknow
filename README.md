@@ -307,11 +307,13 @@ python test.py
 
 A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels for `iknowpy 0.0.3` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
 
-To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project.
+To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project. You can view the `iknowpy` project on PyPI at https://pypi.org/project/iknowpy/.
 
 ```Shell
 pip install -U twine
 ```
+
+To see the https://pypi.org/project/iknowpy/
 
 #### On Windows
 
