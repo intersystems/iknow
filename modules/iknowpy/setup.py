@@ -350,18 +350,30 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
 else:
     no_dependencies = True
 
+with open('README.md') as readme_file:
+    long_description = readme_file.read()
+
 try:
     setup(
         name='iknowpy',
-        description='iKnow natural language processing engine',
-        long_description='iKnow natural language processing engine',
+        description='iKnow Natural Language Processing engine',
+        long_description=long_description,
+        long_description_content_type='text/markdown',
         url='https://github.com/intersystems/iknow',
         author='InterSystems Corporation',
         license='MIT',
         classifiers=[
             'Development Status :: 3 - Alpha',
             'License :: OSI Approved :: MIT License',
+            'Programming Language :: C++',
+            'Programming Language :: Cython',
             'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3 :: Only',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Programming Language :: Python :: 3.7',
+            'Programming Language :: Python :: 3.8',
+            'Programming Language :: Python :: Implementation :: CPython',
         ],
         keywords='NLP',
         project_urls={
