@@ -142,7 +142,7 @@ def patchlib_getneeded(lib_path):
 
 def patchlib_replaceneeded(lib_path, old_deps, name_map):
     """For the shared library at lib_path, replace its declared dependencies on
-    old_dep_names with those in name_map.
+    old_dep_names with those in name_map. Unix only.
 
     old_deps: a nonempty list of dependencies
         (either by name or path, depending on the value currently in the shared
@@ -177,7 +177,8 @@ def patchlib_setname(lib_path, name):
 
 
 def rehash(file_path):
-    """Return (hash, size) for a file with path file_path."""
+    """Return (hash, size) for a file with path file_path. The hash and size
+    are used by pip to verify the integrity of the contents of a wheel."""
     with open(file_path, 'rb') as file:
         contents = file.read()
         hash = base64.urlsafe_b64encode(hashlib.sha256(contents).digest()).decode('latin1').rstrip('=')
@@ -186,7 +187,8 @@ def rehash(file_path):
 
 
 def rand_alphanumeric(length=8):
-    """Return a random alphanumeric string with a given length."""
+    """Return a random alphanumeric string with a given length. Used to tag
+    shared libraries with a unique name."""
     return ''.join(random.choice(ALPHANUMERIC) for _ in range(length))
 
 
@@ -211,11 +213,12 @@ def patch_wheel(whl_path):
 
     # create list of libraries to repair
     repair_lib_dir = os.path.join(tmp_dir, 'iknowpy')
-    repair_lib_paths = glob.glob(os.path.join(repair_lib_dir, 'engine.*.so'))
+    module_pattern = os.path.join(repair_lib_dir, 'engine.*.so')
+    repair_lib_paths = glob.glob(module_pattern)
     if len(repair_lib_paths) == 0:
-        raise BuildError('Unable to find module matching pattern {!r}'.format(os.path.join(repair_lib_dir, 'engine.*.so')))
+        raise BuildError('Unable to find module matching pattern {!r}'.format(module_pattern))
     elif len(repair_lib_paths) > 1:
-        raise BuildError('Found multiple modules matching pattern {!r}'.format(os.path.join(repair_lib_dir, 'engine.*.so')))
+        raise BuildError('Found multiple modules matching pattern {!r}'.format(module_pattern))
     repair_lib_paths.extend(glob.iglob(os.path.join(repair_lib_dir, iculibs_name_pattern)))
     repair_lib_paths.extend(glob.iglob(os.path.join(repair_lib_dir, enginelibs_name_pattern)))
 
@@ -241,30 +244,28 @@ def patch_wheel(whl_path):
             patchlib_replaceneeded(lib_path, dep_libs, lib_rename)
         os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
 
-    # update record file
+    # update record file, which tracks wheel contents and their checksums
     record_filepath = os.path.join(tmp_dir, 'iknowpy-{}.dist-info'.format(VERSION), 'RECORD')
     print('updating {}'.format(record_filepath))
-    record_file = open(record_filepath, 'w')
-    filepath_list = []
-    for root, _, files in os.walk(tmp_dir):
-        for file in files:
-            filepath_list.append(os.path.join(root, file))
-    for file_path in filepath_list:
-        if file_path == record_filepath:
-            record_file.write(os.path.relpath(record_filepath, tmp_dir))
-            record_file.write(',,\n')
-        else:
-            record_line = '{},sha256={},{}\n'.format(os.path.relpath(file_path, tmp_dir), *rehash(file_path))
-            record_file.write(record_line)
-    record_file.close()
+    with open(record_filepath, 'w') as record_file:
+        filepath_list = []
+        for root, _, files in os.walk(tmp_dir):
+            for file in files:
+                filepath_list.append(os.path.join(root, file))
+        for file_path in filepath_list:
+            if file_path == record_filepath:
+                record_file.write(os.path.relpath(record_filepath, tmp_dir))
+                record_file.write(',,\n')
+            else:
+                record_line = '{},sha256={},{}\n'.format(os.path.relpath(file_path, tmp_dir), *rehash(file_path))
+                record_file.write(record_line)
 
     # repackage wheel
     print('repackaging {}'.format(whl_path))
-    whl_file = zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED)
-    for file_path in filepath_list:
-        print('adding {}'.format(file_path))
-        whl_file.write(file_path, os.path.relpath(file_path, tmp_dir))
-    whl_file.close()
+    with zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED) as whl_file:
+        for file_path in filepath_list:
+            print('adding {}'.format(file_path))
+            whl_file.write(file_path, os.path.relpath(file_path, tmp_dir))
 
     # remove temporary files
     print('removing {}'.format(tmp_dir))
@@ -283,14 +284,14 @@ def find_wheel():
     return wheel_pattern_matches[0]
 
 
+# constants
 ALPHANUMERIC = string.ascii_letters + string.digits
+VERSION = '0.0.3'
 
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
 else:
     icudir = '../../thirdparty/icu'
-
-VERSION = '0.0.3'
 
 # platform-specific settings
 install_wheel = False
@@ -317,11 +318,12 @@ else:
         enginelibs_name_pattern = 'libiknow*.dylib'
         os.environ['CC'] = 'clang++'
         os.environ['CXX'] = 'clang++'
+        extra_compile_args = ['-std=c++11']
         if install_wheel:
+            # set wheel target platform to that of the build platform
             macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
             os.environ['MACOSX_DEPLOYMENT_TARGET'] = macosx_version
             sys.argv.append('--plat-name=macosx-{}-x86_64'.format(macosx_version))
-        extra_compile_args = ['-std=c++11']
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'
