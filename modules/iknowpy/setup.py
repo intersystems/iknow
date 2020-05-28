@@ -286,7 +286,7 @@ def find_wheel():
 
 # constants
 ALPHANUMERIC = string.ascii_letters + string.digits
-VERSION = '0.0.4'
+VERSION = '0.0.5'
 
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
@@ -350,7 +350,7 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
 else:
     no_dependencies = True
 
-with open('README.md') as readme_file:
+with open('README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
 try:
