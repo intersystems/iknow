@@ -115,7 +115,6 @@ To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (
 - Mac OS X 10.9 or higher for x86_64
 - Linux for x86_64 (pip ≥19.0 is required)
 - Linux for i686 (pip ≥19.0 is required)
-- Linux for ppc64le (pip ≥19.3 is required)
 
 ## From SpaCy
 
