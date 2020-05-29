@@ -114,8 +114,12 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			const size_t text_start = literal_start - pText;
 			const size_t text_stop = literal_end - pText;
 
+			bool is_measure = false; // we can only have one measurement attribute per merged lexrep
+			int idx_measure = 0; // index to measurement attribute
 			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
-				bool is_measure = false, is_value = false, is_unit = false; // lexrep level
+				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText()); // the attribute marker
+
+				bool is_marker_measure = false, is_value = false, is_unit = false; // lexrep level
 				const size_t label_count = it->NumberOfLabels();
 				for (size_t i = 0; i < label_count; ++i) {
 					FastLabelSet::Index idx_label = it->GetLabelIndexAt(i);
@@ -140,15 +144,24 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 								}
 							}
 							Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(id_property);
-							std::string a_index = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText());
-							unsigned short idx_sentence = static_cast<unsigned short>(udata.iknow_sentences.size()); // sentence reference
 							unsigned short idx_attribute = static_cast<unsigned short>(sentence_data.sent_attributes.size()); // attribute reference
 							mapLexrep2Attribute.insert(make_pair(lexrep, make_pair(idx_sentence, idx_attribute))); // link ID to lexrep
 
-							sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_index));
-							sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
-
+							if (!is_measure) {
+								sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
+								sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
+							}
 							if (id_property == Sent_Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
+								if (!is_measure) {
+									idx_measure = (int) sentence_data.sent_attributes.size() - 1;
+									is_measure = is_marker_measure = true;
+								}
+								if (!is_marker_measure) { // add marker to existing marker
+									Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure];
+									ref.marker_ += " " + a_marker;
+									ref.offset_stop_ = it->GetTextPointerEnd() - pText;
+									is_marker_measure = true;
+								}
 								String at_value, at_unit, at_value2, at_unit2; // measurement attribute properties
 								String at_token = it->GetValue();
 								if (is_value && is_unit) { // separate value & unit properties
@@ -161,7 +174,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 										if (is_value) at_value = it->GetNormalizedText();
 										if (is_unit) at_unit = it->GetNormalizedText();
 								}
-								Sent_Attribute& ref = sentence_data.sent_attributes.back(); // reference the newly added measuremnt attribute
+								Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure]; // reference the newly added measuremnt attribute
 
 								// ref.optional_parameters.measurement.value_ = 
 								if (at_value.length()) ref.value_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
@@ -187,7 +200,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 
 				for (IkSentence::EntityVector::const_iterator i = entity_vector.begin(); i != entity_vector.end(); ++i) { // collect entity id's
 					// (*this)(*i + 1); //occurrence ids are 1-based
-					sentence_data.path.push_back(*i); 
+					sentence_data.path.push_back((unsigned short)*i); 
 				}
 			}
 		}

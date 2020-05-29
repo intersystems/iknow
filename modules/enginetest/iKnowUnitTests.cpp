@@ -20,6 +20,8 @@ void iKnowUnitTests::runUnitTests(void)
 		iKnowUnitTests test_collection;
 		pError = "Japanese output must generate entity vectors";
 		test_collection.test1(pError);
+		pError = "Only one measurement attribute in example English text";
+		test_collection.test2(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -30,6 +32,35 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+void iKnowUnitTests::test2(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
+	string text_source_utf8 = "The only sound as we followed the narrow hillside path through the firs and pines was that of the sparkling green Soca river crashing its way through the gorge hundreds of feet below. ";
+	// <attr type = "measurement" literal = "hundreds of feet" token = "hundreds of feet" value = "hundreds of" unit = "feet">
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+	engine.index(text_source, "en");
+
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
+	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		size_t start_literal = attribute.offset_start_;
+		size_t stop_literal = attribute.offset_stop_;
+		String literal(&text_source[start_literal], &text_source[stop_literal]);
+
+		if (literal != u"hundreds of feet")
+			throw std::runtime_error(string(pMessage));
+		string marker = attribute.marker_;
+		if (marker != "hundreds of feet")
+			throw std::runtime_error(string(pMessage));
+		string value = attribute.value_;
+		if (value != "hundreds of")
+			throw std::runtime_error(string(pMessage));
+		string unit = attribute.unit_;
+		if (unit != "feet")
+			throw std::runtime_error(string(pMessage));
+	}
+
 }
 void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produce entity vectors
 	String text_source = {
