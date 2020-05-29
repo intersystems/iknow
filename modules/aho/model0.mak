@@ -32,7 +32,7 @@ IS_DYLIB = 1
 ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86 lnxrhppc64 lnxdebarm), $(PLATFORM))
 #Similar problem on AIX xlC, but can't isolate the optimizations
 #there: No documentation on specific flags.
-ifeq ($(PLATFORM),lnxubuntux64)
+ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86), $(PLATFORM))
 ifeq ($(IKNOWMODELLANG),ja)
 UNOPTIMIZED = 1
 endif
