@@ -312,8 +312,6 @@ To upload to PyPI, you need the twine package. You also need an account at PyPI.
 pip install -U twine
 ```
 
-To see the https://pypi.org/project/iknowpy/
-
 #### On Windows
 
 1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
