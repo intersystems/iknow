@@ -350,6 +350,9 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
 else:
     no_dependencies = True
 
+# Copy license file
+shutil.copy2('../../LICENSE', '.')
+
 with open('README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
@@ -402,11 +405,12 @@ try:
         }
     )
 finally:
-    # remove ICU and iKnow engine libraries from package source
+    # remove dependent libraries and license from package source
     for lib in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
         remove(lib)
     for lib in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
         remove(lib)
+    remove('LICENSE')
 
 if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
     print('repairing wheel')
