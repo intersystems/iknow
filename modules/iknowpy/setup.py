@@ -35,6 +35,103 @@ class BuildError(Exception):
     pass
 
 
+class PatchLib:
+    """An instance represents a library file patcher. Linux and Mac OS only."""
+
+    def __init__(self):
+        """Check that the tools needed to patch libraries are present, then
+        configure tools to patch libraries correctly. Raise an exception if
+        tools are not present.
+
+        On Linux, we require patchelf >=0.9. On Mac OS, we require otool and
+        install_name_tool."""
+        if sys.platform == 'darwin':
+            if not shutil.which('otool'):
+                raise BuildError('otool not found')
+            if not shutil.which('install_name_tool'):
+                raise BuildError('install_name_tool not found')
+        else:  # linux
+            if not shutil.which('patchelf'):
+                raise BuildError('patchelf not found')
+            p = subprocess.run(['patchelf', '--version'],
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
+                universal_newlines=True)
+            try:
+                version = float(p.stdout.split()[1])
+            except ValueError:
+                raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
+            if version < 0.9:
+                raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
+
+    def setrpath(self, lib_path):
+        """Given the path to a shared library, set its rpath to '$ORIGIN' so
+        that it can find libraries in its own directory. Linux only."""
+        if sys.platform == 'darwin':
+            raise NotImplementedError('PatchLib.setrpath is Linux only')
+        subprocess.run(['patchelf', '--set-rpath', '$ORIGIN', lib_path],
+                       check=True)
+
+    def getneeded(self, lib_path):
+        """Given a path to a shared library, return a list containing the ICU and
+        iKnow engine direct dependencies of that shared library. The list may
+        contain the names of the dependencies or paths to the dependencies,
+        depending on what is embedded in the executable."""
+        if sys.platform == 'darwin':
+            cmd = ['otool', '-L', lib_path]
+            p = subprocess.run(cmd, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               check=True, universal_newlines=True)
+            lib_name = os.path.split(lib_path)[1]
+            needed = map(up_to_first_space, p.stdout.rstrip().split('\n'))
+            needed = (s.strip() for s in needed)
+            return [s for s in needed
+                    if os.path.split(s)[1] != lib_name and
+                    (fnmatch.fnmatch(s, '*' + iculibs_name_pattern) or
+                     fnmatch.fnmatch(s, '*' + enginelibs_name_pattern))]
+        else:
+            cmd = ['patchelf', '--print-needed', lib_path]
+            p = subprocess.run(cmd, stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               check=True, universal_newlines=True)
+            return [s for s in p.stdout.split()
+                    if fnmatch.fnmatch(s, iculibs_name_pattern) or
+                    fnmatch.fnmatch(s, enginelibs_name_pattern)]
+
+    def replaceneeded(self, lib_path, old_deps, name_map):
+        """For the shared library at lib_path, replace its declared dependencies
+        on old_dep_names with those in name_map..
+
+        old_deps: a nonempty list of dependencies
+            (either by name or path, depending on the value currently in the
+            shared library) that the shared library has
+        name_map: a dict that maps an old dependency NAME to a new NAME"""
+        if sys.platform == 'darwin':
+            cmd = ['install_name_tool']
+            for old_dep in old_deps:
+                cmd.append('-change')
+                cmd.append(old_dep)
+                old_dep_name = os.path.split(old_dep)[1]
+                new_dep_name = name_map[old_dep_name]
+                new_dep = os.path.join('@loader_path', new_dep_name)
+                cmd.append(new_dep)
+        else:
+            cmd = ['patchelf']
+            for old_dep in old_deps:
+                cmd.append('--replace-needed')
+                cmd.append(old_dep)
+                cmd.append(name_map[old_dep])
+        cmd.append(lib_path)
+        subprocess.run(cmd, check=True)
+
+    def setname(self, lib_path, name):
+        """Set the name of a shared library. Does not rename the file."""
+        if sys.platform == 'darwin':
+            cmd = ['install_name_tool', '-id', name, lib_path]
+        else:
+            cmd = ['patchelf', '--set-soname', name, lib_path]
+        subprocess.run(cmd, check=True)
+
+
 class CleanCommand(Command):
     """Command for cleaning all build files"""
     user_options = []
@@ -74,38 +171,6 @@ def remove(path):
         pass
 
 
-def patchlib_check():
-    """Check that the tools needed to patch libraries are present. Raise an
-    exception if tools are not present. Unix only.
-
-    On Linux, we require patchelf >=0.9. On Mac OS, we require otool and
-    install_name_tool."""
-    if sys.platform == 'darwin':
-        if not shutil.which('otool'):
-            raise BuildError('otool not found')
-        if not shutil.which('install_name_tool'):
-            raise BuildError('install_name_tool not found')
-    else:
-        if not shutil.which('patchelf'):
-            raise BuildError('patchelf not found')
-        p = subprocess.run(
-            ['patchelf', '--version'],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
-            universal_newlines=True)
-        try:
-            version = float(p.stdout.split()[1])
-        except ValueError:
-            raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
-        if version < 0.9:
-            raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
-
-
-def patchelf_setrpath(lib_path):
-    """Given the path to a shared library, set its rpath to '$ORIGIN' so that it
-    can find libraries in its own directory. Linux only."""
-    subprocess.run(['patchelf', '--set-rpath', '$ORIGIN', lib_path], check=True)
-
-
 def up_to_first_space(s):
     """Return the substring of s up to the first space, or all of s if it does
     not contain a space."""
@@ -113,67 +178,6 @@ def up_to_first_space(s):
     if i == -1:
         i = len(s)
     return s[:i]
-
-
-def patchlib_getneeded(lib_path):
-    """Given a path to a shared library, return a list containing the ICU and
-    iKnow engine direct dependencies of that shared library. The list may
-    contain the names of the dependencies or paths to the dependencies,
-    depending on what is embedded in the executable. Unix only."""
-    if sys.platform == 'darwin':
-        cmd = ['otool', '-L', lib_path]
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                           check=True, universal_newlines=True)
-        lib_name = os.path.split(lib_path)[1]
-        needed = map(up_to_first_space, p.stdout.rstrip().split('\n'))
-        needed = (s.strip() for s in needed)
-        return [s for s in needed
-                if os.path.split(s)[1] != lib_name and
-                (fnmatch.fnmatch(s, '*' + iculibs_name_pattern) or
-                 fnmatch.fnmatch(s, '*' + enginelibs_name_pattern))]
-    else:
-        cmd = ['patchelf', '--print-needed', lib_path]
-        p = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                           check=True, universal_newlines=True)
-        return [s for s in p.stdout.split()
-                if fnmatch.fnmatch(s, iculibs_name_pattern) or
-                fnmatch.fnmatch(s, enginelibs_name_pattern)]
-
-
-def patchlib_replaceneeded(lib_path, old_deps, name_map):
-    """For the shared library at lib_path, replace its declared dependencies on
-    old_dep_names with those in name_map. Unix only.
-
-    old_deps: a nonempty list of dependencies
-        (either by name or path, depending on the value currently in the shared
-        library) that the shared library has
-    name_map: a dict that maps an old dependency NAME to a new NAME"""
-    if sys.platform == 'darwin':
-        cmd = ['install_name_tool']
-        for old_dep in old_deps:
-            cmd.append('-change')
-            cmd.append(old_dep)
-            old_dep_name = os.path.split(old_dep)[1]
-            new_dep_name = name_map[old_dep_name]
-            new_dep = os.path.join('@loader_path', new_dep_name)
-            cmd.append(new_dep)
-    else:
-        cmd = ['patchelf']
-        for old_dep in old_deps:
-            cmd.append('--replace-needed')
-            cmd.append(old_dep)
-            cmd.append(name_map[old_dep])
-    cmd.append(lib_path)
-    subprocess.run(cmd, check=True)
-
-
-def patchlib_setname(lib_path, name):
-    """Set the name of a shared library. Does not rename the file. Unix only."""
-    if sys.platform == 'darwin':
-        cmd = ['install_name_tool', '-id', name, lib_path]
-    else:
-        cmd = ['patchelf', '--set-soname', name, lib_path]
-    subprocess.run(cmd, check=True)
 
 
 def rehash(file_path):
@@ -202,6 +206,8 @@ def patch_wheel(whl_path):
     2. We don't want a system library with the same name to interfere with
     loading."""
 
+    print('repairing wheel')
+
     # extract wheel
     tmp_dir = 'dist/temp'
     print('extracting {} to {}'.format(whl_path, tmp_dir))
@@ -223,6 +229,7 @@ def patch_wheel(whl_path):
     repair_lib_paths.extend(glob.iglob(os.path.join(repair_lib_dir, enginelibs_name_pattern)))
 
     # repair libraries by setting dependency paths and renaming them
+    patcher = PatchLib()
     lib_rename = {}  # dict from old lib name to new lib name
     for lib_path in repair_lib_paths:
         lib_name = os.path.split(lib_path)[1]
@@ -236,12 +243,12 @@ def patch_wheel(whl_path):
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
         print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])))
-        dep_libs = patchlib_getneeded(lib_path)
-        patchlib_setname(lib_path, lib_rename[lib_name])
+        dep_libs = patcher.getneeded(lib_path)
+        patcher.setname(lib_path, lib_rename[lib_name])
         if dep_libs:
-            if sys.platform != 'darwin':
-                patchelf_setrpath(lib_path)
-            patchlib_replaceneeded(lib_path, dep_libs, lib_rename)
+            if sys.platform == 'linux':
+                patcher.setrpath(lib_path)
+            patcher.replaceneeded(lib_path, dep_libs, lib_rename)
         os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
 
     # update record file, which tracks wheel contents and their checksums
@@ -421,8 +428,6 @@ finally:
     remove('LICENSE')
 
 if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
-    print('repairing wheel')
-    patchlib_check()
     patch_wheel(find_wheel())
 
 if install_wheel:
