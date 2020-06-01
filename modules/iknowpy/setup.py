@@ -62,13 +62,18 @@ class PatchLib:
                 raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
             if version < (0, 9):
                 raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
+            if platform.processor() in ('ppc64le', 'aarch64'):
+                # use 64KiB page size
+                self._patchelf = ['patchelf', '--page-size', '65536']
+            else:
+                self._patchelf = ['patchelf']
 
     def setrpath(self, lib_path):
         """Given the path to a shared library, set its rpath to '$ORIGIN' so
         that it can find libraries in its own directory. Linux only."""
         if sys.platform == 'darwin':
             raise NotImplementedError('PatchLib.setrpath is Linux only')
-        subprocess.run(['patchelf', '--set-rpath', '$ORIGIN', lib_path],
+        subprocess.run(self._patchelf + ['--set-rpath', '$ORIGIN', lib_path],
                        check=True)
 
     def getneeded(self, lib_path):
@@ -89,7 +94,7 @@ class PatchLib:
                     (fnmatch.fnmatch(s, '*' + iculibs_name_pattern) or
                      fnmatch.fnmatch(s, '*' + enginelibs_name_pattern))]
         else:
-            cmd = ['patchelf', '--print-needed', lib_path]
+            cmd = self._patchelf + ['--print-needed', lib_path]
             p = subprocess.run(cmd, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE,
                                check=True, universal_newlines=True)
@@ -115,7 +120,7 @@ class PatchLib:
                 new_dep = os.path.join('@loader_path', new_dep_name)
                 cmd.append(new_dep)
         else:
-            cmd = ['patchelf']
+            cmd = self._patchelf[:]
             for old_dep in old_deps:
                 cmd.append('--replace-needed')
                 cmd.append(old_dep)
@@ -128,7 +133,7 @@ class PatchLib:
         if sys.platform == 'darwin':
             cmd = ['install_name_tool', '-id', name, lib_path]
         else:
-            cmd = ['patchelf', '--set-soname', name, lib_path]
+            cmd = self._patchelf + ['--set-soname', name, lib_path]
         subprocess.run(cmd, check=True)
 
 
