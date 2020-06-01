@@ -333,6 +333,8 @@ else:
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'
+        os.environ['CC'] = 'g++'
+        os.environ['CXX'] = 'g++'
         extra_compile_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
