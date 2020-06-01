@@ -57,10 +57,10 @@ class PatchLib:
                 stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True,
                 universal_newlines=True)
             try:
-                version = float(p.stdout.split()[1])
+                version = tuple(int(x) for x in p.stdout.split()[1].split('.'))
             except ValueError:
                 raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
-            if version < 0.9:
+            if version < (0, 9):
                 raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
 
     def setrpath(self, lib_path):
