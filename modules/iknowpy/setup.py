@@ -293,6 +293,12 @@ if 'ICUDIR' in os.environ:
 else:
     icudir = '../../thirdparty/icu'
 
+# Do not allow creation of a source distribution, as building iknowpy and its
+# dependencies is too complex to be encoded in a source distribution. If you
+# want to build iknowpy yourself, use the GitHub repository.
+if 'sdist' in sys.argv:
+    raise BuildError('Creation of a source distribution is not supported.')
+
 # platform-specific settings
 install_wheel = False
 if sys.platform == 'win32':
