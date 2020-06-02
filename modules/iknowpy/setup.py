@@ -298,7 +298,7 @@ def find_wheel():
 
 # constants
 ALPHANUMERIC = string.ascii_letters + string.digits
-VERSION = '0.0.5'
+VERSION = '0.0.6'
 
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
