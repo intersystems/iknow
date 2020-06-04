@@ -201,6 +201,95 @@ def rand_alphanumeric(length=8):
     return ''.join(random.choice(ALPHANUMERIC) for _ in range(length))
 
 
+def extract_wheel(whl_path, dest):
+    """Extract a wheel to the directory dest.
+
+    Parameter whl_path: The path to the wheel to extract
+    Precondition: whl_path is the path to an existing wheel
+
+    Parameter dest: The destination to extract the wheel
+    Precondition: dest is an existing directory"""
+    print('extracting {} to {}'.format(whl_path, dest))
+    with zipfile.ZipFile(whl_path) as whl_file:
+        whl_file.extractall(dest)
+
+
+def update_wheel_record(whl_dir):
+    """Given a directory containing the extracted contents of a wheel, update
+    the RECORD file to account for any changes in the contents."""
+    record_filepath = os.path.join(whl_dir, 'iknowpy-{}.dist-info'.format(VERSION), 'RECORD')
+    print('updating {}'.format(record_filepath))
+    filepath_list = []
+    for root, _, files in os.walk(whl_dir):
+        for file in files:
+            filepath_list.append(os.path.join(root, file))
+    with open(record_filepath, 'w') as record_file:
+        for file_path in filepath_list:
+            if file_path == record_filepath:
+                record_file.write(os.path.relpath(record_filepath, whl_dir))
+                record_file.write(',,\n')
+            else:
+                record_line = '{},sha256={},{}\n'.format(
+                    os.path.relpath(file_path, whl_dir), *rehash(file_path))
+                record_file.write(record_line)
+
+
+def repackage_wheel(whl_path, whl_dir):
+    """Create or replace a wheel at whl_path by packaging the files in
+    filepath_list.
+    Precondition: whl_dir is the directory containing the extracted wheel
+    contents as specified in filepath_list"""
+    print('repackaging {}'.format(whl_path))
+    filepath_list = []
+    for root, _, files in os.walk(whl_dir):
+        for file in files:
+            filepath_list.append(os.path.join(root, file))
+    with zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED) as whl_file:
+        for file_path in filepath_list:
+            print('adding {}'.format(file_path))
+            whl_file.write(file_path, os.path.relpath(file_path, whl_dir))
+
+
+def fix_wheel_ppc64le(whl_path):
+    """Fix a ppc64le wheel so that it is compatible with Python distributions
+    using both 'ppc64le' and 'powerpc64le' platform tags. Linux for ppc64le
+    only."""
+    print('patching ppc64le wheel')
+
+    # extract wheel
+    tmp_dir = 'dist/temp'
+    rmtree(tmp_dir)
+    os.mkdir(tmp_dir)
+    extract_wheel(whl_path, tmp_dir)
+
+    # add compatiblity with different platform tag
+    module_pattern = os.path.join(tmp_dir, 'iknowpy', 'engine.*pc64le-*.so')
+    module_paths = glob.glob(module_pattern)
+    if len(module_paths) == 0:
+        raise BuildError('Unable to find module matching pattern {!r}'.format(module_pattern))
+    elif len(module_paths) > 1:
+        raise BuildError('Found multiple modules matching pattern {!r}'.format(module_pattern))
+    module_path = module_paths[0]
+    module_dir, module_name = os.path.split(module_path)
+    if '-powerpc64le-' in module_name:
+        other_module_name = module_name.replace('-powerpc64le-', '-ppc64le-')
+    elif '-ppc64le-' in module_name:
+        other_module_name = module_name.replace('-ppc64le-', '-powerpc64le-')
+    else:
+        raise BuildError("Module {} contains neither '-powerpc64le-' nor '-ppc64le-'".format(module_path))
+    shutil.copy2(module_path, os.path.join(module_dir, other_module_name))
+
+    # update record
+    update_wheel_record(tmp_dir)
+
+    # repackage wheel
+    repackage_wheel(whl_path, tmp_dir)
+
+    # remove temporary files
+    print('removing {}'.format(tmp_dir))
+    rmtree(tmp_dir)
+
+
 def patch_wheel(whl_path):
     """Patch a wheel in a manner similar to auditwheel. On Unix, this is
     necessary prior to packaging the ICU and iKnow engine shared libraries.
@@ -215,12 +304,9 @@ def patch_wheel(whl_path):
 
     # extract wheel
     tmp_dir = 'dist/temp'
-    print('extracting {} to {}'.format(whl_path, tmp_dir))
-    whl_file = zipfile.ZipFile(whl_path)
     rmtree(tmp_dir)
     os.mkdir(tmp_dir)
-    whl_file.extractall(tmp_dir)
-    whl_file.close()
+    extract_wheel(whl_path, tmp_dir)
 
     # create list of libraries to repair
     repair_lib_dir = os.path.join(tmp_dir, 'iknowpy')
@@ -257,27 +343,10 @@ def patch_wheel(whl_path):
         os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
 
     # update record file, which tracks wheel contents and their checksums
-    record_filepath = os.path.join(tmp_dir, 'iknowpy-{}.dist-info'.format(VERSION), 'RECORD')
-    print('updating {}'.format(record_filepath))
-    with open(record_filepath, 'w') as record_file:
-        filepath_list = []
-        for root, _, files in os.walk(tmp_dir):
-            for file in files:
-                filepath_list.append(os.path.join(root, file))
-        for file_path in filepath_list:
-            if file_path == record_filepath:
-                record_file.write(os.path.relpath(record_filepath, tmp_dir))
-                record_file.write(',,\n')
-            else:
-                record_line = '{},sha256={},{}\n'.format(os.path.relpath(file_path, tmp_dir), *rehash(file_path))
-                record_file.write(record_line)
+    update_wheel_record(tmp_dir)
 
     # repackage wheel
-    print('repackaging {}'.format(whl_path))
-    with zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED) as whl_file:
-        for file_path in filepath_list:
-            print('adding {}'.format(file_path))
-            whl_file.write(file_path, os.path.relpath(file_path, tmp_dir))
+    repackage_wheel(whl_path, tmp_dir)
 
     # remove temporary files
     print('removing {}'.format(tmp_dir))
@@ -431,6 +500,9 @@ finally:
     for lib in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
         remove(lib)
     remove('LICENSE')
+
+if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
+    fix_wheel_ppc64le(find_wheel())
 
 if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
     patch_wheel(find_wheel())
