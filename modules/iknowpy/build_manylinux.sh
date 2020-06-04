@@ -121,4 +121,4 @@ fi
 
 
 ##### Upload iknowpy wheels #####
-/opt/python/cp38-cp38/bin/python -m twine upload --repository testpypi -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
+/opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
