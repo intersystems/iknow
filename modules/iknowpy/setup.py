@@ -370,8 +370,12 @@ def find_wheel():
 # constants
 ALPHANUMERIC = string.ascii_letters + string.digits
 
-with open('VERSION') as version_file:
-    version = version_file.read().strip()
+# obtain version
+version = {}
+with open('iknowpy/version.py') as version_file:
+    exec(version_file.read(), version)
+version = version['__version__']
+
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
 else:
