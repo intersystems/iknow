@@ -113,10 +113,10 @@ See `<repo_root>/modules/iknowpy/tests/test.py` for a basic example of how to us
 To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via `pip` is supported for CPython 3.5 through CPython 3.8 on the following platforms.
 - Windows for x86_64
 - Mac OS X 10.9 or higher for x86_64
-- Linux for x86_64 (pip ≥19.0 is required)
-- Linux for i686 (pip ≥19.0 is required)
-- Linux for ppc64le (pip ≥19.3 is required)
-- Linux for aarch64 (pip ≥19.3 is required)
+- Linux (CentOS 6 or newer) for x86_64 (pip ≥19.0 is required)
+- Linux (CentOS 6 or newer) for i686 (pip ≥19.0 is required)
+- Linux (CentOS 7 or newer) for ppc64le (pip ≥19.3 is required)
+- Linux (CentOS 7 or newer) for aarch64 (pip ≥19.3 is required)
 
 ## From SpaCy
 
