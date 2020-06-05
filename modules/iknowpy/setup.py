@@ -277,7 +277,9 @@ def fix_wheel_ppc64le(whl_path):
         other_module_name = module_name.replace('-ppc64le-', '-powerpc64le-')
     else:
         raise BuildError("Module {} contains neither '-powerpc64le-' nor '-ppc64le-'".format(module_path))
-    shutil.copy2(module_path, os.path.join(module_dir, other_module_name))
+    other_module_path = os.path.join(module_dir, other_module_name)
+    print('copying {} -> {}'.format(module_path, other_module_path))
+    shutil.copy2(module_path, other_module_path)
 
     # update record
     update_wheel_record(tmp_dir)

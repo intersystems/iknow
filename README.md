@@ -295,18 +295,13 @@ python setup.py install
 
 ### Step 4: Testing iknowpy
 
-The test script at `<repo_root>/modules/iknowpy/tests/test.py` provides an example of how to use `iknowpy`. Run this script to call a few iKnow functions from Python and print their results.
-
-```Shell
-cd <repo_root>/modules/iknowpy/tests
-python test.py
-```
+The scripts at `<repo_root>/modules/iknowpy/tests/` provide example of how to use `iknowpy`. Run the scripts to call a few iKnow functions from Python and print their results.
 
 :warning: If you are testing `iknowpy` via the Python interactive console, do not do so in the `<repo_root>/modules/iknowpy` working directory. Because of how Python resolves module names, importing `iknowpy` will cause Python to try importing the source package `<repo_root>/modules/iknowpy/iknowpy` instead of the installed package, resulting in an import error.
 
 ### Step 5: (Optional) Building a Wheel and Uploading to PyPI
 
-A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. These instructions provide an example of how wheels for `iknowpy 0.0.3` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
+A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. Unless otherwise noted, these instructions provide an example of how wheels for `iknowpy 0.0.3` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
 
 To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project. You can view the `iknowpy` project on PyPI at https://pypi.org/project/iknowpy/.
 
@@ -357,50 +352,43 @@ In general, binaries built on one Linux distribution might not be directly runna
 python setup.py bdist_wheel
 ```
 
-Wheels built this way cannot be uploaded to PyPI, as PyPI does not allow wheels that are specific to a particular Linux distribution.
+Wheels built this way cannot be uploaded to PyPI, as PyPI does not allow wheels that are specific to a particular Linux distribution. To build a wheel that is compatible with the vast majority of modern Linux distributions, we leverage the [manylinux](https://github.com/pypa/manylinux) project, which is the standard way to distribute pre-built Python extension modules on Linux. The build script `<repo_root>/modules/iknowpy/build_manylinux.sh` is provided for convenience. When run inside a manylinux container, it builds `iknowpy` manylinux wheels for Python 3.5 through 3.8 and uploads the wheels to PyPI.
 
-To build a wheel that is compatible with the vast majority of modern Linux distributions, we leverage the manylinux project, which is the standard way to distribute pre-built Python extension modules on Linux. In particular, we use the manylinux2010_x86_64 Docker image as a build platform, which produces wheels that are compatible with most Linux x86_64 distributions that are at least as new as CentOS 6.
+The script supports the following manylinux images.
+- manylinux2010_x86_64
+- manylinux2010_x86_64
+- manylinux2010_i686
+- manylinux2014_x86_64
+- manylinux2014_i686
+- manylinux2014_aarch64
+- manylinux2014_ppc64le
+The manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 6, and the manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 7.
 
-1. Obtain the manylinux2010 docker image and run it interactively.
+The script takes 4 positional arguments.
+1. TAG: the platform tag (e.g. manylinux2010_x86_64)
+2. ICU_URL: the URL to a .zip source release of ICU (e.g. https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip)
+3. TOKEN: an authentication token for updating the `iknowpy` project on PyPI
+4. BRANCH: (optional, default is "master") iKnow GitHub branch from which to build the wheel
+
+The following instructions indicate how to build and distribute `iknowpy` for Linux x86_64 (CentOS 6 or newer). You can adapt these directions as needed to build manylinux wheels for other platforms.
+
+1. Obtain the manylinux2010_x86_64 docker image and run it interactively.
 
    ```Shell
    docker pull quay.io/pypa/manylinux2010_x86_64
-   docker run -it <image>
+   docker run -it --rm <image>
    ```
 
-2. Inside the container, build the ICU and iKnow engine dependencies. The following commands are for ICU version 67.1, but you can adapt them as necessary for other ICU versions.
+2. In a second shell, copy the build script into the container.
 
    ```Shell
-   yum install -y dos2unix openssl-devel
-   cd /home
-   curl -L -O https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
-   unzip icu4c-67_1-src.zip
-   git clone https://github.com/intersystems/iknow.git
-   cd icu/source
-   mv /usr/bin/python /usr/bin/python.backup
-   ln -s /opt/python/cp27-cp27m/bin/python /usr/bin/python
-   dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
-   export CXXFLAGS="-std=c++11"
-   export ICUDIR=/home/iknow/thirdparty/icu
-   ./runConfigureICU Linux --prefix=$ICUDIR
-   gmake
-   gmake install
-   rm -f /usr/bin/python
-   mv /usr/bin/python.backup /usr/bin/python
-   cd /home/iknow
-   export IKNOWPLAT=lnxrhx64
-   make
+   docker cp <repo_root>/modules/iknowpy/build_manylinux.sh <container>:/
    ```
 
-3. Inside the container, build the `iknowpy` wheel and convert it to a manylinux2010 wheel.
+3. Return to the first shell, which is running the container, and execute the script.
 
    ```Shell
-   cd modules/iknowpy
-   /opt/python/cp38-cp38/bin/python -m pip install -U cython setuptools wheel twine
-   /opt/python/cp38-cp38/bin/python setup.py bdist_wheel --no-dependencies
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
-   auditwheel repair dist/iknowpy-0.0.3-cp38-cp38-linux_x86_64.whl -w dist2/
-   /opt/python/cp38-cp38/bin/python -m twine upload dist2/iknowpy-0.0.3-cp38-cp38-manylinux2010_x86_64.whl
+   ./build_manylinux.sh manylinux2010_x86_64 https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip <TOKEN> master
    ```
 
 
