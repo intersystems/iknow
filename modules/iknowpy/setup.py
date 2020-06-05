@@ -104,7 +104,7 @@ class PatchLib:
 
     def replaceneeded(self, lib_path, old_deps, name_map):
         """For the shared library at lib_path, replace its declared dependencies
-        on old_dep_names with those in name_map..
+        on old_dep_names with those in name_map.
 
         old_deps: a nonempty list of dependencies
             (either by name or path, depending on the value currently in the
@@ -238,7 +238,7 @@ def repackage_wheel(whl_path, whl_dir):
     """Create or replace a wheel at whl_path by packaging the files in
     filepath_list.
     Precondition: whl_dir is the directory containing the extracted wheel
-    contents as specified in filepath_list"""
+    contents"""
     print('repackaging {}'.format(whl_path))
     filepath_list = []
     for root, _, files in os.walk(whl_dir):
@@ -410,7 +410,7 @@ else:
     if sys.platform == 'darwin':
         iculibs_name_pattern = 'libicu*.dylib'
         enginelibs_name_pattern = 'libiknow*.dylib'
-        os.environ['CC'] = 'clang++'
+        os.environ['CC'] = 'clang++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'clang++'
         extra_compile_args = ['-std=c++11']
         if install_wheel:
@@ -421,7 +421,7 @@ else:
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'
-        os.environ['CC'] = 'g++'
+        os.environ['CC'] = 'g++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'g++'
         extra_compile_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
