@@ -217,7 +217,7 @@ def extract_wheel(whl_path, dest):
 def update_wheel_record(whl_dir):
     """Given a directory containing the extracted contents of a wheel, update
     the RECORD file to account for any changes in the contents."""
-    record_filepath = os.path.join(whl_dir, 'iknowpy-{}.dist-info'.format(VERSION), 'RECORD')
+    record_filepath = os.path.join(whl_dir, 'iknowpy-{}.dist-info'.format(version), 'RECORD')
     print('updating {}'.format(record_filepath))
     filepath_list = []
     for root, _, files in os.walk(whl_dir):
@@ -358,7 +358,7 @@ def patch_wheel(whl_path):
 def find_wheel():
     """Return the path to the wheel file that this script created. Raise
     exception if wheel cannot be found."""
-    wheel_pattern = 'dist/iknowpy-{}-*{}{}-*.whl'.format(VERSION, sys.version_info.major, sys.version_info.minor)
+    wheel_pattern = 'dist/iknowpy-{}-*{}{}-*.whl'.format(version, sys.version_info.major, sys.version_info.minor)
     wheel_pattern_matches = glob.glob(wheel_pattern)
     if len(wheel_pattern_matches) == 0:
         raise BuildError('Unable to find wheel matching pattern {!r}'.format(wheel_pattern))
@@ -369,8 +369,9 @@ def find_wheel():
 
 # constants
 ALPHANUMERIC = string.ascii_letters + string.digits
-VERSION = '0.0.6'
 
+with open('VERSION') as version_file:
+    version = version_file.read().strip()
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
 else:
@@ -476,7 +477,7 @@ try:
         },
         packages=['iknowpy'],
         package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},
-        version=VERSION,
+        version=version,
         python_requires='>=3.5',
         setup_requires=['cython', 'wheel'],
         zip_safe=False,
