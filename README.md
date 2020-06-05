@@ -358,14 +358,13 @@ Wheels built this way cannot be uploaded to PyPI, as PyPI does not allow wheels 
 
 The script supports the following manylinux images.
 - manylinux2010_x86_64
-- manylinux2010_x86_64
 - manylinux2010_i686
 - manylinux2014_x86_64
 - manylinux2014_i686
 - manylinux2014_aarch64
 - manylinux2014_ppc64le
 
-The manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 6, and the manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 7.
+The manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 6, and the manylinux2014 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 7.
 
 The script takes 4 positional arguments.
 1. TAG: the platform tag (e.g. manylinux2010_x86_64)
@@ -373,7 +372,7 @@ The script takes 4 positional arguments.
 3. TOKEN: an authentication token for updating the `iknowpy` project on PyPI
 4. BRANCH: (optional, default is "master") iKnow GitHub branch from which to build the wheel
 
-The following instructions indicate how to build and distribute `iknowpy` for Linux x86_64 (CentOS 6 or newer). You can adapt these directions as needed to build manylinux wheels for other platforms.
+The following instructions indicate how to build and distribute `iknowpy` for Linux x86_64. You can adapt these directions as needed to build manylinux wheels for other platforms.
 
 1. Obtain the manylinux2010_x86_64 docker image and run it interactively.
 
