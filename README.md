@@ -117,6 +117,7 @@ To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (
 - Linux for i686 (pip ≥19.0 is required)
 - Linux for ppc64le (pip ≥19.3 is required)
 - Linux for aarch64 (pip ≥19.3 is required)
+
 Linux releases for x86_64 and i686 are compatible with the vast majority of modern distributions that are no older than CentOS 6. Linux releases for ppc64le and aarch64 are compatible with the vast majority of modern distributions that are no older than CentOS 7.
 
 ## From SpaCy
@@ -363,6 +364,7 @@ The script supports the following manylinux images.
 - manylinux2014_i686
 - manylinux2014_aarch64
 - manylinux2014_ppc64le
+
 The manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 6, and the manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 7.
 
 The script takes 4 positional arguments.
