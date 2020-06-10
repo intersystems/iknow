@@ -134,7 +134,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							for (const iknow::core::AttributeId* ent_param = kb->GetAttributeParamsBegin(idx_label, cnt_attribute); ent_param != kb->GetAttributeParamsEnd(idx_label, cnt_attribute); ++ent_param) {
 								String param_attribute(kb->AttributeNameForId(*ent_param).data, kb->AttributeNameForId(*ent_param).size);
 
-								if (param_attribute == kMeasurementString) id_property = Sent_Attribute::Measurement;
 								if (!id_property) id_property = kb->PropertyIdForName(param_attribute);
 								if (param_attribute == kMeasurementValueString) { // new, measurement value attribute type
 									is_value = true;
@@ -219,6 +218,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	data->GetProximityPairVector(udata.iknow_proximity); // Proximity is document related
 
 	// treat attribute paths
+	/*
 	for (iknow::core::IkIndexOutput::vecAttributePaths::iterator itAPaths = data->AttributePathsBegin(); itAPaths != data->AttributePathsEnd(); ++itAPaths) {
 		Path_Attribute_Span path_attribute_span;
 
@@ -243,6 +243,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			}
 		}
 	}
+	*/
 }
 
 iKnowEngine::iKnowEngine() // Constructor
