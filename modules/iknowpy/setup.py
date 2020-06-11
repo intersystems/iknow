@@ -151,6 +151,7 @@ class CleanCommand(Command):
         rmtree('build')
         rmtree('dist')
         rmtree('iknowpy.egg-info')
+        rmtree('iknowpy/__pycache__')
         remove('iknowpy/engine.cpp')
         if sys.platform == 'win32':
             module_pattern = 'iknowpy/engine.*.pyd'
