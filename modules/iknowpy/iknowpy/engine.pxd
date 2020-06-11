@@ -21,10 +21,9 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sent_Attribut
 		PositiveSentiment = 5
 		NegativeSentiment = 6
 		Frequency = 8
-		Duration = 9
-		Measurement = 10
-		Certainty = 11
-		Other
+		Duration = 10
+		Measurement = 11
+		Certainty = 12
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 	ctypedef unsigned short Entity_Ref
