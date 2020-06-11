@@ -333,6 +333,9 @@ def patch_wheel(whl_path):
             lib_name_split[0] += '-' + rand_alphanumeric()
             lib_name_new = '.'.join(lib_name_split)
             lib_rename[lib_name] = lib_name_new
+    for lib_name in iculib_map:
+        # replace dependency on symlink to dependency on actual library file
+        lib_rename[lib_name] = lib_rename[iculib_map[lib_name]]
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
         print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])))
@@ -427,22 +430,28 @@ else:
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
-# Copy ICU and iKnow engine libraries into package source if appropriate
+# Copy ICU and iKnow engine libraries into package source if appropriate.
+# Do not copy ICU symbolic links, but keep track of link structure in
+# iculib_map.
+iculib_map = {}  # map from name of ICU symbolic link to name of real library file
 if '--no-dependencies' in sys.argv:
     no_dependencies = True
     sys.argv.remove('--no-dependencies')
 elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
     no_dependencies = False
-    iculibs_list = glob.glob(iculibs_path_pattern)
-    enginelibs_list = glob.glob(enginelibs_path_pattern)
-    if not iculibs_list:
+    iculib_paths = glob.glob(iculibs_path_pattern)
+    enginelib_paths = glob.glob(enginelibs_path_pattern)
+    if not iculib_paths:
         raise BuildError('ICU libraries not found: {}'.format(iculibs_path_pattern))
-    if not enginelibs_list:
+    if not enginelib_paths:
         raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_path_pattern))
-    for lib in iculibs_list:
-        shutil.copy2(lib, 'iknowpy')
-    for lib in enginelibs_list:
-        shutil.copy2(lib, 'iknowpy')
+    for lib_path in iculib_paths:
+        if os.path.islink(lib_path):
+            iculib_map[os.path.split(lib_path)[1]] = os.path.split(os.path.realpath(lib_path))[1]
+        else:
+            shutil.copy2(lib_path, 'iknowpy')
+    for lib_path in enginelib_paths:
+        shutil.copy2(lib_path, 'iknowpy')
 else:
     no_dependencies = True
 
@@ -502,10 +511,10 @@ try:
     )
 finally:
     # remove dependent libraries and license from package source
-    for lib in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
-        remove(lib)
-    for lib in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
-        remove(lib)
+    for lib_path in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
+        remove(lib_path)
+    for lib_path in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
+        remove(lib_path)
     remove('LICENSE')
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
