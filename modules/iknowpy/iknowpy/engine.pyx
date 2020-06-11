@@ -60,13 +60,21 @@ cdef class iKnowEngine:
 
 	@property
 	def _m_index_raw(self):
-		"""Return a raw representation of the index following Cython default type coercions. For debug use only."""
+		"""Raw representation of the index following Cython default type coercions. For debug use only."""
 		return self.engine.m_index
 
 	@property
 	def m_index(self):
-		"""Build a Python representation of the index. The Python representation follows the Cython default type
-		coercions with the exception of C++ enums, which are converted to Python strings."""
+		"""The data after indexing.
+
+		m_index['sentences'] : a list of sentences in the text source after indexing.
+		m_index['sentences'][i] : the ith sentence in the text source after indexing.
+		m_index['sentences'][i]['entities'] : a list of text entities in the ith sentence after indexing.
+		m_index['sentences'][i]['path'] : a list representing the path in the ith sentence.
+		m_index['sentences'][i]['path_attributes'] : a list of spans in the ith sentence's path after attribute expansion.
+		m_index['sentences'][i]['sent_attributes'] : a list of attribute sentence markers for the ith sentence.
+		m_index['proximity'] : the proximity pairs in the text source after indexing.
+		"""
 		cdef list sentences_mod = []
 		cdef list entities_mod, sent_attrs_mod
 		for sentence in self.engine.m_index.sentences:
