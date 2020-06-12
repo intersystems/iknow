@@ -92,7 +92,7 @@
 ;1,20,25,26,40,$;ENConTime;typeConcept;part of a time indication;0;;
 ;1,20,25,40,$;ENConTimePlural;typeConcept;part of a time indication, for words in plural;0;;
 ;1,25,40,$;ENCurrency;typeConcept;for currency acronyms;0;;
-;1,20,40,50,62,65,70,71,$;ENDate;typeConcept;label for dates (months);0;;
+;1,20,25,40,50,62,65,70,71,$;ENDate;typeConcept;label for dates (months);0;;
 ;1,40,$;ENDay;typeConcept;for days of the week;0;;
 ;1,40,50,55,60,62,65,70,71,$;ENDemonstr_pl;typeOther;‘(both) these’, ‘(both) those’;0;;
 ;1,20,40,50,55,60,62,65,70,71,$;ENDemonstr_s;typeOther;this;0;;
@@ -131,7 +131,7 @@
 ;1,20,25,26,40,50,55,62,65,70,71,75,$;ENNum;typeConcept;written numbers;0;;
 ;1,20,25,26,40,50,$;ENNumber;typeConcept;for numbers written in numbers as opposed to ENNum written in words;0;;
 ;1,25,$;ENNumberYear;typeConcept;for combination number and year eg. 1-year;0;;
-;1,20,25,40,75,$;ENNumberPlural;typeConcept;for numbers in plural;0;;
+;1,20,25,26,40,75,$;ENNumberPlural;typeConcept;for numbers in plural;0;;
 ;1,20,40,50,55,60,62,65,70,71,75,81,$;ENOf;typeRelation;of + some other prepositions;0;;
 ;1,20,60,75;ENOr;typeRelation;separate label for 'or';0;;
 ;1,40;ENOrdNum;typeConcept;label for ordinal numbers;0;;
@@ -168,6 +168,7 @@
 ;1,55,65,70,71;ENRPart;typeRelation;past participle which is (disambiguated as) relation;0;;
 ;1,40;ENsAdj;typeConcept;extra label for words ending on possessive 's;0;;
 ;1,20,40;ENSo;typeAmbiguous;so;0;;
+;40;ENStreet;typeConcept;street, rd., avenue etc.;0;;
 ;1,20,40,50,$;ENThere;typeBeginConcept;there and some adverbs of place;0;;
 ;40,50,55,$;ENThesame;typeConcept;The same;0;;
 ;1,40;ENTimes;typeConcept;once,twice,thrice,times;0;;
@@ -224,7 +225,7 @@
 ;1,25,40,$;ENBeforeMeasurement;typeAttribute;attribute for expressions before measurements;0;;
 ;1,40;ENBeforeNoMeasurement;typeAttribute;marks items that precede numbers rather than measurements;0;;
 ;1,25,$;ENMeasureIndicator;typeAttribute;another attribute for identifying ENBeforeMeasurement;0;;
-;1,26,40,$;ENDistance;typeAttribute;attribute for distance;0;;Entity(Measurement)
+;1,26,40,75,$;ENDistance;typeAttribute;attribute for distance;0;;Entity(Measurement)
 ;1,26,$;ENO2Saturation;typeAttribute;attribute for oxygen saturation;0;;Entity(Measurement)
 ;1,26,$;ENPulse;typeAttribute;attribute for pulse;0;;Entity(Measurement)
 ;1,25,26,75,$;ENSize;typeAttribute;attribute for size;0;;Entity(Measurement)
@@ -250,7 +251,7 @@
 ;75,$;ENNumberPlusUnit2;typeAttribute;copy of NumberPlusUnit, not deleted in join rules;0;;
 
 
-;55,60,65,70,71,$;ENPBegin;typeAttribute;for sentence structure detection;0;;
+;55,60,65,70,71,75,$;ENPBegin;typeAttribute;for sentence structure detection;0;;
 ;55;ENWithSObj;typeAttribute;for verbs that tend to take a sentence as object;0;;
 ;55,60,65,$;ENWithToInf1;typeAttribute;for verbs that tend to take to+inf as object immediately after the labeled lexrep;0;;
 ;55,60,65,$;ENWithToInf2;typeAttribute;for verbs that tend to take to+inf as object;0;;

@@ -16,6 +16,7 @@
 1055;1;CapitalMixed;^ENCapitalMixed+ENCapitalInitial;
 
 /*		1055.	The Department for Business, Innovation & Skills (BIS) is a ministerial department of the United Kingdom Government.
+
 /* ==================================================================================================================================================================
 /* BLOCK 1: USER-DEFINED LABELS                                                                                                                                      
 /* ==================================================================================================================================================================
@@ -57,6 +58,7 @@
 2180;1;ENNumberPlusUnit;+ENNumberPlusUnit2;add attribute that can be 'saved' in Joins
 
 /*		2180. The shares are down around 12% year-on-year.
+
 /* ==================================================================================================================================================================
 /* BLOCK 20: PROCESSING SPECIFIC WORDS AND NUMBERS                                                                                                                   
 /* ==================================================================================================================================================================
@@ -128,6 +130,7 @@
 1017;20;ENNor;-ENNor;
 
 /*		1017.	The physician stated that the patient never received oral corticosteroids nor was her fluticasone reduced.
+
 /* SPECIAL TREATMENT AT BEGINNING AND END OF SENTENCE
 /*===================================================
 
@@ -150,6 +153,7 @@
 828;20;ENComma|ENNegStop|SEnd;ENComma|ENAdvstruct-ENConj|*;rule for 'though' and 'and...', 'or...' etc.
 
 /*		828. There is a swimming pool, though.
+
 /* REMOVE NEGATIONSTOPPERS
 /* Words with the label ENAndOrBut are usually negation stoppers. These rules detect contexts where ENAndOrBut connects related words.
 /*========================
@@ -169,6 +173,7 @@
 461;20;ENCon|ENAndOrBut+^"but"|ENAdj+ENPart;^ENCon+ENList|-ENNegStop+ENList|^ENAdj+ENList;to NOT make AndOrBut a negationstopper between two concepts
 
 /*		461.	The nurse reported that the physician felt that therapy with rofecoxib was in no way responsible for the patient's rash or elevated lipase and amylase levels.
+
 /* JOIN EVERYTHING, SOMETHING, ETC. WITH ADJECTIVE THAT FOLLOWS
 /* ============================================================
 
@@ -207,6 +212,7 @@
 1752;20;"as"|ENAdj|"as"|"possible";ENAdj|Join|Join|Join;
 
 /*		1752.	“Our job was to make it as hard as possible for him,” the instructor said.
+
 /* JOIN 'RIGHT' WITH FOLLOWING PREPOSITION
 /* =======================================
 
@@ -221,12 +227,14 @@
 1084;20;^ENArtPosspron+^ENAdv+^SBegin|ENRight|ENPrep+^"to";*|ENPrep|+Join;
 
 /*		1084. There was a question of a cyst in her kidney with a stone right below the cyst. SHOULD NOT WORK FOR: "The conditions are absolutely right for us. a shift to the right among Israeli voters.
+
 /* RULES FOR 'BACK'
 /* ================
 
 1087;20;ENAdj:ENArtPosspron|ENBack;*|ENCon;
 
 /*		1087. biopsies of the right lower leg and mid back were performed. a steely determination from the front to the back of the team.
+
 /* RULES FOR 'DUE'
 /*================
 
@@ -261,6 +269,7 @@
 2499;20;"due"+^ENRel;ENInfCon+ENPart2;
 
 /*		2499. The expropriation is under due process of law.
+
 /* RULES FOR JOINING NUMBERS
 /*==========================
 
@@ -331,6 +340,7 @@
 1795;20;ENNum:ENNumber|"or"|ENNum:ENNumber;ENNum|+Join|Join;
 
 /*		1795.	The police officers filed three or four incident reports on the suspect over the past two years.
+
 /* RULES FOR JOINING ADVERBS OF DEGREE ETC.
 /*=========================================
 
@@ -361,6 +371,7 @@
 2224;20;ENAdvdegree+^ENSo|ENEverything;ENEverything+ENMod|+Join;
 
 /*		2224. 'If this was a test, nearly everyone failed': how tech giants deny your digital rights.
+
 /* RULES FOR 'TOO'
 /*================
 
@@ -379,6 +390,7 @@
 1598;20;ENToo|ENAdv|ENPart;ENAdj|+Join|+Join;
 
 /*		1598. The physician indicated that her hypertension may be "too well controlled" and decreased her medication.
+
 /* RULES FOR 'WORTH'
 /* =================
 
@@ -389,6 +401,7 @@
 1105;20;"worth"|ENPrespart;ENRel|+Join;
 
 /*		1105. These appear to be similar to peptides in the milk of other marsupials, which means these animals are worth studying too.
+
 /* RULES FOR 'THANKS'
 /*===================
 
@@ -399,12 +412,14 @@
 1590;20;"thanks"+^ENCon|"to";ENPrep|+Join;
 
 /*		1590. Profits at a nationwide dry cleaning business tumbled 28 per cent thanks to the pub smoking ban.
+
 /* RULES FOR 'PRETTY'
 /* ==================
 
 1111;20;"pretty"|ENAdvmandeg;ENAdvmandeg|+Join;
 
 /*		1111. Getting your continence back happens pretty quickly.
+
 /* RULES FOR 'EVER'
 /*=================
 
@@ -419,6 +434,7 @@
 1373;20;ENAdj:"first"|"ever"|ENCon:ENInfCon:ENVerbCon;ENAdj|Join|ENCon;attr. Temp should not be kept
 
 /*		1373. with tax receipts hitting their highest ever levels. his second ever book.
+
 /* RULES FOR 'FIRST'
 /*==================
 
@@ -449,6 +465,7 @@
 1419;20;^ENArtPosspron+^SBegin|"first"|ENRel:ENInf:ENAux:ENPrep+^ENAdj+^ENInfCon;*|ENAdvTemp+ENTemp|*;
 
 /*		1419. He first flew on the space shuttle on a space station construction mission in 2008. It's in this setting that we first meet Kurt Russell as Star-Lord's father. Tizzard must first be satisfied. It is important first to average over the intraindividual replicates. SHOULD NOT WORK FOR. The first arrives in 2017. First Direct Evidence of Long-distance Seasonal Movements. Along with writing Dolly Parton’s first hit.
+
 /* RULES FOR 'ONCE'
 /*=================
 
@@ -471,6 +488,7 @@
 1756;20;"once"|SEnd;ENFrequency+ENBeginrelation-ENConj|*;
 
 /*		1756.	He already errantly passed on this type of player once.
+
 /* RULES FOR 'LATER','LAST'
 /*=========================
 
@@ -481,18 +499,21 @@
 1478;20;ENmAux|"later";*|ENAdvTemp+ENTemp;
 
 /*		1478. Jimmy would later pastiche the latter’s act.
+
 /* RULES FOR 'YET'
 /*================
 
 1385;20;SBegin|"yet";*|ENAdvstruct;
 
 /*		1385. Yet the program has had trouble, too.
+
 /* RULES FOR 'STILL' - 'LATER'
 /*============================
 
 1424;20;ENArtPosspron|"still":"later";*|ENAdj-ENTemp;
 
 /*		1424. A still image of the smoke cloud caused by an explosion at a fireworks market.
+
 /* RULES FOR ORDINAL NUMBERS (i.e., 22nd, etc.)
 /*=============================================
 
@@ -507,6 +528,8 @@
 1750;20;ENNumber+ENAdj|ENConTime;ENTime|Join;
 
 /*		1750.	DONE at Prague, this 20th day of March 1992, in a single authentic copy in the English language which shall be deposited with the Government of Sweden.
+
+
 /*===========================================================================================================================================================
 /*BLOCK 25: MEASUREMENTS - PART 1                                                                                                                            
 /*===========================================================================================================================================================
@@ -575,6 +598,10 @@
 
 /*		2019. The carrier currently has a fleet of 140 planes and will add two by the end of March.
 
+2521;25;^ENDate|ENNum:ENNumber:"one"|"of":"out of"|ENNum:ENNumber:"one"|^ENDate;-ENBeforeNoMeasurement|+ENNum+ENMeasurement|Join|Join|*;
+
+/*		2521. The answer is on page 3 of 9.
+
 1926;25;"from"|ENNumber:ENNum:"one"|ENTo:"through"|ENNumber:ENNum:"one"|ENUnit;+ENMeasurementBegin|ENNumber|+Join|+Join|*;
 
 /*		1926.	The FAA restrictions forced them to scale back the tower from 775 to 690 feet.
@@ -586,6 +613,7 @@
 1744;25;ENNumber:ENNum|"or so"|typeConcept;ENNumber|+Join|*;
 
 /*		1744. They studied the eating habits of the 22,000 or so students who live in the city.
+
 /* RULES TO DETECT WEIGHT
 /*=======================
 
@@ -596,6 +624,7 @@
 1323;25;ENBeforeWeight|ENNum:ENNumber:"one"|ENAfterWeight;-ENBeforeWeight|+ENWeight|-ENAfterWeight-ENCurrency-ENAfterVolume+ENWeight;rule should precede rules for Prices
 
 /*		1323. She had also reported a weight loss of 15 pounds over the past two months.
+
 /* RULES TO DETECT PRICES
 /*=======================
 
@@ -618,6 +647,7 @@
 1248;25;ENQuantity|ENCurrency;ENQuantity+ENPrice|ENCon+ENPrice;
 
 /*		1248. Despite these setbacks the courageous youngster went on to become a county level tennis player, raise thousands of pounds for several charities.
+
 /* RULES TO DETECT PERCENTAGES
 /*============================
 
@@ -630,6 +660,7 @@
 1257;25;ENPercent|ENOrMoreLess1|ENOrMoreLess2;+ENPercentage|+Join|+Join;
 
 /*		1257. ABCD AG gained 6.8 percent or more after reporting quarterly earnings that beat estimates.
+
 /* RULES TO DETECT AGE
 /*====================
 
@@ -725,6 +756,7 @@
 1293;25;ENNum:ENNumber:"one"|ENAndOrBut|"older":"younger"|typeRelation;+ENAge|Join|+Join|+ENMeasurementStop;
 
 /*		1293. It is her plan to allow adults age 55 and older to join the club.
+
 /* RULES FOR SURFACE
 /*==================
 
@@ -735,6 +767,7 @@
 1306;25;ENNum:ENNumber:"one"|ENAfterSize1:ENAfterSize2:ENAfterDistance|"by"|ENNum:ENNumber|ENAfterSize1:ENAfterSize2:ENAfterDistance;ENNumber+ENSurface|+Join|+Join|+Join|+Join;
 
 /*		1306. The club had applied for permission to put up netting on a 60 metres by 40 metres area supported.
+
 /* RULES FOR DISTANCE
 /* ==================
 
@@ -742,9 +775,14 @@
 
 /*		1298. Bob, who lives less than a mile from the crash site.
 
+2520;25;ENNum:ENNumber:"one"|ENAfterDistance|"from";+ENDistance|+ENDistance-ENAfterDistance-ENAfterSize1-ENAfterSize2|*;
+
+/*		2520. Sketch the locus of points that are 2 cm from a fixed point P1.
+
 1295;25;ENNum:ENNumber:"one"|ENAfterDistance;+ENDistance|+ENDistance-ENAfterDistance;
 
-/*		1295. He said he was about 330 yards from shore and paddling out when the 10ft shark appeared beneath him.
+/*		1295. This feat is the equivalent of packing 40 kilometers of thin thread into a tennis ball.
+
 /* RULES TO DETECT BLOOD PRESSURE
 /*===============================
 
@@ -783,6 +821,7 @@
 1352;25;ENBeforeBloodpressure|":":"="|ENNum:ENNumber;-ENBeforeBloodpressure|*|+ENBloodpressure;
 
 /*		1352. Vital Signs: BP: 114/75.
+
 /* RULES FOR SIZE
 /* ==============
 
@@ -817,6 +856,7 @@
 1846;25;ENNumber:ENNum:"one"|"x":"+/-"|ENNumber:ENNum:"one":ENCon;^ENNumber+ENMeasurement|+Join|+Join;
 
 /*		1846.	Patients were between 16 and 82 years old (average +/- SD, 40.4 +/- 13.4) with a male to female ratio of 2.5:1.
+
 /* RULES FOR TEMPERATURE
 /*======================
 
@@ -835,6 +875,7 @@
 1318;25;ENBeforeTemperature|ENNum:ENNumber:"one";-ENBeforeTemperature|+ENTemperature;
 
 /*		1318. The patient had a temperature of 101.6 on postoperative day two.
+
 /* RULES TO DETECT VOLUME
 /*=======================
 
@@ -845,6 +886,7 @@
 1326;25;ENNum:ENNumber:"one"|ENAfterVolume;+ENVolume|+ENVolume-ENAfterVolume;
 
 /*		1326. losing 200 cc of blood in the procedure.	SHOULD NOT WORK FOR. 	The baby weighs 7 pounds 7 ounces.
+
 /* RULES TO DETECT PULSE
 /*======================
 
@@ -875,12 +917,14 @@
 1330;25;ENBeforePulse|ENNum:ENNumber:"one";-ENBeforePulse|+ENPulse;
 
 /*		1330. Heart rate was 78, blood pressure 98/50, respiratory rate of 32.
+
 /* RULES TO DETECT RESPIRATORY RATE
 /*=================================
 
 1335;25;ENBeforeRespiration|ENNum:ENNumber:"one";-ENBeforeRespiration|+ENRespiration;
 
 /*		1335. His vital signs at that time included a RR of 18 and his weight was 224 pounds.
+
 /* RULES TO DETECT OXYGEN SATURATION
 /*==================================
 
@@ -911,6 +955,7 @@
 2328;25;ENOrMoreLess2;ENPremod3+ENAdv+ENIntensifier+ENAdvmandeg;
 
 /*		2328. due to "either significant (collateralized debt obligation) exposure or more significant investment in subprime.
+
 /* GENERAL ATTRIBUTE FOR MEASUREMENTS
 /*===================================
 
@@ -937,20 +982,22 @@
 2193;26;ENQuantity+ENMeasurement;+ENValue;
 
 /*		2193. It has killed hundreds of thousands and pushed millions more to flee their homes.
+
+
 /* ==================================================================================================================================================================
 /* BLOCK 40: MAIN DISAMBIGUATION PHASE                                                                                                                               
 /* ==================================================================================================================================================================
 /* PREPARATIONS:
 
-2186;40;ENCon+ENCapitalInitial+^ENDate+^ENConTime+^ENConTimePlural+^ENsAdj+^ENBeforeMeasurement|ENNumber+^ENNumberPlusUnit;*|+ENNoMeasurement;numbers after capitalized words are mostly not measurements
+2186;40;ENCon+ENCapitalInitial+^ENDate+^ENConTime+^ENConTimePlural+^ENsAdj+^ENBeforeMeasurement|*ENNumber+^ENNumberPlusUnit;*|+ENNoMeasurement-ENMeasurement;numbers after capitalized words are mostly not measurements
 
 /*		2186. updates to the company's Windows 10 software.
 
-2199;40;ENYearNum:ENNumber+^ENNumberPlusUnit|*<ENCon:ENAdj|"street":"st.":"avenue":"boulevard":"road":"rd.";+ENNoMeasurement|*|*;
+2199;40;ENYearNum:ENYear:ENNumber+^ENNumberPlusUnit|*<ENCon:ENAdj|ENStreet;^ENNumber+ENNoMeasurement-ENTime|*|*;
 
 /*		2199. InterSystems Australia Pty Limited, Level 12, 383 Kent Street, Sydney NSW 2000, Australia.
 
-2198;40;ENBeforeNoMeasurement|ENNumber+^ENNumberPlusUnit;*|+ENNoMeasurement;ad hoc rule
+2198;40;ENBeforeNoMeasurement|*ENNumber+^ENNumberPlusUnit;*|+ENNoMeasurement-ENMeasurement;ad hoc rule
 
 /*		2198. ARTICLE 2 SPECIFIC DUTIES. It has an image like a hologram that changes from a '£' symbol to the number '1' when the coin is seen from different angles.
 
@@ -961,6 +1008,7 @@
 2042;40;ENPrespart;+ENPrespart2;add label for later phases
 
 /*		2042. In the dead of night Dec. 21, ministers finished three days of negotiating.
+
 /* IDENTIFICATION OF PHRASES THAT INDICATE ORGANIZATIONAL UNITS (BASED ON CAPITALIZATION)
 /* ======================================================================================
 
@@ -991,16 +1039,20 @@
 1050;40;ENOrgUnit;^ENCon;
 
 /*		1050.	He graduated from Dalhousie University in Halifax.
+
 /* TO DISAMBIGUATE "JAN"
 /*======================
 
 1481;40;"jan"+ENCapitalInitial|^ENNumber+^ENYear+^SEnd;ENCon|*;
 
-/*		1481. project manager Jan Vanderwaard.
+/*		1481. project manager Jan Vanderwagens.
+
 /* TO DISAMBIGUATE "MARCH"
 /*========================
 
 1483;40;ENArtPosspron|"march";*|ENCon;
+
+/*		1483. A couple of recent changes may accelerate the march of biometrics.
 
 /* DISAMBIGUATION BASED ON CAPITALIZATION
 /* ======================================
@@ -1033,7 +1085,7 @@
 
 /*		466.	Do you speak Polish?
 
-2339;40;*<ENCapitalInitial|ENCapitalInitial+"street":"st.":"avenue":"boulevard":"road":"rd.";ENCon+ENCapitalInitial|Join;
+2339;40;*<ENCapitalInitial|ENCapitalInitial+ENStreet;ENCon+ENCapitalInitial|Join;
 
 /*		2339. Its political director has open pass to Downing Street.
 
@@ -1088,12 +1140,14 @@
 1098;40;ENPrep+^"to"|ENBe+ENCapitalAll;^ENPrep|ENCon;
 
 /*		1098. Often they take the form of letters such as AM for Ave Maria. It was overrun by IS in June 2014.
+
 /* RULES FOR SOME PROPER NOUNS
 /*============================
 
 1745;40;^SBegin+^"to"+^"used to"|"quicken":"live":"pierce"+ENCapitalInitial;*|-ENInf+ENCon;
 
 /*		1745. Gordon Hayward broke his left ankle in his first game with the team Tuesday night at Quicken Loans Arena. Facebook has also launched Snapchat-style filters in Facebook Live as a special Halloween feature.
+
 /* TO WRITE NUMBERS AS ONE CONCEPT
 /*================================
 
@@ -1121,6 +1175,7 @@
 1075;40;ENNum:"one"|ENTo|ENNum;^ENNum|+Join|+Join;
 
 /*		1075. Its asset-under-management target is of S$25 billion in three to five years, up from S$17.7 billion in 2007.
+
 /* MERGE INC. AND LTD. WITH PRECEDING NAME
 /* =======================================
 
@@ -1135,6 +1190,7 @@
 834;40;ENConpart2;ENCon;default
 
 /*		834. Inc. is the abbreviation of Incorporated.
+
 /* RULES FOR 'WHATEVER'
 /* ====================
 
@@ -1149,6 +1205,7 @@
 2168;40;"whatever"+^ENRel;ENAdj;
 
 /*		2168. We will take whatever action is required. We will be undertaking whatever measures may be required to ensure the adequate implementation of the objectives and provisions.
+
 /* RULES FOR 'NO ONE'
 /* ==================
 
@@ -1159,6 +1216,7 @@
 2311;40;"no"|"one"|^ENCon;ENPerspron+ENNegation|Join|*;
 
 /*		2311. No one can explain the rise in childhood allergic diseases.
+
 /* RULES FOR 'TIMES'
 /*==================
 
@@ -1169,6 +1227,7 @@
 1755;40;ENTimes|"as"|ENAdvAdj;ENAdvAdj-ENMeasurement|+Join|+Join;very rare
 
 /*		1755.	Men who had used the drug regularly from puberty were thrice as likely to develop the disease than those who had not used the drug.
+
 /* CONCRETE TIME, FREQUENCY, DURATION
 /*===================================
 /* Concrete time, 1st part + Initial Join rules ConTime(Plural)
@@ -1217,6 +1276,7 @@
 1783;40;ENDirection+ENDistance;ENBeginconcept+ENDirection+ENMeasurement;
 
 /*		1783.	A heavily armed teen barged into his former high school about an hour northwest of Miami on Wednesday.
+
 /* Concrete frequency, 1st part
 /*=============================
 
@@ -1243,6 +1303,7 @@
 1638;40;ENAdjFreq|"fall":"spring";ENAdvFreqCon|+Join;
 
 /*		1638. Swifts pair for life and return from Africa each spring to the same nest sites.
+
 /* Concrete duration, 1st part
 /*============================
 
@@ -1318,6 +1379,7 @@
 1678;40;"after"|ENQuantityTime:ENQuantity:ENNum:ENNumber:"one"|ENConTime:ENConTimePlural|"of":"as";*|ENAdvDurCon|+Join|*;
 
 /*		1678. Subsequently, after 2 days of hospitalization, the patient recovered from oedema, vomiting and hypotension. But after thousands of years as a male, the tree is turning female.
+
 /* Concrete time, 2nd part
 /*========================
 
@@ -1497,7 +1559,7 @@
 
 /*		1542. the geomagnetic storms could hit Earth on November 2 and 3 and this will cause the stunning Auroras at the poles.
 
-471;40;ENDate|ENNumber;ENDate+ENTime-ENCertainty|+Join;
+471;40;ENDate:"may"|ENNumber;ENDate+ENTime-ENCertainty|+Join;
 
 /*		471.	Coles was born March 6th 1758.
 
@@ -1565,11 +1627,11 @@
 
 /*		780.	They will be meeting on Saturday March 3 at the traditional time of 11am.
 
-1492;40;ENPrep|ENDate|ENAndOrBut|ENMay;*|*|*|ENAdvTime-ENCertainty;
+1492;40;ENPrep|ENDate|ENAndOrBut|"may";*|*|*|ENAdvTime-ENCertainty;
 
 /*		1492. Pollutants piled up in the foothills of the Himalayas and eastern Tibetan Plateau in April and May, he explains. Its CDO portfolio lost $4.88 billion in market value in October and November.
 
-1490;40;ENPrep|ENMay;*|ENAdvTime-ENCertainty;
+1490;40;ENPrep|"may";*|ENAdvTime-ENCertainty;
 
 /*		1490. In May, the RBA will consider the government's budget.
 
@@ -1798,6 +1860,7 @@
 1710;40;ENConTime|"over"|ENConTime;ENAdvTime|+Join|+Join;
 
 /*		1710. We have been growing steadily year over year, and definitely the growth is larger this year," Tom said.
+
 /* Concrete frequency, 2nd part
 /*=============================
 
@@ -1877,6 +1940,7 @@
 1608;40;"per"|ENConTime|^typeConcept;*|+ENFrequency|*;
 
 /*		1608. We 're recommending that children under six keep it to about an hour of entertainment screen time per day because they need so much other time in their day to sleep and play and get outdoors and have conversations and just figure stuff out on their own. The patient drinks 2-3 glasses of wine per week.
+
 /* Concrete duration, 2nd part
 /*============================
 
@@ -1895,6 +1959,7 @@
 1661;40;ENPrepDuration+^"for"|ENConTime;*|+ENDuration+ENTime;
 
 /*		1661. influenza vaccination reduces number of fatal myocardial infarctions and strokes during winter seasons.
+
 /* Concrete time, 3rd part
 /*========================
 
@@ -1961,6 +2026,7 @@
 1462;40;ENDay;-ENDay;
 
 /*		1462. The bank said Wednesday that full-year net profit fell 11%.
+
 /* Concrete duration, 3rd part
 /*============================
 
@@ -2003,6 +2069,7 @@
 973;40;ENAdjtime;-ENAdjtime;
 
 /*		973.	I got the early bird rate.
+
 /* CONCEPT IN COMBINATION WITH NUMBER
 /*===================================
 
@@ -2026,6 +2093,7 @@
 1072;40;ENNum:"one"|ENListnumber;*|^ENCon;
 
 /*		1072. Subject to the application by the Community of Article 39 (5) of the "Act concerning the Conditions of Accession and the Adjustments to the Treaties".
+
 /* DISAMBIGUATE ENPART
 /* ===================
 
@@ -2122,26 +2190,80 @@
 /*		1142. multiplication of genetically modified live HPAI virus.
 
 2078;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^"since"+^"as"|*ENAllSome:ENAdverb+^ENAdvTime+^ENAdvDurCon|ENPart+^ENInfCon+^ENInf;*|ENAdj|ENAdj;
+
+/*		2078. The third shared locus may be involved in telomerase activity and is associated with several environmentally caused age-related cancers.
+
 1379;40;ENDemonstr_s:ENDemonstr_pl:ENArtPosspron|ENPremod2:ENAdverb+^ENAdvTime+^ENAdvDurCon|ENPart|ENCon;*|ENAdj-ENTemp|ENAdj|*;
+
+/*		1379. This recently popularized therapy can be useful for eyes that fail standard treatments or for some eyes as a primary treatment.
+
 2086;40;ENDemonstr_s:ENDemonstr_pl:ENArtPosspron|ENNumberPlusUnit|ENPart|ENCon;*|-ENCon+ENAdj|ENAdj|*;variant of r1379, label NumberPlusUnit must not be overwritten
+
+/*		2086. The hike represented a slowdown from the 10% increased dividend paid last year.
+
 2071;40;^SEnd|ENPremod3|ENPart+^ENInfCon|ENVerbCon:SEnd;*|*|ENAdj|*;
+
+/*		2071. An initial scan suggested the tomb may exist, but more detailed scans carried out earlier this year proved it did not. The patient appeared well and less agitated.
+
 2072;40;^ENWhich+^ENNum|ENPremod3|ENPart+^ENInfCon|^"by"+^ENOutOff+^"up";*|ENPremod2|ENAdj|*;
+
+/*		2072. We are confident that the product will deliver customer data needs in one central location, allowing more informed and confident decision-making.
+
 290;40;ENTo|ENPart+^ENInfCon+^ENInf;*|ENAdj;
+
+/*		290.	400 fires reduced some towns to blackened ruins.
+
 2057;40;ENArtPosspron:ENOther:ENPremod3:ENOf|ENAdverb:ENAdj+^ENRel+^ENAdvTime+^ENAdvDurCon+^ENCon|ENPart|^ENPrep+^ENArtPosspron+^ENOther+^ENNo+^ENNum+^ENOutOff+^"up";*|*|ENAdj|*;
+
+/*		2057. It contains two other anonymously printed treatises.
+
 2452;40;SBegin|ENPart+^ENAdj|ENArtPosspron:ENPrep:ENOf;*|ENRel+ENVerb+ENPartAfter40|*;
+
+/*		2452. Published in an imortant newspaper, the article drew a lot of attention.
+
 2064;40;SBegin|ENAdj+^ENRel|ENPart|^ENArtPosspron+^ENPrep+^ENTo;*|*|ENAdj|*;
 2059;40;ENPart+^"aged"|ENArtPosspron:ENNum:ENNumberPlusUnit:ENCollection14;ENRel+ENVerb|*;
+
+/*		2059. A new shopping center opened its doors.
+
 274;40;SBegin|ENPart|ENCon:ENAdj:ENInfCon:ENVerbCon;*|ENAdj|*;
+
+/*		274. Calcified elements tend to work improperly. Retired military figures are not happy with the decision. Cofunded research programs receive more money. Forwarded mails will be answered asap.
+
 2067;40;ENAdj+^ENCon+^ENCapitalInitial+^ENCapitalAll+^ENAdv|ENPart|ENCon;*|ENAdj|*;
+
+/*		2067. A conservation charity called today for action to protect seahorses after finding the UK’s largest known colony of the rare creatures off the South Coast.
+
 2083;40;ENCapitalInitial:ENCapitalAll:ENCapitalMixed+ENAdj|ENCapitalInitial:ENCapitalAll:ENCapitalMixed+ENPart|ENCapitalInitial:ENCapitalAll:ENCapitalMixed+ENCon;*|ENAdj|*;
+
+/*		2083. The sci-fi series Doctor Who was named Best Loved Drama for the third year running.
+
 1061;40;SBegin|ENAdvmandeg|ENPart|ENCon:ENAdj;*|ENAdvmandeg|ENAdj|*;
+
+/*		1061. Moderately differentiated adenocarcinoma.
+
 1060;40;^ENAux+^ENCon+^ENPerspron_subj+^ENIt+^ENSo+^SBegin+^ENAdvTime|ENAdvmandeg|ENPart|ENCon;*|ENAdvmandeg|ENAdj|^ENCon;
+
+/*		1060. Conclusion: Moderately differentiated adenocarcinoma.
+
 540;40;ENOther:ENIndefpron|ENPart|^SEnd+^ENPerspron_obj+^ENIt+^ENOutOff+^ENPrep+^ENArtPosspron+^ENRelOth;*|ENAdj|*;
+
+/*		540.	He was holding our biggest coffee mug, which had another whipped cream mountain melting happily down the sides. There are an interesting array of plants and some secluded spots to enjoy. WRONG: Some committed suicide.
+
 1076;40;"as"|ENPart|ENCon:"as";^ENPrep|ENAdj|*;addition to rule 74
+
+/*		1076. Mitochondria were tagged and tracked in beta-cells within intact islets, as isolated cells, and as cell lines.
+
 1170;40;ENPrep:ENOf|ENDemonstr_s:ENDemonstr_pl|ENPart|ENCon;*|*|ENAdj|^ENCon;
 134;40;^ENArtPosspron+^SBegin|ENPart|ENNo;*|ENRel+ENVerb|^ENNo;
+
+/*		134.	 He offered no further information. A CT scan of the head showed no injury. The patient underwent stress test, which revealed no evidence of stress induced ischemia.
+
 84;40;ENAdj+^ENAdvFreqCon+^ENOrdNum|ENAndOrBut|ENPart+^ENRel|^ENArtPosspron+^ENThere+^ENTo+^"that"+^"by";^ENAdj|^ENAndOrBut|ENAdj|*;
 2080;40;SBegin:ENColon:ENAdj|ENPart|ENPart;*|ENAdj|ENAdj;
+
+/*		2080. Additional Information has been received from a 43 year old white female retired licensed practical nurse.
+
 2081;40;ENPart|ENPart|ENAdverb:ENPrep:"that":ENNum+^ENAdj;ENCon|ENRel+ENVerb|*;
 2082;40;ENPart|ENPart+^ENRel|^ENAdverb+^ENPrep+^ENOutOff+^SEnd;ENRel+ENVerb|ENAdj|*;most common, but not always correct
 2089;40;ENPart|ENPart|ENAdj:ENCon+^ENAdverb;ENCon|ENRel+ENVerb|*;
@@ -2609,6 +2731,7 @@
 2474;40;ENNo|*typeConcept|ENOf|typeConcept|ENPart|ENCon;*|*|*|*|ENAdj|*;
 
 /*		2474. There was no evidence of stress induced ischemia.
+
 /* DISAMBIGUATION OF ENPART, ENINFCON, ENPRESPART BASED ON ENBOTH, ENALLSOME OR ENEITHER
 /*======================================================================================
 
@@ -2651,6 +2774,7 @@
 1043;40;ENInfCon:ENPrespart|ENAny;ENRel+ENVerb|*;
 
 /*		1043.	Without offering any details of subscriber numbers, he smiled.
+
 /* DISAMBIGUATE ENADVADJ
 /* =====================
 
@@ -2678,6 +2802,7 @@
 1114;40;ENAdvAdj;ENAdj;
 
 /*		1114. a burning pain which is positional, worse when she walks or does any type of exercise.
+
 /* DISAMBIGUATION AND/OR DEFAULT ENPART, ENINFCON, ENRELOTH (relative pronoun), ENPRESPART
 /*========================================================================================
 
@@ -2958,6 +3083,7 @@
 2405;40;"may"+ENCon;-ENCertainty;
 2463;40;ENAdvdegree:ENAdvmandeg|ENBeginconcept;*|^ENAdj;
 
+
 /*===========================================================================================================================================================
 /*BLOCK 50: DETECT ENUMERATIONS                                                                                                                              
 /*===========================================================================================================================================================
@@ -2985,6 +3111,7 @@
 2107;50;ENTo:ENmAux|.ENAdvstruct|ENInf|ENAndOrBut+^"but"|ENInf;*|*|+ENList|-ENNegStop+ENList|+ENList;
 2286;50;ENVerb+^ENInf+^ENmAux+^ENPrespart2|ENAndOrBut+^"but"|ENVerb+^ENmAux+^ENAux+^ENPrespart2;+ENList|-ENNegStop+ENList|+ENList;
 1205;50;ENConj|"that"|^ENPerspron_subj+^ENIt+^ENArtPosspron+^ENBoth+^SEnd;*|ENDemonstr_s|*;
+
 
 /*===========================================================================================================================================================
 /*BLOCK 55: DETECT SENTENCE STRUCTURE                                                                                                                        
@@ -3069,6 +3196,7 @@
 2176;55;"("|^")"+^ENVerb|.^")"+^ENVerb|ENVerb;*|+ENPBegin|*|*;
 2177;55;"("|ENPBegin|*^")"|")"|^SEnd;*|*|*|*|+ENPBegin;
 2124;55;ENPunctuation:ENComma+ENPBegin|^ENPunctuation+^SEnd;*|+ENPBegin;
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 60: NEGATION                                                                                                                                                
@@ -3230,6 +3358,7 @@
 /*		2283. But no evacuation took place and efforts to allow medical and food supplies into the besieged area also faltered.
 
 2284;60;typeRelation+^ENInNegspan|ENNegBegin+ENAndOrBut;*|+ENBeginrelation;
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 62: FINALIZATION OF PATH-RELEVANCY                                                                                                                          
@@ -3432,7 +3561,7 @@
 
 2387;65;ENCertConceptBegin;^ENCertBegin;
 
-/*		 2387. It is not certain that this patient's reaction was Steven Johnson Syndrome.
+/*		2387. It is not certain that this patient's reaction was Steven Johnson Syndrome.
 
 2388;65;ENCertConceptStop;^ENCertStop;
 
@@ -3471,6 +3600,8 @@
 2369;65;ENCertStop+^typeRelation+^typeConcept+^typePathRelevant|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertStop|*|+ENCertStop;
 
 /*		2369. Improved reporting of the diseases by public health agencies could also be a contributing factor, the state said.
+
+
 /* ==================================================================================================================================================================
 /* BLOCK 70: SENTIMENT                                                                                                                                               
 /* ==================================================================================================================================================================
@@ -3564,20 +3695,39 @@
 /* Expansion rules for Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
 
 2251;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPosSentimentConceptBegin+ENDummy2|-ENPosSentimentConceptStop|*|*;
+
+/*		2251.UD. The show was good, just not as good as we expected.
+
 2302;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENPosSentiment;*|*|+ENPosSentimentConceptBegin+ENDummy2|-ENPosSentimentConceptStop|*|*;
+
+/*		2302.UD. His trainer is also satisfied that he will be able to clear the fences.
+
 2252;70;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPosSentimentBegin|-ENPBegin|*;
 2253;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegSentimentConceptBegin+ENDummy2|-ENNegSentimentConceptStop|*|*;
+
+/*		2253.UD. Business is bad and despite what we're hearing, the hotels are empty.
+
 2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegSentimentConceptBegin+ENDummy2|-ENNegSentimentConceptStop|*|*;
+
+/*		2303.UD. However, more detailed maps are increasingly difficult to view and explore. The patient was "deeply" jaundiced.
+
 2254;70;ENPerspron_subj:ENPerspron:ENIt:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegSentimentBegin|-ENPBegin|*;
 
 /* No expansion to the right for Endconcept
 
 2270;70;ENEndconcept+ENPosSentiment|^ENPosSentiment+^ENPosSentimentConceptBegin;*|+ENPosSentimentConceptStop;
+
+/*		2270.UD. I am delighted I will have the opportunity to work with colleagues to achieve these ends.
+
 2271;70;ENEndconcept+ENNegSentiment|^ENNegSentiment+^ENNegSentimentConceptBegin;*|+ENNegSentimentConceptStop;
 
+/*		2271.UD. He's disappointed Tom forgot the camera.
 /* Expansion rules for Sentiment attribute on adjective followed by subordinate clause with "that"
 
 2263;70;ENAdj+ENPosSentiment+ENPosSentimentConceptBegin|"that"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|-ENPosSentimentConceptStop|*|+ENPosSentimentConceptStop;
+
+/*		2263.UD. His trainer is also satisfied that he will be able to clear the fences.
+
 2264;70;ENAdj+ENNegSentiment+ENNegSentimentConceptBegin|"that"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|-ENNegSentimentConceptStop|*|+ENNegSentimentConceptStop;
 
 /* Further expansion to the left to include the entire 'subject'
@@ -3585,33 +3735,84 @@
 
 2255;70;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;
 2256;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENPosSentimentConceptBegin;*|+ENPosSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+
+/*		2256.UD. On the whole, he said the figures are very positive.
+
 2257;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENNegSentimentConceptBegin;*|+ENNegSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion
+
+/*		2257.UD. The rest of the exam was negative.
+
 2258;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENPosSentimentConceptBegin;*|+ENPosSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+
+/*		2258.UD. MPs and peers say the lack of transparency on the policy is ‘not good enough’.
+
 2259;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENNegSentimentConceptBegin;*|+ENNegSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion
+
+/*		2259.UD. All drug screens during the patient's hospitalizations were negative.
+
 2260;70;ENPrep|ENDummy2+ENPosSentimentConceptBegin;+ENDummy2+ENPosSentimentConceptBegin|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+
+/*		2260.UD. On 05-AUG-2006, at the physician's office, five out of six occult blood tests done on the patient's stool were positive.
+
 2261;70;ENPrep|ENDummy2+ENNegSentimentConceptBegin;+ENDummy2+ENNegSentimentConceptBegin|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion 
+
+/*		2261.UD. Laboratory result of bronchial culture obtained on 11DEC2016 was negative.
+
 2262;70;ENDummy2;-ENDummy2;cleanup
 
+/*		2262.UD. Business is good and despite what we're hearing, the hotels are busy.
 /* Remove SentimentConcept markers in larger Sentiment span
 
 2241;70;ENPosSentimentConceptBegin+ENInPossentspan;-ENPosSentimentConceptBegin;
+
+/*		2241.UD. Then there is a big question mark above what happens next.
+
 2242;70;ENNegSentimentConceptBegin+ENInNegsentspan;-ENNegSentimentConceptBegin;
+
+/*		2242.UD. It’s not only expensive but bad for the individual concerned.
+
 2243;70;ENPosSentimentConceptStop+ENInPossentspan+^ENPBegin;-ENPosSentimentConceptStop;
+
+/*		2243.UD. She points out that San Francisco, the city closest to the Great Pacific Patch, has successfully implemented policies to stop people using wasteful plastics.
+
 2244;70;ENNegSentimentConceptStop+ENInNegsentspan+^ENPBegin;-ENNegSentimentConceptStop;
 
+/*		2244.UD. The measures taken by a Party against an action or an omission of another Party may only affect the trade with that Party.
 /* Rewrite SentimentConcept labels to interpretable Sentiment labels
 
 2247;70;ENPosSentimentConceptBegin;^ENPosSentimentBegin;
+
+/*		2247.UD. He is considered a person with great integrity.
+
 2248;70;ENNegSentimentConceptBegin;^ENNegSentimentBegin;
+
+/*		2248.UD. his oxygen saturation was only 90 % on room air.
+
 2249;70;ENPosSentimentConceptStop;^ENPosSentimentStop;
+
+/*		2249.UD. Endoscopic resection was successfully accomplished in 25 patients.
+
 2250;70;ENNegSentimentConceptStop;^ENNegSentimentStop;
 
+/*		2250.UD. However, some worries or fears are bigger than others.
 /* Assign InXxxsentspan attributes
 
 2245;70;ENPosSentimentBegin|.^ENPosSentimentStop|ENPosSentimentStop;+ENInPossentspan|+ENInPossentspan-ENPosSentimentBegin|*;
+
+/*		2245.UD. we're thinking about portable benefits packages and things that would be of assistance to those workers as well.
+
 2246;70;ENNegSentimentBegin|.^ENNegSentimentStop|ENNegSentimentStop;+ENInNegsentspan|+ENInNegsentspan-ENNegSentimentBegin|*;
+
+/*		2246.UD. This agency organizes uninteresting cruises.
+
 2306;70;ENNegatedPossent+ENNegSentiment;^ENPosSentiment;restore original sentiment label for marker
+
+/*		2306.UD. We probably benefit less from the daylight in the morning between seven and eight.
+
 2307;70;ENNegatedNegsent+ENPosSentiment;^ENNegSentiment;restore original sentiment label for marker
+
+/*		2307.UD. People are still cautious, but now they’re slowly becoming less skeptical regarding the global economic recovery.
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 71: SENTIMENT + NEGATION                                                                                                                                    
@@ -3620,7 +3821,13 @@
 
 2272;71;ENNegation|ENPosSentiment+ENInNegspan;*|+ENNegatedPossent;
 2274;71;ENNegation|ENNegSentiment+ENInNegspan;*|+ENNegatedNegsent;
+
+/*		2274.UD. It doesn't break the bank.
+
 2273;71;ENNegation|*{1,4}^ENPosSentiment+^ENNegSentiment+^ENNegation+^ENQuestion|ENPosSentiment+ENInNegspan;*|*|+ENNegatedPossent;
+
+/*		2273.UD. It's an idea that's been tried before, but not as successfully.
+
 2275;71;ENNegation|*{1,4}^ENNegSentiment+^ENPosSentiment+^ENNegation+^ENQuestion|ENNegSentiment+ENInNegspan;*|*|+ENNegatedNegsent;
 
 /* Remove original SentimentBegin 
@@ -3628,13 +3835,18 @@
 2276;71;*ENPosSentimentBegin|.^ENPosSentimentBegin+^ENPosSentimentStop+^ENNegatedPossent|ENNegatedPossent+^ENPosSentimentBegin;-ENPosSentimentBegin|*|*;remove original SentimentBegin
 2277;71;*ENNegSentimentBegin|.^ENNegSentimentBegin+^ENNegSentimentStop+^ENNegatedNegsent|ENNegatedNegsent+^ENNegSentimentBegin;-ENNegSentimentBegin|*|*;remove original SentimentBegin
 
+/*		2277.UD. It was performed twice in 1613 but never made it into print and was lost to history.
 /* Reverse sentiment of negated markers
 
 2278;71;^ENInNegspan|ENInNegspan+^ENNegatedPossent|.ENInNegspan+^ENNegatedPossent|ENInNegspan+ENNegatedPossent|.^ENNegStop+^SEnd|*ENNegStop:SEnd;*|+ENNegSentimentBegin-ENPosSentimentBegin|-ENPosSentimentBegin-ENNegSentimentStop|-ENNegatedPossent-ENPosSentimentBegin-ENNegSentimentStop|-ENPosSentimentBegin-ENNegSentimentStop|-ENPosSentimentStop+ENNegSentimentStop;reverse sentiment
 2279;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|.^ENNegStop+^SEnd|*ENNegStop:SEnd;*|+ENPosSentimentBegin-ENNegSentimentBegin|-ENNegSentimentBegin-ENPosSentimentStop|-ENNegatedNegsent-ENNegSentimentBegin-ENPosSentimentStop|-ENNegSentimentBegin-ENPosSentimentStop|-ENNegSentimentStop+ENPosSentimentStop;reverse sentiment
 2280;71;^ENInNegspan|ENInNegspan+^ENNegatedPossent|.ENInNegspan+^ENNegatedPossent|ENInNegspan+ENNegatedPossent|SEnd;*|+ENNegSentimentBegin-ENPosSentimentBegin|-ENPosSentimentBegin|-ENNegatedPossent-ENPosSentimentBegin|-ENPosSentimentStop+ENNegSentimentStop;shorter version of r2278
+
+/*		2280.UD. Devan wasn't happy.
+
 2281;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|SEnd;*|+ENPosSentimentBegin-ENNegSentimentBegin|-ENNegSentimentBegin|-ENNegatedNegsent-ENNegSentimentBegin|-ENNegSentimentStop+ENPosSentimentStop;shorter version of r2279
 
+/*		2281.UD. Devan wasn't worried.
 /* Reassign InXxxsentspan attributes
 
 2288;71;ENInPossentspan:ENInNegsentspan;-ENInPossentspan-ENInNegsentspan;
@@ -3644,8 +3856,17 @@
 /* Split Relations at boundaries of span
 
 2291;71;typeRelation+^ENAndOrBut+^"to"+^ENInPossentspan|typeRelation+ENPBegin+ENInPossentspan;*|+ENBeginrelation;
+
+/*		2291.UD. The patient reported that a urinalysis was done as well (results not reported).
+
 2292;71;typeRelation+^ENAndOrBut+^"to"+^ENInNegsentspan|typeRelation+ENPBegin+ENInNegsentspan;*|+ENBeginrelation;
+
+/*		2292.UD. most qualified scientists in this field admit only that badgers may be a source of infection.
+
 2293;71;typeRelation+^ENAndOrBut+^"to"+ENInPossentspan|typeRelation+ENPBegin+^ENInPossentspan;*|+ENBeginrelation;
+
+/*		2293.UD. Divers lobbied successfully to reopen it in 2003.
+
 2294;71;typeRelation+^ENAndOrBut+^"to"+ENInNegsentspan|typeRelation+ENPBegin+^ENInNegsentspan;*|+ENBeginrelation;
 
 /* Move SentimentBegin from NR to R/C/PR
@@ -3656,21 +3877,44 @@
 2219;71;ENNegSentimentStop+^typeRelation+^typeConcept+^typePathRelevant+^ENNRSentmarker|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENNegSentimentStop|*|+ENNegSentimentStop;
 2353;71;ENPosSentiment:ENNegSentiment+ENAdvstruct;+ENNRSentmarker;
 
+
 /* ==================================================================================================================================================================
 /* BLOCK 75: MEASUREMENT & TIME ATTRIBUTE EXPANSION                                                                                                                  
 /* ==================================================================================================================================================================
 /* 75.1 -- INITIAL PROCESSING
 
 2323;75;ENNoMeasurement+ENList|ENAndOrBut:ENComma+ENList|ENNum+ENList;*|*|-ENNum+ENNoMeasurement;
+
+/*		2323. "Council" shall mean the Council of Ministers as provided for in Articles 7 and 11 of this Treaty;
+
 2324;75;ENNoMeasurement|"to"|ENNum;*|*|-ENNum+ENNoMeasurement;
+
+/*		2324. The term "agricultural products" means for the purpose of this Agreement the products falling withing Chapter 1 to 24 of the Harmonized Commodity Description and Coding system and the products listed in Annex II.
+
 2188;75;ENNum+ENNoMeasurement|ENUnit;-ENNoMeasurement|*;
+
+/*		2188. histamine H1 (Ki= 30 nM) and 5-HT2C (Ki= 102 nM).
+
 2187;75;ENNum+ENNoMeasurement;-ENNum-ENMeasurement;
 1983;75;"of"|ENNum;*|+ENMeasurement;
+
+/*		1983.	A heartbeat of 72 and a heartbeat of 200.
+
 1929;75;ENNum+ENDuration:ENFrequency:ENTime;-ENMeasurement;
+
+/*		1929.	In the dead of night Dec. 21, ministers finished three days of negotiating.
+
 2200;75;ENAdvDurCon;-ENMeasurement-ENValue;
+
+/*		2200. For thousands of years, salmon spawned and died.
+
 1953;75;"one"|ENNum;ENNum|+Join;
+
+/*		1953.	Unspecified therapies were given intramuscular, one 1.5 mg and the other 2.5 mg.
+
 1993;75;"one"|ENUnit;+ENMeasurement+ENNum-ENBeginconcept|ENCon+ENUnit-ENOutOff;
 
+/*		1993.	Among suggestions are turning thermostats down by one degree, which may see a 10 per cent cut in fuel bills.
 /* 75.2 -- COMBINE NUMBER/TIME FOLLOWED BY CONCEPT INTO ONE MEASUREMENT/TIME PATH
 
 1955;75;ENNum+^ENDuration+^ENFrequency+^ENTime|"points":"percent";+ENMeasurement+ENMeasurementBegin|+ENMeasurement;
@@ -3684,9 +3928,12 @@
 1797;75;ENTime|*typeConcept|typeRelation:typeBeginConcept:typeBeginEndConcept;+ENDateTimeBegin|-ENDateTimeStop|+ENDateTimeStop;
 1931;75;*typeConcept+^ENMeasurementBegin|ENMeasurement+ENMeasurementBegin;+ENMeasurementBegin|-ENMeasurementBegin;
 1978;75;*typeConcept|ENMeasurement+^typeBeginConcept+^ENTime;+ENMeasurementBegin|-ENMeasurementBegin;
+
+/*		1978.	At the end of the study period, nearly twice as many patients in the placebo group reported reduced symptoms as in the control group.
+
 1949;75;*ENPathRelObj|ENMeasurementBegin;+ENMeasurementBegin|-ENMeasurementBegin;
 1974;75;*ENPathRelObj|ENNumberPlusUnit;+ENMeasurementBegin|+ENMeasurement;
-1927;75;*typeConcept+^ENNum+^ENNumberPlusUnit|ENNum:ENNumberPlusUnit+^ENDuration+^ENFrequency+^ENTime|*typeConcept|^typeConcept;+ENMeasurementBegin|*|*|+ENMeasurementStop;
+1927;75;*typeConcept+^ENNum+^ENNumberPlusUnit|ENNum:ENNumberPlusUnit+^ENDuration+^ENFrequency+^ENTime|*typeConcept|^typeConcept+^"from";+ENMeasurementBegin|*|*|+ENMeasurementStop;from is treated by r2518
 1938;75;*typeConcept+^ENNum+^ENNumberPlusUnit+^"day"+^"year"|ENNum:ENNumberPlusUnit+^ENDuration+^ENFrequency+^ENTime|^typeConcept+^"of";+ENMeasurementBegin|*|+ENMeasurementStop;
 1814;75;ENTime|*typeConcept+^ENAdvmandeg|ENPunctuation:SEnd;+ENDateTimeBegin|*|+ENDateTimeStop;
 1893;75;ENTime|*typeConcept|typePathRelevant;+ENDateTimeBegin|*|+ENDateTimeStop;
@@ -3724,6 +3971,9 @@
 1920;75;ENMeasurement|"to"|ENMeasurement+ENMeasurementBegin;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|-ENMeasurementBegin;
 1784;75;ENMeasurement+ENDirection|ENOf|*typeConcept|typeRelation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
 1773;75;*ENMeasurement|"of"|ENCon|"by":"in":"into":ENRel:ENPunctuation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
+
+/*		1773.	More than two inches of rain fell over the weekend.
+
 1884;75;ENQuantity|*typeConcept+^ENFrequency|ENFrequency;+ENMeasurementBegin-ENCon|*|+ENMeasurementStop;
 1886;75;typeConcept|"of"|ENNum|ENPunctuation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
 1780;75;*typeConcept:typePathRelevant|"above":"below":"exceeding":"well above":"well below"|*ENMeasurement|*^typeConcept;+ENMeasurementBegin|ENCon|*|+ENMeasurementStop;
@@ -3751,14 +4001,20 @@
 1922;75;*typeConcept|"of"|ENMeasurement;+ENMeasurementBegin|*|-ENMeasurementBegin;
 1907;75;ENFrequency|"to"|^ENNum+^ENTime;*|+ENMeasurementStop|*;
 1914;75;"within":"in"|ENMeasurement;+ENMeasurementBegin|*;
-1925;75;ENMeasurement|"across":"from"|typeConcept;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|*;
+1925;75;ENMeasurement|"across":"from"|.ENArtPosspron|typeConcept;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|*|*;
 2507;75;ENMeasurement|ENAndOrBut|^ENNum+^ENNumberPlusUnit2+^ENNumberPlural;*|+ENMeasurementStop|*;
 
 /*		2507. The patient's blood pressure was 180/98 and physical exam was unremarkable.
 /* 75.4.3 -- MEASUREMENT EXPANSION (MAINLY TO THE LEFT)
 
 1877;75;*typeConcept|"of"|typeConcept|ENFrequency;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|-ENMeasurementBegin-ENMeasurementStop|*;
+
+/*		1877.	The temporary work permits will begin to expire at a rate of nearly 1,000 per day.
+
 1796;75;"one":"total"|"of"|*typeConcept+ENMeasurement:ENMeasurementBegin;+ENMeasurementBegin|-ENMeasurementStop|-ENMeasurementBegin;
+
+/*		1796.	They were last year forced to seek a total of GBP26 billion in funding. Indeed, it has been mentioned on just one of Twitter's four earnings calls this calendar year.
+
 1951;75;ENNum:ENPercentage+^ENTime|"of"|ENArtPosspron|*typeConcept+^ENTime+^ENDuration|^typeConcept+^"ever"+^"of"+^"under"+^"with";+ENMeasurementBegin|+ENCon-ENOf-ENMeasurementStop|^ENCon|*|+ENMeasurementStop;
 1970;75;ENNum|"of"|ENArtPosspron|ENDuration;+ENDateTimeBegin|+ENCon-ENOf|^ENCon|-ENDateTimeBegin-ENAdvDurCon+ENCon;
 1967;75;ENNum|"of"|ENArtPosspron|*typeConcept+^ENTime+^ENDuration|"ever":"of":"under":"with";+ENMeasurementBegin|+ENCon-ENOf|^ENCon|*|*;
@@ -3784,6 +4040,7 @@
 1891;75;*typeConcept|"of"|*ENTime|^typeConcept;+ENDateTimeBegin|-ENDateTimeBegin-ENDateTimeStop|-ENDateTimeBegin|+ENDateTimeStop;a variation of r1890
 1915;75;*ENMeasurement|"within";+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop;
 
+/*		1915. earn 12,000 Miles within 12 months.
 /* 75.6 -- SPECIAL CASES
 /* 75.6.1 -- SPECIAL CASE: "UP TO" - PART 1
 
@@ -3791,27 +4048,54 @@
 
 /* 75.7 -- MEASUREMENT AND TIME EXPANSIONS (MAINLY TO THE LEFT)
 
-2192;75;^SBegin+^ENList|"and":"or":"but":"by":"for":"from":"if"+^ENMeasurementBegin;*|+ENMeasurementStop;
+2192;75;^SBegin+^ENList|"and":"or":"but":"by":"for":ENPBegin+^ENMeasurementBegin;*|+ENMeasurementStop;
+2518;75;ENMeasurementBegin:ENMeasurement+^ENDistance|.<^ENMeasurementStop+^ENDistance+^"from"|"from"|^ENMeasurementBegin+^ENMeasurement;*|*|+ENMeasurementStop|*;
+
+/*		2518. The game also saw a return to form for Sergio with two goals from him in the first half.
+
 1768;75;^SBegin+^ENList|"and":"or":"but":"by":"for":"from":"if";*|+ENDateTimeStop;
-1777;75;^SBegin|"it":"after":"before":"will":"that":"were":"is":"as";*|+ENMeasurementStop+ENDateTimeStop;
+1777;75;^SBegin|"it":"will":"that":"were":"is":"as";*|+ENMeasurementStop+ENDateTimeStop;
+2522;75;^ENDateTimeBegin+^ENAdvTemp|"after":"before";*|+ENMeasurementStop+ENDateTimeStop;extension of r1777
+
+/*		2522. The cooling stops are conducted two minutes after completing the performance test.
+
 1909;75;^SBegin|"during":"over":"while":"under";*|+ENMeasurementStop;
 1960;75;^SBegin+^ENList|ENPunctuation;*|+ENMeasurementStop;
+
+/*		1960.	Net income for the year ended December 31, 2016, was $200 million.
+
 2003;75;ENPerspron_refl|"as";*|+ENBeginrelation+ENDateTimeStop+ENMeasurementStop-ENPrep;
 1959;75;ENPunctuation|^ENList;+ENDateTimeStop|*;
 1910;75;"during";+ENBeginrelation+ENDateTimeBegin-ENPrepDuration-ENPrep;
 1900;75;ENList|"and"|*ENList|ENPunctuation;*|-ENMeasurementStop|*|+ENMeasurementStop;
+
+/*		1900.	My children, aged two, three and five, went swimming.
+
 1903;75;ENList+ENNum|ENPunctuation|ENList+ENNum;*|-ENMeasurementStop|*;
 1932;75;ENList+ENNum|ENPunctuation|"and"|ENList+ENNum;*|-ENMeasurementStop|-ENMeasurementStop|*;
 1790;75;ENmAux:ENAux:SEnd:"had":"who":"through";+ENMeasurementStop+ENDateTimeStop;
+
+/*		1790.	Seven hundred thirty-nine patients who were treated between 1982 and 1992 gave consent to enter the study.
+
 1872;75;"in"|ENTime|"to"|^ENTime+^ENMeasurement;*|*|+ENDateTimeStop+ENMeasurementStop|*;limit the right expansion
 1894;75;"thereafter"|typeRelation;*|+ENDateTimeStop+ENMeasurementStop;
 1971;75;ENNum+^ENTime|"for":"of"|ENNum+^ENTime|^typeConcept;+ENMeasurementBegin|-ENMeasurementStop|*|+ENMeasurementStop;
 1972;75;ENNum+^ENTime|"for":"of"|ENNum+^ENTime|*typeConcept|^typeConcept;+ENMeasurementBegin|-ENMeasurementStop|-ENMeasurementBegin|*|+ENMeasurementStop;
 1977;75;ENMeasurement:ENNum+^ENTime|"through"|ENNum+^ENTime|^typeConcept;+ENMeasurementBegin|-ENMeasurementStop|*|+ENMeasurementStop;
+
+/*		1977.	It was decided that teeth 1 through 5 would be surgically removed.
+
 1988;75;ENDuration:ENTime|"and":"or"|"a"|ENDuration:ENTime|^typeConcept;+ENDateTimeBegin|-ENDateTimeStop|-ENDateTimeStop|-ENDateTimeBegin|+ENDateTimeStop;
+
+/*		1988.	You might need six months or a year to make sure it fits into your meeting schedule.
+
 1989;75;ENDuration:ENTime|"and":"or"|ENDuration:ENTime|^typeConcept;+ENDateTimeBegin|-ENDateTimeStop|-ENDateTimeStop-ENDateTimeBegin|+ENDateTimeStop;
+
+/*		1989.	It was actually the third warmest June, behind last year and 1988.
+
 1998;75;ENDuration:ENTime|ENPerspron_subj:ENPerspron_obj;*|+ENDateTimeStop;
 
+/*		1998.	Put it on your calendar that the last two weeks you have to be ready every day.
 /* 75.6.2 -- SPECIAL CASES: MEASUREMENT EXPANSION
 
 1824;75;"of"|"that":"whom";*|-ENMeasurementStop;
@@ -3838,6 +4122,9 @@
 
 2181;75;ENNum+ENMeasurement+^ENNumberPlusUnit2;+ENValue;output value even if there is no known unit
 2185;75;"one":ENNum+^ENMeasurement+^ENTime|"out of":"of"|."the"|ENMeasurement;+ENValue|+Join|+Join|+Join;
+
+/*		2185. Two of the first legal challenges to Brexit have been rejected by a Belfast court.
+
 2195;75;"one of the":"one out of the"|ENNum+ENMeasurement;ENNum+ENMeasurement+ENValue|+Join;
 
 /* 75.5.2 -- TIME EXPANSION (MOSTLY TO THE LEFT)
@@ -3853,7 +4140,7 @@
 1941;75;"with"|ENTime+ENDateTimeBegin;+ENDateTimeBegin|-ENDateTimeBegin;
 1913;75;ENDuration|"off"|ENDateTimeBegin;+ENDateTimeBegin|-ENDateTimeStop|-ENDateTimeBegin;
 1928;75;"as of"|*ENTime|^ENTime;+ENDateTimeBegin|-ENDateTimeBegin|+ENDateTimeStop;
-1981;75;"from"|ENMeasurement:ENNum|"in";+ENMeasurementBegin|-ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop;
+1981;75;"from"|ENMeasurement:ENNum+^ENTime|"in";+ENMeasurementBegin|-ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop;
 1986;75;"to"|ENMeasurement+^ENTime;+ENMeasurementBegin|-ENMeasurementBegin;
 1982;75;"from":"to"|ENMeasurementBegin+^ENDateTimeBegin+^ENAllSome;+ENMeasurementBegin|-ENMeasurementBegin;
 2001;75;"at":"from"|ENTime|"on"|ENTime|^ENTime;+ENDateTimeBegin+ENBeginrelation-ENPrep-ENOf|-ENDateTimeBegin|-ENDateTimeBegin-ENDateTimeStop|*|+ENDateTimeStop;
@@ -3890,9 +4177,9 @@
 
 1835;75;ENArtPosspron|ENTime|"before"|ENArtPosspron;*|+ENDateTimeBegin|-ENDateTimeStop|-ENDateTimeStop;
 1836;75;ENArtPosspron|ENTime|"before"|"but";*|+ENDateTimeBegin|-ENDateTimeStop|+ENDateTimeStop+ENBeginrelation-ENAndOrBut;
-1833;75;ENTime|"after":"before";+ENDateTimeBegin|-ENDateTimeStop;
+1833;75;ENTime:"immediately"|"after":"before";+ENDateTimeBegin|-ENDateTimeStop;
 1933;75;ENDuration|"prior";+ENDateTimeBegin|-ENDateTimeStop;
-1863;75;ENDuration:ENTime|"after"|*typeConcept|^typeConcept;*|-ENDateTimeBegin-ENDateTimeStop|*|+ENDateTimeStop;
+1863;75;ENDuration:ENTime:ENAdvTemp|"after"|*typeConcept|^typeConcept;*|-ENDateTimeBegin-ENDateTimeStop|*|+ENDateTimeStop;
 1874;75;"after":"before":"through":"until"|ENTime;+ENDateTimeBegin-ENDateTimeStop+ENBeginrelation-ENPrep|*;
 2004;75;"after"|ENArtPosspron|ENDateTimeBegin;+ENDateTimeBegin-ENDateTimeStop+ENBeginrelation-ENPrep-ENAfterTime|-ENDateTimeStop|-ENDateTimeBegin;
 1839;75;"before"|ENPerspron_subj|ENRel|typeConcept;-ENDateTimeStop|-ENDateTimeStop|-ENDateTimeStop|*;
@@ -3952,6 +4239,7 @@
 1883;75;ENQuantity+ENCon;-ENQuantity;
 1999;75;"past"+typeRelation;-ENTime;
 
+
 /* ==================================================================================================================================================================
 /* BLOCK 80/81: CLEANING                                                                                                                                             
 /* ==================================================================================================================================================================
@@ -3969,6 +4257,7 @@
 2169;81;ENPremod2:ENAdj+ENQuestion;-ENQuestion;
 
 /*		2169. The physician was unsure how many alendronate the patient took.
+
 /* REWRITE LANGUAGE-SPECIFIC LABELS TO MANDATORY LABELS
 
 890;81;ENPunctuation;^Punctuation;
