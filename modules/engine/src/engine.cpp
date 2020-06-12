@@ -1,6 +1,5 @@
 #include "engine.h"
 
-// #include <iostream>
 #include <numeric>
 #include <mutex>
 
@@ -48,13 +47,15 @@ using iknowdata::Path_Attribute_Span;
 
 struct UData
 {
-	UData(Text_Source::Sentences& sents, iknow::core::IkConceptProximity::ProximityPairVector_t& proximity) :
+	UData(Text_Source::Sentences& sents, iknow::core::IkConceptProximity::ProximityPairVector_t& proximity, std::vector<std::string>& traces) :
 		iknow_sentences(sents),
-		iknow_proximity(proximity)
+		iknow_proximity(proximity),
+		iknow_traces(traces)
 	{}
 
 	Text_Source::Sentences& iknow_sentences; // reference to sentence information
 	iknow::core::IkConceptProximity::ProximityPairVector_t& iknow_proximity; // collection of proximity information
+	std::vector<std::string> &iknow_traces; // linguistic trace info, on demand
 };
 
 typedef unsigned short PropertyId;
@@ -244,6 +245,18 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 		}
 	}
 	*/
+	if (debug) {
+		const iknow::base::IkTrace<Utf8List>& trace_data = debug->GetTrace();
+		udata.iknow_traces.reserve(trace_data.end() - trace_data.begin()); // reserve memory for storage vector
+		for (iknow::base::IkTrace<Utf8List>::Items::const_iterator it = trace_data.begin(); it != trace_data.end(); ++it) {
+			const String& key = it->first;
+			const Utf8List& valueList = it->second;
+			string value;
+			for_each(valueList.begin(), valueList.end(), [&value](const string& item) { value += (item + ";"); });
+
+			udata.iknow_traces.push_back(IkStringEncoding::BaseToUTF8(key) + ":" + value);
+		}
+	}
 }
 
 iKnowEngine::iKnowEngine() // Constructor
@@ -296,7 +309,7 @@ struct LanguageCodeMap {
 const static LanguageCodeMap language_code_map;
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
-void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language)
+void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
 	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
 		throw ExceptionFrom<iKnowEngine>("Language not supported");
@@ -305,7 +318,8 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 	m_index.sentences.clear();
 	m_index.proximity.clear();
-	UData udata(m_index.sentences, m_index.proximity);
+	m_traces.clear();
+	UData udata(m_index.sentences, m_index.proximity, m_traces);
 
 	SharedMemoryKnowledgebase skb = language_code_map.Lookup(utf8language);
 
@@ -314,17 +328,12 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
 	iknow::core::IkIndexInput Input(&text_input);
-#ifdef _DEBUG // debug version generates a linguistic trace file.
-	bool b_generate_trace_file = true;
-#else
-	bool b_generate_trace_file = false;
-#endif
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
-	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_generate_trace_file);
+	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);
 	lck.unlock();
 }
 
-void iKnowEngine::index(const std::string& text_source, const std::string& language) {
+void iKnowEngine::index(const std::string& text_source, const std::string& language, bool b_trace) {
 	String text_source_ucs2(IkStringEncoding::UTF8ToBase(text_source));
-	index(text_source_ucs2, language);
+	index(text_source_ucs2, language, b_trace);
 }

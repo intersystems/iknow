@@ -21,7 +21,7 @@
 
 #include <set>
 #include <iostream> // console log
-#include <fstream> // for trace file
+// #include <fstream> // for trace file
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -99,25 +99,6 @@ void CProcess::IndexFunc(IkIndexInput& text_input, OutputFunc func, void *userda
 			}
 			if (bDomAndProx) Output.CalculateDominanceAndProximity(); // we need these for UIMA dominance and proximity document annotations 
 			func(&Output, m_tracing_enabled ? &Debug : 0, userdata, m_stemmer);
-
-#ifndef ISC_IRIS
-			if (tracing_enabled) {
-				std::ofstream os("iknowtrace.log", std::ofstream::app);
-				os << "\xEF\xBB\xBF" << std::endl; // Force utf8 header, maybe utf8 is not the system codepage
-
-				const iknow::base::IkTrace<Utf8List>& trace_data = Debug.GetTrace();
-				for (iknow::base::IkTrace<Utf8List>::Items::const_iterator it = trace_data.begin(); it != trace_data.end(); ++it) {
-					const String& key = it->first;
-					const Utf8List& value = it->second;
-					os << IkStringEncoding::BaseToUTF8(key) << " : ";
-					for (Utf8List::const_iterator item = value.begin(); item != value.end(); ++item) {
-						os << *item << "; ";
-					}
-					os << std::endl;
-				}
-				os.close();
-			}
-#endif
 		}
 		catch (const std::bad_alloc& ba) {
 #ifdef ISC_IRIS

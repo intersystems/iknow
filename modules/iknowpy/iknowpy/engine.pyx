@@ -50,10 +50,10 @@ cdef class iKnowEngine:
 	def get_languages_set():
 		return CPPiKnowEngine.GetLanguagesSet()
 
-	def index(self, str text_source, str language):
+	def index(self, str text_source, str language, bool traces = False):
 		if language not in self.get_languages_set():
 			raise ValueError('Language {!r} is not supported.'.format(language))
-		return self.engine.index(text_source, language)
+		return self.engine.index(text_source, language, traces)
 
 	def add_udct_annotation(self, size_t start, size_t stop, str UdctLabel):
 		return self.engine.addUdctAnnotation(start, stop, UdctLabel)
@@ -62,6 +62,11 @@ cdef class iKnowEngine:
 	def _m_index_raw(self):
 		"""Return a raw representation of the index following Cython default type coercions. For debug use only."""
 		return self.engine.m_index
+
+	@property
+	def m_traces(self):
+		"""Return the linguistic trace information"""
+		return self.engine.m_traces
 
 	@property
 	def m_index(self):
