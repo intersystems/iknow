@@ -160,11 +160,11 @@ public:
 	// Current limitations : 
 	//	- works synchronous : the complete text_source is indexed, after return, use iKnowEngine methods to retrieve indexing information.
 	//	- works single threaded : a mutex protects multithread functioning. Use multiprocess to bypass this (current) limitation.
-	void index(iknow::base::String& text_source, const std::string& language);
+	void index(iknow::base::String& text_source, const std::string& language, bool b_trace=false);
 	
 	// Wrapper for indexing function that accepts UTF-8 encoded string instead. The offsets generated will be Unicode character
 	// offsets, not byte offsets in text_source.
-	void index(const std::string& text_source, const std::string& language);
+	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
 	// Adds User Dictionary annotations for customizing purposes
 	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
@@ -172,6 +172,7 @@ public:
 	}
 
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
+	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
