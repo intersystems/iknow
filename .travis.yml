@@ -1,0 +1,13 @@
+matrix:
+  include:
+    - os: linux
+      arch: amd64
+    - os: linux
+      arch: arm64
+    - os: linux
+      arch: ppc64le
+    - os: osx
+    - os: windows
+
+script:
+  - echo platform: $TRAVIS_OS_NAME $TRAVIS_CPU_ARCH
