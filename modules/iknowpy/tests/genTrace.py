@@ -1,22 +1,25 @@
 # This Python file uses the following encoding: utf-8
 ''' genTrace.py tool for logging linguistic traces
     Usage: "python genTrace.py <text files directory> <output directory> <language>"
-    Example (on Windows): "python genTrace.py(r'C:\TextCorpus\English\Financial\',r'C:\tmp\','en')
+    Example (on Windows): "python genTrace.py C:\TextCorpus\English\Financial C:\tmp en
 '''
 
 import sys
-sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-import engine as iknowpy
+
+# for local language development, adapt next line to your local situation, and uncomment next 2 lines 
+#sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+#import engine as iknowpy
+# for "pip install iknowpy", next line will do, outcomment for local language development
+import iknowpy
 
 import os
 import pprint
 import time
-#import iknowpy
 
 # print(sys.argv)
 
-in_path_par = "C:\\P4\\Users\\jdenys\\text_input_data\\en\\" # ja/"
-out_path_par = "C:/tmp/"
+in_path_par = "C:\\P4\\Users\\jdenys\\text_input_data\\en\\"
+out_path_par = "C:\\tmp\\"
 language_par = "en"
 OldStyle = True
 
@@ -65,19 +68,23 @@ for text_file in f:
         if (key=='LexrepCreated'):
 		    # print(value)
             Literal = value.split('"')[1]
-            print('Literal=',Literal)
+            write_ln(f_trace, 'Literal='+Literal)
         elif (key == 'NormalizeToken'):
+            pass
+        elif (key == 'AttributeDetected'):
+            pass
+        elif (key == 'PreprocessToken'):
             pass
         elif (key == "SentenceFound"):
             Sentence = value.split('"')[7]
-            print('Sentence=',Sentence)
+            write_ln(f_trace, 'Sentence='+Sentence)
         elif (key == "LexrepIdentified"):
-            Index, Labels = value.split('"')[3],value.split('"')[5]
+            Index, Labels = trace.split('"')[3],trace.split('"')[5]
             if (Index=='B'): # B&E are Begin&End markers, not real lexreps
                 continue
             if (Index=='E'):
                 continue
-            print(Index, ":", Labels)
+            write_ln(f_trace, Index+":"+Labels)
         elif (key == "RuleApplication"):
             pass
         elif (key == "RuleApplicationResult"):
@@ -87,6 +94,8 @@ for text_file in f:
         elif (key == "RulesComplete"):
             pass
         elif (key == "AmbiguityResolved"):
+            pass
+        elif (key == "ConceptFiltered"):
             pass
         elif (key == "MergingConcept"):
             pass
