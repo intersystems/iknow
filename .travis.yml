@@ -7,7 +7,6 @@ jobs:
   include:
     # - os: linux
     #   arch: amd64
-    #   sudo: required
     #   services:
     #     - docker
     #   env:
@@ -15,7 +14,6 @@ jobs:
     #     - TAG=manylinux2010_x86_64
     # - os: linux
     #   arch: amd64
-    #   sudo: required
     #   services:
     #     - docker
     #   env:
@@ -24,7 +22,6 @@ jobs:
     #     - TAG=manylinux2010_i686
     # - os: linux
     #   arch: amd64
-    #   sudo: required
     #   services:
     #     - docker
     #   env:
@@ -32,7 +29,6 @@ jobs:
     #     - TAG=manylinux2014_x86_64
     # - os: linux
     #   arch: amd64
-    #   sudo: required
     #   services:
     #     - docker
     #   env:
@@ -41,7 +37,6 @@ jobs:
     #     - TAG=manylinux2014_i686
     - os: linux
       arch: arm64
-      sudo: required
       services:
         - docker
       env:
@@ -56,7 +51,9 @@ jobs:
     #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_ppc64le
     #     - TAG=manylinux2014_ppc64le
     - os: osx
+      install:
+        - echo "install step for Mac OS run"
     # - os: windows
 
 script:
-  - travis_wait travis/build.sh
+  - travis/build.sh
