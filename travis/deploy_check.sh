@@ -5,7 +5,9 @@
 # to the file /modules/iknowpy/iknowpy/version.py. Write 1 to stdout if we
 # should deploy. Write 0 to stdout otherwise.
 
-if [ -n $(git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT | grep modules/iknowpy/iknowpy/version.py) ]; then
+set -euxo pipefail
+
+if [ -n "$(git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT | grep modules/iknowpy/iknowpy/version.py)" ]; then
   echo 1
 else
   echo 0
