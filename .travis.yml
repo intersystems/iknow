@@ -21,5 +21,4 @@ jobs:
     # - os: windows
 
 script:
-  - docker run --rm -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN
-  
+  - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN

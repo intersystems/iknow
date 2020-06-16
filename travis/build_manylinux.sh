@@ -124,4 +124,6 @@ if [[ $(./deploy_check.sh) == "1"]]; then
   echo '+ /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
   /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
   set -x
+else
+  echo "Deployment skipped"
 fi
