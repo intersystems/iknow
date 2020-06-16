@@ -1,6 +1,5 @@
 #include "engine.h"
 
-// #include <iostream>
 #include <numeric>
 #include <mutex>
 
@@ -48,13 +47,15 @@ using iknowdata::Path_Attribute_Span;
 
 struct UData
 {
-	UData(Text_Source::Sentences& sents, iknow::core::IkConceptProximity::ProximityPairVector_t& proximity) :
+	UData(Text_Source::Sentences& sents, iknow::core::IkConceptProximity::ProximityPairVector_t& proximity, std::vector<std::string>& traces) :
 		iknow_sentences(sents),
-		iknow_proximity(proximity)
+		iknow_proximity(proximity),
+		iknow_traces(traces)
 	{}
 
 	Text_Source::Sentences& iknow_sentences; // reference to sentence information
 	iknow::core::IkConceptProximity::ProximityPairVector_t& iknow_proximity; // collection of proximity information
+	std::vector<std::string> &iknow_traces; // linguistic trace info, on demand
 };
 
 typedef unsigned short PropertyId;
@@ -68,6 +69,7 @@ static const String kNegativeSentimentString = IkStringEncoding::UTF8ToBase("Neg
 static const String kMeasurementString = IkStringEncoding::UTF8ToBase("Measurement"); // Entity(Measurement, Value, Unit), "Value", "Unit", "Value"+"Unit"
 static const String kMeasurementValueString = IkStringEncoding::UTF8ToBase("Value");
 static const String kMeasurementUnitString = IkStringEncoding::UTF8ToBase("Unit");
+static const String kEntityVectorTypeName = IkStringEncoding::UTF8ToBase("EntityVector");
 
 // 
 // helper function translates internal iknow::core::IkLabel::Type to iknowdata::Entity::eType
@@ -113,8 +115,12 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			const size_t text_start = literal_start - pText;
 			const size_t text_stop = literal_end - pText;
 
+			bool is_measure = false; // we can only have one measurement attribute per merged lexrep
+			int idx_measure = 0; // index to measurement attribute
 			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
-				bool is_measure = false, is_value = false, is_unit = false; // lexrep level
+				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText()); // the attribute marker
+
+				bool is_marker_measure = false, is_value = false, is_unit = false; // lexrep level
 				const size_t label_count = it->NumberOfLabels();
 				for (size_t i = 0; i < label_count; ++i) {
 					FastLabelSet::Index idx_label = it->GetLabelIndexAt(i);
@@ -129,7 +135,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							for (const iknow::core::AttributeId* ent_param = kb->GetAttributeParamsBegin(idx_label, cnt_attribute); ent_param != kb->GetAttributeParamsEnd(idx_label, cnt_attribute); ++ent_param) {
 								String param_attribute(kb->AttributeNameForId(*ent_param).data, kb->AttributeNameForId(*ent_param).size);
 
-								if (param_attribute == kMeasurementString) id_property = Sent_Attribute::Measurement;
 								if (!id_property) id_property = kb->PropertyIdForName(param_attribute);
 								if (param_attribute == kMeasurementValueString) { // new, measurement value attribute type
 									is_value = true;
@@ -139,15 +144,24 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 								}
 							}
 							Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(id_property);
-							std::string a_index = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText());
-							unsigned short idx_sentence = static_cast<unsigned short>(udata.iknow_sentences.size()); // sentence reference
 							unsigned short idx_attribute = static_cast<unsigned short>(sentence_data.sent_attributes.size()); // attribute reference
 							mapLexrep2Attribute.insert(make_pair(lexrep, make_pair(idx_sentence, idx_attribute))); // link ID to lexrep
 
-							sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_index));
-							sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
-
+							if (!is_measure) {
+								sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
+								sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
+							}
 							if (id_property == Sent_Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
+								if (!is_measure) {
+									idx_measure = (int) sentence_data.sent_attributes.size() - 1;
+									is_measure = is_marker_measure = true;
+								}
+								if (!is_marker_measure) { // add marker to existing marker
+									Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure];
+									ref.marker_ += " " + a_marker;
+									ref.offset_stop_ = it->GetTextPointerEnd() - pText;
+									is_marker_measure = true;
+								}
 								String at_value, at_unit, at_value2, at_unit2; // measurement attribute properties
 								String at_token = it->GetValue();
 								if (is_value && is_unit) { // separate value & unit properties
@@ -160,7 +174,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 										if (is_value) at_value = it->GetNormalizedText();
 										if (is_unit) at_unit = it->GetNormalizedText();
 								}
-								Sent_Attribute& ref = sentence_data.sent_attributes.back(); // reference the newly added measuremnt attribute
+								Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure]; // reference the newly added measuremnt attribute
 
 								// ref.optional_parameters.measurement.value_ = 
 								if (at_value.length()) ref.value_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
@@ -178,12 +192,26 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			sentence_data.entities.push_back(Entity(e_type, text_start, text_stop, index_value, data->GetEntityDominance(lexrep), ent_id));
 		}
 		// collect sentence path data
-		for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
-			const IkPath* path = &(*j);
-			for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
-				IkMergedLexrep* lexrep = iknow::core::path::CRC::OffsetToLexrep(*k, sentence->GetLexrepsBegin()); // Sentence offset to lexrep.
-				unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
-				sentence_data.path.push_back(entity_id); // reference to sentence entities
+		if (bIsIdeographic) { // handle entity vectors
+			// iknow::core::PropertyId entity_vector_prop_id = kb->PropertyIdForName(kEntityVectorTypeName); // entity vector property
+			IkSentence::EntityVector& entity_vector = sentence->GetEntityVector();
+			if (!entity_vector.empty()) { // emit entity vectors
+				// Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(entity_vector_prop_id);
+
+				for (IkSentence::EntityVector::const_iterator i = entity_vector.begin(); i != entity_vector.end(); ++i) { // collect entity id's
+					// (*this)(*i + 1); //occurrence ids are 1-based
+					sentence_data.path.push_back((unsigned short)*i); 
+				}
+			}
+		}
+		else { // normal path
+			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
+				const IkPath* path = &(*j);
+				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
+					IkMergedLexrep* lexrep = iknow::core::path::CRC::OffsetToLexrep(*k, sentence->GetLexrepsBegin()); // Sentence offset to lexrep.
+					unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
+					sentence_data.path.push_back(entity_id); // reference to sentence entities
+				}
 			}
 		}
 		udata.iknow_sentences.push_back(sentence_data); // Collect single sentence data
@@ -191,6 +219,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	data->GetProximityPairVector(udata.iknow_proximity); // Proximity is document related
 
 	// treat attribute paths
+	/*
 	for (iknow::core::IkIndexOutput::vecAttributePaths::iterator itAPaths = data->AttributePathsBegin(); itAPaths != data->AttributePathsEnd(); ++itAPaths) {
 		Path_Attribute_Span path_attribute_span;
 
@@ -213,6 +242,19 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 				udata.iknow_sentences[idx_sentence].path_attributes.push_back(path_attribute_span); // store the expanded path attribute.
 				break;
 			}
+		}
+	}
+	*/
+	if (debug) {
+		const iknow::base::IkTrace<Utf8List>& trace_data = debug->GetTrace();
+		udata.iknow_traces.reserve(trace_data.end() - trace_data.begin()); // reserve memory for storage vector
+		for (iknow::base::IkTrace<Utf8List>::Items::const_iterator it = trace_data.begin(); it != trace_data.end(); ++it) {
+			const String& key = it->first;
+			const Utf8List& valueList = it->second;
+			string value;
+			for_each(valueList.begin(), valueList.end(), [&value](const string& item) { value += (item + ";"); });
+
+			udata.iknow_traces.push_back(IkStringEncoding::BaseToUTF8(key) + ":" + value);
 		}
 	}
 }
@@ -267,7 +309,7 @@ struct LanguageCodeMap {
 const static LanguageCodeMap language_code_map;
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
-void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language)
+void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
 	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
 		throw ExceptionFrom<iKnowEngine>("Language not supported");
@@ -276,7 +318,8 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 	m_index.sentences.clear();
 	m_index.proximity.clear();
-	UData udata(m_index.sentences, m_index.proximity);
+	m_traces.clear();
+	UData udata(m_index.sentences, m_index.proximity, m_traces);
 
 	SharedMemoryKnowledgebase skb = language_code_map.Lookup(utf8language);
 
@@ -285,17 +328,12 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
 	iknow::core::IkIndexInput Input(&text_input);
-#ifdef _DEBUG // debug version generates a linguistic trace file.
-	bool b_generate_trace_file = true;
-#else
-	bool b_generate_trace_file = false;
-#endif
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
-	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_generate_trace_file);
+	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);
 	lck.unlock();
 }
 
-void iKnowEngine::index(const std::string& text_source, const std::string& language) {
+void iKnowEngine::index(const std::string& text_source, const std::string& language, bool b_trace) {
 	String text_source_ucs2(IkStringEncoding::UTF8ToBase(text_source));
-	index(text_source_ucs2, language);
+	index(text_source_ucs2, language, b_trace);
 }

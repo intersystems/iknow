@@ -192,6 +192,31 @@ private:
 	double dP1_; // position factor
 };
 
+struct LocalIdeographicDominanceCalculator {
+	FreqMap& singles_; // single symbols, adjusted
+	FreqMap& doubles_; // double symbols...
+
+	LocalIdeographicDominanceCalculator(FreqMap& mapSingles, FreqMap& mapDoubles) : singles_(mapSingles), doubles_(mapDoubles)
+	{}
+	void set_frequency(size_t freq) { frqConcept_ = freq; }
+	void operator()(const iknow::base::Char* begin, const iknow::base::Char* end) {
+		size_t con_length = (end - begin); // concept length
+		size_t sum_singles = 0, sum_doubles = 0;
+		while (begin != end) {
+			sum_singles += singles_[WordPtr(begin, begin + 1)]; // cumulate single symbol frequency
+			if ((end - begin) > 1) sum_doubles += doubles_[WordPtr(begin, begin + 2)]; // cumulate double symbol frequency
+			++begin;
+		}
+		domConcept_ = frqConcept_ * (sum_singles / con_length) * sum_doubles;
+	}
+	size_t getDominance(void) {
+		return domConcept_;
+	}
+private:
+	void operator=(const LocalIdeographicDominanceCalculator&);
+	size_t frqConcept_, domConcept_;
+};
+
 struct LocalDominanceCalculator {
 	dblFreqMap& singles_; // frequency map of single words
 	bool b_right_most_significant; // when position is important, the right position is most important
@@ -541,56 +566,73 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 		using iknow::core::path::CRCs;
 		using iknow::core::path::Offsets;
 
-		// calculate proximity out of path info
-		for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
-			const IkPath* path = &(*j);
-			DirectOutputPath output_path;
-			output_path.offsets.reserve(path->Size());
-			/*
-			DirectOutputPath output_path_extra;
-			if (entity_extra_info) output_path_extra.offsets.reserve(path->Size());
-			*/
+		//
+		// calculate proximity
+		//
+		if (bIsIdeographic && entity_extra_info) { // no paths for Japanese, calculate proximity out of Entity Vectors...
+			MergedLexreps& merged_lexrep_vector = const_cast<IkSentence*>(sentence)->GetLexreps();
 			IkConceptProximity::ProxPoints_t concept_proximity;
-			concept_proximity.reserve(path->Size()); // will be a little smaller though...
+			concept_proximity.reserve(const_cast<IkSentence*>(sentence)->GetEntityVector().size());
 
-			//A valid path must have both a relation and a concept.
-			bool path_has_relation = false;
-			bool path_has_concept = false;
-			for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
-				const IkMergedLexrep* lexrep = &(*(sentence->GetLexrepsBegin()+(*k)));
-				path_has_relation |= lexrep->IsRelation();
-				path_has_concept |= lexrep->IsConcept();
+			for (IkSentence::EntityVector::const_iterator itEV = sentence->GetEntityVectorBegin(); itEV != sentence->GetEntityVectorEnd(); ++itEV) { // scroll over the sentence entity vectors
+				IkMergedLexrep* lexrep = &(merged_lexrep_vector[*itEV]);
 				OccurrenceId occurrence_id = offset_map[lexrep];
-				output_path.offsets.push_back(lexrep);
-				DetectPathAttributes(*lexrep, output_path.offsets.size() - 1, output_path.attributes); // Detect path attributes
-				if (entity_extra_info) {
-					// output_path_extra.offsets.push_back(*k); // we need to preserve the sentence offsets
-					EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator))); // get the entity id
-					EntityFrequencyInfo& ent_freq = entity_map.GetMetadata(entity_id); // entity_id is part of path, count path frequency
-					if (lexrep->IsConcept()) {
-						++ent_freq.concept_in_path;
-						concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
-					}
-					if (lexrep->IsRelation()) {
-						++ent_freq.relation_in_path;
-					}
-					// if (lexrep->IsPathRelevant) TODO ?
-				}
+				EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator)));
+				concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
 			}
-			//Set the end of unfinished begin path attributes to the end of the path
-			for (DirectOutputPathAttributeMap::iterator k = output_path.attributes.begin(); k != output_path.attributes.end(); ++k) {
-				DirectOutputPathAttribute& last_attribute = k->second.back();
-				if (last_attribute.end == DirectOutputPathAttribute::kUnknown) {
-					EndPathAttribute(last_attribute, output_path.offsets.size()); // force path attribute end
-				}
-			}
+			m_concept_proximity(concept_proximity); // calculate concept proximity
+		}
+		else { // calculate proximity out of path info
+			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
+				const IkPath* path = &(*j);
+				DirectOutputPath output_path;
+				output_path.offsets.reserve(path->Size());
+				/*
+				DirectOutputPath output_path_extra;
+				if (entity_extra_info) output_path_extra.offsets.reserve(path->Size());
+				*/
+				IkConceptProximity::ProxPoints_t concept_proximity;
+				concept_proximity.reserve(path->Size()); // will be a little smaller though...
 
-			if ((path_has_relation && path_has_concept) || (sentence->GetPathConstruction() == iknow::core::kPathRelevant)) { // if kPathRelevant, always emit path info
-				++path_count;
-				path_vector.push_back(output_path);
-				if (entity_extra_info) {
-					// path_vector_extra.push_back(output_path_extra); // store extra dominance information
-					m_concept_proximity(concept_proximity); // calculate concept proximity
+				//A valid path must have both a relation and a concept.
+				bool path_has_relation = false;
+				bool path_has_concept = false;
+				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
+					const IkMergedLexrep* lexrep = &(*(sentence->GetLexrepsBegin() + (*k)));
+					path_has_relation |= lexrep->IsRelation();
+					path_has_concept |= lexrep->IsConcept();
+					OccurrenceId occurrence_id = offset_map[lexrep];
+					output_path.offsets.push_back(lexrep);
+					DetectPathAttributes(*lexrep, output_path.offsets.size() - 1, output_path.attributes); // Detect path attributes
+					if (entity_extra_info) {
+						// output_path_extra.offsets.push_back(*k); // we need to preserve the sentence offsets
+						EntityId entity_id = entity_map.Insert(WordPtr(lexrep->GetNormalizedValue(lexrep_separator))); // get the entity id
+						EntityFrequencyInfo& ent_freq = entity_map.GetMetadata(entity_id); // entity_id is part of path, count path frequency
+						if (lexrep->IsConcept()) {
+							++ent_freq.concept_in_path;
+							concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
+						}
+						if (lexrep->IsRelation()) {
+							++ent_freq.relation_in_path;
+						}
+						// if (lexrep->IsPathRelevant) TODO ?
+					}
+				}
+				//Set the end of unfinished begin path attributes to the end of the path
+				for (DirectOutputPathAttributeMap::iterator k = output_path.attributes.begin(); k != output_path.attributes.end(); ++k) {
+					DirectOutputPathAttribute& last_attribute = k->second.back();
+					if (last_attribute.end == DirectOutputPathAttribute::kUnknown) {
+						EndPathAttribute(last_attribute, output_path.offsets.size()); // force path attribute end
+					}
+				}
+
+				if ((path_has_relation && path_has_concept) || (sentence->GetPathConstruction() == iknow::core::kPathRelevant)) { // if kPathRelevant, always emit path info
+					++path_count;
+					path_vector.push_back(output_path);
+					if (entity_extra_info) {
+						// path_vector_extra.push_back(output_path_extra); // store extra dominance information
+						m_concept_proximity(concept_proximity); // calculate concept proximity
+					}
 				}
 			}
 		}
@@ -627,8 +669,9 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 	size_t nbr_occurrences_in_text = 0; // number of entity occurences in source
 
 	if (entity_extra_info) { // calculate entity dominance
-		FreqMap singleWordsInSource;
+		FreqMap singleWordsInSource, singleIdeographsInSource;
 		mySingleWordCollector singleWordsInSourceBuilder(singleWordsInSource);
+		mySingleWordCollector singleIdeographsInSourceBuilder(singleIdeographsInSource);
 		dblFreqMap singleCWords, singleRWords;
 		SingleWordP1Corrector singleCWordsBuilder(singleWordsInSource, singleCWords, dP1);
 		SingleWordP1Corrector singleRWordsBuilder(singleWordsInSource, singleRWords);
@@ -645,9 +688,38 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 					iknow::base::IkStringAlg::Tokenize(keyst.begin(), keyst.end(), static_cast<Char>(' '), singleWordsInSourceBuilder);
 				}
 			}
+			else {
+				if (frequency_info.concept > 0) { // This entity is a concept !
+					singleIdeographsInSourceBuilder.reset(1); // real concept frequency does not count
+					singleWordsInSourceBuilder.reset(1);
+					const Char* token_begin = keyst.begin();
+					const Char* token_end = keyst.end();
+					while (token_begin != token_end) {
+						singleIdeographsInSourceBuilder(token_begin, token_begin + 1); // collect single symbols
+						if ((token_end - token_begin) > 1) singleWordsInSourceBuilder(token_begin, token_begin + 2); // collect (overlapping) double symbols
+						++token_begin;
+					}
+				}
+			}
 			entity_id++;
 		}
-
+		if (bIsIdeographic) { // Correct the singleIdeographs
+			for (FreqMap::iterator it = singleIdeographsInSource.begin(); it != singleIdeographsInSource.end(); it++) { // scroll over frequency map
+				if (iknow::base::IkStringAlg::IsKatakana(*(it->first.begin()))) it->second = (size_t)2; // Katakana single symbol set to frequency 2
+				else if (iknow::base::IkStringAlg::IsHiragana(*(it->first.begin()))) it->second = (size_t)1; // Hiragana single symbol set to frequency 1
+				else if (iknow::base::IkStringAlg::IsJpnNumber(*(it->first.begin()))) it->second = (size_t)1; // Number single symbol set to frequency 1
+			}
+			/*
+			if (debug) { // trace Single Ideographs
+				for (FreqMap::const_iterator cit = singleIdeographsInSource.begin(); cit != singleIdeographsInSource.end(); ++cit) debug->SingleWordFreq(cit->first, cit->second);
+			}
+			*/
+		}
+		/*
+		if (debug) { // trace Single Word Frequencies
+			for (FreqMap::const_iterator cur = singleWordsInSource.begin(); cur != singleWordsInSource.end(); ++cur) debug->SingleWordFreq(cur->first, cur->second);
+		}
+		*/
 		if (!bIsIdeographic) { // calculate positional relative 
 			entity_id = 1;
 			for (EntityMap::const_iterator_keys it = entity_map.begin_keys(); it != entity_map.end_keys(); it++) { // scroll over the entities
@@ -678,23 +750,34 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 		// calculate local dominance per entity
 		LocalDominanceCalculator conceptDominance(singleCWords, dP1, bModifiersOnLeft);
 		LocalDominanceCalculator relationDominance(singleRWords, dP1, bModifiersOnLeft);
+		LocalIdeographicDominanceCalculator ideoDominance(singleIdeographsInSource, singleWordsInSource);
 		double DomConceptMax = (double)0.0, DomRelationMax = (double)0.0; // keep maximum values for normalization
-		// Dominance IdeoDomMax = static_cast<Dominance>(0);
+		Dominance IdeoDomMax = static_cast<Dominance>(0);
 
 		entity_id = 1;
 		for (EntityMap::const_iterator_keys it = entity_map.begin_keys(); it != entity_map.end_keys(); ++it) {
 			const WordPtr& keyst = *it;
 			EntityFrequencyInfo& frequency_info = entity_map.GetMetadata(entity_id);
 			if (frequency_info.concept > 0) { // entity is a concept
-				iknow::base::IkStringAlg::TokenizeWithLPFlag(keyst.begin(), keyst.end(), static_cast<Char>(' '), conceptDominance);
-				double Dom = static_cast<double>(conceptDominance.getDominance());
-				// if (debug) debug->TraceKeyDouble("LocalConceptDominance", keyst, Dom);  // trace local concept dominance
-				Dom = Dom*(((double)1.0 - dP2) + dP2*(double)frequency_info.concept); // entity frequency corrected
-				// if (debug) debug->TraceKeyDouble("LCDFCorrected", keyst, Dom); // trace
-				Dom = Dom*(((double)1.0 - dP3) + dP3*(double)frequency_info.concept_in_path / (double)frequency_info.concept); // path frequency corrected
-				// if (debug) debug->TraceKeyDouble("LCDPCorrected", keyst, Dom); // trace
-				if (Dom > DomConceptMax) DomConceptMax = Dom;
-				frequency_info.cDom = static_cast<Dominance>(Dom);
+				if (bIsIdeographic) {
+					ideoDominance.set_frequency(frequency_info.concept);
+					ideoDominance(keyst.begin(), keyst.end());
+					Dominance Dom = ideoDominance.getDominance();
+					// if (debug) debug->TraceKeyDouble("LocalConceptDominance", keyst, static_cast<double>(Dom));  // trace local concept dominance
+					if (Dom > IdeoDomMax) IdeoDomMax = Dom;
+					frequency_info.cDom = Dom;
+				}
+				else {
+					iknow::base::IkStringAlg::TokenizeWithLPFlag(keyst.begin(), keyst.end(), static_cast<Char>(' '), conceptDominance);
+					double Dom = static_cast<double>(conceptDominance.getDominance());
+					// if (debug) debug->TraceKeyDouble("LocalConceptDominance", keyst, Dom);  // trace local concept dominance
+					Dom = Dom * (((double)1.0 - dP2) + dP2 * (double)frequency_info.concept); // entity frequency corrected
+					// if (debug) debug->TraceKeyDouble("LCDFCorrected", keyst, Dom); // trace
+					Dom = Dom * (((double)1.0 - dP3) + dP3 * (double)frequency_info.concept_in_path / (double)frequency_info.concept); // path frequency corrected
+					// if (debug) debug->TraceKeyDouble("LCDPCorrected", keyst, Dom); // trace
+					if (Dom > DomConceptMax) DomConceptMax = Dom;
+					frequency_info.cDom = static_cast<Dominance>(Dom);
+				}
 			}
 			if (frequency_info.relation > 0 && !bIsIdeographic) { // entity is a relation, and not ideographical
 				iknow::base::IkStringAlg::Tokenize(keyst.begin(), keyst.end(), static_cast<Char>(' '), relationDominance);
@@ -710,7 +793,7 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 			entity_id++;
 		}
 		// Normalize with P4
-		// if (bIsIdeographic) DomConceptMax = static_cast<double>(IdeoDomMax);
+		if (bIsIdeographic) DomConceptMax = static_cast<double>(IdeoDomMax);
 		for (entity_id = 1; entity_id <= entity_map.Size(); ++entity_id) {
 			const double OUTPUT_SCALE = (double) 1000.0;
 			// StemMap::const_iterator itStem = stem_ent_map.find(entity_id); // does this entity have a stem ?
