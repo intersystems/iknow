@@ -47,7 +47,6 @@ jobs:
       env:
         - DOCKER_IMAGE=quay.io/pypa/manylinux2014_aarch64
         - TAG=manylinux2014_aarch64
-        - WAIT=travis_wait
     # - os: linux
     #   arch: ppc64le
     #   sudo: required
@@ -60,4 +59,4 @@ jobs:
     # - os: windows
 
 script:
-  - travis/build.sh
+  - travis_wait travis/build.sh
