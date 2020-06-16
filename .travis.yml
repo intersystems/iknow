@@ -60,8 +60,6 @@ jobs:
 
 script:
   - if: os = linux
-  - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN
-
-script:
+    docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN
   - if: os = osx
-  - echo "This is Mac OS"
+    echo "This is Mac OS"
