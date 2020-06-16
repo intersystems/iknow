@@ -1,6 +1,9 @@
 #ifndef IKNOW_BASE_POOLALLOCATOR_H_
 #define IKNOW_BASE_POOLALLOCATOR_H_
 #include <stddef.h>
+#ifdef ISC_IRIS
+#include <type_traits>
+#endif
 #include <algorithm>
 #include <vector>
 #include <iostream>
@@ -56,8 +59,11 @@ namespace iknow {
 	}
 
 	//Normal handling for sub-block size allocations.
-
+#ifdef ISC_IRIS
+	size_t alignment = std::alignment_of<T>::value;
+#else
 	size_t alignment = alignof(T);
+#endif
 	size_t padding = offset_ % alignment ? alignment - offset_ % alignment : 0;
 	size_t chunk_size = padding + request_size;
 
