@@ -3,10 +3,16 @@ notifications:
 
 language: cpp
 
-matrix:
+jobs:
   include:
     - os: linux
       arch: amd64
+      sudo: required
+      services:
+        - docker
+      env:
+        - DOCKER_IMAGE=quay.io/pypa/manylinux2010_x86_64
+        - TAG=manylinux2010_x86_64
     # - os: linux
     #   arch: arm64
     # - os: linux
@@ -15,4 +21,5 @@ matrix:
     # - os: windows
 
 script:
-  - "echo platform: $TRAVIS_OS_NAME $TRAVIS_CPU_ARCH"
+  - docker run --rm -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN
+  
