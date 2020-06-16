@@ -136,6 +136,12 @@ LIBRARYFLAGS += -g -O3
 EXECUTABLEFLAGS += -g -O3
 endif
 
+###Japanese language model is optimized forever...
+ifeq ($(UNOPTIMIZED), 1)
+OBJECTFLAGS += -O0
+endif
+
+
 #Strict flags
 ifeq ($(STRICT),1)
 #"long long" is used in sysTypes.h
