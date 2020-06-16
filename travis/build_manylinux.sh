@@ -118,8 +118,7 @@ fi
 
 
 ##### Upload iknowpy wheels if version was bumped #####
-cd /iknow/travis
-if [[ "$(./deploy_check.sh)" == "1" ]]; then
+if [[ "$(/iknow/travis/deploy_check.sh)" == "1" ]]; then
   { set +x; } 2>/dev/null  # don't save token to build log
   echo '+ /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
   /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
