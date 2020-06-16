@@ -17,7 +17,8 @@
 set -euxo pipefail
 TAG="$1"
 URL="$2"
-set +x  # don't save token to build log
+{ set +x; } 2>/dev/null  # don't save token to build log
+echo '+ TOKEN="$3"'
 TOKEN="$3"
 set -x
 
@@ -116,10 +117,11 @@ if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
 fi
 
 
-##### Upload iknowpy wheels if token is specified #####
-set +x  # don't save token to build log
-if [ -z "$TOKEN" ]; then
-  echo "Upload to PyPI"
+##### Upload iknowpy wheels if version was bumped #####
+cd /iknow/travis
+if [[ $(./deploy_check.sh) == "1"]]; then
+  { set +x; } 2>/dev/null  # don't save token to build log
+  echo '+ /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
   /opt/python/cp38-cp38/bin/python -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
+  set -x
 fi
-set -x
