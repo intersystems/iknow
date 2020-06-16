@@ -13,51 +13,55 @@ jobs:
       env:
         - DOCKER_IMAGE=quay.io/pypa/manylinux2010_x86_64
         - TAG=manylinux2010_x86_64
-    - os: linux
-      arch: amd64
-      sudo: required
-      services:
-        - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2010_i686
-        - PRE_CMD=linux32
-        - TAG=manylinux2010_i686
-    - os: linux
-      arch: amd64
-      sudo: required
-      services:
-        - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2014_x86_64
-        - TAG=manylinux2014_x86_64
-    - os: linux
-      arch: amd64
-      sudo: required
-      services:
-        - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2014_i686
-        - PRE_CMD=linux32
-        - TAG=manylinux2014_i686
-    - os: linux
-      arch: arm64
-      sudo: required
-      services:
-        - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2014_aarch64
-        - TAG=manylinux2014_aarch64
-    - os: linux
-      arch: ppc64le
-      sudo: required
-      services:
-        - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2014_ppc64le
-        - TAG=manylinux2014_ppc64le
-
-    # - os: osx
+    # - os: linux
+    #   arch: amd64
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   env:
+    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2010_i686
+    #     - PRE_CMD=linux32
+    #     - TAG=manylinux2010_i686
+    # - os: linux
+    #   arch: amd64
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   env:
+    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_x86_64
+    #     - TAG=manylinux2014_x86_64
+    # - os: linux
+    #   arch: amd64
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   env:
+    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_i686
+    #     - PRE_CMD=linux32
+    #     - TAG=manylinux2014_i686
+    # - os: linux
+    #   arch: arm64
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   env:
+    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_aarch64
+    #     - TAG=manylinux2014_aarch64
+    # - os: linux
+    #   arch: ppc64le
+    #   sudo: required
+    #   services:
+    #     - docker
+    #   env:
+    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_ppc64le
+    #     - TAG=manylinux2014_ppc64le
+    - os: osx
     # - os: windows
 
 script:
+  - if: os = linux
   - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow $DOCKER_IMAGE $PRE_CMD /iknow/travis/build_manylinux.sh $TAG $ICU_URL $PYPI_TOKEN
+
+script:
+  - if: os = osx
+  - echo "This is Mac OS"
