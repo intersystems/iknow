@@ -9,51 +9,39 @@ jobs:
     #   arch: amd64
     #   services:
     #     - docker
-    #   env:
-    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2010_x86_64
-    #     - TAG=manylinux2010_x86_64
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_URL $PYPI_TOKEN
     # - os: linux
     #   arch: amd64
     #   services:
     #     - docker
-    #   env:
-    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2010_i686
-    #     - PRE_CMD=linux32
-    #     - TAG=manylinux2010_i686
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2010_i686 $ICU_URL $PYPI_TOKEN
     # - os: linux
     #   arch: amd64
     #   services:
     #     - docker
-    #   env:
-    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_x86_64
-    #     - TAG=manylinux2014_x86_64
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_x86_64 /iknow/travis/build_manylinux.sh manylinux2014_x86_64 $ICU_URL $PYPI_TOKEN
     # - os: linux
     #   arch: amd64
     #   services:
     #     - docker
-    #   env:
-    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_i686
-    #     - PRE_CMD=linux32
-    #     - TAG=manylinux2014_i686
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2014_i686 $ICU_URL $PYPI_TOKEN
+    # - os: linux
+    #   arch: ppc64le
+    #   services:
+    #     - docker
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_URL $PYPI_TOKEN
     - os: linux
       arch: arm64
       services:
         - docker
-      env:
-        - DOCKER_IMAGE=quay.io/pypa/manylinux2014_aarch64
-        - TAG=manylinux2014_aarch64
-    # - os: linux
-    #   arch: ppc64le
-    #   sudo: required
-    #   services:
-    #     - docker
-    #   env:
-    #     - DOCKER_IMAGE=quay.io/pypa/manylinux2014_ppc64le
-    #     - TAG=manylinux2014_ppc64le
+      script:
+        - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_URL $PYPI_TOKEN
     - os: osx
       install:
-        - echo "install step for Mac OS run"
+        - echo "OSX install step done"
     # - os: windows
-
-script:
-  - travis/build.sh

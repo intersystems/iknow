@@ -29,10 +29,10 @@ IS_DYLIB = 1
 #output function for lexrep matching. But that's just a guess.
 #Reported to the gcc maintainers:
 # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=63191
-ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86 lnxrhppc64 lnxdebarm macx64), $(PLATFORM))
+ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86 lnxrhppc64 lnxdebarm macx64 lnxrharm64), $(PLATFORM))
 #Similar problem on AIX xlC, but can't isolate the optimizations
 #there: No documentation on specific flags.
-ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86 macx64), $(PLATFORM))
+ifeq ($(findstring $(PLATFORM), lnxubuntux64 lnxrhx86 macx64 lnxrharm64), $(PLATFORM))
 ifeq ($(IKNOWMODELLANG),ja)
 UNOPTIMIZED = 1
 endif
