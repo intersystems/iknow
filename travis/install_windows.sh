@@ -5,7 +5,7 @@
 set -euxo pipefail
 
 # Visual Studio 2019
-choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
+# choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
 
 # Python
 wget https://www.python.org/ftp/python/3.5.4/python-3.5.4-amd64.exe
@@ -19,7 +19,7 @@ done
 
 # Python packages
 for PYTHON in /c/"Program Files"/Python3*/python.exe; do
-  "$PYTHON" -m pip install -U pip --no-warn-script-location
+  "$PYTHON" -m pip install -U pip
   PACKAGES="cython setuptools wheel"
   if [[ "$PYTHON" == *"Python38"* ]]; then
     PACKAGES="$PACKAGES twine"
