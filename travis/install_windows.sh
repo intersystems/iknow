@@ -19,10 +19,10 @@ done
 
 # Python packages
 for PYTHON in /c/"Program Files"/Python3*/python.exe; do
-  "$PYTHON" -m pip install -U pip
+  "$PYTHON" -m pip install -U pip --no-warn-script-location
   PACKAGES="cython setuptools wheel"
   if [[ "$PYTHON" == *"Python38"* ]]; then
     PACKAGES="$PACKAGES twine"
   fi
-  "$PYTHON" -m pip install -U $PACKAGES
+  "$PYTHON" -m pip install -U $PACKAGES --no-warn-script-location | powershell
 done
