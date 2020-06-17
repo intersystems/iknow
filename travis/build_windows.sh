@@ -15,6 +15,7 @@ echo '+ TOKEN="$2"'
 TOKEN="$2"
 set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
+ls $MSBUILD_PATH
 export PATH=$MSBUILD_PATH:$PATH
 
 
@@ -28,7 +29,7 @@ unzip icu4c.zip -d "$ICUDIR"
 
 ##### Build iKnow engine #####
 cd modules
-msbuild iKnowEngine.sln -p:Configuration="Release" -p:Platform="x64"
+MSBuild.exe iKnowEngine.sln -p:Configuration="Release" -p:Platform="x64"
 
 
 ##### Build iknowpy wheels #####
