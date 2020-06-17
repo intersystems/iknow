@@ -1,27 +1,32 @@
 # This Python file uses the following encoding: utf-8
 ''' genRAW.py tool for generating linguistic reference material
     Usage: "python genRAW.py <text files directory> <output directory> <language>"
-    Example (on Windows): "python genRAW.py(r'C:\TextCorpus\English\Financial\',r'C:\ReferenceData\English\','en')
+    Example (on Windows): "python genRAW.py C:/TextCorpus/English/Financial/ C:/Raw/English/ en
 
     Remark : output of Path attributes does not work yet.
 '''
 
-#import sys
+import sys
+
+# for local language development, adapt next line to your local situation, and uncomment next 2 lines 
 #sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
 #import engine as iknowpy
+# for "pip install iknowpy", next line will do, outcomment for local language development
+import iknowpy
 
 import os
 import pprint
 import time
-import iknowpy
+
+#
+# Following are default runtime parameters if no command line parameters are present.
+#
+in_path_par = "C:/P4/Users/jdenys/text_input_data/en/"  # input directory with text files
+out_path_par = "C:/tmp/"                                # output directory to write the RAW file
+language_par = "en"                                     # language selector
+OldStyle = True                                         # mimics the old-style RAW file format
 
 # print(sys.argv)
-
-in_path_par = "C:\\P4\\Users\\jdenys\\text_input_data\\en\\" # ja/"
-out_path_par = "C:/tmp/"
-language_par = "en" # "ja"
-OldStyle = True
-
 if (len(sys.argv)>1):
     in_path_par = sys.argv[1]
 if (len(sys.argv)>2):
@@ -39,10 +44,25 @@ def write_ln(file_,text_):
 #
 from os import walk
 
-f = []
+f = []  # non-recursive list of files
 for (dirpath, dirnames, filenames) in walk(in_path_par):
-    f.extend(filenames)
+    for single_file in filenames:
+        full_path = dirpath + single_file
+        f.append(full_path)
     break
+
+f_rec = []  # recursive list of files
+def collect_files_recursive(in_path_par):
+    for (dirpath, dirnames, filenames) in walk(in_path_par):
+        for single_file in filenames:
+            full_path = dirpath + single_file
+            f_rec.append(full_path)
+        for single_dir in dirnames:
+            full_dir = dirpath + single_dir + "/"
+            collect_files_recursive(full_dir)
+        break
+
+collect_files_recursive(in_path_par)
 
 engine = iknowpy.iKnowEngine()
 
@@ -54,7 +74,7 @@ write_ln(f_raw,"# out_path_par:"+out_path_par)
 write_ln(f_raw,"# language_par:"+language_par)
 write_ln(f_raw,"#\n#\n#")
 
-for text_file in f:
+for text_file in f_rec:
     print(text_file)
     # do file.WriteLine("D"_$char(1)_$p(name,tSep,$l(name,tSep))_$char(1)_filename)
     if OldStyle:
@@ -62,7 +82,7 @@ for text_file in f:
     else:
         write_ln(f_raw,'\n<D name=\"'+text_file+'\" file=\"'+in_path_par+text_file+'\">') # D050_sentences.txtC:\P4\Users\jdenys\text_input_data\ja\050_sentences.txt
     
-    f_text = open(in_path_par+text_file, "rb")
+    f_text = open(text_file, "rb")
     header = f_text.read(3)
     if (header == b'\xef\xbb\xbf'): #Utf8 BOM
         header = b''    # remove BOM
