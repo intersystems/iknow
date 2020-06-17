@@ -21,7 +21,6 @@ export PATH=$MSBUILD_PATH:$PATH
 ##### Install ICU #####
 REPO_ROOT=$(pwd)
 wget -O icu4c.zip "$URL"
-unzip icu4c-src.zip
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 mkdir -p "$ICUDIR"
 unzip icu4c.zip -d "$ICUDIR"
