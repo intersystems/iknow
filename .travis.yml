@@ -3,55 +3,57 @@ notifications:
 
 language: cpp
 
-jobs:
-  include:
-    # - os: linux
-    #   arch: amd64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_URL $PYPI_TOKEN
-    # - os: linux
-    #   arch: amd64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2010_i686 $ICU_URL $PYPI_TOKEN
-    # - os: linux
-    #   arch: amd64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_x86_64 /iknow/travis/build_manylinux.sh manylinux2014_x86_64 $ICU_URL $PYPI_TOKEN
-    # - os: linux
-    #   arch: amd64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2014_i686 $ICU_URL $PYPI_TOKEN
-    # - os: linux
-    #   arch: ppc64le
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_URL $PYPI_TOKEN
-    # TODO report bug regarding aarch64 line buffering
-    # - os: linux
-    #   arch: arm64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_URL $PYPI_TOKEN
-    # - os: osx
-    #   osx_image: xcode11.6
-    #   install:
-    #     - travis/install_osx.sh
-    #   script:
-    #     - travis/build_osx.sh $ICU_URL $PYPI_TOKEN
-    - os: windows
-      env:
-        - MSBUILD_PATH="C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\MSBuild\Current\Bin"
-      install:
-        - travis/install_windows.sh
-      script:
-        - echo "insert script here"
+env:
+  global:
+    - ICU_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip  # URL to .zip source release of ICU
+    - ICU_WIN_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip  # URL to .zip pre-built release of ICU for Windows x86_64
+  jobs:
+    include:
+      # - os: linux
+      #   arch: amd64
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_URL $PYPI_TOKEN
+      # - os: linux
+      #   arch: amd64
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2010_i686 $ICU_URL $PYPI_TOKEN
+      # - os: linux
+      #   arch: amd64
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_x86_64 /iknow/travis/build_manylinux.sh manylinux2014_x86_64 $ICU_URL $PYPI_TOKEN
+      # - os: linux
+      #   arch: amd64
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2014_i686 $ICU_URL $PYPI_TOKEN
+      # - os: linux
+      #   arch: ppc64le
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_URL $PYPI_TOKEN
+      # TODO report bug regarding aarch64 line buffering
+      # - os: linux
+      #   arch: arm64
+      #   services:
+      #     - docker
+      #   script:
+      #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_URL $PYPI_TOKEN
+      # - os: osx
+      #   osx_image: xcode11.6
+      #   install:
+      #     - travis/install_osx.sh
+      #   script:
+      #     - travis/build_osx.sh $ICU_URL $PYPI_TOKEN
+      - os: windows
+        install:
+          - travis/install_windows.sh
+        script:
+          - travis/build_windows.sh
