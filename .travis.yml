@@ -48,4 +48,7 @@ jobs:
         - travis/install_osx.sh
       script:
         - travis/build_osx.sh $ICU_URL $PYPI_TOKEN
-    # - os: windows
+    - os: windows
+      install:
+        - travis/install_windows.sh
+
