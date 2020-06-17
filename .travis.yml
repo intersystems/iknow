@@ -35,13 +35,17 @@ jobs:
     #     - docker
     #   script:
     #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_URL $PYPI_TOKEN
-    - os: linux
-      arch: arm64
-      services:
-        - docker
-      script:
-        - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_URL $PYPI_TOKEN
+    # TODO report bug regarding aarch64 line buffering
+    # - os: linux
+    #   arch: arm64
+    #   services:
+    #     - docker
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_URL $PYPI_TOKEN
     - os: osx
+      osx_image: xcode11.6
       install:
-        - echo "OSX install step done"
+        - travis/install_osx.sh
+      script:
+        - travis/build_osx.sh $ICU_URL $PYPI_TOKEN
     # - os: windows
