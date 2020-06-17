@@ -18,7 +18,7 @@ for PACKAGE in python-*.pkg; do
   sudo installer -pkg "$PACKAGE" -target /
 done
 
-# update Python packages
+# install Python packages
 for PYTHON in python3.5 python3.6 python3.7 python3.8; do
   curl https://bootstrap.pypa.io/get-pip.py | "$PYTHON"
   PACKAGES="cython setuptools wheel"

@@ -18,6 +18,7 @@ set -x
 
 ##### Build ICU #####
 REPO_ROOT=$(pwd)
+export MACOSX_DEPLOYMENT_TARGET=10.9
 curl -L -o icu4c-src.zip "$URL"
 unzip icu4c-src.zip
 cd icu/source
@@ -31,7 +32,6 @@ make install
 
 
 ##### Build iKnow engine #####
-export MACOSX_DEPLOYMENT_TARGET=10.9
 export IKNOWPLAT=macx64
 cd "$REPO_ROOT"
 make
