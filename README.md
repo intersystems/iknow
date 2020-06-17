@@ -4,17 +4,72 @@
 
 This readme file has the basic pointers to get started, but make sure you click through to the **[wiki](https://github.com/intersystems/iknow/wiki)** for more details on any of these subjects.
 
-- [Understanding iKnow](#understanding-iknow)
-  - [Entities](#entities)
-  - [Attributes](#attributes)
-  - [How it works](#how-it-works)
 - [Using iKnow](#using-iknow)
   - [From Python](#from-python)
   - [From C++](#from-c)
   - [From InterSystems IRIS](#from-intersystems-iris)
-  - [From UIMA](#from-uima)
+- [Understanding iKnow](#understanding-iknow)
+  - [Entities](#entities)
+  - [Attributes](#attributes)
+  - [How it works](#how-it-works)
 - [Building iKnow](#building-iknow)
 - [Contributing to iKnow](#contributing-to-iknow)
+
+# Using iKnow
+
+## From Python
+
+The easiest way to see for yourself what iKnow does with text is by giving it a try! Thanks to our [Python interface](https://github.com/intersystems/iknow/wiki/Getting-Started), that only takes two simple steps:
+
+1. Use `pip` to install the `iknowpy` module as follows:
+
+   ```Shell
+   pip install iknowpy
+   ```
+
+2. From your Python prompt, instantiate the engine and start indexing:
+
+   ```Python
+   import iknowpy
+   
+   engine = iknowpy.iKnowEngine()
+
+   # show supported languages
+   print(engine.get_languages_set())
+
+   # index some text
+   text = 'This is a test of the Python interface to the iKnow engine.'
+   engine.index(text, 'en')
+
+   # print the raw results
+   print(engine.m_index)
+
+   # or make it a little nicer
+   for s in engine.m_index['sentences']:
+     for e in s['entities']:
+       print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
+     print('\n')
+   ```
+
+If you are looking for another programming language or interface, check out the other [APIs](https://github.com/intersystems/iknow/wiki/APIs). For more on the Python interface, move on to the [Getting Started](https://github.com/intersystems/iknow/wiki/Getting-Started) section in the wiki!
+
+## From C++
+
+The main C++ API file is `engine.h` (modules\engine\src), defining the class `iKnowEngine` with the main entry point:
+
+```C++
+index(TextSource, language)
+```
+
+ After indexing all data is stored in `iknowdata::Text_Source m_index`. "iknowdata" is the namespace used for all classes that contain output data. Fore more details, please refer to the [API overview](https://github.com/intersystems/iknow/wiki/APIs) on the wiki.
+
+
+## From InterSystems IRIS
+
+For many years, the iKnow engine has been available as an embedded service on the InterSystems IRIS Data Platform. The obvious advantage of packaging it with a database is that indexing results from many documents can be stored in a single repository, enabling corpus-wide analytics through practical APIs. See the [iKnow documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GIKNOW) for IRIS or browse the InterSystems Developer Community's articles on setting up an [iKnow domain](https://community.intersystems.com/post/creating-domain-iknow-domain-architect), [browsing it](https://community.intersystems.com/post/iknow-demo-apps-part-1-knowledge-portal) and [using iFind](https://community.intersystems.com/post/free-text-search-way-search-your-text-fields-sql-developers-are-hiding-you) (iKnow-powered text search)
+
+The [InterSystems IRIS Community Edition](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ACLOUD) is available from Docker Hub free of charge.
+
 
 # Understanding iKnow
 
@@ -71,66 +126,6 @@ Some InterSystems-era resources on how iKnow works:
 [Read more...](https://github.com/intersystems/iknow/wiki/Approach)
 
 
-# Using iKnow
-
-Read more on the [APIs](https://github.com/intersystems/iknow/wiki/APIs) here.
-
-## From Python
-
-The easiest way to see for yourself what iKnow does with text is by giving it a try! Thanks to our [Python interface](https://github.com/intersystems/iknow/wiki/Getting-Started), that only takes two simple steps:
-
-1. Use `pip` to install the `iknowpy` module as follows:
-
-   ```Shell
-   pip install iknowpy
-   ```
-
-2. From your Python prompt, instantiate the engine and start indexing:
-
-   ```Python
-   import iknowpy
-   
-   engine = iknowpy.iKnowEngine()
-
-   # show supported languages
-   print(engine.get_languages_set())
-
-   # index some text
-   text = 'This is a test of the Python interface to the iKnow engine.'
-   engine.index(text, 'en')
-
-   # print the raw results
-   print(engine.m_index)
-
-   # or make it a little nicer
-   for s in engine.m_index['sentences']:
-     for e in s['entities']:
-       print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
-     print('\n')
-   ```
-
-If you are looking for another programming language or interface, check out the other [APIs](https://github.com/intersystems/iknow/wiki/APIs). For more on the Python interface, move on to the [Getting Started](https://github.com/intersystems/iknow/wiki/Getting-Started) section in the wiki!
-
-## From C++
-
-The main C++ API file is `engine.h` (modules\engine\src), defining the class `iKnowEngine` with the main entry point:
-
-```C++
-index(TextSource, language)
-```
-
- After indexing all data is stored in `iknowdata::Text_Source m_index`. "iknowdata" is the namespace used for all classes that contain output data. Fore more details, please refer to the [API overview](https://github.com/intersystems/iknow/wiki/APIs) on the wiki.
-
-
-## From InterSystems IRIS
-
-For many years, the iKnow engine has been available as an embedded service on the InterSystems IRIS Data Platform. The obvious advantage of packaging it with a database is that indexing results from many documents can be stored in a single repository, enabling corpus-wide analytics through practical APIs. See the [iKnow documentation](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GIKNOW) for IRIS or browse the InterSystems Developer Community's articles on setting up an [iKnow domain](https://community.intersystems.com/post/creating-domain-iknow-domain-architect), [browsing it](https://community.intersystems.com/post/iknow-demo-apps-part-1-knowledge-portal) and [using iFind](https://community.intersystems.com/post/free-text-search-way-search-your-text-fields-sql-developers-are-hiding-you) (iKnow-powered text search)
-
-The [InterSystems IRIS Community Edition](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ACLOUD) is available from Docker Hub free of charge.
-
-## From UIMA
-
-This part of the kit has not yet been added to the open source repository, but relevant documentation can be found [here](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=GUIMA).
 
 # Building the iKnow Engine
 
