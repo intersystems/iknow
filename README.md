@@ -9,17 +9,11 @@ This readme file has the basic pointers to get started, but make sure you click 
   - [Attributes](#attributes)
   - [How it works](#how-it-works)
 - [Using iKnow](#using-iknow)
-  - [Directly](#directly)
   - [From Python](#from-python)
-  - [From SpaCy](#from-spacy)
+  - [From C++](#from-c)
   - [From InterSystems IRIS](#from-intersystems-iris)
   - [From UIMA](#from-uima)
 - [Building iKnow](#building-iknow)
-  - [Dependencies](#dependencies)
-  - [On Windows](#on-windows)
-  - [On Linux / Unix](#on-linux--unix)
-  - [On Docker](#on-docker)
-  - [Building the Python Module](#building-the-python-module)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Understanding iKnow
@@ -81,48 +75,52 @@ Some InterSystems-era resources on how iKnow works:
 
 Read more on the [APIs](https://github.com/intersystems/iknow/wiki/APIs) here.
 
-## Directly
-
-The C++ API file is "engine.h" (modules\engine\src), it defines the class "iKnowEngine", and it's main method : `index(TextSource, language)`. After indexing all data is stored in `iknowdata::Text_Source m_index`. "iknowdata" is the namespace used for all classes that contain meaningfull data :
-- `iknowdata::struct Entity` : represents a text entity after indexing.
-- `iknowdata::struct Sent_Attribute` : represents an attribute sentence marker.
-- `iknowdata::struct Path_Attribute_Span` : represents a span in the sentence' path after attribute expansion.
-- `iknowdata::struct Sentence` : represents a sentence in the text source after indexing.
-- `iknowdata::Sentence::Path` : represents a path in a sentence.
-- `iknowdata::struct Text_Source` : represents the whole text after indexing.
-
-`enginetest.cpp` (modules\enginetest\enginetest.cpp) has a demo function (`void a_short_demo(void)`) that explains every step from indexing to retrieving the results.
-
-The main `iKnowEngine::index()` method has currently 2 limitations : it only works synchronously and single threaded. A mutex is used to synchronize threads internally, no protection is needed from the side of the client.
-
 ## From Python
 
-Requires Python ≥3.5.
+The easiest way to see for yourself what iKnow does with text is by giving it a try! Thanks to our [Python interface](https://github.com/intersystems/iknow/wiki/Getting-Started), that only takes two simple steps:
 
-The `iknowpy` wrapper module provides a Python interface to the iKnow engine. It defines the class "iKnowEngine" and its main method, `iKnowEngine.index()`. After indexing, all data is stored in the `m_index` property, represented as nested dictionaries and lists.
-- `m_index['sentences']` : a list of sentences in the text source after indexing.
-- `m_index['sentences'][i]` : the i<sup>th</sup> sentence in the text source after indexing.
-- `m_index['sentences'][i]['entities']` : a list of text entities in the i<sup>th</sup> sentence after indexing.
-- `m_index['sentences'][i]['path']` : a list representing the path in the i<sup>th</sup> sentence.
-- `m_index['sentences'][i]['path_attributes']` : a list of spans in the i<sup>th</sup> sentence's path after attribute expansion.
-- `m_index['sentences'][i]['sent_attributes']` : a list of attribute sentence markers for the i<sup>th</sup> sentence.
-- `m_index['proximity']` : the proximity pairs in the text source after indexing.
+1. Use `pip` to install the `iknowpy` module as follows:
 
-See `<repo_root>/modules/iknowpy/tests/test.py` for a basic example of how to use the module.
+   ```Shell
+   pip install iknowpy
+   ```
 
-To install a pre-built release of `iknowpy`, execute ```pip install iknowpy``` (```pip3 install iknowpy``` on some platforms). Installation via `pip` is supported for CPython 3.5 through CPython 3.8 on the following platforms.
-- Windows for x86_64
-- Mac OS X 10.9 or higher for x86_64
-- Linux for x86_64 (pip ≥19.0 is required)
-- Linux for i686 (pip ≥19.0 is required)
-- Linux for ppc64le (pip ≥19.3 is required)
-- Linux for aarch64 (pip ≥19.3 is required)
+2. From your Python prompt, instantiate the engine and start indexing:
 
-Linux releases for x86_64 and i686 are compatible with the vast majority of modern distributions that are no older than CentOS 6. Linux releases for ppc64le and aarch64 are compatible with the vast majority of modern distributions that are no older than CentOS 7.
+   ```Python
+   import iknowpy
+   
+   engine = iknowpy.iKnowEngine()
 
-## From SpaCy
+   # show supported languages
+   print(engine.get_languages_set())
 
-WIP
+   # index some text
+   text = 'This is a test of the Python interface to the iKnow engine.'
+   engine.index(text, 'en')
+
+   # print the raw results
+   print(engine.m_index)
+
+   # or make it a little nicer
+   for s in engine.m_index['sentences']:
+     for e in s['entities']:
+       print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
+     print('\n')
+   ```
+
+If you are looking for another programming language or interface, check out the other [APIs](https://github.com/intersystems/iknow/wiki/APIs). For more on the Python interface, move on to the [Getting Started](https://github.com/intersystems/iknow/wiki/Getting-Started) section in the wiki!
+
+## From C++
+
+The main C++ API file is `engine.h` (modules\engine\src), defining the class `iKnowEngine` with the main entry point:
+
+```C++
+index(TextSource, language)
+```
+
+ After indexing all data is stored in `iknowdata::Text_Source m_index`. "iknowdata" is the namespace used for all classes that contain output data. Fore more details, please refer to the [API overview](https://github.com/intersystems/iknow/wiki/APIs) on the wiki.
+
 
 ## From InterSystems IRIS
 
@@ -136,262 +134,9 @@ This part of the kit has not yet been added to the open source repository, but r
 
 # Building the iKnow Engine
 
-The [source code](https://github.com/intersystems/iknow/wiki/Source-Code) for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. See also [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
+The [source code](https://github.com/intersystems/iknow/wiki/Source-Code) for the iKnow engine is written in C++ and includes .sln files for building with [Microsoft Visual Studio 2019 Community Edition](https://visualstudio.microsoft.com/vs/community/) and Makefiles for building in Linux/Unix. 
 
-## Dependencies
-
-* [ICU](http://site.icu-project.org/)	: Header files and libraries
-
-## On Windows
-
-### Step 1: Setting up dependencies
-
-1. Download the Win64 binaries for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and unzip to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice).
-
-2. If you chose a different folder for your ICU libraries, update ```<repo_root>\modules\Dependencies.props``` to represent your local configuration. This is how it looks after download, which should be OK if you used the suggested directory paths:
-
-```
-  <PropertyGroup Label="UserMacros">
-    <ICUDIR>$(SolutionDir)..\thirdparty\icu\</ICUDIR>
-    <ICU_INCLUDE>$(ICUDIR)\include</ICU_INCLUDE>
-    <ICU_LIB>$(ICUDIR)\lib64</ICU_LIB>
-  </PropertyGroup>
-```
-
-### Step 2: Building iKnow
-
-1. Open the Solution file ```<repo_root>\modules\iKnowEngine.sln``` in Visual Studio. We used Visual Studio Community 2019
-
-2. In the Solution Explorer, choose "iKnowEngineTest" as "Set up as startup project"
-
-3. In Solution Configurations, choose either "Debug|x86", or "Release|x64", depending on the kind of executable you prefer.
-
-4. Build the solution, it will build all 29 projects.
-
-### Step 3: Testing the indexer
-
-Once building has succeeded, you can run the test program, depending on which build config you chose:
-
-* ```<repo_root>\kit\x64\Debug\bin\iKnowEngineTest.exe```
-* ```<repo_root>\kit\x64\Release\bin\iKnowEngineTest.exe```
-
-:warning: Note that you'll have to add the ```$(ICUDIR)/bin64``` directory to your PATH or copy its .dll files to this test folder in order to run the test executable.
-
-Alternatively, you can also start a debugging session in Visual Studio and walk through the code to inspect it.
-
-The iKnow indexing demo program will index one sentence for each of the 11 languages, and write out the sentence boundaries. That's of course not very spectacular by itself, but future iterations of this demo program will expose more of the entity and context information iKnow detects.
-
-### Optional: Compiling the language models.
-
-The `iKnowLanguageCompiler` project lets you compile the [language models](https://github.com/intersystems/iknow/wiki/Language-Models) themselves to pick up any changes you may have made to the source .csv files. First, build the `iKnowEngineTest` program as described above, since the language compiler relies on common parts, and then build `iKnowLanguageCompiler`. This should result in a new executable:
-
-* ```<repo_root>\kit\x64\(Debug|Release)\bin\iKnowLanguageCompiler.exe```
-
-Open a command window, change directory to ```<repo_root>\kit\x64\(Debug|Release)\bin\```, and run the program with the requested language code (eg: `IKnowLanguageCompiler en` for building the English language model). If no language parameter is supplied, all language models will be rebuilt. After the build process, you must rebuild the test program to pick up the new language models.
-
-It is important to understand the in- and output of this proces. The input consists of a collection of csv-files, representing the language model as assembled by a qualified linguist:
-
-* ```<repo_root>\language_models\(cd|de|en|es|fr|ja|nl|pt|ru|sv|uk)\```
-
-  Each language directory contains 8 (or less) csv-files : "acro", "filter", "labels", "lexreps", "metadata", "prepro", "regex" and "rules". See ```<repo_root>\docs\KB-file-formats.docx``` for a detailed description. These are **input** for the language model builder.
-
-* ```<repo_root>\modules\engine\language_data\```
-
-  This directory contains, per language, the binary representation of the linguistic data, in the form of a header file (`kb_<language>_data.h`), this is **output**, generated by the language compiler, *do not edit*!
-
-* ```<repo_root>\modules\aho\inl\(cd|de|en|es|fr|ja|nl|pt|ru|sv|uk)\```
-
-  This is the place where, per language, AHO state machine data is written, this is **output**, also the result of the language compilation proces, *do not edit*!
-
-The language compiler must be run from its `/bin` directory, and knows the input and output directories, no need for any configuration. If you would like to change these, you'll have to edit the source code. After rebuilding a languge model data, a new build of the language module itself is needed, since this binary data is hard coded for maximum speed.
-
-Please refer to the corresponding wiki section for more on our [language models](https://github.com/intersystems/iknow/wiki/Language-Models).
-
-
-## On Linux / Unix
-
-### Step 1: Setting up dependencies
-
-1. Download the proper binaries for a recent release of the [ICU library](https://github.com/unicode-org/icu/releases/) (e.g. [version 65.1](https://github.com/unicode-org/icu/releases/tag/release-65-1)) and untar to ```<repo_root>/thirdparty/icu``` (or a local folder of your choice). 
-
-2. Save the path you untarred the archive to a ```ICUDIR``` environment variable.
-   Note that your ICU download may have a relative path inside the tar archive, so you may need to use ```--strip-components=4``` or manually reorganise to make sure the ```${ICUDIR}/include``` leads where you'd expect it to lead.
-
-### Step 2: Building iKnow
-
-1. Set the ```IKNOWPLAT``` environment variable to the target platform of your choice: e.g. "lnxubuntux64", "lnxrhx64" or "macx64"
-   
-2. In the ```<repo_root>``` folder, run ```make all```
-
-
-
-## On Docker
-
-While primarily useful for build-testing convenience, we're also providing a Dockerfile that stuffs the code in a clean container with the required ICU libraries. If your Linux / Unix build doesn't seem to work, perhaps a quick look at this Dockerfile will help nail down where trouble starts.
-
-### Step 1: Building the container
-
-1. Optionally open the ```Dockerfile``` to change the ICU library version to use
-  
-2. Use the ```docker build``` command to package things up:
-
-  ```Shell
-  docker build --tag iknow .
-  ```
-   This will automatically download the ICU library of your choice and register its path for onward building.
-
-### Step 2: Building iKnow
-
-1. Start and step into the container using ```docker run```:
-
-```Shell
-docker run --rm -it iknow
-```
-   The ```--rm``` flag will make sure the container gets dropped after you're done exploring.
-
-2. Inside the container, use ```make all``` to kick off the build.
-
-```Shell
-cd /usr/src/iknow
-make all
-```
-
-### Step 3: Testing iKnow
-
-3. ```make test``` will build and run the testprogram ("iknowenginetest"). You will find the testprogram in /usr/src/iknow/kit/lnxubuntux64/release/bin
-
-```Shell
-cd /usr/src/iknow
-make test
-```
-
-
-## Building the Python Module
-
-The `iknowpy` module brings the iKnow engine capabilities to Python ≥3.5 and is currently supported on Windows, Mac OS, and Linux. The following directions refer to the commands ```pip``` and ```python```. On some platforms, these commands use Python 2 by default, in which case you should execute ```pip3``` and ```python3``` instead to ensure that you are using Python 3.
-
-### Step 1: Build the iKnow engine
-
-Build the iKnow engine following the above directions. If you are on Windows, choose the "Release|x64" configuration.
-
-### Step 2: Setting up dependencies
-
-1. Install Python ≥3.5. Ensure that the installation includes Python header files.
-
-2. Install `Cython`, `setuptools`, and `wheel`. You can do this by having a Python distribution that already includes these modules or by running 
-
-   ```Shell
-   pip install -U cython setuptools wheel
-   ```
-
-3. If you are on Mac OS, ensure that the `otool` and `install_name_path` command-line tools are present. They should be available if you have XCode installed with command-line developer tools.
-   If you are on Linux, ensure that the `patchelf` tool is present. You can install it using the package manager on your machine.
-
-### Step 3: Building and installing iknowpy
-
-Open a command shell in the directory `<repo_root>/modules/iknowpy` and execute the setup script. This builds `iknowpy`, creates a package containing `iknowpy` and its dependencies, and installs the package.
-
-```Shell
-python setup.py install
-```
-
-### Step 4: Testing iknowpy
-
-The scripts at `<repo_root>/modules/iknowpy/tests/` provide example of how to use `iknowpy`. Run the scripts to call a few iKnow functions from Python and print their results.
-
-:warning: If you are testing `iknowpy` via the Python interactive console, do not do so in the `<repo_root>/modules/iknowpy` working directory. Because of how Python resolves module names, importing `iknowpy` will cause Python to try importing the source package `<repo_root>/modules/iknowpy/iknowpy` instead of the installed package, resulting in an import error.
-
-### Step 5: (Optional) Building a Wheel and Uploading to PyPI
-
-A wheel is a pre-built package that includes `iknowpy` and its dependencies (the iKnow engine and ICU) and can be installed using ```pip install iknowpy```. A single wheel is specific to the build platform and the minor version of Python (e.g. 3.7 or 3.8) used to build the wheel. Thus, a wheel must be built for every platform and minor Python version for which a simple installation using pip is desired. Unless otherwise noted, these instructions provide an example of how wheels for `iknowpy 0.0.3` for Python 3.8 were built and uploaded to PyPI. To build a later version of `iknowpy` or to build for a different version of Python, you can adapt these directions.
-
-To upload to PyPI, you need the twine package. You also need an account at PyPI.org and have permission to update the `iknowpy` project. You can view the `iknowpy` project on PyPI at https://pypi.org/project/iknowpy/.
-
-```Shell
-pip install -U twine
-```
-
-#### On Windows
-
-1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
-
-2. Build the wheel.
-
-   ```Shell
-   python setup.py bdist_wheel
-   ```
-
-3. Upload the wheel.
-
-   ```Shell
-   twine upload dist/iknowpy-0.0.3-cp38-cp38-win_amd64.whl
-   ```
-
-#### On Mac OS
-
-Decide the minimum version of Mac OS that the wheel will support. Ensure that the iKnow engine, ICU, and Python were built with support for this version. Python distributions from https://www.python.org/downloads/mac-osx are the best for this situation, as they tend to be the distributions that are maximally compatible with different Mac OS versions. The following directions assume a minimum target version of Mac OS X 10.9, but you can adapt them to suit your preferences.
-
-1. Open a command shell in the directory `<repo_root>/modules/iknowpy`.
-
-2. Build the wheel. If you do not specify `MACOSX_DEPLOYMENT_TARGET` or `--plat-name`, then the minimum supported Mac OS version defaults to that of the Python distribution used to build the wheel.
-
-   ```Shell
-   export MACOSX_DEPLOYMENT_TARGET=10.9
-   python setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
-   ```
-
-3. Upload the wheel.
-
-   ```Shell
-   twine upload dist/iknowpy-0.0.3-cp38-cp38-macosx_10_9_x86_64.whl
-   ```
-
-#### On Linux
-
-In general, binaries built on one Linux distribution might not be directly runnable on another Linux distribution. If all you want is a wheel that is compatible with the build platform and its binary compatible platforms, simply execute the following in the directory `<repo_root>/modules/iknowpy`.
-
-```Shell
-python setup.py bdist_wheel
-```
-
-Wheels built this way cannot be uploaded to PyPI, as PyPI does not allow wheels that are specific to a particular Linux distribution. To build a wheel that is compatible with the vast majority of modern Linux distributions, we leverage the [manylinux](https://github.com/pypa/manylinux) project, which is the standard way to distribute pre-built Python extension modules on Linux. The build script `<repo_root>/modules/iknowpy/build_manylinux.sh` is provided for convenience. When run inside a manylinux container, it builds `iknowpy` manylinux wheels for Python 3.5 through 3.8 and uploads the wheels to PyPI.
-
-The script supports the following manylinux images.
-- manylinux2010_x86_64
-- manylinux2010_i686
-- manylinux2014_x86_64
-- manylinux2014_i686
-- manylinux2014_aarch64
-- manylinux2014_ppc64le
-
-The manylinux2010 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 6, and the manylinux2014 images produce wheels that are compatible with Linux distributions that are at least as new as CentOS 7.
-
-The script takes 4 positional arguments.
-1. TAG: the platform tag (e.g. manylinux2010_x86_64)
-2. ICU_URL: the URL to a .zip source release of ICU (e.g. https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip)
-3. TOKEN: an authentication token for updating the `iknowpy` project on PyPI
-4. BRANCH: (optional, default is "master") iKnow GitHub branch from which to build the wheel
-
-The following instructions indicate how to build and distribute `iknowpy` for Linux x86_64. You can adapt these directions as needed to build manylinux wheels for other platforms.
-
-1. Obtain the manylinux2010_x86_64 docker image and run it interactively.
-
-   ```Shell
-   docker pull quay.io/pypa/manylinux2010_x86_64
-   docker run -it --rm <image>
-   ```
-
-2. In a second shell, copy the build script into the container.
-
-   ```Shell
-   docker cp <repo_root>/modules/iknowpy/build_manylinux.sh <container>:/
-   ```
-
-3. Return to the first shell, which is running the container, and execute the script.
-
-   ```Shell
-   ./build_manylinux.sh manylinux2010_x86_64 https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip <TOKEN> master
-   ```
+Please refer to [this wiki page](https://github.com/intersystems/iknow/wiki/Build-Process) for more on the overall build process.
 
 
 # Contributing to iKnow
