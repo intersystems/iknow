@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 ''' genTrace.py tool for logging linguistic traces
     Usage: "python genTrace.py <text files directory> <output directory> <language>"
-    Example (on Windows): "python genTrace.py C:\TextCorpus\English\Financial C:\tmp en
+    Example (on Windows): "python genTrace.py C:\TextCorpus\English\Financial\ C:\tmp\ en
 '''
 
 import sys
@@ -18,8 +18,8 @@ import time
 
 # print(sys.argv)
 
-in_path_par = "C:\\P4\\Users\\jdenys\\text_input_data\\en\\"
-out_path_par = "C:\\tmp\\"
+in_path_par = "C:/P4/Users/jdenys/text_input_data/en/"
+out_path_par = "C:/tmp/"
 language_par = "en"
 OldStyle = True
 
