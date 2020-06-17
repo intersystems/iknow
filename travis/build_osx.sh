@@ -18,12 +18,13 @@ set -x
 
 ##### Build ICU #####
 REPO_ROOT=$(pwd)
-export MACOSX_DEPLOYMENT_TARGET=10.9
 curl -L -o icu4c-src.zip "$URL"
 unzip icu4c-src.zip
 cd icu/source
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
+export LDFLAGS="-headerpad_max_install_names"
+export MACOSX_DEPLOYMENT_TARGET=10.9
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 ./runConfigureICU MacOSX --prefix="$ICUDIR"
 make
