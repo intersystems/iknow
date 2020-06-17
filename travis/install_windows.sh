@@ -14,7 +14,7 @@ set -euxo pipefail
 wget https://www.python.org/ftp/python/3.8.3/python-3.8.3-amd64.exe
 
 for PYINSTALL in python-*.exe; do
-  "./$PYINSTALL" -quiet
+  "./$PYINSTALL" -quiet InstallAllUsers=1
 done
 
 # Python packages
