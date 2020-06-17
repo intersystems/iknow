@@ -2,6 +2,8 @@
 
 # Install build dependencies on Windows
 
+set -euxo pipefail
+
 # Visual Studio 2019
 choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
 
@@ -12,7 +14,7 @@ wget https://www.python.org/ftp/python/3.7.7/python-3.7.7-amd64-webinstall.exe
 wget https://www.python.org/ftp/python/3.8.3/python-3.8.3-amd64-webinstall.exe
 
 for PYINSTALL in python-*.exe; do
-  "$PYINSTALL" /passive InstallAllUsers=1 Shortcuts=0 Include_doc=0 Include_launcher=0 Include_tcltk=0 Include_test=0
+  "./$PYINSTALL" /passive InstallAllUsers=1 Shortcuts=0 Include_doc=0 Include_launcher=0 Include_tcltk=0 Include_test=0
 done
 
 # Python packages
