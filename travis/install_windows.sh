@@ -29,12 +29,9 @@ wget https://www.python.org/ftp/python/3.8.3/python-3.8.3-amd64-webinstall.exe &
 PIDS="$PIDS $!"
 wait_all "$PIDS"
 
-PIDS=""
 for PYINSTALL in python-*.exe; do
   "./$PYINSTALL" -quiet InstallAllUsers=1 Shortcuts=0 Include_doc=0 Include_launcher=0 Include_tcltk=0 Include_test=0 &
-  PIDS="$PIDS $!"
 done
-wait_all "$PIDS"
 
 # Python packages
 PIDS=""
