@@ -34,7 +34,7 @@ fi
 # Given a string of PIDs of background jobs, wait for all of them to terminate.
 wait_all () {
   local PID
-  for PID in $1; do
+  for PID in "$1"; do
     wait "$PID"
   done
 }
