@@ -31,14 +31,18 @@ if [[ " $SUPPORTEDTAGS " != *" $TAG "* ]]; then
 fi
 
 
-##### Install dependencies #####
-# dos2unix is needed to give ICU build scripts Unix line endings so that they
-# can be executed. For some reason, ICU source releases use Windows line
-# endings. On some platforms, openssl-devel is needed to install twine.
-yum install -y dos2unix openssl-devel
+# Given a string of PIDs of background jobs, wait for all of them to terminate.
+wait_all () {
+  local PID
+  for PID in "$1"; do
+    wait "$PID"
+  done
+}
 
 
 ##### Build ICU #####
+yum install -y dos2unix openssl-devel &
+PIDS="$!"
 curl -L -o icu4c-src.zip "$URL"
 unzip icu4c-src.zip
 cd icu/source
@@ -50,6 +54,7 @@ if [[ "$TAG" == "manylinux2010_"* ]]; then
   ln -s /opt/python/cp27-cp27m/bin/python /usr/bin/python
 fi
 
+wait_all "$PIDS"
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
 export ICUDIR=/iknow/thirdparty/icu
@@ -88,14 +93,17 @@ cd modules/iknowpy
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
 
 # install Python package dependencies and build initial wheels
+PIDS=""
 for PYTHON in /opt/python/cp3*/bin/python; do
-  PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then
-    PACKAGES="$PACKAGES twine"
-  fi
-  "$PYTHON" -m pip install -U $PACKAGES
-  "$PYTHON" setup.py bdist_wheel --no-dependencies
+  (PACKAGES="cython setuptools wheel" && \
+    if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then \
+      PACKAGES="$PACKAGES twine" \
+    fi && \
+    "$PYTHON" -m pip install -U $PACKAGES && \
+    "$PYTHON" setup.py bdist_wheel --no-dependencies) &
+  PIDS="$PIDS $!"
 done
+wait_all "$PIDS"
 
 # aarch64 and ppc64le platforms often have a large page size of 64KiB. We need
 # to redirect all invocations of patchelf so that when auditwheel invokes it, it
@@ -107,9 +115,12 @@ if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
 fi
 
 # repair wheels using auditwheel
+PIDS=""
 for WHEEL in dist/iknowpy-*.whl; do
-  auditwheel repair -w dist2 $WHEEL
+  auditwheel repair -w dist2 "$WHEEL" &
+  PIDS="$PIDS $!"
 done
+wait_all "$PIDS"
 
 # restore patchelf on aarch64 and ppc64le
 if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then

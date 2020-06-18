@@ -10,13 +10,13 @@ env:
 
 jobs:
   include:
-    - name: "manylinux2014_aarch64"
-      os: linux
-      arch: arm64
-      services:
-        - docker
-      script:
-        - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN
+    # - name: "manylinux2014_aarch64"
+    #   os: linux
+    #   arch: arm64
+    #   services:
+    #     - docker
+    #   script:
+    #     - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN
     # - name: "manylinux2014_ppc64le"
     #   os: linux
     #   arch: ppc64le
@@ -38,13 +38,13 @@ jobs:
     #     - docker
     #   script:
     #     - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2014_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2014_i686 $ICU_SRC_URL $PYPI_TOKEN
-    # - name: "manylinux2010_x86_64"
-    #   os: linux
-    #   arch: amd64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2010_x86_64"
+      os: linux
+      arch: amd64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_SRC_URL $PYPI_TOKEN
     # - name: "manylinux2010_i686"
     #   os: linux
     #   arch: amd64
