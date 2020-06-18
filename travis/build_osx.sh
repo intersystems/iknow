@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Build wheels for Python 3.5 through Python 3.8, compatible with
-# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if the iknowpy version was
-# incremented in the commit associated with this build.
+# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate.
 #
 # Usage: ./build_osx.sh ICU_SRC_URL TOKEN
 # - ICU_SRC_URL is the URL to a .zip source release of ICU

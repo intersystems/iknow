@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Build Windows x86_64 wheels for Python 3.5 through Python 3.8. Upload the
-# wheels to PyPI if the iknowpy version was incremented in the commit associated
-# with this build.
+# wheels to PyPI if appropriate.
 #
 # Usage: ./build_windows.sh ICU_WIN_URL TOKEN
 # - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
@@ -15,7 +14,6 @@ echo '+ TOKEN="$2"'
 TOKEN="$2"
 set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
-ls "$MSBUILD_PATH"
 export PATH=$MSBUILD_PATH:$PATH
 
 

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Build manylinux wheels for Python 3.5 through Python 3.8. Upload the wheels to
-# PyPI if the iknowpy version was incremented in the commit associated with this
-# build. This script must be executed inside a manylinux container.
+# PyPI if appropriate. This script must be executed inside a manylinux
+# container.
 #
 # Usage: ./build_manylinux.sh TAG ICU_SRC_URL TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
