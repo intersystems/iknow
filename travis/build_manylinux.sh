@@ -92,7 +92,7 @@ make -j $(nproc)
 cd modules/iknowpy
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
 
-# install Python package dependencies and build initial wheels
+# install Python package dependencies
 PIDS=""
 for PYTHON in /opt/python/cp3*/bin/python; do
   (
@@ -101,11 +101,15 @@ for PYTHON in /opt/python/cp3*/bin/python; do
       PACKAGES="$PACKAGES twine"
     fi
     "$PYTHON" -m pip install -U $PACKAGES
-    "$PYTHON" setup.py bdist_wheel --no-dependencies
   ) &
   PIDS="$PIDS $!"
 done
 wait_all "$PIDS"
+
+# build initial wheels
+for PYTHON in /opt/python/cp3*/bin/python; do
+  "$PYTHON" setup.py bdist_wheel --no-dependencies
+done
 
 # aarch64 and ppc64le platforms often have a large page size of 64KiB. We need
 # to redirect all invocations of patchelf so that when auditwheel invokes it, it
