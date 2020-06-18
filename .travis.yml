@@ -10,13 +10,13 @@ env:
 
 jobs:
   include:
-    # - name: "manylinux2014_aarch64"
-    #   os: linux
-    #   arch: arm64
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2014_aarch64"
+      os: linux
+      arch: arm64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_COMMIT -e TRAVIS_BRANCH -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN
     # - name: "manylinux2014_ppc64le"
     #   os: linux
     #   arch: ppc64le
@@ -59,9 +59,9 @@ jobs:
     #     - travis/install_osx.sh
     #   script:
     #     - travis/build_osx.sh $ICU_SRC_URL $PYPI_TOKEN
-    - name: "Windows x86_64"
-      os: windows
-      install:
-        - travis/install_windows.sh
-      script:
-        - travis/build_windows.sh $ICU_WIN_URL $PYPI_TOKEN
+    # - name: "Windows x86_64"
+    #   os: windows
+    #   install:
+    #     - travis/install_windows.sh
+    #   script:
+    #     - travis/build_windows.sh $ICU_WIN_URL $PYPI_TOKEN
