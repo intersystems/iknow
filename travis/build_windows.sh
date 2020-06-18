@@ -40,8 +40,8 @@ done
 ##### Upload iknowpy wheels if version was bumped #####
 if [[ "$($REPO_ROOT/travis/deploy_check.sh)" == "1" ]]; then
   { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /c/"Program Files"/Python38/python.exe -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  /c/"Program Files"/Python38/python.exe -m twine upload --repository-url https://test.pypi.org/legacy/ -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
+  echo '+ /c/"Program Files"/Python38/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
+  /c/"Program Files"/Python38/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
   set -x
 else
   echo "Deployment skipped"
