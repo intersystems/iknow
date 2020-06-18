@@ -29,7 +29,7 @@ unzip icu4c.zip -d "$ICUDIR"
 
 ##### Build iKnow engine #####
 cd modules
-MSBuild.exe iKnowEngine.sln -p:Configuration="Release" -p:Platform="x64"
+MSBuild.exe iKnowEngine.sln -p:Configuration="Release" -p:Platform="x64" -maxcpucount
 
 
 ##### Build iknowpy wheels #####

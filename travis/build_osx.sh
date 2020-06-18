@@ -27,7 +27,7 @@ export LDFLAGS="-headerpad_max_install_names"
 export MACOSX_DEPLOYMENT_TARGET=10.9
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 ./runConfigureICU MacOSX --prefix="$ICUDIR"
-make -j 2
+make -j $(sysctl -n hw.logicalcpu)
 make install
 
 
