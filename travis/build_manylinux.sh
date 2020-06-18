@@ -46,7 +46,6 @@ PIDS="$!"
 curl -L -o icu4c-src.zip "$URL"
 unzip icu4c-src.zip
 cd icu/source
-wait_all "$PIDS"
 
 # ICU build environment requires that /usr/bin/python be at least version 2.7.
 # manylinux2010 images have version 2.6, so create symlink to version 2.7 binary
@@ -55,6 +54,7 @@ if [[ "$TAG" == "manylinux2010_"* ]]; then
   ln -s /opt/python/cp27-cp27m/bin/python /usr/bin/python
 fi
 
+wait_all "$PIDS"
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
 export ICUDIR=/iknow/thirdparty/icu
@@ -95,14 +95,12 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDI
 # install Python package dependencies and build initial wheels
 PIDS=""
 for PYTHON in /opt/python/cp3*/bin/python; do
-  (
-    PACKAGES="cython setuptools wheel"
-    if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then
-      PACKAGES="$PACKAGES twine"
-    fi
-    "$PYTHON" -m pip install -U $PACKAGES
-    "$PYTHON" setup.py bdist_wheel --no-dependencies
-  ) &
+  (PACKAGES="cython setuptools wheel" && \
+    if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then \
+      PACKAGES="$PACKAGES twine" \
+    fi && \
+    "$PYTHON" -m pip install -U $PACKAGES && \
+    "$PYTHON" setup.py bdist_wheel --no-dependencies) &
   PIDS="$PIDS $!"
 done
 wait_all "$PIDS"
