@@ -30,7 +30,7 @@ PIDS="$PIDS $!"
 wait_all "$PIDS"
 
 for PYINSTALL in python-*.exe; do
-  "./$PYINSTALL" -quiet InstallAllUsers=1 Shortcuts=0 Include_doc=0 Include_launcher=0 Include_tcltk=0 Include_test=0 &
+  "./$PYINSTALL" -quiet InstallAllUsers=1 Shortcuts=0 Include_doc=0 Include_launcher=0 Include_tcltk=0 Include_test=0
 done
 
 # Python packages
