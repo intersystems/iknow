@@ -15,7 +15,6 @@ echo '+ TOKEN="$2"'
 TOKEN="$2"
 set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
-ls "$MSBUILD_PATH"
 export PATH=$MSBUILD_PATH:$PATH
 
 
