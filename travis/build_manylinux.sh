@@ -4,7 +4,7 @@
 # PyPI if the iknowpy version was incremented in the commit associated with this
 # build. This script must be executed inside a manylinux container.
 #
-# Usage: ./build_manylinux.sh TAG ICU_URL TOKEN
+# Usage: ./build_manylinux.sh TAG ICU_SRC_URL TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686
@@ -12,7 +12,7 @@
 #     manylinux2014_i686
 #     manylinux2014_aarch64
 #     manylinux2014_ppc64le
-# - ICU_URL is the URL to a .zip source release of ICU
+# - ICU_SRC_URL is the URL to a .zip source release of ICU
 # - TOKEN is an API token to the iknowpy repository on PyPI.
 
 set -euxo pipefail
