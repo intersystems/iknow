@@ -27,7 +27,7 @@ export LDFLAGS="-headerpad_max_install_names"
 export MACOSX_DEPLOYMENT_TARGET=10.9
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 ./runConfigureICU MacOSX --prefix="$ICUDIR"
-make
+make -j 2
 make install
 
 
@@ -35,7 +35,7 @@ make install
 ##### Build iKnow engine #####
 export IKNOWPLAT=macx64
 cd "$REPO_ROOT"
-make
+make -j 2
 
 
 ##### Build iknowpy wheels #####

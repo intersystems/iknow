@@ -54,7 +54,7 @@ dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureI
 export CXXFLAGS="-std=c++11"
 export ICUDIR=/iknow/thirdparty/icu
 ./runConfigureICU Linux --prefix="$ICUDIR"
-gmake
+gmake -j 2
 gmake install
 
 # restore system Python on manylinux2010
@@ -80,7 +80,7 @@ else
   exit 1
 fi
 
-make
+make -j 2
 
 
 ##### Build iknowpy wheels #####
