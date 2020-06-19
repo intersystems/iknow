@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-# Build manylinux wheels for Python 3.5 through Python 3.8 and upload them to
-# PyPI. This script must be executed inside a manylinux container.
+# Build manylinux wheels for Python 3.5 through Python 3.8. Upload the wheels to
+# PyPI if appropriate. This script must be executed inside a manylinux
+# container.
 #
-# Usage: ./build_manylinux.sh TAG ICU_URL TOKEN [BRANCH]
+# Usage: ./build_manylinux.sh TAG ICU_SRC_URL TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686
@@ -11,16 +12,16 @@
 #     manylinux2014_i686
 #     manylinux2014_aarch64
 #     manylinux2014_ppc64le
-# - ICU_URL is the URL to a .zip source release of ICU
-# - TOKEN is an API token to the iknowpy repository
-# - BRANCH (optional) is the iKnow GitHub branch from which to build the wheel.
-#   Default is "master".
+# - ICU_SRC_URL is the URL to a .zip source release of ICU
+# - TOKEN is an API token to the iknowpy repository on PyPI.
 
 set -euxo pipefail
 TAG="$1"
 URL="$2"
+{ set +x; } 2>/dev/null  # don't save token to build log
+echo '+ TOKEN="$3"'
 TOKEN="$3"
-BRANCH="${4-master}"
+set -x
 
 SUPPORTEDTAGS="manylinux2010_x86_64 manylinux2010_i686 manylinux2014_x86_64 manylinux2014_i686 manylinux2014_aarch64 manylinux2014_ppc64le"
 
@@ -38,10 +39,8 @@ yum install -y dos2unix openssl-devel
 
 
 ##### Build ICU #####
-cd /home
 curl -L -o icu4c-src.zip "$URL"
 unzip icu4c-src.zip
-git clone https://github.com/intersystems/iknow.git
 cd icu/source
 
 # ICU build environment requires that /usr/bin/python be at least version 2.7.
@@ -53,9 +52,9 @@ fi
 
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
-export ICUDIR=/home/iknow/thirdparty/icu
+export ICUDIR=/iknow/thirdparty/icu
 ./runConfigureICU Linux --prefix="$ICUDIR"
-gmake
+gmake -j $(nproc)
 gmake install
 
 # restore system Python on manylinux2010
@@ -66,8 +65,7 @@ fi
 
 
 ##### Build iKnow engine #####
-cd /home/iknow
-git checkout "$BRANCH"
+cd /iknow
 
 if [[ "$TAG" == *"_x86_64" ]]; then
   export IKNOWPLAT=lnxrhx64
@@ -82,12 +80,12 @@ else
   exit 1
 fi
 
-make
+make -j $(nproc)
 
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
 
 # install Python package dependencies and build initial wheels
 for PYTHON in /opt/python/cp3*/bin/python; do
@@ -120,5 +118,12 @@ if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
 fi
 
 
-##### Upload iknowpy wheels #####
-/opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
+##### Upload iknowpy wheels if version was bumped #####
+if [[ "$(/iknow/travis/deploy_check.sh)" == "1" ]]; then
+  { set +x; } 2>/dev/null  # don't save token to build log
+  echo '+ /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
+  /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
+  set -x
+else
+  echo "Deployment skipped"
+fi

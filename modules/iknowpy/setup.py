@@ -400,6 +400,7 @@ if sys.platform == 'win32':
     enginelibs_name_pattern = 'iKnow*.dll'
     enginelibs_path_pattern = os.path.join('../../kit/x64/Release/bin', enginelibs_name_pattern)
     extra_compile_args = []
+    extra_link_args = []
 else:
     if len(sys.argv) > 1 and sys.argv[1] == 'install':
         # On Unix, we do not support direct installation. Create a wheel instead
@@ -417,6 +418,7 @@ else:
         os.environ['CC'] = 'clang++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'clang++'
         extra_compile_args = ['-std=c++11']
+        extra_link_args = ['-headerpad_max_install_names']
         if install_wheel:
             # set wheel target platform to that of the build platform
             macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
@@ -428,6 +430,7 @@ else:
         os.environ['CC'] = 'g++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'g++'
         extra_compile_args = []
+        extra_link_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
@@ -502,7 +505,8 @@ try:
                 include_dirs=['../engine/src', '../core/src/headers', '../base/src/headers', os.path.join(icudir, 'include')],
                 library_dirs=library_dirs,
                 libraries=['iknowengine'],
-                extra_compile_args=extra_compile_args
+                extra_compile_args=extra_compile_args,
+                extra_link_args=extra_link_args
             )],
             compiler_directives={'language_level': '3'}
         ),

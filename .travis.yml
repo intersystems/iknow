@@ -1,0 +1,64 @@
+language: cpp
+
+env:
+  global:
+    - ICU_SRC_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip  # URL to .zip source release of ICU
+    - ICU_WIN_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip  # URL to .zip pre-built release of ICU for Windows x86_64
+
+jobs:
+  include:
+    - name: "manylinux2014_aarch64"
+      os: linux
+      arch: arm64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2014_x86_64"
+      os: linux
+      arch: amd64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_x86_64 /iknow/travis/build_manylinux.sh manylinux2014_x86_64 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2014_i686"
+      os: linux
+      arch: amd64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2014_i686 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2010_x86_64"
+      os: linux
+      arch: amd64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "Mac OS X 10.9 x86_64"
+      os: osx
+      osx_image: xcode11.6
+      install:
+        - travis/install_osx.sh
+      script:
+        - travis/build_osx.sh $ICU_SRC_URL $PYPI_TOKEN
+    - name: "manylinux2010_i686"
+      os: linux
+      arch: amd64
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2010_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2010_i686 $ICU_SRC_URL $PYPI_TOKEN
+    - name: "Windows x86_64"
+      os: windows
+      install:
+        - travis/install_windows.sh
+      script:
+        - travis/build_windows.sh $ICU_WIN_URL $PYPI_TOKEN
+    - name: "manylinux2014_ppc64le"
+      os: linux
+      arch: ppc64le
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_SRC_URL $PYPI_TOKEN
