@@ -34,7 +34,7 @@ make install
 ##### Build iKnow engine #####
 export IKNOWPLAT=macx64
 cd "$REPO_ROOT"
-make -j 2
+make -j $(sysctl -n hw.logicalcpu)
 
 
 ##### Build iknowpy wheels #####
