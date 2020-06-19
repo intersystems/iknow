@@ -459,8 +459,21 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
 else:
     no_dependencies = True
 
-# Copy license file
+# include MIT license in distribution
 shutil.copy2('../../LICENSE', '.')
+
+# include ICU license in distribution
+icu_license_found = False
+for root, _, files in os.walk(icudir):
+    for filename in files:
+        if filename == 'LICENSE':
+            icu_license_found = True
+            shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
+            break
+    if icu_license_found:
+        break
+if not icu_license_found:
+    raise BuildError('ICU license not found in {}'.format(icudir))
 
 with open('README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
@@ -515,12 +528,13 @@ try:
         }
     )
 finally:
-    # remove dependent libraries and license from package source
+    # remove dependent libraries and licenses from package source
     for lib_path in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
         remove(lib_path)
     for lib_path in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
         remove(lib_path)
     remove('LICENSE')
+    remove('LICENSE_ICU')
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
     fix_wheel_ppc64le(find_wheel())
