@@ -40,22 +40,38 @@ cdef char* aType_to_str(aType t) except NULL:
 
 
 cdef class iKnowEngine:
-	"""Python wrapper for C++ iKnowEngine class."""
+	"""A class that represents an instance of the iKnow Natural Language
+	Processing engine. iKnow is a library for Natural Language Processing that
+	identifies entities (phrases) and their semantic context in natural language
+	text in English, German, Dutch, French, Spanish, Portuguese, Swedish,
+	Russian, Ukrainian, Czech and Japanese.
+
+	Index some text by calling the index() method. After this method completes,
+	results are stored in the m_index attribute. If applicable, linguistic trace
+	information is stored in the m_traces attribute."""
 	cdef CPPiKnowEngine engine
 
 	def __cinit__(self):
+		"""Initialize the underlying C++ iKnowEngine class"""
 		self.engine = CPPiKnowEngine()
 
 	@staticmethod
 	def get_languages_set():
+		"""Return the set of supported languages."""
 		return CPPiKnowEngine.GetLanguagesSet()
 
 	def index(self, str text_source, str language, bool traces = False):
+		"""Index the text in text_source with a given language. (Call
+		get_languages_set() to see which languages are supported.) After
+		indexing, results are stored in the m_index attribute. If traces==True,
+		then the linguistic trace information is stored in the m_traces
+		attribute."""
 		if language not in self.get_languages_set():
 			raise ValueError('Language {!r} is not supported.'.format(language))
 		return self.engine.index(text_source, language, traces)
 
 	def add_udct_annotation(self, size_t start, size_t stop, str UdctLabel):
+		"""Add a custom user dictionary annotation."""
 		return self.engine.addUdctAnnotation(start, stop, UdctLabel)
 
 	@property
@@ -65,7 +81,7 @@ cdef class iKnowEngine:
 
 	@property
 	def m_traces(self):
-		"""Return the linguistic trace information"""
+		"""The linguistic trace information"""
 		return self.engine.m_traces
 
 	@property
