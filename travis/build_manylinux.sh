@@ -4,7 +4,7 @@
 # PyPI if appropriate. This script must be executed inside a manylinux
 # container.
 #
-# Usage: ./build_manylinux.sh TAG ICU_SRC_URL TOKEN
+# Usage: ./build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686
@@ -13,14 +13,17 @@
 #     manylinux2014_aarch64
 #     manylinux2014_ppc64le
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
-# - TOKEN is an API token to the iknowpy repository on PyPI.
+# - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
+# - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
 TAG="$1"
 URL="$2"
 { set +x; } 2>/dev/null  # don't save token to build log
-echo '+ TOKEN="$3"'
-TOKEN="$3"
+echo '+ PYPI_TOKEN="$3"'
+PYPI_TOKEN="$3"
+echo '+ TESTPYPI_TOKEN="$4"'
+TESTPYPI_TOKEN="$4"
 set -x
 
 SUPPORTEDTAGS="manylinux2010_x86_64 manylinux2010_i686 manylinux2014_x86_64 manylinux2014_i686 manylinux2014_aarch64 manylinux2014_ppc64le"
@@ -106,7 +109,7 @@ if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
   chmod +x /usr/local/bin/patchelf
 fi
 
-# repair wheels using auditwheel
+# repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do
   auditwheel repair -w dist2 $WHEEL
 done
@@ -118,12 +121,27 @@ if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
 fi
 
 
-##### Upload iknowpy wheels if version was bumped #####
-if [[ "$(/iknow/travis/deploy_check.sh)" == "1" ]]; then
+##### Upload iknowpy wheels if appropriate #####
+export REPO_ROOT=/iknow
+DEPLOY=$(/iknow/travis/deploy_check.sh)
+if [[ "$DEPLOY" == "0" ]]; then
+  echo "Deployment skipped"
+else
+  if [[ "$DEPLOY" == "PyPI" ]]; then
+    export TWINE_REPOSITORY=pypi
+    { set +x; } 2>/dev/null  # don't save token to build log
+    echo '+ TOKEN="$PYPI_TOKEN"'
+    TOKEN="$PYPI_TOKEN"
+    set -x
+  else
+    export TWINE_REPOSITORY=testpypi
+    { set +x; } 2>/dev/null  # don't save token to build log
+    echo '+ TOKEN="$TESTPYPI_TOKEN"'
+    TOKEN="$TESTPYPI_TOKEN"
+    set -x
+  fi
   { set +x; } 2>/dev/null  # don't save token to build log
   echo '+ /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
   /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
   set -x
-else
-  echo "Deployment skipped"
 fi
