@@ -60,7 +60,7 @@ cdef class iKnowEngine:
 		"""Return the set of supported languages."""
 		return CPPiKnowEngine.GetLanguagesSet()
 
-	def index(self, str text_source, str language, bool traces = False):
+	def index(self, str text_source, str language, bool traces=False):
 		"""Index the text in text_source with a given language. (Call
 		get_languages_set() to see which languages are supported.) After
 		indexing, results are stored in the m_index attribute. If traces==True,

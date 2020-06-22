@@ -263,7 +263,7 @@ def fix_wheel_ppc64le(whl_path):
     os.mkdir(tmp_dir)
     extract_wheel(whl_path, tmp_dir)
 
-    # add compatiblity with different platform tag
+    # add compatibility with different platform tag
     module_pattern = os.path.join(tmp_dir, 'iknowpy', 'engine.*pc64le-*.so')
     module_paths = glob.glob(module_pattern)
     if len(module_paths) == 0:
