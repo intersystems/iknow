@@ -13,14 +13,12 @@ jobs in .travis.yml."""
 import itertools
 
 build_times = {
-    'manylinux2014_aarch64': 13*60+8,
-    'manylinux2014_ppc64le': 12*60+2,
-    'manylinux2014_x86_64': 14*60+3,
-    'manylinux2014_i686': 12*60+46,
-    'manylinux2010_x86_64': 12*60+21,
-    'manylinux2010_i686': 13*60,
-    'Mac OS X 10.9 x86_64': 20*60+6,
-    'Windows x86_64': 12*60+33
+    'manylinux2014_aarch64': 15*60+29,
+    'manylinux2014_ppc64le': 17*60+5,
+    'manylinux2010_x86_64': 12*60+39,
+    'manylinux2010_i686': 13*60+3,
+    'Mac OS X 10.9 x86_64': 23*60+49,
+    'Windows x86_64': 12*60+13
 }
 
 QUEUE_LENGTH = 5
