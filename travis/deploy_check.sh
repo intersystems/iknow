@@ -28,7 +28,7 @@ set -euxo pipefail
 
 if [[ "$TRAVIS_BRANCH" == "master" ]] && \
     [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && \
-    [ -n "$(git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT | grep modules/iknowpy/iknowpy/version.py)" ]
+    git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT | grep modules/iknowpy/iknowpy/version.py
 then
   if grep ".dev[0-9][0-9]*'" "$REPO_ROOT/modules/iknowpy/iknowpy/version.py"; then
     echo TestPyPI
