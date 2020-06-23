@@ -1,7 +1,7 @@
 """Export definitions from engine.h"""
 
 from libcpp.string cimport string
-from libcpp cimport bool
+from libcpp cimport bool as cpp_bool
 from libcpp.set cimport set
 from libcpp.vector cimport vector
 from .IkConceptProximity cimport ProximityPairVector_t
@@ -76,7 +76,7 @@ cdef extern from "../../engine/src/engine.h" nogil:
 		vector[string] m_traces
 
 		CPPiKnowEngine() except +
-		void index(const string& text_source, const string& language, bool traces) except +
+		void index(const string& text_source, const string& language, cpp_bool traces) except +
 		void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) except +
 
 		@staticmethod
