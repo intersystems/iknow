@@ -46,9 +46,9 @@ The easiest way to see for yourself what iKnow does with text is by giving it a 
 
    # or make it a little nicer
    for s in engine.m_index['sentences']:
-     for e in s['entities']:
-       print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
-     print('\n')
+       for e in s['entities']:
+           print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
+       print('\n')
    ```
 
 If you are looking for another programming language or interface, check out the other [APIs](https://github.com/intersystems/iknow/wiki/APIs). For more on the Python interface, move on to the [Getting Started](https://github.com/intersystems/iknow/wiki/Getting-Started) section in the wiki!
