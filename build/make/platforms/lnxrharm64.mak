@@ -18,6 +18,11 @@ OBJECTSUFFIX = .o
 LIBFLAGS = -fPIC
 OBJECTFLAGS += -c $(CPPLANGFLAG) -O2 -DBIT64PLAT -DSIZEOF_LONG=8 -Wno-non-template-friend -DLINUX -DUNIX $(if $(CREATELIBRARY),$(LIBFLAGS))
 
+###Japanese language model is optimized forever...
+ifeq ($(UNOPTIMIZED), 1)
+OBJECTFLAGS += -O0
+endif
+
 ###Stage 2a: Objects->Library
 LIBRARIAN = g++
 LIBRARYDIRFLAG = -L

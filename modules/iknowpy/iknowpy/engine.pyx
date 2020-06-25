@@ -1,6 +1,8 @@
 # distutils: language=c++
 # cython: c_string_type=unicode, c_string_encoding=utf8
 
+cimport cython
+import typing
 from cython.operator cimport dereference as deref, postincrement as postinc
 from .engine cimport *
 
@@ -40,45 +42,72 @@ cdef char* aType_to_str(aType t) except NULL:
 
 
 cdef class iKnowEngine:
-	"""Python wrapper for C++ iKnowEngine class."""
+	"""A class that represents an instance of the iKnow Natural Language
+	Processing engine. iKnow is a library for Natural Language Processing that
+	identifies entities (phrases) and their semantic context in natural language
+	text in English, German, Dutch, French, Spanish, Portuguese, Swedish,
+	Russian, Ukrainian, Czech and Japanese.
+
+	Index some text by calling the index() method. After this method completes,
+	results are stored in the m_index attribute. If applicable, linguistic trace
+	information is stored in the m_traces attribute."""
 	cdef CPPiKnowEngine engine
 
 	def __cinit__(self):
+		"""Initialize the underlying C++ iKnowEngine class"""
 		self.engine = CPPiKnowEngine()
 
 	@staticmethod
-	def get_languages_set():
+	@cython.binding(True)
+	def get_languages_set() -> typing.Set[typing.Text]:
+		"""Return the set of supported languages."""
 		return CPPiKnowEngine.GetLanguagesSet()
 
-	def index(self, str text_source, str language, bool traces = False):
+	@cython.binding(True)
+	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False) -> None:
+		"""Index the text in text_source with a given language. Supported
+		languages are given by get_languages_set(). After indexing, results are
+		stored in the m_index attribute. The traces argument is optional and is
+		False by default. If traces is True, then the linguistic trace
+		information is stored in the m_traces attribute."""
 		if language not in self.get_languages_set():
 			raise ValueError('Language {!r} is not supported.'.format(language))
 		return self.engine.index(text_source, language, traces)
 
-	def add_udct_annotation(self, size_t start, size_t stop, str UdctLabel):
+	@cython.binding(True)
+	def add_udct_annotation(self, start: int, stop: int, str UdctLabel: typing.Text) -> None:
+		"""Add a custom user dictionary annotation."""
 		return self.engine.addUdctAnnotation(start, stop, UdctLabel)
 
 	@property
 	def _m_index_raw(self):
-		"""Raw representation of the index following Cython default type coercions. For debug use only."""
+		"""Raw representation of the index following Cython default type
+		coercions. For debug use only."""
 		return self.engine.m_index
 
 	@property
-	def m_traces(self):
-		"""Return the linguistic trace information"""
+	def m_traces(self) -> typing.List[typing.Text]:
+		"""The linguistic trace information, as a list of strings."""
 		return self.engine.m_traces
 
 	@property
-	def m_index(self):
-		"""The data after indexing.
+	def m_index(self) -> typing.Dict[typing.Text, typing.Any]:
+		"""The data after indexing, in dictionary form.
 
-		m_index['sentences'] : a list of sentences in the text source after indexing.
-		m_index['sentences'][i] : the ith sentence in the text source after indexing.
-		m_index['sentences'][i]['entities'] : a list of text entities in the ith sentence after indexing.
-		m_index['sentences'][i]['path'] : a list representing the path in the ith sentence.
-		m_index['sentences'][i]['path_attributes'] : a list of spans in the ith sentence's path after attribute expansion.
-		m_index['sentences'][i]['sent_attributes'] : a list of attribute sentence markers for the ith sentence.
-		m_index['proximity'] : the proximity pairs in the text source after indexing.
+		m_index['sentences'] : a list of sentences in the text source after
+			indexing.
+		m_index['sentences'][i] : the ith sentence in the text source after
+			indexing.
+		m_index['sentences'][i]['entities'] : a list of text entities in the ith
+			sentence after indexing.
+		m_index['sentences'][i]['path'] : a list representing the path in the
+			ith sentence.
+		m_index['sentences'][i]['path_attributes'] : a list of spans in the ith
+			sentence's path after attribute expansion.
+		m_index['sentences'][i]['sent_attributes'] : a list of attribute
+			sentence markers for the ith sentence.
+		m_index['proximity'] : the proximity pairs in the text source after
+			indexing.
 		"""
 		cdef list sentences_mod = []
 		cdef list entities_mod, sent_attrs_mod

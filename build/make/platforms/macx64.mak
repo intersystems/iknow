@@ -51,7 +51,7 @@ LIBRARIAN = $(GNUTOOL)
 LIBRARYDIRFLAG = -L
 LIBRARYSEARCHFLAG = -l
 
-LFLAGS = $(PLATARCH) -Wl,-multiply_defined,suppress -stdlib=$(STDLIB)
+LFLAGS = $(PLATARCH) -Wl,-multiply_defined,suppress -Wl,-headerpad_max_install_names -stdlib=$(STDLIB)
 # Note that dylib's need a -install_name to be set
 LIBRARYFLAGSDYN = -dynamiclib -install_name @loader_path/$(@F)
 LIBRARYFLAGSSO = -dynamic -bundle

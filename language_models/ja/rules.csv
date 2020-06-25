@@ -296,6 +296,7 @@
 2508;5;SBegin|JPAdv+JPAdjNoun|JPSuruNoun|JPCon|JPde;*|JPCon|Join|Join|JPParticleDE;
 3282;5;SBegin|JPAdv+JPAdjNoun|JPSuruNoun|JPya;*|JPCon|Join|^JPya;
 3912;5;"特別"|JPKatakana;-JPAdv|+Dummy;
+4588;5;SBegin|JPAdjNoun|JPSuffixNoun+JPSuffixPerson;*|-JPAdv|JPCon;
 1883;5;SBegin|JPAdv+JPAdjNoun+^"治"|^JPni;*|JPAdv|*;
 3102;5;JPCon|"代わり"|^JPmasu+^SEnd;^JPCon|Join|+Dummy;
 3173;5;"当然"|JPCon;-JPAdjNoun+JPBeginRelation|^JPCon;
@@ -520,7 +521,7 @@
 28;5;JPtoiu|JPno|JPha;JPNonRelevant|JPNonRelevant|JPParticleHA;
 29;5;JPParticlePREPO|JPno|JPha;JPParticlePREPO|JPNINounOther|-JPVerbOther;
 1340;5;JPCon|JPno|JPNINounOther|JPde;^JPCon|JPRelation|Join|JPParticleDE;
-2158;5;JPto|JPshite|JPVerb;JPNonRelevant|JPBeginRelation|JPVerb;
+2158;5;JPto|JPshite|JPVerb+^JPConjVerb;JPNonRelevant|JPBeginRelation|JPVerb;
 2159;5;JPto|JPshite;JPParticlePREPO+JPtoshite|Join;
 1330;5;JPParticlePREPO|JPno;JPParticlePREPO|JPNonRelevant;
 30;5;JPCon|JPha|JPCon;-JPVerb+Topic|-JPVerbOther|^JPCon;
@@ -811,7 +812,6 @@
 1136;5;JPu|JPke;JPVerbOther+JPVerbNoun|Join;
 4404;5;"か"|"な"|"あ"|BracketClose:JPPunctuation;JPParticleKA|JPNonRelevant|Join|*;
 3900;5;JPna|"あ";JPna+JPHiragana|Join;
-4011;5;JPna|JPga|JPre;JPVerbOther+JPVerbNoun|Join|Join;
 4012;5;JPna|JPga;JPAdjVStem|Join;
 2730;5;JPna|JPku;JPnaku+JPVerbOther+JPNegation|Join;
 2880;5;JPna|JPgu;JPVerbOther|Join;
@@ -1588,6 +1588,8 @@
 239;5;JPAdjNoun+^"異常"+^"不良"|JPSuruNoun+^"軽快"+^"持続"|JPSuruVerb;JPSuruNoun|Join|JPSuruVerb;
 951;5;JPAdjNoun+JPAdv|JPNumber;JPAdjNoun|*;
 952;5;JPAttributive+JPAdv|JPNumber;JPAttributive|JPNumber;
+4587;5;JPAdjNoun|"に"|JPAttributive+JPVerbBase;*|*|-JPAttributive;
+4586;5;JPAttributive+JPVerbBase|JPPartAdvNOUN:JPConj:"か":"の":JPPunctuation:SEnd:JPNonRelevant;-JPAttributive|*;
 240;5;JPAdjNoun|JPCon;-JPAdv|^JPCon-JPSuruNoun;
 241;5;JPAdjNoun|JPSuruNoun|JPno;-JPAdv|JPCon|JPno;
 242;5;JPAdjVStem|JPdatta;-JPAdjVStem|JPdatta;
@@ -1685,7 +1687,7 @@
 4029;5;JPwa|JPComma;-JPVerbOther|^JPComma;
 4049;5;^JPni+^JPParticleNI+^SBegin|JPVerbNoun+^"あまり"|JPVerbOther+^JPkara+^JPtame+^JPto+^JPya|JPComma;*|^JPCon|Join|^JPComma;
 4198;5;JPComma|JPVerbOther|JPVerbOther+JPSuffixNoun|JPComma;JPComma|JPCon|Join|JPComma;
-4205;5;JPComma:JPnakaguro|JPVerbOther|JPVerbOther|JPComma;+Dummy|JPCon|Join|JPComma;
+4205;5;JPComma:JPnakaguro|JPVerbOther|JPVerbOther+^JPya|JPComma;+Dummy|JPCon|Join|JPComma;
 4228;5;JPCon|JPVerbOther+^JPno|JPVerbOther+^JPkara+^JPto+^JPya|JPComma;JPCon|Join|Join|JPComma;
 4277;5;JPVerbOther+^JPno|JPVerbOther+JPAdjVStem|JPComma;-JPVerbOther+Dummy|-JPVerbOther-JPAdjVStem+Dummy|JPComma;
 4285;5;JPAdjNoun:JPCon|JPLinkV|JPtame|JPComma;JPCon|^JPLinkV+JPEndRelation|Join|JPComma;
@@ -2454,7 +2456,6 @@
 1889;5;JPCon|JPmo|JPVerb;^JPCon|JPParticleMO|^JPVerb;
 3479;5;JPParticleMO|JPdekinai;JPParticleMO|JPVerb+JPNegation;
 3009;5;JPmo|JPdekinai;JPParticleMO|JPVerb+JPNegation;
-3782;5;JPmo|JPchi;JPVerb+JPHiragana|Join;
 4171;5;BracketOpen|JPmo|JPtsu;BracketOpen|JPCon+JPHiragana|Join;
 464;5;^JPni+^JPParticleNI+^SBegin|JPmo|JPVerbEndOther+^JPi+^"こう"+^JPri;+Dummy|JPVerb|Join;
 3506;5;JPVerbOther|JPta|JPre;JPVerbNoun+JPVerbOther|Join|Join;
@@ -2685,7 +2686,6 @@
 1768;5;JPVerb|JPVerbEndOther+JPVerbPastAttributive;JPVerb+JPVerbPastAttributive|Join;
 2106;5;JPVerb|JPVerbEndOther+JPNegation;JPVerb+JPNegation|Join;
 2309;5;JPVerb+JPNegation+^"思わず"|JPVerbEndOther;JPVerb+JPNegation|Join;
-4449;5;BracketOpen|JPsu|JPda|JPchi;*|JPCon+JPHiragana|Join|Join;
 3769;5;JPVerb+JPHiragana|JPchi+JPHiragana;JPVerb+JPHiragana|Join;
 540;5;JPVerb+^JPPrefixAdjVStem+^JPVerbPastAttributive|JPVerbEndOther+^JPbi;JPVerb|Join;
 2733;5;JPConjVerb+JPBeginRelation|JPSuffixVerb;JPVerb+JPBeginRelation|Join;
@@ -3937,8 +3937,7 @@
 3655;5;JPni|JPVerbNoun|JPha:JPParticleHA;JPParticleNI|JPCon|^JPParticleHA;
 3659;5;JPni|JPVerbNoun|JPnakaguro;JPParticleNI|JPCon|+Dummy;
 3660;5;JPni|JPVerbNoun|JPspace;JPParticleNI|JPCon|+Dummy;
-3661;5;JPni|JPVerbNoun|JPto;JPParticleNI|JPCon|JPParticleTO;
-3663;5;JPni|JPVerbNoun|JPParticleTO;JPParticleNI|JPCon|+Dummy;
+3661;5;JPni|JPVerbNoun|JPto:JPParticleTO;JPParticleNI|JPCon|JPParticleTO;
 3664;5;JPni|JPVerbNoun|JPParticleNO;JPParticleNI|JPAttributive|Join;
 3653;5;JPni|JPVerbNoun+^"いい"+^"買い"+^"強い"|^JPParticleKA+^JPAdv+^JPSuffixVerb+^JPLinkV+^JPVerbNoun+^JPExpressionNR+^JPNonRelevant+^SEnd;JPParticleNI+JPEndRelation|JPVerb|+Dummy;
 4261;5;SBegin|JPAdvTime|JPVerbNoun+^JPRule289|^JPLinkV+^JPno+^JPParticleNO+^SEnd;*|^JPAdvTime|JPVerb|+Dummy;

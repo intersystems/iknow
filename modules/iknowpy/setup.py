@@ -263,7 +263,7 @@ def fix_wheel_ppc64le(whl_path):
     os.mkdir(tmp_dir)
     extract_wheel(whl_path, tmp_dir)
 
-    # add compatiblity with different platform tag
+    # add compatibility with different platform tag
     module_pattern = os.path.join(tmp_dir, 'iknowpy', 'engine.*pc64le-*.so')
     module_paths = glob.glob(module_pattern)
     if len(module_paths) == 0:
@@ -400,6 +400,7 @@ if sys.platform == 'win32':
     enginelibs_name_pattern = 'iKnow*.dll'
     enginelibs_path_pattern = os.path.join('../../kit/x64/Release/bin', enginelibs_name_pattern)
     extra_compile_args = []
+    extra_link_args = []
 else:
     if len(sys.argv) > 1 and sys.argv[1] == 'install':
         # On Unix, we do not support direct installation. Create a wheel instead
@@ -417,6 +418,7 @@ else:
         os.environ['CC'] = 'clang++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'clang++'
         extra_compile_args = ['-std=c++11']
+        extra_link_args = ['-headerpad_max_install_names']
         if install_wheel:
             # set wheel target platform to that of the build platform
             macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
@@ -428,6 +430,7 @@ else:
         os.environ['CC'] = 'g++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'g++'
         extra_compile_args = []
+        extra_link_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
@@ -456,8 +459,21 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
 else:
     no_dependencies = True
 
-# Copy license file
+# include MIT license in distribution
 shutil.copy2('../../LICENSE', '.')
+
+# include ICU license in distribution
+icu_license_found = False
+for root, _, files in os.walk(icudir):
+    for filename in files:
+        if filename == 'LICENSE':
+            icu_license_found = True
+            shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
+            break
+    if icu_license_found:
+        break
+if not icu_license_found:
+    raise BuildError('ICU license not found in {}'.format(icudir))
 
 with open('README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
@@ -502,7 +518,8 @@ try:
                 include_dirs=['../engine/src', '../core/src/headers', '../base/src/headers', os.path.join(icudir, 'include')],
                 library_dirs=library_dirs,
                 libraries=['iknowengine'],
-                extra_compile_args=extra_compile_args
+                extra_compile_args=extra_compile_args,
+                extra_link_args=extra_link_args
             )],
             compiler_directives={'language_level': '3'}
         ),
@@ -511,12 +528,13 @@ try:
         }
     )
 finally:
-    # remove dependent libraries and license from package source
+    # remove dependent libraries and licenses from package source
     for lib_path in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
         remove(lib_path)
     for lib_path in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
         remove(lib_path)
     remove('LICENSE')
+    remove('LICENSE_ICU')
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
     fix_wheel_ppc64le(find_wheel())
