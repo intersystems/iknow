@@ -7,8 +7,8 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-#sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-#import engine as iknowpy
+# sys.path.insert(0, 'C:/iKnow_GH/kit/x64/Release/bin')
+# import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
 import iknowpy
 
@@ -18,8 +18,8 @@ import time
 
 # print(sys.argv)
 
-in_path_par = "C:/P4/Users/jdenys/text_input_data/en/"
-out_path_par = "C:/tmp/"
+in_path_par = "C:/tmp/text_input_data/"
+out_path_par = "C:/tmp/output/"
 language_par = "en"
 OldStyle = True
 
@@ -63,18 +63,23 @@ for text_file in f:
     f_trace = open(out_path_par + text_file + ".log", "wb")
     f_trace.write(b'\xef\xbb\xbf') # Utf8 BOM
     for trace in engine.m_traces:
-	    #print(trace)
-        key, value = trace.split(':')[0],trace.split(':')[1]
+        print(trace)
+        key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
         if (key=='LexrepCreated'):
-		    # print(value)
             Literal = value.split('"')[1]
-            write_ln(f_trace, 'Literal='+Literal)
+            write_ln(f_trace, 'Literal:'+Literal)
+#            pass
         elif (key == 'NormalizeToken'):
-            pass
+            write_ln(f_trace, key+":"+value)
+#            pass
         elif (key == 'AttributeDetected'):
-            pass
+            attribute_type = value.split(';')[0]
+            Literal = value.split('"')[1]
+            write_ln(f_trace, key+":"+attribute_type+";"+Literal)
+#            pass
         elif (key == 'PreprocessToken'):
-            pass
+            write_ln(f_trace, key+":"+value)
+#            pass
         elif (key == "SentenceFound"):
             Sentence = value.split('"')[7]
             write_ln(f_trace, 'Sentence='+Sentence)
@@ -84,39 +89,57 @@ for text_file in f:
                 continue
             if (Index=='E'):
                 continue
-            write_ln(f_trace, Index+":"+Labels)
+            write_ln(f_trace, "LexrepIdentified:"+Index+":"+Labels)
         elif (key == "RuleApplication"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "RuleApplicationResult"):
+            write_ln(f_trace, key + value)
             pass
         elif (key == "JoinResult"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "RulesComplete"):
             pass
         elif (key == "AmbiguityResolved"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "ConceptFiltered"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "MergingConcept"):
             pass
         elif (key == "MergedConcept"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "MergingRelation"):
             pass
         elif (key == "MergedRelation"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "MergedRelationNonrelevant"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "SentenceComplete"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "EntityVector"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "MergedKatakana"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "LabelKatakana"):
-            pass
+            write_ln(f_trace, key + value)
+#            pass
         elif (key == "TraceTime"):
-            pass
+            ## Express time in milliseconds:
+            milli_time = value.split(';')[1]
+            write_ln(f_trace, key + ":" + milli_time + " ms")
+            ## Express time in microseconds:
+#            micro_time = value.split(';')[2]
+#            write_ln(f_trace, key + ":" + micro_time + " µs")
+#            pass
         else:
             print(key)
 
