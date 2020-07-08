@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/intersystems/iknow.svg?branch=master)](https://travis-ci.com/intersystems/iknow)
+
 # iKnow
 
 **iKnow** is a library for Natural Language Processing that identifies entities (phrases) and their semantic context in natural language text in English, German, Dutch, French, Spanish, Portuguese, Swedish, Russian, Ukrainian, Czech and Japanese. It was originally developed by [i.Know](https://www.linkedin.com/company/i.know/about/) in Belgium, acquired by [InterSystems](https://www.intersystems.com) in 2010 to be embedded in its Caché and [IRIS Data Platform](http://www.intersystems.com/iris) products. InterSystems published the iKnow engine as open source in 2020. 
@@ -46,9 +48,9 @@ The easiest way to see for yourself what iKnow does with text is by giving it a 
 
    # or make it a little nicer
    for s in engine.m_index['sentences']:
-     for e in s['entities']:
-       print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
-     print('\n')
+       for e in s['entities']:
+           print('<'+e['type']+'>'+e['index']+'</'+e['type']+'>', end=' ')
+       print('\n')
    ```
 
 If you are looking for another programming language or interface, check out the other [APIs](https://github.com/intersystems/iknow/wiki/APIs). For more on the Python interface, move on to the [Getting Started](https://github.com/intersystems/iknow/wiki/Getting-Started) section in the wiki!

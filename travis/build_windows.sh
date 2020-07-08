@@ -15,6 +15,7 @@ echo '+ PYPI_TOKEN="$2"'
 PYPI_TOKEN="$2"
 echo '+ TESTPYPI_TOKEN="$3"'
 TESTPYPI_TOKEN="$3"
+set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
 export PATH=$MSBUILD_PATH:$PATH
 
