@@ -50,11 +50,11 @@ namespace iknow
       IkSummarizer(const IkSummarizer&); // Prevent copy-construction
       IkSummarizer& operator=(const IkSummarizer&); // Prevent assignment
 
-      typedef map<iknow::base::String, int> ScaleFactorsWords;
+      typedef std::map<iknow::base::String, int> ScaleFactorsWords;
       ScaleFactorsWords m_scaleFactorsW;
-      typedef map<int, double> ScaleFactorsSentences;
+      typedef std::map<int, double> ScaleFactorsSentences;
       ScaleFactorsSentences m_scaleFactorsS;
-      typedef vector<IkSummaryImportanceRule*> ImportanceRules; 
+      typedef std::vector<IkSummaryImportanceRule*> ImportanceRules; 
       ImportanceRules m_importanceRules; // an array of pointers is chosen because sorting is more performant
 
       void addImportanceRule(SENTENCE_IMPORTANCE sentenceImportance, const iknow::base::String& text, bool wholeWord) {

@@ -9,6 +9,8 @@
 #include "engine.h"
 #include "iKnowUnitTests.h"
 
+using namespace std;
+
 using iknow::base::String;
 using iknow::base::IkStringEncoding;
 using namespace iknowdata;
@@ -187,27 +189,27 @@ void a_short_demo(void)
 		for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
 			const Sent_Attribute& attribute = *it_marker;
 
-			std::string a_type("unknown"); // enum aType { Negation=1, DateTime=2, PositiveSentiment=5, NegativeSentiment=6, Frequency=8, Duration=9, Measurement=10, Certainty=11, Other }; 
-			switch (attribute.type_) { // translate the attribute type
-			case Sent_Attribute::Negation:
+			std::string a_type("unknown");
+			switch (attribute.type) { // translate the attribute type
+			case Attribute::Negation:
 				a_type = "negation";
 				break;
-			case Sent_Attribute::DateTime:
+			case Attribute::DateTime:
 				a_type = "date_time";
 				break;
-			case Sent_Attribute::PositiveSentiment:
+			case Attribute::PositiveSentiment:
 				a_type = "positive_sentiment";
 				break;
-			case Sent_Attribute::NegativeSentiment:
+			case Attribute::NegativeSentiment:
 				a_type = "negative_sentiment";
 				break;
-			case Sent_Attribute::Frequency:
+			case Attribute::Frequency:
 				a_type = "frequency";
 				break;
-			case Sent_Attribute::Duration:
+			case Attribute::Duration:
 				a_type = "duration";
 				break;
-			case Sent_Attribute::Measurement:
+			case Attribute::Measurement:
 				a_type = "measurement";
 				std::cout << a_type << ":\"" << attribute.marker_ << "\" ";
 
@@ -243,7 +245,7 @@ void a_short_demo(void)
 		if (!sent.path_attributes.empty()) { // Path spans : attribute expansion
 			std::cout << "Attribute Path Spans: " << std::endl;
 			for (PathAttributeIterator it_path_attribute = sent.path_attributes.begin(); it_path_attribute != sent.path_attributes.end(); ++it_path_attribute) { // iterate over the attribute path expansion
-				const Path_Attribute_Span& attribute_expansion = *it_path_attribute;
+				const Path_Attribute& attribute_expansion = *it_path_attribute;
 				const Attribute_Ref& attribute_ref = attribute_expansion.sent_attribute_ref;
 				const Entity_Ref& entity_ref_begin = attribute_expansion.entity_start_ref;
 				const Entity_Ref& entity_ref_end = attribute_expansion.entity_stop_ref;

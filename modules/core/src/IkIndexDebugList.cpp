@@ -509,10 +509,10 @@ void IkIndexDebug<Utf8List>::LabelKatakana(const IkLexrep& lexrep, const IkKnowl
 }
 
 #ifdef AIX
-void IkIndexDebug::StartTimer(void)
+void IkIndexDebug<Utf8List>::StartTimer(void)
 {
 }
-void IkIndexDebug::TraceTheTime(const int action) {
+void IkIndexDebug<Utf8List>::TraceTheTime(const int action) {
 }
 #else //!AIX
 // using std::chrono::system_clock;

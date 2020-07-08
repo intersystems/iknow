@@ -15,11 +15,10 @@
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
+using namespace std;
+
 using namespace iknow::core;
 using namespace iknow::base;
-
-using std::string;
-using std::stringstream;
 
 // sum of all summary relevances of lexreps
 double IkIndexOutput::computeSummaryRelevanceCore() const
@@ -54,41 +53,6 @@ String IkIndexOutput::GetNormalizedText() const
   if (!text.empty()) text.erase(text.size() - 1);
   return text;
 }
-
-#define TYPE_SENTENCE		3
-#define TYPE_CONCEPT		4
-#define TYPE_RELATION		5
-#define TYPE_NONRELEVANT	6
-#define TYPE_CRC			8
-#define TYPE_PATH			9
-#define TYPE_DOCUMENT	   10
-#define TYPE_LITERAL	   11
-
-typedef size_t EntityId;
-typedef size_t LiteralId;
-typedef size_t StemId;
-typedef size_t OccurrenceId;
-typedef size_t CrcId;
-
-//Simplify the syntax of declaring vectors that use the pool allocator
-//(On Solaris don't bother...awful old STL implementation)
-template<typename T>
-struct poolvec {
-#ifndef SOLARIS
-	typedef std::vector<T, PoolAllocator<T> > type;
-#else //SOLARIS
-	typedef std::vector<T> type;
-#endif //SOLARIS
-};
-
-template<typename K, typename V>
-struct poolmap {
-#ifndef SOLARIS
-	typedef std::map<K, V, less<K>, PoolAllocator<std::pair<const K, V> > > type;
-#else //SOLARIS
-	typedef std::map<K, V> type;
-#endif
-};
 
 // Dominance structures
 typedef IkIndexOutput::Frequency Frequency;
@@ -167,7 +131,7 @@ struct SingleWordP1Corrector {
 		if (bLP) {
 			size_t entity_size = token_vct_.size();
 			size_t position = b_right_most_significant_ ? 0 : entity_size; // start position
-			for (vector<WordPtr>::iterator it = token_vct_.begin(); it != token_vct_.end(); it++) { // read left to right
+			for (std::vector<WordPtr>::iterator it = token_vct_.begin(); it != token_vct_.end(); it++) { // read left to right
 				Frequency frqSingleWord = singles_[*it];
 				b_right_most_significant_ ? position++ : position--; // increment position
 				size_t factor = entity_size - position;
@@ -249,27 +213,6 @@ struct LocalDominanceCalculator {
 private:
 	void operator=(const LocalDominanceCalculator&); // must not be copied
 };
-
-
-typedef size_t PathOffset;
-struct DirectOutputPathAttribute {
-	static const PathOffset kUnknown = static_cast<OccurrenceId>(-1);
-	PropertyId type;
-	PathOffset begin;
-	PathOffset end;
-	PathOffset continuation;
-};
-
-//Map from type to attribute
-typedef poolvec<DirectOutputPathAttribute>::type DirectOutputPathAttributes;
-typedef poolmap<PropertyId, DirectOutputPathAttributes>::type DirectOutputPathAttributeMap;
-typedef poolvec<const IkMergedLexrep*>::type DirectOutputPathOffsets;
-struct DirectOutputPath {
-	DirectOutputPathOffsets offsets;
-	DirectOutputPathAttributeMap attributes;
-};
-
-typedef poolvec<DirectOutputPath>::type DirectOutputPaths;
 
 class pathLabelAttribute {
 public:
@@ -508,10 +451,13 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 	m_concept_proximity.rehash(sentences_size * 32); // set ready for calculating and collecting concept proximity data
 
 	size_t path_count = 0;
-	DirectOutputPaths path_vector; // collector for path data
+	// DirectOutputPaths path_vector; // collector for path data
+	size_t sent_count = 0;
 
 	for (Sentences::const_iterator i = SentencesBegin(); i != SentencesEnd(); ++i) { // scroll over sentences
 		const IkSentence* sentence = &(*i);
+		DirectOutputPaths path_vector; // collector for path data
+
 		/*
 		const IkKnowledgebase* kb = sentence->GetLexrepsBegin()->LexrepsBegin()->GetKnowledgebase(); // KB does not change in a sentence.
 		const iknow::core::AttributeId entity_attribute_type = kb->AttributeIdForName(kEntityString);
@@ -636,8 +582,9 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 				}
 			}
 		}
+		paths_.push_back(path_vector); // store path information for sentence
 	}
-
+	/*
 	// path data handling : DirectOutputPaths path_vector; 
 	std::vector<const IkMergedLexrep*> path_attributes;
 	path_attributes.reserve(8); // big enough to avoid reallocations
@@ -660,6 +607,7 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 			}
 		}
 	}
+	*/
 	size_t uni_con_count = 0;  // unique concepts count
 	size_t uni_rel_count = 0; // unique relations count
 	// size_t semdom_con_count = 0; // sum of concept semantic dominance

@@ -18,6 +18,8 @@ const std::set<std::string>& iKnowEngine::GetLanguagesSet(void) {
 
 typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug<TraceListType>*, void*, Stemmer*);
 
+using namespace std;
+
 using iknow::shell::CProcess;
 using iknow::shell::SharedMemoryKnowledgebase;
 using iknow::shell::CompiledKnowledgebase;
@@ -43,7 +45,7 @@ using iknow::core::path::CRCs;
 using iknowdata::Text_Source;
 using iknowdata::Sent_Attribute;
 using iknowdata::Entity;
-using iknowdata::Path_Attribute_Span;
+using iknowdata::Path_Attribute;
 
 struct UData
 {
@@ -143,7 +145,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 									is_unit = true;
 								}
 							}
-							Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(id_property);
+							iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(id_property);
 							unsigned short idx_attribute = static_cast<unsigned short>(sentence_data.sent_attributes.size()); // attribute reference
 							mapLexrep2Attribute.insert(make_pair(lexrep, make_pair(idx_sentence, idx_attribute))); // link ID to lexrep
 
@@ -151,7 +153,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 								sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
 								sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
 							}
-							if (id_property == Sent_Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
+							if (a_type == iknowdata::Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
 								if (!is_measure) {
 									idx_measure = (int) sentence_data.sent_attributes.size() - 1;
 									is_measure = is_marker_measure = true;
@@ -219,11 +221,10 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	data->GetProximityPairVector(udata.iknow_proximity); // Proximity is document related
 
 	// treat attribute paths
-	/*
 	for (iknow::core::IkIndexOutput::vecAttributePaths::iterator itAPaths = data->AttributePathsBegin(); itAPaths != data->AttributePathsEnd(); ++itAPaths) {
-		Path_Attribute_Span path_attribute_span;
+		Path_Attribute path_attribute_span;
 
-		Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(itAPaths->first);
+		iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(itAPaths->first);
 
 		std::vector<const IkMergedLexrep*>& lexreps_vec = itAPaths->second; // attribute path expansion
 		const IkMergedLexrep* start = *(lexreps_vec.begin());
@@ -244,7 +245,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			}
 		}
 	}
-	*/
 	if (debug) {
 		const iknow::base::IkTrace<Utf8List>& trace_data = debug->GetTrace();
 		udata.iknow_traces.reserve(trace_data.end() - trace_data.begin()); // reserve memory for storage vector
