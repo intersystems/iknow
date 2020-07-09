@@ -584,30 +584,7 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 		}
 		paths_.push_back(path_vector); // store path information for sentence
 	}
-	/*
-	// path data handling : DirectOutputPaths path_vector; 
-	std::vector<const IkMergedLexrep*> path_attributes;
-	path_attributes.reserve(8); // big enough to avoid reallocations
-	for (DirectOutputPaths::iterator it = path_vector.begin(); it != path_vector.end(); ++it) {
-		DirectOutputPath path = *it;
-		for (DirectOutputPathAttributeMap::iterator it_attr_map = path.attributes.begin(); it_attr_map != path.attributes.end(); ++it_attr_map) { // iterate the attributes
-			// const PropertyId& type = it_attr_map->first;
-			const DirectOutputPathAttributes& attributes = it_attr_map->second;
 
-			for (DirectOutputPathAttributes::const_iterator it_attr = attributes.begin(); it_attr != attributes.end(); ++it_attr) {
-				PropertyId type = it_attr->type;
-				PathOffset begin = it_attr->begin;
-				PathOffset end = it_attr->end;
-				if (end == begin) ++end;
-				path_attributes.clear();
-				for (PathOffset itPath = begin; itPath != end; ++itPath) {
-					path_attributes.push_back(path.offsets[itPath]);
-				}
-				vecAttributePaths_.push_back(std::make_pair(type, path_attributes));
-			}
-		}
-	}
-	*/
 	size_t uni_con_count = 0;  // unique concepts count
 	size_t uni_rel_count = 0; // unique relations count
 	// size_t semdom_con_count = 0; // sum of concept semantic dominance

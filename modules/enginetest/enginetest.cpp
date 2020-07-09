@@ -189,28 +189,8 @@ void a_short_demo(void)
 		for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
 			const Sent_Attribute& attribute = *it_marker;
 
-			std::string a_type("unknown");
-			switch (attribute.type) { // translate the attribute type
-			case Attribute::Negation:
-				a_type = "negation";
-				break;
-			case Attribute::DateTime:
-				a_type = "date_time";
-				break;
-			case Attribute::PositiveSentiment:
-				a_type = "positive_sentiment";
-				break;
-			case Attribute::NegativeSentiment:
-				a_type = "negative_sentiment";
-				break;
-			case Attribute::Frequency:
-				a_type = "frequency";
-				break;
-			case Attribute::Duration:
-				a_type = "duration";
-				break;
-			case Attribute::Measurement:
-				a_type = "measurement";
+			std::string a_type = AttributeName(attribute.type); // translate the attribute type
+			if (attribute.type== Attribute::Measurement) {
 				std::cout << a_type << ":\"" << attribute.marker_ << "\" ";
 
 				std::cout << (!attribute.value_.empty() ? "val=\"" + attribute.value_ + "\" ": "");
@@ -219,8 +199,6 @@ void a_short_demo(void)
 				std::cout << (!attribute.unit2_.empty() ? "unit2=\"" + attribute.unit2_ + "\" " : "");
 				std::cout << std::endl;
 				continue; 
-				
-			default:;
 			}
 
 			std::cout << a_type << ":\"" << attribute.marker_ << "\"" << std::endl;
@@ -246,18 +224,16 @@ void a_short_demo(void)
 			std::cout << "Attribute Path Spans: " << std::endl;
 			for (PathAttributeIterator it_path_attribute = sent.path_attributes.begin(); it_path_attribute != sent.path_attributes.end(); ++it_path_attribute) { // iterate over the attribute path expansion
 				const Path_Attribute& attribute_expansion = *it_path_attribute;
-				const Attribute_Ref& attribute_ref = attribute_expansion.sent_attribute_ref;
-				const Entity_Ref& entity_ref_begin = attribute_expansion.entity_start_ref;
-				const Entity_Ref& entity_ref_end = attribute_expansion.entity_stop_ref;
-
-				// Corresponding sentence attribute marker is attribute_ref
-				const Sent_Attribute& attribute = sent.sent_attributes[attribute_ref];
-				std::cout << "marker:\"" << attribute.marker_ << "\" (span: ";
-				// Path is entity_ref_begin until entity_ref_end
-				for (Entity_Ref entity_span = entity_ref_begin; entity_span <= entity_ref_end; ++entity_span) {
-					std::cout << "\"" << sent.entities[entity_span].index_ << "\" ";
+				std::string a_type = AttributeName(attribute_expansion.type); // translate the attribute type
+				std::cout << "Span_type:\"" << a_type << "\" span=";
+				unsigned short head = attribute_expansion.pos;
+				Entity_Ref head_entity = sent.path[head];
+				std::cout << "\"" << sent.entities[head_entity].index_ << "\""; // head entity
+				for (int i = 1; i < attribute_expansion.span; ++i) {
+					unsigned short trail = head + i;
+					Entity_Ref trail_entity = sent.path[trail];
+					std::cout << " \"" << sent.entities[trail_entity].index_ << "\""; // trail entity
 				}
-				std::cout << ")" << std::endl;
 			}
 		}
 		std::cout << std::endl;

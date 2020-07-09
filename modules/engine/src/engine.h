@@ -65,6 +65,19 @@ namespace iknowdata { // to bundle all generated data
 		Measurement = IKATTMEASURE,
 		Certainty = IKATTCERTAINTY
 	};
+	inline std::string AttributeName(Attribute attribute) { // translate the attribute type
+		switch (attribute) {
+		case Attribute::Negation:			return "negation";
+		case Attribute::DateTime:			return "date_time";
+		case Attribute::PositiveSentiment:	return "positive_sentiment";
+		case Attribute::NegativeSentiment:	return "negative_sentiment";
+		case Attribute::Frequency:			return "frequency";
+		case Attribute::Duration:			return "duration";
+		case Attribute::Measurement:		return "measurement";
+		case Attribute::Certainty:			return "certainty";
+		default:							return "unknown";
+		}
+	}
 	//
 	// Basic functionality of iknow indexing is splitup of text in entities : 4
 	//
@@ -106,10 +119,10 @@ namespace iknowdata { // to bundle all generated data
 	{
 		Attribute type; // attribute type
 		unsigned short pos; // start position in path
-		unsigned short span; // attibute span (= number of entities in paty)
+		unsigned short span; // attibute span (number of path entities)
 
-		Attribute_Ref sent_attribute_ref; // reference to sentence attribute
-		Entity_Ref entity_start_ref, entity_stop_ref; // reference to entity vector range, expressing the attribute expansion.
+		// Attribute_Ref sent_attribute_ref; // reference to sentence attribute
+		// Entity_Ref entity_start_ref, entity_stop_ref; // reference to entity vector range, expressing the attribute expansion.
 	};
 
 	struct Sentence
@@ -122,7 +135,7 @@ namespace iknowdata { // to bundle all generated data
 		Entities			entities;	// the sentence entities
 		Sent_Attributes		sent_attributes;	// the sentence attributes
 		Path				path;		// the sentence path
-		Path_Attributes		path_attributes;	// expanded attributes in the sentence
+		Path_Attributes		path_attributes;	// expanded attributes in the path
 
 		// utility functions : return text source offsets of the sentence : start and stop.
 		size_t offset_start() const { return entities.begin()->offset_start_; }

@@ -207,6 +207,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			}
 		}
 		else { // normal path
+			/*
 			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
 				const IkPath* path = &(*j);
 				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
@@ -215,36 +216,41 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 					sentence_data.path.push_back(entity_id); // reference to sentence entities
 				}
 			}
+			*/
+			{	// collect path attribute expansions
+				DirectOutputPaths& sent_paths = data->paths_[udata.iknow_sentences.size()]; // paths for the sentence (in fact, only one per sentence after introducing path_relevants)
+				for (DirectOutputPaths::iterator it_path = sent_paths.begin(); it_path != sent_paths.end(); ++it_path) // iterate all paths (in fact, only one...)
+				{
+					size_t path_length = it_path->offsets.size();
+					for (int i = 0; i < path_length; ++i) {
+						const IkMergedLexrep* lexrep = it_path->offsets[i];
+						unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
+						sentence_data.path.push_back(entity_id); // reference to sentence entities
+					}
+					DirectOutputPathAttributeMap& amap = it_path->attributes;
+					for (DirectOutputPathAttributeMap::iterator it_attr = amap.begin(); it_attr != amap.end(); ++it_attr) { // iterate per attribute id
+						PropertyId id_attr = it_attr->first;
+						DirectOutputPathAttributes& path_attr = it_attr->second;
+						for (DirectOutputPathAttributes::iterator it_path_attr = path_attr.begin(); it_path_attr != path_attr.end(); ++it_path_attr) { // iterate per attribute id path
+							DirectOutputPathAttribute& pa = *it_path_attr; // single attribute id path = path attribute expansion
+							PropertyId id_attr_path = pa.type; // is equal to "id_attr"
+							PathOffset attr_path_begin = pa.begin; // refers to path
+							PathOffset attr_path_end = pa.end; // refers to path
+							cout << id_attr_path << ":" << attr_path_begin << ":" << attr_path_end << std::endl;
+							Path_Attribute path_attribute;
+							path_attribute.type = static_cast<iknowdata::Attribute>(id_attr_path);
+							path_attribute.pos = (unsigned short) pa.begin; // start position
+							path_attribute.span = (unsigned short) (pa.begin == pa.end ? 1 : pa.end - pa.begin); // attribute expansion span, minimum = 1
+							sentence_data.path_attributes.push_back(path_attribute);
+						}
+					}
+				}
+			}
 		}
 		udata.iknow_sentences.push_back(sentence_data); // Collect single sentence data
 	}
 	data->GetProximityPairVector(udata.iknow_proximity); // Proximity is document related
 
-	// treat attribute paths
-	for (iknow::core::IkIndexOutput::vecAttributePaths::iterator itAPaths = data->AttributePathsBegin(); itAPaths != data->AttributePathsEnd(); ++itAPaths) {
-		Path_Attribute path_attribute_span;
-
-		iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(itAPaths->first);
-
-		std::vector<const IkMergedLexrep*>& lexreps_vec = itAPaths->second; // attribute path expansion
-		const IkMergedLexrep* start = *(lexreps_vec.begin());
-		const IkMergedLexrep* stop = *(lexreps_vec.end() - 1);
-		unsigned short idx_sentence = mapLexrep2Entity[start].first;
-		path_attribute_span.entity_start_ref = mapLexrep2Entity[start].second;
-		path_attribute_span.entity_stop_ref = mapLexrep2Entity[stop].second;
-
-		// Where is the marker ?
-		for (std::vector<const IkMergedLexrep*>::iterator itLexreps = lexreps_vec.begin(); itLexreps != lexreps_vec.end(); ++itLexreps) {
-			mapLexrep2Attribute_type::iterator itLexrep = mapLexrep2Attribute.find(*itLexreps);
-			if (itLexrep != mapLexrep2Attribute.end()) {
-				unsigned short idx_sentence = (itLexrep->second).first;
-				path_attribute_span.sent_attribute_ref = (itLexrep->second).second;
-
-				udata.iknow_sentences[idx_sentence].path_attributes.push_back(path_attribute_span); // store the expanded path attribute.
-				break;
-			}
-		}
-	}
 	if (debug) {
 		const iknow::base::IkTrace<Utf8List>& trace_data = debug->GetTrace();
 		udata.iknow_traces.reserve(trace_data.end() - trace_data.begin()); // reserve memory for storage vector
