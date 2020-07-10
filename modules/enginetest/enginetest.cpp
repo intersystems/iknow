@@ -189,8 +189,8 @@ void a_short_demo(void)
 		for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
 			const Sent_Attribute& attribute = *it_marker;
 
-			std::string a_type = AttributeName(attribute.type); // translate the attribute type
-			if (attribute.type== Attribute::Measurement) {
+			std::string a_type = AttributeName(attribute.type_); // translate the attribute type
+			if (attribute.type_== Attribute::Measurement) {
 				std::cout << a_type << ":\"" << attribute.marker_ << "\" ";
 
 				std::cout << (!attribute.value_.empty() ? "val=\"" + attribute.value_ + "\" ": "");

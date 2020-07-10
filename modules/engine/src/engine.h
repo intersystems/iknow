@@ -55,7 +55,7 @@ namespace iknowdata { // to bundle all generated data
 	typedef unsigned short Entity_Ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 	typedef unsigned short Attribute_Ref; // reference to sentence attribute vector, is less (or equal) Entity_Ref.
 
-	enum class Attribute { // Supported attributes in NLP-Fx
+	enum /*class*/ Attribute { // Supported attributes in NLP-Fx, should be an "enum class", but Cython refuses to build
 		Negation = IKATTNEGATION,
 		DateTime = IKATTTIME,
 		PositiveSentiment = IKATTSENPOSITIVE,
@@ -105,9 +105,9 @@ namespace iknowdata { // to bundle all generated data
 		Sent_Attribute(Attribute att_type,
 			size_t start, size_t stop, 
 			std::string& marker
-		) : type(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
+		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
 
-		Attribute type;
+		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
 		std::string marker_; // the normalized attribute textual representation, utf8 encoded
 		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
@@ -120,9 +120,6 @@ namespace iknowdata { // to bundle all generated data
 		Attribute type; // attribute type
 		unsigned short pos; // start position in path
 		unsigned short span; // attibute span (number of path entities)
-
-		// Attribute_Ref sent_attribute_ref; // reference to sentence attribute
-		// Entity_Ref entity_start_ref, entity_stop_ref; // reference to entity vector range, expressing the attribute expansion.
 	};
 
 	struct Sentence

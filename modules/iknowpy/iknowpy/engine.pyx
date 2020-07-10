@@ -20,7 +20,7 @@ cdef char* eType_to_str(eType t) except NULL:
 	raise ValueError('Entity type {} is unrecognized.'.format(t))
 
 
-cdef char* aType_to_str(aType t) except NULL:
+cdef char* aType_to_str(Attribute t) except NULL:
 	"""Convert attribute type from enum to string."""
 	if t == Negation:
 		return 'Negation'
@@ -110,11 +110,12 @@ cdef class iKnowEngine:
 			indexing.
 		"""
 		cdef list sentences_mod = []
-		cdef list entities_mod, sent_attrs_mod
+		cdef list entities_mod, sent_attrs_mod, path_attrs_mod
 		for sentence in self.engine.m_index.sentences:
 			entities_mod = []
 			sent_attrs_mod = []
-			# use iterator instead of for-in syntax because Entity and Path_Attribute_Span structs don't have default
+			path_attrs_mod = []
+			# use iterator instead of for-in syntax because Entity and Path_Attribute structs don't have default
 			# constructors, which are required with for-in syntax
 			entity_iter = sentence.entities.begin()
 			while entity_iter != sentence.entities.end():
@@ -137,6 +138,12 @@ cdef class iKnowEngine:
 				                       'unit2': deref(sent_attr_iter).unit2,
 				                       'entity_ref': deref(sent_attr_iter).entity_ref})
 				postinc(sent_attr_iter)
+			path_attr_iter = sentence.path_attributes.begin()
+			while path_attr_iter != sentence.path_attributes.end():
+				path_attrs_mod.append({'type': aType_to_str(deref(path_attr_iter).type),
+									   'pos': deref(path_attr_iter).pos,
+									   'span': deref(path_attr_iter).span})
+				postinc(path_attr_iter)
 			sentences_mod.append({'entities': entities_mod, 'sent_attributes': sent_attrs_mod, 'path': sentence.path,
-			                      'path_attributes': sentence.path_attributes})
+			                      'path_attributes': path_attrs_mod})
 		return {'sentences': sentences_mod, 'proximity': self.engine.m_index.proximity}
