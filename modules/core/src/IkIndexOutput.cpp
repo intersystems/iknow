@@ -452,7 +452,7 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 
 	size_t path_count = 0;
 	// DirectOutputPaths path_vector; // collector for path data
-	size_t sent_count = 0;
+	// size_t sent_count = 0;
 
 	for (Sentences::const_iterator i = SentencesBegin(); i != SentencesEnd(); ++i) { // scroll over sentences
 		const IkSentence* sentence = &(*i);
