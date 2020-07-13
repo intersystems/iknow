@@ -9,10 +9,10 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-import engine as iknowpy
+# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+# import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
-# import iknowpy
+import iknowpy
 
 import os
 import pprint
@@ -139,6 +139,7 @@ for text_file in f_rec:
                    sent_attribute_raw = sent_attribute_raw + ' unit=\"' + sent_attribute['unit'] + '\"'
 
                 sent_attribute_raw = sent_attribute_raw + '>'
+                # print(sent_attribute_raw)
                 write_ln(f_raw, sent_attribute_raw)
         #
         # if path not empty and language is Japanese, emit as attribute : "entity_vector" 
@@ -184,30 +185,25 @@ for text_file in f_rec:
         #
         if (len(sent['path_attributes'])):
             for path_attribute in sent['path_attributes']:
-                attribute_type = path_attribute['type']
+                attr_name = path_attribute['type']
+                if (attr_name == "DateTime"):
+                    attr_name = "time"
+                if (attr_name == "Measurement"):
+                    attr_name = "measurement"
+                if (attr_name == "Negation"):
+                    attr_name = "negation"
+
                 start_position = path_attribute['pos']
                 attribute_span = path_attribute['span']
                 attr_path = sent['path'][start_position:start_position+attribute_span]
-                path_attribute_raw = '<attr type=\"' + attribute_type + '\" span=\"'
+                path_attribute_raw = '<attr type=\"' + attr_name + '\" span=\"'
 
                 for sent_index in attr_path:
-                    path_attribute_raw = path_attribute_raw + ' \"' + sent['entities'][sent_index]['index'] + '\"'
-                path_attribute_raw = path_attribute_raw + '>'
+                    path_attribute_raw = path_attribute_raw + sent['entities'][sent_index]['index'] + ' '
+
+                path_attribute_raw = path_attribute_raw.strip() + '\">'
                 write_ln(f_raw,path_attribute_raw)
 
-                # entity_start_ref = path_attribute['entity_start_ref']
-                # entity_stop_ref = path_attribute['entity_stop_ref']
-                # sent_attribute_ref = path_attribute['sent_attribute_ref']
-
-                # a_marker = sent['sent_attributes'][sent_attribute_ref]['marker']
-                # a_type = sent['sent_attributes'][sent_attribute_ref]['type']
-
-                # path_attribute_raw = '<attr type=\"' + a_type + '\" marker=\"' + a_marker + '\" span=\"'
-                # for x in range(entity_start_ref, entity_stop_ref):
-                    # print(sent['entities'][x]['index'])
-                #    path_attribute_raw = path_attribute_raw + sent['entities'][x]['index'] + " "
-                #path_attribute_raw = path_attribute_raw + sent['entities'][entity_stop_ref]['index'] + '\">'
-                #write_ln(f_raw,path_attribute_raw)
 
 f_raw.close()
 

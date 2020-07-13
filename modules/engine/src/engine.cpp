@@ -120,7 +120,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			bool is_measure = false; // we can only have one measurement attribute per merged lexrep
 			int idx_measure = 0; // index to measurement attribute
 			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
-				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText()); // the attribute marker
+				//std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText()); // the attribute marker
+				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
 
 				bool is_marker_measure = false, is_value = false, is_unit = false; // lexrep level
 				const size_t label_count = it->NumberOfLabels();
@@ -236,7 +237,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							PropertyId id_attr_path = pa.type; // is equal to "id_attr"
 							PathOffset attr_path_begin = pa.begin; // refers to path
 							PathOffset attr_path_end = pa.end; // refers to path
-							cout << id_attr_path << ":" << attr_path_begin << ":" << attr_path_end << std::endl;
+							// cout << id_attr_path << ":" << attr_path_begin << ":" << attr_path_end << std::endl;
 							Path_Attribute path_attribute;
 							path_attribute.type = static_cast<iknowdata::Attribute>(id_attr_path);
 							path_attribute.pos = (unsigned short) pa.begin; // start position
