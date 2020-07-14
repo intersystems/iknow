@@ -208,16 +208,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			}
 		}
 		else { // normal path
-			/*
-			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) { // iterate paths
-				const IkPath* path = &(*j);
-				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
-					IkMergedLexrep* lexrep = iknow::core::path::CRC::OffsetToLexrep(*k, sentence->GetLexrepsBegin()); // Sentence offset to lexrep.
-					unsigned short entity_id = mapLexrep2Entity[lexrep].second; // entity id from lexrep
-					sentence_data.path.push_back(entity_id); // reference to sentence entities
-				}
-			}
-			*/
 			{	// collect path attribute expansions
 				DirectOutputPaths& sent_paths = data->paths_[udata.iknow_sentences.size()]; // paths for the sentence (in fact, only one per sentence after introducing path_relevants)
 				for (DirectOutputPaths::iterator it_path = sent_paths.begin(); it_path != sent_paths.end(); ++it_path) // iterate all paths (in fact, only one...)

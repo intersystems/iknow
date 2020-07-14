@@ -102,8 +102,8 @@ cdef class iKnowEngine:
 			sentence after indexing.
 		m_index['sentences'][i]['path'] : a list representing the path in the
 			ith sentence.
-		m_index['sentences'][i]['path_attributes'] : a list of spans in the ith
-			sentence's path after attribute expansion.
+		m_index['sentences'][i]['path_attributes'] : a list of semantic attribute 
+			expansions in the ith sentence's path.
 		m_index['sentences'][i]['sent_attributes'] : a list of attribute
 			sentence markers for the ith sentence.
 		m_index['proximity'] : the proximity pairs in the text source after

@@ -115,6 +115,12 @@ namespace iknowdata { // to bundle all generated data
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 	};
 
+	/*
+	**	Path_Attribute represents the expansion of a semantic attribute (https://github.com/intersystems/iknow/wiki/Attributes)
+	**  "type" : represents the attribute type
+	**  "pos" : starting position in the path (a path is a vector of entity references)
+	**  "span" : number of consecutive path entities 
+	*/
 	struct Path_Attribute // path attribute : expresses range of attributes in path
 	{
 		Attribute type; // attribute type
@@ -127,7 +133,7 @@ namespace iknowdata { // to bundle all generated data
 		typedef std::vector<Entity> Entities;
 		typedef std::vector<Sent_Attribute> Sent_Attributes;
 		typedef std::vector<Entity_Ref> Path;	// unsigned short indexes the Entity in the iKnow_Entities vector 
-		typedef std::vector<Path_Attribute> Path_Attributes;	// expanded 
+		typedef std::vector<Path_Attribute> Path_Attributes;	// expanded attributes in path 
 
 		Entities			entities;	// the sentence entities
 		Sent_Attributes		sent_attributes;	// the sentence attributes

@@ -226,13 +226,13 @@ void a_short_demo(void)
 				const Path_Attribute& attribute_expansion = *it_path_attribute;
 				std::string a_type = AttributeName(attribute_expansion.type); // translate the attribute type
 				std::cout << "Span_type:\"" << a_type << "\" span=";
-				unsigned short head = attribute_expansion.pos;
-				Entity_Ref head_entity = sent.path[head];
-				std::cout << "\"" << sent.entities[head_entity].index_ << "\""; // head entity
-				for (int i = 1; i < attribute_expansion.span; ++i) {
-					unsigned short trail = head + i;
-					Entity_Ref trail_entity = sent.path[trail];
-					std::cout << " \"" << sent.entities[trail_entity].index_ << "\""; // trail entity
+				unsigned short head = attribute_expansion.pos; // starting position of attribute expansion
+				Entity_Ref head_entity = sent.path[head]; // corresponding entity reference
+				std::cout << "\"" << sent.entities[head_entity].index_ << "\""; // write head entity
+				for (int i = 1; i < attribute_expansion.span; ++i) { // iterate attribute expansion span
+					unsigned short trail = head + i; // next
+					Entity_Ref trail_entity = sent.path[trail]; // next entity reference
+					std::cout << " \"" << sent.entities[trail_entity].index_ << "\""; // write next entity
 				}
 			}
 		}
