@@ -402,12 +402,9 @@ void IkIndexDebug<Utf8List>::SentenceFound(const String& kb_name, double certain
   for (Lexreps::const_iterator i = lexreps.begin(); i != lexreps.end(); ++i) {
     String val = i->GetValue();
     if (val.empty()) continue;
-    //Merge if it's a split literal (indicated with leading space)
-	if (val[0] == ' ' && !sentence.empty() && separator == iknow::base::SpaceString()) {
-      sentence.erase(sentence.size() - 1);
-      val.erase(0,1);
-    }
-	if (!sentence.empty()) sentence += separator;
+    bool bSplitLiteral = (val[0]==' '); //Merge if it's a split literal (indicated with leading space)
+    if (bSplitLiteral) val.erase(0, 1); // remove leading ' '
+	if (!sentence.empty() && !bSplitLiteral) sentence += separator;
     sentence += val;
   }
   trace_data += IkStringEncoding::BaseToUTF8(sentence) + "\" />";
