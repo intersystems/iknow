@@ -458,9 +458,9 @@ static String OffsetToValue(path::Offset offset, const MergedLexreps& lexreps) {
 
 void IkIndexDebug<Utf8List>::CRC(const path::CRC& crc, const MergedLexreps& lexreps) {
   Utf8List out;
-  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.master, lexreps)));
+  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.head, lexreps)));
   out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.relation, lexreps)));
-  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.slave, lexreps)));
+  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.tail, lexreps)));
   trace_.Add("CRC", out);
 }
 
