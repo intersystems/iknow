@@ -21,9 +21,9 @@ import time
 #
 # Following are default runtime parameters if no command line parameters are present.
 #
-in_path_par = "C:/P4/Users/jdenys/text_input_data/en/"  # input directory with text files
+in_path_par = "C:/P4/Users/jdenys/text_input_data/ja/"  # input directory with text files
 out_path_par = "C:/tmp/"                                # output directory to write the RAW file
-language_par = "en"                                     # language selector
+language_par = "ja"                                     # language selector
 OldStyle = True                                         # mimics the old-style RAW file format
 
 # print(sys.argv)
@@ -148,7 +148,9 @@ for text_file in f_rec:
             # <attr type="time" literal="経済学部2年のセンター利用入試" token="2年">
             entity_vec_raw = '<attr type=\"entity_vector\"'
             for sent_index in sent['path']:
-                entity_vec_raw = entity_vec_raw + ' \"' + sent['entities'][sent_index]['index'] + '\"'
+                entity = sent['entities'][sent_index]
+                lit_text = text[entity['offset_start']:entity['offset_stop']]
+                entity_vec_raw = entity_vec_raw + ' \"' + lit_text + '\"'
             entity_vec_raw = entity_vec_raw + '>'
             write_ln(f_raw, entity_vec_raw)
         #
