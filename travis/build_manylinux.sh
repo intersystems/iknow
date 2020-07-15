@@ -2,9 +2,9 @@
 
 # Build manylinux wheels for Python 3.5 through Python 3.8. Upload the wheels to
 # PyPI if appropriate. This script must be executed inside a manylinux
-# container.
+# container in which /iknow is the root of the repository.
 #
-# Usage: ./build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: /iknow/travis/build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686

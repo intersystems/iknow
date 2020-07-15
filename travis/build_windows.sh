@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # Build Windows x86_64 wheels for Python 3.5 through Python 3.8. Upload the
-# wheels to PyPI if appropriate.
+# wheels to PyPI if appropriate. This script must be executed with the
+# repository root as the working directory.
 #
-# Usage: ./build_windows.sh ICU_WIN_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_windows.sh ICU_WIN_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI

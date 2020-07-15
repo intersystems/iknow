@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # Build wheels for Python 3.5 through Python 3.8, compatible with
-# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate.
+# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate. This
+# script must be executed with the repository root as the working directory.
 #
-# Usage: ./build_osx.sh ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_osx.sh ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
