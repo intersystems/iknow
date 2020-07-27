@@ -10,8 +10,8 @@ brew install dos2unix
 # download Python
 curl -L -O https://www.python.org/ftp/python/3.5.4/python-3.5.4-macosx10.6.pkg
 curl -L -O https://www.python.org/ftp/python/3.6.8/python-3.6.8-macosx10.9.pkg
-curl -L -O https://www.python.org/ftp/python/3.7.7/python-3.7.7-macosx10.9.pkg
-curl -L -O https://www.python.org/ftp/python/3.8.3/python-3.8.3-macosx10.9.pkg
+curl -L -O https://www.python.org/ftp/python/3.7.8/python-3.7.8-macosx10.9.pkg
+curl -L -O https://www.python.org/ftp/python/3.8.5/python-3.8.5-macosx10.9.pkg
 
 # install Python
 for PACKAGE in python-*.pkg; do
