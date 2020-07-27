@@ -37,8 +37,22 @@ fi
 ##### Install dependencies #####
 # dos2unix is needed to give ICU build scripts Unix line endings so that they
 # can be executed. For some reason, ICU source releases use Windows line
-# endings. On some platforms, openssl-devel is needed to install twine.
-yum install -y dos2unix openssl-devel
+# endings. On some platforms, openssl-devel is needed to build the cryptography
+# Python module, a dependency of twine.
+if [[ "$TAG" == "manylinux2010_i686" ]]; then
+  yum install -y dos2unix
+  # On manylinux2010_i686, yum installs OpenSSL 1.0.1e, which is not compatible
+  # with cryptography >= 2.9. Build OpenSSL from source instead.
+  curl -L -O https://github.com/openssl/openssl/archive/OpenSSL_1_1_1g.tar.gz
+  tar xfz OpenSSL_1_1_1g.tar.gz
+  cd openssl-OpenSSL_1_1_1g
+  ./Configure linux-generic32
+  make
+  make install
+  cd ..
+else
+  yum install -y dos2unix openssl-devel
+fi
 
 
 ##### Build ICU #####
