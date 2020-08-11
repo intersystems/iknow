@@ -475,7 +475,7 @@ for root, _, files in os.walk(icudir):
 if not icu_license_found:
     raise BuildError('ICU license not found in {}'.format(icudir))
 
-with open('README.md', encoding='utf-8') as readme_file:
+with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
 try:
