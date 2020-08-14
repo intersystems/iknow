@@ -1,4 +1,4 @@
-/*
+﻿/*
 ** enginetest.cpp : testing the iKnow engine
 */
 #include <stdio.h>
