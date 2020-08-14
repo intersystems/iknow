@@ -132,6 +132,10 @@ for text_file in f:
         elif (key == "LabelKatakana"):
             write_ln(f_trace, key + value)
 #            pass
+        elif (key == "InvalidEntityVector"):
+            write_ln(f_trace, key + value)
+        elif (key == "MissingEntityVector"):
+            write_ln(f_trace, key + value)
         elif (key == "TraceTime"):
             ## Express time in milliseconds:
             milli_time = value.split(';')[1]
