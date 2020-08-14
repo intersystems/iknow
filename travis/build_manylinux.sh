@@ -110,7 +110,7 @@ for PYTHON in /opt/python/cp3*/bin/python; do
   if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then
     PACKAGES="$PACKAGES twine"
   fi
-  "$PYTHON" -m pip install -U $PACKAGES
+  "$PYTHON" -m pip install $PACKAGES
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
 
