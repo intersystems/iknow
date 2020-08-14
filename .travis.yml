@@ -14,13 +14,13 @@ jobs:
         - docker
       script:
         - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL $PYPI_TOKEN $TESTPYPI_TOKEN
-    # - name: "manylinux2014_ppc64le"
-    #   os: linux
-    #   arch: ppc64le
-    #   services:
-    #     - docker
-    #   script:
-    #     - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_SRC_URL $PYPI_TOKEN $TESTPYPI_TOKEN
+    - name: "manylinux2014_ppc64le"
+      os: linux
+      arch: ppc64le
+      services:
+        - docker
+      script:
+        - docker run --rm -e TRAVIS_BRANCH -e TRAVIS_PULL_REQUEST -e TRAVIS_COMMIT -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_SRC_URL $PYPI_TOKEN $TESTPYPI_TOKEN
     - name: "manylinux2010_x86_64"
       os: linux
       arch: amd64
