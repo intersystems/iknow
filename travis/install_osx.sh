@@ -19,8 +19,9 @@ for PACKAGE in python-*.pkg; do
 done
 
 # install Python packages
+curl -L -O https://bootstrap.pypa.io/get-pip.py
 for PYTHON in python3.5 python3.6 python3.7 python3.8; do
-  curl https://bootstrap.pypa.io/get-pip.py | "$PYTHON"
+  "$PYTHON" get-pip.py
   PACKAGES="cython setuptools wheel"
   if [[ "$PYTHON" == "python3.8" ]]; then
     PACKAGES="$PACKAGES twine"
