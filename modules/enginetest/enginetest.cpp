@@ -19,19 +19,19 @@ inline String ucs2(const char* input_text) {
 	return String(IkStringEncoding::UTF8ToBase(input_text));
 }
 String getSampleText(std::string language_code) { // must be ucs-2 encoded text.
-	if (language_code == "en") return ucs2("Be the change you want to see in life.");
-	if (language_code == "de") return ucs2("Oder die Erkundung der Natur - und zwar ohne Anleitung.");
-	if (language_code == "ru") return ucs2("Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.");
-	if (language_code == "es") return ucs2("En Argentina no hay estudios previos reportados en cuanto a la elaboración de vinos cítricos ni de «vino de naranja».");
-	if (language_code == "fr") return ucs2("En pratique comment le faire ?");
-	if (language_code == "ja") return ucs2("こんな台本でプロットされては困る、と先生は言った。");
-	if (language_code == "nl") return ucs2("Op basis van de afzonderlijke evaluatieverslagen stelt de Commissie een synthese op communautair niveau op.");
-	if (language_code == "pt") return ucs2("Distingue-se o mercado de um produto ou serviço dos mercados de fatores de produção, capital e trabalho.");
-	if (language_code == "sv") return ucs2("Jag är bäst i klassen. Ingen gör efter mig, kan jag inte lämna. Var försiktig, är gräset alltid grönare på andra sidan.");
-	if (language_code == "uk") return ucs2("грошових зобов'язань, прийнятих на себе згідно з умов цього договору.");
-	if (language_code == "cs") return ucs2("Létající jaguár je novela spisovatele Josefa Formánka z roku 2004.");
+	if (language_code == "en") return ucs2(u8"Be the change you want to see in life.");
+	if (language_code == "de") return ucs2(u8"Oder die Erkundung der Natur - und zwar ohne Anleitung.");
+	if (language_code == "ru") return ucs2(u8"Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.");
+	if (language_code == "es") return ucs2(u8"En Argentina no hay estudios previos reportados en cuanto a la elaboración de vinos cítricos ni de «vino de naranja».");
+	if (language_code == "fr") return ucs2(u8"En pratique comment le faire ?");
+	if (language_code == "ja") return ucs2(u8"こんな台本でプロットされては困る、と先生は言った。");
+	if (language_code == "nl") return ucs2(u8"Op basis van de afzonderlijke evaluatieverslagen stelt de Commissie een synthese op communautair niveau op.");
+	if (language_code == "pt") return ucs2(u8"Distingue-se o mercado de um produto ou serviço dos mercados de fatores de produção, capital e trabalho.");
+	if (language_code == "sv") return ucs2(u8"Jag är bäst i klassen. Ingen gör efter mig, kan jag inte lämna. Var försiktig, är gräset alltid grönare på andra sidan.");
+	if (language_code == "uk") return ucs2(u8"грошових зобов'язань, прийнятих на себе згідно з умов цього договору.");
+	if (language_code == "cs") return ucs2(u8"Létající jaguár je novela spisovatele Josefa Formánka z roku 2004.");
 
-	return ucs2("Time flies like an arrow, fruit flies like a banana");
+	return ucs2(u8"Time flies like an arrow, fruit flies like a banana");
 }
 
 //
