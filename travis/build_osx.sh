@@ -42,7 +42,7 @@ make -j $(sysctl -n hw.logicalcpu)
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-for PYTHON in python3.5 python3.6 python3.7 python3.8; do
+for PYTHON in python3.5 python3.6 python3.7 python3.8 python3.9; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
 done
 
@@ -66,7 +66,7 @@ else
     set -x
   fi
   { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ python3.8 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  python3.8 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
+  echo '+ python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
+  python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
   set -x
 fi

@@ -60,7 +60,7 @@ else
     set -x
   fi
   { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /c/"Program Files"/Python38/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  /c/"Program Files"/Python38/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
+  echo '+ /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
+  /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
   set -x
 fi

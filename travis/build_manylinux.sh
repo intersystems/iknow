@@ -114,7 +114,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDI
 # install Python package dependencies and build initial wheels
 for PYTHON in /opt/python/cp3*/bin/python; do
   PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then
+  if [[ "$PYTHON" == *"/cp39-cp39/"* ]]; then
     PACKAGES="$PACKAGES twine"
   fi
   "$PYTHON" -m pip install --user --no-warn-script-location $PACKAGES
@@ -162,8 +162,8 @@ else
     set -x
   fi
   { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
-  /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
+  echo '+ /opt/python/cp39-cp39/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
+  /opt/python/cp39-cp39/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
   set -x
 fi
 
