@@ -35,10 +35,16 @@ fi
 
 
 ##### Install dependencies #####
-# dos2unix is needed to give ICU build scripts Unix line endings so that they
-# can be executed. For some reason, ICU source releases use Windows line
-# endings. On some platforms, openssl-devel is needed to build the cryptography
-# Python module, a dependency of twine. ccache is used to speed up build times.
+# epel-release
+#   Needed on some platforms to install ccache.
+# dos2unix
+#   Give ICU build scripts Unix line endings so that they can be executed. For
+#   some reason, ICU source releases use Windows line endings.
+# ccache
+#   Speed up build times by caching results from previous builds.
+# openssl-devel
+#   On some platforms, this is needed to build the cryptography Python module, a
+#   dependency of twine.
 yum install -y epel-release
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
