@@ -38,9 +38,16 @@ fi
 # dos2unix is needed to give ICU build scripts Unix line endings so that they
 # can be executed. For some reason, ICU source releases use Windows line
 # endings. On some platforms, openssl-devel is needed to build the cryptography
-# Python module, a dependency of twine.
+# Python module, a dependency of twine. ccache is used to speed up build times.
+yum install -y epel-release
+yum install -y dos2unix ccache
+mkdir -p /opt/ccache
+ln -s /usr/bin/ccache /opt/ccache/cc
+ln -s /usr/bin/ccache /opt/ccache/c++
+ln -s /usr/bin/ccache /opt/ccache/gcc
+ln -s /usr/bin/ccache /opt/ccache/g++
+export PATH="/opt/ccache:$PATH"
 if [[ "$TAG" == "manylinux2010_i686" ]]; then
-  yum install -y dos2unix
   # On manylinux2010_i686, yum installs OpenSSL 1.0.1e, which is not compatible
   # with cryptography >= 2.9. Build OpenSSL from source instead.
   curl -L -O https://github.com/openssl/openssl/archive/OpenSSL_1_1_1g.tar.gz
@@ -51,7 +58,7 @@ if [[ "$TAG" == "manylinux2010_i686" ]]; then
   make install
   cd ..
 else
-  yum install -y dos2unix openssl-devel
+  yum install -y openssl-devel
 fi
 
 
@@ -159,3 +166,5 @@ else
   /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
   set -x
 fi
+
+ccache -s
