@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build manylinux wheels for Python 3.5 through Python 3.8. Upload the wheels to
+# Build manylinux wheels for Python 3.5 through Python 3.9. Upload the wheels to
 # PyPI if appropriate. This script must be executed inside a manylinux
 # container in which /iknow is the root of the repository.
 #

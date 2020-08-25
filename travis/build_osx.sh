@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build wheels for Python 3.5 through Python 3.8, compatible with
+# Build wheels for Python 3.5 through Python 3.9, compatible with
 # Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate. This
 # script must be executed with the repository root as the working directory.
 #
