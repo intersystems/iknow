@@ -4,24 +4,24 @@ def strip_negation(text, language="en", iknow=iknowpy.iKnowEngine()):
     iknow.index(text,language)
     stripped = ""
     for s in iknow.m_index['sentences']:
+        # note that these positions are path positions, not sentence positions
         pos = 0
         negated = []
         for a in s['path_attributes']:
             if a['type']=="Negation":
-                #print(a)
-                for p in range(pos,a['pos']-1):
+                for p in range(pos,a['pos']-1):  # append zeroes since last attribute
                     negated.append(0)
-                for p in range(a['pos'],a['pos']+a['span']):
+                for p in range(0,a['span']):     # append zeroes for this span
                     negated.append(1)
-                pos = a['pos']+a['span']
-        for p in range(pos, len(s['entities'])):
+                pos = a['pos']+a['span']-1       # update position
+        for p in range(pos, len(s['path'])-1):
             negated.append(0)
         pos = 0
         for e in s['entities']:
-            if e['type'] == 'NonRelevant': continue
+            if e['type'] == 'NonRelevant':
+                continue
             if negated[pos] != 1: 
-                stripped += e['index']
-                stripped+= " "
+                stripped += text[e['offset_start']:e['offset_stop']] + " "
             pos = pos+1
         stripped += '\n'
     return stripped
