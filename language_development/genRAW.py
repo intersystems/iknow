@@ -21,9 +21,9 @@ import time
 #
 # Following are default runtime parameters if no command line parameters are present.
 #
-in_path_par = "C:/P4/Users/jdenys/text_input_data/ja/"  # input directory with text files
+in_path_par = "C:/P4/Users/jdenys/text_input_data/en/"  # input directory with text files
 out_path_par = "C:/tmp/"                                # output directory to write the RAW file
-language_par = "ja"                                     # language selector
+language_par = "en"                                     # language selector
 OldStyle = True                                         # mimics the old-style RAW file format
 
 # print(sys.argv)
@@ -127,9 +127,14 @@ for text_file in f_rec:
         # sentence attributes
         #
         if (len(sent['sent_attributes'])):
-            # <attr type="time" literal="合格後" token="合格後">
             for sent_attribute in sent['sent_attributes']:
                 attr_name = sent_attribute['type'].lower()
+                attr_marker = sent_attribute['marker'] # corresponds to lexreps.csv match 
+                attr_entity = sent['entities'][sent_attribute['entity_ref']]['index'] # corresponding entity index value
+
+                attr_marker_literal = text[sent_attribute['offset_start']:sent_attribute['offset_stop']] # literal version of the marker
+                attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] # corresponding entity index literal value
+
                 if (attr_name == 'datetime'):
                     attr_name = 'time'
                 sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'] + '\"'
