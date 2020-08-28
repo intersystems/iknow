@@ -70,7 +70,7 @@ fi
 
 ##### Build ICU #####
 curl -L -o icu4c-src.zip "$URL"
-unzip icu4c-src.zip
+unzip -q icu4c-src.zip
 cd icu/source
 
 # ICU build environment requires that /usr/bin/python be at least version 2.7.

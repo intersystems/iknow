@@ -23,10 +23,10 @@ export PATH=$MSBUILD_PATH:$PATH
 
 ##### Install ICU #####
 export REPO_ROOT=$(pwd)
-wget -O icu4c.zip "$URL"
+wget -nv -O icu4c.zip "$URL"
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 mkdir -p "$ICUDIR"
-unzip icu4c.zip -d "$ICUDIR"
+unzip -q icu4c.zip -d "$ICUDIR"
 
 
 ##### Build iKnow engine #####

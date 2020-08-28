@@ -22,7 +22,7 @@ set -x
 ##### Build ICU #####
 export REPO_ROOT=$(pwd)
 curl -L -o icu4c-src.zip "$URL"
-unzip icu4c-src.zip
+unzip -q icu4c-src.zip
 cd icu/source
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
