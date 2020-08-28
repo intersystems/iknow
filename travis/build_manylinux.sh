@@ -127,25 +127,11 @@ for PYTHON in /opt/python/cp3*/bin/python; do
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
 
-# aarch64 and ppc64le platforms often have a large page size of 64KiB. We need
-# to redirect all invocations of patchelf so that when auditwheel invokes it, it
-# produces ELFs with the proper page alignment.
-if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
-  mv /usr/local/bin/patchelf /usr/local/bin/_patchelf
-  printf '#!/usr/bin/env bash\n\n_patchelf --page-size 65536 "$@"\n' >> /usr/local/bin/patchelf
-  chmod +x /usr/local/bin/patchelf
-fi
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do
   auditwheel repair -w dist2 $WHEEL
 done
-
-# restore patchelf on aarch64 and ppc64le
-if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
-  rm -f /usr/local/bin/patchelf
-  mv /usr/local/bin/_patchelf /usr/local/bin/patchelf
-fi
 
 
 ##### Upload iknowpy wheels if appropriate #####
