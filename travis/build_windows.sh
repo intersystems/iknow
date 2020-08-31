@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build Windows x86_64 wheels for Python 3.5 through Python 3.8. Upload the
+# Build Windows x86_64 wheels for Python 3.5 through Python 3.9. Upload the
 # wheels to PyPI if appropriate. This script must be executed with the
 # repository root as the working directory.
 #
@@ -23,10 +23,10 @@ export PATH=$MSBUILD_PATH:$PATH
 
 ##### Install ICU #####
 export REPO_ROOT=$(pwd)
-wget -O icu4c.zip "$URL"
+wget -nv -O icu4c.zip "$URL"
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 mkdir -p "$ICUDIR"
-unzip icu4c.zip -d "$ICUDIR"
+unzip -q icu4c.zip -d "$ICUDIR"
 
 
 ##### Build iKnow engine #####
