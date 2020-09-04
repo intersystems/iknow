@@ -773,6 +773,7 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 	else {
 		bEndFound = (lexrep_vector.size()==1); // Only SBegin is present
 	}
+
 	//TODO, TRW: Is there a way we could figure out we need to switch languages earlier?
 	if ((m_languageKbMap.size() > 1) && nPosition != nPositionEndOfPreviousIteration)
 	{
