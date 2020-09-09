@@ -6,13 +6,12 @@
 
 set -euxo pipefail
 
-pip3 install --user twine
-
 export REPO_ROOT=$(pwd)
 DEPLOY=$(travis/deploy_check.sh)
 if [[ "$DEPLOY" == "0" ]]; then
   echo "Deployment skipped"
 else
+  pip3 install --user twine
   if [[ "$DEPLOY" == "PyPI" ]]; then
     export TWINE_REPOSITORY=pypi
     { set +x; } 2>/dev/null  # don't save token to build log
