@@ -509,6 +509,7 @@ try:
         project_urls={
             'Source': 'https://github.com/intersystems/iknow',
             'Tracker': 'https://github.com/intersystems/iknow/issues',
+            'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
         package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},
