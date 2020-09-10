@@ -37,7 +37,6 @@ using namespace iknow::ali;
 #define SEMANTIC_ACTION(x) { if (m_pDebug) (m_pDebug->x); };
 #define TIMER_ACTION(x) { if (m_pDebug) (m_pDebug->x); };
 
-
 const size_t MAX_WORD_SIZE=150; // Maximum allowed wordsize as defined by Michael.
 
 //////////////////////////////////////////////////////////////////////

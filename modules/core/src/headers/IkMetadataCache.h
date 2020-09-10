@@ -4,7 +4,6 @@
 #include "IkTypes.h"
 #include "utlExceptionFrom.h"
 
-
 //Rather than perform the expensive virtual method and string hash table lookup/conversion
 //we'll store frequently accessed knowledgebase metadata values here.
 

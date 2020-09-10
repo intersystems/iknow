@@ -3,7 +3,6 @@
 #include "IkTypes.h"
 #include <string>
 
-
 using iknow::base::String;
 using iknow::base::Char;
 using iknow::core::IkMetadataCache;
