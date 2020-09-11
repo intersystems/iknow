@@ -4,7 +4,6 @@
 #include "IkTypes.h"
 #include "utlExceptionFrom.h"
 
-
 //Rather than perform the expensive virtual method and string hash table lookup/conversion
 //we'll store frequently accessed knowledgebase metadata values here.
 
@@ -57,7 +56,8 @@ namespace iknow {
 	  kP4,
 	  kPScale,
 	  kPathConstruction,
-	  kRegexSplitter
+	  kRegexSplitter,
+      kFuriganaHandling
     };
 
     template<MetadataValue V>
@@ -77,7 +77,14 @@ namespace iknow {
 		kCRCSequence, // default
 		kPathRelevant
 	};
-
+    /*
+    ** https://github.com/intersystems/iknow/issues/31
+    ** Furigana handling made flexible: "on"=handle as originally implemented (default), "off"=no special treatment
+    */
+    enum FuriganaHandling {
+        kFuriDefault, // as originally implemented
+        kFuriOff
+    };
     class IkMetadataCache {
     public:
       explicit IkMetadataCache(const IkKnowledgebase& kb);
@@ -138,6 +145,7 @@ namespace iknow {
 	  std::size_t pScale_;
 	  PathConstruction path_construction_;
 	  iknow::base::String regex_splitter_;
+      FuriganaHandling furigana_handling_;
     };
 
 #define METADATA_VALUE_INFO(id, key, type, field, default_value)	\
@@ -171,6 +179,7 @@ namespace iknow {
 	METADATA_VALUE_INFO(kPScale, "SCALE", std::size_t, pScale_, 100)
 	METADATA_VALUE_INFO(kPathConstruction, "PathConstruction", PathConstruction, path_construction_, kCRCSequence)
 	METADATA_VALUE_INFO(kRegexSplitter, "ValUnitRegexSplitter", iknow::base::String, regex_splitter_, iknow::base::String())
+    METADATA_VALUE_INFO(kFuriganaHandling, "FuriganaHandling", FuriganaHandling, furigana_handling_, kFuriDefault)
 #undef METADATA_VALUE_INFO
 
   }

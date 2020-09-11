@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-# Build manylinux wheels for Python 3.5 through Python 3.9. Upload the wheels to
-# PyPI if appropriate. This script must be executed inside a manylinux
-# container in which /iknow is the root of the repository.
+# Build manylinux wheels for Python 3.5 through Python 3.9. This script must be
+# executed inside a manylinux container in which /iknow is the root of the
+# repository.
 #
 # Usage: /iknow/travis/build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
@@ -42,9 +42,6 @@ fi
 #   some reason, ICU source releases use Windows line endings.
 # ccache
 #   Speed up build times by caching results from previous builds.
-# openssl-devel
-#   On some platforms, this is needed to build the cryptography Python module, a
-#   dependency of twine.
 yum install -y epel-release
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
@@ -53,19 +50,6 @@ ln -s /usr/bin/ccache /opt/ccache/c++
 ln -s /usr/bin/ccache /opt/ccache/gcc
 ln -s /usr/bin/ccache /opt/ccache/g++
 export PATH="/opt/ccache:$PATH"
-if [[ "$TAG" == "manylinux2010_i686" ]]; then
-  # On manylinux2010_i686, yum installs OpenSSL 1.0.1e, which is not compatible
-  # with cryptography >= 2.9. Build OpenSSL from source instead.
-  curl -L -O https://github.com/openssl/openssl/archive/OpenSSL_1_1_1g.tar.gz
-  tar xfz OpenSSL_1_1_1g.tar.gz
-  cd openssl-OpenSSL_1_1_1g
-  ./Configure linux-generic32
-  make
-  make install
-  cd ..
-else
-  yum install -y openssl-devel
-fi
 
 
 ##### Build ICU #####
@@ -120,13 +104,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDI
 # install Python package dependencies and build initial wheels
 for PYTHON in /opt/python/cp3*/bin/python; do
   PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == *"/cp39-cp39/"* ]]; then
-    PACKAGES="$PACKAGES twine"
-  fi
   "$PYTHON" -m pip install --user --no-warn-script-location $PACKAGES
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
-
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do
@@ -134,29 +114,5 @@ for WHEEL in dist/iknowpy-*.whl; do
 done
 
 
-##### Upload iknowpy wheels if appropriate #####
-export REPO_ROOT=/iknow
-DEPLOY=$(/iknow/travis/deploy_check.sh)
-if [[ "$DEPLOY" == "0" ]]; then
-  echo "Deployment skipped"
-else
-  if [[ "$DEPLOY" == "PyPI" ]]; then
-    export TWINE_REPOSITORY=pypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$PYPI_TOKEN"'
-    TOKEN="$PYPI_TOKEN"
-    set -x
-  else
-    export TWINE_REPOSITORY=testpypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$TESTPYPI_TOKEN"'
-    TOKEN="$TESTPYPI_TOKEN"
-    set -x
-  fi
-  { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /opt/python/cp39-cp39/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
-  /opt/python/cp39-cp39/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
-  set -x
-fi
-
+##### Report cache statistics #####
 ccache -s
