@@ -1,4 +1,7 @@
 
+/* ==================================================================================================================================================================
+/* BLOCK 1: USER-DEFINED LABELS                                                                                                                                      
+/* ==================================================================================================================================================================
 /* REWRITE MANDATORY LABELS TO LANGUAGE-SPECIFIC LABELS
 
 884;1;Punctuation;^ENPunctuation;
@@ -17,9 +20,11 @@
 
 /*		1055.	The Department for Business, Innovation & Skills (BIS) is a ministerial department of the United Kingdom Government.
 
-/* ==================================================================================================================================================================
-/* BLOCK 1: USER-DEFINED LABELS                                                                                                                                      
-/* ==================================================================================================================================================================
+/* SWITCH OFF BUILT-IN SENTIMENT DETECTION
+/* Enable rule 2550 to switch off the built-in sentiment detection.
+/*2550;1;ENPosSentiment:ENNegSentiment;-ENPosSentiment-ENNegSentiment;;disable built-in sentiment detection
+/*2550. That was a good idea.
+
 /* REWRITE USER-DEFINED LABELS BY LANGUAGE-SPECIFIC LABELS:
 
 894;1;UDNegation;+ENNegation+ENNegBegin;
@@ -28,11 +33,11 @@
 
 895;1;UDPosSentiment;+ENPosSentiment;
 
-/*		895.UD.	The results of the test were excellent.
+/*		895.UD.	The tests were successful.
 
 896;1;UDNegSentiment;+ENNegSentiment;
 
-/*		896.UD.	The market has worsened, Robert said.
+/*		896.UD.	It is difficult to find the right people for this job.
 
 891;1;UDConcept;^UDConcept+ENCon;
 
@@ -58,6 +63,7 @@
 2180;1;ENNumberPlusUnit;+ENNumberPlusUnit2;add attribute that can be 'saved' in Joins
 
 /*		2180. The shares are down around 12% year-on-year.
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 20: PROCESSING SPECIFIC WORDS AND NUMBERS                                                                                                                   
@@ -105,6 +111,7 @@
 451;20;ENAtAll;-ENAtAll;
 
 /*		451.	Fuel costs force a second look at all farm production costs.
+
 /* NO MORE & ANY MORE
 /* These rules distinguish between negative relation and negative, attributive adjective.
 /* ------------------ 
@@ -116,6 +123,7 @@
 455;20;ENAnymore;+ENNegation+ENNegBegin;
 
 /*		455.	The R&B diva convincingly sings about how she wants "no more drama, no more pain."
+
 /* NEITHER
 /* -------
 
@@ -142,7 +150,7 @@
 
 /*		1172. Coronally and sagittally reformatted images were provided.
 
-457;20;SBegin|ENAndOrBut+^ENNegation;*|ENNonrelevant;to make conjunctions at beginning sentence nonrelevant
+457;20;SBegin|ENAndOrBut+^ENNegation;*|+ENNonrelevant;to make conjunctions at beginning sentence nonrelevant
 
 /*		457.	And then we made a mistake.
 
@@ -269,6 +277,13 @@
 2499;20;"due"+^ENRel;ENInfCon+ENPart2;
 
 /*		2499. The expropriation is under due process of law.
+/
+* RULE FOR 'ONLY'
+/* ===============
+
+2556;20;ENArtPosspron:ENsAdj|"only";*|ENAdj;
+
+/*		2556. If this is your only tour, it's a fair rule.
 
 /* RULES FOR JOINING NUMBERS
 /*==========================
@@ -966,10 +981,11 @@
 1719;26;ENTemperature:ENWeight:ENVolume:ENRespiration;+ENMeasurement;
 
 /*		1719. Nasogastric tube on even days , once daily , Tylenol 650 mg.
+/*2183. Pulse was 81 bpm, respirations 15 per minute and he was afebrile.
 
-2183;26;ENNumber:ENNum:"one"|"per"+ENUnit;+ENValue|-ENUnit;
+2547;26;ENNumber:ENNum:"one"|*ENUnit;*|+ENMeasurement;
 
-/*		2183. Pulse was 81 bpm, respirations 15 per minute and he was afebrile.
+/*		2547. The poll found 42 per cent of licensees thought a ban on cigarette vending in pubs would further damage business.
 
 2011;26;ENNumber:ENNum:"one"|ENUnit+^ENNum+^ENNumber;+ENValue|+ENUnitProperty;
 
@@ -1129,6 +1145,7 @@
 
 /*		2320. His decline has been in part a result of major national pollsters switching from surveys of registered voters to those of likely voters.
 
+2566;40;"bad"+ENCapitalInitial|ENCapitalInitial;ENCon+ENCapitalInitial-ENNegSentiment|*;German geographical names
 790;40;ENConIfCap:ENConIfCapAll:ENConIfCap1;-ENConIfCap-ENConIfCapAll-ENConIfCap1;remove ENConIfCap to avoid problems with double labels
 
 /*		790.	The firm has raised its rating on RSG from “neutral” to “outperform".
@@ -1216,6 +1233,11 @@
 2311;40;"no"|"one"|^ENCon;ENPerspron+ENNegation|Join|*;
 
 /*		2311. No one can explain the rise in childhood allergic diseases.
+
+/* RULE FOR 'THE TWO OF YOU' etc.
+/* ==============================
+
+2557;40;"the"|ENNum|"of"|ENPerspron_obj;ENPerspron_subj+ENPerspron_obj|Join|Join|Join;
 
 /* RULES FOR 'TIMES'
 /*==================
@@ -2141,7 +2163,7 @@
 
 /*		2085. She was slightly agitated on the first day.
 
-2351;40;ENAux|"since"|.ENAdverb+^ENAdvTime|ENPart:"been"|^typeConcept;*|ENAdvTemp+ENTemp+ENAdverb|*|-ENPart+ENRel+ENRPart|*;
+2351;40;ENAux|"since"|.ENAdverb+^ENAdvTime|ENPart:"been";*|ENAdvTemp+ENTemp+ENAdverb|*|-ENPart+ENRel+ENRPart;
 
 /*		2351. He has since mainly ordered them online.
 
@@ -2301,6 +2323,7 @@
 1384;40;ENPerspron_subj|ENAdvstruct|ENVerbConAdj;*|*|ENRel+ENVerb;
 272;40;ENPerspron_subj|ENAux|ENNot|ENVerbConAdj;ENPerspron_subj|ENAux|^ENNot|ENRel+ENVerb;
 1106;40;ENArtPosspron:ENsAdj|ENAdv|ENVerbConAdj:ENAdj:ENPrespart|ENCon;*|ENAdj|+Join|*;
+2560;40;ENTo+^ENPrep|ENVerbConAdj;*|ENInf;
 
 /* DISAMBIGUATE ENPART2
 /* ====================
@@ -2358,6 +2381,10 @@
 
 /* ENINFCON ONLY
 
+2536;40;"do not"|ENInfCon;*|ENInf;unlike other mAux, "do not" cannot be followed by a noun
+
+/*		2536. Do not feed the animals!
+
 1131;40;ENmAux|ENAdj+ENAdv|ENInfCon;*|ENAdv|ENInf;
 1569;40;ENPart|ENTo|ENInf:ENInfCon;*|*|ENInf;
 1163;40;ENTo|ENInf:ENInfCon|"and":"or"|ENInf:ENInfCon;*|ENInf|*|ENInf;refinement of r433
@@ -2402,7 +2429,12 @@
 123;40;ENPerspron_subj|ENInfCon;ENPerspron_subj|ENRel+ENVerb;
 222;40;ENIt|ENInfCon;ENIt|ENRel+ENVerb;
 567;40;ENPrep+^"to"|ENAdv|ENInfCon;*|*|ENCon;
-190;40;ENAdvstruct|ENInfCon;*|^ENInf;
+2553;40;ENmAux:ENTo|ENAdvstruct|ENInfCon;*|*|^ENInf;
+2555;40;ENAdvstruct|ENInfCon+^ENAdj|^ENAux+^ENmAux;*|^ENRel+ENVerb|*;
+
+/*		2555. Mike also hopes to break his personal record.
+
+190;40;ENAdvstruct|ENInfCon|^ENAux+^ENmAux;*|^ENInf|*;in practice only cases of InfCon+Adj
 291;40;ENPrep:ENOf|ENInfCon;*|ENCon;
 1606;40;ENmAux|"that"|ENInfCon;*|ENDemonstr_s|ENInf;
 303;40;ENCon|ENWhich|ENInfCon;*|ENWhich|ENRel+ENVerb;
@@ -2428,6 +2460,18 @@
 382;40;ENAuxCon|ENAndOrBut;ENCon-ENCertainty|*;
 33;40;ENAuxCon;ENmAux;
 
+/* DISAMBIGUATE 'LIKE'
+/* ===================
+
+2561;40;^ENmAux+^ENBe|ENPerspron_subj|.ENAdverb|"like";*|*|*|ENRel+ENVerb+ENPosSentiment;
+
+/*		2561. They also like to play with toys and interact with people.
+
+2562;40;ENmAux|.ENAdverb|"like"+^ENInf;*|*|ENInf+ENPosSentiment;see also rule 2564
+2563;40;ENPerspron_subj:ENIt:ENPerspron:ENEverything|.ENAdverb|"likes";*|*|ENRel+ENVerb+ENPosSentiment;
+
+/*		2563. She is famous and everyone likes to talk about her.
+
 /* DISAMBIGUATE ENPRESPART
 /* =======================
 /* RULES WITH LEFT CONTEXT
@@ -2444,7 +2488,10 @@
 1572;40;ENmAux|ENRel:ENInf|ENPrespart|^ENPrep+^ENAdj+^ENCon;*|*|ENRel+ENVerb|*;
 282;40;ENThere|ENBe|ENPrespart|^ENArtPosspron;*|ENRel+ENVerb|ENAdj|*;
 384;40;ENThere|ENBe|ENAdvstruct|ENPrespart;*|ENRel+ENVerb|ENAdvstruct|ENAdj;
-1162;40;ENBe|ENPrespart|ENAndOrBut|typeConcept|SEnd;ENAux|ENAdj|*|*|*;addition to r281
+1162;40;ENBe|ENPrespart|ENAndOrBut|typeConcept|SEnd;+ENAux|ENAdj|*|*|*;addition to r281
+
+/*		1162. It was clarifying and indispensable.
+
 2335;40;ENBe|ENPrespart+ENAdj|ENAdj:ENCon;*|-ENAdj|*;preparation for r281
 2408;40;ENBe|ENPrespart+^ENAdj|ENAndOrBut|ENPrespart+^ENAdj;ENAux|ENRel+ENVerb|*|ENRel+ENVerb;
 281;40;ENBe|ENPrespart+^ENAdj;ENAux|ENRel+ENVerb;
@@ -2609,6 +2656,7 @@
 1735;40;ENComma|ENInfCon+^ENCapitalInitial|ENCon|ENRel|ENArtPosspron;*|ENRel|*|*|*;
 
 /*		1735. Such traditions, she believes, help Melrose preserve its unique sense of self — a bedroom community that happens to be a city.
+
 /* FURTHER DISAMBIGUATION OF ENPRESPART ; ENREL + OTHER LABEL: REMOVE OTHER LABELS THAN ENREL
 /* ==========================================================================================
 
@@ -2795,6 +2843,7 @@
 
 /*		2393. Complication are unlikely.
 
+2554;40;ENPerspron_subj:ENIt:ENTo|ENAdvAdj|ENRel:ENAux:ENInf:ENmAux:ENPart:ENVerbCon:ENInfCon;*|ENAdv|*;
 1603;40;ENAdvAdj+ENAdvmodal;ENAdvmodal;
 
 /*		1603. the bank's earnings are likely to be hurt this financial year.
@@ -2820,7 +2869,11 @@
 1579;40;ENPrep|"the":"a":"an"|ENCon|ENVerbCon|ENCon;*|*|*|ENCon|*;
 1577;40;"the":"a":"an"|ENCon|ENVerbCon|ENCon|ENAux:ENRel;*|*|ENCon|*|*;
 1073;40;^ENRel+^ENAux+^SBegin|ENVerbCon+^ENCapitalInitial|ENVerbCon:ENCon;*|ENRel+ENVerb|*;
+2558;40;ENAdj+^ENCon|ENAndOrBut|ENVerbCon:ENInfCon|ENPrep:ENTo;*|*|ENRel+ENVerb|*;
 1074;40;ENVerbCon;-ENVerbCon;remove remaining double labels
+
+/*		1074. we're thinking about portable benefits packages and things that would be of assistance to those workers as well.
+
 24;40;ENInfCon;ENCon;
 1985;40;ENPrespart|"aside";ENRel+ENVerb|*;
 2341;40;SBegin|ENPrespart|ENPrep|.ENArtPosspron|*typeConcept|ENBe;*|ENCon|*|*|*|*;
@@ -2829,7 +2882,12 @@
 
 /*		2477. Of course, applying maths to solve biological problems is not entirely new.
 
+2544;40;ENPrespart+ENAdj;ENAdj;
+
+/*		2544. However, he said often the cancer is discovered too late because the symptoms are considered embarrassing and the authorities are reluctant to tackle it.
+
 29;40;ENPrespart;ENCon;
+2552;40;"look":"looking":"looks":"looked"|.ENAdverb|ENAdj:ENCon;+ENLinkingverb-ENCon|*|*;ad hoc rule for 'look', which acts as a linking verb depending on the context
 
 /* Concrete frequency, 3rd part
 /*=============================
@@ -3037,8 +3095,16 @@
 1091;40;ENComma:ENCon|ENAndOrBut|ENBack;*|ENAndOrBut|ENCon;rule must precede rule 1078
 1078;40;typeRelation+^typeConcept|ENAdv|^typeConcept+^SEnd;*|ENAdv|*;
 1108;40;"something":"something else"|ENAdvmandeg;ENMod+ENEverything|+Join;
+
+/*		1108. making it happen is something else entirely.
+
 1110;40;"nothing":"nothing else"|ENAdvmandeg;*|ENAdj;
+
+/*		1110. And there is nothing more unpleasant than 12-year-old boys.
+
 1107;40;ENAdvmandeg|SEnd;ENAdv|*;
+
+/*		1107. occlusion of the arteries to the nose bilaterally.
 
 /* DISAMBIGUATE ENINDEFPRON, ENONCE, ENPERSPRON_REFL ; DEFAULT ENBE, ENCON + ENINF
 /*================================================================================
@@ -3060,6 +3126,10 @@
 /* LABELS & ATTRIBUTES CLEAN-UP
 /*=============================
 
+2540;40;ENCon|"as"|"a"|"whole"|^typeConcept+^"of";*|ENCon|Join|Join|*;
+
+/*		2540. You can comment on individual items within the project or on the project as a whole.
+
 905;40;ENRel|ENMod+ENAdvmandeg;*|ENAdv;
 953;40;^ENIntensifier+^ENPremod3+^SBegin|ENAdvmandeg|ENPerspron_subj:ENPerspron_obj;*|ENAdv|*;
 2391;40;ENAdvmandeg|ENArtPosspron;ENAdvmodal|*;
@@ -3075,6 +3145,10 @@
 977;40;ENIt;ENIt;
 996;40;ENIndefpron+^"any"|typeConcept;ENBeginconcept|-ENUnit;
 2157;40;ENIndefpron|ENRel:ENInf;ENPerspron_subj|*;more specific than r997
+2545;40;"nothing"|"more"|ENAdj:ENCon;ENBeginconcept-ENNegation|ENAdj|*;
+
+/*		2545. There is nothing more abstract than reality.
+
 997;40;ENIndefpron|typeRelation;ENMod|*;
 1018;40;ENNeither|typeConcept;ENAdj+ENNegation+ENNegBegin|*;default if no '(n)or' is found
 1042;40;ENAny|typeConcept;ENNonrelevant|*;
@@ -3110,6 +3184,8 @@
 2287;50;ENCon|ENPrep|"and"|ENPrep;*|*|-ENNegStop|*;
 2107;50;ENTo:ENmAux|.ENAdvstruct|ENInf|ENAndOrBut+^"but"|ENInf;*|*|+ENList|-ENNegStop+ENList|+ENList;
 2286;50;ENVerb+^ENInf+^ENmAux+^ENPrespart2|ENAndOrBut+^"but"|ENVerb+^ENmAux+^ENAux+^ENPrespart2;+ENList|-ENNegStop+ENList|+ENList;
+2524;50;ENArtPosspron|ENAdj|ENComma|ENAdj|","|ENAdj|ENCon;*|+ENList|+ENList|+ENList|+ENList|+ENList|+ENList;
+2525;50;ENArtPosspron|ENAdj|","|ENAdj|ENCon;*|+ENList|+ENList|+ENList|+ENList;
 1205;50;ENConj|"that"|^ENPerspron_subj+^ENIt+^ENArtPosspron+^ENBoth+^SEnd;*|ENDemonstr_s|*;
 
 
@@ -3155,18 +3231,47 @@
 2046;55;ENAux|ENPerspron_subj:ENIt:ENPerspron|ENAux:ENmAux+^"had"+^"been";*|+ENPBegin|*;
 2163;55;ENVerb|*^typeRelation+^ENPBegin+^ENIt+^ENPerspron_subj+^ENPerspron|ENPerspron_subj:ENIt:ENPerspron|.ENAdverbAfter40|ENVerb;*|*|+ENPBegin|*|*;
 2165;55;ENVerb|ENMod|ENIt:ENPerspron_subj+ENPBegin;*|*|-ENPBegin;
+
+/*		2165. There is nothing we can do.
+
 2223;55;ENVerb|"that"|*ENList|ENVerb;*|+ENPBegin|*|*;
 2040;55;ENDummy2;-ENDummy2;
+
+/*		2040. Coronally and sagittally reformatted images were provided.
+
 2135;55;ENVerb+ENWithSObj|ENArtPosspron|*ENCon|ENVerb;*|+ENPBegin|*|*;
+
+/*		2135. He said the special guest had arrived.
+
+2528;55;"no"|*ENCon|ENArtPosspron|*typeConcept|ENVerb;*|*|+ENPBegin|*|*;
+
+/*		2528. We had no idea the dog had escaped.
+
 2105;55;^ENPBegin|ENConj:ENWhich|*^ENVerb+^ENAndOrBut+^ENComma+^ENPBegin|ENVerb;*|+ENPBegin|*|*;variant of r2047
 2122;55;^ENPBegin|"but"+ENNegStop+^ENList|*^ENVerb+^ENAndOrBut+^ENComma+^ENPBegin;*|+ENPBegin|*;variant of r2105
 2128;55;ENPrep:ENOf:ENBe|*ENCon|ENAndOrBut+^ENList|ENArtPosspron|*ENCon:ENPrep:ENOf|ENVerb+^ENPrespart2|^ENPrep;*|*|+ENPBegin|*|*|*|*;
 2173;55;ENRPart:ENAdvTemp:ENAdv|ENAndOrBut|^typeRelation;*|+ENPBegin|*;
 2222;55;ENPrespart2|.ENAdverbAfter40|ENAndOrBut|^typeRelation+^ENAdj+^ENAdverbAfter40;*|*|+ENPBegin|*;
+2543;55;ENVerb|ENAdj|ENAndOrBut+^ENList|ENArtPosspron;*|*|+ENPBegin|*;
+
+/*		2543.  The patient's liver functions were elevated and the lipase was normal.
+
 2174;55;ENRPart|ENComma|^typeRelation;*|*|+ENPBegin;
+
+/*		2174. Since the target was announced, it has added 47,419 rooms.
+
 2115;55;ENCon:ENMod:")"|ENWhich;*|+ENPBegin;
+
+/*		2115. Most snakes have a slow-acting venom that works like a powerful sedative.
+
 2127;55;^ENPBegin|"there"|ENVerb;*|+ENPBegin|*;
+
+/*		2127. However licensees claimed there had been “almost no increase” in trade from non-smokers to compensate for the loss.
+
 2343;55;ENVerb+^ENV3|.ENPrep:ENArtPosspron|*typeConcept+^ENPBegin|ENArtPosspron+^ENPBegin|*typeConcept|ENVerb;*|*|*|+ENSubord|*|*;
+
+/*		2343. The Chairman said in a statement the board remains positive about the long term growth prospects for the business.
+
 2029;55;ENComma|ENPBegin|*^ENComma|ENComma|ENRel+^ENList;*|*|*|*|+ENPBegin;
 2134;55;ENComma|ENPBegin|*^ENComma|ENComma|ENAdv:ENAdvmodal|ENRel+^ENList;*|*|*|*|+ENPBegin|-ENPBegin;variant of r2029
 2031;55;ENComma|ENPBegin|*^ENComma|ENComma|ENAndOrBut+^ENList|^typeConcept;*|*|*|*|+ENPBegin|*;
@@ -3189,6 +3294,7 @@
 2490;55;ENIt:"that"|ENBe|"because";*|*|-ENPBegin-ENAttrStop;
 2170;55;ENComma+^ENList|ENArtPosspron+^ENPBegin|^ENPBegin;*|+ENPBegin|*;
 2225;55;ENComma|ENAdverbAfter40+^ENPBegin|ENArtPosspron+^ENPBegin|*typeConcept|ENVerb:SEnd;*|+ENPBegin|*|*|*;
+2523;55;"said"+^ENPBegin|ENAdj;*|+ENPBegin;
 2032;55;ENHyphen:ENAndOrBut+^ENList|.ENAdvstruct:ENAdvTemp|ENPerspron_subj:ENIt:ENPerspron:ENWhich|^ENComma+^ENTo+^ENPerspron_subj+^ENPerspron+^SEnd;+ENPBegin|*|*|*;
 2048;55;ENHyphen:ENAndOrBut|.ENAdvstruct:","|ENPBegin;+ENPBegin|*|-ENPBegin;
 2106;55;ENHyphen:ENAndOrBut+^ENList+^ENPBegin|.ENAdvstruct:ENAdverbAfter40|ENVerb:ENNot;+ENPBegin|*|*;
@@ -3258,6 +3364,10 @@
 
 1236;60;SBegin:ENColon|ENAux:ENmAux|ENPerspron:ENPerspron_subj:ENIt:ENDemonstr_s:ENDemonstr_pl|ENNot;*|*|*|-ENNot-ENNegation-ENNegBegin+ENAdvmodal;questions with inversion
 1389;60;SBegin:ENColon|ENAux:ENmAux|*ENCon|ENNot;*|*|*|-ENNot-ENNegation-ENNegBegin+ENAdvmodal;questions with inversion, variant of r1236, low-frequent
+2535;60;SBegin:ENColon|ENAuxneg|^ENInf+^ENRPart+^ENBe+^ENAdvstruct;*|-ENNegation-ENNegBegin|*;
+
+/*		2535. Weren't they phantastic?
+
 1238;60;SBegin|ENQuestion|ENAux:ENmAux|ENPerspron:ENPerspron_subj:ENIt:ENDemonstr_s:ENDemonstr_pl|ENNot;*|+ENNegBegin|*|*|^ENNot;questions with inversion
 1391;60;SBegin|ENQuestion|ENAux:ENmAux|*ENCon|ENNot;*|+ENNegBegin|*|*|*;questions with inversion
 
@@ -3278,7 +3388,7 @@
 
 /* Expansion to the left
 
-751;60;ENIt:ENPerspron_subj|.ENAdvmodal:ENAdvstruct:ENAdv|ENAuxneg;+ENNegBegin|*|*;
+751;60;ENIt:ENPerspron_subj|.ENAdvmodal:ENAdvstruct:ENAdv|ENAuxneg:ENVerb+ENNegation;+ENNegBegin|*|*;
 1394;60;*ENCon|.ENAdvmodal:ENAdvstruct:ENAdv|ENAuxneg:ENVerb+ENNegation;+ENNegBegin|*|*;variant of r751
 1235;60;ENIt:ENPerspron_subj|ENBe|ENAdvmodal:ENAdvstruct:ENAdv|ENNot;+ENNegBegin|^ENBe|*|^ENNot;variant of r751
 1396;60;*ENCon|ENBe|ENAdvmodal:ENAdvstruct:ENAdv|ENNot;+ENNegBegin|^ENBe|*|^ENNot;variant of r1235
@@ -3294,12 +3404,17 @@
 1201;60;*ENCon|ENOf|ENArtPosspron|ENNegBegin;+ENNegBegin|*|*|*;
 1219;60;ENList+^ENNegBegin|*ENList+^ENNegBegin+^ENNegStop|ENNegBegin+^ENNegation;+ENNegBegin|*|*;
 
-/* Note to r1203 and r1204: 1203 rewrites various prepositions to ENOf, r1204 keeps the original label (Prep or Of). 
-/*                          Replacing ^ENOf by * in r1203 has positive effects on measurement expansion and negative effects on negation expansion in the corpus. 
-/*                          -> needs further fine-tuning
+/* Note to r1203, r2559 and r1204: 1203 rewrites various prepositions to ENOf, r1204 keeps the original label (Prep or Of). 
 /* 													Integrating r1204 in 1203 with * has both positive and negative side-effects for negation and measurement expansion of both 'of' and other prepositions.
 
-1203;60;*ENCon|"of":ENPrep+^"as"|ENNegBegin+^ENNegation;+ENNegBegin|^ENOf|-ENNegBegin;
+2559;60;*ENCon|"of"|ENNegBegin+^ENNegation;+ENNegBegin|*|-ENNegBegin;
+
+/*		2559. The trend of economic overheating hasn't been solved at the root, inflation risks have grown.
+
+1203;60;*ENCon|ENPrep+^"as"+^"of"|ENNegBegin+^ENNegation;+ENNegBegin|^ENOf|-ENNegBegin;
+
+/*		1203. The trend toward economic overheating hasn't been solved at the root, inflation risks have grown.
+
 2007;60;"during"+ENOf;-ENOf+ENPrep;preliminary fix for negative side-effect of r1203 to avoid that 'during' becomes nonrelevant
 1204;60;*ENCon|"of":ENPrep+^"as"|ENArtPosspron|ENNegBegin+^ENNegation;+ENNegBegin|*|^ENArtPosspron|-ENNegBegin;
 1786;60;*typeConcept|ENOf+ENRel|*typeConcept+ENNegBegin;+ENNegBegin|-ENOf-ENPrespart|-ENNegBegin;to deal with specific lexreps that originally had ENRel & ENPrespart
@@ -3332,6 +3447,10 @@
 
 /*		2050. I don't know if it was out of sympathy.
 
+2551;60;ENCondition+^ENInNegspan|.ENArtPosspron|ENNegBegin;+ENNegBegin+ENInNegspan|*|-ENNegBegin;
+
+/*		2551. If the Joint Committee does not reach an agreement after consultations, the State Party may adopt the appropriate measures to deal with the difficulties resulting from the practice.
+
 2053;60;typeRelation+^ENInNegspan|ENAndOrBut:ENConj+ENNegBegin;*|+ENBeginrelation;
 2054;60;ENAndOrBut|typeRelation+ENNegBegin;+ENBeginrelation+ENNegBegin|-ENBeginrelation;
 
@@ -3359,6 +3478,12 @@
 
 2284;60;typeRelation+^ENInNegspan|ENNegBegin+ENAndOrBut;*|+ENBeginrelation;
 
+/* PREPARATION FOR SENTIMENT DETECTION: SPECIFIC WORDS
+
+2564;60;"like"+ENInf+^ENInNegspan;-ENPosSentiment;
+
+/*		2564. We would like to see the results.
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 62: FINALIZATION OF PATH-RELEVANCY                                                                                                                          
@@ -3374,7 +3499,7 @@
 951;62;ENDemonstr_s:ENDemonstr_pl|ENRel:ENBe:ENPrep:ENOf:ENAndOrBut:ENPunctuation:ENAdv:ENQuestion;ENMod|*;
 2356;62;ENDemonstr_s:ENDemonstr_pl|*ENAdvmandeg:ENAdvmodal|^typeConcept;ENMod|*|*;
 1048;62;ENRel|ENDemonstr_s:ENDemonstr_pl|^typeConcept+^SEnd;^ENRel|ENMod|*;
-1047;62;ENDemonstr_s:ENDemonstr_pl|ENPerspron_subj:ENWhich:SEnd;ENMod|*;
+1047;62;ENDemonstr_s:ENDemonstr_pl|ENPerspron_subj:ENArtPosspron:ENWhich:SEnd;ENMod|*;
 2321;62;ENDemonstr_s:ENDemonstr_pl;ENArtPosspron;default for remaining cases
 952;62;ENPerspron_obj:ENPerspron_subj;+ENMod;
 901;62;ENQuantity+ENMod|typeConcept;-ENMod|*;
@@ -3393,7 +3518,8 @@
 2486;65;ENNegStop+^ENCertainty+^"because";+ENAttrStop;
 
 /*		2486. The patient did not know what happened next, but apparently she was found down by her husband in their house.
-/* SENTIMENT ON VERB OR ADVERB -> expand to phrase
+
+/* CERTAINTY ON VERB OR ADVERB -> expand to phrase
 /* Assign attributes
 
 2357;65;typeRelation+ENCertainty+^ENPrep;+ENCertBegin;
@@ -3419,12 +3545,14 @@
 2506;65;ENPossibility+ENBe|ENRPart;-ENCertainty-ENCertBegin|*;
 
 /*		2506.  a favorable outcome could be observed in all patients. NOT_IN: They asked how many people could be affected by this rule.
+
 /* Expansion rules
 /* Exception: relation-type marker after preposition
 
 2359;65;^ENCertainty|ENPrep:ENOf+^"down"+^"as"|."both"|ENCertBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2|+ENDummy2;
 
 /*		2359. Recently, the number of all-time discoveries passed the 15,000 mark, serving to highlight the importance of being able to spot and predict the paths of potentially destructive rocks in the night sky.
+
 /* Exception: marker after AndOrBut
 
 2373;65;ENAndOrBut+^ENList+^"or"|ENCertBegin;+ENPBegin|*;
@@ -3435,6 +3563,7 @@
 2485;65;"("|.^ENCertBegin+^")"|ENCertBegin;+ENDummy2|*|*;
 
 /*		2485. She had a severe rash (probably not treated yet).
+
 /* General rules
 
 2360;65;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^ENCertBegin+^ENDummy2|ENCertBegin+^"chance"+^ENPBegin;+ENCertBegin|*|-ENCertBegin;
@@ -3452,6 +3581,7 @@
 2487;65;^ENCertainty+^ENAdvstruct|ENAttrStop|.^ENCertainty+^ENPBegin+^ENCertStop|ENCertStop;*|+ENCertStop|*|-ENCertStop;shorten scope at AttrStop
 
 /*		2487. Increased AF in some macular diseases may be due to unmasking of AF rather than increased fluorophores within abnormal retina.
+
 /* Special cases:
 
 2363;65;SBegin|ENCertBegin|","|ENPBegin+ENCertStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|-ENCertStop|*|+ENCertStop;
@@ -3465,11 +3595,13 @@
 2493;65;ENCertainty|.ENNegation|"because":"whether"+ENPBegin+ENCertStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertStop|*|+ENCertStop;exception to r2377
 
 /*		2493. Analysts, predicting write-downs, have been doubting whether it will make a profit of $5 billion in 2019.
+
 /* Assign InXxxsentspan attributes
 
 2364;65;ENCertBegin|.^ENCertStop|ENCertStop;+ENInCertspan|+ENInCertspan|*;
 
 /*		2364. Clearly, regional measurements can provide more detailed information about morphologic changes that cannot be gained by globally averaged evaluations alone.
+
 /* Split Relations at boundaries of span
 
 2365;65;typeRelation:typeOther+^ENInCertspan|typeRelation+ENInCertspan;*|+ENBeginrelation;
@@ -3479,17 +3611,20 @@
 2366;65;typeRelation:typeOther+ENInCertspan|typeRelation+^ENInCertspan;*|+ENBeginrelation;
 
 /*		2366. So it was likely a very modern-looking small bird, around the size of a budgerigar.
-/* SENTIMENT ON OTHER MARKERS -> expand to the right, no expansion to the left
+
+/* CERTAINTY ON OTHER MARKERS -> expand to the right, no expansion to the left
 /* Assign attributes to (Begin)Concepts
 
 2379;65;typeConcept:typeBeginConcept+ENCertainty+^ENCertBegin;+ENCertConceptBegin;
 
 /*		2379. There was no evidence of bleeding.
+
 /* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
 
 2380;65;ENPrep+ENCertainty;+ENCertConceptBegin;
 
 /*		2380. giant gastric ulcer without evidence of active bleeding.
+
 /* Expansion rules for type(Begin)Concept, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
 
 2382;65;ENCertConceptBegin|ENPrep|ENVerb;*|+ENCertConceptStop|*;
@@ -3503,6 +3638,7 @@
 2484;65;ENWithToInf1:ENWithToInf2|ENRel|ENVerb+ENCertConceptStop|.^ENVerb+^ENPerspron_subj+^ENNegation+^ENPBegin+^"but"+^ENAttrStop+^SEnd+^ENCertConceptStop|ENVerb:ENPerspron_subj:ENNegation:ENPBegin:"but":ENAttrStop:SEnd;*|*|-ENCertConceptStop|*|+ENCertConceptStop;correction of 2383
 
 /*		2484. We will not be complacent and are absolutely committed to taking action to tackle inequalities and increase employment rates.
+
 /* Expansion rules for Certainty attribute on adjective preceded by a linking verb -> expansion to the left
 
 2394;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENCertainty;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
@@ -3516,6 +3652,7 @@
 2396;65;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENCertainty;+ENCertBegin|-ENPBegin|*;
 
 /*		2396. I am not confident that I can give an accurate answer to that.
+
 /* Expansion rule for Certainty attribute on adverbs modifying an adjective and preceded by a linking verb -> expansion to the left
 
 2503;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdvmandeg+ENCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
@@ -3525,6 +3662,7 @@
 2504;65;typeConcept+^ENAdj|*ENAuxneg+ENBe+^ENPBegin|ENAdvmandeg+ENCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
 
 /*		2504. The appendix is not clearly visualized.
+
 /* No expansion to the right for Endconcept
 
 2384;65;ENEndconcept+ENCertainty|^ENCertainty+^ENCertConceptBegin;*|+ENCertConceptStop;
@@ -3534,6 +3672,7 @@
 2397;65;ENCon:ENAdj+ENCertainty+ENCertConceptBegin|.ENAdverbAfter40|ENPBegin+ENCertConceptStop+^"because"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertConceptStop-ENCertStop|*|+ENCertConceptStop;
 
 /*		2397. We are sure that this is no ordinary recession.
+
 /* Further expansion to the left to include the entire 'subject'
 
 2399;65;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENCertConceptBegin;*|+ENCertConceptBegin+ENDummy2|*|-ENDummy2-ENCertConceptBegin;
@@ -3548,7 +3687,8 @@
 2402;65;ENDummy2;-ENDummy2;
 
 /*		2402.  A relationship between tumour volume and local control seems unlikely.
-/* Remove SentimentConcept markers in larger Sentiment span
+
+/* Remove CertConcept markers in larger CertaintySentiment span
 
 2385;65;ENCertConceptBegin+ENInCertspan;-ENCertConceptBegin;
 
@@ -3557,7 +3697,8 @@
 2386;65;ENCertConceptStop+ENInCertspan+^ENPBegin;-ENCertConceptStop;
 
 /*		2386. The passion of our common involvement no doubt caused our involvement in passion for each other.
-/* Rewrite SentimentConcept labels to interpretable Sentiment labels
+
+/* Rewrite CertConcept labels into interpretable Certainty labels
 
 2387;65;ENCertConceptBegin;^ENCertBegin;
 
@@ -3566,6 +3707,7 @@
 2388;65;ENCertConceptStop;^ENCertStop;
 
 /*		2388. They were not confident that it was an effective method of cervical cancer prevention.
+
 /* Assign InXxxsentspan attributes
 
 2389;65;ENCertBegin|.^ENCertStop|ENCertStop;+ENInCertspan|+ENInCertspan-ENCertBegin|*;
@@ -3582,6 +3724,7 @@
 2491;65;"if"+^ENInCertspan|ENCertBegin;+ENBeginrelation+ENCertBegin|-ENCertBegin;
 
 /*		2491. If scientists were not confident that they could discover the causes of things using scientific techniques, the sort used to study the physical universe, then they would not spend the time or effort trying to discover those causes.
+
 /* Split Relations at boundaries of span
 
 2403;65;typeRelation:typeOther+^ENInCertspan+^"to"|typeRelation+ENInCertspan;*|+ENBeginrelation;
@@ -3591,6 +3734,7 @@
 2404;65;typeRelation:typeOther+ENInCertspan+^ENPrep|typeRelation+^ENInCertspan;*|+ENBeginrelation;
 
 /*		2404. Maybe the pressure is off because Francis keeps it off.
+
 /* Move CertBegin and CertStop from NR to R/C/PR
 
 2368;65;ENCertBegin+^typeRelation+^typeConcept+^typePathRelevant+^ENCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
@@ -3601,16 +3745,18 @@
 
 /*		2369. Improved reporting of the diseases by public health agencies could also be a contributing factor, the state said.
 
+2565;65;ENCertBegin+ENNonrelevant+^ENCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 70: SENTIMENT                                                                                                                                               
 /* ==================================================================================================================================================================
 /* REVERSE SENTIMENT WITH "less"
 
-2304;70;"less"|ENPosSentiment;*|^ENNegatedPossent+ENNegSentiment;
-2305;70;"less"|ENNegSentiment+^ENNegatedPossent;*|^ENNegatedNegsent+ENPosSentiment;
-2308;70;ENPosSentiment+typeRelation|"less"|^ENNegatedPossent+^ENNegatedNegsent;-ENPosSentiment+ENNegatedPossent+ENNegSentiment|*|*;
-2309;70;ENNegSentiment+typeRelation+^ENNegatedPossent|"less"|^ENNegatedPossent+^ENNegatedNegsent;-ENNegSentiment+ENNegatedNegsent+ENPosSentiment|*|*;
+2304;70;"less":"a lot less":"much less"|ENPosSentiment;*|^ENNegatedPossent+ENNegSentiment;
+2305;70;"less":"a lot less":"much less"|ENNegSentiment+^ENNegatedPossent;*|^ENNegatedNegsent+ENPosSentiment;
+2308;70;ENPosSentiment+typeRelation|"less":"a lot less":"much less"|^ENNegatedPossent+^ENNegatedNegsent;-ENPosSentiment+ENNegatedPossent+ENNegSentiment|*|*;
+2309;70;ENNegSentiment+typeRelation+^ENNegatedPossent|"less":"a lot less":"much less"|^ENNegatedPossent+^ENNegatedNegsent;-ENNegSentiment+ENNegatedNegsent+ENPosSentiment|*|*;
 
 /* SENTIMENT ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
 
@@ -3625,6 +3771,9 @@
 2205;70;typeRelation+ENNegSentiment+^ENPrep;+ENNegSentimentBegin;
 2268;70;ENAdverb+^typeConcept+ENPosSentiment;+ENPosSentimentBegin;
 2269;70;ENAdverb+^typeConcept+ENNegSentiment;+ENNegSentimentBegin;
+2537;70;"unfortunately"+ENNegSentiment;-ENAdvmandeg+ENAdverb+ENNegSentimentBegin;
+
+/*		2537. Unfortunately, there were not any boats left.
 
 /* Expansion rules
 /* Exception: relation-type marker after preposition
@@ -3634,16 +3783,43 @@
 
 /* General rules
 
-2206;70;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^ENPosSentimentBegin+^ENDummy2|ENPosSentimentBegin+^ENPBegin;+ENPosSentimentBegin|*|-ENPosSentimentBegin;
-2207;70;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^ENNegSentimentBegin+^ENDummy2|ENNegSentimentBegin+^ENPBegin;+ENNegSentimentBegin|*|-ENNegSentimentBegin;
+2541;70;*typeConcept|ENPartAfter40+ENPosSentimentBegin+^ENPBegin|"by";+ENPosSentimentBegin+ENDummy2|-ENPosSentimentBegin|*;
+
+/*		2541. It is known as a destination enjoyed by many celebrities.
+
+2542;70;*typeConcept|ENPartAfter40+ENNegSentimentBegin+^ENPBegin|"by";+ENNegSentimentBegin+ENDummy2|-ENNegSentimentBegin|*;
+
+/*		2542.UD. The investigation also looked at abuse suffered by his brother.
+
+2206;70;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^ENPosSentimentBegin+^ENDummy2|ENPosSentimentBegin+^ENPBegin+^ENDummy2;+ENPosSentimentBegin|*|-ENPosSentimentBegin;
+2207;70;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^ENNegSentimentBegin+^ENDummy2|ENNegSentimentBegin+^ENPBegin+^ENDummy2;+ENNegSentimentBegin|*|-ENNegSentimentBegin;
+
+/*		2207.UD. Phalaenopsis orchids hate low temperatures.
+
 2347;70;ENDummy2;-ENDummy2;remove temp label
-2210;70;ENPosSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|+ENPosSentimentStop;
-2211;70;ENNegSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|+ENNegSentimentStop;
+
+/*		2347.UD. The man is awarded for successfully founding an educational system in the region.
+
+2210;70;ENPosSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd;*|*|+ENPosSentimentStop;
+
+/*		2210.UD. An evening like this makes me feel hopeful and optimistic and happy.
+
+2550;70;ENNegSentiment+ENPrespart2|.^typeConcept|*typeConcept|ENVerb;*|*|*|+ENNegSentimentStop+ENAttrStop;
+
+/*		2550. But it is worrying that employment is down and more people are dropping out of the labour market.
+
+2211;70;ENNegSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd;*|*|+ENNegSentimentStop;
 
 /* Special cases:
 
+2539;70;SBegin:ENAndOrBut:ENPunctuation|"unfortunately"+ENNegSentiment|.","|ENPBegin+ENNegSentimentStop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|-ENNegSentimentStop|*|+ENNegSentimentStop;separate rule for unfortunately
+
+/*		2539. Unfortunately, it didn't work.
+
 2348;70;SBegin|ENPosSentimentBegin|","|ENPBegin+ENPosSentimentStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|-ENPosSentimentStop|*|+ENPosSentimentStop;
-2349;70;SBegin|ENNegSentimentBegin|","|ENPBegin+ENNegSentimentStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|-ENNegSentimentStop|*|+ENNegSentimentStop;
+2349;70;SBegin:ENPunctuation:ENAndOrBut|.ENNonrelevant|ENNegSentimentBegin|","|ENPBegin+ENNegSentimentStop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|*|-ENNegSentimentStop|*|+ENNegSentimentStop;
+
+/*		2349.UD. Sadly, that cartridge door doesn't open, though.
 
 /* Assign InXxxsentspan attributes
 
@@ -3653,6 +3829,9 @@
 /* Split Relations at boundaries of span
 
 2212;70;typeRelation:typeOther+^ENInPossentspan|typeRelation+ENInPossentspan;*|+ENBeginrelation;
+
+/*		2212.UD. My mother will be so happy to see her.
+
 2213;70;typeRelation:typeOther+^ENInNegsentspan|typeRelation+ENInNegsentspan;*|+ENBeginrelation;
 2216;70;typeRelation:typeOther+ENInPossentspan|typeRelation+^ENInPossentspan;*|+ENBeginrelation;
 2217;70;typeRelation:typeOther+ENInNegsentspan|typeRelation+^ENInNegsentspan;*|+ENBeginrelation;
@@ -3660,54 +3839,71 @@
 /* SENTIMENT ON OTHER MARKERS -> expand to the right, no expansion to the left
 /* Assign attributes to (Begin)Concepts
 
-2233;70;typeConcept:typeBeginConcept+ENPosSentiment;+ENPosSentimentConceptBegin;
-2234;70;typeConcept:typeBeginConcept+ENNegSentiment;+ENNegSentimentConceptBegin;
+2233;70;typeConcept:typeBeginConcept+ENPosSentiment;+ENPossentConceptBegin;
+2234;70;typeConcept:typeBeginConcept+ENNegSentiment;+ENNegsentConceptBegin;
 
 /* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
 
-2265;70;ENPrep+ENPosSentiment;+ENPosSentimentConceptBegin;
-2266;70;ENPrep+ENNegSentiment;+ENNegSentimentConceptBegin;
+2265;70;ENPrep+ENPosSentiment;+ENPossentConceptBegin;
+2266;70;ENPrep+ENNegSentiment;+ENNegsentConceptBegin;
 
 /* Expansion rules for type(Begin)Concept, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
 
-2237;70;ENPosSentimentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENPosSentimentConceptStop|*;
-2238;70;ENNegSentimentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENNegSentimentConceptStop|*;
-2239;70;ENPosSentimentConceptBegin|ENPrep|ENVerb;*|+ENPosSentimentConceptStop|*;probably not ideal-> review later
-2240;70;ENNegSentimentConceptBegin|ENPrep|ENVerb;*|+ENNegSentimentConceptStop|*;probably not ideal-> review later
+2237;70;ENPossentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENPossentConceptStop|*;
+2238;70;ENNegsentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENNegsentConceptStop|*;
+2239;70;ENPossentConceptBegin|ENPrep|ENVerb;*|+ENPossentConceptStop|*;probably not ideal-> review later
+2240;70;ENNegsentConceptBegin|ENPrep|ENVerb;*|+ENNegsentConceptStop|*;probably not ideal-> review later
 
 /*		2240.UD. The ‘new’ problem of outdoor air pollution is too large to be ignored or deferred to tomorrow’s agenda.
 
-2235;70;ENPosSentimentConceptBegin|.^ENVerb+^ENPerspron_subj+^ENNegation+^ENPBegin+^"but"+^SEnd+^ENPosSentimentConceptStop|ENVerb:ENPerspron_subj:ENNegation:ENPBegin:"but":SEnd;*|*|+ENPosSentimentConceptStop;
+2531;70;ENVerb:ENPerspron_subj:ENNegation:ENPBegin:"but":SEnd:ENAttrStop;+ENDummy2;use temp label to shorten following rules
+
+/*		2531. Bad infections can even lead to blindness and/or loss of the eye.
+
+2235;70;ENPossentConceptBegin|.^ENDummy2+^ENPossentConceptStop|ENDummy2;*|*|+ENPossentConceptStop;
 
 /*		2235.UD. Endoscopic resection was successfully accomplished in 25 patients.
 
-2236;70;ENNegSentimentConceptBegin|.^ENVerb+^ENPerspron_subj+^ENNegation+^ENPBegin+^"but"+^SEnd+^ENNegSentimentConceptStop|ENVerb:ENPerspron_subj:ENNegation:ENPBegin:"but":SEnd;*|*|+ENNegSentimentConceptStop;
+2236;70;ENNegsentConceptBegin|.^ENDummy2+^ENNegsentConceptStop|ENDummy2;*|*|+ENNegsentConceptStop;
 
 /*		2236.UD. Bad infections can even lead to blindness and/or loss of the eye.
 
-2297;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENPosSentimentConceptStop|^SBegin;+ENPosSentimentConceptStop|-ENPosSentimentConceptStop|*;rare, correction of r2235
+2297;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENPossentConceptStop|^SBegin;+ENPossentConceptStop|-ENPossentConceptStop|*;rare, correction of r2235
 
 /*		2297.UD. You will see the benefit sooner than you would think. WRONG: The project also proved therapeutic, helping Maria and I to come to terms with the death of our parents.
 
-2298;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENNegSentimentConceptStop|^SBegin;+ENNegSentimentConceptStop|-ENNegSentimentConceptStop|*;rare, correction of r2236
+2298;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENNegsentConceptStop|^SBegin;+ENNegsentConceptStop|-ENNegsentConceptStop|*;rare, correction of r2236
 
 /*		2298.UD. There were suggestions today that they may have forced the authorities to move against the men sooner than they wanted.
+
+2530;70;^ENPunctuation|ENPrespart2+ENPossentConceptStop|.^ENDummy2+^ENPossentConceptStop|ENDummy2;*|-ENPossentConceptStop|*|+ENPossentConceptStop;correction of r2236
+
+/*		2530. We did a good job of possessing the ball the majority of the time.
+
+2527;70;^ENPunctuation|ENPrespart2+ENNegsentConceptStop|.^ENDummy2+^ENNegsentConceptStop|ENDummy2;*|-ENNegsentConceptStop|*|+ENNegsentConceptStop;correction of r2236
+
+/*		2527. Looking ahead, he said he sees bad debts rising to 20 basis points in 2008 from 9 basis points in 2007.
+
+2532;70;ENDummy2;-ENDummy2;clean up temp label
+
+/*		2532. The market has worsened, Robert said.
+
 /* Expansion rules for Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
 
-2251;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPosSentimentConceptBegin+ENDummy2|-ENPosSentimentConceptStop|*|*;
+2251;70;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp:ENPercent|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPossentConceptBegin+ENDummy2|*|-ENPossentConceptStop|*|*;
 
 /*		2251.UD. The show was good, just not as good as we expected.
 
-2302;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENPosSentiment;*|*|+ENPosSentimentConceptBegin+ENDummy2|-ENPosSentimentConceptStop|*|*;
+2302;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENPosSentiment;*|*|+ENPossentConceptBegin+ENDummy2|-ENPossentConceptStop|*|*;
 
 /*		2302.UD. His trainer is also satisfied that he will be able to clear the fences.
 
 2252;70;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPosSentimentBegin|-ENPBegin|*;
-2253;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegSentimentConceptBegin+ENDummy2|-ENNegSentimentConceptStop|*|*;
+2253;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|*|*;
 
 /*		2253.UD. Business is bad and despite what we're hearing, the hotels are empty.
 
-2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegSentimentConceptBegin+ENDummy2|-ENNegSentimentConceptStop|*|*;
+2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|*|*;
 
 /*		2303.UD. However, more detailed maps are increasingly difficult to view and explore. The patient was "deeply" jaundiced.
 
@@ -3715,86 +3911,90 @@
 
 /* No expansion to the right for Endconcept
 
-2270;70;ENEndconcept+ENPosSentiment|^ENPosSentiment+^ENPosSentimentConceptBegin;*|+ENPosSentimentConceptStop;
+2270;70;ENEndconcept+ENPosSentiment|^ENPosSentiment+^ENPossentConceptBegin;*|+ENPossentConceptStop;
 
 /*		2270.UD. I am delighted I will have the opportunity to work with colleagues to achieve these ends.
 
-2271;70;ENEndconcept+ENNegSentiment|^ENNegSentiment+^ENNegSentimentConceptBegin;*|+ENNegSentimentConceptStop;
+2271;70;ENEndconcept+ENNegSentiment|^ENNegSentiment+^ENNegsentConceptBegin;*|+ENNegsentConceptStop;
 
 /*		2271.UD. He's disappointed Tom forgot the camera.
+
 /* Expansion rules for Sentiment attribute on adjective followed by subordinate clause with "that"
 
-2263;70;ENAdj+ENPosSentiment+ENPosSentimentConceptBegin|"that"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|-ENPosSentimentConceptStop|*|+ENPosSentimentConceptStop;
+2263;70;ENAdj+ENPosSentiment+ENPossentConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENPossentConceptStop|*|+ENPossentConceptStop;
 
 /*		2263.UD. His trainer is also satisfied that he will be able to clear the fences.
 
-2264;70;ENAdj+ENNegSentiment+ENNegSentimentConceptBegin|"that"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|-ENNegSentimentConceptStop|*|+ENNegSentimentConceptStop;
+2264;70;ENAdj+ENNegSentiment+ENNegsentConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENNegsentConceptStop|*|+ENNegsentConceptStop;
 
 /* Further expansion to the left to include the entire 'subject'
 /* Note: ENDummy2 marks ENXxxSentimentConceptBegin in left expansion of adjectives
 
 2255;70;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;
-2256;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENPosSentimentConceptBegin;*|+ENPosSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+2256;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENPossentConceptBegin;*|+ENPossentConceptBegin+ENDummy2|*|-ENDummy2-ENPossentConceptBegin;extend left expansion
 
 /*		2256.UD. On the whole, he said the figures are very positive.
 
-2257;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENNegSentimentConceptBegin;*|+ENNegSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion
+2257;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENNegsentConceptBegin;*|+ENNegsentConceptBegin+ENDummy2|*|-ENDummy2-ENNegsentConceptBegin;extend left expansion
 
 /*		2257.UD. The rest of the exam was negative.
 
-2258;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENPosSentimentConceptBegin;*|+ENPosSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+2258;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENPossentConceptBegin;*|+ENPossentConceptBegin+ENDummy2|*|-ENDummy2-ENPossentConceptBegin;extend left expansion
 
 /*		2258.UD. MPs and peers say the lack of transparency on the policy is ‘not good enough’.
 
-2259;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENNegSentimentConceptBegin;*|+ENNegSentimentConceptBegin+ENDummy2|*|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion
+2259;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENNegsentConceptBegin;*|+ENNegsentConceptBegin+ENDummy2|*|-ENDummy2-ENNegsentConceptBegin;extend left expansion
 
 /*		2259.UD. All drug screens during the patient's hospitalizations were negative.
 
-2260;70;ENPrep|ENDummy2+ENPosSentimentConceptBegin;+ENDummy2+ENPosSentimentConceptBegin|-ENDummy2-ENPosSentimentConceptBegin;extend left expansion
+2260;70;ENPrep|ENDummy2+ENPossentConceptBegin;+ENDummy2+ENPossentConceptBegin|-ENDummy2-ENPossentConceptBegin;extend left expansion
 
 /*		2260.UD. On 05-AUG-2006, at the physician's office, five out of six occult blood tests done on the patient's stool were positive.
 
-2261;70;ENPrep|ENDummy2+ENNegSentimentConceptBegin;+ENDummy2+ENNegSentimentConceptBegin|-ENDummy2-ENNegSentimentConceptBegin;extend left expansion 
+2261;70;ENPrep|ENDummy2+ENNegsentConceptBegin;+ENDummy2+ENNegsentConceptBegin|-ENDummy2-ENNegsentConceptBegin;extend left expansion 
 
 /*		2261.UD. Laboratory result of bronchial culture obtained on 11DEC2016 was negative.
 
 2262;70;ENDummy2;-ENDummy2;cleanup
 
 /*		2262.UD. Business is good and despite what we're hearing, the hotels are busy.
+
 /* Remove SentimentConcept markers in larger Sentiment span
 
-2241;70;ENPosSentimentConceptBegin+ENInPossentspan;-ENPosSentimentConceptBegin;
+2241;70;ENPossentConceptBegin+ENInPossentspan;-ENPossentConceptBegin;
 
 /*		2241.UD. Then there is a big question mark above what happens next.
 
-2242;70;ENNegSentimentConceptBegin+ENInNegsentspan;-ENNegSentimentConceptBegin;
+2242;70;ENNegsentConceptBegin+ENInNegsentspan;-ENNegsentConceptBegin;
 
 /*		2242.UD. It’s not only expensive but bad for the individual concerned.
 
-2243;70;ENPosSentimentConceptStop+ENInPossentspan+^ENPBegin;-ENPosSentimentConceptStop;
+2243;70;ENPossentConceptStop+ENInPossentspan+^ENPBegin;-ENPossentConceptStop;
 
 /*		2243.UD. She points out that San Francisco, the city closest to the Great Pacific Patch, has successfully implemented policies to stop people using wasteful plastics.
 
-2244;70;ENNegSentimentConceptStop+ENInNegsentspan+^ENPBegin;-ENNegSentimentConceptStop;
+2244;70;ENNegsentConceptStop+ENInNegsentspan+^ENPBegin;-ENNegsentConceptStop;
 
 /*		2244.UD. The measures taken by a Party against an action or an omission of another Party may only affect the trade with that Party.
+
 /* Rewrite SentimentConcept labels to interpretable Sentiment labels
 
-2247;70;ENPosSentimentConceptBegin;^ENPosSentimentBegin;
+2247;70;ENPossentConceptBegin;^ENPosSentimentBegin;
 
 /*		2247.UD. He is considered a person with great integrity.
 
-2248;70;ENNegSentimentConceptBegin;^ENNegSentimentBegin;
+2248;70;ENNegsentConceptBegin;^ENNegSentimentBegin;
 
 /*		2248.UD. his oxygen saturation was only 90 % on room air.
 
-2249;70;ENPosSentimentConceptStop;^ENPosSentimentStop;
+2249;70;ENPossentConceptStop;^ENPosSentimentStop;
 
 /*		2249.UD. Endoscopic resection was successfully accomplished in 25 patients.
 
-2250;70;ENNegSentimentConceptStop;^ENNegSentimentStop;
+2250;70;ENNegsentConceptStop;^ENNegSentimentStop;
 
 /*		2250.UD. However, some worries or fears are bigger than others.
+
 /* Assign InXxxsentspan attributes
 
 2245;70;ENPosSentimentBegin|.^ENPosSentimentStop|ENPosSentimentStop;+ENInPossentspan|+ENInPossentspan-ENPosSentimentBegin|*;
@@ -3824,11 +4024,19 @@
 
 /*		2274.UD. It doesn't break the bank.
 
-2273;71;ENNegation|*{1,4}^ENPosSentiment+^ENNegSentiment+^ENNegation+^ENQuestion|ENPosSentiment+ENInNegspan;*|*|+ENNegatedPossent;
+2273;71;"no":ENWithout:ENAdj+ENNegation|*{1,4}^ENPosSentiment+^ENNegSentiment+^ENNegation+^ENQuestion+^ENPBegin|ENPosSentiment+ENInNegspan;*|*|+ENNegatedPossent;
 
-/*		2273.UD. It's an idea that's been tried before, but not as successfully.
+/*		2273.UD. the company has no plans to prioritize recommendation requests in the news feed.
 
-2275;71;ENNegation|*{1,4}^ENNegSentiment+^ENPosSentiment+^ENNegation+^ENQuestion|ENNegSentiment+ENInNegspan;*|*|+ENNegatedNegsent;
+2275;71;"no":ENWithout:ENAdj+ENNegation|*{1,4}^ENNegSentiment+^ENPosSentiment+^ENNegation+^ENQuestion+^ENPBegin|ENNegSentiment+ENInNegspan;*|*|+ENNegatedNegsent;
+
+/*		2275.UD. No maternal or postnatal problems were reported.
+
+2533;71;^ENQuestion|ENNegation+^"no"|.typeRelation+^ENPosSentiment+^ENNegSentiment+^ENNegation+^ENQuestion|.typeConcept:typeOther+^ENPosSentiment+^ENNegSentiment+^ENNegation|ENPosSentiment+ENInNegspan;*|*|*|*|+ENNegatedPossent;
+
+/*		2533. But black boxes aren't perfect.
+
+2534;71;^ENQuestion|ENNegation+^"no"|.typeRelation+^ENPosSentiment+^ENNegSentiment+^ENNegation+^ENQuestion|.typeConcept:typeOther+^ENPosSentiment+^ENNegSentiment+^ENNegation|ENNegSentiment+ENInNegspan;*|*|*|*|+ENNegatedNegsent;
 
 /* Remove original SentimentBegin 
 
@@ -3836,17 +4044,20 @@
 2277;71;*ENNegSentimentBegin|.^ENNegSentimentBegin+^ENNegSentimentStop+^ENNegatedNegsent|ENNegatedNegsent+^ENNegSentimentBegin;-ENNegSentimentBegin|*|*;remove original SentimentBegin
 
 /*		2277.UD. It was performed twice in 1613 but never made it into print and was lost to history.
-/* Reverse sentiment of negated markers
+
+/* Reverse sentiment of negated positive markers
 
 2278;71;^ENInNegspan|ENInNegspan+^ENNegatedPossent|.ENInNegspan+^ENNegatedPossent|ENInNegspan+ENNegatedPossent|.^ENNegStop+^SEnd|*ENNegStop:SEnd;*|+ENNegSentimentBegin-ENPosSentimentBegin|-ENPosSentimentBegin-ENNegSentimentStop|-ENNegatedPossent-ENPosSentimentBegin-ENNegSentimentStop|-ENPosSentimentBegin-ENNegSentimentStop|-ENPosSentimentStop+ENNegSentimentStop;reverse sentiment
-2279;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|.^ENNegStop+^SEnd|*ENNegStop:SEnd;*|+ENPosSentimentBegin-ENNegSentimentBegin|-ENNegSentimentBegin-ENPosSentimentStop|-ENNegatedNegsent-ENNegSentimentBegin-ENPosSentimentStop|-ENNegSentimentBegin-ENPosSentimentStop|-ENNegSentimentStop+ENPosSentimentStop;reverse sentiment
 2280;71;^ENInNegspan|ENInNegspan+^ENNegatedPossent|.ENInNegspan+^ENNegatedPossent|ENInNegspan+ENNegatedPossent|SEnd;*|+ENNegSentimentBegin-ENPosSentimentBegin|-ENPosSentimentBegin|-ENNegatedPossent-ENPosSentimentBegin|-ENPosSentimentStop+ENNegSentimentStop;shorter version of r2278
 
 /*		2280.UD. Devan wasn't happy.
 
-2281;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|SEnd;*|+ENPosSentimentBegin-ENNegSentimentBegin|-ENNegSentimentBegin|-ENNegatedNegsent-ENNegSentimentBegin|-ENNegSentimentStop+ENPosSentimentStop;shorter version of r2279
+2548;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|.^ENNegStop+^SEnd|*ENNegStop:SEnd;*|-ENNegSentimentBegin|-ENNegSentimentBegin|-ENNegatedNegsent-ENNegSentimentBegin|-ENNegSentimentBegin|-ENNegSentimentStop;remove sentiment span
 
-/*		2281.UD. Devan wasn't worried.
+2549;71;^ENInNegspan|ENInNegspan+^ENNegatedNegsent|.ENInNegspan+^ENNegatedNegsent|ENInNegspan+ENNegatedNegsent|SEnd;*|-ENNegSentimentBegin|-ENNegSentimentBegin|-ENNegatedNegsent-ENNegSentimentBegin|-ENNegSentimentStop;shorter version of r...
+
+/*		2549.UD. Devan wasn't worried.
+
 /* Reassign InXxxsentspan attributes
 
 2288;71;ENInPossentspan:ENInNegsentspan;-ENInPossentspan-ENInNegsentspan;
@@ -3896,7 +4107,7 @@
 /*		2188. histamine H1 (Ki= 30 nM) and 5-HT2C (Ki= 102 nM).
 
 2187;75;ENNum+ENNoMeasurement;-ENNum-ENMeasurement;
-1983;75;"of"|ENNum;*|+ENMeasurement;
+1983;75;"of"|ENNum+^ENTime;*|+ENMeasurement;
 
 /*		1983.	A heartbeat of 72 and a heartbeat of 200.
 
@@ -3915,6 +4126,7 @@
 1993;75;"one"|ENUnit;+ENMeasurement+ENNum-ENBeginconcept|ENCon+ENUnit-ENOutOff;
 
 /*		1993.	Among suggestions are turning thermostats down by one degree, which may see a 10 per cent cut in fuel bills.
+
 /* 75.2 -- COMBINE NUMBER/TIME FOLLOWED BY CONCEPT INTO ONE MEASUREMENT/TIME PATH
 
 1955;75;ENNum+^ENDuration+^ENFrequency+^ENTime|"points":"percent";+ENMeasurement+ENMeasurementBegin|+ENMeasurement;
@@ -3943,7 +4155,7 @@
 1896;75;"since"|"the"|ENTime;+ENDateTimeBegin|*|-ENDateTimeBegin;
 1936;75;*typeConcept+^ENTime|ENTime+^ENAdvTime;+ENDateTimeBegin|-ENDateTimeBegin;
 1964;75;"one"|"of"|*typeConcept+^ENTime|ENTime+^ENAdvTime;+ENMeasurementBegin|*|-ENDateTimeBegin-ENMeasurementBegin|*;
-1992;75;"one":ENNum|"out of"|ENMeasurementBegin+^ENTime;+ENMeasurementBegin|*|-ENDateTimeBegin-ENMeasurementBegin;
+1992;75;"one":ENNum|.typeConcept|"out of"|ENNum:ENMeasurementBegin+^ENTime;+ENMeasurementBegin|*|*|-ENDateTimeBegin-ENMeasurementBegin;
 1940;75;*typeConcept+^ENDuration|ENDuration+^ENAdvDurCon;+ENDateTimeBegin|-ENDateTimeBegin;
 1966;75;ENDuration|*typeConcept|^typeConcept;+ENDateTimeBegin|-ENDateTimeBegin|+ENDateTimeStop;
 1962;75;ENPathRelObj|*typeConcept+ENDateTimeBegin+^ENDuration|ENDuration:ENTime;+ENDateTimeBegin|-ENDateTimeBegin|-ENDateTimeBegin;
@@ -3963,14 +4175,14 @@
 /* 75.4 -- EXPANSION OF MEASUREMENTS
 /* 75.4.1 -- MEASUREMENT EXPANSION - SPECIFY RIGHT AND LEFT
 
-1792;75;*ENMeasurement|*typeConcept|typeRelation+^ENList;+ENMeasurementBegin|*|+ENMeasurementStop;
+1792;75;*ENMeasurement|*typeConcept|typeRelation+^ENList+^"out of"+^"up to";+ENMeasurementBegin|*|+ENMeasurementStop;
 2201;75;ENFrequency|ENAndOrBut+ENList|^ENFrequency;*|+ENMeasurementStop|*;
 1878;75;*ENMeasurement|*typeConcept:typeEndConcept|SEnd;+ENMeasurementBegin|*|+ENMeasurementStop;
 1793;75;ENMeasurement+ENSize|*typeConcept|ENPunctuation;+ENMeasurementBegin|*|+ENMeasurementStop;
 1781;75;ENMeasurement|"a":"an"|*typeConcept|^typeConcept;+ENMeasurementBegin|ENCon-ENArtPosspron|*|+ENMeasurementStop;doesn't always work for "the"
 1920;75;ENMeasurement|"to"|ENMeasurement+ENMeasurementBegin;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|-ENMeasurementBegin;
 1784;75;ENMeasurement+ENDirection|ENOf|*typeConcept|typeRelation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
-1773;75;*ENMeasurement|"of"|ENCon|"by":"in":"into":ENRel:ENPunctuation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
+1773;75;*ENMeasurement|"of"|*ENCon:ENList|"by":"in":"into":ENRel:ENPunctuation;+ENMeasurementBegin|*|*|+ENMeasurementStop;
 
 /*		1773.	More than two inches of rain fell over the weekend.
 
@@ -4005,6 +4217,7 @@
 2507;75;ENMeasurement|ENAndOrBut|^ENNum+^ENNumberPlusUnit2+^ENNumberPlural;*|+ENMeasurementStop|*;
 
 /*		2507. The patient's blood pressure was 180/98 and physical exam was unremarkable.
+
 /* 75.4.3 -- MEASUREMENT EXPANSION (MAINLY TO THE LEFT)
 
 1877;75;*typeConcept|"of"|typeConcept|ENFrequency;+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop|-ENMeasurementBegin-ENMeasurementStop|*;
@@ -4041,6 +4254,7 @@
 1915;75;*ENMeasurement|"within";+ENMeasurementBegin|-ENMeasurementBegin-ENMeasurementStop;
 
 /*		1915. earn 12,000 Miles within 12 months.
+
 /* 75.6 -- SPECIAL CASES
 /* 75.6.1 -- SPECIAL CASE: "UP TO" - PART 1
 
@@ -4064,7 +4278,6 @@
 
 /*		1960.	Net income for the year ended December 31, 2016, was $200 million.
 
-2003;75;ENPerspron_refl|"as";*|+ENBeginrelation+ENDateTimeStop+ENMeasurementStop-ENPrep;
 1959;75;ENPunctuation|^ENList;+ENDateTimeStop|*;
 1910;75;"during";+ENBeginrelation+ENDateTimeBegin-ENPrepDuration-ENPrep;
 1900;75;ENList|"and"|*ENList|ENPunctuation;*|-ENMeasurementStop|*|+ENMeasurementStop;
@@ -4096,6 +4309,7 @@
 1998;75;ENDuration:ENTime|ENPerspron_subj:ENPerspron_obj;*|+ENDateTimeStop;
 
 /*		1998.	Put it on your calendar that the last two weeks you have to be ready every day.
+
 /* 75.6.2 -- SPECIAL CASES: MEASUREMENT EXPANSION
 
 1824;75;"of"|"that":"whom";*|-ENMeasurementStop;
@@ -4210,6 +4424,7 @@
 1934;75;ENDuration|"of";+ENDateTimeBegin|-ENDateTimeStop;
 
 /*		1934.	A few weeks of antibiotic treatment cures most cases, though some people's symptoms linger for several months.
+
 /* 75.8 -- REMOVE EXPANSION WHEN IT EQUALS THE ATTRIBUTE
 
 2202;75;ENMeasurementBegin|.^ENMeasurementStop+^SEnd|ENMeasurementStop:SEnd;+ENInMeasspan|+ENInMeasspan|*;
@@ -4268,6 +4483,7 @@
 
 /*		2315. No silver lining, yet, for Cindy .
 
+2538;$;ENAndOrBut+ENNonrelevant+ENPosSentimentBegin:ENNegSentimentBegin;-ENNonrelevant;avoid that attribute span gets lost due to nonrelevant first word
 2329;$;ENNRSentmarker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant sentiment markers relations
 
 /*		2329.UD. The osteotomy was partially healed only.

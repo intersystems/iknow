@@ -87,7 +87,7 @@
 ;1,40,50;ENConIfCap;typeAmbiguous;make concept if capitalized;0;;
 ;1,40,50;ENConIfCapAll;typeAmbiguous;make concept if capitalized;0;;
 ;1,40,50;ENConIfCap1;typeAmbiguous;make concept if capitalized - for one-letter-words;0;;
-;1,50,55,60,65;ENConj;typeRelation;subordinate conjunction;0;;
+;1,50,55,60,65,70;ENConj;typeRelation;subordinate conjunction;0;;
 ;1,40,50;ENConpart2;typeConcept;last part of a name;0;;
 ;1,20,25,26,40,$;ENConTime;typeConcept;part of a time indication;0;;
 ;1,20,25,40,$;ENConTimePlural;typeConcept;part of a time indication, for words in plural;0;;
@@ -116,7 +116,7 @@
 ;1,40,50,65,70,71,81,$;ENLinkingverb;typeRelation;becomes seems appears;0;;
 ;1,40,50,$;ENListnumber;typeBeginEndConcept;numbers for list;0;;
 ;1,40,50,$;ENLitNo;typeConcept;only the word no;0;;
-;1,20,40,50,55,60,65,75,81,$;ENmAux;typeRelation;modal auxiliaries;0;;
+;1,20,40,50,55,60,65,70,75,81,$;ENmAux;typeRelation;modal auxiliaries;0;;
 ;1,40;ENMay;typeAmbiguous;to differentiate between "May" as month or name;0;;
 ;1,26,40,75,$;ENNumberPlusUnit;typeConcept;general label for all numbers plus units without space;0;;Entity(Measurement,Value,Unit)
 ;20,25,40,50,55,62,65,70,71,75,$;ENMod;typePathRelevant;PathRelevant entity;0;;
@@ -124,7 +124,7 @@
 ;1,20,40,50,$;ENNeither;typeRelation;neither;0;;
 ;1,20,40,50,60,$;ENNo;typeConcept;no etc., added for medical content;0;;
 ;1,50,60,$;ENNone;typePathRelevant;none;0;;
-;1,50,55,$;ENNonrelevant;typeOther;label for disambiguation;0;;
+;1,50,55,65,70,71,$;ENNonrelevant;typeOther;label for disambiguation;0;;
 ;1,20,50;ENNor;typeRelation;nor;0;;
 ;1,20,40,50,55,60,65,70,71,81,$;ENNot;typeRelation;not etc., added for medical content;0;;
 ;20,50,$;ENNotMany;typePathRelevant;"not many";0;;
@@ -142,10 +142,10 @@
 ;1,40,50,55,65,70,71,$;ENOutOff;typeRelation;out, off;0;;
 ;1,20,25,40;ENPart;typeAmbiguous;relation or modifier;0;;
 ;1,40,50,$;ENPart2;typeRelation;past participle, besides other label;0;;
-;1,55;ENPartAfter40;typeRelation;extra label for past participles without a linking verb if they become relations;0;;
+;1,55,70;ENPartAfter40;typeRelation;extra label for past participles without a linking verb if they become relations;0;;
 ;1,20,$;ENPartofnum;typeConcept;for parts of numbers to be joined into one number;0;;
 ;40,50,62,65,70,71,75,$;ENPathRelObj;typePathRelevant;possesive pronouns out of ENArtPosspron;0;;
-;1,20,25,26,75,$;ENPercent;typeConcept;label for different lexreps expressing percent;0;;
+;1,20,25,26,70,75,$;ENPercent;typeConcept;label for different lexreps expressing percent;0;;
 ;1,40,50,55,60,65,70,71,$;ENPerspron;typePathRelevant;everyone, nobody, no-one;0;;
 ;1,20,40,50,55,60,62,65,70,71,75;ENPerspron_obj;typeNonRelevant;objectpron.;0;;
 ;1,20,40,50,75,$;ENPerspron_refl;typeRelation;objectpron. en refl. pron.;0;;
@@ -165,8 +165,8 @@
 ;1,20,25,40,50,55,60,62,65,70,71,75,81,$;ENRel;typeRelation;unambiguous relation;0;;
 ;1,20,25,40;ENRelOth;typeAmbiguous;relation or other;0;;
 ;1,20,50;ENRight;typeAmbiguous;part of preposition when preceding it;0;;
-;1,55,65,70,71;ENRPart;typeRelation;past participle which is (disambiguated as) relation;0;;
-;1,40;ENsAdj;typeConcept;extra label for words ending on possessive 's;0;;
+;1,55,60,65,70,71;ENRPart;typeRelation;past participle which is (disambiguated as) relation;0;;
+;1,20,40;ENsAdj;typeConcept;extra label for words ending on possessive 's;0;;
 ;1,20,40;ENSo;typeAmbiguous;so;0;;
 ;40;ENStreet;typeConcept;street, rd., avenue etc.;0;;
 ;1,20,40,50,$;ENThere;typeBeginConcept;there and some adverbs of place;0;;
@@ -182,7 +182,7 @@
 ;1,40,50;ENVerbConThat;typeAmbiguous;verbs/nouns that become relation before 'that';0;;
 ;1,20,40,50,$;ENVery;typeConcept;very;0;;
 ;1,40,50,55,60,62,65,70,71,75,81,$;ENWhich;typeRelation;'which', 'that' etc.;0;;
-;1,40,50,60,75,81,$;ENWithout;typeRelation;without;0;;
+;1,40,50,60,71,75,81,$;ENWithout;typeRelation;without;0;;
 ;1,25,40,50,$;ENYear;typeConcept;label for common years;0;;
 ;1,40,$;ENYearNum;typeConcept;label for uncommon years;0;;
 
@@ -195,21 +195,21 @@
 ;1,75,$;ENFrequency;typeAttribute;attribute for frequency indications;0;;Entity(Frequency)
 ;1,75,$;ENDuration;typeAttribute;attribute for duration indications;0;;Entity(Duration)
 ;1,$;ENTemp;typeAttribute;attribute for vague time indications;0;;Entity(DateTime)
-;1,75,$;ENTime;typeAttribute;attribute for concrete time indications;0;;Entity(DateTime)
+;1,55,75,$;ENTime;typeAttribute;attribute for concrete time indications;0;;Entity(DateTime)
 
 ;1,62,65,70,71,75,$;ENDummy;typeAttribute;dummy attribute to temporarily mark lexreps;0;;
 ;40,55,65,70,71;ENDummy2;typeAttribute;extra dummy attribute;0;;
 
-;70,71,$;ENPosSentiment;typeAttribute;for sentiment markers;0;;Entity(PositiveSentiment)
+;1,70,71,$;ENPosSentiment;typeAttribute;for sentiment markers;0;;Entity(PositiveSentiment)
 ;70,71,80,$;ENPosSentimentBegin;typeAttribute;to end the sentiment span;0;;Path(Begin,PositiveSentiment)
 ;70,71,80,$;ENPosSentimentStop;typeAttribute;to end the sentiment span;0;;Path(End,PositiveSentiment)
-;70,71,$;ENNegSentiment;typeAttribute;for sentiment markers;0;;Entity(NegativeSentiment)
+;1,70,71,$;ENNegSentiment;typeAttribute;for sentiment markers;0;;Entity(NegativeSentiment)
 ;70,71,80,$;ENNegSentimentBegin;typeAttribute;to end the sentiment span;0;;Path(Begin,NegativeSentiment)
 ;70,71,80,$;ENNegSentimentStop;typeAttribute;to end the sentiment span;0;;Path(End,NegativeSentiment)
-;70;ENPosSentimentConceptBegin;typeAttribute;begin of sentiment span for concept-type sentiment markers;0;;
-;70;ENNegSentimentConceptBegin;typeAttribute;begin of sentiment span for concept-type sentiment markers;0;;
-;70;ENPosSentimentConceptStop;typeAttribute;end of sentiment span for concept-type sentiment markers;0;;
-;70;ENNegSentimentConceptStop;typeAttribute;end of sentiment span for concept-type sentiment markers;0;;
+;70;ENPossentConceptBegin;typeAttribute;begin of sentiment span for concept-type sentiment markers;0;;
+;70;ENNegsentConceptBegin;typeAttribute;begin of sentiment span for concept-type sentiment markers;0;;
+;70;ENPossentConceptStop;typeAttribute;end of sentiment span for concept-type sentiment markers;0;;
+;70;ENNegsentConceptStop;typeAttribute;end of sentiment span for concept-type sentiment markers;0;;
 ;70,71;ENInPossentspan;typeAttribute;marker for lexreps in positive sentiment span;0;;
 ;70,71;ENInNegsentspan;typeAttribute;marker for lexreps in negative sentiment span;0;;
 ;70,71;ENNegatedPossent;typeAttribute;marker for positive sentiment markers in negation span;0;;
@@ -260,6 +260,7 @@
 ;55;ENV3;typeAttribute;for verbs with valence 3;0;;
 
 ;55;ENCompare;typeAttribute;comparison;0;;
+;60;ENCondition;typeAttribute;conditional conjunction;0;;
 
 ;1,65,$;ENCertainty;typeAttribute;general attribute for certainty;0;;Entity(Certainty)
 ;1,65,$;ENCertBegin;typeAttribute;to begin the certainty span;0;;Path(Begin,Certainty)
@@ -269,6 +270,6 @@
 ;1,65,$;ENInCertspan;typeAttribute;marker for lexreps in a certainty span;0;;
 ;1,65,$;ENPossibility;typeAttribute;used to fine-tune Certainty;0;;
 
-;1,65,$;ENAttrStop;typeAttribute;general end-of-scope marker;0;;
+;1,65,70,$;ENAttrStop;typeAttribute;general end-of-scope marker;0;;
 
 
