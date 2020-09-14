@@ -6,6 +6,16 @@ from libcpp.set cimport set
 from libcpp.vector cimport vector
 from .IkConceptProximity cimport ProximityPairVector_t
 
+cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
+	enum Attribute:
+		Negation = 1
+		DateTime = 2
+		PositiveSentiment = 5
+		NegativeSentiment = 6
+		Frequency = 9
+		Duration = 10
+		Measurement = 11
+		Certainty = 12
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
 	const size_t kNoConcept = <size_t>(-1)
@@ -15,17 +25,6 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil
 		Relation
 		PathRelevant
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sent_Attribute" nogil:
-	enum aType:
-		Negation = 1
-		DateTime = 2
-		PositiveSentiment = 5
-		NegativeSentiment = 6
-		Frequency = 8
-		Duration = 10
-		Measurement = 11
-		Certainty = 12
-
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 	ctypedef unsigned short Entity_Ref
 	ctypedef unsigned short Attribute_Ref
@@ -34,7 +33,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sentence" nog
 	ctypedef vector[Entity] Entities
 	ctypedef vector[Sent_Attribute] Sent_Attributes
 	ctypedef vector[Entity_Ref] Path
-	ctypedef vector[Path_Attribute_Span] Path_Attributes
+	ctypedef vector[Path_Attribute] Path_Attributes
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Text_Source" nogil:
 	ctypedef ProximityPairVector_t Proximity
@@ -49,15 +48,16 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		size_t entity_id "entity_id_"
 
 	struct Sent_Attribute:
-		aType type "type_"
+		Attribute type "type_"
 		size_t offset_start "offset_start_", offset_stop "offset_stop_"
 		string marker "marker_"
 		string value "value_", unit "unit_", value2 "value2_", unit2 "unit2_"
 		Entity_Ref entity_ref
 
-	struct Path_Attribute_Span:
-		Attribute_Ref sent_attribute_ref
-		Entity_Ref entity_start_ref, entity_stop_ref
+	struct Path_Attribute:
+		Attribute type "type"
+		unsigned short pos "pos"
+		unsigned short span "span"
 
 	struct Sentence:
 		Entities entities

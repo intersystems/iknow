@@ -73,7 +73,7 @@ void CProcess::IndexFunc(IkIndexInput& text_input, OutputFunc func, void *userda
 	static const size_t kMinStringPoolSize = 64;
 	static StringPool* string_pool = 0;
 	if (!string_pool) {
-		string_pool = new StringPool(max(string_pool_size, kMinStringPoolSize), string_pool_string_size);
+		string_pool = new StringPool(std::max(string_pool_size, kMinStringPoolSize), string_pool_string_size);
 	}
 	else {
 		string_pool->Reset(string_pool_size, string_pool_string_size);
@@ -82,7 +82,7 @@ void CProcess::IndexFunc(IkIndexInput& text_input, OutputFunc func, void *userda
 	IkLexrep::SetTextBuffer((text_input.GetString())->c_str()); // store pointer to input text data 
 	//Allocate space in input size chunks
 	static const size_t kMinPoolSize = 16384;
-	PoolAllocator<int>::Reset(max(text_size * 32, kMinPoolSize));
+	PoolAllocator<int>::Reset(std::max(text_size * 32, kMinPoolSize));
 	//We need these in their own scope so they're destroyed before
 	//we clear the pool. IkIndexOutput uses the pool and IkIndexDebug might someday
 	{

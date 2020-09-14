@@ -55,6 +55,29 @@ namespace iknowdata { // to bundle all generated data
 	typedef unsigned short Entity_Ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 	typedef unsigned short Attribute_Ref; // reference to sentence attribute vector, is less (or equal) Entity_Ref.
 
+	enum /*class*/ Attribute { // Supported attributes in NLP-Fx, should be an "enum class", but Cython refuses to build
+		Negation = IKATTNEGATION,
+		DateTime = IKATTTIME,
+		PositiveSentiment = IKATTSENPOSITIVE,
+		NegativeSentiment = IKATTSENNEGATIVE,
+		Frequency = IKATTFREQ,
+		Duration = IKATTDURATION,
+		Measurement = IKATTMEASURE,
+		Certainty = IKATTCERTAINTY
+	};
+	inline std::string AttributeName(Attribute attribute) { // translate the attribute type
+		switch (attribute) {
+		case Attribute::Negation:			return "negation";
+		case Attribute::DateTime:			return "date_time";
+		case Attribute::PositiveSentiment:	return "positive_sentiment";
+		case Attribute::NegativeSentiment:	return "negative_sentiment";
+		case Attribute::Frequency:			return "frequency";
+		case Attribute::Duration:			return "duration";
+		case Attribute::Measurement:		return "measurement";
+		case Attribute::Certainty:			return "certainty";
+		default:							return "unknown";
+		}
+	}
 	//
 	// Basic functionality of iknow indexing is splitup of text in entities : 4
 	//
@@ -79,23 +102,12 @@ namespace iknowdata { // to bundle all generated data
 	
 	struct Sent_Attribute // sentence attribute
 	{
-		enum aType { // Supported attributes in NLP-Fx
-			Negation= IKATTNEGATION, 
-			DateTime= IKATTTIME, 
-			PositiveSentiment= IKATTSENPOSITIVE, 
-			NegativeSentiment= IKATTSENNEGATIVE, 
-			Frequency= IKATTFREQ, 
-			Duration= IKATTDURATION, 
-			Measurement= IKATTMEASURE, 
-			Certainty= IKATTCERTAINTY
-		}; 
-
-		Sent_Attribute(aType att_type, 
+		Sent_Attribute(Attribute att_type,
 			size_t start, size_t stop, 
 			std::string& marker
 		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
 
-		aType type_;
+		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
 		std::string marker_; // the normalized attribute textual representation, utf8 encoded
 		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
@@ -103,10 +115,17 @@ namespace iknowdata { // to bundle all generated data
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 	};
 
-	struct Path_Attribute_Span // path attribute span : expresses range of attribute
+	/*
+	**	Path_Attribute represents the expansion of a semantic attribute (https://github.com/intersystems/iknow/wiki/Attributes)
+	**  "type" : represents the attribute type
+	**  "pos" : starting position in the path (a path is a vector of entity references)
+	**  "span" : number of consecutive path entities 
+	*/
+	struct Path_Attribute // path attribute : expresses range of attributes in path
 	{
-		Attribute_Ref sent_attribute_ref; // reference to sentence attribute
-		Entity_Ref entity_start_ref, entity_stop_ref; // reference to entity vector range, expressing the attribute expansion.
+		Attribute type; // attribute type
+		unsigned short pos; // start position in path
+		unsigned short span; // attibute span (number of path entities)
 	};
 
 	struct Sentence
@@ -114,12 +133,12 @@ namespace iknowdata { // to bundle all generated data
 		typedef std::vector<Entity> Entities;
 		typedef std::vector<Sent_Attribute> Sent_Attributes;
 		typedef std::vector<Entity_Ref> Path;	// unsigned short indexes the Entity in the iKnow_Entities vector 
-		typedef std::vector<Path_Attribute_Span> Path_Attributes;	// expanded 
+		typedef std::vector<Path_Attribute> Path_Attributes;	// expanded attributes in path 
 
 		Entities			entities;	// the sentence entities
 		Sent_Attributes		sent_attributes;	// the sentence attributes
 		Path				path;		// the sentence path
-		Path_Attributes		path_attributes;	// expanded attributes in the sentence
+		Path_Attributes		path_attributes;	// expanded attributes in the path
 
 		// utility functions : return text source offsets of the sentence : start and stop.
 		size_t offset_start() const { return entities.begin()->offset_start_; }

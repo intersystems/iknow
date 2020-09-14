@@ -37,7 +37,6 @@ using namespace iknow::ali;
 #define SEMANTIC_ACTION(x) { if (m_pDebug) (m_pDebug->x); };
 #define TIMER_ACTION(x) { if (m_pDebug) (m_pDebug->x); };
 
-
 const size_t MAX_WORD_SIZE=150; // Maximum allowed wordsize as defined by Michael.
 
 //////////////////////////////////////////////////////////////////////
@@ -507,38 +506,42 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 		  u_isgraph(cCur) || // Japanese also uses broader graphical symbols
 		  u_ispunct(cCur)) { // All "Px" categories = punctuation
 
-        if (IkStringAlg::IsOpenParenthesis(cCur)) { // handle parenthesis. scan for furigana reading aid.
-          int tmp_nPosition=nPosition+1; 
-		  IkStringAlg::FuriganaClass furigana_class=IkStringAlg::NoFurigana; // to be detected
-		  bool bIsFurigana=false;
-		  bool bCreatedFurigana = false;
-		  while ((size_t)tmp_nPosition<input_size) {
-		    const Char current_char=pData[tmp_nPosition++];
-            if (IkStringAlg::IsJpnSplit(current_char)) continue; // do not end the sentence before closing parenthesis
-		    // double newline ends the sentence
-		    if (IkStringAlg::IsCloseParenthesis(current_char)) { // ending furigana parenthesis
-              // const Char* closing_parenthesis=&pData[tmp_nPosition]; // iterator style, one past the real closing parenthesis symbol
-			  lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, pData + nBeginPos, pData + tmp_nPosition, pData + nPosition, pData + tmp_nPosition, m_pKnowledgebase->GetLabelIndex(UnknownLabel)));
-			  SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
-			  nBeginPos=nPosition=tmp_nPosition;
-			  bCreatedFurigana = true;
-			  break;
-            } else { // check current_char for Furigana
-				if (!bIsFurigana) { // to be detected
-					furigana_class=IkStringAlg::FindFuriganaClass(current_char);
-					if (furigana_class==IkStringAlg::NoFurigana) break; // no Furigana
-					else bIsFurigana=true;
-				} else { // further scan Furigana
-					if (IkStringAlg::FindFuriganaClass(current_char)!=furigana_class) { // no continuation of Furigana
-					  if (u_isspace(current_char)) continue; // PL128243
-			          if (furigana_class==IkStringAlg::HiraganaFurigana && (IkStringAlg::IsJpnDOT(current_char) || IkStringAlg::IsJpnChoon(current_char))) continue; // exception, a DOT or the Cho-on in Hiragana means, continue
-			          else break; // *not* furigana, process normally
-					}
-				}
-			}
-          }
-		  if (bCreatedFurigana) continue;
-        }
+		  if (m_pKnowledgebase->GetMetadata<kFuriganaHandling>()==kFuriDefault) { // Furigana reading aid handling
+			  if (IkStringAlg::IsOpenParenthesis(cCur)) { // handle parenthesis. scan for furigana reading aid.
+				  int tmp_nPosition = nPosition + 1;
+				  IkStringAlg::FuriganaClass furigana_class = IkStringAlg::NoFurigana; // to be detected
+				  bool bIsFurigana = false;
+				  bool bCreatedFurigana = false;
+				  while ((size_t)tmp_nPosition < input_size) {
+					  const Char current_char = pData[tmp_nPosition++];
+					  if (IkStringAlg::IsJpnSplit(current_char)) continue; // do not end the sentence before closing parenthesis
+					  // double newline ends the sentence
+					  if (IkStringAlg::IsCloseParenthesis(current_char)) { // ending furigana parenthesis
+						// const Char* closing_parenthesis=&pData[tmp_nPosition]; // iterator style, one past the real closing parenthesis symbol
+						  lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, pData + nBeginPos, pData + tmp_nPosition, pData + nPosition, pData + tmp_nPosition, m_pKnowledgebase->GetLabelIndex(UnknownLabel)));
+						  SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
+						  nBeginPos = nPosition = tmp_nPosition;
+						  bCreatedFurigana = true;
+						  break;
+					  }
+					  else { // check current_char for Furigana
+						  if (!bIsFurigana) { // to be detected
+							  furigana_class = IkStringAlg::FindFuriganaClass(current_char);
+							  if (furigana_class == IkStringAlg::NoFurigana) break; // no Furigana
+							  else bIsFurigana = true;
+						  }
+						  else { // further scan Furigana
+							  if (IkStringAlg::FindFuriganaClass(current_char) != furigana_class) { // no continuation of Furigana
+								  if (u_isspace(current_char)) continue; // PL128243
+								  if (furigana_class == IkStringAlg::HiraganaFurigana && (IkStringAlg::IsJpnDOT(current_char) || IkStringAlg::IsJpnChoon(current_char))) continue; // exception, a DOT or the Cho-on in Hiragana means, continue
+								  else break; // *not* furigana, process normally
+							  }
+						  }
+					  }
+				  }
+				  if (bCreatedFurigana) continue;
+			  }
+		  }
         const Char* val_begin = pData + nBeginPos;
         const Char* val_end = pData + nPosition;
 
@@ -769,6 +772,7 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 	else {
 		bEndFound = (lexrep_vector.size()==1); // Only SBegin is present
 	}
+
 	//TODO, TRW: Is there a way we could figure out we need to switch languages earlier?
 	if ((m_languageKbMap.size() > 1) && nPosition != nPositionEndOfPreviousIteration)
 	{

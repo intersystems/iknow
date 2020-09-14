@@ -22,6 +22,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test1(pError);
 		pError = "Only one measurement attribute in example English text";
 		test_collection.test2(pError);
+		pError = "3 Sentence Attribute markers in sentence";
+		test_collection.test3(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -33,6 +35,31 @@ void iKnowUnitTests::runUnitTests(void)
 		exit(-1);
 	}
 }
+void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
+	string text_source_utf8 = "Now, I have been on many walking holidays, but never on one where I have my bags ferried\nfrom hotel to hotel while I simply get on with the job of walkingand enjoying myself.";
+	// <attr type = "measurement" literal = "hundreds of feet" token = "hundreds of feet" value = "hundreds of" unit = "feet">
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+	engine.index(text_source, "en");
+
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		size_t start_literal = attribute.offset_start_;
+		size_t stop_literal = attribute.offset_stop_;
+		String literal(&text_source[start_literal], &text_source[stop_literal]);
+
+		string strMarker = attribute.marker_;
+		int count_upper = std::count_if(strMarker.begin(), strMarker.end(), [](unsigned char c) { return std::isupper(c); }); // Useless, I know...
+	}
+	if (count_attributes!=3) {
+		throw std::runtime_error(string(pMessage));
+	}
+
+}
+
 void iKnowUnitTests::test2(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
 	string text_source_utf8 = "The only sound as we followed the narrow hillside path through the firs and pines was that of the sparkling green Soca river crashing its way through the gorge hundreds of feet below. ";
 	// <attr type = "measurement" literal = "hundreds of feet" token = "hundreds of feet" value = "hundreds of" unit = "feet">

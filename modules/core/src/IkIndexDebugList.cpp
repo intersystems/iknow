@@ -402,12 +402,9 @@ void IkIndexDebug<Utf8List>::SentenceFound(const String& kb_name, double certain
   for (Lexreps::const_iterator i = lexreps.begin(); i != lexreps.end(); ++i) {
     String val = i->GetValue();
     if (val.empty()) continue;
-    //Merge if it's a split literal (indicated with leading space)
-	if (val[0] == ' ' && !sentence.empty() && separator == iknow::base::SpaceString()) {
-      sentence.erase(sentence.size() - 1);
-      val.erase(0,1);
-    }
-	if (!sentence.empty()) sentence += separator;
+    bool bSplitLiteral = (val[0]==' '); //Merge if it's a split literal (indicated with leading space)
+    if (bSplitLiteral) val.erase(0, 1); // remove leading ' '
+	if (!sentence.empty() && !bSplitLiteral) sentence += separator;
     sentence += val;
   }
   trace_data += IkStringEncoding::BaseToUTF8(sentence) + "\" />";
@@ -461,9 +458,9 @@ static String OffsetToValue(path::Offset offset, const MergedLexreps& lexreps) {
 
 void IkIndexDebug<Utf8List>::CRC(const path::CRC& crc, const MergedLexreps& lexreps) {
   Utf8List out;
-  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.master, lexreps)));
+  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.head, lexreps)));
   out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.relation, lexreps)));
-  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.slave, lexreps)));
+  out.push_back(IkStringEncoding::BaseToUTF8(OffsetToValue(crc.tail, lexreps)));
   trace_.Add("CRC", out);
 }
 
@@ -509,10 +506,10 @@ void IkIndexDebug<Utf8List>::LabelKatakana(const IkLexrep& lexrep, const IkKnowl
 }
 
 #ifdef AIX
-void IkIndexDebug::StartTimer(void)
+void IkIndexDebug<Utf8List>::StartTimer(void)
 {
 }
-void IkIndexDebug::TraceTheTime(const int action) {
+void IkIndexDebug<Utf8List>::TraceTheTime(const int action) {
 }
 #else //!AIX
 // using std::chrono::system_clock;

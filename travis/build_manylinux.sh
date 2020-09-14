@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-# Build manylinux wheels for Python 3.5 through Python 3.8. Upload the wheels to
-# PyPI if appropriate. This script must be executed inside a manylinux
-# container.
+# Build manylinux wheels for Python 3.5 through Python 3.9. This script must be
+# executed inside a manylinux container in which /iknow is the root of the
+# repository.
 #
-# Usage: ./build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: /iknow/travis/build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686
@@ -35,15 +35,26 @@ fi
 
 
 ##### Install dependencies #####
-# dos2unix is needed to give ICU build scripts Unix line endings so that they
-# can be executed. For some reason, ICU source releases use Windows line
-# endings. On some platforms, openssl-devel is needed to install twine.
-yum install -y dos2unix openssl-devel
+# epel-release
+#   Needed on some platforms to install ccache.
+# dos2unix
+#   Give ICU build scripts Unix line endings so that they can be executed. For
+#   some reason, ICU source releases use Windows line endings.
+# ccache
+#   Speed up build times by caching results from previous builds.
+yum install -y epel-release
+yum install -y dos2unix ccache
+mkdir -p /opt/ccache
+ln -s /usr/bin/ccache /opt/ccache/cc
+ln -s /usr/bin/ccache /opt/ccache/c++
+ln -s /usr/bin/ccache /opt/ccache/gcc
+ln -s /usr/bin/ccache /opt/ccache/g++
+export PATH="/opt/ccache:$PATH"
 
 
 ##### Build ICU #####
 curl -L -o icu4c-src.zip "$URL"
-unzip icu4c-src.zip
+unzip -q icu4c-src.zip
 cd icu/source
 
 # ICU build environment requires that /usr/bin/python be at least version 2.7.
@@ -93,55 +104,15 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDI
 # install Python package dependencies and build initial wheels
 for PYTHON in /opt/python/cp3*/bin/python; do
   PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == *"/cp38-cp38/"* ]]; then
-    PACKAGES="$PACKAGES twine"
-  fi
-  "$PYTHON" -m pip install -U $PACKAGES
+  "$PYTHON" -m pip install --user --no-warn-script-location $PACKAGES
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
-
-# aarch64 and ppc64le platforms often have a large page size of 64KiB. We need
-# to redirect all invocations of patchelf so that when auditwheel invokes it, it
-# produces ELFs with the proper page alignment.
-if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
-  mv /usr/local/bin/patchelf /usr/local/bin/_patchelf
-  printf '#!/usr/bin/env bash\n\n_patchelf --page-size 65536 "$@"\n' >> /usr/local/bin/patchelf
-  chmod +x /usr/local/bin/patchelf
-fi
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do
   auditwheel repair -w dist2 $WHEEL
 done
 
-# restore patchelf on aarch64 and ppc64le
-if [[ "$TAG" == *"_aarch64" || "$TAG" == *"_ppc64le" ]]; then
-  rm -f /usr/local/bin/patchelf
-  mv /usr/local/bin/_patchelf /usr/local/bin/patchelf
-fi
 
-
-##### Upload iknowpy wheels if appropriate #####
-export REPO_ROOT=/iknow
-DEPLOY=$(/iknow/travis/deploy_check.sh)
-if [[ "$DEPLOY" == "0" ]]; then
-  echo "Deployment skipped"
-else
-  if [[ "$DEPLOY" == "PyPI" ]]; then
-    export TWINE_REPOSITORY=pypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$PYPI_TOKEN"'
-    TOKEN="$PYPI_TOKEN"
-    set -x
-  else
-    export TWINE_REPOSITORY=testpypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$TESTPYPI_TOKEN"'
-    TOKEN="$TESTPYPI_TOKEN"
-    set -x
-  fi
-  { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl'
-  /opt/python/cp38-cp38/bin/python -m twine upload -u "__token__" -p "$TOKEN" dist2/iknowpy-*manylinux*.whl
-  set -x
-fi
+##### Report cache statistics #####
+ccache -s

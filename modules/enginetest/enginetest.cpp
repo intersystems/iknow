@@ -1,4 +1,4 @@
-/*
+﻿/*
 ** enginetest.cpp : testing the iKnow engine
 */
 #include <stdio.h>
@@ -9,6 +9,8 @@
 #include "engine.h"
 #include "iKnowUnitTests.h"
 
+using namespace std;
+
 using iknow::base::String;
 using iknow::base::IkStringEncoding;
 using namespace iknowdata;
@@ -17,19 +19,19 @@ inline String ucs2(const char* input_text) {
 	return String(IkStringEncoding::UTF8ToBase(input_text));
 }
 String getSampleText(std::string language_code) { // must be ucs-2 encoded text.
-	if (language_code == "en") return ucs2("Be the change you want to see in life.");
-	if (language_code == "de") return ucs2("Oder die Erkundung der Natur - und zwar ohne Anleitung.");
-	if (language_code == "ru") return ucs2("Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.");
-	if (language_code == "es") return ucs2("En Argentina no hay estudios previos reportados en cuanto a la elaboración de vinos cítricos ni de «vino de naranja».");
-	if (language_code == "fr") return ucs2("En pratique comment le faire ?");
-	if (language_code == "ja") return ucs2("こんな台本でプロットされては困る、と先生は言った。");
-	if (language_code == "nl") return ucs2("Op basis van de afzonderlijke evaluatieverslagen stelt de Commissie een synthese op communautair niveau op.");
-	if (language_code == "pt") return ucs2("Distingue-se o mercado de um produto ou serviço dos mercados de fatores de produção, capital e trabalho.");
-	if (language_code == "sv") return ucs2("Jag är bäst i klassen. Ingen gör efter mig, kan jag inte lämna. Var försiktig, är gräset alltid grönare på andra sidan.");
-	if (language_code == "uk") return ucs2("грошових зобов'язань, прийнятих на себе згідно з умов цього договору.");
-	if (language_code == "cs") return ucs2("Létající jaguár je novela spisovatele Josefa Formánka z roku 2004.");
+	if (language_code == "en") return ucs2(u8"Be the change you want to see in life.");
+	if (language_code == "de") return ucs2(u8"Oder die Erkundung der Natur - und zwar ohne Anleitung.");
+	if (language_code == "ru") return ucs2(u8"Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.");
+	if (language_code == "es") return ucs2(u8"En Argentina no hay estudios previos reportados en cuanto a la elaboración de vinos cítricos ni de «vino de naranja».");
+	if (language_code == "fr") return ucs2(u8"En pratique comment le faire ?");
+	if (language_code == "ja") return ucs2(u8"こんな台本でプロットされては困る、と先生は言った。");
+	if (language_code == "nl") return ucs2(u8"Op basis van de afzonderlijke evaluatieverslagen stelt de Commissie een synthese op communautair niveau op.");
+	if (language_code == "pt") return ucs2(u8"Distingue-se o mercado de um produto ou serviço dos mercados de fatores de produção, capital e trabalho.");
+	if (language_code == "sv") return ucs2(u8"Jag är bäst i klassen. Ingen gör efter mig, kan jag inte lämna. Var försiktig, är gräset alltid grönare på andra sidan.");
+	if (language_code == "uk") return ucs2(u8"грошових зобов'язань, прийнятих на себе згідно з умов цього договору.");
+	if (language_code == "cs") return ucs2(u8"Létající jaguár je novela spisovatele Josefa Formánka z roku 2004.");
 
-	return ucs2("Time flies like an arrow, fruit flies like a banana");
+	return ucs2(u8"Time flies like an arrow, fruit flies like a banana");
 }
 
 //
@@ -187,28 +189,8 @@ void a_short_demo(void)
 		for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
 			const Sent_Attribute& attribute = *it_marker;
 
-			std::string a_type("unknown"); // enum aType { Negation=1, DateTime=2, PositiveSentiment=5, NegativeSentiment=6, Frequency=8, Duration=9, Measurement=10, Certainty=11, Other }; 
-			switch (attribute.type_) { // translate the attribute type
-			case Sent_Attribute::Negation:
-				a_type = "negation";
-				break;
-			case Sent_Attribute::DateTime:
-				a_type = "date_time";
-				break;
-			case Sent_Attribute::PositiveSentiment:
-				a_type = "positive_sentiment";
-				break;
-			case Sent_Attribute::NegativeSentiment:
-				a_type = "negative_sentiment";
-				break;
-			case Sent_Attribute::Frequency:
-				a_type = "frequency";
-				break;
-			case Sent_Attribute::Duration:
-				a_type = "duration";
-				break;
-			case Sent_Attribute::Measurement:
-				a_type = "measurement";
+			std::string a_type = AttributeName(attribute.type_); // translate the attribute type
+			if (attribute.type_== Attribute::Measurement) {
 				std::cout << a_type << ":\"" << attribute.marker_ << "\" ";
 
 				std::cout << (!attribute.value_.empty() ? "val=\"" + attribute.value_ + "\" ": "");
@@ -217,8 +199,6 @@ void a_short_demo(void)
 				std::cout << (!attribute.unit2_.empty() ? "unit2=\"" + attribute.unit2_ + "\" " : "");
 				std::cout << std::endl;
 				continue; 
-				
-			default:;
 			}
 
 			std::cout << a_type << ":\"" << attribute.marker_ << "\"" << std::endl;
@@ -243,19 +223,17 @@ void a_short_demo(void)
 		if (!sent.path_attributes.empty()) { // Path spans : attribute expansion
 			std::cout << "Attribute Path Spans: " << std::endl;
 			for (PathAttributeIterator it_path_attribute = sent.path_attributes.begin(); it_path_attribute != sent.path_attributes.end(); ++it_path_attribute) { // iterate over the attribute path expansion
-				const Path_Attribute_Span& attribute_expansion = *it_path_attribute;
-				const Attribute_Ref& attribute_ref = attribute_expansion.sent_attribute_ref;
-				const Entity_Ref& entity_ref_begin = attribute_expansion.entity_start_ref;
-				const Entity_Ref& entity_ref_end = attribute_expansion.entity_stop_ref;
-
-				// Corresponding sentence attribute marker is attribute_ref
-				const Sent_Attribute& attribute = sent.sent_attributes[attribute_ref];
-				std::cout << "marker:\"" << attribute.marker_ << "\" (span: ";
-				// Path is entity_ref_begin until entity_ref_end
-				for (Entity_Ref entity_span = entity_ref_begin; entity_span <= entity_ref_end; ++entity_span) {
-					std::cout << "\"" << sent.entities[entity_span].index_ << "\" ";
+				const Path_Attribute& attribute_expansion = *it_path_attribute;
+				std::string a_type = AttributeName(attribute_expansion.type); // translate the attribute type
+				std::cout << "Span_type:\"" << a_type << "\" span=";
+				unsigned short head = attribute_expansion.pos; // starting position of attribute expansion
+				Entity_Ref head_entity = sent.path[head]; // corresponding entity reference
+				std::cout << "\"" << sent.entities[head_entity].index_ << "\""; // write head entity
+				for (int i = 1; i < attribute_expansion.span; ++i) { // iterate attribute expansion span
+					unsigned short trail = head + i; // next
+					Entity_Ref trail_entity = sent.path[trail]; // next entity reference
+					std::cout << " \"" << sent.entities[trail_entity].index_ << "\""; // write next entity
 				}
-				std::cout << ")" << std::endl;
 			}
 		}
 		std::cout << std::endl;

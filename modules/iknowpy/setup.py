@@ -475,7 +475,7 @@ for root, _, files in os.walk(icudir):
 if not icu_license_found:
     raise BuildError('ICU license not found in {}'.format(icudir))
 
-with open('README.md', encoding='utf-8') as readme_file:
+with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
 
 try:
@@ -490,6 +490,7 @@ try:
         classifiers=[
             'Development Status :: 3 - Alpha',
             'License :: OSI Approved :: MIT License',
+            'Topic :: Scientific/Engineering :: Information Analysis',
             'Programming Language :: C++',
             'Programming Language :: Cython',
             'Programming Language :: Python :: 3',
@@ -498,12 +499,17 @@ try:
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
+            'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: Implementation :: CPython',
+            'Operating System :: MacOS :: MacOS X',
+            'Operating System :: Microsoft :: Windows',
+            'Operating System :: POSIX'
         ],
         keywords='NLP',
         project_urls={
             'Source': 'https://github.com/intersystems/iknow',
             'Tracker': 'https://github.com/intersystems/iknow/issues',
+            'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
         package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},

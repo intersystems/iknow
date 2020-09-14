@@ -9,10 +9,6 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-#include "IkExportCore.h"
-#include "IkObject.h"
-#include "IkSentence.h"
-#include "SafeString.h"
 #include <map>
 #include <unordered_map>
 #include <set>
@@ -21,23 +17,73 @@
 #include <vector>
 #include <utility>
 #include <cstring>
+
+#include "IkExportCore.h"
+#include "IkObject.h"
+#include "IkSentence.h"
+#include "SafeString.h"
 #include "StringPool.h"
 #include "PoolAllocator.h"
 #include "IkConceptProximity.h"
 #include "Utility.h"
-
-using namespace std;
 
 #ifdef WIN32
 #pragma warning(push)
 #pragma warning(disable:4251)
 #endif
 
+typedef size_t EntityId;
+typedef size_t LiteralId;
+typedef size_t StemId;
+typedef size_t OccurrenceId;
+typedef size_t CrcId;
+
+typedef size_t PathOffset;
+struct DirectOutputPathAttribute {
+	static const PathOffset kUnknown = static_cast<OccurrenceId>(-1);
+	iknow::core::PropertyId type;
+	PathOffset begin;
+	PathOffset end;
+	PathOffset continuation;
+};
+
+//Simplify the syntax of declaring vectors that use the pool allocator
+//(On Solaris don't bother...awful old STL implementation)
+template<typename T>
+struct poolvec {
+#ifndef SOLARIS
+	typedef std::vector<T, PoolAllocator<T> > type;
+#else //SOLARIS
+	typedef std::vector<T> type;
+#endif //SOLARIS
+};
+
+template<typename K, typename V>
+struct poolmap {
+#ifndef SOLARIS
+	typedef std::map<K, V, std::less<K>, PoolAllocator<std::pair<const K, V> > > type;
+#else //SOLARIS
+	typedef std::map<K, V> type;
+#endif
+};
+
+//Map from type to attribute
+typedef poolvec<DirectOutputPathAttribute>::type DirectOutputPathAttributes;
+typedef poolmap<iknow::core::PropertyId, DirectOutputPathAttributes>::type DirectOutputPathAttributeMap;
+typedef poolvec<const iknow::core::IkMergedLexrep*>::type DirectOutputPathOffsets;
+struct DirectOutputPath {
+	DirectOutputPathOffsets offsets;
+	DirectOutputPathAttributeMap attributes;
+};
+
+typedef poolvec<DirectOutputPath>::type DirectOutputPaths;
+
 namespace iknow 
 {
   namespace core
   {
     typedef std::vector<IkSentence, iknow::base::PoolAllocator<IkSentence> > Sentences;
+	typedef std::vector<DirectOutputPaths, iknow::base::PoolAllocator<DirectOutputPaths> > Paths;
 
     class WordPtr {
     public:
@@ -88,11 +134,7 @@ namespace iknow
 		typedef size_t Dominance;
 		typedef size_t Frequency;
 		typedef std::pair<EntityId, Dominance> EntityDominance;
-		// typedef std::vector<std::pair<PropertyId, std::pair<const IkMergedLexrep*, const IkMergedLexrep*> > > vecAttributePaths;
-		typedef std::vector<std::pair<PropertyId, std::vector<const IkMergedLexrep*> > > vecAttributePaths;
-
 		typedef std::unordered_map<WordPtr,size_t,hash_wordptr> WordCounts;
-
 		typedef std::map<EntityId, Dominance> EntityDominanceMap;
 
 		void Add(const IkSentence& sentence) { sentences_.push_back(sentence); }
@@ -106,8 +148,6 @@ namespace iknow
 		Sentences::iterator SentencesEnd() { return sentences_.end(); }
 		Sentences::reverse_iterator SentencesRBegin() { return sentences_.rbegin(); }
 		Sentences::reverse_iterator SentencesREnd() { return sentences_.rend(); }
-		vecAttributePaths::iterator AttributePathsBegin() { return vecAttributePaths_.begin(); }
-		vecAttributePaths::iterator AttributePathsEnd() { return vecAttributePaths_.end(); }
 
 		WordCounts const & GetWordCounts() const { return m_wordCounts; }
 
@@ -138,11 +178,11 @@ namespace iknow
 			if (lexrep->IsRelation()) return static_cast<double>(m_relation_dominance[ent_id]);
 			return static_cast<double>(0.0);
 		}
-		
+		Paths paths_;
+
     protected:
       virtual double computeSummaryRelevanceCore() const; // inherited from IkDocumentPart
       Sentences sentences_;
-	  vecAttributePaths vecAttributePaths_;
 
     private:
       WordCounts m_wordCounts; // summarizer is responsable for maintaining the wordCounts // TODO: is this ok?

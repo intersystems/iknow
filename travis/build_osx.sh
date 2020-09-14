@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-# Build wheels for Python 3.5 through Python 3.8, compatible with
-# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate.
+# Build wheels for Python 3.5 through Python 3.9, compatible with
+# Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate. This
+# script must be executed with the repository root as the working directory.
 #
-# Usage: ./build_osx.sh ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_osx.sh ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
@@ -21,7 +22,7 @@ set -x
 ##### Build ICU #####
 export REPO_ROOT=$(pwd)
 curl -L -o icu4c-src.zip "$URL"
-unzip icu4c-src.zip
+unzip -q icu4c-src.zip
 cd icu/source
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
@@ -41,7 +42,7 @@ make -j $(sysctl -n hw.logicalcpu)
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-for PYTHON in python3.5 python3.6 python3.7 python3.8; do
+for PYTHON in python3.5 python3.6 python3.7 python3.8 python3.9; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
 done
 
@@ -65,7 +66,7 @@ else
     set -x
   fi
   { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ python3.8 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  python3.8 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
+  echo '+ python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
+  python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
   set -x
 fi
