@@ -43,18 +43,6 @@ jobs:
       script:
         - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_SRC_URL $PYPI_TOKEN $TESTPYPI_TOKEN
         - travis/deploy_manylinux.sh
-    - name: "manylinux2010_i686"
-      os: linux
-      dist: focal
-      arch: amd64
-      services:
-        - docker
-      cache:
-        directories:
-          - ccache
-      script:
-        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2010_i686 linux32 /iknow/travis/build_manylinux.sh manylinux2010_i686 $ICU_SRC_URL $PYPI_TOKEN $TESTPYPI_TOKEN
-        - travis/deploy_manylinux.sh
     - name: "Mac OS X 10.9 x86_64"
       os: osx
       osx_image: xcode11.6
