@@ -29,10 +29,31 @@ typedef std::list<std::string> CacheList;
 #include <queue>
 #include <sstream>
 
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Metadata.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Acronym.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Regex.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Filter.h"
+// #include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Label.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Lexrep.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_PreprocessFilter.h"
+#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Rule.h"
 
 
 namespace iknow {
   namespace shell {
+      class CSV_DataGenerator; // forward declaration
+      class iKnow_KB_Label
+      {
+      public:
+          std::string Name; // Name As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
+          std::string Type; // Type As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
+          std::string Attributes; // Attributes As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE");
+          std::string PhaseList; // Property PhaseList As %String;
+
+      private:
+          static void LoadSpecialLabels(CSV_DataGenerator& kb);
+          static iKnow_KB_Label LabelFromString(std::vector<std::string>& row_label, std::string& isDefault);
+      };
 
     class AbstractKnowledgebase {
     public:
@@ -94,6 +115,7 @@ namespace iknow {
       virtual CacheList FetchRows(size_t) { return CacheList(); }
       virtual void CloseTable() { }
 
+      std::vector<iknow::shell::iKnow_KB_Label> kb_labels;
     };
 
     struct RawKBData {

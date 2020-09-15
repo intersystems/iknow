@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "UserKnowledgeBase.h"
 
 #include <numeric>
 #include <mutex>
@@ -324,6 +325,16 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	CProcess::type_languageKbMap temp_map;
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
+
+	static const size_t kRawSize = 48000000;
+	unsigned char* buf_ = new unsigned char[kRawSize];
+	iknow::shell::Raw raw(buf_, kRawSize);
+	iknow::shell::RawAllocator allocator(raw);
+
+	IkKnowledgebase* user_dictionary = new SharedMemoryKnowledgebase(allocator, kb_csv_data, false);
+	if (user_dictionary) {
+		user_dictionary->FilterInput(text_input);
+	}
 	iknow::core::IkIndexInput Input(&text_input);
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
 	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);

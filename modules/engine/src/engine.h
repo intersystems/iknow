@@ -10,6 +10,8 @@
 #define IKNOW_API
 #endif
 
+#include "UserKnowledgeBase.h" // User KB (for udct)
+
 //
 // stl library includes
 //
@@ -195,6 +197,8 @@ public:
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
+	UserKnowledgeBase kb_csv_data; // User dictionary
+
 
 };
 

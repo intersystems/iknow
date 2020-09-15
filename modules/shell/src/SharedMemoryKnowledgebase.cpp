@@ -25,10 +25,428 @@ using std::pair;
 using std::map;
 using std::back_inserter;
 using std::transform;
+using namespace iknow::csvdata;
+
+typedef map<String, FastLabelSet::Index> LabelIndexMap;
+
+//A functor to convert a raw CacheList into a Kb* type
+template<typename KbT>
+class RawListToKb {
+public:
+	KbT operator()(CacheList& list);
+};
+
+class WithAllocator {
+protected:
+	WithAllocator(RawAllocator& allocator) : allocator_(allocator) {}
+	RawAllocator& GetAllocator() { return allocator_; }
+private:
+	RawAllocator& allocator_;
+	void operator=(const WithAllocator&);
+};
+
+class WithLabelMap {
+protected:
+	WithLabelMap(LabelIndexMap& map) : map_(map) {}
+	LabelIndexMap& GetLabelMap() { return map_; }
+private:
+	LabelIndexMap& map_;
+	void operator=(const WithLabelMap&);
+};
+
+class WithAttributeMap {
+protected:
+	WithAttributeMap(AttributeMapBuilder& attribute_map) : attribute_map_(attribute_map) {}
+	AttributeMapBuilder& GetAttributeMap() { return attribute_map_; }
+private:
+	AttributeMapBuilder& attribute_map_;
+	void operator=(const WithAttributeMap&);
+};
+
+template<>
+class RawListToKb<KbLabel> : private WithAllocator, private WithAttributeMap {
+public:
+	typedef KbLabel output_type;
+	RawListToKb(RawAllocator& allocator, AttributeMapBuilder& attribute_map) : WithAllocator(allocator), WithAttributeMap(attribute_map) {}
+
+	KbLabel operator()(iKnow_KB_Label label) {
+		return KbLabel(GetAllocator(), label.Name, label.Type, label.Attributes, label.PhaseList, GetAttributeMap());
+	}
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbLexrep> : private WithAllocator, private WithLabelMap {
+public:
+	typedef KbLexrep output_type;
+	RawListToKb(RawAllocator& allocator, LabelIndexMap& map, size_t& max_lexrep_size, size_t& max_token_size) : WithAllocator(allocator), WithLabelMap(map), max_lexrep_size_(max_lexrep_size), max_token_size_(max_token_size) {}
+
+#if defined _IRIS
+	KbLexrep operator()(CacheList& list) {
+		KbLexrep lexrep(GetAllocator(), GetLabelMap(), list[1].AsAString(), list[2].AsAString());
+#else
+	KbLexrep operator()(iKnow_KB_Lexrep kb_lexrep) {
+		KbLexrep lexrep(GetAllocator(), GetLabelMap(), kb_lexrep.Token, kb_lexrep.Labels);
+#endif
+		size_t size = lexrep.TokenCount();
+		if (size > max_lexrep_size_) max_lexrep_size_ = size;
+		// for Japanese, we need to calculate the maximum token size, this is an unnecessary step for non-Asian languages, but it's only done while loading, so no runtime performance while indexing...
+		size_t max_token = lexrep.maxTokenSize();
+		if (max_token > max_token_size_) max_token_size_ = max_token;
+		return lexrep;
+	}
+
+	size_t MaxLexrepSize() { return max_lexrep_size_; }
+	size_t MaxTokenSize() { return max_token_size_; }
+private:
+	size_t& max_lexrep_size_;
+	size_t& max_token_size_;
+	void operator=(const RawListToKb&);
+	};
+
+template<>
+class RawListToKb<KbRule> : private WithAllocator, private WithLabelMap {
+public:
+	typedef KbRule output_type;
+	RawListToKb(RawAllocator& allocator, LabelIndexMap& map) : WithAllocator(allocator), WithLabelMap(map) {}
+
+#if defined _IRIS
+	KbRule operator()(CacheList& list) {
+		return KbRule(GetAllocator(), GetLabelMap(), list[1].AsAString(), list[2].AsAString(), iknow::core::PhaseFromString(list[4].AsAString()));
+	}
+#else
+	KbRule operator()(iKnow_KB_Rule rule) {
+		return KbRule(GetAllocator(), GetLabelMap(), rule.InputPattern, rule.OutputPattern, iknow::core::PhaseFromString(rule.Phase));
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbAcronym> : private WithAllocator {
+public:
+	typedef KbAcronym output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbAcronym operator()(CacheList& list) {
+		return KbAcronym(GetAllocator(), list[1].AsAString(), list[2].AsBool() != 0);
+	}
+#else
+	KbAcronym operator()(iKnow_KB_Acronym acronym) {
+		return KbAcronym(GetAllocator(), acronym.Token, acronym.IsSentenceEnd);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbRegex> : private WithAllocator {
+public:
+	typedef KbRegex output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbRegex operator()(CacheList& list) {
+		return KbRegex(GetAllocator(), list[1].AsAString(), list[2].AsAString());
+	}
+#else
+	KbRegex operator()(iKnow_KB_Regex regex) {
+		return KbRegex(GetAllocator(), regex.name, regex.Pattern);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbPreprocessFilter> : private WithAllocator {
+public:
+	typedef KbPreprocessFilter output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbPreprocessFilter operator()(CacheList& list) {
+		return KbPreprocessFilter(GetAllocator(), list[1].AsAString(), list[2].AsAString());
+	}
+#else
+	KbPreprocessFilter operator()(iKnow_KB_PreprocessFilter filter) {
+		return KbPreprocessFilter(GetAllocator(), filter.InputToken, filter.OutputToken);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbFilter> : private WithAllocator {
+public:
+	typedef KbFilter output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbFilter operator()(CacheList& list) {
+		return KbFilter(GetAllocator(), list[1].AsAString(), list[2].AsAString(), list[3].AsBool() != 0, list[4].AsBool() != 0, list[7].AsBool() != 0, list[8].AsBool() != 0);
+	}
+#else
+	KbFilter operator()(iKnow_KB_Filter filter) {
+		return KbFilter(GetAllocator(), filter.InputToken, filter.OutputToken, filter.ApplyOnlyAtBeginning, filter.ApplyOnlyAtEnd, filter.IsConceptFilter, filter.IsRelationFilter);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbProperty> : private WithAllocator {
+public:
+	typedef KbProperty output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbProperty operator()(CacheList& list) {
+		return KbProperty(GetAllocator(), static_cast<PropertyId>(list[0].AsLong()), list[1].AsAString());
+	}
+#else
+	KbProperty operator()(const std::pair<int, string>& kb_property) {
+		return KbProperty(GetAllocator(), static_cast<PropertyId>(kb_property.first), kb_property.second);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbMetadata> : private WithAllocator {
+public:
+	typedef KbMetadata output_type;
+	RawListToKb(RawAllocator& allocator) : WithAllocator(allocator) {}
+
+#if defined _IRIS
+	KbMetadata operator()(CacheList& list) {
+		return KbMetadata(GetAllocator(), list[1].AsAString(), list[2].AsAString());
+	}
+#else
+	KbMetadata operator()(iKnow_KB_Metadata metadata) {
+		return KbMetadata(GetAllocator(), metadata.Name, metadata.Val);
+	}
+#endif
+
+private:
+	void operator=(const RawListToKb&);
+};
+
+using namespace iknow::shell::StaticHash;
+
+template<typename VectorT, typename KbT>
+void WriteKbBlock(RawAllocator& allocator, const VectorT& v, KbT*& begin, KbT*& end) {
+	begin = allocator.InsertRange(v.begin(), v.end());
+	end = begin + v.size();
+}
+
+template<typename IterT, typename TransformerT>
+void LoadKbRange(IterT begin, IterT end, size_t size, TransformerT& transformer, RawAllocator& allocator, const typename TransformerT::output_type*& out_begin, const typename TransformerT::output_type*& out_end) {
+	typedef typename TransformerT::output_type KbT;
+	vector<KbT> values;
+	values.reserve(size);
+	transform(begin, end, back_inserter(values), transformer);
+	WriteKbBlock(allocator, values, out_begin, out_end);
+}
+
+template<typename IterT, typename TransformerT, typename StringT, typename KeyFuncT>
+void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& transformer, const Table<StringT, typename TransformerT::output_type>*& table, KeyFuncT key_function, RawAllocator& allocator) {
+	typedef typename TransformerT::output_type KbT;
+	typedef vector<KbT> Values;
+	Values values;
+	values.reserve(size);
+	transform(begin, end, back_inserter(values), transformer);
+	Builder<StringT, KbT> table_builder(values.size());
+	for (typename Values::const_iterator i = values.begin(); i != values.end(); ++i) {
+		table_builder.Insert(key_function(&*i), allocator.Insert(*i));
+	}
+	table = allocator.Insert(table_builder.Build(allocator));
+}
 
 SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(RawKBData* kb_data) : kb_data_(kb_data) {}
 SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(unsigned char* kb_data) : kb_data_(reinterpret_cast<RawKBData*>(kb_data)) {}
-  
+
+SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(RawAllocator& allocator, AbstractKnowledgebase& kb, bool is_compiled) {
+	//The RawKBData must be the first thing in the block, we'll use its address for the base of all
+	//OffsetPtrs in the structure.
+	kb_data_ = allocator.Insert(RawKBData());
+	OFFSETPTRGUARD;
+
+	LabelIndexMap label_index_map; // label names mapped to (internal) label indexes.
+	AttributeMapBuilder attribute_map_builder;
+
+	size_t labels_count = static_cast<size_t>(kb.LabelCount());
+	if (labels_count > iknow::core::kMaxLabelCount) { //Make sure we don't have too many labels
+		throw ExceptionFrom<SharedMemoryKnowledgebase>("Number of labels to load exceeds maximum limit.");
+	}
+	// Transform label data
+	{
+		RawListToKb<KbLabel> label_transformer(allocator, attribute_map_builder);
+		const KbLabel* begin, * end;
+		LoadKbRange(kb.kb_labels.begin(), kb.kb_labels.end(), labels_count, label_transformer, allocator, begin, end);
+		kb_data_->labels_begin = begin;
+		kb_data_->labels_end = end;
+	}
+	//Store the KbAttributeMap generated via the label loads
+	kb_data_->attribute_map = allocator.Insert(attribute_map_builder.ToAttributeMap(allocator));
+
+/*
+	//Build the map from label name to offset in labels table
+	Builder<String, size_t> labels_table_builder(labels_count);
+	for (size_t i = 0; i < labels_count; ++i) {
+		const KbLabel* label = kb_data_->labels_begin + i;
+		labels_table_builder.Insert(label->PointerToName(), allocator.Insert(i));
+		//TODO: Other components should just use the kb_data_->labels table.
+		label_index_map.insert(LabelIndexMap::value_type(label->Name(), static_cast<FastLabelSet::Index>(i)));
+	}
+	kb_data_->labels = allocator.Insert(labels_table_builder.Build(allocator));
+
+
+
+	//Special labels
+	for (size_t i = BeginLabels; i != EndLabels; i++) {
+		kb_data_->special_labels[SpecialLabel(i)] = GetLabelIndexFromList(*kb_data_, kb.GetSpecialLabel(SpecialLabel(i)));
+	}
+
+	//Lexreps
+	if (!is_compiled) {
+		kb_data_->max_lexrep_size = 0;
+		kb_data_->max_token_size = 0;
+		RawListToKb<KbLexrep> lexrep_transformer(allocator, label_index_map, kb_data_->max_lexrep_size, kb_data_->max_token_size);
+		LoadKbStructureToTable(kb,
+			&AbstractKnowledgebase::NextLexrep,
+			&AbstractKnowledgebase::GetLexrep,
+			kb.LexrepCount(),
+			lexrep_transformer,
+#ifdef AIX
+			mem_fun(&KbLexrep::PointerToToken),
+#else
+			[](const KbLexrep* lexrep) { return lexrep->PointerToToken(); },
+#endif
+			kb_data_->lexreps,
+			allocator);
+	}
+	//Rules
+	RawListToKb<KbRule> rule_transformer(allocator, label_index_map);
+	LoadKbStructure(kb,
+		&AbstractKnowledgebase::NextRule,
+		&AbstractKnowledgebase::GetRule,
+		kb.RuleCount(),
+		rule_transformer,
+		kb_data_->rules_begin,
+		kb_data_->rules_end,
+		allocator);
+	//Acronyms
+	RawListToKb<KbAcronym> acronym_transformer(allocator);
+	LoadKbStructureToTable(kb,
+		&AbstractKnowledgebase::NextAcronym,
+		&AbstractKnowledgebase::GetAcronym,
+		kb.AcronymCount(),
+		acronym_transformer,
+#ifdef AIX
+		mem_fun(&KbAcronym::PointerToToken),
+#else
+		[](const KbAcronym* acronym) { return acronym->PointerToToken(); },
+#endif
+		kb_data_->acronyms,
+		allocator);
+	//Regexes
+	RawListToKb<KbRegex> regex_transformer(allocator);
+	LoadKbStructure(kb,
+		&AbstractKnowledgebase::NextRegex,
+		&AbstractKnowledgebase::GetRegex,
+		kb.RegexCount(),
+		regex_transformer,
+		kb_data_->regexes_begin,
+		kb_data_->regexes_end,
+		allocator);
+
+	//Preprocess Filters
+	RawListToKb<KbPreprocessFilter> preprocess_filter_transformer(allocator);
+	LoadKbStructure(kb,
+		&AbstractKnowledgebase::NextPreprocessFilter,
+		&AbstractKnowledgebase::GetPreprocessFilter,
+		kb.PreprocessFilterCount(),
+		preprocess_filter_transformer,
+		kb_data_->preprocess_filters_begin,
+		kb_data_->preprocess_filters_end,
+		allocator);
+
+	//Concept Filters
+	RawListToKb<KbFilter> concept_filter_transformer(allocator);
+	LoadKbStructure(kb,
+		&AbstractKnowledgebase::NextConceptFilter,
+		&AbstractKnowledgebase::GetConceptFilter,
+		kb.ConceptFilterCount(),
+		concept_filter_transformer,
+		kb_data_->concept_filters_begin,
+		kb_data_->concept_filters_end,
+		allocator);
+	//Input Filters (initially, identical to preprocess filters
+
+	RawListToKb<KbInputFilter> input_filter_transformer(allocator);
+	LoadKbStructure(kb,
+		&AbstractKnowledgebase::NextInputFilter,
+		&AbstractKnowledgebase::GetInputFilter,
+		kb.InputFilterCount(),
+		input_filter_transformer,
+		kb_data_->input_filters_begin,
+		kb_data_->input_filters_end,
+		allocator);
+
+	//Semantic properties
+	RawListToKb<KbProperty> property_transformer(allocator);
+	LoadKbStructureToTable(kb,
+		&AbstractKnowledgebase::NextProperty,
+		&AbstractKnowledgebase::GetProperty,
+		kb.PropertyCount(),
+		property_transformer,
+#ifdef AIX
+		mem_fun(&KbProperty::PointerToName),
+#else
+		[](const KbProperty* property) { return property->PointerToName(); },
+#endif
+		kb_data_->properties,
+		allocator);
+
+	//Language metadata
+	RawListToKb<KbMetadata> metadata_transformer(allocator);
+	LoadKbStructureToTable(kb,
+		&AbstractKnowledgebase::NextMetadata,
+		&AbstractKnowledgebase::GetMetadata,
+		kb.MetadataCount(),
+		metadata_transformer,
+#ifdef AIX
+		mem_fun(&KbMetadata::PointerToName),
+#else
+		[](const KbMetadata* metadata) { return metadata->PointerToName(); },
+#endif
+		kb_data_->metadata,
+		allocator);
+
+	//Hash
+#if defined(LINUX) || defined(UNIX)
+	kb_data_->hash = hash<std::string>()(IkStringEncoding::BaseToUTF8(kb.GetHash()));
+#else
+	kb_data_->hash = hash<decltype(kb.GetHash())>()(kb.GetHash());
+#endif
+*/
+}
+
 void SharedMemoryKnowledgebase::FilterInput(iknow::base::String& input) const {
   OFFSETPTRGUARD;
   const KbInputFilter* const begin = kb_data_->input_filters_begin;
