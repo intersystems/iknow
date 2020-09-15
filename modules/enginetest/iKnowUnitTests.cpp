@@ -52,9 +52,9 @@ void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attri
 		String literal(&text_source[start_literal], &text_source[stop_literal]);
 
 		string strMarker = attribute.marker_;
-		int count_upper = std::count_if(strMarker.begin(), strMarker.end(), [](unsigned char c) { return std::isupper(c); }); // Useless, I know...
+		int count_upper = (int) std::count_if(strMarker.begin(), strMarker.end(), [](unsigned char c) { return std::isupper(c); }); // Useless, I know...
 	}
-	if (count_attributes!=3) {
+	if (count_attributes!=4) {
 		throw std::runtime_error(string(pMessage));
 	}
 
@@ -122,7 +122,7 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	for (Text_Source::Proximity::iterator itProx = engine.m_index.proximity.begin(); itProx != engine.m_index.proximity.end(); ++itProx) {
 		size_t id1 = itProx->first.first;
 		size_t id2 = itProx->first.second;
-		double proximity = itProx->second;
+		double proximity = static_cast<double>(itProx->second);
 
 		// cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
 
@@ -133,7 +133,7 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	// Top 10 dominant terms :
 	typedef pair<int, double> EntDomType;
 	vector<EntDomType> vecDominantConcepts;
-	for_each(mapDominantConcepts.begin(), mapDominantConcepts.end(), [&vecDominantConcepts](pair<const size_t,double>& ent_par) { vecDominantConcepts.push_back(make_pair(ent_par.first, ent_par.second)); });
+	for_each(mapDominantConcepts.begin(), mapDominantConcepts.end(), [&vecDominantConcepts](pair<const size_t,double>& ent_par) { vecDominantConcepts.push_back(make_pair((int)ent_par.first, (double)ent_par.second)); });
 	sort(vecDominantConcepts.begin(), vecDominantConcepts.end(), [](EntDomType& a, EntDomType& b) { return a.second > b.second;  });
 	for (vector<EntDomType>::iterator itDom = vecDominantConcepts.begin(); itDom != vecDominantConcepts.end(); ++itDom) {
 		// cout << "\"" << mapTextSource[itDom->first] << "\" DOM=" << itDom->second << endl;
