@@ -13,6 +13,9 @@ using the following command, after navigating to the `/demos` folder:
 $ jupyter notebook demo.ipynb
 ```
 
+Please note that the GitHub rendering of the notebook doesn't follow the ASCII 
+escape highlighting, but you will be able to see it when opening in Jupyter.
+
 ## Highlighting
 
 The `highlight.py` script leverages [colorama](https://github.com/tartley/colorama) 
