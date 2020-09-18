@@ -191,14 +191,16 @@ public:
 	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
 		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
 	}
-
+	void useUdct(bool flag = false) {
+		m_bUserDCT = flag;
+	}
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
-	UserKnowledgeBase kb_csv_data; // User dictionary
-
+	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
+	bool m_bUserDCT; // default false
 
 };
 

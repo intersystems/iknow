@@ -29,94 +29,8 @@ typedef std::list<std::string> CacheList;
 #include <queue>
 #include <sstream>
 
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Metadata.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Acronym.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Regex.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Filter.h"
-// #include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Label.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Lexrep.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_PreprocessFilter.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Rule.h"
-
-
 namespace iknow {
   namespace shell {
-      class CSV_DataGenerator; // forward declaration
-      class iKnow_KB_Label
-      {
-      public:
-          std::string Name; // Name As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
-          std::string Type; // Type As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
-          std::string Attributes; // Attributes As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE");
-          std::string PhaseList; // Property PhaseList As %String;
-
-      private:
-          static void LoadSpecialLabels(CSV_DataGenerator& kb);
-          static iKnow_KB_Label LabelFromString(std::vector<std::string>& row_label, std::string& isDefault);
-      };
-
-    class AbstractKnowledgebase {
-    public:
-      typedef size_t Key;
-
-      virtual bool IsCompiled() = 0;
-
-      virtual std::string GetName() = 0;
-      virtual iknow::base::String GetHash() = 0;
-
-      virtual size_t AcronymCount() = 0;
-      virtual Key NextAcronym(Key key = 0) = 0;
-      virtual CacheList GetAcronym(Key key) = 0;
-
-      virtual size_t RegexCount() = 0;
-      virtual Key NextRegex(Key key = 0) = 0;
-      virtual CacheList GetRegex(Key key) = 0;
-
-      virtual size_t LabelCount() = 0;
-      virtual Key NextLabel(Key key = 0) = 0;
-      virtual CacheList GetLabel(Key key) = 0;
-
-      virtual CacheList GetSpecialLabel(iknow::core::SpecialLabel label) = 0;
-
-      virtual size_t LexrepCount() = 0;
-      virtual Key NextLexrep(Key key = 0) = 0;
-      virtual CacheList GetLexrep(Key key) = 0;
-
-      virtual size_t RuleCount() = 0;
-      virtual Key NextRule(Key key = 0) = 0;
-      virtual CacheList GetRule(Key key) = 0;
-
-      virtual size_t PreprocessFilterCount() = 0;
-      virtual Key NextPreprocessFilter(Key key = 0) = 0;
-      virtual CacheList GetPreprocessFilter(Key key) = 0;
-
-      virtual size_t ConceptFilterCount() = 0;
-      virtual Key NextConceptFilter(Key key = 0) = 0;
-      virtual CacheList GetConceptFilter(Key key) = 0;
-
-      virtual size_t InputFilterCount() = 0;
-      virtual Key NextInputFilter(Key key = 0) = 0;
-      virtual CacheList GetInputFilter(Key key) = 0;
-
-      virtual size_t PropertyCount() = 0;
-      virtual Key NextProperty(Key key = 0) = 0;
-      virtual CacheList GetProperty(Key key) = 0;
-
-      virtual size_t MetadataCount() = 0;
-      virtual Key NextMetadata(Key key = 0) = 0;
-      virtual CacheList GetMetadata(Key key) = 0;
-
-      //These will have default dummy implementations for KBs that don't support
-      //dynamic loading.
-      virtual bool IsDynamic()  { return false; }
-      virtual size_t PhaseCount() { return 0; }
-      virtual void ReadTable(const std::string&, size_t) { }
-      virtual bool TableAtEnd() { return true; }
-      virtual CacheList FetchRows(size_t) { return CacheList(); }
-      virtual void CloseTable() { }
-
-      std::vector<iknow::shell::iKnow_KB_Label> kb_labels;
-    };
 
     struct RawKBData {
       OffsetPtr<const KbLabel> labels_begin;
@@ -155,8 +69,7 @@ namespace iknow {
 
     class SHELL_API SharedMemoryKnowledgebase : public iknow::core::IkKnowledgebase {
     public:
-      //for building from an abstract representation
-      SharedMemoryKnowledgebase(RawAllocator& allocator, AbstractKnowledgebase& kb, bool is_compiled = false);
+
       //for reading from a pointer to a table created by the above constructor
       SharedMemoryKnowledgebase(RawKBData* kb_data);
       //does the cast to a RawKBData
