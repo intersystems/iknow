@@ -1,5 +1,5 @@
 ﻿/* Default labels
-;5,10,13,$;JPCon;typeConcept;label for concepts;1;;
+;5,10,13,17,$;JPCon;typeConcept;label for concepts;1;;
 ;5,10,$;-;typeOther;symbol for composite labels;0;;
 ;3,5,10,$;JPFurigana;typeOther;parentheses only containing all Hiraganas or all numbers;0;;
 ;3,5,10,$;JPKatakana;typeConcept;Katakana characters;0;;
@@ -15,9 +15,9 @@
 ;5,10,13,$;JPBeginEndRelation;typeBeginEndRelation;do not merge with other Relations;0;;
 ;5,7,10,13,$;JPBeginRelation;typeBeginRelation;do not merge with previous Relation;0;;
 ;5,7,10,13,$;JPEndRelation;typeEndRelation;do not merge with subsequent Relation;0;;
-;$;JPNegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
-;$;JPNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
-;5,20,$;JPNegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
+;17,$;JPNegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
+;17,$;JPNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
+;5,17,20,$;JPNegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
 ;$;JPDateTime;typeAttribute;time indication;0;;Entity(DateTime)
 ;$;JPFreq;typeAttribute;frequency indication;0;;Entity(Frequency)
 
@@ -40,6 +40,7 @@
 ;3;JPRule3437;typeAttribute;exceptions for Rule #3437;0;;
 ;5,10;JPRule289;typeAttribute;exceptions for Rule #289;0;;
 ;5,$;JPPolite;typeAttribute;words in polite form;0;;
+;5,$;JPSahen;typeAttribute;SuruNoun to be kept as label in verbs;0;;
 
 /* Main Labels Specific to Parts-of-Speech
 ;5,10,$;JPPrefix;typeConcept;label for word that can be a prefix or something else;0;;
@@ -104,7 +105,7 @@
 ;5,10,$;JPAdjVStem;typeConcept;label for adjectival verb stem ;0;;
 ;5,7,10,13,17,$;JPAdjVBase;typeConcept;label for Adjectival Verb Predicative/Attributive Form;0;;
 ;5,10,$;JPAdjVCond;typeRelation;label for Adjectival Verb Conditional Form;0;;
-;5,10,$;JPAdjVConj;typeOther;label for Adjectival Verb Conjunctive Form;0;;
+;5,10,13,$;JPAdjVConj;typeOther;label for Adjectival Verb Conjunctive Form;0;;
 ;5,10,13,$;JPAdjVConjPast;typeConcept;label for Adjectival Verb Conjunctive (Plain Affirmative Past) Form;0;;
 ;5,10,$;JPAdjVHypo;typeRelation;label for Adjectival Verb Hypothetical Form;0;;
 ;5,10,$;JPAdjVerbSuffix;typeRelation;label for Adjective Suffix verbs;0;;
@@ -358,7 +359,7 @@
 ;5,10,13,$;JPParticleTO;typeRelation;label for the particle と;0;;
 ;5,10,$;JPParticleNI;typeRelation;label for the particle に (indicating 'in' or 'to');0;;
 ;5,10,$;JPParticleNO;typeRelation;label for the particle の;0;;
-;5,10,13,$;JPParticleHA;typeOther;label for the particle は;0;;
+;5,10,13,17,$;JPParticleHA;typeOther;label for the particle は;0;;
 ;5,10,$;JPParticleHE;typeRelation;label for the particle へ;0;;
 ;5,10,13,$;JPParticleMO;typeOther;label for the particle も;0;;
 ;5,10,13,$;JPParticleYA;typeOther;label for the particle や;0;;
