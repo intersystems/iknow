@@ -17,7 +17,7 @@ jobs:
         directories:
           - ccache
       script:
-        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh manylinux2014_aarch64 $ICU_SRC_URL
+        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh $ICU_SRC_URL
         - travis/deploy_manylinux.sh
     - name: "manylinux2014_ppc64le"
       os: linux
@@ -29,7 +29,7 @@ jobs:
         directories:
           - ccache
       script:
-        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh manylinux2014_ppc64le $ICU_SRC_URL
+        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh $ICU_SRC_URL
         - travis/deploy_manylinux.sh
     - name: "manylinux2010_x86_64"
       os: linux
@@ -41,7 +41,7 @@ jobs:
         directories:
           - ccache
       script:
-        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh manylinux2010_x86_64 $ICU_SRC_URL
+        - docker run --rm -e CCACHE_DIR=/ccache -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $(pwd):/iknow quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh $ICU_SRC_URL
         - travis/deploy_manylinux.sh
     - name: "Mac OS X 10.9 x86_64"
       os: osx
