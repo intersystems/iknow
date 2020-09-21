@@ -4,11 +4,12 @@
 # executed inside a manylinux container in which /iknow is the root of the
 # repository.
 #
-# Usage: /iknow/travis/build_manylinux.sh ICU_SRC_URL
+# Usage: /iknow/travis/build_manylinux.sh
+#
+# Required Environment Variables:
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 
 set -euxo pipefail
-URL="$1"
 
 
 ##### Install dependencies #####
@@ -30,7 +31,7 @@ export PATH="/opt/ccache:$PATH"
 
 
 ##### Build ICU #####
-curl -L -o icu4c-src.zip "$URL"
+curl -L -o icu4c-src.zip "$ICU_SRC_URL"
 unzip -q icu4c-src.zip
 cd icu/source
 

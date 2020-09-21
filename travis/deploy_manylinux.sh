@@ -4,7 +4,7 @@
 # this script outside the container to deploy the wheels if appropriate. The
 # working directory must be the root of the GitHub repository.
 #
-# Environment variables:
+# Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 

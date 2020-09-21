@@ -4,20 +4,21 @@
 # Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate. This
 # script must be executed with the repository root as the working directory.
 #
-# Usage: travis/build_osx.sh ICU_SRC_URL
+# Usage: travis/build_osx.sh
+#
+# Required Environment Variables:
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 #
-# Environment variables:
+# Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
-URL="$1"
 
 
 ##### Build ICU #####
 export REPO_ROOT=$(pwd)
-curl -L -o icu4c-src.zip "$URL"
+curl -L -o icu4c-src.zip "$ICU_SRC_URL"
 unzip -q icu4c-src.zip
 cd icu/source
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
