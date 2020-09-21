@@ -4,19 +4,15 @@
 # Mac OS X >= 10.9 x86_64. Upload the wheels to PyPI if appropriate. This
 # script must be executed with the repository root as the working directory.
 #
-# Usage: travis/build_osx.sh ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_osx.sh ICU_SRC_URL
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
+#
+# Environment variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
 URL="$1"
-{ set +x; } 2>/dev/null  # don't save token to build log
-echo '+ PYPI_TOKEN="$2"'
-PYPI_TOKEN="$2"
-echo '+ TESTPYPI_TOKEN="$3"'
-TESTPYPI_TOKEN="$3"
-set -x
 
 
 ##### Build ICU #####

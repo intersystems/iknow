@@ -2,7 +2,11 @@
 
 # After build_manylinux.sh successfully runs inside a manylinux container, run
 # this script outside the container to deploy the wheels if appropriate. The
-# working directory must be the root of the GitHub repository. 
+# working directory must be the root of the GitHub repository.
+#
+# Environment variables:
+# - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
+# - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
 

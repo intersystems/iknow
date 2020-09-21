@@ -4,19 +4,15 @@
 # wheels to PyPI if appropriate. This script must be executed with the
 # repository root as the working directory.
 #
-# Usage: travis/build_windows.sh ICU_WIN_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_windows.sh ICU_WIN_URL
 # - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+# 
+# Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
 URL="$1"
-{ set +x; } 2>/dev/null  # don't save token to build log
-echo '+ PYPI_TOKEN="$2"'
-PYPI_TOKEN="$2"
-echo '+ TESTPYPI_TOKEN="$3"'
-TESTPYPI_TOKEN="$3"
-set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
 export PATH=$MSBUILD_PATH:$PATH
 

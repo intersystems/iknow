@@ -4,7 +4,7 @@
 # executed inside a manylinux container in which /iknow is the root of the
 # repository.
 #
-# Usage: /iknow/travis/build_manylinux.sh TAG ICU_SRC_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: /iknow/travis/build_manylinux.sh TAG ICU_SRC_URL
 # - TAG is the manylinux platform tag. Supported tags are
 #     manylinux2010_x86_64
 #     manylinux2010_i686
@@ -13,18 +13,10 @@
 #     manylinux2014_aarch64
 #     manylinux2014_ppc64le
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
-# - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
-# - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
 TAG="$1"
 URL="$2"
-{ set +x; } 2>/dev/null  # don't save token to build log
-echo '+ PYPI_TOKEN="$3"'
-PYPI_TOKEN="$3"
-echo '+ TESTPYPI_TOKEN="$4"'
-TESTPYPI_TOKEN="$4"
-set -x
 
 SUPPORTEDTAGS="manylinux2010_x86_64 manylinux2010_i686 manylinux2014_x86_64 manylinux2014_i686 manylinux2014_aarch64 manylinux2014_ppc64le"
 

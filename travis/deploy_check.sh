@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 # Check whether and where we should deploy iknowpy after building it. We deploy
-# iknowpy if and only if 3 criteria hold.
+# iknowpy if and only if 4 criteria hold.
 #   1. The build is from the master branch.
 #   2. The build is not associated with an open pull request.
-#   3. The commit that the current build is testing contains a change to
+#   3. Variables PYPI_TOKEN and TESTPYPI_TOKEN are set. 
+#   4. The commit that the current build is testing contains a change to
 #      /modules/iknowpy/iknowpy/version.py.
 #
 # If the version specified in version.py is a developmental release version as
@@ -28,6 +29,7 @@ set -euxo pipefail
 
 if [[ "$TRAVIS_BRANCH" == "master" ]] && \
     [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && \
+    [ -z ${PYPI_TOKEN+x} ] && [ -z ${TESTPYPI_TOKEN+x} ] && \
     git diff-tree --no-commit-id --name-only -r $TRAVIS_COMMIT | grep modules/iknowpy/iknowpy/version.py > /dev/null
 then
   if grep ".dev[0-9][0-9]*'" "$REPO_ROOT/modules/iknowpy/iknowpy/version.py"; then
