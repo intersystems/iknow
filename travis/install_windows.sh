@@ -21,9 +21,5 @@ done
 # Python packages
 for PYTHON in /c/"Program Files"/Python3*/python.exe; do
   "$PYTHON" -m pip install -U pip
-  PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == *"Python39"* ]]; then
-    PACKAGES="$PACKAGES twine"
-  fi
-  "$PYTHON" -m pip install -U $PACKAGES --no-warn-script-location
+  "$PYTHON" -m pip install -U cython setuptools wheel --no-warn-script-location
 done

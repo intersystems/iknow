@@ -23,9 +23,5 @@ done
 curl -L -O https://bootstrap.pypa.io/get-pip.py
 for PYTHON in python3.5 python3.6 python3.7 python3.8 python3.9; do
   "$PYTHON" get-pip.py
-  PACKAGES="cython setuptools wheel"
-  if [[ "$PYTHON" == "python3.9" ]]; then
-    PACKAGES="$PACKAGES twine"
-  fi
-  "$PYTHON" -m pip install -U $PACKAGES --no-warn-script-location
+  "$PYTHON" -m pip install -U cython setuptools wheel --no-warn-script-location
 done

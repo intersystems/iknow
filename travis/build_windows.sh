@@ -36,28 +36,3 @@ cd iknowpy
 for PYTHON in /c/"Program Files"/Python3*/python.exe; do
   "$PYTHON" setup.py bdist_wheel
 done
-
-
-##### Upload iknowpy wheels if appropriate #####
-DEPLOY=$($REPO_ROOT/travis/deploy_check.sh)
-if [[ "$DEPLOY" == "0" ]]; then
-  echo "Deployment skipped"
-else
-  if [[ "$DEPLOY" == "PyPI" ]]; then
-    export TWINE_REPOSITORY=pypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$PYPI_TOKEN"'
-    TOKEN="$PYPI_TOKEN"
-    set -x
-  else
-    export TWINE_REPOSITORY=testpypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$TESTPYPI_TOKEN"'
-    TOKEN="$TESTPYPI_TOKEN"
-    set -x
-  fi
-  { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
-  set -x
-fi

@@ -44,26 +44,5 @@ for PYTHON in python3.5 python3.6 python3.7 python3.8 python3.9; do
 done
 
 
-##### Upload iknowpy wheels if appropriate #####
-DEPLOY=$($REPO_ROOT/travis/deploy_check.sh)
-if [[ "$DEPLOY" == "0" ]]; then
-  echo "Deployment skipped"
-else
-  if [[ "$DEPLOY" == "PyPI" ]]; then
-    export TWINE_REPOSITORY=pypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$PYPI_TOKEN"'
-    TOKEN="$PYPI_TOKEN"
-    set -x
-  else
-    export TWINE_REPOSITORY=testpypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$TESTPYPI_TOKEN"'
-    TOKEN="$TESTPYPI_TOKEN"
-    set -x
-  fi
-  { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  python3.9 -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
-  set -x
-fi
+##### Report cache statistics #####
+ccache -s

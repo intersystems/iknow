@@ -74,14 +74,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDI
 
 # install Python package dependencies and build initial wheels
 for PYTHON in /opt/python/cp3*/bin/python; do
-  PACKAGES="cython setuptools wheel"
-  "$PYTHON" -m pip install --user --no-warn-script-location $PACKAGES
+  "$PYTHON" -m pip install --user cython setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do
-  auditwheel repair -w dist2 $WHEEL
+  auditwheel repair "$WHEEL"
 done
 
 
