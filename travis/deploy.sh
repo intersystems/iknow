@@ -34,7 +34,7 @@ set -euxo pipefail
 
 if [[ "$TRAVIS_BRANCH" == "master" ]] && \
     [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && \
-    [ -n ${PYPI_TOKEN+x} ] && [ -n ${TESTPYPI_TOKEN+x} ] && \
+    [ -n "${PYPI_TOKEN+x}" ] && [ -n "${TESTPYPI_TOKEN+x}" ] && \
     git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null
 then
   "$PYTHON" -m pip install --user twine --no-warn-script-location
