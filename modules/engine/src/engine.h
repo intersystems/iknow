@@ -187,10 +187,15 @@ public:
 	// offsets, not byte offsets in text_source.
 	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
-	// Adds User Dictionary annotations for customizing purposes
-	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
-		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
-	}
+	// User dictionary methods :
+
+	// Adds User Dictionary label to a lexical representation for customizing purposes
+	int addUdctLabel(const std::string& literal, const char* UdctLabel); // m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
+	// Add User Dictionary literal rewrite, not functional.
+	void addUdctRewrite(const std::string& literal, const std::string& literal_rewrite);
+	// Add User Dictionary EndNoEnd, not functional. 
+	void addUdctEndNoEnd(const std::string& literal, bool b_end = true);
+
 	void useUdct(bool flag = false) {
 		m_bUserDCT = flag;
 	}
@@ -199,7 +204,7 @@ public:
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
-	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
+	static iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
 	bool m_bUserDCT; // default false
 
 };

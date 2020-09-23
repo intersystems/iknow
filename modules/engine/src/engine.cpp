@@ -12,6 +12,8 @@
 #include "IkIndexInput.h"
 #include "RegExServices.h"
 
+iknow::csvdata::UserKnowledgeBase iKnowEngine::m_user_data; // User dictionary
+
 const std::set<std::string>& iKnowEngine::GetLanguagesSet(void) {
 	static const std::set<std::string> iknow_languages = { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 	return iknow_languages;
@@ -345,3 +347,17 @@ void iKnowEngine::index(const std::string& text_source, const std::string& langu
 	String text_source_ucs2(IkStringEncoding::UTF8ToBase(text_source));
 	index(text_source_ucs2, language, b_trace);
 }
+
+// Adds User Dictionary label to a lexical representation for customizing purposes
+int addUdctLabel(const std::string& literal, const char* UdctLabel)
+{
+	// normalize the literal
+	// add to the udct lexreps
+	return -1;
+}
+// Add User Dictionary literal rewrite, not functional.
+void addUdctRewrite(const std::string& literal, const string& literal_rewrite) {}
+
+// Add User Dictionary EndNoEnd, not functional. 
+void addUdctEndNoEnd(const std::string& literal, bool b_end = true) {}
+
