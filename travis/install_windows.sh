@@ -7,6 +7,10 @@ set -euxo pipefail
 # Visual Studio 2019
 choco install visualstudio2019buildtools --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
 
+# buildcache
+wget -nv https://github.com/mbitsnbites/buildcache/releases/latest/download/buildcache-win-msvc.zip
+unzip -qj buildcache-win-msvc.zip
+
 # Python
 wget -nv https://www.python.org/ftp/python/3.5.4/python-3.5.4-amd64-webinstall.exe
 wget -nv https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64-webinstall.exe
