@@ -10,7 +10,9 @@ jobs:
     - name: "manylinux2014_aarch64"
       os: linux
       dist: focal
-      arch: arm64
+      arch: arm64-graviton2
+      virt: lxd
+      group: edge
       services:
         - docker
       cache:
