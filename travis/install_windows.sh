@@ -11,7 +11,7 @@ choco install visualstudio2019buildtools --package-parameters "--add Microsoft.V
 wget -nv https://www.python.org/ftp/python/3.5.4/python-3.5.4-amd64-webinstall.exe
 wget -nv https://www.python.org/ftp/python/3.6.8/python-3.6.8-amd64-webinstall.exe
 wget -nv https://www.python.org/ftp/python/3.7.8/python-3.7.8-amd64-webinstall.exe
-wget -nv https://www.python.org/ftp/python/3.8.5/python-3.8.5-amd64-webinstall.exe
+wget -nv https://www.python.org/ftp/python/3.8.5/python-3.8.6-amd64-webinstall.exe
 wget -nv https://www.python.org/ftp/python/3.9.0/python-3.9.0rc2-amd64-webinstall.exe
 
 for PYINSTALL in python-*.exe; do
