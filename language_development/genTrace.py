@@ -7,19 +7,18 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/iKnow_GH/kit/x64/Release/bin')
-# import engine as iknowpy
+sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
-import iknowpy
+# import iknowpy
 
 import os
 import pprint
 import time
 
 # print(sys.argv)
-
-in_path_par = "C:/tmp/text_input_data/"
-out_path_par = "C:/tmp/output/"
+in_path_par = "C:/P4/Users/jdenys/text_input_data/en/try/"
+out_path_par = "C:/tmp/"
 language_par = "en"
 OldStyle = True
 
