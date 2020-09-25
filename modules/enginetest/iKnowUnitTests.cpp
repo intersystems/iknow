@@ -22,8 +22,10 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test1(pError);
 		pError = "Only one measurement attribute in example English text";
 		test_collection.test2(pError);
-		pError = "3 Sentence Attribute markers in sentence";
+		pError = "4 Sentence Attribute markers in sentence";
 		test_collection.test3(pError);
+		pError = "Test on SBegin/SEnd labels";
+		test_collection.test4(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -35,6 +37,34 @@ void iKnowUnitTests::runUnitTests(void)
 		exit(-1);
 	}
 }
+
+void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBegin/SEnd labels
+	string text_source_utf8 = u8"The position of the window made it very unlikely that this was a random passerby.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+	engine.index(text_source, "en", true); // traces should contain SBegin/SEnd labels
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepIdentified") != string::npos) {
+			string& trace_sbegin = (*it);
+			if (trace_sbegin.find("labels=\"SBegin;\"") == string::npos) // first should be SBegin
+				throw std::runtime_error(string(pMessage));
+			while ((it + 1)->find("LexrepIdentified") != string::npos)
+				++it;
+			string& trace_send = (*it);
+			if (trace_send.find("labels=\"SEnd;\"") == string::npos) // last should be SEnd
+				throw std::runtime_error(string(pMessage));
+		}
+	}
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get the sentence reference
+	const Path_Attribute& attribute_expansion = *sent.path_attributes.begin(); // path attribute
+	if (attribute_expansion.type != Certainty)
+		throw std::runtime_error(string("No certainty attribute detected !"));
+	if (attribute_expansion.pos != 5)
+		throw std::runtime_error(string("Position of certainty attribute must be 5 !"));
+	if (attribute_expansion.span != 5) // TODO: this value is *not* correct.
+		throw std::runtime_error(string("Span of certainty attribute must be more than 1 !"));
+}
+
 void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
 	string text_source_utf8 = "Now, I have been on many walking holidays, but never on one where I have my bags ferried\nfrom hotel to hotel while I simply get on with the job of walkingand enjoying myself.";
 	// <attr type = "measurement" literal = "hundreds of feet" token = "hundreds of feet" value = "hundreds of" unit = "feet">
