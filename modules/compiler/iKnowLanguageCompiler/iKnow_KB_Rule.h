@@ -20,6 +20,7 @@ namespace iknow {
 
 			std::string TransformRulePattern(std::string& csv_rule_input, std::string& csv_phase, CSV_DataGenerator& kb, newLabels_type &newLabels, newLabelsIndex_type &newLabelsIndex, SPhases_type& SBegin, SPhases_type& SEnd);
 
+			std::string csv_id; // identification number in csv-file
 			/*
 			Property InputPattern As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE") [ Required ];
 			Property OutputPattern As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE") [ Required ];

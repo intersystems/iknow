@@ -27,6 +27,7 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			if ((std::count(line.begin(), line.end(), ';') + 1) < 4) continue; // Continue : ($L(line, ";") < 4)
 			vector<string> row_rule = kb.split_row(line);
 			iKnow_KB_Rule rule; // Set rule = ..%New()
+			rule.csv_id = row_rule[1 - 1]; // csv identification of rule
 			rule.Phase = row_rule[2 - 1]; // Set phase = $PIECE(line, ";", 2)	// Set rule.Phase = phase
 			rule.InputPattern = rule.TransformRulePattern(row_rule[3 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.InputPattern = ..TransformRulePattern($PIECE(line, ";", 3), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
 			rule.OutputPattern = rule.TransformRulePattern(row_rule[4 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.OutputPattern = ..TransformRulePattern($PIECE(line, ";", 4), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
@@ -171,8 +172,8 @@ std::string iKnow_KB_Rule::TransformRulePattern(string& pattern, string& phase, 
 	for (vector<string>::iterator it = labels.begin(); it != labels.end(); ++it) {
 		string& label = *it;
 
-		if (label == "SBegin") SBeginPhases.insert(phase); // add rule phase to SBegin label
-		if (label == "SEnd") SEndPhases.insert(phase); // add rule phase to SEnd label
+		if (label.find("SBegin") != string::npos) SBeginPhases.insert(phase); // add rule phase to SBegin label
+		if (label.find("SEnd") != string::npos) SEndPhases.insert(phase); // add rule phase to SEnd label
 
 		string newLabel;
 		int lastQuote = 0;
