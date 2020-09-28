@@ -5,7 +5,7 @@
 set -euxo pipefail
 
 # Homebrew packages
-brew install dos2unix
+brew install dos2unix ccache
 
 # download Python
 curl -L -O https://www.python.org/ftp/python/3.5.4/python-3.5.4-macosx10.6.pkg
