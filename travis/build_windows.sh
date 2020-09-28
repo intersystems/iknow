@@ -40,7 +40,7 @@ BUILDCACHE_IMPERSONATE=cl.exe \
 
 ##### Build iknowpy wheels #####
 cd iknowpy
-for PYTHON in /c/"Program Files"/Python3*/python.exe; do
+for PYTHON in "$TRAVIS_BUILD_DIR"/python.*/tools/python.exe; do
   "$PYTHON" setup.py bdist_wheel
 done
 

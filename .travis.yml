@@ -66,4 +66,4 @@ jobs:
         - travis/install_windows.sh
       script:
         - BUILDCACHE_DIR="$TRAVIS_BUILD_DIR/buildcache" travis/build_windows.sh
-        - PYTHON=/c/"Program Files"/Python39/python.exe travis/deploy.sh
+        - PYTHON="$TRAVIS_BUILD_DIR/python.3.9.0-rc2/tools/python.exe" travis/deploy.sh
