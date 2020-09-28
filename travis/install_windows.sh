@@ -13,7 +13,7 @@ unzip -qj buildcache-win-msvc.zip
 
 # Python
 choco install nuget.commandline --limit-output 
-for PYVERSION in 3.5.4 3.6.8 3.7.8 3.8.6 3.9.0-rc2; do
+for PYVERSION in 3.5.4 3.6.8 3.7.9 3.8.6 3.9.0-rc2; do
   nuget.exe install python -Version "$PYVERSION" -NonInteractive -Verbosity quiet
 done
 
