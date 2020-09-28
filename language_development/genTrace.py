@@ -7,7 +7,7 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/iKnow_GH/kit/x64/Release/bin')
+# sys.path.insert(0, 'C:/Users/nleclerc/source/repos/iknow/kit/x64/Release/bin')
 # import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
 import iknowpy
@@ -85,10 +85,6 @@ for text_file in f:
             write_ln(f_trace, 'Sentence='+Sentence)
         elif (key == "LexrepIdentified"):
             Index, Labels = trace.split('"')[3],trace.split('"')[5]
-            if (Index=='B'): # B&E are Begin&End markers, not real lexreps
-                continue
-            if (Index=='E'):
-                continue
             write_ln(f_trace, "LexrepIdentified:"+Index+":"+Labels)
         elif (key == "RuleApplication"):
             write_ln(f_trace, key + value)
