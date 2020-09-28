@@ -20,9 +20,8 @@ export PATH="$MSBUILD_PATH:$PATH"
 
 
 ##### Install ICU #####
-export REPO_ROOT="$(pwd)"
 wget -nv -O icu4c.zip "$ICU_WIN_URL"
-export ICUDIR="$REPO_ROOT/thirdparty/icu"
+export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 mkdir -p "$ICUDIR"
 unzip -q icu4c.zip -d "$ICUDIR"
 
