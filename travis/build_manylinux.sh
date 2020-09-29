@@ -53,9 +53,6 @@ case "$PROCESSOR" in
   x86_64)
     export IKNOWPLAT=lnxrhx64
     ;;
-  i686)
-    export IKNOWPLAT=lnxrhx86
-    ;;
   aarch64)
     export IKNOWPLAT=lnxrharm64
     ;;
