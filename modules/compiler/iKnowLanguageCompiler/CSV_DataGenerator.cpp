@@ -152,7 +152,7 @@ const std::vector<std::pair<int, string>> CSV_DataGenerator::kb_properties = {
 	make_pair(IKATTCERTAINTY, "Certainty")
 };
 
-void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
+void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::ostream& os)
 {
 	/*
 	Do ..LoadTableFromCSV(prefix _ "metadata.csv", "%iKnow.KB.Metadata", kb)
@@ -167,7 +167,9 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	*/
 	kb_language = language;
 	Hash = language; // just a unique string per KB
-	cout << "Loading CSV data for language \"" << language << "\"" << endl;;
+	stringstream message;
+	message << "Loading CSV data for language \"" << language << "\"" << endl;
+	cout << message.str(); os << message.str();
 
 	kb_metadata.clear();
 	size_t cap = kb_metadata.capacity();
@@ -216,10 +218,15 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	cout << "Reading rules data..." << endl;
 	iKnow_KB_Rule::ImportFromCSV(csv_path_ + language + "/" + "rules.csv", *this);
 	cout << kb_rules.size() << " rule items (reserved=" << cap << ")" << endl;
-
+	{
+		os << "Rule CSV mapping:" << endl;
+		for (int idRule = 0; idRule < kb_rules.size(); idRule++) {
+			os << idRule << ":" << kb_rules[idRule].csv_id << "\t" << kb_rules[idRule].InputPattern << "\t->\t" << kb_rules[idRule].OutputPattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
+		}
+	}
 	labelIndexTable_type &label_index_table = labelIndexTable;
 	int label_idx = 0;
-	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table,&label_idx](iKnow_KB_Label label){ label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
+	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table, &label_idx, &os](iKnow_KB_Label label) { os << label_idx << "\t" << label.Name << endl; label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
 	//Override value for "-"
 	labelIndexTable["-"] = -1; //Set table("-") = -1
 }

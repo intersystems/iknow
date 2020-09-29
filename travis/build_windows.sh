@@ -4,26 +4,23 @@
 # wheels to PyPI if appropriate. This script must be executed with the
 # repository root as the working directory.
 #
-# Usage: travis/build_windows.sh ICU_WIN_URL PYPI_TOKEN TESTPYPI_TOKEN
+# Usage: travis/build_windows.sh
+#
+# Required Environment Variables:
 # - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+#
+# Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI
 
 set -euxo pipefail
-URL="$1"
-{ set +x; } 2>/dev/null  # don't save token to build log
-echo '+ PYPI_TOKEN="$2"'
-PYPI_TOKEN="$2"
-echo '+ TESTPYPI_TOKEN="$3"'
-TESTPYPI_TOKEN="$3"
-set -x
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
 export PATH=$MSBUILD_PATH:$PATH
 
 
 ##### Install ICU #####
 export REPO_ROOT=$(pwd)
-wget -nv -O icu4c.zip "$URL"
+wget -nv -O icu4c.zip "$ICU_WIN_URL"
 export ICUDIR=$REPO_ROOT/thirdparty/icu
 mkdir -p "$ICUDIR"
 unzip -q icu4c.zip -d "$ICUDIR"
@@ -39,28 +36,3 @@ cd iknowpy
 for PYTHON in /c/"Program Files"/Python3*/python.exe; do
   "$PYTHON" setup.py bdist_wheel
 done
-
-
-##### Upload iknowpy wheels if appropriate #####
-DEPLOY=$($REPO_ROOT/travis/deploy_check.sh)
-if [[ "$DEPLOY" == "0" ]]; then
-  echo "Deployment skipped"
-else
-  if [[ "$DEPLOY" == "PyPI" ]]; then
-    export TWINE_REPOSITORY=pypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$PYPI_TOKEN"'
-    TOKEN="$PYPI_TOKEN"
-    set -x
-  else
-    export TWINE_REPOSITORY=testpypi
-    { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ TOKEN="$TESTPYPI_TOKEN"'
-    TOKEN="$TESTPYPI_TOKEN"
-    set -x
-  fi
-  { set +x; } 2>/dev/null  # don't save token to build log
-  echo '+ /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl'
-  /c/"Program Files"/Python39/python.exe -m twine upload -u "__token__" -p "$TOKEN" dist/iknowpy-*.whl
-  set -x
-fi
