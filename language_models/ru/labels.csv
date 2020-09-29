@@ -18,7 +18,6 @@
 ;1,38,39,40,60,65,66,70,80,$;RUCon;typeConcept;default label;1;;
 
 /* RU labels
-;1,40,66,$;RUAdvTime;typeAmbiguous;to make rules for advPR+time without using attribute time in phase 40;0;;
 ;1,40,50,$;RUActobj;typeAmbiguous;personal pronoun as acting object;0;;
 ;1,38,40,50,60,65,66,70,80,$;RUAdj;typeConcept;adjective;0;;
 ;1,39;RUAdjAccF;typeConcept;adjective accusative feminine;0;;
@@ -36,7 +35,6 @@
 ;1,39;RUAdjNomN;typeConcept;adjective nominative neuter;0;;
 ;1,40,65,$;RUAdjPossibleBCon;typeConcept;adjective possibly BeginConcept;0;;
 ;1,39;RUAdjPreposMN;typeConcept;adjective prepositional masculine/neuter;0;;
-;1,40,$;RUAdjtemp;typeConcept;adjective used in time expressions;0;;
 ;1,38,40,$;RUAdv;typeAmbiguous;adverb of manner;0;;
 ;1,38,40,50,60,65,66,70,$;RUAdvPR;typePathRelevant;pathrelevant adverbs of time and place;0;;
 ;1,40,$;RUAdvaux;typeAmbiguous;modal adverb;0;;
@@ -45,6 +43,7 @@
 ;1,40,$;RUAdvPred;typeAmbiguous;adverb or predicate;0;;
 ;1,40,$;RUAdvRefl;typeAmbiguous;adverb or reflexive pronoun;0;;
 ;1,39,40,60,65,66,70,80,$;RUAdvStruct;typeOther;structural adverb;0;;
+;1,40,70,$;RUAdvTime;typeBeginEndConcept;adverbs of time: concrete time indications;0;;
 ;1,40,65,70,80,$;RUAndOrBut;typeRelation;'and'/'or'/'but';0;;
 ;1,39,40,60,66,70,80,$;RUAndOr;typeRelation;'and'/'or';0;;
 ;1,70;RUAntecedent;typeOther;extra label to limit expansion for antecedents;0;;
@@ -53,10 +52,10 @@
 ;1,40,60,65,66,70,80,$;RUCAdv;typeConcept;adverb as concept;0;;
 ;1,39,40,70,$;RUBeginendconcept;typeBeginEndConcept;beginconcept plus endconcept;0;;
 ;70,80,$;RUBeginrel;typeBeginRelation;to split relations to manage attribute expansion;0;;
+;1,40;RUBeginTime;typeAmbiguous;words that start a time indication;0;;
+;1,40;RUBracketsnumber;typeConcept;number in between brackets;0;;
 ;1,40,$;RUCapitalInitial2;typeAttribute;to use label in phase 40 without the risk that it is overwritten in phase 39;0;;
-;1,39,40,$;RUCent;typeAmbiguous;century;0;;
-;1,38,40,$;RUCfr;typeConcept;numbers in digits defined in regex file, and numbers in full not used in time expressions;0;;
-;1,38,40,$;RUCfrYear;typeConcept;cardinal number used as year;0;;
+;1,39,40;RUCentury;typeConcept;century;0;;
 ;1,38,40,60,65,66,70,80,$;RUComma;typeEndConcept;comma;0;;
 ;1,38,40,70;RUComp;typeRelation;comparatives, except 'more'/'less';0;;
 ;1,38,40,$;RUCompgr;typeAmbiguous;'more'/'less';0;;
@@ -88,12 +87,14 @@
 ;1,39;RUConNomN;typeConcept;noun nominative neuter;0;;
 ;1,40,$;RUConVerb;typeAmbiguous;noun or conjugated verb;0;;
 ;1,40,$;RUDam;typeAmbiguous;specific word 'dam' (meaning 'I give'/'ladies');0;;
-;1,40,$;RUDay;typeAmbiguous;days of the week;0;;
+;1,40;RUDay;typeAmbiguous;days of the week;0;;
+;1,40;RUDate;typeBeginEndConcept;extra label for date defined in regex file;0;;
 ;1,38,39,40,50,65,70,80,$;RUDempron;typePathRelevant;demonstrative pronoun;0;;
+;1,40;RUDigit;typeConcept;extra label for numbers that are digits;0;;
 ;1,40,$;RUDostatotsjno;typeAmbiguous;specific word 'dostatotchno' (meaning 'enough');0;;
 ;1,40,$;RUDrug;typeAmbiguous;part of reciprocal pronoun OR noun, specific word 'drug' (meaning '[part of] each other'/'friend');0;;
-;1,40,65,70,$;RUECon;typeEndConcept;end concept;0;;
 ;1,40,$;RUEdva;typeAmbiguous;specific word 'edva' (meaning 'barely');0;;
+;1,40;RUEndTime;typeConcept;words that end a time indication;0;;
 ;1,40,$;RUEto;typeAmbiguous;specific word 'eto' (meaning 'this'/'this is');0;;
 ;1,38,40,66,70;RUHyphen;typeAmbiguous;dash;0;;
 ;1,38,39,40,50,70,80,$;RUIndefpron;typeAmbiguous;general label for ALL indefinite pronouns;0;;
@@ -105,14 +106,12 @@
 ;1,38,40,$;RUInitial;typeConcept;initial;0;;
 ;1,40,65,$;RUIz;typeAmbiguous;specific word 'iz' (meaning 'out');0;;
 ;1,38,40,60,65,$;RUKAdj;typeAmbiguous;short adjective;0;;
-;1,40,$;RUKazjdyj;typeConcept;specific word 'kazhdyj' (meaning 'each');0;;
 ;1,66,70;RUKotory;typeRelation;specific word 'kotory' (meaning 'which');0;;
 ;1,40,$;RUKoe;typeOther;specific word 'koe' (meaning 'which');0;;
 ;1,40,66,$;RULayout;typeBeginEndConcept;for numbered lists;0;;
 ;1,39,40,60,70,$;RUmAux;typeRelation;modal auxiliary verb;0;;
-;1,40,$;RUMonth;typeAmbiguous;name of months;0;;
-;1,40,$;RUMonthNom;typeConcept;name of months, nominative;0;;
-;1,40,$;RUNazad;typeConcept;'nazad' or 'spustya';0;;
+;1,40;RUMonth;typeConcept;name of months;0;;
+;1,40;RUNazad;typeConcept;'nazad' or 'spustya';0;;
 ;1,38,39,40,60,65,66,$;RUNe;typeAmbiguous;specific word 'ne' (meaning 'not');0;;
 ;1,70,$;RUNegBCon;typeBeginConcept;BeginConcept as Negation marker, extra label next to BCon;0;;
 ;1,65,70;RUNegComp;typeAmbiguous;extra label for comparative after 'ne';0;;
@@ -127,25 +126,25 @@
 ;1,40,$;RUNeskolko;typeAmbiguous;specific word 'neskolko' (meaning 'some'/'a bit');0;;
 ;1,38,40,65,70,$;RUNi;typeAmbiguous;specific word 'ni' (meaning 'nor');0;;
 ;1,38,39,40,65,70,$;RUNikakoy;typeBeginConcept;specific word 'nikakoy' (meaning 'not any');0;;
-;1,40,65,$;RUNoBCon;typeConcept;this word cannot be beginconcept;0;;
-;1,40,$;RUNoEConBefore;typeConcept;word preceding cannot be endconcept;0;;
+;1,40,65;RUNoBCon;typeConcept;this word cannot be beginconcept;0;;
 ;1,40,60,65,66,70,$;RUNRPron;typeAmbiguous;nonrelevant pronouns;0;;
 ;1,38,40,65,70,$;RUNum;typeConcept;cardinal number;0;;
 ;1,39,40,$;RUObrazom;typeAmbiguous;specific word 'obrazom' (meaning 'in ... way' as adverb);0;;
 ;1,40,$;RUOchota;typeAmbiguous;specific word 'okhota' (meaning 'feel like'/'hunting');0;;
 ;1,40,65,$;RUOdin;typeAmbiguous;specific word 'odin, odnogo,...';0;;
 ;1,40,$;RUOkolo;typeAmbiguous;specific word 'okolo' (meaning 'close to'/'almost');0;;
+;1,38,40,$;RUOrdNum;typeConcept;ordinal number (a.o. in time expressions);0;;
 ;1,40,$;RUOsobenno;typeAmbiguous;specific word 'osobenno' (meaning 'especially');0;;
 ;1,40,$;RUOtnositelno;typeAmbiguous;specific word 'otnositelno' (meaning 'relatively'/'concerning');0;;
 ;1,40,60,65,66,70,$;RUPart;typeRelation;participle;0;;
 ;1,38,40,50,$;RUPartActpf;typeAmbiguous;active past participle;0;;
 ;1,38,40,$;RUPartAdj;typeAmbiguous;participle or adjective;0;;
-;1,40,$;RUPartAdjSubst;typeAmbiguous;participle or adjective or noun;0;;
-;1,40,$;RUPartAdjtemp;typeConcept;participle or adjective which can be used in time expressions;0;;
+;1,40,$;RUPartAdjCon;typeAmbiguous;participle or adjective or noun;0;;
+;1,40;RUPartTime;typeConcept;can be part of a time indication;0;;
 ;1,38,40,50,65,66,70,80,$;RUPerspron;typePathRelevant;personal pronoun;0;;
 ;1,39;RUPlusAcc;typeRelation;word that is followed by an accusative case;0;;
 ;1,39;RUPlusAcc/Prepos;typeAmbiguous;word that is followed by an accusative or prepostional case;0;;
-;1,39;RUPlusGen;typeAmbiguous;word that is followed by a genitive;0;;
+;1,39,40;RUPlusGen;typeAmbiguous;word that is followed by a genitive;0;;
 ;1,40,$;RUPoka;typeAmbiguous;specific word 'poka' (meaning 'bye'/'still');0;;
 ;1,38,39,40,50,60,65,70,80,$;RUPosspron;typePathRelevant;possessive pronoun;0;;
 ;1,40,$;RUPosspronGenMN;typeOther;possessive pronoun genitive masculine/neuter;0;;
@@ -156,23 +155,28 @@
 ;1,40,50,60,65,66,70,80,$;RUPRPron;typePathRelevant;pathrelevant pronouns;0;;
 ;1,40,$;RUPtclVerb;typeAmbiguous;conjugated verb or particle;0;;
 ;1,39,40,$;RUPutjom;typeAmbiguous;specific word: noun or preposition 'putyom' (meaning 'road'/'through');0;;
+;1,40;RUQuarter;typeConcept;specific word: time or not time: 'kvartal' (meaning 'quarter'/'neighborhood');0;;
 ;1,40,50,60,65,66,70,80,$;RURAdv;typeRelation;adverb as relation;0;;
 ;1,40,$;RURanee;typeAmbiguous;specific word 'ranee';0;;
-;1,38,40,$;RURanking;typeConcept;ranking number in time expressions;0;;
-;1,40,$;RURaz;typeAmbiguous;specific word 'raz' (meaning 'time'/'times');0;;
+;1,40,$;RURaz;typeConcept;specific word 'raz' (meaning 'time'/'times');0;;
 ;1,40,$;RUDempronConj;typeAmbiguous;demonstrative pronoun or conjunction as relation;0;;
 ;1,40,66,$;RURefl;typeAmbiguous;reflexive pronoun;0;;
 ;1,40,60,65;RURelpron;typeRelation;relative pronoun;0;;
 ;1,40,70,$;RURepr;typeRelation;reciprocal pronoun;0;;
+;1,40;RURoman;typeConcept;roman numbers;0;;
 ;1,40,$;RUSamyj;typeAmbiguous;specific word 'samyj' (part of superlative);0;;
+;1,40;RUSeason;typeConcept;extra label for seasons;0;;
+;1,40;RUSingleWord;typeAmbiguous;extra label for time indications as beginendconcept made up of one word, not to be joined with other concept;0;;
 ;1,40,$;RUSjtoto;typeAmbiguous;specific word 'sjto-to'(for combination with adjective);0;;
 ;1,38,$;RUSos;typeAmbiguous;specific word group 'v sostoyanii' (meaning 'capable');0;;
-;1,38,40,$;RUSreda;typeAmbiguous;specific word 'sreda' (meaning 'Wednesday'/'environment');0;;
+;1,38,40;RUSreda;typeConcept;specific word 'sreda' (meaning 'Wednesday'/'environment');0;;
 ;1,40,$;RUSuffix;typeOther;for suffixes '-to' and '-ka', stripped off in prepro file;0;;
 ;1,40,$;RUTak;typeAmbiguous;specific word 'tak' (meaning 'so');0;;
 ;1,38,39,40,$;RUTakoj;typeAmbiguous;specific word 'takoy' (meaning 'so');0;;
-;1,39,40,$;RUTemp;typeAmbiguous;expression of time, rewritten to endconcept;0;;
-;1,39,40,$;RUTempBeginEnd;typeConcept;expression of time, rewritten to beginendconcept;0;;
+;1,40,70,$;RUTimeBeginConcept;typeBeginConcept;time-related begin concept;0;;
+;1,40,$;RUTimeConcept;typeConcept;time-related concepts (eg. 'day', 'week', ...);0;;
+;1,40,65,70,$;RUTimeEndConcept;typeEndConcept;time-related end concept;0;;
+;1,40;RUTimes;typeConcept;for words expressing a number of 'times' in time indications;0;;
 ;1,40,$;RUTom;typeAmbiguous;specific word 'tom' (meaning 'chapter'/'that');0;;
 ;1,40,$;RUTsjasje;typeAmbiguous;specific word: noun or adverb 'chashtshe' ('bush'/'more often');0;;
 ;1,38,$;RUTsjasti;typeAmbiguous;specific word 'chasti' (meaning 'part'/'part of') ;0;;
@@ -182,8 +186,9 @@
 ;1,40,$;RUVsego;typeAmbiguous;specific word 'vsego' (meaning 'in total'/'of the entire');0;;
 ;1,40,$;RUVsjo;typeAmbiguous;specific word 'vsyo' (meaning 'whole/entire'/'ever [more]');0;;
 ;1,38,$;RUV;typeAmbiguous;preposition 'v' (meaning 'in'/'to');0;;
-;1,39,40,$;RUWeek;typeAmbiguous;words for 'week' or 'month';0;;
-;1,39,40,$;RUYear;typeAmbiguous;words for 'year';0;;
+;1,40;RUYear;typeAmbiguous;words for 'year';0;;
+;1,38,40,$;RUYearNum;typeConcept;cardinal number used as year;0;;
+;1,40;RUYearNumHyphen;typeConcept;numbers that can be years, hyphenated;0;;
 
 /* RU attributes
 ;70,$;RUNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
@@ -204,8 +209,10 @@
 ;66,70;RUBracket1;typeAttribute;opening bracket, defined as attribute to avoid interference with punctuation label;0;;
 ;66,70;RUBracket2;typeAttribute;closing bracket, defined as attribute to avoid interference with punctuation label;0;;
 ;66;RUInclPunct;typeAttribute;structural adverb starting with a comma, which makes a difference in pattern for sentence structure detection;0;;
+;1,40;RUAcro;typeAttribute;extra label for time-related abbreviations;0;;
 
 ;1,66,70,$;RUPBegin;typeAttribute;to mark entities starting a phrase;0;;
 ;1,66;RUPossiblePBegin;typeAttribute;to mark candidates for the 'phrase begin' attribute;0;;
+;1,70;RUPossibleNegSpan;typeAttribute;to mark candidates for the negation span;0;;
 ;1,66;RUNotMarkerPB;typeAttribute;to mark punctuation (dash) which is NOT followed by a phrase-begin;0;;
 
