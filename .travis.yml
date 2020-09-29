@@ -7,7 +7,7 @@ env:
     # URL to .zip pre-built release of ICU for Windows x86_64
     - ICU_WIN_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip
     # Docker run command with arguments common to all manylinux builds
-    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e ICU_SRC_URL -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $TRAVIS_BUILD_DIR:/iknow"
+    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_SRC_URL -v $TRAVIS_BUILD_DIR/ccache:/ccache -v $TRAVIS_BUILD_DIR/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
 
 jobs:
   include:
@@ -19,7 +19,10 @@ jobs:
       group: edge
       services: docker
       cache:
-        directories: ccache
+        directories:
+          - ccache
+          - pipcache  # pip cache for container
+          - $HOME/.cache/pip  # pip cache for host
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh &&
         PYTHON=python3 travis/deploy.sh
@@ -29,7 +32,10 @@ jobs:
       arch: ppc64le
       services: docker
       cache:
-        directories: ccache
+        directories:
+          - ccache
+          - pipcache
+          - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh &&
         PYTHON=python3 travis/deploy.sh
@@ -39,23 +45,38 @@ jobs:
       arch: amd64
       services: docker
       cache:
-        directories: ccache
+        directories:
+          - ccache
+          - pipcache
+          - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh &&
         PYTHON=python3 travis/deploy.sh
     - name: "Mac OS X 10.9 x86_64"
       os: osx
       osx_image: xcode11.6
-      env: HOMEBREW_NO_AUTO_UPDATE=1 PATH="/usr/local/opt/ccache/libexec:$PATH"
-      cache: ccache
+      env: >-
+        HOMEBREW_NO_AUTO_UPDATE=1
+        PATH="/usr/local/opt/ccache/libexec:$PATH"
+        CCACHE_DIR="$TRAVIS_BUILD_DIR/ccache"
+        PIP_CACHE_DIR="$TRAVIS_BUILD_DIR/pipcache"
+      cache:
+        directories:
+          - ccache
+          - pipcache
       install: travis/install_osx.sh
       script: >-
         travis/build_osx.sh &&
         PYTHON=python3.9 travis/deploy.sh
     - name: "Windows x86_64"
       os: windows
+      env: >-
+        BUILDCACHE_DIR="$TRAVIS_BUILD_DIR/buildcache"
+        PIP_CACHE_DIR="$TRAVIS_BUILD_DIR/pipcache"
       cache:
-        directories: buildcache
+        directories:
+          - buildcache
+          - pipcache
       install: travis/install_windows.sh
       script: >-
         travis/build_windows.sh &&

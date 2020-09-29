@@ -7,6 +7,7 @@
 # Usage: /iknow/travis/build_manylinux.sh
 #
 # Required Environment Variables:
+# - PIP_CACHE_DIR is the location that pip caches files
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 
 set -euxo pipefail
@@ -73,10 +74,12 @@ cd modules/iknowpy
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
 
 # install Python package dependencies and build initial wheels
+chown -R root "$PIP_CACHE_DIR"
 for PYTHON in /opt/python/cp3*/bin/python; do
   "$PYTHON" -m pip install --user cython setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
+chmod -R a+rw "$PIP_CACHE_DIR"
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do

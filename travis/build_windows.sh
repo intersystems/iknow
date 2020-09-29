@@ -27,7 +27,6 @@ unzip -q icu4c.zip -d "$ICUDIR"
 ##### Build iKnow engine #####
 cd modules
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/BuildTools/MSBuild/Current/Bin"
-export BUILDCACHE_DIR="$TRAVIS_BUILD_DIR/buildcache"
 BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
   MSBuild.exe iKnowEngine.sln -p:Configuration=Release -p:Platform=x64 \
     -maxcpucount \
