@@ -10,9 +10,10 @@ import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
 # sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-# import engine as iknowpy
+sys.path.insert(0, 'C:/iKnow_GH/kit/x64/Release/bin')
+import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
-import iknowpy
+#import iknowpy
 
 import os
 import pprint
@@ -44,19 +45,21 @@ def write_ln(file_,text_):
 #
 from os import walk
 
-f = []  # non-recursive list of files
+f = []  # non-recursive list of files, .txt only
 for (dirpath, dirnames, filenames) in walk(in_path_par):
     for single_file in filenames:
-        full_path = dirpath + single_file
-        f.append(full_path)
+        if (single_file.endswith('.txt')):
+            full_path = dirpath + single_file
+            f.append(full_path)
     break
 
-f_rec = []  # recursive list of files
+f_rec = []  # recursive list of files, .txt only
 def collect_files_recursive(in_path_par):
     for (dirpath, dirnames, filenames) in walk(in_path_par):
         for single_file in filenames:
-            full_path = dirpath + single_file
-            f_rec.append(full_path)
+            if (single_file.endswith('.txt')):
+                full_path = dirpath + single_file
+                f_rec.append(full_path)
         for single_dir in dirnames:
             full_dir = dirpath + single_dir + "/"
             collect_files_recursive(full_dir)
@@ -97,17 +100,35 @@ for text_file in f_rec:
         #
         if OldStyle:
             sentence_raw = 'S\x01'
+            ent_stop = ''
             for entity in sent['entities']:
                 ent_type = entity['type']
                 lit_text = text[entity['offset_start']:entity['offset_stop']]
+                ent_start = entity['offset_start']
                 if ent_type == 'NonRelevant':
-                    sentence_raw = sentence_raw + lit_text
+                    if (ent_start != ent_stop):
+                        sentence_raw = sentence_raw + lit_text
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + lit_text
+                    ent_stop = entity['offset_stop']
                 if ent_type == 'Concept':
-                    sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + '\x02' + lit_text + '\x02'
+                    ent_stop = entity['offset_stop']
                 if ent_type == 'Relation':
-                    sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + '\x03' + lit_text + '\x03'
+                    ent_stop = entity['offset_stop']
                 if ent_type == 'PathRelevant':
-                    sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    ent_stop = entity['offset_stop']
 
                 if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
                     sentence_raw = sentence_raw + ' '
@@ -132,7 +153,7 @@ for text_file in f_rec:
                 attr_name = sent_attribute['type'].lower()
                 if (attr_name == 'datetime'):
                     attr_name = 'time'
-                sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'] + '\"'
+                sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'].lstrip() + '\"'
                 if sent_attribute['value']:
                    sent_attribute_raw = sent_attribute_raw + ' value=\"' + sent_attribute['value'] + '\"'
                 if sent_attribute['unit']:
