@@ -341,16 +341,27 @@ def patch_wheel(whl_path):
     for lib_name in iculib_map:
         # replace dependency on symlink to dependency on actual library file
         lib_rename[lib_name] = lib_rename[iculib_map[lib_name]]
+
+    os.makedirs(CACHE_DIR, exist_ok=True)
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
-        print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])))
-        dep_libs = patcher.getneeded(lib_path)
-        patcher.setname(lib_path, lib_rename[lib_name])
-        if dep_libs:
-            if sys.platform == 'linux':
-                patcher.setrpath(lib_path)
-            patcher.replaceneeded(lib_path, dep_libs, lib_rename)
-        os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
+        print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])), end='')
+        if os.path.isfile(os.path.join('dist/cache', lib_rename[lib_name])):
+            # copy patched library from cache
+            os.remove(lib_path)
+            shutil.copy2(os.path.join(CACHE_DIR, lib_rename[lib_name]), lib_dir)
+            print(' (cached)')
+        else:
+            dep_libs = patcher.getneeded(lib_path)
+            patcher.setname(lib_path, lib_rename[lib_name])
+            if dep_libs:
+                if sys.platform == 'linux':
+                    patcher.setrpath(lib_path)
+                patcher.replaceneeded(lib_path, dep_libs, lib_rename)
+            os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
+            # copy patched library into cache
+            shutil.copy2(os.path.join(lib_dir, lib_rename[lib_name]), CACHE_DIR)
+            print()
 
     # update record file, which tracks wheel contents and their checksums
     update_wheel_record(tmp_dir)
@@ -374,6 +385,9 @@ def find_wheel():
         raise BuildError('Found multiple wheels matching pattern {!r}'.format(wheel_pattern))
     return wheel_pattern_matches[0]
 
+
+# set constants
+CACHE_DIR = 'dist/cache'
 
 # obtain version
 version = {}
