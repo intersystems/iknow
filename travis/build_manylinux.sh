@@ -20,7 +20,10 @@ set -euxo pipefail
 #   some reason, ICU source releases use Windows line endings.
 # ccache
 #   Speed up build times by caching results from previous builds.
-yum install -y epel-release
+PROCESSOR="$(uname -p)"
+if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
+  yum install -y epel-release
+fi
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
@@ -46,7 +49,7 @@ gmake install
 ##### Build iKnow engine #####
 cd /iknow
 
-case $(uname -p) in
+case "$PROCESSOR" in
   x86_64)
     export IKNOWPLAT=lnxrhx64
     ;;
