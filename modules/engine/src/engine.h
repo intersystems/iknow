@@ -187,6 +187,9 @@ public:
 	// offsets, not byte offsets in text_source.
 	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
+	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
+	std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+
 	// User dictionary methods :
 
 	// Adds User Dictionary label to a lexical representation for customizing purposes
@@ -204,7 +207,7 @@ public:
 
 private:
 	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
-	static iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
+	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
 	bool m_bUserDCT; // default false
 
 };

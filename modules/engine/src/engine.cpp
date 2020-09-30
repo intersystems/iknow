@@ -10,9 +10,8 @@
 #include "IkSummarizer.h"
 #include "IkPath.h"
 #include "IkIndexInput.h"
+#include "IkIndexProcess.h"
 #include "RegExServices.h"
-
-iknow::csvdata::UserKnowledgeBase iKnowEngine::m_user_data; // User dictionary
 
 const std::set<std::string>& iKnowEngine::GetLanguagesSet(void) {
 	static const std::set<std::string> iknow_languages = { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
@@ -348,16 +347,41 @@ void iKnowEngine::index(const std::string& text_source, const std::string& langu
 	index(text_source_ucs2, language, b_trace);
 }
 
+std::string iKnowEngine::NormalizeText(const string& text_source, const std::string& language, bool bUserDct, bool bLowerCase, bool bStripPunct) {
+	try {
+		String input = IkStringEncoding::UTF8ToBase(text_source);
+
+		//A static buffer for the output string.
+		static String output;
+
+		//No ALI for normalization: We need a KB.
+		SharedMemoryKnowledgebase skb = language_code_map.Lookup(language);
+		IkKnowledgebase* kb = &skb;
+
+		IkKnowledgebase* ud_kb = NULL;
+
+		std::map<iknow::base::String, IkKnowledgebase const*> null_kb_map;
+		IkIndexProcess process(null_kb_map);
+		output = process.NormalizeText(input, kb, ud_kb, bLowerCase, bStripPunct);
+
+		return IkStringEncoding::BaseToUTF8(output);
+	}
+	catch (const std::exception& e) {
+		throw ExceptionFrom<iKnowEngine>(e.what());
+	}
+	throw std::runtime_error("Failed to throw an exception.");
+}
+
 // Adds User Dictionary label to a lexical representation for customizing purposes
-int addUdctLabel(const std::string& literal, const char* UdctLabel)
+int iKnowEngine::addUdctLabel(const std::string& literal, const char* UdctLabel)
 {
-	// normalize the literal
-	// add to the udct lexreps
+	string normalized = NormalizeText(literal, "en"); // normalize the literal
+	m_user_data.addUdctLabel(normalized, UdctLabel); // add to the udct lexreps
 	return -1;
 }
 // Add User Dictionary literal rewrite, not functional.
-void addUdctRewrite(const std::string& literal, const string& literal_rewrite) {}
+void iKnowEngine::addUdctRewrite(const std::string& literal, const string& literal_rewrite) {}
 
 // Add User Dictionary EndNoEnd, not functional. 
-void addUdctEndNoEnd(const std::string& literal, bool b_end = true) {}
+void iKnowEngine::addUdctEndNoEnd(const std::string& literal, bool b_end) {}
 

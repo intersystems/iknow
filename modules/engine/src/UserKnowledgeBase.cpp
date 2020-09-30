@@ -23,23 +23,12 @@ using iknow::base::IkStringEncoding;
 using iknow::base::String;
 using namespace iknow::core;
 
-vector<iKnow_KB_Metadata> UserKnowledgeBase::kb_metadata;
-vector<iKnow_KB_Acronym> UserKnowledgeBase::kb_acronyms;
-vector<iKnow_KB_Regex> UserKnowledgeBase::kb_regex;
-vector<iKnow_KB_Filter> UserKnowledgeBase::kb_filter;
-vector<iKnow_KB_Label> UserKnowledgeBase::kb_labels;
-UserKnowledgeBase::lexreps_Type UserKnowledgeBase::kb_lexreps;
-std::unordered_map<std::string, int> UserKnowledgeBase::lexrep_index;
-vector<iKnow_KB_PreprocessFilter> UserKnowledgeBase::kb_prepro;
-vector<iKnow_KB_Rule> UserKnowledgeBase::kb_rules;
-
 using namespace std;
 using namespace iknow::base;
 using namespace iknow::core;
 using namespace iknow::shell;
 
 typedef std::map<String, FastLabelSet::Index> LabelIndexMap;
-
 
 //A functor to convert a raw CacheList into a Kb* type
 template<typename KbT>
@@ -365,7 +354,7 @@ unsigned char* UserKnowledgeBase::generateRAW(bool IsCompiled)
 	}
 
 	kb_data_->hash = std::hash<decltype(GetHash())>()(GetHash());
-
+	m_IsDirty = false; // RAW reflects CSV state...
 	return data_buffer;
 }
 
@@ -465,37 +454,6 @@ const std::vector<std::pair<int, string>> UserKnowledgeBase::kb_properties = {
 	make_pair(IKATTCERTAINTY, "Certainty")
 };
 
-vector<string> special_labels = { // language independent labels
-	";1,$;Concept;typeConcept;;0;",
-	";1,$;Join;typeOther;;0;",
-	";1,$;JoinReverse;typeOther;;0;",
-	";1,$;NonRelevant;typeOther;;0;",
-	";1,$;Punctuation;typeEndConcept;;0;",
-	";1,$;Relation;typeRelation;;0;",
-	";1,$;Numeric;typeOther;;0;",
-	";1,$;Unknown;typeOther;;0;",
-	";1,$;CapitalAll;typeAttribute;;0;",
-	";1,$;CapitalInitial;typeAttribute;;0;",
-	";1,$;CapitalMixed;typeAttribute;;0;",
-	";1,$;NonSemantic;typeAttribute;;0;Entity(NonSemantic)",
-	";1,$;User1;typeAttribute;;0;",
-	";1,$;User2;typeAttribute;;0;",
-	";1,$;User3;typeAttribute;;0;",
-	";1,$;AlphaBetic;typeConcept;;0;",
-	";1,$;Space;typeOther;;0;",
-	";1,$;Katakana;typeConcept;;0;",
-	";1,$;UDNegation;typeAttribute;;0;",
-	";1,$;UDPosSentiment;typeAttribute;;0;",
-	";1,$;UDNegSentiment;typeAttribute;;0;",
-	";1,$;UDConcept;typeConcept;;0;",
-	";1,$;UDRelation;typeRelation;;0;",
-	";1,$;UDNonRelevant;typeNonRelevant;;0;",
-	";1,$;UDUnit;typeAttribute;;0;",
-	";1,$;UDNumber;typeAttribute;;0;",
-	";1,$;UDTime;typeAttribute;;0;"
-
-};
-
 std::vector<std::string> split_row(std::string row_text, char split)
 {
 	std::vector<std::string> split_data;
@@ -525,6 +483,36 @@ iKnow_KB_Label LabelFromString(vector<string>& row_label, string& isDefault) // 
 //
 UserKnowledgeBase::UserKnowledgeBase() : m_IsDirty(true)
 {
+	vector<string> special_labels = { // language independent labels
+	";1,$;Concept;typeConcept;;0;",
+	";1,$;Join;typeOther;;0;",
+	";1,$;JoinReverse;typeOther;;0;",
+	";1,$;NonRelevant;typeOther;;0;",
+	";1,$;Punctuation;typeEndConcept;;0;",
+	";1,$;Relation;typeRelation;;0;",
+	";1,$;Numeric;typeOther;;0;",
+	";1,$;Unknown;typeOther;;0;",
+	";1,$;CapitalAll;typeAttribute;;0;",
+	";1,$;CapitalInitial;typeAttribute;;0;",
+	";1,$;CapitalMixed;typeAttribute;;0;",
+	";1,$;NonSemantic;typeAttribute;;0;Entity(NonSemantic)",
+	";1,$;User1;typeAttribute;;0;",
+	";1,$;User2;typeAttribute;;0;",
+	";1,$;User3;typeAttribute;;0;",
+	";1,$;AlphaBetic;typeConcept;;0;",
+	";1,$;Space;typeOther;;0;",
+	";1,$;Katakana;typeConcept;;0;",
+	";1,$;UDNegation;typeAttribute;;0;",
+	";1,$;UDPosSentiment;typeAttribute;;0;",
+	";1,$;UDNegSentiment;typeAttribute;;0;",
+	";1,$;UDConcept;typeConcept;;0;",
+	";1,$;UDRelation;typeRelation;;0;",
+	";1,$;UDNonRelevant;typeNonRelevant;;0;",
+	";1,$;UDUnit;typeAttribute;;0;",
+	";1,$;UDNumber;typeAttribute;;0;",
+	";1,$;UDTime;typeAttribute;;0;"
+	};
+
 	string isDefault = "";
 	for (vector<string>::iterator it = special_labels.begin(); it != special_labels.end(); ++it) {
 		vector<string> row_label = split_row(*it, ';');

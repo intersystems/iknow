@@ -41,17 +41,17 @@ namespace iknow {
 			// SharedMemoryKnowledgebase(RawAllocator& allocator, AbstractKnowledgebase& kb, bool is_compiled = false);
 			unsigned char* generateRAW(bool IsCompiled);
 
-			static std::vector<iKnow_KB_Metadata> kb_metadata;
-			static std::vector<iKnow_KB_Acronym> kb_acronyms;
-			static std::vector<iKnow_KB_Regex> kb_regex;
-			static std::vector<iKnow_KB_Filter> kb_filter;
-			static std::vector<iKnow_KB_Label> kb_labels;
+			std::vector<iKnow_KB_Metadata> kb_metadata;
+			std::vector<iKnow_KB_Acronym> kb_acronyms;
+			std::vector<iKnow_KB_Regex> kb_regex;
+			std::vector<iKnow_KB_Filter> kb_filter;
+			std::vector<iKnow_KB_Label> kb_labels;
 			iKnow_KB_Label* kb_concept_label; // Property ConceptLabel As Label;
 			typedef std::vector<iKnow_KB_Lexrep>	lexreps_Type;
-			static lexreps_Type kb_lexreps;
-			static std::unordered_map<std::string, int> lexrep_index;
-			static std::vector<iKnow_KB_PreprocessFilter> kb_prepro;
-			static std::vector<iKnow_KB_Rule> kb_rules;
+			lexreps_Type kb_lexreps;
+			std::unordered_map<std::string, int> lexrep_index;
+			std::vector<iKnow_KB_PreprocessFilter> kb_prepro;
+			std::vector<iKnow_KB_Rule> kb_rules;
 			static const std::vector<std::pair<int, std::string>> kb_properties;
 			typedef std::unordered_map<std::string, int>	labelIndexTable_type;
 			labelIndexTable_type labelIndexTable; // mapping of labels to indexes
@@ -67,6 +67,12 @@ namespace iknow {
 			}
 			bool IsDirty(void) {
 				return m_IsDirty;
+			}
+			int addUdctLabel(const std::string& token, const std::string& label) {
+				// check if label does exist
+				kb_lexreps.push_back(iKnow_KB_Lexrep(token, label));
+				m_IsDirty = true; // need recompilation
+				return 0;
 			}
 
 		private:

@@ -26,6 +26,10 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test3(pError);
 		pError = "Test on SBegin/SEnd labels";
 		test_collection.test4(pError);
+		pError = "Test on User Dictionary (UDCT)";
+		test_collection.test5(pError);
+		pError = "Test on Text Normalizer";
+		test_collection.test6(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -35,6 +39,32 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+// std::string NormalizeText(std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+void iKnowUnitTests::test6(const char* pMessage) {
+	iKnowEngine engine;
+
+	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
+	string text_lowercased = engine.NormalizeText(text_source, "en");
+
+	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), isupper) > 0) // 
+		throw std::runtime_error("NormalizeText does not work correctly");
+}
+
+void iKnowUnitTests::test5(const char* pMessage) { // User DCT test : @er/pr positive,UDPosSentiment
+	string text_source_utf8 = u8"The test was er/pr positive.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+
+	engine.addUdctLabel("er/pr positive", "UDPosSentiment");
+	engine.useUdct(true); 
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		cout << *it << endl;
 	}
 }
 
@@ -62,7 +92,7 @@ void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBeg
 	if (attribute_expansion.pos != 5)
 		throw std::runtime_error(string("Position of certainty attribute must be 5 !"));
 	if (attribute_expansion.span != 5) // TODO: this value is *not* correct.
-		throw std::runtime_error(string("Span of certainty attribute must be more than 1 !"));
+		throw std::runtime_error(string("Span of certainty attribute must be 5 !"));
 }
 
 void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
