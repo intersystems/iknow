@@ -25,6 +25,10 @@ PROCESSOR="$(uname -p)"
 if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
   yum install -y epel-release
 fi
+if [ "$PROCESSOR" = aarch64 ]; then
+  # this mirror is slow on arm64-graviton2, so disable it
+  echo "exclude=csc.mcs.sdsmt.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
+fi
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
