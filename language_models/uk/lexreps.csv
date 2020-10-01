@@ -5,6 +5,7 @@
 ;;{number-all};;UKNum;UKDigit;UKCon;
 ;;{number-ending};;UKNum;UKDigit;UKCon;
 ;;{number-percentage};;UKNum;UKDigit;UKCon;
+;;{number-slash};;UKNum;UKDigit;UKCon;
 
 
 
@@ -17,14 +18,18 @@
 ;;{ranking_nomn};;UKOrdNum;UKAdj;UKDigit;UKAdjNomN;
 ;;{ranking_nompl};;UKOrdNum;UKAdj;UKDigit;UKAdjNomPl;
 ;;{1ranking_accf};;UKOrdNum;UKAdj;UKDigit;UKAdjAccF;
-;;{ranking_genmn};;UKOrdNum;UKAdj;UKDigit;UKAdjGenMN;
+;;{0ranking_genmn};0 gives precedence to '1ordnumber-year';UKOrdNum;UKAdj;UKDigit;UKAdjGenMN;
 ;;{ranking_genf};;UKOrdNum;UKAdj;UKDigit;UKAdjGenF;
 ;;{ranking_datlocmn};;UKOrdNum;UKAdj;UKDigit;UKAdjDatLocMN;
 ;;{ranking_instrf};;UKOrdNum;UKAdj;UKDigit;UKAdjInstrF;
-;;{ranking_genpl};;UKOrdNum;UKAdj;UKDigit;UKAdjGenPl;
+;;{0ranking_genpl};;UKOrdNum;UKAdj;UKDigit;UKAdjGenPl;
 ;;{ranking_instrpl};;UKOrdNum;UKAdj;UKDigit;UKAdjInstrPl;
 ;;{ranking_nomm_datlocf};;UKOrdNum;UKAdj;UKDigit;UKAdjNomM;UKAdjDatLocF;
 ;;{ranking_instrmn_datpl};;UKOrdNum;UKAdj;UKDigit;UKAdjDatPl;UKAdjInstrMN;
+
+;;{numberroman_hyphen};;UKNum;UKDigit;UKCon;UKRoman;
+;;{numberroman};;UKNum;UKDigit;UKCon;UKRoman;
+;;{ordnumberroman};;UKOrdNum;UKDigit;UKAdj;UKRoman;
 ;;{adjcon_nomf};;UKAdjCon;UKAdjNomF;
 ;;{adjcon_nomm_datlocf};;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
 ;;{adjcon_nomm};;UKAdjCon;UKAdjNomM;
@@ -39,7 +44,12 @@
 ;;{adjcon_genpl};;UKAdjCon;UKAdjGenPl;
 ;;{adjcon_instrpl};;UKAdjCon;UKAdjInstrPl;
 ;;{adjcon_instrmn_datpl};;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
-;;{number-year};;UKNum;UKYearNum;UKCon;UKDigit;
+;;{number-year};possible year number, 4 digits 1000-2199;UKNum;UKYearNum;UKCon;UKDigit;
+;;{number-year-hyphen};possible year number, 4 digits with hyphen;UKNum;UKYearNum;UKCon;UKDigit;UKYearNumHyphen;
+;;{2ordnumber-year};possible year ordinal number, regex starts with '1' for precedence over regular ordinal number '0ranking_genmn';UKOrdNum;UKAdj;UKDigit;UKYearNum;UKAdjGenMN;
+;;{numbers-year};;UKNum;UKYearNum;UKCon;UKDigit;
+;;{date1};;UKAdvTime;UKTime;
+;;{date2};;UKAdvTime;UKTime;
 
 ;;{footnote1};;UKLayout;
 ;;{footnote2};;UKLayout;
@@ -228,17 +238,21 @@
 ;;{1noun_instrmn_genpl};;UKCon;UKConInstrMN;UKConGenPl;
 ;;{1noun_instrf_genmn};;UKCon;UKConInstrF;UKConGenMN;
 ;;{1noun_nomaccf};;UKCon;UKConNomF;UKConAccF;
+;;{1noun_accf};;UKCon;UKConAccF;
+;;{2noun_nomaccf_gendatmn};;UKCon;UKConAccF;UKConDatMN;UKConGenMN;
 ;;{1noun_instrmn};;UKConInstrMN;UKCon;
 ;;{1noun_instrf};;UKConInstrF;UKCon;
 ;;{1noun_instrpl};;UKConInstrPl;UKCon;
-;;{2noun_loc};;UKConLoc;UKCon;
+;;{2noun_locmn};;UKConLocMN;UKCon;
+;;{3noun_nompl_locfmn};;UKCon;UKConNomPl;UKConLocMN;UKConLocF;
+;;{1noun_datmn};;UKCon;UKConDatMN;
 ;;{1noun_dat_pl};;UKConDatPl;UKCon;
-;;{1noun_loc_pl};;UKConLoc;UKCon;
+;;{1noun_loc_pl};;UKConLocPl;UKCon;
 ;;{1noun_gen_pl};;UKConGenPl;UKCon;
 ;;{1noun_nomf_nomgenn_nomaccgenpl};;UKConNomF;UKConNomN;UKConGenMN;UKConNomPl;UKConGenPl;UKCon;
 ;;{1noun_genf_nomaccpl};;UKConGenF;UKConNomPl;UKCon;
 ;;{2noun_genmn_nomaccpl};;UKConGenMN;UKConNomPl;UKCon;
-;;{2noun_gendatlocf_nomaccpl};;UKConGenF;UKConLoc;UKConNomPl;UKCon;
+;;{2noun_gendatlocf_nomaccpl};;UKConGenF;UKConLocF;UKConLocMN;UKConNomPl;UKCon;
 ;;{1adjaccf_nounaccf_noungenmn};;UKCon;UKAdjAccF;UKConAccF;UKConGenMN;
 ;;{1adjpossnomm_congenpl};;UKCon;UKConGenPl;UKPossessive;
 
@@ -445,13 +459,26 @@
 ;;(x|х);;UKNum;UKDigit;UKCon;
 ;;d;;UKNum;UKDigit;UKCon;
 ;;c;;UKNum;UKDigit;UKCon;
-;;i(i|v|x|х);;UKNum;UKDigit;UKCon;
-;;v(i);;UKNum;UKDigit;UKCon;
-;;(x|х)(i|v|x|х|l|c);;UKNum;UKDigit;UKCon;
-;;(x|х)(i|v|x|х|l|c)(i|v|x|х|l|c);;UKNum;UKDigit;UKCon;
-;;(x|х)(i|v|x|х|l|c)(i|v|x|х|l|c)(i|v|x|х|l|c);;UKNum;UKDigit;UKCon;
-;;(x|х)(i|v|x|х|l|c)(i|v|x|х|l|c)(i|v|x|х|l|c)(i|v|x|х|l|c);;UKNum;UKDigit;UKCon;
-;;l(i|v|x|х);;UKNum;UKDigit;UKCon;
+;;i(i|v|x|х);;UKNum;UKDigit;UKCon;UKRoman;
+;;v(i);;UKNum;UKDigit;UKCon;UKRoman;
+;;(x|х)(i|v|x|х|l|c);;UKNum;UKDigit;UKCon;UKRoman;
+
+
+
+;;l(i|v|x|х);;UKNum;UKDigit;UKCon;UKRoman;
+;;\(1\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(2\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(3\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(4\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(5\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(6\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(7\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(8\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(9\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\((1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\((1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);number in between brackets;UKNum;UKDigit;UKCon;UKBracketsnumber;
+;;\(1(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;UKCon;UKBracketsnumber;UKTime;UKYearNum;
+;;\(20(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;UKCon;UKBracketsnumber;UKTime;UKYearNum;
 ;;/;;UKAndOrBut;
 ;;і/або;;UKAndOrBut;UKAndOr;
 ;;i/або;;UKAndOrBut;UKAndOr;
@@ -505,7 +532,7 @@
 ;;старе;;UKAdj;UKAdjNomN;
 ;;сире;;UKAdj;UKAdjNomN;
 ;;буре;;UKAdj;UKAdjNomN;
-;;люте;;UKAdj;UKAdjNomN;
+;;люте;;UKAdj;UKAdjNomN;UKBeginTime;
 ;;святе;;UKAdj;UKAdjNomN;
 ;;тихе;;UKAdj;UKAdjNomN;
 ;;сухе;;UKAdj;UKAdjNomN;
@@ -530,7 +557,7 @@
 ;;північно-східні;;UKAdj;UKAdjNomPl;
 ;;східні;;UKAdj;UKAdjNomPl;
 ;;ранні;;UKAdj;UKAdjNomPl;
-;;останні;;UKAdj;UKAdjNomPl;
+;;останні;;UKAdj;UKAdjNomPl;UKBeginTime;
 ;;докорінні;;UKAdj;UKAdjNomPl;
 ;;верхні;;UKAdj;UKAdjNomPl;
 ;;круті;;UKAdj;UKAdjNomPl;
@@ -563,11 +590,11 @@
 ;;пізня;;UKAdj;UKAdjNomF;
 ;;синя;;UKAdj;UKAdjNomF;
 ;;рання;;UKAdj;UKAdjNomF;
-;;остання;;UKAdj;UKAdjNomF;
+;;остання;;UKAdj;UKAdjNomF;UKBeginTime;
 ;;військову;;UKAdj;UKAdjAccF;
 ;;бурякову;;UKAdj;UKAdjAccF;
 ;;храмову;;UKAdj;UKAdjAccF;
-;;зимову;;UKAdj;UKAdjAccF;
+;;зимову;;UKAdj;UKAdjAccF;UKBeginTime;
 ;;нікотинову;;UKAdj;UKAdjAccF;
 ;;гіалінову;;UKAdj;UKAdjAccF;
 ;;одержима;;UKAdj;UKAdjNomF;
@@ -674,7 +701,7 @@
 ;;дитячої;;UKAdj;UKAdjGenF;
 ;;котячої;;UKAdj;UKAdjGenF;
 ;;невизначеним;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
-;;ученим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;ученим;;UKCon;UKConDatPl;UKConInstrMN;
 ;;невирішеним;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;неперевершеним;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;незахищеним;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
@@ -839,7 +866,7 @@
 ;;готовим;;UKVerbAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;гострим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;чесну;;UKVerbAdj;UKAdjAccF;
-;;рада;;UKAdjCon;UKAdjNomF;UKConNomF;
+;;рада;;UKAdjCon;UKAdjNomF;UKConNomF;UKConIfCap;
 ;;молода;;UKAdjCon;UKAdjNomF;UKConNomF;
 ;;швидка;;UKAdjCon;UKAdjNomF;UKConNomF;
 ;;рідка;;UKAdj;UKAdjNomF;
@@ -893,7 +920,7 @@
 ;;малій;;UKAdjCon;UKAdjDatLocF;
 ;;ближній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
 ;;збірній;;UKAdjCon;UKAdjDatLocF;
-;;літній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;літній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
 ;;неповнолітній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
 ;;присутній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
 ;;колишній;;UKAdjCon;UKAdjNomM;UKAdjDatLocF;
@@ -981,7 +1008,7 @@
 ;;духові;;UKAdjCon;UKAdjNomPl;
 ;;рухові;;UKAdjCon;UKAdjNomPl;
 ;;раді;;UKAdjCon;UKAdjNomPl;
-;;молоді;;UKAdjCon;UKAdjNomPl;UKConGenF;UKConLoc;
+;;молоді;;UKAdjCon;UKAdjNomPl;UKConGenF;UKConLocF;
 ;;швидкі;;UKAdjCon;UKAdjNomPl;
 ;;малі;;UKAdjCon;UKAdjNomPl;
 ;;сталі;;UKAdjCon;UKAdjNomPl;
@@ -1016,7 +1043,7 @@
 ;;збірні;;UKAdjCon;UKAdjNomPl;
 ;;безхребетні;;UKAdjCon;UKAdjNomPl;
 ;;безробітні;;UKAdjCon;UKAdjNomPl;
-;;літні;;UKAdjCon;UKAdjNomPl;
+;;літні;;UKAdjCon;UKAdjNomPl;UKBeginTime;
 ;;малолітні;;UKAdjCon;UKAdjNomPl;
 ;;неповнолітні;;UKAdjCon;UKAdjNomPl;
 ;;повнолітні;;UKAdjCon;UKAdjNomPl;
@@ -1026,7 +1053,7 @@
 ;;старі;;UKAdjCon;UKAdjNomPl;
 ;;сирі;;UKAdjCon;UKAdjNomPl;
 ;;хворі;;UKAdjCon;UKAdjNomPl;
-;;бурі;;UKAdjCon;UKAdjNomPl;
+;;бурі;;UKAdjCon;UKAdjNomPl;UKConGenF;UKConNomPl;
 ;;багаті;;UKAdjCon;UKAdjNomPl;
 ;;куті;;UKAdjCon;UKAdjNomPl;
 ;;святі;;UKAdjCon;UKAdjNomPl;
@@ -1061,7 +1088,6 @@
 ;;святим;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
 ;;слідчим;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
 ;;гірничим;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
-;;головуючим;;UKAdj;UKAdjDatPl;UKAdjInstrMN
 ;;командуючим;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
 ;;повнолітнім;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
 ;;колишнім;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
@@ -1134,7 +1160,7 @@
 ;;рідних;;UKAdjCon;UKAdjGenPl;
 ;;вихідних;;UKAdjCon;UKAdjGenPl;
 ;;похідних;;UKAdjCon;UKAdjGenPl;
-;;учених;;UKAdjCon;UKAdjGenPl;
+;;учених;;UKCon;UKConGenPl;
 ;;новонароджених;;UKAdjCon;UKAdjGenPl;
 ;;алкозалежних;;UKAdjCon;UKAdjGenPl;
 ;;заможних;;UKAdjCon;UKAdjGenPl;
@@ -1178,7 +1204,7 @@
 ;;простою;;UKAdjCon;UKAdjInstrF;
 ;;святою;;UKAdjCon;UKAdjInstrF;
 
-;;літня;;UKAdjCon;UKAdjNomF;
+;;літня;;UKAdjCon;UKAdjNomF;UKBeginTime;
 ;;колишня;;UKAdjCon;UKAdjNomF;
 ;;байдуже;;UKAdjAdv;
 ;;чуже;;UKAdjAdv;
@@ -1215,26 +1241,26 @@
 ;;повніше;;UKAdjAdvComp;
 ;;докладніше;;UKAdjAdvComp;
 ;;складніше;;UKAdjAdvComp;
-;;західніше;;UKAdjAdvComp;
-;;східніше;;UKAdjAdvComp;
+;;західніше;;UKCAdv;
+;;східніше;;UKCAdv;
 ;;природніше;;UKAdjAdvComp;
 ;;поширеніше;;UKAdjAdvComp;
 ;;виразніше;;UKAdjAdvComp;
-;;південніше;;UKAdjAdvComp;
+;;південніше;;UKCAdv;
 ;;ймовірніше;;UKAdjAdvComp;
 ;;правомірніше;;UKAdjAdvComp;
 ;;сучасніше;;UKAdjAdvComp;
 ;;якнайтісніше;;UKAdjAdvComp;
 ;;апетитніше;;UKAdjAdvComp;
 ;;коректніше;;UKAdjAdvComp;
-;;північніше;;UKAdjAdvComp;
+;;північніше;;UKCAdv;
 ;;точніше;;UKAdjAdvComp;
 ;;детальніше;;UKAdjAdvComp;
 ;;доцільніше;;UKAdjAdvComp;
 ;;повільніше;;UKAdjAdvComp;
 ;;сильніше;;UKAdjAdvComp;
 ;;скоріше;;UKAdjAdvComp;
-;;частіше;;UKAdjAdvComp;
+;;частіше;;UKAdvTemp;UKTime;
 ;;чистіше;;UKAdjAdvComp;
 ;;по-простіше;;UKAdjAdvComp;
 ;;простіше;;UKAdjAdvComp;
@@ -1324,78 +1350,78 @@
 ;;сильнішою;;UKAdjComp;UKAdj;UKAdjInstrF;
 ;;вільнішою;;UKAdjComp;UKAdjInstrF;
 ;;меншою;;UKAdjComp;UKAdj;UKAdjInstrF;
-;;позаминула;;UKAdjtemp;UKAdjNomF;
-;;наступна;;UKAdjtemp;UKAdjNomF;
-;;минуле;;UKAdjtemp;UKAdjNomN;
-;;позаминуле;;UKAdjtemp;UKAdjNomN;
-;;наступне;;UKAdjtemp;UKAdjNomN;
-;;майбутнє;;UKAdjtemp;UKAdjNomN;
-;;нинішнє;;UKAdjtemp;UKAdjNomN;
-;;минулими;;UKAdjtemp;UKAdjInstrPl;
-;;позаминулими;;UKAdjtemp;UKAdjInstrPl;
-;;наступними;;UKAdjtemp;UKAdjInstrPl;
-;;майбутніми;;UKAdjtemp;UKAdjInstrPl;
-;;минулий;;UKAdjtemp;UKAdjNomM;
-;;позаминулий;;UKAdjtemp;UKAdjNomM;
-;;наступний;;UKAdjtemp;UKAdjNomM;
-;;минулій;;UKAdjtemp;UKAdjDatLocF;
-;;наступній;;UKAdjtemp;UKAdjDatLocF;
-;;майбутній;;UKAdjtemp;UKAdjNomM;UKAdjDatLocF;
-;;нинішній;;UKAdjtemp;UKAdjNomM;UKAdjDatLocF;
-;;минулі;;UKAdjtemp;UKAdjNomPl;
-;;позаминулі;;UKAdjtemp;UKAdjNomPl;
-;;наступні;;UKAdjtemp;UKAdjNomPl;
-;;майбутні;;UKAdjtemp;UKAdjNomPl;
-;;нинішні;;UKAdjtemp;UKAdjNomPl;
-;;минулої;;UKAdjtemp;UKAdjGenF;
-;;позаминулої;;UKAdjtemp;UKAdjGenF;
-;;наступної;;UKAdjtemp;UKAdjGenF;
-;;майбутньої;;UKAdjtemp;UKAdjGenF;
-;;нинішньої;;UKAdjtemp;UKAdjGenF;
-;;минулим;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;позаминулим;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;наступним;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;минулім;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;позаминулім;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;наступнім;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;майбутнім;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;нинішнім;;UKAdjtemp;UKAdjDatPl;UKAdjInstrMN;
-;;минулого;;UKAdjtemp;UKAdjGenMN;
-;;позаминулого;;UKAdjtemp;UKAdjGenMN;
-;;наступного;;UKAdjtemp;UKAdjGenMN;
-;;майбутнього;;UKAdjtemp;UKAdjGenMN;
-;;нинішнього;;UKAdjtemp;UKAdjGenMN;
-;;минулу;;UKAdjtemp;UKAdjAccF;
-;;позаминулу;;UKAdjtemp;UKAdjAccF;
-;;минулому;;UKAdjtemp;UKAdvtempPart2;UKAdjDatLocMN;
-;;позаминулому;;UKAdjtemp;UKAdjDatLocMN;
-;;наступному;;UKAdjtemp;UKAdjDatLocMN;
-;;майбутньому;;UKAdjtemp;UKAdjDatLocMN;
-;;нинішньому;;UKAdjtemp;UKAdjDatLocMN;
-;;наступну;;UKAdjtemp;UKAdjAccF;
-;;минулих;;UKAdjtemp;UKAdjGenPl;
-;;позаминулих;;UKAdjtemp;UKAdjGenPl;
-;;наступних;;UKAdjtemp;UKAdjGenPl;
-;;майбутніх;;UKAdjtemp;UKAdjGenPl;
-;;прийдешніх;;UKAdjtemp;UKAdjGenPl;
-;;нинішніх;;UKAdjtemp;UKAdjGenPl;
-;;майбутню;;UKAdjtemp;UKAdjAccF;
-;;нинішню;;UKAdjtemp;UKAdjAccF;
-;;новою;;UKAdj;UKAdjInstrF;
-;;минулою;;UKAdjtemp;UKAdjInstrF;
-;;позаминулою;;UKAdjtemp;UKAdjInstrF;
-;;наступною;;UKAdjtemp;UKAdjInstrF;
-;;майбутньою;;UKAdjtemp;UKAdjInstrF;
-;;нинішньою;;UKAdjtemp;UKAdjInstrF;
-;;теперішньою;;UKAdjtemp;UKAdjInstrF;
-;;майбутня;;UKAdjtemp;UKAdjNomF;
-;;нинішня;;UKAdjtemp;UKAdjNomF;
+;;позаминула;;UKAdj;UKAdjNomF;UKBeginTime;
+;;наступна;;UKAdj;UKAdjNomF;UKBeginTime;
+;;минуле;;UKAdj;UKAdjNomN;UKBeginTime;
+;;позаминуле;;UKAdj;UKAdjNomN;UKBeginTime;
+;;наступне;;UKAdj;UKAdjNomN;UKBeginTime;
+;;майбутнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;нинішнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;минулими;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;позаминулими;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;наступними;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;майбутніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;минулий;;UKAdj;UKAdjNomM;UKBeginTime;
+;;позаминулий;;UKAdj;UKAdjNomM;UKBeginTime;
+;;наступний;;UKAdj;UKAdjNomM;UKBeginTime;
+;;минулій;;UKAdj;UKAdjDatLocF;UKBeginTime;
+;;наступній;;UKAdj;UKAdjDatLocF;UKBeginTime;
+;;майбутній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;нинішній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;минулі;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;позаминулі;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;наступні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;майбутні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;нинішні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;минулої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;позаминулої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;наступної;;UKAdj;UKAdjGenF;UKBeginTime;
+;;майбутньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;нинішньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;минулим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;позаминулим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;наступним;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;минулім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;позаминулім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;наступнім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;майбутнім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;нинішнім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;минулого;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;позаминулого;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;наступного;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;майбутнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;нинішнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;минулу;;UKAdj;UKAdjAccF;UKBeginTime;
+;;позаминулу;;UKAdj;UKAdjAccF;UKBeginTime;
+;;минулому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;позаминулому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;наступному;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;майбутньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;нинішньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;наступну;;UKAdj;UKAdjAccF;UKBeginTime;
+;;минулих;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;позаминулих;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;наступних;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;майбутніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;прийдешніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;нинішніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;майбутню;;UKAdj;UKAdjAccF;UKBeginTime;
+;;нинішню;;UKAdj;UKAdjAccF;UKBeginTime;
+;;новою;;UKAdj;UKAdj;UKAdjInstrF;UKBeginTime;
+;;минулою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;позаминулою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;наступною;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;майбутньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;нинішньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;теперішньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;майбутня;;UKAdj;UKAdjNomF;UKBeginTime;
+;;нинішня;;UKAdj;UKAdjNomF;UKBeginTime;
 ;;справдi;;UKAdv;
 ;;далi;;UKAdv;
 ;;а капела;;UKAdv;
 ;;крадькома;;UKAdv;
 ;;жартома;;UKAdv;
-;;віднедавна;;UKAdv;
+;;віднедавна;;UKAdvTemp;UKTime;
 ;;на ура;;UKAdv;
 ;;зчаста;;UKAdv;
 ;;вглиб;;UKAdv;
@@ -1419,10 +1445,10 @@
 ;;залюбки;;UKAdv;
 ;;завдовжки;;UKAdvdegree;
 ;;мовчки;;UKAdv;
-;;завдовшки;;UKAdvdegree;
-;;завтовшки;;UKAdvdegree;
-;;заввишки;;UKAdvdegree;
-;;завширшки;;UKAdvdegree;
+
+
+
+
 ;;філософськи;;UKAdv;
 ;;зсередини;;UKAdv;
 ;;звідтоді;;UKAdv;
@@ -1432,28 +1458,28 @@
 ;;мимоволі;;UKAdv;
 ;;ззовні;;UKAdv;
 ;;укупі;;UKAdv;
-;;з радості;;UKAdv;
-;;в цілості;;UKAdv;
-;;у цілості;;UKAdv;
+
+
+
 ;;в дійсності;;UKAdv;
-;;втричі;;UKAdv;
-;;тричі;;UKAdv;
-;;утричі;;UKAdv;
-;;вдвічі;;UKAdv;
-;;двічі;;UKAdv;
-;;удвічі;;UKAdv;
-;;на зразок;;UKAdv;
+;;втричі;;UKAdvTime;UKTimes;UKTime;
+;;тричі;;UKAdvTime;UKTimes;UKTime;
+;;утричі;;UKAdvTime;UKTimes;UKTime;
+;;вдвічі;;UKAdvTime;UKTimes;UKTime;
+;;двічі;;UKAdvTime;UKTimes;UKTime;
+;;удвічі;;UKAdvTime;UKTimes;UKTime;
+;;на зразок;;UKPrep;
 ;;навпіл;;UKAdv;
 ;;впритул;;UKAdv;
 ;;кінець-кінцем;;UKAdv;
 ;;під проводом;;UKAdv;
-;;за своїм розсудом;;UKAdv;
+
 ;;загалом;;UKAdvdegree;
-;;за кордоном;;UKAdv;
+;;за кордоном;;UKCAdv;
 ;;оптом;;UKAdv;
-;;на перший план;;UKAdv;
+;;на перший план;;UKRAdv;
 ;;взамін;;UKAdv;
-;;за кордон;;UKAdv;
+;;за кордон;;UKCAdv;
 ;;слабо;;UKAdv;
 ;;грубо;;UKAdv;
 ;;яскраво;;UKAdv;
@@ -1705,7 +1731,7 @@
 ;;хмарно;;UKAdv;
 ;;фрагментарно;;UKAdv;
 ;;ядерно;;UKAdv;
-;;мізерно;;UKAdv;
+;;мізерно;;UKAdvdegree;
 ;;мирно;;UKAdv;
 ;;вірно;;UKAdv;
 ;;невірно;;UKAdv;
@@ -1784,7 +1810,7 @@
 ;;гранично;;UKAdv;
 ;;емпірично;;UKAdv;
 ;;історично;;UKAdv;
-;;категорично;;UKAdv;
+;;категорично;;UKAdvdegree;
 ;;метафорично;;UKAdv;
 ;;асиметрично;;UKAdv;
 ;;електрично;;UKAdv;
@@ -1801,7 +1827,7 @@
 ;;філогенетично;;UKAdv;
 ;;критично;;UKAdv;
 ;;політично;;UKAdv;
-;;практично;;UKAdv;
+;;практично;;UKAdvdegree;
 ;;тактично;;UKAdv;
 ;;фактично;;UKAdv;
 ;;скептично;;UKAdv;
@@ -1916,7 +1942,7 @@
 ;;неухильно;;UKAdv;
 ;;прихильно;;UKAdv;
 ;;стабільно;;UKAdv;
-;;вільно;;UKAdv;
+;;вільно;;UKAdv;UKConIfCap;
 ;;добровільно;;UKAdv;
 ;;повільно;;UKAdv;
 ;;самовільно;;UKAdv;
@@ -1959,13 +1985,13 @@
 ;;зверхньо;;UKAdv;
 ;;внутрішньо;;UKAdv;
 ;;вголос;;UKAdv;
-;;по праву;;UKAdv;
+
 ;;з роду;;UKAdv;
 
-;;на скаку;;UKAdv;
+
 ;;нашвидку;;UKAdv;
 ;;відпочатку;;UKAdv;
-;;рука в руку;;UKAdv;
+
 ;;вперемішку;;UKAdv;
 ;;потихеньку;;UKAdv;
 ;;по-своєму;;UKAdv;
@@ -1983,13 +2009,13 @@
 ;;напряму;;UKAdv;
 ;;порівну;;UKAdv;
 ;;наполовину;;UKAdv;
-;;з розгону;;UKAdv;
-;;з-за кордону;;UKAdv;
-;;із-за кордону;;UKAdv;
+
+;;з-за кордону;;UKCAdv;
+;;із-за кордону;;UKCAdv;
 ;;вручну;;UKAdv;
 ;;знизу-вгору;;UKAdv;
 ;;дощенту;;UKAdv;
-;;поверху;;UKAdv;
+;;поверху;;UKAdvCon;
 ;;вдвох;;UKAdv;
 ;;удвох;;UKAdv;
 ;;усімох;;UKAdv;
@@ -2021,7 +2047,7 @@
 ;;де-юре;;UKAdvaux;
 ;;по можливості;;UKAdvaux;
 ;;по всій вірогідності;;UKAdvaux;
-;;неможливо;;UKAdvaux;
+;;неможливо;;UKmAux;UKVerb;
 ;;невипадково;;UKAdvaux;
 ;;обов'язково;;UKAdvaux;
 ;;ні з того ні з сього;;UKAdvaux;
@@ -2082,13 +2108,13 @@
 ;;поступово;;UKAdvdegree;
 ;;здебільшого;;UKAdvdegree;UKNRIfBegin;
 ;;замало;;UKAdvdegree;
-;;немало;;UKIndefpronPRCon;UKIndefpron;
-;;чимало;;UKIndefpronPRCon;UKIndefpron;
+;;немало;;UKIndefpronPRCon;UKIndefpron;UKIndefpronAdvdegree;
+;;чимало;;UKIndefpronPRCon;UKIndefpron;UKIndefpronAdvdegree;
 ;;рівно;;UKAdvdegree;UKAdvdegreeCon;
 ;;орієнтовно;;UKAdvdegree;
 ;;надзвичайно;;UKAdvdegree;
 ;;повноцінно;;UKAdvdegree;
-;;достовірно;;UKAdv;
+;;достовірно;;UKAdvdegree;
 ;;незмірно;;UKAdvdegree;
 ;;нерівномірно;;UKAdvdegree;
 ;;помірно;;UKAdvdegree;
@@ -2126,7 +2152,7 @@
 ;;певною мірою;;UKAdvdegree;
 ;;повністю;;UKAdvdegree;
 ;;обмаль;;UKAdvdegreeCon;
-;;кінця;;UKAdvPart2;
+;;кінця;;UKAdvPart2;UKCon;UKBeginTime;UKConGenMN;
 ;;готові;;UKAdvPred;
 ;;цікаво;;UKAdvPred;
 ;;важливо;;UKAdvPred;
@@ -2142,7 +2168,7 @@
 ;;складно;;UKAdvPred;
 ;;видно;;UKAdvPred;
 ;;очевидно;;UKAdvPred;
-;;пізно;;UKAdvPred;
+;;пізно;;UKAdvPred;UKBeginTime;
 ;;приємно;;UKAdvPred;
 ;;доступно;;UKAdvPred;
 ;;сама себе;;UKAdvRefl;
@@ -2204,7 +2230,8 @@
 ;;на кшталт;;UKPrep;
 ;;адже;;UKConj;
 ;;але;;UKAndOrBut;UKConj;
-;;а саме;;UKAndOrBut;UKConj;-;UKAdvStruct;
+/**** Rewritten by DELVE, ;;а саме;;UKAndOrBut;UKConj;-;UKAdvStruct;
+;;а саме;;UKAndOrBut;UKConj;Lit_а;-;UKAdvStruct
 ;;але ж;;UKAndOrBut;UKConj;
 ;;або ж;;UKAndOrBut;UKAndOr;
 ;;ачи;;UKConj;
@@ -2215,30 +2242,30 @@
 ;;i;;UKAndOrBut;UKConIfCap;UKAndOr;
 ;;між тим;;UKConj;
 ;;або;;UKAndOrBut;UKAndOr;
-;;найближчим часом;;UKBeginendconcept;UKCon;
+;;найближчим часом;;UKAdvTime;
 ;;б;;UKBi;UKCond;
 ;;би;;UKBi;UKCond;
-;;століттями;;UKCent;
-;;сторіччями;;UKCent;
-;;нашої ери;;UKCent;
-;;тисячолітті;;UKCent;
-;;столітті;;UKCent;
-;;сторіччі;;UKCent;
-;;століттям;;UKCent;
-;;сторіччям;;UKCent;
-;;ст;;UKCent;
-;;ст.;;UKCent;
-;;ст. н. е;;UKCent;
-;;століттях;;UKCent;
-;;сторіччях;;UKCent;
-;;сторіч;;UKCent;
-;;століть;;UKCent;
-;;тисячоліть;;UKCent;
-;;століттю;;UKCent;
-;;сторіччю;;UKCent;
-;;тисячоліття;;UKCent;
-;;століття;;UKCent;
-;;сторіччя;;UKCent;
+;;століттями;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччями;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;нашої ери;;UKCon;UKEndTime;UKEndDate;
+;;тисячолітті;;UKTimeConcept;UKCon;UKConLocMN;UKTime;
+;;столітті;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччі;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;століттям;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччям;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;ст;;UKCentury;UKCon;UKAcro;
+;;ст.;;UKCentury;UKCon;UKAcro;
+
+;;століттях;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччях;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіч;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;століть;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;тисячоліть;;UKTimeConcept;UKCon;UKConGenPl;UKTime;
+;;століттю;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччю;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;тисячоліття;;UKTimeConcept;UKCon;UKConNomN;UKConGenMN;UKConNomPl;UKTime;
+;;століття;;UKCentury;UKCon;UKTimeConcept;UKTime;
+;;сторіччя;;UKCentury;UKCon;UKTimeConcept;UKTime;
 ;;%;;UKNum;UKCon;
 ;;друга;;UKOrdNum;UKAdj;UKAdjNomF;
 ;;сьома;;UKOrdNum;UKAdj;UKAdjNomF;
@@ -2260,7 +2287,7 @@
 ;;десяте;;UKOrdNum;UKAdj;UKAdjNomN;
 ;;перше;;UKOrdNum;UKAdj;UKAdjNomN;
 ;;третє;;UKOrdNum;UKAdj;UKAdjNomN;
-;;десятки;;UKNum;UKCon;
+;;десятки;;UKNum;UKCon;UKConNomPl;
 ;;другими;;UKOrdNum;UKAdj;UKAdjInstrPl;
 ;;сьомими;;UKOrdNum;UKAdj;UKAdjInstrPl;
 ;;восьмими;;UKOrdNum;UKAdj;UKAdjInstrPl;
@@ -2405,7 +2432,7 @@
 ;;всіх;;UKIndefpronPRCon;UKIndefpron;UKVsjeGen;UKSup;UKVsje;UKAdjGenPl;
 ;;усіх;;UKIndefpronPRCon;UKIndefpron;UKVsjeGen;UKVsje;UKAdjGenPl;
 ;;обох;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
-;;ввесь;;UKIndefpronPRCon;UKIndefpron;
+;;ввесь;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
 ;;найважче;;UKComp;
 ;;вужче;;UKComp;
 ;;радше;;UKComp;
@@ -2434,30 +2461,30 @@
 ;;найвітряніше;;UKComp;
 ;;добріше;;UKComp;
 ;;крутіше;;UKComp;
-;;найменше;;UKComp;
+;;найменше;;UKAdjAdvComp;
 ;;тонше;;UKComp;
-;;найперше;;UKComp;
-;;найширше;;UKComp;
-;;найгірше;;UKComp;
-;;найкраще;;UKComp;
-;;найвище;;UKComp;
+;;найперше;;UKAdjAdvComp;
+;;найширше;;UKAdjAdvComp;
+;;найгірше;;UKAdjAdvComp;
+;;найкраще;;UKAdjAdvComp;
+;;найвище;;UKAdjAdvComp;
 ;;далі;;UKComp;
-;;усе менше;;UKCompgr;
-;;все менше;;UKCompgr;
-;;менше і менше;;UKCompgr;
-;;менше i менше;;UKCompgr;
-;;щонайменше;;UKCompgr;
-;;менше;;UKCompgr;UKMoreLess;
-;;більше;;UKCompgr;UKMoreLess;
-;;усе більше;;UKCompgr;
-;;все більше;;UKCompgr;
-;;найбільше;;UKCompgr;
-;;більше і більше;;UKCompgr;
-;;більше i більше;;UKCompgr;
-;;найменш;;UKCompgr;
-;;менш;;UKCompgr;UKMoreLess;
-;;більш;;UKCompgr;UKMoreLess;
-;;найбільш;;UKCompgr;
+;;усе менше;;UKCompdegree;
+;;все менше;;UKCompdegree;
+;;менше і менше;;UKCompdegree;
+;;менше i менше;;UKCompdegree;
+;;щонайменше;;UKCompdegree;
+;;менше;;UKCompdegree;UKMoreLess;
+;;більше;;UKCompdegree;UKMoreLess;
+;;усе більше;;UKCompdegree;
+;;все більше;;UKCompdegree;
+;;найбільше;;UKCompdegree;
+;;більше і більше;;UKCompdegree;
+;;більше i більше;;UKCompdegree;
+;;найменш;;UKCompdegree;
+;;менш;;UKCompdegree;UKMoreLess;
+;;більш;;UKCompdegree;UKMoreLess;
+;;найбільш;;UKCompdegree;
 ;;о і s;;UKCon;
 ;;сполучних штатів;;UKCon;
 ;;приходу до влади;;UKCon;
@@ -2505,8 +2532,8 @@
 ;;хіба;;UKConj;
 ;;дарма;;UKConj;
 ;;хоча;;UKConj;
-;;де б;;UKConj;
-;;коли б;;UKConj;
+
+
 
 
 
@@ -2522,7 +2549,7 @@
 ;;немов;;UKConj;
 
 ;;невже;;UKConj;
-;;коли б не;;UKConj;
+
 ;;про те;;UKConj;
 ;;зате;;UKConj;
 ;;проте;;UKConj;
@@ -2539,7 +2566,7 @@
 ;;туди ж;;UKConj;
 ;;до того ж;;UKConj;
 ;;а то ж;;UKConj;
-;;аніж;;UKConj;
+;;аніж;;UKNizh;UKThan;
 ;;отож;;UKConj;
 ;;коли раз;;UKConj;
 ;;буцім би;;UKConj;
@@ -2645,69 +2672,45 @@
 ;;витік;;UKConVerb;UKConNomM;
 ;;закис;;UKConVerb;UKConNomM;
 ;;гаю;;UKConVerb;UKConIfCap;
-;;середа;;UKDay;
-;;понеділка;;UKDay;
-;;вівторка;;UKDay;
-;;субота;;UKDay;
-;;суботи;;UKDay;
-;;неділі;;UKDay;
-;;п'ятниці;;UKDay;
-;;понеділок;;UKDay;
-;;вівторок;;UKDay;
-;;середам;;UKDay;
-;;п'ятницям;;UKDay;
-;;четвер;;UKDay;
-;;середу;;UKDay;
-;;суботу;;UKDay;
-;;неділях;;UKDay;
-;;п'ятниць;;UKDay;
-;;неділю;;UKDay;
-;;п'ятницю;;UKDay;
-;;неділя;;UKDay;
-;;п'ятниця;;UKDay;
-;;се;;UKDempron;
-;;сими;;UKDempron;
-;;сей;;UKDempron;UKConIfCap;
-;;оцей;;UKDempron;
-;;сій;;UKDempron;
-;;отой;;UKDempron;
-;;сієї;;UKDempron;UKAdjGenF;
-;;сим;;UKDempron;
+;;середа;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;понеділка;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;вівторка;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;субота;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;суботи;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;неділі;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;п'ятниці;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;понеділок;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;вівторок;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;середам;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;п'ятницям;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;четвер;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;середу;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;суботу;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;неділях;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;п'ятниць;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;неділю;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;п'ятницю;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;неділя;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;п'ятниця;;UKDay;UKCon;UKTimeConcept;UKTime;
+;;се;;UKDempron;UKBeginTime;
+;;сими;;UKDempron;UKBeginTime;
+;;сей;;UKDempron;UKBeginTime;UKConIfCap;
+;;оцей;;UKDempron;UKBeginTime;
+;;сій;;UKDempron;UKBeginTime;
+;;отой;;UKDempron;UKBeginTime;
+;;сієї;;UKDempron;UKBeginTime;UKAdjGenF;
+;;сим;;UKDempron;UKBeginTime;
 
-;;сього;;UKDempron;UKAdjGenMN;
-;;от;;UKAdvStruct;
-;;сьому;;UKDempron;
-;;сих;;UKDempron;UKAdjGenPl;
-;;отих;;UKDempron;UKAdjGenPl;
-;;сією;;UKDempron;
-;;цією;;UKDempron;
-;;сю;;UKDempron;
-;;рр. до н. е.;;UKECon;UKCon;
-;;ц.р.;;UKECon;UKCon;
-;;наступні дні;;UKECon;UKCon;
-;;кілька разів;;UKECon;UKCon;
-;;кілька років;;UKECon;UKCon;
-;;тих років;;UKECon;UKCon;
-;;тих самоих років;;UKECon;UKCon;
-;;кілька днів;;UKECon;UKCon;
-;;рр. до н. е;;UKECon;UKCon;
-;;рр. до нашої ери;;UKECon;UKCon;
-;;році до нашої ери;;UKECon;UKCon;
-;;тієї пори;;UKECon;UKCon;
-;;тієї самої пори;;UKECon;UKCon;
-;;того самого разу;;UKECon;UKCon;
-;;того ж року;;UKECon;UKCon;UKYear;
-;;цього ж року;;UKECon;UKCon;UKYear;
-;;сього року;;UKECon;UKCon;UKYear;
-;;того року;;UKECon;UKCon;UKYear;
-;;того самого року;;UKECon;UKCon;UKYear;
-;;цього року;;UKECon;UKCon;UKYear;
-;;початку року;;UKECon;UKCon;
-;;кінця року;;UKECon;UKCon;
-;;тижнів тому;;UKECon;UKCon;
-;;кілька часу;;UKECon;UKCon;
-;;цього часу;;UKECon;UKCon;
-;;цього моменту;;UKECon;UKCon;
+;;сього;;UKDempron;UKBeginTime;UKAdjGenMN;
+;;от;;UKPrep;
+;;сьому;;UKDempron;UKBeginTime;
+;;сих;;UKDempron;UKBeginTime;UKAdjGenPl;
+;;отих;;UKDempron;UKBeginTime;UKAdjGenPl;
+;;сією;;UKDempron;UKBeginTime;
+;;цією;;UKDempron;UKBeginTime;
+;;сю;;UKDempron;UKBeginTime;
+
+;;ц.р.;;UKTimeEndConcept;UKTime;
 
 
 
@@ -2715,89 +2718,115 @@
 
 
 
-;;тих років;;UKECon;UKCon
-;;тої пори;;UKECon;UKCon;
-;;секунди потому;;UKECon;UKCon;
-;;секунд потому;;UKECon;UKCon;
-;;хвилини потому;;UKECon;UKCon;
-;;хвилин потому;;UKECon;UKCon;
-;;години потому;;UKECon;UKCon;
-;;годин потому;;UKECon;UKCon;
-;;дня потому;;UKECon;UKCon;
-;;днів потому;;UKECon;UKCon;
-;;тижнів потому;;UKECon;UKCon;
-;;місяця потому;;UKECon;UKCon;
-;;місяців потому;;UKECon;UKCon;
-;;року потому;;UKECon;UKCon;
-;;років потому;;UKECon;UKCon;
-;;віків потому;;UKECon;UKCon;
-;;століть потому;;UKECon;UKCon;
-;;секунди тому;;UKECon;UKCon;
-;;секунд тому;;UKECon;UKCon;
-;;хвилини тому;;UKECon;UKCon;
-;;хвилин тому;;UKECon;UKCon;
-;;години тому;;UKECon;UKCon;
-;;годин тому;;UKECon;UKCon;
-;;дня тому;;UKECon;UKCon;
-;;днів тому;;UKECon;UKCon;
-;;тижнів тому;;UKECon;UKCon
-;;місяця тому;;UKECon;UKCon;
-;;місяців тому;;UKECon;UKCon;
-;;року тому;;UKECon;UKCon;
-;;років тому;;UKECon;UKCon;
-;;віків тому;;UKECon;UKCon;
-;;століть тому;;UKECon;UKCon;
-;;того ж дня;;UKECon;UKCon;
-;;цього ж дня;;UKECon;UKCon;
-;;того дня;;UKECon;UKCon;
-;;соняшного дня;;UKECon;UKCon;
-;;того самого дня;;UKECon;UKCon;
-;;цього дня;;UKECon;UKCon;
-;;середні століття;;UKECon;UKCon;
-;;р до н. е.;;UKECon;UKCon;
-;;р н. е.;;UKECon;UKCon;
-;;р. до н. е.;;UKECon;UKCon;
-;;р. н. е.;;UKECon;UKCon;
-;;рр до н. е.;;UKECon;UKCon;
-;;рр н. е.;;UKECon;UKCon;
-;;рр. до н. е.;;UKECon;UKCon
-;;рр. н. е.;;UKECon;UKCon;
-;;року до н. е.;;UKECon;UKCon;
-;;року н. е.;;UKECon;UKCon;
-;;років до н. е.;;UKECon;UKCon;
-;;років н. е.;;UKECon;UKCon;
-;;р до нашої ери;;UKECon;UKCon;
-;;р нашої ери;;UKECon;UKCon;
-;;р. до нашої ери;;UKECon;UKCon;
-;;р. нашої ери;;UKECon;UKCon;
-;;рр до нашої ери;;UKECon;UKCon;
-;;рр нашої ери;;UKECon;UKCon;
-;;рр. до нашої ери;;UKECon;UKCon
-;;рр. нашої ери;;UKECon;UKCon;
-;;році до нашої ери;;UKECon;UKCon
-;;році нашої ери;;UKECon;UKCon;
-;;років до нашої ери;;UKECon;UKCon;
-;;років нашої ери;;UKECon;UKCon;
-;;весни;;UKECon;UKCon;
-;;зими;;UKECon;UKCon;
-;;цієї осені;;UKECon;UKCon;
-;;літо;;UKECon;UKCon;
-;;зиму;;UKECon;UKCon;
-;;весну;;UKECon;UKCon;
-;;льоту;;UKECon;UKCon;
-;;четвергах;;UKECon;UKCon;
-;;середах;;UKECon;UKCon;
-;;понеділках;;UKECon;UKCon;
-;;вівторках;;UKECon;UKCon;
-;;суботах;;UKECon;UKCon;
-;;п'ятницях;;UKECon;UKCon;
-;;осінь;;UKECon;UKCon;
-;;широкому сенсі слова;;UKAdj;-;UKCon;-;UKECon;UKCon;
-;;вужчому сенсі слова;;UKAdj;-;UKCon;-;UKECon;UKCon;
-;;широкому сенсі;;UKAdj;-;UKECon;UKCon;
-;;вужчому сенсі;;UKAdj;-;UKECon;UKCon;
-;;цьому сенсі;;UKECon;UKCon;
-;;деякому сенсі;;UKECon;UKCon;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;до цього часу;;UKPrep;-;UKAdvTemp;UKTime;Join;
+/**** Rewritten by DELVE, ;;з цього часу;;UKPrep;-;UKAdvTemp;UKTime;Join;
+;;з цього часу;;UKPrep;Lit_з;-;UKAdvTemp;UKTime;Join
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;віків потому;;UKTimeEndConcept;UKTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;весни;;UKCon;UKTimeConcept;UKTime;UKConGenF;UKConNomPl;
+;;зими;;UKCon;UKTimeConcept;UKTime;UKConGenF;UKConNomPl;
+
+;;літо;;UKCon;UKTimeConcept;UKTime;UKConNomN;
+;;зиму;;UKCon;UKTimeConcept;UKTime;UKConAccF;
+;;весну;;UKCon;UKTimeConcept;UKTime;UKConAccF;
+
+;;четвергах;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;середах;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;понеділках;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;вівторках;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;суботах;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;п'ятницях;;UKCon;UKTimeConcept;UKTime;UKConLocPl;
+;;осінь;;UKCon;UKTimeConcept;UKTime;UKConNomF;
+
+
+
+
+
+
 ;;-;;UKHyphen;UKPunctuation;
 ;;–;;UKHyphen;UKPunctuation;
 ;;—;;UKHyphen;UKPunctuation;
@@ -2838,8 +2867,10 @@
 ;;мати на увазі;;UKInf;
 ;;приходити на зміну;;UKInf;
 ;;прийти на зміну;;UKInf;
-;;мати його на увазі;;UKInf;-;UKPosspron;-;UKInf;-;UKInf;
-;;мати це на увазі;;UKInf;-;UKTse;-;UKInf;-;UKInf;
+/**** Rewritten by DELVE, ;;мати його на увазі;;UKInf;-;UKPosspron;-;UKInf;-;UKInf;
+;;мати його на увазі;;UKInf;-;UKPosspron;-;UKInf;Lit_на;-;UKInf
+/**** Rewritten by DELVE, ;;мати це на увазі;;UKInf;-;UKTse;-;UKInf;-;UKInf;
+;;мати це на увазі;;UKInf;-;UKTse;Lit_це;-;UKInf;Lit_на;-;UKInf
 ;;брати;;UKInfCon;UKConNomPl;
 ;;грати;;UKInfCon;UKInfAfterVerb;UKConNomPl;
 ;;плакати;;UKInfCon;UKConNomPl;
@@ -2895,7 +2926,7 @@
 ;;ладні;;UKKAdj;
 ;;необхідні;;UKKAdj;
 ;;притаманні;;UKKAdj;
-;;відмінні;;UKKAdj;
+;;відмінні;;UKAdj;UKAdjNomPl;
 ;;характерні;;UKKAdj;
 ;;недостатні;;UKKAdj;
 ;;причетні;;UKKAdj;
@@ -2917,21 +2948,21 @@
 ;;коло;;UKKolo;
 ;;,;;UKComma;
 
-;;кожна;;UKKozhen;UKAdj;UKAdjNomF;
-;;кожне;;UKKozhen;UKAdj;UKAdjNomN;
-;;кожними;;UKKozhen;UKAdj;UKAdjInstrPl;
-;;кожний;;UKKozhen;UKAdj;UKAdjNomF;
-;;кожній;;UKKozhen;UKAdj;UKAdjNomM;UKAdjDatLocF;
-;;кожні;;UKKozhen;UKAdj;UKAdjNomPl;
-;;кожної;;UKKozhen;UKAdj;UKGen;
-;;кожним;;UKKozhen;UKAdj;UKAdjDatPl;UKAdjInstrMN;
-;;кожнім;;UKKozhen;UKAdj;UKAdjDatLocMN;
-;;кожен;;UKKozhen;UKAdj;UKAdjNomM;
-;;кожного;;UKKozhen;UKAdj;UKGen;UKAdjGenMN;
-;;кожному;;UKKozhen;UKAdj;UKAdjDatLocMN;
-;;кожну;;UKKozhen;UKAdj;UKAdjAccF;
-;;кожних;;UKKozhen;UKAdj;UKGen;UKAdjGenPl;
-;;кожною;;UKKozhen;UKAdj;UKAdjInstrF;
+;;кожна;;UKKozhen;UKAdj;UKAdjNomF;UKBeginTime;
+;;кожне;;UKKozhen;UKAdj;UKAdjNomN;UKBeginTime;
+;;кожними;;UKKozhen;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;кожний;;UKKozhen;UKAdj;UKAdjNomF;UKBeginTime;
+;;кожній;;UKKozhen;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;кожні;;UKKozhen;UKAdj;UKAdjNomPl;UKBeginTime;
+;;кожної;;UKKozhen;UKAdj;UKAdjGenF;UKBeginTime;
+;;кожним;;UKKozhen;UKAdj;UKAdjDatPl;UKAdjInstrMN;UKBeginTime;
+;;кожнім;;UKKozhen;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;кожен;;UKKozhen;UKAdj;UKAdjNomM;UKBeginTime;
+;;кожного;;UKKozhen;UKAdj;UKAdjGenMN;UKAdjGenMN;UKBeginTime;
+;;кожному;;UKKozhen;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;кожну;;UKKozhen;UKAdj;UKAdjAccF;UKBeginTime;
+;;кожних;;UKKozhen;UKAdj;UKAdjGenPl;UKBeginTime;
+;;кожною;;UKKozhen;UKAdj;UKAdjInstrF;UKBeginTime;
 ;;треба;;UKmAux;UKVerb;
 ;;потрібна;;UKmAux;UKVerb;
 ;;можна;;UKmAux;UKVerb;
@@ -2947,47 +2978,47 @@
 ;;можливо;;UKmAux;UKVerb;
 ;;потрібно;;UKmAux;UKVerb;
 ;;необхідно;;UKmAux;UKVerb;
-;;листопада;;UKMonth;
-;;листопад;;UKMonth;
-;;лютий;;UKMonth;
-;;листопаді;;UKMonth;
-;;травні;;UKMonth;
-;;червні;;UKMonth;
-;;грудні;;UKMonth;
-;;жовтені;;UKMonth;
-;;березні;;UKMonth;
-;;липні;;UKMonth;
-;;серпні;;UKMonth;
-;;вересні;;UKMonth;
-;;жовтні;;UKMonth;
-;;квітні;;UKMonth;
-;;січні;;UKMonth;
-;;серпнем;;UKMonth;
-;;вереснем;;UKMonth;
-;;лютим;;UKMonth;
-;;лютого;;UKMonth;
-;;лютому;;UKMonth;
-;;січ;;UKMonth;
-;;травень;;UKMonth;
-;;червень;;UKMonth;
-;;грудень;;UKMonth;
-;;березень;;UKMonth;
-;;липень;;UKMonth;
-;;серпень;;UKMonth;
-;;вересень;;UKMonth;
-;;жовтень;;UKMonth;
-;;квітень;;UKMonth;
-;;січень;;UKMonth;
-;;травня;;UKMonth;
-;;червня;;UKMonth;
-;;грудня;;UKMonth;
-;;березня;;UKMonth;
-;;липня;;UKMonth;
-;;серпня;;UKMonth;
-;;вересня;;UKMonth;
-;;жовтня;;UKMonth;
-;;квітня;;UKMonth;
-;;січня;;UKMonth;
+;;листопада;;UKMonth;UKCon;UKTime;
+;;листопад;;UKMonth;UKCon;UKTime;
+;;лютий;;UKMonth;UKCon;UKTime;UKConNomM;
+;;листопаді;;UKMonth;UKCon;UKTime;
+;;травні;;UKMonth;UKCon;UKTime;
+;;червні;;UKMonth;UKCon;UKTime;
+;;грудні;;UKMonth;UKCon;UKTime;
+;;жовтені;;UKMonth;UKCon;UKTime;
+;;березні;;UKMonth;UKCon;UKTime;
+;;липні;;UKMonth;UKCon;UKTime;
+;;серпні;;UKMonth;UKCon;UKTime;
+;;вересні;;UKMonth;UKCon;UKTime;
+;;жовтні;;UKMonth;UKCon;UKTime;
+;;квітні;;UKMonth;UKCon;UKTime;
+;;січні;;UKMonth;UKCon;UKTime;
+;;серпнем;;UKMonth;UKCon;UKTime;
+;;вереснем;;UKMonth;UKCon;UKTime;
+;;лютим;;UKMonth;UKCon;UKTime;UKConInstrMN;
+;;лютого;;UKMonth;UKCon;UKTime;UKConGenMN;
+;;лютому;;UKMonth;UKCon;UKTime;UKConDatMN;
+;;січ;;UKMonth;UKCon;UKTime;UKConIfCap;
+;;травень;;UKMonth;UKCon;UKTime;
+;;червень;;UKMonth;UKCon;UKTime;
+;;грудень;;UKMonth;UKCon;UKTime;
+;;березень;;UKMonth;UKCon;UKTime;
+;;липень;;UKMonth;UKCon;UKTime;
+;;серпень;;UKMonth;UKCon;UKTime;
+;;вересень;;UKMonth;UKCon;UKTime;
+;;жовтень;;UKMonth;UKCon;UKTime;
+;;квітень;;UKMonth;UKCon;UKTime;
+;;січень;;UKMonth;UKCon;UKTime;
+;;травня;;UKMonth;UKCon;UKTime;
+;;червня;;UKMonth;UKCon;UKTime;
+;;грудня;;UKMonth;UKCon;UKTime;
+;;березня;;UKMonth;UKCon;UKTime;
+;;липня;;UKMonth;UKCon;UKTime;
+;;серпня;;UKMonth;UKCon;UKTime;
+;;вересня;;UKMonth;UKCon;UKTime;
+;;жовтня;;UKMonth;UKCon;UKTime;
+;;квітня;;UKMonth;UKCon;UKTime;
+;;січня;;UKMonth;UKCon;UKTime;
 ;;далеко не;;UKNe;UKNegation;UKNegBegin;
 ;;ще пі;;UKNe;UKNegation;UKNegBegin;
 ;;ніяка;;UKNegation;UKNiyaki;
@@ -3005,18 +3036,18 @@
 ;;ніякі;;UKNegation;UKNiyaki;
 ;;жодні;;UKNegation;UKNiyaki;
 ;;ні в якій мірі;;UKNegation;UKNegBegin;UKNe;
-;;ніякої;;UKNegation;UKNiyaki;UKGen;UKAdjGenF;
-;;жодної;;UKNegation;UKNiyaki;UKGen;UKAdjGenF;
+;;ніякої;;UKNegation;UKNiyaki;UKAdjGenF;
+;;жодної;;UKNegation;UKNiyaki;UKAdjGenF;
 ;;ніяк;;UKNegation;UKNe;UKNegBegin;
 ;;ніяким;;UKNegation;UKNiyaki;
 ;;жодним;;UKNegation;UKNiyaki;
 ;;жоден;;UKNegation;UKNiyaki;
-;;ніякого;;UKNegation;UKNiyaki;UKGen;UKAdjGenMN;
-;;жодного;;UKNegation;UKNiyaki;UKGen;UKAdjGenMN;
+;;ніякого;;UKNegation;UKNiyaki;UKAdjGenMN;
+;;жодного;;UKNegation;UKNiyaki;UKAdjGenMN;
 ;;не те що;;UKRAdv;
 ;;жодному;;UKNegation;UKNiyaki;
-;;ніяких;;UKNegation;UKNiyaki;UKGen;UKAdjGenPl;
-;;жодних;;UKNegation;UKNiyaki;UKGen;UKAdjGenPl;
+;;ніяких;;UKNegation;UKNiyaki;UKAdjGenPl;
+;;жодних;;UKNegation;UKNiyaki;UKAdjGenPl;
 ;;ніякою;;UKNegation;UKNiyaki;
 ;;жодною;;UKNegation;UKNiyaki;
 ;;ніскільки;;UKNegBegin;UKNe;
@@ -3026,8 +3057,8 @@
 ;;, напр. ,;;UKAdvStruct;
 ;;т.зв.;;UKAdvStruct;
 ;;до слова ,;;UKAdvStruct;
-;;, в більшості випадків ,;;UKAdvStruct;
-;;, у більшості випадків ,;;UKAdvStruct;
+
+
 ;;, наприклад ,;;UKAdvStruct;
 ;;на мій погляд ,;;UKAdvStruct;
 ;;на його погляд ,;;UKAdvStruct;
@@ -3042,18 +3073,18 @@
 ;;проте ,;;UKAdvStruct;
 ;;одначе ,;;UKAdvStruct;
 ;;, радше ,;;UKAdvStruct;
-;;вперше ,;;UKAdvStruct;
+
 ;;тим більше ,;;UKAdvStruct;
 ;;, так виглядає ,;;UKAdvStruct;
 ;;іншими словами ,;;UKAdvStruct;
-;;за її словами ,;;UKAdvStruct;
-;;за моїми словами ,;;UKAdvStruct;
-;;за нашими словами ,;;UKAdvStruct;
-;;за твоїми словами ,;;UKAdvStruct;
-;;за своїми словами ,;;UKAdvStruct;
-;;за вашими словами ,;;UKAdvStruct;
-;;за його словами ,;;UKAdvStruct;
-;;за їх словами ,;;UKAdvStruct;
+
+
+
+
+
+
+
+
 ;;, у принципі ,;;UKAdvStruct;
 ;;, в принципі ,;;UKAdvStruct;
 ;;, однак ,;;UKAdvStruct;
@@ -3061,18 +3092,18 @@
 ;;за визначенням ,;;UKAdvStruct;
 ;;, за певних обставин ,;;UKAdvStruct;
 ;;, окрім цього ,;;UKAdvStruct;
-;;нагадаємо ,;;UKAdvStruct;
+
 ;;відзначимо ,;;UKAdvStruct;
 ;;скажімо ,;;UKAdvStruct;
 ;;, відповідно ,;;UKAdvStruct;
-;;на його думку ,;;UKAdvStruct;
-;;на її думку ,;;UKAdvStruct;
-;;на мою думку ,;;UKAdvStruct;
-;;на нашу думку ,;;UKAdvStruct;
-;;на твою думку ,;;UKAdvStruct;
-;;на свою думку ,;;UKAdvStruct;
-;;на вашу думку ,;;UKAdvStruct;
-;;на їх думку ,;;UKAdvStruct;
+
+
+
+
+
+
+
+
 ;;, з другого боку ,;;UKAdvStruct;
 ;;, з одного боку ,;;UKAdvStruct;
 ;;у загальному і цілому ,;;UKAdvStruct;
@@ -3085,14 +3116,13 @@
 ;;так зв.;;UKAdvStruct;
 ;;та ін.;;UKAdvStruct;
 ;;щоправда;;UKAdvStruct;
-/**** Rewritten by DELVE, ;;всього за;;UKAdvStruct;-;UKPrep;
-;;всього за;;UKAdvStruct;-;UKPrep;Lit_за
-;;будь-ласка;;UKAdvStruct;
-;;будь ласка;;UKAdvStruct;
+
+;;будь-ласка;;UKRAdv;
+;;будь ласка;;UKRAdv;
 ;;недарма;;UKAdvStruct;
 ;;так звана;;UKAdvStruct;
-;;ще одна;;UKAdvStruct;
-;;хоча б;;UKAdvStruct;
+
+;;хоча б;;UKAdvdegree;
 ;;і т.д;;UKAdvStruct;
 ;;i т.д;;UKAdvStruct;
 ;;насамперед;;UKAdvStruct;
@@ -3106,7 +3136,7 @@
 ;;отже;;UKAdvStruct;
 ;;уже;;UKAdvStruct;
 ;;так зване;;UKAdvStruct;
-;;ще одне;;UKAdvStruct;
+
 ;;швидше за все;;UKAdvStruct;
 ;;перш за все;;UKAdvStruct;
 ;;не лише;;UKRAdv;
@@ -3123,22 +3153,22 @@
 ;;теж;;UKAdvStruct;
 ;;ж;;UKAdvStruct;
 ;;також;;UKAdvStruct;
-;;кожна з;;UKAdvStruct;
-;;кожне з;;UKAdvStruct;
-;;кожними з;;UKAdvStruct;
-;;кожний з;;UKAdvStruct;
-;;кожній з;;UKAdvStruct;
-;;кожні з;;UKAdvStruct;
-;;кожної з;;UKAdvStruct;
-;;кожним з;;UKAdvStruct;
-;;кожнім з;;UKAdvStruct;
-;;кожен з;;UKAdvStruct;
-;;кожного з;;UKAdvStruct;
 
-;;кожному з;;UKAdvStruct;
-;;кожну з;;UKAdvStruct;
-;;кожних з;;UKAdvStruct;
-;;кожною з;;UKAdvStruct;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;;хоч би;;UKAdvStruct;
 ;;як завжди;;UKAdvStruct;
@@ -3150,31 +3180,31 @@
 ;;всього тільки;;UKAdvStruct;
 ;;тільки;;UKAdvStruct;
 ;;не тільки;;UKRAdv;
-;;за його словами;;UKAdvStruct;
+
 ;;ай;;UKAdvStruct;
 ;;так званий;;UKAdvStruct;
-;;ще одній;;UKAdvStruct;
+
 ;;ой;;UKAdvStruct;
 ;;насправді;;UKAdvStruct;
-;;справді;;UKAdvStruct;
+;;справді;;UKAdv;
 ;;годі;;UKAdvStruct;
-;;в цьому разі;;UKAdvStruct;
-;;у цьому разі;;UKAdvStruct;
+
+
 ;;так звані;;UKAdvStruct;
 ;;в моєму розумінні;;UKAdvStruct;
 ;;по-суті;;UKAdvStruct;
 ;;врешті;;UKAdvStruct;
 ;;вкінці;;UKAdvStruct;
 ;;до речі;;UKAdvStruct;
-;;ще однієї;;UKAdvStruct;
+
 ;;так званої;;UKAdvStruct;
-;;ще одної;;UKAdvStruct;
+
 ;;так;;UKAdvStruct;
 ;;так званим;;UKAdvStruct;
-;;ще одним;;UKAdvStruct;
+
 ;;щонайважливішим;;UKAdvStruct;
 ;;між іншим;;UKAdvStruct;
-;;ще однім;;UKAdvStruct;
+
 ;;передовсім;;UKAdvStruct;
 ;;передусім;;UKAdvStruct;
 ;;утім;;UKAdvStruct;
@@ -3189,16 +3219,16 @@
 ;;ж бо;;UKAdvStruct;
 ;;го;;UKAdvStruct;
 ;;так званого;;UKAdvStruct;
-;;ще одного;;UKAdvStruct;
+
 ;;більше того;;UKAdvStruct;
 ;;крім усього іншого;;UKAdvStruct;
 ;;окрім усього іншого;;UKAdvStruct;
 ;;тілько;;UKAdvStruct;
 ;;як правило;;UKAdvStruct;
 ;;як відомо;;UKAdvStruct;
-;;ще одно;;UKAdvStruct;
+
 ;;переважно;;UKAdvStruct;
-;;звичайно;;UKAdvStruct;
+;;звичайно;;UKAdvTemp;UKTime;
 ;;звісно;;UKAdvStruct;
 ;;як не прикро;;UKAdvStruct;
 ;;взагалі-то;;UKAdvStruct;
@@ -3207,12 +3237,12 @@
 
 ;;тощо;;UKAdvStruct;
 ;;ані мур-мур;;UKAdvStruct;
-;;як-от;;UKAdvStruct;
+;;як-от;;UKConj;
 ;;врешті-решт;;UKAdvStruct;
 ;;у свою чергу;;UKAdvStruct;
 ;;в свою чергу;;UKAdvStruct;
 ;;в підсумку;;UKAdvStruct;
-;;у підсумку;;UKAdvStruct;
+;;у підсумку;;UKAdv;
 ;;з одного боку;;UKAdvStruct;
 ;;з іншого боку;;UKAdvStruct;
 ;;у цілому;;UKAdvStruct;
@@ -3220,9 +3250,9 @@
 ;;так званому;;UKAdvStruct;
 ;;в основному;;UKAdvStruct;
 ;;у основному;;UKAdvStruct;
-;;ще одному;;UKAdvStruct;
+
 ;;так звану;;UKAdvStruct;
-;;ще одну;;UKAdvStruct;
+
 ;;ну;;UKAdvStruct;
 ;;ах;;UKAdvStruct;
 ;;так званих;;UKAdvStruct;
@@ -3237,7 +3267,7 @@
 ;;навіть;;UKAdvStruct;
 ;;навіть і;;UKAdvStruct;
 ;;мабуть;;UKAdvStruct;
-;;ще однією;;UKAdvStruct;
+
 ;;так званою;;UKAdvStruct;
 ;;зрештою;;UKAdvStruct;
 ;;на його переконання;;UKAdvStruct;
@@ -3253,19 +3283,19 @@
 ;;будь-чого;;UKIndefpronPR;UKIndefpron;
 ;;будь-чому;;UKIndefpronPR;UKIndefpron;
 ;;небуть;;UKIndefpronPR;UKIndefpron;
-;;декого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;декого;;UKIndefpronPR;UKIndefpron;
 ;;дехто;;UKIndefpronPR;UKIndefpron;
 ;;декому;;UKIndefpronPR;UKIndefpron;
-;;ким-небудь;;UKIndefpronPR;UKIndefpron;
-;;кім-небудь;;UKIndefpronPR;UKIndefpron;
-;;кого-небудь;;UKIndefpronPR;UKIndefpron;
-;;кому-небудь;;UKIndefpronPR;UKIndefpron;
-;;хто-небудь;;UKIndefpronPR;UKIndefpron;
-;;чим-небудь;;UKIndefpronPR;UKIndefpron;
-;;чім-небудь;;UKIndefpronPR;UKIndefpron;
-;;чого-небудь;;UKIndefpronPR;UKIndefpron;
-;;чому-небудь;;UKIndefpronPR;UKIndefpron;
-;;що-небудь;;UKIndefpronPR;UKIndefpron;
+;;ким-небудь;;UKPRPron;
+;;кім-небудь;;UKPRPron;
+;;кого-небудь;;UKPRPron;
+;;кому-небудь;;UKPRPron;
+;;хто-небудь;;UKPRPron;
+;;чим-небудь;;UKPRPron;
+;;чім-небудь;;UKPRPron;
+;;чого-небудь;;UKPRPron;
+;;чому-небудь;;UKPRPron;
+;;що-небудь;;UKPRPron;UKShtshos;
 
 ;;декілька;;UKIndefpronPRCon;UKIndefpron;
 ;;кілька;;UKIndefpronPRCon;UKIndefpron;
@@ -3273,7 +3303,7 @@
 ;;кількома;;UKIndefpronPRCon;UKIndefpron;
 ;;небагатьма;;UKIndefpronPRCon;UKIndefpron;
 ;;небагатьом;;UKIndefpronPRCon;UKIndefpron;
-;;решта;;UKIndefpronPR;UKIndefpron;
+
 ;;інша;;UKIndefpronPR;UKIndefpron;
 ;;така же;;UKIndefpronPR;UKIndefpron;
 ;;така ж;;UKIndefpronPR;UKIndefpron;
@@ -3287,20 +3317,20 @@
 ;;такій ж;;UKIndefpronPR;UKIndefpron;
 ;;такі же;;UKIndefpronPR;UKIndefpron;
 ;;такі ж;;UKIndefpronPR;UKIndefpron;
-;;такої же;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;такої ж;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;такої же;;UKIndefpronPR;UKIndefpron;
+;;такої ж;;UKIndefpronPR;UKIndefpron;
 ;;таким же;;UKIndefpronPR;UKIndefpron;
 ;;таким ж;;UKIndefpronPR;UKIndefpron;
 ;;такім же;;UKIndefpronPR;UKIndefpron;
 ;;такім ж;;UKIndefpronPR;UKIndefpron;
-;;такого же;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;такого ж;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;такого же;;UKIndefpronPR;UKIndefpron;
+;;такого ж;;UKIndefpronPR;UKIndefpron;
 ;;такому же;;UKIndefpronPR;UKIndefpron;
 ;;такому ж;;UKIndefpronPR;UKIndefpron;
 ;;таку же;;UKIndefpronPR;UKIndefpron;
 ;;таку ж;;UKIndefpronPR;UKIndefpron;
-;;таких же;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;таких ж;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;таких же;;UKIndefpronPR;UKIndefpron;
+;;таких ж;;UKIndefpronPR;UKIndefpron;
 ;;такою же;;UKIndefpronPR;UKIndefpron;
 ;;такою ж;;UKIndefpronPR;UKIndefpron;
 ;;те же;;UKIndefpronPR;UKIndefpron;
@@ -3313,22 +3343,22 @@
 ;;той ж;;UKIndefpronPR;UKIndefpron;
 ;;ті же;;UKIndefpronPR;UKIndefpron;
 ;;ті ж;;UKIndefpronPR;UKIndefpron;
-;;тіеї же;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;тіеї ж;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;тіеї же;;UKIndefpronPR;UKIndefpron;
+;;тіеї ж;;UKIndefpronPR;UKIndefpron;
 ;;тої же;;UKIndefpronPR;UKIndefpron;
 ;;тої ж;;UKIndefpronPR;UKIndefpron;
 ;;тим же;;UKIndefpronPR;UKIndefpron;
 ;;тим ж;;UKIndefpronPR;UKIndefpron;
 ;;тім же;;UKIndefpronPR;UKIndefpron;
 ;;тім ж;;UKIndefpronPR;UKIndefpron;
-;;того же;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;того ж;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;того же;;UKIndefpronPR;UKIndefpron;
+;;того ж;;UKIndefpronPR;UKIndefpron;
 ;;тому же;;UKIndefpronPR;UKIndefpron;
 ;;тому ж;;UKIndefpronPR;UKIndefpron;
 ;;ту же;;UKIndefpronPR;UKIndefpron;
 ;;ту ж;;UKIndefpronPR;UKIndefpron;
-;;тих же;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;тих ж;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;тих же;;UKIndefpronPR;UKIndefpron;
+;;тих ж;;UKIndefpronPR;UKIndefpron;
 ;;тою же;;UKIndefpronPR;UKIndefpron;
 ;;тою ж;;UKIndefpronPR;UKIndefpron;
 ;;це же;;UKIndefpronPR;UKIndefpron;
@@ -3341,18 +3371,18 @@
 ;;цій ж;;UKIndefpronPR;UKIndefpron;
 ;;ці же;;UKIndefpronPR;UKIndefpron;
 ;;ці ж;;UKIndefpronPR;UKIndefpron;
-;;цієї же;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;цієї ж;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;цієї же;;UKIndefpronPR;UKIndefpron;
+;;цієї ж;;UKIndefpronPR;UKIndefpron;
 ;;цим же;;UKIndefpronPR;UKIndefpron;
 ;;цим ж;;UKIndefpronPR;UKIndefpron;
 ;;цім же;;UKIndefpronPR;UKIndefpron;
 ;;цім ж;;UKIndefpronPR;UKIndefpron;
-;;цього же;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;цього ж;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;цього же;;UKIndefpronPR;UKIndefpron;
+;;цього ж;;UKIndefpronPR;UKIndefpron;
 ;;цьому же;;UKIndefpronPR;UKIndefpron;
 ;;цьому ж;;UKIndefpronPR;UKIndefpron;
-;;цих же;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;цих ж;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;цих же;;UKIndefpronPR;UKIndefpron;
+;;цих ж;;UKIndefpronPR;UKIndefpron;
 ;;цією же;;UKIndefpronPR;UKIndefpron;
 ;;цією ж;;UKIndefpronPR;UKIndefpron;
 ;;цю же;;UKIndefpronPR;UKIndefpron;
@@ -3362,9 +3392,9 @@
 ;;той самий;;UKIndefpronPR;UKIndefpron;
 ;;той же самий;;UKIndefpronPR;UKIndefpron;
 ;;той ж самий;;UKIndefpronPR;UKIndefpron;
-;;того самого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;того же самого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;того ж самого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;того самого;;UKIndefpronPR;UKIndefpron;
+;;того же самого;;UKIndefpronPR;UKIndefpron;
+;;того ж самого;;UKIndefpronPR;UKIndefpron;
 ;;тому самому;;UKIndefpronPR;UKIndefpron;
 ;;тому же самому;;UKIndefpronPR;UKIndefpron;
 ;;тому ж самому;;UKIndefpronPR;UKIndefpron;
@@ -3373,9 +3403,9 @@
 ;;та же сама;;UKIndefpronPR;UKIndefpron;
 ;;та ж сама;;UKIndefpronPR;UKIndefpron;
 ;;та сама;;UKIndefpronPR;UKIndefpron;
-;;тієї самої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;тієї же самої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;тієї ж самої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;тієї самої;;UKIndefpronPR;UKIndefpron;
+;;тієї же самої;;UKIndefpronPR;UKIndefpron;
+;;тієї ж самої;;UKIndefpronPR;UKIndefpron;
 ;;тій самій;;UKIndefpronPR;UKIndefpron;
 ;;тій же самій;;UKIndefpronPR;UKIndefpron;
 ;;тій ж самій;;UKIndefpronPR;UKIndefpron;
@@ -3391,9 +3421,9 @@
 ;;ті сами;;UKIndefpronPR;UKIndefpron;
 ;;ті же сами;;UKIndefpronPR;UKIndefpron;
 ;;ті ж сами;;UKIndefpronPR;UKIndefpron;
-;;тих самоих;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;тих же самоих;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;тих ж самоих;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;тих самоих;;UKIndefpronPR;UKIndefpron;
+;;тих же самоих;;UKIndefpronPR;UKIndefpron;
+;;тих ж самоих;;UKIndefpronPR;UKIndefpron;
 ;;тими самимм;;UKIndefpronPR;UKIndefpron;
 ;;тими же самими;;UKIndefpronPR;UKIndefpron;
 ;;тими ж самими;;UKIndefpronPR;UKIndefpron;
@@ -3402,89 +3432,87 @@
 ;;все та ж;;UKIndefpronPR;UKIndefpron;
 ;;та ж;;UKIndefpronPR;UKIndefpron;
 ;;все те ж;;UKIndefpronPR;UKIndefpron;
-;;те ж;;UKIndefpronPR;UKIndefpron
 ;;все то ж;;UKIndefpronPR;UKIndefpron;
 ;;то ж;;UKIndefpronPR;UKIndefpron;
 ;;все та же;;UKIndefpronPR;UKIndefpron;
 ;;та же;;UKIndefpronPR;UKIndefpron;
 ;;все те же;;UKIndefpronPR;UKIndefpron;
-;;те же;;UKIndefpronPR;UKIndefpron
 ;;все то же;;UKIndefpronPR;UKIndefpron;
 ;;то же;;UKIndefpronPR;UKIndefpron;
-;;деякими;;UKIndefpronPRCon;UKIndefpron;
-;;деяка;;UKIndefpronPRCon;UKIndefpron;
-;;деяке;;UKIndefpronPRCon;UKIndefpron;
-;;деякий;;UKIndefpronPRCon;UKIndefpron;
-;;деякій;;UKIndefpronPRCon;UKIndefpron;
-;;деяким;;UKIndefpronPRCon;UKIndefpron;
-;;деякім;;UKIndefpronPRCon;UKIndefpron;
+;;деякими;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;деяка;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;деяке;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;деякий;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;деякій;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;деяким;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;деякім;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;деякого;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
-;;деякі;;UKIndefpronPRCon;UKIndefpron;
+;;деякі;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
 ;;деякої;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
-;;деяку;;UKIndefpronPRCon;UKIndefpron;
-;;деякому;;UKIndefpronPRCon;UKIndefpron;
+;;деяку;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
+;;деякому;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;деяких;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
-;;деякою;;UKIndefpronPRCon;UKIndefpron;
-;;одними;;UKIndefpronPRCon;UKIndefpron;
+;;деякою;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
+;;одними;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
 ;;інше;;UKIndefpronPR;UKIndefpron;
 ;;іншими;;UKIndefpronPR;UKIndefpron;
-;;решти;;UKIndefpronPR;UKIndefpron;
+
 ;;інший;;UKIndefpronPR;UKIndefpron;
 ;;іншій;;UKIndefpronPR;UKIndefpron;
 ;;будьякі;;UKIndefpronPRNR;UKIndefpron;
-;;одні;;UKIndefpronPRCon;UKIndefpron;UKOdyn;
-;;одні з;;UKIndefpronPR;UKIndefpron;-;UKPrep;
-;;решті;;UKIndefpronPR;UKIndefpron;
+;;одні;;UKIndefpronPRCon;UKIndefpron;UKOdyn;UKAdjNomPl;
+
+
 ;;інші;;UKIndefpronPR;UKIndefpron;
-;;іншої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;іншої;;UKIndefpronPR;UKIndefpron;
 ;;іншим;;UKIndefpronPR;UKIndefpron;
 ;;іншім;;UKIndefpronPR;UKIndefpron;
 ;;декільком;;UKIndefpronPRCon;UKIndefpron;
 ;;кільком;;UKIndefpronPRCon;UKIndefpron;
-;;іншого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;іншого;;UKIndefpronPR;UKIndefpron;
 ;;абихто;;UKIndefpronPR;UKIndefpron;
-;;будь-що;;UKIndefpronPR;UKIndefpron;
+;;будь-що;;UKPRPron;
 ;;абищо;;UKIndefpronPR;UKIndefpron;
 ;;такого роду;;UKIndefpronPRNR;UKIndefpron;
-;;усякому;;UKCon;
+;;усякому;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;іншому;;UKIndefpronPR;UKIndefpron;
-;;решту;;UKIndefpronPR;UKIndefpron;
+
 ;;іншу;;UKIndefpronPR;UKIndefpron;
 ;;одних;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
 ;;декiлькох;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
 ;;декількох;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
 ;;кількох;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
-;;якесь;;UKIndefpronPRCon;UKIndefpron;
-;;якимись;;UKIndefpronPRCon;UKIndefpron;
-;;кимсь;;UKIndefpronPR;UKIndefpron;
-;;чогось;;UKIndefpronPR;UKIndefpron;
-;;якимось;;UKIndefpronPRCon;UKIndefpron;
-;;чимось;;UKIndefpronPR;UKIndefpron;
-;;якімось;;UKIndefpronPRCon;UKIndefpron;
-;;хтось;;UKIndefpronPR;UKIndefpron;
-;;щось;;UKIndefpronPR;UKIndefpron;UKShtshos;
-;;комусь;;UKIndefpronPR;UKIndefpron;
-;;чомусь;;UKAdvStruct;
-;;рештою;;UKIndefpronPR;UKIndefpron;
+;;якесь;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;якимись;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;кимсь;;UKPRPron;
+;;чогось;;UKPRPron;
+;;якимось;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;UKAdjDatPl;
+;;чимось;;UKPRPron;
+;;якімось;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;хтось;;UKPRPron;
+;;щось;;UKPRPron;UKShtshos;
+;;комусь;;UKPRPron;
+;;чомусь;;UKPRPron;
+
 ;;іншою;;UKIndefpronPR;UKIndefpron;
 ;;інших;;UKIndefpronPR;UKIndefpron;
-;;всія;;UKIndefpronPRCon;UKIndefpron;
+;;всія;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
 
 ;;тим самим;;UKAdvStruct;
 ;;будь-яка;;UKIndefpronPRNR;UKIndefpron;
-;;будь-яке;;UKIndefpronPRNR;UKIndefpron;
+;;будь-яке;;UKIndefpronPRNR;UKIndefpron;;
 ;;будь-якими;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-який;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-якій;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-які;;UKIndefpronPRNR;UKIndefpron;
-;;будь-якої;;UKIndefpronPRNR;UKIndefpron;UKAdjGenF;
+;;будь-якої;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-яким;;UKIndefpronPRNR;UKIndefpron;
-;;будь-якого;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
-;;будь якого;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
+;;будь-якого;;UKIndefpronPRNR;UKIndefpron;
+;;будь якого;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-якім;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-яку;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-якому;;UKIndefpronPRNR;UKIndefpron;
-;;будь-яких;;UKIndefpronPRNR;UKIndefpron;UKAdjGenPl;
+;;будь-яких;;UKIndefpronPRNR;UKIndefpron;
 ;;будь-якою;;UKIndefpronPRNR;UKIndefpron;
 ;;всіляка;;UKIndefpronPR;UKIndefpron;
 ;;усіляка;;UKIndefpronPR;UKIndefpron;
@@ -3498,50 +3526,50 @@
 ;;усілякій;;UKIndefpronPR;UKIndefpron;
 ;;всілякі;;UKIndefpronPR;UKIndefpron;
 ;;усілякі;;UKIndefpronPR;UKIndefpron;
-;;всілякої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
-;;усілякої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;всілякої;;UKIndefpronPR;UKIndefpron;
+;;усілякої;;UKIndefpronPR;UKIndefpron;
 ;;всіляким;;UKIndefpronPR;UKIndefpron;
 ;;усіляким;;UKIndefpronPR;UKIndefpron;
 ;;всілякім;;UKIndefpronPR;UKIndefpron;
 ;;усілякім;;UKIndefpronPR;UKIndefpron;
-;;всілякого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
-;;усілякого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;всілякого;;UKIndefpronPR;UKIndefpron;
+;;усілякого;;UKIndefpronPR;UKIndefpron;
 ;;всіляку;;UKIndefpronPR;UKIndefpron;
 ;;усіляку;;UKIndefpronPR;UKIndefpron;
 ;;всілякому;;UKIndefpronPR;UKIndefpron;
 ;;усілякому;;UKIndefpronPR;UKIndefpron;
-;;всіляких;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
-;;усіляких;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;всіляких;;UKIndefpronPR;UKIndefpron;
+;;усіляких;;UKIndefpronPR;UKIndefpron;
 ;;всілякою;;UKIndefpronPR;UKIndefpron;
 ;;усілякою;;UKIndefpronPR;UKIndefpron;
-;;всяка;;UKIndefpronPRCon;UKIndefpron;
-;;всяке;;UKIndefpronPRCon;UKIndefpron;
-;;всякими;;UKIndefpronPRCon;UKIndefpron;
-;;всякий;;UKIndefpronPRCon;UKIndefpron;
-;;всякій;;UKIndefpronPRCon;UKIndefpron;
-;;всякі;;UKIndefpronPRCon;UKIndefpron;
+;;всяка;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;всяке;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;всякими;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;всякий;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;всякій;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;всякі;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
 ;;всякої;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
-;;всяким;;UKIndefpronPRCon;UKIndefpron;
-;;всякім;;UKIndefpronPRCon;UKIndefpron;
+;;всяким;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;всякім;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;всякого;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
-;;всяку;;UKIndefpronPRCon;UKIndefpron;
-;;всякому;;UKIndefpronPRCon;UKIndefpron;
+;;всяку;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
+;;всякому;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;всяких;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
-;;всякою;;UKIndefpronPRCon;UKIndefpron;
-;;декотра;;UKIndefpronPRCon;UKIndefpron;
-;;декотре;;UKIndefpronPRCon;UKIndefpron;
-;;декотрими;;UKIndefpronPRCon;UKIndefpron;
-;;декотрий;;UKIndefpronPRCon;UKIndefpron;
-;;декотрій;;UKIndefpronPRCon;UKIndefpron;
-;;декотрі;;UKIndefpronPRCon;UKIndefpron;
+;;всякою;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
+;;декотра;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;декотре;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;декотрими;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;декотрий;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;декотрій;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;декотрі;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
 ;;декотрої;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
-;;декотрим;;UKIndefpronPRCon;UKIndefpron;
-;;декотрім;;UKIndefpronPRCon;UKIndefpron;
+;;декотрим;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;декотрім;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
 ;;декотрого;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
-;;декотрому;;UKIndefpronPRCon;UKIndefpron;
-;;декотру;;UKIndefpronPRCon;UKIndefpron;
+;;декотрому;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;декотру;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
 ;;декотрих;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
-;;декотрою;;UKIndefpronPRCon;UKIndefpron;
+;;декотрою;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
 ;;інакша;;UKIndefpronPR;UKIndefpron;
 ;;інакше;;UKAdv;
 ;;інакше як;;UKConj;UKConjPB;
@@ -3549,73 +3577,73 @@
 ;;інакший;;UKIndefpronPR;UKIndefpron;
 ;;інакшій;;UKIndefpronPR;UKIndefpron;
 ;;інакші;;UKIndefpronPR;UKIndefpron;
-;;інакшої;;UKIndefpronPR;UKIndefpron;UKAdjGenF;
+;;інакшої;;UKIndefpronPR;UKIndefpron;
 ;;інакшим;;UKIndefpronPR;UKIndefpron;
 ;;інакшім;;UKIndefpronPR;UKIndefpron;
-;;інакшого;;UKIndefpronPR;UKIndefpron;UKAdjGenMN;
+;;інакшого;;UKIndefpronPR;UKIndefpron;
 ;;інакшому;;UKIndefpronPR;UKIndefpron;
 ;;інакшу;;UKIndefpronPR;UKIndefpron;
-;;інакших;;UKIndefpronPR;UKIndefpron;UKAdjGenPl;
+;;інакших;;UKIndefpronPR;UKIndefpron;
 ;;інакшою;;UKIndefpronPR;UKIndefpron;
 ;;яка-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;яке-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;який-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;якими-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;яким-небудь;;UKIndefpronPRNR;UKIndefpron;
-;;яких-небудь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenPl;
+;;яких-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;якій-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;якім-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;які-небудь;;UKIndefpronPRNR;UKIndefpron;
-;;якого-небудь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
-;;якої-небудь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenF;
+;;якого-небудь;;UKIndefpronPRNR;UKIndefpron;
+;;якої-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;якому-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;якою-небудь;;UKIndefpronPRNR;UKIndefpron;
 ;;яку-небудь;;UKIndefpronPRNR;UKIndefpron;
-;;якась;;UKIndefpronPRNR;UKIndefpron;
-;;якийсь;;UKIndefpronPRNR;UKIndefpron;
-;;якійсь;;UKIndefpronPRNR;UKIndefpron;
-;;якісь;;UKIndefpronPRNR;UKIndefpron;
-;;якоїсь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenF;
-;;якимсь;;UKIndefpronPRNR;UKIndefpron;
-;;якогось;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
-;;якихось;;UKIndefpronPRNR;UKIndefpron;UKAdjGenPl;
-;;якусь;;UKIndefpronPRNR;UKIndefpron;
-;;якомусь;;UKIndefpronPRNR;UKIndefpron;
-;;якоюсь;;UKIndefpronPRNR;UKIndefpron;
+;;якась;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;якийсь;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;якійсь;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;якісь;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
+;;якоїсь;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
+;;якимсь;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;якогось;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
+;;якихось;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
+;;якусь;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
+;;якомусь;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;якоюсь;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
 ;;котрась;;UKIndefpronPRNR;UKIndefpron;
 ;;котресь;;UKIndefpronPRNR;UKIndefpron;
 ;;котримись;;UKIndefpronPRNR;UKIndefpron;
 ;;котрийсь;;UKIndefpronPRNR;UKIndefpron;
 ;;котрійсь;;UKIndefpronPRNR;UKIndefpron;
 ;;котрісь;;UKIndefpronPRNR;UKIndefpron;
-;;котроїсь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenF;
+;;котроїсь;;UKIndefpronPRNR;UKIndefpron;
 ;;котримсь;;UKIndefpronPRNR;UKIndefpron;
 ;;котрімсь;;UKIndefpronPRNR;UKIndefpron;
-;;котрогось;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
+;;котрогось;;UKIndefpronPRNR;UKIndefpron;
 ;;котромусь;;UKIndefpronPRNR;UKIndefpron;
 ;;котрусь;;UKIndefpronPRNR;UKIndefpron;
-;;котрихсь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenPl;
+;;котрихсь;;UKIndefpronPRNR;UKIndefpron;
 ;;котроюсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиєсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиїмись;;UKIndefpronPRNR;UKIndefpron;
 ;;чийсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиїйсь;;UKIndefpronPRNR;UKIndefpron;
-;;чиєїсь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenF;
+;;чиєїсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиїсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиїмсь;;UKIndefpronPRNR;UKIndefpron;
-;;чийогось;;UKIndefpronPRNR;UKIndefpron;UKAdjGenMN;
+;;чийогось;;UKIndefpronPRNR;UKIndefpron;
 ;;чиємусь;;UKIndefpronPRNR;UKIndefpron;
 ;;чийомусь;;UKIndefpronPRNR;UKIndefpron;
-;;чиїхсь;;UKIndefpronPRNR;UKIndefpron;UKAdjGenPl;
+;;чиїхсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиєюсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиюсь;;UKIndefpronPRNR;UKIndefpron;
 ;;чиясь;;UKIndefpronPRNR;UKIndefpron;
 ;;тис.;;UKNum;UKCon;
-;;одне-два;;UKNum;UKCon;
-;;два;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;мільярда;;UKNum;UKCon;
-;;півмільярда;;UKNum;UKCon;
-;;сорока;;UKNum;UKCon;
+;;одне-два;;UKNum;UKCon;UKConNomPl;
+;;два;;UKNum;UKCon;UKConNomPl;
+;;мільярда;;UKNum;UKCon;UKConGenMN;
+;;півмільярда;;UKNum;UKCon;UKConGenMN;
+;;сорока;;UKNum;UKCon;UKConNomPl;UKConGenMN;
 ;;двома;;UKNum;UKCon;UKConInstrPl;
 ;;сімома;;UKNum;UKCon;UKConInstrPl;
 ;;вісьмома;;UKNum;UKCon;UKConInstrPl;
@@ -3660,232 +3688,232 @@
 ;;тринадцятьма;;UKNum;UKCon;UKConInstrPl;
 ;;чотирнадцятьма;;UKNum;UKCon;UKConInstrPl;
 ;;одна;;UKNum;UKCon;UKOdyn;UKConNomF;
-;;мільйона;;UKNum;UKCon;
-;;півмільйона;;UKNum;UKCon;
-;;трильйона;;UKNum;UKCon;
-;;півтора;;UKNum;UKCon;
-;;чотириста;;UKNum;UKCon;
-;;триста;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;дев'яноста;;UKNum;UKCon;
-;;ста;;UKNum;UKCon;
-;;тисяча;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;мільярдів;;UKNum;UKCon;
-;;мільйонів;;UKNum;UKCon;
-;;трильйонів;;UKNum;UKCon;
+;;мільйона;;UKNum;UKCon;UKConGenMN;
+;;півмільйона;;UKNum;UKCon;UKConGenMN;
+;;трильйона;;UKNum;UKCon;UKConGenMN;
+;;півтора;no case label;UKNum;UKCon;
+;;чотириста;;UKNum;UKCon;UKConNomPl;
+;;триста;;UKNum;UKCon;UKConNomPl;
+;;дев'яноста;;UKNum;UKCon;UKConGenMN;
+;;ста;;UKNum;UKCon;UKConGenMN;
+;;тисяча;;UKNum;UKCon;UKConNomPl;
+;;мільярдів;;UKNum;UKCon;UKConGenPl;
+;;мільйонів;;UKNum;UKCon;UKConGenPl;
+;;трильйонів;;UKNum;UKCon;UKConGenPl;
 ;;млрд;;UKNum;UKCon;
-;;одне;;UKNum;UKCon;UKOdyn;UKConNomAcc;UKConNomN;
+;;одне;;UKNum;UKCon;UKOdyn;UKConNomN;
 ;;мільйоне;;UKNum;UKCon;
 ;;трильйоне;;UKNum;UKCon;
 ;;тисяче;;UKNum;UKCon;
-;;двоє;;UKNum;UKCon;
-;;троє;;UKNum;UKCon;
-;;мільярди;;UKNum;UKCon;
-;;вісімки;;UKNum;UKCon;
-;;сімки;;UKNum;UKCon;
-;;сороками;;UKNum;UKCon;
-;;мільйонами;;UKNum;UKCon;
-;;трильйонами;;UKNum;UKCon;
-;;двомастами;;UKNum;UKCon;
-;;дев'ятьмастами;;UKNum;UKCon;
-;;дев'ятьомастами;;UKNum;UKCon;
-;;п'ятьмастами;;UKNum;UKCon;
-;;п'ятьомастами;;UKNum;UKCon;
-;;сімомастами;;UKNum;UKCon;
-;;трьомастами;;UKNum;UKCon;
-;;восьмистами;;UKNum;UKCon;
-;;семистами;;UKNum;UKCon;
-;;тисячами;;UKNum;UKCon;
-;;семи;;UKNum;UKCon;
-;;восьми;;UKNum;UKCon;
-;;половини;;UKNum;UKCon;
-;;мільйони;;UKNum;UKCon;
-;;трильйони;;UKNum;UKCon;
-;;чотири;;UKNum;UKCon;
-;;півтори;;UKNum;UKCon;
-;;три;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;шести;;UKNum;UKCon;
-;;п'яти;;UKNum;UKCon;
-;;вісімдесяти;;UKNum;UKCon;
-;;десяти;;UKNum;UKCon;
-;;п'ятдесяти;;UKNum;UKCon;
-;;сімдесяти;;UKNum;UKCon;
-;;шістдесяти;;UKNum;UKCon;
-;;вісімнадцяти;;UKNum;UKCon;
-;;двадцяти;;UKNum;UKCon;
-;;дванадцяти;;UKNum;UKCon;
-;;дев'ятнадцяти;;UKNum;UKCon;
-;;одинадцяти;;UKNum;UKCon;
-;;п'ятнадцяти;;UKNum;UKCon;
-;;сімнадцяти;;UKNum;UKCon;
-;;тринадцяти;;UKNum;UKCon;
-;;чотирнадцяти;;UKNum;UKCon;
-;;тридцяти;;UKNum;UKCon;
-;;одній;;UKNum;UKCon;UKOdyn;
-;;дві;;UKNum;UKCon;
-;;мільйонові;;UKNum;UKCon;
-;;трильйонові;;UKNum;UKCon;
-;;мільйоні;;UKNum;UKCon;
-;;трильйоні;;UKNum;UKCon;
-;;сотні;;UKNum;UKCon;
-;;двісті;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
+;;двоє;;UKNum;UKCon;UKConNomPl;
+;;троє;;UKNum;UKCon;UKConNomPl;
+;;мільярди;;UKNum;UKCon;UKConNomPl;
+;;вісімки;;UKNum;UKCon;UKConGenF;
+;;сімки;;UKNum;UKCon;UKConGenF;
+;;сороками;;UKNum;UKCon;UKConInstrPl;
+;;мільйонами;;UKNum;UKCon;UKConInstrPl;
+;;трильйонами;;UKNum;UKCon;UKConInstrPl;
+;;двомастами;;UKNum;UKCon;UKConInstrPl;
+;;дев'ятьмастами;;UKNum;UKCon;UKConInstrPl;
+;;дев'ятьомастами;;UKNum;UKCon;UKConInstrPl;
+;;п'ятьмастами;;UKNum;UKCon;UKConInstrPl;
+;;п'ятьомастами;;UKNum;UKCon;UKConInstrPl;
+;;сімомастами;;UKNum;UKCon;UKConInstrPl;
+;;трьомастами;;UKNum;UKCon;UKConInstrPl;
+;;восьмистами;;UKNum;UKCon;UKConInstrPl;
+;;семистами;;UKNum;UKCon;UKConInstrPl;
+;;тисячами;;UKNum;UKCon;UKConInstrPl;
+;;семи;;UKNum;UKCon;UKConGenF;
+;;восьми;;UKNum;UKCon;UKConGenF;
+;;половини;;UKNum;UKCon;UKConGenF;UKPartTime;
+;;мільйони;;UKNum;UKCon;UKConNomPl;
+;;трильйони;;UKNum;UKCon;UKConNomPl;
+;;чотири;;UKNum;UKCon;UKConNomPl;
+;;півтори;no case label;UKNum;UKCon;
+;;три;;UKNum;UKCon;UKConNomPl;
+;;шести;;UKNum;UKCon;UKConGenF;
+;;п'яти;;UKNum;UKCon;UKConGenF;
+;;вісімдесяти;;UKNum;UKCon;UKConGenF;
+;;десяти;;UKNum;UKCon;UKConGenF;
+;;п'ятдесяти;;UKNum;UKCon;UKConGenF;
+;;сімдесяти;;UKNum;UKCon;UKConGenF;
+;;шістдесяти;;UKNum;UKCon;UKConGenF;
+;;вісімнадцяти;;UKNum;UKCon;UKConGenF;
+;;двадцяти;;UKNum;UKCon;UKConGenF;
+;;дванадцяти;;UKNum;UKCon;UKConGenF;
+;;дев'ятнадцяти;;UKNum;UKCon;UKConGenF;
+;;одинадцяти;;UKNum;UKCon;UKConGenF;
+;;п'ятнадцяти;;UKNum;UKCon;UKConGenF;
+;;сімнадцяти;;UKNum;UKCon;UKConGenF;
+;;тринадцяти;;UKNum;UKCon;UKConGenF;
+;;чотирнадцяти;;UKNum;UKCon;UKConGenF;
+;;тридцяти;;UKNum;UKCon;UKConGenF;
+;;одній;;UKNum;UKCon;UKOdyn;UKConLocF;
+;;дві;;UKNum;UKCon;UKConNomPl;
+;;мільйонові;;UKNum;UKCon;UKConDatMN;
+;;трильйонові;;UKNum;UKCon;UKConDatMN;
+;;мільйоні;;UKNum;UKCon;UKConLocMN;
+;;трильйоні;;UKNum;UKCon;UKConLocMN;
+;;сотні;;UKNum;UKCon;UKConGenF;UKConNomPl;
+;;двісті;;UKNum;UKCon;UKConNomPl;
 ;;сороці;;UKNum;UKCon;
 ;;десятці;;UKNum;UKCon;
 ;;півтисячі;;UKNum;UKCon;
 ;;тисячі;;UKNum;UKCon;
-;;однієї;;UKNum;UKCon;UKOdyn;UKGen;
-;;одної;;UKNum;UKCon;UKOdyn;UKGen;
-;;сорок;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;десяток;;UKNum;UKCon;
-;;сорокам;;UKNum;UKCon;
-;;мільйонам;;UKNum;UKCon;
-;;трильйонам;;UKNum;UKCon;
-;;восьмистам;;UKNum;UKCon;
-;;семистам;;UKNum;UKCon;
-;;дев'ятистам;;UKNum;UKCon;
-;;п'ятистам;;UKNum;UKCon;
-;;двомстам;;UKNum;UKCon;
-;;трьомстам;;UKNum;UKCon;
-;;тисячам;;UKNum;UKCon;
-;;однім;;UKNum;UKCon;UKOdyn;
-;;вісім;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;сім;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;двом;;UKNum;UKCon;
-;;сімом;;UKNum;UKCon;
-;;вісьмом;;UKNum;UKCon;
-;;мільйоном;;UKNum;UKCon;
-;;трильйоном;;UKNum;UKCon;
-;;чотирьом;;UKNum;UKCon;
-;;трьом;;UKNum;UKCon;
-;;шістьом;;UKNum;UKCon;
-;;дев'ятьом;;UKNum;UKCon;
-;;п'ятьом;;UKNum;UKCon;
-;;вісімдесятьом;;UKNum;UKCon;
-;;десятьом;;UKNum;UKCon;
-;;п'ятдесятьом;;UKNum;UKCon;
-;;сімдесятьом;;UKNum;UKCon;
-;;шістдесятьом;;UKNum;UKCon;
-;;вісімнадцятьом;;UKNum;UKCon;
-;;двадцятьом;;UKNum;UKCon;
-;;дванадцятьом;;UKNum;UKCon;
-;;дев'ятнадцятьом;;UKNum;UKCon;
-;;одинадцятьом;;UKNum;UKCon;
-;;п'ятнадцятьом;;UKNum;UKCon;
-;;сімнадцятьом;;UKNum;UKCon;
-;;тридцятьом;;UKNum;UKCon;
-;;тринадцятьом;;UKNum;UKCon;
-;;чотирнадцятьом;;UKNum;UKCon;
-;;сотням;;UKNum;UKCon;
+;;однієї;;UKNum;UKCon;UKOdyn;UKConGenF;
+;;одної;;UKNum;UKCon;UKOdyn;UKConGenF;
+;;сорок;;UKNum;UKCon;UKConGenPl;UKConNomPl;
+;;десяток;;UKNum;UKCon;UKConGenPl;UKConNomPl;
+;;сорокам;;UKNum;UKCon;UKConDatPl;
+;;мільйонам;;UKNum;UKCon;UKConDatPl;
+;;трильйонам;;UKNum;UKCon;UKConDatPl;
+;;восьмистам;;UKNum;UKCon;UKConDatPl;
+;;семистам;;UKNum;UKCon;UKConDatPl;
+;;дев'ятистам;;UKNum;UKCon;UKConDatPl;
+;;п'ятистам;;UKNum;UKCon;UKConDatPl;
+;;двомстам;;UKNum;UKCon;UKConDatPl;
+;;трьомстам;;UKNum;UKCon;UKConDatPl;
+;;тисячам;;UKNum;UKCon;UKConDatPl;
+;;однім;;UKNum;UKCon;UKOdyn;UKConLocMN;
+;;вісім;;UKNum;UKCon;UKConNomPl;
+;;сім;;UKNum;UKCon;UKConNomPl;
+;;двом;;UKNum;UKCon;UKConDatPl;
+;;сімом;;UKNum;UKCon;UKConDatPl;
+;;вісьмом;;UKNum;UKCon;UKConDatPl;
+;;мільйоном;;UKNum;UKCon;UKConInstrMN;
+;;трильйоном;;UKNum;UKCon;UKConInstrMN;
+;;чотирьом;;UKNum;UKCon;UKConDatPl;
+;;трьом;;UKNum;UKCon;UKConDatPl;
+;;шістьом;;UKNum;UKCon;UKConDatPl;
+;;дев'ятьом;;UKNum;UKCon;UKConDatPl;
+;;п'ятьом;;UKNum;UKCon;UKConDatPl;
+;;вісімдесятьом;;UKNum;UKCon;UKConDatPl;
+;;десятьом;;UKNum;UKCon;UKConDatPl;
+;;п'ятдесятьом;;UKNum;UKCon;UKConDatPl;
+;;сімдесятьом;;UKNum;UKCon;UKConDatPl;
+;;шістдесятьом;;UKNum;UKCon;UKConDatPl;
+;;вісімнадцятьом;;UKNum;UKCon;UKConDatPl;
+;;двадцятьом;;UKNum;UKCon;UKConDatPl;
+;;дванадцятьом;;UKNum;UKCon;UKConDatPl;
+;;дев'ятнадцятьом;;UKNum;UKCon;UKConDatPl;
+;;одинадцятьом;;UKNum;UKCon;UKConDatPl;
+;;п'ятнадцятьом;;UKNum;UKCon;UKConDatPl;
+;;сімнадцятьом;;UKNum;UKCon;UKConDatPl;
+;;тридцятьом;;UKNum;UKCon;UKConDatPl;
+;;тринадцятьом;;UKNum;UKCon;UKConDatPl;
+;;чотирнадцятьом;;UKNum;UKCon;UKConDatPl;
+;;сотням;;UKNum;UKCon;UKConDatPl;
 ;;млн;;UKNum;UKCon;
 ;;трлн;;UKNum;UKCon;
-;;трильйон;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;мільйон;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;одно;;UKNum;UKCon;UKOdyn;
-;;четверо;;UKNum;UKCon;
-;;семеро;;UKNum;UKCon;
-;;восьмеро;;UKNum;UKCon;
-;;шестеро;;UKNum;UKCon;
-;;дев'ятеро;;UKNum;UKCon;
-;;п'ятеро;;UKNum;UKCon;
-;;десятеро;;UKNum;UKCon;
-;;вісімнадцятеро;;UKNum;UKCon;
-;;двадцятеро;;UKNum;UKCon;
-;;дванадцятеро;;UKNum;UKCon;
-;;дев'ятнадцятеро;;UKNum;UKCon;
-;;одинадцятеро;;UKNum;UKCon;
-;;п'ятнадцятеро;;UKNum;UKCon;
-;;сімнадцятеро;;UKNum;UKCon;
-;;тридцятеро;;UKNum;UKCon;
-;;тринадцятеро;;UKNum;UKCon;
-;;чотирнадцятеро;;UKNum;UKCon;
-;;шістнадцятеро;;UKNum;UKCon;
-;;дев'яносто;;UKNum;UKCon;
-;;сто;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;семисот;;UKNum;UKCon;
-;;восьмисот;;UKNum;UKCon;
-;;дев'ятисот;;UKNum;UKCon;
-;;п'ятисот;;UKNum;UKCon;
-;;вісімсот;;UKNum;UKCon;
-;;сімсот;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;сот;;UKNum;UKCon;
-;;дев'ятсот;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;п'ятсот;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;двохсот;;UKNum;UKCon;
-;;трьохсот;;UKNum;UKCon;
-;;вісімдесят;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;сімдесят;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;п'ятдесят;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;шістдесят;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;трійку;;UKNum;UKCon;
-;;сороку;;UKNum;UKCon;
-;;дев'ятку;;UKNum;UKCon;
-;;десятку;;UKNum;UKCon;
-;;двадцятку;;UKNum;UKCon;
-;;кількамільйонному;;UKNum;UKCon;
-;;одну;;UKNum;UKCon;UKOdyn;
-;;половину;;UKNum;UKCon;UKConAccF;
-;;мільйону;;UKNum;UKCon;
-;;трильйону;;UKNum;UKCon;
-;;тисячу;;UKNum;UKCon;
-;;сороках;;UKNum;UKCon;
-;;мільйонах;;UKNum;UKCon;
-;;трильйонах;;UKNum;UKCon;
-;;восьмистах;;UKNum;UKCon;
-;;семистах;;UKNum;UKCon;
-;;дев'ятистах;;UKNum;UKCon;
-;;п'ятистах;;UKNum;UKCon;
-;;двохстах;;UKNum;UKCon;
-;;трьохстах;;UKNum;UKCon;
-;;тисячах;;UKNum;UKCon;
-;;двох;;UKNum;UKCon;
-;;сімох;;UKNum;UKCon;
-;;вісьмох;;UKNum;UKCon;
-;;чотирьох;;UKNum;UKCon;
-;;трьох;;UKNum;UKCon;
-;;шістьох;;UKNum;UKCon;
-;;дев'ятьох;;UKNum;UKCon;
-;;п'ятьох;;UKNum;UKCon;
-;;вісімдесятьох;;UKNum;UKCon;
-;;десятьох;;UKNum;UKCon;
-;;п'ятдесятьох;;UKNum;UKCon;
-;;сімдесятьох;;UKNum;UKCon;
-;;шістдесятьох;;UKNum;UKCon;
-;;вісімнадцятьох;;UKNum;UKCon;
-;;двадцятьох;;UKNum;UKCon;
-;;дванадцятьох;;UKNum;UKCon;
-;;дев'ятнадцятьох;;UKNum;UKCon;
-;;одинадцятьох;;UKNum;UKCon;
-;;п'ятнадцятьох;;UKNum;UKCon;
-;;сімнадцятьох;;UKNum;UKCon;
-;;тридцятьох;;UKNum;UKCon;
-;;тринадцятьох;;UKNum;UKCon;
-;;чотирнадцятьох;;UKNum;UKCon;
-;;тисяч;;UKNum;UKCon;
-;;шість;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;дев'ять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;п'ять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;десять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;кільканадцять;;UKNum;UKCon;
-;;двадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;дванадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;дев'ятнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;одинадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;тринадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;чотирнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;шістнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;вісімнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;п'ятнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;сімнадцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
-;;тридцять;;UKNum;UKCon;UKConNomAcc;UKConNomPl;
+;;трильйон;;UKNum;UKCon;UKConNomPl;
+;;мільйон;;UKNum;UKCon;UKConNomPl;
+;;одно;;UKNum;UKCon;UKOdyn;UKConNomN;
+;;четверо;;UKNum;UKCon;UKConNomPl;
+;;семеро;;UKNum;UKCon;UKConNomPl;
+;;восьмеро;;UKNum;UKCon;UKConNomPl;
+;;шестеро;;UKNum;UKCon;UKConNomPl;
+;;дев'ятеро;;UKNum;UKCon;UKConNomPl;
+;;п'ятеро;;UKNum;UKCon;UKConNomPl;
+;;десятеро;;UKNum;UKCon;UKConNomPl;
+;;вісімнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;двадцятеро;;UKNum;UKCon;UKConNomPl;
+;;дванадцятеро;;UKNum;UKCon;UKConNomPl;
+;;дев'ятнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;одинадцятеро;;UKNum;UKCon;UKConNomPl;
+;;п'ятнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;сімнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;тридцятеро;;UKNum;UKCon;UKConNomPl;
+;;тринадцятеро;;UKNum;UKCon;UKConNomPl;
+;;чотирнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;шістнадцятеро;;UKNum;UKCon;UKConNomPl;
+;;дев'яносто;;UKNum;UKCon;UKConNomPl;
+;;сто;;UKNum;UKCon;UKConNomPl;
+;;семисот;;UKNum;UKCon;UKConGenF;
+;;восьмисот;;UKNum;UKCon;UKConGenF;
+;;дев'ятисот;;UKNum;UKCon;UKConGenF;
+;;п'ятисот;;UKNum;UKCon;UKConGenF;
+;;вісімсот;;UKNum;UKCon;UKConNomPl;
+;;сімсот;;UKNum;UKCon;UKConNomPl;
+;;сот;;UKNum;UKCon;UKConGenPl;
+;;дев'ятсот;;UKNum;UKCon;UKConNomPl;
+;;п'ятсот;;UKNum;UKCon;UKConNomPl;
+;;двохсот;;UKNum;UKCon;UKConGenPl;
+;;трьохсот;;UKNum;UKCon;UKConGenPl;
+;;вісімдесят;;UKNum;UKCon;UKConNomPl;
+;;сімдесят;;UKNum;UKCon;UKConNomPl;
+;;п'ятдесят;;UKNum;UKCon;UKConNomPl;
+;;шістдесят;;UKNum;UKCon;UKConNomPl;
+;;трійку;;UKNum;UKCon;UKConAccF;
+;;сороку;;UKNum;UKCon;UKConAccF;
+;;дев'ятку;;UKNum;UKCon;UKConAccF;
+;;десятку;;UKNum;UKCon;UKConAccF;UKConDatMN;UKConLocMN;
+;;двадцятку;;UKNum;UKCon;UKConAccF;
+;;кількамільйонному;;UKAdj;UKAdjDatLocMN;
+;;одну;;UKNum;UKCon;UKOdyn;UKConAccF;
+;;половину;;UKNum;UKCon;UKConAccF;UKPartTime;
+;;мільйону;;UKNum;UKCon;UKConDatMN;
+;;трильйону;;UKNum;UKCon;UKConDatMN;
+;;тисячу;;UKNum;UKCon;UKConAccF;
+;;сороках;;UKNum;UKCon;UKConLocPl;
+;;мільйонах;;UKNum;UKCon;UKConLocPl;
+;;трильйонах;;UKNum;UKCon;UKConLocPl;
+;;восьмистах;;UKNum;UKCon;UKConLocPl;
+;;семистах;;UKNum;UKCon;UKConLocPl;
+;;дев'ятистах;;UKNum;UKCon;UKConLocPl;
+;;п'ятистах;;UKNum;UKCon;UKConLocPl;
+;;двохстах;;UKNum;UKCon;UKConLocPl;
+;;трьохстах;;UKNum;UKCon;UKConLocPl;
+;;тисячах;;UKNum;UKCon;UKConLocPl;
+;;двох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;сімох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;вісьмох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;чотирьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;трьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;шістьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;дев'ятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;п'ятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;вісімдесятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;десятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;п'ятдесятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;сімдесятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;шістдесятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;вісімнадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;двадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;дванадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;дев'ятнадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;одинадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;п'ятнадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;сімнадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;тридцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;тринадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;чотирнадцятьох;;UKNum;UKCon;UKConGenPl;UKConLocPl;
+;;тисяч;;UKNum;UKCon;UKConGenPl;
+;;шість;;UKNum;UKCon;UKConNomPl;
+;;дев'ять;;UKNum;UKCon;UKConNomPl;
+;;п'ять;;UKNum;UKCon;UKConNomPl;
+;;десять;;UKNum;UKCon;UKConNomPl;
+;;кільканадцять;;UKNum;UKCon;UKConNomPl;
+;;двадцять;;UKNum;UKCon;UKConNomPl;
+;;дванадцять;;UKNum;UKCon;UKConNomPl;
+;;дев'ятнадцять;;UKNum;UKCon;UKConNomPl;
+;;одинадцять;;UKNum;UKCon;UKConNomPl;
+;;тринадцять;;UKNum;UKCon;UKConNomPl;
+;;чотирнадцять;;UKNum;UKCon;UKConNomPl;
+;;шістнадцять;;UKNum;UKCon;UKConNomPl;
+;;вісімнадцять;;UKNum;UKCon;UKConNomPl;
+;;п'ятнадцять;;UKNum;UKCon;UKConNomPl;
+;;сімнадцять;;UKNum;UKCon;UKConNomPl;
+;;тридцять;;UKNum;UKCon;UKConNomPl;
 ;;тисячею;;UKNum;UKCon;UKConInstrF;
 ;;однією;;UKOdyn;UKNum;UKCon;UKConInstrF;
-;;сотню;;UKNum;UKCon;
-;;сорокою;;UKNum;UKCon;
+;;сотню;;UKNum;UKCon;UKConAccF;
+;;сорокою;;UKNum;UKCon;UKConInstrF;
 ;;одною;;UKOdyn;UKNum;UKCon;UKConInstrF;
 ;;одним;;UKOdyn;UKNum;UKCon;UKConInstrMN;
-;;один;;UKOdyn;UKNum;UKCon;UKConNomAcc;UKConNomM;
-;;одного;;UKOdyn;UKNum;UKCon;UKGen;
-;;одному;;UKOdyn;UKNum;UKCon;
-;;особливо;;UKOsoblyvo;
+;;один;;UKOdyn;UKNum;UKCon;UKConNomM;
+;;одного;;UKOdyn;UKNum;UKCon;UKConGenMN;
+;;одному;;UKOdyn;UKNum;UKCon;UKConDatMN;UKConLocMN;
+;;особливо;;UKAdvdegree;
 ;;дано;;UKPart;
 ;;отримано можливість;;UKPart;
 ;;перелякано;;UKAdv;
@@ -3939,209 +3967,209 @@
 ;;надіслані;;UKPartadjPart;UKAdjNomPl;
 ;;завужен;;UKPartadjPart;
 ;;завоевана;;UKPartadjPart;UKAdjNomF;
-;;звинувачуваного;;UKPartAdjSubst;UKAdjGenMN;
-;;затриманого;;UKPartAdjSubst;UKAdjGenMN;
-;;арештованого;;UKPartAdjSubst;UKAdjGenMN;
-;;лежачих;;UKPartAdjSubst;UKAdjGenPl;
-;;відпочиваючого;;UKPartAdjSubst;UKAdjGenMN;
-;;арештовані;;UKPartAdjSubst;UKAdjNomPl;
-;;одруженим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;одруженими;;UKPartAdjSubst;UKAdjInstrPl;
-;;кохану;;UKPartAdjSubst;UKAdjAccF;
-;;коханої;;UKPartAdjSubst;UKAdjGenF;
-;;пораненими;;UKPartAdjSubst;UKAdjInstrPl;
-;;пораненою;;UKPartAdjSubst;UKAdjInstrF;
-;;поранених;;UKPartAdjSubst;UKAdjGenPl;
-;;поранену;;UKPartAdjSubst;UKAdjAccF;
-;;пораненому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;пораненого;;UKPartAdjSubst;UKAdjGenMN;
-;;пораненим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;пораненої;;UKPartAdjSubst;UKAdjGenF;
-;;пораненій;;UKPartAdjSubst;
-;;полоненими;;UKPartAdjSubst;UKAdjInstrPl;
-;;полоненою;;UKPartAdjSubst;UKAdjInstrF;
-;;полонених;;UKPartAdjSubst;UKAdjGenPl;
-;;полонену;;UKPartAdjSubst;UKAdjAccF;
-;;полоненому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;полоненого;;UKPartAdjSubst;UKAdjGenMN;
-;;полоненим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;полоненої;;UKPartAdjSubst;UKAdjGenF;
-;;полоненій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;відпочиваючих;;UKPartAdjSubst;UKAdjGenPl;
-;;знайома;;UKPartAdjSubst;UKAdjNomF;
-;;підозрювана;;UKPartAdjSubst;UKAdjNomF;
-;;піддана;;UKPartAdjSubst;UKAdjNomF;
-;;засуджена;;UKPartAdjSubst;UKAdjNomF;
-;;ув'язнена;;UKPartAdjSubst;UKAdjNomF;
-;;віруюча;;UKPartAdjSubst;UKAdjNomF;
-;;постраждалими;;UKPartAdjSubst;UKAdjInstrPl;
-;;потерпілими;;UKPartAdjSubst;UKAdjInstrPl;
-;;померлими;;UKPartAdjSubst;UKAdjInstrPl;
-;;знайомими;;UKPartAdjSubst;UKAdjInstrPl;
-;;підозрюваними;;UKPartAdjSubst;UKAdjInstrPl;
-;;підданими;;UKPartAdjSubst;UKAdjInstrPl;
-;;засудженими;;UKPartAdjSubst;UKAdjInstrPl;
-;;ув'язненими;;UKPartAdjSubst;UKAdjInstrPl;
-;;вченими;;UKPartAdjSubst;UKAdjInstrPl;
-;;охочими;;UKPartAdjSubst;UKAdjInstrPl;
-;;віруючими;;UKPartAdjSubst;UKAdjInstrPl;
-;;завідуючими;;UKPartAdjSubst;UKAdjInstrPl;
-;;керуючими;;UKPartAdjSubst;UKAdjInstrPl;
-;;постраждалий;;UKPartAdjSubst;UKAdjNomM;
-;;потерпілий;;UKPartAdjSubst;UKAdjNomM;
-;;померлий;;UKPartAdjSubst;UKAdjNomM;
-;;підозрюваний;;UKPartAdjSubst;UKAdjNomM;
-;;підданий;;UKPartAdjSubst;UKAdjNomM;
-;;поранений;;UKPartAdjSubst;UKAdjNomM;
-;;ув'язнений;;UKPartAdjSubst;UKAdjNomM;
-;;обвинувачений;;UKPartAdjSubst;UKAdjNomM;
-;;обвинувачених;;UKPartAdjSubst;UKAdjGenPl;
-;;обвинуваченому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;обвинуваченого;;UKPartAdjSubst;UKAdjGenMN;
-;;обвинуваченим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;обвинуваченими;;UKPartAdjSubst;UKAdjInstrPl;
-;;закоханих;;UKPartAdjSubst;UKAdjGenPl;
-;;завідуючий;;UKPartAdjSubst;UKAdjNomM;
-;;керуючий;;UKPartAdjSubst;UKAdjNomM;
-;;віруючий;;UKPartAdjSubst;UKAdjNomM;
-;;постраждалій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;потерпілій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;померлій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;знайомій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;підозрюваній;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;підданій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;засудженій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;ув'язненій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;віруючій;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;постраждалі;;UKPartAdjSubst;UKAdjNomPl;
-;;потерпілі;;UKPartAdjSubst;UKAdjNomPl;
-;;померлі;;UKPartAdjSubst;UKAdjNomPl;
-;;знайомі;;UKPartAdjSubst;UKAdjNomPl;
-;;підозрювані;;UKPartAdjSubst;UKAdjNomPl;
-;;піддані;;UKPartAdjSubst;UKAdjNomPl;
-;;затримані;;UKPartAdjSubst;UKAdjNomPl;
-;;засуджені;;UKPartAdjSubst;UKAdjNomPl;
-;;ув'язнені;;UKPartAdjSubst;UKAdjNomPl;
-;;охочі;;UKPartAdjSubst;UKAdjNomPl;
-;;завідуючі;;UKPartAdjSubst;UKAdjNomPl;
-;;керуючі;;UKPartAdjSubst;UKAdjNomPl;
-;;віруючі;;UKPartAdjSubst;UKAdjNomPl;
-;;убиті;;UKPartAdjSubst;UKAdjNomPl;
-;;убитий;;UKPartAdjSubst;UKAdjNomM;
-;;убитими;;UKPartAdjSubst;UKAdjInstrPl;
-;;постраждалої;;UKPartAdjSubst;UKAdjGenF;
-;;потерпілої;;UKPartAdjSubst;UKAdjGenF;
-;;померлої;;UKPartAdjSubst;UKAdjGenF;
-;;знайомої;;UKPartAdjSubst;UKAdjGenF;
-;;підозрюваної;;UKPartAdjSubst;UKAdjGenF;
-;;підданої;;UKPartAdjSubst;UKAdjGenF;
-;;засудженої;;UKPartAdjSubst;UKAdjGenF;
-;;ув'язненої;;UKPartAdjSubst;UKAdjGenF;
-;;віруючої;;UKPartAdjSubst;UKAdjGenF;
-;;постраждалим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;потерпілим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;померлим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;знайомим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;підозрюваним;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;підданим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;засудженим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;ув'язненим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;вченим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;охочим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;завідуючим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;віруючим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;керуючим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;трудящим;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;постраждалім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;потерпілім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;померлім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;знайомім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;підданім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;засудженім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;завідуючім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;віруючім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;керуючім;;UKPartAdjSubst;UKAdjDatLocMN;
-;;постраждалого;;UKPartAdjSubst;UKAdjGenMN;
-;;потерпілого;;UKPartAdjSubst;UKAdjGenMN;
-;;померлого;;UKPartAdjSubst;UKAdjGenMN;
-;;знайомого;;UKPartAdjSubst;UKAdjGenMN;
-;;підозрюваного;;UKPartAdjSubst;UKAdjGenMN;
-;;підданого;;UKPartAdjSubst;UKAdjGenMN;
-;;засудженого;;UKPartAdjSubst;UKAdjGenMN;
-;;ув'язненого;;UKPartAdjSubst;UKAdjGenMN;
-;;вченого;;UKPartAdjSubst;UKAdjGenMN;
-;;віруючого;;UKPartAdjSubst;UKAdjGenMN;
-;;завідуючого;;UKPartAdjSubst;UKAdjGenMN;
-;;керуючого;;UKPartAdjSubst;UKAdjGenMN;
-;;постраждалу;;UKPartAdjSubst;UKAdjAccF;
-;;потерпілу;;UKPartAdjSubst;UKAdjAccF;
-;;померлу;;UKPartAdjSubst;UKAdjAccF;
-;;знайому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;постраждалому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;потерпілому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;померлому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;знайомому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;підозрюваному;;UKPartAdjSubst;UKAdjDatLocMN;
-;;підданому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;засудженому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;ув'язненому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;віруючому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;завідуючому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;керуючому;;UKPartAdjSubst;UKAdjDatLocMN;
-;;підозрювану;;UKPartAdjSubst;UKAdjAccF;
-;;піддану;;UKPartAdjSubst;UKAdjAccF;
-;;засуджену;;UKPartAdjSubst;UKAdjAccF;
-;;ув'язнену;;UKPartAdjSubst;UKAdjAccF;
-;;віруючу;;UKPartAdjSubst;UKAdjAccF;
-;;постраждалих;;UKPartAdjSubst;UKAdjGenPl;
-;;потерпілих;;UKPartAdjSubst;UKAdjGenPl;
-;;померлих;;UKPartAdjSubst;UKAdjGenPl;
-;;знайомих;;UKPartAdjSubst;UKAdjGenPl;
-;;підозрюваних;;UKPartAdjSubst;UKAdjGenPl;
-;;підданих;;UKPartAdjSubst;UKAdjGenPl;
-;;засуджених;;UKPartAdjSubst;UKAdjGenPl;
-;;ув'язнених;;UKPartAdjSubst;UKAdjGenPl;
-;;вчених;;UKPartAdjSubst;UKAdjGenPl;
-;;охочих;;UKPartAdjSubst;UKAdjGenPl;
-;;завідуючих;;UKPartAdjSubst;UKAdjGenPl;
-;;віруючих;;UKPartAdjSubst;UKAdjGenPl;
-;;керуючих;;UKPartAdjSubst;UKAdjGenPl;
-;;трудящих;;UKPartAdjSubst;UKAdjGenPl;
-;;постраждалою;;UKPartAdjSubst;UKAdjInstrF;
-;;потерпілою;;UKPartAdjSubst;UKAdjInstrF;
-;;померлою;;UKPartAdjSubst;UKAdjInstrF;
-;;знайомою;;UKPartAdjSubst;UKAdjInstrF;
-;;підозрюваною;;UKPartAdjSubst;UKAdjInstrF;
-;;підданою;;UKPartAdjSubst;UKAdjInstrF;
-;;засудженою;;UKPartAdjSubst;UKAdjInstrF;
-;;ув'язненою;;UKPartAdjSubst;UKAdjInstrF;
-;;віруючою;;UKPartAdjSubst;UKAdjInstrF;
-;;поранена;;UKPartAdjSubst;UKAdjNomF;
-;;поранені;;UKPartAdjSubst;UKAdjNomPl;
-;;печений;;UKPartAdjSubst;UKAdjNomM;
-;;печена;;UKPartAdjSubst;UKAdjNomF;
-;;печені;;UKPartAdjSubst;UKAdjNomPl;
-;;хрещений;;UKPartAdjSubst;UKAdjNomM;
-;;хрещена;;UKPartAdjSubst;UKAdjNomF;
-;;хрещені;;UKPartAdjSubst;UKAdjNomPl;
-;;хрещеній;;UKPartAdjSubst;UKAdjNomM;UKAdjDatLocF;
-;;хрещеної;;UKPartAdjSubst;UKAdjGenF;
-;;хрещеним;;UKPartAdjSubst;UKAdjDatPl;UKAdjInstrMN;
-;;нападаючий;;UKPartAdjSubst;UKAdjNomM;
-;;нападаюча;;UKPartAdjSubst;UKAdjNomF;
-;;нападаючі;;UKPartAdjSubst;UKAdjNomPl;
-;;непрацюючий;;UKPartAdjSubst;UKAdjNomM;
-;;непрацююча;;UKPartAdjSubst;UKAdjNomF;
-;;непрацюючі;;UKPartAdjSubst;UKAdjNomPl;
-;;наречений;;UKPartAdjSubst;UKAdjNomM;
-;;наречена;;UKPartAdjSubst;UKAdjNomF;
-;;наречені;;UKPartAdjSubst;UKAdjNomPl;
-;;командуючий;;UKPartAdjSubst;UKAdjNomM;
-;;командуюча;;UKPartAdjSubst;UKAdjNomF;
-;;командуючі;;UKPartAdjSubst;UKAdjNomPl;
-;;миропомазаний;;UKPartAdjSubst;UKAdjNomM;
-;;миропомазана;;UKPartAdjSubst;UKAdjNomF;
-;;миропомазані;;UKPartAdjSubst;UKAdjNomPl;
+;;звинувачуваного;;UKPartAdjCon;UKAdjGenMN;
+;;затриманого;;UKPartAdjCon;UKAdjGenMN;
+;;арештованого;;UKPartAdjCon;UKAdjGenMN;
+;;лежачих;;UKPartAdjCon;UKAdjGenPl;
+;;відпочиваючого;;UKPartAdjCon;UKAdjGenMN;
+;;арештовані;;UKPartAdjCon;UKAdjNomPl;
+;;одруженим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;одруженими;;UKPartAdjCon;UKAdjInstrPl;
+;;кохану;;UKPartAdjCon;UKAdjAccF;
+;;коханої;;UKPartAdjCon;UKAdjGenF;
+;;пораненими;;UKPartAdjCon;UKAdjInstrPl;
+;;пораненою;;UKPartAdjCon;UKAdjInstrF;
+;;поранених;;UKPartAdjCon;UKAdjGenPl;
+;;поранену;;UKPartAdjCon;UKAdjAccF;
+;;пораненому;;UKPartAdjCon;UKAdjDatLocMN;
+;;пораненого;;UKPartAdjCon;UKAdjGenMN;
+;;пораненим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;пораненої;;UKPartAdjCon;UKAdjGenF;
+;;пораненій;;UKPartAdjCon;
+;;полоненими;;UKPartAdjCon;UKAdjInstrPl;
+;;полоненою;;UKPartAdjCon;UKAdjInstrF;
+;;полонених;;UKPartAdjCon;UKAdjGenPl;
+;;полонену;;UKPartAdjCon;UKAdjAccF;
+;;полоненому;;UKPartAdjCon;UKAdjDatLocMN;
+;;полоненого;;UKPartAdjCon;UKAdjGenMN;
+;;полоненим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;полоненої;;UKPartAdjCon;UKAdjGenF;
+;;полоненій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;відпочиваючих;;UKPartAdjCon;UKAdjGenPl;
+;;знайома;;UKPartAdjCon;UKAdjNomF;
+;;підозрювана;;UKPartAdjCon;UKAdjNomF;
+;;піддана;;UKPartAdjCon;UKAdjNomF;
+;;засуджена;;UKPartAdjCon;UKAdjNomF;
+;;ув'язнена;;UKPartAdjCon;UKAdjNomF;
+;;віруюча;;UKPartAdjCon;UKAdjNomF;
+;;постраждалими;;UKPartAdjCon;UKAdjInstrPl;
+;;потерпілими;;UKPartAdjCon;UKAdjInstrPl;
+;;померлими;;UKPartAdjCon;UKAdjInstrPl;
+;;знайомими;;UKPartAdjCon;UKAdjInstrPl;
+;;підозрюваними;;UKPartAdjCon;UKAdjInstrPl;
+;;підданими;;UKPartAdjCon;UKAdjInstrPl;
+;;засудженими;;UKPartAdjCon;UKAdjInstrPl;
+;;ув'язненими;;UKPartAdjCon;UKAdjInstrPl;
+;;вченими;;UKCon;UKConInstrPl;
+;;охочими;;UKPartAdjCon;UKAdjInstrPl;
+;;віруючими;;UKPartAdjCon;UKAdjInstrPl;
+;;завідуючими;;UKPartAdjCon;UKAdjInstrPl;
+;;керуючими;;UKPartAdjCon;UKAdjInstrPl;
+;;постраждалий;;UKPartAdjCon;UKAdjNomM;
+;;потерпілий;;UKPartAdjCon;UKAdjNomM;
+;;померлий;;UKPartAdjCon;UKAdjNomM;
+;;підозрюваний;;UKPartAdjCon;UKAdjNomM;
+;;підданий;;UKPartAdjCon;UKAdjNomM;
+;;поранений;;UKPartAdjCon;UKAdjNomM;
+;;ув'язнений;;UKPartAdjCon;UKAdjNomM;
+;;обвинувачений;;UKPartAdjCon;UKAdjNomM;
+;;обвинувачених;;UKPartAdjCon;UKAdjGenPl;
+;;обвинуваченому;;UKPartAdjCon;UKAdjDatLocMN;
+;;обвинуваченого;;UKPartAdjCon;UKAdjGenMN;
+;;обвинуваченим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;обвинуваченими;;UKPartAdjCon;UKAdjInstrPl;
+;;закоханих;;UKPartAdjCon;UKAdjGenPl;
+;;завідуючий;;UKPartAdjCon;UKAdjNomM;
+;;керуючий;;UKPartAdjCon;UKAdjNomM;
+;;віруючий;;UKPartAdjCon;UKAdjNomM;
+;;постраждалій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;потерпілій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;померлій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;знайомій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;підозрюваній;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;підданій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;засудженій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;ув'язненій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;віруючій;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;постраждалі;;UKPartAdjCon;UKAdjNomPl;
+;;потерпілі;;UKPartAdjCon;UKAdjNomPl;
+;;померлі;;UKPartAdjCon;UKAdjNomPl;
+;;знайомі;;UKPartAdjCon;UKAdjNomPl;
+;;підозрювані;;UKPartAdjCon;UKAdjNomPl;
+;;піддані;;UKPartAdjCon;UKAdjNomPl;
+;;затримані;;UKPartAdjCon;UKAdjNomPl;
+;;засуджені;;UKPartAdjCon;UKAdjNomPl;
+;;ув'язнені;;UKPartAdjCon;UKAdjNomPl;
+;;охочі;;UKPartAdjCon;UKAdjNomPl;
+;;завідуючі;;UKPartAdjCon;UKAdjNomPl;
+;;керуючі;;UKPartAdjCon;UKAdjNomPl;
+;;віруючі;;UKPartAdjCon;UKAdjNomPl;
+;;убиті;;UKPartAdjCon;UKAdjNomPl;
+;;убитий;;UKPartAdjCon;UKAdjNomM;
+;;убитими;;UKPartAdjCon;UKAdjInstrPl;
+;;постраждалої;;UKPartAdjCon;UKAdjGenF;
+;;потерпілої;;UKPartAdjCon;UKAdjGenF;
+;;померлої;;UKPartAdjCon;UKAdjGenF;
+;;знайомої;;UKPartAdjCon;UKAdjGenF;
+;;підозрюваної;;UKPartAdjCon;UKAdjGenF;
+;;підданої;;UKPartAdjCon;UKAdjGenF;
+;;засудженої;;UKPartAdjCon;UKAdjGenF;
+;;ув'язненої;;UKPartAdjCon;UKAdjGenF;
+;;віруючої;;UKPartAdjCon;UKAdjGenF;
+;;постраждалим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;потерпілим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;померлим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;знайомим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;підозрюваним;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;підданим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;засудженим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;ув'язненим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;вченим;;UKCon;UKConDatPl;UKConInstrMN;
+;;охочим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;завідуючим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;віруючим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;керуючим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;трудящим;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;постраждалім;;UKPartAdjCon;UKAdjDatLocMN;
+;;потерпілім;;UKPartAdjCon;UKAdjDatLocMN;
+;;померлім;;UKPartAdjCon;UKAdjDatLocMN;
+;;знайомім;;UKPartAdjCon;UKAdjDatLocMN;
+;;підданім;;UKPartAdjCon;UKAdjDatLocMN;
+;;засудженім;;UKPartAdjCon;UKAdjDatLocMN;
+;;завідуючім;;UKPartAdjCon;UKAdjDatLocMN;
+;;віруючім;;UKPartAdjCon;UKAdjDatLocMN;
+;;керуючім;;UKPartAdjCon;UKAdjDatLocMN;
+;;постраждалого;;UKPartAdjCon;UKAdjGenMN;
+;;потерпілого;;UKPartAdjCon;UKAdjGenMN;
+;;померлого;;UKPartAdjCon;UKAdjGenMN;
+;;знайомого;;UKPartAdjCon;UKAdjGenMN;
+;;підозрюваного;;UKPartAdjCon;UKAdjGenMN;
+;;підданого;;UKPartAdjCon;UKAdjGenMN;
+;;засудженого;;UKPartAdjCon;UKAdjGenMN;
+;;ув'язненого;;UKPartAdjCon;UKAdjGenMN;
+;;вченого;;UKCon;UKConGenMN;
+;;віруючого;;UKPartAdjCon;UKAdjGenMN;
+;;завідуючого;;UKPartAdjCon;UKAdjGenMN;
+;;керуючого;;UKPartAdjCon;UKAdjGenMN;
+;;постраждалу;;UKPartAdjCon;UKAdjAccF;
+;;потерпілу;;UKPartAdjCon;UKAdjAccF;
+;;померлу;;UKPartAdjCon;UKAdjAccF;
+;;знайому;;UKPartAdjCon;UKAdjDatLocMN;
+;;постраждалому;;UKPartAdjCon;UKAdjDatLocMN;
+;;потерпілому;;UKPartAdjCon;UKAdjDatLocMN;
+;;померлому;;UKPartAdjCon;UKAdjDatLocMN;
+;;знайомому;;UKPartAdjCon;UKAdjDatLocMN;
+;;підозрюваному;;UKPartAdjCon;UKAdjDatLocMN;
+;;підданому;;UKPartAdjCon;UKAdjDatLocMN;
+;;засудженому;;UKPartAdjCon;UKAdjDatLocMN;
+;;ув'язненому;;UKPartAdjCon;UKAdjDatLocMN;
+;;віруючому;;UKPartAdjCon;UKAdjDatLocMN;
+;;завідуючому;;UKPartAdjCon;UKAdjDatLocMN;
+;;керуючому;;UKPartAdjCon;UKAdjDatLocMN;
+;;підозрювану;;UKPartAdjCon;UKAdjAccF;
+;;піддану;;UKPartAdjCon;UKAdjAccF;
+;;засуджену;;UKPartAdjCon;UKAdjAccF;
+;;ув'язнену;;UKPartAdjCon;UKAdjAccF;
+;;віруючу;;UKPartAdjCon;UKAdjAccF;
+;;постраждалих;;UKPartAdjCon;UKAdjGenPl;
+;;потерпілих;;UKPartAdjCon;UKAdjGenPl;
+;;померлих;;UKPartAdjCon;UKAdjGenPl;
+;;знайомих;;UKPartAdjCon;UKAdjGenPl;
+;;підозрюваних;;UKPartAdjCon;UKAdjGenPl;
+;;підданих;;UKPartAdjCon;UKAdjGenPl;
+;;засуджених;;UKPartAdjCon;UKAdjGenPl;
+;;ув'язнених;;UKPartAdjCon;UKAdjGenPl;
+;;вчених;;UKCon;UKConGenPl;
+;;охочих;;UKPartAdjCon;UKAdjGenPl;
+;;завідуючих;;UKPartAdjCon;UKAdjGenPl;
+;;віруючих;;UKPartAdjCon;UKAdjGenPl;
+;;керуючих;;UKPartAdjCon;UKAdjGenPl;
+;;трудящих;;UKPartAdjCon;UKAdjGenPl;
+;;постраждалою;;UKPartAdjCon;UKAdjInstrF;
+;;потерпілою;;UKPartAdjCon;UKAdjInstrF;
+;;померлою;;UKPartAdjCon;UKAdjInstrF;
+;;знайомою;;UKPartAdjCon;UKAdjInstrF;
+;;підозрюваною;;UKPartAdjCon;UKAdjInstrF;
+;;підданою;;UKPartAdjCon;UKAdjInstrF;
+;;засудженою;;UKPartAdjCon;UKAdjInstrF;
+;;ув'язненою;;UKPartAdjCon;UKAdjInstrF;
+;;віруючою;;UKPartAdjCon;UKAdjInstrF;
+;;поранена;;UKPartAdjCon;UKAdjNomF;
+;;поранені;;UKPartAdjCon;UKAdjNomPl;
+;;печений;;UKPartAdjCon;UKAdjNomM;
+;;печена;;UKPartAdjCon;UKAdjNomF;
+;;печені;;UKPartAdjCon;UKAdjNomPl;
+;;хрещений;;UKPartAdjCon;UKAdjNomM;
+;;хрещена;;UKPartAdjCon;UKAdjNomF;
+;;хрещені;;UKPartAdjCon;UKAdjNomPl;
+;;хрещеній;;UKPartAdjCon;UKAdjNomM;UKAdjDatLocF;
+;;хрещеної;;UKPartAdjCon;UKAdjGenF;
+;;хрещеним;;UKPartAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;нападаючий;;UKPartAdjCon;UKAdjNomM;
+;;нападаюча;;UKPartAdjCon;UKAdjNomF;
+;;нападаючі;;UKPartAdjCon;UKAdjNomPl;
+;;непрацюючий;;UKPartAdjCon;UKAdjNomM;
+;;непрацююча;;UKPartAdjCon;UKAdjNomF;
+;;непрацюючі;;UKPartAdjCon;UKAdjNomPl;
+;;наречений;;UKPartAdjCon;UKAdjNomM;
+;;наречена;;UKPartAdjCon;UKAdjNomF;
+;;наречені;;UKPartAdjCon;UKAdjNomPl;
+;;командуючий;;UKPartAdjCon;UKAdjNomM;
+;;командуюча;;UKPartAdjCon;UKAdjNomF;
+;;командуючі;;UKPartAdjCon;UKAdjNomPl;
+;;миропомазаний;;UKPartAdjCon;UKAdjNomM;
+;;миропомазана;;UKPartAdjCon;UKAdjNomF;
+;;миропомазані;;UKPartAdjCon;UKAdjNomPl;
 ;;вона;;UKPerspron;
 ;;тебе;;UKPerspron;
 ;;мене;;UKPerspron;
@@ -4161,62 +4189,62 @@
 ;;він;;UKPerspron;
 ;;нього;;UKPerspron;
 /**** Rewritten by DELVE, ;;один з вас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;один з вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
+;;один з вас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;один із вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один із вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;один зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одного з вас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одного з вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
+;;одного з вас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одного із вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного із вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одного зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одному з вас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одному з вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
+;;одному з вас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одному із вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному із вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одному зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одним з вас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одним з вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
+;;одним з вас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одним із вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним із вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;одним зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;однім з вас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;однім з вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
+;;однім з вас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;однім із вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;однім із вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 /**** Rewritten by DELVE, ;;однім зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;однім зі вас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_вас
 ;;вас;;UKPerspron;
 /**** Rewritten by DELVE, ;;один з нас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;один з нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
+;;один з нас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;один із нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один із нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;один зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одного з нас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одного з нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
+;;одного з нас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одного із нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного із нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одного зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одному з нас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одному з нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
+;;одному з нас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одному із нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному із нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одному зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одним з нас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одним з нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
+;;одним з нас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одним із нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним із нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;одним зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;однім з нас;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;однім з нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
+;;однім з нас;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;однім із нас;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;однім із нас;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_нас
 /**** Rewritten by DELVE, ;;однім зі нас;;UKPerspron;-;UKPrep;-;UKPerspron;
@@ -4225,31 +4253,31 @@
 ;;йому;;UKActobj;UKPerspron;
 ;;ньому;;UKPerspron;
 /**** Rewritten by DELVE, ;;один з них;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;один з них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
+;;один з них;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;один із них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один із них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;один зі них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;один зі них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одного з них;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одного з них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
+;;одного з них;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одного із них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного із них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одного зі них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одного зі них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одному з них;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одному з них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
+;;одному з них;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одному із них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному із них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одному зі них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одному зі них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одним з них;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;одним з них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
+;;одним з них;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одним із них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним із них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;одним зі них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;одним зі них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;однім з них;;UKPerspron;-;UKPrep;-;UKPerspron;
-;;однім з них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
+;;однім з них;;UKPerspron;-;UKPrep;Lit_з;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;однім із них;;UKPerspron;-;UKPrep;-;UKPerspron;
 ;;однім із них;;UKPerspron;-;UKPrep;-;UKPerspron;Lit_них
 /**** Rewritten by DELVE, ;;однім зі них;;UKPerspron;-;UKPrep;-;UKPerspron;
@@ -4265,43 +4293,43 @@
 ;;своє;;UKPosspron;UKAdjNomN;
 ;;твоє;;UKPosspron;UKAdjNomN;
 ;;моє;;UKPosspron;UKAdjNomN;
-;;вашими;;UKPosspron;
-;;нашими;;UKPosspron;
-;;їхніми;;UKPosspron;
-;;своїми;;UKPosspron;
-;;твоїми;;UKPosspron;
-;;моїми;;UKPosspron;
-;;наши;;UKPosspron;
+;;вашими;;UKPosspron;UKAdjInstrPl;
+;;нашими;;UKPosspron;UKAdjInstrPl;
+;;їхніми;;UKPosspron;UKAdjInstrPl;
+;;своїми;;UKPosspron;UKAdjInstrPl;
+;;твоїми;;UKPosspron;UKAdjInstrPl;
+;;моїми;;UKPosspron;UKAdjInstrPl;
+;;наши;;UKPosspron;UKAdjNomPl;
 ;;свій;;UKPosspron;UKAdjNomM;
 ;;твій;;UKPosspron;UKAdjNomM;
 ;;мій;;UKPosspron;UKAdjNomM;
-;;їхній;;UKPosspron;
-;;вашій;;UKPosspron;
-;;нашій;;UKPosspron;
-;;своїй;;UKPosspron;
-;;твоїй;;UKPosspron;
-;;моїй;;UKPosspron;
+;;їхній;;UKPosspron;UKAdjNomM;UKAdjDatLocF;
+;;вашій;;UKPosspron;UKAdjDatLocF;
+;;нашій;;UKPosspron;UKAdjDatLocF;
+;;своїй;;UKPosspron;UKAdjDatLocF;
+;;твоїй;;UKPosspron;UKAdjDatLocF;
+;;моїй;;UKPosspron;UKAdjDatLocF;
 ;;їхні;;UKPosspron;UKAdjNomPl;
 ;;ваші;;UKPosspron;UKAdjNomPl;
 ;;наші;;UKPosspron;UKAdjNomPl;
 ;;своєї;;UKPosspron;UKAdjGenF;
 ;;твоєї;;UKPosspron;UKAdjGenF;
 ;;моєї;;UKPosspron;UKAdjGenF;
-;;її;;UKPosspron;UKAdjGen;
-;;свої;;UKPosspron;
-;;твої;;UKPosspron;
-;;мої;;UKPosspron;
+;;її;;UKPosspron;UKAdjGenF;
+;;свої;;UKPosspron;UKAdjNomPl;
+;;твої;;UKPosspron;UKAdjNomPl;
+;;мої;;UKPosspron;UKAdjNomPl;
 ;;вашої;;UKPosspron;UKAdjGenF;
 ;;нашої;;UKPosspron;UKAdjGenF;
-;;їхньої;;UKPosspron;
-;;вашим;;UKPosspron;
-;;нашим;;UKPosspron;
-;;їхнім;;UKPosspron;
-;;вашім;;UKPosspron;
-;;нашім;;UKPosspron;
-;;своїм;;UKPosspron;
-;;твоїм;;UKPosspron;
-;;моїм;;UKPosspron;
+;;їхньої;;UKPosspron;UKAdjDatPl;UKAdjInstrMN;
+;;вашим;;UKPosspron;UKAdjDatPl;UKAdjInstrMN;
+;;нашим;;UKPosspron;UKAdjDatPl;UKAdjInstrMN;
+;;їхнім;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
+;;вашім;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
+;;нашім;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
+;;своїм;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
+;;твоїм;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
+;;моїм;;UKPosspron;UKAdjDatLocMN;UKAdjDatPl;
 ;;свого;;UKPosspron;UKAdjGenMN;
 ;;твого;;UKPosspron;UKAdjGenMN;
 ;;його;;UKPosspron;UKAdjGenMN;
@@ -4310,15 +4338,15 @@
 ;;нашого;;UKPosspron;UKAdjGenMN;
 ;;їхнього;;UKPosspron;UKAdjGenMN;
 ;;воно;;UKPerspron;
-;;своєму;;UKPosspron;
-;;твоєму;;UKPosspron;
-;;моєму;;UKPosspron;
-;;своїму;;UKPosspron;
-;;вашому;;UKPosspron;
-;;нашому;;UKPosspron;
-;;їхньому;;UKPosspron;
-;;вашу;;UKPosspron;
-;;нашу;;UKPosspron;
+;;своєму;;UKPosspron;UKAdjDatLocMN;
+;;твоєму;;UKPosspron;UKAdjDatLocMN;
+;;моєму;;UKPosspron;UKAdjDatLocMN;
+;;своїму;;UKPosspron;UKAdjDatLocMN;
+;;вашому;;UKPosspron;UKAdjDatLocMN;
+;;нашому;;UKPosspron;UKAdjDatLocMN;
+;;їхньому;;UKPosspron;UKAdjDatLocMN;
+;;вашу;;UKPosspron;UKAdjAccF;
+;;нашу;;UKPosspron;UKAdjAccF;
 ;;ваших;;UKPosspron;UKAdjGenPl;
 ;;наших;;UKPosspron;UKAdjGenPl;
 ;;їхніх;;UKPosspron;UKAdjGenPl;
@@ -4328,15 +4356,15 @@
 ;;моїх;;UKPosspron;UKAdjGenPl;
 ;;ваш;;UKPosspron;UKAdjNomM;
 ;;наш;;UKPosspron;UKAdjNomM;
-;;своєю;;UKPosspron;
-;;твоєю;;UKPosspron;
-;;їхню;;UKPosspron;
-;;свою;;UKPosspron;
-;;твою;;UKPosspron;
-;;мою;;UKPosspron;
-;;вашою;;UKPosspron;
-;;нашою;;UKPosspron;
-;;їхньою;;UKPosspron;
+;;своєю;;UKPosspron;UKAdjInstrF;
+;;твоєю;;UKPosspron;UKAdjInstrF;
+;;їхню;;UKPosspron;UKAdjAccF;
+;;свою;;UKPosspron;UKAdjAccF;
+;;твою;;UKPosspron;UKAdjAccF;
+;;мою;;UKPosspron;UKAdjAccF;
+;;вашою;;UKPosspron;UKAdjInstrF;
+;;нашою;;UKPosspron;UKAdjInstrF;
+;;їхньою;;UKPosspron;UKAdjInstrF;
 ;;їхня;;UKPosspron;UKAdjNomF;
 ;;своя;;UKPosspron;UKAdjNomF;
 ;;твоя;;UKPosspron;UKAdjNomF;
@@ -4353,7 +4381,7 @@
 ;;певне;;UKPred;
 ;;жодне;;UKNegation;UKNiyaki;
 ;;здатне;;UKPred;
-;;нижче;;UKPred;
+;;нижче;;UKPrep;
 ;;ніколи;;UKNe;UKNegation;UKNegBegin;
 ;;властивий;;UKPred;
 ;;жодний;;UKNegation;UKNiyaki;
@@ -4401,11 +4429,11 @@
 ;;з огляду на;;UKPrep;
 ;;у відповідь на;;UKPrep;
 ;;на;;UKPrep;
-;;з вечора;;UKPrep;-;UKECon;UKCon;
+
 ;;углиб;;UKPrep;
 ;;об;;UKPrep;
 ;;замість того щоб;;UKPrep;
-;;в;;UKPrep;UKAdvtempPart1;
+;;в;;UKPrep;
 ;;за умов;;UKPrep;
 ;;вiд;;UKPrep;
 ;;позад;;UKPrep;
@@ -4433,7 +4461,7 @@
 ;;під;;UKPrep;
 ;;од;;UKPrep;
 ;;поряд;;UKPrep;
-;;за те;;UKPrep;
+
 ;;вдовж;;UKPrep;
 ;;вздовж;;UKPrep;
 ;;повздовж;;UKPrep;
@@ -4470,7 +4498,7 @@
 ;;заради;;UKPrep;
 ;;з нагоди;;UKPrep;
 ;;помежи;;UKPrep;
-;;на віки;;UKPrep;-;UKECon;
+
 ;;завдяки;;UKPrep;
 ;;за словами;;UKPrep;
 ;;попри;;UKPrep;
@@ -4498,16 +4526,16 @@
 ;;на протязі;;UKPrep;
 ;;напередодні;;UKPrep;
 ;;від імені;;UKPrep;
-;;всередині;;UKPrep;
-;;усередині;;UKPrep;
-;;на світанні;;UKPrep;-;UKECon;UKCon;
+;;всередині;;UKAdvPrep;
+;;усередині;;UKAdvPrep;
+
 ;;у сфері;;UKPrep;
 ;;в результаті;;UKPrep;
 ;;у результаті;;UKPrep;
 ;;в якості;;UKPrep;
 ;;у якості;;UKPrep;
 ;;за відсутності;;UKPrep;
-;;з ночі;;UKPrep;-;UKECon;UKCon;
+
 ;;впоперек;;UKPrep;
 ;;поперек;;UKPrep;
 ;;упоперек;;UKPrep;
@@ -4515,11 +4543,11 @@
 ;;віддалік;;UKPrep;
 ;;оддалік;;UKPrep;
 ;;неподалік;;UKPrep;
-;;через рік;;UKPrep;-;UKECon;UKCon;
+
 ;;у спадок;;UKPrep;
 ;;внаслідок;;UKPrep;
 ;;унаслідок;;UKPrep;
-;;за рахунок;;UKPrep;
+
 ;;крім;;UKPrep;
 ;;окрім;;UKPrep;
 ;;під впливом;;UKPrep;
@@ -4527,8 +4555,7 @@
 ;;під приводом;;UKPrep;
 ;;за винятком;;UKPrep;
 ;;за принципом;;UKPrep;
-/**** Rewritten by DELVE, ;;за часом;;UKPrep;-;UKCon;
-;;за часом;;UKPrep;Lit_за;-;UKCon
+
 ;;за виключенням;;UKPrep;
 ;;відповідно до;;UKPrep;
 ;;по відношенню до;;UKPrep;
@@ -4557,20 +4584,27 @@
 ;;поблизу;;UKPrep;
 ;;у випадку;;UKPrep;
 ;;на думку;;UKPrep;
-;;з ранку;;UKPrep;-;UKECon;UKCon;
-;;на світанку;;UKPrep;-;UKECon;UKCon;
+
+
 ;;з боку;;UKPrep;
 ;;збоку;;UKPrep;
 ;;в силу;;UKPrep;
 ;;через силу;;UKPrep;
-;;в майбутньому;;UKPrep;UKAdvtempPart1;-;UKECon;UKCon;
+/**** Rewritten by DELVE, ;;в майбутньому;;UKPrep;-;UKTimeEndConcept;UKTime;
+;;в майбутньому;;UKPrep;Lit_в;-;UKTimeEndConcept;UKTime
+/**** Rewritten by DELVE, ;;в минулому;;UKPrep;-;UKTimeEndConcept;UKTime;
+;;в минулому;;UKPrep;Lit_в;-;UKTimeEndConcept;UKTime
+/**** Rewritten by DELVE, ;;у майбутньому;;UKPrep;-;UKTimeEndConcept;UKTime;
+;;у майбутньому;;UKPrep;Lit_у;-;UKTimeEndConcept;UKTime
+/**** Rewritten by DELVE, ;;у минулому;;UKPrep;-;UKTimeEndConcept;UKTime;
+;;у минулому;;UKPrep;Lit_у;-;UKTimeEndConcept;UKTime
 ;;у середину;;UKPrep;
 ;;в міру;;UKPrep;
 ;;у міру;;UKPrep;
 ;;з точки зору;;UKPrep;
 ;;з часу;;UKPrep;
 ;;у;;UKPrep;
-;;зверху;;UKPrep;
+;;зверху;;UKAdvPrep;
 ;;в рамках;;UKPrep;
 ;;у рамках;;UKPrep;
 ;;в інтересах;;UKPrep;
@@ -4584,7 +4618,7 @@
 ;;опріч;;UKPrep;
 ;;поруч;;UKPrep;
 ;;крізь;;UKPrep;
-;;на мить;;UKPrep;-;UKECon;UKCon;
+
 ;;на честь;;UKPrep;
 ;;на користь;;UKPrep;
 ;;замість;;UKPrep;
@@ -4602,11 +4636,13 @@
 ;;близько;;UKPrepAdvdeg;
 ;;згідно;;UKPrepAdvdeg;
 ;;біля;;UKPrepAdvdeg;
-;;поверх;;UKPrepCon;
+
 /**** Rewritten by DELVE, ;;за межами;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
 ;;за межами;;UKPrepMultiword;UKPrep;Lit_за;-;UKPrepMultiword
-;;з приводу;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
-;;в межах;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
+/**** Rewritten by DELVE, ;;з приводу;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
+;;з приводу;;UKPrepMultiword;UKPrep;Lit_з;-;UKPrepMultiword
+/**** Rewritten by DELVE, ;;в межах;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
+;;в межах;;UKPrepMultiword;UKPrep;Lit_в;-;UKPrepMultiword
 /**** Rewritten by DELVE, ;;у межах;;UKPrepMultiword;UKPrep;-;UKPrepMultiword;
 ;;у межах;;UKPrepMultiword;UKPrep;Lit_у;-;UKPrepMultiword
 ;;зрозуміло;;UKPtclVerb;
@@ -4615,49 +4651,49 @@
 ;;значить;;UKPtclVerb;
 ;;здається;;UKPtclVerb;
 ;;тобто;;UKConj;
-;;разів;;UKRaz;UKCon;
-;;раз;;UKRaz;UKCon;
-;;рази;;UKRaz;UKCon;
-;;разі;;UKRaz;UKCon;
-;;разу;;UKRaz;UKCon;
-;;те;;UKDempron;
-;;те чи інше;;UKDempron;
-;;тими;;UKDempron;
-;;цими;;UKDempron;
-;;тими чи іншими;;UKDempron;
-;;цей;;UKDempron;
-;;той чи інший;;UKDempron;
-;;тій;;UKDempron;
-;;цій;;UKDempron;
-;;тій чи іншій;;UKDempron;
-;;той;;UKDempron;
-;;ті;;UKDempron;
-;;ці;;UKDempron;
-;;тієї;;UKDempron;UKAdjGenF;
-;;цієї;;UKDempron;UKAdjGenF;
-;;тої;;UKDempron;
-;;тієї чи іншої;;UKDempron;UKAdjGenF;
-;;тої чи іншої;;UKDempron;
-;;цим;;UKDempron;
-;;тім;;UKDempron;
-;;цім;;UKDempron;
-;;тім чи іншім;;UKDempron;
-;;того;;UKDempron;UKAdjGenMN;
-;;того чи іншого;;UKDempron;UKAdjGenMN;
-;;цього;;UKDempron;UKAdjGenMN;
-;;тому;;UKDempron;UKTomu;
-;;тому чи іншому;;UKDempron;UKTomu;
-;;цьому;;UKDempron;
-;;ту;;UKDempron;
-;;ту чи іншу;;UKDempron;
-;;тих;;UKDempron;UKAdjGenPl;
-;;цих;;UKDempron;UKAdjGenPl;
-;;тих чи інших;;UKDempron;UKAdjGenPl;
-;;тією;;UKDempron;
-;;тою;;UKDempron;
-;;тою чи іншою;;UKDempron;
-;;цю;;UKDempron;
-;;ця;;UKDempron;
+;;разів;;UKRaz;UKCon;UKTimes;
+;;раз;;UKRaz;UKCon;UKTimes;
+;;рази;;UKRaz;UKCon;UKTimes;
+;;разі;;UKRaz;UKCon;UKTimes;
+;;разу;;UKRaz;UKCon;UKTimes;
+;;те;;UKDempron;UKBeginTime;
+;;те чи інше;;UKDempron;UKBeginTime;
+;;тими;;UKDempron;UKBeginTime;
+;;цими;;UKDempron;UKBeginTime;
+;;тими чи іншими;;UKDempron;UKBeginTime;
+;;цей;;UKDempron;UKBeginTime;
+;;той чи інший;;UKDempron;UKBeginTime;
+;;тій;;UKDempron;UKBeginTime;
+;;цій;;UKDempron;UKBeginTime;
+;;тій чи іншій;;UKDempron;UKBeginTime;
+;;той;;UKDempron;UKBeginTime;
+;;ті;;UKDempron;UKBeginTime;
+;;ці;;UKDempron;UKBeginTime;
+;;тієї;;UKDempron;UKBeginTime;UKAdjGenF;
+;;цієї;;UKDempron;UKBeginTime;UKAdjGenF;
+;;тої;;UKDempron;UKBeginTime;
+;;тієї чи іншої;;UKDempron;UKBeginTime;UKAdjGenF;
+;;тої чи іншої;;UKDempron;UKBeginTime;
+;;цим;;UKDempron;UKBeginTime;
+;;тім;;UKDempron;UKBeginTime;UKConIfCap;
+;;цім;;UKDempron;UKBeginTime;
+;;тім чи іншім;;UKDempron;UKBeginTime;
+;;того;;UKDempron;UKBeginTime;UKAdjGenMN;
+;;того чи іншого;;UKDempron;UKBeginTime;UKAdjGenMN;
+;;цього;;UKDempron;UKBeginTime;UKAdjGenMN;
+;;тому;;UKDempron;UKBeginTime;UKEndTime;
+;;тому чи іншому;;UKDempron;UKBeginTime;
+;;цьому;;UKDempron;UKBeginTime;
+;;ту;;UKDempron;UKBeginTime;
+;;ту чи іншу;;UKDempron;UKBeginTime;
+;;тих;;UKDempron;UKBeginTime;UKAdjGenPl;
+;;цих;;UKDempron;UKBeginTime;UKAdjGenPl;
+;;тих чи інших;;UKDempron;UKBeginTime;UKAdjGenPl;
+;;тією;;UKDempron;UKBeginTime;
+;;тою;;UKDempron;UKBeginTime;
+;;тою чи іншою;;UKDempron;UKBeginTime;
+;;цю;;UKDempron;UKBeginTime;
+;;ця;;UKDempron;UKBeginTime;
 ;;тим;;UKDempronConj;
 ;;то;;UKDempronConj;
 ;;себе;;UKRefl;
@@ -4721,7 +4757,8 @@
 ;;чого;;UKRelpron;UKNegPR_part;
 ;;хто;;UKRelpron;UKNegPR_part;
 ;;почто;;UKRelpron;
-;;та , що;;UKDempron;-;UKComma;-;UKConj;
+/**** Rewritten by DELVE, ;;та , що;;UKDempron;-;UKComma;-;UKConj;
+;;та , що;;UKDempron;-;UKComma;-;UKConj;Lit_що
 
 
 
@@ -4809,7 +4846,7 @@
 ;;таких;;UKTakij;
 ;;такою;;UKTakij;
 ;;це;;UKTse;
-;;потому;;UKTomu;UKAdvPR;
+;;потому;;UKAdvPR;UKEndTime;
 ;;постачається;;UKVerb;
 ;;вважатися;;UKInf;UKPlusDatInstr;
 ;;вважатись;;UKInf;UKPlusDatInstr;
@@ -5119,18 +5156,18 @@
 ;;дало початок;;UKVerb;
 ;;дали початок;;UKVerb;
 ;;давши початок;;UKVerb;
-;;маю право;;UKVerb;
-;;маєш право;;UKVerb;
-;;має право;;UKVerb;
-;;маємо право;;UKVerb;
-;;маєм право;;UKVerb;
-;;маєте право;;UKVerb;
-;;мають право;;UKVerb;
-;;маючи право;;UKVerb;
-;;маяв право;;UKVerb;
-;;маяла право;;UKVerb;
-;;маяло право;;UKVerb;
-;;маяли право;;UKVerb;
+
+
+
+
+
+
+
+
+
+
+
+
 ;;маю назву;;UKVerb;
 ;;маєш назву;;UKVerb;
 ;;має назву;;UKVerb;
@@ -5365,7 +5402,7 @@
 ;;додам;;UKVerb;
 ;;дало;;UKVerb;
 ;;помер;;UKVerb;
-;;пас;;UKVerb;
+;;пас;;UKVerbCon;
 ;;спас;;UKVerb;
 ;;вніс;;UKVerb;
 ;;зріс;;UKVerb;
@@ -5397,7 +5434,7 @@
 ;;вірю;;UKVerb;
 ;;так чи не так;;UKAdv;
 ;;чи не так;;UKAdvStruct;
-;;мала;;UKVerb;UKmAux;
+;;мала;;UKmAux;UKVerb;
 ;;мав;;UKVerb;UKmAux;
 ;;був;;UKVerb;UKButi;UKAux;UKCopula;
 ;;буде;;UKVerb;UKButi;UKAux;UKCopula;
@@ -5448,7 +5485,7 @@
 ;;росла;;UKVerbAdj;UKAdjNomF;
 ;;живе;;UKVerbAdj;UKAdjNomN;
 ;;блідне;;UKVerbAdj;UKAdjNomN;
-;;світлій;;UKVerbAdj;UKAdjDatLocF;UKAdjDatLoc;
+;;світлій;;UKAdj;UKAdjDatLocF;UKAdjDatLoc;
 ;;бурим;;UKVerbAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;зачистим;;UKVerbAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;напливу;;UKVerbAdj;UKAdjAccF;
@@ -5474,7 +5511,7 @@
 ;;ухвали;;UKVerbCon;UKConGenF;UKConNomPl;
 ;;розділи;;UKVerbCon;UKConNomPl;
 ;;спини;;UKVerbCon;UKConGenF;UKConNomPl;
-;;заміни;;UKVerbCon;UKConGenF;UKConNomPl;
+;;заміни;;UKCon;UKConGenF;UKConNomPl;
 ;;тони;;UKVerbCon;UKConNomPl;
 ;;світи;;UKVerbCon;UKConGenF;UKConNomPl;
 ;;мрій;;UKVerbCon;UKConGenPl;
@@ -5592,16 +5629,16 @@
 ;;верстати;;UKInfCon;UKConNomPl;
 ;;намети;;UKVerbCon;UKConNomPl;
 ;;запити;;UKInfCon;UKConNomPl;
-;;освіти;;UKVerbCon;UKConGenF;UKConNomPl;
+;;освіти;;UKCon;UKConGenF;UKConNomPl;
 ;;стік;;UKVerbCon;UKConNomM;
 ;;тік;;UKVerbCon;UKConNomM;
-;;цікавим;;UKVerbAdj;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;цікавим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;простим;;UKVerbAdj;UKAdj;UKAdjDatPl;UKAdjInstrMN;
 ;;правило;;UKVerbCon;UKConNomN;
 ;;крило;;UKVerbCon;UKConNomN;
 ;;тис;;UKVerbCon;UKNum;UKCon;
 ;;доріс;;UKVerbCon;UKConIfCap;
-;;полину;;UKVerbCon;UKConGenMN;UKConDatMN;UKConLoc;
+;;полину;;UKVerbCon;UKConGenMN;UKConDatMN;UKConLocMN;
 ;;смажать;;UKVerb;
 ;;вручать;;UKVerb;
 ;;вздоровить;;UKVerb;
@@ -5612,232 +5649,235 @@
 ;;напою;;UKVerbCon;UKConGenMN;
 ;;морю;;UKVerbCon;UKConDatMN;
 ;;власне;;UKVlasne;
-;;всіма;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усіма;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;все;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усе;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всій;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усій;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всі;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усі;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всім;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усім;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всьому;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усьому;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;весь;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;увесь;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всією;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усією;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;всю;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;усю;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;вся;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;уся;;UKIndefpronPRCon;UKIndefpron;UKVsje;
-;;місяць-два;;UKWeek;
-;;місяць-півтора;;UKWeek;
-;;тижневі;;UKWeek;
-;;місяцеві;;UKWeek;
-;;тижні;;UKWeek;
-;;місяці;;UKWeek;
-;;тижнем;;UKWeek;
-;;місяцем;;UKWeek;
-;;тиждень;;UKWeek;
-;;місяць;;UKWeek;
-;;тижню;;UKWeek;
-;;місяцю;;UKWeek;
-;;тижня;;UKWeek;
-;;місяця;;UKWeek;
-;;р.;;UKYear;
-;;рік-два;;UKYear;
-;;літа;;UKYear;
-;;років;;UKYear;
-;;роки;;UKYear;
-;;роками;;UKYear;
-;;рокові;;UKYear;
-;;часі;;UKYear;
-;;році;;UKYear;
-;;рік;;UKYear;
-;;рокам;;UKYear;
-;;роком;;UKYear;
-;;р;;UKYear;
-;;рр;;UKYear;
-;;час;;UKYear;
-;;року;;UKYear;
-;;роках;;UKYear;
-;;день;;UKYear;
-;;десятиліть;;UKYear;
+;;всіма;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrPl;
+;;усіма;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrPl;
+;;все;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomN;
+;;усе;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomN;
+;;всій;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjDatLocF;
+;;усій;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjDatLocF;
+;;всі;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomPl;
+;;усі;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomPl;
+;;всім;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrMN;UKAdjDatPl;
+;;усім;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrMN;UKAdjDatPl;
+;;всьому;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjDatLocMN;
+;;усьому;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjDatLocMN;
+;;весь;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomM;
+;;увесь;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomM;
+;;всією;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrF;
+;;усією;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjInstrF;
+;;всю;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjAccF;
+;;усю;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjAccF;
+;;вся;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomF;
+;;уся;;UKIndefpronPRCon;UKIndefpron;UKVsje;UKAdjNomF;
+;;місяць-два;;UKCon;UKTimeConcept;UKTime;
+;;місяць-півтора;;UKCon;UKTimeConcept;UKTime;
+;;тижневі;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;місяцеві;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;тижні;;UKCon;UKTimeConcept;UKConLocMN;UKConLocPl;UKTime;
+;;місяці;;UKCon;UKTimeConcept;UKConIfCap;UKConLocMN;UKConLocPl;UKTime;
+;;тижнем;;UKCon;UKTimeConcept;UKConInstrMN;UKTime;
+;;місяцем;;UKCon;UKTimeConcept;UKConIfCap;UKConInstrMN;UKTime;
+;;тиждень;;UKCon;UKTimeConcept;UKConNomM;UKTime;
+;;місяць;;UKCon;UKTimeConcept;UKConIfCap;UKConNomM;UKTime;
+;;тижню;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;місяцю;;UKCon;UKTimeConcept;UKConIfCap;UKConDatMN;UKTime;
+;;тижня;;UKCon;UKTimeConcept;UKConGenMN;UKTime;
+;;місяця;;UKCon;UKTimeConcept;UKConIfCap;UKConGenMN;UKTime;
+;;р.;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;рік-два;;UKYear;UKCon;UKTimeConcept;UKTime;
+;;літа;;UKTimeConcept;UKCon;UKConGenMN;UKConNomPl;
+;;років;;UKYear;UKCon;UKTimeConcept;UKConGenPl;
+;;роки;;UKYear;UKCon;UKTimeConcept;UKConNomPl;
+;;роками;;UKYear;UKCon;UKTimeConcept;UKConInstrPl;
+;;рокові;;UKYear;UKCon;UKTimeConcept;UKConDatMN;
+;;часі;;UKCon;UKConLocMN;UKTimeConceptAmbiguous;
+;;році;;UKYear;UKCon;UKTimeConcept;UKConLocMN;
+;;рік;ambiguous: can be genitive of 'river';UKYear;UKCon;UKTimeConcept;UKConNomM;UKConGenPl;
+;;рокам;;UKYear;UKCon;UKTimeConcept;UKConDatPl;
+;;роком;;UKYear;UKCon;UKTimeConcept;UKConInstrMN;
+;;р;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;рр;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;час;;UKCon;UKConNomM;UKTimeConceptAmbiguous;
+;;року;;UKYear;UKCon;UKTimeConcept;UKConGenMN;UKConDatMN;UKTime;
+;;роках;;UKYear;UKCon;UKTimeConcept;UKConLocPl;
+;;день;;UKTimeConcept;UKCon;UKConNomM;UKTime;
+;;десятиліть;;UKTimeConcept;UKCon;UKConGenPl;UKTime;
 
-;;ті часи;;UKBeginendconcept;UKCon;
-;;кілька місяців;;UKBeginendconcept;UKCon;
-;;з року в рік;;UKBeginendconcept;UKCon;
-;;із року в рік;;UKBeginendconcept;UKCon;
-;;весь рік;;UKBeginendconcept;UKCon;
-;;увесь рік;;UKBeginendconcept;UKCon;
-;;роком раніше;;UKBeginendconcept;UKCon;
-;;рік тому;;UKBeginendconcept;UKCon;
-;;днем раніше;;UKBeginendconcept;UKCon;
-;;місяць тому;;UKBeginendconcept;UKCon;
-;;рік потому;;UKBeginendconcept;UKCon;
-;;наступного дня;;UKBeginendconcept;UKCon;
-;;місяць потому;;UKBeginendconcept;UKCon;
-;;цього разу;;UKBeginendconcept;UKCon;
-;;декілька раз;;UKBeginendconcept;UKCon;
-;;декілька разів;;UKBeginendconcept;UKCon;
-;;того разу;;UKBeginendconcept;UKCon;
-;;цей раз;;UKBeginendconcept;UKCon;
-;;трохи часу;;UKBeginendconcept;UKCon;
-;;декілька днів;;UKBeginendconcept;UKCon;
-;;день за днем;;UKBeginendconcept;UKCon;
-;;рік за роком;;UKBeginendconcept;UKCon;
-;;увесь вечір;;UKBeginendconcept;UKCon;
-;;весь вечір;;UKBeginendconcept;UKCon;
-;;декілька років;;UKBeginendconcept;UKCon;
-;;даный момент;;UKBeginendconcept;UKCon;
-;;теперішній момент;;UKBeginendconcept;UKCon;
-;;поточний момент;;UKBeginendconcept;UKCon;
-;;сьогоднішній момент;;UKBeginendconcept;UKCon;
-;;ту пору;;UKBeginendconcept;UKCon;
-;;увесь місяць;;UKBeginendconcept;UKCon;
-;;весь місяць;;UKBeginendconcept;UKCon;
-;;довгі роки;;UKBeginendconcept;UKCon;
-;;останні роки;;UKBeginendconcept;UKCon;
-;;той же день;;UKBeginendconcept;UKCon;
-;;цей же день;;UKBeginendconcept;UKCon;
-;;вчорашний день;;UKBeginendconcept;UKCon;
-;;сьогоднішний день;;UKBeginendconcept;UKCon;
-;;теперішній день;;UKBeginendconcept;UKCon;
-;;цей день;;UKBeginendconcept;UKCon;
-;;цілий день;;UKBeginendconcept;UKCon;
-;;той день;;UKBeginendconcept;UKCon;
-;;цей день;;UKBeginendconcept;UKCon
-;;увесь день;;UKBeginendconcept;UKCon;
-;;весь день;;UKBeginendconcept;UKCon;
-;;якийсь час;;UKBeginendconcept;UKCon;
-;;теперішній час;;UKBeginendconcept;UKCon;
-;;якийсь час;;UKBeginendconcept;UKCon
-;;останнім часом;;UKBeginendconcept;UKCon;
-;;свій час;;UKBeginendconcept;UKCon;
-;;свого часу;;UKBeginendconcept;UKCon;
-;;той час;;UKBeginendconcept;UKCon;
-;;цей час;;UKBeginendconcept;UKCon;
-;;увесь цей час;;UKBeginendconcept;UKCon;
-;;весь цей час;;UKBeginendconcept;UKCon;
-;;кінці року;;UKBeginendconcept;UKCon;
-;;середні віки;;UKBeginendconcept;UKCon;
-;;тижнем раніше;;UKBeginendconcept;UKCon;
-;;тижнем пізніше;;UKBeginendconcept;UKCon;
-;;секунда потому;;UKBeginendconcept;UKCon;
-;;секунда тому;;UKBeginendconcept;UKCon;
-;;хвилина потому;;UKBeginendconcept;UKCon;
-;;хвилина тому;;UKBeginendconcept;UKCon;
-;;годину потому;;UKBeginendconcept;UKCon;
-;;годину тому;;UKBeginendconcept;UKCon;
-;;день потому;;UKBeginendconcept;UKCon;
-;;дні потому;;UKBeginendconcept;UKCon;
-;;день тому;;UKBeginendconcept;UKCon;
-;;дні тому;;UKBeginendconcept;UKCon;
-;;тиждень потому;;UKBeginendconcept;UKCon;
-;;тіжні потому;;UKBeginendconcept;UKCon;
-;;тиждень тому;;UKBeginendconcept;UKCon;
-;;тіжні тому;;UKBeginendconcept;UKCon;
-;;вік потому;;UKBeginendconcept;UKCon;
-;;вік тому;;UKBeginendconcept;UKCon;
-;;століття потому;;UKBeginendconcept;UKCon;
-;;століття тому;;UKBeginendconcept;UKCon;
-;;місяцем раніше;;UKBeginendconcept;UKCon;
-;;день пізніше;;UKBeginendconcept;UKCon;
-;;місяцем пізніше;;UKBeginendconcept;UKCon;
-;;роком пізніше;;UKBeginendconcept;UKCon;
-;;ті саме часи;;UKBeginendconcept;UKCon;
-;;минулому напередодні;;UKBeginendconcept;UKCon;
-;;цьому тижні;;UKBeginendconcept;UKCon;
-;;цьому ж році;;UKBeginendconcept;UKCon;
-;;тому році;;UKBeginendconcept;UKCon;
-;;тому самому році;;UKBeginendconcept;UKCon;
-;;деякий час;;UKBeginendconcept;UKCon;
-;;той самий час;;UKBeginendconcept;UKCon;
-;;останній час;;UKBeginendconcept;UKCon;
-;;яке-то час;;UKBeginendconcept;UKCon;
-;;даний момент;;UKBeginendconcept;UKCon;
-;;цей момент;;UKBeginendconcept;UKCon;
-;;нинішній момент;;UKBeginendconcept;UKCon;
-;;ту саму пору;;UKBeginendconcept;UKCon;
-;;сьогоднішній день;;UKBeginendconcept;UKCon;
-;;донині;;UKBeginendconcept;UKCon;
-;;позавчора;;UKBeginendconcept;UKCon;
-;;вчора;;UKBeginendconcept;UKCon;
-;;учора;;UKBeginendconcept;UKCon;
-;;завтра;;UKBeginendconcept;UKCon;
-;;післязавтра;;UKBeginendconcept;UKCon;
-;;сьогодні;;UKBeginendconcept;UKCon;
-;;увечері;;UKBeginendconcept;UKCon;
-;;звечора;;UKBeginendconcept;UKCon;
-;;вранці;;UKBeginendconcept;UKCon;
-;;рано вранці;;UKBeginendconcept;UKCon;
-;;уранці;;UKBeginendconcept;UKCon;
-;;вночі;;UKBeginendconcept;UKCon;
-;;торік;;UKBeginendconcept;UKCon;
-;;зранку;;UKBeginendconcept;UKCon;
-;;узимку;;UKBeginendconcept;UKCon;UKSeason;
-;;взимку;;UKBeginendconcept;UKCon;UKSeason;
-;;зимою;;UKBeginendconcept;UKCon;UKSeason;
-;;весною;;UKBeginendconcept;UKCon;UKSeason;
-;;навесні;;UKBeginendconcept;UKCon;UKSeason;
-;;влітку;;UKBeginendconcept;UKCon;UKSeason;
-;;улітку;;UKBeginendconcept;UKCon;UKSeason;
-;;літом;;UKBeginendconcept;UKCon;UKSeason;
-;;осінню;;UKBeginendconcept;UKCon;UKSeason;
-;;восени;;UKBeginendconcept;UKCon;UKSeason;
-;;вдень;;UKBeginendconcept;UKCon;
-;;споконвіку;;UKBeginendconcept;UKCon;
-;;цієї весни;;UKBeginendconcept;UKCon;
-;;цього літа;;UKBeginendconcept;UKCon;
-;;цієї зими;;UKBeginendconcept;UKCon;
-;;ввечері;;UKBeginendconcept;UKCon;
-;;пізно ввечері;;UKBeginendconcept;UKCon;
-;;опівночі;;UKBeginendconcept;UKCon;
-;;весь ранок;;UKBeginendconcept;UKCon;
-;;після обіду;;UKBeginendconcept;UKCon;
-;;цю зиму;;UKBeginendconcept;UKCon;
-;;цю весну;;UKBeginendconcept;UKCon;
-;;всю ніч;;UKBeginendconcept;UKCon;
-;;весь тиждень;;UKBeginendconcept;UKCon;
-;;цю осінь;;UKBeginendconcept;UKCon;
-;;півдня;;UKBeginendconcept;UKCon;
-;;полудня;;UKBeginendconcept;UKCon;
-;;опівдні;;UKBeginendconcept;UKCon;
-;;це літо;;UKBeginendconcept;UKCon;
-;;надалі;;UKTime;UKAdvPR;UKAdvTime;
-;;спершу;;UKTime;UKAdvPR;UKAdvTime;
-;;назавжди;;UKTime;UKAdvPR;UKAdvTime;
-;;тоді;;UKTime;UKAdvPR;UKAdvTime;
-;;спочатку;;UKTime;UKAdvPR;UKAdvTime;
-;;заздалегідь;;UKTime;UKAdvPR;UKAdvTime;
-;;нинi;;UKTime;UKAdvPR;UKAdvTime;
-;;наш час;;UKTime;UKAdvPR;UKAdvTime;
-;;з часом;;UKTime;UKAdvPR;UKAdvTime;
-;;коли-небудь;;UKTime;UKAdvPR;UKAdvTime;
-;;задовго;;UKTime;UKAdvPR;UKAdvTime;
-;;давно;;UKTime;UKAdvPR;UKAdvTime;
-;;нещодавно;;UKTime;UKAdvPR;UKAdvTime;
-;;недавно;;UKTime;UKAdvPR;UKAdvTime;
-;;скоро;;UKTime;UKAdvPR;UKAdvTime;
-;;незабаром;;UKTime;UKAdvPR;UKAdvTime;
-;;колись;;UKTime;UKAdvPR;UKAdvTime;
-;;до сих пір;;UKTime;UKAdvPR;UKAdvTime;
-;;тепер;;UKTime;UKAdvPR;UKAdvTime;
-;;весь час;;UKTime;UKAdvPR;UKAdvTime;
-;;напочатку;;UKTime;UKAdvPR;UKAdvTime;
-;;з плином часу;;UKTime;UKAdvPR;UKAdvTime;
-;;з самого початку;;UKTime;UKAdvPR;UKAdvTime;
-;;до тих пір;;UKTime;UKAdvPR;UKAdvTime;
-;;з тих пір;;UKTime;UKAdvPR;UKAdvTime;
-;;тойчас;;UKTime;UKAdvPR;UKAdvTime;
-;;напочатку;;UKTime;UKAdvPR;UKAdvTime
-;;увесь час;;UKTime;UKAdvPR;UKAdvTime;
-;;зараз;;UKTime;UKAdvPR;UKAdvTime;
-;;одразу;;UKTime;UKAdvPR;UKAdvTime;
-;;тут же;;UKTime;UKAdvPR;UKAdvTime;
-;;відразу;;UKTime;UKAdvPR;UKAdvTime;
+
+
+/**** Rewritten by DELVE, ;;з року в рік;;UKPrep;-;UKTimeConcept;UKCon;UKTime;-;UKPrep;-;UKTimeConcept;UKCon;UKTime;
+;;з року в рік;;UKPrep;Lit_з;-;UKTimeConcept;UKCon;UKTime;-;UKPrep;Lit_в;-;UKTimeConcept;UKCon;UKTime
+/**** Rewritten by DELVE, ;;із року в рік;;UKPrep;-;UKTimeConcept;UKCon;UKTime;-;UKPrep;-;UKTimeConcept;UKCon;UKTime;
+;;із року в рік;;UKPrep;-;UKTimeConcept;UKCon;UKTime;-;UKPrep;Lit_в;-;UKTimeConcept;UKCon;UKTime
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**** Rewritten by DELVE, ;;день за днем;;UKTimeConcept;UKCon;UKTime;-;UKPrep;-;UKTimeConcept;UKCon;UKTime;
+;;день за днем;;UKTimeConcept;UKCon;UKTime;-;UKPrep;Lit_за;-;UKTimeConcept;UKCon;UKTime
+/**** Rewritten by DELVE, ;;рік за роком;;UKTimeConcept;UKCon;UKTime;-;UKPrep;-;UKTimeConcept;UKCon;UKTime;
+;;рік за роком;;UKTimeConcept;UKCon;UKTime;-;UKPrep;Lit_за;-;UKTimeConcept;UKCon;UKTime
+
+
+
+
+;;теперішній момент;;UKAdvTime;UKTime;
+;;поточний момент;;UKAdvTime;UKTime;
+;;сьогоднішній момент;;UKAdvTime;UKTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;свій час;;UKAdvTime;UKTime;
+;;свого часу;;UKTimeEndConcept;UKTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;минулому напередодні;;UKAdvTime;UKTime;
+
+
+
+
+
+
+
+
+
+
+;;нинішній момент;;UKAdvTime;UKTime;
+
+
+;;донині;;UKAdvTime;UKTime;UKSingleWord;
+;;позавчора;;UKAdvTime;UKTime;UKSingleWord;
+;;вчора;;UKAdvTime;UKTime;UKSingleWord;
+;;учора;;UKAdvTime;UKTime;UKSingleWord;
+;;завтра;;UKAdvTime;UKTime;UKSingleWord;
+;;післязавтра;;UKAdvTime;UKTime;UKSingleWord;
+;;сьогодні;;UKAdvTime;UKTime;UKSingleWord;
+;;увечері;;UKAdvTime;UKTime;
+;;звечора;;UKAdvTime;UKTime;
+;;вранці;;UKAdvTime;UKTime;
+
+;;уранці;;UKAdvTime;UKTime;
+;;вночі;;UKAdvTime;UKTime;
+;;торік;;UKAdvTime;UKTime;UKSingleWord;
+;;зранку;;UKAdvTime;UKTime;
+;;узимку;;UKAdvTime;UKTime;
+;;взимку;;UKAdvTime;UKTime;
+;;зимою;;UKCon;UKTimeConcept;UKTime;UKConInstrF;
+;;весною;;UKCon;UKTimeConcept;UKTime;UKConInstrF;
+;;навесні;;UKAdvTime;UKTime;
+;;влітку;;UKAdvTime;UKTime;
+;;улітку;;UKAdvTime;UKTime;
+;;літом;;UKCon;UKTimeConcept;UKTime;UKConInstrMN;
+;;осінню;;UKCon;UKTimeConcept;UKTime;UKConInstrF;
+;;восени;;UKAdvTime;UKTime;
+;;вдень;;UKAdvTime;UKTime;
+
+
+
+
+;;ввечері;;UKAdvTime;UKTime;
+
+;;опівночі;;UKAdvTime;UKTime;
+
+;;після обіду;;UKAdvTime;UKTime;
+
+
+
+
+
+
+;;полудня;;UKCon;UKTimeConcept;UKTime;
+;;опівдні;;UKAdvTime;UKTime;
+
+;;надалі;;UKAdvTemp;UKTime;
+;;спершу;;UKAdvTemp;UKTime;
+;;назавжди;;UKAdvTemp;UKTime;
+;;тоді;;UKAdvTemp;UKTime;
+;;спочатку;;UKAdvTemp;UKTime;
+;;заздалегідь;;UKAdvTemp;UKTime;
+;;нинi;;UKAdvTemp;UKTime;
+;;наш час;;UKAdvTemp;UKTime;
+;;з часом;;UKAdvTemp;UKTime;
+;;коли-небудь;;UKAdvTemp;UKTime;
+;;задовго;;UKAdvTemp;UKTime;
+;;давно;;UKAdvTemp;UKTime;
+;;нещодавно;;UKAdvTemp;UKTime;
+;;недавно;;UKAdvTemp;UKTime;
+;;скоро;;UKAdvTemp;UKTime;
+;;незабаром;;UKAdvTemp;UKTime;
+;;колись;;UKAdvTemp;UKTime;
+;;до сих пір;;UKAdvTemp;UKTime;
+;;тепер;;UKAdvTemp;UKTime;
+
+;;напочатку;;UKAdvTemp;UKTime;
+;;з плином часу;;UKAdvTemp;UKTime;
+;;з самого початку;;UKAdvTemp;UKTime;
+;;до тих пір;;UKAdvTemp;UKTime;
+;;з тих пір;;UKAdvTemp;UKTime;
+;;тойчас;;UKAdvTemp;UKTime;
+
+;;зараз;;UKAdvTemp;UKTime;
+;;одразу;;UKAdvTemp;UKTime;UKAdvdegree;
+;;тут же;;UKAdvTemp;UKTime;
+;;відразу;;UKAdvTemp;UKTime;
 ;;кудись;;UKAdvPR;
 ;;звідти;;UKAdvPR;
 ;;туди;;UKAdvPR;
@@ -5861,88 +5901,88 @@
 ;;куди-то;;UKAdvPR;
 ;;звідки-то;;UKAdvPR;
 ;;ось;;UKAdvStruct;
-;;не раз і не де два;;UKAdvPR;
-;;не раз i не де два;;UKAdvPR;
-;;не раз, і не два;;UKAdvPR;
-;;не раз, i не два;;UKAdvPR;
-;;завжди;;UKAdvPR;
-;;іноді;;UKAdvPR;
-;;зрідка;;UKAdvPR;
-;;все частіше;;UKAdvPR;
-;;не раз;;UKAdvPR;
-;;нерідко;;UKAdvPR;
+;;не раз і не де два;;UKAdvTemp;UKTime;
+;;не раз i не де два;;UKAdvTemp;UKTime;
+
+
+;;завжди;;UKAdvTemp;UKTime;
+;;іноді;;UKAdvTemp;UKTime;
+;;зрідка;;UKAdvTemp;UKTime;
+;;все частіше;;UKAdvTemp;UKTime;
+;;не раз;;UKAdvTemp;UKTime;
+;;нерідко;;UKAdvTemp;UKTime;
 ;;рідко;;UKNe;UKNegation;UKNegBegin;
-;;безперервно;;UKAdvPR;
+;;безперервно;;UKAdvTemp;UKTime;
 ;;постійно;;UKAdv;
-;;безперестанку;;UKAdvPR;
+;;безперестанку;;UKAdvTemp;UKTime;
 ;;регулярно;;UKAdv;
-;;нечасто;;UKAdvPR;
-;;часто;;UKAdvPR;
-;;інколи;;UKAdvPR;
-;;місцями;;UKAdvPR;
-;;в окремих випадках;;UKAdvPR;
-;;в деяких випадках;;UKAdvPR;
-;;в більшості випадків;;UKAdvPR;
-;;у більшості випадків;;UKAdvPR;
+;;нечасто;;UKAdvTemp;UKTime;
+;;часто;;UKAdvTemp;UKTime;
+;;інколи;;UKAdvTemp;UKTime;
+
+
+
+
+
 ;;деїнде;;UKAdvPR;
 ;;усюди;;UKAdvPR;
-;;частіше всього;;UKAdvPR;
-;;частіше за все;;UKAdvPR;
-;;частіш за все;;UKAdvPR;
-;;раз у раз;;UKAdvPR;
-;;раз по раз;;UKAdvPR;
-;;беспрестанно;;UKAdvPR;
-;;пізніше;;UKTimePRCon;UKComp;
-;;раніше чи пізніше;;UKTimePRCon;
-;;раніше;;UKTimePRCon;UKComp;
-;;раніш;;UKTimePRCon;UKComp;
-;;часом;;UKAdvtempCon;
-;;часами;;UKAdvtempCon;
-;;щоденно;;UKAdvBeginendconcept;
-;;повсякдень;;UKAdvBeginendconcept;
-;;щомісячно;;UKAdvBeginendconcept;
-;;щонеділі;;UKAdvBeginendconcept;
-;;щодня;;UKAdvBeginendconcept;
-;;повсякденно;;UKAdvBeginendconcept;
-;;щорічно;;UKAdvBeginendconcept;
-;;щороку;;UKAdvBeginendconcept;
-;;щорік;;UKAdvBeginendconcept;
-;;щомісяця;;UKAdvBeginendconcept;
-;;щодвароки;;UKAdvBeginendconcept;
-;;щохвилини;;UKAdvBeginendconcept;
-;;щомиті;;UKAdvBeginendconcept;
-;;щотижнево;;UKAdvBeginendconcept;
+;;частіше всього;;UKAdvTemp;UKTime;
+;;частіше за все;;UKAdvTemp;UKTime;
+;;частіш за все;;UKAdvTemp;UKTime;
+;;раз у раз;;UKAdvTemp;UKTime;
+;;раз по раз;;UKAdvTemp;UKTime;
+;;беспрестанно;;UKAdvTemp;UKTime;
+;;пізніше;;UKAdvTemp;UKEndTime;UKTime;
+;;раніше чи пізніше;;UKAdvTemp;UKTime;
+;;раніше;;UKAdvTemp;UKEndTime;UKTime;
+
+
+
+;;щоденно;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;повсякдень;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щомісячно;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щонеділі;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щодня;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;повсякденно;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щорічно;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щороку;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щорік;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щомісяця;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щодвароки;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щохвилини;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щомиті;;UKAdvTime;UKAdvTimeFreq;UKTime;
+;;щотижнево;;UKAdvTime;UKAdvTimeFreq;UKTime;
 ;;вдруге;;UKAdv;
 ;;удруге;;UKAdv;
 ;;вчетверте;;UKAdv;
 ;;втретє;;UKAdv;
 ;;утретє;;UKAdv;
-;;зліва;;UKRAdv;
-;;вдома;;UKAdvBeginendconcept;
-;;дома;;UKAdvBeginendconcept;
-;;удома;;UKAdvBeginendconcept;
-;;вниз;;UKRAdv;
-;;нагорі;;UKRAdv;
-;;вгорі;;UKRAdv;
-;;вбік;;UKRAdv;
-;;направо;;UKRAdv;
-;;вправо;;UKRAdv;
-;;наліво;;UKRAdv;
-;;вліво;;UKRAdv;
-;;здалеку;;UKRAdv;
-;;праворуч;;UKRAdv;
-;;ліворуч;;UKRAdv;
-;;всередину;;UKRAdv;
+;;зліва;;UKCAdv;
+;;вдома;;UKBeginendconcept;
+;;дома;;UKBeginendconcept;
+;;удома;;UKBeginendconcept;
+;;вниз;;UKCAdv;
+;;нагорі;;UKCAdv;
+;;вгорі;;UKCAdv;
+;;вбік;;UKAdvPrep;
+;;направо;;UKCAdv;
+;;вправо;;UKCAdv;
+;;наліво;;UKCAdv;
+;;вліво;;UKCAdv;
+;;здалеку;;UKCAdv;
+;;праворуч;;UKCAdv;
+;;ліворуч;;UKCAdv;
+;;всередину;;UKCAdv;
 ;;недалеко;;UKAdv;
 ;;далеко;;UKAdv;
-;;на півдорозі;;UKRAdv;
-;;увись;;UKRAdv;
-;;знизу;;UKRAdv;
-;;донизу;;UKRAdv;
-;;додому;;UKRAdv;
-;;вгору;;UKRAdv;
-;;догори;;UKRAdv;
-;;вперед;;UKRAdv;
+
+;;увись;;UKCAdv;
+;;знизу;;UKCAdv;
+;;донизу;;UKCAdv;
+;;додому;;UKBeginendconcept;
+;;вгору;;UKCAdv;
+;;догори;;UKCAdv;
+;;вперед;;UKCAdv;
 ;;на ходу;;UKRAdv;
 ;;з краю в край;;UKRAdv;
 ;;з боку на бік;;UKRAdv;
@@ -5957,73 +5997,73 @@
 ;;у сторону;;UKPrep;
 ;;під боком;;UKPrep;
 ;;назад;;UKPrep;
-;;то й справа;;UKAdvPR;
-;;знов;;UKAdvPR;
-;;найчастіше;;UKAdvPR;
-;;деколи;;UKAdvPR;;
-;;наново;;UKAdvPR;
-;;часто-густо;;UKAdvPR;
-;;знову;;UKAdvPR;
-;;час від часу;;UKAdvPR;
-;;з дня на день;;UKAdvPR;
-;;не завжди;;UKNe;UKNegBegin;UKNegation;
-;;вічно;;UKAdvPR;
+;;то й справа;;UKAdvTemp;UKTime;
+;;знов;;UKAdvTemp;UKTime;
+;;найчастіше;;UKAdvTemp;UKTime;
+;;деколи;;UKAdvTemp;UKTime;
+;;наново;;UKAdvTemp;UKTime;
+;;часто-густо;;UKAdvTemp;UKTime;
+;;знову;;UKAdvTemp;UKTime;
+;;час від часу;;UKAdvTemp;UKTime;
+;;з дня на день;;UKAdvTemp;UKTime;
+
+;;вічно;;UKAdvTemp;UKTime;
 ;;повторно;;UKAdv;
 ;;багаторазово;;UKAdv;
 ;;неодноразово;;UKAdv;
-;;вперше;;UKAdv;
-;;уперше;;UKAdv;
+;;вперше;;UKAdvTemp;UKTime;
+;;уперше;;UKAdvTemp;UKTime;
 ;;достроково;;UKAdv;
 ;;невідкладно;;UKAdv;
 ;;завчасно;;UKAdv;
 ;;короткочасно;;UKAdv;
 ;;наперед;;UKAdv;
-;;зазвичай;;UKAdvPR;
+;;зазвичай;;UKAdvTemp;UKTime;
 ;;зовні;;UKAdv;
 ;;апріорі;;UKAdv;
-;;якось;;UKTime;UKAdvPR;
-;;віддавна;;UKTime;UKAdvPR;
-;;донедавна;;UKTime;UKAdvPR;
-;;здавна;;UKTime;UKAdvPR;
-;;тоді ж;;UKTime;UKAdvPR;
-;;наразі;;UKTime;UKAdvPR;
-;;віднині;;UKTime;UKAdvPR;
-;;однині;;UKTime;UKAdvPR;
-;;нині;;UKTime;UKAdvPR;
-;;понині;;UKTime;UKAdvPR;
-;;на віки вічні;;UKTime;UKAdvPR;
-;;досі;;UKTime;UKAdvPR;
-;;нарешті;;UKTime;UKAdvPR;
-;;урешті;;UKTime;UKAdvPR;
-;;потім;;UKTime;UKAdvPR;
-;;згодом;;UKTime;UKAdvPR;
-;;цілодобово;;UKTime;UKAdvPR;
-;;безстроково;;UKTime;UKAdvPR;
-;;не давно;;UKTime;UKAdvPR;
-;;вчасно;;UKTime;UKAdvPR;
-;;довічно;;UKTime;UKAdvPR;
-;;коли-то;;UKTime;UKAdvPR;
-;;тільки що;;UKTime;UKAdvPR;
-;;відтепер;;UKTime;UKAdvPR;
-;;дотепер;;UKTime;UKAdvPR;
-;;доти;;UKTime;UKAdvPR;
-;;відтоді;;UKTime;UKAdvPR;
-;;до цих пір;;UKTime;UKAdvPR;
-;;перш;;UKTime;UKAdvPR;
-;;вкотре;;UKTime;UKAdvPR;
-;;раптом;;UKTime;UKAdvPR;
-;;невдовзі;;UKTime;UKAdvPR;
-;;миттєво;;UKTime;UKAdvPR;
-;;рано;;UKTime;UKAdvPR;
-;;рано чи пізно;;UKTime;UKAdvPR;
-;;негайно;;UKTime;UKAdvPR;
-;;тим часом;;UKTime;UKAdvPR;
-;;неодночасно;;UKTime;UKAdvPR;
-;;одночасно;;UKTime;UKAdvPR;
-;;одномоментно;;UKTime;UKAdvPR;
-;;водночас;;UKTime;UKAdvPR;
-;;зразу;;UKTime;UKAdvPR;
-;;в подальшому;;UKTime;UKAdvPR;
+;;якось;;UKAdvTemp;UKTime;
+;;віддавна;;UKAdvTemp;UKTime;
+;;донедавна;;UKAdvTemp;UKTime;
+;;здавна;;UKAdvTemp;UKTime;
+;;тоді ж;;UKAdvTemp;UKTime;
+;;наразі;;UKAdvTemp;UKTime;
+;;віднині;;UKAdvTemp;UKTime;
+;;однині;;UKAdvTemp;UKTime;
+;;нині;;UKAdvTemp;UKTime;
+;;понині;;UKAdvTemp;UKTime;
+;;на віки вічні;;UKAdvTemp;UKTime;
+;;досі;;UKAdvTemp;UKTime;
+;;нарешті;;UKAdvTemp;UKTime;
+;;урешті;;UKAdvTemp;UKTime;
+;;потім;;UKAdvTemp;UKTime;
+;;згодом;;UKAdvTemp;UKTime;
+;;цілодобово;;UKAdvTemp;UKTime;
+;;безстроково;;UKAdvTemp;UKTime;
+;;не давно;;UKAdvTemp;UKTime;
+;;вчасно;;UKAdvTemp;UKTime;
+;;довічно;;UKAdvTemp;UKTime;
+;;коли-то;;UKAdvTemp;UKTime;
+;;тільки що;;UKAdvTemp;UKTime;
+;;відтепер;;UKAdvTemp;UKTime;
+;;дотепер;;UKAdvTemp;UKTime;
+;;доти;;UKAdvTemp;UKTime;
+;;відтоді;;UKAdvTemp;UKTime;
+;;до цих пір;;UKAdvTemp;UKTime;
+;;перш;;UKAdvTemp;UKTime;
+;;вкотре;;UKAdvTemp;UKTime;
+;;раптом;;UKAdvTemp;UKTime;
+;;невдовзі;;UKAdvTemp;UKTime;UKAdvdegree;
+;;миттєво;;UKAdvTemp;UKTime;
+;;рано;;UKAdvTemp;UKTime;UKBeginTime;
+;;рано чи пізно;;UKAdvTemp;UKTime;
+;;негайно;;UKAdvTemp;UKTime;
+;;тим часом;;UKAdvTemp;UKTime;
+;;неодночасно;;UKAdvTemp;UKTime;
+;;одночасно;;UKAdvTemp;UKTime;
+;;одномоментно;;UKAdvTemp;UKTime;
+;;водночас;;UKAdvTemp;UKTime;
+;;зразу;;UKAdvTemp;UKTime;
+;;в подальшому;;UKAdvTemp;UKTime;
 ;;покищо;;UKAdvStruct;
 ;;все ще;;UKAdvStruct;
 ;;підчас;;UKPrep;
@@ -6047,7 +6087,7 @@
 ;;не такою;;UKNe;UKNegBegin;UKNegation;
 ;;не така , яка;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
 ;;не таке , яке;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
-
+;;не такими , яким;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
 ;;не такий , який;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
 ;;не такій , якій;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
 /**** Rewritten by DELVE, ;;не такі , які;;UKNe;UKNegBegin;UKNegation;UKPBegin;Join;-;UKComma;-;UKKotry;UKRelpron;
@@ -6256,8 +6296,6 @@
 ;;живемо;;UKVerb;
 ;;ведемо;;UKVerb;
 ;;винить;;UKVerb;
-;;живемо;;UKVerb
-;;чинить;;UKVerb
 ;;гнуть;;UKVerb;
 ;;летиш;;UKVerb;
 ;;п'ють;;UKVerb;
@@ -6810,8 +6848,8 @@
 ;;ядерну;;UKAdjAccF;UKAdj;
 ;;дверну;;UKAdjAccF;UKAdj;
 ;;хороші;;UKAdj;UKAdjNomPl;
-;;половина;;UKNum;UKCon;UKConNomF;
-;;половиною;;UKNum;UKCon;UKConInstrF;
+;;половина;;UKNum;UKCon;UKConNomF;UKPartTime;
+;;половиною;;UKNum;UKCon;UKConInstrF;UKPartTime;
 ;;тим не менше;;UKAdvStruct;
 ;;чи ні;;UKAndOrBut;UKAndOr;UKConj;-;UKRAdv;
 ;;як така E;;UKAdvStruct;Join;-;SEnd;
@@ -6835,12 +6873,10 @@
 ;;особисту;;UKAdjAccF;UKAdj;
 ;;податкові;;UKAdj;UKAdjNomPl;
 ;;новим;;UKAdjDatPl;UKAdjInstrMN;UKAdj;
-;;р;;UKYear
-;;p;;UKYear;
-;;р.;;UKYear
-;;p.;;UKYear;
-;;останню;;UKAdjAccF;UKAdj;
-;;в.;;UKCent;
+;;p;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;p.;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;останню;;UKAdjAccF;UKAdj;UKBeginTime;
+;;в.;;UKCentury;UKCon;UKAcro;
 ;;збройна;;UKAdjNomF;UKAdj;
 ;;правильні;;UKAdj;UKAdjNomPl;
 ;;жильні;;UKAdj;UKAdjNomPl;
@@ -6904,8 +6940,8 @@
 ;;термінам;;UKCon;UKConDatPl;UKNoBConAfter;
 ;;терміном;;UKCon;UKConInstrMN;UKNoBConAfter;
 ;;термінами;;UKCon;UKConInstrPl;UKNoBConAfter;
-;;терміні;;UKCon;UKConLoc;UKNoBConAfter;
-;;термінах;;UKCon;UKConLoc;UKNoBConAfter;
+;;терміні;;UKCon;UKConLocMN;UKNoBConAfter;
+;;термінах;;UKCon;UKConLocPl;UKNoBConAfter;
 ;;запис;;UKCon;UKConNomM;UKNoBConAfter;
 ;;записи;;UKCon;UKConNomPl;UKNoBConAfter;
 ;;запису;;UKCon;UKConGenMN;UKConDatMN;UKNoBConAfter;
@@ -6914,15 +6950,15 @@
 ;;записам;;UKCon;UKConDatPl;UKNoBConAfter;
 ;;записом;;UKCon;UKConInstrMN;UKNoBConAfter;
 ;;записами;;UKCon;UKConInstrPl;UKNoBConAfter;
-;;записі;;UKCon;UKConLoc;UKNoBConAfter;
-;;записах;;UKCon;UKConLoc;UKNoBConAfter;
+;;записі;;UKCon;UKConLocMN;UKNoBConAfter;
+;;записах;;UKCon;UKConLocPl;UKNoBConAfter;
 ;;поняття;;UKCon;UKConNomN;UKConNomPl;UKConGenMN;UKNoBConAfter;
 ;;понять;;UKCon;UKConGenPl;UKNoBConAfter;
-;;поняттю;;UKCon;UKConDatMN;UKConLoc;UKNoBConAfter;
+;;поняттю;;UKCon;UKConDatMN;UKConLocMN;UKNoBConAfter;
 ;;поняттям;;UKCon;UKConInstrMN;UKConDatPl;UKNoBConAfter;
 ;;поняттями;;UKCon;UKConInstrPl;UKNoBConAfter;
-;;понятті;;UKCon;UKConLoc;UKNoBConAfter;
-;;поняттях;;UKCon;UKConLoc;UKNoBConAfter;
+;;понятті;;UKCon;UKConLocMN;UKNoBConAfter;
+;;поняттях;;UKCon;UKConLocPl;UKNoBConAfter;
 ;;слово;;UKCon;UKConNomN;UKNoBConAfter;
 ;;слова;;UKCon;UKConNomPl;UKConGenMN;UKNoBConAfter;
 ;;слів;;UKCon;UKConGenPl;UKNoBConAfter;
@@ -6930,8 +6966,8 @@
 ;;словам;;UKCon;UKConDatPl;UKNoBConAfter;
 ;;словом;;UKCon;UKConInstrMN;UKNoBConAfter;
 ;;словами;;UKCon;UKConInstrPl;UKNoBConAfter;
-;;слові;;UKCon;UKConLoc;UKNoBConAfter;
-;;словах;;UKCon;UKConLoc;UKNoBConAfter;
+;;слові;;UKCon;UKConLocMN;UKNoBConAfter;
+;;словах;;UKCon;UKConLocPl;UKNoBConAfter;
 ;;метод;;UKCon;UKConNomM;UKNoBConAfter;
 ;;методи;;UKCon;UKConNomPl;UKNoBConAfter;
 ;;методу;;UKCon;UKConGenMN;UKConDatMN;UKNoBConAfter;
@@ -6940,9 +6976,9 @@
 ;;методам;;UKCon;UKConDatPl;UKNoBConAfter;
 ;;методом;;UKCon;UKConInstrMN;UKNoBConAfter;
 ;;методами;;UKCon;UKConInstrPl;UKNoBConAfter;
-;;методі;;UKCon;UKConLoc;UKNoBConAfter;
-;;методах;;UKCon;UKConLoc;UKNoBConAfter;
-;;україні;;UKCon;UKConLoc;
+;;методі;;UKCon;UKConLocMN;UKNoBConAfter;
+;;методах;;UKCon;UKConLocPl;UKNoBConAfter;
+;;україні;;UKCon;UKConLocF;
 ;;не без;;UKPrep;
 ;;ручні;;UKAdj;UKAdjNomPl;
 ;;ставав;;UKVerb;UKButi;
@@ -6963,29 +6999,29 @@
 ;;, власне ,;;UKAdvStruct;
 ;;, проте ,;;UKAdvStruct;
 ;;, одначе ,;;UKAdvStruct;
-;;, вперше ,;;UKAdvStruct;
+
 ;;, тим більше ,;;UKAdvStruct;
 ;;, іншими словами ,;;UKAdvStruct;
-;;, за її словами ,;;UKAdvStruct;
-;;, за моїми словами ,;;UKAdvStruct;
-;;, за нашими словами ,;;UKAdvStruct;
-;;, за твоїми словами ,;;UKAdvStruct;
-;;, за своїми словами ,;;UKAdvStruct;
-;;, за вашими словами ,;;UKAdvStruct;
-;;, за його словами ,;;UKAdvStruct;
-;;, за їх словами ,;;UKAdvStruct;
+
+
+
+
+
+
+
+
 ;;, за визначенням ,;;UKAdvStruct;
-;;, нагадаємо ,;;UKAdvStruct;
+
 ;;, відзначимо ,;;UKAdvStruct;
 ;;, скажімо ,;;UKAdvStruct;
-;;, на його думку ,;;UKAdvStruct;
-;;, на її думку ,;;UKAdvStruct;
-;;, на мою думку ,;;UKAdvStruct;
-;;, на нашу думку ,;;UKAdvStruct;
-;;, на твою думку ,;;UKAdvStruct;
-;;, на свою думку ,;;UKAdvStruct;
-;;, на вашу думку ,;;UKAdvStruct;
-;;, на їх думку ,;;UKAdvStruct;
+
+
+
+
+
+
+
+
 ;;, у загальному і цілому ,;;UKAdvStruct;
 ;;, у загальному i цілому ,;;UKAdvStruct;
 ;;, натомість ,;;UKAdvStruct;
@@ -7006,17 +7042,17 @@
 ;;ніякій іншій;;UKNegation;UKNiyaki;
 ;;ніякі інші;;UKNegation;UKNiyaki;
 ;;жодні інші;;UKNegation;UKNiyaki;
-;;ніякої іншої;;UKNegation;UKNiyaki;UKGen;
-;;жодної іншої;;UKNegation;UKNiyaki;UKGen;
+;;ніякої іншої;;UKNegation;UKNiyaki;UKAdjGenF;
+;;жодної іншої;;UKNegation;UKNiyaki;UKAdjGenF;
 ;;ніяким іншим;;UKNegation;UKNiyaki;
 ;;жодним іншим;;UKNegation;UKNiyaki;
 ;;жоден інший;;UKNegation;UKNiyaki;
-;;ніякого іншого;;UKNegation;UKNiyaki;UKGen;
-;;жодного іншого;;UKNegation;UKNiyaki;UKGen;
+;;ніякого іншого;;UKNegation;UKNiyaki;UKAdjGenMN;
+;;жодного іншого;;UKNegation;UKNiyaki;UKAdjGenMN;
 ;;жодному іншому;;UKNegation;UKNiyaki;
 ;;ніякому іншому;;UKNegation;UKNiyaki;
-;;ніяких інших;;UKNegation;UKNiyaki;UKGen;
-;;жодних інших;;UKNegation;UKNiyaki;UKGen;
+;;ніяких інших;;UKNegation;UKNiyaki;UKAdjGenPl;
+;;жодних інших;;UKNegation;UKNiyaki;UKAdjGenPl;
 ;;ніякою іншою;;UKNegation;UKNiyaki;
 ;;жодною іншою;;UKNegation;UKNiyaki;
 ;;жодне інше;;UKNegation;UKNiyaki;
@@ -7026,3 +7062,990 @@
 ;;жодну іншу;;UKNegation;UKNiyaki;
 ;;ніякім іншім;;UKNegation;UKNiyaki;
 ;;ніяку іншу;;UKNegation;UKNiyaki;
+;;набік;;UKAdv;
+;;здати;;UKInf;
+;;на адресу;;UKPrep;
+;;узяти участь;;UKInf;
+;;візьмімо участь;;UKVerb;
+;;візьмім участь;;UKVerb;
+;;візьми участь;;UKVerb;
+;;візьміть участь;;UKVerb;
+;;узяв участь;;UKVerb;
+;;узяли участь;;UKVerb;
+;;узяла участь;;UKVerb;
+;;узяло участь;;UKVerb;
+;;пішки;;UKAdv;
+;;оціню;;UKVerb;
+;;оціним;;UKVerb;
+;;оціниш;;UKVerb;
+;;оцінить;;UKVerb;
+;;оцінило;;UKVerb;
+;;вечеряти;;UKVerb;
+;;вечерятиму;;UKVerb;
+;;вечерятимем;;UKVerb;
+;;вечеряю;;UKVerb;
+;;вечеряєм;;UKVerb;
+;;вечеряєш;;UKVerb;
+;;вечеряєте;;UKVerb;
+;;вечеряла;;UKVerb;
+;;забороню;;UKVerb;
+;;забороним;;UKVerb;
+;;заборониш;;UKVerb;
+;;забороните;;UKVerb;
+;;заборонить;;UKVerb;
+;;заборонять;;UKVerb;
+;;заборонило;;UKVerb;
+;;залишуся;;UKVerb;
+;;залишусь;;UKVerb;
+;;залишимось;;UKVerb;
+;;залишимся;;UKVerb;
+;;залишишся;;UKVerb;
+;;залишитесь;;UKVerb;
+;;дякуватиму;;UKVerb;
+;;дякуватимем;;UKVerb;
+;;дякую;;UKVerb;
+;;дякуєм;;UKVerb;
+;;запозичити;;UKInf;
+;;запозичу;;UKVerb;
+;;запозичим;;UKVerb;
+;;запозичите;;UKVerb;
+;;запозичив;;UKVerb;
+;;запозичило;;UKVerb;
+;;хильнути;;UKInf;
+;;хильну;;UKVerb;
+;;хильнемо;;UKVerb;
+;;хильнем;;UKVerb;
+;;хильнете;;UKVerb;
+;;хильне;;UKVerb;
+;;хильнуть;;UKVerb;
+;;хильнув;;UKVerb;
+;;хильнули;;UKVerb;
+;;хильнула;;UKVerb;
+;;страшенно;;UKAdv;
+;;жахливо;;UKAdv;
+;;лякатим;;UKVerb;
+;;лякатимем;;UKVerb;
+;;лякаєм;;UKVerb;
+;;лякали;;UKVerb;
+;;лякала;;UKVerb;
+;;виповню;;UKVerb;
+;;виповним;;UKVerb;
+;;виповниш;;UKVerb;
+;;виповните;;UKVerb;
+;;виповнять;;UKVerb;
+;;виповнило;;UKVerb;
+;;відпасти;;UKInf;
+;;відпаду;;UKVerb;
+;;відпадемо;;UKVerb;
+;;відпадем;;UKVerb;
+;;відпадеш;;UKVerb;
+;;відпадете;;UKVerb;
+;;відпаде;;UKVerb;
+;;відпав;;UKVerb;
+;;відпали;;UKVerb;
+;;відпало;;UKVerb;
+;;допустимо;;UKVerb;
+;;допущу;;UKVerb;
+;;допустим;;UKVerb;
+;;допустиш;;UKVerb;
+;;допустите;;UKVerb;
+;;подам;;UKVerb;
+;;подамо;;UKVerb;
+;;подаси;;UKVerb;
+;;подасте;;UKVerb;
+;;поясню;;UKVerb;
+;;поясним;;UKVerb;
+;;поясниш;;UKVerb;
+;;поясните;;UKVerb;
+;;пояснило;;UKVerb;
+;;разом;;UKAdvCon;
+;;нескладно;;UKAdv;
+;;підпишу;;UKVerb;
+;;підпишемо;;UKVerb;
+;;підпишем;;UKVerb;
+;;підпишеш;;UKVerb;
+;;підпишете;;UKVerb;
+;;підписало;;UKVerb;
+;;закуплені;;UKPartadjPart;UKAdjNomPl;
+;;оперативніше;;UKAdv;
+;;та/або;;UKConj;
+;;ослаблю;;UKVerb;
+;;ослабим;;UKVerb;
+;;ослабиш;;UKVerb;
+;;ослабите;;UKVerb;
+;;ослабти;;UKInf;
+;;ослабну;;UKVerb;
+;;ослабнемо;;UKVerb;
+;;ослабнем;;UKVerb;
+;;ослабнете;;UKVerb;
+;;ослабне;;UKVerb;
+;;ослабнуть;;UKVerb;
+;;ослаб;;UKVerb;
+;;ослабли;;UKVerb;
+;;ослабла;;UKVerb;
+;;ослабло;;UKVerb;
+;;зміцніти;;UKInf;
+;;зміцнію;;UKVerb;
+;;зміцнів;;UKVerb;
+;;зміцніє;;UKVerb;
+;;зміцнієм;;UKVerb;
+;;зміцніли;;UKVerb;
+;;зміцніла;;UKVerb;
+;;зміцніло;;UKVerb;
+;;збанкрутіти;;UKInf;
+;;збанкрутію;;UKVerb;
+;;збанкрутієм;;UKVerb;
+;;збанкрутіє;;UKVerb;
+;;збанкрутів;;UKVerb;
+;;збанкрутіли;;UKVerb;
+;;збанкрутіла;;UKVerb;
+;;збанкрутіло;;UKVerb;
+;;неможливе;;UKKAdj;
+;;неможлива;;UKKAdj;
+;;входити до складу;;UKInf;
+;;входжу до складу;;UKVerb;
+;;входимо до складу;;UKVerb;
+;;входим до складу;;UKVerb;
+;;входиш до складу;;UKVerb;
+;;входите до складу;;UKVerb;
+;;входить до складу;;UKVerb;
+;;входять до складу;;UKVerb;
+;;входив до складу;;UKVerb;
+;;входили до складу;;UKVerb;
+;;входила до складу;;UKVerb;
+;;входило до складу;;UKVerb;
+;;входивши до складу;;UKVerb;UKGerund;
+;;входим;;UKVerb;
+;;неможливі;;UKKAdj;
+;;самотужки;;UKAdv;
+;;почергово;;UKAdv;
+;;повечеряти;;UKInf;
+;;повечеряю;;UKVerb;
+;;повечеряєм;;UKVerb;
+;;повечеряєш;;UKVerb;
+;;повечеряєте;;UKVerb;
+;;повечеряла;;UKVerb;
+/**** Rewritten by DELVE, ;;не мало;;UKNegation;UKNegBegin;UKNe;-;UKVerb;
+;;не мало;;UKNegation;UKNegBegin;UKNe;Lit_не;-;UKVerb
+;;мало не;;UKNegation;UKNegBegin;UKNe;
+;;кидатися в очі;;UKInf;
+;;кидатись в очі;;UKInf;
+;;кидатимуся в очі;;UKVerb;
+;;кидатимусь в очі;;UKVerb;
+;;кидатимемося в очі;;UKVerb;
+;;кидатимемось в очі;;UKVerb;
+;;кидатимемся в очі;;UKVerb;
+;;кидатимешся в очі;;UKVerb;
+;;кидатиметеся в очі;;UKVerb;
+;;кидатиметесь в очі;;UKVerb;
+;;кидатиметься в очі;;UKVerb;
+;;кидатимуться в очі;;UKVerb;
+;;кидаюся в очі;;UKVerb;
+;;кидаюсь в очі;;UKVerb;
+;;кидаємося в очі;;UKVerb;
+;;кидаємось в очі;;UKVerb;
+;;кидаємся в очі;;UKVerb;
+;;кидаєшся в очі;;UKVerb;
+;;кидаєтеся в очі;;UKVerb;
+;;кидаєтесь в очі;;UKVerb;
+;;кидається в очі;;UKVerb;
+;;кидаються в очі;;UKVerb;
+;;кидаючись в очі;;UKVerb;UKGerund;
+;;кидався в очі;;UKVerb;
+;;кидавсь в очі;;UKVerb;
+;;кидалися в очі;;UKVerb;
+;;кидались в очі;;UKVerb;
+;;кидалася в очі;;UKVerb;
+;;кидалась в очі;;UKVerb;
+;;кидалося в очі;;UKVerb;
+;;кидалось в очі;;UKVerb;
+;;кидатимуся;;UKVerb;
+;;кидатимусь;;UKVerb;
+;;кидатимемся;;UKVerb;
+;;кидатимешся;;UKVerb;
+;;кидатиметесь;;UKVerb;
+;;кидаємся;;UKVerb;
+;;кидавсь;;UKVerb;
+;;привітно;;UKAdv;
+;;попасти;;UKInf;
+;;попаду;;UKVerb;
+;;попадемо;;UKVerb;
+;;попадем;;UKVerb;
+;;попадеш;;UKVerb;
+;;попадете;;UKVerb;
+;;попаде;;UKVerb;
+;;попав;;UKVerb;
+;;попало;;UKVerb;
+;;доїтиму;;UKVerb;
+;;доїтимем;;UKVerb;
+;;доїтиме;;UKVerb;
+;;дою;;UKVerb;
+;;доїмо;;UKVerb;
+;;доїм;;UKVerb;
+;;доїте;;UKVerb;
+;;доїв;;UKVerb;
+;;доїли;;UKVerb;
+;;доїло;;UKVerb;
+;;доїду;;UKVerb;
+;;доїдем;;UKVerb;
+;;доїдеш;;UKVerb;
+;;доїдете;;UKVerb;
+;;доїхало;;UKVerb;
+;;сподобаємся;;UKVerb;
+;;сподобавсь;;UKVerb;
+;;сподобались;;UKVerb;
+;;сподобалась;;UKVerb;
+;;сподобалось;;UKVerb;
+;;густи;;UKInf;
+;;густимемо;;UKVerb;
+;;гуду;;UKVerb;
+;;гудемо;;UKVerb;
+;;гудем;;UKVerb;
+;;гудеш;;UKVerb;
+;;гуде;;UKVerb;
+;;гув;;UKVerb;
+;;гули;;UKVerb;
+;;гула;;UKVerb;
+;;гуло;;UKVerb;
+;;приїдем;;UKVerb;
+;;приїдеш;;UKVerb;
+;;приїхало;;UKVerb;
+;;включу;;UKVerb;
+;;включим;;UKVerb;
+;;включите;;UKVerb;
+;;включило;;UKVerb;
+;;купуватиму;;UKVerb;
+;;купуватимем;;UKVerb;
+;;купую;;UKVerb;
+;;купуєм;;UKVerb;
+;;рекомендуватиму;;UKVerb;
+;;рекомендуватимем;;UKVerb;
+;;рекомендую;;UKVerb;
+;;рекомендуєм;;UKVerb;
+;;міцніше;;UKAdjAdvComp;
+;;почну;;UKVerb;
+;;почнем;;UKVerb;
+;;почнете;;UKVerb;
+;;плаватиму;;UKVerb;
+;;плаватимем;;UKVerb;
+;;плаваю;;UKVerb;
+;;плаваєм;;UKVerb;
+;;плавала;;UKVerb;
+;;виправдаєм;;UKVerb;
+;;виправдало;;UKVerb;
+;;найміть;;UKVerb;
+;;відвідуватимем;;UKVerb;
+;;відвідуєм;;UKVerb;
+;;повідомлю;;UKVerb;
+;;повідомимо;;UKVerb;
+;;повідомим;;UKVerb;
+;;повідомиш;;UKVerb;
+;;повідомите;;UKVerb;
+;;очікуватимем;;UKVerb;
+;;очікую;;UKVerb;
+;;очікуєм;;UKVerb;
+;;відповідатимем;;UKVerb;
+;;відповідаєм;;UKVerb;
+;;обовязково;;UKAdv;
+;;мало хто;;UKIndefpronPRCon;UKIndefpron;
+;;багато хто;;UKIndefpronPRCon;UKIndefpron;
+;;гірша;;UKAdj;UKAdjNomF;
+;;гіршу;;UKAdj;UKAdjAccF;
+;;гіршім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;посилив;;UKVerb;
+;;відхилив;;UKVerb;
+;;її/його;;UKPosspron;UKAdjGenMN;
+;;суворе;;UKAdj;UKAdjNomN;
+;;суворими;;UKAdj;UKAdjInstrPl;
+;;суворому;;UKAdj;UKAdjDatLocMN;UKAdjDatLoc;
+;;суворою;;UKAdj;UKAdjInstrF;
+;;сувору;;UKAdj;UKAdjAccF;
+;;суворім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;страшна;;UKAdj;UKAdjNomF;
+;;невесело;;UKAdv;
+;;володів;;UKVerb;
+
+
+
+
+;;зростати;;UKInf;
+;;смачно;;UKAdv;
+/**** Rewritten by DELVE, ;;а );;UKCon;-;UKBracket2;Punctuation;
+;;а );;UKCon;Lit_а;-;UKBracket2;Punctuation
+/**** Rewritten by DELVE, ;;б );;UKCon;-;UKBracket2;Punctuation;
+;;б );;UKCon;Lit_б;-;UKBracket2;Punctuation
+/**** Rewritten by DELVE, ;;в );;UKCon;-;UKBracket2;Punctuation;
+;;в );;UKCon;Lit_в;-;UKBracket2;Punctuation
+;;наявна;;UKAdj;UKAdjNomF;
+;;наявний;;UKAdj;UKAdjNomM;
+;;наявного;;UKAdj;UKAdjGenMN;
+;;наявною;;UKAdj;UKAdjInstrF;
+;;наявну;;UKAdj;UKAdjAccF;
+;;наявній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKAdjDatLoc;
+;;наявнім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;шумно;;UKAdv;
+;;хороше;;UKAdj;UKAdjNomN;
+;;хорошими;;UKAdj;UKAdjInstrPl;
+;;хорошою;;UKAdj;UKAdjInstrF;
+;;хорошої;;UKAdj;UKAdjGenF;
+;;хорошій;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKAdjDatLoc;
+;;хорошім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;класно;;UKAdv;
+;;будьте;;UKVerb;UKButi;UKAux;UKCopula;
+;;виконали;;UKVerb;
+;;свіже;;UKAdv;
+;;у цьому плані;;UKRAdv;
+;;, крім того ,;;UKAdvStruct;
+;;зненацька;;UKAdv;
+;;раз і назавжди;;UKAdvTemp;UKTime;
+;;наберем чинності;;UKVerb;
+;;набереш чинності;;UKVerb;
+;;наберемо чинності;;UKVerb;
+;;наберете чинності;;UKVerb;
+;;наберу чинності;;UKVerb;
+;;наберуть чинності;;UKVerb;
+;;набирав чинності;;UKVerb;
+;;набирала чинності;;UKVerb;
+;;набирали чинності;;UKVerb;
+;;набирало чинності;;UKVerb;
+;;набирати чинності;;UKInf;
+;;набиратиме чинності;;UKVerb;
+;;набиратимем чинності;;UKVerb;
+;;набиратимемо чинності;;UKVerb;
+;;набиратимете чинності;;UKVerb;
+;;набиратимеш чинності;;UKVerb;
+;;набиратиму чинності;;UKVerb;
+;;набиратимуть чинності;;UKVerb;
+;;набираю чинності;;UKVerb;
+;;набирають чинності;;UKVerb;
+;;набирає чинності;;UKVerb;
+;;набираєм чинності;;UKVerb;
+;;набираємо чинності;;UKVerb;
+;;набираєте чинності;;UKVerb;
+;;набираєш чинності;;UKVerb;
+;;набрав чинності;;UKVerb;
+;;набрала чинності;;UKVerb;
+;;набрали чинності;;UKVerb;
+;;набрало чинності;;UKVerb;
+;;набрати чинності;;UKInf;
+;;вводитися в дію;;UKInf;
+;;вводитись в дію;;UKInf;
+;;вводитиметься в дію;;UKVerb;
+;;вводитимуться в дію;;UKVerb;
+;;вводиться в дію;;UKVerb;
+;;вводяться в дію;;UKVerb;
+;;вводився в дію;;UKVerb;
+;;вводивсь в дію;;UKVerb;
+;;вводилися в дію;;UKVerb;
+;;вводились в дію;;UKVerb;
+;;вводилася в дію;;UKVerb;
+;;вводилась в дію;;UKVerb;
+;;вводилося в дію;;UKVerb;
+;;вводилось в дію;;UKVerb;
+;;на час;;UKPrep;
+;;своєю чергою;;UKAdvStruct;
+;;в складі;;UKPrep;
+;;тим паче;;UKRelpron;
+;;сприятливім;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;сприятливе;;UKAdj;UKAdjNomN;
+;;ні разу;;UKNegRel;UKNegBegin;UKNegation;
+;;вмить;;UKAdvTemp;UKTime;
+;;банити;;UKInf;
+;;ученими;;UKCon;UKConInstrPl;
+;;ученого;;UKCon;UKConGenMN;
+;;вчена;;UKCon;UKConNomF;
+;;вчене;;UKCon;UKConNomN;
+;;вчений;;UKCon;UKConNomM;
+;;вченому;;UKCon;UKConDatMN;UKConLocMN;
+;;вченою;;UKCon;UKConInstrF;
+;;вченої;;UKCon;UKConGenF;
+;;вчену;;UKCon;UKConAccF;
+;;вчені;;UKCon;UKConNomPl;
+;;вченій;;UKCon;UKConLocF;
+;;вченім;;UKCon;UKConDatPl;UKConInstrMN;
+;;учена;;UKCon;UKConNomF;
+;;учене;;UKCon;UKConNomN;
+;;учений;;UKCon;UKConNomM;
+;;ученому;;UKCon;UKConDatMN;UKConLocMN;
+;;ученою;;UKCon;UKConInstrF;
+;;ученої;;UKCon;UKConGenF;
+;;учену;;UKCon;UKConAccF;
+;;учені;;UKCon;UKConNomPl;
+;;ученій;;UKCon;UKConLocF;
+;;ученім;;UKCon;UKConDatPl;UKConInstrMN;
+;;еквівалент;;UKCon;UKConNomM;UKNoBCon;
+;;густій;;UKAdj;UKAdjDatLocF;UKAdjDatLoc;
+;;густе;;UKAdj;UKAdjNomN;
+;;густу;;UKAdj;UKAdjAccF;
+;;густі;;UKAdj;UKAdjNomPl;
+;;густим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;густім;;UKAdj;UKAdjDatLocMN;
+;;рожева;;UKAdj;UKAdjNomF;
+;;рожеву;;UKAdj;UKAdjAccF;
+;;рожеві;;UKAdj;UKAdjNomPl;
+;;рожевім;;UKAdj;UKAdjDatLocMN;
+;;перната;;UKAdj;UKAdjNomF;
+;;пернате;;UKAdj;UKAdjNomN;
+;;пернатий;;UKAdj;UKAdjNomM;
+;;пернатим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;пернатими;;UKAdj;UKAdjInstrPl;
+;;пернатому;;UKAdj;UKConDatMN;UKConLocMN;
+;;пернатою;;UKAdj;UKAdjInstrF;
+;;пернатої;;UKAdj;UKAdjGenF;
+;;пернату;;UKAdj;UKAdjAccF;
+;;пернаті;;UKAdj;UKAdjNomPl;
+;;пернатій;;UKAdj;UKAdjDatLocF;
+;;пернатім;;UKAdj;UKAdjDatLocMN;
+;;смертельно;;UKAdv;
+;;колгоспні;;UKAdj;UKAdjNomPl;
+;;водну;;UKAdj;UKAdjAccF;
+;;поодинці;;UKAdv;
+;;наприкінці;;UKCon;UKBeginTime;
+;;іржава;;UKAdj;UKAdjNomF;
+;;іржаве;;UKAdj;UKAdjNomN;
+;;іржавим;;UKAdj;UKAdjDatPl;UKAdjInstrMN;
+;;іржавих;;UKAdj;UKAdjGenPl;
+;;іржавою;;UKAdj;UKAdjInstrF;
+;;іржаву;;UKAdj;UKAdjAccF;
+;;іржаві;;UKAdj;UKAdjNomPl;
+;;іржавій;;UKAdj;UKAdjDatLocF;
+;;іржавім;;UKAdj;UKAdjDatLocMN;
+;;прохолодно;;UKAdv;
+;;усяка;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;усяке;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;усякими;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;усякий;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;усякій;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;усякі;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
+;;усякої;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
+;;усяким;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;усякім;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;усякого;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
+;;усяку;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
+;;усяких;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
+;;усякою;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
+;;як це не;;UKRAdv;
+;;не так;;UKNe;UKNegation;UKNegBegin;
+;;не так вже;;UKNe;UKNegation;UKNegBegin;
+;;не так вже й;;UKNe;UKNegation;UKNegBegin;
+;;неповнолітнього;;UKAdjCon;UKAdjGenMN;
+;;неповнолітньому;;UKAdjCon;UKAdjDatLocMN;
+;;неповнолітньою;;UKAdjCon;UKAdjInstrF;
+;;неповнолітньої;;UKAdjCon;UKAdjGenF;
+;;неповнолітнім;;UKAdjCon;UKAdjDatPl;UKAdjInstrMN;
+;;неповнолітніми;;UKAdjCon;UKAdjInstrPl;
+;;без урахування;;UKPrep;UKNegPrep;UKNegation;
+;;номер;;UKCon;UKConNomM;UKNoBCon;UKJoinWithNumber;
+;;початку;;UKCon;UKBeginTime;UKConGenMN;UKConDatMN;UKConLocMN;
+;;початок;;UKCon;UKBeginTime;UKConNomM;
+;;початком;;UKCon;UKBeginTime;UKConInstrMN;
+;;кінець;;UKCon;UKBeginTime;UKConNomM;
+;;кінцю;;UKCon;UKBeginTime;UKConDatMN;
+;;кінцем;;UKCon;UKBeginTime;UKConInstrMN;
+;;кінці;;UKCon;UKBeginTime;UKConLocMN;
+;;останнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;останньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;останньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;останньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;останнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;останній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;останнім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;останніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;останніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;місяців;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;січнем;;UKMonth;UKCon;UKTime;UKConInstrMN;
+;;жовтнем;;UKMonth;UKCon;UKTime;UKConInstrMN;
+;;найближча;;UKAdj;UKBeginTime;UKAdjNomF;
+;;найближче;;UKAdj;UKBeginTime;UKAdjNomN;
+;;найближчий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;найближчим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;найближчими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;найближчих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;найближчого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;найближчому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;найближчою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;найближчої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;найближчу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;найближчі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;найближчій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;найближчім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;середина;;UKCon;UKConNomF;UKBeginTime;
+;;середини;;UKCon;UKConGenF;UKBeginTime;
+;;середині;;UKCon;UKConLocF;UKBeginTime;
+;;середину;;UKCon;UKConAccF;UKBeginTime;
+;;серединою;;UKCon;UKConInstrF;UKBeginTime;
+;;число;;UKCon;UKConNomN;UKPartTime;
+;;числа;;UKCon;UKConGenMN;UKConNomPl;UKPartTime;
+;;чисел;;UKCon;UKConGenPl;UKPartTime;
+;;числу;;UKCon;UKConDatMN;UKPartTime;
+;;числам;;UKCon;UKConDatPl;UKPartTime;
+;;числом;;UKCon;UKConInstrMN;UKPartTime;
+;;числами;;UKCon;UKConInstrPl;UKPartTime;
+;;числі;;UKCon;UKConLocMN;UKPartTime;
+;;числах;;UKCon;UKConLocPl;UKPartTime;
+;;половині;;UKCon;UKConLocF;UKNum;UKPartTime;
+;;пори;;UKCon;UKConGenF;
+;;пору;;UKCon;UKConAccF;
+;;часу;;UKCon;UKConGenMN;UKConDatMN;UKTimeConceptAmbiguous;
+;;часи;;UKCon;UKConNomPl;UKTimeConceptAmbiguous;
+;;часом;;UKCon;UKConInstrMN;UKTimeConceptAmbiguous;
+;;за час;;UKPrep;
+;;теплу;;UKAdjCon;UKAdjAccF;UKConDatMN;
+;;дружню;;UKAdj;UKAdjAccF;
+/**** Rewritten by DELVE, ;;з того часу;;UKPrep;-;UKAdvTemp;UKTime;Join;
+;;з того часу;;UKPrep;Lit_з;-;UKAdvTemp;UKTime;Join
+;;до того часу;;UKPrep;-;UKAdvTemp;UKTime;Join;
+;;теперішній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;теперішня;;UKAdj;UKAdjNomF;UKBeginTime;
+;;теперішнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;теперішні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;теперішнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;теперішньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;теперішніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;теперішньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;теперішнім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;теперішню;;UKAdj;UKAdjAccF;UKBeginTime;
+;;теперішніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;якi-то;latin character;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
+;;яка-то;;UKIndefpronPRCon;UKIndefpron;UKAdjNomF;
+;;яке-то;;UKIndefpronPRCon;UKIndefpron;UKAdjNomN;
+;;якими-то;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrPl;
+;;який-то;;UKIndefpronPRCon;UKIndefpron;UKAdjNomM;
+;;якій-то;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocF;
+;;які-то;;UKIndefpronPRCon;UKIndefpron;UKAdjNomPl;
+;;якої-то;;UKIndefpronPRCon;UKIndefpron;UKAdjGenF;
+;;яким-то;;UKIndefpronPRCon;UKIndefpron;UKAdjDatPl;UKAdjInstrMN;
+;;якім-то;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;якого-то;;UKIndefpronPRCon;UKIndefpron;UKAdjGenMN;
+;;яку-то;;UKIndefpronPRCon;UKIndefpron;UKAdjAccF;
+;;якому-то;;UKIndefpronPRCon;UKIndefpron;UKAdjDatLocMN;
+;;яких-то;;UKIndefpronPRCon;UKIndefpron;UKAdjGenPl;
+;;якою-то;;UKIndefpronPRCon;UKIndefpron;UKAdjInstrF;
+;;щодва;;UKCon;UKNum;
+;;чотирихсоті;;UKCon;UKNum;
+;;рр.;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;pp.;;UKYear;UKCon;UKTimeConcept;UKAcro;
+;;третини;;UKCon;UKPartTime;UKConGenF;UKConNomPl;
+;;третина;;UKCon;UKPartTime;UKConNomF;
+;;третині;;UKCon;UKPartTime;UKConLocF;
+;;третину;;UKCon;UKPartTime;UKConAccF;
+;;третиною;;UKCon;UKPartTime;UKConInstrF;
+;;чверть;;UKCon;UKPartTime;UKConNomF;UKConAccF;
+;;чверті;;UKCon;UKPartTime;UKConGenF;UKConLocF;
+;;чвертю;;UKCon;UKPartTime;UKConInstrF;
+;;десятиліття;;UKCon;UKTimeConcept;UKConNomN;UKConGenMN;UKConNomPl;UKTime;
+;;десятиліттю;;UKCon;UKTimeConcept;UKConDatMN;UKConLocMN;UKTime;
+;;десятиліттям;;UKCon;UKTimeConcept;UKConDatPl;UKConInstrMN;UKTime;
+;;десятиліттями;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;десятилітті;;UKCon;UKTimeConcept;UKConLocMN;UKTime;
+;;десятиліттях;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;тисячоліттю;;UKCon;UKTimeConcept;UKConDatMN;UKConLocMN;UKTime;
+;;тисячоліттям;;UKCon;UKTimeConcept;UKConDatPl;UKConInstrMN;UKTime;
+;;тисячоліттями;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;тисячоліттях;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;осені;;UKCon;UKTimeConcept;UKTime;UKConGenF;UKConNomPl;UKConLocF;
+;;зима;;UKCon;UKTimeConcept;UKTime;UKConNomF;
+;;весна;;UKCon;UKTimeConcept;UKTime;UKConNomF;
+;;весні;;UKCon;UKTimeConcept;UKTime;UKConLocF;
+;;літі;;UKCon;UKTimeConcept;UKTime;UKConLocMN;
+;;зимі;;UKCon;UKTimeConcept;UKTime;UKConLocF;
+;;десятка;;UKCon;UKNum;UKConGenMN;
+;;десятком;;UKCon;UKNum;UKConInstrMN;
+;;десятків;;UKCon;UKNum;UKConGenPl;
+;;десятками;;UKCon;UKNum;UKConInstrPl;
+;;волога;;UKAdj;UKAdjNomF;
+;;календарний рік;;UKCon;UKTimeConcept;UKYear;UKConNomM;UKTime;
+;;календарним роком;;UKCon;UKTimeConcept;UKYear;UKConInstrMN;UKTime;
+;;календарного року;;UKCon;UKTimeConcept;UKYear;UKConGenMN;UKTime;
+;;календарному року;;UKCon;UKTimeConcept;UKYear;UKConDatMN;UKTime;
+;;календарному році;;UKCon;UKTimeConcept;UKYear;UKConLocMN;UKTime;
+;;попередній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;попередня;;UKAdj;UKAdjNomF;UKBeginTime;
+;;попереднє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;попередні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;попереднього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;попередньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;попередніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;попередньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;попереднім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;попередню;;UKAdj;UKAdjAccF;UKBeginTime;
+;;попередніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;попередньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;поточна;;UKAdj;UKBeginTime;UKAdjNomF;
+;;поточне;;UKAdj;UKBeginTime;UKAdjNomN;
+;;поточний;;UKAdj;UKBeginTime;UKAdjNomM;
+;;поточним;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;поточними;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;поточних;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;поточного;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;поточному;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;поточною;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;поточної;;UKAdj;UKBeginTime;UKAdjGenF;
+;;поточну;;UKAdj;UKBeginTime;UKAdjAccF;
+;;поточні;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;поточній;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;поточнім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;ріках;;UKYear;UKCon;UKTimeConcept;UKConLocPl;
+;;дня;;UKCon;UKTimeConcept;UKConGenMN;UKTime;
+;;днем;;UKCon;UKTimeConcept;UKConInstrMN;UKTime;
+;;дні;;UKCon;UKTimeConcept;UKConLocMN;UKConNomPl;UKTime;
+;;дню;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;дневі;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;днів;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;дням;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;днями;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;днях;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;два-три;;UKCon;UKNum;UKConNomPl;UKTime;
+;;ніч;;UKCon;UKTimeConcept;UKConNomF;UKConAccF;UKTime;
+;;ночі;;UKCon;UKTimeConcept;UKConGenF;UKConNomPl;UKTime;
+;;ніччю;;UKCon;UKTimeConcept;UKConInstrF;UKTime;
+;;ночей;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;ночам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;ночами;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;ночах;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;тижнів;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;тижням;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;тижнями;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;тижнях;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;місяцям;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;місяцями;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;місяцях;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;календарних днів;;UKCon;UKTimeConcept;UKYear;UKConGenPl;UKTime;
+;;календарного дня;;UKCon;UKTimeConcept;UKYear;UKConGenMN;UKTime;
+;;пару;;UKCon;UKNum;UKConAccF;UKConGenMN;UKConDatMN;
+;;сотень;;UKCon;UKNum;UKConGenPl;
+;;літнє;;UKAdjCon;UKAdjNomN;UKBeginTime;
+;;літнього;;UKAdjCon;UKAdjGenMN;UKBeginTime;
+;;літньої;;UKAdjCon;UKAdjGenF;UKBeginTime;
+;;літніх;;UKAdjCon;UKAdjGenPl;UKBeginTime;
+;;літньому;;UKAdjCon;UKAdjDatLocMN;UKBeginTime;
+;;літнім;;UKAdjCon;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;літню;;UKAdjCon;UKAdjAccF;UKBeginTime;
+;;літніми;;UKAdjCon;UKAdjInstrPl;UKBeginTime;
+;;літньою;;UKAdjCon;UKAdjInstrF;UKBeginTime;
+;;осінній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;осіння;;UKAdj;UKAdjNomF;UKBeginTime;
+;;осіннє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;осінні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;осіннього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;осінньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;осінніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;осінньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;осіннім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;осінніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;осінньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;зимова;;UKAdj;UKBeginTime;UKAdjNomF;
+;;зимове;;UKAdj;UKBeginTime;UKAdjNomN;
+;;зимовий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;зимовим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;зимовими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;зимових;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;зимового;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;зимовому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;зимовою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;зимової;;UKAdj;UKBeginTime;UKAdjGenF;
+;;зимові;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;зимовій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;зимовім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;весняна;;UKAdj;UKBeginTime;UKAdjNomF;
+;;весняне;;UKAdj;UKBeginTime;UKAdjNomN;
+;;весняний;;UKAdj;UKBeginTime;UKAdjNomM;
+;;весняним;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;весняними;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;весняних;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;весняного;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;весняному;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;весняною;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;весняної;;UKAdj;UKBeginTime;UKAdjGenF;
+;;весняні;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;весняній;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;веснянім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;весняну;;UKAdj;UKBeginTime;UKAdjAccF;
+;;година;;UKCon;UKTimeConcept;UKConNomF;UKTime;
+;;години;;UKCon;UKTimeConcept;UKConGenF;UKConNomPl;UKTime;
+;;годині;;UKCon;UKTimeConcept;UKConLocF;UKTime;
+;;годину;;UKCon;UKTimeConcept;UKConAccF;UKTime;
+;;годиною;;UKCon;UKTimeConcept;UKConInstrF;UKTime;
+;;годин;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;годинам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;годинами;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;годинах;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;хвилина;;UKCon;UKTimeConcept;UKConNomF;UKTime;
+;;хвилини;;UKCon;UKTimeConcept;UKConGenF;UKConNomPl;UKTime;
+;;хвилині;;UKCon;UKTimeConcept;UKConLocF;UKTime;
+;;хвилину;;UKCon;UKTimeConcept;UKConAccF;UKTime;
+;;хвилиною;;UKCon;UKTimeConcept;UKConInstrF;UKTime;
+;;хвилин;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;хвилинам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;хвилинами;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;хвилинах;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;вечора;;UKCon;UKTimeConcept;UKConGenMN;UKTime;
+;;вечір;;UKCon;UKTimeConcept;UKConNomM;UKTime;
+;;вечору;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;вечорові;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;вечором;;UKCon;UKTimeConcept;UKConInstrMN;UKTime;
+;;вечорі;;UKCon;UKTimeConcept;UKConLocMN;UKTime;
+;;вечори;;UKCon;UKTimeConcept;UKConNomPl;UKTime;
+;;вечорів;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;вечорам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;вечорами;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;вечорах;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;ранок;;UKCon;UKTimeConcept;UKConNomM;UKTime;
+;;ранку;;UKCon;UKTimeConcept;UKConGenMN;UKConDatMN;UKConLocMN;UKTime;
+;;ранкові;;UKCon;UKTimeConcept;UKConDatMN;UKTime;
+;;ранком;;UKCon;UKTimeConcept;UKConInstrMN;UKTime;
+;;ранки;;UKCon;UKTimeConcept;UKConNomPl;UKTime;
+;;ранків;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;ранкам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;ранками;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;ранках;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;липнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;липневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;липневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;липневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;липневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;липневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;липневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;липневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;липневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;липневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;липневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;липневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;липневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;липневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;червнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;червневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;червневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;червневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;червневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;червневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;червневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;червневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;червневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;червневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;червневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;червневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;червневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;червневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;січнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;січневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;січневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;січневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;січневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;січневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;січневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;січневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;січневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;січневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;січневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;січневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;січневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;січневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;люта;;UKAdj;UKBeginTime;UKAdjNomF;
+;;лютими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;лютих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;лютою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;лютої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;люті;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;лютій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;лютім;;UKCon;UKMonth;UKConLocMN;UKTime;
+;;люту;;UKAdj;UKBeginTime;UKAdjAccF;
+;;березнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;березневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;березневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;березневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;березневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;березневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;березневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;березневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;березневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;березневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;березневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;березневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;березневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;березневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;квітнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;квітневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;квітневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;квітневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;квітневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;квітневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;квітневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;квітневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;квітневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;квітневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;квітневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;квітневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;квітневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;квітневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;травнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;травневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;травневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;травневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;травневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;травневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;травневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;травневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;травневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;травневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;травневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;травневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;травневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;травневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;серпнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;серпневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;серпневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;серпневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;серпневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;серпневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;серпневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;серпневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;серпневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;серпневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;серпневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;серпневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;серпневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;серпневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;вереснева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;вересневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;вересневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;вересневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;вересневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;вересневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;вересневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;вересневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;вересневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;вересневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;вересневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;вересневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;вересневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;вересневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;жовтнева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;жовтневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;жовтневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;жовтневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;жовтневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;жовтневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;жовтневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;жовтневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;жовтневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;жовтневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;жовтневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;жовтневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;жовтневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;жовтневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;листопадова;;UKAdj;UKBeginTime;UKAdjNomF;
+;;листопадове;;UKAdj;UKBeginTime;UKAdjNomN;
+;;листопадовий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;листопадовим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;листопадовими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;листопадових;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;листопадового;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;листопадовому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;листопадовою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;листопадової;;UKAdj;UKBeginTime;UKAdjGenF;
+;;листопадові;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;листопадовій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;листопадовім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;листопадову;;UKAdj;UKBeginTime;UKAdjAccF;
+;;груднева;;UKAdj;UKBeginTime;UKAdjNomF;
+;;грудневе;;UKAdj;UKBeginTime;UKAdjNomN;
+;;грудневий;;UKAdj;UKBeginTime;UKAdjNomM;
+;;грудневим;;UKAdj;UKBeginTime;UKAdjInstrMN;UKAdjDatPl;
+;;грудневими;;UKAdj;UKBeginTime;UKAdjInstrPl;
+;;грудневих;;UKAdj;UKBeginTime;UKAdjGenPl;
+;;грудневого;;UKAdj;UKBeginTime;UKAdjGenMN;
+;;грудневому;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;грудневою;;UKAdj;UKBeginTime;UKAdjInstrF;
+;;грудневої;;UKAdj;UKBeginTime;UKAdjGenF;
+;;грудневі;;UKAdj;UKBeginTime;UKAdjNomPl;
+;;грудневій;;UKAdj;UKBeginTime;UKAdjDatLocF;
+;;грудневім;;UKAdj;UKBeginTime;UKAdjDatLocMN;
+;;грудневу;;UKAdj;UKBeginTime;UKAdjAccF;
+;;квартал;;UKCon;UKTimeConcept;UKConNomM;
+;;кварталу;;UKCon;UKTimeConcept;UKConGenMN;UKConDatMN;
+;;кварталові;;UKCon;UKTimeConcept;UKConDatMN;
+;;кварталом;;UKCon;UKTimeConcept;UKConInstrMN;
+;;кварталі;;UKCon;UKTimeConcept;UKConLocMN;
+;;квартали;;UKCon;UKTimeConcept;UKConNomPl;
+;;кварталів;;UKCon;UKTimeConcept;UKConGenPl;
+;;кварталам;;UKCon;UKTimeConcept;UKConDatPl;
+;;кварталами;;UKCon;UKTimeConcept;UKConInstrPl;
+;;кварталах;;UKCon;UKTimeConcept;UKConLocPl;
+;;україна;;UKCon;UKConNomF;
+;;секунда;;UKCon;UKTimeConcept;UKConNomF;UKTime;
+;;секунди;;UKCon;UKTimeConcept;UKConGenF;UKConNomPl;UKTime;
+;;секунді;;UKCon;UKTimeConcept;UKConLocF;UKTime;
+;;секунду;;UKCon;UKTimeConcept;UKConAccF;UKTime;
+;;секундою;;UKCon;UKTimeConcept;UKConInstrF;UKTime;
+;;секунд;;UKCon;UKTimeConcept;UKConGenPl;UKTime;
+;;секундам;;UKCon;UKTimeConcept;UKConDatPl;UKTime;
+;;секундами;;UKCon;UKTimeConcept;UKConInstrPl;UKTime;
+;;секундах;;UKCon;UKTimeConcept;UKConLocPl;UKTime;
+;;до н. е;;UKCon;UKEndTime;UKEndDate;
+;;до н. е.;;UKCon;UKEndTime;UKEndDate;
+;;до р. х.;;UKCon;UKEndTime;UKEndDate;
+;;до р. х;;UKCon;UKEndTime;UKEndDate;
+;;н. е.;;UKCon;UKEndTime;UKEndDate;
+;;н. е;;UKCon;UKEndTime;UKEndDate;
+;;до нашої ери;;UKCon;UKEndTime;UKEndDate;
+/**** Rewritten by DELVE, ;;не раніш як;;UKNegCon;UKNegation;UKTime;Join;-;UKConj;
+;;не раніш як;;UKNegCon;UKNegation;UKTime;Join;-;UKConj;Lit_як
+/**** Rewritten by DELVE, ;;не пізніш як;;UKNegCon;UKNegation;UKTime;Join;-;UKConj;
+;;не пізніш як;;UKNegCon;UKNegation;UKTime;Join;-;UKConj;Lit_як
+;;більша;;UKAdj;UKAdjNomF;UKAdjComp;
+;;більший;;UKAdj;UKAdjNomM;UKAdjComp;
+;;більшим;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKAdjComp;
+;;більшими;;UKAdj;UKAdjInstrPl;UKAdjComp;
+;;більших;;UKAdj;UKAdjGenPl;UKAdjComp;
+;;більшого;;UKAdj;UKAdjGenMN;UKAdjComp;
+;;більшому;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;більшою;;UKAdj;UKAdjInstrF;UKAdjComp;
+;;більшої;;UKAdj;UKAdjGenF;UKAdjComp;
+;;більші;;UKAdj;UKAdjNomPl;UKAdjComp;
+;;більшій;;UKAdj;UKAdjDatLocF;UKAdjComp;
+;;більшім;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;більшу;;UKAdj;UKAdjAccF;UKAdjComp;
+;;менших;;UKAdj;UKAdjGenPl;UKAdjComp;
+;;меншого;;UKAdj;UKAdjGenMN;UKAdjComp;
+;;меншому;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;меншім;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;раз поспіль;;UKTimes;UKRaz;UKCon;
+;;довша;;UKAdj;UKAdjNomF;UKAdjComp;
+;;довший;;UKAdj;UKAdjNomM;UKAdjComp;
+;;довшим;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKAdjComp;
+;;довшими;;UKAdj;UKAdjInstrPl;UKAdjComp;
+;;довших;;UKAdj;UKAdjGenPl;UKAdjComp;
+;;довшого;;UKAdj;UKAdjGenMN;UKAdjComp;
+;;довшому;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;довшою;;UKAdj;UKAdjInstrF;UKAdjComp;
+;;довшої;;UKAdj;UKAdjGenF;UKAdjComp;
+;;довші;;UKAdj;UKAdjNomPl;UKAdjComp;
+;;довшій;;UKAdj;UKAdjDatLocF;UKAdjComp;
+;;довшім;;UKAdj;UKAdjDatLocMN;UKAdjComp;
+;;довшу;;UKAdj;UKAdjAccF;UKAdjComp;
+;;до нової ери;;UKCon;UKEndTime;UKEndDate;
+;;нової ери;;UKCon;UKEndTime;UKEndDate;
+;;сьогоднішній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;сьогоднішня;;UKAdj;UKAdjNomF;UKBeginTime;
+;;сьогоднішнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;сьогоднішні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;сьогоднішнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;сьогоднішньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;сьогоднішніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;сьогоднішньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;сьогоднішнім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;сьогоднішніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;сьогоднішньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;вчорашній;;UKAdj;UKAdjNomM;UKAdjDatLocF;UKBeginTime;
+;;вчорашня;;UKAdj;UKAdjNomF;UKBeginTime;
+;;вчорашнє;;UKAdj;UKAdjNomN;UKBeginTime;
+;;вчорашні;;UKAdj;UKAdjNomPl;UKBeginTime;
+;;вчорашнього;;UKAdj;UKAdjGenMN;UKBeginTime;
+;;вчорашньої;;UKAdj;UKAdjGenF;UKBeginTime;
+;;вчорашніх;;UKAdj;UKAdjGenPl;UKBeginTime;
+;;вчорашньому;;UKAdj;UKAdjDatLocMN;UKBeginTime;
+;;вчорашнім;;UKAdj;UKAdjInstrMN;UKAdjDatPl;UKBeginTime;
+;;вчорашніми;;UKAdj;UKAdjInstrPl;UKBeginTime;
+;;вчорашньою;;UKAdj;UKAdjInstrF;UKBeginTime;
+;;каже;;UKVerb;

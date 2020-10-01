@@ -5,814 +5,2354 @@
 /*==================================================
 
 920;1;CapitalInitial;^UKCapitalInitial;
+
+/*		920. Українка багато перекладала.
+
 1126;1;CapitalMixed;^UKCapitalMixed;
+
+/*		1126. каналу Дунай-Чорне море.
+
 1158;1;CapitalAll;^UKCapitalAll;rewriting mandatory label to a language-specific label
+
+/*		1158. ПІБ.
+
 921;1;Punctuation;UKPunctuation;
 
+/*		921. які мають лише гострий кінець (шило) або й гостре лезо (ніж).
 /*Rewrite user dictionary labels
 /*==============================
 
 926;1;UDNegation;+UKNegation+UKNegBegin;
+
+/*		926.UD. якщо він заперечує проти адміністративного позову.
+
 927;1;UDPosSentiment;+UKPosSentiment+UKPosSentimentBegin;
+
+/*		927.UD. Психологічно команда почувається добре.
+
 928;1;UDNegSentiment;+UKNegSentiment+UKNegSentimentBegin;
+
+/*		928.UD. через погано розвинену інфраструктуру, держава була не спроможна оплачувати транспортування вантажів.
+
 923;1;UDConcept;UKCon;
+
+/*		923.UD. Ті, хто працює, мають право на страйк для захисту своїх економічних і соціальних інтересів.
+
 924;1;UDRelation;UKRelation;
+
+/*		924.UD. наскільки людина знайома і як ставиться до життя українського народу.
+
 925;1;UDNonRelevant;UKNonRelevant;
 
+/*		925.UD. Більшість відомостей про мову розглядали крізь призму чужоземних концепцій.
 /*PHASE 38: prepare negation
 /* = = = = = = = = = = = = =
+/*adverb of time or degree
+/*========================
+
+1342;38;UKAdvTemp+UKAdvdegree|UKPrep;UKRAdv-UKTime|*;
+
+/*		1342. Еритрозухіди, або «червоні крокодили», були істотами, які жили невдовзі після масового пермського вимирання 252 мільйони років тому.
+
+1343;38;UKAdvTemp+UKAdvdegree;-UKAdvdegree;
+
+/*		1343. Коли посудину виставляли на сонячне світло, поверхня суміші одразу чорніла.
 /*join negation markers
 /*=====================
 
 1302;38;UKNe|UKNe;UKNe|+Join;
+
+/*		1302. Ось ці питання треба ставити, бо вибори чи референдум — це аж ніяк не самоціль.
+
 1201;38;UKAdvdegree|UKNe;JoinReverse|+UKNe;
-506;38;UKHyphen|UKNe|UKCon:UKAdj:UKIndefpron;UKConj|^UKNegRel|*;'ne' between dash and noun becomes relatio
+
+/*		1201. регулярно повторюваних бумів і депресій практично не існувало.
+
+1419;38;"це"|"не"|*UKAdv|UKComma:SEnd;*|*|UKCAdv|*;
+
+/*		1419. Кіно існує більше століття, проте це не довго, якщо порівнювати з іншими видами мистецтва.
+
+1418;38;UKHyphen|UKTse|UKNe|.UKAdv:UKPosspron:UKIndefpron|*UKCon:UKAdj;UKConj|JoinReverse|UKNegRel|*|*;'tse ne' between dash and noun becomes relation
+
+/*		1418. хлопчик - це не просто шикарний бариста.
+
+506;38;UKHyphen|UKNe|UKCon:UKAdj:UKIndefpron;UKConj|^UKNegRel|*;'ne' between dash and noun becomes relation
+
+/*		506. Це - не жінка, яка пише музику, це - композитор, який є жінкою.
+
 1214;38;UKNe|UKVsjeGen;UKNegCon+UKNegIndefpronCon|+Join;
+
+/*		1214. що на ринку можливе перевиробництво якогось одного товару, а не усіх товарів одночасно.
+
 1203;38;UKNe|UKVsje;UKBCon+UKNegIndefpronCon+UKNegBCon|+Join;
+
+/*		1203. Далеко не всі результати творчої діяльності стають об'єктами інтелектуальної власності.
+
 562;38;UKAdvdegree:UKAdvdegNR|UKNiyaki;JoinReverse|+UKBCon+UKNegBCon;adverb of degree plus Niyaki are joined to negation marker as beginconcept
+
+/*		562. з іншого боку, навіть досить ніякий текст можна прочитати так, що розіпре народ. не відбувається майже ніяких значних перетворень.
+
 1154;38;UKAdvdegree:UKAdvdegNR|UKNegPR;JoinReverse|+UKNegPR;
 
+/*		1154. Майже нічого не читається звичайним розмовним голосом.
+
+1417;38;UKTse|UKNe|^UKVerb:UKInf;JoinReverse|UKNegRel|*;
+
+/*		1417. Свобода творця це не служба народові і його утилітарним цілям. NOT. це не виключає можливості додаткового забезпечення заставою.
 /*add label to negation marker for later processing of negated indefinite pronoun
 /*===============================================================================
 
-1333;38;UKNe|UKIndefpronPRCon;+UKNegIndefpronCon|*;
+1333;38;UKNe|UKIndefpronPRCon:UKMalo;+UKNegIndefpronCon|*;
 
+/*		1333. При цьому не всяка зовнішня дія викликає відчуття: для цього вона повинна досягти певної сили.
 /*PHASE 39: Case specific labels for adjectives and nouns
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 /*Preparation: add general labels to specific case labels
 /*=======================================================
 
 1287;39;UKConInstrMN:UKConInstrF:UKConInstrPl;+UKConInstr;
+
+/*		1287. згідно з абзацом третім частини першої статті 40.
+
 1288;39;UKAdjInstrMN:UKAdjInstrF:UKAdjInstrPl;+UKAdjInstr;
+
+/*		1288. згідно з абзацом третім частини першої статті 40.
+
 1289;39;UKAdjGenMN:UKAdjGenF:UKAdjGenPl;+UKAdjGen;
+
+/*		1289. вирішення деяких гострих проблем.
+
 1290;39;UKConGenMN:UKConGenF:UKConGenPl;+UKConGen;
+
+/*		1290. 54 секунди.
+
 1293;39;UKAdjDatLocF:UKAdjDatLocMN;+UKAdjDatLoc;
 
-/*Preparation: disambiguate adjcon
-/*================================
+/*		1293. Є всі підстави вважати, що істотно допоміг молодій сім'ї почати свою справу свекор.
+/*Preparation: disambiguate adjcon and adjverb
+/*============================================
 
 1296;39;UKAdjCon+UKAdjNomPl|UKConNomPl;-UKAdjCon+UKAdj|*;
+
+/*		1296. За таких обставин судові акти не можуть залишатися без змін.
+
 1314;39;UKAdjNomF|UKAdjCon+UKConNomF;*|-UKAdjCon-UKAdjNomF+UKCon;
 
+/*		1314. верховна рада.
+
+1517;39;"мала"|UKConNomF;UKAdj+UKAdjNomF|*;
+
+/*		1517. Мала Рада.
+/*Preparation: disambiguate nouns with ambiguous endings
+/*======================================================
+
+1345;39;UKAdjGenPl|UKConInstrMN+UKConGenPl;*|-UKConInstrMN;
+
+/*		1345. комплексу взаємопов'язаних систем.
+/*Preparation: disambiguate participle
+/*====================================
+
+1363;39;UKTse|.UKButi|UKPartadjPart+UKAdjNomM|UKCon+UKConNomM;*|*|UKAdj+UKAdjNomM|*;
+
+/*		1363. це буде відкритий простір з дерев'яною стелею і мансардними вікнами.
+
+1389;39;UKTse|.UKButi|UKPartadjPart+UKAdjNomF|UKCon+UKConNomF;*|*|UKAdj+UKAdjNomF|*;
+
+/*		1389. це буде ранена женщина.
+
+1390;39;UKTse|.UKButi|UKPartadjPart+UKAdjNomN|UKCon+UKConNomN;*|*|UKAdj+UKAdjNomN|*;
+
+/*		1390. це буде украдене явище.
+
+1391;39;UKTse|.UKButi|UKPartadjPart+UKAdjNomPl|UKCon+UKConNomPl;*|*|UKAdj+UKAdjNomPl|*;
+
+/*		1391. це буде криті автостоянки.
 /*Preparation: add NoBCon for noun+adjective in same case
 /*=======================================================
 
-1273;39;UKConNomN|UKAdjNomN|^UKConNomN;*|+UKNoBCon|*;Adj follows Con in same case
-1277;39;UKConNomM|UKAdjNomM|^UKConNomM;*|+UKNoBCon|*;Adj follows Con in same case
-1278;39;UKConNomF|UKAdjNomF|^UKConNomF;*|+UKNoBCon|*;Adj follows Con in same case
-1274;39;UKConNomPl|UKAdjNomPl|^UKConNomPl;*|+UKNoBCon|*;Adj follows Con in same case
-1275;39;UKConAccF|UKAdjAccF|^UKConAccF;*|+UKNoBCon|*;Adj follows Con in same case
+1273;39;UKConNomN|UKAdjNomN+^UKIndefpron|^UKConNomN;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1273. твердження невірне. NOT. Тому словосполучення «адміністративне право» цілком закономірно можна трактувати.
+
+1277;39;UKConNomM|UKAdjNomM+^UKIndefpron|^UKConNomM;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1277. метод диспозитивний. NOT. повертає в людський соціум біологічний відбір.
+
+1278;39;UKConNomF|UKAdjNomF+^UKIndefpron|^UKConNomF;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1278. подія визначна. NOT. Викладені у касаційній скарзі доводи скаржника судова колегія вважає непереконливими.
+
+1274;39;UKConNomPl|UKAdjNomPl+^UKIndefpron|^UKConNomPl;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1274. льодобури звичайні не підуть в перемерзлу зимову кригу. NOT. протягом тридцяти днів однієї чергової сесії пленарні засідання не можуть розпочатися. NOT. Якщо учені всі свої перемоги здобули в рамках однієї кампанії.
+
+1397;39;UKConLocF|UKAdjDatLocF+^UKIndefpron|^UKConLocF:UKConNomM;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1397. зазначеної в частині першій статті 40 Закону.
+
+1275;39;UKConAccF|UKAdjAccF+^UKIndefpron|^UKConAccF;*|+UKNoBCon|*;Adj follows Con in same case
+
+/*		1275. діяльність господарську.
+
 1286;39;UKConInstrMN|UKAdjInstrMN;*|+UKNoBCon;Adj follows Con in same case
+
+/*		1286. згідно з абзацом третім частини першої статті 40.
+
 1291;39;UKConInstrF|UKAdjInstrF;*|+UKNoBCon;Adj follows Con in same case
+
+/*		1291. передбаченим частиною першою цієї статті.
+
 1283;39;UKAdjNomF|*UKAdjInstr:UKConInstr|UKAdjNomF:UKConNomF;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
+
+/*		1283. відбулася ініційована першою половиною мирова маніфестація.
+
 1280;39;UKAdjNomM|*UKAdjInstr:UKConInstr|UKAdjNomM:UKConNomM;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
+
+/*		1280. урегульований законом договір.
+
 1284;39;UKAdjNomN|*UKAdjInstr:UKConInstr|UKAdjNomN:UKConNomN;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
+
+/*		1284. урегульоване законом висловлювання.
+
 1285;39;UKAdjNomPl|*UKAdjInstr:UKConInstr|UKAdjNomPl:UKConNomPl;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
+
+/*		1285. урегульовані законом суспільні відносини.
+
 1276;39;UKAdjAccF|*UKAdjInstr:UKConInstr|UKAdjAccF:UKConAccF;*|*|+UKNoBCon;Instrumental in between Adj and Adj/Con of same case
+
+/*		1276. передбачену статутом поточну господарську діяльність.
+
 1313;39;UKAdjInstr:UKConInstr|UKAdjInstr:UKConInstr;*|+UKNoBCon;
 
+/*		1313. Кожен має право будь-якими не забороненими законом засобами захищати свої права.
 /*Preparation: only Possessive if capitalized
 /*===========================================
 
 1292;39;UKPossessive+^UKCapitalInitial;-UKPossessive;
 
+/*		1292. можна отримати необхідні для розрахунків кількісні дані.
 /*Preparation: add PossibleBCon label to relevant cases
 /*=====================================================
 
-1281;39;UKAdj:UKPartAdj:UKPartadjPart:UKAdjCon+UKAdjNomM:UKAdjNomN:UKAdjNomF:UKAdjNomPl:UKAdjAccF:UKAdjDatLoc:UKAdjInstr+^UKNoBCon:UKAdjGen:UKConGen;+UKAdjPossibleBCon;
-1282;39;UKConNomM:UKConNomN:UKConNomF:UKConAccF:UKConNomPl:UKConDatPl:UKConInstr+^UKConGen;+UKConPossibleBCon;
+1281;39;UKAdj:UKPartAdj:UKPartadjPart:UKAdjCon:UKIndefpronPRCon+UKAdjNomM:UKAdjNomN:UKAdjNomF:UKAdjNomPl:UKAdjAccF:UKAdjDatLoc:UKAdjInstr+^UKNoBCon:UKAdjGen:UKConGen;+UKAdjPossibleBCon;
 
+/*		1281. але і мати від народження особливу нервову систему. NOT. зміст правочину. NOT. діяльність господарську.
+
+1282;39;UKConNomM:UKConNomN:UKConNomF:UKConAccF:UKConNomPl:UKConDatMN:UKConDatPl:UKConInstr+^UKConGen;+UKConPossibleBCon;
+
+/*		1282. стаж роботи за фахом не менш як десять років. Використання власності не може завдавати шкоди правам, свободам та гідності громадян. NOT. розділення фаз.
 /*Join concept clusters
 /*=====================
 
 1319;39;UKAdjNomF|UKPosspron+UKAdjNomF|UKConNomF;*|UKAdj|*;
+
+/*		1319. але це не головна наша зброя і не найсильніша.
+
 1320;39;UKAdjNomM|UKPosspron+UKAdjNomM|UKConNomM;*|UKAdj|*;
+
+/*		1320. не головний наш центр.
+
 1321;39;UKAdjNomN|UKPosspron+UKAdjNomN|UKConNomN;*|UKAdj|*;
 
+/*		1321. Старе наше становище.
+
+1369;39;UKAdjNomM|UKPrep|UKCon|UKConNomM;^UKAdj+UKAdjNomM-UKPartadjPart|UKAdj|*|-UKConPossibleBCon;
+
+/*		1369. На території Нової Зеландії запрацював перший у світі банк.
+
+1370;39;UKAdjNomN|UKPrep|UKCon|UKConNomN;^UKAdj+UKAdjNomN-UKPartadjPart|UKAdj|*|-UKConPossibleBCon;remark: not for ConNomF, ConNomPl because the endings overlap with other endings, ConGenMN, UKConGenPl or UKConGenF because pattern is ambiguous
+
+/*		1370. прийняте на виконання рішення суду.
+
+1392;39;UKAdjAccF+^UKConGenMN|UKPrep|UKCon|UKConAccF;^UKAdj+UKAdjAccF-UKAttributive-UKPartAdj|UKAdj|*|-UKConPossibleBCon;
+
+/*		1392. народи хотіли опанувати найбільше висунену на північ частину моря.
+
+1396;39;UKAdjDatLocMN|UKPrep|UKCon|UKConDatMN;^UKAdj+UKAdjDatLocMN-UKAttributive-UKPartAdj|UKAdj|*|-UKConPossibleBCon;
+
+/*		1396. Подключение проектора к доступному в продаже маршрутизатору.
+
+1393;39;UKAdjDatPl|UKPrep|UKCon|UKConDatPl;^UKAdj+UKAdjDatPl-UKAttributive-UKPartAdj|UKAdj|*|-UKConPossibleBCon;
+
+/*		1393. дати належну оцінку зібраним по справі доказам.
+
+1395;39;UKAdjInstrPl|UKPrep|UKCon|UKConInstrPl;^UKAdj+UKAdjInstrPl-UKAttributive-UKPartAdj|UKAdj|*|-UKConPossibleBCon;
+
+/*		1395. а також запобігає зловживанню доступними в суспільстві програмами соціального захисту.
+
+1368;39;UKAdjInstrMN|UKPrep|UKCon|UKConInstrMN;^UKAdj+UKAdjInstrMN-UKAttributive-UKPartAdj|UKAdj|*|-UKConPossibleBCon;
+
+/*		1368. країна є найбільшим у світі виробником соняшникової олії.
 /*Split concept cluster using adjectives in Dative and Instrumental cases
 /*=======================================================================
 
-1127;39;UKVerb+UKPlusDatInstr|.UKAdj|UKCon+^UKConInstr|UKAdjDatLoc:UKAdjInstr:UKAdjDatPl+^UKCapitalInitial+^UKCapitalMixed;*|*|*|UKBCon;
-1130;39;UKVerb+UKPlusDatInstr|UKCon|UKCon+^UKConInstr|UKAdjDatLoc:UKAdjInstr:UKAdjDatPl;*|*|*|UKBCon;
 1323;39;UKCon:UKVerbCon+^UKConNomM|UKNe|UKAdj+UKAdjNomM;*|UKBCon+UKNegBCon-UKNegBegin|*;
+
+/*		1323. Крім того, попит в країнах для поліпшення доступу до освіти не такий високий.
+
 1325;39;UKCon:UKVerbCon+^UKConNomF|UKNe|UKAdj+UKAdjNomF;*|UKBCon+UKNegBCon-UKNegBegin|*;
+
+/*		1325. хоча їхня здатність до духовного росту не менша.
+
 1326;39;UKCon:UKVerbCon+^UKConNomN|UKNe|UKAdj+UKAdjNomN;*|UKBCon+UKNegBCon-UKNegBegin|*;
+
+/*		1326. Таке споживання солодощів не помітне.
+
 1327;39;UKCon:UKVerbCon+^UKConNomPl|UKNe|UKAdj+UKAdjNomPl;*|UKBCon+UKNegBCon-UKNegBegin|*;
 
-/*Split concept cluster using adjectives in Nominative and Accusative cases
-/*=========================================================================
+/*		1327. Зовнішні рухові розлади не помітні, але координація рухів дещо порушується.
+/*Split concept cluster
+/*=====================
 
 1267;39;UKCon+^UKNum:UKCapitalAll:UKPossessive:UKNoBConAfter|UKAdjPossibleBCon:UKConPossibleBCon+^UKCapitalInitial:UKCapitalMixed:UKCapitalAll:UKNoBCon;*|^UKBCon;
 
-/*More/less
-/*=========
+/*		1267. Протягом цього періоду договір про фінансовий лізинг не може бути розірваний жодною зі сторін. NOT. термін житлове право.
+/*Correction for number
+/*=====================
+
+1429;39;UKJoinWithNumber|UKNum+UKBCon;*|-UKBCon;
+
+/*		1429. Слабкість номер один — ізольованість форвардів.
+/*More/less, and a half
+/*=====================
+
+1513;39;UKNum|"з"|"половиною";UKNum+UKCon|+Join|+Join;
+
+/*		1513. у два з половиною рази.
 
 1250;39;UKDigit|UKMoreLess|UKThan;UKNum+UKCon|Join|UKRelpron;
+
+/*		1250. на 20% більше ніж у 2010 році.
+
+640;39;UKNum|UKAndOrBut|UKMoreLess;^UKNum|+Join|+Join;
+
+/*		640. Слід відзначити, що переважна більшість мікроорганізмів (82 %) були резистентними до двох та більше антибіотиків.
+
 1248;39;UKNe|UKMoreLess|.UKThan|UKNum+UKConPossibleBCon;UKBCon-UKNegation-UKNegBegin|Join|Join|*;
+
+/*		1248. має вищу юридичну освіту і стаж роботи за фахом не менш як десять років. Якщо під час повторного розгляду закон буде знову прийнятий Верховною Радою України не менш як двома третинами.
+
+1428;39;UKNe|UKMoreLess|UKThan|UKPrep;UKCAdv-UKNegation-UKNegBegin|Join|*|*;
+
+/*		1428. строк може бути продовжено, але не більш як на п'ять років.
+
 1249;39;UKNe|UKMoreLess|UKThan;UKCAdv-UKNegation-UKNegBegin|Join|Join;
-1252;39;UKNe|UKMoreLess|UKNum;UKCAdv-UKNegation-UKNegBegin|Join|*;
+
+/*		1249. на вимогу не менш як трьох мільйонів громадян.
+
+1497;39;UKNe|UKMoreLess:"пізніше":"раніше"|*UKNum|UKTimeConcept:UKMonth;JoinReverse-UKNegation-UKNegBegin|JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1497. не більше восьми тижнів. не пізніше 3 млн років тому. не пізніше 15 вересня кожного року.
+
+1252;39;UKNe|UKMoreLess:"пізніше":"раніше"|UKNum;UKCAdv-UKNegation-UKNegBegin|Join|*;
+
+/*		1252. Нині не менше 70% дітей у світі отримують початкову освіту.
+
 1251;39;UKMoreLess|UKThan;UKAdvdegree|Join;
 
-/*participles
-/*===========
+/*		1251. після призначення (перерахунку) пенсії має менш ніж 24 місяців страхового стажу.
 
-1315;39;UKComma|.UKNe|UKPartAdj:UKPartadjPart|UKConInstr:UKAdjInstr;*|*|UKPart|*;
+1372;39;UKCon|UKAndOr|UKMoreLess|UKComma:SEnd;*|*|UKCAdv|*;
 
+/*		1372. вага становить 450 кг і менше.
+/*participles before instrumental
+/*===============================
+
+1315;39;UKComma|.UKNe:UKIndefpronAdvdegree:UKMalo|UKPartAdj:UKPartadjPart|UKConInstr:UKAdjInstr;*|*|UKPart|*;
+
+/*		1315. що жодна атака, не підкріплена пішаками не буде вдалою.
+
+1344;39;UKCon|UKPartAdj+^UKAdjInstrMN|UKConInstrMN|^UKAdj:UKCon;*|UKPart|*|*;
+
+/*		1344. а також у випадках встановлених законом чи договором між банком і клієнтом.
+
+1388;39;UKCon|UKPartAdj+^UKAdjInstrPl|UKConInstrPl|^UKAdj:UKCon;*|UKPart|*|*;remark: not for ConInstrF because the ending overlaps with genitive masc. or neut.
+
+/*		1388. у випадках встановлених законами.
 /*verbadj
 /*=======
 
 1324;39;UKVerbAdj+UKAdjAccF|UKAdj+UKAdjAccF;^UKAdj+UKAdjAccF|*;
+
+/*		1324. уживати живу давню мову.
+
 1329;39;UKVerbAdj+UKAdjDatPl+UKAdjInstrMN|UKAdj+UKAdjDatPl+UKAdjInstrMN;^UKAdj+UKAdjDatPl+UKAdjInstrMN|*;
 
+/*		1329. Найпоширенішим простим житньо-пшеничним хлібом є хліб з оббивного борошна.
+/*Possessive pronoun part of noun group
+/*=====================================
+
+652;39;UKAdj+UKAdjNomF|UKPosspron+UKAdjNomF:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjNomF:UKConNomF;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		652. головна їх філософська суть.
+
+1402;39;UKAdj+UKAdjNomN|UKPosspron+UKAdjNomN:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjNomN:UKConNomN;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1402. належне його науково-технічне забезпечення.
+
+1403;39;UKAdj+UKAdjNomM|UKPosspron+UKAdjNomM:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjNomM:UKConNomM;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1403. окремий її розгляд буде виглядати як агітація.
+
+1404;39;UKAdj+UKAdjNomPl|UKPosspron+UKAdjNomPl:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjNomPl:UKConNomPl;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1404. експериментальні їх дослідження.
+
+1405;39;UKAdj+UKAdjInstrPl|UKPosspron+UKAdjInstrPl:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjInstrPl:UKConInstrPl;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1405. найяскравішими його представниками.
+
+1406;39;UKAdj+UKAdjDatLocF|UKPosspron+UKAdjDatLocF:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjDatLocF:UKConLocF;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1406. головній їх суті.
+
+1407;39;UKAdj+UKAdjGenF|UKPosspron+UKAdjGen|UKCon:UKAdj:UKNum+UKAdjGenF:UKConGenF;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1407. Також Конгрес до наступної своєї сесії.
+
+1408;39;UKAdj+UKAdjAccF|UKPosspron+UKAdjAccF:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjAccF:UKConAccF;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1408. найкращу його половину віддають представникам роду молодого.
+
+1409;39;UKAdj+UKAdjDatLocMN|UKPosspron+UKAdjDatLocMN:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjDatLocMN:UKConDatMN:UKConLocMN;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1409. тобто кримінально-виконавчої політики в другому її значенні.
+
+1410;39;UKAdj+UKAdjInstrF|UKPosspron+UKAdjInstrF:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjInstrF:UKConInstrF;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1410. а безпосередньою його причиною є невідповідність наступним його викупом.
+
+1411;39;UKAdj+UKAdjGenPl|UKPosspron+UKAdjGen|UKCon:UKAdj:UKNum+UKAdjGenPl:UKConGenPl;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1411. Пізнання як соціального управління в цілому, так і окремих його сторін.
+
+1412;39;UKAdj+UKAdjDatPl|UKPosspron+UKAdjDatPl:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjDatPl:UKConDatPl;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1412. Але він може передавати належні йому права певним своїм органам.
+
+1413;39;UKAdj+UKAdjInstrMN|UKPosspron+UKAdjInstrMN:UKAdjGen|UKCon:UKAdj:UKNum+UKAdjInstrMN:UKConInstrMN;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1413. за відповідну за відповідну плату і наступним його викупом.
+
+1414;39;UKAdj+UKAdjGenMN|UKPosspron+UKAdjGen|UKCon:UKAdj:UKNum+UKAdjGenMN:UKConGenMN;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+
+/*		1414. веде до оперативного їх відновлення.
 /*PHASE 40: General phase
 /* = = = = = = = = = = = 
 /*Conifcap
 /*========
 
-867;40;UKConIfCap+UKCapitalInitial;UKCon;
-1159;40;^SBegin|"i"+UKCapitalAll;*|UKCon;for Latin 'i'
+1442;40;UKTimeConcept:UKMonth+UKConIfCap+UKCapitalInitial;-UKTimeConcept-UKTime;for moon instead of month, for abbreviation of January or 'Sikh'
 
+/*		1442. з висадкою на Місяці в 1969–1972 роках. "Дорога на Січ".
+
+867;40;UKConIfCap+UKCapitalInitial;UKCon;
+
+/*		867. Г. Гайне.
+
+1159;40;^SBegin|"і":"i"+UKCapitalAll;*|UKNum+UKDigit+UKCon+UKRoman;for Latin and Ukrainian 'i'
+
+/*		1159. Повторне подання законопроекту про внесення змін до розділів I, III і XIII цієї Конституції з одного й того самого питання можливе лише до Верховної Ради України наступного скликання. мали достовірно нижчу концентрацію вітаміну Д ніж представники І групи.
+
+1355;40;UKCon+^UKCapitalAll|"а":"б":"в"+UKCapitalAll|^typeConcept;*|UKCon|*;
+
+/*		1355. під аутентичною назвою Будівля багажного відділення з рампою, корпус В, який знаходиться біля 14-ї колії. NOT. ВЕЧІР ПРЕМ’ЄР З ОСАДЧОЮ. NOT. Політика у сфері виконання покарань В основі формування і розвитку правової системи держави.
+
+1356;40;"а":"б":"в"+UKCon|UKAndOr|"а":"б":"в"+UKCapitalAll;*|*|UKCon;
+
+/*		1356. Віруси грипу А і В мають два поверхневих антигени.
+
+1371;40;UKCon+UKCapitalInitial:UKCapitalAll|"де"|UKCon+UKCapitalInitial;*|UKCon|*;'de' as part of name
+
+/*		1371. Робер де Сорбон. офіцером Я. де Бальменом.
+
+1378;40;^SBegin|"ані"+UKCapitalInitial;*|UKCon-UKNegation-UKNegBegin;for name: 'Anna'
+
+/*		1378. Щиро вдячні світлій та позитивній Ані.
 /*Multiword as preposition
 /*========================
 
 871;40;UKPrepMultiword|UKPrepMultiword|SEnd;UKPrep|UKCon|*;
+
+/*		871. Він стає для нього інструментом маніпуляції з приводу.
+
 872;40;UKPrepMultiword|UKPrepMultiword;UKPrep|+Join;
 
+/*		872. І якщо з приводу визначення господарського законодавства.
 /*Adjective / Noun
 /*================
 
 1110;40;UKPrep|UKAdj|UKAdjCon;*|*|UKCon;
+
+/*		1110. на макроскопічному рівні таким поняття є музична форма.
+
 1111;40;UKAdvStruct|UKPartadjPart|UKAdjCon;*|UKAdj|UKCon;
+
+/*		1111. 462 300 тонн (маються на увазі тільки підтверджені дані).
+
+1424;40;UKAdjCon|UKComma|.UKAdv:UKAdvdegree:UKCompdegree|^UKAdj:UKPartAdjCon;UKCon|*|*|*;
+
+/*		1424. За неповнолітніх, які не досягли п'ятнадцяти років, угоди укладають від їх імені батьки (усиновителі) або опікун.
+
 1109;40;UKAdjCon;^UKAdj;
 
+/*		1109. Конституція не може бути змінена в умовах воєнного або надзвичайного стану.
 /*Verb / adverb degree
 /*====================
 
 854;40;UKCon|UKMalo;*|UKVerb+UKButi;
+
+/*		854. Краще сполучення з морем мало князівство.
+
 902;40;UKComma|UKMalo|UKAdj;*|UKVerb|*;
-855;40;UKMalo;UKAdvdegree;
 
-/*Preposition / noun
-/*==================
+/*		902. Адвокат також припустив, що повідомлення, яке він назвав «провокацією», мало політичний характер.
 
-857;40;UKPrep|UKPrepCon;*|UKCon;
-859;40;UKPrepCon;UKPrep;
+1348;40;UKMalo|UKPosspron;UKVerb|*;
 
+/*		1348. кожне плем'я (союз племен) мало свій говір.
+
+1349;40;UKVerb|UKMalo|UKComma:SEnd;*|UKRAdv|*;
+
+/*		1349. У Середні віки мода змінювалася мало, особливо для чоловіків.
+
+855;40;UKMalo;UKIndefpronPRCon+UKIndefpron+UKIndefpronAdvdegree;
+
+/*		855. Послідовників такої позиції у світі не так вже й мало.
 /*Conditional verb
 /*================
 
 911;40;UKButi|UKBi;^UKButi|+Join;
+
+/*		911. Оскільки завтра музей був би відкритим для публіки.
+
 912;40;UKBi|UKButi;^UKButi|+Join;
+
+/*		912. Відтворення достатньо голосного звуку, що міг би бути чутний поверх звуку оркестру.
+
 910;40;UKBi;^UKVerb;
 
+/*		910. Я не став би про це поширюватися.
 /*Idiomatic expressions
 /*=====================
 
 898;40;UKPo|UKSuti|UKVerb;UKPrep|UKCon|*;
+
+/*		898. По суті веде розмову президент.
+
 899;40;UKPo|UKSuti;UKAdvStruct|+Join;
 
+/*		899. При цьому технічно підводні човни цього періоду залишались у своїй більшості дуже недосконалими і були по суті «пірнаючими».
 /*Concept clusters
 /*================
 
-715;40;UKCon|UKAdv|UKAdj|SEnd;*|^UKBCon+UKCon|*|*;
 822;40;UKVerb|UKRefl;UKVerb|+Join;
 
+/*		822. Отже, складний інститут податкового права являє собою відокремлений комплекс юридичних норм.
 /*'шкода'
 
 1141;40;UKShkoda|UKInf;UKPred|^UKInf;
+
+/*		1141. свобода, заради якої не шкода розлучитися з благополуччям.
+
 1142;40;UKShkoda;UKCon;
 
+/*		1142. Матеріальна чи моральна шкода, завдана фізичним або юридичним особам актами і діями.
 /*'коло'
 
 814;40;UKAdj|UKKolo;*|UKCon;
+
+/*		814. Її зміст охоплює широке коло тем і образів, в тому числі філософських, історичних, сучасних, громадянських.
+
 816;40;UKKolo|UKPosspron;UKPrep|*;
+
+/*		816. Я на сторожі коло їх Поставлю слово.
+
 818;40;UKKolo;UKCon;
 
+/*		818. Особа не несе відповідальності за відмову давати показання або пояснення щодо себе, членів сім'ї чи близьких родичів, коло яких визначається законом.
 /*'власне'
 
 826;40;UKPosspron|UKVlasne;*|UKAdj;
+
+/*		826. країна зберегла своє власне космічне агентство.
+
 828;40;UKVerb|UKVlasne|UKCon;*|UKAdj|*;
+
+/*		828. Обидві гілки мали власне самоврядування з елементами військової демократії.
+
 829;40;UKInf|UKVlasne|UKCon;*|UKAdj|*;
+
+/*		829. Людина починає випрацьовувати власне ставлення до життя і смерті.
+
 852;40;UKVlasne|UKAdj;UKAdvdegree|*;
+
+/*		852. Комплексність екологічного права він пояснює тим, що воно і включає в себе власне екологічні норми.
+
 827;40;UKVlasne;UKAdvStruct;
 
+/*		827. То власне їй письменниця диктувала проекти своєї.
 /*'ніж'
 
 834;40;UKNizh|UKPrep;UKPrep|*;
+
+/*		834. Вона лише повинна враховувати, що їхня вина набагато нижча, ніж у старших дітей.
+
 836;40;UKNizh|UKAdj:UKCon;UKRelpron|*;
+
+/*		836. Вона забезпечує майже у 1,5 рази більшу продуктивність, ніж ацетатна тканина. Фактор імплементації ще більш важливий ніж фактор підписання.
+
 914;40;UKNizh|UKPartadjPart|UKCon;UKRelpron|UKAdj|*;
+
+/*		914. Міжнародне право діє інакше, ніж централізована система права.
+
 838;40;UKComma:UKAdjAdvComp|UKNizh;*|UKRelpron;
+
+/*		838. Встановлено інші правила, ніж ті, що передбачені у відповідному акті.
+
 835;40;UKNizh;UKCon;
 
-/*Time OR comparative
-/*===================
-
-1256;40;UKTimePRCon+UKComp|UKNum:UKThan;UKCAdv|*;
-1257;40;UKTimePRCon+UKComp;-UKComp;
-
+/*		835. які мають лише гострий кінець (шило) або й гостре лезо (ніж).
 /*'як такий'
 
 1262;40;"як"|UKTakij|UKComma|^UKRelpron:UKConj:UKPrep;UKAdvStruct|Join|*|*;
 
+/*		1262. Як такі, вибухові лінзи при цьому не використаються. NOT. Ці відносини моделюються як такі, що виникають між юридично рівними сторонами. NOT. як такі, на які варто рівнятися.
 /*Dash
 /*====
 
 868;40;UKHyphen|UKAdvdegree|UKPartadjPart;UKConj|UKCAdv|UKAdj;
 
+/*		868. Синдром - дуже поширене.
 /*Expressions of time
 /*===================
 
-1099;40;UKAdj|UKSeason;*|UKCon;
-1096;40;UKSeason|UKECon+UKYear;UKBeginendconcept|+Join;
-1098;40;^UKDigit:UKOrdNum:SBegin|UKMonth|UKECon+UKYear;*|UKBeginendconcept|+Join;
-1097;40;UKECon+UKYear;-UKYear;
-289;40;UKECon|UKDigit:UKOrdNum;UKBCon+UKCon|*;time as endconcept before digit or ordinal number becomes beginconcept
-874;40;UKYear|UKYear;UKYear|+Join;
-293;40;UKPrep|UKWeek;*|UKECon+UKCon;week/month after preposition becomes endconcept
-292;40;UKWeek;UKYear;default for week/month: behaves as year
-1095;40;UKSeason|UKDigit|^UKYear+^SEnd;UKBeginendconcept|+Join|*;
-274;40;UKDigit:UKOrdNum|UKYear|UKAdjtemp|UKCent;*|UKCon|*|UKECon+UKCon;century after digit or ordinal number plus year plus adjective in time expression becomes endconcept
-275;40;UKDigit:UKOrdNum|UKYear|UKDigit:UKOrdNum|UKCent;*|UKCon|*|UKECon+UKCon;century after digit or ordinal number plus year plus digit or ordinal number becomes endconcept
-756;40;UKCent|UKCent;UKCent|+Join;
-1132;40;UKCent|UKDigit;UKCon|*;
-277;40;UKCent;UKYear;default for century: behaves as year
-1070;40;UKBeginendconcept|UKDigit:UKOrdNum|UKYear;UKBeginendconcept|+Join|+Join;
-1272;40;UKOrdNum+^UKDigit|UKYear|UKAdjGen:UKConGen;*|UKCon|*;
-276;40;UKDigit:UKOrdNum|UKYear;*|UKECon+UKCon;year after digit or ordinal number becomes endconcept
-272;40;UKAdjtemp|UKYear;UKAdjtemp|UKECon+UKCon;year after adjective in time expression becomes endconcept
-267;40;UKKozhen|UKYear;UKBCon+UKCon|UKECon+UKCon;'kozhen' plus year becomes beginendconcept
-279;40;UKDay|UKDigit:UKOrdNum;UKBCon+UKCon|*;day before digit or ordinal number becomes beginconcept
-1069;40;UKDay|UKBeginendconcept;UKBeginendconcept|+Join;
-1071;40;UKBeginendconcept:UKAdvBeginendconcept|UKDigit|UKMonth;UKBCon+UKCon|UKCon|UKMonth;
-578;40;UKDigit|UKMonth;UKBCon+UKCon|*;digit before month becomes beginconcept
-1269;40;UKMonth|UKYearNum|^UKECon;UKCon|UKECon|*;
-1270;40;UKDay|UKMonth;UKCon|*;
-282;40;UKMonth|UKDigit:UKOrdNum;UKCon|*;month before digit or ordinal number becomes concept
-283;40;UKMonth|.UKAdjtemp|UKECon;UKCon|^UKAdj|UKECon+UKCon;month before (adjective in time expression plus) endconcept becomes concept
-281;40;UKMonth|UKYear;UKCon|UKECon+UKCon;month plus year becomes concept plus endconcept
-783;40;UKNum|UKYear;*|UKECon+UKCon;
-797;40;UKAdvtempPart1|UKAdvtempPart2;UKPrep|UKECon+UKCon;
-288;40;UKDay:UKMonth;UKECon+UKCon;default for day and month: endconcept
-287;40;UKAdjtemp;UKAdj;default for adjective in time expression: adjective
-799;40;UKIndefpron|UKYear;UKAdj|UKECon+UKCon;
-800;40;UKYear|UKTomu;UKCon|UKECon+UKCon;
-270;40;UKYear;UKCon;default for year: concept
-776;40;UKECon|UKTomu;UKCon|UKECon+UKCon;
-1067;40;UKBeginendconcept|UKTomu;UKBeginendconcept|+Join;
-798;40;UKIndefpron|UKECon;UKAdj|UKECon+UKCon;
-381;40;UKPrepAdvdeg|UKDigit;UKBCon+UKCon|*;adverb of degree (which can be preposition) before digit becomes beginconcept
-1068;40;UKNum|UKBeginendconcept;*|UKECon;
+1455;40;*UKDempron:UKIndefpron:UKTakij|"пори":"пору":"час";UKAdvTemp+UKTime|+Join;
 
-/*PathRelevant time / Concept
-/*===========================
+/*		1455. в такий час на вулиці вже темно.
 
-1073;40;UKTimePRCon|UKPartAdj;^UKPartAdj|+Join;
-1075;40;UKTimePRCon|UKPartAdjSubst;^UKPartAdjSubst|+Join;
-1079;40;UKTimePRCon|UKECon;UKCon|*;
-1077;40;UKECon|UKTimePRCon;UKCon|UKECon;
-1080;40;UKTimePRCon|UKAdvtempPart1|UKOrdNum;UKCon|^UKAdvtempPart1|*;
-1078;40;UKAdvdegree|UKTimePRCon;UKTime+UKAdvPR|+Join;
-1074;40;UKTimePRCon;UKTime+UKAdvPR;
+1449;40;UKNum|UKBracketsnumber|UKMonth;UKAdvTime+UKTime|+Join|+Join;
 
-/*Pathrelevant time part of Concept
-/*=================================
+/*		1449. 16 (29) травня прибула делегація.
+/* Concrete time
 
-1092;40;UKAdvPR|UKPartAdj;UKAdv|*;
-1093;40;UKAdj|UKAdvPR|UKCon;*|UKAdj|*;
-1094;40;UKKAdj|UKAdvPR|UKCon;UKAdj|UKAdj|*;
+1509;40;UKNum|UKTimes|UKAdvTimeFreq;UKAdvTime+UKTime|+Join|+Join;
 
+/*		1509. Конгрес збирається на звичайні сесії один раз щороку.
+
+1485;40;UKNum|*UKAdj:UKCon|UKAdvTimeFreq;*|*|UKTimeEndConcept;
+
+/*		1485. до 600 мільйонів комунікаційних контактів щодня.
+
+1521;40;UKPrep|UKDay|UKOrdNum:UKNum|"числа";*|UKAdvTime+UKTime|+Join|+Join;
+
+/*		1521. у неділю 24 числа відбудуться традиційні сільськогосподарські ярмарки.
+
+1520;40;UKPrep|UKDay|UKOrdNum;*|UKAdvTime+UKTime|+Join;
+
+/*		1520. з вівторка 19-го по суботу 23 листопада.
+
+1440;40;UKPrep|UKTimeConcept|^UKAdjGen:UKConGen:UKCapitalInitial;*|UKAdvTime+UKTime|*;only for TimeConcepts labeled in lexreps, not for joined TimeConcepts in rules
+
+/*		1440. Банк купив за тиждень понад 500 млн доларів. NOT. у день П'ятидесятниці.
+
+1460;40;UKPrep|UKTimeConcept+^UKAcro;*|+UKTime;
+
+/*		1460. на день видання наказу.
+
+1472;40;"упродовж":"впродовж":"за":"на"|UKOrdNum:UKNum+^UKYearNum|UKYear;*|UKTimeConcept+UKTime|+Join;
+
+/*		1472. впродовж 9,5 років спостереження. засуджено на 8 років важкої в'язниці.
+
+1475;40;UKPrep|UKDigit+^UKYearNum|UKYear|*UKConGen:UKAdjGen|^UKVerb;*|UKTimeConcept+UKTime|+Join|*|*;
+
+/*		1475. Після 19 років професійної кар'єри. NOT. в 893 році країна вислала священиків. NOT. з 1743 року скрипалем придворної капели.
+
+1473;40;UKPrep|.UKBeginTime|UKDigit|UKYear;*|JoinReverse|JoinReverse|UKTimeEndConcept+UKTime;
+
+/*		1473. Вже у 1917-му році він уклав контракт. З початку 1970-х років температура підвищилася.
+
+1471;40;UKPrep|UKDigit|UKCentury+UKAcro;*|UKAdvTime+UKTime|+Join;exception to rule1466
+
+/*		1471. Ще у 18 ст. він не давав жодних засобів.
+
+1467;40;UKBeginTime:UKPartTime:UKTimeConcept:UKTimeEndConcept|.UKDigit|UKCentury+UKAcro;*|*|+UKTimeConcept+UKTime;exception to rule1466
+
+/*		1467. На початку 18 ст. з'являються кочові племена.
+
+1466;40;^UKRoman|UKCentury+UKAcro;*|-UKCentury;abbreviation for century can have other meaning if not preceded by roman numeral
+
+/*		1466. ч. 1 ст. 216 ЦК.
+
+1515;40;UKNum|UKHyphen|UKNum|UKCentury;+UKTime|*|UKTimeEndConcept+UKTime|+Join;
+
+/*		1515. У II — I століттях до нової ери.
+
+1518;40;UKBeginTime|*UKNum:UKOrdNum|*UKPrep:UKAndOr:UKAndOrBut:UKHyphen|.UKBeginTime|*UKOrdNum:UKNum|.UKAdj|UKTimeConcept:UKEndTime;+UKTime|+UKTime|*|JoinReverse|JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1518. Заснований наприкінці 5 — початку 6 століття. зростання незалежного кіновиробництва наприкінці 20-го і на початку 21-го століття.
+
+1495;40;UKPrep|*UKNum:UKOrdNum|UKPrep:UKAndOr:UKAndOrBut:UKHyphen|.UKBeginTime|*UKOrdNum:UKNum|.UKAdj|UKTimeConcept:UKEndTime;*|+UKTime|*|JoinReverse|JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1495. від 30 до 90 днів. в 20-му і 21-му століттях. від 24 до 30 робочих годин. тривав з VII до V—ІІІ тис. до н. е.
+
+1464;40;UKNum+^UKPartTime|UKCentury;UKTimeEndConcept+UKTime|+Join;
+
+/*		1464. мова XIII–XIV століть. NOT. музика першої половини століття.
+
+1433;40;UKNum|UKMonth|UKNum|UKYear;UKAdvTime+UKTime|+Join|+Join|+Join;
+
+/*		1433. Рекорд курсу встановлено 26 січня 2018 року.
+
+1439;40;UKCon|UKBeginTime+UKAdjGen:UKConGen|UKMonth:UKYear:UKTimeConcept;*|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1439. Згідно експериментальних та епідеміологічних досліджень останніх років.
+
+1445;40;UKAdj+UKBeginTime|UKNum|*UKMonth:UKYear:UKTimeConcept|UKConGen:UKAdjGen;UKTimeConcept+UKTime|+Join|+Join|*;if starts with adjective and followed by genitive: not EndConcept
+
+/*		1445. в останні шість місяців строку повноважень Президента.
+
+1465;40;UKBeginTime+UKAdjGen:UKConGen|.UKNum|*UKMonth:UKYear:UKTimeConcept:UKTimeEndConcept;UKTimeEndConcept+UKTime|+Join|+Join;
+
+/*		1465. промислової революції кінця XVIII ст.. до реформи середини 19 ст. панували жахливі умови. нижче якого не опускалася з початку жовтня.
+
+1446;40;UKBeginTime|UKNum:UKIndefpronPRCon|*UKMonth:UKYear:UKTimeConcept;UKAdvTime+UKTime|+Join|+Join;if starts with noun, EndConcept is ok
+
+/*		1446. За останні кілька років.
+
+1498;40;UKPrep|UKBeginTime|UKPrep:UKAndOr:UKAndOrBut|UKBeginTime|UKTimeConcept:UKMonth;*|+UKTime|*|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1498. в осінні та літні місяці.
+
+1514;40;UKBeginTime|UKYear:UKTimeConcept|UKAdjGen;UKTimeConcept+UKTime|+Join|*;genitive noun ending too ambiguous to join with time concept
+
+/*		1514. за кожний день пленарних засідань.
+
+1436;40;^UKNum|UKBeginTime|*UKMonth:UKYear:UKTimeConcept:UKTimeEndConcept:UKAdvTime+^UKSingleWord;*|UKAdvTime+UKTime|+Join;
+
+/*		1436. Кожна неділя року присвячена святкуванню.
+
+1457;40;UKAdj:UKCon|UKBeginTime+^UKDempron|UKTimeConceptAmbiguous;*|UKTimeConcept+UKTime|+Join;cases with dempron are covered in r1455
+
+/*		1457. паралельні форми творення майбутнього часу.
+
+1458;40;UKBeginTime+^UKDempron|UKTimeConceptAmbiguous;UKAdvTime+UKTime|+Join;
+
+/*		1458. до теперішнього часу жінки складають 11% із космонавтів. Останнім часом ситуація змінилася.
+
+1437;40;UKOrdNum|UKDay|UKMonth;UKAdvTime+UKTime|+Join|+Join;
+
+/*		1437. Чергові сесії починаються першого вівторка лютого і першого вівторка вересня кожного року.
+
+1500;40;*UKNum:UKOrdNum|UKPrep:UKAndOr:UKAndOrBut|*UKOrdNum:UKNum|.UKAdj|UKMonth;+UKTime|*|JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1500. що починається 15 або 28 листопада.
+
+1435;40;UKDigit|UKMonth;UKAdvTime+UKTime|+Join;
+
+/*		1435. 24 листопада переговори зайшли у глухий кут.
+
+1499;40;UKTimeConcept|UKNum|^typeConcept;+UKTimeConcept+UKTime|+Join|*;
+
+/*		1499. годин п’ять після посадки. вручення нагороди жінка року 2013.
+
+1443;40;*UKOrdNum:UKNum|.UKAdj|UKTimeConcept+^UKYear;JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1443. За перші два місяці переговор. за дев’ять місяців минулого року. Академічна музика першої половини століття.
+
+1450;40;*<UKOrdNum:UKNum:UKBeginTime:UKPartTime+^UKYearNum|UKTimeConcept:UKTimeEndConcept:UKMonth;JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1450. у перших числах січня. до кінця 1-ї третини 20 ст. через чверть століття. наприкінці 50-х років минулого століття. через двадцять років число виросте.
+
+1477;40;UKBeginTime|UKOrdNum:UKNum|UKYear;JoinReverse|JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1477. Економічна криза кінця 1990-х років.
+
+1478;40;UKOrdNum|UKPartTime|UKOrdNum|UKYear;JoinReverse|JoinReverse|JoinReverse|UKTimeEndConcept+UKTime;
+
+/*		1478. У другій половині 1970-их років переговори зайшли.
+
+1441;40;UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKMonth|.UKNum:UKOrdNum:UKIndefpron|UKYear:UKTimeConcept|UKAdjGen;JoinReverse|JoinReverse|+UKTimeConcept+UKTime|*;
+
+/*		1441. Літургія не повинна святкуватись з понеділка до п'ятниці першого тижня Великого Посту.
+
+1431;40;UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKMonth|.UKNum:UKOrdNum:UKIndefpron|UKYear:UKTimeConcept;UKAdvTime+UKTime|+Join|+Join;
+
+/*		1431. Весною 1922 р. переговори завершилися. за листопад 2019 року. на початку грудня 2012 р.. наприкінці 50-х років минулого століття.
+
+1452;40;UKPrep|UKMonth|UKOrdNum;*|UKAdvTime+UKTime|+Join;
+
+/*		1452. в серпні 1991-го лідер став основною фігурою.
+
+1453;40;UKMonth|UKOrdNum;UKTimeConcept+UKTime|+Join;
+
+/*		1453. не те що учасників подій листопада 23-го знайти важко.
+
+1444;40;UKOrdNum|UKAdvTime;UKAdvTime+UKTime|+Join;
+
+/*		1444. У першій половині січня 1940 року.
+
+1486;40;UKYearNum|UKAndOr:UKAndOrBut|UKBeginTime|UKYearNum;+UKTime|*|UKTimeEndConcept+UKTime|+Join;
+
+/*		1486. процес 1950-х і початку 1960-х.
+
+1474;40;UKBeginTime:UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKMonth+UKAdjGen:UKConGen|UKYearNum;UKTimeEndConcept+UKTime|+Join;
+
+/*		1474. на початку 2000-х економіка показала сильне зростання.
+
+1496;40;UKAdj|UKBeginTime:UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKMonth|UKYearNum;*|UKTimeEndConcept+UKTime|+Join;
+
+/*		1496. як «Тарасова ніч» (1838).
+
+1432;40;UKBeginTime:UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKMonth|UKYearNum;UKAdvTime+UKTime|+Join;
+
+/*		1432. Навесні 1838 лідер задумал викупити молодого поета. 28 червня 1996-го вона стала республікою.
+
+1438;40;UKTimeConcept:UKBeginTime:UKAdvTime|UKAdvTime+^UKSingleWord;UKAdvTime+UKTime|+Join;
+
+/*		1438. Уранцi 5 листопада. вибори проходять у неділю 10 листопада 2019 року. NOT. Тому сьогодні основним напрямком розвитку в цій галузі є використання допоміжних реагентів.
+
+1470;40;UKTimeConcept:UKBeginTime:UKVsje|UKTimeConcept;UKTimeConcept+UKTime|+Join;
+
+/*		1470. До майже годинного дійства організатори готувалися весь рік.
+
+1451;40;UKIndefpronPRCon:UKIndefpronPR|UKAdvTime:UKTimeEndConcept;UKAdvTime+UKTime|+Join;
+
+/*		1451. Тисячі подібних театрів були збудовані або переобладнані протягом кількох наступних років. протягом кількох наступних років.
+
+1519;40;UKIndefpronPR|UKTimeConcept;UKTimeEndConcept+UKTime|+Join;
+
+/*		1519. У той же день країна видала свою програмну декларацію.
+
+1462;40;UKIndefpronPRCon:UKBeginTime|UKTimeConcept|UKAdjGen:UKConGen;UKTimeConcept+UKTime|+Join|*;
+
+/*		1462. Після кількох місяців обговорення та розгляду проекту.
+
+1461;40;UKIndefpronPRCon:UKBeginTime|UKTimeConcept;UKTimeEndConcept+UKTime|+Join;
+
+/*		1461. протягом багатьох років.
+
+1468;40;UKTimeEndConcept|UKTimeEndConcept;+UKTimeEndConcept+UKTime|+Join;
+
+/*		1468. на початку 60-х років XIX ст..
+
+1489;40;UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKYear;+UKTime|*|+UKTime|*|UKAdvTime+UKTime|+Join;
+
+/*		1489. під 1189, 1213, 1280 і 1282 роками.
+
+1487;40;UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKYear;+UKTime|*|UKAdvTime+UKTime|+Join;
+
+/*		1487. проекти 1902 і 1912 років.
+
+1516;40;UKYearNum|UKHyphen|UKYearNum|UKYear;+UKTime|*|UKTimeEndConcept+UKTime|+Join;
+
+/*		1516. За війни 1941 — 1945 років.
+
+1476;40;UKYearNum|UKYear;UKTimeEndConcept+UKTime|+Join;
+
+/*		1476. Під час саміту 2008 року президент заявил. 1308 року держава перейшла до його синів.
+
+1454;40;*<UKOrdNum:UKNum|UKPartTime|UKAdvTime:UKYearNum;UKAdvTime+UKTime|+Join|+Join;
+
+/*		1454. до другої половини 1943.
+
+1490;40;UKPrep|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|^typeConcept;*|+UKTime|*|+UKTime|*|+UKTime|*;
+
+/*		1490. Протягом 1960-х, 1970х і 1980х була висока народжуваність.
+
+1488;40;UKPrep|UKYearNum|UKAndOr:UKAndOrBut:UKComma:UKHyphen|UKYearNum|^typeConcept;*|+UKTime|*|+UKTime|*;
+
+/*		1488. в 1783 і 1784. від 1941 — 1942.
+
+1481;40;UKPrep|UKYearNum|^typeConcept;*|+UKTime|*;
+
+/*		1481. від 2010 до 2015 року.
+
+1494;40;UKPrep|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|.UKPrepAdvdeg:UKAdvdegree:"понад"|UKAdjPossibleBCon:UKConPossibleBCon:UKNum;*|+UKTime|*|UKTimeEndConcept+UKTime|*|*;
+
+/*		1494. Між 1972 та 1974 дві сторони також погодилися посилити свої економічні зв'язки.
+
+1493;40;UKPrep|UKYearNum:UKTimeConcept|.UKPrepAdvdeg:UKAdvdegree:"понад"|UKAdjPossibleBCon:UKConPossibleBCon:UKNum;*|UKTimeEndConcept+UKTime|*|*;
+
+/*		1493. У 1980 понад 100 мільйонів тонн було викинуто.
+
+1482;40;UKPrep|UKYearNum|UKPrep|UKDigit|typeConcept;*|-UKTime|*|*|*;not time: correction to rule1481
+
+/*		1482. від 1000 до 5500 км.
+
+1491;40;UKBracket1|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKBracket2;*|+UKTime|*|+UKTime|*|+UKTime|*;
+
+/*		1491. (1735—1739, 1768—1774, 1787—1791).
+
+1492;40;UKBracket1|UKYearNum|UKAndOr:UKAndOrBut:UKComma|UKYearNum|UKBracket2;*|+UKTime|*|+UKTime|*;
+
+/*		1492. (1847 і 1857).
+
+1483;40;UKBracket1|UKYearNumHyphen|UKBracket2;*|+UKTime|*;
+
+/*		1483. Друге прем'єрство (2007–2010).
+
+1484;40;UKAdj|UKYear;*|+UKTime;
+
+/*		1484. Напруженими для сім'ї були різні роки.
+
+1507;40;UKTimeConcept+UKConGen|UKEndDate;JoinReverse|UKTimeEndConcept+UKTime;only for BC and AD, genitive
+
+/*		1507. були відомі ряду стародавніх цивілізацій II-I тисячоліть до н. е..
+
+1506;40;*UKTimeConcept:UKTimeEndConcept:UKAdvTime:UKNum|UKEndDate;JoinReverse|UKAdvTime+UKTime;only for BC and AD
+
+/*		1506. у 82 до н. е..
+
+1502;40;UKTimeConcept:UKTimeEndConcept:UKAdvTime|UKEndTime;UKAdvTime+UKTime|+Join;
+
+/*		1502. два роки тому зірці діагностували крововилив. Кілька тижнів тому дискусію почав виходець.
+
+1510;40;UKNum:UKIndefpronPRCon|UKTimes|"за":"на"|UKTimeConcept:UKAdvTime:UKTimeEndConcept;UKAdvTime+UKTime|+Join|+Join|+Join;
+
+/*		1510. Всіх випробовуваних будили кілька разів за ніч і запитували. Літургія може служитися лише один раз на день на одному вівтарі.
+
+1508;40;^UKAdj|UKTimes|"за":"на":"в"|UKTimeConcept:UKAdvTime:UKTimeEndConcept;*|UKAdvTime+UKTime|+Join|+Join;
+
+/*		1508. двічі за тиждень. планують заряджати раз на два-три дні. двічі в рік. NOT. яка поступилася останній раз в березні цього року.
+
+527;40;UKRaz|UKNum;UKAdvTime+UKTime|+Join;'raz' before number becomes beginconcept and gets joined with number
+
+/*		527. можуть раз дев'ять спитати документи.
+
+1511;40;UKOrdNum|UKRaz;JoinReverse|UKAdvTime+UKTime;number plus 'raz' becomes beginendconcept
+
+/*		1511. Чинні чемпіони виграли в дев'ятий раз.
+
+1512;40;*UKNum|UKRaz|^UKAdjAdvComp:UKAdjComp:UKCompdegree;JoinReverse|UKAdvTime+UKTime|*;number plus 'raz' becomes beginendconcept
+
+/*		1512. у світі були процитовані 971,5 тис. разів. NOT. в шість разів дорожче.
+
+582;40;*UKAdvdegree:UKCompdegree|UKRaz;JoinReverse|UKAdvTime+UKTime;adverb of degree plus 'raz' becomes beginendconcept
+
+/*		582. Завести м'яч у ворота супротивника якомога більше разів.
+
+288;40;UKDay:UKMonth;UKTimeEndConcept+UKTime;default for day and month: endconcept
+
+/*		288. У червні газета опублікувала документи.
+
+1447;40;UKAdvdegree:UKPrepAdvdeg:"понад"|UKTimeConcept;JoinReverse|+UKTimeConcept+UKTime;
+
+/*		1447. після призначення пенсії пропрацював додатково 24 місяця. Перебуваючи біля двох місяців за ґратами.
+
+1480;40;UKAdvdegree:"понад"|UKTimeEndConcept;JoinReverse|+UKTimeEndConcept+UKTime;
+
+/*		1480. особи зі стажем понад 8 років.
+
+1503;40;UKAdvdegree:UKPrepAdvdeg:"понад"|UKAdvTime;JoinReverse|+UKAdvTime+UKTime;
+
+/*		1503. понад 40—35 тис. років тому. це близько 1,5-2 млн років тому.
+/*Pathrelevant time part of Concept or Relation
+/*=============================================
+
+1092;40;UKAdvTemp|UKPartAdj;UKAdv-UKTime|*;
+
+/*		1092. У нині існуючих країнах.
+
+1093;40;UKAdj|UKAdvTemp|UKCon;*|UKAdj-UKTime|*;
+
+/*		1093. включаючи знамениту нині марку.
+
+1094;40;UKKAdj|UKAdvTemp|UKCon;UKAdj|UKAdj-UKTime|*;
+
+/*		1094. широко відомі перш схеми.
 /*Preposition + noun possible as adverb
 /*=====================================
 
 789;40;UKAdvPart1|UKAdvPart2|UKVerb;UKRAdv|+Join|*;
-792;40;UKPartadjPart|UKAdvPart1|UKAdvPart2;*|UKRAdv|+Join;
-791;40;UKAdvPart2;UKCon;
 
+/*		789. Ми до кінця захищаємо наші джерела інформації.
+
+792;40;UKPartadjPart|UKAdvPart1|UKAdvPart2;*|UKRAdv|+Join;
+
+/*		792. Цілі жодної сторони не досягнуті до кінця.
 /*Verb or noun
 /*============
 
 896;40;UKVerbCon|UKOdyn;UKVerb|*;
+
+/*		896. Бачив навіть, хто ніс одну з дощок.
+
 897;40;UKPrep:UKNum|UKVerbCon;*|UKCon;
+
+/*		897. був здійснений перехід до оплати науково-технічної продукції. 23 нагороди.
+
 1104;40;UKVerb|UKPrep|UKCon|UKVerbCon;*|*|*|UKCon;
+
+/*		1104. агресор постукає у ворота пекла.
+
 1105;40;UKPrep|UKCon|UKVerbCon|UKAndOrBut;*|*|UKCon|*;
+
+/*		1105. Протягом цих подій він звільнив людство з кайданів Пекла і повернувся до життя як людина і Бог.
+
 1144;40;UKCon|UKAndOrBut|UKVerbCon;*|*|UKCon;
 
+/*		1144. на виробництво та розподілення електроенергії, газу та води.
 /*Preposition 'из'
 /*================
 
 1035;40;UKTakij|UKSamyj;UKIndefpronPR|+Join;
+
+/*		1035. Такий самий публічний характер має і діяльність органів місцевого самоврядування.
+
 1039;40;UKTakij|UKJak;UKRelpron|+Join;
+
+/*		1039. куріння кальяну сприяє поширенню інфекційних захворювань, таких як гепатит, герпес, туберкульоз.
+
 1040;40;UKTakij|UKComma|UKJak;UKRelpron|+Join|+Join;
+
+/*		1040. На відміну від традиційних матеріалів, таких, як марля, сорбенти мають високий потенціал.
+
 408;40;UKTakij;UKIndefpronPRNR+UKIndefpron;default for taky: pathrelevant or nonrelevant indefinite pronoun
+
+/*		408. Навіщо мені така влада, яка не може оперативно вирішити питання.
+
 565;40;UKOdyn|UKIz|UKNum+^UKOdyn;JoinReverse|JoinReverse|^UKNum;'odin' plus 'iz' plus number are joined as number
+
+/*		565. країна - одна з п'яти визнаних держав.
+
 1050;40;UKOdyn:UKKozhen|UKIz|UKIndefpronPRNR;UKAdj|+Join|+Join;
-1056;40;UKOdyn:UKKozhen|UKIz|UKPerspron:UKRelpron;UKPerspron|+Join|+Join;
-1051;40;UKOdyn:UKKozhen+^UKGen|UKIz;UKBCon+UKAdj|+Join;
-1058;40;UKOdyn:UKKozhen|UKIz;UKAdj|+Join;
 
-/*Adverb time/Noun
-/*================
+/*		1050. Одна з таких етнографічних груп.
 
-765;40;UKPrep|UKAdvtempCon;*|UKCon;
-1087;40;UKPrep|UKCon|UKAndOrBut|UKAdvtempCon;*|*|*|UKCon;
-879;40;UKAdj|UKAdvtempCon;*|UKCon;
-1086;40;UKButi|UKAdvtempCon;*|UKCon;
-766;40;UKAdvtempCon;UKAdvPR;
+1056;40;UKOdyn:UKKozhen:UKIndefpron|UKIz|UKPerspron:UKRelpron;UKPerspron|+Join|+Join;
 
-/*Adverb time: beginendconcept
-/*============================
+/*		1056. Однак для цього потрібно виконати ряд вимог, одне з них. Це невід'ємна властивість людини, якою природа наділяє кожного із нас. На цей рахунок існує безліч теорій, багато з яких суперечать одна одній.
 
-1088;40;UKNum|.UKCon|UKAdvBeginendconcept;*|*|UKECon;
-1089;40;UKAdvBeginendconcept;UKBeginendconcept;
+1341;40;UKAdvdegree|UKOdyn:UKKozhen+^UKConGen:UKAdjGen|UKIz;UKBCon+UKAdj|+Join|+Join;
 
+/*		1341. При цьому, за оцінкою фахівців, якщо інспекторам вдасться ліквідувати хоча б один із прекурсорів зарину.
 /*Negation: 'не' relation
 /*=======================
 
-1083;40;"не"|UKAdvPR;^UKNegRel|UKRAdv;
+1083;40;UKNe:UKNegRel|UKAdvTemp;UKNegRel|+Join;
 
+/*		1083. зберігає здатність залишатися корисним, навіть якщо його використовують у їжу не відразу.
 /*Combination number and pronoun; indefinite pronoun as part of noun group
 /*========================================================================
 
 1253;40;^typeConcept|UKDigit|UKIndefpron|UKCon;*|*|UKAdj|*;
+
+/*		1253. У 9 інших випадках таких відмінностей не виявлено.
+
 324;40;UKNum+^UKDigit|UKIndefpron|UKCon;*|UKAdj|*;indefinite pronoun between number and noun becomes concept
+
+/*		324. Тому терміни «просто господарі» і «підприємці» ми можемо уявити собі у вигляді антитези двох таких суб'єктів господарювання.
+
 451;40;UKNum+^UKDigit|UKDempron|UKCon:UKAdj;*|UKCAdv|*;demonstrative pronoun between number and adjective or noun becomes concept
+
+/*		451. Потім мільярди цих клітин пакували і продавалися. Один цей маленький секрет дає жінці можливість володіти будь-якою ситуацією. NOT. згідно з абзацом третім частини першої статті 40 цього Закону.
+
 323;40;UKAdj|UKIndefpron|UKCon+^UKNum;*|UKAdj|*;indefinite pronoun between adjective and noun becomes concept
 
+/*		323. Від римської така лазня відрізняється наявністю спеціальної труби. NOT. Собор був прийнятий як вселенський усіма п'ятьма патріархами.
 /*Rules for specific words
 /*========================
 /* 'біля', 'згідно', 'близько'
 
-382;40;UKPrepAdvdeg|UKNum;UKBCon+UKCon|*;adverb of degree which can be preposition before number becomes concept
+1354;40;UKOdyn|"біля"|UKOdyn;^UKNum|UKPrep|^UKNum;
+
+/*		1354. У випадку Ісуса його ноги були прибиті цвяхами одна біля одної до цієї дощечки.
+
+1401;40;UKPrep|.UKAdv:UKAdj:UKPosspron:UKDempron:UKIndefpron|UKCon|UKPrepAdvdeg|UKNum|*typeConcept|.UKAdv:UKAdvdegree|UKVerb;*|*|*|UKBCon+UKCon|*|*|*|*;
+
+/*		1401. В Європі близько двадцять відсотків людей страждають через ожиріння.
+
+1399;40;UKAdj|UKPrepAdvdeg|UKNum;*|UKBCon+UKCon|*;adverb of degree which can be preposition before number becomes beginconcept
+
+/*		1399. При цьому були присутні близько сто тис. громадян.
+
+382;40;UKPrepAdvdeg|UKNum;UKCon|*;adverb of degree which can be preposition before number becomes concept
+
+/*		382. Раніше затримали близько десяти осіб.
+
 383;40;UKPrepAdvdeg;UKPrep;default for adverb of degree which can be preposition: preposition
 
+/*		383. Біля Вишкова найкраще збереглися вулканічні кратери.
 /* ('раз' combined with) comparative
 
-530;40;UKRaz|UKCompgr|UKComma|UKRelpron;UKCon|UKCon|*|*;'raz' plus 'more/less' before relative pronoun both become concept
-531;40;UKCompgr|UKIndefpron;UKAdv|*;'more/less' before indefinite pronoun becomes adverb
+530;40;UKRaz|UKCompdegree|UKComma|UKRelpron;UKCon|UKCon|*|*;'raz' plus 'more/less' before relative pronoun both become concept
 
+/*		530. Тобто майже в 2 рази більше, ніж у середньому у світі.
+
+531;40;UKCompdegree|UKIndefpron;UKAdv|*;'more/less' before indefinite pronoun becomes adverb
+
+/*		531. Найбільше таких жінок.
 /* 'больше','меньше'
 
-831;40;UKAdvdegree|UKCompgr;UKCompgr|+Join;
-526;40;UKNe|UKVerb|UKCompgr;*|*|UKRAdv;'more/less' after 'ne' plus verb becomes relation
-771;40;UKCompgr|UKNum;UKAdj|*;
-773;40;UKCompgr|UKPunctuation;UKRAdv|UKPunctuation;
-860;40;"все":"усе"|UKCompgr;UKAdvdegree|UKCompgr;
-865;40;UKCompgr|UKSup|UKSup;UKCompgr|+Join|+Join;
-878;40;UKNum|UKCompgr;*|UKAdj;
-1065;40;UKCompgr|"за"|"все";UKCompgr|+Join|+Join;
-525;40;UKCompgr;UKAdvdegree+UKAdvdegreeCon;default for 'more/less': adverb of degree plus adverb of degree which can be concept
+831;40;UKAdvdegree|UKCompdegree;UKCompdegree|+Join;
 
+/*		831. Метою гри є забити якомога більше голів.
+
+526;40;UKNe|UKVerb|UKCompdegree;*|*|UKRAdv;'more/less' after 'ne' plus verb becomes relation
+
+/*		526. Не вірую більше я в небо.
+
+771;40;UKCompdegree:"понад"|UKNum;UKAdj|*;
+
+/*		771. Страхова компанія виплатила більше 300 тис. грн.. Близько 90 % існуючої відпрацювали більше одного терміну експлуатації.
+
+773;40;UKCompdegree|UKPunctuation;UKRAdv|*;
+
+/*		773. За часткового втручання держави в економіку — в деякі сфери більше (скажімо, в економічну та соціальну інфраструктуру).
+
+860;40;"все":"усе":"ще"|UKCompdegree;JoinReverse|+UKCompdegree;
+
+/*		860. Але зараз у суспільстві все більш зміцнюється та виходить на перший план. Потім вони формують ще більш смертоносну інфекцію.
+
+865;40;UKCompdegree|UKSup|UKSup;UKCompdegree|+Join|+Join;
+
+/*		865. Але більше за всіх здивував довговолосий молодик.
+
+878;40;UKNum|UKCompdegree;*|UKAdj;
+
+/*		878. На 41% більше, ніж до початку.
+
+1065;40;UKCompdegree|"за"|"все";UKCompdegree|+Join|+Join;
+
+/*		1065. від діячів масової культури менш за все потрібна творчість.
+
+525;40;UKCompdegree;UKAdvdegree+UKAdvdegreeCon;default for 'more/less': adverb of degree plus adverb of degree which can be concept
+
+/*		525. Одного з найбільш енергозалежних органів.
 /* something + adjective
 /*======================
 
 1155;40;UKShtshos|.UKAdv|UKAdj;UKBCon|UKCAdv|*;
 
+/*		1155. Творчість, у результаті якої появляється щось нове, властива далеко не всім.
 /* 'раз'; number
 /*==============
 
-528;40;UKRaz|UKAdvdegree:UKAdjAdvComp:UKAdjComp;UKCon|UKCon;'raz' plus adverb of degree or comparative both become concepts
+528;40;UKRaz:UKTimes|UKAdvdegree:UKAdjAdvComp:UKAdjComp;UKCon-UKTime|UKCon;'raz' plus adverb of degree or comparative both become concepts
+
+/*		528. В 2013 році - майже в шість разів вище. можуть бути в багато разів сильнішими.
+
 917;40;UKAdjComp;+UKAdj;
-527;40;UKRaz|UKNum;UKBCon+UKCon|*;'raz' before number becomes beginconcept
-582;40;UKAdvdegree|UKRaz;UKBCon+UKCon|UKECon+UKCon;adverb of degree plus 'raz' becomes beginconcept plus endconcept
-533;40;UKRaz;UKECon+UKCon;default for 'raz': endconcept
-640;40;UKNum|UKAndOrBut|UKAdvdegree;^UKNum|+Join|+Join;
+
+/*		917. Якщо ж цього не відбудеться, то скептики будуть сильнішими.
+
+1456;40;UKDempron:UKIndefpron|UKRaz;JoinReverse|UKAdvTemp+UKTime;
+
+/*		1456. Знана модниця цього разу завітала на престижну церемонію.
+
+533;40;UKRaz;UKTimeEndConcept;default for 'raz': endconcept
+
+/*		533. В даному разі перерозподіл прибутків здійснюється.
+
 731;40;UKNum+^UKDigit|UKPartadjPart;*|UKAdj;
+
+/*		731. Поверхневі течії утворюють два замкнені кільця. NOT. під 1436 зазначений перший доктор.
+
 738;40;UKOrdNum:UKDigit|UKPartadjPart|UKAdj;*|UKAdj|*;
 
+/*		738. яка виробила перші уніфіковані футбольні правила.
 /*Adverb/adjective
 /*================
 
 762;40;UKComma|UKAdjAdv|UKCon;*|UKAdj|*;
+
+/*		762. Поезію характеризує античне розуміння доблесті (arete), блискуче володіння міфологічними ілюзіями.
+
 760;40;UKAdjAdv;UKAdv;
 
+/*		760. Тут поет здружився з селянами, охоче з ними зустрічався і розмовляв.
 /*Adverb/predicate
 /*================
 
 327;40;UKAdvPred|UKAdj+^UKOrdNum;UKAdj|*;adverb/predicate before adjective becomes concept
+
+/*		327. Допомоги небайдужих чекає тяжко хворий партизан.
+
+1374;40;^UKPart|UKButi|.UKAdvStruct:UKAdvTemp|*UKAdvPred|UKComma|^UKAdv:UKAdvPred:UKRAdv;*|*|*|UKCAdv|*|*;
+
+/*		1374. Будьте готові, що коли Ви не повідомите про порядок виносу страв.
+
 250;40;UKButi|UKAdvPred|UKCon;*|UKPred|*;adverb/predicate between 'to be' and noun becomes relation
+
+/*		250. оскільки відсутність у цієї особи повноважень стало відомо відповідачу після прийняття судового рішення у справі.
+
 749;40;UKAdvPred|UKNum:UKOrdNum;UKPred|*;
+
+/*		749. Сьогодні відомо 16 типів гемаглютиніну та 9 типів нейрамінідази. але найчастіше це не можливо — надто складно першому організовувати собі страховку.
+
 758;40;UKAdvPred|UKComma|UKConj;UKPred|*|*;
+
+/*		758. Із наведеного чітко видно, що патли в неї вже тиждень немиті.
+
 9;40;UKAdvPred:UKAdvaux;UKAdv;default for adverb/predicate: adverb
 
+/*		9. Важливо також відзначити, що мітохондрії. Але результати інтелектуальної діяльності обов'язково мають відповідати встановленим вимогам закону.
+/*Adverb of place/direction OR preposition
+
+1386;40;UKAdvPrep|UKPunctuation:UKAndOr:SEnd;UKCAdv|*;
+
+/*		1386. Поверхня схилу зазвичай дуже нерівна, вкрита шаром глини, чорною зверху і ясно-сірою всередині. пробиваються» страхувальними шлямбурами «зверху — вниз».
+
+1387;40;UKAdvPrep;UKPrep;
+
+/*		1387. Банщики час від часу поливають зверху водою.
 /*Adverb degree: part of nonrelevant or not
 /*=========================================
 
 257;40;UKAdvdegNR|UKAdvStruct;UKAdvStruct|*;adverb of degree/structure before structural adverb becomes nonrelevant
+
+/*		257. Її становлення відбуватиметься майже так само.
+
 258;40;UKAdvdegNR;+UKAdvdegree;extra label for adverb of degree/structure: adverb of degree
 
+/*		258. Тому словосполучення «адміністративне право» цілком закономірно можна трактувати як «управлінське право».
+/*Adverb or noun
+/*==============
+
+1339;40;UKAdj|UKAdvCon;*|UKCon;
+
+/*		1339. що набирається, з кожним разом збільшується.
+
+1340;40;UKAdvCon;UKAdv;
+
+/*		1340. 1637 року війська разом захопили фортецю.
 /*Conjunction/nonrelevant
 /*=======================
 
 568;40;SBegin|UKConjNR;*|^UKAdvStruct;conjunction/nonrelevant at beginning sentence becomes nonrelevant
+
+/*		568. Втім, вчені під час дослідження цих поліморфізмів виявили протилежні дані.
+
 851;40;SBegin|UKAdvStruct|UKComma|UKConjNR;*|*|*|UKAdvStruct;
+
+/*		851. Так, зокрема: банк має відповідати за фінансову сторону політики.
+
 784;40;UKComma|UKConjNR|UKComma;*|UKAdvStruct|*;
+
+/*		784. Судові рішення мотивовано, зокрема, тим, що обраний позивачем.
+
 569;40;UKConjNR;^UKConj;default for conjunction/nonrelevant: conjunction
 
-/* 'особливо'
-
-846;40;UKOsoblyvo|UKAdv;UKAdv|+Join;
-843;40;UKOsoblyvo|UKAdj;UKAdvdegree|*;
-418;40;UKOsoblyvo;UKAdvStruct;
-
+/*		569. При цьому він посилається на висловлювання зарубіжних вчених, зокрема на Р. Д..
 /*Nonrelevant with conditions
 /*===========================
 
 803;40;SBegin|UKNRIfBegin;*|UKAdvStruct;
+
+/*		803. Здебільшого оперні театри отримують субсидії від держави або приватних меценатів.
+
 794;40;SBegin|UKNRIfComma|UKComma;*|UKAdvStruct|*;
 
+/*		794. Швидше, оспорюється підсумковий ефект.
 /*Verb / adjective
 /*================
 
 870;40;UKVerbAdj|UKCon|.UKNe|UKVerb;UKBCon+UKCon|*|*|*;
+
+/*		870. Різниця лише в тому, що доросла людина не використовує це «зброя» де завгодно.
+
 1102;40;UKVerb|UKVerbAdj|UKCon;*|UKAdj|*;
+
+/*		1102. Не останню роль тут зіграла вдала участь актор у мерській гонці.
+
 1106;40;UKVerb|UKIndefpron|UKVerbAdj;*|*|UKAdj;
+
+/*		1106. знищується все живе поза укриттями.
+
 1100;40;UKAdvdegree|UKVerbAdj|^UKInf+^SEnd;UKCAdv|UKAdj|*;
+
+/*		1100. Оскільки анімація дуже тривала у виробництві і часто дуже коштовна.
+
 1101;40;UKPosspron|UKVerbAdj;*|UKAdj;
+
+/*		1101. наша вдала серія.
+
 1103;40;UKTse|UKVerbAdj;*|UKAdj;
+
+/*		1103. це вдала домовленість.
+
 1330;40;UKVerbAdj|UKButi;UKAdj|*;
+
+/*		1330. простим був проект підводного судна.
+
 1331;40;UKButi|UKVerbAdj;*|UKAdj;
+
+/*		1331. оскільки випікання хліба з їх допомогою ставало простим.
+
 806;40;UKVerbAdj;UKVerb;
 
+/*		806. Вона не стала звинувачувати кого-небудь.
 /*Comparative adjective/comparative adverb
 /*========================================
 
 804;40;UKVsje|UKPartadjPart|UKAdjAdvComp|UKCon;UKAdj|UKAdj|UKAdj|*;
+
+/*		804. Всі описані вище приклади відносяться до галузі економіки, що зветься мікроекономікою (microeconomics).
+
 767;40;UKCon|UKAdjAdvComp|UKCon|UKVerb;*|UKBCon+UKCon|*|*;
+
+/*		767. В музичній практиці важливіше значення має умовне співвідношення рівнів сили звуку.
+
 770;40;UKAdjAdvComp|UKCon|UKVerb;UKAdj|*|*;
+
+/*		770. Перераховані вище заходи вимагають вдосконалення нормативно-правової бази.
+
 1255;40;UKAdjAdvComp|UKNum;UKCAdv|*;
-769;40;UKAdjAdvComp;UKComp+UKAdvdegreeCon;
+
+/*		1255. Вважається, що показання до хірургічного лікування ожиріння виникають при ІМТ вище 40.
+
+1463;40;UKAdjAdvComp|UKCon;UKAdj|*;adjective/adverb comparative before noun becomes concept
+
+/*		1463. протягом якого мало відбутися подальше зростання ролі міжнародно-правового регулювання. віком старше 2 років.
+
+769;40;UKAdjAdvComp;UKComp+UKAdv;
+
+/*		769. На північ і північний захід від цього масиву серед водних просторів все виразніше виступали контури гір.
+
 866;40;UKComp|UKSup|UKSup;UKComp|+Join|+Join;
 
+/*		866. яка плаває краще за всіх.
 /*digit in context
 /*================
 
 754;40;UKPartadjPart|UKOrdNum:UKDigit;UKPart|*;
+
+/*		754. Під 1436 зазначений перший доктор. діяльності шахового зібрання (засноване 1901).
+
 755;40;UKOrdNum:UKDigit|UKHyphen|UKOrdNum:UKDigit;*|UKConj|*;
 
+/*		755. Середня температура липня на півночі моря — +23 — +25 ° C..
 /*Adverb degree (combined with negation)
 /*======================================
 
-309;40;UKAdvdegreeCon|UKCon:UKBeginendconcept;UKAdj|UKCon;noun/adverb of degree before noun or beginendconcept becomes concept
+1448;40;UKAdvdegreeCon|UKTimeConcept;JoinReverse|+UKTimeConcept+UKTime;noun/adverb of degree before timeconcept becomes part of it
+
+/*		1448. провів на орбіті майже рік (340 днів).
+
+1479;40;UKAdvdegreeCon|UKTimeEndConcept;JoinReverse|+UKTimeEndConcept;noun/adverb of degree before timeendconcept becomes part of it
+
+/*		1479. Процедура таїнства хрещення залишається майже без змін більше 1500 років.
+
+1469;40;UKAdvdegreeCon|UKAdvTime;JoinReverse|+UKAdvTime;
+
+/*		1469. не може розглядатися Верховною Радою України більше одного разу протягом однієї чергової сесії.
+
+309;40;UKAdvdegreeCon|UKCon;UKAdj|UKCon;noun/adverb of degree before noun or beginendconcept becomes concept
+
+/*		309. Найбільше увагу глядачів привернули роботи із зображеної жіночкою на човні у морі.
+
 787;40;UKAdvdegreeCon+^UKComp;UKAdvdegree;
 
+/*		787. Тобто майже в 2 рази більше, ніж у середньому у світі.
 /* 'дещо'
 
 1310;40;UKDeshtsho|UKRAdv;UKRAdv|+Join;
+
+/*		1310. Станом на 1 квітня 2013 року наявне населення складало 2 846 852 осіб, постійне дещо менше — 2845938.
+
 1041;40;UKDeshtsho|UKAdvdegree;UKAdvdegree|+Join;
+
+/*		1041. наявне населення складало 2 846 852 осіб, постійне дещо менше.
+
 1044;40;UKDeshtsho|UKAdjComp;UKAdj|+Join;
+
+/*		1044. Дещо вільнішою була цензура.
+
 1045;40;UKDeshtsho|UKVerb;UKVerb|+Join;
+
+/*		1045. Культурні особливості дещо відрізняються у різних регіонах.
+
 1046;40;UKDeshtsho|UKInf;UKInf|+Join;
+
+/*		1046. при цьому його зміст і форма може дещо відрізнятися від первісного авторського задуму відповідно до естетичних ідеалів.
+
 1047;40;UKDeshtsho|UKPartAdj;UKPartAdj|+Join;
+
+/*		1047. Голосний переднього ряду, високого, але дещо зниженого піднесення, нелабіалізований.
+
 1049;40;UKDeshtsho|UKPartadjPart;UKPartadjPart|+Join;
+
+/*		1049. зразка, яка була дещо призабута в ранньому середньовіччі.
+
 1042;40;UKDeshtsho;UKIndefpronPR+UKIndefpron;
 
+/*		1042. кожний іконописець вносить дещо своє у створені ним ікони.
 /*Indefinite pronoun OR adverb degree
 /*===================================
 
-1053;40;UKIndefpronAdvdegree|UKVerb:UKInf:UKPart;UKRAdv|^UKVerb;
+1347;40;UKIndefpronAdvdegree|"в"|"чому"|UKVerb:UKInf;UKRAdv|*|*|*;
 
+/*		1347. Між тим відносини виникають за різних обставин і багато в чому різняться між собою.
+
+1053;40;UKIndefpronAdvdegree|UKVerb:UKInf:UKPart;UKRAdv|*;
+
+/*		1053. У цей час багато працює на літературній ниві. країна продовжувала багато витрачати на підтримку режимів. З того часу було дуже багато модернізовано та реконструйовано.
+
+1385;40;UKCon|UKHyphen:UKButi|.UKAdv:UKAdvdegree|UKIndefpronAdvdegree|^UKVerb:UKPart:UKInf;*|*|*|UKCAdv|*;
+
+/*		1385. І сплата податку в розмірі 6 грн - мізерно мало.
 /*Adverb degree
 /*=============
 
 242;40;UKAdvdegree|UKIndefpronPR;UKIndefpronPR|+Join;adverb of degree before pathrelevant indefinite pronoun becomes pathrelevant
-1133;40;UKAdvdegree|UKIndefpronPRCon|UKPartadjPart;UKBCon+UKCon|UKAdj|UKAdj;
-356;40;UKAdvdegree|UKIndefpronPRCon;UKBCon+UKCon|UKCon;adverb of degree plus indefinite pronoun as pathrelevant or concept becomes beginconcept plus concept
-253;40;UKAdvdegree|UKPrep;UKPrep|*;adverb of degree before preposition becomes relation
+
+/*		242. засвоєння античності мало зовсім інший характер.
+
+1359;40;UKAdvdegree|UKIndefpronPRNR;UKIndefpronPRNR|+Join;adverb of degree before pathrelevant/nonrelevant indefinite pronoun becomes part of pronoun
+
+/*		1359. розмістити на човні практично будь-яке обладнання.
+
+356;40;UKAdvdegree:UKVidnosno|UKIndefpronPRCon;JoinReverse|+UKIndefpronPRCon;adverb of degree plus indefinite pronoun as pathrelevant or concept becomes beginconcept plus concept
+
+/*		356. В даний момент вони характерні для економік майже всіх країн світу.
+
+253;40;UKAdvdegree|UKPrep;UKRAdv|*;adverb of degree before preposition becomes relation
+
+/*		253. який майже на тридцять років був старшим від неї.
+
 889;40;UKAdv|UKAndOrBut|UKAdvdegree;UKAdvdegree|*|*;
-1082;40;UKAdvdegree|UKAdvTime;UKAdvPR+UKTime|+Join;
+
+/*		889. Рішення суду, ухвалене на основі повно і всебічно з'ясованих обставин.
+
+1082;40;UKAdvdegree|UKAdvTemp;JoinReverse|+UKAdvTemp;
+
+/*		1082. була створена зовсім недавно.
+
 1085;40;UKAdvdegree|UKAdvPR;UKAdvPR|+Join;
+
+/*		1085. Петрогліфи відомі практично скрізь.
+
 1254;40;UKAdvdegree|UKNum;UKCAdv|*;
+
+/*		1254. я зупинився на відстані більш ніж 30 метрів від зупинки громадського транспорту.
+
 243;40;UKAdvdegree;UKAdv;default for adverb of degree: adverb
 
+/*		243. У результаті значно розширюється база мотивації трудової діяльності працівників не тільки як споживачів.
 /* 'всё' (combined with comparative)
 
 365;40;UKComp|"за"|"все";UKComp|+Join|+Join;
-306;40;"все":"усе"|UKComp;UKAdv|*;'vsjo' before comparative becomes adverb
 
+/*		365. Але мені здається, що краще за все була б зараз пауза.
+
+306;40;"все":"усе":"ще"|UKComp;JoinReverse|+UKComp;'vsjo' before comparative becomes adverb
+
+/*		306. На північ і північний захід від цього масиву серед водних просторів все виразніше виступали контури Карпатських гір.
 /*Comparative
 /*===========
 
 793;40;UKPrep|UKComp|UKCon;*|UKAdj|*;
+
+/*		793. в найсильніше почуття.
+
 307;40;UKComp;UKAdv;default for comparative: adverb
 
+/*		307. не було сенсу працювати ліпше.
 /*Adverb time
 /*===========
 
 881;40;UKAdj|UKAdv|UKPrep;*|UKAdj|*;
 
+/*		881. Найближчою генеалогічно до української є білоруська мова.
 /*InfCon
 /*======
 
 777;40;UKmAux:UKAux|UKInfCon;*|UKVerb;
+
+/*		777. Можна карати порушників 10 - чи 15-хвилинними вилученнями під час матчу. ці недоумки не будуть мати доступу.
+
 903;40;UKComma|UKInfCon|UKComma;*|UKCon|*;
+
+/*		903. Формами випуску цих матеріалів є гелі, пасти, порошки, гранули, губки та пористі покриття.
+
 1107;40;UKVerb|UKInfAfterVerb;*|UKInf;
+
+/*		1107. Тренування не проводили, а на штучному - не вмів і не любив грати.
+
 1108;40;UKButi|UKPartadjPart|UKInfCon;*|UKPart|UKInf;
+
+/*		1108. Тот був запрошений грати на престижному фестивалі.
+
 778;40;UKInfCon;+UKVerbCon;
 
+/*		778. щоб грати музику відповідно до настрою фільму у кожен конкретний момент.
 /*Participles: predicative / attributive
 /*======================================
 
 170;40;UKVerb|UKVerbCon;*|UKCon;verb/noun after verb becomes concept
+
+/*		170. акті законодавства України, то застосовуються правила міжнародного договору.
+
 802;40;UKButi|UKPartadjPart;*|UKPart;
+
+/*		802. Вивчаючи ушкодження, які були спричинені від дії гострих колюче-ріжучих знарядь.
+
 720;40;UKPrep|UKPartadjPart|UKCon;*|UKAdj|*;
+
+/*		720. Дим виходить через відчинене вікно.
+
 1135;40;^UKTse:UKPrep+^SBegin|UKPartadjPart|UKPartadjPart:UKPartAdj|UKCon;*|UKPart|UKAdj|*;
+
+/*		1135. невірно застосоване діюче законодавство та дана невірна оцінка матеріалам зібраним.
+
 724;40;UKPrep|UKPartadjPart|UKAdj;*|UKAdj|*;
+
+/*		724. Наука повинна дати відповіді на поставлені суспільною практикою запитання.
+
 737;40;UKPrep|UKAdv|UKPartadjPart|UKCon;*|*|UKAdj|*;
+
+/*		737. Немає спокуси зіграти в суто атакуючий футбол.
+
 830;40;^UKCon+^SBegin|UKComma|UKConj|UKPartadjPart|UKCon;*|*|*|UKAdj|*;
-1134;40;^UKRelpron+^SBegin|UKAdvPR|UKPartadjPart|UKCon;*|*|UKAdj|*;
+
+/*		830. Якщо зважити, що представлена конструкція не потребує жодних джерел живлення.
+
+1134;40;^UKRelpron|UKAdvTemp|UKPartadjPart|UKCon;*|*|UKAdj|*;
+
+/*		1134. нещодавно визнана скандалістка. NOT. всередину, куди заздалегідь поміщені цебро з водою і віник.
+
 721;40;UKAdj|UKPartadjPart|UKCon;*|UKAdj|*;
+
+/*		721. створений єдиний наземний автоматизований комплекс керування.
+
 732;40;UKAdj|UKPartadjPart|UKAdj;*|UKAdj|*;
-780;40;UKIndefpronPRCon|UKPartadjPart|UKCon:UKAdj;UKBCon+UKCon|UKAdj|*;
-812;40;UKIndefpron|UKPartadjPart|UKCon;*|UKAdj|*;
+
+/*		732. Так в античній скульптурі підносилися прекрасні оголені жіночі фігури із гармонійними пропорціями.
+
+780;40;UKIndefpronPRCon|UKPartadjPart|UKCon:UKAdj;^UKBCon+UKAdj|UKAdj|*;
+
+/*		780. Банківському праву властиві обидва вказані методи. Така система може включати усі існуючі економічні нормативи та фінансові показники або лише частину з них.
+
+812;40;UKIndefpron:UKTse|UKPartadjPart|UKCon;*|UKAdj|*;
+
+/*		812. Обіймати будь-які інші оплачувані посади.
+
 848;40;^UKComma|UKPartadjPart:UKPartAdj|UKPrep|UKPerspron|UKAdj:UKCon;*|UKAdj|+Join|+Join|+Join;
+
+/*		848. яка прилягає до зовнішньої мембрани (outer membrane) мітохондрії і відокремлена від неї міжмембранним простором. NOT. солдатами, висланими проти них штабом.
+
 739;40;UKPartadjPart|UKActobj|UKCon;UKAdj|UKAdj|*;
+
+/*		739. Може бути покладено на створювані ними органи.
+
 744;40;UKPartadjPart|UKActobj|UKVerbCon;UKAdj|UKAdj|UKCon;
+
+/*		744. Оскільки підготовані ними переклади переписувались носіями інших діалектів.
+
 746;40;UKJak|UKPartadjPart|UKAndOrBut|UKPartadjPart|UKCon;^UKRelpron|UKAdj|UKAdj|UKAdj|*;
+
+/*		746. Тому управлінський вплив виступає як цілеспрямований та організуючий фактор.
+
 849;40;UKJak|.UKNe|UKPartadjPart|UKCon;^UKRelpron|*|UKAdj|*;
+
+/*		849. Реально з'єднуються із засобами праці як не наймані робітники.
+
 725;40;SBegin|UKPartadjPart|UKCon:UKAdj;*|UKAdj|*;
+
+/*		725. Зведений бюджет складається із трьох підбюджетів. Вивітрені кам'яні розсипи можна спостерігати.
+
 733;40;UKPartadjPart|UKCon|UKVerb:UKNe;UKAdj|*|*;
+
+/*		733. Тобто даний позов не направлений на захист порушеного права.
+
 1061;40;UKAdvStruct|UKVidnosno|UKPartadjPart|UKCon;*|UKCAdv|UKAdj|*;
+
+/*		1061. то це насамперед відносно замкнута частина системи права.
+
 801;40;^UKComma+^UKRelpron+^SBegin|UKPartadjPart|UKCon|UKPunctuation;*|UKAdj|*|*;
+
+/*		801. Відомості про зміст освіти й отримані результати (форма навчання, вимоги програми, докладні дані про програму, схема оцінювання).
+
 785;40;UKInf|UKPartadjPart;*|UKAdj;
+
+/*		785. а також розірвати укладений у 1995 р. договір про спільну діяльність.
+
 727;40;UKVerb+^UKButi|UKPartadjPart|UKAdj:UKCon;UKVerb|UKAdj|*;participles nominative between verb (except 'to be') and adjective or noun becomes adjective 
+
+/*		727. Країна не прийме споряджені отруйними речовинами боєприпаси. У довго незаживаючих ранах констатується підвищений рівень ензимів.
+
 735;40;UKVerb+^UKButi+^UKE|UKPartadjPart|UKPrep;*|UKAdj|*;participles nominative between verb (except 'to be') and preposition becomes adjective
+
+/*		735. такі заклади буди відкриті протягом 1980-х років.
+
 736;40;UKAdj|UKAndOrBut|UKPartadjPart;*|*|UKAdj;
+
+/*		736. Трактуються як протилежні і пов'язані з концепцією поділу суспільства.
+
 807;40;UKPartadjPart|UKAndOrBut|UKAdj|SEnd;UKAdj|*|*|*;
-742;40;^UKComma+^UKCon+^UKButi|UKAdv|UKPartadjPart|UKCon;*|*|UKAdj|*;
+
+/*		807. Усі дієслова поділяються на два види — доконаний і недоконаний.
+
+742;40;^UKComma+^UKCon+^UKButi|UKAdv|UKPartadjPart|UKCon+^UKNum;*|*|UKAdj|*;
+
+/*		742. Встановлено, що пацієнти з ІХС асоційованою з МС мають достовірно більш виражений гіповітаміноз Д , Е. Авітаміноз.Сімптоми. Хімічно заквашений хліб також називають «швидким хлібом» і «хлібом на соді». NOT. Повністю виграна однією з протиборчих сторін.
+
 745;40;UKVerb+^UKButi|UKAdv|UKPartadjPart|UKAdj|UKCon;*|UKCAdv|UKAdj|*|*;
+
+/*		745. Податкове право займає чітко виражене проміжне положення.
+
 887;40;UKPartadjPart|UKCon|UKAdv|UKVerb;UKAdj|*|*|*;
+
+/*		887. А розвинутий транспорт значно збільшує ринок.
+
 1137;40;UKPartadjPart|UKPartadjPart:UKPartAdj|UKCon;UKAdj|UKAdj|*;
+
+/*		1137. Обґрунтований даний позов тим, що при прийнятті оскаржуваних рішень загальних зборів.
+
 1138;40;UKAdvStruct|UKPartadjPart|UKCon+^UKConInstr;*|UKAdj|*;
+
+/*		1138. авангардистів були так звані прокляті поети XIX століття. NOT. Нотна тривалість може бути також модифікована «крапкою».
+
 1139;40;UKButi|UKPart|UKPartadjPart|UKCon;*|*|UKAdj|*;
+
+/*		1139. в якій було написано даний твір, таке виконання.
+
 1145;40;UKHyphen|UKTse|UKCon|UKPartadjPart;*|*|*|UKAdj;
+
+/*		1145. Кібернетичний підхід до поняття «управління» — це підхід формалізований.
+
 1264;40;UKNegPR|UKNe|UKPartadjPart|.UKAdv:UKCAdv|UKAdj;UKAdj|UKNegCon-UKNegBegin|UKAdj|*|*;
+
+/*		1264. діючі та ніким не скасовані юридично зобов'язуючі угоди.
+
+1364;40;UKAdj|UKComma|UKPartadjPart|UKComma;*|*|UKAdj|*;
+
+/*		1364. верхній, нижній, дивний, зачарований, чарівний та істинний.
+
 730;40;UKPartadjPart;UKPart;
 
+/*		730. Список фільмів-учасників заходу і склад журі поки не оприлюднені.
 /*Participle (+defaults other labels into present participle)
 /*===========================================================
 
-1140;40;UKPartAdjSubst|UKAndOrBut|UKPartAdjSubst;UKAdj|*|UKAdj;
-389;40;UKPartAdjSubst;UKPartAdj;default for long participle/noun: long participle
+1140;40;UKPartAdjCon|UKAndOrBut|UKPartAdjCon;UKAdj|*|UKAdj;
+
+/*		1140. більш 18 тисяч убитими, пораненими та полоненими.
+
+389;40;UKPartAdjCon;UKPartAdj;default for long participle/noun: long participle
+
+/*		389. Такий вплив містить комплекс керуючих команд, що їх виробляє, формує і видає суб'єкт.
+
 833;40;UKButi|.UKAdv|UKPartAdj;*|UKRAdv|UKPart;
-825;40;UKE:UKNe:UKConj|UKPartAdj|UKPrep;*|UKPart|*;
+
+/*		833. Наші можливості "на полі бою" будуть вкрай обмеженими.
+
+825;40;UKNe:UKConj|UKPartAdj|UKPrep;*|UKPart|*;
+
+/*		825. Підписання договору від імені юридичною особи не уповноваженою на це особою є підставою. В радянському музикознавстві музична форма вважалася другорядною відносно змісту, проте пов'язаною зі змістом зворотнім зв'язком.
+
 808;40;UKPartAdj|UKAndOrBut|UKAdj;UKAdj|*|*;
-392;40;UKECon|UKPartAdj|^UKCon+^SEnd;UKECon+UKCon|UKPart|*;long participle after time expression as endconcept becomes relation
+
+/*		808. Підозрюваний, обвинувачений чи підсудний має право на захист.
+
 1143;40;UKComma|."які"|UKPartAdj;*|UKRelpron|UKPart;
+
+/*		1143. Підписання договору від імені юридичною особи не уповноваженою на це особою є підставою, визначеною ст. 215 Цивільного кодексу України.
+
 44;40;UKComma|UKNe|.UKAdv|UKPartAdj;*|*|UKRAdv|UKPart;long participle after comma plus 'ne' (plus adverb) becomes relation
-45;40;UKComma|UKAdv|UKPartAdj;*|UKRAdv|UKPart;long participle after comma plus adverb becomes relation
+
+/*		44. Держава гарантує свободу політичної діяльності, не забороненої Конституцією і законами України.
+
+45;40;^UKAdj|UKComma|UKAdv|UKPartAdj;*|*|UKRAdv|UKPart;long participle after comma plus adverb becomes relation
+
+/*		45. з використанням елементів бюджетування, широко застосовуваних у цей час. NOT. як і в малих, більш знайомих кальмарів.
+
 393;40;UKPart|UKAndOrBut|UKPartAdj;*|*|UKPart;long participle after past participle plus and/or/but becomes relation
+
+/*		393. одна з найважливіших пісень, написаних і виконаних ним за п'ять років.
+
 52;40;UKNe|UKPartAdj;*|UKAdj;long participle after 'ne' becomes concept
+
+/*		52. Факт зникнення цієї держави залишався не визнаним юридично.
+
 43;40;UKPartAdj;^UKAdj;default for long participle: adjective
 
+/*		43. забезпечення конституційних прав і свобод ув'язнених під варту. замовник зобов’язується оплатити виконавцеві зазначену послугу.
 /* 'відносно': adverb degree OR preposition
 
 1059;40;UKVerb:UKPart:UKInf:UKPrep|UKVidnosno;*|UKAdv;
+
+/*		1059. ці мембранні субдомени поєднані відносно невеликими трубчастими структурами. Незважаючи на те, що фонди розвитку навчальних закладів почали працювати відносно недавно, їх плани та ідеї вже реалізовуються. Зважаючи на відносно молодий геологічний вік моря.
+
 1060;40;UKVidnosno;UKPrep;
 
+/*		1060. відставання підприємств відносно інших суб’єктів-конкурентів на ринках.
 /*Nonrelevant part of noun group
 /*==============================
 
-652;40;UKAdj:UKNum|UKPosspron|UKAdj:UKNum;*|UKAdj|*;possessive pronoun between two adjectives or numbers becomes concept
+1415;40;UKNum+^UKYearNum|UKPosspron|UKAdj:UKNum;*|UKAdj|*;possessive pronoun between number and adjective or number becomes concept
+
+/*		1415. жителі якої витрачають половину своїх споживчих витрат на їжу.
+
 701;40;UKAdj|UKActobj:"ж":"же"|UKCon;*|UKAdj|*;personal pronoun as acting object or 'ж(е)' between adjective and noun becomes concept
 
+/*		701. з метою максимізації ефективності виконуваних ними операцій. Для дрібного ж бізнесу, як правило, розумно практикувати лише поточне планування.
 /* 'чином'
 
 710;40;UKAdj|UKAndOrBut|UKAdj|UKChinom;UKAdv|+Join|+Join|+Join;adjective plus and/or/but plus adjective plus 'chinom' are joined to one adverb
+
+/*		710. провести ці вибори вільним і справедливим чином.
+
 558;40;UKAdj|UKChinom;UKAdv|UKAdv;adjective plus 'chinom' both become adverb
+
+/*		558. стану екологічної безпеки, чи належним чином поставлена система організації.
+
 555;40;UKIndefpronPR|UKChinom;UKIndefpronPR|+Join;pathrelevant indefinite pronoun plus 'chinom' are joined to pathrelevant indefinite pronoun
+
+/*		555. Таким же чином інформація в них, як правило, мається на єдиному екземплярі.
+
 1031;40;UKIndefpronPRNR|UKChinom;UKAdvStruct|+Join;
+
+/*		1031. Ці корупційні схеми побудовані таким чином, що формально існують усі документи.
+
 556;40;UKChinom;UKCon;default for 'chinom': concept
 
+/*		556. На думку тодішніх “верхів” лірика аж ніяким чином не могла впливати на соціально-економічний розвиток суспільства і її просто зневажали.
 /* 'самый'
 
 188;40;UKSamyj|UKAdj+^UKCapitalInitial;UKAdj|*;'samy' before adjective becomes concept
+
+/*		188. Саме державні органи влади здійснюють моніторинг нарахування та сплати податків. NOT. у суді саме Бублик був директором.
+
 189;40;UKSamyj|UKAdv|UKAdj;UKAdj|^UKCAdv|*;'samy' before adverb plus adjective becomes concept
+
+/*		189. Самими екологічно несприятливими районами.
+
 197;40;UKSamyj;UKAdvStruct;default for 'samy': structural adverb
 
+/*		197. Близько 30 % інвестицій припадає саме на такі операції.
 /* 'шляхом'
 
 198;40;UKAdj|UKShliachom;*|UKCon;'shliakhom' after adjective becomes concept
+
+/*		198. в лійці підтримували постійним шляхом доливання нових доз модельного розчину.
+
 869;40;UKShliachom|SEnd;UKCon|*;
+
+/*		869. здійснює своє правління прямим, директивним, шляхом.
+
 195;40;UKShliachom;UKPrep;default for 'shliakhom': preposition
 
+/*		195. веде до подолання її шляхом зміни власника.
 /*Reciprocal pronoun/number 'один'
 /*================================
 
-222;40;UKOdyn|UKPrep|UKOdyn;UKVerb|+Join|+Join;reciprocal pronoun plus preposition plus reciprocal pronoun is joined to verb
-1036;40;UKOdyn|UKAndOrBut|UKIndefpronPR;UKIndefpronPR|+Join|+Join;
-176;40;UKOdyn+^UKIndefpron;UKAdj;default for reciprocal pronoun: adjective
+222;40;UKOdyn|.UKPrep|UKOdyn;UKRAdv|+Join|+Join;reciprocal pronoun plus preposition plus reciprocal pronoun is joined to verb
 
+/*		222. Відрізняються одне від одного залежно від об'єкта. команди так жодного разу і не змогли влучити у ворота одна одної.
+
+1036;40;UKOdyn|UKAndOrBut|UKIndefpronPR;UKIndefpronPR|+Join|+Join;
+
+/*		1036. Ніхто не може бути двічі притягнений до юридичної відповідальності одного виду за одне й те саме правопорушення.
 /*Indefinite pronoun before adjective, possessive pronoun
 /*=======================================================
 
 1215;40;UKVsjeGen|UKAdj:UKNum;UKCon|*;
-353;40;UKVsje|UKAdj:UKNum;UKBCon+UKCon|*;'vsyo' before adjective or number becomes beginconcept
-341;40;UKIndefpronPRCon|UKAdj;UKAdj|*;indefinite pronoun as pathrelevant or concept before adjective becomes concept
-1032;40;UKIndefpronPRNR|.UKNe|UKAdj:UKPosspron;UKNRPron|*|*;
-357;40;UKIndefpronPRCon|UKPosspron|^UKVerb+^SEnd;UKCon|UKCon|*;indefinite pronoun as pathrelevant or concept plus possessive pronoun both become concepts
 
+/*		1215. створити на базі комітету робочу групу з доопрацювання всіх чотирьох законопроектів.
+
+353;40;UKVsje|UKAdj:UKNum;UKBCon+UKCon|*;'vsyo' before adjective or number becomes beginconcept
+
+/*		353. Але я надав дорогу всім транспортним засобам. Для цього доводиться приділяти увагу всім трьом аспектам тактики.
+
+341;40;UKIndefpronPRCon|UKAdj;^UKAdj|*;indefinite pronoun as pathrelevant or concept before adjective becomes concept
+
+/*		341. Напередодні який набирає чинності закону кілька великих ЗМІ та видавничих будинків вже змінили структуру власників.
+
+1032;40;UKIndefpronPRNR|.UKNe|UKAdj:UKPosspron;UKNRPron|*|*;
+
+/*		1032. економічні кризи в цей час «вже не представляються такими грізними для капіталізму. Така її природа, адже безправними легше керувати (виконувати свою головну задачу). Кожен має право будь-якими не забороненими законом засобами захищати свої права.
+
+357;40;UKIndefpronPRCon|UKPosspron|^UKVerb+^SEnd;^UKAdj|UKAdj|*;indefinite pronoun as pathrelevant or concept plus possessive pronoun both become concepts
+
+/*		357. порушення процесу капіталістичного виробництва у всіх його фазах. NOT. як безліч їх вмирає.
 /* 'правда' and 'и'
 
 217;40;SBegin|UKPravda|UKComma;*|UKAdvStruct|*;'pravda' at beginning sentence before comma becomes nonrelevant
+
+/*		217. Правда, як тільки він зайняв посаду в уряді.
+
 214;40;UKPravda;UKCon;default for 'pravda': concept
+
+/*		214. вперше обігнала за рейтингом (правда, всього лише на 1%) Партію.
+
 779;40;SBegin|UKAdvStruct|UKAndOrBut;*|UKAdvStruct|+Join;
+
+/*		779. Ну а хто ним стане - поки несподіванка навіть для журі.
+
 567;40;SBegin|UKAndOrBut;*|UKAdvStruct;and/or at beginning sentence becomes nonrelevant
+
+/*		567. І цей рух відбувається у вигляді ривків.
+
 786;40;SBegin|UKAdvStruct|UKComma|UKAndOrBut;*|*|*|UKAdvStruct;
 
+/*		786. Врешті, й витвір високої культури буває інколи популярним.
 /*noun/verb
 /*=========
 
 775;40;UKConVerb|UKInf;UKVerb|*;
+
+/*		775. Систему міжнародного права слід відрізняти від системи науки міжнародного права.
+
 487;40;UKAdj:UKPrep:UKVerb|UKConVerb;*|UKCon;noun/verb after adjective becomes concept
+
+/*		487. Дружба з «тіткою Єлею» залишила помітний слід в житті і творчості поетеси. три кола навколо гаю у своєму дачному селищі. Американський журналіст знайшов слід ЦРУ.
+
 492;40;UKConVerb|UKAdj:UKCon;UKCon|*;noun/verb before adjective or noun becomes concept
+
+/*		492. Слід американського черевика на помаранчевій шкуринці. таких як метан і закис азоту, що утримують тепло.
+
 490;40;UKConVerb;UKVerb;default for noun/verb: verb
 
+/*		490. як і слід було очікувати.
 /*Verb/noun
 /*=========
 /*NOTE: InfCon has extra label VerbCon (r778), make sure Inf is not lost when it becomes a Relation
 
 165;40;UKAdj|UKVerbCon;*|UKCon;verb/noun after adjective becomes concept
-747;40;UKIndefpronPRCon|UKVerbCon;UKAdj|UKCon;
+
+/*		165. вважав такими перенагромадження капіталу і зниження заробітної плати працюючих.
+
+747;40;UKIndefpronPRCon|UKVerbCon;^UKAdj|UKCon;
+
+/*		747. Великі дози алкоголю чинять паралізуючий вплив на деякі відділи центральної нервової системи.
+
 1030;40;UKIndefpronPRNR|UKVerbCon;UKNRPron|UKCon;
+
+/*		1030. Ця влада почувається впевнено, бо вона агресивна, вона зневажає будь-які правила гри.
+
 757;40;UKPosspron:UKDempron|UKVerbCon;*|UKCon;
+
+/*		757. їхня мати. ті запити.
+
 168;40;UKPrep|UKVerbCon;*|UKCon;verb/noun after preposition becomes concept
+
+/*		168. яку було проведено згідно ухвали суду.
+
 651;40;UKVerbCon|UKVerb;UKCon|*;
+
+/*		651. Правила встановлюють також особливості тримання засуджених.
+
 782;40;UKInf:UKPart|UKVerbCon;*|UKCon;
+
+/*		782. Щоб порівняти сліди пальців на місці злочину. Таким людям рекомендовано вироби з борошна.
+
 781;40;UKVerbCon|UKPart;UKCon|*;
+
+/*		781. на інші виплати встановлені законом.
+
 884;40;UKPunctuation:UKComma|UKVerbCon|UKPunctuation:UKComma;*|UKCon|*;
+
+/*		884. назва походить від alloy (сплав).
+
 900;40;UKInf:UKVerb+^UKButi|UKCon|UKVerbCon;*|*|UKCon;
+
+/*		900. Міцний основний корпус човна, виготовлений зі спеціальних сплавів, здатний витримати тиск води на глибинах занурення. Введення парового двигуна значною мірою спростило видалення води і дозволило будувати глибші шахти, видобуваючи, таким чином, більше вугілля.
+
 904;40;UKVerbCon|UKCon|UKVerb;UKCon|*|*;
+
+/*		904. Правила відбору встановлюються окремими федераціями видів спорту.
+
 1197;40;UKInfCon;UKInf;
+
+/*		1197. Треба виходити і грати.
+
 169;40;UKVerbCon;UKVerb;default for verb/noun: verb
 
+/*		169. Встановлено інші правила, ніж ті, що передбачені у відповідному акті.
 /*Indefinite pronoun before concept
 /*=================================
 
 1057;40;UKIndefpronPRCon|UKIndefpronPRNR;UKIndefpronPRCon|+Join;
-338;40;UKIndefpronPRNR|UKCon;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before noun becomes nonrelevant pronoun
-362;40;UKIndefpronPRCon|UKCon;UKCon|*;indefinite pronoun as pathrelevant or concept before concept becomes concept
 
+/*		1057. Вилетіли ще багато таких куль.
+
+338;40;UKIndefpronPRNR|UKCon;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before noun becomes nonrelevant pronoun
+
+/*		338. Незважаючи на таку схожість лізингу з кредитуванням.
+
+362;40;UKIndefpronPRCon|UKCon;^UKAdj|*;indefinite pronoun as pathrelevant or concept before concept becomes concept
+
+/*		362.  Положення цієї глави можуть застосовуватися до всіх договорів про надання послуг.
 /*Particle/verb
 /*=============
 
 918;40;UKPtclVerb|UKComma|UKConj;UKVerb|*|*;
+
+/*		918. Зрозуміло, що альтерація системи кровообігу під час внутрішньоутробного розвитку.
+
 179;40;SBegin|UKPtclVerb|UKComma;*|UKAdvStruct|*;partcicle/verb at beginning sentence before comma becomes nonrelevant
+
+/*		179. Зрозуміло, далеко не всі фундаментальні дослідження завершуються відкриттями.
+
 177;40;UKPtclVerb;UKVerb;default for particle/verb: verb
 
+/*		177. Це зрозуміло.
 /*Reciprocal pronoun
 /*==================
 
 1147;40;UKPrep|UKRepr;*|UKPerspron;
+
+/*		1147. кілька ченців живуть окремо, але поблизу один одного.
+
 447;40;UKRepr;UKVerb;default for reciprocal pronoun: verb
 
+/*		447. окремі табори, які суперечили один одному в питаннях соціально-економічної орієнтації.
 /*Emphasized reflexive pronoun
 /*============================
 
 484;40;UKPrep|UKAdvRefl;*|UKPerspron;'sam sebe' after preposition becomes pathrelevant
+
+/*		484. Тільки не для держави, не для нації, а для самих себе – від політичного банкрутства та забуття.
+
 485;40;UKAdvRefl;UKAdv;default for 'sam sebe': adverb
 
+/*		485. Сьогодні світ має допомогти сам собі.
 /*Reflexive pronoun
 /*=================
 
 137;40;UKVerb|UKPrep|UKRefl;UKVerb|+Join|+Join;verb plus preposition plus reflexive pronoun are joined to verb
+
+/*		137. організація включає в себе розробку методів.
+
 1029;40;UKPart|UKPrep|UKRefl;UKPart|+Join|+Join;
+
+/*		1029. грошових зобов'язань, прийнятих на себе згідно з умов цього договору.
+
 1027;40;UKInf|UKPrep|UKRefl;UKInf|+Join|+Join;
+
+/*		1027. Розробка загальних принципів функціонування державних банків має включати в себе окреслення сфери.
+
 644;40;UKInf|UKRefl;UKInf|+Join;
+
+/*		644. Тому терміни «просто господарі» і «підприємці» ми можемо уявити собі у вигляді антитези двох таких суб'єктів господарювання.
+
 1028;40;UKVerb|UKRefl;^UKVerb|+Join;
+
+/*		1028. з'явилося угруповання вояків, що звали себе козаками.
+
 645;40;UKRefl|UKInf;UKInf|+Join;
+
+/*		645. Важко собі уявити, що в цих настановах після є яка-небудь доцільність.
+
 139;40;UKRefl|UKVerb;UKVerb|+Join;reflexive pronoun plus verb are joined to verb
+
+/*		139. Хоча це були зовсім не ті тренінги, які я собі уявляла.
+
 138;40;UKRefl|UKAdv|UKVerb;UKVerb|*|*;reflexive pronoun before adverb plus verb becomes relation
+
+/*		138. Ставка на профілактику в роботі з дітьми себе цілком виправдала.
+
 154;40;UKCon|UKRefl;UKCon|+Join;
 
+/*		154. за уособлення собою значного внеску.
 /* 'тем','то'
 
 402;40;UKComma|UKDempronConj;*|UKConj;'tim/to' after comma becomes relation
+
+/*		402. Якщо боржник є юридичною особою, то реалізація майна проводиться за місцезнаходженням.
+
 401;40;UKDempronConj;UKDempron;default for 'tim/to': demonstrative pronoun
 
+/*		401. Це зумовлено й тим, що ікони не можна копіювати.
 /* 'це' indefinite pronoun/verb
 
 468;40;UKHyphen|UKTse|UKCon:UKAdj:UKAdv:UKAndOrBut;*|UKPred|*;'tse' between dash and adjective, noun, adverb or and/or/but becomes relation
+
+/*		468. За визначенням, роз'яснення рішення, ухвали - це засіб виправлення недоліків судового акта, який полягає в усуненні неясності судового акта. Атмосферне повітря - це зовнішня газоподібна оболонка Землі. Результати інтелектуальної діяльності — це безперечно результати творчої діяльності. Кватроченто — це і значні суспільні потрясіння.
+
+1384;40;UKCon:UKAdj|UKTse|UKCAdv:UKAdj:UKCon:UKNegCon;*|UKPred|*;'tse' between adjective or noun and adverb as concept, adjective, noun or 'ne' as concept becomes relation
+
+/*		1384. Есперанто це одна з найпопулярніших штучних мов у світі.
+
 470;40;UKTse;UKDempron;default for 'tse': demonstrative pronoun
 
+/*		470. Але це не означає, що не будемо грати.
 /*Indefinite pronoun
 /*==================
 
-360;40;UKIndefpronPRCon|UKDempron|UKCon;UKBCon+UKCon|UKCon|*;indefinite pronoun as pathrelevant or concept plus demonstrative pronoun before noun become beginconcept plus concept
-337;40;UKIndefpronPRNR|UKIndefpronPR;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before pathrelevant indefinite pronoun becomes nonrelevant
-1034;40;UKIndefpronPRNR|UKKAdj|UKCon;UKNRPron|UKAdj|*;
-891;40;UKIndefpronPRCon|UKKAdj;UKAdj|UKAdj;
-335;40;UKIndefpronPRNR;UKPRPron;default for pathrelevant or nonrelevant indefinite pronoun: pathrelevant pronoun
-361;40;UKIndefpronPRCon|UKIndefpronPR|^UKVerb+^UKComma+^SEnd;UKBCon+UKCon|UKCon|*;
-358;40;UKIndefpronPRCon|UKIndefpronPR;UKIndefpronPR|+Join;indefinite pronoun as pathrelevant or concept plus pathrelevant indefinite pronoun are joined to pathrelevant pronoun
-862;40;UKIndefpronPRCon|^UKAdj+^UKCon+^SEnd;UKIndefpronPR|*;
-864;40;UKIndefpronPRCon|SEnd;UKIndefpronPR|*;
+360;40;UKIndefpronPRCon|UKDempron|UKCon;^UKBCon+UKAdj|UKAdj|*;indefinite pronoun as pathrelevant or concept plus demonstrative pronoun before noun become beginconcept plus concept
 
+/*		360. але всі ці заходи значно ускладнюють обладнання.
+
+337;40;UKIndefpronPRNR|UKIndefpronPR;UKNRPron|*;pathrelevant or nonrelevant indefinite pronoun before pathrelevant indefinite pronoun becomes nonrelevant
+
+/*		337. Порівняно невелика частина віруючих або належить до яких-небудь інших конфесій.
+
+1034;40;UKIndefpronPRNR|UKKAdj|UKCon;UKNRPron|UKAdj|*;
+
+/*		1034. країна здатна забезпечити себе й експортувати такі важливі види корисних копалин.
+
+891;40;UKIndefpronPRCon|UKKAdj;^UKAdj|UKAdj;
+
+/*		891. Святилище містить усі необхідні знаряддя для здійснення різних служб і Таїнств.
+
+1504;40;UKIndefpronPRCon|.UKAdv|UKAdj:UKCon;UKAdj|*|*;
+
+/*		1504. між масою і тими небагатьма по-справжньому творчими талантами.
+
+335;40;UKIndefpronPRNR;UKPRPron;default for pathrelevant or nonrelevant indefinite pronoun: pathrelevant pronoun
+
+/*		335. В цивільному праві чимало прав такого роду.
+
+361;40;UKIndefpronPRCon|UKIndefpronPR|^UKVerb+^UKComma+^SEnd;^UKBCon+UKAdj|UKAdj|*;
+
+/*		361. що має найбільшу продуктивність при всіх інших однакових параметрах.
+
+358;40;UKIndefpronPRCon|UKIndefpronPR;UKIndefpronPR|+Join;indefinite pronoun as pathrelevant or concept plus pathrelevant indefinite pronoun are joined to pathrelevant pronoun
+
+/*		358. Всі інші поставилися до витівки регіоналки більш лояльно.
+
+862;40;UKIndefpronPRCon;UKIndefpronPR;
+
+/*		862. Знову починають притягатися вільні капітали – усі одержують доходи – економіка виходить із кризи.
 /*Relative pronoun: default conjunction
 /*=====================================
 
 573;40;UKRelpron;+UKConj;extra label for relative pronoun: conjunction
 
+/*		573. в контексті забезпечення надання базових банківських операцій, причому недостатньо ефективно, про що свідчать низькі показники їх фінансових результатів.
 /*Demonstrative pronoun
 /*=====================
 
 449;40;UKDempron|UKAdv|UKAdj;UKNRPron|^UKCAdv|*;demonstrative pronoun plus adverb before adjective becomes nonrelevant plus concept
+
+/*		449. Від цих дуже хороших людей.
+
 453;40;UKDempron|UKCon:UKAdj;UKNRPron|*;demonstrative pronoun before noun or adjective becomes nonrelevant pronoun
 
+/*		453. здійснення контролю за діяльністю Кабінету Міністрів України відповідно до цієї Конституції. Тому управлінський вплив виступає як цілеспрямований та організуючий фактор.
 /*Short form adjective
 /*====================
 
 882;40;UKInf+^UKButi|UKKAdj;*|UKAdj;
+
+/*		882. Намагаються в той чи інший спосіб вирішити наявні проблеми. NOT. ці обставини не могли бути відомі заявникові на час розгляду справи.
+
 474;40;UKCon|UKAdv|UKKAdj;*|^UKRAdv|UKPred;adverb plus short adjective after noun  both become relation
+
+/*		474. Душа абсолютно відмінна від тіла і міститься в ньому, як у темниці.
+
 1202;40;UKCon|UKNe|UKKAdj;*|*|UKPred;
-473;40;UKCon|UKKAdj;*|UKPred;short adjective after noun becomes relation
+
+/*		1202. Етимологія слова «Україна» достеменно не відома.
+
+473;40;UKCon+^UKNum|UKKAdj;*|UKPred;short adjective after noun becomes relation
+
+/*		473. Як буде видно зі змісту договору про фінансовий лізинг, для цього договору характерне інше.
+
 875;40;UKPerspron|UKKAdj;*|UKPred;
+
+/*		875. В даний момент вони характерні для економік майже всіх країн світу.
+
 876;40;UKKAdj|UKPrep;UKPred|*;
+
+/*		876. Виходи їх відомі в районі.
+
 850;40;UKPrep|UKKAdj;*|UKAdj;
+
+/*		850. на здоров’я людини та про можливі шкідливі наслідки.
+
 894;40;UKKAdj|UKCon|UKCon|UKVerb;UKAdj|*|*|*;
-472;40;^UKVerb:UKPart:UKAndOrBut:UKRAdv:SBegin:UKAdj|UKKAdj|UKCon;*|UKPred|*;short adjective before noun becomes relation
+
+/*		894. Недостатня вентиляція легень призводить до нестачі кисню в тканинах.
+
+1360;40;UKComma|.UKPrep|UKKotry|.UKRelpron|UKKAdj|.UKAdj|UKCon;*|*|*|*|UKPred|*|*;
+
+/*		1360. Дітям, яким необхідні 2 дози грипозної вакцини.
+
+1362;40;UKComma|.UKAdv|UKKAdj|UKCon+UKConDatMN:UKConDatPl;*|*|UKPred|*;
+
+/*		1362. Є й інші міста, добре відомі туристам.
+
+1361;40;UKPrep|UKDempron|UKKAdj|.UKAdj|UKCon;*|*|UKPred|*|*;
+
+/*		1361. Для цього необхідна інтегрованість.
+
 821;40;UKAdj:UKAdv|UKKAdj|UKAdj;*|UKAdj|*;
+
+/*		821. Їх найближчі відомі живі родичі. Всесвітньо відомі українські боксери.
+
 475;40;^UKVerb+^UKPart+^UKConj+^UKPunctuation+^SBegin|UKKAdj|UKAdj;*|UKPred|^UKAdj;short adjective before adjective becomes relation
+
+/*		475. Особливої гостроти вона набуває щодо транзитивної економіки, оскільки останній, притаманні численні негативні наслідки реформування.
+
 478;40;UKPred|UKAndOrBut|UKKAdj;*|*|UKPred;short adjective after predicate plus and/or/but becomes relation
+
+/*		478. що для кожного випадку є властивий і  характерний тільки йому певний стан тих або інших прапорців.
+
 477;40;UKKAdj|UKAndOrBut|UKPred;UKPred|*|*;short adjective before and/or/but plus predicate becomes predicate
+
+/*		477. що для кожного випадку є характерний і властивий тільки йому певний стан тих або інших прапорців.
+
 810;40;UKButi|UKKAdj|^UKAdj;*|UKPred|*;
+
+/*		810. Цілющий ефект трав'яних настоїв та настоянок був відомий, коли Європа перебувало під владою кельтських племен. Проте деталі цієї подорожі мало відомі.
+
 906;40;UKComma|UKKAdj|SEnd;*|UKPred|*;
+
+/*		906. Примирення, звичайно, можливе.
+
 823;40;UKKAdj|UKPosspron:UKInf;UKPred|*;
+
+/*		823. Незалежно від того чи відомі їхні імена.	Він заявив, що готовий платити.
+
 907;40;UKKAdj|UKConj+^UKAndOr;UKPred|*;
+
+/*		907. Встановлювати обмеження, а потім їх руйнувати - схоже так і працює двигун прогресу. NOT. Необхідне і достатнє біорізноманіття.
+
 908;40;UKPunctuation|UKKAdj|SEnd;*|UKPred|*;
+
+/*		908. У Києві вночі помірний, вдень невеликий дощ, гроза: можливе.
+
 476;40;UKKAdj;UKAdj;default for short adjective: adjective
 
+/*		476. Особа, яка вчиняє правочин, повинна мати необхідний обсяг цивільної дієздатності.
 /*Reflexive pronoun pt2
 /*=====================
 
 155;40;UKRefl;UKPerspron;default for reflexive pronoun: personal pronoun
 
+/*		155. Кожний громадянин має право знайомитися  з відомостями про себе.
 /*Adverb-suffix
 /*=============
 
 751;40;UKCon|UKAdvSuffix;*|UKCon;
-752;40;UKVerb|UKAdvSuffix;*|UKVerb;
+
+/*		751. Про забезпечення безпеки дорожнього руху шляхом приведення до ладу розміток.
+
 753;40;UKAdvSuffix;UKVerb;
 
+/*		753. пущено до ладу першу ділянку метрополітену.
 /*Adverb
 /*======
 
 5;40;UKAdv|UKVerb:UKPart:UKPred;^UKRAdv|*;adverb before verb, participle or predicate becomes relation
-2;40;UKAdv|.UKNe|UKAdj;^UKCAdv|*|*;adverb before (ne plus) adjective becomes concept
+
+/*		5. Поступки, нав'язані силою однієї зі сторін, неминуче породжують в іншої бажання реваншу. Є й інші міста, добре відомі туристам — порт-місто Одеса і старе місто Львів на заході.
+
+1346;40;UKCon+^UKNum|UKAdv|UKAdj+^UKAdjGen;*|UKBCon|*;
+
+/*		1346. У світі немає двох держав, чиї інтереси абсолютно ідентичні. NOT. зустрічався з одним дуже поінформованим чоловіком.
+
+2;40;UKAdv|.UKNe|UKAdj+^UKIndefpron;^UKCAdv|*|*;adverb before (ne plus) adjective becomes concept
+
+/*		2. Відтворення достатньо голосного звуку, що міг би бути чутний поверх звуку оркестру. Нарешті, об'єкт промислової власності з тих чи інших причин може бути просто не запатентованим. NOT. Тут особливо важливо все оснащення сходжувача.
+
 70;40;UKAdv|UKInf:UKRAdv;^UKRAdv|*;adverb before infinitive or adverb as relation becomes relation
+
+/*		70. Для дрібного ж бізнесу, як правило, розумно практикувати лише поточне планування.
+
 3;40;UKAdv|UKCAdv;^UKCAdv|*;adverb before adverb as concept becomes concept
+
+/*		3.  Ця мембрана є найбільш білково збагаченою, з вмістом протеїнів і ліпідів у співвідношенні 75:25.
+
 20;40;UKAdv|UKAndOrBut|UKRAdv;^UKRAdv|*|*;adverb before and/or/but plus adverb as relation becomes relation
+
+/*		20. “Українці все більше і більше звикають купувати через інтернет», – стверджує він.
+
 21;40;UKAdv|UKAndOrBut|UKCAdv;^UKCAdv|*|*;adverb before and/or/but plus adverb as concept becomes concept
-33;40;UKAdj|UKAdv:UKBeginendconcept|UKCon;*|^UKCAdv|*;adverb or beginendconcept between adjective and noun becomes concept
+
+/*		21. З можливих стилів сходження більше цінуються ті, що «чистіше» і найменш затратні за часом.
+
+33;40;UKAdj|UKAdv:UKSingleWord|UKCon;*|UKCAdv|*;adverb or beginendconcept between adjective and noun becomes concept
+
+/*		33. Виникли у наслідок популярного в XVII - XVIII ст. філологічного напряму досліджень (співзвучності назв). реалізовуваних сьогодні контрактів.
+
 880;40;UKAdj|UKAdv|SEnd;*|UKAdj|*;
+
+/*		880. Факт залишався не визнаним юридично.
+
+1357;40;UKButi|*UKAdv|^UKPart:UKInf:UKCon;*|UKCAdv|*;
+
+/*		1357. то на практиці це буде дуже складно. NOT. Але якщо тодішній купець був фактично підприємцем.
+
+1376;40;SBegin:UKConj|"це":"все"|*UKAdv|UKComma|*UKAdv|UKAndOr:UKAndOrBut|*UKAdv|UKComma:SEnd;*|*|UKCAdv|*|UKCAdv|*|UKCAdv|*;
+
+/*		1376. Все дуже смачно, класно та швидко.
+
+1377;40;SBegin:UKConj|"це":"все"|*UKAdv|UKAndOr:UKAndOrBut|*UKAdv|UKComma:SEnd;*|*|UKCAdv|*|UKCAdv|*;
+
+/*		1377. Все дуже смачно та швидко, офіціант теж дуже привітлива і приємна.
+
+1373;40;SBegin:UKConj|"це":"все"|*UKAdv|UKComma:SEnd;*|*|UKCAdv|*;
+
+/*		1373. Це закономірно.
+
+1383;40;"що"|*UKAdv|UKComma:SEnd;*|UKCAdv|*;
+
+/*		1383. При тому, що дуже важливо, це не лише державні гроші.
+
+1380;40;SBegin:UKConj|UKPrep|.UKCAdv:UKAdj|UKCon|*UKAdv|UKAndOr:UKAndOrBut|*UKAdv|UKComma:SEnd;*|*|*|*|UKCAdv+UKBCon|*|UKCAdv|*;
+
+/*		1380. У номері чисто та комфортно, є все необхідне, навіть чайник, чай, цукор.
+
+1381;40;SBegin:UKConj|UKPrep|.UKCAdv:UKAdj|UKCon|*UKAdv|UKComma:SEnd;*|*|*|*|UKCAdv+UKBCon|*;
+
+/*		1381. В бунгало чисто, новий ремонт, сучасна сантехніка, є фен.
+
+1358;40;UKCAdv|*UKAndOr:UKAndOrBut:UKComma|*UKAdv;*|*|UKCAdv;
+
+/*		1358. в розвитку фігур ставало все важче і важче. тому, що це престижно, сучасно, культурно або оригінально. Для аналогічних завдань у сучасних дослідженнях використовують телекеровані з поверхні підводні апарати, що набагато дешевше, але значно менш наочно.
+
+1365;40;UKHyphen|*UKAdv|UKComma:SEnd;UKConj|UKCAdv|*;
+
+/*		1365. а набір ваги — все легше, причому вага, що набирається, з кожним разом збільшується.
+
+1366;40;UKCon|"не тільки"|UKAdv|UKComma|*{2}UKAndOrBut|UKAdv;*|*|UKCAdv|*|*|UKCAdv;
+
+/*		1366. При цьому фахівці запевняють: сало в раціоні не тільки смачно, але і корисно.
+
+1367;40;UKPrep|UKAdv;*|UKCAdv;
+
+/*		1367. Давайте не боятись змінювати на краще.
+
 38;40;UKAdv;^UKRAdv;default for adverb: relation
 
+/*		38. Юридичні норми утворюють галузь права не безпосередньо, а через інститути.
+/*one of
+/*======
+
+1350;40;UKOdyn:UKKozhen:UKIndefpronPR+^UKConGen:UKAdjGen|UKIz|.UKPRPron:UKPosspron:UKNRPron:UKAdj:UKCAdv:UKAdvTemp|UKCon;UKBCon+UKAdj|+Join|UKAdj|*;
+
+/*		1350. Одним із перших своїми враженнями поділився режисер. Дехто з авторів. NOT. Усього з 1990 р. по 2012 р..
+
+1351;40;UKOdyn:UKKozhen:UKIndefpronPR+^UKConGen:UKAdjGen|UKIz|.UKPRPron:UKPosspron:UKNRPron:UKCAdv:UKAdvTemp|UKAdj;UKBCon+UKAdj|+Join|UKAdj|*;
+
+/*		1351. Вона була однією з перших, хто прибув. Ці фрази стали одними з найпопулярніших і найзгадуваніших у ЗМІ.
+
+1352;40;UKOdyn:UKKozhen:UKIndefpronPR|UKIz|.UKPRPron:UKPosspron:UKNRPron:UKAdj:UKCAdv:UKAdvTemp|UKCon;UKAdj|+Join|UKAdj|*;
+
+/*		1352. Закінчився час на годиннику одного з гравців.
+
+1353;40;UKOdyn:UKKozhen:UKIndefpronPR|UKIz|.UKPRPron:UKPosspron:UKNRPron:UKCAdv:UKAdvTemp|UKAdj;UKAdj|+Join|UKAdj|*;
+
+/*		1353. Презентація роботи одного з перших в області центрів.
 /*Preposition: nonrelevant/relation
 /*=================================
 
 493;40;UKAdj|UKPrep|UKPerspron|UKCon;*|UKAdj|UKAdj|*;preposition plus personal pronoun between adjective and noun both become part of the concept
 
+/*		493. Оскільки відповідач не виконав взятих на себе зобов'язань.
 /*Dash
 /*====
 
-428;40;UKCon:UKAdj|UKHyphen|UKCAdv:UKAdj:UKCon:UKNegCon;*|UKConj|*;dash between adjective or noun and adverb as concept, adjective, noun or 'ne' as concept becomes relation
+428;40;UKCon:UKAdj:UKAdvTime:UKTimeEndConcept|UKHyphen|UKCAdv:UKAdj:UKCon:UKNegCon:UKAdvTime:UKTimeEndConcept;*|UKConj|*;dash between adjective or noun and adverb as concept, adjective, noun or 'ne' as concept becomes relation
 
+/*		428. Лазня — спеціально обладнане приміщення для миття тіла з одночасною дією води і пари або гарячого повітря. Єдиним органом законодавчої влади в Україні є парламент - Верховна Рада України. День прийняття Конституції України є державним святом - Днем Конституції України. у другому - металургійні комбінати. перше, що природний результат гри — нічия.
 /*Defaults
 /*========
 
 610;40;UKButi+^UKInf;^UKVerb;
+
+/*		610. Домінуючим видом була E. сoli. NOT. Народні депутати України не можуть мати іншого представницького мандата чи бути на державній службі.
+
 400;40;UKComma;+UKPunctuation;extra label for comma: punctuation
-1038;40;UKECon;UKECon;to remove other labels than econ
+
+/*		400. Відтворення достатньо голосного звуку, що міг би бути чутний поверх звуку оркестру.
+
 1043;40;UKAdj+^UKBCon;UKAdj;to remove other labels than adj
-1066;40;UKBeginendconcept;UKBeginendconcept;to remove other labels than beginendconcept
+
+/*		1043. її наслідки посідають одне з важливіших місць в структурі захворювань.
+
 1149;40;UKIndefpronPR;UKPRPron;default for pathrelevant indefinite pronoun: pathrelevant pronoun
-1150;40;UKAdvPR;UKAdvPR;to remove all other labels so PathRelevancy is not lost
+
+/*		1149. Багато хто розумів.
+
 1151;40;UKDempron;UKPRPron;default for demonstrative pronoun: pathrelevant pronoun
+
+/*		1151. Це пояснюється тим, що лізингодавець не зацікавлений при припиненні платежів.
+
 1152;40;UKPerspron;UKPerspron;to remove all other labels so PathRelevancy is not lost
+
+/*		1152. Вона не стала звинувачувати.
+
 1237;40;UKBCon;UKBCon;to remove all other labels than BCon, to prevent it from becoming nonrelevant
 
+/*		1237. замовник зобов’язується оплатити виконавцеві зазначену послугу.
 /*PHASE 60: detect enumerations
 /* = = = = = = = = = = = = = = 
 
-1180;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;4-element enumeration
-1181;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration
+1180;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr:UKAndOrBut|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;4-element enumeration
+
+/*		1180. Не допускається збирання, зберігання, використання та поширення конфіденційної інформації про особу без її згоди.
+
+1181;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr:UKAndOrBut|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration
+
+/*		1181. Правочин, що вчиняється батьками (усиновлювачами), не може суперечити правам та інтересам їхніх малолітніх, неповнолітніх чи непрацездатних дітей. Доктор не радять виключати з раціону фрукти, овочі та інші поживні страви.
+
 1182;60;*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr|.UKPosspron:UKAdj:UKPRPron:UKNRPron:UKCAdv|*UKCon;+UKList|+UKList|+UKList|+UKList;2-element enumeration
+
+/*		1182. Поняття «фінансовий лізинг» не слід змішувати з різними формами відносин щодо найму і підряду.
+
 1297;60;UKBCon|.UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr:UKAndOrBut|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;4-element enumeration starting with beginconcept
+
+/*		1297. Ми не даємо оцінок подіям, особам, учасникам подій чи явищам.
+
 1298;60;UKBCon|.UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr:UKAndOrBut|.UKPosspron:UKAdj:UKPRPron|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration starting with beginconcept
+
+/*		1298. Ми не даємо оцінок подіям, учасникам подій чи явищам. Використання власності не може завдавати шкоди правам, свободам та гідності громадян.
+
 1299;60;UKBCon|.UKCon:UKPosspron:UKAdj:UKPRPron|UKAndOr:UKAndOrBut|.UKPosspron:UKAdj:UKPRPron:UKNRPron:UKCAdv|*UKCon;+UKList|+UKList|+UKList|+UKList|+UKList;2-element enumeration starting with beginconcept
+
+/*		1299. Ми не даємо оцінок подіям чи явищам. що навіть на ранніх етапах розвитку первісні общини та племена не існували окремо.
+
 1304;60;SBegin|*UKCon:UKPosspron:UKAdj:UKPRPron|UKComma|*UKCon:UKPosspron:UKAdj:UKPRPron;*|+UKList|+UKList|+UKList;2-element enumeration with comma
+
+/*		1304. Глибокі структурні зміни економіки, розв'язання цілої низки глобальних проблем можливі не на основі ринкових стимулів.
+
 1183;60;SBegin:UKConj|"і"|*UKCon:UKPosspron:UKAdj:UKPRPron|.UKComma|UKAndOr|*UKCon:UKPosspron:UKAdj:UKPRPron;*|+UKList|+UKList|+UKList|+UKList|+UKList;literal because it's AdvStruct at beginning sentence
+
+/*		1183. Проте і творчість, і інтелектуальна діяльність мають свої особливості або відмінності. І ринок, і ієрархія влади не є досконалими механізмами.
+
 1185;60;UKNegRel:UKNe|UKVerb|UKAndOr:UKAndOrBut|UKNegRel:UKNe|UKVerb;*|*|+UKList|*|*;2-element enumeration of negated conjugated verbs
+
+/*		1185. У касаційній інстанції не приймаються і не розглядаються вимоги.
+
 1226;60;UKNegRel:UKNe|UKPart|UKAndOr:UKAndOrBut|UKNegRel:UKNe|UKPart;*|*|+UKList|*|*;2-element enumeration of negated participles
+
+/*		1226. Не може бути обраним до Верховної Ради України громадянин, який має судимість за вчинення умисного злочину, якщо ця судимість не погашена і не знята у встановленому законом порядку.
+
 1198;60;UKConj|UKVerb|UKAndOr|UKConj|UKVerb;*|*|+UKList|*|*;2-element enumeration of conjunction + conjugated verb
-1186;60;UKVerb:UKPart|UKAndOr:UKAndOrBut|.UKAdvStruct:UKRAdv:UKAdvPR|UKVerb:UKPart;*|+UKList|*|*;2-element enumeration of conjugated verbs
+
+/*		1198. ось ті шляхи і рецепти щастя, яких дотримувались і які пропагували провідні українські мислителі.
+
+1186;60;UKVerb:UKPart|UKAndOr:UKAndOrBut|.UKAdvStruct:UKRAdv:UKAdvPR:UKAdvTemp|UKVerb:UKPart;*|+UKList|*|*;2-element enumeration of conjugated verbs
+
+/*		1186. вони пом'якшують або скасовують відповідальність особи. Але в деяких випадках міжнародне право дозволяє чи навіть приписує сторонам суперечки. Разом із тим, у цій сфері існує і завжди залишиться певна кількість імперативних приписів. Заслухавши суддю-доповідача, розглянувши та обговоривши доводи касаційної скарги. Суддя не може бути без згоди Верховної Ради України затриманий чи заарештований до винесення обвинувального вироку судом.
+
+1421;60;UKInf|UKAndOr:UKAndOrBut|.UKAdvStruct:UKRAdv:UKAdvPR:UKAdvTemp|UKInf;*|+UKList|*|*;2-element enumeration of infinitives
+
+/*		1421. не має права встановлювати або вважати доведеними обставини.
+
 1187;60;UKNegRel:UKNe|.UKmAux:UKNegPR|UKVerb:UKPart|UKAndOr|.UKAdvStruct:UKRAdv|UKVerb|^SEnd;*|*|*|-UKList|*|*|*;correction for r1186: should be split here
-1188;60;UKCon|UKComma|UKAndOr|.UKPosspron:UKPRPron:UKNRPron:UKCAdv:UKPrep:UKAdvPR|*UKAdj:UKCon|UKPunctuation:SEnd;+UKList|+UKList|+UKList|+UKList|+UKList|*;
+
+/*		1187. Окуляри, що не запотівають і швидко сохнуть від бризок води. У ранній Церкві допускався одружений єпископат, але пізніше це  відмінили з практичних міркувань, аби єпископ не був нічим зв'язаний і міг повністю віддаватись своєму служінню.
+
+1188;60;UKCon|UKComma|UKAndOr|.UKPosspron:UKPRPron:UKNRPron:UKCAdv:UKPrep:UKAdvPR:UKAdvTemp|*UKAdj:UKCon|UKPunctuation:SEnd;+UKList|+UKList|+UKList|+UKList|+UKList|*;
+
+/*		1188. що визнання державних і комунальних юридичних осіб власниками неминуче веде або до виникнення фігури подвійного власника, або до утвердження існування розщеплюваної власності. за якою і банкір, і видавець, і аптекар, і нерідко сільський господар.
+
 1199;60;UKRAdv|UKAndOr:UKAndOrBut|UKRAdv;*|+UKList|*;
+
+/*		1199. Для таких сходжень існує і постійно вдосконалюється технічний арсенал, що дозволяє швидко і максимально можливо надійно в незручному положенні організувати точку страховки або опори, висячий іноді багатоденний бівак, приготування їжі на вису й ін. Отже, судом першої інстанції не було повно та всебічно досліджено усі фактичні обставини.
+
 1189;60;UKAndOr:UKAndOrBut|UKRAdv|UKComma|UKAndOr|UKRAdv;*|*|*|+UKList|*;
+
+/*		1189. а правозастосовча діяльність Ради Безпеки обмежена і юридично, і політично.
+
 1241;60;UKNe|UKAdj|UKAndOrBut|.UKNe|UKAdj;+UKList|+UKList|+UKList|+UKList|+UKList;
+
+/*		1241. Взуття тепле (але не вільне і не затісне), що добре тримає кішки.
+
 1263;60;UKInf|UKComma|UKInf|.UKComma|UKAndOr|UKInf;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;
+
+/*		1263. Паранормальні явища — загальний термін, що описує події, яких немає змоги виміряти, повторити, чи провести науковий експеримент, тому ці явища, з точки зору класичної науки, не мають великої цінності.
+
 1306;60;.UKPosspron:UKPRPron:UKNRPron:UKCAdv|UKAdj|UKComma|.UKCAdv|UKAdj|UKAndOrBut|.UKCAdv|*UKAdj|.UKCon;+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList|+UKList;3-element enumeration of adjectives with AndOrBut
 
+/*		1306. Він не може бути касаційної, апеляційної чи наглядової інстанцією для судів загальної юрисдикції.
 /*PHASE 65: negation markers
 /* = = = = = = = = = = = = =
 /*Default labels - negation markers
@@ -820,180 +2360,418 @@
 /*'none of'
 
 1216;65;UKNegPR:UKNiyaki|UKIz|"них":"нас":"вас";UKNegPR|+Join|+Join;
-1218;65;UKNiyaki+UKGen|UKIz|UKPosspron:UKPRPron:UKNRPron;UKNegCon-UKNegBegin|UKAdj|UKAdj;
-1217;65;UKNiyaki|UKIz|UKPosspron:UKPRPron:UKNRPron;UKBCon+UKNegBCon|UKAdj|UKAdj;
-1220;65;UKNiyaki+UKGen|UKIz;UKNegCon|UKAdj;
-1219;65;UKNiyaki|UKIz;UKBCon+UKNegBCon|UKAdj;
-1024;65;UKPrep;UKPrep;make sure prepositions don't become nonrelevant
 
+/*		1216. хоча на жодній з них не було нічого підозрілого.
+
+1218;65;UKNiyaki+UKAdjGen|UKIz|UKPosspron:UKPRPron:UKNRPron;UKNegCon-UKNegBegin|UKAdj|UKAdj;
+
+/*		1218. Не наслідуйте стиль оформлення жодного з наших веб-сайтів або сторінок.
+
+1217;65;UKNiyaki|UKIz|UKPosspron:UKPRPron:UKNRPron;UKBCon+UKNegBCon|UKAdj|UKAdj;
+
+/*		1217. Жоден з ваших гравців не залишається один на один з противником.
+
+1220;65;UKNiyaki+UKAdjGen|UKIz;UKNegCon|UKAdj;
+
+/*		1220. Незвичний та унікальний дизайн нашого бренду не уникне очам жодного з перехожих чи Ваших друзів і близьких.
+
+1219;65;UKNiyaki|UKIz;UKBCon+UKNegBCon|UKAdj;
+
+/*		1219. Але довговічних династій жоден з тиранів не створив.
+
+1024;65;UKPrep;UKPrep;26-08-2015-nl,make sure prepositions don't become nonrelevant
+
+/*		1024. значним гетерогенітетом як за своєю морфологією.
 /* nothing + adjective
 
 1205;65;UKNegPR:UKNiyaki|.UKCAdv|UKAdj;UKBCon+UKNegBCon|UKCAdv|*;
 
+/*		1205. хвороба не створює в організмі нічого істотно нового.
 /*'ни'
 
 1204;65;UKNi|UKPrep|UKRelpron|UKAdj:UKCon;UKBCon+UKNegBCon-UKNegBegin|+Join|+Join|*;
+
+/*		1204. Ми надаємо слово всім зацікавленим і не стаємо ні на чий бік.
+
 96;65;UKNi|UKPrep|UKNegPR_part;UKNegPR+UKNegation-UKNegBegin|+Join|+Join;'ni' plus preposition plus part of negation marker as pathrelevant are joined to negation marker as pathrelevant
+
+/*		96. Але ж ні в кого не викликає сумніву.
+
 861;65;SBegin|UKNi|UKComma;*|UKAdvStruct|*;
+
+/*		861. Ні, сього не буде!
+
 98;65;UKNi;^UKNegRel;default for 'ni': negation marker as relation
 
+/*		98. вони взагалі не передбачають ні існування такої посади, ні повноважень виконавчого директора.
+/*'не': not negation
+
+1427;65;UKRelpron|UKCond|UKPerspron|UKNe;*|*|*|UKRAdv-UKNegation-UKNegBegin;
+
+/*		1427. Я був і залишуся прикордонником і де б я не був, чим би не займався, я завжди буду хвилюватися разом із прикордонни.
+
+1426;65;UKRelpron|UKCond|UKNe;JoinReverse|JoinReverse|UKRAdv-UKNegation-UKNegBegin;
+
+/*		1426. Чим би не був спричинений біль чи дискомфорт у животі, аби швидко зняти неприємні відчуття та дочекатись допомоги лікаря, варто зробити кілька простих речей.
 /*disambiguate 'не'
 
 1334;65;UKNe+UKNegIndefpronCon|UKAdj;UKNegCon|*;
-1200;65;UKNe|.UKAdj:UKCAdv:UKCon:UKECon;UKNegCon-UKNegBegin|*;no expansion for negation on noun
+
+/*		1334. При цьому не всяка зовнішня дія викликає відчуття: для цього вона повинна досягти певної сили.
+
+1200;65;UKNe|.UKAdj:UKCAdv:UKCon;UKNegCon-UKNegBegin|*;no expansion for negation on noun
+
+/*		1200. У цих умовах на перший план висувається питання вже навіть не конкурентоспроможності підприємств.
+
 541;65;UKNe;UKNegRel;default for 'ne': negation marker as relation
 
+/*		541. Поняття «фінансовий лізинг» не слід змішувати з різними формами відносин щодо найму і підряду.
 /*'жоден' and 'ніякий'
 
 1337;65;UKNiyaki+UKAdjGen;UKNegCon;
+
+/*		1337. Цілі жодної сторони не досягнуті до кінця.
+
 561;65;UKNiyaki;UKBCon+UKNegBCon;default for 'niyaki': negation marker as beginconcept
 
+/*		561. Сільське населення й сільські робітники ніяким страхуванням не користувалися.
 /*PHASE 66: sentence structure detection
 /* = = = = = = = = = = = = = = = = = = =
 /*after punctuation
 /*=================
 
 1163;66;SBegin:":"|^SBegin+^UKPunctuation;*|+UKPBegin;first word sentence or hyphen, colon
+
+/*		1163. На думку тодішніх “верхів” лірика аж ніяким чином не могла впливати на соціально-економічний розвиток суспільства. Ще складніше справа з контролем за доходами та видатками, не пов’язаними з основною діяльністю: фінансовими, інвестиційними, іншими операційними та іншими доходами.
+
 1164;66;SBegin|UKPunctuation|^UKPunctuation;*|*|+UKPBegin;
+
+/*		1164. - У чому причина того, що не грають? « Наша сім’я жила в дуже близьких стосунках з селянами. »
+
 1317;66;SBegin|UKPunctuation|UKDigit|UKPunctuation|^UKPunctuation;*|*|*|*|+UKPBegin;
+
+/*		1317. [83] Стала виразнішою господарча спеціалізація за природно-кліматичними зонами.
+
 1165;66;*{2}UKPunctuation|^UKPunctuation;*|+UKPBegin;
+
+/*		1165. між позивачем та відповідачем було укладено Договір (т.1 а.с.19-21), за умовами якого позивач надає відповідачу кредит.
+
 1166;66;UKBracket1|*{1,2}^UKPunctuation|UKBracket2|^SEnd:UKPunctuation;-UKPunctuation|*|-UKPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
+
+/*		1166. з урахуванням заробітної плати, з якої призначено (попередньо перераховано) пенсію.
+
 1167;66;UKBracket1:UKBracket2+UKPunctuation|^SEnd:UKPunctuation;*|+UKPBegin;isolate part of sentence between ()
 
+/*		1167. Діяльність органів, що діють від імені держави, регулюють в основному закони (а не інші правові акти).
 /*after comma
 /*===========
 
 1173;66;UKComma|UKAdvStruct|UKComma;*|*|+UKNotMarkerPB;preparation, mark comma after advstruct so it's NOT followed by a PB
+
+/*		1173. Важлива відмінність фінансового лізингу від договору майнового найму полягає в тому, що в користування, як правило, здаються не старі засоби.
+
 1170;66;UKComma|UKPrep:UKRAdv|UKConj;*|+UKPBegin|*;after comma: preposition/adverb + conjunction
+
+/*		1170. ся як такі, що виникають між юридично рівними сторонами, між якими не виникає стосунків влади та підкори. Це пов'язано з існуванням граничних рівнів зарплатні, вище яких або відбувається лімітування відрахувань.
+
 1171;66;UKComma|UKNegPR|UKNegRel;*|+UKPBegin|*;after comma: negation pronoun
+
+/*		1171. вважаючи, що масова підриває елітарну, нічого не даючи взамін.
+
 1224;66;UKPunctuation|UKConj:UKPart:UKAndOr+^UKList;*|+UKPBegin;after punctuation: conjunction
+
+/*		1224. Потім ми повинні грати - якщо ми не граємо, тоді вже тритижнева перерва.
+
 1169;66;UKComma|UKPart:UKAndOr+^UKList;*|+UKPBegin;after comma: conjunction or participle
+
+/*		1169. Вибір емпіричної терапії, оснований на даних локального моніторингу.
+
 1172;66;UKComma+^UKNotMarkerPB|UKVerb:UKPred:UKNegRel;*|+UKPBegin;after comma: verb, predicate or relation negation marker
+
+/*		1172. На початку XX ст. французькі вчені, говорячи про природу криз, називали підхід основоположників марксизму «теорією катастроф». Творчість, у результаті якої появляється щось нове, властива далеко не всім. NOT. Важлива відмінність фінансового лізингу від договору майнового найму полягає в тому, що в користування, як правило, здаються не старі засоби.
+
 1174;66;UKComma|UKAndOr+^UKList|.<^UKComma:UKPunctuation|UKVerb:UKPred;*|+UKPBegin|*|*;after comma: and/or if verb follows
+
+/*		1174. А головне, не давали ні на хвилину нікому забути про те, що проблема є, і права людини продовжують порушуватися. Лізингоодержувач не є власником майна чи обладнання, і воно перебуває на балансі лізингодавця. NOT. рідкісні види були філогенетично (а імовірно, і екологічно) близькі до масових або ж відрізнялися. NOT. І ринок, і ієрархія влади не є досконалими механізмами.
+
 1175;66;UKAdj:UKCon:UKNRPron:UKPRPron:UKPerspron:UKRAdv:UKAdvStruct:UKAdvPR;+UKPossiblePBegin;preparation for various patterns concerning phrase begin
-1177;66;UKPrep:UKBCon:UKPosspron:UKNegCon;+UKPossiblePBegin;preparation for various patterns concerning phrase begin
+
+/*		1175. І хоча втручання держави в цю діяльність законодавством не допускається, така регламентація не може обмежитися загальною вимогою про те. Крім цього, КВК України містить низку нових положень, яких не було у Виправно-трудовому кодексі, по-новому чи більш детально регулює окремі питання виконання та відбування кримінальних покарань. І хоч системний підхід до аналізу явищ дійсності не є відкриттям кібернетики, саме вона привернула загальну увагу.
+
+1177;66;UKPrep:UKBCon:UKPosspron:UKNegCon:UKAdvTemp;+UKPossiblePBegin;preparation for various patterns concerning phrase begin
+
+/*		1177. Вірус не стійкий у навколишньому середовищі, інактивується при 50 ºС впродовж 30–60 хвилин, під час заморожування зберігається протягом кількох місяців і років. Усе це пояснюється тим, що ринок, як образно зазначається в літературі, не все може. ніяких особливостей їх розгляду законодавством не встановлено.
+
 1176;66;UKVerb:UKPart:UKPred|.^UKPunctuation|UKComma:UKHyphen|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
+
+/*		1176. З часом, незважаючи на те, що не вся рідка фаза відділилася від твердої, фільтрування припиняється практично повністю. Така політика їх діяльності не лише йде в розріз із концепцією державного банку, вона також у певному сенсі є дестабілізуючою для вітчизняної економіки. Хоча вона може затриматись на короткий час на Землі, потім вона обов'язково спрямовується на небеса або в пекло. Але як вбачається з матеріалів, складених відповідачем, ці обставини не враховувались. цілісність системи — це сукупність компонентів, взаємодія яких породжує нові якості. Хоча в ранній Церкві існував чин дияконис, нині потреби у ньому немає. І що ще важливі, хліб має рідкісну властивість – він не приїдається, не може набриднути людям.
+
 1307;66;UKVerb:UKPart:UKPred|.^UKPunctuation|UKComma|UKPossiblePBegin|*UKList|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*|*;new phrase includes an enumeration
+
+/*		1307. беручи до уваги такі дані, об'єднання української, російської та білоруської мов в одну підгрупу східнослов'янських мов не є науковим.
+
 1195;66;SBegin:UKPunctuation|*UKConj:UKAdvStruct:UKRAdv|UKComma|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
+
+/*		1195. Таким чином, поняття науково-технічного прогресу не охоплює собою цілу сферу інтелектуальної діяльності. Між тим, правове регулювання банківської діяльності належить до найбільш складних і найменш розроблених проблем національного права.	Усе це пояснюється тим, що ринок, як образно зазначається в літературі, не все може (наприклад, він не може регулювати ціни природних монополістів). Очевидно, така  ситуація не може не викликати внутрішніх функціональних протиріч. загальнодоступною, а відтак, відповідач не міг не знати про те.
+
 1303;66;SBegin:UKPunctuation|*UKPossiblePBegin+^UKList|UKComma:UKHyphen|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
+
+/*		1303. крім того, навіть невеликі іони й субстрати метаболізму не можуть проникнути через неї без участі специфічних білків-переносників. Відповідно до ст. 203 Цивільного кодексу України, зміст правочину не може суперечити цьому Кодексу. Цей результат має бути новим, оригінальним, він не може бути повторенням уже відомого.
+
 1311;66;UKConj|*UKPossiblePBegin+^UKList|UKComma|UKPossiblePBegin|.<^UKPBegin:UKPunctuation|UKVerb:UKPred:UKNegRel;*|*|*|+UKPBegin|*|*;
 
+/*		1311. До того вона будувалась на вилученні та перерозподілі ресурсів, результатом якого було те, що великим та стабільним підприємствам не було сенсу працювати ліпше.
 /*after conjunction / and/or
 /*==========================
 
 1212;66;^UKPBegin|UKConjPB;*|+UKBeginrel+UKPBegin;
-1178;66;^UKConj|UKAndOr|.UKPrep|UKConj:UKPunctuation|*UKPossiblePBegin;*|+UKBeginrel+UKPBegin|*|*|*;'and/or' followed by conjunction or punctuation
+
+/*		1212. Ніхто не може бути заарештований або триматися під вартою інакше як за вмотивованим рішенням суду і тільки на підставах та в порядку, встановлених законом.
+
+1178;66;^UKConj|UKAndOr+^UKList|.UKPrep:UKAdvStruct|UKConj:UKPunctuation+^UKList;*|+UKBeginrel+UKPBegin|*|*;'and/or' followed by conjunction or punctuation
+
+/*		1178. Далеко не всі результати творчої діяльності стають об'єктами інтелектуальної власності і, отже, об'єктами правової охорони. Вже не вперше відвідую ваш кафе і ось, що хочу сказати: меню- все свіже, якісне, а головне доступні ціни.
+
 1184;66;UKVerb:UKPart:UKPred+^UKCond|.<^UKPunctuation|UKAndOr+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;
+
+/*		1184. Конституційні права і свободи гарантуються і не можуть бути скасовані. Якщо вичерпані усі доступні національні правові засоби захисту прав людини і вони не принесли позитивного вирішення справи. NOT. У касаційній інстанції не приймаються і не розглядаються вимоги. NOT. «приходь та й іди вслід за Мною, узявши хреста».
+
 1221;66;UKVerb:UKPred+^UKCond|.<^UKPunctuation:UKPart|UKAndOr+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr|UKPart;*|*|+UKBeginrel+UKPBegin|*|*;no split if Part precedes AndOr+Part
+
+/*		1221. строк якої настав або строк якої не зазначений чи визначений моментом витребування. NOT. Касаційна ж інстанція згідно з частиною другою статті 1117 ГПК України не має права встановлювати або вважати доведеними обставини, що не були встановлені у рішенні або постанові господарського суду чи відхилені ним, вирішувати питання про достовірність того чи іншого доказу, про перевагу одних доказів над іншими, збирати нові докази або додатково перевіряти докази.
+
 1213;66;UKVerb:UKPart:UKPred:UKInf+^UKCond|.<^UKPunctuation|UKAndOrBut+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr:UKInf|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;
+
+/*		1213. З зазначеною постановою не згоден та вважаю її незаконною з наступних підстав.
+
+1422;66;UKVerb:UKPart:UKPred:UKInf+^UKCond:UKmAux|.<^UKPunctuation|UKAndOrBut+^UKList|UKNegRel|UKInf;*|*|+UKBeginrel+UKPBegin|*|*;variant of r1213 for infinitive, extra exception: modal auxiliary verb
+
+/*		1422. У критичних випадках варто, перш за все, зібратися та не панікувати. NOT. так що можна і не користуватись громадським транспортом.
+
 1265;66;UKVerb:UKPred+^UKCond|.<^UKPunctuation:UKPart|UKAndOrBut+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr:UKInf|UKPart;*|*|+UKBeginrel+UKPBegin|*|*;
+
+/*		1265. Вважаю дану постанову необґрунтованою, такою що не відповідає нормам КУпАП та винесеною з перевищенням компетенції суб’єкта владних повноважень. NOT. Громадянин України не може бути вигнаний за межі України або виданий іншій державі.
+
 1190;66;UKVerb:UKPart:UKPred+^UKCond|*<^UKPunctuation|UKAndOr|*<^UKPBegin:UKPunctuation:UKAndOr:UKAndOrBut:UKConj|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;variant of r1184: position 2 and 4 are not optional and there is no exception for enumerations
+
+/*		1190. Цим проектам не судилося збутися через те, що влада незабаром перейшла до Директорії й тема створення київського метро відійшла на задній план. NOT. І наказ МВС, частина якого явно суперечила Конституції України і Кодексу України про Адміністративні правопорушення – наглядна спроба влади ввести вигідні для себе ж правила гри. NOT. як у самій Італії, так і далеко за її межами, якому б століттю чи мистецькому напрямку вони б не належали.
+
 1192;66;UKVerb:UKPart:UKPred+^UKCond|*<^UKPunctuation:UKPBegin|UKConj|.<^UKPBegin:UKPunctuation:UKAndOr:UKAndOrBut|UKVerb;*|*|+UKBeginrel+UKPBegin|*|*;start phrase at conjunction
-1243;66;typeConcept|UKAndOr|UKVerb;*|+UKPBegin|*;
+
+/*		1192. Відтак Британія офіційно відмовилась надсилати у Рим гроші та не визнавала верховенство папи в державі. NOT. Я вірю, що це можливо і що ми можемо це зробити.
+
+1243;66;UKAdj|UKAndOr|.UKNegRel|UKVerb;*|+UKPBegin|*|*;
+
+/*		1243. В усякому разі ці поняття не тотожні і означають вони не одне і те ж. загальні ж плани занадто дрібні й не можуть передати всіх деталей.
+
 1194;66;UKPrep|UKConj+UKPBegin;+UKBeginrel+UKPBegin|-UKBeginrel-UKPBegin;correction for r1192 so preposition + conjunction don't get split up
 
+/*		1194. Таке самостійне погашення боргу підпадає під визначення добровільного виконання про яке йдеться у статті 117 Господарського-процесуального кодексу України.
+
+1423;66;*UKList|UKAndOr+^UKList|.<^UKPBegin:UKPunctuation:UKAndOr|UKVerb;*|+UKBeginrel+UKPBegin|*|*;
+
+/*		1423. Командир (начальник), який своїм рішенням чи бездіяльністю порушив установлений порядок обліку, зберігання, використання військового та іншого майна або не вжив належних заходів.
 /*relative clause
 /*===============
 
 1245;66;UKCon|UKNegRel|UKPart+UKAttributive;*|+UKPBegin|*;participle as relation after noun starts new phrase
+
+/*		1245. Підписання договору від імені юридичною особи не уповноваженою на це особою є підставою, визначеною ст. 215 Цивільного кодексу України.
+
 1261;66;UKCon|UKPrep|UKKotry;*|*|+UKPBegin;
 
+/*		1261. заявили, що ці справи не варті паперу на якому написані.
 /*main verb after participle / subclause
 /*======================================
 
 1246;66;UKCon|.UKComma|UKNegRel|UKPart|*<^UKComma:UKPBegin|UKVerb:UKInf;*|*|*|*|*|+UKPBegin;look for main verb after participle as phrase begin
-1259;66;UKComma|UKRelpron|.UKNegRel|UKVerb+^UKCond|*<^UKVerb:UKPunctuation:UKPBegin|UKAdvPR:UKRAdv|UKVerb;*|*|*|*|*|+UKPBegin|*;
+
+/*		1246. Підписання договору від імені юридичною особи не уповноваженою на це особою є підставою, визначеною ст. 215 Цивільного кодексу України. Це пояснюється тим, що лізингодавець не зацікавлений при припиненні платежів ставити питання про розірвання договору.
+
+1259;66;UKComma|UKRelpron|.UKNegRel|UKVerb+^UKCond|*<^UKVerb:UKPunctuation:UKPBegin|UKAdvPR:UKAdvTemp:UKRAdv|UKVerb;*|*|*|*|*|+UKPBegin|*;
+
+/*		1259. Ті, хто не погодились з Халкідонським собором на Заході часто звуться «Орієнтальним Православ'ям.
+
 1260;66;UKComma|UKRelpron|.UKNegRel|UKVerb+^UKCond|*^UKVerb:UKPunctuation:UKPBegin|UKVerb;*|*|*|*|*|+UKPBegin;
 
+/*		1260. Ті, хто не погодились з Халкідонським собором на Заході звуться «Орієнтальним Православ'ям.
 /*move PBegin on dash to next entity
 /*==================================
 
 1196;66;"-":"–":"—"+UKPBegin|^UKPBegin;-UKPBegin|+UKPBegin;
 
+/*		1196. Проте обмеження творчості встановлюються законом — творчість не може бути анти-суспільною.
 /*PHASE 70: negation expansion
 /* = = = = = = = = = = = = = =
 /* expansion to left
 /*==================
 /* preparation: assign NoExpansion for preposition-concept patterns
 
-1239;70;^UKCon:UKECon|UKPrep|.UKNRPron:UKPRPron:UKPosspron|*UKCAdv:UKAdj:UKCon+^UKBCon;*|*|*|+UKNoExpansion;
+1239;70;^UKCon:UKPerspron|UKPrep|.UKNRPron:UKPRPron:UKPosspron:UKAdvStruct|*UKCAdv:UKAdj:UKCon+^UKBCon;*|*|*|+UKNoExpansion;
 
+/*		1239. А «ринок сонячної енергетики України скоро почне свій стрімкий розвиток і вже через 3-5 років буде не меншим, ніж у деяких країнах Західної Європи». Про сам ринок землі немає змісту проводити референдум. NOT. якщо він протягом визначеного іспитового строку не вчинить нового злочину.
 /*expansion to 'у'
 /*================
 
 1295;70;"у"|*UKNRPron:UKPRPron:UKPosspron:UKCAdv:UKAdj:UKCon+^UKBCon|UKNegRel:UKNegPred;+UKNegBegin|*|*;
 
+/*		1295. в той самий час у слабких не було необхідності підвищувати ефективніст.
 /*expansion for adjective/adverb as concept
 /*=========================================
 
 1240;70;typeConcept:typePathRelevant+^UKNoExpansion|UKPrep|*typeConcept:typePathRelevant:typeAmbiguous|.UKmAux|UKCopula|.UKCAdv|UKNegCon|.UKCAdv|UKAdj|^UKCAdv:UKAdj:UKCon+^UKNegation:UKNegBegin;+UKNegBegin|*|*|*|*|*|*|*|*|+UKNegStop;expansion to subject before copula + negated adjective
+
+/*		1240. При цьому різниця у цих двох шляхах є не моральною чи духовною, а суто практичною.
+
 1238;70;typeConcept:typePathRelevant+^UKNoExpansion|.UKmAux|UKCopula|.UKCAdv|UKNegCon|.UKCAdv|UKAdj|^UKCAdv:UKAdj:UKCon+^UKNegation:UKNegBegin;+UKNegBegin|*|*|*|*|*|*|+UKNegStop;expansion to subject before copula + negated adjective
+
+/*		1238. оскільки для його оцінки переважна більшість показників є не кількісними, а якісними. цей показник має бути не меншим за 20 м². NOT. і вже через 3-5 років буде не меншим.
+
 1242;70;UKNegCon|*UKAdj:UKCon:UKCAdv|UKAndOr|.UKNegCon:UKPosspron|*UKCAdv:UKAdj:UKCon|^UKNegation:UKNegBegin;+UKNegBegin|*|-UKNegStop|*|*|+UKNegStop;expansion for negated adjective in list
+
+/*		1242. При цьому різниця у цих двох шляхах є не моральною чи духовною, а суто практичною. тобто діти були не кращі і не гірші в цьому відношенні своїх закордонних однолітків. Далеко не кожне велике й середнє підприємство. не окремих держав і монополій.
+
 1332;70;UKNegCon|*UKCAdv:UKAdj|"від"|*UKPrep:UKAdvStruct:UKNRPron:UKPRPron:UKAdj:UKCon|^UKNegation;+UKNegBegin|-UKNegStop|-UKNegStop|-UKNegStop|+UKNegStop;expansion for negated adjective to 'than+...' in comparison 
+
+/*		1332. мають забезпечувати рівень життя, не нижчий від прожиткового мінімуму.
+
 1322;70;UKCon+^UKNoExpansion|UKHyphen|UKNegCon|*UKCAdv:UKAdj:UKCon|^UKNegation:UKNegBegin;+UKNegBegin|UKConj|*|*|+UKNegStop;expansion to subject before dash + negated adjective
 
+/*		1322. Але підводний туризм — не надто безпечний вид відпочинку.
 /*expansion for negated indefinite pronoun
 /*========================================
 
 1335;70;UKPBegin|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegIndefpronCon+^UKPBegin;+UKNegBegin|*|*;
 
+/*		1335. Творчість, у результаті якої появляється щось нове, властива далеко не всім.
 /*verb/predicate
 /*==============
 
-1206;70;UKPBegin|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegPred:UKNegRel+^UKPBegin|^UKInf:UKAttributive;+UKNegBegin|*|*|*;exception: no left expansion for 'ne+inf' or 'ne+attributive participle'
+1206;70;UKPBegin|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegPred:UKNegRel+^UKPBegin|^UKAttributive;+UKNegBegin|*|*|*;exception: no left expansion for 'ne+inf' or 'ne+attributive participle'
+
+/*		1206. Якщо даних немає - зазначають причину цього. Проте ВООЗ та інші авторитетні організації зазначають, що кальян не є безпечною альтернативою сигаретам. NOT. посадові особи Державтоінспекції МВС України мають право не повертати посвідчення водія до ухвалення рішення про позбавлення права чи сплати штрафу.
+
 1305;70;UKPBegin|*UKList+^UKNoExpansion|.<^UKPBegin:UKPunctuation:UKNoExpansion|UKNegPred:UKNegRel+^UKPBegin;+UKNegBegin|*|*|*;
+
+/*		1305. Глибокі структурні зміни економіки, розв'язання цілої низки глобальних проблем можливі не на основі ринкових стимулів. Члени Кабінету Міністрів України, керівники центральних та місцевих органів виконавчої влади не мають права суміщати свою службову діяльність з іншою роботою.
+
 1223;70;UKPBegin+^UKVerb|.UKPossiblePBegin:UKmAux+^UKNoExpansion|UKNegRel|UKInf;+UKNegBegin|*|*|*;
-1294;70;UKECon|UKCAdv:UKAdj:UKCon|.UKAdj:UKCon:UKPrep:UKList:UKRAdv|UKNegRel;*|+UKNegBegin|*|*;
+
+/*		1223. Людина може розумово працювати, але творчого результату не досягти. Однак його можна використовувати лише як приблизний орієнтир, бо він може не збігатися однаковому ступеню огрядності у різних людей. NOT. В операціях фінансового лізингу не оминути участі комерційних банків.
+
+1294;70;UKTimeEndConcept|UKCAdv:UKAdj:UKCon|.UKAdj:UKCon:UKPrep:UKList:UKRAdv|UKNegRel;*|+UKNegBegin|*|*;
+
+/*		1294. що до промислової революції кінця XVIII ст. регулярно повторюваних бумів і депресій практично не існувало.
+
 1268;70;^UKPrep|UKNegPR:UKBCon:UKPRPron:UKPosspron+^UKAdjGen|.UKAdj:UKCon:UKPrep:UKList:UKRAdv|UKNegRel;*|+UKNegBegin|*|*;
+
+/*		1268. Згідно з висновком судової будівельно-технічної експертизи спірний кіоск не виявлено і по вул. Замковій. Так, відповідно до ст. 7 КУпАП ніхто не може бути підданий заходу впливу в зв’язку з адміністративним правопорушенням. Протягом цього періоду договір про фінансовий лізинг не може бути розірваний жодною зі сторін. Навіть на великих підприємствах внутрішні функціональні служби й структурні підрозділи не підозрюють.
+
 1318;70;^UKPrep|"вона":"ви":"ми":"вони":"ти":"він":"я":"воно"|UKNegRel;*|+UKNegBegin|*;
-1271;70;UKECon|UKCAdv:UKAdj:UKCon|.UKCAdv:UKAdj:UKCon:UKPrep|UKNegRel:UKNegPred;*|+UKNegBegin|*|*;left expansion to word after time indication
+
+/*		1318. У разі їх невідповідності вимогам закону вони не можуть стати об'єктами правової охорони.
+
+1271;70;UKTimeEndConcept:UKAdvTime|UKCAdv:UKAdj:UKCon|.UKCAdv:UKAdj:UKCon:UKPrep|UKNegRel:UKNegPred;*|+UKNegBegin|*|*;left expansion to word after time indication
+
+/*		1271. Водночас з грудня 2010 року свідоцтво про проведення гастрольних заходів не видаються.
+
 1312;70;UKCon+UKNoExpansion|*UKAdvStruct:UKNRPron:UKRAdv|UKCAdv:UKAdj:UKCon|.UKCAdv:UKAdj:UKCon:UKPrep|UKNegRel:UKNegPred;*|*|+UKNegBegin|*|*;left expansion to concept after prep+concept+nonRelevant
 
+/*		1312. Видається, що для такого песимізму все ж підстав немає — людство переможе бездуховність, розум візьме верх. Проте на практиці ця норма не могла бути втілена в життя.
+
+1416;70;UKPBegin|.<^UKPBegin:UKPunctuation|UKNegPred:UKNegRel+^UKPBegin|.UKVerb|SEnd;+UKNegBegin|*|*|*|*;variation r1206 for negated verb end sentence: expansion to pattern prep-noun
+
+/*		1416. В ухвалі щодо нього про жінку як співучасницю не йшлося. В Україні статистичних даних щодо цього поліморфізму не існує.
 /*participle
 /*==========
 
 1244;70;UKCon|UKNegRel|UKPart+UKAttributive;+UKNegBegin|*|*;
 
+/*		1244. Підписання договору від імені юридичною особи не уповноваженою на це особою є підставою.
 /* stop negation expansion
 /*========================
 
 1208;70;UKNegPred:UKNegRel:UKNegBCon:UKNegCon+UKNegBegin|.<^UKPBegin|UKPunctuation+^UKList;*|*|+UKNegStop;
+
+/*		1208. Сильна фігура не чекає ні від кого таких слів, це розмови для слабких. З часом, незважаючи на те, що не вся рідка фаза відділилася від твердої, фільтрування припиняється практично повністю. NOT. Право визначати і змінювати конституційний лад в Україні належить виключно народові і не може бути узурповане державою, її органами або посадовими особами.
+
 1210;70;UKNegPred:UKNegRel:UKNegBCon:UKNegCon+UKNegBegin|.<^UKPBegin:UKNegStop|UKPBegin+^UKNegation:UKNegBegin;*|*|+UKNegStop;
+
+/*		1210. Але ж серед таких винаходів інколи є такі, які морально не застаріли і продовжують використовуватися.
+
 1336;70;UKNegRel+UKPBegin|UKPunctuation+UKNegStop|UKConj|.^UKPBegin|UKPBegin+^UKNegation:UKNegBegin;*|-UKNegStop|-UKNegStop|*|+UKNegStop;correction: not negstop directly after negation marker
+
+/*		1336. показували її не такою, якою ми її «бачимо», а такою, якою ми її «знаємо».
+
 1211;70;UKBracket1|UKNegBegin|.^UKBracket2|UKBracket2;*|*|*|+UKNegStop;limit negation span for one or two entities between brackets
 
+/*		1211. Через тиждень, 13 липня 1923 р., (а не в січні 1923!) Президія прийняла відозву до всіх народів і урядів світу.
 /* left expansion to antecedent
 /*=============================
 
-1227;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKKotry+UKNegBegin;+UKNegBegin|*|*|*;
-1247;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKNegRel|UKPart+UKAttributive;+UKNegBegin|*|*|*|*;
-1316;70;UKCon|UKKotry|.UKNRPron:UKPRPron:UKPosspron:UKCAdv:UKAdj|UKCon|UKNegRel;+UKNegBegin|+UKNegBegin-UKNegStop|*|*|*;
+1425;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKPrep+UKNegBegin|UKKotry+^"що";+UKNegBegin|*|*|*|*;
 
+/*		1425. містять вичерпний перелік рішень, за якими виконавче провадження не зупиняється. NOT. межі, встановлені нормами, за умови що використання цих об’єктів та субстанцій не передбачається у будь-якому технологічному процесі.
+
+1227;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKKotry+UKNegBegin;+UKNegBegin|*|*|*;
+
+/*		1227. Данні про особу, яка притягається до адміністративної відповідальності досліджена не була.
+
+1247;70;UKCon:UKBCon:UKPRPron+^UKNum|.UKAdj|UKComma|UKNegRel|UKPart+UKAttributive;+UKNegBegin|*|*|*|*;
+
+/*		1247. Держава гарантує свободу політичної діяльності, не забороненої Конституцією і законами України. означав людину самотню, не пов'язану з домом і сім'єю.
 /* expansion 'без'
 /*================
 /* preparation: assign a temp marker to all words in a negation span
 
 1229;70;UKNegBegin:UKInNegspan|^UKNegStop;*|+UKInNegspan;assign a temp marker to all words in a negation span
+
+/*		1229. Народні депутати України не можуть бути без згоди Верховної Ради України притягнені до кримінальної відповідальності.
+
 1234;70;UKPrep|UKBCon;*|+UKCon;
 
+/*		1234. який зійшов без кисню майже на всі 14 восьмитисячників планети.
+/*Expansion before 'без'
+
+1420;70;UKCon|UKNegPrep;+UKNegBegin|*;
+
+/*		1420. Суть полягає в тому, що такі матеріали не мають параметра "опір", що означає передачу енергії без втрат у вигляді нагріву.
 /*stop negation expansion
 
 1266;70;UKGerund+UKInNegspan;+UKNegStop;
 
+/*		1266. колегія суддів Вищого господарського суду України вважає, що касаційна скарга не підлягає задоволенню виходячи з наступного.
 /*Expansion after 'без'
 
 1228;70;UKNegPrep;+UKNegBegin;
+
+/*		1228. судові рішення прийняті у справі повинні бути залишені без змін.
+
 1230;70;UKAdj:UKCAdv:UKCon:UKPRPron:UKNRPron:UKPosspron:UKPerspron;+UKPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
-1231;70;UKPrep:UKList:UKECon:UKAdvPR;+UKPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+
+/*		1230. чоловік вже встиг вибачитися у своєму мікроблозі, визнавши, що водив автомобіль без прав і зазначив, що сподівається виправити свою помилку.
+
+1231;70;UKPrep:UKList:UKAdvPR:UKAdvTemp:UKNegCon:UKTimeEndConcept:UKAdvTime;+UKPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+
+/*		1231. без контролю суду за їх виконанням – відзначається у Концепції. повітряний простір без відповідного дозволу минулого тижня, заявив президент.
+
 1233;70;UKNegPrep|*UKPossibleNegSpanBez+^UKPBegin:UKInNegspan|^typeConcept:UKNegation:UKNegBegin:UKInNegspan;*|*|+UKNegStop;
+
+/*		1233. без «душі» тіло не могло б існувати.
+
 1338;70;UKNegPrep|.<^UKPBegin:UKNegStop:UKInNegspan|UKPBegin+^UKNegation:UKNegBegin;*|*|+UKNegStop;
 
+/*		1338. водив автомобіль без прав і зазначив, що сподівається виправити свою помилку.
 /* clean conflicting negation parameters
 /*======================================
 
 1207;70;UKNegBegin+^typeConcept:typeBeginConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^UKNegBegin;*|+UKNegBegin;
+
+/*		1207. Але такої волі з боку Партії немає. NOT. і не всім, що змагаються, вони відповідають.
+
 1209;70;UKNegStop+^typeConcept:typeBeginConcept:typeRelation:typePathRelevant|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^UKNegation:UKNegBegin;*|*|+UKNegStop;
 
+/*		1209. Платежі йдуть не з прибутку підприємства, отже, на їх суму зменшується розмір оподатковуваного прибутку.
 /*PHASE 80: sentiment
 /* = = = = = = =  = =
 /* Stop sentiment scope in the right-hand part of the path
@@ -1056,9 +2834,16 @@
 /*=========
 
 1153;80;UKPosspron;UKPosspron;to remove all other labels so PathRelevancy is not lost
+
+/*		1153. Художник зумів відчути й передати тонкий, мінливий стан природи, сповнити її людським теплом рідних вулиць.
+
 1179;80;UKAndOr:UKAndOrBut:UKConj:UKPrep+UKBeginrel;UKBeginrel;give beginrelation its final label
+
+/*		1179. На відміну від тупих предметів, гострі не відзначаються різноманітністю і класифікуються за механізмом дії.
+
 1235;80;UKCon+UKBCon;UKBCon;
 
+/*		1235. Наскельні малюнки можуть мати різну тематику - ритуальну, меморіальну, знакову з усіма можливими варіаціями.
 /*PHASE $: Rewrite language specific labels to unified labels
 /*= = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
