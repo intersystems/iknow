@@ -82,11 +82,13 @@ namespace iknow {
 			}
 			int addSEndCondition(const std::string& literal, const bool b_end) {
 				kb_acronyms.push_back(iKnow_KB_Acronym(literal, b_end));
+				m_IsDirty = true; // need recompilation
 				return 0;
 			}
 
 		private:
 			bool m_IsDirty; // if true, needs reloading
+
 		};
 
 	}

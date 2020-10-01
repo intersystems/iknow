@@ -258,6 +258,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	}
 }
 
+static SharedMemoryKnowledgebase *pUserDCT = NULL; // User dictionary, one per process
+
 iKnowEngine::iKnowEngine() : m_bUserDCT(false) // Constructor
 {
 }
@@ -308,6 +310,7 @@ struct LanguageCodeMap {
 const static LanguageCodeMap language_code_map;
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
+
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
 	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
@@ -327,17 +330,22 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
 
-	SharedMemoryKnowledgebase user_dictionary = m_user_data.generateRAW(false); 
+	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
+
 	if (m_bUserDCT) {
-		process.setUserDictionary(&user_dictionary);
-		user_dictionary.FilterInput(text_input); // rewritings can only be applied if we no longer emit text offsets
+		if (pUserDCT == NULL)
+			pUserDCT = new SharedMemoryKnowledgebase(m_user_data.generateRAW(false));	// first use generation.
+		if (m_user_data.IsDirty()) {
+			delete pUserDCT;
+			pUserDCT = new SharedMemoryKnowledgebase(m_user_data.generateRAW(false)); // reconstruct if data has been added.
+		}
+		process.setUserDictionary(pUserDCT);
+		pUserDCT->FilterInput(text_input); // rewritings can only be applied if we no longer emit text offsets
 	}
 	else {
 		process.setUserDictionary(NULL);
 	}
-
 	iknow::core::IkIndexInput Input(&text_input);
-	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
 	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);
 	lck.unlock();
 }
@@ -349,21 +357,13 @@ void iKnowEngine::index(const std::string& text_source, const std::string& langu
 
 std::string iKnowEngine::NormalizeText(const string& text_source, const std::string& language, bool bUserDct, bool bLowerCase, bool bStripPunct) {
 	try {
-		String input = IkStringEncoding::UTF8ToBase(text_source);
-
-		//A static buffer for the output string.
-		static String output;
-
-		//No ALI for normalization: We need a KB.
-		SharedMemoryKnowledgebase skb = language_code_map.Lookup(language);
+		SharedMemoryKnowledgebase skb = language_code_map.Lookup(language); //No ALI for normalization: We need a KB.
 		IkKnowledgebase* kb = &skb;
-
 		IkKnowledgebase* ud_kb = NULL;
 
 		std::map<iknow::base::String, IkKnowledgebase const*> null_kb_map;
 		IkIndexProcess process(null_kb_map);
-		output = process.NormalizeText(input, kb, ud_kb, bLowerCase, bStripPunct);
-
+		String output = process.NormalizeText(IkStringEncoding::UTF8ToBase(text_source), kb, ud_kb, bLowerCase, bStripPunct);
 		return IkStringEncoding::BaseToUTF8(output);
 	}
 	catch (const std::exception& e) {

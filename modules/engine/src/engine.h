@@ -217,7 +217,6 @@ public:
 private:
 	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
 	bool m_bUserDCT; // default false
-
 };
 
 
