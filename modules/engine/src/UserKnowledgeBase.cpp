@@ -15,7 +15,7 @@ using namespace iknow::csvdata;
 iKnow_KB_Label::iKnow_KB_Label() {}
 iKnow_KB_Label::~iKnow_KB_Label() {}
 
-static const size_t kRawSize = 48000000;
+static const size_t kRawSize = 480000;
 
 using namespace iknow::csvdata;
 using namespace std;

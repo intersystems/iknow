@@ -24,9 +24,9 @@ bool iKnow_KB_Acronym::ImportFromCSV(std::string acro_csv, CSV_DataGenerator& kb
 			if (line.find("/*") != string::npos) continue; // Continue:$Find(line, "/*")'=0 // comment line
 			if ((std::count(line.begin(), line.end(), ';') + 1) < 4) continue; // Continue : ($L(line, ";") < 4)
 			vector<string> row_acronym = kb.split_row(line);
-			iKnow_KB_Acronym acronym; // Set acronym = ..%New()
-			acronym.Token = row_acronym[3 - 1]; // Set acronym.Token = $PIECE(line, ";", 3)
-			acronym.IsSentenceEnd = (row_acronym[4 - 1][0] != '0'); // Set acronym.IsSentenceEnd = $PIECE(line, ";", 4)
+			iKnow_KB_Acronym acronym(row_acronym[3 - 1], row_acronym[4 - 1][0] != '0'); // Set acronym = ..%New()
+			// acronym.Token = row_acronym[3 - 1]; // Set acronym.Token = $PIECE(line, ";", 3)
+			// acronym.IsSentenceEnd = (row_acronym[4 - 1][0] != '0'); // Set acronym.IsSentenceEnd = $PIECE(line, ";", 4)
 			// Set acronym.Knowledgebase = kb
 			// Do kb.AddToHash(acronym.Token)
 			// Do kb.AddToHash(acronym.IsSentenceEnd)

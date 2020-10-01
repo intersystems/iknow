@@ -170,7 +170,8 @@ public:
 	static const std::set<std::string>& GetLanguagesSet(void);
 
 	enum errcodes {
-		iknow_language_not_supported = -1 // unsupported language
+		iknow_language_not_supported = -1, // unsupported language
+		iknow_unknown_label = -2	// udct_addLabel : label does not exist
 	};
 	iKnowEngine();
 	~iKnowEngine();
@@ -193,20 +194,27 @@ public:
 	// User dictionary methods :
 
 	// Adds User Dictionary label to a lexical representation for customizing purposes
-	int addUdctLabel(const std::string& literal, const char* UdctLabel); // m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
+	int udct_addLabel(const std::string& literal, const char* UdctLabel); // m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
 	// Add User Dictionary literal rewrite, not functional.
-	void addUdctRewrite(const std::string& literal, const std::string& literal_rewrite);
+	int udct_addEntry(const std::string& literal, const std::string& literal_rewrite);
 	// Add User Dictionary EndNoEnd, not functional. 
-	void addUdctEndNoEnd(const std::string& literal, bool b_end = true);
-
-	void useUdct(bool flag = false) {
+	int udct_addSEndCondition(const std::string& literal, bool b_end = true);
+	int udct_addNegationTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDNegation");
+	}
+	int udct_addPositiveSentimentTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDPosSentiment");
+	}
+	int udct_addNegativeSentimentTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDNegSentiment");
+	}
+	void udct_use(bool flag = false) {
 		m_bUserDCT = flag;
 	}
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
-	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
 	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
 	bool m_bUserDCT; // default false
 

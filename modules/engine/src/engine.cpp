@@ -373,15 +373,21 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 }
 
 // Adds User Dictionary label to a lexical representation for customizing purposes
-int iKnowEngine::addUdctLabel(const std::string& literal, const char* UdctLabel)
+int iKnowEngine::udct_addLabel(const std::string& literal, const char* UdctLabel)
 {
 	string normalized = NormalizeText(literal, "en"); // normalize the literal
-	m_user_data.addUdctLabel(normalized, UdctLabel); // add to the udct lexreps
-	return -1;
+	if (m_user_data.addLexrepLabel(normalized, UdctLabel) == -1) return iknow_unknown_label; // add to the udct lexreps
+	return 0; // OK
 }
 // Add User Dictionary literal rewrite, not functional.
-void iKnowEngine::addUdctRewrite(const std::string& literal, const string& literal_rewrite) {}
+int iKnowEngine::udct_addEntry(const std::string& literal, const string& literal_rewrite) {
+	return -1; // we cannot rewrite input text as long as we use text offsets to annotate text.
+}
 
-// Add User Dictionary EndNoEnd, not functional. 
-void iKnowEngine::addUdctEndNoEnd(const std::string& literal, bool b_end) {}
+// Add User Dictionary EndNoEnd. 
+int iKnowEngine::udct_addSEndCondition(const std::string& literal, bool b_end)
+{
+	m_user_data.addSEndCondition(literal, b_end);
+	return 0;
+}
 

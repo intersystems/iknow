@@ -68,10 +68,20 @@ namespace iknow {
 			bool IsDirty(void) {
 				return m_IsDirty;
 			}
-			int addUdctLabel(const std::string& token, const std::string& label) {
-				// check if label does exist
+			int addLexrepLabel(const std::string& token, const std::string& label) {
+				bool bIsLabel = false;
+				for (auto it = kb_labels.begin(); it != kb_labels.end() && !bIsLabel; ++it) { // TODO: check if label does exist
+					if (label == it->Name) bIsLabel = true;
+				}
+				if (!bIsLabel)
+					return -1;
+				
 				kb_lexreps.push_back(iKnow_KB_Lexrep(token, label));
 				m_IsDirty = true; // need recompilation
+				return 0;
+			}
+			int addSEndCondition(const std::string& literal, const bool b_end) {
+				kb_acronyms.push_back(iKnow_KB_Acronym(literal, b_end));
 				return 0;
 			}
 
