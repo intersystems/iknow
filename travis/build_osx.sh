@@ -8,6 +8,7 @@
 #
 # Required Environment Variables:
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
+# - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
@@ -23,7 +24,6 @@ cd icu/source
 dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
 export CXXFLAGS="-std=c++11"
 export LDFLAGS="-headerpad_max_install_names"
-export MACOSX_DEPLOYMENT_TARGET=10.9
 export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 ./runConfigureICU MacOSX --prefix="$ICUDIR"
 make -j $(sysctl -n hw.logicalcpu)

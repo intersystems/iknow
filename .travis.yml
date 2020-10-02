@@ -57,13 +57,17 @@ jobs:
       osx_image: xcode11.7
       env: >-
         HOMEBREW_NO_AUTO_UPDATE=1
+        MACOSX_DEPLOYMENT_TARGET=10.9
         PATH="/usr/local/opt/ccache/libexec:$PATH"
+        PYINSTALL_DIR="$HOME/.pyenv/versions"
         CCACHE_DIR="$TRAVIS_BUILD_DIR/ccache"
         PIP_CACHE_DIR="$TRAVIS_BUILD_DIR/pipcache"
       cache:
         directories:
           - ccache
           - pipcache
+          - $PYINSTALL_DIR
+      before_install: eval "$(pyenv init -)"
       install: travis/install_osx.sh
       script: >-
         travis/build_osx.sh &&
