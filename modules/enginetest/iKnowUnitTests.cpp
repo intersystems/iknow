@@ -22,8 +22,14 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test1(pError);
 		pError = "Only one measurement attribute in example English text";
 		test_collection.test2(pError);
-		pError = "3 Sentence Attribute markers in sentence";
+		pError = "4 Sentence Attribute markers in sentence";
 		test_collection.test3(pError);
+		pError = "Test on SBegin/SEnd labels";
+		test_collection.test4(pError);
+		pError = "Test on User Dictionary (UDCT)";
+		test_collection.test5(pError);
+		pError = "Test on Text Normalizer";
+		test_collection.test6(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -35,6 +41,80 @@ void iKnowUnitTests::runUnitTests(void)
 		exit(-1);
 	}
 }
+
+// std::string NormalizeText(std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+void iKnowUnitTests::test6(const char* pMessage) {
+	iKnowEngine engine;
+
+	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
+	string text_lowercased = engine.NormalizeText(text_source, "en");
+
+	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), isupper) > 0) // 
+		throw std::runtime_error("NormalizeText does not work correctly");
+}
+
+void iKnowUnitTests::test5(const char* pMessage) { // User DCT test 
+	string text_source_utf8 = u8"The Fr. test was er/pr positive.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+
+	engine.udct_addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
+	if (engine.udct_addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
+		throw std::runtime_error(string("Unknow label *not* triggered !"));
+
+	engine.udct_addSEndCondition("Fr.", false); // ;;Ph.D.;0;
+	engine.udct_use(true); 
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
+		throw std::runtime_error(string(pMessage));
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		// cout << *it << endl;
+		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("value=\"er/pr\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("value=\"positive.\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+}
+
+void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBegin/SEnd labels
+	string text_source_utf8 = u8"The position of the window made it very unlikely that this was a random passerby.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+	iKnowEngine engine;
+	engine.index(text_source, "en", true); // traces should contain SBegin/SEnd labels
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepIdentified") != string::npos) {
+			string& trace_sbegin = (*it);
+			if (trace_sbegin.find("labels=\"SBegin;\"") == string::npos) // first should be SBegin
+				throw std::runtime_error(string(pMessage));
+			while ((it + 1)->find("LexrepIdentified") != string::npos)
+				++it;
+			string& trace_send = (*it);
+			if (trace_send.find("labels=\"SEnd;\"") == string::npos) // last should be SEnd
+				throw std::runtime_error(string(pMessage));
+		}
+	}
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get the sentence reference
+	const Path_Attribute& attribute_expansion = *sent.path_attributes.begin(); // path attribute
+	if (attribute_expansion.type != Certainty)
+		throw std::runtime_error(string("No certainty attribute detected !"));
+	if (attribute_expansion.pos != 5)
+		throw std::runtime_error(string("Position of certainty attribute must be 5 !"));
+	if (attribute_expansion.span != 5) // TODO: this value is *not* correct.
+		throw std::runtime_error(string("Span of certainty attribute must be 5 !"));
+}
+
 void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attribute in example text : verify correctness
 	string text_source_utf8 = "Now, I have been on many walking holidays, but never on one where I have my bags ferried\nfrom hotel to hotel while I simply get on with the job of walkingand enjoying myself.";
 	// <attr type = "measurement" literal = "hundreds of feet" token = "hundreds of feet" value = "hundreds of" unit = "feet">
@@ -52,9 +132,9 @@ void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attri
 		String literal(&text_source[start_literal], &text_source[stop_literal]);
 
 		string strMarker = attribute.marker_;
-		int count_upper = std::count_if(strMarker.begin(), strMarker.end(), [](unsigned char c) { return std::isupper(c); }); // Useless, I know...
+		int count_upper = (int) std::count_if(strMarker.begin(), strMarker.end(), [](unsigned char c) { return std::isupper(c); }); // Useless, I know...
 	}
-	if (count_attributes!=3) {
+	if (count_attributes!=4) {
 		throw std::runtime_error(string(pMessage));
 	}
 
@@ -122,7 +202,7 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	for (Text_Source::Proximity::iterator itProx = engine.m_index.proximity.begin(); itProx != engine.m_index.proximity.end(); ++itProx) {
 		size_t id1 = itProx->first.first;
 		size_t id2 = itProx->first.second;
-		double proximity = itProx->second;
+		double proximity = static_cast<double>(itProx->second);
 
 		// cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
 
@@ -133,7 +213,7 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	// Top 10 dominant terms :
 	typedef pair<int, double> EntDomType;
 	vector<EntDomType> vecDominantConcepts;
-	for_each(mapDominantConcepts.begin(), mapDominantConcepts.end(), [&vecDominantConcepts](pair<const size_t,double>& ent_par) { vecDominantConcepts.push_back(make_pair(ent_par.first, ent_par.second)); });
+	for_each(mapDominantConcepts.begin(), mapDominantConcepts.end(), [&vecDominantConcepts](pair<const size_t,double>& ent_par) { vecDominantConcepts.push_back(make_pair((int)ent_par.first, (double)ent_par.second)); });
 	sort(vecDominantConcepts.begin(), vecDominantConcepts.end(), [](EntDomType& a, EntDomType& b) { return a.second > b.second;  });
 	for (vector<EntDomType>::iterator itDom = vecDominantConcepts.begin(); itDom != vecDominantConcepts.end(); ++itDom) {
 		// cout << "\"" << mapTextSource[itDom->first] << "\" DOM=" << itDom->second << endl;

@@ -1,4 +1,4 @@
-/*
+﻿/*
 ** enginetest.cpp : testing the iKnow engine
 */
 #include <stdio.h>
@@ -252,7 +252,7 @@ void a_short_demo(void)
 	for (Text_Source::Proximity::iterator itProx = engine.m_index.proximity.begin(); itProx != engine.m_index.proximity.end(); ++itProx) {
 		size_t id1 = itProx->first.first;
 		size_t id2 = itProx->first.second;
-		double proximity = itProx->second;
+		double proximity = static_cast<double>(itProx->second);
 
 		cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
 	}

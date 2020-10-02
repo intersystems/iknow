@@ -490,6 +490,7 @@ try:
         classifiers=[
             'Development Status :: 3 - Alpha',
             'License :: OSI Approved :: MIT License',
+            'Topic :: Scientific/Engineering :: Information Analysis',
             'Programming Language :: C++',
             'Programming Language :: Cython',
             'Programming Language :: Python :: 3',
@@ -500,11 +501,15 @@ try:
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: Implementation :: CPython',
+            'Operating System :: MacOS :: MacOS X',
+            'Operating System :: Microsoft :: Windows',
+            'Operating System :: POSIX'
         ],
         keywords='NLP',
         project_urls={
             'Source': 'https://github.com/intersystems/iknow',
             'Tracker': 'https://github.com/intersystems/iknow/issues',
+            'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
         package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},

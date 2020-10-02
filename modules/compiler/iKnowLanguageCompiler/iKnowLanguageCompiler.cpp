@@ -80,14 +80,14 @@ int main(int argc, char* argv[])
 		if (language_to_build.empty()) { // build them all
 			for (auto it = SetOfLanguages.begin(); it != SetOfLanguages.end(); ++it) {
 				CSV_DataGenerator my_csv_generator(csv_path, aho_path, ldata_path);
-				my_csv_generator.loadCSVdata(*it, false);
+				my_csv_generator.loadCSVdata(*it, false, os);
 				my_csv_generator.generateRAW();
 				my_csv_generator.generateAHO();
 			}
 		}
 		else { // build one
 			CSV_DataGenerator my_csv_generator(csv_path, aho_path, ldata_path);
-			my_csv_generator.loadCSVdata(language_to_build, false);
+			my_csv_generator.loadCSVdata(language_to_build, false, os);
 			my_csv_generator.generateRAW();
 			my_csv_generator.generateAHO();
 		}

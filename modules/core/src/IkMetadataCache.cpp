@@ -21,6 +21,7 @@ using iknow::core::kEntityVectorScanDirection;
 using iknow::core::PathConstruction;
 using iknow::core::kCRCSequence;
 using iknow::core::kPathRelevant;
+using iknow::core::FuriganaHandling;
 
 template<>
 size_t IkMetadataCache::ConvertValue<size_t>(const String& val) {
@@ -72,6 +73,15 @@ PathConstruction IkMetadataCache::ConvertValue<PathConstruction>(const String& v
 }
 
 template<>
+FuriganaHandling IkMetadataCache::ConvertValue<FuriganaHandling>(const String& val) {
+    static const Char off_array[] = { 'o', 'f', 'f', '\0' };
+    static const String off_string(off_array);
+    if (val == off_string) {
+        return kFuriOff;
+    }
+    return kFuriDefault; // Default value
+}
+template<>
 bool IkMetadataCache::ConvertValue<bool>(const String& val) {
   if (val.empty()) return true; // default is modifiers on left
   static const Char CFalse='0'; // zero is false indicator
@@ -105,5 +115,6 @@ IkMetadataCache::IkMetadataCache(const IkKnowledgebase& kb) {
   LoadValue<kPScale>(kb);
   LoadValue<kPathConstruction>(kb);
   LoadValue<kRegexSplitter>(kb);
+  LoadValue<kFuriganaHandling>(kb);
 }
 

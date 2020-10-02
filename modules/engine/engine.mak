@@ -6,13 +6,13 @@ PLATFORM = $(IKNOWPLAT)
 
 CPP_LANGUAGE = 14
 
-INCLUDEDIRS = $(ROOT_DIR)/modules/engine/src $(ROOT_DIR)/modules/shell/src/SDK/headers $(ROOT_DIR)/modules/shell/src $(ROOT_DIR)/modules/ali $(ROOT_DIR)/modules/core/src/headers $(ROOT_DIR)/modules/base/src/headers \
+INCLUDEDIRS = $(ROOT_DIR)/modules/engine/src $(ROOT_DIR)/modules/shell/src/SDK/headers $(ROOT_DIR)/modules/shell/src $(ROOT_DIR)/modules/ali $(ROOT_DIR)/modules/core/src/headers $(ROOT_DIR)/modules/base/src/headers $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler \
 	 $(ROOT_DIR)/kernel/$(PLATFORM)/h $(ROOT_DIR)/kernel/ux/h $(ROOT_DIR)/kernel/common/h $(ROOT_DIR)/shared/System/unix $(ROOT_DIR)/shared/System \
 	$(ROOT_DIR)/shared/Utility $(ICUDIR)/include
 
 OBJECTFLAGS += -DMACHINETYP=58
 
-SOURCES =  $(ROOT_DIR)/modules/engine/src/engine.cpp $(ROOT_DIR)/modules/engine/language_data/*.c
+SOURCES =  $(ROOT_DIR)/modules/engine/src/*.cpp $(ROOT_DIR)/modules/engine/language_data/*.c
 LOCATION = bin
 CREATELIBRARY = 1
 PROJECT = libiknowengine

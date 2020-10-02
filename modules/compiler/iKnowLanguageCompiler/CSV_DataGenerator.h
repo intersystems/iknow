@@ -42,8 +42,8 @@ namespace iknow {
 			}
 			// Index NameIndex On Name[Unique];
 
-			void loadCSVdata(std::string language = "en", bool IsCompiled = true);
-			void generateRAW(void);
+			void loadCSVdata(std::string language = "en", bool IsCompiled = true, std::ostream& os = std::cout);
+			void generateRAW(bool IsCompiled = true);
 			void generateAHO(void);
 
 			std::string GetName() {

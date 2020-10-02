@@ -10,6 +10,8 @@
 #define IKNOW_API
 #endif
 
+#include "UserKnowledgeBase.h" // User KB (for udct)
+
 //
 // stl library includes
 //
@@ -168,7 +170,8 @@ public:
 	static const std::set<std::string>& GetLanguagesSet(void);
 
 	enum errcodes {
-		iknow_language_not_supported = -1 // unsupported language
+		iknow_language_not_supported = -1, // unsupported language
+		iknow_unknown_label = -2	// udct_addLabel : label does not exist
 	};
 	iKnowEngine();
 	~iKnowEngine();
@@ -185,17 +188,35 @@ public:
 	// offsets, not byte offsets in text_source.
 	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
-	// Adds User Dictionary annotations for customizing purposes
-	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
-		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
-	}
+	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
+	std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
 
+	// User dictionary methods :
+
+	// Adds User Dictionary label to a lexical representation for customizing purposes
+	int udct_addLabel(const std::string& literal, const char* UdctLabel); // m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
+	// Add User Dictionary literal rewrite, not functional.
+	int udct_addEntry(const std::string& literal, const std::string& literal_rewrite);
+	// Add User Dictionary EndNoEnd, not functional. 
+	int udct_addSEndCondition(const std::string& literal, bool b_end = true);
+	int udct_addNegationTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDNegation");
+	}
+	int udct_addPositiveSentimentTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDPosSentiment");
+	}
+	int udct_addNegativeSentimentTerm(const std::string& literal) {
+		return udct_addLabel(literal, "UDNegSentiment");
+	}
+	void udct_use(bool flag = false) {
+		m_bUserDCT = flag;
+	}
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
-	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
-
+	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
+	bool m_bUserDCT; // default false
 };
 
 

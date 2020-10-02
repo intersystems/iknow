@@ -143,7 +143,7 @@ namespace iknow {
 				std::string value(begin_token + equal_sign_offset +1, end_token);
 				if (!key.compare("len")) {
 					int value_int = static_cast<int> (value[0] - '0'); // range is 0 to 9
-					if (value_int > 0 || value_int <= 9) lexrep_length_ = static_cast<short> (value_int);
+					if (value_int > 0 && value_int <= 9) lexrep_length_ = static_cast<short> (value_int);
 				}
 			}
 		}

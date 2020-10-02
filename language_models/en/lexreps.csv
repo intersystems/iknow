@@ -1,7 +1,6 @@
 ﻿
 
 ;;{apostrophe_possession};;ENAdj;ENsAdj;
-
 ;;{number-all};;ENNumber;
 ;;#{number-all};;ENEndconcept;
 ;;{number-big1};;ENNumber;ENMeasurement;
@@ -12,26 +11,21 @@
 ;;{number-percentage};;ENNumber;ENPercent;ENPercentage;ENNumberPlusUnit;
 ;;{number-slash};;ENNumber;
 ;;{number-hyphen-slash};;ENNumber;
-
 ;;{number-plural};;ENNumberPlural;ENCon;
 ;;{number-plural2};;ENNumberPlural;ENCon;
 ;;{number-plural3};;ENYear;ENTime;
 ;;{number-plural4};;ENYear;ENTime;
 ;;{number-plural5};;ENYear;ENTime;
 ;;{number-hyphen1};;ENNumber;
-
 ;;{number-age};;ENCon;ENAge;ENAfterAge;ENNumberPlusUnit;
 ;;over-{number-age2};;ENNumber;ENAge;ENNumberPlusUnit;
 ;;under-{number-age2};;ENNumber;ENAge;ENNumberPlusUnit;
-
 ;;(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fourty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion)-year-old(s|'s|);;ENNumber;ENAge;ENAfterAge;ENNumberPlusUnit;
-
 ;;{number-moreless};;ENNumber;
 ;;{number-moreless2};;ENNumber;
 ;;{number-moreless3};;ENNumber;
 ;;{number-moreless4};;ENNumber;
 ;;{number-moreless5};;ENNumber;
-
 ;;(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fourty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion)-year;;ENNumberYear;ENAdj;ENDuration;
 ;;-{number-all};;ENNumber;
 ;;-{number-big1};;ENNumber;
@@ -39,7 +33,6 @@
 ;;-{number-decimal};;ENNumber;
 ;;{number-all}½;;ENNumber;ENNum;
 ;;{number-all}-(game|page|point|strikeout|story|room|person|man);;ENNumber;ENNum;
-
 ;;{number-all}-(second|minute|hour|day|week|month|season|year);;ENAdj;ENDuration;ENNumberYear;
 ;;{number-all}½-(second|minute|hour|day|week|month|year);;ENNumber;ENTime;ENNumberPlusUnit;
 ;;{number-all}-km;;ENNumber;ENDistance;ENNumberPlusUnit;
@@ -61,15 +54,11 @@
 ;;(high|low)-{number-all}s;;ENNumber;ENNum;ENMeasurement;
 ;;mid-{number-all}s;;ENNumber;ENNum;ENTime;
 ;;{number-x};;ENTimes;ENCon;
-
 ;;{rankingnumber};;ENNumber;ENAdj;
 ;;{rankingnumber}-(century);;ENTime;ENAdj;
 ;;{rankingnumber}-(largest|tallest);;ENMeasurement;ENAdj;
-
 ;;(first-quarter|second-quarter|third-quarter|fourth-quarter);;ENQuarter;ENConTime;ENAdj;
-
 ;;{number-all}/{rankingnumber};;ENMeasurement;ENAdj;
-
 ;;(first|second|third|fourth|fifth|sixth|seventh|eighths|ninths)-(best|largest|tallest|worst);;ENAdj;ENMeasurement;
 ;;(top|bottom)( |-)(first|second|third|fourth|fifth|sixth|seventh|eighths|ninths);;ENAdj;ENMeasurement;
 
@@ -92,7 +81,9 @@
 ;;{ukpoundextra2};;ENNumber;ENPrice;ENNumberPlusUnit;
 
 ;;(|.){number-all}(-|)(km|miles|mile|yards|yard);;ENNumber;ENDistance;ENNumberPlusUnit
+
 ;;(one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|fourty|fifty|sixty|seventy|eighty|ninety|hundred|thousand|million|billion)-(yard(s|)|mile(s|));;ENNumber;ENDistance;ENNumberPlusUnit;
+
 ;;(|.){number-all}(ft|foot|meter|ft-long|foot-long|meter-long|km-long);;ENNumber;ENSize;ENNumberPlusUnit;
 ;;(|.){number-all}(-ft|in|ins|-foot|-feet|-inch|-inches);;ENNumber;ENSize;ENNumberPlusUnit
 ;;(|.){number-all}-(deci|centi|milli|)(meter|metre)(s|);;ENNumber;ENSize;ENNumberPlusUnit;
@@ -160,13 +151,14 @@
 
 ;;{layout01};;ENBeginendconcept;
 
-;;{adjective01};;ENAdj;
-;;{adjective02};;ENAdj;
-;;{adjective03};;ENAdj;
-;;{adjective04};;ENAdj;
-;;{adjective05};;ENAdj;ENConIfCap;
-;;{adjective06};;ENAdj;ENConIfCap;
-;;{infinitivelikeadjective};;ENAdj;
+;;{adjective01};-sive;ENAdj;
+;;{adjective02};-ous;ENAdj;
+;;{adjective03};-emic;ENAdj;
+;;{adjective04};-tic;ENAdj;
+;;{adjective05};-[binrstu]al;ENAdj;ENConIfCap;
+;;{adjective06};-(ic|id|ge)al;ENAdj;ENConIfCap;
+/*;;{adjective07};-cular
+;;{infinitivelikeadjective};-size;ENAdj;
 
 ;;{infinitive01};;ENInf;
 ;;{pastparticiple01};;ENPart;
@@ -191,7 +183,6 @@
 
 ;;àééàéàéàéààé;;NonRelevant;
 ;;–;;ENHyphen;
-
 ;;—;;ENHyphen;
 ;;•;;ENNonrelevant;
 ;;≤;;ENRel;
@@ -274,7 +265,6 @@
 ;;'ve not;;ENAuxneg;ENNegBegin;ENNegation;ENAux;
 ;;'ve;;ENAux;
 
-
 ;;'(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;ENYear;ENTime;
 ;;1(0|1|2|3|4|5|6|7|8)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;ENYearNum;
 ;;19(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;ENYear;ENTime;
@@ -287,7 +277,6 @@
 ;;20(0|1|2|3)(0|1|2|3|4|5|6|7|8|9)(-|/)20(0|1|2|3)(0|1|2|3|4|5|6|7|8|9);;ENYear;ENTime;
 ;;20(0|1|2|3)(0|1|2|3|4|5|6|7|8|9)(-|/)(0|1|2|3)(0|1|2|3|4|5|6|7|8|9);;ENYear;ENTime;
 
-
 ;;twenty (one|two|three|four|five|six|seven|eight|nine);;ENNum;
 ;;thirty (one|two|three|four|five|six|seven|eight|nine);;ENNum;
 ;;forty (one|two|three|four|five|six|seven|eight|nine);;ENNum;
@@ -296,7 +285,6 @@
 ;;seventy (one|two|three|four|five|six|seven|eight|nine);;ENNum;
 ;;eighty (one|two|three|four|five|six|seven|eight|nine);;ENNum;
 ;;ninety (one|two|three|four|five|six|seven|eight|nine);;ENNum;
-
 ;;(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety);;ENNum;
 
 /**** Rewritten by DELVE, ;;, accounting for;;ENComma;-;ENRel;ENVerb;-;ENPrep;
@@ -331,7 +319,6 @@
 /**** Rewritten by DELVE, ;;, even to;;ENComma;-;ENRel;-;ENTo;
 ;;, even to;;ENComma;Lit_,;-;ENRel;-;ENTo;Lit_to
 ;;, for one;;ENAdvstruct;
-
 ;;, he said ,;;ENComma;
 ;;, he says ,;;ENAdvstruct;
 ;;, in addition ,;;ENAdvstruct;
@@ -341,7 +328,6 @@
 ;;, in part ,;;ENAdvstruct;
 ;;, in the first place ,;;ENMod;
 ;;, in this case ,;;ENAdvstruct;
-
 ;;, it said;;ENAdvstruct;
 ;;, likewise ,;;ENAdvstruct;
 /**** Rewritten by DELVE, ;;, making;;ENComma;-;ENRel;ENVerb;
@@ -350,7 +336,6 @@
 ;;, matters;;ENComma;Lit_,;-;ENCon
 /**** Rewritten by DELVE, ;;, meaning;;ENComma;-;ENRel;ENVerb;
 ;;, meaning;;ENComma;Lit_,;-;ENRel;ENVerb
-
 ;;, more than anything ,;;ENAdvstruct;
 /**** Rewritten by DELVE, ;;, mostly;;ENComma;-;ENRel;
 ;;, mostly;;ENComma;Lit_,;-;ENRel
@@ -370,10 +355,8 @@
 ;;, once again ,;;ENAdvstruct;
 /**** Rewritten by DELVE, ;;, only;;ENComma;-;ENAdv;
 ;;, only;;ENComma;Lit_,;-;ENAdv;Lit_only
-
 /**** Rewritten by DELVE, ;;, plans to;;ENComma;-;ENRel;ENVerb;-;ENTo;
 ;;, plans to;;ENComma;Lit_,;-;ENRel;ENVerb;-;ENTo;Lit_to
-
 /**** Rewritten by DELVE, ;;, ridiculing;;ENComma;-;ENRel;ENVerb;
 ;;, ridiculing;;ENComma;Lit_,;-;ENRel;ENVerb
 ;;, say ,;;ENAdvstruct;
@@ -417,7 +400,6 @@
 ;;a coming out;;ENArtPosspron;Lit_a;-;ENCon;-;ENCon
 /**** Rewritten by DELVE, ;;a communist state;;ENArtPosspron;-;ENAdj;-;ENCon;
 ;;a communist state;;ENArtPosspron;Lit_a;-;ENAdj;-;ENCon
-
 /**** Rewritten by DELVE, ;;a couple of;;ENArtPosspron;-;ENQuantity;Join;
 ;;a couple of;;ENArtPosspron;Lit_a;-;ENQuantity;Join
 /**** Rewritten by DELVE, ;;a couple;;ENArtPosspron;-;ENNum;
@@ -444,7 +426,8 @@
 ;;a few;;ENQuantity;ENQuantityTime;
 /**** Rewritten by DELVE, ;;a further;;ENArtPosspron;-;ENAdj;
 ;;a further;;ENArtPosspron;Lit_a;-;ENAdj
-
+;;a good bit of;;ENQuantity;
+;;a good part of;;ENQuantity;
 /**** Rewritten by DELVE, ;;a half of the;;ENArtPosspron;-;ENNum;Join;Join;
 ;;a half of the;;ENArtPosspron;Lit_a;-;ENNum;Join;Join
 /**** Rewritten by DELVE, ;;a heads up;;ENArtPosspron;-;ENCon;-;ENCon;
@@ -452,7 +435,6 @@
 /**** Rewritten by DELVE, ;;a just;;ENArtPosspron;-;ENAdj;
 ;;a just;;ENArtPosspron;Lit_a;-;ENAdj;Lit_just
 ;;a kind of;;ENArtPosspron;
-
 ;;a little too;;ENToo;
 ;;a lot a;;ENQuantity;
 ;;a lot less than;;ENPremod;ENCompare;
@@ -471,10 +453,8 @@
 ;;a matter of course;;ENArtPosspron;Lit_a;-;ENCon;Join;Join
 /**** Rewritten by DELVE, ;;a moderate;;ENArtPosspron;-;ENAdj;
 ;;a moderate;;ENArtPosspron;Lit_a;-;ENAdj
-
 /**** Rewritten by DELVE, ;;a more;;ENArtPosspron;-;ENPremod3;
 ;;a more;;ENArtPosspron;Lit_a;-;ENPremod3;Lit_more
-
 /**** Rewritten by DELVE, ;;a most;;ENArtPosspron;-;ENPremod3;
 ;;a most;;ENArtPosspron;Lit_a;-;ENPremod3
 /**** Rewritten by DELVE, ;;a near;;ENArtPosspron;-;ENAdj;
@@ -507,7 +487,6 @@
 ;;a swipe;;ENArtPosspron;Lit_a;-;ENCon
 /**** Rewritten by DELVE, ;;a third of the;;ENArtPosspron;-;ENNum;Join;Join;
 ;;a third of the;;ENArtPosspron;Lit_a;-;ENNum;Join;Join
-
 ;;a while;;ENAdvDurPR;ENDuration;
 ;;a while ago;;ENAdvTemp;ENTemp
 /**** Rewritten by DELVE, ;;a woman's;;ENArtPosspron;-;ENAdj;
@@ -740,9 +719,10 @@
 ;;according;;ENRel;
 ;;accordingly;;ENAdv;ENAdvmandeg;
 ;;accords;;ENVerbCon;
+;;accost;;ENInfCon;
+;;accosts;;ENVerbCon;
 ;;account for;;ENInf;
 ;;account;;ENInfCon;
-
 ;;accounted;;ENPart;
 /**** Rewritten by DELVE, ;;accounting for;;ENRel;ENVerb;-;ENPrep;
 ;;accounting for;;ENRel;ENVerb;-;ENPrep;Lit_for
@@ -776,7 +756,6 @@
 ;;accursed;;ENAdj;
 ;;accusatorily;;ENAdv;ENAdvmandeg;
 ;;accuse;;ENInf;
-
 ;;accused;;ENPart;
 ;;accuses;;ENRel;ENVerb;
 ;;accusing;;ENPrespart;
@@ -839,7 +818,6 @@
 ;;acrimoniously;;ENAdv;ENAdvmandeg;
 ;;acrobatically;;ENAdv;ENAdvmandeg;
 ;;across;;ENPrep;
-
 ;;act;;ENInfCon;ENConceptbeforenumber;
 ;;acted;;ENPart;
 /**** Rewritten by DELVE, ;;acting as;;ENPrespart;-;ENPrep;
@@ -1145,7 +1123,7 @@
 ;;agreeing;;ENPrespart;ENWithToInf1;
 ;;agreeingly;;ENAdv;ENAdvmandeg;
 ;;agrees;;ENRel;ENVerb;ENWithToInf1;
-;;agricultural good;;ENCon;
+;;agricultural good;;ENAdj;-;ENCon;
 ;;agricultural;;ENAdj;
 ;;agriculture (&|and) agri-food;;ENCon;
 /**** Rewritten by DELVE, ;;ahead of;;ENPrep;-;ENOf;
@@ -2000,7 +1978,7 @@
 ;;as a result of;;ENPrep;ENDateTimeStop;
 ;;as far as;;ENRel;ENConj;
 ;;as for;;ENPrep;
-;;as if;;ENRel;ENConj;
+;;as if;;ENRel;ENConj;ENCondition;
 ;;as little as possible;;ENAdv;ENAdvmandeg;
 ;;as little as;;ENEqcomp;
 ;;as long as;;ENPrep;
@@ -2050,8 +2028,8 @@
 ;;ask;;ENInf;
 ;;askance;;ENAdv;ENAdvmandeg;
 ;;asked;;ENPart;
-/**** Rewritten by DELVE, ;;asking if;;ENRel;ENVerb;-;ENRel;ENConj;
-;;asking if;;ENRel;ENVerb;-;ENRel;ENConj;Lit_if
+/**** Rewritten by DELVE, ;;asking if;;ENRel;ENVerb;-;ENRel;ENConj;ENCondition;
+;;asking if;;ENRel;ENVerb;-;ENRel;ENConj;ENCondition;Lit_if
 ;;asking;;ENPrespart;
 ;;asks;;ENRel;ENVerb;
 ;;aslant;;ENPrep;
@@ -2130,7 +2108,7 @@
 ;;assume;;ENInf;ENWithToInf2;
 ;;assumed;;ENPart;ENWithToInf2;
 ;;assumes;;ENRel;ENVerb;ENWithToInf2;
-;;assuming;;ENPrespart;ENWithToInf2;
+;;assuming;;ENPrespart;ENWithToInf2;ENCondition;
 ;c=0;assumingly;;ENAdv;ENAdvmandeg;ENCertainty;
 ;;assure;;ENInf;
 ;;assured;;ENPart;
@@ -2397,9 +2375,10 @@
 ;;awe;;ENInfCon;
 ;;awed;;ENPart;
 ;;awes;;ENRel;ENVerb;
-;;awesomely;;ENAdv;ENAdvmandeg;
+;;awesome;;ENAdj;ENPosSentiment;
+;;awesomely;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;awestruckly;;ENAdv;ENAdvmandeg;
-;;awful;;ENAdj;
+;;awful;;ENAdj;ENNegSentiment;
 ;;awfully;;ENAdv;ENAdvmandeg;
 ;;awhile;;ENAdvDurPR;ENDuration;;
 ;;awing;;ENPrespart;
@@ -2479,12 +2458,11 @@
 ;;bacterially;;ENAdv;ENAdvmandeg;
 ;;bacteriologically;;ENAdv;ENAdvmandeg;
 ;;bacterized;;ENPart;
-
 ;;bad-mouth;;ENInf;
 ;;bad-mouthed;;ENPart;
 ;;bad-mouths;;ENRel;ENVerb;
 ;;bad-temperedly;;ENAdv;ENAdvmandeg;
-;;bad;;ENAdj;
+;;bad;;ENAdj;ENNegSentiment;
 ;;badge;;ENInfCon;
 ;;badged;;ENPart;
 ;;badges;;ENVerbCon;
@@ -2765,9 +2743,10 @@
 ;;beats per minute;;ENCon;ENAfterPulse;ENUnit;
 ;;beats;;ENVerbCon;
 ;;beauteously;;ENAdv;ENAdvmandeg;
-;;beautiful rose;;ENCon;
-;;beautiful;;ENAdj;
-;;beautifully;;ENAdv;ENAdvmandeg;
+/**** Rewritten by DELVE, ;;beautiful rose;;ENAdj;ENPosSentiment;-;ENCon;
+;;beautiful rose;;ENAdj;ENPosSentiment;-;ENCon;Lit_rose
+;;beautiful;;ENAdj;ENPosSentiment;
+;;beautifully;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;becalmingly;;ENAdv;ENAdvmandeg;
 ;;became;;ENRel;ENVerb;
 ;;because of;;ENPrep;ENNegStop;ENDateTimeStop;
@@ -3561,7 +3540,6 @@
 ;;botoxed;;ENPart;
 ;;botoxes;;ENRel;ENVerb;
 ;;botoxing;;ENPrespart;
-
 ;;bottled;;ENPart;
 ;;bottles away;;ENCon;-;ENPrep;
 ;;bottles;;ENVerbCon;
@@ -3692,6 +3670,7 @@
 ;;break down;;ENInfCon;
 ;;break even;;ENInfCon;
 ;;break free;;ENInf;
+;;break out;;ENInf;
 ;;break;;ENInfCon;
 ;;breakable;;ENAdj;
 ;;breakdance;;ENInfCon;
@@ -3702,10 +3681,12 @@
 ;;breaking down;;ENPrespart;
 ;;breaking even;;ENPrespart;-;ENAdj;
 ;;breaking free;;ENPrespart;
+;;breaking out;;ENPrespart;
 ;;breaking up;;ENPrespart;
 ;;breaking;;ENPrespart;
 ;;breakingly;;ENAdv;ENAdvmandeg;
 ;;breaks free;;ENRel;ENVerb;
+;;breaks out;;ENRel;ENVerb;
 ;;breaks;;ENVerbCon;
 ;;breast-fed;;ENPart;
 ;;breast-feed;;ENInf;
@@ -3773,9 +3754,9 @@
 ;;brightens;;ENRel;ENVerb;
 ;;brightling;;ENPrespart;
 ;;brightly;;ENAdv;ENAdvmandeg;
-;;brilliant;;ENAdj;
+;;brilliant;;ENAdj;ENPosSentiment;
 ;;brilliantined;;ENPart;
-;;brilliantly;;ENAdv;ENAdvmandeg;
+;;brilliantly;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;brim;;ENInfCon;
 ;;brimmed;;ENPart;
 ;;brimming;;ENPrespart;
@@ -3821,6 +3802,7 @@
 ;;broadly;;ENAdv;ENAdvmandeg;ENAdvdegree;
 ;;broke back;;ENRel;ENVerb;
 ;;broke free;;ENRel;ENVerb;
+;;broke out;;ENRel;ENVerb;
 ;;broke;;ENRel;ENVerb;ENAdj;
 ;;broken down;;ENPart;
 ;;broken-heartedly;;ENAdv;ENAdvmandeg;
@@ -3927,7 +3909,6 @@
 ;;bugging;;ENPrespart;
 ;;bugs;;ENVerbCon;
 ;;build up;;ENInfCon;
-
 ;;build;;ENInfCon;
 ;;building;;ENPrespart;
 /**** Rewritten by DELVE, ;;builds on;;ENRel;ENVerb;-;ENPrep;
@@ -4205,6 +4186,8 @@
 ;;came crashing down;;ENRel;ENVerb;
 ;;came forward;;ENRel;ENVerb;
 ;;came into effect;;ENRel;ENVerb;
+;;came into force;;ENRel;ENVerb;
+;;came round;;ENRel;ENVerb;
 ;;came to terms;;ENRel;ENVerb;
 ;;came;;ENRel;ENVerb;ENWithToInf1;
 ;;camouflage;;ENInfCon;
@@ -4315,6 +4298,7 @@
 ;;capacitates;;ENRel;ENVerb;
 ;;capacitating;;ENPrespart;
 ;;cape and islands;;ENCon;
+;;cape of good hope;;ENCon;
 ;;capital;;ENCon;ENAdj;
 ;;capitalise;;ENInf;
 ;;capitalised;;ENPart;
@@ -4713,6 +4697,7 @@
 ;;charing;;ENPrespart;
 ;;charismatically;;ENAdv;ENAdvmandeg;
 ;;charitably;;ENAdv;ENAdvmandeg;
+;;charles the great;;ENCon;
 ;;charm;;ENInfCon;
 ;;charmed;;ENPart;
 ;;charming;;ENAdj;
@@ -4811,7 +4796,6 @@
 ;;cherry-picks;;ENRel;ENVerb;
 ;;cherry-picking;;ENPrespart;
 ;;cherubically;;ENAdv;ENAdvmandeg;
-
 ;;chested;;ENPart;
 ;;chesting;;ENPrespart;
 ;;chests;;ENVerbCon;
@@ -4945,6 +4929,8 @@
 ;;chunkily;;ENAdv;ENAdvmandeg;
 ;;chunking;;ENPrespart;
 ;;chunks;;ENVerbCon;
+/**** Rewritten by DELVE, ;;the church of england;;ENArtPosspron;-;ENCon;Join;Join;
+;;the church of england;;ENArtPosspron;Lit_the;-;ENCon;Join;Join
 ;;churlishly;;ENAdv;ENAdvmandeg;
 ;;churn;;ENInfCon;
 ;;churned;;ENPart;
@@ -5210,7 +5196,6 @@
 ;;clothe;;ENInf;
 ;;clothed;;ENPart;
 ;;clothes;;ENVerbCon;
-
 ;;clots;;ENVerbCon;
 ;;clotted;;ENPart;
 ;;clotting;;ENPrespart;
@@ -5541,6 +5526,8 @@
 ;;come forward;;ENInf;
 ;;come hell or high water;;ENAdv;ENAdvmandeg;
 ;;come into effect;;ENInf;
+;;come into force;;ENInf;
+;;come round;;ENInf;
 ;;come to terms;;ENInf;ENPart;
 ;;come what may;;ENAdv;ENAdvmandeg;
 ;;come;;ENInf;ENWithToInf1;
@@ -5549,11 +5536,13 @@
 ;;comes crashing down;;ENRel;ENVerb;
 ;;comes forward;;ENRel;ENVerb;
 ;;comes into effect;;ENRel;ENVerb;
+;;comes into force;;ENRel;ENVerb;
+;;comes round;;ENRel;ENVerb;
 ;;comes to terms;;ENRel;ENVerb;
 ;;comes;;ENRel;ENVerb;ENWithToInf1;
 ;;comfirmed;;ENPart;
 ;;comfort;;ENInfCon;
-;;comfortable;;ENAdj;
+;;comfortable;;ENAdj;ENPosSentiment;
 ;;comfortably;;ENAdv;ENAdvmandeg;
 ;;comforted;;ENPart;
 ;;comfortedly;;ENAdv;ENAdvmandeg;
@@ -5568,8 +5557,10 @@
 /**** Rewritten by DELVE, ;;coming in;;ENRel;ENVerb;-;ENPrep;
 ;;coming in;;ENRel;ENVerb;-;ENPrep;Lit_in
 ;;coming into effect;;ENRel;ENVerb;
+;;coming into force;;ENRel;ENVerb;ENPrespart2;
 /**** Rewritten by DELVE, ;;coming into;;ENRel;ENVerb;-;ENPrep;
 ;;coming into;;ENRel;ENVerb;-;ENPrep;Lit_into
+;;coming round;;ENRel;ENVerb;ENPrespart2;
 ;;coming out of;;ENRel;ENVerb;
 ;;coming to terms;;ENPrespart;
 ;;coming;;ENPrespart;ENAdjtime;ENWithToInf1;
@@ -5964,7 +5955,7 @@
 ;;confound;;ENInf;
 ;;confounded;;ENPart;
 ;;confoundedly;;ENAdv;ENAdvmandeg;
-;;confounding;;ENPrespart;
+;;confounding;;ENPrespart;ENAdj;
 ;;confoundingly;;ENAdv;ENAdvmandeg;
 ;;confounds;;ENRel;ENVerb;
 ;;confront;;ENInf;
@@ -6086,7 +6077,6 @@
 ;;consigns;;ENRel;ENVerb;
 ;;consist;;ENInf;
 ;;consisted;;ENPart;
-
 /**** Rewritten by DELVE, ;;consistent with;;ENRel;-;ENPrep;ENOf;
 ;;consistent with;;ENRel;-;ENPrep;ENOf;Lit_with
 ;;consistent;;ENAdj;
@@ -6427,7 +6417,6 @@
 ;;corns;;ENVerbCon;
 ;;coronal;;ENAdj;
 ;;corporate;;ENAdj;
-
 ;;corporation;;ENOrgUnit;
 ;;corral;;ENInfCon;
 ;;corralled;;ENPart;
@@ -6655,6 +6644,7 @@
 ;;coxing;;ENPrespart;
 ;;coyly;;ENAdv;ENAdvmandeg;
 ;;cozily;;ENAdv;ENAdvmandeg;
+;;cozy;;ENAdj;ENPosSentiment;
 ;;crabbily;;ENAdv;ENAdvmandeg;
 ;;crabbing;;ENPrespart;
 ;;crack down;;ENInf;
@@ -6699,6 +6689,7 @@
 ;;crankily;;ENAdv;ENAdvmandeg;
 ;;cranking;;ENPrespart;
 ;;cranks;;ENVerbCon;
+;;crappy;;ENAdj;ENNegSentiment;
 ;;crash-land;;ENInf;
 ;;crash-landed;;ENPart;
 ;;crash-lands;;ENRel;ENVerb;
@@ -6752,10 +6743,10 @@
 ;;credits;;ENVerbCon;
 ;;credulously;;ENAdv;ENAdvmandeg;
 ;;creep;;ENInfCon;
-;;creepily;;ENAdv;ENAdvmandeg;
+;;creepily;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;creeping;;ENPrespart;
 ;;creeps;;ENVerbCon;
-;;creepy;;ENAdj;
+;;creepy;;ENAdj;ENNegSentiment;
 ;;cremate;;ENInf;
 ;;cremated;;ENPart;
 ;;cremates;;ENRel;ENVerb;
@@ -7212,7 +7203,6 @@
 ;;dawned;;ENPart;
 ;;dawning;;ENPrespart;
 ;;dawns;;ENVerbCon;
-
 ;;day after day;;ENCon;ENDuration;
 ;;day care;;ENCon;
 ;;day;;ENCon;ENConTime;ENTime;
@@ -7220,7 +7210,6 @@
 ;;daydreamed;;ENPart;
 ;;daydreaming;;ENPrespart;
 ;;daydreams;;ENVerbCon;
-
 ;;daze;;ENInfCon;
 ;;dazed;;ENPart;
 ;;dazedly;;ENAdv;ENAdvmandeg;
@@ -7320,9 +7309,7 @@
 ;;debuts;;ENVerbCon;
 ;;dec.;;ENDate;ENCon;ENMonthAbbr;
 ;;dec;;ENDate;ENCon;ENMonthAbbr;
-
 ;;decadently;;ENAdv;ENAdvmandeg;
-
 ;;decaffeinate;;ENInf;
 ;;decaffeinated;;ENPart;
 ;;decaffeinates;;ENRel;ENVerb;
@@ -7369,7 +7356,6 @@
 ;;decelerated;;ENPart;
 ;;decelerates;;ENRel;ENVerb;
 ;;decelerating;;ENPrespart;
-
 ;;december;;ENDate;ENCon;ENConTime;ENTime;
 ;;decennial;;ENAdj;ENFrequency;
 ;;decennially;;ENAdvFreqCon;ENFrequency;
@@ -7695,10 +7681,10 @@
 ;;deliberating;;ENPrespart;
 ;;delicate;;ENAdj;
 ;;delicately;;ENAdv;ENAdvmandeg;
-;;delicious;;ENAdj;
-;;deliciously;;ENAdv;ENAdvmandeg;
+;;delicious;;ENAdj;ENPosSentiment;
+;;deliciously;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;delight;;ENInfCon;
-;;delighted;;ENPart;ENAdj;
+;;delighted;;ENPart;ENAdj;ENPosSentiment;
 ;;delightedly;;ENAdv;ENAdvmandeg;
 ;;delightful;;ENAdj;
 ;;delightfully;;ENAdv;ENAdvmandeg;
@@ -8177,7 +8163,7 @@
 ;;despatched;;ENPart;
 ;;despatches;;ENVerbCon;
 ;;despatching;;ENPrespart;
-;;desperate;;ENAdj;
+;;desperate;;ENAdj;ENNegSentiment;
 ;;desperately;;ENAdv;ENAdvmandeg;
 ;;despise;;ENInf;
 ;;despised;;ENPart;
@@ -8547,8 +8533,8 @@
 ;;disappointed with;;ENRel;
 ;;disappointed;;ENPart;ENAdj;
 ;;disappointedly;;ENAdv;ENAdvmandeg;
-;;disappointing;;ENPrespart;ENAdj;
-;;disappointingly;;ENAdv;ENAdvmandeg;
+;;disappointing;;ENPrespart;ENAdj;ENNegSentiment;
+;;disappointingly;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;disappoints;;ENRel;ENVerb;
 ;;disapprove;;ENInf;
 ;;disapproved;;ENPart;
@@ -8735,11 +8721,11 @@
 ;;disgorged;;ENPart;
 ;;disgorges;;ENRel;ENVerb;
 ;;disgorging;;ENPrespart;
-;;disgrace;;ENInfCon;
-;;disgraced;;ENPart;
-;;disgracefully;;ENAdv;ENAdvmandeg;
-;;disgraces;;ENVerbCon;
-;;disgracing;;ENPrespart;
+;;disgrace;;ENInfCon;ENNegSentiment;
+;;disgraced;;ENPart;ENNegSentiment;
+;;disgracefully;;ENAdv;ENAdvmandeg;ENNegSentiment;
+;;disgraces;;ENVerbCon;ENNegSentiment;
+;;disgracing;;ENPrespart;ENNegSentiment;
 ;;disgruntled;;ENAdj;
 ;;disgruntledly;;ENAdv;ENAdvmandeg;
 ;;disguise;;ENInfCon;
@@ -8747,12 +8733,12 @@
 ;;disguisedly;;ENAdv;ENAdvmandeg;
 ;;disguises;;ENVerbCon;
 ;;disguising;;ENPrespart;
-;;disgust;;ENInfCon;
-;;disgusted;;ENPart;
-;;disgustedly;;ENAdv;ENAdvmandeg;
-;;disgusting;;ENPrespart;ENAdj;
-;;disgustingly;;ENAdv;ENAdvmandeg;
-;;disgusts;;ENRel;ENVerb;
+;;disgust;;ENInfCon;ENNegSentiment;
+;;disgusted;;ENPart;ENNegSentiment;
+;;disgustedly;;ENAdv;ENAdvmandeg;ENNegSentiment;
+;;disgusting;;ENPrespart;ENAdj;ENNegSentiment;
+;;disgustingly;;ENAdv;ENAdvmandeg;ENNegSentiment;
+;;disgusts;;ENRel;ENVerb;ENNegSentiment;
 ;;dish;;ENInfCon;
 ;;disharmoniously;;ENAdv;ENAdvmandeg;
 ;;dishearten;;ENInf;
@@ -9284,7 +9270,6 @@
 ;;dope;;ENInfCon;
 ;;doped;;ENPart;
 ;;dopes;;ENVerbCon;
-
 ;;dosed;;ENPart;
 ;;dot;;ENInfCon;
 ;;dote;;ENInf;
@@ -9376,7 +9361,6 @@
 ;;dozed;;ENPart;
 ;;dozen(s|);;ENQuantity;ENMeasurement;
 ;;dozens of;;ENQuantity;ENMeasurement;
-
 ;;dozes;;ENVerbCon;
 ;;dozing;;ENPrespart;
 ;;dr;;ENAdj;
@@ -9521,7 +9505,6 @@
 ;;dropping litter;;ENRel;ENVerb;-;ENCon;
 ;;dropping out;;ENPrespart;
 ;;dropping;;ENPrespart;
-
 ;;drops;;ENVerbCon;
 ;;drove;;ENRel;ENVerb;
 ;;drown;;ENInf;
@@ -9680,17 +9663,14 @@
 ;;ear;;ENInfCon;
 ;;eared;;ENPart;
 ;;earing;;ENPrespart;
-
 ;;earlier;;ENAdvTemp;ENAdj;ENEndoftime;ENAdjtime;
 ;;early-(morning|afternoon|evening|night);;ENCon;ENConTime;ENTime;
 /**** Rewritten by DELVE, ;;early on ,;;ENAdvTemp;ENTemp;Join;-;ENComma;
 ;;early on ,;;ENAdvTemp;ENTemp;Join;-;ENComma;Lit_,
-
 /**** Rewritten by DELVE, ;;early on in;;ENAdvTemp;ENTemp;Join;-;ENPrep;
 ;;early on in;;ENAdvTemp;ENTemp;Join;-;ENPrep;Lit_in
 ;;early on;;ENAdvTemp;ENTemp;
 ;;early one morning;;ENAdvTemp;ENTemp;
-
 /**** Rewritten by DELVE, ;;early stage;;ENAdj;-;ENCon;
 ;;early stage;;ENAdj;Lit_early;-;ENCon
 ;;early;;ENAdj;ENAdjtime;ENAdvTemp;
@@ -9818,7 +9798,6 @@
 ;;egotistically;;ENAdv;ENAdvmandeg;
 ;;egregious;;ENAdj;
 ;;egregiously;;ENAdv;ENAdvmandeg;
-
 ;;eight-and-a-half;;ENNum;
 ;;eighth;;ENAdj;ENOrdNum;ENFraction;
 ;;eighths;;ENFraction;
@@ -9831,7 +9810,6 @@
 ;;eighty-six;;ENNum;
 ;;eighty-three;;ENNum;
 ;;eighty-two;;ENNum;
-
 ;;either of her;;ENIndefpron;
 ;;either of his;;ENIndefpron;
 ;;either of my;;ENIndefpron;
@@ -9928,9 +9906,7 @@
 ;;elevated;;ENPart;ENAdj;
 ;;elevates;;ENRel;ENVerb;
 ;;elevating;;ENPrespart;
-
 ;;eleven-and-a-half;;ENNum;
-
 ;;elicit;;ENInf;
 ;;elicited;;ENPart;
 ;;eliciting;;ENPrespart;
@@ -9994,11 +9970,11 @@
 ;;embarked;;ENPart;
 ;;embarking;;ENPrespart;
 ;;embarks;;ENRel;ENVerb;
-;;embarrass;;ENRel;ENVerb;
-;;embarrassed;;ENPart;ENAdj;
-;;embarrassedly;;ENAdv;ENAdvmandeg;
-;;embarrassing;;ENPrespart;
-;;embarrasssed;;ENPart;
+;;embarrass;;ENRel;ENVerb;ENNegSentiment;
+;;embarrassed;;ENPart;ENAdj;ENNegSentiment;
+;;embarrassedly;;ENAdv;ENAdvmandeg;ENNegSentiment;
+;;embarrassing;;ENPrespart;ENAdj;ENNegSentiment;
+;;embarrasssed;;ENPart;ENNegSentiment;
 ;;embattle;;ENInf;
 ;;embattled;;ENPart;
 ;;embattles;;ENRel;ENVerb;
@@ -10320,11 +10296,12 @@
 ;;enhances;;ENRel;ENVerb;
 ;;enhancing;;ENPrespart;
 ;;enigmatically;;ENAdv;ENAdvmandeg;
-;;enjoy;;ENInf;
-;;enjoyably;;ENAdv;ENAdvmandeg;
-;;enjoyed;;ENPart;
-;;enjoying;;ENPrespart;
-;;enjoys;;ENRel;ENVerb;
+;;enjoy;;ENInf;ENPosSentiment;
+;;enjoyable;;ENAdj;ENPosSentiment;
+;;enjoyably;;ENAdv;ENAdvmandeg;ENPosSentiment;
+;;enjoyed;;ENPart;ENPosSentiment;
+;;enjoying;;ENPrespart;ENPosSentiment;
+;;enjoys;;ENRel;ENVerb;ENPosSentiment;
 ;;enlarge;;ENInf;
 ;;enlarged;;ENPart;
 ;;enlarges;;ENRel;ENVerb;
@@ -10414,10 +10391,13 @@
 ;;entangled;;ENPart;
 ;;entangles;;ENRel;ENVerb;
 ;;entangling;;ENPrespart;
+;;enter into force;;ENInf;
 ;;enter;;ENInf;
 ;;enterally;;ENAdv;ENAdvmandeg;
+;;entered into force;;ENRel;ENVerb;
 ;;entered;;ENPart;
 ;;enteric;;ENAdj;
+;;entering into force;;ENRel;ENVerb;ENPrespart2;
 ;;entering;;ENPrespart;
 ;;enterprise;;ENInfCon;
 ;;enterprising;;ENPrespart;
@@ -10661,7 +10641,6 @@
 ;;estimate that;;ENInf;-;ENRel;ENConj;Lit_that
 ;;estimate;;ENInfCon;
 ;;estimated;;ENPart;ENWithToInf2;
-
 ;;estimates;;ENVerbCon;ENVerbConThat;
 ;;estimating;;ENPrespart;
 ;;estrange;;ENInf;
@@ -10732,9 +10711,8 @@
 ;;evasively;;ENAdv;ENAdvmandeg;
 ;;even able to;;ENTo;
 ;;even as;;ENPrep;
-
 ;;even days;;ENAdj;-;ENCon;
-;;even if;;ENRel;ENConj;
+;;even if;;ENRel;ENConj;ENCondition;
 ;;even just;;ENJust;
 ;;even more;;ENPremod3;ENAdv;ENIntensifier;ENAdvmandeg;
 /**** Rewritten by DELVE, ;;even now ,;;ENAdvTemp;ENTemp;Join;-;ENComma;
@@ -10757,7 +10735,6 @@
 ;;eventually;;ENAdvTemp;ENTemp;
 ;;ever again;;ENAdvTemp;ENTemp;
 ;;ever more;;ENAdv;ENAdvmandeg;
-
 ;;ever since;;ENPrep;
 ;;ever-so-slightly;;ENAdv;ENAdvmandeg;
 ;;ever;;ENAdvTemp;ENTemp;
@@ -10766,21 +10743,17 @@
 ;;everted;;ENPart;
 ;;everting;;ENPrespart;
 ;;everts;;ENRel;ENVerb;
-
 ;;every kind of;;ENAdj;
 ;;every now and again;;ENAdvTemp;ENAdvFreqPR;ENFrequency;
 ;;every now and then;;ENAdvTemp;ENAdvFreqPR;ENFrequency;
-
 ;;every one;;ENBeginconcept;
 /**** Rewritten by DELVE, ;;every other challenge;;ENAdj;-;ENAdj;-;ENCon;
 ;;every other challenge;;ENAdj;Lit_every;-;ENAdj;Lit_other;-;ENCon
 ;;every other;;ENAdj;ENBeginconcept;ENAdjFreq;
 /**** Rewritten by DELVE, ;;every remaining;;ENAdj;-;ENAdj;
 ;;every remaining;;ENAdj;Lit_every;-;ENAdj
-
 /**** Rewritten by DELVE, ;;every second;;ENBeginconcept;-;ENCon;ENTime;
 ;;every second;;ENBeginconcept;Lit_every;-;ENCon;ENTime;Lit_second
-
 ;;every so often;;ENAdvTemp;ENAdvFreqPR;ENFrequency;
 ;;every;;ENAdj;ENBeginconcept;ENAdjFreq;ENsAdj;
 ;;everybody else's;;ENBeginconcept;
@@ -10875,10 +10848,8 @@
 ;;excel;;ENInfCon;
 ;;exceled;;ENPart;
 ;;excelled;;ENPart;
-;;excellent at;;ENRel;
-;;excellent in;;ENRel;
-;;excellent;;ENAdj;
-;;excellently;;ENAdv;ENAdvmandeg;
+;;excellent;;ENAdj;ENPosSentiment;
+;;excellently;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;excelling;;ENPrespart;
 ;;excels;;ENRel;ENVerb;
 ;;except for;;ENPrep;ENAttrStop;ENNegStop;
@@ -11269,6 +11240,8 @@
 ;;fabricated;;ENPart;
 ;;fabricates;;ENVerbCon;
 ;;fabricating;;ENPrespart;
+;;fabulous;;ENAdj;ENPosSentiment;
+;;fabulously;;ENPosSentiment;
 ;;face;;ENInfCon;
 ;;faced by;;ENRel;ENVerb;
 ;;face to face;;ENAdv;ENAdvmandeg;
@@ -11312,9 +11285,17 @@
 ;;fagged;;ENPart;
 ;;fagging;;ENPrespart;
 ;;fags;;ENVerbCon;
+/**** Rewritten by DELVE, ;;fail to;;ENInf;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;
+;;fail to;;ENInf;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;Lit_to
 ;;fail;;ENInf;ENWithToInf1;
+/**** Rewritten by DELVE, ;;failed to;;ENRel;ENVerb;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;
+;;failed to;;ENRel;ENVerb;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;Lit_to
 ;;failed;;ENPart;ENWithToInf1;
+/**** Rewritten by DELVE, ;;failing to;;ENPrespart;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;
+;;failing to;;ENPrespart;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;Lit_to
 ;;failing;;ENPrespart;ENWithToInf1;
+/**** Rewritten by DELVE, ;;fails to;;ENRel;ENVerb;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;
+;;fails to;;ENRel;ENVerb;ENWithToInf1;ENNegation;ENNegBegin;-;ENTo;Lit_to
 ;;fails;;ENRel;ENVerb;ENWithToInf1;
 ;;faint;;ENVerbConAdj;ENInf;
 ;;fainted;;ENPart;
@@ -11358,6 +11339,7 @@
 ;;falls off;;ENRel;ENVerb;
 ;;falls short;;ENRel;ENVerb;
 ;;falls;;ENVerbCon;
+;;false;;ENAdj;
 ;;falsely;;ENAdv;ENAdvmandeg;
 ;;falsified;;ENPart;
 ;;falsifies;;ENRel;ENVerb;
@@ -11411,15 +11393,14 @@
 ;;fantasized;;ENPart;
 ;;fantasizes;;ENRel;ENVerb;
 ;;fantasizing;;ENPrespart;
-;;fantastic;;ENAdj;
-;;fantastically;;ENAdv;ENAdvmandeg;
+;;fantastic;;ENAdj;ENPosSentiment;
+;;fantastically;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;far apart;;ENCon;
 ;;far away;;ENAdvdir;
 ;;far beyond;;ENRel;
 ;;far from;;ENPrep;
 ;;far less than;;ENPremod;ENCompare;
 ;;far less;;ENPremod3;ENAdv;ENIntensifier;ENAdvmandeg;
-
 ;;far more often;;ENAdvTemp;ENAdvFreqPR;ENFrequency;
 ;;far more questions;;ENCon;
 ;;far;;ENAdj;
@@ -11475,7 +11456,6 @@
 ;;fatefully;;ENAdv;ENAdvmandeg;
 ;;fates;;ENVerbCon;
 ;;father's day;;ENCon;ENTime;
-
 ;;fathered;;ENPart;
 ;;fathering;;ENPrespart;
 ;;fatigue;;ENInfCon;
@@ -11540,7 +11520,6 @@
 ;;febr.;;ENDate;ENCon;ENMonthAbbr;
 ;;feb;;ENDate;ENCon;ENMonthAbbr;
 ;;febr;;ENDate;ENCon;ENMonthAbbr;
-
 ;;february;;ENDate;ENCon;ENConTime;ENTime;
 ;;fecklessly;;ENAdv;ENAdvmandeg;
 ;;fed up with;;ENRel;
@@ -11688,7 +11667,6 @@
 ;;fiendishly;;ENAdv;ENAdvmandeg;
 ;;fierce;;ENAdj;
 ;;fiercely;;ENAdv;ENAdvmandeg;
-
 ;;fifth;;ENAdj;ENOrdNum;ENFraction;
 ;;fifths;;ENFraction;
 ;;fifty-eight;;ENNum;
@@ -11700,7 +11678,6 @@
 ;;fifty-six;;ENNum;
 ;;fifty-three;;ENNum;
 ;;fifty-two;;ENNum;
-
 ;;fight back;;ENInf;
 ;;fight;;ENInfCon;
 ;;fighting back;;ENPrespart;
@@ -11733,7 +11710,7 @@
 ;;filtering;;ENPrespart;
 ;;filters;;ENVerbCon;
 ;;filthily;;ENAdv;ENAdvmandeg;
-;;filthy;;ENAdj;
+;;filthy;;ENAdj;ENNegSentiment;
 ;;filtrate;;ENInfCon;
 ;;filtrated;;ENPart;
 ;;filtrates;;ENVerbCon;
@@ -11771,6 +11748,7 @@
 ;;finessed;;ENPart;
 ;;finesses;;ENVerbCon;
 ;;finessing;;ENPrespart;
+;;finest;;ENAdj;ENPosSentiment;
 ;;fingering;;ENPrespart;ENRel;
 ;;fingerprint;;ENInfCon;
 ;;fingerprinted;;ENPart;
@@ -11809,7 +11787,6 @@
 /**** Rewritten by DELVE, ;;first dates;;ENCon;ENFrequency;-;ENCon;
 ;;first dates;;ENCon;ENFrequency;Lit_first;-;ENCon
 /* Expanded previously by DELVE....;;first date(|s);;ENCon;ENFrequency;-;ENCon;
-
 ;;first of all;;ENAdvTemp;ENTemp;
 ;;first lady;avoid measurement attribute;ENCon;
 ;;first minister;avoid measurement attribute;ENCon;
@@ -11819,7 +11796,6 @@
 ;;first time ever;;ENCon;
 ;;first-half;;ENAdj;ENTime;
 ;;first-line;;ENAdj;
-
 ;;firstly;;ENAdvTemp;ENTemp;
 ;;fiscal;;ENAdj;
 ;;fish and chips;;ENCon;
@@ -11839,9 +11815,7 @@
 ;;fitted;;ENPart;
 ;;fitting;;ENPrespart;
 ;;fittingly;;ENAdv;ENAdvmandeg;
-
 ;;five-and-a-half;;ENNum;
-
 ;;fix;;ENInf;ENAdj;
 ;;fixate;;ENInf;
 ;;fixated;;ENPart;
@@ -12180,7 +12154,6 @@
 ;;following;;ENPrespart;ENRel;ENAfterTime;
 /**** Rewritten by DELVE, ;;the following;;ENArtPosspron;-;ENAdjtime;ENAdj;
 ;;the following;;ENArtPosspron;Lit_the;-;ENAdjtime;ENAdj
-
 ;;followingly;;ENAdv;ENAdvmandeg;
 ;;follows;;ENRel;ENVerb;
 ;;fond of;;ENRel;
@@ -12197,7 +12170,6 @@
 ;;foolish;;ENAdj;
 ;;foolishly;;ENAdv;ENAdvmandeg;
 ;;fools;;ENVerbCon;
-
 ;;footballing;;ENPrespart;
 ;;footed;;ENPart;
 ;;footing;;ENPrespart;
@@ -12216,6 +12188,8 @@
 /**** Rewritten by DELVE, ;;for awhile;;ENPrep;-;ENAdvDurPR;ENDuration;
 ;;for awhile;;ENPrep;Lit_for;-;ENAdvDurPR;ENDuration
 ;;for example ,;;ENAdvstruct;
+/**** Rewritten by DELVE, ;;B for example ,;;SBegin;-;ENAdvstruct;Join;-;ENComma;
+;;B for example ,;;SBegin;-;ENAdvstruct;Join;-;ENComma;Lit_,
 ;;for example;;ENAdvstruct;
 ;;for granted;;ENRel;
 ;;for instance ,;;ENAdvstruct;
@@ -12226,7 +12200,6 @@
 ;;for the most part;;ENAdv;ENAdvmandeg;
 ;;for the purpose of;;ENPrep;
 ;;for the purposes of;;ENPrep;
-
 ;;for the time being;;ENAdvTemp;ENTemp;
 ;;for which;;ENRelOth;ENConj;
 ;;for(e|)go;;ENInf;
@@ -12378,8 +12351,9 @@
 ;;forty-six;;ENNum;
 ;;forty-three;;ENNum;
 ;;forty-two;;ENNum;
-
 ;;forward dated;;ENPart;
+;;forward option;;ENAdj;-;ENCon;
+;;forward options;;ENAdj;-;ENCon;
 ;;forward;;ENVerbConAdj;ENInf;
 ;;forwarded;;ENPart;
 ;;forwarding;;ENPrespart;
@@ -12422,7 +12396,6 @@
 ;;founders;;ENVerbCon;
 ;;founding;;ENPrespart;
 ;;founds;;ENRel;ENVerb;
-
 ;;four-and-a-half;;ENNum;
 ;;fourth;;ENAdj;ENOrdNum;ENFraction
 ;;fourths;;ENFraction
@@ -12468,6 +12441,7 @@
 ;;frantic;;ENAdj;
 ;;frantically;;ENAdv;ENAdvmandeg;
 ;;fraternally;;ENAdv;ENAdvmandeg;
+;;fraudulent;;ENAdj;
 ;;fraudulently;;ENAdv;ENAdvmandeg;
 ;;fraught with;;ENRel;ENVerb;
 ;;fraught;;ENAdj;
@@ -12595,6 +12569,8 @@
 ;;frolicks;;ENRel;ENVerb;
 ;;frolicsomely;;ENAdv;ENAdvmandeg;
 ;;B from the outset;;SBegin;-;ENAdvTemp;ENTemp;Join;Join;
+/**** Rewritten by DELVE, ;;from start to finish;;ENPrep;ENOf;-;ENCon;-;ENPrep;-;ENCon;
+;;from start to finish;;ENPrep;ENOf;Lit_from;-;ENCon;Lit_start;-;ENPrep;Lit_to;-;ENCon
 /**** Rewritten by DELVE, ;;from the moment;;ENPrep;-;ENAdvTemp;ENTemp;Join;
 ;;from the moment;;ENPrep;Lit_from;-;ENAdvTemp;ENTemp;Join
 /**** Rewritten by DELVE, ;;from the outset ,;;ENAdvTemp;ENTemp;Join;Join;-;ENComma;SEnd;
@@ -12637,14 +12613,14 @@
 ;;fruitfully;;ENAdv;ENAdvmandeg;
 ;;fruiting;;ENPrespart;
 ;;fruitlessly;;ENAdv;ENAdvmandeg;
-
 ;;frustarted;;ENPart;
-;;frustrate;;ENInf;
-;;frustrated;;ENPart;
+;;frustrate;;ENInf;ENNegSentiment;
+;;frustrated;;ENPart;ENNegSentiment;
 ;;frustratedly;;ENAdv;ENAdvmandeg;
 ;;frustrately;;ENAdv;ENAdvmandeg;
-;;frustrates;;ENRel;ENVerb;
-;;frustrating;;ENPrespart;ENAdj;
+;;frustrates;;ENRel;ENVerb;ENNegSentiment;
+;;frustrating;;ENPrespart;ENAdj;ENNegSentiment;
+;;frustration;;ENCon;ENNegSentiment;
 ;;fry;;ENInf;
 ;;frying;;ENPrespart;
 ;;fted;;ENPart;
@@ -12675,7 +12651,6 @@
 ;;full year results;;ENCon;
 ;;full-size;;ENAdj;
 ;;full-time;;ENAdj;
-
 ;;full;;ENAdj;
 ;;fullfilled;;ENPart;
 ;;fullified;;ENPart;
@@ -12724,6 +12699,7 @@
 ;;funds;;ENVerbCon;
 ;;funeral;;ENCon;
 ;;funereally;;ENAdv;ENAdvmandeg;
+;;fungible good;legal term;ENAdj;-;ENCon;
 ;;funk;;ENInfCon;
 ;;funked;;ENPart;
 ;;funking;;ENPrespart;
@@ -13224,7 +13200,6 @@
 ;;go grab;;ENInf;
 /**** Rewritten by DELVE, ;;go on;;ENInf;-;ENPrep;ENWithToInf1;
 ;;go on;;ENInf;-;ENPrep;ENWithToInf1;Lit_on
-
 ;;go up;;ENInf;
 ;;go;;ENInf;
 ;;goad;;ENInfCon;
@@ -13271,8 +13246,8 @@
 ;;gone out;;ENPart;
 ;;gone up;;ENPart;
 ;;gone;;ENPart;ENRel;
-/**** Rewritten by DELVE, ;;good at;;ENAdj;-;ENPrep;
-;;good at;;ENAdj;-;ENPrep;Lit_at
+/**** Rewritten by DELVE, ;;good at;;ENAdj;ENPosSentiment;-;ENPrep;
+;;good at;;ENAdj;ENPosSentiment;-;ENPrep;Lit_at
 ;;good destined;;ENCon;-;ENPart;
 ;;good friday;;ENCon;ENTime;
 ;;good will gesture;;ENCon;
@@ -13280,7 +13255,7 @@
 ;;good-humouredly;;ENAdv;ENAdvmandeg;
 ;;good-looking;;ENAdj;
 ;;good-naturedly;;ENAdv;ENAdvmandeg;
-;;good;;ENAdj;
+;;good;;ENAdj;ENPosSentiment;
 ;;gooding;;ENPrespart;
 ;;goof;;ENInfCon;
 ;;goofed;;ENPart;
@@ -13297,8 +13272,8 @@
 ;;gores;;ENVerbCon;
 ;;gorge;;ENInfCon;
 ;;gorged;;ENPart;
-;;gorgeous;;ENAdj;
-;;gorgeously;;ENAdv;ENAdvmandeg;
+;;gorgeous;;ENAdj;ENPosSentiment;
+;;gorgeously;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;gorges;;ENVerbCon;
 ;;gorging;;ENPrespart;
 ;;goring;;ENPrespart;
@@ -13449,7 +13424,6 @@
 ;;green eyed;;ENCon;
 ;;green;;ENAdj;
 ;;greened;;ENPart;
-
 ;;greenling;;ENPrespart;
 ;;greet;;ENInfCon;
 ;;greeted;;ENPart;
@@ -13559,6 +13533,7 @@
 ;;growlingly;;ENAdv;ENAdvmandeg;
 ;;growls;;ENVerbCon;
 ;;grown-up;;ENVerbConAdj;
+;;grown up;;ENPart;
 ;;grown ups;;ENCon;
 ;;grown;;ENPart;
 ;;grows;;ENRel;ENVerb;
@@ -13756,7 +13731,6 @@
 ;;hall of fame;;ENCon;
 ;;hall of famer(|s);;ENCon;
 ;;hallow;;ENInfCon;
-
 ;;hallowed;;ENPart;
 ;;hallowing;;ENPrespart;
 ;;hallows;;ENVerbCon;
@@ -13819,7 +13793,6 @@
 ;;handsomely;;ENAdv;ENAdvmandeg;
 ;;handwashing;;ENPrespart;
 ;;handwriting;;ENPrespart;
-
 ;;hang on;;ENInf;
 ;;hang;;ENInfCon;
 ;;hanged;;ENPart;
@@ -13839,7 +13812,7 @@
 ;;happening;;ENPrespart;
 ;;happens;;ENRel;ENVerb;ENWithToInf1;
 ;;happily;;ENAdv;ENAdvmandeg;
-;;happy;;ENAdj;
+;;happy;;ENAdj;ENPosSentiment;
 ;;harangue;;ENInfCon;
 ;;harangued;;ENPart;
 ;;harangues;;ENVerbCon;
@@ -14148,8 +14121,7 @@
 ;;help needs;;ENCon;-;ENRel;ENVerb;
 ;;help;;ENInfCon;ENmAux;
 ;;helped;;ENRel;ENVerb;
-;;helpful to the;;ENCon;
-;;helpful;;ENAdj;
+;;helpful;;ENAdj;ENPosSentiment;
 ;;helpfully;;ENAdv;ENAdvmandeg;
 ;;helping;;ENPrespart;
 ;;helpless;;ENAdj;
@@ -14485,8 +14457,8 @@
 ;;horizontally;;ENAdv;ENAdvmandeg;
 ;;hormonal;;ENAdj;
 ;;hormonally;;ENAdv;ENAdvmandeg;
-;;horrible;;ENAdj;
-;;horribly;;ENAdv;ENAdvmandeg;
+;;horrible;;ENAdj;ENNegSentiment;
+;;horribly;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;horridly;;ENAdv;ENAdvmandeg;
 ;;horrific;;ENAdj;
 ;;horrifically;;ENAdv;ENAdvmandeg;
@@ -14556,7 +14528,6 @@
 ;;howled;;ENPart;
 ;;howling;;ENPrespart;
 ;;howls;;ENVerbCon;
-
 ;;hubristically;;ENAdv;ENAdvmandeg;
 ;;huddle;;ENInfCon;
 ;;huddled;;ENPart;
@@ -14814,7 +14785,7 @@
 ;;if anything ,;;ENAdvstruct;
 /**** Rewritten by DELVE, ;;if so;;ENRel;ENConj;-;ENAdv;ENAdvmandeg;
 ;;if so;;ENRel;ENConj;Lit_if;-;ENAdv;ENAdvmandeg;Lit_so
-;;if;;ENRel;ENConj;
+;;if;;ENRel;ENConj;ENCondition;
 ;;ignite;;ENInf;
 ;;ignited;;ENPart;
 ;;ignites;;ENRel;ENVerb;
@@ -15114,7 +15085,6 @@
 ;;in all respects;;ENAdv;ENAdvmandeg;
 ;;in and out of;;ENPrep;
 ;;in and out;;ENAdv;
-
 ;;in any case ,;;ENAdvstruct;
 ;;in any case;;ENAdvstruct;
 ;;in any way;;ENAdv;ENAdvmandeg;
@@ -15155,6 +15125,7 @@
 ;;in relation to;;ENPrep;
 ;;in respect of;;ENPrep;
 ;;in response to;;ENPrep;
+;;in situ;Con because it can be used after nouns;ENAdj;ENCon;
 ;;in so far as;;ENRel;ENConj;
 ;;in spite of;;ENPrep;
 ;;in tandem;;ENAdv;ENAdvmandeg;
@@ -15162,7 +15133,6 @@
 /**** Rewritten by DELVE, ;;in the beginning ,;;ENAdvTemp;ENTemp;Join;Join;-;ENComma;
 ;;in the beginning ,;;ENAdvTemp;ENTemp;Join;Join;-;ENComma;Lit_,
 ;;in the course of;;ENPrep;
-
 ;;in the end ,;;ENAdvstruct;
 /**** Rewritten by DELVE, ;;in the end all;;ENAdvstruct;Join;Join;-;ENAllSome;
 ;;in the end all;;ENAdvstruct;Join;Join;-;ENAllSome;Lit_all
@@ -15187,7 +15157,6 @@
 ;;in this respect;;ENAdv;ENAdvmandeg;
 ;;in turn;;ENAdvstruct;
 ;;in use;;ENCon;
-
 ;;in vitro;;ENAdj;ENCon;
 ;;in vivo;;ENAdj;ENCon;
 ;;in which;;ENRelOth;ENMeasurementStop;ENDateTimeStop;ENConj;
@@ -15469,7 +15438,6 @@
 ;;infantilised;;ENPart;
 ;;infantilises;;ENRel;ENVerb;
 ;;infantilising;;ENPrespart;
-
 ;;infarcted;;ENPart;
 ;;infatuate;;ENInf;
 ;;infatuated;;ENPart;
@@ -16359,7 +16327,6 @@
 ;;jangles;;ENVerbCon;
 ;;jangling;;ENPrespart;
 ;;janglingly;;ENAdv;ENAdvmandeg;
-
 ;;january;;ENDate;ENCon;ENConTime;ENTime;
 ;;japanese;;ENAdj;
 ;;jar;;ENInfCon;
@@ -16519,7 +16486,6 @@
 ;;juicy;;ENAdj;
 ;;jul.;;ENDate;ENCon;ENMonthAbbr;
 ;;jul;;ENDate;ENCon;ENMonthAbbr;
-
 ;;july;;ENDate;ENCon;ENConTime;ENTime;
 ;;jumble;;ENInfCon;
 ;;jumbled;;ENPart;
@@ -16532,7 +16498,6 @@
 ;;jumps;;ENVerbCon;
 ;;jun.;;ENDate;ENCon;ENMonthAbbr;
 ;;jun;;ENDate;ENCon;ENMonthAbbr;
-
 ;;june;;ENDate;ENCon;ENConTime;ENTime;
 ;;junior;;ENAdj;
 /**** Rewritten by DELVE, ;;just a;;ENAdvstruct;-;ENArtPosspron;
@@ -16548,7 +16513,6 @@
 /**** Rewritten by DELVE, ;;just before;;ENPrep;ENAdvstruct;-;ENPrep;
 ;;just before;;ENPrep;ENAdvstruct;Lit_just;-;ENPrep;Lit_before
 ;;just beforehand;;ENAdvTemp;ENTemp;
-
 ;;just in time;;ENAdvTemp;ENTemp;
 ;;just like;;ENRel;
 /**** Rewritten by DELVE, ;;just once;;ENAdvstruct;-;ENAdvTemp;ENAdvFreqPR;ENFrequency;
@@ -16557,7 +16521,6 @@
 ;;just so much;;ENPremod2;
 ;;just so;;ENSo;ENAdvdegree;ENAdvmandeg;
 ;;just the;;ENArtPosspron;
-
 ;;just;;ENJust;ENAdvbeforetime;
 ;;justified;;ENPart;
 ;;justifiedly;;ENAdv;ENAdvmandeg;
@@ -16658,8 +16621,10 @@
 ;;kilting;;ENPrespart;
 ;;kilts;;ENVerbCon;
 ;;kinapping;;ENPrespart;
+;;kind of a;;ENArtPosspron;
+;;kind of an;;ENArtPosspron;
 ;;kind of like;;ENRel;
-;;kind of;;ENAdvstruct;
+;;kind of;;ENAdvAdj;
 ;;kind to;;ENRel;
 ;;kind;;ENAdj;
 ;;kindheartedly;;ENAdv;ENAdvmandeg;
@@ -16706,7 +16671,6 @@
 ;;knifed;;ENPart;
 ;;knifes;;ENRel;ENVerb;
 ;;knifing;;ENPrespart;
-
 ;;knighted;;ENPart;
 ;;knighting;;ENPrespart;
 ;;knights;;ENVerbCon;
@@ -16904,19 +16868,15 @@
 ;;lashing;;ENPrespart;
 ;;lasing;;ENPrespart;
 ;;last but not least;;ENAdvstruct;
-
 ;;last fall's;;ENAdj;
 ;;last honour;;ENCon;
-
 /**** Rewritten by DELVE, ;;last just a;;ENInf;-;ENAdvstruct;-;ENArtPosspron;
 ;;last just a;;ENInf;Lit_last;-;ENAdvstruct;Lit_just;-;ENArtPosspron;Lit_a
-
 /**** Rewritten by DELVE, ;;last may be;;ENCon;-;ENAux;-;ENBe;
 ;;last may be;;ENCon;Lit_last;-;ENAux;Lit_may;-;ENBe
 ;;last remaining;;ENAdj;
 ;;last time;;ENCon;
 ;;last week's;;ENAdj;ENTime;
-
 ;;last;;ENInfCon;ENAdj;ENAdv;ENAdjtime;
 ;;lasted;;ENPart;
 ;;lasting;;ENPrespart;
@@ -16925,15 +16885,12 @@
 ;;latched;;ENPart;
 ;;latches;;ENVerbCon;
 ;;latching;;ENPrespart;
-
 /**** Rewritten by DELVE, ;;late for;;ENAdvTemp;ENTemp;ENEndoftime;-;ENPrep;
 ;;late for;;ENAdvTemp;ENTemp;ENEndoftime;Lit_late;-;ENPrep;Lit_for
-
 ;;late summer bank holiday;;ENCon;ENTime;
 ;;late;;ENAdj;ENAdjtime;ENAdvTemp;ENEndoftime;
 ;;lately;;ENAdvTemp;ENTemp;
 ;;latently;;ENAdv;ENAdvmandeg;
-
 /**** Rewritten by DELVE, ;;later life;;ENAdj;-;ENCon;
 ;;later life;;ENAdj;Lit_later;-;ENCon
 ;;later on;;ENAdvTemp;ENTemp;
@@ -17137,7 +17094,6 @@
 ;;lesioned;;ENPart;
 ;;lesioning;;ENPrespart;
 ;;less able to;;ENTo;
-
 ;c=0;less likely;;ENAdvmodal;ENAdvAdj;ENWithToInf1;ENCertainty;ENConceptafternumber;
 ;;less than just( a| an);;ENPremod;
 ;;less than or;;ENRel;
@@ -17281,8 +17237,10 @@
 ;;likening;;ENPrespart;
 ;;likens;;ENRel;ENVerb;
 ;;likes;;ENRel;ENVerb;ENWithToInf1;
-;;he likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;
-;;she likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;
+/**** Rewritten by DELVE, ;;he likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;
+;;he likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;Lit_likes
+/**** Rewritten by DELVE, ;;she likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;
+;;she likes;;ENPerspron_subj;ENMeasurementStop;ENDateTimeStop;-;ENRel;ENVerb;Lit_likes
 ;;likewise;;ENAdvstruct;
 ;;liking;;ENPrespart;ENWithToInf1;
 ;;lilt;;ENInfCon;
@@ -17390,7 +17348,6 @@
 ;;lively;;ENAdj;ENAdv;ENAdvmandeg;
 ;;liveried;;ENAdj;
 ;;lives;;ENVerbCon;
-
 ;;lividly;;ENAdv;ENAdvmandeg;
 ;;living standards;;ENAdj;
 ;;living;;ENPrespart;
@@ -17497,10 +17454,12 @@
 ;;look alike;;ENInfCon;
 ;;look back;;ENInfCon;
 ;;look forward;;ENInf;
+;;look like;;ENInf;
 ;;look up;;ENInf;
 ;;look;;ENInfCon;ENWithToInf1;
 ;;looked back;;ENPart;
 ;;looked forward;;ENRel;ENVerb;ENWithToInf1;
+;;looked like;to be evaluated: split this lexrep or not?;ENRel;ENVerb;
 ;;looked up;;ENPart;
 ;;looked;;ENRel;ENVerb;ENWithToInf1;
 ;;looking back;;ENPrespart;
@@ -17510,7 +17469,7 @@
 ;;looks forward;;ENRel;ENVerb;ENWithToInf1;
 ;;looks like;;ENRel;ENVerb;
 /**** Rewritten by DELVE, ;;looks to be;;ENRel;ENVerb;ENWithToInf1;-;ENTo;-;ENBe;
-;;looks to be;;ENRel;ENVerb;ENWithToInf1;-;ENTo;Lit_to;-;ENBe
+;;looks to be;;ENRel;ENVerb;ENWithToInf1;Lit_looks;-;ENTo;Lit_to;-;ENBe
 ;;looks up;;ENRel;ENVerb;
 ;;looks;;ENVerbCon;ENWithToInf1;
 ;;loom;;ENInfCon;
@@ -17572,7 +17531,7 @@
 ;;lousily;;ENAdv;ENAdvmandeg;
 ;;love;;ENInfCon;ENWithToInf2;
 ;;loved;;ENPart;ENWithToInf2;
-;;lovely;;ENAdj;
+;;lovely;;ENAdj;ENPosSentiment;
 ;;lovering;;ENPrespart;
 ;;loves;;ENVerbCon;ENWithToInf2;
 ;;loving;;ENPrespart;ENWithToInf2;
@@ -17697,7 +17656,6 @@
 /**** Rewritten by DELVE, ;;made it harder;;ENRel;ENVerb;-;ENIt;-;ENAdj;
 ;;made it harder;;ENRel;ENVerb;-;ENIt;Lit_it;-;ENAdj
 ;;made love;;ENPart;
-
 ;;made out;;ENPart;
 ;;made sure;;ENRel;ENVerb;
 ;;made up;;ENPart;
@@ -17725,8 +17683,8 @@
 ;;magnetizing;;ENPrespart;
 ;;magnetizingly;;ENAdv;ENAdvmandeg;
 ;;magnetotunneling;;ENAdj;
-;;magnificent;;ENAdj;
-;;magnificently;;ENAdv;ENAdvmandeg;
+;;magnificent;;ENAdj;ENPosSentiment;
+;;magnificently;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;magnified;;ENPart;
 ;;magnifies;;ENRel;ENVerb;
 ;;magnify;;ENInf;
@@ -17807,14 +17765,12 @@
 ;;malingering;;ENPrespart;
 ;;malingeringly;;ENAdv;ENAdvmandeg;
 ;;malingers;;ENRel;ENVerb;
-
 ;;malnourished;;ENPart;
 ;;malodorous;;ENAdj;
 ;;malodorously;;ENAdv;ENAdvmandeg;
 ;;malodourous;;ENAdj;
 ;;malodourously;;ENAdv;
 ;;maltracked;;ENPart;
-
 ;;maltreat;;ENInf;
 ;;maltreated;;ENPart;
 ;;maltreating;;ENPrespart;
@@ -17943,7 +17899,6 @@
 ;;marching;;ENPrespart;
 ;;marching through;;ENRel;ENVerb;
 ;;marchingly;;ENAdv;ENAdvmandeg;
-
 ;;marginal;;ENAdj;
 ;;marginalise;;ENInf;
 ;;marginalised;;ENPart;
@@ -18125,7 +18080,6 @@
 ;;mattered;;ENPart;
 ;;mattering;;ENPrespart;
 ;;matters;;ENVerbCon;
-
 ;;matting;;ENPrespart;
 ;;mattingly;;ENAdv;ENAdvmandeg;
 ;;mature;;ENVerbConAdj;
@@ -18167,17 +18121,14 @@
 /**** Rewritten by DELVE, ;c=0;may exempt;;ENmAux;ENCertainty;-;ENInf;
 ;c=0;may exempt;;ENmAux;ENCertainty;Lit_may;-;ENInf
 ;c=0;may have;;ENAux;ENWithToInf1;ENCertainty;
-
 /**** Rewritten by DELVE, ;c=0;may make;;ENmAux;ENCertainty;-;ENInf;
 ;c=0;may make;;ENmAux;ENCertainty;Lit_may;-;ENInf
-
 /**** Rewritten by DELVE, ;c=0;may not just;;ENmAux;ENCertainty;-;ENAdv;-;ENAdv;
 ;c=0;may not just;;ENmAux;ENCertainty;Lit_may;-;ENAdv;Lit_not;-;ENAdv;Lit_just
 /**** Rewritten by DELVE, ;c=0;may not only;;ENmAux;ENCertainty;-;ENAdv;-;ENAdv;
 ;c=0;may not only;;ENmAux;ENCertainty;Lit_may;-;ENAdv;Lit_not;-;ENAdv;Lit_only
 ;c=0;may not;;ENAuxneg;ENNegBegin;ENNegation;ENmAux;ENCertainty;
 ;c=0;may or may not;;ENmAux;ENCertainty;
-
 /**** Rewritten by DELVE, ;c=0;may well have;;ENAux;ENCertainty;-;ENAdvmandeg;-;ENAux;
 ;c=0;may well have;;ENAux;ENCertainty;Lit_may;-;ENAdvmandeg;Lit_well;-;ENAux;Lit_have
 ;c=0;may;;ENConIfCap;ENAuxCon;ENmAux;ENDate;ENConTime;ENCertainty;
@@ -18213,7 +18164,6 @@
 ;;means something;;ENRel;ENVerb;-;ENIndefpron;Lit_something
 ;;means;;ENVerbCon;ENRel;ENVerbConThat;ENWithToInf1;
 ;;meant;;ENRel;ENVerb;ENWithToInf1;
-
 ;;meanwhile;;ENAdvTemp;ENTemp;
 ;;measure;;ENInfCon;
 ;;measured;;ENPart;
@@ -18559,7 +18509,6 @@
 ;;mimics;;ENVerbCon;
 ;;miming;;ENPrespart;
 ;;mimmicked;;ENPart;
-
 ;;minaciously;;ENAdv;ENAdvmandeg;
 ;;minacous;;ENAdj;
 ;;mince;;ENInf;
@@ -18627,12 +18576,10 @@
 ;;ministry of justice;;ENCon;
 ;;ministry;;ENOrgUnit;
 ;;minor;;ENAdj;
-
 ;;minted;;ENPart;
 ;;minting;;ENPrespart;
 ;;minus;;ENPrep;
 ;;minute drive away;;ENCon;
-
 ;;minutely;;ENAdv;ENAdvmandeg;
 ;;minutes drive away;;ENCon;
 ;;mirror;;ENInfCon;
@@ -18971,7 +18918,6 @@
 ;;monstrous;;ENAdj;
 ;;monstrously;;ENAdv;ENAdvmandeg;
 ;;month after month;;ENCon;ENDuration;
-
 ;;month;;ENCon;ENConTime;ENTime;
 ;;monthly;;ENAdj;ENAdvFreqCon;ENFrequency;
 ;;month-old(|s);;ENCon;ENAfterAge;ENUnit;
@@ -19035,7 +18981,6 @@
 ;;more and more;;ENPremod3;
 /**** Rewritten by DELVE, ;;more detail;;ENAdj;-;ENCon;
 ;;more detail;;ENAdj;Lit_more;-;ENCon
-
 ;c=0;more likely;;ENAdvmodal;ENAdvAdj;ENWithToInf1;ENCertainty;ENConceptafternumber;
 ;c=0;more than likely;;ENAdvmodal;ENAdvAdj;ENCertainty;
 /**** Rewritten by DELVE, ;;more needs to be;;ENCon;-;ENRel;ENVerb;ENWithToInf1;-;ENTo;-;ENBe;
@@ -19108,11 +19053,15 @@
 ;;most gripping;;ENAdvmandeg;-;ENAdj;
 ;;most interesting;;ENAdvmandeg;-;ENAdj;
 ;c=0;most likely;;ENAdvmodal;ENAdvAdj;ENWithToInf1;ENCertainty;
+;;most of all;;ENAdv;ENAdvmandeg;ENAdvdegree;
 ;;most of her;;ENAdj;
 ;;most of his;;ENAdj;
+;;most of it;;ENMod;
+;;most of its;;ENAdj;
 ;;most of my;;ENAdj;
 ;;most of our;;ENAdj;
 ;;most of such;;ENAdj;
+;;most of that;;ENAllSome;
 ;;most of the other;;ENAdj;
 ;;most of the others;;ENPerspron_subj;ENPerspron_obj;
 ;;most of the time;;ENBeginconcept;
@@ -19124,19 +19073,17 @@
 ;;most of whom;;ENPerspron_subj;
 ;;most of you;;ENMod;
 ;;most of your;;ENAdj;
-;;most of;;NonRelevant;
+;;most of;;ENIndefpron;ENQuantity;
 ;;most other;;ENAdj;
 ;;most others;;ENPerspron_subj;ENPerspron_obj;
 ;;most striking;;ENAdvmandeg;-;ENAdj;
 ;;most such;;ENAdj;
-
 ;;most wanted;;ENCon;
 ;;most;;ENAdv;ENAdvmandeg;ENIntensifier;
 ;;mostly;;ENAdv;ENAdvmandeg;
 ;;mothballed;;ENPart;
 ;;mothballing;;ENPrespart;
 ;;mother's day;;ENCon;ENTime;
-
 ;;mothered;;ENPart;
 ;;mothering;;ENPrespart;
 ;;motheringly;;ENAdv;ENAdvmandeg;
@@ -19180,7 +19127,6 @@
 ;;mounting;;ENPrespart;
 ;;mountingly;;ENAdv;ENAdvmandeg;
 ;;mounts;;ENVerbCon;
-
 ;;mourn;;ENInf;
 ;;mourned;;ENPart;
 ;;mournful;;ENAdj;
@@ -19238,7 +19184,6 @@
 ;;much less well;;ENAdv;ENAdvmandeg;
 ;;much less;;ENPremod2;
 ;;much like;;ENRel;
-
 ;;much more;;ENPremod2;
 ;;much of;;ENArtPosspron;
 ;;much rather;;ENAdv;ENAdvmandeg;
@@ -19499,7 +19444,7 @@
 ;;nasal;;ENAdj;
 ;;nasally;;ENAdv;ENAdvmandeg;
 ;;nastily;;ENAdv;ENAdvmandeg;
-;;nasty;;ENAdj;
+;;nasty;;ENAdj;ENNegSentiment;
 ;;national archives (&|and) records administration;;ENCon;
 ;;national center;;ENOrgUnit;
 ;;national centre;;ENOrgUnit;
@@ -19560,6 +19505,7 @@
 ;;nearby;;ENAdj;ENAdv;ENAdvmandeg;
 ;;neared;;ENPart;
 ;;nearer;;ENAdv;ENAdvmandeg;
+;;nearest;;ENAdj;
 ;;nearing;;ENPrespart;
 ;;nearingly;;ENAdv;ENAdvmandeg;
 /**** Rewritten by DELVE, ;;nearly a;;ENAdj;ENAdvbeforetime;-;ENAdj;
@@ -19747,7 +19693,6 @@
 ;;news headlines;;ENCon;
 ;;newtorking;;ENPrespart;
 ;;next month's;;ENAdj;
-
 /**** Rewritten by DELVE, ;;next to no;;ENAdvmandeg;-;ENAdvmandeg;-;ENNo;ENNegBegin;ENNegation;
 ;;next to no;;ENAdvmandeg;-;ENAdvmandeg;Lit_to;-;ENNo;ENNegBegin;ENNegation;Lit_no
 ;;next to;;ENPrep;
@@ -19762,7 +19707,7 @@
 ;;nic(ti|)tated;;ENPart;
 ;;nic(ti|)tates;;ENRel;ENVerb;
 ;;nic(ti|)tating;;ENPrespart;
-;;nice;;ENAdj;
+;;nice;;ENAdj;ENPosSentiment;
 ;;nicely;;ENAdv;ENAdvmandeg;
 ;;nicked;;ENPart;
 ;;nickedly;;ENAdv;ENAdvmandeg;
@@ -19787,7 +19732,6 @@
 ;;nights;;ENConTime;ENCon;
 ;;nimble;;ENAdj;
 ;;nimbly;;ENAdv;ENAdvmandeg;
-
 ;;nine-and-a-half;;ENNum;
 ;;nineteenth-century;;ENAdj;
 ;;ninety-eight;;ENNum;
@@ -19799,7 +19743,6 @@
 ;;ninety-six;;ENNum;
 ;;ninety-three;;ENNum;
 ;;ninety-two;;ENNum;
-
 ;;ninth;;ENAdj;ENOrdNum;ENFraction;
 ;;ninths;;ENFraction;
 ;;nip;;ENInfCon;
@@ -19840,14 +19783,13 @@
 ;;no fewer than;;ENAdj;ENCompare;
 /**** Rewritten by DELVE, ;;no fewer than that;;ENQuantity;ENNegation;Join;-;ENRel;-;ENWhich;
 ;;no fewer than that;;ENQuantity;ENNegation;Join;-;ENRel;Lit_than;-;ENWhich;Lit_that
-
 ;;no less than;;ENAdj;ENCompare;
 /**** Rewritten by DELVE, ;;no less than that;;ENQuantity;ENNegation;Join;-;ENRel;-;ENWhich;
 ;;no less than that;;ENQuantity;ENNegation;Join;-;ENRel;Lit_than;-;ENWhich;Lit_that
 ;;no less;;ENAdv;ENAdvmandeg;ENAdvdegree;
 ;;no longer;;ENNot;ENNegation;ENNegBegin;
 ;;no matter how;;ENRelOth;ENConj;
-;;no matter if;;ENRelOth;ENConj;
+;;no matter if;;ENRelOth;ENConj;ENCondition;
 ;;no matter what;;ENRelOth;ENConj;
 ;;no matter when;;ENRelOth;ENConj;
 ;;no matter where;;ENRelOth;ENConj;
@@ -19862,16 +19804,16 @@
 ;;no more;;ENAnymore;ENNegation;
 ;;no one else's;;ENBeginconcept;ENNegation;
 ;;no one else;;ENPerspron;ENNegation;
-
 ;;no other than;;ENNonrelevant;
 /**** Rewritten by DELVE, ;;no other;;ENNo;ENNegation;ENNegBegin;-;ENAdj;
 ;;no other;;ENNo;ENNegation;ENNegBegin;Lit_no;-;ENAdj;Lit_other
 ;;no others;;ENPerspron_subj;ENPerspron_obj;ENNegation;
 ;;no strings attached;;ENCon;ENNegation;
+/**** Rewritten by DELVE, ;;no such;;ENNo;-;ENAdj;
+;;no such;;ENNo;Lit_no;-;ENAdj;Lit_such
 ;;no-one else;;ENPerspron;ENNegation;
 ;;no-one;;ENPerspron;ENNegation;ENNegBegin;
 ;;no;;ENNegBegin;ENNo;ENNegation;ENLitNo;
-
 ;;noble;;ENAdj;
 ;;nobly;;ENAdv;ENAdvmandeg;
 ;;nobody else's;;ENBeginconcept;ENNegation;
@@ -19985,7 +19927,6 @@
 ;;none of whom;;ENBeginconcept;ENNegation;ENNegBegin;
 ;;none other than;;ENNonrelevant;
 ;;none the less;;ENAdvstruct;
-
 ;;none;;ENNegation;ENNone;
 ;;nonetheless ,;;ENAdvstruct;
 ;;nonetheless;;ENAdvstruct
@@ -20050,7 +19991,6 @@
 ;;not all the;;ENNo;ENNegation;Lit_not;-;ENAdj;Lit_all;-;ENAdj;Lit_the
 /**** Rewritten by DELVE, ;;not all;;ENNo;ENNegation;-;ENAdj;
 ;;not all;;ENNo;ENNegation;Lit_not;-;ENAdj;Lit_all
-
 /**** Rewritten by DELVE, ;c=0;not confident that;;ENNot;ENNegBegin;ENNegation;ENCertainty;-;ENAdj;ENCertainty;-;ENWhich;
 ;c=0;not confident that;;ENNot;ENNegBegin;ENNegation;ENCertainty;Lit_not;-;ENAdj;ENCertainty;-;ENWhich;Lit_that
 ;;not even;;ENNot;ENNegBegin;ENNegation;
@@ -20089,7 +20029,12 @@
 ;;nothing if not;;ENAdvmandeg;
 ;;nothing less than( a| an| the|);;ENPremod;ENCompare;
 ;;nothing like;;ENRel;ENNegation;ENNegBegin;
-;;nothing more than( a| an| the|);;ENPremod;ENNegation;ENCompare;
+;;nothing more than( a| an| the|);;ENPremod;ENCompare;
+;;nothing more E;;ENCon;ENNegation;Join;-;SEnd;
+/**** Rewritten by DELVE, ;;nothing more ,;;ENCon;ENNegation;Join;-;ENComma;
+;;nothing more ,;;ENCon;ENNegation;Join;-;ENComma;Lit_,
+/**** Rewritten by DELVE, ;;nothing more to;;ENAllSome;ENNegation;ENWithToInf1;ENNegBegin;Join;-;ENTo;ENPrep;
+;;nothing more to;;ENAllSome;ENNegation;ENWithToInf1;ENNegBegin;Join;-;ENTo;ENPrep;Lit_to
 /**** Rewritten by DELVE, ;;nothing much;;ENCon;ENNegation;-;ENCon;
 ;;nothing much;;ENCon;ENNegation;Lit_nothing;-;ENCon
 ;;nothing other than;;ENNonrelevant;
@@ -20122,7 +20067,6 @@
 ;;nov.;;ENDate;ENCon;ENMonthAbbr;
 ;;nov;;ENDate;ENCon;ENMonthAbbr;
 ;;novel;;ENCon;
-
 ;;november;;ENDate;ENCon;ENConTime;ENTime;
 ;;novennial;;ENAdj;ENFrequency;
 ;;novennially;;ENAdvFreqCon;ENFrequency;
@@ -20434,6 +20378,7 @@
 ;;okay;;ENAdj;
 ;;okayed;;ENPart;
 ;;old-fashioned;;ENAdj;
+;;old fashioned;;ENAdj;
 ;;old;;ENAdj;
 ;;oligomeri(s|z)e;;ENInf;
 ;;oligomeri(s|z)ed;;ENPart;
@@ -20451,7 +20396,6 @@
 ;;omittingly;;ENAdv;ENAdvmandeg;
 ;;on account of;;ENPrep;
 ;;on behalf of;;ENPrep;
-
 ;;on line;;ENAdj;
 ;;on no account;;ENNot;ENNegBegin;ENNegation;
 ;;on par;;ENAdj;
@@ -20476,9 +20420,7 @@
 ;;once only E;;ENTimes;ENAdv;ENAdvmandeg;ENFrequency;Join;-;SEnd;
 ;;once or twice;;ENTimes;ENAdv;ENAdvmandeg;ENFrequency;
 ;;once upon a time;;ENAdvTemp;ENTemp;ENTime;
-
 ;;once;;ENRel;ENNegStop;ENConj;ENTimes;
-
 ;;oncoming;;ENAdj;
 ;;one after another;;ENAdvTemp;ENFrequency;
 ;;one and a half;;ENNum;
@@ -20520,7 +20462,6 @@
 ;;one of your most;;ENAdj;ENPremod3;
 ;;one of your;;ENAdj;
 ;;one of yours;;ENAllSome;
-
 ;;one or two;;ENAdj;
 ;;one out of the;;ENAdj;
 ;;one set;;ENCon;
@@ -20545,11 +20486,9 @@
 /**** Rewritten by DELVE, ;;only a;;ENAdv;-;ENArtPosspron;
 ;;only a;;ENAdv;Lit_only;-;ENArtPosspron;Lit_a
 ;;only later;;ENAdvTemp;ENTemp;
-
 /**** Rewritten by DELVE, ;;only way out;;ENAdvmandeg;-;ENCon;-;ENCon;
 ;;only way out;;ENAdvmandeg;Lit_only;-;ENCon;-;ENCon
 ;;only;;ENAdvstruct;
-
 ;;onto;;ENRel;
 ;;onwardly;;ENAdv;ENAdvmandeg;
 ;;onwards;;ENAdvdir;
@@ -20713,7 +20652,6 @@
 ;;orientatingly;;ENAdv;ENAdvmandeg;
 ;;oriented;;ENPart;
 ;;orientedly;;ENAdv;ENAdvmandeg;
-
 ;;orienting;;ENPrespart;
 ;;orientingly;;ENAdv;ENAdvmandeg;
 ;;orients;;ENVerbCon;
@@ -20725,6 +20663,7 @@
 ;;originates;;ENRel;ENVerb;
 /**** Rewritten by DELVE, ;;originating from;;ENRel;ENVerb;-;ENPrep;
 ;;originating from;;ENRel;ENVerb;-;ENPrep;Lit_from
+;;originating good;legal term;ENAdj;-;ENCon;
 ;;originating;;ENPrespart;
 ;;originatingly;;ENAdv;ENAdvmandeg;
 ;;ornamental rose;;ENCon;
@@ -20774,9 +20713,7 @@
 ;;other groups;;ENOther;Lit_other;-;ENCon
 ;;other than;;ENAndOrBut;ENAttrStop;ENNegStop;
 ;;other;;ENOther;
-
 ;;others;;ENConceptafternumber;ENPerspron_subj;ENPerspron_obj;
-
 ;;ought not to;;ENAuxneg;ENNegBegin;ENNegation;ENmAux;
 ;;ought to;;ENmAux;
 /**** Rewritten by DELVE, ;;our back;;ENArtPosspron;-;ENCon;
@@ -21042,7 +20979,6 @@
 ;;overblowing;;ENPrespart;
 ;;overblown;;ENPart;
 ;;overblows;;ENRel;ENVerb;
-
 ;;overbore;;ENRel;ENVerb;
 ;;overborne;;ENPart;
 ;;overcalled;;ENPart;
@@ -21197,7 +21133,6 @@
 ;;overlapping;;ENPrespart;
 ;;overlappingly;;ENAdv;ENAdvmandeg;
 ;;overlaps;;ENVerbCon;
-
 ;;overlies;;ENRel;ENVerb;
 ;;overload;;ENInfCon;
 ;;overloaded;;ENPart;
@@ -21516,7 +21451,6 @@
 ;;pads;;ENVerbCon;
 ;;page one;;ENCon;
 ;;page view(s|);;ENCon;
-
 ;;page;;ENCon;ENBeforeNoMeasurement;
 ;;paged;;ENPart;
 ;;pagedly;;ENAdv;ENAdvmandeg;
@@ -21535,7 +21469,6 @@
 ;;painkilling;;ENAdj;
 ;;painless;;ENAdj;
 ;;painlessly;;ENAdv;ENAdvmandeg;
-
 ;;painstaking;;ENAdj;
 ;;painstakingly;;ENAdv;ENAdvmandeg;
 ;;paint;;ENInfCon;
@@ -21949,7 +21882,6 @@
 ;;peacefully;;ENAdv;ENAdvmandeg;
 ;;peacekeeping;;ENCon;ENAdj;
 ;;peacemaking;;ENCon;ENAdj;
-
 ;;peak force;;ENCon;
 ;;peak;;ENInfCon;
 ;;peaked;;ENPart;
@@ -22127,7 +22059,6 @@
 ;;per cent;;ENCon;ENPercent;ENAfterO2Saturation;ENUnit;
 ;;per centage;;ENCon;ENPercent;ENAfterO2Saturation;ENUnit;
 ;;per centum;;ENCon;ENPercent;ENAfterO2Saturation;ENUnit;
-
 ;;per se;;ENAdv;ENAdvmandeg;
 ;;per;;ENPrep;
 ;;peracylated;;ENAdj;
@@ -22164,11 +22095,12 @@
 ;;peremptory;;ENAdj;
 ;;perennial;;ENAdj;ENFrequency;
 ;;perennially;;ENAdvFreqCon;ENFrequency;
+;;perfect;;ENAdj;ENPosSentiment;
 ;;perfected;;ENPart;
 ;;perfectedly;;ENAdv;ENAdvmandeg;
 ;;perfecting;;ENPrespart;
 ;;perfectingly;;ENAdv;ENAdvmandeg;
-;;perfectly;;ENAdv;ENAdvmandeg;
+;;perfectly;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;perfects;;ENVerbCon;
 ;;perfidious;;ENAdj;
 ;;perfidiously;;ENAdv;ENAdvmandeg;
@@ -22371,7 +22303,6 @@
 ;;perverting;;ENPrespart;
 ;;pervertingly;;ENAdv;ENAdvmandeg;
 ;;perverts;;ENVerbCon;
-
 ;;pessimistic;;ENAdj;
 ;;pessimistically;;ENAdv;ENAdvmandeg;
 ;;pester;;ENInf;
@@ -22383,6 +22314,7 @@
 ;;pestiferous;;ENAdj;
 ;;pestiferously;;ENAdv;ENAdvmandeg;
 ;;petabyte(|s);;ENUnit;ENCon;
+;;peter the great;;ENCon;
 ;;petered;;ENPart;
 ;;peteredly;;ENAdv;ENAdvmandeg;
 ;;petering;;ENPrespart;
@@ -22432,6 +22364,7 @@
 ;;phenocopies;;ENVerbCon;
 ;;phenocopy;;ENInfCon;
 ;;phenocopying;;ENPrespart;
+;;phenomenal;;ENAdj;ENPosSentiment;
 ;;phenotyped;;ENPart;
 ;;phenotyping;;ENPrespart;
 ;;philander;;ENInfCon;
@@ -22605,7 +22538,6 @@
 ;;pieces;;ENVerbCon;ENConceptbeforenumber;
 ;;piecing;;ENPrespart;
 ;;piecingly;;ENAdv;ENAdvmandeg;
-
 ;;pied;;ENPart;
 ;;piedly;;ENAdv;ENAdvmandeg;
 ;;pies;;ENVerbCon;
@@ -22924,16 +22856,12 @@
 ;;pleaches;;ENRel;ENVerb;
 ;;pleaching;;ENPrespart;
 ;;pleachingly;;ENAdv;ENAdvmandeg;
-
 ;;plead;;ENInf;
-
 ;;pleaded;;ENPart;
-
 ;;pleading;;ENPrespart;
 ;;pleadingly;;ENAdv;ENAdvmandeg;
-
 ;;pleads;;ENRel;ENVerb;
-;;pleasant;;ENAdj;
+;;pleasant;;ENAdj;ENPosSentiment;
 ;;pleasantly;;ENAdv;ENAdvmandeg;
 ;;please;;ENRelOth;
 ;;pleased;;ENPart;ENAdj;
@@ -23179,7 +23107,6 @@
 ;;polishes;;ENVerbCon;
 ;;polishing;;ENPrespart;
 ;;polishingly;;ENAdv;ENAdvmandeg;
-
 ;;polite;;ENAdj;
 ;;politely;;ENAdv;ENAdvmandeg;
 ;;political;;ENAdj;
@@ -23902,7 +23829,6 @@
 ;;prenylated;;ENPart;
 ;;prenylates;;ENRel;ENVerb;
 ;;prenylating;;ENPrespart;
-
 ;;preoccupied;;ENPart;
 ;;preoccupiedly;;ENAdv;ENAdvmandeg;
 ;;preoccupies;;ENRel;ENVerb;
@@ -23917,7 +23843,6 @@
 ;;preorganized;;ENPart;
 ;;preorganizes;;ENRel;ENVerb;
 ;;preorganizing;;ENPrespart;
-
 ;;prepackage;;ENInf;
 ;;prepackaged;;ENPart;
 ;;prepackagedly;;ENAdv;ENAdvmandeg;
@@ -24019,7 +23944,6 @@
 ;;presses;;ENVerbCon;
 ;;pressing;;ENPrespart;
 ;;pressingly;;ENAdv;ENAdvmandeg;
-
 ;;pressured;;ENPart;
 ;;pressuredly;;ENAdv;ENAdvmandeg;
 ;;pressures;;ENVerbCon;
@@ -24338,7 +24262,6 @@
 ;;prognosticable;;ENAdj;
 ;;prognostical;;ENAdj;
 ;;prognostically;;ENAdv;ENAdvmandeg;
-
 /**** Rewritten by DELVE, ;;program a;;ENInf;ENRel;-;ENArtPosspron;
 ;;program a;;ENInf;ENRel;-;ENArtPosspron;Lit_a
 /**** Rewritten by DELVE, ;;program an;;ENInf;ENRel;-;ENArtPosspron;
@@ -24347,7 +24270,6 @@
 ;;program(|m)edly;;ENAdv;ENAdvmandeg;
 ;;program(|m)ing;;ENPrespart;
 ;;program(|m)ingly;;ENAdv;ENAdvmandeg;
-
 /**** Rewritten by DELVE, ;;programs a;;ENInf;ENRel;-;ENArtPosspron;
 ;;programs a;;ENInf;ENRel;-;ENArtPosspron;Lit_a
 /**** Rewritten by DELVE, ;;programs an;;ENInf;ENRel;-;ENArtPosspron;
@@ -24643,7 +24565,6 @@
 ;;prowls;;ENVerbCon;
 ;;proxied;;ENPart;
 ;;proxies;;ENVerbCon;
-
 ;;proxying;;ENPrespart;
 ;;proximal;;ENAdj;
 ;;proximally;;ENAdv;ENAdvmandeg;
@@ -24705,7 +24626,6 @@
 ;;puckishly;;ENAdv;ENAdvmandeg;
 ;;puerile;;ENAdj;
 ;;puerilely;;ENAdv;ENAdvmandeg;
-
 ;;puff;;ENInfCon;ENConceptbeforenumber;
 ;;puffed;;ENPart;
 ;;puffedly;;ENAdv;ENAdvmandeg;
@@ -24903,7 +24823,6 @@
 ;;purveys;;ENVerbCon;
 ;;push back;;ENInf;
 ;;push forward;;ENInf;
-
 /**** Rewritten by DELVE, ;;push past;;ENInf;-;ENPrep;
 ;;push past;;ENInf;-;ENPrep;Lit_past
 ;;push;;ENInfCon;
@@ -24931,7 +24850,6 @@
 ;;pussyfoots;;ENRel;ENVerb;
 ;;pussyfooting;;ENPrespart;
 ;;pussyfootingly;;ENAdv;ENAdvmandeg;
-
 ;;put forward;;ENInf;
 ;;put in place;;ENInf;
 ;;put into effect;;ENInf;
@@ -24987,7 +24905,6 @@
 ;;q3 results;;ENCon;
 ;;q4 result;;ENCon;
 ;;q4 results;;ENCon;
-
 ;;q.d.;;ENEndconcept;
 ;;q.h.s.;;ENEndconcept;
 ;;q.i.d.;;ENEndconcept;
@@ -25069,7 +24986,6 @@
 ;;quartering;;ENPrespart;
 ;;quarteringly;;ENAdv;ENAdvmandeg;
 ;;quarterly;;ENAdj;ENAdvFreqCon;ENFrequency;
-
 ;;quarters;;ENFraction;
 ;;quash;;ENInf;
 ;;quashed;;ENPart;
@@ -25252,7 +25168,6 @@
 ;;rabbits;;ENVerbCon;
 ;;rabid;;ENAdj;
 ;;rabidly;;ENAdv;ENAdvmandeg;
-
 ;;race;;ENInfCon;ENConceptbeforenumber;
 ;;raced back;;ENRel;ENVerb;
 ;;raced;;ENPart;
@@ -26505,7 +26420,7 @@
 ;;respectable;;ENAdj;
 ;;respectably;;ENAdv;ENAdvmandeg;
 ;;respected;;ENPart;
-;;respectful for;;ENRel;
+;;respectful;;ENAdj;ENPosSentiment;
 ;;respectfully;;ENAdv;ENAdvmandeg;
 ;;respecting;;ENPrespart;
 ;;respective;;ENAdj;
@@ -26659,7 +26574,6 @@
 ;;reunite;;ENInf;
 ;;reunited;;ENPart;
 ;;reunites;;ENRel;ENVerb;
-
 ;;reuniting;;ENPrespart;
 ;;reuse;;ENInfCon;
 ;;reused;;ENPart;
@@ -26957,8 +26871,7 @@
 /**** Rewritten by DELVE, ;;rose was;;ENCon;-;ENBe;
 ;;rose was;;ENCon;Lit_rose;-;ENBe
 ;;rose water;;ENCon;
-;;rose;;ENPart;ENRel;ENConIfCap
-
+;;rose;use label Part instead of Verb to cover nouns (too many side-effects when using VerbCon);ENRel;ENPart;ENConIfCap;
 ;;rosetting;;ENPrespart;
 ;;rosily;;ENAdv;ENAdvmandeg;
 ;;rostrally;;ENAdv;ENAdvmandeg;
@@ -26984,7 +26897,6 @@
 ;;roughly;;ENAdv;ENAdvmandeg;ENAdvdegree;
 ;;roughriding;;ENPrespart;
 ;;rouled;;ENPart;
-
 ;;rounded;;ENPart;
 ;;rounding;;ENPrespart;
 ;;roundly;;ENAdv;ENAdvmandeg;
@@ -27016,7 +26928,7 @@
 ;;rudding;;ENPrespart;
 ;;ruddy;;ENInf;ENVerbConAdj;
 ;;ruddying;;ENPrespart;
-;;rude;;ENAdj;
+;;rude;;ENAdj;ENNegSentiment;
 ;;rudely;;ENAdv;ENAdvmandeg;
 ;;rue;;ENInfCon;
 ;;rued;;ENPart;
@@ -27102,20 +27014,18 @@
 ;;sacrifice;;ENInfCon;
 ;;sacrificed;;ENPart;
 ;;sacrifices;;ENVerbCon;
-
 ;;sacrificially;;ENAdv;ENAdvmandeg;
 ;;sacrificing;;ENPrespart;
 ;;sacrified;;ENPart;
 ;;sacrilegiously;;ENAdv;ENAdvmandeg;
-;;sad about;;ENRel;
-;;sad;;ENAdj;
+;;sad;;ENAdj;ENNegSentiment;
 ;;saddened;;ENPart;ENAdj;
 ;;saddenedly;;ENAdv;ENAdvmandeg;
 ;;saddening;;ENPrespart;
 ;;saddled;;ENPart;
 ;;saddling;;ENPrespart;
 ;;sadistically;;ENAdv;ENAdvmandeg;
-;;sadly;;ENAdv;ENAdvmandeg;
+;;sadly;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;safe from;;ENRel;
 ;;safe;;ENAdj;
 ;;safed;;ENPart;
@@ -27134,9 +27044,9 @@
 ;;sagged;;ENPart;
 ;;sagging;;ENPrespart;
 /**** Rewritten by DELVE, ;;said that;;ENRel;ENVerb;-;ENWhich;
-;;said that;;ENRel;ENVerb;-;ENWhich;Lit_that
+;;said that;;ENRel;ENVerb;Lit_said;-;ENWhich;Lit_that
 /**** Rewritten by DELVE, ;;said to;;ENRel;ENVerb;ENWithToInf1;-;ENTo;
-;;said to;;ENRel;ENVerb;ENWithToInf1;-;ENTo;Lit_to
+;;said to;;ENRel;ENVerb;ENWithToInf1;Lit_said;-;ENTo;Lit_to
 ;;said;;ENRel;ENVerb;ENWithSObj;
 ;;sail;;ENInfCon;
 ;;sailed;;ENPart;
@@ -27264,7 +27174,7 @@
 ;;scapegoated;;ENPart;
 ;;scapegoating;;ENPrespart;
 ;;scarcely;;ENAdv;ENAdvmandeg;
-;;scare;;ENInf;
+;;scare;;ENInfCon;
 ;;scared of;;ENRel;
 ;;scared;;ENPart;ENAdj;
 ;;scaredly;;ENAdv;ENAdvmandeg;
@@ -27459,7 +27369,6 @@
 ;;seconded;;ENPart;
 ;;secondly;;ENAdvstruct;
 ;;seconds a minute;;ENCon;
-
 ;;seconds an hour;;ENCon;
 ;;secret;;ENAdj;
 ;;secretary of state;;ENCon;
@@ -27928,6 +27837,7 @@
 ;;shoring up;;ENPrespart;
 ;;shoring;;ENPrespart;
 ;;shorn;;ENPart;
+;;short of breath;;ENAdj;
 ;;short-sightedly;;ENAdv;ENAdvmandeg;
 ;;short-temperedly;;ENAdv;ENAdvmandeg;
 ;;short-term;;ENAdj;ENDuration;
@@ -27988,12 +27898,11 @@
 ;;showered;;ENPart;
 ;;showering;;ENPrespart;
 ;;showily;;ENAdv;ENAdvmandeg;
-;;showing good;;ENRel;ENVerb;-;ENAdj;
+;;showing good;;ENRel;ENVerb;-;ENAdj;ENPosSentiment;
 ;;showing;;ENRel;ENVerb;
 ;;showingly;;ENAdv;ENAdvmandeg;
 ;;showjumping;;ENPrespart;
 ;;shown;;ENPart;
-
 ;;shows;;ENVerbCon;ENVerbConThat;
 ;;shrank;;ENPart;
 ;;shred;;ENInfCon;
@@ -28542,7 +28451,7 @@
 ;;so far from;;ENAdvmandeg;Lit_so;-;ENAdj;-;ENPrep;Lit_from
 ;;so far so good;;ENCon;
 ;;so far;;ENAdvstruct;
-;;so good;;ENAdvmandeg;
+;;so good;;ENAdvmandeg;ENPosSentiment;
 /**** Rewritten by DELVE, ;;so grateful to;;ENAdj;-;ENAdj;-;ENTo;
 ;;so grateful to;;ENAdj;Lit_so;-;ENAdj;-;ENTo;Lit_to
 ;;so long as;;ENRel;ENConj;
@@ -28644,6 +28553,7 @@
 ;;some of it;;ENMod;
 ;;some of its;;ENAdj;
 ;;some of our;;ENAdj;
+;;some of that;;ENAllSome;
 ;;some of their;;ENAdj;
 ;;some of the other;;ENAdj;
 ;;some of the others;;ENPerspron_subj;ENPerspron_obj;
@@ -28657,7 +28567,6 @@
 ;;some others;;ENPerspron_subj;ENPerspron_obj;
 ;;some such;;ENAdj;
 ;;some thousands of;;ENQuantity;ENMeasurement;
-
 ;;some trillions of;;ENQuantity;ENMeasurement;
 ;;some;;ENIndefpron;ENAllSome;ENAdvbeforetime;ENQuantityTime;
 ;;somehow;;ENAdv;ENAdvmandeg;
@@ -28816,7 +28725,6 @@
 ;;speculate;;ENInf;
 ;;speculated;;ENPart;
 ;;speculates;;ENRel;ENVerb;
-
 ;;speculating;;ENPrespart;
 ;;speculatively;;ENAdv;ENAdvmandeg;
 ;;sped;;ENPart;
@@ -28846,7 +28754,6 @@
 ;;spike;;ENInfCon;
 ;;spiked;;ENPart;
 ;;spikes;;ENVerbCon;
-
 ;;spikily;;ENAdv;ENAdvmandeg;
 ;;spiking;;ENPrespart;
 ;;spill over;;ENInf;
@@ -28881,7 +28788,7 @@
 ;;splashed;;ENPart;
 ;;splashing;;ENPrespart;
 ;;splayed;;ENPart;
-;;splendid;;ENAdj;
+;;splendid;;ENAdj;ENPosSentiment;
 ;;splendidly;;ENAdv;ENAdvmandeg;
 ;;splenectomized;;ENPart;
 ;;splenetically;;ENAdv;ENAdvmandeg;
@@ -29420,7 +29327,7 @@
 ;;strictly speaking;;ENAdvstruct;
 ;;strictly;;ENAdv;ENAdvmandeg;
 ;;stridently;;ENAdv;ENAdvmandeg;
-;;strides;;ENRel;ENVerb;
+;;strides;;ENVerbCon;
 ;;striding;;ENPrespart;
 ;;strike;;ENInfCon;
 ;;strikes;;ENVerbCon;
@@ -29558,7 +29465,6 @@
 ;;subscribing;;ENPrespart;
 ;;subsequent to;;ENPrep;
 ;;subsequent;;ENAdj;
-
 ;;subsequently;;ENAdv;ENAdvmandeg;ENEndoftime;
 ;;subserved;;ENPart;
 ;;subserviently;;ENAdv;ENAdvmandeg;
@@ -29622,8 +29528,6 @@
 ;;such an;;ENArtPosspron;
 ;;such and such;;ENArtPosspron;ENMod;
 ;;such as;;ENPrep;ENCompare;
-/**** Rewritten by DELVE, ;;such good;;ENArtPosspron;-;ENAdj;
-;;such good;;ENArtPosspron;Lit_such;-;ENAdj
 /**** Rewritten by DELVE, ;;such other;;ENArtPosspron;-;ENOther;ENMod;
 ;;such other;;ENArtPosspron;Lit_such;-;ENOther;ENMod;Lit_other
 ;;such that;;ENRel;
@@ -29727,8 +29631,8 @@
 ;;super;;ENAdj;
 ;;superallowed;;ENPart;
 ;;superannuated;;ENPart;
-;;superb;;ENAdj;
-;;superbly;;ENAdv;ENAdvmandeg;
+;;superb;;ENAdj;ENPosSentiment;
+;;superbly;;ENAdv;ENAdvmandeg;ENPosSentiment;
 ;;superceeded;;ENPart;
 ;;supercharged;;ENPart;
 ;;supercharging;;ENPrespart;
@@ -30076,6 +29980,7 @@
 ;;taking care;;ENRel;ENVerb;ENPrespart2;
 ;;taking charge;;ENRel;ENVerb;ENPrespart2;
 ;;taking effect;;ENRel;ENVerb;ENPrespart2;
+;;taking forward;;ENRel;ENVerb;ENPrespart2;
 ;;taking hold;;ENRel;ENVerb;ENPrespart2;
 ;;taking into account;;ENRel;ENVerb;ENPrespart2;
 ;;taking into view;;ENRel;ENVerb;ENPrespart2;
@@ -30205,7 +30110,6 @@
 ;;teeming;;ENPrespart;
 ;;teenage;;ENAdj;
 ;;teenaged;;ENPart;
-
 ;;teetered;;ENPart;
 ;;teetering;;ENPrespart;
 ;;teething;;ENPrespart;
@@ -30287,8 +30191,7 @@
 ;;terminating;;ENPrespart;
 ;;terraced;;ENPart;
 ;;terracing;;ENPrespart;
-;;terrible at;;ENRel;
-;;terrible;;ENAdj;
+;;terrible;;ENAdj;ENNegSentiment;
 ;;terribly;;ENAdv;ENAdvmandeg;
 ;;terrified of;;ENRel;
 ;;terrified;;ENPart;
@@ -30371,11 +30274,8 @@
 ;;the first time;;ENArtPosspron;Lit_the;-;ENMod;ENFrequency;Join
 /**** Rewritten by DELVE, ;;the first time in;;ENArtPosspron;-;ENAdj;ENOrdNum;-;ENCon;-;ENPrep;ENOf;
 ;;the first time in;;ENArtPosspron;Lit_the;-;ENAdj;ENOrdNum;Lit_first;-;ENCon;Lit_time;-;ENPrep;ENOf;Lit_in
-
 /**** Rewritten by DELVE, ;;the fourth most;;ENArtPosspron;-;ENAdj;-;ENAdj;
 ;;the fourth most;;ENArtPosspron;Lit_the;-;ENAdj;-;ENAdj
-/**** Rewritten by DELVE, ;;the good;;ENArtPosspron;-;ENAdj;
-;;the good;;ENArtPosspron;Lit_the;-;ENAdj
 /**** Rewritten by DELVE, ;;the highest rated;;ENArtPosspron;-;ENAdj;-;ENCon;
 ;;the highest rated;;ENArtPosspron;Lit_the;-;ENAdj;-;ENCon
 /**** Rewritten by DELVE, ;;the just;;ENArtPosspron;-;ENAdj;
@@ -30389,7 +30289,6 @@
 ;;the last remaining;;ENArtPosspron;Lit_the;-;ENAdj;Lit_last;-;ENAdj
 /**** Rewritten by DELVE, ;;the last;;ENArtPosspron;-;ENAdj;ENAdjtime;
 ;;the last;;ENArtPosspron;Lit_the;-;ENAdj;ENAdjtime;Lit_last
-
 /**** Rewritten by DELVE, ;;the least developed;;ENArtPosspron;-;ENAdvmandeg;-;ENAdj;
 ;;the least developed;;ENArtPosspron;Lit_the;-;ENAdvmandeg;-;ENAdj
 /**** Rewritten by DELVE, ;;the less than;;ENArtPosspron;-;ENAdj;Join;
@@ -30402,6 +30301,8 @@
 ;;the more;;ENArtPosspron;Lit_the;-;ENPremod3;Lit_more
 /**** Rewritten by DELVE, ;;the most adjusting;;ENArtPosspron;-;ENAdvmandeg;-;ENAdj;
 ;;the most adjusting;;ENArtPosspron;Lit_the;-;ENAdvmandeg;-;ENAdj
+/**** Rewritten by DELVE, ;;the most of;;ENArtPosspron;-;ENCon;-;ENOf;ENMeasureIndicator;
+;;the most of;;ENArtPosspron;Lit_the;-;ENCon;-;ENOf;ENMeasureIndicator;Lit_of
 /**** Rewritten by DELVE, ;;the most;;ENArtPosspron;-;ENPremod3;
 ;;the most;;ENArtPosspron;Lit_the;-;ENPremod3
 /**** Rewritten by DELVE, ;;the next over;;ENArtPosspron;-;ENCon;-;ENCon;
@@ -30414,18 +30315,14 @@
 ;;the only one;;ENArtPosspron;Lit_the;-;ENAdj;Lit_only;-;ENCon;Lit_one
 /**** Rewritten by DELVE, ;;the only ones;;ENArtPosspron;-;ENAdj;-;ENCon;
 ;;the only ones;;ENArtPosspron;Lit_the;-;ENAdj;Lit_only;-;ENCon
-/**** Rewritten by DELVE, ;;the only;;ENArtPosspron;-;ENAdj;
-;;the only;;ENArtPosspron;Lit_the;-;ENAdj;Lit_only
 /**** Rewritten by DELVE, ;;the past;;ENArtPosspron;-;ENCon;ENAdjtime;
 ;;the past;;ENArtPosspron;Lit_the;-;ENCon;ENAdjtime;Lit_past
-
 /**** Rewritten by DELVE, ;;the rose;;ENArtPosspron;-;ENCon;
 ;;the rose;;ENArtPosspron;Lit_the;-;ENCon;Lit_rose
 /**** Rewritten by DELVE, ;;the said;;ENArtPosspron;-;ENAdj;
-;;the said;;ENArtPosspron;Lit_the;-;ENAdj
+;;the said;;ENArtPosspron;Lit_the;-;ENAdj;Lit_said
 /**** Rewritten by DELVE, ;;the same date;;ENArtPosspron;-;ENAdvTime;Join;
 ;;the same date;;ENArtPosspron;Lit_the;-;ENAdvTime;Join
-
 /**** Rewritten by DELVE, ;;the same time;;ENNonrelevant;-;ENAdvTemp;ENTemp;Join;
 ;;the same time;;ENNonrelevant;Lit_the;-;ENAdvTemp;ENTemp;Join
 /**** Rewritten by DELVE, ;;the same time period;;ENNonrelevant;-;ENAdvTime;Join;Join;
@@ -30446,7 +30343,8 @@
 ;;the tenth most;;ENArtPosspron;Lit_the;-;ENAdj;-;ENAdj
 /**** Rewritten by DELVE, ;;the third most;;ENArtPosspron;-;ENAdj;-;ENAdj;
 ;;the third most;;ENArtPosspron;Lit_the;-;ENAdj;-;ENAdj
-
+/**** Rewritten by DELVE, ;;the underneath;;ENArtPosspron;-;ENAdj;
+;;the underneath;;ENArtPosspron;Lit_the;-;ENAdj
 /**** Rewritten by DELVE, ;;the well being;;ENArtPosspron;-;ENCon;Join;
 ;;the well being;;ENArtPosspron;Lit_the;-;ENCon;Join
 /**** Rewritten by DELVE, ;;the well;;ENArtPosspron;-;ENAdj;
@@ -30533,7 +30431,6 @@
 ;;third;;ENAdj;ENOrdNum;ENFraction;
 ;;thirstily;;ENAdv;ENAdvmandeg;
 ;;thirsty;;ENAdj;
-
 ;;thirty-eight;;ENNum;
 ;;thirty-five;;ENNum;
 ;;thirty-four;;ENNum;
@@ -30547,16 +30444,13 @@
 ;;this autumn's;;ENAdj;
 /**** Rewritten by DELVE, ;;this fall's;;ENArtPosspron;-;ENAdj;
 ;;this fall's;;ENArtPosspron;Lit_this;-;ENAdj
-
 /**** Rewritten by DELVE, ;;this month's;;ENArtPosspron;-;ENAdj;
 ;;this month's;;ENArtPosspron;Lit_this;-;ENAdj
 ;;this pm;;ENAdvTime;
 /**** Rewritten by DELVE, ;;this spring's;;ENArtPosspron;-;ENAdj;
 ;;this spring's;;ENArtPosspron;Lit_this;-;ENAdj
-
 /**** Rewritten by DELVE, ;;this summer's;;ENArtPosspron;-;ENAdj;
 ;;this summer's;;ENArtPosspron;Lit_this;-;ENAdj
-
 /**** Rewritten by DELVE, ;;at the moment of;;ENPrep;-;ENArtPosspron;-;ENCon;-;ENOf;
 ;;at the moment of;;ENPrep;Lit_at;-;ENArtPosspron;Lit_the;-;ENCon;-;ENOf;Lit_of
 /**** Rewritten by DELVE, ;;at the moment when;;ENPrep;-;ENArtPosspron;-;ENCon;-;ENRelOth;ENConj;
@@ -30566,7 +30460,6 @@
 ;;this week's;;ENAdj;ENTime;
 /**** Rewritten by DELVE, ;;this winter's;;ENArtPosspron;-;ENAdj;
 ;;this winter's;;ENArtPosspron;Lit_this;-;ENAdj
-
 ;;this;;ENDemonstr_s;
 ;;thisisadummyentry;;ENCon;
 ;;thornily;;ENAdv;ENAdvmandeg;
@@ -30578,11 +30471,14 @@
 ;;those of them;;ENBeginconcept;
 ;;those of us;;ENBeginconcept;
 ;;those of you;;ENBeginconcept;
-
 ;;those;;ENDemonstr_pl;
 ;;though;;ENRel;ENAttrStop;ENNegStop;ENConj;
 ;;thought process;;ENCon;
 ;;thought processes;;ENCon;
+/**** Rewritten by DELVE, ;c=0;not thought to;;ENNot;ENNegation;ENNegBegin;-;ENRel;ENVerb;ENWithToInf1;ENCertainty;-;ENTo;ENCertainty;
+;c=0;not thought to;;ENNot;ENNegation;ENNegBegin;Lit_not;-;ENRel;ENVerb;ENWithToInf1;ENCertainty;Lit_thought;-;ENTo;ENCertainty;Lit_to
+/**** Rewritten by DELVE, ;c=0;thought to;;ENRel;ENVerb;ENWithToInf1;ENCertainty;-;ENTo;ENCertainty;
+;c=0;thought to;;ENRel;ENVerb;ENWithToInf1;ENCertainty;Lit_thought;-;ENTo;ENCertainty;Lit_to
 ;;thought;;ENRel;ENVerb;ENWithSObj;ENWithToInf2;
 ;;thoughtful;;ENAdj;
 ;;thoughtfully;;ENAdv;ENAdvmandeg;
@@ -30601,11 +30497,9 @@
 ;;threateningly;;ENAdv;ENAdvmandeg;
 ;;threatens;;ENRel;ENVerb;ENWithToInf1;
 ;;threatneing;;ENPrespart;
-
 ;;three-and-a-half;;ENNum;
 ;;three of four;;ENAdj;
 ;;three-dimensionally;;ENAdv;ENAdvmandeg;
-
 ;;thresholding;;ENPrespart;
 ;;threw;;ENRel;ENVerb;
 ;;thrice;;ENAdv;ENAdvmandeg;ENTimes;ENFrequency;
@@ -30741,7 +30635,6 @@
 ;;titrating;;ENPrespart;
 /**** Rewritten by DELVE, ;;to come to work;;ENTo;-;ENInf;-;ENTo;-;ENCon;
 ;;to come to work;;ENTo;Lit_to;-;ENInf;-;ENTo;Lit_to;-;ENCon
-
 /**** Rewritten by DELVE, ;;to cool;;ENTo;-;ENInf;
 ;;to cool;;ENTo;Lit_to;-;ENInf
 ;;to cut a long story short ,;;ENAdvstruct;
@@ -30765,7 +30658,6 @@
 ;;to mother;;ENTo;Lit_to;-;ENInfCon
 /**** Rewritten by DELVE, ;;to nose;;ENTo;-;ENInfCon;
 ;;to nose;;ENTo;Lit_to;-;ENInfCon
-
 /**** Rewritten by DELVE, ;;to paper;;ENTo;-;ENInfCon;
 ;;to paper;;ENTo;Lit_to;-;ENInfCon
 /**** Rewritten by DELVE, ;;to party;;ENTo;-;ENInfCon;
@@ -30793,16 +30685,13 @@
 /**** Rewritten by DELVE, ;;to slow this;;ENTo;-;ENInf;-;ENArtPosspron;
 ;;to slow this;;ENTo;Lit_to;-;ENInf;-;ENArtPosspron;Lit_this
 ;;to this end;;ENAdvstruct;
-
 /**** Rewritten by DELVE, ;;to wind;;ENTo;-;ENInfCon;
 ;;to wind;;ENTo;Lit_to;-;ENInfCon
 ;;to-and-fro;;ENAdv;ENAdvmandeg;
 ;;to;;ENTo;ENPrep;ENMeasureIndicator
 ;;toasted;;ENPart;
 ;;toasting;;ENPrespart;
-
 ;;today;;ENAdvTime;
-
 ;;toddling;;ENPrespart;
 ;;toeing;;ENPrespart;
 ;;together;;ENAdv;
@@ -31186,6 +31075,7 @@
 ;;truculently;;ENAdv;ENAdvmandeg;
 ;;trudged;;ENPart;
 ;;trudging;;ENPrespart;
+;;true;;ENAdj;
 ;;truly;;ENAdv;ENAdvmandeg;
 ;;trump card;;ENCon;
 ;;trump;;ENInfCon;ENConIfCap;
@@ -31280,7 +31170,6 @@
 ;;tweaked;;ENPart;
 ;;tweaking;;ENPrespart;
 ;;tweeted;;ENPart;
-
 ;;twelve-and-a-half;;ENNum;
 ;;twenty-eight;;ENNum;
 ;;twenty-five;;ENNum;
@@ -31323,14 +31212,12 @@
 ;;twitter account;;ENCon;
 ;;twitter accounts;;ENCon;
 ;;twittering;;ENPrespart;
-
 ;;two-and-a-half;;ENNum;
 ;;two or three;;ENAdj;ENNum;
 ;;two out of the;;ENCon;
 ;;two-handed;;ENAdj;ENNumberPlusUnit;
 ;;two-handedly;;ENAdv;ENAdvmandeg;
 ;;two-thirds;;ENNum;
-
 ;;tying;;ENPrespart;
 ;;type 1;;ENAdj;
 ;;type 2;;ENAdj;
@@ -31441,7 +31328,7 @@
 ;;uncleared;;ENAdj;
 ;;unclearly;;ENAdv;ENAdvmandeg;
 ;;uncleverly;;ENAdv;ENAdvmandeg;
-;;uncomfortable;;ENAdj;
+;;uncomfortable;;ENAdj;ENNegSentiment;
 ;;uncomfortably;;ENAdv;ENAdvmandeg;
 ;;uncommonly;;ENAdv;ENAdvmandeg;
 ;;uncommunicatively;;ENAdv;ENAdvmandeg;
@@ -31657,7 +31544,7 @@
 ;;unforgetfully;;ENAdv;ENAdvmandeg;
 ;;unforgivingly;;ENAdv;ENAdvmandeg;
 ;;unfortunate;;ENAdj;
-;;unfortunately;;ENAdv;ENAdvmandeg;
+;;unfortunately;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;unfounded;;ENAdj;
 ;;unfulfilled;;ENAdj;
 ;;unfunded;;ENAdj;
@@ -31679,7 +31566,7 @@
 ;;unguiltily;;ENAdv;ENAdvmandeg;
 ;;unhaltingly;;ENAdv;ENAdvmandeg;
 ;;unhappily;;ENAdv;ENAdvmandeg;
-;;unhappy;;ENAdj;
+;;unhappy;;ENAdj;ENNegSentiment;
 ;;unharmed;;ENAdj;
 ;;unharmoniously;;ENAdv;ENAdvmandeg;
 ;;unhealthily;;ENAdv;ENAdvmandeg;
@@ -31805,7 +31692,7 @@
 ;;unperturbed;;ENAdj;
 ;;unperturbedly;;ENAdv;ENAdvmandeg;
 ;;unplanned;;ENAdj;
-;;unpleasant;;ENAdj;
+;;unpleasant;;ENAdj;ENNegSentiment;
 ;;unpleasantly;;ENAdv;ENAdvmandeg;
 ;;unpoetically;;ENAdv;ENAdvmandeg;
 ;;unpolished;;ENPart;
@@ -31853,6 +31740,7 @@
 ;;unrolled;;ENPart;
 ;;unromantically;;ENAdv;ENAdvmandeg;
 ;;unruffledly;;ENAdv;ENAdvmandeg;
+;;unsafe;;ENAdj;
 ;;unsatisfactorily;;ENAdv;ENAdvmandeg;
 ;;unsatisfied;;ENAdj;
 ;;unsatisfiedly;;ENAdv;ENAdvmandeg;
@@ -31910,8 +31798,7 @@
 ;;untidies;;ENRel;ENVerb;
 ;;untidy;;ENPart;
 ;;untidying;;ENPrespart;
-
-;;until;;ENPrep;
+;;until;;ENPrep;ENCondition;
 ;;untill;;ENPrep;
 ;;unto;;ENPrep;
 ;;untouched;;ENAdj;
@@ -31944,7 +31831,7 @@
 ;;unyieldingly;;ENAdv;ENAdvmandeg;
 ;;up and down;;ENPrep;ENAdvdir;ENRel;
 ;;up to now;;ENAdvTemp;ENTemp;
-;;up to;;ENTo;ENMeasureIndicator
+;;up to;;ENTo;ENMeasureIndicator;ENPrep;
 ;;up until now;;ENAdvTemp;ENTemp;
 ;;up-regulate;;ENInf;
 ;;up-regulates;;ENRel;ENVerb;
@@ -32031,7 +31918,7 @@
 ;;used;;ENPart;
 ;;useful;;ENAdj;
 ;;usefully;;ENAdv;ENAdvmandeg;
-;;useless;;ENAdj;
+;;useless;;ENAdj;ENNegSentiment;
 ;;uselessly;;ENAdv;ENAdvmandeg;
 ;;user-friendly;;ENAdv;ENAdvmandeg;
 ;;uses;;ENVerbCon;
@@ -32232,6 +32119,7 @@
 ;;vigintennial;;ENAdj;ENFrequency;
 ;;vigintennially;;ENAdvFreqCon;ENFrequency;
 ;;vigorously;;ENAdv;ENAdvmandeg;
+;;vile;;ENAdj;ENNegSentiment;
 ;;vilely;;ENAdv;ENAdvmandeg;
 ;;vilified;;ENPart;
 ;;vilifying;;ENPrespart;
@@ -32327,6 +32215,7 @@
 ;;vs naipaul;;ENCon;
 ;;vs.;;ENPrep;
 ;;vs;;ENPrep;
+;;vulgar;;ENAdj;ENNegSentiment;
 ;;vulgarly;;ENAdv;ENAdvmandeg;
 ;;vulnerable;;ENAdj;
 ;;vulnerably;;ENAdv;ENAdvmandeg;
@@ -32694,8 +32583,8 @@
 ;;wheezing;;ENPrespart;
 ;;wheezingly;;ENAdv;ENAdvmandeg;
 ;;when and where;;ENRelOth;ENQuestion;
-;;when;;ENRelOth;ENConj;ENQuestion;
-;;whenever;;ENRelOth;ENConj;
+;;when;;ENRelOth;ENConj;ENQuestion;ENCondition;
+;;whenever;;ENRelOth;ENConj;ENCondition;
 ;;whence;;ENRelOth;
 ;;where and when;;ENRelOth;ENQuestion;
 ;;where;;ENRelOth;ENQuestion;
@@ -32704,8 +32593,8 @@
 ;;wherein;;ENRelOth;ENConj;
 ;;whereof;;ENRelOth;ENConj;
 ;;wherever;;ENThere;
-;;whether or not;;ENRel;ENConj;
-;;whether;;ENRel;ENNegStop;ENConj;
+;;whether or not;;ENRel;ENConj;ENCondition;
+;;whether;;ENRel;ENNegStop;ENConj;ENCondition;
 /**** Rewritten by DELVE, ;;which claims to;;ENWhich;ENAttrStop;ENNegStop;-;ENRel;ENVerb;-;ENTo;
 ;;which claims to;;ENWhich;ENAttrStop;ENNegStop;Lit_which;-;ENRel;ENVerb;-;ENTo;Lit_to
 /**** Rewritten by DELVE, ;;which let us;;ENWhich;ENAttrStop;ENNegStop;-;ENmAux;-;ENPerspron_obj;
@@ -32978,6 +32867,7 @@
 ;;wonder whether;;ENInf;
 ;;wonder;;ENInfCon;
 ;;wondered;;ENPart;
+;;wonderful;;ENAdj;ENPosSentiment;
 ;;wonderfully;;ENAdv;ENAdvmandeg;
 ;;wondering;;ENPrespart;
 ;;wonderingly;;ENAdv;ENAdvmandeg;
@@ -33017,13 +32907,13 @@
 ;;worlds away;;ENCon;
 ;;worldwide;;ENAdj;
 ;;worn;;ENPart;
-;;worried about;;ENRel;
-;;worried;;ENPart;
+;;worried about;;ENRel;ENNegSentiment;
+;;worried;;ENPart;ENNegSentiment;
 ;;worriedly;;ENAdv;ENAdvmandeg;
-;;worries;;ENVerbCon;ENVerbConThat;
-;;worrisome;;ENAdv;ENAdvmandeg;
+;;worries;;ENVerbCon;ENVerbConThat;ENNegSentiment;
+;;worrisome;;ENAdv;ENAdvmandeg;ENNegSentiment;
 ;;worry;;ENInfCon;
-;;worrying;;ENPrespart;ENAdj;
+;;worrying;;ENPrespart;ENAdj;ENNegSentiment;
 ;;worsen;;ENInf;
 ;;worsened;;ENPart;
 ;;worsening;;ENPrespart;
@@ -33032,6 +32922,7 @@
 ;;worshipfully;;ENAdv;ENAdvmandeg;
 ;;worshipped;;ENPart;
 ;;worshippingly;;ENAdv;ENAdvmandeg;
+;;worst;;ENAdj;ENNegSentiment;
 ;;worth;;ENRel;
 ;;worthily;;ENAdv;ENAdvmandeg;
 ;;worthing;;ENPrespart;
@@ -33250,19 +33141,19 @@
 ;;at length;;ENAdvmandeg;ENAdv;
 ;;defibrillated;;ENPart;
 ;;likeliest;;ENAdvmodal;
-;;worse;;ENAdvAdj;
+;;worse;;ENAdvAdj;ENNegSentiment;
 ;;maximally;;ENAdv;ENAdvdegree;
 /**** Rewritten by DELVE, ;;in a row over;;ENPrep;-;ENArtPosspron;-;ENCon;-;ENPrep;
 ;;in a row over;;ENPrep;Lit_in;-;ENArtPosspron;Lit_a;-;ENCon;-;ENPrep;Lit_over
 ;;in a row;;ENCon;
 /**** Rewritten by DELVE, ;;complicated by;;ENRel;ENVerb;-;ENPrep;
 ;;complicated by;;ENRel;ENVerb;-;ENPrep;Lit_by
-
 ;;otherwise;;ENAdv;ENAdvmandeg;
+/**** Rewritten by DELVE, ;;B in addition ,;;SBegin;-;ENAdvstruct;Join;-;ENComma;
+;;B in addition ,;;SBegin;-;ENAdvstruct;Join;-;ENComma;Lit_,
 ;;in addition ,;;ENAdvstruct;
 ;;unresponsive;;ENAdj;
 ;;at this time;;ENAdvTemp;ENTemp;
-
 ;;at times like these;;ENAdvTemp;ENTemp;
 ;;by this time;;ENAdvTemp;ENTemp;
 ;;in conjunction with;;ENRel;
@@ -33541,13 +33432,13 @@
 ;;respiratory rate;;ENCon;ENBeforeRespiration;ENBeforeMeasurement;
 ;;respirations;;ENCon;ENBeforeRespiration;ENBeforeMeasurement;
 ;;rr;;ENCon;ENBeforeRespiration;ENBeforeMeasurement;
-/**** Rewritten by DELVE, ;;per minute;;ENPrep;ENAfterRespiration;ENAfterPulse;ENUnit;-;ENCon;ENAfterRespiration;ENAfterPulse;ENUnit;
-;;per minute;;ENPrep;ENAfterRespiration;ENAfterPulse;ENUnit;Lit_per;-;ENCon;ENAfterRespiration;ENAfterPulse;ENUnit
+;;per minute;;ENCon;ENAfterRespiration;ENAfterPulse;ENUnit;
 ;;oxygen saturation(|s);;ENCon;ENBeforeO2Saturation;ENBeforeMeasurement;
 ;;o2 saturation(|s);;ENCon;ENBeforeO2Saturation;ENBeforeMeasurement;
 ;;o2 sat(|s);;ENCon;ENBeforeO2Saturation;ENBeforeMeasurement;
 ;;satting;;ENCon;ENBeforeO2Saturation;ENBeforeMeasurement;
 ;;breaths/minute;;ENCon;ENAfterRespiration;ENUnit;
+;;microm;microM;ENCon;ENUnit;
 /**** Rewritten by DELVE, ;;the year before;;ENArtPosspron;-;ENAdvTime;Join;
 ;;the year before;;ENArtPosspron;Lit_the;-;ENAdvTime;Join
 /**** Rewritten by DELVE, ;;the year after;;ENArtPosspron;-;ENAdvTime;Join;

@@ -152,7 +152,7 @@ const std::vector<std::pair<int, string>> CSV_DataGenerator::kb_properties = {
 	make_pair(IKATTCERTAINTY, "Certainty")
 };
 
-void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
+void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::ostream& os)
 {
 	/*
 	Do ..LoadTableFromCSV(prefix _ "metadata.csv", "%iKnow.KB.Metadata", kb)
@@ -167,7 +167,9 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	*/
 	kb_language = language;
 	Hash = language; // just a unique string per KB
-	cout << "Loading CSV data for language \"" << language << "\"" << endl;;
+	stringstream message;
+	message << "Loading CSV data for language \"" << language << "\"" << endl;
+	cout << message.str(); os << message.str();
 
 	kb_metadata.clear();
 	size_t cap = kb_metadata.capacity();
@@ -216,10 +218,15 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled)
 	cout << "Reading rules data..." << endl;
 	iKnow_KB_Rule::ImportFromCSV(csv_path_ + language + "/" + "rules.csv", *this);
 	cout << kb_rules.size() << " rule items (reserved=" << cap << ")" << endl;
-
+	{
+		os << "Rule CSV mapping:" << endl;
+		for (int idRule = 0; idRule < kb_rules.size(); idRule++) {
+			os << idRule << ":" << kb_rules[idRule].csv_id << "\t" << kb_rules[idRule].InputPattern << "\t->\t" << kb_rules[idRule].OutputPattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
+		}
+	}
 	labelIndexTable_type &label_index_table = labelIndexTable;
 	int label_idx = 0;
-	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table,&label_idx](iKnow_KB_Label label){ label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
+	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table, &label_idx, &os](iKnow_KB_Label label) { os << label_idx << "\t" << label.Name << endl; label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
 	//Override value for "-"
 	labelIndexTable["-"] = -1; //Set table("-") = -1
 }
@@ -350,6 +357,35 @@ public:
 #endif
 
 private:
+	void operator=(const RawListToKb&);
+};
+
+template<>
+class RawListToKb<KbLexrep> : private WithAllocator, private WithLabelMap {
+public:
+	typedef KbLexrep output_type;
+	RawListToKb(RawAllocator& allocator, LabelIndexMap& map, size_t& max_lexrep_size, size_t& max_token_size) : WithAllocator(allocator), WithLabelMap(map), max_lexrep_size_(max_lexrep_size), max_token_size_(max_token_size) {}
+
+#if defined _IRIS
+	KbLexrep operator()(CacheList& list) {
+		KbLexrep lexrep(GetAllocator(), GetLabelMap(), list[1].AsAString(), list[2].AsAString());
+#else
+	KbLexrep operator()(iKnow_KB_Lexrep kb_lexrep) {
+		KbLexrep lexrep(GetAllocator(), GetLabelMap(), kb_lexrep.Token, kb_lexrep.Labels);
+#endif
+		size_t size = lexrep.TokenCount();
+		if (size > max_lexrep_size_) max_lexrep_size_ = size;
+		// for Japanese, we need to calculate the maximum token size, this is an unnecessary step for non-Asian languages, but it's only done while loading, so no runtime performance while indexing...
+		size_t max_token = lexrep.maxTokenSize();
+		if (max_token > max_token_size_) max_token_size_ = max_token;
+		return lexrep;
+	}
+
+	size_t MaxLexrepSize() { return max_lexrep_size_; }
+	size_t MaxTokenSize() { return max_token_size_; }
+private:
+	size_t& max_lexrep_size_;
+	size_t& max_token_size_;
 	void operator=(const RawListToKb&);
 };
 
@@ -526,7 +562,7 @@ void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& trans
 
 unsigned char* iknow::shell::base_pointer = NULL;
 
-void CSV_DataGenerator::generateRAW(void)
+void CSV_DataGenerator::generateRAW(bool IsCompiled)
 {
 	unsigned char* buf_ = new unsigned char[kRawSize];
 	iknow::shell::Raw raw(buf_, kRawSize);
@@ -571,23 +607,16 @@ void CSV_DataGenerator::generateRAW(void)
 		kb_data_->special_labels[SpecialLabel(i)] = *p;
 	}
 
-	//Lexreps
+	//Lexreps : load only if not compiled
 	{
-		/*
-		if (!is_compiled) {
-		kb_data_->max_lexrep_size = 0;
-		kb_data_->max_token_size = 0;
-		RawListToKb<KbLexrep> lexrep_transformer(allocator, label_index_map, kb_data_->max_lexrep_size, kb_data_->max_token_size);
-		LoadKbStructureToTable(kb,
-		&AbstractKnowledgebase::NextLexrep,
-		&AbstractKnowledgebase::GetLexrep,
-		kb.LexrepCount(),
-		lexrep_transformer,
-		[](const KbLexrep* lexrep) { return lexrep->PointerToToken(); },
-		kb_data_->lexreps,
-		allocator);
+		if (!IsCompiled) {
+			kb_data_->max_lexrep_size = 0;
+			kb_data_->max_token_size = 0;
+			RawListToKb<KbLexrep> lexrep_transformer(allocator, label_index_map, kb_data_->max_lexrep_size, kb_data_->max_token_size);
+			const iknow::shell::StaticHash::Table<String, KbLexrep>* lexrep_table;
+			LoadKbRangeAsTable(kb_lexreps.begin(), kb_lexreps.end(), kb_lexreps.size(), lexrep_transformer, lexrep_table, [](const KbLexrep* lexrep) { return lexrep->PointerToToken(); }, allocator);
+			kb_data_->lexreps = lexrep_table;
 		}
-		*/
 	}
 	//Rules
 	{
