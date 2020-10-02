@@ -1,14 +1,15 @@
 #include "UserKnowledgeBase.h"
 #include "SharedMemoryKnowledgebase.h"
 
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Metadata.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Acronym.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Regex.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Filter.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Label.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Lexrep.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_PreprocessFilter.h"
-#include "..\..\compiler\iKnowLanguageCompiler\iKnow_KB_Rule.h"
+// Borrow KB CSV structures from the language compiler
+#include "iKnow_KB_Metadata.h"
+#include "iKnow_KB_Acronym.h"
+#include "iKnow_KB_Regex.h"
+#include "iKnow_KB_Filter.h"
+#include "iKnow_KB_Label.h"
+#include "iKnow_KB_Lexrep.h"
+#include "iKnow_KB_PreprocessFilter.h"
+#include "iKnow_KB_Rule.h"
 
 using namespace iknow::csvdata;
 
