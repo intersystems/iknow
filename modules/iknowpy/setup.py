@@ -21,9 +21,7 @@ import glob
 import hashlib
 import os
 import platform
-import random
 import shutil
-import string
 import subprocess
 import sys
 import zipfile
@@ -196,10 +194,15 @@ def rehash(file_path):
         return hash, size
 
 
-def rand_alphanumeric(length=8):
-    """Return a random alphanumeric string with a given length. Used to tag
-    shared libraries with a unique name."""
-    return ''.join(random.choice(ALPHANUMERIC) for _ in range(length))
+def hashfile(afile, blocksize=65536, length=8):
+    """Hash the contents of an open file handle with SHA256. Return the first
+    length characters of the hash."""
+    hasher = hashlib.sha256()
+    buf = afile.read(blocksize)
+    while len(buf) > 0:
+        hasher.update(buf)
+        buf = afile.read(blocksize)
+    return hasher.hexdigest()[:length]
 
 
 def extract_wheel(whl_path, dest):
@@ -311,8 +314,18 @@ def patch_wheel(whl_path):
     os.mkdir(tmp_dir)
     extract_wheel(whl_path, tmp_dir)
 
-    # create list of libraries to repair
+    # copy ICU and iKnow engine library files
+    iculib_map = {}  # name of symlink to ICU library -> name of actual ICU library file
     repair_lib_dir = os.path.join(tmp_dir, 'iknowpy')
+    for lib_path in iculib_paths:
+        if os.path.islink(lib_path):
+            iculib_map[os.path.split(lib_path)[1]] = os.path.split(os.path.realpath(lib_path))[1]
+        else:
+            shutil.copy2(lib_path, repair_lib_dir)
+    for lib_path in enginelib_paths:
+        shutil.copy2(lib_path, repair_lib_dir)
+
+    # create list of libraries to repair
     module_pattern = os.path.join(repair_lib_dir, 'engine.*.so')
     repair_lib_paths = glob.glob(module_pattern)
     if len(repair_lib_paths) == 0:
@@ -331,22 +344,34 @@ def patch_wheel(whl_path):
             lib_rename[lib_name] = lib_name
         else:
             lib_name_split = lib_name.split('.')
-            lib_name_split[0] += '-' + rand_alphanumeric()
+            with open(lib_path, 'rb') as lib_file:
+                lib_name_split[0] += '-' + hashfile(lib_file)
             lib_name_new = '.'.join(lib_name_split)
             lib_rename[lib_name] = lib_name_new
     for lib_name in iculib_map:
         # replace dependency on symlink to dependency on actual library file
         lib_rename[lib_name] = lib_rename[iculib_map[lib_name]]
+
+    os.makedirs(CACHE_DIR, exist_ok=True)
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
-        print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])))
-        dep_libs = patcher.getneeded(lib_path)
-        patcher.setname(lib_path, lib_rename[lib_name])
-        if dep_libs:
-            if sys.platform == 'linux':
-                patcher.setrpath(lib_path)
-            patcher.replaceneeded(lib_path, dep_libs, lib_rename)
-        os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
+        print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])), end='')
+        if os.path.isfile(os.path.join('dist/cache', lib_rename[lib_name])):
+            # copy patched library from cache
+            os.remove(lib_path)
+            shutil.copy2(os.path.join(CACHE_DIR, lib_rename[lib_name]), lib_dir)
+            print(' (cached)')
+        else:
+            dep_libs = patcher.getneeded(lib_path)
+            patcher.setname(lib_path, lib_rename[lib_name])
+            if dep_libs:
+                if sys.platform == 'linux':
+                    patcher.setrpath(lib_path)
+                patcher.replaceneeded(lib_path, dep_libs, lib_rename)
+            os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
+            # copy patched library into cache
+            shutil.copy2(os.path.join(lib_dir, lib_rename[lib_name]), CACHE_DIR)
+            print()
 
     # update record file, which tracks wheel contents and their checksums
     update_wheel_record(tmp_dir)
@@ -371,8 +396,8 @@ def find_wheel():
     return wheel_pattern_matches[0]
 
 
-# constants
-ALPHANUMERIC = string.ascii_letters + string.digits
+# set constants
+CACHE_DIR = 'dist/cache'
 
 # obtain version
 version = {}
@@ -434,10 +459,12 @@ else:
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
-# Copy ICU and iKnow engine libraries into package source if appropriate.
-# Do not copy ICU symbolic links, but keep track of link structure in
-# iculib_map.
-iculib_map = {}  # map from name of ICU symbolic link to name of real library file
+# Find ICU and iKnow engine libraries. On Windows, copy libraries into package
+# source if appropriate. On Unix, we never copy the libraries into the package
+# source at this stage because the libraries are added during the wheel repair
+# step.
+iculib_paths = []  # paths to original ICU libraries
+enginelib_paths = []  # paths to original iKnow engine libraries
 if '--no-dependencies' in sys.argv:
     no_dependencies = True
     sys.argv.remove('--no-dependencies')
@@ -449,13 +476,11 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
         raise BuildError('ICU libraries not found: {}'.format(iculibs_path_pattern))
     if not enginelib_paths:
         raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_path_pattern))
-    for lib_path in iculib_paths:
-        if os.path.islink(lib_path):
-            iculib_map[os.path.split(lib_path)[1]] = os.path.split(os.path.realpath(lib_path))[1]
-        else:
+    if sys.platform == 'win32':
+        for lib_path in iculib_paths:
             shutil.copy2(lib_path, 'iknowpy')
-    for lib_path in enginelib_paths:
-        shutil.copy2(lib_path, 'iknowpy')
+        for lib_path in enginelib_paths:
+            shutil.copy2(lib_path, 'iknowpy')
 else:
     no_dependencies = True
 

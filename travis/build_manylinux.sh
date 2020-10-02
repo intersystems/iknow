@@ -7,6 +7,7 @@
 # Usage: /iknow/travis/build_manylinux.sh
 #
 # Required Environment Variables:
+# - PIP_CACHE_DIR is the location that pip caches files
 # - ICU_SRC_URL is the URL to a .zip source release of ICU
 
 set -euxo pipefail
@@ -20,7 +21,10 @@ set -euxo pipefail
 #   some reason, ICU source releases use Windows line endings.
 # ccache
 #   Speed up build times by caching results from previous builds.
-yum install -y epel-release
+PROCESSOR="$(uname -p)"
+if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
+  yum install -y epel-release
+fi
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
@@ -46,12 +50,9 @@ gmake install
 ##### Build iKnow engine #####
 cd /iknow
 
-case $(uname -p) in
+case "$PROCESSOR" in
   x86_64)
     export IKNOWPLAT=lnxrhx64
-    ;;
-  i686)
-    export IKNOWPLAT=lnxrhx86
     ;;
   aarch64)
     export IKNOWPLAT=lnxrharm64
@@ -73,10 +74,12 @@ cd modules/iknowpy
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
 
 # install Python package dependencies and build initial wheels
+chown -R root "$PIP_CACHE_DIR"
 for PYTHON in /opt/python/cp3*/bin/python; do
   "$PYTHON" -m pip install --user cython setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
+chmod -R a+rw "$PIP_CACHE_DIR"
 
 # repair wheels using auditwheel to convert to manylinux wheels
 for WHEEL in dist/iknowpy-*.whl; do

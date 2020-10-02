@@ -1,20 +1,46 @@
 ﻿
 
 
-;;{year1};;RUCfrYear;
-;;{year2};;RUCfrYear;
-;;{year3};;RUCfrYear;
-;;{year4};;RUCfrYear;
+;;{year1};;RUYearNum;RUNum;RUCon;RUDigit;
+;;{year2};;RUYearNum;RUNum;RUCon;RUDigit;
+;;{year-hyphen1};;RUYearNum;RUNum;RUCon;RUDigit;RUYearNumHyphen;
+;;{year-hyphen2};;RUYearNum;RUNum;RUCon;RUDigit;RUYearNumHyphen;
 
 
 
-;;{number-all};;RUCfr;
+;;{number-all};;RUNum;RUDigit;RUCon;
 
 
 
 
-;;{ranking};;RUAdj;RURanking;
-;;{numberroman};;RUAdj;RURanking;
+
+
+;;{ordnumber_nomm_genf};;RUAdj;RUOrdNum;
+;;{ordnumber_nomm};;RUAdj;RUOrdNum;RUAdjNomM;
+;;{ordnumber_nomn};;RUAdj;RUOrdNum;RUAdjNomN;
+;;{ordnumber_nomf};;RUAdj;RUOrdNum;RUAdjNomF;
+;;{ordnumber_accf};;RUAdj;RUOrdNum;RUAdjAccF;
+;;{1ordnumber_genmn};;RUAdj;RUOrdNum;RUAdjGenMN;
+;;{ordnumber_gdpif};;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;{1ordnumber_datmn};;RUAdj;RUOrdNum;RUAdjDatMN;
+;;{ordnumber_prepmn};;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;{ordnumber_instrmn_datpl};;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;{ordnumber_nomaccpl};;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;{1ordnumber_genpl};;RUAdj;RUOrdNum;RUAdjGenPl;
+;;{ordnumber_instrpl};;RUAdj;RUOrdNum;RUAdjInstrPl;
+
+;;{numberroman};;RUAdj;RUOrdNum;RUDigit;RURoman;
+;;{numberroman_hyphen};;RUNum;RUDigit;RUCon;RURoman;
+;;{ordnumberroman};;RUOrdNum;RUDigit;RUAdj;RURoman;
+
+;;{2ordnumber-year};;RUAdj;RUDigit;RUOrdNum;RUYearNum;
+;;{date1};;RUAdvTime;RUTime;RUDate;
+;;{date2};;RUAdvTime;RUTime;RUDate;
+
+
+/*;;\((1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);number in between brackets
+
+
 
 ;;{initial};;RUInitial
 ;;{initial2};;RUInitial
@@ -373,15 +399,19 @@
 
 
 
-;;\(1\);;RULayout;
-;;\(2\);;RULayout;
-;;\(3\);;RULayout;
-;;\(4\);;RULayout;
-;;\(5\);;RULayout;
-;;\(6\);;RULayout;
-;;\(7\);;RULayout;
-;;\(8\);;RULayout;
-;;\(9\);;RULayout;
+;;\(1\);;RULayout;RUBracketsnumber;
+;;\(2\);;RULayout;RUBracketsnumber;
+;;\(3\);;RULayout;RUBracketsnumber;
+;;\(4\);;RULayout;RUBracketsnumber;
+;;\(5\);;RULayout;RUBracketsnumber;
+;;\(6\);;RULayout;RUBracketsnumber;
+;;\(7\);;RULayout;RUBracketsnumber;
+;;\(8\);;RULayout;RUBracketsnumber;
+;;\(9\);;RULayout;RUBracketsnumber;
+;;\((1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;RULayout;RUBracketsnumber;
+;;\(1(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;RUCon;RUBracketsnumber;RUTime;RUYearNum;
+;;\(20(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;RUCon;RUBracketsnumber;RUTime;RUYearNum;
+
 ;;:;;Punctuation;
 ;;\(;;RUBracket1;Punctuation;
 ;;\);;RUBracket2;Punctuation;
@@ -422,7 +452,7 @@
 ;;древнее;;RUAdjNomN;RUAdj;
 ;;заднее;;RUAdjNomN;RUAdj;
 ;;северо-западнее;;RUAdjNomN;RUAdj;
-;;последнее;;RUAdjNomN;RUAdj;
+;;последнее;;RUAdjNomN;RUAdj;RUBeginTime;RUPartTime;
 ;;переднее;;RUAdjNomN;RUAdj;
 ;;среднее;;RUAdjNomN;RUAdj;
 ;;новогоднее;;RUAdjNomN;RUAdj;
@@ -439,7 +469,7 @@
 ;;ненадлежащее;;RUAdjNomN;RUAdj;
 ;;пентозансодержащее;;RUAdjNomN;RUAdj;
 ;;общее;;RUAdjNomN;RUAdj;
-;;грядущее;;RUAdjNomN;RUAdj;
+;;грядущее;;RUAdjNomN;RUAdj;RUBeginTime;
 ;;потрясающее;;RUAdjNomN;RUAdj;
 ;;погодообразующее;;RUAdjNomN;RUAdj;
 ;;структурообразующее;;RUAdjNomN;RUAdj;
@@ -474,23 +504,23 @@
 ;;неослепляющие;;RUAdjNomAccPl;RUAdj;
 ;;настоящие;;RUAdjNomAccPl;RUAdj;
 ;;господне;;RUAdjNomN;RUAdj;
-;;первое;;RUAdjNomN;RUAdj;RURanking;
+;;первое;;RUAdjNomN;RUAdj;RUOrdNum;
 ;;ископаемое;;RUAdjNomN;RUAdj;
 ;;заведомое;;RUAdjNomN;RUAdj;
-;;седьмое;;RUAdjNomN;RUAdj;RURanking;
-;;восьмое;;RUAdjNomN;RUAdj;RURanking;
+;;седьмое;;RUAdjNomN;RUAdj;RUOrdNum;
+;;восьмое;;RUAdjNomN;RUAdj;RUOrdNum;
 ;;специализированное;;RUAdjNomN;RUAdj;
 ;;вышесказанное;;RUAdjNomN;RUAdj;
 ;;высоконравственное;;RUAdjNomN;RUAdj;
 ;;временное;;RUAdjNomN;RUAdj;
 ;;военное;;RUAdjNomN;RUAdj;
-;;второе;;RUAdjNomN;RUAdj;RURanking;
+;;второе;;RUAdjNomN;RUAdj;RUOrdNum;
 ;;сердитое;;RUAdjNomN;RUAdj;
-;;четвертое;;RUAdjNomN;RUAdj;RURanking;
-;;шестое;;RUAdjNomN;RUAdj;RURanking;
-;;девятое;;RUAdjNomN;RUAdj;RURanking;
-;;пятое;;RUAdjNomN;RUAdj;RURanking;
-;;десятое;;RUAdjNomN;RUAdj;RURanking;
+;;четвертое;;RUAdjNomN;RUAdj;RUOrdNum;
+;;шестое;;RUAdjNomN;RUAdj;RUOrdNum;
+;;девятое;;RUAdjNomN;RUAdj;RUOrdNum;
+;;пятое;;RUAdjNomN;RUAdj;RUOrdNum;
+;;десятое;;RUAdjNomN;RUAdj;RUOrdNum;
 ;;неосознаваемые;;RUAdjNomAccPl;RUAdj;
 ;;недосягаемые;;RUAdjNomAccPl;RUAdj;
 ;;неотчуждаемые;;RUAdjNomAccPl;RUAdj;
@@ -636,7 +666,7 @@
 ;;святые;;RUAdjNomAccPl;RUAdj;
 ;;общепринятые;;RUAdjNomAccPl;RUAdj;
 ;;стародубье;;RUAdjNomN;RUAdj;
-;;третье;;RUAdj;RURanking;RUAdjNomN;
+;;третье;;RUAdj;RUOrdNum;RUAdjNomN;
 ;;непохож;;RUAdj;
 ;;дороги;;RUAdj;
 ;;схожи;;RUAdj;
@@ -753,10 +783,10 @@
 ;;православнѣи;;RUAdj;
 ;;тяжелей;;RUAdjGDPIF;RUAdj;
 ;;задней;;RUAdjGDPIF;RUAdj;
-;;последней;;RUAdjGDPIF;RUAdj;
+;;последней;;RUAdjGDPIF;RUAdj;RUBeginTime;RUPartTime;
 ;;передней;;RUAdjGDPIF;RUAdj;
 ;;средней;;RUAdjGDPIF;RUAdj;
-;;поздней;;RUAdjGDPIF;RUAdj;
+;;поздней;;RUAdjGDPIF;RUAdj;RUBeginTime;
 ;;предновогодней;;RUAdjGDPIF;RUAdj;
 ;;юго-восточней;;RUAdjGDPIF;RUAdj;
 ;;дальней;;RUAdjGDPIF;RUAdj;
@@ -1196,7 +1226,7 @@
 ;;ненадлежащим;;RUAdjInstrMN/DatPl;RUAdj;
 ;;противоречащим;;RUAdjInstrMN/DatPl;RUAdj;
 ;;несведущим;;RUAdjInstrMN/DatPl;RUAdj;
-;;грядущим;;RUAdjInstrMN/DatPl;RUAdj;
+;;грядущим;;RUAdjInstrMN/DatPl;RUAdj;RUBeginTime;
 ;;малоимущим;;RUAdjInstrMN/DatPl;RUAdj;
 ;;сущим;;RUAdjInstrMN/DatPl;RUAdj;
 ;;молочно-цветущим;;RUAdjInstrMN/DatPl;RUAdj;
@@ -1309,7 +1339,7 @@
 ;;неведомом;;RUAdjPreposMN;RUAdj;
 ;;песчаном;;RUAdjPreposMN;RUAdj;
 ;;едином;;RUAdjPreposMN;RUAdj;RUOdin;
-;;зимнем;;RUAdjPreposMN;RUAdj;
+;;зимнем;;RUAdjPreposMN;RUAdj;RUBeginTime;RUTime;
 ;;необоснованном;;RUAdjPreposMN;RUAdj;
 ;;обоснованном;;RUAdjPreposMN;RUAdj;
 ;;поляризованном;;RUAdjPreposMN;RUAdj;
@@ -1355,7 +1385,6 @@
 ;;незащищенном;;RUAdjPreposMN;RUAdj;
 ;;деревянном;;RUAdjPreposMN;RUAdj;
 ;;постоянном;;RUAdjPreposMN;RUAdj;
-
 ;;масляном;;RUAdjPreposMN;RUAdj;
 ;;серебряном;;RUAdjPreposMN;RUAdj;
 ;;саргсяном;;RUAdjPreposMN;RUAdj;
@@ -1507,7 +1536,7 @@
 ;;ненадлежащего;;RUAdjGenMN;RUAdj;
 ;;пентозансодержащего;;RUAdjGenMN;RUAdj;
 ;;эпоксидсодержащего;;RUAdjGenMN;RUAdj;
-;;грядущего;;RUAdjGenMN;RUAdj;
+;;грядущего;;RUAdjGenMN;RUAdj;RUBeginTime;
 ;;сущего;;RUAdjGenMN;RUAdj;
 ;;водоотталкивающего;;RUAdjGenMN;RUAdj;
 ;;исчерпывающего;;RUAdjGenMN;RUAdj;
@@ -1736,7 +1765,7 @@
 ;;крахмалсодержащих;;RUAdj;RUAdjGenPl;
 ;;спиртосодержащих;;RUAdj;RUAdjGenPl;
 ;;эпоксидсодержащих;;RUAdj;RUAdjGenPl;
-;;грядущих;;RUAdj;RUAdjGenPl;
+;;грядущих;;RUAdj;RUAdjGenPl;RUBeginTime;
 ;;быстротекущих;;RUAdj;RUAdjGenPl;
 ;;малоимущих;;RUAdj;RUAdjGenPl;
 ;;присущих;;RUAdj;RUAdjGenPl;
@@ -2123,7 +2152,6 @@
 ;;беременная;;RUAdjNomF;RUAdj;
 ;;желчекаменная;;RUAdjNomF;RUAdj;
 ;;каменная;;RUAdjNomF;RUAdj;
-;;каменная;;RUAdjNomF;RUAdj
 ;;краснознаменная;;RUAdjNomF;RUAdj;
 ;;недоуменная;;RUAdjNomF;RUAdj;
 ;;одновременная;;RUAdjNomF;RUAdj;
@@ -2285,7 +2313,7 @@
 ;;золотое;;RUAdjNomN;RUAdj;
 ;;святое;;RUAdjNomN;RUAdj;
 ;;общепринятое;;RUAdjNomN;RUAdj;
-;;подозреваемые;;RUPartAdjSubst;RUAdjNomAccPl;
+;;подозреваемые;;RUPartAdjCon;RUAdjNomAccPl;
 ;;одна за другой;;RUAdjNomF;RUAdj;
 ;;одной за другой;;RUAdjGDPIF;RUAdj;RUBCon;
 ;;одну за другой;;RUAdjAccF;RUAdj;
@@ -2294,72 +2322,72 @@
 ;;одно за другим;;RUAdjNomN;RUAdj;
 ;;одного за другим;;RUAdjGenMN;RUAdj;RUBCon;
 ;;одному за другим;;RUAdjDatMN;RUAdj;
-;;нынешнее;;RUAdjtemp;RUAdjNomN;
-;;истекшее;;RUAdjtemp;RUAdjNomN;
-;;будущее;;RUAdjtemp;RUAdjNomN;
-;;предыдущее;;RUAdjtemp;RUAdjNomN;
-;;нынешние;;RUAdjtemp;RUAdjNomAccPl;
-;;истекшие;;RUAdjtemp;RUAdjNomAccPl;
-;;будущие;;RUAdjtemp;RUAdjNomAccPl;
-;;предыдущие;;RUAdjtemp;RUAdjNomAccPl;
-;;позапрошлые;;RUAdjtemp;RUAdjNomAccPl;
-;;прошлые;;RUAdjtemp;RUAdjNomAccPl;
-;;нынешними;;RUAdjtemp;RUAdjInstrPl;
-;;истекшими;;RUAdjtemp;RUAdjInstrPl;
-;;будущими;;RUAdjtemp;RUAdjInstrPl;
-;;предыдущими;;RUAdjtemp;RUAdjInstrPl;
-;;позапрошлыми;;RUAdjtemp;RUAdjInstrPl;
-;;прошлыми;;RUAdjtemp;RUAdjInstrPl;
-;;нынешней;;RUAdjtemp;RUAdjGDPIF;
-;;истекшей;;RUAdjtemp;RUAdjGDPIF;
-;;будущей;;RUAdjtemp;RUAdjGDPIF;
-;;предыдущей;;RUAdjtemp;RUAdjGDPIF;
-;;нынешний;;RUAdjtemp;RUAdjNomM;
-;;истекший;;RUAdjtemp;RUAdjNomM;
-;;будущий;;RUAdjtemp;RUAdjNomM;
-;;предыдущий;;RUAdjtemp;RUAdjNomM;
-;;позапрошлой;;RUAdjtemp;RUAdjGDPIF;
-;;прошлой;;RUAdjtemp;RUAdjGDPIF;
-;;позапрошлый;;RUAdjtemp;RUAdjNomM;
-;;прошлый;;RUAdjtemp;RUAdjNomM;
-;;нынешнем;;RUAdjtemp;RUAdjPreposMN;
-;;истекшем;;RUAdjtemp;RUAdjPreposMN;
-;;будущем;;RUAdjtemp;RUAdjPreposMN;
-;;предыдущем;;RUAdjtemp;RUAdjPreposMN;
-;;нынешним;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;истекшим;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;будущим;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;предыдущим;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;позапрошлом;;RUAdjtemp;RUAdjPreposMN;
-;;прошлом;;RUAdjtemp;RUAdjPreposMN;
-;;позапрошлым;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;прошлым;;RUAdjtemp;RUAdjInstrMN/DatPl;
-;;будущаго;;RUAdjtemp;
-;;нынешнего;;RUAdjtemp;RUAdjGenMN;
-;;истекшего;;RUAdjtemp;RUAdjGenMN;
-;;будущего;;RUAdjtemp;RUAdjGenMN;
-;;предыдущего;;RUAdjtemp;RUAdjGenMN;
-;;позапрошлого;;RUAdjtemp;RUAdjGenMN;
-;;прошлого;;RUAdjtemp;RUAdjGenMN;
-;;нынешнему;;RUAdjtemp;RUAdjDatMN;
-;;истекшему;;RUAdjtemp;RUAdjDatMN;
-;;будущему;;RUAdjtemp;RUAdjDatMN;
-;;предыдущему;;RUAdjtemp;RUAdjDatMN;
-;;позапрошлому;;RUAdjtemp;RUAdjDatMN;
-;;прошлому;;RUAdjtemp;RUAdjDatMN;
-;;нынешних;;RUAdjtemp;RUAdjGenPl;
-;;истекших;;RUAdjtemp;RUAdjGenPl;
-;;будущих;;RUAdjtemp;RUAdjGenPl;
-;;предыдущих;;RUAdjtemp;RUAdjGenPl;
-;;позапрошлых;;RUAdjtemp;RUAdjGenPl;
-;;прошлых;;RUAdjtemp;RUAdjGenPl;
-;;позапрошлую;;RUAdjtemp;RUAdjAccF;
-;;прошлую;;RUAdjtemp;RUAdjAccF;
-;;истекшую;;RUAdjtemp;RUAdjAccF;
-;;будущую;;RUAdjtemp;RUAdjAccF;
-;;предыдущую;;RUAdjtemp;RUAdjAccF;
-;;нынешнюю;;RUAdjtemp;RUAdjAccF;
-;;будущая;;RUAdjtemp;RUAdjNomF;
+;;нынешнее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;истекшее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;будущее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;предыдущее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;нынешние;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;истекшие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;будущие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;предыдущие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;позапрошлые;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;прошлые;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;нынешними;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;истекшими;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;будущими;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;предыдущими;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;позапрошлыми;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;прошлыми;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;нынешней;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;истекшей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;будущей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;предыдущей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;нынешний;;RUAdj;RUAdjNomM;RUBeginTime;
+;;истекший;;RUAdj;RUAdjNomM;RUBeginTime;
+;;будущий;;RUAdj;RUAdjNomM;RUBeginTime;
+;;предыдущий;;RUAdj;RUAdjNomM;RUBeginTime;
+;;позапрошлой;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;прошлой;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;позапрошлый;;RUAdj;RUAdjNomM;RUBeginTime;
+;;прошлый;;RUAdj;RUAdjNomM;RUBeginTime;
+;;нынешнем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;истекшем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;будущем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;предыдущем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;нынешним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;истекшим;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;будущим;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;предыдущим;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;позапрошлом;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;прошлом;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;позапрошлым;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;прошлым;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;будущаго;;RUAdj;RUBeginTime;
+;;нынешнего;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;истекшего;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;будущего;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;предыдущего;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;позапрошлого;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;прошлого;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;нынешнему;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;истекшему;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;будущему;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;предыдущему;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;позапрошлому;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;прошлому;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;нынешних;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;истекших;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;будущих;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;предыдущих;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;позапрошлых;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;прошлых;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;позапрошлую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;прошлую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;истекшую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;будущую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;предыдущую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;нынешнюю;;RUAdjAccF;RUAdj;RUBeginTime;
+;;будущая;;RUAdjNomF;RUAdj;RUBeginTime;
 ;;снова;;RUAdv;
 ;;сызмальства;;RUAdv;
 ;;дотла;;RUAdv;
@@ -2752,7 +2780,7 @@
 ;;передно;;RUAdv;
 ;;поочередно;;RUAdv;
 ;;безвозмездно;;RUAdv;
-;;поздно;;RUAdv;
+;;поздно;;RUAdv;RUBeginTime;
 ;;видно;;RUAdvPred;
 ;;заодно;;RUAdv;
 ;;свободно;;RUAdv;
@@ -2902,7 +2930,7 @@
 ;;единовременно;;RUAdv;
 ;;заблаговременно;;RUAdv;
 ;;кратковременно;;RUAdv;
-;;одновременно;;RUAdvPR;RUTime;RUAdvTime;
+;;одновременно;;RUAdvPR;RUTime;
 ;;попеременно;;RUAdv;
 ;;своевременно;;RUAdv;
 ;;поименно;;RUAdv;
@@ -3402,7 +3430,7 @@
 ;;дважды;;RUAdv;
 ;;трижды;;RUAdv;
 ;;взаймы;;RUAdv;
-;;впредь;;RUTime;RUAdvPR;RUAdvTime;
+;;впредь;;RUTime;RUAdvPR;
 ;;впредь до;;RUPrep;
 ;;порознь;;RUAdv;
 ;;посолонь;;RUAdv;
@@ -3517,8 +3545,8 @@
 ;;сложнее всего;;RUAdvdegree;
 ;;труднее всего;;RUAdvdegree;
 ;;ненамного;;RUAdvdegree;
-;;немного;;RUIndefpronAdvdegree;
-;;много;;RUIndefpronAdvdegree;
+;;немного;;RUIndefpronAdvdegree;RUBeginTime;
+;;много;;RUIndefpronAdvdegree;RUBeginTime;
 ;;более того;;RUAdvdegree;
 ;;гораздо;;RUAdvdegree;
 ;;немножко;;RUAdvdegree;
@@ -3527,8 +3555,8 @@
 ;;настолько;;RUAdvdegree;
 ;;столько;;RUAdvdegree;
 ;;частенько;;RUAdvdegree;
-;;немало;;RUIndefpronAdvdegree;
-;;мало;;RUIndefpronAdvdegree;
+;;немало;;RUIndefpronAdvdegree;RUBeginTime;
+;;мало;;RUIndefpronAdvdegree;RUBeginTime;
 ;;в среднем около;;RUAdvdegree;
 ;;ровно;;RUAdvdegree;
 ;;худо-бедно;;RUAdvdegree;
@@ -3670,138 +3698,146 @@
 ;;самих себя;;RUAdvRefl;
 ;;справа;;RURAdv;
 
-;;не раз и не два;;RUAdvPR;
+;;не раз и не два;;RUAdvPR;RUTime;
 ;;слева;;RURAdv;
-;;сперва;;RUTime;RUAdvPR;RUAdvTime;
-;;всегда;;RUAdvPR;
-;;навсегда;;RUTime;RUAdvPR;RUAdvTime;
+;;сперва;;RUTime;RUAdvPR;
+;;всегда;;RUAdvPR;RUTime;
+;;навсегда;;RUTime;RUAdvPR;
 
-;;кое-когда;;RUAdvPR;
-;;иногда;;RUAdvPR;
-;;тогда;;RUTime;RUAdvPR;RUAdvTime;
+;;кое-когда;;RUAdvPR;RUTime;
+;;иногда;;RUAdvPR;RUTime;
+;;тогда;;RUTime;RUAdvPR;
 ;;тогда как;;RURelpron;
 ;;кое-куда;;RUAdvPR;
 ;;оттуда;;RUAdvPR;
 ;;туда;;RUAdvPR;
 ;;сюда;;RUAdvPR;
 ;;отсюда;;RUAdvPR;
-;;изредка;;RUAdvPR;
+;;изредка;;RUAdvPR;RUTime;
 ;;издалека;;RURAdv;
-;;сначала;;RUTime;RUAdvPR;RUAdvTime;
-;;позавчера;;RUTemp;RUTempBeginEnd;
-;;позавчера днем;;RUTemp;RUTempBeginEnd;
-;;позавчера вечером;;RUTemp;RUTempBeginEnd;
-;;позавчера ночью;;RUTemp;RUTempBeginEnd;
-;;позавчера утром;;RUTemp;RUTempBeginEnd;
-;;вчера;;RUTemp;RUTempBeginEnd;
-;;ранее вчера;;RUTemp;RUTempBeginEnd;
-;;позднее вчера;;RUTemp;RUTempBeginEnd;
-;;вчера днем;;RUTemp;RUTempBeginEnd;
-;;вчера вечером;;RUTemp;RUTempBeginEnd;
-;;вчера ночью;;RUTemp;RUTempBeginEnd;
-;;вчера утром;;RUTemp;RUTempBeginEnd;
-;;завтра;;RUTemp;RUTempBeginEnd;
-;;ранее завтра;;RUTemp;RUTempBeginEnd;
-;;позднее завтра;;RUTemp;RUTempBeginEnd;
-;;завтра днем;;RUTemp;RUTempBeginEnd;
-;;завтра вечером;;RUTemp;RUTempBeginEnd;
-;;завтра ночью;;RUTemp;RUTempBeginEnd;
-;;завтра утром;;RUTemp;RUTempBeginEnd;
-;;послезавтра;;RUTemp;RUTempBeginEnd;
-;;послезавтра днем;;RUTemp;RUTempBeginEnd;
-;;послезавтра вечером;;RUTemp;RUTempBeginEnd;
-;;послезавтра ночью;;RUTemp;RUTempBeginEnd;
-;;послезавтра утром;;RUTemp;RUTempBeginEnd;
-;;вдруг;;RUAdvPR;
+;;сначала;;RUTime;RUAdvPR;
+;;позавчера;;RUAdvTime;RUTime;RUSingleWord;
+
+
+
+
+;;вчера;;RUAdvTime;RUTime;RUSingleWord;
+
+
+
+
+
+
+;;завтра;;RUAdvTime;RUTime;RUSingleWord;
+
+
+
+
+
+
+;;послезавтра;;RUAdvTime;RUTime;RUSingleWord;
+
+
+
+
+;;вдруг;;RUAdvPR;RUTime;
 ;;вперед;;RUAdv;
 ;;кое-где;;RUAdvPR;
-;;прежде;;RUTime;RUAdvPR;RUAdvTime;
-;;прежде чем;;RURAdv;-;RURelpron;RUNegRelpron;
-;;прежде , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;прежде;;RUTime;RUAdvPR;
+/**** Rewritten by DELVE, ;;прежде чем;;RURAdv;-;RURelpron;RUNegRelpron;
+;;прежде чем;;RURAdv;-;RURelpron;RUNegRelpron;Lit_чем
+/**** Rewritten by DELVE, ;;прежде , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;прежде , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;Lit_чем
 ;;везде;;RUAdvPR;
-;;заранее;;RUTime;RUAdvPR;RUAdvTime;
-;;ранее;;RURanee;
-;;ранее чем;;RURAdv;-;RURelpron;RUNegRelpron;
-;;ранее , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;заранее;;RUTime;RUAdvPR;
+;;ранее;;RURanee;RUEndTime;
+/**** Rewritten by DELVE, ;;ранее чем;;RURAdv;-;RURelpron;RUNegRelpron;
+;;ранее чем;;RURAdv;-;RURelpron;RUNegRelpron;Lit_чем
+/**** Rewritten by DELVE, ;;ранее , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;ранее , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;Lit_чем
 ;;тут же;;RUAdvPR;
-;;позже;;RUTime;RUAdvPR;RUAdvTime;
-;;позже чем;;RURAdv;-;RURelpron;RUNegRelpron;
-;;позже , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
-;;вначале;;RUTime;RUAdvPR;RUAdvTime;
-;;ныне;;RUTime;RUAdvPR;RUAdvTime;
-;;поныне;;RUTime;RUAdvPR;RUAdvTime;
-;;отныне;;RUTime;RUAdvPR;RUAdvTime;
-;;вскоре;;RUTime;RUAdvPR;RUAdvTime;
-;;нынче;;RUTime;RUAdvPR;RUAdvTime;
-;;раньше;;RUTime;RUAdvPR;RUAdvTime;
-;;раньше чем;;RURAdv;-;RURelpron;RUNegRelpron;
-;;раньше , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
-;;все чаще;;RUAdvPR;
-;;впервые;;RUAdv;
-;;не раз;;RUAdvPR;
-;;уже не раз;;RUAdvPR;
+;;позже;;RUTime;RUAdvPR;RUEndTime;
+/**** Rewritten by DELVE, ;;позже чем;;RURAdv;-;RURelpron;RUNegRelpron;
+;;позже чем;;RURAdv;-;RURelpron;RUNegRelpron;Lit_чем
+/**** Rewritten by DELVE, ;;позже , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;позже , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;Lit_чем
+;;вначале;;RUTime;RUAdvPR;
+;;ныне;;RUTime;RUAdvPR;
+;;поныне;;RUTime;RUAdvPR;
+;;отныне;;RUTime;RUAdvPR;
+;;вскоре;;RUTime;RUAdvPR;
+;;нынче;;RUTime;RUAdvPR;
+;;раньше;;RUTime;RUAdvPR;
+/**** Rewritten by DELVE, ;;раньше чем;;RURAdv;-;RURelpron;RUNegRelpron;
+;;раньше чем;;RURAdv;-;RURelpron;RUNegRelpron;Lit_чем
+/**** Rewritten by DELVE, ;;раньше , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;раньше , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;Lit_чем
+;;все чаще;;RUAdvPR;RUTime;
+;;впервые;;RUAdv;RUTime;
+;;не раз;;RUAdvPR;RUTime;
+;;уже не раз;;RUAdvPR;RUTime;
 ;;вниз;;RURAdv;
 ;;спереди;;RURAdv;
 ;;снаружи;;RURAdv;
-;;временами;;RUAdvPR;
+;;временами;;RUAdvPR;RUTime;
 ;;вбок;;RURAdv;
 ;;там;;RUAdvPR;
-;;со временем;;RUTime;RUAdvPR;RUAdvTime;
+;;со временем;;RUTime;RUAdvPR;
 ;;со временем года;;RUPrep;-;RUCon;-;RUCon;
-;;вечером;;RUTemp;RUTempBeginEnd;
-;;поздно вечером;;RUTemp;RUTempBeginEnd;
-;;поздним вечером;;RUTemp;RUTempBeginEnd;
-;;рано утром;;RUTemp;RUTempBeginEnd;
-;;утром;;RUTemp;RUTempBeginEnd;
-;;когда-либо;;RUTime;RUAdvPR;RUAdvTime;
+;;вечером;;RUAdvTime;RUTime;
+
+
+
+;;утром;;RUAdvTime;RUTime;
+;;когда-либо;;RUTime;RUAdvPR;
 ;;направо;;RURAdv;
 ;;вправо;;RURAdv;
 ;;налево;;RURAdv;
 ;;влево;;RURAdv;
-;;чаще всего;;RUAdvPR;
-;;задолго;;RUTime;RUAdvPR;RUAdvTime;
+;;чаще всего;;RUAdvPR;RUTime;
+;;задолго;;RUTime;RUAdvPR;
 ;;надолго;;RUAdv;
 ;;ненадолго;;RUAdv;
 ;;долго;;RUAdv;
 ;;недолго;;RUAdv;
-;;нередко;;RUAdvPR;
+;;нередко;;RUAdvPR;RUTime;
 ;;редко;;RUNe;RUNegation;RUNegBegin;
 ;;далеко;;RUAdv;
-;;то и дело;;RUAdvPR;
+;;то и дело;;RUAdvPR;RUTime;
 
-;;давно;;RUTime;RUAdvPR;RUAdvTime;
-;;недавно;;RUTime;RUAdvPR;RUAdvTime;
-;;ежедневно;;RUAdvPR;
-;;повседневно;;RUAdvPR;
-;;непрерывно;;RUAdvPR;
-;;ежегодно;;RUAdvPR;
-;;беспрестанно;;RUAdvPR;
+;;давно;;RUTime;RUAdvPR;
+;;недавно;;RUTime;RUAdvPR;
+;;ежедневно;;RUAdvTime;RUTime;RUSingleWord;
+;;повседневно;;RUAdvTime;RUTime;RUSingleWord;
+;;непрерывно;;RUAdvPR;RUTime;
+;;ежегодно;;RUAdvTime;RUTime;RUSingleWord;
+;;беспрестанно;;RUAdvPR;RUTime;
 ;;обыкновенно;;RUAdv;
-;;регулярно;;RUAdvPR;
-;;повсеместно;;RUAdvPR;
+;;регулярно;;RUAdvPR;RUTime;
+;;повсеместно;;RUAdvPR;RUTime;
 ;;обычно;;RUAdv;
-;;ежемесячно;;RUAdvPR;
-;;изначально;;RUTime;RUAdvPR;RUAdvTime;
-;;скоро;;RUTime;RUAdvPR;RUAdvTime;
-;;когда -то;;RUTime;RUAdvPR;RUAdvTime;
+;;ежемесячно;;RUAdvTime;RUTime;RUSingleWord;
+;;изначально;;RUTime;RUAdvPR;
+;;скоро;;RUTime;RUAdvPR;
+;;когда -то;;RUTime;RUAdvPR;
 ;;куда -то;;RUAdvPR;
 ;;откуда -то;;RUAdvPR;
 ;;где -то;;RUAdvPR;
-;;нечасто;;RUAdvPR;
-;;часто;;RUAdvPR;
-;;до тех пор;;RUTime;RUAdvPR;RUAdvTime;
-;;с тех пор;;RUTime;RUAdvPR;RUAdvTime;
-;;до сих пор;;RUTime;RUAdvPR;RUAdvTime;
-;;подчас;;RUAdvPR;
-;;сейчас;;RUTime;RUAdvPR;RUAdvTime;
-;;тотчас;;RUTime;RUAdvPR;RUAdvTime;
+;;нечасто;;RUAdvPR;RUTime;
+;;часто;;RUAdvPR;RUTime;
+;;до тех пор;;RUTime;RUAdvPR;
+;;с тех пор;;RUTime;RUAdvPR;
+;;до сих пор;;RUTime;RUAdvPR;
+;;подчас;;RUAdvPR;RUTime;
+;;сейчас;;RUTime;RUAdvPR;
+;;тотчас;;RUTime;RUAdvPR;
 ;;тут;;RUAdvPR;
 ;;повсюду;;RUAdvPR;
-;;сразу;;RUTime;RUAdvPR;RUAdvTime;
+;;сразу;;RUTime;RUAdvPR;
 ;;книзу;;RURAdv;
 ;;неподалеку;;RURAdv;
 ;;сбоку;;RURAdv;
-;;поначалу;;RUTime;RUAdvPR;RUAdvTime;
+;;поначалу;;RUTime;RUAdvPR;
 ;;в сторону;;RUPrep;
 ;;наверху;;RURAdv;
 ;;вверху;;RURAdv;
@@ -3809,16 +3845,16 @@
 ;;наверх;;RURAdv;
 ;;вверх;;RURAdv;
 ;;где-нибудь;;RUAdvPR;
-;;когда-нибудь;;RUTime;RUAdvPR;RUAdvTime;
+;;когда-нибудь;;RUTime;RUAdvPR;
 ;;куда-нибудь;;RUAdvPR;
-;;теперь;;RUTime;RUAdvPR;RUAdvTime;
+;;теперь;;RUTime;RUAdvPR;
 ;;здесь;;RUAdvPR;
 ;;ввысь;;RURAdv;
-;;ночью;;RUTemp;RUTempBeginEnd;
-;;все время;;RUTime;RUAdvPR;RUAdvTime;
-;;сегодня;;RUTemp;RUTempBeginEnd;
-;;ранее сегодня;;RUTemp;RUTempBeginEnd;
-;;позднее сегодня;;RUTemp;RUTempBeginEnd;
+;;ночью;;RUAdvTime;RUTime;
+;;все время;;RUTime;RUAdvPR;
+;;сегодня;;RUAdvTime;RUTime;RUSingleWord;
+
+
 ;;и;;RUAndOr;RUAndOrBut;
 ;;или;;RUAndOr;RUAndOrBut;
 ;;стала;;RUAux;RUVerb;
@@ -3871,70 +3907,70 @@
 
 ;;ладно;;RUCAdv;
 ;;все нормально;;RUCAdv;
-;;в.;;RUCent;
-;;века;;RUCent;
-;;столетиев;;RUCent;
-;;веков;;RUCent;
-;;столетие;;RUCent;
-;;веке;;RUCent;
-;;веками;;RUCent;
-;;столетиями;;RUCent;
-;;веках;;RUCent;
-;;столетиях;;RUCent;
-;;нашей эры;;RUCent;
-;;столетия;;RUCent;
-;;$;;RUCfr;
+;;в.;;RUCentury;RUCon;RUAcro;
+;;века;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетиев;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;веков;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетие;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;веке;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;веками;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетиями;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;веках;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетиях;;RUTimeConcept;RUCon;RUCentury;RUTime;
 
-;;первыми;;RUAdjInstrPl;RUAdj;RURanking;
-;;третьей;;RUAdjGDPIF;RUAdj;RURanking;
-;;первой;;RUAdjGDPIF;RUAdj;RURanking;
+;;столетия;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;$;;RUNum;RUCon;
+
+;;первыми;;RUAdjInstrPl;RUAdj;RUOrdNum;
+;;третьей;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;первой;;RUAdjGDPIF;RUAdj;RUOrdNum;
 
 
 
-;;четвертой;;RUAdjGDPIF;RUAdj;RURanking;
+;;четвертой;;RUAdjGDPIF;RUAdj;RUOrdNum;
 
-;;девятой;;RUAdjGDPIF;RUAdj;RURanking;
-;;пятой;;RUAdjGDPIF;RUAdj;RURanking;
-;;десятой;;RUAdjGDPIF;RUAdj;RURanking;
+;;девятой;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;пятой;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;десятой;;RUAdjGDPIF;RUAdj;RUOrdNum;
 
-;;сорок;;RUCfr;RURanking;
-;;девяносто;;RUCfr;RURanking;
-;;восемьдесят;;RUCfr;RURanking;
-;;пятьдесят;;RUCfr;RURanking;
-;;семьдесят;;RUCfr;RURanking;
-;;шестьдесят;;RUCfr;RURanking;
-;;первых;;RUAdjGenPl;RUAdj;RURanking
-;;двадцать;;RUCfr;RURanking;
-;;тридцать;;RUCfr;RURanking;
-;;первою;;RUAdj;RURanking;
+;;сорок;;RUNum;RUCon;
+;;девяносто;;RUNum;RUCon;
+;;восемьдесят;;RUNum;RUCon;
+;;пятьдесят;;RUNum;RUCon;
+;;семьдесят;;RUNum;RUCon;
+;;шестьдесят;;RUNum;RUCon;
+;;первых;;RUAdjGenPl;RUAdj;RUOrdNum;
+;;двадцать;;RUNum;RUCon;
+;;тридцать;;RUNum;RUCon;
+;;первою;;RUAdj;RUOrdNum;
 
-;;первая;;RUAdjNomF;RUAdj;RURanking;
+;;первая;;RUAdjNomF;RUAdj;RUOrdNum;
 ;;оба;;RUIndefpronPRCon;RUIndefpron;
 ;;всеа;;RUIndefpronPRCon;RUIndefpron;
 ;;обе;;RUIndefpronPRCon;RUIndefpron;
-;;каждое;;RUAdjNomN;RUAdj;
-;;каждые;;RUAdjNomAccPl;RUAdj;
+;;каждое;;RUAdjNomN;RUAdj;RUBeginTime;
+;;каждые;;RUAdjNomAccPl;RUAdj;RUBeginTime;
 ;;всеми;;RUIndefpronPRCon;RUIndefpron;
 ;;обеими;;RUIndefpronPRCon;RUIndefpron;
 ;;обоими;;RUIndefpronPRCon;RUIndefpron;
 ;;всей;;RUIndefpronPRCon;RUIndefpron;
-;;каждой;;RUAdjGDPIF;RUAdj;
+;;каждой;;RUAdjGDPIF;RUAdj;RUBeginTime;
 ;;всем;;RUIndefpronPRCon;RUIndefpron;
 ;;обеим;;RUIndefpronPRCon;RUIndefpron;
 ;;обоим;;RUIndefpronPRCon;RUIndefpron;
-;;каждым;;RUAdjInstrMN/DatPl;RUAdj;
+;;каждым;;RUAdjInstrMN/DatPl;RUAdj;RUBeginTime;
 ;;обоего;;RUIndefpronPRCon;RUIndefpron;
 
 ;;всему;;RUIndefpronPRCon;RUIndefpron;
-;;каждому;;RUAdjDatMN;RUAdj;
+;;каждому;;RUAdjDatMN;RUAdj;RUBeginTime;
 ;;обеих;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
 ;;обоих;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
-;;каждых;;RUAdj;RUAdjGenPl;
+;;каждых;;RUAdj;RUAdjGenPl;RUBeginTime;
 ;;весь;;RUIndefpronPRCon;RUIndefpron;
 ;;всею;;RUIndefpronPRCon;RUIndefpron;
 ;;всю;;RUIndefpronPRCon;RUIndefpron;
-;;каждую;;RUAdjAccF;RUAdj;
-;;каждая;;RUAdjNomF;RUAdj;
+;;каждую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;каждая;;RUAdjNomF;RUAdj;RUBeginTime;
 ;;всея;;RUIndefpronPRCon;RUIndefpron;
 ;;вся;;RUIndefpronPRCon;RUIndefpron;
 ;;послабее;;RUComp;
@@ -3959,7 +3995,7 @@
 ;;прохладнее;;RUComp;
 ;;беднее;;RUComp;
 ;;вреднее;;RUComp;
-;;позднее;;RUComp;
+;;позднее;;RUComp;RUBeginTime;
 ;;виднее;;RUComp;
 ;;свободнее;;RUComp;
 ;;выгоднее;;RUComp;
@@ -4095,14 +4131,14 @@
 ;;временах года;;RUCon;
 ;;время года;;RUCon;
 ;;самого начала;;RUCon;
-;;того месяца;;RUCon;
-;;этого месяца;;RUCon;
+
+
 ;;без вести пропавшие;;RUCon;
-;;той неделе;;RUCon;
-;;этой неделе;;RUCon;
-;;все вместе;;RUCon;
-;;том месяце;;RUCon;
-;;этом месяце;;RUCon;
+
+
+;;все вместе;;RUIndefpronPRCon;RUIndefpron;
+
+
 ;;без вести пропавшими;;RUCon;
 ;;без вести пропавшей;;RUCon;
 ;;полномочий;;RUCon;
@@ -4117,17 +4153,17 @@
 ;;много всего;;RUCon;
 ;;без вести пропавшего;;RUCon;
 ;;врожденного;;RUCon;
-;;самое начало;;RUCon;
-;;том году;;RUCon;
+
+
 ;;без вести пропавшему;;RUCon;
 ;;рыльце в пуху;;RUCon;
 ;;без вести пропавших;;RUCon;
-;;первый же день;;RUCon;
+
 ;;без вести пропавшую;;RUCon;
 ;;без вести пропавшая;;RUCon;
 ;;день рождения;;RUCon;
-;;того дня;;RUCon;
-;;этого дня;;RUCon;
+
+
 ;;т. е.;;RUConj;
 ;;т.е.;;RUConj;
 ;;т. к.;;RUConj;
@@ -4190,7 +4226,7 @@
 ;;в то время как;;RUConj;
 ;;итак;;RUConj;
 ;;притом;;RUConj;
-;;потом;;RUAdvPR;RUTime;RUAdvTime;
+;;потом;;RUAdvPR;RUTime;
 ;;ибо;;RUConj;
 ;;либо;;RUConj;RUAndOrBut;RUAndOr;
 ;;в числе всего прочего;;RUConj;
@@ -4253,62 +4289,63 @@
 ;;хотя;;RUConj;
 ;;а;;RUConjNR;RUAndOrBut;
 ;;но;;RUConjNR;RUAndOrBut;
-;;начала;;RUConVerb;
-;;начало;;RUConVerb;
+;;начала;;RUConVerb;RUBeginTime;RUConGen;RUConGenMN;
+;;начало;;RUConVerb;RUBeginTime;
 ;;дам;;RUDam;
-;;четверга;;RUDay;
-;;вторника;;RUDay;
-;;понедельника;;RUDay;
-;;четверг;;RUDay;
-;;понедельнике;;RUDay;
-;;субботе;;RUDay;
-;;пятнице;;RUDay;
-;;выходные;;RUDay;
-;;воскресенье;;RUDay;
-;;выходные дни;;RUDay;
-;;выходных дней;;RUDay;
-;;пятницей;;RUDay;
-;;субботой;;RUDay;
-;;вторник;;RUDay;
-;;понедельник;;RUDay;
-;;среда;;RUSreda;
-;;среду;;RUSreda;
-;;среды;;RUSreda;
-;;среде;;RUSreda;
-;;средой;;RUSreda;
-;;сред;;RUSreda;
-;;средам;;RUSreda;
-;;средами;;RUSreda;
-;;средах;;RUSreda;
-;;воскресеньем;;RUDay;
-;;четвергом;;RUDay;
-;;понедельником;;RUDay;
-;;воскресенье вечером;;RUDay;
-;;вторник вечером;;RUDay;
-;;понедельник вечером;;RUDay;
-;;пятницу вечером;;RUDay;
-;;сегодня вечером;;RUTemp;RUTempBeginEnd;
-;;субботу вечером;;RUDay;
-;;четверг вечером;;RUDay;
-;;воскресенье утром;;RUDay;
-;;вторник утром;;RUDay;
-;;понедельник утром;;RUDay;
-;;пятницу утром;;RUDay;
-;;сегодня утром;;RUTemp;RUTempBeginEnd;
-;;субботу утром;;RUDay;
-;;четверг утром;;RUDay;
-;;четвергу;;RUDay;
-;;вторнику;;RUDay;
-;;понедельнику;;RUDay;
-;;субботу;;RUDay;
-;;пятницу;;RUDay;
-;;выходных;;RUDay;
-;;субботы;;RUDay;
-;;пятницы;;RUDay;
-;;воскресенью;;RUDay;
-;;сегодня ночью;;RUTemp;RUTempBeginEnd;
-;;сегодня днем;;RUTemp;RUTempBeginEnd;
-;;воскресенья;;RUDay;
+;;четверга;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторника;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельника;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четверг;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельнике;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботе;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятнице;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;выходные;;RUCon;RUTimeConcept;RUTime;
+;;воскресенье;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;выходные дни;;RUCon;RUTimeConcept;RUTime;
+;;выходных дней;;RUCon;RUTimeConcept;RUTime;
+;;пятницей;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботой;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторник;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельник;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;среда;;RUSreda;RUCon;
+;;среду;;RUSreda;RUCon;
+
+
+
+
+;;к среде;;RUPrep;-;RUDay;RUCon;RUTimeConcept;RUTime;
+;;средам;;RUSreda;RUCon;
+
+
+;;воскресеньем;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четвергом;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельником;;RUDay;RUCon;RUTimeConcept;RUTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;четвергу;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторнику;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельнику;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботу;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницу;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;выходных;;RUCon;RUTimeConcept;RUTime;RUAdjGenPl;
+;;субботы;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницы;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;воскресенью;;RUDay;RUCon;RUTimeConcept;RUTime;
+
+
+;;воскресенья;;RUDay;RUCon;RUTimeConcept;RUTime;
 ;;эта;;RUDempron;
 ;;сие;;RUDempron;
 ;;сии;;RUDempron;
@@ -4316,12 +4353,12 @@
 ;;эти;;RUDempron;
 ;;сей;;RUDempron;
 ;;оной;;RUDempron;
-;;этой;;RUDempron;
+;;этой;;RUDempron;RUPlusGen;
 ;;оный;;RUDempron;
 ;;сем;;RUDempron;
 ;;этим;;RUDempron;
 ;;этом;;RUDempron;
-;;сего;;RUDempron;
+;;сего;;RUDempron;RUPlusGen;
 ;;оного;;RUDempron;RUPlusGen;
 ;;этого;;RUDempron;RUPlusGen;
 ;;этот;;RUDempron;
@@ -4337,72 +4374,82 @@
 ;;друге;;RUDrug;
 ;;другом;;RUDrug;
 ;;другу;;RUDrug;
-;;с.г.;;RUECon;RUCon;
-;;конца года;;RUECon;RUCon;
-;;начала года;;RUECon;RUCon;
-;;конце года;;RUECon;RUCon;
-;;начале года;;RUECon;RUCon;
-;;того же года;;RUECon;RUCon;
-;;этого же года;;RUECon;RUCon;
-;;сего года;;RUECon;RUCon;
-;;того года;;RUECon;RUCon;
-;;этого года;;RUECon;RUCon;
-;;средние века;;RUECon;RUCon;
-;;те времена;;RUBeginendconcept;RUCon;
-;;несколько месяцев;;RUBeginendconcept;RUCon;
-;;из года в год;;RUBeginendconcept;RUCon;
-;;весь год;;RUBeginendconcept;RUCon;
-;;годом ранее;;RUBeginendconcept;RUCon;
-;;днем ранее;;RUBeginendconcept;RUCon;
-;;месяцем ранее;;RUBeginendconcept;RUCon;
-;;неделей ранее;;RUECon;RUCon;
-;;годом позже;;RUBeginendconcept;RUCon;
-;;днем позже;;RUBeginendconcept;RUCon;
-;;месяцем позже;;RUBeginendconcept;RUCon;
-;;неделей позже;;RUECon;RUCon;
-;;сей раз;;RUBeginendconcept;RUCon;
-;;несколько раз;;RUBeginendconcept;RUCon;
-;;тот раз;;RUBeginendconcept;RUCon;
-;;этот раз;;RUBeginendconcept;RUCon;
-;;несколько времени;;RUBeginendconcept;RUCon;
-;;несколько дней;;RUBeginendconcept;RUCon;
-;;день за днем;;RUBeginendconcept;RUCon;
-;;год за годом;;RUBeginendconcept;RUCon;
-;;весь вечер;;RUBeginendconcept;RUCon;
-;;несколько лет;;RUBeginendconcept;RUCon;
-;;тех лет;;RUECon;RUCon;
-;;данный момент;;RUBeginendconcept;RUCon;
-;;настоящий момент;;RUBeginendconcept;RUCon;
-;;нынешний момент;;RUBeginendconcept;RUCon;
-;;сегодняшний момент;;RUBeginendconcept;RUCon;
-;;текущий момент;;RUBeginendconcept;RUCon;
-;;тому же году;;RUBeginendconcept;RUCon;
-;;этом же году;;RUBeginendconcept;RUCon;
-;;этом году;;RUBeginendconcept;RUCon;
-;;тому году;;RUBeginendconcept;RUCon;
-;;ту пору;;RUBeginendconcept;RUCon;
-;;весь месяц;;RUBeginendconcept;RUCon;
-;;долгие годы;;RUBeginendconcept;RUCon;
-;;последние годы;;RUBeginendconcept;RUCon;
-;;той поры;;RUECon;RUCon;
-;;тот же день;;RUBeginendconcept;RUCon;
-;;этот же день;;RUBeginendconcept;RUCon;
-;;вчерашний день;;RUBeginendconcept;RUCon;
-;;сегодняшний день;;RUBeginendconcept;RUCon;
-;;настоящий день;;RUBeginendconcept;RUCon;
-;;сей день;;RUBeginendconcept;RUCon;
-;;целый день;;RUBeginendconcept;RUCon;
-;;тот день;;RUBeginendconcept;RUCon;
-;;этот день;;RUBeginendconcept;RUCon;
-;;весь день;;RUBeginendconcept;RUCon;
-;;какое -то время;;RUBeginendconcept;RUCon;
-;;настоящее время;;RUBeginendconcept;RUCon;
-;;некоторое время;;RUBeginendconcept;RUCon;
-;;последнее время;;RUBeginendconcept;RUCon;
-;;свое время;;RUBeginendconcept;RUCon;
-;;то время;;RUBeginendconcept;RUCon;
-;;это время;;RUBeginendconcept;RUCon;
-;;все это время;;RUBeginendconcept;RUCon;
+;;с.г.;;RUCon;RUEndTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;;сей раз;;RUAdvPR;RUTime;
+
+;;тот раз;;RUAdvPR;RUTime;
+;;этот раз;;RUAdvPR;RUTime;
+;;несколько времени;;RUAdvPR;RUTime;
+
+;;день за днем;;RUAdvTime;RUTime;
+;;год за годом;;RUAdvTime;RUTime;
+
+
+
+
+
+
+
+
+
+
+
+
+;;ту пору;;RUAdvPR;RUTime;
+
+
+
+;;той поры;;RUAdvPR;RUTime;
+
+
+
+
+
+
+
+
+
+
+;;какое -то время;;RUAdvPR;RUTime;
+;;настоящее время;;RUAdvTime;RUTime;
+;;некоторое время;;RUAdvPR;RUTime;
+;;последнее время;;RUAdvPR;RUTime;
+
+/**** Rewritten by DELVE, ;;в то время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;в то время;;RUPrep;Lit_в;-;RUAdvPR;RUTime;Join
+/**** Rewritten by DELVE, ;;в это время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;в это время;;RUPrep;Lit_в;-;RUAdvPR;RUTime;Join
+/**** Rewritten by DELVE, ;;за то время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;за то время;;RUPrep;Lit_за;-;RUAdvPR;RUTime;Join
+/**** Rewritten by DELVE, ;;за это время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;за это время;;RUPrep;Lit_за;-;RUAdvPR;RUTime;Join
+/**** Rewritten by DELVE, ;;на то время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;на то время;;RUPrep;Lit_на;-;RUAdvPR;RUTime;Join
+/**** Rewritten by DELVE, ;;на это время;;RUPrep;-;RUAdvPR;RUTime;Join;
+;;на это время;;RUPrep;Lit_на;-;RUAdvPR;RUTime;Join
+;;все это время;;RUAdvPR;RUTime;
 ;;едва;;RUEdva;
 ;;это;;RUEto;
 ;;--;;RUHyphen;RUPunctuation;
@@ -4877,9 +4924,9 @@
 ;;тернисты;;RUKAdj;
 ;;просты;;RUKAdj;
 ;;перекрыты;;RUKAdj;
-;;каждый;;RUKazjdyj;RUAdjNomM;RUAdj;
-;;каждом;;RUKazjdyj;RUAdjPreposMN;RUAdj;
-;;каждого;;RUKazjdyj;RUAdjGenMN;RUAdj;
+;;каждый;;RUAdjNomM;RUAdj;RUBeginTime;
+;;каждом;;RUAdjPreposMN;RUAdj;RUBeginTime;
+;;каждого;;RUAdjGenMN;RUAdj;RUBeginTime;
 ;;кое;;RUKoe;
 ;;,;;RUComma;RUPunctuation;
 ;;, готовое к;;RUComma;-;RUPart;-;RUPrep;
@@ -4939,54 +4986,54 @@
 ;;хочешь;;RUmAux;
 ;;нельзя;;RUmAux;RUNegRel;RUNegation;RUNegBegin;
 ;;хочется;;RUmAux;
-;;марта;;RUMonth;
-;;августа;;RUMonth;
-;;мае;;RUMonth;
-;;феврале;;RUMonth;
-;;апреле;;RUMonth;
-;;июле;;RUMonth;
-;;июне;;RUMonth;
-;;январе;;RUMonth;
-;;декабре;;RUMonth;
-;;ноябре;;RUMonth;
-;;октябре;;RUMonth;
-;;сентябре;;RUMonth;
-;;марте;;RUMonth;
-;;августе;;RUMonth;
-;;маем;;RUMonth;
-;;февралем;;RUMonth;
-;;апрелем;;RUMonth;
-;;июлем;;RUMonth;
-;;июнем;;RUMonth;
-;;январем;;RUMonth;
-;;декабрем;;RUMonth;
-;;ноябрем;;RUMonth;
-;;октябрем;;RUMonth;
-;;сентябрем;;RUMonth;
-;;мартом;;RUMonth;
-;;августом;;RUMonth;
-;;марту;;RUMonth;
-;;августу;;RUMonth;
-;;маю;;RUMonth;
-;;февралю;;RUMonth;
-;;апрелю;;RUMonth;
-;;июлю;;RUMonth;
-;;июню;;RUMonth;
-;;январю;;RUMonth;
-;;декабрю;;RUMonth;
-;;ноябрю;;RUMonth;
-;;октябрю;;RUMonth;
-;;сентябрю;;RUMonth;
-;;мая;;RUMonth;
-;;февраля;;RUMonth;
-;;апреля;;RUMonth;
-;;июля;;RUMonth;
-;;июня;;RUMonth;
-;;января;;RUMonth;
-;;декабря;;RUMonth;
-;;ноября;;RUMonth;
-;;октября;;RUMonth;
-;;сентября;;RUMonth;
+;;марта;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;августа;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUConIfCap;RUTime;
+;;мае;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;феврале;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;апреле;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июле;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июне;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;январе;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;декабре;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;ноябре;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;октябре;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;сентябре;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;марте;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;августе;;RUMonth;RUTimeConcept;RUCon;RUConIfCap;RUTime;
+;;маем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;февралем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;апрелем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июлем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июнем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;январем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;декабрем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;ноябрем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;октябрем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;сентябрем;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;мартом;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;августом;;RUMonth;RUTimeConcept;RUCon;RUConIfCap;RUTime;
+;;марту;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;августу;;RUMonth;RUTimeConcept;RUCon;RUConIfCap;RUTime;
+;;маю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;февралю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;апрелю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июлю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;июню;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;январю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;декабрю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;ноябрю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;октябрю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;сентябрю;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;мая;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;февраля;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;апреля;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;июля;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;июня;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;января;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;декабря;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;ноября;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;октября;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
+;;сентября;;RUMonth;RUTimeConcept;RUConGen;RUCon;RUConGenMN;RUTime;
 
 ;;далеко не;;RUNe;RUNegation;RUNegBegin;
 
@@ -5086,7 +5133,7 @@
 ;;почти никакая;;RUNikakoy;RUNegation;RUNegBegin;
 
 ;;нем;;RUNem;
-;;несколько;;RUNeskolko;
+;;несколько;;RUNeskolko;RUIndefpron;
 ;;ни;;RUNi;RUNegation;RUNegBegin;
 
 ;;никем;;RUNegPR;RUNegation;RUNegBegin;
@@ -5126,7 +5173,8 @@
 
 
 ;;по крайней мере ,;;RUAdvStruct;
-;;короче ,;;RUAdvStruct;
+;;, короче ,;;RUAdvStruct;
+;;B короче ,;;SBegin;-;RUAdvStruct;Join;
 ;;в частности ,;;RUAdvStruct;
 ;;, в сущности ,;;RUAdvStruct;RUInclPunct;
 ;;, само собой ,;;RUAdvStruct;RUInclPunct;
@@ -5260,7 +5308,7 @@
 ;;сам;;RUAdvStruct;
 ;;тем временем;;RUAdvStruct;
 ;;между тем;;RUAdvStruct;
-;;затем;;RUAdvPR;RUTime;RUAdvTime;
+;;затем;;RUAdvPR;RUTime;
 ;;таким путем;;RUAdvStruct;
 ;;впрочем;;RUAdvStruct;
 ;;самим;;RUAdvStruct;
@@ -5344,7 +5392,7 @@
 ;;однажды;;RUAdvStruct;
 ;;оглы;;RUAdvStruct;
 ;;хны;;RUAdvStruct;
-;;вновь;;RUAdvPR;
+;;вновь;;RUAdvPR;RUTime;
 ;;ведь;;RUAdvStruct;
 ;;в первую очередь;;RUAdvStruct;
 ;;в свою очередь;;RUAdvStruct;
@@ -5463,10 +5511,10 @@
 ;;теми же;;RUIndefpronPR;RUIndefpron;
 ;;такими же;;RUIndefpronPR;RUIndefpron;
 ;;эти же;;RUIndefpronPR;RUIndefpron;
-;;такой же;;RUIndefpronPR;RUIndefpron;
-;;одной и той же;;RUIndefpronPR;RUIndefpron;
-;;той же;;RUIndefpronPR;RUIndefpron;
-;;этой же;;RUIndefpronPR;RUIndefpron;
+;;такой же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;одной и той же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;той же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этой же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
 ;;одним и тем же;;RUIndefpronPR;RUIndefpron;
 ;;тем же;;RUIndefpronPR;RUIndefpron;
 ;;таким же;;RUIndefpronPR;RUIndefpron;
@@ -5475,10 +5523,10 @@
 ;;одном и том же;;RUIndefpronPR;RUIndefpron;
 ;;том же;;RUIndefpronPR;RUIndefpron;
 ;;этом же;;RUIndefpronPR;RUIndefpron;
-;;одного и того же;;RUIndefpronPR;RUIndefpron;
-;;такого же;;RUIndefpronPR;RUIndefpron;
-;;того же;;RUIndefpronPR;RUIndefpron;
-;;этого же;;RUIndefpronPR;RUIndefpron;
+;;одного и того же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;такого же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;того же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этого же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
 ;;все то же;;RUIndefpronPR;RUIndefpron;
 ;;одно и то же;;RUIndefpronPR;RUIndefpron;
 ;;то же;;RUIndefpronPR;RUIndefpron;
@@ -5493,10 +5541,10 @@
 ;;одну и ту же;;RUIndefpronPR;RUIndefpron;
 ;;ту же;;RUIndefpronPR;RUIndefpron;
 ;;эту же;;RUIndefpronPR;RUIndefpron;
-;;одних и тех же;;RUIndefpronPR;RUIndefpron;
-;;тех же;;RUIndefpronPR;RUIndefpron;
-;;таких же;;RUIndefpronPR;RUIndefpron;
-;;этих же;;RUIndefpronPR;RUIndefpron;
+;;одних и тех же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;тех же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;таких же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этих же;;RUIndefpronPR;RUIndefpron;RUPlusGen;
 ;;такою же;;RUIndefpronPR;RUIndefpron;
 ;;тою же;;RUIndefpronPR;RUIndefpron;
 ;;этою же;;RUIndefpronPR;RUIndefpron;
@@ -5539,16 +5587,16 @@
 ;;эдакий;;RUIndefpronPRNR;RUIndefpron;
 ;;этакий;;RUIndefpronPRNR;RUIndefpron;
 ;;прочий;;RUIndefpronPR;RUIndefpron;
-;;таковой;;RUIndefpronPRNR;RUIndefpron;
-;;другой;;RUIndefpronPR;RUIndefpron;
-;;эдакой;;RUIndefpronPRNR;RUIndefpron;
-;;этакой;;RUIndefpronPRNR;RUIndefpron;
-;;той же самой;;RUIndefpronPR;RUIndefpron;
-;;той самой;;RUIndefpronPR;RUIndefpron;
-;;этой же самой;;RUIndefpronPR;RUIndefpron;
-;;этой самой;;RUIndefpronPR;RUIndefpron;
-;;иной;;RUIndefpronPR;RUIndefpron;
-;;некоторой;;RUIndefpronPRNR;RUIndefpron;
+;;таковой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;другой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;эдакой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;этакой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;той же самой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;той самой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этой же самой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этой самой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;иной;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;некоторой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;тот же самый;;RUIndefpronPR;RUIndefpron;
 ;;тот самый;;RUIndefpronPR;RUIndefpron;
 ;;этими же самый;;RUIndefpronPR;RUIndefpron;
@@ -5576,18 +5624,18 @@
 ;;иным;;RUIndefpronPR;RUIndefpron;
 ;;остальным;;RUIndefpronPR;RUIndefpron;
 ;;нек-рым;;RUIndefpronPRCon;RUIndefpron;
-;;кой-чего;;RUIndefpronPR;RUIndefpron;
-;;прочего;;RUIndefpronPR;RUIndefpron;
-;;такового;;RUIndefpronPRNR;RUIndefpron;
-;;другого;;RUIndefpronPR;RUIndefpron;
-;;эдакого;;RUIndefpronPRNR;RUIndefpron;
-;;этакого;;RUIndefpronPRNR;RUIndefpron;
-;;того же самого;;RUIndefpronPR;RUIndefpron;
-;;того самого;;RUIndefpronPR;RUIndefpron;
-;;этого же самого;;RUIndefpronPR;RUIndefpron;
-;;этого самого;;RUIndefpronPR;RUIndefpron;
-;;иного;;RUIndefpronPR;RUIndefpron;
-;;некоторого;;RUIndefpronPRNR;RUIndefpron;
+;;кой-чего;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;прочего;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;такового;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;другого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;эдакого;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;этакого;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;того же самого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;того самого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этого же самого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;этого самого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;иного;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;некоторого;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;прочему;;RUIndefpronPR;RUIndefpron;
 ;;таковому;;RUIndefpronPRNR;RUIndefpron;
 ;;другому;;RUIndefpronPR;RUIndefpron;
@@ -5657,9 +5705,9 @@
 ;;некоторыми;;RUIndefpronPRCon;RUIndefpron;
 ;;многий;;RUIndefpronPRCon;RUIndefpron;
 ;;немногий;;RUIndefpronPRCon;RUIndefpron;
-;;любой;;RUIndefpronPRNR;RUIndefpron;
-;;многой;;RUIndefpronPRCon;RUIndefpron;
-;;немногой;;RUIndefpronPRCon;RUIndefpron;
+;;любой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;многой;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
+;;немногой;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
 ;;многим;;RUIndefpronPRCon;RUIndefpron;
 ;;немногим;;RUIndefpronPRCon;RUIndefpron;
 ;;нескольким;;RUIndefpronPRCon;RUIndefpron;
@@ -5668,9 +5716,9 @@
 ;;немногом;;RUIndefpronPRCon;RUIndefpron;
 ;;любым;;RUIndefpronPRNR;RUIndefpron;
 ;;некоторым;;RUIndefpronPRCon;RUIndefpron;
-;;любого;;RUIndefpronPRNR;RUIndefpron;
-;;многого;;RUIndefpronPRCon;RUIndefpron;
-;;немногого;;RUIndefpronPRCon;RUIndefpron;
+;;любого;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;многого;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
+;;немногого;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
 ;;любому;;RUIndefpronPRNR;RUIndefpron;
 ;;многому;;RUIndefpronPRCon;RUIndefpron;
 ;;немногому;;RUIndefpronPRCon;RUIndefpron;
@@ -5699,18 +5747,18 @@
 ;;чьими-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;чей-л.;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-л.;;RUIndefpronPRNR;RUIndefpron;
-;;какой-л.;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какой-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;каким-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;каком-л.;;RUIndefpronPRNR;RUIndefpron;
-;;чьего-л.;;RUIndefpronPRNR;RUIndefpron;
-;;какого-л.;;RUIndefpronPRNR;RUIndefpron;
+;;чьего-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какого-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьему-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;какому-л.;;RUIndefpronPRNR;RUIndefpron;
-;;каких-л.;;RUIndefpronPRNR;RUIndefpron;
-;;чьих-л.;;RUIndefpronPRNR;RUIndefpron;
+;;каких-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьих-л.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какою-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-л.;;RUIndefpronPRNR;RUIndefpron;
 ;;чью-л.;;RUIndefpronPRNR;RUIndefpron;
@@ -5723,18 +5771,18 @@
 ;;чьими-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;чей-н.;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-н.;;RUIndefpronPRNR;RUIndefpron;
-;;какой-н.;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какой-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;каким-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;каком-н.;;RUIndefpronPRNR;RUIndefpron;
-;;чьего-н.;;RUIndefpronPRNR;RUIndefpron;
-;;какого-н.;;RUIndefpronPRNR;RUIndefpron;
+;;чьего-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какого-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьему-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;какому-н.;;RUIndefpronPRNR;RUIndefpron;
-;;каких-н.;;RUIndefpronPRNR;RUIndefpron;
-;;чьих-н.;;RUIndefpronPRNR;RUIndefpron;
+;;каких-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьих-н.;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какою-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-н.;;RUIndefpronPRNR;RUIndefpron;
 ;;чью-н.;;RUIndefpronPRNR;RUIndefpron;
@@ -5760,11 +5808,11 @@
 ;;некий;;RUIndefpronPRNR;RUIndefpron;
 ;;всяческий;;RUIndefpronPR;RUIndefpron;
 ;;всякий;;RUIndefpronPRCon;RUIndefpron;
-;;кое-какой;;RUIndefpronPRNR;RUIndefpron;
-;;некой;;RUIndefpronPRNR;RUIndefpron;
-;;всяческой;;RUIndefpronPR;RUIndefpron;
-;;всякой;;RUIndefpronPRCon;RUIndefpron;
-;;той или иной;;RUIndefpronPRNR;RUIndefpron;
+;;кое-какой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;некой;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;всяческой;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;всякой;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
+;;той или иной;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;тот или иной;;RUIndefpronPRNR;RUIndefpron;
 ;;какие-л;;RUIndefpronPRNR;RUIndefpron;
 ;;какое-л;;RUIndefpronPRNR;RUIndefpron;
@@ -5773,18 +5821,18 @@
 ;;чьими-л;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-л;;RUIndefpronPRNR;RUIndefpron;
 ;;чей-л;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-л;;RUIndefpronPRNR;RUIndefpron;
-;;какой-л;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какой-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем-л;;RUIndefpronPRNR;RUIndefpron;
 ;;каким-л;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим-л;;RUIndefpronPRNR;RUIndefpron;
 ;;каком-л;;RUIndefpronPRNR;RUIndefpron;
-;;чьего-л;;RUIndefpronPRNR;RUIndefpron;
-;;какого-л;;RUIndefpronPRNR;RUIndefpron;
+;;чьего-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какого-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьему-л;;RUIndefpronPRNR;RUIndefpron;
 ;;какому-л;;RUIndefpronPRNR;RUIndefpron;
-;;каких-л;;RUIndefpronPRNR;RUIndefpron;
-;;чьих-л;;RUIndefpronPRNR;RUIndefpron;
+;;каких-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьих-л;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какою-л;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-л;;RUIndefpronPRNR;RUIndefpron;
 ;;чью-л;;RUIndefpronPRNR;RUIndefpron;
@@ -5808,18 +5856,18 @@
 ;;чьими-н;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-н;;RUIndefpronPRNR;RUIndefpron;
 ;;чей-н;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-н;;RUIndefpronPRNR;RUIndefpron;
-;;какой-н;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какой-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем-н;;RUIndefpronPRNR;RUIndefpron;
 ;;каким-н;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим-н;;RUIndefpronPRNR;RUIndefpron;
 ;;каком-н;;RUIndefpronPRNR;RUIndefpron;
-;;чьего-н;;RUIndefpronPRNR;RUIndefpron;
-;;какого-н;;RUIndefpronPRNR;RUIndefpron;
+;;чьего-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какого-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьему-н;;RUIndefpronPRNR;RUIndefpron;
 ;;какому-н;;RUIndefpronPRNR;RUIndefpron;
-;;каких-н;;RUIndefpronPRNR;RUIndefpron;
-;;чьих-н;;RUIndefpronPRNR;RUIndefpron;
+;;каких-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьих-н;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какою-н;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-н;;RUIndefpronPRNR;RUIndefpron;
 ;;чью-н;;RUIndefpronPRNR;RUIndefpron;
@@ -5831,50 +5879,50 @@
 ;;какими-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чьими-либо;;RUIndefpronPRNR;RUIndefpron;
-;;какой-либо;;RUIndefpronPRNR;RUIndefpron;
+;;какой-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чей-либо;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-либо;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;каким-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;каком-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чьем-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим-либо;;RUIndefpronPRNR;RUIndefpron;
-;;какого-либо;;RUIndefpronPRNR;RUIndefpron;
-;;чьего-либо;;RUIndefpronPRNR;RUIndefpron;
+;;какого-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьего-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какому-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чьему-либо;;RUIndefpronPRNR;RUIndefpron;
-;;каких-либо;;RUIndefpronPRNR;RUIndefpron;
-;;чьих-либо;;RUIndefpronPRNR;RUIndefpron;
+;;каких-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьих-либо;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какою-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чью-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;какая-либо;;RUIndefpronPRNR;RUIndefpron;
 ;;чья-либо;;RUIndefpronPRNR;RUIndefpron;
-;;некоего;;RUIndefpronPRNR;RUIndefpron;
-;;кое-какого;;RUIndefpronPRNR;RUIndefpron;
-;;всяческого;;RUIndefpronPR;RUIndefpron;
-;;всякого;;RUIndefpronPRCon;RUIndefpron;
-;;того или иного;;RUIndefpronPRNR;RUIndefpron;
+;;некоего;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;кое-какого;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;всяческого;;RUIndefpronPR;RUIndefpron;RUPlusGen;
+;;всякого;;RUIndefpronPRCon;RUIndefpron;RUPlusGen;
+;;того или иного;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какая бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какие бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;каким бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какими бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;каких бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;какого бы то ни было;;RUIndefpronPRNR;RUIndefpron;
+;;каких бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;какого бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какое бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;какой бы то ни было;;RUIndefpronPRNR;RUIndefpron;
+;;какой бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;каком бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какому бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какою бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какую бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чье бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;чьего бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;чьей бы то ни было;;RUIndefpronPRNR;RUIndefpron;
+;;чьего бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
+;;чьей бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чьему бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чьим бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чьими бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;чьих бы то ни было;;RUIndefpronPRNR;RUIndefpron;
+;;чьих бы то ни было;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чью бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;чья бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какие -то;;RUIndefpronPRNR;RUIndefpron;
@@ -5884,7 +5932,7 @@
 ;;чьими -то;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи -то;;RUIndefpronPRNR;RUIndefpron;
 ;;чей -то;;RUIndefpronPRNR;RUIndefpron;
-;;чьей -то;;RUIndefpronPRNR;RUIndefpron;
+;;чьей -то;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;какой -то;;RUIndefpronPRNR;RUIndefpron;
 ;;чьем -то;;RUIndefpronPRNR;RUIndefpron;
 ;;каким -то;;RUIndefpronPRNR;RUIndefpron;
@@ -5926,7 +5974,7 @@
 ;;чей-нибудь;;RUIndefpronPRNR;RUIndefpron;
 ;;чье-нибудь;;RUIndefpronPRNR;RUIndefpron;
 ;;чьего-нибудь;;RUIndefpronPRNR;RUIndefpron;
-;;чьей-нибудь;;RUIndefpronPRNR;RUIndefpron;
+;;чьей-нибудь;;RUIndefpronPRNR;RUIndefpron;RUPlusGen;
 ;;чьем-нибудь;;RUIndefpronPRNR;RUIndefpron;
 ;;чьему-нибудь;;RUIndefpronPRNR;RUIndefpron;
 ;;чьи-нибудь;;RUIndefpronPRNR;RUIndefpron;
@@ -8990,447 +9038,447 @@
 ;;ставшую;;RUPart;
 ;;сопоставимая;;RUPart;
 ;;ставшая;;RUPart;
-;;погибшее;;RUPartAdjSubst;RUAdjNomN;
-;;пострадавшее;;RUPartAdjSubst;RUAdjNomN;
-;;пропавшее;;RUPartAdjSubst;RUAdjNomN;
-;;потерпевшее;;RUPartAdjSubst;RUAdjNomN;
-;;умершее;;RUPartAdjSubst;RUAdjNomN;
-;;надлежащее;;RUPartAdjSubst;RUAdjNomN;
-;;подлежащее;;RUPartAdjSubst;RUAdjNomN;
-;;принадлежащее;;RUPartAdjSubst;RUAdjNomN;
-;;служащее;;RUPartAdjSubst;RUAdjNomN;
-;;проживающее;;RUPartAdjSubst;RUAdjNomN;
-;;страдающее;;RUPartAdjSubst;RUAdjNomN;
-;;окружающее;;RUPartAdjSubst;RUAdjNomN;
-;;желающее;;RUPartAdjSubst;RUAdjNomN;
-;;заведующее;;RUPartAdjSubst;RUAdjNomN;
-;;верующее;;RUPartAdjSubst;RUAdjNomN;
-;;пьющее;;RUPartAdjSubst;RUAdjNomN;
-;;составляющее;;RUPartAdjSubst;RUAdjNomN;
-;;управляющее;;RUPartAdjSubst;RUAdjNomN;
-;;правящее;;RUPartAdjSubst;RUAdjNomN;
-;;курящее;;RUPartAdjSubst;RUAdjNomN;
-;;погибшие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;пострадавшие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;пропавшие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;потерпевшие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;умершие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;надлежащие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;подлежащие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;принадлежащие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;служащие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;проживающие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;страдающие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;окружающие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;желающие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;заведующие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;верующие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;пьющие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;составляющие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;управляющие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;правящие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;курящие;;RUPartAdjSubst;RUAdjNomAccPl;
-;;подозреваемое;;RUPartAdjSubst;RUAdjNomN;
-;;обвиняемое;;RUPartAdjSubst;RUAdjNomN;
-;;подсудимое;;RUPartAdjSubst;RUAdjNomN;
-;;знакомое;;RUPartAdjSubst;RUAdjNomN;
-;;данное;;RUPartAdjSubst;RUAdjNomN;
-;;подданное;;RUPartAdjSubst;RUAdjNomN;
-;;избранное;;RUPartAdjSubst;RUAdjNomN;
-;;осужденное;;RUPartAdjSubst;RUAdjNomN;
-;;подчиненное;;RUPartAdjSubst;RUAdjNomN;
-;;заключенное;;RUPartAdjSubst;RUAdjNomN;
-;;обвиняемые;;RUPartAdjSubst;RUAdjNomAccPl;
-;;подсудимые;;RUPartAdjSubst;RUAdjNomAccPl;
-;;знакомые;;RUPartAdjSubst;RUAdjNomAccPl;
-;;данные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;подданные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;избранные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;осужденные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;подчиненные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;заключенные;;RUPartAdjSubst;RUAdjNomAccPl;
-;;погибшими;;RUPartAdjSubst;RUAdjInstrPl;
-;;пострадавшими;;RUPartAdjSubst;RUAdjInstrPl;
-;;пропавшими;;RUPartAdjSubst;RUAdjInstrPl;
-;;потерпевшими;;RUPartAdjSubst;RUAdjInstrPl;
-;;умершими;;RUPartAdjSubst;RUAdjInstrPl;
-;;надлежащими;;RUPartAdjSubst;RUAdjInstrPl;
-;;подлежащими;;RUPartAdjSubst;RUAdjInstrPl;
-;;принадлежащими;;RUPartAdjSubst;RUAdjInstrPl;
-;;служащими;;RUPartAdjSubst;RUAdjInstrPl;
-;;желающими;;RUPartAdjSubst;RUAdjInstrPl;
-;;окружающими;;RUPartAdjSubst;RUAdjInstrPl;
-;;проживающими;;RUPartAdjSubst;RUAdjInstrPl;
-;;страдающими;;RUPartAdjSubst;RUAdjInstrPl;
-;;верующими;;RUPartAdjSubst;RUAdjInstrPl;
-;;заведующими;;RUPartAdjSubst;RUAdjInstrPl;
-;;пьющими;;RUPartAdjSubst;RUAdjInstrPl;
-;;составляющими;;RUPartAdjSubst;RUAdjInstrPl;
-;;управляющими;;RUPartAdjSubst;RUAdjInstrPl;
-;;правящими;;RUPartAdjSubst;RUAdjInstrPl;
-;;курящими;;RUPartAdjSubst;RUAdjInstrPl;
-;;подозреваемыми;;RUPartAdjSubst;RUAdjInstrPl;
-;;обвиняемыми;;RUPartAdjSubst;RUAdjInstrPl;
-;;подсудимыми;;RUPartAdjSubst;RUAdjInstrPl;
-;;знакомыми;;RUPartAdjSubst;RUAdjInstrPl;
-;;данными;;RUPartAdjSubst;RUAdjInstrPl;
-;;избранными;;RUPartAdjSubst;RUAdjInstrPl;
-;;подданными;;RUPartAdjSubst;RUAdjInstrPl;
-;;заключенными;;RUPartAdjSubst;RUAdjInstrPl;
-;;осужденными;;RUPartAdjSubst;RUAdjInstrPl;
-;;подчиненными;;RUPartAdjSubst;RUAdjInstrPl;
-;;погибшей;;RUPartAdjSubst;RUAdjGDPIF;
-;;пострадавшей;;RUPartAdjSubst;RUAdjGDPIF;
-;;пропавшей;;RUPartAdjSubst;RUAdjGDPIF;
-;;потерпевшей;;RUPartAdjSubst;RUAdjGDPIF;
-;;умершей;;RUPartAdjSubst;RUAdjGDPIF;
-;;надлежащей;;RUPartAdjSubst;RUAdjGDPIF;
-;;подлежащей;;RUPartAdjSubst;RUAdjGDPIF;
-;;принадлежащей;;RUPartAdjSubst;RUAdjGDPIF;
-;;служащей;;RUPartAdjSubst;RUAdjGDPIF;
-;;проживающей;;RUPartAdjSubst;RUAdjGDPIF;
-;;страдающей;;RUPartAdjSubst;RUAdjGDPIF;
-;;окружающей;;RUPartAdjSubst;RUAdjGDPIF;
-;;желающей;;RUPartAdjSubst;RUAdjGDPIF;
-;;заведующей;;RUPartAdjSubst;RUAdjGDPIF;
-;;верующей;;RUPartAdjSubst;RUAdjGDPIF;
-;;пьющей;;RUPartAdjSubst;RUAdjGDPIF;
-;;составляющей;;RUPartAdjSubst;RUAdjGDPIF;
-;;управляющей;;RUPartAdjSubst;RUAdjGDPIF;
-;;правящей;;RUPartAdjSubst;RUAdjGDPIF;
-;;курящей;;RUPartAdjSubst;RUAdjGDPIF;
-;;пострадавший;;RUPartAdjSubst;RUAdjNomM;
-;;пропавший;;RUPartAdjSubst;RUAdjNomM;
-;;потерпевший;;RUPartAdjSubst;RUAdjNomM;
-;;надлежащий;;RUPartAdjSubst;RUAdjNomM;
-;;подлежащий;;RUPartAdjSubst;RUAdjNomM;
-;;принадлежащий;;RUPartAdjSubst;RUAdjNomM;
-;;служащий;;RUPartAdjSubst;RUAdjNomM;
-;;проживающий;;RUPartAdjSubst;RUAdjNomM;
-;;страдающий;;RUPartAdjSubst;RUAdjNomM;
-;;окружающий;;RUPartAdjSubst;RUAdjNomM;
-;;желающий;;RUPartAdjSubst;RUAdjNomM;
-;;заведующий;;RUPartAdjSubst;RUAdjNomM;
-;;верующий;;RUPartAdjSubst;RUAdjNomM;
-;;пьющий;;RUPartAdjSubst;RUAdjNomM;
-;;составляющий;;RUPartAdjSubst;RUAdjNomM;
-;;управляющий;;RUPartAdjSubst;RUAdjNomM;
-;;правящий;;RUPartAdjSubst;RUAdjNomM;
-;;курящий;;RUPartAdjSubst;RUAdjNomM;
-;;подозреваемой;;RUPartAdjSubst;RUAdjGDPIF;
-;;обвиняемой;;RUPartAdjSubst;RUAdjGDPIF;
-;;подсудимой;;RUPartAdjSubst;RUAdjGDPIF;
-;;знакомой;;RUPartAdjSubst;RUAdjGDPIF;
-;;данной;;RUPartAdjSubst;RUAdjGDPIF;
-;;подданной;;RUPartAdjSubst;RUAdjGDPIF;
-;;избранной;;RUPartAdjSubst;RUAdjGDPIF;
-;;осужденной;;RUPartAdjSubst;RUAdjGDPIF;
-;;подчиненной;;RUPartAdjSubst;RUAdjGDPIF;
-;;заключенной;;RUPartAdjSubst;RUAdjGDPIF;
-;;подозреваемый;;RUPartAdjSubst;RUAdjNomM;
-;;обвиняемый;;RUPartAdjSubst;RUAdjNomM;
-;;знакомый;;RUPartAdjSubst;RUAdjNomM;
-;;данный;;RUPartAdjSubst;RUAdjNomM;
-;;подданный;;RUPartAdjSubst;RUAdjNomM;
-;;избранный;;RUPartAdjSubst;RUAdjNomM;
-;;подчиненный;;RUPartAdjSubst;RUAdjNomM;
-;;заключенный;;RUPartAdjSubst;RUAdjNomM;
-;;погибшем;;RUPartAdjSubst;RUAdjNomM;
-;;пострадавшем;;RUPartAdjSubst;RUAdjPreposMN;
-;;пропавшем;;RUPartAdjSubst;RUAdjPreposMN;
-;;потерпевшем;;RUPartAdjSubst;RUAdjPreposMN;
-;;умершем;;RUPartAdjSubst;RUAdjPreposMN;
-;;надлежащем;;RUPartAdjSubst;RUAdjPreposMN;
-;;подлежащем;;RUPartAdjSubst;RUAdjPreposMN;
-;;принадлежащем;;RUPartAdjSubst;RUAdjPreposMN;
-;;служащем;;RUPartAdjSubst;RUAdjPreposMN;
-;;проживающем;;RUPartAdjSubst;RUAdjPreposMN;
-;;страдающем;;RUPartAdjSubst;RUAdjPreposMN;
-;;окружающем;;RUPartAdjSubst;RUAdjPreposMN;
-;;желающем;;RUPartAdjSubst;RUAdjPreposMN;
-;;заведующем;;RUPartAdjSubst;RUAdjPreposMN;
-;;верующем;;RUPartAdjSubst;RUAdjPreposMN;
-;;пьющем;;RUPartAdjSubst;RUAdjPreposMN;
-;;составляющем;;RUPartAdjSubst;RUAdjPreposMN;
-;;управляющем;;RUPartAdjSubst;RUAdjPreposMN;
-;;правящем;;RUPartAdjSubst;RUAdjPreposMN;
-;;курящем;;RUPartAdjSubst;RUAdjPreposMN;
-;;погибшим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;пострадавшим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;пропавшим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;потерпевшим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;умершим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;надлежащим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;подлежащим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;принадлежащим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;служащим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;проживающим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;страдающим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;окружающим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;желающим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;заведующим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;верующим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;пьющим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;составляющим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;управляющим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;правящим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;курящим;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;подозреваемом;;RUPartAdjSubst;RUAdjPreposMN;
-;;обвиняемом;;RUPartAdjSubst;RUAdjPreposMN;
-;;подсудимом;;RUPartAdjSubst;RUAdjPreposMN;
-;;знакомом;;RUPartAdjSubst;RUAdjPreposMN;
-;;данном;;RUPartAdjSubst;RUAdjPreposMN;
-;;подданном;;RUPartAdjSubst;RUAdjPreposMN;
-;;избранном;;RUPartAdjSubst;RUAdjPreposMN;
-;;осужденном;;RUPartAdjSubst;RUAdjPreposMN;
-;;подчиненном;;RUPartAdjSubst;RUAdjPreposMN;
-;;заключенном;;RUPartAdjSubst;RUAdjPreposMN;
-;;подозреваемым;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;обвиняемым;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;подсудимым;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;знакомым;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;данным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;подданным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;избранным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;осужденным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;подчиненным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;заключенным;;RUPartAdjSubst;RUAdjInstrMN/DatPl;
-;;погибшего;;RUPartAdjSubst;RUAdjGenMN;
-;;пострадавшего;;RUPartAdjSubst;RUAdjGenMN;
-;;пропавшего;;RUPartAdjSubst;RUAdjGenMN;
-;;потерпевшего;;RUPartAdjSubst;RUAdjGenMN;
-;;умершего;;RUPartAdjSubst;RUAdjGenMN;
-;;надлежащего;;RUPartAdjSubst;RUAdjGenMN;
-;;подлежащего;;RUPartAdjSubst;RUAdjGenMN;
-;;принадлежащего;;RUPartAdjSubst;RUAdjGenMN;
-;;служащего;;RUPartAdjSubst;RUAdjGenMN;
-;;желающего;;RUPartAdjSubst;RUAdjGenMN;
-;;окружающего;;RUPartAdjSubst;RUAdjGenMN;
-;;проживающего;;RUPartAdjSubst;RUAdjGenMN;
-;;страдающего;;RUPartAdjSubst;RUAdjGenMN;
-;;верующего;;RUPartAdjSubst;RUAdjGenMN;
-;;заведующего;;RUPartAdjSubst;RUAdjGenMN;
-;;пьющего;;RUPartAdjSubst;RUAdjGenMN;
-;;составляющего;;RUPartAdjSubst;RUAdjGenMN;
-;;управляющего;;RUPartAdjSubst;RUAdjGenMN;
-;;правящего;;RUPartAdjSubst;RUAdjGenMN;
-;;курящего;;RUPartAdjSubst;RUAdjGenMN;
-;;подозреваемого;;RUPartAdjSubst;RUAdjGenMN;
-;;обвиняемого;;RUPartAdjSubst;RUAdjGenMN;
-;;подсудимого;;RUPartAdjSubst;RUAdjGenMN;
-;;знакомого;;RUPartAdjSubst;RUAdjGenMN;
-;;данного;;RUPartAdjSubst;RUAdjGenMN;
-;;избранного;;RUPartAdjSubst;RUAdjGenMN;
-;;подданного;;RUPartAdjSubst;RUAdjGenMN;
-;;заключенного;;RUPartAdjSubst;RUAdjGenMN;
-;;осужденного;;RUPartAdjSubst;RUAdjGenMN;
-;;подчиненного;;RUPartAdjSubst;RUAdjGenMN;
-;;погибшему;;RUPartAdjSubst;RUAdjDatMN;
-;;пострадавшему;;RUPartAdjSubst;RUAdjDatMN;
-;;пропавшему;;RUPartAdjSubst;RUAdjDatMN;
-;;потерпевшему;;RUPartAdjSubst;RUAdjDatMN;
-;;умершему;;RUPartAdjSubst;RUAdjDatMN;
-;;надлежащему;;RUPartAdjSubst;RUAdjDatMN;
-;;подлежащему;;RUPartAdjSubst;RUAdjDatMN;
-;;принадлежащему;;RUPartAdjSubst;RUAdjDatMN;
-;;служащему;;RUPartAdjSubst;RUAdjDatMN;
-;;желающему;;RUPartAdjSubst;RUAdjDatMN;
-;;окружающему;;RUPartAdjSubst;RUAdjDatMN;
-;;проживающему;;RUPartAdjSubst;RUAdjDatMN;
-;;страдающему;;RUPartAdjSubst;RUAdjDatMN;
-;;верующему;;RUPartAdjSubst;RUAdjDatMN;
-;;заведующему;;RUPartAdjSubst;RUAdjDatMN;
-;;пьющему;;RUPartAdjSubst;RUAdjDatMN;
-;;составляющему;;RUPartAdjSubst;RUAdjDatMN;
-;;управляющему;;RUPartAdjSubst;RUAdjDatMN;
-;;правящему;;RUPartAdjSubst;RUAdjDatMN;
-;;курящему;;RUPartAdjSubst;RUAdjDatMN;
-;;подозреваемому;;RUPartAdjSubst;RUAdjDatMN;
-;;обвиняемому;;RUPartAdjSubst;RUAdjDatMN;
-;;подсудимому;;RUPartAdjSubst;RUAdjDatMN;
-;;знакомому;;RUPartAdjSubst;RUAdjDatMN;
-;;данному;;RUPartAdjSubst;RUAdjDatMN;
-;;избранному;;RUPartAdjSubst;RUAdjDatMN;
-;;подданному;;RUPartAdjSubst;RUAdjDatMN;
-;;заключенному;;RUPartAdjSubst;RUAdjDatMN;
-;;осужденному;;RUPartAdjSubst;RUAdjDatMN;
-;;подчиненному;;RUPartAdjSubst;RUAdjDatMN;
-;;погибших;;RUPartAdjSubst;RUAdjGenPl;
-;;пострадавших;;RUPartAdjSubst;RUAdjGenPl;
-;;пропавших;;RUPartAdjSubst;RUAdjGenPl;
-;;потерпевших;;RUPartAdjSubst;RUAdjGenPl;
-;;умерших;;RUPartAdjSubst;RUAdjGenPl;
-;;надлежащих;;RUPartAdjSubst;RUAdjGenPl;
-;;подлежащих;;RUPartAdjSubst;RUAdjGenPl;
-;;принадлежащих;;RUPartAdjSubst;RUAdjGenPl;
-;;служащих;;RUPartAdjSubst;RUAdjGenPl;
-;;проживающих;;RUPartAdjSubst;RUAdjGenPl;
-;;страдающих;;RUPartAdjSubst;RUAdjGenPl;
-;;окружающих;;RUPartAdjSubst;RUAdjGenPl;
-;;желающих;;RUPartAdjSubst;RUAdjGenPl;
-;;заведующих;;RUPartAdjSubst;RUAdjGenPl;
-;;верующих;;RUPartAdjSubst;RUAdjGenPl;
-;;пьющих;;RUPartAdjSubst;RUAdjGenPl;
-;;составляющих;;RUPartAdjSubst;RUAdjGenPl;
-;;управляющих;;RUPartAdjSubst;RUAdjGenPl;
-;;правящих;;RUPartAdjSubst;RUAdjGenPl;
-;;курящих;;RUPartAdjSubst;RUAdjGenPl;
-;;подозреваемых;;RUPartAdjSubst;RUAdjGenPl;
-;;обвиняемых;;RUPartAdjSubst;RUAdjGenPl;
-;;подсудимых;;RUPartAdjSubst;RUAdjGenPl;
-;;знакомых;;RUPartAdjSubst;RUAdjGenPl;
-;;данных;;RUPartAdjSubst;RUAdjGenPl;
-;;подданных;;RUPartAdjSubst;RUAdjGenPl;
-;;избранных;;RUPartAdjSubst;RUAdjGenPl;
-;;осужденных;;RUPartAdjSubst;RUAdjGenPl;
-;;подчиненных;;RUPartAdjSubst;RUAdjGenPl;
-;;заключенных;;RUPartAdjSubst;RUAdjGenPl;
-;;погибшею;;RUPartAdjSubst;
-;;пострадавшею;;RUPartAdjSubst;
-;;пропавшею;;RUPartAdjSubst;
-;;потерпевшею;;RUPartAdjSubst;
-;;умершею;;RUPartAdjSubst;
-;;надлежащею;;RUPartAdjSubst;
-;;подлежащею;;RUPartAdjSubst;
-;;принадлежащею;;RUPartAdjSubst;
-;;служащею;;RUPartAdjSubst;
-;;проживающею;;RUPartAdjSubst;
-;;страдающею;;RUPartAdjSubst;
-;;окружающею;;RUPartAdjSubst;
-;;желающею;;RUPartAdjSubst;
-;;заведующею;;RUPartAdjSubst;
-;;верующею;;RUPartAdjSubst;
-;;пьющею;;RUPartAdjSubst;
-;;составляющею;;RUPartAdjSubst;
-;;правящею;;RUPartAdjSubst;
-;;курящею;;RUPartAdjSubst;
-;;подозреваемою;;RUPartAdjSubst;
-;;обвиняемою;;RUPartAdjSubst;
-;;подсудимою;;RUPartAdjSubst;
-;;знакомою;;RUPartAdjSubst;
-;;данною;;RUPartAdjSubst;
-;;подданною;;RUPartAdjSubst;
-;;избранною;;RUPartAdjSubst;
-;;осужденною;;RUPartAdjSubst;
-;;подчиненною;;RUPartAdjSubst;
-;;заключенною;;RUPartAdjSubst;
-;;подозреваемую;;RUPartAdjSubst;RUAdjAccF;
-;;обвиняемую;;RUPartAdjSubst;RUAdjAccF;
-;;подсудимую;;RUPartAdjSubst;RUAdjAccF;
-;;знакомую;;RUPartAdjSubst;RUAdjAccF;
-;;данную;;RUPartAdjSubst;RUAdjAccF;
-;;подданную;;RUPartAdjSubst;RUAdjAccF;
-;;избранную;;RUPartAdjSubst;RUAdjAccF;
-;;осужденную;;RUPartAdjSubst;RUAdjAccF;
-;;подчиненную;;RUPartAdjSubst;RUAdjAccF;
-;;заключенную;;RUPartAdjSubst;RUAdjAccF;
-;;погибшую;;RUPartAdjSubst;RUAdjAccF;
-;;пострадавшую;;RUPartAdjSubst;RUAdjAccF;
-;;пропавшую;;RUPartAdjSubst;RUAdjAccF;
-;;потерпевшую;;RUPartAdjSubst;RUAdjAccF;
-;;умершую;;RUPartAdjSubst;RUAdjAccF;
-;;надлежащую;;RUPartAdjSubst;RUAdjAccF;
-;;подлежащую;;RUPartAdjSubst;RUAdjAccF;
-;;принадлежащую;;RUPartAdjSubst;RUAdjAccF;
-;;служащую;;RUPartAdjSubst;RUAdjAccF;
-;;проживающую;;RUPartAdjSubst;RUAdjAccF;
-;;страдающую;;RUPartAdjSubst;RUAdjAccF;
-;;окружающую;;RUPartAdjSubst;RUAdjAccF;
-;;желающую;;RUPartAdjSubst;RUAdjAccF;
-;;заведующую;;RUPartAdjSubst;RUAdjAccF;
-;;верующую;;RUPartAdjSubst;RUAdjAccF;
-;;пьющую;;RUPartAdjSubst;RUAdjAccF;
-;;составляющую;;RUPartAdjSubst;RUAdjAccF;
-;;управляющую;;RUPartAdjSubst;RUAdjAccF;
-;;правящую;;RUPartAdjSubst;RUAdjAccF;
-;;курящую;;RUPartAdjSubst;RUAdjAccF;
-;;подозреваемая;;RUPartAdjSubst;RUAdjNomF;
-;;обвиняемая;;RUPartAdjSubst;RUAdjNomF;
-;;подсудимая;;RUPartAdjSubst;RUAdjNomF;
-;;знакомая;;RUPartAdjSubst;RUAdjNomF;
-;;данная;;RUPartAdjSubst;RUAdjNomF;
-;;подданная;;RUPartAdjSubst;RUAdjNomF;
-;;избранная;;RUPartAdjSubst;RUAdjNomF;
-;;осужденная;;RUPartAdjSubst;RUAdjNomF;
-;;подчиненная;;RUPartAdjSubst;RUAdjNomF;
-;;заключенная;;RUPartAdjSubst;RUAdjNomF;
-;;погибшая;;RUPartAdjSubst;RUAdjNomF;
-;;пострадавшая;;RUPartAdjSubst;RUAdjNomF;
-;;пропавшая;;RUPartAdjSubst;RUAdjNomF;
-;;потерпевшая;;RUPartAdjSubst;RUAdjNomF;
-;;умершая;;RUPartAdjSubst;RUAdjNomF;
-;;надлежащая;;RUPartAdjSubst;RUAdjNomF;
-;;подлежащая;;RUPartAdjSubst;RUAdjNomF;
-;;принадлежащая;;RUPartAdjSubst;RUAdjNomF;
-;;служащая;;RUPartAdjSubst;RUAdjNomF;
-;;проживающая;;RUPartAdjSubst;RUAdjNomF;
-;;страдающая;;RUPartAdjSubst;RUAdjNomF;
-;;окружающая;;RUPartAdjSubst;RUAdjNomF;
-;;желающая;;RUPartAdjSubst;RUAdjNomF;
-;;заведующая;;RUPartAdjSubst;RUAdjNomF;
-;;верующая;;RUPartAdjSubst;RUAdjNomF;
-;;пьющая;;RUPartAdjSubst;RUAdjNomF;
-;;составляющая;;RUPartAdjSubst;RUAdjNomF;
-;;управляющая;;RUPartAdjSubst;RUAdjNomF;
-;;правящая;;RUPartAdjSubst;RUAdjNomF;
-;;курящая;;RUPartAdjSubst;RUAdjNomF;
-;;минувшее;;RUPartAdjtemp;RUAdjNomN;
-;;ушедшее;;RUPartAdjtemp;RUAdjNomN;
-;;текущее;;RUPartAdjtemp;RUAdjNomN;
-;;последующее;;RUPartAdjtemp;RUAdjNomN;
-;;следующее;;RUPartAdjtemp;RUAdjNomN;
-;;минувшие;;RUPartAdjtemp;RUAdjNomN;
-;;ушедшие;;RUPartAdjtemp;RUAdjNomN;
-;;текущие;;RUPartAdjtemp;RUAdjNomN;
-;;последующие;;RUPartAdjtemp;RUAdjNomN;
-;;следующие;;RUPartAdjtemp;RUAdjNomN;
-;;минувшими;;RUPartAdjtemp;RUAdjNomN;
-;;ушедшими;;RUPartAdjtemp;RUAdjNomN;
-;;текущими;;RUPartAdjtemp;RUAdjNomN;
-;;последующими;;RUPartAdjtemp;RUAdjNomN;
-;;следующими;;RUPartAdjtemp;RUAdjNomN;
-;;минувшей;;RUPartAdjtemp;RUAdjGDPIF;
-;;ушедшей;;RUPartAdjtemp;RUAdjGDPIF;
-;;текущей;;RUPartAdjtemp;RUAdjGDPIF;
-;;последующей;;RUPartAdjtemp;RUAdjGDPIF;
-;;следующей;;RUPartAdjtemp;RUAdjGDPIF;
-;;минувший;;RUPartAdjtemp;RUAdjNomM;
-;;ушедший;;RUPartAdjtemp;RUAdjNomM;
-;;текущий;;RUPartAdjtemp;RUAdjNomM;
-;;последующий;;RUPartAdjtemp;RUAdjNomM;
-;;следующий;;RUPartAdjtemp;RUAdjNomM;
-;;минувшем;;RUPartAdjtemp;RUAdjPreposMN;
-;;ушедшем;;RUPartAdjtemp;RUAdjPreposMN;
-;;текущем;;RUPartAdjtemp;RUAdjPreposMN;
-;;последующем;;RUPartAdjtemp;RUAdjPreposMN;
-;;следующем;;RUPartAdjtemp;RUAdjPreposMN;
-;;минувшим;;RUPartAdjtemp;RUAdjInstrMN/DatPl;
-;;ушедшим;;RUPartAdjtemp;RUAdjInstrMN/DatPl;
-;;текущим;;RUPartAdjtemp;RUAdjInstrMN/DatPl;
-;;последующим;;RUPartAdjtemp;RUAdjInstrMN/DatPl;
-;;следующим;;RUPartAdjtemp;RUAdjInstrMN/DatPl;
-;;минувшего;;RUPartAdjtemp;RUAdjGenMN;
-;;ушедшего;;RUPartAdjtemp;RUAdjGenMN;
-;;текущего;;RUPartAdjtemp;RUAdjGenMN;
-;;последующего;;RUPartAdjtemp;RUAdjGenMN;
-;;следующего;;RUPartAdjtemp;RUAdjGenMN;
-;;минувшему;;RUPartAdjtemp;RUAdjDatMN;
-;;ушедшему;;RUPartAdjtemp;RUAdjDatMN;
-;;текущему;;RUPartAdjtemp;RUAdjDatMN;
-;;последующему;;RUPartAdjtemp;RUAdjDatMN;
-;;следующему;;RUPartAdjtemp;RUAdjDatMN;
-;;минувших;;RUPartAdjtemp;RUAdjGenPl;
-;;ушедших;;RUPartAdjtemp;RUAdjGenPl;
-;;текущих;;RUPartAdjtemp;RUAdjGenPl;
-;;последующих;;RUPartAdjtemp;RUAdjGenPl;
-;;следующих;;RUPartAdjtemp;RUAdjGenPl;
-;;последующею;;RUPartAdjtemp;
-;;минувшую;;RUPartAdjtemp;RUAdjAccF;
-;;ушедшую;;RUPartAdjtemp;RUAdjAccF;
-;;текущую;;RUPartAdjtemp;RUAdjAccF;
-;;последующую;;RUPartAdjtemp;RUAdjAccF;
-;;следующую;;RUPartAdjtemp;RUAdjAccF;
-;;последующая;;RUPartAdjtemp;RUAdjNomF;
+;;погибшее;;RUPartAdjCon;RUAdjNomN;
+;;пострадавшее;;RUPartAdjCon;RUAdjNomN;
+;;пропавшее;;RUPartAdjCon;RUAdjNomN;
+;;потерпевшее;;RUPartAdjCon;RUAdjNomN;
+;;умершее;;RUPartAdjCon;RUAdjNomN;
+;;надлежащее;;RUPartAdjCon;RUAdjNomN;
+;;подлежащее;;RUPartAdjCon;RUAdjNomN;
+;;принадлежащее;;RUPartAdjCon;RUAdjNomN;
+;;служащее;;RUPartAdjCon;RUAdjNomN;
+;;проживающее;;RUPartAdjCon;RUAdjNomN;
+;;страдающее;;RUPartAdjCon;RUAdjNomN;
+;;окружающее;;RUPartAdjCon;RUAdjNomN;
+;;желающее;;RUPartAdjCon;RUAdjNomN;
+;;заведующее;;RUPartAdjCon;RUAdjNomN;
+;;верующее;;RUPartAdjCon;RUAdjNomN;
+;;пьющее;;RUPartAdjCon;RUAdjNomN;
+;;составляющее;;RUPartAdjCon;RUAdjNomN;
+;;управляющее;;RUPartAdjCon;RUAdjNomN;
+;;правящее;;RUPartAdjCon;RUAdjNomN;
+;;курящее;;RUPartAdjCon;RUAdjNomN;
+;;погибшие;;RUPartAdjCon;RUAdjNomAccPl;
+;;пострадавшие;;RUPartAdjCon;RUAdjNomAccPl;
+;;пропавшие;;RUPartAdjCon;RUAdjNomAccPl;
+;;потерпевшие;;RUPartAdjCon;RUAdjNomAccPl;
+;;умершие;;RUPartAdjCon;RUAdjNomAccPl;
+;;надлежащие;;RUPartAdjCon;RUAdjNomAccPl;
+;;подлежащие;;RUPartAdjCon;RUAdjNomAccPl;
+;;принадлежащие;;RUPartAdjCon;RUAdjNomAccPl;
+;;служащие;;RUPartAdjCon;RUAdjNomAccPl;
+;;проживающие;;RUPartAdjCon;RUAdjNomAccPl;
+;;страдающие;;RUPartAdjCon;RUAdjNomAccPl;
+;;окружающие;;RUPartAdjCon;RUAdjNomAccPl;
+;;желающие;;RUPartAdjCon;RUAdjNomAccPl;
+;;заведующие;;RUPartAdjCon;RUAdjNomAccPl;
+;;верующие;;RUPartAdjCon;RUAdjNomAccPl;
+;;пьющие;;RUPartAdjCon;RUAdjNomAccPl;
+;;составляющие;;RUPartAdjCon;RUAdjNomAccPl;
+;;управляющие;;RUPartAdjCon;RUAdjNomAccPl;
+;;правящие;;RUPartAdjCon;RUAdjNomAccPl;
+;;курящие;;RUPartAdjCon;RUAdjNomAccPl;
+;;подозреваемое;;RUPartAdjCon;RUAdjNomN;
+;;обвиняемое;;RUPartAdjCon;RUAdjNomN;
+;;подсудимое;;RUPartAdjCon;RUAdjNomN;
+;;знакомое;;RUPartAdjCon;RUAdjNomN;
+;;данное;;RUPartAdjCon;RUAdjNomN;
+;;подданное;;RUPartAdjCon;RUAdjNomN;
+;;избранное;;RUPartAdjCon;RUAdjNomN;
+;;осужденное;;RUPartAdjCon;RUAdjNomN;
+;;подчиненное;;RUPartAdjCon;RUAdjNomN;
+;;заключенное;;RUPartAdjCon;RUAdjNomN;
+;;обвиняемые;;RUPartAdjCon;RUAdjNomAccPl;
+;;подсудимые;;RUPartAdjCon;RUAdjNomAccPl;
+;;знакомые;;RUPartAdjCon;RUAdjNomAccPl;
+;;данные;;RUPartAdjCon;RUAdjNomAccPl;
+;;подданные;;RUPartAdjCon;RUAdjNomAccPl;
+;;избранные;;RUPartAdjCon;RUAdjNomAccPl;
+;;осужденные;;RUPartAdjCon;RUAdjNomAccPl;
+;;подчиненные;;RUPartAdjCon;RUAdjNomAccPl;
+;;заключенные;;RUPartAdjCon;RUAdjNomAccPl;
+;;погибшими;;RUPartAdjCon;RUAdjInstrPl;
+;;пострадавшими;;RUPartAdjCon;RUAdjInstrPl;
+;;пропавшими;;RUPartAdjCon;RUAdjInstrPl;
+;;потерпевшими;;RUPartAdjCon;RUAdjInstrPl;
+;;умершими;;RUPartAdjCon;RUAdjInstrPl;
+;;надлежащими;;RUPartAdjCon;RUAdjInstrPl;
+;;подлежащими;;RUPartAdjCon;RUAdjInstrPl;
+;;принадлежащими;;RUPartAdjCon;RUAdjInstrPl;
+;;служащими;;RUPartAdjCon;RUAdjInstrPl;
+;;желающими;;RUPartAdjCon;RUAdjInstrPl;
+;;окружающими;;RUPartAdjCon;RUAdjInstrPl;
+;;проживающими;;RUPartAdjCon;RUAdjInstrPl;
+;;страдающими;;RUPartAdjCon;RUAdjInstrPl;
+;;верующими;;RUPartAdjCon;RUAdjInstrPl;
+;;заведующими;;RUPartAdjCon;RUAdjInstrPl;
+;;пьющими;;RUPartAdjCon;RUAdjInstrPl;
+;;составляющими;;RUPartAdjCon;RUAdjInstrPl;
+;;управляющими;;RUPartAdjCon;RUAdjInstrPl;
+;;правящими;;RUPartAdjCon;RUAdjInstrPl;
+;;курящими;;RUPartAdjCon;RUAdjInstrPl;
+;;подозреваемыми;;RUPartAdjCon;RUAdjInstrPl;
+;;обвиняемыми;;RUPartAdjCon;RUAdjInstrPl;
+;;подсудимыми;;RUPartAdjCon;RUAdjInstrPl;
+;;знакомыми;;RUPartAdjCon;RUAdjInstrPl;
+;;данными;;RUPartAdjCon;RUAdjInstrPl;
+;;избранными;;RUPartAdjCon;RUAdjInstrPl;
+;;подданными;;RUPartAdjCon;RUAdjInstrPl;
+;;заключенными;;RUPartAdjCon;RUAdjInstrPl;
+;;осужденными;;RUPartAdjCon;RUAdjInstrPl;
+;;подчиненными;;RUPartAdjCon;RUAdjInstrPl;
+;;погибшей;;RUPartAdjCon;RUAdjGDPIF;
+;;пострадавшей;;RUPartAdjCon;RUAdjGDPIF;
+;;пропавшей;;RUPartAdjCon;RUAdjGDPIF;
+;;потерпевшей;;RUPartAdjCon;RUAdjGDPIF;
+;;умершей;;RUPartAdjCon;RUAdjGDPIF;
+;;надлежащей;;RUPartAdjCon;RUAdjGDPIF;
+;;подлежащей;;RUPartAdjCon;RUAdjGDPIF;
+;;принадлежащей;;RUPartAdjCon;RUAdjGDPIF;
+;;служащей;;RUPartAdjCon;RUAdjGDPIF;
+;;проживающей;;RUPartAdjCon;RUAdjGDPIF;
+;;страдающей;;RUPartAdjCon;RUAdjGDPIF;
+;;окружающей;;RUPartAdjCon;RUAdjGDPIF;
+;;желающей;;RUPartAdjCon;RUAdjGDPIF;
+;;заведующей;;RUPartAdjCon;RUAdjGDPIF;
+;;верующей;;RUPartAdjCon;RUAdjGDPIF;
+;;пьющей;;RUPartAdjCon;RUAdjGDPIF;
+;;составляющей;;RUPartAdjCon;RUAdjGDPIF;
+;;управляющей;;RUPartAdjCon;RUAdjGDPIF;
+;;правящей;;RUPartAdjCon;RUAdjGDPIF;
+;;курящей;;RUPartAdjCon;RUAdjGDPIF;
+;;пострадавший;;RUPartAdjCon;RUAdjNomM;
+;;пропавший;;RUPartAdjCon;RUAdjNomM;
+;;потерпевший;;RUPartAdjCon;RUAdjNomM;
+;;надлежащий;;RUPartAdjCon;RUAdjNomM;
+;;подлежащий;;RUPartAdjCon;RUAdjNomM;
+;;принадлежащий;;RUPartAdjCon;RUAdjNomM;
+;;служащий;;RUPartAdjCon;RUAdjNomM;
+;;проживающий;;RUPartAdjCon;RUAdjNomM;
+;;страдающий;;RUPartAdjCon;RUAdjNomM;
+;;окружающий;;RUPartAdjCon;RUAdjNomM;
+;;желающий;;RUPartAdjCon;RUAdjNomM;
+;;заведующий;;RUPartAdjCon;RUAdjNomM;
+;;верующий;;RUPartAdjCon;RUAdjNomM;
+;;пьющий;;RUPartAdjCon;RUAdjNomM;
+;;составляющий;;RUPartAdjCon;RUAdjNomM;
+;;управляющий;;RUPartAdjCon;RUAdjNomM;
+;;правящий;;RUPartAdjCon;RUAdjNomM;
+;;курящий;;RUPartAdjCon;RUAdjNomM;
+;;подозреваемой;;RUPartAdjCon;RUAdjGDPIF;
+;;обвиняемой;;RUPartAdjCon;RUAdjGDPIF;
+;;подсудимой;;RUPartAdjCon;RUAdjGDPIF;
+;;знакомой;;RUPartAdjCon;RUAdjGDPIF;
+;;данной;;RUPartAdjCon;RUAdjGDPIF;
+;;подданной;;RUPartAdjCon;RUAdjGDPIF;
+;;избранной;;RUPartAdjCon;RUAdjGDPIF;
+;;осужденной;;RUPartAdjCon;RUAdjGDPIF;
+;;подчиненной;;RUPartAdjCon;RUAdjGDPIF;
+;;заключенной;;RUPartAdjCon;RUAdjGDPIF;
+;;подозреваемый;;RUPartAdjCon;RUAdjNomM;
+;;обвиняемый;;RUPartAdjCon;RUAdjNomM;
+;;знакомый;;RUPartAdjCon;RUAdjNomM;
+;;данный;;RUPartAdjCon;RUAdjNomM;
+;;подданный;;RUPartAdjCon;RUAdjNomM;
+;;избранный;;RUPartAdjCon;RUAdjNomM;
+;;подчиненный;;RUPartAdjCon;RUAdjNomM;
+;;заключенный;;RUPartAdjCon;RUAdjNomM;
+;;погибшем;;RUPartAdjCon;RUAdjNomM;
+;;пострадавшем;;RUPartAdjCon;RUAdjPreposMN;
+;;пропавшем;;RUPartAdjCon;RUAdjPreposMN;
+;;потерпевшем;;RUPartAdjCon;RUAdjPreposMN;
+;;умершем;;RUPartAdjCon;RUAdjPreposMN;
+;;надлежащем;;RUPartAdjCon;RUAdjPreposMN;
+;;подлежащем;;RUPartAdjCon;RUAdjPreposMN;
+;;принадлежащем;;RUPartAdjCon;RUAdjPreposMN;
+;;служащем;;RUPartAdjCon;RUAdjPreposMN;
+;;проживающем;;RUPartAdjCon;RUAdjPreposMN;
+;;страдающем;;RUPartAdjCon;RUAdjPreposMN;
+;;окружающем;;RUPartAdjCon;RUAdjPreposMN;
+;;желающем;;RUPartAdjCon;RUAdjPreposMN;
+;;заведующем;;RUPartAdjCon;RUAdjPreposMN;
+;;верующем;;RUPartAdjCon;RUAdjPreposMN;
+;;пьющем;;RUPartAdjCon;RUAdjPreposMN;
+;;составляющем;;RUPartAdjCon;RUAdjPreposMN;
+;;управляющем;;RUPartAdjCon;RUAdjPreposMN;
+;;правящем;;RUPartAdjCon;RUAdjPreposMN;
+;;курящем;;RUPartAdjCon;RUAdjPreposMN;
+;;погибшим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;пострадавшим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;пропавшим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;потерпевшим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;умершим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;надлежащим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;подлежащим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;принадлежащим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;служащим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;проживающим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;страдающим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;окружающим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;желающим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;заведующим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;верующим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;пьющим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;составляющим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;управляющим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;правящим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;курящим;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;подозреваемом;;RUPartAdjCon;RUAdjPreposMN;
+;;обвиняемом;;RUPartAdjCon;RUAdjPreposMN;
+;;подсудимом;;RUPartAdjCon;RUAdjPreposMN;
+;;знакомом;;RUPartAdjCon;RUAdjPreposMN;
+;;данном;;RUPartAdjCon;RUAdjPreposMN;
+;;подданном;;RUPartAdjCon;RUAdjPreposMN;
+;;избранном;;RUPartAdjCon;RUAdjPreposMN;
+;;осужденном;;RUPartAdjCon;RUAdjPreposMN;
+;;подчиненном;;RUPartAdjCon;RUAdjPreposMN;
+;;заключенном;;RUPartAdjCon;RUAdjPreposMN;
+;;подозреваемым;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;обвиняемым;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;подсудимым;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;знакомым;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;данным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;подданным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;избранным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;осужденным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;подчиненным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;заключенным;;RUPartAdjCon;RUAdjInstrMN/DatPl;
+;;погибшего;;RUPartAdjCon;RUAdjGenMN;
+;;пострадавшего;;RUPartAdjCon;RUAdjGenMN;
+;;пропавшего;;RUPartAdjCon;RUAdjGenMN;
+;;потерпевшего;;RUPartAdjCon;RUAdjGenMN;
+;;умершего;;RUPartAdjCon;RUAdjGenMN;
+;;надлежащего;;RUPartAdjCon;RUAdjGenMN;
+;;подлежащего;;RUPartAdjCon;RUAdjGenMN;
+;;принадлежащего;;RUPartAdjCon;RUAdjGenMN;
+;;служащего;;RUPartAdjCon;RUAdjGenMN;
+;;желающего;;RUPartAdjCon;RUAdjGenMN;
+;;окружающего;;RUPartAdjCon;RUAdjGenMN;
+;;проживающего;;RUPartAdjCon;RUAdjGenMN;
+;;страдающего;;RUPartAdjCon;RUAdjGenMN;
+;;верующего;;RUPartAdjCon;RUAdjGenMN;
+;;заведующего;;RUPartAdjCon;RUAdjGenMN;
+;;пьющего;;RUPartAdjCon;RUAdjGenMN;
+;;составляющего;;RUPartAdjCon;RUAdjGenMN;
+;;управляющего;;RUPartAdjCon;RUAdjGenMN;
+;;правящего;;RUPartAdjCon;RUAdjGenMN;
+;;курящего;;RUPartAdjCon;RUAdjGenMN;
+;;подозреваемого;;RUPartAdjCon;RUAdjGenMN;
+;;обвиняемого;;RUPartAdjCon;RUAdjGenMN;
+;;подсудимого;;RUPartAdjCon;RUAdjGenMN;
+;;знакомого;;RUPartAdjCon;RUAdjGenMN;
+;;данного;;RUPartAdjCon;RUAdjGenMN;
+;;избранного;;RUPartAdjCon;RUAdjGenMN;
+;;подданного;;RUPartAdjCon;RUAdjGenMN;
+;;заключенного;;RUPartAdjCon;RUAdjGenMN;
+;;осужденного;;RUPartAdjCon;RUAdjGenMN;
+;;подчиненного;;RUPartAdjCon;RUAdjGenMN;
+;;погибшему;;RUPartAdjCon;RUAdjDatMN;
+;;пострадавшему;;RUPartAdjCon;RUAdjDatMN;
+;;пропавшему;;RUPartAdjCon;RUAdjDatMN;
+;;потерпевшему;;RUPartAdjCon;RUAdjDatMN;
+;;умершему;;RUPartAdjCon;RUAdjDatMN;
+;;надлежащему;;RUPartAdjCon;RUAdjDatMN;
+;;подлежащему;;RUPartAdjCon;RUAdjDatMN;
+;;принадлежащему;;RUPartAdjCon;RUAdjDatMN;
+;;служащему;;RUPartAdjCon;RUAdjDatMN;
+;;желающему;;RUPartAdjCon;RUAdjDatMN;
+;;окружающему;;RUPartAdjCon;RUAdjDatMN;
+;;проживающему;;RUPartAdjCon;RUAdjDatMN;
+;;страдающему;;RUPartAdjCon;RUAdjDatMN;
+;;верующему;;RUPartAdjCon;RUAdjDatMN;
+;;заведующему;;RUPartAdjCon;RUAdjDatMN;
+;;пьющему;;RUPartAdjCon;RUAdjDatMN;
+;;составляющему;;RUPartAdjCon;RUAdjDatMN;
+;;управляющему;;RUPartAdjCon;RUAdjDatMN;
+;;правящему;;RUPartAdjCon;RUAdjDatMN;
+;;курящему;;RUPartAdjCon;RUAdjDatMN;
+;;подозреваемому;;RUPartAdjCon;RUAdjDatMN;
+;;обвиняемому;;RUPartAdjCon;RUAdjDatMN;
+;;подсудимому;;RUPartAdjCon;RUAdjDatMN;
+;;знакомому;;RUPartAdjCon;RUAdjDatMN;
+;;данному;;RUPartAdjCon;RUAdjDatMN;
+;;избранному;;RUPartAdjCon;RUAdjDatMN;
+;;подданному;;RUPartAdjCon;RUAdjDatMN;
+;;заключенному;;RUPartAdjCon;RUAdjDatMN;
+;;осужденному;;RUPartAdjCon;RUAdjDatMN;
+;;подчиненному;;RUPartAdjCon;RUAdjDatMN;
+;;погибших;;RUPartAdjCon;RUAdjGenPl;
+;;пострадавших;;RUPartAdjCon;RUAdjGenPl;
+;;пропавших;;RUPartAdjCon;RUAdjGenPl;
+;;потерпевших;;RUPartAdjCon;RUAdjGenPl;
+;;умерших;;RUPartAdjCon;RUAdjGenPl;
+;;надлежащих;;RUPartAdjCon;RUAdjGenPl;
+;;подлежащих;;RUPartAdjCon;RUAdjGenPl;
+;;принадлежащих;;RUPartAdjCon;RUAdjGenPl;
+;;служащих;;RUPartAdjCon;RUAdjGenPl;
+;;проживающих;;RUPartAdjCon;RUAdjGenPl;
+;;страдающих;;RUPartAdjCon;RUAdjGenPl;
+;;окружающих;;RUPartAdjCon;RUAdjGenPl;
+;;желающих;;RUPartAdjCon;RUAdjGenPl;
+;;заведующих;;RUPartAdjCon;RUAdjGenPl;
+;;верующих;;RUPartAdjCon;RUAdjGenPl;
+;;пьющих;;RUPartAdjCon;RUAdjGenPl;
+;;составляющих;;RUPartAdjCon;RUAdjGenPl;
+;;управляющих;;RUPartAdjCon;RUAdjGenPl;
+;;правящих;;RUPartAdjCon;RUAdjGenPl;
+;;курящих;;RUPartAdjCon;RUAdjGenPl;
+;;подозреваемых;;RUPartAdjCon;RUAdjGenPl;
+;;обвиняемых;;RUPartAdjCon;RUAdjGenPl;
+;;подсудимых;;RUPartAdjCon;RUAdjGenPl;
+;;знакомых;;RUPartAdjCon;RUAdjGenPl;
+;;данных;;RUPartAdjCon;RUAdjGenPl;
+;;подданных;;RUPartAdjCon;RUAdjGenPl;
+;;избранных;;RUPartAdjCon;RUAdjGenPl;
+;;осужденных;;RUPartAdjCon;RUAdjGenPl;
+;;подчиненных;;RUPartAdjCon;RUAdjGenPl;
+;;заключенных;;RUPartAdjCon;RUAdjGenPl;
+;;погибшею;;RUPartAdjCon;
+;;пострадавшею;;RUPartAdjCon;
+;;пропавшею;;RUPartAdjCon;
+;;потерпевшею;;RUPartAdjCon;
+;;умершею;;RUPartAdjCon;
+;;надлежащею;;RUPartAdjCon;
+;;подлежащею;;RUPartAdjCon;
+;;принадлежащею;;RUPartAdjCon;
+;;служащею;;RUPartAdjCon;
+;;проживающею;;RUPartAdjCon;
+;;страдающею;;RUPartAdjCon;
+;;окружающею;;RUPartAdjCon;
+;;желающею;;RUPartAdjCon;
+;;заведующею;;RUPartAdjCon;
+;;верующею;;RUPartAdjCon;
+;;пьющею;;RUPartAdjCon;
+;;составляющею;;RUPartAdjCon;
+;;правящею;;RUPartAdjCon;
+;;курящею;;RUPartAdjCon;
+;;подозреваемою;;RUPartAdjCon;
+;;обвиняемою;;RUPartAdjCon;
+;;подсудимою;;RUPartAdjCon;
+;;знакомою;;RUPartAdjCon;
+;;данною;;RUPartAdjCon;
+;;подданною;;RUPartAdjCon;
+;;избранною;;RUPartAdjCon;
+;;осужденною;;RUPartAdjCon;
+;;подчиненною;;RUPartAdjCon;
+;;заключенною;;RUPartAdjCon;
+;;подозреваемую;;RUPartAdjCon;RUAdjAccF;
+;;обвиняемую;;RUPartAdjCon;RUAdjAccF;
+;;подсудимую;;RUPartAdjCon;RUAdjAccF;
+;;знакомую;;RUPartAdjCon;RUAdjAccF;
+;;данную;;RUPartAdjCon;RUAdjAccF;
+;;подданную;;RUPartAdjCon;RUAdjAccF;
+;;избранную;;RUPartAdjCon;RUAdjAccF;
+;;осужденную;;RUPartAdjCon;RUAdjAccF;
+;;подчиненную;;RUPartAdjCon;RUAdjAccF;
+;;заключенную;;RUPartAdjCon;RUAdjAccF;
+;;погибшую;;RUPartAdjCon;RUAdjAccF;
+;;пострадавшую;;RUPartAdjCon;RUAdjAccF;
+;;пропавшую;;RUPartAdjCon;RUAdjAccF;
+;;потерпевшую;;RUPartAdjCon;RUAdjAccF;
+;;умершую;;RUPartAdjCon;RUAdjAccF;
+;;надлежащую;;RUPartAdjCon;RUAdjAccF;
+;;подлежащую;;RUPartAdjCon;RUAdjAccF;
+;;принадлежащую;;RUPartAdjCon;RUAdjAccF;
+;;служащую;;RUPartAdjCon;RUAdjAccF;
+;;проживающую;;RUPartAdjCon;RUAdjAccF;
+;;страдающую;;RUPartAdjCon;RUAdjAccF;
+;;окружающую;;RUPartAdjCon;RUAdjAccF;
+;;желающую;;RUPartAdjCon;RUAdjAccF;
+;;заведующую;;RUPartAdjCon;RUAdjAccF;
+;;верующую;;RUPartAdjCon;RUAdjAccF;
+;;пьющую;;RUPartAdjCon;RUAdjAccF;
+;;составляющую;;RUPartAdjCon;RUAdjAccF;
+;;управляющую;;RUPartAdjCon;RUAdjAccF;
+;;правящую;;RUPartAdjCon;RUAdjAccF;
+;;курящую;;RUPartAdjCon;RUAdjAccF;
+;;подозреваемая;;RUPartAdjCon;RUAdjNomF;
+;;обвиняемая;;RUPartAdjCon;RUAdjNomF;
+;;подсудимая;;RUPartAdjCon;RUAdjNomF;
+;;знакомая;;RUPartAdjCon;RUAdjNomF;
+;;данная;;RUPartAdjCon;RUAdjNomF;
+;;подданная;;RUPartAdjCon;RUAdjNomF;
+;;избранная;;RUPartAdjCon;RUAdjNomF;
+;;осужденная;;RUPartAdjCon;RUAdjNomF;
+;;подчиненная;;RUPartAdjCon;RUAdjNomF;
+;;заключенная;;RUPartAdjCon;RUAdjNomF;
+;;погибшая;;RUPartAdjCon;RUAdjNomF;
+;;пострадавшая;;RUPartAdjCon;RUAdjNomF;
+;;пропавшая;;RUPartAdjCon;RUAdjNomF;
+;;потерпевшая;;RUPartAdjCon;RUAdjNomF;
+;;умершая;;RUPartAdjCon;RUAdjNomF;
+;;надлежащая;;RUPartAdjCon;RUAdjNomF;
+;;подлежащая;;RUPartAdjCon;RUAdjNomF;
+;;принадлежащая;;RUPartAdjCon;RUAdjNomF;
+;;служащая;;RUPartAdjCon;RUAdjNomF;
+;;проживающая;;RUPartAdjCon;RUAdjNomF;
+;;страдающая;;RUPartAdjCon;RUAdjNomF;
+;;окружающая;;RUPartAdjCon;RUAdjNomF;
+;;желающая;;RUPartAdjCon;RUAdjNomF;
+;;заведующая;;RUPartAdjCon;RUAdjNomF;
+;;верующая;;RUPartAdjCon;RUAdjNomF;
+;;пьющая;;RUPartAdjCon;RUAdjNomF;
+;;составляющая;;RUPartAdjCon;RUAdjNomF;
+;;управляющая;;RUPartAdjCon;RUAdjNomF;
+;;правящая;;RUPartAdjCon;RUAdjNomF;
+;;курящая;;RUPartAdjCon;RUAdjNomF;
+;;минувшее;;RUAdjNomN;RUPartAdj;RUBeginTime;
+;;ушедшее;;RUAdjNomN;RUPartAdj;RUBeginTime;
+;;текущее;;RUAdjNomN;RUPartAdj;RUBeginTime;
+;;последующее;;RUAdjNomN;RUPartAdj;RUBeginTime;
+;;следующее;;RUAdjNomN;RUPartAdj;RUBeginTime;
+;;минувшие;;RUAdjNomAccPl;RUPartAdj;RUBeginTime;
+;;ушедшие;;RUAdjNomAccPl;RUPartAdj;RUBeginTime;
+;;текущие;;RUAdjNomAccPl;RUPartAdj;RUBeginTime;
+;;последующие;;RUAdjNomAccPl;RUPartAdj;RUBeginTime;
+;;следующие;;RUAdjNomAccPl;RUPartAdj;RUBeginTime;
+;;минувшими;;RUAdjInstrPl;RUPartAdj;RUBeginTime;
+;;ушедшими;;RUAdjInstrPl;RUPartAdj;RUBeginTime;
+;;текущими;;RUAdjInstrPl;RUPartAdj;RUBeginTime;
+;;последующими;;RUAdjInstrPl;RUPartAdj;RUBeginTime;
+;;следующими;;RUAdjInstrPl;RUPartAdj;RUBeginTime;
+;;минувшей;;RUAdjGDPIF;RUPartAdj;RUBeginTime;
+;;ушедшей;;RUAdjGDPIF;RUPartAdj;RUBeginTime;
+;;текущей;;RUAdjGDPIF;RUPartAdj;RUBeginTime;
+;;последующей;;RUAdjGDPIF;RUPartAdj;RUBeginTime;
+;;следующей;;RUAdjGDPIF;RUPartAdj;RUBeginTime;
+;;минувший;;RUAdjNomM;RUPartAdj;RUBeginTime;
+;;ушедший;;RUAdjNomM;RUPartAdj;RUBeginTime;
+;;текущий;;RUAdjNomM;RUPartAdj;RUBeginTime;
+;;последующий;;RUAdjNomM;RUPartAdj;RUBeginTime;
+;;следующий;;RUAdjNomM;RUPartAdj;RUBeginTime;
+;;минувшем;;RUAdjPreposMN;RUPartAdj;RUBeginTime;
+;;ушедшем;;RUAdjPreposMN;RUPartAdj;RUBeginTime;
+;;текущем;;RUAdjPreposMN;RUPartAdj;RUBeginTime;
+;;последующем;;RUAdjPreposMN;RUPartAdj;RUBeginTime;
+;;следующем;;RUAdjPreposMN;RUPartAdj;RUBeginTime;
+;;минувшим;;RUAdjInstrMN/DatPl;RUPartAdj;RUBeginTime;
+;;ушедшим;;RUAdjInstrMN/DatPl;RUPartAdj;RUBeginTime;
+;;текущим;;RUAdjInstrMN/DatPl;RUPartAdj;RUBeginTime;
+;;последующим;;RUAdjInstrMN/DatPl;RUPartAdj;RUBeginTime;
+;;следующим;;RUAdjInstrMN/DatPl;RUPartAdj;RUBeginTime;
+;;минувшего;;RUAdjGenMN;RUPartAdj;RUBeginTime;
+;;ушедшего;;RUAdjGenMN;RUPartAdj;RUBeginTime;
+;;текущего;;RUAdjGenMN;RUPartAdj;RUBeginTime;
+;;последующего;;RUAdjGenMN;RUPartAdj;RUBeginTime;
+;;следующего;;RUAdjGenMN;RUPartAdj;RUBeginTime;
+;;минувшему;;RUAdjDatMN;RUPartAdj;RUBeginTime;
+;;ушедшему;;RUAdjDatMN;RUPartAdj;RUBeginTime;
+;;текущему;;RUAdjDatMN;RUPartAdj;RUBeginTime;
+;;последующему;;RUAdjDatMN;RUPartAdj;RUBeginTime;
+;;следующему;;RUAdjDatMN;RUPartAdj;RUBeginTime;
+;;минувших;;RUAdjGenPl;RUPartAdj;RUBeginTime;
+;;ушедших;;RUAdjGenPl;RUPartAdj;RUBeginTime;
+;;текущих;;RUAdjGenPl;RUPartAdj;RUBeginTime;
+;;последующих;;RUAdjGenPl;RUPartAdj;RUBeginTime;
+;;следующих;;RUAdjGenPl;RUPartAdj;RUBeginTime;
+;;последующею;;RUPartAdj;RUBeginTime;
+;;минувшую;;RUAdjAccF;RUPartAdj;RUBeginTime;
+;;ушедшую;;RUAdjAccF;RUPartAdj;RUBeginTime;
+;;текущую;;RUAdjAccF;RUPartAdj;RUBeginTime;
+;;последующую;;RUAdjAccF;RUPartAdj;RUBeginTime;
+;;следующую;;RUAdjAccF;RUPartAdj;RUBeginTime;
+;;последующая;;RUAdjNomF;RUPartAdj;RUBeginTime;
 ;;они оба;;RUPerspron;
 ;;вы оба;;RUPerspron;
 ;;мы оба;;RUPerspron;
@@ -9783,8 +9831,8 @@
 ;;за исключением;;RUPrep;
 /**** Rewritten by DELVE, ;;в среднем;;RUPrep;RUAdvdegree;-;RUAdvdegree;
 ;;в среднем;;RUPrep;RUAdvdegree;Lit_в;-;RUAdvdegree
-/**** Rewritten by DELVE, ;;в дальнейшем;;RUPrep;-;RUECon;RUCon;
-;;в дальнейшем;;RUPrep;Lit_в;-;RUECon;RUCon
+/**** Rewritten by DELVE, ;;в дальнейшем;;RUPrep;-;RUTimeEndConcept;RUTime;
+;;в дальнейшем;;RUPrep;Lit_в;-;RUTimeEndConcept;RUTime
 ;;посредством;;RUPrep;
 /**** Rewritten by DELVE, ;;в среднем учебном;;RUPrep;-;RUAdj;-;RUAdj;
 ;;в среднем учебном;;RUPrep;Lit_в;-;RUAdj;-;RUAdj
@@ -9888,259 +9936,259 @@
 ;;вероятно;;RURAdv;
 ;;в ответ;;RURAdv;
 ;;зря;;RURAdv;
-;;i;;RURanking;RUAdj;
-;;ii;;RURanking;RUAdj;
-;;iii;;RURanking;RUAdj;
-;;viii;;RURanking;RUAdj;
-;;xviii;;RURanking;RUAdj;
-;;хviii;;RURanking;RUAdj;
-;;xiii;;RURanking;RUAdj;
-;;хiii;;RURanking;RUAdj;
-;;vii;;RURanking;RUAdj;
-;;xvii;;RURanking;RUAdj;
-;;хvii;;RURanking;RUAdj;
-;;xii;;RURanking;RUAdj;
-;;хii;;RURanking;RUAdj;
-;;vi;;RURanking;RUAdj;
-;;xvi;;RURanking;RUAdj;
-;;хvi;;RURanking;RUAdj;
-;;xi;;RURanking;RUAdj;
-;;xxi;;RURanking;RUAdj;
-;;хi;;RURanking;RUAdj;
-;;ххi;;RURanking;RUAdj;
-;;iv;;RURanking;RUAdj;
-;;xiv;;RURanking;RUAdj;
-;;хiv;;RURanking;RUAdj;
-;;v;;RURanking;RUAdj;
-;;xv;;RURanking;RUAdj;
-;;хv;;RURanking;RUAdj;
-;;ix;;RURanking;RUAdj;
-;;xix;;RURanking;RUAdj;
-;;x;;RURanking;RUAdj;
-;;xx;;RURanking;RUAdj;
-;;сороковые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;двадцатые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;тридцатые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;девяностые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;восьмидесятые;;RURanking;RUAdjNomAccPl;RUAdj;
+;;i;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;ii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;iii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;viii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xviii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хviii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xiii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хiii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;vii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xvii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хvii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хii;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;vi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xvi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хvi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xxi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;ххi;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;iv;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xiv;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хiv;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;v;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xv;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хv;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;ix;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xix;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;x;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;xx;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;сороковые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;двадцатые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;тридцатые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;девяностые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;восьмидесятые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
 
-;;пятидесятые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;семидесятые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;шестидесятые;;RURanking;RUAdjNomAccPl;RUAdj;
-;;i-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;ii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;iii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;viii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xviii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xiii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;vii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xvii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xii-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;vi-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xvi-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xi-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xxi-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;iv-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xiv-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;v-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xv-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;ix-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;x-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;xx-м;;RURanking;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;
-;;iii-ем;;RURanking;RUAdjPreposMN;RUAdj;
-;;третьем;;RURanking;RUAdjPreposMN;RUAdj;
-;;третьим;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;i-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;ii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;viii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xiii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xviii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;vii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xvii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xii-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;vi-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xvi-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xi-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xxi-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;iv-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xiv-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;v-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xv-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;ix-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;x-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;xx-ом;;RURanking;RUAdjPreposMN;RUAdj;
-;;сороковом;;RURanking;RUAdjPreposMN;RUAdj;
-;;первом;;RURanking;RUAdjPreposMN;RUAdj;
-;;седьмом;;RURanking;RUAdjPreposMN;RUAdj;
-;;восьмом;;RURanking;RUAdjPreposMN;RUAdj;
-;;втором;;RURanking;RUAdjPreposMN;RUAdj;
-;;восемнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;двадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;двенадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;девятнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;одиннадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;пятнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;семнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;тридцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;тринадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;четырнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;шестнадцатом;;RURanking;RUAdjPreposMN;RUAdj;
-;;четвертом;;RURanking;RUAdjPreposMN;RUAdj;
-;;шестом;;RURanking;RUAdjPreposMN;RUAdj;
-;;девяностом;;RURanking;RUAdjPreposMN;RUAdj;
-;;девятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;пятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;восьмидесятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;десятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;пятидесятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;семидесятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;шестидесятом;;RURanking;RUAdjPreposMN;RUAdj;
-;;сороковым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;первым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;седьмым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;восьмым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;вторым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;восемнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;двадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;двенадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;девятнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;одиннадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;пятнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;семнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;тридцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;тринадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;четырнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;шестнадцатым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;четвертым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;шестым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;девяностым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;девятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;пятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;восьмидесятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;десятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;пятидесятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;семидесятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;шестидесятым;;RURanking;RUAdjInstrMN/DatPl;RUAdj;
-;;i-го;;RURanking;RUAdjGenMN;RUAdj;RUAdjGenMN;RUAdj;
-;;ii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;iii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;viii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xiii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xviii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;vii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xvii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xii-го;;RURanking;RUAdjGenMN;RUAdj;
-;;vi-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xvi-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xi-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xxi-го;;RURanking;RUAdjGenMN;RUAdj;
-;;iv-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xiv-го;;RURanking;RUAdjGenMN;RUAdj;
-;;v-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xv-го;;RURanking;RUAdjGenMN;RUAdj;
-;;ix-го;;RURanking;RUAdjGenMN;RUAdj;
-;;x-го;;RURanking;RUAdjGenMN;RUAdj;
-;;xx-го;;RURanking;RUAdjGenMN;RUAdj;
-;;третьего;;RURanking;RUAdjGenMN;RUAdj;
-;;i-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;ii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;iii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;vii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;viii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xiii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xvii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xviii-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;vi-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xvi-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xi-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xxi-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;iv-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xiv-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;v-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xv-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;ix-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;x-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;xx-ого;;RURanking;RUAdjGenMN;RUAdj;
-;;сорокового;;RURanking;RUAdjGenMN;RUAdj;
-;;первого;;RURanking;RUAdjGenMN;RUAdj;
-;;седьмого;;RURanking;RUAdjGenMN;RUAdj;
-;;восьмого;;RURanking;RUAdjGenMN;RUAdj;
-;;второго;;RURanking;RUAdjGenMN;RUAdj;
-;;восемнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;двадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;двенадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;девятнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;одиннадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;пятнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;семнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;тридцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;тринадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;четырнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;шестнадцатого;;RURanking;RUAdjGenMN;RUAdj;
-;;четвертого;;RURanking;RUAdjGenMN;RUAdj;
-;;шестого;;RURanking;RUAdjGenMN;RUAdj;
-;;девяностого;;RURanking;RUAdjGenMN;RUAdj;
-;;девятого;;RURanking;RUAdjGenMN;RUAdj;
-;;пятого;;RURanking;RUAdjGenMN;RUAdj;
-;;восьмидесятого;;RURanking;RUAdjGenMN;RUAdj;
-;;десятого;;RURanking;RUAdjGenMN;RUAdj;
-;;пятидесятого;;RURanking;RUAdjGenMN;RUAdj;
-;;семидесятого;;RURanking;RUAdjGenMN;RUAdj;
-;;шестидесятого;;RURanking;RUAdjGenMN;RUAdj;
-;;третьему;;RURanking;RUAdjDatMN;RUAdj;
-;;сороковому;;RURanking;RUAdjDatMN;RUAdj;
-;;первому;;RURanking;RUAdjDatMN;RUAdj;
-;;седьмому;;RURanking;RUAdjDatMN;RUAdj;
-;;восьмому;;RURanking;RUAdjDatMN;RUAdj;
-;;второму;;RURanking;RUAdjDatMN;RUAdj;
-;;восемнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;двадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;двенадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;девятнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;одиннадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;пятнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;семнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;тридцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;тринадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;четырнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;шестнадцатому;;RURanking;RUAdjDatMN;RUAdj;
-;;четвертому;;RURanking;RUAdjDatMN;RUAdj;
-;;шестому;;RURanking;RUAdjDatMN;RUAdj;
-;;девяностому;;RURanking;RUAdjDatMN;RUAdj;
-;;девятому;;RURanking;RUAdjDatMN;RUAdj;
-;;пятому;;RURanking;RUAdjDatMN;RUAdj;
-;;восьмидесятому;;RURanking;RUAdjDatMN;RUAdj;
-;;десятому;;RURanking;RUAdjDatMN;RUAdj;
-;;пятидесятому;;RURanking;RUAdjDatMN;RUAdj;
-;;семидесятому;;RURanking;RUAdjDatMN;RUAdj;
-;;шестидесятому;;RURanking;RUAdjDatMN;RUAdj;
-;;iх;;RURanking;RUAdj;
-;;хiх;;RURanking;RUAdj;
-;;х;;RURanking;RUAdj;
-;;хх;;RURanking;RUAdj;
-;;сороковых;;RURanking;RUAdjGenPl;RUAdj;
-;;двадцатых;;RURanking;RUAdjGenPl;RUAdj;
-;;тридцатых;;RURanking;RUAdjGenPl;RUAdj;
-;;девяностых;;RURanking;RUAdjGenPl;RUAdj;
-;;восьмидесятых;;RURanking;RUAdjGenPl;RUAdj;
-;;десятых;;RURanking;RUAdjGenPl;RUAdj;
-;;пятидесятых;;RURanking;RUAdjGenPl;RUAdj;
-;;семидесятых;;RURanking;RUAdjGenPl;RUAdj;
-;;шестидесятых;;RURanking;RUAdjGenPl;RUAdj;
-;;раза;;RURaz;
-;;много раз;;RURaz;
-;;раз;;RURaz;
+;;пятидесятые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;семидесятые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;шестидесятые;;RUOrdNum;RUAdjNomAccPl;RUAdj;
+;;i-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;ii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;iii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;viii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xviii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xiii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;vii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xvii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xii-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;vi-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xvi-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xi-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xxi-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;iv-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xiv-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;v-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xv-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;ix-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;x-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;xx-м;;RUOrdNum;RUAdjPreposMN;RUAdjInstrMN/DatPl;RUAdj;RUDigit;
+;;iii-ем;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;третьем;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;третьим;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;i-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;ii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;viii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xiii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xviii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;vii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xvii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xii-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;vi-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xvi-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xi-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xxi-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;iv-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xiv-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;v-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xv-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;ix-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;x-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;xx-ом;;RUOrdNum;RUAdjPreposMN;RUAdj;RUDigit;
+;;сороковом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;первом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;седьмом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;восьмом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;втором;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;восемнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;двадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;двенадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;девятнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;одиннадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;пятнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;семнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;тридцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;тринадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;четырнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;шестнадцатом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;четвертом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;шестом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;девяностом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;девятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;пятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;восьмидесятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;десятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;пятидесятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;семидесятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;шестидесятом;;RUOrdNum;RUAdjPreposMN;RUAdj;
+;;сороковым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;первым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;седьмым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;восьмым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;вторым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;восемнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;двадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;двенадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;девятнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;одиннадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;пятнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;семнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;тридцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;тринадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;четырнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;шестнадцатым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;четвертым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;шестым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;девяностым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;девятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;пятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;восьмидесятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;десятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;пятидесятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;семидесятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;шестидесятым;;RUOrdNum;RUAdjInstrMN/DatPl;RUAdj;
+;;i-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUAdjGenMN;RUAdj;RUDigit;
+;;ii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;iii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;viii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xiii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xviii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;vii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xvii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xii-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;vi-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xvi-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xi-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xxi-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;iv-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xiv-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;v-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xv-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;ix-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;x-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xx-го;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;третьего;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;i-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;ii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;iii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;vii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;viii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xiii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xvii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xviii-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;vi-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xvi-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xi-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xxi-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;iv-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xiv-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;v-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xv-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;ix-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;x-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;xx-ого;;RUOrdNum;RUAdjGenMN;RUAdj;RUDigit;
+;;сорокового;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;первого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;седьмого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;восьмого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;второго;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;восемнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;двадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;двенадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;девятнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;одиннадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;пятнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;семнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;тридцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;тринадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;четырнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;шестнадцатого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;четвертого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;шестого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;девяностого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;девятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;пятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;восьмидесятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;десятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;пятидесятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;семидесятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;шестидесятого;;RUOrdNum;RUAdjGenMN;RUAdj;
+;;третьему;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;сороковому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;первому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;седьмому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;восьмому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;второму;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;восемнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;двадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;двенадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;девятнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;одиннадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;пятнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;семнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;тридцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;тринадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;четырнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;шестнадцатому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;четвертому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;шестому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;девяностому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;девятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;пятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;восьмидесятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;десятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;пятидесятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;семидесятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;шестидесятому;;RUOrdNum;RUAdjDatMN;RUAdj;
+;;iх;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хiх;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;х;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;хх;;RUOrdNum;RUAdj;RUDigit;RURoman;
+;;сороковых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;двадцатых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;тридцатых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;девяностых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;восьмидесятых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;десятых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;пятидесятых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;семидесятых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;шестидесятых;;RUOrdNum;RUAdjGenPl;RUAdj;
+;;раза;;RURaz;RUTimes;
+
+;;раз;;RURaz;RUTimes;
 ;;та;;RUDempron;
 ;;се;;RUDempron;
 ;;те;;RUDempron;
 ;;теми;;RUDempron;
-;;той;;RUDempron;
-;;того;;RUDempron;
+;;той;;RUDempron;RUPlusGen;
+;;того;;RUDempron;RUPlusGen;
 ;;тот;;RUDempron;
 ;;тому;;RUDempron;
 ;;ту;;RUDempron;
-;;тех;;RUDempron;
+;;тех;;RUDempron;RUPlusGen;
 ;;тем;;RUDempronConj;
 ;;то;;RUDempronConj;
 ;;себе;;RURefl;
@@ -10454,36 +10502,35 @@
 ;;друг друге;;RURepr;
 ;;друг другом;;RURepr;
 ;;друг другу;;RURepr;
-;;назад;;RUNazad;
-;;спустя;;RUPrep;
-;;секунда спустя;;RUECon;RUCon;
-;;секунды спустя;;RUECon;RUCon;
-;;секунд спустя;;RUECon;RUCon;
-;;минута спустя;;RUECon;RUCon;
-;;минуты спустя;;RUECon;RUCon;
-;;минут спустя;;RUECon;RUCon;
-;;час спустя;;RUECon;RUCon;
-;;часа спустя;;RUECon;RUCon;
-;;часов спустя;;RUECon;RUCon;
-;;день спустя;;RUECon;RUCon;
-;;дня спустя;;RUECon;RUCon;
-;;дни спустя;;RUECon;RUCon;
-;;дней спустя;;RUECon;RUCon;
-;;неделя спустя;;RUECon;RUCon;
-;;недели спустя;;RUECon;RUCon;
-;;недель спустя;;RUECon;RUCon;
-;;месяц спустя;;RUECon;RUCon;
-;;месяца спустя;;RUECon;RUCon;
-;;месяцев спустя;;RUECon;RUCon;
-;;год спустя;;RUECon;RUCon;
-;;года спустя;;RUECon;RUCon;
-;;лет спустя;;RUECon;RUCon;
-;;век спустя;;RUECon;RUCon;
-;;века спустя;;RUECon;RUCon;
-;;веков спустя;;RUECon;RUCon;
-;;столетие спустя;;RUECon;RUCon;
-;;столетия спустя;;RUECon;RUCon;
-;;столетий спустя;;RUECon;RUCon;
+;;назад;;RUNazad;RUCon;RUEndTime;
+;;спустя;;RUPrep;RUEndTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ;;это самое;;RUSamyj;RUAdjNomN;
 ;;самое;;RUSamyj;RUAdjNomN;
 ;;самые;;RUSamyj;RUAdjNomAccPl;
@@ -10528,43 +10575,46 @@
 ;;такою уж;;RUTakoj;
 ;;такую уж;;RUTakoj;
 ;;такая уж;;RUTakoj;
-;;после обеда;;RUTemp;
-;;зиме;;RUTemp;
-;;весне;;RUTemp;
-;;полуночи;;RUTemp;
-;;этой зимой;;RUTemp;RUTempBeginEnd;
-;;зимой;;RUTemp;RUTempBeginEnd;
-;;весной;;RUTemp;RUTempBeginEnd;
-;;этой весной;;RUTemp;RUTempBeginEnd;
-;;четвергам;;RUTemp;
-;;вторникам;;RUTemp;
-;;понедельникам;;RUTemp;
-;;субботам;;RUTemp;
-;;пятницам;;RUTemp;
-;;ранним утром;;RUTemp;RUTempBeginEnd;
-;;этим летом;;RUTemp;RUTempBeginEnd;
-;;летом;;RUTemp;RUTempBeginEnd;
-;;воскресеньям;;RUTemp;
-;;все утро;;RUTemp;
-;;это лето;;RUTemp;
-;;лето;;RUTemp;
-;;эту зиму;;RUTemp;
-;;зиму;;RUTemp;
-;;эту весну;;RUTemp;
-;;весну;;RUTemp;
-;;лету;;RUTemp;
-;;полдень;;RUTemp;
-;;эту осень;;RUTemp;
-;;осень;;RUTemp;
-;;всю ночь;;RUTemp;
-;;всю неделю;;RUWeek;
-;;осенью;;RUTemp;RUTempBeginEnd;
-;;этой осенью;;RUTemp;RUTempBeginEnd;
-;;наше время;;RUTemp;
+;;после обеда;;RUCon;RUTimeConcept;RUTime;
+;;зиме;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;весне;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;полуночи;;RUCon;RUTimeConcept;RUTime;
+
+;;зимой;;RUAdvTime;RUTime;RUSeason;
+;;весной;;RUAdvTime;RUTime;RUSeason;
+
+;;четвергам;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторникам;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельникам;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботам;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницам;;RUDay;RUCon;RUTimeConcept;RUTime;
+
+
+;;летом;;RUAdvTime;RUTime;RUSeason;
+;;воскресеньям;;RUDay;RUCon;RUTimeConcept;RUTime;
+
+
+;;лето;;RUCon;RUTimeConcept;RUTime;RUSeason;
+
+;;зиму;;RUCon;RUTimeConcept;RUTime;RUSeason;
+
+;;весну;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;лету;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;полдень;;RUCon;RUTimeConcept;RUTime;
+
+;;осень;;RUCon;RUTimeConcept;RUTime;RUSeason;RUConNomF/AccF;
+
+
+;;осенью;;RUAdvTime;RUTime;RUSeason;
+
+/**** Rewritten by DELVE, ;;в наше время;;RUPrep;-;RUAdvTime;RUTime;Join;
+;;в наше время;;RUPrep;Lit_в;-;RUAdvTime;RUTime;Join
 ;;том;;RUTom;
 ;;чаще;;RUTsjasje;
-;;чаще , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
-;;чаще чем;;RURAdv;-;RURelpron;RUNegRelpron;
+/**** Rewritten by DELVE, ;;чаще , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;
+;;чаще , чем;;RURAdv;-;RUComma;-;RURelpron;RUNegRelpron;Lit_чем
+/**** Rewritten by DELVE, ;;чаще чем;;RURAdv;-;RURelpron;RUNegRelpron;
+;;чаще чем;;RURAdv;-;RURelpron;RUNegRelpron;Lit_чем
 ;;части;;RUCon;
 /**** Rewritten by DELVE, ;;в состоянии;;RUV;-;RUSos;
 ;;в состоянии;;RUV;Lit_в;-;RUSos
@@ -10604,70 +10654,70 @@
 ;;пристань;;RUVerbCon;
 ;;пропасть;;RUVerbCon;
 ;;вести;;RUVesti;
-;;всего;;RUVsego;
-;;всех;;RUVsego;
-;;все;;RUVsjo;
+;;всего;;RUVsego;RUBeginTime;
+;;всех;;RUVsego;RUBeginTime;
+;;все;;RUVsjo;RUBeginTime;
 ;;все это;;RUIndefpronPR;
-;;месяца;;RUWeek;
-;;неделе;;RUWeek;
-;;месяце;;RUWeek;
-;;месяцем;;RUWeek;
-;;месяцу;;RUWeek;
-;;месяц;;RUWeek;
-;;неделю;;RUWeek;
-;;недель;;RUWeek;
+;;месяца;not always Time because can mean 'moon';RUTimeConcept;RUCon;
+;;неделе;;RUTimeConcept;RUCon;RUTime;
+;;месяце;not always Time because can mean 'moon';RUTimeConcept;RUCon;
+;;месяцем;not always Time because can mean 'moon';RUTimeConcept;RUCon;
+;;месяцу;not always Time because can mean 'moon';RUTimeConcept;RUCon;
+;;месяц;not always Time because can mean 'moon';RUTimeConcept;RUCon;
+;;неделю;;RUTimeConcept;RUCon;RUTime;
+;;недель;;RUTimeConcept;RUCon;RUTime;
 
-;;г.;;RUYear;
-;;гг.;;RUYear;
-;;г до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;г н. э.;;RUYear;-;RUCon;-;RUECon;
-;;г. до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;г. н. э.;;RUYear;-;RUCon;-;RUECon;
-;;гг до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;гг н. э.;;RUYear;-;RUCon;-;RUECon;
-;;гг. до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;гг. н. э.;;RUYear;-;RUCon;-;RUECon;
-;;году до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;году н. э.;;RUYear;-;RUCon;-;RUECon;
-;;лет до н. э.;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;лет н. э.;;RUYear;-;RUCon;-;RUECon;
-;;года;;RUYear;
-;;годов;;RUYear;
-;;г;;RUYear;
-;;гг;;RUYear;
-;;этот же год;;RUYear;
-;;этот год;;RUYear;
-;;год;;RUYear;
-;;годе;;RUYear;
+;;г.;;RUYear;RUConGen;RUAcro;
+;;гг.;;RUYear;RUConGen;RUAcro;
 
 
-;;годами;;RUYear;
 
 
-;;годам;;RUYear;
-
-;;годом;;RUYear;
-
-;;году;;RUYear;
-;;годах;;RUYear;
-
-;;годы;;RUYear;
-;;г до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;г нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;г. до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;г. нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;гг до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;гг нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;гг. до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;гг. нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;году до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;году нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;лет до нашей эры;;RUYear;-;RUPrep;-;RUCon;-;RUECon;
-;;лет нашей эры;;RUYear;-;RUCon;-;RUECon;
-;;день;;RUYear;
 
 
-;;дня;;RUYear;
+
+
+
+
+
+
+;;года;;RUYear;RUConGen;RUConGenMN;RUTimeConcept;RUCon;RUTime;
+;;годов;;RUYear;RUConGen;RUConGenPl;RUTimeConcept;RUCon;RUTime;
+;;г;;RUYear;RUConGen;RUAcro;
+;;гг;;RUYear;RUConGen;RUAcro;
+
+
+;;год;;RUYear;RUTimeConcept;RUCon;RUTime;
+;;годе;;RUYear;RUTimeConcept;RUCon;RUTime;
+;;десятилетие;;RUCon;RUTimeConcept;RUTime;
+;;десятилетии;;RUCon;RUTimeConcept;RUTime;
+;;годами;;RUYear;RUTimeConcept;RUCon;RUTime;
+;;десятилетиями;;RUCon;RUTimeConcept;RUTime;
+;;десятилетий;;RUCon;RUTimeConcept;RUTime;
+;;годам;;RUYear;RUTimeConcept;RUCon;RUTime;
+;;десятилетием;;RUCon;RUTimeConcept;RUTime;
+;;годом;;RUYear;RUTimeConcept;RUCon;RUTime;
+;;десятилетиям;;RUCon;RUTimeConcept;RUTime;
+;;году;;RUYear;RUCon;RUTimeConcept;RUTime;
+;;годах;;RUYear;RUCon;RUTimeConcept;RUTime;
+;;десятилетиях;;RUCon;RUTimeConcept;RUTime;
+;;годы;;RUYear;RUCon;RUTimeConcept;RUTime;
+
+
+
+
+
+
+
+
+
+
+
+
+;;день;;RUCon;RUConNom/AccM;RUTime;RUTimeConcept;
+;;десятилетию;;RUCon;RUTimeConcept;RUTime;
+;;десятилетия;;RUCon;RUTimeConcept;RUTime;
+;;дня;;RUCon;RUConGenMN;RUTime;RUTimeConcept;
 
 ;;подслизистом;;RUAdjPreposMN;RUAdj;
 ;;безусловно;;RUAdv
@@ -10678,36 +10728,36 @@
 ;;строгий;;RUAdjNomM;RUAdj;
 ;;сирую;;RUAdjAccF;RUAdj;
 ;;сизую;;RUAdjAccF;RUAdj;
-;;первый;;RUAdjNomM;RUAdj;RURanking;
-;;второй;;RUAdjGDPIF;RUAdj;RURanking;
-;;третий;;RUAdjNomM;RUAdj;RURanking;
-;;четвертый;;RUAdjNomM;RUAdj;RURanking;
-;;пятый;;RUAdjNomM;RUAdj;RURanking;
-;;шестой;;RUAdjGDPIF;RUAdj;RURanking;
-;;седьмой;;RUAdjGDPIF;RUAdj;RURanking;
-;;восьмой;;RUAdjGDPIF;RUAdj;RURanking;
-;;девятый;;RUAdjNomM;RUAdj;RURanking;
-;;десятый;;RUAdjNomM;RUAdj;RURanking;
-;;первую;;RUAdjAccF;RUAdj;RURanking;
-;;вторую;;RUAdjAccF;RUAdj;RURanking;
-;;третью;;RUAdjAccF;RUAdj;RURanking;
-;;четвертую;;RUAdjAccF;RUAdj;RURanking;
-;;пятую;;RUAdjAccF;RUAdj;RURanking;
-;;шестую;;RUAdjAccF;RUAdj;RURanking;
-;;седьмую;;RUAdjAccF;RUAdj;RURanking;
-;;восьмую;;RUAdjAccF;RUAdj;RURanking;
-;;девятую;;RUAdjAccF;RUAdj;RURanking;
-;;десятую;;RUAdjAccF;RUAdj;RURanking;
-;;первые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;вторые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;третьи;;RUAdjNomAccPl;RUAdj;RURanking;
-;;четвертые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;пятые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;шестые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;седьмые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;восьмые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;девятые;;RUAdjNomAccPl;RUAdj;RURanking;
-;;десятые;;RUAdjNomAccPl;RUAdj;RURanking;
+;;первый;;RUAdjNomM;RUAdj;RUOrdNum;
+;;второй;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;третий;;RUAdjNomM;RUAdj;RUOrdNum;
+;;четвертый;;RUAdjNomM;RUAdj;RUOrdNum;
+;;пятый;;RUAdjNomM;RUAdj;RUOrdNum;
+;;шестой;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;седьмой;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;восьмой;;RUAdjGDPIF;RUAdj;RUOrdNum;
+;;девятый;;RUAdjNomM;RUAdj;RUOrdNum;
+;;десятый;;RUAdjNomM;RUAdj;RUOrdNum;
+;;первую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;вторую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;третью;;RUAdjAccF;RUAdj;RUOrdNum;
+;;четвертую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;пятую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;шестую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;седьмую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;восьмую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;девятую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;десятую;;RUAdjAccF;RUAdj;RUOrdNum;
+;;первые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;вторые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;третьи;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;четвертые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;пятые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;шестые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;седьмые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;восьмые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;девятые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
+;;десятые;;RUAdjNomAccPl;RUAdj;RUOrdNum;
 ;;пустит в ход;;RUVerb;
 ;;воплощать в жизнь;;RUVerb;
 ;;получил в собственность;;RUVerb;
@@ -10737,7 +10787,7 @@
 ;;на смену;;RUPrep;
 ;;дым;;RUCon;
 ;;крым;;RUCon;
-;;днем;;RUCon;
+;;днем;;RUCon;RUTimeConcept;RUTime;
 ;;человеком;;RUCon;
 ;;сроком;;RUCon;
 ;;брешь;;RUCon;
@@ -10761,14 +10811,12 @@
 ;;провала;;RUCon;
 ;;шаповал;;RUCon;
 ;;шаповала;;RUCon;
-;;подвал;;RUCon;
-;;подвала;;RUCon;
 ;;вал;;RUCon;
 ;;вала;;RUCon;
 ;;штурвал;;RUCon;
 ;;штурвала;;RUCon;
-;;подвал;;RUCon
-;;подвала;;RUCon
+;;подвал;;RUCon;
+;;подвала;;RUCon;
 ;;интервал;;RUCon;
 ;;интервала;;RUCon;
 ;;фестивали;;RUCon;
@@ -10827,7 +10875,6 @@
 ;;дали;;RUVerb;
 ;;дало;;RUVerb;
 ;;дала;;RUVerb;
-;;орел;;RUCon;
 ;;ккал;;RUCon;
 ;;аль-газали;;RUCon;
 ;;скал;;RUCon;
@@ -10866,7 +10913,7 @@
 ;;стрела;;RUCon;RUConNomF;
 ;;выстрел;;RUCon;
 ;;выстрела;;RUCon;
-;;орел;;RUCon
+;;орел;;RUCon;
 ;;расстрел;;RUCon;
 ;;расстрела;;RUCon;
 ;;обстрел;;RUCon;
@@ -11345,7 +11392,6 @@
 ;;провезли;;RUVerb;
 ;;увезли;;RUVerb;
 ;;вывезли;;RUVerb;
-;;влезли;;RUVerb;
 ;;полезли;;RUVerb;
 ;;исчезли;;RUVerb;
 ;;зли;;RUVerb;
@@ -13248,7 +13294,6 @@
 ;;повезло;;RUVerb;
 ;;провезло;;RUVerb;
 ;;вывезло;;RUVerb;
-;;влезло;;RUVerb;
 ;;исчезло;;RUVerb;
 ;;поблекло;;RUVerb;
 ;;вовлекло;;RUVerb;
@@ -13276,7 +13321,6 @@
 ;;перенесло;;RUVerb;
 ;;произнесло;;RUVerb;
 ;;принесло;;RUVerb;
-;;несло;;RUVerb;
 ;;донесло;;RUVerb;
 ;;пронесло;;RUVerb;
 ;;отнесло;;RUVerb;
@@ -13476,7 +13520,6 @@
 ;;звонит;;RUVerb;
 ;;позвонит;;RUVerb;
 ;;пустозвонит;;RUVerb;
-;;гонит;;RUVerb;
 ;;долдонит;;RUVerb;
 ;;узаконит;;RUVerb;
 ;;клонит;;RUVerb;
@@ -13524,9 +13567,6 @@
 ;;натрут;;RUVerb;
 ;;сотрут;;RUVerb;
 ;;ототрут;;RUVerb;
-;;натрут;;RUVerb
-;;сотрут;;RUVerb
-;;ототрут;;RUVerb
 ;;прут;;RUVerb;
 ;;бют;;RUVerb;
 ;;гниют;;RUVerb;
@@ -13900,7 +13940,6 @@
 ;;холю;;RUVerb;
 ;;закуплю;;RUVerb;
 ;;подкуплю;;RUVerb;
-;;сулю;;RUVerb;
 ;;хохлю;;RUVerb;
 ;;наколю;;RUVerb;
 ;;школю;;RUVerb;
@@ -14186,11 +14225,10 @@
 ;;пью;;RUVerb;
 ;;выпью;;RUVerb;
 ;;сошью;;RUVerb;
-;;лживая;;RUAdjNomF;RUAdj;
 ;;служивая;;RUAdjNomF;RUAdj;
 ;;старослуживая;;RUAdjNomF;RUAdj;
 ;;живая;;RUAdjNomF;RUAdj;
-;;лживая;;RUAdjNomF;RUAdj
+;;лживая;;RUAdjNomF;RUAdj;
 ;;кривая;;RUAdjNomF;RUAdj;
 ;;игривая;;RUAdjNomF;RUAdj;
 ;;сивогривая;;RUAdjNomF;RUAdj;
@@ -16209,7 +16247,7 @@
 ;;обедняя;;RUVerb;
 ;;усредняя;;RUVerb;
 ;;упраздняя;;RUVerb;
-;;поздняя;;RUVerb;
+;;поздняя;;RUAdj;RUAdjNomF;RUBeginTime;
 ;;заводняя;;RUVerb;
 ;;наводняя;;RUVerb;
 ;;обводняя;;RUVerb;
@@ -16243,7 +16281,7 @@
 ;;вкореняя;;RUVerb;
 ;;искореняя;;RUVerb;
 ;;укореняя;;RUVerb;
-;;осеняя;;RUVerb;
+
 ;;затеняя;;RUVerb;
 ;;оттеняя;;RUVerb;
 ;;увлажняя;;RUVerb;
@@ -17015,14 +17053,12 @@
 ;;имеющих в виду;;RUPartAdj;
 ;;имеющую в виду;;RUPartAdj;
 ;;начатому;;RUPartAdj;RUAdjDatMN;
-;;внесших;;RUPartAdj;RUAdjGenPl;
-;;возросших;;RUPartAdj;RUAdjGenPl;
 ;;возросшим;;RUPartAdj;RUAdjInstrMN/DatPl;
 ;;потрясшим;;RUPartAdj;RUAdjInstrMN/DatPl;
 ;;унесшие;;RUPartAdj;RUAdjNomAccPl;
 ;;перенесший;;RUPartAdj;RUAdjNomM;
-;;внесших;;RUPartAdj;RUAdjGenPl
-;;возросших;;RUPartAdj;RUAdjGenPl
+;;внесших;;RUPartAdj;RUAdjGenPl;
+;;возросших;;RUPartAdj;RUAdjGenPl;
 ;;начатых;;RUPartAdj;RUAdjGenPl;
 ;;передаваемая в собственность;;RUPartAdj;
 ;;передаваемого в собственность;;RUPartAdj;
@@ -17095,7 +17131,6 @@
 ;;пленным;;RUAdjInstrMN/DatPl;RUAdj;
 ;;пленном;;RUAdjPreposMN;RUAdj;
 ;;пленная;;RUAdjNomF;RUAdj;
-;;пленной;;RUAdjGDPIF;RUAdj
 ;;пленную;;RUAdjAccF;RUAdj;
 ;;пленное;;RUAdjNomN;RUAdj;
 ;;пленные;;RUAdjNomAccPl;RUAdj;
@@ -17166,10 +17201,7 @@
 ;;елок;;RUConGenPl;RUConGen;RUCon;
 ;;мер;;RUConGenPl;RUConGen;RUCon;
 ;;взяв под контроль;;RUPart;
-;;взял под контроль;;RUVerb
-;;взяла под контроль;;RUVerb
 ;;взяло под контроль;;RUVerb;
-;;взяли под контроль;;RUVerb
 ;;возьмет под контроль;;RUVerb;
 ;;возьмут под контроль;;RUVerb;
 ;;взять под контроль;;RUInf;
@@ -17215,28 +17247,8 @@
 ;;отказалась от должности;;RUVerb;
 ;;отказались от должности;;RUVerb;
 ;;отказаться от должности;;RUInf;
-;;принять во внимание;;RUInf
-;;принимать во внимание;;RUInf
 ;;принимая во внимание;;RUVerb;
-;;принял во внимание;;RUVerb
-;;приняла во внимание;;RUVerb
-;;приняло во внимание;;RUVerb
-;;приняли во внимание;;RUVerb
 ;;приняв во внимание;;RUVerb;
-;;принимал во внимание;;RUVerb
-;;принимала во внимание;;RUVerb
-;;принимало во внимание;;RUVerb
-;;принимали во внимание;;RUVerb
-;;принимаю во внимание;;RUVerb
-;;принимаешь во внимание;;RUVerb
-;;принимает во внимание;;RUVerb
-;;принимаем во внимание;;RUVerb
-;;принимаете во внимание;;RUVerb
-;;принимают во внимание;;RUVerb
-;;принимается во внимание;;RUVerb
-;;принимаются во внимание;;RUVerb
-;;примет во внимание;;RUVerb
-;;примут во внимание;;RUVerb
 ;;брать во внимание;;RUInf;
 ;;выставил на продажу;;RUVerb;
 ;;выставила на продажу;;RUVerb;
@@ -17270,19 +17282,19 @@
 ;;благодать;;RUConNomF;RUCon;
 ;;правой;;RUAdjGDPIF;RUAdj;
 ;;что-то такое;;RUIndefpronPR;
-;;подряд;;RUNoEConBefore;
-;;январь;;RUMonthNom;RUCon;
-;;февраль;;RUMonthNom;RUCon;
-;;март;;RUMonthNom;RUCon;
-;;апрель;;RUMonthNom;RUCon;
-;;май;;RUMonthNom;RUCon;
-;;июнь;;RUMonthNom;RUCon;
-;;июль;;RUMonthNom;RUCon;
-;;август;;RUMonthNom;RUCon;
-;;сентябрь;;RUMonthNom;RUCon;
-;;октябрь;;RUMonthNom;RUCon;
-;;ноябрь;;RUMonthNom;RUCon;
-;;декабрь;;RUMonthNom;RUCon;
+;;подряд;;RUCon;RUEndTime;
+;;январь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;февраль;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;март;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;апрель;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;май;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;июнь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;июль;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;август;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUConIfCap;RUTime;
+;;сентябрь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;октябрь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;ноябрь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
+;;декабрь;;RUCon;RUConNom/AccM;RUMonth;RUTimeConcept;RUTime;
 ;;манила;;RUVerb;RUConIfCap;
 ;;мчило;;RUVerb;
 ;;ежит;;RUVerb;
@@ -17374,7 +17386,6 @@
 ;;ценного;;RUAdjGenMN;RUAdj;
 ;;юного;;RUAdjGenMN;RUAdj;
 ;;командующого;;RUAdjGenMN;RUAdj;
-;;болезненного;;RUAdjGenMN;RUAdj
 ;;коленного;;RUAdjGenMN;RUAdj;
 ;;алой;;RUAdjGDPIF;RUAdj;
 ;;злой;;RUAdjGDPIF;RUAdj;
@@ -17441,10 +17452,10 @@
 ;;дом;;RUConNom/AccM;RUCon;
 ;;слом;;RUConNom/AccM;RUCon;
 ;;азом;;RUConInstrMN;RUCon;
-;;музея;;RUConGen;RUCon;
-;;гена;;RUConGen;RUCon;
-;;генеза;;RUConGen;RUCon;
-;;здоровья;;RUConGen;RUCon;
+;;музея;;RUConGen;RUCon;RUConGenMN;
+;;гена;;RUConGen;RUCon;RUConGenMN;
+;;генеза;;RUConGen;RUCon;RUConGenMN;
+;;здоровья;;RUConGen;RUCon;RUConGenMN;
 ;;мобили;;RUConNomAccPl;RUCon;
 ;;листья;;RUConNomAccPl;RUCon;
 ;;чане;;RUConPrepos;RUCon;
@@ -17707,8 +17718,8 @@
 ;;владело;;RUVerb;
 ;;владел;;RUVerb;
 ;;влезла;;RUVerb;
-;;влезли;;RUVerb
-;;влезло;;RUVerb
+;;влезли;;RUVerb;
+;;влезло;;RUVerb;
 ;;влез;;RUVerb;
 ;;влекла;;RUVerb;
 ;;влекли;;RUVerb;
@@ -17987,14 +17998,13 @@
 ;;несла;;RUVerb;
 ;;нес;;RUVerb;
 ;;несли;;RUVerb;
-;;несло;;RUVerb
+;;несло;;RUVerb;
 ;;носила;;RUVerb;
 ;;носили;;RUVerb;
 ;;носило;;RUVerb;
 ;;носил;;RUVerb;
 ;;обидел;;RUVerb;
 ;;обидела;;RUVerb;
-;;обидели;;RUVerb
 ;;обидело;;RUVerb;
 ;;одел;;RUVerb;
 ;;одела;;RUVerb;
@@ -18038,7 +18048,6 @@
 ;;плыла;;RUVerb;
 ;;плыли;;RUVerb;
 ;;плыло;;RUVerb;
-;;плыл;;RUVerb
 ;;пил;;RUVerbCon;
 ;;пила;;RUVerbCon;
 ;;пили;;RUVerb;
@@ -18065,7 +18074,6 @@
 ;;пожилило;;RUVerb;
 ;;полез;;RUVerb;
 ;;полезла;;RUVerb;
-;;полезли;;RUVerb
 ;;полезло;;RUVerb;
 ;;полз;;RUVerb;
 ;;ползла;;RUVerb;
@@ -18084,9 +18092,6 @@
 ;;попили;;RUVerb;
 ;;попило;;RUVerb;
 ;;порола;;RUVerb;
-;;пороли;;RUVerb
-;;пороло;;RUVerb
-;;порол;;RUVerb
 ;;потел;;RUVerb;
 ;;потела;;RUVerb;
 ;;потело;;RUVerb;
@@ -18095,7 +18100,6 @@
 ;;прилезла;;RUVerb;
 ;;прилезли;;RUVerb;
 ;;прилезло;;RUVerb;
-;;приминал;;RUVerb
 ;;приминала;;RUVerb;
 ;;приминали;;RUVerb;
 ;;приминало;;RUVerb;
@@ -18128,10 +18132,7 @@
 ;;росило;;RUVerb;
 ;;росил;;RUVerb;
 ;;росла;;RUVerb;
-;;росли;;RUVerb
-;;росло;;RUVerb
 ;;свистела;;RUVerb;
-;;свистели;;RUVerb
 ;;свистело;;RUVerb;
 ;;свистел;;RUVerb;
 ;;сдала;;RUVerb;
@@ -18140,14 +18141,12 @@
 ;;сдал;;RUVerb;
 ;;сидел;;RUVerb;
 ;;сидела;;RUVerb;
-;;сидели;;RUVerb
 ;;сидело;;RUVerb;
 ;;синил;;RUVerb;
 ;;синила;;RUVerb;
 ;;синили;;RUVerb;
 ;;синило;;RUVerb;
 ;;сиротела;;RUVerb;
-;;сиротели;;RUVerb
 ;;сиротело;;RUVerb;
 ;;сиротел;;RUVerb;
 ;;слал;;RUVerb;
@@ -18158,11 +18157,9 @@
 ;;слыли;;RUVerb;
 ;;слыло;;RUVerb;
 ;;слыл;;RUVerb;
-;;смели;;RUVerb
 ;;сминала;;RUVerb;
 ;;сминали;;RUVerb;
 ;;сминало;;RUVerb;
-;;сминал;;RUVerb
 ;;снил;;RUVerb;
 ;;снила;;RUVerb;
 ;;снили;;RUVerb;
@@ -18172,7 +18169,6 @@
 ;;спали;;RUVerb;
 ;;спало;;RUVerb;
 ;;съела;;RUVerb;
-;;съели;;RUVerb
 ;;съело;;RUVerb;
 ;;съел;;RUVerb;
 ;;сыпал;;RUVerb;
@@ -18182,9 +18178,7 @@
 ;;таила;;RUVerb;
 ;;таили;;RUVerb;
 ;;таило;;RUVerb;
-;;таил;;RUVerb
 ;;темнела;;RUVerb;
-;;темнели;;RUVerb
 ;;темнело;;RUVerb;
 ;;темнел;;RUVerb;
 ;;тенил;;RUVerb;
@@ -18228,11 +18222,9 @@
 ;;умел;;RUVerb;
 ;;умела;;RUVerb;
 ;;умело;;RUVerb;
-;;умели;;RUVerb
 ;;уминала;;RUVerb;
 ;;уминали;;RUVerb;
 ;;уминало;;RUVerb;
-;;уминал;;RUVerb
 ;;упал;;RUVerb;
 ;;упала;;RUVerb;
 ;;упали;;RUVerb;
@@ -18244,7 +18236,6 @@
 ;;ходило;;RUVerb;
 ;;худел;;RUVerb;
 ;;худела;;RUVerb;
-;;худели;;RUVerb
 ;;худело;;RUVerb;
 ;;цветала;;RUVerb;
 ;;цветали;;RUVerb;
@@ -18268,8 +18259,6 @@
 ;;чтило;;RUVerb;
 ;;шел;;RUVerb;
 ;;шла;;RUVerb;
-;;шло;;RUVerb
-;;шли;;RUVerb
 ;;шутил;;RUVerb;
 ;;шутила;;RUVerb;
 ;;шутили;;RUVerb;
@@ -18472,7 +18461,6 @@
 ;;гудите;;RUVerb;
 ;;гудят;;RUVerb;
 ;;идите;;RUVerb;
-;;беру;;RUVerb
 ;;берешь;;RUVerb;
 ;;берем;;RUVerb;
 ;;бериут;;RUVerb;
@@ -18524,7 +18512,6 @@
 ;;машете;;RUVerb;
 ;;машут;;RUVerb;
 ;;болю;;RUVerb;
-;;болит;;RUVerb
 ;;болишь;;RUVerb;
 ;;болим;;RUVerb;
 ;;болите;;RUVerb;
@@ -18533,19 +18520,16 @@
 ;;стою;;RUVerb;
 ;;стоишь;;RUVerb;
 ;;стоит;;RUVerb;
-;;стоим;;RUVerb
 ;;стоите;;RUVerb;
 ;;стоят;;RUVerb;
 ;;жалею;;RUVerb;
 ;;жалеешь;;RUVerb;
 ;;жалеет;;RUVerb;
-;;жалеем;;RUVerb
 ;;жалеете;;RUVerb;
 ;;жалеют;;RUVerb;
 ;;пою;;RUVerb;
 ;;поишь;;RUVerb;
 ;;поит;;RUVerb;
-;;поим;;RUVerb
 ;;поите;;RUVerb;
 ;;поят;;RUVerb;
 ;;дышу;;RUVerb;
@@ -18572,11 +18556,9 @@
 ;;храним;;RUVerb;
 ;;храните;;RUVerb;
 ;;храният;;RUVerb;
-;;гоню;;RUVerb
 ;;гонишь;;RUVerb;
-;;гонит;;RUVerb
 ;;гоним;;RUVerb;
-;;гонит;;RUVerb
+;;гонит;;RUVerb;
 ;;гонят;;RUVerb;
 ;;дурю;;RUVerb;
 ;;дуришь;;RUVerb;
@@ -18584,7 +18566,7 @@
 ;;дурим;;RUVerb;
 ;;дурите;;RUVerb;
 ;;дурят;;RUVerb;
-;;сулю;;RUVerb
+;;сулю;;RUVerb;
 ;;сулишь;;RUVerb;
 ;;сулит;;RUVerb;
 ;;сулим;;RUVerb;
@@ -18596,19 +18578,14 @@
 ;;тратим;;RUVerb;
 ;;тратите;;RUVerb;
 ;;тратят;;RUVerb;
-;;ращу;;RUVerb
 ;;растишь;;RUVerb;
 ;;растит;;RUVerb;
-;;растим;;RUVerb
 ;;растите;;RUVerb;
 ;;растят;;RUVerb;
-;;жрут;;RUVerb;
 ;;жрешь;;RUVerb;
-;;жрут;;RUVerb
 ;;жрем;;RUVerb;
 ;;жрете;;RUVerb;
-;;жрут;;RUVerb
-;;учу;;RUVerb
+;;жрут;;RUVerb;
 ;;учишь;;RUVerb;
 ;;учит;;RUVerb;
 ;;учим;;RUVerb;
@@ -18617,7 +18594,6 @@
 ;;шучу;;RUVerb;
 ;;шутишь;;RUVerb;
 ;;шутит;;RUVerb;
-;;шутим;;RUVerb
 ;;шутите;;RUVerb;
 ;;шутят;;RUVerb;
 ;;царишь;;RUVerb;
@@ -18641,7 +18617,6 @@
 ;;кормим;;RUVerb;
 ;;кормите;;RUVerb;
 ;;кормят;;RUVerb;
-;;дую;;RUVerb
 ;;дуешь;;RUVerb;
 ;;дует;;RUVerb;
 ;;дуем;;RUVerb;
@@ -18656,11 +18631,9 @@
 ;;творю;;RUVerb;
 ;;творишь;;RUVerb;
 ;;творит;;RUVerb;
-;;творим;;RUVerb
 ;;творите;;RUVerb;
 ;;творят;;RUVerb;
 ;;зовите;;RUVerb;
-;;лгу;;RUVerb
 ;;лжешь;;RUVerb;
 ;;лжет;;RUVerb;
 ;;лжем;;RUVerb;
@@ -18727,7 +18700,6 @@
 ;;явив;;RUVerb;
 ;;гиб;;RUVerb;
 ;;кивая;;RUVerb;
-;;играя;;RUVerb
 ;;нося;;RUVerb;
 ;;лил;;RUVerb;
 ;;гонимый;;RUPartAdj;RUAdjNomM;
@@ -18743,7 +18715,6 @@
 ;;видимая;;RUPartAdj;RUAdjNomF;
 ;;видимое;;RUPartAdj;RUAdjNomN;
 ;;видимого;;RUPartAdj;RUAdjGenMN;
-;;видимую;;RUPartAdj;RUAdjAccF
 ;;видимому;;RUPartAdj;RUAdjDatMN;
 ;;видимой;;RUPartAdj;RUAdjGDPIF;
 ;;видимым;;RUPartAdj;RUAdjInstrMN/DatPl;
@@ -18772,17 +18743,8 @@
 ;;возимые;;RUPartAdj;RUAdjNomAccPl;
 ;;возимых;;RUPartAdj;RUAdjGenPl;
 ;;возимыми;;RUPartAdj;RUAdjInstrPl;
-;;гонимый;;RUPartAdj;RUAdjNomM
-;;гонимая;;RUPartAdj;RUAdjNomF
 ;;гонимое;;RUPartAdj;RUAdjNomN;
-;;гонимого;;RUPartAdj;RUAdjGenMN
-;;гонимую;;RUPartAdj;RUAdjAccF
-;;гонимому;;RUPartAdj;RUAdjDatMN
 ;;гонимой;;RUPartAdj;RUAdjGDPIF;
-;;гонимым;;RUPartAdj;RUAdjInstrMN/DatPl
-;;гонимые;;RUPartAdj;RUAdjNomAccPl
-;;гонимых;;RUPartAdj;RUAdjGenPl
-;;гонимыми;;RUPartAdj;RUAdjInstrPl
 ;;носимый;;RUPartAdj;RUAdjNomM;
 ;;носимая;;RUPartAdj;RUAdjNomF;
 ;;носимое;;RUPartAdj;RUAdjNomN;
@@ -18815,11 +18777,9 @@
 ;;тертым;;RUPartAdj;RUAdjInstrMN/DatPl;
 ;;тертые;;RUPartAdj;RUAdjNomAccPl;
 ;;тертых;;RUPartAdj;RUAdjGenPl;
-;;тертыми;;RUPartAdj;RUAdjInstrPl;
 ;;тертый;;RUPartAdj;RUAdjNomM;
-;;тертыми;;RUPartAdj;RUAdjInstrPl
+;;тертыми;;RUPartAdj;RUAdjInstrPl;
 ;;мытый;;RUPartAdj;RUAdjNomM;
-;;мытая;;RUPartAdj;RUAdjNomF
 ;;мытое;;RUPartAdj;RUAdjNomN;
 ;;мытого;;RUPartAdj;RUAdjGenMN;
 ;;мытую;;RUPartAdj;RUAdjAccF;
@@ -18967,7 +18927,6 @@
 ;;литого;;RUPartAdj;RUAdjGenMN;
 ;;литую;;RUPartAdj;RUAdjAccF;
 ;;литому;;RUPartAdj;RUAdjDatMN;
-;;литой;;RUPartAdj;RUAdjGDPIF
 ;;литым;;RUPartAdj;RUAdjInstrMN/DatPl;
 ;;литые;;RUPartAdj;RUAdjNomAccPl;
 ;;литых;;RUPartAdj;RUAdjGenPl;
@@ -18978,7 +18937,6 @@
 ;;шитого;;RUPartAdj;RUAdjGenMN;
 ;;шитую;;RUPartAdj;RUAdjAccF;
 ;;шитому;;RUPartAdj;RUAdjDatMN;
-;;шитой;;RUPartAdj;RUAdjGDPIF
 ;;шитым;;RUPartAdj;RUAdjInstrMN/DatPl;
 ;;шитые;;RUPartAdj;RUAdjNomAccPl;
 ;;шитых;;RUPartAdj;RUAdjGenPl;
@@ -19037,13 +18995,12 @@
 ;;единые;;RUOdin;RUAdjNomAccPl;RUAdj;
 ;;единых;;RUOdin;RUAdjGenPl;RUAdj;
 ;;едиными;;RUOdin;RUAdjInstrPl;RUAdj;
-;;какой-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какого-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какому-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какое-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какая-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какую-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
-;;какой-бы то ни было;;RUIndefpronPRNR;RUIndefpron
+;;какой-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какие-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;каких-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
 ;;какии-бы то ни было;;RUIndefpronPRNR;RUIndefpron;
@@ -19059,13 +19016,12 @@
 ;;теплом;;RUAdjPreposMN;RUAdj;
 ;;жарком;;RUAdjPreposMN;RUAdj;
 ;;безумно;;RUAdv;
-;;доселе;;RUTime;RUAdvPR;RUAdvTime;
+;;доселе;;RUTime;RUAdvPR;
 ;;лица;;RUConNomF/GenMN/NomAccPl;
 ;;дель;;RUCon;
 ;;фон;;RUCon;
 ;;сестер;;RUConGenPl;RUConGen;RUCon;
 ;;божья;;RUAdjNomF;RUAdj;
-;;листья;;RUConNomAccPl;RUCon
 ;;братья;;RUConNomAccPl;RUCon;
 ;;слова;;RUConNomF/GenMN/NomAccPl;RUConNomAccPl_ambig;RUCon;
 ;;слово;;RUConNomN;RUCon;
@@ -19104,16 +19060,10 @@
 ;;или нет E;;RUAndOrBut;RUAndOr;Lit_или;-;RURAdv;Lit_нет;-;SEnd
 ;;перечла;;RUVerb;
 ;;прочла;;RUVerb;
-;;сочла;;RUVerb
-;;учла;;RUVerb
 ;;помог;;RUVerb;
 ;;исчез;;RUVerb;
 ;;надоел;;RUVerb;
-;;поел;;RUVerb
-;;съел;;RUVerb
 ;;клеил;;RUVerb;
-;;лил;;RUVerb
-;;сшил;;RUVerb
 ;;страшил;;RUVerb;
 ;;ухудшил;;RUVerb;
 ;;улучшил;;RUVerb;
@@ -19127,11 +19077,12 @@
 ;;отнюдь не только;;RURAdv;
 ;;не токмо;;RURAdv;
 ;;не позже;;RUNe;RUNegBegin;RUNegation;-;RUComp;
-;;не более;;RUNe;RUNegBegin;RUNegation;-;RUComp;
+/**** Rewritten by DELVE, ;;не более;;RUNe;RUNegBegin;RUNegation;-;RUComp;
+;;не более;;RUNe;RUNegBegin;RUNegation;-;RUComp;Lit_более
 ;;не менее;;RUNe;RUNegBegin;RUNegation;-;RUComp;
 ;;не ранее;;RUNe;RUNegBegin;RUNegation;-;RUComp;
-;;не один год;;RUBeginendconcept;RUCon;
-;;уже не один год;;RUBeginendconcept;RUCon;
+
+
 ;;белый;;RUAdjNomM;RUAdj;
 ;;белая;;RUAdjNomF;RUAdj;
 ;;белое;;RUAdjNomN;RUAdj;
@@ -19151,7 +19102,6 @@
 ;;нового;;RUAdjGenMN;RUAdj;
 ;;новой;;RUAdjGDPIF;RUAdj;
 ;;новому;;RUAdjDatMN;RUAdj;
-;;новом;;RUAdjPreposMN;RUAdj
 ;;новым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;новые;;RUAdjNomAccPl;RUAdj;
 ;;новых;;RUAdjGenPl;RUAdj;
@@ -19163,7 +19113,6 @@
 ;;малого;;RUAdjGenMN;RUAdj;
 ;;малой;;RUAdjGDPIF;RUAdj;
 ;;малому;;RUAdjDatMN;RUAdj;
-;;малом;;RUAdjPreposMN;RUAdj
 ;;малым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;малые;;RUAdjNomAccPl;RUAdj;
 ;;малых;;RUAdjGenPl;RUAdj;
@@ -19175,23 +19124,22 @@
 ;;левого;;RUAdjGenMN;RUAdj;
 ;;левой;;RUAdjGDPIF;RUAdj;
 ;;левому;;RUAdjDatMN;RUAdj;
-;;левом;;RUAdjPreposMN;RUAdj
 ;;левым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;левые;;RUAdjNomAccPl;RUAdj;
 ;;левых;;RUAdjGenPl;RUAdj;
 ;;левыми;;RUAdjInstrPl;RUAdj;
-;;целый;;RUAdjNomM;RUAdj;
-;;целая;;RUAdjNomF;RUAdj;
-;;целое;;RUAdjNomN;RUAdj;
-;;целую;;RUAdjAccF;RUAdj;
-;;целого;;RUAdjGenMN;RUAdj;
-;;целой;;RUAdjGDPIF;RUAdj;
-;;целому;;RUAdjDatMN;RUAdj;
-;;целом;;RUAdjPreposMN;RUAdj;
-;;целым;;RUAdjInstrMN/DatPl;RUAdj;
-;;целые;;RUAdjNomAccPl;RUAdj;
-;;целых;;RUAdjGenPl;RUAdj;
-;;целыми;;RUAdjInstrPl;RUAdj;
+;;целый;;RUAdjNomM;RUAdj;RUBeginTime;
+;;целая;;RUAdjNomF;RUAdj;RUBeginTime;
+;;целое;;RUAdjNomN;RUAdj;RUBeginTime;
+;;целую;;RUAdjAccF;RUAdj;RUBeginTime;
+;;целого;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;целой;;RUAdjGDPIF;RUAdj;RUBeginTime;
+;;целому;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;целом;;RUAdjPreposMN;RUAdj;RUBeginTime;
+;;целым;;RUAdjInstrMN/DatPl;RUAdj;RUBeginTime;
+;;целые;;RUAdjNomAccPl;RUAdj;RUBeginTime;
+;;целых;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;целыми;;RUAdjInstrPl;RUAdj;RUBeginTime;
 ;;конный;;RUAdjNomM;RUAdj;
 ;;конная;;RUAdjNomF;RUAdj;
 ;;конное;;RUAdjNomN;RUAdj;
@@ -19245,7 +19193,6 @@
 ;;серое;;RUAdjNomN;RUAdj;
 ;;серую;;RUAdjAccF;RUAdj;
 ;;серого;;RUAdjGenMN;RUAdj;
-;;серой;;RUAdjGDPIF;RUAdj
 ;;серому;;RUAdjDatMN;RUAdj;
 ;;сером;;RUAdjPreposMN;RUAdj;
 ;;серым;;RUAdjInstrMN/DatPl;RUAdj;
@@ -19269,7 +19216,6 @@
 ;;милое;;RUAdjNomN;RUAdj;
 ;;милую;;RUAdjAccF;RUAdj;
 ;;милого;;RUAdjGenMN;RUAdj;
-;;милой;;RUAdjGDPIF;RUAdj
 ;;милому;;RUAdjDatMN;RUAdj;
 ;;милом;;RUAdjPreposMN;RUAdj;
 ;;милым;;RUAdjInstrMN/DatPl;RUAdj;
@@ -19317,17 +19263,13 @@
 ;;полое;;RUAdjNomN;RUAdj;
 ;;полую;;RUAdjAccF;RUAdj;
 ;;полого;;RUAdjGenMN;RUAdj;
-;;полой;;RUAdjGDPIF;RUAdj
 ;;полому;;RUAdjDatMN;RUAdj;
-;;полом;;RUAdjPreposMN;RUAdj
 ;;полым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;полые;;RUAdjNomAccPl;RUAdj;
 ;;полых;;RUAdjGenPl;RUAdj;
 ;;полыми;;RUAdjInstrPl;RUAdj;
 ;;общий;;RUAdjNomM;RUAdj;
 ;;общая;;RUAdjNomF;RUAdj;
-;;общее;;RUAdjNomN;RUAdj
-;;общую;;RUAdjAccF;RUAdj
 ;;общего;;RUAdjGenMN;RUAdj;
 ;;общей;;RUAdjGDPIF;RUAdj;
 ;;общему;;RUAdjDatMN;RUAdj;
@@ -19396,23 +19338,20 @@
 ;;яркие;;RUAdjNomAccPl;RUAdj;
 ;;ярких;;RUAdjGenPl;RUAdj;
 ;;яркими;;RUAdjInstrPl;RUAdj;
-;;ранний;;RUAdjNomM;RUAdj;
-;;ранняя;;RUAdjNomF;RUAdj;
-;;раннее;;RUAdjNomN;RUAdj
-;;раннюю;;RUAdjAccF;RUAdj;
-;;раннего;;RUAdjGenMN;RUAdj;
-;;ранней;;RUAdjGDPIF;RUAdj;
-;;раннему;;RUAdjDatMN;RUAdj;
-;;раннем;;RUAdjPreposMN;RUAdj;
-;;ранним;;RUAdjInstrMN/DatPl;RUAdj;
-;;ранние;;RUAdjNomAccPl;RUAdj;
-;;ранних;;RUAdjGenPl;RUAdj;
-;;ранними;;RUAdjInstrPl;RUAdj;
-;;главнокомандующий;;RUAdjNomM;RUAdj
+;;ранний;;RUAdjNomM;RUAdj;RUBeginTime;
+;;ранняя;;RUAdjNomF;RUAdj;RUBeginTime;
+;;раннюю;;RUAdjAccF;RUAdj;RUBeginTime;
+;;раннего;;RUAdjGenMN;RUAdj;RUBeginTime;
+;;ранней;;RUAdjGDPIF;RUAdj;RUBeginTime;
+;;раннему;;RUAdjDatMN;RUAdj;RUBeginTime;
+;;раннем;;RUAdjPreposMN;RUAdj;RUBeginTime;
+;;ранним;;RUAdjInstrMN/DatPl;RUAdj;RUBeginTime;
+;;ранние;;RUAdjNomAccPl;RUAdj;RUBeginTime;
+;;ранних;;RUAdjGenPl;RUAdj;RUBeginTime;
+;;ранними;;RUAdjInstrPl;RUAdj;RUBeginTime;
 ;;главнокомандующая;;RUAdjNomF;RUAdj;
 ;;главнокомандующее;;RUAdjNomN;RUAdj;
 ;;главнокомандующую;;RUAdjAccF;RUAdj;
-;;главнокомандующего;;RUAdjGenMN;RUAdj
 ;;главнокомандующей;;RUAdjGDPIF;RUAdj;
 ;;главнокомандующему;;RUAdjDatMN;RUAdj;
 ;;главнокомандующем;;RUAdjPreposMN;RUAdj;
@@ -19420,51 +19359,16 @@
 ;;главнокомандующие;;RUAdjNomAccPl;RUAdj;
 ;;главнокомандующих;;RUAdjGenPl;RUAdj;
 ;;главнокомандующими;;RUAdjInstrPl;RUAdj;
-;;органный;;RUAdjNomM;RUAdj
-;;органная;;RUAdjNomF;RUAdj
-;;органное;;RUAdjNomN;RUAdj
-;;органного;;RUAdjGenMN;RUAdj
-;;органной;;RUAdjGDPIF;RUAdj
-;;органному;;RUAdjDatMN;RUAdj
-;;органном;;RUAdjPreposMN;RUAdj
-;;органным;;RUAdjInstrMN/DatPl;RUAdj
-;;органные;;RUAdjNomAccPl;RUAdj
-;;органных;;RUAdjGenPl;RUAdj
-;;органными;;RUAdjInstrPl;RUAdj
-;;болезненный;;RUAdjNomM;RUAdj
-;;болезненная;;RUAdjNomF;RUAdj
-;;болезненное;;RUAdjNomN;RUAdj
-;;болезненного;;RUAdjGenMN;RUAdj
-;;болезненной;;RUAdjGDPIF;RUAdj
-;;болезненному;;RUAdjDatMN;RUAdj
-;;болезненном;;RUAdjPreposMN;RUAdj
-;;болезненным;;RUAdjInstrMN/DatPl;RUAdj
-;;болезненные;;RUAdjNomAccPl;RUAdj
-;;болезненных;;RUAdjGenPl;RUAdj
-;;болезненными;;RUAdjInstrPl;RUAdj
 ;;безболезненный;;RUAdjNomM;RUAdj;
 ;;безболезненная;;RUAdjNomF;RUAdj;
 ;;безболезненное;;RUAdjNomN;RUAdj;
 ;;безболезненную;;RUAdjAccF;RUAdj;
-;;безболезненного;;RUAdjGenMN;RUAdj
-;;безболезненной;;RUAdjGDPIF;RUAdj
 ;;безболезненному;;RUAdjDatMN;RUAdj;
 ;;безболезненном;;RUAdjPreposMN;RUAdj;
 ;;безболезненным;;RUAdjInstrMN/DatPl;RUAdj;
 ;;безболезненные;;RUAdjNomAccPl;RUAdj;
 ;;безболезненных;;RUAdjGenPl;RUAdj;
 ;;безболезненными;;RUAdjInstrPl;RUAdj;
-;;коленный;;RUAdjNomM;RUAdj
-;;коленная;;RUAdjNomF;RUAdj
-;;коленное;;RUAdjNomN;RUAdj
-;;коленного;;RUAdjGenMN;RUAdj
-;;коленной;;RUAdjGDPIF;RUAdj
-;;коленному;;RUAdjDatMN;RUAdj
-;;коленном;;RUAdjPreposMN;RUAdj
-;;коленным;;RUAdjInstrMN/DatPl;RUAdj
-;;коленные;;RUAdjNomAccPl;RUAdj
-;;коленных;;RUAdjGenPl;RUAdj
-;;коленными;;RUAdjInstrPl;RUAdj
 ;;явный;;RUAdjNomM;RUAdj;
 ;;явная;;RUAdjNomF;RUAdj;
 ;;явное;;RUAdjNomN;RUAdj;
@@ -19494,7 +19398,6 @@
 ;;жилую;;RUAdjAccF;RUAdj;
 ;;жилого;;RUAdjGenMN;RUAdj;
 ;;жилому;;RUAdjDatMN;RUAdj;
-;;жилом;;RUAdjPreposMN;RUAdj
 ;;жилым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;жилые;;RUAdjNomAccPl;RUAdj;
 ;;жилых;;RUAdjGenPl;RUAdj;
@@ -19523,13 +19426,10 @@
 ;;сырые;;RUAdjNomAccPl;RUAdj;
 ;;сырых;;RUAdjGenPl;RUAdj;
 ;;сырыми;;RUAdjInstrPl;RUAdj;
-;;живая;;RUAdjNomF;RUAdj
 ;;живое;;RUAdjNomN;RUAdj;
 ;;живую;;RUAdjAccF;RUAdj;
 ;;живого;;RUAdjGenMN;RUAdj;
-;;живой;;RUAdjGDPIF;RUAdj
 ;;живому;;RUAdjDatMN;RUAdj;
-;;живом;;RUAdjPreposMN;RUAdj
 ;;живым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;живые;;RUAdjNomAccPl;RUAdj;
 ;;живых;;RUAdjGenPl;RUAdj;
@@ -19541,18 +19441,12 @@
 ;;медвежье;;RUAdjNomN;RUAdj;
 ;;божье;;RUAdjNomN;RUAdj;
 ;;говяжье;;RUAdjNomN;RUAdj;
-;;медленный;;RUAdjNomM;RUAdj
 ;;медленная;;RUAdjNomF;RUAdj;
 ;;медленное;;RUAdjNomN;RUAdj;
 ;;медленную;;RUAdjAccF;RUAdj;
-;;медленного;;RUAdjGenMN;RUAdj
-;;медленной;;RUAdjGDPIF;RUAdj
 ;;медленному;;RUAdjDatMN;RUAdj;
 ;;медленном;;RUAdjPreposMN;RUAdj;
-;;медленным;;RUAdjInstrMN/DatPl;RUAdj
-;;медленные;;RUAdjNomAccPl;RUAdj
 ;;медленных;;RUAdjGenPl;RUAdj;
-;;медленными;;RUAdjInstrPl;RUAdj
 ;;замедленный;;RUAdjNomM;RUAdj;
 ;;замедленная;;RUAdjNomF;RUAdj;
 ;;замедленное;;RUAdjNomN;RUAdj;
@@ -19565,63 +19459,27 @@
 ;;замедленные;;RUAdjNomAccPl;RUAdj;
 ;;замедленных;;RUAdjGenPl;RUAdj;
 ;;замедленными;;RUAdjInstrPl;RUAdj;
-;;временный;;RUAdjNomM;RUAdj
 ;;временная;;RUAdjNomF;RUAdj;
-;;временное;;RUAdjNomN;RUAdj
-;;временного;;RUAdjGenMN;RUAdj
-;;временной;;RUAdjGDPIF;RUAdj
-;;временному;;RUAdjDatMN;RUAdj
-;;временном;;RUAdjPreposMN;RUAdj
-;;временным;;RUAdjInstrMN/DatPl;RUAdj
-;;временные;;RUAdjNomAccPl;RUAdj
-;;временных;;RUAdjGenPl;RUAdj
 ;;временными;;RUAdjInstrPl;RUAdj;
 ;;одновременный;;RUAdjNomM;RUAdj;
-;;одновременная;;RUAdjNomF;RUAdj
-;;одновременное;;RUAdjNomN;RUAdj
 ;;одновременную;;RUAdjAccF;RUAdj;
 ;;одновременного;;RUAdjGenMN;RUAdj;
-;;одновременной;;RUAdjGDPIF;RUAdj
 ;;одновременному;;RUAdjDatMN;RUAdj;
-;;одновременном;;RUAdjPreposMN;RUAdj
-;;одновременным;;RUAdjInstrMN/DatPl;RUAdj
 ;;одновременные;;RUAdjNomAccPl;RUAdj;
-;;одновременных;;RUAdjGenPl;RUAdj
 ;;одновременными;;RUAdjInstrPl;RUAdj;
-;;своевременный;;RUAdjNomM;RUAdj
 ;;своевременная;;RUAdjNomF;RUAdj;
 ;;своевременное;;RUAdjNomN;RUAdj;
 ;;своевременную;;RUAdjAccF;RUAdj;
 ;;своевременного;;RUAdjGenMN;RUAdj;
-;;своевременной;;RUAdjGDPIF;RUAdj
-;;своевременному;;RUAdjDatMN;RUAdj
-;;своевременном;;RUAdjPreposMN;RUAdj
 ;;своевременным;;RUAdjInstrMN/DatPl;RUAdj;
 ;;своевременные;;RUAdjNomAccPl;RUAdj;
 ;;своевременных;;RUAdjGenPl;RUAdj;
 ;;своевременными;;RUAdjInstrPl;RUAdj;
-;;современный;;RUAdjNomM;RUAdj
-;;современная;;RUAdjNomF;RUAdj
-;;современное;;RUAdjNomN;RUAdj
-;;современного;;RUAdjGenMN;RUAdj
-;;современной;;RUAdjGDPIF;RUAdj
-;;современному;;RUAdjDatMN;RUAdj
-;;современном;;RUAdjPreposMN;RUAdj
-;;современным;;RUAdjInstrMN/DatPl;RUAdj
-;;современные;;RUAdjNomAccPl;RUAdj
-;;современных;;RUAdjGenPl;RUAdj
-;;современными;;RUAdjInstrPl;RUAdj
 ;;единовременный;;RUAdjNomM;RUAdj;
 ;;единовременная;;RUAdjNomF;RUAdj;
-;;единовременное;;RUAdjNomN;RUAdj
 ;;единовременную;;RUAdjAccF;RUAdj;
-;;единовременного;;RUAdjGenMN;RUAdj
-;;единовременной;;RUAdjGDPIF;RUAdj
 ;;единовременному;;RUAdjDatMN;RUAdj;
 ;;единовременном;;RUAdjPreposMN;RUAdj;
-;;единовременным;;RUAdjInstrMN/DatPl;RUAdj
-;;единовременные;;RUAdjNomAccPl;RUAdj
-;;единовременных;;RUAdjGenPl;RUAdj
 ;;единовременными;;RUAdjInstrPl;RUAdj;
 ;;долговременный;;RUAdjNomM;RUAdj;
 ;;долговременная;;RUAdjNomF;RUAdj;
@@ -19632,8 +19490,6 @@
 ;;долговременному;;RUAdjDatMN;RUAdj;
 ;;долговременном;;RUAdjPreposMN;RUAdj;
 ;;долговременным;;RUAdjInstrMN/DatPl;RUAdj;
-;;долговременные;;RUAdjNomAccPl;RUAdj
-;;долговременных;;RUAdjGenPl;RUAdj
 ;;долговременными;;RUAdjInstrPl;RUAdj;
 ;;безвременный;;RUAdjNomM;RUAdj;
 ;;безвременная;;RUAdjNomF;RUAdj;
@@ -19643,7 +19499,6 @@
 ;;безвременной;;RUAdjGDPIF;RUAdj;
 ;;безвременному;;RUAdjDatMN;RUAdj;
 ;;безвременном;;RUAdjPreposMN;RUAdj;
-;;безвременным;;RUAdjInstrMN/DatPl;RUAdj
 ;;безвременные;;RUAdjNomAccPl;RUAdj;
 ;;безвременных;;RUAdjGenPl;RUAdj;
 ;;безвременными;;RUAdjInstrPl;RUAdj;
@@ -19700,14 +19555,12 @@
 ;;дикое;;RUAdjNomN;RUAdj;
 ;;дикую;;RUAdjAccF;RUAdj;
 ;;дикого;;RUAdjGenMN;RUAdj;
-;;дикой;;RUAdjGDPIF;RUAdj
 ;;дикому;;RUAdjDatMN;RUAdj;
 ;;диком;;RUAdjPreposMN;RUAdj;
 ;;диким;;RUAdjInstrMN/DatPl;RUAdj;
 ;;дикие;;RUAdjNomAccPl;RUAdj;
 ;;диких;;RUAdjGenPl;RUAdj;
 ;;дикими;;RUAdjInstrPl;RUAdj;
-;;синее;;RUAdjNomN;RUAdj
 ;;синюю;;RUAdjAccF;RUAdj;
 ;;синего;;RUAdjGenMN;RUAdj;
 ;;синему;;RUAdjDatMN;RUAdj;
@@ -19755,9 +19608,7 @@
 ;;голое;;RUAdjNomN;RUAdj;
 ;;голую;;RUAdjAccF;RUAdj;
 ;;голого;;RUAdjGenMN;RUAdj;
-;;голой;;RUAdjGDPIF;RUAdj
 ;;голому;;RUAdjDatMN;RUAdj;
-;;голом;;RUAdjPreposMN;RUAdj
 ;;голым;;RUAdjInstrMN/DatPl;RUAdj;
 ;;голые;;RUAdjNomAccPl;RUAdj;
 ;;голых;;RUAdjGenPl;RUAdj;
@@ -19941,3 +19792,752 @@
 ;;к );;RUCon;-;RUBracket2;Punctuation;
 /**** Rewritten by DELVE, ;;с );;RUCon;-;RUBracket2;Punctuation;
 ;;с );;RUCon;Lit_с;-;RUBracket2;Punctuation
+;;июн;;RUMonth;RUTimeConcept;RUCon;RUTime;
+;;начале;;RUCon;RUBeginTime;
+;;конца;;RUCon;RUBeginTime;RUConGen;RUConGenMN;
+;;конце;;RUCon;RUBeginTime;
+;;месяцев;;RUCon;RUTimeConcept;RUConGen;RUConGenPl;RUTime;
+;;конец;;RUCon;RUBeginTime;
+;;середина;;RUCon;RUBeginTime;
+;;середины;;RUCon;RUBeginTime;RUConGen;
+;;середине;;RUCon;RUBeginTime;
+;;середину;;RUCon;RUBeginTime;
+;;серединой;;RUCon;RUBeginTime;
+;;пятница;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;воскресеньев;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;воскресеньи;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;воскресеньями;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;воскресеньях;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторниками;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторниках;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторнике;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторники;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторников;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;вторником;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельниками;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельниках;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельники;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;понедельников;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятниц;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницами;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницах;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;пятницею;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;суббот;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;суббота;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботами;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботах;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;субботою;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четвергами;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четвергах;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четверге;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четверги;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;четвергов;;RUDay;RUCon;RUTimeConcept;RUTime;
+;;выходным;;RUCon;RUTimeConcept;RUTime;RUAdjInstrMN/DatPl;
+;;выходными;;RUCon;RUTimeConcept;RUTime;RUAdjInstrPl;
+;;половина;;RUCon;RUPartTime;
+;;половины;;RUCon;RUPartTime;
+;;половине;;RUCon;RUPartTime;
+;;половину;;RUCon;RUPartTime;
+;;половиной;;RUCon;RUPartTime;
+;;концу;;RUBeginTime;RUCon;
+;;концом;;RUBeginTime;RUCon;
+;;началу;;RUBeginTime;RUCon;
+;;началом;;RUBeginTime;RUCon;
+;;последнего;;RUAdj;RUBeginTime;RUAdjGenMN;RUPartTime;
+;;последнем;;RUAdj;RUBeginTime;RUAdjPreposMN;RUPartTime;
+;;последнему;;RUAdj;RUBeginTime;RUAdjDatMN;RUPartTime;
+;;последние;;RUAdj;RUBeginTime;RUAdjNomAccPl;RUPartTime;
+;;последний;;RUAdj;RUBeginTime;RUAdjNomM;RUPartTime;
+;;последним;;RUAdj;RUBeginTime;RUAdjInstrMN/DatPl;RUPartTime;
+;;последними;;RUAdj;RUBeginTime;RUAdjInstrPl;RUPartTime;
+;;последних;;RUAdj;RUBeginTime;RUAdjGenPl;RUPartTime;
+;;последнюю;;RUAdj;RUBeginTime;RUAdjAccF;RUPartTime;
+;;последняя;;RUAdj;RUBeginTime;RUAdjNomF;RUPartTime;
+;;овечья;;RUAdj;RUAdjNomF;
+;;третья;;RUAdj;RUOrdNum;RUAdjNomF;
+;;одиннадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;одиннадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;одиннадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;одиннадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;одиннадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;одиннадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;одиннадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;одиннадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;двенадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;двенадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;двенадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;двенадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;двенадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;двенадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;двенадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;двенадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;тринадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;тринадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;тринадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;тринадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;тринадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;тринадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;тринадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;тринадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;четырнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;четырнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;четырнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;четырнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;четырнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;четырнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;четырнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;четырнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;пятнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;пятнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;пятнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;пятнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;пятнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;пятнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;пятнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;пятнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;шестнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;шестнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;шестнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;шестнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;шестнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;шестнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;шестнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;шестнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;семнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;семнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;семнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;семнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;семнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;семнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;семнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;семнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;восемнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;восемнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;восемнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;восемнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;восемнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;восемнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;восемнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;восемнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;девятнадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;девятнадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;девятнадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;девятнадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;девятнадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;девятнадцатые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;девятнадцатых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;девятнадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;двадцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;двадцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;двадцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;двадцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;двадцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;двадцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;тридцатый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;тридцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;тридцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;тридцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;тридцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;тридцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;сороковой;;RUAdj;RUOrdNum;RUAdjNomM;
+;;сороковая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;сороковую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;сороковое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;сороковыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;пятидесятый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;пятидцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;пятидцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;пятидцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;пятидцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;пятидцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;шестидесятый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;шестидцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;шестидцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;шестидцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;шестидцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;шестидцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;семидесятый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;семидцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;семидцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;семидцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;семидцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;семидцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;восьмидесятый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;восьмидцатая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;восьмидцатой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;восьмидцатую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;восьмидцатое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;восьмидцатыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;девяностый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;девяностая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;девяностой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;девяностую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;девяностое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;девяностыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;сотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;сотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;сотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;сотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;сотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;сотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;сотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;сотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;сотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;сотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;сотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;сотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;двухсотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;двухсотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;двухсотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;двухсотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;двухсотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;двухсотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;двухсотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;двухсотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;двухсотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;двухсотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;двухсотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;двухсотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;трехсотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;трехсотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;трехсотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;трехсотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;трехсотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;трехсотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;трехсотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;трехсотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;трехсотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;трехсотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;трехсотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;трехсотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;четырехсотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;четырехсотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;четырехсотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;четырехсотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;четырехсотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;четырехсотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;четырехсотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;четырехсотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;четырехсотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;четырехсотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;четырехсотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;четырехсотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;пятисотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;пятисотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;пятисотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;пятисотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;пятисотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;пятисотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;пятисотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;пятисотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;пятисотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;пятисотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;пятисотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;пятисотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;шестисотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;шестисотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;шестисотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;шестисотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;шестисотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;шестисотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;шестисотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;шестисотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;шестисотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;шестисотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;шестисотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;шестисотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;семисотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;семисотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;семисотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;семисотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;семисотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;семисотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;семисотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;семисотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;семисотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;семисотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;семисотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;семисотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;восьмисотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;восьмисотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;восьмисотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;восьмисотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;восьмисотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;восьмисотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;восьмисотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;восьмисотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;восьмисотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;восьмисотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;восьмисотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;восьмисотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;девятисотый;;RUAdj;RUOrdNum;RUAdjNomM;
+;;девятисотого;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;девятисотому;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;девятисотым;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;девятисотом;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;девятисотая;;RUAdj;RUOrdNum;RUAdjNomF;
+;;девятисотой;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;девятисотую;;RUAdj;RUOrdNum;RUAdjAccF;
+;;девятисотое;;RUAdj;RUOrdNum;RUAdjNomN;
+;;девятисотые;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;девятисотых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;девятисотыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;тысячный;;RUAdj;RUOrdNum;RUAdjNomM;
+;;тысячного;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;тысячному;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;тысячным;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;тысячном;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;тысячная;;RUAdj;RUOrdNum;RUAdjNomF;
+;;тысячной;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;тысячную;;RUAdj;RUOrdNum;RUAdjAccF;
+;;тысячное;;RUAdj;RUOrdNum;RUAdjNomN;
+;;тысячные;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;тысячных;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;тысячными;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;двухтысячный;;RUAdj;RUOrdNum;RUAdjNomM;
+;;двухтысячного;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;двухтысячному;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;двухтысячным;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;двухтысячном;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;двухтысячная;;RUAdj;RUOrdNum;RUAdjNomF;
+;;двухтысячной;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;двухтысячную;;RUAdj;RUOrdNum;RUAdjAccF;
+;;двухтысячное;;RUAdj;RUOrdNum;RUAdjNomN;
+;;двухтысячные;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;двухтысячных;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;двухтысячными;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;миллионный;;RUAdj;RUOrdNum;RUAdjNomM;
+;;миллионного;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;миллионному;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;миллионным;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;миллионном;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;миллионная;;RUAdj;RUOrdNum;RUAdjNomF;
+;;миллионной;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;миллионную;;RUAdj;RUOrdNum;RUAdjAccF;
+;;миллионное;;RUAdj;RUOrdNum;RUAdjNomN;
+;;миллионные;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;миллионных;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;миллионными;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;миллиардный;;RUAdj;RUOrdNum;RUAdjNomM;
+;;миллиардного;;RUAdj;RUOrdNum;RUAdjGenMN;
+;;миллиардному;;RUAdj;RUOrdNum;RUAdjDatMN;
+;;миллиардным;;RUAdj;RUOrdNum;RUAdjInstrMN/DatPl;
+;;миллиардном;;RUAdj;RUOrdNum;RUAdjPreposMN;
+;;миллиардная;;RUAdj;RUOrdNum;RUAdjNomF;
+;;миллиардной;;RUAdj;RUOrdNum;RUAdjGDPIF;
+;;миллиардную;;RUAdj;RUOrdNum;RUAdjAccF;
+;;миллиардное;;RUAdj;RUOrdNum;RUAdjNomN;
+;;миллиардные;;RUAdj;RUOrdNum;RUAdjNomAccPl;
+;;миллиардных;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;миллиардными;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;вторая;;RUAdj;RUAdjNomF;RUOrdNum;
+;;вторых;;RUAdj;RUAdjGenPl;RUOrdNum;
+;;вторыми;;RUAdj;RUAdjInstrPl;RUOrdNum;
+;;четвертая;;RUAdj;RUAdjNomF;RUOrdNum;
+;;четвертых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;четвертыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;пятая;;RUAdjNomF;RUAdj;RUOrdNum;
+;;пятых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;пятыми;;RUAdjInstrPl;RUAdj;RUOrdNum;
+;;шестая;;RUAdj;RUAdjNomF;RUOrdNum;
+;;шестых;;RUAdj;RUAdjGenPl;RUOrdNum;
+;;шестыми;;RUAdj;RUAdjInstrPl;RUOrdNum;
+;;седьмая;;RUAdj;RUAdjNomF;RUOrdNum;
+;;седьмых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;седьмыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;восьмая;;RUAdj;RUAdjNomF;RUOrdNum;
+;;восьмых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;восьмыми;;RUAdj;RUOrdNum;RUAdjInstrPl;
+;;девятая;;RUAdjNomF;RUAdj;RUOrdNum;
+;;девятых;;RUAdj;RUOrdNum;RUAdjGenPl;
+;;девятыми;;RUAdjInstrPl;RUAdj;RUOrdNum;
+;;десятая;;RUAdjNomF;RUAdj;RUOrdNum;
+;;десятыми;;RUAdjInstrPl;RUAdj;RUOrdNum;
+;;ближайшая;;RUAdjNomF;RUAdj;RUBeginTime;
+;;ближайшего;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;ближайшее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;ближайшей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;ближайшем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;ближайшему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;ближайшие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;ближайший;;RUAdj;RUAdjNomM;RUBeginTime;
+;;ближайшим;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;ближайшими;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;ближайших;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;ближайшую;;RUAdj;RUAdjAccF;RUBeginTime;
+;;месяцы;;RUCon;RUTimeConcept;RUTime;
+;;месяцам;;RUCon;RUTimeConcept;RUTime;
+;;месяцами;;RUCon;RUTimeConcept;RUTime;
+;;месяцах;;RUCon;RUTimeConcept;RUTime;
+;;очередный;;RUAdj;RUAdjNomM;RUBeginTime;
+;;очередного;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;очередному;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;очередным;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;очередном;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;очередная;;RUAdj;RUAdjNomF;RUBeginTime;
+;;очередной;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;очередную;;RUAdj;RUAdjAccF;RUBeginTime;
+;;очередное;;RUAdj;RUAdjNomN;RUBeginTime;
+;;очередные;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;очередных;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;очередными;;RUAdj;RUAdjInstrPl;RUBeginTime;
+;;наступающая;;RUAdjNomF;RUAdj;RUBeginTime;
+;;наступающего;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;наступающее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;наступающей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;наступающем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;наступающему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;наступающие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;наступающий;;RUAdj;RUAdjNomM;RUBeginTime;
+;;наступающим;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;наступающими;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;наступающих;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;наступающую;;RUAdj;RUAdjAccF;RUBeginTime;
+;;дне;;RUCon;RUTimeConcept;RUTime;
+;;дней;;RUCon;RUTimeConcept;RUTime;
+;;дни;;RUCon;RUTimeConcept;RUTime;
+;;дню;;RUCon;RUTimeConcept;RUTime;
+;;дням;;RUCon;RUTimeConcept;RUTime;
+;;днями;;RUCon;RUTimeConcept;RUTime;
+;;днях;;RUCon;RUTimeConcept;RUTime;
+;;пару;;RUCon;RUNum;
+;;вчерашняя;;RUAdjNomF;RUAdj;RUBeginTime;
+;;вчерашнего;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;вчерашнее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;вчерашней;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;вчерашнем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;вчерашнему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;вчерашние;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;вчерашний;;RUAdj;RUAdjNomM;RUBeginTime;
+;;вчерашним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;вчерашними;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;вчерашних;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;вчерашнюю;;RUAdj;RUAdjAccF;RUBeginTime;
+;;сегодняшняя;;RUAdjNomF;RUAdj;RUBeginTime;
+;;сегодняшнего;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;сегодняшнее;;RUAdj;RUAdjNomN;RUBeginTime;
+;;сегодняшней;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;сегодняшнем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;сегодняшнему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;сегодняшние;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;сегодняшний;;RUAdj;RUAdjNomM;RUBeginTime;
+;;сегодняшним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;сегодняшними;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;сегодняшних;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;сегодняшнюю;;RUAdj;RUAdjAccF;RUBeginTime;
+;;лет;;RUCon;RUYear;
+;;н. э;;RUCon;RUEndTime;
+;;н. э.;;RUCon;RUEndTime;
+;;до н. э;;RUCon;RUEndTime;
+;;до н. э.;;RUCon;RUEndTime;
+;;до нашей эры;;RUCon;RUEndTime;
+;;нашей эры;;RUCon;RUEndTime;
+;;квартал;;RUCon;RUQuarter;
+;;квартала;;RUCon;RUQuarter;
+;;кварталу;;RUCon;RUQuarter;
+;;кварталом;;RUCon;RUQuarter;
+;;квартале;;RUCon;RUQuarter;
+;;кварталы;;RUCon;RUQuarter;
+;;кварталов;;RUCon;RUQuarter;
+;;кварталам;;RUCon;RUQuarter;
+;;кварталами;;RUCon;RUQuarter;
+;;кварталах;;RUCon;RUQuarter;
+;;четверть;;RUCon;RUPartTime;
+;;четверти;;RUCon;RUPartTime;
+;;четвертью;;RUCon;RUPartTime;
+;;треть;;RUCon;RUPartTime;
+;;трети;;RUCon;RUPartTime;
+;;столетию;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетием;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетии;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетий;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;столетиям;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетия;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетию;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетием;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетии;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетий;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетиям;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетиях;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетие;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;тысячелетиев;;RUTimeConcept;RUCon;RUCentury;RUTime;
+;;десятилетиев;;RUCon;RUTimeConcept;RUTime;
+;;вв.;;RUCentury;RUCon;RUAcro;
+;;грядущая;;RUAdjNomF;RUAdj;RUBeginTime;
+;;грядущей;;RUAdj;RUAdjGDPIF;RUBeginTime;
+;;грядущем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;грядущему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;грядущие;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;грядущий;;RUAdj;RUAdjNomM;RUBeginTime;
+;;грядущими;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;грядующую;;RUAdj;RUAdjAccF;RUBeginTime;
+;;январский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;январская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;январского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;январское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;январской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;январском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;январскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;январские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;январским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;январскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;январских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;январскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;февральский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;февральская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;февральского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;февральское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;февральской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;февральском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;февральскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;февральские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;февральским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;февральскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;февральских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;февральскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;мартовский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;мартовская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;мартовского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;мартовское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;мартовской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;мартовском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;мартовскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;мартовские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;мартовским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;мартовскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;мартовских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;мартовскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;апрельский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;апрельская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;апрельского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;апрельское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;апрельской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;апрельском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;апрельскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;апрельские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;апрельским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;апрельскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;апрельских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;апрельскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;майский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;майская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;майского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;майское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;майской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;майском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;майскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;майские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;майским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;майскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;майских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;майскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;июньский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;июньская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;июньского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;июньское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;июньской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;июньском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;июньскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;июньские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;июньским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;июньскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;июньских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;июньскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;июльский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;июльская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;июльского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;июльское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;июльской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;июльском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;июльскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;июльские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;июльским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;июльскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;июльских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;июльскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;августовский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;августовская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;августовского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;августовское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;августовской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;августовском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;августовскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;августовские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;августовским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;августовскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;августовских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;августовскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;сентябрьский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;сентябрьская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;сентябрьского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;сентябрьское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;сентябрьской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;сентябрьском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;сентябрьскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;сентябрьские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;сентябрьским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;сентябрьскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;сентябрьских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;сентябрьскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;октябрьский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;октябрьская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;октябрьского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;октябрьское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;октябрьской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;октябрьском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;октябрьскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;октябрьские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;октябрьским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;октябрьскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;октябрьских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;октябрьскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;ноябрьский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;ноябрьская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;ноябрьского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;ноябрьское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;ноябрьской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;ноябрьском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;ноябрьскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;ноябрьские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;ноябрьским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;ноябрьскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;ноябрьских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;ноябрьскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;декабрьский;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;декабрьская;;RUAdjNomF;RUAdj;RUBeginTime;RUTime;
+;;декабрьского;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;декабрьское;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;декабрьской;;RUAdj;RUAdjGDPIF;RUBeginTime;RUTime;
+;;декабрьском;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;декабрьскому;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;декабрьские;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;декабрьским;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;декабрьскими;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;декабрьских;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;декабрьскую;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;позднего;;RUAdj;RUAdjGenMN;RUBeginTime;
+;;позднем;;RUAdj;RUAdjPreposMN;RUBeginTime;
+;;позднему;;RUAdj;RUAdjDatMN;RUBeginTime;
+;;поздние;;RUAdj;RUAdjNomAccPl;RUBeginTime;
+;;поздний;;RUAdj;RUAdjNomM;RUBeginTime;
+;;поздним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;
+;;поздними;;RUAdjInstrPl;RUAdj;RUBeginTime;
+;;поздних;;RUAdj;RUAdjGenPl;RUBeginTime;
+;;позднюю;;RUAdj;RUAdjAccF;RUBeginTime;
+;;дата;;RUCon;RUBeginTime;
+;;не позднее;;RUNe;RUNegation;RUNegBegin;-;RUComp;
+;;весна;;RUCon;RUTimeConcept;RUTime;RUSeason;RUConNomF;
+;;весны;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;зима;;RUCon;RUTimeConcept;RUTime;RUSeason;RUConNomF;
+;;зимы;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;лета;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;лете;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;осени;;RUCon;RUTimeConcept;RUTime;RUSeason;
+;;летнего;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;летнем;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;летнему;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;летние;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;летний;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;летним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;летними;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;летних;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;летнюю;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;летнее;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;летняя;;RUAdj;RUAdjNomF;RUBeginTime;RUTime;
+;;осеннего;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;осеннем;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;осеннему;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;осенние;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;осенний;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;осенним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;осенними;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;осенних;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;осеннюю;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;осеннее;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;осенняя;;RUAdj;RUAdjNomF;RUBeginTime;RUTime;
+;;весеннего;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;весеннем;;RUAdj;RUAdjPreposMN;RUBeginTime;RUTime;
+;;весеннему;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;весенние;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;весенний;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;весенним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;весенними;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;весенних;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;весеннюю;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;весеннее;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;весенняя;;RUAdj;RUAdjNomF;RUBeginTime;RUTime;
+;;зимнего;;RUAdj;RUAdjGenMN;RUBeginTime;RUTime;
+;;зимнему;;RUAdj;RUAdjDatMN;RUBeginTime;RUTime;
+;;зимние;;RUAdj;RUAdjNomAccPl;RUBeginTime;RUTime;
+;;зимний;;RUAdj;RUAdjNomM;RUBeginTime;RUTime;
+;;зимним;;RUAdj;RUAdjInstrMN/DatPl;RUBeginTime;RUTime;
+;;зимними;;RUAdjInstrPl;RUAdj;RUBeginTime;RUTime;
+;;зимних;;RUAdj;RUAdjGenPl;RUBeginTime;RUTime;
+;;зимнюю;;RUAdj;RUAdjAccF;RUBeginTime;RUTime;
+;;зимнее;;RUAdj;RUAdjNomN;RUBeginTime;RUTime;
+;;зимняя;;RUAdj;RUAdjNomF;RUBeginTime;RUTime;
+;;сутки;;RUCon;RUTimeConcept;RUTime;
+;;ночь;;RUCon;RUTimeConcept;RUTime;
+;;час;;RUCon;RUTimeConcept;RUTime;
+;;часа;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;часов;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;часу;;RUCon;RUTimeConcept;RUTime;
+;;часом;;RUCon;RUTimeConcept;RUTime;
+;;часе;;RUCon;RUTimeConcept;RUTime;
+;;часы;;RUCon;RUTimeConcept;RUTime;
+;;часам;;RUCon;RUTimeConcept;RUTime;
+;;часами;;RUCon;RUTimeConcept;RUTime;
+;;часах;;RUCon;RUTimeConcept;RUTime;
+;;секунда;;RUCon;RUTimeConcept;RUTime;
+;;секунды;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;секунд;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;секунде;;RUCon;RUTimeConcept;RUTime;
+;;секундой;;RUCon;RUTimeConcept;RUTime;
+;;секундам;;RUCon;RUTimeConcept;RUTime;
+;;секундами;;RUCon;RUTimeConcept;RUTime;
+;;секундах;;RUCon;RUTimeConcept;RUTime;
+;;минута;;RUCon;RUTimeConcept;RUTime;
+;;минуты;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;минут;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;минуте;;RUCon;RUTimeConcept;RUTime;
+;;минутой;;RUCon;RUTimeConcept;RUTime;
+;;минутам;;RUCon;RUTimeConcept;RUTime;
+;;минутами;;RUCon;RUTimeConcept;RUTime;
+;;минутах;;RUCon;RUTimeConcept;RUTime;
+;;утра;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;утро;;RUCon;RUTimeConcept;RUTime;
+;;утру;;RUCon;RUTimeConcept;RUTime;
+;;утре;;RUCon;RUTimeConcept;RUTime;
+;;утр;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;утрам;;RUCon;RUTimeConcept;RUTime;
+;;утрами;;RUCon;RUTimeConcept;RUTime;
+;;утрах;;RUCon;RUTimeConcept;RUTime;
+;;вечер;;RUCon;RUTimeConcept;RUTime;
+;;вечера;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;вечерам;;RUCon;RUTimeConcept;RUTime;
+;;вечерами;;RUCon;RUTimeConcept;RUTime;
+;;вечерах;;RUCon;RUTimeConcept;RUTime;
+;;вечере;;RUCon;RUTimeConcept;RUTime;
+;;вечеров;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;вечеру;;RUCon;RUTimeConcept;RUTime;
+;;век;;RUCon;RUTimeConcept;RUTime;
+;;векам;;RUCon;RUTimeConcept;RUTime;
+;;веки;;RUCon;RUTimeConcept;RUTime;
+;;веком;;RUCon;RUTimeConcept;RUTime;
+;;веку;;RUCon;RUTimeConcept;RUTime;
+;;ночам;;RUCon;RUTimeConcept;RUTime;
+;;ночами;;RUCon;RUTimeConcept;RUTime;
+;;ночах;;RUCon;RUTimeConcept;RUTime;
+;;ночей;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;ночи;;RUCon;RUTimeConcept;RUTime;
+;;суток;;RUCon;RUTimeConcept;RUTime;RUConGen;
+;;суткам;;RUCon;RUTimeConcept;RUTime;
+;;сутками;;RUCon;RUTimeConcept;RUTime;
+;;сутках;;RUCon;RUTimeConcept;RUTime;
+;;неделей;;RUCon;RUTimeConcept;RUTime;
+;;недели;;RUCon;RUTimeConcept;RUTime;
+;;неделя;;RUCon;RUTimeConcept;RUTime;
+;;неделям;;RUCon;RUTimeConcept;RUTime;
+;;неделями;;RUCon;RUTimeConcept;RUTime;
+;;неделях;;RUCon;RUTimeConcept;RUTime;
+;;рано утром;;RUAdvTime;RUTime;

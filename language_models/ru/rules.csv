@@ -5,60 +5,140 @@
 /*==================================================
 
 819;1;CapitalInitial;^RUCapitalInitial;
+
+/*		819. Срок приостановления службы.
+
 957;1;CapitalAll;^RUCapitalAll;
+
+/*		957. на уровне ВАС.
+
 820;1;Punctuation;RUPunctuation;
 
+/*		820. (лето 2011).
 /*Rewrite user dictionary labels
 /*==============================
 
 825;1;UDNegation;+RUNegation+RUNegBegin;
+
+/*		825.UD. Компания отрицает эти обвинения.
+
 829;1;UDPosSentiment;+RUPosSentiment+RUPosSentimentBegin;
+
+/*		829.UD. Геоглиф хорошо виден из космоса и не имеет аналогов в России.
+
 830;1;UDNegSentiment;+RUNegSentiment+RUNegSentimentBegin;
+
+/*		830.UD. Однако пока что определить время создания геоглифа невозможно.
+
 821;1;UDConcept;RUCon;
+
+/*		821.UD. Он работает в пиджаке.
+
 823;1;UDRelation;RURelation;
+
+/*		823.UD. Не потому, что там глубже, а потому что на большом расстоянии труднее определить на глазок и запомнить истинное место падения бутылки В хоре он держал тридцать шесть человек.
+
 824;1;UDNonRelevant;RUNonRelevant;
 
+/*		824.UD. Опытная проверка критериев литературного развития требует учёта многих показателей, обусловливаемых как характером воспринимаемого литературного произведения (вид, жанр, стиль, язык).
 /*PHASE 38: VARIOUS PREPARATORY RULES
 /* = = = = = = = = = = = = = = = = = 
 /*Idiomatic expressions
 /*=====================
 
 691;38;RUPrep+RUAdvdegree|RUAdvdegree|RUAdj;RUPrep|RURAdv|*;to make a relation of 'в' in 'в среднем'
-696;38;"в"|"части"|^RURanking:RUCfr;RUPrep|+Join|*;to join 'части' with 'в'
+
+/*		691. В среднем московское метро перевозит 6,43 миллионов пассажиров.
+
+696;38;"в"|"части"|^RUOrdNum:RUNum;RUPrep|+Join|*;to join 'части' with 'в'
+
+/*		696. Программы в части боевых надводных кораблей. NOT. Если правила, содержащиеся в части первой настоящей статьи, не позволяют определить содержание. NOT. пункты, перечисленные в части 3 настоящей статьи.
+
 1082;38;RUV|RUSos|RUInf:RUComma:SEnd;RUPred|+Join|*;
+
+/*		1082. Индивидуальный предприниматель, который не в состоянии удовлетворить требования кредиторов. бежать они были не в состоянии.
+
 723;38;RUV|RUSos|RUAdv|RUInf;RUPred|+Join|*|*;
+
+/*		723. не в состоянии самостоятельно обеспечивать реализацию полики.
+
 724;38;RUV|RUSos;RUPrep|RUCon;
 
+/*		724. Появление в общественных местах в состоянии опьянения.
 /*Initials/Names
 /*==============
 
 826;38;RUCapitalInitial|RUVerb+RUCapitalInitial;*|RUCon;
+
+/*		826. Большой Имбиряй.
+
 763;38;RUInitial|RUAdj+RUCapitalInitial;RUAdj|+Join;
+
+/*		763. Р. Бельская и Ф. М. Достоевский.
+
 764;38;RUInitial;RUCon;
 
+/*		764. Р. Бельская и Ф. М. Достоевский.
 /*Sreda
 /*=====
-
-941;38;RUSreda|RUAdjGDPIF:RUAdjGen;RUCon|*;
-
 /*Join and preparation 'ne'
 /*=========================
 
 1067;38;RUAdvdegree|"нет";RUPred+RUNegPred|+Join;
+
+/*		1067. приводит к накоплению этих микроорганизмов в центре опухоли, где практически нет кислорода.
+
 1063;38;RUAdvdegree|RUNe;RUNe|+Join;
+
+/*		1063. Тогда мы практически не платили никаких налогов.
+
 1069;38;RUAdvdegree|RUNegRel;RUNegRel|+Join;
+
+/*		1069. обладатели которых практически никогда не меняют.
+
 1073;38;RUAdvdegree|RUNi;RUNi|+Join;
+
+/*		1073. Женщина осталась почти ни с чем из-за немалых трат на жильё.
+
 1068;38;RUNe+^RUNegRel|RUTakoj;RUNe|+Join;
+
+/*		1068. Первое впечатление было не такое уж мрачное, как казалось.
+
 1065;38;RUNe+^RUNegRel|"все":"всех":"всем":"всеми":"всего":"всему";RUBCon+RUNegBCon|+Join;
+
+/*		1065. В  вашем возрасте так следить за собой далеко не все следят.
+
 1188;38;RUPrep|RUNe:RUNegRel|RUAdvPR|RUPartAdj;*|RUNegCon|+Join|RUAdj;
+
+/*		1188. правовое пространство под не всегда оправданное "специальное" ограничительное законотворчество.
+
 1249;38;RUNe|RUComp;*|+RUNegComp;
+
+/*		1249. на срок не свыше шести лет.
+
 1064;38;RUNe:RUNegRel|RUAdvPR:"везде";RUNegRel|+Join;
+
+/*		1064. не всегда работы в действительности оказывались более тяжкими.  Он никогда прежде об этой роли не думал.
+
 1066;38;RUNikakoy|"из"|RUDempron;RUNikakoy|+Join|+Join;
+
+/*		1066. Никакие из этих устоев не считаются опасными.
+
 506;38;RUHyphen|RUNe:RUNegRel|RUCon:RUAdj:RUIndefpron;^RUConj|RUNegRel|*;'ne' between dash and noun/adjective/indefinite pronoun becomes Relation
+
+/*		506. эти выводы -- не повод для глубокого пессимизма. Лишение самостоятельности -- не единственный минус законопроекта. правовое содержание этого понятия - не всегда одно и то же.
+
 562;38;RUAdvdegree:RUAdvdegreeNR|RUNikakoy;RUBCon+RUNegBCon|+Join;adverb of degree before 'nikakoy' becomes beginconcept
+
+/*		562. Это слово не имеет абсолютно никакого отношения к поездам.
+
 634;38;RUNikakoy:RUNegPR|RUNe|RUPartActpf|RUCon;RUBCon+RUNegBCon|RUNegCon|RUCon|*;
+
+/*		634. Моя группа встретила ещё ничего не знавших посланцев.
+
 1057;38;RUAdvdegree:RUAdvdegreeNR:RUCompgr|RUNegPR;RUNegPR|+Join;
 
+/*		1057. В структуре выдвижения номинантов практически ничего не изменилось.
 /*PHASE 39: CONCEPT CLUSTERS: disambiguate according to case endings of adjectives and nouns
 /* = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 /* remark: general label 'Adj' for adjectives is not defined in phase 39 to prevent it to be overwritten
@@ -66,118 +146,295 @@
 
 954;39;RUCapitalInitial;+RUCapitalInitial2;
 
+/*		954. Капитан мужской сборной России по теннису Шамиль Тарпищев назвал.
 /*Disambiguate case labels nouns and adjectives
 /*=============================================
 
 1144;39;RUAdjNomF|RUConInstrPl|RUAdjNomF;*|*|RUAdj+RUNoBCon;
+
+/*		1144. Сохраняемая староверами старая вера.
+
 789;39;RUAdjNomF|RUConNomF/GenMN/NomAccPl;*|RUConNomF+RUConPossibleBCon+RUCon;
+
+/*		789. русская армия.
+
 798;39;RUPlusGen|RUConGenF/NomAccPl:RUConGDP/NomAccPl:RUConGDP;*|RUConGenF+RUConGen+RUCon;
+
+/*		798. получат от компании бонусные SMS и минуты разговора.
+
 761;39;RUPlusGen|RUConNomF/GenMN/NomAccPl;*|RUConGenMN+RUConGen+RUCon;
+
+/*		761. при исполнении такого заказа.
+
 802;39;RUPlusAcc/Prepos|RUConGenF/NomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon;
+
+/*		802. на танцы похаживал в горсад.
+
 1126;39;RUPlusAcc/Prepos|RUConGDP/NomAccPl:RUConGDP;*|RUConPossibleBCon+RUCon;prepositive/accusative
+
+/*		1126. в изгнании.
+
 786;39;RUAdjGDPIF|RUConGenF/NomAccPl:RUConGDP/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGen+RUCon;
-760;39;RUAdjGenMN|RUConNomF/GenMN/NomAccPl;RUAdj+RUAdjGen+RUNoBCon|RUConGenMN+RUConGen+RUCon;
+
+/*		786. подлежащие государственной регистрации.
+
+760;39;RUAdjGenMN|RUConNomF/GenMN/NomAccPl+^RUCapitalInitial;RUAdj+RUAdjGen+RUNoBCon|RUConGenMN+RUConGen+RUCon;
+
+/*		760. за счёт федерального бюджета.
+
 800;39;RUAdjNomAccPl|RUConNomAccPl_ambig;RUAdjNomAccPl+RUAdj+RUAdjPossibleBCon|RUConNomAccPl+RUConPossibleBCon+RUCon;
+
+/*		800. в рамках этой программы серьезные средства будут направлены на поддержку.
+
 804;39;RUConNomF/GenMN/NomAccPl|RUAdjNomAccPl|RUAndOr|RUAdjNomAccPl;*|RUAdj+RUAdjPossibleBCon|*|*;
+
+/*		804. распространения православия государственные и церковные органы.
+
 1127;39;^RUConNomAccPl_ambig|RUConNomAccPl_ambig|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;*|RUConNomAccPl+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;
-782;39;RUConNomF/AccF|RUAdjAccF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;
+
+/*		1127. потому что есть вещи общие для всех людей. глины огнеупорные для производства буровых растворов.
+
+782;39;RUConNomF/AccF|RUAdjAccF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon-RUPartAdj;
+
+/*		782. следует понимать ссылку и на часть первую, и на часть вторую.
+
 783;39;RUConNomF/AccF;RUConNomF+RUConPossibleBCon+RUCon;
-1129;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|^RUConNomF:RUAdjNomF;RUConNomF+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon|*;
-762;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUAdjNomF|RUCon;RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|RUAdj+RUNoBCon|*;
+
+/*		783. Новость о прекращении уголовного дела.
+
+1129;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|^RUConNomF:RUAdjNomF;RUConNomF+RUConPossibleBCon+RUCon|RUAdj+RUNoBCon-RUPartAdj|*;
+
+/*		1129. Екатерина II Алексеевна Великая .
+
+762;39;RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUAdjNomF|RUCon;RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|RUAdj+RUNoBCon-RUPartAdj|*;
+
+/*		762. В случае нарушения медицинским учреждением условий договора страховая медицинская организация вправе.
+
 758;39;RUCon|RUConNomF/GenMN/NomAccPl|RUAdjNomF|RUCon;*|RUConGenMN+RUConGen+RUCon|RUAdj+RUAdjPossibleBCon|*;
+
+/*		758. после предъявления ультиматума советско-финская война.
+
 1128;39;RUCon|RUPrep|RUCon|RUConNomF/GenMN/NomAccPl|RUNe:RUVerb;*|*|*|RUConGenMN+RUConGen+RUCon|*;
+
+/*		1128. принципиальных изменений в окраске дворца не происходит.
+
 779;39;RUCapitalInitial|RUAdjNomF+RUCapitalInitial|^RUConNomF:RUAdjNomF;*|RUAdj+RUNoBCon|*;
-778;39;RUConNomF/NomM|RUAdjNomF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon;
-752;39;RUConNomF|RUAdjNomF|^RUConNomF+^RUAdjNomF+^SEnd;*|RUAdj+RUNoBCon|*;to prevent concept split
+
+/*		779. Русская Православная Церковь.
+
+778;39;RUConNomF/NomM|RUAdjNomF;RUConPossibleBCon+RUCon|RUAdj+RUNoBCon-RUPartAdj;
+
+/*		778. соль природная.
+
+752;39;RUConNomF|RUAdjNomF|^RUConNomF+^RUAdjNomF+^SEnd;*|RUAdj+RUNoBCon-RUPartAdj|*;to prevent concept split
+
+/*		752. часть вторая в ред.
+
 759;39;RUAdjGenMN;RUAdj+RUAdjGen+RUNoBCon;
+
+/*		759. признает зарубежного представителя виновным.
+
 754;39;RUAdjNomF;RUAdj+RUAdjPossibleBCon;
+
+/*		754. При заборе воды налоговая база определяется как объем воды.
+
 753;39;RUConNomF;RUConPossibleBCon+RUCon;
+
+/*		753. При заборе воды налоговая база определяется как объем воды.
+
 1120;39;SBegin:RUAdjNomM:RUPlusAcc|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+
+/*		1120. царский подарок. Ребенок вправе выбрать то, что ему интересно.
+
 1122;39;RUIndefpron:RUPosspron:RUDempron:RUTakoj:RUNikakoy+^RUPlusGen|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+
+/*		1122. с открытием в тот же срок финансирования.
+
 1123;39;^RUCon:RUPlusGen:RUAdjGenPl|RUConNomM/GenPl|RUNe:RUVerb:RUmAux;*|RUConNom/AccM+RUCon+RUConPossibleBCon|*;
+
+/*		1123. в течение которого участок не мог быть использован. NOT. что трёх красок не хватает.
+
 1124;39;RUVerb:RUInf:RUAdvStruct|RUConNomM/GenPl;*|RUConNom/AccM+RUCon+RUConPossibleBCon;
+
+/*		1124. В случаях, когда обязательство не предусматривает срок его исполнения и не содержит условий.
+
 1125;39;RUConNomM/GenPl|RUAdjNomM|^RUConNom/AccM;RUConNom/AccM+RUCon+RUConPossibleBCon|*|*;
+
+/*		1125. цемента, песок природный строительный.
+
 1132;39;RUAdjGDPIF|RUConNom/AccM;RUAdj+RUAdjPossibleBCon|*;rewrite word with GDPI ending to nominative when noun in nom case masculine follows
 
+/*		1132. Всего за месяц молодой игрок заработал на турнирах.
 /*Defaults for ambiguous nouns that can be genitive
 /*=================================================
 
 1121;39;RUConNomM/GenPl:RUConGDP/NomAccPl:RUConNomF/GenMN/NomAccPl:RUConGenF/NomAccPl;RUConGen+RUCon;
-757;39;RUConGenMN:RUConGenF:RUConGenPl:RUConGDP;RUConGen+RUCon;
 
+/*		1121. что трёх красок не хватает.
+
+757;39;RUConGenMN:RUConGenF:RUConGenPl:RUConGDP;+RUConGen;
+
+/*		757. совершил в течение испытательного срока новое преступление.
 /*Concept clusters: using case information adjectives
 /*===================================================
 /*Adjective Nominative-Accusative Masculine
 
 1145;39;RUAdjNomM|RUConInstrPl|RUAdjNomM;*|*|RUAdj+RUNoBCon;
+
+/*		1145. Сохраняемый староверами старый символ.
+
 775;39;RUCapitalInitial+^RUConGen:RUConInstrMN:RUConInstrPl|RUAdjNomM+RUCapitalInitial;*|RUAdj+RUNoBCon;default rules for ConGen should precede this rule
+
+/*		775. Анатолий Белый.
+
 777;39;RUConNomF/NomM|RUAdjNomM;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;
+
+/*		777. уголь бурый.
+
 776;39;RUConNom/AccM|RUAdjNomM|^RUConNom/AccM+^SEnd;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;
+
+/*		776. песок природный строительный, галька, гравий, песчано-гравийные смеси.
+
 774;39;RUAdjNomM;RUAdj+RUAdjPossibleBCon;
+
+/*		774. на несколько часов остановил работу общественный транспорт.
+
 947;39;RUConNom/AccM:RUConNomF/NomM;RUConPossibleBCon+RUCon;
 
+/*		947. министр труда.
 /*Adjective Nominative Neuter
 
 1143;39;RUAdjNomN|RUConInstrPl|RUAdjNomN;*|*|RUAdj+RUNoBCon;
+
+/*		1143. Сохраняемое староверами крюковое пение.
+
 746;39;RUConNomN|RUAdjNomN;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon;
+
+/*		746. Словосочетание „Московское государство“ появляется в 1480-е годы.
+
 747;39;RUConNomN;RUCon+RUConPossibleBCon;
+
+/*		747. с целью обращения взыскания на это имущество. NOT. до аэропорта Домодедово.
+
 751;39;RUAdjNomN;RUAdj+RUAdjPossibleBCon;
 
+/*		751. совершил в течение испытательного срока новое преступление.
 /*Adjective Accusative Feminine
 
 781;39;RUCapitalInitial|RUAdjAccF+RUCapitalInitial;*|RUAdj+RUNoBCon;
+
+/*		781. Наталью Магнитскую.
+
 780;39;RUAdjAccF;RUAdj+RUAdjPossibleBCon;
 
+/*		780. они чуть отогнули на окне маскировочную штору.
 /*Adjective Prepositional Masculine-Neuter
 
 1151;39;"при"|"этом"|^RUConPrepos:RUAdjPreposMN;RUAdvStruct|+Join|*;
+
+/*		1151. если при этом преступление не было доведено до конца по не зависящим от этого лица обстоятельствам. NOT. Название закрепилось за отделившимися при этом расколе церквями.
+
 1130;39;RUAdjPreposMN+RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;RUConInstrMN+RUCon-RUAdj|*;correction: capitalized adjective in preposition case becomes noun (name) in instrumental case
+
+/*		1130. В среду матчем между «Салаватом Юлаевым» и «Атлантом» стартует.
+
 815;39;RUAdjPreposMN+RUCapitalInitial|^RUAdjPreposMN:RUConPrepos;RUConInstrMN+RUCon-RUAdj|*;correction: adjective in preposition case becomes noun (name) in instrumental case
+
+/*		815. с агентом Джимом Придо. NOT. на Таутенбургском 1.34-метровом телескопе Шмидта.
+
 817;39;RUConPrepos|RUAdjPreposMN;*|RUAdj+RUNoBCon;
+
+/*		817. В Царстве русском развивались такие виды спорта.
+
 1119;39;RUPrep|.RUAdjGDPIF:RUAdjPreposMN|RUConPrepos|RUCon+^RUConGen|*RUNe:RUVerb|SEnd:RUPunctuation;*|*|*|^RUBCon|*|*;exception for nouns in genitive (all ambiguous nouns with genitive must be rewritten to the default before this rule)
+
+/*		1119. Ни о каких прототипах торпед или иного оружия в романе речи не шло. NOT. принципиальных изменений в окраске дворца не происходит.
+
 816;39;RUAdjPreposMN;RUAdj;
 
+/*		816. жарьте его по 2-3 мин с каждой стороны при сильном режиме и по 4-5 мин при более слабом.
 /*Adjective Instrumental Masculine-Neuter / Dative Plural
 
 808;39;RUCapitalInitial|RUAdjInstrMN/DatPl+RUCapitalInitial;*|RUAdj+RUNoBCon;
+
+/*		808. с посадским человеком Кузьмой Мининым.
+
 809;39;RUConInstrMN|RUAdjInstrMN/DatPl;*|RUAdj+RUNoBCon;
+
+/*		809. Так, академиком Сахаровым был предложен проект.
+
 814;39;RUAdjInstrMN/DatPl|RUPutjom;*|RUCon;
 
+/*		814. приобретенных другими лицами преступным путем.
 /*Adjective Nominative-Accusative Plural
 
 1142;39;RUAdjNomAccPl|RUConInstrPl|RUAdjNomAccPl;*|*|RUAdj+RUNoBCon;
+
+/*		1142. проверенные тысячелетиями слабые напитки.
+
 785;39;RUConNomAccPl|RUAdjNomAccPl|^RUConNomAccPl:RUConNomAccPl_ambig:RUAdjNomAccPl;RUCon+RUConPossibleBCon|RUAdj+RUNoBCon|*;
+
+/*		785. В этом городе  граждане ответственные, грамотные и живые, оставалось. NOT. он вдыхал в игрушки волшебные души.
+
 784;39;RUAdjNomAccPl;RUAdj+RUAdjPossibleBCon;
+
+/*		784. Рекордной величины международные резервы достигли 8 августа 2008 года.
+
 788;39;RUConNomAccPl;RUCon+RUConPossibleBCon;
 
+/*		788. В этом городе братья улетали навсегда, они покидали этот мир.
 /*Adjective Genitive-Dative-Prepositional-Instrumental Feminine
 
-1008;39;RUAdjGDPIF|"зимой";RUAdj+RUNoBCon|RUTemp+RUNoBCon;
-1009;39;RUAdjGDPIF|"весной";RUAdj+RUNoBCon|RUTemp+RUNoBCon;
 772;39;RUAdjGDPIF;RUAdj+RUAdjGen+RUNoBCon;not necessarily Genitive, but this default prevents unwanted Concept splits
 
+/*		772. Мы начинаем процесс создания новой патрульной службы.
 /*Adjective Genitive Plural
 
 818;39;RUAdjGenPl;RUAdj+RUAdjGen+RUNoBCon;
 
+/*		818. Парк Красноярской железной дорогу пополнили пять новых маневровых тепловозов.
 /*Adjective Dative Masculine-Neuter
 
 806;39;RUCapitalInitial|RUAdjDatMN+RUCapitalInitial;*|RUAdj+RUNoBCon;
+
+/*		806. брат обратились к Ивану Грозному с просьбой о подданстве.
+
 1140;39;RUCon|RUAdjDatMN|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Dative should not become BeginConcept
+
+/*		1140. или путем придания одним товарам вида других, либо с представлением таможенному органу поддельных документов. Ограничение свободы заключается в установлении судом осужденному следующих ограничений.
+
 1135;39;RUCon|RUAdjDatMN|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Dative should not become BeginConcept
+
+/*		1135. Ограничение свободы заключается в установлении судом осужденному следующих ограничений.
+
 805;39;RUAdjDatMN;RUAdj+RUAdjPossibleBCon;
 
+/*		805. по экспортному контракту платежи подлежат рассмотрению.
 /*Adjective Instrumental Plural
 
 773;39;RUConInstrPl|RUAdjInstrPl;*|RUAdj+RUNoBCon;
-767;39;RUAdjInstrPl|RUPrep|^RUPrep|^RUPrep|RUAdjInstrPl;RUBCon|+Join|+Join|+Join|+Join;
-768;39;RUAdjInstrPl|RUPrep|^RUPrep|RUAdjInstrPl;RUAdj+RUNoBCon|+Join|+Join|+Join;
-1139;39;RUCon|RUAdjInstrPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr should not become BeginConcept
-1137;39;RUCon|RUAdjInstrPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr should not become BeginConcept
-765;39;RUAdjInstrPl;RUAdj+RUAdjPossibleBCon;
-992;39;RUWeek:"этот же год":"этот год":"год":"годы"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;
-1133;39;"день":"дня":"столетие":"столетие":"годы":"день":"дня"|RUConGen:RUAdjGen|^RUVerb;RUCon|*|*;
 
+/*		773. Все три этажа сооружения облицованы камнями идентичными.
+
+767;39;RUAdjInstrPl|RUPrep|^RUPrep|^RUPrep|RUAdjInstrPl;RUBCon|+Join|+Join|+Join|+Join;
+
+/*		767. постукивая друг о дружку модными в этом сезоне голландскими башмаками.
+
+768;39;RUAdjInstrPl|RUPrep|^RUPrep|RUAdjInstrPl;RUAdj+RUNoBCon|+Join|+Join|+Join;
+
+/*		768. регулируемые уполномоченными на то государственными органами.
+
+1139;39;RUCon|RUAdjInstrPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr should not become BeginConcept
+
+/*		1139. постепенная подготовка к принятию различными государствами законодательства.
+
+1137;39;RUCon|RUAdjInstrPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr should not become BeginConcept
+
+/*		1137. без согласия специализированного государственного органа, осуществляющего надзор за отбыванием осужденными наказания в виде ограничения свободы.
+
+765;39;RUAdjInstrPl;RUAdj+RUAdjPossibleBCon;
+
+/*		765. в результате катастрофы круглыми сиротами остались восемь детей.
 /*PHASE 40: GENERAL RULES FOR DISAMBIGUATION
 /* = = = = = = = = = = = = = = = = = = = = =
 /*Various: specific words and concept clusters
@@ -185,817 +442,2000 @@
 /*Ranee
 
 1020;40;RURanee|RUPartAdj;^RUPartAdj|+Join;
-1021;40;RURanee|RUPartAdjSubst;^RUPartAdjSubst|+Join;
-1023;40;RURanee;RUTime+RUAdvPR;
 
+/*		1020. прекращения действия ранее введенных налогов.
+
+1021;40;RURanee|RUPartAdjCon;^RUPartAdjCon|+Join;
+
+/*		1021. отношения, возникшие из ранее заключенных договоров.
+
+1023;40;RURanee;^RUTime+RUAdvPR;
+
+/*		1023. Ранее оператор заявляла, что электростанция не до конца готова к летним тайфунам.
 /*Adjectives in instrumental: used as adverbs, in time expressions, as beginconcept
 
 812;40;RUAdjInstrMN/DatPl|RUAndOr|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv|RUAdv|+Join;
-810;40;RUSamyj|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|+Join|RUAdv;
-811;40;RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv;
-1006;40;RUAdjInstrMN/DatPl|"летом";RUAdj|RUTemp+RUNoBCon;
-1007;40;RUAdjInstrMN/DatPl|"осенью";RUAdj|RUTemp+RUNoBCon;
-1138;40;RUCon|RUAdjInstrMN/DatPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr/Dat should not become BeginConcept
-1136;40;RUCon|RUAdjInstrMN/DatPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr/Dat should not become BeginConcept
-807;40;RUAdjInstrMN/DatPl;^RUAdj+RUAdjPossibleBCon;
-1134;40;RUPartAdjSubst:RUPartAdjtemp:RUPartAdj:RUPartActpf:RUSamyj+RUAdj;-RUAdj;remove general Adj which is added as default next to case specific labels, so it doesn't hinder the disambiguation of PartAdjSubst,PartAdjtemp,PartAdj,PartActpf,Samyj
 
+/*		812. ответить пропорциональным и справедливым образом.
+
+810;40;RUSamyj|RUAdjInstrMN/DatPl|RUObrazom;RUAdv|+Join|RUAdv;
+
+/*		810. были самым тесным образом связаны с чем-то.
+
+811;40;RUAdjInstrMN/DatPl|RUObrazom;RUAdv|RUAdv;
+
+/*		811. нормы частного и публичного права теснейшим образом переплетаются.
+
+1138;40;RUCon|RUAdjInstrMN/DatPl|RUCon|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*|*;adjective Instr/Dat should not become BeginConcept
+
+/*		1138. сооружения и помещения дипломатическим представительствам иностранных государств в Российской Федерации.
+
+1136;40;RUCon|RUAdjInstrMN/DatPl|RUAdjGen:RUConGen;*|RUAdj+RUNoBCon|*;adjective Instr/Dat should not become BeginConcept
+
+/*		1136. правила о пенсиях рабочим казённых горных заводов.
+
+807;40;RUAdjInstrMN/DatPl;^RUAdj+RUAdjPossibleBCon;
+
+/*		807. признает зарубежного представителя виновным. по трудовым договорам, заключенным с российской организацией.
+
+1134;40;RUPartAdjCon:RUPartAdj:RUPartActpf:RUSamyj+RUAdj;-RUAdj;remove general Adj which is added as default next to case specific labels, so it doesn't hinder the disambiguation of PartAdjSubst,PartAdjtemp,PartAdj,PartActpf,Samyj
+
+/*		1134.  не могут собирать отработавшие объекты.
 /*Splitting concept clusters: using adjectives
 
 766;40;RUAdjPossibleBCon+^RUPartAdj|RUVerbCon;*|RUCon;
+
+/*		766. на поселении Пахомовская Пристань I были обнаружены фрагменты сосудов.
+
 565;40;RUNum|RUIz|RUNum;RUBCon|RUCon|RUCon;number before 'iz' plus number becomes beginconcept
+
+/*		565. погибли четверо из шести человек.
+
 455;40;RUNum|RUDempron|RUAdj;RUCon|RUCAdv|*;demonstrative pronoun between number and adjective becomes concept
+
+/*		455. Один этот маленький штрих.
+
 705;40;RUCon|RUAdjPossibleBCon|SEnd:RUComma;*|RUAdj+RUNoBCon|*;to not split up adjective from preceding noun at end of sentence or before comma
-999;40;RUBeginendconcept:RUTempBeginEnd|RUPartAdj|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;
-392;40;RUECon|RUPartAdj:RUPartActpf|^RUCon+^SEnd;RUECon+RUCon|RUPart|*;long participle after time expression as endconcept becomes relation
-1150;40;RUCon|RUPartAdj:RUPartActpf+RUAdjPossibleBCon+^RUNoBCon|^RUInf;*|^RUBCon+RUAdj|*;to split up concepts with different cases, separate rule for participles with exception for following infinitive, then participle should become Relation
-692;40;RUCon|RUAdjPossibleBCon+^RUNoBCon:RUPartAdj:RUPartActpf;*|^RUBCon+RUAdj;to split up concepts with different cases (exception: participles, see r1150)
+
+/*		705. Признание гражданина недееспособным. Дело молодое, содвинулись.
+
+392;40;RUAdvTime+^RUSingleWord|RUPartAdj:RUPartActpf|^RUCon+^SEnd;*|RUPart|*;long participle after time expression as endconcept becomes relation
+
+/*		392. директор, в настоящее время находящийся на больничном. NOT. известно, что сегодня определяющим фактором в госзакупках является цена.
+
+1150;40;RUCon+^RUNum:RUTimeConcept|RUPartAdj:RUPartActpf+RUAdjPossibleBCon+^RUNoBCon|^RUInf;*|^RUBCon+RUAdj|*;to split up concepts with different cases, separate rule for participles with exception for following infinitive, then participle should become Relation
+
+/*		1150. Управление зарегистрированным транспортным средством. NOT. преседатель, в свои 70 лет решивший стать подручным сомнительного алюминиевого короля.
+
+692;40;RUCon+^RUNum:RUAcro|RUAdjPossibleBCon+^RUNoBCon:RUPartAdj:RUPartActpf;*|^RUBCon+RUAdj;to split up concepts with different cases (exception: participles, see r1150)
+
+/*		692. На шоссе маршрутное такси упало с моста. NOT. Исполнение солидарной обязанности одним из должников. NOT. с 2 живыми существами.
+
 715;40;RUCon|RUAdv|RUAdj|SEnd;*|RUBCon|*|*;
 
+/*		715. Этот мир и несёт человеку истинно человеческое.
 /*Splitting concept clusters: using nouns (plus adjectives)
 
 951;40;RUConPossibleBCon+RUCapitalInitial2;-RUConPossibleBCon;don't split Concept when possible beginconcept is capitalized
+
+/*		951. на компании "Мегафон".
+
 958;40;RUConPossibleBCon+RUCapitalAll;-RUConPossibleBCon;don't split Concept when possible beginconcept is allcaps
+
+/*		958. территорию аэродрома ДОСААФ.
+
 1118;40;RUPrep|RUCon|.RUTakoj|RUConGen|RUConPossibleBCon;*|*|*|*|^RUBCon;
+
+/*		1118. Очевидно, что при исполнении такого заказа тяжесть вины не могла быть принимаема к точному руководству.
+
 931;40;RUPrep|.RUPosspron:RUDempron:RUDempronConj:RUIndefpron|RUCon+^RUNum|RUConPossibleBCon;*|*|^RUCon|^RUBCon;
+
+/*		931. У моего доверителя восприятие жизни, чести и достоинства не самые легковесные. В этом городе граждане ответственные, грамотные и живые, оставалось. Тоталитаризм для этих людей понятие очень широкое. NOT. в один голос.
+
 1154;40;RUPrep|*RUCon|RUAdjGen|RUCon|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*|*;
+
+/*		1154. В России подобных памятников нет. NOT. В группах танцевально–двигательной терапии нет ограничений для состава группы.
+
 1155;40;RUPrep|*RUCon+^RUConGen|RUConGen|"нет"|^RUAdj:RUCon;*|*|^RUBCon|*|*;
+
+/*		1155. И от судеб защиты нет. NOT. В группах танцевально–двигательной терапии нет ограничений для состава группы.
+
 1152;40;RUConGen:RUConPreposPl|RUConPossibleBCon;*|^RUBCon;
 
+/*		1152. при осуществлении адвокатской деятельности мнение не может быть привлечён к какой-либо ответственности, кроме уголовной. очаги, поддерживающие на своих планетах жизнь.
 /*Sreda
 
-938;40;RUAdj|RUSreda;*|RUCon;
-939;40;RUSreda|RUConGen:RUAdjGen;RUCon|*;
-940;40;RUSreda;RUDay+RUCon;
+1333;40;RUPrep|RUSreda|^RUConGen:RUAdjGen;*|RUCon+RUTimeConcept+RUDay+RUTime|*;
 
+/*		1333. Удара стихии ожидают в ночь на среду.
+
+1334;40;RUSreda|RUComma:RUAndOr|RUDay;RUCon+RUTimeConcept+RUDay+RUTime|*|*;
+
+/*		1334. первые три дня: среда, четверг и пятница.
+
+1335;40;RUDay|RUComma:RUAndOr|RUSreda;*|*|RUCon+RUTimeConcept+RUDay+RUTime;
+
+/*		1335. первые три дня: понедельник, вторник и среда.
 /*Including Relation+PathRelevant in Concept
 
 956;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;preposition plus personal pronoun between adjective and noun become concepts
 
+/*		956. привычной для него среде.
 /*'кое'
 
 371;40;RUKoe|RUPrep|RURelpron;RUIndefpronPR|+Join|+Join;
 
+/*		371. Я кое с кем говорил об этой проблеме.
 /*Clean-up
 
-1131;40;RUAdj+RUBCon+^RUOdin;RUBCon;
-1304;40;RUCfr:RUNum|"см."+^RUCapitalInitial;*|RUCon;
+1365;40;RUAdj+RUBCon+^RUOdin+RUBeginTime;RUBCon+RUBeginTime;
 
+/*		1365. лечит беженцев каждый день.
+
+1373;40;RUAdj+RUBCon+^RUOdin+RUOrdNum;RUBCon+RUOrdNum;
+
+/*		1373. За три месяца первый раз вернулся.
+
+1131;40;RUAdj+RUBCon+^RUOdin;RUBCon;
+
+/*		1131. На улице угасающее лето никак не хотело выглядеть осенью. NOT. В силу обязательства одно лицо (должник) обязано совершить в пользу другого лица (кредитора) определенное действие, как-то.
+
+1304;40;RUNum|"см."+^RUCapitalInitial;*|RUCon;
+
+/*		1304. Цели появлялись справа и слева от него на расстоянии 10 см.
+/*time as part of Concept
+/*-----------------------------
+
+1189;40;RUPrep|RUAdvPR:RUSingleWord|RUPartAdj;*|RUCAdv|RUAdj;
+
+/*		1189. В недавно принятой правительственной программе этой реформы отражено стремление. которые составляют 2% от ежегодно вывозимых на свалки 200 млн т.
 /*Expressions of time
 /*===================
 
-742;40;RUCfr|RURanking;RURanking|+Join;
-293;40;RUPrep|RUWeek;*|RUECon+RUCon;week/month after preposition becomes endconcept, before rules 'year'
-987;40;RUWeek|RUMonth:RUMonthNom;RUCon|RUCon;
-997;40;RUWeek|RUYear;RUCon|RUECon+RUCon;
-998;40;RUWeek|RUCfrYear;RUCon|RUCon;
-292;40;RUWeek;RUECon+RUCon;week/month becomes endconcept
-274;40;RURanking|RUYear|RUAdjtemp:RUPartAdjtemp:RURanking|RUCent;RUCfr|RUCon|RUAdj|RUECon+RUCon;century after ranking number+year+time adjective becomes endconcept
-277;40;RUCent;RUYear;century behaves as year
-276;40;RUCfrYear:RURanking|RUYear;*|RUECon+RUCon;year after number becomes endconcept
-272;40;RUAdjtemp:RUPartAdjtemp|RUYear;RUAdj|RUECon+RUCon;year after adjective of time adjective becomes endconcept
-267;40;RUKazjdyj|RUYear;RUBeginendconcept+RUCon|+Join;'kazhdy' plus year becomes beginendconcept
-279;40;RUDay:RUTemp|RUCfr;RUBCon|*;days of the week/expression of time before number become beginconcept
-738;40;^RUBCon|RUCfr|RUMonth;*|+RUBCon|RUMonth;
-1015;40;RUNum|RUYear|RUNazad;RUBCon|RUCon|RUECon+RUCon;
-282;40;RUMonth|RUCfrYear;RUCon|RUCfr;month before number year becomes concept
-741;40;RUMonth|RURanking;RUCon|*;
-283;40;RUMonth|.RUAdj|RUECon;RUCon|*|RUECon+RUCon;month before (time adjective plus) time indication as endconcept becomes concept
-281;40;RUMonth|RUYear;RUCon|RUYear;month before year becomes concept
-1010;40;RUTemp+RUNoBCon|RUCfrYear;RUCon|RUCon;
-289;40;RUTemp|RUCfrYear:RURanking;RUBCon|RUCon;expression of time before number year/ranking number necomes beginconcept
-290;40;RUTemp|RUAdj|RUECon;RUCon|*|RUECon+RUCon;expression of time before adjective plus time indication as endconcept becomes concept
-288;40;RUDay;RUECon+RUCon;default for day: becomes endconcept
-285;40;RUMonth;RUECon+RUCon;default for month: becomes endconcept
-286;40;RUPartAdjtemp;RUPartAdj;default for time participle: becomes participle
-287;40;RUAdjtemp;RUAdj;default for time adjective: becomes adjective
-270;40;RUYear;RUCon;default for year: becomes concept
-381;40;RUOkolo|RUCfr;RUBCon|*;'okolo' before number becomes beginconcept
-744;40;RUCfrYear;RUCfr;
+1385;40;RUAdvPR|RUEndTime;+RUAdvPR|+Join;
 
-/*Various: specific words and word groups, time
-/*=============================================
-/*'назад' and 'спустя'
+/*		1385. его ведомство некоторое время назад нанимало на работу.
 
-1011;40;RUBeginendconcept|RUNazad;RUBeginendconcept+RUCon|+Join;
+1369;40;RUDempron|RUAdvTime+RUSeason;-RUPlusGen|*;
+
+/*		1369. В Лондоне той осенью был особый аромат.
+
+1363;40;RUTimeConcept+RUConIfCap+RUCapitalInitial;-RUTimeConcept-RUMonth-RUTime;
+
+/*		1363. по рождению София Фредерика Августа.
+
+1356;40;"лет"|RUEndTime;+RUTimeConcept|*;
+
+/*		1356. вывел джаз на филармоническую сцену 50 лет назад.
+
+1368;40;RUDate:RUSeason|RUYear;RUAdvTime|+Join;
+
+/*		1368. на интервале 2 месяца до 28.04.2006 г. .
+
+640;40;RUNum|RUAndOr|RUAdvdegree:RUCompgr;RUNum|+Join|+Join;
+
+/*		640. Их может использоваться до двадцати и более.
+
+1340;40;RUNum|RUBracketsnumber|RUMonth;RUMonth+RUCon+RUTimeConcept|+Join|+Join;
+
+/*		1340. 1 (13) марта 1881 Александр II был смертельно ранен.
+
+1357;40;RUTimeConcept:RUYear|."или"|RUNum|RUEndTime;RUTimeConcept+RUTime|+Join|+Join|+Join;
+
+/*		1357. решения, принятые год или два назад.
+
+1342;40;RUDempron+RUPlusGen|RUTimeConcept:RUYear:RUSeason;RUTimeEndConcept|+Join;
+
+/*		1342. получение награды этого года.
+
+1345;40;RUDempron:RUIndefpron:RUNeskolko|RUTimeConcept:RUYear:RUSeason;RUAdvTime|+Join;
+
+/*		1345. Мукой тот год выдавали.
+
+1379;40;RUNum|"по":"до":"на":RUAndOr:RUHyphen|RUNum|RUMonth|RUYearNum|RUYear;+RUTime|*|JoinReverse|JoinReverse|JoinReverse|RUAdvTime;
+
+/*		1379. в ночь с 3 на 4 октября 1993 г. .
+
+1376;40;"в"|"ночь"|"с"|RUNum|"на"|RUNum|*RUTimeConcept:RUYearNum;*|*|*|+RUTime|*|JoinReverse|RUTimeEndConcept;
+
+/*		1376. В ночь с 7 на 8 августа 2008.
+
+1381;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUYear|RUNum:RUOrdNum|RUTimeConcept;+RUTime|*|*|*|*|*;
+
+/*		1381. в 60 — 70-е гг. ХХ века.
+
+1380;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUBeginTime:RUPartTime:RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUTimes:RUTimeConcept+^RUYear;+RUTime|*|*|*;
+
+/*		1380. в русской литературе XVIII и начала XIX веков.
+
+1375;40;*RUYearNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUYear+RUTimeConcept:RUAcro;+RUTime|*|JoinReverse|RUAdvTime;
+
+/*		1375. С 1925 до 1947 года. Результаты исследований портала 2003 и 2007 г. свидетельствуют.
+
+1382;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUCentury+RUAcro;+RUTime|*|JoinReverse|RUAdvTime;
+
+/*		1382. а основе отдельных достижений 17 -- 18 вв. заложили.
+
+1359;40;*RUNum:RUOrdNum|RUQuarter|RUNum|RUYear;JoinReverse|JoinReverse|JoinReverse|RUAdvTime;
+
+/*		1359. во втором квартале 2011 г объемы вскрыши упали на 22 проц.
+
+1362;40;RUNum:RUOrdNum|RUYear|RUNum:RUOrdNum|RUCentury;RUAdvTime|+Join|+Join|+Join;
+
+/*		1362. в 60-90ые годы XVIII века.
+
+1358;40;RURoman:RUBeginTime|.RUNum:RUOrdNum|RUQuarter:RUCentury;RUTimeEndConcept|+Join|+Join;
+
+/*		1358. упала по итогам II квартала на 29%. выросло на 25 проц по сравнению с предыдущим кварталом. В XX в. слово «деонтология» стало широко использоваться в медицине. с 4 по конец 8 в.
+
+1330;40;^RUBeginTime:RUNum|RUAdj+^RUDigit:RUOrdNum:RUNum:RUBeginTime|RUAdvTime:RUYear+^RUSingleWord:"лет";*|*|RUTimeEndConcept+RUNoBCon;
+
+/*		1330. Климат Москвы умеренно-континентальный c холодной продолжительной зимой и тёплым продолжительным летом. NOT. сенаторы присягнули Николаю I ночью. NOT. И быть голодной сегодня ей тоже нравилось. в минувшем учебном году.
+
+1308;40;RUNum:RUOrdNum|RUMonth:RUTimeConcept|*RUNum:RUOrdNum|RUYear;RUAdvTime|+Join|+Join|+Join;
+
+/*		1308. датировано 19 августа 201 г.. Первый месяц 1942 года был самым холодным. Но тот, утраченный тринадцатого июля двадцать шестого года.
+
+1320;40;RUNum|RUMonth|RUYearNum:RUYear;RUAdvTime|+Join|+Join;
+
+/*		1320. 8 сентября 1914 Главнокомандующий обращается непосредственно к императору.
+
+1319;40;RUYearNum|RUYear+RUConGen;RUTimeEndConcept|+Join;
+
+/*		1319. К этой конвенции был приложен акт 1795 года.
+
+1315;40;RUYearNum|RUYear;RUAdvTime|+Join;
+
+/*		1315. В 2011 году Норвегия впервые запретила использование натурального меха.
+
+1354;40;"за":"после":"через":"спустя":"на":"на протяжении":"по истечении":RUAdj|.RUAdvdegree|RUNum|RUYear;*|JoinReverse|JoinReverse|RUTimeConcept+RUTime;
+
+/*		1354. после десяти лет работы в фирме. На это ушли долгие семь лет.
+
+1355;40;RUOrdNum|"лет";RUTimeConcept+RUTime|+Join;
+
+/*		1355. С самых первых лет своего существования.
+
+1316;40;RUNum:RUOrdNum|RUMonth;RUAdvTime|+Join;
+
+/*		1316. 16 июля адвокаты сообщили. Зачисление на платной основе продолжалось до первого сентября.
+
+1344;40;"в":"с"|*RUOrdNum:RUNum|"годах":"году":"годы"|^RUOrdNum:RUNum;*|JoinReverse|RUTimeEndConcept|*;
+
+/*		1344. В 1780-1790-х годах работы продолжили. Основная причина — размещение с 1950-1960-х гг. гиганстких «грязных» производств.
+
+1346;40;"в":"с"|*RUOrdNum:RUNum|RUYear+^RUTimeConcept:"лет";*|JoinReverse|RUTimeEndConcept;
+
+/*		1346. В 60-80-х гг. прошлого века. NOT. Гражданин может осуществлять свои права и обязанности с 18 лет.
+
+1348;40;"в":"с"|RUYearNum|^typeConcept;*|RUAdvTime|*;
+
+/*		1348. в 1991 разгорелся конфликт. NOT. станет легче в 1000 раз.
+
+1349;40;*RUNum:RUOrdNum:RUBeginTime|RUAdj|RUTimeEndConcept:RUTimeConcept;+RUTime-RUYearNum-RUYearNumHyphen|*|RUTimeConcept+RUTime;
+
+/*		1349. в 2008-2009 учебном году.
+
+1347;40;"в":"с"|RUYearNumHyphen;*|RUAdvTime;
+
+/*		1347. В 1941—1945 ряд народов были организованы.
+
+1350;40;*RUOrdNum:RUNum+RUBCon|RUTimeConcept:"гг.":"гг";JoinReverse|RUTimeBeginConcept;
+
+/*		1350. в срок наказания из расчета один день пребывания в стационаре.
+
+1326;40;*RUOrdNum:RUNum|RUTimeConcept:"гг.":"гг";JoinReverse|RUTimeConcept+RUTime;
+
+/*		1326. За 8 месяцев сего года в федеральный бюджет. за первые шесть месяцев с.г.. назначил в 1 год лишения свободы. За период 1990-2009 гг. в республике произошло снижение.
+
+1309;40;RUTimeConcept|RUNum:RUOrdNum|RUYear;RUAdvTime|+Join|+Join;
+
+/*		1309. нарушение произошло в мае 201 г..
+
+1324;40;RUTimeConcept:RUMonth:RUAdvTime:RUTimeEndConcept+^RUNoBCon|RUBeginTime:RUDempron:RUIndefpron+RUAdjGen:RUConGen:RUPlusGen|RUMonth:RUYear:RUTimeConcept;RUAdvTime|+Join|+Join;
+
+/*		1324. Девочки родились в апреле этого года. выборы назначены на 5 октября этого года. Данная температура побила рекорд 26 июля этого же года. NOT. Апрельским вечером прошлого года.
+
+1321;40;RUMonth:RUSeason|RUYearNum;RUAdvTime|+Join;
+
+/*		1321. В декабре 2007 В. объявил.
+
+1343;40;RUBeginTime+RUPartTime|.RUNum:RUOrdNum|RUTimeConcept:RUYear:RUMonth;^RUTimeConcept+RUTime|+Join|+Join;forms of 'posledny' not EndConcept, because often before genitive
+
+/*		1343. последний день Масленицы.
+
+1364;40;RUBeginTime+RUBCon:RUIndefpronAdvdegree|.RUNum:RUOrdNum|RUTimeConcept:RUYear:RUMonth;RUAdvTime|+Join|+Join;
+
+/*		1364. лечит беженцев каждый день. что именно поэтому Павел много лет был его.
+
+1327;40;RUBeginTime:RUTimeConcept|.RUNum:RUOrdNum|RUTimeConcept:RUYear:RUMonth;RUTimeEndConcept|+Join|+Join;
+
+/*		1327. В последующие годы периоды роста перемежались с периодами спадов.
+
+1317;40;RUBeginTime:RUTimeConcept+RUConGen|RUTimeConcept:RUAdvTime:RUTimeEndConcept;RUTimeEndConcept|+Join;
+
+/*		1317. с конца декабря 1941.
+
+1325;40;RUAdj|RUBeginTime:RUTimeConcept|RUTimeConcept:RUAdvTime:RUTimeEndConcept;*|RUTimeEndConcept|+Join;
+
+/*		1325. Случайное известие о суровой зиме 1526 года превратилось в расхожий анекдот.
+
+1360;40;RUBeginTime:RUTimeConcept+^RUAcro+RUAdjGen:RUConGen|RUTimeConcept:RUAdvTime:RUTimeEndConcept;RUTimeEndConcept|+Join;
+
+/*		1360. биомедицинская революция последних десятилетий ХХ в. ширится.
+
+1318;40;RUBeginTime:RUTimeConcept+^RUAcro|RUTimeConcept:RUAdvTime:RUTimeEndConcept;RUAdvTime|+Join;
+
+/*		1318. В конце прошлой неделе председатель заявил о намерении. NOT. В. В. Геращенко.
+
+1322;40;RUTimeEndConcept|RUTimeEndConcept;RUTimeEndConcept|+Join;
+
+/*		1322. 2 млрд рублей до конца мая 1999 года.
+
+1323;40;RUPrep|RUMonth:RUSeason:RUDay|^RUNum:RUOrdNum;*|RUTimeEndConcept|*;
+
+/*		1323. В мае компания проводит "Дни открытых дверей". А в ночь на вторник тайфун дошел.
+
+1307;40;RUPrep|RUTimeConcept+^RUAcro;*|+RUTime;
+
+/*		1307. То есть в течение месяца всё становится ясно? Норвегия впервые запретила использование натурального меха на Неделе Моды.
+
+1371;40;RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUTimes|"в"|RUTimeConcept:RUAdvTime:RUTimeEndConcept;RUAdvTime|+Join|+Join|+Join;
+
+/*		1371. домохозяйка ходит за продуктами десять раз в неделю.
+
+1370;40;^RUAdj|RUTimes|"в"|RUTimeConcept:RUAdvTime:RUTimeEndConcept;*|RUAdvTime|+Join|+Join;
+
+/*		1370. "Фотобиеннале- 2002", проводимый раз в два года.
+
+1374;40;RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUTimes|RUComp:RUCompgr:"более";*|-RUTimes|*;
+
+/*		1374. в три раза быстрее, чем на лошадях.
+
+1372;40;RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUTimes;RUAdvTime|+Join;
+
+/*		1372. возросло за 2010 год почти в два раза.
+
+1361;40;RUNum:RUOrdNum|RUCentury|RUEndTime;RUAdvTime|+Join|+Join;
+
+/*		1361. ( 3 в. до н. э.).
+
+1331;40;RUAdvTime:RUTimeConcept:RUTimeEndConcept:RUNum|RUEndTime;RUAdvTime|+Join;
+
+/*		1331. 17 июля с.г. .
+
+1341;40;RUOrdNum|RUPartTime|.RUBeginTime:RUDempron:RUIndefpron+RUAdjGen:RUConGen:RUPlusGen|RUTimeConcept:RUMonth:RUTimeEndConcept:RUAdvTime;RUTimeEndConcept|+Join|+Join|+Join;
+
+/*		1341. перечеркнуть все достижения первой половины этого года.
+
+1351;40;RUPartTime|RUTimeConcept:RUTimeEndConcept;RUTimeEndConcept|+Join;
+
+/*		1351. климатическая зима составила 178 дней, то есть половину года.
+
+1329;40;RUAdvTime:RUTimeEndConcept:RUBeginTime|RUAdvTime:RUTimeEndConcept;RUAdvTime|+Join;
+
+/*		1329. глава была задержана утром 17 июля. мы же каждый год 31 декабря ходим в баню.
+
+1338;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUTimeConcept;JoinReverse|RUTimeConcept+RUTime;
+
+/*		1338. Он её не видел почти два месяца. ведь им осталось работать всего три месяца.
+
+1387;40;RUAdvdegree|RURaz;JoinReverse|RUTimeEndConcept;
+
+/*		1387. столько же раз приходили отписки.
+
+1352;40;RUAdvdegree:RUVsego:RUOkolo:RUNum:RUIndefpron|RUTimeEndConcept;JoinReverse|RUTimeEndConcept;
+
+/*		1352. так как более половины дней в году были постными.
+
+1339;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUAdvTime+^RUSingleWord;JoinReverse|RUAdvTime;
+
+/*		1339. в среднем 9 января — 4 мая. NOT. это более или менее сегодня уже понятно.
+
+1366;40;RUNe|RUComp|RUAdvTime:RUTimeEndConcept:RUTimeConcept;RUAdvTime-RUNegBegin|+Join|+Join;
+
+/*		1366. вступают в силу не ранее 1 января года. не ранее одного месяца со дня их официального опубликования.
+
+1337;40;RUAdvTime:RUTimeEndConcept:RUTimeBeginConcept;+RUTime;
+
+/*		1337. В первой половине апреля.
+
+1383;40;RUTimeConcept;+RUCon;
+
+/*		1383. Люди почти неделю не выходили на связь.
+
+742;40;RUNum|RUOrdNum;RUOrdNum|+Join;
+
+/*		742. из которых два первые представляют лучшие места.
+
 1017;40;RUVerb|RUNazad;*|RURAdv;
-1012;40;RUECon|RUNazad;RUBeginendconcept+RUCon|+Join;
 
+/*		1017. Теперь, оглядываясь назад, я думаю.
 /*'много','мало': indefinite pronoun or adverb of degree
 
 1034;40;RUIndefpronAdvdegree|RUPosspron|^RUVerb+^RUPart+^RUInf+^RUAux+^SEnd;RUCon|RUCon|*;
+
+/*		1034. достаточно много своих проблем.
+
 1036;40;RUIndefpronAdvdegree|RUDempron|RUCon:RUAdj;RUCon|RUCon|*;
+
+/*		1036. покупали много этих бумаг.
+
 1038;40;RUIndefpronAdvdegree|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;
+
+/*		1038. кроме нас было много таких же ребят, как мы.
+
 1039;40;RUIndefpronAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;
+
+/*		1039. Сначала свидетели говорили одно, а после того, как возбудили дело — немного другое.
+
 1035;40;RUIndefpronAdvdegree;RUAdvdegree;
 
-/*vague time as part of Concept
-/*-----------------------------
-
-1189;40;RUPrep|RUAdvPR|RUPartAdj;*|RUCAdv|RUAdj;
-
-/*time: beginendconcept
-/*---------------------
-
-1018;40;RUAdvdegree|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
-1019;40;RUAdj|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
-1016;40;RUNazad;RUECon+RUCon;
-1003;40;RUTemp+RUTempBeginEnd;RUBeginendconcept;
-291;40;RUTemp;RUECon+RUCon;time expression becomes endconcept
-
+/*		1035. В трех казармах обнаружили так много ошибок и недочетов.
 /*'из': preposition
 
 329;40;RUNeskolko|RUIz;RUIndefpronPR|RUPrep;'neskolko' plus 'iz' becomes nonrelevant
-1033;40;RUCfr|RUNum;RUNum|+Join;
+
+/*		329. Несколько из запомнившихся мне рассказов.
+
 408;40;RUTakoj;RUIndefpronPRNR+RUIndefpron;'takoy' becomes indefinite pronoun pathrelevant/nonrelevant
 
+/*		408. Такой способ активизации памяти.
 /*Combination number and pronoun; indefinite pronoun as part of noun group
 /*------------------------------------------------------------------------
 
 324;40;RUNum|RUIndefpron|RUCon;RUCon|RUAdj|*;indefinite pronoun between number and noun becomes part concept
+
+/*		324. Три другие перста соединены как знак соединения.
+
 451;40;RUNum|RUDempron|RUCon;RUCon|RUCAdv|*;demonstrative pronoun between number and noun becomes part concept
+
+/*		451. Я дам пять тысяч этому мальчишке.
+
 323;40;RUAdj|RUIndefpron|RUCon;*|RUAdj|*;indefinite pronoun between adjective and noun becomes part concept
 
+/*		323. можно подобрать животных любых размеров.
 /*'около'
 
 382;40;RUOkolo|RUNum;RUBCon|RUCon;'okolo' plus number becomes beginconcept
+
+/*		382. постоянно проживали около двух тысяч человек.
+
 383;40;RUOkolo;RUPrep;default for 'okolo': preposition
 
+/*		383. Около дома.
 /*'раз' and comparative
 
 529;40;RURaz|RUCompgr;RUCon|RUCon;'raz' plus 'more/less' become concepts
+
+/*		529. Он выделил в два с половиной раза меньше денег.
+
 532;40;RUCompgr|RUPrep:RUIndefpron;RUAdv|*;'more/less/ before preposition behaves as other adverbs
 
+/*		532. вес ее был значительно меньше в русской довоенной армии. Одна из капель меньше другой.
 /*'дам'
 
 572;40;RUNe:RUPerspron|RUDam;*|RUVerb;'dam' after 'ne' becomes relation
+
+/*		572. Паспорт не дам! Я дам пять тысяч этому мальчишке.
+
 570;40;RUDam;RUCon;default for 'dam': becomes concept
 
+/*		570. До 23.30 вход для дам - бесплатный!
 /*'больше','меньше'
 
 526;40;RUNe|RUVerb|RUCompgr;*|*|RURAdv;'more/less' after 'ne' plus verb becomes relation
+
+/*		526. не верю больше взрослым.
+
 525;40;RUCompgr;RUAdvdegree;default for 'more/less': adverb of degree
 
+/*		525. В ней было примерно вдвое больше людей.
 /*'раз', number
 
-828;40;RUNum|RUAdvStruct|RUVerbCon;*|*|RUCon;
-528;40;RURaz|RUAdvdegree;RUCon|RUCon;'raz' plus adverb of degree become concepts
-721;40;RUNum|RURaz|RUComp;RUCon|+Join|+Join;
-527;40;RURaz|RUNum;RUBCon|RUCon;'raz' plus number becomes beginconcept
-582;40;RUAdvdegree|RURaz;RUBeginendconcept+RUCon|+Join;adverb of degree plus 'raz' becomes beginendconcept
-533;40;RURaz;RUECon+RUCon;default for 'raz': endconcept
-640;40;RUNum|RUAndOr|RUAdvdegree;RUCon|RUCon|RUCon;
-720;40;RUNum|"с"|"лишним";RUCon|RUCon|+Join;
-328;40;RUNum+^RUOdin;^RUCon;default for number: concept
+1386;40;RUNe|RUComp|RUNum:RUOrdNum;RUNegCon-RUNegBegin|RUCAdv|*;
 
+/*		1386. группа численностью не менее одной пятой членов Совета.
+
+828;40;RUNum|RUAdvStruct|RUVerbCon;*|*|RUCon;
+
+/*		828. Одно только село губернии имело такие огромные хлебные торговые операции.
+
+528;40;RURaz|RUAdvdegree;RUCon|RUCon;'raz' plus adverb of degree become concepts
+
+/*		528. В четыре раза более длинную.
+
+721;40;RUNum|RURaz|RUComp;RUCon|+Join|+Join;
+
+/*		721. Средняя урожайность в два раза выше, чем в прошлом году.
+
+527;40;RURaz|RUNum;RUBCon|RUCon;'raz' plus number becomes beginconcept
+
+/*		527. Это повторилось раз десять и вдруг погасло.
+
+533;40;RURaz;RUTimeEndConcept;default for 'raz': endconcept
+
+/*		533. Прошлый раз он у них в карты играл.
+
+720;40;RUNum|"с"|"лишним";RUCon|RUCon|+Join;
+
+/*		720. за девять с лишним лет.
+
+328;40;RUNum+^RUOdin;+RUCon;default for number: concept
+
+/*		328. За месяц -- почти десять.
 /*'вести'
 
 191;40;RUPrep|RUVesti;*|RUCon;'vesti' after preposition becomes concept
+
+/*		191. Отец пропал без вести.
+
 192;40;RUVesti;RUInf;default for 'vesti': infinitive
 
+/*		192. С этого момента могла вести свободный бизнес.
 /*'достаточно'
 
 410;40;RUDostatotsjno|RUCon;RUCAdv|*;'dostatochno' before noun becomes concept
+
+/*		410. Сегодня уже существует достаточно примеров эффективного сотрудничества почтовых ведомств разных стран.
+
 411;40;RUDostatotsjno;RUAdvPred;default for 'dostatochno': adverb/predicate
 
+/*		411. Достаточно иметь доступ к базе данных.
 /*Adverb/predicate
 /*----------------
 
 327;40;RUAdvPred|RUAdj;RUAdj|*;adverb/predicate before adjective becomes concept
+
+/*		327. Причиной невроза могут стать недостаточно стабильные отношения.
+
 479;40;RUAdvPred|RUKAdj;RUAdv|RUKAdj;adverb/predicate before short adjective becomes adverb
+
+/*		479. Он был тяжело болен.
+
 6;40;RUAdvPred|RUInf;RUPred|*;adverb/predicate before infinitive becomes relation
+
+/*		6. Бремя тяжело нести.
+
 42;40;RUInf:RUNe|RUAdvPred;*|RUPred;adverb/predicate after infinitive/'ne' becomes relation
+
+/*		42. Но пока об этом говорить рано.
+
 250;40;RUAux|RUAdvPred|RUCon;*|RUPred|*;adverb/predicate between linking verb and concept becomes relation
+
+/*		250. И тогда стало очевидно намерение завладеть банком.
+
 9;40;RUAdvPred;RUAdv;default for adverb/predicate: adverb
 
+/*		9. Он готов устав поменять при необходимости.
 /*'охота'
 
 413;40;RUInf|RUOchota;*|RUPred;'okhota' after infinitive becomes relation
+
+/*		413. А нашим рокерам летать охота!
+
 414;40;RUOchota|RUInf;RUPred|*;'okhota' before infinitive becomes relation
+
+/*		414. Кому охота ехать в ненастье.
+
 130;40;RUOchota;RUCon;default for 'okhota': concept
 
+/*		130. Охота на мамонтов.
 /*'так'
 
 1062;40;"не так"|RUComma:RUAux:SEnd;RUCAdv|*;
 
+/*		1062. Начинает думать, что с ней что-то не так.
 /*Adverb degree
 /*-------------
 
 257;40;RUAdvdegreeNR|RUAdvStruct;RUAdvStruct|*;adverb of degree OR structural adverb becomes nonrelevant before structural adverb
-258;40;RUAdvdegreeNR;RUAdvdegree;default for adverb of degree OR structural adverb: adverb of degree
-557;40;RUCon|RUAdvdegree|RUCon;*|RUBCon|*;adverb of degree between two concepts becomes beginconcept
 
+/*		257. Выглядело это примерно так.
+
+258;40;RUAdvdegreeNR;RUAdvdegree;default for adverb of degree OR structural adverb: adverb of degree
+
+/*		258. Когда фондю останется совсем мало.
 /*Conjunction/nonrelevant
 /*-----------------------
 
 568;40;SBegin|RUConjNR;*|^RUAdvStruct;conjunction OR structural adverb at beginning sentence becomes structural adverb
+
+/*		568. Но такого закона ещё нет.
+
 569;40;RUConjNR;^RUConj;
 
+/*		569. Это всегда было не роскошью, а средством насыщения.
 /*'едва'
 
 1175;40;RUEdva|*^"как":RUComma|RUComma|"как";RUConj|*|*|*;
+
+/*		1175. Едва внутренний монолог коснулся Пушкина, как внутренний голос возмутился.
+
 1259;40;RUEdva|*^"сразу":RUComma|RUComma|"сразу";RUConj|*|*|*;
+
+/*		1259. Едва зашли в номер, сразу поняли, вот оно - что мы хотели!
+
 730;40;RUEdva;RUNe+RUNegation+RUNegBegin;
 
+/*		730. до получения едва заметного окрашивания.
 /*'особенно'
 
 416;40;RUOsobenno|RUCon:RUPrep:RURelpron:RUConj;RUAdvStruct|*;'osobenno' before noun, preposition, conjunction or relative pronoun becomes structural adverb
+
+/*		416. Рост этих секторов, особенно ноутбуков. Особенно когда заботливая продавщица сообщила.
+
 418;40;RUOsobenno;RUAdvdegree;default for 'osobenno': adverb of degree
 
+/*		418. Особенно важно знать содержание токсичных металлов.
 /*'чаще'
 
 131;40;RUPrep|RUTsjasje;*|RUCon;'chashtshe' after preposition becomes concept
+
+/*		131. Укрывшихся в чаще от дьявольской несвободы мира.
+
 482;40;RUTsjasje;RUAdvPR;
 
+/*		482. Банки чаще идут на сотрудничество с известными клиринговыми центрами.
 /*Combination adverb - linking verb
 /*---------------------------------
 
 464;40;RUAdvdegree:RUAdvaux|RUAux;RURAdv|*;adverb of degree or modal adverb before linking verb becomes relatio
+
+/*		464. система всё больше становится инструментом.
+
 466;40;RUAdvaux;RUAdv;default for modal adverb: adverb
 
+/*		466. В последние годы система развивалась очень быстро.
 /*dash and number
 /*---------------
 
-1176;40;RUCfr|RUHyphen|RUCfr;*|RUPrep|*;
-1231;40;RUCfr+RUBCon;RUBCon;
-271;40;RUCfr;RUCon;default for number: concept
+1176;40;RUNum|RUHyphen|RUNum;*|RUPrep|*;
 
+/*		1176. Быть может, не намного меньше нынешних среднестоличных $ 120 -- 150 в год.
 /*Adverb degree
 /*-------------
 
 309;40;RUAdvdegree|RUCon:RUOdin;RUAdj|*;adverb of degree before noun or 'odin' becomes concept
 
+/*		309. Много лет. Спектакль я практически один заканчивал.
 /*'всего'
 
 365;40;RUComp|RUVsego;*|RUAdv;'vsego' after comparative becomes adverb
-1045;40;RUVsego|RUBeginendconcept;RUBeginendconcept+RUCon|+Join;
+
+/*		365. Но красивее всего это растение осенью.
+
 1046;40;RUVsego|RUBCon;RUBCon+RUCon|+Join;
+
+/*		1046. Сейчас их проживает всего около 4000 человек.
+
 364;40;RUVsego;RUIndefpronPRCon+RUIndefpron;default for 'vsego': indefinite pronoun concept or pathrelevant
 
+/*		364. Невозможность исходного описания всего проекта.
 /*'относительно'
 
 379;40;RUOtnositelno|RUAdj;RUAdvdegree|*;'otnositelno' before adjective becomes adverb of degree
+
+/*		379. Относительно небольшое расстояние.
+
 377;40;RUOtnositelno;RUPrep;default for 'otnositelno': preposition
 
+/*		377. Гипотез относительно целей исследования.
 /*'все же'
 
 1227;40;"все"|"же"|^RUAdj:RUCon;RUAdvStruct|+Join|*;
 
+/*		1227. Мне хоть и не задавали первый вопрос, но я всё же скажу. NOT. Но не все же талантливые люди так свободны.
 /*Adverb degree
 /*-------------
 
 242;40;RUAdvdegree|RUIndefpronPR;RUIndefpronPR|+Join;adverb of degree plus pathrelevant indefinite pronoun are joined as one pathrelevant indefinite pronoun
+
+/*		242. Примерно тот же социальный контингент.
+
 979;40;RUAdvdegree|RUIndefpronPRNR;RUNRPron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or nonrelevant are joined as nonrelevant pronoun
-1025;40;RUAdvdegree|RUAdvTime;RUAdvPR+RUTime|+Join;
-1026;40;RUAdvdegree|RUAdvPR;RUAdvPR|+Join;
+
+/*		979. Примерно таковой социальный контингент.
+
+1025;40;RUAdvdegree|RUAdvPR;JoinReverse|+RUAdvPR;
+
+/*		1025. Очень скоро архитектурные «новинки» палаццо были «занесены в реестр самых модных».
+
 356;40;RUAdvdegree|RUIndefpronPRCon;RUIndefpronPRCon+RUIndefpron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or concept are joined as indefinite pronoun as pathrelevant or concept
+
+/*		356. Он добился в жизни практически всего и теперь может посвятить себя работе на благо родины.
+
 349;40;RUAdvdegree|RUVsjo;RUBCon|*;adverb of degree before 'vsjo' becomes beginconcept
+
+/*		349. Почти все 80 тысяч жителей покинули опасную зону.
+
 253;40;RUAdvdegree|RUPrep;RURAdv|*;adverb of degree before preposition becomes relation
+
+/*		253. Мы беседовали как минимум с 39 родителями.
+
 1103;40;RUAux|RUAdvdegree|RURelpron;*|RURAdv|*;
+
+/*		1103. было почти как холодная смерть.
+
 243;40;RUAdvdegree;RUAdv;default for adverb of degree: adverb
 
+/*		243. Совершенно очевидно, что.
 /*'всё'/'все' (combined with comparative)
 
 306;40;RUVsjo|RUComp;RUAdvdegree|*;'vsjo' before comparative becomes adverb of degree
+
+/*		306. Рыбаки удалялись все дальше.
+
 711;40;RUCon|RUVsjo|^RUVerb+^RUPart+^RUAux+^RUInf+^RUIndefpron+^SEnd;*|RUBCon|*;
+
+/*		711. Об утверждении Правил удостоверений все транспортные средства разделены на 5 категорий. NOT. То есть в течение месяца всё становится ясно?
+
 712;40;^RUBCon+^SBegin|RUVsjo|RUCon;*|RUBCon|^RUCon-RUBCon;
+
+/*		712. с четверга все работы прекращались.
+
 162;40;RUVsjo;RUIndefpronPRCon+RUIndefpron;default for 'vsjo': indefinite pronoun as pathrelevant or concept
 
+/*		162. Все основные заказчики известны.
 /*Comparative
 /*-----------
 
 481;40;RUAux|RUComp|RUCon;*|RURAdv|*;comparative between linking verb and noun becomes relation
+
+/*		481. Стоимость базисной терапии была ниже стоимости терапии циклоспорином.
+
 714;40;"тем"|RUComp;RUComp|+Join;
+
+/*		714. Тем интереснее, что во главе остался генерал.
+
+1367;40;RUNe|RUComp|"чем";RUNegBCon-RUNegBegin|RUCAdv|*;
+
+/*		1367. удаленным от центра города не более чем на 15 км.
+
 1252;40;RUNe|RUComp|RUCon:RUAdj;RUNegCon-RUNegBegin|RUCAdv|*;
-1253;40;RUNe|RUComp|RUBCon;RUNegCon-RUNegBegin|RUCAdv|RUCon;
+
+/*		1252. белые ночи могут наблюдаться на широте не ниже 60° 33'.
+
 307;40;RUComp;+RUAdv;extra label adverb is added to comparative
 
+/*		307. Жилищным кооперативам будет намного проще.
 /*Modal verb
 /*----------
 
 522;40;RUmAux;+RUVerb;extra label verb is added to modal verb
 
+/*		522. Поэтому такого случая ей предоставлять никак нельзя.
 /*'это': indefinite pronoun/verb
 
 468;40;RUHyphen|RUEto|RUCon:RUBCon:RUAdj:RUIndefpron:RUPosspron;+RUNotMarkerPB|RUPred|*;'eto' between dash and noun, beginconcept, adjective, indefinite pronoun or possessive pronoun becomes relation
+
+/*		468. Как ясно уже из названия -- это кино о кино.  репертуарный театр – это наша ценность, которую мы должны беречь.
+
 499;40;^RUVerb+^SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;
+
+/*		499. А это неправильно.
+
 971;40;SBegin|RUEto|RUAdv|SEnd;*|RUPred|RURAdv|*;
+
+/*		971. это неправильно.
+
 500;40;^RUVerb+^SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;
+
+/*		500. Как это хорошо, когда есть где поплакать.
+
 972;40;SBegin|RUEto|RUAdv|RUComma;*|RUPred|RURAdv|*;
+
+/*		972. Это ниже, чем падение на 34%.
+
 968;40;RUEto|RUAdv|RUCon;RUPred|*|*;make 'eto' relation
+
+/*		968. Это просто позор.
+
 962;40;^RUPrep+^RUVerb+^RUPerspron+^RUPartActpf+^RUPartAdj+^RUInf+^RUPart+^SBegin|RUEto|RUPrep;*|RUPred|*;make 'eto' relation
+
+/*		962. а это в 30 раз больше. NOT. но сделают это в ближайшее время.
+
 969;40;SBegin|RUEto|RUPrep;*|RUPred|*;make 'eto' relation
+
+/*		969. это на 40% выше.
+
 964;40;^RUVerb+^RUAux+^RUmAux+^SBegin|RUEto|RUAdvStruct:RURAdv|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make 'eto' relation
+
+/*		964. язык – это не только знаковая система, приспособленная к передаче сообщений, но и компонент сознания. NOT. Это также противоречит договору. NOT. Выглядело это примерно так.
+
 973;40;SBegin|RUEto|RUAdvStruct|^RUVerb+^RUAux+^RUmAux+^SEnd;*|RUPred|*|*;make 'eto' relation
+
+/*		973. Это только наша статистика.
+
 965;40;RUEto|RUNe:RUNegCon|^RUVerb:RUAux:RUmAux:RUPrep:RUPred:SEnd:RUIndefpron;RUPred|*|*;make 'eto' relation
+
+/*		965. Если это не дипломат, против него должно быть возбуждено уголовное дело». NOT. никогда это не было механическим переносом. NOT. Причем пожаловались на это не кто-нибудь, а голландцы.
+
 966;40;^RUVerb|RUEto|RURelpron:RUDempronConj;*|RUPred|*;make 'eto'
+
+/*		966. Второй аргумент — это то, что поставки только повысят уровень эскалации. NOT. А объясняется это тем, что герои.
+
 470;40;RUEto;RUPRPron;default for 'eto': pathrelevant pronoun
 
+/*		470. Это требуется как для получения логической схемы.
 /*Participles
 /*-----------
 
 394;40;RUNe|.RUAdv|RUPartActpf;*|RURAdv|RUPart;active past participle after 'ne' (+adverb) becomes relation
+
+/*		394. Акционеры не полностью оплатившие акции несут солидарную ответственность.
+
 385;40;RUAdv|RUAdvPR|RUPartActpf;RURAdv|RURAdv|RUPart;active past participle after adverb plus pathrelevant adverb becomes relation
+
+/*		385. Патриархат, исторически всегда имевший юрисдикцию.
+
 391;40;RUPartActpf;RUPartAdj;default for active past participle: long participle
+
+/*		391. Или такой вариант, вышедший из-под пера.
+
 727;40;RUVerb|RUPartAdj|RUAdv|^RUCon+^SEnd;*|RUPart|RURAdv|*;
+
+/*		727. Деяние признается совершенным невиновно, если лицо, его совершившее, не осознавало.
+
 388;40;RUPartAdj|RUInf;RUPart|*;long participle before infinitive becomes relation
-389;40;RUPartAdjSubst;RUPartAdj;default for long participle OR noun: long participle
+
+/*		388. Молодые люди, видимо решившие защитить честь.
+
+389;40;RUPartAdjCon;RUPartAdj;default for long participle OR noun: long participle
+
+/*		389. Суд, кроме того, лишил осужденного воинского звания и правительственных наград.
+
 8;40;RUComma|RUPartAdj;*|RUPart;long participle after comma becomes relation
+
+/*		8. Кроме прав, перечисленных в части первой настоящей статьи.
+
 45;40;RUComma|RUAdv|RUPartAdj;*|RURAdv|RUPart;
+
+/*		45. физические лица, фактически находящиеся в Российской Федерации.
+
 1141;40;RUComma|RUAdvPR|RUPartAdj|^RUCon;*|*|RUPart|*;
+
+/*		1141. Такими обычно выглядят бедные красавицы, недавно вышедшие замуж за богатого. NOT. она не имела постоянного, повсеместно распространённого строя.
+
 1085;40;RUComma|RUAdvStruct:RUConj|RUPartAdj|RUPrep;*|*|RUPart|*;
+
+/*		1085. стал во всем мире употребляться в несколько ином смысле, в основном совпадающем с термином «современная медицинская этика».
+
 1086;40;RUComma|.RUAdvStruct|RUNe|RUPartAdj;*|*|*|RUPart;
+
+/*		1086. Водка высшей очистки, то есть не содержащая почти ничего кроме этанола и воды.
+
 440;40;RUComma|.RUAdv|RUNe|RUPartAdj;*|RURAdv|*|RUPart;long participle after comma (plus adverb) plus 'ne' becomes relation
+
+/*		440. новыми хозяевами, обычно не имеющими никакого отношения к прежним обитателям тех мест.
+
 1087;40;RUComma|RUAndOrBut:"как"|RUPartAdj|.RUComma|RUAndOrBut:"как"|RUNe|RUPartAdj;*|*|RUPart|*|*|*|RUPart;
-1040;40;RUECon|RUPartAdj|^RUCon+^RUAdj+^SEnd;^RUECon+RUCon|RUPart|*;
+
+/*		1087. что должник обязан произвести исполнение не кредитору, а указанному или не указанному в договоре третьему лицу. Стороны могут заключить договор, как предусмотренный, так и не предусмотренный законом или иными правовыми актами.
+
+1040;40;RUAdvTime:RUTimeEndConcept:RUTimeConcept|RUPartAdj|^RUCon+^RUAdj+^SEnd;*|RUPart|*;
+
+/*		1040. двух правительственных органов, в декабре 1965 года объединённых в Совет.
+
 635;40;RUPart|RUCon|RUAndOr|RUPartAdj;*|*|*|RUPart;
+
+/*		635. Сбыт официальных документов, предоставляющих права или освобождающих от обязанностей.
+
 393;40;RUPart|RUAndOr|RUPartAdj;*|*|RUPart;long participle after past participle plus and/or becomes relation
+
+/*		393. Некоммерческой организацией, создаваемой и действующей в соответствии с законом.
+
 52;40;.RUNegPR|RUNe|RUPartAdj;RUAdj-RUNegBegin|RUAdj-RUNegBegin|RUAdj;'ne' before long participle both become concept
+
+/*		52. И по другим не предусмотренным федеральным законом основаниям. Элементами ФП могут быть всякие, ничего не значащие эмоциональные фразы и авторские отступления.
+
 43;40;RUPartAdj;RUAdj;default for long participle: adjective
+
+/*		43. Все перечисленные и другие вопросы.
+
 1058;40;RUSjtoto|RUAdv|RUAdj;RUBCon|RUCAdv|*;
+
+/*		1058. утомляя себя попусту, лишь бы избежать чего-то более серьёзного.
+
 1269;40;RUNegPR|RUAdv|RUAdj;RUBCon+RUNegBCon|RUCAdv|*;
+
+/*		1269. Ничего особенно хорошего.
+
 1056;40;RUSjtoto|.RUNe|RUAdj;RUBCon|*|*;
+
+/*		1056. депутаты должны были бы подготовиться и запланировать на этот год что-то хорошее для избирателей.
+
 1268;40;RUNegPR|.RUNe|RUAdj;RUBCon+RUNegBCon|*|*;
+
+/*		1268. современная водка ничего общего не имеет с той водкой.
+
 655;40;"действительно"|RUAdj;RUCAdv|*;
 
+/*		655. Другая группа пила действительно натуральный кофе высокого качества.
 /*Nonrelevant part of noun group
 /*------------------------------
 
 652;40;RUAdj:RUBCon|RUPosspron:RUActobj|RUAdj;*|RUAdj|*;possessive pronoun or acting object between adjective or beginconcept and adjective becomes concept
+
+/*		652. Он рассказывал о последней своей крупной стройке. пользования и распоряжения принадлежащим ему жилым помещением.
+
 959;40;RUAdj:RUBCon|*RUActobj:"только":"же":"лишь":"еще":"уже"|RUCon;*|RUAdj|*;Personal pronoun as acting object or literals between adjective or beginconcept and noun becomes concept
 
+/*		959. в концы зачищенных им же проводов. ответственность по его обязательствам принадлежащим им имуществом.
 /*'образом'
 
 555;40;RUIndefpronPR|RUObrazom;RUIndefpronPR|+Join;pathrelevant pronoun plus 'obrazom' are joined as pathrelevant pronoun
+
+/*		555. Вправе продать или иным образом уступить свою долю.
+
 980;40;RUIndefpronPRNR|RUObrazom;RUAdvStruct|+Join;pathrelevant or nonrelevant pronoun plus 'obrazom' are joined as structural adverb
+
+/*		980. Вправе продать или любом образом уступить свою долю.
+
 556;40;RUObrazom;RUCon;default for 'obrazom': concept
 
+/*		556. Неопределённость в вопросе о том,  каким образом следует применять налоговые нормы.
 /*'несколько'
 
 182;40;RUNeskolko|RUInf:RUPart:RUVerb:RUAdv;RUAdvdegree|*;'neskolko' before infinitive, past participle, verb or adverb becomes adverb of degree
+
+/*		182. Однако считаем целесообразным несколько расширить перечень задач.
+
 975;40;RUNeskolko|SEnd:RUComma;RUIndefpronPR|*;
+
+/*		975. причин для его воспаления предположительно несколько.
+
 348;40;RUAdvdegree;RUAdv;default for adverb of degree: adverb
+
+/*		348. годы несколько изменили политический вектор восприятия вещей.
+
 977;40;RUCon|RUNeskolko;*|RUBCon;
+
+/*		977. организации, имеющие на территории Российской Федерации несколько подразделений.
+
 1157;40;RUNeskolko|RUIndefpronPR|.RUNe:RUAdv:RUNegCon|RUAdj:RUCon:RUCAdv;RUAdj|RUAdj|*|*;
+
+/*		1157. несколько иных нравственных критериев. несколько других не менее красивых союзов.
+
 181;40;RUNeskolko;RUCon;default for 'neskolko': concept
 
+/*		181. С летними переходами связаны несколько скандалов.
 /*'нем'
 
 203;40;RUPrep|RUNem;*|RUPerspron;'nem' after preposition becomes personal pronoun
+
+/*		203. Именно о нем идет речь.
+
 208;40;RUNem;RUAdj;default for 'nem': adjective
 
+/*		208. Когда я ем, я глух и нем!
 /*'том'
 
 431;40;RUPrep|RUTom;*|RUPRPron;'tom' after preposition become pathrelevant
+
+/*		431. В том пространстве, где мы находимся.
+
 202;40;RUTom;RUCon;default for 'tom': concept
 
+/*		202. Недавно вышел том "Преступления и наказания".
 /*'самый'
 
 189;40;RUSamyj|.RUAdv|RUAdj;RUAdj|^RUCAdv|*;'samy' before (adverb plus) adjective becomes adjective
+
+/*		189. Самыми экологически неблагоприятными являются районы, прилежащие к автомагистралям города.
+
 197;40;RUSamyj;RUAdvStruct;default for 'samy': structural adverb
 
+/*		197. В самый разгар пляжного сезона.
 /*'путём'
 
 198;40;RUAdj:RUPosspron|RUPutjom;*|RUCon;'putjom' after adjective or possessive pronoun becomes concept
+
+/*		198. Это должно быть нашим путем.
+
 195;40;RUPutjom;RUPrep;default for 'putjom': preposition
 
+/*		195. поведение развивается путем подражания семейным моделям.
 /*'правда' and 'и'
 
 212;40;SBegin|.RUAndOr|RUPravda|RUComma;*|RUAdvStruct|RUAdvStruct|*;'pravda' at beginning sentence (after and/or) and before comma becomes nonrelevant
+
+/*		212. И правда, у них ещё хуже, чем у нас дело шло.
+
 214;40;RUPravda;RUCon;default for 'pravda': concept
+
+/*		214. Правда есть и на той, и на другой стороне.
+
 567;40;SBegin|RUAndOr;*|RUAdvStruct;and/or at beginning sentence becomes nonrelevant
 
+/*		567. И кстати, не стоит его преувеличивать.
 /*'друг': reciprocal pronoun/noun
 
 445;40;RUAdj|RUDrug|RUPrep|RUDrug;*|RUAdj|RUAdj|RUAdj;reciprocal pronoun with preposition after adjective becomes concept
+
+/*		445. Далеки друг от друга сопоставляемые значения.
+
 222;40;RUDrug|RUPrep|RUDrug;RURAdv|+Join|+Join;reciprocal pronoun with preposition becomes relation
+
+/*		222. Постоянно находимся в контакте друг с другом.
+
 226;40;RUPrep|RUDrug|RUCon;*|RUIndefpronPR|*;
+
+/*		226. Мы нашли квартиру в другом доме.
+
 176;40;RUDrug;RUCon;default for reciprocal pronoun OR noun: noun
 
+/*		176. назначил своего ближайшего друга.
 /*ConVerb: noun/verb
 /*------------------
 
-487;40;RUAdj:RUPosspron|RUConVerb;*|RUCon;verb OR noun after adjective or possessive pronoun becomes concept
+487;40;RUAdj:RUPosspron:RUNum|RUConVerb;*|RUCon;verb OR noun after adjective or possessive pronoun becomes concept
+
+/*		487. Классическое начало провинциального бытия.
+
 736;40;^RUCon+^SBegin|RUConVerb|RUPosspron|RUCon;*|RUCon|^RUPosspron|^RUCon;
+
+/*		736. Личность Александра II и начало его правления.
+
 737;40;RUConVerb|RUVerb;RUCon|*;
+
+/*		737. Для начала определим размеры листа берёсты.
+
 486;40;RUPrep:RUVerb|RUConVerb;*|RUCon;verb OR noun after preposition or verb becomes concept
+
+/*		486. Через неделю после начала знакомства.
+
 492;40;RUConVerb|RUAdj:RUCon;RUCon|*;verb OR noun before adjective or noun becomes concept
+
+/*		492. С момента начала регистрации инфекции.
+
 490;40;RUConVerb;RUVerb;default for verb OR noun (label ConVerb): relation
 
+/*		490. На решение этих проблем начало работать само время.
 /*'прибыли'
 
-432;40;RUPribyli|RUCon+^RUBeginendconcept;RUVerb|*;'pribyli' before noun becomes relation
+432;40;RUPribyli|RUCon;RUVerb|*;'pribyli' before noun becomes relation
+
+/*		432. Никогда не примет решение против этой организации.
+
 167;40;RUCon|RUPribyli;*|RUCon;'pribyli' after noun becomes concept
+
+/*		167. Распределение прибыли и убытков полного товарищества.
+
 166;40;RUPribyli;RUVerbCon;default for 'pribyli': label VerbCon
 
+/*		166. Прибыли уже несколько дней назад.
 /*VerbCon: noun/verb - different disambiguation than ConVerb
 /*----------------------------------------------------------
 
 646;40;RUVerbCon|RUAdvStruct;RUVerb|*;
+
+/*		646. Важным событием стали также церковные реформы.
+
 648;40;RUAdj|"стали";*|RUVerb;
+
+/*		648. Очень популярными стали шляпы.
+
 165;40;RUAdj:RUPrep:RUVerb|RUVerbCon;*|RUCon;verb OR noun after adjective, preposition or verb becomes concept
+
+/*		165. Получение такого препарата сулит огромные прибыли.
+
 651;40;RUVerbCon|.RUNe|RUVerb;RUCon|*|*;
+
+/*		651. Большинство производителей пил делят свою продукцию. Но и остальные жители села не должны оказаться за бортом.
+
 1230;40;RUVerbCon|RUPrep|*RUAdj:RUCon|.RUNe|RUVerb;RUCon|*|*|*|*;
+
+/*		1230. Например, в перифразе А шило в мешке ногам покоя не дает часть.
+
 169;40;RUVerbCon;RUVerb;default for verb OR noun (label VerbCon): relation
 
+/*		169. Примет последнее как Божий дар.
 /*Particle/verb
 /*-------------
 
 178;40;RUPtclVerb|RUComma|RURelpron;RUVerb|*|*;particle OR verb before comma plus relative pronoun becomes relation
+
+/*		178. Допустим, что статистики не ошиблись.
+
 179;40;SBegin|RUPtclVerb|RUComma;*|RUAdvStruct|*;particles OR verb at beginning sentence before comma becomes nonrelevant
+
+/*		179. Допустим, руководитель хочет обновить производство.
+
 177;40;RUPtclVerb;RUVerb;default for particle OR verb: relation
 
+/*		177. Проблема, которая кажется неразрешимой, исчезнет сама.
 /*Reciprocal pronoun
 /*------------------
 
 1048;40;RUAdj|RURepr|RUCon;*|RUAdj|*;
+
+/*		1048. никогда не мешающих друг другу идей.
+
 1049;40;RUPrep|RURepr;*|RUPerspron;
+
+/*		1049. при наклоне они перемещаются относительно друг друга.
+
 447;40;RURepr;+RUVerb;extra label for reciprocal pronoun: verb
 
+/*		447. Мы знали друг друга с очень давних времён.
 /*Emphasized reflexive pronoun
 /*----------------------------
 
 483;40;RUVerb|RUAdvRefl;*|RURAdv;'sam sebya' after verb becomes relation
+
+/*		483. Мы пугаем самих себя собственной настойчивостью.
+
 484;40;RUPrep|RUAdvRefl;*|RUPerspron;'sam sebya' after preposition becomes pathrelevant
+
+/*		484. Вступает иногда в противоречие с самим собой.
+
 485;40;RUAdvRefl;RUAdv;default for 'sam sebya': adverb
 
+/*		485. Выгодно сдаёт её же по двойной цене самому себе.
 /*Reflexive pronoun
 /*-----------------
 
 137;40;RUPrep|RURefl;*|RUPerspron;reflexive pronoun after preposition becomes pathrelevant
+
+/*		137. Обращает на себя внимание тот факт.
+
 458;40;RUPart|RURefl;RUPart|+Join;participle plus reflexive pronoun are joined to participle
+
+/*		458. Учреждённая группой экспертов, считающих себя независимыми.
+
 644;40;RUInf|RURefl;RUInf|+Join;infinitive plus reflexive pronoun are joined to infinitive
+
+/*		644. Нам надо вбить себе в голову, что верить с первого взгляда нельзя ничему.
+
 645;40;RURefl|RUInf;RUInf|+Join;reflexive pronoun plus infinitive are joined to infinitive
+
+/*		645. Не умею себя хвалить.
+
 139;40;RURefl|RUVerb;RUVerb|+Join;reflexive pronoun plus verb are joined to verb
+
+/*		139. Я памятник себе воздвиг нерукотворный.
+
 138;40;RURefl|RUAdv|RUVerb;RUVerb|RURAdv|*;reflexive pronoun plus adverb before verb become relation
+
+/*		138. Точка зрения теории множеств себя вполне оправдала.
+
 1228;40;RURefl|RUNe|RUVerb:RUInf;RURAdv|*|*;
+
+/*		1228. Ни разу криком себя не унизила.
+
 154;40;RUCon|RURefl;*|+Join;noun plus reflexive pronoun are joined to noun
+
+/*		154. утверждения себя в роли главного медиатора.
+
 156;40;RUAdj|RURefl;*|RUAdj;reflexive pronoun after adjective becomes concept
 
+/*		156. Скомпрометировавшие себя поиски.
 /*'тем','то'
 
 1044;40;RUAdj|"тем";*|RUCon;
+
+/*		1044. обсудил несколько важных тем жизни.
+
 402;40;^SBegin|RUComma:RUHyphen|RUDempronConj;*|*|RUConj;'tem/to' after comma or dash becomes relation
+
+/*		402. Если окончание срока приходится на месяц, в котором нет соответствующего числа, то срок истекает в последний день этого месяца.
+
 401;40;RUDempronConj;RUPRPron;default for 'tem/to': pathrelevant pronoun
 
+/*		401. Необходимо учитывать то обстоятельство.
 /*Indefinite pronoun: NonRelevant OR PathRelevant
 /*-----------------------------------------------
 
 1043;40;RUIndefpronPRCon|RUIndefpronPRNR;^RUIndefpronPRCon|+Join;
+
+/*		1043. с 1984 г. все такие пациенты считаются.
+
 1060;40;RUIndefpronPRNR|.RUAdvStruct:RUAdv|RUAdj:RUPosspron:RUCon:RUIndefpronPR;RUNRPron|*|*;
+
+/*		1060. направлена на поощрение любых так называемых креативных течений.
+
 335;40;RUIndefpronPRNR;RUIndefpronPR;default for pathrelevant OR nonrelevant indefinite pronoun is pathrelevant pronoun
 
+/*		335. И таких с каждым годом становится все больше!
 /*Indefinite pronoun: PathRelevant OR Concept
 /*-------------------------------------------
 
 357;40;RUIndefpronPRCon|RUPosspron;RUCon|RUCon;indefinite pronoun as pathrelevant OR as concept plus possessive pronoun both become concepts
+
+/*		357. Поэтому даже представить себе трудно, как преобразится вся наша техника - и земная, и космическая.
+
 981;40;RUIndefpronPRCon|.RUAdv|RUAdj;RUAdj|RUAdj|*;
-1042;40;RUIndefpronPRCon|RUECon;RUBeginendconcept+RUCon|+Join;
+
+/*		981. Все широко обсуждаемые потенциальные войны.
+
 362;40;RUIndefpronPRCon|RUCon;RUCon|*;indefinite pronoun as pathrelevant OR as concept after noun becomes concept
+
+/*		362. Снегоуборочная машина останавливается в нескольких метрах от места происшествия.
+
 360;40;RUIndefpronPRCon|RUDempron:RUPRPron|RUCon;RUCon|RUCon|*;indefinite pronoun as pathrelevant OR as concept plus demonstrative or patherelevant pronoun before noun both become concept
+
+/*		360. Во всей этой ситуации меня особенно огорчает тот факт.
+
 361;40;RUIndefpronPRCon|RUIndefpronPR|^RUVerb+^RUComma+^SEnd;RUCon|RUCon|*;indefinite pronoun as pathrelevant OR as concept plus pathrelevant indefinite pronoun both become concepts
+
+/*		361. Все остальные памятные места.
+
 358;40;RUIndefpronPRCon|RUIndefpronPR;RUIndefpronPR|+Join;indefinite pronoun as pathrelevant OR as concept plus pathrelevant indefinite pronoun are joined as pathrelevant indefinite pronoun
+
+/*		358. Все другие встречают его радостными и довольными.
+
 359;40;RUIndefpronPRCon;RUIndefpronPR;default for indefinite pronoun as pathrelevant OR as concept: pathrelevant indefinite pronoun
 
+/*		359. Чем это кончилось - сегодня все знают.
 /*BeginConcept
 /*------------
 
 690;40;^RUCon+^SBegin|RUPrep|RUAdj|RUCon|RUCon|RUNe|RUPart;*|*|*|*|RUBCon|*|*;
 
+/*		690. В случаях, когда в возмездном договоре цена не предусмотрена.
 /*'пока'
 
 544;40;RUComma:RUVerb|RUPoka;*|RUConj;'poka' after comma or verb becomes conjunction
+
+/*		544. Вчера, пока я перечитывала диплом. Это могло пригодиться, хотя я и не знал пока, для чего.
+
 549;40;RUPoka;RUAdvStruct;default for 'poka': nonrelevant
 
+/*		549. Развалины пока остаются под землёй.
 /*Demonstrative pronoun
 /*---------------------
 
-1061;40;RUDempron:RUPRPron|.RUAdv:RUNe|RUAdj:RUPosspron:RUCon;RUNRPron|*|*;
+1061;40;RUDempron:RUPRPron|.RUAdv:RUNe|RUAdj:RUPosspron:RUCon:RUTimeConcept;RUNRPron|*|*;
 
+/*		1061. Кроме этих более или менее определённых ощущений. А эти "не ленивые" прут, как носороги, попирая все человеческие ценности.
 /*Personal or possessive pronoun
 /*------------------------------
 
 1166;40;RUCon:RUPrep:RURelpron|RUPerspron+RUPosspron|RUAdj:RUCon;*|RUPosspron|*;
 
+/*		1166. поскольку от их согласия или несогласия не так уж много и зависит. На месте его мысль не стояла, не сидела и не лежала.
 /*Short form adjective
 /*--------------------
 
 474;40;RUCon|RUAdv|RUKAdj;RUCon|RURAdv|RUPred;short adjective after noun plus adverb becomes relation
+
+/*		474. Геоглиф хорошо виден из космоса.
+
 473;40;RUCon:RUNum|RUKAdj;^RUCon|RUPred;short adjective after noun or number becomes relation
+
+/*		473. В происшествии виновен грузоотправитель.
+
 472;40;RUKAdj|RUCon:RUBCon:RUAdj;RUPred|*;short adjective before noun, beginconcept or adjective becomes relation
+
+/*		472. стали известны обладатели почетных "Оскаров".
+
 478;40;RUPred|RUAndOr|RUKAdj;*|*|RUPred;short adjective after predicate plus and/or becomes relation
+
+/*		478. Все собаки живы и здоровы.
+
 477;40;RUKAdj|RUAndOr|RUPred;RUPred|*|*;short adjective before and/or plus predicate becomes relation
+
+/*		477. Был весел и доволен жизнью.
+
 734;40;RUKAdj|SEnd;RUPred|*;
+
+/*		734. Сделка, совершенная с целью, заведомо противной основам правопорядка или нравственности, ничтожна.
+
 476;40;RUKAdj;+RUAdj;Adj label is added to short adjective
 
+/*		476. Они свободны в установлении своих прав и обязанностей на основе договора.
 /*Include PathRelevant in Concept
 /*-------------------------------
 
 564;40;RUAdj|RUAdvPR|RUAdj:RUCon;*|RUCAdv|*;adverb time/place between two adjectives becomes CONCEPT
 
+/*		564. Это единственное здесь древесное растение из однодольных.
 /*Reflexive pronoun pt2
 /*---------------------
 
 155;40;RURefl;RURAdv;default for reflexive pronoun: adverb as relation
 
+/*		155. физическое лицо, которое считает себя пострадавшим от действий или бездействия регулятора.
 /*Adverb
 /*------
 
 5;40;RUAdv|RUVerb:RUPart:RUPred;RURAdv|*;adverb before verb, participle or verb becomes relation
+
+/*		5. Товары, услуги и финансовые средства свободно перемещаются на всей территории. Последние особенно нужны.
+
 2;40;RUAdv|RUAdj+^RUNum;RUCAdv|RUAdj-RUBCon;adverb before adjective becomes concept
+
+/*		2. По весьма серьёзному поводу. NOT. Невесомый куб, длина ребра которого l, погружают вертикально один раз в воду.
+
 70;40;RUAdv|RUInf;RURAdv|*;adverb before infinitive becomes relation
+
+/*		70. Для публики в отелях будут бесплатно наливать шампанское.
+
 3;40;RUAdv|RUCAdv;RUCAdv|*;adverb before adverb as concept becomes concept
+
+/*		3. Угроза может стать для страны гораздо более удобным предлогом.
+
 713;40;RUCon|RUCAdv|RUCAdv;*|^RUBCon|^RUCon;
+
+/*		713. Угроза может стать для страны гораздо более удобным предлогом.
+
 4;40;RUAdv|RURAdv;RURAdv|*;adverb before adverb as relation becomes relation
+
+/*		4. Помимо этого я очень тесно работал с силовыми структурами.
+
 20;40;RUAdv|RUAndOr|RURAdv;RURAdv|+RUList|*;adverb before and/or plus adverb as relation becomes relation
+
+/*		20. Динамически и автоматически становятся доступными пользователям.
+
 21;40;RUAdv|RUAndOr|RUCAdv;RUCAdv|*|*;adverb before and/or plus adverb as concept becomes concept
+
+/*		21. Процессы являются социально и экономически детерминированными.
+
 33;40;RUAdj|RUAdv|RUCon;*|RUCAdv|*;adverb between adjective and noun becomes concept
+
+/*		33. Сумма налога за месяц, в котором имело место указанное выше превышение либо осуществлялась реализация подакцизных товаров.
+
 17;40;^RUPart|RUAux|.RUAdvStruct:RUAdvPR|*RUAdv;*|*|*|RUCAdv;adverb after linking verb (plus structural adverb or pathrelevant aderb) becomes concept
+
+/*		17. В случаях, предусмотренных законом, юридическая помощь оказывается бесплатно. Нужно поставить торговую сеть в такие условия, чтобы ей было не только душеспасительно, но и выгодно заботиться о живом человеке. NOT. чтобы сие учинено было немедленно, дабы не упустить нынешнего зимнего пути.
+
 319;40;RUCAdv|RUAndOr|RUAdv;*|*|^RUCAdv;adverb after adverb as concept plus and/or becomes concept
+
+/*		319. не знаю, мне будет тяжело и грустно.
+
 34;40;RUAdv|RUCAdv;RUCAdv|*;adverb before adverb as concept becomes concept
+
+/*		34. Статистически достоверно более высокий, чем в норме, уровень.
+
 38;40;RUAdv;RURAdv;default for adverb: relation
 
+/*		38. с ним иных федеральных законов (далее - законы), регулирующих отношения.
 /*Preposition: nonrelevant/relation
 /*---------------------------------
 
 493;40;RUAdj|RUPrep|RUPerspron+^RUPosspron|RUCon;*|RUAdj|RUAdj|*;preposition plus personal pronoun between adjective and noun become part of concept
+
+/*		493. В соответствии с заключенным между ними договором.
+
 340;40;RUPrep|RUIndefpron|RUAdj;*|RUIndefpronPR|*;indefinite pronoun between preposition and adjective becomes pathrelevant indefinite pronoun
 
-/*'(ни) один из'
+/*		340. Разговаривать о чем-нибудь ничтожном.
 /*Relative pronoun: default conjunction
 /*-------------------------------------
 
 573;40;RURelpron;+RUConj;extra label is added to relative pronoun: conjunction
 
+/*		573. Более четко зафиксировать, как именно ключевые руководители отвечают за достигнутый результат.
 /*Dash
 
-581;40;RUECon|RUHyphen|RUCon;RUECon+RUCon|^RUConj|*;dash between endoncept and concept becomes relation
-1004;40;RUBeginendconcept|RUHyphen|RUCon:RUBeginendconcept;RUBeginendconcept|^RUConj|*;
-580;40;RUCon:RUIndefpronPR|RUHyphen|RUBCon:RUCAdv:RUAdj:RUCon:RUNikakoy:RUNRPron;*|^RUConj|*;dash between concept or pathrelevant indefinite pronoun and beginconcept, adverb as concept, adjective, noun, 'nikakoy' or pathrelevant pronoun becomes relation
-745;40;RUAdj|RUHyphen|RUCon:RUAdj;*|^RUConj|*;
+581;40;RUAdvTime:RUTimeEndConcept:RUTimeConcept:RUCon:RUAdj|RUHyphen|RUCon:RUAdj:RUCon:RUAdvTime:RUTimeEndConcept:RUTimeConcept;*|^RUConj|*;dash between endoncept and concept becomes relation
 
+/*		581. С 1997 года -- директор по стратегической работе. Дата 17 февраля 1864 года — день боевого крещения.
+
+580;40;RUCon:RUIndefpronPR:RUAdvTime:RUTimeEndConcept:RUTimeConcept|RUHyphen|RUBCon:RUCAdv:RUAdj:RUCon:RUNikakoy:RUNRPron;*|^RUConj|*;dash between concept or pathrelevant indefinite pronoun and beginconcept, adverb as concept, adjective, noun, 'nikakoy' or pathrelevant pronoun becomes relation
+
+/*		580. этот показатель - около ста процентов. Любая работа интересна, а тем более такая – тяжелая и ответственная.
 /*Defaults
 /*--------
 
 647;40;RUConIfCap;RUConIfCap;
+
+/*		647. стремление Августа II.
+
 400;40;RUComma;+RUPunctuation;extra label for comma: punctuation
+
+/*		400. Правило поведения, не предусмотренное законодательством, независимо от того, зафиксировано ли оно в каком-либо документе.
+
 932;40;RUBCon+^RUOdin;RUBCon;to remove all other labels than BCon, to prevent it from becoming NonRelevant
-949;40;RUECon;RUECon;to remove all other labels than ECon, to prevent it from becoming NonRelevant
-1041;40;RUBeginendconcept;RUBeginendconcept;to remove all other labels than beginconcept
-988;40;RUECon|RUNoEConBefore;RUCon|RUECon;
+
+/*		932. об этом заявил во вторник журналистам заведующий общественно-политическим отделом администрации президента.
+
 1051;40;RUIndefpronPR;RUPRPron;to remove all other labels so PathRelevancy is not lost
+
+/*		1051. он является гражданином другой страны.
+
 1052;40;RUAdvPR;RUAdvPR;to remove all other labels so PathRelevancy is not lost
+
+/*		1052. туда пришло уведомление.
+
 1053;40;RUDempron;RUPRPron;to remove all other labels so PathRelevancy is not lost
+
+/*		1053. До этого у нас торговались.
+
 1162;40;RUPerspron+RUPosspron;RUPerspron+RUPosspron;to remove all other labels so PathRelevancy is not lost
+
+/*		1162. Сейчас их жизни ничто не угрожает.
+
 1054;40;RUPerspron+^RUPosspron;RUPerspron;to remove all other labels so PathRelevancy is not lost
+
+/*		1054. Ему были нанесены несколько ударов.
+
 1055;40;RUPosspron+^RUPerspron;RUPosspron;to remove all other labels so PathRelevancy is not lost
 
+/*		1055. сообщила во вторник о своей отставке.
 /*PHASE 60: DETECT ENUMERATIONS
 /*= = = = = = = = = = = = = = =
 
 1183;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;4-element enumeration
+
+/*		1183. Сбор, хранение, использование и распространение информации о частной жизни лица без его согласия не допускаются.
+
 1182;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUComma|*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList|+RUList|+RUList;3-element enumeration
+
+/*		1182. Зачастую друзья, родственники и члены семьи преступников не находят ничего необычного в их способе зарабатывать себе средства к существованию, считают этот вид деятельности своего рода «работой».
+
 1179;60;*RUCon:RUPosspron:RUAdj:RUPRPron|RUAndOr|.RUPosspron:RUAdj:RUPRPron:RUNRPron:RUCAdv|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration
+
+/*		1179. Для меня было непривычно -- я приходил, а обеда или ужина не было. Органы управления здравоохранением и медицинские учреждения не имеют права быть учредителями страховых медицинских организаций. Никто не может быть лишен права на рассмотрение его дела в том суде и тем судьей, к подсудности которых оно отнесено законом.
+
 1181;60;*RUBCon|RUAndOr|.RUPosspron:RUAdj:RUPRPron|*RUCon;+RUList|+RUList|+RUList|+RUList;2-element enumeration
+
+/*		1181. Численность приверженцев точно установить невозможно, так как в ряде стран традиционного распространения православия государственные и церковные органы не ведут учёта членов Церкви.
+
 1195;60;*RUAdj|RUAndOr|.RUCAdv|*RUAdj;+RUList|+RUList|+RUList|+RUList;2-element enumeration of adjectives
+
+/*		1195. она не была рентабельной и легкоуправляемой.
+
 1196;60;*RUInf|RUAndOr|*RUInf;+RUList|+RUList|+RUList;2-element enumeration of infinitives
+
+/*		1196. Я не должен был всё время сидеть и слушать, что они должны были донести до меня.
+
 1292;60;*RUVerb:RUNegPred|.RUInf|RUAndOr|.RUAdvStruct:RURAdv:RUNe:RUNegRel:RUInf|*RUVerb|^"ли";+RUList|+RUList|+RUList|+RUList|+RUList|*;2-element enumeration of verbs
+
+/*		1292. если лицо не предвидело, но должно было и могло предвидеть возможность наступления этих последствий. если жильцы сами ничего не видят и не слышат. Люди ничего не знают и даже не хотят знать. NOT. правильно ли он поступил и не может ли он сделать что-нибудь лучше.
+
 1301;60;RUNe|RUVerb|RUAndOr|.RUAdvStruct:RURAdv:RUInf|RUVerb|^SEnd;-RUList|-RUList|-RUList|-RUList|-RUList|*;correction to r1292: should be split here
+
+/*		1301. Надо было показывать, что я ничего не боюсь и верю в своё быстрое возвращение. Она никому не отказывала и обыкновенно дарила каждому своему крестнику несколько червонцев.
+
 1288;60;RUNe:RUNegRel|RUPart:RUPred:RUKAdj|RUAndOr|RUNe:RUNegRel|RUVerb;+RUList|+RUList|+RUList|+RUList|+RUList;negated participle/predicate and negated verb should stay together
+
+/*		1288. в возмездном договоре цена не предусмотрена и не может быть определена. если эти обстоятельства не известны и не должны быть известны страховщику.
+
 1295;60;RUPred|RUAndOr|.RURAdv|RUPred;+RUList|+RUList|+RUList|+RUList;
+
+/*		1295. цветов мало (чёрный, белый и их оттенки), но сочетания гармоничны и беспроигрышны. Эти обязательства предельно конкретны и достаточно напряженны.
+
 1303;60;RURelpron|RUAux:RUmAux|RUAndOr|RURelpron|RUAux:RUmAux;+RUList|+RUList|+RUList|+RUList|+RUList;
+
+/*		1303. Как будут и как должны вести себя губернаторы в этой ситуации?
+
 1305;60;RUVerb|"ли"|RUAndOr|RUVerb|"ли";+RUList|+RUList|+RUList|+RUList|+RUList;
 
+/*		1305. следует определять, сознавал ли и мог ли сознавать больной природу и степень вредных последствий.
 /*PHASE 65: NEGATION MARKERS
 /* = = = = = = = = = = = = =
 /*Default labels - negation markers
 /*=================================
 
 1093;65;RUVerb:RUPred:RUPart+^RUAux|RUNe|RUAdj:RUCon;*|RUNegRel|*;
+
+/*		1093. Он бы, наверное, и знать не знал, что носит в животе наличку, если б не пустяковая дорожная авария. Хотя нужно не 70, а 30. он стоит не $ 170 млн, а $ 310 млн.
+
 1097;65;^RUAdj|RUAndOrBut|RUNe|.RUAdj|RUCon;*|*|RUNegRel|*|*;
+
+/*		1097. он видит в нем только непревзойденный идеал, а не конкурента. NOT. где должны формироваться простые и ничем не заменимые образы и понятия.
+
 1101;65;RUCon|RUNe|RUKAdj;*|RUNegRel|RUPred;
+
+/*		1101. Она сообщила суду, что с исковыми требованиями ее организация не согласна, считает их незаконными.
+
 1100;65;RUCon|RUNe|RUCAdv:RUCon:RUNum:RUAdj+^RUNoBCon:RUNegComp;*|RUBCon+RUNegBCon|*;
+
+/*		1100. У моего доверителя восприятие жизни, чести и достоинства не самые легковесные. спектакль "Крокодил" с успехом идущий на сцене Московского театра кукол уже не один год. NOT. на срок не свыше шести лет.
+
 1099;65;RUNe|RUAdj:RUCAdv:RUCon:RUNum;RUNegCon|*;
+
+/*		1099. Нет, вы ни в чём не виноваты. Применение насилия, не опасного для жизни или здоровья осужденного. Вид его показался мне не особенно гневным.
+
 1098;65;RUNe;RUNegRel;
+
+/*		1098. Не было ни одного замечания в наш адрес.
+
 1084;65;RUNikakoy|RUNegRel;RUNegPR|*;
+
+/*		1084. Мне никакой не понравился.
+
 1254;65;RUConGen|RUNikakoy|SEnd:RUPunctuation;*|RUNegCon|*;
+
+/*		1254. Очень тонкие перегородки между номерами, шумоизоляции никакой.
+
 561;65;RUNikakoy;RUBCon+RUNegBCon;default for 'nikakoy': becomes beginconcept
 
+/*		561. но никакого результата не давали.
 /*'ни'
 
 96;65;RUNi|RUPrep|RURelpron|RUAdj:RUCon;RUBCon+RUNegBCon|+Join|+Join|*;'ni' plus preposition plus relative pronoun before adjective or noun together become one beginconcept
-1074;65;RUNi|.RUPrep|RUOdin|.RUIz|.RUNRPron:RUPRPron|*RUAdj:RUCon:RUECon;RUBCon+RUNegBCon|+Join|+Join|RUAdj|RUAdj|*;
+
+/*		96. Ни к каким делам партии я никогда никакого отношения не имел.
+
+1074;65;RUNi|.RUPrep|RUOdin|.RUIz|.RUNRPron:RUPRPron|*RUAdj:RUCon:RUTimeEndConcept;RUBCon+RUNegBCon|+Join|+Join|RUAdj|RUAdj|*;
+
+/*		1074. Ни одна из подобных систем  в полном объёме не инсталлирована. Ни одна из этих моделей не позволяет одновременно учесть три основных параметра атаки. Бабушка не выдала меня ни единого раза и свои тайны я несла к ней.
+
 1083;65;RUNi|.RUPrep|RUOdin|RUPunctuation:SEnd:RUNegRel:RUPrep;RUNegPR|+Join|+Join|*;
+
+/*		1083. я ещё ни одного не видела. в стране действительно не было ни одного, который бы соответствовал.
+
 1104;65;RUCond|."то"|RUNi;*|RURAdv|RURAdv-RUNegation-RUNegBegin;no negation
+
+/*		1104. решение -- во что бы то ни стало растащить избирателей.
+
 1117;65;RUCond:RUConj|*RUAdj:RUCon:RUPrep:RUPerspron:RUPRPron:RUNRPron:RUAdvStruct:RURAdv|RUNi;*|*|RURAdv-RUNegation-RUNegBegin;no negation
 
+/*		1117. Все препараты, какая бы низкая доза гормонов в них ни была, обладают очень высоким эффектом. Как это ни горько признать, мы ещё до покупателя не доехали.
 /*'один из'
 
 1075;65;RUOdin+RUNoBCon|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUAdj|RUAdj|RUAdj|*;
+
+/*		1075. связанное с потерей герметичности одного из трубопроводов.
+
 1076;65;RUOdin|RUIz|.RUPRPron:RUPosspron:RUNRPron:RUAdj:RUCAdv:RUAdvPR|RUCon;RUBCon-RUNum|RUAdj|RUAdj|*;
+
+/*		1076. ответственным за одни из самых страшных злодеяний. Алкогольный делирий — один из наиболее часто встречаемых алкогольных психозов.
+
 1081;65;RUOdin|RUIz|RUAdj;RUBCon-RUNum|RUAdj|*;
+
+/*		1081. Коммерциализация образования уже сделала высшее образование одним из самых дорогих в мире.
+
 1078;65;RUOdin|RUIz|RUPRPron;RUPRPron-RUNum|+Join|+Join;
 
+/*		1078. Оин были одними из тех, кого он называет «строителями театра».
 /*Default labels
 /*--------------
 
 1149;65;RUOdin+RUBCon;RUBCon;
+
+/*		1149. В силу обязательства одно лицо (должник) обязано совершить в пользу другого лица (кредитора) определенное действие, как-то.
+
 1077;65;RUOdin;RUAdj;
+
+/*		1077. Они решили, что это такая странная особенность -- питаться одними пельменями.
+
 985;65;RUPrep;RUPrep;
+
+/*		985. История с задержанием.
+
 1102;65;RUKAdj;RUAdj;
 
+/*		1102. Они свободны в установлении своих прав и обязанностей.
 /*PHASE 66: SENTENCE STRUCTURE DETECTION
 /*= = = = = = = = = = = = = = = = = = = 
 /*after punctuation
 /*=================
 
 1273;66;SBegin:RUHyphen:":"+^RUNotMarkerPB|^SBegin+^RUPunctuation;*|+RUPBegin;first word sentence or hyphen, colon
+
+/*		1273. Можно хоть с завтрашнего дня ничего не делать и предаваться развлечениям. Время выбрано безупречно – для актуальности ничего придумывать не пришлось. NOT. Но самое забавное в опоздании - это причины, которые приводят в объяснительных записках.
+
 1275;66;SBegin|RULayout:RUPunctuation|^RULayout;*|*|+RUPBegin;
+
+/*		1275. (3) гетерогенностью исследуемых групп населения и больных. "Люди ничего не знают и даже не хотят знать".
+
 1276;66;*{2}RUPunctuation|^RUPunctuation;*|+RUPBegin;
+
+/*		1276. не может рассматриваться как препятствующее экономическим субъектам осуществлять деятельность по реализации товаров (выполнению работ, оказанию услуг), а также получать из бюджета возмещение излишне уплаченного налога.
+
 1278;66;RUBracket1|*{1,2}^RUPunctuation|RUBracket2|^SEnd+^RUPunctuation;-RUPunctuation|*|-RUPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
+
+/*		1278. Глава крестьянского (фермерского) хозяйства, осуществляющего деятельность без образования юридического лица.
+
 1277;66;RUBracket1:RUBracket2+RUPunctuation|^SEnd:RUPunctuation;*|+RUPBegin;isolate part of sentence between ()
 
+/*		1277. Важнейшее общественное богослужение в православии — Божественная литургия (в России также называемая «обедней»).
 /*after comma
 /*===========
 
 1299;66;RUComma|RUAdvStruct|RUComma;*|*|+RUNotMarkerPB;preparation: mark comma after advstruct so it's NOT followed by a PB
+
+/*		1299. Они, конечно, вербуют своих сторонников.
+
 1280;66;RUComma|RUPrep:RURAdv|RUConj;*|+RUPBegin|*;PB after comma: preposition/adverb + conjunction or relative pronoun
+
+/*		1280. Гражданин отвечает по своим обязательствам всем принадлежащим ему имуществом, за исключением имущества, на которое в соответствии с законом не может быть обращено взыскание. Беспартийные, без роду без племени, неизвестно откуда взявшиеся.
+
 1296;66;RUComma|RUNegPR|RUNegRel;*|+RUPBegin|*;PB after comma: negation pronoun
+
+/*		1296. человек, ничего не знавший о маневре своего благородного начальника.
+
 1279;66;RUComma|RUConj:RUPart;*|+RUPBegin;PB after comma: conjunction or participle
+
+/*		1279. Все без исключения домашние должны неукоснительно придерживаться единой стратегии воспитания, чтобы детскую психику не "штормило" от педагогических разногласий взрослых. Я об этом ничего не знаю ,-- заявил директор одной из местных строительных фирм, просивший не называть его имени.
+
 1300;66;RUComma+^RUNotMarkerPB|RUVerb:RUPred:RUNegRel;*|+RUPBegin;
+
+/*		1300. независимо от того, превышают ли они установленный законодательством лимит для целей исчисления налога на прибыль или нет. а потом, не найдя ничего, вынуждены были оправдываться, — напомнил эксперт. по обязательствам, не связанным с осуществлением. NOT. Они, конечно, вербуют своих сторонников.
+
 1281;66;RUVerb:RUPred|.^RUPunctuation|RUComma|RUAndOr|.^RUVerb:RUPred:RUNegRel:RUComma|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*|*;after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
+
+/*		1281. она уже ничего не ждала для себя лично, и в этот момент судьба сделала ей царский подарок. оин действительно очень гордятся своим штатом, и лучше их не задевать.
+
 1282;66;RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron:RURAdv:RUAdvStruct:RUAdvPR;+RUPossiblePBegin;preparation for various patterns concerning phrase begin
+
+/*		1282. Первые представляют собой чистую водно-спиртовую смесь, вторые допускают незначительные вкусо-ароматические добавки. Ко всему, за что брался, он относился как к произведению искусства. Как уточняет журнал, оператор нигде не рекламирует акцию. Для жильцов дома, которых даже не поставили в известность о создании кондоминиума, эта новость стала поистине ошеломляющей. Я не раскрывал замысла, и человек куда-то вышел, потом вошёл и, тяжело вздохнув, сел на место.
+
 1284;66;RUPrep:RUNegRel:RUNegPR:RUBCon;+RUPossiblePBegin;preparation for various patterns concerning phrase begin
+
+/*		1284. никто не ревновал, не соперничал с ним. с подоспевшей полицией один убийца погиб. хотя и стоял за прилавком.
+
 1283;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*;
 
+/*		1283. Первые представляют собой чистую водно-спиртовую смесь, вторые допускают незначительные вкусо-ароматические добавки. Ко всему, за что брался, он относился как к произведению искусства. Как уточняет журнал, оператор нигде не рекламирует акцию. Для жильцов дома, которых даже не поставили в известность о создании кондоминиума, эта новость стала поистине ошеломляющей. Я не раскрывал замысла, и человек куда-то вышел, потом вошёл и, тяжело вздохнув, сел на место.
 /*after and/or
 /*============
 
 1306;66;RUAndOr|.RUPrep|RUKotory|*RUPossiblePBegin;+RUBeginrel+RUPBegin|*|*|*;'and' followed by 'kotory' (less restrictions than other relpron/conj)
+
+/*		1306. организовать игру, в которую детям было бы интересно играть и в которой они могли бы по ходу дела, без особого напряжения усваивать какие-то полезные сведения.
+
 1289;66;^RUConj:RUInf|RUAndOr|.RUPrep|RUConj|*RUPossiblePBegin;*|+RUBeginrel+RUPBegin|*|*|*;'and' followed by conjunction
+
+/*		1289. Натирать же пятна порохом многажды накрепко, чтоб они тех пятен ничем не вытравливали и чтоб те пятна были посмерть. NOT. Метан может добываться и как самостоятельное ископаемое.
+
 1287;66;RUPart:RUPred|RUAndOr+^RUList|*RUPossiblePBegin|RUVerb:RUPred+^RUInf|^SEnd;*|+RUBeginrel+RUPBegin|*|*|*;
+
+/*		1287. в сердце всё равно остаётся католичкой, ибо была на том воспитана и не может от власти воспоминания освободиться. NOT. что сумма задолженности налогоплательщиком признана и не оспаривалась. NOT. в возмездном договоре цена не предусмотрена и не может быть определена.
+
 1290;66;RUVerb:RUPred|.^RUPunctuation:RUAndOr|RUAndOr+^RUList|.^RUPunctuation:RUInclPunct:RUVerb:RUPred:RUInf:RUAndOr|RUVerb:RUPred+^RUInf:RUNegPred;*|*|+RUBeginrel+RUPBegin|*|*;
+
+/*		1290.  но потушить пока не удаётся и до осени вряд ли получится. он не стал ни о чём спрашивать, лишь сдержанно поклонился и в сопровождении двух латников вышел из шатра. NOT. Ничего другого там не делали и делать в обозримом будущем не собираются. NOT. Популярность его сезонов привела и к увлечению европейцев традиционным русским костюмом и породила новую моду.
+
 1297;66;RUVerb:RUPart:RUPred|.^RUPunctuation|RUComma+^RUList|RUAndOr|RUPossiblePBegin|.^RUVerb:RUPred:RUNegRel:RUPart:RUPBegin:RUPunctuation:RUInclPunct:RUAndOr|RUVerb:RUPred:RUNegRel:RUPart;*|*|*|+RUPBegin|*|*|*;and/or after comma
+
+/*		1297. В нашем доме, например, в двух квартирах ремонт всё ещё не сделан, и поэтому рабочие всё время что-то таскают.
+
 1298;66;RUVerb:RUPart:RUPred|.^RUVerb:RUComma|RUComma|RUAndOr|RUVerb:RUPred:RUNegRel+^RUInf;*|*|*|+RUPBegin|*;and/or after comma
 
+/*		1298. Николай I не смог договориться о разделе империи, и решил форсировать события путем прямого военного нажима.
 /*PHASE 70: NEGATION EXPANSION
 /* = = = = = = = = = = = = =  
 /*Preparation
 /*===========
 
 1072;70;RUNi|RUPrep|RUNegPR_part|^RUNegRel:"нет";RUNegPR+RUNegation|+Join|+Join|*;PathRelevant when used independently, no expansion if no NegRel follows
+
+/*		1072. ни в чем не повинных людей.
+
 1092;70;RUNi|RUPrep|RUNegPR_part;RUNegPR+RUNegation+RUNegBegin|+Join|+Join;PathRelevant when used independently, plus expansion if NegRel follows
+
+/*		1092. Ни на кого не может быть возложена обязанность уплачивать налоги и сборы.
+
 1091;70;.RUNegBCon|RUNegCon|.RUCAdv+^RUNegComp|RUAdj|RUCon+^RUList;-RUNegBegin|-RUNegBegin|*|*|*;
+
+/*		1091. Опека и попечительство устанавливаются для защиты прав и интересов недееспособных или не полностью дееспособных граждан. На фоне резвых и непоседливых сверстников, постоянно затевающих различные игры, не совсем здоровый ребёнок будет выглядеть этаким отшельником, которому всё безразлично. NOT. Это не более сильная концентрация старой и всеми любимой L'eau de toilette, это новый аккорд на вечную тему.
+
 682;70;RUNegRel|RUPrep|RUAdj|RUCon|RUVerb;*|*|*|*|+RUNegStop;to stop negation at the end of negated concept after preposition
+
+/*		682. Мы не с пустыми руками начинаем сезон.
+
 98;70;RUNi;^RUNegRel;
+
+/*		98. Энтузиазм людей не измерить ни в рублях, ни в долларах!
+
 1193;70;RUNegPR_part;-RUNegPR_part;clean-up
 
+/*		1193. По ним как будто ничего не видно, и это создаёт иллюзию, что их ничто не беспокоит.
 /*Expansion of negation scope to the left
 /*=======================================
 /*No negation
 
 1255;70;"некогда"|RUVerb;RUAdvPR+RUTime|*;
 
+/*		1255. майор из этой воинской части некогда взял элитных щенков.
 /*Split relations
 
 1216;70;RUVerb+^RUCond:RURepr|RUNegRel|RUVerb;*|^RUBeginrel|*;
+
+/*		1216. В межсезонье все подразделения трудились не покладая рук.
+
 1246;70;RUVerb|RUAdvStruct|RUConj;*|*|+RUBeginrel;
 
+/*		1246. Помню, например, что мы никогда не запирали двери.
 /*subject before 'ne'
 /* assign NoExpansion for preposition-concept patterns
 
 1168;70;^RUCon|RUPrep|RUCon|"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|*|*|+RUNoExpansion;no expansion to noun after 'у' if prep+con precedes
+
+/*		1168. в дом у Красного моста являться охоты не было.
+
 1109;70;^RUCon|RUPrep+^"у"|.RUNRPron:RUPRPron|*RUCAdv:RUAdj:RUPosspron:RUCon:RUPrep:RUAndOrBut+^"у":RUPerspron;*|*|*|+RUNoExpansion;
+
+/*		1109. Выставки стараюсь не пропускать, в кино и театре почти не бываю. В этот период не включается время, необходимое для освоения участка. Оно принципиально разграничивается от других христианских исповеданий не как истина от заблуждений, а, собственно, в качестве целого по сравнению с частями. NOT. если в отношении этих лиц по данному преступлению не имеется решения суда иностранного государства. NOT. У следователя не было материалов, по которым он мог бы принять решение.
+
 1116;70;^RUCon|RUPrep+^"у"|RUPRPron:RUPerspron;*|*|+RUNoExpansion;
 
+/*		1116. я надеюсь, что до такого не дойдет. Он не боялся надоесть, в нём не было никаких комплексов.
+/*preparation: extra label for timeconcepts to include in pattern
+
+1384;70;RUAdvTime:RUTimeEndConcept:RUTimeBeginConcept;+RUPossibleNegSpan;
+
+/*		1384. расходы по прошлому году пока не обнародованы.
 /*expansion to personal/demonstrative/indefinite pronoun / concept before negation marker
 
-1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUECon|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to bcon/con/perspron/posspron/indefpron-prep-con, '+NegBegin' as condition to avoid expansion for Negation Concepts without expansion
+1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUPossibleNegSpan|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to bcon/con/perspron/posspron/indefpron-prep-con, '+NegBegin' as condition to avoid expansion for Negation Concepts without expansion
+
+/*		1108. Значительную роль религий в истории нашей цивилизации не станет отрицать никто. Она ведь от этой идеи не отказывалась. Во всяком случае, мы с тобой для переименования еще не готовы. И когда кто-либо по каким-либо причинам не уступает дорогу транспорту со спецсигналом, он грубейшим образом нарушает правила. Во-вторых, даже самая высокая мера наказания за административное правонарушение не настолько тяжка для правонарушителя, как в уголовном праве, чтобы её имело смысл дифференцировать». это самые свежие данные, расходы по прошлому году пока не обнародованы.  столько же раз приходили отписки о том, что оснований для привлечения её к ответственности нет. она должна обслуживать эти противоположные интересы -- других задач перед ней никто не ставит.
+
 1153;70;RUBCon:RUCon+^RUNoExpansion|RUNRPron|*RUAdj:RUCon+^RUNoExpansion|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to con
-1165;70;RUPred|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to predicate before adj/posspron/indefpron/con
-1214;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|*|*|*;expansion to adj/posspron/indefpron/con before ne+inf
-1105;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon:RUNegPR|^RUInf;+RUNegBegin|+RUNegBegin|*|*;expansion to adj/posspron/indefpron/con
+
+/*		1153. образование исполнительных органов общества и досрочное прекращение их полномочий, если уставом общества решение этих вопросов не отнесено к компетенции совета директоров (наблюдательного совета).
+
+1165;70;RUPred|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to predicate before adj/posspron/indefpron/con
+
+/*		1165. Беспредельное вещественное потребительство — это идеал не всякого общества, а именно современного рыночного общества.
+
+1214;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon+RUNegBegin|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|*|*|*;expansion to adj/posspron/indefpron/con before ne+inf
+
+/*		1214. Но негативную информацию не исключить, тем более если плохое случается каждый день.
+
+1105;70;*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon+^RUNoExpansion|.RURAdv:RUAdvStruct:RUAdvPR|RUNegRel:RUNegBCon:RUNegPR+RUNegBegin|^RUInf;+RUNegBegin|+RUNegBegin|*|*;expansion to adj/posspron/indefpron/con
+
+/*		1105. Заведующий кафедрой общей политологии не видит в смене полпредов в трех федеральных округах ничего удивительного. Присяжные крайне редко совершают ошибки. Шла долго -- ничего не менялось ни в пейзаже, ни во времени, но усталости она не чувствовала. а представители этих школ не скрывают своей конфессиональной или идеологической ангажированности. За эксцесс исполнителя другие соучастники преступления уголовной ответственности не подлежат. По делам, выделенным в отдельное производство, государственная пошлина повторно не уплачивается. Может быть, инфаркта как такового не было. поскольку одна-две ступеньки часто не воспринимаются как лестница и их порой попросту не замечают.
+
 1163;70;RUConPossibleBCon|RUBCon|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+
+/*		1163. договором предусмотрена лишь оплата страховщиками медицинских расходов застрахованных работников, а страховые выплаты застрахованным лицам не производятся.
+
 1112;70;^RUCon:RUAdj|RUAndOrBut|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+
+/*		1112. Шла долго -- ничего не менялось ни в пейзаже, ни во времени, но усталости она не чувствовала, только стало вдруг скучно. Тонкая тёплая струя масла прольётся вам туда, где он, по всем понятиям, должен находиться -- и эти ощущения вы не забудете никогда.
+
 1111;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUPerspron|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+
+/*		1111. Леопольда я больше не видел. Как видишь, белые мыши нам не мешают. То есть квартира тебе больше не нужна? но особых преимуществ это им не дало.
+
 1114;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPerspron|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon|RUNegRel;*|*|+RUNegBegin|+RUNegBegin|*;expansion to subject or object
+
+/*		1114. почему вы галстук не носите?! По-нашему Заработки не превышают 6000 рублей. Ах, извините, мы этого не знали. Может, он что-нибудь не так сделал?
+
 1115;70;SBegin:RUPunctuation:RUConj|.RUAdvStruct|RUPRPron|RUNegRel;*|*|+RUNegBegin|*;expansion to pathrelevant pronoun
+
+/*		1115. Это не может быть правдой.
+
 1167;70;*RUPerspron:RUCon+^RUNoExpansion|.RUAdvStruct|RUPunctuation+RUConj|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to subject before dash + 'ne'
+
+/*		1167. Свою миссию он видел в том, чтобы быть издателем для народа, когда коммерция – не цель, а средство.
+
 1215;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart|.RUCon|RUNegRel:RUNegCon:RUNegBCon+RUNegBegin|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*|*;expansion to object before ne+inf
+
+/*		1215. Выставки стараюсь не пропускать, в кино и театре почти не бываю -- кажется, что ничего достойного там не происходит.
+
 1110;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart:RUAdvPR+^RUNegPred|.RUCon|RUNegRel:RUNegCon:RUNegBCon:RUNegPR+RUNegBegin|^RUInf;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*;expansion to subject, with possibly a relation preceding 'ne', +NegBegin as condition to avoid expansion for Negation Concepts without expansion, exception: NegPred
+
+/*		1110. Его он ещё не промотал. Он её не видел почти два месяца. Он терпеть не может чёрствого хлеба. пришли к выводу, что они не так хороши, как могли бы быть. в пределах населённых пунктов она появляется очень редко. Четвёртое место было не занято. Договором в пользу третьего лица признается договор, в котором стороны установили, что должник обязан произвести исполнение не кредитору.  бедные могут не тратить силы на своё развитие. Своим ходом троллейбусы идти не могли. Этим довольны не все.  Я же не опаздываю! NOT. Во-первых, когда баня протопилась там нет никакого дыма.
+
 1106;70;RUBCon|RUNegRel;+RUNegBegin|*;expansion to beginconcept
 
+/*		1106. В случаях, когда в возмездном договоре цена не предусмотрена и не может быть определена исходя из условий договора, исполнение договора должно быть оплачено.
 /*expansion to longer noun-preposition-noun pattern
 
 1169;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+
+/*		1169. Продолжительность исполнения данного вида наказания лицами в возрасте до пятнадцати лет не может превышать двух часов в день, а лицами в возрасте от пятнадцати до шестнадцати лет - трех часов в день. подчеркнём, что цель эксперимента в данном случае -- не проверка новейших методов преподавания.
+
 1170;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+
+/*		1170. Случаев обращения людей в больницы с симптомами отравления гептилом также не было.
+
 1171;70;RUCon+^RUNoExpansion|RUPrep|.RUAdj|RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
 
+/*		1171. Понятно, что 88-сильный мотор с максимальным крутящим моментом в 128 Нм вряд ли способен на подвиги.
 /*include verb in left expansion
 
 1164;70;.RUPosspron:RUCon:RUPRPron|RUVerb|RUPerspron+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+
+/*		1164. Вид его показался мне не особенно гневным, и у меня мелькнуло.
+
 1177;70;RUVerb|.RUAdvStruct:RURAdv|RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+
+/*		1177. В 2002 г. мексиканские исследователи обнаружили не просто новый, никем ранее не виданный и не описанный кактус -- они нашли растение, невообразимо отличающееся от всех, до сих пор известных.
+
 1186;70;RUCon+^RUNoExpansion|RUAux|RUNegCon:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+
+/*		1186. Мы стремимся, чтобы островной регион были не просто красивым и обустроенным местом, а чтобы люди здесь оставались жить и воспитывать детей. Рассуждения гетмана были не всеми поняты и не всеми приняты.
+
 1213;70;RUInf:RUPred|.RUAdvPR:RUAdvStruct|RUNegRel:RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
 
+/*		1213. приглушённым голосом он объясняет, что приехать сейчас не может -- больна жена. является то, что биоэтика — это в принципе не корпоративная этика.
 /*subject before negation predicate / short adjective
 
 1156;70;RUBCon:RUCon|.RUAdvPR|RUNegPred|SEnd:RUPunctuation:RUPrep:RUAndOr;+RUNegBegin|*|*|*;
+
+/*		1156. И от судеб защиты нет. Фруктов там нет.
+
 1059;70;*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj:RUPrep+^RUNoExpansion|.RURAdv|RUNegPred|SEnd:RUPunctuation:RUPrep;+RUNegBegin|+RUNegBegin|*|*;
+
+/*		1059. Воспоминание о любимой женщине поблекло, но оно все же присутствует в жизни поэта даже тогда, когда возлюбленной уже нет среди живых. Адекватной замены попросту нет.
+
 1197;70;"у"|*RUCon:RUPRPron:RUPosspron:RUNRPron:RUPerspron:RUAdj|.RURAdv|RUNegPred;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
 
+/*		1197. В интервью она честно признается: у романа героев "Двух дней" нет будущего.
 /*expansion to preposition 'у'
 
 1113;70;"у"|RUPerspron|*RUAdj:RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;for expansion of negation: 'у' + perspron + concept + negation marker
+
+/*		1113. То есть там, позади, оставался список на букву Г, но от этого списка мы оторвались, и теперь у нас списка не было.
+
 1107;70;"у"|RUAdj:RUPerspron:RUCon+RUNegBegin;+RUNegBegin|*;for expansion of negation: 'у' + perspron/noun + negation marker
 
+/*		1107. При ней давным-давно состоял другой кавалер, у неё вообще не было в них недостатка. У следователя не было материалов, по которым он мог бы принять решение.
 /*expansion to antecedent
 
 1158;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|RUPrep|RUCon|.RUAdvStruct|RUPred:RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+
+/*		1158. Они там прыгали, падали мордой в грязь, орали слова, которых в словарях нет.  Две порции -- на него и жену, которая в штате не числилась. Экономика погрузилась в глубокую депрессию, от которой до конца не оправилась до сих пор.
+
 1174;70;RUCon:RUPRPron|.RUComma:RUPrep|RUKotory+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+
+/*		1174. образовался тихий угол, которого она пока не трогала. Любовь для женщины -- это кислород, без которого нет жизни. Он писал, что нет людей, которые ни во что не верят. В начале был хаос, в котором уже находился Логос, рациональная организующая сила, без которой неупорядоченность вселенной не может стать организованной. заключения договора на срок не менее пяти лет, в течение которых страховые выплаты в пользу застрахованного лица не производятся (за исключением страховой выплаты, предусмотренной в случае наступления смерти застрахованного лица). мне случалось давать свои сапоги ребятам, у которых их вовсе не было.
+
 1159;70;RUCon:RUPRPron|.RUComma|RUKotory+typeRelation|.RUAdvPR:RUVerb|RUNegRel+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;
+
+/*		1159. поручения, которые не были исполнены банком.
+
 1270;70;RUPRPron|.RUComma:RUPrep|"кто":"кого":"кому":"чего":"чему"+typeRelation|.RUAdvStruct:RUAdvPR:RUCon:RUAdj:RUPrep:RUPerspron:RUVerb|RUPred:RUNegRel:RUNegPR+RUNegation;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;relative pronoun with PathRelevant as antecedent
+
+/*		1270. если уж дома, в своём скворечнике, в том, до чего никому нет дела, кроме меня, я не могу быть независимым. мы усиливаем опасности неуправляемого выхода энергии тех, кому они не позволяют реализоваться.
+
 1160;70;RUCon|RUComma|.RUAdvStruct|RUNegRel|RUPart;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*|*;
+
+/*		1160. к концу отпуска по уходу за ребёнком осталась почти ни с чем из-за немалых трат на жильё и выхаживание своего ребёнка, не отличающегося здоровьем. Водка высшей очистки, то есть не содержащая почти ничего кроме этанола и воды.
+
 1161;70;RUCon|RUComma|RUPart|RUNegRel;+RUNegBegin+RUAntecedent|+RUNegBegin|+RUNegBegin|*;
 
+/*		1161. Деньги нашлись в разных банках разных стран и на счётах, принадлежащих отнюдь не членам партии.
 /*infinitive before negation predicate
 
 673;70;RUInf|RUCon|RUVerb|RUPred+RUNegation;+RUNegBegin|^RUCon|RUVerb|+RUNegStop;to make infinitive before 'nechego' NegBegin
 
+/*		673. Давать отпор было некому, банды были уже ликвидированы.
 /*expansion to enumeration patterns
 
 1180;70;RUList|.RUList+^RUNegBegin|RUList+RUNegBegin+^RUAntecedent;+RUNegBegin|+RUNegBegin|*;
 
+/*		1180. Для меня было непривычно -- я приходил, а обеда или ужина не было. NOT. Создание чрезвычайных судов и судов, не предусмотренных настоящим Федеральным конституционным законом, не допускается.
 /*expansion to conjunction
 
 1172;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUAdvStruct:RUInf:RUCond:RUNRPron|RUCon:RUPerspron:RUPosspron:RUPRPron:RUNRPron+RUNegBegin;+RUNegBegin|*|*;
+
+/*		1172. Все капсулы должны быть закодированы, не следует их открывать до тех пор, пока все тесты не будут выполнены. Куда же вы прёте не раздевшись! Что произойдёт, если коснуться заземлённой проволокой не конца B, а конца A? Если такого документа нет.
+
 1260;70;RUConj+^RUAndOrBut:RUPunctuation|RUNegPR:RUNegBCon+RUNegBegin;+RUNegBegin|*;
+
+/*		1260. Он хорошо знал, что никого и ничего там нет.
+
 1178;70;RUConj+^RUAndOrBut:RUPunctuation|.RUBCon:RUAdj:RUCon+^RUNegBegin|RUCon+RUNegBegin;+RUNegBegin|*|*;
 
+/*		1178. Если собственник жилого помещения использует его не по назначению, систематически нарушает права и интересы соседей либо бесхозяйственно обращается с жильем.
 /*Restriction of negation scope on the right
 /*==========================================
 /*Correction: not actually list -> Negation stop at Comma
 
 1184;70;RUPunctuation+RUList|*RUList|.RUPrep:RUNRPron:RUAdj:RUCon:RURAdv|RUVerb;-RUList|-RUList|*|*;
 
+/*		1184. По прогнозам, если не будут приняты эффективные меры, смертность и инвалидность в мире от ДТП возрастут к 2020 г. на 67%.
 /*Conjunction
 
 674;70;^RUPrep|RUConj+^RUNegRelpron:RUList:RUNegBegin;*|+RUNegStop;Specific conjunctions become NegStop
 
+/*		674. Я не успел ответить, как подкатил грузовик -- спасительный экипаж, который увезёт меня от этих мест подальше будто бы в недосягаемые пространства. NOT. Член кооператива не может одновременно быть членом наблюдательного совета и членом правления либо председателем кооператива. NOT. Это значит, что государство обязуется направить в адрес нуждающегося, дать ему то, без чего естественное существование человека как биосоциального организма невозможно.
 /*Punctuation
 
 1190;70;RUPunctuation+^RUList;+RUNegStop;
 
+/*		1190. пока они не оказались в здании бывшего института нефти и газа - сейчас там штаб одной их повстанческих военных бригад. NOT. Если место исполнения не определено законом, иными правовыми актами или договором.
 /*And/Or
 /* remark: not generally beginrelation because of possible meaning 'also/even'
 
 1212;70;RUNegPred|RUAdvPR|"и";*|*|RUAdvStruct;
+
+/*		1212. Во всех странах с рыночной экономикой нет специальных министерств печати, как нет там и государственных книжных предприятий.
+
 1258;70;RUNegRel|.RUPerspron|RUInf|"и"|*RUAdj:RUCon;*|*|*|RUAdvStruct|*;
+
+/*		1258. Нельзя его признать и делегированным официальным разъяснением закона.
+
 1302;70;^"как"|RUVerb|"и"|"как";*|*|RUAdvStruct|*;
+
+/*		1302. Он выступал и как режиссёр, оставаясь в то же время сотрудником.
+
 1223;70;RUNegRel|^RUVerb:RUConj|"и"+^RUAdvStruct|RUVerb|^SEnd;*|*|+RUBeginrel|*|*;split at 'and' when verb follows
-1225;70;RUNegRel|*RUPart:RUVerb:RUInf:RUAux|.RURAdv|"и"+^RUAdvStruct|*RUPrep:RUAdj:RUCon:RUAdvStruct:RUBeginendconcept:RURAdv:RUAdvPR|RUVerb;*|*|*|+RUBeginrel|*|*;split at 'and' when verb follows
+
+/*		1223. Он протекал не одномоментно и был связан со многими факторами.
+
+1225;70;RUNegRel|*RUPart:RUVerb:RUInf:RUAux|.RURAdv|"и"+^RUAdvStruct|*RUPrep:RUAdj:RUCon:RUAdvStruct:RUAdvTime:RURAdv:RUAdvPR|RUVerb;*|*|*|+RUBeginrel|*|*;split at 'and' when verb follows
+
+/*		1225. Зарплаты не выплачивались и некоторые предприятия перешли на бартер. Проводить дискриминацию граждан, назначая каждому свою цену, он не может и поэтому действует как монополист. «Холодная сварка» незаменима и там, где стыки не были соединены друг с другом и через несколько лет разошлись.
+
 1226;70;RUNegRel|RUVerb+^RUmAux:RUAux|"и"+^RUAdvStruct|RUAux:RUmAux;*|*|+RUBeginrel|*;split at 'and' when verb follows
+
+/*		1226. Второе параметрическое уравнение, задающее прямую x=x0, принципиального значения при решении данной задачи не имеет и может быть опущено, так как выражение должно выполняться для произвольных значений x0. Стоимость бланка нового удостоверения также не изменится и будет по-прежнему составлять 800 рублей.
+
 1221;70;^RUConj|"и"+^RUAdvStruct|RUConj+^"как";*|+RUBeginrel|*;split at 'and' when conjunction follows
+
+/*		1221. Он давно привык и потому не отказывается.
+
 1256;70;RUNegPR|RUNegRel|RUInf|"и"+^RUAdvStruct;*|*|*|+RUBeginrel+RUNegStop;
+
+/*		1256. Можно хоть с завтрашнего дня ничего не делать и предаваться развлечениям.
+
 1194;70;"и"+^RUList:RUAdvStruct|^RUNegation;+RUNegStop|*;
+
+/*		1194. Первые сигареты не были снабжены фильтром и больше напоминали папиросы. NOT. Он хорошо знал, что никого и ничего там нет, хотел объяснить и доказать невежественным людям.
+
 1198;70;^RUVerb|"или"|RUVerb;*|+RUNegStop|*;
 
+/*		1198. Могут быть мёртвые знания, которые не используются в новых актах восприятия и деятельности или используются стандартно, путём абсолютного отождествления новой ситуации с той, в которой эти знания впервые применялись, то есть не творчески.
 /* Assign a temp marker to all words in a negation span
 
 1201;70;RUNegBegin:RUInNegspan|^RUNegStop;*|+RUInNegspan;assign a temp marker to all words in a negation span
 
+/*		1201. Надо было показывать, что я ничего не боюсь и верю в своё быстрое возвращение.
 /*Expansion 'без'
 /*===============
 /*Expansion before 'без'
 
 1211;70;RUCon|RUNegPrep;+RUNegBegin|*;
 
+/*		1211. Он приехал сюда добровольно в рамках "Врачей без границ".
 /*Expansion after 'без'
 
 1210;70;RUNegPrep;+RUNegBegin;
 
+/*		1210. Он не может быть назначен (избран) на другую должность или в другой суд без его согласия.
 /*Stop expansion after 'без'
 
 1205;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron:RUPerspron|RUVerb+^RUInNegspan;*|*|+RUNegStop|*|*;
+
+/*		1205. Если пациент попадает в операционную без премедикации или она оказывается неэффективной, то он обычно эмоционально возбуждён.
+
 1206;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|RUPrep+^RUInNegspan;*|*|+RUNegStop|*;
+
+/*		1206. Все осуждённые к каторжным работам делятся на 3 разряда, осуждённые без срока или на время свыше 12 лет именуются каторжными первого разряда;
+
 1204;70;RUNegPrep|*^RUBCon:RUVerb:RUInf:RUPrep|RUBCon:RUVerb:RUInf:RUPrep+^RUInNegspan:RUNegation;+RUNegBegin|*|+RUNegStop;
+
+/*		1204. Он круто положил руль -- без всяких ссылок на параграфы и пункты выгнал его из палаты. NOT. маленький городок без туристических объектов, без какой бы то ни было спешки и суеты.
+
 1207;70;RUNegPrep|RUAdj|RUPrep|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|+RUNegStop;exception to r1204
+
+/*		1207. Самовольное занятие земельного участка или использование земельного участка без оформленных в установленном порядке правоустанавливающих документов на землю.
+
 1209;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUNRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|RUPRPron|*|+RUNegStop;copy of r1208 for NRPron that should be PRPron
+
+/*		1209. Оставление погибающего военного корабля командиром, не исполнившим до конца свои служебные обязанности, а равно лицом из состава команды корабля без надлежащего на то распоряжения командира.
+
 1208;70;RUNegPrep|*RUAdj:RUCon|RUPrep|RUPerspron:RUPRPron|*RUAdj:RUCon|^RUInNegspan:RUNegation;*|*|-RUNegStop|*|*|+RUNegStop;exception to r1204
+
+/*		1208. Безвозмездным признается договор, по которому одна сторона обязуется предоставить что-либо другой стороне без получения от нее платы или иного встречного предоставления.
+
 1203;70;RUNegPrep|*RUAdj:RUCon:RUNRPron:RUPRPron|RUAndOr|*RUAdj:RUCon:RUNRPron:RUPRPron|RUPrep:RUVerb+^RUInNegspan;*|*|*|*|+RUNegStop;
 
+/*		1203. Потребление  веществ без назначения врача либо потребление иных одурманивающих веществ на улицах.
 /* Assign a temp marker to all words in a negation span after 'без'
 
 1266;70;RUNegRel|*typeRelation+^RUNegRel:RUNegStop:RUPrep|RUConj+RUNegStop|^RUNegation;*|*|+RUBeginrel|*;to split off NegStop from relation with Negation marker
+
+/*		1266. Служивые бродягами трусили за нею следом, пока не пришлось что было сил бежать. Положения настоящей главы Конституции составляют основы конституционного строя Российской Федерации и не могут быть изменены иначе как в порядке, установленном настоящей Конституцией.
+
 1267;70;RUNegRel|RUAndOr+RUNegStop|^RUNegation;*|+RUBeginrel|*;to split off NegStop from relation with Negation marker
 
+/*		1267. Боязнь, что делаю что-то не так и недели занятий пойдут насмарку, привела меня к спецу.
 /*Clean conflicting negation parameters
 /*=====================================
 
 1192;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|*|+RUNegStop;move NegStop from nonrelevant to next relevant lexrep
+
+/*		1192. У каждого характер, скажем так, не самый приятный, да еще и накопленный жизненный опыт сказывается.
+
 1191;70;RUNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant:typeAmbiguous+^RUNegation:RUNegBegin;*|+RUNegStop;move NegStop from nonrelevant to next relevant lexrep
+
+/*		1191. Возвращение более чем 200 тысяч "зелёных фуражек "в родное лоно -- это не восстановление памятника, это будет посерьёзнее. NOT. Как уточняет журнал, оператор нигде не рекламирует акцию.
+
 1229;70;RUConj+RUPunctuation;-RUPunctuation;
 
+/*		1229. Полномочия официально переданы генералу - человеку, который  никогда не служил.
 /*PHASE 80: SENTIMENT
 /* = = = = = = = = = 
 /*Stop sentiment scope in the right-hand part of the path with NegSentimentStop/PosSentimentStop
@@ -1031,6 +2471,7 @@
 
 1248;80;RUConj:RUAndOr+RUBeginrel;RUBeginrel;give beginrelation its final label
 
+/*		1248. Помню, например, что мы никогда не запирали двери.
 /* Rewrite language specific labels to unified labels
 /*===================================================
 

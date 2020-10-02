@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Import this property file to allow buildcache.exe to cache object files when building.
+Bash Usage: MSBuild.exe iKnowEngine.sln -p:ForceImportBeforeCppTargets="$(pwd)/EnableBuildCache.props"
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Label="Globals">
+    <UseMultiToolTask>true</UseMultiToolTask>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <BrowseInformation>false</BrowseInformation>
+      <ObjectFileName>$(IntDir)%(Filename).obj</ObjectFileName>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>

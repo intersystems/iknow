@@ -75,9 +75,34 @@ cdef class iKnowEngine:
 		return self.engine.index(text_source, language, traces)
 
 	@cython.binding(True)
-	def add_udct_annotation(self, start: int, stop: int, str UdctLabel: typing.Text) -> None:
-		"""Add a custom user dictionary annotation."""
-		return self.engine.addUdctAnnotation(start, stop, UdctLabel)
+	def udct_addLabel(self, str literal: typing.Text, str UdctLabel: typing.Text) -> int:
+		"""Add a custom user dictionary label."""
+		return self.engine.udct_addLabel(literal, UdctLabel)
+
+	@cython.binding(True)
+	def udct_addSEndCondition(self, str literal, cpp_bool sent_ending) -> int:
+		"""Add an End/NoEnd condtion to the user dictionary."""
+		return self.engine.udct_addSEndCondition(literal, sent_ending)
+
+	@cython.binding(True)
+	def udct_addNegationTerm(self, str literal) -> int:
+		"""Add a Negation term to the user dictionary."""
+		return self.engine.udct_addNegationTerm(literal)
+
+	@cython.binding(True)
+	def udct_addPositiveSentimentTerm(self, str literal) -> int:
+		"""Add a Positive Sentiment term to the user dictionary."""
+		return self.engine.udct_addPositiveSentimentTerm(literal)
+
+	@cython.binding(True)
+	def udct_addNegativeSentimentTerm(self, str literal) -> int:
+		"""Add a Negative Sentiment term to the user dictionary."""
+		return self.engine.udct_addNegativeSentimentTerm(literal)
+
+	@cython.binding(True)
+	def udct_use(self, cpp_bool flag) -> None:
+		"""Activate/Deactivate user dictionary use"""
+		return self.engine.udct_use(flag)
 
 	@property
 	def _m_index_raw(self):

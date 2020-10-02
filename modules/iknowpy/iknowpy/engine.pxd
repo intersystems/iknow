@@ -77,7 +77,13 @@ cdef extern from "../../engine/src/engine.h" nogil:
 
 		CPPiKnowEngine() except +
 		void index(const string& text_source, const string& language, cpp_bool traces) except +
-		void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) except +
+
+		void udct_use(cpp_bool flag) except +
+		int udct_addLabel(const string& literal, const char* UdctLabel) except +
+		int udct_addSEndCondition(const string& literal, cpp_bool sentence_end) except +
+		int udct_addNegationTerm(const string& literal) except +
+		int udct_addPositiveSentimentTerm(const string& literal) except +
+		int udct_addNegativeSentimentTerm(const string& literal) except +
 
 		@staticmethod
 		const set[string]& GetLanguagesSet() except +

@@ -17,7 +17,6 @@ set -euxo pipefail
 
 
 ##### Build ICU #####
-export REPO_ROOT=$(pwd)
 curl -L -o icu4c-src.zip "$ICU_SRC_URL"
 unzip -q icu4c-src.zip
 cd icu/source
@@ -25,7 +24,7 @@ dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureI
 export CXXFLAGS="-std=c++11"
 export LDFLAGS="-headerpad_max_install_names"
 export MACOSX_DEPLOYMENT_TARGET=10.9
-export ICUDIR=$REPO_ROOT/thirdparty/icu
+export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 ./runConfigureICU MacOSX --prefix="$ICUDIR"
 make -j $(sysctl -n hw.logicalcpu)
 make install
@@ -33,7 +32,7 @@ make install
 
 ##### Build iKnow engine #####
 export IKNOWPLAT=macx64
-cd "$REPO_ROOT"
+cd "$TRAVIS_BUILD_DIR"
 make -j $(sysctl -n hw.logicalcpu)
 
 
