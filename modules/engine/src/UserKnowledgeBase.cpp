@@ -1,16 +1,6 @@
 #include "UserKnowledgeBase.h"
 #include "SharedMemoryKnowledgebase.h"
 
-// Borrow KB CSV structures from the language compiler
-#include "iKnow_KB_Metadata.h"
-#include "iKnow_KB_Acronym.h"
-#include "iKnow_KB_Regex.h"
-#include "iKnow_KB_Filter.h"
-#include "iKnow_KB_Label.h"
-#include "iKnow_KB_Lexrep.h"
-#include "iKnow_KB_PreprocessFilter.h"
-#include "iKnow_KB_Rule.h"
-
 using namespace iknow::csvdata;
 
 static const size_t kRawSize = 480000;
