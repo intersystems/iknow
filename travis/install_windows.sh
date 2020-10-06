@@ -12,7 +12,7 @@ choco install visualstudio2019buildtools --limit-output --package-parameters "--
 
 # buildcache
 wget -nv https://github.com/mbitsnbites/buildcache/releases/latest/download/buildcache-win-msvc.zip
-unzip -qj buildcache-win-msvc.zip
+unzip -qj buildcache-win-msvc.zip -d "$HOME"
 
 # Python
 choco install nuget.commandline --limit-output

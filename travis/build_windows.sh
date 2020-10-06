@@ -34,7 +34,7 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
     -p:ForceImportBeforeCppTargets="$(pwd)/EnableBuildCache.props" \
     -p:TrackFileAccess=false \
     -p:CLToolExe=buildcache.exe \
-    -p:CLToolPath="$TRAVIS_BUILD_DIR"
+    -p:CLToolPath="$HOME"
 
 
 ##### Build iknowpy wheels #####
@@ -45,4 +45,4 @@ done
 
 
 ##### Report cache statistics #####
-"$TRAVIS_BUILD_DIR/buildcache.exe" -s
+"$HOME/buildcache.exe" -s
