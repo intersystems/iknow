@@ -5,10 +5,10 @@ set -x
 # International Components for Unicode
 if [ "$TRAVIS_OS_NAME" = windows ]; then
   # URL to .zip pre-built release of ICU for Windows x86_64
-  export ICU_WIN_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip
+  export ICU_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip
 else
   # URL to .zip source release of ICU
-  export ICU_SRC_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
+  export ICU_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
 fi
 
 # Python versions

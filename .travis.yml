@@ -3,7 +3,9 @@ language: cpp
 env:
   global:
     # Docker run command with arguments common to all manylinux builds
-    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_SRC_URL -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+    # directory where ICU is installed on host
+    - ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 
 before_install: . travis/dependencies.sh
 
@@ -18,6 +20,7 @@ jobs:
       services: docker
       cache:
         directories:
+          - $ICUDIR
           - $HOME/ccache
           - $HOME/pipcache  # pip cache for container
           - $HOME/.cache/pip  # pip cache for host
@@ -31,6 +34,7 @@ jobs:
       services: docker
       cache:
         directories:
+          - $ICUDIR
           - $HOME/ccache
           - $HOME/pipcache
           - $HOME/.cache/pip
@@ -44,6 +48,7 @@ jobs:
       services: docker
       cache:
         directories:
+          - $ICUDIR
           - $HOME/ccache
           - $HOME/pipcache
           - $HOME/.cache/pip
@@ -62,6 +67,7 @@ jobs:
         PYINSTALL_DIR="$HOME/.pyenv/versions"
       cache:
         directories:
+          - $ICUDIR
           - $CCACHE_DIR
           - $PIP_CACHE_DIR
           - $PYINSTALL_DIR
@@ -79,6 +85,7 @@ jobs:
         PYINSTALL_DIR="$HOME/python"
       cache:
         directories:
+          - $ICUDIR
           - $BUILDCACHE_DIR
           - $PIP_CACHE_DIR
           - $PYINSTALL_DIR

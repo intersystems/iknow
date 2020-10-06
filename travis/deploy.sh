@@ -39,7 +39,6 @@ if [[ "$TRAVIS_BRANCH" == "master" ]] && \
     [ -n "${PYPI_TOKEN+x}" ] && [ -n "${TESTPYPI_TOKEN+x}" ] && \
     git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null
 then
-  "$PYTHON" -m pip install --user twine --no-warn-script-location
   if [ "$TRAVIS_OS_NAME" = linux ]; then
     WHEELS=modules/iknowpy/wheelhouse/iknowpy-*manylinux*.whl
     PYTHON=python3
@@ -51,6 +50,7 @@ then
       PYTHON=python$(echo "${PYVERSIONS##* }" | awk -F '.' '{print $1"."$2}')
     fi
   fi
+  "$PYTHON" -m pip install --user twine --no-warn-script-location
   if grep ".dev[0-9][0-9]*'" "modules/iknowpy/iknowpy/version.py"; then
     export TWINE_REPOSITORY=testpypi
     { set +x; } 2>/dev/null  # don't save token to build log

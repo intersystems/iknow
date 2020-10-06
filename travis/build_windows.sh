@@ -7,7 +7,8 @@
 # Usage: travis/build_windows.sh
 #
 # Required Environment Variables:
-# - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+# - ICU_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+# - ICUDIR is the directory to install ICU
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
 # - PYINSTALL_DIR is the directory where Python instances are installed
 #
@@ -18,11 +19,15 @@
 set -euxo pipefail
 
 
-##### Install ICU #####
-wget -nv -O icu4c.zip "$ICU_WIN_URL"
-export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
-mkdir -p "$ICUDIR"
-unzip -q icu4c.zip -d "$ICUDIR"
+##### Install ICU if it's not cached #####
+if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
+  rm -rf "$ICUDIR"
+  wget -nv -O icu4c.zip "$ICU_URL"
+  export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
+  mkdir -p "$ICUDIR"
+  unzip -q icu4c.zip -d "$ICUDIR"
+  echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
+fi
 
 
 ##### Build iKnow engine #####

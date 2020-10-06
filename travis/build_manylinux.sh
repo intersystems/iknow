@@ -8,7 +8,7 @@
 #
 # Required Environment Variables:
 # - PIP_CACHE_DIR is the location that pip caches files
-# - ICU_SRC_URL is the URL to a .zip source release of ICU
+# - ICU_URL is the URL to a .zip source release of ICU
 
 set -euxo pipefail
 
@@ -38,17 +38,21 @@ ln -s /usr/bin/ccache /opt/ccache/g++
 export PATH="/opt/ccache:$PATH"
 
 
-##### Build ICU #####
-curl -L -o icu4c-src.zip "$ICU_SRC_URL"
-unzip -q icu4c-src.zip
-cd icu/source
-
-dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
-export CXXFLAGS="-std=c++11"
+##### Build ICU if it's not cached #####
 export ICUDIR=/iknow/thirdparty/icu
-PYTHON=/opt/python/cp39-cp39/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
-gmake -j $(nproc)
-gmake install
+if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
+  rm -rf "$ICUDIR"
+  curl -L -o icu4c-src.zip "$ICU_URL"
+  unzip -q icu4c-src.zip
+  cd icu/source
+
+  dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
+  export CXXFLAGS="-std=c++11"
+  PYTHON=/opt/python/cp39-cp39/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
+  gmake -j $(nproc)
+  gmake install
+  echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
+fi
 
 
 ##### Build iKnow engine #####

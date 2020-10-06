@@ -13,7 +13,7 @@ set -euxo pipefail
 choco install visualstudio2019buildtools --limit-output --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --quiet"
 
 # buildcache
-wget -nv https://github.com/mbitsnbites/buildcache/releases/latest/download/buildcache-win-msvc.zip
+wget -nv "$BUILDCACHE_URL"
 unzip -qj buildcache-win-msvc.zip -d "$HOME"
 
 # Python
