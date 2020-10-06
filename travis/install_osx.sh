@@ -4,6 +4,7 @@
 #
 # Required environment variables:
 # - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
+# - PYVERSIONS is a space-delimited string of Python versions to install
 # - PYINSTALL_DIR is the location that Python installations are installed and
 #   cached
 
@@ -60,7 +61,6 @@ brew install dos2unix ccache
 # way, we add one Python installation to the cache during every run until all
 # installations are in the cache, all while keeping a reasonable runtime before
 # all installations are in the cache.
-PYVERSIONS="3.5.9 3.6.11 3.7.8 3.8.5 3.9.0b5"
 
 # print list of Python versions available for installing using pyenv
 pyenv install --list | paste -s -d '\0' -

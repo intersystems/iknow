@@ -17,12 +17,14 @@
 # while "0.0.10" is not.
 #
 # Required Environment Variables:
-# - PYTHON is the Python instance used to deploy the wheels
 # - TRAVIS_OS_NAME is the name of the platform (linux, osx, windows)
 # - TRAVIS_BRANCH is the branch for which the build is occurring
 # - TRAVIS_PULL_REQUEST is the pull request number for current build, or false
 #   if it's not a pull request
 # - TRAVIS_COMMIT is the commit hash for current build
+# - PYVERSIONS (windows and osx only) is the space-delimited Python versions
+#   present, ordered old to new
+# - PYINSTALL_DIR (windows only) is location Python is installed
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI. If unset,
@@ -38,14 +40,17 @@ if [[ "$TRAVIS_BRANCH" == "master" ]] && \
     git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null
 then
   "$PYTHON" -m pip install --user twine --no-warn-script-location
-  case "$TRAVIS_OS_NAME" in
-    linux)
-      WHEELS=modules/iknowpy/wheelhouse/iknowpy-*manylinux*.whl
-      ;;
-    *)
-      WHEELS=modules/iknowpy/dist/iknowpy-*.whl
-      ;;
-  esac
+  if [ "$TRAVIS_OS_NAME" = linux ]; then
+    WHEELS=modules/iknowpy/wheelhouse/iknowpy-*manylinux*.whl
+    PYTHON=python3
+  else
+    WHEELS=modules/iknowpy/dist/iknowpy-*.whl
+    if [ "$TRAVIS_OS_NAME" = windows ]; then
+      PYTHON="$PYINSTALL_DIR/python.${PYVERSIONS##* }/tools/python.exe"
+    else  # osx
+      PYTHON=python$(echo "${PYVERSIONS##* }" | awk -F '.' '{print $1"."$2}')
+    fi
+  fi
   if grep ".dev[0-9][0-9]*'" "modules/iknowpy/iknowpy/version.py"; then
     export TWINE_REPOSITORY=testpypi
     { set +x; } 2>/dev/null  # don't save token to build log

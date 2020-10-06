@@ -3,6 +3,8 @@
 # Install build dependencies on Windows
 #
 # Required Environment Variables:
+# - PYVERSIONS is a space-delimited string of Python versions to install with
+#   nuget
 # - PYINSTALL_DIR is the directory where Python instances are installed
 
 set -euxo pipefail
@@ -16,7 +18,6 @@ unzip -qj buildcache-win-msvc.zip -d "$HOME"
 
 # Python
 choco install nuget.commandline --limit-output
-PYVERSIONS="3.5.4 3.6.8 3.7.9 3.8.6 3.9.0-rc2"
 if [ -d "$PYINSTALL_DIR" ]; then
   # delete unused Python versions from cache
   cd "$PYINSTALL_DIR"

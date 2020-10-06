@@ -2,12 +2,10 @@ language: cpp
 
 env:
   global:
-    # URL to .zip source release of ICU
-    - ICU_SRC_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
-    # URL to .zip pre-built release of ICU for Windows x86_64
-    - ICU_WIN_URL=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip
     # Docker run command with arguments common to all manylinux builds
     - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_SRC_URL -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+
+before_install: . travis/dependencies.sh
 
 jobs:
   include:
@@ -25,7 +23,7 @@ jobs:
           - $HOME/.cache/pip  # pip cache for host
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh &&
-        PYTHON=python3 travis/deploy.sh
+        travis/deploy.sh
     - name: "manylinux2014_ppc64le"
       os: linux
       dist: focal
@@ -38,7 +36,7 @@ jobs:
           - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh &&
-        PYTHON=python3 travis/deploy.sh
+        travis/deploy.sh
     - name: "manylinux2010_x86_64"
       os: linux
       dist: focal
@@ -51,7 +49,7 @@ jobs:
           - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh &&
-        PYTHON=python3 travis/deploy.sh
+        travis/deploy.sh
     - name: "Mac OS X 10.9 x86_64"
       os: osx
       osx_image: xcode11.7
@@ -67,11 +65,12 @@ jobs:
           - $CCACHE_DIR
           - $PIP_CACHE_DIR
           - $PYINSTALL_DIR
-      before_install: eval "$(pyenv init -)"
-      install: travis/install_osx.sh
+      install:
+        - eval "$(pyenv init -)"
+        - travis/install_osx.sh
       script: >-
         travis/build_osx.sh &&
-        PYTHON=python3.9 travis/deploy.sh
+        travis/deploy.sh
     - name: "Windows x86_64"
       os: windows
       env: >-
@@ -86,4 +85,4 @@ jobs:
       install: travis/install_windows.sh
       script: >-
         travis/build_windows.sh &&
-        PYTHON="$PYINSTALL_DIR/python.3.9.0-rc2/tools/python.exe" travis/deploy.sh
+        travis/deploy.sh

@@ -38,8 +38,9 @@ make -j $(sysctl -n hw.logicalcpu)
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-for PYTHON in python3.5 python3.6 python3.7 python3.8 python3.9; do
-  "$PYTHON" setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
+for PYVERSION in $PYVERSIONS; do
+  PYMAJORMINOR=$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
+  python$PYMAJORMINOR setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
 done
 
 
