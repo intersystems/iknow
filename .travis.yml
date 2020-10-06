@@ -77,11 +77,13 @@ jobs:
       env: >-
         BUILDCACHE_DIR="$TRAVIS_BUILD_DIR/buildcache"
         PIP_CACHE_DIR="$TRAVIS_BUILD_DIR/pipcache"
+        PYINSTALL_DIR="$HOME/python"
       cache:
         directories:
           - buildcache
           - pipcache
+          - $PYINSTALL_DIR
       install: travis/install_windows.sh
       script: >-
         travis/build_windows.sh &&
-        PYTHON="$TRAVIS_BUILD_DIR/python.3.9.0-rc2/tools/python.exe" travis/deploy.sh
+        PYTHON="$PYINSTALL_DIR/python.3.9.0-rc2/tools/python.exe" travis/deploy.sh

@@ -9,6 +9,7 @@
 # Required Environment Variables:
 # - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
+# - PYINSTALL_DIR is the directory where Python instances are installed
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
@@ -38,7 +39,7 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
 
 ##### Build iknowpy wheels #####
 cd iknowpy
-for PYTHON in "$TRAVIS_BUILD_DIR"/python.*/tools/python.exe; do
+for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
   "$PYTHON" setup.py bdist_wheel
 done
 
