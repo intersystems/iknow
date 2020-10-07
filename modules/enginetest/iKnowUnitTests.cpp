@@ -1,6 +1,7 @@
 ﻿#include "iKnowUnitTests.h"
 #include "engine.h"
 
+#include <cctype>
 #include <stdexcept>
 #include <iostream>
 #include <map>
@@ -49,7 +50,7 @@ void iKnowUnitTests::test6(const char* pMessage) {
 	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
 	string text_lowercased = engine.NormalizeText(text_source, "en");
 
-	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), isupper) > 0) // 
+	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), [](unsigned char c) { return isupper(c); } ) > 0) // 
 		throw std::runtime_error("NormalizeText does not work correctly");
 }
 
