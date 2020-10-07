@@ -7,13 +7,39 @@
 # - PYVERSIONS is a space-delimited string of Python versions to install
 # - PYINSTALL_DIR is the location that Python installations are installed and
 #   cached
+# - PYENV_TOOL_VERSION is the version of pyenv during the previous build
 # - pyinstall_fallback is a function for obtaining an official .pkg installer
 #   for Python
+# - CYTHON_VERSION is the version of Cython to install
+#
+# Optional environment variables:
+# - GITHUB_TOKEN is an OAUTH token for triggering a GitHub Actions workflow
 
 set -euxo pipefail
 
 # Homebrew packages
 brew install dos2unix ccache
+
+# If we're building a push to the master branch, check whether Travis has
+# updated pyenv. If so, trigger GitHub actions if we have permission to do so.
+PYENV_TOOL_VERSION_CURRENT="$(brew list --versions pyenv)"
+PYENV_TOOL_VERSION_CURRENT=${PYENV_TOOL_VERSION_CURRENT#"pyenv "}
+{ set +x; } 2>/dev/null
+if [ "$TRAVIS_BRANCH" = master ] && \
+    [ "$TRAVIS_PULL_REQUEST" == false ] && \
+    [ "$PYENV_TOOL_VERSION_CURRENT" != "$PYENV_TOOL_VERSION" ] && \
+    [ -n "${GITHUB_TOKEN+x}" ]
+then
+  echo "pyenv was updated, triggering dependency-autoupdate"
+  curl -X POST \
+    -H "Accept: application/vnd.github.v3+json" \
+    -H "Authorization: token $GITHUB_TOKEN" \
+    https://api.github.com/repos/$TRAVIS_REPO_SLUG/actions/workflows/dependency-autoupdate.yml/dispatches \
+    -d "{\"ref\": \"master\", \"inputs\": {\"PYENV_TOOL_VERSION_CURRENT\": \"$PYENV_TOOL_VERSION_CURRENT\"}}"
+else
+  echo "not triggering dependency-autoupdate"
+fi
+set -x
 
 # Python
 # We must handle a performance tradeoff when handling the installation of
@@ -37,10 +63,6 @@ brew install dos2unix ccache
 # way, we add one Python installation to the cache during every run until all
 # installations are in the cache, all while keeping a reasonable runtime before
 # all installations are in the cache.
-
-# print list of Python versions available for installing using pyenv
-pyenv install --list | paste -s -d '\0' -
-
 if [ -d "$PYINSTALL_DIR" ]; then
   # delete unused Python versions from cache
   cd "$PYINSTALL_DIR"
@@ -83,12 +105,12 @@ pyenv global $PYENV_INSTALLED_VERSIONS
 # Python packages
 for PYTHON in $PYENV_INSTALLED_CMDS; do
   "$PYTHON" -m pip install -U pip
-  "$PYTHON" -m pip install -U cython setuptools wheel --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 for PYTHON in $PKG_INSTALLED_CMDS; do
   if ! [ -f get-pip.py ]; then
     curl -L -O https://bootstrap.pypa.io/get-pip.py
   fi
   "$PYTHON" get-pip.py
-  "$PYTHON" -m pip install -U cython setuptools wheel --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done

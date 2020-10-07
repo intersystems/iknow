@@ -3,7 +3,7 @@ language: cpp
 env:
   global:
     # Docker run command with arguments common to all manylinux builds
-    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -e CYTHON_VERSION -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
     # directory where ICU is installed on host
     - ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 

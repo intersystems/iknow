@@ -6,6 +6,7 @@
 # - PYVERSIONS is a space-delimited string of Python versions to install with
 #   nuget
 # - PYINSTALL_DIR is the directory where Python instances are installed
+# - CYTHON_VERSION is the version of Cython to install
 
 set -euxo pipefail
 
@@ -40,5 +41,5 @@ done
 # Python packages
 for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
   "$PYTHON" -m pip install -U pip
-  "$PYTHON" -m pip install -U cython setuptools wheel --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
