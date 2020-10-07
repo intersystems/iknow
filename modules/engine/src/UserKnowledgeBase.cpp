@@ -2,10 +2,6 @@
 #include "SharedMemoryKnowledgebase.h"
 
 using namespace iknow::csvdata;
-
-static const size_t kRawSize = 480000;
-
-using namespace iknow::csvdata;
 using namespace std;
 using iknow::base::IkStringEncoding;
 using iknow::base::String;
@@ -219,19 +215,23 @@ void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& trans
 	table = allocator.Insert(table_builder.Build(allocator));
 }
 
-unsigned char* data_buffer = NULL;
+static const size_t kRawSize = 48000;
+unsigned char* data_buffer(bool b_init)
+{
+	static unsigned char udct_memory[kRawSize]; // raw representation of user dictionary data, only allocated when used.
+
+	return (unsigned char*)(b_init ? memset(udct_memory, 0, sizeof udct_memory) : udct_memory);
+
+}
 unsigned char* iknow::shell::base_pointer = NULL;
 
 unsigned char* UserKnowledgeBase::generateRAW(bool IsCompiled)
 {
 	if (!IsDirty()) { // no need to regenerate
-		return data_buffer;
+		return data_buffer(false);
 	}
-	if (data_buffer != NULL) // if we need to regenerate the user dictionary data, clean up the previous buffer.
-		delete[] data_buffer;
 
-	data_buffer = new unsigned char[kRawSize];
-	iknow::shell::Raw raw(data_buffer, kRawSize);
+	iknow::shell::Raw raw(data_buffer(true), kRawSize);
 	iknow::shell::RawAllocator allocator(raw);
 
 	RawKBData* kb_data_ = allocator.Insert(RawKBData());
@@ -343,7 +343,7 @@ unsigned char* UserKnowledgeBase::generateRAW(bool IsCompiled)
 
 	kb_data_->hash = std::hash<decltype(GetHash())>()(GetHash());
 	m_IsDirty = false; // RAW reflects CSV state...
-	return data_buffer;
+	return data_buffer(false);
 }
 
 iknow::base::String UserKnowledgeBase::GetSpecialLabel(SpecialLabel label) {
