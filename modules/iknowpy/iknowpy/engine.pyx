@@ -172,3 +172,12 @@ cdef class iKnowEngine:
 			sentences_mod.append({'entities': entities_mod, 'sent_attributes': sent_attrs_mod, 'path': sentence.path,
 			                      'path_attributes': path_attrs_mod})
 		return {'sentences': sentences_mod, 'proximity': self.engine.m_index.proximity}
+
+	@cython.binding(False)
+	def load_dictionary(self, dictionary : __name__.UserDictionary) -> int:
+		for entry in dictionary.entries:
+			# TODO: input checking?
+			ret = self.engine.udct_addLabel(entry.string, entry.label)
+			if ret < 0:
+				return ret
+		return self.engine.udct_use(True)
