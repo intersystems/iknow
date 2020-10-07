@@ -7,34 +7,10 @@
 # - PYVERSIONS is a space-delimited string of Python versions to install
 # - PYINSTALL_DIR is the location that Python installations are installed and
 #   cached
+# - pyinstall_fallback is a function for obtaining an official .pkg installer
+#   for Python
 
 set -euxo pipefail
-
-# Given a Python version (MAJOR.MINOR only), print the URL for a compatible
-# official package installer. Return 1 if the version is not supported.
-pyinstall_fallback () {
-  case "$1" in
-    3.5)
-      echo https://www.python.org/ftp/python/3.5.4/python-3.5.4-macosx10.6.pkg
-      ;;
-    3.6)
-      echo https://www.python.org/ftp/python/3.6.8/python-3.6.8-macosx10.9.pkg
-      ;;
-    3.7)
-      echo https://www.python.org/ftp/python/3.7.9/python-3.7.9-macosx10.9.pkg
-      ;;
-    3.8)
-      echo https://www.python.org/ftp/python/3.8.6/python-3.8.6-macosx10.9.pkg
-      ;;
-    3.9)
-      echo https://www.python.org/ftp/python/3.9.0/python-3.9.0rc2-macosx10.9.pkg
-      ;;
-    *)
-      echo "Version $1 is not supported"
-      return 1
-      ;;
-  esac
-}
 
 # Homebrew packages
 brew install dos2unix ccache

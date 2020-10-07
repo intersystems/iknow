@@ -19,6 +19,33 @@ if [ "$TRAVIS_OS_NAME" = windows ]; then
 elif [ "$TRAVIS_OS_NAME" = osx ]; then
   # space-delimited Python versions to install with pyenv, old to new
   export PYVERSIONS="3.5.9 3.6.11 3.7.8 3.8.5 3.9.0b5"
+
+  # Given a Python version (MAJOR.MINOR only), print the URL for a compatible
+  # official package installer. Return 1 if the version is not supported.
+  pyinstall_fallback () {
+    case "$1" in
+      3.5)
+        echo https://www.python.org/ftp/python/3.5.4/python-3.5.4-macosx10.6.pkg
+        ;;
+      3.6)
+        echo https://www.python.org/ftp/python/3.6.8/python-3.6.8-macosx10.9.pkg
+        ;;
+      3.7)
+        echo https://www.python.org/ftp/python/3.7.9/python-3.7.9-macosx10.9.pkg
+        ;;
+      3.8)
+        echo https://www.python.org/ftp/python/3.8.6/python-3.8.6-macosx10.9.pkg
+        ;;
+      3.9)
+        echo https://www.python.org/ftp/python/3.9.0/python-3.9.0-macosx10.9.pkg
+        ;;
+      *)
+        echo "Version $1 is not supported"
+        return 1
+        ;;
+    esac
+  }
+  export -f pyinstall_fallback
 fi
 
 # buildcache
