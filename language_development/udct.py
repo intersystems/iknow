@@ -3,12 +3,19 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-import engine as iknowpy
+# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+# import engine as iknowpy
 # for "pip install iknowpy", next line will do, outcomment for local language development
-# import iknowpy
+import iknowpy
 
 engine = iknowpy.iKnowEngine()
+dict = iknowpy.UserDictionary()
+# dict.add_negation_term("w/o")
+dict.add_label("one concept", dict.CONCEPT)    # CONCEPT is a constant for "UDConcept"
+dict.add_label("some text", dict.MEASUREMENT)  # MEASUREMENT is a constant for "UDMeasurement"
+engine.load_dictionary(dict)
+engine.index("some text w/o one concept", "en")
+
 
 ret = engine.udct_addLabel('Literal (1)', 'UDNegation') # assign a UD label
 ret = engine.udct_addLabel('Literal (2)', 'Illegal Label') # returns -2 : label does not exist
