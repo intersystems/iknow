@@ -7,8 +7,10 @@
 # Usage: travis/build_windows.sh
 #
 # Required Environment Variables:
-# - ICU_WIN_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+# - ICU_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
+# - ICUDIR is the directory to install ICU
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
+# - PYINSTALL_DIR is the directory where Python instances are installed
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI
@@ -17,11 +19,15 @@
 set -euxo pipefail
 
 
-##### Install ICU #####
-wget -nv -O icu4c.zip "$ICU_WIN_URL"
-export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
-mkdir -p "$ICUDIR"
-unzip -q icu4c.zip -d "$ICUDIR"
+##### Install ICU if it's not cached #####
+if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
+  rm -rf "$ICUDIR"
+  wget -nv -O icu4c.zip "$ICU_URL"
+  export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
+  mkdir -p "$ICUDIR"
+  unzip -q icu4c.zip -d "$ICUDIR"
+  echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
+fi
 
 
 ##### Build iKnow engine #####
@@ -33,15 +39,15 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
     -p:ForceImportBeforeCppTargets="$(pwd)/EnableBuildCache.props" \
     -p:TrackFileAccess=false \
     -p:CLToolExe=buildcache.exe \
-    -p:CLToolPath="$TRAVIS_BUILD_DIR"
+    -p:CLToolPath="$HOME"
 
 
 ##### Build iknowpy wheels #####
 cd iknowpy
-for PYTHON in "$TRAVIS_BUILD_DIR"/python.*/tools/python.exe; do
+for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
   "$PYTHON" setup.py bdist_wheel
 done
 
 
 ##### Report cache statistics #####
-"$TRAVIS_BUILD_DIR/buildcache.exe" -s
+"$HOME/buildcache.exe" -s
