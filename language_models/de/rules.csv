@@ -3,542 +3,1582 @@
 /*============
 
 345;1;Punctuation;^DEPunctuation;rewriting mandatory label to a language-specific copy
+
+/*		345; aaa (bbb) ccc.
+
 346;1;CapitalInitial;^DECapitalInitial;rewriting mandatory label to a language-specific copy
+
+/*		346; Eins, Zwei.
+
 609;1;CapitalMixed;^DECapitalInitial;treat CapitalMixed in the same way as CapitalInitial
 
+/*		609; Die erste heute-Sendung.
 /* RELABEL USER DICTIONARY ITEMS        
 /*======================================
 
 350;1;UDNegation;+DENegation;
+
+/*		350.UD; Er verneinte dies auf der Stelle.
+
 348;1;UDPosSentiment;+DEPosSentiment+DEPosSentimentBegin;
+
+/*		348.UD; Erfolg haben kann jeder Mensch.
+
 349;1;UDNegSentiment;+DENegSentiment+DENegSentimentBegin;
+
+/*		349.UD; Aufgrund mehrerer Verstöße innerhalb der Probezeit hat die Behörde die Teilnahme an einem Aufbauseminar angeordnet.
+
 351;1;UDConcept;UDConcept+DECon;
+
+/*		351.UD; Ich blieb bei ihm, bis er abfuhr.
+
 352;1;UDRelation;UDRelation+DERel;
+
+/*		352.UD; Umso wichtiger ist das Nein zu neuen Belastungen.
+
 353;1;UDNonRelevant;NonRelevant;
 
+/*		353.UD; Der Patient ist ansprechbar, blass, kaltschweißig und offenbar unter starkem Alkoholeinfluss.
 /* DISAMBIGUATE THE WORD noch
 /* --------------------------
 /* noch is a negative conjunction after weder; detection of weder...noch with up to 8 elements in between them
 
 254;20;DEWeder|*{1,8}^DENoch|DENoch;DENegRel|*|DENegRel;
+
+/*		254; Zwischenwelten: Weder Krieg noch Frieden. Er kann weder die Dose aufmachen, noch kann er die NUSS öffnen. Das liegt weder an dem sprachgewaltigen Text des österreichischen Schriftstellers, noch an der soliden Inszenierung.
+
 262;20;DEWeder;DENegRel;default if no noch is found
+
+/*		262; Geschlechtsspezifische Unterschiede gab es weder im Bezug auf die Bereitschaft, einen Mahlzeitenersatz zu nutzen noch in der Applikationsdauer.
+
 648;20;DENicht:DEKein:DENegWord|*^DEKomma|DEKomma|DENoch|DERel:DERelAux;*|*|*|DENegRel|*;
+
+/*		648; Die Breite der Einrichtung für den vorderen Unterfahrschutz darf an keiner Stelle seitlich die Kotflügel der Räder der vordersten Achse überschreiten, noch darf sie auf keiner Seite um mehr als 100 mm kürzer sein.
+
 263;20;DENoch;DEAdv+DEAdvNonrelevant;
 
+/*		263; Es gibt noch zwei Probleme.
 /* OPERATIONS ON ADVERBS
 /* ---------------------
 
 318;30;DEAdvDegree|DEAdvTime;DEAdvTime|+Join;
+
+/*		318; die Gebäude im Hintergrund existieren größtenteils heute nicht mehr.
+
 425;30;DEAdvDegree|DEAdvTemp;DEAdvTemp|+Join;
+
+/*		425; fast immer.
+
 466;30;DEAdvDegree|DEAdvPlace;DEAdvPlace|+Join;
+
+/*		466; Ohne Informationstechnologie geht es heute aber fast nirgendwo mehr, auch nicht in den deutschen Schlüsselindustrien.
+
 479;30;DEAdvDegree|DEAdvManner;DEAdvManner|+Join;
+
+/*		479; Aber wir machen es auch sehr gern.
+
 316;30;DEAdvDegree|DEAdvDegree;DEAdvDegree|+Join;
+
+/*		316; Ganz besonders möchte ich mich bedanken.
+
 343;30;"mehr"|"als"|DENum;DEAdvDegree+DEAdv-DEAdj|Join|^DENum;
+
+/*		343; Mehr als zwei Stunden für ein Hauptgericht?
+
 344;30;"mehr"|"als"|^DENum;DEPrep-DEAdj|Join|*;
 
+/*		344; Du kannst mehr als du denkst.
 /* DISAMBIGUATE THROUGH CAPITALIZATION
 /* -----------------------------------
 /* im übrigen
 /* Note: These rules have to be higher than the rules that rewrite Conpart1 to Con.
 
 633;40;"im"|"übrigen"|DECon+DECapitalInitial;*|DEAttradj|*;
+
+/*		633; gleichen Lebens- und Wachstumschancen wie im übrigen Gebiet der Gemeinschaft verbessern würde.
+
 634;40;"im"|"übrigen";DEAdv+DEAdvNonrelevant|Join;
 
+/*		634; Deshalb wurde auf diesen Posten ja im übrigen Herr S. ernannt. Im übrigen halte ich die Bezeichnung Informationswirtschaft für zutreffender.
 /* other cases
 
 288;40;SBegin|DECapitalInitial;*|-DECapitalInitial;ignore capital at beginning of sentence
+
+/*		288; Ganz besonders möchte ich mich bedanken.
+
 224;40;^DEDoppelpunkt+^DELayout+^SBegin|DEConIfCap+DECapitalInitial;*|DECon;
+
+/*		224; Dank der Subvention gibt es nächsten Monat ein Fest. Regen, Regen regen Regen.
+
 416;40;^DEPunctuation+^DELayout+^SBegin|DEInf+DECapitalInitial;*|DECon;
+
+/*		416; Er hatte keine Bedenken.
+
 422;40;DEDoppelpunkt|DEInf|typeRelation;*|DECon|*;
+
+/*		422; Die Maxime der Nachrichtenformulierung lautet also: Schreiben fürs Sprechen fürs Verstehen.
+
 513;40;DEConpart1|DECapitalInitial;DECon|+Join;
+
+/*		513; Herr Kollege.
+
 514;40;DEConpart1;^DECon;
 
+/*		514; Die zwei Frauen waren gemeinsam.
 /* IDENTIFICATION OF PHRASES THAT INDICATE ORGANIZATIONAL UNITS
 
 610;40;DEOrgUnit|"für"|*typeConcept|DEKomma|*typeConcept|"und"|DECapitalInitial;^DECon|+Join|+Join|+Join|+Join|+Join|+Join;
+
+/*		610;	Mein nächster Punkt betrifft das Europäische Institut für Technologie, Forschung und Entwicklung und die Voraussetzungen dafür.
+
 611;40;DEOrgUnit|"für"|*typeConcept|"und"|*typeConcept;^DECon|+Join|+Join|+Join|+Join;
+
+/*		611;	Gleichzeitig wurde das Institut für Tiefenpsychologie und Psychotherapie gegründet.
+
 612;40;DEOrgUnit|"für"|*typeConcept;^DECon|+Join|+Join;
+
+/*		612;	der Internationalen Organisation für Migration.
+
 613;40;DEOrgUnit;^DECon;
 
+/*		613; Dessen Präsident und Vizepräsident haben ihre Ämter bereits niedergelegt, um den Weg für einen neuen Verein frei zu machen.
 /* ORDINAL NUMBERS
 /* ---------------
 
 40;40;DENumadj;DEAttradj;
 
+/*		40; Donnerstag, der 4. März.
 /* ETWAS, NICHTS, ALLES
 /* --------------------
 
 486;40;"etwas"|DEAdj:DEPredadj:DECon;DEAdv+DEAdvDegree|*;
+
+/*		486; Online-Brief etwas billiger als Standardpost.
+
 487;40;"etwas":"nichts":"alles"|DEAttradj:DECapitalInitial;DEBeginadj|^DECon;
+
+/*		487; Dann sitzt da plötzlich etwas Buntes im Geäst.
+
 492;40;"etwas"|DEVielWenig;DEBeginadj|DEAttradj;
 
+/*		492; Aus Sicht der Bürger aber geht es um etwas viel Grundsätzlicheres: um die allgemeinen Wertmaßstäbe einer Gesellschaft.
 /* (default = Subjpron + Objpron via lexreps)
 /* VIEL, WENIG
 /* -----------
 
 490;40;DEVielWenig|DECon;DEAttradj|*;
+
+/*		490; Im Gespräch wird viel Information weitergegeben.
+
 491;40;DEVielWenig|DEAttradj;DEAttradj|*;
 
+/*		491; Viel Gutes lässt sich über den Autor und das Buch sagen.
 /* KEINES, KEINER
 /* --------------
 /* Lexreps: keines der, keines dieser, keines
 
 540;40;"keines":"keiner"|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|*;
+
+/*		540; sie erkläre sich aus dem Umstand, dass der Buchbewertername keines bibliographischen Zusatzes bedürfe.
+
 541;40;"keiner"|DEVerbAdj|DEAttradj:DEGeoadj:DECapitalInitial:DECon;DEKein|DEAttradj|*;
 
+/*		541; Die Vollstreckung von Disziplinarmaßnahmen bedarf keiner erneuten Genehmigung.
 /* ABER
 /* ----
 
 551;40;DEKomma|"aber";*|DEAndOrBut;
+
+/*		551; Meines Wissens ist darunter keines, das direkt für Bergrinderrassen bestimmt ist, aber eine ganze Reihe davon kommt für Landwirte in Betracht...
+
 552;40;"aber"+^DEAndOrBut;DEAdvModality+DEAdv;
 
+/*		552; bis hin zu einer Perfektion, die wir aber sicherlich niemals erreichen werden.
 /* DEVerbteil: rules for words that have DEVerbteil and other labels
 /* -----------------------------------------------------------------
 
 112;40;DEVerbteil|DEKomma:DEDoppelpunkt:SEnd;DEVerbteil|*;
 
+/*		112; Was stellt es dar, dieses Gemälde? Er wies die Vorwuerfe zurueck: man habe Beweise vorgelegt. Sie zogen Argumente an den Haaren herbei.
 /* DISAMBIGUATE DEVerbAdj
 /* ----------------------
 
 123;40;SBegin|DEPrep|DEDer:DEDefart|DECon|DEVerbAdj;*|DEPrep|*|*|DERel;
+
+/*		123; In der Werkstatt produzierte man Trinkgläser. Auf dem Schiff befreiten Polizisten die Geiseln.
+
 139;40;SBegin|DEVerbAdj;*|DEAttradj;
+
+/*		139; Erneuerte Versuche hatten kein Resultat.
+
 508;40;DEVerbAdj|DEKomma|"dass";DERel|*|DEConj;
+
+/*		508; Die anderen Gäste waren so begeistert, dass der damalige Hoteldirektor beschloss, ein Markenzeichen daraus zu machen.
+
 192;40;DEDer|DEPrep|DECon|DEVerbAdj;*|DEAdj|DECon|DEAttradj;
+
+/*		192; Der von Rubens porträtierte Mann ist weiter unbekannt.
+
 125;40;DEPrep|DEDer:DEDefart|DECon|DEVerbAdj|DECon;DEPrep|*|DECon|DEAttradj|DECon;
+
+/*		125; Nach der von der Theatergesellschaft organisierten Vorstellung konnte man mit den Schauspielern reden. Dem Landesgesundheitsamt wurden 16.700 durch das Virus verursachte Infektionen gemeldet.
+
 128;40;DEPrep|DEEiner|DEVerbAdj;DEPrep|*|DEAttradj;
+
+/*		128; Die Geschichte über einer fingierten Reise hatte viel Erfolg.
+
 141;40;DEPrep|DEAdv|DEVerbAdj;DEPrep|DEAdv|DEAttradj;
+
+/*		141; Die Korrespondenz zwischen damals respektierten Personen wurde später herausgegeben.
+
 145;40;DEPrep|DEZeit|DEVerbAdj;DEPrep|DEAttradj|DEAttradj;
+
+/*		145; Die seit Ende Dezember verwendeten Formulare sind undeutlich.
+
 506;40;DEEiner:DEEines|DEPrep|DECon|DEVerbAdj;DEGenitiv|DEAttradj|DEAttradj|DEAttradj;
+
+/*		506; Möglicherweise könnte eine schlechtere Beta-Zellkompensation bei einer durch Gewichtszunahme bedingten Zunahme der Insulinresistenz das höhere Risiko von Frauen für eine Diabetesmanifestation bei Adipositas erklären.
+
 507;40;DEEiner:DEEines|DEPrep|typeConcept|typeConcept|DEVerbAdj;DEGenitiv|DEAttradj|DEAttradj|DEAttradj|DEAttradj;
+
+/*		507; bei den akuten Leukämien Defekte der Zellzyklusregulation zu einer gegenüber gesunden Zellen beschleunigten Zellteilung führen.
+
 14;40;DEDefart:DEIndefart|DEVerbAdj;*|DEAttradj;
+
+/*		14; Wie schnell findet ihr die versteckten Eier? Gibt es eine vereinfachte Fassung?
+
 121;40;DEDefart|DEPredadj|DEVerbAdj;DEDefart|DEPredadj|DEAttradj;
+
+/*		121; Die zweifach vermietete Wohnung war Gegenstand des Prozesses.
+
 135;40;DEDefart:DEIndefart|DEAdv|DEVerbAdj|DECon;*|DEAdv|DEAttradj|DECon;
+
+/*		135; Die damals produzierten Klaviere stehen jetzt im Museum. Eine ebenfalls vermummte Frau kam näher.
+
 146;40;DEDefart:DEIndefart|DEZeit|DEVerbAdj|DECon;*|DEAttradj|DEAttradj|DECon;
+
+/*		146; Die Ende Februar bestellten Fotos sind immer noch nicht geliefert worden. Die Polizei spricht mit einem Ende März verhafteten Mann.
+
 18;40;DEPrepart:DEGenitiv:DEEiner:DEDer|DEVerbAdj;*|DEAttradj;
+
+/*		18; Die Hälfte meiner digitalisierten Bilder ist zu dunkel. ich bin begeistert für Jeans einer bestimmten Marke. Es handelt sich um die Beschützung der bedrohten Tierarten.
+
 140;40;DEPosspron|DEVerbAdj;DEPosspron|DEAttradj;
+
+/*		140; Er wollte seine beschlagnahmten Sachen zurück.
+
 122;40;DEPredadj|DEVerbAdj|DECon;DEPredadj|DEAttradj|DECon;
+
+/*		122; In Deutschland gibt es tariflich gewährte Urlaubsgelder.
+
 103;40;DEPrep|DEVerbAdj|DECon;DEPrep|DEAttradj|DECon;
+
+/*		103; Für beschädigte Wertsachen wird nicht gewährt.
+
 133;40;DEPrep|DEVerbAdj|DEPrep;DEPrep|DECon|DEPrep;
+
+/*		133; Ich habe den Urlaub bei Bekannten in Italien verbracht.
+
 131;40;DENum|DEVerbAdj|DECon;DENum|DEAttradj|DECon;
+
+/*		131; Die drei inhaftierten Taschendiebe sind schon wieder frei.
+
 132;40;DEKein|DEVerbAdj;DEKein|DEAttradj;
+
+/*		132; Von den Dieben gibt es noch keine heiße Spur.
+
 138;40;DEVerbAdj|DERelCon;DEAttradj|DECon;
+
+/*		138; Er war an 3 versuchten Morden beteiligt.
+
 86;40;DEZu|DEVerbAdj;DEZu|DEAttradj;
+
+/*		86; In dem Gebiet kommt es oft zu bewaffneten Auseinandersetzungen.
+
 37;40;DEPrep|DENicht|DEVerbAdj|DECon;DEPrep|DENicht|DEAttradj|DECon;
+
+/*		37; Er greift auf nicht benötigte Kreditermächtigungen zurück.
+
 327;40;DEVerbAdj+DECapitalInitial;DECon;for substantivierte Adjektive
+
+/*		327; 'Institut für Menschenrechte fordert Wahlrecht für alle Behinderte'.
+
 417;40;DEDemonstrativ:DEAttradj:DEAttrpron|DEVerbAdj|DECon;*|DEAttradj|DECon;
+
+/*		417; Immer mehr Österreicher nehmen diese begünstigte Frühpension in Anspruch - vor allem Büroangestellte.
+
 493;40;DEVielWenig|DEVerbAdj|DECon;DEAttradj|DEAttradj|DECon;
+
+/*		493; In diesen versicherte der viel verehrte Bonner Professor seiner Unterstützung.
+
 645;40;DEVerbAdj|DERefl;DERel|*;don't wait until default rule for this case
 
+/*		645; Da beglückwünschte sich die Familie. Dabei etablierte sich diese Praxis erst seit einigen Jahrzehnten und auch nur in den reichen Industriestaaten.
 /* DEInfAttradj
 /* ------------
 
 226;40;SBegin|DEInfAttradj|DEObjpron;*|DERel|DEObjpron;imperative at the beginning of a sentence
+
+/*		226; Billigen Sie denn ein solches Unternehmen?
+
 227;40;DEInfAttradj+DECapitalInitial;DECon;
+
+/*		227; Die Freien Demokraten haben einen Vorschlag eingereicht.
+
 89;40;DEDefart:DEIndefart:DEPrepart:DEPrep|DEInfAttradj;*|DEAttradj;
+
+/*		89; Ein tramig schöner Traum hat die bangen Ahnungen tiefer in ihr gefoltertes Herz geschrieben. Einen heißen Sommer darf man dort nicht erwarten. Wir standen im stillen Raum und warteten. Ich bin aber sehr froh, dass ich auf meinen Dad gehört habe.
+
 93;40;DEPrep|DENicht|DEInfAttradj|DECon;DEPrep|DENicht|DEAttradj|DECon;
+
+/*		93; Es ist verboten, potenzielle Kunden mit nicht fertigen Produkten zu locken.
+
 271;40;DEGenitiv:DEDer|DEInfAttradj;^DEGenitiv|DEAttradj;
+
+/*		271; Ein nicht ausbezahlter Gewinnanteil wird beim Geschäftsinhaber auf einem Privatkonto des stillen Gesellschafters verbucht.
+
 500;40;DEEiner|DEInfAttradj;DEGenitiv+DEIndefart|DEAttradj;
 
+/*		500; Sie stehen in einer langen Tradition der Wissensvermittlung.
 /* DEInf
 /* -----
 
 50;40;DEEin:DEKein:DEPrepart|DEInf;*|DECon;
+
+/*		50; es bietet sich jetzt ein zusammengehen von politischen parteien an. er hatte keine bedenken. ich habe mich beim schwimmen gestoßen.
+
 73;40;DEDefart|DEInf|^DERelAux+^SEnd;DEDefart|DECon|*;
+
+/*		73; das ist eine folge von dem legalisieren von drogen.
+
 104;40;DENum|DEInf;DECon|DERel;
+
+/*		104; Zehn Mitglieder sind vor, acht sind gegen und zwei enthalten sich.
+
 325;40;"alle"|DEInf;DECon|DERel;
+
+/*		325; Alle schauen nach oben.
+
 221;40;DEPosspron+^DESubjpron|DEInf;DEPosspron|DECon;
 
+/*		221; Er verspricht seinen „lieben Mitarbeiterinnen und Mitarbeitern“ heute Vormittag grundlegende Veränderungen.
 /* DERelCon
 /* --------
 
 228;40;SBegin|DERelCon|DEObjpron;*|DERel|DEObjpron;
+
+/*		228; Träumen Sie auch davon?
+
 291;40;SBegin|DERelCon;*|DECon;
+
+/*		291; Erfolge und Misserfolge.
+
 229;40;DERelCon+DECapitalInitial;DECon;has to come after r138
+
+/*		229; Warum die Frau auf die Schienen fuhr, ist unklar.
+
 54;40;DERelCon|DERel:DEInf;DECon|*;
+
+/*		54; Warum die frau auf die schienen fuhr, ist unklar. wenn man die ziele erreichen will, braucht man mehr geld.
+
 56;40;DESubjpron|DERelCon;DESubjpron|DERel;
+
+/*		56; Ich suche ein gutes Wörterbuch.
+
 59;40;DEZu|DERelCon;DEZu|DERel;
+
+/*		59; Es ist wichtig, die Pflanzen zu pflegen.
+
 60;40;DERelCon|DESubjpron;DERel|DESubjpron;
+
+/*		60; Seit Jahren träume ich von einer Weltreise.
+
 62;40;SBegin|DEObjpron|DERelCon;*|DEObjpron|DERel;
+
+/*		62; Sie fluchten laut.
+
 65;40;DEIndefart:DEDefart:DEAttradj:DEPosspron:DEPrep:DEEin|DERelCon;*|DECon;
+
+/*		65; ich habe eine frage für sie. die ernte war sehr gut. ie berichteten von großen erfolgen im ausland. Seine fahrt hat zehn minuten gedauert. Auf fragen wird später geantwortet. wir haben in polen ein schloss und ein museum besucht.
+
 72;40;DENicht|DERelCon;DENicht|DERel;
+
+/*		72; Das ist eine Frage, die ich nicht mehr stelle.
+
 64;40;DERelCon|DERelCon;DECon|DERel;
+
+/*		64; Sie sollen bis zu 400 euro strafe zahlen.
+
 115;40;DECon|DERelCon;DECon|DERel;
+
+/*		115; Alle müssen Zinsen zahlen.
+
 169;40;DEPrep|DEDemonstrativ|DERelCon;DEPrep|DEDemonstrativ|DECon;
+
+/*		169; Welche regeln gelten für dieses unternehmen?
+
 68;40;DERelCon|DEIndefart;DERel|DEIndefart;
+
+/*		68; Von Begegnung zu Begegnung aber wuchs eine Gewissheit.
+
 74;40;DERelCon|DERefl;DERel|DERefl;
+
+/*		74; Die Delegierten sprachen sich dafür aus.
+
 81;40;DEPredadj|DERelCon;DEPredadj|DERel;
+
+/*		81; Wir werden es tarifvertraglich regeln, dass Mehrarbeit nur noch mit Freizeit ausgeglichen werden kann.
+
 120;40;DEAdv|DERelCon|DERelAux;DEAdv|DERel|DERelAux;
+
+/*		120; Aber man solle die Kommission doch erst einmal arbeiten lassen.
+
 142;40;DEZeit|DERelCon|DERelAux;DEZeit|DERel|DERelAux;
+
+/*		142; Er sagte, dass die Lieferung Ende April erfolgen wuerde.
+
 193;40;DERelAux|DERelCon|SEnd;DERelAux|DERel|*;
+
+/*		193; Der Täter konnte flüchten.
+
 494;40;DEVielWenig|DERelCon;DEBeginadj|DECon;
+
+/*		494; Die einst viel beschäftigte und beliebte TV-Moderatorin erlitt eine psychoreaktive Sprachblockade. WRONG: Im Krieg könne man nicht viel unternehmen, um die Essgewohnheiten entscheidend zu verändern.
+
 70;40;DERelCon;DERel;default
 
+/*		70; Er muss seine Bestellung von letzter Woch noch zahlen.
 /* DERelConMod
 /* -----------
 
 110;40;DEPrep:DEDefart:DEIndefart|DERelConMod;*|^DEAttradj;
+
+/*		110; Die Bilder erinnern mich an trübe Novembertage. Der Minister und die Delegierten haben den ganzen Vormittag miteinander geredet. Man hat einen verletzten Mann ins Krankenhaus gebracht.
+
 187;40;DECon|DEGenitiv|DERelConMod;^DECon|DEGenitiv|^DECon;note: Posspron gets overwritten, ^ is to keep CapitalInitial
+
+/*		187; Die Familie des Verurteilten hat sich beschwert.
+
 183;40;DEAttradj|DERelConMod;DEAttradj|^DECon;
+
+/*		183; In der 2. Runde gab es 16 Teilnehmer.
+
 181;40;DERelConMod|DERelAux:DEDefart:DEObjpron:DEDemonstrativ;DERel|*;
+
+/*		181; Die gestrige Ausgabe war mit "Sa, 18.03.1995" ueberschrieben, die korrekte Ueberschrift haette aber "Sa, 11.03.1995" lauten sollen. Die Kinder weisen die Vögel an. Der Richter verurteilte ihn wegen Landfriedensbruch. Sie verurteilten diese vermuteten Planungen.
+
 188;40;DESubjpron|DERelConMod;DESubjpron|DERel;
+
+/*		188; Er traute der Situation nicht.
+
 182;40;DERelConMod;^DECon;
 
+/*		182; Man sagt, dass Liebe blind ist.
 /* VIEL, WENIG, part 2
 /* -------------------
 
 495;40;DEVielWenig|DEPredadj;DEAdv+DEAdvDegree|^DEPredadj;
+
+/*		495; die Datenschutzbewegung ist viel stärker geworden.
+
 496;40;DEVielWenig;DEBeginadj+DEIndefpron;
 
+/*		496; Doch seit dem Beschluss ist viel passiert.
 /* DETECT GENITIVE ARTICLES AND PRONOUNS
 /* -------------------------------------
 
 413;40;SBegin|DEPosspron+DEGenitiv;*|DEPosspron;
+
+/*		413; Ihrer Beliebtheit und ihrer offenherzigen Art hatte er auch zu verdanken, dass sie über die Jahre auch weit über Bayern hinaus zum bekannten Fernsehgesicht wurde.
+
 414;40;^DEPrep+^DEZu+^DEPunctuation+^SBegin|DEPosspron+DEGenitiv;*|-DEPosspron;
+
+/*		414; Kann ein Einvernehmen nicht hergestellt werden, so benennen die Fraktionen die Mitglieder im Verhältnis ihrer Stärke.
+
 167;40;DECon|DEGenitiv|DECon:DENum;DECon|DEGenitiv|DECon;
+
+/*		167; Die Tochter seiner Schwester heißt Monika. Die Namen seiner 47 schwarzen Katzen kann er problemlos auflisten.
+
 175;40;DECon|DEGenitiv|DEAttradj|DECon;DECon|DEGenitiv|DEAttradj|DECon;
+
+/*		175; Mit Trauer hat er auf den Tod des ehemaligen Bundesministers reagiert.
+
 177;40;DENum|DEGenitiv|DECon;DECon|DEGenitiv|DECon;
+
+/*		177; Er ist mit drei seiner Kinder nach Griechenland gezogen.
+
 443;40;DECon|DEGenitiv|DECapitalInitial;DECon|DEGenitiv|DECon+DECapitalInitial;
+
+/*		443; die Kontrolle des Einzelnen findet dabei durch kollektiven Druck durch die Gruppe statt.
+
 189;40;DECon|DEDer;DECon|DEGenitiv;
+
+/*		189; Die Reform der universitären Ausbildungen hat große Folgen.
+
 191;40;DENum|DEDer:DEEiner:DEEines;DENum|DEGenitiv;
+
+/*		191; Sie erzielte 18 der 20 Punkte. Dies ist Teil 2 einer neuen Trilogie. Folge 130 eines langen Fortsetzungsromans ist meistens einfach langweilig.
+
 190;40;DEDer;DEDefart;
+
+/*		190; In der Vergangenheit.
+
 3;40;DECon|DEEiner|DECon;DECon|DEGenitiv|DECon;
+
+/*		3; Die Handtasche einer Frau enthält meistens viele nützliche Sachen.
+
 46;40;DECon|DEEines:DEEiner|DEAdv:DENicht|DECon:DEAttradj;DECon|DEGenitiv|*|*;
+
+/*		46; In Oberbayern sind die 65 Millionen Jahre alten Überreste eines fast 2m grossen Entenschnabeldinosauriers gefunden worden. Denn die Konsequenz einer zwar universalen und unantastbaren Menschenwürde, wäre nicht akzeptabel. Sie reagierte damit auf die Veroeffentlichung eines teilweise geheimen Berichtes. Es ist ein emissionsgünstiges Fahrzeug einer ganz großen Hubraumklasse.
+
 21;40;DECon|DEEiner:DEEines|DEAttradj:DEBeginadj:DEGeoadj;DECon|DEGenitiv|*;
+
+/*		21; Acht Mitglieder einer internationalen Fälscherbande wurden verhaftet. Spione sind Teil eines neuen globalen Kampfes. Wir haben die Familie einer französischen Kollegin kennengelernt.
+
 22;40;DECon|DEEines|DEPredadj;DECon|DEGenitiv|*;
 
+/*		22; Chinesische Spione bei Google sind Teil eines völlig neuen globalen Kampfes.
 /*  DETECT CONJUNCTIONS
 /*  -------------------
 
 554;40;"deren";+DEDefart;treat 'deren' like a Defart in order to detect it as a relative pronoun
+
+/*		554; Auf den Zusammenhang zwischen Kriminalität und deren medialer Darstellung einerseits und politischen Interventionen und damit verbundenen kulturellen Deutungsmustern andererseits haben Sie bereits vor Jahren eindrucksvoll hingewiesen.
+
 195;40;DEKomma|DEDefart|DEPrep:DEPart:DEConj:DENegRel:DENicht;DEKomma|DEConj+DERelconj|*;
+
+/*		195; Das Buch, das neben dem Telefon lag, ist verschwunden.
+
 543;40;DEKomma|DEDefart|DESubjpron:DEObjpron:DEDefart:DEBeginadj:DEEin:DEIndefart:DEKein:DEPosspron;*|DEConj+DERelconj|*;
+
+/*		543; Ich weiß, dass Sie sich der Verantwortung sehr gut bewusst sind, die wir alle im Hinblick auf die Probleme tragen. Peter, der angerufen hatte, kam zu spät.
+
 546;40;DEKomma+^DEHyphen|DEDefart|DEAdv:DEPredadj;*|DEConj+DERelconj|*;
+
+/*		546; Die meisten der rund 18.000 Menschen, die täglich über die Öresundbrücke pendeln, wohnen in Schweden und arbeiten in Dänemark.
+
 547;40;DEKomma|DEDefart|*DERel:DERelAux:DEZuInf:DEInf|DEKomma:DEAndOrBut:DEPunctuation;*|DEConj+DERelconj|*|*;
+
+/*		547; Es gibt noch eine weitere Form der Diskriminierung, die aufhören muss: Frauen dürfen nicht bestraft werden, weil sie länger leben.
+
 544;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|*DEInf:DERel:DERelAux+^DEZu|DEKomma:DEAndOrBut;*|*|DEConj+DERelconj|*|*|*;
+
+/*		544; Doch kann es hilfreiche Hormone produzieren, die Arterien schützen und den Blutzuckerspiegel kontrollieren können.
+
 548;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEPart|*DEInf:DERel:DERelAux+^DEZu|DEKomma:DEAndOrBut;*|*|DEConj+DERelconj|*|*|*|*;variant of 544
+
+/*		548; Jetzt sind erste Bilder der 23-Jährigen, die im vergangenen Oktober einen Werbevertrag unterschrieben hatte, erschienen.
+
 545;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|*DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*;
+
+/*		545; Was wir nicht akzeptieren können, sind schöne Titel oder Überschriften, die Ungleichgewichte in der Situation verschleiern.
+
 606;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEInf:DERel:DERelAux:DEPart+^DEZu|*DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*|*;
+
+/*		606; Diese Arbeitsmethode hat es uns auch ermöglicht, einen Sprung ins Ungewisse ohne wissenschaftliche und logische Grundlage und mit gewissen Widersprüchen im ursprünglichen Text zu vermeiden, die zur vollständigen Ablehnung des Vorschlags geführt hatten.
+
 607;40;^DERel+^DEAdv+^SBegin|DEKomma+^DEHyphen|DEDefart|*DECon:DEAttradj:DEPredadj:DEPrep:DEPrepart:DEDefart:DEIndefart:DEGenitiv|DEInf:DERel:DERelAux:DEPart+^DEZu|DEInf:DERel:DERelAux:DEPart+^DEZu|DEInf:DERel:DERelAux+^DEZu+^SEnd|SEnd;*|*|DEConj+DERelconj|*|*|*|*|*;
+
+/*		607; Das ist auch ein Ergebnis der Untersuchungen, die im Zusammenhang mit der Enquete-Kommission  durchgeführt worden sind.
+
 549;40;DEKomma+^DEHyphen|DEDefart|DEZu|^typeRelation;*|DEConj+DERelconj|*|*;
+
+/*		549; Sie kann ferner keine Änderungsanträge annehmen, die zu einer Überzahl von Vorschriften führt.
+
 550;40;DEKomma+^DEHyphen|DEDefart|DEKomma;*|DEConj+DERelconj|*;
+
+/*		550;  Wir sehen die klägliche Kooperationsunfähigkeit der Regierungen der Mitgliedstaaten, die, wie er richtig hervorhebt, sich gegenseitig Daten und Informationen vorenthalten.
+
 553;40;DEDefart+DEPosspron;-DEDefart;cleaning rule for 'deren'
 
+/*		553; Ein neuer Bereich der „quartären Medien“ umfasst das Feld der Kommunikation durch Computer, deren Anwendung nicht mehr in relativer Kürze erlernt werden kann und deren Beherrschung noch nicht ausreichend in der Bevölkerung verbreitet ist.
 /* CONJUNCTIONS
 /* ------------
 
 2;40;DEDefart|DERefl:DEDemonstrativ;DEConj+DERelconj|*;
+
+/*		2; Wie findet man ein Tier, das sich immer wieder versteckt? Peter ist der Mann, der all diese Häuser entworfen hat.
+
 222;40;DEPredadj|DEPredadj;DEPredadj|DEAdj;
+
+/*		222; Der Weg zur Regierungsbildung im Senat ist nun endgueltig frei.
+
 214;40;DEWie|DEPredadj;DEConj|DEAdj;
+
+/*		214; Er rechne ausserdem damit, dass er im Herbst das Mandat wie ueblich um ein Jahr verlaengern wird.
+
 212;40;DEDefart|DEConj;DEDefart|DEPrep;
+
+/*		212; Unbemerkt und unbehelligt von den seit Tagen dort wartenden Fotografen und Kameraleuten.
+
 488;40;DEKomma|DEPrep|DEDefart:DEDenen|DEDefart:DEDer;*|DEConj+DERelconj|Join|*;
+
+/*		488; Im Stadtparlament werden heute jene fünf Fragen beschlossen, über die die Wiener abstimmen werden.
+
 215;40;DEConj;DEConj;
 
+/*		215; Sie trinken einen Kaffee, während sie auf den Bus warten.
 /* LONGER CONCEPTS WITH ARTICLE + PREPOSITION
 /* ------------------------------------------
 
 211;40;DEDefart|DEPrep|DEObjpron;DEDefart|DEPrep|DECon;
+
+/*		211; Man hat die von ihm geschriebene Geschichte verfilmt.
+
 52;40;DEDefart|DEPrepart|DECon|DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DECon|DEAttradj;
+
+/*		52; Das am Donnerstag erreichte Steuerabkommen geht jetzt ins Parlament. Die am Mittwoch fertigen Güter müssen spätestens am Freitag abgeholt werden.
+
 180;40;DEDefart|DEPrep|DEDefart|DECon|DEAttradj:DEVerbAdj:DEInfAttradj;DEDefart|DEAttradj|DEAttradj|DECon|DEAttradj;
+
+/*		180; Sind die von der Post gewünschten kurzen Laufzeiten mit der Bahn zu realisieren? Die von den Arbeitgebern geforderte generelle Verlaengerung der Wochenarbeitszeit auf 39,5 Stunden im Westen lehnt die Gewerkschaftsseite ab. Die für die Zulassung nötigen klinischen Studien sind zeitaufwendig und teuer.
+
 134;40;DEDefart|DEPrep|DECon|DEVerbAdj:DEAttradj|DECon;DEDefart|DEAttradj|DECon|DEAttradj|DECon;
+
+/*		134; Er will die seit Jahren andauernde Diskussion um Alkohol beenden.
+
 194;40;DEDefart|DEPrep|DEAdv|DEAttradj|DECon;DEDefart|DEAttradj|DECon|DEAttradj|DECon;
+
+/*		194; Die bis dann geplanten Maßnahmen werden jetzt durchgeführt.
+
 136;40;DEDefart|DEPrep|DECon:DENum|DECon|DEVerbAdj|DECon;DEDefart|DEAttradj|DECon|DECon|DEAttradj|DECon;
+
+/*		136; Die in zwei Minuten bezifferten Resultate sind ermutigend.
+
 219;40;DEPrep|DEPrep|DECon|DEVerbAdj:DEAttradj|DECon;DEPrep|DECon|DECon|DEAttradj|DECon;
 
+/*		219; Soll für aus Leipzig importierte Bücher immer Einfuhrzoll bezahlt werden? Die Nachricht verbreitete sich schnell unter in Österreich lebenden Chinesen.
 /* OTHER LONGER CONCEPTS
 /* ---------------------
 
 301;40;DEIndefart|DEAdv|DEPredadj:DEAttradj;DEIndefart|DEAttradj|DEAttradj;
+
+/*		301; Sie fließen in einen möglichst einfach gehaltenen Vorschlag ein.
+
 426;40;DEIndefart:DEEin|DEAdv|DECon;DEIndefart|DEAttradj|DECon;
 
+/*		426; die offene dunkelblaue Wolljacke gibt den Blick frei auf einen fast kugelrunden Bauch.
 /* SEIN
 /* ----
 
 9;40;DESein|DEKomma:DEPunctuation:SEnd;DERel|*;
+
+/*		9; Das Zelt soll stark sein, winddicht und leicht. Ich möchte um sechs zu Hause sein.
+
 11;40;DEPart|DESein;DEPart|DERel;
+
+/*		11; Die Maschinen sollten eigentlich stillgelegt sein nach dem Winter.
+
 218;40;DEZu|DESein;DEZu|DERel;
+
+/*		218; Es scheint sehr schön zu sein und einem großen Publikum zu gefallen.
+
 420;40;DESein|DEPrep;DEPosspron|DEPrep;
+
+/*		420; einen Nachwuchs-Mafiosi, dem sein auf Rache schwörender toter Vater als Geist erscheint.
+
 419;40;DESein|typeRelation;DERel|*;
+
+/*		419; Ich gehe davon aus, dass die Zahl erschreckend hoch sein wird.
+
 418;40;DESein;DEPosspron;default for remaining cases
 
+/*		418; Er war bedroht, sein Amt zu verlieren.
 /* Connections with partial words
 /* ------------------------------
 
 562;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;
+
+/*		562; Es verfügt über eine verstellbare Aufhängung für Foto-, Video-, Nachtsicht- und Wärmebildkameras.
+
 559;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join|Join|Join|+Join;
+
+/*		559; Ökonomische Rationalität gebietet es, vorsichtigerweise Präventions-, Schutz- und Abwehrmaßnahmen zu ergreifen.
+
 555;40;DECon|"@connect@"|DEAndOrBut|DECon;^DECon|Join|Join|+Join;
+
+/*		555; Trotzdem ist der Stabilitäts- und Wachstumspakt ein Erfolg.
+
 563;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;
+
+/*		563; Als GEHEIM können auch wichtige Geschäfts-, Betriebs-, Erfindungs-, Steuer- oder sonstige private Geheimnisse oder Umstände des persönlichen Lebensbereichs eingestuft werden.
+
 564;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|+Join|Join|Join|+Join;
+
+/*		564; hier vor allem rasche Erschöpfbarkeit, Appetit-, Schlaf- und psychische Störungen, sowie interaktionell ein typisches depressives Verhalten.
+
 556;40;DECon|"@connect@"|DEAndOrBut|DEAttradj:DEGeoadj;^DEAttradj|Join|Join|+Join;
+
+/*		556; Die Wertvorstellungen der mittel- und osteuropäischen Länder oder anderer kleinerer Mitgliedstaaten.
+
 565;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|Join|Join|Join|+Join|Join|Join|+Join;
+
+/*		565; Aber Modellflug herkömmlicher Art war gestern, jetzt kommen Quadro-, Hexa-, Okto- oder einfach Minikopter.
+
 566;40;DECon|"@connect@"|DEKomma|DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|+Join|Join|Join|+Join;
+
+/*		566; Aber Modellflug herkömmlicher Art war gestern, jetzt kommen Quadro-, Hexa- oder einfach Minikopter.
+
 561;40;DECon|"@connect@"|DEAndOrBut|DEPredadj;^DEPredadj|Join|Join|+Join;
+
+/*		561; in ihrem bereits frist- und formgerecht beim Präsidenten des Deutschen Bundestages.
+
 557;40;DECon|"@connect@"|DEAndOrBut|DERel:DEInf;DERel|Join|Join|+Join;
+
+/*		557; Wir sehen wie sie auf unseren Bürgersteigen auf- und abgehen.
+
 560;40;DECon|"@connect@"|DEAndOrBut|DEZuInf;DEZuInf|Join|Join|+Join;
+
+/*		560; Es ist nicht sehr sinnvoll, lebende Tiere zur Schlachtung aus- oder einzuführen.
+
 558;40;DECon|"@connect@";^DECon|Join;to avoid that @connect@ disturbs other rules
 
+/*		558; Es gibt ein Risiko von Lohn- oder von Sozialdumping.
 /* RULES RELATED TO DEPredadj
 /* --------------------------
 
 96;40;DEPrep|DEIndefart:DEEiner|DEPredadj|DEVerbAdj;DEPrep|*|DEPredadj|DEAttradj;
+
+/*		96; Ich habe auf einem scheinbar blockierten kleinen Landweg im Stau gestanden. Es wird von einer sozial motivierten neuen Regel gesprochen.
+
 158;40;DESo|DEPredadj;DESo|DECon;
+
+/*		158; Sie kamen so spät, dass sie nicht mehr mitmachen konnten.
+
 161;40;DEZu|DEPredadj|DEAttradj;DEPrep|DEAttradj|DEAttradj;
+
+/*		161; Ich fürchte, die Diskussion wird zu ethisch unverantwortlichen Vorschlägen führen.
+
 160;40;DENicht|DEZu|DEPredadj;DEBeginadj+DENegation|DEAdj|DEAdj;
+
+/*		160; Wirst du dich nicht zu einsam fühlen?
+
 159;40;DEZu|DEPredadj;DEBeginadj|DEAdj;
+
+/*		159; Ich würde mich dort zu einsam fühlen.
+
 155;40;DEPredadj|DENicht;DEAdv|DENicht;
+
+/*		155; Der Konsens scheint zu sein, dass es einfach nicht mehr umsetzbar ist.
+
 35;40;DENicht|DEPredadj;DEBeginadj+DENegation|DEAdj;
+
+/*		35; Eine Schnecke ist nicht schnell.
+
 156;40;DEPredadj|DEDefart:DEIndefart;DEAdv|*;
+
+/*		156; Ich habe explizit den Autor erwähnt. Sie hat ehrenamtlich einem Behinderten geholfen.
+
 82;40;DECon|DEPredadj|DERel:DEPart;DECon|DERel|DERel;
+
+/*		82; Ich hoffe, dass Thomas vernünftig reagiert. Ist das Problem deutlich geworden?
+
 49;40;DECon|DEPredadj;DECon|DEBeginadj;
+
+/*		49; Ist Fynn wach?
+
 439;40;DEBeginadj|DEPredadj|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;
 
+/*		439; Für alle niedrig gelegenen Skigebiete Deutschlands war dieser Winter hervorragend.
 /* SO
 /* --
 
 83;40;DESo|DEBeginadj;DESo|DEAdj;
+
+/*		83; Die Schuld wird so nicht größer.
+
 84;40;DESo|DERel:DERelAux;DEAdv|DERel;
+
+/*		84; So wurde es früher in den USA gehandhabt. Wir wollen es so lassen.
+
 85;40;DESo|DEPart;DEAdv|DEPart;
+
+/*		85; Das Programm soll so umgestaltet werden, dass es erst um neun anfängt.
+
 608;40;DEKomma|DESo|DECon+DECapitalInitial;*|DEAndOrBut|*;
 
+/*		608; "Es ist sehr schön geworden", so Marie-Jeanne.
 /* DA
 /* --
 
 644;40;SBegin:DEDoppelpunkt|"da"|^typeRelation;*|DEConj|*;
+
+/*		644; Da brüllende und unruhige Kinder oft einen aufgeblähten Bauch haben, vermuteten Ärzte früher darin den Grund für das Schreien. Das ist allerdings nur die halbe Wahrheit: Da der Euro zuletzt gegenüber dem Dollar - auf dessen Basis Gold bewertet wird - stark an Wert verloren hat, fällt der Preisrückgang in der europäischen Gemeinschaftswährung geringer aus.
+
 470;40;SBegin:DEDoppelpunkt|"da"|DEPrep:DEPrepart:DERefl;*|DEConj|*;
 
+/*		470; Da zum Zeitpunkt der Tat das besagte Gesetz noch nicht gegolten habe, sei die nachträgliche Anwendung unzulässig.
 /* DEFAULTS
 /* --------
 
 510;40;"meinen"+DEAttradj;DEPosspron;
+
+/*		510; Von Herzen bedanke ich mich bei meinen unersetzlichen Eltern.
+
 201;40;DEInfAttradj;DERel;
+
+/*		201; Eimer leeren.
+
 202;40;DEVerbAdj;DERel;
+
+/*		202; Der Klub degradierte.
+
 205;40;DEInf;DERel;
+
+/*		205; Modernisieren.
+
 620;40;DEZu|^DERel+^DERelAux;DEPrep|*;zu->prep when no infinitive follows
+
+/*		620; Hier dürfte allerdings auch der bis zum Jahresende ausnehmend milde Winter zu dieser Entwicklung beigetragen haben.
+
 621;40;DEPrep|SEnd;DEVerbteil|*;
+
+/*		621; Sie hörten nicht zu.
+
 5;40;DEIndefart;DENonRelevant;
+
+/*		5; Siehst du einen Vogel?
+
 7;40;DEDefart;DENonRelevant;
+
+/*		7; Wer hat den Ball?
+
 113;40;DEPredadj;DEPredadj;
+
+/*		113; Das Produkt ist detektierbar.
+
 641;40;DEPrep|DEAdj|DEAttradj:DECon;*|^DEAttradj|*;
+
+/*		641; Auch unter neuer Führung sei es nicht gelungen, nachhaltig das Ruder herumzureißen.
+
 415;40;DEDemonstrativ|typeRelation;DESubjpron+DEObjpron|*;
+
+/*		415; All diese sollen verschwinden.
+
 171;40;DEDemonstrativ|DEKomma:DEDoppelpunkt:DENonRelevant;DESubjpron|*;
+
+/*		171; Er sagte das man über diese, wie er sagte, "wichtigste Aufgabe seit der Gründung des Vereins" diskutieren sollte. Mit seinen Kollegen hat er basierend auf langjährigen Messdaten eine Klimaprognose für die deutschen Wintersportgebiete der Mittelgebirge aufgestellt - und hat eine schlechte Nachricht für diese: Das Schneevergnügen dort wird ihrer Berechnung zufolge wohl nur noch wenige Jahrzehnte währen.
+
 646;40;DEDemonstrativ;DENonRelevant;reduces the number of labels to take into account in phase 70
+
+/*		646; Gewaltakte auf beiden Seiten bringen den für eine solche Lösung notwendigen politischen Prozess nicht voran.
+
 497;40;DEPosspron;DEPosspron;remove conflicting Genitiv label
+
+/*		497; Er wollte seine beschlagnahmten Sachen zurück.
+
 223;40;DEKomma;+DEPunctuation;
+
+/*		223; in den Hochseilgarten , auf verspannten Drähten balancierend.
+
 238;40;DEDoppelpunkt;+DEPunctuation;
+
+/*		238; Name: Markus.
+
 225;40;DEConIfCap;-DEConIfCap;
+
+/*		225; Er hat laut gerufen.
+
 342;40;DEVerbteil+DEAdv;DEVerbteil;for Adv+Verbteil
+
+/*		342; Wir bleiben beieinander bis in alle Ewigkeit.
+
 512;40;"*"|DENum;DERel|^DENum;
 
+/*		512; 6 * 4 = 24;
 /* RULES FOR NEGATION, part 1
 /*===========================
 /* Assign negation attribute
 
 33;40;DENicht|DERel;DERel+DENegation|DERel;
+
+/*		33; Wenn sie nicht kommt, wird das Meeting verschoben.
+
 32;40;DENicht|DECon;DEBeginadj+DENegation|DECon;
+
+/*		32; Er meinte, nicht Familien, sondern Jugendgruppen sollten eingeladen werden.
+
 34;40;DENicht|DEAttradj;DEBeginadj+DENegation|DEAttradj;
+
+/*		34; Wir werden nicht gezahlte Rechnungen um 5 % erhöhen.
+
 36;40;DENicht|DEAdj;DEBeginadj+DENegation|DEAdj;
 
+/*		36; Dieses Auto ist nicht schöner als das andere.
 /* Give adverbs their lexrep-type
 /* ------------------------------
 
 296;50;DEAdvDirection+^DEAdv;-DEAdvDirection;
+
+/*		296; Sie zogen Argumente an den Haaren herbei.
+
 297;50;DEAdvManner+^DEAdv;-DEAdvManner;
+
+/*		297. Er hatte eine glücklicherweise milde Form von EPI, d.h. er hatte Mühe Fett zu verdauen.
+
 299;50;DEAdvModality+^DEAdv;-DEAdvModality;
+
+/*		299; Sie fließen in einen möglichst einfachen Vorschlag ein.
+
 304;50;DEAdvPlace+^DEAdv;-DEAdvPlace;
+
+/*		304; sowie einen dort tätigen Priester.
+
 310;50;DEAdvDegree+^DEAdv;-DEAdvDegree;
+
+/*		310; Natürlich gibt er nicht allein den Marschbefehl, aber er hat eine ganz starke Stimme.
+
 427;50;DEAdvTemp+^DEAdv;-DEAdvTemp;
+
+/*		427; Die Massenmedien nehmen in modernen Demokratien eine immer wichtigere Rolle ein.
+
 454;50;DEAdvTime+^DEAdv;-DEAdvTime;
 
+/*		454; Dank der 550 aufmerksamen Gastgeber in dem heilklimatischen Kurort mit Deutschlands einzigem Schroth- Heilbad bricht man jeden Morgen wieder gut erholt zu neuen Touren auf.
 /* Define type for ambiguous labels
 
 307;50;"von"|DEAdvPlace;DEAdvDirection|+Join;
+
+/*		307; Von oben nach unten.
+
 306;50;"nach"|DEAdvPlace;DEAdvDirection|+Join;
+
+/*		306; Von oben nach unten.
+
 405;50;DEAdvDegree|DENicht:DEKein;DERAdv|*;
+
+/*		405; Luft im Bauch ist aber meist nicht die Ursache. Diese Menschen haben meist keine starke Lobby.
+
 511;50;DEAdvDegree|"nichts"+DESubjpron;DESubjpron+DEObjpron|+Join;
+
+/*		511; Und dass eigentlich gar nichts passieren kann.
+
 311;50;DEAdvDegree|DERel:DERelAux:DEPart:DEPrep:DEPrepart:DEConj;DERAdv|*;
+
+/*		311; Beinahe gelingt den Fußballern der dritte Sieg. Ganz besonders möchte ich mich beim Arzt bedanken. Letztere wurde schon wegen ihrer Heilkraft sehr geschätzt. Marken funktionieren durchaus in Social Networks. Wir haben uns einigermaßen vom letzten Konzert des Jahres erholt. Ich bewunderte ihn sehr als Schauspieler. WRONG: Besonders betroffen sind Mädchen.
+
 452;50;DEAdvDegree|DEEin;DEAdvDegree|DENum;
+
+/*		452; Durch die Neugestaltung wird sich die Bauzeit um etwa ein halbes Jahr verlängern.
+
 451;50;DEAdvDegree|DEVerbteil;DERAdv|^DEVerbteil;
+
+/*		451; spätestens ab dem 1. August 2008.
+
 319;50;DEAdvDegree|DENonRelevant:DEAdvNonrelevant;DERAdv|*;
+
+/*		319; Diese Unterschiede werden zumindest teilweise die regional unterschiedlichen Präferenzen wiederspiegeln. Das Studio kann durchaus auch an andere Sender vermietet werden.
+
 314;50;DEAdvDegree|DENegation;DEBeginadj|-DEBeginadj-DEKein+DEAttradj;adverb of degree with non-DERel negation
+
+/*		314; es kann meist nicht länger als 30 Minuten am Stück schlafen.
+
 326;50;DEAdvDegree|DEBeginadj;DEAdvDegree|DEAdj;
+
+/*		326; 1962 wurden noch fast alle Nummer-1-Hits auf deutsch gesungen.
+
 483;50;DEAdvDegree|DEAnder;DEAdvDegree|DEAttradj;
+
+/*		483; Der Kläger machte in Straßburg nun geltend, dass das Gesetz rückwirkend angewandt worden sei und zum Zeitpunkt seines Prozesses ein ganz anderes Recht gegolten habe.
+
 335;50;DENonRelevant|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DENonRelevant|DEAttradj|*;
+
+/*		335; Die Organisation begrüsst das heute veröffentlichte Urteil des Bundesverwaltungsgerichts. Die damals produzierten Klaviere stehen jetzt im Museum. Denn unter den dort stationierten Offizieren befanden sich eine Reihe Leutnants, die sich zur Revolution bekannten.
+
 339;50;DEEin|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEEin|DEAttradj|*;
+
+/*		339; ein heute unbekanntes Tier. ein bisher unbekanntes Tier. Es ist ein stellenweise schönes Buch, das weise ist und klug - aber genau das eben auch sein will.
+
 337;50;DEPrepart|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEPrepart|DEAttradj|*;
+
+/*		337; Viel Spaß hatten wir im stundenweise geöffneten Aqua Park. Das 3-Sterne Hotel liegt im immer schönen, naturreichen Sauerland. Um 5 bin ich in St. Moritz und auch beim gleich daneben liegenden Slverplana See.
+
 336;50;DENonRelevant|DEAdvTime:DEAdvTemp:DEAdvPlace|DECon;^DENonRelevant|DEAttradj|*;
+
+/*		336; Damit blieb dem heute 59-jährigen Mann die Sicherungsverwahrung erspart. die zuvor gefeierten Interpreten. Die hier dargestellten Daten zum Lipidstoffwechsel unterstreichen dies eindrucksvoll.
+
 338;50;DEPrepart|DEAdvTime:DEAdvTemp:DEAdvPlace|DECon;^DEPrepart|DEAttradj|*;
+
+/*		338; Beim heute viertklassigen Klub agierte er eine Spielzeit lang in der Verteidigung. Beim damals viertklassigen Klub agierte er eine Spielzeit lang in der Verteidigung. Dort halten wir uns links und kommen am streckenweise verwachsenen Weg immer wieder zu schönen Wiesen.
+
 463;50;DEGenitiv|DEAdvTime:DEAdvTemp:DEAdvPlace|DEAttradj;^DEGenitiv|DEAttradj|*;
+
+/*		463; Konkret ging es um den Fall eines heute 52 Jahre alten Mannes. Aufgrund des oft kühlen Wetters im Oktober beginnt das Oktoberfest seit 1872 schon im September. Dass die Odyssee sich nach dem Ende dieses rundum gelungenen Theaterspektakels fortsetzt, daran jedenfalls ist nur das Wetter Schuld.
+
 450;50;DENicht|DEAdvTemp;^DENicht|+Join;
+
+/*		450; Oft ist ein Umzug aus familiären GrUnden nicht sofort möglich.
+
 440;50;DEBeginadj|DEAdvNonrelevant:DEAdvModality|DEAttradj;DEBeginadj|DEAttradj|DEAttradj;
 
+/*		440; Alle noch bestehenden Verkehrsverbindungen zwischen den beiden Teilen Berlins wurden unterbrochen. Alle diese vielleicht schönen Wünsche taugen nichts, weil sie an der Realität des Lebens vorbeigehen.
 /* Remove superfluous labels
 
 285;50;DEAdvDirection;DEAdvDirection;
+
+/*		285; Sie gingen hinein und kamen an eine schwarze Wendeltreppe.
+
 286;50;DEAdvManner;DEAdvManner;
+
+/*		286; Nicht nur Kinder spielen gerne!
+
 287;50;DEAdvModality;DEAdvModality;
+
+/*		287; Beim Absturz eines Kampfflugzeugs sind höchstwahrscheinlich beide Personen an Bord ums Leben gekommen.
+
 294;50;DEAdvNonrelevant;DEAdvNonrelevant;has to be before 305 because of dort
+
+/*		294; Allerdings steige die Arbeitslosigkeit nicht mehr so stark.
+
 305;50;DEAdvPlace;DEAdvPlace;
+
+/*		305; Erfolg ist anderswo.
+
 292;50;DEAdvDegree;DECAdv;
+
+/*		292; Die Angebotsfülle ist nahezu unendlich.
+
 334;50;DEAdvTime;DEAdvTime;
+
+/*		334; Ich habe gestern mit ihm gesprochen.
+
 423;50;DEAdvTemp;DEAdvTemp+DETime;
+
+/*		423; Die damals produzierten Klaviere stehen jetzt im Museum.
+
 312;50;DERAdv;DERAdv;
+
+/*		312; Die am Mittwoch fertigen Güter müssen spätestens am Freitag abgeholt werden.
+
 453;50;DEJe;DERAdv;make 'je' relation (RAdv is not used in lexreps)
+
+/*		453; Je höher der Bildungsstand und das Allgemeinwissen, desto mehr kann aus Nachrichten gelernt werden.
+
 284;50;DEAdv;DEAdvNonrelevant;
+
+/*		284; Hiermit berechnen wir Ihnen folgende, am 25.07.2013, gelieferte Positionen.
+
 615;50;DEAdvDirection:DEAdvManner:DEAdvModality:DEAdvNonrelevant:DEAdvPlace:DEAdvTime:DEAdvTemp:DERAdv;+DEAdv;add Adv label again for use in following phases
 
+/*		615; Außerdem sei das Pensionszugangsalter gestiegen.
 /* Give pronouns their lexrep-type
 /* -------------------------------
 
 429;50;DEIndefpron|typeRelation;DESubjpron|*;
+
+/*		429; Alle müssen Zinsen zahlen.
+
 434;50;DEIndefpron|DEPredadj;DESubjpron|^DEPredadj;
+
+/*		434; Es ist schon lange her, dass die beiden gemeinsam spielten.
+
 436;50;DEIndefpron|DEAdvTemp;DESubjpron|DEAdvTemp+DETime;
+
+/*		436; Andere ehemals in Mitteleuropa lebende Großsäuger.
+
 437;50;DEIndefpron|DEAdvTime;DESubjpron|DEAdvTime;
+
+/*		437; Ich habe die beiden gestern gesehen.
+
 430;50;DEIndefpron|DEAdvNonrelevant:DENonRelevant:DEPunctuation:SEnd;DESubjpron|*;
+
+/*		430; Wo sind sie alle überhaupt? Aufgrund dieser positiven Externalitäten besteht für alle der Anreiz, ein Free-Rider-Verhalten zu zeigen. Man erwartet, dass der Bund auch noch andere, insbesondere grosse Kantone kontaktiert. Boulevard personalisiere Kunst dreimal mehr als andere.
+
 432;50;DEIndefpron;-DEIndefpron;remove to avoid conflicts
+
+/*		432; Institut für Menschenrechte fordert Wahlrecht für alle Behinderte.
+
 482;50;DEAnder+DECon;DECon;
+
+/*		482; Mit der Restrukturierung der Stadt und der mit ihr verbundenen räumlichen Entwicklung findet eine Umdeutung des öffentlichen Raumes statt, die mit einem Verlust des Ortes einhergeht, an dem Integration des Anderen und Fremden möglich war.
+
 484;50;typeConcept|"anderer":"derselben":"desselben"|typeConcept;*|DECon|*;
+
+/*		484; Wenngleich Diuretika nicht leistungssteigernd wirken, so werden sie zur Verschleierung der Einnahme anderer Dopingmittel angewandt.
+
 485;50;DENum|DEAnder;DEAttradj|DEAttradj;
+
+/*		485; Der Mann, der auch Nebenkläger ist, hatte wie zwei andere Opfer am Dienstag ausgesagt.
+
 481;50;DEAnder;DEAnder;
+
+/*		481; Das Studio kann durchaus auch an andere Sender vermietet werden.
+
 442;50;DEAttradj+DEGenitiv;DEAttradj;clean up unused Genitiv label
+
+/*		442; Er habe dann seinen Laptop genommen und sei „in aller Gemütsruhe“ gegangen.
+
 438;50;DEAdjpron+^DEGenitiv;DEBeginadj;
+
+/*		438; Alle schauen nach oben.
+
 489;50;DENonRelevant|DERelAux:DERel+^"zu";DESubjpron|*;
+
+/*		489; Das ist eine Frage, die ich nicht mehr stelle.
+
 630;50;DENonRelevant|DEDoppelpunkt:SEnd;DEObjpron|*;
+
+/*		630; Wie meinen Sie das?
+
 499;50;DEEiner|DEPrep:DEPrepart;DENonRelevant|*;exception to r498
+
+/*		499; nur einer von 3,8 Millionen Fällen in Hessen.
+
 501;50;DEPrep|DEEiner|^DEGenitiv+^DEAndOrBut;^DEPrep|DENonRelevant|*;
+
+/*		501; Seit Jahren träume ich von einer Weltreise.
+
 498;50;DEEiner|typeRelation;DESubjpron|*;
+
+/*		498; "Ob da einer lacht" sei ihm egal.
+
 502;50;DEEines|SEnd:DEPunctuation;DEObjpron|*;
+
+/*		502; So gibt es nur eines. Gegen Ihre eigene Wut hilft nur eines: rausgehen!
+
 505;50;DEEines|DEPrep:DEPrepart;DEGenitiv|*;
+
+/*		505; Spenden sind von einer Partei erlangt, wenn sie in den Verfügungsbereich eines für die Finanzangelegenheiten zuständigen Vorstandsmitglieds oder eines hauptamtlichen Mitarbeiters der Partei gelangt sind.
+
 504;50;DEEines|typeRelation;DESubjpron|*;
+
+/*		504; Denn eines sollte Deutschland nicht passieren.
+
 176;50;DENum;DECon;
 
+/*		176; Nummer 99 und Nummer 100.
 /* DETECT ENUMERATIONS
 /* ===================
 
 529;60;DEHyphen;-DEKomma;
+
+/*		529; Ihm wird die Freiheit der Entscheidungen übertragen bzw. zugewiesen – ebenso die Verantwortung für die Konsequenzen seines Handelns, seiner Wahl.
+
 533;60;*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;4-element enumeration
+
+/*		533; A, B, C oder D.
+
 520;60;DEIndefart:DEEin|*DEAttradj:DECon|DEKomma|DEIndefart:DEEin|*DEAttradj:DECon|DEAndOr|DEIndefart:DEEin|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration
+
+/*		520; Ein A, ein B und ein C.
+
 521;60;DENonRelevant|*DEAttradj:DECon|DEKomma|DENonRelevant|*DEAttradj:DECon|DEAndOr|DENonRelevant|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration
+
+/*		521; Auch infolge der begrenzten und unzulänglichen Kontrollmöglichkeiten sind Verstöße gegen die Verordnung mit sämtlichen sich daraus ergebenden Folgen für die Verkehrssicherheit, die Wettbewerbsbedingungen und die Lebensfähigkeit dieser Branche nicht selten an der Tagesordnung.
+
 522;60;DEPosspron|*DEAttradj:DECon|DEKomma|DEPosspron|*DEAttradj:DECon|DEAndOr|DEPosspron|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration
+
+/*		522; Herzlich danke ich für seine Rücksicht, sein Verständnis und seine Geduld.
+
 523;60;*DEAttradj:DECon|DEKomma|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;3-element enumeration
+
+/*		523; Im zweiten Kapitel steht im Fokus, inwiefern die dargestellten gesellschaftlichen Entwicklungen ihren Niederschlag finden in den kriminalpolitischen Konzepten, Handlungsweisen und Umgangsformen mit abweichendem Verhalten.
+
 524;60;DEIndefart:DEEin+^DEList|*DEAttradj:DECon|DEAndOr|DEIndefart:DEEin|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration
+
+/*		524; wir haben in polen ein schloss und ein museum besucht.
+
 525;60;DENonRelevant+^DEList|*DEAttradj:DECon|DEAndOr|DENonRelevant|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration
+
+/*		525; Der Minister und die Delegierten haben den ganzen Vormittag miteinander geredet.
+
 526;60;DEPosspron+^DEList|*DEAttradj:DECon|DEAndOr|DEPosspron|*DEAttradj:DECon;+DEList|+DEList|+DEList|+DEList|+DEList;2-element enumeration
+
+/*		526; Außerdem möchte der Ratsvorsitz der Kommission für ihre Bemühungen und ihren Beitrag an wertvollem Fachwissen während des Legislativprozesses danken.
+
 623;60;DERel:DERelAux:DEPrep|*DEAttradj:DECon|DEAndOr|*DEAttradj:DECon|^DERel+^DERelAux;*|+DEList|+DEList|+DEList|*;
+
+/*		623; sie ist Wagenburg und Kleingärtnerverein ohne staatlichen Zuschuss in einem. Zusammenarbeit mit dem Mittelmeerraum für Frieden und Wohlstand in der Region.
+
 625;60;DEAttradj|DEKomma|DEAttradj|DECon;+DEList|+DEList|+DEList|+DEList;
+
+/*		625; keine Erinnerung mehr an sonnigen, warmen Tage im 12. und 13. jahrhundert.
+
 629;60;*typeConcept|"zwischen"|*^typeRelation|"und"|*^typeRelation+^DEPunctuation+^DEKein;+DEList|+DEList|+DEList|+DEList|+DEList;
 
+/*		629; Nachdem die Forscher deren Einfluss heraus gerechnet hatten, blieb ein deutlicher Zusammenhang zwischen Kaffeekonsum und Erkrankungsrisiko bestehen.
 /* RULES FOR NEGATION, part 2
 /*===========================
 
 647;70;DEGeoadj;+DEAttradj;
+
+/*		647; eine Reise durch drei deutsche Großstädte.
+
 206;70;DENicht;DERel+DENegation;default
+
+/*		206; In Bayern gilt diese Regelung nicht.
+
 232;70;DEKein;+DENegation;
+
+/*		232; Der Gewinn der Weltmeisterschaft wäre kein wirtschaftlicher Erfolg.
+
 264;70;DENegRel;DERel+DENegation;
+
+/*		264; In diesem Zustand will sie auf keinen Fall das hilflose Kind alleine lassen.
+
 587;70;DERelconj+DENegation;DEConj+DENegWord;for Relconj created by r513
+
+/*		587; Es wird möglich sein, gemeinsam die zustimmungsfähigen Lösungen zu finden, ohne die die Union auf Dauer außerstande bleiben wird, ihre politischen Ambitionen zu finanzieren.
+
 283;70;SBegin:DEKomma:DEAndOr|"ohne"|.^"zu"|"zu"|DERel:DERelAux;*|+DERel|*|*|*;for ohne
+
+/*		283; Man lebt Jahre wie ein König, ohne den Preis zu bezahlen.
+
 631;70;SBegin:DEKomma|DEAdv|"ohne"|.^"zu"|"zu"|DERel:DERelAux;*|*|+DERel|*|*|*;variant of r283
+
+/*		631; Man lebt Jahre wie ein König, jedoch ohne den Preis zu bezahlen.
+
 588;70;"ohne"|.^"zu"+^DEZuInf|DEZuInf;+DERel|*|*;for ohne, variant of r283
+
+/*		588; Das Braten roher Würste erfordert mehr Geschick, da die Wurst vollständig durchgegart werden muss ohne außen anzubrennen.
+
 589;70;"ohne dass";+DERel;
+
+/*		589; Vielleicht hat sich Ihr Kind auch einen Knochen gebrochen, ohne dass Sie es bemerkt haben.
+
 590;70;"ohne"+^DERel;DEPrep+DENegation;(assign NegBegin later to avoid that expansion rules are applied)
 
+/*		590; „Primäre Medien“ sind ohne technische Hilfsmittel verwendbar, z.B. direkte mündliche Rede.
 /* Expansion of negation scope
 
 233;70;DEKein;+DENegBegin;
+
+/*		233; Der Gewinn der Weltmeisterschaft wäre kein wirtschaftlicher Erfolg.
+
 239;70;DEBeginadj+DENegation;+DENegBegin;
+
+/*		239; Er meinte, nicht Familien, sondern Jugendgruppen sollten eingeladen werden.
+
 234;70;DERel+DENegation;+DENegBegin;
+
+/*		234; "Ich kann nicht die Feuerwehr eines Landes einfach vor die Wand fahren lassen", sagte er.
+
 235;70;DERel:DERelAux|DERel:DEBeginadj+DENegation;+DENegBegin|*;
+
+/*		235; Die entsprechende EU-Richtlinie ist nicht gekippt.
+
 614;70;DERel:DERelAux|*DEAdv|DERel:DEBeginadj+DENegation;+DENegBegin|*|*;
+
+/*		614; Das sei hiermit nicht gelöst worden.
+
 616;70;DERel:DERelAux|*^DEPunctuation+^DEAndOrBut+^DERel|DERel+DENegation|SEnd:DEKomma;+DENegBegin|*|*|*;
+
+/*		616; Verletzte gab es dabei demnach nicht.
+
 619;70;DERelAux|*^DEPunctuation+^DEAndOrBut+^DERel|DERel+DENegation|DEPart:DERel:DEVerbteil|SEnd:DEKomma;+DENegBegin|*|*|*|*;
+
+/*		619; Der Verdacht habe sich aber nicht bestätigt.
+
 574;70;*DESubjpron:DEObjpron:DERefl|DERel:DERelAux+DENegBegin;+DENegBegin|*;variant of r236
+
+/*		574; Spannungen zwischen ihnen und der Bevölkerung gebe es nicht.
+
 236;70;*DEAttradj:DECon|DERel:DERelAux:DERefl+DENegBegin;+DENegBegin|*;
+
+/*		236; Kultur ist kaum ein Thema für Korrespondenten.
+
 583;70;DENegBegin|DEConj+DENegation|DEZuInf;-DENegBegin|*|*;restriction for r236
+
+/*		583; Wird er die derzeitige Vereinbarung wirksam sein lassen ohne einzugreifen, damit wir sehen können, ob sie dem öffentlichen Interesse dient.
+
 584;70;DEConj+DENegation|"zu"|DERel|^DENegation;*|*|*|+DENegStop;restriction for r236
+
+/*		584; Der Vorwurf: er betreibe Forschung, ohne zu wissen, woher die Organe gekommen sind.
+
 585;70;DEConj+DENegation|DEZuInf|^DENegation;*|*|+DENegStop;restriction for r236
+
+/*		585; Im Laufe des Jahres haben wir bereits gelernt, dass das meistgebrauchte Zauberwort „nachhaltig“ lautet, das ohne nachzudenken für alle Konzepte verwendet wird.
+
 266;70;*DEAttradj:DECon|DERelAux|DENegBegin+^DEKein;+DENegBegin|DERelAux|*;
+
+/*		266; Die Vorratsdatenspeicherung ist noch nicht ganz tot.
+
 636;70;*DECon|DEGenitiv:DEPrepart:DEPrep|DEAttradj|DECon+DENegBegin;+DENegBegin|*|*|*;
+
+/*		636; Zu den Kosten der geplanten Werksschließung äußerte sich er nicht.
+
 626;70;*DEAttradj:DECon:DEGenitiv:DEPrepart:DEPrep:DENonRelevant:DEPosspron:DEAnder+^DENegBegin|DECon+DENegBegin;+DENegBegin|*;
+
+/*		626; Bei Fristen wird der Tag der Verteilung der Drucksache nicht eingerechnet. Recht, das als Landesrecht erlassen worden ist, aber wegen Änderung des Artikels nicht als Landesrecht erlassen werden könnte, gilt als Landesrecht fort.
+
 237;70;DECon|DEAndOrBut|DECon+DENegBegin;+DENegBegin|DERel|DECon;
+
+/*		237; Steuern und Abgaben mussten nicht ganz so hoch steigen.
+
 572;70;*DERelAux:DERel:DESubjpron:DEObjpron+^DENegBegin|DENegBegin+^DEKein;+DENegBegin|*;
+
+/*		572; Er sprach davon, dass Formen dem Maler heilig seien und dass er nie abstrakt malte, hielt sich jedoch mit detaillierteren Bildbeschreibungen gänzlich zurück.
+
 639;70;*DERelAux:DERel+^DENegBegin|*DEAdv|DENegBegin+^DEKein;+DENegBegin|*|*;
+
+/*		639; Sie liegen zumeist abseits von Straßen und Plätzen und standen daher Bauvorhaben der Nachwendezeit nicht im Wege.
+
 642;70;SBegin|*DEPosspron:DEAttradj:DECon:DEGenitiv|DERelAux:DERel+DENegBegin;*|+DENegBegin|*;
+
+/*		642; Details wollte er nicht nennen.
+
 643;70;SBegin|^DEPrep|*DEPosspron:DEAttradj:DECon:DEGenitiv|DERelAux:DERel+DENegBegin;*|*|+DENegBegin|*;
+
+/*		643; Die Pyrrolizidinalkaloide seien meist nicht in den Teekräutern selbst enthalten, sondern im Unkraut auf den Feldern.
+
 573;70;DEConj|DENegBegin;+DENegBegin|-DENegBegin;
+
+/*		573; Solche räumlichen Eingrenzungen von Problemlagen erlauben die Definition von no-go-areas, die in der cognitive map der Stadtbewohnerinnen und -bewohner als nicht begehbar gespeichert werden.
+
 580;70;DEConj|DENonRelevant|DENegBegin;+DENegBegin|*|-DENegBegin;
+
+/*		580; Um die Ermittlungen nicht zu behindern, sei der Fall erst jetzt bekannt gemacht worden, heißt es in der Mitteilung.
+
 649;70;DEConj|DERefl|DENonRelevant|DENegBegin;+DENegBegin|*|*|-DENegBegin;
+
+/*		649; Es ist unser Standpunkt, dass sich die Organisation nicht in Fragen der Ausbildung einmischen darf.
+
 577;70;*DECon|DEKomma|DERelconj+DENegBegin;+DENegBegin|*|*;include antecedent of relative clause
+
+/*		577; Der Verband übernimmt viele Aufgaben, die weder eine Stadt noch ein Kreis erfüllen kann – von der Gesetzgebung über die Ausschußarbeit bis zur Ausbildung.
+
 578;70;DEList|.DEList+^DENegBegin|DEList+DENegBegin;+DENegBegin|*|*;
+
+/*		578; Personen, die infolge Richterspruchs die Wählbarkeit oder das Wahlrecht nicht besitzen, können nicht Mitglieder einer Partei sein.
+
 627;70;SBegin:DEDoppelpunkt:DEHyphen|DEPrep|DENegBegin;*|+DENegBegin|*;
+
+/*		627; Aus dieser Perspektive wird Armut nicht auf strukturelle Bedingungen von Ungleichheit und ungleichen Chancen zurückgeführt.
+
 628;70;SBegin:DEDoppelpunkt:DEHyphen|DEPrep+^DENegBegin|*DENonRelevant|DENegBegin;*|+DENegBegin|*|*;
+
+/*		628; Bei dieser neuerlichen Lüge stimmte nicht einmal die Uhrzeit.
+
 632;70;SBegin:DEDoppelpunkt:DEHyphen|DEAdv|DEPrep|DENegBegin;*|*|+DENegBegin|*;
+
+/*		632; Auch unter neuer Führung sei es nicht gelungen, nachhaltig das Ruder herumzureißen.
+
 534;70;DENegBegin:DEInNegspan|^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span
+
+/*		534; Der Strukturbruch wird hier nicht durch exogene Faktoren erklärt, sondern als Folge von Modernisierung selbst verstanden.
+
 600;70;DENegBegin:DEInNegspan|DEPrep+DENegation;*|+DEInNegspan;
+
+/*		600; Leider bekommt man meistens nicht das eine ohne das andere“, bedauert der Wissenschaftler.
+
 601;70;DENegBegin:DEInNegspan|^DEInNegspan+^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, repetition of r534 for cases where rxxx has fired
+
+/*		601; Bald werden wir kein Auto ohne Nebellampen mehr sehen.
+
 591;70;*DEAttradj:DECon|DEPrep+DENegation;+DENegBegin|*;has to be after r534-600-601 to avoid interference
+
+/*		591; Für die Österreicher ging damit eine Saison zu Ende, in der sie erstmals seit achtzehn Jahren ohne Abfahrtssieg blieben.
+
 602;70;DEList|.DEList+^DENegBegin|DEList+DENegBegin;+DENegBegin|*|*;
 
+/*		602; Zudem darf im Falle der Bedürftigkeit das Sozialamt oder die Agentur für Arbeit nicht auf das Ersparte zugreifen.
 /* Restriction of negation scope
 
 567;70;DEDoppelpunkt|^DENegation;*|+DENegStop;
+
+/*		567; Ich möchte jedoch unterstreichen, dass wir nicht bei Null anfangen: Wir können auf einer umfassenden Partnerschaft aufbauen.
+
 240;70;DEPunctuation|DEAndOrBut;*|+DENegStop;
+
+/*		240; Bei zwei anderen Therapieansätzen sollen die Tumorzellen nicht durch aktivierte körpereigene Immunzellen, sondern durch Hilfen aus dem Biotechnologielabor vernichtet werden.
+
 618;70;DEKomma:DEDoppelpunkt|DEConj+^DENegBegin|DESubjpron;*|+DENegStop|*;
+
+/*		618; „Da überrascht es nicht, dass man jetzt anfängt, Gespräche zu führen.“
+
 622;70;DEKomma+^DEList;+DENegStop;
+
+/*		622; Allerdings steige die Arbeitslosigkeit nicht mehr so stark, während die Beschäftigung gegenüber dem Vorjahr um 0,9 Prozent "deutlich" zugenommen habe.
+
 624;70;SBegin:DEKomma:DEHyphen|DERel+DENegation|DEKomma+DENegStop;*|*|-DENegStop;correction of r622
+
+/*		624; Viele Menschen interessiert, wie das Land in Zukunft regiert wird - nicht, von wem sie regiert wird.
+
 527;70;typeRelation|DEKomma+^DEList|DECon:DEAttradj;*|*|+DENegStop;specific case of r241
+
+/*		527; Mediziner wurden angewiesen, Dosen aus der betroffenen Charge nicht zu verwenden, da das Mittel lebensbedrohliche Allergien auslösen könne, hieß es.
+
 241;70;DEPunctuation+^DEList|DECon;DEPunctuation|+DENegStop;
+
+/*		241; Die Maxime der Nachrichtenformulierung lautet also: Schreiben fürs Sprechen fürs Verstehen.
+
 528;70;DEPunctuation+^DEKomma|DECon:DEAttradj;DEPunctuation|+DENegStop;variant of r241
+
+/*		528; Im zweiten Kapitel steht im Fokus, inwiefern die dargestellten gesellschaftlichen Entwicklungen ihren Niederschlag finden in den kriminalpolitischen Konzepten, Handlungsweisen und Umgangsformen mit abweichendem Verhalten.
+
 246;70;DEPunctuation|DENonRelevant|DECon;DEPunctuation|DENonRelevant|+DENegStop;
+
+/*		246; Dabei backt er keine kleinen Brötchen: Die Dienste sind gleich in mehreren europäischen Länders verfügbar.
+
 410;70;DEPunctuation|DEPosspron|DECon;DEPunctuation|+DENegStop|*;variant of 246 for Posspron
+
+/*		410; Sehr weit hat er sich da nicht vorgewagt: Sein Hausboot, fester Wohnsitz seit Jahren, liegt im Harburger Hafen.
+
 247;70;DEPunctuation|DEEin|DECon;DEPunctuation|DEEin|+DENegStop;
+
+/*		247; Sehr weit hat er sich da nicht vorgewagt: ein Hausboot, fester Wohnsitz seit Jahren, liegt im Harburger Hafen.
+
 248;70;DEPunctuation|DEEiner|DECon;DEPunctuation|DEEiner|+DENegStop;
+
+/*		248; Mehrere Täter hatten im Hotel zeitweise keine Handschuhe an, einer Täter hinterließ wohl Fingerabdrücke.
+
 249;70;DEPunctuation|DEEines|DECon;DEPunctuation|DEEines|+DENegStop;
+
+/*		249; Es gab keine Fertigstellung des Berliner Außenringes, eines Eisenbahnringes um West-Berlin herum.
+
 250;70;DEPunctuation|DERel:DERelAux;*|+DENegStop;
+
+/*		250; Wenngleich das Bedrohungsgefühl sich nicht mit steigender krimineller Gefährdung erklären lässt, sind Verunsicherungen innerhalb der Bevölkerung dennoch ein dominierendes Thema und als gesellschaftliches Problem relevant.
+
 519;70;^DENegation+^SBegin|DEPunctuation|DEConj;*|DEPunctuation|+DENegStop;
+
+/*		519; Ich habe jetzt nicht gesagt, dass ich die Kopfpauschale ganz toll finde.
+
 571;70;DERel+^DENegation|DENegation+^"weder"+^"noch"|DEPunctuation|DEConj;*|*|*|+DENegStop;
+
+/*		571; Ich finde nicht, dass man das Schutz von Tieren beim Transport nennen kann.
+
 251;70;DEPunctuation+^DEDoppelpunkt|DEAdv|DERel;DEPunctuation|*|+DENegStop;
+
+/*		251; Angenommen, im politischen Prozess würde tatsächlich das von einer Mehrheit der Bürger gewünschte Bündel bereitgestellt (was in der Realität nicht immer gewährleistet zu sein scheint), so muss eine Minderheit doch mit einem suboptimalen Bündel vorlieb nehmen.
+
 252;70;DEPunctuation|DESubjpron:DEObjpron|DERel;DEPunctuation|+DENegStop|*;
+
+/*		252; Er sorgt dafür, das sich nicht alle Individuen an einem Ort befinden, er sorgt dafür, dass einzelne Individuen unterschiedlich weit voneinander entfernt sein können.
+
 265;70;DEPunctuation|DESo;DEPunctuation|+DENegStop;
+
+/*		265; Kann ein Einvernehmen nicht hergestellt werden, so benennen die Fraktionen die Mitglieder im Verhältnis ihrer Stärke.
+
 253;70;DECon+^DENegWord|DEAndOrBut|DERel;DECon|+DENegStop|^DERel;
+
+/*		253; Sie habe kein Zukunftskonzept und finde einmal einen Minimalkonsens.
+
 518;70;DEKein|*DECon:DEPrep:DEPrepart:DENonRelevant|DEPunctuation|typeRelation:typePathRelevant;*|*|*|+DENegStop;
+
+/*		518; Tatsächlich sei die Liste kein Allheilmittel, sondern ein «vernünftiger Kompromiss» zwischen den verschiedenen Akteuren im Gesundheitswesen.
+
 537;70;DEKein|*DEAttradj:DECon|*DERelAux:DERel|DEAndOr|^SEnd|^SEnd;*|*|*|+DENegStop+DEBeginrel|*|*;
+
+/*		537; zwei Staaten nebeneinander, die in Frieden und Sicherheit leben, keine Vorurteile haben und die Menschenrechte achten.
+
 542;70;DEKein|*DEAttradj:DECon:DEPrep:DEPrepart:DENonRelevant|*DERelAux:DERel|DEAndOr|^SEnd|^SEnd;*|*|*|+DENegStop+DEBeginrel|*|*;
+
+/*		542; Deshalb fordern sie, zu überprüfen, zu überprüfen, dass sich keinerlei toxische Stoffe in diesen Materialien befinden und die gemeinschaftliche Gesetzgebung über Lebensmittel-Zusatzstoffe im Falle der Genehmigung neuer Verpackungsmaterialien für Lebensmittel genauestens anzuwenden.
+
 538;70;DEKein|*DEAttradj:DECon|*DERelAux:DERel:DEPart|DEKomma|^DENegBegin;*|*|*|*|+DENegStop;
+
+/*		538; Ich bin davon überzeugt, dass dies keine leichte Aufgabe sein wird, doch wir dürfen die Herausforderungen, die sich uns stellen werden, nicht unterschätzen.
+
 539;70;DEKein|*DEAttradj:DECon|DEKomma+^DEList;*|*|+DENegStop;
+
+/*		539; Tatsächlich sei die Liste kein Allheilmittel, sondern ein «vernünftiger Kompromiss» zwischen den verschiedenen Akteuren im Gesundheitswesen.
+
 536;70;DENegStop|*DEInNegspan+^DENegation+^DENegBegin;-DEInNegspan|-DEInNegspan;remove InNegspan markers outside span
+
+/*		536; Hier wäre der Ort für eine Philosophie der Gabe – wenn sie nicht gerade hier so gesteigert hilflos wirkte.
+
 568;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|DERel:DERelAux|^DEPunctuation+^DEAndOrBut;*|+DENegStop+DEBeginrel|*|*;
+
+/*		568; Er konnte aber den Zusammenstoß jedoch nicht verhindern und prallte gegen die Beifahrerseite des Pkw.
+
 581;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|*DEAdv|DERel:DERelAux|^DEPunctuation+^DEAndOrBut;*|+DENegStop+DEBeginrel|*|*|*;
+
+/*		581; Eine Verwicklung konnte ihm allerdings nie nachgewiesen werden und so wurde er freigesprochen.
+
 640;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|*DEAdv|^DERel+^DERelAux+^DENegBegin;*|+DENegStop+DEBeginrel|*|*;
+
+/*		640; Jüngst hatte der Mutterkonzern vermeldet, dass die Gesellschaft erneut die angepeilten Ziele nicht erreicht und auch im vergangenen Jahre rote Zahlen geschrieben hat.
+
 595;70;typeRelation+^DEInNegspan|DEAndOrBut|DEPrep+DENegation;*|+DEBeginrel|*;
+
+/*		595; Auf diesem Grundstück kann er aber seinen Tagesablauf völlig frei gestalten, dort arbeiten und ohne Einschränkungen Besucher empfangen oder sie bei sich im Haus wohnen lassen.
+
 569;70;DERel:DERelAux+DEInNegspan|DEAndOrBut+DENegStop|*DERel:DERelAux:DEZuInf+^SEnd|SEnd;*|-DENegStop-DEBeginrel|*|*;correction of the result of r568
+
+/*		569; Die Ausübung der staatlichen Befugnisse und die Erfüllung der staatlichen Aufgaben ist Sache der Länder, soweit dieses Grundgesetz keine andere Regelung trifft oder zuläßt.
+
 570;70;DERel:DERelAux+DEInNegspan|DEAndOrBut+DENegStop|*DERel:DERelAux:DEZuInf+^DENegation|DEPunctuation;*|-DENegStop-DEBeginrel|*|*;correction of the result of r568, rare
+
+/*		570; Die Ausübung der staatlichen Befugnisse und die Ausführung der Bundesgesetze obliegt grundsätzlich den Bundesländern, sofern das Grundgesetz keine abweichende Regelung trifft oder zulässt (Art.5).
+
 638;70;DERel:DERelAux+DEInNegspan|DEAndOrBut|DESubjpron;*|+DENegStop+DEBeginrel|*;
+
+/*		638; Der Präsident könne entweder nicht selbstständig handeln oder er werde daran gehindert.
+
 575;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;
+
+/*		575; Bis heute werden die Nachrichten noch vom Blatt gelesen und nicht vom Teleprompter, der sich in den meisten anderen Sendungen etabliert hat.
+
 637;70;typeRelation+^DEConj+^DEInNegspan|DEAndOrBut+^DEInNegspan|*^typeConcept+^typeRelation|DENegBegin;*|+DENegStop+DEBeginrel|*|*;
+
+/*		637; Es gibt solche Leute, die volles Visier fahren und trotzdem nicht kleinzukriegen sind.
+
 635;70;DEAdv+^DEInNegspan|DEAndOrBut+^DEInNegspan|DERel:DERelAux:DEConj+DENegBegin;*|+DENegStop+DEBeginrel|*;
 
+/*		635; Vergleichende Studien, welches der beiden Mittel besser hilft, fehlen bisher und sind nicht im Interesse der industrie.
 /* Expansion for 'ohne' as a preposition; try not to interupt the span of other negation markers
 
 596;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|^DEInNegspan;+DENegBegin|*|*|+DENegStop;
+
+/*		596; Der Bub sei praktisch ohne Bezugspersonen aufgewachsen, weise "enorme Sozialisationsdefizite" auf und fühle sich von der Mutter völlig im Stich gelassen.
+
 599;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv:DEAndOr|DEInNegspan;+DENegBegin|*|*|*;
+
+/*		599; Bald werden wir kein Auto ohne Nebellampen mehr sehen.
+
 598;70;DEPrep+DENegation|.DENonRelevant:DEEin:DEPosspron|*DEBeginadj:DEAttradj:DECon:DEGenitiv+^DENegBegin|DENegation:DENegBegin;+DENegBegin|*|*|*;
+
+/*		598; Ohne das Feedback hätte ich wohl nie ein Album herausgebracht.
+
 605;70;DEPrep+DENegation|DEObjpron|^DEInNegspan;+DENegBegin|*|+DENegStop;
+
+/*		605; Ohne dieses werden die Krebszellen auch leichter angreifbar für Immunzellen.
+
 597;70;DEPrep+DENegation|DENegBegin;+DENegBegin|*;
 
+/*		597; „Sie sind Mütter ohne Ehemänner nicht gewöhnt“.
 /* Clean conflicting negation parameters
 
 242;70;DENegStop+DENegBegin;-DENegStop;
+
+/*		242; Man lebt Jahre wie ein König, ohne den Preis zu bezahlen.
+
 243;70;DENegation+DENegStop;-DENegStop;
 586;70;typeRelation+DENegation|.typeRelation+^DENegation+^DENegBegin+^DENegStop|typeRelation+DENegStop|.typeRelation+^DENegation+^DENegBegin|^typeRelation+^DENegBegin+^DENegation;*|*|*|*|+DENegStop;relation entity with negation marker and NegStop -> move NegStop to following entity
+
+/*		586; Im Laufe des Jahres haben wir bereits gelernt, dass das meistgebrauchte Zauberwort „nachhaltig“ lautet, das ohne nachzudenken für alle Konzepte verwendet wird.
+
 594;70;typeRelation+DENegStop|.typeRelation+^DENegation+^DENegBegin+^DENegStop|DEPrep+DENegation;-DENegStop|*|*;relation entity with NegStop and negation marker -> remove NegStop
+
+/*		594; Eine Vorlage, zu der eine Erweiterte öffentliche Ausschussberatung stattgefunden hat, kann ohne besondere Vereinbarung im Ältestenrat nicht Gegenstand einer nochmaligen Aussprache im Plenum sein.
+
 244;70;DENegBegin|DENegBegin;^DENegBegin|-DENegBegin;
+
+/*		244; Sie gehen nicht in den Wald.
+
 245;70;DENegBegin;-DENegStop;
+
+/*		245; Er geht noch nicht nach Hause.
+
 530;70;DENegStop+^typeRelation+^typeConcept|^DENegation+^DENegBegin;*|+DENegStop;
+
+/*		530; "Ich höre jetzt nicht auf, nur weil es schwierig ist."
+
 579;70;DENegBegin+^typeRelation+^typeConcept+^typePathRelevant|^DENegBegin+^DENegStop;*|+DENegBegin;
 
+/*		579; Angst scheint gegen alle abgesichert zu sein, „[…] dabei braucht Angst gar nicht wirklich vorhanden zu sein.
 /* RULES FOR SENTIMENT EXPANSION
 /* Expansion of sentiment scope 
 
 354;80;DECon|DERel+DEPosSentiment;+DEPosSentimentBegin|-DEPosSentimentBegin;
+
+/*		354.UD; Rekord-Weltmeister freut sich ausgelassen auf dessen Comeback.
+
 355;80;DECon|DERel+DENegSentiment;+DENegSentimentBegin|-DENegSentimentBegin;
+
+/*		355.UD; Ein Fünftel der Bevölkerung bedauert die Entscheidung.
+
 356;80;DECon|DERelAux|DEPosSentimentBegin;+DEPosSentimentBegin|DERelAux|-DEPosSentimentBegin;
 357;80;DECon|DERelAux|DENegSentimentBegin;+DENegSentimentBegin|DERelAux|-DENegSentimentBegin;
 358;80;DECon|DEGenitiv|DECon+DEPosSentimentBegin;+DEPosSentimentBegin|DEGenitiv|-DEPosSentimentBegin;
@@ -581,6 +1621,7 @@
 
 532;$;DEAndOr:DEAndOrBut+DEBeginrel;^DEBeginrel-DEAndOrBut;
 
+/*		532; Alle Preise wurden unentgeltlich zur Verfügung gestellt und können nicht bar ausgezahlt werden.
 /* Rewrite language-specific label to general mandatory label
 
 347;$;DEPunctuation;^Punctuation;
