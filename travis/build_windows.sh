@@ -23,7 +23,6 @@ set -euxo pipefail
 if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
   rm -rf "$ICUDIR"
   wget -nv -O icu4c.zip "$ICU_URL"
-  export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
   mkdir -p "$ICUDIR"
   unzip -q icu4c.zip -d "$ICUDIR"
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
