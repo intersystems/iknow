@@ -15,7 +15,7 @@ fi
 # Availability of certain versions can differ between NuGet and pyenv.
 if [ "$TRAVIS_OS_NAME" = windows ]; then
   # space-delimited Python versions to install with NuGet, old to new
-  export PYVERSIONS="3.5.4 3.6.8 3.7.9 3.8.6 3.9.0-rc2"
+  export PYVERSIONS="3.5.4 3.6.8 3.7.9 3.8.6 3.9.0"
 elif [ "$TRAVIS_OS_NAME" = osx ]; then
   # space-delimited Python versions to install with pyenv, old to new
   export PYVERSIONS="3.5.9 3.6.11 3.7.8 3.8.5 3.9.0b5"
