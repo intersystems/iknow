@@ -80,12 +80,14 @@ jobs:
     - name: "Windows x86_64"
       os: windows
       env: >-
+        BUILDCACHE_EXE_DIR="$HOME/buildcache_exe"
         BUILDCACHE_DIR="$HOME/buildcache"
         PIP_CACHE_DIR="$HOME/pipcache"
         PYINSTALL_DIR="$HOME/python"
       cache:
         directories:
           - $ICUDIR
+          - $BUILDCACHE_EXE_DIR
           - $BUILDCACHE_DIR
           - $PIP_CACHE_DIR
           - $PYINSTALL_DIR
