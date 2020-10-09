@@ -90,10 +90,17 @@ namespace iknow {
         phases_begin_ = allocator.InsertRange(phase_vector.begin(), phase_vector.end());
         phases_end_ = phases_begin_ + phase_vector.size();	
       }
+      KbLabel(const KbLabel& other) { // explicit copy constructor to avoid random bytes (due to type alignment).
+          this->name_ = other.name_;
+          this->type_ = other.type_;
+          this->attributes_begin_ = other.attributes_begin_;
+          this->attributes_end_ = other.attributes_end_;
+          this->phases_begin_ = other.phases_begin_;
+          this->phases_end_ = other.phases_end_;
+      }
       iknow::base::String Name() const { return *name_; }
       const CountedBaseString* PointerToName() const { return name_; }
       iknow::core::IkLabel::Type Type() const { return type_; }
-      iknow::core::FastLabelSet::Index Index() const { return index_; }
       size_t AttributeCount() const { return attributes_end_ - attributes_begin_; }
       const KbAttribute* GetAttribute(size_t position) const {
         if (position > AttributeCount()) throw ExceptionFrom<KbLabel>("Illegal attribute position.");
@@ -106,7 +113,6 @@ namespace iknow {
     private:
       OffsetPtr<const CountedBaseString> name_;
       iknow::core::IkLabel::Type type_;
-      iknow::core::FastLabelSet::Index index_;
       OffsetPtr<const KbAttribute> attributes_begin_;
       OffsetPtr<const KbAttribute> attributes_end_;
       OffsetPtr<const Phase> phases_begin_;

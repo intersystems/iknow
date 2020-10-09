@@ -20,6 +20,16 @@ namespace iknow {
       IkRuleOutputAction(Action action, FastLabelSet::Index label) : 
         action_(action),
         label_(label) {}
+      IkRuleOutputAction(const IkRuleOutputAction& other) { // explicit copy constructor
+          this->action_ = other.action_;
+          this->label_ = other.label_;
+      }
+      const IkRuleOutputAction& operator=(const IkRuleOutputAction& rhs) { // explicit copy operator
+          this->action_ = rhs.action_;
+          this->label_ = rhs.label_;
+          return *this;
+      }
+
       Action GetAction() const {
         return action_;
       }
@@ -55,6 +65,10 @@ namespace iknow {
 	  IkRuleOutputPattern() : options_(IkRuleOption::kNOP) { // No Operation output pattern
 		  std::fill(ActionsBegin(), ActionsEnd(), IkRuleOutputAction()); // fill with non actions
 	  }
+      IkRuleOutputPattern(const IkRuleOutputPattern& other) { // explicit copy constructor
+          std::copy(other.actions_, other.actions_ + (sizeof other.actions_ / sizeof other.actions_[0]), this->actions_);
+          this->options_ = other.options_;
+      }
       //Apply this label output pattern to the given lexrep. Some label assignments require consulting
       //the input pattern.
       void Apply(IkLexrep& lexrep, const IkRuleInputPattern& in, Phase phase) const {

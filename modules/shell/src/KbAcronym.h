@@ -9,16 +9,20 @@ namespace iknow {
     class KbAcronym {
     public:
       KbAcronym(RawAllocator& allocator, const std::string& token, bool is_sentence_end) :
-	token_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(token))),
-	is_sentence_end_(is_sentence_end) {}
+        token_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(token))),
+        is_sentence_end_(is_sentence_end) {}
+      KbAcronym(const KbAcronym& other) { // explicit copy constructor
+          this->token_ = other.token_;
+          this->is_sentence_end_ = other.is_sentence_end_;
+      }
       iknow::base::String Token() const {
-	return iknow::base::String(*token_);
+        return iknow::base::String(*token_);
       }
       const CountedBaseString* PointerToToken() const {
-	return token_;
+        return token_;
       }
       bool IsSentenceEnd() const {
-	return is_sentence_end_;
+        return is_sentence_end_;
       }
     private:
       OffsetPtr<const CountedBaseString> token_;
