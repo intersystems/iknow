@@ -1,1303 +1,2106 @@
-
+﻿
+/* PHASE 1: RELABEL MANDATORY LABELS AND USER DICTIONARY ITEMS
 /*============================================================
 /* Rewrite mandatory labels to language-specific labels
-
 428;1;Punctuation;^NLPunctuation;
+/*		428. Eén (anderhalf) twee.
 429;1;CapitalInitial;^NLCapitalInitial;
+/*		429. Dat betekent dat je meer dan in Nederland en Duitsland werk moet maken van de aankleding van het product.
 430;1;CapitalMixed;^NLCapitalMixed;
+/*		430. Het AMiCA-project.
 431;1;CapitalAll;^NLCapitalAll;
+/*		431. Druk op OK om verder te gaan.
+
+/* Prepare user dictionary items for further processing
 433;1;UDNegation;+NLNegation;
+/*		433.UD. De schade werd op generlei wijze vergoed.
 434;1;UDPosSentiment;+NLPosSentiment;
+/*		434.UD. Het is bovendien een mooi voorbeeld van hoe de eID niet voor een overheidstoepassing gebruikt wordt.
 435;1;UDNegSentiment;+NLNegSentiment;
+/*		435.UD. Altijd on the road maar zonder het hoofd te verliezen.
 436;1;UDConcept;NLUDConcept+NLCon;
+/*		436.UD. Ik ben Geraldueerd en ik woon in Vlissingen.
 437;1;UDRelation;NLUDRelation+NLRel;
+/*		437.UD. We moeten het systeem nog epibreren, zei hij.
 438;1;UDNonRelevant;NonRelevant;
+/*		438.UD. We hebben de Belgische politie gewezen op de verdwijning van Sandra.
 
+
+/* PHASE 30: DETECT TIME INDICATIONS
 /* =================================
-
 1217;30;"ca."|NLNum;NLAdvDegree|*;
+/*		1217. Het Noordzeebekken vormde zich vanaf het Krijt, ca. 60 miljoen jaar geleden.
 1083;30;"op"|NLNum:"een"|"na";NLNum-NLPrep-NLPrep2|+Join-NLArt-NLEen|+Join-NLPrep-NLPrep2;
+/*		1083. Met 4,9 miljoen toeristen (2007) is Amsterdam de op vier na meest bezochte toeristenbestemming.
 578;30;NLDay|NLNum|NLMonth|NLJaar;NLAdvTime|Join|Join|Join;
+/*		578. De AEX opent maandag 10 maart 2008 naar verwachting lager.
 577;30;NLNum|NLMonth|NLNum;NLAdvTime|Join|Join;
+/*		577. Opgemaakt te Halen op 17 december 2014.
 579;30;NLDay|NLNum|NLMonth;NLAdvTime|Join|Join;
+/*		579. Volgende week maandag 31 augustus loopt het woonrecht af in Doel.
 584;30;NLNum|NLMonth;NLAdvTime|Join;
+/*		584. Per 1 oktober jl. is een reorganisatie ingevoerd.
 585;30;NLMonth:NLPartofyear|NLJaar;NLAdvTime|Join;
+/*		585. Alleen de Amerikaanse concurrent deed het in maart 2007 beter met een bedrag van 157,7 miljoen euro. 5,3 procent meer dan in dezelfde periode vorig jaar.
 1486;30;NLDay|NLDate;NLAdvTime+NLDate|Join;
+/*		1486. De volgende voorstelling vindt plaats op vrijdag 25-01-2019 in Turnhout.
 1487;30;NLDate|NLDigitaltime;NLAdvTime|Join;
+/*		1487. AMSTERDAM 11/08/2018 18:00 .
 1488;30;NLAdvTime+NLDigitaltime;NLCon;clean up to avoid conflicting labels
+/*		1488. Om 17u00 Belgische tijd wordt er meer uitleg gegeven.
 586;30;"begin"|NLAdvTime:NLMonth;NLAdvTime-NLStemCon-NLRelCon|Join;
+/*		586. Zo zou een stel uit Almere begin deze zomer in Suriname gaan trouwen.
 671;30;"midden":"medio":"eind":"aanstaande"|NLAdvTime:NLMonth;NLAdvTime|Join;
+/*		671. Eerder schrapte het bedrijf al plannen om tenminste $1 miljard aan aandelenkapitaal op te halen, nadat de aandelenkoers medio januari instortte. Eind september zou het project afgesloten worden met een groots feest.
 580;30;"aanstaande":NLMonth:NLAdvTime|NLAdvTime;NLAdvTime|Join;
+/*		580. Op 5 maart jongstleden zijn ze teruggekeerd.
 581;30;"aanstaande":NLWeek|NLDay;NLAdvTime|Join;
+/*		581. Deze krant meldt dat hij niets over deze sanering kwijt wil, maar dat aanstaande donderdag de cijfers over 2007 zullen worden gepubliceerd.
 582;30;NLAdvTime|"jongstleden":"aanstaande";NLAdvTime|Join;
+/*		582. We moeten op 14 maart aanstaande een bindend bod doen op het huis.
 590;30;NLAdvTime;NLAdvTime;avoid label conflicts
+/*		590. Hierbij stuur ik u een contractvoorstel naar aanleiding van uw brief d.d. 20 januari 2011.
 988;30;NLAdvDegree|NLEen|NLTimeconcept;NLBegin|NLAttradj|*;
+/*		988. De zwelling was reeds meer dan een maand aanwezig. Op Texel wordt, precies een week na het Sinterklaasfeest, het feest Ouwe Sunderklaas gehouden.
 394;30;NLAdvDegree|NLEnd+^NLHyphen;NLAdvTime|Join;
+/*		394. Een volledig jaar later was de ingang nog altijd afgesloten.
 1216;30;NLNum+^NLJaar|NLNum|NLEnd+^NLHyphen;NLAdvTime|Join|Join;
+/*		1216. Het Noordzeebekken vormde zich vanaf het Krijt, ca. 60 miljoen jaar geleden. NOT. Omdat het in 2008 50 jaar geleden is dat Expo 58 werd geopend.
 1214;30;NLNum|NLEnd+^NLHyphen;NLAdvTime|Join;
+/*		1214. Het verbaast me niet dat hij geen tien minuten geleden deze vergaderzaal verlaten heeft.
 
+
+/* PHASE 40: DISAMBIGUATION RULES
 /*===============================
 /* Preparation
-
 359;40;":";+NLPunctuation;Punctuation is not assigned automatically since ":" is used in rules
+/*		359. We maken drie taarten: chocoladetaart, kaastaart en citroentaart.
 488;40;NLNum|NLProcent;*|Join;
+/*		488. Er is 3 procent meer omzet gerealiseerd.
 
 /* Disambiguate the words WAAR, WEL
-
 1088;40;"niet"|"waar"|NLSubjpron:NLArt:"ze";NLRel|NLOndvw|*;
+/*		1088. Wie geen basiskennis heeft weet ook niet waar hij verdere kennis moet zoeken.
 1089;40;"niet"+^NLRel|"waar";*|NLAttradj;
+/*		1089. En dat is natuurlijk niet waar, daarvoor bestaat geen enkel bewijs.
 1095;40;NLLinkingverb|"waar"|"dat";*|NLAttradj|NLOndvw;
+/*		1095. Het is waar dat niet precies wordt aangegeven welk percentage de binnenkomende schepen in rekening moet worden gebracht.
 1277;40;"waar"|.NLLinkingverb|NLPunctuation:SEnd;NLAttradj|*|*;
+/*		1277. Als dat waar is, ziet de toekomst er goed uit.
 1099;40;"maar":NLComma|"wel";*|NLRAdv;
+/*		1099. Zoals hier al is gezegd, zijn er geen bewijzen maar wel duidelijke aanwijzingen.
 
 /* Disambiguate the word GEHEEL: adverb of degree OR noun
-
 1145;40;NLArt:"één":"als"|.NLAdvDegree:NLAdj:NLRelAdj:NLAttradj+^"geheel"|"geheel";*|NLAttradj|NLCon;
+/*		1145. Ik maak deel van een zeer plezant geheel. voor zowel de Nederlanden als geheel als voor de beide afzonderlijke staten. een open geheel, een doorgangsgebied.
 1146;40;NLPrep|NLPoss:"zijn":"haar":NLDempron|"geheel";*|*|NLCon;
+/*		1146. De borst wordt in haar geheel verwijderd.
 
 /* Negation: Join negation markers
-
 1173;40;"niet-"|NLPart:NLAdj:NLConAttradj:NLRelAdj:NLInf:NLRelConAdj;NLAttradj+NLNegWord|+Join;
+/*		1173. beleggingsinstelling met zetel in een niet-aangewezen staat. Ik lees uitspraken van virologen en van dierenartsen die zeggen dat niet-vaccineren in deze wereld een tijdbom is.
 736;40;NLAdvDegree|NLNooit;NLNooit+NLNiet|+Join;
+/*		736. ontsteking van de eierstokken wat zeer zelden voorkomt.
 694;40;NLAdvDegree+^"genoeg"|NLNiet;NLNiet|+Join;
+/*		694. ik mag absoluut niet klagen.
 695;40;"nog"|NLNiet;NLNiet|+Join;
+/*		695. bevelen die de Raad trouwens nog helemaal niet heeft gegeven.
 737;40;NLAdvDegree|NLSubjpron+NLObjpron;NLSubjpron+NLObjpron|+Join;
+/*		737. In Caïro droeg in 1980 bijna niemand nog een hoofddoek, nu bijna iedereen. dit heeft helemaal niets met vliegtuigen te maken.
 
 /* Join 'genoeg'
-
 1124;40;NLAdj|"genoeg";NLAdj|+Join;
+/*		1124. De outlook is echter niet goed genoeg.
 
 /* Disambiguate through capitalization
-
 195;40;NLVan+NLCapitalInitial|NLCapitalInitial;NLCon+NLCapitalInitial|Join;for names with 'Van'
+/*		195. Er is een akkoord bereikt met Dhr. Van Buren.
 196;40;NLVan+NLCapitalInitial|NLDe|NLCapitalInitial;NLCon+NLCapitalInitial|Join|Join;for names with 'Van De' or 'Van de'
+/*		196. De nieuwe roman van Van de Wyngaert heeft succes.
 482;40;NLFirstname+NLCapitalInitial|NLDe:NLVan|NLCapitalInitial;NLCon+NLCapitalInitial|Join|Join;for names with 'van'
+/*		482. Heb je Adriaan van Vossem ontmoet?
 672;40;NLFirstname+NLCapitalInitial|"voor"|NLDe|NLCapitalInitial;NLCon+NLFirstname+NLCapitalInitial|Join|Join|Join;for organisation names
+/*		672. De Raad voor de Kinderbescherming spande de zaak bij de kinderrechter aan.
 197;40;NLVan;NLPrep;
+/*		197. De hond van Gert heet Samson.
 658;40;NLDe+NLConIfCap|NLCapitalInitial;NLCon+NLCapitalInitial|Join;for known names with 'de' at the beginning of a sentence
+/*		658. De Lijn gaat de controles nog verscherpen.
 166;40;SBegin|NLCapitalInitial;*|-NLCapitalInitial;ignore capital at beginning of sentence
+/*		166. De eerste ronde.
 189;40;"-"|NLCapitalInitial;*|-NLCapitalInitial;ignore capital after -
+/*		189. ROTTERDAM - In de stromende regen had hij de 79-jarige vrouw aangesproken.
 165;40;NLDe+NLCapitalInitial|NLCapitalInitial;NLCon|Join;probably a family name with De
+/*		165. De twee kandidaten, een vrouw uit Zele en een man uit De Pinte, mochten een korte speech houden.
 190;40;NLDe+NLCapitalInitial|^NLCapitalInitial+^SEnd;-NLCapitalInitial|*;probably a missing sentence end
+/*		190. Titel zonder punt De eerste zin.
 188;40;NLCapitalInitial|NLCapitalInitial;NLCon|NLCon+NLCapitalInitial;make capitalized words Concept
+/*		188. We werden voorgesteld aan Ben Pelckmans.
 198;40;NLConIfAllCap+NLCapitalAll;NLCon;
+/*		198. Is er al iemand van het OM aanwezig?
 200;40;NLConIfCap+NLCapitalInitial;NLCon+NLCapitalInitial;
+/*		200. Zij heeft in Leiden gestudeerd.
 483;40;NLFirstname;-NLFirstname;avoid conflicting labels
+/*		483. Toon het resultaat op de vergadering.
 
 /* Disambiguate ambiguous past participle OR conjugated verb (OR infinitive)
-
 1132;40;"te"|NLPartVerbInf;*|NLVerb+NLInf;
+/*		1132. zonder de bevoegdheidssfeer van de Raad te betreden.
 1298;40;NLDie:NLRelConModOth|NLZe:NLJe:NLSubjpron+NLPlural|NLPartVerbInf|^NLRelAux;*|*|NLVerb|*;
+/*		1298. Alle teksten die ze herzien, worden in de lijst vermeld.
 1297;40;NLmAux|.^NLInf+^NLInfCon+^NLPartVerbInf+^NLRelAux+^NLAux+^NLOndvw|NLPartVerbInf;*|*|NLInf;
+/*		1297. We zullen na het jaar 2020 minder steun kunnen ontvangen.
 1035;40;NLSubjpron|NLPartVerb;*|NLVerb;
+/*		1035. Zij omschreven de sfeer als volgt.
 1055;40;NLArt:NLAttradj:NLGeen:NLDempron|NLRelCon+NLPartVerb|^NLCon;*|NLCon|*;
+/*		1055. De 40 naakte ontslagen zijn wel veel minder dan de aangekondigde 109 jobs die moesten verdwijnen. dat er van de Griekse autoriteiten tot op heden nog geen enkel bericht is ontvangen. NOT. Dat bericht Le Soir.
 1054;40;NLPartVerb|NLLinkingverb;NLPartrel|*;
+/*		1054. De patiënte kan uit het ziekenhuis ontslagen worden op 27.08.13.
 1129;40;NLAdvTemp:NLConj|NLPartVerb|typeConcept;*|NLVerb|*;
+/*		1129. Daarna begonnen mensen over straat te rennen en schreeuwden ze het uit.
 1130;40;NLPartVerb|NLObjpron:"haar";NLVerb|*;
+/*		1130. die verweten haar voortdurend dat zij veel te onbuigzaam was.
 1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep;*|*|NLAttradj|*;
+/*		1289. Na de desastreus verlopen veldtocht verlieten de troepen het land.
 1290;40;SBegin|.^NLRelAux+^NLLinkingverb+^NLAux+^NLmAux+^NLPartVerb|NLPartVerb+^NLRelCon;*|*|NLVerb;
+/*		1290. Regenten begonnen het politieke klimaat te beheersen.
 1034;40;NLPartVerb+^NLRelCon;NLPart;
+/*		1034. ik vind dat maatregelen die verder gaan dan deze omschreven taken niet doelgericht zijn. een expositie gemaakt van miljoenen tulpen die vooral door toeristen goed wordt bezocht.
 
 /* Idioms
-
 1052;40;^NLGeen:NLArt:NLAttradj:NLConAttradj:NLPoss|"gebruik":"plaats":"baat"|NLmAux|NLInf;*|NLVerb|*|*;
+/*		1052. op een goede dag plaats moet maken voor bestaande EU-richtlijnen. geen echte concurrentiestrijd op het gebied van de elektronische handel plaats zou vinden. NOT. ondernemingen die van het stelsel geen gebruik kunnen maken. NOT. dat dit bureau op een centrale plaats moet komen.
 
 /* Disambiguate the word JE: possessive OR personal pronoun
-
 339;40;NLStemCon|NLJe;NLVerb|NLSubjpron;
+/*		339. Wat voor onzin kraam jij nu weer uit?
 129;40;NLJe|NLJe;NLSubjpron|NLPoss;
+/*		129. Heb je je zwempak meegebracht?
 2;40;NLJe|NLArt:NLEr:NLPrep:NLVerb:NLmAux:NLRelConModOth;NLSubjpron|*;
+/*		2. Heb je het instructieboekje gelezen? Wil je een snoepje? Volgende week kan je de resultaten bekijken. Kan je er de sterren zien?
 1365;40;NLPrep+^NLOndvw+^NLConj|NLJe|NLAttradj:NLCon;*|NLPoss|*;
+/*		1365. met een felbegeerde doctorstitel voor je naam.
 
 /* Disambiguate the words ONS and HUN: possessive or personal pronouns
-
 934;40;NLSubjpron|NLPoss+NLObjpron|NLNiet:NLVerb:NLPartrel;*|NLObjpron|*;
+/*		934. Dat betekent natuurlijk niet dat we de belangen van de voedselproducenten kunnen veronachtzamen en evenmin dat we ons niet open moeten stellen voor moderne methoden.
 1061;40;NLPoss+NLObjpron|NLPart:NLRelAdj:NLAttradj|NLAndOr|NLAttradj|NLCon:NLAdjCon;NLPoss|NLAttradj|*|*|*;
+/*		1061. dan zouden deze diensten niet aan hun beoogde en noodzakelijke doelstelling beantwoorden.
 1060;40;NLPoss+NLObjpron|NLPart:NLRelAdj:NLAttradj|NLCon:NLAdjCon;NLPoss|NLAttradj|*;
+/*		1060. Vandaag is de omgekeerde beweging ingezet en plaatsen de ouder geworden zonen hun overleden vaders blijkbaar op een voetstuk. De verantwoordelijke functionarissen mogen hun verdiende straf niet ontlopen.
 135;40;NLPoss+NLObjpron|NLCon;NLPoss|*;
+/*		135. terwijl de Amerikanen nog nooit zoveel subsidies voor hun landbouw hebben uitgetrokken.
 136;40;NLPoss|NLAttradj;NLPoss|NLAttradj;
+/*		136. De kunststeden Brugge, Gent, Antwerpen, Mechelen en Brussel trekken toeristen voor hun historische gebouwen, begijnhoven, architectuur en musea.
 
 /* Disambiguate the word BIJ: preposition or noun
-
 310;40;NLBij|NLDe|NLCon|NLTe|NLInf:NLInfCon|NLCon;NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLCon;
+/*		310. Op eigen verzoek en wegens het bereiken van een bij de wet te bepalen leeftijd worden zij ontslagen.
 265;40;NLArt|NLBij|NLArt|NLCon|NLPart;*|NLPrep|*|*|*;
+/*		265. Vertegenwoordiging van de bij een vakbond aangesloten werknemers.
 312;40;NLArt|NLBij|NLArt|NLRelCon|NLPart;*|NLPrep|*|NLCon|*;
+/*		312. De bij het onderzoek betrokken politiemensen.
 309;40;NLArt|NLBij:NLPrep|NLArt|NLCon|NLRelAdj:"bepaalde";*|NLAttradj|NLAttradj|NLCon|NLAttradj;
+/*		309. Uit de bij de rechtbank vertoonde video-opnamen kon worden opgemaakt dat Mark M., inwoner van mijn kiesdistrict, op geen enkele wijze bij het geweld betrokken is geweest. Voor de bij de Grondwet bepaalde gevallen worden de gekozen leden van elke Kamer in een Nederlandse en een Franse taalgroep ingedeeld. De Raad van State doet bij wege van arrest uitspraak als administratief rechtscollege en geeft advies in de door de wet bepaalde gevallen.
 313;40;NLArt|NLBij|NLArt|NLRelCon|NLRelAdj;*|NLAttradj|NLAttradj|NLCon|NLAttradj;
+/*		313. De bij het onderzoek bedreigde getuige.
 10;40;NLDe:NLEen:NLAttradj|NLBij;*|NLCon;
+/*		10. een Franse taalgroep ingedeeld op de bij de wet vastgestelde wijze.
 15;40;NLBij;NLPrep;
+/*		15. Er stonden twintig stoelen bij elkaar. Ik heb de koffer bij de kapstok in de hal gezet.
 
 /* Disambiguate some other specific words
-
 1326;40;"zowel"|*^"als"|"als";*|*|NLAndOrBut;
+/*		1326. Het zou de maatregelen op nationaal niveau coördineren en als een katalysator werken voor maatregelen in zowel de openbare als particuliere sector.
 16;40;NLPoss:NLArt:NLPrep+^NLPrep2|NLWilde;*|NLAttradj;
+/*		16. Ze hebben hun wilde tijger moeten afmaken. In de arena liep een wilde stier. Het wilde konijntje wilde niet in het hok blijven zitten.
 19;40;NLWilde;NLVerb+NLmAux;
+/*		19. Hij wilde naar Spanje verhuizen.
 20;40;NLEen|NLLaat;*|NLAttradj;
+/*		20. Op de website staat een laat verslag van de vorige vergadering.
 128;40;NLLaat|NLInfCon;NLVerb|NLVerb+NLInf;
+/*		128. Als je die ballon laat vliegen, win je misschien een prijs.
 22;40;NLLaat;NLVerb;
+/*		22. Bompa laat de hond uit.
 246;40;NLPoss:NLGeen|NLHaar;*|NLCon;
+/*		246. Mijn haar was vanaf mijn geboorte nog nooit geknipt.
 1066;40;"haar"|NLCon;NLPoss|*;
+/*		1066. Er is een nieuwe regering die niet per se haar gezicht moet bewaren wegens de eerdere weerstand.
 489;40;NLCon|"vol"|NLCon:NLAttradj;*|NLPrep|*;
+/*		489. Ineens stond de gang vol mannen met bivakmutsen over hun hoofd. Een theaterbeleving vol visuele verrassingen en fijne humor.
 665;40;NLCon|"vol"|SEnd;*|NLRAdv|*;
+/*		665. "Ik kan er niets over verklaren, want ik was er niet bij", hield L. vol.
 490;40;"vol"+^NLPrep+^NLRAdv;NLAdj;
+/*		490. De Vlaamse Australiër had immers tijd zat - een vol jaar - om zijn voelsprieten uit te steken.
 597;40;SBegin:NLPunctuation|NLAl|NLRelAux:NLVerb:NLmAux:NLAuxCon:NLRelAuxCon:NLRelCon;*|NLOndvw|-NLInf;
+/*		597. Mensen kunnen weer min of meer normaal naar het Hoekse strand, al blijft een deel nog dagenlang afgesloten voor onderzoek. Al hebben we vaak alleen maar de indruk dat we een bewuste beslissing nemen. Al kan je niets zien, je kan het wel horen.
 600;40;NLPrep|"al"|NLDe:NLHet;*|NLAttradj|Join;
+/*		600. van al de Galliërs zijn de Belgen de dappersten.
 636;40;NLVeelWeinig|NLCon:NLAttradj;NLAttradj|*;
+/*		636. Er was veel volk op de markt.
+/*638. Er stonden veel oude modellen in de etalage.
 683;40;^NLPunctuation+^SBegin+^NLNum|NLMaar|NLNum;*|NLAdvStruct|*;
+/*		683. Als je maar één spuitje hebt gehad, ben je onvoldoende gewapend en haal je best een herhaling. NOT. Mevrouw, niet één maar vier wetgevingsverslagen moeten nog in stemming worden gebracht.
 685;40;NLEr:NLJe:NLZe:NLSubjpron+^NLObjpron|NLMaar;*|NLAdvStruct;
+/*		685. Je mag niet vergeten dat hij maar matig geïnteresseerd is.
 1287;40;^NLInf+^NLPrep|NLMaar|NLInf:NLPrep|SEnd;*|NLAdvStruct|*|*;
+/*		1287. De lottokoorts blijft maar stijgen.
 1302;40;SBegin:NLOndvw|*^NLVerb+^NLLinkingverb+^NLRelCon+^NLNiet+^NLGeen+^NLPunctuation+^NLHyphen+^NLMaar|NLMaar|^NLEr+^NLNiet+^NLGeen;*|*|NLRAdv|*;
+/*		1302. Hoewel de CEO maar een paar dagen vastzat, is zijn bedrijf door de aanklacht weggevaagd.
+/* NOTE: 'maar' is usually AdvStruct after imperative, but we don't label imperatives separately, and using Verb has many side-effects
 1304;40;NLOndvw:SBegin|NLMaar|^NLEr+^NLNiet+^NLGeen;*|NLAdvStruct|*;
+/*		1304. Maar stel nu dat de legende niet waar is?
 953;40;"in"|"het"|"niet"|SEnd:NLComma:NLPrep;*|NLVerb|Join|*;
-
+/*		953. De inkomsten van Usain Bolt vallen in het niet bij die van golfers en tennissers.
 /* Disambiguate the word ZIJN: possessive pronoun OR copula
-
 257;40;SBegin|NLEr|NLZijn|NLInfCon;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|NLCon;
+/*		257. Er zijn voorstellen om tot een federale kieskring te komen.
 258;40;SBegin|NLOndvw:NLVerb|NLZijn;*|*|NLPoss;
+/*		258. Hoewel zijn kleren vuil zijn, verkeren ze nog in goede staat. Maakte zijn romandebuut met Heilig zonder moeite (1987).
 256;40;SBegin|^NLPrep+^NLAndOrBut|NLZijn;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf;
+/*		256. Beiden zijn christen-democraat.
 178;40;NLZijn|NLPart|^NLCon;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|*;
+/*		178. De regels op het Gelderlandplein zijn aangescherpt met als gevolg dat deze levende reclamezuil voor goede doelen niet langer meer in de passage op het Gelderlandplein mag staan.
 250;40;NLZijn|NLRelAdj|^NLCon+^SEnd;*|NLAttradj|*;
+/*		250. De meeste kosten bij ABCD zijn vast, omzetverlies werkt dus onmiddellijk door tot de bottomline.
 193;40;NLZijn|NLRelAdj:NLPart|NLCon;NLPoss|NLAttradj|*;
+/*		193. Wat onmiddellijk opviel was zijn bedrukte stemming.
 192;40;NLZijn|NLRelConModOth;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		192. Volgens mij zijn dat zoete aardappelen.
 48;40;NLPrep|NLZijn|^SEnd;*|NLPoss|*;
+/*		48. De kleuter speelde met zijn nieuwe tractor. NOT. Er moet in ieder geval geen enkele financiële stimulans voor zijn.
 1387;40;NLZijn|NLAdj|^NLCon+^NLAndOrBut;NLRelAux+NLAux+NLLinkingverb+NLVerb|*|*;
+/*		1387. De meeste promoties zijn volledig in orde.
 49;40;NLEr|NLZijn|NLCon|NLDie;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|NLOndvw;
+/*		49. En er zijn mensen die normaal en goed opgeleid zijn en die erg arm zijn.
 130;40;NLZijn|SEnd:NLArt:NLDempron:NLPathRelevant:NLHeel:NLNiet:NLGeen;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		130. De kinderen zullen heel blij zijn. Maar het zijn de sponsordeals en het startgeld die het meeste opleveren. Slechts vier jongeren zijn heel ontevreden. Godsdienst en wetenschap zijn niet zomaar totaal verschillende disciplines. Het interieur van de barokke jezuïetenkerk liep schade op, maar er zijn geen topstukken vernield.
 50;40;NLZijn|NLPrep:NLRelPrepAdj;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|^NLPrep;
+/*		50. Flitspalen zullen voor bepaalde punten in het verkeer altijd complementair zijn met trajectcontrole. De cijfers over 2007 zijn conform de verwachtingen.
 55;40;NLZijn|NLAdvStruct:NLRAdv:NLAdvDegree:NLZo:NLEr:NLDan;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		55. Twee mensen, onder wie een kind, zijn nog vermist. De verwachtingen voor 2008 zijn daarentegen teleurstellend. De afzonderlijke leden ervan - zelfs de permanente leden - zijn hiertoe niet bevoegd.
 56;40;NLZijn|NLSubjpron:NLZe:NLPoss:NLJe:NLRefl:NLPunctuation:NLConj:NLOndvw;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		56. Om acht uur zijn wij aan de beurt. Zijn ze nog in het land? Een hele eer, want zij zijn onze grote voorbeelden. Je kunt bang zijn je machteloos te voelen. De ondernemingen zijn zich dus bewust van wat zij kopen. "Er zal een tolk aanwezig zijn", zei hij. Dat zou een resultaat zijn waarvoor we op geen enkele manier een natuurlijke verklaring kunnen vinden. Dus denk ik dat we minstens even sterk gewapend zijn als vorig jaar.
 64;40;NLDit|NLZijn;NLDempron|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		64. De directeur probeert echter de schade te beperken: „Dit zijn individuele gevallen.
 668;40;NLZijn|NLAdvTime:NLEnd:NLDay:NLWeek:NLMonth;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		668. In Irak zijn vandaag zeker 15 mensen gedood bij twee bomaanslagen. De toonaangevende indexen in Japan zijn dinsdag lager de dag uitgegaan.
 1070;40;NLRAdv|NLZijn|^typeConcept;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		1070. Restanten hiervan zijn te zien in symbolen. we schrappen bepalingen die niet meer van toepassing zijn en we regelen de bepalingen voor "eenmalig vervoer" van gevaarlijke goederen.
 1253;40;NLZijn|NLAndOrBut|^NLPoss;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|*;
+/*		1253. Het hoeft niet groot te zijn maar wel instapklaar.
 
 /* Disambiguate the word GEZIEN: participle or preposition
-
 1143;40;SBegin|"gezien";*|NLPrep;
+/*		1143. Gezien die situatie en die verschillen in benadering kunnen wij vooralsnog geen actie ondernemen.
 1142;40;^NLPart|NLAndOrBut:NLComma|"gezien";*|*|NLOndvw;
+/*		1142. Omwille daarvan en gezien laser-epilatie bijgevolg slechts het topje van de ijsberg is. kan ik ook begrijpen, gezien zijn financiële handel en wandel.
 1144;40;"gezien"+^NLPrep|"zijn"|^NLArt:NLSubjpron:NLZe;*|NLPoss|*;
+/*		1144. Het heeft eindelijk de aandacht gekregen die het gezien zijn economische en politieke dynamiek toekomt. NOT. dus financieel gezien zijn we bereid nog meer te doen.
 1141;40;"gezien"+^NLPrep|NLArt;NLOndvw|*;
+/*		1141. Diuretica waren noodzakelijk gezien de radiografische longcongestie.
 
 /* Disambiguate the word MEER: noun or adverb
-
 318;40;NLHet|NLMeer|NLZijn;*|NLCon|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		318. Bij het meer zijn honderden kijkers toegestroomd.
 289;40;NLMeer|NLZijn;NLRAdv|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		289. Dat komt vooral doordat vrouwen meer zijn gaan roken.
 351;40;NLArt|NLMeer|NLRelAdj|NLCon;*|NLAttradj|NLAttradj|NLCon;
+/*		351. Zowel de grote massa als de meer ontwikkelde mensen noemen dit eudaimonia.
 352;40;NLArt|NLMeer|NLRelAdj+^NLPart;*|NLCon|NLVerb;
+/*		352. Tussen het bos en het meer ontdekte hij bewegende gestalten.
 1062;40;"niet"|"veel"|*NLAttradj:NLCon|"meer";*|*|*|NLCon;
+/*		1062. Er zijn al niet veel joden meer die een keppeltje dragen.
 1147;40;"geen"|.NLAdj:NLAttradj|NLCon:"geheel"|"meer";*|NLAttradj|NLCon|NLCon;
+/*		1147. Wij mogen geen tijd meer verliezen.
 
 /* Disambiguate the words NU, EENS, TELKENS, TOEN: adverb of time or conjunction
-
 729;40;"toen"|NLArt:NLPoss:NLCon;NLOndvw|*;
+/*		729. Toen de jongeren eten wilden klaarmaken op de camping, ontplofte hun gasvuurtje. Op 4 november, toen Barack Obama verkozen werd tot president.
 608;40;SBegin:NLPart|NLAdvTempConj|typeConcept;*|NLOndvw|*;
+/*		608. Nu Fontaine het Vlaams Huis leidt, heeft de vennootschap blijkbaar haar activiteiten uitgebreid.
 609;40;SBegin|NLAdvTempConj|NLArt:NLDit;*|NLOndvw|*;
+/*		609. Nu de wonde mooi genezen is kan eerstdaags gestart worden met de radiotherapie.
 731;40;SBegin:NLComma|NLAdvTempConj|NLVerb+^NLRelAux|NLRelConModOth:NLConj;*|NLOndvw|*|*;
+/*		731. Eerder deze week ontstond er al heisa in Frankrijk, toen bekendraakte dat de Bibiothèque National in Parijs voor de digitalisering van haar boekenarsenaal in zee gaat met Google. NOT. Nu blijkt dat hieraan niet voldaan is en dat de instelling in Frankfurt volledig is verlamd.
 610;40;NLPunctuation|NLAdvTempConj|NLArt;*|NLOndvw|*;
+/*		610. Vlaanderen wil de heffing bij voorkeur invoeren in overleg met de buurlanden, maar moet rekening houden met vertraging, nu de Nederlandse regering is gevallen.
 612;40;NLAdvTempConj|NLSubjpron:NLZe:NLDie:"er":NLRefl;NLOndvw|*;
+/*		612. Nu ik minister ben, worden mijn zakenreizen bijna allemaal door het departement geregeld. Alain klopte op de ramen, maar schrok toen hij zag dat die zwartgeblakerd waren. toen die het niet aandurfde, rekende De Bezige Bij uit hoe het kon. toen er brokstukken van een gevelplaat naar beneden vielen.
 1239;40;NLPart|NLAdvTempConj|NLPrep;*|NLOndvw|*;
-611;40;NLAdvTempConj;-NLAdvTempConj;
+/*		1239. Deze zelfde EU-regeringen hebben nooit iets gezegd toen in Frankrijk een nieuwe regering gevormd werd.
+611;40;NLAdvTempConj;-NLAdvTempConj;default
+/*		611. Nu is hij directeur.
 1008;40;SBegin:NLPunctuation|NLAdj|NLOndvw;*|NLOndvw|+Join;
+/*		1008. Zeker nu die al zeven jaar zonder enig succes aan de gang zijn.
 
 /* Disambiguate the words DAN WEL
-
 1013;40;NLAdj:NLAttradj|"dan wel"|NLAdj:NLAttradj;*|NLConj|*;
+/*		1013. In dit stadium zou ik echter een niet zozeer technische dan wel filosofische en praktische opmerking willen formuleren.
 
 /* Disambiguate the words NIET ALLEEN, ALLEEN, ENKEL
-
 239;40;NLNiet|"alleen"|SEnd:NLPunctuation;*|NLAdj|*;
+/*		239. Naar een restaurant ga ik liefst niet alleen. Sinterklaas werkt niet alleen, hij gaat tegenwoordig vergezeld van vele Zwarte Pieten.
 977;40;"niet enkel":"niet enkel en alleen"|*^"maar ook"+^"maar tevens"+^"maar eveneens"+^"maar"|"maar ook":"maar tevens":"maar eveneens":"maar";NLRAdv-NLNegation-NLNegBegin|*|*;
+/*		977. niet enkel in Antwerpen en Brussel maar ook in Parijs en Rotterdam. dat het desbetreffende systeem niet enkel voor militaire en defensiedoeleinden wordt gebruikt, maar tevens een commerciële, industriële en technologische functie heeft.
 973;40;NLNiet|"alleen"+^NLAdj|*^"maar ook"+^"maar tevens"+^"maar eveneens"+^"maar"|"maar ook":"maar tevens":"maar eveneens":"maar";NLRAdv-NLNegation-NLNegBegin|NLRAdv|*|*;
+/*		973. Die praktijk vormt niet alleen een financiële verliespost voor de maatschappij, maar heeft ook al geleid tot explosies die veel slachtoffers eisten en tot ecologische schade. Het gehele GLB - en dus niet alleen de veeteeltsector, maar eveneens de akkerbouw die de veevoeders voortbrengt - zou onder de loep moeten worden genomen.
 974;40;NLNiet|"alleen"+^NLAdj|*^NLComma|NLComma|"ook";NLRAdv-NLNegation-NLNegBegin|NLRAdv|*|*|NLConj;
+/*		974. Een ideaal vetpercentage haal je niet alleen door minder te eten, ook door anders te eten.
 966;40;^SBegin|NLNiet|"alleen"|"zijn":"is"+typeRelation|SEnd:NLPunctuation;*|*|NLAdj|*|*;
+/*		966. Mensen met een monofobie kunnen niet alleen zijn. NOT. Niet alleen zijn met het bestaande beleid de doelstellingen niet gehaald. NOT. als we het doen, zal dat niet alleen zijn als reactie op een conjuncturele situatie.
 965;40;NLNiet|"alleen"|"ben":"bent":"geweest"+typeRelation;*|NLAdj|*;
+/*		965. En je moet me beloven dat je later, als ik dood ben, naar mijn graf komt en met mij komt praten zodat ik niet alleen ben.
 970;40;NLNiet|"alleen"|NLVerb|SEnd;*|NLAdj|*|*;
+/*		970. Lokale hulpdiensten kunnen het echter niet alleen redden.
 244;40;NLNiet|"alleen"+^NLAdj;NLRel+NLNegation+NLNietAlleen|+Join;
+/*		244. De kliniek heeft ons echter verzekerd dat hij nooit alleen naar buiten gaat. Pakjesavond is er al lang niet meer alleen voor kinderen. Daar gaat het niet alleen om mensenrechten en milieu.
 504;40;"alleen"+^NLRAdv|NLAux;NLAdj|*;
+/*		504. Maar we moeten een verklaring onder ede invoeren waarin de aankomende promovendus belooft dat hij zijn onderzoek alleen heeft gedaan.
 1020;40;NLArt|"alleen"|NLAttradj;*|NLAttradj|*;
+/*		1020. ﻿een alleen opererende terrorist.
 1021;40;NLArt|.NLAdvRestriction|"door"|NLArt|NLCon|NLAttradj;*|NLAttradj|NLAttradj|NLAttradj|*|*;
+/*		1021. een alleen door de eu gefinancierde maatregel. De Raad is flexibel omgesprongen met de door het Parlement geventileerde kritiek.
 859;40;NLNooit|NLAdj|NLPrep;*|NLRAdv|*;
+/*		859. Doe een doek of washandje om de coldpack, leg de coldpack nooit direct op de huid.
 505;40;NLPoss:NLAttradj|"enkel";*|NLCon;
+/*		505. Ik heb pijn aan mijn enkel. Ik heb een pijnlijke enkel.
 507;40;NLDe:NLEen|NLPart|"enkel";*|NLAttradj|NLCon;
+/*		507. Geef hem een pijnstiller voor de gezwollen enkel. De patiënt kwam binnen met een gezwollen enkel.
 
 /* Disambiguate indefinite pronoun ANDERE(N)
-
 515;40;NLNum|NLAnderen;*|NLCon;
+/*		515. Twaalf tieners overleefden de brand niet, 23 anderen raakten gewond.
 516;40;NLDe|NLAnderen;NLSubjpron+NLObjpron|Join;
+/*		516. Waar zijn de anderen gebleven?
 517;40;NLMeasure|NLAnderen;*|NLCon;
+/*		517. We gingen met een aantal anderen op stap.
 518;40;NLAnderen;NLSubjpron+NLObjpron;
+/*		518. Sommigen vinden het mooi, anderen niet.
 525;40;"onder"|"andere"|^NLCon+^SEnd;NLAdvStruct|Join|*;
+/*		525. Het omvat onder andere een luchthavengebouw. SHOULD_NOT_FIRE_IN: 1 juli 2004 is tevens de termijn voor vaartuigen die onder andere vlaggen varen dan die van de lidstaten van de Unie.
 
 /* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
-
 1196;40;"bepaalde"|NLConj:NLPoss:NLArt:"haar":"dat";NLVerb|*;
+/*		1196. Hoewel de rechter bepaalde dat hij de rest van zijn leven achter tralies moet doorbrengen. Die bepaalde de  koers.
 1199;40;NLNum|"bepaalde";*|NLCon;
+/*		1199. Kan worden verricht door één bepaalde groep.
 1200;40;NLArt|.NLAdvTemp|"bepaalde"|^NLAttradj:NLConAttradj:NLCon:NLRelCon;*|*|NLAttradj|*;
+/*		1200. Met inachtneming, zo nodig, van het bepaalde in artikel 91, derde lid. op een bepaalde wijze en op een bepaald tijdstip, hetgeen hier niet het geval was.
 
 /* Disambiguate the words WELKE ... OOK
-
 1140;40;"welke":"welk"|.NLAdj:NLAttradj:NLConAttradj:NLSubjpron|NLCon|"ook";NLSubjpron+NLObjpron|*|*|NLSubjpron+NLObjpron;
+/*		1140. dat niemand in Europa, dus noch de Commissie noch welke andere Europese instantie ook, de voortzetting van de huidige politiek zal kunnen tolereren.
 
 /* Disambiguate the words NET, PAS: adverb of time or noun
-
 321;40;NLAdvTempCon|NLPart;NLPart|+Join;
+/*		321. Mevrouw Agatha Raisin zat achter een pas opgeruimd bureau.
 326;40;NLPrep|NLArt|NLAdvTempCon;*|*|NLCon;
+/*		326. In de beslissende derde set sloeg Clijsters een belangrijke breakbal in het net.
 322;40;NLPrep:NLVerb:NLRelAdj|NLPoss|NLAdvTempCon;*|*|NLCon;
+/*		322. Zonder enig spoor van zwakte of ouderdom in zijn pas.
 320;40;NLVerb|NLAdvTempCon;*|NLRAdv;
+/*		320. Dit gelijkwaardig stellen gebeurde pas met de taalwet van 1932.
 1186;40;NLArt:NLAttradj:NLGeen|NLAdvTempCon;*|NLCon;
+/*		1186. Het katholieke net is daarbij het grootst.
 1188;40;NLAdvTempCon|NLAdvStruct;NLAdvStruct|+Join;
+/*		1188. Net daarom kunnen bestaande aandeelhouders in de meeste gevallen rekenen op gunstige voorwaarden.
 1185;40;NLAdvTempCon|NLPrep;NLPrep|+Join;
+/*		1185. Het aandeel strandde in Londen tussentijds net onder de 75 dollar.
 319;40;NLAdvTempCon;NLAdvTemp;
+/*		319. Dit terwijl een gratieverzoek net was afgewezen.
 
 /* Disambiguate the word ZO
-
 382;40;NLZo|^NLZo|"mogelijk";NLAdj|+Join|Join;
+/*		382. Aannemer, klant en architect engageren zich samen om de kosten zo efficiënt mogelijk te beheersen.
 389;40;NLZo|NLAdj;NLAdvDegree|NLAdj+NLWithZo;
+/*		389. De ijskap reikte zo ver naar het zuiden, dat het noorden van Nederland door gletsjers bedekt werd.
 390;40;NLOm|NLZo|^NLPart+^NLTe+^SEnd;*|NLAdvStruct|*;
+/*		390. Om zo een herhaling van de methodes uit het verleden onmogelijk te maken.
 391;40;NLVerb|NLZo|NLArt;*|NLAdvStruct|*;
+/*		391. Het weekje zee van vier vrienden kende zo een dramatisch einde.
 387;40;NLAndOrBut|NLZo|NLPunctuation;NLAdvStruct|Join|*;
+/*		387. "Alsof het een tweedehands pak was, of zo", zei hij.
 388;40;NLAndOrBut|NLZo|SEnd;NLAdvStruct|Join|*;
+/*		388. Maar toen dacht ik nog niet aan praktische zaken, zoals samenwonen of zo.
 386;40;NLAndOrBut|NLZo|^"niet";*|NLAdvStruct|*;
+/*		386. Uitgebreid krabben kan een onderliggende huidaandoening verergeren en zo een vicieuze cirkel veroorzaken.
 383;40;SBegin|NLZo|^NLAttradj+^NLAdj+^NLAdvTime+^NLAdvTemp+^SEnd;*|NLAdvStruct|*;
+/*		383. Zo moet de werknemer de cheques altijd op zak hebben.
 384;40;NLZo;NLAdvDegree;
+/*		384. Een burenruzie in Sprang Capelle, is zo geëscaleerd dat de politie moest ingrijpen.
 824;40;NLAdvDegree|NLAdvDegree;NLAdvDegree|+Join;
+/*		824. Onder de aartshertogen Albrecht en Isabella verdween de invloed van het protestantisme vrijwel volledig en werd het katholicisme vernieuwd door de besluiten van het Concilie van Trente.
 81;40;"zolang"|NLArt:NLEr:NLSubjpron:NLJe:NLZe:NLDempron;NLOndvw|*;
+/*		81. De behandeling moet voortgezet worden zolang de jeuk aanhoudt.
 427;40;NLAdvDegree|NLAdvTime;NLAdvTime|+Join;
+/*		427. Dat is acht procent meer dan vorig jaar.
 576;40;NLAdvDegree:"iets"|NLAdvTemp;NLAdvTemp|+Join;
-
+/*		576. De zo vaak bezongen authenticiteit blijkt vaak niet veel meer dan een gewiekste marketingvondst. niet om 12.00 uur maar misschien iets later.
 /* Disambiguate ZOALS: comparison or explanatory
-
 1283;40;NLZoals|NLSubjpron:NLEr;NLConj|*;
+/*		1283. Daarom denk ik, zoals ik al eerder heb gezegd, dat dit werk is dat nog maar net is begonnen.
 1285;40;NLZoals|NLHet|NLVerb:NLmAux:NLAux:NLRelAux+^NLInf;NLConj|*|*;
+/*		1285. als alles perfect is zoals het zou moeten zijn, waarom zou hij dat dan nog moeten doen?
 1284;40;NLZoals;NLRel;
+/*		1284. Exportsteun, zoals die bijvoorbeeld in de landbouw bestaat, kan natuurlijk onder geen beding verleend worden.
 
 /* Disambiguate the words KAN, WIL: auxiliary verb or noun
-
 78;40;NLDe|NLAuxCon;*|NLCon;
+/*		78. Waar is de kan met water?
 80;40;NLAuxCon;NLmAux+NLVerb;
+/*		80. Hoe wil je die kippen vangen?
 
 /* Disambiguate the word WAS: (linking) verb or noun
-
 77;40;NLDe|NLRelAuxCon;*|NLCon;
+/*		77. Hier wordt de was opgewarmd.
 79;40;NLRelAuxCon;NLRelAux+NLLinkingverb;
+/*		79. Waar was je gisterenavond?
 
 /* Linking verbs
-
 1128;40;NLmAux|"worden"|NLPart;*|-NLLinkingverb|*;
+/*		1128. Maar ik vind niet dat dit verslag vrijwel kritiekloos kan worden aanvaard.
 1111;40;NLmAux|NLLinkingverb|^NLPart;+NLLinkingverb|*|*;
+/*		1111. Het zou ruim 46.000 vierkante meter groot moeten worden.
 1046;40;NLmAux|NLZijn|typeRelation+^NLPart;+NLLinkingverb|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
-
+/*		1046. Wat precies de gevolgen zullen zijn weten we echter nog niet.
 /* Disambiguate the word DAT: demonstrative pronoun or subordinate conjunction
-
 531;40;"dat"|NLRelAux|^NLPart+^SEnd;NLSubjpron+NLObjpron-NLRelpron|*|*;
+/*		531. Dat is een nieuw model.
 847;40;SBegin|NLRelAux|"dat"|NLGeen:NLArt:NLPoss:NLNiet;*|*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		847. Is dat geen inbreuk op de privacy? Is dat niet schitterend?
 534;40;SBegin:"maar":"en"|"dat"|NLRelAux;*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		534. Dat heeft gewerkt, zie ik.
 533;40;^NLCon+^NLRelCon+^NLComma+^SBegin+^NLVerb|"dat"|NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		533. Soms deden we alsof we sliepen, maar dat hielp niet. NOT. Sommige collega's zijn namelijk van mening dat de brief geen voorstel bevat dat overeenkomt met de eisen van het Reglement.
 861;40;^NLCon|NLComma|"dat"|NLVerb|^NLPrep;*|*|NLSubjpron+NLObjpron|*|*;
+/*		861. Als wij deze bedrijven niet kunnen verplichten dezelfde diensten te bieden als nu door de overheid worden verzorgd, dat wil zeggen een universele dienst. NOT. over een zeer belangrijk probleem gesproken, dat samenhangt met het feit dat de voorlichting niet gecentraliseerd kan worden.
 532;40;SBegin|"dat"|NLVerb;*|NLSubjpron+NLObjpron|*;
+/*		532. Dat meldde de brandweer.
 909;40;SBegin:NLAndOrBut:NLPunctuation:NLSubjpron+^NLComma|"dat"|NLmAux;*|NLSubjpron+NLObjpron|*;
+/*		909. Dat zou intern tot gemor kunnen leiden. Nochtans zouden we dat moeten doen.
 535;40;NLmAux+^"wil"+^"wilt"+^"wilden"+^"willen"|"dat";*|NLSubjpron+NLObjpron+NLDempron-NLRelpron;
+/*		535. Ze kan dat in de Gemeentewet regelen.
 538;40;"dat"|NLmAux|NLSubjpron;NLObjpron|*|*;
+/*		538. Met de camper door de VS, dat zouden we ook graag nog eens doen.
 642;40;NLVeelWeinig|"dat";NLSubjpron+NLObjpron|NLOndvw;
+/*		642. er is veel dat hopeloos lijkt in deze wereld.
 995;40;NLSubjpron|"dat"|NLNiet:NLPart;*|NLObjpron|*;
+/*		995. Er zijn veel dingen die ik graag zou willen garanderen, maar helaas kan ik dat niet. Dan had ik dat aanvaard en goedgekeurd.
 1018;40;^"er":"het":NLVerb|NLNiet|NLPrep|"dat"|NLCon;*|*|*|NLArt|*;
+/*		1018. We moeten de balletjes zoeken die niet door dat buisje gevallen zijn. NOT. ik twijfel er niet aan dat Duitsland er zeer nauwlettend op zal toezien.
 1090;40;NLmAux:NLRelAux|"dat"|.NLNiet|NLInf;*|NLSubjpron+NLObjpron|*|*;
+/*		1090. wij willen dat allesbehalve "voortzetten en versnellen" maar juist stopzetten. en we laten dat rijpen tot een geuze met een eigen typische smaak.
 1120;40;NLPrep|"dat"|"van";*|NLObjpron-NLRelpron|*;
+/*		1120. Noch op dit gebied, noch op dat van het Handvest van de grondrechten.
 1136;40;NLSubjpron:NLRelConModOth:"die":SBegin:NLRelAux|.NLAdvTemp|NLPrep|"dat"|NLCon;*|*|*|NLArt|*;
+/*		1136. dus ijvert hij om dat plafond te halen. per stoomboot, hetgeen in dat perspectief niet verwonderlijk is. maar tegelijkertijd werd in dat mandaat gewezen op de noodzaak.
 1137;40;NLPrep|"dat"|NLCon|SEnd;*|NLArt|*|*;
+/*		1137. overduidelijk is dat hij geen recht heeft op dat geld.
 1138;40;NLOm|"dat"|NLCon;*|NLArt|*;
+/*		1138. de verantwoordelijkheid die de nationale overheid heeft om dat project te realiseren.
 1139;40;NLRelConModOth|.NLArt|NLCon|NLPrep|"dat"|NLCon;*|*|*|*|NLArt-NLRelpron|*;
+/*		1139. De lidstaten hebben te verstaan gegeven dat het Verdrag op dat terrein niet zal worden gewijzigd.
 1121;40;"dat"|.NLAdvStruct|NLPrep|SEnd;NLObjpron-NLRelpron|*|*|*;
+/*		1121. Noch de Verdragen, noch de begrotingsregels staan ons dat echter toe.
 1209;40;NLVerb:NLRelAux:NLPrep|"dat":"die"|.NLAttradj:NLAdj|NLCon|.NLAdvStruct:NLAdvModality:NLAdj|NLNiet|.NLPrep|SEnd:NLPunctuation;*|NLArt|*|*|*|*|*|*;
+/*		1209. Voor veel beleggers weegt dat risico voorlopig niet op. Een grote verrassing is dat eindresultaat niet. Ik begrijp die uitspraak niet. ﻿Ik vergeet die brandende pijn nooit.
 1204;40;NLVerb:NLRelAux:NLInfCon|"dat":"die"|.NLAdvStruct:NLAdvModality|NLNiet|.NLRAdv:NLAdvManner|SEnd:NLPunctuation;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*|*;
+/*		1204. In het verleden gebeurde dat niet. ik ben dat in elk geval niet. Hij stelt die niet teleur.
 1205;40;NLRelAux|"dat":"die"|.NLAdvTemp:NLAdvStruct|NLNiet|NLPart;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+/*		1205. Ondertussen is dat nog altijd niet gebeurd. Moody's heeft zijn ratings onder heroverweging voor een mogelijke verlaging, maar heeft die nog niet doorgevoerd.
 1206;40;NLmAux:NLAux|"dat"|.NLAdvTemp:NLAdvStruct|NLGeen:"nauwelijks";*|NLSubjpron+NLObjpron-NLRelpron|*|*;
+/*		1206. Uiteraard is dat geen enkel probleem. In Wallonië en Brussel is dat geen 1,5%.
 1208;40;NLAndOrBut|"dat"|NLCon:NLRelCon|*NLmAux:NLRelAux|NLPart:NLPartCon;*|NLOndvw|NLCon|*|*;
+/*		1208. Dit is inderdaad lovenswaardig, maar belangrijker is dat er niet alleen een omlijsting wordt gecreëerd, maar dat inhoud wordt gegeven aan het onderwijs.
 1207;40;SBegin:NLAndOrBut|"dat"+^NLOndvw|NLCon:NLRelCon|NLVerb;*|NLArt|NLCon|*;
+/*		1207. Dat plan bevat sociale maatregelen die de grote legertransformatie verteerbaar moesten maken.
 1280;40;NLComma|NLPrep|"wie";*|NLConj|Join;
+/*		1280. Twee mensen, onder wie een kind, zijn nog vermist.
 1281;40;NLPrep|"wie";+NLRelpron|*;
+/*		1281. Ik ben ervan op de hoogte dat de behandelend arts met wie ik deze overeenkomst aanga niet geconventioneerd is. In verschillende winkels is het aanschuiven geblazen voor wie een ticket wil kopen.
 
 /* Disambiguate RelAdj and Part
-
 426;40;NLJaar|NLRelAdj|NLCon;NLNum|NLVerb|*;
+/*		426. In 2014 verwacht Karen een zoontje.
 199;40;NLPart+^NLRelPrepAdj;+NLRelAdj;
+/*		199. We hebben kip met appelmoes gegeten.
 379;40;NLHet|NLRelAdj|NLCon;*|NLAttradj|*;
+/*		379. Ik zag het beloofde land, maar mocht het niet betreden. Het voorgeschreven eetschema moet nauwgezet gevolgd worden.
 23;40;NLDe:NLEen:NLHeel:NLPoss+^NLObjpron|NLRelAdj;*|NLAttradj;
+/*		23. De politie zoekt de ontsnapte gevangene. Het ongeval werd veroorzaakt door een ontspoorde trein. Die oude man is heel wijs. Hij keek naar mijn uitgestoken hand.
 355;40;NLArt|NLAdvDegree:NLAdvTime:"nauwelijks"|NLRelAdj;*|NLAttradj|NLAttradj;
+/*		355. Gezien de nogal beladen voorgeschiedenis. Dat laat het baggerconcern donderdag weten, naar aanleiding van de vandaag gehouden algemene aandeelhoudersvergadering. Dit is een nauwelijks verhulde militaire strategie.
 226;40;NLDe:NLEen|NLAdj|NLRelAdj;*|NLAttradj|NLAttradj;
+/*		226. De moeiteloos behaalde resultaten waren indrukwekkend. De opnames vonden plaats in een smaakvol vernieuwde taverne.
 283;40;NLEen|NLAdjCon|NLRelAdj;*|NLAttradj|NLAttradj;
+/*		283. Bij elke aanval raakt de stier een klein beetje meer gewond.
 827;40;NLAttradj|NLNiet|NLRelAdj|NLCon;*|NLCon|NLAttradj|*;
+/*		827. De overblijvende zetels worden toegewezen aan de kieskringen met het  grootste   nog niet vertegenwoordigde   bevolkingsoverschot.
 122;40;NLAttradj:NLGeen|NLRelAdj|NLCon;*|NLAdj|*;
+/*		122. Hij is een oude miskende kunstenaar. Verder moeten wij oppassen dat door de richtlijn geen beschermde markten ontstaan.
 841;40;NLRelAdj:NLAttradj|NLComma|NLAdj|NLRelAdj|NLComma|NLCon;NLAttradj|*|NLAttradj|NLAttradj|*|*;
+/*		841. onder zeer strikte, medisch onderbouwde, voorwaarden.
 840;40;NLAdj|NLRelAdj|NLCon:NLAttradj;NLAttradj|NLAttradj|*;
+/*		840. België heeft veel vruchtbare en goed bewaterde grond.
 641;40;NLVeelWeinig|NLRelAdj|NLCon;NLAttradj|NLAttradj|*;
+/*		641. Er zijn veel miskende kunstenaars.
 234;40;NLPrep|NLRelAdj|NLAttradj|NLCon;*|NLAttradj|*|*;
+/*		234. Met strikt logische redeneringen doet de wiskunde uitspraken over gedefinieerde objecten en formuleert de verbanden daartussen.
 133;40;NLPrep|NLRelAdj|NLCon:NLAdjCon;*|NLAttradj|NLCon;
+/*		133. Diagnose: cross-legflap na uitgebreid trauma. Pennen van gerecycleerd plastic.
 1299;40;NLSubjpron:NLZe|NLRelAdj+NLPart|^NLRelAux+^NLAux+^NLLinkingverb;*|NLVerb|*;
+/*		1299. Dat moet overeenkomen met het aantal calorieën dat hij verbruikt.
 290;40;NLArt|NLPart|NLAdjCon;*|NLAttradj|NLCon;
+/*		290. Een jaarlijkse terugblik op het afgelopen politiek en economisch jaar.
 260;40;NLDe|NLPrep|NLJaar|NLPart|NLCon;*|NLJaar|^NLJaar|NLAttradj|*;
+/*		260. De in 2012 gevangen vogels worden terug vrijgelaten.
 224;40;NLNum|NLPart|NLCon;*|NLAttradj|*;
+/*		224. Kan u een schatting maken voor de 3 aangeboden schilderijen?
 251;40;NLPunctuation|NLRelAdj+NLPart|NLCon+NLCapitalInitial:NLCapitalAll;*|NLVerb|*;
+/*		251. Wanneer hij de zaak overneemt, verwacht Paul een toename van het cliënteel. Na de overname van het Nederlandse energiebedrijf Essent, versterkt RWE zich ook in België.
 225;40;NLPunctuation|NLPart+^NLRelPrepAdj|NLCon+^NLHaar;*|NLAttradj|*;
+/*		225. We aten soep, gebakken vis met puree, en ijstaart.
 254;40;NLRelAdj+NLPart|NLCon+NLCapitalInitial:NLCapitalAll;NLVerb|*;
+/*		254. Verwacht Paul een toename van het cliënteel? Verwacht JBC een toename van de kosten?
 530;40;NLComma|NLRelAdj|NLCapitalInitial;*|NLVerb|*;
+/*		530. Maar daar hebben politie en justitie geen voordeel van ondervonden, benadrukte Jansen.
 1322;40;NLTe|NLRelAdj;*|NLAdj;
+/*		1322. Ze is opgegroeid in een te beschermd milieu.
 288;40;NLAux|NLAdvTemp|NLMeer|NLRelAdj+NLPart;*|*|NLRAdv|NLPartrel;
+/*		288. Amerika is doorgaans meer gefocust op snel en vetarm.
 618;40;NLmAux|NLPart|"worden";*|NLPartrel|*;
+/*		618. Stress kan aangepakt worden.
 1389;40;NLmAux|"worden"|NLPart;*|*|NLPartrel;
+/*		1389. De site heeft een oppervlakte van 66.000m² waar o.a. een supermarkt en 130 winkels zullen worden gehuisvest.
 276;40;NLHet|"net";*|NLCon;
+/*		276. Het net is omgevallen.
 368;40;NLAdjCon|NLAdj;NLAdj|+Join;
+/*		368. Daarnaast moeten onderhandelingen worden gestart over een collectief sociaal plan voor iedereen.
 416;40;NLAdj+^NLAdvDegree+^NLAdvTemp|NLAdj+^NLAdvDegree;NLAdj|+Join;
+/*		416. Pagina's die online gratis te lezen zijn. Ze serveerden een onverwacht lekker ontbijt. NOT. Bovendien zal liberalisatie uiteindelijk schadelijk blijken te zijn.
 1051;40;NLGeen|NLAdj+NLAdvTemp|NLAdj:NLCon;*|NLAttradj|NLAttradj;
+/*		1051. Deze belangen leveren mij echter geen enkel direct financieel voordeel op als de amendementen aangenomen zouden worden.
 1274;40;NLAttradj|NLCon:NLRelCon|NLAndOrBut|NLRelAdj|NLCon:NLRelCon;*|*|*|NLAttradj|*;
+/*		1274. ten hoogste 150 echte vrienden en vertrouwde kennissen.
 1275;40;NLAttradj|NLAndOrBut|NLRelAdj|NLCon:NLRelCon;*|*|NLAttradj|*;
+/*		1275. ten hoogste 150 echte en vertrouwde kennissen.
 
 /* Disambiguate RelCon and InfCon
-
 529;40;SBegin|NLRelCon|SEnd:NLVerb;*|NLCon|*;
+/*		529. Boycot.
 298;40;NLCon|NLAdj|NLRelCon|NLRelAux;*|NLAttradj|NLCon|*;
+/*		298. De rechtbank oordeelde dat de gemeente passend werk had moeten bieden.
 303;40;NLAdj|NLRelCon|NLPart;NLAttradj|NLCon|NLPartrel;
+/*		303. Het Mahayana-boeddhisme werd pas vierhonderd jaar later door de Indiase meester Nagarjuna nieuw leven ingeblazen.
 1131;40;NLRelAux|.NLAdvStruct:NLAdvTemp|NLRelCon|NLPart;-NLLinkingverb|*|NLCon|NLPartrel;
+/*		1131. Onder brouwers worden verhalen verteld van brouwers. Op verschillende plaatsen in Europa worden momenteel testen uitgevoerd met het systeem.
 302;40;NLAdj|NLRelCon|NLTe|NLInf;NLAttradj|NLCon|NLRTe|*;
+/*		302. Ze schrikken bij het vooruitzicht in een vreemde taal vreemd eten te bestellen.
 1101;40;NLComma:NLArt:NLPoss|NLAdj|NLAndOr|NLAdj|NLRelCon;*|NLAttradj|*|NLAttradj|NLCon;
+/*		1101. Wij maken hiermee duidelijk dat wij deze mensen volledig willen opnemen in het economisch en sociaal leven.
 673;40;NLComma:NLArt:NLPoss|NLAdj:"aantal"|NLRelCon;*|NLAttradj|NLCon;
+/*		673. Zalige warmte, lekker eten, gezellig barbecueën op de camping. In een leegstaand pand in de Hovestraat wordt een concertje georganiseerd. Ten derde wordt in de ontwerpresolutie een aantal keren verwezen naar duurzame werkgelegenheid.
 1096;40;"welk":"welke"|NLRelCon;*|NLCon;
+/*		1096. welk doel men zich daarbij ook voor ogen stelt.
 1023;40;NLCon|NLAdj|NLRelCon|NLPrep|NLTe:NLRefl;*|NLBegin|NLCon|*|*;
+/*		1023. Die probeert de vereniging nieuw leven in te blazen. Ook als die uitbreiding extra kosten met zich meebrengt.
 297;40;NLCon|NLAdj|NLRelCon+^NLStemCon;*|NLRAdv|NLVerb;
+/*		297. De explosievendeskundige zal tijdens de werken het terrein grondig onderzoeken.
 26;40;NLArt:NLHeel:NLHetzelfde|NLRelCon;*|NLCon;
+/*		26. Ook de vlucht naar Rome had een kleine vertraging. Ik heb een vraag over hoofdstuk 3. De meerderheid heeft het plan goedgekeurd. Heel Halen staat achter het voorstel. Geen van de andere door mij genoemde, ondergeschikte voedselproducerende diersoorten vertoont dezelfde kenmerken als het paard.
 674;40;NLPrep|NLDempron|NLRelCon;*|NLDempron-NLRelpron|NLCon;
+/*		674. Na deze ingreep mocht de patiënt naar zijn kamer.
 1211;40;NLSubjpron|NLDempron|NLRelCon|.NLAdvStruct|NLNiet;*|NLArt|NLCon|*|*;
+/*		1211. Als wij deze stap namelijk niet zouden zetten, zouden wij de deur wagenwijd openzetten voor manipulatie.
 675;40;typeRelation|"deze"|NLRelCon;*|*|NLCon;
+/*		675. Ten opzichte van januari 2007 zijn deze verkopen met 19,6% gedaald. Onderzoekers hebben deze test echter nooit kunnen herhalen.
 676;40;"deze"|NLRelCon|typeRelation;NLDempron|NLCon|*;
+/*		676. Deze plant groeit bij de buurman tegen een muur en gaat vervolgens over de erfgrens.
 301;40;NLAdj|NLRelCon|NLSubjpron;NLRAdv|NLVerb|*;
+/*		301. Maar plots greep hij ons bij de kraag.
 985;40;NLVerb+^NLRelAux|NLAdvDegree|NLRelCon+^NLStemCon|NLArt:NLPrep;*|NLAttradj|NLCon|*;
+/*		985. Over de oorsprong van het dollarteken doen heel wat verhalen de ronde.
 293;40;NLVerb+^NLRelAux+^NLmAux|NLAdj+^NLAdvTemp|NLRelCon+^NLStemCon;*|NLAttradj|NLCon;
+/*		293. Zijn gedrag veroorzaakt groeiend wantrouwen bij zijn collega's.
 1102;40;NLPrep:NLGeen|NLAdj|NLAndOr|NLAdj|NLRelCon;*|NLAttradj|*|NLAttradj|NLCon;
+/*		1102. Toch heb ik geen blind en absoluut vertrouwen in de marktmechanismen.
 228;40;NLPrep:NLGeen|NLAdj|NLRelCon;*|NLAttradj|NLCon;
+/*		228. Analisten rekenden echter op fors verlies. Dit is geen chique merk.
 231;40;NLEen|NLHeel|NLAdj|NLRelCon;*|*|NLAttradj|NLCon;
+/*		231. Louis Vuitton is daarentegen een heel chique merk.
 232;40;SBegin|NLAdj|NLRelCon;*|NLAttradj|NLCon;
+/*		232. Rustgevend kruid wordt populair.
 31;40;NLAttradj:NLGeen:NLPathRelevant:NLConAttradj:NLPoss|NLRelCon|^"er";*|NLCon|*;
+/*		31. Ik heb een nieuwe plant gekocht. Ik heb een luide bel op mijn fiets. Er zijn geen verschillen tussen de provincies. Misschien was er wel een andere vorm van intelligent leven ontstaan. NOT. Voor ons bestaan er geen consumenten.
 367;40;NLNum+^NLJaar|NLRelCon;*|NLCon;
+/*		367. Maandag ging men nog uit van 292 doden en bijna vierhonderd vermisten.
 637;40;NLVeelWeinig|NLRelCon:NLInfCon;NLBegin|NLCon;
+/*		637. Donderdag en vrijdag is het herfstachtig met veel wind en soms regen of enkele buien.
 242;40;NLRelCon|NLSubjpron|SEnd:NLPunctuation:NLArt;NLVerb|*|*;
+/*		242. Op 10 januari verhuis ik. "Ik ben moe", zucht hij, en gaat op de bank zitten. Bezweet en buiten adem kom ik een halfuur later thuis.
 287;40;NLmAux|.NLSubjpron:NLRAdv|NLMeer|NLInfCon;*|*|NLRAdv|NLInf+NLVerb;
+/*		287. Ze zouden meer lijken op hoe we er zelf uitzien. Als wij echter de meest dynamische regio van de wereld willen zijn, moeten wij niet alleen meer werken maar ook beter geïnformeerd zijn en die informatie kunnen gebruiken.
 816;40;NLMeer|NLCon;+NLAttradj|*;
+/*		816. In de vooravond zullen we daarover meer duidelijkheid hebben.
 401;40;NLMeer+^NLAttradj;+NLAdj;default for 'meer' to avoid conflicting labels
+/*		401. Dat hangt meer af van de wijze waarop het materiaal tot een frame is verwerkt.
 33;40;^NLCon|NLAdjCon|NLRelCon|^NLObjpron;*|*|NLCon|*;
+/*		33. Een proportioneel stelsel brengt meer kleur in de politiek. NOT. Groep en publiek lijken elkaar gevonden te hebben. NOT. dat zal geen enkele rol meer spelen!
 34;40;NLPrep|NLRelCon|NLDie:NLPrep:NLPart;*|NLCon|*;
+/*		34. Nu is de kust veilig tegen stormen die eens in honderd jaar voorkomen. Je kan geen avocado's vervoeren op wegen met verzakkingen. De financiele lasten bestaan met name uit kosten gerelateerd aan de herwaardering.
 1272;40;NLmAux|*{1,6}^NLInfCon+^NLVerb|NLInfCon|^NLInf+^NLInfCon;*|*|NLInf|*;
+/*		1272. Alleen kún je daar eigenlijk geen toestemming voor vragen.
 201;40;NLPrep+^NLPrep2|NLRelCon;*|NLCon;
-1273;40;NLPrep|NLInfCon;*|NLCon;
+/*		201. Het boekjaar is afgesloten zonder verliezen.
+1273;40;NLPrep|NLInfCon;*|NLCon;not always good
+/*		1273. het feit dat zij dergelijke negatieve opvattingen stimuleren of er niet tegen optreden, maakt het nog erger.
 35;40;NLZijn|NLRelCon;*|NLCon;
+/*		35. Hij heeft zijn vissen in een grotere bokaal gezet.
 112;40;NLmAux|NLRelCon+^NLStemCon;*|NLInf;
+/*		112. Je mag kiezen tussen wortelen en bloemkool.
 633;40;^"te"|NLAux|NLInfCon;*|*|NLCon;
+/*		633. Ook de politie van Turnhout heeft plannen om trajectcontrole te gaan toepassen.
 113;40;NLSubjpron|NLRelCon;*|NLVerb;
+/*		113. Iedere zondag gaan wij koersen. Ik zweer het je.
 364;40;NLNiet+^"nauwelijks"|NLRelCon;*|NLVerb;
+/*		364. als we die tenminste niet verliezen aan moties van orde. NOT. Niets is aan mijn aandacht ontsnapt maar ik kan niet puntsgewijs reageren omdat er nauwelijks vragen zijn gesteld.
 710;40;NLRelAdj+NLPart|NLRelConModOth;NLPartrel|NLOndvw;
+/*		710. Ik heb gewenst dat het mooi weer zou worden.
 38;40;NLRelAdj|NLRelConModOth;NLVerb|NLOndvw;
+/*		38. Hij was kwaad toen bleek dat het voor stemmingen benodigde quorum niet aanwezig was.
 40;40;NLRelCon|NLVerb+^NLAux|NLPrep;NLCon|*|*;
+/*		40. Het bedrijf, dat werk bood aan 141 mensen, ging failliet.
 41;40;NLRelCon|NLRelAdj+NLPart|NLOm;NLCon|NLPartrel|*;
+/*		41. Er zijn gisteren vooral voorstellen gelanceerd om het geldprobleem op te lossen.
 42;40;^NLTe+^NLRelAdj|NLRelCon|NLVerb:NLPartrel:NLInfCon+^NLRelAux;*|NLCon|*;
+/*		42. We moeten 100 euro kosten betalen. NOT. Twee verkeerde zetten heffen elkaar niet op.
 1388;40;NLRelAdj|NLRelCon|NLAux;NLAttradj|NLCon|*;combination of r567 and r187 to assure correct processing of this specific pattern
+/*		1388. Individuele fiches met uitgewerkte proefnota’s, gastro- en bewaartips en behaalde prijzen zijn fantastisch, maar niet elke site kan/wil die investering ophoesten.
 567;40;^NLTe|NLRelCon|NLAux;*|NLCon|*;
+/*		567. Laura begrijpt weinig van de commotie die haar plan heeft veroorzaakt.
 857;40;NLArt|NLAdvModality|NLRelAdj|NLCon;*|NLAttradj|NLAttradj|*;
+/*		857. Bij klinisch onderzoek gaat het om een vermoedelijk besmette thyreoglossuscyste.
 187;40;NLRelAdj|NLRelCon;NLAttradj|NLCon;
+/*		187. De daartoe vereiste bedragen worden jaarlijks op de begroting uitgetrokken.
 247;40;NLSubjpron|NLHaar|NLRelCon;*|NLObjpron|NLVerb;
+/*		247. Ik dacht dat hij haar beet of sloeg.
 245;40;NLHaar|NLRelCon;*|NLCon;
+/*		245. De vibratie in haar stem en emotionele teksten bezorgen je kippenvel.
 1149;40;NLCon|NLComma|NLRelCon|NLComma:NLAndOr:"enzovoort":"etcetera";*|*|NLCon|*;
+/*		1149. De kast is gevuld met LP's, boeken, teksten en andere parafernalia.
 1255;40;^NLPrep+^NLAndOrBut|NLInfCon|SEnd;*|NLVerb+NLInf|*;
+/*		1255. En ik denk dat zulke gebeurtenissen bestaan.
 1271;40;NLPrep:NLPunctuation|.NLPoss|*typeConcept|NLAndOr|NLRelCon|^NLSubjpron+^NLJe+^NLCon+^NLAdvStruct+^NLAdvTemp+^NLAdvTime;*|*|*|*|NLCon|*;
-
+/*		1271. Vroeger ging de bakker langs de deur met paard en wagen en later met een bakfiets of auto vol met wit en bruin tarwebrood en roggebrood en beschuit.
 /* Disambiguate StemCon
-
 341;40;NLStemCon|NLIk;NLVerb|NLSubjpron;
+/*		341. Dan zweer ik bij mijn eigen naam dat dit paleis in puin zal vallen.
 331;40;NLPrep:NLCon:NLVerb|NLStemCon;*|NLCon;
+/*		331. De wereld hapt naar adem. Ze haalde adem. Hij nam hortend en stotend een nieuwe hap adem.
 332;40;NLAdj|NLStemCon;NLBegin|NLCon;
+/*		332. Ik zie dat er in de commissies veel zinvol werk wordt gedaan.
 336;40;SBegin|NLStemCon;*|NLVerb;
+/*		336. Film met een camera, niet met je gsm.
 356;40;NLStemCon|NLRefl:NLObjpron:NLHaar:NLZe:NLCon:NLArt;NLVerb|*;
+/*		356. En bel jezelf op om de boodschap te beluisteren. Ik ben zelf veertig jaar een onderzoeker geweest, en geloof me: wetenschappers volgen gewoon de data die hun experimenten opleveren, en niet omgekeerd. Je bent het vast van plan, maar bel haar zodra je meer weet. Wees lief en bel ze nog even. Ik besluit maar boodschappen te gaan doen, en haal ingrediënten voor een enorme pan soep. En geloof het of niet, zo denken heel wat jongeren er over.
 358;40;":":"•"|NLStemCon;NLPunctuation|NLVerb;
+/*		358. Haar motto is: "durf te veranderen". • Adem langzaam in en uit.
 372;40;NLAdvStruct|NLPunctuation|NLStemCon;*|*|NLVerb;
+/*		372. Nou, leer dat dan maar snel.
 330;40;NLStemCon;+NLRelCon;
+/*		330. Ik heb deze bundel grondig doorgenomen en wens nog enkele opmerkingen te formuleren.
 1256;40;NLCon|NLRelCon+^NLCapitalInitial|NLPunctuation:SEnd;*|NLVerb|*;can be non-conjugated verb form!
+/*		1256. In 1992 (Roermond) en 2002 (Aken) vonden hier nog kleine aardbevingen plaats. Hoeveel de advertentiecampagne kost, is evenmin geweten.
 
 /* Defaults
-
 108;40;NLZe;NLSubjpron;
+/*		108. Ze zegt dat ze morgen komt.
 402;40;NLJe;NLSubjpron;
+/*		402. Die keer dat we op het balkon rookten omhelsde je me.
 
 /* Disambiguate Verb+Inf (for later detection of sentence structure)
-
 1260;40;NLmAux|*^NLmAux+^NLVerb+^NLInf+^NLTe|NLVerb+NLInf;*|*|-NLVerb;
+/*		1260. De minister wil dat in de Gemeentewet vastleggen.
 1313;40;^NLVerb+^NLRelAux+^NLTe|NLInf+^NLRelAux+^NLAux+^NLmAux+^NLLinkingverb|NLVerb+NLInf+^NLRelAux+^NLAux+^NLLinkingverb;*|*|-NLInf;
+/*		1313. Mij zal je alvast nooit horen dicteren wat Alexander moet doen.
 1316;40;"het"|.NLAdvDirection:NLAdvManner:NLAdvStruct:NLAdvTemp|NLVerb+NLInf+^NLAux|"van";*|*|NLRel+NLNominf|*;preliminary solution for infinitives used as nouns
+/*		1316. Het betalen van een schadevergoeding brengt aanzienlijke problemen met zich mee.
 
 /* Disambiguate RelConAdj
-
 45;40;NLAttradj:NLGeen|NLRelConAdj;*|NLAdjCon;
+/*		45. Speciale gevallen kan je nooit uitsluiten. Hoewel na 40 jaar gebruik geen gevallen met schadelijke gezondheidseffecten bekend zijn.
 365;40;NLRelConAdj|NLRelCon;NLAttradj|NLCon;
+/*		365. Daar verorbert men per jaar gemiddeld 3,5 kilogram per persoon en komt de groente op de vierde plaats.
 43;40;NLDe:NLEen|NLRelConAdj;*|NLAdjCon;
+/*		43. De verzekerde krijgt 125 euro terug. Dit schilderij heeft een waarde van 46.000 euro.
 212;40;NLHeel|NLRelConAdj;NLAdvDegree|NLAdjCon;
+/*		212. Het was heel licht in het appartement.
 648;40;NLNum:NLAdj|NLRelConAdj;*|NLAdjCon;
+/*		648. Sinds juli zijn zestien gevallen aangetroffen. Deze apparaatjes zenden een voor zeezoogdieren irritant geluid uit dat de vissen op afstand houdt.
 650;40;NLPathRelevant:NLDempron:NLPoss:NLMeasure|NLRelConAdj;*|NLAdjCon;
+/*		650. In zulke gevallen blijkt chirurgie een goede oplossing. De chip waarop de video's worden opgeslagen is dezelfde als degene die wordt gebruikt bij wenskaarten die geluid produceren. Op de eerste herdenkingsdag van zijn dood, in 1927, trok een mysterieuze vrouw eenieders aandacht. Daarenboven ziet men in meerdere landen met een hoge vaccinatiegraad dat het aantal gevallen van kinkhoest bij adolescenten en volwassenen de laatste 10 – 15 jaar is toegenomen.
 651;40;NLPrep:NLVerb|NLHet|NLRelConAdj;*|*|NLAdjCon;
+/*		651. Dat vereist het geduld van Job.
 652;40;NLPrep|NLRelConAdj;*|NLAdjCon;
+/*		652. De gemeente heeft het verzoek in beraad.
 653;40;NLVerb+^NLRelAux+^NLmAux|NLPartCon|NLPrep;*|NLAdjCon|*;
+/*		653. Hij leest gebeden uit een dik boek.
 657;40;NLSubjpron|NLRelConAdj+^NLPartCon|NLArt;*|NLVerb|*;
+/*		657. ik licht het programmaonderdeel over de bestrijding van drugs graag toe.
 
 /* Disambiguate the word ZELF
-
 1071;40;NLCon|"zelf"|SEnd:NLVerb:NLPunctuation:NLLinkingverb:NLAdvDegree:NLAndOr;*|NLAdvStruct|*;
+/*		1071. Dat tweede gebeurt beter niet door de letterensector zelf. De route zelf is volledig gratis. De man zelf was gewond in het aangezicht. Hoewel de Meester zelf nogal weigerachtig staat tegenover te veel 'Weelde en Feestgedruis'.
 1072;40;NLCon|"zelf"|"die":"dat"|^NLCon+^NLEnd;*|NLAdvStruct|NLOndvw|*;
+/*		1072. Het was de FOD Mobiliteit zelf die met een rondzendbrief de examencentra begin deze week op de hoogte bracht van de mogelijkheid. Het was de rechter zelf die een verhoor eiste van de kinderen. Dit is niet zozeer te danken aan de voorlichting en de reclame als wel aan de projecten zelf die werden gefinancierd. Het is per slot van rekening het Parlement zelf dat sinds lange tijd al een regeling eist.
 
 /* Disambiguate the words DAT, WAT, WIE
-
 546;40;NLRelConModOth|NLDie:NLDit;NLOndvw|NLDempron-NLRelpron;
+/*		546. de Consumentenbond vindt dat die niet werkt.
 1259;40;NLVerb+^NLRelAux+^NLAux|NLRelConModOth|NLNiet|NLCon;*|NLOndvw|*|*;
+/*		1259. Panetta zei dat niet gebeurtenissen uit het verleden, maar die van het heden en de toekomst de uitdaging voor zijn organisatie zijn.
 1252;40;NLVerb|NLRelConModOth|^NLSubjpron+^NLVerb+^NLRelAux+^NLRelCon|.^NLVerb+^NLRelAux+^NLRelCon+^NLOndvw+^SEnd|SEnd:NLOndvw+^NLRelOndvwPrep;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+/*		1252. Oppassen betekent dat voor Anna.
 1257;40;NLVerb|NLRelConModOth|*^NLSubjpron+^NLVerb+^NLRelAux+^NLPunctuation|NLPunctuation|NLAndOrBut:NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+/*		1257. We hebben dat getest, en de eerste bestelling is geplaatst op 7 mei 2007.
 1258;40;NLAux:NLRelAux+^NLVerb|NLRelConModOth|^NLVerb+^NLRelAux+^NLPartrel+^NLPunctuation|NLPunctuation:SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*|*;
+/*		1258. Was dat maar zo!
 1254;40;NLVerb|NLRelConModOth|SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		1254. Volgens mij klopt dat.
 46;40;NLVerb|NLRelConModOth;*|NLOndvw;
+/*		46. De weermannen voorspellen dat het een zachte winter wordt. WRONG. "Geuzestekers" kopen lambiek, maken daarvan een eigen mengsel en laten dat rijpen tot een geuze.
 47;40;NLRelConModOth|NLPrep;NLOndvw|*;
+/*		47. Ben jij het type dat in de middagpauze snel een dutje doet?
 560;40;NLDie:NLRelConModOth:NLOm|"dat";NLOndvw|NLDempron-NLRelpron;
+/*		560. Het gaat om mensen die dat nog niet wisten. Het is vermoedelijk maar een kwestie van tijd dat dat gebeurt en de arts geschorst zal worden. tenzij het openbaar ministerie duidelijke redenen heeft om dat niet te doen.
 645;40;NLOndvw:NLConj+^"gezien"|"dat";*|NLDempron-NLRelpron;
+/*		645. Deze mensen zijn zich veel meer van allerhande prikkels bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is. Ik verzoek de diensten van het Parlement na te gaan waarom dat niet is gebeurd.
 936;40;NLPunctuation:NLHyphen:NLAndOrBut|NLNiet|"dat"|NLPrep;*|*|NLDempron|*;
+/*		936. Ik ken geen enkel ander gebied - niet dat van de euro of het vrije verkeer van personen.
 1294;40;NLRelConModOth:NLDie|NLSubjpron|NLInf;*|*|-NLInf+NLVerb;
+/*		1294. Het gaat erom dat wij doen wat technisch mogelijk is.
 
 /* Further disambiguate the word DIE
-
 1264;40;SBegin|.NLAdvDirection:NLAdvManner:NLAdvModality:NLAdvPlace:NLAdvStruct:NLAdvTemp:NLAdvTime|NLVerb:NLInf:NLRelCon|NLDie;*|*|^NLVerb-NLInfCon|-NLDie-NLRelpron;
+/*		1264. Meestal raken die ons land binnen via een schip.
 555;40;SBegin|NLDie|typeRelation;*|NLSubjpron+NLObjpron|*;
+/*		555. Die heeft overwinterd in het zuiden.
 557;40;SBegin|NLDie|typeConcept;*|NLDempron|*;
+/*		557. Die vrachtschepen varen op het Albertkanaal.
 556;40;SBegin:":"|NLDie;*|NLDempron;
+/*		556. Die staat op p. 556. JANSSEN: Die uitleg aanvaard ik niet.
 294;40;^NLDie+^SBegin|NLDie|NLAdj+^NLAdvTemp|NLVerb+^NLLinkingverb;*|NLOndvw|NLRAdv|*;
+/*		294. Renners die scherp staan, raken ook makkelijker een helling op. NOT. dat er een ontwikkeling gaande is die uiteindelijk zal moeten leiden tot de goedkeuring.
 295;40;^NLDie+^SBegin|NLDie|NLAdj|NLRelCon|^NLVerb+^SEnd;*|NLOndvw|NLRAdv|NLVerb|*;
+/*		295. Jeuk kan variëren van lichte jeuk bij milde irritatie van de huid tot een heftige, allesbeheersende toestand die normaal leven zo goed als onmogelijk maakt.
 537;40;NLDie|NLRelAux|^NLPart+^NLPartrel+^NLVerb+^SEnd;NLSubjpron+NLObjpron|*|*;
+/*		537. En die heb je vaak niet. De enige uitzondering is de tocht van 1933, die was in de winter 1933-34. WRONG: reclame-uiting: iedere vorm van informatieverstrekking die dient ter aanprijzing van of een wervend karakter kent ter zake van een bepaalde financiële dienst of een bepaald financieel product;
 540;40;NLAndOrBut|NLDie|NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		540. Er zijn wel kosten, maar die zitten onderwijl wel al verrekend in de prijs.
 542;40;NLmAux:NLOndvw|NLDie;*|NLDempron-NLRelpron;
+/*		542. Individuele fiches met uitgewerkte proefnota’s, gastro- en bewaartips en behaalde prijzen zijn fantastisch, maar niet elke site kan/wil die investering ophoesten. Van zodra die achter een wolk verdwenen, begonnen de wandelaars zonder het te merken in cirkeltjes te lopen.
 545;40;NLRelAux|NLDie|NLCon;*|NLDempron-NLRelpron|*;
+/*		545. In Paraguay en Brazilië werden die bladeren vroeger gebruikt als zoetmiddel.
 186;40;NLCon:NLNum|NLDie|^NLCon+^SEnd;*|NLOndvw|*;
+/*		186. Er leven vogels die niet kunnen vliegen. Het zijn er zes die je per twee verbindt.
 279;40;NLAdjCon|NLDie;*|NLOndvw;
+/*		279. Leven met een ouder die psychische problemen heeft, is niet eenvoudig.
 317;40;NLDe|NLAttradj|NLDie;*|*|NLOndvw;
+/*		317. De enige die ertussen geglipt was, reed het jaar voordien bovendien ook nog voor hem.
 286;40;NLAttradj:NLAdj|NLDie|^NLCon+^NLPrep+^SEnd;*|NLOndvw|*;
+/*		286. Ook zijn er frieten te koop die minder frituurvet opnemen en daarmee minder ongezond zijn.
 563;40;NLDan:NLConj:NLAdvStruct|NLDie;*|NLDempron-NLRelpron;
+/*		563. De armpjes van kinderen zijn sowieso al korter dan die van volwassenen, dus ze bevinden zich dichter bij de geluidsbron. Ook al weet hij niet precies waar die plek ligt. De Hollandse zeevaart kende in deze tijd ook een opvallend sterke groei, vooral die op de Oostzee. De Elfstedentocht van 1997 was de zwaarste sinds die legendarische van 1963.
 1195;40;NLVerb|"dan"|NLVerb+^NLPartrel;*|NLConj|*;
+/*		1195. Als een consument verse wortelen koopt dan moet hij ervan uit kunnen gaan dat die onbehandeld zijn.
 913;40;NLAndOrBut|"dan";*|NLConj;
+/*		913. dan hoeven we niet hiermee door te gaan en dan kunnen we wel verder debatteren.
 543;40;NLDie|NLVerb|NLSubjpron;NLObjpron|*|*;
+/*		543. We moeten nadenken, niet over boycots en sancties - die verafschuwen wij - maar over bijvoorbeeld de mogelijkheid het toerisme alleen te bevorderen in bepaalde gebieden.
 222;40;NLDie|NLRefl:NLGeen:NLArt:NLSubjpron;NLOndvw|*;
+/*		222. Hier hebben kunstenaars gewoond die zich "retrovisten" noemden. De analisten, die geen gunstig advies gegeven hebben, hebben zich vergist. Het waren de hoge golven, veroorzaakt door de stormwinden, die de slachtoffers maakten. Het is tragisch dat zoveel mensen niet de behandeling krijgen die ze verdienen.
 562;40;NLDie|NLPrep|NLPrep;NLDempron-NLRelpron|*|*;
+/*		562. de glasvezelkabel 'hoort' ondergrondse seismische golven via virtuele microfoons en geeft die door aan een centrale computer.
 1154;40;NLDie|NLAdj+^NLAdvTemp|NLPrep;NLOndvw|NLRAdv|*;
+/*		1154. De professor, die deeltijds aan de universiteit doceert, wijt de fout aan een onzorgvuldigheid van een assistent.
 553;40;NLAndOrBut|NLDie|^NLNiet;*|NLDempron-NLRelpron|*;
+/*		553. De winst van begin vorige week, evenals die van dinsdag, zouden meer lijken op een rally in een dalende markt dan op het begin van een stijgende markt. NOT. mEr zijn mensen die in de stad wonen, maar die niet te voet naar de winkel kunnen gaan.
 547;40;NLPrep+^"mee"+^"toe"|NLDie;*|NLDempron-NLRelpron;
+/*		547. Een concrete aanleiding voor die stijging is er niet, maar het aandeel was de laatste tijd fors terrein verloren na een stroom van negatieve berichten.
 797;40;NLConj:NLOndvw:"zolang"|NLSubjpron+^NLObjpron|NLDie:"dat";*|*|NLDempron-NLRelpron;
+/*		797. Als we die lijn niet volgen, zullen we geen doelmatig ontwikkelingsbeleid kunnen voeren. Juist omdat ik geloof dat wij dat politiek tekort nauwelijks kunnen opvullen. Zolang ze dat met succes kunnen doen hoeven ze niet zelf te werken aan het verkleinen van de overlast. NOT. De doelisten zagen Willem IV als degene die het bestuur kon hervormen.
 935;40;NLNiet:NLRel|"die"|NLPrep:NLAttradj:NLCon;*|NLDempron|*;
+/*		935. Ik heb namelijk niet die indruk. Ik denk dat ze in de eerste plaats hun eigen belangen en niet die van hun onderneming dienen. We kunnen de uitdagingen die ons te wachten staan nooit aangaan, zeker niet die van de uitbreiding.
 937;40;"noch"|"die":"dat"|NLPrep;*|NLDempron|*;
+/*		937. Dat is niet het standpunt van Frankrijk, noch dat van Italië. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
 1267;40;NLVerb|NLDie|.^NLVerb+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|NLDempron-NLRelpron|*|*;
+/*		1267. De sterke huizencijfers geven die winsten een extra duw in de rug.
 
 /* Disambiguation of and with TE
-
 65;40;^"er"|NLEen:NLDe|NLTe|NLVerb:NLRelCon:NLRelAdj+^NLUDRelation;*|*|NLAdj|NLAdj;
+/*		65. In deze straat staat een te renoveren woning te koop. De lijst van de te innen geldsommen is gepubliceerd. Er ligt nog een te schillen aardappel op het aanrecht. Dit wordt de te drukken versie. Ze is opgegroeid in een te beschermd milieu. De te beperkte ruimte zorgde voor ongenoegen. NOT. het zou ook interessant voor haar zijn om er een te hebben.
 167;40;NLTe|NLCapitalInitial:NLCapitalMixed;NLPrep|NLCon;
+/*		167. Opgemaakt te Halen op 17 december 2012. Opgemaakt te Herk-de-Stad op 17 december 2012.
 267;40;NLPrep|NLDe|NLCon|NLTe|NLInf:NLInfCon|NLCon;NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
+/*		267. Provinciale staten en de gemeenteraad stellen, behoudens bij de wet of door hen krachtens de wet te bepalen uitzonderingen, de provinciale onderscheidenlijk de gemeentelijke verordeningen vast. De leden van beide kamers worden gekozen op de grondslag van evenredige vertegenwoordiging binnen door de wet te stellen grenzen.
 74;40;NLTe|NLRelCon;NLRTe|NLInf+NLVerb;
+/*		74. De fototentoonstelling is te bezoeken t.e.m. zaterdag 6 mei.
 1307;40;NLRelConModOth|.^NLTe|NLTe|NLInf+^"zijn"|NLLinkingverb:NLAux:NLteAux;*|*|NLRel+NLRTe|NLRel|NLVerb;
+/*		1307. Maar dit is een punt dat gemakkelijk op te lossen is.
 1306;40;NLOndvw+^"om"|.^NLTe+^NLRTe+^NLOndvw+^"om"|NLTe:NLRTe|NLInf+^"zijn"|NLLinkingverb:NLAux:NLteAux;*|*|NLRel+NLRTe|NLRel|NLVerb;
+/*		1306. Pagina's die online gratis te lezen zijn.
 71;40;NLTe|NLInf+NLVerb+^"zijn";NLRTe|-NLVerb;
+/*		71. Het tweede halfjaar belooft wel nog altijd moeilijk te worden. Deze omhaling dient om een project in Haïti te steunen. Het dreigt een lange zoektocht te worden.
 118;40;NLTe|NLZijn;NLRTe|NLRelAux+NLAux+NLLinkingverb+NLInf;
+/*		118. De mensheid kan niet zonder Afrika, waar, in Kenia, de mens voor het eerst rechtop schijnt te zijn gaan lopen.
 663;40;NLTe|NLAdjCon;NLAdvDegree|NLAdj;
+/*		663. Te duur, te vroeg en te ver zijn de sleutelwoorden.
 631;40;NLTe|NLCon+^NLUDConcept;NLAdj|+Join;
+/*		631. Hij kwam te paard de studio binnengereden. 631.UD. Not_in: De politie kwam te paard.
 632;40;NLTe;NLAdvDegree;
+/*		632. Hij stelt vast dat zijn verwachtingen te hoog gespannen waren.
 
 /* Indefinite pronouns (with and without Negation)
 /*	MINDER
-
 987;40;NLMeer:"minder"|"dan"|NLNum;NLBegin|+Join|*;
+/*		987. Het natst zijn de Veluwe, Drenthe en Zuid-Limburg, het droogst het centrale deel van Limburg met minder dan 700 mm.
 989;40;"minder"+^NLBegin|NLCon;NLAttradj|*;
+/*		989. De houder van een visum voor verblijf van langere duur mag niet minder rechten hebben dan de houder van een visum voor verblijf van korte duur. NOT. We zullen na het jaar 2027 minder steun ontvangen.
 
 /* NIET ALLE, NIET VEEL
-
 701;40;NLNiet+^NLNooit|"alle";NLBegin+NLNegation|+Join;
+/*		701. Ik begrijp heel goed dat ze niet alle supermarkten voor mij alleen gaan aanpassen. SHOULD NOT WORK FOR. Dat toont aan dat goed groenbeheer nooit alle risico's kan uitsluiten. In de geschiedenis van de club werden nog nooit alle prijzen gepakt.
 702;40;NLNiet+^NLNooit|"veel"|NLCon:NLAdj:NLBegin;NLBegin+NLNegation|+Join|NLCon;
+/*		702. Als renners tijdens de week losrijden, verbruiken ze niet zo veel calorieën. Dat wil zeggen dat de resultaten van dit jaar 'niet veel lager' zullen zijn dan de recordresultaten. SHOULD NOT WORK FOR. We laten ook nooit veel geld in de kassa.
 703;40;NLNiet+^NLNooit|"veel";NLNiet|+Join;
+/*		703. Hij stelde vast dat zijn indrukwekkende kennis van de Franse cultuur eigenlijk niet veel verder reikte dan de buitenste boulevards van Parijs. SHOULD NOT WORK FOR. Over die angstige periode heeft zij nooit veel willen vertellen.
 
 /* NIET ALLES, NIET ALLEMAAL, NIET IEDEREEN
-
 708;40;NLNiet+^NLNooit|"alles":"allemaal":"iedereen";NLPathRelevant+NLNegation|+Join;
+/*		708. Ik weet dat ik lang niet alles gezegd heb. Het is niet meer allemaal zo eenvoudig. de toegenomen rijkdom bereikt niet iedereen. SHOULD NOT WORK FOR. En iedereen weet dat Jef nooit alles zal terugbetalen.
 
 /* NIET DEZELFDE, NIET HETZELFDE
-
 706;40;NLNiet+^NLNooit|NLAdvDegree|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant+NLNegation|+Join|+Join|*;
+/*		706. Onder het voorwendsel dat aan dieren van 24 maanden niet precies dezelfde risico's verbonden zijn als aan andere dieren.
 721;40;NLNiet|NLAdvDegree|NLHetzelfde|"te"|NLInf;NLPathRelevant+NLNegation|+Join|+Join|*|*;
+/*		721. Ze hoeft daarom ook niet precies hetzelfde te verdienen.
 720;40;NLNiet|NLHetzelfde|"te"|NLInf;NLPathRelevant+NLNegation|+Join|*|*;
+/*		720. Ze hoeft daarom ook niet hetzelfde te verdienen als haar populaire tegenspeelster.
 705;40;NLNiet|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant+NLNegation|+Join|*;
+/*		705. Vroeger had een trage omzetting niet dezelfde gevolgen als nu. Waarom kunnen wij niet hetzelfde doen?
 704;40;NLNiet|.NLAdvDegree|NLHetzelfde;NLRel+NLNegation|+Join|+Join;
+/*		704. Deze situatie is helaas niet meer dezelfde.
 
 /*	HETZELFDE
-
 724;40;NLAdvDegree|NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLSubjpron|+Join|*;
+/*		724. Alle bloeddrukverlagers hadden ongeveer hetzelfde effect.
 722;40;NLAdvDegree|NLHetzelfde|"te"|NLInf;NLSubjpron|+Join|*|*;
+/*		722. Maarten reageerde door precies hetzelfde te beweren.
 625;40;NLAdvDegree|NLHetzelfde;NLHetzelfde+NLBeginpron|Join;
+/*		625. Ze gingen op precies dezelfde wijze te werk.
 619;40;NLHetzelfde|NLCon:NLAdjCon:NLAttradj:NLConAttradj:NLVerb:NLInf:NLmAux:NLPrep;NLSubjpron|*;
+/*		619. En dit moedigt weer aan om meer van dezelfde koopsompolissen te verkopen. Het juridische begrip insolvabiliteit zelf heeft niet in alle landen van de Europese Unie dezelfde boekhoudkundige betekenis.
 725;40;NLHetzelfde|NLPart:NLPartrel;NLSubjpron|*;
+/*		725. als mijn collega het woord had kunnen voeren, had hij hetzelfde gezegd. We proberen om van hen hetzelfde gedaan te krijgen.
 723;40;NLHetzelfde|"te"|NLInf;NLSubjpron|*|*;
+/*		723. We weten dat we niemand kunnen dwingen hetzelfde te doen als wij.
 622;40;"hetzelfde"+^NLSubjpron;NLRAdv;
+/*		622. Chemisch gezien zijn biet- en rietsuiker hetzelfde: 100% saccharose.
 
 /*	IETS
-
 627;40;"iets"|typeRelation;NLSubjpron+NLObjpron|*;
+/*		627. Ik verkoop iets aan iemand in de Filippijnen.
 634;40;"iets"|NLPart;NLSubjpron+NLObjpron|*;
+/*		634. Maar met die klacht is voor zover wij weten nooit iets gebeurd.
 628;40;"iets"+^NLSubjpron;NLAdvDegree;
+/*		628. De winst en omzet zijn iets hoger uitgekomen dan de eerder afgegeven verwachting van het bedrijf.
 1189;40;"net"+^NLCon|NLAdvDegree;NLAdvDegree|+Join;
+/*		1189. de reële groei is, rekening houdend met de bevolkingsgroei, net iets meer dan nul.
 
 /* Miscellaneous
-
 76;40;NLEen|NLRelPrepAdj;*|NLAdj;
+/*		76. Hier wordt een rond punt aangelegd.
 87;40;NLInf|NLRelAdj|NLEr;*|NLVerb|*;
+/*		87. Lessen volgen zat er niet in.
 139;40;NLVerb|NLRelAdj+^NLPart|NLSubjpron;*|NLVerb|*;
+/*		139. Toen ze niet reageerde herhaalde ik de mededeling.
 719;40;NLPart|NLmAux:NLAux;NLPartrel|*;
+/*		719. Dit is duidelijk te zien aan de groei in totale activa en de vele transacties die dit jaar aangekondigd en afgerond zijn.
 1036;40;NLGeen|^NLMeer|NLPrep|^NLMeer|NLMeer;*|*|*|*|NLRAdv;
+/*		1036. We wachten af wat er gebeurt nu er geen belemmering voor derden meer is om zich ermee te bemoeien.
 485;40;NLGeen|^NLMeer|NLMeer;*|*|NLCon;
+/*		485. Er bestaat geen twijfel meer over.
 487;40;NLGeen|NLAttradj:NLAdj|^NLMeer|NLMeer;*|*|*|NLCon;
+/*		487. Op enkele uitzonderingen na zijn er dus geen "Belgische" scholen meer, maar wel Nederlandstalige, Franstalige, of Duitstalige.
 819;40;NLNum:"een"|NLCon|NLMeer:"minder";*|*|NLCon;
+/*		819. Door het warme voorjaar vliegen er dit jaar zo'n 210 miljoen wespen meer rond dan anders. Billy’s verblijf duurde zowat een maand minder dan gepland.
 1065;40;NLNiet|NLAdvDegree|NLCon|"meer";NLBegin|NLAttradj|NLCon|NLCon;
+/*		1065. De grote werken moeten namelijk snel worden uitgevoerd en bejaarden hebben niet zoveel tijd meer om nog lang te wachten.
 481;40;NLCon+^NLMeasure+^NLProcent|.NLAdvDegree:NLVeelWeinig|NLAdj|^NLCon+^SEnd;+NLEnd|*|*|*;
+/*		481. Volgens Justitie zijn bij de affaire zeker 10 universiteiten betrokken. Even verder moest ze stoppen omdat de schade aan de auto te groot was. Zo komt het dat de partij veel sterker is dan vroeger. 481.UD. We hopen dat het weer snel beter wordt. SHOULD NOT WORK FOR. Geen enkel systeem is honderd procent perfect.
 393;40;SBegin|NLAndOrBut;*|NLAdvStruct;
+/*		393. En toch zie je dat veel ondernemingen nu online diensten aanbieden.
 1118;40;"daar"|NLSubjpron|NLRel:NLNiet;NLOndvw|*|*;
+/*		1118. Alle financiële ramingen van de consumptie en export van rundvlees zijn onzeker daar ze geen rekening houden met de recente gevolgen van de mond- en klauwzeerepidemie.
 
 /* Adverbs
 /*	WEL
-
 1004;40;"het"|"wel"|NLVerb:NLInf;*|NLRAdv|*;
+/*		1004. We doen allemaal alsof het niet gebeurt, maar we weten allemaal dat het wel gebeurt.
 
 /*	VEEL, WEINIG
-
 826;40;NLAdvDegree|NLVeelWeinig;NLAdvDegree|+Join;
+/*		826. Ik ben niet erg veel wijzer geworden.
 640;40;NLVeelWeinig;NLAdvDegree;
+/*		640. De ziekte komt immers weinig voor.
 
 /* Adverbs of direction
-
 595;40;NLArt|NLAdvDirection|NLAttradj;*|NLAttradj|*;
+/*		595. De heen en weer lopende bootsman had het gehoord en kwam naderbij.
 235;40;NLAdvDirection;NLRAdv;
+/*		235. De bus reed heen en weer tussen de parking en het stadscentrum.
 
 /*	Adverbs: degree and manner (label Adj)
-
 305;40;NLNiet+^NLNooit|NLAdvDegree|NLCon;NLBegin|NLAttradj|*;
+/*		305. Maar omdat die niet genoeg brandstof had, heeft een Sea King hem verder gevoerd naar het brandwondencentrum.
 664;40;NLNiet|NLAdvDegree|NLAdvTemp;*|NLAdj|Join;
+/*		664. Als de afstand niet te lang is, kan ik best nog heel hard gaan.
 417;40;NLNiet|NLAdvDegree|NLAttradj:NLStemCon:NLConAttradj;*|NLAttradj|*;
+/*		417. Het is de laatste, maar niet erg goede strohalm. Daardoor heb ik niet genoeg werk om voor mijn pensioen te kunnen zorgen.
 306;40;NLAdvDegree|NLGeen;NLGeen|+Join;
+/*		306. Er staat zo goed als geen bedrijfsnieuws op de agenda.
 616;40;NLAdvDegree|NLAdvPlace;NLAdvPlace|Join;
+/*		616. De telecomaandelen staan helemaal bovenaan.
 1134;40;NLGeen|NLAdvDegree|NLCon:NLAttradj;*|NLAttradj|*;
+/*		1134. Alleen kan men in een korte resolutie natuurlijk geen heel boek verwerken.
 205;40;NLAdvDegree|NLCon:NLAttradj:NLNum;NLBegin|*;
+/*		205. Er was amper ontsmettingsmateriaal beschikbaar.
 424;40;"ik"|NLAdvDegree|NLStemCon;NLSubjpron|NLRAdv|NLVerb;
+/*		424. Als ik een beetje werk aan mijn techniek komt het wel goed.
 423;40;NLAdvDegree|NLStemCon;^NLBegin|NLCon;
+/*		423. Ze vond genoeg steun en toeverlaat.
 395;40;NLAdvDegree|NLConAttradj;^NLBegin|NLCon;
+/*		395. Veel wiskundige objecten, zoals de verzameling van de getallen en functies hebben een inwendige structuur.
 413;40;NLCon|NLAdvDegree|NLAdj|SEnd;*|NLBegin|*|*;
+/*		413. Slechts zelfinzicht maakt het probleem enigszins hanteerbaar.
 643;40;NLCon|NLAdvDegree|NLAdj|NLRelCon;*|NLRAdv|Join|*;
+/*		643. De olie balanceert rond de grens van $100 per vat, terwijl de dollar nagenoeg onveranderd staat ten opzichte van de euro en de Yen.
 1045;40;NLAdj+^NLAdvTemp|NLPrep|*NLPoss:NLObjpron:NLHaar|NLLinkingverb;NLAttradj|*|*|*;
+/*		1045. Het zijn die sjaaltjes die zo kenmerkend voor ons zijn. Het zou ook interessant voor haar zijn om er een te hebben.
 1053;40;NLAdj+^NLAdvTemp|NLPrep|*NLArt:NLAdjCon:NLPoss:NLAttradj:NLConAttradj:NLPathRelevant:NLCon|*NLLinkingverb|NLPart:NLPartrel;NLRAdv|*|*|*|*;
+/*		1053. Er zijn ook semi-permanente rimpelvullers die langzamer door het lichaam worden afgebroken.
 922;40;NLAdj+^NLAdvTemp|NLPrep|*NLArt:NLAdjCon:NLPoss:NLAttradj:NLConAttradj:NLPathRelevant:NLCon|*NLRTe:NLVerb:NLPart:NLRel:NLInf+^NLLinkingverb;NLRAdv|*|*|*;
+/*		922. We zijn alles grondig aan het analyseren. Dat is typisch voor een ongeval waarbij de fiets altijd nogal hard tegenaan de thorax aanbotst. De minister vindt het belangrijk om Belgische kunst te tonen in het buitenland. Ik heb zelden auteurs zo gretig over hun boeken weten praten. NOT. Het meest genoemd zijn harde knobbels die ongemakkelijk of zelfs pijnlijk voor de patiënt kunnen zijn. om mensen aan te moedigen langer aan de slag te blijven. De beurzen in New York waren nochtans positief aan de nieuwe handelsweek begonnen.
 207;40;NLCon|NLAdvDegree|NLAdj|^NLPart+^NLPartrel+^NLInf+^NLVerb+^"te"+^NLRelAux+^SEnd+^NLRAdv;*|NLBegin|*|*;
+/*		207. Een twaalfvoudige zwangerschap is volgens wetenschappers bijna onmogelijk voor een vrouw. NOT. Het is onze bedoeling dit verslag zeer snel te behandelen. NOT. Hoe dan ook moet het probleem zeer serieus tegemoet getreden worden.
 1039;40;NLAdvDegree|NLAdvDegree|NLAdj;NLAdj|+Join|+Join;
+/*		1039. De regeringen hebben al veel te lang gewacht met optreden na de eerste alarmerende berichten.
 408;40;NLAdvDegree|NLAdj:NLAttradj;NLAdj|+Join;
+/*		408. De ijskap reikte zo ver naar het zuiden, dat het noorden van Nederland door gletsjers bedekt werd.	Ze moeten een andere oplossing zoeken omdat deze aanpak te duur is.
 814;40;NLAdvDegree|NLAdvModality;NLAdvModality|+Join;
+/*		814. Er werd aan de ouders meegedeeld dat de cyste hoogst waarschijnlijk zal recidiveren.
 823;40;NLAdvDegree|NLAdjCon|NLRelAux;NLAttradj|+Join|*;
+/*		823. Ons noodplan is inmiddels niet alleen erg duur geworden, maar vergt ook de volledige inzet van elke lidstaat.
 208;40;^NLVerb+^SBegin|NLAdvDegree|NLAdjCon;*|NLBegin|NLAdj;
+/*		208. Bovendien is het systeem bijzonder duur.
 834;40;NLSubjpron|NLObjpron|NLAdvDegree;*|*|NLRAdv;
+/*		834. Ik kan alleen maar zeggen dat zij mij uitermate geshockeerd hebben.
 211;40;NLAdvDegree+^NLAdvTemp|NLEen|NLMeasure:NLProcent:NLNum;NLBegin|NLAttradj|*;
+/*		211. Amper een half jaar later herhaalde de geschiedenis zich zaterdagavond weer.
 307;40;NLAdvDegree|NLBegin;NLBegin|NLAttradj;
+/*		307. Daardoor kreeg hij een veel te hoge schadevergoeding.
 342;40;NLHeel+NLBegin;NLBegin;to clean conflicting labels
+/*		342. Toen kwam hij met een heel ander idee op de proppen.
 1125;40;NLNiet:NLAdj|NLAdvDegree:NLAdvModality+^"te":"zo"|NLLinkingverb|^NLPart:NLPartrel:"te";*|NLAttradj|*|*;
+/*		1125. Een aanbeveling over alcoholgebruik onder jongeren zal toch echt niet genoeg zijn om de zaak in te dammen. Hij vond dat geen van de biedingen financieel afdoende was. Het gaat erom dat wij doen wat technisch mogelijk is. NOT. dat de deugdelijkheid van het geheel even afdoende wordt gewaarborgd.
 821;40;NLAdj+^NLAdvTemp|NLRAdv;NLRAdv|+Join;
+/*		821. Zolang dat niet het geval is, blijft het hard nodig ervoor te waken dat classificatiebureaus niet afhankelijk zijn NOT. Het betrof een geval uit Italië dat direct aanhangig was gemaakt.
 1064;40;NLAdj+^NLAdvTemp|"te"|NLLinkingverb|^NLPart:NLPartrel;NLAttradj|NLRTe|*|*;
+/*		1064. De recessie zet iedereen ertoe aan om productiever te zijn. NOT. Verschillen van inzicht tussen Raad en Parlement, en die zijn er regelmatig, hoeven zo niet meer eenzijdig te worden opgelost. NOT. Op het vlak van de institutionele kwesties dient tijdens de top duidelijk te worden gesteld dat de versterkte samenwerking geen alibi mag zijn voor onvoldoende uitbreiding.
 1063;40;NLAdj+^NLAdvTemp|"te"|NLInf+^NLLinkingverb;NLRAdv|NLRTe|*;
+/*		1063. Dit is duidelijk te zien aan de groei in totale activa en de vele transacties die dit jaar aangekondigd en afgerond zijn.
 825;40;NLAdj+^NLAdvTemp|NLGeen;NLRAdv|*;
+/*		825. Zij zijn duidelijk geen werknemers in de gebruikelijke zin van het woord. NOT. Deze ontwikkeling was een van de factoren die maakte dat de Nederlanden uiteindelijk geen deel meer zouden uitmaken van het Heilige Roomse Rijk.
 204;40;NLAdvDegree;NLRAdv;
+/*		204. De schade werd ruimschoots gecompenseerd.
 835;40;NLAdj+^NLAdvTemp|NLNiet:NLRel+^"noch"|NLRAdv:NLVerb:NLInf:NLPrep;NLRAdv|*|*;
+/*		835. Nu weten we allemaal dat die tests wetenschappelijk nog niet helemaal op punt staan. Er is een onderzoek waaruit blijkt dat de mens zoveel 'vrienden' gewoon niet aankan. Dat kan natuurlijk niet alleen met strafmaatregelen verholpen worden. NOT. en dat de vrouwen noch vanuit economisch noch vanuit maatschappelijk oogpunt worden uitgesloten.
 920;40;^NLConj+^NLArt|NLAdj+^NLAdvTemp|NLPoss;*|NLRAdv|*;
+/*		920. mDe oude meesters blijven aandacht krijgen, maar de jonge dichters doen prominent hun intrede.  NOT. Zij braken onmiddellijk hun vakantie op.
 1085;40;"jaren"|NLNum;*|+NLJaar;
+/*		1085. Het gaat om de grootste hervorming van de sector sinds de jaren dertig.
 1084;40;NLNum+^NLJaar|NLBegin;NLBegin|NLAttradj;
+/*		1084. 22 op 100 Belgische huishoudens hebben minstens één hond en 23 op 100 minstens één kat. NOT. Volgens de conservatieven zijn in de revolutionaire jaren zestig zowat alle kwalen van deze tijd ontsproten.
 
 /*	Adverbs: time - place
-
 1022;40;"een":"de"|NLAdvTemp|NLCon:NLRelCon;*|NLAttradj|NLCon;
+/*		1022. Dat was de lijfspreuk van een staatshoofd van een inmiddels teloorgegaan systeem. Uitziend naar een spoedig antwoord, teken ik.
 603;40;NLArt|NLAdvTemp:NLAdvTime:NLAdvPlace|NLAttradj:NLRelAdj;*|NLAttradj|*;
+/*		603. De onlangs overleden acteur.
 613;40;NLArt|NLAdj+NLAdvTemp|typeConcept;*|NLAttradj|*;
+/*		613. VAnalisten voorzagen een sterkere daling van het direct resultaat.
 836;40;NLVerb:NLPart|NLNiet+^NLNooit|NLAdvTemp|NLAttradj;*|NLRel+NLNegation|Join|*;
+/*		836. Men kan niet direct al die aanvragen als bedrog betitelen. Om de effectiviteit niet te belemmeren, hebben wij voorgesteld niet vooraf financiële grenzen af te bakenen.
 837;40;NLNiet|NLAdvTemp|"meer"|NLArt;NLRel+NLNegation|Join|Join|*;
+/*		837. Herbenoeming van een burgemeester is niet altijd meer een automatisme.
 1024;40;NLNiet|NLAdvTemp:"overal"|NLAndOr|NLAdvTemp:"overal";NLNiet|Join|Join|Join;
+/*		1024. Het gebruik van ftalaten is verboden, niet voor altijd en overal op ons grondgebied, maar alleen voor de fabricage van kinderspeelgoed.
 644;40;NLNiet|NLAdvTemp:"overal";NLNiet|Join;
+/*		644. Ook andere minderheden voelen zich niet altijd geaccepteerd.
 614;40;NLAdj+NLAdvTemp;NLAdvTemp;
+/*		614. Het slachtoffer overleed later in het ziekenhuis.
 
 /*	Adverbs: manner
-
 699;40;NLArt|NLAdjCon|NLPart;*|NLCon|*;
+/*		699. De besmetting wordt niet alleen van de moeder op het jong overgebracht, maar ook via de velden en de weilanden.
 1093;40;NLVerb:NLInf+^NLLinkingverb|NLAdj|NLConj:NLPrep:NLPunctuation:SEnd;*|NLRAdv|*;
+/*		1093. De erfgoedcel, kerken, politie en brandweer weten perfect welk veiligheidstraject ze in noodgevallen moeten volgen. NOT. Het glas is halfvol dan wel halfleeg.
 
 /*	Adverbs: modality
-
 213;40;NLDe:NLEen|NLAdvModality:NLAdvManner;*|NLAttradj;
+/*		213. Momenteel zegt ze dat ze nog bezig is met een mogelijk voorzitterschap. De uitsluitend gemeentelijke of provinciale belangen worden door de gemeenteraden of de provincieraden geregeld volgens de beginselen bij de Grondwet vastgesteld. Naast een uiteraard lagere omzet zal hij te maken krijgen met een gespannen liquiditeit en een misschien zichtbaar slechtere solvabiliteit van zijn onderneming.
 349;40;NLHet|NLAdvModality:NLAdvManner|NLAttradj;*|NLAttradj|*;
+/*		349. Het zonder meer uitstekende verhuisbedrijf had zelfs haar kleren in de slaapkamer gelegd.
 1037;40;NLLinkingverb:NLRelAux|.NLSubjpron:NLCon|NLAdj|NLAdvModality:NLAdvManner|*NLAdj|^NLInf:NLPart;*|*|NLAttradj|NLAttradj|NLAttradj|*;
+/*		1037. Dit is organisatorisch waarschijnlijk moeilijk haalbaar.
 1038;40;NLLinkingverb:NLRelAux|.NLSubjpron:NLCon|NLAdvModality:NLAdvManner|*NLAdj|^NLInf:NLPart:NLPartrel;*|*|NLRAdv|NLAttradj|*;
+/*		1038. Dat is mogelijk onterecht, stelt de Britse krant. Deze ambtenaren hebben wellicht minder goede beslissingen genomen. Maar in de Verenigde Staten blijven ze uiteraard woedend. Daar zijn wetenschappers mede verantwoordelijk voor. NOT. We spreken dezelfde taal en daarom heb ik misschien gemakkelijker kunnen begrijpen.
 1044;40;SBegin|NLAdj|NLLinkingverb|"er";*|NLRAdv|*|*;
+/*		1044. Natuurlijk zijn er bossen waarin geen enkele productieactiviteit plaatsvindt. Postoperatief is er een goede doorbloeding van de flap.
 215;40;NLAdvModality;NLRAdv+NLAdvModality;
+/*		215. Het kostenargument heeft ongetwijfeld meegespeeld bij de beslissing.
 1482;40;NLAdvManner;NLRAdv;default
+/*		1482. Het kostenargument heeft rechtstreeks meegespeeld bij de beslissing.
 1190;40;"net"+^NLCon|NLRAdv;NLRAdv|+Join;
+/*		1190. Net daar knelt het schoentje.
 
 /* Participle as part of noun phrase
-
 380;40;NLDe|NLAttradj|NLPart;*|*|NLAttradj;
+/*		380. De zo vaak bezongen authenticiteit blijkt vaak niet veel meer dan een gewiekste marketingvondst.
 277;40;NLDe|NLHaar|NLPart;*|NLPoss|NLAttradj;
+/*		277. Sara had geen andere keus dan door de voordeur naar de haar toegewezen ruimtes te lopen.
 278;40;NLDe|NLObjpron|NLPart;*|NLObjpron|NLAttradj;
+/*		278. Ze stonden op en drukten de hen toegestoken hand.
 1082;40;NLPunctuation:NLAndOr:NLOndvw:NLPrep:NLDie|NLPrep|NLArt|NLCon|NLPart|NLCon;*|NLAttradj|NLAttradj|*|NLAttradj|*;
+/*		1082. Dit geldt vooral voor de eerste, in het buitenland geboren generatie. De wet kan bepalen dat het verrichten van bij de wet aangewezen handelingen tot het verlies van het lidmaatschap kan leiden. De tests worden niet stelselmatig uitgevoerd, maar alleen op zieke of in het bedrijfsproces omgekomen dieren. een verzekeraar, die door een verzekeraar overgedragen risico’s accepteert.
 1078;40;NLArt|.NLAdvStruct|NLPrep|*NLArt:NLCon:NLNum:NLPrep+^NLAdvStruct|NLAttradj|NLCon|NLPart:NLRelAdj|*NLAttradj:NLCon;*|*|NLAttradj|NLAttradj|NLAttradj|*|NLAttradj|*;
+/*		1078. In deze ruime, internationale kaders moeten wij alles in het werk stellen om de reeds door de verschillende landen erkende rechten op internationaal vlak daadwerkelijk te beschermen.
 1075;40;^NLVerb:NLRelAux:"die":"dat":NLOndvw|"het"|.NLAdvStruct|NLPrep+^"om"|*NLArt:NLCon:NLNum:NLPrep+^NLAdvStruct|NLPart|NLCon+^NLAdvStruct;*|*|*|NLAttradj|NLAttradj|NLAttradj|*;
+/*		1075. Die vormt een bedreiging voor het reeds op gang gekomen onderhandelingsproces.
 1081;40;"een"|.NLAdvStruct:NLNiet|NLPrep+^"van"|.NLArt|.NLAttradj|*NLCon:NLNum+^NLAdvStruct|NLAttradj|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|NLAttradj|*;
+/*		1081. De wet stelt de zittingsduur van een na ontbinding optredende Tweede Kamer vast. Daardoor is een voor beide kanten voordelige overeenkomst niet mogelijk geweest.
 1076;40;"een"|.NLAdvStruct:NLNiet|NLPrep+^"van"|*NLArt:NLCon:NLNum:NLPrep+^NLAdvStruct|NLPart|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj|*;
+/*		1076. Er was geen schending van een in artikel 6 van het Verdrag genoemd beginsel. NOT. IJs is namelijk een van ABCD's grootste energievreters.
 1079;40;"de"|.NLAdvStruct:NLNiet|NLPrep|.NLArt|*NLCon:NLNum+^NLAdvStruct|NLAttradj|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
+/*		1079. Hij maakte de 0-2 in de met 0-4 gewonnen match.
 1080;40;"de"|.NLAdvStruct:NLNiet|NLPrep|.NLArt|.NLAttradj:NLNum|*NLCon+^NLAdvStruct|NLAttradj|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|NLAttradj|*;
+/*		1080. Als wij de tijdens de afgelopen vijf jaar geboekte resultaten moeten evalueren, blijken er plotseling geen gegevens te zijn. Ik kan niet instemmen met de door enkele collega's ingediende amendementen.
 273;40;"de":"een van de"|.NLAdvStruct:NLNiet|NLPrep|*NLArt:NLCon:NLNum:NLPrep+^NLAdvStruct|NLPart|NLCon+^NLAdvStruct;*|*|NLAttradj|NLAttradj|NLAttradj|*;
+/*		273. Ook hebben de aanklagers in deze zaak en de bij het onderzoek betrokken politiemensen geen kennis van de inhoud gehad. "Wij verwelkomen de op bestuursniveau genomen maatregelen," aldus de analist verwijzend naar het opstappen van de bestuursvoorzitter.
 262;40;NLArt:NLDempron:"andere"|.NLRAdv|NLPrep|NLDe|NLCon|NLPart|NLCon+^NLAdvStruct;*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
+/*		262. Van het verst in de duinen gelegen paviljoen zouden alle ramen zijn gesneuveld. bestuursorganen van het Rijk en van andere bij of krachtens de wet aangewezen bestuursorganen. Van het kiesrecht is uitgesloten hij die wegens het begaan van een daartoe bij de wet aangewezen delict bij onherroepelijke rechterlijke uitspraak is veroordeeld tot een vrijheidsstraf van ten minste een jaar en hierbij tevens is ontzet van het kiesrecht.
 218;40;NLDe|NLCon|NLPart|NLCon+^NLAdvStruct;*|NLAttradj|NLAttradj|*;
+/*		218. De zaterdagavond opgeroepen politiemensen zouden zich achterwaarts de duinen in hebben willen terugtrekken.
 
 /*	Adverbs: manner
-
 422;40;NLAdj|NLAdj;NLAdj|+Join;
+/*		422. Politici kennen elkaar niet zo goed meer.
 145;40;NLRelAux+^NLPartrel;+NLVerb;a.o. for 'was', reduce irrelevant variety in labels
+/*		145. De 21ste is een vrijdag. NOT. Patiënte was duizelig geworden en gevallen waarbij zij een wonde heeft opgelopen.
 910;40;NLAdj|NLmAux|NLArt:NLSubjpron;NLRAdv|*|*;
+/*		910. Gelukkig kon het zieke meisje tijdig gered worden door buren. Algemeen moet men vaststellen dat er geen noemenswaardige verbetering is opgetreden.
 1056;40;"leek":"leken":"lijkt":"lijken":"lijk"|NLAdj|"op";*|NLRAdv|*;
+/*		1056. Het voorstel van de Commissie lijkt te sterk op dat van de Raad.
 219;40;NLVerb|.NLAdvStruct:NLAdvTemp|NLAdj|NLArt:NLRAdv;*|*|NLRAdv|*;
+/*		219. De passagiers deden zittend een dutje. Annelies ruimde snel de rommel op. De kindjes kwamen zingend het podium op. Tevens wordt ook probleemloos een PEG-sonde geplaatst.
 831;40;NLVerb+^NLRelAux|*NLSubjpron:NLAdvStruct:NLNiet|NLAdj|SEnd;*|*|NLRAdv|*;
+/*		831. Onderweg werkten ze heel voorbeeldig.
 1133;40;NLSubjpron:NLObjpron|NLAdj|NLRAdv;*|NLRAdv|*;
+/*		1133. Het verbaast mij werkelijk ten zeerste.
 419;40;NLAdj|NLRAdv|SEnd:NLVerb:NLPrep:NLRel:NLRAdv:"dat";NLRAdv|*|*;
+/*		419. Hier komt de ziekteverzekering sneller tussenbeide. U weet dat ik u persoonlijk zeer waardeer. extra concurrentie in ruil voor toegang tot markten die feitelijk volledig in Amerikaanse handen zijn. gewoon omdat de zaak nu eenmaal toevallig zo in elkaar kan zitten.
 1041;40;NLLinkingverb|NLRAdv|NLAdj|NLPrep|^NLVerb:NLPart:NLmAux;*|*|NLAttradj|*|*;
+/*		1041. de rapporteur was daarover zeer vaag in zijn uiteenzetting. NOT. Zeker de Franstalige ouders zijn daar sterk van overtuigd.
 1040;40;NLLinkingverb|."het"|NLRAdv|NLAdj|NLComma:SEnd:NLRelConModOth;*|*|*|NLAttradj|*;
+/*		1040. De bloemlezing werd daardoor hedendaagser, maar ze blijft wel thematisch. Het is verder ontoelaatbaar dat 2 miljoen euro is aangewend.
 1126;40;NLLinkingverb|NLNiet+^NLNooit|NLAdj|^NLPart;*|*|NLAttradj|*;
+/*		1126. Ook beleggers zijn niet enthousiast. NOT. maar is nog niet algemeen aangetoond.
 978;40;NLAdj|NLPrep|NLRTe|NLInf+^NLLinkingverb;NLRAdv|*|*|*;
+/*		978. Wij begrijpen best dat het niet mogelijk is om in enkele maanden tijd het roer radicaal om te gooien.
 979;40;NLArt|NLRAdv|NLPrep|NLRTe|NLVerb|NLCon;*|*|NLAttradj|NLAttradj|NLAttradj|*;
+/*		979. Aan het moeilijk in te schatten risico met betrekking tot de kwaliteit van de levensmiddelen wordt hierdoor niet veel verbeterd.
 396;40;NLAdj|NLInf:NLVerb:NLRTe+^NLLinkingverb;NLRAdv|*;
+/*		396. Die goudmijn aan functionele anekdotes en wetenswaardigheden doet de lezer tegelijkertijd net hongerig doorlezen.
 409;40;NLAdj|NLRAdv|NLRTe:NLInf;NLRAdv|+Join|*;
+/*		409. Verscheidene staalbedrijven kwamen overeen om fors meer te betalen voor ijzererts.
 400;40;NLVerb:NLmAux|NLEr|NLAdj|^NLCon+^SEnd;*|*|NLRAdv|*;
+/*		400. Ook begon er langzaam een sociaal stelsel te ontstaan.
 403;40;NLVerb|NLSubjpron|NLEr|NLAdj;*|*|*|NLRAdv;
+/*		403. Misschien hebben wij er goed aan gedaan resoluties uit te vaardigen.
 421;40;NLAdj|.NLPrep:NLRefl|NLPart:NLPartrel:NLVerb:NLInf+^NLLinkingverb;NLRAdv|*|*;
+/*		421. De chirurg rende de operatiekamer in, waar de 47-jarige man acuut geopereerd moest worden. De conclusie is dat de toekomst van de landbouwsector er allesbehalve rooskleurig uitziet. Dat is een heel interessante vraag: zouden we het individu niet gewoon zichzelf laten reguleren? De commissaris is hier niet dieper op ingegaan.
 1364;40;NLVerb+^NLLinkingverb|"het"|NLAdj|^typeConcept;*|*|NLRAdv|*;
+/*		1364. Hij deed het goed in de Vuelta.
 947;40;NLPrep|NLAdj|NLArt;*|NLRAdv|*;
+/*		947. - als de schenker een of meerdere van zijn erfgenamen begunstigd heeft zonder werkelijk de bedoeling te hebben om de anderen te benadelen.
 
 /* Defaults
-
 486;40;NLMeer+^NLAttradj;NLAdj;
+/*		486. Frituurolie daarentegen bevat veel meer onverzadigde vetten.
 98;40;NLDan;NLPrep;
+/*		98. De kathedraal is hoger dan de Boerentoren.
 99;40;NLRelPrepAdj;NLPrep;
+/*		99. Onweer en regen rond de lanceerbasis gooiden roet in het eten.
 
 /* Defaults for Part and RelAdj
-
 571;40;SBegin|NLRelAdj|NLCon;*|NLAttradj|*;
+/*		571. Gestolen kunstwerk uit 1980 teruggevonden.
 709;40;NLAux|NLRAdv|NLPart;*|*|NLPartrel;
+/*		709. Duizenden mensen in heel Europa hebben ervoor gekozen producten te kopen die geen GGO's bevatten.
 846;40;NLArt|"door"|*NLArt:NLAttradj:NLCon:NLObjpron|NLRelAdj|NLAttradj:NLCon;*|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|*;
+/*		846. de Lycische bisschop uit de door Grieken bewoonde antieke stad Myra. de door een of meer leden verlangde inlichtingen.
 833;40;NLArt:NLPrep+^"om"|NLRAdv|*NLAttradj:NLRelAdj:NLConAttradj:NLPart|NLCon|^"te";*|NLAttradj|NLAttradj|*|*;
+/*		833. de hieraan gerelateerde structurele steun. Ze zouden bovendien uitsluitend kunnen plaatsvinden in hiertoe erkende laser-en IPL centra. NOT. Dan zal ik de laatste zijn om daar veel trammelant over te maken.
 855;40;NLArt|NLNiet|"te"|NLInf|*NLAttradj:NLCon;*|NLCon|NLAttradj|NLAttradj|*;
+/*		855. Opnieuw wordt een dorp opgeofferd voor de niet te stillen honger naar meer ruimte voor havenuitbreiding.
 854;40;NLArt|NLNiet|NLRelAdj|NLCon;*|NLCon|NLAttradj|*;
+/*		854. De pijplijn maakt goede vorderingen, zo staat in een niet becijferde trading update.
 572;40;^NLCon+^NLRelAux+^SBegin|NLPart+^NLInf|NLCon;*|NLAttradj|*;
+/*		572. De patiënte zou enkele uren voor de opname, 15 februari, overgegeven hebben en gedaald bewustzijn vertonen. NOT. dat hoeft ons er niet van te weerhouden acties op te zetten.
 711;40;NLRelAdj+NLPart;NLPartrel;
+/*		711. Met die niet mis te verstane waarschuwing werd ons dit programma aangereikt.
 92;40;NLRelAdj;NLVerb;
+/*		92. Het verlies liep zelfs even op tot meer dan 3 procent, maar het aandeel herstelde daarna weer.
 
 /* other defaults
-
 1029;40;"wees":"lijken":"bleek":"leek":"leken"+^NLCon+^NLAdj;NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		1029. Wees realistisch. Subsidies in deze sector lijken mij niet zinvol. Een  richtlijn voor alle werknemers bleek toen niet haalbaar in de Raad.
 335;40;NLStemCon;NLCon;
+/*		335. Pennen van gerecycleerd plastic, ongelakte potloden, lijm zonder oplosmiddel.
 1317;40;"dat"+NLOndvw|NLInfCon;*|NLCon;
+/*		1317. Daarom dient deze regeling zo te zijn dat scholen alleen maar mogen worden voorzien van gezond fruit.
 1318;40;=NLOndvw|NLInfCon;*|NLCon;
+/*		1318. Het debat is natuurlijk een startpunt, omdat besluiten verder besproken moeten worden.
 908;40;NLInfCon;NLVerb+NLInf;
+/*		908. Die vrachtschepen varen op het Albertkanaal.
 93;40;NLRelCon;NLVerb;
+/*		93. VWie kijkt die ziet, wie niet wil zien, die staart.
 838;40;NLAdj|NLVerb+^NLLinkingverb;NLRAdv|*;
+/*		838. Deze maat was proefondervindelijk ontstaan en passend bij de gemiddelde lengte van wielrenners in de jaren vijftig en zestig in de 20e eeuw. NOT. Ze zegt dat ze onschuldig is.
 1030;40;NLAdj|NLLinkingverb|NLPartrel+^NLLinkingverb;NLRAdv|*|*;
+/*		1030. Het lopende aandeleninkoopplan zal tijdelijk worden stopgezet om ons endogene en exogene groeipotentieel te vrijwaren. NOT. Enkele brouwerijen zijn klein en artisanaal gebleven terwijl andere groter en semi-industrieel zijn geworden.
 1031;40;NLAdj|NLAndOr|NLAdj|NLLinkingverb;NLAttradj+NLList|+NLList|NLAttradj+NLList|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		1031. En de boodschap mag nooit groter of belangrijker zijn dan de plot.
 94;40;NLRelConModOth;NLOndvw;
+/*		94. Het is onzin dat bezoekers niet op de parking mogen staan.
 544;40;NLDie;NLOndvw;
+/*		544. Dat er amper bedrijven zijn die via een beursintroductie kapitaal willen ophalen, is niet echt verrassend. Wrong: Als je die ballon laat vliegen, win je misschien een prijs.
 1087;40;"het"|."niet"|NLAdj|NLmAux|"zijn";*|*|*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf;
+/*		1087. Zo kan ik u zeggen dat het niet eerlijk zou zijn voor de toeschouwers die al een ticket gekocht hebben.
 647;40;NLPartCon;NLPartrel;
+/*		647. Hierdoor waren er ook enkele takken aan de zijde van de buurman gevallen.
 102;40;NLRelConAdj;NLCon;
+/*		102. Er schijnt licht op de scène.
 103;40;NLRelModAdv;NLAdj;
+/*		103. 50 minuten overstaptijd is nipt.
 1483;40;NLArt:NLPoss:NLDempron:NLAttradj:NLAdj:NLCon:NLConAttradj;+NLNPcomp;preparation for r1484
+/*		1483. Deze auto, de autopapieren en zijn groene jas werden hier gevonden.
 1484;40;SBegin|*NLNPcomp:NLPrep|NLAndOr:NLComma|NLZijn;*|*|*|NLPoss;
+/*		1484. GSinterklaas en zijn helper, Zwarte Piet, komen volgens de overlevering in de nacht van 5 december in Nederland en 6 december in België langs de schoorsteen binnen in alle huizen om geschenken te brengen voor de kinderen die er wonen.
 1371;40;SBegin|*NLNPcomp:NLAdvStruct:NLPrep:NLAndOr:NLComma|NLZijn;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		1371. Andere belangrijke havengebieden zijn Amsterdam, Eemshaven en Vlissingen/Terneuzen.
 131;40;NLZijn|*NLVerb:NLPartrel:NLRTe|SEnd;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|*;
+/*		131. In dat geval zou alle moeite en de tot nu toe gevoerde dialoog voor niets zijn geweest.
 990;40;NLZijn|NLRAdv;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		990. Op 24 april zei de onderneming: "De raad van bestuur en de raad van commissarissen zijn ervan overtuigd dat we met de maatregelen op de goede weg zijn".
 327;40;NLAdj:NLCon|NLZijn|^NLAttradj+^NLCon+^SEnd;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		327. Deze 4 littekens zijn soepel en functioneel niet hinderend.
 1032;40;NLmAux|."het":NLNiet|NLAdj|NLZijn;*|*|NLAdj|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		1032. Ik stem in met wat mijn collega heeft gezegd maar wil uitdrukkelijk zijn aandacht vragen voor de perifere gebieden van de Unie.
 829;40;NLPartrel|NLZijn;*|NLRelAux+NLAux+NLLinkingverb+NLVerb;
+/*		829. In bepaalde omstandigheden zal zij gedwongen zijn aanvullend verlof te nemen.
 95;40;NLZijn;NLPoss;
+/*		95. Hij parkeert zijn fiets aan het station.
 1278;40;NLOm|.^NLOm+^NLRTe|NLOm|NLRTe|NLInf;+NLConj|*|-NLOm+NLPrep2|*|*;om ... splittable verb with 'om'
+/*		1278. Dat was mijn manier om met de hele toestand om te gaan.
 109;40;NLOm|.^NLOm+^NLRTe|NLRTe;+NLConj|*|*;
+/*		109. Druk op OK om verder te gaan.
 879;40;*NLmAux|NLVerb|NLAndOr|NLInf+^NLmAux;*|*|+NLList|*;
+/*		879. Er zijn nog steeds volwassenen - bijna een miljard - die niet kunnen lezen en schrijven. NOT. dit incident met de heer Dijksma had nooit mogen plaatsvinden en moet worden opgelost.
 981;40;NLmAux|NLNiet|NLAndOr|NLmAux|NLNiet;*|*|+NLList|*|*;
+/*		981. de Europese Unie is niet, kan niet en mag niet alleen maar een economische unie zijn.
 877;40;NLmAux|NLAndOr|NLmAux;*|+NLList|*;
+/*		877. Ten derde kan en mag de Europese Unie zich niet onbeperkt uitbreiden.
 1094;40;"welk":"welke"|.NLPathRelevant|NLCon|"dan ook";*|*|*|NLRAdv;
+/*		1094. In geen geval is het aan de politiek of welk Parlement dan ook om kritiek te leveren.
 
 /* Reflexive pronoun
-
 124;40;NLRefl|NLVerb;NLVerb|+Join;
+/*		124. Zie hoe de kat zich wast!
 157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
+/*		157. De portier heeft zich niet vergist.
 125;40;NLVerb|NLRefl;NLVerb|+Join;
+/*		125. De groep bereidt zich voor op de beursintroductie.
 500;40;"ik"|NLVerb|"me":"mij";NLSubjpron|NLVerb|+Join;
+/*		500. Ik verveel me.
 
 /* Relation adverbs
-
 1097;40;NLVerb+^NLLinkingverb|."het":NLSubjpron|NLRAdv|NLAdj;*|*|*|NLRAdv;
+/*		1097. Ze stonden wellicht jarenlang in schuren. Twee analisten rekenden hier respectievelijk op 8% en 9%, wat een vertraging betekent ten opzichte van 12% in 2007.
 1098;40;NLRAdv|NLAdj|NLPunctuation:NLConj:NLOndvw:NLArt:NLRAdv:NLBegin:NLAdvStruct;*|NLRAdv|*;
+/*		1098. De teelt is maar vrij recent in Nederland op grote schaal aanwezig, vooral na 1970, met de doorbraak van de witloftrek op stromend water. Ingeval de troon onbezet is, voorzien de Kamers, samen beraadslagend, voorlopig in het regentschap totdat de geheel vernieuwde Kamers bijeenkomen.
 1100;40;^NLLinkingverb|NLAdj|NLAndOr|NLRAdv;*|NLRAdv|*|*;
+/*		1100. Na enkele weken stelde hij vast dat de bittere wortels waren uitgelopen en dat de blaadjes zoet en mals smaakten.
 
 /* Disambiguate the word DUS
-
 726;40;NLComma|NLDus;*|NLConj;
+/*		726. Er is immers geen wet en ook geen contract, dus privépersonen kunnen zich niet tot een rechter wenden.
 727;40;NLDus;NLAdvStruct;
+/*		727. Het heeft dus geen enkele zin deze rechtsonzekerheid in stand te houden.
 
 /* Defaults
-
 138;40;NLHaar;NLPoss;
+/*		138. Haar plaats wordt op de terugvlucht ingenomen door Timothy.
 171;40;NLGeen;NLGeen;
+/*		171. Geen probleem.
 140;40;NLNum|NLHyphen|NLNum;NLCon|Join|Join;
+/*		140. Lierse - Antwerp: 1 - 1.
 141;40;NLHyphen;NLPunctuation;
+/*		141. Lierse - Antwerp: 1 - 1.
 202;40;NLConIfCap;-NLConIfCap;
+/*		202. De kar bolt verder.
 203;40;NLConIfAllCap;-NLConIfAllCap;
+/*		203. Druk op OK om verder te gaan.
 496;40;"•";NLPunctuation;
+/*		496. • horen • zien • zwijgen.
 1148;40;NLConAttradj;NLAttradj;
+/*		1148. Tumorectomie rechts zonder okseluitruiming.
 1166;40;NLVerb|"en"|NLPartrel;*|*|NLVerb;
+/*		1166. Ik hoop en verwacht dat de voorstellen de steun van het comité zullen krijgen.
 1405;40;NLAdj|NLCon;NLAttradj|*;
+/*		1405. De verzwakking van de dollar ten opzichte van de yen is slecht nieuws voor bedrijven.
 
+
+/* PHASE 50: PATHRELEVANT ENTITIES AND CONCEPT BOUNDARIES
 /* ========================================================
-
 526;50;NLIndefpron+NLCon;NLCon;let capitalization overrule Indefpron
+/*		526. Filips II, zijn zoon, zou de Nederlanden erven, Spanje én de Beide Siciliën.
 509;50;NLIndefpron|typeRelation;NLSubjpron|*;
+/*		509. Sommige worden vrij snel door het lichaam afgebroken.
 511;50;NLIndefpron|NLAdvStruct:NLArt:SEnd;NLSubjpron|*;
+/*		511. Ze kunnen daarvoor indien nodig wettelijke maatregelen nemen, zoals sommige al hebben gedaan.
 646;50;NLDempron|NLGeen;NLSubjpron+NLObjpron|*;
+/*		646. De Brandwonden Stichting raadt derhalve stomen af, indien dat geen aantoonbaar nut heeft.
 558;50;NLDempron|typeConcept;NLArt|*;
+/*		558. Deze offerte betreft uw vraag met ref. 201982.
 559;50;NLDempron|^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^SEnd;NLSubjpron+NLObjpron|*;
+/*		559. Dit geldt vooral voor de eerste, in het buitenland geboren generatie.
 512;50;NLBeginpron|NLBegin;*|NLAttradj;
+/*		512. Een van de meest vooraanstaande Italiaanse kunstmusea viert feest.
 514;50;NLBegin|NLBeginpron;*|-NLBeginpron;
+/*		514. Zowat alle leerlingen spelen graag op de speelplaats.
 510;50;NLIndefpron;-NLIndefpron;remove to avoid conflicts
+/*		510. Van het verst in de duinen gelegen paviljoen zouden alle ramen zijn gesneuveld.
 513;50;NLBeginpron+NLAttradj;NLBeginpron;avoid conflicts
+/*		513. In beide gevallen mogen de op een lijst voorgedragen kandidaten ook op de andere worden voorgedragen.
 521;50;NLNum|"andere";*|NLCon;
+/*		521. Daarmee doet de verzekeraar beduidend slechter dan de twee andere financiële waarden in de lijst.
 522;50;NLAttradj:NLMeasure:NLBeginpron|"andere";^NLAttradj|NLCon;
+/*		522. Verschillende andere leerlingen raakten gewond. Naast een reeks andere klassieke vergoedingen, zoals onkosten, een pensioenregeling en een auto, blijft de traditionele langetermijnbonus ook gelden. Eerste wisselschakelaar: fasedraad (bruin) aan de gemerkte klem, schakeldraden (zwart) aan de beide andere klemmen.
 519;50;^NLGeen+^SBegin|"ander":"andere"+NLAttradj;*|NLPathRelevant;
+/*		519. Dat is een ander probleem.
 624;50;"dezelfde";NLPathRelevant;attributive "dezelfde" is always PathRelevant
+/*		624. Zo wordt duidelijk dat mensen dezelfde al eeuwen bekende kring van ten hoogste 150 échte vrienden en vertrouwde kennissen onderhouden.
 635;50;NLBeginpron;NLBeginpron;
+/*		635. Het is een kort nummer, meerdere atleten strijden gelijktijdig om de ereplaatsen en elke toeschouwer kan zich de kracht die nodig is om zo’n nummer te winnen levendig inbeelden.
 670;50;NLCon+^"maand"+^"maanden"|NLDay:NLMonth;*|NLBegin;
+/*		670. Sinds 1 september 2008 rijdt de parkshuttle weer maandag tot en met vrijdag van 6.00 tot 21.00 uur.
 498;50;NLSubjpron;NLSubjpron-NLRelpron;
+/*		498. Hierbij stuur ik u een contractvoorstel naar aanleiding van uw brief d.d. 20 januari 2011.
 677;50;NLAdvTemp;+NLTime;
+/*		677. Er lopen soms kippen rond.
 
 /* Disambiguate the word EENS
-
 807;50;"met"|*NLArt:NLAttradj:NLBeginpron:NLCon|"eens";*|*|NLVerb;
+/*		807. Wij zijn het met het Parlement eens dat er geen zakelijke of verwantschapsrelaties mogen bestaan. Wij zijn het echter niet met alle formuleringen eens.
 804;50;"met"|NLSubjpron:NLObjpron:NLPoss|"eens";*|*|NLVerb;
+/*		804. Ik ben het overigens met u eens dat dit geen gewoonte mag worden. Wat dat betreft zijn wij het roerend met hem eens.
 805;50;"het"|NLNiet|"eens";*|*|NLVerb;
+/*		805. Over de rol van Julie zijn we het absoluut niet eens en dat zal voorlopig ook wel zo blijven. Hij schijnt het niet eens te zijn met uw visie.
 806;50;"het"|"eens";*|NLVerb;
-
+/*		806. Eigenlijk is hij het eens met Dirk.
 /* Some more Concept boundaries
-
 1366;50;typeRelation|.NLArt:NLPoss|NLBegin;*|*|^NLCon;
+/*		1366. Het heeft een totale waarde van meer dan een half miljard euro.
 1367;50;NLCon|.NLAdvStruct:NLPunctuation|NLArt:NLPoss|NLAttradj:NLCon;*|*|+NLCBegin|*;
+/*		1367. Ik lees uitspraken van virologen en van dierenartsen die zeggen dat niet vaccineren in deze wereld een tijdbom is.
 1373;50;NLEnd|typeConcept;*|+NLCBegin;
+/*		1373. Je mag niet vergeten dat hij maar zestien jaar is en dat de verwachtingen groot zijn.
 
+
+/* PHASE 60: DETECT ENUMERATIONS
 /* ===============================
-
 784;60;*NLArt:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLAdjCon:NLCon:NLNum|NLAndOr|.NLArt:NLPoss:NLAdvStruct|NLAttradj:NLAdjCon:NLNum:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;4-element enumeration
+/*		784. Finland, Oostenrijk, Portugal en Zweden vermelden evenmin dergelijke gevallen.
 785;60;*NLArt:NLPathRelevant:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|NLComma|*NLArt:NLPathRelevant:NLAdvStruct:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|.NLComma|NLAndOr|.NLArt:NLPathRelevant:NLAdvStruct:NLPoss|NLAttradj:NLAdjCon:NLNum:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;3-element enumeration
+/*		785. Ook de culturele, historische en religieuze aspecten mogen niet over het hoofd worden gezien. Onophoudelijk rinkelt de gsm van Kevin die er met zijn wenkbrauwpiercing, zijn 33 jaar en zijn stoere postuur allesbehalve als een typische duivenmelker uitziet. Ik ben geen voorstander van de legalisering van ecstasy, cannabis of andere synthetische drugs.
 1007;60;*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|NLComma|.NLArt|*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|NLComma|.NLArt|*NLAttradj:NLAdj:NLAdjCon:NLCon:"van"|^NLVerb;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|*;3-element enumeration, only commas, no AndOr
+/*		1007. Het Vlaamse Gewest omvat de provincies Antwerpen, Limburg, Oost-Vlaanderen, Vlaams-Brabant en West-Vlaanderen.
 1006;60;NLPrep|.NLArt|*NLAttradj:NLAdjCon:NLCon|NLComma|.NLArt|*NLAttradj:NLAdjCon:NLCon|NLAndOr|NLPrep|.NLArt|*NLAttradj:NLAdjCon:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;3-element enumeration,including repetition of preposition
+/*		1006. Ook in de Goorstraat, Zakstraat en aan het Hooiveld was er stormschade.
 808;60;^NLArt|NLVerb|NLPrep|*NLPrep:NLArt:NLPoss:NLAttradj:NLCon|NLAndOr|*NLArt:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|NLVerb;*|*|*|*|+NLNoList|*|*;no enumeration
+/*		808. De bestuurder die vrijdagnacht een dodelijk ongeval veroorzaakte in Antwerpen en vluchtmisdrijf pleegde, is door een onderzoeksrechter aangehouden. NOT. Het betrekken van de leerlingen en hun ouders mag niet worden vergeten.
 1170;60;NLGeen|*NLAttradj:NLAdjCon:NLCon|NLAndOr|NLArt;*|*|+NLNoList|*;no enumeration
+/*		1170. Er is geen winkel en een agent brengt twee keer per jaar een routinebezoekje.
 1172;60;NLCon|NLAndOr|NLAdvStruct|.NLArt:NLPathRelevant:NLPoss|*NLAdj:NLAttradj:NLAdjCon:NLCon:NLBegin:NLNum|SEnd:NLPunctuation:NLAndOr;+NLList|+NLList|+NLList|+NLList|+NLList|*;2-element enumeration
+/*		1172. U heeft namelijk al duidelijk gemaakt dat we geen behoefte hebben aan nog een procedure en nog een nieuwe methode.
 786;60;.NLAdvStruct|*NLArt:NLPoss:NLAttradj:NLAdjCon:NLCon:NLNum|.NLAdvStruct|"en"+^NLNoList|.NLArt:NLPathRelevant:NLPoss|*NLAdj:NLAttradj:NLAdjCon:NLCon:NLBegin:NLNum;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;2-element enumeration
+/*		786. In ruim zes op de tien gevallen werden intensiteit en duur van de sessie niet aangepast aan het huidtype van de klant. Dit heeft niet te maken met de hoeveelheid suiker en andere vergistbare koolhydraten die je neemt. NOT. Ikzelf beschouw die als een historische noodzaak en een kans die niet in gevaar mag worden gebracht. NOT. Ik was net in mijn kamer en het is niet verwonderlijk dat de vrijdagen zo gedevalueerd zijn.
 1382;60;.NLAdvStruct|*NLArt:NLPoss:NLAttradj|"en"+^NLNoList|*NLAdvStruct|.NLArt:NLPathRelevant:NLPoss|*NLAdj:NLAttradj:NLAdjCon|*NLAdjCon:NLCon:NLBegin:NLNum;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;based on 786 but with AdvStruct after AndOrBut, requiring more restrictions
+/*		1382. We willen namelijk geen artistiekelingen opleiden maar mensen die weten hoe ze een goede en bovendien rendabele film moeten maken.
 1415;60;*NLAttradj:NLAdj:NLAdjCon|NLComma|*NLAttradj:NLAdj:NLAdjCon;+NLList|+NLList|+NLList;
+/*		1415. Op enkele uitzonderingen na zijn er dus geen "Belgische" scholen meer, maar wel Nederlandstalige, Franstalige, of Duitstalige.
 1416;60;*NLAttradj:NLAdj:NLAdjCon|"en"|*NLAttradj:NLAdj:NLAdjCon:NLCon;+NLList|+NLList|+NLList;
+/*		1416. Deze 4 littekens zijn soepel en functioneel niet hinderend.
 1180;60;.NLAttradj|NLCon|"of"|.NLArt:NLAttradj:NLAdj|NLCon;+NLList|+NLList|+NLList|+NLList|+NLList;2-element enumeration with 'of'
+/*		1180. Help ons mee een verhaal te vertellen en breng je mama of papa of oma of opa mee. Als het dan even wat minder gaat, dan zie je in een dergelijke economie een sterkere correctie dan in bijvoorbeeld de Nederlandse of Duitse economie.
 1182;60;*NLAttradj|"of"|*NLAttradj|NLCon;+NLList|+NLList|+NLList|+NLList;2-element enumeration with 'of'
+/*		1182. De uitsluitend gemeentelijke of provinciale belangen worden door de gemeenteraden of de provincieraden geregeld volgens de beginselen bij de Grondwet vastgesteld.
 1181;60;NLPoss|"of"|NLPoss;+NLList|+NLList|+NLList;2-element enumeration with 'of'
+/*		1181. Laat het ons dan weten via mail en vergeet haar of zijn contactgegevens niet!
 1005;60;*NLPathRelevant:NLAttradj|NLComma|.NLAdvStruct|*NLBegin:NLAttradj:NLAdj;+NLList|+NLList|+NLList|+NLList;
+/*		1005. Zijn onderzoek is nooit bevestigd door ander, soortgelijk onderzoek en is ook van de hand gewezen door nota bene het Wetenschappelijk Comité van de Commissie zelf, het CSTEE. De huidige, nog kwetsbare groei zal er niet voor kunnen zorgen dat de burgers die al geruime tijd van de samenleving zijn uitgesloten nu in hoog tempo opnieuw in de maatschappij worden opgenomen. De in andere, meer specifieke verslagen aangedragen argumenten rechtvaardigden het uitstel van de kwijting evenmin.
 1016;60;NLNum|NLComma|NLNum;+NLList|+NLList|+NLList;
+/*		1016. Met betrekking tot gespecificeerd risicomateriaal kan ik helaas niet akkoord gaan met de amendementen 16, 17, 18, 40 en 41 op artikel 8. Wie denkt er aan de bejaarden van 2100, 2200 of later?
 1265;60;SBegin|.NLAdvStruct|*NLCon:NLSubjpron|NLAndOr|NLCon:NLSubjpron;*|*|+NLList|+NLList|+NLList;
+/*		1265. Marc en zij hebben een winkel geopend.
 1266;60;NLSubjpron|NLAndOr|NLSubjpron;+NLList|+NLList|+NLList;
+/*		1266. Het is alles of niks.
 1269;60;NLInf|NLAndOr|NLInf|NLPrep:NLOndvw:NLPunctuation:SEnd;+NLList|+NLList|+NLList|*;
+/*		1269. Op die manier kan geen enkele natie leven en functioneren.
 1270;60;NLInf|NLPrep|NLAndOr|NLInf|NLPrep;+NLList|+NLList|+NLList|+NLList|+NLList;
+/*		1270. Aanduiden van en insnijden van de nieuwe positie van de navel.
 1324;60;*NLCon|NLInf|NLComma|*NLCon|NLInf|NLAndOr|*NLCon|NLInf;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;
+/*		1324. We gaan vlees bakken, groenten stomen en aardappelen koken.
 1325;60;*NLCon|NLInf|NLAndOr|*NLCon|NLInf;+NLList|+NLList|+NLList|+NLList|+NLList;
+/*		1325. Als ik in Oostende ben, wil ik garnalen eten en zandkastelen bouwen.
 
+
+/* PHASE 63: DETECT SENTENCE STRUCTURE
 /* =====================================
-
 1247;63;SBegin:NLColon:"-"|^NLVerb;*|+NLPBegin;
+/*		1247. Walvissen zijn zoogdieren.
 1249;63;SBegin:NLColon:"-":NLComma|NLVerb;*|+NLPBegin;
+/*		1249. Zijn er nog nootjes?
 1263;63;NLComma:NLAndOrBut+^NLList|NLSubjpron|^"van";*|+NLPBegin|*;
+/*		1263. Al kan je niets zien, je kan het wel horen.
 1303;63;NLComma+^NLList|"dan":"zo":"aldus";*|+NLPBegin;
+/*		1303. Als deze sector niet horen wil, dan moet ze maar voelen.
 1481;63;NLComma|NLAdvModality;*|+NLPBegin;
+/*		1481. Er komen buien, waarschijnlijk met smeltende sneeuw.
 1301;63;"maar"+NLAndOrBut;+NLPBegin;
+/*		1301. Soms deden we alsof we sliepen, maar dat hielp niet.
 1291;63;=NLOndvw;+NLPBegin;
+/*		1291. Een hele eer, want zij zijn onze grote voorbeelden.
 1296;63;"gezien"+NLOndvw;+NLPBegin;
+/*		1296. Dat kan ik ook begrijpen, gezien zijn financiële handel en wandel.
 1288;63;NLOndvw:NLRelpron|.^NLVerb+^NLInf+^NLPBegin|*NLVerb;+NLPBegin|*|+NLPEnd;
+/*		1288. Zij heeft aangegeven dat ze zich per heden in Nieuw-Zeeland gaat vestigen.
 1308;63;"om"+NLOndvw|.^NLVerb+^NLInf+^NLPBegin+^NLRTe|NLRTe|*NLInf;+NLPBegin|*|*|+NLPEnd;
+/*		1308. Zij heeft toestemming gevraagd om zich per heden in Nieuw-Zeeland te vestigen. Ik denk dat ze alles doen om dat te voorkomen.
 1314;63;NLPEnd|NLPrep+^NLConj+^NLOndvw|.NLArt:NLPoss:NLDempron|*NLAdj:NLCon|NLVerb;-NLPEnd|*|*|+NLPEnd|+NLPBegin;
+/*		1314. Alle partijen die betrokken zijn bij de situatie realiseren zich dat maar al te goed.
 1300;63;NLOndvw|NLPartrel|NLPrep;+NLPBegin|*|*;
+/*		1300. Deze tonijn wordt daarom op de Europese markt afgezet maar via de landen als bedoeld in bijlage IV.
 1286;63;^NLOndvw+^NLConj|NLConj;*|+NLPBegin;
+/*		1286. Druk op OK om verder te gaan.
 1261;63;NLAndOrBut|.NLAdvStruct|NLPBegin;+NLPBegin|*|-NLPBegin;
+/*		1261. Hij wil weten of dat ook daadwerkelijk is gebeurd.
 1268;63;^NLVerb|NLAndOrBut+^NLList|.NLEr|NLVerb;*|+NLPBegin|*|*;
+/*		1268. Hij nam een krijtje en schreef iets op het bord.
 1305;63;NLVerb:NLPartrel:NLInf|NLAndOrBut:NLComma+^NLList|.NLAdvStruct|NLArt:NLPoss:NLDempron:NLNiet:NLPrep;*|+NLPBegin|*|*;
+/*		1305. Het vakantieverblijf was niet geboekt en het geld was verdwenen.
 1321;63;NLVerb:NLPartrel:NLInf|NLAndOrBut+^NLList|*NLCon|^NLRelpron+^SEnd;*|+NLPBegin|*|*;
+/*		1321. Ik besluit maar boodschappen te gaan doen, en haal ingrediënten voor een enorme pan soep.
 1379;63;NLInf+^NLmAux|NLAndOrBut+^NLPBegin|.NLAdvStruct|NLmAux:NLRelAux;*|+NLPBegin|*|*;
+/*		1379. Als de behandeling beter wordt, blijven patiënten immers langer leven en wordt ook de mogelijke besmettingshaard groter.
 1380;63;NLInf+^NLmAux|NLAndOr+NLPBegin|*NLmAux:NLRelAux|NLPunctuation:SEnd;*|-NLPBegin|*|*;
+/*		1380. Hij doet dat alleen maar als de productiefactoren ter plaatse gunstig zijn en blijven.
 1385;63;NLRTe|NLInf|NLArt:NLPoss:NLDempron:NLNiet;*|*|+NLPBegin;
+/*		1385. Ik betreur het dat de mogelijkheid zijn gevangenisstraf op humanitaire gronden uit te stellen niet is benut. Aannemers en ontwikkelaars moeten om te overleven de minderopbrengsten van de sociale woningen compenseren door de prijs van niet-sociale woningen te verhogen.
 1309;63;NLOndvw:NLRelpron:NLConj|*^NLInf+^NLOndvw+^NLConj+^NLRelpron|*NLInf|NLVerb:NLRelAux+^NLInf|^NLAndOrBut+^NLPunctuation+^SEnd;*|*|*|+NLPBegin|*;
+/*		1309. Er is immers geen wet en ook geen contract, dus privépersonen kunnen zich niet tot een rechter wenden.
 1310;63;NLPEnd|NLPunctuation+^NLList|^NLPBegin;*|*|+NLPBegin;
+/*		1310. En dat kan, wat bevoegdheden betreft, in de toekomst alleen maar toenemen.
 1383;63;NLPartrel|NLPunctuation+^NLList|^NLPBegin+^NLPartrel+^SEnd;*|*|+NLPBegin+NLDummy;
+/*		1383. De uitbreiding is nog maar een paar jaar van ons verwijderd, en het wordt hoog tijd dat wij dat feit onder ogen zien.
 1384;63;NLPartrel|NLPunctuation|NLDummy|*^NLVerb+^NLInf+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|*|-NLPBegin|*|*;
+/*		1384. U hebt dit zojuist zelf onderstreept, mevrouw de commissaris.
 1386;63;NLDummy;-NLDummy;
+/*		1386. De besmetting wordt niet alleen van de moeder op het jong overgebracht, maar ook via de velden en de weilanden.
 1392;63;NLRelAux|NLPartrel|NLVerb+^NLRelAux+^NLmAux;*|*|+NLPBegin;
+/*		1392. Ook als die diagnose wordt bijgesteld ziet het er niet goed uit voor de 29-jarige Pool.
 
+
+/* PHASE 65: NEGATION ATTRIBUTES
 /*================================
 /* NAUWELIJKS
-
 1212;65;"nauwelijks"|.NLAttradj|NLCon;NLGeen|*|*;
+/*		1212. Bovendien heeft het nauwelijks effect bij vrouwen.
 
 /* Negation + Adverb
-
 962;65;"dan"|NLNiet:NLRel;NLAdvStruct|*;
+/*		962. Is het dan niet logisch dat ook de controles vooraf in onafhankelijkheid dienen te gebeuren?
 967;65;NLVerb+^NLLinkingverb|.NLSubjpron:NLObjpron:"het":NLAdvStruct:NLRAdv:NLAdvTemp:"er"|NLNiet|NLAdj|^NLLinkingverb;*|*|*|NLRAdv|*;
+/*		967. Daarom geven wij niet alleen, wij hebben ook wat gekregen. Wij kunnen echter nooit definitief kwijting weigeren. Ik vind zelf, en gelukkig sta ik daarin niet alleen, dat de praktische taak van de regulering van de veiligheidsvoorschriften overgelaten moet worden aan de Europese instantie voor de luchtverkeersveiligheid. Parlementaire debatten verlopen meestal al niet bepaald strijdlustig. Sinterklaas werkt niet alleen, hij gaat tegenwoordig vergezeld van vele Zwarte Pieten.
 969;65;NLVerb+^NLLinkingverb|*NLArt:NLAttradj:NLCon:NLPrep:NLAdvStruct|NLNiet|NLAdj|SEnd:NLPunctuation;*|*|*|NLRAdv|*;
+/*		969. In de tussentijd ligt het verkeer niet stil, en de concurrentie met andere vervoersmiddelen gaat natuurlijk gewoon door. De etiketteringsverordening die nu wordt voorgesteld, voorziet in de mogelijkheid om dieren niet afzonderlijk, maar groepsgewijs te identificeren.
 
 /* Assign negation attribute
-
 104;65;NLNiet|NLVerb:NLRTe;NLRel|*;
+/*		104. Ik hoop dat het testresultaat niet tegenvalt.
 366;65;NLNiet+^NLNooit:"nauwelijks"|NLNum:NLBeginEnd:NLAdvTime;NLBegin|NLCon;
+/*		366. Mochten die systemen geïnstalleerd zijn, dan zou nu niet twee, maar ruim 27 procent van de Belgische treinen uitgerust zijn met het modernste stopsysteem op de markt. Ik hoop dat het niet nog eens 25 jaar zal duren voordat we ook op dit punt eindelijk succes boeken. We kunnen niet allebei dingen tegelijk doen.
 659;65;NLAdj|NLNiet+^NLNooit|NLAdj:NLAttradj;NLBegin|NLCon|NLAttradj;
+/*		659. Deze 4 littekens zijn soepel en functioneel niet hinderend. wettelijk niet bindende administratieve brief.
 822;65;NLCon|NLNiet+^NLNooit|NLAttradj;*|NLBegin|*;
+/*		822. Omgekeerd zijn universitaire ziekenhuizen niet systematisch duurder dan andere.
 105;65;NLNiet+^NLNooit|NLAttradj;NLCon|*;
+/*		105. Hoe het incident kon gebeuren, is nog niet duidelijk.
 1048;65;NLNiet+^NLNooit|NLAdj|NLAux|NLPartrel+NLLinkingverb;NLBegin|NLAttradj|*|*;
+/*		1048. Het klopt dat onze resultaten niet heel veel beter zijn geworden dan de afgelopen drie jaar.
 1047;65;NLNiet+^NLNooit|NLAdj|NLLinkingverb|^NLPartrel;NLBegin|NLAttradj|*|*;
+/*		1047. Het gaat hier om aanbevelingen, die niet bindend zijn
 121;65;NLNiet+^NLNooit|NLAdj:NLAdjCon;NLBegin|NLAdj;
+/*		121. Olie was sinds 20 oktober vorig jaar niet zo duur. NOT. Er werd nooit duidelijk occult bloedverlies gerapporteerd.
 732;65;"niet":NLNiet|"genoeg"+typeRelation;NLRel+NLNegation|+Join;
+/*		732. Het belang van deze hervorming kan niet genoeg worden benadrukt. Het kan niet vaak genoeg gezegd worden.
 734;65;"niet":NLNiet+^NLNooit+typeBeginConcept|"genoeg"+typeConcept;NLBegin+NLNegation|+Join;
+/*		734. Maar omdat die niet genoeg brandstof had, heeft een Sea King hem verder gevoerd naar het brandwondencentrum.
 119;65;NLNiet;NLRel;
+/*		119. De belangrijkste gast lustte het hoofdgerecht niet.
 284;65;NLAdjCon;NLCon;
+/*		284. Personen die ouder zijn dan 65 jaar.
 1119;65;NLVerb|NLAdj|NLRel;*|NLRAdv|*;
+/*		1119. Het personage is natuurlijk niet zomaar een flierefluiter.
 
+
+/*PHASE 70: NEGATION ATTRIBUTES AND EXPANSION
 /* ============================================
-
 1331;70;"zoals"+NLRel;+NLConj;
+/*		1331. Zoals de markt had verwacht, hebben we uitstekende resultaten gerapporteerd.
 1332;70;NLNominf;+NLVerb;
+/*		1332. Ook heeft mevrouw hem bij het bekijken van een serie foto's in een zogenoemde Foslo-confrontatie niet herkend.
 
 /* Don't mark negation in questions with inversion
-
 955;70;SBegin:NLColon|NLVerb|*NLCon:NLSubjpron|"niet"|"dan";*|*|*|+NLDummy|^NLConj2+NLNegStop;
+/*		955. Gebeurt dit niet dan zal de hulp een averechts effect hebben.
 956;70;SBegin:NLColon|NLVerb|NLSubjpron|"niet"|.NLRAdv:NLVerb|NLComma|"dan";*|*|*|+NLDummy|*|*|*;
+/*		956. Slagen zij niet, dan zal het Parlement zich genoodzaakt zien om in hun plaats op te treden. Mocht dit niet mogelijk blijken, dan vind ik het gemeenschappelijk standpunt echter aanvaardbaar.
 1202;70;SBegin:NLColon|NLVerb|NLSubjpron|.NLAdvStruct|"niet"+^NLDummy|"dat"+NLOndvw;*|*|*|*|NLRAdv|*;
+/*		1202. Vindt u ook niet dat wij de komst van de minister even moeten afwachten?
 960;70;SBegin:NLColon|NLVerb+^"laat":"laten"|*NLArt:NLAttradj:NLCon|.NLAdvStruct|"niet"+^NLDummy|"dat":NLAdj:NLRAdv;*|*|*|*|NLRAdv|*;
+/*		960. Vindt de Commissie ook niet dat het begrip "efficiënt gebruik" enigszins misleidend is? Vindt de commissaris het niet merkwaardig dat producten die op de markt worden gebracht niet getest zijn? Mijn eerste vraag is: waren de vastgestelde termijnen niet te kort?
 961;70;SBegin:NLColon|NLLinkingverb:NLmAux:"gaat"+^"mocht":"mochten":"laat":"laten"|NLSubjpron:"het"|.NLAdvStruct:NLRAdv|"niet":NLGeen+^NLDummy|^SEnd;*|*|*|*|NLRAdv|*;
+/*		961. Is dat niet schitterend? Zou hij niet ook willen overwegen om een hond te kopen?
 
 /* EXPANSION OF NEGATION SCOPE
 /* Preparation: miscellaneous issues
-
 1014;70;NLVerb|*NLArt:NLSubjpron:NLCon|"dat"|NLRel+NLNegation|SEnd:NLComma:"dan";*|*|NLSubjpron|*|*;
+/*		1014. Doen ze dat niet, dan riskeren zij een fikse boete. Hopelijk vergeet de Commissie dat niet.
 1243;70;NLAux:"was"|"niet"|"zonder"|NLCon;*|NLPrep-NLNegation-NLNegBegin|Join|*;'niet zonder' doesn't express negation when preceded by forms of 'zijn' and followed by a noun
+/*		1243. De discussie is niet zonder resultaat. De discussie was niet zonder resultaat.
 1242;70;^NLVerb|"niet"|"zonder"|NLCon|^"kan":"kunnen":"kon":"konden";*|NLPrep-NLNegation-NLNegBegin|Join|*|*;'niet zonder' doesn't express negation when followed by a noun, unless preceded by a verb or reflexive pronoun, or unless the noun is followed by a form of 'kunnen'
+/*		1242. Dit lijkt onschuldig, maar stomen doe je blijkbaar niet zonder risico. Wij moeten ons ervan bewust zijn dat het proces waaraan we nu begonnen zijn, niet zonder tegenslagen zal verlopen. NOT. De mensheid kan niet zonder water. NOT. Daarbij zullen we op den duur ook niet zonder boetes kunnen.
 439;70;NLNegation+^"zonder"+^"zonder te"+^"zonder dat";+NLNegBegin;
+/*		439. Dat er amper bedrijven zijn die via een beursintroductie kapitaal willen ophalen, is niet echt verrassend.
 750;70;NLRelpron+^NLOndvw;-NLRelpron;
+/*		750. Voor veel beleggers weegt dat risico voorlopig niet op. NOT. hij staat symbool voor mensen die zelfs in hopeloze situaties niet opgeven.
 1237;70;NLNegation|*NLPrep:NLArt:NLAdj:NLCon:NLAttradj:NLVerb:NLPartrel+^"sinds"|"sinds";*|*|NLConj;
+/*		1237. De Cubaanse leider verscheen niet meer in het openbaar sinds ernstige gezondheidsproblemen hem er eind juli 2006 toe dwongen de macht over te dragen aan zijn broer Raul, 78 jaar. Gezien de patient geen bijkomende complicaties ondervond sinds zijn opname, werd hij naar de dienst pneumologie overgebracht voor opvolging.
 
 /* verb: Relation split
-
 1105;70;NLRelAux|NLPartrel|NLVerb;*|*|NLBeginrel;
+/*		1105. Dat dit inderdaad is gebeurd hadden velen enkele maanden geleden nauwelijks durven dromen. Of dat betekent dat we in het eerste kwartaal al winst hebben gemaakt kan ik niet zeggen.
 1220;70;NLRelAux|NLInf+^NLRelAux:NLmAux|NLVerb+^NLInf;*|*|NLBeginrel;
+/*		1220. Hoeveel bruinvissen er in de netten blijven zitten is niet bekend, maar wel is duidelijk dat de staande netten sterfte onder de bruinvissen in de hand werken.
 1184;70;NLPartrel|NLRelAux|NLmAux+NLInf|NLInf;*|*|-NLVerb|*;
+/*		1184. Mertens vindt dat hij niet door het OM gedagvaard had mogen worden.
 1178;70;NLPartrel|NLRelAux|NLVerb;*|*|NLBeginrel;
+/*		1122. Doordat de openbare financiën totaal ondermijnd zijn krijgen ambtenaren noch gepensioneerden hun loon of pensioen tijdig uitbetaald. De bakstenen die op deze manier gevormd worden hebben betrekkelijk gladde zijden.
 1110;70;NLmAux|NLInf+^NLRelAux:NLmAux|NLVerb+^NLInf|^"te":SEnd;*|*|NLBeginrel|*;
+/*		1110. Hoe veel extra omzet ABCD hiermee hoopt te kunnen genereren kon Knol niet zeggen.
 1175;70;NLRTe|NLInf|NLmAux|^NLInf;*|*|NLBeginrel|*;
+/*		1175. Om dat te bewerkstelligen moeten wij niet verder treuzelen. NOT. of het Parlement in een met absolute meerderheid aangenomen resolutie te kennen zou geven dat de uitvoeringsmaatregelen de gedelegeerde bevoegdheden overschrijden.
 1224;70;NLRTe:NLmAux|NLInf|NLRelAux:NLmAux|NLRel:NLObjpron;*|*|NLBeginrel|*;
+/*		1224. Zelfs het voorstel van de Commissie om een aantal energiebesparende indicatoren op te nemen werd niet aanvaard. Het streven naar een gemeenschappelijke ontwikkeling en samenwerking om het probleem bij de wortels aan te pakken lijkt mij toch nauwelijks verenigbaar met het idee te snoeien in de samenwerking voor meer controle. wat uit het moeras getrokken moet worden mag niet zwaarder worden belast.
 1225;70;NLRelAux|NLPartrel|NLRel+^"noch";*|*|^NLBeginrel;
+/*		1225.  Het gevaar bestaat dat zodra een onderneming effectief op de beurs noteert, de koers naar beneden duikt en dat het prijsniveau waarop werd ingetekend niet meer wordt bereikt. NOT. De gevechten worden gewonnen noch verloren.
 
 /* negation on Concept / Time indication only: no expansion
-
 810;70;NLPoss:NLArt:NLPrep:NLBeginpron:NLBegin:NLAttradj|.NLAdvStruct|NLBegin:NLCon:"nauwelijks"+NLNegation+NLNegBegin|*NLAttradj:NLAdj|*NLCon;*|*|NLAttradj+NLNegation-NLNegBegin|*|*;
+/*		810. Ons doel is te komen tot een betere samenhang in de bepaald niet geringe activiteiten die wij op dit gebied momenteel al ontplooien. De pijplijn maakt goede vorderingen, zo staat in een niet becijferde trading update. Er bevindt zich ook een functioneel niet hinderend litteken ongeveer ter hoogte van de elleboog rechts. Het gaat om niet zo belangrijke gebieden. NOT. Ik vind het niet goed dat de lidstaten de geheimhouding van bepaalde documenten kunnen eisen. Deze tekst moet een duidelijke steun in de rug van de helaas niet aanwezige oorzitter zijn.
 1117;70;^NLVerb:NLCon:NLAdvStruct|"niet"|NLPrep|NLArt|NLCon|NLAttradj;*|NLCon+NLNegation-NLNegBegin|NLCon|NLCon|*|*;
+/*		1117. niet resulteren in het op eenvoudige wijze toetreden van niet tot de kring behorende personen of vennootschappen.
 1213;70;"nauwelijks"|NLNum;NLBegin-NLNegation-NLNegBegin|*;
+/*		1213. In Wallonië en Brussel is dat nauwelijks 1,5%.
 1215;70;NLGeen:"nauwelijks"|NLAdvTime;NLBegin+NLNegation|NLEnd;
+/*		1215. De overeenkomst voor bananen is nog geen zeven jaar geleden in werking getreden.
 
 /* expansion to conjunction before GEEN
-
 843;70;*NLRelpron:NLOndvw|.typeOther:typeAmbiguous|NLGeen;+NLNegBegin|*|*;
+/*		843. Het lijkt gerechtvaardigd dit dossier af te sluiten aangezien er geen veranderingen meer te verwachten zijn in de toekomst. Ik ben van oordeel dat het geen zin heeft om een bijkomende plastische chirurgische correctie uit te voeren. Ze zoeken mannen die geen of weinig cosmetica gebruiken. Als geen rekening wordt gehouden met wisselkoersschommelingen, was de daling te verwaarlozen. Dat zei de topman, die eveneens geen raming van de verwachte opbrengst wil geven.
 
 /* expansion to verb
 /* assign Expansion for labels to be included in left expansion to verb
-
 1231;70;NLNum:NLAdj:NLAttradj:NLPrep:NLArt:NLPoss:"er"+^NLConj;+NLExpansion;
+/*		1231. Mij zal je alvast nooit horen dicteren wat Alexander moet doen. NOT. Schoffelen of tubes lijm inpakken om niet gekort te worden op je uitkering.
 1232;70;NLAdvStruct:NLAdvTemp:NLAdvTime:NLRAdv:NLSubjpron:NLObjpron:"zich";+NLExpansion;
+/*		1232. Ik zou hem wel nooit willen ontmoeten. Je kan eindeloos variëren met technieken om kralen te verwerken tot een ketting.
 1233;70;NLCon:NLPathRelevant:NLBeginpron:NLAdvRestriction:NLBegin:NLEnd:NLNum+^NLNegation;+NLExpansion;
+/*		1233. Dit komt slechts zeer zelden voor. Daarin zit de opbrengst uit de plaatsing van een converteerbare obligatie enkele maanden terug niet begrepen. Het virus overleeft een temperatuur van meer dan 26º C niet en levert voor de mens dus geen gevaar op. In dat geval zou de Europese ICBE's uiteraard niet dezelfde behandeling ten deel vallen.
 
 /* expansion to preceding verb
-
 1193;70;NLVerb|*NLArt:NLCon:NLList|NLRel+NLNegation;+NLNegBegin|*|*;
+/*		1193. De Commissie kan amendementen 39 en 40 evenmin overnemen. Wanneer de schrijver bekend is en zijn woonplaats in België heeft, kan de uitgever, de drukker of de verspreider niet worden vervolgd.
 782;70;NLVerb:NLPartrel:NLRTe:NLBeginrel|.NLExpansion|NLRel:NLBegin:NLPathRelevant:NLCon+NLNegation+NLNegBegin;+NLNegBegin+NLNoExpansion|*|*;
+/*		782. Mij zal je alvast nooit horen dicteren wat Alexander Dhaenen moet doen. Ik zou hem wel nooit willen ontmoeten. Ze bleek zelfs niet zwanger te zijn. NOT. Ook als die diagnose wordt bijgesteld ziet het er niet goed uit voor de 29-jarige Pool. NOT. Wat ik ter discussie stel is niet wát de Commissie gedaan heeft, maar hóe.
 
 /* expansion to concept, first part: before negation marker as Relation or PathRelevant
-
 1227;70;*NLBegin:NLCon:NLNum:NLAttradj:NLArt:NLPoss|NLPrep+^"om"|*NLBegin:NLCon:NLNum:NLAttradj:NLAdj:NLArt:NLAdvRestriction:NLPoss|.NLRAdv:NLAdvTemp|NLRel:NLPathRelevant+NLNegation;+NLNegBegin|*|*|*|*;
+/*		1227. In ruim zes op de tien gevallen werden intensiteit en duur van de sessie niet aangepast aan het huidtype van de klant. Dat is toegelaten als het geen lasten voor de bedrijven veroorzaakt en hun mededingingsvermogen ten opzichte van de buitenlandse concurrenten niet aantast.
 164;70;*NLBegin:NLCon:NLNum:NLAttradj:"als":NLBeginpron:NLArt:NLPoss|.NLAdvTemp:NLAdvStruct:NLRAdv:"het":"er"|NLRel:NLPathRelevant+NLNegation;+NLNegBegin|*|*;
+/*		164. Het is onzin dat bezoekers niet op de parking mogen staan. Bovendien werken die niet-gesubsidieerde scholen niet samen met het CLB. Bovendien is de omvang van $200 miljard niet de bovengrens.
 
 /* expansion to personal pronoun
-
 740;70;*NLSubjpron:NLObjpron:NLRefl|.NLRAdv:NLAdvStruct|NLRel:NLBegin:NLCon:NLPathRelevant+NLNegation+NLNegBegin;+NLNegBegin|*|*;
+/*		740. Mis je hem niet te veel? Het lijkt me niet simpel om de juiste balans te vinden tussen het maatschappijkritische element en een lekker verhaal. Toch is de kans groot dat u niet alles weet over papieren biljetten. Waarom kunnen wij niet hetzelfde doen? Die kunnen we hier echter niet allemaal behandelen.
 739;70;^NLPrep|*NLSubjpron:NLObjpron|NLVerb:NLPartrel:NLAdvRestriction+NLNegBegin|^NLAux;*|+NLNegBegin|*|*;
+/*		739. Hij luistert niet naar opera. Ze vergeten nooit zijn blik. We mogen alleen niet blind zijn en vooral geen blanco cheque uitschrijven!
 
 /* expansion to conjunction, first part
-
 1009;70;NLConj:NLOndvw+^"dus"|.NLSubjpron:NLAdvTemp:NLAdvStruct:NLRAdv|.NLPrep:NLCon:NLNum:NLAttradj:NLAdj:NLArt:NLPoss:NLPathRelevant|.NLRAdv:NLAdvStruct:NLAdvTemp|NLNegBegin+^NLGeen:NLConj:NLOndvw:"zonder":"die":"dat":NLNoExpansion|^"die":"dat";+NLNegBegin|*|*|*|*|*;
+/*		1009. Hij denkt dat de winstcapaciteit 'niet gemakkelijk kan worden hersteld op korte termijn'. Hiervoor zijn al in 2007 voorzieningen genomen, maar aangezien deze projecten nog niet afgerond zijn moet nog blijken of de afschrijvingen ook echt nodig zijn. Enkele aandeelhouders morden dat het dividend niet hoger was, gezien de forse stijging van de resultaten vorig jaar. NOT. Wat ik ter discussie stel is niet wát de Commissie gedaan heeft, maar hóe.
 796;70;NLConj:NLOndvw+^"dus"|*NLAdvStruct:NLCon:NLNum:NLAttradj:NLArt:NLPoss:NLBegin+^NLNegation|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder":"die":"dat"|^"die":"dat";+NLNegBegin|*|*|*;
+/*		796. Pas vlak voor vertrek ontdekten de reizigers hierdoor dat hun tickets in feite helemaal nooit waren aangeschaft.
 748;70;NLConj:NLOndvw+^"dus"|*NLSubjpron:"er":NLPrep:NLAdvStruct:NLRAdv|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder"|^"die":"dat";+NLNegBegin|*|*|*;
+/*		748. "De sterke koersdaling vertelt ons dat we niet zomaar kunnen melden dat we het kapitaal willen uitbreiden, zonder daarbij te vermelden waar dit geld in wordt geinvesteerd", aldus de ceo. De regelen die ze invoeren, zijn slechts voor een jaar van kracht indien zij niet worden vernieuwd. Aangezien ze dat zelf niet kunnen, moeten we ook opkomen voor individuele dieren.
 1235;70;NLConj:NLOndvw+^"dus"|NLNegBegin+^NLGeen+^NLConj+^NLOndvw+^"zonder":"die":"dat"|^"die":"dat";+NLNegBegin|*|*;
+/*		1235. De mensenrechten worden in de eerste plaats geschonden wanneer niet iedereen in staat wordt gesteld een menswaardig bestaan te hebben. Maar parken waarvoor niet genoeg financiële middelen beschikbaar zijn, zonder bewegwijzering, zijn niet doelmatig en nutteloos.
 
 /* expansion to antecedent
-
 749;70;*NLCon:NLNum:NLAttradj|.NLAdvStruct|NLConj:NLRelpron+NLNegBegin+^"om"+^"wanneer"+^"zonder dat"+^"zonder te";+NLNegBegin+NLAntecedent|*|*;
+/*		749. Binnen een termijn die zestig dagen niet te boven mag gaan, neemt de Kamer een definitieve beslissing door het wetsontwerp hetzij te verwerpen, hetzij aan te nemen. "Dat is heel goed, want dat zijn volwassen markten die niet meer heel sterk groeien", zegt de analist.
 996;70;"zij":"degenen":"diegenen"|"die"+NLNegBegin;+NLNegBegin+NLAntecedent|*;
+/*		996. Het is van fundamenteel belang dat degenen die deze gewelddaden hebben gepleegd niet ongestraft blijven. We maken ons zorgen over een andere categorie, namelijk zij die geen toegang hebben tot nieuwe kenniscentra.
 753;70;*NLCon:NLNum:NLAttradj|NLComma|"die":"dewelke"+NLNegBegin+^typePathRelevant;+NLNegBegin+NLAntecedent|*|*;
+/*		753. Wij moeten ervoor waken dat de burger zijn keuze kan bepalen aan de hand van een nauwkeurige en duidelijke etikettering, die hem niet in verwarring brengt of misleidt. Beleggers herontdekten de nutssector, die tot hiertoe niet volop meedeed aan de beursrally.
 755;70;*NLCon:NLNum:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|NLNegation;+NLNegBegin+NLAntecedent|*|*|*;
+/*		755. aBadgasten trokken het meisje, dat niet kon zwemmen en geen opblaasvleugeltjes droeg, op de kant.
 754;70;*NLCon:NLNum:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|*NLCon:NLNum:NLAttradj:NLPrep:NLArt:NLPoss|NLNegation;+NLNegBegin+NLAntecedent|*|*|*|*;
+/*		754. Dit betreft dus amendement 2, dat om twee redenen niet geaccepteerd kan worden. NOT. 310 miljoen voor zestien landen, dat is niet echt veel minder dan 400 miljoen. NOT. Het valt ook niet te ontkennen, mijnheer de commissaris, dat er nauwelijks alternatieven bestaan.
 
 /* expansion to concept, second part
 /* assign NoExpansion for preposition-concept patterns
-
 1218;70;^NLCon|NLPrep+^"van"|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPrep;*|*|+NLNoExpansion;
+/*		1218. Je ketting bestaat uit zes koordjes die je per twee verbindt. Lambiek is immers een zuur bier en met jongere hop zou het te bitter smaken en met minder hop zou het niet goed bewaren.
 1219;70;^NLCon|NLPrep+^"van"|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLPathRelevant:NLAdvRestriction:NLPrep;*|*|+NLNoExpansion;
+/*		1219. Aan dergelijke mensonterende rituelen wenst de zelfverklaarde zonaanbidder niet mee te doen.
 1234;70;^NLCon|NLPrep+^"van"|*NLPoss:NLSubjpron:NLObjpron:NLBeginpron:NLCon:NLAdj:NLAttradj;*|*|+NLNoExpansion;
+/*		1234. Voor ons is het boek nog niet dicht.
 1236;70;^NLCon|NLPrep+^"van"|*NLArt:NLPoss:NLCon:NLAdj:NLAttradj:NLList:NLPrep;*|*|+NLNoExpansion;
+/*		1236. Vanwege de verschillen in historische achtergrond, het wettelijk kader, het type en aantal reactoren en de verschillende houdingen ten opzichte van verordeningen is het niet eenvoudig om een communautaire harmonisatie van de veiligheidseisen van de lidstaten te bewerkstelligen. Wee de politicus die zich laat misleiden door dromen over de verre toekomst en de concrete problemen niet ziet en niet oplost!
 983;70;NLCon|.NLRAdv|NLBegin+NLNegation+NLNegBegin;+NLNegBegin|*|*;
+/*		983. Daardoor wordt het in de winter gemiddeld niet kouder dan 5°C.
 
 /* expansion to concept before verb+NegationBegin
-
 1222;70;*NLCon:NLBegin:NLNum+^NLNoExpansion|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLPoss|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLPoss|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*|*|*|*|*;
+/*		1222. Het volledige effect op de omzet van UCB is echter nog niet bekend. In 1998 zijn er 123 zaken aanhangig gemaakt bij het Hof van Justitie, en 25% van de richtlijnen inzake milieubeheer wordt niet toegepast of omgezet.
 1221;70;*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction+^NLNoExpansion|NLPrep|*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPoss|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*|*|*;
+/*		1221. Het mechanisme van jeuk is niet goed bekend. Dus gebrek aan geld kon nooit de reden zijn. Zware bosbranden in Griekenland raken niet onder controle.
 760;70;*NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction:NLPoss+^NLNoExpansion|NLVerb:NLPartrel:NLRTe+NLNegBegin|^NLOndvw+^NLSubjpron;+NLNegBegin|*|*;
+/*		760. En inderdaad, mensen kijken niet. Het is niet een dramatisch probleem. Financiele details zijn niet gegeven.
 1223;70;SBegin|.NLAdvStruct|"van"|NLCon:NLBegin:NLNum:NLAdj:NLAttradj:NLArt:NLAdvRestriction+NLNegBegin;*|*|+NLNegBegin|*;
+/*		1223. Van evacuatie is er nooit sprake geweest.
 1226;70;NLNum:NLCon|NLPrep|NLObjpron:NLSubjpron|NLVerb:NLPartrel:NLRTe+NLNegBegin;+NLNegBegin|*|*|*;
+/*		1226. Een relatie tussen beide is nooit aangetoond. Negen van hen hebben de aanval niet overleefd.
 
 /* concept as object before subjpron
-
 770;70;*NLCon:NLNum:NLAttradj|NLSubjpron:NLObjpron+NLNegBegin;+NLNegBegin|*;
+/*		770. Het spreekt voor zich dat kinderen van een paar jaar oud zoiets niet begrijpen. Ze doen dat omdat een duivenliefhebber ze niet wil verkopen - het zijn zijn topduiven, hij heeft er een emotionele band mee - of omdat ze ze niet kunnen betalen.
 801;70;SBegin:NLAndOrBut:NLPunctuation|.NLAdvStruct|*NLArt:NLNum:NLCon:NLBegin:NLAdj:NLAttradj:NLPoss:"van"+^NLNoExpansion|NLVerb:NLPartrel+NLNegBegin|NLSubjpron;*|*|+NLNegBegin|*|*;
+/*		801. Om maar te zeggen: veel troost heb ik vroeger niet gezien. Een dubbelfunctie wijst hij niet bij voorbaat af. Mijn dochter zou zoiets nooit verzinnen.
 802;70;SBegin:NLAndOrBut|.NLAdvStruct|.NLArt:NLAdj:NLAttradj:NLPathRelevant|NLCon+^NLNoExpansion|NLVerb:NLPartrel+NLNegBegin|NLSubjpron|.NLAdvStruct:NLAdvTemp|NLRel+NLNegation;*|*|+NLNegBegin|+NLNegBegin|*|*|*|*;
+/*		802. En die strijd dienen we niet door lukraak computers te plaatsen zonder de docenten op te leiden in het gebruik ervan. De problemen in de eindfase van de levenscyclus van PVC moeten worden opgelost en de industrie kan dat niet zelf en niet alleen. Een andere conclusie kunnen wij niet trekken. Het hele navigatieprobleem hoeven wij nu niet uit te diepen. Een dubbelfunctie wijst hij niet bij voorbaat af. NOT. Door hun meningsverschillen en hoogoplopende ruzies zijn ze niet in staat opdrachten naar behoren uit te voeren.
 
 /* concept, enumeration with "noch"
-
 1109;70;NLCon|NLComma|*NLCon:NLAttradj:NLArt:NLPoss|"noch";+NLNegBegin|*|*|*;
+/*		1109. Industrialisering, kernenergie noch biotechnologie hebben ons welvaart en vrijheid voor iedereen gebracht.
 
 /* expansion to pattern concept-'als'-concept
-
 798;70;NLCon|"als"|NLCon|NLVerb+NLNegBegin;+NLNegBegin|*|*|*;
+/*		798. Maar, aldus de onderzoeker, een eekhoorn als huisdier zal de doorsnee kleuter nooit vragen.
 
 /* expansion to enumeration patterns
-
 787;70;.NLSubjpron|NLList|.NLList+^NLNegBegin|NLList+NLNegBegin+^NLAntecedent:NLNoExpansion;+NLNegBegin|+NLNegBegin|*|*;
+/*		787. Geuze of gueuze wordt niet gebrouwen maar gestoken. Bij dit alles moet worden opgemerkt dat het onderscheid tussen Kelten en Germanen niet goed duidelijk is. De artikelen 120 en 59 zijn in voorkomend geval niet van toepassing. NOT. Een werkelijke samenwerking tussen een Europa en een Afrika die niet meer onder de voogdij staan van de bank- en industrieconglomeraten. NOT. Door hun meningsverschillen en hoogoplopende ruzies zijn ze niet in staat opdrachten naar behoren uit te voeren, laat staan dat ze in staat zouden zijn een restaurant te runnen.
 
 /* expansion to conjunction, second part: for enumerations
-
 781;70;NLConj:NLOndvw:"die":"dat"+^typePathRelevant|NLPoss:NLArt:NLCon:NLNum:NLAttradj+NLNegBegin+^"zonder"+^NLAntecedent;+NLNegBegin|*;
+/*		781. Het proces gaat over een reeks liquidaties in het criminele milieu waarop politie en justitie lange tijd de vinger niet konden leggen. Omdat woorden uit een tweede taal zelden binnendringen bij het lezen of spreken in de moedertaal, gingen wetenschappers ervan uit dat het menselijke brein erin slaagt om irrelevante talen eenvoudigweg uit te schakelen. NOT. Het gaat hier om vrouwen die niet mogen deelnemen aan het arbeidsproces, geen onderwijs mogen volgen en geen toegang hebben tot de publieke ruimte. NOT. omdat dat een taak voor het comité zou inhouden waarvoor het niet bevoegd is. NOT. Het gaat hier om twee problemen waar we niet omheen kunnen. NOT. het gaat om niet zo belangrijke gebieden.
 
 /* expansion to PathRelevant
-
 1108;70;NLPathRelevant|typeConcept+NLNegBegin;+NLNegBegin|*;
+/*		1108. De andere landgenoten kwamen niet aan voetballen toe.
 
 /* RESTRICTION OF NEGATION SCOPE
 /* Punctuation
-
 864;70;NLColon|^NLNegation;*|+NLNegStop;
+/*		864. Meteen panikeren bij een kapitaalverhoging is ook niet nodig: ook gezonde bedrijven worden geconfronteerd met tijdelijke problemen.
 865;70;NLComma+^NLList;+NLNegStop;
+/*		865. Twaalf tieners overleefden de brand niet, 23 anderen raakten gewond. NOT. De uitwerking van het handvest zal zich geleidelijk en gestaag doen voelen en geen plotselinge, algemene ommekeer teweeg brengen.
 870;70;NLPunctuation+^NLComma|^NLNegBegin;*|+NLNegStop;
+/*		870. Ze doen dat omdat een duivenliefhebber ze niet wil verkopen - het zijn zijn topduiven, hij heeft er een emotionele band mee - of omdat ze ze niet kunnen betalen.
 
 /* EN
-
 1153;70;NLRel+NLNegation|"en"|NLVerb+^NLNegBegin;*|^NLConj2+NLNegStop|*;restriction of expansion
+/*		1153. Het virus overleeft een temperatuur van meer dan 26º C niet en levert voor de mens dus geen gevaar op.
 1155;70;SBegin:NLAndOr:NLPunctuation|*NLArt:NLAttradj:NLCon:NLRAdv:NLSubjpron:NLAdvStruct|NLVerb|"en"|NLVerb;*|*|*|+NLList|*;
+/*		1155. De Koning benoemt en ontslaat de federale staatssecretarissen. Hierdoor verbeterde en recupereerde de acute nierinsufficiëntie. zij beraadslagen en besluiten ter zake in verenigde vergadering. Bovendien veronderstellen en vermoeden wij dat het desbetreffende systeem niet enkel voor militaire en defensiedoeleinden wordt gebruikt. Het afluisteren en gebruiken van informatie uit tapgesprekken tussen een advocaat en een verdachte mag niet.
 1169;70;SBegin:NLAndOr:NLPunctuation|NLVerb|"en"|NLVerb;*|*|+NLList|*;
+/*		1169. Ontsmetten en afdekken van de wonde.
 1156;70;NLConj|NLVerb|"en"|NLVerb;*|*|+NLList|*;
+/*		1156. waar beginnen en stoppen we?
 1157;70;NLVerb:NLInf|"en"|.NLPartrel|*NLVerb:NLInf|SEnd:NLAndOr:NLPunctuation;*|+NLList|*|*|*;
+/*		1157. Op die manier kan geen enkele natie leven en functioneren. Deze bevindingen kunnen ertoe bijdragen dat gewrichtsprothesen minder vaak infecteren en vervangen moeten worden.
 1163;70;"het"|NLInf|"en"|."het":NLRAdv|NLInf;*|*|+NLList|*|*;exception to r1150
+/*		1163. Het begrijpen en beschrijven van verandering is een terugkerend thema in de natuurwetenschappen en de calculus werd ontwikkeld om dit te onderzoeken.
 1164;70;NLRTe|NLInf|"en"|NLRTe|NLInf;*|*|+NLList|*|*;exception to r1150
+/*		1164. Om tandcariës te voorkomen is het belangrijk om niet te vaak suiker te eten en te drinken buiten de gewone maaltijden.
 1158;70;NLPartrel|"en"|NLPartrel;*|+NLList|*;exception to r1150
+/*		1158. Het instituut is inmiddels veroordeeld en gesloten.
 1159;70;NLPrep|"en"|NLPrep;*|+NLList|*;exception to r1150
+/*		1159. Steeds minder mensen nemen de wagen om zich van en naar hun werk te verplaatsen.
 1160;70;NLVerb|NLPrep|"en"|NLVerb|NLPrep;*|*|+NLList|*|*;exception to r1150
+/*		1160. Bloeiende kloosters zoals de Sint-Pietersabdij en de Sint-Baafsabdij in Gent, de abijen van Lobbes, St-Hubert, Stavelot en vele andere rezen op en droegen bij tot de economische en culturele ontwikkeling van het land.
 1168;70;NLCon|NLPrep|"en"|.NLArt|NLCon|NLPrep;*|*|+NLList|*|*|*;exception to r1150
+/*		1168. Eerder kwamen al een woordenboek met turnwoorden uit en eentje over de wielersport.
 1161;70;NLRAdv|"en"|NLRAdv;*|+NLList|*;#exception to r1150
+/*		1161. Dat heeft de jury recent en unaniem beslist, in reële tijd.
 1162;70;NLInf|"en"|NLRAdv|NLInf;*|+NLList|*|*;exception to r1150
+/*		1162. Kennis delen, spreiden en toegankelijk maken is ons doel.
 1167;70;NLConj|"en"|NLConj;*|+NLList|*;exception to r1150
+/*		1167. stap 1: noteren hoe vaak en wanneer u krabt.
 1150;70;"en"+^NLList;^NLConj2+NLNegStop;restriction of expansion
+/*		1150. Wij zijn ons niet altijd bewust van ons straffen en belonen. NOT. Dat betekent dat elke momentopname van het personeelsprofiel nooit een volledig beeld zal en kan geven.
 
 /* Conjunction
-
 686;70;^NLOndvw+^SBegin|^NLAndOrBut|NLOndvw+^"dat"+^"als"+^"wat"+^"wie"+^"die";*|*|^NLConj2+NLNegStop;
+/*		686. Vlak na het ongeval werd zijn toestand nog als levensbedreigend aanschouwd omdat we niet zeker wisten of hij het gas ook had ingeademd. Ik kan er niets over verklaren, want ik was er niet bij, hield L. vol.
 
 /*	MAAR
-
 682;70;NLNegBegin|.^"maar":"maar ook":"doch":NLPunctuation|"maar":"maar ook":"doch"+^NLAdvStruct;*|*|^NLConj2+NLNegStop;
+/*		682. Je hebt hem niet gezien maar wel gehoord. Er is geen duidelijk bewustzijnsverlies geweest maar er zijn klinisch tekenen van een fractuur. NOT. Het probleem is niet zozeer dat maar 25% van de schepen wordt gecontroleerd. NOT. Als wij daar geen gehoor vinden, staan wij voor de lastige vraag uit te maken welke niet-essentiële taken dan maar moeten worden afgestoten.
 
 /* OF
-
 984;70;NLRel+NLNegation|*NLRTe:NLVerb:NLInf:NLRAdv|"of"|^typeRelation+^NLAdvStruct;*|*|^NLConj2+NLNegStop|*;
+/*		984. Ik kan dus niet zeggen of er nog procedures zijn tegen een kantoor waar een lid van de familie bij betrokken is. Ik weet niet zeker of u een vraag heeft gesteld. NOT. Liberalisering mag het dienstenaanbod niet ontoereikend maken of zelfs doen verdwijnen.
 1171;70;NLCon:NLBegin+NLNegation+NLNegBegin|*NLAdj:NLAttradj|.NLAux|"of"+^NLList;*|*|*|^NLConj2+NLNegStop;
+/*		1171. Het is niet duidelijk of ze zelf in het bad is gegaan of erin is gevallen. temeer daar het niet duidelijk is of deze omkering van de regelgeving ook op het strafrecht van toepassing is.
 898;70;NLVerb:NLInf:NLPartrel:NLNegation|"of"|NLSubjpron:NLObjpron:NLPoss;*|^NLConj2+NLNegStop|*;
+/*		898. Riet weet nog niet of haar baas een schadeclaim gaat indienen.
 1001;70;NLRel+NLNegation|.NLVerb:NLPartrel:NLRAdv:NLAdvStruct:NLRTe:NLPrep|"of"|NLArt:NLSubjpron|^NLInf;*|*|^NLConj2+NLNegStop|*|*;
+/*		1001. Wij weten evenmin of deze openstelling en deze oplossingen alleen voor hoogopgeleiden of tevens voor laagopgeleiden zullen gelden. Vanuit milieustandpunt maakt het niet uit of we energie winnen uit de verbranding van oud plastic, dan wel uit nieuwe olie.
 931;70;NLPartrel:NLNegation|"of"|NLVerb|NLArt:NLSubjpron;*|^NLConj2+NLNegStop|*|*;
+/*		931. is het echt zo dat er geen reële besluiten worden genomen of is het zo dat de besluiten al genomen zijn? WRONG: Andere fabrikanten die complete groepen aanboden, zijn verdwenen, overgenomen of hebben het aanbod drastisch beperkt.
 912;70;NLVerb:NLInf:NLPartrel:NLNegation|"of"|NLOndvw:NLConj:NLComma;*|^NLConj2+NLNegStop|*;
+/*		912. Ik wil hier geen adviezen geven of, en hoe, de grondwet veranderd zou moeten worden. Indien de Senaat zich niet binnen de voorgeschreven termijn heeft uitgesproken of indien hij de Kamer van volksvertegenwoordigers in kennis heeft gesteld van zijn beslissing om het wetsontwerp niet te amenderen, zendt de Kamer van volksvertegenwoordigers het ontwerp over aan de Koning.
 1003;70;typeRelation+^NLConj+^NLOndvw+^NLInNegspan|"of"+^NLInNegspan|*^typeConcept+^typeRelation+^NLAdvTemp|NLNegBegin;*|^NLConj2+NLNegStop|*|*;
+/*		1003. het feit dat zij dergelijke negatieve opvattingen stimuleren of er niet tegen optreden, speelt in hun nadeel. Ik moet u er echter op wijzen dat er zowel in de Unie als in de lidstaten gegevensbescherming bestaat en het daarom niet toegestaan is dergelijke inlichtingen te publiceren. Er moet bijvoorbeeld gekeken worden of het systeem niet interfereert met andere elektronica op die treinen.
 
 /* Assign a temp marker to all words in a negation span
-
 881;70;NLNegBegin:NLInNegspan|^NLNegStop:NLNegation:NLNegWord:NLConj:NLOndvw;*|+NLInNegspan;
+/*		881. Geen wonder dus dat dieven vanuit de hele wereld het op onze blauwe geschelpte gemunt hebben. NOT. Als de lidstaten van de Europese Unie hun beleid niet wijzigen en geen prioriteit wensen te geven aan investeringen in de overheidsdiensten in plaats van aan risicovolle investeringen in de grote bedrijven, zal ieder besluit over een daadwerkelijk veilige openbare vervoersdienst op Europees niveau zonder gevolg blijven. NOT. Er is geen enkele aanleiding om aan te nemen dat dit ten koste zal gaan van de zekerheid of de veiligheid.
 882;70;NLNegBegin:NLInNegspan|"zonder":"zonder te":"zonder dat";*|+NLInNegspan;
+/*		882. Sommige stoffen zijn zo gevoelig dat ze niet gereinigd kunnen worden zonder speciale apparatuur en deskundigheid. Een belangrijk nadeel is dat als het effect niet naar wens is, de vuller niet zonder blijvende schade verwijderd kan worden. NOT. In woningen zonder schoorsteen wordt de schoen veelal voor de verwarming in de woonkamer of bij de achterdeur gezet.
 1240;70;"zonder te":"zonder dat"|*^NLNegStop:NLNegation:NLNegWord:NLConj:NLOndvw;*|+NLInNegspanZonderconj;
+/*		1240. zonder dat hem wordt gevraagd waarom hij de informatie wil hebben.
 
 /* Verbs
-
 1176;70;NLVerb:NLInf+NLInNegspan|NLBeginrel+^NLNegBegin;*|+NLNegStop;
+/*		1176. Hiervoor zijn al in 2007 voorzieningen genomen, maar aangezien deze projecten nog niet afgerond zijn moet nog blijken of de afschrijvingen ook echt nodig zijn. Als de rechtbanken wegens een buitensporige werkdruk niet goed en snel kunnen werken wordt, zoals mevrouw al opmerkte, een vertraagde rechtsbedeling zonder meer rechtsweigering.
 
 /* DOOR
-
 993;70;^NLNegation:NLNegBegin:NLArt|"door"+NLInNegspan|*^NLPunctuation:NLAndOrBut:NLNegBegin:NLCon|NLCon|.NLPrep|NLRTe|*^NLNegation;*|^NLConj2+NLNegStop|*|*|*|*|*;
+/*		993. hij vraagt zich af of er geen extra geld naar het fonds kan gaan door andere maatregelen af te bouwen.
 1012;70;^NLNegation:NLNegBegin:NLArt|"door"+NLInNegspan|.NLPoss:NLObjpron:NLSubjpron|*NLPrep:NLArt:NLCon:NLNum:NLAttradj:NLAdj|NLRTe|*^NLNegation;*|^NLConj2+NLNegStop|*|*|*|*;
+/*		1012. Ik geloof, mijnheer de voorzitter, dat we die zwakke plekken niet weg kunnen werken door nog meer waarnemingscentra op te richten, zoals nu gepland wordt.
 
 /* Conjunction
-
 963;70;^NLSubjpron|NLVerb:NLPartrel+^NLInNegspan|"maar":"maar ook"|NLNegation+typeRelation;*|*|^NLConj2|*;
+/*		963. De index is gebaseerd op de verkopen van woningen, waaronder eengezinswoningen en appartementen, waarvoor de koopcontracten zijn getekend maar nog niet afgerond. NOT. Ik verwacht dat niet van Conny, maar je weet maar nooit.
 1091;70;NLInNegspan|NLPrep|"welk":"welke":"hoe":"wat":"wie":"hoeveel"+^NLNegBegin+^NLNegation;*|NLConj+NLConj2+NLNegStop-NLInNegspan+NLPBegin|+Join;
+/*		1091. Wij mogen echter niet uit het oog verliezen in welke omgeving de Europese bedrijven moeten opereren en concurreren. omdat de consument dan niet kan zien uit welk land het vlees komt. Ik heb geen verklaring voor wat er gebeurd is.
 932;70;NLInNegspan|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
+/*		932. Je mag niet vergeten dat hij maar zestien jaar is. BDaardoor doen we het niet altijd op de juiste manier met soms minder goede resultaten als gevolg. Evenmin vonden de onderzoekers aanwijzingen dat langdurig statinegebruik gepaard zou gaan met een hogere kans op kanker. Ik wil dan ook benadrukken dat dit voorstel niet los kan worden gezien van de andere voorstellen die reeds ter tafel liggen. We hadden eigenlijk nog nooit met vrienden of familie gesproken over wat er precies gebeurd was. NOT. De laatste aflevering staat integraal in het teken van zomerse muziekjes die de voorbije zomer niet van de radio te branden waren. Kan de Raad bevestigen dat er geen enkel besluit wordt genomen tijdens de ontmoetingen van de Euro-11?
 1241;70;NLInNegspanZonderconj|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin:NLNegation:"als";*|^NLConj2+NLNegStop-NLInNegspan;
+/*		1241. zonder dat hem wordt gevraagd waarom hij de informatie wil hebben. NOT. zonder dat ze een bestaan als paria hoeven te leiden.
 1203;70;^NLNegBegin:NLNegation|NLOndvw:NLConj:"die":"dat"+typeRelation+NLNegBegin;*|^NLConj2+NLNegBegin;
+/*		1203. We gaan er in dit voorbeeld van uit dat geen van beide auto’s een bedrijfswagen is. NOT. Maar dat betekent niet dat de weg niet hobbelig meer zal zijn.
 933;70;^SBegin:NLComma:NLAndOrBut|NLNegation+^"noch"|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation+^"als"+^"om"|^NLNegBegin;*|*|^NLConj2+NLNegStop-NLInNegspan|*;
+/*		933. Ik denk niet dat het gewone publiek zo geïnteresseerd is. NOT. Maar dat betekent niet dat de weg niet hobbelig meer zal zijn. Wij concluderen op basis hiervan niet dat er geen compensatie komt. NOT. Niet dat ze nu ook reizen naar Vlaanderen aanbiedt. NOT. In tegenstelling tot wat er is gesuggereerd, houdt dit voorstel echter niet alleen in dat mensen worden geschoold in de omgang met ladders en evenmin dat het gebruik van ladders wordt verboden.
 939;70;NLVerb+^"gaat":"ging":"heb":"heeft":"hebben":"had":"hadden":NLmAux|.NLObjpron:NLAdvTemp:NLRAdv:NLAdvStruct:NLArt:NLAttradj:NLAdj:NLCon|NLNegation+^"noch"|"om"|^NLPartrel;*|*|*|^NLConj2+NLNegStop-NLInNegspan|*;
+/*		939. Het helpt niet om te zeggen dat de ploeg verzwakt is. NOT. Het gaat dus niet om harmonisatie, maar om gemeenschappelijke doelstellingen. NOT. Ook de boerengemeenschap als geheel heeft niet om vaccinatie gevraagd. NOT. Het leven en de gezondheid van mensen mogen nooit om politieke redenen in gevaar worden gebracht. NOT. Daar was ons echter ook niet om gevraagd.
 951;70;NLNegation|*NLRAdv:NLVerb:NLAttradj:NLCon:NLPartrel|"dan";*|*|^NLConj2+NLNegStop;
+/*		951. De Koning heeft geen andere macht dan die welke de Grondwet hem uitdrukkelijk toekennen.
 991;70;NLNegation+^"zonder"|*^"dan":NLNegStop|"dan"|NLPrep;*|*|^NLConj2+NLNegStop|*;
+/*		991. Geen rechter kan uit zijn ambt worden ontzet of worden geschorst dan door een vonnis.
 1015;70;NLNegation+^"zonder"|.^"dan":NLNegStop|"dan"|NLVerb;*|*|^NLConj2+NLNegStop|*;
+/*		1015. Lukt de reparatie niet dan krijgt u een nieuw toestel. Lukt de reparatie niet binnen de week dan krijgt u een vervangtoestel.
 
 /* Second conjunction
-
 942;70;NLNegation|NLConj:NLOndvw;*|+NLInNegspan;
+/*		942. Volledige werkgelegenheid is niet helemaal hetzelfde als het volkomen ontbreken van elke vorm van werkloosheid.
 943;70;NLInNegspan|^NLNegStop+^NLNegation+^NLNegWord+^NLInNegspan;*|+NLInNegspan;
+/*		943. Bij hernieuwbare energiebronnen en het CO2-beleid zullen we op den duur ook niet zonder boetes kunnen.
 944;70;NLInNegspan+^NLNegBegin|NLOndvw:NLConj+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
+/*		944. Daarom moet het moederschap niet als een ziekte of als een last voor de economie worden gezien maar als een aan de maatschappij geleverde dienst.
 
 /* Expansion for ZONDER
 /*	Expansion after 'zonder'
-
 1026;70;NLPrep+NLNegation|.NLArt:NLAttradj:NLAdj:NLCon:NLPrep:NLAdvStruct|.NLRAdv:NLPartrel:NLAdvTemp|.NLPrep|NLRTe|*typeRelation:typeOther+^NLNegation:NLNegStop:NLOndvw:NLConj|NLOndvw:NLConj+^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLNegStop;+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|NLBeginrel+NLNegStop;
+/*		1026. ''De sterke koersdaling vertelt ons dat we niet zomaar kunnen melden dat we het kapitaal willen uitbreiden, zonder daarbij te vermelden waar dit geld in wordt geinvesteerd'', aldus de ceo.
 894;70;NLPrep+NLNegation|.NLArt:NLAttradj:NLAdj:NLCon:NLPrep:NLAdvStruct|.NLRAdv:NLPartrel|NLRTe|*typeRelation:typeOther+^NLNegation+^NLNegStop|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegBegin|+NLNegStop;
-1028;70;"zonder"|*NLVerb|*"en":NLPrep|^NLVerb;*|*|NLBeginrel+NLNegStop|*;
+/*		894. de vraag of we tropische bossen werkelijk duurzaam kunnen beheren, zonder daarbij duurzame schade aan te richten, is nog steeds niet werkelijk beantwoord. Van zodra die achter een wolk verdwenen, begonnen de wandelaars zonder het te merken in cirkeltjes te lopen. Het bedrijf zegt dat de lang verwachte kapitaalverhoging 'in de komende weken' zal worden gelanceerd, zonder verdere details vrij te geven. NOT. Deze doelstellingen kunnen niet altijd worden bereikt zonder inspanningen te doen en zonder aan comfort in te boeten, maar vaak is het ook heel eenvoudig.
+1028;70;"zonder"|*NLVerb|*"en":NLPrep|^NLVerb;*|*|NLBeginrel+NLNegStop|*;TO BE CHECKED: delete?
+/*		1028. WRONG: Na de wedstrijd gaf de doelman van Club Brugge zonder verpinken toe dat hij liever nu geschorst is dan in de play-off.
 899;70;"zonder dat"|."er":NLRAdv|.NLArt:NLAttradj:NLAdj:NLCon:NLPrep:NLAdvStruct:NLSubjpron|.NLRAdv|*NLVerb:NLPartrel+^NLNegation|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegStop;
+/*		899. Daarna werd de wond behandeld, zonder dat een infectie optrad. Zonder dat het opvalt zijn dieren bovendien massaal het slachtoffer van natuurlijke rampen en vooral ook oorlogen. zonder dat er aandacht wordt geschonken aan de argumenten inzake economisch rendement die op het concurrentievermogen van invloed zijn.
 1011;70;NLVerb:NLPartrel+NLInNegspanZonder|*NLArt:NLAttradj:NLAdj:NLCon:NLPrep;*|+NLInNegspanZonder;
+/*		1011. Wanneer bedrijven een economische machtspositie creëren of consolideren, zonder dat zij de noodzakelijke voorstellen doen voor de wijze waarop zij de ongunstige effecten daarvan denken op te vangen, hebben wij geen andere keuze dan de fusie te blokkeren.
 1010;70;NLInNegspanZonder|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
+/*		1010. Hun leven en dat van degenen die zij liefhebben verkeert voortdurend in gevaar, zonder dat zij maar iets gedaan hebben waarom zij dat lot zouden verdienen en zonder dat zij iets kunnen doen om het te vermijden.
 1238;70;"zonder dat";NLConj2+NLNegation+NLNegBegin+NLPBegin;
+/*		1238. Maar na ontvangst van hun betalingen werden de boekingen stiekem geannuleerd, zonder dat zij hiervan op de hoogte werden gesteld.
 
 /*	Expansion before 'zonder' plus noun phrase
-
 852;70;*NLAttradj:NLCon:NLNum|NLPrep+NLNegation|*NLArt:NLAttradj:NLAdj:NLCon:"welke"|^"te";+NLNegBegin|*|*|*;
+/*		852. Om een langdurige economische ontwikkeling zonder inflatie te kunnen verzekeren moeten wij nu zorgen voor de noodzakelijke productiviteitsverbetering. Wij zullen daarom voor paragraaf 1 zonder deze aanbevelingen stemmen.
 888;70;NLPrep+NLNegation+^NLInNegspan|.NLArt|*NLAttradj:NLAdj:NLCon:NLAndOr|"van"|.NLArt|*NLAttradj:NLAdj:NLCon:NLBeginpron:NLPathRelevant|"van"+^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|*|*|+NLInNegspan|*|*|+NLInNegspanZonder;
+/*		888. Ze vragen een verkorting van de arbeidstijd, zonder inlevering van loon en zonder verslechtering van de kwaliteit van het werk.
 887;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLAdj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLAdj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|+NLInNegspan|*|+NLNegStop;
+/*		887. Het grootste deel van de in België geproduceerde chocolade bestaat uit kwaliteitschocolade met cacaoboter zonder toevoeging van andere (plantaardige of dierlijke) vetten.
 889;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLAdj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLAdj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr|NLNegBegin;+NLNegBegin|*|+NLInNegspan|+NLInNegspanZonder|*;
+/*		889. Zonder de medewerking van de slachtoffers kunnen we nooit garanderen dat degenen die munt slaan uit dit soort praktijken voor het gerecht worden gebracht.
 880;70;NLPrep+NLNegation+^NLInNegspan|.NLAdvStruct:NLPoss:NLArt|*NLAttradj:NLAdj:NLCon:NLAndOr:NLList:NLBegin|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|*|+NLNegStop;
+/*		880. De resultaten van 2008 evenaren in een jaar zonder grote sportevents zou een uitstekende prestatie zijn. De man zonder vaste woon- of verblijfplaats had bij twee winkels in de gemeente stenen door de ruiten gegooid. Hij verliet de koers gisteravond zonder ritzege, gouden leiderstrui of puntenshirt. Afzonderlijke landen of bedrijfstakken kunnen zonder al te veel moeite ontkomen aan de effecten die de afgelopen dagen onder de aandacht zijn gebracht.
 890;70;NLInNegspanZonder+^NLInNegspan|NLPartrel:NLVerb+^NLNegBegin;*|+NLNegStop;
+/*		890. Zij heeft onze collega er namelijk zonder enige vorm van bewijs van beschuldigd zich te verrijken met de illegale handel in diamanten.
 891;70;^typeRelation|NLAndOr+^NLNegBegin|NLNegStop;*|+NLNegStop|*;
+/*		891. Er mag geen herziening van de Grondwet worden ingezet of voortgezet in oorlogstijd of wanneer de Kamers verhinderd zijn vrij bijeen te komen op het federale grondgebied.
 886;70;NLPrep:NLConj+NLNegation;+NLNegBegin;
+/*		886. In werkelijkheid bedroeg de stijging 2,3%, zonder het effect van de extra dag in februari.
 
 /* Clean conflicting negation parameters
-
 156;70;NLNegStop+NLNegBegin;-NLNegStop;
+/*		156. Ik kan er niets over verklaren, want ik was er niet bij.
 159;70;NLNegation+NLNegStop;-NLNegStop;the combination of both labels does not occur with the current rules
 751;70;NLRelpron+NLConj2;-NLRelpron;
+/*		751. Ik beklemtoon nogmaals hetgeen ik zei over het gedrag van Oscar. Hij wijst op de gestegen grondstofprijzen zoals van olie en metaal, "hetgeen de koersen van deze bedrijven normaal gesproken zou moeten stimuleren".
 958;70;NLNegStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther:typeAmbiguous|typeConcept:typeBeginConcept:typeRelation:typePathRelevant+^NLNegation;*|*|+NLNegStop;move NegStop from nonrelevant to next lexrep
+/*		958. De wereldwijde vertraging in de economie en de gevolgen van de kredietcrisis hebben gevolgen voor het vertrouwen in de sector en het reisvolume, terwijl de inflatie een wissel trekt op het inkomen van consumenten.
 818;70;NLNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeRelation:typePathRelevant+^NLNegation;*|+NLNegStop;move NegStop from nonrelevant to next lexrep
+/*		818. Zijn werk heeft inhoudelijke diepgang, en de subtiliteit van zijn kleur- en materiaalgebruik verraden een fijnzinnig, bijna mystiek kunstenaar. Lang niet alle winters wordt de tocht gehouden, dit is afhankelijk van de toestand van het ijs. Ik hoop ook dat op niet al te lange termijn een fundamentele en leesbare tekst zal worden opgesteld.
 1451;70;SBegin|*typeOther:typeAmbiguous|NLNegBegin;*|+NLNegBegin|*;copy NegBegin on nonrelevant first word(s) of the sentence to avoid problems in phase 85
+/*		1451. Toch moet hij niet te zwaar bestraft worden.
 1368;70;NLDummy:NLInNegspan:NLExpansion;-NLDummy-NLInNegspan-NLExpansion;cleanup
+/*		1368. Gebeurt dit niet dan zal de hulp een averechts effect hebben.
 
 /* Make negation span recognizable in next phases
-
 1426;70;NLNegBegin+^NLNietAlleen+^NLInNegspan|.^NLNegStop+^NLNietAlleen+^SEnd|NLNegStop:SEnd;+NLInNegspan|+NLInNegspan|*;
+/*		1426. Ik kan er niets over verklaren, want ik was er niet bij.
 
+
+/* PHASE 80: RULES FOR SENTIMENT EXPANSION
 /* =========================================
 /* Sentiment attributes get assigned via the user dictionary
-
 1381;80;NLConj2;+NLPBegin;
+/*		1381. Ik beklemtoon nogmaals hetgeen ik zei over het gedrag van Oscar.
 
 /* Expansion of sentiment scope
 /* Sentiment attribute on verb -> expand to "phrase"
-
 1334;80;NLPBegin|.^NLPBegin+^NLPosSentiment|NLVerb+NLPosSentiment+^NLPBegin;+NLPosSentimentBegin|*|*;
+/*		1334.UD. We genoten zelfs van de extra aandacht.
 1335;80;NLPBegin|.^NLPBegin+^NLNegSentiment|NLVerb+NLNegSentiment+^NLPBegin;+NLNegSentimentBegin|*|*;
+/*		1335.UD. Het aandeel verloor 2 procent tot 2.990 yen.
+/* NOTE!!! These rules cannot fire if there are other sentiment markers in the phrase,
+/*         e.g. ..., zodat versnippering ook hier de efficiëntie niet ten goede komt. with 'efficiëntie' as a PosSentiment marker.
+/*         -> replace .^NLPBegin+^NLNegSentiment by .<^NLPBegin
 1342;80;NLPBegin+NLPosSentiment+^typeConcept;+NLPosSentimentBegin;
+/*		1342.UD. Natuurlijk is dat niet altijd nodig, maar als hij dat doet, geniet hij wel van een zeer concurrentiële eenheidsprijs.
 1343;80;NLPBegin+NLNegSentiment+^typeConcept;+NLNegSentimentBegin;
-
 /*/* Sentiment attribute on concept word -> expand to the right, no expansion to the left
-
 1354;80;typeConcept:typeBeginConcept+NLPosSentiment;+NLPosSentimentConceptBegin;
+/*		1354.UD. Titanium kan niet roesten dus de frames zullen zeer lang mooi blijven.
 1355;80;typeConcept:typeBeginConcept+NLNegSentiment;+NLNegSentimentConceptBegin;
+/*		1355.UD. De tekst is slecht en vaag.
 
 /*/* Sentiment attribute on type(Begin)Concept -> expand to the right until next verb form, negation marker or beginning of phrase
 /* preparation
-
 1369;80;typeRelation+^NLPrep+^NLAndOrBut+^NLSentimentconvertor;+NLDummy;
+/*		1369. Je kan eindeloos variëren met technieken om kralen te verwerken tot een ketting.
 1404;80;NLLinkingverb+NLPartrel+NLDummy;-NLDummy;correction of r1369
+/*		1404. De gevolgen zijn heel zwaar geweest.
 1372;80;NLPrep|NLPunctuation:SEnd;+NLDummy|*;use dummy to mark a preposition at the end of a sentence or before punctuation
+/*		1372. Het bruidspaar ziet er goed uit.
 1374;80;NLPrep2:NLPunctuation:NLAndOrBut|NLPrep;+NLDummy|*;Prep2 usually splittable verb part
+/*		1374. Als hij eenmaal op dreef is, hou je niet meer op met lachen.
 1457;80;NLRel:NLPrep:NLGeen+NLNegation;+NLDummy;
+/*		1457. Voor kleuters die thuis geen Nederlands spreken, is dat zeer belangrijk. Sterk oplopende inflammatoire parameters zonder koorts.
 
 /* add Stop-markers
-
 1417;80;NLPosSentiment+NLPosSentimentConceptBegin|NLAndOr:NLPunctuation|NLNegSentiment;*|+NLPosSentimentConceptStop+NLDummy|*;
+/*		1417.UD. Over moties van vertrouwen en wantrouwen kan slechts gestemd worden na verloop van achtenveertig uur, volgend op de indiening van de motie.
 1418;80;NLNegSentiment+NLNegSentimentConceptBegin|NLAndOr:NLPunctuation|NLPosSentiment;*|+NLNegSentimentConceptStop+NLDummy|*;
+/*		1418.UD. Aldus wordt gezondheid enkel een kwestie van kosten en winst.
 1397;80;NLPosSentiment+NLPosSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLDummy+^NLPunctuation|NLComma+^NLList;*|*|+NLPosSentimentConceptStop;
+/*		1397.UD. Enkele soorten vogelspinnen zijn hiervan een goed voorbeeld, maar ook voor papegaaien, reptielen en amfibieën kan dit opgaan.
 1398;80;NLNegSentiment+NLNegSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLDummy+^NLPunctuation|NLComma+^NLList;*|*|+NLNegSentimentConceptStop;
+/*		1398.UD. In totaal was er sprake van een verlies van 2,7 procentpunt, tot 74,8%.
 1393;80;NLPosSentiment+NLPosSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLAdvStruct+^NLPrep+^NLDummy|*NLAdvStruct|^NLPrep;*|*|+NLPosSentimentConceptStop|*;
+/*		1393.UD. Olieaandelen sloten met winst, ook al omdat de olieprijs vandaag weer in goede doen was. Daarnaast plaatste hij zonder geldige licentie ook piercings.
 1394;80;NLNegSentiment+NLNegSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLAdvStruct+^NLPrep+^NLDummy|*NLAdvStruct|^NLPrep;*|*|+NLNegSentimentConceptStop|*;
+/*		1394.UD. Bij 86 procent is het risico zelfs erg groot omdat het speelgoed meer dan 100 decibel (dB) produceert.
 1358;80;NLPosSentiment+NLPosSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLDummy|NLPBegin:NLCBegin:NLBegin:NLSubjpron:NLDummy:NLNegation+^NLPosSentiment;*|*|+NLPosSentimentConceptStop;
+/*		1358.UD. Na een succesvolle tournee stonden beide dames op de theaterkaart.
 1359;80;NLNegSentiment+NLNegSentimentConceptBegin|.^NLPBegin+^NLCBegin+^NLSubjpron+^NLBegin+^NLDummy|NLPBegin:NLCBegin:NLBegin:NLSubjpron:NLDummy:NLNegation+^NLNegSentiment;*|*|+NLNegSentimentConceptStop;
+/*		1359.UD. De zwakke dollar woog op het resultaat.
 1420;80;NLAdj+NLPosSentiment+NLPosSentimentConceptBegin+^NLWithZo|NLRelpron+^"die"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLPosSentimentConceptStop|*|+NLPosSentimentConceptStop;
+/*		1420.UD. Het is goed dat er een zwembad is.
 1421;80;NLAdj+NLNegSentiment+NLNegSentimentConceptBegin+^NLWithZo|NLRelpron+^"die"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLNegSentimentConceptStop|*|+NLNegSentimentConceptStop;
+/*		1421.UD. Het is wel heel erg lastig dat het licht altijd uitgaat.
 1406;80;NLDummy;-NLDummy;
+/*		1406. Na een succesvolle tournee stonden beide dames op de theaterkaart.
 
 /* Sentiment attribute on adjective preceded by a linking verb in main clause -> expansion to the left
-
 1360;80;typeConcept+^NLAdj|NLLinkingverb+^NLPBegin|.NLAdvStruct:NLAdvTemp|NLAdj:NLAttradj:NLCon+NLPosSentiment;+NLPosSentimentConceptBegin+NLDummy|-NLPosSentimentConceptStop|*|*;
+/*		1360.UD. Rustgevend kruid wordt populair.
 1361;80;NLSubjpron|NLLinkingverb|NLAdj:NLCon+NLPosSentiment;+NLPosSentimentBegin|-NLPBegin|*;
+/*		1361.UD. Ze zijn tevreden over hun nieuwe tv.
 1362;80;typeConcept+^NLAdj|NLLinkingverb+^NLPBegin|.NLAdvStruct:NLAdvTemp|NLAdj:NLAttradj:NLCon+NLNegSentiment;+NLNegSentimentConceptBegin+NLDummy|-NLNegSentimentConceptStop|*|*;
+/*		1362.UD. Slechts vier jongeren zijn heel ontevreden.
 1363;80;NLSubjpron|NLLinkingverb|NLAdj:NLCon+NLNegSentiment;+NLNegSentimentBegin|-NLPBegin|*;
+/*		1363.UD. Ik ben moe, zucht hij, en gaat op de bank zitten.
 
 /* Sentiment attribute on adjective with linkingverb in subordinate clause (subject - adj-predicate - verb)
-
 1458;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|SEnd;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|*;
+/*		1458.UD. Ik hoor dat de toeschouwers tevreden zijn.
 1459;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|NLPrep+^"dan"+^NLPBegin|*^NLPBegin+^SEnd|NLPBegin:SEnd;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|*|*|+NLPosSentimentConceptStop;
+/*		1459.UD. Dat bewijst dat het Belgische voetbal minder aantrekkelijk is voor buitenlandse spelers. Als woorden in ons geheugen beschikbaar zijn in verschillende talen, dan zal de activering van die woorden gemakkelijker verlopen.
 1460;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLPosSentiment|*NLLinkingverb|typeRelation+^NLPrep;+NLPosSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLPosSentimentConceptStop|+NLPosSentimentConceptStop+NLBeginrel;
+/*		1460.UD. Gezien dit preparaat niet in orale vorm beschikbaar is en gezien de noodzakelijke frequentie van toediening was er de wens tot een permanente centrale veneuze toegang.
 1461;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|SEnd;+NLNegSentimentConceptBegin+NLDummy|*|-NLNegSentimentConceptBegin|-NLNegSentimentConceptStop|*;
+/*		1461.UD. Enkele soorten verspreiden ook ziektes onder vee, zoals blauwtong, dat vooral bij schapen gevaarlijk is.
 1462;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|NLPrep+^"dan"+^NLPBegin|*^NLPBegin+^SEnd|NLPBegin:SEnd;+NLNegSentimentConceptBegin+NLDummy|*|-NLNegSentimentConceptBegin|-NLNegSentimentConceptStop|*|*|+NLNegSentimentConceptStop;
+/*		1462.UD. Dertig procent van de 15- tot 17-jarigen denkt bovendien dat waterpijp van vijf tabaksproducten het minst schadelijk is voor de gezondheid.
 1463;80;NLEnd:NLCon|.NLAdvStruct:NLAdvTemp|NLAdj+NLNegSentiment|*NLLinkingverb|typeRelation+^NLPrep;+NLNegSentimentConceptBegin+NLDummy|*|-NLPosSentimentConceptBegin|-NLNegSentimentConceptStop|+NLNegSentimentConceptStop+NLBeginrel;
+/*		1463.UD. Ikzelf ben van mening dat dit volkomen ontoereikend is en dat, als dit niet met een richtlijn geregeld wordt, de lidstaten die momenteel achterop hinken geen aandrang zullen voelen om ook maar iets te doen.
 
 /* Further expansion to the left
-
 1407;80;NLArt:NLPoss:NLBeginpron:NLAttradj:NLCon;+NLNPcomp;
+/*		1407. Er komen ca. 200.000 bezoekers per week.
 1408;80;NLPrep+NLPBegin|.NLPrep:NLAndOr:NLNPcomp+^NLDummy|NLDummy;*|*|-NLDummy;
+/*		1408. Op de vergadering in Antwerpen zijn nog maar eens tevreden klanten geciteerd.
 1409;80;^NLNPcomp|NLNPcomp+^NLDummy|.NLNPcomp+^NLDummy|NLDummy+NLPosSentimentConceptBegin;*|+NLPosSentimentConceptBegin+NLDummy|*|-NLDummy-NLPosSentimentConceptBegin;
+/*		1409.UD. Rustgevend kruid wordt populair.
 1410;80;^NLNPcomp|NLNPcomp+^NLDummy|.NLNPcomp+^NLDummy|NLDummy+NLNegSentimentConceptBegin;*|+NLNegSentimentConceptBegin+NLDummy|*|-NLDummy-NLNegSentimentConceptBegin;
+/*		1410.UD. Sommige dieren zijn bovendien gevaarlijk, zoals giftige slangen en schorpioenen.
 1411;80;^NLNPcomp|NLNPcomp+^NLDummy|.NLNPcomp:NLPrep:NLAndOr+^NLDummy+^NLPBegin|NLDummy+NLPosSentimentConceptBegin;*|+NLPosSentimentConceptBegin+NLDummy|*|-NLDummy-NLPosSentimentConceptBegin;
+/*		1411.UD. Elk goed nieuws over de huizenmarkt is goed nieuws voor bedrijven.
 1412;80;^NLNPcomp|NLNPcomp+^NLDummy|.NLNPcomp:NLPrep:NLAndOr+^NLDummy+^NLPBegin|NLDummy+NLNegSentimentConceptBegin;*|+NLNegSentimentConceptBegin+NLDummy|*|-NLDummy-NLNegSentimentConceptBegin;
+/*		1412.UD. De timing van de verkoop is "lastig", aldus de topman, die eveneens geen raming van de verwachte opbrengst wil geven.
 1470;80;NLPrep|NLDummy+NLPosSentimentConceptBegin;+NLDummy+NLPosSentimentConceptBegin|-NLDummy-NLPosSentimentConceptBegin;
+/*		1470.UD. Gezien dit preparaat niet in orale vorm beschikbaar is en gezien de noodzakelijke frequentie van toediening was er de wens tot een permanente centrale veneuze toegang.
 1471;80;NLPrep|NLDummy+NLNegSentimentConceptBegin;+NLDummy+NLNegSentimentConceptBegin|-NLDummy-NLNegSentimentConceptBegin;
+/*		1471.UD. Enkele soorten verspreiden ook ziektes onder vee, zoals blauwtong, dat vooral bij schapen gevaarlijk is.
 1419;80;NLDummy;-NLDummy;
+/*		1419. Rustgevend kruid wordt populair.
 
 /*/* Sentiment attribute on remaining words (mainly adverbs) -> expansion = phrase
-
 1401;80;NLPosSentiment+^NLPosSentimentConceptBegin;+NLPosSentimentBegin;
+/*		1401.UD. Sommigen vinden het mooi, anderen niet.
 1402;80;NLNegSentiment+^NLNegSentimentConceptBegin;+NLNegSentimentBegin;
+/*		1402.UD. Wij mogen geen tijd meer verliezen.
 1375;80;NLPBegin|.^NLPBegin+^NLPosSentimentBegin|NLPosSentiment+NLPosSentimentBegin+^NLPosSentimentConceptBegin+^NLPBegin;+NLPosSentimentBegin|*|-NLPosSentimentBegin;
+/*		1375.UD. Sommige worden vrij goed door het lichaam opgenomen.
 1376;80;NLPBegin|.^NLPBegin+^NLNegSentimentBegin|NLNegSentiment+NLNegSentimentBegin+^NLNegSentimentConceptBegin+^NLPBegin;+NLNegSentimentBegin|*|-NLNegSentimentBegin;
+/*		1376.UD. Wetenschappers vrezen dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij de mens.
 1479;80;NLPosSentimentBegin|NLPosSentimentConceptBegin;*|-NLPosSentimentConceptBegin;
+/*		1479.UD. Er zijn regels die ervoor zorgen dat een webshop voldoende betrouwbaar is.
 1480;80;NLNegSentimentBegin|NLNegSentimentConceptBegin;*|-NLNegSentimentConceptBegin;
+/*		1480.UD. Ik kan me inbeelden dat vele mensen het debat moe waren.
 
 /*/* Restriction of sentiment scope: stop at end of phrase
-
 1339;80;typeRelation+NLPosSentiment|.^NLPBegin+^SEnd+^NLPosSentimentBegin|SEnd:NLPBegin+^NLPosSentimentBegin;*|*|+NLPosSentimentStop;
+/*		1339.UD. Lambiek is immers een zuur bier en met jongere hop zou het te bitter smaken en met minder hop zou het niet goed bewaren.
 1340;80;typeRelation+NLNegSentiment|.^NLPBegin+^SEnd+^NLNegSentimentBegin|SEnd:NLPBegin+^NLNegSentimentBegin;*|*|+NLNegSentimentStop;
+/*		1340.UD. Wij mogen geen tijd meer verliezen.
 1344;80;NLPosSentimentBegin|.^NLPBegin+^SEnd+^NLPosSentimentStop|SEnd:NLPBegin+^NLPosSentiment+^NLPosSentimentBegin;*|*|+NLPosSentimentStop;
+/*		1344.UD. De wonden zijn reeds goed genezen.
 1345;80;NLNegSentimentBegin|.^NLPBegin+^SEnd+^NLNegSentimentStop|SEnd:NLPBegin+^NLNegSentiment+^NLNegSentimentBegin;*|*|+NLNegSentimentStop;
+/*		1345.UD. Aan een herberekening zijn heel wat kosten en risico' s verbonden.
 1424;80;NLRAdv+NLPosSentiment+^NLWithZo|"dat"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLPosSentimentStop|*|+NLPosSentimentStop;
+/*		1424.UD. Ze vinden het goed dat er een zwembad is.
 1425;80;NLRAdv+NLNegSentiment+^NLWithZo|"dat"|.^NLPBegin+^SEnd|NLPBegin:SEnd;*|-NLNegSentimentStop|*|+NLNegSentimentStop;
+/*		1425.UD. Ik vind het jammer dat de rozen uitgebloeid zijn.
 
 /* Remove SentimentConcept markers in larger Sentiment span
-
 1395;80;NLPosSentimentConceptStop|.^NLPosSentimentStop+^NLPosSentimentBegin+^NLPosSentimentConceptStop|NLPosSentimentStop;-NLPosSentimentConceptStop|*|*;
+/*		1395.UD. 'Ik was heel tevreden over mijn tijdrit', aldus de renner.
 1396;80;NLNegSentimentConceptStop|.^NLNegSentimentStop+^NLNegSentimentBegin+^NLNegSentimentConceptStop|NLNegSentimentStop;-NLNegSentimentConceptStop|*|*;
+/*		1396.UD. Ik ben moe, zucht hij, en gaat op de bank zitten.
 
 /* Move attribute markers to relevant entity
-
 1346;80;NLPosSentimentBegin:NLPosSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLPosSentimentBegin|*|+NLPosSentimentBegin;
+/*		1346.UD. Ook de buurtbewoners hebben gewonnen.
 1347;80;NLPosSentimentBegin:NLPosSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLPosSentimentBegin|+NLPosSentimentBegin;
+/*		1347.UD. De wonden zijn reeds goed genezen.
 1348;80;NLNegSentimentBegin:NLNegSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLNegSentimentBegin|*|+NLNegSentimentBegin;
+/*		1348.UD. Slechts 1% van de jongeren vindt acne absoluut niet storend.
 1349;80;NLNegSentimentBegin:NLNegSentimentConceptBegin+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;-NLNegSentimentBegin|+NLNegSentimentBegin;
+/*		1349.UD. Maar Lisa en ik groeiden jammer genoeg uit elkaar.
 1350;80;NLPosSentimentStop:NLPosSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentStop;
+/*		1350.UD. ABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste winst op Euronext Brussel.
 1351;80;NLPosSentimentStop:NLPosSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+NLPosSentimentStop;
+/*		1351.UD. ABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste winst op Euronext Brussel.
 1352;80;NLNegSentimentStop:NLNegSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;
+/*		1352.UD. Hij zegt wel dat de ontwikkelingen van de wereldeconomie, waaronder de zwakke dollar, een effect hebben op het bedrijf.
 1353;80;NLNegSentimentStop:NLNegSentimentConceptStop+^typeConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+NLNegSentimentStop;
+/*		1353.UD. In totaal was er sprake van een verlies van 2,7 procentpunt, tot 74,8%.
 
 /* Remove conflicting attributes
-
 1399;80;NLPosSentimentStop:NLPosSentimentConceptStop+NLPosSentiment:NLPosSentimentBegin:NLPosSentimentConceptBegin;-NLPosSentimentStop-NLPosSentimentConceptStop;
+/*		1399.UD. ABCD krikte de netto courante winst, de winst uit de verhuringen, met 25 procent op tot 10,7 miljoen euro of 2,67 euro per aandeel.
 1400;80;NLNegSentimentStop:NLNegSentimentConceptStop+NLNegSentiment:NLNegSentimentBegin:NLNegSentimentConceptBegin;-NLNegSentimentStop-NLNegSentimentConceptStop;
+/*		1400.UD. We lopen het risico een verloren generatie te creëren.
 
 /* Split relations with a SentimentBegin or SentimentStop attribute
-
 1336;80;typeRelation+^NLPosSentimentBegin+^NLPosSentiment|typeRelation+NLPosSentimentBegin;*|+NLBeginrel;
+/*		1336.UD. Er zijn regels die ervoor zorgen dat een webshop voldoende betrouwbaar is.
 1338;80;typeRelation+^NLNegSentimentBegin+^NLNegSentiment|typeRelation+NLNegSentimentBegin;*|+NLBeginrel;
+/*		1338.UD. Wetenschappers vrezen dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij de mens.
 1377;80;typeRelation+^NLPrep|typeRelation+NLPBegin+NLPosSentimentStop;*|+NLBeginrel;
+/*		1377.UD. De operatie bleek goed gelukt en er trad een goede wondgenezing op.
 1378;80;typeRelation+^NLPrep|typeRelation+NLPBegin+NLNegSentimentStop;*|+NLBeginrel;
+/*		1378.UD. Olga is waarschijnlijk slecht ten val gekomen en daarna vertrappeld door een andere olifant.
 1422;80;typeRelation+^NLPrep|typeRelation+NLPBegin+NLPosSentimentConceptStop;*|+NLBeginrel;
+/*		1422.UD. Wie daardoor wordt getroffen is misschien kortstondig mooi geweest maar is daarna langdurig ziek.
 1423;80;typeRelation+^NLPrep|typeRelation+NLPBegin+NLNegSentimentConceptStop;*|+NLBeginrel;
+/*		1423.UD. De ambulancebroeders zijn woedend dat het openbaar ministerie (OM) ondanks de landelijke campagne tegen het toenemend geweld aan het adres van hulpverleners weigert een drugsverslaafde te vervolgen die vlak voor Kerstmis één van hen dwars door zijn kleren heen in de buik heeft gebeten.
 1390;80;typeRelation|NLOm+NLPBegin+NLPosSentimentStop;*|+NLBeginrel;
+/*		1390.UD. De gids vindt het goed om Belgische kunst te tonen in het buitenland.
 1391;80;typeRelation|NLOm+NLPBegin+NLNegSentimentStop;*|+NLBeginrel;
+/*		1391.UD. Dit maakt het alleen maar gevaarlijk om hulp te bieden in echte noodsituaties.
 1432;80;NLPosSentimentConceptBegin;^NLPosSentimentBegin;
+/*		1432.UD. Voor de handige vingers toont de lesgeefster nog een mooie afwerking om de ketting te sluiten.
 1433;80;NLPosSentimentConceptStop;^NLPosSentimentStop;
+/*		1433.UD. Voor de handige vingers toont de lesgeefster nog een mooie afwerking om de ketting te sluiten.
 1434;80;NLNegSentimentConceptBegin;^NLNegSentimentBegin;
+/*		1434.UD. Er Dus dan wordt het al lastig.
 1435;80;NLNegSentimentConceptStop;^NLNegSentimentStop;
+/*		1435.UD. De verdachte zou gevaarlijk en onberekenbaar zijn.
 
 /* CLEANUP
-
 783;80;NLAndOr;-NLAndOr;
+/*		783. In geval van diefstal of verlies moet ze ook geblokkeerd kunnen worden.
 795;80;NLCon+NLEnd;-NLCon;
+/*		795. Of zij Nederland daadwerkelijk verlaat, hangt af van het oordeel van de rechter.
 1069;80;NLConj2+^NLAdvStruct;^NLConj2-NLOndvw-NLConj-NLRelpron-NLRelOndvwPrep-NLAndOrBut-NLPrep-NLCon;
+/*		1069. het is niet slecht voor de tanden en het is veilig voor diabetici.
 1403;80;NLAndOrBut|NLBeginrel;+NLBeginrel|-NLBeginrel;
+/*		1403. Nu kan ze haar arm mooi en goed spontaan bewegen.
 1337;80;NLBeginrel;-NLOndvw-NLRelpron-NLVerb-NLAux-NLRelAux-NLLinkingverb-NLAndOrBut;
+/*		1337. Nu de wonde mooi genezen is kan eerstdaags gestart worden met de radiotherapie.
 1341;80;NLBeginrel;-NLPrep-NLOm-NLRelOndvwPrep;
+/*		1341. De operatie bleek goed gelukt en er trad een goede wondgenezing op.
 
+
+/* PHASE 85: NEGATION + SENTIMENT
 /* ================================
 /* Detect sentiment markers in negation span
-
 1448;85;NLPrep+NLInNegspan|NLPrep+NLInNegspan;*|-NLInNegspan;preparation for r1446 and r1447
+/*		1448. De commissie liet zich in het rapport niet positief uit over de beursnotering.
 1427;85;^NLNegation|NLNegation|NLPosSentiment+NLInNegspan;*|*|+NLNegPosSent;mark sentiment markers in negation span
+/*		1427.UD. Ook beleggers zijn niet tevreden.
 1428;85;^NLNegation|NLNegation|NLNegSentiment+NLInNegspan;*|*|+NLNegNegSent;mark sentiment markers in negation span
+/*		1428.UD. Ik vind dat geluid absoluut niet storend.
 1446;85;^NLNegation|NLNegation|*{1,3}NLInNegspan+^"zonder"+^NLPosSentiment|NLPosSentiment+NLInNegspan;*|*|*|+NLNegPosSent;mark sentiment markers in negation span
+/*		1446.UD. De voorstelling werd geen noemenswaardig succes in Frankrijk.
 1447;85;^NLNegation|NLNegation|NLInNegspan+^"zonder"+^NLAndOrBut+^NLNegSentiment|NLNegSentiment+NLInNegspan;*|*|*|+NLNegNegSent;mark sentiment markers in negation span
+/*		1447.UD. Ze hebben in Nederland geen marktaandeel verloren.
 1454;85;^NLNegation|NLNegation|NLInNegspan+^"zonder"+^NLAndOrBut+^NLNegSentiment|NLInNegspan+^NLNegSentiment|NLNegSentiment+NLInNegspan;*|*|*|*|+NLNegNegSent;mark sentiment markers in negation span
+/*		1454.UD. Ze zeiden dat ze nooit een wedstrijd verloren hadden.
 1430;85;^NLNegation|NLNegation+^NLPEnd+^NLRel|NLPosSentiment+^NLPBegin;*|*|+NLNegPosSent;mark sentiment marker in negated concept without expansion
+/*		1430.UD. Deze benaming was niet populair en werd in 1946 afgeschaft.
 1452;85;*NLPosSentimentBegin|.^NLPosSentimentBegin+^NLPosSentimentStop+^NLNegPosSent|NLNegPosSent+^NLPosSentimentBegin;-NLPosSentimentBegin|*|*;remove original SentimentBegin
+/*		1452.UD. De oortjes zijn ook nog niet zo goed ontwikkeld, waardoor die toch veel gevoeliger zijn.
 1453;85;*NLNegSentimentBegin|.^NLNegSentimentBegin+^NLNegSentimentStop+^NLNegNegSent|NLNegNegSent+^NLNegSentimentBegin;-NLNegSentimentBegin|*|*;remove original SentimentBegin
+/*		1453.UD. Nochtans begon het duo niet slecht.
 
 /* Deal with non-negation words that reverse Sentiment: weinig, minder
-
 1464;85;"weinig":"minder"|NLPosSentiment|.typeConcept|^typeConcept;+NLNegSentimentBegin+NLDummy|-NLPosSentimentBegin|*|+NLNegSentimentStop;reverse Sentiment after "weinig" or "minder"
+/*		1464.UD. Zijn zoon kende minder succes.
 1475;85;NLPosSentimentBegin|.^NLPosSentimentBegin+^NLPosSentiment+^NLNegSentimentBegin+^NLNegSentiment|NLPosSentiment+NLSentimentconvertor|.^NLPosSentimentStop|NLPosSentimentStop;+NLNegSentimentBegin+NLDummy-NLPosSentimentBegin|*|*|*|-NLPosSentimentStop+NLNegSentimentStop;
+/*		1475.UD. Dat bewijst dat het Belgische voetbal minder aantrekkelijk is voor buitenlandse spelers.
 1473;85;NLPosSentiment+NLSentimentconvertor+NLPosSentimentBegin|.typeConcept|^typeConcept;+NLNegSentimentBegin+NLDummy-NLPosSentimentBegin|*|+NLNegSentimentStop;reverse Sentiment after "weinig" or "minder"
+/*		1473.UD. Een te magere coureur kan ook veel minder goed tegen de kou.
 1466;85;NLPosSentimentBegin+^NLDummy|.^NLPosSentimentBegin+^NLPosSentimentStop+^NLDummy+^NLNegSentimentBegin|NLNegSentimentBegin+NLDummy;-NLPosSentimentBegin|*|*;remove obsolete PosSentimentBegin after reversion of Sentiment
+/*		1466.UD. We hebben minder genoten van het tweede optreden.
 1467;85;NLDummy;-NLDummy;cleanup
+/*		1467.UD. Die zijn minder goed beveiligd dan de nieuwere modellen.
 1465;85;"weinig":"minder"|NLNegSentiment|.typeConcept|^typeConcept;+NLPosSentimentBegin+NLDummy|-NLNegSentimentBegin|*|+NLPosSentimentStop;
+/*		1465.UD. Patiënten die volgens de richtlijn behandeld worden hebben al na drie maanden beduidend minder last van jeuk.
 1477;85;NLNegSentimentBegin|.^NLNegSentimentBegin+^NLNegSentiment+^NLNegSentimentBegin+^NLPosSentiment|NLNegSentiment+NLSentimentconvertor|.^NLNegSentimentStop|NLNegSentimentStop;+NLPosSentimentBegin+NLDummy-NLNegSentimentBegin|*|*|*|-NLNegSentimentStop+NLPosSentimentStop;reverse Sentiment after "weinig" or "minder"
+/*		1477.UD. Deze techniek wordt als minder schadelijk gezien.
 1474;85;NLNegSentiment+NLSentimentconvertor+NLNegSentimentBegin|.typeConcept|^typeConcept;+NLPosSentimentBegin+NLDummy-NLNegSentimentBegin|*|+NLPosSentimentStop;reverse Sentiment after "weinig" or "minder"
+/*		1474.UD. OOok zijn er slangen die niet spontaan aanvallen en daardoor minder gevaarlijk zijn.
 1468;85;NLNegSentimentBegin+^NLDummy|.^NLNegSentimentBegin+^NLNegSentimentStop+^NLDummy+^NLPosSentimentBegin|NLPosSentimentBegin+NLDummy;-NLNegSentimentBegin|*|*;very rare, remove obsolete NegSentimentBegin after reversion of Sentiment
+/*		1468.UD. Hij voelde zich er minder verloren dan vorige keer.
 1469;85;NLDummy;-NLDummy;cleanup
+/*		1469.UD. Deze techniek wordt als minder schadelijk gezien.
 
 /* Reverse sentiment
-
 1436;85;^NLInNegspan|NLInNegspan+^NLNegPosSent|.NLInNegspan+^NLNegPosSent|NLInNegspan+NLNegPosSent|.^NLNegStop+^SEnd|*NLNegStop:SEnd;*|+NLNegSentimentBegin-NLPosSentimentBegin|-NLPosSentimentBegin-NLNegSentimentStop|-NLNegPosSent-NLPosSentimentBegin-NLNegSentimentStop|-NLPosSentimentBegin-NLNegSentimentStop|-NLPosSentimentStop+NLNegSentimentStop;reverse sentiment
+/*		1436.UD. Dit biedt geen goed vooruitzicht voor de inflatie.
 1449;85;^NLInNegspan|NLInNegspan+^NLNegNegSent|.NLInNegspan+^NLNegNegSent|NLInNegspan+NLNegNegSent|.^NLNegStop+^SEnd|*NLNegStop:SEnd;*|+NLPosSentimentBegin-NLNegSentimentBegin|-NLNegSentimentBegin-NLPosSentimentStop|-NLNegNegSent-NLNegSentimentBegin-NLPosSentimentStop|-NLNegSentimentBegin-NLPosSentimentStop|-NLNegSentimentStop+NLPosSentimentStop;reverse sentiment
+/*		1449. Nochtans begon het duo niet slecht.
 1455;85;^NLInNegspan|NLInNegspan+^NLNegPosSent|.NLInNegspan+^NLNegPosSent|NLInNegspan+NLNegPosSent|SEnd;*|+NLNegSentimentBegin-NLPosSentimentBegin|-NLPosSentimentBegin|-NLNegPosSent-NLPosSentimentBegin|-NLPosSentimentStop+NLNegSentimentStop;shorter version of r1436
+/*		1455.UD. Geen noemenswaardig succes.
 1456;85;^NLInNegspan|NLInNegspan+^NLNegNegSent|.NLInNegspan+^NLNegNegSent|NLInNegspan+NLNegNegSent|SEnd;*|+NLPosSentimentBegin-NLNegSentimentBegin|-NLNegSentimentBegin|-NLNegNegSent-NLNegSentimentBegin|-NLNegSentimentStop+NLPosSentimentStop;shorter version of r1449
+/*		1456.UD. Fysiek geen last.
 
 /* PHASE 99: FINAL CLEANUP
 /* =======================
 /* Move attribute markers to relevant entity (in final phase, because only a few labels are defined in phase 85)
-
 1437;$;NLPosSentimentBegin+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentBegin;move sentiment attribute from nonrelevant to relevant lexrep
+/*		1437.UD. De politie is zeer tevreden over het verloop van het festival.
 1438;$;NLPosSentimentBegin+NLPunctuation|.typeAmbiguous:typeOther|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentBegin;
+/*		1438.UD. Voordeel is dat de laatstgenoemde installaties maar een keer de investering hoeven te doen, met andere woorden het kan nu in één keer goed gebeuren.
 1439;$;NLNegSentimentBegin+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentBegin;move sentiment attribute from nonrelevant to relevant lexrep
-1440;$;NLNegSentimentBegin+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentBegin;
+/*		1439.UD. De oortjes zijn ook nog niet zo goed ontwikkeld, waardoor die toch veel gevoeliger zijn.
+1440;$;NLNegSentimentBegin+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentBegin;no example
 1441;$;NLPosSentimentStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentStop;move sentiment attribute from nonrelevant to relevant lexrep
+/*		1441.UD. het is niet slecht is voor de tanden en het is veilig voor diabetici.
 1442;$;NLPosSentimentStop+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLPosSentimentStop;
+/*		1442.UD. We hebben in Nederland dan ook geen marktaandeel verloren, stelt hij.
 1443;$;NLNegSentimentStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeRelation+^typePathRelevant|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;move sentiment attribute from nonrelevant to relevant lexrep
+/*		1443.UD. Deze benaming was niet populair en werd in 1946 afgeschaft.
 1444;$;NLNegSentimentStop+NLPunctuation|.^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+NLNegSentimentStop;move sentiment attribute from nonrelevant to relevant lexrep
+/*		1444.UD. De outlook is echter niet goed genoeg, aldus de analist.
 
 /* Rewrite language-specific label to general mandatory label
-
 432;$;NLPunctuation;^Punctuation;
+/*		432. Oost west, thuis best.
 1333;$;NLBeginrel+NLConj;-NLConj;
+/*		1333. Toen we haar confronteerden met de vraag of zij de uitslagen die we haar hadden meegegeven aan U had afgegeven zoals afgesproken, moest zij evenwel bekennen dat ze dit niet had gedaan.
 1295;$;"allemaal";-NLAdvStruct+NLObjpron;force 'allemaal' to become PR for the moment

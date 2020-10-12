@@ -20,6 +20,13 @@ namespace iknow {
 		// we use a hack for pathrelevant, if both concept and relation are true, it flags pathrelevant !
         type_(is_concept_f && is_relation_f ? _pathrelevant : (is_concept_f ? _concept : (is_relation_f ? _relation : _nonrelevant))) {}
 
+      KbFilter(const KbFilter& other) { // explicit copy constructor
+         this->input_token_ = other.input_token_;
+         this->output_token_ = other.output_token_;
+         this->is_applied_only_at_beginning_ = other.is_applied_only_at_beginning_;
+         this->is_applied_only_at_end_ = other.is_applied_only_at_end_;
+         this->type_ = other.type_;
+      }
       iknow::base::String InputToken() const { return iknow::base::String(*input_token_); }
       const CountedBaseString* PointerToInputToken() const { return input_token_; }
       iknow::base::String OutputToken() const { return iknow::base::String(*output_token_); }

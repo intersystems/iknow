@@ -4,18 +4,21 @@
 #include <algorithm>
 #include <string>
 #include <iterator>
+#include <cstring>
+
 #include "IkTypes.h"
 #include "OffsetPtr.h"
 
 //RawBlocks are an abstraction for storing a series of objects in a
 //statically-allocated chunk of memory (like a pre-allocated piece of Cache
 //shared memory)
-//TODO: Do I understand alignment concerns?
 namespace iknow {
   namespace shell {
     class Raw {
     public:
-      Raw(unsigned char* begin, size_t size) : begin_(begin), size_(size) {}
+      Raw(unsigned char* begin, size_t size) : begin_(begin), size_(size) {
+		  memset(begin, 0, size); // init for a reproducible binary model.
+	  }
       unsigned char* Begin() const { return begin_; }
       size_t Size() const { return size_; }
     private:
