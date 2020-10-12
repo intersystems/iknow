@@ -45,6 +45,11 @@ namespace iknow {
 			else { type_ = kEverywhere;	}
 			if (type_ == kExact && separator_is_punctuation) type_ = kExactInNonText;
       }
+	  KbPreprocessFilter(const KbPreprocessFilter& other) { // explicit copy constructor
+		  this->input_token_ = other.input_token_;
+		  this->output_token_ = other.output_token_;
+		  this->type_ = other.type_;
+	  }
       iknow::base::String InputToken() const { 	return iknow::base::String(*input_token_); }
       const CountedBaseString* PointerToInputToken() const { return input_token_; }
       iknow::base::String OutputToken() const { return iknow::base::String(*output_token_); }
