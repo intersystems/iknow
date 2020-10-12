@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <string>
 #include <iterator>
+#include <cstring>
+
 #include "IkTypes.h"
 #include "OffsetPtr.h"
 
