@@ -1,3 +1,8 @@
+/*
+** UserKnowledgeBase.cpp : a flexible KB that can change during runtime, lexreps are mapped, not compiled into a statemachine.
+*/
+#include <cstring>
+
 #include "UserKnowledgeBase.h"
 #include "SharedMemoryKnowledgebase.h"
 

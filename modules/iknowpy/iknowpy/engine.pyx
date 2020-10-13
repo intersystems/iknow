@@ -181,3 +181,7 @@ cdef class iKnowEngine:
 			if ret < 0:
 				return ret
 		return self.engine.udct_use(True)
+
+	@cython.binding(False)
+	def unload_dictionary(self) -> int:
+		return self.engine.udct_use(False)

@@ -334,10 +334,10 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 	if (m_bUserDCT) {
 		if (pUserDCT == NULL)
-			pUserDCT = new SharedMemoryKnowledgebase(m_user_data.generateRAW(false));	// first use generation.
-		if (m_user_data.IsDirty()) {
+			pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false));	// first use generation.
+		if (m_user_dictionary.getUDCTdata().IsDirty()) {
 			delete pUserDCT;
-			pUserDCT = new SharedMemoryKnowledgebase(m_user_data.generateRAW(false)); // reconstruct if data has been added.
+			pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false)); // reconstruct if data has been added.
 		}
 		process.setUserDictionary(pUserDCT);
 		pUserDCT->FilterInput(text_input); // rewritings can only be applied if we no longer emit text offsets
@@ -373,21 +373,42 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 }
 
 // Adds User Dictionary label to a lexical representation for customizing purposes
-int iKnowEngine::udct_addLabel(const std::string& literal, const char* UdctLabel)
+int iKnowUserDictionary::addLabel(const std::string& literal, const char* UdctLabel)
 {
-	string normalized = NormalizeText(literal, "en"); // normalize the literal
-	if (m_user_data.addLexrepLabel(normalized, UdctLabel) == -1) return iknow_unknown_label; // add to the udct lexreps
+	string normalized = iKnowEngine::NormalizeText(literal, "en"); // normalize the literal
+	if (m_user_data.addLexrepLabel(normalized, UdctLabel) == -1) return iKnowEngine::iknow_unknown_label; // add to the udct lexreps
 	return 0; // OK
 }
 // Add User Dictionary literal rewrite, not functional.
-int iKnowEngine::udct_addEntry(const std::string& literal, const string& literal_rewrite) {
+int iKnowUserDictionary::addEntry(const std::string& literal, const string& literal_rewrite) {
 	return -1; // we cannot rewrite input text as long as we use text offsets to annotate text.
 }
 
 // Add User Dictionary EndNoEnd. 
-int iKnowEngine::udct_addSEndCondition(const std::string& literal, bool b_end)
+int iKnowUserDictionary::addSEndCondition(const std::string& literal, bool b_end)
 {
 	m_user_data.addSEndCondition(literal, b_end);
 	return 0;
 }
 
+// Load a User Dictionary into the iKnow engine
+int iKnowEngine::loadUserDictionary(iKnowUserDictionary& udct)
+{
+	if (pUserDCT == NULL)
+		pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false));	// first use generation.
+	else
+		return iKnowEngine::iknow_user_dictionary_already_loaded;
+
+	m_bUserDCT = true;
+	return 0;
+}
+
+// Unload the User Dictionary
+void iKnowEngine::unloadUserDictionary(void)
+{
+	if (pUserDCT != NULL) {
+		delete pUserDCT;
+		pUserDCT = NULL;
+	}
+	m_bUserDCT = false;
+}
