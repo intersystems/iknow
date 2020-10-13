@@ -3,687 +3,1838 @@
 /*====================
 
 702;1;CapitalInitial;^ESCapitalInitial;
+
+/*		702. La fachada de La Pedrera.
+
 947;1;CapitalMixed;^ESCapitalInitial;
+
+/*		947. El iPhone de Apple logró unas ventas de un millón de unidades.
+
 617;1;CapitalAll;^ESCapitalAll;
+
+/*		617. El campo de acción de una ONG puede ser local, nacional o internacional.
+
 618;1;Punctuation;ESPunctuation;
 
+/*		618. En determinada parte de su órbita no llega a ocultarlo del todo, dejando una franja anular (eclipse anular).
 /*Rewrite user dictionary labels
 
 620;1;UDNegation;+ESNegation+ESNegBegin;
+
+/*		620_UD. Se le niega el voto y el poder político, al 10% de la población que abarca a empresarios, banqueros y terratenientes, que ya poseen el poder económico.
+
 621;1;UDPosSentiment;+ESPosSentiment+ESPosSentimentBegin;
+
+/*		621_UD. En un primer momento, para recibir a la gente y para los primeros contactos, es bueno mantener todas las bombillas encendidas.
+
 622;1;UDNegSentiment;+ESNegSentiment+ESNegSentimentBegin;
+
+/*		622_UD. Ya que este es un mes habitualmente malo para el empleo.
+
 623;1;UDConcept;ESCon;
+
+/*		623_UD. En este período el se dedicó a su carrera y comenzó a trabajar como asistente.
+
 624;1;UDRelation;ESRelation;
+
+/*		624_UD. El se había convertido en el hombre más solicitado por la prensa internacional.
+
 625;1;UDNonRelevant;ESNonRelevant;
 
+/*		625_UD. El lenguaje combinaría recurrencias (repeticiones) y desvíos de la norma para alejarse de la lengua estándar, causar extrañeza, renovarse, impresionar la imaginación y la memoria y llamar la atención sobre su forma expresiva.
 /*PHASE 40: DISAMBIGUATION AND PREPARATION FOR ATTRIBUTE ASSIGNMENT
 /*=================================================================
 /*CAPITALISATION
 
 906;40;ESConPlusDeCap|.ESAdj|ESDe|ESCapitalInitial;ESCon|+Join|+Join|+Join;
+
+/*		906. En el norteño estado mexicano de Chihuahua. Las autoridades del Estado de Río han confirmado.
+
 242;40;SBegin|ESCapitalInitial;*|-ESCapitalInitial;to ignore capital letters when at the beginning of a sentence
+
+/*		242. Con su protesta, el aspiraba a que el Gobierno mejorara las condiciones de vida en prisión.
+
 972;40;SBegin:ESPunctuation|ESA+ESCapitalAll|^ESPunctuation+^ESComma;*|-ESCapitalAll|*;to ignore the capitalization of "a" at the beginning of a sentence
+
+/*		972. A las 10.13 ha comenzado a declarar en el Juzgado de Instrucción.
+
 243;40;ESConIfCap+ESCapitalInitial;ESCon+ESCapitalInitial;to convert certain words to concepts when capitalized as the Spanish verbo/name leo/Leo
+
+/*		243. Se llama Leo.
+
 973;40;ESCapitalAll|ESCapitalAll|ESCapitalAll;-ESCapitalAll|*|*;ignore capitalization when the whole sentence is in upper case
+
+/*		973. PRUEBAS A DIAGNÓSTICO.
+
 974;40;ESCapitalAll|ESCapitalAll|ESColon:SEnd;-ESCapitalAll|-ESCapitalAll|*;
+
+/*		974. LIGADO A TRADICIONES.
+
 967;40;ESConIfCap+ESCapitalAll;ESCon+ESCapitalAll;
+
+/*		967. El USA Today tiene cifras de difusión de alrededor de 2 millones.
+
 847;40;ESConIfCap+^ESA+^ESAndOrBut|ESCapitalInitial;ESCon|ESCon+ESCapitalInitial;
+
+/*		847. Del Bosque ha negado que la presentación haya sido pesada. NOT. en mucha menor medida Francia, Portugal u Holanda.
+
 244;40;ESDefart:ESPrepart+ESCapitalInitial|ESCapitalInitial;ESCon|ESCon;to make the article part of a name when capitalized
+
+/*		244. El cura demandaba al diario El País.
+
 245;40;ESEste+ESCapitalInitial;ESConLoc;to differentiate Este (the East) from este (this)
+
+/*		245. Diversos países de Europa, Norteamérica y Asia del Este.
+
 1054;40;ESDe+ESCapitalInitial|ESCon+ESCapitalInitial;ESCon+ESCapitalInitial|+Join;
 
+/*		1054. Agüero y De Gea entran en la lista ante el Rosenborg.
 /*vi VERSUS ROMAN NUMERAL VI
 
 887;40;ESCon+ESCapitalInitial|ESVi;^ESCon|ESCon;
+
+/*		887. La residencia del rey Alfonso VI tras conquistar Toledo.
+
 888;40;"siglo"|ESVi;ESConTime+ESCon|+Join;
+
+/*		888. En el siglo vi.
+
 890;40;ESVi+ESCapitalAll;ESCon;
+
+/*		890. VI Titán 23/1 con relación a Saturno.
+
 889;40;ESVi;ESVerb;
 
+/*		889. Creo que vi algo parecido.
 /*ESTE: CONCEPT OR PRONOUN
 
 73;40;ESPrepart|ESEste;ESPrepart|ESConLoc;makes Concept of ESTE when it's not capitalized, but preceded by an article
+
+/*		73. El marqués de Salamanca dio nombre al nuevo barrio al este de lo que pasará a ser el eje central de la ciudad.
+
 754;40;ESEste|ESDe;ESConLoc|^ESDe;
+
+/*		754. En el extremo este de la ciudad.
+
 211;40;ESEste;ESDemonstr;should directly follow rule 73 and 754, should precede all rules for demonstrative pronouns
 
+/*		211. Cuando su equipo necesitaba un empujón, este centrocampista le proporcionó coraje.
 /*NORTE,SUR,ESTE,OESTE
 
 753;40;ESConLoc|ESDe|ESDefart|^ESRelpron+^SEnd;ESCon|+Join|+Join|*;
+
+/*		753. Este de la península.
+
 751;40;ESConLoc|ESDe:"del"|^ESDemonstr+^SEnd;ESCon|+Join|*;
+
+/*		751. A unos 200 kilómetros al norte de Calcuta. NOT. en la frontera sur de este país con Guatemala.
+
 752;40;ESConLoc;ESCon;
 
+/*		752. El cerro delimitado al sur por la hondonada del arroyo.
 /*CONCEPT PLUS DE and NAMES OF ORGANIZATIONS
 
 930;40;ESOrgUnit|"de"|*ESCapitalInitial|ESComma|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|ESCapitalInitial:ESCon;^ESCon|+Join|+Join|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
+
+/*		930. Programa Avanza I+D del Ministerio de Industria, Turismo y Comercio.
+
 931;40;ESOrgUnit+ESCapitalInitial|"de"|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|*ESCapitalInitial:ESCon:ESAdj;^ESOrgUnit+ESCapitalInitial|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
+
+/*		931. Director del Instituto de Ciencias Básicas y Medicina Experimental del Hospital Italiano.
+
 944;40;ESOrgUnit+ESCapitalInitial|*ESAdj:ESCapitalInitial|"de"|*ESCapitalInitial:ESCon:ESAdj:ESConVerb|"y":"e"|*ESCapitalInitial:ESCon:ESAdj;^ESCon|+Join|+Join|+Join|Join|+Join;no '+' on penultimate join to remove NegStop attribute
+
+/*		944. Según informa el Instituto Nacional de Geofísica y Vulcanología de Italia (INGV), la actividad del volcán se intensificó en la noche de este miércoles.
+
 935;40;ESOrgUnit+ESCapitalInitial|ESDe:"del"|ESPart;^ESOrgUnit+ESCapitalInitial|+Join|+Join;
+
+/*		935. La Asociación de Afectados del Vuelo JK5022 ha organizado para hoy diversos actos en memoria de los fallecidos.
+
 936;40;ESOrgUnit+ESCapitalInitial|ESDe:"del"|ESCon:ESAdj:ESConVerb:ESAdjVerb:ESConPart:ESmAuxCon;^ESOrgUnit+ESCapitalInitial|+Join|+Join;
+
+/*		936. Votar en contra del informe no tendría otro efecto que devolverlo a la Comisión de Control Presupuestario sin una manifestación clara de lo que va a pasar después y de qué modo.
+
 937;40;ESOrgUnit+ESCapitalInitial|ESDe|ESLo:ESDefart|ESCon:ESAdj:ESConVerb:ESAdjVerb:ESConPart:ESmAuxCon;^ESOrgUnit+ESCapitalInitial|+Join|+Join|+Join;
+
+/*		937. Nadie se sorprenderá de que una mi voz a los que aquí han felicitado mayoritariamente al Primer Ministro por su excelente dirección del Consejo de la Unión Europea durante estos seis meses.
+
 939;40;ESOrgUnit+ESCapitalInitial|*ESAdj:ESCapitalInitial|ESDe:"del"|.ESLo:ESDefart|*typeConcept+ESCapitalInitial+^ESIndefpron;^ESOrgUnit|+Join|+Join|+Join|Join;
+
+/*		939. El Consejo de Insuficiencia Cardíaca de la Sociedad Argentina de Cardiología ha desarrollado y publicado recientemente el Consenso de Insuficiencia Cardíaca. se encuentra en el epicentro de la política que proclamó el Consejo Europeo de Lisboa y que repetirá, espero, la próxima Cumbre de Estocolmo.
+
 941;40;ESOrgUnit+ESCapitalInitial|ESDe:"del"|.ESLo:ESDefart|typeConcept+ESCapitalInitial+^ESIndefpron+^ESNumber;^ESOrgUnit+ESCapitalInitial|+Join|+Join|*;
+
+/*		941. La Federación Internacional de Planificación de la Familia. El pronunció palabras muy duras no sólo para con nuestro Departamento de Medio Ambiente, sino también para con las políticas de nuestro Departamento de Hacienda, nuestra Agencia de Protección del Medio Ambiente, nuestra Agencia de Protección del Patrimonio y, de hecho, nuestras autoridades locales.
+
 943;40;ESOrgUnit+ESConPlusDe+ESCapitalInitial;ESCon+ESCapitalInitial;
+
+/*		943. Los fallos del Ministerio de Agricultura de un país no deben jamás volver a poner en peligro a la cabaña de nuestro continente.
+
 942;40;ESOrgUnit;-ESOrgUnit;
+
+/*		942. A los países pobres jamás se les ha dado la oportunidad de participar seriamente en el desarrollo de la sociedad industrial.
+
 903;40;ESConPlusDe|ESDe:"del"|ESPart:ESConVerb:ESAdjVerb:ESConPart:ESmAuxCon;ESCon|+Join|+Join;
+
+/*		903. El tipo de tejido es flojo y transparente. tipo del tejido. Una serie de revueltas contra los ministros italianos.
+
 907;40;ESConPlusDe|ESDe|ESLo:ESDefart|ESConVerb:ESAdjVerb:ESConPart:ESmAuxCon;ESCon|+Join|+Join|+Join;
+
+/*		907. Universidad de los andes.
+
 908;40;ESConPlusDe|ESAdj|ESDe:"del"|.ESLo:ESDefart|typeConcept+^ESIndefpron;ESCon|+Join|+Join|+Join|*;
+
+/*		908. Secretario general de la sociedad astronómica. la Liga española de Fútbol. secretario general del PSOE.
+
 909;40;ESConPlusDe|ESDe:"del"|.ESLo:ESDefart|typeConcept+^ESIndefpron;ESCon|+Join|+Join|*;
 
+/*		909. Secretarios de la Presidencia. Una llamada del secretario de Defensa. NOT. La tasa base es la cantidad de algo, sin importar su precio.
 /*MAS/MENOS
 
 892;40;ESNum+^ESConTime|ESAndOrBut|ESMasmenos|^ESAdj+^SEnd;ESNum|+Join|+Join|*;
+
+/*		892. Esa estructura creada entre dos o más personas. NOT. en cuanto a la primera y más importante fuente de formación.
+
 828;40;^ESNum+^ESNumber+^SBegin|ESMasmenos|ESDe|ESLo;*|ESAdv|^ESDe|^ESLo;
+
+/*		828. Ha durado más de lo que se pensaba.
+
 675;40;ESBeforeNum|ESDe:ESPrepart|ESNum;ESNum|+Join|+Join;
+
+/*		675. Porque sigue habiendo más de cuatro millones de personas en paro por las que seguir trabajando.
+
 676;40;ESBeforeNum|ESDe:ESPrepart|ESNumber;ESNumber|+Join|+Join;
+
+/*		676. Ha caído en menos de 24 horas tanta agua como la prevista para todo el mes. Varios ángulos, ya que se debe enfatizar en que es más del 55 por ciento de la población.
+
 677;40;ESBeforeNum|ESDe:ESPrepart|ESUn;ESNum|+Join|+Join;
+
+/*		677. La diligencia tardó menos de una hora.
+
 827;40;ESVerb:ESInf|ESMasmenos|"que";*|+Join|ESRelpron;mainly comparisons
+
+/*		827. La luz del flash sorprende y saca una imagen donde nos reconocemos menos que con la luz natural. Un favor u usarlo para asuntos que tienen mas que ver con lo personal o con lo grupal.
+
 674;40;ESNum:ESNumber|ESAfterBCon;ESBeginconcept|ESCon;veces más/menos
 
+/*		674. Se vió que contenía en ese momento 40 veces más gliadina que la de los daneses.
 /*NEGATION OR NO NEGATION?
 /* MÁS XXX QUE NUNCA
 /*remark: "más que nunca" = lexrep
 
 917;40;ESMasmenos:"mejor":"mayor"|^"que"|"que"|ESNunca;*|*|*|ESAdvPR-ESNegation-ESNegBegin;
 
+/*		917. Durante las negociaciones, las partes estuvieron más cerca que nunca de una solución negociada. Ahora goza de mayor popularidad que nunca entre el pueblo.
 /* COMPARATIVE/SUPERLATIVE ... JAMÁS
 
 924;40;ESMasmenos:"mayor":"peor":"mejor":"mejores"|*{1,7}^"jamás"|"jamás";*|*|ESAdvPR+ESTime-ESNegation-ESNegBegin;
 
+/*		924. Situará este caso como el de mayor fraude jamás cometido contra Europa en el ámbito de la Política Agraria Común. Luego resultó ser una de las mejores Asambleas que hemos celebrado jamás. Se trata del acuerdo más amplio que la Unión Europea ha concluido jamás con un tercer país y no debemos arrojar por la borda los principios que caracterizan una cooperación de futuro.
 /* APENAS WITHOUT NEGATION
 
 926;40;"apenas":"apenas si"|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron;+ESAdvdeg-ESNegation-ESNegBegin|*;
+
+/*		926. Apenas unas decenas de millones de años.
+
 927;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*;
+
+/*		927. (Apenas contamos seis o siete mujeres).
+
 928;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*;
+
+/*		928. Sus ventas apenas llegaron a unos centenares de unidades.
+
 1031;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESTempBeginEnd;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*|*;
 
+/*		1031. No se puede seguir admitiendo que la tasa global de participación en el programa apenas haya superado el 50%.
 /*ADVERBS - part 1
 /* adverb of modality
 
 796;40;ESAdvmodal|ESNum;-ESAdv|^ESNum;
 
+/*		796.  Miles, tal vez decenas de miles de especies están en peligro.
 /* adverb manner
 
 794;40;typeRelation|ESAdvmanner|ESNum;*|+Join|^ESNum;
 
+/*		794. Existen fundamentalmente dos tipos de seguro médico. Ahora están en marcha cuatro casas de 180 metros cuadrados.
 /* adverb degree -> join - 'todo menos' + concept -> advdegree
 
 782;40;ESAdvdeg|ESTodo|ESDefart;ESAdj|+Join|+Join;
+
+/*		782. Casi toda la provincia.
+
 884;40;ESAdvdeg|ESNegPR;ESNegPR|+Join;
+
+/*		884. Casi nadie sabe que el famoso ogro verde de las películas.
+
 781;40;ESAdvdeg|ESIndefpronPRCon;ESIndefpronPRCon|+Join;
+
+/*		781. Nos muestra totalmente todo aquello que veríamos si fuéramos igualmente sensibles.
+
 779;40;ESAdvdeg|ESIndefpronPRNR;ESIndefpronPRNR|+Join;
+
+/*		779. Me parece que esto en términos generales no es completamente cierto.
+
 780;40;ESAdvdeg|ESIndefpronPR;ESIndefpronPR|+Join;
+
+/*		780. No conocen bastante otros idiomas puedan tener acceso a ellas.
+
 657;40;ESAdvdeg|ESNum:ESUn:"uno";ESNum|+Join;
+
+/*		657. La Fiscalía adelantó que al menos tres personas podrían estar implicadas en este robo. la emisión, del 4,590%, casi un punto más que el 3,6% que pagó hace dos meses. La investigación también indica que en el país, casi uno de cada dos consumidores de alcohol.
+
 661;40;ESAdvdeg|ESDefart|ESNum;ESNum|+Join|+Join;
+
+/*		661. Cuando la luna tape más o menos la mitad del astro en ciudades como Madrid.
+
 1098;40;"todo"|"menos"|ESCon:ESAdj:ESConVerb:ESAdjVerb;ESAdv+ESAdvdeg|+Join|ESAdj;
+
+/*		1098. Es todo menos perfecta, es todo menos segoro.
+
 1099;40;"todo"|"menos"|ESAdv;ESAdv+ESAdvdeg|+Join|*;
 
+/*		1099. El ha actuado todo menos dignamente.
 /*TIME: CONCRETE POINT IN TIME
 
 914;40;"día"|ESNum|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join|+Join;rule should precede rule 45
+
+/*		914. Su selección no se concentra en Barcelona hasta el día dos de septiembre.
+
 45;40;ESNumber+^ESNumberNotyear|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
+
+/*		45. Las fechas límite comienzan el 9 de agosto y finalizan el 6 de septiembre.
+
 281;40;ESNum:"uno"|ESDe:"del"|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
+
+/*		281. Los populares celebraron el doce de octubre. Uno de marzo de dos mil dieciséis.
+
 43;40;ESMonth|ESDe|ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
+
+/*		43. La última gran erupción de este volcán tuvo lugar en mayo de 2008.
+
 282;40;ESTempBeginEnd|ESDe|ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join|+Join;
+
+/*		282. Según denuncian en lugar de facilitarles las facturas correspondientes a estos expedientes se les ha dado "un papel que habían fabricado tres días antes", ya que en el mismo aparece la fecha de 7 de marzo de 2013, cuando los gastos se originaron entre 2010 y 2012.
+
 911;40;ESMonth:ESTempBeginEnd|ESDe|*{2,3}ESNum;ESTempBeginEnd|+Join|+Join;
+
+/*		911. El día cinco de noviembre de dos mil. El día cinco de noviembre de dos mil dieciseis.
+
 845;40;ESTempBeginEnd|ESDay;ESTempBeginEnd|+Join;
+
+/*		845. Durante la actividad, anunció que hoy lunes enviará a la Asamblea Nacional.
+
 851;40;^ESConTime+^SBegin|ESAdjtemp|ESDay:ESConTime;*|ESTempBeginEnd|+Join;
+
+/*		851. La Tierra completa un giro cada día.
+
 852;40;ESDay|ESAdjtemp;ESTempBeginEnd|+Join;
+
+/*		852. El conquistaba el jueves pasado el gran premio de las letras: el Nobel de Literatura.
+
 854;40;ESDay|ESTempBeginEnd;ESTempBeginEnd|+Join;
+
+/*		854. Todo el territorio español el miércoles 30 de agosto de 1749.
+
 855;40;ESDay|ESNum:ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join;
+
+/*		855. Todavía el sábado 18 y el domingo 19 guardó la ciudad una cierta normalidad.
+
 284;40;ESTempBeginEnd|ESTempBeginEnd;ESTempBeginEnd|+Join;makes dates one concept
+
+/*		284. El próximo jueves 22 de julio, a las 10:00 horas, el Bilbao Exhibition Center (BEC) abrirá sus puertas.
+
 877;40;"año"|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join;
+
+/*		877. Los primeros meses del año 1977 destacaron por la agitación política. NOT. El impuesto para los cigarrillos creció este año 2,6 por ciento y el ad valórem el 3 por ciento.
+
 886;40;"siglo"|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join;
+
+/*		886. Desde la Antigua Grecia o Egipto a España y Sicilia en el siglo VIII.
+
 913;40;ESMonth:ESTempBeginEnd|"del"|"año"|*{2,3}ESNum;ESConTime|+Join|+Join|+Join;
+
+/*		913. Día uno de marzo del año dos mil. día uno de marzo del año dos mil dieciseis.
+
 879;40;ESMonth:ESTempBeginEnd|"del"|ESConTime;ESConTime|+Join|+Join;
+
+/*		879. Se produjo en enero del año pasado en la ciudad. La ciudad fue destruida el 10 de agosto del año 997.
+
 878;40;"mes"|ESDe:ESPrepart|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join|+Join;
+
+/*		878. En el noveno mes de 2010 se registraron 31.763 transacciones.
+
 880;40;ESIndefpronPRNR:ESIndefpronPR|ESConTime;ESConTime|+Join;
+
+/*		880. A cualquier hora fuera del horario laboral, cualquier día del año. Ese mismo año, el continuó exponiendo regularmente, ya como profesional, y se unió oficialmente al grupo surrealista.
+
 874;40;ESConTime|ESAdjtemp|^ESConTime;ESConTime|+Join|*;
+
+/*		874. Recibió el año pasado 2,5 millones de visitantes. NOT. La Luna se retrasa del orden de 50 minutos cada día.
+
 873;40;ESConTime|"del":"al"|ESConTime+^ESNum;ESConTime|+Join|+Join;
+
+/*		873. Un periodo de transición durante la primera década del siglo XX. Una hora al día. NOT. Los 3 años del segundo ciclo suponen un estudio general.
+
 863;40;ESDemonstr|ESConTime+^ESNum|^ESAdj;ESTempBeginEnd|+Join|*;
+
+/*		863. Los cigarrillos creció este año 2,6 por ciento. Estará en cartelera todo este mes. NOT. En esos años difíciles para la industria textil.
+
 849;40;ESDay;ESCon+ESEndCon;
 
+/*		849. El pierde de lunes a  viernes 328.000 oyentes.
 /*TIME - AMBIGUOUS: CONCRETE OR VAGUE TIME INDICATION
 
 946;40;ESDefart:ESPrepart|ESAdvPR|ESCon;*|ESAdj|*;
+
+/*		946. ¿Es la primera lengua que se hablaba en la franja costera de la ahora España?
+
 870;40;ESCon|ESAdvPR|ESAdj|^ESPrep+^ESComo;^ESCon|ESAdj-ESTime|^ESAdj|*;
+
+/*		870. Quimioterapia, un tratamiento en ocasiones agresivo y largo. Para reemplazar los cepos actualmente existentes.
+
 872;40;ESCon|ESAdvPR|ESPart|ESPunctuation:ESComma;^ESCon|ESAdj-ESTime|ESAdj|*;
+
+/*		872. La novedad respecto a la interpretación anteriormente postulada — que ya podríamos denominar básicamente.
+
 868;40;ESDe|ESConAdvPR+ESAdj:ESNum|ESCon:ESConVerb;^ESDe|ESAdj|^ESCon;
+
+/*		868. Los artículos focalizados en desarrollo de nuevo producto.
+
 866;40;ESCon:ESConVerb|ESDe|ESConAdvPR+ESCon;^ESCon|^ESDe|ESCon;
+
+/*		866. La mayoría de los crímenes son por ajustes de cuentas, enfrentamientos por cuestiones de momento, y homicidios culposos.
+
 867;40;ESDe|ESConAdvPR;ESAdvPR+ESTime|+Join;
+
+/*		867. Si bien de momento nuestra exposición, únicamente, se ha limitado a su presentación.
+
 865;40;ESAdvdeg:ESMasmenos|ESAdvPR;ESAdvPR+ESTime|+Join;
+
+/*		865. Había decaído casi de inmediato y “con rapidez vertiginosa”. Plutón ha pasado a clasificarse como planeta enano, y más recientemente considerado como asteroide.
+
 862;40;ESAdvdeg:ESMasmenos|ESTimePRCon;ESTimePRCon|+Join;
+
+/*		862. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
+
 860;40;ESConTime|ESTimePRCon;ESEndCon|+Join;
+
+/*		860. Muy cerca de la anterior, quince minutos antes, con una afección "mínima" en  un coche cercano.
+
 881;40;ESCon|ESNum|ESConTime;^ESCon|ESTempBeginEnd|+Join;
+
+/*		881. En nuestro país la supervivencia cinco años después del tratamiento es, aproximadamente, de un 78 %.
+
 859;40;ESTimePRCon;ESAdvPR+ESTime;
+
+/*		859. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
+
 861;40;ESConTime+ESNum;-ESConTime;
 
+/*		861. No interfería en los segundos niveles de los ministerios.
 /*BAJO - PREPOSITION
 
 214;40;ESBajo|ESConVerb:ESConPart;ESBajo|ESCon;makes ConVerb Concept after 'bajo'
+
+/*		214. Como consecuencia, las ventas de obras de medio y bajo precio están resistiendo peor la crisis que las operaciones con piezas "del segmento superior del mercado", señala el análisis.
+
 802;40;ESBajo|ESPunctuation:ESComma;ESAdj|*;
+
+/*		802. guitarra, bajo, teclados, sintetizador.
+
 725;40;ESAdvdeg:ESMasmenos|ESBajo;ESAdj|+Join;
+
+/*		725. El sol todavía está muy bajo en el horizonte. el más bajo de los  últimos tres años.
+
 798;40;ESDefart:ESIndefart:ESPrepart:ESPrep:ESDemonstr:ESPosspron|ESBajo;*|ESAdj;
+
+/*		798. Hay mucha gente que está imitando el bajo perfil. Una familia con un bajo nivel socio-económico. el canal del Bajo Guadalquivir. Las comidas con bajo valor nutricional.
+
 137;40;ESBajo|ESDefart:ESIndefart:ESAdj;ESPrep|*;makes preposition of 'bajo' if followed by definite article
+
+/*		137. Este dios también es conocido como el dios del viento bajo el nombre de Ehécatl. la gestión del territorio bajo un único mando.
+
 805;40;ESCon|ESBajo|ESCon;*|ESPrep|*;
+
+/*		805. Esta película, tras múltiples polémicas, concurre a los Oscar bajo bandera argentina.
+
 799;40;ESDefart:ESIndefart:ESPrepart|ESCon|ESBajo;*|*|ESAdj;
+
+/*		799. Aunque expresan un nivel bajo de sentimiento religioso.
+
 804;40;ESCon|ESComma|ESBajo|ESCon;*|*|ESAdj|*;
+
+/*		804. Fuertes tasas de crecimiento, bajo apalancamiento y unos tipos de interés más altos.
+
 806;40;ESAndOrBut|ESBajo|ESCon;*|ESAdj|*;
+
+/*		806. Después comienza la alimentación complementaria, que debe ser balanceada, rica en proteínas, frutas, vegetales y bajo contenido de azúcar.
+
 807;40;ESVerb|ESConVerb:ESConPart|ESBajo;*|ESCon|ESAdj;
+
+/*		807. Sólo crece pasto bajo no alcanzando la humedad para la formación de bosques.
+
 797;40;ESBajo;ESPrep;
 
+/*		797. Suprema magistratura del poder puede presentarse bajo tres modalidades.
 /*NUMBER: ESNUMBER
 
 293;40;ESConceptbeforenumber|ESNumber;ESCon|ESNumber;makes a concept of several INfCons and Converbs before numbers
+
+/*		293. Un horno microondas modelo 7195.
+
 891;40;ESIndefart:ESDefart:ESPrepart:ESPrep|ESPercent;*|ESCon;
+
+/*		891. Más al este, el Sol estará un poco más arriba en el cielo cuando el eclipse llegue a su máximo, con un 67% cubierto en Atenas.
+
 110;40;^ESCon+^SBegin|ESNum:ESNumber|ESPart;*|ESNum|ESCon;makes Concept of participle if preceded by numeral
+
+/*		110. Hay 752 heridos y 150 desaparecidos.
+
 808;40;ESNumber;ESAdj;
 
+/*		808. La muerte de estos 12 reclusos.
 /*'DE'
 
 98;40;ESDe|ESPart:ESConVerb;*|ESCon;makes Concept of participle after 'de'
+
+/*		98. El cuarto modelo en el que se muestra la asociación de sentido positivo entre procreación y naturaleza. La atleta llega a los tribunales de Plaza Castilla.
+
 812;40;ESIndefpronPRCon|ESDe|ESIndefpron:ESDemonstr|ESCon;ESAdj|+Join|+Join|*;
 
+/*		812. Se producía de unos cuantos de estos hombres porque intentaban reconstruir su organización.
 /*ESNUM
 
 152;40;ESNum|ESDe|ESNum;ESNum|ESNum|ESNum;
+
+/*		152. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra.
+
 856;40;ESNum|ESEndCon;ESTempBeginEnd|+Join;
+
+/*		856. En una información legal elaborada ocho años más tarde se dice.
+
 853;40;ESAdjtemp:ESIndefpronPRCon|ESTempBeginEnd;ESTempBeginEnd|+Join;
+
+/*		853. El vertido comenzó el pasado viernes por la tarde.
+
 151;40;ESNum|ESDe|ESCon:ESEndCon:ESAdj;ESNum|ESNum|*;makes Concept of preposition 'de' between numeral and Concept
+
+/*		151. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra. aproximadamente 20 millones de años más tarde. Al comienzo de la medida, centenares de jóvenes tomaron las calles del barrio en una protesta.
+
 795;40;ESNum|ESDe|ESIndefpron;ESAdj|ESAdj|*;
+
+/*		795. Un quinto de todas las especies de aves del mundo.
+
 716;40;ESCon|ESAdjVerb|ESNum;^ESCon|ESVerb|*;
+
+/*		716. La excursión dura tres horas y es apta para toda la familia.
+
 792;40;ESNum;ESAdj;
 
+/*		792. El avión solar completa su primer vuelo nocturno.
 /*1st TAN
 
 735;40;ESCon|ESTan|ESAdj;*|ESAdj|+Join;
+
+/*		735. Al principio todos me desaconsejaron rodar con una niña tan pequeña, pero salió bien.
+
 734;40;ESDemodo|ESDemodo|ESTan|ESAdj:ESPart;ESAdvmanner+ESAdv|+Join|+Join|+Join;
 
+/*		734. Es difícil encontrar otra institución que trate de modo tan desdeñoso a quienes defienden.
 /*DE MODO, DE FORMA
 
 893;40;ESDemodo|ESDemodo|ESAdv|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join|+Join;
+
+/*		893. Policía de Investigaciones está trabajando de forma muy eficiente por asegurar el orden público. Hay varios ejemplos de países que sólo han sido capaces de mantener la democracia de forma muy limitada.
+
 1073;40;ESDemodo|ESDemodo|ESAdj:ESPart:ESAdjVerb:ESConPart|ESAndOrBut|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join|+Join|+Join;extension of r893
+
+/*		1073. Esta última profesión tiene estudios separados en algunos países, mientras que en otros sus atribuciones son desarrolladas por arquitectos e ingenieros civiles, de forma conjunta o independiente.
+
 733;40;ESDemodo|ESDemodo|ESAdj:ESPart:ESAdjVerb:ESConPart;ESAdvmanner+ESAdv|+Join|+Join;
+
+/*		733. La posibilidad de contemplar, de modo gratuito, la imagen captada por el telescopio.
+
 894;40;ESDemodo|ESDemodo;ESPrep|ESCon;
 
+/*		894. A eso se añade el momento de forma por el que pasa.
 /*ADJECTIVE OR NOUN
 
 711;40;ESIndefart:ESDefart:ESDemonstr|ESAdjCon;*|ESCon;
+
+/*		711. Los hombres sufren el doble de accidentes de tráfico.
+
 712;40;ESAdjCon;ESAdj;
 
+/*		712. Mala tarde de la señora presidenta.
 /*ADJECTIVE OR ADVERB
 
 706;40;ESAdv:ESMasmenos|ESAdvAdj;ESAdvAdj|+Join;
+
+/*		706. Aunque reconocían las serias dificultades que entrañaba incluso durante ese período aparentemente bien documentado.
+
 681;40;ESLinkingverb|ESAdvAdj|ESAdv;*|ESAdj|ESAdj;
+
+/*		681. No está bien físicamente.
+
 678;40;ESLinkingverb|ESAdvAdj|^ESPart+^ESRefl;^ESLinkingverb|ESAdj|*;
+
+/*		678. Es mejor mantener un perfil bajo. En algunos casos puede que sea mejor. NOT. El grano a fin de ver sí está bien penetrado hasta el corazón. NOT. Además si la niña está bien se come a los demás.
+
 682;40;ESPrep|ESAdvAdj;*|ESAdj;
+
+/*		682. Para bien o para mal.
+
 691;40;ESAdvAdj|ESCon;ESAdj|*;
+
+/*		691. Los astados habían obtenido el premio al mejor toro o a la mejor corrida.
+
 760;40;ESAdvAdj|ESConVerb|ESAdj;ESAdj|ESCon|*;
+
+/*		760. Mal manejo nutricional de la familia.
+
 695;40;ESVerb:ESPart:ESPosspron|ESAdvAdj|ESConVerb;*|ESAdj|ESCon;
+
+/*		695. El, además, tiene mejor promedio goleador que el ex capitán madridista. Nadie podría haber elegido mejor consigna. Con el propósito de identificar fenómenos o sucesos que aporten gran información para su mejor desempeño.
+
 699;40;ESIndefart:ESDefart|ESConVerb|ESAdvAdj;*|ESCon|ESAdj;
+
+/*		699. Más vale el peor concierto / que no el divorcio mejor.
+
 693;40;ESIndefart:ESDefart|ESCon|ESAdvAdj;*|*|ESAdj;
+
+/*		693. En tanto, las finanzas públicas de la provincia no ofrecían una perspectiva mejor.
+
 758;40;ESPrepart|ESAdvAdj|^ESInf;*|ESAdj|*;
+
+/*		758. La causación del mal que implica la pena penal. El autor de Las flores del mal. NOT. El arte del bien combinar los sonidos en el tiempo.
+
 703;40;ESInf|ESAdvAdj:ESAdv|ESAdvAdj:ESAdv;*|ESAdv|ESAdv;
+
+/*		703. El salmantino puede dormir bien tranquilo.
+
 757;40;ESAdj|ESAndOrBut|ESAdvAdj;*|ESAndOrBut|ESAdj;
+
+/*		757. Pues consideran que hay principios claros de lo que está bien o mal.
+
 822;40;ESIndefpron:ESNoAdj|ESAdvAdj;*|ESAdj;
+
+/*		822. Quién que no quiera de la vida algo mejor no es melancólico.
+
 679;40;ESAdvAdj;ESAdvmanner+ESAdv;
 
+/*		679. La música es el arte del bien combinar los sonidos en el tiempo.
 /*PARTICIPLES OR NOUNS BECOME NOUN
 
 721;40;ESIndefart:ESDefart:ESDemonstr|ESPart;*|ESCon;
 
+/*		721. Aunque cada país presente un recorrido histórico diferente. Verdad es que estos acabados no consiguen desvirtuar la inmensa calidad del monumento.
 /*ADJECTIVE OR VERB
 
 667;40;ESRefl:ESPerspron|ESAdjVerb;*|ESVerb;
+
+/*		667. En las angosturas de Óbidos, a 600 km del mar, el río se estrecha. no me extraña.
+
 722;40;ESNo|ESAdjVerb|ESPrep:ESNegPR;*|ESVerb|*;
+
+/*		722. Como puede apreciarse en este ejemplo, el votante no precisa de la realización de ningún procedimiento adicional.
+
 713;40;ESCon:ESAdj:ESComma|ESAdjVerb|ESDefart:ESIndefart:ESPosspron|ESCon:ESConVerb|^ESVerb+^SEnd;*|ESVerb|*|^ESCon|*;
+
+/*		713. La estocada perfecta corta la aorta y provoca la muerte casi instantánea. la Tierra completa un giro cada día. Como espectáculo moderno realizado a pie, fija sus normas y adopta su orden actual.
+
 718;40;ESVerb|ESAndOrBut|ESAdjVerb|^ESCon+^SEnd;*|*|ESVerb|*;
+
+/*		718. La disposición que la contiene y expresa, es un elemento importante.
+
 720;40;ESRelpron|ESAdjVerb|ESIndefpron:ESDefart:ESIndefart:ESPrep:ESComma;*|ESVerb|*;
+
+/*		720. La competición con los demás o consigo mismo, en que precisa unas reglas concretas. donde está el fondo del predio tomado, que linda con una de las entradas a la villa Ciudad Oculta. Tengo el despacho en el mismo sitio en el que vivo, en Velázquez.
+
 793;40;ESAdj|ESAdjVerb|ESPosspron;*|ESVerb|*;
+
+/*		793. El avión solar completa su primer vuelo nocturno.
+
 668;40;ESAdjVerb;ESAdj;
 
+/*		668. El hecho de disentir sobre aspectos puntuales de la reforma laboral no le impide coincidir en "muchas otras políticas" y "mucho menos seguir teniendo una relación absolutamente estrecha y normalizada".
 /*DICHO
 
 660;40;ESDicho|ESPrep:ESDe:ESEn;ESPartrel|^ESPrep;
+
+/*		660. Lo dicho hasta ahora es el paradigma del autismo puro. Por saber en qué consiste aprender, o, dicho de otra manera, por conocer cuáles son los mecanismos psicológicos.
+
 689;40;ESAdv|ESDicho;*|ESPartrel;
+
+/*		689. Para decir bien dicha una frase la mente tiene que independizarse de las manos.
+
 765;40;ESDicho|ESDemonstr|ESComma;ESPartrel|*|*;
 
+/*		765. Dicho esto, el volvió a contestar.
 /*mAUXCON: PODER, DEBER
 
 120;40;ESDefart:ESIndefart:ESPosspron:ESIndefpron:ESDemonstr:ESPrepart:ESAdj|ESmAuxCon;*|ESCon;makes Concept of 'poder'
+
+/*		120. Tiene el poder de subvertir nuestra ontología del arte. Un “poder permanente” es un instrumento jurídico. Aumentó su poder de negociación frente a las élites político-partidarias territoriales. Eso podría ser una solución transitoria, al tiempo que de cierta poder económico a River para poder reestructurarse en diversos campos. Se les ha dado ese poder, aunque no lo hayan pedido. Ella no estaba loca y todo había sido un complot, iniciado en 1506, para apartarla del poder. Esto es negativo desde el punto de vista de la democracia, pues ésta trata de que la ciudadanía como un todo tenga mayor poder.
+
 118;40;ESDe|ESmAuxCon|ESInf;*|ESmAux|*;makes 'poder' behave like infinitive 'ser' if followed by infinitive and preceded by 'de'
+
+/*		118. Se previó una muestra subdividida en dos grupos, con el objetivo de poder comparar las respuestas.
+
 133;40;ESDe|ESmAuxCon;*|ESCon;makes Concept of 'poder' after preposition 'de'
+
+/*		133. El nuevo magister estará preparado para desempeñar cargos ejecutivos en las instituciones de Estado y en los órganos de poder público.
+
 750;40;ESmAuxCon;ESInf+ESmAux;
 
+/*		750. Durante la misma tuvo que retirarse el casco para poder tomar aire.
 /*AUXCON
 
 916;40;ESIndefart:ESPosspron:ESPrepart|ESAuxCon;*|ESCon;
+
+/*		916. Pueden referirse a la vida vegetal de una era histórica como la flora fósil y pueden estar subdivididas en medio ambientes especiales. Se cree que, en el siglo XI de nuestra era, vikingos de origen noruego establecieron las primeras colonias europeas en América. Aquel son, era revolucionario en medio de la indigencia y de la menoridad de aquellos desfavorecidos. Bailan al son del tambor. Creo que la idea de que pueden existir estructuras heredadas que resultan útiles en el cumplimiento de cierto rol biológico, y que hasta son capaces de incrementar la aptitud de sus portadores. Detalles de la formación de los frutos del haya.
+
 1095;40;ESDefart|ESAuxCon+ESLinkingverb;*|ESCon;
 
+/*		1095. Todos estos factores nos llevan a la era de la estandarización del producto turístico.
 /*TANTO - RELATION
 
 829;40;ESTanto|*{1,7}^ESComo|ESComo;^ESConj|*|ESComo;makes RELATION of tanto in combination with como
+
+/*		829. Tanto legales como ilegales. Tanto por parte de las autoridades sanitarias como de las organizaciones humanitarias desplazadas en la zona. Su población tanto a familias, preferiblemente con niños, como a empresarios con un proyecto empresarial.
+
 836;40;ESTanto;ESAdvdeg+ESAdv;
 
+/*		836. Estos cambios que se observan no son tanto en la manera de hacer campaña a través de la red, sino en la manera que la ciudadanía se implica.
 /*NOUN OR PARTICIPLE
 
 810;40;ESRefl|ESVerb|ESConPart;*|*|ESPartrel;
+
+/*		810. Se vio puesta en jaque.
+
 748;40;ESmAux|ESLinkingverb|ESConPart;*|*|ESPartrel;
+
+/*		748. El ganado puede ser criado en áreas donde el duro clima imposibilita el crecimiento de los cultivos.
+
 809;40;ESAux|ESConPart+ESRelAfterLinkingverb;*|ESPartrel;
+
+/*		809. Se había puesto de moda la ropa extravagante.
+
 654;40;ESAux+^ESLinkingverb|ESConPart;*|ESPartrel;
+
+/*		654. Durante los últimos años los vehículos han estado haciéndose más limpios.
+
 732;40;ESAuxCon|.ESAdv|ESConPart;ESAux|ESAdv|ESPartrel;
+
+/*		732. No son muy del agrado de algunas figuras. No consta que haya estado nunca en la cueva.
+
 811;40;ESAdv|ESConPart|ESPrep;*|ESPartrel|*;
+
+/*		811. La división original entre la parte alta y la parte baja de la comunidad emanaría de los territorios antiguamente puestos bajo la protección de ancestros míticos fundadores.
+
 969;40;ESDicho;ESAdj;
+
+/*		969. Dicha incursión augura un futuro nada halagüeño.
+
 656;40;ESConPart;ESCon;
 
+/*		656. Sin excepción de sexo, estado, edad, o reserva.
 /*ADVERB AFTER LINKING VERB
 
 730;40;ESLinkingverb|ESAdv+^ESAdvdeg+^"así"|ESPrep:ESComma;*|ESAdj|*;
+
+/*		730. Lo que suele ser más de lo que cualquier profesional liberal se puede permitir.
+
 731;40;ESLinkingverb|ESAdv|ESNo|ESAdj;*|ESAdj|ESNoInCon+ESNegation-ESNegBegin|ESAdj;
 
+/*		731. Era absolutamente no pragmático.
 /*CONCEPT OR VERB -> CONCEPT
 
 885;40;ESRefl|ESDefart|ESConVerb;*|*|ESVerb;
+
+/*		885. Por eso es que esa recompensa no se la gana nadie.
+
 185;40;ESDefart:ESIndefart:ESPosspron:ESIndefpron:ESDemonstr:ESPrepart:ESPrep|ESConVerb;*|ESCon;makes Concept of ConVerb
+
+/*		185. El campo de acción de una ONG puede ser local, nacional o internacional.
+
 209;40;ESPosspron|ESAdj|ESConVerb;*|ESAdj|ESCon;makes Concept of ConVerb after possessive pronoun + adjective
+
+/*		209. Como denominó su polémico libro.
+
 270;40;ESVerb|ESConVerb;ESVerb|ESCon;
+
+/*		270. La introducción más temprana de gluten se pensó asociada en ocasiones a unas más precoces o graves manifestaciones clínicas de la enfermedad, sin que existiera evidencia suficiente.
+
 312;40;ESInf:ESNoAdj|ESConVerb;*|ESCon;
 
+/*		312. La estrategia del Tesoro para 2013 contempla la posibilidad de convocar subastas especiales fuera de su calendario habitual para dotar de liquidez ciertas referencias y mejorar así el funcionamiento del mercado secundario. Esto permite contestar preguntas acerca de sistemas planetarios. Me encantó que el trajera estas cosas acerca de la identidad nacional y cultural, la de fijar valores. El parlamento no fue de ninguna ayuda en aquel entonces.
 /*CONCEPT OR VERB -> VERB - part 1
 
 823;40;ESCon|ESConVerb|ESIndefpron:ESIndefart:ESDefart:ESDemonstr;*|ESVerb|*;
+
+/*		823. Si la civilidad funda la república institucional, entonces no puede ser el mero producto de esta.
+
 968;40;ESConVerb+ESVerbCon;^ESVerb;
+
+/*		968. No mires a la cámara, escucha en todo momento cómo te sientes.
+
 1045;40;ESCon|ESConVerb|ESNo:ESAdvdeg:ESAdv|typeConcept;*|ESVerb|*|*;
 
+/*		1045. La participación en la economía de mercado resulta difícilmente posible.
 /*ADVERB DEGREE OR NONRELEVANT
 
 669;40;ESAdvdegNonrel|ESAdj;ESAdj|ESAdj;
+
+/*		669. Nos muestra totalmente todo aquello que veríamos si fuéramos igualmente sensibles.
+
 670;40;ESAdvdegNonrel;ESNonrel;
 
+/*		670. Colaboraron igualmente en la creación de dos de los iconos más representativos del movimiento.
 /*ADVERBS DEGREE
 
 663;40;ESAdvdeg|ESAdvdeg;ESAdvdeg|+Join;
+
+/*		663. La astronomía observacional estuvo casi totalmente estancada en Europa durante la Edad Media.
+
 672;40;ESAdvdeg|ESAdv;ESAdv|+Join;
+
+/*		672. El centró el objetivo y lanzó varios avisos a navegantes, muy posiblemente a los dos cajeros.
+
 709;40;ESAdvdeg:ESAdvmanner|ESMasmenos;ESMasmenos|+Join;
+
+/*		709. La música está bastante más baja que en el resto del local.
+
 652;40;ESAdvdeg|ESCon;ESAdj|*;
+
+/*		652. Esta vez, ellos se han puesto bastante puristas.
+
 841;40;ESAux|ESPart|ESAdvdeg|ESConVerb;*|*|ESAdj|ESCon;
+
+/*		841. Se ha hecho mucho daño a mi imagen.
+
 842;40;ESAux:ESVerb:ESDe|ESAdvdeg|ESConVerb;*|ESAdj|ESCon;
+
+/*		842. Griegos y fenicios creyeron que esta zona era el Dorado, que había mucho oro y plata. Tenemos mucho aprecio. Esta fue una generación intelectualmente muy aguda, de mucho peso en la historia cultural.
+
 708;40;ESDefart:ESIndefart:ESPrepart|ESAdvdeg|ESConVerb;*|ESAdj|ESCon;
+
+/*		708. En la época la épica podía escribirse también en prosa, y con el precedente en el teatro del poco respeto a los modelos clásicos.
+
 740;40;ESAdvdeg|ESTempBeginEnd;ESTempBeginEnd|+Join;
+
+/*		740. Desde aproximadamente 12 de febrero de 1561.
+
 666;40;ESCon|ESAdvdeg|ESAdj:ESPart|ESAndOrBut|ESAdj:ESPart;ESCon|ESAdj|ESAdj|ESAndOrBut|ESAdj;
+
+/*		666. No le impide mantener una relación "absolutamente estrecha y normalizada" con afiliados.
+
 665;40;ESAux|ESAdvdeg|ESPart;*|ESAdv|ESPartrel;
+
+/*		665. El manejo de la casa estaba totalmente dominado por sus padres.
+
 684;40;ESAux|ESAdvdeg|ESAdj;*|ESAdj|ESAdj;
+
+/*		684. La poesía tanguera tiene la inhabitual característica de ser considerablemente compleja.
+
 707;40;ESCon|ESAdvdeg|ESPart;ESCon|ESAdj|ESCon;
+
+/*		707. Pero a pesar de las limitaciones de este estudio, consideramos que sienta un antecedente en este territorio poco explorado de la interacción de niños bilingües jugando videojuegos.
+
 651;40;ESAdvdeg;ESAdv+ESAdvmanner;
 
+/*		651. Ha caído en menos de 24 horas tanta agua como la prevista para todo el mes.
 /*JOIN ADVERBS WITH INFINITIVES
 
 250;40;ESInf|ESAdvmanner:ESAdv|^ESAdj+^SEnd;^ESInf|+Join|*;to change adverb of degree together with infinitive
+
+/*		250. Y se podría pagar bien si el Gobierno hiciese las cosas bien.
+
 251;40;ESInf|ESMasmenos|ESAdvmanner;^ESInf|+Join|+Join;to change adverb of degree together with infinitive
 
+/*		251. Futuras investigaciones deberán incluir forzosamente un corpus más amplio, a fin de generalizar más ampliamente las tendencias registradas.
 /*JOINS WITH MASMENOS
 
 53;40;ESMasmenos|ESAdvVerb;ESAdv|+Join;
+
+/*		53. Los terrenos que más adelante ocuparán el Palacio Real y la Plaza de Oriente.
+
 52;40;ESMasmenos|ESAuxCon;ESCon|+Join;
+
+/*		52. Pues los más son los que establecen las leyes que se aplican al hombre individual, como tú sostenías hace un momento. Lo más era lienzo hilado por aquí mismo.
+
 54;40;ESMasmenos|ESPart;ESAdj|+Join;
 
+/*		54. Uno de los narcotraficantes más buscados.
 /*QUANTITY: UN DE LAS
 
 895;40;"una":"uno"|"de"|"las":"los":"cada"|typeConcept;ESBeginconcept|+Join|+Join|+Join;
+
+/*		895. Una de las cuatro figuras. A principio de los sesenta, aún en la universidad, fui uno de los instigadores de un manifiesto.
+
 896;40;ESIndefart|"de"|"las":"los"|"de"|typeConcept;ESBeginconcept|+Join|+Join|+Join|+Join;
 
+/*		896. Con este número se inicia un largo y arduo camino para consolidar a la Revista como la revista científica especializada en conservación más importante de la región, y una de las de mayor impacto en el planeta.
 /*NEGATION
 
 252;40;ESNoAdj|ESAdj;ESNoInCon+ESNegation|*;
+
+/*		252. Esta manera de caracterizar la relación entre norma y ley es de especial importancia porque evidencia la condición no-institucional de la civilidad.
+
 253;40;"no-"|ESCon;-ESNoAdj+ESNoInCon+ESNegation|*;to recognise adjectives with negative part as negational entities
+
+/*		253. La libertad como no-dominación.
+
 254;40;ESNoAdj|ESPart;ESNoInCon+ESNegation|ESAdj;to recognise adjectives with negative part as negational entities
+
+/*		254. No tenía ningún sentido del dinero personal, para entendernos, ningún interés por él.
+
 1090;40;ESNoInCon|ESInf+ESmAux|ESInf;*|ESCon|ESCon;
+
+/*		1090. Puede ser el no querer inquietar a la población antes de las Navidades.
+
 1089;40;ESNoInCon|ESInf;*|ESCon;
 
+/*		1089. Ha sido un acierto el no proceder a una reforma revolucionaria.
 /*ADVERB MODAL
 
 701;40;ESLinkingverb|ESAdvmodal;ESLinkingverb|+Join;
 
+/*		701. La tasa de empleo de las mujeres es probablemente la más baja.
 /*ADVERB MANNER
 
 673;40;ESAdv:"nada"|ESAdj;ESAdj-ESNegBegin|*;same as rule 259 to cover subsequent adverbs
+
+/*		673. Aproximadamente 20 millones de años más tarde.
+
 259;40;ESAdv|ESAdj;ESAdj|*;
+
+/*		259. Esta fue una generación intelectualmente muy aguda, de mucho peso en la historia cultural.
+
 715;40;ESCon|ESAdv|ESNo|ESAdj;*|ESAdj|ESNoInCon+ESNegation|*;
+
+/*		715. Una sociedad culturalmente no homogénea.
+
 705;40;ESComma|ESAdvmanner:ESAdvPR|ESPart|^ESCon+^SEnd;ESComma|*|ESPartrel|*;
+
+/*		705. Un acto en el que su viuda, visiblemente afectada, reclamó a las autoridades.
+
 262;40;^ESLinkingverb+^SBegin|ESAdvmanner|ESPart;*|ESAdj|ESAdj;to make adverb of degree followed by participle both Concepts
+
+/*		262. Incluso durante ese período aparentemente bien documentado.
+
 680;40;SBegin|ESAdvmanner|ESPart;*|ESAdv|ESPartrel;
 
+/*		680. Prácticamente agotado el efecto y sofocada la pirotecnia de la última crisis de Gobierno.
 /*MAS,MENOS
 
 20;40;ESCon|ESMasmenos|ESAdj;*|ESCon|ESCon;makes mas-menos part of the Concept after Concept and followed by adjective
+
+/*		20. El precio ha subido a su nivel más alto desde julio de 2008.
+
 729;40;ESMasmenos|ESAdv;ESAdv|+Join;
 
+/*		729. Se mantiene todavía en la penumbra un conjunto de rasgos de la ciencia experimental y, más precisamente, del experimento científico.
 /*BIEN
 
 266;40;ESAndOrBut|ESBien|ESPart;*|ESAdj|ESCon;Bien with past participle is adjective + concept
+
+/*		266. En todos ellos, la morfología de cóndrulos presenta formas redondeadas o semirredondeadas o bien fragmentados, en algunos casos muy difusos y de difícil distinción.
+
 267;40;ESAndOrBut|ESBien;ESAndOrBut|+Join+ESNegStop;
 
+/*		267. Lógicamente, no quedaba claro si esta práctica simplemente retrasaba el debut de los síntomas o bien podía proporcionar una protección permanente y definitiva ante la enfermedad.
 /*2nd TAN
 
 745;40;ESIndefart:ESDefart|ESCon|ESTan|ESPart;*|*|ESAdj|+Join;
+
+/*		745. Un repertorio tan limitado que hace que en los últimos cuarenta años un promedio.
+
 747;40;ESCon:ESConVerb:ESIndefpron|.ESAdj|ESTan|ESAdj;*|*|ESAdj|+Join;
+
+/*		747. Su existencia por sucesos bélicos tan decisivos como la invasión cartaginesa. Cuando te quedas así mirando, no sabes cosas tan elementales que me pones nerviosa.
+
 744;40;ESNo|ESTan|ESAdj;ESNoInCon+ESNegation|ESAdj|+Join;
+
+/*		744. Los mayores de China pero no tan grave como el de BP.
+
 746;40;ESTan|ESAdj|ESCon:ESComma|"que":"como";ESPrep|*|*|ESRelpron;
+
+/*		746. En Buenos Aires guardan tan estrechas similitudes que motiva a la comparación. Sus procesos no son tan objetivos, que no es infalible.
+
 742;40;ESTan|ESAdj:ESIndefpron:ESCon|"que":"como";ESPrep|*|ESRelpron;
+
+/*		742. El miedo es tan grande que la recompensa de 50 millones de pesos por información. Muchísimas especies, tan diversas como murciélagos frutícolas.
+
 741;40;ESTan;ESNonrel;
 
+/*		741. Y ahora mi vida es tan plena y tan fuerte y tan caótica en mi casa.
 /*INFINITIVES: CONCEPT OR VERB
 
 122;40;ESDefart:ESIndefart|ESInf;*|ESCon;makes Concept of 'ser' after article
 
+/*		122. El ser creado por Frankenstein resulta tener una psicología, una interioridad propia. Le describieron como un ser de rostro blanco y barbado.
 /*DEMONSTRATIVE PRONOUN: ADJECTIVAL USE = NonRel
 
 768;40;ESIndefpronPRCon|ESDemonstr|ESIndefpronPR;ESAdj|+Join|+Join;
+
+/*		768. Esa gente que se ha ninguneado, a quien se le ha quitado todo y que sin embargo te aparecen en los expedientes judiciales, en toda esta otra cultura.
+
 915;40;ESDefart:ESDemonstr|ESNo|ESCon:ESPart;ESDefart|^ESCon-ESNegBegin|ESCon;'no' becomes a Concept after article or dem. pronoun
+
+/*		915. Se demuestra la no factibilidad. Queremos transformar esa no sesión en un acontecimiento. Un claro ejemplo serían los cigarrillos en el ambiente carcelario, que serían utilizados incluso por los no fumadores para cambiar por otros bienes.
+
 777;40;ESIndefpronPRCon|ESDemonstr|ESCon:ESAdj;ESAdj|+Join|*;
+
+/*		777. Todos estos recortes no afectarán a los 350 diputados y a los 264 senadores. Todos estos diferentes grupos.
+
 838;40;ESIndefpronPRCon|ESDe|ESDemonstr|ESCon;ESAdj|+Join|+Join|*;
+
+/*		838. Las interesantes rentabilidades de muchas de estas ofertas y las dudas que han sacudido.
+
 761;40;ESDemonstr|ESCon;ESNonrel|*;
+
+/*		761. Las laxas barreras existentes entre esta institución y el exterior.
+
 839;40;ESIndefpronPRCon|ESDe|ESDemonstr|ESAdj:ESCon;ESIndefpronPRCon|+Join|+Join|*;
+
+/*		839. Muchas de estas nuevas características aportaron caracteres más tranquilos.
+
 762;40;ESDemonstr|ESAdj;ESNonrel|*;
+
+/*		762. El indicó que esa variable se debe observar desde varios ángulos.
+
 766;40;ESIndefpronPRCon|ESDemonstr;ESIndefpronPR|+Join;
 
+/*		766. Nos muestra totalmente todo aquello que veríamos si fuéramos igualmente sensibles.
 /*INDEFINITE PRONOUNS: GENERAL
 
 21;40;ESCon+^ESDe|ESIndefpron|ESCon;*|ESBeginconcept|*;makes BeginConcept of indefinite pronoun between two Concepts
 
+/*		21. Cuando no lo son se provocan generalmente confrontaciones pocas veces resueltas, que muchas veces terminan en conflictos.
 /*INDEFINITE PRONOUNS: PATHRELEVANT OR CONCEPT
 
 127;40;ESIndefpron|ESPart;*|ESAdj;makes Concept of participle after indefinite pronoun
+
+/*		127. Pronunciaba unas atinadas y elocuentes palabras ante los procuradores de la Junta.
+
 776;40;ESIndefpronPRCon|ESIndefpronPR:ESIndefpronPRCon;ESIndefpronPRCon|+Join;
+
+/*		776. Como muchos otros extranjeros, acabó trabajando de pescador. Aunque sucintamente, conviene recordar unas pocas cuestiones ocurridas con anterioridad al periodo en estudio, que trascendieron a la década de 1920.
+
 837;40;ESIndefpronPRCon|ESDe|ESDefart|ESIndefpron;ESAdj|+Join|+Join|+Join;
+
+/*		837. Donde permite hacer muchas de las mismas cosas que Office.
+
 775;40;ESIndefpronPRCon|ESDe|ESDefart:ESPosspron|^ESRelpron+^SEnd;ESAdj|+Join|+Join|*;
+
+/*		775. Muchos de los detenidos eran oficiales y miembros de la Fuerza Pública. Aunque sin duda muchos de sus formantes se hallaran presentes.
+
 784;40;ESDefart|ESAdv|ESPart;*|ESAdj|ESCon;
+
+/*		784. Condiciones hasta ahora extrahumanas como las arriba mencionadas.
+
 778;40;ESTodo|ESDefart;ESAdj|+Join;
+
+/*		778. La quinta parte de toda el agua dulce incorporado a los océanos.
+
 813;40;ESIndefpronPRCon|.ESNo|ESAdj;ESAdj|*|*;
+
+/*		813. El sistema analiza automáticamente varias variables, como la gente que le envía al usuario más correos, y los ordena. Algunos "no nativos" de estas comunidades.
+
 785;40;ESIndefpronPRCon|ESAndOrBut|ESAdj:ESNoInCon;ESAdj|*|*;
+
+/*		785. Muchos e importantes estudiosos de las ciencias políticas. Regiones en las que había poca o ninguna luz.
+
 772;40;ESIndefpronPRCon|ESCon:ESEndCon;ESAdj|*;
+
+/*		772. Si la arquitectura es ante todo espacio y luz. Pocas semanas después de la transmisibilidad de humano a humano, la estrategia global de control se centra inicialmente en la contención de los brotes epidémicos.
+
 786;40;ESIndefpronPRCon|ESConVerb;ESAdj|ESCon;
+
+/*		786. Lo único que me ha decepcionado es su sonido, muy poca cosa para un coche como este.
+
 773;40;ESIndefpronPRCon|ESPosspron;ESAdj|ESAdj;
+
+/*		773. "Queríamos ver reflejadas todas nuestras referencias, porque son la causa de nuestro particular estilo".
+
 774;40;ESCon|ESIndefpronPRCon|ESRelpron;*|ESAdj|*;
 
+/*		774. Se establece en Sevilla, primero como proveedor de las galeras reales, y posteriormente, como recaudador de impuestos atrasados, empleos ambos que le acarrearán numerosos problemas y disputas.
 /*ARTICLE -> PERSPRON
 
 966;40;ESDefart:ESNoAdj|ESVerb;ESPerspron-ESNegBegin|*;
+
+/*		966. Si su decisión es que no podemos explicar nuestro voto, la acataré, pero no sin reservas.
+
 1088;40;^ESPrep|ESDefart:ESNoAdj|typeRelation+^typeConcept;*|ESPerspron-ESNegBegin|*;
 
+/*		1088. Los departamentos de Antioquia, Norte de Santander, Santander y los de la Costa Atlántica.
 /*CIERTO
 
 816;40;ESCierto|ESAndOrBut|ESAdj;ESAdj|*|*;
+
+/*		816. De la clase política, de cierta y efectiva opinión pública.
+
 817;40;ESIndefart:ESDefart:ESPrep|ESCon|ESCierto;*|*|ESAdj;
+
+/*		817. No parece tener una consecuencia cierta y una ventaja significativa para las Letras.
+
 820;40;ESIndefart:ESDefart:ESPrep|ESCon|ESAdj|ESCierto|^ESCon+^SEnd;*|*|ESAdj|ESAdj|*;
+
+/*		820. A la inexistencia de datos económicos ciertos se suma un problema de eficacia.
+
 818;40;ESLinkingverb|ESCierto;*|ESAdj;
+
+/*		818. Una cosa es cierta, por documentada.
+
 819;40;ESCierto|ESLinkingverb;ESAdj|*;
 
+/*		819. El resultado es que la distinción entre juicio político y conocimiento cierto es indispensable en el diseño institucional de cualquier democracia representativa.
 /*INDEFINITE PRONOUNS: PATHRELEVANT OR NONRELEVANT
 
 815;40;ESIndefpronPRNR|ESCon:ESAdj:ESIndefpronPR;ESNonrel|*;
+
+/*		815. La embajada muestra cierta preocupación. Y negó cualquier nuevo contacto con la banda. Compensación de las sumas adeudadas al contratista, cobro de la garantía o a cualquier otro medio para obtener el pagor.
+
 814;40;ESIndefpronPRNR;ESIndefpronPR;
 
+/*		814. Una de las claves fue la enseñanza, cierto, y de las más importantes.
 /*SOMETHING/SOMEONE - NO ONE PLUS ADJECTIVE, NO <SER> (NADA) MÁS QUE
 
 770;40;ESAlgo|ESAdj;ESBeginconcept|*;
+
+/*		770. Podemos hallar algo similar. El contacto casual con alguien infectado no constituye riesgo para contraer el mal.
+
 958;40;ESNo|ESLinkingverb|"nada"|ESMasmenos|"que";-ESNegation-ESNegBegin|^ESLinkingverb|Join|Join|ESPrep;
+
+/*		958. Esto no es nada más que un acicate para un mayor esfuerzo, un mejor trabajo y una mayor colaboración.
+
 959;40;ESNo|ESLinkingverb|ESMasmenos|"que";-ESNegation-ESNegBegin|^ESLinkingverb|Join|ESPrep;
+
+/*		959. La democracia no fue más que un mito.
+
 956;40;"nada"|ESMasmenos|"que"|ESInf;*|*|ESPrep|*;
+
+/*		956. No hay nada más que decidir, el tema está ya concluido.
+
 883;40;ESNegPR|ESAdj:ESMasmenos;ESAdj|ESAdj;
 
+/*		883. Nada más abrirles la barrera, los toros salieron pitando por la avenida.
 /*PARTICIPLES - CONCEPT
 
 128;40;ESPosspron:ESPrepart:ESPrep:ESLo|ESPart;*|ESCon;makes Concept of participle
+
+/*		128. La fundación se encarga en la actualidad de la gestión de su legado. Respetamos la decisión, pero ya forma parte del pasado. En determinada parte de su órbita no llega a ocultarlo del todo, dejando una franja anular (eclipse anular). Se cumplió lo anunciado.
+
 109;40;ESDefart:ESIndefart:ESPosspron:ESDemonstr:ESPrepart:ESPrep|ESAdj|ESPart;*|*|ESCon;makes Concept of participle
+
+/*		109. A partir de 1924 la industria textil experimenta una importante caída durante tres años consecutivos. La sociedad pudo haber interpretado su propio pasado. Otro pequeño pescado es la sardina. En el presente estudio se intenta diferenciar la impronta en el relieve del gran Acantilado Costero. La organización se centra en padres en busca de un empleo y ayuda a profesionales cualificados con hijos.
+
 277;40;ESInf+^ESAux|ESPart|ESPrep:ESPrepart:ESDe;*|ESCon|*;makes CONCEPT of past participle after infinitive and before preposition
 
+/*		277. Al llegar a la curva, la manada se estiró y los toros comenzaron a entrar separados en la plaza. Jamás se desarrolla el cuerpo sin la inteligencia, de la misma manera que ésta no ha de cultivarse sin ir acompañada del mejoramiento de aquél.
 /*ADVERBS - CONCEPT
 
 146;40;ESDefart:ESIndefart|ESAdv;*|ESCon;makes Concept of adverb after article
+
+/*		146. La relación con el «afuera» cumple funciones cotidianas que tienden no sólo a optimizar sus condiciones de existencia. Razón por la que se señala que hasta ahora ningún Estado ha podido renunciar a la pena como causación consciente de un mal para garantizar el orden jurídico.
+
 138;40;ESIndefpron+^ESAlgo|ESAdv+^ESAdvmodal;*|ESCon;makes Concept of adverb after indefinite pronoun
 
+/*		138. El ascenso de la burguesía al poder, en algunos casos de forma radical y con exclusividad, y en otros de forma compartida.
 /*NO - CONCEPT
 
 17;40;ESCon|ESNo:"nada"|ESCon;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept if between Concepts
+
+/*		17. Algunas organizaciones simplifican la imputación de los costes generales o de estructura no asignándolos a los centros de costes.
+
 13;40;ESCon|ESNo|ESPart;*|ESNoInCon+ESNegation-ESNegBegin|ESCon;makes 'no' part of the Concept between Concept and past participle which behaves as Concept
+
+/*		13. Los programas de radio y televisión se comunican con personas no admitidas.
+
 69;40;ESCon|ESNo:"nada"|ESAdj;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between Concept and adjective
+
+/*		69. En el transcurso del tiempo la parte visible tiene 4 km más de radio que la parte no visible.
+
 607;40;ESConVerb|ESNo|ESAdj;ESCon|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between ConVerb and adjective
+
+/*		607. La Conselleria de Salut impulsa la realización de las pruebas rápidas y elabora un estudio de estos tests que se hacen entorno no asistencial, al mismo tiempo que recuerda nuevamente la importancia del diagnóstico precoz de esta enfermedad.
+
 608;40;ESConVerb|ESNo|ESCon;ESCon|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between ConVerb and Concept
+
+/*		608. Seguiremos luchando por nuestro reconocimiento como nación, por el respeto y trato no discriminatorio de nuestra lengua y nuestra cultura.
+
 714;40;"no"|ESAdj;ESNoInCon+ESNegation-ESNegBegin|*;
+
+/*		714. Algunos "no nativos" de estas comunidades.
+
 929;40;ESUn:ESDefart:"del"|ESNo:ESNoInCon;*|^ESNoInCon-ESNegBegin;
+
+/*		929. La segunda parte de su pregunta la puedo responder con un no categórico. El consentimiento o el no consentimiento de la víctima no siempre es válido.
+
 975;40;"de"|ESNo|ESCon;*|ESNoInCon+ESNegation-ESNegBegin|*;makes 'no' part of the Concept between 'de' and Concept
 
+/*		975. El Tratado de No Proliferación de Armas Nucleares.
 /*PARTICIPLES - RELATION
 
 671;40;ESAux:ESLinkingverb|.ESAdv:ESAdvPR|ESPart;ESAux|*|ESPartrel;makes Relation of past participle after auxiliary verb (plus adverb)
+
+/*		671. Han sido frecuentemente excluidos.
+
 724;40;ESPartrel|ESAndOrBut|ESAdv|ESPart;*|*|*|ESPartrel;
+
+/*		724. Esto es así porque los criterios de análisis son muy variados y raramente precisados.
+
 179;40;ESAuxCon|ESPart;*|ESPartrel;makes Relation of past participle after ambiguous auxiliary verb which can be Concept
+
+/*		179. En septiembre, cuando espera que el mercado haya mejorado.
+
 659;40;ESmAux|ESInf|ESPart;*|*|ESPartrel;
+
+/*		659. Tráfico de mercancías puede verse seriamente dañado.
+
 180;40;ESmAux2|ESPart;*|ESPartrel;makes Relation of participle after specific modal auxilary verbs
+
+/*		180. Dependencia física: El organismo se vuelve necesitado de las drogas.
+
 1067;40;ESmAux2;^ESmAux;difference between modal auxiliary verbs is not relevant for rest of rules file
+
+/*		1067. Tenemos la obligación de garantizar que no vuelve a repetirse jamás.
+
 33;40;ESCon|ESPart|ESAdv|ESPrep|ESCon;*|ESPartrel|ESRel|*|*;makes Relation of  past participle after Concept and before adverb + preposition + Concept
+
+/*		33. La tortilla, especialmente la de harina, ha sido parte de la dieta de astronautas preparada especialmente para misiones espaciales.
+
 171;40;ESPart|ESPrep:ESComo:ESPrepart+^ESDe;ESPartrel|*;makes Relation of past participle followed by preposition
+
+/*		171. La evaluación neuropsicológica cobrará especial importancia en casos asociados a patologías ligadas a disfunción cerebral. El periodo conocido como de industrialización por sustitución de importaciones.
+
 1046;40;^ESCon|ESPart|ESDe;*|ESPartrel|*;
+
+/*		1046. No obstante, hasta ahora sólo unas 50 personas han recibido dicha formación, que sigue sin ser obligatoria en el seno de la Dirección General encargada de esta ayuda. WRONG. No es la primera vez que vemos vertidos de petróleo, con o sin intención.
+
 1047;40;ESCon|ESPart+ESPreferRel|ESDe;*|ESPartrel|*;
+
+/*		1047. Caminan sin prisa ni sentido, los cuerpos tomados de las manos, las noches, las calles.
+
 87;40;ESPart|ESAdv|ESPrep;ESPartrel|ESRel|*;makes Relation of past participle  before adverb + preposition
+
+/*		87. Por último, este  método de digestión fue utilizado para la mineralización de muestras vegetales en trabajos anteriores y en otros que actualmente se están desarrollando, en nuestro centro de investigación, debido fundamentalmente a su bajo costo y rapidez.
+
 22;40;ESComma|ESPart|ESIndefpron:ESNonrel:ESDefart:ESIndefart;+ESComma|ESPartrel|*;makes Relation of past participle after comma and before indefinite pronoun, article or NonRelevant
+
+/*		22. Esto significa, entonces, que si es verdad que, dadas ciertas condiciones, los seres humanos ejercerán el poder arbitrariamente. El consejo, celebrado el miércoles.
+
 727;40;ESCon|ESAdv|ESPart;*|ESAdj|+Join;
+
+/*		727. El cólera se considera en la actualidad una enfermedad reemergente, así denominadas aquellas afecciones supuestamente controladas.
+
 726;40;ESAdv|ESPart;ESPartrel|+Join;
 
+/*		726. Por ello denominadas, ellas mismas, "parteras", "sanadoras" y "curanderas", respectivamente.
 /*CONCEPT OR VERB - RELATION
 
 129;40;ESPerspron|ESConVerb|ESCon;*|ESVerb|*;makes Relation of ConVerb after personal pronoun and before Concept
+
+/*		129. Espero que esta sea la primera y la última vez que me toque nominarte.
+
 157;40;"que"|ESConVerb;ESRelpron|ESVerb;makes Relation of ConVerb after relative pronoun 'que'
+
+/*		157. Un planeta es un cuerpo sólido celeste que gira alrededor de una estrella y que se hace visible por la luz que refleja.
+
 1043;40;ESRelpron|ESTempBeginEnd|ESConVerb;*|*|ESVerb;
+
+/*		1043. Un agricultor normal, pequeño o grande, que hoy compra piensos no tiene ni una sola posibilidad razonable de saber qué contienen.
+
 824;40;ESRelpron|ESConVerb|ESRelpron:ESComo:ESDefart:ESIndefart;*|ESVerb|*;
+
+/*		824. En septiembre, cuando espera que el mercado haya mejorado.
+
 825;40;ESRelpron|ESCon|ESConVerb|ESComma:ESPrep:SEnd;*|*|ESVerb|*;
+
+/*		825. La entrevista comienza cuando Pablo pregunta, "¿Por qué seguir creyendo?". Esta teoría sostiene que "flamenco" deriva de flamancia, palabra que proviene de "flama" y que en germanía se refiere al temperamento fogoso de los gitanos. En el uso de fondos reservados, ¿cuántas normas violas?
+
 153;40;ESPerspron|ESConVerb;*|ESVerb;makes Relation of ConVerb after personal pronoun
+
+/*		153. Lo que me importa de las primarias de Madrid son dos cosas.
+
 148;40;ESCon|ESAdj|ESConVerb|ESDefart:ESIndefart;*|*|ESVerb|*;makes Relation of ConVerb after Concept + adjective and before article
+
+/*		148. La zona central abarca la cuenca del río. Dotar de poder a las bases populares resulta una ilusión.
+
 4;40;ESConVerb|ESPosspron;ESVerb|*;makes Relation of ConVerb before possessive pronoun
+
+/*		4. Con el tratamiento adecuado se prolonga la vida y se mejora su calidad.
+
 327;40;ESNo:ESRefl|ESConVerb;*|ESVerb;makes Relation of ConVerb after 'no' or reflexive pronoun
+
+/*		327. Su libro no enseña a nadar.
+
 89;40;ESConj|ESConVerb|ESA;*|ESVerb|*;
+
+/*		89. Pero si cuentas a todos una mentira te van a descubrir.
+
 68;40;^ESAdj+^SBegin|ESConVerb|ESInf;*|ESVerb|*;
+
+/*		68. El ser creado por Frankenstein resulta tener una psicología, una interioridad propia.
+
 197;40;ESConVerb|ESIndefart|ESCon;ESVerb|*|*;
+
+/*		197. Pero no se trata de que alcance un mayor nivel de verdad sobre lo real.
+
 200;40;ESConj|ESConVerb|ESDefart:ESIndefart:ESDemonstr:ESIndefpron;*|ESVerb|*;
+
+/*		200. Esta manera de caracterizar la relación entre norma y ley es de especial importancia porque evidencia la condición no-institucional de la civilidad. Puede poseer por el nodo móvil como dirección a largo plazo para su uso solamente mientras que visita una cierta foreing network.
+
 215;40;SBegin|.ESAdv|ESConVerb|ESDefart:ESIndefart:ESNonrel;*|ESRel|ESVerb|*;
+
+/*		215. En realidad gana una. Mejora la recomendación de los centros. Lucía una larga melena con patillas, gabardina, medias y polainas al estilo de los artistas victorianos.
+
 220;40;ESComma|.ESAdv|ESConVerb|ESDefart:ESIndefart;*|ESRel|ESVerb|*;
 
+/*		220. Un reciente estudio, realizado entre septiembre y diciembre de 2008, muestra la realidad religiosa en España.
 /*NADA QUE + INF
 
 960;40;"nada"|"que"|ESInf;*|ESRel|*;
 
+/*		960. La alcaldía capitalina asegura que no tiene nada que ver con el hecho.
 /*MUY, MAS, MENOS
 
 710;40;ESMasmenos|ESAdj;ESAdj|+Join;
 
+/*		710. Anecdótico carácter documental y comunicativo para hacer visible algo infinitamente más potente en él.
 /*RECIPROCAL PRONOUN
 
 648;40;ESPrep:ESDe|ESRecipr;^ESPrep|ESPerspron;
+
+/*		648. Así, 26 veces al año, la Luna pasa alternativamente de uno al otro lado de la órbita terrestre.
+
 649;40;ESRecipr;ESVerb;
 
+/*		649. La historia común se fragua aprendiendo los unos de los otros.
 /*MISCELLANEOUS
 
 300;40;SBegin|ESAndOrBut;*|ESNonrel;to make the conjunction at the beginning of a sentence non-relevant
+
+/*		300. Y hay escenas muy interesantes.
+
 971;40;ESPrep|ESInf;^ESConj|*;
+
+/*		971. Todos los Estados europeos son conocidos en el mundo entero por ser unos polos de atracción turística envidiados por todos.
+
 981;40;ESPrep|"cómo";*|-ESConj2;
+
+/*		981. Pues no existe ni un solo documento sobre cómo se pueden reciclar las lámparas trituradas.
+
 1056;40;ESNo|.ESRefl|typeRelation|"solo":"sólo":"solamente"|^SEnd+^ESPunctuation|*^"sino también"+^"sino que"+^"sino"|"sino también":"sino que":"sino";ESAdv-ESNegation-ESNegBegin|*|*|ESAdv-ESAdvstruct-ESNonrel|*|*|*;
+
+/*		1056. Frente a ellos, expertos en educación defienden que la escuela no es solo lugar de transmisión de conocimientos, sino también un espacio clave para la socialización.
+
 991;40;ESNo|typeRelation|"solo":"sólo":"solamente";*|*|ESAdv-ESAdvstruct-ESNonrel;
+
+/*		991. Frente a ellos, expertos en educación defienden que la escuela no es solo lugar de transmisión de conocimientos.
+
 1057;40;ESNo|ESRefl|typeRelation|"solo":"sólo":"solamente";*|*|*|ESAdv-ESAdvstruct-ESNonrel;
 
+/*		1057. No se trata sólo de la comprensión de lo que se acordó.
 /*LABELS DEFAULTS AND CLEAN-UP
 
 767;40;ESIndefpronPRCon:ESIndefpronPR;ESIndefpronPR;
+
+/*		767. Le agradezco todo lo que ha hecho.
+
 1080;40;ESmAux|ESConj:ESRelpron;ESVerb|*;
+
+/*		1080. No queremos que esto se convierta en un problema, ni queremos que conste como punto formal del orden del día.
+
 204;40;ESVerb;ESVerb;to remove all other labels than Verb
+
+/*		204. Estos grupos compartieron ideas similares.
+
 650;40;ESInf;ESInf;to remove all other labels than infintive
+
+/*		650. Él iba tomando sus notas para articular su respuesta.
+
 301;40;ESAdv;ESAdv;to remove all other labels than adverb
+
+/*		301. Ha durado más de lo que se pensaba.
+
 850;40;ESEndCon;ESEndCon;to remove all other labels than endconcept, should be BEFORE r737
+
+/*		850. El pierde de lunes a viernes 328.000 oyentes.
+
 737;40;ESCon;ESCon;to remove all other labels than Concept
+
+/*		737. La activista.
+
 869;40;ESAdj;ESAdj-ESNegBegin;to remove all other labels than adjective
+
+/*		869. El campo de acción de una ONG puede ser local, nacional o internacional.
+
 1015;40;ESConVerb;ESCon;to make the remaining ConVerbs act as concepts
+
+/*		1015. Riñón derecho con quiste parapiélico sin hidronefrosis o lesiones focales.
+
 241;40;ESComma;+ESPunctuation;to add Punctuation label to comma for next phases
+
+/*		241. Los «relojes blandos», que habían aparecido en 1931, fueron interpretados como una referencia a la teoría de la relatividad de Einstein, y fueron supuestamente creados tras la observación de unos pedazos de camembert expuestos al sol.
+
 844;40;ESPerspron;ESPerspron;to remove all other labels than personal pronoun
+
+/*		844. Ha durado más de lo que se pensaba.
+
 846;40;ESConIfCap;-ESConIfCap;
+
+/*		846. El último momento a aceptar el formato.
+
 1060;40;ESAuxCon;^ESAux;treat default Auxcon as Aux
 
+/*		1060. El teléfono apenas si tiene que ver con lo que era.
 /*PHASE 60: DETECT ENUMERATIONS
 /*=============================
 
 982;60;*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESAndOrBut:"ni"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
+
+/*		982. No creo haber trabajado jamás bajo un presidente que fuese mejor, más competente, más firme y más cortés.
+
 983;60;*ESCon:ESAdj|ESComma|*ESCon:ESAdj|ESAndOrBut:"ni"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
+
+/*		983. Establecer categorías de carne de vacuno como novillo, buey o vaquilla no contribuirá en nada a disipar los temores del consumidor.
+
 993;60;*ESCon:ESAdj+^ESList|ESComma|*ESCon:ESAdj+ESList;+ESList|+ESList|*;for longer enumerations
+
+/*		993. La Comisión de Cultura, Juventud, Educación, Medios de Comunicación y Deporte fue notificada del acuerdo apenas pocas semanas antes del inicio de las negociaciones.
+
 994;60;*ESCon:ESAdj+^ESList|ESComma|*ESCon:ESAdj+ESList;+ESList|+ESList|*;for longer enumerations
+
+/*		994. 803 estudiantes de 29 colegios de Fornelos, Vila de Cruces, Cotobade, Lalín, Forcarei, Agolada, Dozón, A Cañiza y Rodeiro.
+
 1014;60;*ESCon:ESAdj+^ESList|ESAndOrBut:"ni"|*ESCon:ESAdj|SEnd;+ESList|+ESList-ESNegStop|+ESList|*;
+
+/*		1014. Riñón derecho con quiste parapiélico sin hidronefrosis o lesiones focales.
+
 989;60;ESDefart|*ESCon:ESAdj|ESComma|ESDefart|*ESCon:ESAdj|ESComma|ESDefart|*ESCon:ESAdj|ESAndOrBut:"ni"|ESDefart|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		989. La arquitectura no son los edificios, sino cómo los soportes materiales, las plantas, los animales y los usuarios se relacionan entre ellos creando situaciones deseadas.
+
 984;60;ESDefart|*ESCon:ESAdj|ESComma|ESDefart|*ESCon:ESAdj|ESAndOrBut:"ni"|ESDefart|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		984. Su violación, por tanto, jamás podrá excusarse con referencias a la religión, la cultura o las tradiciones.
+
 988;60;ESDefart|*ESCon:ESAdj|ESComma|ESDefart|*ESCon:ESAdj|ESComma|ESAndOrBut:"ni"|ESDefart|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		988. El sotobosque dominante está compuesto por especies leñosas de tipo espinoso y aromático: especies como el romero, el tomillo, y la jara son muy típicas de Andalucía.
+
 995;60;ESDefart|*ESCon:ESAdj+^ESList|ESComma|ESDefart+ESList|*ESCon:ESAdj+ESList;+ESList|+ESList|+ESList|*|*;for longer enumerations
+
+/*		995. A partir de la observación, el olfato, la palpación, la percusión y la auscultación.
+
 985;60;ESIndefart|*ESCon:ESAdj|ESComma|ESIndefart|*ESCon:ESAdj|ESAndOrBut|ESIndefart:"ni"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		985. Allí construyó un hospital, una panadería, una armería, una zapatería y una talabartería para crear una infraestructura industrial de apoyo.
+
 996;60;ESIndefart|*ESCon:ESAdj+^ESList|ESComma|ESIndefart+ESList|*ESCon:ESAdj+ESList;+ESList|+ESList|+ESList|*|*;for longer enumerations
+
+/*		996. Allí construyó un hospital, una panadería, una armería, una zapatería y una talabartería para crear una infraestructura industrial de apoyo.
+
 986;60;ESPosspron|*ESCon:ESAdj|ESComma|ESPosspron|*ESCon:ESAdj|ESAndOrBut:"ni"|ESPosspron|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		986. En toda su área de expansión la especie ha sido desde siempre explotada por su carne, sus huevos, sus plumas, su piel y su aceite con diversas aplicaciones.
+
 997;60;ESPosspron|*ESCon:ESAdj+^ESList|ESComma|ESPosspron+ESList|*ESCon:ESAdj+ESList;+ESList|+ESList|+ESList|*|*;for longer enumerations
+
+/*		997. En toda su área de expansión la especie ha sido desde siempre explotada por su carne, sus huevos, sus plumas, su piel y su aceite con diversas aplicaciones.
+
 1020;60;"de":"del"|*ESCon:ESAdj+^ESList|ESComma|"de":"del"|*ESCon:ESAdj|ESComma|"de":"del"|*ESCon:ESAdj|ESAndOrBut:"ni"|"de":"del"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		1020. Años de ojeo, de becas, de educación y de mimo no se reemplazan por fichajes apresurados entre el oleaje del mercado.
+
 1021;60;"de":"del"|*ESCon:ESAdj+^ESList|ESComma|"de":"del"|*ESCon:ESAdj|ESAndOrBut:"ni"|"de":"del"|*ESCon:ESAdj;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		1021. Para valorar la consecución de los objetivos se han elaborado indicadores de cobertura, de proceso y de resultados.
+
 1013;60;"de":"del"|*ESCon:ESAdj+^ESList|ESAndOrBut:"ni"|"de":"del"|*ESCon:ESAdj;+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		1013. Nunca se ha demostrado que eso sea posible y la opinión técnica de los ingenieros que han participado en el diseño del microchip y del fabricante es que eso nunca será fácil o ni siquiera posible.
+
 1058;60;ESDefart|*ESCon:ESAdj|ESAndOrBut|ESDefart|ESCon:ESAdj;+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		1058. Si no habrá ante todo una simplificación administrativa, difícilmente se podrán alcanzar los objetivos comunitarios de reformas inspiradas en la eficacia y la concentración.
+
 1062;60;ESIndefart|*ESCon:ESAdj|ESAndOrBut|ESIndefart|ESCon:ESAdj;+ESList|+ESList|+ESList-ESNegStop|+ESList|+ESList;
+
+/*		1062. Efectivamente, la reglamentación comunitaria no debe en ningún caso suponer un freno o un obstáculo para los Estados miembros que deseen proporcionar a sus habitantes una protección más exigente.
+
 1070;60;*ESRefl:ESInf|ESComma|*ESRefl:ESInf|ESComma|*ESRefl:ESInf|ESAndOrBut|ESRefl:ESInf;+ESList|+ESList|+ESList|+ESList|+ESList|+ESList-ESNegStop|+ESList;
+
+/*		1070. Por sus propiedades de rigidez y absorción de la humedad, la hoja de diario es también un recurso útil a la hora de limpiar, envolver, aislar y embalar.
+
 1071;60;*ESRefl:ESInf|ESComma:ESAndOrBut|*ESRefl:ESInf|ESAndOrBut|*ESRefl:ESInf;+ESList|+ESList-ESNegStop|+ESList|+ESList-ESNegStop|+ESList;
+
+/*		1071. Todo se resumió en una rutina demoledora de comer, dormir y correr.
+
 1072;60;*ESRefl:ESInf|ESAndOrBut|*ESRefl:ESInf;+ESList|+ESList-ESNegStop|+ESList;
 
+/*		1072. No se debe dramatizar y atribuirle mayor importancia de la que tiene.
 /*PHASE 70: NEGATION
 /*==================
 /*PREPARATION
 
 1040;70;ESNo2+^ESAdj;^ESNo+ESNegBegin;
 
+/*		1040. Eso difícilmente constituye una cuestión de orden.
 /* O NO with or without negation/*
 
 1033;70;"si":"sí"|*^"o"|"o"|"no"|SEnd;*|*|ESAdvstruct|Join|*;make 'o no' NO at the end of a sentence when 'si' or 'sí' precedes
+
+/*		1033. Dicha información les proporciona una auténtica elección sobre si se deciden a trabajar en un país extranjero o no.
+
 1034;70;"o"|"no"|SEnd:ESPunctuation:ESIndefart:ESDefart;+ESBeginrel|*|+ESNegStop;preliminary rule: avoid expansion to the left within relation
+
+/*		1034. La dirección que vaya a tomar depende que pueda seguir avanzando o no.
+
 1039;70;ESVerb:ESAux:ESInf:ESPartrel:ESColon|"no"|SEnd;*|-ESNo+ESNoInCon-ESNegBegin|*;'no' as opposite of 'sí' at the end of a sentence
 
+/*		1039. Dije no.
 /* NO x SINO inf without negation/*
 
 1061;70;"no"|ESVerb:ESAux:ESmAux|"sino"|^ESVerb;-ESNegation-ESNegBegin|*|*|*;
 
+/*		1061. El entrenador lo rechaza y le confi esa que no es sino el aguador.
 /* No negation in questions without interrogative
 
 1096;70;SBegin:ESPunctuation|"¿"|ESNo;*|*|-ESNegation-ESNegBegin;
 
+/*		1096. ¿No se están produciendo también retrasos?
 /*ADD NEGATIONSTOPPERS
 /* based on punctuation
 
 961;70;ESColon:ESHyphen|^ESNegation+^SEnd;*|+ESNegStop;
+
+/*		961. Apenas podemos imaginar el efecto de cualquier tipo de susto nuclear - sólo un susto - para estos sectores de nuestra economía.
+
 998;70;ESPunctuation|ESPunctuation|^ESNegation+^ESNegBegin;*|*|+ESNegStop;
+
+/*		998. El primer avión diseñado para volar día y noche sin combustible no aterrizó hoy a las nueve de la mañana en el aeropuerto de Payerne (Suiza), tras completar con éxito su primer vuelo nocturno.
+
 1048;70;typeConcept|ESPunctuation+^ESList|^ESNegation+^ESNegBegin;*|*|+ESNegStop;
+
+/*		1048. La innovación se configura como un factor endógeno a la empresa al que se le atribuyen propiedades dinámicas, no es estable en el tiempo pues se desarrolla bajo unas determinadas trayectorias, articuladas en torno a diversas formas de innovación y siguiendo unas dinámicas de cambio particulares.
+
 1094;70;^ESPunctuation|typePathRelevant+^ESNegation|ESPunctuation+^ESList|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop;
+
+/*		1094. No quiero detenerme ahora, señor ponente, en el detalle de mis ideas sobre los puntos generales que esta Asamblea ya ha suscrito. NOT. En cuanto al tercero, se trata de la integración más necesaria y urgente: el hecho de que el tabaco no sea, entretanto, subvencionado por hectárea, sino por cantidad producida.
+
 611;70;ESNoAdj|ESPunctuation|ESVerb;^ESAdj|ESPunctuation|^ESVerb+ESNegStop;
+
+/*		611. Cuando digo ninguno, digo "si".
+
 979;70;typeRelation:typeConcept:typePathRelevant|ESPunctuation+^ESList|ESPosspron:ESIndefpronPR;*|*|+ESNegStop;
+
+/*		979. Un Libro Blanco, por definición, no está hecho para tomar o dejar, su función es la de provocar respuestas y este Libro Blanco lo ha conseguido.
+
 987;70;typeRelation:typeConcept:typePathRelevant|ESPunctuation+^ESList|ESDefart:ESIndefart|^ESNegation+^ESNegBegin;*|*|+ESNegStop|+ESNegStop;
+
+/*		987. Como no podía ser de otra forma, el supuesto avistamiento despertó de su letargo a los ufólogos.
+
 609;70;ESInf:ESVerb|ESPunctuation+^ESList|ESAux:ESPartrel;*|*|+ESNegStop;
+
+/*		609. Cómo, a veces, hasta el 80 por ciento del dinero no se invertía, creándose, en ocasiones, una enorme bolsa de dinero.
+
 601;70;ESVerb|ESPunctuation|ESCon;^ESVerb|ESPunctuation|^ESCon+ESNegStop;
+
+/*		601. Suele resumirse en la expresión el rey reina, pero no gobierna (expresión debida a A. T.).
+
 965;70;ESPunctuation+^ESList|ESPerspron:ESDemonstr:ESRefl:ESComo+^ESNegation+^ESNegBegin|^ESNegation+^ESNegBegin;*|+ESNegStop|*;
+
+/*		965. Pero su gran logro ha sido demostrar "que la energía solar no tiene límites", ni siquiera la noche, como explicó el ingeniero P. L..
+
 992;70;ESPunctuation+^ESList|ESDefart+^ESNegation+^ESNegBegin|^ESNegation+^ESNegBegin|*^ESVerb+^ESAux+^ESLinkingverb+^ESPunctuation+^SEnd|ESVerb:ESAux:ESLinkingverb;*|+ESNegStop|+ESNegStop|*|*;special case of r965: add NegStop on lexrep after nonrelevant Defart
+
+/*		992. El no se siente tocado electoralmente, el objetivo del partido es descabalgar al otro partido del gobierno.
+
 978;70;ESPunctuation|ESmAux:ESAux+^ESNegation+^ESNegBegin|^ESNegation+^ESNegBegin;*|+ESNegStop|*;variant of r965
+
+/*		978. Si no, deben abandonar el país. WRONG. Pero quiero decirles a sus Señorías que, en ningún caso, podemos presentar la administración comunitaria como especialmente cargada de estos defectos.
+
 976;70;ESPunctuation|ESAndOrBut:ESPrep+^ESNegation+^ESNegBegin+^ESList;*|+ESNegStop;
 
+/*		976. Porque dicho evento ya no supone una amenaza, o bien porque algunas modalidades de representación que actualmente se proponen liman dicho potencial.
 /* rules for 'sin'
 
 1064;70;ESConj+ESNegation|"dudar":"dudarlo"|^SEnd;*|*|+ESNegStop;
+
+/*		1064. Votaremos sin dudar a favor de este texto.
+
 1001;70;ESPrep:ESConj+ESNegation|*^ESPunctuation+^ESNegation|ESPunctuation|^ESList;*|+ESAfterSin|*|+ESNegStop;
+
+/*		1001. Estamos muy dolidos, sin palabras, fue lo único que dijo uno de ellos.
+
 1002;70;ESPrep+ESNegation|*typeConcept+^ESNegation|ESVerb:ESAux:ESmAux:ESInf:ESPartrel:ESRefl;*|+ESAfterSin|+ESNegStop;
+
+/*		1002. Además, el jugador del equipo con pelota tiende a divertirse, mientras que el jugador del equipo sin pelota tiende a impacientarse.
+
 1017;70;ESPrep+ESNegation|*typeConcept:typeBeginConcept|ESPosspron:ESPerspron:ESDefart:ESIndefart:ESComo;*|+ESAfterSin|+ESNegStop;extension of r1002
+
+/*		1017. Además, no podía quedar sin comentario la participación de la sociedad.
+
 1011;70;ESPrep+ESNegation|ESIndefart:ESDefart:ESPosspron|*typeConcept+^ESNegation|ESVerb:ESAux:ESmAux:ESInf:ESPartrel:ESRefl:ESPosspron:ESComo;*|+ESAfterSin|+ESAfterSin|+ESNegStop;variant of r1002
+
+/*		1011. Sin embargo, los intentos de fijar población y de atraer nuevos habitantes a los municipios se han llevado a cabo, en ocasiones, sin las herramientas apropiadas para garantizar el éxito de las iniciativas.
+
 1027;70;ESPrep+ESNegation|ESIndefart:ESDefart:ESPosspron|*typeConcept+^ESNegation|ESDefart;*|+ESAfterSin|+ESAfterSin|+ESNegStop;variant of r1002
+
+/*		1027. En pocas palabras: sin los impuestos el estado no podría funcionar.
+
 1007;70;ESPrep+ESNegation|*typeConcept+^ESNegation|ESPrep+^"de"+^"para";*|+ESAfterSin|+ESNegStop;broadening r1002
+
+/*		1007. Los avestruces se reproducen sin problemas en cautividad, cuando están bien alimentados y mantenidos.
+
 1012;70;typeRelation|ESPrep+ESNegation|ESIndefart:ESDefart:ESPosspron|*typeConcept+^ESNegation|ESPrep+^"de"+^"para";*|*|+ESAfterSin|+ESAfterSin|+ESNegStop;variant of r1007
+
+/*		1012. Acudieron sin sus maridos a la boda.
+
 1008;70;typeRelation+^ESPrep|ESPrep+ESNegation|*typeConcept+^ESNegation|ESPrepart;*|*|+ESAfterSin|+ESNegStop;
+
+/*		1008. Todos los tiros libres son directos y sin barrera del equipo rival.
+
 1003;70;ESPrep+ESNegation|*typeRelation|*typeConcept|ESVerb:ESAux:ESInf:ESPartrel:ESPosspron:"en":ESComo;*|*|+ESAfterSin|+ESNegStop;
+
+/*		1003. Evolución: Ha permanecido en fototerapia durante 48 horas sin haber presentado incidencias significativas siendo la bilirrubina al alta de 8,70 mg/dl.
+
 1004;70;ESConj+ESNegation|*ESInf|ESPrep:ESDefart:ESIndefart|*typeConcept|ESVerb:ESAux:ESmAux:ESInf:ESPartrel:ESRefl;*|*|*|+ESAfterSin|+ESNegStop;
+
+/*		1004. Sin permitir a Nicaragua hablar.
+
 1009;70;ESConj+ESNegation|*ESInf|ESPrep:ESDefart:ESIndefart|*typeConcept|ESPosspron:"en":ESComo;*|*|*|+ESAfterSin|+ESNegStop;extension of r1004
+
+/*		1009. El huracán pasó sin destruir los campamentos en los alrededores de Puerto Príncipe, que albergan alrededor de 1,3 millones de sobrevivientes del terremoto de enero.
+
 1005;70;ESConj+ESNegation|*ESInf|*typeConcept|ESVerb:ESAux:ESmAux:ESInf:ESPartrel:ESRefl;*|*|+ESAfterSin|+ESNegStop;
+
+/*		1005. Un receptor que permite contener 12 muestras por vez y proteger la cavidad del horno, frente a fugas accidentales, que sin ser demasiado frecuentes se pueden producir.
+
 1010;70;ESConj+ESNegation|*ESInf|*typeConcept|ESPosspron:"en":ESComo;*|*|+ESAfterSin|+ESNegStop;extension of r1005
+
+/*		1010. El problema para el Gobierno es cómo transmitir este mensaje a los ciudadanos sin parecer alarmista en un tema que pocos políticos se atreven a discutir en público.
+
 1000;70;ESPrep+ESNegation|*^ESConj+^ESNegation|ESConj+^ESNegation;*|*|+ESNegStop;
+
+/*		1000. Si no se comenten errores muy grandes, como por ejemplo frenar con el volante girado o levantar el pie del acelerador sin miramientos en medio de un giro, es relativamente fácil ir más o menos rápido.
+
 1036;70;ESNegation|*^ESPunctuation|ESPunctuation|ESVerb+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop|*;
 
+/*		1036. Casi sin dinero, busca alojamiento en la pensión más barata posible.
 /* NegStop on conjunctions
 
 950;70;ESNegation|*^ESPunctuation|ESPunctuation|ESConj:ESRelpron+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop|*;
+
+/*		950. Asimismo, en la respuesta se afirmaba que un impuesto de este tipo, aplicado a nivel comunitario, difícilmente sería compatible con el apartado 2 del artículo 57 del Tratado CE, que limita la posibilidad de adoptar medidas restrictivas a un número reducido de ámbitos.
+
 1063;70;ESNegation|^ESConj|*^ESConj+^ESRelpron|ESConj+^ESNegation+^ESRelpron|ESInf|^ESPunctuation+^SEnd;*|*|*|+ESNegStop+ESBeginrel-ESA-ESEn-ESDe+ESDummy|*|*;stop negation before infinitive clause
+
+/*		1063. La defensa de la chica no es suficiente para librar a los futbolistas de posibles penas.
+
 1091;70;ESNegBegin|^ESConj2|*^ESConj2+^ESRelpron+^ESNegStop+^ESNegBegin|ESConj2+^ESNegation|^ESNegation;*|*|*|+ESNegStop+ESBeginrel|*;
+
+/*		1091. Tenemos que convencer a los que viven y trabajan en esas islas vulnerables y en esas penínsulas remotas de que no tienen nada que temer si se introduce un grado de competencia en el proceso de adjudicación de esos contratos.
+
 1066;70;ESNegBegin|ESBeginrel+ESDummy;*|-ESBeginrel-ESNegStop;finetuning result of r1063
+
+/*		1066. Establecer categorías de carne de vacuno como novillo, buey o vaquilla no contribuirá en nada a disipar los temores del consumidor.
+
 1068;70;ESComo|ESBeginrel+ESDummy;+ESBeginrel+ESDummy|-ESBeginrel-ESDummy;finetuning result of r1063
+
+/*		1068. En un futuro lejano los eclipses totales de Sol dejen de producirse al no tener la Luna suficiente tamaño como para tapar el disco solar.
+
 1065;70;ESVerb:ESAux:ESPartrel:ESInf:ESmAux|ESBeginrel+ESDummy;*|-ESBeginrel-ESNegStop;finetuning result of r1063
+
+/*		1065. No estoy contento, no voy a responder a lo que ha pasado.
+
 951;70;ESNegation+^ESNegPR|ESVerb|ESConj2:ESRelpron+^ESNegation|^ESNegation+^ESNegBegin;*|*|+ESNegStop+ESBeginrel|*;
+
+/*		951. No concretan si se trata de una fusión fría o real, ni tampoco ponen fecha.
+
 954;70;ESNegation+^ESNegPR|.ESRefl|ESAux|ESPartrel|ESRelpron+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|*|+ESNegStop+ESBeginrel|*;
+
+/*		954. Por el momento no han confirmado que pondrán una API abierta a disposición de los usuarios y ni posibles fechas. Nunca se ha demostrado que eso sea posible.
+
 952;70;ESNegation+^ESNegPR|ESPerspron:ESRefl|ESVerb:ESAux|ESRelpron+^ESNegation|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop+ESBeginrel|*;
+
+/*		952. No me extraña que se haya marchado.
+
 977;70;ESNegation+^ESNegPR|*^ESConj2+^ESNegation+^ESNegStop|ESConj2+^ESNegation|^ESNegation;*|*|+ESNegStop+ESBeginrel|*;
+
+/*		977. No sé si es la ultima oportunidad, pero sí una de las últimas.
+
 957;70;ESNegation|*^ESInf+^ESRelpron+^ESNegPR|ESInf|ESRelpron+^ESNegation+^ESNegStop|^ESNegation+^ESNegBegin;*|*|*|+ESNegStop+ESBeginrel|*;
+
+/*		957. Pero les dejó con la miel en los labios, porque a partir de ahí, no quiso aclarar cuál era esa decisión.
+
 1038;70;ESVerb:ESInf:ESPartrel+^ESNegation|ESRelpron|ESNegation+^ESNegPR;*|+ESBeginrel|*;
+
+/*		1038. Me pareció que no se había examinado nunca hasta la fecha.
+
 1041;70;typeRelation+^ESNegation|ESConj2|typeRelation+ESNegation;*|+ESBeginrel|*;
+
+/*		1041. Se trata de un país en el que viven unas 300 tribus, de las cuales varias están totalmente aisladas porque apenas existen vías de comunicación.
+
 1049;70;^ESConj+^ESAux|ESConj+ESNegation;*|+ESBeginrel;
+
+/*		1049. Hay nada que hacer allí», dijo sin descartar la posibilidad de volver a Francia.
+
 1042;70;^ESNegation+^ESAndOrBut|"y"|ESBeginrel:ESNegation+^ESNegPR;*|+ESBeginrel|-ESBeginrel;correction of r1041
+
+/*		1042. Pese a la herida, siguió corriendo y no fue hasta llegar a la calle y encontrarse con la familia cuando fue consciente de lo que le había ocurrido.
+
 1069;70;ESNegation|*^ESAndOrBut+^ESNegStop|ESAndOrBut+ESNegStop;*|*|+ESBeginrel;
+
+/*		1069. No quería cambiarse de ropa, no quería lavarse y finalmente, su padre decidió a encerrarla.
+
 953;70;ESNegation|*^ESRelpron+^ESNegPR+^ESColon|ESRelpron+^ESNegation+^ESNegStop|^ESNegation+^ESNegBegin;*|*|+ESNegStop|*;
+
+/*		953. Este Parlamento no cumple la legislación de sanidad y seguridad que en realidad ha aprobado.
+
 1093;70;ESNegation|"lo":ESDemonstr|"que"+ESNegStop;*|*|-ESNegStop;correction of output of previous rules
+
+/*		1093. Una de las reglas del periodismo dice que uno no debe contar lo que le pasó en una circunstancia determinada --en un taxi, en un autobús, en la vida cotidiana-- a no ser que lo que le ocurrió resulte algo extraordinario.
+
 1092;70;"lo":ESDemonstr|"que"+ESNegStop|ESInf;*|-ESNegStop|*;correction of output of previous rules
 
+/*		1092. No tienen nada a lo que objetar.
 /* detect end-of-phrase without punctuation or conjunction
 
 1081;70;ESNegation|*^ESInf+^ESPunctuation|ESInf|ESVerb:ESAux:ESmAux;*|*|*|+ESNegStop+ESBeginrel;
+
+/*		1081. A lo que ya no puedo yo comprometerme es a lo que entraña su mención a la tarea legislativa en el ámbito de la seguridad social.
+
 1097;70;typeRelation+^ESPrep|ESPrep+ESNegStop|^"lo";*|+ESBeginrel|*;
 
+/*		1097. Votaremos sin dudarlo a favor del informe del Sr. D..
 /* correct (position of) NegStop
 
 1006;70;ESNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept;*|+ESNegStop;move NegStop from nonrelevant to next lexrep
+
+/*		1006. Por el contrario, la suspensión me parece rígida y no es cómoda, algo normal en vehículos de este tipo.
+
 1055;70;ESNegStop+^typeConcept+^typeRelation+^typePathRelevant|*^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept;*|*|+ESNegStop;move NegStop from nonrelevant to next lexrep
+
+/*		1055. Apenas podemos imaginar el efecto de cualquier tipo de susto nuclear - sólo un susto - para estos sectores de nuestra economía.
+
 321;70;ESAdj|ESAndOrBut|ESAdj;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two adjectives
+
+/*		321. Especialización, comunidades verticales, contenidos específicos, enfoques locales (que no implican un corsé geográfico o profesional, ni un enfoque limitado, sino un conocimiento profundo de los candidatos).
+
 308;70;ESCon|ESAndOrBut|ESCon;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two concepts
+
+/*		308. Tras analizar en profundidad la palanca de mando de 'flaps'/'slats', el panel central de instrumentos de la aeronave , los componentes electrónicos y el comportamiento del avión, no se han constatado "evidencias o indicios de anomalías".
+
 322;70;ESPart|ESAndOrBut|ESPart;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between two present participles
+
+/*		322. Liberacin de material desde la contencin primaria no planificada o controlada.
+
 323;70;ESCon|ESAndOrBut|ESAdj;*|-ESNegStop|*;to NOT make AndOrBut a negationstopper between Concept and adjective
 
+/*		323. Nosotros no hemos tenido catedráticos de Universidad en inteligencia o altos funcionarios, como ha ocurrido siempre en el Reino Unido.
 /*INTERMEDIATE PREPARATIONS
 
 612;70;ESAdj;^ESCon;
+
+/*		612. Pronunciaba unas atinadas y elocuentes palabras ante los procuradores de la Junta.
+
 1037;70;ESPart;+ESCon;make rules for adjectives also work for participles that are used as adjectives
 
+/*		1037. El proyecto de directiva presentado apenas plantea problemas.
 /*EXPANSION TO THE LEFT
 
 1030;70;^ESPrep+^ESPrepart+^ESPerspron+^ESDemonstr|ESPerspron:ESDemonstr:ESIndefpronPR|ESNo+ESNegation;*|+ESNegBegin|*;
+
+/*		1030. Nosotros no perseguimos delincuentes. Esto no existe.
+
 1018;70;*ESCon+^ESNegBegin|ESNo+ESNegation;+ESNegBegin|*;
+
+/*		1018. La atleta implicada en la Operación no ha entrado por la puerta principal.
+
 606;70;*ESCon|ESRelpron|ESNo+ESNegation;+ESNegBegin|ESRelpron|*;
+
+/*		606. El portavoz le ha pedido a las autoridades que "no pierda el tiempo" hablando con el presidente.
+
 309;70;ESCon|ESAndOrBut|*ESCon|ESNo+ESNegation;+ESNegBegin|ESAndOrBut|^ESCon|*;
+
+/*		309. El embalsamamiento será obligatorio cuando la inhumación o cremación no pueda realizarse antes de las 72 horas desde el momento del fallecimiento.
+
 1022;70;*ESCon:ESDe:ESDefart:ESPosspron:ESIndefpronPR|ESNo+ESNegation;+ESNegBegin|*;
+
+/*		1022. A este bajo número de priori no parecía la más adecuada para cubrir la demanda.
+
 1025;70;*ESCon+ESNegBegin+^ESNegation+^ESAfterSin|ESDefart:ESPosspron+ESNegBegin;-ESNegBegin+ESNegStop|*;restriction on r1022
+
+/*		1025. En éste proceso de decisión de compra los consumidores nunca tienen a su disposición la totalidad de la información requerida.
+
 1026;70;*ESDe:ESDefart:ESPosspron:ESCon+ESNegBegin|ESCon+ESNegStop;-ESNegBegin|*;
+
+/*		1026. En el juego el material no es indispensable.
+
 1086;70;ESCon|ESPrep+ESNegation;+ESNegBegin|*;
+
+/*		1086. Por el antecedente de edad materna avanzada se realiza amniocentesis citogenética sin complicaciones.
+
 1019;70;*ESList+^ESNegBegin|ESList+ESNegBegin+^ESNegation;+ESNegBegin|*;
 
+/*		1019. En segundo lugar, se trata de un proceso al que la industria cultural y los medios de difusión masiva no han permanecido ajenos. NOT. Está claro que hay dos sistemas: uno en el Mar del Norte, el No Special Fee System, y el sistema vigente en el resto de los puertos.
 /* prepositional phrase not included in left expansion
 
 1023;70;ESPrep:ESPrepart:ESComo+^ESNegation|*ESCon:ESDefart:ESPosspron:ESIndefart:ESIndefpronPR:ESDe+^ESNegStop|ESNegation;-ESNegBegin|-ESNegBegin|*;
+
+/*		1023. La pregunta del estimado diputado nunca le ha sido formulada al Consejo.
+
 1074;70;ESPrep:ESPrepart:ESComo+^ESNegation|ESNonrel|*ESCon+^ESNegStop|ESNegation;-ESNegBegin|-ESNegBegin|-ESNegBegin|*;extension of r1023
+
+/*		1074. Esta ley les exige a partir de este momento no emitir programas o imágenes en las que los presentadores o colaboradores fumen o publiciten tabaco.
+
 1050;70;ESPrep:ESPrepart:ESComo+^ESNegation|*ESCon:ESDefart:ESPosspron:ESDe+^ESNegStop|ESRelpron;*|-ESNegBegin|*;
+
+/*		1050. Me gustaría pedirle al señor que nunca más vuelva a comentar una propuesta.
+/*prepositional phrase included in left expansion
+
 1028;70;SBegin|"en"|.ESDefart|*ESCon|ESNegation+ESNegBegin;*|+ESNegBegin|*|*|*;restore negation on prepositional phrase with 'en' at beginning of sentence
 
+/*		1028. En la democracia griega no existía la representación. En tórax no hay adenopatías de significación, axilar de 2cm izquierda.
 /* include conditional conjunction
 
 1051;70;ESCondition|ESNegBegin;-ESNegStop+ESNegBegin+ESBeginrel|*;
+
+/*		1051. El aseguró que si no lograra ampliar esos trofeos consideraría que habría hecho una grandísima carrera, mejor de lo que esperaba.
+
 1052;70;ESCondition|^ESNegStop|ESNegBegin;-ESNegStop+ESNegBegin+ESBeginrel|*|*;
+
+/*		1052. Pero, si este derecho no existe sobre las áreas protegidas, ¿los indígenas serán capaces de proteger estos espacios de las amenazas económicas?
+
 1053;70;ESPrep:ESAndOrBut|ESCondition+ESNegBegin;+ESNegBegin|-ESBeginrel;
 
+/*		1053. Si la naturaleza no fuera hermosa, no valdría la pena conocerla, y si no valiera la pena conocerla, tampoco valdría la pena vivir.
 /*PHASE 80 SENTIMENT
 /*==================
 /*restriction of the scope
 
 1076;80;ESCon|ESPunctuation|ESVerb:ESPrep:ESPrepart:ESPartrel:ESConj:ESComo;*|*|+ESPosSentimentStop+ESNegSentimentStop;
+
+/*		1076_UD. El ejemplo es la mejor enseñanza, al pueblo hay que estimularlo en la fe de sus capacidades y posibilidades.
+
 1078;80;ESInf|ESPunctuation|ESAux;*|*|+ESPosSentimentStop+ESNegSentimentStop;
+
+/*		1078_UD. Es bueno entrenar, hay que haber jugado muchos partidos de competición.
+
 1079;80;ESVerb|ESPunctuation|ESCon;*|*|+ESPosSentimentStop+ESNegSentimentStop;
 
+/*		1079_UD. Habría hecho una grandísima carrera, mejor de lo que esperaba, trofeos no lograra ampliar.
 /*Apply typeBeginRelation
 
 1087;95;ESBeginrel;ESBeginrel;delete Relpron, Conj, Conj2, Como, AndOrBut, Aux, Linkingverb, mAux and Inf from lexreps with Beginrel label
 
+/*		1087. Pero no vemos cómo responderíamos en estos momentos. Se trata de un país en el que viven unas 300 tribus, de las cuales varias están totalmente aisladas porque apenas existen vías de comunicación.
 /*Rewrite language specific labels to unified labels
 /*===================================================
 
