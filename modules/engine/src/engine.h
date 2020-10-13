@@ -194,8 +194,8 @@ public:
 	}
 
 private:
+	friend class iKnowEngine;
 	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
-
 };
 
 class IKNOW_API iKnowEngine
@@ -250,15 +250,16 @@ public:
 		return m_user_dictionary.addLabel(literal, "UDNegSentiment");
 	}
 	void udct_use(bool flag = false) {
-		m_bUserDCT = flag;
+		if (flag) loadUserDictionary(m_user_dictionary);
+		else unloadUserDictionary();
 	}
 	int loadUserDictionary(iKnowUserDictionary& udct);
 	void unloadUserDictionary(void);
 
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
-	iKnowUserDictionary m_user_dictionary; // user dictionary for customizing iKnow output
 
 private:
-	bool m_bUserDCT; // default false
+	iKnowUserDictionary m_user_dictionary; // user dictionary for customizing iKnow output
+
 };

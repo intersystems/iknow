@@ -45,10 +45,8 @@ void iKnowUnitTests::runUnitTests(void)
 
 // std::string NormalizeText(std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
 void iKnowUnitTests::test6(const char* pMessage) {
-	iKnowEngine engine;
-
 	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
-	string text_lowercased = engine.NormalizeText(text_source, "en");
+	string text_lowercased = iKnowEngine::NormalizeText(text_source, "en");
 
 	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), [](unsigned char c) { return isupper(c); } ) > 0) // 
 		throw std::runtime_error("NormalizeText does not work correctly");
@@ -57,8 +55,8 @@ void iKnowUnitTests::test6(const char* pMessage) {
 void iKnowUnitTests::test5(const char* pMessage) { // User DCT test 
 	string text_source_utf8 = u8"The Fr. test was er/pr positive.";
 	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
-	iKnowEngine engine;
 
+	iKnowEngine engine;
 	engine.udct_addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
 	if (engine.udct_addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
 		throw std::runtime_error(string("Unknow label *not* triggered !"));
@@ -87,6 +85,37 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 			}
 		}
 	}
+
+	iKnowUserDictionary the_user_dictionary;
+	the_user_dictionary.addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
+	if (the_user_dictionary.addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
+		throw std::runtime_error(string("Unknow label *not* triggered !"));
+
+	the_user_dictionary.addSEndCondition("Fr.", false); // ;;Ph.D.;0;
+	engine.loadUserDictionary(the_user_dictionary);
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
+		throw std::runtime_error(string(pMessage));
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		// cout << *it << endl;
+		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("value=\"er/pr\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("value=\"positive.\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+	engine.unloadUserDictionary();
 }
 
 void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBegin/SEnd labels

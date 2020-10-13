@@ -260,7 +260,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 
 static SharedMemoryKnowledgebase *pUserDCT = NULL; // User dictionary, one per process
 
-iKnowEngine::iKnowEngine() : m_bUserDCT(false) // Constructor
+iKnowEngine::iKnowEngine() // Constructor
 {
 }
 
@@ -332,19 +332,10 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
 
-	if (m_bUserDCT) {
-		if (pUserDCT == NULL)
-			pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false));	// first use generation.
-		if (m_user_dictionary.getUDCTdata().IsDirty()) {
-			delete pUserDCT;
-			pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false)); // reconstruct if data has been added.
-		}
-		process.setUserDictionary(pUserDCT);
+	process.setUserDictionary(pUserDCT);
+	if (pUserDCT)
 		pUserDCT->FilterInput(text_input); // rewritings can only be applied if we no longer emit text offsets
-	}
-	else {
-		process.setUserDictionary(NULL);
-	}
+
 	iknow::core::IkIndexInput Input(&text_input);
 	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);
 	lck.unlock();
@@ -395,11 +386,10 @@ int iKnowUserDictionary::addSEndCondition(const std::string& literal, bool b_end
 int iKnowEngine::loadUserDictionary(iKnowUserDictionary& udct)
 {
 	if (pUserDCT == NULL)
-		pUserDCT = new SharedMemoryKnowledgebase(m_user_dictionary.getUDCTdata().generateRAW(false));	// first use generation.
+		pUserDCT = new SharedMemoryKnowledgebase(udct.m_user_data.generateRAW(false));	// first use generation.
 	else
 		return iKnowEngine::iknow_user_dictionary_already_loaded;
 
-	m_bUserDCT = true;
 	return 0;
 }
 
@@ -410,5 +400,4 @@ void iKnowEngine::unloadUserDictionary(void)
 		delete pUserDCT;
 		pUserDCT = NULL;
 	}
-	m_bUserDCT = false;
 }
