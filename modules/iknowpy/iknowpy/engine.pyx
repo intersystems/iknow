@@ -127,7 +127,7 @@ cdef class iKnowEngine:
 	@cython.binding(True)
 	def load_user_dictionary(self, iKnowUserDictionary udct) -> int:
 		"""Load User Dictionary"""
-		return self.engine.loadUserDictionary(udct)
+		return self.engine.loadUserDictionary(udct.user_dictionary)
 
 	@cython.binding(True)
 	def unload_user_dictionary(self) -> None:
