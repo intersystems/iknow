@@ -505,6 +505,9 @@ if not icu_license_found:
 
 with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
+    # Strip off badges. They belong in the GitHub version of the README file but
+    # are less appropriate on PyPI.
+    long_description = long_description[long_description.index('# iKnow\n'):]
 
 try:
     setup(
