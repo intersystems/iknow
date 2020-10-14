@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Search for an update to Cython.
 
-Usage: update_icu.py"""
+Usage: update_cython.py"""
 
 import updatelib
 
