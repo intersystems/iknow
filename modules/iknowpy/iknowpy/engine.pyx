@@ -41,6 +41,20 @@ cdef char* aType_to_str(Attribute t) except NULL:
 	raise ValueError('Attribute type {} is unrecognized.'.format(t))
 
 
+cdef class iKnowUserDictionary:
+	"""A class that represents a user dictionary"""
+	cdef CPPiKnowUserDictionary user_dictionary
+
+	def __cinit__(self):
+		"""Initialize the underlying C++ iKnowUserDictioanry class"""
+		self.user_dictionary = CPPiKnowUserDictionary()
+
+	@cython.binding(True)
+	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> int:
+		"""Add a custom user dictionary label."""
+		return self.user_dictionary.addLabel(literal, UdctLabel)
+
+
 cdef class iKnowEngine:
 	"""A class that represents an instance of the iKnow Natural Language
 	Processing engine. iKnow is a library for Natural Language Processing that
@@ -62,6 +76,12 @@ cdef class iKnowEngine:
 	def get_languages_set() -> typing.Set[typing.Text]:
 		"""Return the set of supported languages."""
 		return CPPiKnowEngine.GetLanguagesSet()
+
+	@staticmethod
+	@cython.binding(True)
+	def normalize_text(str text_source: typing.Text, str language: typing.Text, cpp_bool bUserDct: bool = False, cpp_bool bLowerCase: bool = True, cpp_bool bStripPunct: bool = True) -> typing.Text:
+		"""Normalize the text_source."""
+		return CPPiKnowEngine.NormalizeText(text_source, language, bUserDct, bLowerCase, bStripPunct)
 
 	@cython.binding(True)
 	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False) -> None:
@@ -103,6 +123,16 @@ cdef class iKnowEngine:
 	def udct_use(self, cpp_bool flag) -> None:
 		"""Activate/Deactivate user dictionary use"""
 		return self.engine.udct_use(flag)
+
+	@cython.binding(True)
+	def load_user_dictionary(self, iKnowUserDictionary udct) -> int:
+		"""Load User Dictionary"""
+		return self.engine.loadUserDictionary(udct)
+
+	@cython.binding(True)
+	def unload_user_dictionary(self) -> None:
+		"""Unload User Dictioanry"""
+		return self.engine.unloadUserDictionary()
 
 	@property
 	def _m_index_raw(self):

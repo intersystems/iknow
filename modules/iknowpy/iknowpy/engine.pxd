@@ -71,6 +71,18 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 
 
 cdef extern from "../../engine/src/engine.h" nogil:
+	cdef cppclass CPPiKnowUserDictionary "iKnowUserDictionary":
+		CPPiKnowUserDictionary() except +
+		
+		int addLabel(const string& literal, const char* UdctLabel) except +
+		int addEntry(const string& literal, const string& literal_rewrite) except +
+		int addSEndCondition(const string& literal, cpp_bool b_end) except +
+		int addNegationTerm(const string& literal) except +
+		int addPositiveSentimentTerm(const string& literal) except +
+		int addNegativeSentimentTerm(const string& literal) except +
+
+
+cdef extern from "../../engine/src/engine.h" nogil:
 	cdef cppclass CPPiKnowEngine "iKnowEngine":
 		Text_Source m_index
 		vector[string] m_traces
@@ -85,5 +97,11 @@ cdef extern from "../../engine/src/engine.h" nogil:
 		int udct_addPositiveSentimentTerm(const string& literal) except +
 		int udct_addNegativeSentimentTerm(const string& literal) except +
 
+		int loadUserDictionary(CPPiKnowUserDictionary& udct) except +
+		void unloadUserDictionary() except +
+
 		@staticmethod
 		const set[string]& GetLanguagesSet() except +
+
+		@staticmethod
+		string NormalizeText(const string& text_source, const string& language, cpp_bool bUserDct, cpp_bool bLowerCase, cpp_bool bStripPunct) except +

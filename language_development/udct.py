@@ -1,37 +1,84 @@
 # This Python file uses the following encoding: utf-8
 
 import sys
+from collections import namedtuple
+
+class UserDictionary(object):
+
+    # constants
+    # role labels
+    CONCEPT = "UDConcept"
+    RELATION = "UDRelation"
+    NONRELEVANT = "UDNonRelevant"
+
+    # attribute labels
+    NEGATION = "UDNegation"
+    UNIT = "UDUnit"
+    SENTIMENT_POSITIVE = "UDPosSentiment"
+    SENTIMENT_NEGATIVE = "UDNegSentiment"
+    NUMBER = "UDNumber"
+    TIME = "UDTime"
+
+    # constructor
+    def __init__(self, entries=[]):
+        self.entries = entries
+
+    # generic method (make private?)
+    def add_label(self, string, label):
+        # declare Entry named tuple for convenience
+        Entry = namedtuple("Entry", ["string", "label"])
+        self.entries.append(Entry(string, label))
+
+    # example of specific (public) method
+    def add_concept(self, string):
+        self.add_label(string, UserDictionary.CONCEPT)
+
+    def add_relation(self, string):
+        self.add_label(string, UserDictionary.RELATION)
+
+    def add_nonrelevant(self, string):
+        self.add_label(string, UserDictionary.NONRELEVANT)
+
+    def add_negation_term(self, string):
+        self.add_label(string, UserDictionary.NEGATION)
+
+    def add_unit_term(self, string):
+        self.add_label(string, UserDictionary.UNIT)
+
+    def add_positive_sentiment_term(self, string):
+        self.add_label(string, UserDictionary.SENTIMENT_POSITIVE)
+
+    def add_negative_sentiment_term(self, string):
+        self.add_label(string, UserDictionary.SENTIMENT_NEGATIVE)
+
+    def add_number_term(self, string):
+        self.add_label(string, UserDictionary.NUMBER)
+
+    def add_time_term(self, string):
+        self.add_label(string, UserDictionary.TIME)
+
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-# import engine as iknowpy
+sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+import engine as iknowpy
+
 # for "pip install iknowpy", next line will do, outcomment for local language development
-import iknowpy
+# import iknowpy
 
 engine = iknowpy.iKnowEngine()
-dict = iknowpy.UserDictionary()
-# dict.add_negation_term("w/o")
+user_dictionary = iknowpy.iKnowUserDictionary()
+
+user_dictionary.add_label("some text", "UDMeasurement")
+
+raw_text = "Ik ben Fr. dus niet OVERHEERLIJK !"
+norm_text = engine.normalize_text(raw_text, "nl")
+
+dict = UserDictionary()
+dict.add_negation_term("w/o")
 dict.add_label("one concept", dict.CONCEPT)    # CONCEPT is a constant for "UDConcept"
 dict.add_label("some text", dict.MEASUREMENT)  # MEASUREMENT is a constant for "UDMeasurement"
 engine.load_dictionary(dict)
 engine.index("some text w/o one concept", "en")
-
-
-ret = engine.udct_addLabel('Literal (1)', 'UDNegation') # assign a UD label
-ret = engine.udct_addLabel('Literal (2)', 'Illegal Label') # returns -2 : label does not exist
-ret = engine.udct_addLabel('Literal (3)', 'UDPosSentiment') 
-
-# add an End/NoEnd condtion to the user dictionary.
-ret = engine.udct_addSEndCondition("Fr.", False)
-
-# add a Negation term to the user dictionary.
-ret = engine.udct_addNegationTerm("NEEE")
-
-# add a Positive Sentiment term to the user dictionary.
-ret = engine.udct_addPositiveSentimentTerm("WAUW")
-
-# add a Negative Sentiment term to the user dictionary.
-ret = engine.udct_addNegativeSentimentTerm("BELACHELIJK")
 
 engine.udct_use(True) # do use user dictionary
 

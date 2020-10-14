@@ -363,6 +363,10 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 	throw std::runtime_error("Failed to throw an exception.");
 }
 
+// Constructor
+iKnowUserDictionary::iKnowUserDictionary() {
+}
+
 // Adds User Dictionary label to a lexical representation for customizing purposes
 int iKnowUserDictionary::addLabel(const std::string& literal, const char* UdctLabel)
 {

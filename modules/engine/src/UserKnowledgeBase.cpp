@@ -220,7 +220,7 @@ void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& trans
 	table = allocator.Insert(table_builder.Build(allocator));
 }
 
-static const size_t kRawSize = 48000;
+static const size_t kRawSize = 10*1024; // User dictionary is limited in size, 10k should suffice
 unsigned char* data_buffer(bool b_init)
 {
 	static unsigned char udct_memory[kRawSize]; // raw representation of user dictionary data, only allocated when used.

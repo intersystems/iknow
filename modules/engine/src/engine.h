@@ -170,6 +170,8 @@ namespace iknowdata { // to bundle all generated data
 class IKNOW_API iKnowUserDictionary
 {
 public:
+	iKnowUserDictionary(); //ctor
+
 	// Adds User Dictionary label to a lexical representation for customizing purposes
 	int addLabel(const std::string& literal, const char* UdctLabel);
 
@@ -201,13 +203,19 @@ private:
 class IKNOW_API iKnowEngine
 {
 public:
-	static const std::set<std::string>& GetLanguagesSet(void);
-
 	enum errcodes {
 		iknow_language_not_supported = -1, // unsupported language
 		iknow_unknown_label = -2,	// udct_addLabel : label does not exist
 		iknow_user_dictionary_already_loaded = -3 // user dictionary is already loaded
 	};
+
+	// returns set of supported languages
+	static const std::set<std::string>& GetLanguagesSet(void);
+
+	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
+	static std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+
+	// ctor & dtor
 	iKnowEngine();
 	~iKnowEngine();
 	
@@ -223,8 +231,6 @@ public:
 	// offsets, not byte offsets in text_source.
 	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
-	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
-	static std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
 
 	// User dictionary methods :
 
