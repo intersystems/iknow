@@ -1,0 +1,27 @@
+# Configuration for checking whether we are close to the PyPI limit of 10GB
+# per project.
+#
+# If we are close to the limit, create an issue on GitHub.
+
+name: Check PyPI Limit
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check-pypi-limit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: check iknowpy project size
+        run: $GITHUB_WORKSPACE/.github/workflows/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
+      - name: make HOME variable available
+        run: echo ::set-env name=HOME::$HOME
+      - name: create issue
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: "[check-pypi-limit] The PyPI size limit has almost been reached"
+          content-filepath: ${{ env.HOME }}/issue.md
+          assignees: adang1345
