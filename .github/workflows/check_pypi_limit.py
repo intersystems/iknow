@@ -25,7 +25,7 @@ for release in json_data['releases'].values():
     for file in release:
         size += file['size']
 if size <= SIZE_THRESHOLD:
-    print(f'Size of iknowpy is {size}, which is lower than the threshold of {SIZE_THRESHOLD}')
+    print(f'Size of iknowpy is {size:,} bytes, which is lower than the threshold of {SIZE_THRESHOLD:,} bytes')
     sys.exit(0)
 
 # determine whether there is an open issue saying we're near the limit
