@@ -167,11 +167,13 @@ namespace iknowdata { // to bundle all generated data
 //
 // User Dictionary for customizing iKnow output
 //
-class IKNOW_API iKnowUserDictionary
+class IKNOW_API UserDictionary
 {
 public:
-	iKnowUserDictionary(); //ctor
-
+	UserDictionary(); //ctor
+	void clear() {
+		m_user_data.clear();
+	}
 	// Adds User Dictionary label to a lexical representation for customizing purposes
 	int addLabel(const std::string& literal, const char* UdctLabel);
 
@@ -182,18 +184,16 @@ public:
 	int addSEndCondition(const std::string& literal, bool b_end = true);
 
 	// Shortcut for known UD labels
-	int addNegationTerm(const std::string& literal) {
-		return addLabel(literal, "UDNegation");
-	}
-	int addPositiveSentimentTerm(const std::string& literal) {
-		return addLabel(literal, "UDPosSentiment");
-	}
-	int addNegativeSentimentTerm(const std::string& literal) {
-		return addLabel(literal, "UDNegSentiment");
-	}
-	iknow::csvdata::UserKnowledgeBase& getUDCTdata() {
-		return m_user_data;
-	}
+	int addConceptTerm(const std::string& literal);
+	int addRelationTerm(const std::string& literal);
+	int addNonrelevantTerm(const std::string& literal);
+
+	int addUnitTerm(const std::string& literal);
+	int addNumberTerm(const std::string& literal);
+	int addTimeTerm(const std::string& literal);
+	int addNegationTerm(const std::string& literal);
+	int addPositiveSentimentTerm(const std::string& literal);
+	int addNegativeSentimentTerm(const std::string& literal);
 
 private:
 	friend class iKnowEngine;
@@ -233,39 +233,12 @@ public:
 
 
 	// User dictionary methods :
-
-	// Adds User Dictionary label to a lexical representation for customizing purposes
-	int udct_addLabel(const std::string& literal, const char* UdctLabel) { // m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
-		return m_user_dictionary.addLabel(literal, UdctLabel);
-	}
-	// Add User Dictionary literal rewrite, not functional.
-	int udct_addEntry(const std::string& literal, const std::string& literal_rewrite) {
-		return m_user_dictionary.addEntry(literal, literal_rewrite);
-	}
-	// Add User Dictionary EndNoEnd, not functional. 
-	int udct_addSEndCondition(const std::string& literal, bool b_end = true) {
-		return m_user_dictionary.addSEndCondition(literal, b_end);
-	}
-	int udct_addNegationTerm(const std::string& literal) {
-		return m_user_dictionary.addLabel(literal, "UDNegation");
-	}
-	int udct_addPositiveSentimentTerm(const std::string& literal) {
-		return m_user_dictionary.addLabel(literal, "UDPosSentiment");
-	}
-	int udct_addNegativeSentimentTerm(const std::string& literal) {
-		return m_user_dictionary.addLabel(literal, "UDNegSentiment");
-	}
-	void udct_use(bool flag = false) {
-		if (flag) loadUserDictionary(m_user_dictionary);
-		else unloadUserDictionary();
-	}
-	int loadUserDictionary(iKnowUserDictionary& udct);
+	int loadUserDictionary(UserDictionary& udct);
 	void unloadUserDictionary(void);
 
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
-	iKnowUserDictionary m_user_dictionary; // user dictionary for customizing iKnow output
 
 };

@@ -51,6 +51,12 @@ namespace iknow {
 			bool IsDirty(void) {
 				return m_IsDirty;
 			}
+			void clear(void) {
+				kb_lexreps.clear();
+				kb_acronyms.clear();
+				m_IsDirty = true;
+			}
+
 			int addLexrepLabel(const std::string& token, const std::string& label) {
 				bool bIsLabel = false;
 				for (auto it = kb_labels.begin(); it != kb_labels.end() && !bIsLabel; ++it) { // TODO: check if label does exist

@@ -41,18 +41,78 @@ cdef char* aType_to_str(Attribute t) except NULL:
 	raise ValueError('Attribute type {} is unrecognized.'.format(t))
 
 
-cdef class iKnowUserDictionary:
+cdef class UserDictionary:
 	"""A class that represents a user dictionary"""
-	cdef CPPiKnowUserDictionary user_dictionary
+	cdef CPPUserDictionary user_dictionary
 
 	def __cinit__(self):
 		"""Initialize the underlying C++ iKnowUserDictioanry class"""
-		self.user_dictionary = CPPiKnowUserDictionary()
+		self.user_dictionary = CPPUserDictionary()
+
+	@cython.binding(True)
+	def clear(self) -> None:
+		"""Clear the User Dictionary object"""
+		return self.user_dictionary.clear()
 
 	@cython.binding(True)
 	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> int:
 		"""Add a custom user dictionary label."""
 		return self.user_dictionary.addLabel(literal, UdctLabel)
+
+	@cython.binding(True)
+	def add_entry(self, str literal: typing.Text, str literal_rewrite: typing.Text) -> int:
+		"""Rewrite a literal."""
+		return self.user_dictionary.addEntry(literal, literal_rewrite)
+
+	@cython.binding(True)
+	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> int:
+		"""Add a sentence end condition."""
+		return self.user_dictionary.addSEndCondition(literal, bSentenceEnd)
+
+	@cython.binding(True)
+	def add_concept(self, str literal: typing.Text) -> int:
+		"""Add a concept term."""
+		return self.user_dictionary.addConceptTerm(literal)
+
+	@cython.binding(True)
+	def add_relation(self, str literal: typing.Text) -> int:
+		"""Add a relation term."""
+		return self.user_dictionary.addRelationTerm(literal)
+
+	@cython.binding(True)
+	def add_non_relevant(self, str literal: typing.Text) -> int:
+		"""Add a non relevant term."""
+		return self.user_dictionary.addNonrelevantTerm(literal)
+
+	@cython.binding(True)
+	def add_negation(self, str literal: typing.Text) -> int:
+		"""Add a negation term."""
+		return self.user_dictionary.addNegationTerm(literal)
+
+	@cython.binding(True)
+	def add_positive_sentiment(self, str literal: typing.Text) -> int:
+		"""Add a positive sentiment term."""
+		return self.user_dictionary.addPositiveSentimentTerm(literal)
+
+	@cython.binding(True)
+	def add_negative_sentiment(self, str literal: typing.Text) -> int:
+		"""Add a negative sentiment term."""
+		return self.user_dictionary.addNegativeSentimentTerm(literal)
+
+	@cython.binding(True)
+	def add_unit(self, str literal: typing.Text) -> int:
+		"""Add a unit term."""
+		return self.user_dictionary.addUnitTerm(literal)
+
+	@cython.binding(True)
+	def add_number(self, str literal: typing.Text) -> int:
+		"""Add a number term."""
+		return self.user_dictionary.addNumberTerm(literal)
+
+	@cython.binding(True)
+	def add_time(self, str literal: typing.Text) -> int:
+		"""Add a time term."""
+		return self.user_dictionary.addTimeTerm(literal)
 
 
 cdef class iKnowEngine:
@@ -95,37 +155,7 @@ cdef class iKnowEngine:
 		return self.engine.index(text_source, language, traces)
 
 	@cython.binding(True)
-	def udct_addLabel(self, str literal: typing.Text, str UdctLabel: typing.Text) -> int:
-		"""Add a custom user dictionary label."""
-		return self.engine.udct_addLabel(literal, UdctLabel)
-
-	@cython.binding(True)
-	def udct_addSEndCondition(self, str literal, cpp_bool sent_ending) -> int:
-		"""Add an End/NoEnd condtion to the user dictionary."""
-		return self.engine.udct_addSEndCondition(literal, sent_ending)
-
-	@cython.binding(True)
-	def udct_addNegationTerm(self, str literal) -> int:
-		"""Add a Negation term to the user dictionary."""
-		return self.engine.udct_addNegationTerm(literal)
-
-	@cython.binding(True)
-	def udct_addPositiveSentimentTerm(self, str literal) -> int:
-		"""Add a Positive Sentiment term to the user dictionary."""
-		return self.engine.udct_addPositiveSentimentTerm(literal)
-
-	@cython.binding(True)
-	def udct_addNegativeSentimentTerm(self, str literal) -> int:
-		"""Add a Negative Sentiment term to the user dictionary."""
-		return self.engine.udct_addNegativeSentimentTerm(literal)
-
-	@cython.binding(True)
-	def udct_use(self, cpp_bool flag) -> None:
-		"""Activate/Deactivate user dictionary use"""
-		return self.engine.udct_use(flag)
-
-	@cython.binding(True)
-	def load_user_dictionary(self, iKnowUserDictionary udct) -> int:
+	def load_user_dictionary(self, UserDictionary udct) -> int:
 		"""Load User Dictionary"""
 		return self.engine.loadUserDictionary(udct.user_dictionary)
 
@@ -202,16 +232,3 @@ cdef class iKnowEngine:
 			sentences_mod.append({'entities': entities_mod, 'sent_attributes': sent_attrs_mod, 'path': sentence.path,
 			                      'path_attributes': path_attrs_mod})
 		return {'sentences': sentences_mod, 'proximity': self.engine.m_index.proximity}
-
-	@cython.binding(False)
-	def load_dictionary(self, dictionary : __name__.UserDictionary) -> int:
-		for entry in dictionary.entries:
-			# TODO: input checking?
-			ret = self.engine.udct_addLabel(entry.string, entry.label)
-			if ret < 0:
-				return ret
-		return self.engine.udct_use(True)
-
-	@cython.binding(False)
-	def unload_dictionary(self) -> int:
-		return self.engine.udct_use(False)

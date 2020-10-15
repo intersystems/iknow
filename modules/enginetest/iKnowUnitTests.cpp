@@ -57,42 +57,13 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
 
 	iKnowEngine engine;
-	engine.udct_addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
-	if (engine.udct_addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
+	UserDictionary user_dictionary;
+	user_dictionary.addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
+	if (user_dictionary.addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
 		throw std::runtime_error(string("Unknow label *not* triggered !"));
 
-	engine.udct_addSEndCondition("Fr.", false); // ;;Ph.D.;0;
-	engine.udct_use(true); 
-	engine.index(text_source, "en", true); // traces should show UDPosSentiment
-
-	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
-		throw std::runtime_error(string(pMessage));
-
-	// Check for Positive Sentiment markers
-	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
-		// cout << *it << endl;
-		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
-		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
-		if (it->find("UserDictionaryMatch") != string::npos) {
-			string& trace_userdct = (*it);
-			if (trace_userdct.find("value=\"er/pr\"") != string::npos) {
-				if (trace_userdct.find("UDPosSentiment") == string::npos)
-					throw std::runtime_error(string(pMessage));
-			}
-			if (trace_userdct.find("value=\"positive.\"") != string::npos) {
-				if (trace_userdct.find("UDPosSentiment") == string::npos)
-					throw std::runtime_error(string(pMessage));
-			}
-		}
-	}
-
-	iKnowUserDictionary the_user_dictionary;
-	the_user_dictionary.addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
-	if (the_user_dictionary.addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
-		throw std::runtime_error(string("Unknow label *not* triggered !"));
-
-	the_user_dictionary.addSEndCondition("Fr.", false); // ;;Ph.D.;0;
-	engine.loadUserDictionary(the_user_dictionary);
+	user_dictionary.addSEndCondition("Fr.", false); // ;;Ph.D.;0;
+	engine.loadUserDictionary(user_dictionary);
 	engine.index(text_source, "en", true); // traces should show UDPosSentiment
 
 	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
@@ -116,6 +87,41 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 		}
 	}
 	engine.unloadUserDictionary();
+
+	user_dictionary.clear();
+	user_dictionary.addLabel("some text", "UDUnit");
+	user_dictionary.addSEndCondition("Fr.", false);
+	user_dictionary.addConceptTerm("one concept");
+	user_dictionary.addRelationTerm("one relation");
+	user_dictionary.addNonrelevantTerm("crap");
+	user_dictionary.addNegationTerm("w/o");
+	user_dictionary.addPositiveSentimentTerm("great");
+	user_dictionary.addNegativeSentimentTerm("awfull");
+	user_dictionary.addUnitTerm("Hg");
+	user_dictionary.addNumberTerm("magic number");
+	user_dictionary.addTimeTerm("future");
+
+	int ret = engine.loadUserDictionary(user_dictionary);
+	String text_source2(IkStringEncoding::UTF8ToBase("some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"));
+
+	engine.index(text_source2, "en", true); // generate Traces
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+			if (it->find("UserDictionaryMatch") != string::npos) {
+				string& trace_userdct = (*it);
+				if (trace_userdct.find("value=\"w/o\"") != string::npos) {
+					if (trace_userdct.find("UDNegation") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+				if (trace_userdct.find("value=\"awfull,\"") != string::npos) {
+					if (trace_userdct.find("UDNegSentiment") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+				if (trace_userdct.find("value=\"Hg\"") != string::npos) {
+					if (trace_userdct.find("UDUnit") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+			}
+	}
 }
 
 void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBegin/SEnd labels
