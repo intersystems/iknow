@@ -41,7 +41,11 @@ jobs:
           body: |-
             As of ${{ env.ICU_PUBLISHED_AT }}, a new version of ICU has been released.
 
-            For details of the release, see ${{ env.ICU_HTML_URL }}.
+            Release Information (sourced from ${{ env.ICU_HTML_URL }})
+            <blockquote>
+
+            ${{ env.ICU_RELEASE_INFO }}
+            </blockquote>
 
             *I am a bot, and this action was performed automatically.*
 
