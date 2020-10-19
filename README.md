@@ -123,7 +123,7 @@ Some attributes are not available for all languages yet. See the [wiki section](
 ## How it works
 
 Some InterSystems-era resources on how iKnow works:
-- A recent [introductory video](https://www.youtube.com/watch?v=2pQur_PJn_w)
+- A recent [introductory video](https://www.youtube.com/watch?v=VkR6rcv4_aA)
 - A not-so-recent [playlist](https://www.youtube.com/watch?v=QfbqISDFC1s&list=PLp4xNHWZ7IQmUwbtvHsiZnn2nblxjug15&index=1) on our video channel
 - A fun animation of our unique bottom-up approach in [Japanese](https://www.youtube.com/watch?v=yOVP6visOfo) and [Russian](https://www.youtube.com/watch?v=dNJHWxgVr5I) (English version embedded [here](https://learning.intersystems.com/course/view.php?id=114))
 
