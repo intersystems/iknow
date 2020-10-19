@@ -4,19 +4,45 @@
 /* REWRITE UNIFIED LABELS TO LANGUAGE SPECIFIC LABELS
 
 375;1;CapitalInitial;^PTCapitalInitial;
+
+/*		375. A Secretária de Estado Para a Reforma do Estado, Administração Pública e Poder Local, organizou e lançou a concurso público.
+
 730;1;CapitalMixed;^PTCapitalMixed+PTCapitalInitial;relevant in rules for names
+
+/*		730. Também presente na Europa e nos Estados Unidos da América é aquilo que os investigadores designam como uma "nebulosa místico-esotérica".
+
 376;1;CapitalAll;^PTCapitalAll;
+
+/*		376. CONDIÇÕES SOCIOECONÔMICAS.
+
 377;1;Punctuation;PTPunctuation;
 
+/*		377. A floresta está localizada em planaltos pouco elevados (30-200m) e apresenta um solo extremamente pobre em nutrientes.
 /* REWRITE USER DICTIONARY LABELS
 
 379;1;UDNegation;+PTNegation+PTNegBegin;
+
+/*		379.UD. - Essa visão nega a validade tanto da teoria do sub-consumo quanto da sub-poupança.
+
 380;1;UDPosSentiment;+PTPosSentiment+PTPosSentimentBegin;
+
+/*		380.UD. - Para que um combate seja eficaz é necessário, acima de tudo, que os brigadistas estejam bem treinados, equipados e que as condições de trabalho sejam desejáveis.
+
 381;1;UDNegSentiment;+PTNegSentiment+PTNegSentimentBegin;
+
+/*		381.UD. - Os marinheiros eram mal remunerados e espoliados pelos oficiais.
+
 382;1;UDConcept;+PTCon;
+
+/*		382.UD. - Mas estamos a trabalhar em como fazer algo novo.
+
 383;1;UDRelation;PTRelation;
+
+/*		383.UD. - Um projeto pretende valorizar o património geológico das nove ilhas do arquipélago, está também vocacionado para as relações entre o homem e os vulcões nos Açores.
+
 384;1;UDNonRelevant;PTNonRelevant;
 
+/*		384.UD. - É um dos membros da Comunidade dos Países de Língua Portuguesa (CPLP).
 /* PHASE 40: GENERAL DISAMBIGUATION
 /*=================================
 /* CAPITALISATION
@@ -24,798 +50,2085 @@
 
 738;40;PTGeoType|.PTAdj|PTDe:PTDo|PTCapitalInitial;PTCon+PTCapitalInitial+PTCapitalMixed|+Join|+Join|+Join;
 
+/*		738. Mais tarde, durante o Estado Novo de Salazar, a colonia passaria a ter o estatuto de província ultramarina, com o nome de Guiné Portuguesa. A vegetação de ambientes aquáticos no Estado da Bahia é pouco conhecida, particularmente de ambientes lênticos do semiárido.
 /* Names of organizations etc.
 
 735;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|PTDe:"e"|*PTCapitalInitial;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join;
+
+/*		735. Agradeço ao Instituto de Turismo de Portugal a atribuição de uma bolsa de estudo para doutoramento. A emissão de visto de estada temporária e de residência são válidos apenas para o território português e carecem de autorização prévia do SEF – Serviço de Estrangeiros e Fronteiras.
+
 734;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial|"e"|PTDo|*PTCapitalInitial+^PTOrgUnit+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|Join|Join|Join|Join|Join;
+
+/*		734. Essa associação é realizada pelos distribuidores retalhistas autorizados e consiste na comunicação ao IMTT (Instituto da Mobilidade e dos Transportes Terrestres) da atribuição de um determinado DEM a um determinado número de matrícula.
+
 731;40;PTOrgUnit+PTCapitalInitial|.PTCapitalInitial+^PTPrepart+^PTPrep+^PTDefart+^PTIndefart|PTDe:PTDo|*PTCapitalInitial+^PTConPlusDe;PTCon+PTOrgUnit+PTCapitalInitial+PTCapitalMixed|Join|+Join|+Join;
+
+/*		731. No que se refere à indústria, segundo a Associação Brasileira da Indústria Química (ABIQUIM), esper -se computar para 2005 um chiffre d'affaires da ordem de 70 bilhões de dólares.
+
 739;40;PTCon+PTCapitalMixed|PTDe:PTDo|*PTCapitalInitial|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|Join|*|*;
+
+/*		739. Em caso de fuga da meta, o Estado-membro se obriga a tomar ações corretivas imediatas e a acatar quaisquer sanções impostas pelo Conselho de Ministros das Finanças – ECOFIN –, órgão central de decisão sobre harmonização fiscal.
+
 741;40;PTOrgUnit+PTCapitalMixed|*PTDe:PTDo:PTPrepart:PTPrep:PTEm:"e":PTCapitalInitial+^PTOrgUnit+^PTConPlusDe|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|*|*;
+
+/*		741. Para a investigação dos efeitos do câmbio no emprego usamos uma amostra de empresas pesquisadas pela Federação das Indústrias do Estado do Rio Grande do Sul (FIERGS).
+
 740;40;PTCon+PTCapitalInitial|PTCon+PTCapitalInitial|PTDe:PTDo:PTPrepart|*PTCapitalInitial|PTPunctuation|PTCapitalAll:PTCapitalMixed;PTCon+PTCapitalInitial|Join|Join|Join|*|*;
+
+/*		740. As Lojas Francas de Portugal (LFP) venceu o concurso internacional para licenciamento de quatro espaços comerciais no aeroporto da Madeira.
+
 732;40;PTOrgUnit;-PTOrgUnit;
 
+/*		732. No início da década de 1960, o Governo Brasileiro decidiu estimular a produção de papel e celulose, até então importados.
 /* Person names
 
 742;40;PTName|PTDe:PTDo|*PTCapitalInitial;PTCon+PTCapitalInitial|Join|Join;detect names with 'de' or 'da' based on first names
 
+/*		742. Em 1452 o grupo ocidental (Flores e Corvo) é descoberto por Diogo de Teive.
 /* GENERAL RULES
 
 273;40;SBegin|PTCapitalInitial|^PTCapitalInitial;*|-PTCapitalInitial|*;to ignore capital letters when at the beginning of a sentence
+
+/*		273. Dezenas de milhares de pessoas protestaram pela quinta vez. NOT. Gil Eanes contornou o Cabo Bojador, dissipando o terror que este promontório inspirava.
+
 274;40;SBegin|PTCapitalAll;*|-PTCapitalAll;to ignore capital letters when at the beginning of a sentence
+
+/*		274. A liberação dos resultados da autópsia  inflamou ainda mais controvérsia.
+
 278;40;PTCapitalInitial|PTConIfCapsL&R|PTCapitalInitial;^PTCon|PTCon|PTCon;to make some words part of a name
+
+/*		278. Um Estudo em Indústrias Conserveiras do Rio Grande do Sul.
+
 280;40;PTConIfCap+PTCapitalInitial;PTCon+PTConIfCap;to convert certain words to concepts when capitalized
+
+/*		280. Uma série de telegramas da Embaixada dos Estados Unidos.
+
 281;40;PTConIfCapAll+PTCapitalAll;PTCon;to convert e.g. AS and INCUBA to concepts
+
+/*		281. Essa foi a primeira morte de um piloto na pista em dez anos - desde que a FIA adotara sérias medidas de segurança.
+
 283;40;PTConIfCap;-PTConIfCap;to get rid of this secondary label
+
+/*		283. Na área estudada há espécies florindo todos os meses e não há sazonalidade marcada como ocorre na mata mesófila de áreas circunvizinhas.
+
 284;40;PTConIfCapAll;-PTConIfCapAll;to get rid of this secondary label
+
+/*		284. Uma boa vitamina e uma oração removem qualquer pestilência cerebral.
+
 285;40;PTConIfCapsL&R;-PTConIfCapsL&R;to get rid of this secondary label
 
+/*		285. As chuvas também causaram danos na rede elétrica e deixou mais de 3 milhões de pessoas sem luz em seis províncias do norte do país.
 /* "Não-": PREFIX
 
 288;40;PTNaoPrefix|PTAdj;PTAdj+PTNegation|+Join;
+
+/*		288. Isso se deve à presença do isótopo radioativo potássio-40 (40K), regularmente distribuído no potássio ocorrente na natureza, apesar de que o isótopo comum, potássio-39 (39K), seja não-radioativo.
+
 289;40;PTNaoPrefix|PTCon;PTCon+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
+
+/*		289. 7,4% (cerca de 12 milhões) declaram-se agnósticos, ateus ou não-seguidores de religião alguma.
+
 290;40;PTNaoPrefix|PTPart;PTAdj+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
+
+/*		290. A maior parte da legislação brasileira é Codificada, apesar de os estatutos não-codificados serem uma parte substancial do sistema, desempenhando um papel complementar.
+
 291;40;PTNaoPrefix|PTConVerb:PTAdjVerb;PTCon+PTNegation|+Join;to recognise adjectives with negative prefix as negational entities
 
+/*		291. A matriz energética é baseada em fontes renováveis, sobretudo a energia hidrelétrica e o etanol, além de fontes não-renováveis de energia, como o petróleo e o gás natural.
 /* "ou não: distinguish between negation-or-no-negation (via label PTOuNao) and ...-or-negation
 
 826;40;PTAux:PTVerb:PTAuxCon:PTPart|"ou"|"não"|^PTAux+^PTVerb;*|PTAdv+PTOuNao+PTNegation|Join|*;
+
+/*		826. Agora cabe aos governos decidir se seremos ou não capazes de acabar com a poluição do rio. NOT. Seria obsceno discutir os grandes temas da finança mundial e ignorar as necessidades daqueles que não têm o suficiente para comer ou não têm acesso a água potável.
+
 830;40;"ou"|"não"|SEnd:PTPunctuation:PTDe:PTComma;PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
+
+/*		830. A habitação coletiva, com as casas dispostas em relação a um espaço cerimonial que pode ser no centro ou não. Há dúvidas sobre se cursaria, ou não, os estudos oficiais de aquelas eras, na universidade.
+
 838;40;PTCon:PTAdj|"ou"|"não"|PTPrep:PTPrepart+^PTDe;*|PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
 
+/*		838. A coerência ou não deste grau de correlação depende de outro fator não analisado nessa pesquisa que é a taxa de juros.
 /* Detect comparisons
 
 865;40;PTMesmo:PTMaismenos:PTComparadj|.PTAdj|PTComprel|^PTVerb+^PTAux;*|*|-PTRelpron|*;
 
+/*		865. Com a posse do novo governo, promoveu-se uma reforma tarifária ainda mais profunda que a primeira.
 /* VERBS PLUS PRONOUN - CLUSTER
 
 919;40;^PTPronsuffix|PTPronsuffix|PTPronsuffix;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon|Join|Join;
+
+/*		919. Conhecendo esses mecanismos, poder-se-á tentar agir sobre eles.
+
 920;40;^PTPronsuffix|PTPronsuffix+PTInf;+PTInf+PTWithSuffix-PTVerb-PTCon-PTConVerb-PTInfCon-PTAuxCon|Join;
+
+/*		920. Consequentemente, é essencial combatê-lo.
+
 921;40;^PTPronsuffix|PTPronsuffix+PTVerb;+PTVerb-PTCon-PTInf-PTConVerb-PTInfCon-PTAuxCon-PTAdjVerb-PTPart|Join;
+
+/*		921. Quando falamos da cultura política, referimo-nos ao sistema político como internalizado na cognição, nos sentimentos e nas avaliações da sua população.
+
 918;40;PTA:"para":PTDefart|PTVerb|PTPronsuffix;*|^PTInf+PTWithSuffix|+Join;exception to r922
+
+/*		918. Instou os países a influenciarem as autoridades e a convencerem-nas de que a ajuda humanitária internacional é neutra e imparcial.
+
 922;40;PTVerb:PTInf:PTGer:PTAux:PTSer|PTPronsuffix;+PTWithSuffix-PTConVerb-PTInfCon|Join;
+
+/*		922. O relatório ignora-a por completo. A asa dianteira de seu carro se soltou fazendo-o perder o controle do veículo.
+
 924;40;PTConVerb|PTPronsuffix;^PTVerb+PTWithSuffix|Join;
+
+/*		924. Essa área de manguezal acha-se inteiramente preservada através da criação de um ‘parque ecológico’.
+
 923;40;^PTPronsuffix|PTPronsuffix;PTInf+PTWithSuffix|Join;for unknown verb forms, especially personal infinitives with -se
 
+/*		923. Nos anos 1950 começou a articular-se uma resistência multifacetada.
 /* SER: NOUN or AUXILIARY INFINITIVE
 
 15;40;PTDefart:PTIndefart:PTIndefpronPRNR|PTSer+^PTWithSuffix;*|PTCon;makes Concept of 'ser'after articel or indefinite pronoun
+
+/*		15. O ser que faz arte é definido como o artista. O capacete mostrou uma quebra com grande afundamento acima da viseira, obviamente insuportável para qualquer ser vivo.
+
 479;40;PTSer;^PTAux+PTInf+PTLinkingverb;
 
+/*		479.  Colocá-la em questão é um risco, mas não deixa de ser uma necessidade que se impõe mesmo que, em um espaço restrito, as questões possam apenas ser esboçadas.
 /* CERCA: PREPOSITION OR NOUN OR VERB
 
 690;40;PTConVerb+PTPrep|PTCon;PTPrep|*;
+
+/*		690. Neste sentido, é óbvio que a discussão que apresentam cerca biógrafos e obras em tensões que não abarcam integralmente o universo do audiovisual, quando pensamos em sua especificidade.
+
 691;40;PTRelpron|PTDefart:PTA|PTConVerb+PTPrep;*|*|PTVerb;
 
+/*		691. Ao mesmo tempo em que nega a realidade que o cerca, constata-se personagem imerso á frieza e á corrupção do jogo.
 /* NOS: PREPART or PERSPRON
 
 751;40;PTNos|PTVerb:PTAux;PTPerspron|*;
+
+/*		751. Ele ainda nos diz algo importante na constituição dessa problemática.
+
 752;40;PTNos;-PTNos;
 
+/*		752. Entretanto, é improvável que venham a ser licenciadas nos próximos dois a três anos.
 /* MULTIWORD PREPOSITION: JOIN
 
 496;40;PTAdv:PTMaismenos|PTAdjInPrep|PTPrep;PTPrep|+Join|+Join;
+
+/*		496. Poucas são as informações encontradas nesta lei, sendo o assunto tratado eventualmente dentro de outros temas. O planeta mais próximo do nosso sistema solar simplesmente desapareceu.
+
 497;40;PTAdv:PTMaismenos:PTAdjAdv|PTAdjInPrep|PTPrepart;PTPrepart|+Join|+Join;
+
+/*		497. Facilitando o rumo directo para Lisboa e possibilitando assim que os portugueses se aventurassem cada vez para mais longe da costa.
+
 835;40;PTAdjInPrep|PTPrep|PTInf:PTRefl:PTPerspron;PTConj|Join|*;
+
+/*		835. Ele foi condenado em Abril ultimo a oito anos de trabalhos forçados, depois de se haver concluído que entrara ilegalmente no país.
+
 494;40;PTAdjInPrep|PTPrep;PTPrep|+Join;
+
+/*		494. Certamente, eles haviam passado por outras tarefas (e talvez outros senhores) antes de chegarem à vida marítima.
+
 495;40;PTAdjInPrep|PTPrepart;PTPrepart|+Join;
 
+/*		495. Na base de dados empregada no trabalho, a informação de que dispomos é a relativa ao número de empregados no último dia do mês.
 /* CONCEPT PLUS DE
 
 716;40;PTConPlusDe|.PTAdj|PTDe:PTDo|PTConVerb:PTAdjVerb:PTConPart:PTPoder;PTCon|+Join|+Join|+Join;
+
+/*		716. A segunda colocada é a Universidade Federal de Minas Gerais com 320 vagas anuais. O grupo de partidos que se sentou à mesa das negociações. Conseguimos chegar à fase de grupos da Liga Europa.
+
 726;40;PTConPlusDe|PTDe|PTPart;PTCon|+Join|+Join;
+
+/*		726. Vamos apresentar uma série de propostas às Secretarias Regionais da Ciência.
+
 715;40;PTConPlusDe|.PTAdj|PTDe:PTDo|typeConcept;PTCon|+Join|+Join|*;
+
+/*		715. Vamos apresentar uma série de propostas às Secretarias Regionais da Ciência. Frete um grande iate com um grupo de amigos. Universidade Tecnológica Federal do Paraná.
+
 710;40;PTConPlusDe+PTConVerb|^PTDe;PTConVerb|*;
 
+/*		710. Segundo a ministra, com este dispositivo pretende-se fazer todo o acompanhamento do aluno desde o momento da sua candidatura à vaga.
 /* CONJUNCTION OR ADVERB
 
 876;40;PTConjAdv|PTComma:PTPunctuation:PTAndOrBut:SEnd;^PTAdv|*;
+
+/*		876. Então, quando mordeu a maçã, caiu mortinha.
+
 877;40;PTLinkingverb|PTConjAdv;*|-PTConjAdv;
+
+/*		877. A aliança jamais desfeita entre a burguesia urbana e a oligarquia rural é então consolidada.
+
 878;40;PTConjAdv;PTConj;
 
+/*		878. Os portugueses começaram então a abandonar a capital.
 /* INFINITIVE or NOUN
 
 698;40;PTIndefart:PTDefart|PTInfCon;*|PTCon;
+
+/*		698. A existência de ambientalista e ao mesmo tempo pesquisadora da área em questão permitiu a produção de um  parecer técnico-científico.
+
 699;40;PTIndefart:PTDefart:PTPrep:PTPrepart|PTAdjVerb:PTNum|PTInfCon;*|PTAdj|PTCon;
+
+/*		699. Tal propósito deve se organizar de forma extremamente cuidadosa a partir de um atento olhar ao desenvolvimento de sua atividade poética. Essa ‘elegância’ não se nota ao primeiro olhar.
+
 694;40;PTAdj:PTIndefpron:PTPrepart|PTInfCon;*|PTCon;
+
+/*		694. Foram propostos a utilização do erro-padrão da média ao invés do desvio-padrão, no cálculo da variabilidade dos ambientes para cada cultivar e também o aumento do nível de confiança. Esta mesma cultivar também é a mais indicada para ambientes favoráveis. Entre os nutrientes, o nitrogênio é o elemento requerido em maior quantidade pelo feijoeiro e, dependendo da cultivar, apresenta maior ou menor capacidade de fixação do nitrogênio atmosférico.
+
 696;40;^PTCon|PTA|PTInfCon;*|^PTA|PTCon;
+
+/*		696. Os cientistas, estudando a cultivar de pimentão Yolo em casa-de-vegetação, verificaram um consumo total de água de 1.232,8 mm para um ciclo de 115 dias. NOT. Uma das mais influentes teóricas sobre a agricultura seguiu precisamente esta estratégia e concluiu que a pressão da população tem sido a força-chave por trás da intensificação do uso da terra, compelindo os grupos a cultivar produtos agrícolas em primeiro lugar.
+
 695;40;PTInfCon;^PTInf;
 
+/*		695. O processo de rigorosa simplificação ambiental começou entre os colonos agrícolas, procurando por um produto agrícola que pudessem cultivar e exportar para o leste pelas ferrovias.
 /* AUXILIARY VERB or NOUN
 
 39;40;PTA|PTAuxCon;PTDefart|PTCon;makes Concept of ambiguous linking verb which can also be concept
+
+/*		39. E isto foi assim, pelo menos, até a era moderna e a ascensão do modo de produção capitalista.
+
 40;40;PTIndefart:PTPosspron:PTDemonstr:PTPrepart:PTMaismenos|PTAuxCon;*|PTCon;makes Concept of ambiguous linking verb which can also be concept
+
+/*		40. Recordam que as Nações Desenvolvidas viveram uma era notável, de paz e prosperidade económica. Os anos 80 foram realmente a sua era dourada. Há dúvidas sobre se cursaria, ou não, os estudos oficiais de aquelas eras, na universidade. Na Era dos Descobrimentos, destacou-se por ter sido o comandante dos primeiros navios a navegar directamente da Europa para a Índia.
+
 44;40;PTPrep+^PTComo|PTAuxCon|^PTPart;*|PTCon|*;makes Concept of ambiguous linking verb which can also be concept, after preposition
+
+/*		44. O número de prestadores de assistência em escala nos aeroportos está limitado a dois operadores, o que até era possível, não fosse o facto de a selecção dos prestadores de assistência em três das categorias não ter sido feita de acordo com o disposto na directiva. NOT. Historiador, localizando a biografia em seus altos e baixos conforme era reconhecida pelos profissionais da História. NOT. Como era de se esperar.
+
 66;40;PTAuxCon|PTPart;PTAux+PTVerb|PTPartrel;makes Relation of past participle after ambiguous auxiliary verb which can be concept
+
+/*		66.  O trabalho de brigadista era considerado pesado por 38, % deles, medianamente pesado por 46, % e leve por 15, %.
+
 234;40;PTAuxCon|PTAdv:PTAdjAdv|PTPart;PTAux+PTVerb|PTAdv|PTPartrel;makes Relation of past participle after ambiguous auxiliary verb which can be concept + adverb
+
+/*		234. Porém, este empreendimento não era bem visto pelas altas classes. A salada de frutas, por exemplo, era mal vista devido a isso.
+
 530;40;PTAuxCon+PTLinkingverb;PTAux+PTVerb+PTLinkingverb;
+
+/*		530. Era claro o dilema colocado à coroa portuguesa.
+
 531;40;PTAuxCon;PTAux+PTVerb;
 
+/*		531. Por esta razão, muito esforço deve ser feito para oferecer-lhes segurança contra as forças destrutivas.
 /* REFLEXIVE VERBS
 
 834;40;PTConj:PTRelpron:PTNao|PTRefl|PTAux;*|-PTConj-PTCondition|*;disambiguate 'se'
+
+/*		834. Se pudermos nos ater às perplexidades do presente, estaremos em área traumática, mas este é o único solo onde se pode construir um pensamento novo.
+
 872;40;PTAux|.PTAdv:PTAdvstruct|PTRefl|PTPart;*|*|-PTConj-PTCondition|*;
+
+/*		872. Com isso a empresa não havia ainda se pronunciado sobre o fato.
+
 928;40;PTRefl+^PTConj|PTAux+PTInf;PTAux+PTInf|Join;avoid that one of the labels gets lost
+
+/*		928. A idade mínima para se poder celebrar um contrato de trabalho é de 16 anos e a reforma é compulsiva aos 70 anos.
+
 507;40;PTRefl+^PTConj|PTAux;PTAux|Join;
+
+/*		507. Por esta data já se tinha, na Europa, o conhecimento da existência de terras a leste da linha do Tratado de Tordesilhas.
+
 508;40;PTRefl|PTVerb+^PTAux;PTVerb|+Join;
+
+/*		508. Zouk foi o ritmo que melhor se encaixou na nossa dança.
+
 506;40;PTRefl|PTInf;PTInf|+Join;
 
+/*		506. Todos afirmaram não ter dificuldade alguma para se adaptar a outras funções quando necessário.
 /* EM: PREPOSITION
 
 240;40;PTEm|PTSegundo;PTEm|PTAdj;makes Concept of 'segundo' after 'em'
+
+/*		240. Seu companheiro de equipe terminou em segundo.
+
 1;40;PTMaismenos|PTPart|PTEm;PTCon|PTCon|PTPrep;makes Concept of past participle and 'mais'
+
+/*		1. A alface é uma das hortaliças mais cultivadas em todo mundo.
+
 2;40;PTEm;PTPrep;
 
+/*		2. A contração volumétrica dos frutos foi determinada pela relação entre o volume em cada teor de água e o volume inicial.
 /* AO: PREPOSITION AS PART OF CONCEPT
 
 678;40;PTNum:PTNumber+^PTRoman|PTAo;PTNumber|PTCon;
+
+/*		678. Subjacente a essa queda mensal, o nível de realocação é estimado em 12,56% ao ano. NOT. Dedicámos o capítulo III ao tema da composição patrimonial.
+
 679;40;PTAo;PTPrepart;
 
+/*		679. O beneficiamento dos frutos de mamona é um dos principais fatores limitantes ao crescimento da cultura.
 /* A = PREPOSIION or DEFINITE ARTICLE
 
 159;40;PTA|PTInf:PTNumber;PTPrep|*;rewrites 'a' to preposition before infinitive or number
+
+/*		159. Nos anos subseqüentes esses índices voltaram a subir, e em 2006 chegaram à margem de 6,38%, o maior índice registrado desde 2002. As sessões experimentais do musical terão início a 14 de Novembro.
+
 191;40;PTNum:PTIndefart|PTA|PTNum;PTNum|PTPrep|PTNum;rewrites 'a' to preposition between numerals
+
+/*		191. Entretanto, é improvável que venham a ser licenciadas nos próximos dois a três anos. Contava de um a cem, e dobrava o dedo mindinho.
+
 190;40;PTA|PTDefart:PTIndefart:PTDemonstr:PTIndefpron;PTPrep|*;rewrites 'a' to preposition before article, demonstrative and indefinite pronoun
+
+/*		190. Possuem também alguns fósseis, como a os da espécie Ostrea crassissima. Responde a um grande número de encomendas. Nas respostas a esta questão, surge um aspecto contraditório. A todos os países foi dado o prazo para se adaptarem as mudanças necessárias.
+
 196;40;PTA|PTMonth;PTPrep|PTMonth;rewrites 'a' to preposition before month
+
+/*		196. Os dados foram coletados em dias alternados, no período de novembro de 2008 a fevereiro de 2009.
+
 199;40;PTA|PTPart:PTConPart;PTDefart|PTCon;rewrites 'a' to definite article and past participle to Concept
+
+/*		199. A topografia também influencia os distúrbios no sistema, por aumentar a susceptibilidade do sítio a determinados tipos de problemas, tais como deslizamentos.
+
 574;40;PTComma|PTPart|PTA;*|PTPartrel|*;
+
+/*		574. Recanto das Emas é uma das mais recentes cidades satélites criadas no entorno da capital, localizada a 25,8km do centro do Plano Piloto.
+
 598;40;PTPart+^PTAux|PTA|PTAdj;*|PTPrep|*;
+
+/*		598. Cada sociedade atribui determinados papéis a homens e mulheres, os quais freqüentemente se ajustam a determinadas características atribuídas a ambos os sexos. NOT. De fato, a população também foi a única a diminuir em termos numéricos.
+
 358;40;PTA|PTNao|PTCon;PTDefart|PTNaoAdj+PTNegation-PTNegBegin|PTCon;
 
+/*		358. A protecção do trabalhador, por exemplo, na doença, no caso de acidente laboral, a não descriminação por sexo ou raça, a igualdade de oportunidades, são alguns do valores e direitos que estão presentes e são activamente defendidos pelas leis laborais.
 /* CERTO
 
 624;40;PTLinkingverb|PTCerto;*|PTAdj;
+
+/*		624. Ela estava certa e eu me sentei.
+
 629;40;PTCerto|PTLinkingverb;PTAdj|*;
+
+/*		629. Embora não existam evidências concretas a sustentar qualquer das hipóteses, certo é que por esta data já se tinha o conhecimento da existência de terras a leste da linha.
+
 630;40;PTVerb|PTCerto|PTRelpron;*|PTAdv|*;
+
+/*		630. Sabemos certo que ele dá, per si, e per seus oficiais, mui boa ordem à navegação destes trautos.
+
 626;40;PTCon:PTConVerb|PTCerto|PTPrep:PTPrepart:PTConj;*|PTAdj|*;
+
+/*		626. Como encontrar a proporção certa entre as estratégias públicas e privadas de planeamento urbano de longo prazo e os projectos imediatos, a liderança dos poderes públicos e os consensos sociais? No contrato de trabalho a termo certo se a sua duração for inferior.
+
 628;40;PTCerto|PTComma:PTAndOrBut:PTPunctuation;PTAdj|*;
+
+/*		628. Os jogadores sabem que estão no caminho certo, eles têm a minha palavra.
+
 631;40;PTCon:PTConVerb|PTCerto|SEnd;*|PTAdj|*;
 
+/*		631. Contrato de trabalho a termo certo.
 /* SALVO: ADJECTIVE, PARTICIPLE or PREPOSITION
 
 456;40;PTLinkingverb|PTSalvo;*|PTAdj;
+
+/*		456. Um cristão é alguém que sente que está salvo de corpo e alma.
+
 458;40;PTPrep:PTA|PTSalvo;^PTPrep|PTAdj;
+
+/*		458. Todos os deputados estão vivos, foram evacuados do Parlamento e estão a salvo.
+
 457;40;PTSalvo;PTPrep;
 
+/*		457. As pencas podem ainda ser cortadas em grupos mais pequenos, geralmente em caixas de cartão que podem ser envolvidas por sacos de polietileno e que são embarcadas, salvo raras excepções, nos chamados "barcos fruteiros".
 /* ESTE: NOUN or ARTICLE
 
 3;40;PTDefart:PTPrepart|PTEste;*|PTCon;makes Concept of 'este' if preceded by article
+
+/*		3. Podem ser encontrados ao longo de todo o Este e Centro dos EUA, com excepção do estado da Florida.
+
 5;40;PTEste;PTDemonstr;
 
+/*		5. Este é composto pelos setores de Calçados e Metalurgia.
 /* PODER: AUXILIARY INFINITIVE OR NOUN
 
 912;40;PTPoder|.PTAdv:PTAdvPR:PTAdvstruct|PTInf;PTAux+PTInf|*|*;
+
+/*		912. "Poder estar sempre com os meus amigos sem perturbações", avalia ela.
+
 914;40;PTNao+^"nem"|PTPoder;*|PTAux+PTInf;
+
+/*		914. E peço desculpa por não poder neste momento ser mais preciso.
+
 926;40;PTPoder+PTVerb;-PTPoder;
+
+/*		926. Poder-se-ia até chamar tais condições de determinantes suaves da existência humana, já que elas influenciam significativamente como e onde as pessoas obtém seus meios de vida.
+
 913;40;PTPoder;PTCon;
 
+/*		913. O Parlamento recomende aos Estados-Membros que atribuam mais recursos e poder às instituições. O equilíbrio de poder entre as Instituições.
 /* TODO/A(S): makes some following nonrelevants part of Concept
 
 637;40;PTComma|PTConVerb|PTIndefpron;PTComma|PTVerb|*;
+
+/*		637. Reúne uma imensa massa documental cujo conteúdo, proporcionalmente à relevância das várias ilhas, abarca todo o arquipélago.
+
 617;40;PTCon|PTTodo|PTIndefart:PTDefart:PTDemonstr:PTA|PTCon;PTCon|PTBeginconcept|PTCon|+Join;
+
+/*		617. A televisão, e os recursos de alta resolução de vídeo demonstram para o telespectador todas as nuances de uma partida em tempo real.
+
 618;40;PTTodo|PTDefart|PTPosspron;PTAdj|+Join|+Join;
+
+/*		618. Há, portanto, tantas histórias da música quanto há culturas no mundo e todas as suas vertentes têm desdobramentos e subdivisões.
+
 620;40;PTTodo|PTDefart|PTIndefpron;PTTodo+PTIndefpron+PTIndefpronPRCon|+Join|+Join;
+
+/*		620. Todos os demais afirmaram possuir mais de dez anos de experiência na função de gestão.
+
 615;40;PTTodo|PTIndefart:PTDefart:PTPosspron:PTDemonstr:PTDemonstrPR|^PTVerb+^PTRelpron;PTAdj|+Join|*;
+
+/*		615. Além de ritmo e compasso definidos musicalmente, traz historicamente em seu bojo toda uma cultura de comidas. Todos esses valores mostraram grande variação ao longo do ano. NOT. Qualifica o Nobel como portador de "uma mensagem de rotundo apoio a todos os que lutam no mundo pela liberdade e direitos humanos". NOT. Todos os brigadistas que receberam treinamento tiveram noções de segurança e de primeiros socorros, e todos consideraram essas noções satisfatórias.
+
 616;40;PTTodo|PTA:PTNum;PTAdj|+Join;
 
+/*		616. Foram selecionados vários pontos de coleta procurando abranger toda a cidade e diferentes áreas. Na religião Wicca, em que todo primeiro dia de lua cheia esbat é considerado sagrado.
 /* NUMBERS PLUS 'DE'
 
 722;40;PTNum:PTMaismenos|PTDe|PTNum:PTPercent;PTNum|+Join|+Join;
+
+/*		722. Dezenas de milhares de pessoas protestaram pela quinta vez. Mais de nove de cada dez pessoas nos Estados Unidos. Entre as escolas com menos de 25% de participação.
+
 327;40;PTNum|PTConVerb;PTNum|PTCon;makes Concept of ConVerb after numeral
+
+/*		327. A diferença entre as duas equipes nunca foi tão evidente.
+
 720;40;PTNum:PTPercent|PTDe|PTCon:PTConVerb:PTConPart:PTPart;PTCon|+Join|+Join;
+
+/*		720. Existem mais de 1,7 milhões de equipes no mundo. Observa-se que os frutos de mamona apresentaram 46% de redução do seu volume em relação ao volume inicial.
+
 721;40;PTNum:PTPercent|PTDe|PTAdj:PTAdjVerb;PTAdj|+Join|+Join;
 
+/*		721. O pessoal em actividade nos serviços dos hospitais e dos centros de saúde situa-se na ordem de quatro milhares de profissionais. É claro que eles apareceram em outros locais, incluindo os ranchos pecuaristas da região, mas enormes concentrações, em agrupamentos de milhares de animais, todas as espécies reunidas novamente.
 /* ADVERB or NOUN
 
 460;40;PTPrep:PTPrepart:PTIndefart:PTDefart|PTAdvCon;*|PTCon;
+
+/*		460. Também não deve ser fruto do acaso o fato. Um acaso fez descobrir a cilada.
+
 462;40;PTAdvCon;PTAdvmanner+PTAdv;
 
 /* PARTICIPLE or ADJECTIVE
 
 554;40;PTAux|PTPart+PTAdj;*|PTPartrel;
+
+/*		554. As dunas parabólicas têm forma em meialua, nesse sentido, são opostas às dunas barcanas.
+
 555;40;PTComma|PTPart+PTAdj|PTPrepart;*|PTPartrel|*;
+
+/*		555. O preconceito é fonte de intolerância, de violência e leva à discriminação quando o diferente é considerado inferior, privado dos privilégios que outros desfrutam.
+
 553;40;PTPart+PTAdj;PTAdj;
 
+/*		553. A administração de algumas rodovias foi transferida à iniciativa privada a partir do final da década de 90.
 /* ADJECTIVE or NOUN
 
 842;40;PTIndefart:PTDefart:PTPosspron:PTPrepart:PTPrep|PTAdjCon|typeRelation;*|PTCon|*;
+
+/*		842. As músicas não ocidentais, como a africana apelam mais ao imaginário.
+
 570;40;PTIndefart:PTDefart|PTAdjCon|PTConVerb|"a"|PTInf;*|PTCon|PTVerb|*|^PTInf;
+
+/*		570. Hoje a relação com o parceiro volta a ganhar valor.
+
 575;40;PTIndefpron:PTIndefart:PTDefart:PTPosspron|PTAdjCon|PTPart:PTVerb;*|PTCon|*;
+
+/*		575. Disso decorre que a civilização geralmente as formas de dominação se impõem quando certas características construídas a partir das relações sociais são naturalizadas. O material usado pelo artista e suas técnicas são o que tornam uma obra de arte bonita. A capitalização é um processo comum entre as companhias de capital aberto que por algum motivo precisam de mais recursos.
+
 577;40;PTIndefpron|PTAdjCon|PTRelpron:PTComma:SEnd;*|PTCon|*;
+
+/*		577. Pode ser mais adequado modelar a disputa entre Estados-membros e o bloco, separando o jogador em dois outros jogadores que representassem a Comissão e o Conselho de Ministros distintamente. Esta edição representa um turning point em nosso projeto editorial original, por vários motivos.
+
 576;40;PTPrepart:PTPrep|PTAdjCon|PTPart;*|PTCon|*;
+
+/*		576. Estética do cotidiano no documentário feito com celular.
+
 884;40;PTVerb:PTGer+^PTLinkingverb|PTAdjCon|typeRelation;*|PTCon|*;
 
+/*		884. Idosos, deficientes e pais únicos possuem direito a um passe diário.
 /* ADJECTIVE or VERB
 
 587;40;PTAdjVerb+PTVerb|.PTAdv|PTInf;PTVerb|*|*;
+
+/*		587. O mundo precisa urgentemente calcular o valor do carbono. Uma democracia precisa estar ancorada por uma "cultura democrática"?
+
 572;40;PTIndefart:PTDefart|PTCon|PTAdjVerb;*|*|PTAdj;
+
+/*		572. Identificação e clarificação dos valores em função do público em questões e as particularidades locais.
+
 583;40;PTInf|PTA|PTCon:PTConVerb|PTAdjVerb;*|*|*|PTAdj;
+
+/*		583. A parada vai limitar-se a forças militares a pé, assim como antigos combatentes.
+
 585;40;PTPrep|PTConVerb|PTAdv:PTMaismenos|PTAdjVerb;*|PTCon|PTAdj|+Join;
+
+/*		585. Em linhas mais gerais uma espécie de quadro de referência do funcionamento do sistema desde a sua criação até finais da era de Setecentos, tornavam qualquer abordagem, na mesma linha de trabalho, no mínimo, redundante.
+
 584;40;PTAux:PTCon:PTAndOrBut:PTComma|PTAdv:PTMaismenos|PTAdjVerb;*|PTAdj|+Join;
+
+/*		584. O processo de formação de preços de navios de segunda mão no mercado internacional é extremamente complexo. O novo campo da história ambiental se encontra numa posição muito estranha. Foi a explosão de um forno usado para fundir os resíduos radioativos metálicos de leve e muito leve atividade que acionou seu centro de urgência. O técnico falou ainda de "factores colaterais ao jogo, pouco controláveis, como a sorte, que também conta, e pode ditar uma fuga ao que é a lógica das finais".
+
 605;40;PTCon|PTAdjVerb|PTIndefpronPRCon;*|PTAdj|+Join;
+
+/*		605. Assim, uma canção de Elvis Presley, um heavy metal ou uma canção punk, embora sejam todas consideradas formas de rock, representam diversas culturas musicais várias.
+
 671;40;PTCon:PTAdjCon|PTAdvPR|PTAdjVerb;PTCon|PTAdj|+Join;
+
+/*		671. Não posso deixar aqui públicamente de expressar a mágoa que sentimos pelo falecimento de um profissional como muito poucos, de um colega sempre atento.
+
 582;40;PTAdjVerb+PTVerb;PTVerb;
+
+/*		582. A província precisa de cerca de 850 salas de aula para atender 600 mil alunos.
+
 702;40;PTCon:PTConVerb|PTAdvstruct|PTAdv:PTMaismenos|PTAdj:PTAdjVerb;PTCon|PTAdj|+Join|+Join;
+
+/*		702. Para a gerente da exposição a alta carga tributária é ainda um empecilho para o crescimento ainda mais expressivo deste segmento. Especificamente em nosso caso, a tradução seria já um caso ainda mais complexo.
+
 794;40;PTAdj|PTAndOrBut|PTAdjVerb;*|*|PTAdj;
+
+/*		794. Nos últimos anos, por conta de conjunturas internas e externas o transporte aéreo sofreu grandes perdas.
+
 573;40;PTAdjVerb;PTConVerb;
 
+/*		573. Foram propostos a utilização do erro-padrão da média ao invés do desvio-padrão, no cálculo da variabilidade dos ambientes para cada cultivar.
 /* PARTICIPLE or NOUN
 
 588;40;PTAdj|PTConPart;*|PTCon;
+
+/*		588. Também não guardam grande significado em termos de relação conceitual.
+
 590;40;PTPrep|PTAdjAdv|PTConPart;*|PTAdj|PTCon;
+
+/*		590. Ao retratar o momento do martírio, essas pinturas sinalizavam também paisagens específicas das cidades onde eles haviam ocorrido, levando a atenção a lugares de alto significado para a cristandade.
+
 594;40;PTPrep:PTDemonstr|PTConPart;*|PTCon;
+
+/*		594. A pessoa humana, antes vista como sujeito do processo terapêutico,   respeitada em sua dignidade, vontade, liberdade e razão, transforma-se em objeto de estudo. Quais as características das questões formuladas por esses sujeitos para mediar a leitura de textos didáticos de ciências?
+
 591;40;PTCon|PTAndOrBut|PTConPart;*|*|PTCon;
+
+/*		591. O diretor que olha para esse filme a partir do processo de resiliência e destaca o poder e significado das imagens tidas como vazias.
+
 592;40;SBegin|PTConPart|PTDe|.PTDefart:PTIndefart:PTPosspron|PTCon:PTNumber:PTNum:PTAdj;*|PTCon|*|*|*;
+
+/*		592. Proposta de atividades de monitoramento ambiental e inteligência empresarial para o modelo de gestão. Proposta de dois investigadores portugueses.
+
 595;40;PTComma|PTConPart|PTDe|PTCon:PTNumber:PTNum:PTAdj;*|PTCon|*|*;
+
+/*		595. Foram analisadas quatro dimensões da religiosidade: afiliação religiosa, frequência a cultos, medida de autoavaliação geral quanto à religiosidade e a educação religiosa na infância.
+
 593;40;PTVerb+^PTAux|PTConPart|PTPrep:PTPrepart;*|PTCon|*;
+
+/*		593. Na semana passada, o governo recusou proposta da ANMR. NOT. Uma mudança radical do traçado foi proposta para seguir as regras.
+
 603;40;PTVerb|PTConPart|PTIndefpronPRCon;*|PTCon|PTAdj;
+
+/*		603. Os termos perigo e risco tem se tornado cada vez mais freqüentes no vocabulário científico, embora nesse estudo assumam significados vários.
+
 619;40;PTIndefpron:PTNaoAdj|PTConPart;*|PTCon;
+
+/*		619. Entretanto, a equipe de médica não notou nenhuma ferida na caixa torácica ou no abdômen. O estilo musical influenciou fortemente a música de outros estados.
+
 718;40;PTMaismenos|PTPart|PTConPart;PTAdj|+Join|PTCon;
+
+/*		718. O estado de São Paulo, sendo o mais industrializado estado da federação, é o maior produtor e também consumidor de energia nacional.
+
 589;40;PTConPart;PTPart;
 
+/*		589. Os termos perigo e risco tem se tornado cada vez mais freqüentes no vocabulário científico, embora nesse estudo assumam significados diferentes.
 /* ANTES: PREPOSITION / ADVERB
 
 674;40;PTAntes|PTPart;PTAdv|*;
 
+/*		674. O antes utilizado scout com papel e caneta já vem sendo substituído pelo emprego de sistemas computadorizados.
 /* ADVERBS OF DEGREE plus INDEFINITE PRONOUNS / plus PATHRELEVANT TIME EXPRESSIONS
 
 646;40;PTAdvdegree:PTMaismenos|PTIndefart:PTDefart:PTA|PTIndefpronPR;PTIndefpronPR|+Join|+Join;
+
+/*		646. O entretenimento busca constantemente uma combinação de elementos que já despertaram certa reação no passado, na suposição de que a mesma combinação provocará mais ou menos a mesma reação de novo.
+
 611;40;PTAdvdegree:PTMaismenos|PTIndefpronPR;PTIndefpronPR|+Join;
+
+/*		611. No início da semana, o país e pelo menos outros quatro do Cone Sul tiveram.
+
 612;40;PTAdvdegree:PTMaismenos|PTIndefpronPRNR;PTIndefpronPRNR|+Join;
+
+/*		612. É quase certo que o adjetivo usado pelo capitão ao se referir ao velho marinheiro tenha sido um pouco mais pesado do que o anotado por o viajante em questão.
+
 604;40;PTAdvdegree:PTMaismenos|PTIndefpronPRCon;PTIndefpronPRCon|+Join;
+
+/*		604. Nestas idas e vindas a Lei levou quatro anos para ser regulamentada e mais alguns anos ainda para se tornar parcela representativa das destinações de  recursos públicos para a cultura. Todos falam a mesma língua (o português) e, quase todos, são cristãos, com largo predomínio de católicos.
+
 669;40;PTAdvdegree:PTMaismenos|PTAdvPR+PTTime;PTAdvPR+PTTime|+Join;
+
+/*		669. Análises de adaptabilidade vêm sendo usadas principalmente para características produtivas e mais recentemente para outras finalidades como para ecofisiologia dos componentes do rendimento. Até muito recentemente, todos aqueles ecossistemas têm sido entendidos pelos ecologistas como tendo poderes auto-equilibrantes.
+
 675;40;PTAdvdegree:PTMaismenos|PTAdvPR;PTAdvPR|+Join;
 
+/*		675. Tremores e hipermetria são os mais freqüentemente encontrados em cães com a forma neurológica da cinomose.
 /*TIME: CONCRETE POINT IN TIME
 
 656;40;PTConTime:PTTempBeginEnd:PTDay|PTDe:PTPrepartTime|PTConTime:PTDay:PTTempBeginEnd;PTConTime+PTTempEnd|+Join|+Join;
+
+/*		656. Na base de dados empregada no trabalho, a informação de que dispomos é a relativa ao número de empregados no último dia do mês. Amanhã de manhã vamos anunciar uma decisão. Após atrasar por quase dois meses o anúncio, o Instituto divulgou na manhã desta segunda-feira as médias das escolas. Até ao final do dia de ontem.
+
 663;40;PTAdjtemp|PTConTime|PTAdj;PTAdj|PTCon|PTAdj;
+
+/*		663. Relativamente à situação dos professores, no próximo ano lectivo, o sector vai receber 1.602 novos professores.
+
 650;40;^PTConTime|PTAdjtemp|PTConTime;*|PTConTime+PTTempBeginEnd|+Join;
+
+/*		650. O setor teve taxas de crescimento líquido do emprego positivas para o primeiro e o último ano.
+
 648;40;PTConTime|PTAdjtemp;PTConTime|+Join;
+
+/*		648. As amostras de água para a análise foram transportadas à temperatura ambiente até o laboratório, onde eram mantidas à temperatura de 5ºC até o dia seguinte.
+
 657;40;PTDemonstr:PTIndefpron|PTConTime:PTDay;PTTempBeginEnd|+Join;
+
+/*		657. Ele foi avaliado esta manhã, tendo a equipa médica concluído que a sua  lesão não é grave. A Universidade entrega esta segunda-feira, à Comissão Nacional da UNESCO, o dossier da sua candidatura a Património da Humanidade.
+
 649;40;PTConTime|PTNumber:PTNum;PTConTime|+Join;
+
+/*		649. O senhor teve de pagar uma fiança no valor de um milhão de dólares para aguardar em casa pela próxima audiência no tribunal, adiada para o próximo dia 6 de Junho.
+
 54;40;PTNumber:PTNum|PTDe|PTMonth:PTConTime;PTMonth|+Join|+Join;makes Concept of 'de' between number and month or ConTime
+
+/*		54. 10 de maio de 1947 é considerada uma data de vital importância para o ressurgimento do futebol mundial. Isso limita a algumas dezenas de milhões de anos o intervalo de tempo.
+
 53;40;PTMonth:PTConTime:PTTempBeginEnd|PTDe:PTPrepartTime|PTNumber:PTConTime;PTMonth|PTCon|PTEndconcept;
+
+/*		53. A exceção foi em março de 2003 quando foi registrado um número maior. O número de acessos diários em Julho rondou os 473 mil utilizadores, um acréscimo de 6,5 por cento face ao mesmo mês de 2009.
+
 659;40;PTConTime|PTDe|PTMonth;PTMonth|+Join|+Join;
+
+/*		659. Na madrugada de 1 de Fevereiro de 2006 nevou na Serra do Caldeirão, e a manhã de 10 de Janeiro de 2009 nevou na Serra de Monchique.
+
 704;40;PTIndefpron|PTDefart|PTConTime:PTDay;PTTempBeginEnd|+Join|+Join;
+
+/*		704. Em ambas os meses a precipição média ronda os 40 mm.
+
 723;40;PTIndefpronPRCon|PTMonth;PTAdj|PTMonth;
+
+/*		723. Isso limita a algumas dezenas de milhões de anos o intervalo de tempo.
+
 653;40;PTNumber:PTNum|PTPrepartTime|PTConTime;PTTempBeginEnd|+Join|+Join;
+
+/*		653. Dos anos 30 aos 60 do século XX a pesca de bacalhau passa a ser feita  também nas proximidades da Groenlândia.
+
 668;40;PTConTime|PTAdjtempAfter;PTConTime|+Join;
+
+/*		668. Ele reitera não poder resgatar a sua própria memória de 35 anos atrás.
+
 651;40;PTConTime+^PTTempBeginEnd+^PTTempEnd+^PTNumber;PTCon;
+
+/*		651. Na religião Wicca, em que todo primeiro dia de lua cheia esbat. NOT. Afloram a cada dia novas alternativas tornando mais dinâmicas. NOT. A televisão líbia exibiu na noite de domingo imagens da partida.
+
 655;40;PTConTime+PTTempBeginEnd;PTTempBeginEnd;
+
+/*		655. Na base de dados empregada no trabalho, a informação de que dispomos é a relativa ao número de empregados no último dia do mês.
+
 661;40;PTConTime+PTTempEnd;PTTempEnd;
+
+/*		661. A televisão líbia exibiu na noite de domingo imagens da partida.
+
 207;40;PTNumber:PTNum|PTCon|PTAndOrBut|PTMeio;PTNum|PTCon|PTCon|PTCon;makes Concept of 'e' between number + Concept and 'meio'
+
+/*		207. A demora foi superior a três anos e meio.
+
 705;40;PTTempBeginEnd|PTDateBrackets;PTTempBeginEnd|+Join;
+
+/*		705. O Ministério passa a veicular hoje (7) avisos publicitários em rádios.
+
 725;40;PTTempEnd|PTDateBrackets;PTTempEnd|+Join;
+
+/*		725. A maior parte dos voos tinha como destino Buenos Aires (Argentina) e Montevidéu (Uruguai), cujos aeroportos foram fechados na noite deste domingo (12).
+
 707;40;PTDay|PTDateBrackets;PTDay+PTCon|+Join;
 
+/*		707. No fim da quinta-feira (5), a presidente anunciou a liberação de R$ 650 milhões.
 /* NUMBERS
 
 543;40;PTAdvdegree|PTAdvdegree;PTAdvdegree|+Join;
+
+/*		543. Na região litoral existem 5 meses secos, e entre Junho e Setembro a queda de precipitação é muito pouco frequente.
+
 724;40;PTNum|PTPart|"pelo":"pela":"no":"por";PTNum|PTPartrel|*;
+
+/*		724. Neste ambiente de produção com fraco desempenho volta a pesar a questão da operação de capitalização de R$ 120 bilhões feita pela empresa no ano passado. Os R$ 6,7 bilhões previstos no Orçamento. Na quinta-feira, três moradores foram detidos e outros dois indiciados por terem jogado pedras na polícia, no domingo passado.
+
 514;40;PTNum;PTNumber;
+
+/*		514. O desastre deveu-se à seca, a mais severa em aproximadamente duzentos anos no clima da região.
+
 513;40;PTAdvdegree|PTNumber;PTNumber|+Join;
+
+/*		513. Devendo o solo se manter próximo a 80% da sua capacidade.
+
 82;40;PTCon|PTConVerb|PTNumber;*|PTVerb|PTNumber;makes Relation of ConVerb between Concept and Number
+
+/*		82. A nova constituição reserva 25% do orçamento do Estado e 18% de impostos federais e taxas municipais para a educação.
+
 28;40;PTNumber+^PTPercent|PTPart;PTNumber|PTCon;makes Concept of past participle after number
+
+/*		28. O laptop terá um ecrã a rondar as 12 polegadas. NOT. O acréscimo de 0,3% observado em julho.
+
 515;40;PTNumber|PTIndefpron|PTCon:PTAdjCon;PTAdj|+Join|PTCon;
+
+/*		515. O casal procurou quatro outros cartórios de Curitiba. Assim, pode ser mais adequado modelar a disputa entre Estados-membros e o bloco, separando o jogador União Européia em dois outros jogadores que representassem a Comissão e o Conselho de Ministros distintamente.
+
 516;40;PTNumber|PTAdvstruct|PTAdj:PTPart;PTAdj|+Join|+Join;
+
+/*		516. Mais de 40 conventos são fundados na cidade em adição aos 30 já existentes.
+
 527;40;PTMaismenos|PTDe|PTNumber:PTUm|PTSegundo;PTAdj|+Join|+Join|PTCon;
+
+/*		527. Menos de um segundo e eu já perco o ar.
+
 525;40;PTMaismenos|PTDe|PTNumber:PTUm;PTAdj|+Join|+Join;
 
+/*		525. Existem mais de 1,7 milhões de equipes no mundo. Os dois clubes duraram mais de um mês, sendo que inicialmente.
 /* CONCEPT CLUSTER WITH NONRELEVANT
 
 517;40;PTCon|PTAdvstruct|PTAdj:PTPart|^PTPrepart;PTCon|PTAdj|+Join|*;
 
+/*		517. Como foi mencionado, a tendência é considerar o termo arte apenas relacionado, diretamente, à produção das artes plásticas. A arte pode trazer indícios sobre a vida, a História e os costumes de um povo, inclusive dos povos e nações já extintos. NOT. Apenas reforçam o consumo de gêneros já utilizados pelos portugueses como a cerveja.
 /* CONFORME: ADJECTIVE or VERB or PREPOSITION
 
 178;40;PTIndefart|PTCon|PTConforme;*|*|PTAdj;makes adjective of 'conforme' after article + Concept
 
+/*		178. São incapazes de dar uma resposta conforme e convicente.
 /* SEGUNDO: ADJECTIVE or PREPOSITION
 
 157;40;PTDefart:PTIndefart:PTDemonstr:PTPrepart|PTSegundo;*|PTAdj;makes adjective of 'segundo' if preceded by article, demonstrative pronoun or preposition+article
+
+/*		157. As cavas foram apontadas como sendo o segundo maior fator de perigo da localidade, seguidos pela ausência de salva-vidas e da presença de rochas de praia.
+
 162;40;PTPrep|PTSegundo|PTAndOrBut;^PTPrep|PTAdj|PTAndOrBut;makes adjective of 'segundo' between preposition and AndOrBut
+
+/*		162. Ele afirma que vai acelerar as nomeações de segundo e terceiro escalões, mas avisa que não há espaço para todos no governo.
+
 165;40;SBegin|PTSegundo|PTComma;*|PTAdv|PTComma;to make adverb of 'segundo' at beginning sentence
+
+/*		165. Segundo, o desenvolvimento seria necessário para a democracia.
+
 239;40;PTSegundo|PTPerspron;PTAdv|PTPerspron;to make adverb of 'segundo' before personal pronoun
 
+/*		239. Segundo ela, a operação foi um sucesso.
 /* MESMO: NONRELEVANT or INDEFINITE PRONOUN
 
 565;40;PTComma:PTAndOrBut|PTMesmo|PTVerb:PTPart;*|PTNonrel|*;
+
+/*		565. Nestes casos não é possìvel indicar com clareza a veracidade do depoimento, mesmo levando em conta a ironia nas seguidas falas. Sempre era colocado após o preparo e mesmo comido junto com o alimento, colocando-se um naco de comida na boca e em seguida o tempero.
+
 564;40;^PTDemonstr+^PTDefart|PTMesmo|PTPrep:PTPrepart:PTConj:PTRelpron;*|PTNonrel|*;
+
+/*		564. Os agonistas a2 adrenérgicos não induzem depressão respiratória profunda, mesmo em doses elevadas. NOT. Logo quando fui procurar algum filme apareceu este mesmo como sugestão. NOT. O som desta música não será o mesmo de uma música que apenas utilize piano.
+
 681;40;PTAux|PTMesmo|PTInf;*|PTNonrel|*;
 
+/*		681. Esses períodos podem ser anuais, mensais, semanais ou podem mesmo se desenrolar ao longo de um dia.
 /* MINHA: POSSESSIVE PRONOUN or NOUN
 
 566;40;PTPrep:PTPrepart|PTMinha|SEnd;*|PTCon|*;
+
+/*		566. Eram sete anões, que trabalhavam numa minha.
+
 568;40;PTMinha|PTDe;PTCon|*;
+
+/*		568. Eles exploraram a costa setentrional do Golfo da Guiné, atingindo a «minha de ouro» de Sama.
+
 567;40;PTMinha;PTPosspron;
 
+/*		567. À Minha Querida Mamã.
 /* NEGATION PLUS INDEFINITE PRONOUN
 
 687;40;PTNaoAdj|PTIndefpronPR|PTCon;^PTNaoAdj|+Join|*;
+
+/*		687. Nenhuma outra profissão, ou atividade, poderá reivindicar tais atributos.
+
 688;40;PTNaoAdj|PTIndefpronPR;PTNegPR+PTNegBegin+PTNegation|+Join;
 
+/*		688. Com as suas respectivas variantes estéticas o azulejo vai ser utilizado em outros países europeus como os Países Baixos, a Itália e mesmo a Inglaterra, mas em nenhum outro acaba por assumir a posição de destaque no universo artístico nacional.
 /* ADVERBS OF DEGREE: JOINS
 
 541;40;"pouco"|PTDe|^"que";PTAdvdegree+PTAdv|+Join|*;
+
+/*		541. O senhor deputado falará dentro em pouco de forma mais aprofundada sobre este país.
+
 448;40;PTCon:PTConVerb|PTAdvdegree|PTPart;PTCon|PTAdj|+Join;
+
+/*		448. Nós ainda não temos um quadro completamente pesquisado sobre como e onde os fatores ecológicos possam ter desempenhado um papel causal na grande transformação.
+
 447;40;PTAdvdegree|PTPart;PTPart|+Join;
+
+/*		447. Este grande desafio está sendo plenamente cumprido e é um motivo de júbilo da sociedade.
+
 523;40;PTAdvdegree|PTMaismenos;PTMaismenos|+Join;
+
+/*		523. Ele trabalha muito mais com imagens.
+
 520;40;PTAdvdegree+^PTPrep|PTCon;PTCon|+Join;
+
+/*		520. Para ter certeza de que as crianças estão bebendo bastante água, ofereça a elas um copo o tempo todo. NOT. Essas feições são enquadradas na categoria de riscos sazonais e são responsáveis pelo desenvolvimento de correntes de retorno mais freqüentes próximo a costa.
+
 512;40;PTAdj:PTAdjAdv|PTAdvdegreeAfter;PTAdj|+Join;
+
+/*		512. Se eles são maduros o suficiente para escolher a profissão. Não tinha ido para o meu assento rápido o bastante.
+
 529;40;PTAdvdegree|"do":"da":"dos":"das";PTAdj|+Join;
+
+/*		529. Muito do material para a história ambiental tem estado disponível há gerações e está simplesmente sendo absorvido pelo pensamento histórico à luz da experiência recente.
+
 544;40;PTAdvdegree|PTDe|PTCon:PTNumber:PTIndefpron:PTAdj;PTAdj|+Join|*;
+
+/*		544. Se ele estiver inquieto depois da mamada e não se acalmar, ofereça um pouco de água. Sendo o maior evento do género em Portugal, conta com participantes vindos um pouco de toda a Europa, nomeadamente de Espanha, França, Reino Unido e Itália.
+
 532;40;PTAdvdegree|PTConVerb|PTVerb;PTCon|+Join|^PTVerb;
+
+/*		532. Por esta razão, muito esforço deve ser feito para oferecer-lhes segurança contra as forças destrutivas.
+
 682;40;PTAdvdegree|PTNegPR;PTNegPR|+Join;
 
+/*		682. Eles se tornaram, em suma, especialistas em produção, até ao ponto de virtualmente nada produzirem para seu próprio consumo pessoal e direto.
 /* ADVERB AFTER LINKING VERB
 
 484;40;PTLinkingverb|PTAdv+^PTAdvdegree|PTComma;*|PTAdj|*;
+
+/*		484. E não é por acaso, pois, nos últimos sete anos, esse modelo de financiamento e apoio público injetou na economia.
+
 485;40;PTLinkingverb|PTAdv|PTNao|PTAdj;*|PTAdj|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;
 
+/*		485. Essa notícia é biologicamente não verdadeira.
 /* PARTICIPLES: CONCEPT (before rules converb)
 
 549;40;PTPrep|PTDemonstr|PTPart|PTComma:PTPrep:PTPrepart:PTA;*|PTDemonstrPR|PTPartrel|*;
+
+/*		549. O modelo polinomial, dentre aqueles testados, foi o que melhor representou o fenômeno. O diagrama pluviométrico foi elaborado conforme aqueles apresentados em Nimer. A ISC foi definida como aquela diagnosticada pela equipe médica.
+
 440;40;PTIndefart:PTDefart:PTPosspron:PTDemonstr:PTIndefpron|PTPart;*|PTCon;
 
+/*		440. Derrocada causa um ferido grave.
 /* NOUN or VERB: CONCEPT
 
 560;40;PTAlgo:PTNegPR|PTConVerb;*|PTVerb;
+
+/*		560. A violência física é a que mais se evidencia aos olhos da sociedade e acontece quando alguém causa ou tenta causar dano por meio de força física. Tudo  indica que brevemente teremos a primeira leva dos formandos no mercado de trabalho e nenhum deles pertence à ilha salineira.
+
 6;40;PTDefart:PTIndefart:PTPosspron:PTDemonstr:PTMaismenos:PTIndefpron:PTIndefpronconcept:PTCujo|PTConVerb;*|PTCon;makes Concept of ConVerb after article, possessive, demonstrative, indefinite pronouns and some other cases
+
+/*		6. Ainda não compreendemos completamente a razão da ocorrência desta segunda revolução, e nem indagamos quais têm sido seus efeitos sobre o ambiente natural.
+
 183;40;PTA:PTPrepart:PTPrep|PTConVerb;*|PTCon;makes Concept of ConVerb after 'a', preposition or preposition+article
+
+/*		183. Os movimentos de internamento nos hospitais têm mantido características de certa estabilidade, situando-se a demora média em 7 ou 8 dias e a taxa de ocupação à volta de 62%.
+
 326;40;PTDemonstr:PTDefart:PTIndefart|PTAdj|PTConVerb;PTDemonstr|^PTAdj|PTCon;makes Concept of ConVerb after demonstrative pronoun or article + adjective
+
+/*		326. São as principais causas apontadas por jovens que não namoram e não pretendem manter relacionamentos sérios.
+
 14;40;PTPosspron|PTAdj|PTConVerb;*|*|PTCon;makes Concept of ConVerb after possessive pronoun + adjective
+
+/*		14. A economia e o setor industrial cresceram consideravelmente, mas sua maior conquista foi a construção da nova capital, Brasília, inaugurada em 1960.
+
 184;40;PTTanto|PTConVerb|PTComo;PTTanto|PTCon|PTComo;
+
+/*		184. Tanto aborto como abandono, e principalmente violência, não só física, mas também a sexual e a psicológica.
+
 305;40;PTInf:PTPrep|PTAdj+^PTAdjCon|PTConVerb;*|^PTAdj|PTCon;
+
+/*		305. Assim, não é possível obter ""verdadeiro"" sumo de banana, ainda que a sua polpa possa ser misturada ao sumo de outros frutos. Essa gama não é a mesma para tradições religiosas diferentes, mas ampla o bastante em cada caso para demonstrar que essas tradições são flexíveis. NOT. Imigração de europeus passa a ser incentivada pelo governo Imperial e provincial.
+
 323;40;PTInf+^PTAux|PTConVerb;*|PTCon;
+
+/*		323. Embora tenha declarado inconstitucional o regime especial de pagamento das dívidas judiciais, o Supremo não deu uma solução para estados e municípios que, por exemplo, já fizeram acordos para pagar parte dos credores.
+
 521;40;PTVerb|PTAdvdegree|PTConVerb;*|PTCon|+Join;
+
+/*		521. O governo demonstra bastante interesse na atração de investimentos estrangeiros.
+
 909;40;PTNumber|PTConVerb+^PTVerb|^PTDefart+^PTIndefart+^PTPosspron+^PTDemonstr;*|PTCon|*;
 
+/*		909. Dos 239 filmes a serem exibidos, no entanto, apenas 74 dos trabalhos, participam na competição.
 /* NOUN or VERB: RELATION
 
 73;40;PTPerspron|PTConVerb|PTCon;PTPerspron|PTVerb|*;makes Relation of ConVerb between personal pronoun and Concept
+
+/*		73. Há uma passagem no seu estudo sobre a ética protestante e o espírito do capitalismo na qual ele cita o escritor.
+
 693;40;PTPerspron|PTConVerb|PTAdj|PTComma:PTPrep;*|PTCon|*|*;should be before r75
+
+/*		693. E isso resultou em um timbre amplo, que lhe permitia explorar uma enorme gama expressiva, dando a ela controle total sobre os papéis que cantava.
+
 75;40;PTPerspron|.PTNao|PTConVerb;PTPerspron|*|PTVerb;makes Relation of ConVerb after personal pronoun (+ 'nao')
+
+/*		75. Ela procura compreender a religião do ponto de vista do crente.
+
 74;40;PTRelpron|PTConVerb;PTRelpron|PTVerb;makes Relation of ConVerb after relative pronoun
+
+/*		74. O registo cinematográfico pode optar por seguir a ordem cronológica dos acontecimentos ou encontar uma outra ordem que destaque a importância dos intervenientes do filme.
+
 83;40;PTRefl|PTConVerb;^PTVerb|+Join;makes Relation of ConVerb after reflexive pronoun
+
+/*		83. A atriz embarca para Florianópolis nos próximos dias e se junta à equipe, na cidade desde o fim de setembro, para dar continuidade às gravações da novela.
+
 76;40;PTCon:PTNumber|PTConVerb|PTDefart:PTA|^PTVerb;^PTCon|PTVerb|*|*;makes Relation of ConVerb between Concept or number and article
+
+/*		76. Domingo a meio da tarde, um punhado de lisboetas espreita o desfile na ala lateral do Mercado da Ribeira. O século XV marca o início dos Descobrimentos, durante os quais Portugal vive um período de grande expansão através dos oceanos. NOT. Dos 239 filmes a serem exibidos, no entanto, apenas 74 dos trabalhos.
+
 77;40;PTCon|PTAdj|PTConVerb|PTDefart:PTIndefart;*|*|PTVerb|*;makes Relation of ConVerb between Concept + adjective and article
+
+/*		77. A precipitação média ronda os 90 a 120 mm, e as temperaturas médias oscilam entre os 8/10 °C e os 16/18 °C. Da parte inferior sai um extremo proeminente que se destaca das pencas e exibe uma coloração e uma consistência diferenciadas: é o chamado umbigo da banana, que, cozido e preparado com outros ingredientes, é comestível de requintado sabor e alto valor nutricional.
+
 79;40;PTCon|PTConVerb|PTIndefart:PTInf+^PTAux;*|PTVerb|*;makes Relation of ConVerb between Concept and indefite article
+
+/*		79. Este estudo testa um classificador adaptativo que implementa um processo de classificação iterativo, visando a cada iteração aumentar a confiabilidade nos valores estimados para os parâmetros do classificador. Como dito acima, este trabalho procura focar seus esforços nas análises da imagem do filme.
+
 185;40;PTCon|PTConVerb|PTCon:PTTempEnd;^PTCon|PTVerb|^PTCon;makes Relation of ConVerb between Concepts
+
+/*		185. O curso, cuja duração é de 08 semestres, tem módulos presenciais anualmente realizados nos meses de Janeiro e Julho. No momento de crise, a sociedade cria problemas de dimensões tão diferentes, em uma velocidade tão crescente, que a universidade não consegue responder.
+
 259;40;PTA|PTCon|PTAdj|PTConVerb|PTA|PTCon;PTA|^PTCon|^PTAdj|PTVerb|PTA|PTCon;makes Relation of ConVerb between 'a' + Concept + adjective and 'a' + Concept
+
+/*		259. A palavra lúdico carrega a ideia de sua etimologia ludibrium, que denota joguete, zombaria, insulto, ultraje, engodo e ludìus, que é o pantomimo, o comediante.
+
 86;40;PTNao|PTConVerb|PTAdv:PTAdvstruct:PTPrepart:PTDefart:PTNao;*|PTVerb|*;makes Relation of ConVerb between 'nao' and adverb
+
+/*		86. Eu não penso construtivamente. Eu não penso assim. Não será nunca possível a paz e o bem estar num pais donde a corrupção não passe pelos tribunais e seja sentenciada. Eles não mugem nem tugem.
+
 748;40;PTCon|PTNao+^"nem"|PTConVerb;*|*|PTVerb;
+
+/*		748. Sua justaposição não cria uma visão de totalidade e suas contradições não as destroem.
+
 526;40;PTConVerb|PTAdvdegree|PTPrep:PTPrepart;PTVerb|PTAdv|PTPrep;
+
+/*		526. No Japão, o cultivo de banana para vestuário e uso doméstico remonta pelo menos ao século XIII.
+
 180;40;PTConVerb|PTComo|PTDefart:PTIndefart;PTVerb|PTComo|*;makes Relation of ConVerb before 'como' + definite article
+
+/*		180. A passagem sob dois pórticos sucessivos conta como uma viagem, desde que o veículo faça o percurso no intervalo de tempo expectável face à distância a percorrer e às velocidades aplicáveis na via.
+
 88;40;PTConVerb|PTIndefart|PTCon:PTNum;PTVerb|*|*;makes Relation of ConVerb before indefinite article + Concept or number
+
+/*		88. Falta uma semana para o início do ano lectivo.
+
 80;40;PTConVerb|PTPosspron;PTVerb|^PTPosspron;makes Relation of ConVerb before possessive pronoun
+
+/*		80. Drogas pisicotrópicas são aquelas drogas que atuam sobre o nosso cérebro e de alguma forma muda nosso pisquismo.
+
 569;40;PTConVerb|"a"|PTInf;PTVerb|*|*;
+
+/*		569. Essas pesquisas indicam que a evidenciação auxilia a manter a comunicação.
+
 85;40;PTConj:SBegin:PTNao|PTConVerb|"a";*|PTVerb|*;makes Relation of ConVerb between conjunction/'nao'/beginning sentence and 'a'
+
+/*		85. Por isso, ter apenas um bom desempenho já não garante a sustentação no mercado. Melhora a taxa de oxigenação do sangue.
+
 89;40;PTConj:PTAndOrBut|PTConVerb|PTDefart:PTIndefart:PTDemonstr:PTIndefpron;*|PTVerb|*;makes Relation of ConVerb between conjunction and article/demonstrative or indefinite pronoun
+
+/*		89. Como ele veste essencialmente as próprias criações, pedimos para que ele indicasse onde compra os tecidos para suas peças. Isso parece-me uma verdadeira loucura, pois mina tudo aquilo que estabelecemos na Europa.
+
 94;40;SBegin:PTComma|PTConVerb|PTDefart:PTIndefart;*|PTVerb|*;makes Relation of ConVerb between beginning sentence/comma and article
+
+/*		94. Garante o anonimato do utilizador e do veículo mas tem validade de 90 dias. Frete um grande iate com um grupo de amigos. Zoneamento químico do centro para a borda dos cristais é pouco signifi cativo e, quando reconhecido, mostra um maior enriquecimento do componente Or junto às porções periféricas do mineral.
+
 262;40;SBegin|PTConVerb|PTInf;*|PTVerb|*;makes Relation of ConVerb as first word sentence and before infinitive
+
+/*		262. Vale destacar ainda a qualidade de vários trabalhos científicos de químicos brasileiros.
+
 903;40;SBegin:PTComma|PTConVerb|PTRelpron|PTNao;*|PTVerb|*|*;
 
+/*		903. A quantidade de médicos no Brasil, segundo levantamento feito pelo Conselho Federal de Medicina, mostra que não há problemas em relação à oferta em atividade desses profissionais e, sim, uma desigualdade na distribuição.
 /* TIME: PATHRELEVANT PLUS TIME AS PART OF CONCEPT
 
 665;40;PTTempBeginEnd|PTAdjtempAfter;PTTempBeginEnd|+Join;
+
+/*		665. Até poucas décadas atrás o termo ‘história da música’ significava meramente a história da música erudita europeia.
+
 673;40;PTAdjtempAfter+PTAdvdir;PTAdv+PTAdvdir;
+
+/*		673. Porém, atrás dos clubes anteriores, com um número de sócios muito inferior.
+
 667;40;PTAdjtempAfter;PTAdvPR+PTTime;
+
+/*		667. Chegamos mais cedo, contou a estudante.
+
 664;40;PTCon:PTAdjCon:PTAdj|PTAdvPR+PTTime|PTAdj:PTPart;PTCon|PTAdj|+Join;
+
+/*		664. A câmera cinematográfica, por meio do primeiro plano e do close up, monumentalizou o rosto em proporções até então inimagináveis. Indústria paulista inicia um processo de substituição de importações, passando a produzir no estado os produtos até então importados. É desenvolvido em nível organizacional mediano, tendo como principal finalidade a utilização eficiente dos recursos disponíveis para a consecução de objetivos previamente fixados. A construção de uma pousada de juventude na ilha das Flores constituiria “um factor de perturbação” no equilíbrio da oferta turística actualmente existente naquela ilha.
+
 677;40;PTCon:PTAdjCon:PTAdj|PTAdvPR|PTAdj;PTCon|PTAdj|+Join;
 
+/*		677. Para os embarcadiços, as calmarias - comuns especialmente na linha do Equador - representavam um perigo muitas vezes letal e eram objeto de terror, tanto quanto os temporais.
 /* ADVERB OR ADJECTIVE
 
 498;40;PTAdvdegree:PTMaismenos|PTAdjAdv;PTAdjAdv|+Join;
+
+/*		498. Aqui se torna mais claro o que foi mencionado na introdução.
+
 463;40;PTInf+^PTAux|PTAdjAdv|^PTCon;*|PTAdv|*;
+
+/*		463. Mas o outro lado deste impressionante sucesso foi (e é) uma tendência em apostar alto contra a natureza. Com a aprovação definitiva deste projeto a cidade irá respirar melhor. NOT. O país tem de ser mais rápido a reduzir o desequilíbrio orçamental.
+
 468;40;PTAux|PTAdjAdv|PTPart;*|PTAdv|PTPartrel;
+
+/*		468. Os brigadistas estejam bem treinados.
+
 692;40;PTPunctuation|PTAdjAdv|PTVerb;*|PTAdv|*;
+
+/*		692. De uma chance a igreja ou - melhor dito, tenhamos a coragem para rever o nosso conceito de igreja?
+
 511;40;PTA:PTPrep|PTAdjAdv|PTInf;*|PTAdv|*;
+
+/*		511. Uma inflexão de modo a melhor integrar todas as anomalias. Mais estudos devem ser feitos para melhor demonstrar os efeitos da alcalinidade.
+
 480;40;PTAux:PTRefl:PTAdj|PTAdjAdv|PTInf;*|PTAdv|*;
+
+/*		480. Julgamos, todavia, que o presente estudo pode bem situar-se numa linha de abordagem e de caracterização das facetas que definem as dominantes. No entanto, vários trabalhos têm sido desenvolvidos, utilizando-se aproximações e modelos empíricos na tentativa de se melhor representar esse complicado fenômeno em produtos de natureza biológica. Concretizadas estas vias de investigação, parecia-nos ser possível melhor compreender os homens, na sua relação com a terra e com a fortuna.
+
 504;40;PTAdjAdv|PTAux|PTInf+^PTAux;PTAdv|*|*;
+
+/*		504. Ela mal podia sair do lugar dela, relembrou. NOT. De fato, as próprias análises da tradição confuciana citadas acima podem ser vistas como tentativas de inventar um confucionismo democrático.
+
 469;40;PTAdjAdv|PTPart|"pelo":"pelos":"pela":"pelas";PTAdv|PTPartrel|*;
+
+/*		469. Sendo, portanto, uma atividade complexa, envolve interesses conflitantes não bem conhecidos pelas partes pelo que se recomenda que sua gestão seja assentada no reconhecimento do diálogo e aprendizagem dos atores envolvidos.
+
 470;40;PTAux|PTAdv:PTAdvPR|PTAdjAdv|PTPart;*|^PTAdv|+Join|PTPartrel;
+
+/*		470. O estudo de caso, seja ele simples e específico ou complexo e abstrato, é sempre bem delimitado e seus contornos são claramente definidos no desenrolar do   estudo.
+
 471;40;PTAdjAdv|PTPart|PTPrepart;PTAdj|+Join|*;
+
+/*		471. A precipitação média anual é cerca de 1.600mm, sendo que a pluviosidade durante o verão (dezembro = 230mm) é cerca de duas vezes maior que no inverno (agosto = 51mm), caracterizando duas estações bem definidas quanto à precipitação.
+
 472;40;PTComma:PTAndOrBut|PTAdjAdv|PTPart:PTGer;*|PTAdv|*;
+
+/*		472. O desenvolvimento de novas cultivares de milho, bem adaptadas e de alta produtividade, é importante para incrementar a melhoria de rendimento da atividade no semiárido nordestino.
+
 473;40;PTAdj|PTAdjAdv|PTPart;^PTAdj|+Join|+Join;
+
+/*		473. Os eletrodos assim preparados apresentaram picos voltamétricos bem definidos e associados com processos redox envolvendo o centro metálico.
+
 474;40;PTVerb+^PTLinkingverb|PTAdjAdv|PTDefart:PTIndefart:PTA:PTPrep:PTPrepart:PTRelpron:PTPunctuation;*|PTAdv|*;
+
+/*		474. POVO do dia 07 de outubro demonstra bem o espírito que tomou conta da sociedade. Vasco da Gama conhecia bem a astronomia. todos os olhares se concentraram num vestido cujo padrão de bifes crus ficaria bem num talho. citamos acima: "As pessoas são mais facilmente induzidas a fazer, e fazem mais facilmente, o que já estão habituados". NOT. Como é bem de ver.
+
 505;40;^PTCon+^PTIndefart+^PTDefart|PTAdjAdv|PTVerb|PTPrepart:PTPrep:PTPosspron:PTIndefart:PTDefart;*|PTAdv|*|*;
+
+/*		505. O modelo polinomial, dentre aqueles testados, foi o que melhor representou o fenômeno da contração volumétrica da massa e unitária dos frutos de mamona. Outra peculiaridade do samba baiano era a forma de concurso que a danças às vezes apresenta, que era uma disputa entre os participantes para ver quem melhor executava seus detalhes solistas. NOT. O seu ponto mais alto localiza-se no Baixo Alentejo. NOT. O preço de um bem equilibra as quantidades produzidas e consumidas.
+
 482;40;PTVerb+^PTLinkingverb:PTPart|PTAdjAdv|PTComma:PTAndOrBut;*|PTAdv|*;
+
+/*		482. "Correu bem", foram as únicas palavras que proferiu à saída da audiência. NOT. Eles já estavam bem, apesar do evidente cansaço.
+
 481;40;PTVerb+^PTLinkingverb|PTAdjAdv|SEnd;*|PTAdv|*;
+
+/*		481. Foi um jogo muito bom, é um time fantástico, toca bem a bola, trabalha bem. NOT. Eles já estavam bem.
+
 545;40;PTRelpron|PTAdjAdv|PTVerb;*|PTAdv|*;
+
+/*		545. Naturalmente que a simples constatação de um vazio como o que acima se aponta, não se apresenta como razão suficientemente estimulante para determinar uma opção desta natureza.
+
 475;40;PTPart:PTGer|PTTao:PTAdvdegree|PTAdjAdv;*|PTAdv|+Join;
+
+/*		475. As plantas recém-chegadas não têm se adaptado tão bem ao seu novo ambiente. muito esforço deve ser feito para oferecer-lhes segurança contra as forças destrutivas, adaptando-as tão bem quanto permite a engenhosidade humana.
+
 476;40;PTCon|PTAdjAdv|PTPart|PTPrep;*|PTAdv|PTPartrel|*;
+
+/*		476. espera agora que os portugueses sejam sensíveis aos inquéritos, até porque esta é uma doença bem conhecida em Portugal.
+
 483;40;PTAdjAdv|PTAdv;PTAdv|+Join;
+
+/*		483. Podem ser executados desde bem lentamente, induzindo a um jogo mais lento e estratégico.
+
 546;40;PTPrep|PTAdjAdv|PTVerb;*|PTAdv|*;
+
+/*		546. Apesar de já terem uma longa história, e como acima se referiu, até ao princípio do século XX só ocorreram alterações ambientais relativamente modestas.
+
 464;40;PTAdjAdv;PTAdj;
 
+/*		464. Tribunal mais alto é o Supremo Tribunal Federal.
 /* ADVERBS: ADJECTIVES
 
 286;40;PTAdvmanner:PTAdvdegree|PTAdj;PTAdj|PTAdj;to make adverbs of manner or degree adjectives before an adjective
+
+/*		286. A floresta está localizada em planaltos pouco elevados (30-200m) e apresenta um solo extremamente pobre em nutrientes. A característica física do trabalho foi considerada pesada para 47,8% dos entrevistados, medianamente pesada para 43,5%, muito pesada para 4,4%.
+
 292;40;PTDefart:PTIndefart:PTDemonstr|PTAdj;*|PTAdj;to let words that can be both adjective and adverb lose the adverb label
 
+/*		292. As variações volumétricas, pela sua desidratação, são relatadas como as principais causas das alterações das principais propriedades físicas dos produtos agrícolas. Esta prática foi criada pelo presidente e fortaleceu o poder dos coronéis em seus estados.
 /* TAO
 
 454;40;PTNao|PTTao|PTAdj;PTNaoAdj+PTNegation|PTAdj|+Join;
+
+/*		454. Não tão grande quanto a minha, evidente, mas ainda assim uma carreira importante.
+
 453;40;^PTCon|PTTao|PTAdj|.PTComma|"que":"quanto":"como";*|PTPrep|*|*|*;
+
+/*		453. Esse relatório teve uma repercussão política, institucional e social tão importante, que extrapolou os limites da medicina. A diferença entre as duas equipes nunca foi tão evidente quanto no GP da Inglaterra de 1987.
+
 455;40;PTCon:PTAdj|"tão":"acima":"assim"|PTPart:PTAdj;^PTCon|PTAdj|+Join;
+
+/*		455. Não obstante resultados tão significativos, os números mostram que ainda há muito espaço para crescimento. E era justamente essa a função dos locais sagrados: apossar-se da história, sobre a memória das perseguições e seus territórios, garantindo a continuidade entre dois momentos históricos tão distintos.
+
 452;40;PTTao;PTAdvstruct;
 
+/*		452. Para começar, é importante relacionar quais elementos tornam uma obra de arte tão glamurosa.
 /* ADVERBS OF STRUCTURE
 
 450;40;PTCon|PTAdvstruct|PTAdj;*|PTAdj|+Join;
 
+/*		450. Aos equipamento já existentes nas ilhas, vão juntar-se a pousada de S. Jorge.
 /* MAIS / MENOS - ADVERBS OF DEGREE
 
 57;40;PTCon+^PTEndconcept|PTMaismenos:PTAdvdegree|PTAdj;PTCon|PTCon|PTCon;makes mais-menos part of Concept between Concept and adjective
+
+/*		57. Para a presente edição constituem principais temas da competição a “Prevenção e Tratamento de Doenças Mais Comuns” e “Saúde da Criança”. NOT.Vale dizer que para despertarmos interesse das pessoas e da sociedade como um todo está cada dia mais difícil e técnico.
+
 537;40;PTPrep|PTMaismenos:PTAdvdegree|PTConVerb;*|PTAdj|PTCon;
+
+/*		537. Lentos, os times realizaram um início de segunda etapa morno, com muito combate no setor de meio-campo.
+
 524;40;PTVerb+^PTAux+^PTLinkingverb|PTMaismenos|PTPrep;*|PTAdv|*;
+
+/*		524. Por ter um brilho tão sutil, o cometa levou um pouco mais de tempo do que o habitual até ser confirmado pala IAU (União Astronômica Internacional).
+
 535;40;PTVerb|PTMaismenos|PTPrep:PTPrepart:PTDefart:PTIndefart;*|PTAdv|*;
+
+/*		535. O culto aos mártires envolveu muito mais do que a lembrança de trajetórias notáveis. Napolitano levanta um pouco mais o véu sobre o acordo bilateral.
+
 867;40;PTVerb:PTInf+^PTAux|PTMaismenos|PTComprel;*|PTAdv|*;
+
+/*		867. E ele concluiu: — Eu te amo mais do que qualquer coisa no mundo.  Revisitá-lo  faz-me apreciá-lo mais do que apreciei mesmo quando fiz  essa  directa.
+
 536;40;PTVerb|PTMaismenos|SEnd;*|PTAdv|*;
+
+/*		536. A criança e o adolescente brasileiros estão lendo mais.
+
 538;40;PTInf|PTMaismenos|PTDefart:PTIndefart:PTPrepart;*|PTAdv|*;
+
+/*		538. A metodologia proposta, apresenta as vantagens de valorizar mais os desvios apresentados entre os ambientes. O Ciência-Tour é um dos projetos que fazem parte dessa iniciativa, na qual cerca de 40 alunos do ensino fundamental visitam entidades da cidade para observar e aprender um pouco mais do trabalho de cada uma.
+
 602;40;^PTCon|PTPart|PTMaismenos|PTPrep:PTPrepart:PTComprel;*|*|PTAdv|*;
+
+/*		602. Atualmente, a procura por azulejos tem se dado menos por seu valor decorativo e mais por suas características impermeabilizantes. NOT. Não é difícil perceber que essa indagação revela uma preocupação centrada muito mais no processo de construção de textos.
+
 130;40;PTMaismenos|PTAdvVerb:PTAdv;PTAdv|PTAdv;makes 'mais' + AdvVerb or Adv both adverb
+
+/*		130. Sobre isso discutiremos mais adiante. Ela examina essa parte do indivíduo e da ação social que é mais fortemente ligada ao uso dos requisitos materiais para o bem-estar.
+
 132;40;PTMaismenos|PTPart;PTMaismenos|PTCon;makes Concept of past participle after 'mais'
+
+/*		132. É a mais cultivada no Estado, cultivada em ambiente protegido, sob as condições edafoclimáticas de Boa Vista.
+
 533;40;PTMaismenos|PTVerb:PTInf;PTAdv|*;
+
+/*		533. É o tipo de sinusite que mais leva as pessoas ao médico.
+
 534;40;PTMaismenos|PTAdj;PTAdj|+Join;
+
+/*		534. As duas equipas partiram para o sorteio na condição de cabeças de série pelo que evitaram formações teoricamente mais fortes.
+
 444;40;PTAdvdegree;PTAdvmanner+PTAdv;
 
+/*		444. O impacto dessa política nessas economias, no contexto de um baixo crescimento e uma muito baixa inflação, ainda é incerto.
 /* JAMAIS WITHOUT NEGATION
 
 819;40;"mais":"maior":"maiores"|*{1,5}^"jamais"|"jamais"|PTPart;*|*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;
+
+/*		819. Este é - importa diz-lo - o programa mais importante e ambicioso jamais apresentado relativamente a esta questão, e devo felicit-la por isso.
+
 788;40;"mais":"maior":"maiores"|"jamais"|PTPart;*|PTAdvPR+PTTime-PTNegation-PTNegBegin|*;
 
+/*		788. Verifiquei com enorme satisfação que a dotação é a maior jamais atribuída a um ano europeu.
 /* NAO MENOS WITHOUT NEGATION
 
 790;40;"não menos"|PTDe|PTNum:PTNumber;PTAdvdegree-PTNegation-PTNegBegin|Join|*;
 
+/*		790. Não menos de 6 milhões de jovens de idades entre 18 e 24 anos.
 /* RECIPROCAL PRONOUN IN TWO PARTS
 
 640;40;PTVerb|PTRecipr1|PTPrep:PTPrepart|.PTDefart|PTRecipr2;^PTVerb|+Join|+Join|+Join|+Join;
+
+/*		640. Deve-se definir um ecossistema como uma entidade coletiva de plantas e animais que interagem uns com os outros e com o ambiente não-vivente. O conjunto de discursos produzidos por esses "críticos ambientais" não pode ser entendido enquanto uma convergência de ocorrências isoladas, mas constitui uma tradição de pensamento na medida em que essas idéias e discursos comumente se referem uns aos outros.
+
 645;40;PTRecipr1|PTPrep:PTPrepart|PTRecipr2;PTIndefpronPR|*|PTIndefpronPR;
 
+/*		645. As chamadas balizas são constituídas de dois postes verticais de 2,44 metros de altura localizados a 7,32 metros de distância um do outro e sobre o centro de cada linha de fundo.
 /* UM/UMA IN QUANTITY
 
 641;40;PTIndefart|"dos":"das"|."de"|typeConcept;PTBeginconcept|+Join|+Join|+Join;
+
+/*		641. O local é reconhecido como sendo um dos de maior risco ao afogamento. O reitor é uma das quatro personalidades que recebem a 10 de junho condecorações.
+
 643;40;PTIndefart|"dos":"das":"de"|PTPosspron|typeConcept;PTBeginconcept|+Join|+Join|+Join;
+
+/*		643. O departamento tem como um de seus indicadores a digitalização.
+
 636;40;PTIndefart|"dentre"|PTDefart|typeConcept;PTBeginconcept|+Join|+Join|+Join;
+
+/*		636. É aí que entra o problema econômico, pois dentre estes mecanismos de exclusão estavam sanções socioeconômicas como a proibição de se associar, empregar ou negociar com qualquer um dentre os “hereges”.
+
 644;40;PTIndefart|"para";PTBeginconcept|+Join;
 
+/*		644. Apesar de haver um médico para cada 549 brasileiros - índice superior ao recomendado pela Organização Mundial de Saúde (OMS), de um para cada mil pessoas -, sete em cada 10 profissionais habilitados para atuar no país trabalham nas regiões Sul e Sudeste.
 /* UNS AS INDEFINITE PRONOUN
 
 639;40;PTUns|^typeConcept;PTIndefpronPR|*;
 
+/*		639. Apesar de uns virem no convés e outros no porão, ambos compartilhavam espaços do navio em circunstâncias diversas.
 /* SOMETHING/SOMEONE - NO ONE PLUS ADJECTIVE
 
 559;40;PTAlgo|PTDe|PTAdj;PTBeginconcept|PTAdj|+Join;
+
+/*		559. A criação de uma cultura sobre o tempo no Brasil seria algo de grande valor social e científico.
+
 558;40;PTAlgo|PTAdj:PTMaismenos;PTBeginconcept|PTAdj;
+
+/*		558. Cyrulnik ainda nos diz algo importante na constituição dessa problemática. Precisavamos de alguém mais novo.
+
 685;40;PTNegPR|PTDe|PTAdj:PTMaismenos;PTCon|PTAdj|+Join;
+
+/*		685. Procurou, mesmo, “não alterar nada de especial”, segundo disse aos jornalistas.
+
 683;40;PTNegPR|PTAdj:PTMaismenos;PTCon|PTAdj;
 
+/*		683. Nada inferior a 10 por cento, não vale a pena estarmos a dar por um lado e tirar por outro.
 /* OUTROS/OUTRAS
 
 561;40;"entre":"dentre"|PTOutros|^PTAdj+^PTCon+^PTIndefpron;PTAdvstruct|+Join|*;
 
+/*		561. Os sistemas de plantio direto apresentam vantagens como melhoria da estrutura do solo, melhoria do desenvolvimento do sistema radicular e aumento da eficiência no uso de água pelas plantas, dentre outras. NOT. Integrada da mobilidade e o planeamento estratégico, entre outras dimensões. NOT. Já o enfoque estrutural vem sendo amplamente discutido, com várias propostas de relatórios e balanços, reconhecimento de receitas, perdas e custos, entre outros diversos enfoques de natureza estrutural.
 /* SUBSTANTIVATED INTERROGATIVE PRONOUNS
 
 188;40;PTDefart|PTInterpron;PTDefart|PTCon;makes Concept of interrogative pronoun after definite article, 'the reason'
 
+/*		188. Inclusive abordando o porquê da não utilização de práticas.
 /* SUBSTANTIVATED INFINITIVES
 
 200;40;^PTConj+^"de"+^"para"|"o"|PTInf+^PTLinkingverb+^PTWithSuffix;*|PTDefart|^PTCon;makes Concept of infinitive preceded by definite article
+
+/*		200. Só com o avançar do curso irei descobrir que especialidade vou escolher. NOT. A finalidade desta reorientação foi a de ganhar "mentes e corações" das populações, o ficar estreitamente ligado à "Metrópole".
+
 201;40;PTIndefart|PTInf;*|^PTCon;makes Concept of infinitive preceded by indefinite pronoun
 
+/*		201. Numa edição em que alguns criadores pintaram a moda de brandos beges e cinzas crise, ao quarto dia houve um despertar.
 /* PARTICIPLES: CONCEPT
 
 371;40;PTIndefpronconcept|PTPart;*|PTCon;makes Concept of past participle after indefinite pronoun
+
+/*		371. O que mais capacidade tem para levar a obra artística a um número grande de interessados, por utilizar diversos sentidos (visão, audição) e por utilizar também satélite.
+
 23;40;PTPrepart|PTPart;PTPrepart|PTCon;makes Concept of past participle after preposition+article
+
+/*		23. A técnica do Discurso do Sujeito Coletivo foi utilizada para a análise dos dados.
+
 25;40;PTPrep+^PTConforme+^PTComo|PTPart;*|PTCon;makes Concept of past participle after preposition
+
+/*		25. Para partidas internacionais se recomenda as seguintes medidas. NOT. a adaptabilidade e estabilidade são computadas por meio do desviopadrão entre as médias porcentuais dos ambientes, conforme demonstrado por S. e C. NOT. Traça-se o seguinte paralelo com os Paradigmas de Apoio à Decisão, como ilustrado no Quadro 1.
+
 29;40;PTDefart:PTIndefart:PTPosspron:PTIndefpron:PTDemonstr|PTAdj|PTPart;*|*|PTCon;makes Concept of past participle after article/possessive/indefinite/demonstrative pronoun + adjective
+
+/*		29. É quase certo que o adjetivo usado pelo capitão ao se referir ao velho marinheiro tenha sido um pouco mais pesado. A maioria dos capoeiristas passa a ser conhecida na comunidade mais pelos seus respectivos apelidos do que por seus próprios nomes.
+
 34;40;PTPrepart|PTAdj|PTPart;PTPrepart|*|PTCon;makes Concept of past participle after preposition+article + adjective
+
+/*		34. Este tipo de transporte também coloca em perigo a vida dos passageiros transportados, através do uso de veículos não inspecionados.
+
 35;40;PTPrep+^PTDe|PTAdj|PTPart;*|*|PTCon;makes Concept of past participle after preposition + adjective
+
+/*		35. Há sinais de maior concorrência, com sucessivas descidas nas taxas de juro. NOT. Fatores referentes à má sinalização e a um baixo contingente de salva-vidas podem ser apontados como fatores responsáveis pela elevação no número de ocorrências.
+
 502;40;PTAux|PTAdv:PTAdj|PTAndOrBut|PTAdv|PTPart;*|PTAdv|*|*|PTPartrel;
+
+/*		502. Primeiro na Inglaterra e, depois, em todas as partes do planeta, os sistemas agroecológicos foram racional e sistematicamente reformados a fim de intensificar, não apenas a produção de alimentos e fibras, mas a acumulação da riqueza pessoal.
+
 501;40;PTAdj|PTAndOrBut|PTAdv|PTPart;*|*|PTAdj|+Join;
+
+/*		501. Muitas práticas agrícolas, outrora consideradas primitivas ou mal orientadas, estão sendo reconhecidas como sofisticadas e apropriadas.
+
 798;40;PTCon|PTAdj|PTAndOrBut|PTPart|^PTPrepart+^"em"+^"por";*|*|*|PTAdj|*;
+
+/*		798. A produção dos estudantes revelou uma concepção limitada da atividade de leitura, o que reforça a necessidade de que uma atenção especial seja dada ao problema da mediação da leitura em sala de aula por parte dos cursos de formação inicial e continuada de professores.
+
 800;40;PTCon|PTAdj|PTAndOrBut|PTPart|PTDo;*|*|*|PTAdj|*;
+
+/*		800. Já o fogão industrial é uma versão moderna e ampliada do fogão doméstico.
+
 849;40;PTCon:PTAdj|PTPart|PTPunctuation:SEnd;*|PTAdj|*;
+
+/*		849. Pretende-se desenvolver ainda análise comparativa desse julgamento com arrêt da jurisprudência administrativa francesa que assentou a mesma tese no que diz respeito à viabilidade da modulação feita.
+
 887;40;^typeConcept|PTNaoAdj|PTPart;*|*|PTCon;
 
+/*		887. Porque nenhum deputado desta Câmara vai tomar medidas contra esto documento vergonhoso.
 /* PARTICIPLES: RELATION
 
 297;40;PTAux|PTAdvmanner|PTPart;*|PTPartrel|+Join;
+
+/*		297. Assim, vem sendo largamente difundido o conceito de desenvolvimento sustentável, visando à promoção simultânea do desenvolvimento econômico, do equilíbrio ecológico e da equidade social.
+
 449;40;PTAux|PTAdvstruct|PTPart;*|*|PTPartrel;
+
+/*		449. Tais iniciativas não foram ainda adotadas no nosso país.
+
 610;40;PTAux|PTPart+PTAux;*|PTPartrel+PTAux;
+
+/*		610. Em quase todos os casos, esses agricultores de estilo primário introduziram plantas que não faziam parte do ecossistema nativo, que podem até ter sido trazidas de várias partes do planeta.
+
 65;40;PTAux|PTPart;*|PTPartrel;makes Relation of past participle after auxiliary verb
+
+/*		65. O tamanho dos frutos foi determinado por meio da variação do volume e a forma foi analisada pela esfericidade e circularidade.
+
 670;40;PTAux|PTAdvPR:PTNegPR:PTAdv|PTPart;*|*|PTPartrel;
+
+/*		670. Informações mais relevantes para o julgamento do investimento devem ser sempre divulgadas, e não omitidas mesmo quando forem desfavoráveis. Qualquer ação realmente eficaz contra o agressor é dificilmente tomada o que, até pouco tempo, era justificada.
+
 689;40;PTCon|PTInf|PTPart;*|*|PTPartrel;
+
+/*		689. Então basta dizer que hoje é impossível o homem deixar seus sentidos de lado simplesmente ignorando-os e deixando de comunicar-se, ou seja, é impossível o homem viver isolado a margem da sociedade.
+
 466;40;PTCon:PTConVerb|PTAdv|PTPart|PTComma:PTVerb:PTNao;^PTCon|PTAdj|+Join|*;
+
+/*		466. A rede neural construída para determinação do teor de carne mecanicamente separada mostrou-se eficiente durante a fase de treinamento e teste da rede. A comunhão de mesa com pessoas socialmente marginalizadas não era uma exceção. O transporte ferroviário é a transferência de pessoas ou bens, entre dois locais geograficamente separados, efectuada por um comboio, automotora ou outro veículo semelhante.
+
 467;40;PTCon|PTAdv|PTPart|SEnd;*|PTAdj|+Join|*;
+
+/*		467. Não é necessário recorrer à cultura para reproduzir os padrões de alternância entre os regimes efetivamente observados.
+
 465;40;PTCon|PTAdv|PTPart;*|^PTAdv|PTPartrel;
+
+/*		465. Entende-se por carne mecanicamente separada (CMS) de frango.
+
 67;40;PTCon|PTPart|PTAdv|PTPrep|PTCon;*|PTPartrel|PTAdv|*|*;makes Relation of past participle between Concept and adverb + preposition + Concept
+
+/*		67. A localidade responde por 66% dos acidentes e é caracterizada pelo surgimento de canais de profundidade média em torno de 1,1m situados aproximadamente entre 70m e 120m.
+
 68;40;PTPart|PTPrep:PTPrepart:PTComo+^PTDe;PTPartrel|*;makes Relation of past participle followed by preposition/preposition+article/'como'
+
+/*		68. São as principais causas apontadas por jovens que não namoram e não pretendem manter relacionamentos sérios.
+
 840;40;PTPart|PTDe|PTNumber;PTPartrel|*|*;
+
+/*		840. Os grupos seguiram a afinidade dos mineiros, vindos de três empresas distintas.
+
 847;40;SBegin:PTPunctuation:PTComma:PTAdv:PTAdvstruct:PTAdvPR|PTPart|PTDe;*|PTPartrel|*;
+
+/*		847. As variáveis analisadas foram: dados de identificação - sexo e idade.
+
 246;40;PTPart|PTAdv|PTPrepart;PTPartrel|*|*;makes Relation of past participle before adverb + preposition+article
+
+/*		246. As plantas recém-chegadas não têm se adaptado tão bem ao seu novo ambiente.
+
 70;40;PTPart|PTAdv:PTAdvPR|PTPrep;PTPartrel|*|*;makes Relation of past participle before adverb/PathRelevant adverb + preposition
+
+/*		70. Prefere os pratos com peixes, acompanhados geralmente de arroz branco. Decoração ao grande fogo: pintura sobre o vidrado remetida posteriormente a uma cozedura com temperaturas superiores.
+
 72;40;PTComma|PTPart|PTIndefpron:PTDefart:PTIndefart:PTBeginconcept:PTTempEnd:PTTempBeginEnd;PTComma|PTPartrel|*;makes Relation of past participle between comma and indefinite pronoun/article/beginconcept/TempEnd/TempBeginEnd
+
+/*		72. Cada ponto na curva mostra uma produção potencial total máxima para a economia, que é a produção máxima de um bem, dada uma quantidade de produção do outro bem. A iniciativa é pelo Dia Estadual da Doação de Sangue, comemorado hoje.
+
 676;40;PTComma|PTAdvPR:PTAdv|PTPart;*|*|PTPartrel;
+
+/*		676. Em qualquer lugar, uma tal reestruturação envolve uma pressão das energias produtivas de algum ecossistema para servir mais exclusivamente a um conjunto de propósitos conscientes, muitas vezes localizados fora dele. O desenvolvimento de novas cultivares de milho, bem adaptadas e de alta produtividade, é importante para incrementar a melhoria de rendimento da atividade.
+
 680;40;PTConj|PTPart|PTComma;*|PTPartrel|PTComma;
+
+/*		680. Embora pouco difundido, o Issues Management origina-se do campo da administração pública.
+
 232;40;PTPart|PTAndOrBut|PTPartrel|PTPrep;PTPartrel|PTAndOrBut|PTPartrel|*;makes Relation of past participle before AndOrBut + past participle as Relation
+
+/*		232. É o chamado umbigo da banana, que, cozido e preparado com outros ingredientes, é comestível de requintado sabor e alto valor nutricional.
+
 231;40;PTPart|PTAndOrBut|PTPartrel|PTPrepart;PTPartrel|PTAndOrBut|PTPartrel|PTPrep;makes Relation of past participle before AndOrBut + past participle as Relation
+
+/*		231. Técnica desenvolvida e implementada pelos mouros na Península Ibérica e seguida em Espanha com assimilação do gosto pela decoração geométrica e vegetalista.
+
 229;40;PTPart|PTAndOrBut|PTPartrel;PTPart|PTAndOrBut|PTPart;makes Relation of past participle before AndOrBut + past participle as Relation
+
+/*		229. As plantas recém-chegadas não têm se adaptado e mudado tão bem ao seu novo ambiente.
+
 230;40;PTPartrel|PTAndOrBut|PTPart;PTPartrel|PTAndOrBut|PTPartrel;makes Relation of past participle after past participle as Relation + AndOrBut
+
+/*		230. Se abstém de cometer atos criminosos, simplesmente pelo medo de ser apanhado e punido novamente.
+
 500;40;PTPartrel|PTAndOrBut|PTAdv|PTPart;*|*|*|PTPartrel;
+
+/*		500. Alguns ecossistemas são nitidamente pequenos e facilmente demarcados, como um único lago na Nova Inglaterra, enquanto outros estão espalhados e mal definidos.
+
 503;40;PTAdj|PTPart|PTAndOrBut|PTAdv|PTPart;^PTAdj|+Join|*|PTAdj|+Join;
+
+/*		503. Trabalho feminino ainda mal visto e mal remunerado.
+
 522;40;PTAndOrBut|PTAdv|PTPart;*|PTAdj|+Join;
 
+/*		522. Uma história um pouco mais genérica, mas também mais humana, e bastante bem executada.
 /* NAO
 
 795;40;PTDe|PTNao|PTCon;*|PTNaoAdj+PTNegation-PTNegBegin|PTCon;
+
+/*		795. De fato, as estimativas apresentadas corroboram a idéia de não existência dessa correlação.
+
 58;40;PTCon|PTNao+^"nem"|PTCon;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon;makes 'nao' part of Concept between two Concepts
+
+/*		58. Os Edifícios Não Residenciais também registaram uma diminuição de 10%.
+
 622;40;PTCon|PTNao+^"nem"|PTPart|PTAdv;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon|+Join;
+
+/*		622. Por sua vez, dentro de cada confederação há associações de futebol, que representam um país e, em algumas ocasiões, um território ou estado não reconhecido internacionalmente.
+
 59;40;PTCon|PTNao+^"nem"|PTPart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon;makes 'nao' part of Concept between Concept and past participle as Concept
+
+/*		59. Este tipo de transporte também coloca em perigo a vida dos passageiros transportados, através do uso de veículos não inspecionados.
+
 789;40;PTAdj|PTNao+^"nem"|PTPart|^PTPrep+^PTPrepart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTCon|*;makes 'nao' part of Concept between adjective and past participle as Concept
+
+/*		789. Barcos de passageiros não cadastrados muitas vezes transitam em rios e mares, sobrelotados, e também botando em perigo a vida dos passageiros transportados.
+
 60;40;PTCon|.PTAdj|PTNao+^"nem"|PTAdj;PTCon|*|PTNaoAdj+PTNegation-PTNegBegin|*;makes 'nao' part of Concept between Concept (+ adjective) and adjective
+
+/*		60. Inicialmente, consideramos as dois variáveis incluídas em nosso modelo não cultural.
+
 366;40;PTConVerb|PTNao+^"nem"|PTAdj;PTCon|PTNaoAdj+PTNegation-PTNegBegin|*;makes 'nao' part of Concept between ConVerb and adjective
+
+/*		366. Em contrapartida, perderam peso relativo ao nível da produção e do emprego, os sectores da metalomecânica pesada, maquinaria não eléctrica, material de transporte e produtos químicos não industriais (sectores em que Portugal é fortemente importador).
+
 367;40;PTConVerb|PTNao+^"nem"|PTPart;PTCon|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;makes 'nao' part of Concept between ConVerb and past participle as Concept
+
+/*		367. Abelhas generalistas freqüentemente visitam flores pequenas e abertas, isto é, flores não especializadas.
+
 243;40;PTDefart:PTIndefart:PTPrepart:PTPosspron|PTNao+^"nem"|PTCon:PTAdj;*|PTNaoAdj+PTNegation-PTNegBegin|*;makes 'nao' part of Concept between article/preposition+article/possesive pronoun and Concept or adjective
+
+/*		243. O não pagamento de taxas de portagem constitui contra-ordenação punível com uma coima de dez vezes a taxa de portagem, com um mínimo de 25 euros. Em outra região, o migrante costuma ter uma média salarial superior à dos não migrantes, mas uma jornada média de trabalho de 45 horas semanais.
+
 361;40;PTDefart:PTIndefart:PTPrepart|PTNao+^"nem"|PTPart;*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;makes 'nao' part of Concept between article/preposition+article and past participle as Concept
+
+/*		361. Os não inscritos poderão se inscrever mediante o pagamento de R$20,00 (vinte reais) por clínica.
+
 791;40;PTNaoAdj|PTCon|"nem"|PTPart;*|*|PTNaoAdj+PTNegation-PTNegBegin|PTAdj;
 
+/*		791. O desporto amador e profissional, o desporto não contaminado nem poluído, o desporto como um instrumento de desenvolvimento pessoal, um instrumento de coesão e de solidariedade entre os povos.
 /* ADVERBS: CONCEPT
 
 299;40;PTDefart:PTIndefart|PTAdvPR|PTAdj;*|PTAdj|+Join;makes Concept of adverb between article and adjective
+
+/*		299. Nossa lista de assinantes chega a 3.000, mais um sempre crescente numero de pessoas que o recebem por correio eletrônico. Uma vez que estamos a trabalhar para um sempre crescente número de empresas. Deve ter por resposta um "sim" muito claro.
+
 48;40;PTDefart:PTIndefart|PTAdvmanner;*|PTAdj;makes Concept of adverb after article
+
+/*		48. O impacto dessa política nessas economias, no contexto de um baixo crescimento e uma muito baixa inflação, ainda é incerto. Seus primeiros passos, como os de todo aprendiz, foram aprender as tarefas do trabalho.
+
 198;40;PTCon|PTAdv|PTAdj;*|PTAdj|*;makes Concept of adverb between Concept and adjective
 
+/*		198. As duas equipas partiram para o sorteio na condição de cabeças de série pelo que evitaram formações teoricamente mais fortes.
 /* DEMONSTRATIVE PRONOUN: ADJECTIVAL USE = NonRel
 
 547;40;PTDemonstr|PTNao|PTCon:PTPart;PTNonrel|PTNaoAdj+PTNegation-PTNegBegin|*;
+
+/*		547. Esta não correlação corrobora o que já foi comentado nas analises das questões 10. Poucas eram as diferenças funcionais entre os santos martirizados e aqueles não martirizados.
+
 548;40;PTDemonstr|PTCon:PTAdjCon;PTNonrel|*;
+
+/*		548. A cultura da mamona vem apresentando elevado crescimento nos últimos anos, com a adesão de maior número de produtores e indústrias a esse agronegócio.
+
 551;40;PTDemonstr|PTAdj:PTNumber;PTNonrel|^PTAdj;
+
+/*		551. Porém, essa nova estrutura requer respostas a perguntas. Há, na verdade, alguns pontos de contato estilísticos e temáticos entre esses três poetas.
+
 556;40;^PTPrepart+^PTRelpron|PTCon|PTDemonstr|"que";*|*|PTNonrel|*;
+
+/*		556. Neste trabalho é testado um classificador adaptativo que visa suavizar os efeitos causados por um número insuficiente de amostras de treinamento, fato este que pode degradar severamente a acurácia dos resultados. NOT. Caso tenha que haver deslocalização de residentes, importa definir em que condições esta será feita.
+
 550;40;PTDemonstr;PTDemonstrPR;
 
+/*		550. A salada de frutas, por exemplo, era mal vista devido a isso.
 /* RECIPROCAL PRONOUNS
 
 441;40;PTPrep:PTA|PTRecipr;^PTPrep|PTPerspron;
 
+/*		441. As pessoas têm igualmente reestruturado a si mesmas e as suas relações sociais.
 /* INDEFINITE PRONOUNS AS BEGINCONCEPT or AS PART OF CONCEPT CLUSTER 
 
 150;40;PTCon|PTIndefpron|PTCon;PTCon|PTBeginconcept|*;makes BeginConcept of indefinite pronoun between two Concepts
+
+/*		150. Há na empresa outros gastos voluntários que não se referem diretamente à elaboração de produto.
+
 613;40;PTAdj:PTIndefpronPRCon|PTIndefpronPR|PTCon;^PTAdj|+Join|*;
 
+/*		613. Os custos também podem ser considerados em função de diversas outras classificações. Descobrimos também processos específicos da sua evolução e história cívica e outros projectos que são seguidos ou participados por muitas outras cidades.
 /* INDEFINITE PRONOUNS: ADJECTIVAL USE = Concept
 
 703;40;^PTPrep|PTIndefpronPRCon|PTIndefart:PTDefart:PTPosspron|PTCon:PTAdj;*|PTAdj|+Join|*;
+
+/*		703. São poucos os trabalhos que tratam da relação câmbio-fluxos de trabalhadores. NOT. Este acidente foi considerada por muitos uma revanche do ano anterior.
+
 596;40;PTIndefpronPRCon|PTCon:PTAdj:PTMaismenos;PTAdj|*;
+
+/*		596. Ambas teorias foram discutidas. Com arranjos completamente distintos, alguns mais parecidos com os originais, outros em que os ‘assassinamos’. Na Tabela 1, são apresentadas algumas características do solo da área de estudo.
+
 608;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRCon|^PTAdj+^PTCon;*|PTAdj|*;
+
+/*		608. Esperamos pois a colaboração, a compressão e a participação dos nossos leitores, artistas, poetas, escritores, músicos, bailarinos, investigadores, pessoas anónimas todos  aqueles  que confiam na cultura como meio para melhorar a vida pessoal e colectiva. Para ter certeza de que as crianças estão bebendo bastante água, ofereça a elas um copo o tempo todo.
+
 597;40;PTIndefpronPRCon;PTIndefpronPR;
 
+/*		597. Um teve pneumonia e o outro tinha fortes e freqüentes dores de cabeça – ambos representaram 8,7% do total.
 /* INDEFINITE PRONOUNS: ADJECTIVAL USE = NonRelevant
 
 623;40;PTIndefpronPRNR|PTCon:PTBeginconcept:PTAdj:PTIndefpronPR;PTNonrel|*;
+
+/*		623. A partir da apresentação do projecto, quaisquer outras propostas têm de ser entregues no prazo de 30 dias. Quando se opta por uma estrutura de documentário, imediatamente pensa-se na apresentação de certa verdade.
+
 632;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|SEnd;^PTCon|PTNonrel|*;
+
+/*		632. Outros se estabeleceram ali por períodos consideráveis, vitimados por problemas de saúde, em busca de engajamento em outra embarcação, por falta de emprego, deserção ou outros motivos quaisquer.
+
 633;40;PTCon:PTAdjCon:PTConVerb:PTAdj|PTIndefpronPRNR|^PTAdj+^PTCon;*|PTNonrel|*;
+
+/*		633. O clube não vai ter pela frente um adversário qualquer, mas, ainda assim, é difícil de parar se atuar a 100 por cento.
+
 625;40;PTIndefpronPRNR;PTIndefpronPR;
 
+/*		625. Quaisquer que tenham sido os significados emocionais da terra para o ego do individuo e sua identidade, qualquer preocupação moral que tivesse engendrado foi agora suprimida.
 /* INDEFINITE PRONOUNS CONCEPT AS PART OF PATHRELEVANT INDEFINITE PRONOUN
 
 614;40;PTIndefpronconcept+PTAdj|PTIndefpronPR;PTIndefpronPR|+Join;
 
+/*		614. No modernismo, surgiu vários estilos, os mais destacados são Expressionismo, Simbolismo, Impressionismo, Realismo, Naturalismo, Cubismo e Futurismo, embora tenham sido desenvolvidos diversos outros.
 /* INDEFINITE PRONOUNS AS NEGATION
 
 686;40;PTNaoAdj|PTPrepart|PTPosspron;^PTNaoAdj|+Join|+Join;
+
+/*		686. Eu não vi nenhum dos seus filmes.
+
 853;40;"nunhum":"nenhuma"|PTVerb:PTAux;PTPerspron+PTNegation-PTNegBegin|*;
 
+/*		853. Algumas são promissoras, mas nenhuma está madura para a escala industrial.
 /* DEFART AS PERSONAL PRONOUN
 
 803;40;PTDefart|PTInf;PTPerspron|*;
 
+/*		803. Existem diversas formas de as satisfazer.
 /* TANTO COMO
 
 433;40;PTTanto|*{1,7}^PTComo|PTComo;^PTConj|*|PTComo;makes Relation of 'tanto' in expression 'tanto...como'
 
+/*		433. Esta estética é influenciada pelo Barroco onde as cenas ganham um estatuto teatral e onde as molduras chegam a ter quase tanto peso como as cenas centrais. Diante da emissão de novas ações, tanto o governo como os acionistas minoritários poderão adquirir os papéis. Tanto podem ascender ao topo da escala social como tombar no extremo oposto.
 /* A NÃO SER
 
 896;40;PTA|"não"|"ser"|PTAdj:PTPart:PTPartrel:PTAdv:PTComma;PTConj|*|*|*;
+
+/*		896. Infelizmente, isso continua a não ser feito.
+
 897;40;PTA|"não"|"ser";PTPrep+PTNegStop|Join|Join;
 
+/*		897. Em Malvaviscus arboreus e Hibiscus rosa-sinensis a produção de flores não cessa, a não ser esporádica e brevemente ao longo do ano, caracterizando o tipo contínuo de floração.
 /* LABELS CLEAN-UP
 
 241;40;PTVerb+^PTAux;PTVerb;to remove all other labels than Verb
+
+/*		241. O chefe da equipe de psicólogos que acompanha a saúde mental dos trabalhadores afirmou que todos os grupos passam por etapas de crescimento e enfrentam crises.
+
 700;40;PTCon;PTCon;to remove all other labels than Con
+
+/*		700. A existência de ambientalista e ao mesmo tempo pesquisadora da área em questão permitiu a produção de um parecer técnico-científico.
+
 885;40;PTAdjCon;PTAdj+PTCon;default
+
+/*		885. Ela examina essa parte do indivíduo e da ação social que é mais fortemente ligada ao uso dos requisitos materiais para o bem-estar.
+
 325;40;PTConj+PTConVerb;-PTConVerb;
+
+/*		325. Também não se sabe ainda que impacto a decisão terá sobre os parcelamentos em curso e sobre os leilões de precatórios (caso em que credores que aceitam um deságio maior recebem a dívida primeiro).
+
 701;40;PTConVerb;PTCon;default
+
+/*		701. Colégios da Especialidade da Ordem dos Médicos pareceres favoráveis para haver fornmação em 2011.
+
 307;40;PTAdvmanner;PTAdv;
+
+/*		307. Os resíduos, que são a diferença entre os valores observados experimentalmente pelos valores estimados pelos modelos, foram representados em gráficos, em função dos valores estimados de contração volumétrica.
+
 308;40;PTAdv;PTAdv-PTNegBegin;
+
+/*		308. Seu companheiro de equipe venceu novamente.
+
 309;40;PTIndefpronconcept;PTIndefpronconcept;
+
+/*		309. Os termos perigo e risco tem se tornado cada vez mais freqüentes no vocabulário científico, embora nesse estudo assumam significados diferentes.
+
 254;40;PTComma;+PTPunctuation;add Punctuation label to comma
+
+/*		254. Com base nos resultados, concluiu-se que a forma dos frutos de mamona é influenciada pela redução do teor de água.
+
 906;40;"para"|PTInf;PTConj|*;
+
+/*		906. Uma formação inicial de quatro ou cinco anos jamais poderá ser suficiente para equipar um professor para o ensino ao longo da vida.
+
 443;40;PTPrep+^PTDe+^PTComo;PTPrep;
+
+/*		443. Esta prática foi criada pelo presidente Campos Sales e fortaleceu o poder dos coronéis em seus estados.
+
 478;40;PTAux;-PTPart;to make sure the auxiliary verb becomes a relation
+
+/*		478. A maioria dos itens apresentou aplicabilidade quanto às características técnicas, tendo sido assim avaliado favoravelmente pelos especialistas.
+
 557;40;PTIndefpronPR;PTIndefpronPR;to make sure the pathrelevant indefinite pronoun becomes pathrelevant
+
+/*		557. Desta forma, podemos inferir que tais imagens possuem uma força diferente daquela ficcional mesmo que nelas tenham algo desta construção de realidade.
+
 652;40;PTEndconcept;PTEndconcept;to remove all other labels than EndConcept
+
+/*		652. A sua periodicidade é mensal, sendo publicado ao dia 15 de cada mês ou no primeiro dia útil seguinte.
+
 706;40;PTLayout;PTLayout;to remove all other labels than Layout
+
+/*		706. Podem-se dividir os estoques em quatro tipos, ou seja: (1) mercadorias e produtos acabados, (2) produtos em elaboração, (3) matérias-primas e embalagens, (4) materiais de consumo e almoxarifados.
+
 773;40;PTA;PTDefart;default
+
+/*		773. Contração volumétrica e forma dos frutos de mamona durante a secagem.
+
 866;40;PTRelpron+PTComprel;-PTComprel;
 
-/*890;40;PTPrepartTime;-PTPrepartTime;;cleanup irrelevant label
+/*		866. 86,9% dos brigadistas afirmaram que atualmente não tinham problema de saúde algum.
 /* PHASE 60: DETECTION OF ENUMERATIONS
 /*====================================
 
 753;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;
+
+/*		753. Os questionários versaram sobre os fatores humanos, as condições de saúde, alimentação, treinamento, reciclagem e segurança no trabalho.
+
 754;60;*PTCon:PTAdj|PTComma|*PTCon:PTAdj|PTAndOrBut:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;
+
+/*		754. Ele recomenda que as univeridades tomem medidas que visem coibir a prática do plágio na redação de teses, monografias e artigos.
+
 755;60;*PTCon:PTAdj+^PTList|PTComma|*PTCon:PTAdj+PTList;+PTList|+PTList|*;for longer enumerations
+
+/*		755. Os questionários versaram sobre os fatores humanos, as condições de saúde, alimentação, treinamento, reciclagem e segurança no trabalho.
+
 756;60;*PTCon:PTAdj+^PTList|PTComma|*PTCon:PTAdj+PTList;+PTList|+PTList|*;for longer enumerations
+
+/*		756. Para tanto, várias negociações foram iniciadas em 1991, envolvendo doze países (Alemanha, França, Reino Unido, Itália, Espanha, Bélgica, Holanda, Portugal, Grécia, Irlanda, Dinamarca e Luxemburgo), que culminaram, em 1992, no Tratado da União Européia, hoje conhecido por Tratado de Maastricht.
+
 757;60;*PTCon:PTAdj+^PTList|PTAndOrBut:"nem"|*PTCon:PTAdj|SEnd;+PTList|+PTList-PTNegStop|+PTList|*;
+
+/*		757. Muitas práticas agrícolas, outrora consideradas primitivas ou mal orientadas.
+
 758;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		758. Os ameríndios influenciaram a língua e a culinária do país e os africanos influenciaram a língua, a culinária, a música, a dança e a religião.
+
 759;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		759. Também foi definida a missão, a visão e os valores da empresa.
+
 760;60;PTDefart|*PTCon:PTAdj|PTComma|PTDefart|*PTCon:PTAdj|PTComma|PTAndOrBut:"nem"|PTDefart|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		760. O trigo, o milho, e o arroz, os cereais mais amplamente cultivados, todos eles foram transportados bem distantes de seus pontos de origem e têm substituído a vegetação nativa numa vasta extensão da superfície terrestre.
+
 761;60;PTDefart|*PTCon:PTAdj+^PTList|PTComma|PTDefart+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations
+
+/*		761. Os ameríndios influenciaram a língua e a culinária do país e os africanos influenciaram a língua, a culinária, a música, a dança e a religião.
+
 762;60;PTIndefart|*PTCon:PTAdj|PTComma|PTIndefart|*PTCon:PTAdj|PTAndOrBut|PTIndefart:"nem"|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		762. A bateria típica em uma roda de capoeira Angola é composta por três berimbaus, dois pandeiros, um atabaque, um agogô e um ganzuá.
+
 763;60;PTIndefart|*PTCon:PTAdj+^PTList|PTComma|PTIndefart+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations
+
+/*		763. Acompanhados por um pandeiro, um tamborim, uma cuíca e um surdo, estes compositores terminariam por influenciar e lapidar as características essenciais desse novo samba carioca urbano.
+
 764;60;PTPosspron|*PTCon:PTAdj|PTComma|PTPosspron|*PTCon:PTAdj|PTAndOrBut:"nem"|PTPosspron|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		764. Diante de um quadro, cada espectador terá uma sensação, de acordo com sua disposição, seus conhecimentos e seus gostos.
+
 765;60;PTPosspron|*PTCon:PTAdj+^PTList|PTComma|PTPosspron+PTList|*PTCon:PTAdj+PTList;+PTList|+PTList|+PTList|*|*;for longer enumerations
+
+/*		765. O artista faz arte segundo seus sentimentos, suas vontades, seu conhecimento, suas ideias, sua criatividade e sua imaginação, o que deixa claro que cada obra de arte é uma forma de interpretação da vida.
+
 859;60;PTMonth|PTComma|PTMonth|PTComma|PTMonth|PTAndOrBut|PTMonth;+PTList|+PTList|+PTList|+PTList|+PTList|-PTNegStop|+PTList;
+
+/*		859. Seja em Janeiro, Fevereiro, Dezembro ou Agosto, as atrações e shows vão estar sempre lá.
+
 860;60;PTMonth|PTComma|PTMonth|PTAndOrBut|PTMonth;+PTList|+PTList|+PTList|-PTNegStop|+PTList;
+
+/*		860. A maior parte das ocorrências ocorre nos meses de julho, dezembro e janeiro, períodos de alta estação na capital cearense.
+
 861;60;PTMonth|PTAndOrBut|PTMonth;+PTList|-PTNegStop|+PTList;
+
+/*		861. O curso, cuja duração é de 08 semestres, tem módulos presenciais anualmente realizados nos meses de Janeiro e Julho.
+
 766;60;PTDefart|*PTCon:PTAdj|PTAndOrBut|PTDefart|PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		766. Considerando a importância e a variabilidade existentes nas propriedades físicas dos produtos agrícolas de diferentes espécies.
+
 767;60;PTIndefart|*PTCon:PTAdj|PTAndOrBut|PTIndefart|PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		767. Está claro que se um indivíduo ou uma população vive em ambiente satisfatório, os genes terão a oportunidade de expressar seu máximo potencial.
+
 778;60;PTNumber|PTAndOrBut|PTNumber;+PTList|+PTList-PTNegStop|+PTList;
+
+/*		778. A redução do teor de água influencia a contração volumétrica unitária e da massa dos frutos de mamona, provocando redução de seus valores em 46,0 e 63,0%, respectivamente.
+
 796;60;PTDemonstrPR|PTAndOrBut|PTIndefpronPR|PTCon;+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		796. As nossas preocupações relativas a estas e outras partes do relatório não diminuem de forma alguma o nosso apoio.
+
 799;60;PTCon|PTAdj|PTAndOrBut|PTAdj:PTIndefpronPR;*|+PTList|+PTList-PTNegStop|+PTList;
+
+/*		799. Podem ser executados desde bem lentamente, induzindo a um jogo mais lento e estratégico.
+
 895;60;PTDo|*PTCon:PTAdj|PTAndOrBut|PTDo|*PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		895. Garante o anonimato do utilizador e do veículo mas tem validade de 90 dias.
+
 927;60;PTPrepart|*PTCon:PTAdj|PTAndOrBut|PTPrepart|*PTCon:PTAdj;+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		927. Garante o anonimato do utilizador e do veículo mas tem validade de 90 dias.
+
 908;60;PTDe|PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon:PTAdj|PTAndOrBut|PTDe|PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon:PTAdj;+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList|+PTList;
+
+/*		908. A nova ordem não era uma questão de existência de mercados isolados aqui e alhures, mas de uma economia inteira desenhada de acordo com um modelo simplificado e idealizado de comportamento humano: o encontro de um comprador e de um vendedor com o objetivo de maximizar livremente a riqueza pessoal.
+
 768;60;SBegin:PTColon:PTConj:"como"|*PTCon:PTAdj|PTAndOrBut|*PTCon:PTAdj;*|+PTList|+PTList-PTNegStop|+PTList;
+
+/*		768. Bradicardia e hipotensão não são observadas com o uso de clonidina epidural.
+
 816;60;SBegin:PTColon|PTDefart:PTIndefart:PTPosspron|*PTCon:PTAdj|PTAndOrBut|.PTDefart:PTIndefart:PTPosspron|*PTCon:PTAdj;*|+PTList|+PTList|+PTList-PTNegStop|+PTList|+PTList;
+
+/*		816. As imagens e os signos divergem igualmente sobre a questão de referência.
+
 892;60;SBegin:PTColon:PTConj:"como"|PTDefart|PTPosspron|*PTCon:PTAdj|PTAndOrBut|*PTCon:PTAdj;*|+PTList|+PTList|+PTList|+PTList-PTNegStop|+PTList;
+
+/*		892. As suas infância e adolescência foram marcadas por factos que o influenciariam posteriormente.
+
 882;60;"entre"|*{1,5}^PTAndOrBut|"e"|*^PTPunctuation+^PTComma+^PTVerb+^PTConj+^SEnd;*|+PTList|-PTNegStop+PTList|+PTList;
+
+/*		882. A umidade relativa do ar varia entre 20 e 60%, com mínimas chegando a 15% nas horas mais quentes do dia.
+
 804;60;PTComma|PTAndOrBut;*|^PTConj;
+
+/*		804. A proteção ocular nunca foi usada por 69,2% dos brigadistas, e as luvas nunca foram utilizadas por 46,2% desses brigadistas.
+
 841;60;SBegin|PTAndOrBut;*|PTConj;
+
+/*		841. E se pessoa de Vossa Excelência confirma esses alertas.
+
 879;60;PTInf|PTAndOrBut|PTInf;+PTRList|+PTRList-PTNegStop|+PTRList;
+
+/*		879. O processo de rigorosa simplificação ambiental começou entre os colonos agrícolas que apareceram, procurando por um produto agrícola que pudessem cultivar e exportar para o leste pelas ferrovias.
+
 880;60;PTPartrel|PTAndOrBut|PTPartrel;+PTRList|+PTRList-PTNegStop|+PTRList;
 
+/*		880. Nesse período, a temperatura foi acompanhada e mantida na faixa de variação fisiológica para cães.
 /* PHASE 70: NEGATION
 /*===================
 /* PREPARATION
 /* add/remove labels that are needed for the expansion rules
 
 345;70;PTAdj;+PTCon;
+
+/*		345. Quando toca a sirene, toda a estratégia de segurança já deve estar definida.
+
 848;70;PTPart+PTPreferRel;PTPartrel;
+
+/*		848. Feito isso, a empresa teve condições de confeccionar os Contratos de Gestão e Resultados para todas as diretorias, departamentos e agências.
+
 356;70;PTPart;^PTCon;
+
+/*		356. Observou-se que, à exceção de um dos entrevistados, todos os demais afirmaram possuir mais de dez anos de experiência na função de gestão.
+
 898;70;PTInf:PTVerb:PTRefl+PTNegStop;-PTNegStop;remove attribute that came from lexrep "se"
+
+/*		898. Essa ‘elegância’ não se nota ao primeiro olhar.
+
 899;70;PTAdv+PTNegation+^PTOuNao;PTNao+PTNegation+PTNegBegin-PTNaoAdj;for "dificilmente"
 
+/*		899. Os sorotipos 1 e 5 são muito raramente resistentes à penicilina.
 /* não só/meramente/apenas
 
 929;70;PTNao+^PTNegation2|PTVerb:PTAux:PTInf:PTPartrel|PTAdvrestrict|^PTNumber;PTAdv|*|PTAdv|*;removing negation from Nao and making Advrestrict Relation when both occur together with a verb in between
 
+/*		929. Porque não é meramente um conceito negativo que indica a ausência de violência, mas um conceito positivo de acção.
 /* add labels that are used in the expansion rules
 
 780;70;PTComma|PTAdvstruct|PTComma;+PTNonrel|+PTNonrel|+PTNonrel;
+
+/*		780. A salada de frutas, por exemplo, era mal vista devido a isso.
+
 747;70;PTDefart:PTIndefart:PTNonrel:PTPosspron:PTCon:PTNumber:PTIndefpronPR;+PTNPC;adding label to diminish number of options in following rules
+
+/*		747. Só se encontram, porém, a partir do século II a.C. até o século III d.C. na China.
+
 843;70;PTAdv:PTAdvPR:PTAdvstruct;+PTAdv70;
 
+/*		843. A simples apresentação de percentuais também não é válida. A intenção aqui não é fazer uma declaração teórica definitiva sobre o assunto. Mas esta definição mais imprecisa também não resolverá o problema.
 /* disambiguate conjunctions
 
 820;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|"apesar"|PTDo;*|PTConj|Join;
+
+/*		820. Apesar da infecção pelo CDV ocorrer em animais de todas as faixas etárias, os filhotes, com idade inferior a três meses, parecem ser os mais susceptíveis.
+
 821;70;SBegin:PTColon:PTConj:PTRelpron:PTComma:PTAndOrBut|PTComo+PTPrep;*|PTConj;
+
+/*		821. Como era de se esperar.
+
 839;70;PTVerb:PTAux:PTInf|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|"e"|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|^PTInf;*|*|-PTAndOrBut+PTConj|*|*|*;
+
+/*		839. O salão está cheio e ele não segue até o fim da lista.
+
 881;70;PTVerb|"e"|^PTVerb;*|+PTConj|*;
 
+/*		881. 7,7% não controlavam e 15,4% não souberam responder.
 /* NÃO as the opposite of SIM
 
 845;70;PTVerb:PTAux:PTInf:PTPartrel:PTPunctuation|.PTAdv70|"não"|PTPunctuation:SEnd;*|*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' at the end of a sentence
+
+/*		845. Ele disse 'não, vim só te dar o cigarro'.
+
 846;70;PTDefart|"não"|PTDo:PTRelpron:SEnd;*|-PTNao+PTNaoAdj-PTNegBegin|*;'não' as opposite of 'sim' in specific contexts, very rare!
 
+/*		846. O centro das nossas atenções logicamente pode levar a acontecimentos tais como o não da Irlanda.
 /* EXPANSION TO THE LEFT
 /* basic structure: (subject) - não - verb
 
 745;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
+
+/*		745. Essa ‘elegância’ não se nota ao primeiro olhar.
+
 750;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop|*;
+
+/*		750. Apesar de o ministério não nos ter pago, as crianças não deixaram de receber os apoios sociais.
+
 771;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*;
+
+/*		771. São as principais causas apontadas por jovens que não namoram e não pretendem manter relacionamentos sérios.
+
 772;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdv70|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|+PTNegBegin|+PTNegBegin|*|*;
 
+/*		772. Não me passa pela cabeça.
 /* variations
 
 792;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|*|+PTNegBegin|-PTNegStop;
+
+/*		792. Em alguns casos, no entanto, a empresa pode não achar conveniente aumentar seu nível de dívida.
+
 805;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*;variant of r792
 
+/*		805. Ele pode não superá-lo.
 /* variation 2: (subject) - não - pronominal object- verb
 
 822;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|*|+PTNegBegin|*|-PTNegStop;
+
+/*		822. Sua justaposição não cria uma visão de totalidade e suas contradições não as destroem.
+
 824;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTDefart:PTPerspron|PTVerb:PTAux:PTInf:SEnd;*|+PTNegBegin|+PTNegBegin|*|*;
 
+/*		824. Um dia foi ela a chegar atrasada e eu fechei a porta e não a deixei entrar.
 /* variation 3: adverb - (subject) - não - verb
 
 801;70;SBegin:PTColon:PTConj:PTRelpron:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|PTNPC|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
+
+/*		801. Porém, o empreendimento não seria realizado durante o seu reinado.
+
 817;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTVerb:PTAux:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;
+
+/*		817. É importante destacar que atualmente não existem formas estruturadas de monitoramento ambiental.
+
 818;70;SBegin:PTColon:PTConj:PTRelpron:PTAndOrBut:PTPunctuation+^PTList|PTAdvPR:PTAdv:PTAdvstruct:PTPunctuation|.PTPerspron:PTDemonstrPR:PTAdvstruct:PTAdv|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;
 
+/*		818. — Não nos separamos dela nem em troca de todo o ouro que há no mundo!
 /* subclause with "que"
 
 809;70;^PTRelpron+^PTPrep|PTRelpron|.PTPerspron:PTDemonstrPR|PTAdvPR:PTAdv:PTAdvstruct|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin+PTBeginrel|*|*|+PTNegBegin|*;
 
+/*		809. 86,9% dos brigadistas afirmaram que atualmente não tinham problema de saúde algum.
 /* negation span starts after a Concept
 
 812;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop;
+
+/*		812. No segundo caso a lei não estabelece prazo de validade.
+
 813;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTNao|PTRefl:PTPerspron|PTVerb:PTAux;*|*|+PTNegBegin|+PTNegBegin|-PTNegStop|*;
+
+/*		813. Esse facto faz-nos pensar onde poderia chegar caso a vida não lhe tivesse pregado esta partida?
+
 814;70;PTCon|PTDefart:PTBeginconcept:PTNonrel|*PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList:PTAdvstruct|PTAux|PTNao|PTVerb:PTAux:PTInf:SEnd;*|*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;
 
+/*		814. A evolução histórica do segmento conserveiro gaúcho, com o fechamento de diversas empresas, sinaliza que no passado algumas empresas podem não ter dado a devida atenção a práticas mais apropriadas de gestão.
 /* negation with Partrel
 
 837;70;PTCon|.PTAdvstruct|PTNao|.PTAdv|PTPartrel;+PTNegBegin|*|+PTNegBegin|*|*;
 
+/*		837. Sendo, portanto, uma atividade complexa, envolve interesses conflitantes não bem conhecidos pelas partes.
 /* sem
 
 852;70;PTCon|PTAux|PTPrep+PTNegBegin;+PTNegBegin|*|*;
+
+/*		852. A comida ficasse sem sabor.
+
 850;70;^PTDo|PTCon|PTPrep+PTNegation|PTNPC;*|+PTNegBegin|*|*;
 
+/*		850. Um ano após a instalação das torres de vigilância, os registros de acidentes sem vitimas fatais reduziram de 298 para 149 casos.
 /* nenhum(a) dos/das
 
 856;70;"nenhum":"nenhuma"|"das":"dos"|.PTIndefpronPR|PTCon;+PTBeginconcept-PTNaoAdj|PTAdj|PTAdj|*;
+
+/*		856. Cabe destacar que os critérios de cálculo de lucratividade não apresentaram correlação significativa com nenhuma das outras questões analisadas.
+
 857;70;"nenhum":"nenhuma"|PTDe|PTPerspron;PTPerspron+PTNegation-PTNaoAdj|Join|Join;
 
+/*		857. Nenhum de nós deseja um aumento da pobreza.
 /* Include antecedent of relative clause with negation
 
 900;70;^PTPrep+^PTPrepart|*PTCon+^PTAdj+^PTNegBegin|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|-PTBeginrel|*;
+
+/*		900. Famílias que jamais teriam capacidade de pagar.
+
 901;70;^PTPrep+^PTPrepart|PTCon+^PTAdj|.PTCon|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|+PTNegBegin|-PTBeginrel|*;
 
+/*		901. Gostaria de levantar uma questão particular que não está prevista nestes regulamentos.
 /* Miscellaneous
 
 769;70;PTCondition|PTNegBegin;+PTBeginrel+PTNegBegin|*;include conditional conjunction
+
+/*		769. Bons projetos deixam de ser financiados quando a firma não se compromete com a proteção dos interesses dos seus investidores.
+
 797;70;SBegin:PTColon:PTConj:PTRelpron:PTComma+^PTList+^"para"|PTInf|.PTNPC:PTDe:PTPrep:PTPrepart:PTPerspron:PTList|PTNao|PTVerb:PTAux:SEnd;*|+PTNegBegin|*|+PTNegBegin|-PTNegStop;infinitive as subject
+
+/*		797. Concentrar a atenção neste aspecto nunca irá produzir um relatório atractivo.
+
 774;70;typeRelation+^PTAndOrBut+^PTPrep+^PTPrepart+^PTRelpron+^PTNegation+^PTNegBegin|PTRelpron:"e"|.PTAdv70|typeRelation+PTNegBegin;*|+PTBeginrel|*|*;split relation when negation only applies to part of it
+
+/*		774. Penso que condicionar uma à outra não contribuiu para o que debatíamos.
+
 775;70;typeRelation+^PTAndOrBut+^PTPrep+^PTPrepart+^PTRelpron+^PTNegation+^PTNegBegin|PTAndOrBut|PTRelpron|.PTAdv70|typeRelation+PTNegBegin;*|+PTBeginrel|*|*|*;split relation when negation only applies to part of it
+
+/*		775. Independentemente da controvérsia que a própria afirmação não deixará de suscitar e que não cabe discutir no curso desta nota, a escolha desta baliza exige uma clarificação adicional que, não obstante a sua simplicidade, empresta ao critério desta escolha uma maior solidez.
+
 844;70;PTVerb:PTPartrel+^PTAux|.PTPrep:PTPrepart|PTNao|PTInf;*|*|+PTNegBegin+PTBeginrel|*;split relation before an infinitive clause with negation
+
+/*		844. Os banhistas que preferem não entrar no mar ficaram no percentual de 9%.
+
 777;70;PTAndOrBut|PTBeginrel;+PTBeginrel|-PTBeginrel;
+
+/*		777. Alguns críticos questionam se o escritor realmente teria transparecido o seu verdadeiro eu ou se tudo não teria passado de um produto, entre tantos, da sua vasta criação.
+
 776;70;PTDefart|PTRelpron|typeRelation+PTNegBegin;*|+PTBeginrel|*;
+
+/*		776. Além da sobrinha, tem um cunhado e um sobrinho, com os quais não se relaciona.
+
 808;70;PTVerb+^PTAux|"não"+PTNegBegin;*|+PTNegBegin+PTBeginrel;split relation when negation only applies to part of it
+
+/*		808. Os banhistas que preferem não entrar no mar ficaram no percentual de 9%.
+
 851;70;PTVerb:PTPartrel:PTInf+^PTAux|.PTAdv70|PTPrep+PTNegBegin;*|*|+PTNegBegin+PTBeginrel;
+
+/*		851. Ninguém pode sobreviver sem alguma coisa do solo.
+
 893;70;PTVerb:PTPartrel:PTInf|PTConj+PTNegation;*|+PTBeginrel;split relation before "sem que"
+
+/*		893. A última delas, um novo cometa, aconteceu sem que ele precisasse sair de casa.
+
 854;70;PTNegation|.typeRelation+^PTNegBegin+^PTNegStop|PTNegBegin;+PTNegBegin|*|*;include negation marker in immediately following negation span
 
+/*		854. Os riscos ambientais existentes fazem com que sejam necessários estudos de impacto ambiental sérios nos oito países afectados, sem os quais nenhum projecto deve avançar.
 /* move NegBegin from nonrelevant to relevant lexrep
 
 746;70;PTNegBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegBegin;move NegBegin from nonrelevant to relevant lexrep
 
+/*		746. A diferença entre as duas equipes nunca foi tão evidente.
 /* post-processing Advstruct between commas
 
 779;70;PTComma|PTAdvstruct+^PTNegBegin|PTComma;PTNonrel|*|PTNonrel;
 
+/*		779. Dos 239 filmes a serem exibidos, no entanto, apenas 74 dos trabalhos.
 /* EXPANSION TO THE RIGHT
 /* general rules
 
 911;70;PTNao|.PTComma|*PTVerb:PTAux:PTInf|.PTComma|PTNegation2+^"nem";*|*|*|*|+PTAdv70-PTNegBegin;a negation marker that enforces a preceding negation marker must not act as NegBegin
+
+/*		911. O regulamento não impede de forma alguma que os Estados-Membros abram completamente os seus mercados de cabotagem.
+
 858;70;^PTNegation2+^"sem"|PTPunctuation+^PTList|^PTNegBegin+^PTNegation+^PTNegation2;*|*|+PTNegStop;stop the right expansion at a punctuation mark, except when it concerns a comma in an enumeration
+
+/*		858. Não é possível avaliar apenas uma variável, por exemplo teor de cálcio.
+
 863;70;PTNegation2|PTPunctuation|PTConj+^PTNegBegin;*|*|+PTNegStop;cover cases that are excluded by r858
+
+/*		863. Seja como for, alguns conselheiros afirmaram que as coisas não aconteceram, de forma alguma, como foi relatado pela imprensa internacional.
+
 864;70;^typeRelation+^PTNegBegin|PTRelpron+^PTNegBegin;*|+PTNegStop;stop expansion at Relpron
+
+/*		864. Assim, no seu famoso exemplo, não existiria uma equivalência mesmo entre as palavras que um leitor desavisado tornaria como 'meramente referenciais' tais como 'ippos', 'equus' e 'cavalo'.
+
 874;70;^typeRelation|PTDe|PTRelpron+^PTNegBegin;*|+PTNegStop|*;stop expansion at de+Relpron
+
+/*		874. Sem voltar a cair na noção de que a pessoa que é punida deva ser culpada.
+
 869;70;^PTNao|PTConj+^PTNegBegin+^PTNegation+^"de"|^PTNegBegin+^PTNegation;*|+PTNegStop|*;stop expansion at conjunction (not "de")
+
+/*		869. Não havia recipientes térmicos para manter a água gelada.
+
 870;70;PTConj+"de"+^PTNegBegin+^PTNegation|PTDefart+^PTNegBegin+^PTNegation;+PTNegStop|*;stop expansion at conjunction "de"
+
+/*		870. Recebe o segurado que teve a ação finalizada, ou seja, quando não há mais chances de o INSS recorrer.
+
 883;70;PTCon+^PTAdj+^PTNegation+^PTNegBegin|PTDe:PTPrep|PTInf;*|^PTConj+PTNegStop|*;stop expansion at conjunction labeled as Prep before infinitive
+
+/*		883. 58,3% responderam não sentirem a necessidade de relembrar ou aperfeiçoar alguma técnica de combate a incêndios.
+
 888;70;^PTNegation+^PTNegBegin|PTPrep:PTPrepart|PTRelpron:PTComo|^PTNegBegin;*|+PTNegStop|*|*;stop expansion at prep(art)+Relpron or Como
+
+/*		888. Sendo, portanto, uma atividade complexa, envolve interesses conflitantes não bem conhecidos pelas partes pelo que se recomenda que sua gestão seja assentada no reconhecimento do diálogo e aprendizagem dos atores envolvidos.
+
 889;70;PTNegBegin|*^PTNegStop|PTNegStop+PTPrep:PTPrepart|PTRelpron:PTComo;*|*|+PTBeginrel|*;adding Beginrel to result of r888 in case of negation
+
+/*		889. Temos uma lista sem fim em que tudo parece ser fundamental, das instituições maritais ao celibato dos sacerdotes e à tolerância religiosa.
+
 891;70;PTNao|PTVerb+^PTAux|.PTAdv70|PTRelpron:PTAux+^PTInf;*|*|*|+PTNegStop+PTBeginrel;stop expansion at beginning of subordinate clause
+
+/*		891. Não acredito que a prática de punição fosse justificada.
+
 904;70;PTNao|PTAux|PTInf|PTRelpron;*|*|*|+PTNegStop+PTBeginrel;stop expansion at beginning of subsordinate clause
+
+/*		904. Não devemos consentir que o país mais proteccionista impeça a celebração de acordos.
+
 875;70;PTNegPR|PTRelpron+PTNegStop|typeRelation;*|-PTNegStop|*;
+
+/*		875. A imagem não tem nada que ver com a prática de solidariedade da UE.
+
 871;70;PTNegBegin|*^PTNegStop|PTConj:PTAndOrBut+PTNegStop+^PTNegBegin+^PTRList;*|*|+PTBeginrel;split relation at conjunction in negation span
+
+/*		871. Nunca se mexia e era extremamente silenciosa.
+
 873;70;PTConj:PTRelpron:PTPrep|PTBeginrel+PTNegStop;+PTNegStop|*;move Beginrel to conjunction to exclude the conjunction from the expansion
+
+/*		873. Ele permanecerá pelo menos oito dias internado e não tem qualquer previsão de quando deve retornar ao cargo.
+
 886;70;PTPartrel|*^PTVerb+^PTAux+^PTNegBegin|PTVerb:PTAux+^PTNegBegin+^PTNegation;*|*|+PTNegStop;stop expansion on conjugated verb after Partrel
+
+/*		886. Este grande desafio está sendo plenamente cumprido e é um motivo de júbilo da sociedade.
+
 907;70;PTNegation+PTNegBegin+^PTNaoAdj|PTPunctuation|*{1,3}^PTPunctuation|PTPunctuation|^PTAndOrBut+^PTConj;*|+PTNegBegin|+PTNegBegin|+PTNegBegin|+PTNegBegin;don't let an adverbial expression between commas interrupt the expansion
 
+/*		907. A verdade, contudo, é que os meses foram passando, várias cartas foram enviada ao bastonário, sem, diz o governante, qualquer resposta.
 /* sem
 
 894;70;PTPrep+PTNegation|*PTNPC:PTDe:PTPrep:PTPrepart:PTList|PTVerb:PTPartrel;*|*|+PTNegStop;
+
+/*		894. Ele descobriu que os estudantes evangélicos foram os que menos apresentavam uso abusivo de álcool, e os sem religião apresentaram frequências mais elevadas.
+
 910;70;PTPrep+PTNegation|.PTDefart:PTIndefart:PTNonrel:PTPosspron|*PTCon|PTDefart:PTIndefart:PTNonrel:PTPosspron;*|*|*|+PTNegStop;stop at concept after concept
 
+/*		910. Eu apoio sem reservas o trabalho do Governo.
 /* move NegStop from nonrelevant to relevant lexrep
 
 862;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep
+
+/*		862. Não é possível avaliar apenas uma variável, por exemplo teor de cálcio, e determinar a partir desta, a porcentagem de CMS da amostra.
+
 905;70;PTNegStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+PTNegStop;move NegStop from nonrelevant to relevant lexrep
 
+/*		905. "Tentámos entrar, mas disseram-nos que não podíamos, a menos que a inquilina saísse para nos convidar".
 /* SENTIMENT SCOPE
 /* Restriction of scope
 
@@ -864,6 +2177,7 @@
 
 770;95;PTBeginrel;PTBeginrel;deletes Conj, Refl, etc. to avoid conflict with Beginrel
 
+/*		770. No entanto, não se pode precisar o quanto este genótipo é superior.
 /* REWRITE LANGUAGE SPECIFIC LABELS TO UNIFIED LABELS
 
 378;$;PTPunctuation;Punctuation;
