@@ -4,7 +4,9 @@
 
 **iKnow** is a library for Natural Language Processing that identifies entities (phrases) and their semantic context in natural language text in English, German, Dutch, French, Spanish, Portuguese, Swedish, Russian, Ukrainian, Czech and Japanese. It was originally developed by [i.Know](https://www.linkedin.com/company/i.know/about/) in Belgium, acquired by [InterSystems](https://www.intersystems.com) in 2010 to be embedded in its Caché and [IRIS Data Platform](http://www.intersystems.com/iris) products. InterSystems published the iKnow engine as open source in 2020. 
 
-This readme file has the basic pointers to get started, but make sure you click through to the **[wiki](https://github.com/intersystems/iknow/wiki)** for more details on any of these subjects.
+[![Getting started with iKnow](https://img.youtube.com/vi/VkR6rcv4_aA/0.jpg)](https://www.youtube.com/watch?v=VkR6rcv4_aA)
+
+This readme file has everything you need to get started, but make sure you click through to the **[wiki](https://github.com/intersystems/iknow/wiki)** for more details on any of these subjects.
 
 - [Using iKnow](#using-iknow)
   - [From Python](#from-python)
