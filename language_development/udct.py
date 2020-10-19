@@ -3,11 +3,11 @@
 import sys
 
 # for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-import engine as iknowpy
+# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
+# import engine as iknowpy
 
 # for "pip install iknowpy", next line will do, outcomment for local language development
-# import iknowpy
+import iknowpy
 
 engine = iknowpy.iKnowEngine()
 user_dictionary = iknowpy.UserDictionary()
