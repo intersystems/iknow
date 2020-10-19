@@ -23,7 +23,6 @@ set -euxo pipefail
 if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
   rm -rf "$ICUDIR"
   wget -nv -O icu4c.zip "$ICU_URL"
-  export ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
   mkdir -p "$ICUDIR"
   unzip -q icu4c.zip -d "$ICUDIR"
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
@@ -39,7 +38,7 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
     -p:ForceImportBeforeCppTargets="$(pwd)/EnableBuildCache.props" \
     -p:TrackFileAccess=false \
     -p:CLToolExe=buildcache.exe \
-    -p:CLToolPath="$HOME"
+    -p:CLToolPath="$BUILDCACHE_EXE_DIR"
 
 
 ##### Build iknowpy wheels #####
@@ -50,4 +49,4 @@ done
 
 
 ##### Report cache statistics #####
-"$HOME/buildcache.exe" -s
+"$BUILDCACHE_EXE_DIR/buildcache.exe" -s

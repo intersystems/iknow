@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "UserKnowledgeBase.h"
 
 #include <numeric>
 #include <mutex>
@@ -9,6 +10,7 @@
 #include "IkSummarizer.h"
 #include "IkPath.h"
 #include "IkIndexInput.h"
+#include "IkIndexProcess.h"
 #include "RegExServices.h"
 
 const std::set<std::string>& iKnowEngine::GetLanguagesSet(void) {
@@ -256,6 +258,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	}
 }
 
+static SharedMemoryKnowledgebase *pUserDCT = NULL; // User dictionary, one per process
+
 iKnowEngine::iKnowEngine() // Constructor
 {
 }
@@ -306,6 +310,7 @@ struct LanguageCodeMap {
 const static LanguageCodeMap language_code_map;
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
+
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
 	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
@@ -324,8 +329,14 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	CProcess::type_languageKbMap temp_map;
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
-	iknow::core::IkIndexInput Input(&text_input);
+
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
+
+	process.setUserDictionary(pUserDCT);
+	if (pUserDCT)
+		pUserDCT->FilterInput(text_input); // rewritings can only be applied if we no longer emit text offsets
+
+	iknow::core::IkIndexInput Input(&text_input);
 	process.IndexFunc(Input, iKnowEngineOutputCallback, &udata, true, b_trace);
 	lck.unlock();
 }
@@ -333,4 +344,93 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 void iKnowEngine::index(const std::string& text_source, const std::string& language, bool b_trace) {
 	String text_source_ucs2(IkStringEncoding::UTF8ToBase(text_source));
 	index(text_source_ucs2, language, b_trace);
+}
+
+std::string iKnowEngine::NormalizeText(const string& text_source, const std::string& language, bool bUserDct, bool bLowerCase, bool bStripPunct) {
+	try {
+		SharedMemoryKnowledgebase skb = language_code_map.Lookup(language); //No ALI for normalization: We need a KB.
+		IkKnowledgebase* kb = &skb;
+		IkKnowledgebase* ud_kb = NULL;
+
+		std::map<iknow::base::String, IkKnowledgebase const*> null_kb_map;
+		IkIndexProcess process(null_kb_map);
+		String output = process.NormalizeText(IkStringEncoding::UTF8ToBase(text_source), kb, ud_kb, bLowerCase, bStripPunct);
+		return IkStringEncoding::BaseToUTF8(output);
+	}
+	catch (const std::exception& e) {
+		throw ExceptionFrom<iKnowEngine>(e.what());
+	}
+	throw std::runtime_error("Failed to throw an exception.");
+}
+
+// Constructor
+UserDictionary::UserDictionary() {
+}
+
+// Adds User Dictionary label to a lexical representation for customizing purposes
+int UserDictionary::addLabel(const std::string& literal, const char* UdctLabel)
+{
+	string normalized = iKnowEngine::NormalizeText(literal, "en"); // normalize the literal
+	if (m_user_data.addLexrepLabel(normalized, UdctLabel) == -1) return iKnowEngine::iknow_unknown_label; // add to the udct lexreps
+	return 0; // OK
+}
+// Add User Dictionary literal rewrite, not functional.
+int UserDictionary::addEntry(const std::string& literal, const string& literal_rewrite) {
+	return -1; // we cannot rewrite input text as long as we use text offsets to annotate text.
+}
+
+// Add User Dictionary EndNoEnd. 
+int UserDictionary::addSEndCondition(const std::string& literal, bool b_end)
+{
+	m_user_data.addSEndCondition(literal, b_end);
+	return 0;
+}
+
+// Shortcut for known UD labels
+int UserDictionary::addConceptTerm(const std::string& literal) {
+	return addLabel(literal, "UDConcept");
+}
+int UserDictionary::addRelationTerm(const std::string& literal) {
+	return addLabel(literal, "UDRelation");
+}
+int UserDictionary::addNonrelevantTerm(const std::string& literal) {
+	return addLabel(literal, "UDNonRelevant");
+}
+int UserDictionary::addUnitTerm(const std::string& literal) {
+	return addLabel(literal, "UDUnit");
+}
+int UserDictionary::addNumberTerm(const std::string& literal) {
+	return addLabel(literal, "UDNumber");
+}
+int UserDictionary::addTimeTerm(const std::string& literal) {
+	return addLabel(literal, "UDTime");
+}
+int UserDictionary::addNegationTerm(const std::string& literal) {
+	return addLabel(literal, "UDNegation");
+}
+int UserDictionary::addPositiveSentimentTerm(const std::string& literal) {
+	return addLabel(literal, "UDPosSentiment");
+}
+int UserDictionary::addNegativeSentimentTerm(const std::string& literal) {
+	return addLabel(literal, "UDNegSentiment");
+}
+
+// Load a User Dictionary into the iKnow engine
+int iKnowEngine::loadUserDictionary(UserDictionary& udct)
+{
+	if (pUserDCT == NULL)
+		pUserDCT = new SharedMemoryKnowledgebase(udct.m_user_data.generateRAW(false));	// first use generation.
+	else
+		return iKnowEngine::iknow_user_dictionary_already_loaded;
+
+	return 0;
+}
+
+// Unload the User Dictionary
+void iKnowEngine::unloadUserDictionary(void)
+{
+	if (pUserDCT != NULL) {
+		delete pUserDCT;
+		pUserDCT = NULL;
+	}
 }

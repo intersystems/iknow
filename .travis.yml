@@ -3,7 +3,7 @@ language: cpp
 env:
   global:
     # Docker run command with arguments common to all manylinux builds
-    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -e CYTHON_VERSION -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
     # directory where ICU is installed on host
     - ICUDIR="$TRAVIS_BUILD_DIR/thirdparty/icu"
 
@@ -80,12 +80,14 @@ jobs:
     - name: "Windows x86_64"
       os: windows
       env: >-
+        BUILDCACHE_EXE_DIR="$HOME/buildcache_exe"
         BUILDCACHE_DIR="$HOME/buildcache"
         PIP_CACHE_DIR="$HOME/pipcache"
         PYINSTALL_DIR="$HOME/python"
       cache:
         directories:
           - $ICUDIR
+          - $BUILDCACHE_EXE_DIR
           - $BUILDCACHE_DIR
           - $PIP_CACHE_DIR
           - $PYINSTALL_DIR

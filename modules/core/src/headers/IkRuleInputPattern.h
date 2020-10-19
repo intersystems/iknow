@@ -76,6 +76,17 @@ namespace iknow {
 				required_labels_[i] = FastLabelSet::NPos();
 			}
       }
+	  IkRuleInputPattern(const IkRuleInputPattern& other) { // explicit copy constructor to avoid random binary data
+		std::copy(other.labels_, other.labels_ + (sizeof other.labels_ / sizeof other.labels_[0]), this->labels_);
+		std::copy(other.or_labels_, other.or_labels_ + (sizeof other.or_labels_ / sizeof other.or_labels_[0]), this->or_labels_);
+		std::copy(other.required_labels_, other.required_labels_ + (sizeof other.required_labels_ / sizeof other.required_labels_[0]), this->required_labels_);
+		std::copy(other.options_, other.options_ + (sizeof other.options_ / sizeof other.options_[0]), this->options_);
+		this->usesTypeLabels_ = other.usesTypeLabels_;
+		this->variable_pattern_ = other.variable_pattern_;
+		this->variable_length_ = other.variable_length_;
+		this->lexrep_length_ = other.lexrep_length_; 
+		this->var_narrow_ = other.var_narrow_;
+	  }
 	  bool IsMatch(const FastLabelSet& labels) const {
 		  for (size_t i = 0; i < kPatternSize; ++i) {
 			  if (labels_[i] == FastLabelSet::NPos()) break; // reached end of rule input pattern

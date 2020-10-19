@@ -416,8 +416,16 @@ else:
 if 'sdist' in sys.argv:
     raise BuildError('Creation of a source distribution is not supported.')
 
-# platform-specific settings
+# If installation is requested, do not perform a direct installation. Create a
+# wheel instead and install the wheel. On Unix, this is necessary to perform the
+# wheel repair process. On Windows, this is necessary to replace any instances
+# that were previously installed using pip.
 install_wheel = False
+if len(sys.argv) > 1 and sys.argv[1] == 'install':
+    sys.argv[1] = 'bdist_wheel'
+    install_wheel = True
+
+# platform-specific settings
 if sys.platform == 'win32':
     library_dirs = ['../../kit/x64/Release/bin']
     iculibs_name_pattern = 'icu*.dll'
@@ -427,11 +435,6 @@ if sys.platform == 'win32':
     extra_compile_args = []
     extra_link_args = []
 else:
-    if len(sys.argv) > 1 and sys.argv[1] == 'install':
-        # On Unix, we do not support direct installation. Create a wheel instead
-        # and install the wheel.
-        sys.argv[1] = 'bdist_wheel'
-        install_wheel = True
     if 'IKNOWPLAT' in os.environ:
         iknowplat = os.environ['IKNOWPLAT']
     else:
@@ -502,6 +505,9 @@ if not icu_license_found:
 
 with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
+    # Strip off badges. They belong in the GitHub version of the README file but
+    # are less appropriate on PyPI.
+    long_description = long_description[long_description.index('# iKnow\n'):]
 
 try:
     setup(

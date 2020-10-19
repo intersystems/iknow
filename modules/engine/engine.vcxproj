@@ -23,9 +23,11 @@
     <ClCompile Include="language_data\kb_sv_data.c" />
     <ClCompile Include="language_data\kb_uk_data.c" />
     <ClCompile Include="src\engine.cpp" />
+    <ClCompile Include="src\UserKnowledgeBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine.h" />
+    <ClInclude Include="src\UserKnowledgeBase.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{DF448293-BD0E-46C4-8689-69FCAEC64DE0}</ProjectGuid>
@@ -76,7 +78,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;IKNOW_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SCL_SECURE_NO_WARNINGS;_DEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\shell\src;..\core\src\headers;..\shell\src\SDK\headers;..\base\src\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\shell\src;..\core\src\headers;..\shell\src\SDK\headers;..\base\src\headers;..\compiler\iKnowLanguageCompiler;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -94,7 +96,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;IKNOW_EXPORTS;CACHE_COM_DISABLE;_ISCDLL;_SCL_SECURE_NO_WARNINGS;NDEBUG;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\shell\src;..\core\src\headers;..\shell\src\SDK\headers;..\base\src\headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\shell\src;..\core\src\headers;..\shell\src\SDK\headers;..\base\src\headers;..\compiler\iKnowLanguageCompiler;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4251</DisableSpecificWarnings>
     </ClCompile>
     <Link>

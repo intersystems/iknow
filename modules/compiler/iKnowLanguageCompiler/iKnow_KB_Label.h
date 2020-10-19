@@ -27,9 +27,6 @@ namespace iknow {
 
 			// Index NameIndex On(Knowledgebase, Name)[Unique];
 
-			iKnow_KB_Label();
-			~iKnow_KB_Label();
-
 		private:
 			static void LoadSpecialLabels(CSV_DataGenerator& kb);
 			static iKnow_KB_Label LabelFromString(std::vector<std::string>& row_label, std::string &isDefault);

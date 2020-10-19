@@ -12,18 +12,20 @@ namespace iknow {
     class KbProperty {
     public:
       KbProperty(RawAllocator& allocator, iknow::core::PropertyId id, const std::string& name) :
-	id_(id), 
-	name_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(name))) { }
-
-      iknow::core::PropertyId Id() const {
-	return id_;
+        id_(id), 
+        name_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(name))) { }
+      KbProperty(const KbProperty& other) {
+          this->id_ = other.id_;
+          this->name_ = other.name_;
       }
-
+      iknow::core::PropertyId Id() const {
+        return id_;
+      }
       iknow::base::String Name() const {
-	return iknow::base::String(*name_);
+        return iknow::base::String(*name_);
       }
       const CountedBaseString* PointerToName() const {
-	return name_;
+        return name_;
       }
     private:
       iknow::core::PropertyId id_;

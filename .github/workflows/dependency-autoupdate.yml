@@ -1,0 +1,142 @@
+# Configuration for autoupdating dependencies.
+#
+# Once a day, at midnight UTC, we check for updates to
+# - ICU
+# - buildcache
+# - Python for Windows
+# - Cython
+# In addition, whenever Travis CI updates its Mac OS X build machines so that a
+# new version of pyenv is available, we check for updates to Python on Mac OS X.
+#
+# For each dependency that has an update, we create a pull request containing a
+# single commit that updates the dependency.
+
+name: Dependency Autoupdate
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      PYENV_TOOL_VERSION_CURRENT:
+        description: 'current version of pyenv, as reported by Travis CI'
+        required: true
+
+jobs:
+  autoupdate-ICU:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_icu.py ${{ secrets.GITHUB_TOKEN }}
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-ICU] update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
+          branch: autoupdate-ICU
+          delete-branch: true
+          title: "[autoupdate] Update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
+          body: |-
+            As of ${{ env.ICU_PUBLISHED_AT }}, a new version of ICU has been released.
+
+            Release Information (sourced from ${{ env.ICU_HTML_URL }})
+            <blockquote>
+
+            ${{ env.ICU_RELEASE_INFO }}
+            </blockquote>
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-buildcache:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-buildcache] update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
+          branch: autoupdate-buildcache
+          delete-branch: true
+          title: "[autoupdate] Update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
+          body: |-
+            As of ${{ env.BUILDCACHE_PUBLISHED_AT }}, a new version of buildcache has been released.
+
+            For details of the release, see ${{ env.BUILDCACHE_HTML_URL }}.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-cython:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_cython.py
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-cython] update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
+          branch: autoupdate-cython
+          delete-branch: true
+          title: "[autoupdate] Update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
+          body: |-
+            A new version of Cython is available.
+
+            For details of the release, see https://cython.readthedocs.io/en/latest/src/changes.html.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-python-windows:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py win64
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-python-windows] update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          branch: autoupdate-python-windows
+          delete-branch: true
+          title: "[autoupdate] Update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          body: |-
+            A new version of Python for Windows is available.
+
+            ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
+
+            For details of all Python releases, see https://www.nuget.org/packages/python.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-python-osx:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py osx ${{ github.event.inputs.PYENV_TOOL_VERSION_CURRENT }} ${{ secrets.GITHUB_TOKEN }}
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-python-osx] update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          branch: autoupdate-python-osx
+          delete-branch: true
+          title: "[autoupdate] Update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          body: |-
+            A new version of Python for Mac OS X is available.
+
+            ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
+
+            For details of the updated versions, see https://github.com/pyenv/pyenv/releases/v${{ github.event.inputs.PYENV_TOOL_VERSION_CURRENT }}.
+
+            *I am a bot, and this action was performed automatically.*
