@@ -96,12 +96,3 @@ iKnow_KB_Label iKnow_KB_Label::LabelFromString(vector<string>& row_label, string
 	label.PhaseList = row_label[2 - 1]; // Set label.PhaseList = $PIECE(line, ";", 2)
 	return label;
 }
-
-iKnow_KB_Label::iKnow_KB_Label()
-{
-}
-
-
-iKnow_KB_Label::~iKnow_KB_Label()
-{
-}

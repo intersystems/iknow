@@ -24,6 +24,11 @@ namespace iknow {
 				while (rit != the_labels.rend() && *rit == ';') ++rit;
 				the_labels.erase(rit.base(), the_labels.end()); // remove ending ';'
 			}
+			iKnow_KB_Lexrep(const std::string& token, const std::string& label) :	// for UDCT use, a token with a single label
+				Token(token),
+				Labels(label + ";")
+			{}
+
 			std::string Token; // Property Token As %String(MAXLEN = 2048, XMLPROJECTION = "ATTRIBUTE")[Required];
 
 			std::string Meta; // Property Meta As %String(MAXLEN = 128, XMLPROJECTION = "ATTRIBUTE");

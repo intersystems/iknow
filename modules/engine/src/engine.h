@@ -10,6 +10,8 @@
 #define IKNOW_API
 #endif
 
+#include "UserKnowledgeBase.h" // User KB (for udct)
+
 //
 // stl library includes
 //
@@ -162,14 +164,58 @@ namespace iknowdata { // to bundle all generated data
 
 }
 
+//
+// User Dictionary for customizing iKnow output
+//
+class IKNOW_API UserDictionary
+{
+public:
+	UserDictionary(); //ctor
+	void clear() {
+		m_user_data.clear();
+	}
+	// Adds User Dictionary label to a lexical representation for customizing purposes
+	int addLabel(const std::string& literal, const char* UdctLabel);
+
+	// Add User Dictionary literal rewrite, not functional.
+	int addEntry(const std::string& literal, const std::string& literal_rewrite);
+
+	// Add User Dictionary EndNoEnd, not functional. 
+	int addSEndCondition(const std::string& literal, bool b_end = true);
+
+	// Shortcut for known UD labels
+	int addConceptTerm(const std::string& literal);
+	int addRelationTerm(const std::string& literal);
+	int addNonrelevantTerm(const std::string& literal);
+
+	int addUnitTerm(const std::string& literal);
+	int addNumberTerm(const std::string& literal);
+	int addTimeTerm(const std::string& literal);
+	int addNegationTerm(const std::string& literal);
+	int addPositiveSentimentTerm(const std::string& literal);
+	int addNegativeSentimentTerm(const std::string& literal);
+
+private:
+	friend class iKnowEngine;
+	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
+};
+
 class IKNOW_API iKnowEngine
 {
 public:
+	enum errcodes {
+		iknow_language_not_supported = -1, // unsupported language
+		iknow_unknown_label = -2,	// udct_addLabel : label does not exist
+		iknow_user_dictionary_already_loaded = -3 // user dictionary is already loaded
+	};
+
+	// returns set of supported languages
 	static const std::set<std::string>& GetLanguagesSet(void);
 
-	enum errcodes {
-		iknow_language_not_supported = -1 // unsupported language
-	};
+	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
+	static std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+
+	// ctor & dtor
 	iKnowEngine();
 	~iKnowEngine();
 	
@@ -185,18 +231,14 @@ public:
 	// offsets, not byte offsets in text_source.
 	void index(const std::string& text_source, const std::string& language, bool b_trace=false);
 
-	// Adds User Dictionary annotations for customizing purposes
-	void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) {
-		m_map_udct_annotations.insert(std::make_pair(start, iknow::core::IkIndexInput::IknowAnnotation(start, stop, UdctLabel)));
-	}
+
+	// User dictionary methods :
+	int loadUserDictionary(UserDictionary& udct);
+	void unloadUserDictionary(void);
 
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
-	iknow::core::IkIndexInput::mapInputAnnotations_t m_map_udct_annotations;
 
 };
-
-
-

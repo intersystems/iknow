@@ -18,7 +18,10 @@ namespace iknow {
 
 			// Index KnowledgebaseIndex On Knowledgebase;
 
-			iKnow_KB_Acronym() {}
+			iKnow_KB_Acronym(const std::string& token, const bool bIsSEnd) : 
+				Token(token),
+				IsSentenceEnd(bIsSEnd)
+			{}
 			~iKnow_KB_Acronym() {}
 		};
 	}

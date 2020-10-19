@@ -71,13 +71,39 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 
 
 cdef extern from "../../engine/src/engine.h" nogil:
+	cdef cppclass CPPUserDictionary "UserDictionary":
+		CPPUserDictionary() except +
+		void clear() except +
+
+		int addLabel(const string& literal, const char* UdctLabel) except +
+		int addEntry(const string& literal, const string& literal_rewrite) except +
+		int addSEndCondition(const string& literal, cpp_bool b_end) except +
+
+		int addConceptTerm(const string& literal) except +
+		int addRelationTerm(const string& literal) except +
+		int addNonrelevantTerm(const string& literal) except +
+
+		int addNegationTerm(const string& literal) except +
+		int addPositiveSentimentTerm(const string& literal) except +
+		int addNegativeSentimentTerm(const string& literal) except +
+		int addUnitTerm(const string& literal) except +
+		int addNumberTerm(const string& literal) except +
+		int addTimeTerm(const string& literal) except +
+
+
+cdef extern from "../../engine/src/engine.h" nogil:
 	cdef cppclass CPPiKnowEngine "iKnowEngine":
 		Text_Source m_index
 		vector[string] m_traces
 
 		CPPiKnowEngine() except +
 		void index(const string& text_source, const string& language, cpp_bool traces) except +
-		void addUdctAnnotation(size_t start, size_t stop, const char* UdctLabel) except +
+
+		int loadUserDictionary(CPPUserDictionary& udct) except +
+		void unloadUserDictionary() except +
 
 		@staticmethod
 		const set[string]& GetLanguagesSet() except +
+
+		@staticmethod
+		string NormalizeText(const string& text_source, const string& language, cpp_bool bUserDct, cpp_bool bLowerCase, cpp_bool bStripPunct) except +

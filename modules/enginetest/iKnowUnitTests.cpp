@@ -1,6 +1,7 @@
 ﻿#include "iKnowUnitTests.h"
 #include "engine.h"
 
+#include <cctype>
 #include <stdexcept>
 #include <iostream>
 #include <map>
@@ -26,6 +27,10 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test3(pError);
 		pError = "Test on SBegin/SEnd labels";
 		test_collection.test4(pError);
+		pError = "Test on User Dictionary (UDCT)";
+		test_collection.test5(pError);
+		pError = "Test on Text Normalizer";
+		test_collection.test6(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -35,6 +40,87 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+// std::string NormalizeText(std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+void iKnowUnitTests::test6(const char* pMessage) {
+	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
+	string text_lowercased = iKnowEngine::NormalizeText(text_source, "en");
+
+	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), [](unsigned char c) { return isupper(c); } ) > 0) // 
+		throw std::runtime_error("NormalizeText does not work correctly");
+}
+
+void iKnowUnitTests::test5(const char* pMessage) { // User DCT test 
+	string text_source_utf8 = u8"The Fr. test was er/pr positive.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+
+	iKnowEngine engine;
+	UserDictionary user_dictionary;
+	user_dictionary.addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
+	if (user_dictionary.addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
+		throw std::runtime_error(string("Unknow label *not* triggered !"));
+
+	user_dictionary.addSEndCondition("Fr.", false); // ;;Ph.D.;0;
+	engine.loadUserDictionary(user_dictionary);
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
+		throw std::runtime_error(string(pMessage));
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		// cout << *it << endl;
+		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("value=\"er/pr\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("value=\"positive.\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+	engine.unloadUserDictionary();
+
+	user_dictionary.clear();
+	user_dictionary.addLabel("some text", "UDUnit");
+	user_dictionary.addSEndCondition("Fr.", false);
+	user_dictionary.addConceptTerm("one concept");
+	user_dictionary.addRelationTerm("one relation");
+	user_dictionary.addNonrelevantTerm("crap");
+	user_dictionary.addNegationTerm("w/o");
+	user_dictionary.addPositiveSentimentTerm("great");
+	user_dictionary.addNegativeSentimentTerm("awfull");
+	user_dictionary.addUnitTerm("Hg");
+	user_dictionary.addNumberTerm("magic number");
+	user_dictionary.addTimeTerm("future");
+
+	int ret = engine.loadUserDictionary(user_dictionary);
+	String text_source2(IkStringEncoding::UTF8ToBase("some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"));
+
+	engine.index(text_source2, "en", true); // generate Traces
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+			if (it->find("UserDictionaryMatch") != string::npos) {
+				string& trace_userdct = (*it);
+				if (trace_userdct.find("value=\"w/o\"") != string::npos) {
+					if (trace_userdct.find("UDNegation") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+				if (trace_userdct.find("value=\"awfull,\"") != string::npos) {
+					if (trace_userdct.find("UDNegSentiment") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+				if (trace_userdct.find("value=\"Hg\"") != string::npos) {
+					if (trace_userdct.find("UDUnit") == string::npos)
+						throw std::runtime_error(string(pMessage));
+				}
+			}
 	}
 }
 
@@ -62,7 +148,7 @@ void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBeg
 	if (attribute_expansion.pos != 5)
 		throw std::runtime_error(string("Position of certainty attribute must be 5 !"));
 	if (attribute_expansion.span != 5) // TODO: this value is *not* correct.
-		throw std::runtime_error(string("Span of certainty attribute must be more than 1 !"));
+		throw std::runtime_error(string("Span of certainty attribute must be 5 !"));
 }
 
 void iKnowUnitTests::test3(const char* pMessage) { // Only one measurement attribute in example text : verify correctness

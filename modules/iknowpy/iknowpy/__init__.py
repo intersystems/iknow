@@ -1,2 +1,2 @@
 from .version import __version__
-from .engine import iKnowEngine
+from .engine import iKnowEngine, UserDictionary
