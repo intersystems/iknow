@@ -18,7 +18,7 @@ if ! [ -f "$BUILDCACHE_EXE_DIR/iknow_buildcache_url.txt" ] || [ $(cat "$BUILDCAC
   rm -rf "$BUILDCACHE_EXE_DIR"
   wget -nv -O buildcache.zip "$BUILDCACHE_URL"
   unzip -qj buildcache.zip -d "$BUILDCACHE_EXE_DIR"
-  echo "$BUILDCACHE_URL" > "$BUILDCACHE_EXE_DIR/iknow_icu_url.txt"
+  echo "$BUILDCACHE_URL" > "$BUILDCACHE_EXE_DIR/iknow_buildcache_url.txt"
 fi
 
 # Python
