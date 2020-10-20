@@ -106,7 +106,7 @@ void a_short_demo(void);
 
 int main(int argc, char* argv[])
 {
-	testing::iKnowUnitTests::runUnitTests(); // first, verify the quality
+	testing::iKnowUnitTests::runUnitTests(); // first, run existing unit tests
 	
 	// currently supported languages : { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 	const std::set<std::string> languages_set = iKnowEngine::GetLanguagesSet();
@@ -123,6 +123,8 @@ int main(int argc, char* argv[])
 		os.close();
 
 		a_short_demo();
+
+		cout << endl << "*** All tests passed succesfully ***" << endl;
 	}
 	catch (std::exception& e)
 	{
@@ -131,6 +133,7 @@ int main(int argc, char* argv[])
 	catch (...) {
 		cerr << "Smart Indexer failed..." << std::endl;
 	}
+
 	return 0;
 }
 

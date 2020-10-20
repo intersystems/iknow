@@ -59,7 +59,7 @@ If you are looking for another programming language or interface, check out the 
 
 ## From C++
 
-The main C++ API file is `engine.h` (modules\engine\src), defining the class `iKnowEngine` with the main entry point:
+The main C++ API file is [engine.h] (https://github.com/intersystems/iknow/blob/master/modules/engine/src/engine.h#L203), defining the class `iKnowEngine` with the main entry point:
 
 ```C++
 index(TextSource, language)
