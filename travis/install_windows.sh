@@ -4,7 +4,7 @@
 #
 # Required Environment Variables:
 # - PYVERSIONS is a space-delimited string of Python versions to install with
-#   nuget
+#   NuGet
 # - PYINSTALL_DIR is the directory where Python instances are installed
 # - CYTHON_VERSION is the version of Cython to install
 

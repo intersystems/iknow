@@ -108,7 +108,7 @@ if platform == 'win64':
     url_data = urllib.request.urlopen(f'{base_url}python/index.json')
     json_data = json.load(url_data)
     available_versions = [version for version in json_data['versions'] if re.match(VERSION_REGEX, version)]
-else:
+else:  # platform == 'osx'
     pyenv_tool_version_current = sys.argv[2]
     headers = {'Authorization': 'Bearer ' + sys.argv[3]}
     request = urllib.request.Request(f'https://api.github.com/repos/pyenv/pyenv/zipball/v{pyenv_tool_version_current}', headers=headers)

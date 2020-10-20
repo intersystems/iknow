@@ -11,7 +11,7 @@ before_install: . travis/dependencies.sh
 
 jobs:
   include:
-    - name: "manylinux2014_aarch64"
+    - name: manylinux2014_aarch64
       os: linux
       dist: focal
       arch: arm64-graviton2
@@ -27,7 +27,7 @@ jobs:
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
-    - name: "manylinux2014_ppc64le"
+    - name: manylinux2014_ppc64le
       os: linux
       dist: focal
       arch: ppc64le
@@ -41,7 +41,7 @@ jobs:
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
-    - name: "manylinux2010_x86_64"
+    - name: manylinux2010_x86_64
       os: linux
       dist: focal
       arch: amd64
@@ -55,7 +55,7 @@ jobs:
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
-    - name: "Mac OS X 10.9 x86_64"
+    - name: Mac OS X 10.9 x86_64
       os: osx
       osx_image: xcode11.7
       env: >-
@@ -77,7 +77,7 @@ jobs:
       script: >-
         travis/build_osx.sh &&
         travis/deploy.sh
-    - name: "Windows x86_64"
+    - name: Windows x86_64
       os: windows
       env: >-
         BUILDCACHE_EXE_DIR="$HOME/buildcache_exe"

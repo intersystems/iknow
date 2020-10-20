@@ -26,7 +26,7 @@ PYENV_TOOL_VERSION_CURRENT="$(brew list --versions pyenv)"
 PYENV_TOOL_VERSION_CURRENT=${PYENV_TOOL_VERSION_CURRENT#"pyenv "}
 { set +x; } 2>/dev/null
 if [ "$TRAVIS_BRANCH" = master ] && \
-    [ "$TRAVIS_PULL_REQUEST" == false ] && \
+    [ "$TRAVIS_PULL_REQUEST" = false ] && \
     [ "$PYENV_TOOL_VERSION_CURRENT" != "$PYENV_TOOL_VERSION" ] && \
     [ -n "${GITHUB_TOKEN+x}" ]
 then
