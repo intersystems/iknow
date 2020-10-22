@@ -83,7 +83,12 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUD
 
 # install Python package dependencies and build initial wheels
 chown -R root "$PIP_CACHE_DIR"
-for PYTHON in /opt/python/cp3*/bin/python; do
+for PYTHON in /opt/python/cp35-cp35m/bin/python \
+              /opt/python/cp36-cp36m/bin/python \
+              /opt/python/cp37-cp37m/bin/python \
+              /opt/python/cp38-cp38/bin/python \
+              /opt/python/cp39-cp39/bin/python
+do
   "$PYTHON" -m pip install --user cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
