@@ -36,6 +36,21 @@ void workingdir(string& work_dir) {
 
 set<string> SetOfLanguages = { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 
+void build_one_language(string& csv, string& aho, string& ldata, string& langdev, string lang)
+{
+	CSV_DataGenerator my_csv_generator(csv, aho, ldata);
+	std::ofstream os(langdev + lang + "_compiler_report.log"); // logging file for indexing results
+	if (os.is_open()) {
+		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
+		my_csv_generator.loadCSVdata(lang, false, os);
+		os.close();
+	} else
+		my_csv_generator.loadCSVdata(lang, false);
+
+	my_csv_generator.generateRAW();
+	my_csv_generator.generateAHO();
+}
+
 int main(int argc, char* argv[])
 {
 	string exe_path(argv[0]);
@@ -57,9 +72,10 @@ int main(int argc, char* argv[])
 		std::cerr << "Run the Language Compiler from the /kit/ directory" << endl;
 		exit(-1);
 	}
-	std::string csv_path = repo_root + "language_models/";
-	std::string aho_path = repo_root + "modules/aho/";
-	std::string ldata_path = repo_root + "modules/engine/language_data";
+	string csv_path = repo_root + "language_models/";
+	string aho_path = repo_root + "modules/aho/";
+	string ldata_path = repo_root + "modules/engine/language_data";
+	string langdev_path = repo_root + "language_development/";
 
 	string language_to_build;
 
@@ -74,24 +90,15 @@ int main(int argc, char* argv[])
 	}
 	try {
 		std::cout << "iKnowLanguage compiler" << std::endl << std::endl;
-		std::ofstream os("compiler_report.log"); // logging file for indexing results
-		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
-
+		
 		if (language_to_build.empty()) { // build them all
 			for (auto it = SetOfLanguages.begin(); it != SetOfLanguages.end(); ++it) {
-				CSV_DataGenerator my_csv_generator(csv_path, aho_path, ldata_path);
-				my_csv_generator.loadCSVdata(*it, false, os);
-				my_csv_generator.generateRAW();
-				my_csv_generator.generateAHO();
+				build_one_language(csv_path, aho_path, ldata_path, langdev_path, *it);
 			}
 		}
 		else { // build one
-			CSV_DataGenerator my_csv_generator(csv_path, aho_path, ldata_path);
-			my_csv_generator.loadCSVdata(language_to_build, false, os);
-			my_csv_generator.generateRAW();
-			my_csv_generator.generateAHO();
+			build_one_language(csv_path, aho_path, ldata_path, langdev_path, language_to_build);
 		}
-		os.close();
 	}
 	catch (std::exception& e)
 	{

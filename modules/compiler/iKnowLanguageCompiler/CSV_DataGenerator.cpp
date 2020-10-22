@@ -10,6 +10,8 @@
 #include "Util.h"
 #include "IkStringEncoding.h"
 
+#include <string>
+#include <iomanip>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
@@ -218,15 +220,17 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::
 	cout << "Reading rules data..." << endl;
 	iKnow_KB_Rule::ImportFromCSV(csv_path_ + language + "/" + "rules.csv", *this);
 	cout << kb_rules.size() << " rule items (reserved=" << cap << ")" << endl;
-	{
-		os << "Rule CSV mapping:" << endl;
+	if (!os.fail()) {
+		os << left << "Rule CSV mapping:" << endl;
 		for (int idRule = 0; idRule < kb_rules.size(); idRule++) {
-			os << idRule << ":" << kb_rules[idRule].csv_id << "\t" << kb_rules[idRule].InputPattern << "\t->\t" << kb_rules[idRule].OutputPattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
+			os << setw(12) << string(to_string(idRule) + ":" + kb_rules[idRule].csv_id) << "\t" << kb_rules[idRule].InputPattern << "\t->\t" << kb_rules[idRule].OutputPattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
 		}
 	}
 	labelIndexTable_type &label_index_table = labelIndexTable;
 	int label_idx = 0;
-	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table, &label_idx, &os](iKnow_KB_Label label) { os << label_idx << "\t" << label.Name << endl; label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
+	if (!os.fail())
+		os << endl << "Internal label numbers:" << endl << endl;
+	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table, &label_idx, &os](iKnow_KB_Label label) { if (!os.fail()) os << label_idx << "\t" << label.Name << endl; label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
 	//Override value for "-"
 	labelIndexTable["-"] = -1; //Set table("-") = -1
 }
