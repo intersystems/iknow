@@ -5,8 +5,8 @@
 set -x
 
 
-# If you edit the dependency-autoupdate section manually, check to make sure you
-# do not break the dependency-autoupdate scripts in .github/workflows.
+# If you edit the dependency-autoupdate section manually, you may also need to
+# change .github/workflows/updatelib.py.
 
 # START DEPENDENCY-AUTOUPDATE SECTION
 ICU_NAME="ICU 67.1"

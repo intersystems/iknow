@@ -3,39 +3,96 @@
 /*==================================================
 
 516;1;CapitalInitial;^FRCapitalInitial;
+
+/*		516. La Cour a également constaté que l’évaluation et le suivi de projets présentés par certains États membres étaient confiés à des experts nationaux.
+
 517;1;CapitalAll;^FRCapitalAll;
+
+/*		517. Règlement (CE) no 2236/95.
+
 518;1;CapitalMixed;^FRCapitalMixed;
+
+/*		518. La ligne de contrôle (LoC).
+
 519;1;Punctuation;FRPunctuation;
 
+/*		519. Le déclin sera néanmoins rapide : après une éphémère abdication puis un bref retour au pouvoir, l'Empereur est définitivement vaincu.
 /*Rewrite user dictionary labels
 /*==============================
 
 521;1;UDNegation;+FRNegation+FRNegBegin;
+
+/*		521.UD. Ils préfèrent discuter plutôt que de nier les difficultés.
+
 522;1;UDPosSentiment;+FRPosSentiment+FRPosSentimentBegin;
+
+/*		522.UD. Par suite, les paiements en question n’ont pas été imputés au bon exercice budgétaire.
+
 523;1;UDNegSentiment;+FRNegSentiment+FRNegSentimentBegin;
+
+/*		523.UD. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d’entre eux ont mal fonctionné.
+
 524;1;UDConcept;FRCon+FRUDConcept;
+
+/*		524.UD. La stérilisation des équipements, les cadences d'opération qui n'auraient, selon l' accusation, pas permis de travailler dans des conditions d'hygiène satisfaisantes et la qualification du personnel paramédical ont été mises en cause.
+
 525;1;UDRelation;UDRelation+FRRelation;
+
+/*		525.UD. Homme soulevant le globe terrestre.
+
 526;1;UDNonRelevant;FRNonRelevant;
 
+/*		526.UD. Dès qu'ils aperçoivent une pièce de vêtement, un fragment d'uniforme ou sentent une odeur suspecte, ils stoppent tout.
 /* DETECT NEGATION WITH ne + 2nd NEGATION MARKER
 /* Don't mark negation in questions with inversion
 /* Note: long context needed, since inversion (with 'real' negation) can occur after certain adverbs, "Peut-être ne s'agit-il pas d'un énorme problème".
 /*       for more information, see http://forum.wordreference.com/threads/inversion-sujet-verbe-dans-la-phrase-affirmative.538175/
 
 776;20;SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;
+
+/*		776. Ne pensez-vous pas qu'il serait utile?
+
 777;20;SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
+
+/*		777. Ne pensez-vous donc pas qu'il serait utile?
+
 780;20;SBegin|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
+
+/*		780. Ne vous semble-t-il pas bizarre?
+
 781;20;SBegin|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;
+
+/*		781. Ne vous semble-t-il pourtant pas bizarre?
+
 778;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;
+
+/*		778. Dès lors, ne devrions-nous pas les considérer comme un instrument improductif?
+
 779;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
+
+/*		779. Dès lors, ne devrions-nous donc pas les considérer comme un instrument improductif?
+
 782;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais|^SEnd;*|*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal|*;
+
+/*		782. Est-il possible d' avoir un fonds spécifique pour le bétail, et ne s' agit-il pas d' une distorsion de la concurrence? Not_in: Mais pourquoi n'y avait-il pas un docteur? Not_in: Peut-être ne s'agit-il pas d'un énorme problème.
+
 783;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;
 
+/*		783. L'échec enregistré en Allemagne ne nous suffit-il donc pas? Not_in: Mais pourquoi n'y avait-il alors pas un docteur?
 /* Special case: form of pouvoir without 'pas' etc.
 
 786;20;SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
+
+/*		786. Ne pouvez-vous vraiment rien faire pour empêcher une répétition de ces bêtises?
+
 787;20;SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
+
+/*		787. Ne les pourrait-on pas reprendre ?
+
 788;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
+
+/*		788. Dans ce cas, ne pouvait-on vraiment pas en faire un peu plus pour surmonter le blocage actuel?
+
 789;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
 
 /* 2nd marker gets label FRAdvNeg. If no 'ne' is found, all lexreps labeled FRPas (except for 'pas' itself) get the label FRAdvNeg anyway.
@@ -43,568 +100,1613 @@
 /* note: pas moins = FRPlus;-;FRAdvDegree;FRAdv
 
 640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg;
+
+/*		640. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat.
+
 639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg;
+
+/*		639. Que cela ne vous arrête surtout pas dans votre exercice professionnel.
+
 638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg;
+
+/*		638. Il n'y a apparemment pas d'autre solution.
+
 637;20;FRNe|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
+
+/*		637. L'influence n'était pas suffisamment documentée.
+
 636;20;FRNe|FRPlus:FRPas;FRNe+FRAdvNeg+FRNegation|FRAdvNeg;
+
+/*		636. Ne pas se contenter de constater mais agir.
+
 700;20;FRPas+^"pas"+^FRJamais+^"non";FRAdvNeg;make unambiguous negation markers AdvNeg
+
+/*		700. "Les opérateurs ont ajusté les prix en fonction du type de change qu'ils anticipent comme le plus probable", à savoir une nouvelle monnaie pas encore en circulation mais déjà dépréciée dans les esprits.
+
 730;20;FRRien:FRNegWord:FRAucun:FRPersonne:FRNegation;+FRNegindicator;
+
+/*		730. Rien ne va plus.
+
 785;20;FRNoNegWord;-FRNegindicator;
+
+/*		785. Il ne s'agit plus seulement des arrestations arbitraires.
+
 725;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|FRNegindicator+^FRSans|^FRQue+^SEnd;FRNe+FRNegation|*|*;
+
+/*		725. C’est donc magnifique de ne rien ressentir de particulier.
+
 726;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|FRNegindicator+^FRSans;FRNe+FRNegation|*|*;
+
+/*		726. Les forces locales affirment régulièrement ne recevoir aucune aide.
+
 727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
+
+/*		727. L'adaptation doit bien sûr dans ce cas ne déroger à aucune des règles régissant la contactologie pédiatrique.
+
 728;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*;
+
+/*		728. Quelquefois, la pratique ne repose donc sur aucune raison médicale.
+
 729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*;
+
+/*		729. Ne fait-il preuve d'aucun respect ?
+
 731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*;
+
+/*		731. Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
+
 831;20;"nulle";-FRNegWord;
 
+/*		831. Sept États vinicoles de l'Union européen appliquent toujours une taxe nulle sur le vin.
 /* PrepAdv
 
 609;30;FRPrepAdv|FRComma;-FRPrep-FRPrepAdv|^FRComma;
+
+/*		609. Depuis, un compromis s'est dégagé lors de la visite à Rome mardi et le sommet devrait entériner ce résultat.
+
 610;30;FRPrepAdv|SEnd;-FRPrep-FRPrepAdv|*;
+
+/*		610. De nombreux Européens craignent toujours des hausses des prix au moment du changement d' étiquettes ou peu après.
+
 674;30;FRSRelAux|FRPrepAdv|FRPart;FRSRelAux|+FRAdv-FRPrepAdv|FRPart;
+
+/*		674. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé, qui a depuis changé de nom et de propriétaires.
+
 653;30;FRPrepAdv;FRPrep;
 
+/*		653. En ce qui concerne plus particulièrement les études, lesformulaires de demande contiennent depuis l’année 2000 des informations sur les coûts externes et internes.
 /* AdvCon
 
 711;30;FRIndefart:FRDefart:FRPoss:FRDemonstr|FRAdvCon;*|FRCon;
+
+/*		711. Le mal est décidément profond et la décision d'abandonner doit être considérée comme judicieuse.
+
 713;30;FRAuDu:FRDe:FRMod|FRAdvCon;*|FRCon;
+
+/*		713. Nécessité d'une meilleure vue d'ensemble.
+
 712;30;FRAdvCon;^FRAdv;default: result is Adv+AdvXxx
 
+/*		712. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d’entre eux ont mal fonctionné.
 /* ADVERBS (PART 1)
 
 686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;FRAdvNR+FRAdv|Join|Join|^FRNum;"pas moins" not preceded by "ne"
+
+/*		686. La raison est la suivante : le sujet concerne pas moins de 1 800 000 salariés dans l' Union européenne.
+
 687;30;"pas"+FRPlus|"moins"|FRDe|FRCon;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" not preceded by "ne"
+
+/*		687. Cela signifie plus d'intégration et pas moins d'intégration.
+
 688;30;FRAdvNeg|"moins"|FRDe|FRCon+^FRNum;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" preceded by "ne"
+
+/*		688. Cette nouvelle politique en matière de recherche ne requerra pas moins de chercheurs, mais deux fois plus.
+
 689;30;"à"|"moins"|"de":"dµ"|FRInf;-FRPrep+FRSConj+FRNegation|Join|Join|^FRInf;cannot be done with a lexrep because of ambiguity
+
+/*		689. Nous ne pouvons pas nous engager en toute crédibilité dans le processus et trouver des solutions réellement constructives à moins de commencer par nous-mêmes.
+
 635;30;FRPlus|FRAdvManner:FRAdvTemp:FRAdvModal:FRAdvLoc;FRAdvDegree+FRAdv|*;
+
+/*		635. Il demande plus précisément une enquête sur cette transaction.
+
 641;30;FRPlus|FRAdvDegree;FRPlus+FRAdvDegree+FRAdv|+Join;
+
+/*		641. Bon nombre des pays de ont jugé utile d utiliser plus largement des instruments de ce type pour certaines catégories de services financés sur fonds publics.
+
 623;30;FRAdvDegree|FRAdvManner;FRAdv+FRAdvManner|+Join;
+
+/*		623. Il s'accrochera d'autant plus solidement.
+
 624;30;FRAdvDegree|FRAdvTemp;FRAdv+FRAdvTemp|+Join;
+
+/*		624. Les femmes sont de plus en plus âgées lors de leur première maternité — 30 ans en 2009 — et de moins en moins souvent mariées.
+
 625;30;FRAdvNR|FRAdvNR;FRAdv+FRAdvNR|+Join;
+
+/*		625. Les enfants éventuels du couple sont alors généralement confiés à la mère par la justice.
+
 304;30;FRTres|FRAdvManner;FRAdv+FRAdvManner|+Join;
+
+/*		304. Le développement de l'export varie très fortement d'un secteur à un autre.
+
 302;30;FRTres|FRAdvDegree;FRAdv+FRAdvDegree|+Join;
+
+/*		302. La patronne, très royalement, me fait une insignifiante réduction.
+
 626;30;FRTres|FRAdvTemp;FRAdv+FRAdvTemp|+Join;
+
+/*		626. Il s'agit très souvent d'un rééquilibrage.
+
 627;30;FRTres|FRAdvLoc;FRAdv+FRAdvLoc|+Join;
+
+/*		627. Première rétrospective pour cet artiste très internationalement reconnu.
+
 628;30;FRTres|FRAdvModal;FRAdv+FRAdvModal|+Join;
+
+/*		628. Ils vont très probablement se rencontrer.
+
 649;30;FRAdvNeg:FRPas+^FRJamais|FRAdvManner;FRAdvNeg|+Join;
+
+/*		649. Dire qu'on fume casserait un peu l'ambiance et ne donnerait pas forcément confiance.
+
 299;30;FRAdvModal;+FRAdvCR;treat modal adverbs in the same way as time adverbs for now
+
+/*		299. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat.
+
 257;30;FRAdvManner;+FRAdvCR;treat adverbs expressing manner in the same way as time adverbs for now
 
+/*		257. Par cette fausse mesure il a stupidement renoncé à tous ses avantages.
 /* TIME EXPRESSIONS
 
 673;30;"il y a"|FRNum|FRTimeconcept;-FRSRel+FRAdvTime+FRAdv|+Join|+Join;
 
+/*		673. Après sa greffe du foie, il y a 10 ans, elle cherchait un moyen de donner au suivant.
 /* DISAMBIGUATION RULES
 /* ====================
 /* DISAMBIGUATE THROUGH CAPITALIZATION
 
 331;40;SBegin|FRLetter;*|-FRConIfAllCap;discard capitalization of a letter at the beginning of a sentence
+
+/*		331. A-t-il fait une choix?
+
 670;40;FRCapitalAll|FRCapitalAll|FRCapitalAll;-FRCapitalAll|*|*;ignore capitalization when the whole sentence is in upper-case
+
+/*		670. A PARTIR DU 7EME JOURS D'HOSPITALISATION J'ARRIVE A GERER MON TAUX DE GLYCEMIE ENTRE 0.80 ET 1.40.
+
 671;40;FRCapitalAll|FRCapitalAll|SEnd;-FRCapitalAll|-FRCapitalAll|*;ignore capitalization when the whole sentence is in upper-case
+
+/*		671. OUI, JE L'AI ENTENDU!
+
 332;40;FRConIfCap+FRCapitalInitial;FRCon+FRCapitalInitial;
+
+/*		332. Le canal de Suez est un canal situé en Égypte.
+
 333;40;FRConIfAllCap+FRCapitalAll;FRCon;
 
+/*		333. La CE a pris une décision.
 /* HANDLE PERSONAL PRONOUNS THAT ARE ATTACHED TO A VERB FORM
 
 95;40;FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel|FRPostsubjpron;FRSRel|Join;verb with -t-il etc.
+
+/*		95. Demande-t-il des renseignements? "Un mode de vie malsain", critique-t-elle. Ajoutera-t-il des commentaires?
+
 166;40;FRCon+^FRUDConcept|FRPostsubjpron;FRSRel|Join;unknown verb with -t-il etc.
+
+/*		166. Un prix ridicule, susurre-t-on à Paris. 166.UD. Not_in: Travailler-vous à Paris?
+
 98;40;FRSRelAux|FRPostsubjpron;FRSRelAux|Join;auxiliary verb with -t-il etc.
 
+/*		98. Mais sont-ils de meilleurs hommes politiques?
 /* DISAMBIGUATE 2ND PART OF CONCEPT
 
 484;40;FRConpart1|FRSRelCon:FRSRelMod:FRSRelConMod:FRPartCon:FRPartConMod;FRCon|FRCon;
 
+/*		484. Institut national de la recherche agronomique. Tu connais la Rue de la Sèche à Liège?
 /* RULES FOR SPECIFIC WORDS
 /* sans (+ disambiguate using 'sans')
 
 495;40;FRSans|FRPartConMod;FRSans|FRCon;
+
+/*		495. Sans élus, c'est le chaos imminent.
+
 708;40;FRSans|^FRInf|FRInf;FRSConj|*|^FRInf;
+
+/*		708. Nous devons encourager le citoyen à découvrir les valeurs cachées de la nature sans lui nuire.
+
 430;40;FRSans;FRPrep;
 
+/*		430. Il buvait un café sans lait.
 /* personne
 
 435;40;FRPersonne|FRNe;FRSubjpron+FRNegWord|FRNe;personne ne
+
+/*		435. Personne ne te croira.
+
 441;40;FRPersonne|FRAdv|FRNe;FRSubjpron+FRNegWord|^FRAdv|FRNe;personne ne
+
+/*		441. Personne ainsi n'a oublié cette humiliation.
+
 436;40;FRVerb:FRSRelAux:FRPart:FRInf|FRPersonne;^FRVerb|FRObjpron+FRNegWord;personne after verb form
+
+/*		436. Elle tourna son visage étranger et avoua qu'elle ne cherchait personne. Il n'avait oublié personne.
+
 439;40;FRPersonne;FRCon;default
 
+/*		439. Vous payez 22 euros par personne.
 /* detect SON and TON used as nouns
 
 168;40;FRDefart:FRIndefart:FRAucun|FRPossCon;*|FRCon;article with ton or son
+
+/*		168. Le ton de son message est grave. L'intensité d'un son est reliée à l'amplitude de l'onde sonore. Le g n'a aucun son devant n.
+
 633;40;FRPossCon;FRPoss;default
 
+/*		633. Le pays a menacé à plusieurs reprises de se retirer unilatéralement de ce traité pour pouvoir mener à bien son projet.
 /* moi AS A NOUN
 
 660;40;FRDefart:FRIndefart:FRPoss:FRDemonstr|"moi";*|FRCon;
 
+/*		660. Cela venait de mon Moi supérieur intérieur.
 /* bien que
 
 631;40;SBegin|"bien"|FRQue;*|FRSConj|Join;
 
+/*		631. Bien que le cours débute dans un peu plus d'une semaine, l'organisation n'a pas terminé ses devoirs.
 /* près de
 
 684;40;"près de":"près dµ":"près des"|FRNum;FRAdvDegree+FRAdv|^FRNum;
 
+/*		684. Près de 25.000 personnes ont participé vendredi à la manifestation.
 /* Conj3 (parce que)
 
 797;40;FRVerb:FRPart|FRSConj3;*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context
+
+/*		797. Ils l'éloignaient parce qu'il n'y avait pas de lieu de refuge.
+
 819;40;FRAdvNeg|FRPartCon:FRPartConMod:FRPartMod|FRSConj3;*|*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context, extremely low-frequent
 
+/*		819. Ils ne les ont pas invités parce qu'avec ses deux bébés, it serait difficile à venir.
 /* en plus (d..), plus d'un(e)
 
 810;40;"en"|"plus"|FRDe|FRNum;*|FRMod|Join|*;
+
+/*		810. L' indice a terminé la séance de jeudi à son plus bas niveau en plus de trois ans.
+
 811;40;typeConcept|"en"|"plus"|SEnd;*|FRCon|Join|*;
+
+/*		811. Dans deux semaines, l'organisation comptera douze membres en plus. Celle-ci aura 18 millions d'enfants et de jeunes en moins et 52 % de personnes de plus de 65 ans en plus. Not_in: Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
+
 812;40;"en"|"plus"|FRDe:FRDes:"du";FRPrep|Join|Join;
+
+/*		812. Avons-nous besoin d'un billet de 1 euro en plus de la pièce de 1 euro?
+
 813;40;"en"|"plus";FRAdv+FRAdvNR|Join;
+
+/*		813. Il persiste en plus à ne respecter aucun des engagements qu'il a pris. Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
+
 814;40;FRPlus|FRDe|FRIndefart;FRMod|Join|FRNum;
 
+/*		814. Il habite à Quebec depuis plus d'une trentaine d'années.
 /* DISAMBIGUATION AMBIGUOUS AUXILIARIES
 
 101;40;FRDe|FRSRelCon;FRDe|FRCon;disambiguate 'avions' before rules for FRSRelAux can fire
+
+/*		101. La déclaration de dépenses inéligibles pour les subventions directes aux investissements est peu susceptible d’entraîner un paiement indu.
+
 184;40;FRPas:FRAdvNeg|FREte;FRAdvNeg|FRSRelAux;negation with été
+
+/*		184. Les fournisseurs de données suivants n'ont pas été correctement actualisés.
+
 667;40;FRPrep+^FRSRel|FRDefart|FREst;^FRPrep|+FRDefart|^FRCon-FRSRelAux;
+
+/*		667. De plus, il envoie deux équipes à l'est afin de trouver une solution pour relier l'Acadie et le Canada par route terrestre.
+
 669;40;FRDefart|FREst|FRDe|FRCapitalInitial;FRDefart|^FRCon-FRSRelAux|FRPrep|^FRCapitalInitial;very low-frequent
+
+/*		669. l'est de Harare.
+
 668;40;FRSubjpron:FRSubjpron2|FRDefart|FREst;*|FRDefart|FRSRelAux;
 
+/*		668. Dans certaines parties des Balkans, le mark allemand est le moyen de paiement officiel ou il l'est de facto.
 /* beaucoup AND peu
 
 604;40;FRBeaucoup|FRDe|FRCon:FRPart:FRPartCon:FRPartConMod;FRMod|Join|FRCon;
+
+/*		604. Mais c'est un vrai sport, qui demande beaucoup d'entraînement pour parvenir au haut niveau.
+
 611;40;FRBeaucoup|FRPartConMod;FRMod|+Join;
+
+/*		611. Le chef, bien que peu connu, est favorablement considéré.
+
 606;40;FRBeaucoup|FRVerb:FRSRelAux;FRQuantpron|*;
+
+/*		606. Beaucoup sont en prison déjà.
+
 605;40;FRBeaucoup;FRAdv+FRAdvDegree;default rule
 
+/*		605. De Paris à Londres en un peu plus de deux heures.
 /* ADVERBS
 
 307;40;FRAdvDegree|FRSRelMod:FRSRelConMod;FRCon|FRCon;adverb of degree belongs to adjective
+
+/*		307. La preuve au dossier démontre que l'intimé a substantiellement satisfait à ses obligations. En mucus, le tissu prend l'aspect d'une masse cystique, relativement liquide.
+
 309;40;FRSRelAux|FRAdvDegree|FRCon:FRPPart;FRSRelAux|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary
+
+/*		309. La pente était tellement forte que les deux jeunes gens ne pouvaient pas avancer. En raison de ces insuffisances, les mesures adoptées étaient largement inadaptées dès le départ et se sont avérées inefficaces dans de nombreux domaines.
+
 289;40;FRAdvDegree|FRPPart;FRCon|FRCon;adverb of degree before present participle
+
+/*		289. Le premier résultat est inimaginable et tellement touchant.
+
 292;40;FREtre|FRAdvDegree|FRCon;FRInf|FRCon|FRCon;adverb of degree belongs to adjective after être
+
+/*		292. Le coût social marginal du transport peut aussi être considérablement supérieur à son coût moyen.
+
 291;40;FRSRel|FRAdvDegree|FRCon;FRSRel|FRCon|FRCon;adverb of degree belongs to adjective after FRSRel
+
+/*		291. Cela semble complètement contraire à la fois à la politique gouvernementale et également à l'harmonisation européenne.
+
 288;40;FRComma|FRAdvDegree|FRCon;FRComma|FRCon|FRCon;adverb of degree belongs to adjective after comma
+
+/*		288. Il est possible d’espérer des restitutions très proches de la normale, à peine détectable.
+
 481;40;FRAdvDegree|FRNum;FRCon|FRCon;adverb of degree belongs to number
+
+/*		481. Crise oblige, à peine trois Européens sur cinq prévoient des vacances d'été.
+
 285;40;FRAdvDegree|FRPlus;FRPlus|Join;adverb of degree can modify plus
+
+/*		285. Il avançait considérablement plus vite que les vieux bus.
+
 284;40;FRSRelAux|FRAdvCR|FRAdvDegree|FRCon;FRSRelAux|FRAdvCR|FRCon|FRCon;
+
+/*		284. Il était physiquement totalement passif.
+
 287;40;FRAdvDegree;FRAdvCR+FRAdvDegree;treat adverbs of degree in the same way as time adverbs for now
+
+/*		287. C'était un été complètement fou.
+
 286;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;modal adverb belongs to adjective after comma
+
+/*		286. C'était incroyable, vraiment incroyable !
+
 316;40;FRAdvCR|FRAndOrBut|FRAdvCR;^FRAdvCR|Join|+Join;merge adjoint adverbs
+
+/*		316. La gouvernance locale relève directement et uniquement des législatures provinciales.
+
 297;40;FRDefart:FRIndefart|FRAdvCR|FRCon;*|FRMod|FRCon;adverb preceded by article
+
+/*		297. Malgré la probablement grande difficulté de la troisième partie, le jury est déçu que les étudiants ne maîtrisent plus que très approximativement l'électrochimie. Ce pays a accompli un extrêmement bon travail.
+
 293;40;FRPrep|FRAdvCR|FRCon;FRPrep|FRMod|FRCon;
+
+/*		293. Le pays a fait un saut que même les diplomates expérimentés tenaient pour à peine possible.
+
 479;40;FRPrep|FRAdvCR|FRNum;FRPrep|FRMod|FRCon;adverb modifying a number, low-frequent since AdvDegree is covered by r481
+
+/*		479. Les résultats peuvent être expectés après probablement deux mois.
+
 650;40;FRAdvCR;+FRAdv;
 
+/*		650. Les plants de riz n'en ont biologiquement besoin.
 /* INFCON
 
 657;40;FRIndefart:FRPoss:FRDemonstr:FRMod|FRInfCon;*|FRCon;
+
+/*		657. Le téléphone n'était plus qu'un souvenir.
+
 658;40;FRDefart|FRInfCon+^FRAvoir;^FRDefart|FRCon;
+
+/*		658. Le savoir est très important pour ne pas s'inquiéter.
+
 666;40;FRAuDu|FRInfCon;^FRAuDu|FRCon;
+
+/*		666. Le parti au pouvoir va lancer la campagne.
+
 659;40;FRInfCon;^FRInf;
+
+/*		659. Si ce n'est pas une blague, cela fera certainement sourire les lecteurs des journaux de vendredi.
+
 433;40;FRRien|FRPart:FRPartCon:FRPartConMod;FRRien|FRSRel;participle preceded by rien
+
+/*		433. Le gouverneur n'a rien dévoilé de ses projets d'avenir. Et si on ne retrouve rien, c’est qu’en général on n’a rien perdu.
+
 629;40;FREte|FRPart:FRPartCon:FRPartConMod;FRSRel|FRSRel;
+
+/*		629. Une autre procédure a à nouveau été tranchée à son avantage.
+
 654;40;FREtre|FRPart:FRPartCon:FRPartConMod;-FREtre|FRSRel;
+
+/*		654. Le bateau apparaissait être vendu.
+
 656;40;FRAvoir|FRPart:FRPartCon:FRPartConMod;-FRAvoir|FRSRel;
+
+/*		656. Le pouvoir semble avoir accepté un compromis.
+
 1;40;FRSRelAux|.FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRelAux|*|FRSRel;auxiliary with met participle
+
+/*		1. Ils ont présenté la nouvelle collection à Bruxelles. Tout est parti d'un informaticien de la Banque. Il avait en effet recommandé deux ordinateurs. Il a ainsi déjà commencé ses réflexions sur le sujet.
+
 53;40;FRSRelAux|FRSRel|FRPart;FRSRelAux|^FRSRel|FRSRel;remaining cases
+
+/*		53. Elle a par exemple rédigé un acte de défense de 206 pages.
+
 597;40;FRSRelAux|FRSubjpron|FRPart:FRPartCon:FRPartConMod;FRSRelAux|FRSubjpron|FRSRel;
 
+/*		597. Ils ont tous les deux passé une bonne partie de leur enfance en internat. La branche automobile, qui peine à dégager des bénéfices, sera elle réorganisée en profondeur. Il semble qu'ils soient tous les deux condamnés à débattre de la même question tous les six ou trois mois.
 /* PAST PARTICIPLES WITH NEGATION
 
 83;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|FRSRel;auxiliary with negation and potential participle
+
+/*		83. Les mesures d'interdiction de fumer dans les lieux publics n'ont pas eu de réel effet sur le tabagisme actif. Ils déclarent qu'ils n'auraient pas accusé un innocent. Not_in: Il s agirait du plus fort séisme qu'on a jamais ressenti. Il ne serait pas intéressé par les activités à l’étranger.
+
 103;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|*|FRSRel;auxiliary with negation, adverb and potential participle
+
+/*		103. Ils n'ont pas simplement agi comme professeurs, mais comme magistrats. Tout le personnel recruté n'est pas simultanément employé. Nous n'avons pas vraiment vécu la crise économique.
+
 79;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPart:FRPartCon:FRPartConMod;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;adverb between verb and negation
+
+/*		79. Ce pays n'avait toujours pas annoncé une mesure similaire. La solution IASC ne serait finalement pas retenue. Athènes n'a toujours pas levé ses réserves. On sait qu'on n'est de nouveau pas protégé au tirage au sort.
+
 432;40;FRIndefart|FRCon|FRJamais|FRPart:FRPartCon:FRPartConMod;FRIndefart|FRCon|FRPas|FRCon;jamais + participle as an attribute to a noun
+
+/*		432. Il repousse les limites de l'exactitude graphique et scientifique pour donner à la bande dessinée une crédibilité jamais atteinte.
+
 735;40;FRIndefart|FRCon|FRJamais|FRSRel;FRIndefart|FRCon|FRAdvNeg|^FRSRel;jamais modifying a verb
+
+/*		735. La banque a clôturé à 13,19 euros, un niveau jamais vu depuis l'été 2004.
+
 323;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg;FRSRelAux|^FRAdv|FRAdvNeg;adverb between verb and negation
 
+/*		323. Il n'y a apparemment pas d'autre solution.
 /* OTHER STRUCTURES WITH POSSIBLE NEGATION MARKERS
 /* Negation marker with negation
 
 76;40;FRSRel|FRAdv|FRPas;FRSRel|^FRAdv|FRAdvNeg;adverb between verb and negation
+
+/*		76. Cette année ne sera pas terrible mais sans doute pas aussi mauvais que d autres.
+
 16;40;FRNe|FRSRelAux:FRSRelCon:FRSRelConMod:FRSRelMod:FRPPart;FRNe|FRSRel;ne preceeds verb
+
+/*		16. Ils ne sont arrivés qu'à dix heures. L' irresponsabilité de la classe politique locale ne porte pas à l' optimisme. Il ne lâche rien de ses ambitions présidentielles. La France ne manque déjà pas de textes pour s'attaquer aux employeurs sans scrupules. Le roi était un nomade qui se déplace avec toute son administration, ne restant jamais plus de quelques semaines dans la même résidence.
+
 173;40;FRNe|FRObjpron|FRSRelCon;FRNe|FRObjpron|FRSRel;
+
+/*		173. Le tribunal ne lui donne pas tort.
+
 691;40;FRNe|FRDefart:FRObjpron|FRPPart;FRNe|*|FRSRel;ne with object and present participle
+
+/*		691. En ne lui donnant pas les moyens de son existence.
+
 734;40;FRPas:FRAdvNeg|FRDe|"autre":"autres";FRAdvNeg|Join|FRAutre;
 
+/*		734. Il n'y a apparemment pas d'autre solution.
 /* Negation marker with negation
 
 204;40;FRNe|FRDefart|FRSRel|FRAdvNeg;^FRNe|FRObjpron|FRSRel|FRAdvNeg;
+
+/*		204. La fonction ne l'intéresse plus.
+
 758;40;FRSRel|FRNon|^FRCon+^FRComma+^SEnd;FRSRel|FRAdvNeg|*;variant of r3
+
+/*		758. Les actions visent l'economie dans son ensemble, et non des secteurs ou industries specifiques.
+
 759;40;FRNon|typeRelation+^typeConcept;FRAdvNeg|*;
+
+/*		759. Il faut malgré tout noter que ce ne vaut que pour la politique industrielle de la France, non pour ses finances. WRONG: celui subi par les partisans du "non" à la Constitution européenne.
+
 760;40;FRCon|FRNon|FRPart|^"par"+^SEnd;^FRCon|FRCon|FRCon|*;
+
+/*		760. "Nous avons trouvé 225 kilos d'engins non explosés et nous continuons de chercher", a dit le capitaine.
+
 3;40;FRSRel|FRPas+^FRNon;FRSRel|FRAdvNeg;verb without 'ne' but with negation
+
+/*		3. Je chante pas ce soir.
+
 4;40;FRSRelAux|FRPas+^FRJamais+^FRNon;FRSRel|FRAdvNeg;
+
+/*		4. J'ai pas envie.
+
 826;40;FRAdv|FRPas|^typeConcept+^SEnd;*|FRAdvNeg|*;
 
+/*		826. T'imagine le regard des autres souvent pas au courant !
 /* FURTHER DISAMBIGUATION OF PAST PARTICIPLES
 
 51;40;FRTres|FRPart;FRCon|FRCon;très must be followed by an adjective
+
+/*		51. Un Fleuve très surveillé.
+
 632;40;FRAndOrBut|FRAdvCR|FRPart;^FRAndOrBut|FRMod|FRCon;
+
+/*		632. La chef de zone venait d'arriver, escortée par trois enquêteurs et visiblement éreintée par sa nuit au cachot.
+
 160;40;FRDefart:FRIndefart:FRPoss:FRDes:FRDe|FRPart:FRPartCon:FRPartConMod;*|FRCon;
+
+/*		160. Ce modéré soit connu de l'Alliance. A 3-1, le New-Yorkais voyait enfin une éclaircie. La France préfère renouer avec son passé. En ce qui concerne l’évaluation et le suivi, la séparation des fonctions est insuffisante. L'harmonisation de la procédure d'octroi du statut de réfugié.
+
 161;40;FRPrep|FRPart:FRPartCon;FRPrep|FRCon;(tested PartConMod, decided not to add it)
+
+/*		161. Preuve pour l'aide social avec contrainte sévère a l'emploi.
+
 663;40;FRNum:FRQuantpron|FRPartCon:FRPartConMod;*|FRCon;
+
+/*		663. Celui-ci a cependant été condamnée à plusieurs reprises par la Cour.  WRONG: Les dirigeants de l'opposition, dont certains interrogés par l'AFP, ont refusé de se prononcer.
+
 662;40;FRPart:FRPartCon:FRPartConMod|"par";FRSRel|^FRPrep;
 
+/*		662. Chaque weekend il y a des accidents causés par des chauffeurs ivres.
 /* JOIN REFLEXIVE PRONOUN AND VERB
 
 21;40;FRRefl|FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel;FRSRel|+Join;merge reflexive pronoun with verb
+
+/*		21. L'armée s'avance lentement. Le fibromes matriciel se présente comme une tuméfaction conique de couleur chair. Le kyste mucoïde sous-unguéal se manifeste par une rougeur de la lunule. Ils se rencontrent dans la gare.
+
 318;40;FRRefl|FRInf;FRInf|+Join;infinitive is merged with reflexive pronoun
+
+/*		318. Celui-ci pourrait dans certains cas s'effectuer par voie de procédure civile ou administrative.
+
 20;40;FRRefl|FRSRelAux;FRSRel|FRSRelAux;don't merge se with auxiliary verb
 
+/*		20. Ils se sont rencontrés dans la gare.
 /* DISAMBIGUATION OF FRSRelCon
 /* to FRSRel
 
 661;40;FRNe|FRDefart|FRSRelCon;^FRNe|FRObjpron|FRSRel;
 
+/*		661. Personne ne la remarque.
 /* to FRSRel
 
 174;40;FRSubjpron|FRObjpron|FRSRelCon;FRSubjpron|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
+
+/*		174. On lui offre la possibilité.
+
 172;40;FRSubjpron2|FRObjpron|FRSRelCon;FRSubjpron2|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
 
+/*		172. Ça me révolte.
 /* to FRCon
 
 28;40;FRDefart:FRIndefart:FRAucun:FRPoss:FRDes:FRPrep:FRMod:FRQuantpron|FRSRelCon;*|FRCon;
+
+/*		28. La coupe brésilienne était délicieuse. Nous y sommes restés une nuit. Le scénario français n'offre aucune marge de manoeuvre. J'ai envoyé un e-mail dans ma pause de midi. Des mesures créatives permettant de démarrer une période de prénégociation. On a averti la police par téléphone. Par cette fausse mesure il a stupidement renoncé à tous ses avantages. Toute bande noire d'un seul ongle doit faire l'objet d'une biopsie sauf si sa cause est évidente (mélanonychie de friction par exemple).
+
 514;40;FRSRelCon+FRCapitalInitial;FRCon;
 
+/*		514. Inspiré par la décision relative au Fonds de cohésion.
 /* to FRSRel
 
 25;40;FRSRelCon|FRIndefart:FRAucun:FRDefart:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
+
+/*		25. Elle visite une amie à Namur. Cela pose aucun problème pour la construction modulaire. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Cette masse passe ensuite de l'intestin grêle au côlon. La révolution industrielle fait son apparition. Il ne faut pas qu'il rêve être directeur d'agence sans aucune expérience. Le gouvernement fait construire trois chemins de fer transcontinentaux. «Ils étaient très bons», juge celui qui a vraiment apprécié l'émission.
+
 59;40;FRSRelCon|FRPas:FRAdvNeg;FRSRel|FRAdvNeg;
+
+/*		59. Et ça fait pas de mal.
+
 106;40;FRSRelCon|FRDe|FRInf;FRSRel|FRSRel|FRInf;
+
+/*		106. Les négociations qu'elle tente de mettre en place. Le gouvernement actuel tente de s'aligner avec la Coopération économique.
+
 31;40;FRSubjpron:FRSubjpron2:FRDatpron|FRSRelCon;*|FRSRel;after pronoun
+
+/*		31. Il reste sur deux finales. Tout cela conduit à l'existence de fromages à forte identité. Je leur demande de ne pas respirer pendant cinq minutes.
+
 52;40;FRSConj:FRSRelconj|FRSRelCon;*|FRSRel;after conjunction
+
+/*		52. Une vision que partage cette femme. L'Homme qui marche est installé au palais Farnèse.
+
 515;40;FRSRelCon+FRCapitalAll;FRCon;treat capitalized RelCons as Con, place this rule after disambiguation rules because if the whole text is capaitalized, the rules must get priority
+
+/*		515. Madame ROCHE ne participera pas.
+
 475;40;FRCapitalInitial:FRCapitalMixed+FRCon|FRSRelCon+^FRCapitalInitial;^FRCon|FRSRel;detect verb after name
 
+/*		475. La Cour recommande a la Commission de poursuivre ses investigations. InterSystems lance avec succès la nouvelle version.
 /* THE WORD 'plus' WITH AN ADJECTIVE AFTER A NOUN
 
 239;40;FRCon|FRPlus|FRCon:FRPart;FRCon|FRMod|FRCon;'plus' becomes part of the concept after a noun
+
+/*		239. Réflexion à ce sujet sur des bases plus utiles pour le soignant. Il empêche également la réalisation d'essais plus poussés que ceux auxquels les autres ont déjà procédé.
+
 223;40;FRCon|FRAdv|FRPlus|FRCon:FRPart;FRCon|FRMod|FRMod|FRCon;'plus' becomes part of the concept after a noun
+
+/*		223. Leur intérêt est de faire prescrire par les médecins des molécules toujours plus nombreuses et plus coûteuses. Des mesures de sécurité toujours plus étudiées.
+
 225;40;FRCon|FRPlus|FRDe|FRCon;FREnd|FRMod|FRMod|FRCon;'plus de' after a noun starts a new concept
 
+/*		225. On a huit fois plus de chance d'avoir un accident corporel si on est somnolent.
 /* FURTHER DISAMBIGUATION OF PAST PARTICIPLES
 /* These rules must come after 239 and 223 (noun - plus - participle).
 
 675;40;FRAdvDegree|FRPartMod;FRCon|FRCon;
+
+/*		675. Ces phases de construction préliminaires comportent l’élément de risque le plus élevé d’un projet et sont nécessaires pour l’octroi de permis de construire.
+
 483;40;FRCon|FRPartMod|FRDes:"du";FRCon|FRCon|FRPrep;noun with adjective before des or du
+
+/*		483. Le directeur demande un rapport détaillé des circonstances. La porte ouverte du jardin collectif.
+
 683;40;FRMod|FRPart;*|FRCon;
+
+/*		683. Partout, les valeurs bancaires étaient les plus malmenées.
+
 92;40;FRPart|FREn;FRSRel|FREn;participle followed by 'en'
+
+/*		92. Il s'agit d'un homme remis en liberté sous caution.
+
 5;40;FRPart|FRPrep;FRSRel|*;participle followed by preposition
+
+/*		5. Les gouvernements ont eux aussi cherché à apaiser les esprits.
+
 312;40;FRCon|FRPart|FRAdvCR|FRAndOrBut;FRCon|FRCon|FRCon|FRAndOrBut;
+
+/*		312. Ils sont détachés, sur des projets exécutés individuellement ou en équipe.
+
 6;40;FRPart|FRAdv|FRPrep;FRSRel|^FRAdv|FRPrep;
+
+/*		6. L'inégalité de la taille d'image perçue subjectivement par chacun des deux yeux.
+
 157;40;FRPart|FRDefart:FRAucun:FRSubjpron2;FRSRel|*;participle becomes relation before article, aucun, celui etc.
+
+/*		157. Tous ces éléments ont été inclus dans un plan d'action consolidé adopté le 8 novembre. Il n'a, jusqu'ici, donné aucune consigne de vote. Soudain, j'ai senti une main sur le dos de ma veste et entendu quelqu'un dire.
+
 682;40;FRPart+^FRPartMod|FRCon;FRSRel|^FRCon;Part is probably a relation before a concept
+
+/*		682. Le nombre d'erreurs constaté ex post était très mineur.
+
 104;40;FRComma|FRPart;FRComma|FRSRel;participle after comma is probably relation
 
+/*		104. La réorganisation de la connectivité, observée chez l'aveugle précoce, n'est pas observée à la suite d'une perte tardive de la vision.
 /* DISAMBIGUATION OF FRSRelMod
 
 46;40;FRSRelMod|FRDefart:FRIndefart:FRAdv:FRPoss:FRMod;FRSRel|*;
 
+/*		46. La codification des lois intègre les principes de droit commun. Il présente un budget très austère. Les autorités de contrôle ont classé cet incident au niveau 1 de l’échelle internationale des événements, soit comme anomalie, précise encore le directeur. La télévision publique diffuse ses programmes à destination de l’étranger. L'affectivité fausse tous les raisonnements en effet.
 /* DISAMBIGUATION OF FRSRelConMod
 
 391;40;FRSRelconj|FRSRelConMod;FRSRelconj|FRSRel;
+
+/*		391. Une crise profonde qui dure depuis le troisième trimestre 1998.
+
 774;40;^FRDefart:FRIndefart+^SBegin|FRSRelConMod|FRDefart:FRIndefart|FRCon;*|FRSRel|*|^FRCon;
+
+/*		774. Le chirurgien plasticien du 21ème siècle, qui se spécialise dans la chirurgie plastique du nez, pratique la chirurgie esthétique du nez au quotidien.
+
 350;40;FRSRelConMod;FRCon;default
 
+/*		350. Elle est marchande de fleurs.
 /* DEFAULTS
 
 23;40;FRPartCon;FRCon;default
+
+/*		23. Le Grand Marché était plein de gens.
+
 22;40;FRSRelCon;FRCon;default
 
+/*		22. Il y avaient trois équipes françaises.
 /* des BETWEEN CONCEPTS
 
 114;40;FRCon|FRDes|FRCon:FRNum;^FRCon|FRPrep|*;
 
+/*		114. Les gouverneurs des provinces de Buenos Aires et Cordoba. Les noms des cinq vainqueurs seront annoncés après le diner.
 /* MISCELLANEOUS
 
 171;40;FRPrep|FRObjpron|FRInf;FRSConj|FRObjpron|FRInf;'pour' and 'à' with pronoun and infinitive
+
+/*		171. Un courrier a été envoyé pour leur informer.
+
 340;40;FRSRelAux;FRSRel+FRVerb;default rewriting for auxiliary verbs after the last rule that applies specifically to FRSRelAux
+
+/*		340. Il est le président.
+
 143;40;FRPPart|FRInf;FRSRel|FRInf;present participle followed by infinitive
 
+/*		143. L'organisation effectue un service très limité, avec très peu de trains et des temps d’attente pouvant atteindre plusieurs heures entre deux trains.
 /* De
 
 767;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|^FRSConj+^SEnd;*|FRSConj+FRSConj2|FRInf|*;refining r33
+
+/*		767. On a huit fois plus de chance d'avoir un accident corporel si on est somnolent.
+
 773;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|FRSConj;*|*|FRInf|FRSConj+FRSConj2;refining r33 and 767
+
+/*		773. Il incombe aux Etats membres de garantir que de telles exigences sont respectées.
+
 33;40;FRDe|FRInf;FRSConj|FRInf;'de' with infinitive
+
+/*		33. Ils ont refusé de se prononcer.
+
 112;40;FRDe|FRDemonstr;FRDe|FRDefart;'de' with demonstrative pronoun
+
+/*		112. La prévention de ces pathologies liées au travail.
+
 146;40;FRDe|FRSubjpron2;FRPrep|FRSubjpron2;'de' with 'cela', 'quelqu un' etc.
+
+/*		146. Les positions subjectives de celui qui s’y risque.
+
 170;40;FRDe|FRObjpron:FRDefart|FRInf;FRSConj|FRObjpron|FRInf;'de' with pronoun and infinitive
+
+/*		170. Prière de vous mettre en rapport avec le directeur.
+
 58;40;FRDe|FRRefl;FRSConj|FRRefl;'de se'
+
+/*		58. Les comités sont tenus de se réunir au moins deux fois par an.
+
 156;40;FRDe|FRSRel;FRSConj|FRSRel;
+
+/*		156. C'est au sein des comités de suive que se manifeste le plus l'intéraction des partenaires.
+
 63;40;FRDe|FRNe:FRAdvNeg;FRSConj|FRNe;'de' with negation (and infinitive)
+
+/*		63. Il faut leur donner les moyens de ne pas reprendre.
+
 121;40;FRDe|FRIndefart:FRAucun:FRMod:FRQuantpron;FRPrep|*;'d un(e)' between concepts
+
+/*		121. Elle a joué un rôle dans la définition d'une nouvelle gastronomie. On ne peut le dire d'aucun homme, d'aucune situation, d'aucun discours. La méthode consiste à préserver la sensibilité de chaque élève. Cette défaite est dans la mémoire de tous.
+
 575;40;typeConcept|FRDe|FRIndefpron;*|FRPrep|FRIndefpron;
+
+/*		575. D'autres mesures visent à faciliter l'abandon volontaire de la culture du tabac au profit d'autres cultures.
+
 600;40;FRQuantpron|FRDe;FRQuantpron|FRPrep;
 
+/*		600. Il faudrait même ajouter des incitatifs pour les encourager à le faire, le tout de façon strictement volontaire.
 /* DISAMBIGUATION OF PRESENT PARTICIPLES
 
 589;40;FREn|FRDefart:FREn:FRRefl|FRPPart;FRSConj|*|FRSRel;
+
+/*		589. Ces symptômes peuvent évoquer des troubles fonctionnels intestinaux en s'intégrant parfaitement dans les critères du syndrom du colon irritable.
+
 117;40;FRDefart:FRIndefart:FRAucun:FRPoss+^FRObjpron|FRPPart;*|FRCon;after article or FRAucun
+
+/*		117. Un montant de 1 428 235 euros. La mise en production échelonnée d'un nouveau système de paie dans le courant de l'année 2003. Aucun représentant de l'organisation a été invité. Appelez-nous et nous vous enverrons notre représentant qui vous fera part de nos conditions avantageuses.
+
 178;40;FREn|FRDatpron:FRObjpron|FRPPart;FRPrep|FRNonconcept|FRSRel;en lui/me/vous etc., has to come before r40
+
+/*		178. Le fils annonce la décision à son père, qui proteste en vain en lui rappelant les sacrifiees qu'il a faits à son profit. Elle sourit en me disant cela.
+
 40;40;FRPPart|FRDefart:FRIndefart:FRAucun:FRPoss:FRMod:FRQuantpron:FRSubjpron2:FRAdv;FRSRel|*;
+
+/*		40. Les declarations produites par l'instance de certification devraient toujours etre fondêes sur des depenses correspondantes justifiant la declaration. Une publication récente a confirmé la difficulté du diagnostic en trouvant une prévalence de 5 % de la maladie coeliaque chez l’adulte qui consulte en gastro-entérologie pour des troubles fonctionnels intestinaux. Lorsque je le questionnai à ce sujet bien plus tard il me répondit qu'il ne savait pas non plus pourquoi, ne se rappelant aucune dispute entre nous. Ils pourraient s'approvisionner en augmentant leurs importations. Cet accord avec l'entreprise démontre le pouvoir durable de sa musique, dépassant toutes les références précédentes. De plus, les terres continentales du Nord Canadien sont bordées au nord d'un grand archipel, l'archipel arctique canadien comprenant certaines des plus grandes îles du monde. Il finit son discours en avertissant ceux pour qui il l'écrivait. La reconstruction se fait en respectant toujours les grands principes de la rhinopoïèse.
+
 191;40;FRComma|FRPPartCon;FRComma|FRCon;e.g. commandant, dirigeant, tenant, has to come after r157
+
+/*		191. Le salariat est devenu la principale forme d'emploi, représentant 89,5 % des emplois.
+
 189;40;FRComma|FRPPart;FRComma|FRSRel;after comma
+
+/*		189. Il y a un avis, déclarant qu'il n'était pas nécessaire de conclure ces contrats.
+
 65;40;FREn|FRPPart;FRPrep|FRSRel;
+
+/*		65. Réaliser régulièrement des contrôles de la qualité des informations produites en vérifiant que les informations sont présentes dans les dossiers des patients.
+
 66;40;FRRefl|FRPPart;FRSRel|Join;
+
+/*		66. Le bruit de pas, de portes s’ouvrant et se refermant ou de voix, sont parfois des manifestations effrayantes de la paralysie du sommeil.
+
 118;40;FRPrep|FRPPart;FRPrep|FRCon;
+
+/*		118. Les taux par habitant sont très élévés.
+
 116;40;FRPPart|FRDes;FRSRel|FRDes;
 
+/*		116. La très grande sécurité des équipements actuels permet également de les prescrire chez des enfants et des jeunes adolescents désirant des lentilles pour des raisons esthétiques ou fonctionnelles.
 /* MISCELLANEOUS
 
 70;40;FRPrep|FRAvoir|FRSRel;FRPrep|FRSRel|FRSRel;'avoir' between preposition and past participle (labeled as Rel by now)
+
+/*		70. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu' avant le début de l' été le site devrait être entièrement dégagé.
+
 746;40;typeRelation|FRPrep|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
+
+/*		746. Le rôle délétère de la sieste dans un cas et salvateur dans l’autre y est curieusement occulté, comme s’il s’agissait simplement de mieux s’endormir pour ne pas risquer d’être somnolent.
+
 747;40;^typeRelation+^SBegin|FRPrep+^"à"|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
+
+/*		747. C'est dans ces zones d'ombre que doivent être dissimulées les cicatrices pour ne pas être visibles. WRONG: Le g n'a aucun son devant n.
+
 44;40;FRCon|FRDefart:FRIndefart:FRAucun:FRPoss;FREnd|*;detect concept boundaries
+
+/*		44. Dans les trois principaux pays producteurs, un comportement anticoncurrentiel, matérialisé par des ententes sur les prix, a en outre mis en péril la valeur de la production. Le marché a été réformé en profondeur une première fois en 1992. L'audit n'a mis en lumière aucune erreur significative. Le Luxembourg a trouvé pendant les dernières décennies sa place dans l'industrie audiovisuelle.
+
 113;40;FRDe|FRDefart;FRDe|FRNonconcept;must come after r117
+
+/*		113. Elle est née chez des cuisiniers formés par les grands chefs de la Haute cuisine.
+
 122;40;FRDe|FRPoss;FRPrep|FRPoss;
 
+/*		122. Afin d’élucider le vague à l’âme de leurs 102 000 salariés, ils ont décidé de leur envoyer un questionnaire.
 /* INFINITIVES
 
 142;40;FRInf|FRDe;FRInf|FRPrep;
+
+/*		142. Un fumeur va fabriquer de muscles et aura plus de protéines dans son alimentation.
+
 695;40;FRPas|FRInf;FRAdvNeg|FRInf;
+
+/*		695. C'est le sentiment d'être un « zombie vivant » car vous « ne pouvez pas parler, pas bouger, ni remuer la main, ou respirer profondément, ni même ouvrir les paupières pour voir ».
+
 762;40;"pour"|FRInf;FRSConj+FRSConj2|FRInf;add Conj2 for attribute expansion
+
+/*		762. Il peut attendre longtemps, des années parfois, pour trouver la situation adéquate.
+
 655;40;FRInf;FRInf+FRSRel;this rule implicitly deletes the label Avoir
+
+/*		655. Ils préfèrent discuter plutôt que de nier les difficultés.
+
 127;40;FRRefl|FRSRel;FRSRel|FRSRel;'se' becomes a relation when followed by an infinitive that has become relation
 
+/*		127. Ces symptômes peuvent évoquer des troubles fonctionnels intestinaux en s'intégrant parfaitement dans les critères du syndrom du colon irritable.
 /* PERSONAL PRONOUNS: SPECIAL CASES
 
 150;40;FRSubjpron2|FRDes:FRDe;FRSubjpron2|FRPrep;
+
+/*		150. Celle des navires de charge classiques a continué de diminuer. La modalité d'expression de cette perte est celle de la nostalgie.
+
 177;40;FRDe|FRDatpron;FRPrep|FRObjpron;
 
+/*		177. Ce garçon est amoureux d'elle.
 /* Un(e) AS A NUMERAL (CONCEPT)
 
 342;40;FRIndefart|FRAndOrBut:FRPrep:FRSRel:FRComma:SEnd;FRCon|*;
+
+/*		342. Il a visité un ou deux cafés. Un à un, les foyers d' incendie souterrains qui couvent sous les décombres et continuent d' enfumer l' athmosphère sont maîtrisés. Il y a trois tableaux dans la collection de cet amateur, dont un vient du Cabinet M. J'en ai un. J'en ai un, mon frère en a deux.
+
 343;40;FRIndefart|FRPas;FRCon|FRCon;
+
+/*		343. Pour l'instant, nous concentrons notre attention sur les méthodes à un pas.
+
 344;40;FRIndefart|FRDes;FRCon|FRCon;
 
+/*		344. Sa création est une des tâches du designer.
 /* MISCELLANEOUS
 
 376;40;FRPrep;+FRSRel;
+
+/*		376. On force ces deux organisations de poursuivre leurs activités sous un autre nom.
+
 50;40;FRPartMod;FRCon;default to implicitly delete conflicting labels
 
+/*		50. Ce petit club à l'atmosphère feutré.
 /* plus AS A RELATION
 
 235;40;FRPlus|FRIndefart:FRDefart:FRSubjpron;FRSRel|*;plus as a (mathematical) relation or as a conjunction
 
+/*		235. Douze plus une questions. Plus le nombre de transmetteurs s'accroit, plus le texte change. Plus vous avez de peuples à conduire , plus vous avez de misères à soulager.
 /* ADVERBS
 
 73;40;FRCon:"tout"|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
+
+/*		73. Ce travail d’intro­spection en des temps aussi difficiles ne va pas sans poser de problèmes. Voici la liste des utilisateurs actuellement en ligne.
+
 72;40;FRMod|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
+
+/*		72. Le vin et le procédé de vinification les plus anciennement attestés.
+
 74;40;FRCon|FRAdv|FRMod;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
+
+/*		74. Le cheveu gris et l'allure toujours un peu raide.
+
 75;40;FRSRel|FRAdv|FRSRel;^FRSRel|^FRAdv|^FRSRel;adverb between relations becomes relation
+
+/*		75. Il vit ici avec son épouse et les quatre enfants qui lui restent.
+
 715;40;FRCon|FRAdv|FRAdvCR|FRCon;FRCon|FRCon|FRCon|FRCon;adverb between concepts becomes concept
+
+/*		715. L' accès aux traitements reste très limité et les traitements encore trop chers pour la grande majorité des populations.
+
 324;40;FRCon|FRAdv|FRPart:FRPartConMod;FRCon|FRCon|FRCon;adverb between concept and past participle becomes concept
+
+/*		324. Ou elle peut être mise en acte de façon plus ou moins élaborée et maladroite.
+
 325;40;FRAussi|FRCon:FRSRelMod|FRQue;FRSRel|FRCon|FRQue;'aussi' is not nonrelevant in aussi X que
+
+/*		325. Pour qui est dépendant, fumer est aussi indispensable que respirer. Sa guérison est fréquemment aussi brusque que son invasion.
+
 613;40;FRComma|"même";FRComma|FRSConj;
+
+/*		613. Il est très violent, même dangereux.
+
 303;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;relevant adverb becomes part of concept between comma and concept
+
+/*		303. Dès son arrivée à Lourdes, il avait tenu à parcourir, visiblement ému, le chemin du pèlerin.
+
 306;40;FRComma|FRAdvCR|FRSRel;FRComma|^FRAdvCR|FRSRel;relevant adverb becomes part of relation between comma and relation
+
+/*		306. Les tumeurs glomiques sont rares et se rencontrent surtout aux ongles des mains, plutôt chez des femmes dans leur cinquième décennie.
+
 327;40;FRAdvNR|FRDe;FRAdvNR|FRPrep;de is mostly a relation after a NonRelevant adverb
 
+/*		327. Il y a toujours de l'ostéoclastogènèse et donc de la destruction osseuse.
 /* de soi
 
 602;40;FRCon|"de"|"soi";^FRCon|Join|Join;merge 'de soi' with preceding concept
+
+/*		602. Elles ont besoin de garder leurs propres réseaux sociaux et d'activités qui renforcent leur respect de soi et leurs perspectives dans leur pays d'origine à leur retour.
+
 603;40;^typeConcept+^SBegin|"de"|"soi";*|FRAdvCR+FRAdv+FRAdvManner|Join;merge 'de soi', but not the preceding lexrep in other cases
 
+/*		603. Le renforcement des règles va donc de soi.
 /* DEFAULTS ETC.
 
 351;40;FRPartConMod;FRCon;default
+
+/*		351. Je t'aime, chéri!
+
 648;40;FRNum+FRCon;FRNum;remove Con-label
+
+/*		648. L'article 462 du C.pén. doit être appliqué.
+
 352;40;FRIndefart;+FRNonconcept;don't remove Indefart label: needed later
+
+/*		352. Elle lit un livre.
+
 105;40;FRSRel|FRDe;*|FRSRel;
+
+/*		105. Les citoyens bénéficient de cette nouvelle règle.
+
 192;40;FRDe|FRNonconcept;FRSRel|FRNonconcept;
+
+/*		192. C'était le début de ce voyage.
+
 353;40;FRDe|FRAdvCR;FRPrep|^FRAdvCR;
+
+/*		353. Ces fameux isotopes ont une durée de vie d'à peine quelques jours.
+
 193;40;FRDe|FRSConj:FRSRelconj;FRSRel|FRSRel;
+
+/*		193. C'était un réel bon exemple de ce que la coopération internationale devrait être.
+
 480;40;^FRPlus+^SBegin|FRDe|FRNum;*|FRPrep|FRMod;
+
+/*		480. Ce père de quatre enfants a eu un accident.
+
 354;40;FRComma|FRDe;FRComma|FRSRel;
+
+/*		354. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
+
 377;40;FRPrep;FRPrep;to implicitly delete conflicting labels
+
+/*		377. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
+
 685;40;FRDe|FRPrep;FRPrep|FRPrep;
+
+/*		685. Le gel de jusqu'à 30 millions de dollars taïwanais.
+
 111;40;FRDemonstr;FRDefart;default
+
+/*		111. Ce confort a disparu.
+
 402;40;FRDefart;+FRNonconcept;don't remove Defart label: needed later
+
+/*		402. La pianiste a 20 ans.
+
 167;40;FRComma;+FRPunctuation;don't remove Comma label: needed later
+
+/*		167. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
+
 330;40;SBegin|FRAndOrBut;*|FRAdvNR;et, ou, mais aussi, mais surtout are NonRelevant at the beginning of a sentence
+
+/*		330. Mais aussi en devenant l'un des plus grands seigneurs et propriétaires terriens.
+
 355;40;FRConIfCap;-FRConIfCap;avoid that words become NonRelevant because of double labels
+
+/*		355. Aujourd'hui, mon père me donne de l'argent de poche.
+
 356;40;FRConIfAllCap;-FRConIfAllCap;avoid that words become NonRelevant because of double labels
+
+/*		356. Une s'est achevée en sa faveur en janvier dernier.
+
 357;40;FRLetter;-FRLetter;avoid that words become NonRelevant because of double labels
+
+/*		357. L'influence n'était pas suffisamment documentée.
+
 577;40;FRNum:FRMod|"autres";*|FRMod-FRAutre;
+
+/*		577. Et de plus en plus d'autres services sont mis à la disposition. Les huit autres provinces sont habitées par des fortes majorités anglophones.
+
 358;40;FRDe|FRPunctuation;FRSRel|FRPunctuation;
+
+/*		358. Ceci est une pipe de (René) Magritte.
+
 500;40;SBegin|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;
+
+/*		500. Des paiements intermédiaires et finals ont également été autorisés.
+
 501;40;SBegin|FRDes|FRNum;*|FRPrep|*;
+
+/*		501. Des cinq candidats finalistes, il est le seul qui n'a pas de voiture.
+
 505;40;^FRNum+^SBegin|FRDes|FRNum;*|FRPrep|*;
+
+/*		505. Les rapports corrigés des seize dernières années.
+
 504;40;FRPunctuation|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;
+
+/*		504. Actuellement, des équipes mixtes fouillent celle-ci afin de détecter un éventuel objet suspect.
+
 502;40;FRPrep|FRDes;FRPrep|FRNonconcept;
+
+/*		502. Ils s'attendent à des grands changements.
+
 608;40;FRQue|FRDes;FRQue|FRNonconcept;
+
+/*		608. Ils disent que des grands changements sont à expecter.
+
 508;40;^FRPrep|FRSRelconj|FRDes;*|*|FRPrep;
+
+/*		508. Ils ont décidé lesquels des grands changements seront réalisés.
+
 506;40;FRAdv|FRDes;*|FRNonconcept;
+
+/*		506. Ils attendent donc des grands changements.
+
 692;40;typeRelation|FRDes;*|FRNonconcept;
+
+/*		692. L'hôpital produit des soins, pas des ordinateurs ! Ils attendent des grands changements. la notion de néoténie, selon laquelle des caractères morphologiques se prolongent à l'état adulte.
+
 576;40;typeConcept|FRDes|FRIndefpron;*|FRPrep|FRIndefpron;
+
+/*		576. Puis ce sera le tour des autres romans nommés ci-dessus.
+
 510;40;SBegin|FRDe|FRCapitalInitial;*|FRPrep|^FRCapitalInitial;
+
+/*		510. De Paris à Londres en un peu plus de deux heures.
+
 512;40;SBegin|FRDe|FRNum;*|FRPrep|^FRNum;
+
+/*		512. De 1850 à 1860, la maison était un auberge.
+
 511;40;SBegin|FRDe;*|FRAdvNR;
+
+/*		511. De nombreux groups ont visité le musée.
+
 716;40;^typeConcept+^FRPas+^FRBegin+^SBegin|FRDe|typeConcept;*|FRPrep|*;
+
+/*		716. Il s’agit parfois de véritables actes manqués, quand on n’invoque pas, de façon peu convaincante, les difficultés économiques.
+
 717;40;FRDe|"autres";FRAutre|+Join;
+
+/*		717. Celui-ci a précisé que d'autres procédures juridiques étaient encore en cours.
+
 732;40;FRPrep|"lequel":"laquelle":"lesquels":"lesquelles";FRSConj+FRSConj2|+Join;
 
+/*		732. L'amélioration des traitements doit notamment aller de pair avec un renforcement de la prévention, à laquelle elle peut donner selon les spécialistes une motivation supplémentaire.
 /* RULES WITH REGARD TO NEGATION ATTRIBUTES
 /* Assign negation attribute to labels
 
 426;40;SBegin:FRPunctuation|FRJamais;*|+FRNegation;
+
+/*		426. Ainsi, la consonne s intervocalique sera toujours prononcé [s], jamais [z]. Jamais il ne les provoqua à des actes impuissants de fureur.
+
 428;40;FRJamais;FRAdvTemp+FRTime-FRPas-FRAdvNeg;remove label Pas
+
+/*		428. Jamais il ne les provoqua à des actes impuissants de fureur. Il s'agirait du plus fort séisme qu'on a jamais ressenti.
+
 690;40;FRPas|FRDe;FRBegin+FRNegation|*;
+
+/*		690. Au supermarché, pas de problème puisqu'il paie en carte bancaire.
+
 693;40;FRPas|FRPlus;FRCon+FRNegation|*;low-frequent
+
+/*		693. Une population fatiguée de devoir passer plusieurs heures dans une chaleur torride devant des agences bancaires et des distributeurs automatiques pour récupérer le peu d'argent auquel le gouvernement l'autorise, pas plus de 1.000 pesos par mois.
+
 696;40;FRAdvCR|FRPas;*|FRAdvNeg;
+
+/*		696. Certainement pas.
+
 736;40;FRIndefart|FRCon|FRPas|FRAdv;*|FRCon|FRCon+FRNegation|*;
+
+/*		736. Un projet pas suffisamment clair et audible.
+
 697;40;FRPas|FRAdv;FRAdvNeg|*;
+
+/*		697. Pas vraiment adeptes des cartes de crédit, ils utilisent beaucoup plus les espèces.
+
 698;40;SBegin:FRPunctuation|FRPas;*|FRAdvNeg;
+
+/*		698. Ils avaient joué contre des fanatiques, pas des amateurs. Pas pire pour un indépendant.
+
 702;40;FRPas|FRCon;FRCon+FRNegation|*;e.g. 'non fumeur'
+
+/*		702. La Charte détaille également la politique de rémunération des administrateurs, tant exécutifs que non exécutifs.
+
 694;40;FRAdvNeg;+FRNegation;
+
+/*		694. Certainement pas.
+
 699;40;FRPas;FRCon;remaining cases: 'pas' as noun
+
+/*		699. Cependant, il ne s'agit ni plus ni moins que du premier pas sur un parcours où, selon moi, nous devons atteindre trois objectifs.
+
 422;40;FRAucun;+FRNegation;
+
+/*		422. Les nombreux citoyens marginalisés ne bénéficient d’aucune formation.
+
 706;40;FRRien|FRDe|FRCon:FRPlus;FRCon+FRNegWord|*|*;
+
+/*		706. Ces catastrophes répétitives n'ont rien de naturel. Rien de plus facile.
+
 434;40;FRRien;FRSubjpron+FRObjpron+FRNegWord;
+
+/*		434. En fait, le témoin n'a rien vu.
+
 757;40;FRCon|"non"|FRCon;*|-FRNegation|*;remove negation attribute within concepts, e.g. organisation non gouvernementale
 
+/*		757. C'est une organisation non gouvernementale qui s'occupe des sans-abris.
 /* ADVERBS
 /* =======
 /* Give adverbs their label type and make sure they keep the label Adv for later phases.
 /* (FRAdv and FRAdvCR are not defined in the last phase -> no risk for conflicting labels.)
 
 634;50;FRDe|FRAdvTime;FRPrep|FRAdvTime+FRAdv;
+
+/*		634. Le retour du colbertisme en France ne date pas d’hier.
+
 677;50;"ce"|FRDay|^typeConcept;FRAdvTime|+Join|*;
+
+/*		677. Il doit témoigner ce mercredi devant le Comité des services financiers. Suite des auditions des témoins ce mercredi après-midi.
+
 833;50;^FRDaypart+^SBegin|FRDe|FRDay;*|FRPrep|*;
+
+/*		833. La Bourse a terminé la séance de mercredi en forte hausse.
+
 834;50;FRDaypart|FRDe|FRDay;FRCon+FRDay|Join|Join;special case for r833
+
+/*		834. La Bourse a terminé la journée de mercredi en forte hausse.
+
 679;50;"cette"|"semaine":"année"|^typeConcept;FRAdvTime|+Join|*;
+
+/*		679. Cette technologie a été  testée cette année durant un match de hockey. Le gouvernement a promis une réponse pour cette semaine.
+
 672;50;FRCon|FRAdvTime|FRCon;*|FRCon|*;make attribute part of concept
+
+/*		672. Grâce aux technologies aujourd'hui disponibles, les chercheurs peuvent analyser ces variations infimes de la lumière.
+
 681;50;^FRMod+^SBegin|FRDay;*|FRBegin;
+
+/*		681. Les débats en séance plénière et en groupes de travail doivent débuter lundi.
+
 620;50;FRCon|FRAdvTemp|FRCon;*|FRCon|*;make attribute part of concept
+
+/*		620. Ces aberrations sont responsables d'images rétiniennes de qualité souvent médiocre.
+
 619;50;FRAdvTemp;FRAdv+FRAdvTemp+FRTime;assign attribute
+
+/*		619. Le diagnostic est souvent retardé.
+
 621;50;FRCon|FRAdvLoc|FRCon;^FRCon|FRCon|^FRCon;make attribute part of concept
+
+/*		621. Cette pratique a des impacts localement significatifs sur l'aménagement du territoire et des espaces naturels publics.
+
 622;50;FRAdvLoc;FRAdv+FRAdvLoc;delete conflicting labels
+
+/*		622. Il vit ici avec son épouse et les quatre enfants qui lui restent.
+
 643;50;FRAdvModal+^FRAdv;-FRAdvModal;delete AdvModal when AdvCR has become something else via rules
+
+/*		643. C'était incroyable, vraiment incroyable !
+
 642;50;FRAdvModal+FRAdv;FRAdv+FRAdvModal;assure the right labels
+
+/*		642. Il n'y a apparemment pas d'autre solution.
+
 646;50;FRAdvManner+^FRAdv;-FRAdvManner;
+
+/*		646. C'est un des virus par e-mails les plus incroyablement rapides.
+
 647;50;FRAdvManner+FRAdv|FRCon+FRCapitalInitial;FRAdvManner|*;don't add Adv here to avoid interference with r644
+
+/*		647. Élément qui liait profondément Chopin à la France et le changeait de la mentalité viennoise.
+
 644;50;FRAdvManner+FRAdv|FRCon:FRPart:FREnd:FRSRelMod;FRMod|*;
+
+/*		644. Il était physiquement totalement passif.
+
 645;50;FRAdvManner+FRAdv;FRAdv+FRAdvManner;assure correct labels
+
+/*		645. Les tests portant sur les contrôles clés opérationnels ont révélé que certains d'entre eux ont mal fonctionné.
+
 676;50;FRAdvDegree|typeConcept+^FRDe;FRCon|*;
 
+/*		676. On s'aperçoit qu'il y a un problème mais il est parfois trop tard.
 /* PATHRELEVANT ENTITIES
 /* =====================
 /* même(s), autre(s), other pronouns
 
 614;50;"même"+FRSConj;FRSConj;(Conj as a result of r613)
+
+/*		614. Il est très violent, même dangereux.
+
 616;50;"même"+FRMod;FRAutre;
+
+/*		616. Il est important de savoir bien distinguer les différences qui opposent la plainte de somnolence et celle de fatigue car la conduite à tenir n’est pas de même nature.
+
 615;50;SBegin|"même":"mêmes"|FRCon;*|FRAutre|FRCon;
+
+/*		615. Même constat dans le 1er siège du 2ème arrondissement.
+
 617;50;"mêmes"|FRCon;FRAutre|FRCon;overlap with r615 and with lexreps
+
+/*		617. Cette règle est suivie en cas de cofinancement mixte, où la contribution nationale est gérée selon les mêmes modalités que les fonds du programme.
+
 569;50;FRAutre;FRAutre;
+
+/*		569. Un autre ex-membre a à nouveau été abonné.
+
 578;50;"entre"|"autres"|typeRelation:typeOther;FRSRel|Join|*;
+
+/*		578. Mais la Régie des Bâtiments a rendu un rapport négatif, soulignant notamment le coût important du projet en raison entre autres de la dépollution nécessaire du site. Bien que cette organisation n'ait pas été institutionnalisée, elle permet aux provinces et territoires de consolider leurs forces et de travailler en collaboration sur tous sujets tombant dans leur juridiction législative en favorisant entre autres les échanges interprovinciaux.
+
 570;50;FRIndefpron|typeRelation;FRSubjpron|*;
+
+/*		570. Un accord dit "swap" permet aux banques centrales de se prêter réciproquement des liquidités à court terme, lorsque l'une ou l'autre en a besoin pour stabiliser le système financier de son pays.
+
 580;50;typeRelation|FRIndefpron|SEnd;*|FRSubjpron|*;
+
+/*		580. Rien, dans ce que nous avons appris dans l' audition des commissaires, n' est susceptible de justifier, à cette étape, un veto sur tel ou tel.
+
 572;50;FRIndefpron|FRPunctuation;FRSubjpron|FRPunctuation;
+
+/*		572. Que ce soit l'un ou l'autre, le dégel des relations entre ces parties est certain.
+
 595;50;FRCon|"chacun":"chacune";^FRCon|Join;
+
+/*		595. Certains spécimens pouvaient atteindre un poids d'environ cent livres chacun. 
+
 574;50;FRQuantpron:FRDemonstr|typeRelation;FRSubjpron|*;
+
+/*		574. Tout est parti d'un informaticien de la Banque.
+
 581;50;typeRelation|FRQuantpron:FRDemonstr|SEnd;*|FRSubjpron|*;
+
+/*		581. La présence d' une force internationale de paix  devrait être l' une des premières préoccupations de ce nouveau régime dont la population attend tout.
+
 583;50;typeRelation|FRQuantpron:FRDemonstr|FRPunctuation;*|FRObjpron|*;
+
+/*		583. Je ne sais pas si tout cet intérêt est dû au fait que ce syndrome se répand de plus en plus ou au fait que plus de gens veulent discuter de quelque chose qui, aux yeux de certains, peut ressembler à un trouble mental.
+
 594;50;SBegin|FRQuantpron:FRDemonstr|FRPunctuation;*|FRSubjpron|*;
+
+/*		594. Certains, comme le général, ont déjà critiqué la composition du pouvoir.
+
 585;50;FRQuantpron|FRNonconcept;FRSubjpron|*;
+
+/*		585. Nous portons tous une part de responsabilité.
+
 587;50;typePathRelevant|FRDes;*|FRNonconcept;
+
+/*		587. Elles constituent toutes des entorses au principe de l'universalité du budget.
+
 590;50;"quelque chose"|"de"|typeConcept;FRMod|Join|*;
+
+/*		590. Tout ce que nous pouvons faire est quelque chose de symbolique.
+
 823;50;FRNonconcept|FRInf;FRObjpron|*;
+
+/*		823. Il ne faut pas l'ignorer ou l'écarter comme un simple jeu.
+
 665;50;FRNonconcept|typeRelation;FRSubjpron+FRObjpron-FRIndefart|*;
+
+/*		665. C'était un été complètement fou.
+
 601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;very low frequent, mostly covered by other rules 
 
+/*		601. La répétition a banalisé les choses pour nous de telle façon que nous ne regardons plus ce que nous sommes habitués à voir.
 /* DETECT ENUMERATIONS
 /* ===================
 
 766;60;"de"+^FRList|*FRCon|FRAndOr|"de"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		766. C'est un réseau professionnel indépendant constitué de managers et de consultants en management expérimentés, aptes à proposer des solutions dans tous les principaux domaines de fonction des entreprises et organisations.
+
 396;60;FRCon|FRDe|FRCon+^"non";^FRCon|+Join|+Join;merge concepts containing de, keep negation attribute
+
+/*		396. Lieutenant de vaisseau est un grade dans la marine.
+
 768;60;FRIndefart|*FRCon|FRComma|FRIndefart|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		768. Il y a là une école, une église et une mairie flanquée de la classique boîte aux lettres française de couleur jaune.
+
 769;60;FRDefart|*FRCon|FRComma|FRDefart|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		769. Les plus grands producteurs de l'UE sont par ordre d'importance l'Italie, la Grèce et l'Espagne, qui représentent ensemble 87 % de la production totale.
+
 801;60;FRPoss|*FRCon|FRComma|FRPoss|*FRCon|FRAndOr|FRPoss|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		801. Aujourd hui, sur l'internet, vous êtes cordialement invité à donner votre avis sur vos voisins, votre médecin ou vos profs.
+
 770;60;"des"|*FRCon|FRComma|"des"|*FRCon|FRAndOr|"des"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		770. Aujourd hui, sur l'internet, vous êtes cordialement invité à donner votre avis sur des voisins, des médecins ou des profs.
+
 771;60;*FRCon|FRComma|*FRCon|FRAndOr|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		771. L'objectif est d'exploiter 250 MW de projets de production d'énergie verte d'origine éolienne, solaire, biomasse et hydroélectrique.
+
 763;60;FRIndefart+^FRList|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		763. Leur vote de fermeture traduit une peur et une ignorance qu'il faudra comprendre et combattre.
+
 764;60;FRDefart+^FRList|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		764. Le cadre général du système a été défini par le Parlement et le Conseil.
+
 802;60;FRPoss+^FRList|*FRCon|FRAndOr|FRPoss|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		802. Son adresse et son numéro de téléphone étaient dans le bottin.
+
 765;60;"des"+^FRList|*FRCon|FRAndOr|"des"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		765. Le principe: des caméras fixées sur les casques des joueurs et des arbitres retransmettent en direct ce qu'ils voient durant le match sur un assistant personnel (PDA) et sur un écran géant.
+
 772;60;"de":"dµ"|FRSRel|FRAndOr|"de":"dµ"|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList;
+
+/*		772. Il s'agit bien, ici, de la même chose car le coucher va lui procurer la double satisfaction de se reposer et de s'endormir.
+
 795;60;"de"|FRObjpron|FRSRel|FRAndOr|"de"|FRObjpron|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
 
+/*		795. La très haute sécurité liée au port de lentilles rigides permet de les adapter et de les prescrire chez des enfants, même fort jeunes, qui souhaitent, pour des raisons fonctionnelles ou esthétiques, remplacer leurs lunettes par des lentilles.
 /* NEGATION
 /* ========
 /* Remove negation attribute from 'ne explétif'
 
 721;70;FRIgnoreNegation|*{1,3}^FRNegation|"ne":"n"+FRNegation;*|*|-FRNegation;very low-frequent
 
+/*		721. Avant qu'il ne puisse me répondre, une alarme se mit à sonner. Toutefois, la Commission réalise l'importance de l'application de l'articleavant que la Charte ne puisse produire tous ses effets. À moins que le réseau ferroviaire ne soit également libéralisé, nous ne pouvons pas y parvenir.
 /* Expansion of negation to the left-hand part of the path
 
 361;70;FRNegation;+FRNegBegin;
+
+/*		361. L'instituteur ne parle pas l'italien.
+
 741;70;FRSConj+^FRNegation|FRNegation+^FRAucun;+FRBeginrel|*;
+
+/*		741. La Charte détaille également la politique de rémunération des administrateurs, tant exécutifs que non exécutifs.
+
 737;70;FRSRel+^FRNegation|FRNe+FRNegation;*|+FRBeginrel;
+
+/*		737. Le cofinancement parallèle est géré par les ministères/ autorités bénéficiaires et ne fait pas partie du système normal d'établissement de rapports.
+
 398;70;FRPrep:FRSRelconj|FRNegation;+FRNegBegin|*;
+
+/*		398. La qualité du résultat implique donc que le cas soit favorable et que toutes les étapes de la reconstruction se passent sans aucun accroc. Les «capitaines de soirées» qui ne consomment pas d'alcool en discothèque ne sont pas conscients des risques qu'il y a à conduire un véhilcule entre 03 et 05 h.
+
 405;70;FRSRelconj|FRSubjpron|FRNegation;+FRNegBegin|*|*;
+
+/*		405. Jusqu'au moment où on n'y pensera plus de tout.
+
 365;70;FRBegin:FRAutre|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;
+
+/*		365. L'autre n'a pas encore reçu de réponse.
+
 805;70;*FRCon|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;
+
+/*		805. En conséquence, les paiements correspondants n’ont pas été imputés au bon exercice budgétaire.
+
 375;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;
+
+/*		375. Par suite, les paiements en question n'ont pas été imputés au bon exercice budgétaire.
+
 743;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;
+
+/*		743. Le report de crédits sur cette ligne budgétaire n'est pas structurel.
+
 744;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;repetition of r375 after application of r743
+
+/*		744. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
+
 745;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;repetition of r743
+
+/*		745. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
+
 720;70;FRCon:"quelqu un"|"sans"+FRNegation|FRCon:FREnd|^SEnd;+FRNegBegin|*|*|*;
+
+/*		720. Il prend un café sans sucre, comme d'habitude.
+
 394;70;FRCon|FRPunctuation|FRSRelconj+FRNegBegin;FRCon|FRPunctuation|^FRSRel;avoid that rule 393 is applied when there is a comma between Con and Relconj
+
+/*		394. Pour les populations, qui n'osent guère le dire à voix haute, la présence d'une force internationale est indispensable.
+
 393;70;FRCon|FRSRelconj+FRNegBegin;FRCon+FRNegBegin|FRSRel;
+
+/*		393. Nêanmoins le fonctionnement de ce systeme a souleve des difficultes dont certaines n'ont pu trouver jusqu'ici de solution satisfaisante.
+
 714;70;FRSubjpron:FRSubjpron2:FRPoss|FRNegBegin+^FRPrep+^FRSConj;+FRNegBegin|*;
+
+/*		714. Que cela ne vous arrête surtout pas dans votre exercice professionnel.
+
 775;70;FRCondition|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*;
+
+/*		775. Si il n'y a pas de dépendance physique, la nicotine est théoriquement inutile.
+
 794;70;FRCondition|^FRNegStop|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*|*;
+
+/*		794. En effet, si nous ne pouvons changer notre âge ou notre hérédité, nous pouvons cesser de fumer, boire moins d alcool, manger moins de charcuteries mais plus de légumes, et faire plus de sport.
+
 800;70;*FRList+^FRNegBegin+^FRNegStop|FRList+FRNegBegin;+FRNegBegin|*;
 
+/*		800. Il est évident que la limite entre les travaux de construction préparatoires et les travaux de construction proprement dits n’est pas toujours facile à définir.
 /* Stop negation in the right-hand part of the path
 
 710;70;FRPrep+FRNegation|typeConcept|typeRelation+^FRPrep+^"et"+^FRNegation+^FRNegBegin;*|*|+FRNegStop;
+
+/*		710. Le régime sans gluten apparaît comme le seul traitement préventif vis-à-vis de la survenue de ces atteintes malignes.
+
 362;70;FRPunctuation|FRAndOrBut;FRPunctuation|+FRNegStop;
+
+/*		362. La situation se détériore, ne s' améliore pas, et nous devrions regarder vers l'avenir.
+
 363;70;FRPunctuation+^FRList|*FRCon;FRPunctuation|+FRNegStop;
+
+/*		363. Je n'ai pas parlé au responsable, monsieur D.
+
 364;70;FRPunctuation|FRSRel+^FRNegation;FRPunctuation|+FRNegStop;
+
+/*		364. Aujourd'hui n'est pas un jour important, a souligné mme D.
+
 378;70;FRPunctuation+^FRList|FRPrep;FRPunctuation|+FRNegStop;
+
+/*		378. Outre les nombreuses animations la semaine sera surtout marquée par  les «journées sans voitures» dans plusieurs villes.
+
 395;70;FRPunctuation|FRSRelconj:FRSConj;FRPunctuation|+FRNegStop;
+
+/*		395. L'audit n'a mis en lumière aucune erreur significative dans les opérations testées, ce qui correspond au résultat de l'audit de l'année précédente.
+
 733;70;FRPunctuation|FRSubjpron:FRSubjpron2:FRObjpron;FRPunctuation|+FRNegStop;
+
+/*		733. Il n’avait pas fait grand cas, on s’en souvient.
+
 704;70;^"ni"+^"non"+^SBegin|FRSConj+FRSConj2|^SEnd;*|-FRSConj+FRNegStop|*;
+
+/*		704. Or le risque, selon eux, "c'est que ni la consommation ni les investissements en actifs immobilisés ne semblent bien placés pour être la locomotive d'une reprise durable".
+
 406;70;FRPunctuation|FRQue;FRPunctuation|+FRNegStop;
+
+/*		406. Il dit qu'il n'a rien entendu, qu'il a bien dormi.
+
 474;70;FRPunctuation|FRAdv|FRSRel;FRPunctuation|+FRNegStop|+FRNegStop;
+
+/*		474. L' information sensorielle n'est pas dirigée au cortex aléatoirement, bien au contraire.
+
 385;70;FRPunctuation+^FRList|FRNonconcept|*FRCon:FRMod;FRPunctuation|FRNonconcept|+FRNegStop;
+
+/*		385. Toutefois, ces données n'étant pas vérifiées, des insuffisances affectant le cofinancement et des dépenses inéligibles risquent de passer longtemps inapercues.
+
 387;70;FRPunctuation|FRSubjpron:FRObjpron:FRSubjpron2|FRSRel:FRObjpron;FRPunctuation|+FRNegStop|*;
+
+/*		387. Ainsi, s’il n’y pas un unique coupable, nous portons tous une part de responsabilité.
+
 820;70;FRAdvTemp:FRAdvTime|FRPunctuation|^FRAdvTemp+^FRAdvTime+^SEnd;*|*|+FRNegStop;
+
+/*		820. Elle n'a pas appelé hier, j'en suis sûre.
+
 821;70;^FRAdvTemp+^FRAdvTime+^SBegin|FRPunctuation|FRAdvTemp:FRAdvTime|^SEnd;*|*|+FRNegStop|*;
+
+/*		821. L'engouement des Français pour le dispositif de l'autoentrepreneur ne se dément donc pas, plus d'un an après sa création".
+
 374;70;FRAndOrBut|FRAdvNR;+FRNegStop+FRBeginrel|*;
+
+/*		374. Il ne s’agit pas de l’entraîner dans des positions anti-morales ou anti-esthétiques mais de dégager un espace où ces positions ne sont pas nécessaires et même nuisent à l’action personnelle.
+
 423;70;FRAndOrBut|FRMod;+FRNegStop|*;
+
+/*		423. Tout se passe ensuite comme si ce deuil à la ritualité duquel on n’a pas participé était alors impossible ou plutôt durablement évité.
+
 379;70;FRAndOrBut|FRSubjpron:FRSubjpron2:FRPunctuation;+FRNegStop|*;
+
+/*		379. En outre, il convient d'assurer le suivi des cas où les Etats membres n'effectuent pas les contrôles prévus par la réglementation et, dans la mesure du possible, de procéder a des corrections.
+
 380;70;FRAndOrBut+^FRList|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;
+
+/*		380. Il dit qu'il n'a rien entendu et qu'il a bien dormi.
+
 796;70;"mais"|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;variant of r380
+
+/*		796. Je ne monte pas encore assez souvent mais quand je viens au filet, mes volées sont en général très bonnes. Mais si personne ne peut accuser ce président hyperactif d’oisiveté, de plus en plus de signes attestent de l’affaiblissement de sa motivation à réformer le pays.
+
 709;70;FRAndOrBut|FRSRelconj;+FRNegStop+FRBeginrel|FRSRelconj;
+
+/*		709. Parmi ces derniers, 45 000 concernent des personnes qui n’ont pas eu d’enfants ensemble ou dont les enfants sont majeurs.
+
 381;70;FRAndOrBut|FRNonconcept:FRIndefart+^FRList;+FRNegStop|*;
+
+/*		381. Il est vrai que cette situation n’est pas entièrement satisfaisante et la surveillance assurée par la hiérarchie est censée limiter les risques.
+
 424;70;FRCon|FRAndOrBut|FRSRel;^FRCon|+FRNegStop|^FRSRel;
+
+/*		424. La Commission doit reviser sans delai et de maniere approfondie la mise en oeuvre de cet objectif.
+
 815;70;FRAdvNeg+^"non"|FRAndOrBut|^FRNegation+^SEnd;*|+FRNegStop+FRBeginrel|*;
+
+/*		815. Il est important que nous essayions de réunir les ressources nécessaires et de les mobiliser pour faire en sorte que ces situations ne se reproduisent plus et pour éviter que l'on en tire un quelconque avantage politique.
+
 816;70;FRAdvNeg+^"non"|*FRSRel+^FRAndOrBut|"et"|^FRNegation+^SEnd;*|*|+FRNegStop+FRBeginrel|*;
+
+/*		816. L'arriéré qui en résulte signifie qu'un nombre encore plus élevé de demandes ne sont pas traitées et qu'en fin de compte, des permis de résidence sont délivrés sans enquête préalable.
+
 817;70;FRAdvNeg+^"non"|"de"|*typeConcept|"et"|^FRNegation+^SEnd;*|*|*|+FRNegStop+FRBeginrel|*;
+
+/*		817. Marc n'a pas de voiture et Jonathan doit rester à la maison.
+
 818;70;FRAdvNeg+^"non"|*^"et"+^FRNegStop|"et"|typeRelation+^FRPrep+^FRNegation;*|*|+FRNegStop+FRBeginrel|*;
+
+/*		818. J'arrête là une liste qui n'est pas limitative et que chacun pourrait allonger.
+
 790;70;FRAdvNeg+^"non"|FRQue|FRSRel;*|+FRBeginrel+FRNegStop|*;
+
+/*		790. N'oublions pas qu'en matière de "retraite" la discrimination est toujours d'actualité.
+
 791;70;FRAdvNeg+^"non"|FRQue:"si"|*FRCon|FRSRel;*|+FRBeginrel+FRNegStop|*|*;
+
+/*		791. Or, n'oublions pas que Montesquieu a fait ses armes en écrivant sur la grandeur et la décadence de Rome. WRONG: Dans le complexe, la mosquée et la salle de réunion sont encore debout, mais les bâtiments voisins ne sont plus qu'enchevêtrement de briques et de métal tordu qui attirent les curieux.
+
 792;70;FRAdvNeg+^"non"|FRQue:"si"|FRIndefart:FRNonconcept:FRPoss|*FRCon|FRSRel;*|+FRBeginrel+FRNegStop|*|*|*;
+
+/*		792. A bord, les quatre policiers ne savent pas encore qu'un braquage vient d'être commis, mais ils décident de rattraper le véhicule pour le contrôler.
+
 793;70;FRAdvNeg+^"non"|FRQue:"si":"sµ"|FRSubjpron;*|+FRBeginrel+FRNegStop|*;
+
+/*		793. D’un coup, maintenant que c’est possible, il ne sait plus s’il a vraiment envie d’y aller.
+
 822;70;FRAdvNeg+^"non"|FRSRel|FRQue:"si"|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;
+
+/*		822. Il ne faut pas oublier qu'il y a d'autres solutions.
+
 828;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|+FRBeginrel+FRNegStop;
+
+/*		828. Cette tâche n'est pas aussi aisée qu'il pourrait le sembler.
+
 829;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|*|+FRBeginrel+FRNegStop;
+
+/*		829. Il s’installe au contraire durablement dans l’illusion qu’il n’est pas vraiment parti et que son séjour est temporaire.
+
 824;70;FRSConj:FRPrep+FRNegation|FRSRel|FRQue|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;
+
+/*		824. Sans compter que de nombreux artistes viennent aussi se tailler une place.
+
 825;70;FRSConj:FRPrep+FRNegation|typeRelation:typeOther|typeRelation|FRQue|^FRNegBegin+^SEnd;*|*|*|+FRBeginrel+FRNegStop|*;
+
+/*		825. J'ai vécu normalement sans même penser que je pourrais un jour être concernée.
+
 798;70;FRNegation|*^FRCon|*FRCon+^FRNegation|FRSRelconj;*|*|*|+FRNegStop;
+
+/*		798. Aucune autre explication ne peut justifier les preuves d'origine qui servent à la fois aux produits manufacturiers et agricoles.
+
 799;70;FRNegation|*^FRCon+^FRPunctuation|*FRCon|*^FRSRelconj+^FRNegation+^FRNegStop+^FRNegBegin+^FRPunctuation+^FRSubjpron2|FRSRelconj;*|*|*|*|+FRNegStop;
+
+/*		799. Nous ne disposons pas encore d'estimations précises qui nous permettent de connaître précisément l'effet que produira le plan hydrologique national sur les prix.
+
 832;70;FRCon|FRSRelconj+^FRNegation+^FRNegBegin|FRVerb+^FRNegation+^FRNegBegin;*|+FRNegStop|*;
+
+/*		832. Ils ont voté dimanche sans grande passion pour le second tour des élections législatives qui devraient consacrer la domination du Parti démocratique.
+
 804;70;FRQue|*^FRVerb+^FRSRel+^FRNegation+^SEnd|SEnd;FRSRel|*|*;
+
+/*		804. Le téléphone n'était plus qu'un souvenir.
+
 803;70;FRNegation|*FRCon|FRQue;*|*|+FRNegStop;
+
+/*		803. Mais il n'est pas sûr que la France y gagne, et encore moins les autres pays.
+
 830;70;FRCon|FRSubjpron+^FRNegWord+^"y";*|+FRNegStop;
 
+/*		830. J'ai pas faim j'ai soif.
 /* Cleaning
 
 740;70;^typeRelation+^SBegin|FRAndOrBut|FRBeginrel;*|*|-FRBeginrel;
+
+/*		740. Ce système n'est pas nouveau et ne nécessite donc pas de mesures spécifiques de contrôle.
+
 386;70;FRNegation+FRNegStop;-FRNegStop;
+
+/*		386. Œil rouge, douloureux, sans baisse d'acuité visuelle.
+
 403;70;FRNegBegin;-FRNegStop;
 
+/*		403. Il ne sait plus s'il a vraiment envie d'y aller.
 /* SENTIMENT
 /* =========
 /* Expansion of sentiment to the left-hand part of the path
@@ -638,12 +1740,28 @@
 /*============================
 
 703;90;FRSConj+FRSConj2;-FRSConj2;default to avoid conflicting labels
+
+/*		703. Pour parvenir à un tel résultat, l'Etat souhaiterait limiter à 1% par an.
+
 705;90;FRSConj2+FRSRel;-FRSConj2;default to avoid conflicting labels
+
+/*		705. On a huit fois plus de chance d'avoir un accident corporel si on est somnolent.
+
 742;90;FRBeginrel|FRBeginrel;^FRBeginrel|-FRBeginrel;
+
+/*		742. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé.
+
 738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase)
+
+/*		738. Ce n'est pas que les gens conduisent mal, mais c'est qu'ils ont un mauvais comportement.
+
 718;$;FRAdv+FRAdvManner:FRAdvDegree:FRAdvTime:FRAdvModal;-FRAdv;
+
+/*		718. L'organisation s’est engagée à définir plus clairement les coûts.
+
 719;$;FRAdv+FRAdvTemp:FRAdvLoc:FRMod;-FRAdv;
 
+/*		719. Cependant, les déficiences restantes signalées ci-après ont été décelées dans les systèmes de contrôle et de surveillance.
 /* Rewrite language specific labels to unified labels
 /*===================================================
 

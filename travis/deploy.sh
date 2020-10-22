@@ -24,7 +24,7 @@
 # - TRAVIS_COMMIT is the commit hash for current build
 # - PYVERSIONS (windows and osx only) is the space-delimited Python versions
 #   present, ordered old to new
-# - PYINSTALL_DIR (windows only) is location Python is installed
+# - PYINSTALL_DIR (windows only) is the location Python is installed
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI. If unset,
@@ -34,8 +34,8 @@
 
 set -euxo pipefail
 
-if [[ "$TRAVIS_BRANCH" == "master" ]] && \
-    [[ "$TRAVIS_PULL_REQUEST" == "false" ]] && \
+if [ "$TRAVIS_BRANCH" = "master" ] && \
+    [ "$TRAVIS_PULL_REQUEST" = "false" ] && \
     [ -n "${PYPI_TOKEN+x}" ] && [ -n "${TESTPYPI_TOKEN+x}" ] && \
     git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null
 then

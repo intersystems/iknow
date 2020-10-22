@@ -69,7 +69,7 @@ case "$PROCESSOR" in
     export IKNOWPLAT=lnxrhppc64le
     ;;
   *)
-    echo "Processor type $(uname -p) is not supported"
+    echo "Processor type $PROCESSOR is not supported"
     exit 1
     ;;
 esac
@@ -79,7 +79,7 @@ make -j $(nproc)
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
 
 # install Python package dependencies and build initial wheels
 chown -R root "$PIP_CACHE_DIR"
