@@ -165,8 +165,8 @@ void a_short_demo(void)
 	for (SentenceIterator it_sent = engine.m_index.sentences.begin(); it_sent != engine.m_index.sentences.end(); ++it_sent) { // loop over the sentences
 		const Sentence& sent = *it_sent; // get a sentence reference
 
-		const size_t start = sent.offset_start(); // start position of the text
-		const size_t stop = sent.offset_stop(); // stop position of the text
+		const size_t start = sent.offset_start(); // start position of the sentence
+		const size_t stop = sent.offset_stop(); // stop position of the sentence
 
 		String SentenceText(&Text_Source[start], &Text_Source[stop]); // reconstruct the sentence
 		std::string SentenceTextUtf8 = IkStringEncoding::BaseToUTF8(SentenceText); // convert it back to utf8
