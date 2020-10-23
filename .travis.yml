@@ -15,49 +15,37 @@ env:
 
 before_install: . travis/dependencies.sh
 
+# common configuration for manylinux builds
+_manylinux: &manylinux
+  os: linux
+  dist: focal
+  services: docker
+  cache:
+    directories:
+      - $ICUDIR
+      - $HOME/ccache
+      - $HOME/pipcache  # pip cache for container
+      - $HOME/.cache/pip  # pip cache for host
+
 jobs:
   include:
-    - name: manylinux2014_aarch64
-      os: linux
-      dist: focal
+    - <<: *manylinux
+      name: manylinux2014_aarch64
       arch: arm64-graviton2
       virt: lxd
       group: edge
-      services: docker
-      cache:
-        directories:
-          - $ICUDIR
-          - $HOME/ccache
-          - $HOME/pipcache  # pip cache for container
-          - $HOME/.cache/pip  # pip cache for host
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
-    - name: manylinux2014_ppc64le
-      os: linux
-      dist: focal
+    - <<: *manylinux
+      name: manylinux2014_ppc64le
       arch: ppc64le
-      services: docker
-      cache:
-        directories:
-          - $ICUDIR
-          - $HOME/ccache
-          - $HOME/pipcache
-          - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
-    - name: manylinux2010_x86_64
-      os: linux
-      dist: focal
+    - <<: *manylinux
+      name: manylinux2010_x86_64
       arch: amd64
-      services: docker
-      cache:
-        directories:
-          - $ICUDIR
-          - $HOME/ccache
-          - $HOME/pipcache
-          - $HOME/.cache/pip
       script: >-
         $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64:$MANYLINUX2010_X86_64_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
