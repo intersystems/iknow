@@ -170,30 +170,33 @@ namespace iknowdata { // to bundle all generated data
 class IKNOW_API UserDictionary
 {
 public:
-	UserDictionary(); //ctor
-	void clear() {
-		m_user_data.clear();
-	}
-	// Adds User Dictionary label to a lexical representation for customizing purposes
+	// Clear the User Dictionary object
+	void clear();
+
+	// Tag User Dictionary label to a lexical representation for customizing purposes
+	// Currently available labels are : "UDNegation", "UDPosSentiment", "UDNegSentiment", "UDConcept", "UDRelation", "UDNonRelevant", "UDUnit", "UDNumber" and "UDTime"
+	// Returns iKnowEngine::iknow_unknown_label if an invalid label is passed as parameter.
 	int addLabel(const std::string& literal, const char* UdctLabel);
 
-	// Add User Dictionary literal rewrite, not functional.
-	int addEntry(const std::string& literal, const std::string& literal_rewrite);
+	// Add User Dictionary literal rewrite, *not* functional, added for compatibility with the IRIS implementation.
+	// The purpose is to rewrite like "dr." to "doctor", to aggregate similar lexical representations.
+	void addEntry(const std::string& literal, const std::string& literal_rewrite);
 
-	// Add User Dictionary EndNoEnd, not functional. 
-	int addSEndCondition(const std::string& literal, bool b_end = true);
+	// Add User Dictionary EndNoEnd, enables force/suppress sentence end conditions.
+	// See iKnowUnitTests::test5() for an example.
+	void addSEndCondition(const std::string& literal, bool b_end = true);
 
 	// Shortcut for known UD labels
-	int addConceptTerm(const std::string& literal);
-	int addRelationTerm(const std::string& literal);
-	int addNonrelevantTerm(const std::string& literal);
+	void addConceptTerm(const std::string& literal); // tag literal as a concept
+	void addRelationTerm(const std::string& literal); // tag literal as a relation
+	void addNonrelevantTerm(const std::string& literal); // tag literal as a non-relevant
 
-	int addUnitTerm(const std::string& literal);
-	int addNumberTerm(const std::string& literal);
-	int addTimeTerm(const std::string& literal);
-	int addNegationTerm(const std::string& literal);
-	int addPositiveSentimentTerm(const std::string& literal);
-	int addNegativeSentimentTerm(const std::string& literal);
+	void addUnitTerm(const std::string& literal); // tag literal as a unit
+	void addNumberTerm(const std::string& literal); // tag literal as a number
+	void addTimeTerm(const std::string& literal); // tag literal as a time indicator
+	void addNegationTerm(const std::string& literal); // tag literal as a negation
+	void addPositiveSentimentTerm(const std::string& literal); // tag literal as a positive sentiment
+	void addNegativeSentimentTerm(const std::string& literal); // tag literal as a negative sentiment
 
 private:
 	friend class iKnowEngine;
@@ -205,8 +208,7 @@ class IKNOW_API iKnowEngine
 public:
 	enum errcodes {
 		iknow_language_not_supported = -1, // unsupported language
-		iknow_unknown_label = -2,	// udct_addLabel : label does not exist
-		iknow_user_dictionary_already_loaded = -3 // user dictionary is already loaded
+		iknow_unknown_label = -2	// udct addLabel : label does not exist
 	};
 
 	// returns set of supported languages
@@ -233,7 +235,9 @@ public:
 
 
 	// User dictionary methods :
-	int loadUserDictionary(UserDictionary& udct);
+	//     loadUserDictionary : will load *and* activate the user dictionary object, if a previously one is active, it will be unloaded and deactivated, will throw an exception if the udct object cannot be loaded.
+	//     unloadUserDictionary : will unload and deactivate the active user dictionary.
+	void loadUserDictionary(UserDictionary& udct);
 	void unloadUserDictionary(void);
 
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.

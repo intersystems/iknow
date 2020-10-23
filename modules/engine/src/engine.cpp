@@ -364,7 +364,12 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 }
 
 // Constructor
-UserDictionary::UserDictionary() {
+//UserDictionary::UserDictionary() {
+//}
+
+// Clear the User Dictionary object.
+void UserDictionary::clear() {
+	m_user_data.clear();
 }
 
 // Adds User Dictionary label to a lexical representation for customizing purposes
@@ -374,56 +379,52 @@ int UserDictionary::addLabel(const std::string& literal, const char* UdctLabel)
 	if (m_user_data.addLexrepLabel(normalized, UdctLabel) == -1) return iKnowEngine::iknow_unknown_label; // add to the udct lexreps
 	return 0; // OK
 }
+
 // Add User Dictionary literal rewrite, not functional.
-int UserDictionary::addEntry(const std::string& literal, const string& literal_rewrite) {
-	return -1; // we cannot rewrite input text as long as we use text offsets to annotate text.
+void UserDictionary::addEntry(const std::string& literal, const string& literal_rewrite) {
+	return; // we cannot rewrite input text as long as we use text offsets to annotate text.
 }
 
 // Add User Dictionary EndNoEnd. 
-int UserDictionary::addSEndCondition(const std::string& literal, bool b_end)
+void UserDictionary::addSEndCondition(const std::string& literal, bool b_end)
 {
 	m_user_data.addSEndCondition(literal, b_end);
-	return 0;
 }
 
 // Shortcut for known UD labels
-int UserDictionary::addConceptTerm(const std::string& literal) {
-	return addLabel(literal, "UDConcept");
+void UserDictionary::addConceptTerm(const std::string& literal) {
+	addLabel(literal, "UDConcept");
 }
-int UserDictionary::addRelationTerm(const std::string& literal) {
-	return addLabel(literal, "UDRelation");
+void UserDictionary::addRelationTerm(const std::string& literal) {
+	addLabel(literal, "UDRelation");
 }
-int UserDictionary::addNonrelevantTerm(const std::string& literal) {
-	return addLabel(literal, "UDNonRelevant");
+void UserDictionary::addNonrelevantTerm(const std::string& literal) {
+	addLabel(literal, "UDNonRelevant");
 }
-int UserDictionary::addUnitTerm(const std::string& literal) {
-	return addLabel(literal, "UDUnit");
+void UserDictionary::addUnitTerm(const std::string& literal) {
+	addLabel(literal, "UDUnit");
 }
-int UserDictionary::addNumberTerm(const std::string& literal) {
-	return addLabel(literal, "UDNumber");
+void UserDictionary::addNumberTerm(const std::string& literal) {
+	addLabel(literal, "UDNumber");
 }
-int UserDictionary::addTimeTerm(const std::string& literal) {
-	return addLabel(literal, "UDTime");
+void UserDictionary::addTimeTerm(const std::string& literal) {
+	addLabel(literal, "UDTime");
 }
-int UserDictionary::addNegationTerm(const std::string& literal) {
-	return addLabel(literal, "UDNegation");
+void UserDictionary::addNegationTerm(const std::string& literal) {
+	addLabel(literal, "UDNegation");
 }
-int UserDictionary::addPositiveSentimentTerm(const std::string& literal) {
-	return addLabel(literal, "UDPosSentiment");
+void UserDictionary::addPositiveSentimentTerm(const std::string& literal) {
+	addLabel(literal, "UDPosSentiment");
 }
-int UserDictionary::addNegativeSentimentTerm(const std::string& literal) {
-	return addLabel(literal, "UDNegSentiment");
+void UserDictionary::addNegativeSentimentTerm(const std::string& literal) {
+	addLabel(literal, "UDNegSentiment");
 }
 
 // Load a User Dictionary into the iKnow engine
-int iKnowEngine::loadUserDictionary(UserDictionary& udct)
+void iKnowEngine::loadUserDictionary(UserDictionary& udct)
 {
-	if (pUserDCT == NULL)
-		pUserDCT = new SharedMemoryKnowledgebase(udct.m_user_data.generateRAW(false));	// first use generation.
-	else
-		return iKnowEngine::iknow_user_dictionary_already_loaded;
-
-	return 0;
+	unloadUserDictionary(); // we can only have one
+	pUserDCT = new SharedMemoryKnowledgebase(udct.m_user_data.generateRAW(false));	// first use generation.
 }
 
 // Unload the User Dictionary

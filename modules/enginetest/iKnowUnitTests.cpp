@@ -101,7 +101,7 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 	user_dictionary.addNumberTerm("magic number");
 	user_dictionary.addTimeTerm("future");
 
-	int ret = engine.loadUserDictionary(user_dictionary);
+	engine.loadUserDictionary(user_dictionary);
 	String text_source2(IkStringEncoding::UTF8ToBase("some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"));
 
 	engine.index(text_source2, "en", true); // generate Traces
