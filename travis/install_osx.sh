@@ -17,9 +17,6 @@
 
 set -euxo pipefail
 
-# Homebrew packages
-brew install dos2unix ccache
-
 # If we're building a push to the master branch, check whether Travis has
 # updated pyenv. If so, trigger GitHub actions if we have permission to do so.
 PYENV_TOOL_VERSION_CURRENT="$(brew list --versions pyenv)"
@@ -114,3 +111,6 @@ for PYTHON in $PKG_INSTALLED_CMDS; do
   "$PYTHON" get-pip.py
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
+
+# Homebrew packages
+brew install dos2unix ccache
