@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/intersystems/iknow.svg?branch=master)](https://travis-ci.com/intersystems/iknow) [![PyPI version](https://badge.fury.io/py/iknowpy.svg)](https://pypi.org/project/iknowpy)
+[![Build Status](https://travis-ci.com/intersystems/iknow.svg?branch=master)](https://travis-ci.com/intersystems/iknow) [![PyPI version](https://img.shields.io/pypi/v/iknowpy?logo=pypi)](https://pypi.org/project/iknowpy) [![Python versions](https://img.shields.io/pypi/pyversions/iknowpy?logo=python)](https://pypi.org/project/iknowpy)
 
 # iKnow
 
