@@ -1,5 +1,11 @@
 language: cpp
 
+# Don't build the commits to the autoupdate- branches that the dependency
+# autoupdater creates. These builds are redundant with the PR builds.
+branches:
+  except:
+    - /^autoupdate-/
+
 env:
   global:
     # Docker run command with arguments common to all manylinux builds
@@ -25,7 +31,7 @@ jobs:
           - $HOME/pipcache  # pip cache for container
           - $HOME/.cache/pip  # pip cache for host
       script: >-
-        $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64 /iknow/travis/build_manylinux.sh &&
+        $DOCKER_RUN quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
     - name: manylinux2014_ppc64le
       os: linux
@@ -39,7 +45,7 @@ jobs:
           - $HOME/pipcache
           - $HOME/.cache/pip
       script: >-
-        $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le /iknow/travis/build_manylinux.sh &&
+        $DOCKER_RUN quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
     - name: manylinux2010_x86_64
       os: linux
@@ -53,7 +59,7 @@ jobs:
           - $HOME/pipcache
           - $HOME/.cache/pip
       script: >-
-        $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64 /iknow/travis/build_manylinux.sh &&
+        $DOCKER_RUN quay.io/pypa/manylinux2010_x86_64:$MANYLINUX2010_X86_64_TAG /iknow/travis/build_manylinux.sh &&
         travis/deploy.sh
     - name: Mac OS X 10.9 x86_64
       os: osx

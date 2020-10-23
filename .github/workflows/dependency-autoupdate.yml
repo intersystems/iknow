@@ -5,6 +5,7 @@
 # - buildcache
 # - Python for Windows
 # - Cython
+# - manylinux
 # In addition, whenever Travis CI updates its Mac OS X build machines so that a
 # new version of pyenv is available, we check for updates to Python on Mac OS X.
 #
@@ -90,6 +91,32 @@ jobs:
             A new version of Cython is available.
 
             For details of the release, see https://cython.readthedocs.io/en/latest/src/changes.html.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-manylinux:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: install requests Python package
+        run: pip3 install --user requests
+      - name: search for update
+        run: $GITHUB_WORKSPACE/.github/workflows/update_manylinux.py
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: "[autoupdate-manylinux] update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
+          branch: autoupdate-manylinux
+          delete-branch: true
+          title: "[autoupdate] Update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
+          body: |-
+            A new manylinux image is available.
+
+            ${{ env.MANYLINUX_UPDATE_INFO_MULTILINE }}
+
+            For details regarding manylinux images, see https://github.com/pypa/manylinux.
 
             *I am a bot, and this action was performed automatically.*
 
