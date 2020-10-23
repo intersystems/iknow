@@ -364,8 +364,8 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 }
 
 // Constructor
-//UserDictionary::UserDictionary() {
-//}
+UserDictionary::UserDictionary() {
+}
 
 // Clear the User Dictionary object.
 void UserDictionary::clear() {

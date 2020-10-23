@@ -170,6 +170,8 @@ namespace iknowdata { // to bundle all generated data
 class IKNOW_API UserDictionary
 {
 public:
+	UserDictionary(); // ctor
+
 	// Clear the User Dictionary object
 	void clear();
 

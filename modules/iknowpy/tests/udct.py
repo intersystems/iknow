@@ -11,7 +11,9 @@ import iknowpy
 
 engine = iknowpy.iKnowEngine()
 user_dictionary = iknowpy.UserDictionary()
-ret = user_dictionary.add_label("some text", "UDUnit")
+user_dictionary.add_label("some text", "UDUnit")
+# following line will throw an exception : Unkown label
+# user_dictionary.add_label("tik tok", "UDUnknown")
 user_dictionary.add_sent_end_condition("Fr.", False)
 
 user_dictionary.add_concept("one concept")
