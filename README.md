@@ -16,7 +16,7 @@ This readme file has everything you need to get started, but make sure you click
   - [Entities](#entities)
   - [Attributes](#attributes)
   - [How it works](#how-it-works)
-- [Building iKnow](#building-iknow)
+- [Building the iKnow Engine](#building-the-iknow-engine)
 - [Contributing to iKnow](#contributing-to-iknow)
 
 # Using iKnow
