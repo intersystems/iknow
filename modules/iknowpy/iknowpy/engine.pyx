@@ -62,11 +62,6 @@ cdef class UserDictionary:
 		raise ValueError('User Dictionary Label {!r} is unknown.'.format(UdctLabel))
 
 	@cython.binding(True)
-	def add_entry(self, str literal: typing.Text, str literal_rewrite: typing.Text) -> None:
-		"""Rewrite a literal."""
-		return self.user_dictionary.addEntry(literal, literal_rewrite)
-
-	@cython.binding(True)
 	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> None:
 		"""Add a sentence end condition."""
 		return self.user_dictionary.addSEndCondition(literal, bSentenceEnd)

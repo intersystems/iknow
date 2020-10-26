@@ -76,7 +76,6 @@ cdef extern from "../../engine/src/engine.h" nogil:
 		void clear() except +
 
 		int addLabel(const string& literal, const char* UdctLabel) except +
-		void addEntry(const string& literal, const string& literal_rewrite) except +
 		void addSEndCondition(const string& literal, cpp_bool b_end) except +
 
 		void addConceptTerm(const string& literal) except +
