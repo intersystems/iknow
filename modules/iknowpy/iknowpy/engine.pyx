@@ -59,6 +59,8 @@ cdef class UserDictionary(object):
 	def __init__(self, load_entries=[]):
 		self.entries = []
 		# load one by one so they also trigger the C++ side
+		if isinstance(load_entries, UserDictionary):
+			load_entries = load_entries.entries
 		for e in load_entries:
 			if isinstance(e, Entry):
 				self.add_label(e.literal, e.label)
