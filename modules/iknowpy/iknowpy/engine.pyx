@@ -58,15 +58,7 @@ cdef class UserDictionary(object):
 
 	def __init__(self, load_entries=None):
 		self._entries = []
-		# load one by one so they also trigger the C++ side
-		if isinstance(load_entries, UserDictionary):
-			load_entries = load_entries.entries
-		if load_entries != None:
-			for e in load_entries:
-				if isinstance(e, Entry):
-					self.add_label(e.literal, e.label)
-				else:
-					self.add_label(e['literal'], e['label'])
+		self.add_all(load_entries)
 
 	@property
 	@cython.binding(True)
@@ -78,6 +70,19 @@ cdef class UserDictionary(object):
 		"""Clear the User Dictionary object"""
 		self.user_dictionary.clear()
 		self._entries = []
+
+	@cython.binding(True)
+	def add_all(self, load_entries = None) -> None:
+		""" Appends the contents of load_entries to this User Dictionary """
+		# load one by one so they also trigger the C++ side
+		if isinstance(load_entries, UserDictionary):
+			load_entries = load_entries.entries
+		if load_entries != None:
+			for e in load_entries:
+				if isinstance(e, Entry):
+					self.add_label(e.literal, e.label)
+				else:
+					self.add_label(e['literal'], e['label'])
 
 	@cython.binding(True)
 	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> None:
