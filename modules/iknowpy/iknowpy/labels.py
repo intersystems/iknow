@@ -3,7 +3,7 @@ class Labels:
 	# role labels
 	CONCEPT = "UDConcept"
 	RELATION = "UDRelation"
-	NONRELEVANT = "UDNonrelevant"
+	NONRELEVANT = "UDNonRelevant"
 
 	# attribute labels
 	NEGATION = "UDNegation"
