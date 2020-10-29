@@ -3,1130 +3,1862 @@
 /* PHASE 1: MANDATORY LABELS AND USER DICTIONARY ITEMS
 /* ===================================================
 /* REWRITE MANDATORY LABELS to language-specific labels
-
 10;1;CapitalInitial;^SVCapitalInitial;
+/*		10. Det senaste dödsbudet kom den 6 december.
 11;1;CapitalMixed;^SVCapitalMixed;
+/*		11. Lena var vårt förstaval, förklarade SvD styrelseordförande.
 12;1;CapitalAll;^SVCapitalAll;
+/*		12. Kungaparet företog ett informellt besök i USA.
 336;1;Punctuation;SVPunctuation;
-
+/*		336. Den är multidimensionell, mångbottnad och kontextuell.
 /* RELABEL USER DICTIONARY ITEMS
-
 727;1;UDNegation;+SVNegation;place before 730 and use + to avoid overwriting other UD-labels
+/*		727.UD. Mannen förnekar brott.
 728;1;UDPosSentiment;+SVPosSentiment;place before 730 and use + to avoid overwriting other UD-labels
+/*		728.UD. Pysselbok för flyktingbarn gör succé.
 729;1;UDNegSentiment;+SVNegSentiment;place before 730 and use + to avoid overwriting other UD-labels
+/*		729.UD. Det blev en dålig start på hösten för klädhandeln.
 730;1;UDConcept;UDConcept+SVCon;
+/*		730.UD. I allmänhet tjänar de disputerade bättre utanför akademin, men detta gäller inte för alla områden.
 731;1;UDRelation;UDRelation+SVRel;
+/*		731.UD. Därigenom får fastighetsägare det underlag inför beslut som de behöver.
 732;1;UDNonRelevant;NonRelevant;
+/*		732.UD. En patient hade försämrats märkbart på grund av progredierande hematom.
+
 
 /* ==========================
 /* PHASE 10: THE WORD 'ELLER'
 /* ==========================
 /* eller is a negative conjunction after varken; detection of varken...eller with up to 8 elements in between them
-
 931;10;"varken"|*{1,9}^"eller"|"eller";SVNegrel+SVNegation|+SVList|SVNegrel+SVNegation+SVNegStart+SVAndOrBut;
+/*		931. Efter tre skilsmässor tillåts varken män eller kvinnor att gifta om sig med varandra. Enligt denna fysiska lag kan energi varken skapas (produceras) eller förintas. Här kan man läsa att EU har förbundit sig att varken bevilja lån, subventioner, bidrag eller skattelättnader.
 546;10;"varken"+^SVNegrel;SVInte+SVNegation;default for varken if no eller is found
+/*		546.  Exempelvis: varken att veta enbart detaljerna av en persons genetik, deras bakgrund och uppväxt, eller deras nuvarande situation är tillräckligt för att förstå deras beteende, men en djup förståelse av allt detta tillsammans kan hjälpa att förstå beteendet.
 547;10;"eller"+^SVNegrel;SVAndOrBut+SVAndOr;default for eller if not preceded by varken
+/*		547.  Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod.
+
 
 /* ========================
 /* PHASE 40: DISAMBIGUATION
 /* ========================
 /* Disambiguate through capitalization
 /* -----------------------------------
-
 16;40;SBegin|SVCapitalInitial;*|-SVCapitalInitial;ignore capital at beginning of sentence
+/*		16.  Daniel flög iväg med hjälp av 120 ballonger.
 17;40;":"|SVCapitalInitial+^SVConIfCap;SVPunctuation|-SVCapitalInitial;ignore capital after colon
+/*		17.  Larmet: Varannan kör för fort på vägarbeten.
 18;40;"-"|SVCapitalInitial;*|-SVCapitalInitial;ignore capital after -
 882;40;SBegin|SVLayout|SVCapitalInitial;*|SVLayout|-SVCapitalInitial;ignore capital after *
+/*		882. * Undvik nära kontakt med personer som du vet är sjuka.
 19;40;SVCapitalInitial+^SVIgnoreCap|SVCapitalInitial+^SVIgnoreCap;SVCon+SVCapitalInitial|SVCon+SVCapitalInitial;make capitalized words Concept
+/*		19.  Knappt 50 år senare invigdes Åhléns City, som ligger i hörnet Drottninggatan/Klarabergsgatan, nära Sergels torg.
 813;40;SVsVerbPart+SVCapitalInitial+SVRegex;SVAdj+SVGen;to account for names
+/*		813.  I går hade han ännu inte informerat Fairtrades ägare.
 172;40;SVConIfAllCap+SVCapitalAll;SVCon;make capitalized words Concept
+/*		172.  Akut diagnostik med DT eller MRT är nödvändig för att med säkerhet kunna skilja ischemisk stroke från intracerebral blödning (klass I, nivå A).
 21;40;SVConIfCap+SVCapitalInitial;SVCon+SVCapitalInitial;make capitalized words Concept
+/*		21.  2 § Annan arbetstvist än som avses i 1 § skall upptagas och avgöras av tingsrätt.
 556;40;SVCapitalInitial|"i"+SVCapitalAll;SVCon|SVCon;recognize names with roman numeral I
+/*		556.  Den 8 november 1913 efterträdde Ludvig formellt Otto I som kung under namnet Ludvig III av Bayern.
 616;40;SVCapitalInitial|"&"|SVCapitalInitial;SVCon|Join|+Join;recognize names with &
+/*		616.  (till exempel Cuban 1986, Dev & Walker 1999).
 14;40;":";+SVPunctuation;Punctuation is not assigned automatically since ":" is used in rules
+/*		14.  Ett något mindre dramatiskt exempel: vi kan använda mötesbordet som matbord och vice versa.
 1089;40;"-";+SVPunctuation;Punctuation is not assigned automatically since "-" is used in rules
+/*		1089. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
 /* Make multiword time indications one entity
 /* ------------------------------------------
-
 860;40;"den"|SVOrdnumber|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
+/*		860. — Den första januari 2022 blir jag pensionär.
 861;40;"den"|SVNum|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
+/*		861. Dessa lagändringar trädde i kraft den 1 april 2011.
 862;40;"den"|SVOrdnumber|SVMonth|"år"|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join|Join;
+/*		862. — Den första januari år 2022 blir jag pensionär.
 863;40;"den"|SVNum|SVMonth|"år"|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join|Join;
+/*		863. Den lägsta -31 °C, den 20 januari år 1814.
 908;40;"den"|SVOrdnumber|SVMonth|SVAdvTime;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
+/*		908. Här mördades en sjuttonårig pojke och en tjugoåttaårig man den fjärde september i år.
 909;40;"den"|SVNum|SVMonth|SVAdvTime;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
+/*		909. Den lägsta -31 °C, den 20 januari i år.
 858;40;"den"|SVOrdnumber|SVMonth;SVAdvTime+SVAdv+SVDate|Join|Join;
+/*		858. Den första maj, då solen genomlöper Oxens tecken.
 859;40;"den"|SVNum|SVMonth;SVAdvTime+SVAdv+SVDate|Join|Join;
+/*		859. Det senaste dödsbudet kom den 6 december.
 736;40;"senast"|"år"|SVYear;SVAdvTime+SVAdv|Join|Join;time indication, specific exception for 735
+/*		736. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 737;40;"senast"|SVMonth;SVAdvTime+SVAdv|+Join;
+/*		737. Vi vill att minst hälften av maten i skola och vård är ekologisk senast april år 2020.
 914;40;SVYear|"och"|"framåt";SVYear|Join|Join;
+/*		914. Vi talar trots allt om en period från 2013 och framåt.
 915;40;SVMonth|"och"|"framåt";SVMonth|Join|Join;
+/*		915. När väl växelkursen har fastställts, dvs. från och med juli och framåt, måste landet visa att det inte bara är intresserat av sitt eget medlemskap i euroområdet, utan även tar ansvar för de övriga länderna i regionen.
 735;40;^SVMonth+^SVbCon+^SBegin|"år"|SVYear;*|SVAdvTime+SVAdv+SVDate|Join;
+/*		735. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
 922;40;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
+/*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
 
 /* Disambiguate specific words
 /* ---------------------------
 /* *** plus and + ***
-
 25;40;SVNumber|"plus";SVNumber|Join;
+/*		25. Cirka fem miljoner plus per år, de senaste åren.
 864;40;^SVNum+^SVDecinum+^SBegin|SVPlussign|^SVNum+^SVDecinum+^SVPlussign+^SEnd;*|SVAndOrBut|*;
+/*		864. Lipofila ämnen: Fettlösliga är i första hand de mycket stora grupperna av kolväten (C + H) och klorkolväten (C + H + Cl).
 
 /* *** man ***
-
 119;40;SVIndefart:SVAttrpron:SVOrdnumber|"man";*|SVCon;
+/*		119. En man larmade polisen. Hon såg snabbt vad som behövde göras, ingen man behövde be om att göra saker. Depressionssjukdom drabbar omkring varannan kvinna och var fjärde man.
 122;40;SVIndefart|SVAdj:SVCon|"man";*|SVAdj|SVCon;
-
+/*		122. En svensk man i 20-årsåldern. En 29-årig man fick föras till sjukhus med ambulans med djupa sår på halsen och huvudet. WRONG: En slutsats man kan dra utifrån deras synpunkter är att dessa faser inte i första hand upplevs innefatta vad handledarna ser som etiska konflikter eller problem.
 /* Remark 1: this rule uses SVCon because adjectives are not labeled as SVAdj
 /* Remark 2: similar rule with SVDemonstr gave bad results
-/* *** avseende ***
 
+/* *** avseende ***
 144;40;"avseende"|SVCon;SVPrep|*;
+/*		144. Avseende detaljer så är dock allting avbildat så noga det har låtit sig göras och med ambitionen att göra så få generaliseringar som möjligt.
 529;40;"avseende"|SVAdj;SVPrep|SVAdj;
+/*		529. Regleringen avseende försäkringens omfattning hindrar inte att sedvanliga försäkringsrättsliga eller skadeståndsrättsliga principer kan tillämpas vid bestämmande av ersättningens storlek.
 145;40;"avseende"|SVIndefart;SVPrep|*;
+/*		145. Framför allt saknas studier avseende ett eventuellt samband mellan A1-allelen och psykologiska förklaringsmodeller/mekanismer i relation till återfallsbenägenhet.
 147;40;"avseende"|SVPrespart;SVPrep|SVCon;
+/*		147. Gynekologisk undersökning avseende predisponerande orsaker som t ex slemhinneatrofi eller prolaps.
 146;40;"avseende"+^SVPrep;SVCon;
+/*		146. Enligt 30 kap. 4 § första stycket brottsbalken ska rätten vid val av påföljd fästa särskilt avseende vid omständigheter som talar för en lindrigare påföljd än fängelse.
 
 /* *** en+prep+number ***
-
 169;40;"en"|SVPrep|SVNumber;SVNumber|SVPrep|SVNumber;
+/*		169. Förutom akut luftrörsvidgande medicin behöver man även öka dosen av detta under en till två veckor.
 
 /* *** de ***
-
 954;40;"de"|SVAux:SVpAux:SVmAux:SVVerb;SVSubjpron|*;
+/*		954. Om de blir inflammerade och slemhinnorna svullnar kan man bli täppt i bihålorna och få bihåleinflammation. Barnmorskor bör rådgöra med läkare innan de förskriver kombinerade hormonpreparat. Om de vill.
 386;40;"de"|SVVerbInf;SVSubjpron|SVVerb;
+/*		386. Texterna skrivs av apotekare och granskas noga av olika experter innan de publiceras.
 907;40;SVPrep|"de"|SVSom;SVPrep|SVObjpron|*;
+/*		907. Av de som får behandling innan sjukdomen har spritt sig från lungorna lever hälften efter fem år.
 289;40;SVPrep|"de"+SVDefart|^SVSom+^SEnd+^SVInte;SVPrep|SVDemonstr+SVDefart|*;
+/*		289. Med tiden blir materialet till ett delta, som kan få olika form beroende på de lokala bottenförhållandena samt våg-styrka och tidvatten.
 288;40;SVConj|"de"|^SVCon+^SVAdj+^SVPart+^SVOrdnumber+^SEnd;SVConj|SVSubjpron|*;
+/*		288. Tack vare de eroderande krafterna samlar en vanlig flod upp flera miljoner ton sediment på sin väg.
 
 /* *** annan / annat / andra ***
-
 827;40;SVIndefart|SVAnnan|SVCon;*|SVAdj|*;
+/*		827. I artikelns andra del rör vi oss mot en annan dimension av verbmetoden.
 828;40;SVIndefart|SVAnnan|SVAdj;*|SVAdj|^SVCon;
+/*		828. En annan viktig upptäckt var maserstrålning.
 838;40;SVIndefart|SVAnnan|SVAdvAdj;*|SVAttrpron+SVAdjpron|SVAdj;
+/*		838. Inte heller får en myndighet eller ett annat allmänt organ ingripa mot någon för att han eller hon i ett radioprogram eller en teknisk upptagning har brukat sin yttrandefrihet eller medverkat till ett sådant bruk.
 839;40;SVIndefart|"annat"|SVImpCon;*|SVAdj|SVCon;
+/*		839. Litteratur är ett omfattande begrepp med vaga gränser mot åt ett håll vardagliga konversationer och åt ett annat håll andra typer av kultur.
 868;40;SVIndefart|SVAnnan|SVPunctuation:SEnd;SVSubjpron+SVObjpron|+Join|*;
+/*		868. Utbyte av ett antidepressivt medel mot ett annat. Med lite andra begynnelsevillkor får vi ett annat, men likartat, mönster.
 927;40;SVIndefart|SVAnnan|typeRelation;SVSubjpron+SVObjpron|+Join|*;
+/*		927. Retoriken används så snart en mänsklig varelse på något sätt vill påverka en annan med hjälp av tecken och symboler.
 829;40;SVIndefart|SVAnnan;*|SVSubjpron+SVObjpron+SVAttrpron+SVAdjpron;default
+/*		829. Fullmäktige får dock överlåta till styrelsen eller en annan nämnd att besluta i ett ärende som har väckts genom medborgarförslag, utom i de fall som anges i 3 kap. 9 §.
 830;40;"någon"|SVAnnan|SVCon;SVIndefart|SVAdj|*;
+/*		830. Det sätt på vilket en artefakt används är emellertid inte självklar eller given på förhand av tekniken själv eller någon annan determinant.
 831;40;"någon"|SVAnnan|SVAdj;SVIndefart|SVAdj|^SVCon;annan = adj before adjective or genitive
+/*		831. Han framförde under rättegången att han inte såg någon annan tänkbar påföljd än livstids fängelse.
 832;40;"någon"|SVAnnan;SVSubjpron+SVObjpron+SVAttrpron|+Join;default
+/*		832. Signar är en fattig änkling som inte har någon annan i världen än den unga dottern Rut.
 834;40;"något"|SVAnnan|SVCon;SVIndefart|SVAdj|*;
+/*		834. I Värmland uppstod en något annan tradition.
 837;40;"något"|SVAnnan|SVAdvAdj;SVIndefart|SVAttrpron+SVAdjpron|SVAdj;annat = adj before adjective or genitive
+/*		837. för brottslig verksamhet eller för något annat socialt nedbrytande beteende.
 840;40;"något"|"annat"|SVImpCon;SVIndefart|SVAdj|SVCon;att = adj before ImpCon
+/*		840. Punktskatter har ofta använts för att höja priset och på det viset styra bort konsumtion från sådant som anses ohälsosamt, miljöfarligt eller olämpligt på något annat sätt.
 836;40;"något"|SVAnnan;SVSubjpron+SVObjpron+SVAttrpron|+Join;default
+/*		836. Något annat kan vi inte lova.
 833;40;SVAnnan;-SVAnnan;remove label to avoid conflicts
+/*		833. I 15:3 stadgades att sådan hävd gäller ifråga om utjord eller urfjäll samt kvar eller kvarnställe, eller annat vattenverk, eller öar och holmar.
 816;40;SVDefart|"andra"|SVCon;SVDefart|SVAdj|*;andra = adj before non-specified concept
+/*		816. Om jag började dansa på bordet under ett viktigt möte skulle de andra deltagarna förmodligen tro att jag var korkad, galen, ignorant eller obildad.
 820;40;SVDefart|"andra"|SVAdj;SVDefart|SVAdj|*;andra = adj before adjective or genitive
+/*		820. Så är det emellertid inte, eftersom den andra grafiska meningen består av fyra syntaktiska meningar (makrosyntagmer), i ett fall åtskilda av kommatecken.
 817;40;SVDefart|"andra"+^SVAdj;SVSubjpron+SVObjpron+SVAttrpron|+Join;default
+/*		817. För att hantera den får man överlägga: ge skäl för sin egen syn på saken och lyssna på vad den andra har att säga.
 822;40;SVConpart1|"andra";SVAdj|SVAdj;
+/*		822. Rådet för forskningens infrastrukturer ska bestå av en ordförande och det antal andra ledamöter som Vetenskapsrådet bestämmer.
 823;40;SVGen|"andra";^SVGen|SVAdj;
+/*		823. Sambandet mellan energi och exergi framgår av termodynamikens andra huvudsats.
 826;40;SVPossibleGennoun|"andra";^SVGen|SVAdj;
+/*		826. Det första varuhuset utanför Sverige – och tillika Ikeas andra varuhus – öppnades 1963 i Asker utanför Oslo.
 824;40;SVNum|"andra";^SVNum|SVAdj;
+/*		824. Över 30 andra skadades i krocken, uppger polisen.
 825;40;SVNumber|"andra";^SVNumber|SVAdj;
+/*		825. 1 § Arbetsdomstolen består av högst fyra ordförande, högst fyra vice ordförande samt sjutton andra ledamöter.
 821;40;"andra"|SVAndOrBut|SVOrdnumber;SVOrdnumber|^SVAndOrBut|^SVOrdnumber;
+/*		821. Vill någon ledamot vid handläggning enligt andra eller tredje stycket att ett mål ska avgöras eller en viss fråga prövas av domstolen i den sammansättning som föreskrivs i första stycket, gäller ledamotens mening.
 819;40;"andra"+^SVAdj+^SVOrdnumber;SVSubjpron+SVObjpron+SVAttrpron+SVAdjpron;default
+/*		819. Det finns andra i omgivningen med samma besvär. Detsamma gällde för andra konsthantverksutbildningar.
 
 /* *** någon ***
-
 1184;40;SVInte|*{1,2}^"någon"+^SVAtt|"någon"|^SVVerb+^SVVerbInf+^SVInf+^SVAtt+^SVConj+^SVComma;*|*|SVIndefart|*;
+/*		1184. Polisen har inte gripit någon misstänkt.
 
 /* *** respektive ***
-
 299;40;SVPrep|"respektive"|^SVPrep+^SVPrepAdv+^SEnd;SVPrep|SVAdj|*;
+/*		299. Här handlar det om lärare, forskare och studerande, som odlar sina respektive vetenskaper enligt vad som gäller inom ramen för respektive specialitet.
 302;40;SVConj|"respektive";SVPrep|SVAdj;
+/*		302. Som stöd för kunskapsdokumentet finns bakgrundsdokument som respektive författare ansvarar för.
 300;40;SVPosspron|"respektive";SVPosspron|SVAdj;
+/*		300. Språkhandlingarna och textaktiviteterna måste alltså friläggas på sina respektive nivåer.
 362;40;SVAttrpron+^SVSubjpron+^SVObjpron|"respektive";SVAttrpron|SVAdj;
+/*		362. Det visar sig att alla de respektive sambanden kvarstår.
 301;40;"respektive"+^SVAdj;SVAndOrBut;
+/*		301. En femte förklaring är hur politiserat respektive tekniskt som ett område anses vara.
 
 /* *** var ***
-
 500;40;"var"|SVOrdnumber+^"första";+SVAttrpron+SVAdjpron|^SVOrdnumber;
+/*		500. Omkring var femte bröstcancer innehåller stora mängder av tillväxtfaktorn HER2, som stimulerar cancerns tillväxt.
 
 /* *** senare ***
-
 565;40;SVAdvDegree|SVNumber:SVNum:SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join|Join;
+/*		565. Kompletterande formuleringar infördes nästan hundra år senare i Kristoffers landslag (JB kap. 1) från 1442. Nästan ett år senare är ledarskapsutbildningen färdig. Knappt 50 år senare invigdes Åhléns City, som ligger i hörnet Drottninggatan/Klarabergsgatan, nära Sergels torg.
 562;40;SVNumber:SVNum|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
+/*		562. Två år senare började hon på den då nystartade Guldsmedsskolan i Strålsnäs. Det är då intressant om den förespråkas 2000 år senare i en annan social miljö.
 569;40;SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
+/*		569. Produktionsstart beräknas nu till i slutet av 2019, ett år senare än tidigare plan.
 850;40;SVAttrpron|SVTimeconcept|"senare";SVAdvTime+SVAdv-SVAdjpron|Join|Join;
+/*		850. Några dagar senare hade omkring fyrtio personer investerat 500 dollar.
 851;40;SVTimeconcept|"senare";SVAdvTime+SVAdv|Join;
+/*		851. Anta att om Karl XII hade lyckats undgå den kula som faktiskt dödade honom så hade han ändå dött sekunderna senare av en annan kula.
 847;40;SVDefart|"senare"|SVmAux:SVAux:SVVerb;SVSubjpron+SVObjpron|Join|*;
+/*		847. Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod. Det senare har nu bland annat uttryckts i regeringsformen som en av riksdagsutskottens uppgifter (4 kap. 8 § RF). Hos de senare ökar fotorespirationen med stigande temperatur.
 564;40;"senare";SVAdvAdj+SVAdvTemp;
+/*		564. Sten och grus är tyngst och avlagras först, medan sand, dy och botten-slam fälls ut senare under den 3000 kilometer långa resan.
 
 /* *** (för ...) sedan ***
-
 852;40;"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|Join|Join;
+/*		852. – Jag var och hälsade på henne för ett par veckor sedan så jag visste ju.
 932;40;"för"|*{1,4}^SVTimeconcept+^"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|+Join|Join|Join;
-
 /* *** sedan ... tillbaka ***
-
 916;40;"sedan"|SVTimeconcept|"tillbaka";SVAdvTime|Join|Join;
+/*		916. Har ett intresse av aktier sedan tag tillbaka och börjar så smått lära mig mer och mer.
 933;40;"sedan"|*{1,3}^SVTimeconcept|SVTimeconcept|"tillbaka";SVAdvTime+SVAdv|+Join|Join|Join;
+/*		933. Årligen har de en omsättning på sju miljarder kronor årligen och sedan tre år tillbaka ägs de av ABCD Invest. SVT har följt dem tätt sedan väldigt många år tillbaka.
 
 /* *** sedan: other cases ***
-
 309;40;SVSedan|SVCon:SVAdj:SVYear:SVAdvTime;SVPrep|*;
+/*		309. Det har gått 40 år sedan Monty Python senast stod på scen i Storbritannien. Där arbetade hon sedan hela livet. De rättsliga och politiska ramarna för styrningen av den offentliga förvaltningen har sedan 1974 genomgått omfattande förändringar. Kunskap ger tillväxt, det är mitt nya slagord, sade Katrin, som sedan den 12 maj dessutom är vd för ABCD Invest.
 323;40;SVSedan|SVSubjpron+^SVAttrpron;SVConj|*;
+/*		323. Försurningen har ökat beroende på en minskning med 0.1 pH enheter sedan den industriella revolutionen startade.
 325;40;SVPunctuation|SVSedan|SVIndefart;SVPunctuation|SVAdvStruct+SVAdv|*;
+/*		325. Han refererar också till det didaktiska kontrakt i en matematikundervisning som inleds med att läraren går igenom nytt stoff, sedan ett urval av uppgifter varefter eleverna räknar på uppgifterna individuellt eller i grupp.
 324;40;SVSedan|SVIndefart:SVPosspron;SVConj|*;
+/*		324. Stora förväntningar ställs sedan ett drygt decennium på att den nya tekniken på olika sätt ska förändra och förbättra undervisningen (Almqvist 2006). Sedan en läktare rasat samman under den första spelningen, flyttades den andra till Söderstadion i juni.
 326;40;SVSedan|SVNum:SVNumber;SVPrep|*;
+/*		326. Det första fallet var en 32-årig kvinna med diabetes mellitus typ 1 sedan 17 års ålder. Carl XVI Gustaf, Carl Gustaf Folke Hubertus, född 30 april 1946 på Haga slott i Solna, Stockholms län, är Sveriges konung och statschef sedan 15 september 1973 då han efterträdde sin farfar Gustaf VI Adolf.
 330;40;SVSedan|"slutet";SVPrep|SVCon;
+/*		330. Dödligheten i kranskärlssjukdom har minskat kraftigt sedan slutet av 1980-talet.
 331;40;SVSedan|"i";SVPrep|SVPrep;
+/*		331. Den undersöks sedan i mikroskop.
 311;40;SVSedan+^SVPrep+^SVAdv;SVAdvStruct+SVAdv;
+/*		311. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
 
 /* *** dagen efter ***
-
 476;40;"dagen"|"efter"|SVVerb:SVVerbPart:SEnd;SVAdvTime+SVAdv|Join|*;
+/*		476. Författaren R.T. var tillsammans med sin hustru på väg för att uppvakta dottern som skulle fylla år dagen efter. Dagen efter kom patienten tillbaka och det slutade med operation för tarmvred. Men dagen efter läste han i lokaltidningen att någon hade vunnit en storvinst på 734 590 i samma spelbutik.
 479;40;"dagen";SVCon;
+/*		479. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
 
 /* *** nå(go)nting ***
-
 340;40;"någonting":"nånting"|SVAdvAdj:SVPart:SVAdvAdj;SVAttrpron|SVAdj;to avoid that prep-någonting becomes NR when någonting belongs to an adjective
+/*		340. Det blev någonting psykedeliskt med den. Ordet litteratur kommer från latinets litteratura som i latinet används i tre betydelser: någonting skrivet, filologi eller lärdom eller vetenskap. Gör nånting vackert.
 341;40;"någonting":"nånting"|SVCon;SVAttrpron|SVCon;same as previous rule: most adjectives are not labeled as such
+/*		341. Framförallt vill jag testa någonting nytt. Undrar vad ni brudar hade/skall ha som motsvarar nånting gammalt, nånting fått, nånting lånat, nånting blått?
 
 /* *** detsamma ***
-
 344;40;SVPrep|"detsamma";*|SVObjpron;
+/*		344. Att lära tillsammans, förnya, dela projekt och goda erfarenheter, förstå och tolerera varandra är några av de lektioner som deltagarna i detta initiativ kan lära av detsamma.
 934;40;"detsamma"|SVVerb:SVAux:SVpAux:SVmAux;SVSubjpron|*;
+/*		934. Detsamma gäller samspelet mellan den allmänna och speciella förvaltningsrätten. Detsamma är syftet med påpekandena och rekommendationerna beträffande den demokratiska genomblickbarheten.
 349;40;"detsamma"|SVVerbPart;SVSubjpron|SVVerb;
+/*		349. Detsamma gällde för andra konsthantverksutbildningar.
 
 /* *** förstås ***
-
 1152;40;SVmAux|SVFoerstaas|.SVAdv|SVInf:SVVerbInf:SVVerbInfAdj:SVVerbInfAdjCon:SVVerbInfCon:SVVerbInfPart:SVVara;*|SVAdvModal+SVAdv|*|*;
+/*		1152. men vi måste förstås ändå kunna kontrollera att medlen används korrekt.
 1150;40;SVmAux|SVFoerstaas|^SVInf+^SVVerbInf+^SVVerbInfAdj+^SVVerbInfAdjCon+^SVVerbInfCon+^SVVerbInfPart+^SVVara+^SVInte;*|SVInf|*;
+/*		1150. det ena endast kan förstås helt mot bakgrund av det andra.
 1154;40;SVInte|SVFoerstaas;*|SVVerbInf;
+/*		1154. en samling språk som man kan ha valt ut och som kanske inte förstås av en stor del av dess medborgare.
 1153;40;^SVVerb+^SVpAux+^SVAux|SVFoerstaas|SVPrep:SVSom;*|SVVerbInf|*;
+/*		1153. Den första frågan handlar ytterst om politisk demokrati så som begreppet förstås i vardagligt tal.
 1151;40;SVFoerstaas;SVAdvModal+SVAdv;
+/*		1151. Vi har förstås varaktiga problem med byggnaderna.
 
 /* *** other specific words ***
-
 363;40;SVSom|"sådan":"sådant"|^SVCon+^SEnd;SVCon+NonRelevant|Join|*;
+/*		363. Det är Europeiska unionen som sådan som måste vara representerad i Förenta nationerna. Rule should not apply in: Det skulle emellertid vara skrattretande att ignorera de konsekvenser som sådan verksamhet har på fiskerisektorn och på fiskebestånd. Undén konstaterar, på samma linje, men mer krasst, att vid urminnes hävd försvaras äganderätten uteslutande genom hänvisning till ett långvarigt besittningsförhållande som sådant, icke till något grundläggande rättsfaktum.
 502;40;"omkring"|SVNum|SVCon;SVAdvDegree+SVAdv|*|*;
+/*		502. Enligt Trafikverket sker det omkring 300 stycken trafikolyckor vid vägarbeten varje år.
 497;40;"omkring"|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|*;
+/*		497. Njurcancer drabbar idag omkring 1 000 personer i Sverige varje år. Omkring hälften av alla som får kärlkramp har symtom som begränsar det dagliga livet.
 755;40;"omkring"|"var";SVAdvDegree+SVAdv|*;
+/*		755. Omkring var femte bröstcancer innehåller stora mängder av tillväxtfaktorn HER2.
 498;40;"omkring"+^SVAdvDegree;SVPrep;
+/*		498. Det har skapat grundval för många tidiga kulturer, inte minst den egyptiska, som uppstod omkring Nilens trekantiga delta.
 507;40;SVPrep|"få";^SVPrep|SVAdj;
+/*		507. Det viktigaste skälet är att det är den dygd där man enklast kan peka på få och avgränsade exempel i hennes romaner.
 524;40;SVPrep|"visst";^SVPrep|SVAttrpron;
+/*		524. Jämte fiske och jakt lever de på visst småskaligt jordbruk.
 583;40;"mer":"mindre"|"än"|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|Join|*;
+/*		583. Det är därför antalet passagerare med Kustpilen har ökat med mer än 100 % sedan starten-92. Ingen får utses till ledamot för mer än två mandatperioder i följd. Undersökningen visade att hälften av författningarna var mindre än 10 år gamla. Mindre än hälften av de röstberättigade röstade.
 585;40;"mer":"mindre";SVAdvAdj+SVAdvDegree;default
+/*		585. Det är de mindre snabbåtarna som berörs, eftersom de är mer väderkänsliga än de större färjorna. Ju större avståndet till bergen blir, desto mindre blir storleken på den typ av sediment som transporteras.
 853;40;SVAdvTemp:SVAdvFreq|"än";SVAndOrBut|Join;
+/*		853. De tror nu att räntan sänks i juli, men att räntehöjningen sen kommer tidigare än vad Riksbanken bedömer. Nyval får dessutom inte utlysas oftare än en gång årligen.
 904;40;"fler"|"än"|SVNum:SVNumber;SVAdvDegree|Join|*;
-963;40;"än"|SVSaa;SVAndOrBut|SVAdv+SVAdvTemp;
+/*		904. Enligt befolkningsbaserade studier är analcancer vanligare hos kvinnor än hos män, fler än 60 procent av fallen ses hos kvinnor (6). En pandemi är en epidemi som finns på fler än två kontinenter och smittar lätt mellan människor.
+963;40;"än"|SVSaa;SVAndOrBut|SVAdv+SVAdvTemp;TO BE EVALUATED: remove AdvTemp?
+/*		963. Vår erfarenhet från projektet är dock att användningsområdet är mycket bredare än så.
 586;40;"än";SVAndOrBut;
+/*		586. Särskilda sätt att använda en artefakt är således mer legitima än andra och vi kan då tala om en sedvänja.
 1217;40;SVCon:SVAdj|"då"|SVCon:SVSubjpron:SVAttrpron:SVIndefart:SVAdj;*|SVRelpron-SVAdvStruct-SVAdv|*;
+/*		1217. Ökade kostnader kan bli ett problem då varje dator kräver underhåll. jag var bara några månader gammal då en polsk cirkus på väg till Jakobstads centrum körde fel och hamnade utanfår vårt hus.
 667;40;"då"|SVSubjpron|^SVCon+^SVAdj+^SVPrespart+^SVSom+^SEnd;SVRelpron-SVAdvStruct-SVAdv|*|*;
+/*		667. Den tyske filosofen Jürgen Habermas menar dock att de tre disciplinerna skall hållas åtskilda då de representerar tre olika mänskliga strävanden.
 668;40;^SVmAux+^SVpAux+^SVDefart+^SBegin|"då"|*SVCon|^SEnd;*|SVRelpron-SVAdvStruct-SVAdv|*|*;
+/*		668. Dessa informerade om silverhalten, men även om producenten, året då arbetet gjordes och den stad där arbetet framställts. WRONG: Hur ser då bakgrunden ut för några av de smeder som jag nämnde inledningsvis?
 671;40;SVComma|"då"|^SVmAux+^SVpAux+^SVAux+^SVVerb+^SVVerbInf+^SEnd;SVPunctuation|SVRelpron-SVAdvStruct-SVAdv|*;
+/*		671. Året med flest underbalanserade kommuner var 1996, då 237 av 279 kommuner redovisade underskott.
 761;40;SVAndOrBut|"då"|SVAttrpron;SVAndOrBut|SVRelpron-SVAdvStruct-SVAdv|*;
+/*		761. Denna mekanism ska sättas in ifall det blir nödvändigt att säkerställa hela euroområdets stabilitet och då alla medlemsstaterna är överens om det.
 636;40;SBegin|"då"|SVSubjpron:SVCon:SVAdj;*|SVRelpron-SVAdvStruct-SVAdv|*;
+/*		636. Då de skapande krafterna frigjorts är befrielse möjlig. Då jordbruket tjänar som växelvaluta såväl i relationer med tredje land som på den inre marknaden, ges företräde åt den fria konkurrensen.
 639;40;SVYear|"då";*|SVRelpron-SVAdvStruct-SVAdv;
+/*		639. Detta skedde 2010 då de var 95 år gamla.
 929;40;SVCon|"där"|SEnd;*|+SVDummy|*;
+/*		929. vad gäller som kunskap där?
 379;40;SVCon|"där"+^SVDummy|^SVAux+^SVVerbPart+^SVPrep+^SVAndOrBut+^SVVerb+^SVVerbInf+^SVmAux+^SVpAux;*|SVRelpron-SVAdvPlace-SVAdv|*;
+/*		379. Nu finns åter stora arealer där jordbruk är olönsamt.
 676;40;"där"|SVCon|^SVSom+^SEnd;SVRelpron-SVAdvPlace-SVAdv|*|*;
+/*		676. I tentamenssvar kan man återfinna märkliga meningar, där syftningsfel kommit att innebära vetenskapliga tokigheter.
 679;40;SBegin|"där"|SVCon;*|SVRelpron-SVAdvPlace-SVAdv|*;
+/*		679. Där naturvetenskapen söker behärska naturen, humanioran söker förståelse för människan, och (den kritiska) samhällsvetenskapen söker en frigörelse från strukturer.
 412;40;"där"|SVSubjpron;SVRelpron-SVAdvPlace-SVAdv|*;
+/*		412. Försurningen kan medföra att granen slås ut på de torraste, våtaste, blåsigaste och kallaste av de lokaler där den annars hjälpligt klarar sig.
 677;40;"där"|SVIndefart;SVRelpron-SVAdvPlace-SVAdv|*;
+/*		677. Vilken bild får vi av hur befälsordningen såg ut i samhället, om vi ur databasen plockar fram samtliga fall där en person beordrar en annan person att göra något?
 413;40;SVPunctuation|"där"|^SVVerb+^SVVerbInf+^SVmAux+^SVpAux+^SVAux+^SVVerbPart+^SEnd;*|SVRelpron-SVAdvPlace-SVAdv|*;
+/*		413. Estimatet tar värden mellan 0 och 1, där 0 innebär full konsumtionsutjämning och 1 innebär full konsumtionskänslighet.
 387;40;"en"|"del"|^SVCon+^SVAdj+^SEnd;SVIndefart|SVCon+SVAdj|*;
+/*		387. En del får astma av kontakt med vissa ämnen som med astma inte reagerar på.
 388;40;"en"|"del"+^SVCon;SVAttrpron+SVAdjpron|Join;
+/*		388. En del människor har inga bihålor i pannan överhuvudtaget.
 389;40;"del"+^SVAdj;SVCon;
+/*		389. Etnografi är ett sätt att fördjupa sig i en utvald del av kulturen.
 470;40;"men"|SEnd;SVCon-SVNegStop|*;
+/*		470. Behandlas syfilis i tid får man inga men.
 481;40;"inte"|"ens"|SVNum:SVNumber;SVAdvDegree+SVAdv+SVNegation|Join|*;
+/*		481. Den motsvarar inte ens 10 procent av vår produktion. Hon har gått runt och förklarat hemma – inte ens tre år gammal – att pappa mår bättre nu.
 483;40;"ens"|SVCon;SVPosspron|*;
+/*		483. Smittan sprids framför allt genom direktkontakt, till exempel när man tar någon i hand, och genom luften, till exempel när någon som är sjuk hostar eller nyser i ens närhet.
 484;40;"ens";SVAdvStruct+SVAdv;
-
+/*		484. Ja, inte ens inom dess ram gör listan ovan anspråk på att vara komplett. WRONG: besvär som stör välbefinnandet och påverkar ens dagliga liv.
 /* NOTE: the rules above may not (always?) apply to 'inte ens' -> TO BE CHECKED
-
 602;40;SVPrep:SVAttrpron:SVIndefart|SVFast;*|SVAdj;
+/*		602. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C. Så snart man lämnar de strategiskt valda texterna blir det uppenbart att analysen av sådana förhållanden som intresserar oss här inte kan genomföras mot bakgrund av någon på förhand uppställd modell eller med hjälp av något fast schema. Man tror att de tidigaste cyanobakterierna höll sig på ett fast underlag, och liksom en del nu levande arter var de kanske rörliga.
 605;40;SVDefart|SVFast;SVDefart|SVAdj;implicitly deletes other labels from Defart
+/*		605. Dock finns det fast infrastruktur vid terminaler för dessa transportmedel.
 606;40;SVpAux|SVFast;SVpAux|SVAdvAdj+SVAdvManner;
+/*		606. Här följer en typisk dialog där också läraren genom sitt språkbruk är fast i uppgiftsdiskursen.
 607;40;SVFast;SVVerbpt2;ignoring that it can be an R-adverb
+/*		607. På ett otroligt filmklipp syns det hur han har spänt fast sig i en liten trädgårdsstol samtidigt som de färgglada ballongerna lyfter honom mot skyn.
 608;40;SVRunt|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|*;
+/*		608. Patienten var cirkulatoriskt stabil med ett blodtryck på 150/80 mm Hg samt en puls på runt 100 slag/minut. I området blåser runt tio meter per sekund.
 612;40;SVIndefart|SVRunt;*|SVAdj;
+/*		612. Vi hade också en boll som vi har undrat lite över, ett runt paket inlindat väldigt snyggt.
 610;40;SVRunt;SVPrep;
+/*		610. Runt matbord samlas människor för att äta, medan mötesbord används vid diskussioner, förhandlingar och beslut.
 615;40;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*;
+/*		615. En person som avses i första stycket får bedriva undervisning under högst ett år i sänder.
 713;40;^SVCon+^SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
+/*		713. den gick från ca 15 procent 1980 till över 50 procent 2004.
 714;40;SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
+/*		714. Över 20 peteckier på en 2,5 kvadratcentimeters area anses onormalt.
 618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join;
+/*		618. Privat familjesparande av stamceller har varit möjligt i USA i över 20 år och finns i de flesta europeiska länder. Detta gäller dock bara för personer som är under 65 år.
 650;40;SVGen|"andra";*|SVAdj;
+/*		650. Sambandet mellan energi och exergi framgår av termodynamikens andra huvudsats.
 682;40;"rent"|SVAdvAdj;SVAdvDegree+SVAdv|*;
+/*		682. Rent praktiskt kan det gå till så att studenten skriver på en arbetsstation, som inte har uppkopplingsmöjligheter till nätverk.
 683;40;"rent"+^SVAdvDegree;SVAdvAdj+SVAdvManner;
+/*		683. Att utreda det ordentligt skulle fordra en egen uppsats (eller rent av en bok) så det blir bara några hastiga noteringar.
 723;40;SVAdvAdj|"sett";^SVAdv|Join;
+/*		723. Utvecklingen av elektronisk förvaltning betraktas internationellt sett som en av de största händelserna inom offentlig förvaltning under de senaste decennierna.
 724;40;"sett";SVPartSup;
+/*		724. Jag har jobbat som polis i 20 år och jag har aldrig sett något liknande.
 698;40;SVSaa|SVAdvAdj|SVSom|"möjligt";SVAdv+SVAdvManner|+Join|Join|Join;
+/*		698. Målsättningen måste med andra ord vara att så långt som möjligt återställa och bibehålla den kemiska omgivning som människan anpassats till under tusentals generationer.
 699;40;"möjligt";SVAdvAdj+SVAdvModal;
+/*		699. Så lite svart som möjligt.
 733;40;SVNum|"§"|SVCapitalInitial;*|SVeCon|*;
+/*		733. 2 § Annan arbetstvist än som avses i 1 § skall upptagas och avgöras av tingsrätt.
 734;40;"§"+^SVeCon;SVCon;default
+/*		734. Inledningsvis ges en historisk tillbakablick på institutet ’urminnes hävd’ varefter jag analyserar dess betydelse i relation till 1983 års vattenlag (jämte promulgationslag), miljöbalkens promulgationslag och 24 kap. 1 § miljöbalken.
 22;40;SVNum|"-"|SVNum;SVCon|Join|Join;avoid that hyphen becomes nonrelevant between numbers
+/*		22. För samtal till texttelefon när du är utomlands, ring + 46 771 - 11 77 99.
 13;40;SVPrepCon;SVPrep;preliminary default
+/*		13. Trots det väcker programmet ett brett spann av känslor och tankar om livets yttre och inre domare.
 
 /* Detect real Gennouns
 /* --------------------
-
 721;40;SVPossibleGennoun|SVCon;SVAdj+SVGen|*;
+/*		721. Ett fundamentalt verktyg i Galileos framgångar var naturligtvis hans teleskop.
 
 /* Disambiguate SVPrepAdv
 /* ----------------------
 /* Basic idea: prep before noun or noun phrase, adv before relation or comma.
-
 910;40;SVPrepAdv|SVComma;^SVAdv|*;
+/*		910. Utanför, sida vid sida, väntade alla som inte fick plats i kyrkan för att få ta farväl.
 930;40;SVPrepAdv|SEnd;+SVDummy|*;extension of r35 (^SEnd cannot be added to r35 because the max number of options is reached)
+/*		930. Stockholmsbörsen väntas öppna lätt nedåt.
 35;40;SVPrepAdv+^SVDummy|^SVmAux+^SVSup+^SVAndOrBut+^SVInf+^SVVerb+^SVVerbInf+^SVAux+^SVpAux;SVPrep|*;preliminary default
+/*		35. Utanför Norden finns en uppfattning om att vikingarna var ett särskilt folkslag, vilket är felaktigt.
 925;40;SVPrepAdv;-SVPrepAdv;to avoid conflicting labels in output
+/*		925. Vanliga vårtor på händer och fötter orsakas av ett flertal virus, som endast smittar människor emellan.
 
 /* Disambiguate SVPossCon
 /* ----------------------
-
 593;40;SVIndefart:SVAdj|SVPossCon;*|SVCon;
+/*		593. Under 1800-talet inleddes en era av realism och naturalism. Den moderna eran började med Robert Koch.
 880;40;SVNum|"min";*|SVCon;
+/*		880. Kräver övervakning av barnet ca 30 min efteråt.
 881;40;SVPossCon|SVPrep;SVCon|*;
+/*		881. Då kan man spela i temperaturer som är jämförbara med en varm vår i Europa med en medeltemperatur på 25 grader.
 879;40;SVPossCon;SVPosspron;default
+/*		879. Min mor har inte mått så bra.
 
 /* Disambiguate SVmAuxCon
 /* ----------------------
-
 1155;40;SVIndefart:SVPosspron:SVGen:SVAdj:SVAttrpron:SVPossibleGennoun|SVmAuxCon;*|SVCon;
+/*		1155. den nya rollen speglar den unga cancerdrabbades vilja att visa sin omgivning en annorlunda bild av sig själv.
 1157;40;^SVmAux|SVDefart|SVmAuxCon;*|*|SVCon;
+/*		1157. Vi måste respektera den vilja folket uttryckt genom resultatet av de val.
 1156;40;SVmAuxCon;SVmAux+SVInf;
+/*		1156. de påstår sig vilja betrakta sig med konstens ögon.
 
 /* Disambiguate SVVerbInf
 /* ----------------------
 /* Note: Although these lexreps are Relations anyway, disambiguation is done to know the exact label,
 /*       so that it can be used in further processing.                                               
-
 56;40;SVmAux|.^SVVerbInfCon+^SVVerbInf+^SVInf+^SVmAux+^SVConj|SVVerbInf;*|*|SVInf;
+/*		56. Vi hoppas att en fond kan bli verklighet där pengar kan delas ut i Lisas intresse.
 1111;40;SVAtt|SVVerbInf;*|SVInf;
+/*		1111. Utgivningsbevis får återkallas om förutsättningar att utfärda sådant bevis inte längre finns.
 
 /* DISAMBIGUATE SVVerbInfAdjCon
 /* ----------------------------
-
 24;40;SBegin|SVVerbInfAdjCon;*|SVAdj;
+/*		24. Blanka och ogiltiga röster räknas inte med vid rösträkningen.
 26;40;SVAtt|SVVerbInfAdjCon;*|SVInf;
+/*		26. Vi har valt att kalla denna metod för den verb-inriktade metoden.
 27;40;SVmAux|SVVerbInfAdjCon;SVmAux|SVInf;
+/*		27. Slutligen så måste historiska metoder ta hänsyn till det faktum att inte allt det man brukar kalla verklighet blir synligt i de historiska källorna.
 46;40;SVmAux|SVAdv|SVVerbInfAdjCon;SVmAux|*|SVInf;
+/*		46. Huvudmännen ska också sträva efter att inrätta karriärsteg för särskilt yrkesskickliga lärare.
 48;40;SVAux|SVVerbInfAdjCon;SVAux|SVAdjCon;
+/*		48. Samtliga deltagare hade låga nivåer av vitamin D. .
 28;40;SVDefart|SVVerbInfAdjCon;SVDefart|SVAdjCon;implicitly deletes other labels on Defart
+/*		28. Vi kommer att ha olja, men inte till de låga priserna.
 40;40;SVIndefart:SVPrep:SVVerb:SVInf:SVVerbInf|SVVerbInfAdjCon;*|SVAdjCon;
+/*		40. Det är lättare för en elitidrottare att öppet tala om en smärta i foten i jämförelse med en smärta i själen. I nästa steg skattar vi separata löneekvationer för sysselsatta inom respektive utanför akademin. Sedan kom nästa problem när man skulle kunna tolka vad man observerat och identifiera signalerna. 3 § Om fullmäktige beslutar att antalet ledamöter i fullmäktige ska ändras, ska beslutet tillämpas först när val av fullmäktige förrättas nästa gång i hela landet.
 489;40;SVAdvDegree|SVVerbInfAdjCon;*|SVAdj;
+/*		489. Vissa gratis operativsystem ställer mycket låga kapacitetskrav varpå utrangerade datorer kan återanvändas.
 508;40;SVPrep|SVAttrpron|SVVerbInfAdjCon;*|*|SVAdjCon;
+/*		508. Upplevelsen av att inte ha ett val kan ses som ett svar på denna smärta och förstås i ljuset av den nära relationen och de starka emotionella banden mellan förälder och barn.
 249;40;SVConpart1|SVVerbInfAdjCon;SVCon|SVAdjCon;
+/*		249. Även om konkurrensen på bredbandsmarknaden fortfarande är svag ökade antalet fasta bredbandslinjer med nästan 80 procent under året fram till oktober 2003.
 45;40;SVVerbInfAdjCon|SVRefl;SVVerbInf|SVRefl;
+/*		45. Skall landet kalla sig för en rättsstat måste lagarna skydda människors rätt att yttra sig och fritt utöva sin religion.
 30;40;SVVerbInfAdjCon|SVObjpron;SVVerb|SVObjpron;
+/*		30. Låt oss kalla den charmig, men platsen ger inte mycket till stan.
 47;40;SVVerbInfAdjCon|SVIndefart;SVVerb|*;
+/*		47. Nu ska forskare på Umeå universitet leda ett projekt för att studera detta.
 73;40;SVVerbInfAdjCon|SVVerbpt2;SVInf|SVVerbpt2;
+/*		73. Eventuellt har man haft tillträde till utrymmet via den mindre luckan akter om bråspelet men sagda lucka kan lika gärna leda ner i det så kallade kabelrummet.
 59;40;SVVerbInfAdjCon;SVAdjCon;
+/*		59. Studier av stjärnors bildande kräver observationer med radioteleskop i stället för optiska teleskop, eftersom stjärnor föds inuti stora, kalla och täta gasmoln som effektivt absorberar allt synligt ljus.
 
 /* DISAMBIGUATE SVVerbInfCon
 /* -------------------------
-
 76;40;SVAtt|SVVerbInfCon;*|SVInf;
+/*		76. Hon har inte gjort något för att skada sitt barn.
 594;40;SVAtt|SVInte|SVVerbInfCon;*|*|SVInf;
+/*		594. Barn med kronisk sjukdom eller infektion de senaste tio dagarna ombads att inte delta.
 77;40;SVmAux|SVVerbInfCon;SVmAux|SVInf;
+/*		77. Hon tvångsgipsades på grund av att hon inte kunde sluta träna trots en stressfraktur.
 94;40;SVmAux|SVInte|SVVerbInfCon;SVmAux|SVNegrel|SVInf;
+/*		94. – Jag vill inte prata om bojkott av landslaget.
 78;40;SVmAux|SVAdv|SVVerbInfCon;SVmAux|*|SVInf;
+/*		78. Den kan även smitta från person till person.
 97;40;SVmAux|SVAdv|SVInte|SVVerbInfCon;SVmAux|*|SVNegrel|SVInf;
+/*		97. Man brukar oftast inte smitta längre när två dygn har gått efter det att besvären har försvunnit.
 90;40;SVmAux|SVAdvCon|SVVerbInfCon;SVmAux|^SVAdv|SVInf;
+/*		90. Sen vet ja inte om de är nå mer, men detta ska ja syssla med mellan 13.15 och 16.30.
 87;40;SVmAux|SVSubjpron+^SVAttrpron|SVVerbInfCon;SVmAux|SVSubjpron|SVInf;
+/*		87. Mera lokalt kan vi fråga detta om det akademiska livet.
 96;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdv|SVVerbInfCon;SVmAux|SVSubjpron|*|SVInf;
-95;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdvCon|SVVerbInfCon;SVmAux|SVSubjpron|^SVAdv|SVInf;
+/*		96. För att fördärva kommunikationen behöver den bara slå dövörat till.
+95;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdvCon|SVVerbInfCon;SVmAux|SVSubjpron|^SVAdv|SVInf;Theoretically possible, but no example was found for this pattern
 808;40;SVmAux|SVCon|SVVerbInfCon;SVmAux|*|SVInf;
+/*		808. Nu planeras en bajsmarsch – den 25 januari ska hundägare tåga till kommunhuset med hundbajs.
 645;40;SVVerbInfCon+SVSForm|SEnd;SVVerb|*;
+/*		645. Majoriteten av alla dödsfall konstateras således genom att en läkare försäkrar sig om att andning och blodcirkulation upphört, i allmänhet genom att lyssna på hjärtat, känna på pulsen och försöka se om personen andas.
 250;40;SVConpart1|SVVerbInfCon;SVCon|SVCon;
+/*		250. Det skulle vara trevligt att göra ett antal ånga inhalationer med infusioner av örter.
 80;40;SVVerbInfCon|SVRefl;SVVerbInf|SVRefl;
+/*		80. Man kan gott fråga sig om en användning av medel till en falsk invigning var motiverad.
 79;40;SVAux|SVVerbInfCon;SVAux|SVAdjCon;
+/*		79. Vi kommer att ha olja, men inte till de låga priserna.
 86;40;SVVerbInfCon|SVVerbpt2;SVInf|SVVerbpt2;
+/*		86. Försurningen kan medföra att granen slås ut på de torraste, våtaste, blåsigaste och kallaste av de lokaler där den annars hjälpligt klarar sig.
 81;40;SVDefart|SVVerbInfCon+^SVSForm;SVDefart|SVAdjCon;
+/*		81. Påfallande ofta hade män en yrkestitel som inte överensstämde med den syssla som de påstods göra eller vilja göra.
 82;40;SVIndefart|SVVerbInfCon;*|SVAdjCon;
+/*		82. Några år senare försökte hertig Karl införa sin uppfattning om hävdens natur i en stadga och denna togs sedermera in i Johan III:s förslag till ordning vid tillämpning av adelns privilegier.
 678;40;SVAdj|SVVerbInfCon;*|SVCon;
+/*		678. Det är i synnerhet dessa typer av sediment som har skapat det kolossala delta som utgör större delen av landet Bangladesh.
 83;40;SVPrep|SVVerbInfCon;SVPrep|SVAdjCon;
+/*		83. De flesta av oss tänker förmodligen på någon typ av skiva på tre eller fler ben.
 84;40;SVVerbInfCon|SVObjpron;SVVerb|SVObjpron;
+/*		84. Det är bra att även använda olika skärbrädor för kött och grönsaker, rengöra dem ordentligt under rinnande vatten och torka dem med ren handduk eller låta dem lufttorka.
 168;40;SVVerbInfCon|SVSubjpron+^SVAttrpron;SVVerb|SVSubjpron;
+/*		168. Lösningen andas man in med hjälp av en speciell apparat, en så kallad nebulisator.
 88;40;SVSubjpron+^SVAttrpron|SVVerbInfCon;SVSubjpron|SVVerb;
+/*		88. Man smittas vid beröring av vårtan eller av de avstötta hudcellerna, och på dessa sätt kan man smitta såväl sig själv som andra personer.
 807;40;^SVpAux+^SVVerb+^SVInf+^SVVerbInf+^SVAux+^SVComma+^SBegin|SVAdv|SVVerbInfCon;*|*|SVVerb;
+/*		807. Om jag började dansa på bordet under ett viktigt möte skulle de andra deltagarna förmodligen tro att jag var korkad, galen, ignorant eller obildad.
 551;40;SVVerbInfCon+SVSForm;SVVerb;
+/*		551. De var i mångt och mycket samma andas barn.
 89;40;SVVerbInfCon;SVCon;
+/*		89. Inställd färja på grund av hårt väder.
 
 /* Disambiguate vara
 /* -----------------
-
 106;40;SVmAux|SVVara;SVmAux|SVpAux;
+/*		106. Det är inte bara avhjälpande av ovanstående problem som kan vara positivt med att använda ordbehandlare.
 527;40;"en"|SVAdj|SVVara;SVIndefart|SVAdj|SVCon;
+/*		527. Med kapitalismens framväxt under 1800-talet blev boken allt mer en kommersiell vara.
 771;40;"en"|SVAdvDegree|SVAdj|SVVara;SVIndefart|*|SVAdj|SVCon;
+/*		771. Det fiskaren letar efter är då en väldigt försäljningsbar vara från andra främlingar.
 578;40;SVVara;SVpAux+SVInf;default
+/*		578. Om det stämmer så borde det vara lätt att observera dessa molekyler.
 
 /* Disambiguate SVVerbInfPart
 /* --------------------------
-
 260;40;SVAtt|SVVerbInfPart;*|SVInf;
+/*		260. Att skydda huden för solen och att lära känna sina födelsemärken är de bästa sätten att förebygga risken för allvarlig hudcancer.
 261;40;SVmAux|SVVerbInfPart;SVmAux|SVInf;
+/*		261. Med det menar jag inte att Aristoteles skulle hävda att det inte finns någon enskild situation där det rätta förhållningssättet är ödmjukhet.
 262;40;SVmAux|SVInte|SVVerbInfPart;SVmAux|SVNegrel|SVInf;
+/*		262. Staten bör inte hävda och finansiera sociala rättigheter som en del av invånarnas medborgarskap.
 263;40;SVmAux|SVAdv|SVVerbInfPart;SVmAux|*|SVInf;
+/*		263. 3 § Mark  och vattenområden som är särskilt känsliga från ekologisk synpunkt skall så långt möjligt skyddas mot åtgärder som kan skada naturmiljön.
 264;40;SVmAux|SVAdv|SVInte|SVVerbInfPart;SVmAux|*|SVNegrel|SVInf;
+/*		264. Man kan följaktligen inte skydda och utbilda dessa barn inom ramen för familjen.
 265;40;SVmAux|SVAdvCon|SVVerbInfPart;SVmAux|^SVAdv|SVInf;
+/*		265. SAIK verkar aningen mätta, men med de spelarna i laget dom har, så kan man aldrig slappna av mot SAIK.
 266;40;SVmAux|SVSubjpron+^SVAttrpron|SVVerbInfPart;SVmAux|SVSubjpron|SVInf;
+/*		266. Hur kan man skydda sig mot bihåleinflammation?
 267;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdv|SVVerbInfPart;SVmAux|SVSubjpron|*|SVInf;
-268;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdvCon|SVVerbInfPart;SVmAux|SVSubjpron|^SVAdv|SVInf;
+/*		267. Samtidigt som vi godkänner förslaget till gemensam resolution kan vi avslutningsvis hävda att situationen kräver ingripanden av olika slag från Europeiska unionen.
+268;40;SVmAux|SVSubjpron+^SVAttrpron|SVAdvCon|SVVerbInfPart;SVmAux|SVSubjpron|^SVAdv|SVInf;theoretically possible, but no example found
 269;40;SVConpart1|SVVerbInfPart;SVCon|SVAdj;
+/*		269. Teoretiskt sett kan ett par mätta och välmående råttor få 1000 ättlingar på ett år.
 270;40;SVVerbInfPart|SVRefl;SVVerbInf|SVRefl;
+/*		270. Vilka ytterligare barriärer skall tillfogas för att på bästa sätt skydda sig mot yttre hot?
 271;40;SVAux|SVVerbInfPart;SVAux|SVPart;
+/*		271. Blusen har bredda, vackra ärmslut.
 272;40;SVVerbInfPart|SVVerbpt2;SVVerbInf|SVVerbpt2;
+/*		272. När vi väl har fattat dessa beslut och tagit hänsyn till förslag från andra parter, enas vi om att åtgärder som ligger i linje med dem vi själva enats om ristas in i sten av Världshandelsorganisationen.
 273;40;SVVerbInfPart;SVVerbPart;
+/*		273. I många år var detta dock bara teorier eftersom få observationer var gjorda.
 
 /* Disambiguate SVInfPart
 /* ----------------------
-
 31;40;SVAtt|SVInfPart;*|SVInf;
+/*		31. Från och med 2018 och sex år framåt kommer ishockey-VM att sändas i SVT.
 32;40;SVmAux|SVInfPart;*|SVInf;
+/*		32. Det är en viktig aspekt av artefakter, att de kan användas för olika syften i olika situationer.
 33;40;SVmAux|SVSubjpron+^SVAttrpron|.SVInte|SVInfPart;SVmAux|SVSubjpron|*|SVInf;
+/*		33. I dag kan vi använda våra kraftfulla datorer och stora datorprogram, men detta hade man inte i radioastronomins barndom.
 60;40;SVmAux|^SVInfPart|SVInfPart;SVmAux|*|SVInf;
+/*		60. Skillnaden mellan borden är inte enbart designen utan det är också skillnad på hur de förväntas bli använda.
 58;40;SVpAux|SVInfPart;*|SVRelpart;
+/*		58. Många mangrovearter har vivipar reproduktion, vilket innebär att trädets frön börjar gro medan de fortfarande är fästa vid trädet.
 251;40;SVConpart1|SVInfPart;SVCon|SVAdj;
+/*		251. När antalet fästa element uppnår ett förutbestämt tal skulle du kunna skicka besökaren vidare till nästa sida eller visa ett gratulationsmeddelande.
 74;40;SVInfPart|SVVerbpt2;SVInf|SVVerbpt2;
+/*		74. Toppmötet kan bli ett tillfälle att träffa nya val, och lyfta fram ännu oprövade alternativ.
 107;40;SVDefart|SVInfPart;SVDefart|SVAdj;
+/*		107. Den använda metoden är inte optimerad för att mäta riktigt låga halter av CRP, varför den uppskattade gräns som anges mer är att betrakta som en medicinsk beslutsgräns än som ett sant referens-intervall.
 108;40;SVPrep|SVInfPart;SVPrep|SVAdj;
+/*		108. Som sändningar av radioprogram anses också tillhandahållande till allmänheten på särskild begäran av direktsända eller inspelade program, om starttidpunkten och innehållet inte kan påverkas av mottagaren. WRONG: Traditionen tros ha kommit under sent 1700-tal från Tyskland, där en flicka kläddes upp för att vara Christkindlein, med tända ljus i håret som föreställde en gloria.
 142;40;SVAttrpron|SVInfPart;*|SVAdj;
+/*		142. I fråga om andra direktsända radioprogram än sådana som avses i 1 kap. 8 § får i lag föreskrivas att den som framträder i programmet skall ansvara för sina yttranden själv.
 36;40;SVInfPart;SVVerb;default
+/*		36. Texter produceras idag med hjälp av ordbehandlare och skrivare, så varför inte använda ordbehandlare också vid salstentor?
 
 /* Disambiguate SVInfCon
 /* ---------------------
-
 51;40;SVAtt|SVInfCon;*|SVInf;
+/*		51. Hon älskade att resa och hade en världskarta på rummet där hon satte nålar för de platser hon besökt.
 49;40;SVmAux|SVInfCon;SVmAux|SVInf;
+/*		49. Oftast är inte hela texten oläsbar, men det kan räcka med tre nyckelord för att göra genomförandet av examinationen svår.
 50;40;SVmAux|SVSubjpron+^SVAttrpron|SVInfCon;SVmAux|SVSubjpron|SVInf;
+/*		50. Varje vecka får vi reda på att man har hittat genen för än det ena än det andra.
 52;40;SVmAux|SVAdv|SVInfCon;SVmAux|*|SVInf;
+/*		52. Man kan själv lära sig en metod för att minska ödemet.
 91;40;SVmAux|SVAdvCon|SVInfCon;SVmAux|^SVAdv|SVInf;
+/*		91. Man måste ba lära sig att CHILLA lite.
 54;40;SVmAux|^SVInfCon|SVInfCon;SVmAux|*|SVInf;
+/*		54. Ulv hade en utskjutande höft, på den kunde Bolde vila sin armbåge, Bolde hade en djup grop vid halsen, där kunde Ulv värma sin hand.
 252;40;SVConpart1|SVInfCon;SVCon|SVCon;
+/*		252. Det förefaller dock som om regionen hotas av en annan slags spricka.
 53;40;SVInfCon|SVRefl;SVInf|SVRefl;
+/*		53. I den processen får båda anpassa sig till varandra, lära sig av varandra och antagligen göra ömsesidiga eftergifter.
 55;40;SVmAux|SVInf|SVAndOrBut|SVInfCon;SVmAux|SVInf|SVAndOrBut|SVInf;
+/*		55. Detsamma gäller, oavsett temperatur, om barnet är slött och inte vill äta eller dricka.
 75;40;SVInte|SVInfCon;SVNegrel|SVInf;
+/*		75. God kontroll av blodtryck och blodsocker är de viktigaste åtgärderna liksom att inte röka.
 72;40;SVInfCon|SVVerbpt2;SVInf|SVVerbpt2;
+/*		72. - Den oklarheten kan bara de reda ut, det kan inte vi.
 70;40;SVPosspron|SVInfCon;SVPosspron|SVCon;
+/*		70. Försvinner denna isbildning så minskar produktionen av djurplankton vilket får negativa följder för de djur som är beroende av djurplankton i sin föda.
 131;40;SVIndefart|SVInfCon;*|SVCon;
+/*		131. Se där en anledning att ta vetenskapliga studier med en nypa salt.
 133;40;SVPrep|SVInfCon;SVPrep|SVCon;
+/*		133. acklimatisering till kyla.
 132;40;SVInfCon|SVCon;SVInf|*;
+/*		132. För rätt att offentligt förevisa en film, ett videogram eller någon annan teknisk upptagning med rörliga bilder kan det dock krävas granskning och godkännande i enlighet med 1 kap. 3 § andra stycket.
 537;40;SVInfCon|SVAdj;SVInf|*;
+/*		537. En studie kan medföra utpekande och känslor av stigmatisering för de ingående informanterna och observerade personerna eller väcka obehagliga minnen och känslor.
 510;40;SVInfCon|SVIndefart;SVInf|*;
+/*		510. Patienten var förtvivlad över sin cancerdiagnos och nästan lika ledsen över att möjligheten att bära en graviditet och föda ett eget barn nu var helt borta.
 742;40;SVSInfCon;SVInf;default for s-forms
+/*		742. Inte heller får de agas eller drivas på med redskap som lätt kan såra eller på annat sätt skada djuret.
 773;40;SVInfCon+SVPreferRelation;SVInf;default for selected words, see lexreps
+/*		773. Kräftor kräva dessa drycker!
 57;40;SVInfCon;SVCon;general default
+/*		57. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
 
 /* Disambiguate SVVerbInfAdj
 /* -------------------------
-
 98;40;SVmAux|SVVerbInfAdj;SVmAux|SVInf;
+/*		98. Hos elitidrottare finns även en hyperaktivitet som utanför ett idrottsligt sammanhang sannolikt skulle uppmärksammas, värderas och bedömas på ett helt annat sätt.
 99;40;SVmAux|SVSubjpron+^SVAttrpron|.SVInte|SVVerbInfAdj;SVmAux|SVSubjpron|*|SVInf;
+/*		99. Om man är orolig för att man har kärlkramp kan man ringa sjukvårdsrådgivningen, telefon 1177, eller kontakta en vårdcentral.
 100;40;SVmAux|SVAdv|SVVerbInfAdj;SVmAux|*|SVInf;
+/*		100. Man ska alltid ringa 112 efter ambulans.
 140;40;SVmAux|SVInte|SVVerbInfAdj;SVmAux|SVNegrel|SVInf;
+/*		140. En del studenter verkar inte gilla att skriva för hand.;
 548;40;SVpAux|SVVerbInfAdj;SVpAux|SVAdj;
+/*		548. En röntgenundersökning kan visa om det finns tecken på att slemhinnorna är svullna eller om det finns vätska i bihålorna.
 745;40;SVpAux|SVSaa|SVVerbInfAdj;SVpAux|*|SVAdj;
+/*		745. Annars har vi bara den här stereotypa bilden av att killar gillar krig och att slåss och ska vara så tuffa.
 550;40;SVAux|SVVerbInfAdj;SVAux|SVAdj;
+/*		550. Det går inte att avgöra själv om man har täta bröst, utan det syns först vid en mammografiundersökning.
 253;40;SVConpart1|SVVerbInfAdj;SVCon|SVAdj;
+/*		253. Det blir ett par tuffa dagar för killarna.
 101;40;SVVerbInfAdj|SVRefl;SVInf|SVRefl;
+/*		101. I övriga fall måste uppgifterna grunda sig på uppgifter i en handling som lämnats i ett ärende som gäller den arbetssökande.
 491;40;SVVerbInfAdj|SVObjpron;SVInf|*;
+/*		491. Grödor som sojabönor och majs har gentekniskt kunnat göras resistenta mot glyfosat som då kan användas för att effektivt döda alla konkurrerande växter i odlingarna.
 102;40;SVVerbInfAdj|SVVerbpt2;SVInf|SVVerbpt2;
+/*		102. Utredningen menar också att landstingen måste ta ett mer aktivt ansvar för att säkra upp infrastrukturen kring kliniska studier.
 135;40;SVPrep|SVVerbInfAdj;SVPrep|SVAdj;
+/*		135. Det blev en vacker, solig och varm dag med friska vindar på Elsas begravning.
 596;40;SVPrep+^SVConj|SVDefart|SVVerbInfAdj|SVCon;*|SVDefart|SVAdj|SVCon;
+/*		596. vid 1350 slitsades den vida tunikan upp över den snäva undertunikan.
 138;40;SVIndefart|SVVerbInfAdj;SVIndefart|SVAdj;
+/*		138. Sådant jordbruk lever (tillsvidare) kvar på rost och röta och många bönders vilja att arbeta till en ringa timpenning.
 139;40;SVPosspron|SVVerbInfAdj;SVPosspron|SVAdj;
+/*		139. Man ska se sitt rätta värde och anpassa sitt handlande, och sina anspråk, till det, inte fordra mera, men absolut inte heller mindre.
 509;40;SVDemonstr|SVVerbInfAdj;SVDemonstr|SVAdj;
+/*		509. Om de inte kan vara trygga där, var är de trygga då? Det stora ansvaret är att göra de rätta valen.
 141;40;SVAttrpron|SVVerbInfAdj;*|SVAdj;
+/*		141. Dessutom försöker elitidrottare i regel att minimera och helst radera alla uppenbara tecken på mental svaghet, särskilt i prestationssammanhang.
 490;40;SVAdvDegree|SVVerbInfAdj;*|SVAdj;
+/*		490. De framhåller också att problemställningarna är relativt lätta för studenterna att förstå.
 774;40;SVGen|SVVerbInfAdj;*|SVAdj;
+/*		774. Den stora svårigheten bestod i att mikrovågsspektroskopi inte kunde göras på grund av CH-radikalens korta livslängd i laboratoriet.
 580;40;SVVerb|.SVVerbpt2|SVVerbInfAdj|SVCon;SVVerb|*|SVAdj|*;
+/*		580. Han betonar äkta självkänsla och menar att vårt eget mentala självsabotage ofta har goda intentioner.
 812;40;SVVerb|SVAdv|.SVVerbpt2|SVVerbInfAdj|SVCon;SVVerb|^SVAdv|*|SVAdj|*;
+/*		812. Rökning frisätter dessutom fria radikaler som stimulerar intracellulära signalvägar.
 590;40;SVInf|.SVVerbpt2|SVVerbInfAdj;SVInf|*|SVAdj;
+/*		590. Stall och andra förvaringsutrymmen för djur ska hållas rena.
 591;40;SVVerbInf|.SVVerbpt2|SVVerbInfAdj;SVVerbInf|*|SVAdj;
+/*		591. Även här saknas säkra belägg, man får resonera sig fram en del.
 666;40;SVVerb|SVVerb|SVVerbInfAdj;SVVerb|SVVerb|SVAdj;
+/*		666. Men för varje år som går kommer osäkra framtida underhållskostnader.
 1158;40;SVSom|SVVerbInfAdj+^SVSForm;*|SVAdj;
+/*		1158. Även en person som lever ett så mediokert liv att hennes välfärdsnivå ständigt ligger på noll tycks ha en välfärdsmässigt viktig egenskap som döda personer saknar.
 952;40;SBegin|SVVerbInfAdj;*|SVAdj;default for beginning of sentence (not always correct)
+/*		952. Mörka färger bars sällan under rokokon, förutom blodrött.
 137;40;SVVerbInfAdj;SVVerb;general default
+/*		137. Man kan själv lära sig en metod för att minska ödemet.
 
 /* Disambiguate SVInfAdj
 /* ---------------------
-
 279;40;SVmAux|SVInfAdj;SVmAux|SVInf;
+/*		279. Ett sätt att försöka lösa dessa problem har utvecklats i en forskargrupp i Cambridge.
 282;40;SVmAux|SVSubjpron+^SVAttrpron|SVInfAdj;SVmAux|SVSubjpron|SVInf;
+/*		282. Kanske kan den heta ABCD?
 283;40;SVmAux|SVAdv|SVInfAdj;SVmAux|*|SVInf;
+/*		283. I fråga om sådant skadestånd skall också gälla vad som sägs i 11 kap. 3–5 §§ tryckfrihetsförordningen om enskilt anspråk i vissa fall.
 284;40;SVmAux|SVInte|SVInfAdj;SVmAux|SVNegrel|SVInf;
+/*		284. Poliser kan lösa enskilda brott, men de kan aldrig lösa brottsligheten.
 280;40;SVAtt|SVInfAdj;*|SVInf;
+/*		280. Att utöva retoriken som en förhandlingskonst blir på det sättet också viktigt för att lösa motsättningar mellan individer och grupper, finna gemensamma grunder och undvika åsiktsförtryck.
 285;40;SVInfAdj|SVRefl;SVInf|SVRefl;
+/*		285. Mitt hår har fått tuppjuck och har börjat bleka sig själv så jag ser ut som en leopard.
 286;40;SVInfAdj|SVVerbpt2;SVInf|SVVerbpt2;
+/*		286. Men det var bankerna som drabbades värst eftersom de tvingades täcka upp alla uttag.
 647;40;SVPrep|SVInfAdj;*|SVAdj;
+/*		647. Rektorerna och förvaltningscheferna var personer med breda kontaktytor inom politik och näringsliv i hela landet.
 281;40;SVInfAdj|SVCon;SVAdj|SVCon;default
+/*		281. Barn som är under sex månader kan få svårt att dia och den snabba andningen gör att de bara kan sova korta stunder. WRONG: Jag försökte hålla mig lugn och täcka vinklarna.
 287;40;SVInfAdj;SVInf;default
+/*		287. Den här lösa och allmänna definitionen drar alltså vissa gränser mot andra discipliner.
 
 /* Disambiguate SVPartSupCon
 /* -------------------------
-
 314;40;SVAux|SVPartSupCon;SVAux|SVSup;
+/*		314. Det är en lång process innan eleverna har vants vid och tränats för att kunna delta i t ex ett undersökningslandskap.
 318;40;SVAux|SVAdv|SVPartSupCon;SVAux|*|SVSup;
+/*		318. Han har inte hört av sig, de anhöriga är oroliga och det har ju blåst i området.
 708;40;SVAux|SVAdvAdj+SVAdvTemp|SVPartSupCon;SVAux|*|SVSup;
+/*		708. En av Sveriges främsta reportrar som sitter snett emot mig till höger här på jobbet, har plötsligt upptäckt Bob Dylan, eller som han säger, ”tagit till sitt hjärta”.
 315;40;SVIndefart|SVPartSupCon;*|SVCon;
+/*		315. Moderna bärbara datorer har oftast bara en fläkt som kyler flera delar samtidigt.
 316;40;SVPosspron|SVPartSupCon;SVPosspron|SVCon;
+/*		316. Man kan beskriva deras ansats som ett försök att i efterhand skapa en sorts yrkesstatistik genom att länka samman uppgifter om de mer väldokumenterade 1800  och 1900-talen med jämförbara data för äldre perioder.
 319;40;SVAttrpron:"icke"|SVPartSupCon;*|SVCon;
+/*		319. Ibland funkar sådana här skämt, ibland inte.
 320;40;SVAdj|SVPartSupCon;SVAdj|SVCon;
+/*		320. Samtidigt  gjordes en fantastisk upptäckt av en rysk kemist.
 317;40;SVPrep|SVPartSupCon;SVPrep|SVCon;
+/*		317. Av den orsaken är antalet tre vanligt i skämt.
 321;40;SVConj|SVPartSupCon;SVConj|SVVerb;
+/*		321. Man kan också få lämna cellprov från den knöl som upptäckts.
 334;40;SVPartSupCon;SVCon;default
+/*		334. En annan viktig upptäckt var maserstrålning. WRONG: Komplex kemi upptäckt i rymden.
 
 /* Disambiguate SVPartCon
 /* ----------------------
-
 275;40;SVIndefart|SVPartCon;*|SVCon;
+/*		275. Den aktersta porten är placerad lite högre än de övriga, troligtvis som en följd av att durken under halvdäcket ligger lite högre än väderdäcket.
 276;40;SVPrep|SVPartCon;SVPrep|SVCon;
+/*		276. Ingen får utses till ledamot för mer än två mandatperioder i följd.
 277;40;SVPosspron|SVPartCon;SVPosspron|SVCon;
+/*		277. Som skydd mot löpkvalster i naturen rekommenderar vi att man använder samma skydd som mot fästingar, dvs stövlar och ljusa, tätt vävda byxor samt en skjorta eller tröja instoppad i byxlinningen.
 278;40;SVPartCon;SVCon;PRELIMINARY DEFAULT
+/*		278. Det första fallet var en 32-årig kvinna med diabetes mellitus typ 1 sedan 17 års ålder.
 
 /* Disambiguate SVVerbAdjCon via SVVerbCon
 /* ---------------------------------------
-
 466;40;SVInf|SVVerbAdjCon;^SVVerb|SVCon;
+/*		466. Senast på onsdag förmiddag ska åklagare bestämma om de ska begäras häktade. WRONG: En förälder kan till exempel säga ”lek inte med bordet”.
 467;40;SVVerb|SVInte|SVVerbAdjCon;^SVVerb|*|SVCon;
+/*		467. Men problemet tar inte slut här.
 764;40;SVPrep+^SVConj|SVDefart+^SVObjpron|SVVerbAdjCon;SVPrep|SVDefart|SVAdj;
+/*		764. Målen på marken angrips bara om det finns ett hot mot de allierades flygplan.
 765;40;SVGen|SVVerbAdjCon;*|SVAdjCon;
+/*		765. Vid tiden kring 1600-talets slut bestämdes även ett enhetligt system med namn, så kallade kategorinamn.
 457;40;SVVerbAdjCon;+SVVerbCon;
+/*		457. Mörka färger bars sällan under rokokon, förutom blodrött.
 
 /* Disambiguate SVVerbCon
 /* ----------------------
-
 148;40;SVSubjpron+^SVAttrpron|SVVerbCon;SVSubjpron|SVVerb;
+/*		148. Det handlar med andra ord om validiteten i metoden.
 149;40;SVVerbCon|SVRefl;SVVerb|SVRefl;
+/*		149. Många av de fall som upptäcks i Sverige rör sig om personer som har blivit smittade i utlandet.
 162;40;SVAttrpron+^SVSubjpron|SVVerbCon;*|SVCon;
+/*		162. För att huvuddomaren ska kunna avgöra var på planen offside förseelsen inträffat håller den assisterande domaren sin flagga i tre olika vinklar in mot planen.
 150;40;SVVerbCon|SVSubjpron+^SVAttrpron;SVVerb|*;
+/*		150. På ett otroligt filmklipp syns det hur han har spänt fast sig i en liten trädgårdsstol samtidigt som de färgglada ballongerna lyfter honom mot skyn.
 158;40;SVVerbCon|SVObjpron;SVVerb|*;
+/*		158. Idag kan man få uppfattningen att DNA helt styr oss.
 163;40;SVVerbCon|SVVerbpt2;SVVerb|SVVerbpt2;
+/*		163. Vilken bild får vi av hur befälsordningen såg ut i samhället, om vi ur databasen plockar fram samtliga fall där en person beordrar en annan person att göra något?
 549;40;SVVerbCon+SVSForm|SVPrep;SVVerb|*;
+/*		549. Greps av polis.
 614;40;SVVerbCon|SVDecinum;SVVerb|*;
+/*		614. Tobaksaktien steg 0,4 procent till 202:60 kronor.
 160;40;SVIndefart|SVVerbCon;*|SVCon;
+/*		160. Allt är i grunden en strid om pengar, makt och inflytande.
 161;40;SVPosspron|SVVerbCon;SVPosspron|SVCon;
+/*		161. om det finns andra i omgivningen med samma besvär.
 254;40;SVConpart1|SVVerbCon;SVCon|SVCon;
+/*		254. Med smärre skillnader i juridiska konstruktioner finns sparbanker i ett stort antal länder.
 751;40;SVPrep:SVConj|SVNumber:SVNum+^SVYear|SVVerbCon;*|*|SVCon;
+/*		751. Enligt internationella fotbollförbundet Fifa spelar drygt 240 miljoner människor i 200 länder fotboll regelbundet. Under årens lopp har denna konvention som 148 länder deltar i räddat många växter och djur som hotas av utrotning. En käpp med två ändar: konsten som planeringsinstrument och protes i postpolitiken. Det är som två ändar på samma sticka.
 511;40;SBegin|SVRelpron|SVVerbCon;*|*|SVVerb;for question words at the beginning of a sentence
+/*		511. Vad händer i kroppen?
 152;40;SVVerbCon|SVCon;SVVerb|SVCon;
+/*		152. Otto lever ensam och har därför inget annat att sköta än sitt eget hemman.
 164;40;SVVerbCon|SVIndefart:SVAdvDegree:SVAttrpron:SVAdj;SVVerb|*;
+/*		164. Det handlar helt enkelt om forskning om texter som har en självklar plats och som bär en stor del av den verksamhet de ingår i respektive forskning om texter som har en mindre självklar status, kanske rentav en marginell roll. Men den otäcka siffran visar även att hela 58 procent av fordonen som åker förbi kör alldeles för fort. Till slut lever de i fullständig bortglömdhet och fattigdom. Dessa tester är oftast standardiserade för enskilda vattenlevande arter och missar synergistiska effekter.
 200;40;SVInte|SVVerbCon;SVInte|SVVerb;
+/*		200. Den visade att han inte lider av en allvarlig psykisk störning.
 410;40;SBegin|SVAdv|SVVerbCon;*|*|SVVerb;
+/*		410. Ofta läggs även ett metallnät, ett så kallat stent, in i kranskärlet för att hålla det utvidgat.
 411;40;SVSom|SVAdv|SVVerbCon;^SVSom|*|SVVerb;
+/*		411. WFS är många gånger svårt att identifiera hos en patient som ofta lider av en eller flera allvarliga sjukdomar. WRONG: Aten och Rom införde skatter på handeln som exempelvis tullar och skatt på försäljning.
 469;40;SVSom|SVVerbCon|SVPrep;*|SVVerb|*;
+/*		469. Men den otäcka siffran visar även att hela 58 procent av fordonen som åker förbi kör alldeles för fort.
 722;40;SVVerbCon|SVInte|^SVInf+^SVVerbInf+^SVAux+^SVmAux+^SVSup+^SEnd;SVVerb|SVInte|*;
+/*		722. Stängslen höjdes till sex meter men stoppar inte människors hopp om ett bättre liv.
 473;40;SVVerbCon+SVCapitalInitial+^SVImpCon;SVCon;default for capitalized words
+/*		473. Vattenkraftverk samt vattenreglering eller vattenöverledning för kraftändamål får inte heller utföras i följande älvsträckor: I Klarälven sträckan mellan Höljes och Edebäck.
 472;40;SVVerbCon+SVSForm+^SVImpCon+^SVVerbAdjCon;SVVerb;default for s-forms
+/*		472. Urminnes hävd sågs alltså som ett laga fång och onekligen föreföll urminnes hävd därtill inta en exklusiv ställning.
 746;40;SVVerbCon+SVPreferRelation;SVVerb;default for selected forms, see lexreps
+/*		746. Verbmetoden handlar alltså ytterst sett om att registrera människors tidsanvändning.
 747;40;SVCon+^SVPossibleGennoun+^SVAdj|SVVerbCon|^SVCon+^SEnd;*|SVVerb|*;
+/*		747. Varje år strömmar 971 kubikkilometer vatten ut i Bengaliska viken från Ganges-Brahmaputra.
 750;40;SVCon+^SVPossibleGennoun+^SVAdj|SVAdvAdj|SVVerbCon|^SVCon+^SEnd;*|*|SVVerb|*;
+/*		750. Det har gått 40 år sedan Monty Python senast stod på scen i Storbritannien.
 756;40;^SVComma+^SBegin|^SVComma|SVComma|SVVerbCon+^SVImpCon|^SVCon+^SVAndOrBut+^SVAux+^SVComma+^SVAv+^SEnd;*|*|*|SVVerb|*;for verb in the main clause after a subordinate clause
+/*		756. Många stumfilmer innehåller textkort, skyltar med text som täcker hela bildrutan, och återger filmens dialog samt annan information av narratologisk betydelse.
 1218;40;^SVDefart+^SVAttrpron+^SVAdj+^SVGen+^SVPrep|SVVerbCon|SVAdvManner;*|SVVerb|*;
+/*		1218. Polisen har ännu inte fått några tips som leder vidare i sökandet.
 151;40;SVVerbCon+^SVImpCon+^SVVerbAdjCon;SVCon;default
+/*		151. Det blev en vacker, solig och varm dag med friska vindar på Elsas begravning.
 
 /* Disambiguate SVImpCon
 /* ---------------------
-
 153;40;SBegin|SVImpCon|SVRefl;*|SVVerb|SVRefl;
+/*		153. Hjälp varandra!
 155;40;SBegin|SVImpCon|SVObjpron;*|SVVerb|SVObjpron;
+/*		155. Sätt denna på din status om du älskar små ponny hästar som springer jätte snabbt.
 154;40;SBegin|SVImpCon|SVAdv;*|SVVerb|*;
+/*		154. Läs gärna dikten på sidan 34 en gång till och reflektera en stund över vilket tillstånd som dikten gestaltar.
 156;40;SBegin|SVImpCon|SVAdvAdj;*|SVVerb|*;
+/*		156. Läs mer: Att leva med ärftlig risk för bröstcancer.
 157;40;SBegin|SVImpCon|SVVerbpt2;*|SVVerb|SVVerbpt2;
+/*		157. Mät upp färs och salt i en bunke.
 189;40;SBegin|SVImpCon|SVIndefart;*|SVVerb|*;
+/*		189. Håll ett jämnt tryck i flera minuter.
 884;40;SBegin|SVImpCon|SVPluralnoun;*|SVVerb|*;
+/*		884. Låt hyresgästerna bestämma med köksbordsmetoden.
 165;40;SVAndOrBut|SVImpCon|SVVerbpt2;SVAndOrBut|SVVerb|SVVerbpt2;
+/*		165. Använd olika skärbrädor och kyl ner maten snabbt.
 188;40;SVAndOrBut|SVImpCon|SVIndefart;SVAndOrBut|SVVerb|*;
+/*		188. Åk ut på landet och besök en bondgård.
 885;40;SVComma|SVImpCon|SVAdv;*|SVVerb|*;
+/*		885. Vid utkastet av fiskedraget används centrifugalkraften, och med olika personliga tekniker bringas spöet i en sådan rörelse att draget vid bromsens frisläppande, far iväg från kastaren i en önskad riktning, där man tror att fisken befinner sig.
 649;40;SVImpCon+SVSForm;SVVerb;
+/*		649. Detta syns framför allt i de unika arbeten som de bland annat tar fram till utställningarna.
 763;40;SVImpCon+SVPreferRelation;SVVerb;default for selected forms, see lexreps
+/*		763. Förkorta eller förläng bråken och lägg samman.
 159;40;SVImpCon+^SVVerbAdjCon;SVCon;default
+/*		159. På plats utanför kyrkan fanns en diakon och även ett team från Röda korset för den som behövde stöd.
 
 /* Disambiguate remaining SVVerbAdjCon
 /* -----------------------------------
-
 462;40;SVAdvDegree|SVVerbAdjCon;*|SVAdj;very low-frequent, may not be relevant
+/*		462. Föredragningslistan är nu lika slut som de flesta av oss tror jag.
 463;40;SVVerbAdjCon+SVSForm;SVVerb;
+/*		463. De principförklaringar som vi alla leds att göra.
 459;40;SVVerbAdjCon;SVCon;default
+/*		459. En gemensam nämnare för dessa historier är att svårigheter ofta har beskrivits med en större öppenhet när karriären väl tagit slut.
 
 /* Disambiguate SVVerbAdj
 /* ----------------------
-
 226;40;SVIndefart|SVVerbAdj;*|SVAdj;
+/*		226. De statliga och kommunala förvaltningsgrenarna med sina idag stora och avancerade elektroniska förvaltningssystem tillkom ursprungligen utifrån en decentraliserad utvecklingsmodell med en låg grad av politisk styrning.
 227;40;SVPrep|SVVerbAdj;SVPrep|SVAdj;
+/*		227. Ofta är det mat som har tillagats vid för låg temperatur.
 228;40;SVAdvDegree|SVVerbAdj;SVAdj|SVAdj;
+/*		228. Men vid den tiden trodde man att det interstellära mediet hade oerhört låg densitet – många gånger lägre än vårt bästa vakuum på jorden.
 245;40;SVPrespart|SVVerbAdj;SVAdj|SVAdj;
+/*		245. Vatten observerades däremot i många objekt även om också den halten var överraskande låg.
 229;40;SVpAux|SVVerbAdj;SVpAux|SVAdj;
+/*		229. Huden blir blek och ibland blåaktig.
 232;40;SVAux|SVVerbAdj;SVAux|SVAdj;
+/*		232. Okomplicerade fall har låg mortalitet.
 255;40;SVConpart1|SVVerbAdj;SVCon|SVCon;
+/*		255. Jag antar att det vi vill just nu är att få avtalet placerat i en slags lös cement.
 230;40;SVVerbAdj|SVPrep;SVVerb|SVPrep;
+/*		230. De såg den som uttryck för att ämnet låg på en hög nivå.
 233;40;SVVerbAdj|SVRefl;SVVerb|SVRefl;
+/*		233. Det är som det skulle finnas en magisk färg som automatiskt ”mönstrade sig själv” när man målade ut den på väggen.
 234;40;SVVerbAdj|SVSubjpron;SVVerb|SVSubjpron;
+/*		234. Varfor misslyckades det?
 239;40;SVVerbAdj|SVVerbpt2;SVVerb|SVVerbpt2;
+/*		239. Heat shock-proteiner är inflammatoriska och läcker ut från döda celler.
 235;40;SVCon|SVVerbAdj;SVCon|SVVerb;
+/*		235. Under lång tid låg fokus på användningen inom elitidrotten. Det temporala och spatiala avståndet mellan Bibeln och Legender löses därmed upp, så att berättelserna präglas av en mytisk tidlöshet.
 236;40;"de"|SVVerbAdj;SVSubjpron|SVVerbAdj;
+/*		236. De löses bäst upp i sura lösningar och reagerar med metallsalter, så använd en rostfri kastrull.
 237;40;SVSubjpron+^SVDefart|SVVerbAdj;SVSubjpron|SVVerb;
+/*		237. Medan i lördags hade jag mer kontroll på vad jag låg.
 238;40;SVSaa|SVVerbAdj;SVSaa|SVAdj;
+/*		238. Vid färdigställandet hade OSO då en spektrometer som var dubbelt så bred som den på Kitt Peak-teleskopet nära Tuscon, Arizona.
 240;40;SVAndOrBut|SVVerbAdj|SVCon;SVAndOrBut|SVAdj|*;
+/*		240. Typiska symtom vid EHEC är diarréer, ofta blodiga, ont i magen och ingen eller låg feber.
 242;40;SVAdv|SVVerbAdj;*|SVVerb;
+/*		242. Felodipin lades till patientens blodtrycksbehandling, och dessutom insattes aktivt D-vitamin.
 243;40;SVConj|SVVerbAdj;SVConj|SVVerb;
+/*		243. Något som misslyckades totalt.
 244;40;SVVerbAdj|SVCon;SVAdj|*;
+/*		244. Man ska undvika att klia, gnugga eller riva på den irriterade huden eftersom det förvärrar besvären. WRONG: Fram till dess låg antalet disputerade ganska oförändrat på omkring 600–700 per år.
 554;40;SVVerbAdj|SVAdj;SVAdj|SVAdj;
+/*		554. psykosociala faktorer, låg fysisk aktivitet och bukfetma.
 231;40;SVVerbAdj+^SVVerbAdjCon;SVVerb;default
+/*		231. Erytropoesstimulerande läkemedel (darbe-poetin alfa) och metoprolol, där doserna successivt ökades, insattes.
 
 /* Disambiguate SVVerbPartSup
 /* --------------------------
-
 1216;40;SVAux|.SVAdv|SVVerbPartSup;*|*|SVSup;
+/*		1216. Bort med bromsen som cancertumören har satt dit.
 274;40;SVVerbPartSup;SVVerb;default
 
 /* Disambiguate SVPartSup
 /* ----------------------
-
 111;40;SVpAux|SVPartSup;*|SVAdj;
+/*		111. Om ett underskott (negativt ekonomiskt resultat) uppstår ska detta vara återställt inom tre år.
 572;40;SVpAux|SVAdvDegree|SVPartSup;*|*|SVAdj;
+/*		572. Växternas fotosyntesmaskineri med två seriekopplade fotosystem är mycket komplicerat och har uppkommit i små steg från enklare system.
 573;40;SVpAux|SVAdvManner|SVPartSup|^SVPrep;*|*|SVAdj|*;
+/*		573. Engelskans chiggers är den folkliga benämningen, men begreppet verkar ha blivit medicinskt accepterat, kanske oftast i form av »chigger bites« eller »chigger dermatitis«.
 646;40;SVpAux|SVInte|SVPartSup;*|*|SVAdj;
+/*		646. Varför det är så är inte känt.
 143;40;SVIndefart|SVPartSup;*|SVAdj;
+/*		143. Trots det väcker programmet ett brett spann av känslor och tankar om livets yttre och inre domare.
 416;40;SVIndefart|SVAdvDegree|SVPartSup;*|SVAdj|SVAdj;
+/*		416. Personer med samsjuklighet mellan missbruk eller beroende och annan psykisk eller somatisk sjukdom är en särskilt utsatt grupp.
 749;40;SVIndefart|SVAdvManner|SVPartSup|SVCon;*|SVAdj|SVAdj|SVCon;
+/*		749. Tidigare studier har diskuterat hur man kan främja ett verkligt informerat samtycke vid föräldraorgandonation [2].
 759;40;SVIndefart|SVAdj|SVPartSup|^SVPrep+^SEnd;*|SVAdj|SVAdj|*;
+/*		759. Ett visst kalkylerat mått av kreditförluster.
 526;40;SVPrep|SVPartSup;*|SVAdj;
+/*		526. Många stora floder mynnar i brett förgrenade deltan.
 715;40;SVPrep+^SVConj|SVAdvAdj|SVPartSup;*|*|SVAdj;
+/*		715. Man får inte arbeta med livsmedel, vård av spädbarn, eller vård av personer med mycket nedsatt immunförsvar så länge man är smittsam.
 552;40;SBegin|SVPartSup|SVCon;*|SVAdj|*;
+/*		552. Nedsatt känsel i armhålan och lymfödem.
 709;40;SBegin|^SVAux|SVPartSup|SVCon;*|*|SVAdj|*;
+/*		709. Dåligt tillagat kycklingkött är den vanligaste smittkällan.
 760;40;SVPunctuation|SVPartSup|SVCon+^SVPluralnoun;*|SVAdj|*;
+/*		760. Båda tillstånden varierar i svårighetsgrad och omfattar långvarig utmattning, bristande energi och motivation, sömnsvårigheter, nedsatt aptit, nedsatt arbetsförmåga, irritation, nedstämdhet och ett nedsatt immunförsvar.
 1098;40;"icke"|SVPartSup|typeConcept;*|SVAdj|*;
+/*		1098. Ensidigt eller icke specificerat ljumskbråck med inklämning, utan gangrän, primärbråck K40.3A.
 115;40;SVPartSup;SVSup;default
+/*		115. Men som sagt, hans flygresa uppskattades inte av den lokala polisen.
 
 /* Disambiguate SVVerbPart
 /* -----------------------
-
 814;40;SVDefart+^"det"|SVsVerbPart|SVCon;SVDefart|SVAdj|*;
+/*		814. De stora skillnaderna i de disputerades sammansättning medför att den bild av inkomstskillnaderna som ges av genomsnittsinkomsterna kan vara missvisande.
 536;40;SVsVerbPart;SVVerb;default for s-forms
+/*		536. Men som sagt, hans flygresa uppskattades inte av den lokala polisen.
 290;40;SVpAux|SVVerbPart+^SVAdj|SVPrep;*|SVRelpart|SVPrep;
+/*		290. Vi har blivit inspirerade till att använda det sociokulturella perspektivet på lärande i slöjdsammanhang för att detta perspektiv inte gör någon åtskillnad mellan språk, handlingar och tankar.
 291;40;SVpAux|SVAdv|SVVerbPart+^SVAdj|SVPrep;*|*|SVRelpart|SVPrep;
+/*		291. Uppförandekoderna var alltså länkade till människors grupptillhörighet.
 123;40;SVpAux|SVVerbPart;*|SVAdj;
+/*		123. 10000 kunder beräknas vara drabbade.
 178;40;SVpAux|SVAdv|SVVerbPart;*|*|SVAdj;
+/*		178. De blev därför frustrerade när de fick en uppgift och en rad frågor utan ett omedelbart facit.
 575;40;SVpAux|SVAdvDegree|SVVerbPart;*|*|SVAdj;
+/*		575. Efter ett antal delningar börjar cellerna bli mer och mer specialiserade och mönster och strukturer börjar uppträda.
 576;40;SVpAux|SVAdvManner|SVVerbPart|^SVPrep;*|*|SVAdj|*;
+/*		576. Om simuleringsmodellerna är empiriskt verifierade kan detta ses som ett mellanting mellan experimentell metodik och teoretisk forskning.
 248;40;SVConpart1|SVVerbPart;SVCon|SVCon;
+/*		248. Antalet disputerade ökar både för män och kvinnor.
 811;40;SVVerbPart|SVVerbpt2;SVVerb|SVVerbpt2;
+/*		811. Det är som det skulle finnas en magisk färg som automatiskt ”mönstrade sig själv” när man målade ut den på väggen.
 293;40;SVPrep+^SVConj|SVDefart+^SVSubjpron|SVVerbPart;SVPrep|SVDefart|SVAdj;
+/*		293. Medicin uppvisade den absolut sett snabbaste ökningen av kvinnoandelen bland de disputerade.
 295;40;SVVerbPart|SVIndefart:SVSubjpron:SVSubjpron;SVVerb|*;
+/*		295. Det statliga konjunkturstödet spelade en viss roll för det höga resultatet åren 2010–11. Utanför, sida vid sida, väntade alla som inte fick plats i kyrkan för att få ta farväl. Detta var på 1600  och 1700-talen kanske främst en markering av ståndstillhörighet som inte sade något om hur de använde sin tid i försörjningssyfte.
 292;40;SVPrep+^SVConj|SVVerbPart;SVPrep|SVPart;
+/*		292. De handlade inte bara om försörjning i snäv ekonomisk bemärkelse, utan var också delar i komplicerade sociala samspel.
 125;40;SVVerbPart|SVPrep;SVSup|SVPrep;
+/*		125. Han framförde under rättegången att han inte såg någon annan tänkbar påföljd än livstids fängelse.
 128;40;SVIndefart|SVVerbPart|SVCon;*|SVAdj|*;
+/*		128. den stora seriösa tv-kanalen har en direktsänd intervju med Lars Jakobsson.
 361;40;SVAttrpron+^SVSubjpron+^SVObjpron|SVVerbPart;*|SVAdj;
+/*		361. Exempelvis finns flera publicerade fysikövningar om krafter där kraftpilarnas storlekar inte överensstämmer med kraftens storlek och deras angreppspunkter är felaktiga.
 648;40;SVGen:SVAdj|SVVerbPart;*|SVAdj;
+/*		648. Linjernas observerade våglängd blir då förflyttade relativt sin vilovåglängd (laboratorievåglängd). Men tabell 1 antyder att detta inte beror på att svenska disputerade kvinnor lämnar akademin i större utsträckning än män.
 899;40;SVPrep|SVDefart+^"det"|SVVerbPart;*|SVDefart|SVAdj;
+/*		899. Skillnaden går i den förväntade riktningen, nämligen att den finansiellt starka gruppen är mindre konsumtionskänslig.
 900;40;SVCon|SVVerbPart|^SVCon+^SVAdj+^SVpAux+^SVAux+^SEnd;*|SVVerb|*;
+/*		900. Forskarna konstaterade att hennes luftvägar var fulla av ett fågelvirus, H10N8, som inte tidigare infekterat människa.
 127;40;SVVerbPart|^SVCon+^SVAdj+^SVpAux+^SVAux+^SVComma+^SVAndOrBut+^SEnd;SVVerb|*;
+/*		127. Det läkte inte så jag ringde vårdcentrale.
 738;40;SVCon|SVVerbPart|SVpAux:SVAux;*|SVVerb|*;
+/*		738. Sista gången ABBA som grupp uppträdde var 1982. När en polispatrull anlände hade mannen blivit knivhuggen i låret av kvinnan.
 126;40;SVVerbPart|SEnd;SVVerb|*;
+/*		126. Det intressanta är att budskapet överensstämde.
 247;40;SVDefart|SVPrep|SVCon|SVVerbPart;SVDefart|SVAdj|SVAdj|SVAdj;
+/*		247. I vilken mån kan den i Sverige tillämpade forskningsetiska vägledningen vara tillämplig och tillräcklig för studenters självständiga arbeten?
 256;40;SVAdvDegree|SVVerbPart+^SVsVerbPart|SVCon;SVAdj|SVAdj|*;
+/*		256. Vid ökande halt tillkommer alltfler och alltmer förvärrade skadeeffekter.
 246;40;SVCon|SVVerbPart|SVCon;SVCon|SVVerb|*;
+/*		246. Sådana upptäckter motiverade spektrallinjeavsökningar.
 530;40;SVCon|SVVerbPart|SVAdj;^SVCon|SVVerb|*;
+/*		530. Fotosyntesen förändrade jordens klimat.
 531;40;SVVerbPart|"hela";SVVerb|SVAdj;
+/*		531. Allt detta blev starten på en vetenskaplig revolution som förändrade hela vår världsbild.
 532;40;^SVDefart+^SVIndefart+^SVAttrpron+^SBegin|SVVerbPart|SVGen;*|SVVerb|^SVAdj;
+/*		532. Senare kom 2008 års finanskris, som påverkade kommunsektorns resultat negativt redan under år 2008.
 257;40;"som"|SVVerbPart;SVRelpron|SVVerb;
+/*		257. Teamet som utförde transplantationen saknade forskningsförberedelser inom fältet.
 901;40;"som"|SVInte|SVVerbPart;SVRelpron|SVInte|SVVerb;
+/*		901. De sa att det var något som inte stämde och att jag skulle uppsöka akuten, säger Patrik.
 258;40;^SVVerb+^SBegin|SVSubjpron+^SVDefart+^SVAttrpron|SVVerbPart;*|SVSubjpron|SVVerb;
+/*		258. Hon älskade att resa och hade en världskarta på rummet där hon satte nålar för de platser hon besökt.
 259;40;SBegin|SVSubjpron+^SVDefart+^SVAttrpron|SVVerbPart;*|SVSubjpron|SVVerb;not covered by r258
+/*		259. Hon påbörjade dalteparinbehandling i hög dos.
 471;40;SBegin|SVAdv|SVVerbPart;*|*|SVVerb;
+/*		471. Sedan frågade doktorn hur så mycket elände och utblottelse hade kunnat ansamlas i en enda kropp.
 523;40;SBegin|SVRelpron|SVVerbPart;*|^SVConj|SVVerb;
+/*		523. Varför stoppade Johan oss?
 422;40;SVAttrRelpron|SVVerbPart;SVRelpron|SVVerb;
+/*		422. Bandbredden på spektrometern var först 500 MHz, men byttes ut 1992 till 1 GHz vilket underlättade observationerna betydligt.
 525;40;SVYear|SVVerbPart;*|SVVerb;
+/*		525. År 1800 upptäckte William Herschel att vår sol även emitterade infraröd strålning utöver det vanliga synliga ljuset.
 921;40;SVAdvTime+^SVAdvAdj|SVVerbPart;*|SVVerb;
+/*		921. I fjol inbringade välgörenhetssatsningen drygt 23,3 miljoner kronor för rent vatten i slumområden och i år växlade givarna upp ytterligare fem miljoner kronor.
 893;40;SVComma|SVVerbPart|SVCapitalInitial:SVCapitalAll:SVCapitalMixed;*|SVVerb|*;
+/*		893. I sitt testamente, daterat den 27 november 1895, stadfäste Nobel att en stiftelse skulle grundas av hans förmögenhet, och att räntan skulle utdelas som pris åt personer som under föregående år gjort mest nytta för mänskligheten.
 896;40;^SVPrep+^SBegin|SVCon|SVComma|SVVerbPart|SVCon;*|*|*|SVAdj|*;
+/*		896. Ringarnas ursprung är millimetertunna, sågade «ark» av syrenträd.
 897;40;SVAdj|SVComma|SVVerbPart|SVCon;*|*|SVAdj|*;
+/*		897. Han är exemplet på den utvecklade, etablerade storheten.
 898;40;SVComma|SVVerbPart;*|SVVerb;default after comma
+/*		898. Ann Jaquin, som började som lärling 1723, startade eget 1746.
 902;40;SVSubjpron|SVVerb|SVAndOrBut|SVVerbPart;SVSubjpron|SVVerb|SVAndOrBut|SVVerb;
+/*		902. Man mätte och vägde och tittade för att bestämma människans ställning i världsalltet.
 903;40;SVVerbPart|SVAndOrBut|SVVerb;SVVerb|SVAndOrBut|SVVerb;don't move up: fallback rule
+/*		903. De gick i ett fackeltåg till kommunhuset där de stoppade och ropade slagord.
 129;40;SVVerbPart;SVCon;default
+/*		129. Ökade kostnader kan bli ett problem då varje dator kräver underhåll.
 
 /* Disambiguate SVSupAdj
 /* ---------------------
-
 503;40;SVpAux|SVSupAdj;SVpAux|SVAdj;
+/*		503. Andra åtgärder vid slakten får inte vidtas innan djuret är dött.
 504;40;SVIndefart|SVSupAdj;*|SVAdj;
+/*		504. Jag inbillar mig att jag ser ett glatt leende på alla jag möter.
 505;40;SVIndefart|SVAdvDegree|SVSupAdj;*|SVAdj|SVAdj;
+/*		505. The ABCD Society erbjuder en fascinerande inblick i en föga förstått problemet.
 506;40;SVSupAdj;SVSup;default
+/*		506. Gruppen hade även lyckats med verifierande laboratoriespektroskopi.
 
 /* Disambiguate SVSupCon
 /* ---------------------
-
 514;40;SVAux|SVSupCon;SVAux|SVSup;
+/*		514. Det tar också en tid innan håret har växt ut igen.
 515;40;SVAux|SVAdv|SVSupCon;SVAux|*|SVSup;
+/*		515. Patienten har därefter mått bra och har nu följts under ett år.
 517;40;SVAux|SVInte|SVSupCon;SVAux|SVInte|SVSup;
+/*		517. Min mor har inte mått så bra.
 518;40;SVAux|SVAdv|SVInte|SVSupCon;SVAux|*|SVInte|SVSup;
+/*		518. B har därefter inte mått bra.
 758;40;SVAux|SVCon+^SVAdj+^SVGen+^SVConpart1|SVSupCon;*|*|SVSup;inversion
+/*		758. I mitten på 1400-talet hade befolkningen växt till mellan fem  och sextusen invånare.
 516;40;SVSupCon;SVCon;default
+/*		516. Ett uppenbart skäl är förstås att vi inte undersöker produktivitet och tillväxt.
 
 /* Disambiguate SVPart
 /* -------------------
-
 553;40;SVConpart1|SVPart;SVCon|SVCon;
+/*		553. På lite sikt plussas antalet anställda på med 4100 anställda.
 109;40;SVpAux|SVPart;SVpAux|SVeCon;
+/*		109. Ledamot har rätt att bli entledigad, om särskilda omständigheter föranleder det.
 117;40;SVCon|SVPart|SVPrep;*|SVRelpart|SVPrep;
+/*		117. Så är det emellertid inte, eftersom den andra grafiska meningen består av fyra syntaktiska meningar (makrosyntagmer), i ett fall åtskilda av kommatecken.
 110;40;SVPart;SVAdj;default
+/*		110. Inställd färja på grund av hårt väder.
 
 /* Disambiguate SVPrespart
 /* -----------------------
-
 116;40;SVPrespart;SVAdj;default
+/*		116. Två båtturer mellan Visby och Nynäshamn har ställts in på grund av vindarna, en från Visby klockan 7 i morse och vändande tur vid 11-tiden.
 
 /* Miscellaneous
 /* -------------
 /* Disambiguate 'bort'
-
 1069;40;SVVerb:SVInf:SVVerbInf:SVSup|SVVerbpt2;*|SVVerbpt2;must be before r423 to avoid that vRel gets deleted
+/*		1069. Det kan mätas i den tumör som opereras bort.
 
 /* Add basic labels
-
 423;40;SVVerb:SVVerbInf:SVInf:SVSup:SVAux:SVmAux:SVpAux:SVVerbpt2;+SVvRel;
+/*		423. Det är de mindre snabbåtarna som berörs, eftersom de är mer väderkänsliga än de större färjorna. Det ruskigare vädret väntas dock fortsätta. Stora delar av landet kan vänta sig dagar med flera skurar, antagligen ända fram till fredag. Kvinnan har häktats på sannolika skäl misstänkt för försök till mord och misshandel. Jag kan inte gå in på några detaljer om vad som har hänt säger polisens presstalesperson. Däremot kan jag bekräfta att en 34-årig kvinna sitter häktad och är misstänkt för försök till mord i två fall och sen är det flera fall av misshandel. Det är väldigt påfrestande för samtliga inblandade, säger hennes advokat. Floder förändrar landskapet, både när de rinner inne i landet, och när de mynnar ut i havet eller i en sjö.
 1070;40;SVRelpart;+SVvRel;like r423, but the maximum number of options is reached in r423
+/*		1070. Dessa tester är oftast standardiserade för enskilda vattenlevande arter och missar synergistiska effekter.
 
 /* Pronouns
-
 365;40;SVPosspron|SVCon;SVPosspron|SVCon;
+/*		365. Tack vare de eroderande krafterna samlar en vanlig flod upp flera miljoner ton sediment på sin väg.
 339;40;SVPrep|SVObjpron|SVSom;SVPrep|SVObjpron|SVRelpron;
+/*		339. För det som framförs är inte bara en åsiktsyttring.
 171;40;SVPrep|SVObjpron+^SVDefart+^SVSubjpron|^SVRelpron+^SEnd;SVPrep|SVObjpron|*;
+/*		171. Mellan åren 2003 och 2013 dog totalt 56 personer i olyckor vid vägarbeten – varav sex av dem jobbade med vägarbeten.
 338;40;SVPrep|SVObjpron+SVSubjpron+^SVAttrpron+^SVDefart|^SVRelpron+^SEnd;SVPrep|SVObjpron|*;
+/*		338. Hos de senare ökar fotorespirationen med stigande temperatur.
 357;40;SVPrep|SVObjpron|SVPunctuation:SEnd;SVPrep|SVObjpron|*;
+/*		357. Hon var glad och positiv, empatisk och väldigt mån om alla, oss och vännerna, ville att man skulle tala väl om människor, berättade föräldrarna. Annars visste man inte hur man skulle agera gentemot varandra.
 1145;40;SVAttrRelpron|*typeConcept|"som helst";SVAdj|*|SVeCon-NonRelevant;
+/*		1145. Han har också rätt att anskaffa uppgifter i vilket ämne som helst för sådant uppgiftslämnande eller offentliggörande.
 173;40;SVAttrRelpron|^SVCon+^SVAdj+^SEnd;SVRelpron|*;
+/*		173. Vilket tyvärr var precis vad som hände.
 350;40;SVNumber|SVAttrpron;SVNumber|+SVAdjpron;e.g. två andra
+/*		350. Astma kan delas in i två olika typer, en allergisk och en icke-allergisk.
 640;40;SVPrep+^"om"|SVObjpron+SVAttrpron|SVvRel;SVPrep|SVObjpron|*;
+/*		640. Hitintills har 140 personer i år smittats av salmonellabakterien som annars brukar kallas den ovanligare sorten, 80 av dessa har drabbats efter ett besök på bykrogen i Löttorp på Norra Öland.
 214;40;SVPrep+^"om"|SVObjpron+SVAttrpron|SVPrep;SVPrep|SVObjpron|SVPrep;
+/*		214. föreningsfrihet: frihet att sammansluta sig med andra för allmänna eller enskilda syften.
 216;40;SVPrep|SVObjpron+SVAttrpron|SVAtt;SVPrep|SVObjpron|SVAtt;
+/*		216. Ötzi dog av allt att döma av inre blödningar efter ett pilskott för 5 300 år sedan.
 218;40;SVPrep|SVObjpron+SVAttrpron|SVAndOrBut;SVPrep|SVObjpron|SVAndOrBut;
+/*		218. Det rör sig också om förhandlingar av olika slag för att fatta beslut som är acceptabla för många och helst alla.
 222;40;SVPrep|SVObjpron+SVAttrpron|SVIndefart;SVPrep|SVObjpron|SVIndefart;
+/*		222. Och inte bara det: de uttryckte enligt många ett slags ädelmodernistiskt, funktionalistiskt begär.
 866;40;SVPosspron;SVPosspron;
+/*		866. Då får du en hel rad med exempel som du kan ta ställning till tillsammans med dina elever.
 492;40;SVDefart|SVOrdnumber:SVNum:SVNumber:SVAdj;SVDefart|*;
+/*		492. Framförallt är det i den första fasen, här kallad planering och empiriinsamling, som etiska överväganden krävs och grunden för en god etik i hela uppsatsarbetet läggs. Sten och grus är tyngst och avlagras först, medan sand, dy och botten-slam fälls ut senare under den 3000 kilometer långa resan. De tio intervjuade lärarna kommer från olika institutioner inom det samhällvetenskapliga och humanistiska området vid det studerade lärosätet. Det har skapat grundval för många tidiga kulturer, inte minst den egyptiska, som uppstod omkring Nilens trekantiga delta.
 643;40;SBegin|SVDefart+SVSubjpron|SVAdv|SVvRel;*|SVSubjpron|*|*;
+/*		643. Det i sin tur ledde till att det skrevs en oerhörd mångfald av böcker.
 644;40;SBegin|SVDefart+SVSubjpron|SVInte|SVvRel;*|SVSubjpron|SVInte|*;
+/*		644. det inte fanns någon behörig utgivare när brottet förövades.
 642;40;SBegin|SVDefart|^SVvRel+^SVSom+^SVSubjpron+^SEnd;*|SVDefart|*;
+/*		642. Det ruskigare vädret väntas dock fortsätta.
 886;40;SVDefart|SVAndOrBut;^SVSubjpron+SVObjpron|*;
+/*		886. Sedan får de prova hos oss en period och om de och vi tycker det fungerar bra så får de börja som assisterande tränare i någon åldersgrupp.
 766;40;SVDemonstr|SVvRel;SVSubjpron|*;
+/*		766. Hur har de uppstått, och varför får de ofta mycket olikartade former?
 926;40;SVDemonstr|SVAndOrBut;SVSubjpron|*;
+/*		926. Sedan får de prova hos oss en period och om de och vi tycker det fungerar bra så får de börja som assisterande tränare i någon åldersgrupp.
 512;40;SVIndefart|SVAndOrBut;SVNumber|*;
+/*		512. För det första förutsätter Cambridge-metoden att de som arbetade hade ett eller möjligen två entydiga yrken.
 513;40;SVIndefart|SVPrep|SVNumber;SVNumber|*|*;
+/*		513. De flesta som drabbas blir återställda inom ett till två dygn.
 641;40;SVSubjpron+SVAttrpron|SVvRel;SVSubjpron|*;
+/*		641. Alla har väl haft en dröm om att flyga flera hundra meter upp i luften, sittandes i en stol samtidigt som 120 heliumballonger håller dig svävande?
 215;40;SVSubjpron+SVAttrpron|SVPrep;SVSubjpron|SVPrep;
+/*		215. Dessa båda aktiviteter – att sända någon i ett ärende, att betala accis för en gris – är i sig kanske inte så uppseendeväckande.
 217;40;SVSubjpron+SVAttrpron|SVAtt;SVSubjpron|SVAtt;
+/*		217. Sammantaget innebär detta att ”kohortpyramiderna” för de olika akademiska områdena ser ganska olika ut.
 219;40;SVSubjpron+SVAttrpron|SVAndOrBut;SVSubjpron|SVAndOrBut;
+/*		219. Särskilda sätt att använda en artefakt är således mer legitima än andra och vi kan då tala om en sedvänja.
 223;40;SVSubjpron+SVAttrpron|SVIndefart;SVSubjpron|SVIndefart;
+/*		223. Tillsammans utrycker de en stor oro för att unga idrottares ambitiösa elitidrottssatsningar leder till skador och utbrändhet.
 
 /* Disambiguate AdvAdj
 /* -------------------
-
 924;40;"något"|SVAdvDegree|SVAdvAdj+SVAdvManner;SVIndefart|SVAdj+SVCon|+Join;
+/*		924. Ett något mindre dramatiskt exempel: vi kan använda mötesbordet som matbord och vice versa.
 740;40;"något"|SVAdvAdj|^SVCon;SVbCon|+Join|*;
+/*		740. Det som händer i Portugal är tyvärr inte något ovanligt, det är bara ett av många exempel.
 712;40;SVCon|SVAdvDegree|SVAdvAdj+SVAdvManner;*|SVAdvAdj+SVAdvManner+SVbCon|+Join;
+/*		712. Kanske är förhandlingsperspektivet särskilt fruktbart i en undervisningssituation som ett alternativ till lärarmonologen.
 710;40;SVAdvDegree|SVAdvAdj+SVAdvManner;SVAdvAdj+SVAdvManner|+Join;
+/*		710. Det slam som floderna för med sig är ofta mycket bördigt.
 767;40;SVAdvAdj+SVAdvDegree|SVNumber;SVAdvDegree|SVNumber;
+/*		767. Annat är det nu när kvoten mellan syre  och koldioxidkoncentrationen ökat minst hundra miljoner gånger.
 1205;40;SVpAux|"för"|SVAdvAdj;*|SVAdj|+Join;
+/*		1205. Och även om det är för tidigt att säga hur resultaten ska omsättas i konkreta åtgärder så öppnas nya möjligheter.
 1207;40;"för"|SVAdvAdj|SVAtt:SVPrep:SVPunctuation:SEnd;SVAdvAdj|+Join|*;
+/*		1207. Men då var det för sent.
 1206;40;"för"|SVAdvAdj;-SVConj|SVAdj;
+/*		1206. En vecka efter operationen flyttades patienten till ett närliggande mindre sjukhus för fortsatt rehabilitering.
 557;40;SVvRel+^SVpAux|SVAdvAdj|SVPrep+^SVConj;*|^SVAdv|SVPrep;
+/*		557. Sten och grus är tyngst och avlagras först, medan sand, dy och botten-slam fälls ut senare under den 3000 kilometer långa resan.
 558;40;SVvRel+^SVpAux|SVAdvAdj|SVConj;*|^SVAdv|*;
+/*		558. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
 716;40;SVvRel+^SVpAux|SVAdvAdj|SVAttrRelpron;*|^SVAdv|*;
+/*		716.  Vi behöver identifiera exakt vilka faktorer på mjölkgården som bidrar till den allergiskyddande effekten.
 687;40;SVvRel+^SVpAux|SVAdvStruct|SVAdvAdj|SVPrep;*|*|^SVAdv|*;
+/*		687. Denna idé utvecklas sedan ytterligare i ett konferensbidrag.
 809;40;SVvRel+^SVpAux|SVAdvStruct|SVAdvAdj|SVPunctuation;*|*|^SVAdv|*;
+/*		809. Den första fasen av kvalsterinfestationen passerar alltså obemärkt, vilket bekräftas av att vår patient inte riktigt vet när han blev biten.
 688;40;SVvRel+^SVpAux|SVAdvTime:SVAdvFreq|SVAdvAdj|^SVCon+^SVAdj+^SVAdvAdj;*|*|^SVAdv|*;
+/*		688. De kollektioner de tog fram i mitten av 1970-talet säljer idag bättre än någonsin tidigare. Symtomen upphör oftast snabbt efter att ansträngningen har avslutats.
 664;40;SVpAux|SVAdvAdj|SVpAux:SVmAux;*|SVAdj|*;
+/*		664. Om detta inte är tillräckligt bör man diskutera behandlingen med sin läkare. Att läkemedel vid depressionsbehandling är atoxiskt är viktigt, eftersom en sjukdom med potentiell suicidrisk behandlas. Vid bedömande av om brottet är grovt skall särskilt beaktas om  gärningsmannen annars visat särskild hänsynslöshet eller råhet.
 686;40;SVRefl|SVAdvAdj|SVPrep;*|^SVAdj|*;
+/*		686. Men i stället drog vinden i väg honom i en annan riktning och det slutade med att han fick slita sig loss från stolen och öppna fallskärmen och landa ungefär en kilometer i från den tänka landningsplatsen.
 691;40;SVPunctuation|SVAdvAdj|SVConj;SVPunctuation|^SVAdv|*;
+/*		691. Kraven och arbetstakten i arbetslivet blir – precis som i elitidrottens värld – allt högre och därmed slås många yrkesarbetande människor ut på grund av psykisk ohälsa och nedsatt arbetsförmåga.
 561;40;SVAdvAdj|SVvRel;^SVAdv|*;
+/*		561. Det är lättare för en elitidrottare att öppet tala om en smärta i foten i jämförelse med en smärta i själen.
 571;40;SVvRel|SVAdvAdj|SVRelpron;*|^SVAdv|SVRelpron;
+/*		571. Men sen så började det klarna mer hur de hade tänkt.
 579;40;SVvRel|SVAdvAdj|SVDefart;*|^SVAdv|*;
+/*		579. Ja, det är klart det är obehagligt när det kommer stora lastbilar, 30 centimeter bakom ryggen i 70-80 km/h, det är inte så kul.
 581;40;SVvRel+^SVpAux|SVAdvAdj|SEnd;*|^SVAdv|*;
+/*		581. Det parasympatiska nervsystemet hämmas kraftigt.
 690;40;SVRefl|SVAdvAdj|SEnd;*|^SVAdj|*;
+/*		690. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
 595;40;SVvRel+^SVpAux|SVAdvAdj|SVPunctuation;*|^SVAdv|SVPunctuation;
+/*		595. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
 582;40;SVvRel+^SVpAux|SVAdvAdj|SVAndOrBut;*|^SVAdv|*;
+/*		582. Patienten har därefter mått bra och har nu följts under ett år.
 694;40;SVvRel+^SVpAux|SVAdvAdj|SVAtt;*|^SVAdv|SVAtt;
+/*		694. Därför kan det gå bra att lägga till fler punkter.
 887;40;SVvRel+^SVpAux|SVAdvAdj|SVYear:SVAdvTime;*|^SVAdv|*;
+/*		887. Antalet tillfällen har minskat successivt 2011, 2012 och 2013. Det kändes bra i dag.
 685;40;SVRefl|SVAdvAdj|SVAndOrBut|^SVAdvAdj+^SVAdv+^SEnd;*|^SVAdv|*|*;
+/*		685. Det är också viktigt att försöka hämta sig psykiskt och knyta an till sina nätverk igen.
 652;40;SVCon|SVAdvAdj+^SVAdvTime|SVPrep:SVConj;*|^SVAdv|*;
+/*		652. Sedan åkte 21-åringen vidare till tågstationen i Umeå. Däremot kan man komma ett litet steg på vägen om man inte talar om texter generellt utan i stället om olika genrer.
 693;40;SVCon|SVAdvAdj+^SVAdvTime|SVAndOrBut+^"än"|SVAdvAdj+^SVAdvTime|^SVCon;*|^SVAdv|*|^SVAdv|*;
+/*		693. Under ljusets medverkan omvandlas de flesta föreningar direkt eller indirekt via fotokemiska reaktioner.
 680;40;SVCon|SVAdvAdj+^SVAdvTime|SVAndOrBut:SVAtt|^SVAdvAdj+^SVAdv+^SEnd;*|^SVAdv|*|*;
+/*		680. Utifrån båda dessa synpunkter är kollegialitet bättre än linjeorganisation. För det andra är det på statsrättens område nödvändigt att beakta det nära sambandet mellan politiska och juridiska överväganden.
 681;40;SVCon|SVAdvAdj+^SVAdvTime|SVPunctuation|^SVAdvAdj+^SVAdv+^SEnd;*|^SVAdv|SVPunctuation|*;
+/*		681. När floden möter det öppna vattnet, sjunker strömhas-tigheten plötsligt, och därmed förlorar vattnet sin förmåga att transportera material.
 662;40;SVCon|SVAdvAdj|SEnd;*|^SVAdv|*;
+/*		662. I artikeln används begreppen ”kultur”, ”kulturell kontext” och ”kontext” parallellt.
 692;40;SVAdv|SVAndOrBut|SVAdvAdj|SVAndOrBut;*|*|^SVAdv|*;
+/*		692. Som forskare följer vi de forskningsetiska regler som utformats internationellt och nationellt och det är också dem vi lär ut i undervisningen kring vetenskapsteori, vetenskapliga metoder och forskningsetik.
 697;40;SVConj|SVAdvAdj|SVPrep;*|^SVAdv|*;
+/*		697. Vi ser ett sådant perspektiv som nödvändigt för textanalys med fokus på kunskapsintresse 3, men menar att det kan ha relevans även för textforskning med andra kunskapsintressen (se typ 1 och 2 ovan).
 762;40;^SVAdvAdj+^SVAdj+^SBegin|SVAndOrBut|SVAdvAdj|SVPrep;*|^SVConj|^SVAdv|*;
+/*		762. Det finns helt enkelt inte tillräckligt mycket information i våra trettio tusen gener för att t ex kunna ange positionerna för nervcellerna i hjärnan, än mindre för hela vår kropp.
 702;40;SVConj|SVAdvAdj|SVSom;*|^SVAdv|^SVPrep;
+/*		702. Vi ser inte det som problem utan snarare som en indikator.
 701;40;"någonting"|SVAdvAdj|^SVCon+^SVAdj+^SVAdvAdj+^SEnd;^SVAttrpron|SVAdj|*;
+/*		701. När han efter något år av desperata försök slutligen inser att det inte finns någonting mer att göra åt dotterns resplaner bryter han definitivt samman.
 700;40;^SVpAux+^SBegin|SVSubjpron+^SVAttrpron+^SVDefart|SVAdvAdj|^SVCon+^SVAdj+^SVAdvAdj+^SEnd;*|*|^SVAdv|*;
+/*		700. Då ser vi mer av ett växelspel.
 703;40;SVAdvAdj+SVRegex|SVPluralnoun;^SVAdv|*;
+/*		703. Under renässansen växlade klädedräkten oerhört mycket och speciellt italienarna var synnerligen modemedvetna.
 856;40;SVAdvDegree|SVAdvAdj+SVAdvTemp|^SVCon+^SEnd;SVAdv+SVAdvTemp|+Join|*;
+/*		856. På sista april börjar man sedan i regel ganska tidigt på morgonen.
 706;40;^SVPrep+^SVConj+^SVDefart+^SVIndefart+^SVAttrpron+^SBegin|SVAdvAdj+SVAdvTemp|^SVCon+^SEnd;*|SVAdv+SVAdvTemp|*;
+/*		706. Vi bebodde inte längre universums centrum utan blev plötsligt bara en liten del i ett mycket stort, förmodligen oändligt, universum.
 726;40;SVSaa|SVAdvAdj|SVSubjpron+^SVEttform;SVConj|+Join|*;
+/*		726. Därför är det bra att undvika att laga mat så länge man har diarréer.
 725;40;SVAdvAdj|SVSubjpron+^SVEttform;^SVAdv|*;
+/*		725. Jag har inte rört mig mycket det senaste dygnet.
 938;40;^SVpAux|*SVAdvAdj|SVInte;*|^SVAdv|*;
+/*		938. men jag säger självklart inte vilka klubbar det rört sig om.
 939;40;SVpAux|SVAdvAdj|SVInte|^SVvRel;*|^SVAdv|*|*;
+/*		939. Det här är definitivt inte information ämnad för mina ögon.  NOT_IN: Om teknisk utrustning som är CE-märkt inte överensstämmer med de tekniska kraven enligt denna lag, ...
 
 /* Disambiguate AdvCon
 /* -------------------
-
 744;40;SVConpart1|SVAdvCon;SVCon|SVCon;
+/*		744. en slags rätt som uppkommit för så länge sedan att ingen kan minnas när och hur rätten uppkom.
 911;40;SVCon+^SVAdj|"akter"|"om";*|SVPrep|Join;
+/*		911. Akterspegeln har fallit bort och dess beståndsdelar vilar på botten akter om skrovet.
 
 /* Så
 /* --
-
 175;40;SVSaa|SVSubjpron+^SVAttrpron;SVConj|SVSubjpron;
+/*		175. Det läkte inte så jag ringde vårdcentrale.
 196;40;SVInte|SVSaa|SVmAux;SVInte|SVConj|*;
+/*		196. Blir det inte så måste regeringen i regel avgå.
 197;40;SVInte|SVSaa;SVbCon|Join;
+/*		197. Uppmärksamheten kom dock inte så mycket att fokusera på resultatet som metoderna.
 180;40;SVCon|SVSaa|SVmAux:SVpAux:SVVerb;SVCon|SVConj|*;
+/*		180. Men om marken har eller kommer att få ett alternativvärde så bör nuvarande politik omprövas. När det kom till kritan så var det varken husbonden eller matmodern som gick till acciskammaren, utan ett barn. Inom akademin finns inga påtagliga könsskillnader i utgångsläget, men på grund av att män har en högre avkastning än kvinnor på sina post-doc år så växer inkomstskillnaderna över tiden när man väl disputerat.
 184;40;SVSaa|SVCon;SVbCon|SVCon;
+/*		184. Den är syntetisk på så vis att den anser dessa principer vara två komplementära sidor av samma mänskliga tillvaro, vilka befinner sig i ständigt samspel och är av lika stor vikt.
 185;40;SVSaa|SVAdj;SVbCon|SVAdj;
+/*		185. Värdeomdömen och praktiska rekommendationer om så centrala frågor är inte bara meningslösa känslouttryck.
 187;40;SVSaa|SVAdvAdj;SVbCon|SVAdj;
+/*		187. Så lite svart som möjligt.
 958;40;SVSaa|SVAdvManner;SVAdv+SVAdvManner|+Join;
+/*		958. Hur kan någonting så ont hända när allting är så gott?
 960;40;SBegin:SVAndOrBut|SVSaa|SVvRel;*|SVAdv+SVAdvManner|*;
+/*		960. Så blev det inte.
 962;40;SVpAux|SVSaa|SVvRel+^SVSup;*|SVAdv+SVAdvManner|+SVbRel;more specific than r961: splits relation for attribute expansion
+/*		962. Varför det är så är inte känt.
 961;40;SVpAux|SVSaa;*|SVAdv+SVAdvManner;
+/*		961. Det är så...
 959;40;SVvRel|SVSaa|SVvRel+^SVSup;*|SVConj+SVbRel|*;not a real conjunction, but this probably works best
+/*		959. Om det stämmer så borde det vara lätt att observera dessa molekyler.
 186;40;SVPunctuation|SVSaa;SVPunctuation|SVConj;
+/*		186. Efter att ha blandat ihop några kemikalier och rört om, så uppstod mönster i bägaren efter några minuter.
 174;40;SVSaa;SVAdvStruct;default
+/*		174. Sedan får de prova hos oss en period och om de och vi tycker det fungerar bra så får de börja som assisterande tränare i någon åldersgrupp. WRONG: Förslagen skall utformas så, att de kan besvaras med ja eller nej.
 
 /* Inte
 /* ----
-
 1139;40;SVInte|SVAdvRestrict;*|SVAdv+SVAdvRestrict;make advrestrict relation after negation (except in fixed lexreps like 'inte bara' etc.)
+/*		1139. Vår uppmärksamhet riktas inte längre enbart mot de inre gränserna, utan även mot de yttre.
 1140;40;SVInte|*{1,3}^SVAdvRestrict+^SVConj+^SVAndOrBut|SVAdvRestrict;*|*|SVAdv+SVAdvRestrict;make advrestrict relation after negation
+/*		1140. medborgarna skall inse att vi inte har vuxit samman enbart socialt, utan även demokratiskt.
 620;40;SVIndefart|SVInte|SVAdvDegree;SVIndefart|SVAdvDegree+SVNegWord|+Join;
+/*		620. Jag tror att en överenskommelse kan nås i en inte alltför avlägsen framtid.
 621;40;SVIndefart|SVInte|SVAdvManner;SVIndefart|SVAdvManner+SVNegWord|+Join;
+/*		621. [...] och kan antas på ett inte obetydligt sätt bidra till att en miljökvalitetsnorm som avses i 5 kap. 2 § första stycket 1 inte följs, [...].
 623;40;SVIndefart|SVInte|SVAdj:SVCon;SVIndefart|SVAdj+SVNegWord|+Join;
+/*		623. En inte oansenlig andel vetenskapsteoretiker menar att humaniora bör klassas som en underavdelning till samhällsvetenskapen. en utebliven hållbar lösning på problematiken kan lägga en inte ovidkommande börda på utvidgningen som helhet.
 632;40;SVDefart|SVInte|SVAdvDegree|SVAdj|SVCon;SVDefart|SVAdvDegree+SVNegWord|+Join|SVAdj|SVCon;
+/*		632. I anslutning till projektet studeras resursstyrningen särskilt vad gäller de inte helt klara gränserna till regelstyrningen.
 635;40;SVDefart|SVInte|SVAdj|SVCon;SVDefart|SVAdj+SVNegWord|+Join|SVCon;
+/*		635. Det är bara de aldrig upphörande behoven hos den lilla flickan i deras vård som får dem att upprätthålla ett slags rutin.
 67;40;SVmAux|SVInte;*|SVNegrel;
+/*		67. De kunde inte dölja att det var det de gjorde.
 68;40;SVInte|SVInf:SVVerb:SVmAux:SVpAux:SVAux:SVSup:SVGen:SEnd;SVNegrel|*;
+/*		68. Kunder som har den återkallade kryddan kvar hemma uppmanas att inte äta den. Vi motar inte bort någon, sade Lars. Vanligtvis kan man se den här typen av beteende på tv-program – där de listar grejer som man absolut inte borde göra. Man är van att köra en hög hastighet och förväntar sig att man ska kunna köra den hastigheten för jämnan och kanske inte är riktigt observant att nu kommer det ett vägarbete. Ett sommarprat som många kan känna igen sig i, även om man aldrig har hållit i en golfklubba. Aldrig sett något liknande. Om inte källans hastighet är känd blir det alltså betydligt svårare att säkert identifiera en signal.
 92;40;SVInte|SVVerbInf;SVNegrel|^SVVerb;
+/*		92. Därför lyssnar vi efter motrepliker, som kanske inte uttalas.
 103;40;SVInte|SVAtt;SVNegrel|SVAtt;
+/*		103. Den begränsade tidsramen på några timmar kommer förmodligen inte att vara tillämplig i arbetslivet.
 105;40;SVInte|SVPrep+^"om";SVNegrel|SVPrep;
+/*		105. Studenternas uppsatsarbete är inte i samma grad reglerat.
 191;40;SVInte|SVRelpron;SVNegrel|SVRelpron;
+/*		191. Annars visste man inte hur man skulle agera gentemot varandra.
 192;40;SVpAux:SVVerb|SVInte;*|SVNegrel;
+/*		192. Det är inte självklart vad man skall mena med arbete. Trots den något dramatiska landningen fick inte Daniel några allvarliga skador.
 199;40;SVInte|SVAdj+^SVCon;SVbCon|SVCon;
+/*		199. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
 857;40;SVInte|SVAdvTemp;SVNegrel|SVAdvManner;
+/*		857. Forskarna konstaterade att hennes luftvägar var fulla av ett fågelvirus, H10N8, som inte tidigare infekterat människa.
 
 /* SVExample
 /* ---------
-
 659;40;SVPunctuation|SVExample|^SVvRel+^SVPrep+^SVConj+^SEnd;SVPunctuation|SVConj|*;
+/*		659. De flesta studenter har tillräcklig datorvana och vet hur man säkerhetssparar på flera enheter, exempelvis USB-minne och hårddisk.
 660;40;SVExample|SEnd;SVAdvStruct|*;
+/*		660. Om man går till tandläkaren är det ju inte någon förälder som tycker det är konstigt att man får veta att barnen har karies till exempel.
 661;40;SBegin|SVExample;*|SVAdvStruct;
+/*		661. Exempelvis kan det uppkomma frågor om likabehandling, förutsebarhet och överklagande.
 656;40;^SVCon+^SBegin|SVExample;*|-SVAdv+SVAdvStruct;
+/*		656. Det går till exempel att ge en USB-sticka till en studiekamrat.
 657;40;SVExample+^SVAdvStruct|^SVCon+^SVAdj+^SVIndefart+^SVDefart+^SEnd;-SVAdv+SVAdvStruct|*;
+/*		657. Om vi har för avsikt att använda bordet på ett speciellt sätt, som ett rymdskepp till exempel, förändras också bordets mening.
 658;40;SVExample+^SVAdvStruct;SVConj;default
+/*		658. För trettio år sedan var nyckelord till exempel lekmannainflytande och decentralisering.
 
 /* Connections with partial words
 /* ------------------------------
-
 717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;SVCon|Join|Join|+Join;e.g. läs- och skrivsvårigheter
+/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
 748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;SVAdj|Join|Join|+Join;
+/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
 923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;SVYear|Join|Join|+Join;
+/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
 718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;SVvRel|Join|Join|+Join;Does it make sense to keep this rule?
 719;40;"@connect@";SVCon;to avoid that concepts get split if no AndOrBut is present
+/*		719. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
 
 /* Defaults part 2
 /* ---------------
-
 711;40;SVAdvAdj+SVbCon;SVbCon;
+/*		711. Länge förblev teorin ganska lösligt förankrad, men det visar sig nu att den har klarat sig väl över det gångna seklet.
 37;40;SVAdvAdj;SVAdj;
+/*		37. Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod.
 38;40;SVAdvCon;SVCon;
+/*		38. Ja, det är klart det är obehagligt när det kommer stora lastbilar, 30 centimeter bakom ryggen i 70-80 km/h, det är inte så kul.
 39;40;SVAdvAdjCon;SVCon;
+/*		39. Det är också en av de absolut viktigaste sporträttigheterna och jag är väldigt glad att vi nu har ett sexårigt avtal som sträcker ända fram till 2023.
 195;40;SVInte|SVbCon;SVInte|SVCon;
+/*		195. Det som händer i Portugal är tyvärr inte något ovanligt, det är bara ett av många exempel.
 64;40;SVInte;SVNegrel;
+/*		64. Det är ju inte bra, det är skrämmande.
 121;40;"man"+^SVCon;SVSubjpron;
+/*		121. Det kan tidvis bli blåsigt på farvattnen också så det får man hålla utkik efter.
 333;40;SVRefl+SVObjpron;SVRefl;
+/*		333. Det slam som floderna för med sig är ofta mycket bördigt.
 970;40;SVPrep|SVAttrRelpron;SVRelpron+SVbRel|+Join;
+/*		970. I vilka etiska regler kan jag finna stöd för mitt beslutsfattande?
 969;40;SVAttrRelpron;SVRelpron;
+/*		969. I artikeln diskuteras avslutningsvis vilka implikationer det kan ha.
 1116;40;"såväl"|*^SVSom|SVSom;*|*|-SVSom-SVConj+SVAndOrBut;
+/*		1116. Kritiken behöver vara satt i system, så att den drabbar såväl gamla som nya idéer.
 1007;40;SBegin:SVvRel:SVNegrel:SVAdv|SVSom|SVSup|^SVCon+^SVDefart+^SVIndefart;*|-SVConj|*|*;som is almost always a comparison word here
+/*		1007. Men sjukdomen är som sagt i de allra flesta fall självläkande och efter en vecka är flertalet återställda.
 1008;40;SVRelpron|SVSom;^SVRelpron+SVbRel|Join;
+/*		1008. Kopparfattig malm får vittra under lång tid då det bildas vad som kallas för rödmull.
 1006;40;SVSom+SVConj|SVvRel+^SVVerbpt2;-SVSom|*;
+/*		1006. de kan aldrig lösa upp den härva av sociala orsaker som ligger bakom en brottslig gärning.
 1130;40;SVSom+SVConj|.SVSubjpron|SVNegrel;-SVSom|*|*;
+/*		1130. Rent praktiskt kan det gå till så att studenten skriver på en arbetsstation, som inte har uppkopplingsmöjligheter till nätverk.
 1013;40;SVSom+SVConj|*^SVvRel+^SEnd|SEnd;-SVConj|*|*;
+/*		1013. I vissa fall kan det dock vara rimligt att se bonde som yrkesbeteckning.
 1024;40;SVPrep+SVConj|*^SVvRel+^SEnd|SEnd;+SVDummy-SVConj|*|*;
+/*		1024. Det blir ett par tuffa dagar för killarna.
 1094;40;"för"+SVPrep+SVConj|SVAtt;-SVPrep|*;
+/*		1094. Oftast är inte hela texten oläsbar, men det kan räcka med tre nyckelord för att göra genomförandet av examinationen svår.
 1034;40;SVPrep+SVConj|*^SVvRel+^SVConj+^SVAtt+^SVAndOrBut+^SVPunctuation|SVConj:SVRelpron:SVAtt:SVAndOrBut:SVPunctuation;-SVConj|*|*;
+/*		1034. Detta gäller dock bara för personer som är under 65 år.
 1120;40;SVPrep+SVConj|SVPunctuation:SVpAux;-SVConj|*;almost always correct
+/*		1120. Efter att ha blandat ihop några kemikalier och rört om, så uppstod mönster i bägaren efter några minuter.
 1119;40;SVPrep+SVConj|SVSubjpron+^SVObjpron;-SVPrep|*;
+/*		1119. Vi evakuerade 1 400 människor men det finns nära 250 000 till om man ser till alla de belägrade områdena.
 1122;40;SVPrep+SVConj|SVAndOrBut|^SVConj+^SVRelpron;-SVConj|*|*;
+/*		1122. Syftet kan istället vara att informera om och belysa ett samhälleligt skeende.
 1121;40;SBegin|"för"|^SVAtt;*|-SVConj|*;
+/*		1121. För äldre barn finns även tabletter.
 1035;40;"om"|*^SVvRel+^SVConj+^"men"+^SVPunctuation+^SVAtt|SVvRel+^SVInf;+SVConj-SVPrep|*|*;
+/*		1035. Ja, jag vet inte om det här är något jag vill prata med dig om innan jag vet vad det är som gått galet, säger han.
 1112;40;"om"|SVAtt;+SVConj-SVPrep|*;
+/*		1112. Verbmetoden handlar alltså ytterst sett om att registrera människors tidsanvändning.
 1113;40;"om"|*^SVvRel+^SVConj+^SVAtt+^SVPunctuation|SVAtt|SVInf|*^SVvRel+^SVConj+^SVPunctuation|SVvRel+^SVInf;+SVConj-SVPrep|*|*|*|*|*;special case of r1035
+/*		1113. Utgivningsbevis får återkallas om förutsättningar att utfärda sådant bevis inte längre finns.
 1105;40;"om"|SVObjpron+^SVSubjpron;-SVConj+SVPrep|*;correction of r1035
+/*		1105. De som skötte om mig sade att jag enligt deras åsikt hade drabbats av legionellabakterier.
 1036;40;SBegin:SVAtt|*^SVvRel+^SVConj|SVPrep+SVConj;*|*|+SVDummy-SVConj;
+/*		1036. Pysselbok för flyktingbarn gör succé.
 1038;40;SVAtt:SVSom|*^SVvRel+^SVConj+^SVPunctuation|"om"+SVConj;*|*|+SVDummy+SVPrep-SVConj;
+/*		1038. Det anförda innebär att försäkringsvillkoret om tillämpning av skadeståndsrättsliga regler inte strider mot lagen om byggfelsförsäkring.
 1037;40;"om"+^SVDummy|SVSubjpron+^SVObjpron;+SVConj-SVPrep|*;
+/*		1037. Det är inte självklart vad man skall mena med arbete, särskilt inte om man avser att undersöka en längre tidsperiod och, i princip, ett samhälle i dess helhet.
 1040;40;"om"+SVPrep|SVConj;-SVPrep+SVConj|*;om is a Prep here, but for further processing Conj is better
+/*		1040. Jag förstår väl att det inte bara handlar om frågan huruvida ljudet är otrevligt eller inte utan även om huruvida det är skadligt.
 1039;40;SVDummy;-SVDummy;
+/*		1039. Det blev en dålig start på hösten för klädhandeln.
 1025;40;SVvRel|SVSom+SVConj|^SVSubjpron;*|-SVConj|*;
+/*		1025. Jag har jobbat som polis i 20 år och jag har aldrig sett något liknande.
 1123;40;SVPrep+SVConj+^"för";-SVPrep;
+/*		1123. Det tar också en tid innan håret har växt ut igen.
 225;40;SVSubjpron+SVAttrpron|"som";SVSubjpron|SVRelpron;
+/*		225. Allt detta är något som vi intresserar oss för som forskare.
 204;40;SVSubjpron+SVAttrpron|SVCon;SVAttrpron|*;
+/*		204. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
 356;40;SVSubjpron+SVAttrpron|SVAdj;SVAttrpron|SVAdj;variation on 204
+/*		356. Trots den något dramatiska landningen fick inte Daniel några allvarliga skador.
 359;40;SVSubjpron+SVAttrpron|SVNumber:SVOrdnumber;SVAttrpron|*;variation on 204
+/*		359. Jag övergår nu till att erinra om vad dessa tre fundamentala rättsnören praktiskt innebär.
 364;40;SVSubjpron+SVAttrpron|SVAttrpron;SVAttrpron|SVAttrpron;variation on 204, this rule might be too general -> to be evaluated
+/*		364. Dessa båda aktiviteter – att sända någon i ett ärende, att betala accis för en gris – är i sig kanske inte så uppseendeväckande.
 355;40;SVSubjpron+SVAttrpron;SVSubjpron;
+/*		355. Jag vet inte om det här är något jag vill prata med dig om innan jag vet vad det är som gått galet, säger han.
 953;40;SVPrep+SVConj|SVSubjpron+^SVObjpron;SVConj|*;
+/*		953. Pappa är bättre nu har hon förklarat för alla hon träffat.
 380;40;SVAdvDirection;SVAdvDirection;
+/*		380. Ishockey-VM tillbaka i SVT.
 419;40;SVAdj|"nog";SVAdj|SVCon;
+/*		419. Om Oscar känner att han inte fick rätt uppbackning var vi inte bra nog.
 421;40;SVCon|"nog";SVAdj|SVCon;
+/*		421. Några få kvinnliga studenter hade styrka nog att bryta med detta mönster.
 420;40;"nog"+^SVCon;SVAdvModal;
+/*		420. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
 381;40;SVAdvModal+^SVAdvRestrict;SVAdvModal;to implicitly remove the conflicting Adv label
+/*		381. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
 655;40;SVAdvManner|SVvRel;SVAdv|^SVvRel;
+/*		655. Alla har väl haft en dröm om att flyga flera hundra meter upp i luften, sittandes i en stol samtidigt som 120 heliumballonger håller dig svävande?
 395;40;SVAdvManner|SVPrep;SVRel|SVPrep;
+/*		395. Men i stället drog vinden i väg honom i en annan riktning och det slutade med att han fick slita sig loss från stolen och öppna fallskärmen och landa ungefär en kilometer i från den tänka landningsplatsen.
 396;40;SVAdvManner|SVConj;SVRel|SVConj;
+/*		396. Däremot kan man komma ett litet steg på vägen om man inte talar om texter generellt utan i stället om olika genrer.
 406;40;SVPrep|SVAdvManner;SVPrep|SVCon;
+/*		406. Många uppsatser och därtill hörande empiriinsamling fungerar väl i enlighet med forskningsetisk vägledning med nogsamt iakttagande av hänsyn och etisk uppmärksamhet.
 407;40;SVAttrpron|SVAdvManner;*|SVCon;
+/*		407. kommer du aldrig att kunna hitta en bättre fusk för Sudoku ∙ än våra helst.
 408;40;SVIndefart|SVAdvManner;SVIndefart|SVCon;
+/*		408. Rökning är en väl etablerad riskfaktor.
 409;40;SVAdvManner|SVAdj;SVAdj|SVAdj;
+/*		409. När skrev du en längre text för hand senast?
 397;40;SVAdvManner;SVAdv;
+/*		397. Hon såg snabbt vad som behövde göras, ingen man behövde be om att göra saker.
 382;40;SVRel;SVRel;to remove possibly conflicting labels
+/*		382. Hon var glad och positiv, empatisk och väldigt mån om alla, oss och vännerna, ville att man skulle tala väl om människor.
 414;40;SVAttrpron|SVAdvDegree;^SVAttrpron|SVCon;
+/*		414. Vid förhör som avses i andra stycket 4 eller 5 skall rätten noga vaka över att frågor inte ställs som kan inkräkta på tystnadsplikten utöver vad som i varje särskilt fall är medgivet.
 415;40;SVIndefart|SVAdvDegree;SVIndefart|SVCon;
+/*		415. På sätt och vis är det en ganska oretorisk hållning, eftersom den uttrycker ett slags essentialism.
 417;40;SVAdvDegree|SVAdj+^SVCon;SVbCon|SVAdj;
+/*		417. Även denna publikation är dock i högre grad inriktad på forskning och etik.
 418;40;SVAdvDegree+^"särskilt"|SVCon;SVbCon|SVCon;
+/*		418. Alltför kort text.
 1142;40;SVNegrel|"särskilt"|SVCon;*|SVbCon|*;
+/*		1142. Därför är det inte särskilt meningsfullt att under nuvarande omständigheter avsätta 9, 5 miljoner ecu till valen.
 474;40;SVAdvDegree|SVNum;SVbCon|SVNum;
+/*		474. Enligt Trafikverket sker det omkring 300 stycken trafikolyckor vid vägarbeten varje år.
 475;40;SVAdvDegree|SVNumber;SVbCon|SVNumber;
+/*		475. Resultatet visar att cirka fyra av tio höll hastighetsbegränsningen förbi vägarbeten.
 480;40;SVAdvDegree|SVIndefart;SVbCon|SVNumber;
+/*		480. Men i stället drog vinden i väg honom i en annan riktning och det slutade med att han fick slita sig loss från stolen och öppna fallskärmen och landa ungefär en kilometer i från den tänka landningsplatsen.
 757;40;SVGen|SVbCon;SVAdj|SVCon;
+/*		757. Slutpriset för diktatorns delvis självbiografiska bok, i två band, landade på drygt 420 000 kronor.
 
 /* Cleanup
 /* -------
-
 23;40;SVIgnoreCap;-SVIgnoreCap;
+/*		23. Utanför Norden finns en uppfattning om att vikingarna var ett särskilt folkslag, vilket är felaktigt.
 44;40;SVConIfCap;-SVConIfCap;
+/*		44. Hon var glad och positiv, empatisk och väldigt mån om alla, oss och vännerna, ville att man skulle tala väl om människor.
 555;40;SVConIfAllCap;-SVConIfAllCap;
+/*		555. I nästa fas i det världsunika forskningsprojektet ska sju kvinnor genomgå IVF-behandling med målet att bli gravida.
 306;40;SVTimeconcept+SVCon;-SVTimeconcept;
+/*		306. Resan med fyra hästspårvagnar, påbörjades kl. 16.00 och tog cirka 15 minuter.
 617;40;"&";SVCon;
+/*		617. Gruppen deltog under namnet Björn & Benny, Agnetha & Anni-Frid i Melodifestivalen 1973 med Ring ring.
 865;40;"-";SVPunctuation;
+/*		865. stjärnbildningsprocessen - svår att studera.
 883;40;SBegin|SVLayout;*|NonRelevant;
+/*		883. * Undvik nära kontakt med personer som du vet är sjuka.
 889;40;SBegin|SVAndOrBut;*|NonRelevant-SVNegStop;
+/*		889. Men arbetet har fått en del oväntade konsekvenser.
 
-/* Disambiguate de, den, det
-/* -------------------------
-
-495;45;SVpAux|SVSubjpron|^SVvRel+^SVPrep|SVAtt;*|SVSubjpron|*|*;
-496;45;^SVSubjpron+^SBegin|SVpAux|"det"|^SVvRel+^SVPrep|^SVvRel+^SVPrep|SVAtt;*|*|SVSubjpron|*|*|*;
-352;45;SVSubjpron+SVDefart|SVCon;-SVSubjpron|SVCon;
-353;45;SVObjpron+SVDefart|SVCon;-SVObjpron|SVCon;
-559;45;SVPrep|SVSubjpron+SVDefart|SVAdj;SVPrep|-SVSubjpron|SVAdj;
-560;45;SVPrep|SVObjpron+SVDefart|SVAdj;SVPrep|-SVObjpron|SVAdj;
 
 /* ======================================================
 /* PHASE 45: CONCEPT BOUNDARIES AND PATHRELEVANT PRONOUNS
 /* ======================================================
+/* Disambiguate de, den, det
+/* -------------------------
+495;45;SVpAux|SVSubjpron|^SVvRel+^SVPrep|SVAtt;*|SVSubjpron|*|*;
+/*		495. När man är förkyld är det vanligt att man får huvudvärk, blir snuvig och täppt i näsan.
+496;45;^SVSubjpron+^SBegin|SVpAux|"det"|^SVvRel+^SVPrep|^SVvRel+^SVPrep|SVAtt;*|*|SVSubjpron|*|*|*;
+/*		496. Om små barn har kräkningar och diarréer är det extra viktigt att de får i sig vätska.
+352;45;SVSubjpron+SVDefart|SVCon;-SVSubjpron|SVCon;
+/*		352. Därigenom får fastighetsägare det underlag inför beslut som de behöver.
+353;45;SVObjpron+SVDefart|SVCon;-SVObjpron|SVCon;
+/*		353. Men den otäcka siffran visar även att hela 58 procent av fordonen som åker förbi kör alldeles för fort.
+559;45;SVPrep|SVSubjpron+SVDefart|SVAdj;SVPrep|-SVSubjpron|SVAdj;
+/*		559. Syftet är härvid att visa på det rättsligt problematiska i att likna ’urminnes hävd’ vid ett tillstånd.
+560;45;SVPrep|SVObjpron+SVDefart|SVAdj;SVPrep|-SVObjpron|SVAdj;
+/*		560. Tre Kronor är något av det mest folkkära vi har i Sverige och SVT har följt dem tätt sedan väldigt många år tillbaka.
+
 /* Concept boundaries
 /* ------------------
-
 663;45;SVCon+^SVConpart1|SVAdjpron;SVCon|SVbCon;
+/*		663. En gång i tiden var cd-skivan en av våra vanligaste julklappar.
 487;45;SVAdvDegree|SVAdjpron;SVbCon-SVAdv|SVAdjpron;
+/*		487. Det samma gällde för nästan allt tidigmodernt arbete.
 488;45;SVAdvDegree|SVOrdnumber;SVbCon-SVAdv|SVAdj;
+/*		488. De allra första persondatorerna saknade fläkt eller hade det endast i nätaggregaten, när processorkraften ökade så ökade även temperaturen, vilket gjorde att man behövde kylflänsar och senare även fläktar på processorerna.
 521;45;SVNumber:SVOrdnumber|SVbCon;SVbCon|SVCon;
+/*		521. Vi är fyra helt olika personer som tycker helt olika saker. Den första helt datoranimerade långfilmen var Toy Story, producerad av Pixar Animation Studios, från 1995.
 768;45;SVYear|SVNum:SVNumber:SVAdj:SVGen+^"års"+^SVYear;SVeCon|*;
+/*		768. Sammanlagt har 1000 svenska singlar deltagit i undersökningen. Detsamma gäller det redan 1974 upptäckta skadesyndromet M74 som slår ut laxyngel. Fullmäktige sammanträder var tredje vecka i Rådssalen i Stockholms stadshus och har sedan 1971 101 ledamöter. Enligt International Congress and Convention Association (ICCA) var Stockholm 2008 åtta på världsrankingen.
 770;45;SVMonth|SVYear|^"kl."+^"klockan"+^"kl"+^SEnd;^SVMonth|SVeCon|*;
+/*		770. Redan andra dagen på jobbet i slutet av januari 1986 ringde mig chefen för ett stort konsultföretag i Stockholm.
 920;45;SVDate|"klockan";SVbCon-SVAdvTime-SVAdv|*;
+/*		920. Vid valborg (Vappen) inleds festligheterna den 30 april klockan 18.00 i Helsingfors.
 890;45;SVCon+^SVMonth+^SVDay|"klockan";*|SVbCon;
+/*		890. Två båtturer mellan Visby och Nynäshamn har ställts in på grund av vindarna, en från Visby klockan 7 i morse och vändande tur vid 11-tiden.
 772;45;SVPluralnoun|SVAdj;SVeCon|SVAdj;
+/*		772. Strax före klockan ett var alla platserna upptagna och ett hundratal person satt sida vid sida med handbuketter och väntade på att ceremonin skulle börja.
 928;45;SVCPron|SVbCon;SVbCon|SVCon;
+/*		928. Därför är det ingen alldeles hopplös uppgift.
 1018;45;SVOrdnumber;+SVAdj;treat ordinal numbers like adjectives in following phases
+/*		1018. Första och andra stycket gäller inte vattenverksamhet som förorsakar endast obetydlig miljöpåverkan.
 
 /* PathRelevant pronouns
 /* ---------------------
-
 351;45;SVSubjpron;SVSubjpron;
+/*		351. Det blev en dålig start på hösten för klädhandeln.
 354;45;SVObjpron;SVObjpron;
+/*		354. Hos de senare ökar fotorespirationen med stigande temperatur.
 335;45;SVAdjpron+SVAttrpron;SVAdjpron;
+/*		335. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
+
 
 /* =============================================
 /* PHASE 50: ADVERBS AND PATHRELEVANT ATTRIBUTES
 /* =============================================
-
 374;50;SVAdvPlace+^SVAdvC;SVAdvPlace;remove non-applicable labels for PathRelevant place adverbs
+/*		374. Där har man i stället hittat salmonella i en oöppnad burk Iwi allkrydda - en kryddblandning som används frekvent i matlagningen på krogen.
 1219;50;SVAdvDegree|SVAdvTime:SVAdvTemp:SVAdvFreq:SVAdvC;+JoinReverse|*;
+/*		1219. Ute lyser en blek och skön vintersol och koltrasten hörs i mina trakter nästan dagligdags. Denna anpassning till atmosfärens ändrade sammansättning har skett ganska nyligen, geologiskt sett. Påfallande ofta hade män en yrkestitel. Patienten var förtvivlad över sin cancerdiagnos och nästan lika ledsen över att möjligheten att bära en graviditet och föda ett eget barn nu var helt borta.
 485;50;SVAdvDegree+^"särskilt";SVRel+SVAdvDegree;
+/*		485. Men den otäcka siffran visar även att hela 58 procent av fordonen som åker förbi kör alldeles för fort.
 984;50;SVAdvDegree+"särskilt";SVAdvStruct;
+/*		984. I anslutning till projektet studeras resursstyrningen särskilt vad gäller de inte helt klara gränserna till regelstyrningen.
 367;50;SVAdvTime+^SVAdj;-SVAdv;
+/*		367. Cyanobakterierna fanns på jorden för 2,5 miljarder år sedan (Summons m.fl. 1999), men sannolikt redan långt dessförinnan.
 843;50;SVAdvFreq+^SVAdj;-SVAdv;remove conflicting labels
-844;50;SVAdj+SVAdvFreq;-SVAdvFreq;avoid that the word becomes NonRelevant because of conflicting labels
+/*		843. Påfallande ofta hade män en yrkestitel.
+844;50;SVAdj+SVAdvFreq;-SVAdvFreq;avoid that the word becomes NonRelevant because of conflicting labels - rare, no example
 704;50;SVAdvTemp+^SVAdj;SVAdvTemp+SVTime;remove conflicting labels
+/*		704. När floden möter det öppna vattnet, sjunker strömhas-tigheten plötsligt, och därmed förlorar vattnet sin förmåga att transportera material.
 705;50;SVAdvTemp+SVAdj;-SVAdvTemp;avoid that the word becomes NR because of conflicting labels
+/*		705. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige, men valde till slut att bosätta sig permanent i Linköping.
 654;50;SVAdvPlace+SVAdvC;SVAdvC;
+/*		654. Midskepps finns en större lucka i däcket.
 891;50;SVAdvPlace;SVAdvPlace;default
+/*		891. Där arbetade hon sedan hela livet.
 912;50;^SVCon+^SBegin|"framme";*|SVeCon;default for framme
+/*		912. Man bör undvika att låta mat stå framme länge.
 913;50;^SVCon+^SBegin|"borta";*|SVeCon;default for borta
+/*		913. De stora samhällsfrågorna skymtar bara någon gång långt borta i kulisserna.
+
 
 /* =============================
 /* PHASE 60: DETECT ENUMERATIONS
 /* =============================
-
 1054;60;SVRelpron;+SVConj;
+/*		1054. För att hantera den får man överlägga: ge skäl för sin egen syn på saken och lyssna på vad den andra har att säga.
 1128;60;SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVAndOr|SVIndefart|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList;
+/*		1128. en AA, en BB, en CC och en DD.
 1129;60;SVIndefart|*SVCon:SVAdj:SVAdjCon|SVComma|SVIndefart|*SVCon:SVAdj:SVAdjCon|SVAndOr|SVIndefart|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList;
+/*		1129. en BB, en CC och en DD.
 998;60;*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|SVAndOr|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|SVList|+SVList|+SVList|+SVList;
+/*		998. AA, BB, CC och DD.
 1146;60;*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|.SVComma|SVListEnd;+SVList|+SVList|+SVList|SVList|+SVList|+SVList|+SVList;
+/*		1146. Jag anser att detta inte främst handlar om fördelningen av medel, juridiska frågor, program och så vidare utan olyckligtvis om att finansieringen har skurits ned.
 999;60;*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|SVAndOr|*SVCon:SVAdj:SVAdjCon;+SVList|+SVList|+SVList|+SVList|+SVList;
+/*		999. BB, CC och DD.
 1147;60;*SVCon:SVAdj:SVAdjCon|SVComma|*SVCon:SVAdj:SVAdjCon|.SVComma|SVListEnd;+SVList|+SVList|+SVList|SVList|+SVList;
+/*		1147. BB, CC, etc.
 1000;60;*SVCon:SVAdj:SVAdjCon|SVAndOr|*SVCon:SVAdj:SVAdjCon|SEnd;+SVList|+SVList|+SVList|*;
+/*		1000. Den är multidimensionell, mångbottnad och kontextuell.
 1029;60;SVAdj|SVAndOr|SVAdj|SVCon;+SVList|+SVList|+SVList|+SVList;
+/*		1029. Blanka och ogiltiga röster räknas inte med vid rösträkningen.
 1085;60;SVAdj|SVComma|SVAdj|SVCon;+SVList|+SVList|+SVList|+SVList;
+/*		1085. Man kan undra vad denna teoretiska, påhittade modell har med verkligheten att göra.
 1126;60;SVvRel|*typeConcept|SVAndOr|*typeConcept|^SVvRel;*|+SVList|+SVList|+SVList|*;
+/*		1126. Engagemang underlättar men det gäller att vara klar över att det som är intressant och önskvärt inte alltid går att bevisa.
 1127;60;SVConj:SVAtt|*typeConcept|SVAndOr|.SVExample|*typeConcept;*|+SVList|+SVList|+SVList|+SVList;
+/*		1127. Det kan vara problematiskt om examinator och handledare/studenter utifrån etiska skäl är oeniga om vilka självständiga arbeten studenter bör genomföra.
 1014;60;SBegin|*typeConcept|SVAndOr|*typeConcept;*|+SVList|+SVList|+SVList;
+/*		1014. Hemodiafiltration eller hemodialys förefaller inte vara en avgörande faktor för graviditetsutfall.
 1017;60;SBegin|SVIndefart|*typeConcept|SVAndOr|SVIndefart|*typeConcept;*|+SVList|+SVList|+SVList|+SVList|+SVList;
+/*		1017. Ett tillstånd eller en dispens får inte ges i strid med en detaljplan eller områdesbestämmelser enligt plan och bygglagen (2010:900).
 1208;60;SBegin|SVPrep|*typeConcept|SVAndOr|*typeConcept;*|*|+SVList|+SVList|+SVList;
+/*		1208. Under 1800-talet och industrialiseringen växte staden snabbt.
 1214;60;SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SVComma|SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SVAndOr|SVPrep|.SVDefart:SVIndefart:SVPosspron|*typeConcept|SEnd;+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|+SVList|*;
+/*		1214. Detta kan ha skett både från söder, från norr och från öster. Ålderspension kan finansieras av staten genom skatter, av arbetsgivare och genom eget pensionssparande.
 1016;60;SVvRel|*SVList|SVvRel;*|-SVList|*;rough correction of previous rules
+/*		1016. Det viktigaste blir att spela ihop laget, vinster och resultat är inte det viktigaste i det här läget.
 1124;60;"mellan":"både"|*^"och"|"och";*|*|+SVList;
+/*		1124. I mitten på 1400-talet hade befolkningen växt till mellan fem och sextusen invånare.
+
 
 /* ===================================
 /* PHASE 65: DETECT SENTENCE STRUCTURE
 /* ===================================
-
 1072;65;SBegin:":":"-"|^SVvRel;*|+SVPBegin;
+/*		1072. Från de tidigaste muntliga berättelserna ledde skriftspråkets uppfinnande omkring 2100 f.Kr. - 2000 f.Kr. till övergången från muntlig tradition till nerskriven.
 1073;65;SBegin:":":"-":SVComma|SVvRel;*|+SVPBegin+SVPVerb;
+/*		1073. Resan med fyra hästspårvagnar, påbörjades kl. 16.00 och tog cirka 15 minuter.
 1077;65;SBegin:SVPunctuation:SVAndOrBut|SVSubjpron;*|+SVPBegin;
+/*		1077. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 1084;65;SVComma+^SVList|*typeConcept|^SVAndOrBut;*|+SVPBegin|*;
+/*		1084. Lärarens etiska förhållningssätt gentemot studenter ur ett bredare perspektiv analyseras av Patricia Keith-Spigel et al. (The Ethics of Teaching, 2002).
 1106;65;SVComma|SVAdv:SVAdvDegree:SVAdvFreq:SVAdvStruct:SVAdvTemp|^SVAndOrBut;*|+SVPBegin|*;
+/*		1106. Samliga arbeten tillverkas i verkstaden, endast kedjorna köps in.
 1086;65;SVComma:SVAndOrBut|.SVAdvStruct:SVAdvTemp|SVNegrel:"och";*|*|+SVPBegin;
+/*		1086. Ja, inte ens inom dess ram gör listan ovan anspråk på att vara komplett.
 1092;65;SVBracket1|^SVPunctuation|SVBracket2|^SEnd+^SVPunctuation;-SVBracket1|*|-SVBracket2|*;treat one word between brackets as non-disturbing part of the sentence
+/*		1092. Enligt International Congress and Convention Association (ICCA) var Stockholm 2008 åtta på världsrankingen.
 1093;65;SVBracket1:SVBracket2|^SEnd;*|+SVPBegin;isolate part of sentence between ()
+/*		1093. man låter regler och allmänna handlingsföreskrifter (”Ljug inte”, ”Håll dina löften”) ha en viktig uppgift i etiken som användbara tumregler.
 1143;65;SVNegrel|SVvRel|SVAndOrBut|typeConcept;*|*|+SVbRel+SVPBegin|*;
+/*		1143. ett beslut som meddelats enligt 26 § inte följs och beslutet är av väsentlig betydelse från djurskyddssynpunkt;
 1144;65;SVRelpron|^SEnd+^SVAndOrBut+^SVPunctuation;+SVPBegin|*;
+/*		1144. Här handlar det om lärare, forskare och studerande, som odlar sina respektive vetenskaper enligt vad som gäller inom ramen för respektive specialitet.
 1058;65;"men";+SVConj+SVPBegin;
+/*		1058. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
 1149;65;SVConj+^SVPrep+^"men"|.^SVvRel+^SVConj+^SVNegrel+^SVAtt|*SVvRel+^SVAux|.^SVPBegin+^SVvRel+^SVConj+^SVAtt+^SVAndOrBut+^SVSubjpron+^SVNegrel|SVNegrel|SVvRel+^SVInf;*|*|*|*|+SVPBegin|*;
+/*		1149. Bland annat infördes en lag om att den som arrangerar en offentlig tillställning som är vinstdrivande inte kommer att behöva betala för polisens insatser.
 1046;65;SVConj+^SVPrep|.^SVvRel+^SVConj|SVvRel;+SVPBegin|*|+SVPVerb;
+/*		1046. 2 § Annan arbetstvist än som avses i 1 § skall upptagas och avgöras av tingsrätt.
 1132;65;SVConj+SVPBegin|SVPunctuation;-SVPBegin|*;correction of r1046
+/*		1132. – Jag vet inte varför, det kan handla om missförstånd, att man trodde att man skulle få mer inflytande i vissa delar.
 1115;65;SVComma:SVvRel|SVConj+^SVPrep+^SVUtan+^SVSom|^SEnd;*|+SVPBegin|*;
+/*		1115. Vildrenarna tilläts t.o.m. äta och lägga sig ner och vila under det långsamma drevet, så att de inte skulle oroas för mycket.
 1215;65;SVAdj+^SVList|SVAndOrBut|SVCon|SVvRel+^SVInf;*|+SVPBegin|*|*;
+/*		1215. Vid typ 2-diabetes är cellernas insulinupptagningsförmåga rubbad och cellerna förmår inte tillgodogöra sig insulinet som de ska.
 1055;65;SVAtt|^SVInf+^SVVerbInf;+SVConj+SVPBegin|*;
+/*		1055. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 1107;65;"för"+SVConj|SVAtt;+SVPBegin|+SVPBegin;
+/*		1107. Nu ska forskare på Umeå universitet leda ett projekt för att studera detta.
 1045;65;SVVerb;+SVPVerb;
+/*		1045. Det handlar m.a.o. om validiteten i metoden.
 1047;65;SVAux|^SVVerb+^SVmAux+^SVpAux+^SVSup|SVSup;+SVPVerb|*|*;
+/*		1047. Hon har inte gjort något för att skada sitt barn.
 1048;65;SVmAux|^SVVerb+^SVmAux+^SVpAux+^SVSup+^SVInf+^SVVerbInf|SVInf:SVVerbInf;+SVPVerb|*|*;
+/*		1048. Framförallt vill jag testa någonting nytt.
 1056;65;SVPBegin|*^SVmAux+^SVConj+^SVPBegin|SVmAux;*|*|+SVPVerb;
+/*		1065. Ökade kostnader kan bli ett problem då varje dator kräver underhåll.
 1053;65;SBegin|^SVvRel+^SVConj|.^SVvRel+^SVConj|SVvRel;*|+SVPBegin|*|+SVPVerb;
+/*		1053. Det handlar m.a.o. om validiteten i metoden.
 1057;65;SVPBegin:SVPVerb+^SVmAux|*^SVConj+^SVmAux+^SVVerbInf|SVVerbInf;*|*|+SVPVerb;
+/*		1057. Mark och Lisa väntas i Stockholm.
 1060;65;SVVerb:SVpAux:SVAux:SVInf:SVVerbInf|*^SVConj+^SVInf+^SVVerbInf|SVVerbInf;*|*|+SVPVerb;
+/*		1060. Enligt denna fysiska lag kan energi varken skapas (produceras) eller förintas.
 1059;65;SVAux+^SVInf;+SVPVerb;
+/*		1059. Rättshjälpen har således upphört (jfr. NJA 2007 s. 752).
 1052;65;SVPVerb|*^SVmAux+^SVConj+^SVPBegin|SVmAux+^SVInf;*|*|+SVPBegin+SVPVerb;
+/*		1052. Om man är orolig för att man har kärlkramp kan man ringa sjukvårdsrådgivningen, telefon 1177, eller kontakta en vårdcentral.
 1095;65;SVPVerb+^SVmAux|.^SVmAux+^SVConj+^SVPBegin|SVmAux+^SVInf;*|*|+SVPBegin+SVPVerb;
+/*		1095. Om de blir inflammerade och slemhinnorna svullnar kan man bli täppt i bihålorna och få bihåleinflammation.
 1159;65;SVAux|SVSup+SVPBegin;*|-SVPBegin;
+/*		1159. patienter som lades in med diagnosen divertikulit ofta blev feberfria och förbättrade snabbt trots att antibiotikabehandlingen knappast hade hunnit verka.
 1063;65;SVPVerb+^SVmAux|*^SVvRel+^SVConj+^SVPunctuation+^SVPBegin+^SVSubjpron|SVVerb+^SVList;*|*|+SVPBegin;
+/*		1063. Man mätte och vägde och tittade för att bestämma människans ställning i världsalltet.
 1065;65;SVVerb:SVInf:SVVerbInf|*^SVvRel+^SVPBegin|SVVerb:SVpAux:SVAux+^SVInf;*|*|+SVPBegin;
+/*		1065. Att lära tillsammans, förnya, dela projekt och goda erfarenheter, förstå och tolerera varandra är några av de lektioner som deltagarna i detta initiativ kan lära av detsamma.
 1114;65;SVVerb:SVInf:SVVerbInf|*^SVvRel+^SVPBegin+^SVPunctuation|SVmAux+^SVInf;*|*|+SVPBegin;
+/*		1114. Om det skulle bli så får de som köpt biljetter pengarna tillbaka.
 1068;65;SVVerb:SVInf:SVVerbInf|SVVerb:SVpAux:SVAux+^SVInf;*|+SVPBegin+SVbRel;
+/*		1068. Sista gången ABBA som grupp uppträdde var 1982.
 1135;65;SVvRel+^SVVerbpt2|.SVAdj:SVAdv|SVVerbpt2|SVVerb:SVpAux:SVAux+^SVInf;*|*|*|+SVPBegin+SVbRel;
+/*		1135. De som hade råd betalade hundra kronor för lunchen — som för stadens mest utsatta var gratis.
 1066;65;SVSup|SVpAux;*|+SVPBegin+SVbRel;
+/*		1066. Då de skapande krafterna frigjorts är befrielse möjlig.
 1071;65;SVvRel+^SVPBegin|SVvRel+SVPBegin;*|+SVbRel;
+/*		1071. Då de skapande krafterna frigjorts är befrielse möjlig.
 1075;65;SVPrep|SVRelpron+SVPBegin;+SVPBegin|-SVPBegin;
+/*		1075. Skillnaden mellan borden är inte enbart designen utan det är också skillnad på hur de förväntas bli använda.
 1079;65;"utan"|."för"|SVAtt;+SVPBegin+SVbRel|-SVPBegin-SVbRel|-SVPBegin-SVbRel;
+/*		1079. Eldar tändes ursprungligen inte för att skrämma bort häxor utan för att bränna det gamla och ge plats för det nya.
 1078;65;"för":"genom"|SVAtt+SVPBegin;+SVPBegin+SVbRel|+Join;
+/*		1078. I princip behöver man inte vara rädd för att man reponerar gangränös tarm.
 1108;65;^SVvRel+^SVPrep+^SVConj+^SVAndOrBut|SVAndOrBut+^"än"|.SVAdvStruct:SVAdvTemp|SVPBegin;*|+SVPBegin+SVbRel|*|-SVPBegin-SVbRel;
+/*		1108. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
 1109;65;"men"|.SVAdvStruct|SVPBegin;+SVPBegin+SVbRel|*|-SVPBegin-SVbRel;
+/*		1109. Men som sagt, hans flygresa uppskattades inte av den lokala polisen.
 1110;65;^SVConj+^SVAndOrBut|SVAndOrBut+^"än"|SVConj+SVPBegin;*|+SVPBegin+SVbRel|-SVPBegin-SVbRel;
+/*		1110. De sa att det var något som inte stämde och att jag skulle uppsöka akuten, säger Patrik.
 1074;65;SVAndOrBut|.SVAdvStruct|SVPBegin;+SVPBegin|*|-SVPBegin-SVbRel;
+/*		1074. Dessa olika försvar kan störas och då ökar risken för infektioner som gör att man blir magsjuk.
 1141;65;SVvRel|SVAndOrBut+^"än"+^SVList|SVCon;*|+SVPBegin|*;
+/*		1141. En reglering som funnits några år har sannolikt hunnit anpassas och flertalet svagheter slipats av.
 1148;65;SVvRel|SVvRel:SVNegrel+SVPBegin;*|+SVbRel;
+/*		1148. Då de skapande krafterna frigjorts är befrielse möjlig.
 1213;65;SVComma+^SVList|SVPrep;*|+SVPBegin;
+/*		1213. Renhjorden höll sig således inom ett begränsat område på 0,5-1 mil, beroende på storleken på hjorden.
+
 
 /* ==================
 /* PHASE 70: NEGATION
 /* ==================
 /* Expansion of negation scope
 /* ---------------------------
-
 625;70;SVNegWord+SVNegation;-SVNegation;avoid expansion for NegWord
+/*		625. En inte oansenlig andel vetenskapsteoretiker menar att humaniora bör klassas som en underavdelning till samhällsvetenskapen.
 1096;70;SVbCon:SVCon+"icke";-SVNegation+SVNegWord;
+/*		1096. Flera av dessa patienter hade dessutom centralt belägna hematom och var redan primärt bedömda som icke lämpliga för utrymning.
 448;70;SVAdjpron+SVNegation;+SVNegStart;
+/*		448. En del människor har inga bihålor i pannan överhuvudtaget.
 1101;70;SVComma|SVAdvDegree+SVNegation;*|+SVNegStart;
+/*		1101. Han konstaterar, på samma linje, men mer krasst, att vid urminnes hävd försvaras äganderätten uteslutande genom hänvisning till ett långvarigt besittningsförhållande som sådant, icke till något grundläggande rättsfaktum.
 1100;70;"icke"+SVAdvDegree;-SVAdv-SVAdvDegree+SVNegrel+SVNegation;
+/*		1100. Här aktualiseras normer om respekt för integritet och att icke skada som en konsekvens av empiriinsamling, databearbetning och resultatredovisning.
 1099;70;SVCon+SVNegation;+SVNegStart;
+/*		1099. Det finns ingen aldrig så god anledning att skända människor på ett sådant sätt som man gör där.
 1137;70;SVAndOrBut|SVbCon+SVNegation;+SVNegStart|*;
+/*		1137. Människor kan göra mycket med hjälp av texter, men knappast allt.
 431;70;^SVSubjpron+^SVObjpron+^SVAdj+SVNegation+^SVNegStart;+SVNegBegin;
+/*		431. Ett sommarprat som många kan känna igen sig i, även om man aldrig har hållit i en golfklubba.
 1088;70;"nej";+SVNegation;
+/*		1088. Även om ingen av föräldrarna explicit ville säga nej till att donera, sade heller ingen av dem ja.
 
 /* Utan
 /* ----
 /* utan = SVConj+SVUtan+SVNegStop
 /* First remove SVConj and make utan a negation marker when there is nothing like 'inte bara' in the sentence.
-
 975;70;SBegin:SVUtan|.^SVAdvRestrict+^SVUtan|SVUtan|^typeRelation;*|*|-SVConj+SVNegation+SVNegStart|*;
+/*		975. Utan teleskop hade astronomiforskningen varit mycket begränsad.
 990;70;SVRefl:SVObjpron|SVNegrel+SVNegation|SVUtan|^SVvRel;*|*|-SVConj+SVNegation+SVNegStart|*;
+/*		990. vi klarar oss inte utan varandra.
 
 /* Then correct the output: no negation marker in 'utan vidare' (when 'vidare' is not an adj) or when preceded by another negation marker.
-
 979;70;SVUtan|SVVidare+^SVAdj;-SVUtan-SVNegation-SVNegStart+SVPrep|*;
+/*		979. det är omöjligt att utan vidare införa undersökningslandskap som bärande princip i undervisningen. NOT_IN: de olika behandlingsmetoderna kan inte göras utan vidare studier.
 1136;70;SVUtan|SVVidare|SVComma:SEnd;-SVUtan-SVNegation-SVNegStart+SVAdv|Join|*;
+/*		1136. vi vill vara säkra på att absoluta gränser inte överskrids utan vidare.
 974;70;SVNegation+^SVUtan|*^SVNegation+^SVUtan|SVUtan|^SVAtt+^SEnd;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel|*;
+/*		974. Dessa samtal är inte inspelade utan anteckningar har gjorts i samband med samtalen.
 989;70;"eller"|SVNegrel+SVNegation|SVUtan;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel;
+/*		989. I detta sammanhang hänger det inte på om ett land är medlem eller inte utan på om medlemslandet ifråga har vissa bestämda intressen.
 991;70;"men"|"inte"|SVUtan;-SVNegBegin|-SVNegation-SVNegBegin|-SVNegation-SVNegStart-SVUtan+SVConj;
+/*		991. Följaktligen kan valutapolitiken påverka tillväxten, men inte utan hjälp av finanspolitiken.
 988;70;^SVRefl+^SVObjpron|SVNegrel+SVNegation|SVUtan|SVvRel:SVSubjpron;*|*|-SVNegation-SVNegStart+SVNegStop+SVbRel|*;
+/*		988. Därför avbröt jag er inte utan lät er avsluta ert anförande.
 
 /* More finetuning: correction of the correction
-
 980;70;SVUtan+^SVNegStart|SVCon:SVAdj|SVPunctuation;+SVNegation+SVNegStart-SVConj+SVPrep|*|*;
+/*		980. Framför allt blev det moderna kvinnomodet inte tänkbart utan långbyxor, som slog igenom på 1930-talet.
 981;70;SVvRel:SVRefl|SVUtan+^SVNegStart|SVCon:SVAdj;*|+SVNegation+SVNegStart-SVConj+SVPrep|*;
+/*		981. 3 § Ingen svensk medborgare får utan samtycke antecknas i ett allmänt register enbart på grund av sin politiska åskådning.
 983;70;SVPrep|*typeConcept|SVUtan+^SVNegStart|SVCon;*|*|+SVNegation+SVNegStart-SVConj+SVPrep|*;
+/*		983. Sedan ett djur har omhändertagits får ägaren inte förfoga över djuret eller avkomma som omfattas av omhändertagandet utan tillstånd av länsstyrelsen.
 
 /* Split Relations
-
 976;70;typeRelation+^SVAdvDegree+^SVNegation|SVUtan+SVNegStart;*|+SVbRel;
+/*		976. Dessa samtal är inte inspelade utan anteckningar har gjorts i samband med samtalen.
 985;70;SVAdvDegree|SVUtan+SVNegStart;+SVbRel|*;
+/*		985. Även denna transplantation gjordes helt utan forskningserfarenheter inom området.
 986;70;SVAdvStruct|SVUtan+SVNegStart;*|+SVbRel;
+/*		986. Den höga kostnaden per jobb generellt beror enligt rapporten på att en stor andel av sänkningen hamnade hos unga som redan hade jobb eller som skulle ha fått jobb även utan den.
 
 /* Restrict or extend expansion
-
 977;70;SVUtan+SVNegStart|*^SVvRel|SVvRel;*|*|+SVNegStop;
+/*		977. Dessa samtal är inte inspelade utan anteckningar har gjorts i samband med samtalen.
 982;70;SVUtan+SVNegStart|SVCon|"mest";*|*|+SVNegStop+SVbCon-SVAdj;
+/*		982. Cannabis (hasch och marijuana) är den utan jämförelse mest brukade illegala drogen i västvärlden.
 978;70;SVUtan+SVNegStart|*^SVPunctuation|SVPunctuation+^SVList|^SVNegation;*|*|+SVNegStop|+SVNegStop;
+/*		978. långvarig hosta utan förklaring, ofta nattetid.
 987;70;^SVUtan|SVUtan+SVNegStart|SEnd;+SVNegBegin|-SVNegStart|*;
+/*		987. Även om det ofta dansas till musik så kan den också framföras utan, antingen genom att den skapar sitt eget ackompanjemang som stepp eller helt utan.
 
 /* assign InNegspan attribute
 /* --------------------------
-
 968;70;SVNegBegin:SVNegStart|*^SVNegStop;+SVInNegspan|+SVInNegspan;
+/*		968. Då duger det inte att fortsätta fiska i vatten.
 
 /* utan att
 /* --------
-
 971;70;SVUtan+^SVInNegspan|SVAtt;+SVNegation+SVNegBegin+SVbRel-SVNegStop|+SVNegation;
+/*		971. Ibland skriver studenter utan att ha tänkt igenom hur informationen presenteras.
 993;70;SVNegrel|SVUtan+SVInNegspan|SVAtt;*|+SVNegation|*;
+/*		993. Det går inte utan att arbeta i Nato-sammanhang.
 972;70;SVInNegspan+^SVNegrel|.SVPunctuation|SVUtan|SVAtt;*|*|+SVNegStop-SVNegation-SVNegBegin|-SVNegation;
+/*		972. Det handlar inte om kapacitet utan att orka med kraven”, säger han.
 973;70;SVAdvRestrict|*^SVUtan|SVUtan|SVAtt;*|*|+SVNegStop-SVNegation-SVNegBegin|-SVNegation;
+/*		973. Flera leverantörer av hypervi-sorer lovar att de inte bara kan köra båda på samma cpu, utan att de till och med kan lägga säkerhetskritisk realtid i mixen.
 992;70;SVUtan+^SVNegation+^SVNegBegin+^SVNegStart;+SVNegStop+SVbRel;
+/*		992. Genom att ge folk något de inte har bett om hjälper vi dem inte utan retar bara upp dem.
 
 /* More expansion-related rules
 /* ----------------------------
-
 1087;70;SVComma|SVNegrel|.^typeConcept+^typeRelation+^typePathRelevant|SVConj:SVPrep;*|*|*|-SVPBegin-SVNegStop;
+/*		1087. När en person väljer att sälja sina varor, inte för att personen vill ha det som köps för sin egen skull, utan för att kunna byta till sig andra varor med vad personen bytt till sig, då är en penningekonomi på väg att födas.
 1061;70;SVPBegin|.^SVPBegin+^SVNegBegin+^SVNegStart|^SVPBegin+^SVNegStart+SVNegation;+SVNegBegin|*|*;
+/*		1061. Barn med kronisk sjukdom eller infektion de senaste tio dagarna ombads att inte delta.
 1062;70;SVPBegin+^SVNegBegin+^SVNegStart+^SVNegation;+SVNegStop;
+/*		1062. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 1138;70;SVNegBegin+^SVNegation|*^SVAndOrBut+^SVNegation|SVAndOrBut+^"än"+^SVList+^SVNegStop|^typeConcept+^SVDefart+^SVIndefart+^SVPosspron+^SVPrep;-SVNegBegin|-SVInNegspan|+SVNegBegin+SVbRel|*;
+/*		1138. Vi vet, slutligen, att många yrkestitlar var vaga, mångtydiga och därmed inte så upplysande.
 1064;70;SVPBegin+SVConj;+SVbRel;
+/*		1064. Redan på 1400-talet började staden växa utanför sina ursprungliga gränser, d.v.s. Gamla stan.
 1091;70;SVAndOrBut+SVPBegin+SVNegBegin;+SVbRel;
+/*		1091. Vi kommer att ha olja, men inte till de låga priserna. Detsamma gäller, oavsett temperatur, om barnet är slött och inte vill äta eller dricka.
 1083;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;move NegBegin from nonrelevant to relevant lexrep
+/*		1083. Ännu i dag vet jag inte om den senare hänvändelsen var samordnad med uppvaktningen från konsultfirman.
 1067;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|+SVNegBegin;
+/*		1067. Den motsvarar inte ens 10 procent av vår produktion.
 1131;70;SVNegBegin+SVbRel:SVAndOr|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;ad hoc rule for men and och
+/*		1131. Men på sätt och vis är det inte alls ett bord.
 1090;70;SVNegBegin+SVbRel:SVAndOr|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|+SVNegBegin;ad hoc rule for men and och
+/*		1090. En del får astma av kontakt med vissa ämnen som med astma inte reagerar på.
 1133;70;SVComma|SVPrep|SVNegStop+^SVComma;*|+SVNegStop|*;
+/*		1133. Galleriskog växer i en krans runt en insjö eller följer en flod i stäpp-, öken eller savannområden, som i för övrigt inte kan bära skog, på grund av att regnet endast fuktar det översta jordlagret.
 
 /* delete unnecessary relation splits
 /* ----------------------------------
-
 1080;70;SVInNegspan;-SVInNegspan;
+/*		1080. Enligt denna fysiska lag kan energi varken skapas (produceras) eller förintas.
 1081;70;SVNegBegin:SVNegStart|.^SVNegStop+^SVPBegin|SVNegStop;+SVInNegspan|+SVInNegspan|*;
+/*		1081. Andra åtgärder vid slakten får inte vidtas innan djuret är dött.
 1082;70;SVbRel+^SVInNegspan+^SVNegStop+^SVNegBegin;-SVbRel;
+/*		1082. Även denna transplantation gjordes helt utan forskningserfarenheter inom området.
 946;70;SVInNegspan+^SVAndOrBut|SVAndOrBut:SVConj+SVNegStop+^"eller";*|+SVbRel;
+/*		946. Jag vet inte var de skulle kunna komma från men det känns långsökt med Norge eller Tjeckien till exempel.  NOT_IN: artros är en kronisk sjukdom utan bot i biologisk mening och eftersom vi lever allt längre antas också prevalensen av artros öka.
 942;70;SVNegStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegStop;move NegStop from nonrelevant to relevant lexrep
+/*		942. Ett något mindre dramatiskt exempel: vi kan använda mötesbordet som matbord och vice versa.
 941;70;SVNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegStop;move NegStop from nonrelevant to relevant lexrep
+/*		941. Redan på 1400-talet började staden växa utanför sina ursprungliga gränser, d.v.s. Gamla stan.
 
 /* add negation to prefix icke- on word (-> Concept) level
 /* -------------------------------------------------------
-
 1134;70;"icke-";+SVNegation;
+/*		1134. Jämfört med icke-kirurgisk behandling mot fetma har obesitaskirurgi större effekt på både kroppsvikt och andra utfallsmått, men slutsatserna begränsas av kort uppföljningstid.
+
 
 /* ===================
 /* PHASE 80: SENTIMENT
@@ -1135,77 +1867,107 @@
 /* Expansion of sentiment scope
 /* ----------------------------
 /* Sentiment attribute on verb -> expand to phrase
-
 1161;80;SVPBegin|.^SVPBegin+^SVPosSentiment|SVvRel+SVPosSentiment+^SVPBegin;+SVPosSentimentBegin|*|*;
+/*		1161.UD. Bra bevisning hjälper föga om det som bevisas är ointressant.
 1163;80;SVPBegin|.^SVPBegin+^SVNegSentiment|SVvRel+SVNegSentiment+^SVPBegin;+SVNegSentimentBegin|*|*;
+/*		1163.UD. Asiatiska krabbor hotar västkusten.
 1191;80;SVPBegin+SVPosSentiment;+SVPosSentimentBegin;
+/*		1191.UD. Stora variationer kan dessutom förekomma mellan olika discipliner.
 1192;80;SVPBegin+SVNegSentiment;+SVNegSentimentBegin;
-
+/*		1192.UD. Bullriga barn är norm i hyreshus.
 /* Sentiment attribute on adjective preceded by a form of 'vara' -> expansion to the left
-
 1167;80;typeConcept+^SVAdj|SVpAux+^SVPBegin|SVAdj:SVCon+SVPosSentiment;+SVPosSentimentBegin|*|*;
+/*		1167.UD. Stora teleskop är bra även för att de samlar in mer ljus än små.
 1178;80;SVSubjpron|SVpAux|SVAdj:SVCon+SVPosSentiment;+SVPosSentimentBegin|-SVPBegin|*;
+/*		1178.UD. Det är bra för de boende i drabbade områden att veta.
 1180;80;typeConcept+^SVAdj|SVpAux+^SVPBegin|SVAdj:SVCon+SVNegSentiment;+SVNegSentimentBegin|*|*;
+/*		1180.UD. När man blir magsjuk av bakterier är det vanligt att man har blivit smittad utomlands, ofta där den hygieniska standarden är dålig.
 1181;80;SVSubjpron|SVpAux|SVAdj:SVCon+SVNegSentiment;+SVNegSentimentBegin|-SVPBegin|*;
+/*		1181.UD. jag är besviken på valresultatet.
 
 /* Sentiment attribute on concept word -> expand to the right, no expansion to the left
-
 1182;80;typeConcept:typeBeginConcept+SVPosSentiment;+SVPosSentimentBegin;
+/*		1182.UD. De båda filmmaterialen har dock kompletterat varandra på ett bra sätt.
 1209;80;typeConcept:typeBeginConcept+SVNegSentiment;+SVNegSentimentBegin;
+/*		1209.UD. Man bör undvika för söta drycker, eftersom alltför mycket socker kan ge mer diarré.
 
 /* Sentiment attribute on type(Begin)Concept -> expand to the right until next verb form, beginning of phrase or att (for typeBeginConcept)
-
 1211;80;typeBeginConcept+SVPosSentiment|*^SVvRel+^SVPBegin+^SVAtt|SVvRel:SVPBegin:SVAtt;+SVPosSentimentBegin|*|+SVPosSentimentStop;
+/*		1211.UD. de kommunikativa målen och diskursgemenskapen diskuteras och problematiseras inte i någon högre grad, vilket innebär att fokus tämligen snabbt hamnar på hur texterna ser ut.
 1212;80;typeBeginConcept+SVNegSentiment|*^SVvRel+^SVPBegin+^SVAtt|SVvRel:SVPBegin:SVAtt;+SVNegSentimentBegin|*|+SVNegSentimentStop;
+/*		1212.UD. Om ingreppet inte lyckas, eller bedöms alltför riskfyllt, bör bronkotomi övervägas.
 1195;80;typeConcept+SVPosSentiment|.^SVPBegin+^SVvRel+^SVSubjpron+^SVPosSentimentBegin|SVPBegin:SVvRel:SVSubjpron+^SVPosSentiment+^SVPosSentimentBegin;*|*|+SVPosSentimentStop+SVDummy;
+/*		1195.UD. Men en vackert tal kan vi studera för dess egen skull, som en ren språkkonst. Ett annat stort framsteg från samma tid var insikten att kloroplasterna härstammar från cyanobakterier.
 1196;80;typeConcept+SVNegSentiment|.^SVPBegin+^SVvRel+^SVSubjpron+^SVNegSentimentBegin|SVPBegin:SVvRel:SVSubjpron+^SVNegSentiment+^SVNegSentimentBegin;*|*|+SVNegSentimentStop+SVDummy;
+/*		1196.UD. Skälet är att ett äktenskap skulle vara alltför ekonomiskt riskfyllt i nuläget, vilket är, kanske inte invändningsfritt, men en rimlig synpunkt.
 
 /* Sentiment attribute on remaining words (mainly adverbs) -> expansion = phrase
-
 1204;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVPosSentiment+^SVPosSentimentBegin|SVPosSentiment+^SVPosSentimentBegin;+SVPosSentimentBegin|*|*;
+/*		1204.UD. Lägre organismer med hög reproduktion, kort generationstid och brutal selektion har bättre möjligheter att anpassa sig snabbt.
 1210;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVNegSentiment+^SVNegSentimentBegin|SVNegSentiment+^SVNegSentimentBegin;+SVNegSentimentBegin|*|*;
-
 /* Sentiment attribute after 'och' or 'genom att' -> start expansion at 'och' or 'genom att' instead of earlier at PBegin
-
 1185;80;SVPosSentimentBegin+^SVPosSentiment|*^SVAndOrBut+^SVPosSentiment|SVAndOrBut+^"än"+^SVList+^SVPosSentimentStop;-SVPosSentimentBegin|*|+SVPosSentimentBegin+SVbRel;
+/*		1185.UD. Hon såg hur stressad butiksinnehavaren var och erbjöd sig att komma och hjälpa honom.
 1186;80;SVNegSentimentBegin+^SVNegSentiment|*^SVAndOrBut+^SVNegSentiment|SVAndOrBut+^"än"+^SVList+^SVNegSentimentStop;-SVNegSentimentBegin|*|+SVNegSentimentBegin+SVbRel;
+/*		1186.UD. Sitt frieri till henne ägnar han dock mest åt att deklarera att han älskar henne trots allt vad förnuftet säger och att beklaga sig över hur hopplös hennes familj är.
 1187;80;SVPosSentimentBegin+^SVPosSentiment|*^"genom"+^"än"+^SVPosSentiment|"genom":"än"|SVAtt;-SVPosSentimentBegin|*|+SVPosSentimentBegin|*;
+/*		1187.UD. I analysen av de två fallbeskrivningarna framgår att aggressiv musik har fungerat som en copingmetod genom att hjälpa informanterna att hantera den ovan nämnda rollkonflikten.
 1188;80;SVNegSentimentBegin+^SVNegSentiment|*^"genom"+^"än"+^SVNegSentiment|"genom":"än"|SVAtt;-SVNegSentimentBegin|*|+SVNegSentimentBegin|*;
+/*		1188.UD. För många är det viktigare att vara väl förberedd än att påbörja en behandling alltför snabbt, innan man har hunnit tänka igenom alla beslut.
 
 /* Restriction of sentiment scope: stop at end of phrase
-
 1164;80;typeRelation+SVPosSentiment|.^SVPBegin+^SVPosSentimentBegin|SVPBegin+^SVPosSentimentBegin;*|*|+SVPosSentimentStop;
+/*		1164.UD. Han spelade bra i målet och räddade oss flera gånger.
 1165;80;typeRelation+SVNegSentiment|.^SVPBegin+^SVNegSentimentBegin|SVPBegin+^SVNegSentimentBegin;*|*|+SVNegSentimentStop;
+/*		1165.UD. Men vi rekommenderar inte att avråda från användning, säger hon.
 1193;80;"utan"+SVbRel;+SVPosSentimentStop+SVNegSentimentStop;
+/*		1193.UD. I nutida systematik räknas inte protozoer till djurriket utan förs till gruppen protister.
 1197;80;SVAtt|SVDummy;*|-SVPosSentimentStop-SVNegSentimentStop;
+/*		1197.UD. Otto är en fantastisk spelare och det är riktigt skönt att få ha honom vid min sida. – Det ska bli väldigt skönt att hoppa av denna skuta nu.
 1201;80;SVAndOrBut|SVDummy+SVPosSentimentStop;+SVPosSentimentStop|-SVPosSentimentStop;
+/*		1201.UD. Alfred Nobel var mycket begåvad, hade stor arbetsförmåga och fast tro på mänsklighetens utveckling genom fredlig kamp med naturens krafter.
 1202;80;SVAndOrBut|SVDummy+SVNegSentimentStop;+SVNegSentimentStop|-SVNegSentimentStop;
+/*		1202.UD. Benskörhet har ofta många olika orsaker det kan vara en följd av att man i ungdomen byggde upp en alltför liten benmassa, men också bero på att man av någon orsak förlorat benmassa relativt snabbt under en längre tid.
 1203;80;SVPrep|SVDummy+SVSubjpron;*|-SVPosSentimentStop-SVNegSentimentStop;
+/*		1203.UD. – Jag tror att det är bra för det visar att vi agerar.
 1198;80;SVDummy;-SVDummy;
+/*		1198.UD. Det är många bra och kloka spelare kvar i laget.
 1199;80;SVPosSentimentBegin|.^SVPBegin+^SVPosSentimentStop|SVPBegin+^SVPosSentiment+^SVPosSentimentBegin;*|*|+SVPosSentimentStop;
+/*		1199.UD. Nu finns åter stora arealer där jordbruk är olönsamt. Storhet är bara möjligt för den som är en verkligt bra människa, som är förträfflig som människa, d v s besitter karaktärsdygderna.
 1200;80;SVNegSentimentBegin|.^SVPBegin+^SVNegSentimentStop|SVPBegin+^SVNegSentiment+^SVNegSentimentBegin;*|*|+SVNegSentimentStop;
+/*		1200.UD. Det är dock en alltför omfattande fråga, så vi lämnar den därhän.
 
 /* Move attribute markers to relevant entity
-
 1176;80;SBegin|"men"+SVPosSentimentBegin|^SEnd;*|*|+SVPosSentimentBegin;
+/*		1176.UD. Men vi rekommenderar inte att avråda från användning, säger hon.
 1177;80;SBegin|"men"+SVNegSentimentBegin|^SEnd;*|*|+SVNegSentimentBegin;
+/*		1177.UD. Men vi rekommenderar inte att avråda från användning, säger hon.
 1168;80;SVPosSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVPosSentimentBegin;
+/*		1168.UD. Här hemma har han drivit ett städbolag tillsammans med en änka.
 1169;80;SVPosSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVPosSentimentBegin;
-1170;80;SVNegSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentBegin;
+/*		1169.UD. För det mesta läker sjukdomen snabbt.
+1170;80;SVNegSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentBegin;no example
 1171;80;SVNegSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegSentimentBegin;
+/*		1171.UD. Om ingreppet inte lyckas, eller bedöms alltför riskfyllt, bör bronkotomi övervägas.
 1172;80;SVPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVPosSentimentStop;
+/*		1172.UD. Hon har gått runt och förklarat hemma – inte ens tre år gammal – att pappa mår bättre nu.
 1173;80;SVPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVPosSentimentStop;
-1174;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentStop;
+/*		1173.UD. De vill snabbt ha lärarens erkännande, tex om uppgifter var rätt lösta.
+1174;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentStop;no example
 1175;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegSentimentStop;
+/*		1175.UD. Bara det inte brusar alltför starkt, alltför länge och alltför ofta återkommande, då blir användaren irriterad.
 
 /* Split relations with a SentimentBegin or SentimentStop attribute
-
 1189;80;typeRelation+^SVAtt+^SVPosSentimentBegin+^SVPosSentimentStop|typeRelation+SVPosSentimentBegin:SVPosSentimentStop;*|+SVbRel;
+/*		1189.UD. Den litteraturkritikern har i stort sett nöjt sig med att konstatera att bokens namn var välfunnet.
 1190;80;typeRelation+^SVAtt+^SVNegSentiment+^SVNegSentimentBegin+^SVNegSentimentStop|typeRelation+SVNegSentimentBegin:SVNegSentimentStop;*|+SVbRel;
+/*		1190.UD. Den andra kommunen ska skriftligen och utan dröjsmål meddela sin inställning.
+
 
 /* =============================
 /* PHASE 80 and PHASE $: CLEANUP
 /* =============================
-
 947;85;SVbRel;SVbRel;remove conflicting labels
+/*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
+/*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.

@@ -26,14 +26,17 @@ for asset in json_data['assets']:
         win_url = asset['browser_download_url']
     elif re.match(r'^icu4c-.+-src\.zip$', asset['name']):
         src_url = asset['browser_download_url']
-assert win_url is not None, 'ICU Win64 URL not found'
-assert src_url is not None, 'ICU source URL not found'
+if win_url is None:
+    print('Warning: ICU Win64 URL for latest version was not found')
+if src_url is None:
+    print('Warning: ICU source URL for latest version was not found')
 
 # set variables to latest ICU version
 vars['ICU_URL_WIN'] = win_url
 vars['ICU_URL_SRC'] = src_url
 vars['ICU_NAME'] = json_data['name']
-updatelib.set_vars(vars)
+if win_url is not None and src_url is not None:
+    updatelib.set_vars(vars)
 
 # set environment variables for next GitHub actions step
 updatelib.setenv('ICU_NAME_OLD', icu_name_old)
