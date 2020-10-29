@@ -102,7 +102,7 @@ outputT IkStringEncodingImpl::ConvertTo(const IkStringEncodingImpl& new_encoding
   ucnv_convertEx(new_encoding.converter_, converter_,
 		 (char**)&buf_cursor, ((char*)buf)+(sizeof(typename outputT::value_type) * buf_size),
 		 (const char**)&in, ((const char*)in) + input_size,
-		 NULL, NULL, NULL, NULL, TRUE, TRUE, &converr);
+		 NULL, NULL, NULL, NULL, true, true, &converr);
   if (U_FAILURE(converr)) {
     throw MessageExceptionFrom<IkStringEncodingImpl>("IKFailedTranscode");
   }
