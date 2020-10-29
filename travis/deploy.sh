@@ -8,7 +8,8 @@
 #   2. The build is not associated with an open pull request.
 #   3. Variables PYPI_TOKEN and TESTPYPI_TOKEN are set. 
 #   4. The commit that the current build is testing contains a change to
-#      /modules/iknowpy/iknowpy/version.py.
+#      /modules/iknowpy/iknowpy/version.py, OR the build was triggered manually
+#      via the Travis UI with variable FORCE_DEPLOY=1.
 #
 # If the version specified in version.py is a developmental release version as
 # defined in PEP 440, then we deploy to TestPyPI. Otherwise, we deploy to PyPI.
@@ -22,6 +23,8 @@
 # - TRAVIS_PULL_REQUEST is the pull request number for current build, or false
 #   if it's not a pull request
 # - TRAVIS_COMMIT is the commit hash for current build
+# - TRAVIS_EVENT_TYPE indicates how the build was triggered
+# - TRAVIS_COMMIT_MESSAGE is the commit message
 # - PYVERSIONS (windows and osx only) is the space-delimited Python versions
 #   present, ordered old to new
 # - PYINSTALL_DIR (windows only) is the location Python is installed
@@ -34,10 +37,11 @@
 
 set -euxo pipefail
 
-if [ "$TRAVIS_BRANCH" = "master" ] && \
-    [ "$TRAVIS_PULL_REQUEST" = "false" ] && \
+if [ "$TRAVIS_BRANCH" = master ] && \
+    [ "$TRAVIS_PULL_REQUEST" = false ] && \
     [ -n "${PYPI_TOKEN+x}" ] && [ -n "${TESTPYPI_TOKEN+x}" ] && \
-    git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null
+    (git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null || \
+      ([ "$TRAVIS_EVENT_TYPE" = api ] && [ "${FORCE_DEPLOY-}" = 1 ]))
 then
   if [ "$TRAVIS_OS_NAME" = linux ]; then
     WHEELS=modules/iknowpy/wheelhouse/iknowpy-*manylinux*.whl
@@ -55,13 +59,13 @@ then
     export TWINE_REPOSITORY=testpypi
     { set +x; } 2>/dev/null  # don't save token to build log
     echo '+ "$PYTHON" -m twine upload -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS'
-    "$PYTHON" -m twine upload -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
+    "$PYTHON" -m twine upload --skip-existing -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
     set -x
   else
     export TWINE_REPOSITORY=pypi
     { set +x; } 2>/dev/null  # don't save token to build log
     echo '+ "$PYTHON" -m twine upload -u "__token__" -p "$PYPI_TOKEN" $WHEELS'
-    "$PYTHON" -m twine upload -u "__token__" -p "$PYPI_TOKEN" $WHEELS
+    "$PYTHON" -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
     set -x
   fi
 else
