@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
 
-# After the build is complete, execute this script to deploy the wheels if
-# appropriate. The working directory must be the root of the repository.
+# After the build is complete, execute this script on Linux to deploy the wheels
+# if appropriate.
+#
+# Wheels are assumed to be in the following locations.
+# - manylinux wheels: ./modules/iknowpy/wheelhouse
+# - osx wheels: ./modules/iknowpy/dist
+# - Windows wheels: ./C:/Users/travis/build/$TRAVIS_REPO_SLUG/modules/iknowpy/dist
+#   (This path is ugly, but until Travis CI better stabilizes its workspace
+#    feature, this is what we must settle with.)
 #
 # We deploy iknowpy if and only if 4 criteria hold.
 #   1. The build is from the master branch.
@@ -18,16 +25,12 @@
 # while "0.0.10" is not.
 #
 # Required Environment Variables:
-# - TRAVIS_OS_NAME is the name of the platform (linux, osx, windows)
 # - TRAVIS_BRANCH is the branch for which the build is occurring
 # - TRAVIS_PULL_REQUEST is the pull request number for current build, or false
 #   if it's not a pull request
 # - TRAVIS_COMMIT is the commit hash for current build
+# - TRAVIS_REPO_SLUG is the location that pip 
 # - TRAVIS_EVENT_TYPE indicates how the build was triggered
-# - TRAVIS_COMMIT_MESSAGE is the commit message
-# - PYVERSIONS (windows and osx only) is the space-delimited Python versions
-#   present, ordered old to new
-# - PYINSTALL_DIR (windows only) is the location Python is installed
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI. If unset,
@@ -37,35 +40,31 @@
 
 set -euxo pipefail
 
+EXPECTED_WHEEL_COUNT=25  # 5 Python versions across 5 platforms
+
 if [ "$TRAVIS_BRANCH" = master ] && \
     [ "$TRAVIS_PULL_REQUEST" = false ] && \
     [ -n "${PYPI_TOKEN+x}" ] && [ -n "${TESTPYPI_TOKEN+x}" ] && \
     (git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null || \
       ([ "$TRAVIS_EVENT_TYPE" = api ] && [ "${FORCE_DEPLOY-}" = 1 ]))
 then
-  if [ "$TRAVIS_OS_NAME" = linux ]; then
-    WHEELS=modules/iknowpy/wheelhouse/iknowpy-*manylinux*.whl
-    PYTHON=python3
-  else
-    WHEELS=modules/iknowpy/dist/iknowpy-*.whl
-    if [ "$TRAVIS_OS_NAME" = windows ]; then
-      PYTHON="$PYINSTALL_DIR/python.${PYVERSIONS##* }/tools/python.exe"
-    else  # osx
-      PYTHON=python$(echo "${PYVERSIONS##* }" | awk -F '.' '{print $1"."$2}')
-    fi
+  WHEELS="modules/iknowpy/wheelhouse/*.whl modules/iknowpy/dist/*.whl C:/Users/travis/build/$TRAVIS_REPO_SLUG/modules/iknowpy/dist/*.whl"
+  if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then
+    echo "Error: Expected $EXPECTED_WHEEL_COUNT wheels"
+    exit 1
   fi
-  "$PYTHON" -m pip install --user twine --no-warn-script-location
+  pip3 install --user twine --no-warn-script-location
   if grep ".dev[0-9][0-9]*'" "modules/iknowpy/iknowpy/version.py"; then
     export TWINE_REPOSITORY=testpypi
     { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ "$PYTHON" -m twine upload -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS'
-    "$PYTHON" -m twine upload --skip-existing -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
+    >&2 echo "+python3 -m twine upload --skip-existing -u \"__token__\" -p \"\$TESTPYPI_TOKEN\"" $WHEELS
+    python3 -m twine upload --skip-existing -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
     set -x
   else
     export TWINE_REPOSITORY=pypi
     { set +x; } 2>/dev/null  # don't save token to build log
-    echo '+ "$PYTHON" -m twine upload -u "__token__" -p "$PYPI_TOKEN" $WHEELS'
-    "$PYTHON" -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
+    >&2 echo "+python3 -m twine upload --skip-existing -u \"__token__\" -p \"\$PYPI_TOKEN\"" $WHEELS
+    python3 -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
     set -x
   fi
 else

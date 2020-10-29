@@ -46,6 +46,7 @@ for PYVERSION in $PYVERSIONS; do
   PYMAJORMINOR=$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
   python$PYMAJORMINOR setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
 done
+rm -r dist/cache
 
 
 ##### Report cache statistics #####
