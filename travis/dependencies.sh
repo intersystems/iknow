@@ -9,9 +9,9 @@ set -x
 # change .github/workflows/updatelib.py.
 
 # START DEPENDENCY-AUTOUPDATE SECTION
-ICU_NAME="ICU 67.1"
-ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-Win64-MSVC2017.zip
-ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-67-1/icu4c-67_1-src.zip
+ICU_NAME="ICU 68.1"
+ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-68-1/icu4c-68_1-Win64-MSVC2019.zip
+ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-68-1/icu4c-68_1-src.zip
 PYVERSIONS_WIN="3.5.4 3.6.8 3.7.9 3.8.6 3.9.0"
 PYVERSIONS_OSX="3.5.10 3.6.12 3.7.9 3.8.6 3.9.0"
 PYENV_TOOL_VERSION=1.2.21
