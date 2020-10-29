@@ -9,6 +9,29 @@ import sys
 # for "pip install iknowpy", next line will do, outcomment for local language development
 import iknowpy
 
+def count_matches(traces, match_key, target_count = -1, debug = False) -> int:
+    match_count = 0
+    if debug:
+        print("\nDEBUG counting : "+match_key)
+    for trace in traces:
+        key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+        if (key == match_key):
+            if debug:
+                print(value)
+            match_count += 1
+    if debug:
+        print("DEBUG end\n")
+    if (target_count >= 0) and ((target_count*2) != match_count):
+        print("ERROR: Unexpected number of trace entries for key '%s'. Found %d instead of %d." % (match_key, match_count, target_count))
+    else:
+        print("Found %d trace entries for key '%s'" % (match_count/2, match_key))
+    return match_count
+
+# TODO: grab from command line args
+debug = False
+test_sentence = "some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"
+
+print("\nBuilding User Dictionary using API...")
 engine = iknowpy.iKnowEngine()
 user_dictionary = iknowpy.UserDictionary()
 user_dictionary.add_label("some text", "UDUnit")
@@ -26,20 +49,40 @@ user_dictionary.add_unit("Hg")
 user_dictionary.add_number("magic number")
 user_dictionary.add_time("future")
 
+if len(user_dictionary.entries) != 11:
+    print("ERROR: UD not fully loaded!")
+
 ret = engine.load_user_dictionary(user_dictionary)
-engine.index("some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future", "en", True) # generate Traces
-for trace in engine.m_traces:
-    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
-    if (key=='UserDictionaryMatch'):
-        print(value)
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'UserDictionaryMatch', 11, debug)
 
+print("\nUnloading User Dictionary...")
 engine.unload_user_dictionary()
-engine.index("some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future", "en", True) # generate Traces
-for trace in engine.m_traces:
-    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
-    if (key=='LexrepIdentified'):
-        print(value)
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'LexrepIdentified', -1, debug)
+count_matches(engine.m_traces, 'UserDictionaryMatch', 0)
 
+# test array load
+print("\nBuilding User Dictionary from list...")
+user_dictionary_2 = iknowpy.UserDictionary(user_dictionary.entries)
+if len(user_dictionary_2.entries) != 11:
+    print("ERROR: UD not fully loaded!")
+engine.load_user_dictionary(user_dictionary_2)
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'UserDictionaryMatch', 11)
+
+
+# test clear
+print("\nClearing User Dictionary ...")
+user_dictionary_2.clear()
+if len(user_dictionary_2.entries) != 0:
+    print("ERROR: UD not fully cleared!")
+engine.unload_user_dictionary() # why is this needed?
+engine.load_user_dictionary(user_dictionary_2)
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'UserDictionaryMatch', 0)
+
+# test simple file load
 def read_udct_file(file_,udct_):
     f_udct = open(file_,"r",True,"utf8")
     for txt_line in f_udct:
@@ -69,12 +112,13 @@ def read_udct_file(file_,udct_):
 
     f_udct.close()
 
+print("\nBuilding User Dictionary from file...")
 user_dictionary.clear()
 read_udct_file("definition_terms_v2c.dct",user_dictionary)
 ret = engine.load_user_dictionary(user_dictionary)
 engine.index("This soltamox and estrogen receptor protein positive etc...", "en", True)
-for trace in engine.m_traces:
-    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
-    if (key=='UserDictionaryMatch'):
-        print(value)
+ret = engine.load_user_dictionary(user_dictionary)
+count_matches(engine.m_traces, 'UserDictionaryMatch', 5, debug)
 
+
+print("\nDone")

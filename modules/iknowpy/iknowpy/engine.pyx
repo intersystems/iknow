@@ -5,6 +5,8 @@ cimport cython
 import typing
 from cython.operator cimport dereference as deref, postincrement as postinc
 from .engine cimport *
+from collections import namedtuple
+from .labels import Labels
 
 
 cdef char* eType_to_str(eType t) except NULL:
@@ -41,75 +43,122 @@ cdef char* aType_to_str(Attribute t) except NULL:
 	raise ValueError('Attribute type {} is unrecognized.'.format(t))
 
 
-cdef class UserDictionary:
+Entry = namedtuple("Entry", ["literal", "label"])
+
+cdef class UserDictionary(object):
 	"""A class that represents a user dictionary"""
 	cdef CPPUserDictionary user_dictionary
 
+	# keep track of entries in a readable form
+	cdef list _entries
+
 	def __cinit__(self):
-		"""Initialize the underlying C++ iKnowUserDictioanry class"""
+		"""Initialize the underlying C++ iKnowUserDictionary class"""
 		self.user_dictionary = CPPUserDictionary()
+
+	def __init__(self, load_entries=None):
+		self._entries = []
+		self.add_all(load_entries)
+
+	@property
+	@cython.binding(True)
+	def entries(self) -> list:
+		return self._entries
 
 	@cython.binding(True)
 	def clear(self) -> None:
 		"""Clear the User Dictionary object"""
-		return self.user_dictionary.clear()
+		self.user_dictionary.clear()
+		self._entries = []
+
+	@cython.binding(True)
+	def add_all(self, load_entries = None) -> None:
+		""" Appends the contents of load_entries to this User Dictionary """
+		# load one by one so they also trigger the C++ side
+		if isinstance(load_entries, UserDictionary):
+			load_entries = load_entries.entries
+		if load_entries != None:
+			for e in load_entries:
+				if isinstance(e, Entry):
+					self.add_label(e.literal, e.label)
+				else:
+					self.add_label(e['literal'], e['label'])
 
 	@cython.binding(True)
 	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> None:
 		"""Add a custom user dictionary label."""
-		if self.user_dictionary.addLabel(literal, UdctLabel) == 0:
-			return
-		raise ValueError('User Dictionary Label {!r} is unknown.'.format(UdctLabel))
+		# capture pseudo-labels for sentence end/noend
+		if (UdctLabel == Labels.SENTENCE_END):
+			self.add_sent_end_condition(literal, True)
+		elif (UdctLabel == Labels.SENTENCE_NO_END):
+			self.add_sent_end_condition(literal, False)
+		elif self.user_dictionary.addLabel(literal, UdctLabel) == 0:
+			self._entries.append(Entry(literal, UdctLabel))
+		else:
+			raise ValueError('User Dictionary Label {!r} is unknown.'.format(UdctLabel))
 
 	@cython.binding(True)
 	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> None:
 		"""Add a sentence end condition."""
-		return self.user_dictionary.addSEndCondition(literal, bSentenceEnd)
+		self.user_dictionary.addSEndCondition(literal, bSentenceEnd)
+		if bSentenceEnd:
+			self._entries.append(Entry(literal, Labels.SENTENCE_END))
+		else:
+			self._entries.append(Entry(literal, Labels.SENTENCE_NO_END))
 
 	@cython.binding(True)
 	def add_concept(self, str literal: typing.Text) -> None:
 		"""Add a concept term."""
-		return self.user_dictionary.addConceptTerm(literal)
+		self.user_dictionary.addConceptTerm(literal)
+		self._entries.append(Entry(literal, Labels.CONCEPT))
 
 	@cython.binding(True)
 	def add_relation(self, str literal: typing.Text) -> None:
 		"""Add a relation term."""
-		return self.user_dictionary.addRelationTerm(literal)
+		self.user_dictionary.addRelationTerm(literal)
+		self._entries.append(Entry(literal, Labels.RELATION))
 
 	@cython.binding(True)
 	def add_non_relevant(self, str literal: typing.Text) -> None:
 		"""Add a non relevant term."""
-		return self.user_dictionary.addNonrelevantTerm(literal)
+		self.user_dictionary.addNonrelevantTerm(literal)
+		self._entries.append(Entry(literal, Labels.NONRELEVANT))
 
 	@cython.binding(True)
 	def add_negation(self, str literal: typing.Text) -> None:
 		"""Add a negation term."""
-		return self.user_dictionary.addNegationTerm(literal)
+		self.user_dictionary.addNegationTerm(literal)
+		self._entries.append(Entry(literal, Labels.NEGATION))
 
 	@cython.binding(True)
 	def add_positive_sentiment(self, str literal: typing.Text) -> None:
 		"""Add a positive sentiment term."""
-		return self.user_dictionary.addPositiveSentimentTerm(literal)
+		self.user_dictionary.addPositiveSentimentTerm(literal)
+		self._entries.append(Entry(literal, Labels.POS_SENTIMENT))
 
 	@cython.binding(True)
 	def add_negative_sentiment(self, str literal: typing.Text) -> None:
 		"""Add a negative sentiment term."""
-		return self.user_dictionary.addNegativeSentimentTerm(literal)
+		self.user_dictionary.addNegativeSentimentTerm(literal)
+		self._entries.append(Entry(literal, Labels.NEG_SENTIMENT))
 
 	@cython.binding(True)
 	def add_unit(self, str literal: typing.Text) -> None:
 		"""Add a unit term."""
-		return self.user_dictionary.addUnitTerm(literal)
+		self.user_dictionary.addUnitTerm(literal)
+		self._entries.append(Entry(literal, Labels.UNIT))
 
 	@cython.binding(True)
 	def add_number(self, str literal: typing.Text) -> None:
 		"""Add a number term."""
-		return self.user_dictionary.addNumberTerm(literal)
+		self.user_dictionary.addNumberTerm(literal)
+		self._entries.append(Entry(literal, Labels.NUMBER))
 
 	@cython.binding(True)
 	def add_time(self, str literal: typing.Text) -> None:
 		"""Add a time term."""
-		return self.user_dictionary.addTimeTerm(literal)
+		self.user_dictionary.addTimeTerm(literal)
+		self._entries.append(Entry(literal, Labels.TIME))
 
 
 cdef class iKnowEngine:
