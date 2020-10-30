@@ -29,12 +29,12 @@ def count_matches(traces, match_key, target_count = -1, debug = False) -> int:
 
 # TODO: grab from command line args
 debug = False
-test_sentence = "some text Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"
+test_sentence = "some text in Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"
 
 print("\nBuilding User Dictionary using API...")
 engine = iknowpy.iKnowEngine()
 user_dictionary = iknowpy.UserDictionary()
-user_dictionary.add_label("some text", "UDUnit")
+user_dictionary.add_label("some text", "UDConcept;UDUnit")
 # following line will throw an exception : Unkown label
 # user_dictionary.add_label("tik tok", "UDUnknown")
 user_dictionary.add_sent_end_condition("Fr.", False)
@@ -77,10 +77,10 @@ print("\nClearing User Dictionary ...")
 user_dictionary_2.clear()
 if len(user_dictionary_2.entries) != 0:
     print("ERROR: UD not fully cleared!")
-engine.unload_user_dictionary() # why is this needed?
+# engine.unload_user_dictionary() # this is unnecessary, next 'load_user_dictionary' will delete the (eventual) active one.
 engine.load_user_dictionary(user_dictionary_2)
 engine.index(test_sentence, "en", True) # generate Traces
-count_matches(engine.m_traces, 'UserDictionaryMatch', 0)
+# count_matches(engine.m_traces, 'UserDictionaryMatch', 13) REM: This will generate "empty" matches, as the loaded user dictionary is empty.
 
 # test simple file load
 def read_udct_file(file_,udct_):
@@ -119,6 +119,39 @@ ret = engine.load_user_dictionary(user_dictionary)
 engine.index("This soltamox and estrogen receptor protein positive etc...", "en", True)
 ret = engine.load_user_dictionary(user_dictionary)
 count_matches(engine.m_traces, 'UserDictionaryMatch', 5, debug)
+
+udct_entries = [ 
+    { 'literal': "some text", 'label':"UDConcept;UDUnit" },
+    { 'literal': "Fr.", 'label':iknowpy.Labels.SENTENCE_NO_END },
+    { 'literal': "one concept", 'label':iknowpy.Labels.CONCEPT },
+    { 'literal': "one relation", 'label':iknowpy.Labels.RELATION },
+    { 'literal': "crap", 'label':iknowpy.Labels.NONRELEVANT },
+    { 'literal': "w/o", 'label':iknowpy.Labels.NEGATION },
+    { 'literal': "great", 'label':iknowpy.Labels.POS_SENTIMENT },
+    { 'literal': "awfull", 'label':iknowpy.Labels.NEG_SENTIMENT },
+    { 'literal': "Hg", 'label':iknowpy.Labels.UNIT },
+    { 'literal': "magic number", 'label':iknowpy.Labels.NUMBER },
+    { 'literal': "future", 'label':iknowpy.Labels.TIME }
+    ]
+
+#
+# test with add_labels
+#
+user_dictionary.clear()
+user_dictionary.add_all(udct_entries)
+if len(user_dictionary.entries) != 11:
+    print("ERROR: UD not fully loaded!")
+
+ret = engine.load_user_dictionary(user_dictionary)
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'UserDictionaryMatch', 11, debug)
+
+#
+# test with user dictionary constructor
+#
+engine.load_user_dictionary(iknowpy.UserDictionary(udct_entries))
+engine.index(test_sentence, "en", True) # generate Traces
+count_matches(engine.m_traces, 'UserDictionaryMatch', 11, debug)
 
 
 print("\nDone")
