@@ -177,6 +177,7 @@ public:
 
 	// Tag User Dictionary label to a lexical representation for customizing purposes
 	// Currently available labels are : "UDNegation", "UDPosSentiment", "UDNegSentiment", "UDConcept", "UDRelation", "UDNonRelevant", "UDUnit", "UDNumber" and "UDTime"
+	// labels can be combined, separated by ';', like "UDConcept;UDTime", "UDRelation;UDNumber"
 	// Returns iKnowEngine::iknow_unknown_label if an invalid label is passed as parameter.
 	int addLabel(const std::string& literal, const char* UdctLabel);
 

@@ -512,3 +512,28 @@ UserKnowledgeBase::UserKnowledgeBase() : m_IsDirty(true)
 		kb_labels.push_back(LabelFromString(row_label, isDefault)); // create and add label object
 	}
 }
+
+int UserKnowledgeBase::addLexrepLabel(const std::string& token, const std::string& labels) {
+	size_t startIndex = 0;
+	size_t  endIndex = 0;
+	while ((endIndex = labels.find(';', startIndex)) < labels.size())
+	{
+		if (!IsValidLabel(labels.substr(startIndex, endIndex - startIndex)))
+			return -1;
+		startIndex = endIndex + 1;
+	}
+	if (startIndex < labels.size())
+	{
+		if (!IsValidLabel(labels.substr(startIndex)))
+			return -1;
+	}
+	kb_lexreps.push_back(iKnow_KB_Lexrep(token, labels));
+	m_IsDirty = true; // need recompilation
+	return 0;
+}
+
+void UserKnowledgeBase::addSEndCondition(const std::string& literal, const bool b_end) {
+	kb_acronyms.push_back(iKnow_KB_Acronym(literal, b_end));
+	m_IsDirty = true; // need recompilation
+}
+

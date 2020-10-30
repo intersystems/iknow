@@ -56,26 +56,22 @@ namespace iknow {
 				kb_acronyms.clear();
 				m_IsDirty = true;
 			}
+			// assign linguistic labels to a lexical representation.
+			int addLexrepLabel(const std::string& token, const std::string& labels);
 
-			int addLexrepLabel(const std::string& token, const std::string& label) {
-				bool bIsLabel = false;
-				for (auto it = kb_labels.begin(); it != kb_labels.end() && !bIsLabel; ++it) {
-					if (label == it->Name) bIsLabel = true;
-				}
-				if (!bIsLabel)
-					return -1;
-				
-				kb_lexreps.push_back(iKnow_KB_Lexrep(token, label));
-				m_IsDirty = true; // need recompilation
-				return 0;
-			}
-			void addSEndCondition(const std::string& literal, const bool b_end) {
-				kb_acronyms.push_back(iKnow_KB_Acronym(literal, b_end));
-				m_IsDirty = true; // need recompilation
-			}
+			// assign a sentence end condition to overrule the heuristics and language model acronyms.
+			void addSEndCondition(const std::string& literal, const bool b_end);
 
 		private:
 			bool m_IsDirty; // if true, needs reloading
+
+			// helper function to verify a single label.
+			bool IsValidLabel(std::string& label) {
+				for (auto it = kb_labels.begin(); it != kb_labels.end(); ++it) {
+					if (label == it->Name) return true;
+				}
+				return false;
+			}
 
 		};
 

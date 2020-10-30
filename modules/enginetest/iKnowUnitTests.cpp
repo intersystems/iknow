@@ -16,7 +16,7 @@ using namespace iknowdata;
 
 void iKnowUnitTests::runUnitTests(void)
 {
-	const char *pError=NULL;
+	const char* pError = NULL;
 	try {
 		iKnowUnitTests test_collection;
 		pError = "Japanese output must generate entity vectors";
@@ -48,12 +48,12 @@ void iKnowUnitTests::test6(const char* pMessage) {
 	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";
 	string text_lowercased = iKnowEngine::NormalizeText(text_source, "en");
 
-	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), [](unsigned char c) { return isupper(c); } ) > 0) // 
+	if (std::count_if(text_lowercased.begin(), text_lowercased.end(), [](unsigned char c) { return isupper(c); }) > 0) // 
 		throw std::runtime_error("NormalizeText does not work correctly");
 }
 
 void iKnowUnitTests::test5(const char* pMessage) { // User DCT test 
-	string text_source_utf8 = u8"The Fr. test was er/pr positive.";
+	string text_source_utf8 = u8"The Fr. test was er/pr positive after a long week.";
 	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
 
 	iKnowEngine engine;
@@ -61,6 +61,7 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 	user_dictionary.addLabel("er/pr positive", "UDPosSentiment"); // : @er/pr positive,UDPosSentiment
 	if (user_dictionary.addLabel("some text", "LabelThatDoesNotExist") != iKnowEngine::iknow_unknown_label)
 		throw std::runtime_error(string("Unknow label *not* triggered !"));
+	user_dictionary.addLabel("a long week", "UDConcept;UDTime"); // : multiple UD labels can be combined
 
 	user_dictionary.addSEndCondition("Fr.", false); // ;;Ph.D.;0;
 	engine.loadUserDictionary(user_dictionary);
@@ -82,6 +83,10 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 			}
 			if (trace_userdct.find("value=\"positive.\"") != string::npos) {
 				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("a long week") != string::npos) {
+				if (trace_userdct.find("UDConcept;UDTime;") == string::npos)
 					throw std::runtime_error(string(pMessage));
 			}
 		}
