@@ -519,7 +519,7 @@ try:
         author='InterSystems Corporation',
         license='MIT',
         classifiers=[
-            'Development Status :: 3 - Alpha',
+            'Development Status :: 4 - Beta',
             'License :: OSI Approved :: MIT License',
             'Topic :: Scientific/Engineering :: Information Analysis',
             'Programming Language :: C++',
