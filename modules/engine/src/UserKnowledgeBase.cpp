@@ -518,13 +518,15 @@ int UserKnowledgeBase::addLexrepLabel(const std::string& token, const std::strin
 	size_t  endIndex = 0;
 	while ((endIndex = labels.find(';', startIndex)) < labels.size())
 	{
-		if (!IsValidLabel(labels.substr(startIndex, endIndex - startIndex)))
+		string label = labels.substr(startIndex, endIndex - startIndex);
+		if (!IsValidLabel(label))
 			return -1;
 		startIndex = endIndex + 1;
 	}
 	if (startIndex < labels.size())
 	{
-		if (!IsValidLabel(labels.substr(startIndex)))
+		string label = labels.substr(startIndex, endIndex - startIndex);
+		if (!IsValidLabel(label))
 			return -1;
 	}
 	kb_lexreps.push_back(iKnow_KB_Lexrep(token, labels));
