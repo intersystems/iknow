@@ -85,26 +85,21 @@ def read_udct_file(file_,udct_):
         # print(txt_line)
         txt_line = txt_line.rstrip()
 
-        txt_list = txt_line.split(',')
-        if (txt_list[0] == ''): # empty input
-            continue
-        if (txt_list[0] == '/*'): # starting with comment
-            continue
-
-        lexrep, action = txt_list[0], txt_list[1]
-        if (lexrep[0] == '@'):
-            literal = lexrep[1:]
-            ret = udct_.add_label(literal,action)
-            if (ret == -2):
-                print('label ' + action + ' not valid !')
-        else: # Set end = $SELECT(command = "\end":1,command = "\noend":0,1:..Err())
-            if action == "\\end":
-                udct_.add_sent_end_condition(lexrep, True)
-            elif action == "\\noend":
-                udct_.add_sent_end_condition(lexrep, False)
-            else:
-                print('action ' + action + ' not valid !')
-
+        if ',' in txt_line and txt_line[0:2] != '/*':
+            txt_list = txt_line.split(',')
+            lexrep, action = txt_list[0], txt_list[1]
+            if (lexrep[0] == '@'):
+                literal = lexrep[1:]
+                ret = udct_.add_label(literal,action)
+                if (ret == -2):
+                    print('label ' + action + ' not valid !')
+            else: # Set end = $SELECT(command = "\end":1,command = "\noend":0,1:..Err())
+                if action == "\\end":
+                    udct_.add_sent_end_condition(lexrep, True)
+                elif action == "\\noend":
+                    udct_.add_sent_end_condition(lexrep, False)
+                else:
+                    print('action ' + action + ' not valid !')
 
     f_udct.close()
 
