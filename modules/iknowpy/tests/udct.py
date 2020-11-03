@@ -2,11 +2,7 @@
 
 import sys
 
-# for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-# import engine as iknowpy
-
-# for "pip install iknowpy", next line will do, outcomment for local language development
+# run "pip install iknowpy" if "import iknowpy" fails.
 import iknowpy
 
 def count_matches(traces, match_key, target_count = -1, debug = False) -> int:
