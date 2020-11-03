@@ -60,8 +60,8 @@ class PatchLib:
                 raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
             if version < (0, 9):
                 raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
-            if platform.processor() in ('ppc64le', 'aarch64'):
-                # use 64KiB page size
+            if platform.processor() == 'aarch64' and version < (0, 12):
+                # work around patchelf bug (see https://github.com/NixOS/patchelf/pull/216)
                 self._patchelf = ['patchelf', '--page-size', '65536']
             else:
                 self._patchelf = ['patchelf']
