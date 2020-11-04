@@ -10,6 +10,24 @@
 using namespace iknow::csvdata;
 using namespace std;
 
+template <typename T>
+T StringToNumber(const string& Text)
+{
+	istringstream ss(Text);
+	T result;
+	return ss >> result ? result : 0;
+}
+
+void str_subsitute(string& text, const string str_find, const string str_replace)
+{
+	string::size_type n = 0;
+	while ((n = text.find(str_find, n)) != std::string::npos)
+	{
+		text.replace(n, str_find.size(), str_replace);
+		n += str_replace.size();
+	}
+}
+
 bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 {
 	ifstream ifs = ifstream(rules_csv, ifstream::in);
@@ -19,15 +37,34 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		newLabelsIndex_type newLabelsIndex; // mapping new labels 
 		newLabels_type newLabels; // mapping labelName and phase to new label
 		SPhases_type SBeginPhases, SEndPhases; // collector for SBegin/SEnd phases
-		int count = 0;
+		int max_rule_csv_id = 0; // store the maximum rule id, to be able to generate a new, unique, one.
+		vector<string> vec_rules_csv;
+		set<int> rule_rewrite_indexes;
 		for (string line; getline(ifs, line);)
 		{
-			++count;
+			vec_rules_csv.push_back(line); // store in case we need to rewrite with new id's
 			if (line.find("/*") != string::npos) continue; // Continue:$Find(line, "/*")'=0 // comment line
 			if ((std::count(line.begin(), line.end(), ';') + 1) < 4) continue; // Continue : ($L(line, ";") < 4)
+
 			vector<string> row_rule = kb.split_row(line);
 			iKnow_KB_Rule rule; // Set rule = ..%New()
 			rule.csv_id = row_rule[1 - 1]; // csv identification of rule
+			int rule_csv_id = StringToNumber<int>(rule.csv_id);
+			if (rule_csv_id == 0) { // need a new id
+				string& last_line = vec_rules_csv.back();
+
+				string quot1("\xe2\x80\x9d"), quot2("\xe2\x80\x9c"); // rewrite exotic (”,“) qoutes.
+				str_subsitute(last_line, quot1, "\"");
+				str_subsitute(last_line, quot2, "\"");
+
+				rule_rewrite_indexes.insert((int)vec_rules_csv.size() - 1); // keep the index
+
+				row_rule = kb.split_row(last_line);
+			}
+			else {
+				if (rule_csv_id > max_rule_csv_id) // store the bigger one
+					max_rule_csv_id = rule_csv_id;
+			}
 			rule.Phase = row_rule[2 - 1]; // Set phase = $PIECE(line, ";", 2)	// Set rule.Phase = phase
 			rule.InputPattern = rule.TransformRulePattern(row_rule[3 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.InputPattern = ..TransformRulePattern($PIECE(line, ";", 3), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
 			rule.OutputPattern = rule.TransformRulePattern(row_rule[4 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.OutputPattern = ..TransformRulePattern($PIECE(line, ";", 4), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
@@ -52,9 +89,27 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			Set sc = rule.%Save()
 			*/
 			if (rule.Phase == "$") rule.Phase = "99"; // prevent last_phase rules to be selected first
-			rule.Precedence = (std::stoi(rule.Phase) * 100000) + count; // sort on phasenumbers and count = appearance in file.
+			rule.Precedence = (std::stoi(rule.Phase) * 100000) + (int)vec_rules_csv.size(); // sort on phasenumbers and count = appearance in file.
 
 			kb.kb_rules.push_back(rule);
+		}
+		ifs.close(); // done reading
+		if (rule_rewrite_indexes.size()) { // generate new indexes and rewrite...
+			std::ofstream ofs = std::ofstream(rules_csv, ofstream::out);
+			if (ofs.is_open()) {
+				for (int idx = 0; idx < vec_rules_csv.size(); ++idx) {
+					string& line = vec_rules_csv[idx];
+
+					if (rule_rewrite_indexes.count(idx)) { // needs rewrite
+						max_rule_csv_id++; // next index
+						ofs << max_rule_csv_id << line << endl;
+					}
+					else { // copy line
+						ofs << line << endl;
+					}
+				}
+				ofs.close();
+			}
 		}
 		// sort kb_rules on Precedence
 		std::sort(kb.kb_rules.begin(), kb.kb_rules.end(), [](iKnow_KB_Rule const& a, iKnow_KB_Rule const& b) { return a.Precedence < b.Precedence;  });
@@ -89,44 +144,11 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		SEndObj.Attributes = "";
 		for_each(SEndPhases.begin(), SEndPhases.end(), [&SEndObj](string phase) { SEndObj.PhaseList += (SEndObj.PhaseList.size() ? "," + phase : phase); });
 		kb.kb_labels.push_back(SEndObj);
-		ifs.close();
 		return true;
 	}
 	cerr << "Error opening file: " << rules_csv << " Language=\"" << kb.GetName() << "\"" << endl;
 	return false;
 }
-
-void str_subsitute(string& text, const string str_find, const string str_replace)
-{
-	string::size_type n = 0;
-	while ((n = text.find(str_find, n)) != std::string::npos)
-	{
-		text.replace(n, str_find.size(), str_replace);
-		n += str_replace.size();
-	}
-}
-
-#if 0
-ClassMethod AddLabelToLexrep(kb As Knowledgebase, token As %String, label As %String)
-{
-	Set lexrepId = ""
-		Set kbId = kb.%Id()
-		&sql(select ID into : lexrepId from Lexrep where Token = : token and Knowledgebase = : kbId)
-		If(SQLCODE = 0) && lexrepId{
-		Set lexrep = ##class(Lexrep).%OpenId(lexrepId)
-		Set separator = $select($extract(lexrep.Labels, *) = ";":"", 1 : ";") // label separator
-		If(lexrep.Labels '[ label) Set lexrep.Labels = lexrep.Labels _ separator _ label _ ";" // check for lexrep.Labels ending '; '
-	}
-	Else{
-			Set lexrep = ##class(Lexrep).%New()
-			Set lexrep.Token = token
-			Set lexrep.Labels = label _ ";"
-			Set lexrep.Knowledgebase = kb
-		}
-		Set sc = lexrep.%Save()
-		If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
-}
-#endif
 
 void AddLabelToLexrep(CSV_DataGenerator& kb, string& token, string& label)
 {
