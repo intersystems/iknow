@@ -27,6 +27,9 @@ import sys
 import zipfile
 from setuptools import setup, Extension, Command
 from Cython.Build import cythonize
+if sys.platform == 'win32':
+    import pefile
+    import machomachomangler.pe
 
 
 class BuildError(Exception):
@@ -34,7 +37,7 @@ class BuildError(Exception):
 
 
 class PatchLib:
-    """An instance represents a library file patcher. Linux and Mac OS only."""
+    """An instance represents a library file patcher."""
 
     def __init__(self):
         """Check that the tools needed to patch libraries are present, then
@@ -42,13 +45,13 @@ class PatchLib:
         tools are not present.
 
         On Linux, we require patchelf >=0.9. On Mac OS, we require otool and
-        install_name_tool."""
+        install_name_tool. On Windows, no external programs are needed."""
         if sys.platform == 'darwin':
             if not shutil.which('otool'):
                 raise BuildError('otool not found')
             if not shutil.which('install_name_tool'):
                 raise BuildError('install_name_tool not found')
-        else:  # linux
+        elif sys.platform == 'linux':
             if not shutil.which('patchelf'):
                 raise BuildError('patchelf not found')
             p = subprocess.run(['patchelf', '--version'],
@@ -65,19 +68,20 @@ class PatchLib:
                 self._patchelf = ['patchelf', '--page-size', '65536']
             else:
                 self._patchelf = ['patchelf']
+        # do nothing on Windows
 
     def setrpath(self, lib_path):
         """Given the path to a shared library, set its rpath to '$ORIGIN' so
         that it can find libraries in its own directory. Linux only."""
-        if sys.platform == 'darwin':
+        if sys.platform != 'linux':
             raise NotImplementedError('PatchLib.setrpath is Linux only')
         subprocess.run(self._patchelf + ['--set-rpath', '$ORIGIN', lib_path],
                        check=True)
 
     def getneeded(self, lib_path):
-        """Given a path to a shared library, return a list containing the ICU and
-        iKnow engine direct dependencies of that shared library. The list may
-        contain the names of the dependencies or paths to the dependencies,
+        """Given a path to a shared library, return a list containing the ICU
+        and iKnow engine direct dependencies of that shared library. The list
+        may contain the names of the dependencies or paths to the dependencies,
         depending on what is embedded in the executable."""
         if sys.platform == 'darwin':
             cmd = ['otool', '-L', lib_path]
@@ -91,7 +95,7 @@ class PatchLib:
                     if os.path.split(s)[1] != lib_name and
                     (fnmatch.fnmatch(s, '*' + iculibs_name_pattern) or
                      fnmatch.fnmatch(s, '*' + enginelibs_name_pattern))]
-        else:
+        elif sys.platform == 'linux':
             cmd = self._patchelf + ['--print-needed', lib_path]
             p = subprocess.run(cmd, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE,
@@ -99,6 +103,17 @@ class PatchLib:
             return [s for s in p.stdout.split()
                     if fnmatch.fnmatch(s, iculibs_name_pattern) or
                     fnmatch.fnmatch(s, enginelibs_name_pattern)]
+        else:  # win32
+            pe = pefile.PE(lib_path)
+            needed = []
+            if hasattr(pe, 'DIRECTORY_ENTRY_IMPORT'):
+                for entry in pe.DIRECTORY_ENTRY_IMPORT:
+                    dll_name = entry.dll.decode('utf-8')
+                    if (fnmatch.fnmatch(dll_name, iculibs_name_pattern) or
+                            fnmatch.fnmatch(dll_name, enginelibs_name_pattern)):
+                        needed.append(dll_name)
+            pe.close()
+            return needed
 
     def replaceneeded(self, lib_path, old_deps, name_map):
         """For the shared library at lib_path, replace its declared dependencies
@@ -117,22 +132,37 @@ class PatchLib:
                 new_dep_name = name_map[old_dep_name]
                 new_dep = os.path.join('@loader_path', new_dep_name)
                 cmd.append(new_dep)
-        else:
+            cmd.append(lib_path)
+            subprocess.run(cmd, check=True)
+        elif sys.platform == 'linux':
             cmd = self._patchelf[:]
             for old_dep in old_deps:
                 cmd.append('--replace-needed')
                 cmd.append(old_dep)
                 cmd.append(name_map[old_dep])
-        cmd.append(lib_path)
-        subprocess.run(cmd, check=True)
+            cmd.append(lib_path)
+            subprocess.run(cmd, check=True)
+        else:  # win32
+            with open(lib_path, 'rb') as f:
+                buf = f.read()
+            buf = machomachomangler.pe.redll(buf, {dep.encode('utf-8'): name_map[dep].encode('utf-8') for dep in old_deps})
+            with open(lib_path, 'wb') as f:
+                f.write(buf)
+            pe = pefile.PE(lib_path)
+            pe.OPTIONAL_HEADER.CheckSum = pe.generate_checksum()
+            pe.write(lib_path)
+            pe.close()
 
     def setname(self, lib_path, name):
-        """Set the name of a shared library. Does not rename the file."""
+        """Set the logical name of a shared library. Does not rename the
+        file."""
         if sys.platform == 'darwin':
             cmd = ['install_name_tool', '-id', name, lib_path]
-        else:
+            subprocess.run(cmd, check=True)
+        elif sys.platform == 'linux':
             cmd = self._patchelf + ['--set-soname', name, lib_path]
-        subprocess.run(cmd, check=True)
+            subprocess.run(cmd, check=True)
+        # do nothing on Windows
 
 
 class CleanCommand(Command):
@@ -309,7 +339,7 @@ def patch_wheel(whl_path):
     print('repairing wheel')
 
     # extract wheel
-    tmp_dir = 'dist/temp'
+    tmp_dir = 'dist{}temp'.format(os.sep)
     rmtree(tmp_dir)
     os.mkdir(tmp_dir)
     extract_wheel(whl_path, tmp_dir)
@@ -326,7 +356,10 @@ def patch_wheel(whl_path):
         shutil.copy2(lib_path, repair_lib_dir)
 
     # create list of libraries to repair
-    module_pattern = os.path.join(repair_lib_dir, 'engine.*.so')
+    if sys.platform == 'win32':
+        module_pattern = os.path.join(repair_lib_dir, 'engine.*.pyd')
+    else:
+        module_pattern = os.path.join(repair_lib_dir, 'engine.*.so')
     repair_lib_paths = glob.glob(module_pattern)
     if len(repair_lib_paths) == 0:
         raise BuildError('Unable to find module matching pattern {!r}'.format(module_pattern))
@@ -356,7 +389,7 @@ def patch_wheel(whl_path):
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
         print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])), end='')
-        if os.path.isfile(os.path.join('dist/cache', lib_rename[lib_name])):
+        if not lib_name.startswith('engine.') and os.path.isfile(os.path.join('dist/cache', lib_rename[lib_name])):
             # copy patched library from cache
             os.remove(lib_path)
             shutil.copy2(os.path.join(CACHE_DIR, lib_rename[lib_name]), lib_dir)
@@ -369,8 +402,9 @@ def patch_wheel(whl_path):
                     patcher.setrpath(lib_path)
                 patcher.replaceneeded(lib_path, dep_libs, lib_rename)
             os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
-            # copy patched library into cache
-            shutil.copy2(os.path.join(lib_dir, lib_rename[lib_name]), CACHE_DIR)
+            if not lib_name.startswith('engine.'):
+                # copy patched library into cache
+                shutil.copy2(os.path.join(lib_dir, lib_rename[lib_name]), CACHE_DIR)
             print()
 
     # update record file, which tracks wheel contents and their checksums
@@ -426,7 +460,9 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
     install_wheel = True
 
 # platform-specific settings
+setup_requires = ['cython', 'wheel']
 if sys.platform == 'win32':
+    setup_requires.extend(['pefile', 'machomachomangler'])
     library_dirs = ['../../kit/x64/Release/bin']
     iculibs_name_pattern = 'icu*.dll'
     iculibs_path_pattern = os.path.join(icudir, 'bin64', iculibs_name_pattern)
@@ -462,10 +498,9 @@ else:
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
 
-# Find ICU and iKnow engine libraries. On Windows, copy libraries into package
-# source if appropriate. On Unix, we never copy the libraries into the package
-# source at this stage because the libraries are added during the wheel repair
-# step.
+# Find ICU and iKnow engine libraries. We do not copy the libraries into the
+# package source at this stage because the libraries are added during the wheel
+# repair step.
 iculib_paths = []  # paths to original ICU libraries
 enginelib_paths = []  # paths to original iKnow engine libraries
 if '--no-dependencies' in sys.argv:
@@ -479,11 +514,6 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv:
         raise BuildError('ICU libraries not found: {}'.format(iculibs_path_pattern))
     if not enginelib_paths:
         raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_path_pattern))
-    if sys.platform == 'win32':
-        for lib_path in iculib_paths:
-            shutil.copy2(lib_path, 'iknowpy')
-        for lib_path in enginelib_paths:
-            shutil.copy2(lib_path, 'iknowpy')
 else:
     no_dependencies = True
 
@@ -543,10 +573,9 @@ try:
             'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
-        package_data={'iknowpy': [iculibs_name_pattern, enginelibs_name_pattern]},
         version=version,
         python_requires='>=3.5',
-        setup_requires=['cython', 'wheel'],
+        setup_requires=setup_requires,
         zip_safe=False,
         ext_modules=cythonize(
             [Extension(
@@ -565,18 +594,14 @@ try:
         }
     )
 finally:
-    # remove dependent libraries and licenses from package source
-    for lib_path in glob.iglob(os.path.join('iknowpy', iculibs_name_pattern)):
-        remove(lib_path)
-    for lib_path in glob.iglob(os.path.join('iknowpy', enginelibs_name_pattern)):
-        remove(lib_path)
+    # remove licenses from package source
     remove('LICENSE')
     remove('LICENSE_ICU')
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
     fix_wheel_ppc64le(find_wheel())
 
-if 'bdist_wheel' in sys.argv and not no_dependencies and sys.platform != 'win32':
+if 'bdist_wheel' in sys.argv and not no_dependencies:
     patch_wheel(find_wheel())
 
 if install_wheel:
