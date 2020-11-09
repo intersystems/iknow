@@ -1,5 +1,6 @@
-
 class Labels:
+	"""User Dictionary labels"""
+
 	# role labels
 	CONCEPT = "UDConcept"
 	RELATION = "UDRelation"

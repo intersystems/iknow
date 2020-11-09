@@ -43,7 +43,7 @@ cdef char* aType_to_str(Attribute t) except NULL:
 	raise ValueError('Attribute type {} is unrecognized.'.format(t))
 
 
-Entry = namedtuple("Entry", ["literal", "label"])
+Entry = namedtuple('Entry', ['literal', 'label'])
 
 cdef class UserDictionary(object):
 	"""A class that represents a user dictionary"""
@@ -72,8 +72,8 @@ cdef class UserDictionary(object):
 		self._entries = []
 
 	@cython.binding(True)
-	def add_all(self, load_entries = None) -> None:
-		""" Appends the contents of load_entries to this User Dictionary """
+	def add_all(self, load_entries=None) -> None:
+		"""Append the contents of load_entries to this User Dictionary """
 		# load one by one so they also trigger the C++ side
 		if isinstance(load_entries, UserDictionary):
 			load_entries = load_entries.entries
@@ -88,9 +88,9 @@ cdef class UserDictionary(object):
 	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> None:
 		"""Add a custom user dictionary label."""
 		# capture pseudo-labels for sentence end/noend
-		if (UdctLabel == Labels.SENTENCE_END):
+		if UdctLabel == Labels.SENTENCE_END:
 			self.add_sent_end_condition(literal, True)
-		elif (UdctLabel == Labels.SENTENCE_NO_END):
+		elif UdctLabel == Labels.SENTENCE_NO_END:
 			self.add_sent_end_condition(literal, False)
 		elif self.user_dictionary.addLabel(literal, UdctLabel) == 0:
 			self._entries.append(Entry(literal, UdctLabel))
