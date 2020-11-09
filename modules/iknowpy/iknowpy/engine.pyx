@@ -61,17 +61,14 @@ cdef class UserDictionary(object):
 		self.add_all(load_entries)
 
 	@property
-	@cython.binding(True)
 	def entries(self) -> list:
 		return self._entries
 
-	@cython.binding(True)
 	def clear(self) -> None:
 		"""Clear the User Dictionary object"""
 		self.user_dictionary.clear()
 		self._entries = []
 
-	@cython.binding(True)
 	def add_all(self, load_entries=None) -> None:
 		"""Append the contents of load_entries to this User Dictionary """
 		# load one by one so they also trigger the C++ side
@@ -84,7 +81,6 @@ cdef class UserDictionary(object):
 				else:
 					self.add_label(e['literal'], e['label'])
 
-	@cython.binding(True)
 	def add_label(self, str literal: typing.Text, str UdctLabel: typing.Text) -> None:
 		"""Add a custom user dictionary label."""
 		# capture pseudo-labels for sentence end/noend
@@ -97,7 +93,6 @@ cdef class UserDictionary(object):
 		else:
 			raise ValueError('User Dictionary Label {!r} is unknown.'.format(UdctLabel))
 
-	@cython.binding(True)
 	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> None:
 		"""Add a sentence end condition."""
 		self.user_dictionary.addSEndCondition(literal, bSentenceEnd)
@@ -106,55 +101,46 @@ cdef class UserDictionary(object):
 		else:
 			self._entries.append(Entry(literal, Labels.SENTENCE_NO_END))
 
-	@cython.binding(True)
 	def add_concept(self, str literal: typing.Text) -> None:
 		"""Add a concept term."""
 		self.user_dictionary.addConceptTerm(literal)
 		self._entries.append(Entry(literal, Labels.CONCEPT))
 
-	@cython.binding(True)
 	def add_relation(self, str literal: typing.Text) -> None:
 		"""Add a relation term."""
 		self.user_dictionary.addRelationTerm(literal)
 		self._entries.append(Entry(literal, Labels.RELATION))
 
-	@cython.binding(True)
 	def add_non_relevant(self, str literal: typing.Text) -> None:
 		"""Add a non relevant term."""
 		self.user_dictionary.addNonrelevantTerm(literal)
 		self._entries.append(Entry(literal, Labels.NONRELEVANT))
 
-	@cython.binding(True)
 	def add_negation(self, str literal: typing.Text) -> None:
 		"""Add a negation term."""
 		self.user_dictionary.addNegationTerm(literal)
 		self._entries.append(Entry(literal, Labels.NEGATION))
 
-	@cython.binding(True)
 	def add_positive_sentiment(self, str literal: typing.Text) -> None:
 		"""Add a positive sentiment term."""
 		self.user_dictionary.addPositiveSentimentTerm(literal)
 		self._entries.append(Entry(literal, Labels.POS_SENTIMENT))
 
-	@cython.binding(True)
 	def add_negative_sentiment(self, str literal: typing.Text) -> None:
 		"""Add a negative sentiment term."""
 		self.user_dictionary.addNegativeSentimentTerm(literal)
 		self._entries.append(Entry(literal, Labels.NEG_SENTIMENT))
 
-	@cython.binding(True)
 	def add_unit(self, str literal: typing.Text) -> None:
 		"""Add a unit term."""
 		self.user_dictionary.addUnitTerm(literal)
 		self._entries.append(Entry(literal, Labels.UNIT))
 
-	@cython.binding(True)
 	def add_number(self, str literal: typing.Text) -> None:
 		"""Add a number term."""
 		self.user_dictionary.addNumberTerm(literal)
 		self._entries.append(Entry(literal, Labels.NUMBER))
 
-	@cython.binding(True)
 	def add_time(self, str literal: typing.Text) -> None:
 		"""Add a time term."""
 		self.user_dictionary.addTimeTerm(literal)
@@ -178,18 +164,15 @@ cdef class iKnowEngine:
 		self.engine = CPPiKnowEngine()
 
 	@staticmethod
-	@cython.binding(True)
 	def get_languages_set() -> typing.Set[typing.Text]:
 		"""Return the set of supported languages."""
 		return CPPiKnowEngine.GetLanguagesSet()
 
 	@staticmethod
-	@cython.binding(True)
 	def normalize_text(str text_source: typing.Text, str language: typing.Text, cpp_bool bUserDct: bool = False, cpp_bool bLowerCase: bool = True, cpp_bool bStripPunct: bool = True) -> typing.Text:
 		"""Normalize the text_source."""
 		return CPPiKnowEngine.NormalizeText(text_source, language, bUserDct, bLowerCase, bStripPunct)
 
-	@cython.binding(True)
 	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False) -> None:
 		"""Index the text in text_source with a given language. Supported
 		languages are given by get_languages_set(). After indexing, results are
@@ -200,12 +183,10 @@ cdef class iKnowEngine:
 			raise ValueError('Language {!r} is not supported.'.format(language))
 		return self.engine.index(text_source, language, traces)
 
-	@cython.binding(True)
 	def load_user_dictionary(self, UserDictionary udct) -> None:
 		"""Load User Dictionary"""
 		return self.engine.loadUserDictionary(udct.user_dictionary)
 
-	@cython.binding(True)
 	def unload_user_dictionary(self) -> None:
 		"""Unload User Dictioanry"""
 		return self.engine.unloadUserDictionary()

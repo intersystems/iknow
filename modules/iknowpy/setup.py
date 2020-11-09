@@ -604,7 +604,7 @@ try:
                 extra_compile_args=extra_compile_args,
                 extra_link_args=extra_link_args
             )],
-            compiler_directives={'language_level': '3'}
+            compiler_directives={'language_level': '3', 'binding': True}
         ),
         cmdclass={
             'clean': CleanCommand
