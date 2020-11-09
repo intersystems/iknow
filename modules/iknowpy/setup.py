@@ -1,16 +1,24 @@
 """Setup script for iknowpy.
 
+The working directory must be the directory containing this script, and the
+iKnow engine must already be built before running this script.
+
+USAGE:
 python setup.py build_ext -i
-    Build the extension module in the ./iknowpy directory.
+    Build the extension module in the ./iknowpy directory. This builds the
+    Python interface component only.
 python setup.py build_ext -i -f
-    Rebuild the extension module in the ./iknowpy directory.
+    Rebuild the extension module in the ./iknowpy directory. This builds the
+    Python interface component only.
 python setup.py install
-    Build and install the module.
+    Build and install the module into your instance of Python.
 python setup.py bdist_wheel
-    Create a wheel containing the extension with dependencies.
+    Create a wheel containing the extension including the iKnow and ICU
+    dependencies.
 python setup.py bdist_wheel --no-dependencies
-    Create a wheel without the dependencies. (Useful if you are using other
-    tools to take care of dependencies)
+    Create a wheel containing the extension without the iKnow and ICU
+    dependencies. (Useful if you are using other tools like auditwheel to take
+    care of dependencies)
 python setup.py clean
     Clean all build files.
 """
@@ -33,11 +41,12 @@ if sys.platform == 'win32':
 
 
 class BuildError(Exception):
+    """Exception that is raised if a build-related error occurs."""
     pass
 
 
 class PatchLib:
-    """An instance represents a library file patcher."""
+    """An instance represents a shared library file patcher."""
 
     def __init__(self):
         """Check that the tools needed to patch libraries are present, then
@@ -64,7 +73,7 @@ class PatchLib:
             if version < (0, 9):
                 raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
             if platform.processor() == 'aarch64' and version < (0, 12):
-                # work around patchelf bug (see https://github.com/NixOS/patchelf/pull/216)
+                # work around patchelf bug (https://github.com/NixOS/patchelf/pull/216)
                 self._patchelf = ['patchelf', '--page-size', '65536']
             else:
                 self._patchelf = ['patchelf']
@@ -270,7 +279,7 @@ def update_wheel_record(whl_dir):
 
 def repackage_wheel(whl_path, whl_dir):
     """Create or replace a wheel at whl_path by packaging the files in
-    filepath_list.
+    whl_dir.
     Precondition: whl_dir is the directory containing the extracted wheel
     contents"""
     print('repackaging {}'.format(whl_path))
@@ -287,7 +296,8 @@ def repackage_wheel(whl_path, whl_dir):
 def fix_wheel_ppc64le(whl_path):
     """Fix a ppc64le wheel so that it is compatible with Python distributions
     using both 'ppc64le' and 'powerpc64le' platform tags. Linux for ppc64le
-    only."""
+    only. This serves as a workaround for
+    https://github.com/pypa/manylinux/issues/687."""
     print('patching ppc64le wheel')
 
     # extract wheel
@@ -327,14 +337,22 @@ def fix_wheel_ppc64le(whl_path):
 
 
 def patch_wheel(whl_path):
-    """Patch a wheel in a manner similar to auditwheel. On Unix, this is
-    necessary prior to packaging the ICU and iKnow engine shared libraries.
-    There are two reasons for patching the libraries.
+    """Patch a wheel in a manner similar to auditwheel. This is necessary for
+    packaging the ICU and iKnow engine shared libraries in a way that avoids
+    dependency hell and ensures that Python packages are self-contained and
+    isolated. There are a few reasons for patching the libraries.
 
     1. We need to be able to load the libraries no matter where they are
     installed.
     2. We don't want a system library with the same name to interfere with
-    loading."""
+    loading.
+    3. We don't want two Python packages containing libraries with the same name
+    to interfere with each other.
+
+    To patch the wheel, we rename the iKnow engine and ICU shared libraries by
+    adding a hash to the file names, and then we re-link them to the newly
+    renamed libraries. This way, we can guarantee that the correct library is
+    loaded when iknowpy is imported."""
 
     print('repairing wheel')
 
@@ -451,9 +469,8 @@ if 'sdist' in sys.argv:
     raise BuildError('Creation of a source distribution is not supported.')
 
 # If installation is requested, do not perform a direct installation. Create a
-# wheel instead and install the wheel. On Unix, this is necessary to perform the
-# wheel repair process. On Windows, this is necessary to replace any instances
-# that were previously installed using pip.
+# wheel instead and install the wheel. This is necessary to perform the wheel
+# repair procedure prior to installation.
 install_wheel = False
 if len(sys.argv) > 1 and sys.argv[1] == 'install':
     sys.argv[1] = 'bdist_wheel'
