@@ -7,13 +7,14 @@
 # Usage: /iknow/travis/build_manylinux.sh
 #
 # Required Environment Variables:
+# - CCACHE_MAXSIZE is the size limit for files held with ccache
 # - PIP_CACHE_DIR is the location that pip caches files
 # - ICU_URL is the URL to a .zip source release of ICU
 
 set -euxo pipefail
 
 
-##### Install dependencies #####
+##### Install and configure dependencies #####
 # epel-release
 #   Needed on some platforms to install ccache.
 # dos2unix
@@ -36,6 +37,11 @@ ln -s /usr/bin/ccache /opt/ccache/c++
 ln -s /usr/bin/ccache /opt/ccache/gcc
 ln -s /usr/bin/ccache /opt/ccache/g++
 export PATH="/opt/ccache:$PATH"
+if [ "$PROCESSOR" = x86_64 ]; then
+  # On manylinux2010_x86_64, the version of ccache is too old to recognize the
+  # CCACHE_MAXSIZE environment variable, so set the max cache size manually.
+  ccache --max-size "$CCACHE_MAXSIZE"
+fi
 
 
 ##### Build ICU if it's not cached #####

@@ -22,7 +22,7 @@ _manylinux_build: &manylinux_build
   services: docker
   env:
     # Docker run command with arguments common to all manylinux builds
-    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e ICU_URL -e CYTHON_VERSION -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
+    - DOCKER_RUN="docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=350M -e ICU_URL -e CYTHON_VERSION -v $HOME/ccache:/ccache -v $HOME/pipcache:/pipcache -v $TRAVIS_BUILD_DIR:/iknow"
   cache:
     branch: paths-relative
     directories:
@@ -72,6 +72,7 @@ jobs:
         MACOSX_DEPLOYMENT_TARGET=10.9
         PATH="/usr/local/opt/ccache/libexec:$PATH"
         CCACHE_DIR="$HOME/ccache"
+        CCACHE_MAXSIZE=400M
         PIP_CACHE_DIR="$HOME/pipcache"
         PYINSTALL_DIR="$HOME/.pyenv/versions"
       cache:
@@ -96,6 +97,7 @@ jobs:
       env: >-
         BUILDCACHE_EXE_DIR="$HOME/buildcache_exe"
         BUILDCACHE_DIR="$HOME/buildcache"
+        BUILDCACHE_MAX_CACHE_SIZE=2147483648
         PIP_CACHE_DIR="$HOME/pipcache"
         PYINSTALL_DIR="$HOME/python"
       cache:
