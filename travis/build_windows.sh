@@ -44,8 +44,9 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
 ##### Build iknowpy wheels #####
 cd iknowpy
 for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
-  "$PYTHON" setup.py bdist_wheel
+  "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
+"$PYTHON" setup.py merge
 
 
 ##### Report cache statistics #####

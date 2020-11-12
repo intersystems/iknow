@@ -94,12 +94,11 @@ do
   "$PYTHON" -m pip install --user cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
+"$PYTHON" setup.py merge --no-dependencies
 chmod -R a+rw "$PIP_CACHE_DIR"
 
-# repair wheels using auditwheel to convert to manylinux wheels
-for WHEEL in dist/iknowpy-*.whl; do
-  auditwheel repair "$WHEEL"
-done
+# repair wheel using auditwheel to convert to manylinux wheel
+auditwheel repair dist/merged/iknowpy-*.whl
 
 
 ##### Report cache statistics #####

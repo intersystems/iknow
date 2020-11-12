@@ -85,7 +85,7 @@ jobs:
       workspaces:
         create:
           name: wheels-osx
-          paths: modules/iknowpy/dist
+          paths: modules/iknowpy/dist/merged
       before_install: . travis/dependencies.sh
       install:
         - eval "$(pyenv init -)"
@@ -110,7 +110,7 @@ jobs:
       workspaces:
         create:
           name: wheels-windows
-          paths: modules/iknowpy/dist
+          paths: modules/iknowpy/dist/merged
       before_install: . travis/dependencies.sh
       install: travis/install_windows.sh
       script: travis/build_windows.sh

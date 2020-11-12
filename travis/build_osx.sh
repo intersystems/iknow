@@ -44,8 +44,9 @@ make -j $(sysctl -n hw.logicalcpu)
 cd modules/iknowpy
 for PYVERSION in $PYVERSIONS; do
   PYMAJORMINOR=$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
-  python$PYMAJORMINOR setup.py bdist_wheel --plat-name=macosx-10.9-x86_64
+  python$PYMAJORMINOR setup.py bdist_wheel --plat-name=macosx-10.9-x86_64 --no-dependencies
 done
+python$PYMAJORMINOR setup.py merge
 rm -r dist/cache
 
 
