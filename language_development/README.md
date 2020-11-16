@@ -7,4 +7,4 @@ This folder contains Python scripts utility programs that can help with language
 
 ---
 
-- `lang_update.bat` : this is a Windows utility script that runs the language compiler and rebuilds the engine. To be used during language development to test modifications. It must be copied into the "bin" directory (`iknow\kit\x64\Release\bin`) after building the engine a first time.
+- `\modules\lang_update.bat` : this is a Windows utility script that runs the language compiler and rebuilds the engine. To be used during language development to test modifications. It must be copied into the "bin" directory (`iknow\kit\x64\Release\bin`) after building the engine a first time.
