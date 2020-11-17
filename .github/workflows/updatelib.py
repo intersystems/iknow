@@ -70,7 +70,7 @@ def setenv(name, value):
 assert sys.version_info >= (3, 6), 'Python >=3.6 is required'
 
 ALPHANUMERIC = string.digits + string.ascii_letters
-DEPENDENCIES_FILENAME = os.path.join(os.environ['GITHUB_WORKSPACE'], 'travis/dependencies.sh')
+DEPENDENCIES_FILENAME = os.path.join(os.environ['GITHUB_WORKSPACE'], '.github/workflows/dependencies.sh')
 EXPECTED_VARNAMES = {
     'ICU_NAME',
     'ICU_URL_WIN',
