@@ -8,14 +8,8 @@
 
 import sys
 
-# for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/iKnow_GH/kit/x64/Release/bin')
-# import engine as iknowpy
-# for "pip install iknowpy", next line will do, outcomment for local language development
+# do "pip install iknowpy" if iknowpy is not installed
 import iknowpy
-
-
-# print(sys.argv)
 
 in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"

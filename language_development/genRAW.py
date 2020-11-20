@@ -2,16 +2,11 @@
 ''' genRAW.py tool for generating linguistic reference material
     Usage: "python genRAW.py <text files directory> <output directory> <language>"
     Example (on Windows): "python genRAW.py C:/TextCorpus/English/Financial/ C:/Raw/English/ en
-
-    Remark : output of Path attributes does not work yet.
 '''
 
 import sys
 
-# for local language development, adapt next line to your local situation, and uncomment next 2 lines 
-# sys.path.insert(0, 'C:/Users/jdenys/source/repos/iknow/kit/x64/Release/bin')
-# import engine as iknowpy
-# for "pip install iknowpy", next line will do, outcomment for local language development
+# run "pip install iknowpy" if "import iknowpy" fails.
 import iknowpy
 
 import os

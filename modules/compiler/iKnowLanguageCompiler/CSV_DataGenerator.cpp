@@ -29,6 +29,7 @@ vector<iKnow_KB_Filter> CSV_DataGenerator::kb_filter;
 vector<iKnow_KB_Label> CSV_DataGenerator::kb_labels;
 CSV_DataGenerator::lexreps_Type CSV_DataGenerator::kb_lexreps;
 std::unordered_map<std::string, int> CSV_DataGenerator::lexrep_index;
+std::unordered_map<std::string, vector<int>> CSV_DataGenerator::lexrep_segments_index;
 vector<iKnow_KB_PreprocessFilter> CSV_DataGenerator::kb_prepro;
 vector<iKnow_KB_Rule> CSV_DataGenerator::kb_rules;
 

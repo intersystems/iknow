@@ -152,6 +152,7 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 
 void AddLabelToLexrep(CSV_DataGenerator& kb, string& token, string& label)
 {
+	// Full lexrep addition
 	auto it_lexrep = kb.lexrep_index.find(token); // &sql(select ID into : lexrepId from Lexrep where Token = : token and Knowledgebase = : kbId)
 	if (it_lexrep != kb.lexrep_index.end()) { // If(SQLCODE = 0) && lexrepId{
 		int lexrep_index = it_lexrep->second;
@@ -159,31 +160,51 @@ void AddLabelToLexrep(CSV_DataGenerator& kb, string& token, string& label)
 		string separator = (*(lexrep.Labels.end() - 1) == ';' ? "" : ";"); // Set separator = $select($extract(lexrep.Labels, *) = ";":"", 1 : ";") // label separator
 		if (lexrep.Labels.find(label) == string::npos)
 			lexrep.Labels = lexrep.Labels + separator + label + ";"; // // If(lexrep.Labels '[ label) Set lexrep.Labels = lexrep.Labels _ separator _ label _ ";" // check for lexrep.Labels ending '; '
-		return;
 	}
 	else { // new
-	// Else{
 		iKnow_KB_Lexrep lexrep; // Set lexrep = ##class(Lexrep).%New()
 		lexrep.Token = token; // Set lexrep.Token = token
 		lexrep.Labels = label + ";"; // Set lexrep.Labels = label _ ";"
-		// Set lexrep.Knowledgebase = kb
 		kb.lexrep_index[lexrep.Token] = (int) kb.kb_lexreps.size(); // new index for lexrep
 		kb.kb_lexreps.push_back(lexrep); // Set sc = lexrep.%Save()
-		// If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 	}
-	/*
-	CSV_DataGenerator::lexreps_Type::iterator it_lexrep = kb.kb_lexreps.begin(); // Set lexrepId = "" // Set kbId = kb.%Id()
-	while (it_lexrep != kb.kb_lexreps.end()) { // &sql(select ID into : lexrepId from Lexrep where Token = : token and Knowledgebase = : kbId)
-		if (it_lexrep->Token == token) { // If(SQLCODE = 0) && lexrepId{
-			iKnow_KB_Lexrep *lexrep = &(*it_lexrep); // Set lexrep = ##class(Lexrep).%OpenId(lexrepId)
-			string separator = (*(lexrep->Labels.end() - 1) == ';' ? "" : ";"); // Set separator = $select($extract(lexrep.Labels, *) = ";":"", 1 : ";") // label separator
-			if (lexrep->Labels.find(label) == string::npos)
-				lexrep->Labels = lexrep->Labels + separator + label + ";"; // // If(lexrep.Labels '[ label) Set lexrep.Labels = lexrep.Labels _ separator _ label _ ";" // check for lexrep.Labels ending '; '
-			return;
+	// Lexrep segment addition
+	auto it_lexrep_segment = kb.lexrep_segments_index.find(token);
+	if (it_lexrep_segment != kb.lexrep_segments_index.end()) { // token represents a lexrep segment
+		vector<int>& segment_indexes = kb.lexrep_segments_index[token];
+
+		for (auto it_index = segment_indexes.begin(); it_index != segment_indexes.end(); ++it_index) {
+			int lexrep_index = *it_index++;
+			int segment_index = *it_index;
+
+			iKnow_KB_Lexrep& lexrep = kb.kb_lexreps[lexrep_index]; // Set lexrep = ##class(Lexrep).%OpenId(lexrepId)
+			vector<string> label_segments, list_labels = kb.split_row(lexrep.Labels, ';');
+			string label_segment;
+			for (auto it = list_labels.begin(); it != list_labels.end(); it++) {
+				if (*it == "-") { // segment splitter
+					label_segments.push_back(label_segment);
+					label_segment.clear();
+					continue;
+				}
+				label_segment += (*it + ";");
+			}
+			label_segments.push_back(label_segment);
+
+			string& token_label_segment = label_segments[segment_index];
+			if (token_label_segment.find(label) == string::npos) { // add label if not present
+				token_label_segment += label + ";";
+			}
+			string labels_update;
+			for (auto it = label_segments.begin(); it < label_segments.end(); ++it) {
+				labels_update += *it;
+				if (it < label_segments.end() - 1)
+					labels_update += "-;";
+			}
+			// for_each(label_segments.begin(), label_segments.end(), [&labels_update](string& label_segment) { labels_update += label_segment + "-"; });
+			lexrep.Labels = labels_update; // updated with literal label
 		}
-		++it_lexrep;
 	}
-	*/
+	// kb.lexrep_segments_index[token_segment].push_back(idx_lexrep)
 }
 
 std::string iKnow_KB_Rule::TransformRulePattern(string& pattern, string& phase, CSV_DataGenerator& kb, newLabels_type &newLabels, newLabelsIndex_type &newLabelsIndex, SPhases_type& SBeginPhases, SPhases_type& SEndPhases)

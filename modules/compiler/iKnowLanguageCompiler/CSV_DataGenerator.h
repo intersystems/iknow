@@ -65,6 +65,7 @@ namespace iknow {
 			typedef std::vector<iKnow_KB_Lexrep>	lexreps_Type;
 			static lexreps_Type kb_lexreps;
 			static std::unordered_map<std::string, int> lexrep_index;
+			static std::unordered_map<std::string, std::vector<int>> lexrep_segments_index;
 			static std::vector<iKnow_KB_PreprocessFilter> kb_prepro;
 			static std::vector<iKnow_KB_Rule> kb_rules;
 			static const std::vector<std::pair<int, std::string>> kb_properties;

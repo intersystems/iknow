@@ -103,9 +103,11 @@ int main(int argc, char* argv[])
 	catch (std::exception& e)
 	{
 		cerr << e.what() << endl;
+		return -1; // pass error codes to stop batch processing.
 	}
 	catch (...) {
 		cerr << "Language Compiler failed..." << std::endl;
+		return -2; // return error code
 	}
 	return 0;
 }

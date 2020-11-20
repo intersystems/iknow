@@ -49,7 +49,6 @@ namespace iknow {
 			}
 			bool IsKatakana(iknow::base::Char token) { // IsKatakana(token As %Char) As %Boolean
 				return ((int)token >= 0x30A0) && ((int)token <= 0x30FF); // Quit:(($Ascii(token)'<$ZHEX("30A0")) & ($Ascii(token)'>$ZHEX("30FF"))) 1
-					 // Quit 0
 			}
 			bool IsJapanese(iknow::base::Char token) //	Method IsJapanese(token As %Char) As %Boolean
 			{
@@ -62,7 +61,6 @@ namespace iknow {
 			}
 			bool IsNumeric(iknow::base::Char token) { //	Method IsNumeric(token As %Char) As %Boolean
 				return ((int)token >= 0x0030) && ((int)token <= 0x0039);  // Quit:(($Ascii(token)'<$ZHEX("0030")) & ($Ascii(token)'>$ZHEX("0039"))) 1 // '0' to '9'
-					// Quit 0
 			}
 			bool IsNumericWord(iknow::base::String word) //	Method IsNumericWord(word As %String) As %Boolean
 			{

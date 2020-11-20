@@ -82,26 +82,6 @@ throw:'$Data(^labelname(kb.Name,labelName)) ##class(%Exception.General).%New(kb.
 }
 throw:labelRealCount=0 ##class(%Exception.General).%New(kb.Name_":Syntax Error, No Valid labels in line("_count_"):"_$ZCONVERT(line,"I","UTF8"))
 }
-If 'kb.RegexpEnabled {
-Set lexrep = ..%New()
-Set lexrep.Token = token
-Set lexrep.Meta = meta
-Set lexrep.Labels = labels
-Set lexrep.Knowledgebase = kb
-Set sc = lexrep.%Save()
-$$$IKModelCheck(sc,stream.Filename,count,line)
-}
-Else {
-Do ..EnumerateTokens(token, .tokens)
-For i=1:1:tokens {
-Set lexrep = ..%New()
-Set lexrep.Token = tokens(i)
-Set lexrep.Meta = meta
-Set lexrep.Labels = labels
-Set lexrep.Knowledgebase = kb
-Set sc = lexrep.%Save()
-$$$IKModelCheck(sc,stream.Filename,count,line)
-}
 }
 Do kb.AddToHash(token)
 Do kb.AddToHash(labels)
@@ -111,10 +91,92 @@ kill:$$$IKISDEVBUILD ^lexreps(kb.Name) // temporary storage for double lexrep ch
 // Set:$$$IKISDEVBUILD hasUpper = ""
 }
 */
+bool IsNumeric(iknow::base::Char token) { //	Method IsNumeric(token As %Char) As %Boolean
+	return ((int)token >= 0x0030) && ((int)token <= 0x0039);  // Quit:(($Ascii(token)'<$ZHEX("0030")) & ($Ascii(token)'>$ZHEX("0039"))) 1 // '0' to '9'
+}
+bool IsKatakana(iknow::base::Char token) { // IsKatakana(token As %Char) As %Boolean
+	return ((int)token >= 0x30A0) && ((int)token <= 0x30FF); // Quit:(($Ascii(token)'<$ZHEX("30A0")) & ($Ascii(token)'>$ZHEX("30FF"))) 1
+}
+
+inline void add_if_not_empty(iknow::base::String& token, vector<string>& lst) {
+	if (token.empty())
+		return;
+	lst.push_back(iknow::base::IkStringEncoding::BaseToUTF8(token));
+	token.clear();
+}
+vector<string> CollectSegments(string& token, const string& labels, CSV_DataGenerator& kb)
+{
+	if (labels.find('-') == string::npos) // token is *not* segmented.
+		return vector<string>();
+
+	vector<string> lstToken, token_segments;
+	string separator(" "); // classic token separator
+
+	if (kb.GetName() == "ja") { // Japanese style
+		separator.clear(); // no separator
+		iknow::base::String StringKana, StringNumeric;
+
+		iknow::base::String wToken = iknow::base::IkStringEncoding::UTF8ToBase(token);
+		for (int cntToken = 1; cntToken <= wToken.length(); cntToken++) {
+			iknow::base::Char symbol = wToken[cntToken - 1];
+			if (IsNumeric(symbol)) {
+				add_if_not_empty(StringKana, lstToken);
+				StringNumeric += symbol;
+				continue;
+			}
+			if (IsKatakana(symbol)) {
+				add_if_not_empty(StringNumeric, lstToken);
+				StringKana += symbol;
+				continue;
+			}
+			add_if_not_empty(StringKana, lstToken);
+			add_if_not_empty(StringNumeric, lstToken);
+			iknow::base::Char StrSymbol[2] = { symbol, '\0' };
+			iknow::base::String Symbol(StrSymbol);
+			add_if_not_empty(Symbol, lstToken);
+		}
+		add_if_not_empty(StringKana, lstToken);
+		add_if_not_empty(StringNumeric, lstToken);
+	}
+	else { // single tokens are space separated, except for ideographical languages
+		lstToken = kb.split_row(token, ' ');
+	}
+
+	// collect label segments
+	vector<string> label_segments, list_labels = kb.split_row(labels, ';');
+	string label_segment;
+	for (auto it = list_labels.begin(); it != list_labels.end(); it++) {
+		if (*it == "-") { // segment splitter
+			label_segments.push_back(label_segment);
+			label_segment.clear();
+			continue;
+		} 
+		label_segment += (*it + ";");
+	}
+	label_segments.push_back(label_segment);
+
+	int idx_single_token_segments = 0;
+	for (int i = 0; i < (int)label_segments.size(); ++i) {
+		string& label_segment = label_segments[i];
+		token_segments.push_back(lstToken[idx_single_token_segments++]);
+		size_t join_index = label_segment.find(";Join;");
+		while (join_index != string::npos) {
+			token_segments.back() += (separator + lstToken[idx_single_token_segments++]);
+			join_index = label_segment.find(";Join;", join_index + 5);
+		}
+		// cout << "seg=\"" << token_segments.back() << "\"" << endl;
+	}
+	if (label_segments.size() != token_segments.size())
+		throw ExceptionFrom<iKnow_KB_Lexrep>("While reading lexreps : Mismatch between token and label segments:\"" + token + "\":\"" + labels + "\"");
+
+	return token_segments;
+}
+
 bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 {
 	kb.kb_lexreps.clear();
 	kb.lexrep_index.clear();
+	kb.lexrep_segments_index.clear();
 
 	cout << "Reading lexrep data..." << endl;
 
@@ -135,6 +197,8 @@ bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 			string labels;
 			for_each(row_lexrep.begin() + 5 - 1, row_lexrep.end(), [&labels](std::string& label) { labels += label + ";"; }); // Set labels = $PIECE(line, ";", 5, 99)
 
+			// collect token segments (splitted by '-' label)
+			vector<string> token_segments = CollectSegments(token, labels, kb);
 			/*
 			std::string::reverse_iterator rit = labels.rbegin();
 			while (rit != labels.rend() && *rit == ';') ++rit;
@@ -147,7 +211,12 @@ bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 				lexrep.Token = tokens[i]; // Set lexrep.Token = tokens(i)
 				lexrep.Meta = meta; // Set lexrep.Meta = meta
 				lexrep.Labels = labels; // Set lexrep.Labels = labels
-				kb.lexrep_index[lexrep.Token] = (int)kb.kb_lexreps.size(); // index on Token for fast retrieval
+				int idx_lexrep = (int)kb.kb_lexreps.size(); // index in lexrep vector for fast retral
+				kb.lexrep_index[lexrep.Token] = idx_lexrep;
+				if (token_segments.size()) { // collect the token segments
+					int idx_segment = 0; // segment index 
+					for_each(token_segments.begin(), token_segments.end(), [idx_lexrep, &kb, &idx_segment](string& token_segment) { kb.lexrep_segments_index[token_segment].push_back(idx_lexrep); kb.lexrep_segments_index[token_segment].push_back(idx_segment++); });
+				}
 				kb.kb_lexreps.push_back(lexrep); // Set lexrep.Knowledgebase = kb
 			}
 			if (!(kb.kb_lexreps.size() % 2048)) cout << char(9) << kb.kb_lexreps.size();

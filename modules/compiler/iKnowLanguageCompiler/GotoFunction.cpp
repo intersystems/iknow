@@ -263,7 +263,7 @@ void GotoFunction::ToC(std::string dir)
 			}
 			else {
 				AryRegexOneStateMap[i] = "kNullOffset"; // Set AryRegexOneStateMap(i) = "kNullOffset"
-				AryRegexNextStateMap[i] = (RegexMapIndex | regexCount << 20); // Set AryRegexNextStateMap(i) = ..MakeNextState(RegexMapIndex, regexCount)
+				AryRegexNextStateMap[i] = (int) (RegexMapIndex | regexCount << 20); // Set AryRegexNextStateMap(i) = ..MakeNextState(RegexMapIndex, regexCount)
 				map<String, int>::iterator it_regex = AryRegexStateMap.begin(); // Set regex = $ORDER(AryRegexStateMap(""))
 				while (it_regex != AryRegexStateMap.end()) { // While regex '= "" {
 					int state = it_regex->second; // Set state = AryRegexStateMap(regex)
