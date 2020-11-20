@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/intersystems/iknow.svg?branch=master)](https://travis-ci.com/intersystems/iknow) [![PyPI version](https://img.shields.io/pypi/v/iknowpy?logo=pypi)](https://pypi.org/project/iknowpy) [![Python versions](https://img.shields.io/pypi/pyversions/iknowpy?logo=python)](https://pypi.org/project/iknowpy)
+[![CI Status](https://github.com/intersystems/iknow/workflows/CI/badge.svg)](https://github.com/intersystems/iknow/actions?query=workflow%3A%22CI%22) [![PyPI version](https://img.shields.io/pypi/v/iknowpy?logo=pypi)](https://pypi.org/project/iknowpy) [![Python versions](https://img.shields.io/pypi/pyversions/iknowpy?logo=python)](https://pypi.org/project/iknowpy)
 
 # iKnow
 
@@ -8,6 +8,7 @@
 
 This readme file has everything you need to get started, but make sure you click through to the **[wiki](https://github.com/intersystems/iknow/wiki)** for more details on any of these subjects.
 
+- [iKnow](#iknow)
 - [Using iKnow](#using-iknow)
   - [From Python](#from-python)
   - [From C++](#from-c)

@@ -4,7 +4,7 @@
 # executed inside a manylinux container in which /iknow is the root of the
 # repository.
 #
-# Usage: /iknow/travis/build_manylinux.sh
+# Usage: /iknow/.github/workflows/build_manylinux.sh
 #
 # Required Environment Variables:
 # - CCACHE_MAXSIZE is the size limit for files held with ccache
@@ -26,8 +26,8 @@ PROCESSOR="$(uname -p)"
 if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
   yum install -y epel-release
 fi
-if [ "$PROCESSOR" = aarch64 ]; then
-  # this mirror is slow on arm64-graviton2, so disable it
+if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
+  # this mirror is often slow, so disable it
   echo "exclude=csc.mcs.sdsmt.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
 fi
 yum install -y dos2unix ccache

@@ -214,6 +214,8 @@ for text_file in f_rec:
                     attr_name = "measurement"
                 if (attr_name == "Negation"):
                     attr_name = "negation"
+                if (attr_name == "Certainty"):
+                    attr_name = "certainty"
 
                 start_position = path_attribute['pos']
                 attribute_span = path_attribute['span']

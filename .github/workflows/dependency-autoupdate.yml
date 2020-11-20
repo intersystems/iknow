@@ -6,8 +6,9 @@
 # - Python for Windows
 # - Cython
 # - manylinux
-# In addition, whenever Travis CI updates its Mac OS X build machines so that a
-# new version of pyenv is available, we check for updates to Python on Mac OS X.
+# In addition, whenever GitHub Actions updates its Mac OS X build machines so
+# that a new version of pyenv is available, we check for updates to Python on
+# Mac OS X.
 #
 # For each dependency that has an update, we create a pull request containing a
 # single commit that updates the dependency.
@@ -20,7 +21,7 @@ on:
   workflow_dispatch:
     inputs:
       PYENV_TOOL_VERSION_CURRENT:
-        description: 'current version of pyenv, as reported by Travis CI'
+        description: 'current version of pyenv, as reported by GitHub Actions'
         required: true
 
 jobs:

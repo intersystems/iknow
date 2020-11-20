@@ -40,7 +40,7 @@
 
 set -euxo pipefail
 
-EXPECTED_WHEEL_COUNT=25  # 5 Python versions across 5 platforms
+EXPECTED_WHEEL_COUNT=5  # 5 platforms
 
 if [ "$TRAVIS_BRANCH" = master ] && \
     [ "$TRAVIS_PULL_REQUEST" = false ] && \
@@ -48,7 +48,7 @@ if [ "$TRAVIS_BRANCH" = master ] && \
     (git diff-tree --no-commit-id --name-only -r "$TRAVIS_COMMIT" | grep modules/iknowpy/iknowpy/version.py > /dev/null || \
       ([ "$TRAVIS_EVENT_TYPE" = api ] && [ "${FORCE_DEPLOY-}" = 1 ]))
 then
-  WHEELS="modules/iknowpy/wheelhouse/*.whl modules/iknowpy/dist/*.whl C:/Users/travis/build/$TRAVIS_REPO_SLUG/modules/iknowpy/dist/*.whl"
+  WHEELS="modules/iknowpy/wheelhouse/*.whl modules/iknowpy/dist/merged/*.whl C:/Users/travis/build/$TRAVIS_REPO_SLUG/modules/iknowpy/dist/merged/*.whl"
   if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then
     echo "Error: Expected $EXPECTED_WHEEL_COUNT wheels"
     exit 1
