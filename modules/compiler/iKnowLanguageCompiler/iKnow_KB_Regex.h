@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "..\..\aho\ModelRegex.h"
+#include "../../aho/ModelRegex.h"
 
 namespace iknow {
 	namespace csvdata {
