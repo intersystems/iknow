@@ -510,14 +510,15 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 			  if (IkStringAlg::IsOpenParenthesis(cCur)) { // handle parenthesis. scan for furigana reading aid.
 				  int tmp_nPosition = nPosition + 1;
 				  IkStringAlg::FuriganaClass furigana_class = IkStringAlg::NoFurigana; // to be detected
-				  bool bIsFurigana = false;
-				  bool bCreatedFurigana = false;
+				  bool bIsFurigana = false, bCreatedFurigana = false;
+				  bool bAllKatakana = false, bAllNumeric = false; 
 				  while ((size_t)tmp_nPosition < input_size) {
 					  const Char current_char = pData[tmp_nPosition++];
 					  if (IkStringAlg::IsJpnSplit(current_char)) continue; // do not end the sentence before closing parenthesis
 					  // double newline ends the sentence
 					  if (IkStringAlg::IsCloseParenthesis(current_char)) { // ending furigana parenthesis
-						// const Char* closing_parenthesis=&pData[tmp_nPosition]; // iterator style, one past the real closing parenthesis symbol
+						  if (bAllKatakana || bAllNumeric) // new: if all symbols are Katakana or all symbols are Numeric, don't emit furigana.
+							  break;
 						  lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, pData + nBeginPos, pData + tmp_nPosition, pData + nPosition, pData + tmp_nPosition, m_pKnowledgebase->GetLabelIndex(UnknownLabel)));
 						  SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
 						  nBeginPos = nPosition = tmp_nPosition;
@@ -529,12 +530,30 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 							  furigana_class = IkStringAlg::FindFuriganaClass(current_char);
 							  if (furigana_class == IkStringAlg::NoFurigana) break; // no Furigana
 							  else bIsFurigana = true;
+
+							  if (furigana_class == IkStringAlg::NumberFurigana)
+								  bAllNumeric = true;
+							  if (furigana_class == IkStringAlg::KatakanaFurigana)
+								  bAllKatakana = true;
 						  }
 						  else { // further scan Furigana
 							  if (IkStringAlg::FindFuriganaClass(current_char) != furigana_class) { // no continuation of Furigana
 								  if (u_isspace(current_char)) continue; // PL128243
 								  if (furigana_class == IkStringAlg::HiraganaFurigana && (IkStringAlg::IsJpnDOT(current_char) || IkStringAlg::IsJpnChoon(current_char))) continue; // exception, a DOT or the Cho-on in Hiragana means, continue
 								  else break; // *not* furigana, process normally
+							  }
+							  switch (IkStringAlg::FindFuriganaClass(current_char)) { // filter Number and KatakanaFurigana
+							  case IkStringAlg::NumberFurigana:
+								  bAllKatakana = false;
+								  break;
+							  case IkStringAlg::KatakanaFurigana:
+								  bAllNumeric = false;
+								  break;
+
+							  default:
+								  bAllKatakana = bAllNumeric = false;
+								  break;
+
 							  }
 						  }
 					  }
