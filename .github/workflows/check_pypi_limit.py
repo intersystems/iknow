@@ -3,8 +3,8 @@
 """Check whether the iknowpy project on PyPI has nearly reached the 10GiB limit.
 
 If we are near the limit and there is no open issue saying that we are near the
-limit, create the file $HOME/issue.md that says that we are near the limit.
-Otherwise, do nothing.
+limit, create the file $HOME/issue.md that says that we are near the limit and
+set CREATE_ISSUE=1 for next steps. Otherwise, set CREATE_ISSUE=0 for next steps.
 
 Usage: check_pypi_limit.py GITHUB_TOKEN"""
 
@@ -12,9 +12,10 @@ import json
 import os
 import sys
 import urllib.request
+from updatelib import setenv
 
 
-SIZE_THRESHOLD = 8589934592  # 8 GiB
+SIZE_THRESHOLD = 9663676416  # 9 GiB
 
 # determine whether the size of the iknowpy project on PyPI has exceeded the
 # threshold
@@ -24,8 +25,9 @@ json_data = json.load(url_data)
 for release in json_data['releases'].values():
     for file in release:
         size += file['size']
-if size <= SIZE_THRESHOLD:
+if size < SIZE_THRESHOLD:
     print(f'Size of iknowpy is {size:,} bytes, which is lower than the threshold of {SIZE_THRESHOLD:,} bytes')
+    setenv('CREATE_ISSUE', '0')
     sys.exit(0)
 
 # determine whether there is an open issue saying we're near the limit
@@ -36,6 +38,7 @@ json_data = json.load(url_data)
 for issue in json_data:
     if issue['title'].startswith('[check-pypi-limit]'):
         print(f'Issue already exists at {issue["html_url"]}')
+        setenv('CREATE_ISSUE', '0')
         sys.exit(0)
 
 # create file containing issue details
@@ -47,5 +50,9 @@ deleting old releases that are no longer relevant.
 
 *I am a bot, and this action was performed automatically.*\
 """
-with open(os.path.join(os.environ["HOME"], 'issue.md'), 'w') as issue_file:
+with open(os.path.join(os.environ['HOME'], 'issue.md'), 'w') as issue_file:
     issue_file.write(issue_text)
+
+# make variables available to next action
+setenv('HOME', os.environ['HOME'])
+setenv('CREATE_ISSUE', '1')

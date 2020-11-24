@@ -217,8 +217,19 @@ jobs:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
           path: ~/.cache/pip
-      - uses: actions/download-artifact@v2
+      - name: download wheel artifacts
+        uses: actions/download-artifact@v2
         with:
           path: ~/wheels
       - name: deploy if appropriate
         run: .github/workflows/deploy.sh
+      - name: check iknowpy project size
+        if: env.DEPLOY_OCCURRED == '1'
+        run: ${{ github.workspace }}/.github/workflows/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
+      - name: create issue
+        if: env.DEPLOY_OCCURRED == '1' && env.CREATE_ISSUE == '1'
+        uses: peter-evans/create-issue-from-file@v2
+        with:
+          title: "[check-pypi-limit] The PyPI size limit has almost been reached"
+          content-filepath: ${{ env.HOME }}/issue.md
+          assignees: isc-adang

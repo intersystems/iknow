@@ -48,6 +48,8 @@ then
   else
     python3 -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
   fi
+  echo "DEPLOY_OCCURRED=1" >> $GITHUB_ENV
 else
   echo "Deployment skipped"
+  echo "DEPLOY_OCCURRED=0" >> $GITHUB_ENV
 fi
