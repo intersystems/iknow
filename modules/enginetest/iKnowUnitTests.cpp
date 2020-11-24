@@ -31,6 +31,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test5(pError);
 		pError = "Test on Text Normalizer";
 		test_collection.test6(pError);
+		pError = "Issue31 : https://github.com/intersystems/iknow/issues/31";
+		test_collection.test7(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -43,6 +45,50 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
+void iKnowUnitTests::test7(const char* pMessage) // https://github.com/intersystems/iknow/issues/31
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。"); //  = > All Hiragana
+	engine.index(text_source, "ja", true); // traces should show UDPosSentiment
+	bool bFurigana = false;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepCreated") != string::npos && it->find("type=Nonrelevant") != string::npos) {
+			if (it->find(u8"index=\"（あかん）\"") != string::npos)
+				bFurigana = true;
+		}
+	}
+	if (bFurigana == false)
+		throw std::runtime_error("Furigana ***not*** detected !" + string(pMessage));
+
+	text_source = IkStringEncoding::UTF8ToBase(u8"黎智英（ジミー・ライ）氏や民主活動家の周庭（アグネス・チョウ）氏が逮捕された。"); //  = > All Katakana
+	bFurigana = false;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepCreated") != string::npos && it->find("type=Nonrelevant") != string::npos) {
+			if (it->find(u8"index=\"（ジミー・ライ）\"") != string::npos)
+				bFurigana = true;
+		}
+	}
+	if (bFurigana == true)
+		throw std::runtime_error("Furigana detected in all Katakana text!" + string(pMessage));
+
+	text_source = IkStringEncoding::UTF8ToBase(u8"将棋の高校生プロ、藤井聡太棋聖（18）がまたしても金字塔を打ち立てた。"); // = > All Numbers
+	bFurigana = false;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepCreated") != string::npos && it->find("type=Nonrelevant") != string::npos) {
+			if (it->find(u8"index=\"（18）\"") != string::npos)
+				bFurigana = true;
+		}
+	}
+	if (bFurigana == true)
+		throw std::runtime_error("Furigana detected in all Numeric text!" + string(pMessage));
+}
+/*
+The Certainty attribute in the English language model has a marker, spanand level.When using the m_index property in the Python interface, the marker can be found through['sent_attributes'], the span through['path_attributes'].The level, currently either 0 (uncertain) or 9 (certain), should be in['sent_attributes'] too, but it is missing.
+Example :
+	Input = "This might be a problem."
+	['sent_attributes'] = [{'type': 'Certainty', 'offset_start' : 7, 'offset_stop' : 12, 'marker' : 'might', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 1}]
+*/
 // std::string NormalizeText(std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
 void iKnowUnitTests::test6(const char* pMessage) {
 	string text_source = u8"WE WANT THIS TEXT LOWERCASED !";

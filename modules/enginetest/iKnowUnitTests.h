@@ -12,5 +12,6 @@ namespace testing {
 		void test4(const char *); // Test SBegin/SEnd labels.
 		void test5(const char *); // User DCT test
 		void test6(const char *); // Text Normalizer test
+		void test7(const char *); // Issue#37 : https://github.com/intersystems/iknow/issues/37 
 	};
 }
