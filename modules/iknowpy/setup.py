@@ -214,6 +214,7 @@ class MergeCommand(Command):
         pass
 
     def run(self):
+        metadata = None  # metadata from .dist-info/WHEEL file
         python_tags = []
         abi_tags = []
         platform_tag = None
@@ -239,8 +240,26 @@ class MergeCommand(Command):
             extracted_dir = os.path.join(tmp_dir_base, whl_name)
             extracted_dirs.append(extracted_dir)
             extract_wheel(whl_path, extracted_dir)
+
+            # verify that original wheels were created with --no-dependencies flag
             if glob.glob(os.path.join(extracted_dir, 'iknowpy', enginelibs_name_pattern)):
                 raise BuildError('{} was not built with --no-dependencies and cannot be merged'.format(whl_path))
+
+            # get the wheel metadata
+            metadata_filepath = os.path.join(extracted_dir, 'iknowpy-{}.dist-info'.format(version), 'WHEEL')
+            if metadata is None:
+                metadata = extract_metadata(metadata_filepath)
+            else:
+                merge_metadata(metadata, extract_metadata(metadata_filepath))
+
+        # Ensure that all wheels have identical metadata with the exception of
+        # the Tag key, which is expected to be different between wheels that
+        # target different Python versions. This way, we don't merge wheels that
+        # might be incompatible with each other.
+        for key, values in metadata.items():
+            if key != 'Tag' and len(values) > 1:
+                raise BuildError('Wheels have conflicting metadata for key {!r} and cannot be merged. Conflicting values are {!r}.'.format(key, values))
+
         python_tags.sort()
         abi_tags.sort()
 
@@ -249,6 +268,14 @@ class MergeCommand(Command):
             for module_path in glob.iglob(os.path.join(extracted_dir, 'iknowpy', module_name_pattern)):
                 print('copying {} -> {}'.format(module_path, os.path.join(extracted_dirs[0], 'iknowpy', os.path.split(module_path)[1])))
                 shutil.copy2(module_path, os.path.join(extracted_dirs[0], 'iknowpy'))
+
+        # update metadata
+        metadata_filepath = os.path.join(extracted_dirs[0], 'iknowpy-{}.dist-info'.format(version), 'WHEEL')
+        print('updating wheel metadata file {}'.format(metadata_filepath))
+        with open(metadata_filepath, 'w') as metadata_file:
+            for key, values in metadata.items():
+                for value in sorted(values):
+                    metadata_file.write('{}: {}\n'.format(key, value))
 
         # fix up the wheel
         if no_dependencies:
@@ -360,6 +387,35 @@ def repackage_wheel(whl_path, whl_dir):
         for file_path in filepath_list:
             print('adding {}'.format(file_path))
             whl_file.write(file_path, os.path.relpath(file_path, whl_dir))
+
+
+def extract_metadata(metadata_path):
+    """Given the path to a file containing metadata in key: value format, return
+    a dictionary representation of the metadata. The dictionary keys correspond
+    to the keys in the file, and each dictionary value is a set corresponding
+    to all the values in the file associated with a key."""
+    metadata = {}
+    with open(metadata_path) as metadata_file:
+        for line in metadata_file:
+            line = line.strip()
+            if line:
+                key, value = line.split(': ')
+                try:
+                    metadata[key].add(value)
+                except KeyError:
+                    metadata[key] = {value}
+    return metadata
+
+
+def merge_metadata(m1, m2):
+    """Given 2 dictionaries that map str->set, merge m2 into m1. For each key in
+    m2, m1's value for that key becomes the union of its own value and m2's
+    value. m1 and m2 must have the same set of keys; otherwise, raise an
+    exception."""
+    if set(m1) != set(m2):
+        raise BuildError('Wheels have conflicting metadata and cannot be merged. One wheel has keys {!r} while another has keys {!r}.'.format(set(m1), set(m2)))
+    for key in m2:
+        m1[key] |= m2[key]
 
 
 def fix_wheel_ppc64le(whl_path, extracted=False):
