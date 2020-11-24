@@ -561,9 +561,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
     install_wheel = True
 
 # platform-specific settings
-setup_requires = ['cython', 'wheel']
 if sys.platform == 'win32':
-    setup_requires.extend(['pefile', 'machomachomangler'])
     library_dirs = ['../../kit/x64/Release/bin']
     iculibs_name_pattern = 'icu*.dll'
     iculibs_path_pattern = os.path.join(icudir, 'bin64', iculibs_name_pattern)
@@ -678,7 +676,13 @@ try:
         packages=['iknowpy'],
         version=version,
         python_requires='>=3.5',
-        setup_requires=setup_requires,
+        setup_requires=[
+            'cython',
+            'wheel',
+            'setuptools>=20.6.8',
+            'pefile; sys_platform == "win32"',
+            'machomachomangler; sys_platform == "win32"'
+        ],
         zip_safe=False,
         ext_modules=cythonize(
             [Extension(
