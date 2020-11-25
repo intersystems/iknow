@@ -81,12 +81,16 @@ def compare_versions(a, b):
     return 1
 
 
+ALLOW_PRERELEASE = False  # flag for whether to allow updates to prerelease Python versions
+
 platform = sys.argv[1]
 assert platform in ('win64', 'osx'), f'{platform} is not supported'
-if platform == 'win64':
+if platform == 'win64' and ALLOW_PRERELEASE:
     VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+(-(a|b|rc)[0-9]+)?$'
-else:
+elif platform == 'osx' and ALLOW_PRERELEASE:
     VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+((a|b|rc)[0-9]+)?$'
+else:
+    VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+$'
 
 vars = updatelib.get_vars()
 if platform == 'win64':
