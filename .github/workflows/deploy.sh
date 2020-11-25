@@ -21,12 +21,20 @@
 # - GITHUB_EVENT_NAME is the event that triggered the workflow
 # - GITHUB_REF is the branch ref that triggered the workflow
 # - GITHUB_SHA is the commit hash for current build
+# - COMMIT_RANGE is a space-separated string of up to 20 commit hashes for the
+#   commits in this push
 #
 # Optional Environment Variables:
 # - PYPI_TOKEN is an API token to the iknowpy repository on PyPI. If unset,
 #   deployment is skipped.
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI. If
 #   unset, deployment is skipped.
+#
+# Output Variables:
+# - DEPLOY_OCCURRED: 0 or 1, indicating whether deployment occurred
+# - WARN_COMMIT: the commit hash for the commit that changed version.py
+#     (present only if version.py was changed in the last <= 20 commits in this
+#      push and was not changed in the final commit)
 
 set -euxo pipefail
 
@@ -34,21 +42,33 @@ EXPECTED_WHEEL_COUNT=5  # 5 platforms
 
 if [ "$GITHUB_EVENT_NAME" = push ] && \
     [ "$GITHUB_REF" = refs/heads/master ] && \
-    [ -n "${PYPI_TOKEN-}" ] && [ -n "${TESTPYPI_TOKEN-}" ] && \
-    git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null
+    [ -n "${PYPI_TOKEN-}" ] && [ -n "${TESTPYPI_TOKEN-}" ]
 then
-  WHEELS=~/wheels/*/*.whl
-  if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then
-    echo "Error: Expected $EXPECTED_WHEEL_COUNT wheels"
-    exit 1
-  fi
-  pip3 install --user twine --no-warn-script-location
-  if grep ".dev[0-9][0-9]*'" "modules/iknowpy/iknowpy/version.py"; then
-    python3 -m twine upload -r testpypi --skip-existing -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
+  if git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null
+  then
+    WHEELS=~/wheels/*/*.whl
+    if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then
+      echo "Error: Expected $EXPECTED_WHEEL_COUNT wheels"
+      exit 1
+    fi
+    pip3 install --user twine --no-warn-script-location
+    if grep ".dev[0-9][0-9]*'" "modules/iknowpy/iknowpy/version.py"; then
+      python3 -m twine upload -r testpypi --skip-existing -u "__token__" -p "$TESTPYPI_TOKEN" $WHEELS
+    else
+      python3 -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
+    fi
+    echo "DEPLOY_OCCURRED=1" >> $GITHUB_ENV
   else
-    python3 -m twine upload --skip-existing -u "__token__" -p "$PYPI_TOKEN" $WHEELS
+    for SHA in $COMMIT_RANGE; do
+      if git diff-tree --no-commit-id --name-only -r "$SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null
+      then
+        echo "WARN_COMMIT=$SHA" >> $GITHUB_ENV
+        break
+      fi
+    done
+    echo "Deployment skipped"
+    echo "DEPLOY_OCCURRED=0" >> $GITHUB_ENV
   fi
-  echo "DEPLOY_OCCURRED=1" >> $GITHUB_ENV
 else
   echo "Deployment skipped"
   echo "DEPLOY_OCCURRED=0" >> $GITHUB_ENV

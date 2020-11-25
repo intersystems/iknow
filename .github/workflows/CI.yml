@@ -210,11 +210,12 @@ jobs:
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       TESTPYPI_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
+      COMMIT_RANGE: ${{ join(github.event.commits.*.id, ' ') }}
     steps:
       - name: check out repository
         uses: actions/checkout@v2
         with:
-          fetch-depth: 2
+          fetch-depth: 21  # github.event.commits has limit of 20 commits, so we need at least 21 to perform diffs
       - name: download cached pip files
         uses: actions/cache@v2
         with:
@@ -227,10 +228,45 @@ jobs:
           path: ~/wheels
       - name: deploy if appropriate
         run: .github/workflows/deploy.sh
-      - name: check iknowpy project size
+      - name: warn if version.py was changed but not in last commit
+        if: env.WARN_COMMIT
+        uses: peter-evans/commit-comment@v1
+        with:
+          sha: ${{ env.WARN_COMMIT }}
+          body: >-
+            **Warning:** The version bump must be part of the final commit in a
+            push to `master` in order to trigger deployment. This is by design
+            because we do not want commits that were made after a version bump
+            to affect the new release. The final commit in the push was
+            ${{ github.sha }}, so automatic deployment was not triggered.
+
+
+
+            If the final commit in the push was a merge commit that `git`
+            automatically created, you can do the following to prevent a merge
+            commit from interfering with deployment the next time you bump the
+            version number.
+
+            - Use `git pull --rebase` instead of `git pull` when updating your
+            local repository.
+
+            - Do not bump the version number in a fork or non-`master` branch
+            before merging into the `master` branch of `intersystems/iknow`.
+            Instead, bump the version number directly in the `master` branch
+            after the merge.
+
+
+
+            If you want, you can still deploy the wheels for this release by
+            downloading them from the **Artifacts** section of
+            https://github.com/${{ github.repository}}/actions/runs/${{ github.run_id}}
+            and manually uploading them to PyPI. Note that these wheels contain
+            all commits in the push, including those that were made after the
+            version bump.
+      - name: check PyPI project size
         if: env.DEPLOY_OCCURRED == '1'
         run: ${{ github.workspace }}/.github/workflows/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
-      - name: create issue
+      - name: create issue if PyPI project size is near limit
         if: env.DEPLOY_OCCURRED == '1' && env.CREATE_ISSUE == '1'
         uses: peter-evans/create-issue-from-file@v2
         with:
