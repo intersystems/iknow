@@ -4,14 +4,11 @@
     Example (on Windows): "python genRAW.py C:/TextCorpus/English/Financial/ C:/Raw/English/ en
 '''
 
-import sys
+# import the usual suspects...
+import sys, os, pprint, time
 
 # run "pip install iknowpy" if "import iknowpy" fails.
 import iknowpy
-
-import os
-import pprint
-import time
 
 #
 # Following are default runtime parameters if no command line parameters are present.
@@ -79,12 +76,8 @@ for text_file in f_rec:
     else:
         write_ln(f_raw,'\n<D name=\"'+text_file+'\" file=\"'+in_path_par+text_file+'\">') # D050_sentences.txtC:\P4\Users\jdenys\text_input_data\ja\050_sentences.txt
     
-    f_text = open(text_file, "rb")
-    header = f_text.read(3)
-    if (header == b'\xef\xbb\xbf'): #Utf8 BOM
-        header = b''    # remove BOM
-    text = header + f_text.read() # read text, must be utf8 encoded
-    text = text.decode('utf8') # decode text to Unicode
+    f_text = open(text_file,"r",True,"utf8") # open text file, must be utf8 encoded
+    text = f_text.read() # read text
     f_text.close()
 
     engine.index(text, language_par)
@@ -132,7 +125,7 @@ for text_file in f_rec:
                 ent_type = entity['type']
                 lit_start = entity['offset_start']
                 lit_stop = entity['offset_stop']
-                lit_text = text[lit_start:lit_stop]
+                lit_text = text[lit_start:lit_stop].replace("\n","") # literal representation of sentence, with newlines removed
                 sentence_raw = sentence_raw + ent_type + '= \"' + lit_text + '\"  '
 
             sentence_raw = sentence_raw + '>'
@@ -147,16 +140,20 @@ for text_file in f_rec:
                 attr_marker = sent_attribute['marker'] # corresponds to lexreps.csv match 
                 attr_entity = sent['entities'][sent_attribute['entity_ref']]['index'] # corresponding entity index value
 
-                attr_marker_literal = text[sent_attribute['offset_start']:sent_attribute['offset_stop']] # literal version of the marker
-                attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] # corresponding entity index literal value
+                attr_marker_literal = text[sent_attribute['offset_start']:sent_attribute['offset_stop']].replace("\n","") # literal version of the marker, remove newlines
+                attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']].replace("\n","") # corresponding entity index literal value, remove newlines
 
                 if (attr_name == 'datetime'):
                     attr_name = 'time'
-                sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']] + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'].lstrip() + '\"'
-                if sent_attribute['value']:
-                   sent_attribute_raw = sent_attribute_raw + ' value=\"' + sent_attribute['value'] + '\"'
-                if sent_attribute['unit']:
-                   sent_attribute_raw = sent_attribute_raw + ' unit=\"' + sent_attribute['unit'] + '\"'
+                sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + attr_entity_literal + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'].lstrip() + '\"'
+                if attr_name == 'certainty':
+                    if sent_attribute['value']:
+                        sent_attribute_raw = sent_attribute_raw + ' level=\"' + sent_attribute['value'] + '\"'
+                else:
+                    if sent_attribute['value']:
+                        sent_attribute_raw = sent_attribute_raw + ' value=\"' + sent_attribute['value'] + '\"'
+                    if sent_attribute['unit']:
+                        sent_attribute_raw = sent_attribute_raw + ' unit=\"' + sent_attribute['unit'] + '\"'
 
                 sent_attribute_raw = sent_attribute_raw + '>'
                 # print(sent_attribute_raw)

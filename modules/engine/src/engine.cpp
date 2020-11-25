@@ -122,8 +122,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			bool is_measure = false; // we can only have one measurement attribute per merged lexrep
 			int idx_measure = 0; // index to measurement attribute
 			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
-				//std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetNormalizedText()); // the attribute marker
 				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
+				char certainty_data = it->GetCertainty(); // certainty char, "0" to "9"
 
 				bool is_marker_measure = false, is_value = false, is_unit = false; // lexrep level
 				const size_t label_count = it->NumberOfLabels();
@@ -155,6 +155,14 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							if (!is_measure) {
 								sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
 								sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
+								if (id_property == IKATTCERTAINTY) { // certainty attribute, emit the certainty level
+									if (certainty_data != '\0') {
+										std::string certainty_value = "0";
+										certainty_value[0] = certainty_data; // '0' to '9'
+										Sent_Attribute& ref = sentence_data.sent_attributes.back();
+										ref.value_ = certainty_value;
+									}
+								}
 							}
 							if (a_type == iknowdata::Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
 								if (!is_measure) {

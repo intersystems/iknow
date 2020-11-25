@@ -148,7 +148,7 @@ namespace iknow
         m_type(type), m_kb(kb),
 		m_summaryRelevance(0), m_id(NextId()), is_annotated_(false),
 		text_begin_(val_begin), text_end_(val_end),
-		meta_data_(NULL) {
+        certainty_value_('\0') {
             NormalizedValue() = PoolString(strNormalizedValue);
         }
       IkLexrep(Type type, const IkKnowledgebase* kb, //Build a lexrep with one label index
@@ -161,7 +161,7 @@ namespace iknow
         m_type(type), m_kb(kb),
 		m_summaryRelevance(0), m_id(NextId()), is_annotated_(false),
 		text_begin_(val_begin), text_end_(val_end),
-		meta_data_(NULL) {
+        certainty_value_('\0') {
           AddLabelIndex(label_index);
           NormalizedValue() = PoolString(strNormalizedValue);
         }
@@ -176,7 +176,7 @@ namespace iknow
         m_type(type), m_kb(kb),
 		m_summaryRelevance(0), m_id(NextId()), is_annotated_(false),
 		text_begin_(val_begin), text_end_(val_end),
-		meta_data_(NULL) {
+        certainty_value_('\0') {
           AddLabelIndex(label_index);
           NormalizedValue() = PoolString(norm_val_begin, norm_val_end);
         }
@@ -289,8 +289,14 @@ namespace iknow
 	  void SetAnnotated(bool mark_annotation) { is_annotated_ = mark_annotation; }
 	  bool IsAnnotated(void) { return is_annotated_; }
 
-	  const char* GetMetaData() const { return meta_data_; }
-	  void SetMetaData(const char* meta_data) { meta_data_ = meta_data; }
+	  // const char* GetMetaData() const { return meta_data_; }
+	  // void SetMetaData(const char* meta_data) { meta_data_ = meta_data; }
+
+      std::string GetMetaData() const;
+      void SetMetaData(const char* meta_data);
+      char GetCertainty() const {
+          return certainty_value_;
+      }
 
     protected:
       const FastLabelSet& LabelSet(Phase p = kMaxPhase) const { return GetLexrepStore().GetLabelSet(offset_, p); }
@@ -325,7 +331,9 @@ namespace iknow
     private:
       bool is_annotated_; // if true, lexrep is annotated
       const iknow::base::Char *text_begin_, *text_end_; // text input pointers
-	  const char* meta_data_; // !new, pointer to lexrep metadata
+
+      // metadata values
+      char certainty_value_; // certainty range '0' to '9', '\0' = undefined
 
 	  static const iknow::base::Char* text_buffer_;
       static iknow::base::StringPool* string_pool_;

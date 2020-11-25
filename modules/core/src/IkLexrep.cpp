@@ -191,3 +191,21 @@ iknow::base::String IkLexrep::GetValue(void) const
 	else
 		return clean_literal;
 }
+
+void IkLexrep::SetMetaData(const char* meta_data) { // parsing of metadata should be done here
+	if (meta_data == NULL) return;
+
+	std::string certainty_value = iknow::base::IkStringAlg::GetMetaValue(meta_data, "c=");
+	if (!certainty_value.empty())
+		certainty_value_ = certainty_value[0];
+}
+
+std::string IkLexrep::GetMetaData() const { // return of metadata should be done here
+	std::string meta_data;
+	if (certainty_value_ != '\0') {
+		meta_data = std::string("c=0");
+		meta_data[2] = certainty_value_;
+	}
+	return meta_data;
+}
+
