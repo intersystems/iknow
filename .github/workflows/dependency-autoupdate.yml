@@ -41,6 +41,7 @@ jobs:
           commit-message: "[autoupdate-ICU] update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
           branch: autoupdate-ICU
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
           body: |-
             As of ${{ env.ICU_PUBLISHED_AT }}, a new version of ICU has been released.
@@ -69,6 +70,7 @@ jobs:
           commit-message: "[autoupdate-buildcache] update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
           branch: autoupdate-buildcache
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
           body: |-
             As of ${{ env.BUILDCACHE_PUBLISHED_AT }}, a new version of buildcache has been released.
@@ -93,6 +95,7 @@ jobs:
           commit-message: "[autoupdate-cython] update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
           branch: autoupdate-cython
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
           body: |-
             A new version of Cython is available.
@@ -119,6 +122,7 @@ jobs:
           commit-message: "[autoupdate-manylinux] update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-manylinux
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
           body: |-
             A new manylinux image is available.
@@ -145,6 +149,7 @@ jobs:
           commit-message: "[autoupdate-python-windows] update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-python-windows
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           body: |-
             A new version of Python for Windows is available.
@@ -171,6 +176,7 @@ jobs:
           commit-message: "[autoupdate-python-osx] update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-python-osx
           delete-branch: true
+          token: ${{ secrets.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           body: |-
             A new version of Python for Mac OS X is available.

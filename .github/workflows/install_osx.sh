@@ -14,7 +14,7 @@
 # - CYTHON_VERSION is the version of Cython to install
 #
 # Optional environment variables:
-# - GITHUB_TOKEN is a bearer token for triggering a GitHub Actions workflow
+# - ACTIONS_TOKEN is a token for triggering a GitHub Actions workflow
 
 set -euxo pipefail
 
@@ -55,12 +55,12 @@ PYENV_TOOL_VERSION_CURRENT=${PYENV_TOOL_VERSION_CURRENT#"pyenv "}
 if [ "$GITHUB_EVENT_NAME" = push ] && \
     [ "$GITHUB_REF" = refs/heads/master ] && \
     [ "$PYENV_TOOL_VERSION_CURRENT" != "$PYENV_TOOL_VERSION" ] && \
-    [ -n "${GITHUB_TOKEN-}" ]
+    [ -n "${ACTIONS_TOKEN-}" ]
 then
   echo "pyenv was updated, triggering dependency-autoupdate"
   curl -X POST \
     -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Authorization: token $ACTIONS_TOKEN" \
     https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/dependency-autoupdate.yml/dispatches \
     -d "{\"ref\": \"master\", \"inputs\": {\"PYENV_TOOL_VERSION_CURRENT\": \"$PYENV_TOOL_VERSION_CURRENT\"}}"
 else
