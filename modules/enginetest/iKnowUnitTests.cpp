@@ -33,6 +33,9 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test6(pError);
 		pError = "Issue31 : https://github.com/intersystems/iknow/issues/31";
 		test_collection.test7(pError);
+		pError = "Issue37 : https://github.com/intersystems/iknow/issues/37";
+		test_collection.test8(pError);
+
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -45,6 +48,31 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
+/* Issue#37
+The Certainty attribute in the English language model has a marker, spanand level.When using the m_index property in the Python interface, the marker can be found through['sent_attributes'], the span through['path_attributes'].The level, currently either 0 (uncertain) or 9 (certain), should be in['sent_attributes'] too, but it is missing.
+Example :
+	Input = "This might be a problem."
+	['sent_attributes'] = [{'type': 'Certainty', 'offset_start' : 7, 'offset_stop' : 12, 'marker' : 'might', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 1}]
+*/
+void iKnowUnitTests::test8(const char* pMessage) // https://github.com/intersystems/iknow/issues/37
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"This might be a problem."); //  = > All Hiragana
+	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Certainty && attribute.value_ != string("0"))
+			throw std::runtime_error("Certainty attribute has no level 0 defined !" + string(pMessage));
+	}
+}
+
+/*
+* If Furigana handling in Japanese is switched off ("FuriganaHandling;off" in metadata.csv), this test will ***FAIL***
+*/
 void iKnowUnitTests::test7(const char* pMessage) // https://github.com/intersystems/iknow/issues/31
 {
 	iKnowEngine engine;

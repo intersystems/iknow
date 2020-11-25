@@ -312,8 +312,9 @@ void IkIndexDebug<Utf8List>::LexrepCreated(const IkLexrep& lexrep, const IkKnowl
 
 void IkIndexDebug<Utf8List>::LexrepIdentified(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
     Utf8List out = ToList(lexrep, kb);
-    if (lexrep.GetMetaData()) {
-        out.push_back(lexrep.GetMetaData());
+    std::string meta = lexrep.GetMetaData();
+    if (!meta.empty()) {
+        out.push_back(meta);
     }
     trace_.Add("LexrepIdentified", out);
 }
