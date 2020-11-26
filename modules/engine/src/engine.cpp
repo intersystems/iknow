@@ -95,8 +95,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 	const String lexrep_separator = (bIsIdeographic ? String() : SpaceString()); // no separator char for Japanese
 	const iknow::base::Char *pText = data->GetTextPointer(); // Get original text pointer
 
-	typedef std::map<const IkMergedLexrep*, std::pair<unsigned short, unsigned short> > mapLexrep2Attribute_type;
-	mapLexrep2Attribute_type mapLexrep2Attribute; // map lexreps to attribute markers.
 	typedef std::map<const IkMergedLexrep*, std::pair<unsigned short, unsigned short> > mapLexrep2Entity_type;
 	mapLexrep2Entity_type mapLexrep2Entity; // map lexreps to entities.
 
@@ -119,8 +117,91 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			const size_t text_start = literal_start - pText;
 			const size_t text_stop = literal_end - pText;
 
-			bool is_measure = false; // we can only have one measurement attribute per merged lexrep
-			int idx_measure = 0; // index to measurement attribute
+			{
+				// handle measurement attributes
+				int iPushMeasurementAttribute = 0;
+				for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
+					std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
+
+					bool bMarkerIsMeasure = false, bMarkerIsValue = false, bMarkerIsUnit = false;
+					const size_t label_count = it->NumberOfLabels();
+					for (size_t i = 0; i < label_count; ++i) {
+						FastLabelSet::Index idx_label = it->GetLabelIndexAt(i);
+						size_t attribute_count = kb->GetAttributeCount(idx_label); // how many attributes on this label ?
+						for (size_t cnt_attribute = 0; cnt_attribute < attribute_count; cnt_attribute++) { // iterate the attributes
+							iknow::core::AttributeId type_attribute = kb->GetAttributeType(idx_label, cnt_attribute);
+							String name_attribute(kb->AttributeNameForId(type_attribute).data, kb->AttributeNameForId(type_attribute).size);
+
+							if (name_attribute == kEntityString) { // found an entity attribute, read the parameters
+								for (const iknow::core::AttributeId* ent_param = kb->GetAttributeParamsBegin(idx_label, cnt_attribute); ent_param != kb->GetAttributeParamsEnd(idx_label, cnt_attribute); ++ent_param) {
+									String param_attribute(kb->AttributeNameForId(*ent_param).data, kb->AttributeNameForId(*ent_param).size);
+									iknow::core::PropertyId id_property = kb->PropertyIdForName(param_attribute);
+									iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(id_property);
+									if (a_type == iknowdata::Attribute::Measurement) // measurement attribute
+										bMarkerIsMeasure = true;
+									if (bMarkerIsMeasure) {
+										if (param_attribute == kMeasurementValueString) { // measurement value attribute type
+											bMarkerIsValue = true;
+										}
+										if (param_attribute == kMeasurementUnitString) { // measurement unit attribute type
+											bMarkerIsUnit = true;
+										}
+									}
+								}
+							}
+						}
+					}
+					if (bMarkerIsMeasure) { // collect for merged lexrep
+						if (!iPushMeasurementAttribute) {
+							sentence_data.sent_attributes.push_back(Sent_Attribute(iknowdata::Attribute::Measurement, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
+							sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
+						}
+						if (iPushMeasurementAttribute > 0) { // adjust marker, except for the first.
+							sentence_data.sent_attributes.back().marker_ += " " + a_marker;
+							sentence_data.sent_attributes.back().offset_stop_ = it->GetTextPointerEnd() - pText;
+						}
+						// handle value & unit
+						String at_value, at_unit, at_value2, at_unit2; // measurement attribute properties
+						String at_token = it->GetValue();
+						if (bMarkerIsValue && bMarkerIsUnit) { // separate value & unit properties
+							if (!RegExHandler.SplitValueUnit(it->GetNormalizedText(), at_value, at_unit)) {  // failed to separate
+								int parts = RegExHandler.Parser2(at_token, at_value, at_unit, at_value2, at_unit2); // refined value/unit parser
+								if (parts == 0) at_value = it->GetNormalizedText(); // set as Value
+							}
+						}
+						else {
+							if (bMarkerIsValue) at_value = it->GetNormalizedText();
+							if (bMarkerIsUnit) at_unit = it->GetNormalizedText();
+						}
+						Sent_Attribute& ref = sentence_data.sent_attributes.back();
+						if (at_value.length()) {
+							if (ref.value_.empty()) // fill up first placeholder
+								ref.value_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
+							else {
+								if (ref.value2_.empty()) // fill up second placeholder
+									ref.value2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
+							}
+						}
+						if (at_unit.length()) {
+							if (ref.unit_.empty())
+								ref.unit_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
+							else {
+								if (ref.unit2_.empty()) // fill up second  placeholder
+									ref.unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
+							}
+						}
+						if (at_value2.length()) {
+							if (ref.value2_.empty()) // only write if available
+								ref.value2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value2);
+						}
+						if (at_unit2.length()) {
+							if (ref.unit2_.empty()) // only write if available
+								ref.unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit2);
+						}
+						iPushMeasurementAttribute++;
+					}
+				}
+			}
 			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
 				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
 				char certainty_data = it->GetCertainty(); // certainty char, "0" to "9"
@@ -136,23 +217,13 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 
 						if (name_attribute == kEntityString) { // found an entity attribute, read the parameters							
 							iknow::core::PropertyId id_property = 0; // first parameter is property
-							bool is_value = is_unit = false; // extra parameters for measurement
 							for (const iknow::core::AttributeId* ent_param = kb->GetAttributeParamsBegin(idx_label, cnt_attribute); ent_param != kb->GetAttributeParamsEnd(idx_label, cnt_attribute); ++ent_param) {
 								String param_attribute(kb->AttributeNameForId(*ent_param).data, kb->AttributeNameForId(*ent_param).size);
-
-								if (!id_property) id_property = kb->PropertyIdForName(param_attribute);
-								if (param_attribute == kMeasurementValueString) { // new, measurement value attribute type
-									is_value = true;
-								}
-								if (param_attribute == kMeasurementUnitString) { // new, measurement unit attribute type
-									is_unit = true;
-								}
+								if (!id_property) 
+									id_property = kb->PropertyIdForName(param_attribute);
 							}
 							iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(id_property);
-							unsigned short idx_attribute = static_cast<unsigned short>(sentence_data.sent_attributes.size()); // attribute reference
-							mapLexrep2Attribute.insert(make_pair(lexrep, make_pair(idx_sentence, idx_attribute))); // link ID to lexrep
-
-							if (!is_measure) {
+							if (a_type != iknowdata::Attribute::Measurement) { // measurements are handled separately
 								sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
 								sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
 								if (id_property == IKATTCERTAINTY) { // certainty attribute, emit the certainty level
@@ -164,37 +235,6 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 									}
 								}
 							}
-							if (a_type == iknowdata::Attribute::Measurement) { // <attr type = "measurement" literal = "5%-82%;" token = "5%-82%;" value = "5" unit = "%" value2 = "82" unit2 = "%">
-								if (!is_measure) {
-									idx_measure = (int) sentence_data.sent_attributes.size() - 1;
-									is_measure = is_marker_measure = true;
-								}
-								if (!is_marker_measure) { // add marker to existing marker
-									Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure];
-									ref.marker_ += " " + a_marker;
-									ref.offset_stop_ = it->GetTextPointerEnd() - pText;
-									is_marker_measure = true;
-								}
-								String at_value, at_unit, at_value2, at_unit2; // measurement attribute properties
-								String at_token = it->GetValue();
-								if (is_value && is_unit) { // separate value & unit properties
-										if (!RegExHandler.SplitValueUnit(it->GetNormalizedText(), at_value, at_unit)) {  // failed to separate
-											int parts = RegExHandler.Parser2(at_token, at_value, at_unit, at_value2, at_unit2); // refined value/unit parser
-											if (parts == 0) at_value = it->GetNormalizedText(); // set as Value
-										}
-								}
-								else {
-										if (is_value) at_value = it->GetNormalizedText();
-										if (is_unit) at_unit = it->GetNormalizedText();
-								}
-								Sent_Attribute& ref = sentence_data.sent_attributes[idx_measure]; // reference the newly added measuremnt attribute
-
-								// ref.optional_parameters.measurement.value_ = 
-								if (at_value.length()) ref.value_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
-								if (at_unit.length()) ref.unit_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
-								if (at_value2.length()) ref.value2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value2);
-								if (at_unit2.length()) ref.unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit2);
-							}								
 						}
 					}
 				}				

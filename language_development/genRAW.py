@@ -154,6 +154,10 @@ for text_file in f_rec:
                         sent_attribute_raw = sent_attribute_raw + ' value=\"' + sent_attribute['value'] + '\"'
                     if sent_attribute['unit']:
                         sent_attribute_raw = sent_attribute_raw + ' unit=\"' + sent_attribute['unit'] + '\"'
+                    if sent_attribute['value2']:
+                        sent_attribute_raw = sent_attribute_raw + ' value2=\"' + sent_attribute['value2'] + '\"'
+                    if sent_attribute['unit2']:
+                        sent_attribute_raw = sent_attribute_raw + ' unit2=\"' + sent_attribute['unit2'] + '\"'
 
                 sent_attribute_raw = sent_attribute_raw + '>'
                 # print(sent_attribute_raw)

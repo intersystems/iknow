@@ -35,6 +35,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test7(pError);
 		pError = "Issue37 : https://github.com/intersystems/iknow/issues/37";
 		test_collection.test8(pError);
+		pError = "Issue41 : https://github.com/intersystems/iknow/issues/41";
+		test_collection.Issue41(pError);
 
 	}
 	catch (std::exception& e) {
@@ -48,6 +50,28 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
+/* Issue#41
+SThe baby weighs 7 pounds 7 ounces.
+<attr type = "measurement" literal = "7 pounds 7 ounces." token = "7 pounds 7 ounces." value = "7" unit = "pounds" value2 = "7" unit2 = "ounces">
+*/
+void iKnowUnitTests::Issue41(const char* pMessage) // https://github.com/intersystems/iknow/issues/41
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"The baby weighs 7 pounds 7 ounces.");
+	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			if (attribute.value_ != string("7") || attribute.unit_ != string("pounds") || attribute.value2_ != string("7") || attribute.unit2_ != "ounces")
+				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
+		}
+	}
+}
+
 /* Issue#37
 The Certainty attribute in the English language model has a marker, spanand level.When using the m_index property in the Python interface, the marker can be found through['sent_attributes'], the span through['path_attributes'].The level, currently either 0 (uncertain) or 9 (certain), should be in['sent_attributes'] too, but it is missing.
 Example :
@@ -58,7 +82,7 @@ void iKnowUnitTests::test8(const char* pMessage) // https://github.com/intersyst
 {
 	iKnowEngine engine;
 
-	String text_source = IkStringEncoding::UTF8ToBase(u8"This might be a problem."); //  = > All Hiragana
+	String text_source = IkStringEncoding::UTF8ToBase(u8"This might be a problem.");
 	engine.index(text_source, "en"); // traces should show UDPosSentiment
 	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
 	int count_attributes = 0;

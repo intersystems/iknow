@@ -13,7 +13,7 @@ namespace testing {
 		void test5(const char *); // User DCT test
 		void test6(const char *); // Text Normalizer test
 		void test7(const char *); // Issue#31 : https://github.com/intersystems/iknow/issues/31
-		void test8(const char*); // Issue#37 : https://github.com/intersystems/iknow/issues/37 
-
+		void test8(const char *); // Issue#37 : https://github.com/intersystems/iknow/issues/37 
+		void Issue41(const char *); // Issue#41 : https://github.com/intersystems/iknow/issues/41
 	};
 }
