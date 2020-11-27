@@ -37,6 +37,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.test8(pError);
 		pError = "Issue41 : https://github.com/intersystems/iknow/issues/41";
 		test_collection.Issue41(pError);
+		pError = "Issue39 : https://github.com/intersystems/iknow/issues/39";
+		test_collection.Issue39(pError);
 
 	}
 	catch (std::exception& e) {
@@ -47,6 +49,34 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/* Issue#39
+* The Frequency attribute for 'daily' is missing in the RAW output for the following example:
+input:
+60 mg daily
+-> attributes: attr type="measurement" literal="60 mg daily" token="60 mg" value="60" unit="mg"
+*/
+void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersystems/iknow/issues/39
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"60 mg daily");
+	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			if (attribute.value_ != string("60") || attribute.unit_ != string("mg"))
+				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
+		}
+		if (attribute.type_ == Frequency) {
+			if (attribute.marker_ != string("daily"))
+				throw std::runtime_error("Frequency attribute not correct !" + string(pMessage));
+		}
 	}
 }
 
