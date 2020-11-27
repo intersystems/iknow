@@ -39,6 +39,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue41(pError);
 		pError = "Issue39 : https://github.com/intersystems/iknow/issues/39";
 		test_collection.Issue39(pError);
+		pError = "Issue42 : https://github.com/intersystems/iknow/issues/42";
+		test_collection.Issue42(pError);
 
 	}
 	catch (std::exception& e) {
@@ -52,18 +54,73 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
+/* Issue#42
+When an entity contains more than one marker of the same type, e.g.two Negation markers or two DateTime markers, the m_index property in the Python interface outputs them as two separate items.It would be better to collect them into one item.
+
+Example 1 : Il n'y avaient jamais des chiens.
+concerned entity : n'y avaient pas
+attribute output :
+[{'type': 'Negation', 'offset_start' : 5, 'offset_stop' : 8, 'marker' : "n'y", 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 1},
+{ 'type': 'Negation', 'offset_start' : 17, 'offset_stop' : 23, 'marker' : 'jamais', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 1 }]
+
+Example 2 : These reports are for the 1997 - 1998 academic year.
+concerned entity : 1997 - 1998 academic year
+attribute output :
+[{'type': 'DateTime', 'offset_start' : 28, 'offset_stop' : 37, 'marker' : '1997-1998', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 4}, 
+{ 'type': 'DateTime', 'offset_start' : 47, 'offset_stop' : 52, 'marker' : 'year.', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 4 }]
+*/
+void iKnowUnitTests::Issue42(const char* pMessage) // https://github.com/intersystems/iknow/issues/42
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"Il n'y avaient jamais des chiens.");
+	engine.index(text_source, "fr");
+	const Sentence& sent1 = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent1.sent_attributes.begin(); it_marker != sent1.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Negation) {
+			if (attribute.marker_ != string("n'y jamais"))
+				throw std::runtime_error("Negation marker not correct !" + string(pMessage));
+		}
+	}
+	text_source = IkStringEncoding::UTF8ToBase(u8"These reports are for the 1997 - 1998 academic year.");
+	engine.index(text_source, "en");
+	const Sentence& sent2 = *engine.m_index.sentences.begin(); // get sentence reference
+	count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent2.sent_attributes.begin(); it_marker != sent2.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == DateTime) {
+			if (!(attribute.marker_ == string("1997") || attribute.marker_ == string("1998 year.")))
+				throw std::runtime_error("DateTime marker not correct !" + string(pMessage));
+		}
+	}
+}
+
+
 /* Issue#39
 * The Frequency attribute for 'daily' is missing in the RAW output for the following example:
 input:
 60 mg daily
 -> attributes: attr type="measurement" literal="60 mg daily" token="60 mg" value="60" unit="mg"
+
+While avoiding giving specific sales figures, Bond told reporters that Asda's 2007 total sales came in at 8%-10%, and about 1% ahead of its target.
+IR: <attr type="measurement" literal="8%-10%," token="8%-10%," value="8" unit="%" value2="10" unit2="%">
+GH: <attr type="measurement" literal="8%-10%," token="8%-10%," value="8%-10%">
+
+On   31-MAY-2001,   after   over a year   without  any  pain killers,  the  patient   took   two "twenty milligram" tablets   and  the  next day,   "all hell   broke   loose."
+IR: <attr type="measurement" literal="two "twenty milligram" tablets" token="two "twenty milligram"" value="two" value2="twenty" unit2="milligram">
+GH: <attr type="measurement" literal="two "twenty milligram" tablets" token="two "twenty milligram"" value="two" unit="milligram" value2="twenty">
+
 */
 void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersystems/iknow/issues/39
 {
 	iKnowEngine engine;
 
 	String text_source = IkStringEncoding::UTF8ToBase(u8"60 mg daily");
-	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	engine.index(text_source, "en");
 	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
 	int count_attributes = 0;
 	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
@@ -78,6 +135,33 @@ void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersy
 				throw std::runtime_error("Frequency attribute not correct !" + string(pMessage));
 		}
 	}
+	String text2_source = IkStringEncoding::UTF8ToBase(u8"While avoiding giving specific sales figures, Bond told reporters that Asda's 2007 total sales came in at 8%-10%, and about 1% ahead of its target.");
+	engine.index(text2_source, "en");
+	const Sentence& sent2 = *engine.m_index.sentences.begin(); // get sentence reference
+	count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent2.sent_attributes.begin(); it_marker != sent2.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			if (attribute.value_ != string("8") || attribute.unit_ != string("%") || attribute.value2_ != string("10") || attribute.unit2_ != string("%"))
+				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
+			break;
+		}
+	}
+	String text3_source = IkStringEncoding::UTF8ToBase(u8"On   31-MAY-2001,   after   over a year   without  any  pain killers,  the  patient   took   two \"twenty milligram\" tablets   and  the  next day,   \"all hell   broke   loose.\"");
+	engine.index(text3_source, "en");
+	const Sentence& sent3 = *engine.m_index.sentences.begin(); // get sentence reference
+	count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent3.sent_attributes.begin(); it_marker != sent3.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			if (attribute.value_ != string("two") || attribute.unit_ != string("") || attribute.value2_ != string("twenty") || attribute.unit2_ != string("milligram"))
+				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
+			break;
+		}
+	}
+
 }
 
 /* Issue#41
@@ -89,7 +173,7 @@ void iKnowUnitTests::Issue41(const char* pMessage) // https://github.com/intersy
 	iKnowEngine engine;
 
 	String text_source = IkStringEncoding::UTF8ToBase(u8"The baby weighs 7 pounds 7 ounces.");
-	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	engine.index(text_source, "en");
 	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
 	int count_attributes = 0;
 	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
@@ -113,7 +197,7 @@ void iKnowUnitTests::test8(const char* pMessage) // https://github.com/intersyst
 	iKnowEngine engine;
 
 	String text_source = IkStringEncoding::UTF8ToBase(u8"This might be a problem.");
-	engine.index(text_source, "en"); // traces should show UDPosSentiment
+	engine.index(text_source, "en");
 	const Sentence& sent = *engine.m_index.sentences.begin(); // get sentence reference
 	int count_attributes = 0;
 	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
@@ -132,7 +216,7 @@ void iKnowUnitTests::test7(const char* pMessage) // https://github.com/intersyst
 	iKnowEngine engine;
 
 	String text_source = IkStringEncoding::UTF8ToBase(u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。"); //  = > All Hiragana
-	engine.index(text_source, "ja", true); // traces should show UDPosSentiment
+	engine.index(text_source, "ja", true);
 	bool bFurigana = false;
 	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
 		if (it->find("LexrepCreated") != string::npos && it->find("type=Nonrelevant") != string::npos) {
