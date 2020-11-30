@@ -70,7 +70,9 @@ jobs:
             ~/ccache
             ~/pipcache
       - name: install dependencies
-        run: sudo apt-get install -y qemu-user-static binfmt-support
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static binfmt-support
       - name: build
         run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=350M -e ICU_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/.github/workflows/build_manylinux.sh
       - name: upload wheel artifact
@@ -99,7 +101,9 @@ jobs:
             ~/ccache
             ~/pipcache
       - name: install dependencies
-        run: sudo apt-get install -y qemu-user-static binfmt-support
+        run:  |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user-static binfmt-support
       - name: build
         run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=350M -e ICU_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/.github/workflows/build_manylinux.sh
       - name: upload wheel artifact
