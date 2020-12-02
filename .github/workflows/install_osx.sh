@@ -3,6 +3,8 @@
 # Install build dependencies on Mac OS X
 #
 # Required environment variables:
+#
+# - XCODE_SELECTED is the path to the XCode application to use
 # - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
 # - GITHUB_EVENT_NAME is the event that triggered the workflow
 # - GITHUB_REF is the branch ref that triggered the workflow
@@ -43,6 +45,9 @@ pyinstall_fallback () {
       ;;
   esac
 }
+
+# choose XCode version
+sudo xcode-select -s "$XCODE_SELECTED"
 
 # pyenv
 brew install pyenv

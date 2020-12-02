@@ -119,6 +119,7 @@ jobs:
         uses: actions/checkout@v2
       - name: set up environment
         run: |
+          echo "XCODE_SELECTED=/Applications/Xcode_12.2.app" >> $GITHUB_ENV
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
           mkdir -p $HOME/cache
@@ -134,17 +135,22 @@ jobs:
       - name: download cached ICU installation
         uses: actions/cache@v2
         with:
-          key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
+          key: ${{ github.job }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}
           path: ${{ env.ICUDIR }}
-      - name: download cached ccache files, pip files, Python installations
+      - name: download cached Python installations
         uses: actions/cache@v2
         with:
-          key: ${{ github.job }}-run-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-run-
+          key: ${{ github.job }}-Python-${{ env.XCODE_SELECTED }}-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-Python-${{ env.XCODE_SELECTED }}-
+          path: ${{ env.PYINSTALL_DIR }}
+      - name: download cached ccache files, pip files
+        uses: actions/cache@v2
+        with:
+          key: ${{ github.job }}-ccache-pip-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-ccache-pip-
           path: |
             ${{ env.CCACHE_DIR }}
             ${{ env.PIP_CACHE_DIR }}
-            ${{ env.PYINSTALL_DIR }}
       - name: install dependencies
         run: .github/workflows/install_osx.sh
       - name: build
