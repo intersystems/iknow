@@ -364,11 +364,10 @@ def update_wheel_record(whl_dir):
     with open(record_filepath, 'w') as record_file:
         for file_path in filepath_list:
             if file_path == record_filepath:
-                record_file.write(os.path.relpath(record_filepath, whl_dir))
+                record_file.write(os.path.relpath(record_filepath, whl_dir).replace('\\', '/'))
                 record_file.write(',,\n')
             else:
-                record_line = '{},sha256={},{}\n'.format(
-                    os.path.relpath(file_path, whl_dir), *rehash(file_path))
+                record_line = '{},sha256={},{}\n'.format(os.path.relpath(file_path, whl_dir).replace('\\', '/'), *rehash(file_path))
                 record_file.write(record_line)
 
 
