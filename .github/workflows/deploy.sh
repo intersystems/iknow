@@ -38,7 +38,7 @@
 
 set -euxo pipefail
 
-EXPECTED_WHEEL_COUNT=5  # 5 platforms
+EXPECTED_WHEEL_COUNT=4  # 4 platforms
 
 if [ "$GITHUB_EVENT_NAME" = push ] && \
     [ "$GITHUB_REF" = refs/heads/master ] && \
