@@ -134,7 +134,7 @@ class PatchLib:
 
     def replaceneeded(self, lib_path, old_deps, name_map):
         """For the shared library at lib_path, replace its declared dependencies
-        on old_dep_names with those in name_map.
+        on old_deps with those in name_map.
 
         old_deps: a nonempty list of dependencies
             (either by name or path, depending on the value currently in the
