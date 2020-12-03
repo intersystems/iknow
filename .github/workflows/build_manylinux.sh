@@ -16,16 +16,14 @@ set -euxo pipefail
 
 ##### Install and configure dependencies #####
 # epel-release
-#   Needed on some platforms to install ccache.
+#   Needed to install ccache.
 # dos2unix
 #   Give ICU build scripts Unix line endings so that they can be executed. For
 #   some reason, ICU source releases use Windows line endings.
 # ccache
 #   Speed up build times by caching results from previous builds.
 PROCESSOR="$(uname -p)"
-if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
-  yum install -y epel-release
-fi
+yum install -y epel-release
 if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
   # this mirror is often slow, so disable it
   echo "exclude=csc.mcs.sdsmt.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
