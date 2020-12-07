@@ -104,7 +104,7 @@ void CProcess::IndexFunc(IkIndexInput& text_input, OutputFunc func, void *userda
 #ifdef ISC_IRIS
 			iKnowKernel::SetError("IKInternalEngineFault", ba.what()); // Notify memory problems to kernel
 #else
-			std::cerr << "IKInternalEngineFault" << ba.what();
+			std::cerr << "IKInternalEngineFault: \"" << ba.what() << "\"";
 #endif
 			// Todo : give indication of text size 
 		}

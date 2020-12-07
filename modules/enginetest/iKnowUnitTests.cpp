@@ -41,6 +41,12 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue39(pError);
 		pError = "Issue42 : https://github.com/intersystems/iknow/issues/42";
 		test_collection.Issue42(pError);
+		pError = "Saskia1";
+		test_collection.Saskia1(pError);
+		pError = "Saskia2";
+		test_collection.Saskia2(pError);
+		pError = "Saskia3";
+		test_collection.Saskia3(pError);
 
 	}
 	catch (std::exception& e) {
@@ -51,6 +57,78 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/* Reported by Saskia
+"This is a conviction under an old, old New York law that's not used much for criminal purposes," said Stephen Neal, a lawyer for McNenney.
+IR: <attr type = "negation" literal = "that's not used" token = "not">
+PY : <attr type = "negation" literal = "that's not used" token = "'s not">
+*/
+void iKnowUnitTests::Saskia3(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"\"This is a conviction under an old, old New York law that's not used much for criminal purposes,\" said Stephen Neal, a lawyer for McNenney.");
+	engine.index(text_source, "en");
+	const Sentence& sent1 = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent1.sent_attributes.begin(); it_marker != sent1.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Negation) {
+			if (attribute.marker_ != string("not"))
+				throw std::runtime_error("Negation marker \"not\" not correct !" + string(pMessage));
+		}
+	}
+}
+
+
+/* Reported by Saskia
+One day, while selling corn, Phiona looks through the crooked planks of a youth ministry, run by Robert Katende(David Oyelowo).
+IR: <attr type="time" literal="One day," token="One day,">
+PY: <attr type="time" literal="One day," token="One day, One day,">
+*/
+void iKnowUnitTests::Saskia2(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"One day, while selling corn, Phiona looks through the crooked planks of a youth ministry, run by Robert Katende(David Oyelowo).");
+	engine.index(text_source, "en");
+	const Sentence& sent1 = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent1.sent_attributes.begin(); it_marker != sent1.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == DateTime) {
+			if (attribute.marker_ != string("One day,"))
+				throw std::runtime_error("DateTime marker \"One day,\" not correct !" + string(pMessage));
+		}
+	}
+
+}
+
+/* Reported by Saskia
+S C3aR(-/-) mice on HFD are transiently resistant to diet-induced obesity during a 8 week period.[1]
+IR: <attr type = "duration" literal = "8 week period." token = "8 week period.">
+PY : <attr type = "duration" literal = "8 week period." token = "8 week">
+*/
+void iKnowUnitTests::Saskia1(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	String text_source = IkStringEncoding::UTF8ToBase(u8"C3aR(-/-)\nmice on HFD are transiently resistant to diet - induced obesity during a 8 week\nperiod.");
+	engine.index(text_source, "en");
+
+	const Sentence& sent1 = *engine.m_index.sentences.begin(); // get sentence reference
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = sent1.sent_attributes.begin(); it_marker != sent1.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Duration) {
+			if (attribute.marker_ != string("8 week period."))
+				throw std::runtime_error("Duration marker \"8 week period.\" not correct !" + string(pMessage));
+		}
 	}
 }
 

@@ -17,6 +17,8 @@ namespace testing {
 		void Issue41(const char *); // Issue#41 : https://github.com/intersystems/iknow/issues/41
 		void Issue39(const char*); // Issue#41 : https://github.com/intersystems/iknow/issues/39
 		void Issue42(const char*); // Issue#41 : https://github.com/intersystems/iknow/issues/42
-
+		void Saskia1(const char*); // see mail Saskia
+		void Saskia2(const char*); // see mail Saskia
+		void Saskia3(const char*); // see mail Saskia
 	};
 }

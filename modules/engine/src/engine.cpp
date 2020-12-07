@@ -202,11 +202,9 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 					}
 				}
 			}
-			std::map<iknowdata::Attribute, Sent_Attribute*> mapLexrepAttributes;
-			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
-				std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
-				char certainty_data = it->GetCertainty(); // certainty char, "0" to "9"
-
+			std::map<iknowdata::Attribute, size_t> mapLexrepAttributes;
+			for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps		
+				std::set<iknowdata::Attribute> setTokenAttributes; // token as marker
 				const size_t label_count = it->NumberOfLabels();
 				for (size_t i = 0; i < label_count; ++i) {
 					FastLabelSet::Index idx_label = it->GetLabelIndexAt(i);
@@ -223,17 +221,30 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 									id_property = kb->PropertyIdForName(param_attribute);
 							}
 							iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(id_property);
+							std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
+							if (it != lexrep->LexrepsBegin()) { // if token starts with " ", remove it since it belongs to the previous token
+								if (a_marker[0] == ' ') { // remove first token
+									size_t next_space = a_marker.find(' ', 1);
+									if (next_space != string::npos) {
+										string stripped(&a_marker[next_space+1]);
+										a_marker = stripped;
+									}
+								}
+							}
 							if (a_type != iknowdata::Attribute::Measurement) { // measurements are handled separately
 								if (mapLexrepAttributes.count(a_type)) { // continue existing
-									Sent_Attribute* p_att = mapLexrepAttributes[a_type];
+									if (setTokenAttributes.count(a_type)) // token already in.
+										continue;
 
-									p_att->offset_stop_ = it->GetTextPointerEnd() - pText; // enlarge the literal
-									p_att->marker_ += string(" ") + a_marker; // add the extra marker
+									size_t idxSentAttribute = mapLexrepAttributes[a_type];
+									sentence_data.sent_attributes[idxSentAttribute].offset_stop_ = it->GetTextPointerEnd() - pText; // enlarge the literal
+									sentence_data.sent_attributes[idxSentAttribute].marker_ += string(" ") + a_marker; // add the extra marker
 								}
 								else { // new
 									sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, it->GetTextPointerBegin() - pText, it->GetTextPointerEnd() - pText, a_marker)); // write marker info
 									sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
 									if (id_property == IKATTCERTAINTY) { // certainty attribute, emit the certainty level
+										char certainty_data = it->GetCertainty(); // certainty char, "0" to "9"
 										if (certainty_data != '\0') {
 											std::string certainty_value = "0";
 											certainty_value[0] = certainty_data; // '0' to '9'
@@ -241,7 +252,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 											ref.value_ = certainty_value;
 										}
 									}
-									mapLexrepAttributes.insert(make_pair(a_type, &sentence_data.sent_attributes.back())); // link lexrep attribute to data structure
+									mapLexrepAttributes.insert(make_pair(a_type, sentence_data.sent_attributes.size()-1)); // link lexrep attribute to data structure
+									setTokenAttributes.insert(a_type);
 								}
 							}
 						}
