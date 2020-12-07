@@ -17,6 +17,12 @@ on:
       - 'LICENSE'
       - '**.md'
   pull_request:
+  workflow_dispatch:
+    inputs:
+      FORCE_DEPLOY:
+        description: Set to 1 to force deployment (effective for master branch only)
+        required: true
+        default: 0
 
 env:
   ICUDIR: ${{ github.workspace }}/thirdparty/icu
@@ -203,13 +209,14 @@ jobs:
           path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
     needs: [manylinux2010_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
     runs-on: ubuntu-20.04
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       TESTPYPI_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
       COMMIT_RANGE: ${{ join(github.event.commits.*.id, ' ') }}
+      FORCE_DEPLOY: ${{ github.event.inputs.FORCE_DEPLOY }}
     steps:
       - name: check out repository
         uses: actions/checkout@v2
@@ -261,7 +268,9 @@ jobs:
             https://github.com/${{ github.repository}}/actions/runs/${{ github.run_id}}
             and manually uploading them to PyPI. Note that these wheels contain
             all commits in the push, including those that were made after the
-            version bump.
+            version bump. Alternatively, you can use the **Run workflow**
+            button at https://github.com/${{ github.repository}}/actions?query=workflow%3ACI
+            to force a deployment.
       - name: check PyPI project size
         if: env.DEPLOY_OCCURRED == '1'
         run: ${{ github.workspace }}/.github/workflows/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
