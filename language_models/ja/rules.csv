@@ -13,6 +13,12 @@
 4548;1;UDConcept;^UDConcept+JPCon;
 4549;1;UDNegation;^UDNegation+JPNegation;
 
+/* ---------- PHASE 2 ----------
+/*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
+
+4608;2;typeConcept|JPParenOpen|*JPKatakana|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+4609;2;typeConcept|JPParenOpen|*JPNumber|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
 
@@ -440,7 +446,7 @@
 3618;5;SBegin|JPyaku|JPNumber;*|JPNonRelevant|JPNumber;
 3624;5;JPno|JPyaku|JPNumber;JPno|JPNumber|Join;
 4114;5;^BracketClose+^JPLinkV+^JPAuxVerbOther+^JPVerb+^JPNaruVerb+^SBegin|JPra|JPyaku|JPNumber;*|JPSuffixNoun|JPNumber|Join;
-11;5;^JPAttributive+^JPCon+^JPPrefix+^JPSuruNoun+^JPsa+^JPshita_kanji_1+^SBegin|JPyaku|JPNumber;+Dummy|JPNonRelevant|JPNumber;
+11;5;^JPAttributive+^JPCon+^JPPrefix+^JPSuruNoun+^JPsa+^JPshita_kanji_1+^SBegin|JPyaku|JPNumber;+Dummy|JPNumber|Join;
 4528;5;JPNumber|JPDate+JPEndConcept;JPEndConcept+DateTime+JPDateTime|Join;
 853;5;JPNumber|JPDate;JPDate+DateTime+JPDateTime|Join;
 970;5;JPde|JPNumber|JPTime;JPEndRelation|^JPNumber|^JPTime;
@@ -4147,7 +4153,7 @@
 2959;13;SBegin|BracketOpen|JPCon|JPCon|JPha;*|BracketOpen|+Topic|Join|JPParticleHA;
 2753;13;^Topic+JPCon|JPha;+Subject|^JPParticleHA;
 2794;13;^OtherEntity+^Topic+JPCon|JPParticleHA;+Subject|JPParticleHA;
-2786;13;JPCon|BracketOpen|JPCon|BracketClose|JPha;+Subject|BracketOpen|JPCon|BracketClose|JPParticleHA;
+2786;13;JPCon|BracketOpen|JPCon|BracketClose|JPha;+Subject|BracketOpen|^JPCon|BracketClose|JPParticleHA;
 2788;13;JPCon|BracketOpen|JPCon|JPCon|BracketClose|JPha;+Subject|BracketOpen|JPCon|JPCon|BracketClose|JPParticleHA;
 2805;13;Predicate|BracketOpen|JPCon|BracketClose|JPga;^Predicate|BracketOpen|+Subject|BracketClose|JPParticleGA;
 2776;13;JPCon|JPParticleMO;+Object+Subject|JPParticleMO;
@@ -4213,6 +4219,14 @@
 3988;13;typeOther+^BracketOpen|"あ";+Dummy|Join;
 4045;13;"ぁ";Join;
 4047;13;"ぜ";Join;
+
+/* ---------- PHASE 19 ----------
+/*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
+
+4612;19;typeConcept|JPParenOpen|*JPKatakana|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+4613;19;typeConcept|JPParenOpen|*JPNumber|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
+4610;19;JPParenOpen;-JPParenOpen;
+4611;19;JPParenClose;-JPParenClose;
 
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS
