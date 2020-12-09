@@ -105,11 +105,11 @@ class PatchLib:
             p = subprocess.run(cmd, stdout=subprocess.PIPE,
                                stderr=subprocess.PIPE,
                                check=True, universal_newlines=True)
-            lib_name = os.path.split(lib_path)[1]
+            lib_name = os.path.basename(lib_path)
             needed = map(up_to_first_space, p.stdout.rstrip().split('\n'))
             needed = (s.strip() for s in needed)
             return [s for s in needed
-                    if os.path.split(s)[1] != lib_name and
+                    if os.path.basename(s) != lib_name and
                     (fnmatch.fnmatch(s, '*' + iculibs_name_pattern) or
                      fnmatch.fnmatch(s, '*' + enginelibs_name_pattern))]
         elif sys.platform == 'linux':
@@ -145,7 +145,7 @@ class PatchLib:
             for old_dep in old_deps:
                 cmd.append('-change')
                 cmd.append(old_dep)
-                old_dep_name = os.path.split(old_dep)[1]
+                old_dep_name = os.path.basename(old_dep)
                 new_dep_name = name_map[old_dep_name]
                 new_dep = os.path.join('@loader_path', new_dep_name)
                 cmd.append(new_dep)
@@ -230,7 +230,7 @@ class MergeCommand(Command):
             raise BuildError('Multiple platform tags were found in the wheels in dist/. '
                              'Only wheels with the same platform tag can be merged.')
         for whl_path in whl_paths:
-            whl_name = os.path.split(whl_path)[1]
+            whl_name = os.path.basename(whl_path)
             whl_name = whl_name[:-len('.whl')]  # strip off the extension
             whl_name_split = whl_name.split('-')
             # whl_name_split has the form [name, version, python_tag, abi_tag, platform_tag]
@@ -266,7 +266,7 @@ class MergeCommand(Command):
         # copy all engine modules into extracted contents of first wheel
         for extracted_dir in extracted_dirs[1:]:
             for module_path in glob.iglob(os.path.join(extracted_dir, 'iknowpy', module_name_pattern)):
-                print('copying {} -> {}'.format(module_path, os.path.join(extracted_dirs[0], 'iknowpy', os.path.split(module_path)[1])))
+                print('copying {} -> {}'.format(module_path, os.path.join(extracted_dirs[0], 'iknowpy', os.path.basename(module_path))))
                 shutil.copy2(module_path, os.path.join(extracted_dirs[0], 'iknowpy'))
 
         # update metadata
@@ -381,7 +381,7 @@ def repackage_wheel(whl_path, whl_dir):
     for root, _, files in os.walk(whl_dir):
         for file in files:
             filepath_list.append(os.path.join(root, file))
-    os.makedirs(os.path.split(whl_path)[0], exist_ok=True)
+    os.makedirs(os.path.dirname(whl_path), exist_ok=True)
     with zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED) as whl_file:
         for file_path in filepath_list:
             print('adding {}'.format(file_path))
@@ -510,7 +510,7 @@ def patch_wheel(whl_path, extracted=False):
     repair_lib_dir = os.path.join(extracted_dir, 'iknowpy')
     for lib_path in iculib_paths:
         if os.path.islink(lib_path):
-            iculib_map[os.path.split(lib_path)[1]] = os.path.split(os.path.realpath(lib_path))[1]
+            iculib_map[os.path.basename(lib_path)] = os.path.basename(os.path.realpath(lib_path))
         else:
             shutil.copy2(lib_path, repair_lib_dir)
     for lib_path in enginelib_paths:
@@ -528,7 +528,7 @@ def patch_wheel(whl_path, extracted=False):
     patcher = PatchLib()
     lib_rename = {}  # dict from old lib name to new lib name
     for lib_path in repair_lib_paths:
-        lib_name = os.path.split(lib_path)[1]
+        lib_name = os.path.basename(lib_path)
         if lib_name.startswith('engine.'):  # don't rename main module file
             lib_rename[lib_name] = lib_name
         else:
