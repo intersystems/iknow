@@ -559,7 +559,9 @@ def patch_wheel(whl_path, extracted=False):
                 patcher.replaceneeded(lib_path, dep_libs, lib_rename)
             os.rename(lib_path, os.path.join(lib_dir, lib_rename[lib_name]))
             if not lib_name.startswith('engine.'):
-                # copy patched library into cache
+                # copy patched library into cache and remove old entries
+                for old_entry in glob.iglob(os.path.join(CACHE_DIR, lib_name[:lib_name.index('.')] + '-*')):
+                    remove(old_entry)
                 shutil.copy2(os.path.join(lib_dir, lib_rename[lib_name]), CACHE_DIR)
             print()
 
