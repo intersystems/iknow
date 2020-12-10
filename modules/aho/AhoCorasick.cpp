@@ -57,7 +57,7 @@ namespace iknow {
         static KbRawDataRegistry kKbRawDataRegistry;
         return kKbRawDataRegistry;
     }
-    const RawDataPointer GetRawDataPointer(const std::string& name, size_t index) {
+    RawDataPointer GetRawDataPointer(const std::string& name, size_t index) {
         KbRawDataRegistry::Handle handle = GetKbRawDataRegistry().Lookup(name, index);
         if (handle == KbRawDataRegistry::kNoSuchHandle) return 0;
         return *GetKbRawDataRegistry().Retrieve(handle);

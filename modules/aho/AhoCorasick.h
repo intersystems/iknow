@@ -87,7 +87,7 @@ namespace iknow {
     AHO_API void ClearALIModel(const std::string& name);
 
     typedef const unsigned char* RawDataPointer;
-    AHO_API const RawDataPointer GetRawDataPointer(const std::string& name, size_t index = 0);
+    AHO_API RawDataPointer GetRawDataPointer(const std::string& name, size_t index = 0);
     AHO_API void SetRawDataPointer(const std::string& name, RawDataPointer* raw_data_adress);
     AHO_API void CleaRAWrModel(const std::string& name);
   }
