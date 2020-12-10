@@ -228,7 +228,7 @@ unsigned char* data_buffer(bool b_init)
 	return (unsigned char*)(b_init ? memset(udct_memory, 0, sizeof udct_memory) : udct_memory);
 
 }
-unsigned char* iknow::shell::base_pointer = NULL;
+const unsigned char* iknow::shell::base_pointer = NULL;
 
 unsigned char* UserKnowledgeBase::generateRAW(bool IsCompiled)
 {

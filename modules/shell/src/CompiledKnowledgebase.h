@@ -7,6 +7,7 @@
 namespace iknow {
   namespace model {
     class Model;
+    typedef const unsigned char* RawDataPointer;
   }
 }
 
@@ -16,8 +17,9 @@ namespace iknow {
     public:
       static const iknow::model::Model* GetModel(const std::string& name, size_t index);
       static bool IsCompiledModel(const std::string& name);
+      static const iknow::model::RawDataPointer GetRawData(const std::string& name);
       CompiledKnowledgebase(RawKBData* kb_data, const std::string& model_id);
-      CompiledKnowledgebase(unsigned char* kb_data, const std::string& model_id);
+      CompiledKnowledgebase(const unsigned char* kb_data, const std::string& model_id);
       CompiledKnowledgebase(SharedMemoryKnowledgebase* sm_kb, const std::string& model_id);
       iknow::core::IkLexrep NextLexrep(iknow::core::Lexreps::iterator& current, iknow::core::Lexreps::iterator end) const;
       bool MoreLexrepsBuffered() const { return !buffered_lexrep_vector_.empty(); }

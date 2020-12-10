@@ -26,8 +26,8 @@ using std::map;
 using std::back_inserter;
 using std::transform;
 
-SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(RawKBData* kb_data) : kb_data_(kb_data) {}
-SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(unsigned char* kb_data) : kb_data_(reinterpret_cast<RawKBData*>(kb_data)) {}
+SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(const RawKBData* kb_data) : kb_data_(kb_data) {}
+SharedMemoryKnowledgebase::SharedMemoryKnowledgebase(const unsigned char* kb_data) : kb_data_(reinterpret_cast<const RawKBData*>(kb_data)) {}
 
 void SharedMemoryKnowledgebase::FilterInput(iknow::base::String& input) const {
     OFFSETPTRGUARD;

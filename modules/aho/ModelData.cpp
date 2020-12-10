@@ -26,9 +26,32 @@ static const LexrepData kLexrepData(OneStateMap(),
 				    HasRegex(),
 				    IsIdeographic());
 
+
+
+namespace iknow {
+	namespace model {
+		namespace MODELNS {
+
+#if MODELINDEX == 0
+#ifdef _IRIS
+			static RawDataPointer kLanguageData = NULL; // empty version
+#else
+			static const unsigned char kb_data[] = { // memory block representing KB data
+#include "kb_data.inl"
+			};
+			static RawDataPointer kLanguageData = &kb_data[0]; // empty version
+#endif
+#endif
+		}
+	}
+}
+
 static const DataModel kModel(kLexrepData);
 
 void iknow::model::MODELNS::Register() {
   SetModel(STR(MODELID), MODELINDEX, &kModel);
+#if MODELINDEX == 0 // RAW datablock only stored once
+  SetRawDataPointer(STR(MODELID), &kLanguageData);
+#endif
 }
 

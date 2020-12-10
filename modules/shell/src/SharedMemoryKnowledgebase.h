@@ -71,11 +71,11 @@ namespace iknow {
     public:
 
       //for reading from a pointer to a table created by the above constructor
-      SharedMemoryKnowledgebase(RawKBData* kb_data);
+      SharedMemoryKnowledgebase(const RawKBData* kb_data);
       //does the cast to a RawKBData
-      SharedMemoryKnowledgebase(unsigned char* kb_data);
+      SharedMemoryKnowledgebase(const unsigned char* kb_data);
 
-      unsigned char* RawData() const { return reinterpret_cast<unsigned char*>(kb_data_); }
+      const unsigned char* RawData() const { return reinterpret_cast<const unsigned char*>(kb_data_); }
 
       void FilterInput(iknow::base::String& input) const;
       
@@ -264,7 +264,7 @@ namespace iknow {
       //Sometimes we generate multiple lexreps while doing a NextLexrep().
       //Save the extras here to return on the next call. Stored in reverse order (next is back())
       mutable LexrepQueue buffered_lexreps_;
-      RawKBData* kb_data_;
+      const RawKBData* kb_data_;
 
     private:
       const KbLabel* GetLabelAt(iknow::core::FastLabelSet::Index index) const {

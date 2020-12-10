@@ -392,10 +392,12 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	m_traces.clear();
 	UData udata(m_index.sentences, m_index.proximity, m_traces);
 
-	SharedMemoryKnowledgebase skb = language_code_map.Lookup(utf8language);
-
-	CompiledKnowledgebase ckb(&skb, utf8language);
-	CProcess::type_languageKbMap temp_map;
+	iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(utf8language);
+	if (!kb_raw_data) { // no kb raw data in language module
+		kb_raw_data = language_code_map.Lookup(utf8language);
+	}
+	CompiledKnowledgebase ckb(kb_raw_data, utf8language);
+	CProcess::type_languageKbMap temp_map; // storage for all KB's
 	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
 	CProcess process(temp_map);
 

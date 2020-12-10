@@ -41,28 +41,28 @@ namespace iknow {
     public:
       DataModel(const LexrepData& data) : f_(data) {}
       State GotoChar(State s, Char c) const {
-	return f_.Goto(s,c);
+	    return f_.Goto(s,c);
       }
       State Goto(State s, const Char* begin, const Char* end) const {
-	return f_.Goto(s, begin, end);
+	    return f_.Goto(s, begin, end);
       }
       State GotoWord(State s, const Char* begin, const Char* end) const {
-	return f_.Goto(s, begin, end);
+	    return f_.Goto(s, begin, end);
       }
       State Failure(State s) const {
-	return f_.Failure(s);
+	    return f_.Failure(s);
       }
       const Match* OutputBegin(State s) const {
-	return f_.OutputBegin(s);
+	    return f_.OutputBegin(s);
       }
       size_t OutputCount(State s) const {
-	return f_.OutputEnd(s) - f_.OutputBegin(s);
+	    return f_.OutputEnd(s) - f_.OutputBegin(s);
       }
       size_t MaxWordCount() const {
-	return f_.MaxWordCount();
+	    return f_.MaxWordCount();
       }
       bool IsIdeographic() const {
-	return f_.IsIdeographic();
+	    return f_.IsIdeographic();
       }
     private:
       LexrepFunctions f_;
@@ -85,6 +85,11 @@ namespace iknow {
     AHO_API const ALIModel* GetALIModel(const std::string& name, size_t index = 0);
     AHO_API const ALIModel* SetALIModel(const std::string& name, size_t index, const ALIModel* model);
     AHO_API void ClearALIModel(const std::string& name);
+
+    typedef const unsigned char* RawDataPointer;
+    AHO_API const RawDataPointer GetRawDataPointer(const std::string& name, size_t index = 0);
+    AHO_API void SetRawDataPointer(const std::string& name, RawDataPointer* raw_data_adress);
+    AHO_API void CleaRAWrModel(const std::string& name);
   }
 }
 #endif

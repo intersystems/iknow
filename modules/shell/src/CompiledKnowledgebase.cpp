@@ -57,7 +57,9 @@ MODELINIT(sv)
 MODELINIT(uk)
 MODELINIT(cs)
 
-
+const RawDataPointer CompiledKnowledgebase::GetRawData(const std::string& name) {
+    return iknow::model::GetRawDataPointer(name);
+}
 
 const Model* CompiledKnowledgebase::GetModel(const std::string& name, size_t index) {
   return iknow::model::GetModel(name, index);
@@ -84,9 +86,11 @@ CompiledKnowledgebase::CompiledKnowledgebase(RawKBData* kb_data, const std::stri
   ConstructModels(model_id);
 }
 
-CompiledKnowledgebase::CompiledKnowledgebase(unsigned char* kb_data, const std::string& model_id) :
-  SharedMemoryKnowledgebase(kb_data) {
+CompiledKnowledgebase::CompiledKnowledgebase(const unsigned char* kb_data, const std::string& model_id) :
+    SharedMemoryKnowledgebase(kb_data) {
   ConstructModels(model_id);
+
+  // SharedMemoryKnowledgebase skb = models_[0].;
 }
 
 CompiledKnowledgebase::CompiledKnowledgebase(SharedMemoryKnowledgebase* sm_kb, const std::string& model_id) :
