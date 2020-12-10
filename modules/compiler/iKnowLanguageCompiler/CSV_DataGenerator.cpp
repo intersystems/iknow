@@ -565,7 +565,7 @@ void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& trans
 	table = allocator.Insert(table_builder.Build(allocator));
 }
 
-unsigned char* iknow::shell::base_pointer = NULL;
+const unsigned char* iknow::shell::base_pointer = NULL;
 
 void CSV_DataGenerator::generateRAW(bool IsCompiled)
 {

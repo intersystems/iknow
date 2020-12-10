@@ -146,11 +146,12 @@ namespace iknow {
 	
 #ifdef INCLUDE_GENERATE_IMAGE_CODE
 	  void generate_image(std::string& dir_name, std::string kb_name) { // data logging
-		  std::string image_file(dir_name + "/kb_" + kb_name + "_data.c");
-		  std::ofstream ofs = std::ofstream(image_file); // Do ##class(Util).OutputToFile(dir _ "/OneStateMap.inl")
+		  // std::string image_file(dir_name + "/kb_" + kb_name + "_data.c");
+		  std::string image_file(dir_name + "/" + kb_name + "/kb_data.inl");
+		  std::ofstream ofs = std::ofstream(image_file); 
 		  if (ofs.is_open()) {
 			  std::string data_name = "kb_" + kb_name + "_data[]";
-			  ofs << "const unsigned char " << data_name << " = { // memory block representing KB data"; // fprintf(stream, "const unsigned char %s = { // memory block representing KB data", data_name.c_str());
+			  // ofs << "const unsigned char " << data_name << " = { // memory block representing KB data"; // fprintf(stream, "const unsigned char %s = { // memory block representing KB data", data_name.c_str());
 			  ofs << hex; // change to hexadecimal format for writing
 			  size_t data_size = BytesUsed();
 			  size_t cnt = static_cast<size_t>(0);
@@ -158,7 +159,7 @@ namespace iknow {
 				  if (!(cnt % static_cast<size_t>(8))) ofs << "\n\t"; // fprintf(stream, "\n\t");
 				  ofs << "0x" << (int)(*(raw_.Begin() + cnt)) << ", "; // fprintf(stream, "0x%x, ", *(raw_.Begin() + cnt));
 			  }
-			  ofs << "0x" << (int)(*(raw_.Begin() + cnt)) << "\n};\n"; // fprintf(stream, "0x%x\n};\n", *(raw_.Begin() + cnt));
+			  ofs << "0x" << (int)(*(raw_.Begin() + cnt)); // << "\n};\n"; // fprintf(stream, "0x%x\n};\n", *(raw_.Begin() + cnt));
 			  ofs.close();
 		  } else {
 			  std::string error_message("Cannot open " + image_file + " for writing !");

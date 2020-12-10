@@ -337,48 +337,7 @@ iKnowEngine::~iKnowEngine() // Destructor
 {
 }
 
-typedef std::map<iknow::base::String, iknow::core::IkKnowledgebase*> KnowledgebaseMap;
-
-extern "C" {
-	extern const unsigned char kb_en_data[];
-	extern const unsigned char kb_de_data[];
-	extern const unsigned char kb_ru_data[];
-	extern const unsigned char kb_es_data[];
-	extern const unsigned char kb_fr_data[];
-	extern const unsigned char kb_ja_data[];
-	extern const unsigned char kb_nl_data[];
-	extern const unsigned char kb_pt_data[];
-	extern const unsigned char kb_sv_data[];
-	extern const unsigned char kb_uk_data[];
-	extern const unsigned char kb_cs_data[];
-}
-
-struct LanguageCodeMap {
-	LanguageCodeMap() {
-		map.insert(CodeMap::value_type("en", const_cast<unsigned char *>(&(kb_en_data[0]))));
-		map.insert(CodeMap::value_type("de", const_cast<unsigned char *>(&(kb_de_data[0]))));
-		map.insert(CodeMap::value_type("ru", const_cast<unsigned char *>(&(kb_ru_data[0]))));
-		map.insert(CodeMap::value_type("es", const_cast<unsigned char *>(&(kb_es_data[0]))));
-		map.insert(CodeMap::value_type("fr", const_cast<unsigned char *>(&(kb_fr_data[0]))));
-		map.insert(CodeMap::value_type("ja", const_cast<unsigned char *>(&(kb_ja_data[0]))));
-		map.insert(CodeMap::value_type("nl", const_cast<unsigned char *>(&(kb_nl_data[0]))));
-		map.insert(CodeMap::value_type("pt", const_cast<unsigned char *>(&(kb_pt_data[0]))));
-		map.insert(CodeMap::value_type("sv", const_cast<unsigned char *>(&(kb_sv_data[0]))));
-		map.insert(CodeMap::value_type("uk", const_cast<unsigned char *>(&(kb_uk_data[0]))));
-		map.insert(CodeMap::value_type("cs", const_cast<unsigned char *>(&(kb_cs_data[0]))));
-	}
-	unsigned char *Lookup(const std::string& language_name) const {
-		CodeMap::const_iterator i = map.find(language_name);
-		return ((i == map.end()) ? NULL : i->second);
-	}
-
-	typedef std::map<std::string, unsigned char *> CodeMap;
-	CodeMap map;
-};
-
-const static LanguageCodeMap language_code_map;
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
-
 
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
@@ -394,7 +353,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 
 	iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(utf8language);
 	if (!kb_raw_data) { // no kb raw data in language module
-		kb_raw_data = language_code_map.Lookup(utf8language);
+		throw ExceptionFrom<iKnowEngine>("Language:\""+string(utf8language)+"\" module has no embedded model data : old stye KB used !");
 	}
 	CompiledKnowledgebase ckb(kb_raw_data, utf8language);
 	CProcess::type_languageKbMap temp_map; // storage for all KB's
@@ -419,7 +378,11 @@ void iKnowEngine::index(const std::string& text_source, const std::string& langu
 
 std::string iKnowEngine::NormalizeText(const string& text_source, const std::string& language, bool bUserDct, bool bLowerCase, bool bStripPunct) {
 	try {
-		SharedMemoryKnowledgebase skb = language_code_map.Lookup(language); //No ALI for normalization: We need a KB.
+		iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(language);
+		if (!kb_raw_data) { // no kb raw data in language module
+			throw ExceptionFrom<iKnowEngine>("Language:\"" + string(language) + "\" module has no embedded model data : old stye KB used !");
+		}
+		SharedMemoryKnowledgebase skb = kb_raw_data; //No ALI for normalization: We need a KB.
 		IkKnowledgebase* kb = &skb;
 		IkKnowledgebase* ud_kb = NULL;
 

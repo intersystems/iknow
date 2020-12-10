@@ -12,7 +12,7 @@ INCLUDEDIRS = $(ROOT_DIR)/modules/engine/src $(ROOT_DIR)/modules/shell/src/SDK/h
 
 OBJECTFLAGS += -DMACHINETYP=58
 
-SOURCES =  $(ROOT_DIR)/modules/engine/src/*.cpp $(ROOT_DIR)/modules/engine/language_data/*.c
+SOURCES =  $(ROOT_DIR)/modules/engine/src/*.cpp
 LOCATION = bin
 CREATELIBRARY = 1
 PROJECT = libiknowengine
