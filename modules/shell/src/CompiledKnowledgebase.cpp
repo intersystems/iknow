@@ -57,7 +57,7 @@ MODELINIT(sv)
 MODELINIT(uk)
 MODELINIT(cs)
 
-const RawDataPointer CompiledKnowledgebase::GetRawData(const std::string& name) {
+RawDataPointer CompiledKnowledgebase::GetRawData(const std::string& name) {
     return iknow::model::GetRawDataPointer(name);
 }
 

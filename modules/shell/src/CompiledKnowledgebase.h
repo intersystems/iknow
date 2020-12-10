@@ -17,7 +17,7 @@ namespace iknow {
     public:
       static const iknow::model::Model* GetModel(const std::string& name, size_t index);
       static bool IsCompiledModel(const std::string& name);
-      static const iknow::model::RawDataPointer GetRawData(const std::string& name);
+      static iknow::model::RawDataPointer GetRawData(const std::string& name);
       CompiledKnowledgebase(RawKBData* kb_data, const std::string& model_id);
       CompiledKnowledgebase(const unsigned char* kb_data, const std::string& model_id);
       CompiledKnowledgebase(SharedMemoryKnowledgebase* sm_kb, const std::string& model_id);
