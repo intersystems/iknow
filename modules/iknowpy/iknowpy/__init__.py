@@ -1,3 +1,5 @@
+"""Natural Language Processing Engine"""
+
 # provide useful error message when accidentally imported from source directory
 import os
 import inspect
