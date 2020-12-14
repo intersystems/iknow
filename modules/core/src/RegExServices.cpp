@@ -15,7 +15,6 @@ using namespace iknow::core;
 
 RegExServices::RegExServices()
 {
-	kb_ = NULL;
 	pattern_ = NULL;
 	matcher_ = NULL;
 	matcher2_ = NULL;
