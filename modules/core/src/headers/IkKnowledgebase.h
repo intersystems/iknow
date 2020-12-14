@@ -128,44 +128,40 @@ namespace iknow
 
       virtual short       IsNonSentenceSeparator(const iknow::base::String &strLabel ) const = 0; /*!< checks if the char is a non sentence separator */
       virtual short       IsSentenceSeparator   (const iknow::base::String &strLabel ) const = 0; /*!< checks if the string is a sentence separator */
-      //Most language models will be happy with this. Avoid the virtual call for now.
-      bool FastIsSentenceSeparator(iknow::base::Char c) const {
-	switch (c) {
-	case '.':
-	case ';':
-	case '!':
-	case '?':
-	  return true;
-	default:
-	  return false;
-	}
+      
+      bool FastIsSentenceSeparator(iknow::base::Char c) const { //Most language models will be happy with this. Avoid the virtual call for now.
+	    switch (c) {
+	    case '.':
+	    case ';':
+	    case '!':
+	    case '?':
+	        return true;
+	    default:
+	        return false;
+	    }
       } 
       virtual short       IsSentenceSeparator   (const iknow::base::Char &cCharacter      ) const = 0; /*!< checks if the char is linked to a sentenceseparator  */
       virtual short       IsWordSeparator       (const iknow::base::Char &cCharacter      ) const = 0; /*!< checks if the char is a wordseparator  */
       virtual short       IsConceptSeparator    (const iknow::base::Char &cCharacter      ) const = 0; /*!< checks if the char is a conceptseparator*/
 
-      void SetIdentifier (std::string const & strIdentifier) { m_strIdentifier = strIdentifier; } /*!< sets the identifier of the kb */
-      std::string const & GetIdentifier() const { return m_strIdentifier; } /*!< gets the identifier of the kb */
       virtual const iknow::base::String GetMetadataString(const std::string& /* name */) const { return iknow::base::String(); }
 
       const IkMetadataCache* GetMetadataCache() const { if (!cache_) cache_ = new IkMetadataCache(*this); return cache_; }
 
       template<MetadataValue V>
-	typename MetadataTraits<V>::value_type GetMetadata() const {
-	const IkMetadataCache* cache = GetMetadataCache();
-	return cache->GetValue<V>();
+	    typename MetadataTraits<V>::value_type GetMetadata() const {
+	    const IkMetadataCache* cache = GetMetadataCache();
+	    return cache->GetValue<V>();
       }
 
       //Returns a hash value for identifying this knowledgebase
       //Note that on a 32-bit system we'd need around 70,000 different knowledgebases
       //to get a 1:2 chance of a collision.
       virtual size_t GetHash() const { return 0; }
- 
       virtual size_t longest_lexrep_length() const = 0; // returns the longest lexrep to lookup.
 
     private:
       mutable IkMetadataCache* cache_;
-      std::string m_strIdentifier;
     };
 
   }

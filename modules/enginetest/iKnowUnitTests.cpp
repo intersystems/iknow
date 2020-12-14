@@ -47,6 +47,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Saskia2(pError);
 		pError = "Saskia3";
 		test_collection.Saskia3(pError);
+		pError = "Saskia4";
+		test_collection.Saskia4(pError);
 
 	}
 	catch (std::exception& e) {
@@ -57,6 +59,30 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/* Reported by Saskia
+In measurement attributes, if the first language to work with is not English, and later the engine switches to English, the value/unit extraction did not work anymore. This was due to a pointer comparison that did not work the way I expected.
+Now the language code is consulted to detect a language switch.
+*/
+void iKnowUnitTests::Saskia4(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	String text_source_cs = IkStringEncoding::UTF8ToBase(u8"Do retrospektivní studie bylo zařazeno 167 pacientů s ASJ.");
+	engine.index(text_source_cs, "cs");
+	String text_source_en = IkStringEncoding::UTF8ToBase(u8"Cambridge police said the search was for a 31-year-old former Harvard student and a wanted suspect in a Philadelphia murder who was believed to be in the Cambridge area.");
+	engine.index(text_source_en, "en");
+
+	int count_attributes = 0;
+	for (AttributeMarkerIterator it_marker = engine.m_index.sentences.begin()->sent_attributes.begin(); it_marker != engine.m_index.sentences.begin()->sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			if (attribute.value_ != string("31") || attribute.unit_ != string("year-old"))
+				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
+		}
 	}
 }
 
