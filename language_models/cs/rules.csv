@@ -3,1158 +3,1596 @@
 /*==================================================
 /* rewrite unified labels to language specific labels
 /*---------------------------------------------------
-
 1;1;CapitalInitial;^CSCapitalInitial;
+/*		1. Bohumil Hrabal.
 122;1;CapitalAll;^CSCapitalAll;
+/*		122. Vysoká škola ekonomická v Praze (VŠE) založena 1953.
 525;1;CapitalMixed;^CSCapitalMixed;
+/*		525. 103 kW.
 177;1;Punctuation;+CSPunctuation;
+/*		177. odhodláni budovat, chránit a rozvíjet.
 
 /* rewrite user dictionary labels
 /*-------------------------------
-
 369;1;UDNegation;+CSNegation+CSNegBegin;
+/*		369.UD. tým tak popírá dosud nejrozšířenější tezi.
 370;1;UDPosSentiment;+CSPosSentiment;
+/*		370.UD. Stále velmi slušný vývoj ekonomiky by měl vytvářet dobrý základ pro objemy distribuované elektřiny.
 371;1;UDNegSentiment;+CSNegSentiment;
+/*		371.UD. velmi špatný zemědělský majetek.
 372;1;UDConcept;CSCon;
+/*		372.UD. Z hlediska etiologie převažovalo lékové poškození.
 373;1;UDRelation;CSRelation;
+/*		373.UD. právnická osoba.
 374;1;UDNonRelevant;CSNonRelevant;
+/*		374.UD. Přesto nese paměť na předmoderní zemědělství.
 
 /*PHASE 38: disambiguation participles, adjectives and nouns - using case information
 /*===================================================================================
 /* preparation
 /*------------
 /* add AdjInstrMN/DatPl-label to AdjLocInstrMN/DatPl-lexreps, they behave the same in this context
-
 585;38;CSAdjLocInstrMN/DatPl;+CSAdjInstrMN/DatPl;
-
+/*		585. tak na mém vlastním výzkumu zabývajícím transnacionálními hudebními toky manter z Indie do České republiky.
 /* add general ConInstr label to specific ConInstr labels
-
 588;38;CSConInstrPl:CSConInstrMN:CSConInstrF;+CSConInstr;
+/*		588. Zvíře je v ní pouhou vegetativní a smyslovou živou bytostí obdařenou schopností pohybu.
 
 /* disambiguate ambiguous endings
-
 640;38;CSLongNTLPartCon+CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdj+CSAdjNomPl-CSLongNTLPartCon|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;version of r519 for LongNTLPartCon
+/*		640. Říkal jsem si, že mají podezřelé kontakty.
 824;38;CSAdjAmbigE+CSConNomPl|CSConNomPl;^CSAdj+CSAdjAmbigE-CSCon|*;
+/*		824. stalinisté komunisty.
 519;38;CSAdjAmbigE|CSConNomPl+CSConInstrPl;^CSAdjNomPl|-CSConInstrPl-CSConInstr-CSConInstrAmbig-CSConGenF;
+/*		519. Spojené státy.
 520;38;CSAdjAmbigI|CSConInstrF+^CSConInstrAmbig;^CSAdjInstrF|*;
+/*		520. měl by to být dobrý zápas s kvalitní atmosférou.
 838;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConNomF+^CSConGenF:CSConAccF;^CSAdjNomF|*;
+/*		838. To je podle mého názoru intelektuální odvaha. NOT. z principů moderní ekonomie.
 839;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSConAccF+^CSConGenF;^CSAdjAccF|*;
+/*		839. tak aby měl čtenář lepší orientaci v daném problému.
 828;38;CSAdjAmbigI+^CSLongPart:CSCiPartCon|CSAdjAcc/InstrF:CSAdjAccF;^CSAdjAccF|^CSAdjAccF;
+/*		828. další realitní kancelář.
 800;38;CSAdjAmbigI+^CSLongPart|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSAdjNomM|*;
+/*		800. kde má tradičně silné postavení nynější prezident. vyvinul první čtyřdobý spalovací motor. NOT. Dále se zohledňují položky snižující základ daně.
 817;38;CSAdjAmbigI+CSBeginTime|CSConNomAccM:CSAdjNomM+^CSConGenPl:CSConGenF:CSConGenMN;^CSBeginTime+CSAdjNomM-CSGen|*;
+/*		817. vydal v Basileji budoucí římský král Fridrich II. Dne 30.10. proto provedena minitorakotomie s evakuací organizovaného výpotku, hrudní drenáž, pacient následující den extubován.
 535;38;CSAdjAcc/InstrF|CSConDatF+CSConAccF;^CSAdjAccF|^CSConAccF;
+/*		535. rostoucí riziko defaultu v druhém čtvrtletí, napjatou situaci v mezinárodním obchodu.
 603;38;CSAdjAcc/InstrF+^CSLongPart|CSConInstrF+CSConGenPl;^CSAdjInstrF|^CSConInstrF;
+/*		603. získanou lingvistickou projekcí. NOT. které zahrnují reformaci uhlovodíků následovanou reakcí vodního plynu.
 534;38;CSAdjAmbigE|CSConDatF+^CSConGenF;^CSAdjDatF|*;
+/*		534. Chrám Sagrada Familia (česky Chrám smíření zasvěcený Svaté rodině).
 551;38;CSConInstrMN+CSConGenPl|CSConInstrMN;-CSConGenPl+CSConPossibleBCon|-CSConGenPl-CSConPossibleBCon;
+/*		551. s portugalským premiérem Socratesem.
 565;38;CSAdjGen/LocPl|CSConGenPl+CSConInstr:CSConNomAccM;*|-CSConInstr-CSConNomAccM;
+/*		565. obsah výsledků zeměměřických činností ověřovaných fyzickou osobou.
 569;38;^SBegin|CSCapitalInitial|CSCapitalInitial+CSConInstrAmbig;*|*|-CSConInstrAmbig-CSConInstrPl-CSConInstr;
+/*		569. Máj je lyrickoepická skladba Karla Hynka Máchy vydaná roku 1836.
 589;38;CSAdjNomF|CSConDatF+CSConNomF;*|-CSConGenMN-CSConNomPl-CSConDatF;
 596;38;CSAdjAcc/InstrF|CSConNomF+CSConAccF;^CSAdjAccF|-CSConNomF;
+/*		596. Stoupenci stříbra vynášejí jeho antibiotickou schopnost efektivně čelit prakticky všem bakteriím, houbám a virům.
 609;38;CSAdjGenMN|CSAdjNomMAnimPl+CSLongNTLPartCon;*|CSCon+CSConGenMN;
+/*		609. Což je menší přesnost než při systému poměrného zastoupení i při užití kvora.
 606;38;CSAdjNomMAnimPl+CSLongNTLPartCon|CSConNomPl+^CSConGenMN:CSConGenF;^CSAdjNomMAnimPl+CSAdj|*;
+/*		606. Zmínění autoři uvádějí. NOT. zhroucení demokracie.
 615;38;CSAdjLocMN+CSLongNTLPartCon|CSConDatMN;^CSAdj+CSAdjLocMN|*;
+/*		615. První převzala vdova po zesnulém dirigentovi.
 826;38;CSAdjLocMN|CSConLocMN+CSConAccF;*|-CSConAccF;
+/*		826. V chicagském akváriu našla svůj domov v roce 1989.
 628;38;CSCiPartCon+CSAdjDatMN|CSConDatMN;^CSAdj+CSAdjDatMN|CSCon+CSConDatMN;
+/*		628. poskytoval vedoucímu zaměstnanci.
 818;38;CSNum+CSConGenPl+CSConDatPl|CSConDatPl;-CSConGenPl-CSGen|*;
+/*		818. nemají kvůli pěti poslancům.
 
 /* disambiguate possible genitive adjective as not genitive and possible beginconcept
-
 754;38;CSAdjAmbigE:CSAdjAmbigI|CSConNomPl:CSConNomAccN:CSLongNTLPartCon+^CSConGenF;+CSAdjPossibleBCon|*;'-é' can only be genitive for feminine
+/*		754. Obsahují synoptická evangelia významné množství historicky doložitelných údajů?
 
 /* disambiguate possible possessive adjective
-
 544;38;CSAdjAmbigI:CSAdjAmbigE|CSCon+CSPossessive+CSConGenF;*|-CSPossessive;ambiguous possessive adjective or feminine noun -> feminine noun
+/*		544. k zajištění spolufinancování nově vznikající budovy.
 552;38;CSPossessive+CSConIfCap+^CSCapitalInitial:CSCapitalMixed;-CSPossessive-CSConIfCap;remove 'possessive adj' label when NOT capitalized or capital mixed (for hyphenated names)
+/*		552. Už za pár měsíců se ale objevila šuškanda o následníkovi. když vznikne poplatníkovi povinnost evidence pro účely DPH. NOT. koalice bombardovala Kaddáfího rodiště.
 825;38;CSPossessive+CSConDatMN|CSAdj+^CSAdjNomPl;-CSPossessive|*;
+/*		825. V pravděpodobně posledním závodě sezony pomohl Powellovi mírný vítr do zad.
 
 /* disambiguate long participle/noun and ci-participle/noun
-
 553;38;CSLongNTLPartCon:CSCiPartCon+CSAdjNomM|CSAdj+CSAdjNomM;CSAdj+CSAdjNomM|*;
+/*		553. Zavražděný šedesátiletý muž byl předsedou místní zahrádkářské kolonie.
 555;38;CSLongNTLPartCon:CSCiPartCon+CSAdjInstrMN/DatPl|CSConInstrMN;CSAdj+CSAdjInstrMN/DatPl|*;
+/*		555. kromě jedné smlouvy s vedoucím zaměstnancem. Na vedoucím místě.
 590;38;CSAdjGenMN|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenMN;
+/*		590. Aplikace uvedeného ustanovení je nesprávná. Za stěžejní indikátor zlepšujícího se hospodaření lze považovat návrat.
 591;38;CSAdjGen/LocPl|.CSSe|CSLongNTLPartCon+CSAdjNomMAnimPl;*|CSAdj|CSCon+CSConGenPl;
+/*		591. Plánováním obrany státu se rozumí soubor plánovaných opatření.
 592;38;CSAdjAmbigE|CSLongNTLPartCon+CSAdjNomMAnimPl|^CSCon;*|CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl|*;
+/*		592. kdo nemá ke své činnosti potřebné oprávnění, nebo komu je činnost zakázána.
 
 /* disambiguate verb/adjective
-
 655;38;CSAdjVerb+CSAdjAcc/InstrF|CSAdjNomPl:CSConNomPl;CSVerb|*;
+/*		655. nemá kde brát hlasy, o jeho osudu rozhodnou odpůrci.
 
 /* disambiguate capitalized longparts used as adjectives
-
 632;38;CSLongPart:CSAdj+CSAdjInstrMN/DatPl+CSConIfCap|CSConInstrMN:CSConDatPl;-CSConIfCap|*;
+/*		632. k rozvoji avantgardního divadla reprezentovaného Osvobozeným divadlem. což tam připomíná plaketa Padlým ženám.
 633;38;CSLongPart:CSAdj+CSAdjNomF+CSConIfCap|CSConNomF;-CSConIfCap|*;
+/*		632. na dolním Manhattanu Columbijská univerzita.
 
 /* disambiguate names with adjective ending -> noun with case specific label
-
 618;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomM+CSCapitalInitial|^CSConNomAccM;*|*|CSCon+CSConNomAccM+CSCapitalInitial|*;
+/*		618. Jan Amos Komenský podstatným způsobem přispěl k rozvoji moderní pedagogiky.
 619;38;^SBegin|CSCon+CSCapitalInitial|CSAdjGenMN+CSCapitalInitial;*|*|CSCon+CSConGenMN+CSCapitalInitial;
+/*		619. ale volba Jana Lucemburského českým králem umožnila nový vzestup. NOT. Sídlem Nejvyššího soudu je Brno.
 617;38;^SBegin|CSCon+CSCapitalInitial|CSAdjDatMN+CSCapitalInitial|^CSConDatMN;*|*|CSCon+CSConDatMN+CSCapitalInitial|*;
+/*		617. Někdejší ředitel Premiéry Českému rozhlasu řekl.
 620;38;^SBegin|CSCon+CSCapitalInitial|CSAdjLocMN+CSCapitalInitial|^CSConLocMN;*|*|CSCon+CSConLocMN+CSCapitalInitial|*;
+/*		620. V památníku Jad Vašem bude otevřeno nové muzeum.
 621;38;^SBegin|CSCon+CSCapitalInitial|CSAdjInstrMN/DatPl+CSCapitalInitial|CSConInstrMN:CSConDatPl;*|*|CSCon+CSConInstrMN+CSCapitalInitial|*;
+/*		621.  pod názvem Veteránem Českým rájem.
 622;38;^SBegin|CSCon+CSCapitalInitial|CSAdjNomF+CSCapitalInitial|^CSConNomF;*|*|CSCon+CSConNomF+CSCapitalInitial|*;
+/*		622. byla Ludmila Jankovcová činná v odboji. NOT. na dolním Manhattanu Columbijská univerzita.
 623;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAcc/InstrF+CSCapitalInitial|^CSConAccF:CSConInstrF;*|*|CSCon+CSConAccF+CSConInstrF+CSCapitalInitial|*;
+/*		623. Jak informoval libereckou zpravodajku Ivanu Bernátovou mluvčí roty. NOT. vláda předložila Senátu Lisabonskou smlouvu.
 624;38;^SBegin|CSCon+CSCapitalInitial|CSAdjAmbigE+CSCapitalInitial;*|*|CSCon+CSConGenF+CSConDatF+CSCapitalInitial;
+/*		624. Se žádostí o svolení k publikaci koncertu Anety Langerové nás nikdo nekontaktoval.
 
 /* disambiguate 'místo' using case information
-
 644;38;CSCon:CSLongNTLPartCon|"místo"|CSAdjGenMN:CSAdjGen/LocPl:CSConGenPl:CSConGenF:CSConGenMN:CSNum;*|CSPrep|*;
+/*		644. Demokratizaci voleb by velmi pomohla možnost škrtat v kandidátkách místo preferenčních hlasů. Odprostíme-li se od těchto vlivů, byl by celkový pokles výsledku hospodaření místo 88 % pouhých 30 %.
 
 /* participles as concept
 /* ----------------------
 /* preceded by agent
-
 563;38;^CSPrepInstr|CSConInstrAmbig+CSConNomPl+^CSConDatF|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAmbigI|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjAmbigI:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*;agent instr + longpart not instr + concept (group) not instr - separate rule for noun with ambiguous instr/nompl ending: longpart cannot be nompl
+/*		563. které pravděpodobně nemohou mít význam pro transportéry zprostředkovanou cytotoxicitu ani být podkladem lékových interakcí. NOT. že nejlepších výsledků z pohledu nízkoteplotní oxidace CO dosahují katalyzátory obsahující 8 váhových % Cu. NOT. V restituci vrácený majetek může stát sebrat.
 562;38;^CSPrepInstr|CSConInstr+^CSConInstrAmbig|CSLongPart+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjAcc/InstrF|.CSAdv|CSAdj:CSCon:CSLongNTLPartCon+^CSAdjInstrMN/DatPl:CSAdjInstrPl:CSConInstr;*|+CSAgent|-CSLongPart+CSAdj|*|*;longpart not instr preceded by agent in instr and followed by concept (group) not instr, AdjAmbigI can be in last position
+/*		562. V tomto případě jde tedy o objektivním právem zaručenou možnost chovat se určitým způsobem. NOT. hra chození s hadem prezentující biblický příběh vyhnání Adama a Evy. NOT. silná solidarita mezi sekcemi daná ojedinělou organizací celé organizace. NOT. kteří před půlnocí udělají za festivalem úplnou tečku. NOT. ve lhůtách stanovených obecně závaznou vyhláškou vydanou obcí. NOT. kterým se stavba umisťuje a povoluje, veřejnoprávní smlouvou nahrazující územní rozhodnutí, územním souhlasem.
 656;38;^CSPrepInstr|CSConInstrMN+^CSConInstrAmbig|CSLongPart+CSAdjInstrPl|CSCon+CSConInstrPl;*|+CSAgent|-CSLongPart+CSAdj|*;
+/*		656. které jsou ke dni nabytí účinnosti tohoto zákona státem registrovanými církvemi a náboženskými společnostmi.
 
 /* other cases
-
 600;38;CSNum|CSAdvTemp:CSAdvCon|CSLongPart|CSCon;*|^CSAdj-CSTime|^CSAdj|*;
 598;38;^CSConInstr|CSLongPart|CSComma:CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSAdj;*|^CSAdj|*|*|*;exception to r597, longpart becomes adj in enumeration
+/*		598. Česká republika je svrchovaný, jednotný a demokratický právní stát. NOT. že není možné ponechat tuto oblast právem neupravenou a právní předpisy.
 
 /* long participles as relation
 /*-----------------------------
 /* long nt-participle after copula (not for ci-participles and long l-participles) becomes relation
-
 601;38;CSCopula:CSJe|.CSPrep|*CSAdj:CSCon:CSPosspron|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|*|*|^CSPart|*;no concept after longpart
+/*		601. činy, které nejsou v zákoně explicitně popsané. Tomuto se chceme vyhnout, jsme rádi, že díky vlastnímu týmu jsou naše výrobky propojené.
 597;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|^CSAdj:CSCon:CSAdjCon:CSLongNTLPartCon:CSSe:CSLongPart;*|*|^CSPart|*;no concept after longpart
+/*		597. Všímají si jen drobného výseku lidského života a jsou většinou vysoce specializované. Tyto kategorie jsou samozřejmě orientační a nejsou proto striktně oddělené. Domy byly více poškozené.
 602;38;SBegin|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|CSCopula:CSJe;*|*|^CSPart|*;longpart before copula at beginning sentence
+/*		602. Způsobené je to naším stylem života.
 549;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE:CSAdjInstrPl+^CSLongLPart:CSCiPart|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;longpart before instrumental
+/*		549. Štítová průčelí jsou členěná klenutými kapličkovými výklenky. Příslušný orgán je povinen zadržení ihned oznámit předsedovi komory, jejímž je zadržený členem. predikáty, které jsou tvořené lehkým slovesem. Zelení upozornili na to, že pokud vznikne odsunuté nádraží, nebude dostatečně obsloužené městskou hromadnou dopravou a doba cestování se o několik minut prodlouží.
 641;38;CSCopula:CSJe|.CSAdv:CSAdvTemp:CSAdvCon:CSConj:CSAdjAdv:CSAdvStruct|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdv:CSAdvTemp|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenF;*|*|^CSPart|*|*;longpartcon before instrumental
+/*		641. a případně jak bylo rozhodnutí zaměstnavateli doručeno, včetně sdělení úřadu.
 
 /* long participles before Instrumental
-
 599;38;CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjAmbigE|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;^CSPart|*|*|^CSPart|*;part-and-part before instr
+/*		599. budovou nadzemní stavba včetně její podzemní části prostorově soustředěná a navenek převážně uzavřená obvodovými stěnami a střešní konstrukcí.
 275;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|^CSPart|*|*;noun instr follows longpart
+/*		275. Významnou roli hrála silná solidarita mezi sekcemi daná ojedinělou organizací celé organizace. Jeho víkendová vystoupení místy prokládaná vtipy a recitací poezie možná uklidnila část domácího publika, trhy ovšem nikoliv. Zadání, vymezenému názvem práce. je nakažlivé onemocnění hrabavé drůbeže vyvolávané bakterií Mycoplasma synoviae. Vrávorání a klimbání, údajně způsobené virózou, které prezident nad korunou českých králů předvedl. NOT. Neuniklo jim, že přes drtivé údery byli Spojenci schopni vyřazené vojáky rychle nahrazovat čerstvými rezervami.
 616;38;CSBracket2|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|^CSPart|*|*;longpart after closing brackets
+/*		616. V roce 2003 proběhl tzv. APEL (Audit práv a etiky léčby v psychiatrických léčebnách) organizovaný Centrem pro rozvoj péče o duševní zdraví.
 637;38;CSCon:CSLongNTLPartCon|CSComma|CSAndOr|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjGenMN:CSAdjDatMN:CSAdjLocMN:CSAdjNomMAnimPl:CSAdjAmbigE|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF;*|*|*|^CSPart|*|*;variation on r275 for pattern concept-comma-and-part
+/*		637. popřípadě s jinou dráhou ležící na samostatném tělese, a označené příslušnou dopravní značkou.
 310;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGen/LocPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConGenPl;*|*|^CSPart|*|*;noun instr (except for ConGen) follows longpart AdjGen/LocPl -> relation
+/*		310. Univerzita je vnitřně členěna na 23 účetních středisek, tvořených fakultami a dalšími součástmi.
 307;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF+^CSConInstrF;*|*|^CSPart|*|*;noun instr (except for ConGen,ConInstrF) follows longpart AdjAcc/InstrF -> relation
+/*		307. Jeho výkon nesmí poškozovat lidské zdraví, přírodu a životní prostředí nad míru stanovenou zákonem.
 513;38;CSCon:CSLongNTLPartCon+CSConInstrMN|CSLongPart+CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|^CSPart|*;exception to r311: longpart should be relation when preceding AND following noun are in instrumental
+/*		513. Každý se může domáhat ochrany svých práv před soudem zákonem stanoveným způsobem.
 311;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrPl+^CSConInstrMN;*|*|^CSPart|*|*;noun instr (except for ConInstrMN) follows longpart AdjInstrMN/DatPl -> relation
+/*		311. do tříd jakosti způsobem stanoveným přímo použitelnými předpisy Evropské unie.
 312;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjAcc/InstrF:CSAdjInstrMN/DatPl+^CSConInstrPl;*|*|^CSPart|*|*;noun instr (except for ConInstrPl) follows longpart AdjInstrPl -> relation
+/*		312. Nejvýznamnější část historie automobilů se začala psát koncem 18. století, kdy byly realizovány první úspěšné pokusy s vozidly poháněnými parním strojem.
 560;38;CSCon:CSLongNTLPartCon+^CSConInstrMN|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjAmbigI|.CSAdv:CSAdvTemp:CSSe|CSConInstr:CSAdjInstrMN/DatPl+^CSConGenF:CSConNomPl;*|*|^CSPart|*|*;noun instr (no exception for ConInstrF, better results this way since the ending is ambiguous) follows longpart AdjAmbigI -> relation
+/*		560. Předkládaná disertační práce je kvalitativní obsahovou analýzou zabývající se pronikáním politických a společenských změn. 4. povolení související se správou cel. NOT. Tato velenáročná matka neváhá oplácet svým americkým vrstevnicím všeobecně převládající reakcí v rodinách asijského původu nad mnohými zvyklosti místní, nezřídka bezbřehé tolerance.
 561;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSSe|CSAdvCon+CSConInstrMN;*|*|^CSPart|*|CSCon+CSConInstrMN;for adverb/noun
+/*		561. část věnující se dosaženým výsledkům a diskuzi následovanou závěrem.
 
 /* long participles before Instrumental, pattern with longpart-and-longpart
-
 789;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSAndOr|CSLongPart+^CSAdjAcc/InstrF:CSAdjInstrF|CSConInstrF:CSAdjAcc/InstrF:CSAdjInstrF;*|*|^CSPart|*|^CSPart|*;last position InstrF
+/*		789. Hlavní část těchto příjmů tvoří příjmy z pokut ukládaných a vybraných Městskou policií.
 790;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|CSAndOr|CSLongPart+^CSAdjInstrMN/DatPl|CSConInstrMN:CSAdjInstrMN/DatPl;*|*|^CSPart|*|^CSPart|*;last position InstrMN
+/*		790. při kontrole činnosti právnických osob založených nebo zřízených státem.
 791;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvTemp:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjInstrPl|CSAndOr|CSLongPart+^CSAdjInstrPl|CSConInstrPl:CSAdjInstrPl;*|*|^CSPart|*|^CSPart|*;last position InstrPl
+/*		791. při kontrole činnosti právnických osob založených nebo zřízených státy.
 
 /* long participles before Dative
-
 531;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSConDatF+^CSConInstrPl;*|*|^CSPart|*|*;relation before noun in dative, exception: longpart as AmbigE is not relation, exception for ambiguous ending which can be genitive
+/*		531. Jedná se o státní zámek zpřístupněný veřejnosti od roku 1950, který je unikátním příkladem novogotického šlechtického sídla druhé poloviny 19. století. NOT. Poslanecká sněmovna nevyslovila důvěru nově jmenované vládě.
 532;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjInstrMN/DatPl|.CSAdv:CSAdvTemp:CSSe|CSConDatPl;*|*|^CSPart|*|*;relation before noun in dative, exception: longpart as DatPl is not relation
+/*		532. V čerstvé aféře figurují keyloggery rozesílané novinářům.
 533;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjDatMN|.CSAdv:CSAdvTemp:CSSe|CSAdjDatMN:CSConDatMN+^CSConGenMN;*|*|^CSPart|*|*;relation before AdjDatMN (if longpart is not in same case)
+/*		533. jiných alternativ nepřirozených lidskému tělu. nad dodržováním povinností stanovených exekutorovi zákonem. NOT. podle zaměření daného oboru vzdělání.
 536;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF|.CSAdv:CSAdvTemp:CSSe|CSAdjDatF;*|*|^CSPart|*|*;relation before AdjDatF (if longpart is not in same case)
+/*		536. Chrám Sagrada Familia (česky Chrám smíření zasvěcený Svaté rodině).
 
 /* long participles before other cases
-
 540;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomM|.CSAdvTemp:CSAdv|CSAdjNomM:CSConNomAccM+^CSConGenPl:CSConGenF:CSConGenMN;*|*|^CSPart|*|*;relation before nom m sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+/*		540. Je to téma zasahující poměrně krátký časový úsek.
 541;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomF|.CSAdvTemp:CSAdv|CSAdjNomF:CSConNomF+^CSConGenF:CSConGenMN;*|*|^CSPart|*|*;relation before nom f sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+/*		541. Rozdílnosti v jejich názorech vedou k výrazné nejednotnosti při posuzování konkrétních případů, což je v otázkách zásahu do osobní svobody skutečnost zasluhující pozornost. NOT. je roven rozdílu mezi energiemi excitovaného stavu díry.
 587;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAccF|.CSAdvTemp:CSAdv|CSAdjAccF:CSConAccF+^CSConGenF:CSConGenMN:CSConNomF:CSConInstrPl;*|*|^CSPart|*|*;better results if AdjAmbigI is not an exception
+/*		587. Ačkoli se okamžitě objevily kritické hlasy obviňující organizaci. NOT. velké části tvořena 20 vyplácenými stipendii.
 542;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjNomMAnimPl:CSAdjNomPl|.CSAdvTemp:CSAdv|CSAdjNomMAnimPl:CSConNomPl+^CSConInstrPl:CSConNomF:CSConGenF:CSConGenMN:CSConGenPl;*|*|^CSPart|*|*;relation before nom pl (if longpart is not in same case), better results if AdjAmbigI is not an exception
+/*		542. Divize je vojenská jednotka, mající asi dvacet tisíc vojáku. NOT. Spojené státy. NOT. pokud jde o to nasednout do rozjetého rychlíku existující značky. NOT. dětská autosedačka je zařízení schválené podle zvláštního právního předpisu určené k zajištění bezpečnosti přepravovaných dětí.
 543;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGenMN|.CSAdvTemp:CSAdv|CSAdjGenMN+^CSConInstr;*|*|^CSPart|*|*;relation before gen sg (if longpart is not in same case), better results if AdjAmbigI is not an exception
+/*		543. Skupina dvojlistých živočichů je nepřirozená (parafyletická), neboť zahrnuje různé postupně se odvětvující vývojové linie, nemající společného předka, který by zároveň nebyl předkem trojlistých. NOT. Ale ty neodejdeš, ty tu zůstaneš, mezi bývalými cukrárnami, zrušenými hřbitovy, odsvěcenými kostely, v té pusté ukradené zemi.
 545;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjGen/LocPl|.CSAdvTemp:CSAdv|CSAdjGen/LocPl;*|*|^CSPart|*|*;relation before gen sg (if longpart is not in same case)
+/*		545. výkonem 9026 bodů vytvořil 26. a 27. května 2001 v Götzis světový rekord nepřekonaný dalších jedenáct let.
 546;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl|.CSAdvTemp:CSAdv|CSAdjAmbigI;*|*|^CSPart|*|*;relation before ambiguous -í (if longpart is in case without overlap with -í)
+/*		546. hospodařil s peněžními prostředky získanými hlavní činností nad rámec finančních vztahů.
 547;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+^CSAdjAmbigE:CSAdjAmbigI:CSAdjDatF/LocSg:CSAdjDatF:CSAdjNomPl:CSAdjNomN|.CSAdvTemp:CSAdv|CSAdjAmbigE:CSAdjNomPl;*|*|^CSPart|*|*;relation before ambiguous -í (if longpart is not in case with overlap with -é)
+/*		547. osob společně tvořících podnikatelské seskupení. probíhající diskuze mnoha historiků zkoumajících raně stuartovské období. reklamních agentur nebo firem provozujících internetové stránky.
 
 /* long participles before ambiguous ending
-
 537;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSLongPart+CSAdjNomF:CSAdjNomM:CSAdjNomMAnimPl:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjGen/LocPl|.CSAdvTemp:CSSe:CSAdv|CSConGenMN+CSConAccF;*|*|^CSPart|*|*;relation before ambiguous gen/dat/loc mn or acc f (if longpart is not in one of these cases)
+/*		537. román věnovaný Františku.
 
 /* long participles same case as preceding noun
-
 571;38;CSCon+CSConDatPl:CSConInstrMN+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrMN/DatPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjInstrMN/DatPl;*|*|^CSPart|*|*;
+/*		571. neměla být poskytnuta subjektům neplnícím závazky vůči státu. s objemem minimálně odpovídajícím kapacitě největší nádrže v ní umístěné.
 572;38;CSCon+CSConInstrPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjInstrPl|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+/*		572. Valná část uhrazených garancí je spojena s úvěry poskytnutými bankami.
 573;38;CSCon+CSConNomAccM+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomM|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+/*		573. Formulář "Informovaný souhlas" podepsán: ano.
 586;38;CSCon:CSLongNTLPartCon+CSConNomF:CSAdjNomMAnimPl:CSConNomPlN+^CSNum|.CSAdv:CSAdvCon+^CSAdvModal|CSLongPart+CSAdjNomF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+/*		586. Jak podrobněji vysvětlí kapitola věnovaná euroskepticismu.
 594;38;CSCon+CSConAccF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+/*		594. velkolepou vojenskou přehlídku věnovanou 70. výročí založení své armády.
 595;38;CSCon+CSConInstrF+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjAcc/InstrF|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon;*|*|^CSPart|*|*;
+/*		595. Povinnost poplatníka podat ohlášení ke své poplatkové povinnosti za podmínek a ve lhůtách stanovených obecně závaznou vyhláškou vydanou obcí v samostatné působnosti.
 613;38;CSCon+CSConLocPl+^CSNum|.CSAdv:CSAdvCon:CSCon+^CSAdvModal|CSLongPart+CSAdjGen/LocPl+^CSLongLPart|.CSAdvTemp:CSSe:CSAdv:CSAdjAdv|CSAdj:CSCon+^CSAdjGen/LocPl:CSConGenPl;*|*|^CSPart|*|*;
+/*		613. participaci v syndikovaných půjčkách – půjčkách nabízených skupinou poskytovatelů.
 
 /* ambiguous ci-participles in -í as relation
-
 593;38;CSCon:CSLongNTLPartCon|.CSAdv:CSAdvCon:CSComma+^CSAdvModal|CSCiPart+CSAdjAmbigI|.CSAdvTemp:CSSe:CSAdv|CSAdj:CSNum;*|*|CSCiPart+CSPart|*|*;
+/*		593. mezi únavou doprovázející hypokinetickou monotónní zátěž a dechem.
 607;38;^CSNum|CSCiPart+CSAdjAmbigI|CSAdjGenMN:CSAdjDatMN:CSAdjInstrMN/DatPl:CSAdjGen/LocPl:CSAdjInstrPl;*|CSCiPart+CSPart|*;ci-part in -í before adj in other case
+/*		607. aby se konalo ve lhůtě počínající třicátým dnem a končící šedesátým dnem od jeho vyhlášení.
 608;38;^CSNum|CSCiPart+CSAdjAmbigI|CSConDatMN:CSConDatPl:CSConGenPl:CSConInstrMN:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomAccN:CSConNomF:CSConInstrF;*|CSCiPart+CSPart|*;ci-part in -í before noun in other case
+/*		608. Jakmile v září vyšel královský dekret povolující ženám řídit.
 611;38;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSNum|CSCiPart:CSCiPartCon+CSAdjAmbigI|CSAdjAccF:CSConAccF:CSConNomAccM:CSConNomAccN:CSConNomPl+^CSConGenF;*|CSCiPart+CSPart|*;cipart in between nom (subject) and acc (object)
+/*		611. Soudní exekutor (dále jen "exekutor") je fyzická osoba splňující předpoklady podle tohoto zákona. Text je využitelný pro vysokoškolské pedagogy vyučující čínskou výslovnost a pro sestavovatele učebních materiálů. NOT. šlo o dva navazující úseky cesty.
 614;38;CSCon:CSLongNTLPartCon|CSCiPart|CSComma|"že";*|CSCiPart+CSPart|*|*;
+/*		614. je-li opatřena úředním razítkem a je-li předloženo potvrzení osvědčující, že zásilka obsahuje pouze úřední dokument.
 
 /* other patterns
-
 625;38;CSPart|CSAndOr|CSLongPart|CSPunctuation:SEnd;*|*|^CSPart|*;
+/*		625. Vojsko se dělí na menší jednotky a je přísně hierarchicky dělené a řízené.
 626;38;CSCon|CSLongPart|.CSSe|CSInf;*|^CSPart|+Join|*;
+/*		626. míra, v níž je čin způsobilý ohrozit nebo porušit společenské zájmy. Umělecká fotografie byla ve svých počátcích zastoupena piktorialismem, což je styl snažící se napodobit malbu.
 643;38;CSCon+CSConGenPl|CSLongNTLPartCon+CSAdjGen/LocPl|CSPrep;*|^CSPart|*;
+/*		643. dohoda zajistit vydání dvou civilistů zadržovaných v pásmu.
 
 /* specific cases and clean-up
 /*----------------------------
 /* longpart/gerund
-
 583;38;CSConNomPl|.CSAdv:CSComma+^CSAdvModal|CSLongNTLPartCon+CSAdjNomMAnimPl|.CSAdj+CSAdjAcc/InstrF:CSAdjInstrMN/DatPl:CSAdjInstrPl:CSAdjInstrF|CSConInstr+^CSConNomPl;*|*|^CSPart|*|*;
+/*		583. a Albert Einstein, ale zejména myslitelé ovlivnění marxismem, například Louis Althusser. NOT. zateplení střechy a výměna střešní krytiny.
 
 /* ci-particple + 'se' as Concept 
-
 559;38;CSCon:CSLongNTLPartCon:CSPrep:CSConj:CSPosspron:SBegin:CSAndOr:CSPunctuation+^CSComma|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon:CSAdj;*|CSCAdv|^CSAdj|+Join|*;
+/*		559. Za stěžejní indikátor zlepšujícího se hospodaření. studiu obrazů a jejich měnících se významech v současné společnosti. Jako módní vlny lze vnímat například prodlužující a zkracující se délku sukní. I vzhledem k (možné) blížící se bouři je tedy vhodné připomenout si rady.
 685;38;CSVerb:CSSe|.CSAdv|CSCiPart+^CSPart|CSSe|CSCon:CSLongNTLPartCon;*|CSCAdv|^CSAdj|+Join|*;
+/*		685. místní jídla a pozorovat měnící se módu i ucítit specifický zápach. A těžko očekávat, že by se rozvíjející se trhy rychle postavily v jinak na události prázdném týdnu na nohy.
 627;38;CSCiPart|CSSe|CSAndOr|CSAdj;^CSAdj|+Join|*|*;
+/*		627. Na nejvyšších úrovních za posledních šest a půl roku se pak nachází index společnosti sledující rozvíjející se a okrajové trhy.
 
 /* non-instrumental adjective as beginconcept when instrumental adjective follows; adverb+adjective after copula+noun
-
 566;38;CSCon|CSAdj+^CSAdjInstrMN/DatPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrMN/DatPl;*|^CSAdj+CSBCon|*;
+/*		566. který je členem rodiny proteinů podobných epidermálním růstovým faktorům. Jde o otázku, zda je dosavadní přístup a tradiční praxe adekvátní současným podmínkám.
 567;38;CSCon|CSAdj+^CSAdjInstrPl:CSOrdNum:CSCapitalInitial|CSAdj+CSAdjInstrPl;*|^CSAdj+CSBCon|*;
+/*		567. který je členem rodiny proteinů podobných epidermálními růstovými faktory.
 804;38;CSCopula:CSJe|.CSAdvStruct|CSCon|CSAdvDegree|CSAdj+CSAdjNomN:CSAdjNomM:CSAdjNomF:CSAdjInstrMN:CSAdjAcc/InstrF;*|*|*|CSCAdv+CSBCon|*;
+/*		804. Stalo se tak pod narkózou, aby byl zákrok méně bolestivý. Nyní je již kořen zcela volný.
 
 /* nominative adjective as beginconcept after noun other case/number/gender
-
 661;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		661. o opatřeních nezbytných k provedení rozhodnutí mezinárodního soudu, které je pro Českou republiku závazné. NOT. ČSÚ očekává meziročně nižší sklizeň pšenice ozimé. NOT. f) právních předpisů upravujících výkon umělecké, kulturní, sportovní a reklamní činnosti dětmi.
 739;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;
+/*		739. o opatřeních nezbytných k provedení rozhodnutí mezinárodního soudu, které je pro Českou republiku závazné, pokud je nelze provést jinak.
 662;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		662. jsou podíly na společných výnosech stejné. bylo díky velkým oknům viditelné pro všechny.
 740;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdj+CSAdjAmbigE+^CSCapitalInitial|CSPunctuation|^CSAdj;*|^CSAdj+CSBCon|*|*;
+/*		740. Vesnice jsou v posledních letech poloprázdné, zůstali jen starší lidé, ti mladší pracují v Bratislavě nebo v zahraničí.
 823;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		823. psychoterapeutické spolupráce jsou v těchto podmínkách efektivní.
 663;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		663. Mnohá těla jsou pouhým ohledáním neidentifikovatelná. NOT. Rita Katzová.
 664;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdj+CSAdjNomF+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		664. Jak vidíme, jeho hodnota je ale ve všech sledovaných letech záporná.  ale situace bude podle mě u většiny veřejnosti podobná. NOT. objížďka je ale skoro pět kilometrů dlouhá.
 665;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		665. Přízvuk je v maďarštině pevný. NOT. Museli asi koukat kluci marocký.
 666;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdj+CSAdjNomM+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		666. V okamžiku, kdy si kaplan není v některých věcech jistý.
 667;38;CSCon+CSConNomF:CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
+/*		667. Předtím byli bojovníci pro vládu užiteční.
 668;38;CSCon+CSConInstrMN:CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
-
+/*		668. že se jejich počet u jednotlivých zástupců různí.
 /* adverb + nominative adjective as beginconcept after noun other case/number/gender
-
 813;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+/*		813. Tato myšlenka nebyla pro architekturu úplně lákavá.
 814;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl:CSConNomPl+^CSConNomF:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+/*		814. úprav masa je v porovnání s našimi předky zoufale nízká.
 815;38;CSCon+CSConNomF:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+/*		815. vnitřní stent, který dle nástřiku volně průchodný.
 816;38;CSCon+CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomAccM:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
+/*		816. je i ve svých čtyřiašedesáti letech velmi společenský.
 821;38;CSCon+CSConNomAccM:CSConNomF:CSConGenMN:CSConDatMN:CSConLocMN+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;
+/*		821. Jsou sice na dnešní dobu nezvykle gumové.
 822;38;CSCon+CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|CSCAdv+CSBCon|*|*;
+/*		822. nejsou někdy přechody mezi těmito třemi částmi jasně zřetelné.
 833;38;CSCon+CSConGenMN:CSConDatMN:CSConLocMN:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConGenF:CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF:CSNoSplit|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|CSCAdv+CSBCon|*|*;
+/*		833. tudíž zisk by mohl být při stejných tržbách relativně vyšší.
 
 /* nominative adjective as beginconcept after adjective+noun in nominative
-
 834;38;CSAdj|CSCon+CSConNomF|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;
+/*		834. U některých léčiv je dokonce pro jejich plnohodnotný účinek enzymová aktivace velmi nutná.
 835;38;CSAdj|CSCon+CSConNomAccM|CSAdv|CSAdj+CSAdjNomM|CSPunctuation:SEnd;*|*|CSCAdv+CSBCon|*|*;
+/*		835. je starý diktátor velmi bohatý.
 836;38;CSAdj|CSCon+CSConNomPl|CSAdv|CSAdj+CSAdjAmbigE+^CSCapitalInitial|SEnd:CSPunctuation;*|*|CSCAdv+CSBCon|*|*;
+/*		836. je ve vztahu ke své hospodářské budoucnosti velmi pesimistické.
 837;38;CSAdj|CSCon+CSConNomPl:CSConNomAccM:CSConNomF:CSConAccF:CSConInstrF|CSAdv|CSAdj+CSAdjAmbigI+^CSCapitalInitial|SEnd:CSPunctuation:CSConj:CSPrep;*|*|CSCAdv+CSBCon|*|*;
+/*		837. Také on je ve sportovním prostředí velmi aktivní.
 
 /* correction: capitalized longpart is not name
-
 306;38;CSAdjAcc/InstrF|CSAdjAcc/InstrF+CSConIfCap+CSCapitalInitial;*|-CSConIfCap;capitalized adjective, exception to r236
+/*		306. analytický rámec daný rozšířenou Klasickou testovou teorií.
 
 /* clean-up ambiguous ending
-
 539;38;CSAdjAcc/InstrF+CSConInstrF;-CSAdjAcc/InstrF;
+/*		539. Ptáci nemají žádné zuby a úzké čelisti se přeměnily v zobák pokrytý vrstvou rohoviny.
 558;38;CSConPossibleBCon+CSConGenF:CSConGenMN:CSConGenPl;-CSConPossibleBCon;
+/*		558. O konci závazku vyrozumívá operátor způsobem, který si spotřebitel zvolil pro zasílání vyúčtování.
 
 /* disambiguate cipart/noun and longpart/noun using case info
-
 514;38;CSCiPartCon:CSLongNTLPartCon+CSAdjInstrMN/DatPl|CSAdj+CSAdjInstrMN/DatPl;CSAdj+CSAdjInstrMN/DatPl|*;
+/*		514. Od konce 20. let do konce 70. let 20. století byl vedoucím architektonickým slohem. Pozemek, na kterém stánek stál, navíc patří odsouzeným daňovým podvodníkům.
 
 /* default for gerund/longpart in í
-
 808;38;CSLongNTLPartCon+CSAdjNomMAnimPl;+CSGerund;
+/*		808. nedá-li předseda komory do 24 hodin od zadržení souhlas k odevzdání zadrženého soudu.
 
 /* disambiguate VerbCon before possessive adjective
-
 812;38;CSPossessive|CSVerbCon;*|CSCon;
+/*		812. to ukazuje Netanjahuův projev.
 
 /* add general 'genitive' label to genitive noun label (to avoid splitting the time concept in phase 39)
-
 652;38;CSConGenPl:CSConGenF:CSConGenMN+^CSConNomAccM;+CSGen;
+/*		652. účetní jednotkou do 30 dnů ode dne vzniku účetní jednotky.
+
 
 /*PHASE 39: time indications
 /*==========================
 /* preparation and clean-up
 /*-------------------------
 /* 'ráno' and 'večer'
-
 476;39;CSAdj:CSIndefpron:CSDempron+CSBeginTime|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;
+/*		476. Již jen jeho jméno slibuje na nedělní ráno poutavé vyprávění. Celý večer jsem pak s přáteli zakončil v jednom skvělém jazzovém klubu. Ty letos zaplatí drahám za osobní linky přes čtyři miliardy korun.
 460;39;CSAdj+^CSOrdNum|CSAdvTime+CSCon;*|CSCon-CSTime;
+/*		460. Dobrý večer. NOT. v půl osmé večer.
 462;39;^CSBeginTime:CSOrdNum|CSAdvTime+CSCon|CSAdj|^CSAdj:CSCon;*|CSCon-CSTime|*|*;
+/*		462. Večer tříkrálový. NOT. Již jen jeho jméno slibuje na nedělní ráno poutavé vyprávění.
 463;39;CSAdvTemp|CSAdvTime+CSCon;CSAdvTime+CSTime|+Join;
+/*		463. Euro vůči dolaru v pátek brzy ráno zamířilo pod hladinu 1,15 USD/EUR.
 
 /* clean-up
-
 461;39;CSAdvTime+CSCon;-CSCon;
+/*		461. Podle mluvčí čekalo ve středu ráno na obou místech shodně něco přes sto zájemců.
 
 /* 'středu'
-
 145;39;"středu"|CSCon+^CSConPossibleBCon;CSCon-CSTime|*;
+/*		145. Madrid je hlavní město Španělska, leží ve středu země. NOT. potvrdil ve středu koordinátor pomoci.
 
 /* 'dubna'
-
 147;39;"dubna"+CSCapitalInitial;CSCon;to discern the place name Dubna from the month
+/*		147. publikoval tým fyziků z Dubna.
 
 /* 'časem'
-
 163;39;"se":CSAux|"časem"|CSVerb:CSPart;*|CSAdvTemp+CSTime|*;
+/*		163. ovšem z praktických důvodů se časem rozšířily mince. Podporou obyvatel a prováděnými sbírkami, byly časem získány prostředky.
 
 /* range (first part)
-
 165;39;CSTimeConcept|CSNum:CSDigit|CSHyphen:CSAndOr:"až":"do"|CSNum:CSDigit;CSECon+CSTime|+Join|*|+CSTime;
+/*		165. On byl 16. prezident USA (v letech 1861 – 1865. Na přelomu roku 2008 a 2009 se začíná používat L3 cache i v běžných procesorech. byl římský císař v letech 117 až 138. ve dnech 20. - 21. 10.2017.
 168;39;CSTimeConcept|CSYearNum|CSComma|CSYearNum|.CSComma|.CSYearNum|CSAndOr|CSYearNum;CSECon+CSTime|+Join|*|+CSTime|*|+CSTime|*|+CSTime;
+/*		168. V letech 1960, 1968, 1970 a 1974 bylo k Praze připojeno dalších celkem více než 60 obcí.
 166;39;CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSOrdNum|CSYear:CSCentury;^CSBCon+CSTime+CSList|+CSList|CSECon+CSTime+CSList|+Join;
+/*		166. jeden z nejpopulárnějších československých zpěváků 60. a 70. let 20. století, avšak oblíben je dodnes. Vývoj řeckého divadla můžeme sledovat od 5. do 4. století př. n. l., kdy nastal jeho úpadek.
 
 /* 'druhý'
-
 786;39;CSJedno:CSJednou:CSJedenPart:CSJeden|*CSAdj:CSCon|CSPrep|CSDruhy|^CSAdj:CSCon;*|*|*|CSPRPron|*;if concept after 'jeden', only 'druhý' becomes PR
+/*		786. aniž bychom tím ovšem upřednostňovali jeden filosofický rozvrh před druhým. NOT. Pro jedno mužstvo z druhých míst ještě zůstane naděje na přidělení divoké karty.
 281;39;CSJedno:CSJednou:CSJedenPart:CSJeden|CSPrep|CSDruhy;CSPRPron|*|CSPRPron;
+/*		281. Tak se ideálně hodili k přepravě zpráv a cenných předmětů od jednoho k druhému.
 286;39;CSJedno:CSJednou:CSJedenPart:CSJeden|"druhému":"druhého";CSPRPron|CSPRPron;
+/*		286. Pokud by byli spolu, hrozí, že se budou vzájemně napadat a jeden druhého zraní.
 287;39;"ani"|CSJedno:CSJednou:CSJedenPart:CSJeden|CSComma|"ani"|CSDruhy;*|CSPRPron|*|*|CSPRPron;
+/*		287. Jak jsme se ale po víkendu dozvěděli, ani jedno, ani druhé není na pořadu dne.
 280;39;CSDruhy;^CSOrdNum+CSAdj;
+/*		280. Druhého května se vyspíme do téhož dne, ale fakticky se změní to, že budem v novém prostoru.
 
 /* 'jednou' (further disambiguation in phase 40)
-
 457;39;CSJednou|CSAdvTime+CSAdv;CSAdvTime+CSAdv+CSTime|+Join;
+/*		457. Podle jejich chování při společných večeřích, které pravidelně jednou měsíčně vařím.
 
 /* 'jeden'
-
 180;39;CSAux|CSJedenPart|CSAdv;*|CSPart+CSNTPart|*;
+/*		180. V pralese byl jeden zaživa.
 27;39;CSJedenPart;^CSCon+CSNum+CSJeden;
+/*		27. účastní-li se ho pouze jeden kandidát.
 
 /* 'jedno'
-
 83;39;CSJedno;CSCon+CSNum+CSJeden;
+/*		83. Zničeno bylo jedno Humvee.
 
 /* 'jeden z/ze'
-
 273;39;CSPosspron:CSIndefpron:CSDempron|CSInfCon:CSVerbCon;*|CSCon;copy part of r12
+/*		273. V nabídce najdete vhodnou variantu na každou pleť.
 97;39;CSJeden:CSJednou:CSIndefpron|"z"|"nich":"nás":"vás";CSPerspron|+Join|+Join;
+/*		97. Jedním z nich je i efektivnější úvěrový trh.
 204;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSCon|+Join|+Join;
+/*		204. ke zrušení rozhodnutí vlády postačuje nesouhlasné usnesení jedné z komor přijaté nadpoloviční většinou všech členů komory. Třebaže někteří herci provádějí přinejmenším některé ze svých vlastních kaskadérských výstupů sami.
 99;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSPosspron:CSIndefpron:CSDempron;CSBCon|+Join|+Join;
+/*		99. Jednou z jeho podkategorií jsou i paparazzi. Při jedné z takových inflačních epizod vznikla i Bank of England, která navíc získala za své služby koruně i práva velmi podobná současným emisním monopolům centrálních bank. Ani jeden z těchto pohledů neodpovídá zcela experimentálním zjištěním, proto byl přijat kompromisní dvoucestný přístup. Automatická extrakce subjektivních názorů z textu je v současnosti jedním z hlavních témat počítačového zpracovávání přirozeného jazyka. dědičná monarchie, v níž panovník předává titul a moc některému ze svých potomků.
 211;39;CSJeden+CSGen|"z":"ze"|CSVerbCon;CSCon|+Join|+Join;to prevent Gen to be split off in following r210
+/*		211. Za 101 dní plával na vzdálenost asi 8 tisíc kilometrů podél jednoho z větví jižního rovníku.
 210;39;CSJeden:CSJednou|"z":"ze"|CSVerbCon;CSBCon|+Join|+Join;
+/*		210. Jednu z větví s křesťanství vyhlásilo jako své státní nebo oficiální náboženství celkem osm států.
 212;39;CSJeden:CSIndefpron+CSGen|"z":"ze"|.CSNRPron|^CSNum;CSAdj|+Join|CSAdj|*;
+/*		212. Kolektivní smlouvu není možné zrušit odstoupením jedné ze smluvních stran;
 503;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;
+/*		503. buď po týdnu v srpnu a září nebo dva týdny najednou v jednom z měsíců.
 98;39;CSJeden:CSJednou:CSIndefpron|"z":"ze"|.CSNRPron|^CSNum;CSBCon|+Join|CSAdj|*;
+/*		98. Hlavním a druhým největším městem Skotska je Edinburgh, který je jedním z největších evropských finančních center. Krom jmenovaných hráčů vyhráli některý z tzv. grandslamových turnajů.
 
 /* 'jednou'
-
 203;39;CSJednou|"z":"ze"|CSNum;CSCon+CSNum+CSJeden|CSPrep|*;
+/*		203. Nobelova cena za literaturu je jednou z pěti Nobelových cen.
 201;39;CSJednou|CSAdj:CSCon;CSCon+CSNum+CSJeden|*;
+/*		201. Funkcionalismus je architektonický sloh, který lze shrnout jednou větou takto: Forma následuje funkci.
 202;39;CSJednou;CSAdvTemp+CSTime;
+/*		202. Takovouto změnu účetního období může účetní jednotka v běžném účetním období provést pouze jednou.
 
 /* join numbers with 'and a half'
-
 489;39;CSNum|"a"|"půl";^CSNum|+Join|+Join;
+/*		489. Na nejvyšších úrovních za posledních šest a půl roku se pak nachází index společnosti.
 
 /* 'až'
-
 471;39;"až"|.CSNum:CSOrdNum|CSTimeConcept;CSPrep|*|*;
+/*		471. Jednání jsou naplánované na pondělí až středu. Dosahoval hmotnosti až 25 tun a žil v období střední až svrchní jury, asi před 181 až 169 miliony let.
 
 /* AdvTime+Adv
-
 439;39;CSAdvTime+CSAdv|CSAdj|CSAdj:CSCon;CSCAdv|*|*;
+/*		439. Účetní jednotka vykazuje každoročně daňovou povinnost, platí čtvrtletní zálohy na daň z příjmů.
 440;39;CSAdvTime+CSAdv;-CSAdv;
+/*		440. Účastníci debaty také sdílejí obavu, že současné poblouznění kryptoměnami a jejich obchodováním poškozuje image blockchainové technologie v očích jejích potenciálních uživatelů, kteří pouze slyší o hackerských útocích, podvodech a množství peněz, o které lidé denně přicházejí.
 
 /* while / moment
-
 480;39;CSDempron:CSBeginTime:CSTu:CSTen:"co"|CSAdvTempCon;CSAdvTemp+CSMultiwordAdverb+CSTime|+Join;
+/*		480. Právě krize na rozvíjejících se trzích je v tuto chvíli hlavním motorem ženoucím vpřed zisky amerického dolaru. Však jste se na  něj z kurtu co chvíli dívala. Dávají to sice každou chvíli, ale jako oddechovka na večer to funguje.
 481;39;CSPrep|CSAdvTempCon;*|CSAdvTemp+CSTime;
+/*		481. Občas na chvilku vysvitne sluníčko, trošku se ohřejeme, ale zase sprchne. 
 482;39;CSAdvTempCon;CSCon;
+/*		482. Ukázali jsme to v té nejlepší chvíli.
 
 /* single-word adverbs of time
-
 475;39;CSAdvTime+CSSingleWord|CSAdvTime+CSSingleWord;CSAdvTime+CSTime|+Join;
+/*		475. Promiňte, ale dnes večer nemůže, i když jinak může vždycky.
 
 /* differentiate age from time
-
 448;39;CSPrep+^"před":"po":"za"|CSNum+^CSPartTime|CSYear|^CSEndTime;*|*|-CSTimeConcept-CSTime|*;
+/*		448. Dílčím cílem je popsat čtenářství českých žáků ve věku od osmi do patnácti let. NOT. Tento druh hospodaření se vyskytoval ještě před 150 lety i v naší krajině. NOT. O čtyři roky později. NOT. v polovině roku.
 
 /* differentiate 'hour/lesson' as noun from time indication
-
 497;39;^CSNum:CSAdvTime:CSOrdNum|CSHour|CSDempron:CSAdj:CSCon+^CSNum;*|CSCon|*;
+/*		497. Je známo, že pozornost a rychlost reakcí klesá již po necelé hodině jízdy v automobilu. NOT. hostí v 21 hodin skupinu Venušecha. NOT. V 8 hodin 50 minut. NOT. na 8:05 hodinu premiéru 822. NOT. před jedenáctou hodinou večerní vyrazil do Káhiry.
 
 /* add general 'genitive' label to different specific genitive labels (to avoid splitting the concept)
-
 500;39;CSBeginTime:CSOrdNum:CSIndefpron+CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE;+CSGen;
+/*		500. k 31. 12. běžného roku.
 505;39;CSBeginTime+CSIndefpron+CSGen;-CSGen;
+/*		505. Do Poslanecké sněmovny se volí 200 poslanců každé čtyři roky na základě poměrného zastoupení.
 
 /* time indications
 /*-----------------
 /* idiom with 'co'
-
 502;39;"co"|CSTimeConcept;CSAdvTime+CSTime|+Join;
+/*		502. rodiny, které za nimi týden co týden jezdí.
 
 /* multiword with 'dopředu'
-
 574;39;CSAdvTemp|"dopředu";^CSAdvTemp|+Join;
+/*		574. Štěstí mají ti, kteří si nasmlouvali dodávky na dlouho dopředu za pevnou cenu.
 
 /* time of day
-
 484;39;"v"|CSNum|.CSOrdNum|"ráno":"odpoledne":"večer";*|CSAdvTime|+Join|+Join;
+/*		484. Do terénu většinou vyjíždíme v šest ráno. Dnešní koncert začíná v půl osmé večer.
 485;39;CSPartTime:CSNum|."hodiny":CSMinute|"před":"po"|CSOrdNum|^CSCon;CSAdvTime+CSTime|+Join|+Join|+Join|*;
+/*		485. Čtvrt hodiny před pátou se včera v pražské porodnici narodilo v pořadí již čtvrté dítě. 5 před páté. čtvrt po páté.
 491;39;CSNum|CSHour|."a"|CSNum|CSMinute;CSAdvTime+CSTime|+Join|+Join|+Join|+Join;
+/*		491. V 8 hodin 50 minut byly položeny květiny na nádraží Kings Gross.
 492;39;CSNum|CSHour;CSTimeConcept+CSTime|+Join;
+/*		492. V současnosti je interní audit zajišťován jedním interním auditorem s úvazkem 0,2, tj. 8 hodin týdně.
 
 /* join dates
-
 452;39;CSBeginTime:CSOrdNum:CSTimeConcept:CSDen|CSMonth;CSMonth+CSTimeConcept+CSCon+CSTime|+Join;
+/*		452. Ty mají vstoupit v platnost 22. srpna nebo blízko tomuto datu.
 144;39;CSDay:CSDen|CSOrdNum|CSMonth:CSOrdNum;CSMonth+CSCon+CSTime|+Join|+Join;
+/*		144. Odehrálo se ve čtvrtek 16. prosince 1773. Ke dni 1. ledna 2011 měla Vídeň 1 713 957 obyvatel. Ke dni 28. 8. 2006 zde žilo 817 obyvatel.
 464;39;CSOrdNum+CSDigit|CSOrdNum+CSDigit;CSMonth+CSCon+CSTime|+Join;two consecutive ordinal numbers in digits express date
+/*		464. v souladu se stanoveným harmonogramem od 6. 6. do 21. 6. 2018. že do 30. 6. mám smlouvu.
 483;39;CSOrdNum|CSBeginTime|CSDay;CSAdvTime+CSTime|*|*;
+/*		483. Velká pardubická je dostihový závod, konající se každou druhou říjnovou neděli na dostihovém závodišti v Pardubicích.
 
 /* join time indications
-
 455;39;^CSPartTime:CSOrdNum|CSBeginTime+^CSGen|.CSOrdNum:CSNum|CSTimeConcept:CSPartTime|^CSYearNum;*|CSAdvTime+CSTime|+Join|+Join|*;concept split, except in case of surrounding time-related words or genitive forms
+/*		455. Společenstva mlynářů a pekařů v ČR minulý týden uvedlo. Za uplynulé dva roky. NOT. Ve 2. čtvrtletí letošního roku. První celý rok hospodaření je rok 2006. NOT. S tím, jak je druhá polovina roku z pohledu obchodního salda pro českou ekonomiku obvykle méně úspěšná než prvních šest měsíců roku. NOT. Mezi nejvýznamnější investice loňského roku patřila nová vodní linka.
 458;39;CSBeginTime+CSGen|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;no split because of genitive form
+/*		458. Alpské spolky nikdy nevnímaly své poslání na pozadí nacionalizujících tendencí konce 19. století. První polovina loňského roku však byla výrazně ovlivněna mimořádnými výnosy. Naopak počítám, že během příštích několika měsíců to přinejmenším bude trvat.
 501;39;CSBeginTime+CSGen:CSAdjGen/LocPl:CSAdjGenMN:CSAdjAmbigI:CSAdjAmbigE|.CSNum:CSOrdNum:CSIndefpron|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;no split because of genitive form -> 2 consecutive adjectives
+/*		501. To jsou odtázky celého dnešního dne.
 441;39;CSOrdNum|.CSNum|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join|+Join;
+/*		441. Tento výzkum je pokusem ukázat sepjetí politiky a sportu v prvních sedmi letech po druhé světové válce.
 468;39;^CSOrdNum|CSPartTime|CSTimeConcept;*|CSTimeConcept+CSCon+CSTime|+Join;exception for preceding ordinal number, here r443 should fire
+/*		468. od poloviny pátého do poloviny čtvrtého století před naším letopočtem. působí v České republice od poloviny roku 1999.
 442;39;CSYear|CSYearNum;CSECon+CSTime|+Join;
+/*		442. léčených v transplantačním centru v letech 2005–2016 podle protokolu zahrnujícího specifickou.
 469;39;CSOrdNum:CSBeginTime+CSGen|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth:CSAdvTime;CSTimeConcept+CSCon+CSTime|+Join|+Join;before r443, no split when begin time indication can be genitive
+/*		469. jeden z nejvýznamnějších a nejosobitějších spisovatelů druhé poloviny 20. století. V druhé půlce července naměřili meteorologové tropickou noc. ve druhé polovině odpoledne však dokázal část ztrát smazat a zamířit k úrovni 4,28.
 443;39;CSOrdNum:CSBeginTime|CSTimeConcept:CSPartTime|CSTimeConcept:CSECon:CSYearNum:CSMonth;CSAdvTime+CSTime|+Join|+Join;
+/*		443. Ve 2. polovině 19. století byly na území dnešní severozápadní Indie a Pákistánu budovány železnice.
 446;39;CSTimeConcept+^CSMonth|CSECon:CSYearNum;CSECon+CSTime|+Join;exception for Month which should be BeginEndConcept
+/*		446. za prvních šest měsíců roku 2017. terorizování obyvatel okolí Washingtonu na podzim roku 2002. v létě roku 2008. v létě 1938. pro oblast vysokých škol na léta 2016-2020. NOT. odstartovala by poslední vlna EET 1. července 2019.
 799;39;CSAdvDegree|CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join|+Join;
+/*		799. po dobu minimálně devíti měsíců. provedení UZ skrota s odstupem cca 4 týdnů.
 498;39;CSNum+CSGen:CSDigit|CSTimeConcept+^CSYear;CSTimeConcept+CSCon+CSTime|+Join;
+/*		498. 62,5 °C po dobu 20 minut.
 512;39;CSAdvDegree|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;CSBCon+CSTime|+Join|CSTimeConcept+CSCon+CSTime|*;
+/*		512. Česká část archivu obnáší zhruba jeden tisíc hodin.
 511;39;^CSNum:CSAdj:CSLongPart|CSNum+^CSDigit|CSTimeConcept+^CSYear|^CSEndTime;*|CSBCon+CSNum+CSTime|CSTimeConcept+CSCon+CSTime|*;
+/*		511. Lidi láká systém čtyři dny práce, tři dny volno. NOT. Účetním obdobím je nepřetržitě po sobě jdoucích dvanáct měsíců. NOT. Moderátor si hezkých pár týdnů nezasouloží. NOT. Ale bylo to těsné, připomněla cílový rozdíl 17 setin sekundy. NOT. Celková doba, po kterou může být zasedání přerušeno, nesmí překročit sto dvacet dnů v roce.
 645;39;"před":"po":"za"|CSNum+^CSPartTime|CSYear;*|CSECon+CSTime|+Join;
+/*		645. Pokud by tvůrci politiky centrální banky očekávali, že inflace dosáhne 2 %, ale hospodářský růst bude za dva roky méně než 2 %, museli by zvažovat, nakolik bude mít zvýšení sazeb tlumící vliv na ekonomiku.
 509;39;CSIndefpron+CSGen|CSTimeConcept;CSTimeConcept+CSCon+CSTime|+Join;
+/*		509. Prostějov není daleko od Brna, je to nějakých 40 minut.
 510;39;CSIndefpron|CSTimeConcept|^CSEndTime;CSBCon+CSTime+CSNoSplit|CSTimeConcept+CSCon+CSTime|*;NoSplit to avoid split in phase 45
-
+/*		510. Ta trvá u všech inkoustových tiskáren několik sekund. je již po několikátý rok na rekordní úrovni.
 /* further join dates
-
 453;39;CSMonth:CSPossibleMonth|CSECon:CSYearNum;CSAdvTime+CSTime|+Join;
+/*		453. Proto se od 1.1. 2008 zvedne cena jízdenek v pražské MHD. Hugo se narodil 16. září ’82.
 467;39;CSMonth|CSNum|^CSAdj:CSCon;CSAdvTime+CSTime|+Join|*;for other numbers than YearNum
+/*		467. Jeho pontifikát trval od 31. ledna 314 do 31. prosince 335.
 454;39;^CSAdj|CSMonth+CSTimeConcept;*|CSAdvTime+CSTime;
+/*		454. Americké úřady práce zaregistrovaly v týdnu do 11. srpna 212 tisíc nově podaných žádostí o podporu v nezaměstnanosti. NOT. V nejchladnějším měsíci lednu je průměrná denní teplota 1 °C.
 167;39;CSYearNum:CSPossibleMonth|CSHyphen|CSAdvTime:CSYearNum:CSPossibleMonth;+CSTime|*|+CSTime;
+/*		167. Kosmas (asi 1045 – 21. října 1125) byl prvním známým českým kronikářem, autorem.
 495;39;CSDay|CSPossibleMonth;CSAdvTime+CSTime|+Join;
+/*		495. Čtvrtek 12.1. po 10 hodině.
 
 /* join combinations of time indications
-
 486;39;*CSNum:CSIndefpron|CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|+Join|-CSEndTime;for 'after' as conjunction
+/*		486. Pět let poté, co vypravil na české koleje své první vlaky.
 487;39;CSTimeConcept|CSEndTime+CSRelpron;CSAdvTime+CSTime|-CSEndTime;for 'after' as conjunction
+/*		487. Další desítky tisíc podnikatelů začnou elektronicky evidovat tržby půl roku poté, co zákon vstoupí v platnost.
 488;39;CSEndTime+CSRelpron;-CSEndTime;clean-up 'after' as conjunction
+/*		488. K témuž docházelo i poté, co si vzal zaměstnanec izolační rukavici.
 450;39;*CSNum:CSIndefpron|CSTimeConcept|CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join|+Join;
+/*		450. V současnosti je interní audit zajišťován jedním interním auditorem s úvazkem 0,2, tj. 8 hodin týdně. v deset hodin večer. Každé hlídá jeden pastýř, který je s ovcemi dvacet čtyři hodin denně. Byla upravena pravidla při výběrovém řízení, které se může protáhnout o několik měsíců déle. V Praze jste nakonec vystoupil o čtyřicet sedm let později.
 449;39;CSTimeConcept|*CSAdvTime:CSEndTime;CSAdvTime+CSTime|+Join;
+/*		449. Záchranáři byli na místo povoláni před čtvrtou hodinou odpoledne. Ve VIP zóně vychází naše expertní výhledy (institucionální objednávky) každý den ráno s dostatečným předstihem pro všechny členy VIP zóny. Svědomí odolával necelých pět dní, policii se šel přihlásit v pátek 12. ledna odpoledne.
 445;39;CSTimeConcept|CSTimeConcept:CSMonth;^CSTimeConcept|+Join;
+/*		445. Od devadesátých let 20. století se proto otevřeně setkáváme s mnohem kritičtějším vnímáním evropského integračního projektu. Od konce 90. let 20. století tak dochází k výrazným změnám. Celkově tak bylo možné za měsíc květen potencionálně zachytit reakce ve výši 988 pipů. Ti dostali možnost vyjádřit se v úterý příštího týdne.
 153;39;CSYear|CSNum+^CSBCon;CSECon+CSTime|+Join;for all numbers since Year is explicit
+/*		153. Když syrské legie prohlásily Vespasiana v roce 69 císařem, pobýval Domitianus právě v Římě. NOT. Právě proto tento měsíc má proměnlivý počet dnů a právě k němu se přidával v přestupném roce jeden den.
 451;39;CSAdvTime:CSMonth:CSBeginTime:CSECon|CSTimeConcept:CSECon:CSAdvTime:CSEndTime+^CSSingleWord;CSAdvTime+CSTime|+Join;exception for single word adverbs of time from lexreps
+/*		451. Cache byla vynalezena v první polovině 60. let 20. století. Skupina již v květnu loňského roku využila příznivé tržní situace a refinancovala dluhopisy ve výši 300 mil. Za celé první pololetí roku 2018 tak Ministerstvo prodalo na primárním trhu střednědobé. Sonda Voyager 2 by mohla dosáhnout této hranice koncem roku 2007. Thespis snad uvedl v letech 636-633 př. n. l. první tragédii.
 
 /* timeconcepts after preposition get time attribute
-
 494;39;CSPrep|CSDigitalTime|CSAdj:CSCon;*|CSCon+CSTime|*;overwrite AdvTime so it won't be split from following time indication eg. Central European Time (ve 20:18 středoevropského letního času)
+/*		494. ve 20:18 středoevropského letního času.
 447;39;CSPrep|*CSNum:CSPartTime:CSIndefpron:CSOrdNum|CSTimeConcept:CSMonth|^"méně":"míň":"víc":"více":CSGen;*|CSAdvTime+CSTime|+Join|*;
+/*		447. ale za pár měsíců byl zpátky v liz.
 659;39;CSPrep|CSTimeConcept:CSMonth|CSGen:CSAdjGenMN;*|+CSTime|*;not AdvTime when genitive follows
+/*		659. Automobilka  se konečně rozhoupala a po měsících čekání zpřístupnila oficiální fotografie nového kupé. Co se stalo v roce vašeho  narození?
 444;39;CSPrep|CSTimeConcept:CSMonth|^CSGen:CSAdjGenMN:CSBeginTime:CSOrdNum;*|CSAdvTime+CSTime|*;
+/*		444. Soužití Čechů a Němců v českých zemích je předmětem zájmu historického výzkumu od konce dvacátého století. NOT. Pokud by se referendum mělo konat v posledních šesti měsících volebního období Poslanecké sněmovny nebo funkčního období zastupitelstev územních samosprávných celků, vyhlásí je prezident republiky tak, aby se konalo spolu s volbami do Poslanecké sněmovny nebo do zastupitelstev územních samosprávných celků. NOT. v letech následujících.
 515;39;CSPrep|CSTimeConcept:CSMonth|CSBeginTime:CSOrdNum+^CSPartTime:CSDempron|^typeConcept;*|CSTimeConcept+CSTime|+Join|*;
+/*		515. V roce 2011 hospodařil rozhlas s náklady o 49,7 mil. Kč nižšími než v roce předchozím. Na rozdíl od let sedmdesátých tentokrát aktivita obhájců devoluce vedla ke kýženému cíli. NOT. Krokodýlkovi stačí jednou za týden čtvrt kila libového masa a dostává například i ryby nebo kuřecí krky, protože obsahují kosti. NOT. projektům z předchozího roku tento titul vyzněl doztracena.
 504;39;CSAdj|CSTimeConcept+CSYear;*|+CSTime;
+/*		504. Fond prostředky na dotaci úroků vynaložil v rozpočtovém roce.
 499;39;*CSNum:CSAdj|CSTimeConcept+^CSYear;*|+CSTime;to catch a large variety in expressions eg. 'working week', 'holiday month', 'business days', some are not actually time indications though: 'it's been a hard day'
+/*		499. zda se ze čtyřdenního pracovního týdne stane standard. se jich v posledních dvou tropických týdnech prodaly tisíce. Pražská burza v uplynulém obchodním týdnu jen ztrácela.
 470;39;CSAdvTime|CSAndOr:CSHyphen|CSTimeConcept;*|*|CSAdvTime+CSTime;
+/*		470. Kam se ale trhy vlastně během posledních týdnů a měsíců dostaly?
 
 /* further joining time indications
-
 479;39;CSNum|CSNum|CSTimeConcept|"v"|CSAdvTime;CSAdvTime+CSTime|+Join|+Join|*|*;
+/*		479. Celková doba, po kterou může být zasedání přerušeno, nesmí překročit sto dvacet dnů v roce.
 206;39;CSBeginTime:CSAdvTime|CSAdvTime+^CSSingleWord;CSAdvTime+CSTime|+Join;exception for single word adverbs of time from lexreps
+/*		206. Zatím jde sice pouze o odvážné představy představitelů hejtmanství, ty by se však do dvou tří let měly změnit v realitu.
 
 /* range (2nd part)
-
 169;39;CSBeginTime:CSPartTime|CSOrdNum|CSHyphen:CSAndOr:"až":"do"|CSAdvTime;CSBCon+CSTime|+Join|*|*;
+/*		169. Období humanistického a renesančního divadla sahá přibližně od počátku 16. do poloviny 17. století. od poloviny pátého do poloviny čtvrtého století před naším letopočtem.
 474;39;"mezi":"od":"před"|*CSNum|"a":"do":"až"|CSAdvTime;*|+CSTime|*|*;
+/*		474. aktuálně se pohybují od jednoho do dvou měsíců. Rýže zdomácněla v Číně v období mezi 11 500 a 6 200 let př. n. l. V oblasti jihoamerických And došlo před 8000 až 5000 lety př. n. l. k domestikování brambor. od 1.7. do 23.7.2006.
 
 /* clean-up
-
 788;39;CSBeforeNumber|CSNum+CSAdvTime;*|+CSCon-CSAdvTime-CSTime;
+/*		788. Působnost vymezuje Zákon č. 2/1969 Sb., o zřízení ministerstev.
+
 
 /*PHASE 40: disambiguate ambiguous labels
 /*=======================================
 /* preparation
 /*------------
 /* disambiguate hyphen
-
 59;40;CSNum:CSOrdNum:CSAdvTime:CSYearNum:CSECon:CSBCon|CSHyphen|CSNum:CSOrdNum:CSECon:CSAdvTime;*|CSPrep-Punctuation|*;
+/*		59. (1895 - 1986). (13. prosince 1640 - 30. dubna 1696). v 70. – 80. letech.
 
 /* listnumber
 /*'a' as Concept in enumeration before bracket
-
 178;40;SBegin|"a"|CSPunctuation;*|CSCon|*;
+/*		178. a) projednávají a rozhodují spory a jiné věci patřící do jejich pravomoci podle zákonů o občanském soudním řízení.
 
 /* join multiwords
-
 400;40;"na"|"rozdíl"|CSAdvStruct:CSAdv:CSRAdv|"od":"ode";CSPrep|+Join|*|CSPrep;
+/*		400. Podle něj by navíc krevní odběry lidé byli ochotni podstoupit poměrně bez problémů, na rozdíl třeba od kolonoskopie.
 435;40;"do"|CSAdj:CSIndefpron:CSDempron|"míry";CSRAdv|+Join|+Join;
+/*		435. Přestože to do jisté míry pravda.
 785;40;CSPRPronPlusAdj|"jiný":"jiného":"jiném":"jinému":"jiným";CSPRPron|+Join;
+/*		785. miminko není odkázáno jen na maminku, nakrmit ho může kdokoliv jiný. vaše nemovitost způsobí někomu jinému škodu.
 784;40;CSPRPronPlusAdj|CSAdj|^CSAdj:CSCon;CSBCon|*|*;
+/*		784. nejde ale o nic dramatického. hrozné věci, které byste někomu cizímu neřekl. NOT. když čtete, jak měl někdo luxusní svatbu.
 
 /* disambiguate names / other ConIfCap
 /*------------------------------------
-
 237;40;CSAdj+CSConIfCap|CSVerbCon:CSInfCon;CSAdj|CSCon;
+/*		237. Časový odstup je dlouhý vzhledem k trvání jedné rázové vlny (v jednotkách mikrosekund).
 236;40;^SBegin:CSPunctuation:CSListnumber|CSConIfCap+CSCapitalInitial+^CSAdj;*|CSCon+CSCapitalInitial;make capitalized words concept, exception for adjectives because this gives better results for surrounding ambiguous words
+/*		236. "Šance je malá," říká Lízal. * Četl jsem, že jí i přítelkyni rád vyvařujete. NOT. (1) Udělil-li zákonný zástupce nezletilému, který nenabyl plné svéprávnosti.
 171;40;CSDempron:CSAdj:CSInf+CSConIfCap+CSCapitalInitial|CSCon+CSCapitalInitial;CSCon+CSCapitalInitial|*;make capitalized ambiguous names concept before capitalized concept - remove Negation attribute for negated verb forms
+/*		171. Tim Burton. Velká Javořina. Vít Olmer.
 123;40;CSConIfAllcaps+CSCapitalAll;CSCon;
+/*		123. Dále zde sídlí Mezinárodní úřad pro váhy a míry (soustava jednotek SI) a Interpol.
 176;40;^SBegin|"i"+CSCapitalAll;*|CSCon;for Latin 'i'
+/*		176. Zmínil se o ní již v knize Dějiny matematiky I vydané v roce 1901.
 
 /* disambiguate specific ambiguous words
 /*--------------------------------------
 /* Preposition or Verb
-
 193;40;CSRelpron:CSConj:CSPerspron|CSPrepVerb;*|CSVerb;
+/*		193. Ty spíš, tak jsem nechal obìd v troubì. Vypadáš, jako když spíš.
 90;40;CSPrepVerb;CSPrep;
+/*		90. Bratr byl první, utíkal přede mnou. kvalita je znát v každém detailu – počínaje chromovanými rohovými spoji až po chromované madlo.
 
 /* 'až'
-
 279;40;CSOrdNum:CSNum|CSCon|"až"|CSOrdNum:CSNum:CSJednou|CSCon;*|*|CSPrep|*|*;
+/*		279. jsme pozorovali velmi výrazné pásy výběrové fotoluminiscence párů (donor In) – (A-centrum) při excitaci v oboru 1,575 eV až 1,588 eV. Průměrná roční teplota se pohybuje mezi 5,5 °C až 9 °C.
 272;40;CSOrdNum:CSNum:CSECon:CSAdvTime|"až"|CSOrdNum:CSNum:CSJednou:CSAdvTime;*|CSPrep|*;
+/*		272. TMD jsou tvořeny šesti až jedenácti helikálními úseky spojenými smyčkami. V průběhu let 1994 až 1998 posuzoval podnikatelské záměry. v období listopad 2014 až prosinec 2016 do užívání fyzické osobě. od 5. až 6. stol.
 
 /* 'buď'
-
 344;40;CSBud|*^CSBud:"nebo":"neboli":"anebo"|"nebo":"neboli":"anebo";CSConj|*|*;'either' when 'nebo' follows
+/*		344. Bylo by tedy možné jednoduchou i tandemovou rázovou vlnu využít v onkologii a to buď samotné vlny, nebo jejich kombinaci s jinými chemickými látkami.
 345;40;CSBud;CSAux+CSVerb+CSCopula;
+/*		345. Buď připraven!
 
 /* 'hlavně'
-
 191;40;CSAdj|CSHlavne;*|CSCon;
+/*		191. V prùbìhu první vìtové války se po celý její prùbìh stále používaly i bronzové dělostřelecké hlavně.
 256;40;CSHlavne|CSConj:CSPrep;CSAdvStruct|*;
+/*		256. toto shrnutí VŠECH institucionálních objednávek z minulého měsíce slouží hlavně jako ukázka.
 192;40;CSHlavne;CSRAdv;
+/*		192. V roce 2005 bylo 65,4 procent elektřiny vyráběno pomocí páry a spalováním (hlavně uhlí).
 
 /* 'hodně'
-
 268;40;CSHodne|CSAdv:CSAdvTemp:CSAdjAdv:CSAdvConj;CSAdvDegree+CSAdv|*;
+/*		268. Toto měřítko je už hodně dlouho jedním z hlavních argumentů medvědů. Mládežnická medaile však pro český hokej visí už dlouho hodně vysoko. Na všechno budeme mít hodně málo času. všechna mužstva doma a venku hodně jinak.
 270;40;CSHodne|*CSPerspron:"se":CSPRPron|CSVerb;CSRAdv|*|*;
 271;40;CSVerb|CSHodne|^CSAdj:CSLongPart:CSPosspron:CSCon:CSLongNTLPartCon;*|CSRAdv|*;
+/*		271. Pracujeme hodně, tréninky jsou rychle za sebou. NOT. Kluci ale naštěstí zblokovali hodně jeho střel.
 269;40;CSHodne;CSAdvDegree+CSAdjAdv;
+/*		269. Pro někoho hodně, pro někoho málo. Tam máme hodně nedostatků.
 
 /* 'potřeba'
-
 150;40;CSAux|"potřeba";*|CSAdvModal+CSAdv;
+/*		150. Protože předem není známo, kolik paměti bude potřeba, nemůže být datový prostor adresován přímo, ale pomocí takzvaných ukazatelů (anglicky pointer).
 
 /* 'jen'
-
 189;40;CSNum|CSJen;*|CSCon;
+/*		189. Kolik korun je jeden jen?
 190;40;CSJen;CSAdvStruct;
+/*		190. V novějším římském právu se trestalo zásadně jen rozhodnutí ztělesněné v čin.
 
 /* 'je'
-
 215;40;CSJe|CSPart;CSAux+CSVerb+CSCopula|*;
+/*		215. Právo svobodně se sdružovat je zaručeno.
 214;40;CSVerb|CSJe;*|CSPerspron;
+/*		214. si postupně podřídili místní obyvatele a přiměli je k odvádění dávek.
 148;40;CSAdvStruct:CSAdvTemp:CSAdv|CSJe|CSInf;*|CSPerspron|*;
+/*		148. Každý má právo svobodně je opustit.
 149;40;CSJe|.CSAdv:CSAdjAdv:CSAdvStruct|CSVerb+^CSInf;CSPerspron|*|*;
+/*		149. Po roce 1990 je využívají zejména zahraniční produkce. v souladu s právními předpisy a používá při vyžadování plnění jejich povinností jen takové prostředky, které je nejméně zatěžují a ještě umožňují dosáhnout cíle správy daní. Naproti tomu u přirozeného práva jsou hlavními původci práva Bůh nebo příroda, stát je jen může uznávat. NOT. Účelem zákona je vytvořit všestranné podmínky.
 4;40;CSJe;CSAux+CSVerb+CSCopula;
+/*		4. Hlavním městem je Biškek.
 
 /* 'jak'
-
 18;40;CSJak;CSRelpron;
+/*		18. Existují různé způsoby, jak zjednodušit pohyb na kole po městě.
 
 /* 'již'
-
 37;40;CSComma|"již";*|CSRelpron;otherwise: AdvStruct
+/*		37. jako odměnu za podporu, již mu poskytl v boji o říšskou královskou korunu.
 
 /* 'kolem'
-
 43;40;CSPosspron:CSAdj:CSNum:CSPrep|CSKolem;*|CSCon;
+/*		43. s levým zadním kolem.
 96;40;CSKolem|CSAdj:CSAdjVerb:CSCon:CSAdvTime:CSTimeConcept+^CSNum;CSPrep|*;
+/*		96. Předpokládaly, že vesmír je v prostoru konečný a existuje věčně, a obsahuje soubor soustředných sfér konečných velikostí - které odpovídají stálicím, Slunci a různým planetám - rotujících kolem kulaté, ale nehybné Země. Od starověku jsou výdaje na obranu a válku běžně kolem 50 % rozpočtu města. Nejméně 16 raket a minometných střel dopadlo kolem 13:00. První empirický doklad rotace Země kolem vlastní osy na základě pozorování komet.
 29;40;CSKolem;CSAdvDegree+CSAdv;
+/*		29. V současnosti se dluhopis emitovaný v květnu loňského roku obchoduje s výnosem kolem jednoho procenta – čili na jedné z nejnižších úrovní od emise.
 
 /* 'má'
-
 182;40;CSPrep:CSVerb+^CSInf|CSMa;*|CSPosspron;
+/*		182. Knihy jsou jako má okna do světa. Tato kola jsou má.
 183;40;SBegin|CSMa|.CSAdj|CSCon|CSVerb;*|CSPosspron|*|*|*;
+/*		183. Má zranìní nejsou vážná.
 48;40;CSMa;CSAux+CSVerb;
+/*		48. Poslanec i senátor má právo odepřít svědectví o skutečnostech.
 
 /* 'navíc'
-
 185;40;CSNum:CSZadny|.CSCon|CSNavic;*|*|CSCAdv;
+/*		185. Sto aut navíc dopravu nezatíží.
 186;40;CSNavic;CSAdvStruct+CSAlso;
+/*		186. Navíc jsme mìli kopat penaltu!
 
 /* 'níž'
-
 32;40;CSPrep|CSNiz;*|CSRelpron;
+/*		32. pokud není zřejmé ze souvislosti, v níž se slovo "banka" nebo "spořitelna" používá.
 184;40;CSNiz;CSAdvDir+CSAdv;
+/*		184. Dej to trochu níž.
 
 /* 'naopak'
-
 102;40;^CSComma:SBegin|"naopak"|CSComma:SEnd;*|CSRAdv|*;
+/*		102. Podle ještě více omezující definice je vesmír vše, co se nachází v našem časoprostoru a s čím bychom mohli interagovat nebo naopak. směnná hodnota peněz klesá s jejich rostoucím množstvím a naopak, ale odmítají teorii neutrality peněz.
 
 /* 'okolo', 'min.', 'max.'
-
 86;40;"okolo":"min.":"max.":CSAdvDegree|CSNum;CSNum+CSCon|+Join;
+/*		86. Na Jamajce žije okolo 2 700 000 obyvatel. může návrh na vyhlášení referenda v téže věci podat vláda či společně nejméně dvě pětiny poslanců nebo společně nejméně dvě pětiny senátorů.
 159;40;"okolo":"min.":"max.":CSAdvDegree|CSAdvTime:CSTimeConcept;CSAdvTime+CSTime|+Join;
+/*		159. Okolo 200 let př. n. l. bylo na místě Závist založeno sídliště Keltů. Zhruba 9500 let př. n. l. bylo v oblasti Levanty kultivováno osm základních neolitických plodin. Já už nervozitou z letů skoro měsíc nespím. Dop: prosím o ATB profylaxi min. 5 dní od operace.
 
 /* 'sám', 'sobě', 'ten', 'tu', 'ty'
-
 65;40;CSSam|.CSPrep|CSSobe;CSRefl|+Join|+Join;
+/*		65. ten nápad přišel sám od sebe.
 67;40;CSSobe|CSSam;CSRefl|+Join;
+/*		67. idempotence vlastností určitého prvku množiny, který lze vynásobit sebou samým.
 66;40;CSTen:CSTu|CSSam;CSPRPron|+Join;
+/*		66. Byla to opět ta samá dvojice, kterou hlídka předtím řešila.
 743;40;CSTu;CSPRPron;
+/*		743. v dějinách lidstva zajišťovalo svým členům ochranu - tu, kterou jsme v roce 1938 od svých spojenců nedostali.
 49;40;^CSVerb|CSSam|CSCon:CSAdj;*|CSAdvStruct|*;
+/*		49. Román byl napsán francouzsky a v následujících letech byl Kunderovou přeložen do češiny (překlad trval déle než samotné napsání, sám Kundera říká, že to bylo jako napsat novou knihu).
 33;40;CSSam;CSRefl;
+/*		33. že převážně sami dlouhodobě pečují o fyzickou osobu.
 
 /* 'tak'
-
 578;40;CSTak|CSAdj|.CSComma|CSConj:"jako":"až";CSCAdv|*|*|*;
+/*		578. Mlhoviny nebo hvězdokupy jsou tak slabé, že za jasné oblohy prakticky mizí, ale tentokrát můžeme tyto objekty hluboké oblohy pozorovat.
 580;40;CSTak|CSAdvTemp|.CSComma:CSVerb|CSConj:"jako":"až";CSAdvTemp+CSTime|+Join|*|*;
+/*		580. Sestavit po volbách vládu ještě ve spolkové republice nikdy netrvalo tak dlouho jako nyní. Čtenář/uživatel tak často zjistí, že data se na dané URL již nenalézají.
 579;40;CSTak|CSAdvTemp:CSNum;CSRAdv|*;
+/*		579. on tak opět minimálně do pátku navýšila náskok v čele tabulky.
 582;40;SBegin:CSComma|CSVerb|CSTak;*|*|CSRAdv;
+/*		582. Přišel tak o vítězství.
 576;40;"a"|.CSAdj:CSCon|CSVerb|CSTak;*|*|*|CSRAdv;
+/*		576. Není to jen tvar, který odpovídá rozměrům pečící nádoby a připomíná tak spíše moskevský chléb. a koupě je tak zdánlivě zcela bezdůvodná.
 47;40;CSTak|CSComma;CSRAdv|*;
+/*		47. Přirozený jazyk a matematika: jak popsat češtinu tak, aby jí „porozuměly“ počítače?
 375;40;"jak"|*^"jak":CSComma|CSComma|CSTak;*|*|*|CSAndOr;
+/*		375. Není divu, že se o sport zajímaly astále zajímají jak politické, tak ekonomické elity jednotlivých států.
 46;40;CSComma|CSTak;*|CSConj;
+/*		46. ze zdrojů na území České republiky, tak i na příjmy plynoucí ze zdrojů v zahraničí. Díky propojení s korpusovými daty bude možné slovník využívat jak pro lingvistický výzkum, tak pro NLP aplikace.
 44;40;CSTak|CSAdj+^CSOrdNum;CSCAdv|*;
+/*		44. Nemyslím si, že to bylo tak jednoznačné. NOT. Stalo se tak 14. prosince 1911.
 196;40;CSTak;CSAdvDegree+CSAdv;
+/*		196. Španěl se tak radoval v této sezóně už ze sedmého triumfu z deseti odjetých závodů.
 
 /* 'vila'
-
 187;40;CSCon|CSVila|.CSAdj|CSCon;*|CSVerb|*|*;
+/*		187. Dívka vila věneček z pampelišek.
 188;40;CSVila;CSCon;
+/*		188. Tradičním sídlem premiéra je Kramářova vila.
 
 /* adjectives
 /*- - - - - -
 /* Adjective or Noun
-
 251;40;CSAdjCon|CSAdj:CSLongPart:CSCon;CSAdj|*;
+/*		251. Účetní hospodářský výsledek za rok 2017 činil 90 tis. Účetní přidaná hodnota v běžných cenách vzrostla v roce 2004 meziročně o 11,2 %.
 71;40;CSAdjCon;CSCon;
+/*		71. Tak jsem zavolal předsedovi představenstva a rozhodli jsme, že trenérovi vyhovíme.
 
 /* Comparatives and Superlatives
-
 277;40;"něco":"ještě"|CSAdjAdv+CSComp+CSAdvDegree;CSAdjAdv+CSComp+CSAdvDegree|+Join;
+/*		277. Na krachu ruského klubu mohou on vydělat ještě více.
 135;40;"něco":"ještě":"stále"|CSComp;CSAdvDegree-CSTime|*;remove time from stále
+/*		135. Ve středověku se pak do jisté míry stala dědičnou záležitostí feudálů, o něco později výlučnou záležitostí politiků. budeme ještě více investovat do našich zaměstnanců formou odměn.
 346;40;"co"|CSAdj+CSSuper;JoinReverse|+CSAdj;
+/*		346. že budou muset svá zařízení v co nejkratší době uzavřít. je pohltit při nehodě co největší množství energie.
 827;40;CSNum|*<CSAdj:CSCon|CSComp:CSSuper+CSBCon;*|*|-CSBCon;
+/*		827. Proto by měl být 3D monitor jen o zhruba 50 procent dražší než srovnatelný 2D monitor.
 8;40;CSAdj+CSComp:CSSuper+^CSBCon;CSAdj;
+/*		8. větší část města se rozkládá ve svahu nad levým břehem. Hlavním městem je Carson City a největším městem je Las Vegas. NOT. objem je v jednotlivých případech větší než 50 litrů.
 76;40;CSNum|"nebo":"či"|CSAdjAdv+CSComp;CSNum+CSCon|+Join|+Join;
+/*		76. Do roku 1949 byly správní obvody až na jednu výjimku z roku 1947 tvořeny jedním nebo více celými katastrálními celky.
 653;40;CSAdj|CSAdjAdv+CSComp|"než":"jak"|CSNum;*|CSNum+CSCon|+Join|+Join;
+/*		653. Podle posledních odhadů hledají firmy rekordních více než dvě stě tisíc zaměstnanců.
 660;40;CSAdjAdv+CSComp|"než":"jak"|CSNum|^CSGen;CSNum+CSBCon|+Join|+Join|*;beginconcept if NOT followed by a noun in genitive
+/*		660. v roce 2008 bylo na celém světě více než 1,4 miliardy lidí. sjednat zvýšení pojistného dražebníka o více než 10 % původního pojistného. Skládá se z více jak 40 malých ostrůvků.
 77;40;CSAdjAdv+CSComp|"než":"jak"|CSNum;CSNum+CSCon|+Join|+Join;
+/*		77. Za prvních Slovanů mělo hradiště rozlohu více než 22 hektarů a patřilo tak mezi největší ranně středověká hradiště u nás.
 493;40;CSAdjAdv+CSComp|"než":"jak"|CSTimeConcept;CSAdvTime+CSTime|+Join|+Join;
+/*		493. byla v úseku více než sedm hodin zablokována doprava.
 347;40;"co"|CSAdjAdv+CSSuper|CSCon;CSAdj|+Join|*;
+/*		347. Dalším trendem je snaha využít co nejvíce informací o detekovaném signálu.
 78;40;CSAdjAdv+CSComp:CSSuper|CSCon;CSAdj|*;
+/*		78. Kolektivní smlouvu mohou uzavřít zaměstnavatel nebo více zaměstnavatelů.
 111;40;CSComp:CSSuper+CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;for combinations with 'less' and 'more'
+/*		111. Užívá se převážné u pěchoty, méně často u jezdectva nebo u tanku.
 112;40;CSComp:CSSuper+CSAdvDegree|CSAdvManner;CSAdv+CSAdvManner|+Join;for combinations with 'less' and 'more'
+/*		112. Bering (také, méně správně, Behring).
 82;40;CSAdvTemp+CSComp:CSSuper;CSAdvTemp;
+/*		82. Václav Havel byl český dramatik, esejista, kritik komunistického režimu a později politik. Ve fotbale hrají dvě družstva po jedenácti hráčích na obdélníkovém, nejčastěji travnatém hřišti.
 348;40;"co"|CSSuper+^CSAdjVerb:CSCAdv;CSAdv+CSAdvDegree|^CSAdv;keep specific labels for adverbs
+/*		348. tímto souvisí největší úskalí forenzní fonetiky: najít takový akustický parametr řeči, který bude co nejvíce odolný vůči změnám pocházejícím od mluvčího, a zároveň takový, jenž mluvčí mezi sebou spolehlivě odliší.
 26;40;CSComp:CSSuper+^CSAdjVerb:CSCAdv;^CSAdv;keep specific labels for adverbs
+/*		26. více státních občanství. NOT. velikost tohoto spoluvlastnického podílu státu vyjádřená výměrou je menší než 10 ha.
 
 /* Adjectives or Verbs
-
 101;40;^CSVerb|CSPerspron+^CSPosspron|CSAdjVerb;*|*|^CSVerb;
+/*		101. jak mu chutná česká kuchyně. NOT. Jeho stará budova je památkově chráněnou secesní stavbou. NOT. A tím spíše se výrazové prostředky, které jsou jí vlastní, promítají do umělecké tvorby.
 581;40;CSKtery|.CSAdv:CSAdvStruct|CSAdjVerb;*|*|^CSVerb;
+/*		581. který vlastní uznávanou veterinární ordinaci v Londýně.
 56;40;CSAdjVerb|CSCondSuffix;^CSVerb|Join;
+/*		56. Lepší-li se stav, pokračujeme další dva týdny, nelepší-li se, podávání ukončujeme.
 376;40;CSAdjVerb|CSPrep;^CSVerb|*;
+/*		376. Podle výrobce chutná po bobulovitém ovoci jako jsou maliny, borůvky či rybíz.
 658;40;CSRelpron:CSConj|.CSAdvStruct:CSAdj:CSLongPart:CSCon:CSPerspron:CSPrep:CSSe|CSAdjVerb|CSComma:CSAndOr:SEnd;*|*|CSVerb|*;
+/*		658. řecký přístav Pireus, který už čínský investor vlastní. Navíc ještě může dávat najevo, jak mu snídaně chutná.
 23;40;CSAdjVerb;CSAdj;
+/*		23. Všichni účastníci řízení mají před soudem rovná práva. velikost tohoto spoluvlastnického podílu státu vyjádřená výměrou je menší než 10 ha.
 
 /* combinations of 'many', 'few', 'more', 'less', 'most', 'least' with pronouns
-
 128;40;CSAdjAdv+CSAdvDegree|"z"|CSPerspron;CSPerspron|+Join|+Join;
+/*		128. Mnoho z nich bylo zatčeno, dodal ještě.
 795;40;"mnozí":"mnohých":"mnohým":"mnohé":"mnohými"|"z"|CSPerspron;CSPerspron|+Join|+Join;
+/*		795. pro mnohé z nich už nemusí být paušály výhodné.
 129;40;CSAdjAdv+CSAdvDegree|."z"|CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|CSAdj|*;
+/*		129. Mnoho z našeho chování má kořeny v procesech, které jsou nevědomé. Na to, že současně probíhá více takových postupů u různých správních orgánů nebo u jiných orgánů veřejné moci, je dotčená osoba povinna správní orgány bezodkladně upozornit.
 
 /* adverbs
 /*- - - - 
 /* Adjectives or Adverbs (or Nouns)
-
 110;40;CSAdjAdv|.CSSe|CSVerb:CSPart;^CSAdv|*|*;keep specific adverb label
+/*		110. Hladové a nemocné děti do školy nechodí, a pokud chodí, tak se mnoho nenaučí.
 121;40;CSAdjAdv|CSLongPart|CSPrep;CSRAdv|^CSPart|*;
+/*		121. Peyo byl belgický kreslíř komiksů, nejvíce známý jako autor Šmoulů.
 636;40;CSLongPart|CSAdjAdv|CSPrep;^CSPart|CSRAdv|*;
+/*		636. další podání musí převyšovat podání již učiněné nejméně o stanovený minimální příhoz.
 136;40;CSVerb:CSPart+^CSCopula|CSAdjAdv|CSPrep:CSConj:CSAndOr:SEnd;*|CSRAdv|*;
+/*		136. Pražané se vystěhovávají nejvíce do Středočeského kraje. NOT. V New Yorku se nalézá asi 5600 mrakodrapů a 48 z nich má přes 200 m, což je nejvíce na světě. Nikdo nemůže být zvolen více než dvakrát za sebou.
 657;40;CSCon|CSAdjAdv+CSAdvDegree|CSPrep;*|CSRAdv|*;
+/*		657. zda „přispívá politika soudržnosti EU v programovém období 2014-2020 více ke zmírňování změny klimatu.
 278;40;CSRAdv|CSAndOr|CSAdjAdv;*|*|CSRAdv;
+/*		278. Němci proto musejí počítat s tím, že za své zdraví budou platit stále více a více.
 675;40;CSAdjAdv|CSRAdv;CSRAdv|*;
+/*		675. Jsem moc ráda, že už je to všechno pryč.
 756;40;CSAdjAdv|CSAdj;CSCAdv|*;
+/*		756. souvislost s generalizací je méně pravděpodobná.
 758;40;CSAdjAdv|CSLongPart;^CSAdv|*;
+/*		758. Málo známý zákon, který to zakazuje.
 22;40;CSAdjAdv;CSAdj;
+/*		22. Datová sada je dostupná online.	zdraví neohrožujícího pracovního prostředí.
 
 /* Short adjectives
-
 173;40;CSShAdj|CSAdj:CSIndefpron:CSCon;*|^CSAdj+CSBCon;
+/*		173. Jedinci si nejsou zcela vědomi některých důležitých aspektů svého chování. že jim nejsou známy okolnosti vylučující uzavření manželství.
 
 /* Adverbs or Nouns
-
 651;40;CSCon|CSAdvCon|CSPart;*|^CSAdv|*;
+/*		651. jsou po mém soudu neprávem opomíjené.
 649;40;CSAdvCon+CSAdvDir|CSLongPart;^CSAdv+CSAdvDir|*;
+/*		649. spíše navazuje na výše zmíněný předpoklad.
 650;40;CSVerb|"výše"|CSAdj;*|CSCAdv|*;
+/*		650. Naopak nejnižší poměr výsledku hospodaření k tržbám lze pozorovat v roce 2015, kdy dosahuje výše pouhých 3,4 %.
 238;40;CSAdj:CSLongPart|CSAdvCon;^CSAdj|CSCon;
+/*		238. Státní moc slouží všem občanům. Uplatnění této klauzule za účelem změny jednomyslného rozhodování na rozhodování kvalifikovanou většinou v určité oblasti.
 407;40;CSPrep:CSPosspron|CSAdvCon;*|CSCon;
+/*		407. a pod hrátkami s časem a prostorem. On si společně se svou stranou získal jejich srdce právě odhodlaností.
 414;40;CSAdvCon+CSAdvManner|CSAdj;CSCAdv|*;
+/*		414. Chlor, chemická značka Cl, (starořecky χλωρóς, chlóros – „zelený“) je toxický, světle zelený plyn, druhý člen řady halogenů.
 406;40;CSAdvCon+CSAdvDegree;CSAdv+CSAdvDegree;
+/*		406. Podpory fanoušků si moc ceníme a tímto moc děkujeme.
 413;40;CSDempron+CSInstr|CSAdvCon;CSNRPron|CSCon;
+/*		413. Na každém kolečku vytlačíme palcem důlek a právě touto stranou dáme do rozpáleného oleje.
 408;40;CSAdvCon+CSAdvDir;CSAdv+CSAdvDir;
+/*		408. A dolů směřuje velmi pomalu.
 416;40;"skokem"+^CSCon|CSVerb;CSRAdv|*;
+/*		416. Skokem byl u ní a zahlédl kufr.
 417;40;CSVerb|"skokem"+^CSCon;*|CSRAdv;
+/*		417. I ony se mnohdy stávají nástrojem politického nátlaku, jejich dostupnost se mění a ceny rostou skokem.
 409;40;"právem":"náhodou":"málem"+^CSCon;CSAdv+CSAdvManner;
+/*		409. Na podzim byl právem hodnocen jako jeden z nejlepších brankářů v lize. V Praze se v té době, byť tak trochu náhodou, také narodil Alois Senefelder, který roku 1796 vynalezl litografii.
 60;40;CSAdvCon+CSAdvTemp;CSAdvTemp+CSTime;
+/*		60. Všímají si jen drobného výseku lidského života a jsou většinou vysoce specializované.
 24;40;CSAdvCon;CSCon;
+/*		24. Ať už bude ale budou kroky jakékoliv, budou krokem do neznámých vod.
 
 /* Adverb or Conjunction
-
 61;40;SBegin:CSComma|CSAdvConj;*|CSConj-CSTime;
+/*		61. Tedy všechny potraviny na trhu by měly být bezpečné. V oblasti komputačních aplikací se zaměřujeme na témata postojové analýzy, tedy automatické extrakce emocí z textu. Kdykoli automobilka postaví sportovní model, řeší stejný problém.
 62;40;CSAdvConj+CSAdvStruct;CSAdvStruct;
+/*		62. Nemá smysl se tím jakkoli zabývat nebo se tomu bránit.
 63;40;CSAdvConj+CSAdvTemp;CSAdvTemp;
+/*		63. Nenápadnou chatku v lesích lze kdykoli převézt jinam.
 194;40;CSAdvConj+CSAdvManner;CSAdvManner+CSAdv;
+/*		194. Obchodní dùm Máj mìl vypadat jinak.
 
 /* Adverb or Reflexive pronoun
-
 72;40;CSInf|CSRefl+CSAdvManner;*|CSRefl;
+/*		72. Muž a žena, kteří chtějí spolu uzavřít manželství mají předem poznat navzájem své charakterové vlastnosti.
 73;40;CSRefl+CSAdvManner|.CSAdv:CSAdvStruct|CSVerb:CSCiPart;CSRefl|*|*;
+/*		73. prohlásit, že navzájem znají svůj zdravotní stav. Ačkoliv pro žádnou z těchto teorií neexistují nezvratné důkazy, je třeba si uvědomit, že se navzájem nevylučují. Je možné si představit oddělené časoprostory, každý existující sám o sobě, které ale nemohou navzájem spolu komunikovat.
 
 /* modal adverb as part of Concept
-
 793;40;CSPrep|CSAdvModal+CSAdvManner|CSAdj;*|CSCAdv|*;
+/*		793. V pravděpodobně posledním závodě sezony.
 794;40;CSAdvModal+CSAdvManner;-CSAdvManner;
+/*		794. Protože však hlavními čtenáři práce budou pravděpodobně sinologové.
 
 /* join adverbs
-
 81;40;CSAdvDegree|CSAdvTemp;CSAdvTemp|+Join;
+/*		81. Některé důkazy rovněž  naznačují, že rychlá kosmická inflace vesmíru proběhla velice brzy po jeho vzniku.
 95;40;CSAdvManner|CSAdvDegree;^CSAdvDegree|+Join;
+/*		95. Vlas a chlup jsou označení pro dva anatomicky téměř totožné útvary tvořené keratinem.
 
 /* Adverbs as part of Concept
-
 197;40;"tak"|CSOrdNum;CSRAdv|*;exception to r7
+/*		197. ekonomika je tak 16. nejsilnější v EU.
 7;40;CSAdvDegree|CSAdj:CSTimeConcept;CSCAdv|*;
+/*		7. Zajímavostí je, že vůbec první zemí, kde byl absint zakázán. Wolfram je šedý až stříbřitě bílý, velmi těžký a mimořádně obtížně tavitelný kov. V rámci kayakingu jsme nejprve pádlovali zhruba půlhodiny na přehradě.
 120;40;CSAdvManner:CSAdvDir|CSOrdNum:CSIndefpron|^CSAdj;CSRAdv|*|*;
+/*		120. Friedrich otevřel oficiálně první mateřskou školu. typicky několik set tisíc tokenů nebo více. NOT. Historicky prvními českými politickými stranami.
 89;40;CSAdvManner|.CSLongPart|CSAdj;CSCAdv|*|*;
+/*		89. Od výše uvedených slov je také odvozeno označení pro klasický fotografický materiál nazývaný kinofilm. NOT. byla založena symbolicky 17. listopadu 1989. všech existujících písemně zaznamenaných jazykových projevů lidstva.
 832;40;CSAdvManner|CSCon+CSAcro;CSCAdv|*;
+/*		832. Pacient s nově dg. lymfoproliferaci byl přijatý k zahájení léčby.
 93;40;CSAdvDegree|CSCAdv;CSCAdv|+Join;
+/*		93. Pohledy pravice a levice jsou naprosto přirozeně odlišné.
 41;40;CSAdvDegree|CSNum;CSNum|+Join;
+/*		41. Je to krátký pulz, který trvá celkem okolo 5 µs.
 255;40;CSAdvManner:CSAdvDir|CSAndOr|CSCAdv;CSCAdv|*|*;
+/*		255. hospitalizace se často odehrávají v technicky a dispozičně nevyhovujících podmínkách.
 
 /* relation OR noun, plus various
 /*- - - - - - - - - - - - - - - -
 /* Infinitive or Noun / Conjugated verb or Noun
-
 198;40;CSAdj:CSPrep|CSCon:CSInfCon:CSVerbCon|CSAndOr|CSInfCon:CSVerbCon|^CSInf;*|CSCon|*|CSCon|*;
+/*		198. Pro získání přirozených uživatelských dotazů i odpovědí systému byla použita metoda crowdsourcingu.
 12;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep|CSInfCon:CSVerbCon;*|CSCon;
+/*		12. Je to druhý nejmenší stát na světě a současně země. předpisu považuje za osobu závislou na pomoci jiné fyzické osoby. Kmen se ve výšce cca 2,5 m rozvětvuje do tří hlavních větví. Náš postup aplikujeme na dva konceptuálně odlišné překladače. Mytologie jsou velmi proměnné a svědčí spíše o pojmenování nějakých sil nebo oblastí. rychlé střídání promítaných obrázků za velmi krátký časový úsek se našemu očnímu nervu a následně i mozku jeví jako nepřerušená činnost.
 133;40;CSAux|CSVerbCon:CSInfCon+CSmAux;*|CSVerb+CSmAux;
+/*		133. dlužník bude moci ve správě majetku nebo v provozu podniku pokračovat. Přestože křesťanská architektura vycházela z římské, byla potřeba řada podstatných změn.
 134;40;CSmAux|CSInfCon;*|CSInf+CSVerb;
+/*		134. V jedné ústřici může růst současně pouze jedna perla.
 132;40;CSVerb|CSVerbCon:CSInfCon;*|CSCon;
+/*		132. Na konferenci je vstup pro účastníky zdarma, ale podmínkou účasti je registrace.
 759;40;CSVerbCon|.CSAdvTemp:CSAdvStruct:CSAdv|CSVerb+^CSInf;CSCon|*|*;
+/*		759. Pořadatelé soutěží často pouze vytyčí přibližný směr závodu a je na soutěžících, jakou trasu zvolí. Navíc se sál postupně začal zaplňovat.
 648;40;CSInfCon+CSAux:CSmAux|CSInf;^CSInf+CSVerb|*;for InfCon as auxiliary verb, to prevent r175 from making it concept
+/*		648. Jak pomoci řešit krizi, o tom přes svou ekonomickou odbornost mlčí.
 797;40;CSmAux|.CSAux:CSSe|*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|*|*|^CSInf+CSVerb;
+/*		797. Označení by naopak mohlo slovenským výrobcům pomoci. Experimenty jsou prvním krokem v plánované větší anotaci a měly by nám pomoci s výběrem podmnožiny studovaných zdrojů. Snažila jsem se jí pomoci, jen ji trochu uklidnit.
 798;40;*CSPosspron:CSPerspron:CSAdvTemp:CSAdvTime:CSAdj:CSCon|CSInfCon+CSAux;*|CSCon;
+/*		798. jejichž cílem je poskytování pomoci lidem v obtížné životní situaci.
 175;40;CSVerbCon:CSInfCon|.CSPerspron:CSAdvStruct|CSVerb;CSCon|*|*;
+/*		175. začala po pěti letech oprav sloužit veřejnosti letos v lednu.
 231;40;CSVerbCon:CSInfCon|CSSe|.CSAdvStruct|CSVerb;CSCon|CSRefl|*|*;
+/*		231. Moci se chopil roku 1961 vojenským převratem.
 115;40;CSLongPart|CSVerbCon:CSInfCon;CSAdj|CSCon;
+/*		115. přijetí usnesení o souhlasu s vysláním ozbrojených sil republiky.
 174;40;CSVerbCon:CSInfCon|CSAdj|^CSAdj:CSCon;CSCon|*|*;
+/*		174. V prezidentském systému tedy lépe odpovídá oddělení moci výkonné od moci zákonodárné podle klasické představy.
 304;40;CSLongNTLPartCon|CSInfCon;CSCon|CSCon;
+/*		304. Základní východisko mé psychologické a psychoterapeutické činnosti je nabídnutí pomoci sociálním pracovníkům v jejich práci s klienty.
 11;40;CSInfCon;^CSInf+CSVerb;keep other labels eg. Aux
+/*		11. Věřili jsme, že to je dobrá investice, protože turismus měl podle všech signálů růst.
 224;40;CSCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|*|CSCon|*|*;
+/*		224. charakteristickou příchutí tabákového výrobku jasně rozpoznatelná vůně nebo chuť jiná než tabáková chuť, kterou výrobku dodává přísada nebo kombinace přísad, zejména ovoce, koření, byliny, alkohol nebo cukrovinky, mentol nebo vanilka. např. teplotavzduchu, stav oblačnosti, rychlost a směr větru, déšť, sněžení apod.). dopravní prostředek, kontejner nebo obal, v nichž se zboží nachází. pšenice, žito, ječmen a oves, rýže a kukuřice.
 247;40;CSAdj|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|CSComma:CSAndOr|CSVerbCon:CSNTPartCon:CSLongNTLPartCon|.CSCon|CSComma:CSAndOr:SEnd;*|CSCon|*|CSCon|*|*;
+/*		247. (jednorázový výnos z vypořádání dřívějšího soudního sporu, pozitivní přecenění, prodej dluhopisů a výnosy spojené s ukončením kurzového závazku).
 225;40;SBegin:CSPunctuation|CSVerbCon:CSNTPartCon|CSComma:CSAndOr|CSCon;*|CSCon|*|*;
+/*		225. pochutiny (koření, alkaloidní pochutiny, ostatní pochutiny, kypřící prostředky).
 13;40;CSVerbCon;^CSVerb;keep other labels eg. Aux
+/*		13. Ani prevence kriminality na finančním trhu kriminalitu zcela neodstraní, ale dokáže ji omezit, stejně jako existence policie nezabrání obecné kriminalitě.
 
 /* 'a to'
-
 337;40;"a"|"to"|CSVerb+^CSInf;CSAndOr+CSConjPB|CSPRPron+CSTen|*;exception to lexrep 'a to' as advstruct
+/*		337. Je to však běh na dlouhou trať, bitcoin existuje teprve 10 let a to je opravdu velmi krátká doba na jeho širší ukotvení ve finančním systému, respektive na jeho širší akceptaci jako platidla.
 605;40;"a"|"to"|CSComma|CSConj;CSAndOr+CSConjPB|CSPRPron+CSTen|*|*;
+/*		605. Důležitým znakem románských staveb je bohatě členěný obrys a to, že dochází k dekorativnímu členění zdí.
 
 /* Participle or Noun
-
 207;40;CSPrep|CSLongPart|CSNTPartCon:CSCiPartCon;*|CSAdj|CSCon;
+/*		207. Většina zahrádkářů z kolonie byla hrůzným činem otřesená a u uzavřené brány skoupá na slovo.
 9;40;CSPosspron:CSIndefpron:CSNRPron:CSAdj:CSNum:CSPrep:CSVerb+^CSAux|CSNTPartCon:CSCiPartCon;*|CSCon;
+/*		9. Složil Rekviem pro tři cella a orchestr a mnoho menších děl, jež se hrají dodnes. geniální hudebník, který za svého života vytvořil 626 děl světského. Poznatky o antické demokracii jsou zprostředkovány především z děl Aristotela. Nazýváno bývá jako Vstupní brána Krkonoš. Vedoucím zaměstnancem je nebo se za vedoucího zaměstnance. Pověření ke kontrole vydává vedoucí kontrolního orgánu. Sekularizovaný životní styl vede některé věřící k chiliasmu. které znemožňují přímé spojení mezi jimi oddělenými pozemky. NOT. Hlavní prostor byl kryt kupolí.
 227;40;CSCiPartCon|CSPunctuation:SEnd:CSVerb:CSPart;CSCon|*;
+/*		227. kontrolní orgán k tomu pověřil (dále jen „kontrolující“). kupující nemusel chodit do úschovny.
 263;40;CSCon|CSAndOr|CSCiPartCon;*|*|CSCon;
+/*		263. převoz vozidla do nejbližšího nebo nejvhodnějšího místa opravy a přeprava řidiče a spolucestujících do nejbližšího místa.
 506;40;^CSVerb|CSAdvDegree:CSAdvManner:CSAdvDir|CSLongNTLPartCon;*|*|CSLongPart;
+/*		506. vědci těsně spojení s výzkumem ionosféry byli ve 20. století dvakrát oceněni Nobelovou cenou za fyziku. NOT. o jejich majetkových povinnostech a právech v době po zániku manželství platí obdobně ustanovení o povinnostech a právech rozvedených manželů ke společnému dítěti.
 10;40;CSNTPartCon;CSPart+CSNTPart;
 87;40;CSCiPartCon;CSCiPart+CSLongPart;
+/*		87. Ovšem, odboráři si vzali možná cestující jako rukojmí.
 809;40;CSLongNTLPartCon+CSGerund;CSCon+CSConNomAccN+CSConGenMN+CSConDatMN+CSConNomPl+CSConGenPl+CSGen;
+/*		809. nedá-li předseda komory do 24 hodin od zadržení souhlas k odevzdání zadrženého soudu.
 113;40;CSLongNTLPartCon;CSCon;
+/*		113. To jen na vysvětlenou a rozhodně tím nechci říct, že s materiálem nesouhlasím.
 
 /* 'se'
-
 684;40;CSSe|*CSAdj:CSCon:CSPrep:CSAndOr:CSAni:CSAdv|CSVerb;CSRefl|*|*;
+/*		684. čím více jsou vědci se svými obrazy světa emocionálně spojeni, tím spíše prosazení se nového obrazu světa bude spojeno až s generační výměnou.
 19;40;CSSe|.CSAdvTime:CSAdvTemp|CSVerb:CSPrep;CSRefl|*|*;
+/*		19. Každé dva roky se volí třetina senátorů. Již v minulosti se ukázalo. jsou ale také země, kde prezident stojí mimo vládu, pak se s ním vláda o výkonnou moc dělí. Samotížná cirkulace bez čerpadla se dnes nenavrhuje. Vojenské entity bez vztahu ke konkrétnímu území se zpravidla nazývají legie nebo soukromé armády.
 20;40;CSVerb|CSSe;*|CSRefl;
+/*		20. Senát může se souhlasem Poslanecké sněmovny podat ústavní žalobu. Zaměřoval se především na lidské chování a omezil se na objektivně pozorovatelná fakta.
 554;40;SBegin:CSPrep:CSConj:CSVerb:CSAdj:CSIndefpron:CSRefl|.CSAdv|CSCiPart|CSSe|CSCon;*|*|^CSAdj|+Join|*;
+/*		554. rodící se hnutí za jejich emancipaci si odkazy na slavná jména dodávalo na legitimitě. Koruna potažmo dvůr reagovaly určitým způsobem na měnící se okolnosti. Dalším faktorem, který přispívá k překonání paternalistického modelu, je zlepšující se informovanost pacientů. Přirovnává proces globálního šíření modernity k obrovskému řítícímu se kolosu. v Bílém domě (a jiných domech), rozjitřená situace na některých rozvíjejících se trzích. A těžko očekávat, že by se rozvíjející se trhy rychle postavily v jinak na události prázdném týdnu na nohy.
 21;40;CSSe;CSPrep;
+/*		21. se sídlem v Paříži.
 
 /* 'ale' + [also]
-
 274;40;"ale"|*CSVerb:CSPrep:CSPRPron:CSCon:"se"|CSAlso;*|*|CSRAdv;
+/*		274. Král je nejen hlavou Norského království, ale stojí také v čele Norské církve, Vrchním velitelem Norských ozbrojených sil a plní reprezentativní funkce. Jak uchopit masiv nejen oné původní, téměř magií opředené legendy, ale k tomu ještě, jak se neztratit v onom košatém a nezměrném uměleckém pokračování, rozvíjení, variování a domýšlení?
 
 /* 'místo': preposition or noun (different from ConPrep)
-
 292;40;^CSAdj:CSPrep|"místo"|CSConj;*|CSPrep|*;
+/*		292. Místo aby spolupracoval se spojenci, tak jimi pohrdá. NOT. Na místo proto jeli i hasiči, kteří ho po žebříku snesli dolů.
 293;40;"místo"|CSDempron:CSPerspron;CSPrep|*;
+/*		293. Místo ní nechává správa hradu obnovit dřevěnou verandu. voják může místo toho učinit oznámení nadřízenému.
 294;40;CSCon|"místo"|*CSAdj:CSCon;*|CSPrep|*;
+/*		294. znamenalo mírný propad místo obvyklého nárůstu během podzimu. WRONG. v jehož územním obvodu má vývozce zboží místo pobytu nebo sídlo. Středoevropané nyní volí klidné prozápadní prezidenty místo konfrontačních.
 295;40;CSPerspron+^CSPosspron|"místo";*|CSPrep;
+/*		295. když jí místo zlatého snubního prstenu navlékl na prst jen kožený červený kroužek, koupený od domorodého prodavače na pláži.
 
 /* Preposition or Noun - first part
-
 222;40;CSPrep:CSConPrep|CSAdvTemp+^CSMultiwordAdverb|CSLongPart;CSPrep|CSCAdv-CSTime|CSAdj;
+/*		222. Výzkum přitom neomezujeme na předem stanovenou skupinu výrazů. Počítač je v informatice zařízení a výpočetní technika, která zpracovává data pomocí předem vytvořeného programu. NOT. Byl jsem v té době zraněný a on taky.
 80;40;CSAdj|CSConPrep|^CSAdj:CSCon:CSPosspron:CSNum;*|CSCon|*;
+/*		80. s dvanácti tunami humanitární pomocí a patnáctičlenným týmem na palubě. NOT. Je známý díky svému dílu z oblastí středověké literatury.
 179;40;CSPrep+^"se"|CSConPrep;*|CSCon;
+/*		179. S pomocí teoretiků tohoto oboru se ve čtvrté kapitole snažím zjednat pořádek. NOT. New Yorku se díky čilému nočnímu životu někdy přezdívá Město, které nikdy nespí.
 220;40;CSConPrep|CSAdj:CSCon:CSBCon:CSECon:CSAdvTime:CSConj;CSPrep|*;
+/*		220. do beztlaké nádoby expanzního automatu a vracení zpět pomocí čerpadla.
 218;40;CSConPrep|CSRefl:CSPerspron:CSDempron:CSPosspron:CSPRPron:CSNRPron:CSIndefpron:CSRelpron;CSPrep|*;
+/*		218. Pomocí něj sliboval jistý učenec.
 
 /* conditional suffix '-li'
-
 54;40;CSVerb|CSCondSuffix;^CSVerb|Join;
+/*		54. stanoví-li mezinárodní smlouva něco jiného než zákon, použije se mezinárodní smlouva. Byla-li Poslanecká sněmovna rozpuštěna, konají se volby do šedesáti dnů po jejím rozpuštění.
 57;40;^SBegin|CSCon+CSCapitalInitial|CSCondSuffix;*|^CSCon|Join;
+/*		57. K2 (pinyin Qiáogēlǐ Fēng, český přepis Čchiao-ke-li feng), známá též pod anglickým názvem Mount Godwin-Austen, je hora v pohoří Karákóram v Asii, nejvyšší hora Pákistánu a druhá nejvyšší hora světa.
 55;40;CSCon|CSCondSuffix;^CSVerb|Join;
+/*		55. Uvoln-li se úřad prezidenta republiky a nový prezident republiky ještě není zvolen nebo nesložil slib.
 58;40;^CSCondSuffix|CSCondSuffix;CSVerb|Join;default rule to make sure suffix doesn't become nonrelevant (combined with word that is neither verb nor concept)
-
 /*stát: infinitive or noun
-
 522;40;"se":"si"|CSVerb|.CSAdj:CSCon:CSAdvStruct:CSAdv+^"stát"|"stát";CSRefl|*|*|CSVerb+CSInf+CSCopula;
+/*		522. Právě odpočty by se měly stát v budoucnu klíčovým nástrojem podpory inovací. Pak se může volba školy stát mechanizmem diferenciace také kvůli sebeselekci.  která se zamilovala do lidského prince, pro nějž se rozhodla stát člověkem.
 523;40;CSVerb|"se":"si"|.CSAdvStruct:CSAdv:CSCon+^"stát"|"stát";*|CSRefl|*|CSVerb+CSInf+CSCopula;
+/*		523. Stačí se stát členem VIP zóny. Chtěla–li se psychologie stát uznanou vědou, musela i ona prokázat.
 524;40;CSmAux:CSAux+^CSCopula|.CSAdvStruct:CSAdv|"stát";*|*|CSVerb+CSInf;
-
+/*		524. některých odborníků dokonce mohlo stát atraktivnějším cílem.
 /*'za prvé', 'za druhé', 'za třetí'
-
 125;40;"za"|"prvé":"druhé":"třetí"|CSVerb:CSRefl;CSAdvStruct|+Join|*;
+/*		125. Za prvé přináší analýzu jazykových prostředků. Za druhé se zaměříme na komputační aplikace.
 
-/*'jako'
-
+/* 'jako'
 377;40;"jako"|CSVerb+^CSInf;CSConj+CSConjPB|*;
+/*		377. Přirovnává proces globálního šíření modernity k obrovskému řítícímu se kolosu, jako je mohutný vůz. NOT. bylo by jako vzpomínat oběti napoleonských válek.
 
 /* disambiguate ambiguous parts of speech
 /*---------------------------------------
 /* long nt- and l-participles and ci-participles = Participle or Adjective
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 /* long l-participles and ci-participles after copula become concepts
-
 508;40;CSCopula|*{1,3}CSAdv:CSAdvStruct:CSAdvTemp:CSAdj:CSCon:CSPrep|CSLongPart+CSLongLPart;*|*|^CSAdj;
+/*		508. náš vhled do jejich diverzity je tedy prozatím závislý hlavně na kultivačním přístupu. protože tehdy bylo oživení ve světě závislé především na vývozu do Číny.
 507;40;CSCopula|CSLongPart+CSLongLPart:CSCiPart;*|^CSAdj;
+/*		507. Uplatňování soukromého práva je nezávislé na uplatňování práva veřejného.
 
 /* long l-participles, nt-participles and ci-participles
-
 216;40;CSAdv|"se"|CSLongPart|CSAdj:CSCon;CSCAdv|CSAdj|+Join|*;
+/*		216. Na konci 19. století byla Praha již industrializovaným, rychle se rozvíjejícím městem se železnicí a továrnami, které bylo největší v českých zemích.
 262;40;CSAdvStruct|CSLongPart|"se"|CSAdj:CSCon;*|CSAdj|+Join|*;
+/*		262. Právě měnící se doba často určuje co je „in“.
 261;40;CSAdj|CSAdvStruct|CSLongPart|CSAdj;*|CSAdj|CSAdj|*;
+/*		261. v případech, kdy existuje nebezpečí záměny s obchodní firmou jiné již existující právnické osoby nebo její pobočky.
 260;40;CSAdj:CSPrep|.CSAdvStruct|CSLongPart|CSAdj:CSCon;*|*|CSAdj|*;
+/*		260. je vesmír stvořen ruční prací z již existujících materiálů.
 124;40;CSIndefpron|CSLongPart|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+/*		124. Různá náboženství v širokém slova smyslu provázela všechna známá lidská společenství.
 229;40;^CSComma:CSCon|CSAdv:CSAdvGeo|CSLongPart|CSAdj;*|CSCAdv|CSAdj|*;
+/*		229. Během 20. století byla umělecká i dokumentární fotografie přijata anglicky hovořícím uměleckým světem a galeriemi. NOT. osob společně tvořících podnikatelské seskupení.
 303;40;CSComma|CSCiPart|CSCon|CSAndOr|CSAdj|CSCon;*|CSAdj|*|*|*|*;
+/*		303. Ojediněle mrznoucí mlhy, mrznoucí mrholení nebo slabé sněžení.
 792;40;CSLongPart|CSAndOr|CSLongPart|CSAdj:CSCon;CSAdj|*|CSAdj|*;
+/*		792. je kvůli tomu zhoršený či omezený příjem z 12. kanálu.
 681;40;CSPrep|CSPerspron|.CSAdv|CSLongPart|^CSAdj:CSCon;*|*|*|^CSPart|*;variant of r117, in case of perspron: adverb also possible in pattern
+/*		681. Architektura se tak osamostatnila od ostatního umění a ačkoli je jím ovlivňována není s ním přímo spojená.
 117;40;CSPrep|CSDempron:CSPRPron|CSLongPart|^CSAdj:CSCon;*|*|^CSPart|*;
+/*		117. Západní jazyky zahrnují pod pojem letectví létání a činnosti s nimi spojené. přechodné soustřeďování odpadů v zařízení k tomu určeném po dobu nejvýše 3 let před jejich využitím.
 118;40;CSLongPart|.CSAdvTime:CSAdv:CSAdvStruct:CSRefl:CSNe|CSPrep:"jak";^CSPart|*|*;
+/*		118. K Brooklynu náleží dlouhá pláž a Coney Island založený v 70. letech 19. století jako jedna z prvních rekreačních oblastí ve Spojených státech. John Fitzgerald Kennedy (29. května 1917 – 22. listopadu 1963), neformálně označovaný jako Jack Kennedy či JFK. lidí, rozšířené prakticky po celém světě. Byl to souhrn práva soukromého i trestního ve formě bronzových desek vystavených také na veřejném místě. další podání musí převyšovat podání již učiněné nejméně o stanovený minimální příhoz, není-li dále stanoveno jinak. Vzhledem k mému výzkumnému vzorku zahrnujícímu jak sezdané. si udržela alespoň něco z jejích 768 000 barelů tekoucích denně. každý den se objeví skupinky stěžující si na ekonomiku.
 119;40;^CSPrep|CSLongPart|."i"|CSInf:CSECon:CSDempron:CSPosspron:CSIndefpron:CSBCon;*|^CSPart|*|*;
+/*		119. dochází ke stále většímu rozšíření osob oprávněných volit až po zásady dnešního všeobecného volebního práva. Klášter Cîteaux bylo opatství založené roku 1098. Člověk postižený touto nemocí sám sebe vnímá jako zvíře. Komora je povinna do 30 dnů předložit ministerstvu veškeré stavovské předpisy přijaté jejími orgány. informací dobrovolně poskytnutých ostatními účastníky dražeb. NOT. Nebylo od věci, že první diváky Jana Palacha v uherskohradišťském kině Hvězda uvedl do dobové atmosféry nejprve dokument Zmatek, který vznikl ve vzrušených dnech roku 1968 po vstupu vojsk Varšavské smlouvy. především v sedmisvazkovém komplexu Obras completas, obsahujícím i jeho projevy, poznámky, rozhovory, deklarace, dopisy a návrhy zákonů. které vyplývají z příslušnosti fyzické osoby ke skupině vymezené některým z důvodů.
 230;40;CSLongPart|CSAndOr|CSPart;^CSPart|*|*;
+/*		230. havarijní jímkou - jímka, záchytná vana nebo nádrž, určená k zadržení závadných látek uniklých nebo vypuštěných při havarijních stavech z nádrží, kontejnerů, obalů, případně technologického zařízení s objemem minimálně odpovídajícím kapacitě největší nádrže v ní umístěné nebo do ní svedené.
 208;40;CSAux|.CSAdj|*CSCon|CSLongPart+^CSLongLPart:CSCiPart|CSAndOr:CSComma:SEnd;*|*|*|^CSPart|*;
+/*		208. oni už tak byli stagnující ekonomikou frustrovaní. NOT. Zranění nebylo životu ohrožující.
 248;40;CSCon|.CSComma|CSLongPart|CSAdv|^CSAdj:CSLongPart;*|*|^CSPart|*|*;
+/*		248. kombinaci předpokladu maximalizace zisku, stálých preferencí a rovnováhy trhu, užívané neoblomně a neohroženě. Kč a zahraniční prostředky získané přímo univerzitou. NOT. pečlivě obrobené hlavy válců osazené sportovněji tvarovanými vačkovými hřídeli.
 548;40;CSCon|.CSComma|CSLongPart|CSAdvTime:CSAdvTemp;*|*|^CSPart|*;
+/*		548. Beltain či Beltine je keltský svátek jara slavený 30. dubna. Bylo to kvůli primitivní stavbě jejich těl, připomínající často pouhou kolonii a nepravou tkáň.
 249;40;CSCon|CSComma|CSLongPart|CSAdvStruct;*|*|^CSPart|*;
+/*		249. Nabízíme jak typizované výstavní sektory v příznivých cenových relacích, určené zejména menším firmám.
 642;40;CSVerb|CSAdvDir|^CSLongPart;*|CSRAdv|*;
+/*		642. Nechává stranou tónovou složku slabiky. NOT. Kvalitní osvěta tak může značně omezit výše zmíněné FUD a FOMO.
 114;40;CSLongPart;CSAdj;
+/*		114. Soudci jsou při výkonu své funkce nezávislí.
 
 /* various
 /*- - - - 
 /* Geographic adverbs
-
 226;40;CSAdvGeo|CSAdj;CSCAdv|*;
+/*		226. U evropsky významných druhů označí ty, které vyžadují podle právních předpisů Evropských společenství zvláštní územní ochranu.
 
 /* Preposition or Noun - second part
-
 288;40;CSConPrep|CSAdj;CSPrep|*;
+/*		288. jak evropské fondy stáčet pomocí komplikovaných pravidel do nějakých soukromých kapes.
 219;40;CSConPrep;CSCon;
+/*		219. matematik, který zavedl znaménka plus a minus.
 
 /* Conjunction as multiword or separate conjunction + demonstrative pronoun
-
 213;40;"a"|"tím"|^CSCAdv:CSAdj:CSCon;CSConj+CSConjPB|+Join|*;
+/*		213. Očekáváme, že tento kontext dovolí generátorům jazyka adaptovat se na způsob vyjadřování uživatele a tím docílit přirozenějších a potenciálně úspěšnějších odpovědí. NOT. Myšlenky velkých filosofů nezastarávají a tím nejcitovanějším je dodnes Platón.
 
 /* pronouns
 /*- - - - -
 /* Indefinite pronouns + Adverb of Time as part of Concept
-
 107;40;CSIndefpron|CSAdvTemp:CSDempron:CSPosspron|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+/*		107. Používáme bohaté závislostní informace z Pražských závislostních korpusů češtiny a angličtiny a několika dříve vyvinutých nástrojů (taggery, parsery). psa lze zařadit do všech těchto kategorií. Proximitní demokracie vzdoruje některým externalitám globalizace a omezuje některé její aspekty.
 103;40;CSIndefpron|.CSAdv|CSCAdv:CSAdj:CSCon;CSAdj|CSAdj|*;
+/*		103. Mezinárodní smlouvou mohou být některé pravomoci orgánů České republiky přeneseny na mezinárodní organizaci nebo instituci. je třeba souhlasu obou komor Parlamentu. Oba výše uvedené teoretické modely v zásadě. Oba výše uvedené teoretické modely.
 104;40;CSIndefpron;CSPRPron;
+/*		104. řešení úpadku a hrozícího úpadku dlužníka soudním řízením některým ze stanovených způsobů. ovšem oba jsou dostupné elektronicky ve standardním formátu.
 
 /* žádný
-
 217;40;SBegin:CSComma:CSConj|CSZadny|CSVerb;*|CSPRPron|*;
+/*		217. Existuje mnoho definic reklamy a propagandy, avšak žádná není „oficiální“ a každý autor teoretické práce si vyvozuje svoji vlastní verzi.
 
 /* Demonstrative pronoun OR personal pronoun
-
 130;40;CSDempron+CSPerspron|CSCAdv:CSAdj:CSCon;CSNRPron|*;
+/*		130. Výjimkou jsou však ti podnikatelé, kteří jsou plátci DPH.
 131;40;CSDempron+CSPerspron;CSPerspron;
+/*		131. I ony měly na sobě kartounové šaty.
 
 /* Demonstrative pronouns
-
 109;40;CSAux+CSCopula|"to";*|CSPRPron;
+/*		109. Je to nakonec tatáž konstelace, při níž mívají největší úspěch.
 108;40;CSDempron+^"tím":"toho"|CSAdvTemp|CSCAdv:CSAdj:CSCon;*|CSAdj|*;
+/*		108. Tato aktuálně budovaná část patří do souboru trojice staveb severního obchvatu Znojma. NOT. v říjnových volbách obhájili mandát a nabyli tím znovu imunitu.
 105;40;CSDempron|CSCAdv:CSAdj:CSCon;CSNRPron|*;
+/*		105. Tento program dovede automaticky vytvořit jednoduché databázové aplikace.
 106;40;CSDempron;CSPRPron;
 
 /* Reflexive pronouns
-
 671;40;CSPrep|CSRefl|CSPunctuation:SEnd;*|CSPRPron|*;
+/*		671. tentokrát vztažen nikoli na Písmo o sobě.
 
 /* adverbs as concept
 /*- - - - - - - - - -
-
 137;40;CSCopula|.CSAdj|*CSAdvManner|CSPrep:SEnd:CSComma:CSHyphen;*|*|CSCAdv|*;
+/*		137. Televize je stejně jako telefon médiem chladným. Venku je mokro, nebo je sucho.
 100;40;CSAdvDegree:CSAdvManner:CSAdvDir|CSAdj;CSCAdv|*;
+/*		100. Podle ještě více omezující definice je vesmír vše, co se nachází v našem časoprostoru a s čím bychom mohli interagovat nebo naopak. Souborem staveb se rozumí vzájemně související stavby. vyvoláním licitátorem přednesené prohlášení nebo datová zpráva licitátora o předmětu dražby, uvedení nejnižšího podání a výše stanoveného minimálního příhozu, jakož i výzva účastníkům dražby k podávání nabídek.
 116;40;*CSAdvDegree:CSAdvManner:CSAdvDir|.CSAndOr|CSCAdv;CSCAdv|*|*;
+/*		116. Omezené zapojení národních parlamentů do rozhodování o změně ostatně poměrně široce definovaných pravomocí Unie je doplněno rozšířením hlasování kvalifikovanou většinou. Výsledkem této spolupráce bylo zvukově i hudebně nejlépe zpracované album skupiny Kiss nazvané Destroyer. Zlato je chemicky odolný, velmi dobře tepelně i elektricky vodivý. také mohou vyskytovat mezi antimykoticky či antibakteriálně působícími léčivy.
 411;40;CSAdj|CSComma|CSAdvTemp|CSAdj:CSCAdv;*|*|CSCAdv|*;
+/*		411. prostor široké, předem obtížně identifikovatelné sféry unijní normotvorby.
 410;40;CSPrep:CSPart|CSAdvTemp+^"pak":CSMultiwordAdverb|CSAdj:CSCAdv;*|CSCAdv|*;
+/*		410. představuje zajímavou alternativu k zatím nejrozšířenějším komerčním katalyzátorům. Třiceti dvěma respondentům ve věku 20-35 let byla předložena předem připravená dilematická situace z párového života, konkrétně s tématem sňatek. NOT. Právě krize na rozvíjejících se trzích je v tuto chvíli hlavním motorem ženoucím vpřed zisky amerického dolaru.
 138;40;CSAdj:CSLongPart+^CSCiPart|CSAdvTemp+^"pak"|CSCAdv:CSAdj;*|CSAdj|CSAdj;only for longparts (not for ciparts)
+/*		138. Technologie zvláštních efektů se mění tak rychle, že mnoho dlouho používaných praktik. Upravené nebo napodobené dříve módní vzory jsou nazývány revival. jedné z dosud málo studovaných skupin exkavát. NOT. nejvyšším pak nevýrazný vrch Teleček mezi Sobínem a Chrášťany. NOT. Bylo to kvůli primitivní stavbě  jejich  těl, připomínající často pouhou kolonii a nepravou tkáň.
 
 /* defaults and clean-up
 /*- - - - - - - - - - - 
-
 6;40;CSAdvDegree:CSAdvDir:CSAdvManner:CSAdvModal;CSRAdv;default
+/*		6. Byl založen roku 1142, zřejmě na radu biskupa.
 364;40;"se"|CSRAdv|CSVerb:CSPrep;CSRefl|*|*;
+/*		364. Vzhledem k tomu že chování je pozorovatelné a vědomí není, introspekce přestávala stačit a nový směr se rychle uchytil.
 367;40;"se"|"i"|CSVerb;CSRefl|CSAdvStruct|*;
+/*		367. Díky vysoké úrovni medicíny v rozvinutých zemích a díky screeningovým programům u některých typů rakoviny se zvýšila šance včasné diagnostiky rakovinných onemocnění a tím se i rozšířil prostor pro jejich léčbu.
 394;40;CSComma|CSVerb|"i"|CSPrep;*|*|CSAdvStruct|*;
+/*		394. Mám celoroční permanentku, jsem i ve Fanklubu.
 734;40;CSPart;-CSAdjNomF-CSAdjNomM-CSAdjNomN-CSAdjNomMAnimPl-CSAdjNomPl;remove specific adj labels, used in phase 80, for participles as relation
+/*		734. Přesvědčení lidí, že se jim vyplatí pohlídat si rizika spojená s únikem vody a dalšími škodami.
 737;40;CSRAdv:CSNRPron;-CSConNomF-CSConNomAccM-CSConNomAccN-CSConNomPl;remove specific noun labels, used in phase 80, for adverbs as relation, and non-relevant pronouns
+/*		737. v důsledku čehož nemůže být ze strany příkazce operace a hlavního účetního kontrolován soulad výše závazku s výší individuálního příslibu nebo limitovaného příslibu podle ustanovení.
 762;40;CSPrep|CSBCon;*|^CSCon;correction: rewrite BCon after preposition to Con, to prevent BCon functioning as sentimentstop and sentiment span ending in preposition
+/*		762. Pokroková metoda by měla být široce dostupná za několik let.
 
 /* disambiguate ambiguous negation markers
-
 253;40;CSRelpron:CSRAdv:CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSPRPron;*|CSVerb-CSNegation|*;
+/*		253. většinová společnost, jako základní problém, který ničí ţivoty jejích příslušníků a v právním státě nemá místo. bratři a kamarádi bezohledně ničí všechno, co jim jako cíl přijde do cesty.
 254;40;CSCon|CSAdvStruct|"ničí":"ničím"|CSCAdv:CSAdj:CSCon:CSIndefpron;*|*|CSVerb-CSNegation|*;
+/*		254. Sucho také ničí nově vysazené stromy.
+
 
 /*PHASE 45: splitting concept clusters
 /*====================================
 /* preparation
 /*------------
-
 252;45;"bez"|CSAdjNomM;CSCon-CSNegation|*;
+/*		252. Bez černý je využíván v lidovém léčitelství a plody jsou různým způsobem zpracovávány na šťávy i džemy.
 634;45;CSBeforeNumber|CSNum+CSConNomPl;+CSOrgUnit|+CSConNomAccM;OrgUnit can prevent split in rules after r577
+/*		634. Číslo tři tedy není konečné? pilot ve výšce deset až patnáct metrů.
 810;45;CSCon+CSAdjAmbigI:CSAdjLocInstrMN/DatPl:CSAdjInstrPl:CSAdjDatMN;+CSConPossibleBCon;
+/*		810. Kontrolovaná osoba je povinna vytvořit podmínky pro výkon kontroly, umožnit kontrolujícímu výkon jeho oprávnění stanovených tímto zákonem.
 811;45;CSCon+CSAdjGenMN:CSAdjAmbigI;+CSGen;
+/*		811. Od prvního do pátého roku se válí v bahně.
 
 /* split concept clusters
 /*-----------------------
 /*split Concept clusters according to adjective case
 /*- - - - - - - - - - - - - - - - - - - - - - - - - 
-
 570;45;CSAdjNomM:CSAdjNomF:CSAdjNomMAnimPl:CSAdjDatMN:CSAdjAcc/InstrF:CSAdjAccF:CSAdjInstrMN/DatPl:CSAdjInstrPl;+CSAdjPossibleBCon;preparation for r264
+/*		570. Představa, že lze posuzovat vynaložené náklady zpět získanými prostředky je zcela falešná.
 604;45;CSAdjInstrF;+CSAdjPossibleBCon;preparation for r264
+/*		604. zasahovali policisté na magistrátu kvůli rozdělování stovek milionů korun magistrátní komisí pro sportovní granty.
 584;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent|CSCAdv+^CSCapitalInitial|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|CSCAdv+CSBCon|*|*;split at adverb before AdjPossibleBCon
+/*		584. Představa, že lze posuzovat vynaložené náklady zpět získanými prostředky je zcela falešná.
 264;45;CSCon+^CSNum:CSOrgUnit:CSPossessive:CSAgent:CSNoSplit:CSAcro|CSAdj+CSAdjPossibleBCon+^CSCapitalInitial|CSAdj:CSCon;*|^CSAdj+CSBCon|*;no split in case of preceding possessive adjective, agent, number or other 'no split' words
+/*		264. Podle mého názoru je však nejvhod nějším modelem jednotný orgán dohledu. Ukázala, jaké informace různá paměťová média o předmoderním i novém zemědělství nesou, jak jsme dnes schopni v těchto médiích číst a osvětlila také, jak zapomínání odnepaměti používaného vědění mohlo v modernizaci probíhat. NOT. jeden současný projekt. NOT. Téma práce nalézá své místo na Katedře religionistiky Evangelické teologické fakulty Karlovy univerzity. NOT. na Berkeleyho pragmatickou interpretaci poznání. NOT. Úspěchy nabitou hokejovou kariéru se rozhodl kanadský útočník definitivně ukončit. NOT. dále vytváří severní 187 km dlouhou hranici mezi Polskem a Německem. OK capitalall: je MŠMT ústředním orgánem. NOT OK capitalall: s SLC membránovými transportními systémemy.
 755;45;CSCopula|CSAdj+CSAdjAmbigI|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjInstrF:CSAdjAcc/InstrF:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;
+/*		755. Z tohoto důvodu je žádoucí větší vtažení pacienta do procesu rozhodování o léčbě. NOT. Při přijetí byl masivní spastický poslechový nález. NOT. Clint Eastwood je žijící filmovou legendou. NOT. léčebně rehabilitační péče, jejímž účelem je maximální možné obnovení fyzických, poznávacích, řečových, smyslových a psychických funkcí.
 757;45;CSCopula|CSAdj+CSAdjAmbigE|CSAdj+CSAdjPossibleBCon+^CSAdjAmbigE:CSAdjAmbigI:CSAdjNomPl:CSAdjNomMAnimPl;*|*|^CSAdj+CSBCon;
+/*		757. Není-li možné poskytnutý údaj o bodu užít pro výkon. NOT. je české hudební uskupení.
 805;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomAccM:CSAgent|CSAdj+CSAdjNomM+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;adj is split after noun with case label which is not NomM or agent
+/*		805. Romantismus neměl na divadlo podstatný vliv. NOT. bavlny a ovocných stromů (například pomerančovníku) do Evropy přes Araby ovládaný Pyrenejský poloostrov (Al-Andalus).
 819;45;CSPrep|CSAdj+^CSAdjNomM:CSAdjAmbigI|CSAdj+CSAdjNomM;*|*|^CSAdj+CSBCon;adj NomM is split after adj which is not NomM
+/*		819. podle jiných trestný čin porušuje chráněné statky.
 806;45;CSPrep|.<CSCon+^CSNum|CSCon+CSConPossibleBCon:CSGen+^CSConNomF:CSAgent|CSAdj+CSAdjNomF+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;adj is split after noun with case label which is not NomF or agent
+/*		806. který navrhl vypustit z novely zákona příslušná ustanovení.
 820;45;CSPrep|CSAdj+^CSAdjNomF:CSAdjAmbigI|CSAdj+CSAdjNomF;*|*|^CSAdj+CSBCon;adj NomF is split after adj which is not NomF
+/*		820. pro Ščasného „neočekávaná“ trenérská mise bude dlouhá.
 
 /*split Concept clusters according to noun case
 /*- - - - - - - - - - - - - - - - - - - - - - -
-
 630;45;CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl:CSConAccF:CSConInstr+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;preparation for splitting concept clusters
+/*		630. Queens je připojen k Bronxu čtyřmi mosty. Zejména na tuzemském trhu společnost dosáhla silných výsledků. NOT. který měl prověřit stálost respondentova úsudku. NOT. Ceny zboží úhrnem klesly o 0,6 %.
 635;45;CSConDatF:CSConDatMN:CSConDatPl+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;preparation for splitting concept clusters
-
+/*		635. Na výše uvedeném snížení poskytnutých finančních zdrojů univerzitě se více podílely. Odporuje-li usnesení, rozhodnutí nebo jiné opatření Komory zákonu.
 /*correction: don't split in case of 'timeconcept' + number
-
 646;45;CSTimeConcept|CSNum|^typeConcept;*|-CSConPossibleBCon|*;
+/*		646. Nyní stačí minutu dvě počkat a vše je zase v nejlepším pořádku.
 577;45;CSCon+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSAcro|CSConPossibleBCon+^CSConNomAccM:CSConNomF:CSConNomAccN:CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|CSBCon;if not Nom singular less context on left side needed
+/*		577. Na základech jejich výzkumů badatelé budují alternativní obraz počátků raného křesťanství. NOT. Vzhledem k minim. manipulaci v ureteru další "JJ" stent nezaveden.
 526;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon+^CSPossessive:CSNum:CSOrgUnit:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|CSBCon;split in case of 2 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept
+/*		526. která dává všem členům povinnost reagovat na ozbrojený útok. Jestliže Senát návrh zákona zamítne. NOT. které vedly ke dvěma mužům. NOT. Množství energie spotřebované za jednotku času udává veličina příkon.
 556;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|CSConPossibleBCon|CSConPossibleBCon+^CSPossessive:CSNum:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;split in case of 3 consecutive ConPossibleBCons, no split if capital because it can be name of previous concept
+/*		556. V r. 1819 založil Victor Hugo se svým bratrem Abelem čtrnáctideník Le Conservateur littéraire.
 527;45;CSPrep:CSVerb:CSConj|.CSAdj:CSPosspron|*CSConPossibleBCon|CSCon+^CSNum:CSOrgUnit:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;split in case of ConPossibleBCon preceding another one in a concept cluster, no split if capital because it can be name of previous concept
+/*		527. Jeden odnesl zraněním ramena útočník. NOT. Podle nejrůznějších propočtů bylo k zisku jednoho křesla potřeba překonat hranici sedmi procent.
 518;45;CSPrep:CSVerb:CSPart|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;no split if capital, can be name - Gen or Loc because noun has to be labeled, otherwise abbr. as adjectives also get split off
+/*		518. což je v otázkách zásahu do osobní svobody skutečnost zasluhující pozornost. V ostatních případech prezident republiky jmenuje a odvolává na návrh předsedy vlády. Matka po porodu odchází, pro rizika rozvoje abstinenčních příznaků příjem na odd. NOT. Stejně jako on si ve čtvrtek další čtyři tisíce lidí v celé republice vystály frontu na kontaktním místě Českého Telecomu. NOT. Fotbalový útočník ROMAN. NOT. Dříve se totiž myslelo, že v buňkách P. lanterna se vyskytují jak hydrogenosomy. NOT. Je portrét historického Ježíše důležitý pro studium vzniku křesťanství? NOT. Bezpečnost potraviny je základem pojmu kvalita potraviny. NOT. když součástí Dolní oblasti Vítkovice důl je.
 840;45;CSConj|*<CSAdj:CSPosspron:CSCon:CSBCon|*<CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSPossessive:CSCapitalAll:CSAgent:CSNoSplit:CSCapitalInitial|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen:CSNum;*|*|*|CSBCon;
+/*		840. zda záruční opravna jménem dodavatele odpovědnost za vady uznává.
 807;45;CSPrep:CSVerb:CSPart|*CSConGenPl:CSConGenF:CSConGenMN:CSConLocPl:CSConLocMN+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|CSBCon;copy r518 so pattern without preceding word(s) works
+/*		807. při kterém stíhali na monitoru terčík pohybující se pseudonáhodným směrem. padla při podpisu smlouvy jedna zajímavá věta.
 550;45;CSPrep:CSVerb|CSCon|CSAdj|*CSCon+^CSNum:CSOrgUnit:CSPossessive:CSConPossibleBCon:CSCapitalAll:CSAgent:CSNoSplit|CSConPossibleBCon+^CSCapitalInitial:CSCapitalMixed:CSCapitalAll:CSGen;*|*|*|*|CSBCon;for pattern with adjective in second position, no split if capital because it can be name of previous concept
+/*		550. V obvodu hlavního města Prahy působnost krajského soudu vykonává Městský soud.
 
 /*split adjective after copula plus noun
 /*- - - - - - - - - - - - - - - - - - - 
-
 516;45;^CSCon:CSPRPron:CSAdj|CSCopula|CSCon+^CSNum:CSPossessive:CSAgent|CSAdj+CSAdjNomM:CSAdjNomF:CSAdjNomN+^CSCapitalInitial;*|*|*|^CSAdj+CSBCon;don't split after number or possessive adjective
+/*		516. V současné době je gramotnost složitý a komplexní jev prolínající všemi vrstvami lidské společnosti. NOT. to je fakt divný. NOT. Světově unikátní je architektura kubistická. NOT. V tomto případě by byla společností vítaná vyšší hodnota obratu celkových aktiv.
+
 
 /*PHASE 60: detect enumerations
 /* ============================
-
 682;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod":"apod."|"apod":"apod.";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration, with 'apod'
+/*		682. I když ještě nebyly zaznamenány takové sociálně patologické jevy závislosti jako na drogách, cigaretách, alkoholu, hracích automatech apod., přesto již lze u některých lidí vystopovat až přílišnou konzumaci televize.
 683;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon+^"apod"|"apod";+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration, with 'apod'
+/*		683. živá bytost, která není ani člověkem, ani božstvem, mytologickou postavou, nadpřirozenou bytostí apod.
 357;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;5-element enumeration
+/*		357. V této části se čtenář seznámí s kynickou hypotézou, teoretickým vymezením mýtotvorby, sociálního formování, mýtů a rituálů a také s religionistickou teorií náboženství.
 354;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;+CSList|+CSList|+CSList|+CSList|+CSList|+CSList|+CSList;4-element enumeration
+/*		354. Ustavují se nové ekologické vztahy a „úlohy“ s novými nástroji, technologiemi, konateli i časovými rozvrhy. ale také dalších deníků, nezávislých, pravicových i levicových.
 355;60;^CSAndOr:CSCon:CSPosspron:CSAdj:CSPRPron|*CSCon:CSPosspron:CSAdj:CSPRPron|CSComma|*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSAdvStruct:CSCon;*|+CSList|+CSList|+CSList|+CSList|+CSList;3-element enumeration
+/*		355. Vzácný host soutěže dorazil do Prahy s manželkou, synem a snachou a dobře se bavil i na večírku po skončení finále. Do moderní formy zemědělství však tyto systémy nezapadaly, neboť byly ze své podstaty rozmanité, nespecializované a lokální. Zákony, spravedlnost ani soudy nehrají v těchto případech žádnou roli. NOT. Je-li takovou stopou například nalezený biologický materiál nebo otisk prstu, ztotožnění podezřelého a pachatele většinou nic nebrání.
 356;60;*CSCon:CSPosspron:CSAdj:CSPRPron|CSAndOr:"ani"|*CSPosspron:CSAdj:CSPRPron:CSNRPron:CSCAdv:CSCon+^CSBCon;+CSList|+CSList|+CSList;2-element enumeration
+/*		356. Jásání na ulicích značné, někde i tance a zpěvy. NOT. že jí způsobil těžkou újmu na zdraví a duševní poruchu takzvaný syndrom týrané osoby.
 363;60;CSAdj|CSComma|*CSAdj|CSCon;+CSList|+CSList|+CSList|+CSList;2-element enumeration without 'and/or'
+/*		363. To, jakou člověk provozuje nebo poslouchá hudbu, bývá chápáno jako velmi osobní, svobodná volba.
 402;60;*CSAdj:CSCon|CSComma|*CSAdj:CSCon|CSComma|*CSAdj:CSCon|.CSAdvStruct|SEnd;+CSList|+CSList|+CSList|+CSList|+CSList|*|*;3-element enumeration at sentence end
+/*		402. Nesmí proto chybět ani při přípravě mladých hudebníků, pěvců, instrumentalistů. Z filosofického hlediska se jako zvíře obvykle označuje živá bytost, která není ani člověkem, ani božstvem, mytologickou postavou, nadpřirozenou bytostí apod.
+
 
 /*PHASE 65: negation markers
 /*==========================
 /* 'žádný z/ze'
-
 240;65;CSZadny|"z"|"nich":"nás":"vás";CSNegPR|+Join|+Join;
+/*		240. Jedná-li však vůči další osobě více zástupců společně a odporují-li si, nepřihlíží se k projevu žádného z nich.
 241;65;CSZadny+CSGen|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegCon|CSAdj|CSAdj;
+/*		241. Na rozdíl od jeho bratrů se však žádné z jeho dětí nestalo později taktéž známými matematiky či fyziky.
 242;65;CSZadny|"z":"ze"|CSPosspron:CSPRPron:CSNRPron;CSNegBCon|CSAdj|CSAdj;
+/*		242. Žádný z těchto mužů ale nepřispěl ke vzniku alpských spolků.
 239;65;CSZadny+CSGen|"z":"ze";CSNegCon|CSAdj;
+/*		239. Na žádné z předcházejících desek nebyl Starý tak tvárný.
 245;65;CSZadny|"z":"ze";CSNegBCon|CSAdj;
+/*		245. placení daně se nevyhne žádný z vlastníků staveb či pozemků.
 803;65;CSCopula|CSShAdj|CSZadny;*|*|CSNegBCon;
+/*		803. Na sliznici ani v oblasti prostaty nejsou patrny žádné slizniční kalcifikace.
 
 /* 'ne'
-
 92;65;CSPrep:CSAdj|.CSAdvStruct:CSAdvTemp|CSNe|CSCAdv:CSAdj;*|*|^CSNegCon|*;keep the Negation attribute
+/*		92. vedle zmíněných pravomocí výlučných, spolu s prý ne zcela jasnými hranicemi tvorby norem sekundárního práva Unie. Druhý způsob financování je dnes typický hlavně u nepříliš rozšířených sportů. z pohledu čl. 10a Ústavy jako předem ne zcela určitelný.
 378;65;CSNe;CSNegRel;
+/*		378. Je na státní sociální síti, a ne na regulátorovi.
+
 
 /*PHASE 66: sentence structure detection
 /*======================================
 /* 'jako'
-
 676;66;CSVerb:CSPart|*^CSVerb:CSPart:CSComma:"jako"|"jako"|*^CSPunctuation:CSVerb|CSVerb+^CSInf;*|*|CSConj+CSConjPB|*|*;
+/*		676. tím, že nevyužíval důsledně všechny právní prostředky při uplatňování a hájení práv státu jako vlastníka a neodůvodněně snižoval výnos z majetku.
 
 /* after punctuation
-
 314;66;SBegin:CSHyphen:":"|^SBegin+^CSPunctuation;*|+CSPBegin;first word sentence or hyphen, colon
+/*		314. Terapie byla provedena u 34,1 % pacientů. NOT. Později téhož roku magazín pěje ódy na indonéskou armádu: … armáda je skrupulózně ústavní a působí z pozice práva.
 349;66;SBegin|CSListnumber:CSPunctuation|^CSListnumber;*|*|+CSPBegin;
+/*		349. (1) Ústava může být doplňována či měněna pouze ústavními zákony. • 0,9 % za období prvních 360 kalendářních dnů.
 338;66;*{2}CSPunctuation:":":CSListnumber|^CSPunctuation;*|+CSPBegin;
+/*		338. (EU SILC), v analýze s využitím modelu byla aplikována data ze dvou vln šetření International. definují různí autoři takto: • Technologie určená pro sběr. Vyčlenili jsme tři základní příčiny této absence: (i) kontextově zapojený je, sémanticky či pragmaticky, spojen s předchozím textem nebo s extralingvistickou situací.
 334;66;^SBegin:CSPunctuation:":":CSListnumber|CSBracket1|*{1,2}^CSPunctuation|CSBracket2|^SEnd+^CSPunctuation;*|-CSPunctuation|*|-CSPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
+/*		334. začínajícího investora (opět) poradí, jak se ochránit. U všech pacientů s progresí encefalopatie (50 %) byla zavedena UPV a sedace. Dnes večer, v noci a zítra (v pondělí) dopoledne se při větru zejména na severozápadě a severu ČR budou tvořit sněhové jazyky, na horách i závěje. NOT. (b) pro formát. NOT. a to zejména (i) zřízením, (ii) rozšířením oblasti regulace finančního trhu.
 399;66;CSBracket1|CSNegRel|.^CSBracket2|CSBracket2;*|+CSPBegin|*|*;isolate 1 or 2 entities with negation marker between ()
+/*		399. Ani jedno ani druhé nepřipadá v úvahu, a tak se na tohle podívám jako na (ne úplně) běžný komunikátor.
 333;66;CSBracket1:CSBracket2+CSPunctuation|^SEnd:CSPunctuation;*|+CSPBegin;isolate part of sentence between ()
+/*		333. ale rozhodně nevyhrávají s lehkostí sobě vlastní (z posledních čtyř účastí dvě výhry a dvě remízy). NOT. Centrem fotosyntetických reakcí jsou u sinic tzv. tylakoidy (vyjma primitivní sinice Gloeobacter, která je nemá), tyto struktury totiž obsahují vlastní fotosyntetická barviva, která jsou nutná pro přeměnu světelné energie na chemickou.
 
 /* verb starts new phrase
-
 654;66;CSVerb|"není";*|+CSBeginrel+CSPBegin;
+/*		654. S výjimkou určení osoby oprávněné společné účastníky na dražbě zastupovat není žádné omezení obsažené v prohlášení účastníků dražby nebo vyplývající z jejich případné dohody vůči dražebníkovi ani vůči třetím osobám účinné.
 680;66;CSPart|"není"|.^CSPart:CSPunctuation|CSPart;*|+CSBeginrel+CSPBegin|*|*;
+/*		680. Architektura se tak osamostatnila od ostatního umění a ačkoli je jím ovlivňována není s ním přímo spojená.
 
 /* after comma
-
 326;66;CSComma|CSPrep:CSRAdv|CSConj:CSRelpron;*|+CSPBegin|*;after comma: preposition/adverb + conjunction or relative pronoun
+/*		326. V roce 1995 badatel v návaznosti na práci svých kolegů vyhlásil Projekt přepsání počátků křesťanství, ke kterému se připojila řada zejména severoamerických badatelů. Kluci hráli příliš individuálně, drželi si puk, místo aby přihráli. podle něj nebude ani na kandidátce, natož aby byl jejím lídrem, jak se spekulovalo.
 315;66;CSComma|CSConj:CSRelpron:CSExample:CSPart:CSVerb;*|+CSPBegin;after comma: conjunction, relative pronoun or 'for example'
+/*		315. Kapitola se zaměřuje na různé koncepce vztahu těchto oborů od badatelů převážně z religionistického prostředí, které slouží k pochopení religionistického přístupu Projektu. Četl jsem, že jí i přítelkyni rád vyvařujete.
 325;66;CSVerb|.^CSPunctuation|CSComma|CSAndOr|.^CSVerb:CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin|*|*;after comma: and/or if verb precedes and follows, not PBegin in case of other Punctuation than comma after verb (brackets)
+/*		325. Některé z těchto komet však svůj průlet zdárně přežijí, a protože se jedná o větší fragmenty, předvedou na obloze i pěkné kometární představení. NOT. Dotyčný by pak mohl projevit lítost, že neplatil daně, a stát se po zaplacení sankcí řádným občanem. NOT. Domníváme se však, že důkladný popis systému slabik je pro další kroky zcela zásadní – ať už pro lingvisty, nebo pro studenty jazyka – a že si zaslouží důkladnou samostatnou studii.
 358;66;CSAdj:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSZadny:CSCAdv;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+/*		358. I přes řadu pozitivních zpráv v posledních týdnech, trhy budou znovu čelit množství překážek, jimiž jsou eskalace politických nejistot.
 359;66;CSRAdv:CSAdvTemp:CSAdvStruct:CSAdvTemp:CSPrep:CSRefl:CSAdvPlace:CSNegCon;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+/*		359. Pátá kapitola začíná zmínkou o kynické filozofii, poté je představeno základní téma části, kterým je kynická hypotéza, jež tvoří důležitou součást alternativního obrazu počátků křesťanství.
 477;66;CSAdvTime:CSECon:CSBCon;+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+/*		477. Ze strany tak i nadále platí předpoklad, že nákupy aktiv v rámci programu od října klesnou z 30 miliard na 15 miliard euro měsíčně a od počátku roku 2019 by již nákupy neměly pokračovat vůbec.
 423;66;CSNegPR:"než";+CSPossiblePBegin;preparation for various patterns concerning phrase begin
+/*		423. Negativní tlak tak dosahuje menších hodnot než tlak pozitivní a zároveň v této fázi neprobíhá žádná prudká změna “shock“.
 360;66;CSComma+^CSList|CSPossiblePBegin|CSVerb;*|+CSPBegin|*;
+/*		360. Pátá kapitola začíná zmínkou o kynické filozofii, poté je představeno základní téma části, kterým je kynická hypotéza, jež tvoří důležitou součást alternativního obrazu počátků křesťanství. I přes řadu pozitivních zpráv v posledních týdnech, trhy budou znovu čelit množství překážek, jimiž jsou eskalace politických nejistot.
 361;66;CSComma+^CSList|CSPossiblePBegin|*^CSVerb:CSPBegin|CSVerb+^CSPBegin;*|+CSPBegin|*|*;
+/*		361. Bylo zaznamenáno malé procento komplikací spojených se zavedením čidla, žádná si nevyžádala neurochirurgický zákrok ani neměla trvalé neurologické následky.
 362;66;CSComma+^CSList|CSPossiblePBegin+typeRelation|*^CSPBegin:SEnd:CSComma|SEnd;*|+CSPBegin|*|*;
+/*		362. ale má též umožnit Evropské unii lépe čelit výzvám 21. století, včetně změny klimatu.
 321;66;CSVerb:CSPart|.^CSVerb:CSComma|CSComma|CSVerb+^CSInf;*|*|*|+CSPBegin;after comma: second verb, also PBegin in case of other Punctuation than comma after verb (brackets)
+/*		321. Některé z těchto komet však svůj průlet zdárně přežijí, a protože se jedná o větší fragmenty, předvedou na obloze i pěkné kometární představení. Doufám ale, že mě trenér nebude potřebovat, podotkl on. Dlužník, který je právnickou osobou nebo fyzickou osobou - podnikatelem, je v úpadku i tehdy, je-li předlužen.
 
 /* and/or
-
 422;66;CSAndOr+CSList|*CSList+^CSAndOr|"a"|*CSList+^CSAndOr|CSVerb;*|*|+CSBeginrel+CSPBegin-CSList|*|*;for "a" as phrase begin after a list
+/*		422. „sport je součástí každého muže a každé ženy a jeho nedostatek nemůže nikdy být nahrazen“.
 318;66;CSVerb:CSPart|CSAndOr|.CSAdvTime|*CSAdj:CSCon:CSPrep|.CSRAdv:CSRefl|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*|*|*|*;after andor: second verb
+/*		318. Bez dobré znalosti firmy je pak těžké její přednosti náležitě docenit a pro řadu podniků je pak obtížné získat finanční prostředky. Ocas chameleona je přibližně stejně dlouhý (u některých druhů někdy i delší) jako tělo, u těla kulatého průřezu, pak je průřez elipsovitý, ze stran je stlačen a na vrcholu je zahrocený.
 351;66;CSVerb:CSPart+^CSInf:"by"|.CSPossiblePBegin:CSInf|CSAndOr+^"či"|*CSPossiblePBegin:CSList:CSInf:CSNegRel|CSVerb+^CSInf;*|*|+CSBeginrel+CSPBegin-CSList|*|*;andor as phrase begin loses the list label
+/*		351. Například povodňové úvěry a úvěry na první privatizační splátky, kdy subjekt nemělžádný jiný garanční majetek a úvěr byl zcela nedosažitelný. V roce 1883 byl dokončen Brooklyn Bridge a přeprava na Manhattan nebyla potřebná s pomocí lodi. Anaerobní heterolobosea, podobně jako některé další anaerobní linie, nejsou v environmentálních knihovnách příliš zastoupena a náš vhled do jejich diverzity je tedy prozatím závislý hlavně na kultivačním přístupu. Příjemce podnikatelský záměr nesplnil a svou činnost ukončil konkursem. Nedává tedy příliš smysl rozšiřovat možnost uplatnění výdajových paušálů u daně z příjmů, když vznikne poplatníkovi povinnost evidence pro účely DPH a administrativa mu tudíž nijak neklesne.
 323;66;^CSPBegin:CSConj:CSRelpron|CSAndOr|.CSPrep|CSConj:CSRelpron;*|+CSBeginrel+CSPBegin|*|*;and followed by conjunction or relpron
+/*		323. V této práci není sledováno stěhování mezi urbanistickými obvody v Praze, neboť předmětem zájmu této práce je vnitřní stěhování mezi obcemi České republiky a proto bude Praha pro účely této práce považována za jednu obec. Dále bylo pomocí mikrosondy na úrovni vesnice z dat stabilního katastru analyzováno, komu lesozemědělské plochy patřily a jaký byl jejich výnos a jaké byly jejich typy. Jedním z nejdůležitějších nástrojů, který má Evropská unie k dispozici a do něhož investuje dlouhodobě více než třetinu svého rozpočtu, je politika hospodářské a sociální soudržnosti. NOT. Povrchové a podzemní vody nejsou předmětem vlastnictví a nejsou součástí ani příslušenstvím pozemku, na němž nebo pod nímž se vyskytují.
 316;66;^CSPBegin|CSAndOr|.CSAdvStruct|CSVerb:CSNegRel+^CSInf;*|+CSBeginrel+CSPBegin|*|*;and/or + verb / negation marker starts new phrase
+/*		316. zemědělských ekosystémech, v nichž člověk pěstuje plodiny či chová zvířata v rozvolněné stromové kultuře. Ukazuje se, že například sňatek přestal plnit jednu ze svých dřívějších funkcí a není již rituálem přechodu do dospělosti. Fond byl založen k tomu, aby dostupnost úvěrů pro zemědělce zajistil a ne potlačil. Opravdu ale odmítám podávat jakékoliv informace o svém soukromém životě a už vůbec ne o své rodině.
 393;66;CSVerb:CSPart+^CSInf|."ani"|*CSList|CSAndOr|.CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|+CSBeginrel+CSPBegin|*|*|*;and/or after enumeration
+/*		393. Rozšíření znalostí o kryptoměnách neuškodí ani centrálním bankéřům a zástupcům dalších regulatorních orgánů a i zde může nabídnoutpomocnou ruku kryptokomunita.
 687;66;CSVerb:CSPart+^CSInf|*CSPrep:CSAdj:CSCon:CSComma|"ani"|*CSPrep:CSAdj:CSCon|CSAndOr|*CSPossiblePBegin|CSVerb;*|*|*|*|+CSBeginrel+CSPBegin|*|*;
+/*		687. Moderní evropský pojem náboženství nemá ekvivalent v řečtině, v hebrejštině ani v dalších jazycích a při překladech se musí nahrazovat pojmy pro zbožnost, kult, povinnost, zákon nebo učení.
 688;66;CSVerb:CSPart+^CSInf|*^CSPBegin:CSAndOr|CSAndOr|"ani";*|*|+CSBeginrel+CSPBegin|*;
+/*		688. Představte si, že budete dvanáct hodin v kuse hrát fotbal a ani jednou si přitom nezakřičíte gól.
 
 /* conjunctions
-
 365;66;CSVerb+^CSAux|CSConj:CSRelpron|CSVerb+^CSInf;*|+CSBeginrel+CSPBegin|*;
+/*		365. Právě měnící se doba často určuje co je „in“, co je frivolní, co je snobské a co je „out“. NOT. Analýzy jsem proto zasadil do souvislostí.
 336;66;^CSPBegin|CSConjPB;*|+CSBeginrel+CSPBegin;
+/*		336. Austrálie vyzvala své občany aby se preventivně vyhnuli cestám do Indonésie v tomto období, k obezřetnosti vyzvaly Američany také Spojené státy.
 426;66;CSCon|CSPrep|CSRelpron;*|+CSPBegin|*;
+/*		426. Zúčastnil se dvou křížových výprav z nichž ani jedna nebyla příliš úspěšná, provedl mnoho reforem francouzského království a roku 1298 byl pro svůj příkladný život plný odříkání svatořečen.
 
 /* participles
-
 342;66;^CSAux|CSCon|CSPart+^CSNTPart;*|*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase
+/*		342. Bylo zaznamenáno malé procento komplikací spojených se zavedením čidla.
 670;66;CSCon|CSPart+^CSNTPart;*|+CSPBegin;long participle/ci-participle as relation after noun starts new phrase
+/*		670. Účastníky dražby nesmějí být dražebník organizující a provádějící tuto dražbu.
 
 /* main verb after relative clause
-
 368;66;CSCon|.CSComma|CSPart+CSPBegin|*^CSVerb:CSComma:CSPBegin|CSVerb+^CSInf;*|*|*|*|+CSPBegin;look for main verb after participle as phrase begin
+/*		368. Analýza stylu odpovídání v datech, prezentovaná v páté kapitole této práce dosud nebyla publikována. Velká pera sloužící k létání najdeme na křídlech a ocase, konturové peří pokrývá povrch těla a jemné prachové peří je patrné na mláďatech a pod konturovým peřím vodních ptáků.
+
 
 /*PHASE 70: negation
 /*==================
 /* preparation
 /*------------
-
 397;70;CSVerb:CSPart+CSNegation;+CSNegVerb;adding label for negated verb to be used to detect the negation span
+/*		397. že z odvedených peněz na daních nikdy nic neuvidí, ba ani v důchodovém věku.
 250;70;CSCon:CSRAdv+CSNegation;-CSNegation;remove Negation from Con or RAdv meant for the other option in case of ambiguity (eg. VerbCon+Negation, LongPartCon+Negation, AdjAdv+Negation ...)
+/*		250. Všechny případy nedodržení splátek.
 
 /* split relations
-
 301;70;CSPart+CSNegation|CSAndOr|CSPart+^CSNegation;*|+CSBeginrel|*;for medical data
+/*		301. Vybaven plod uložený v poloze podélné hlavičkou, první postavení, ženského pohlaví, 3370g neměřena a předán pediatrovi.
 
 /* negative adjectives: assign NoExpansion for preposition-concept patterns
-
 674;70;CSPunctuation:SBegin:CSListnumber:CSConj|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon|CSAndOr|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion|*|+CSNoExpansion;
+/*		674. V oblasti emisní činnosti střednědobých a dlouhodobých státních dluhopisů nerealizovalo Ministerstvo v druhém čtvrtletí roku 2018 žádné výpůjční operace. (1) K dělení nebo scelení pozemku za účelem jeho vydání není třeba vydání rozhodnutí ani jiného opatření jiného orgánu veřejné správy než katastrálního úřadu. Správce daně dbá na to, aby při rozhodování skutkově shodných nebo podobných případů nevznikaly nedůvodné rozdíly.
 380;70;^CSCon:CSECon:CSPRPron:CSPerspron:CSAdj:CSAdvTime:CSAdvTemp|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon+^CSBCon;*|*|*|+CSNoExpansion;
+/*		380. na nějaké taktizování není čas. NOT. Uznávám ho, i když jsem u něho v poslední době neměl moc důvěry, tvrdí. NOT. Černá s tmavě hnědou barvou vás neomladí, naopak prohloubí vrásky. NOT. Přestože v minulosti byly pokusy o postavení hlasu na stejnou úroveň zmíněných biometrických údajů, odborníci dnes o hlasu takto neuvažují.
 431;70;CSCon+CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|+CSNoExpansion;
+/*		431. Zatímco u přehledu pro zdravotní pojišťovnu není třeba změny uvádět.
 672;70;^CSPrep|CSCon:CSECon:CSPRPron:CSPerspron|CSAdvStruct|CSPrep|.CSNRPron:CSPRPron:CSPosspron|*CSCAdv:CSAdj:CSCon;*|*|*|*|*|-CSNoExpansion;correction for noun-advstruct-prep: remove NoExpansion
+/*		672. Gramotnost již v tomto pojetí není pouhým čtením a psaním, ale stává se kontinuálním myšlenkovým společensko-kulturním nástrojem. NOT. a navíc prý za poslední dobu nejde o první útok.
 
 /* expansion of negation scope
 /*----------------------------
 /* expansion to left
 /*- - - - - - - - - 
 /* for pattern with 'to be'
-
 678;70;CSPRPron:CSPerspron|typeConcept:typePathRelevant+^CSNoExpansion|CSAux+CSCopula|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|+CSNegStop;
+/*		678. Ostatní nám jsou neznámé.
 379;70;typeConcept:typePathRelevant+^CSNoExpansion|.CSAux+^CSCopula|CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|*|*|+CSNegStop;
+/*		379. Děje se to tak pomalu, že to možná většina lidí ani nepostřehla, ale změna je nepochybná. Přiznejme, že takový test by byl nefér. naznačují, že štěstí je právě tak dočasné jako bolest a že obojí je nevyhnutelné. NOT. Polonium je nestabilní radioaktivní prvek, nejtěžší ze skupiny chalkogenů.
 677;70;CSAux+CSCopula|.CSCAdv|CSAdj+CSNegation|^typeConcept;+CSNegBegin|*|*|+CSNegStop;
+/*		677. Přestože je téměř nesmyslné spekulovat v této fázi.
 679;70;CSKtery|CSCopula+CSNegBegin;+CSNegBegin|*;
+/*		679. Mnoho z našeho chování má kořeny v procesech, které jsou nevědomé.
 
 /* for concept-preposition-concept pattern
-
 382;70;CSCon:CSPRPron+^CSNoExpansion|*CSPrep:CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*;many prepositions
+/*		382. Dotace na podporu lesnictví v letech 2011 až 2016 byly nehospodárné.
 381;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon+^CSNegBegin|typeConcept:typeEndConcept+CSNegBegin;+CSNegBegin|*|*|*;one preposition
+/*		381. S tím se nelze ztotožnit, odpovědnost za ekonomiku je nepřenosná a efektivnost a účinnost práce je jasně prokázána i ve srovnání s jinými státními institucemi podobného zaměření.
 
 /* for concept-andor-concept pattern
-
 383;70;SBegin:CSConj|*typeConcept|CSAndOr|.CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon+^CSNegBegin|typeConcept+CSNegBegin;*|+CSNegBegin|*|*|*;one preposition
+/*		383. Základní práva a svobody jsou nezadatelné, nezcizitelné, nepromlčitelné a nezrušitelné.
 
 /* for 'ani'
-
 686;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegVerb:CSNegRel:CSPunctuation:CSAni|CSAni+^CSPBegin;+CSNegBegin|*|*;
+/*		686. V tak hladký průběh a pozitivní výsledek nikdo z rodiny ani nedoufal. Nemohou tedy hodnotit, ptát se na smysl své činnosti ani odpovídat na prosté otázky, jaké kladou třeba děti – například, co je věda, co je to pravda nebo proč se nemá lhát.
 
 /* for negative verbs
-
 389;70;CSPBegin+CSList|*CSList|CSNegVerb:CSNegRel;+CSNegBegin|*|*;expansion to enumeration
+/*		389. Zákony, spravedlnost ani soudy nehrají v těchto případech žádnou roli.
 689;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel:CSNoExpansion|"není"+^CSPBegin;+CSNegBegin|*|*;variant r385 for 'není': no left expansion for prep-noun pattern
+/*		689. Nicméně systematický celosvětový výzkum zatím není organizován.
 385;70;CSPBegin:CSPunctuation|.^CSPBegin:CSNegBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel:CSAni+^CSPBegin:"není";+CSNegBegin|*|*;
+/*		385. není-li pravé jméno autora obecně známo a nejde-li o dílo anonymní nebo o dílo pseudonymní. Pokud pronajímatel ani přes upozornění nájemce nesplní svoji udržovací povinnost. NOT. I přes značné rozšíření termínu metabolický syndrom není definice dosud jednotná.
 673;70;CSCon:CSPRPron+^CSNoExpansion|CSPrep|*CSNRPron:CSPRPron:CSPosspron:CSCAdv:CSAdj:CSCon:CSECon:CSAdvTime+^CSNegBegin|CSNegVerb;+CSNegBegin|*|*|*;for pattern noun-preposition-noun
+/*		673. Vzhledem k očekávanému zpomalení ekonomiky pak rychlý obrat v příštím roce nečeká.
 429;70;typeConcept+^CSNoExpansion|.CSInf+^CSNegVerb|CSNegVerb:CSNegRel;+CSNegBegin|*|*;
+/*		429. Vnitřní prostředí jádra není homogenní.
 403;70;*CSList+^CSNegBegin|CSList+CSNegBegin;+CSNegBegin|*;further expansion to enumeration
+/*		403. Rezervy, dlouhodobé závazky a jiná pasiva tento vývoj téměř neovlivnily.
 424;70;CSConj|CSList+CSNegBegin;+CSNegBegin|*;
+/*		424. K stáru však dospěje k závěru, že se tehdy mýlil, že Bůh, spasení ani posmrtný život ve skutečnosti neexistují, a rozhodne se toto nové evangelium zvěstovat těm, které sám uvedl v omyl.
 
 /* general expansion to right
 /*- - - - - - - - - - - - - -
-
 387;70;CSNegVerb:CSAni:CSNegRel;+CSNegBegin;
+/*		387. Není vždy přesné překládat anglické termíny do českého jazyka, proto budou uvedeny české výrazy a jejich možné ekvivalenty v anglickém jazyce.
 
 /* expansion for 'ani'
 /*- - - - - - - - - - 
 /* left expansion
-
 432;70;*CSPrep:CSAdj:CSCon:CSRefl|CSAni;+CSNegBegin|*;
+/*		432. Funkce soudce není slučitelná s funkcí prezidenta republiky, člena Parlamentu ani s jakoukoli funkcí ve veřejné správě. Kim ve skutečnosti pochází z Anglie a v New Yorku ani nebydlela. aby v jednom ani v druhém případě nebyly příměsi toho opačného.
 
 /* stop negation expansion
-
 390;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;expansion up to punctuation
+/*		390. Souvislost mezi fyzickým útokem a politickou příslušností rodinného člena na straně druhé, nemá žádný věcný základ a nic to nemění na zbabělosti a surovosti, s jakou byl útok veden. Ani les ani zemědělství, lesozemědělství představuje mnoho různých kultur, které se ve většině evropských krajin vyskytují „odnepaměti“ a mají téměř kontinuální spektrum lokálních variant.
 391;70;CSNegVerb:CSAni:CSNegRel|.^CSPBegin:SEnd:CSNegStop|CSPBegin:SEnd+^CSNegation:CSNegBegin;*|*|+CSNegStop;expansion up to next phrase begin or sentence end
+/*		391. Naopak Hranice už klopýtnout nesmí.
 398;70;CSBracket1|CSNegBegin|.^CSBracket2|CSBracket2;*|*|*|+CSNegStop;limit negation span for one or two entities between brackets (see r334)
+/*		398. Ani jedno ani druhé nepřipadá v úvahu, a tak se na tohle podívám jako na (ne úplně) běžný komunikátor.
 
 /* assign a temp marker to all words in a negation span, first part
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 405;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;assign a temp marker to all words in a negation span
+/*		405. Tento způsob však neumožňuje automatické převedení zpět do původního písma.
 
 /* expansion for 'bez(e)' (1st part)
 /*- - - - - - - - - - - - - - - - - 
 /* right expansion
-
 420;70;CSNegPrep;+CSNegBegin;
+/*		420. Bez existence reklamy si nelze představit tržní hospodářství.
 418;70;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron;+CSPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+/*		418. Byl prokázán statisticky významný rozdíl v prodloužení doby na WL oproti pacientům bez terapie, což poskytuje vyšší šance na zotavení nebo provedení.
 419;70;CSPrep:CSList:CSAdvTemp;+CSPossibleNegSpanBez;preparatory rule to detect the negation span after 'bez'
+/*		419. Vojenské entity bez vztahu ke konkrétnímu území se zpravidla nazývají legie nebo soukromé armády.
 421;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|CSPBegin;*|*|+CSNegStop;
+/*		421. Fond se musí zabývat bez výjimky se všemi a nese transakční náklady.
 296;70;CSNegPrep|*CSPossibleNegSpanBez+^CSPBegin:CSInNegspan|^typeConcept:CSNegation:CSNegBegin:CSInNegspan;*|*|+CSNegStop;
+/*		296. Bez pána je vždy divoké zvíře, také zajaté zvíře nebo zkrocené zvíře, které není označeno, uprchne a jeho vlastník je nestíhá. Třetí záložku ponechejte bez povšimnutí a změny potvrďte tlačítkem OK. NOT. Bez ní by podnikatelé nebyli schopni určit.
 
 /* left expansion
-
 298;70;CSCon|"bez":"beze"+^CSNoExpansion|^"toho";+CSNegBegin|*|*;not for multiwords with 'bez(e)', not with subclause
+/*		298. trestnost činu, který v cizině spáchal občan České republiky nebo osoba bez státní příslušnosti. NOT. Ve svých oceňovacích modelech snížili diskontní sazbu bez toho, aby zároveň snížili předpokládanou míru růstu zisků. NOT. Ve svých oceňovacích modelech snížili diskontní sazbu bez toho, aby zároveň snížili předpokládanou míru růstu zisků.
 
 /* left expansion to antecedent
 /*- - - - - - - - - - - - - - -
-
 427;70;CSCon|.CSComma|CSPrep+CSNegBegin|CSRelpron;+CSNegBegin|*|*|*;
+/*		427. Již v minulosti bylo prokázáno, že se průběhem času prodražují stejně nebo i více právě stavby o něž se sdružení nikdy nezajímala. Nejvíc si ke svému jubileu samozřejmě přeje zdraví, hned poté ale také radost z práce, bez které by prý umřel.
 434;70;CSVerb+^CSInf|*CSPosspron:CSAdj:CSCAdv:CSCon:CSBCon|CSPrep|*CSAdj:CSCon|CSComma|CSKtery+CSNegBegin;*|+CSNegBegin|*|*|*|*;
+/*		434. řekl jeden z předních japonských expertů na zahraniční politiku, který nechtěl být jmenován.
 428;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery+CSNegBegin;+CSNegBegin|*|*;
+/*		428. pozemkovou parcelou pozemek, který není stavební parcelou. je-li dítě cizinec, který nemá přiděleno rodné číslo.
 669;70;CSCon:CSBCon:CSPRPron|CSComma|CSKtery|.^CSPBegin:CSPunctuation:CSNegVerb:CSNegRel|CSNegVerb:CSNegRel+^CSPBegin;+CSNegBegin|*|*|*|*;
+/*		669. investoři bez mihnutí oka financují na nesmyslných valuacích firmy, které za celou dobu existence nevytvořily zisk. Vhodný je pro ty, kteří nemají peníze na nákup specializovaného těžebního hardwaru virtuálních měn. budovy, kterým se číslo popisné ani evidenční nepřiděluje.
 
 /* expansion for 'bez(e)' (2nd part)
 /*- - - - - - - - - - - - - - - - - 
 /* stop negation expansion after 'bez'
-
 430;70;CSNegPrep|.^CSPBegin:CSPunctuation|CSPunctuation+^CSList;*|*|+CSNegStop;expansion up to punctuation
+/*		430. bez ohledu na jejich společenskou destruktivnost (tak chápe případ proti metodě).
 
 /* right expansion for 'bez' + subclause
-
 404;70;CSNegPrep|"toho"|CSComma|CSConj|.^CSPBegin:SEnd:CSPunctuation:CSNegStop|CSPBegin:SEnd:CSPunctuation+^CSNegation:CSNegBegin;+CSNoExpansion|*|-CSNegStop|-CSNegStop|*|+CSNegStop;'bez' plus subclause 
+/*		404. Ve svých oceňovacích modelech snížili diskontní sazbu bez toho, aby zároveň snížili předpokládanou míru růstu zisků.
 
 /* clean conflicting negation parameters
 /*--------------------------------------
-
 388;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|*typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|*|+CSNegStop;move NegStop from nonrelevant to next lexrep, in case of several NonRelevants
+/*		388. Jinými slovy jsme za to první pololetí nemuseli sáhnout do toho fondu rozvoje a rezerv, ale v druhém pololetí se tomu určitě nevyhneme, a to právě z důvodu toho pokračujícího propadu.
 297;70;CSNegStop+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegStop;move NegStop from nonrelevant to next lexrep
+/*		297. Byl prokázán statisticky významný rozdíl v prodloužení doby na WL oproti pacientům bez terapie, což poskytuje vyšší šance na zotavení nebo provedení.
 386;70;CSNegBegin+^typeConcept:typeRelation:typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegation:CSNegBegin;*|+CSNegBegin;move NegBegin from nonrelevant to next lexrep (remark: make sure all labels covered by the types are in phase 70)
+/*		386. Tento způsob však neumožňuje automatické převedení zpět do původního písma.
 783;70;CSNegBegin+typeOther:typeAmbiguous;-CSNegBegin;
+/*		783. Výborné to bylo třeba u doktora, všude se chovali příjemně, nikdy jsem neměla problém.
 
 /* assign a temp marker to all words in a negation span, second part
 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-
 775;70;CSNegBegin:CSInNegspan|^CSNegStop;*|+CSInNegspan;copy of r405 so all words in negation span get InNegspan label
+/*		775. Ještě k nám nedorazil videozáznam.
+
 
 /*PHASE 80: sentiment
 /*===================
@@ -1164,7 +1602,6 @@
 /* Expansion for sentiment attribute on verb, participle or adverb
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*  Add SentimentBegin and SentimentStop for expansion to the whole phrase
-
 748;80;CSVerb:CSPart:CSRAdv+CSPosSentiment+CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSPosSentimentStop;
 749;80;CSVerb:CSPart:CSRAdv+CSNegSentiment+CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSNegSentimentStop;
 746;80;CSPBegin|.^CSPBegin:CSPosSentiment|CSVerb:CSPart:CSRAdv+CSPosSentiment+^CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSPosSentimentStop;
@@ -1173,18 +1610,15 @@
 /* Expansion for sentiment attribute on type(Begin)Concept
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*  Preparation
-
 692;80;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSPrep+^CSBCon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
 711;80;CSAdvStruct:CSAdvTime:CSECon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
 
 /*  Add SentimentBegin to sentiment marker as Concept
-
 724;80;typeConcept:typeBeginConcept+CSPosSentiment;+CSPosSentimentConceptBegin;
 725;80;typeConcept:typeBeginConcept+CSNegSentiment;+CSNegSentimentConceptBegin;
 782;80;CSCon:CSAdj:CSCAdv:CSNegCon:CSNum:CSOrdNum:CSShAdj:CSZadny;+CSTypeConcept;add extra label to entities with typeconcept, so it can be used with OR together with other labels
 
 /*  Add SentimentStop to sentiment marker as Concept -> expand to the right until next verb form, negation marker or beginning of phrase, include lists
-
 738;80;CSAdj|.CSAdj:CSComma|CSAndOr|.CSCAdv|CSAdj|CSCon;*|+CSPossibleSentimentConceptSpan|+CSPossibleSentimentConceptSpan|*|*|*;preparation: so span doesn't stop in enumeration of adjectives
 732;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSPosSentimentConceptStop;stop at BeginConcept in nominative case
 733;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSNegSentimentConceptStop;stop at BeginConcept in nominative case
@@ -1202,7 +1636,6 @@
 764;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
 
 /*  Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
-
 709;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSPosSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
 710;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSNegSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
 707;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSPosSentiment|CSAdj+CSPosSentiment|^CSCon:CSAdj:CSPosSentiment:CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;left expansion for adjective not yet in sentiment span - add sentiment stop
@@ -1222,7 +1655,6 @@
 
 /* Clean-up: move SentimentStop and SentimentBegin to next relevant entity
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 699;80;typeOther+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 700;80;typeOther+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 718;80;CSBracket1:CSBracket2+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep (separate rule next to r699 because labels and types can't be combined with OR)
@@ -1231,31 +1663,27 @@
 751;80;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
 
 /* Remove conflicting attributes
-
 752;80;CSPosSentimentStop:CSPosSentimentConceptStop+CSPosSentiment:CSPosSentimentBegin:CSPosSentimentConceptBegin;-CSPosSentimentStop-CSPosSentimentConceptStop;
 753;80;CSNegSentimentStop:CSNegSentimentConceptStop+CSNegSentiment:CSNegSentimentBegin:CSNegSentimentConceptBegin;-CSNegSentimentStop-CSNegSentimentConceptStop;
 
 /* Add general begin and stop labels
-
 771;80;CSPosSentimentConceptBegin;-CSPosSentimentConceptBegin+CSPosSentimentBegin;
 772;80;CSNegSentimentConceptBegin;-CSNegSentimentConceptBegin+CSNegSentimentBegin;
 773;80;CSPosSentimentConceptStop;-CSPosSentimentConceptStop+CSPosSentimentStop;
 774;80;CSNegSentimentConceptStop;-CSNegSentimentConceptStop+CSNegSentimentStop;
 
+
 /* PHASE 85: NEGATION + SENTIMENT
 /* Detect sentiment markers in negation span
-
 767;85;^CSNegation|CSNegation|CSPosSentiment+CSInNegspan;*|*|+CSNegPosSent;mark sentiment markers in negation span
 768;85;^CSNegation|CSNegation|CSNegSentiment+CSInNegspan;*|*|+CSNegNegSent;mark sentiment markers in negation span
 
 /* Reverse sentiment
-
 769;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegPosSent|.CSInNegspan+^CSNegPosSent|CSInNegspan+CSNegPosSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSNegSentimentBegin-CSPosSentimentBegin|-CSPosSentimentBegin-CSNegSentimentStop|-CSNegPosSent-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentStop+CSNegSentimentStop;reverse sentiment
 770;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegNegSent|.CSInNegspan+^CSNegNegSent|CSInNegspan+CSNegNegSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSPosSentimentBegin-CSNegSentimentBegin|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegNegSent-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentStop+CSPosSentimentStop;reverse sentiment
 
 /* Clean-up: move SentimentStop and SentimentBegin to next relevant entity, 2nd part
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
 776;85;typeOther+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 777;85;typeOther+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 778;85;CSBracket1:CSBracket2+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
@@ -1263,9 +1691,11 @@
 780;85;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
 781;85;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
 
+
 /*PHASE 90: clean-up
 /*------------------
-
 234;90;CSAdj:CSCAdv:CSNum+CSBCon;CSBCon;
+/*		234. Podle mého názoru je však nejvhod nějším modelem jednotný orgán dohledu.
 302;90;CSAndOr:CSConj:CSRelpron:CSCopula+CSBeginrel;CSBeginrel;
+/*		302. Vybaven plod uložený v poloze podélné hlavičkou, první postavení, ženského pohlaví, 3370g neměřena a předán pediatrovi.
 787;90;CSNum+CSAdvTime;-CSNum;
