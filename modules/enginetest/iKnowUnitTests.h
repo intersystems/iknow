@@ -20,5 +20,6 @@ namespace testing {
 		void Saskia1(const char*); // see mail Saskia
 		void Saskia2(const char*); // see mail Saskia
 		void Saskia3(const char*); // see mail Saskia
+		void Saskia4(const char*); // conversation with Saskia
 	};
 }

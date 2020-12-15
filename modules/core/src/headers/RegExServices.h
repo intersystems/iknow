@@ -22,7 +22,7 @@ namespace iknow
 		private:
 			void clean_regex(void);
 
-			const iknow::core::IkKnowledgebase* kb_; // keep a reference to the current kb
+			iknow::base::String language_code_; // the language code
 			const icu::RegexPattern* pattern_; // compiled regex pattern pointer
 			icu::RegexMatcher* matcher_; // regex matcher object pointer
 			icu::RegexMatcher* matcher2_; // refined value/unit matcher

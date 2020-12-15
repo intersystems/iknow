@@ -62,13 +62,15 @@ then
     fi
     echo "DEPLOY_OCCURRED=1" >> $GITHUB_ENV
   else
-    for SHA in $COMMIT_RANGE; do
-      if git diff-tree --no-commit-id --name-only -r "$SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null
-      then
-        echo "WARN_COMMIT=$SHA" >> $GITHUB_ENV
-        break
-      fi
-    done
+    if [ "$GITHUB_REPOSITORY" = intersystems/iknow ]; then
+      for SHA in $COMMIT_RANGE; do
+        if git diff-tree --no-commit-id --name-only -r "$SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null
+        then
+          echo "WARN_COMMIT=$SHA" >> $GITHUB_ENV
+          break
+        fi
+      done
+    fi
     echo "Deployment skipped"
     echo "DEPLOY_OCCURRED=0" >> $GITHUB_ENV
   fi

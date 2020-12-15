@@ -675,29 +675,38 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv or 'merge' in sys.argv:
 else:
     no_dependencies = True
 
-# include MIT license in distribution
-shutil.copy2('../../LICENSE', '.')
-
-# include ICU license in distribution
-icu_license_found = False
-for root, _, files in os.walk(icudir):
-    for filename in files:
-        if filename == 'LICENSE':
-            icu_license_found = True
-            shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
-            break
-    if icu_license_found:
-        break
-if not icu_license_found:
-    raise BuildError('ICU license not found in {}'.format(icudir))
-
 with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
     # Strip off badges. They belong in the GitHub version of the README file but
     # are less appropriate on PyPI.
-    long_description = long_description[long_description.index('# iKnow\n'):]
+    long_description = long_description[
+                       long_description.index('# iKnow\n'):]
 
 try:
+    # include MIT license in distribution
+    shutil.copy2('../../LICENSE', '.')
+
+    # include ICU license in distribution
+    icu_license_found = False
+    for root, _, files in os.walk(icudir):
+        for filename in files:
+            if filename == 'LICENSE':
+                icu_license_found = True
+                shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
+                break
+        if icu_license_found:
+            break
+    if not icu_license_found:
+        raise BuildError('ICU license not found in {}'.format(icudir))
+
+    # include git revision in distribution
+    with open('iknowpy/git_revision', 'w') as f:
+        subprocess.run(
+            ['git', 'rev-parse', 'HEAD'],
+            stdout=f, stderr=subprocess.PIPE, universal_newlines=True,
+            check=True
+        )
+
     setup(
         name='iknowpy',
         description='iKnow Natural Language Processing engine',
@@ -731,6 +740,7 @@ try:
             'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
+        package_data={'iknowpy': ['git_revision']},
         version=version,
         python_requires='>=3.5',
         setup_requires=[
@@ -759,9 +769,10 @@ try:
         }
     )
 finally:
-    # remove licenses from package source
+    # remove created files from package source
     remove('LICENSE')
     remove('LICENSE_ICU')
+    remove('iknowpy/git_revision')
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
     fix_wheel_ppc64le(find_wheel())

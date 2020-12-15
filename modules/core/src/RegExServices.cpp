@@ -15,7 +15,6 @@ using namespace iknow::core;
 
 RegExServices::RegExServices()
 {
-	kb_ = NULL;
 	pattern_ = NULL;
 	matcher_ = NULL;
 	matcher2_ = NULL;
@@ -132,7 +131,7 @@ int RegExServices::Parser2(const String& valunit, String& value, String& unit, S
 
 void RegExServices::swich_kb(const iknow::core::IkKnowledgebase* kb) 
 {
-		if (kb != kb_) {
+	if (kb->GetMetadata<iknow::core::kLanguageCode>() != language_code_) { // need to switch language
 			clean_regex();
 			String val_unit_regex_ = kb->GetMetadata<iknow::core::kRegexSplitter>();
 			if (val_unit_regex_ != String()) { // regex not empty
@@ -151,7 +150,7 @@ void RegExServices::swich_kb(const iknow::core::IkKnowledgebase* kb)
 					matcher2_ = NULL;
 				}
 			}
-			kb_ = kb;
+			language_code_ = kb->GetMetadata<iknow::core::kLanguageCode>();
 		}
 }
 
