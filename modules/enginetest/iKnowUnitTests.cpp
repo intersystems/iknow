@@ -49,6 +49,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Saskia3(pError);
 		pError = "Saskia4";
 		test_collection.Saskia4(pError);
+		pError = "Issue64 : https://github.com/intersystems/iknow/issues/64";
+		test_collection.Issue64(pError);
 
 	}
 	catch (std::exception& e) {
@@ -59,6 +61,42 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/* Issue#64 :
+The input below contains some Greek characters which seem to mess up the detection of word boundaries. Boundaries (spaces) appear at the wrong positions, causing splitting and incomplete words. This is especially clear at the end of the sentence: the first 3 characters of the second sentence become part of the first sentence. The shift continues until the end of the input file.
+The input file is UTF-8 encoded, as required.
+
+input:
+Syloïde blijkt een vergelijkbaar of zelfs groter effect te hebben op sommige parameters (bijv. 𝑎2, 𝑎3, 1 𝑡1 en 1 𝑡3) van de compressievergelijking. Dit vergelijkbare effect wordt echter vaak alleen bereikt bij een hogere concentratie Syloid in vergelijking met magnesiumstearaat.
+
+output:
+S1: Syloïde blijkt een vergelijkbaar of zelfs groter effect te hebben op sommige parameters (bijv. 𝑎2, 3, 1 𝑡1 en 1 3) van de om ressievergelijking. Dit
+S2: ver elijkbare effect wor t ech er vaa < all> en ber ikt bij een hog re concentratie Syloid in ergelijking met mag esiumstearaat.
+*/
+void iKnowUnitTests::Issue64(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	// String text_source = IkStringEncoding::UTF8ToBase(u8"Syloïde blijkt een vergelijkbaar of zelfs groter effect te hebben op sommige parameters (bijv. 𝑎2, 𝑎3, 1 𝑡1 en 1 𝑡3) van de compressievergelijking. Dit vergelijkbare effect wordt echter vaak alleen bereikt bij een hogere concentratie Syloid in vergelijking met magnesiumstearaat.");
+	String text_source = IkStringEncoding::UTF8ToBase(u8"𝑎2, 𝑎3, 1 𝑡1 en 1 𝑡3)");
+	engine.index(text_source, "nl");
+	for (auto it_sent = engine.m_index.sentences.begin(); it_sent != engine.m_index.sentences.end(); ++it_sent) {
+		const Sentence& sent = *it_sent; // get sentence reference
+
+		String SentenceText(&text_source[sent.offset_start()], &text_source[sent.offset_stop()]); // reconstruct the sentence
+		std::string SentenceTextUtf8 = IkStringEncoding::BaseToUTF8(SentenceText); // convert it back to utf8
+		std::cout << SentenceTextUtf8 << "\"" << std::endl; // send it to the console
+
+		for (auto it_entity = sent.entities.begin(); it_entity != sent.entities.end(); ++it_entity) {
+			const Entity& entity = *it_entity;
+
+			std::cout << entity.index_ << std::endl;
+			String EntityText(&text_source[entity.offset_start_], &text_source[entity.offset_stop_]); // reconstruct the entity
+			std::string EntityTextUtf8 = IkStringEncoding::BaseToUTF8(EntityText); // convert it back to utf8
+			std::cout << EntityTextUtf8 << std::endl;
+		}
 	}
 }
 
