@@ -145,6 +145,23 @@ cdef class UserDictionary(object):
 		self.user_dictionary.addTimeTerm(literal)
 		self._entries.append(Entry(literal, Labels.TIME))
 
+# code to shift indexes in case of surrogate pairs (unicode chars > 16bit), engine uses UCS2 surrogate pairs = 2x16bit chars, Python indexes all chars equal
+IndexShift = [] # shift index to calculate surrogate pairs
+def correct_index(index) -> int:
+	correction_shift = 0
+	for idx in IndexShift:
+		if index <= idx:
+			return correction_shift
+		correction_shift += 1
+	return correction_shift
+
+def idx_shift(index) -> int:
+	return index-correct_index(index)
+
+def get_literal(text_string, index_start, index_stop) -> str:
+	str_literal = text_string[index_start-correct_index(index_start):index_stop-correct_index(index_stop)]
+	return str_literal
+# end extra shift code
 
 cdef class iKnowEngine:
 	"""A class that represents an instance of the iKnow Natural Language
@@ -180,6 +197,15 @@ cdef class iKnowEngine:
 		information is stored in the m_traces attribute."""
 		if language not in self.get_languages_set():
 			raise ValueError('Language {!r} is not supported.'.format(language))
+
+		IndexShift.clear()
+		idx = 0
+		for x in text_source:
+			if ord(x) > 2**16:
+				IndexShift.append(idx)
+				idx += 1
+			idx += 1
+
 		return self.engine.index(text_source, language, traces)
 
 	def load_user_dictionary(self, UserDictionary udct) -> None:
@@ -231,8 +257,8 @@ cdef class iKnowEngine:
 			entity_iter = sentence.entities.begin()
 			while entity_iter != sentence.entities.end():
 				entities_mod.append({'type': eType_to_str(deref(entity_iter).type),
-				                     'offset_start': deref(entity_iter).offset_start,
-				                     'offset_stop': deref(entity_iter).offset_stop,
+				                     'offset_start': idx_shift(deref(entity_iter).offset_start),
+				                     'offset_stop': idx_shift(deref(entity_iter).offset_stop),
 				                     'index': deref(entity_iter).index,
 				                     'dominance_value': deref(entity_iter).dominance_value,
 				                     'entity_id': deref(entity_iter).entity_id})
@@ -240,8 +266,8 @@ cdef class iKnowEngine:
 			sent_attr_iter = sentence.sent_attributes.begin()
 			while sent_attr_iter != sentence.sent_attributes.end():
 				sent_attrs_mod.append({'type': aType_to_str(deref(sent_attr_iter).type),
-				                       'offset_start': deref(sent_attr_iter).offset_start,
-				                       'offset_stop': deref(sent_attr_iter).offset_stop,
+				                       'offset_start': idx_shift(deref(sent_attr_iter).offset_start),
+				                       'offset_stop': idx_shift(deref(sent_attr_iter).offset_stop),
 				                       'marker': deref(sent_attr_iter).marker,
 				                       'value': deref(sent_attr_iter).value,
 				                       'unit': deref(sent_attr_iter).unit,
