@@ -1147,7 +1147,7 @@ void IkIndexProcess::SolveAmbiguous(Lexreps& lexreps)
 
     Lexreps::iterator search_begin = lexreps.begin();
     Lexreps::iterator search_end = lexreps.end();
-    if (lexreps.size() < pattern_size) continue;
+    
 	bool join_required = false, join_reverse_required = false;
 	bool is_variable_rule = (find_if(orig_begin, orig_end, [](const IkRuleInputPattern& rip) { return rip.IsVariable(); }) != orig_end); // true;
 	if (is_variable_rule) {
@@ -1231,6 +1231,7 @@ void IkIndexProcess::SolveAmbiguous(Lexreps& lexreps)
 		}
 	}
 	else {
+		if (lexreps.size() < pattern_size) continue; // works only for non variable rules
 		Lexreps::iterator match = search(search_begin, search_end, orig_begin, orig_end, MatchesPattern(phase));
 		while (match != search_end) {
 			SEMANTIC_ACTION(ApplyRule(i, match, pattern_size, *m_pKnowledgebase));
