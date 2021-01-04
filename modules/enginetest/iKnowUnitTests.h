@@ -22,6 +22,7 @@ namespace testing {
 		void Saskia3(const char*); // see mail Saskia
 		void Saskia4(const char*); // conversation with Saskia
 		void Issue64(const char*); // Issue#64 : https://github.com/intersystems/iknow/issues/64
+		void Issue70(const char*); // Issue#70 : https://github.com/intersystems/iknow/issues/70
 
 	};
 }

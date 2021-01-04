@@ -51,6 +51,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Saskia4(pError);
 		pError = "Issue64 : https://github.com/intersystems/iknow/issues/64";
 		test_collection.Issue64(pError);
+		pError = "Issue70 : https://github.com/intersystems/iknow/issues/70";
+		test_collection.Issue70(pError);
 
 	}
 	catch (std::exception& e) {
@@ -61,6 +63,53 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/* Issue#70
+Example 1: rule 2158 in the English language model
+2158; 50; typeRelation | .ENArtPosspron | *typeConcept+^ENList | ENComma | .ENArtPosspron | typeConcept + ^ ENNegation | ENAndOrBut+^"but" | .ENArtPosspron | typeConcept + ^ ENNegation | ENColon:SEnd; | +ENList | +ENList | +ENList | +ENList | +ENList | -ENNegStop + ENList | +ENList | +ENList | ;;
+
+This rule has 10 elements(9 + SEnd), 3 of which are optional.
+The rule fires for
+"of sneezing, a sore throat and fatigue." -> 9 elements(8 + SEnd)
+but not for:
+"of sneezing, a headache and fatigue." -> 8 elements(7 + SEnd)
+
+Example 2 : rule 2377 in the English language model
+2377; 65; ENCertainty | .ENNegation | ENPBegin+ENCertStop+^ENConj | .^ENPBegin+^SEnd | ENPBegin:SEnd; || -ENCertStop | *| +ENCertStop;;
+
+This rules has 5 elements, 2 of which are optional.
+The rule fires for
+"perhaps what else" -> 4 elements(3 + SEnd)
+but not for:
+"perhaps what" -> 3 elements(2 + SEnd)
+*/
+void iKnowUnitTests::Issue70(const char* pMessage)
+{
+	iKnowEngine engine;
+
+	engine.index(IkStringEncoding::UTF8ToBase(u8"perhaps what else"), "en", true);
+	bool bRuleFires = false;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+
+		if (it->find("RuleApplication:rule_id=1261") != string::npos) {
+			cout << *it << std::endl;
+			bRuleFires = true;
+		}
+	}
+	if (bRuleFires) {
+		bRuleFires = false;
+		engine.index(IkStringEncoding::UTF8ToBase(u8"perhaps what"), "en", true);
+		for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+
+			if (it->find("RuleApplication:rule_id=1261") != string::npos) {
+				cout << *it << std::endl;
+				bRuleFires = true;
+			}
+		}
+		if (!bRuleFires)
+			throw std::runtime_error("Rule 1261 does *not* fire !" + string(pMessage));
 	}
 }
 
@@ -87,8 +136,10 @@ void iKnowUnitTests::Issue64(const char* pMessage)
 
 		String SentenceText(&text_source[sent.offset_start()], &text_source[sent.offset_stop()]); // reconstruct the sentence
 		std::string SentenceTextUtf8 = IkStringEncoding::BaseToUTF8(SentenceText); // convert it back to utf8
-		std::cout << SentenceTextUtf8 << "\"" << std::endl; // send it to the console
+		if (SentenceTextUtf8 != u8"𝑎2, 𝑎3, 1 𝑡1 en 1 𝑡3)")
+			throw std::runtime_error("Failed to reconstruct surrogate pair symbols !" + string(pMessage));
 
+		/*
 		for (auto it_entity = sent.entities.begin(); it_entity != sent.entities.end(); ++it_entity) {
 			const Entity& entity = *it_entity;
 
@@ -97,6 +148,7 @@ void iKnowUnitTests::Issue64(const char* pMessage)
 			std::string EntityTextUtf8 = IkStringEncoding::BaseToUTF8(EntityText); // convert it back to utf8
 			std::cout << EntityTextUtf8 << std::endl;
 		}
+		*/
 	}
 }
 
