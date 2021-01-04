@@ -32,6 +32,7 @@ python setup.py clean
 """
 
 import base64
+import ctypes.util
 import fnmatch
 import glob
 import hashlib
@@ -477,10 +478,9 @@ def patch_wheel(whl_path, extracted=False):
     and the contents of the directory are replaced with the contents of a
     patched version (the contents are not zipped up).
 
-    This is necessary for packaging the ICU and iKnow engine shared libraries in
-    a way that avoids dependency hell and ensures that Python packages are
-    self-contained and isolated. There are a few reasons for patching the
-    libraries.
+    This is necessary for packaging the dependent shared libraries in a way that
+    avoids dependency hell and ensures that Python packages are self-contained
+    and isolated. There are a few reasons for patching the libraries.
 
     1. We need to be able to load the libraries no matter where they are
     installed.
@@ -514,6 +514,13 @@ def patch_wheel(whl_path, extracted=False):
         else:
             shutil.copy2(lib_path, repair_lib_dir)
     for lib_path in enginelib_paths:
+        shutil.copy2(lib_path, repair_lib_dir)
+
+    # copy extra library files
+    for lib_name in extra_libs:
+        lib_path = ctypes.util.find_library(lib_name)
+        if lib_path is None:
+            raise FileNotFoundError('Unable to find library {}'.format(lib_name))
         shutil.copy2(lib_path, repair_lib_dir)
 
     # create list of libraries to repair
@@ -625,6 +632,7 @@ if sys.platform == 'win32':
     module_name_pattern = 'engine.*.pyd'
     enginelibs_name_pattern = 'iKnow*.dll'
     enginelibs_path_pattern = os.path.join('../../kit/x64/Release/bin', enginelibs_name_pattern)
+    extra_libs = ['msvcp140.dll', 'vcruntime140.dll', 'vcruntime140_1.dll', 'concrt140.dll']  # from Visual C++ Redistributable 2015-2019
     extra_compile_args = []
     extra_link_args = []
 else:
@@ -655,6 +663,7 @@ else:
         extra_link_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
     enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
+    extra_libs = []
 
 # Find ICU and iKnow engine libraries. We do not copy the libraries into the
 # package source at this stage because the libraries are added during the wheel
