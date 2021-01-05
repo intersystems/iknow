@@ -42,7 +42,8 @@ cd iknowpy
 for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
-"$PYTHON" setup.py merge
+"$PYTHON" setup.py merge --no-dependencies
+"$PYTHON" -m delvewheel repair dist/merged/iknowpy-*.whl --add-path "$ICUDIR/bin64;../../kit/x64/Release/bin"
 
 
 ##### Report cache statistics #####

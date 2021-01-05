@@ -39,3 +39,4 @@ for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
   "$PYTHON" -m pip install -U pip
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel pefile machomachomangler --no-warn-script-location
 done
+"$PYTHON" -m pip install -U delvewheel

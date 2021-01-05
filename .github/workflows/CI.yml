@@ -206,7 +206,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}
-          path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+          path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
 
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'

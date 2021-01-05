@@ -25,8 +25,7 @@ python setup.py merge
     that the original wheels were created with the --no-dependencies flag and
     that they all have the same platform tag.
 python setup.py merge --no-dependencies
-    Same as above, except the merged wheel does not contain the iKnow and ICU
-    dependencies.
+    Same as above, except the merged wheel does not contain DLL dependencies.
 python setup.py clean
     Clean all build files.
 """
