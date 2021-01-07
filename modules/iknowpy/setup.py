@@ -77,9 +77,9 @@ class PatchLib:
             try:
                 version = tuple(int(x) for x in p.stdout.split()[1].split('.'))
             except ValueError:
-                raise BuildError('Unable to parse patchelf version {!r}'.format(p.stdout.rstrip()))
+                raise BuildError(f'Unable to parse patchelf version {p.stdout.rstrip()!r}')
             if version < (0, 9):
-                raise BuildError('patchelf >=0.9 is needed, but found version {!r}'.format(p.stdout.rstrip()))
+                raise BuildError(f'patchelf >=0.9 is needed, but found version {p.stdout.rstrip()!r}')
             if platform.processor() == 'aarch64' and version < (0, 12):
                 # work around patchelf bug (https://github.com/NixOS/patchelf/pull/216)
                 self._patchelf = ['patchelf', '--page-size', '65536']
@@ -219,11 +219,11 @@ class MergeCommand(Command):
         abi_tags = []
         platform_tag = None
         extracted_dirs = []
-        tmp_dir_base = 'dist{}temp'.format(os.sep)
+        tmp_dir_base = f'dist{os.sep}temp'
         rmtree(tmp_dir_base)
 
         # extract wheels
-        whl_paths = glob.glob('dist/iknowpy-{}-*.whl'.format(version))
+        whl_paths = glob.glob(f'dist/iknowpy-{version}-*.whl')
         if len(whl_paths) < 2:
             raise BuildError('Fewer than 2 wheels were found in dist/')
         if len(set(map(lambda s: s[s.rindex('-') + 1:], whl_paths))) > 1:
@@ -243,10 +243,10 @@ class MergeCommand(Command):
 
             # verify that original wheels were created with --no-dependencies flag
             if glob.glob(os.path.join(extracted_dir, 'iknowpy', enginelibs_name_pattern)):
-                raise BuildError('{} was not built with --no-dependencies and cannot be merged'.format(whl_path))
+                raise BuildError(f'{whl_path} was not built with --no-dependencies and cannot be merged')
 
             # get the wheel metadata
-            metadata_filepath = os.path.join(extracted_dir, 'iknowpy-{}.dist-info'.format(version), 'WHEEL')
+            metadata_filepath = os.path.join(extracted_dir, f'iknowpy-{version}.dist-info', 'WHEEL')
             if metadata is None:
                 metadata = extract_metadata(metadata_filepath)
             else:
@@ -258,7 +258,7 @@ class MergeCommand(Command):
         # might be incompatible with each other.
         for key, values in metadata.items():
             if key != 'Tag' and len(values) > 1:
-                raise BuildError('Wheels have conflicting metadata for key {!r} and cannot be merged. Conflicting values are {!r}.'.format(key, values))
+                raise BuildError(f'Wheels have conflicting metadata for key {key!r} and cannot be merged. Conflicting values are {values!r}.')
 
         python_tags.sort()
         abi_tags.sort()
@@ -266,16 +266,16 @@ class MergeCommand(Command):
         # copy all engine modules into extracted contents of first wheel
         for extracted_dir in extracted_dirs[1:]:
             for module_path in glob.iglob(os.path.join(extracted_dir, 'iknowpy', module_name_pattern)):
-                print('copying {} -> {}'.format(module_path, os.path.join(extracted_dirs[0], 'iknowpy', os.path.basename(module_path))))
+                print(f'copying {module_path} -> {os.path.join(extracted_dirs[0], "iknowpy", os.path.basename(module_path))}')
                 shutil.copy2(module_path, os.path.join(extracted_dirs[0], 'iknowpy'))
 
         # update metadata
-        metadata_filepath = os.path.join(extracted_dirs[0], 'iknowpy-{}.dist-info'.format(version), 'WHEEL')
-        print('updating wheel metadata file {}'.format(metadata_filepath))
+        metadata_filepath = os.path.join(extracted_dirs[0], f'iknowpy-{version}.dist-info', 'WHEEL')
+        print(f'updating wheel metadata file {metadata_filepath}')
         with open(metadata_filepath, 'w') as metadata_file:
             for key, values in metadata.items():
                 for value in sorted(values):
-                    metadata_file.write('{}: {}\n'.format(key, value))
+                    metadata_file.write(f'{key}: {value}\n')
 
         # fix up the wheel
         if no_dependencies:
@@ -284,9 +284,9 @@ class MergeCommand(Command):
             patch_wheel(extracted_dirs[0], True)
 
         # create the merged wheel
-        merged_whl_name = 'iknowpy-{}-{}-{}-{}.whl'.format(version, '.'.join(python_tags), '.'.join(abi_tags), platform_tag)
+        merged_whl_name = f'iknowpy-{version}-{".".join(python_tags)}-{".".join(abi_tags)}-{platform_tag}.whl'
         merged_whl_path = os.path.join('dist', 'merged', merged_whl_name)
-        print('creating merged wheel {}'.format(merged_whl_path))
+        print(f'creating merged wheel {merged_whl_path}')
         repackage_wheel(merged_whl_path, extracted_dirs[0])
 
         # delete temp files
@@ -347,7 +347,7 @@ def extract_wheel(whl_path, dest):
 
     Parameter dest: The destination to extract the wheel
     Precondition: dest is an existing directory"""
-    print('extracting {} to {}'.format(whl_path, dest))
+    print(f'extracting {whl_path} to {dest}')
     with zipfile.ZipFile(whl_path) as whl_file:
         whl_file.extractall(dest)
 
@@ -355,8 +355,8 @@ def extract_wheel(whl_path, dest):
 def update_wheel_record(whl_dir):
     """Given a directory containing the extracted contents of a wheel, update
     the RECORD file to account for any changes in the contents."""
-    record_filepath = os.path.join(whl_dir, 'iknowpy-{}.dist-info'.format(version), 'RECORD')
-    print('updating {}'.format(record_filepath))
+    record_filepath = os.path.join(whl_dir, f'iknowpy-{version}.dist-info', 'RECORD')
+    print(f'updating {record_filepath}')
     filepath_list = []
     for root, _, files in os.walk(whl_dir):
         for file in files:
@@ -376,7 +376,7 @@ def repackage_wheel(whl_path, whl_dir):
     whl_dir.
     Precondition: whl_dir is the directory containing the extracted wheel
     contents"""
-    print('repackaging {}'.format(whl_path))
+    print(f'repackaging {whl_path}')
     filepath_list = []
     for root, _, files in os.walk(whl_dir):
         for file in files:
@@ -384,7 +384,7 @@ def repackage_wheel(whl_path, whl_dir):
     os.makedirs(os.path.dirname(whl_path), exist_ok=True)
     with zipfile.ZipFile(whl_path, 'w', zipfile.ZIP_DEFLATED) as whl_file:
         for file_path in filepath_list:
-            print('adding {}'.format(file_path))
+            print(f'adding {file_path}')
             whl_file.write(file_path, os.path.relpath(file_path, whl_dir))
 
 
@@ -412,7 +412,7 @@ def merge_metadata(m1, m2):
     value. m1 and m2 must have the same set of keys; otherwise, raise an
     exception."""
     if set(m1) != set(m2):
-        raise BuildError('Wheels have conflicting metadata and cannot be merged. One wheel has keys {!r} while another has keys {!r}.'.format(set(m1), set(m2)))
+        raise BuildError(f'Wheels have conflicting metadata and cannot be merged. One wheel has keys {set(m1)!r} while another has keys {set(m2)!r}.')
     for key in m2:
         m1[key] |= m2[key]
 
@@ -434,7 +434,7 @@ def fix_wheel_ppc64le(whl_path, extracted=False):
         extracted_dir = whl_path
     else:
         # extract wheel
-        extracted_dir = 'dist{}temp'.format(os.sep)
+        extracted_dir = f'dist{os.sep}temp'
         rmtree(extracted_dir)
         os.mkdir(extracted_dir)
         extract_wheel(whl_path, extracted_dir)
@@ -443,7 +443,7 @@ def fix_wheel_ppc64le(whl_path, extracted=False):
     module_pattern = os.path.join(extracted_dir, 'iknowpy', 'engine.*pc64le-*.so')
     module_paths = glob.glob(module_pattern)
     if not module_paths:
-        raise BuildError('Unable to find module matching pattern {!r}'.format(module_pattern))
+        raise BuildError(f'Unable to find module matching pattern {module_pattern!r}')
     for module_path in module_paths:
         module_dir, module_name = os.path.split(module_path)
         if '-powerpc64le-' in module_name:
@@ -451,9 +451,9 @@ def fix_wheel_ppc64le(whl_path, extracted=False):
         elif '-ppc64le-' in module_name:
             other_module_name = module_name.replace('-ppc64le-', '-powerpc64le-')
         else:
-            raise BuildError("Module {} contains neither '-powerpc64le-' nor '-ppc64le-'".format(module_path))
+            raise BuildError(f"Module {module_path} contains neither '-powerpc64le-' nor '-ppc64le-'")
         other_module_path = os.path.join(module_dir, other_module_name)
-        print('copying {} -> {}'.format(module_path, other_module_path))
+        print(f'copying {module_path} -> {other_module_path}')
         shutil.copy2(module_path, other_module_path)
 
     # update record
@@ -464,7 +464,7 @@ def fix_wheel_ppc64le(whl_path, extracted=False):
         repackage_wheel(whl_path, extracted_dir)
 
         # remove extracted files
-        print('removing {}'.format(extracted_dir))
+        print(f'removing {extracted_dir}')
         rmtree(extracted_dir)
 
 
@@ -499,7 +499,7 @@ def patch_wheel(whl_path, extracted=False):
     if extracted:
         extracted_dir = whl_path
     else:
-        extracted_dir = 'dist{}temp'.format(os.sep)
+        extracted_dir = f'dist{os.sep}temp'
         rmtree(extracted_dir)
         os.mkdir(extracted_dir)
         extract_wheel(whl_path, extracted_dir)
@@ -519,14 +519,14 @@ def patch_wheel(whl_path, extracted=False):
     for lib_name in extra_libs:
         lib_path = ctypes.util.find_library(lib_name)
         if lib_path is None:
-            raise FileNotFoundError('Unable to find library {}'.format(lib_name))
+            raise FileNotFoundError(f'Unable to find library {lib_name}')
         shutil.copy2(lib_path, repair_lib_dir)
 
     # create list of libraries to repair
     module_pattern = os.path.join(repair_lib_dir, module_name_pattern)
     repair_lib_paths = glob.glob(module_pattern)
     if not repair_lib_paths:
-        raise BuildError('Unable to find module matching pattern {!r}'.format(module_pattern))
+        raise BuildError(f'Unable to find module matching pattern {module_pattern!r}')
     repair_lib_paths.extend(glob.iglob(os.path.join(repair_lib_dir, iculibs_name_pattern)))
     repair_lib_paths.extend(glob.iglob(os.path.join(repair_lib_dir, enginelibs_name_pattern)))
 
@@ -540,7 +540,7 @@ def patch_wheel(whl_path, extracted=False):
         else:
             lib_name_split = lib_name.split('.')
             with open(lib_path, 'rb') as lib_file:
-                lib_name_split[0] += '-' + hashfile(lib_file)
+                lib_name_split[0] = f'{lib_name_split[0]}-{hashfile(lib_file)}'
             lib_name_new = '.'.join(lib_name_split)
             lib_rename[lib_name] = lib_name_new
     for lib_name in iculib_map:
@@ -550,7 +550,7 @@ def patch_wheel(whl_path, extracted=False):
     os.makedirs(CACHE_DIR, exist_ok=True)
     for lib_path in repair_lib_paths:
         lib_dir, lib_name = os.path.split(lib_path)
-        print('repairing {} -> {}'.format(lib_path, os.path.join(lib_dir, lib_rename[lib_name])), end='')
+        print(f'repairing {lib_path} -> {os.path.join(lib_dir, lib_rename[lib_name])}', end='')
         if not lib_name.startswith('engine.') and os.path.isfile(os.path.join('dist/cache', lib_rename[lib_name])):
             # copy patched library from cache
             os.remove(lib_path)
@@ -579,19 +579,19 @@ def patch_wheel(whl_path, extracted=False):
         repackage_wheel(whl_path, extracted_dir)
 
         # remove extracted files
-        print('removing {}'.format(extracted_dir))
+        print(f'removing {extracted_dir}')
         rmtree(extracted_dir)
 
 
 def find_wheel():
     """Return the path to the wheel file that this script created. Raise
     exception if wheel cannot be found."""
-    wheel_pattern = 'dist/iknowpy-{}-*{}{}-*.whl'.format(version, sys.version_info.major, sys.version_info.minor)
+    wheel_pattern = f'dist/iknowpy-{version}-*{sys.version_info.major}{sys.version_info.minor}-*.whl'
     wheel_pattern_matches = glob.glob(wheel_pattern)
     if len(wheel_pattern_matches) == 0:
-        raise BuildError('Unable to find wheel matching pattern {!r}'.format(wheel_pattern))
+        raise BuildError(f'Unable to find wheel matching pattern {wheel_pattern!r}')
     elif len(wheel_pattern_matches) > 1:
-        raise BuildError('Found multiple wheels matching pattern {!r}'.format(wheel_pattern))
+        raise BuildError(f'Found multiple wheels matching pattern {wheel_pattern!r}')
     return wheel_pattern_matches[0]
 
 
@@ -639,7 +639,7 @@ else:
         iknowplat = os.environ['IKNOWPLAT']
     else:
         raise BuildError("'IKNOWPLAT' is not defined")
-    library_dirs = ['../../kit/{}/release/bin'.format(iknowplat)]
+    library_dirs = [f'../../kit/{iknowplat}/release/bin']
     module_name_pattern = 'engine.*.so'
     if sys.platform == 'darwin':
         iculibs_name_pattern = 'libicu*.dylib'
@@ -652,7 +652,7 @@ else:
             # set wheel target platform to that of the build platform
             macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
             os.environ['MACOSX_DEPLOYMENT_TARGET'] = macosx_version
-            sys.argv.append('--plat-name=macosx-{}-x86_64'.format(macosx_version))
+            sys.argv.append(f'--plat-name=macosx-{macosx_version}-x86_64')
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'
@@ -661,7 +661,7 @@ else:
         extra_compile_args = []
         extra_link_args = []
     iculibs_path_pattern = os.path.join(icudir, 'lib', iculibs_name_pattern)
-    enginelibs_path_pattern = os.path.join('../../kit/{}/release/bin'.format(iknowplat), enginelibs_name_pattern)
+    enginelibs_path_pattern = os.path.join(f'../../kit/{iknowplat}/release/bin', enginelibs_name_pattern)
     extra_libs = []
 
 # Find ICU and iKnow engine libraries. We do not copy the libraries into the
@@ -677,9 +677,9 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv or 'merge' in sys.argv:
     iculib_paths = glob.glob(iculibs_path_pattern)
     enginelib_paths = glob.glob(enginelibs_path_pattern)
     if not iculib_paths:
-        raise BuildError('ICU libraries not found: {}'.format(iculibs_path_pattern))
+        raise BuildError(f'ICU libraries not found: {iculibs_path_pattern}')
     if not enginelib_paths:
-        raise BuildError('iKnow engine libraries not found: {}'.format(enginelibs_path_pattern))
+        raise BuildError(f'iKnow engine libraries not found: {enginelibs_path_pattern}')
 else:
     no_dependencies = True
 
@@ -687,8 +687,7 @@ with open('../../README.md', encoding='utf-8') as readme_file:
     long_description = readme_file.read()
     # Strip off badges. They belong in the GitHub version of the README file but
     # are less appropriate on PyPI.
-    long_description = long_description[
-                       long_description.index('# iKnow\n'):]
+    long_description = long_description[long_description.index('# iKnow\n'):]
 
 try:
     # include MIT license in distribution
@@ -705,7 +704,7 @@ try:
         if icu_license_found:
             break
     if not icu_license_found:
-        raise BuildError('ICU license not found in {}'.format(icudir))
+        raise BuildError(f'ICU license not found in {icudir}')
 
     # include git revision in distribution
     with open('iknowpy/git_revision', 'w') as f:
@@ -731,7 +730,6 @@ try:
             'Programming Language :: Cython',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3 :: Only',
-            'Programming Language :: Python :: 3.5',
             'Programming Language :: Python :: 3.6',
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
@@ -750,7 +748,7 @@ try:
         packages=['iknowpy'],
         package_data={'iknowpy': ['git_revision']},
         version=version,
-        python_requires='>=3.5',
+        python_requires='>=3.6',
         setup_requires=[
             'cython',
             'wheel',

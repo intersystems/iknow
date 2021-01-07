@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# Build Windows x86_64 wheels for Python 3.5 through Python 3.9. Upload the
-# wheels to PyPI if appropriate. This script must be executed with the
-# repository root as the working directory.
+# Build Windows x86_64 wheels for Python 3.6 through Python 3.9. This script
+# must be executed with the repository root as the working directory.
 #
 # Usage: .github/workflows/build_windows.sh
 #

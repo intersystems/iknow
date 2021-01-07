@@ -24,9 +24,6 @@ set -euxo pipefail
 # official package installer. Return 1 if the version is not supported.
 pyinstall_fallback () {
   case "$1" in
-    3.5)
-      echo https://www.python.org/ftp/python/3.5.4/python-3.5.4-macosx10.6.pkg
-      ;;
     3.6)
       echo https://www.python.org/ftp/python/3.6.8/python-3.6.8-macosx10.9.pkg
       ;;
