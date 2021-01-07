@@ -34,10 +34,10 @@ pyinstall_fallback () {
       echo https://www.python.org/ftp/python/3.7.9/python-3.7.9-macosx10.9.pkg
       ;;
     3.8)
-      echo https://www.python.org/ftp/python/3.8.6/python-3.8.6-macosx10.9.pkg
+      echo https://www.python.org/ftp/python/3.8.7/python-3.8.7-macosx10.9.pkg
       ;;
     3.9)
-      echo https://www.python.org/ftp/python/3.9.0/python-3.9.0-macosx10.9.pkg
+      echo https://www.python.org/ftp/python/3.9.1/python-3.9.1-macosx10.9.pkg
       ;;
     *)
       echo "Version $1 is not supported"
