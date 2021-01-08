@@ -44,53 +44,74 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
         # reconstruct sentence literal
         #
         sentence_raw = 'S\x01'
-        # for entity in sent['entities']:
-        #     ent_type = entity['type']
-        #     lit_text = text[entity['offset_start']:entity['offset_stop']].replace("\n","") # literal representation of sentence, with newlines removed
-        #     if ent_type == 'NonRelevant':
-        #         sentence_raw = sentence_raw + lit_text
-        #     if ent_type == 'Concept':
-        #         sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
-        #     if ent_type == 'Relation':
-        #         sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
-        #     if ent_type == 'PathRelevant':
-        #         sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
-
-        #     if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
-        #         sentence_raw = sentence_raw + ' '
-
         ent_stop = ''
-        for entity in sent['entities']:
-            ent_type = entity['type']
-            lit_text = text[entity['offset_start']:entity['offset_stop']]
-            ent_start = entity['offset_start']
-            if ent_type == 'NonRelevant':
-                if (ent_start != ent_stop):
-                    sentence_raw = sentence_raw + lit_text
-                else:
-                    sentence_raw = sentence_raw.rstrip() + lit_text
-                ent_stop = entity['offset_stop']
-            if ent_type == 'Concept':
-                if(ent_start != ent_stop):
-                    sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
-                else:
-                    sentence_raw = sentence_raw.rstrip() + '\x02' + lit_text + '\x02'
-                ent_stop = entity['offset_stop']
-            if ent_type == 'Relation':
-                if(ent_start != ent_stop):
-                    sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
-                else:
-                    sentence_raw = sentence_raw.rstrip() + '\x03' + lit_text + '\x03'
-                ent_stop = entity['offset_stop']
-            if ent_type == 'PathRelevant':
-                if(ent_start != ent_stop):
-                    sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
-                else:
-                    sentence_raw = sentence_raw.rstrip() + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
-                ent_stop = entity['offset_stop']
+        if language_par == 'ja':  # Separate procedure for Japanese: make sure double-byte spaces are kept. 
+            for entity in sent['entities']:
+                ent_type = entity['type']
+                lit_text = text[entity['offset_start']:entity['offset_stop']].replace("\n"," ") # literal representation of sentence, with newlines removed
+                while "  " in lit_text:   # get rid of double spaces, caused by replaced newlines
+                    lit_text = lit_text.replace("  ", " ")
+                ent_start = entity['offset_start']
+                if ent_type == 'NonRelevant':
+                    if (ent_start != ent_stop):
+                        sentence_raw = sentence_raw.rstrip(' ') + lit_text
+                    else:
+                        sentence_raw = sentence_raw.rstrip(' ') + lit_text
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'Concept':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                    else:
+                        sentence_raw = sentence_raw.rstrip(' ') + '\x02' + lit_text + '\x02'
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'Relation':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                    else:
+                        sentence_raw = sentence_raw.rstrip(' ') + '\x03' + lit_text + '\x03'
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'PathRelevant':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    else:
+                        sentence_raw = sentence_raw.rstrip(' ') + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    ent_stop = entity['offset_stop']
 
-            if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
-                sentence_raw = sentence_raw + ' '
+                if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
+                    sentence_raw = sentence_raw + ' '
+
+        else:
+            for entity in sent['entities']:
+                ent_type = entity['type']
+                lit_text = text[entity['offset_start']:entity['offset_stop']]
+                ent_start = entity['offset_start']
+                if ent_type == 'NonRelevant':
+                    if (ent_start != ent_stop):
+                        sentence_raw = sentence_raw + lit_text
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + lit_text
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'Concept':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + '\x02' + lit_text + '\x02'
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'Relation':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + '\x03' + lit_text + '\x03'
+                    ent_stop = entity['offset_stop']
+                if ent_type == 'PathRelevant':
+                    if(ent_start != ent_stop):
+                        sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    else:
+                        sentence_raw = sentence_raw.rstrip() + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                    ent_stop = entity['offset_stop']
+    
+                if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
+                    sentence_raw = sentence_raw + ' '
 
 
         write_ln(f_raw, sentence_raw)
@@ -104,10 +125,6 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
             for sent_attribute in sent['sent_attributes']:
                 # print(sent_attribute)
                 attr_name = sent_attribute['type'].lower()
-#                attr_marker = sent_attribute['marker'] # corresponds to lexreps.csv match 
-#                attr_entity = sent['entities'][sent_attribute['entity_ref']]['index'] # corresponding entity index value
-
-#                attr_marker_literal = text[sent_attribute['offset_start']:sent_attribute['offset_stop']].replace("\n","") # literal version of the marker, remove newlines
                 attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']].replace("\n","") # corresponding entity index literal value, remove newlines
 
                 if (attr_name == 'datetime'):
@@ -285,8 +302,6 @@ def f_compare(file1, file2, pair_report, language_par = 'xx'):   # compares 2 RA
 
     # Write summary
     if linecounter == 0:
-        # print('\nNo changes are found in ' + str(file1).split('\\')[-1] + '.')
-        # write_ln(report, '\nNo changes are found in ' + str(file1).split('\\')[-1] + '.')
         print('No changes are found in ' + compfilename + '.')
         write_ln(report, '\nNo changes are found in ' + compfilename + '.')
     else:
@@ -296,14 +311,13 @@ def f_compare(file1, file2, pair_report, language_par = 'xx'):   # compares 2 RA
             print('\nWARNING: The RAW files contain output for a different number of input files!')
             write_ln(outputfile,'WARNING: The RAW files contain output for a different number of input files!')
             write_ln(report,'WARNING: The RAW files contain output for a different number of input files!')
+
         diffcounter = int(linecounter - qmcounter - (qmcounter2 / 2))
         print(str(linecounter) + ' distinct line(s) reported, corresponding to approximately ' + str(diffcounter) + ' difference(s).')
-#        print('See ' + str(outputfile)[25:-1] + ' for details.')
         pair_report_path = str(outputfile)[25:-1]
         pair_report_path = pair_report_path.replace('\\\\','/')
-        #  pair_report_path = pair_report_path.replace('//','/')
         print('See ' + pair_report_path + ' for details.')
-        #    print('Be aware that lines that occur in both files are counted twice.')
+
         write_ln(outputfile,str(linecounter) + ' lines don\'t have a(n exact) copy in the other input file, of which')
         write_ln(report,str(linecounter) + ' lines don\'t have a(n exact) copy in the other input file, of which')
         if sentence_diff > 0:
@@ -367,8 +381,6 @@ for elt in input_test_list:
     genRAW_for_reference_testing(elt, input_path, output_path)
 
 
-user_dictionary = iknowpy.UserDictionary()
-
 input_path = '../reference_materials/input/udct_test'
 output_path = '../reference_materials/new_output/udct_test'
 input_udct_list = os.listdir(input_path)
@@ -376,9 +388,11 @@ for elt in input_udct_list:
     dct_name = elt[0:3] + 'udct.txt'
 #    dct_to_use = open(os.path.join('../reference_materials/udct_test_dictionaries', dct_name), encoding='utf-8')
     dct_to_use = os.path.join('../reference_materials/udct_test_dictionaries', dct_name)
+    user_dictionary = iknowpy.UserDictionary()
     read_udct_file(dct_to_use, user_dictionary)
-    ret = engine.load_user_dictionary(user_dictionary)
+    engine.load_user_dictionary(user_dictionary)
     genRAW_for_reference_testing(elt, input_path, output_path)
+    engine.unload_user_dictionary()
 
 
 # ---------------------------------------------------------------------------------------------------------
