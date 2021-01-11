@@ -237,7 +237,6 @@
 /*		600. van al de Galliërs zijn de Belgen de dappersten.
 636;40;NLVeelWeinig|NLCon:NLAttradj;NLAttradj|*;
 /*		636. Er was veel volk op de markt.
-/*638. Er stonden veel oude modellen in de etalage.
 683;40;^NLPunctuation+^SBegin+^NLNum|NLMaar|NLNum;*|NLAdvStruct|*;
 /*		683. Als je maar één spuitje hebt gehad, ben je onvoldoende gewapend en haal je best een herhaling. NOT. Mevrouw, niet één maar vier wetgevingsverslagen moeten nog in stemming worden gebracht.
 685;40;NLEr:NLJe:NLZe:NLSubjpron+^NLObjpron|NLMaar;*|NLAdvStruct;
@@ -251,6 +250,7 @@
 /*		1304. Maar stel nu dat de legende niet waar is?
 953;40;"in"|"het"|"niet"|SEnd:NLComma:NLPrep;*|NLVerb|Join|*;
 /*		953. De inkomsten van Usain Bolt vallen in het niet bij die van golfers en tennissers.
+
 /* Disambiguate the word ZIJN: possessive pronoun OR copula
 257;40;SBegin|NLEr|NLZijn|NLInfCon;*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|NLCon;
 /*		257. Er zijn voorstellen om tot een federale kieskring te komen.
@@ -436,6 +436,7 @@
 /*		427. Dat is acht procent meer dan vorig jaar.
 576;40;NLAdvDegree:"iets"|NLAdvTemp;NLAdvTemp|+Join;
 /*		576. De zo vaak bezongen authenticiteit blijkt vaak niet veel meer dan een gewiekste marketingvondst. niet om 12.00 uur maar misschien iets later.
+
 /* Disambiguate ZOALS: comparison or explanatory
 1283;40;NLZoals|NLSubjpron:NLEr;NLConj|*;
 /*		1283. Daarom denk ik, zoals ik al eerder heb gezegd, dat dit werk is dat nog maar net is begonnen.
@@ -463,6 +464,7 @@
 /*		1111. Het zou ruim 46.000 vierkante meter groot moeten worden.
 1046;40;NLmAux|NLZijn|typeRelation+^NLPart;+NLLinkingverb|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 /*		1046. Wat precies de gevolgen zullen zijn weten we echter nog niet.
+
 /* Disambiguate the word DAT: demonstrative pronoun or subordinate conjunction
 531;40;"dat"|NLRelAux|^NLPart+^SEnd;NLSubjpron+NLObjpron-NLRelpron|*|*;
 /*		531. Dat is een nieuw model.
@@ -692,6 +694,7 @@
 /*		1255. En ik denk dat zulke gebeurtenissen bestaan.
 1271;40;NLPrep:NLPunctuation|.NLPoss|*typeConcept|NLAndOr|NLRelCon|^NLSubjpron+^NLJe+^NLCon+^NLAdvStruct+^NLAdvTemp+^NLAdvTime;*|*|*|*|NLCon|*;
 /*		1271. Vroeger ging de bakker langs de deur met paard en wagen en later met een bakfiets of auto vol met wit en bruin tarwebrood en roggebrood en beschuit.
+
 /* Disambiguate StemCon
 341;40;NLStemCon|NLIk;NLVerb|NLSubjpron;
 /*		341. Dan zweer ik bij mijn eigen naam dat dit paleis in puin zal vallen.
@@ -1329,6 +1332,7 @@
 /*		805. Over de rol van Julie zijn we het absoluut niet eens en dat zal voorlopig ook wel zo blijven. Hij schijnt het niet eens te zijn met uw visie.
 806;50;"het"|"eens";*|NLVerb;
 /*		806. Eigenlijk is hij het eens met Dirk.
+
 /* Some more Concept boundaries
 1366;50;typeRelation|.NLArt:NLPoss|NLBegin;*|*|^NLCon;
 /*		1366. Het heeft een totale waarde van meer dan een half miljard euro.
@@ -1485,7 +1489,7 @@
 /*		1119. Het personage is natuurlijk niet zomaar een flierefluiter.
 
 
-/*PHASE 70: NEGATION ATTRIBUTES AND EXPANSION
+/* PHASE 70: NEGATION ATTRIBUTES AND EXPANSION
 /* ============================================
 1331;70;"zoals"+NLRel;+NLConj;
 /*		1331. Zoals de markt had verwacht, hebben we uitstekende resultaten gerapporteerd.
@@ -1839,6 +1843,7 @@
 1342;80;NLPBegin+NLPosSentiment+^typeConcept;+NLPosSentimentBegin;
 /*		1342.UD. Natuurlijk is dat niet altijd nodig, maar als hij dat doet, geniet hij wel van een zeer concurrentiële eenheidsprijs.
 1343;80;NLPBegin+NLNegSentiment+^typeConcept;+NLNegSentimentBegin;
+
 /*/* Sentiment attribute on concept word -> expand to the right, no expansion to the left
 1354;80;typeConcept:typeBeginConcept+NLPosSentiment;+NLPosSentimentConceptBegin;
 /*		1354.UD. Titanium kan niet roesten dus de frames zullen zeer lang mooi blijven.
@@ -2079,6 +2084,7 @@
 1456;85;^NLInNegspan|NLInNegspan+^NLNegNegSent|.NLInNegspan+^NLNegNegSent|NLInNegspan+NLNegNegSent|SEnd;*|+NLPosSentimentBegin-NLNegSentimentBegin|-NLNegSentimentBegin|-NLNegNegSent-NLNegSentimentBegin|-NLNegSentimentStop+NLPosSentimentStop;shorter version of r1449
 /*		1456.UD. Fysiek geen last.
 
+
 /* PHASE 99: FINAL CLEANUP
 /* =======================
 /* Move attribute markers to relevant entity (in final phase, because only a few labels are defined in phase 85)
@@ -2104,3 +2110,4 @@
 1333;$;NLBeginrel+NLConj;-NLConj;
 /*		1333. Toen we haar confronteerden met de vraag of zij de uitslagen die we haar hadden meegegeven aan U had afgegeven zoals afgesproken, moest zij evenwel bekennen dat ze dit niet had gedaan.
 1295;$;"allemaal";-NLAdvStruct+NLObjpron;force 'allemaal' to become PR for the moment
+/*		1295. Die worden allemaal in twee weken tijd geplukt. 

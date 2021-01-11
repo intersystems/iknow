@@ -11,6 +11,7 @@
 /*		12. Kungaparet företog ett informellt besök i USA.
 336;1;Punctuation;SVPunctuation;
 /*		336. Den är multidimensionell, mångbottnad och kontextuell.
+
 /* RELABEL USER DICTIONARY ITEMS
 727;1;UDNegation;+SVNegation;place before 730 and use + to avoid overwriting other UD-labels
 /*		727.UD. Mannen förnekar brott.
@@ -48,6 +49,7 @@
 17;40;":"|SVCapitalInitial+^SVConIfCap;SVPunctuation|-SVCapitalInitial;ignore capital after colon
 /*		17.  Larmet: Varannan kör för fort på vägarbeten.
 18;40;"-"|SVCapitalInitial;*|-SVCapitalInitial;ignore capital after -
+/*		18.  - Men vinden avtar en bit in på eftermiddagen.
 882;40;SBegin|SVLayout|SVCapitalInitial;*|SVLayout|-SVCapitalInitial;ignore capital after *
 /*		882. * Undvik nära kontakt med personer som du vet är sjuka.
 19;40;SVCapitalInitial+^SVIgnoreCap|SVCapitalInitial+^SVIgnoreCap;SVCon+SVCapitalInitial|SVCon+SVCapitalInitial;make capitalized words Concept
@@ -234,6 +236,7 @@
 852;40;"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|Join|Join;
 /*		852. – Jag var och hälsade på henne för ett par veckor sedan så jag visste ju.
 932;40;"för"|*{1,4}^SVTimeconcept+^"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|+Join|Join|Join;
+
 /* *** sedan ... tillbaka ***
 916;40;"sedan"|SVTimeconcept|"tillbaka";SVAdvTime|Join|Join;
 /*		916. Har ett intresse av aktier sedan tag tillbaka och börjar så smått lära mig mer och mer.
@@ -921,6 +924,7 @@
 1216;40;SVAux|.SVAdv|SVVerbPartSup;*|*|SVSup;
 /*		1216. Bort med bromsen som cancertumören har satt dit.
 274;40;SVVerbPartSup;SVVerb;default
+/*		274. Anslaget ska räcka tills den är satt i teknisk drift. WRONG: Däremot kan man försöka sänka barnets kroppstemperatur genom att ha det svalt, men inte kallt, i rummet.
 
 /* Disambiguate SVPartSup
 /* ----------------------
@@ -1571,6 +1575,7 @@
 843;50;SVAdvFreq+^SVAdj;-SVAdv;remove conflicting labels
 /*		843. Påfallande ofta hade män en yrkestitel.
 844;50;SVAdj+SVAdvFreq;-SVAdvFreq;avoid that the word becomes NonRelevant because of conflicting labels - rare, no example
+/*		844. Det internationella samfundet berömde sig periodvis av att av den anledningen förbjuda truppminor. 
 704;50;SVAdvTemp+^SVAdj;SVAdvTemp+SVTime;remove conflicting labels
 /*		704. När floden möter det öppna vattnet, sjunker strömhas-tigheten plötsligt, och därmed förlorar vattnet sin förmåga att transportera material.
 705;50;SVAdvTemp+SVAdj;-SVAdvTemp;avoid that the word becomes NR because of conflicting labels
@@ -1875,6 +1880,7 @@
 /*		1191.UD. Stora variationer kan dessutom förekomma mellan olika discipliner.
 1192;80;SVPBegin+SVNegSentiment;+SVNegSentimentBegin;
 /*		1192.UD. Bullriga barn är norm i hyreshus.
+
 /* Sentiment attribute on adjective preceded by a form of 'vara' -> expansion to the left
 1167;80;typeConcept+^SVAdj|SVpAux+^SVPBegin|SVAdj:SVCon+SVPosSentiment;+SVPosSentimentBegin|*|*;
 /*		1167.UD. Stora teleskop är bra även för att de samlar in mer ljus än små.
@@ -1905,6 +1911,8 @@
 1204;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVPosSentiment+^SVPosSentimentBegin|SVPosSentiment+^SVPosSentimentBegin;+SVPosSentimentBegin|*|*;
 /*		1204.UD. Lägre organismer med hög reproduktion, kort generationstid och brutal selektion har bättre möjligheter att anpassa sig snabbt.
 1210;80;SVPBegin:SVbRel|.^SVPBegin+^SVbRel+^SVNegSentiment+^SVNegSentimentBegin|SVNegSentiment+^SVNegSentimentBegin;+SVNegSentimentBegin|*|*;
+/*		1210.UD. Forskarna avråder dock bestämt patienter från att avsluta litiumbehandling.
+
 /* Sentiment attribute after 'och' or 'genom att' -> start expansion at 'och' or 'genom att' instead of earlier at PBegin
 1185;80;SVPosSentimentBegin+^SVPosSentiment|*^SVAndOrBut+^SVPosSentiment|SVAndOrBut+^"än"+^SVList+^SVPosSentimentStop;-SVPosSentimentBegin|*|+SVPosSentimentBegin+SVbRel;
 /*		1185.UD. Hon såg hur stressad butiksinnehavaren var och erbjöd sig att komma och hjälpa honom.
