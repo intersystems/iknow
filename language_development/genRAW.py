@@ -5,7 +5,7 @@
 '''
 
 # import the usual suspects...
-import sys, os, pprint, time
+import sys, time
 
 # run "pip install iknowpy" if "import iknowpy" fails.
 import iknowpy
@@ -66,7 +66,8 @@ write_ln(f_raw,'#')
 write_ln(f_raw,"# in_path_par:"+in_path_par)
 write_ln(f_raw,"# out_path_par:"+out_path_par)
 write_ln(f_raw,"# language_par:"+language_par)
-write_ln(f_raw,"#\n#\n#")
+write_ln(f_raw,"# generated with " + __file__)
+write_ln(f_raw,"#\n#")
 
 for text_file in f_rec:
     print(text_file)
@@ -75,10 +76,16 @@ for text_file in f_rec:
         write_ln(f_raw,'\nD\x01'+text_file+'\x01'+in_path_par+text_file)
     else:
         write_ln(f_raw,'\n<D name=\"'+text_file+'\" file=\"'+in_path_par+text_file+'\">') # D050_sentences.txtC:\P4\Users\jdenys\text_input_data\ja\050_sentences.txt
-    
-    f_text = open(text_file,"r",True,"utf8") # open text file, must be utf8 encoded
-    text = f_text.read() # read text
+
+
+    f_text = open(text_file, "rb")
+    header = f_text.read(3)
+    if (header == b'\xef\xbb\xbf'): #Utf8 BOM
+        header = b''    # remove BOM
+    text = header + f_text.read() # read text, must be utf8 encoded
+    text = text.decode('utf8') # decode text to Unicode
     f_text.close()
+    
 
     engine.index(text, language_par)
     for sent in engine.m_index['sentences']: # S志望学部の決定時期について経営学部生に関しては表7 （ a ） （ b ）に、経済学部生に関しては表8 （ a ） （ b ）に示す。
@@ -88,37 +95,77 @@ for text_file in f_rec:
         if OldStyle:
             sentence_raw = 'S\x01'
             ent_stop = ''
-            for entity in sent['entities']:
-                ent_type = entity['type']
-                lit_text = text[entity['offset_start']:entity['offset_stop']]
-                ent_start = entity['offset_start']
-                if ent_type == 'NonRelevant':
-                    if (ent_start != ent_stop):
-                        sentence_raw = sentence_raw + lit_text
-                    else:
-                        sentence_raw = sentence_raw.rstrip() + lit_text
-                    ent_stop = entity['offset_stop']
-                if ent_type == 'Concept':
-                    if(ent_start != ent_stop):
-                        sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
-                    else:
-                        sentence_raw = sentence_raw.rstrip() + '\x02' + lit_text + '\x02'
-                    ent_stop = entity['offset_stop']
-                if ent_type == 'Relation':
-                    if(ent_start != ent_stop):
-                        sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
-                    else:
-                        sentence_raw = sentence_raw.rstrip() + '\x03' + lit_text + '\x03'
-                    ent_stop = entity['offset_stop']
-                if ent_type == 'PathRelevant':
-                    if(ent_start != ent_stop):
-                        sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
-                    else:
-                        sentence_raw = sentence_raw.rstrip() + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
-                    ent_stop = entity['offset_stop']
+            if language_par == 'ja':  # Separate procedure for Japanese: make sure double-byte spaces are kept. 
+                for entity in sent['entities']:
+                    ent_type = entity['type']
+                    lit_text = text[entity['offset_start']:entity['offset_stop']].replace("\n"," ") # literal representation of sentence, with newlines removed
+                    while "  " in lit_text:   # get rid of double spaces, caused by replaced newlines
+                        lit_text = lit_text.replace("  ", " ")
+                    ent_start = entity['offset_start']
+                    if ent_type == 'NonRelevant':
+                        if (ent_start != ent_stop):
+                            sentence_raw = sentence_raw.rstrip(' ') + lit_text
+                        else:
+                            sentence_raw = sentence_raw.rstrip(' ') + lit_text
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'Concept':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                        else:
+                            sentence_raw = sentence_raw.rstrip(' ') + '\x02' + lit_text + '\x02'
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'Relation':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                        else:
+                            sentence_raw = sentence_raw.rstrip(' ') + '\x03' + lit_text + '\x03'
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'PathRelevant':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                        else:
+                            sentence_raw = sentence_raw.rstrip(' ') + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                        ent_stop = entity['offset_stop']
+    
+                    if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
+                        sentence_raw = sentence_raw + ' '
+    
+            else: # other languages
+                for entity in sent['entities']:
+                    ent_type = entity['type']
+                    lit_text = text[entity['offset_start']:entity['offset_stop']].replace("\n"," ") # literal representation of sentence, replace newline by space
+                    lit_text = lit_text.replace('\r',' ')  # replace return by space
+                    while "  " in lit_text:   # get rid of double spaces, caused by replaced newlines and returns
+                        lit_text = lit_text.replace("  ", " ")
+                    ent_start = entity['offset_start']
+                    if ent_type == 'NonRelevant':
+                        if (ent_start != ent_stop):
+                            sentence_raw = sentence_raw + lit_text
+                        else:
+                            sentence_raw = sentence_raw + lit_text
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'Concept':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + '\x02' + lit_text + '\x02'
+                        else:
+                            sentence_raw = sentence_raw.rstrip() + '\x02' + lit_text + '\x02'
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'Relation':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + '\x03' + lit_text + '\x03'
+                        else:
+                            sentence_raw = sentence_raw.rstrip() + '\x03' + lit_text + '\x03'
+                        ent_stop = entity['offset_stop']
+                    if ent_type == 'PathRelevant':
+                        if(ent_start != ent_stop):
+                            sentence_raw = sentence_raw + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                        else:
+                            sentence_raw = sentence_raw.rstrip() + (' ' if entity == sent['entities'][0] else '') + '<' + lit_text + '>'
+                        ent_stop = entity['offset_stop']
+    
+                    if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
+                        sentence_raw = sentence_raw + ' '
 
-                if entity != sent['entities'][len(sent['entities'])-1]: # not for the last one
-                    sentence_raw = sentence_raw + ' '
         else:
             sentence_raw = '<S '
             for entity in sent['entities']:
@@ -137,12 +184,11 @@ for text_file in f_rec:
         if (len(sent['sent_attributes'])):
             for sent_attribute in sent['sent_attributes']:
                 attr_name = sent_attribute['type'].lower()
-                attr_marker = sent_attribute['marker'] # corresponds to lexreps.csv match 
-                attr_entity = sent['entities'][sent_attribute['entity_ref']]['index'] # corresponding entity index value
 
-                attr_marker_literal = text[sent_attribute['offset_start']:sent_attribute['offset_stop']].replace("\n","") # literal version of the marker, remove newlines
-                attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']].replace("\n","") # corresponding entity index literal value, remove newlines
-
+                attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']].replace("\n"," ") # corresponding entity index literal value, replace newline by space
+                attr_entity_literal = attr_entity_literal.replace('\r',' ')  # replace return by space
+                while "  " in attr_entity_literal:   # get rid of double spaces, caused by replaced newlines and returns
+                        attr_entity_literal = attr_entity_literal.replace("  ", " ")
                 if (attr_name == 'datetime'):
                     attr_name = 'time'
                 sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + attr_entity_literal + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'].lstrip() + '\"'
@@ -190,7 +236,7 @@ for text_file in f_rec:
         #
         # write path
         #
-        if (len(sent['path'])):
+        if (len(sent['path']) and language_par != 'ja'):
             if OldStyle:
                 path_raw = 'P\x01'
                 for sent_index in sent['path']:
@@ -202,6 +248,7 @@ for text_file in f_rec:
                 path_raw = path_raw + '>'
 
             write_ln(f_raw, path_raw.rstrip())
+
         #
         # path attributes
         # <attr type="negation" span="no sign here of hustle and bustle of french alpine tourist honeypots">
