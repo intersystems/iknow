@@ -20,15 +20,13 @@ Other utilities:
 
 
 
-## `genRaw.py`
+## genRaw.py
 
 | Summary | |
 |-|-| 
 | **What** | Generate output that contains the input sentence, attributes, entities (Concepts, Relations, PathRelevant entities), Paths and attribute spans |
 | **Usage** | ```python genRAW.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genRAW.py c:\corpus\input\ C:\corpus\output\ en``` <br/> Note: Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). |
 | **Parameters** | - Formatting of output <br/> - Fixed input and output directories and language code |
-
-### Documentation
 
 With this script you can **generate output** that contains the input sentence, attributes, entities
 (Concepts, Relations, PathRelevant entities), Paths and attribute spans.
@@ -40,8 +38,9 @@ has quotes and double spaces as delimiters. OldStyle=True is the default.
 
 Setting the preferred type of output can be done in `genRAW.py` at line 23.
 
-Below is the comparison of the two types for "This is not a long text, but a sentence of twelve
-words."
+Below is the comparison of the two types for 
+
+> This is not a long text, but a sentence of twelve words.
 
 With `OldStyle=True` (default)
 
@@ -89,15 +88,13 @@ paths to the directories and do not forget such a slash at the end of the paths,
 The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
 nl, pt, ru, sv and uk.
 
-## `genTrace.py`
+## genTrace.py
 
 | Summary | |
 |-|-| 
 | **What** | Generate output with information on unexposed labels (and – in the future - intermediate processing steps). |
 | **Usage** | ```python genTrace.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genTrace.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Note: Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). |
 | **Parameters** | Many parameters to tune which information appears in the output, such as the result of normalization, the result of pre-processing, detected attributes, applied rules etc. |
-
-### Documentation
 
 This script outputs, per sentence, the tokens found (one token per line), the input sentence, the
 **lexreps** found with the **labels** that are used for the linguistic rules processing, a list of **rules** that
@@ -145,7 +142,7 @@ paths to the directories and do not forget such a slash at the end of the paths,
 The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
 nl, pt, ru, sv and uk.
 
-## `ref_testing.py`
+## ref_testing.py
 
 | Summary | |
 |-|-| 
