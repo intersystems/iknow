@@ -563,7 +563,6 @@
 /*		1718. The patient's blood pressure decreased to 150/100 mmHg.
 1719;26;ENTemperature:ENWeight:ENVolume:ENRespiration;+ENMeasurement;
 /*		1719. Nasogastric tube on even days , once daily , Tylenol 650 mg.
-/*2183. Pulse was 81 bpm, respirations 15 per minute and he was afebrile.
 2547;26;ENNumber:ENNum:"one"|*ENUnit;*|+ENMeasurement;
 /*		2547. The poll found 42 per cent of licensees thought a ban on cigarette vending in pubs would further damage business.
 2011;26;ENNumber:ENNum:"one"|ENUnit+^ENNum+^ENNumber;+ENValue|+ENUnitProperty;
@@ -713,6 +712,7 @@
 /* RULE FOR 'THE TWO OF YOU' etc.
 /* ==============================
 2557;40;"the"|ENNum|"of"|ENPerspron_obj;ENPerspron_subj+ENPerspron_obj|Join|Join|Join;
+/*		2557. The three of them were interrupted by Kasner's intercom.
 
 /* RULES FOR 'TIMES'
 /*==================
@@ -3147,6 +3147,7 @@
 /*		2265.UD. it has apparently sat out a round of industry consolidation in favor of internal restructuring.
 2266;70;ENPrep+ENNegSentiment;+ENNegsentConceptBegin;
 /*		2266.UD. it is insisting on enforcing the death verdict against him and nobody objects.
+
 /* Expansion rules for type(Begin)Concept, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
 2237;70;ENPossentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENPossentConceptStop|*;
 /*		2237.UD. This is because people use emotion when making decisions, leading to some options feeling more desirable than others.
@@ -3185,6 +3186,8 @@
 2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|*|*;
 /*		2303.UD. However, more detailed maps are increasingly difficult to view and explore. The patient was "deeply" jaundiced.
 2254;70;ENPerspron_subj:ENPerspron:ENIt:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegSentimentBegin|-ENPBegin|*;
+/*		2254.UD. There are worries that this could be the beginning of an African exodus from the court, a dwindling membership on a continent with a long list of conflicts and human rights abuses to adjudicate. 
+
 /* No expansion to the right for Endconcept
 2270;70;ENEndconcept+ENPosSentiment|^ENPosSentiment+^ENPossentConceptBegin;*|+ENPossentConceptStop;
 /*		2270.UD. I am delighted I will have the opportunity to work with colleagues to achieve these ends.
@@ -3195,6 +3198,7 @@
 2263;70;ENAdj+ENPosSentiment+ENPossentConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENPossentConceptStop|*|+ENPossentConceptStop;
 /*		2263.UD. His trainer is also satisfied that he will be able to clear the fences.
 2264;70;ENAdj+ENNegSentiment+ENNegsentConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENNegsentConceptStop|*|+ENNegsentConceptStop;
+/*		2264.UD. As part of his defence, he told jurors that MI5 was “unhappy” that he had twice refused to act as a “secret agent” for them.
 
 /* Further expansion to the left to include the entire 'subject'
 /* Note: ENDummy2 marks ENXxxSentimentConceptBegin in left expansion of adjectives
@@ -3598,6 +3602,7 @@
 /*		1804.	There was a 20-fold increase in the number of privately built studio apartments for students, to today’s figure of almost 30,000, between 2011 and 2016.
 1869;75;ENBeforeAge|"between";+ENMeasurementBegin|-ENMeasurementBegin;
 /*		1869.	The school offers children aged between two to 11 "a holistic education".
+
 /* DETECT VALUE IN MEASUREMENTS WITH UNKNOWN UNITS
 2181;75;ENNum+ENMeasurement+^ENNumberPlusUnit2;+ENValue;output value even if there is no known unit
 /*		2181. The 20 finalists were selected by a panel of industry experts.

@@ -18,7 +18,7 @@ cdef char* eType_to_str(eType t) except NULL:
 		return 'Relation'
 	elif t == PathRelevant:
 		return 'PathRelevant'
-	raise ValueError('Entity type {} is unrecognized.'.format(t))
+	raise ValueError(f'Entity type {t} is unrecognized.')
 
 
 cdef char* aType_to_str(Attribute t) except NULL:
@@ -39,7 +39,7 @@ cdef char* aType_to_str(Attribute t) except NULL:
 		return 'Measurement'
 	elif t == Certainty:
 		return 'Certainty'
-	raise ValueError('Attribute type {} is unrecognized.'.format(t))
+	raise ValueError(f'Attribute type {t} is unrecognized.')
 
 
 Entry = namedtuple('Entry', ['literal', 'label'])
@@ -90,7 +90,7 @@ cdef class UserDictionary(object):
 		elif self.user_dictionary.addLabel(literal, UdctLabel) == 0:
 			self._entries.append(Entry(literal, UdctLabel))
 		else:
-			raise ValueError('User Dictionary Label {!r} is unknown.'.format(UdctLabel))
+			raise ValueError(f'User Dictionary Label {UdctLabel!r} is unknown.')
 
 	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> None:
 		"""Add a sentence end condition."""
@@ -196,7 +196,7 @@ cdef class iKnowEngine:
 		False by default. If traces is True, then the linguistic trace
 		information is stored in the m_traces attribute."""
 		if language not in self.get_languages_set():
-			raise ValueError('Language {!r} is not supported.'.format(language))
+			raise ValueError(f'Language {language!r} is not supported.')
 
 		IndexShift.clear()
 		idx = 0

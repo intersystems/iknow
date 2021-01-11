@@ -27,6 +27,7 @@
 374;1;UDNonRelevant;CSNonRelevant;
 /*		374.UD. Přesto nese paměť na předmoderní zemědělství.
 
+
 /*PHASE 38: disambiguation participles, adjectives and nouns - using case information
 /*===================================================================================
 /* preparation
@@ -70,6 +71,7 @@
 569;38;^SBegin|CSCapitalInitial|CSCapitalInitial+CSConInstrAmbig;*|*|-CSConInstrAmbig-CSConInstrPl-CSConInstr;
 /*		569. Máj je lyrickoepická skladba Karla Hynka Máchy vydaná roku 1836.
 589;38;CSAdjNomF|CSConDatF+CSConNomF;*|-CSConGenMN-CSConNomPl-CSConDatF;
+/*		589. Podepsala se nějak na vašem výkonu nepovedená kvalifikace?
 596;38;CSAdjAcc/InstrF|CSConNomF+CSConAccF;^CSAdjAccF|-CSConNomF;
 /*		596. Stoupenci stříbra vynášejí jeho antibiotickou schopnost efektivně čelit prakticky všem bakteriím, houbám a virům.
 609;38;CSAdjGenMN|CSAdjNomMAnimPl+CSLongNTLPartCon;*|CSCon+CSConGenMN;
@@ -153,6 +155,7 @@
 
 /* other cases
 600;38;CSNum|CSAdvTemp:CSAdvCon|CSLongPart|CSCon;*|^CSAdj-CSTime|^CSAdj|*;
+/*		600. dva trvale osídlené ostrovy uprostřed pouští.
 598;38;^CSConInstr|CSLongPart|CSComma:CSAndOr|.CSAdv:CSAdvTemp:CSAdvCon|CSAdj;*|^CSAdj|*|*|*;exception to r597, longpart becomes adj in enumeration
 /*		598. Česká republika je svrchovaný, jednotný a demokratický právní stát. NOT. že není možné ponechat tuto oblast právem neupravenou a právní předpisy.
 
@@ -315,6 +318,7 @@
 /*		667. Předtím byli bojovníci pro vládu užiteční.
 668;38;CSCon+CSConInstrMN:CSConInstrF:CSConGenPl:CSConDatPl:CSConLocPl:CSConInstrPl+^CSConNomPl:CSNoSplit|CSAdj+CSAdjNomMAnimPl+^CSCapitalInitial|CSPunctuation:SEnd:CSConj:CSPrep;*|^CSAdj+CSBCon|*;
 /*		668. že se jejich počet u jednotlivých zástupců různí.
+
 /* adverb + nominative adjective as beginconcept after noun other case/number/gender
 813;38;CSCon+CSConNomAccM:CSConNomAccN:CSConGenF:CSConGenMN:CSConDatMN:CSConDatF:CSConLocMN:CSConInstrMN+^CSConNomF:CSConNomPl:CSNoSplit|CSAdv|CSAdj+CSAdjNomF|CSPunctuation:SEnd;*|CSCAdv+CSBCon|*|*;
 /*		813. Tato myšlenka nebyla pro architekturu úplně lákavá.
@@ -563,6 +567,7 @@
 /*		509. Prostějov není daleko od Brna, je to nějakých 40 minut.
 510;39;CSIndefpron|CSTimeConcept|^CSEndTime;CSBCon+CSTime+CSNoSplit|CSTimeConcept+CSCon+CSTime|*;NoSplit to avoid split in phase 45
 /*		510. Ta trvá u všech inkoustových tiskáren několik sekund. je již po několikátý rok na rekordní úrovni.
+
 /* further join dates
 453;39;CSMonth:CSPossibleMonth|CSECon:CSYearNum;CSAdvTime+CSTime|+Join;
 /*		453. Proto se od 1.1. 2008 zvedne cena jízdenek v pražské MHD. Hugo se narodil 16. září ’82.
@@ -696,6 +701,7 @@
 268;40;CSHodne|CSAdv:CSAdvTemp:CSAdjAdv:CSAdvConj;CSAdvDegree+CSAdv|*;
 /*		268. Toto měřítko je už hodně dlouho jedním z hlavních argumentů medvědů. Mládežnická medaile však pro český hokej visí už dlouho hodně vysoko. Na všechno budeme mít hodně málo času. všechna mužstva doma a venku hodně jinak.
 270;40;CSHodne|*CSPerspron:"se":CSPRPron|CSVerb;CSRAdv|*|*;
+/*		270. Hodně nás to rozhodilo. Hodně se to mění.
 271;40;CSVerb|CSHodne|^CSAdj:CSLongPart:CSPosspron:CSCon:CSLongNTLPartCon;*|CSRAdv|*;
 /*		271. Pracujeme hodně, tréninky jsou rychle za sebou. NOT. Kluci ale naštěstí zblokovali hodně jeho střel.
 269;40;CSHodne;CSAdvDegree+CSAdjAdv;
@@ -1094,6 +1100,7 @@
 55;40;CSCon|CSCondSuffix;^CSVerb|Join;
 /*		55. Uvoln-li se úřad prezidenta republiky a nový prezident republiky ještě není zvolen nebo nesložil slib.
 58;40;^CSCondSuffix|CSCondSuffix;CSVerb|Join;default rule to make sure suffix doesn't become nonrelevant (combined with word that is neither verb nor concept)
+
 /*stát: infinitive or noun
 522;40;"se":"si"|CSVerb|.CSAdj:CSCon:CSAdvStruct:CSAdv+^"stát"|"stát";CSRefl|*|*|CSVerb+CSInf+CSCopula;
 /*		522. Právě odpočty by se měly stát v budoucnu klíčovým nástrojem podpory inovací. Pak se může volba školy stát mechanizmem diferenciace také kvůli sebeselekci.  která se zamilovala do lidského prince, pro nějž se rozhodla stát člověkem.
@@ -1101,11 +1108,12 @@
 /*		523. Stačí se stát členem VIP zóny. Chtěla–li se psychologie stát uznanou vědou, musela i ona prokázat.
 524;40;CSmAux:CSAux+^CSCopula|.CSAdvStruct:CSAdv|"stát";*|*|CSVerb+CSInf;
 /*		524. některých odborníků dokonce mohlo stát atraktivnějším cílem.
+
 /*'za prvé', 'za druhé', 'za třetí'
 125;40;"za"|"prvé":"druhé":"třetí"|CSVerb:CSRefl;CSAdvStruct|+Join|*;
 /*		125. Za prvé přináší analýzu jazykových prostředků. Za druhé se zaměříme na komputační aplikace.
 
-/* 'jako'
+/*'jako'
 377;40;"jako"|CSVerb+^CSInf;CSConj+CSConjPB|*;
 /*		377. Přirovnává proces globálního šíření modernity k obrovskému řítícímu se kolosu, jako je mohutný vůz. NOT. bylo by jako vzpomínat oběti napoleonských válek.
 
@@ -1291,6 +1299,7 @@
 /*		630. Queens je připojen k Bronxu čtyřmi mosty. Zejména na tuzemském trhu společnost dosáhla silných výsledků. NOT. který měl prověřit stálost respondentova úsudku. NOT. Ceny zboží úhrnem klesly o 0,6 %.
 635;45;CSConDatF:CSConDatMN:CSConDatPl+^CSConGenF:CSConGenMN:CSConGenPl:CSAdvTemp:CSRAdv:CSAdvTime:CSPossessive:CSCapitalInitial;+CSConPossibleBCon;preparation for splitting concept clusters
 /*		635. Na výše uvedeném snížení poskytnutých finančních zdrojů univerzitě se více podílely. Odporuje-li usnesení, rozhodnutí nebo jiné opatření Komory zákonu.
+
 /*correction: don't split in case of 'timeconcept' + number
 646;45;CSTimeConcept|CSNum|^typeConcept;*|-CSConPossibleBCon|*;
 /*		646. Nyní stačí minutu dvě počkat a vše je zase v nejlepším pořádku.
@@ -1603,93 +1612,153 @@
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*  Add SentimentBegin and SentimentStop for expansion to the whole phrase
 748;80;CSVerb:CSPart:CSRAdv+CSPosSentiment+CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSPosSentimentStop;
+/*		748.UD. Získali jsme 2 europoslance, 2 senátory, 260 starostů, 210 místostarostů a cca 3 000 zastupitelů. Pojmem gramotný člověk byl chápán člověk schopný číst a psát.
 749;80;CSVerb:CSPart:CSRAdv+CSNegSentiment+CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSNegSentimentStop;
+/*		749.UD. Vůbec jsem neváhal, byla to jasná červená karta, odmítl Bílek.
 746;80;CSPBegin|.^CSPBegin:CSPosSentiment|CSVerb:CSPart:CSRAdv+CSPosSentiment+^CSPBegin|.^CSPBegin:SEnd:CSPosSentimentBegin|SEnd:CSPBegin+^CSPosSentimentBegin;+CSPosSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSPosSentimentStop;
+/*		746.UD. Zatímco loni získala v patnácti závodech bodů sedm, nyní má po deseti na kontě jediný.
 747;80;CSPBegin|.^CSPBegin:CSNegSentiment|CSVerb:CSPart:CSRAdv+CSNegSentiment+^CSPBegin|.^CSPBegin:SEnd:CSNegSentimentBegin|SEnd:CSPBegin+^CSNegSentimentBegin;+CSNegSentimentBegin|+CSInSentimentSpan|+CSInSentimentSpan|+CSInSentimentSpan|+CSNegSentimentStop;
+/*		747.UD. Program EV-55 odmítl mluvčí společnosti komentovat, dodal však, že s Evektorem Aero i nadále počítá jako se strategickým výrobcem dílů. Jako každý rok se svým hostům snažil pomoct při vyplňování žádosti o víza, tentokrát byl však zhruba tucet britskými úřady odmítnut.
 
 /* Expansion for sentiment attribute on type(Begin)Concept
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 /*  Preparation
 692;80;CSAdj:CSCAdv:CSCon:CSPRPron:CSNRPron:CSPosspron:CSPerspron:CSPrep+^CSBCon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
+/*		692.UD. a zároveň skýtá potenciál pro využití i zneužití různými ideologiemi.
 711;80;CSAdvStruct:CSAdvTime:CSECon;+CSPossibleSentimentConceptSpan;add label to entities possible in sentiment span for concepts
+/*		711.UD. což představuje zlepšení oproti roku 2016.
 
 /*  Add SentimentBegin to sentiment marker as Concept
 724;80;typeConcept:typeBeginConcept+CSPosSentiment;+CSPosSentimentConceptBegin;
+/*		724.UD. rozšiřovat znalosti o Alpách, podporovat lásku k nim a usnadnit cestování v Alpách.
 725;80;typeConcept:typeBeginConcept+CSNegSentiment;+CSNegSentimentConceptBegin;
+/*		725.UD. Cílem disertační práce byl popis problémů provázející nedobrovolnou hospitalizaci duševně nemocných a identifikace některých sporných, zejména etických aspektů.
 782;80;CSCon:CSAdj:CSCAdv:CSNegCon:CSNum:CSOrdNum:CSShAdj:CSZadny;+CSTypeConcept;add extra label to entities with typeconcept, so it can be used with OR together with other labels
+/*		782.UD. V posledních částech práce je studován potenciál chelátorů železa předcházet poškození srdečních buněk oxidačním stresem a antracykliny.
 
 /*  Add SentimentStop to sentiment marker as Concept -> expand to the right until next verb form, negation marker or beginning of phrase, include lists
 738;80;CSAdj|.CSAdj:CSComma|CSAndOr|.CSCAdv|CSAdj|CSCon;*|+CSPossibleSentimentConceptSpan|+CSPossibleSentimentConceptSpan|*|*|*;preparation: so span doesn't stop in enumeration of adjectives
+/*		738.UD. Pacient má nyní právo na veškeré informace týkající se navrhovaného léčebného či diagnostického postupu včetně možných alternativ. V čínštině je tedy jazyková jednotka na úrovni slabiky významnou jednotkou gramatického, fonologického i fonetického popisu.
 732;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSPosSentimentConceptStop;stop at BeginConcept in nominative case
+/*		732.UD. Nahání vám dvě vysoká vítězství pondělního soupeře velký respekt? NOT. Referendum nekompromisně odhalilo rozdílnou podporu integračnímu procesu napříč členskými státy.
 733;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSBCon+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSConNomF:CSConNomAccM:CSConNomAccN:CSConNomPl;*|*|+CSNegSentimentConceptStop;stop at BeginConcept in nominative case
+/*		733.UD. jí způsobil těžkou újmu na zdraví a duševní poruchu takzvaný syndrom týrané osoby.
 801;80;typeConcept:typeBeginConcept+CSPosSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSPosSentimentConceptStop;stop at Posspron in nominative case
+/*		801.UD. Přes všechny příznivé finanční a ekonomické okolnosti roku 2014 naše závazky po splatnosti ke konci roku.
 802;80;typeConcept:typeBeginConcept+CSNegSentiment|.<CSPossibleSentimentConceptSpan|CSPosspron+CSAdjNomM:CSAdjNomF:CSAdjNomN:CSAdjNomMAnimPl:CSAdjNomPl;*|*|+CSNegSentimentConceptStop;stop at Posspron in nominative case
+/*		802.UD. Přes všechny nepříznivé finanční a ekonomické okolnosti roku 2014 naše závazky po splatnosti ke konci roku.
 730;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;pattern noun-preposition-noun includes a beginconcept
+/*		730.UD. Referendum nekompromisně odhalilo rozdílnou podporu integračnímu procesu napříč členskými státy, inspirovalo svolání hlasování ve Francii.
 731;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|CSBCon|.CSPossibleSentimentConceptSpan+^CSPBegin|^typeConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;pattern noun-preposition-noun includes a beginconcept
+/*		731.UD. Zákaz dovozu a chovu potomků klonů v zemích EU by se rovnal vyhlášení obchodní války Spojeným státům, Kanadě, Austrálii a dalším zemím.
 728;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSPosSentiment;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;basic pattern noun-preposition-noun
+/*		728.UD. proto není jejich přínos náležitě doceněn. Vyšší zisk roku 2011 je patrný i v růstu finančního majetku Českého rozhlasu.
 729;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan+^CSPBegin|^CSTypeConcept:CSECon:CSInSentimentConceptSpan:CSNegSentiment;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;basic pattern noun-preposition-noun
+/*		729.UD. že závažné porušení zmíněných hodnot může vést k pozastavení práv.
 741;80;typeConcept:typeBeginConcept+CSPosSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;stop at punctuation
+/*		741.UD. Zároveň však mezi nimi mnohdy dochází k významným průsečíkům, které přesahují společné hranice zkoumané látky.
 742;80;typeConcept:typeBeginConcept+CSNegSentiment|.CSPossibleSentimentConceptSpan|CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;stop at punctuation
+/*		742.UD. Akutní selhání jater (ASJ) je řídce se vyskytující a vysoce devastující onemocnění, které je charakterizované náhlým nástupem závažné jaterní dysfunkce u jedinců.
 760;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+/*		760.UD. Z dalšího členění vyplývá, že zatímco v činnosti školské bylo dosaženo zisku v činnosti hlavní i doplňkové, tak u činnosti ubytovací a stravovací bylo vykázáno hospodaření.
 761;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|SEnd:CSPunctuation+^CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+/*		761.UD. Datum nabytí právní moci rozhodnutí soudu o omezení svéprávnosti včetně uvedení čísla jednacího a označení soudu.
 763;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+/*		763.UD. Celková jmenovitá hodnota čisté emise střednědobých a dlouhodobých státních dluhopisů na domácím trhu tak v druhém čtvrtletí roku 2018 činila 111,2 mld. Kč.. NOT. Stejně tak mnoho technologií spojených s kryptoměnami přináší různá vylepšení, ale jejich implementace není dostatečně rychlá a nemalá část projektů je tak odsouzena k nezdaru.
 764;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
+/*		764.UD. Velká hospodářská krize z přelomu dvacátých a třicátých let 20. století podnítila vznik nových ekonomických teorií. Jenže voliči jako by po letech zmítání se v krizi ekonomické i politické chtěli přinejmenším v úřadu prezidenta klidnější politiky s jasnou hodnotovou orientací na Západ.
 
 /*  Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
 709;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSPosSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
+/*		709.UD. Při jízdě na lyžích lze stoupat i do velmi prudkých svahů a je předmětem zkoumání, jaký sklon svahu je vhodný pro vynaložení nejmenšího úsilí.
 710;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSNegSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
+/*		710.UD. Některé druhy jsou nebezpečné pro člověka.
 707;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSPosSentiment|CSAdj+CSPosSentiment|^CSCon:CSAdj:CSPosSentiment:CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;left expansion for adjective not yet in sentiment span - add sentiment stop
+/*		707.UD. Dodal, že také reakce v zahraničí jsou pozitivní. Kdybychom dostali gól, bylo by to těžké, protože italské týmy jsou po taktické stránce výborné. NOT. Jedním z mechanizmů umožňujících ranou diferenciaci je svobodná volba školy. NOT. Pouze z finančního hlediska je potom nejlepší odejít až do řádného starobního důchodu. NOT. Při jízdě na lyžích lze stoupat i do velmi prudkých svahů a je předmětem zkoumání, jaký sklon svahu je vhodný pro vynaložení nejmenšího úsilí.
 708;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp:CSPosspron:CSPrep:CSAdj:CSCon+^CSNegSentiment|CSAdj+CSNegSentiment|^CSCon:CSAdj:CSNegSentiment:CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;left expansion for adjective not yet in sentiment span - add sentiment stop
+/*		708.UD. Jejich vztah byl špatný. Jeho výhrady k osobě jsou absurdní a nestydaté. NOT. Ve těchto klubech je horší ekonomická situace, takže kdo jen trochu umí hrát volejbal.
 765;80;CSList|*CSList+^CSPosSentimentConceptBegin|CSPosSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptBegin|*;expansion to beginning of list
+/*		765.UD. Módní fotografie i glamour jsou populární v reklamě.
 766;80;CSList|*CSList+^CSNegSentimentConceptBegin|CSNegSentimentConceptBegin|CSCopula+CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptBegin|*;expansion to beginning of list
+/*		766.UD. Módní fotografie i glamour jsou negativní v reklamě.
 712;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|*;right expansion for adjective in sentiment span - don't add sentiment stop
 713;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|*;right expansion for adjective in sentiment span - don't add sentiment stop
 716;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+/*		716.UD. Vysoké školy jsou veřejné, státní a soukromé, nejstarší a nejvýznamnější je Univerzita Karlova v Praze, která je zároveň nejstarším vysokým učením ve střední Evropě.
 717;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon|CSPrep|*CSPosspron:CSCAdv:CSAdj:CSCon|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+/*		717.UD. Nejhorší jsou půjčky v rodině!
 714;80;CSAdj+CSPosSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+/*		714.UD. Nejvýznamnější byla Pražská sekce, která zaujímá nejdůležitější postavení.
 715;80;CSAdj+CSNegSentiment|CSCopula|*CSPosspron:CSCAdv:CSAdj:CSCon+^CSInSentimentConceptSpan|^CSInSentimentConceptSpan;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;right expansion for adjective not yet in sentiment span - add sentiment stop
+/*		715.UD. A nejhorší jsou vrchní sestry – jsou přísný a zlý.
 721;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+/*		721.UD. I tam, kde je škola dostupná a zdarma si však ne všechny rodiny mohou dovolit děti do školy posílat.
 720;80;CSCopula|*CSPossibleSentimentConceptSpan|CSBCon+CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+/*		720.UD. Pro katastrální úřad bylo rozhodnutí soudu nedostatečné.
 722;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSPosSentiment|CSPunctuation:CSAndOr:SEnd;+CSPosSentimentConceptBegin|-CSPosSentimentConceptStop|*|+CSPosSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+/*		722.UD. Mám někdy při vyjednávání dojem, že je mu příjemné, když se situace hrotí.
 723;80;CSCopula|*CSPRPron:CSPerspron|CSAdj+CSNegSentiment|CSPunctuation:CSAndOr:SEnd;+CSNegSentimentConceptBegin|-CSNegSentimentConceptStop|*|+CSNegSentimentConceptStop;left expansion for sentiment adjective after copula + subject
+/*		723.UD. S tím je to horší.
 
 /* Clean-up: move SentimentStop and SentimentBegin to next relevant entity
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 699;80;typeOther+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		699.UD. bez pomoci přístrojů, tedy pouhým okem. bez pomoci přístrojů, mimo jiné, pouhým okem.
 700;80;typeOther+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		700.UD. Obezita spolu s přidruženými komorbiditami, zejména diabetes mellitus 2. typu.
 718;80;CSBracket1:CSBracket2+CSPosSentimentConceptStop:CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep (separate rule next to r699 because labels and types can't be combined with OR)
+/*		718.UD. Správné zvolení trasy (sklonu svahu) dosud nebylo podloženo teoretickými fakty.
 719;80;CSBracket1:CSBracket2+CSNegSentimentConceptStop:CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep (separate rule next to r700 because labels and types can't be combined with OR)
+/*		719.UD. Akutní selhání jater (ASJ) je řídce se vyskytující a vysoce devastující onemocnění.
 750;80;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+/*		750.UD. Tento fakt by mohl pomoci k lepší spolupráci mezi sportovními spolky těchto dvou městských čtvrtí a propojení jednotlivých oddílů.
 751;80;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+/*		751.UD. Tato zjištění odmítlo jak MF ČR, tak Mze ČR ihned při první kontrole NKÚ jako nedůvodná, vysvětlení je uvedeno výše, jak právně, tak ekonomicky.
 
 /* Remove conflicting attributes
 752;80;CSPosSentimentStop:CSPosSentimentConceptStop+CSPosSentiment:CSPosSentimentBegin:CSPosSentimentConceptBegin;-CSPosSentimentStop-CSPosSentimentConceptStop;
+/*		752.UD. To, že jsem ty soutěže na konec i vyhrál, mě dost překvapilo.
 753;80;CSNegSentimentStop:CSNegSentimentConceptStop+CSNegSentiment:CSNegSentimentBegin:CSNegSentimentConceptBegin;-CSNegSentimentStop-CSNegSentimentConceptStop;
+/*		753.UD. Tvrzení, že úmrtím psa utrpěla finanční ztrátu kvůli možnému krytí, soud odmítl.
 
 /* Add general begin and stop labels
 771;80;CSPosSentimentConceptBegin;-CSPosSentimentConceptBegin+CSPosSentimentBegin;
+/*		771.UD. Současné katalyzátory pro reakce WGS jsou schopny snížit množství CO přibližně na 0.5 až 1.0 obj. %, což není dostatečné a dochází k otravě katalyzátorů.
 772;80;CSNegSentimentConceptBegin;-CSNegSentimentConceptBegin+CSNegSentimentBegin;
+/*		772.UD. Individuálně žádný z nich problém neindikuje.
 773;80;CSPosSentimentConceptStop;-CSPosSentimentConceptStop+CSPosSentimentStop;
+/*		773.UD. Rychlejší tempo růstu nákladů nepředstavuje významný faktor.
 774;80;CSNegSentimentConceptStop;-CSNegSentimentConceptStop+CSNegSentimentStop;
+/*		774.UD. VŠE v roce 2017 nevlastnila žádné majetkové ani dluhové cenné papíry a nedisponovala jinými majetkovými právy.
 
 
-/* PHASE 85: NEGATION + SENTIMENT
+/*PHASE 85: NEGATION + SENTIMENT
 /* Detect sentiment markers in negation span
 767;85;^CSNegation|CSNegation|CSPosSentiment+CSInNegspan;*|*|+CSNegPosSent;mark sentiment markers in negation span
+/*		767.UD. Jeho zdravotní stav není optimální.
 768;85;^CSNegation|CSNegation|CSNegSentiment+CSInNegspan;*|*|+CSNegNegSent;mark sentiment markers in negation span
+/*		768.UD. Období nejistoty ukončila nabídka od Red Wings, kterou nemohl odmítnout.
 
 /* Reverse sentiment
 769;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegPosSent|.CSInNegspan+^CSNegPosSent|CSInNegspan+CSNegPosSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSNegSentimentBegin-CSPosSentimentBegin|-CSPosSentimentBegin-CSNegSentimentStop|-CSNegPosSent-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentStop+CSNegSentimentStop;reverse sentiment
+/*		769.UD. Jeho zdravotní stav není optimální.
 770;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegNegSent|.CSInNegspan+^CSNegNegSent|CSInNegspan+CSNegNegSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSPosSentimentBegin-CSNegSentimentBegin|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegNegSent-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentStop+CSPosSentimentStop;reverse sentiment
+/*		770.UD. VŠE v roce 2017 nevlastnila žádné majetkové ani dluhové cenné papíry a nedisponovala jinými majetkovými právy.
 
 /* Clean-up: move SentimentStop and SentimentBegin to next relevant entity, 2nd part
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 776;85;typeOther+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		776.UD. Byl prokázán statisticky významný rozdíl v prodloužení doby na WL oproti pacientům bez terapie FPSAD, což poskytuje vyšší šance na zotavení nebo provedení LT.
 777;85;typeOther+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		777.UD. Jízda není vůbec nepříjemná nebo bez odměny, [… avšak] nikdy nebudeme schopni směr nebo postup cesty zcela řídit.
 778;85;CSBracket1:CSBracket2+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		778.UD. Dokud se toto číslo nezmění, nemůžeme očekávat změnu ve využívání Linuxu a jiného svobodného softwaru (a tím snížení nákladů) ve státní sféře.
 779;85;CSBracket1:CSBracket2+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
+/*		779.UD. Evropský úřad pro boj s podvody (OLAF) sdílí podezření kriminalistů.
 780;85;typeOther:typeAmbiguous+CSPBegin+CSPosSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+/*		780.UD. Ano, bohužel jste slyšeli dobře.
 781;85;typeOther:typeAmbiguous+CSPBegin+CSNegSentimentBegin|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentBegin;move SentimentBegin from nonrelevant to next relevant lexrep
+/*		781.UD. Tato zjištění odmítlo jak MF ČR, tak Mze ČR ihned při první kontrole NKÚ jako nedůvodná, vysvětlení je uvedeno výše, jak právně, tak ekonomicky.
 
 
 /*PHASE 90: clean-up
@@ -1699,3 +1768,4 @@
 302;90;CSAndOr:CSConj:CSRelpron:CSCopula+CSBeginrel;CSBeginrel;
 /*		302. Vybaven plod uložený v poloze podélné hlavičkou, první postavení, ženského pohlaví, 3370g neměřena a předán pediatrovi.
 787;90;CSNum+CSAdvTime;-CSNum;
+/*		787. např. příspěvek 7/2007.
