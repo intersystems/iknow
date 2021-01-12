@@ -12,6 +12,9 @@ python setup.py build_ext -i -f
     Python interface component only.
 python setup.py install
     Build and install the module into your instance of Python.
+python setup.py install --fast
+    Quickly build and install the module into your instance of Python. For
+    development use only.
 python setup.py bdist_wheel
     Create a wheel containing the extension including the iKnow and ICU
     dependencies.
@@ -35,6 +38,7 @@ import ctypes.util
 import fnmatch
 import glob
 import hashlib
+import itertools
 import os
 import platform
 import shutil
@@ -623,6 +627,12 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
     sys.argv[1] = 'bdist_wheel'
     install_wheel = True
 
+# Check whether fast installation is requested.
+fast_install = False
+if '--fast' in sys.argv and install_wheel:
+    fast_install = True
+    sys.argv.remove('--fast')
+
 # platform-specific settings
 if sys.platform == 'win32':
     library_dirs = ['../../kit/x64/Release/bin']
@@ -664,11 +674,10 @@ else:
     enginelibs_path_pattern = os.path.join(f'../../kit/{iknowplat}/release/bin', enginelibs_name_pattern)
     extra_libs = []
 
-# Find ICU and iKnow engine libraries. We do not copy the libraries into the
-# package source at this stage because the libraries are added during the wheel
-# repair step.
+# Find all dependent libraries.
 iculib_paths = []  # paths to original ICU libraries
 enginelib_paths = []  # paths to original iKnow engine libraries
+extralib_paths = []
 if '--no-dependencies' in sys.argv:
     no_dependencies = True
     sys.argv.remove('--no-dependencies')
@@ -676,10 +685,13 @@ elif 'install' in sys.argv or 'bdist_wheel' in sys.argv or 'merge' in sys.argv:
     no_dependencies = False
     iculib_paths = glob.glob(iculibs_path_pattern)
     enginelib_paths = glob.glob(enginelibs_path_pattern)
+    extralib_paths = [ctypes.util.find_library(lib) for lib in extra_libs]
     if not iculib_paths:
         raise BuildError(f'ICU libraries not found: {iculibs_path_pattern}')
     if not enginelib_paths:
         raise BuildError(f'iKnow engine libraries not found: {enginelibs_path_pattern}')
+    if not all(extralib_paths):
+        raise BuildError(f'Extra libraries not found: {extra_libs}')
 else:
     no_dependencies = True
 
@@ -689,31 +701,40 @@ with open('../../README.md', encoding='utf-8') as readme_file:
     # are less appropriate on PyPI.
     long_description = long_description[long_description.index('# iKnow\n'):]
 
+dependent_lib_names = None
 try:
-    # include MIT license in distribution
-    shutil.copy2('../../LICENSE', '.')
+    if fast_install:
+        # copy dependent libraries into ./iknowpy
+        dependent_lib_names = []
+        for lib_path in itertools.chain(iculib_paths, enginelib_paths, extralib_paths):
+            shutil.copy2(lib_path, 'iknowpy')
+            dependent_lib_names.append(os.path.basename(lib_path))
+        package_data = {'iknowpy': dependent_lib_names}
+    else:
+        # include MIT license in distribution
+        shutil.copy2('../../LICENSE', '.')
 
-    # include ICU license in distribution
-    icu_license_found = False
-    for root, _, files in os.walk(icudir):
-        for filename in files:
-            if filename == 'LICENSE':
-                icu_license_found = True
-                shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
+        # include ICU license in distribution
+        icu_license_found = False
+        for root, _, files in os.walk(icudir):
+            for filename in files:
+                if filename == 'LICENSE':
+                    icu_license_found = True
+                    shutil.copy2(os.path.join(root, filename), 'LICENSE_ICU')
+                    break
+            if icu_license_found:
                 break
-        if icu_license_found:
-            break
-    if not icu_license_found:
-        raise BuildError(f'ICU license not found in {icudir}')
+        if not icu_license_found:
+            raise BuildError(f'ICU license not found in {icudir}')
 
-    # include git revision in distribution
-    with open('iknowpy/git_revision', 'w') as f:
-        subprocess.run(
-            ['git', 'rev-parse', 'HEAD'],
-            stdout=f, stderr=subprocess.PIPE, universal_newlines=True,
-            check=True
-        )
-
+        # include git revision in distribution
+        with open('iknowpy/git_revision', 'w') as f:
+            subprocess.run(
+                ['git', 'rev-parse', 'HEAD'],
+                stdout=f, stderr=subprocess.PIPE, universal_newlines=True,
+                check=True
+            )
+        package_data = {'iknowpy': ['git_revision']}
     setup(
         name='iknowpy',
         description='iKnow Natural Language Processing engine',
@@ -746,7 +767,7 @@ try:
             'Wiki': 'https://github.com/intersystems/iknow/wiki'
         },
         packages=['iknowpy'],
-        package_data={'iknowpy': ['git_revision']},
+        package_data=package_data,
         version=version,
         python_requires='>=3.6',
         setup_requires=[
@@ -775,15 +796,18 @@ try:
         }
     )
 finally:
-    # remove created files from package source
+    # remove created/copied files from package source
     remove('LICENSE')
     remove('LICENSE_ICU')
     remove('iknowpy/git_revision')
+    if dependent_lib_names is not None:
+        for lib_name in dependent_lib_names:
+            remove(os.path.join('iknowpy', lib_name))
 
 if 'bdist_wheel' in sys.argv and platform.processor() == 'ppc64le':
     fix_wheel_ppc64le(find_wheel())
 
-if 'bdist_wheel' in sys.argv and not no_dependencies:
+if 'bdist_wheel' in sys.argv and not no_dependencies and not fast_install:
     patch_wheel(find_wheel())
 
 if install_wheel:

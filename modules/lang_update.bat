@@ -9,7 +9,7 @@ if %errorlevel% NEQ 0 (
 MSBuild ..\..\..\..\modules\iKnowEngine.sln -p:Configuration="Release" -p:Platform="x64" -maxcpucount
 iKnowEngineTest
 pushd ..\..\..\..\modules\iknowpy
-python setup.py install
+python setup.py install --fast
 popd
 
 :exit
