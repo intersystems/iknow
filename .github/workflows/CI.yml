@@ -126,6 +126,7 @@ jobs:
         run: |
           echo "XCODE_SELECTED=/Applications/Xcode_12.3.app" >> $GITHUB_ENV
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
+          echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
           mkdir -p $HOME/cache
           echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
