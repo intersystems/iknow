@@ -13,8 +13,8 @@ python setup.py build_ext -i -f
 python setup.py install
     Build and install the module into your instance of Python.
 python setup.py install --fast
-    Quickly build and install the module into your instance of Python. For
-    development use only.
+    (Windows only) Quickly build and install the module into your instance of
+    Python. For development use only.
 python setup.py bdist_wheel
     Create a wheel containing the extension including the iKnow and ICU
     dependencies.
@@ -630,7 +630,10 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
 # Check whether fast installation is requested.
 fast_install = False
 if '--fast' in sys.argv and install_wheel:
-    fast_install = True
+    if sys.platform == 'win32':
+        fast_install = True
+    else:
+        print('Warning: --fast is supported on Windows only and has been ignored')
     sys.argv.remove('--fast')
 
 # platform-specific settings
