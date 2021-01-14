@@ -132,8 +132,6 @@ jobs:
           echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
           echo "CCACHE_MAXSIZE=400M" >> $GITHUB_ENV
           echo "PYINSTALL_DIR=$HOME/.pyenv/versions" >> $GITHUB_ENV
-          echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
-          echo /usr/local/opt/ccache/libexec >> $GITHUB_PATH
       - name: get list of dependencies
         run: .github/workflows/dependencies.sh
       - name: download cached ICU installation

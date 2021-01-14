@@ -4,11 +4,9 @@
 # - ICU
 # - buildcache
 # - Python for Windows
+# - Python for Mac OS X
 # - Cython
 # - manylinux
-# In addition, whenever GitHub Actions updates its Mac OS X build machines so
-# that a new version of pyenv is available, we check for updates to Python on
-# Mac OS X.
 #
 # For each dependency that has an update, we create a pull request containing a
 # single commit that updates the dependency.
@@ -19,14 +17,9 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
-    inputs:
-      PYENV_TOOL_VERSION_CURRENT:
-        description: 'current version of pyenv, as reported by GitHub Actions'
-        required: true
 
 jobs:
   autoupdate-ICU:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
@@ -55,7 +48,6 @@ jobs:
             *I am a bot, and this action was performed automatically.*
 
   autoupdate-buildcache:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
@@ -80,7 +72,6 @@ jobs:
             *I am a bot, and this action was performed automatically.*
 
   autoupdate-cython:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
@@ -105,7 +96,6 @@ jobs:
             *I am a bot, and this action was performed automatically.*
 
   autoupdate-manylinux:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
@@ -134,7 +124,6 @@ jobs:
             *I am a bot, and this action was performed automatically.*
 
   autoupdate-python-windows:
-    if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
@@ -161,13 +150,12 @@ jobs:
             *I am a bot, and this action was performed automatically.*
 
   autoupdate-python-osx:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
+    runs-on: macos-10.15
     steps:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py osx ${{ github.event.inputs.PYENV_TOOL_VERSION_CURRENT }} ${{ secrets.GITHUB_TOKEN }}
+        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py osx
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -183,6 +171,6 @@ jobs:
 
             ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
 
-            For details of the updated versions, see https://github.com/pyenv/pyenv/releases/v${{ github.event.inputs.PYENV_TOOL_VERSION_CURRENT }}.
+            For details of the updated versions, see https://github.com/pyenv/pyenv/releases/v${{ env.PYENV_TOOL_VERSION }}.
 
             *I am a bot, and this action was performed automatically.*
