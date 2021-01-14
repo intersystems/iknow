@@ -94,7 +94,6 @@ void iKnowUnitTests::Issue70(const char* pMessage)
 	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
 
 		if (it->find("RuleApplication:rule_id=1261") != string::npos) {
-			cout << *it << std::endl;
 			bRuleFires = true;
 		}
 	}
@@ -104,7 +103,6 @@ void iKnowUnitTests::Issue70(const char* pMessage)
 		for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
 
 			if (it->find("RuleApplication:rule_id=1261") != string::npos) {
-				cout << *it << std::endl;
 				bRuleFires = true;
 			}
 		}
