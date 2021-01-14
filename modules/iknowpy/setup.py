@@ -13,8 +13,11 @@ python setup.py build_ext -i -f
 python setup.py install
     Build and install the module into your instance of Python.
 python setup.py install --fast
-    Quickly build and install the module into your instance of Python. For
-    development use only.
+    (Windows only) Quickly build and install the module into your instance of
+    Python. For development use only.
+python setup.py install --user
+    Build the module and perform a user install into your instance of Python.
+    Use this option if `python setup.py install` results in a permission error.
 python setup.py bdist_wheel
     Create a wheel containing the extension including the iKnow and ICU
     dependencies.
@@ -630,8 +633,17 @@ if len(sys.argv) > 1 and sys.argv[1] == 'install':
 # Check whether fast installation is requested.
 fast_install = False
 if '--fast' in sys.argv and install_wheel:
-    fast_install = True
+    if sys.platform == 'win32':
+        fast_install = True
+    else:
+        print('Warning: --fast is supported on Windows only and has been ignored')
     sys.argv.remove('--fast')
+
+# Check whether user installation is requested.
+user_install = False
+if '--user' in sys.argv and install_wheel:
+    user_install = True
+    sys.argv.remove('--user')
 
 # platform-specific settings
 if sys.platform == 'win32':
@@ -811,6 +823,8 @@ if 'bdist_wheel' in sys.argv and not no_dependencies and not fast_install:
     patch_wheel(find_wheel())
 
 if install_wheel:
-    subprocess.run(
-        [sys.executable, '-m', 'pip', 'install', '--upgrade', '--force-reinstall', find_wheel()],
-        check=True)
+    cmd = [sys.executable, '-m', 'pip', 'install', '--upgrade', '--force-reinstall']
+    if user_install:
+        cmd.append('--user')
+    cmd.append(find_wheel())
+    subprocess.run(cmd, check=True)
