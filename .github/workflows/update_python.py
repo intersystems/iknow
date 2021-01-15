@@ -1,16 +1,15 @@
 #!/usr/bin/env python3
 """Search for an update to Python for a given OS.
 
-This update script can be executed on any platform (not necessarily the OS for
-which we're searching for a Python update).
-
 For Windows, we search for updates using NuGet.
 
-For Mac OS X, we search for updates using pyenv. The caller specifies the
-version of pyenv to use to search for Python updates.
+For Mac OS X, we search for updates using pyenv.
 
-Usage: update_python.py win64
-       update_python.py osx PYENV_TOOL_VERSION_CURRENT GITHUB_TOKEN
+Usage:
+    update_python.py win64
+        (can be run on any platform)
+    update_python.py osx
+        (must be run on Mac OS X)
 """
 
 import updatelib
@@ -99,7 +98,6 @@ else:
     current_versions = vars['PYVERSIONS_OSX'].split()
 
 # Get list of available Python versions.
-pyenv_tool_version_current = None
 if platform == 'win64':
     url_data = urllib.request.urlopen('https://api.nuget.org/v3/index.json')
     json_data = json.load(url_data)
@@ -113,23 +111,11 @@ if platform == 'win64':
     json_data = json.load(url_data)
     available_versions = [version for version in json_data['versions'] if re.match(VERSION_REGEX, version)]
 else:  # platform == 'osx'
-    pyenv_tool_version_current = sys.argv[2]
-    headers = {'Authorization': 'Bearer ' + sys.argv[3]}
-    request = urllib.request.Request(f'https://api.github.com/repos/pyenv/pyenv/zipball/v{pyenv_tool_version_current}', headers=headers)
-    url_data = urllib.request.urlopen(request)
-    home_dir = os.environ['HOME']
-    with open(os.path.join(home_dir, 'pyenv-src.zip'), 'wb') as file:
-        file.write(url_data.read())
-    subprocess.run(['unzip', '-q', os.path.join(home_dir, 'pyenv-src.zip'), '-d', home_dir], check=True)
-    for item in os.listdir(home_dir):
-        if os.path.isdir(os.path.join(home_dir, item)) and item.startswith('pyenv-'):
-            pyenv_folder_name = item
-            break
-    else:
-        raise ValueError('Extracted contents of pyenv-src.zip not found')
-    os.environ['PYENV_ROOT'] = os.path.join(home_dir, pyenv_folder_name)
-    pyenv_binary_path = os.path.join(os.environ['PYENV_ROOT'], 'bin/pyenv')
-    p = subprocess.run([pyenv_binary_path, 'install', '--list'],
+    if sys.platform != 'darwin':
+        raise EnvironmentError('Must be run on Mac OS X')
+    subprocess.run(['brew', 'update'], check=True)
+    subprocess.run(['brew', 'install', 'pyenv'], check=True)
+    p = subprocess.run(['pyenv', 'install', '--list'],
                        stdout=subprocess.PIPE, universal_newlines=True,
                        check=True)
     available_versions = [version for version in p.stdout.split() if re.match(VERSION_REGEX, version)]
@@ -152,7 +138,6 @@ if platform == 'win64':
     vars['PYVERSIONS_WIN'] = ' '.join(latest_versions)
 else:
     vars['PYVERSIONS_OSX'] = ' '.join(latest_versions)
-    vars['PYENV_TOOL_VERSION'] = pyenv_tool_version_current
 updatelib.set_vars(vars)
 
 # set environment variables for next GitHub actions step
@@ -161,3 +146,9 @@ for i in range(len(update_info)):
     update_info[i] = ' can be updated to '.join(update_info[i])
     update_info[i] = f'- {update_info[i]}'
 updatelib.setenv('PYTHON_UPDATE_INFO_MULTILINE', '\n'.join(update_info))
+if platform == 'osx':
+    p = subprocess.run(['brew', 'list', '--versions', 'pyenv'],
+                       stdout=subprocess.PIPE, universal_newlines=True,
+                       check=True)
+    pyenv_tool_version = p.stdout.split()[1]
+    updatelib.setenv('PYENV_TOOL_VERSION', pyenv_tool_version)

@@ -13,8 +13,7 @@ ICU_NAME="ICU 68.2"
 ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-68-2/icu4c-68_2-Win64-MSVC2019.zip
 ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-68-2/icu4c-68_2-src.zip
 PYVERSIONS_WIN="3.6.8 3.7.9 3.8.7 3.9.1"
-PYVERSIONS_OSX="3.6.12 3.7.9 3.8.6 3.9.0"
-PYENV_TOOL_VERSION=1.2.21
+PYVERSIONS_OSX="3.6.12 3.7.9 3.8.7 3.9.1"
 BUILDCACHE_NAME="Release v0.23.1"
 BUILDCACHE_URL_WIN=https://github.com/mbitsnbites/buildcache/releases/download/v0.23.1/buildcache-win-msvc.zip
 CYTHON_VERSION=0.29.21
@@ -51,7 +50,6 @@ fi
 
 
 # set variables that will be needed in later steps
-echo "PYENV_TOOL_VERSION=$PYENV_TOOL_VERSION" >> $GITHUB_ENV
 echo "CYTHON_VERSION=$CYTHON_VERSION" >> $GITHUB_ENV
 echo "MANYLINUX2010_X86_64_TAG=$MANYLINUX2010_X86_64_TAG" >> $GITHUB_ENV
 echo "MANYLINUX2014_AARCH64_TAG=$MANYLINUX2014_AARCH64_TAG" >> $GITHUB_ENV

@@ -12,11 +12,7 @@
 # - PYVERSIONS is a space-delimited string of Python versions to install
 # - PYINSTALL_DIR is the location that Python installations are installed and
 #   cached
-# - PYENV_TOOL_VERSION is the version of pyenv during the previous build
 # - CYTHON_VERSION is the version of Cython to install
-#
-# Optional environment variables:
-# - ACTIONS_TOKEN is a token for triggering a GitHub Actions workflow
 
 set -euxo pipefail
 
@@ -46,28 +42,13 @@ pyinstall_fallback () {
 # choose XCode version
 sudo xcode-select -s "$XCODE_SELECTED"
 
+# Homebrew packages
+brew install dos2unix ccache
+
 # pyenv
+brew update --quiet > /dev/null
 brew install pyenv
 eval "$(pyenv init -)"
-
-# If we're building a push to the master branch, check whether a new version of
-# pyenv was installed. If so, trigger dependency autoupdater for Python on OS X.
-PYENV_TOOL_VERSION_CURRENT="$(brew list --versions pyenv)"
-PYENV_TOOL_VERSION_CURRENT=${PYENV_TOOL_VERSION_CURRENT#"pyenv "}
-if [ "$GITHUB_EVENT_NAME" = push ] && \
-    [ "$GITHUB_REF" = refs/heads/master ] && \
-    [ "$PYENV_TOOL_VERSION_CURRENT" != "$PYENV_TOOL_VERSION" ] && \
-    [ -n "${ACTIONS_TOKEN-}" ]
-then
-  echo "pyenv was updated, triggering dependency-autoupdate"
-  curl -X POST \
-    -H "Accept: application/vnd.github.v3+json" \
-    -H "Authorization: token $ACTIONS_TOKEN" \
-    https://api.github.com/repos/$GITHUB_REPOSITORY/actions/workflows/dependency-autoupdate.yml/dispatches \
-    -d "{\"ref\": \"master\", \"inputs\": {\"PYENV_TOOL_VERSION_CURRENT\": \"$PYENV_TOOL_VERSION_CURRENT\"}}"
-else
-  echo "not triggering dependency-autoupdate"
-fi
 
 # Python
 # We must handle a performance tradeoff when handling the installation of
@@ -143,5 +124,5 @@ for PYTHON in $PKG_INSTALLED_CMDS; do
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 
-# Homebrew packages
-brew install dos2unix ccache
+# finish ccache setup
+echo /usr/local/opt/ccache/libexec >> $GITHUB_PATH
