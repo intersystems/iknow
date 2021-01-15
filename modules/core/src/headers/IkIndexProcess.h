@@ -77,7 +77,7 @@ namespace iknow
        *	\exception IkException: UNKNOWN ERROR
        */
       bool FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition, size_t cntWordLimit, bool delimitedSentences, iknow::base::String& kb_name, double& certainty, IkKnowledgebase *pUdct=NULL, double certaintyThresholdForChangingLanguage = 0.35, int nPositionEndOfPreviousIteration = 0); // TODO: why 0.35 ???
-	  bool FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition);
+	  bool FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition, size_t cntWordLimit);
 
       // Find known lexreps by searching the knowledgebase, use internal if pkb==NULL
       void FindKnownLexreps(bool first_run, Lexreps& in_lexrep_vector, Lexreps& out_lexrep_vector, iknow::core::IkKnowledgebase *pkb=NULL);

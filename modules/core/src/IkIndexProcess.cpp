@@ -89,14 +89,14 @@ void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDeb
   double certainty = 0;
   String kb_name(m_languageKbMap.empty()?String():m_languageKbMap.begin()->first);
 
-  int cntWordLimit = (bBinaryMode ? 0x7FFFFFFF : MAX_SENTENCE_SIZE); // set word count limit
+  size_t cntWordLimit = (bBinaryMode ? 0x7FFFFFFF : MAX_SENTENCE_SIZE); // set word count limit
   Lexreps lexrep_vector;
   while ( m_pKnowledgebase->GetMetadata<kIsJapanese>()
-		  ?	FindNextSentenceJP(pInput, lexrep_vector, nPosition)
+		  ?	FindNextSentenceJP(pInput, lexrep_vector, nPosition, cntWordLimit*(size_t)5)
 		  : FindNextSentence(pInput, lexrep_vector, nPosition, cntWordLimit, delimitedSentences, kb_name, certainty, pUdct)) // split by sentences and store in a list
     {
 	  SEMANTIC_ACTION(SentenceFound(kb_name, certainty, m_pKnowledgebase->GetMetadata<kLanguageCode>(), lexrep_vector, pOut->IsJP() ? String() : SpaceString()));
-      if (!bBinaryMode && lexrep_vector.size() >= MAX_SENTENCE_SIZE) continue; // limit sentence length
+      // if (!bBinaryMode && lexrep_vector.size() >= MAX_SENTENCE_SIZE) continue; // limit sentence length
 	  if (lexrep_vector.size()==2) continue; // no text, only SBegin & SEnd
 
 	  Lexreps identified_lexrep_vector;
@@ -399,7 +399,7 @@ void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexr
   IkStringAlg::TokenizeWithLPFlag(strIndex.data(), strIndex.data() + strIndex.size(), static_cast<Char>(' '), token_processor); // extra flag indication if last piece
 }
 
-bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition)
+bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition, size_t cntWordLimit)
 {
     const size_t input_size = pInput->GetString()->size();
     if ((size_t)nPosition >= input_size) return false; // all done
@@ -407,7 +407,7 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
     const Char *pData=(pInput->GetString())->c_str(); // pointer to text data
     int nBeginPos = nPosition; // marks literal start position
 	lexrep_vector.clear();
-	lexrep_vector.reserve(32); //Japanese needs double...
+	lexrep_vector.reserve(64); //Japanese needs double...
 
 	LexrepContext::SeenLabels().Clear();
 	lexrep_vector.push_back(m_begin_lr); // insert SBegin to mark beginning of sentence
@@ -415,6 +415,11 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 
 	// int const nPositionBeginFixed = nPosition; // store start position
 	while ((size_t)nPosition < input_size) {
+		if (lexrep_vector.size() >= cntWordLimit) { // force sentence separator if limit has been reached
+			nPosition--;
+			break;
+		}
+
 	  Char cCur=pData[nPosition];
       if (lexrep_vector.size()==1 && (IkStringAlg::IsJpnIDSP(cCur) || cCur==' ')) { // prodlog111211: If first char is double space, ignore it, if single space, also ignore it
         nPosition++, nBeginPos++;
@@ -639,7 +644,7 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vector, int& nPosition, size_t cntWordLimit, bool delimitedSentences, String& language, double& certainty, IkKnowledgebase *pUdct, double certaintyThresholdForChangingLanguage, int nPositionEndOfPreviousIteration)
 {
 	lexrep_vector.clear();
-	lexrep_vector.reserve(16); //TODO: TRW, better guess?
+	lexrep_vector.reserve(32);
 
 	//Clear the "SeenLabels" which we use during processing of a single sentence
 	//TODO: A more general "context" object that takes callbacks to implement this kind of policy.
@@ -659,6 +664,10 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 	bool bIsAlfaNum = false; // tracks if NBS contains alphanumerical symbols
 
 	while ((size_t)nPosition < input_size && !bEndFound) {
+		if (lexrep_vector.size() >= cntWordLimit) { // force sentence separator if limit has been reached
+			nPosition--;
+			break;
+		}
 		if (pInput->IsAnnotated((size_t) nPosition)) { // separate processing
 			if (nPosition>nBeginPos) { // add previous token, if valid
 				const Char* val_begin = pData + nBeginPos;
@@ -757,8 +766,6 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 					SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
 				}
 				bIsAlfaNum = false; // reset for next token
-				if (lexrep_vector.size() >= cntWordLimit) // force sentence separator if limit has been reached
-					break;
 			}
 			else
 				nBeginPos = nPosition + 1;

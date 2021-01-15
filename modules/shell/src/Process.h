@@ -38,7 +38,7 @@ namespace iknow
         void IndexFunc (const iknow::base::String& input, OutputFunc func, void *userdata, 
                       bool tracing_enabled = 0, 
                       bool merge_relations = 1, 
-                      bool allow_long_sentences = 1, 
+                      bool allow_long_sentences = 0, 
                       bool delimited_sentences_mode = 0, 
                       bool make_summary = 0, 
                       size_t max_concept_cluster_length = 0, 

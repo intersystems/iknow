@@ -23,6 +23,6 @@ namespace testing {
 		void Saskia4(const char*); // conversation with Saskia
 		void Issue64(const char*); // Issue#64 : https://github.com/intersystems/iknow/issues/64
 		void Issue70(const char*); // Issue#70 : https://github.com/intersystems/iknow/issues/70
-
+		void DP402269(const char*); // https://usjira.iscinternal.com/browse/DP-402269
 	};
 }
