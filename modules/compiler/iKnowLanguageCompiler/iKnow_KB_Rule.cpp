@@ -218,44 +218,46 @@ std::string iKnow_KB_Rule::TransformRulePattern(string& pattern, string& phase, 
 		if (label.find("SBegin") != string::npos) SBeginPhases.insert(phase); // add rule phase to SBegin label
 		if (label.find("SEnd") != string::npos) SEndPhases.insert(phase); // add rule phase to SEnd label
 
-		string newLabel;
-		int lastQuote = 0;
-		for (string::iterator ic = label.begin(); ic != label.end(); ++ic) { // scan the label selector
-			char c = *ic;
-			if (lastQuote) {
-				if (c == '\"') {
-					string token(label.begin() + lastQuote, ic); // Set token = $E(label, lastQuote + 1, j - 1)
-					string labelName = "Lit_" + token; // labelname constructed out of token = literal label
-					str_subsitute(labelName, string(":"), string("DoublePoints")); // Set labelName = "Lit_" _ $replace($replace($replace(token, ":", "DoublePoints"), "+", "plus"), "(", "lbrack") // Labels cannot contain the or ':' or '+' symbol
-					str_subsitute(labelName, string("+"), string("plus"));
-					str_subsitute(labelName, string("("), string("lbrack"));
-					
-					if (newLabelsIndex.find(labelName) != newLabelsIndex.end()) { // If $Data(newLabelsIndex(labelName)) { // Literal label exist already
-						int idxLabel = newLabelsIndex[labelName]; // Set idxLabel = newLabelsIndex(labelName)
-						string rulePhases = newLabels[idxLabel].second; // Set rulePhases = $List(newLabels(idxLabel), 2)
-						if (rulePhases.find(phase) == string::npos) // Set:rulePhases'[phase $List(newLabels(idxLabel),2) = rulePhases_","_phase
-							rulePhases += ("," + phase); 
-						newLabels[idxLabel].second = rulePhases; // overwrite
-					}
-					else { // New label
-						newLabels.push_back(make_pair(labelName, phase)); // Set newLabels($Increment(newLabels)) = $Lb(labelName, phase) // store name using a numeric key to avoid collision problems
-						newLabelsIndex.insert(make_pair(labelName, static_cast<int>(newLabels.size() - 1))); // Set newLabelsIndex(labelName) = newLabels
-					}
+		if (label.find("\"") != string::npos) { // convert literal to literal label
+			string newLabel;
+			int lastQuote = 0;
+			for (string::iterator ic = label.begin(); ic != label.end(); ++ic) { // scan the label selector
+				char c = *ic;
+				if (lastQuote) {
+					if (c == '\"') {
+						string token(label.begin() + lastQuote, ic); // Set token = $E(label, lastQuote + 1, j - 1)
+						string labelName = "Lit_" + token; // labelname constructed out of token = literal label
+						str_subsitute(labelName, string(":"), string("DoublePoints")); // Set labelName = "Lit_" _ $replace($replace($replace(token, ":", "DoublePoints"), "+", "plus"), "(", "lbrack") // Labels cannot contain the or ':' or '+' symbol
+						str_subsitute(labelName, string("+"), string("plus"));
+						str_subsitute(labelName, string("("), string("lbrack"));
 
-					AddLabelToLexrep(kb, token, labelName); // Do ..AddLabelToLexrep(kb, token, labelName)
-					//Rewrite label pattern string
-					newLabel = newLabel + labelName; // Set newLabel = newLabel _ labelName
-					lastQuote = 0; // Set lastQuote = 0
+						if (newLabelsIndex.find(labelName) != newLabelsIndex.end()) { // If $Data(newLabelsIndex(labelName)) { // Literal label exist already
+							int idxLabel = newLabelsIndex[labelName]; // Set idxLabel = newLabelsIndex(labelName)
+							string rulePhases = newLabels[idxLabel].second; // Set rulePhases = $List(newLabels(idxLabel), 2)
+							if (rulePhases.find(phase) == string::npos) // Set:rulePhases'[phase $List(newLabels(idxLabel),2) = rulePhases_","_phase
+								rulePhases += ("," + phase);
+							newLabels[idxLabel].second = rulePhases; // overwrite
+						}
+						else { // New label
+							newLabels.push_back(make_pair(labelName, phase)); // Set newLabels($Increment(newLabels)) = $Lb(labelName, phase) // store name using a numeric key to avoid collision problems
+							newLabelsIndex.insert(make_pair(labelName, static_cast<int>(newLabels.size() - 1))); // Set newLabelsIndex(labelName) = newLabels
+						}
+
+						AddLabelToLexrep(kb, token, labelName); // Do ..AddLabelToLexrep(kb, token, labelName)
+						//Rewrite label pattern string
+						newLabel = newLabel + labelName; // Set newLabel = newLabel _ labelName
+						lastQuote = 0; // Set lastQuote = 0
+					}
+				}
+				else {
+					if (c == '\"')
+						lastQuote = static_cast<int>(ic - label.begin()) + 1;
+					else
+						newLabel += *ic;
 				}
 			}
-			else {
-				if (c == '\"')
-					lastQuote = static_cast<int>(ic - label.begin()) + 1;
-				else
-					newLabel += *ic;
-			}
+			label = newLabel; // overwrite csv-label
 		}
-		label = newLabel; // overwrite csv-label
 	}
 	string transformed_pattern;
 	for (vector<string>::iterator it = labels.begin(); it != labels.end(); ++it) { // reconstruct output

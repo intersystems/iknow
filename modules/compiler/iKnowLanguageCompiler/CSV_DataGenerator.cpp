@@ -746,8 +746,8 @@ vector<int> CSV_DataGenerator::CreateLabelsIndexVector(iKnow_KB_Lexrep& lexrep, 
 		if (labelName == "") continue;
 		labelIndexTable_type::iterator it = table.find(labelName);
 		if (it == table.end()) { // If '$Data(table(labelName)) {
-			cout << endl << "Missing label (" << labelName << ") from lexrep """ << lexrep.Token << """(" << lexrep.Labels << ") in label table."; // Write !, "Missing label (" _ labelName _ ") from lexrep """ _ lexrep.Token _ """(" _ labelList _ ") in label table."
-			break; // Break
+			cout << endl << "Missing label (" << labelName << ") from lexrep \"" << lexrep.Token << "\" (" << lexrep.Labels << ")."; // Write !, "Missing label (" _ labelName _ ") from lexrep """ _ lexrep.Token _ """(" _ labelList _ ") in label table."
+			throw ExceptionFrom<CSV_DataGenerator>("\n*** Missing label in lexreps. ***");
 		}
 		indexList.push_back(it->second);
 	}
