@@ -6,8 +6,8 @@ MKDIR = test -e $(dir $@) || mkdir -p $(dir $@)
 DELETE = rm -f
 
 ###Stage 1: Source->Objects
-C_COMPILER = gcc-7
-CPP_COMPILER = g++-7
+C_COMPILER = gcc-9
+CPP_COMPILER = g++-9
 HEADERINCLUDEFLAG = -I
 OBJECTOUTPUTFLAG = -o
 OBJECTSUFFIX = .o
@@ -15,7 +15,7 @@ LIBFLAGS = -fPIC
 OBJECTFLAGS += -c -O2 -DBIT64PLAT -DSIZEOF_LONG=8 -Wno-non-template-friend -DLINUX -DUNIX $(if $(CREATELIBRARY),$(LIBFLAGS))
 
 ###Stage 2a: Objects->Library
-LIBRARIAN = g++-7
+LIBRARIAN = g++-9
 LIBRARYDIRFLAG = -L
 LIBRARYSEARCHFLAG = -l
 LIBRARYFLAGS += -shared -Wl,-rpath,. 
@@ -23,7 +23,7 @@ LIBRARYOUTPUTFLAG = -o
 LIBRARYSUFFIX = .so
 
 ###Stage 2b: Objects->Executable
-LINKER = g++-7
+LINKER = g++-9
 EXECUTABLEDIRFLAG = -L
 EXECUTABLESEARCHFLAG = -l
 EXECUTABLEFLAGS += -ldl -Wno-non-template-friend -DLINUX 
