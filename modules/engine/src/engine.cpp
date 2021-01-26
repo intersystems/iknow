@@ -276,7 +276,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 				PropertyId entity_vector_prop_id = kb->PropertyIdForName(kEntityVectorTypeName);
 				iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(entity_vector_prop_id);
 
-				sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, NULL, NULL, string())); // generate entity vector marker
+				sentence_data.sent_attributes.push_back(Sent_Attribute(a_type)); // generate entity vector marker
 				// sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
 
 				for (IkSentence::EntityVector::const_iterator i = entity_vector.begin(); i != entity_vector.end(); ++i) { // collect entity id's

@@ -109,7 +109,10 @@ namespace iknowdata { // to bundle all generated data
 		Sent_Attribute(Attribute att_type,
 			size_t start, size_t stop, 
 			std::string& marker
-		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
+		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker), entity_ref(0) {}
+		
+		Sent_Attribute(Attribute att_type) : // Entity Vector attributes, no markers, no corresponding offsets
+			type_(att_type), offset_start_(NULL), offset_stop_(NULL), entity_ref(0) {}
 
 		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
