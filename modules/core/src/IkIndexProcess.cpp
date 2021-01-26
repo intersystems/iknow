@@ -136,7 +136,11 @@ void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDeb
 		} else { // path relevant style
 			BuildPathsFromPathRelevants(merged_lexrep_vector, path_vector);
 		}
-      }      
+	  }
+	  else { // Introducing path's for Japanese
+		  Paths& path_vector = sentence.GetPaths();
+		  BuildPathsFromPathRelevants(merged_lexrep_vector, path_vector);
+	  }
       SEMANTIC_ACTION(SentenceComplete(sentence, *m_pKnowledgebase));
       if (m_pKnowledgebase->GetMetadata<kHasEntityVectors>()) { 
 		IkSentence::EntityVector& eVectors = sentence.GetEntityVector();

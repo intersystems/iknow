@@ -527,16 +527,34 @@ void IkIndexOutput::CalculateDominanceAndProximity()
 				concept_proximity.push_back(IkConceptProximity::ProxPoint_t(occurrence_id, entity_id));
 			}
 			m_concept_proximity(concept_proximity); // calculate concept proximity
+			//
+			// new! write Path information
+			//
+			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
+				const IkPath* path = &(*j);
+				DirectOutputPath output_path;
+				output_path.offsets.reserve(path->Size());
+				for (Offsets::const_iterator k = path->OffsetsBegin(); k != path->OffsetsEnd(); ++k) {
+					const IkMergedLexrep* lexrep = &(*(sentence->GetLexrepsBegin() + (*k)));
+					output_path.offsets.push_back(lexrep);
+					DetectPathAttributes(*lexrep, output_path.offsets.size() - 1, output_path.attributes); // Detect path attributes
+				}
+				//Set the end of unfinished begin path attributes to the end of the path
+				for (DirectOutputPathAttributeMap::iterator k = output_path.attributes.begin(); k != output_path.attributes.end(); ++k) {
+					DirectOutputPathAttribute& last_attribute = k->second.back();
+					if (last_attribute.end == DirectOutputPathAttribute::kUnknown) {
+						EndPathAttribute(last_attribute, output_path.offsets.size()); // force path attribute end
+					}
+				}
+				++path_count;
+				path_vector.push_back(output_path);
+			}
 		}
 		else { // calculate proximity out of path info
 			for (IkSentence::Paths::const_iterator j = sentence->GetPathsBegin(); j != sentence->GetPathsEnd(); ++j) {
 				const IkPath* path = &(*j);
 				DirectOutputPath output_path;
 				output_path.offsets.reserve(path->Size());
-				/*
-				DirectOutputPath output_path_extra;
-				if (entity_extra_info) output_path_extra.offsets.reserve(path->Size());
-				*/
 				IkConceptProximity::ProxPoints_t concept_proximity;
 				concept_proximity.reserve(path->Size()); // will be a little smaller though...
 

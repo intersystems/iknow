@@ -272,13 +272,19 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			if (!entity_vector.empty()) { // emit entity vectors
 				// Sent_Attribute::aType a_type = static_cast<Sent_Attribute::aType>(entity_vector_prop_id);
 
+				static const String kEntityVectorTypeName = IkStringEncoding::UTF8ToBase("EntityVector");
+				PropertyId entity_vector_prop_id = kb->PropertyIdForName(kEntityVectorTypeName);
+				iknowdata::Attribute a_type = static_cast<iknowdata::Attribute>(entity_vector_prop_id);
+
+				sentence_data.sent_attributes.push_back(Sent_Attribute(a_type, NULL, NULL, string())); // generate entity vector marker
+				// sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
+
 				for (IkSentence::EntityVector::const_iterator i = entity_vector.begin(); i != entity_vector.end(); ++i) { // collect entity id's
-					// (*this)(*i + 1); //occurrence ids are 1-based
-					sentence_data.path.push_back((unsigned short)*i); 
+					sentence_data.sent_attributes.back().entity_vector.push_back((unsigned short)*i);
 				}
 			}
 		}
-		else { // normal path
+		{ // handle path attributes
 			{	// collect path attribute expansions
 				DirectOutputPaths& sent_paths = data->paths_[udata.iknow_sentences.size()]; // paths for the sentence (in fact, only one per sentence after introducing path_relevants)
 				for (DirectOutputPaths::iterator it_path = sent_paths.begin(); it_path != sent_paths.end(); ++it_path) // iterate all paths (in fact, only one...)

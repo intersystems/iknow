@@ -62,6 +62,7 @@ namespace iknowdata { // to bundle all generated data
 		DateTime = IKATTTIME,
 		PositiveSentiment = IKATTSENPOSITIVE,
 		NegativeSentiment = IKATTSENNEGATIVE,
+		EntityVector = IKATTENTITYVECTOR,
 		Frequency = IKATTFREQ,
 		Duration = IKATTDURATION,
 		Measurement = IKATTMEASURE,
@@ -73,6 +74,7 @@ namespace iknowdata { // to bundle all generated data
 		case Attribute::DateTime:			return "date_time";
 		case Attribute::PositiveSentiment:	return "positive_sentiment";
 		case Attribute::NegativeSentiment:	return "negative_sentiment";
+		case Attribute::EntityVector:		return "entity_vector";
 		case Attribute::Frequency:			return "frequency";
 		case Attribute::Duration:			return "duration";
 		case Attribute::Measurement:		return "measurement";
@@ -115,6 +117,7 @@ namespace iknowdata { // to bundle all generated data
 		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
 
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
+		std::vector<Entity_Ref> entity_vector; // EntityVector, only used in Japanese
 	};
 
 	/*

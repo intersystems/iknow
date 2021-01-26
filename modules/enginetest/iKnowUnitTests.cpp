@@ -642,8 +642,10 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	engine.index(text_source, "ja");
 	if (engine.m_index.sentences.empty())
 		throw std::runtime_error(std::string(pMessage));
-	if (engine.m_index.sentences[0].path.empty()) {
+	if (engine.m_index.sentences[0].sent_attributes[0].type_ != EntityVector)
 		throw std::runtime_error(std::string(pMessage));
+	if (engine.m_index.sentences[0].path.empty()) {
+		throw std::runtime_error(std::string("Engine *must* generate Path data, even for Japanese"));
 	}
 	map<size_t, string> mapTextSource;
 	map<size_t, double> mapDominantConcepts;
