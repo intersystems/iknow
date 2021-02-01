@@ -1,7 +1,6 @@
 # This Python file uses the following encoding: utf-8
 ''' genTrace.py tool for logging linguistic traces
-    It uses /kit/x64/release/bin/compiler_report.log. Make sure to edit line 26 of the script
-    to comply with your local situation.
+    It uses xx_compiler_report.log (generated during compilation in language_development directory). 
     Usage: "python genTrace.py <text files directory> <output directory> <language>"
     Example (on Windows): "python genTrace.py C:\TextCorpus\English\Financial\ C:\tmp\ en
 '''
@@ -30,7 +29,7 @@ print('genTrace input_dir=\"'+in_path_par+'\" output_dir=\"'+out_path_par+'\" la
 def write_ln(file_,text_):
     file_.write((text_+"\r\n").encode('utf8'))
 
-def create_mapping_tabel(mapping_file):
+def create_mapping_table(mapping_file):
     read_mapping_file = open(mapping_file, 'r')
     for line in read_mapping_file:
         if line != '\n':
@@ -48,17 +47,20 @@ def extract_rule_id(rule_order):
 #
 from os import walk
 
-f = []
+f = []  # non-recursive list of files, .txt only
 for (dirpath, dirnames, filenames) in walk(in_path_par):
-    f.extend(filenames)
-    break
+     for single_file in filenames:
+         if (single_file.endswith('.txt')):
+             f.append(single_file)
+         break
 
-create_mapping_tabel(mapping_file)
+create_mapping_table(mapping_file)
 # print('mapping table ready\n')
 
 engine = iknowpy.iKnowEngine()
 
 for text_file in f:
+    print('processing ' + text_file)
     f_text = open(in_path_par+text_file, "rb")
     header = f_text.read(3)
     if (header == b'\xef\xbb\xbf'): #Utf8 BOM
@@ -102,15 +104,15 @@ for text_file in f:
         elif (key == "RuleApplication"):
             # rule_id in trace refers actually to rule order -> retrieve rule order value
             rule_order = value.split(';')[0].split('=')[1]
-            # extract the number that cooresponds to the rule id in rules.csv from compiler_report.log
+            # extract the number that corresponds to the rule id in rules.csv from compiler_report.log
             rule_id = extract_rule_id(rule_order)
             first_semicolon = value.index(';')
             updated_value = 'rule_id=' + rule_id + value[first_semicolon:]
             write_ln(f_trace, key + ':' + updated_value)
 #            pass
-        elif (key == "RuleApplicationResult"):
-            write_ln(f_trace, key + ':' + value)
-            pass
+        elif (key == "RuleApplicationResult"):  # use this only when the code for 'RuleApplication' is activated too
+            write_ln(f_trace, key + ':' + updated_value)
+            # pass
         elif (key == "JoinResult"):
             write_ln(f_trace, key + value)
 #            pass
