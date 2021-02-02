@@ -174,7 +174,7 @@ concerned language to process each of the files. If there are differences in the
 make sure that the differences are improvements and that they are not caused by ignoring
 the dictionary.
 
-## genRaw.py
+## genXML.py
 
 | Summary | |
 |-|-| 
