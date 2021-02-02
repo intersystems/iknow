@@ -8,7 +8,7 @@
 	<xsl:key name="rmatch_key" match="Relation/ExactMatch" use="OntoKey"/> <!-- collect the relation matches -->
 	
 	<xsl:variable name="negation" select="'Negation'"/> <!-- link to ontoconcept in onto.csv file -->
-
+		  
 	<xsl:template match="/"> <!--	hoofdtemplate : de resultaten van de xslt worden teruggegeven in een html-pagina -->
 	<html> 
 	<head>
@@ -188,7 +188,8 @@
 				</xsl:choose>
 				<xsl:text> </xsl:text>
 			  </xsl:for-each>
-			  <xsl:for-each select="certainty">
+			</xsl:for-each>
+			<xsl:for-each select="certainty">
 			  <br /><i><xsl:text>(certainty) </xsl:text></i>
 			  <xsl:for-each select="*">
 			    <xsl:choose>
@@ -201,8 +202,6 @@
 				</xsl:choose>
 				<xsl:text> </xsl:text>
 			  </xsl:for-each>
-			</xsl:for-each>
-
 			</xsl:for-each>
 
 			<!--
@@ -715,8 +714,8 @@
 		      <span class="measurement" title="measurement"><xsl:value-of select="./text()"/></span>
 		  </xsl:when>
 	      <xsl:when test="starts-with(name(),'certainty')">
-			  <xsl:variable name="level_of_certainty"><xsl:value-of select="@level"/></xsl:variable>
-			  <xsl:variable name="tit_of_cert">(c=<xsl:value-of select="$level_of_certainty"/>)</xsl:variable>
+			<xsl:variable name="level_of_certainty"><xsl:value-of select="@level"/></xsl:variable>
+			<xsl:variable name="tit_of_cert">(c=<xsl:value-of select="$level_of_certainty"/>)</xsl:variable>
 
 		      <span class="certainty" title="certainty"><xsl:value-of select="./text()"/><xsl:value-of select="$tit_of_cert"/></span>
 		  </xsl:when>		  
