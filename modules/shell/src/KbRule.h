@@ -351,7 +351,7 @@ namespace iknow {
 					bool bRulePhaseInLabel = false;
 					std::for_each(phase_list.begin(), phase_list.end(), [phase, &bRulePhaseInLabel](Phase p) { if (p == phase) { bRulePhaseInLabel = true; }});
 					if (!bRulePhaseInLabel) {
-						std::cerr << "*** Label not defined in Rule Phase=\"" << (int)phase << "\" *** input_pattern=\"" << input_pattern << "\"" << std::endl;
+						std::cerr << "*** Label (index=\"" << idx << "\") not defined in Rule Phase=\"" << (int)phase << "\" *** input_pattern=\"" << input_pattern << "\"" << std::endl;
 						std::cerr << "Pattern offset=" << (it - input_pattern_vec.begin()) + 1 << "Label offset=" << (it_label - it->LabelsBegin()) + 1 << std::endl;
 						throw ExceptionFrom<KbRule>("label phase number does not mach rule phase.");
 					}
