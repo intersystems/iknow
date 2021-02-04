@@ -67,7 +67,9 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			}
 			rule.Phase = row_rule[2 - 1]; // Set phase = $PIECE(line, ";", 2)	// Set rule.Phase = phase
 			rule.InputPattern = rule.TransformRulePattern(row_rule[3 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.InputPattern = ..TransformRulePattern($PIECE(line, ";", 3), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
-			rule.OutputPattern = rule.TransformRulePattern(row_rule[4 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.OutputPattern = ..TransformRulePattern($PIECE(line, ";", 4), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
+			// rule.OutputPattern = rule.TransformRulePattern(row_rule[4 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.OutputPattern = ..TransformRulePattern($PIECE(line, ";", 4), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
+			rule.OutputPattern = row_rule[4 - 1]; // No need for transforming output patterns.
+
 			/*
 			If($$$IKISDEVBUILD) { // read extra data fields for linguistic tracing
 			Set rule.IdCSV = $PIECE(line, ";", 1)
