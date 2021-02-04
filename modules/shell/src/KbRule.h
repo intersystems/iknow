@@ -321,11 +321,44 @@ namespace iknow {
     class KbRule {
     public:
       //MapT maps label names to KbLabel*'s
-      template<typename MapT>
-      KbRule(RawAllocator& allocator, const MapT& label_map, const std::string& input_pattern, const std::string& output_pattern, Phase phase) {
+      template<typename MapT, typename MapPhaseT>
+      KbRule(RawAllocator& allocator, const MapT& label_map, const MapPhaseT& label_phase_map, const std::string& input_pattern, const std::string& output_pattern, Phase phase) {
 		std::vector<iknow::core::IkRuleInputPattern> input_pattern_vec;
 		RuleInputStringParser<MapT> input_adder(label_map, input_pattern_vec);
 		iknow::base::IkStringAlg::Tokenize(input_pattern, '|', input_adder);
+
+		// check labels phase against rule phase
+		for (auto it = input_pattern_vec.begin(); it != input_pattern_vec.end(); ++it) {
+			auto it_option = it->OptionsBegin();
+			auto it_or_label = it->OrLabelsBegin();
+			for (auto it_label = it->LabelsBegin(); it_label != it->LabelsEnd(); ++it_label, ++it_option) {
+				std::vector<iknow::core::FastLabelSet::Index> label_collection;
+				label_collection.push_back(*it_label);
+				for (int i = 0; i < 7; ++i) // collect the corresponding 7 OR labels
+					label_collection.push_back(*it_or_label++);
+
+				for (auto it_label_collection = label_collection.begin(); it_label_collection != label_collection.end(); ++it_label_collection) {
+					iknow::core::FastLabelSet::Index index_label = *it_label_collection;
+
+					if (index_label == -1) // non-label code
+						continue;
+					if (*it_option == iknow::core::IkRuleInputPattern::kTypeNormal || *it_option == iknow::core::IkRuleInputPattern::kTypeNegated) { // type labels have no phase
+						continue;
+					}
+					typename MapPhaseT::const_iterator i = label_phase_map.find(index_label);
+					iknow::core::FastLabelSet::Index idx = i->first;
+					std::vector<Phase> phase_list = i->second;
+					bool bRulePhaseInLabel = false;
+					std::for_each(phase_list.begin(), phase_list.end(), [phase, &bRulePhaseInLabel](Phase p) { if (p == phase) { bRulePhaseInLabel = true; }});
+					if (!bRulePhaseInLabel) {
+						std::cerr << "*** Label (index=\"" << idx << "\") not defined in Rule Phase=\"" << (int)phase << "\" *** input_pattern=\"" << input_pattern << "\"" << std::endl;
+						std::cerr << "Pattern offset=" << (it - input_pattern_vec.begin()) + 1 << "Label offset=" << (it_label - it->LabelsBegin()) + 1 << std::endl;
+						throw ExceptionFrom<KbRule>("label phase number does not mach rule phase.");
+					}
+				}
+			}
+		}
+
 		std::vector<iknow::core::IkRuleOutputPattern> output_pattern_vec;
 		RuleOutputStringParser<MapT> output_adder(label_map, output_pattern_vec);
 		iknow::base::IkStringAlg::Tokenize(output_pattern, '|', output_adder);

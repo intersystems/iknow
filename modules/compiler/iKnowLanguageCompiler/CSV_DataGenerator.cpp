@@ -308,6 +308,7 @@ using namespace iknow::base;
 using namespace iknow::core;
 
 typedef map<String, FastLabelSet::Index> LabelIndexMap;
+typedef map<FastLabelSet::Index, vector<Phase>> LabelIndex2PhasesMap; // maps label indexes to phase collection, used to verify if label phases match with rule phase
 
 class CacheList;
 
@@ -329,10 +330,13 @@ private:
 
 class WithLabelMap {
 protected:
-	WithLabelMap(LabelIndexMap& map) : map_(map) {}
+	WithLabelMap(LabelIndexMap& map) : map_(map), p_map_phases_(NULL) {}
+	WithLabelMap(LabelIndexMap& map, LabelIndex2PhasesMap* p_map_phases) : map_(map), p_map_phases_(p_map_phases) {}
 	LabelIndexMap& GetLabelMap() { return map_; }
+	LabelIndex2PhasesMap& GetLabelPhasesMap() { return (*p_map_phases_); }
 private:
 	LabelIndexMap& map_;
+	LabelIndex2PhasesMap* p_map_phases_;
 	void operator=(const WithLabelMap&);
 };
 
@@ -398,7 +402,7 @@ template<>
 class RawListToKb<KbRule> : private WithAllocator, private WithLabelMap {
 public:
 	typedef KbRule output_type;
-	RawListToKb(RawAllocator& allocator, LabelIndexMap& map) : WithAllocator(allocator), WithLabelMap(map) {}
+	RawListToKb(RawAllocator& allocator, LabelIndexMap& map, LabelIndex2PhasesMap* p_label_phases) : WithAllocator(allocator), WithLabelMap(map, p_label_phases) {}
 
 #if defined _IRIS
 	KbRule operator()(CacheList& list) {
@@ -406,7 +410,7 @@ public:
 	}
 #else
 	KbRule operator()(iKnow_KB_Rule rule) {
-		return KbRule(GetAllocator(), GetLabelMap(), rule.InputPattern, rule.OutputPattern, iknow::core::PhaseFromString(rule.Phase));
+		return KbRule(GetAllocator(), GetLabelMap(), GetLabelPhasesMap(), rule.InputPattern, rule.OutputPattern, iknow::core::PhaseFromString(rule.Phase));
 	}
 #endif
 
@@ -579,6 +583,7 @@ void CSV_DataGenerator::generateRAW(bool IsCompiled)
 	BasePointerFrame frame_guard(reinterpret_cast<unsigned char*>(kb_data_)); // OFFSETPTRGUARD
 
 	LabelIndexMap label_index_map; // label names mapped to (internal) label indexes.
+	LabelIndex2PhasesMap label_index_phases_map; // label indexes to label phases.
 	AttributeMapBuilder attribute_map_builder;
 
 	size_t labels_count = static_cast<size_t>(LabelCount());
@@ -603,6 +608,12 @@ void CSV_DataGenerator::generateRAW(bool IsCompiled)
 		labels_table_builder.Insert(label->PointerToName(), allocator.Insert(i));
 		//TODO: Other components should just use the kb_data_->labels table.
 		label_index_map.insert(LabelIndexMap::value_type(label->Name(), static_cast<FastLabelSet::Index>(i)));
+
+		// collect label phases
+		for (auto it = label->GetPhasesBegin(); it != label->GetPhasesEnd(); ++it) {
+			const Phase a_phase = *it;
+			label_index_phases_map[static_cast<FastLabelSet::Index>(i)].push_back(a_phase);
+		}
 	}
 	kb_data_->labels = allocator.Insert(labels_table_builder.Build(allocator));
 
@@ -625,7 +636,7 @@ void CSV_DataGenerator::generateRAW(bool IsCompiled)
 	}
 	//Rules
 	{
-		RawListToKb<KbRule> rule_transformer(allocator, label_index_map);
+		RawListToKb<KbRule> rule_transformer(allocator, label_index_map, &label_index_phases_map);
 		const KbRule *begin, *end;
 		LoadKbRange(kb_rules.begin(), kb_rules.end(), kb_rules.size(), rule_transformer, allocator, begin, end);
 		kb_data_->rules_begin = begin;

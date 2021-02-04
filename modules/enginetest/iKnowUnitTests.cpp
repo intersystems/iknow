@@ -546,6 +546,9 @@ void iKnowUnitTests::test5(const char* pMessage) { // User DCT test
 				}
 			}
 	}
+
+	// User dictionary is static, if not unloaded, it stays active.
+	engine.unloadUserDictionary();
 }
 
 void iKnowUnitTests::test4(const char* pMessage) { // Naomi detects missing SBegin/SEnd labels

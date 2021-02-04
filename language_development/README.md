@@ -12,8 +12,9 @@ processing from input to output.
 All tools are available in the `language_development` folder. 
 
 - `genRAW.py` : will recusively scan a directory and index all *.txt files. The result is one big ".RAW" file collecting all data. This tool is mainly used to build reference material.
+- `genXML.py` : will scan a directory non-recursively and index all .txt files, generating an XML output file for each input file. This tool is mainly useful to visually evaluate the output for a text of limited length.
 - `genTrace.py` : all linguistic "events" during indexing are collected, and stored into a ".log" file. Use this for finer debugging during language modeling. These traces correspond to the [SEMANTIC_ACTION](https://github.com/intersystems/iknow/blob/master/modules/core/src/IkIndexProcess.cpp#L37) macro in the C++ code.
-- `ref_test.py` : automates reference testing when validating the impact on overall quality after making changes to the language model
+- `ref_testing.py` : automates reference testing when validating the impact on overall quality after making changes to the language model
 
 Other utilities:
 - `\modules\lang_update.bat` : this is a Windows utility script that runs the language compiler and rebuilds the engine. To be used during language development to test modifications. It must be copied into the "bin" directory (`iknow\kit\x64\Release\bin`) after building the engine a first time.
@@ -92,8 +93,8 @@ nl, pt, ru, sv and uk.
 
 | Summary | |
 |-|-| 
-| **What** | Generate output with information on unexposed labels (and – in the future - intermediate processing steps). |
-| **Usage** | ```python genTrace.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genTrace.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Note: Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). |
+| **What** | Generate output with information on unexposed labels and intermediate processing steps. |
+| **Usage** | ```python genTrace.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genTrace.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Notes: <br/> Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). <br/> GenTrace.py uses a xx_compiler_report.log file which is created in the language_development directory during compilation. If you want to run the script from a difference directory, make sure to copy that compiler_report file for the language you need. |
 | **Parameters** | Many parameters to tune which information appears in the output, such as the result of normalization, the result of pre-processing, detected attributes, applied rules etc. |
 
 This script outputs, per sentence, the tokens found (one token per line), the input sentence, the
@@ -172,3 +173,18 @@ differences are improvements.
 concerned language to process each of the files. If there are differences in the new output,
 make sure that the differences are improvements and that they are not caused by ignoring
 the dictionary.
+
+## genXML.py
+
+| Summary | |
+|-|-| 
+| **What** | Generate output for the iKnow engine in XML format. The script will generate an output file for each input file (txt) in the input directory. Subdirectories are ignored. |
+| **Usage** | ```python genXML.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genXML.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Note: Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). |
+| **Parameters** | None. |
+
+The script uses the style sheet iKnowXML.xsl. It is available in the language_development directory and must be kept together with the genXML.py.
+
+The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
+nl, pt, ru, sv and uk.
+
+
