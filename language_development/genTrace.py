@@ -14,8 +14,6 @@ in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"
 language_par = "en"
 OldStyle = True
-mapping_file = language_par + "_compiler_report.log"   
-mapping_table = {}    
 
 if (len(sys.argv)>1):
     in_path_par = sys.argv[1]
@@ -24,13 +22,16 @@ if (len(sys.argv)>2):
 if (len(sys.argv)>3):
     language_par = sys.argv[3]
 
+mapping_file = language_par + "_compiler_report.log"  
+mapping_table = {}    
+
 print('genTrace input_dir=\"'+in_path_par+'\" output_dir=\"'+out_path_par+'\" language=\"'+language_par+'\"')
 
 def write_ln(file_,text_):
     file_.write((text_+"\r\n").encode('utf8'))
 
 def create_mapping_table(mapping_file):
-    read_mapping_file = open(mapping_file, 'r')
+    read_mapping_file = open(mapping_file, encoding='utf-8')
     for line in read_mapping_file:
         if line != '\n':
             mapping = line.split()[0]
@@ -52,7 +53,7 @@ for (dirpath, dirnames, filenames) in walk(in_path_par):
      for single_file in filenames:
          if (single_file.endswith('.txt')):
              f.append(single_file)
-         break
+#         break
 
 create_mapping_table(mapping_file)
 # print('mapping table ready\n')
