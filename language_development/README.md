@@ -93,8 +93,8 @@ nl, pt, ru, sv and uk.
 
 | Summary | |
 |-|-| 
-| **What** | Generate output with information on unexposed labels (and – in the future - intermediate processing steps). |
-| **Usage** | ```python genTrace.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genTrace.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Note: Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). |
+| **What** | Generate output with information on unexposed labels and intermediate processing steps. |
+| **Usage** | ```python genTrace.py <input_directory> <output_directory> <language_code>``` <br/> Example: <br/> ```python genTrace.py C:\corpus\input\ C:\corpus\output\ en``` <br/> Notes: <br/> Make sure to end the input and output directory with a backslash (or forward slash on UNIX OSes). <br/> GenTrace.py uses a xx_compiler_report.log file which is created in the language_development directory during compilation. If you want to run the script from a difference directory, make sure to copy that compiler_report file for the language you need. |
 | **Parameters** | Many parameters to tune which information appears in the output, such as the result of normalization, the result of pre-processing, detected attributes, applied rules etc. |
 
 This script outputs, per sentence, the tokens found (one token per line), the input sentence, the
