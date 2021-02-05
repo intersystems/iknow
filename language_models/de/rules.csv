@@ -47,6 +47,8 @@
 /*		479; Aber wir machen es auch sehr gern.
 316;30;DEAdvDegree|DEAdvDegree;DEAdvDegree|+Join;
 /*		316; Ganz besonders möchte ich mich bedanken.
+654;30;"mal"|"mehr"|"als";DECon|Join|DEPrep;
+/*		654; Das war 11000 mal mehr als 1992.
 343;30;"mehr"|"als"|DENum;DEAdvDegree+DEAdv-DEAdj|Join|^DENum;
 /*		343; Mehr als zwei Stunden für ein Hauptgericht?
 344;30;"mehr"|"als"|^DENum;DEPrep-DEAdj|Join|*;
@@ -149,6 +151,10 @@
 /*		506; Möglicherweise könnte eine schlechtere Beta-Zellkompensation bei einer durch Gewichtszunahme bedingten Zunahme der Insulinresistenz das höhere Risiko von Frauen für eine Diabetesmanifestation bei Adipositas erklären.
 507;40;DEEiner:DEEines|DEPrep|typeConcept|typeConcept|DEVerbAdj;DEGenitiv|DEAttradj|DEAttradj|DEAttradj|DEAttradj;
 /*		507; bei den akuten Leukämien Defekte der Zellzyklusregulation zu einer gegenüber gesunden Zellen beschleunigten Zellteilung führen.
+653;40;^DEPrep|DEDer|.DEAdv|DEInfAttradj|DEAttradj:DECon:DECapitalInitial;*|DEGenitiv|*|DEAttradj|*;;
+/*		653; Es war die Zeit der kalten Nächte und der heißen Pfannen.
+652;40;DEDefart:DEIndefart:DEDer|.DEAdv|DEVerbAdj:DEInfAttradj|DEAttradj:DEPredadj:DECon:DECapitalInitial;*|*|DEAttradj|*;;
+/*		652; Die hier entfalteten theoretischen Modelle gesellschaftlicher Entwicklung.
 14;40;DEDefart:DEIndefart|DEVerbAdj;*|DEAttradj;
 /*		14; Wie schnell findet ihr die versteckten Eier? Gibt es eine vereinfachte Fassung?
 121;40;DEDefart|DEPredadj|DEVerbAdj;DEDefart|DEPredadj|DEAttradj;
@@ -167,7 +173,7 @@
 /*		103; Für beschädigte Wertsachen wird nicht gewährt.
 133;40;DEPrep|DEVerbAdj|DEPrep;DEPrep|DECon|DEPrep;
 /*		133; Ich habe den Urlaub bei Bekannten in Italien verbracht.
-131;40;DENum|DEVerbAdj|DECon;DENum|DEAttradj|DECon;
+131;40;DENum+^DECon|DEVerbAdj|DECon;DENum|DEAttradj|DECon;added ^Con after adding 4-digit numbers as lexreps with labels Num+Con, awaiting larger review
 /*		131; Die drei inhaftierten Taschendiebe sind schon wieder frei.
 132;40;DEKein|DEVerbAdj;DEKein|DEAttradj;
 /*		132; Von den Dieben gibt es noch keine heiße Spur.
@@ -192,7 +198,7 @@
 /*		226; Billigen Sie denn ein solches Unternehmen?
 227;40;DEInfAttradj+DECapitalInitial;DECon;
 /*		227; Die Freien Demokraten haben einen Vorschlag eingereicht.
-89;40;DEDefart:DEIndefart:DEPrepart:DEPrep|DEInfAttradj;*|DEAttradj;
+89;40;DEDefart:DEIndefart:DEPrepart:DEPrep:DEPosspron|DEInfAttradj;*|DEAttradj;
 /*		89; Ein tramig schöner Traum hat die bangen Ahnungen tiefer in ihr gefoltertes Herz geschrieben. Einen heißen Sommer darf man dort nicht erwarten. Wir standen im stillen Raum und warteten. Ich bin aber sehr froh, dass ich auf meinen Dad gehört habe.
 93;40;DEPrep|DENicht|DEInfAttradj|DECon;DEPrep|DENicht|DEAttradj|DECon;
 /*		93; Es ist verboten, potenzielle Kunden mit nicht fertigen Produkten zu locken.
@@ -205,18 +211,19 @@
 /* -----
 50;40;DEEin:DEKein:DEPrepart|DEInf;*|DECon;
 /*		50; es bietet sich jetzt ein zusammengehen von politischen parteien an. er hatte keine bedenken. ich habe mich beim schwimmen gestoßen.
-73;40;DEDefart|DEInf|^DERelAux+^SEnd;DEDefart|DECon|*;
-/*		73; das ist eine folge von dem legalisieren von drogen.
+/*73;40;DEDefart|DEInf|^DERelAux+^SEnd;DEDefart|DECon|*;not good -> deleted
+/*73; das ist eine folge von dem legalisieren von drogen.
 104;40;DENum|DEInf;DECon|DERel;
 /*		104; Zehn Mitglieder sind vor, acht sind gegen und zwei enthalten sich.
-325;40;"alle"|DEInf;DECon|DERel;
+/*325;40;"alle"|DEInf;DECon|DERel;
+325;40;"alle"|DEInf;DEObjpron+DESubjpron-DEAdjpron|DERel;adapted to make 'all' PR
 /*		325; Alle schauen nach oben.
 221;40;DEPosspron+^DESubjpron|DEInf;DEPosspron|DECon;
 /*		221; Er verspricht seinen „lieben Mitarbeiterinnen und Mitarbeitern“ heute Vormittag grundlegende Veränderungen.
 
 /* DERelCon
 /* --------
-228;40;SBegin|DERelCon|DEObjpron;*|DERel|DEObjpron;
+228;40;SBegin|DERelCon|DEObjpron:DEDefart;*|DERel|DEObjpron;
 /*		228; Träumen Sie auch davon?
 291;40;SBegin|DERelCon;*|DECon;
 /*		291; Erfolge und Misserfolge.
@@ -477,6 +484,8 @@
 /*		620; Hier dürfte allerdings auch der bis zum Jahresende ausnehmend milde Winter zu dieser Entwicklung beigetragen haben.
 621;40;DEPrep|SEnd;DEVerbteil|*;
 /*		621; Sie hörten nicht zu.
+651;40;DEKomma|DEPrep+^DEWie|DEDefart|^typeConcept;*|DEConj|Join|*;not perfect, but good
+/*		651; Das ist eine Fläche so groß wie das kleine County Gloucestershire, in dem ich lebe.
 5;40;DEIndefart;DENonRelevant;
 /*		5; Siehst du einen Vogel?
 7;40;DEDefart;DENonRelevant;
@@ -485,8 +494,8 @@
 /*		113; Das Produkt ist detektierbar.
 641;40;DEPrep|DEAdj|DEAttradj:DECon;*|^DEAttradj|*;
 /*		641; Auch unter neuer Führung sei es nicht gelungen, nachhaltig das Ruder herumzureißen.
-415;40;DEDemonstrativ|typeRelation;DESubjpron+DEObjpron|*;
-/*		415; All diese sollen verschwinden.
+415;40;DEDemonstrativ|.DEPredadj|typeRelation;DESubjpron+DEObjpron|*|*;
+/*		415; All diese sollen verschwinden. Wie kann es gelingen, in schwierigen Zeiten wie diesen zuversichtlich zu bleiben?
 171;40;DEDemonstrativ|DEKomma:DEDoppelpunkt:DENonRelevant;DESubjpron|*;
 /*		171; Er sagte das man über diese, wie er sagte, "wichtigste Aufgabe seit der Gründung des Vereins" diskutieren sollte. Mit seinen Kollegen hat er basierend auf langjährigen Messdaten eine Klimaprognose für die deutschen Wintersportgebiete der Mittelgebirge aufgestellt - und hat eine schlechte Nachricht für diese: Das Schneevergnügen dort wird ihrer Berechnung zufolge wohl nur noch wenige Jahrzehnte währen.
 646;40;DEDemonstrativ;DENonRelevant;reduces the number of labels to take into account in phase 70
@@ -501,7 +510,7 @@
 /*		225; Er hat laut gerufen.
 342;40;DEVerbteil+DEAdv;DEVerbteil;for Adv+Verbteil
 /*		342; Wir bleiben beieinander bis in alle Ewigkeit.
-512;40;"*"|DENum;DERel|^DENum;
+512;40;^SBegin|"*"|DENum;*|DERel|^DENum;
 /*		512; 6 * 4 = 24;
 
 /* RULES FOR NEGATION, part 1
@@ -515,6 +524,10 @@
 /*		34; Wir werden nicht gezahlte Rechnungen um 5 % erhöhen.
 36;40;DENicht|DEAdj;DEBeginadj+DENegation|DEAdj;
 /*		36; Dieses Auto ist nicht schöner als das andere.
+
+647;40;DEGeoadj;+DEAttradj;
+/*		647; eine Reise durch drei deutsche Großstädte.
+
 
 /* Give adverbs their lexrep-type
 /* ------------------------------
@@ -594,6 +607,8 @@
 /*		312; Die am Mittwoch fertigen Güter müssen spätestens am Freitag abgeholt werden.
 453;50;DEJe;DERAdv;make 'je' relation (RAdv is not used in lexreps)
 /*		453; Je höher der Bildungsstand und das Allgemeinwissen, desto mehr kann aus Nachrichten gelernt werden.
+650;50;DEAdv|SEnd;DERAdv|*;
+/*		650; Damals waren 51 Prozent ihrer Follower dagegen.
 284;50;DEAdv;DEAdvNonrelevant;
 /*		284; Hiermit berechnen wir Ihnen folgende, am 25.07.2013, gelieferte Positionen.
 615;50;DEAdvDirection:DEAdvManner:DEAdvModality:DEAdvNonrelevant:DEAdvPlace:DEAdvTime:DEAdvTemp:DERAdv;+DEAdv;add Adv label again for use in following phases
@@ -603,7 +618,8 @@
 /* -------------------------------
 429;50;DEIndefpron|typeRelation;DESubjpron|*;
 /*		429; Alle müssen Zinsen zahlen.
-434;50;DEIndefpron|DEPredadj;DESubjpron|^DEPredadj;
+/*434;50;DEIndefpron|DEPredadj;DESubjpron|^DEPredadj;
+434;50;DEIndefpron|DEPredadj|^DEAttradj;DESubjpron|^DEPredadj|*;
 /*		434; Es ist schon lange her, dass die beiden gemeinsam spielten.
 436;50;DEIndefpron|DEAdvTemp;DESubjpron|DEAdvTemp+DETime;
 /*		436; Andere ehemals in Mitteleuropa lebende Großsäuger.
@@ -625,8 +641,8 @@
 /*		442; Er habe dann seinen Laptop genommen und sei „in aller Gemütsruhe“ gegangen.
 438;50;DEAdjpron+^DEGenitiv;DEBeginadj;
 /*		438; Alle schauen nach oben.
-489;50;DENonRelevant|DERelAux:DERel+^"zu";DESubjpron|*;
-/*		489; Das ist eine Frage, die ich nicht mehr stelle.
+489;50;DENonRelevant|.DEAdv|DERelAux:DERel+^"zu";DESubjpron|*|*;
+/*		489; Das ist eine Frage, die ich nicht mehr stelle. Das ist aber eine Frage, die ich nicht mehr stelle.
 630;50;DENonRelevant|DEDoppelpunkt:SEnd;DEObjpron|*;
 /*		630; Wie meinen Sie das?
 499;50;DEEiner|DEPrep:DEPrepart;DENonRelevant|*;exception to r498
@@ -639,8 +655,8 @@
 /*		502; So gibt es nur eines. Gegen Ihre eigene Wut hilft nur eines: rausgehen!
 505;50;DEEines|DEPrep:DEPrepart;DEGenitiv|*;
 /*		505; Spenden sind von einer Partei erlangt, wenn sie in den Verfügungsbereich eines für die Finanzangelegenheiten zuständigen Vorstandsmitglieds oder eines hauptamtlichen Mitarbeiters der Partei gelangt sind.
-504;50;DEEines|typeRelation;DESubjpron|*;
-/*		504; Denn eines sollte Deutschland nicht passieren.
+504;50;DEEines|.DEAdv|typeRelation;DESubjpron|*|*;
+/*		504; Denn eines sollte Deutschland nicht passieren. Eines immerhin erinnert uns im Winterblues daran, dass es sich um etwas anderes als eine herkömmliche Depression handelt.
 176;50;DENum;DECon;
 /*		176; Nummer 99 und Nummer 100.
 
@@ -673,8 +689,8 @@
 
 /* RULES FOR NEGATION, part 2
 /*===========================
-647;70;DEGeoadj;+DEAttradj;
-/*		647; eine Reise durch drei deutsche Großstädte.
+/*647;70;DEGeoadj;+DEAttradj; - moved to phase 40
+/*647; eine Reise durch drei deutsche Großstädte.
 206;70;DENicht;DERel+DENegation;default
 /*		206; In Bayern gilt diese Regelung nicht.
 232;70;DEKein;+DENegation;
@@ -755,7 +771,7 @@
 /*		534; Der Strukturbruch wird hier nicht durch exogene Faktoren erklärt, sondern als Folge von Modernisierung selbst verstanden.
 600;70;DENegBegin:DEInNegspan|DEPrep+DENegation;*|+DEInNegspan;
 /*		600; Leider bekommt man meistens nicht das eine ohne das andere“, bedauert der Wissenschaftler.
-601;70;DENegBegin:DEInNegspan|^DEInNegspan+^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, repetition of r534 for cases where rxxx has fired
+601;70;DENegBegin:DEInNegspan|^DEInNegspan+^DENegStop+^DENegation+^DENegWord;*|+DEInNegspan;assign a temp marker to all words in a negation span, repetition of r534 for cases where r600 has fired
 /*		601; Bald werden wir kein Auto ohne Nebellampen mehr sehen.
 591;70;*DEAttradj:DECon|DEPrep+DENegation;+DENegBegin|*;has to be after r534-600-601 to avoid interference
 /*		591; Für die Österreicher ging damit eine Saison zu Ende, in der sie erstmals seit achtzehn Jahren ohne Abfahrtssieg blieben.
