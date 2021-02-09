@@ -5,7 +5,7 @@
     Example (on Windows): "python genTrace.py C:\TextCorpus\English\Financial\ C:\tmp\ en
 '''
 
-import sys
+import sys, os
 
 # do "pip install iknowpy" if iknowpy is not installed
 import iknowpy
@@ -71,8 +71,10 @@ for text_file in f:
     f_text.close()
 
     engine.index(text, language_par, traces=True)
-
-    f_trace = open(out_path_par + text_file + ".log", "wb")
+    output_file = os.path.join(out_path_par, text_file) + '.log'
+    if os.path.exists(output_file): # delete existing output file to make sure the new output file gets a new timestamp
+        os.remove(output_file)
+    f_trace = open(output_file, 'wb')
     f_trace.write(b'\xef\xbb\xbf') # Utf8 BOM
     for trace in engine.m_traces:
 #        print(trace)
