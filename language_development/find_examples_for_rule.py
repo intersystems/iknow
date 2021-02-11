@@ -30,7 +30,8 @@ f_rec = []
 engine = iknowpy.iKnowEngine()
  
 
-print('Looking for examples of ' + rule_number + ' of the ' + language_par + ' language model in ' + in_path_par)
+print('Looking for examples for rule ' + rule_number + ' of the ' + language_par + ' language model in ' + in_path_par)
+
 
 # functions
 # add a line in the output file
@@ -52,6 +53,7 @@ def extract_rule_id(rule_order):
     return rule_id
 
 
+
 # make a list of input file (recursive list of files, .txt only) - copied from https://stackoverflow.com/questions/18394147/recursive-sub-folder-search-and-return-files-in-a-list-python
 f_rec = [os.path.join(dp, f) for dp, dn, filenames in os.walk(in_path_par) for f in filenames if
                   os.path.splitext(f)[1].lower() == '.txt']
@@ -61,9 +63,12 @@ f_rec = [os.path.join(dp, f) for dp, dn, filenames in os.walk(in_path_par) for f
 create_mapping_table(mapping_file)
 
 
-# open output file and add UTF-8 BOM
+# open output file and add UTF-8 BOM and information about the content of the file
+if os.path.exists(out_path_par):
+        os.remove(out_path_par)
 f_output = open(out_path_par, "ab")
 f_output.write(b'\xef\xbb\xbf') # Utf8 BOM
+write_ln(f_output, 'Examples for rule ' + rule_number + ' of the ' + language_par + ' language model in ' + in_path_par + '\n')
 
 # read input files one by one
 for text_file in f_rec:
@@ -81,6 +86,7 @@ for text_file in f_rec:
 
     # read trace output
     for trace in engine.m_traces:
+#        print(trace)
         key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
         # store the sentence
         if (key == "SentenceFound"):
@@ -91,9 +97,17 @@ for text_file in f_rec:
             rule_order = value.split(';')[0].split('=')[1]
             # extract the number that corresponds to the rule id in rules.csv from compiler_report.log
             rule_id = extract_rule_id(rule_order)
-            # if the rule id corresponds to the demanded rule number, add the sentence to the output file 
+            # if the rule id corresponds to the demanded rule number, look for the concerned lexreps 
             if rule_id == rule_number:
-                write_ln(f_output, Sentence)
+                lexreps = value.split(';')[3:]
+                lexreps = str(lexreps)
+                lexreps_indexes = ''
+                while 'index=' in lexreps:
+                    lexreps_indexes = lexreps_indexes + ' ' + lexreps[lexreps.find('index=\"')+7:lexreps.find('labels=')-2]
+                    lexreps = lexreps[lexreps.find('labels=')+7:]  # cut off left part of lexreps information in order to julp to the next lexrep
+                # add the concerned lexrep(s) and the sentence to the output
+                #print(lexreps_indexes.lstrip())
+                write_ln(f_output, lexreps_indexes.lstrip() + ';' + Sentence)
 
 
 f_output.close()
