@@ -187,4 +187,20 @@ The script uses the style sheet iKnowXML.xsl. It is available in the language_de
 The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
 nl, pt, ru, sv and uk.
 
+## find_examples_for_rule.py
+
+| Summary | |
+|-|-| 
+| **What** | From a text corpus of UTF-8 files with extension .txt, it retrieves the sentences in which a given rule from rules.csv fires. |
+| **Usage** | ```python find_examples_for_rule.py <input_directory> <output_file> <language_code> <rule_number>``` <br/> Example: <br/> ```python find_examples_for_rule.py c:\corpus\input C:\corpus\output\en_531.csv en 531``` <br/> Note: <br/> Find_examples_for_rule.py uses a xx_compiler_report.log file which is created in the language_development directory during compilation. If you want to run the script from a difference directory, make sure to copy that compiler_report file for the language you need. |
+| **Parameters** | None |
+
+The script reads the input directory recursively, i.e. including its subfolders. In the output, it writes the lexreps to which the rule applies in the first field, and the complete sentence in the second field. These fields are separated by a semicolon.
+
+The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
+nl, pt, ru, sv and uk.
+
+Rule numbers are in the first field of rules.csv.
+
+
 
