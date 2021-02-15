@@ -157,17 +157,6 @@ const std::vector<std::pair<int, string>> CSV_DataGenerator::kb_properties = {
 
 void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::ostream& os)
 {
-	/*
-	Do ..LoadTableFromCSV(prefix _ "metadata.csv", "%iKnow.KB.Metadata", kb)
-	Do ..LoadTableFromCSV(prefix _ "acro.csv", "%iKnow.KB.Acronym", kb)
-	Do ..LoadTableFromCSV(prefix _ "regex.csv", "%iKnow.KB.Regex", kb)
-	Do ..LoadTableFromCSV(prefix _ "filter.csv", "%iKnow.KB.Filter", kb)
-	Do ..LoadTableFromCSV(prefix _ "labels.csv", "%iKnow.KB.Label", kb)
-	// Quit:'##class(%File).Exists(fileName) ##class(%Exception.StatusException).%New("LoadTableFromCSV","9999",,$Listbuild("File " _ fileName _ " does *not* exist."))
-	Do:complete ..LoadTableFromCSV(prefix _ "lexreps.csv", "%iKnow.KB.Lexrep", kb)
-	Do ..LoadTableFromCSV(prefix _ "prepro.csv", "%iKnow.KB.PreprocessFilter", kb)
-	Do ..LoadTableFromCSV(prefix _ "rules.csv", "%iKnow.KB.Rule", kb)
-	*/
 	kb_language = language;
 	Hash = language; // just a unique string per KB
 	stringstream message;
@@ -234,6 +223,19 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::
 	for_each(kb_labels.begin(), kb_labels.end(), [&label_index_table, &label_idx, &os](iKnow_KB_Label label) { if (!os.fail()) os << label_idx << "\t" << label.Name << endl; label_index_table[label.Name] = label_idx++; }); // Do ..BuildLabelIndexTable(kb, .labelIndexTable)
 	//Override value for "-"
 	labelIndexTable["-"] = -1; //Set table("-") = -1
+}
+
+void CSV_DataGenerator::writeIRISlexreps(string lexreps_file)
+{
+	std::ofstream os(lexreps_file); // lexreps.csv file for IRIS
+	if (os.is_open()) {
+		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
+
+		for (auto it_lexrep = kb_lexreps.begin(); it_lexrep != kb_lexreps.end(); ++it_lexrep) {
+			os << ";" << it_lexrep->Meta << ";" << it_lexrep->Token << ";;" << it_lexrep->Labels << endl;
+		}
+		os.close();
+	}
 }
 
 /// Returns the pattern of a given regex index
@@ -778,7 +780,7 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	bool hasRegex = (phase == "_regex"); // Set hasRegex = (phase = "_regex")
 
 	iknow::AHO::GotoFunction *gotoFunc = new iknow::AHO::GotoFunction; // Set gotoFunc = ##class(GotoFunction).%New()
-	gotoFunc->RegexEnabled = phase_switch; // regex_predicate->MatchRegex;
+	gotoFunc->RegexEnabled = true; // always expand... phase_switch; // regex_predicate->MatchRegex;
 	gotoFunc->RegexDictionary = new iknow::AHO::KnowledgebaseRegexDictionary; // Set gotoFunc.RegexDictionary = ##class(KnowledgebaseRegexDictionary).%New()
 	gotoFunc->RegexDictionary->Knowledgebase = this; // Set gotoFunc.RegexDictionary.Knowledgebase = kb
 
@@ -798,8 +800,6 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 		iknow::base::String token = IkStringEncoding::UTF8ToBase(lexrep.Token); // Set token = $ZCONVERT(lexrep.Token, "I", "UTF8")
 
 		outputAdapter->Labels = labels; // Set outputAdaptor.Labels = labels
-		// Set labelString = lexrep.Labels
-		// If $E(labelString, *) = ";" Set $E(labelString, $L(labelString)) = ""  // remove ending ';' for conformity		
 		outputAdapter->LabelString = lexrep.Labels; // // Set outputAdaptor.LabelString = labelString
 		outputAdapter->MetaString = lexrep.Meta;
 
@@ -870,4 +870,20 @@ void CSV_DataGenerator::handle_UTF8_BOM(std::ifstream& ifs)
 		ifs.putback(utf8BOM[1]);
 		ifs.putback(utf8BOM[0]);
 	}
+}
+
+//
+// Data insert methods
+//
+void CSV_DataGenerator::AddLexrep(string& token, string& meta, string& labels, vector<string>& token_segments)
+{
+	iKnow_KB_Lexrep lexrep(token, meta, labels);
+
+	int idx_lexrep = (int)kb_lexreps.size(); // index in lexrep vector for fast retral
+	lexrep_index[lexrep.Token] = idx_lexrep;
+	if (token_segments.size()) { // collect the token segments
+		int idx_segment = 0; // segment index 
+		for_each(token_segments.begin(), token_segments.end(), [idx_lexrep, &idx_segment](string& token_segment) { lexrep_segments_index[token_segment].push_back(idx_lexrep); lexrep_segments_index[token_segment].push_back(idx_segment++); });
+	}
+	kb_lexreps.push_back(lexrep); // Set lexrep.Knowledgebase = kb
 }

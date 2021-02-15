@@ -9,7 +9,7 @@ from os import walk
 from shutil import copyfile
 pp = pprint.PrettyPrinter()
 
-language_par='*' # '*' # default to all languages
+language_par='ja' # '*' # default to all languages
 if (len(sys.argv)>1):
     language_par = sys.argv[1]
 
@@ -79,6 +79,45 @@ def filter_literal_label_from_lexreps(full_path_name):
     f_lexreps.close()
     pass
 
+def filter_DELVE_rewrites_from_lexreps(full_path_name):
+    print("removing DELVE rewrites from:\"" + full_path_name + "\"")
+    lexreps_csv = [] # filtered collection
+
+    f_lexreps = open(full_path_name,'r',True,"utf8")
+    for txt_line in f_lexreps:
+        if txt_line.find("/* Expanded previously by DELVE") != -1:
+            # print(txt_line) # /* Expanded previously by DELVE....;;(く|ぐ|す|た|ぶ|む|る|う)のが大変;;JPVerbEndOther;JPEndRelation;-;JPno;-;JPga;-;JPCon;Join;
+            line_split = txt_line.split(';')
+            meta = line_split[1]
+            lexrep = line_split[2]
+            line_reconstruct = ";" + meta + ";" + lexrep + ";;"
+            for i in range(4,len(line_split),1):
+                if (line_split[i]=="\n"):
+                    continue
+                if (len(line_split[i])): # skip in the (exception) case of emptiness
+                    line_reconstruct += line_split[i] + ";"
+            line_reconstruct += "\n"
+            lexrep_splits = lexrep.split('|')
+            # line_reconstruct += "ACTION:"+str(len(lexrep_splits)) + "\n"
+            for i in range(len(lexrep_splits)):
+                lexreps_csv.pop() # remove the last one
+
+            lexreps_csv.append(line_reconstruct) # add modified line
+            # pp.pprint(line_split)
+            
+        else:
+            lexreps_csv.append(txt_line)
+
+    f_lexreps.close()
+    #
+    # rewrite
+    #
+    f_lexreps = open(full_path_name,"w",True,"utf8")
+    for txt_line in lexreps_csv:
+        f_lexreps.write(txt_line)
+    f_lexreps.close()
+    pass
+
 def task1(language,path):
     print("Processing language=\"" + language + "\" in path=\"" + path + "\"\n")
 
@@ -86,8 +125,9 @@ def task1(language,path):
         for single_file in filenames:
             if (single_file.endswith('.csv')):
                 if single_file == "lexreps.csv":
-                    filter_literal_label_from_lexreps(dirpath + single_file)
+                    # filter_literal_label_from_lexreps(dirpath + single_file)
                     # filter_doubles_from_lexreps(dirpath + single_file)
+                    filter_DELVE_rewrites_from_lexreps(os.path.join(dirpath, single_file))
     pass
 
 def main():
@@ -103,10 +143,10 @@ def main():
     for (dirpath, dirnames, filenames) in walk(currentDirectory):
         if language_par == '*': # process them all
             for single_dir in dirnames:
-                full_dir = dirpath + "/" + single_dir + "/"
+                full_dir = os.path.join(dirpath, single_dir)
                 task1(single_dir, full_dir)
         else:
-            full_dir = dirpath + "/" + language_par + "/"
+            full_dir = os.path.join(dirpath, language_par)
             task1(language_par, full_dir)
             break
         

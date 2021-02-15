@@ -20,7 +20,7 @@ static void ConsumeInput(string input, string curToken, vector<string>& tokens, 
 		return;
 	}
 	char char_ = input[0]; // $E(input, 1)
-	if (char_ == '\\') {
+	if (char_ == '\\' && !escaping) {
 		string rest(input.begin() + 1, input.end());
 		ConsumeInput(rest, curToken, tokens, true);
 		return;
@@ -106,9 +106,6 @@ inline void add_if_not_empty(iknow::base::String& token, vector<string>& lst) {
 }
 vector<string> CollectSegments(string& token, const string& labels, CSV_DataGenerator& kb)
 {
-	if (labels.find('-') == string::npos) // token is *not* segmented.
-		return vector<string>();
-
 	vector<string> lstToken, token_segments;
 	string separator(" "); // classic token separator
 
@@ -198,28 +195,25 @@ bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 			for_each(row_lexrep.begin() + 5 - 1, row_lexrep.end(), [&labels](std::string& label) { labels += label + ";"; }); // Set labels = $PIECE(line, ";", 5, 99)
 
 			// collect token segments (splitted by '-' label)
-			vector<string> token_segments = CollectSegments(token, labels, kb);
-			/*
-			std::string::reverse_iterator rit = labels.rbegin();
-			while (rit != labels.rend() && *rit == ';') ++rit;
-			labels.erase(rit.base(), labels.end()); // remove ending ';' characters
-			*/
-			vector<string> tokens;
-			EnumerateTokens(token, tokens); // Do ..EnumerateTokens(token, .tokens)
-			for (int i = 0; i < tokens.size(); ++i) { // For i = 1:1 : tokens{
-				iKnow_KB_Lexrep lexrep; // Set lexrep = ..%New()
-				lexrep.Token = tokens[i]; // Set lexrep.Token = tokens(i)
-				lexrep.Meta = meta; // Set lexrep.Meta = meta
-				lexrep.Labels = labels; // Set lexrep.Labels = labels
-				int idx_lexrep = (int)kb.kb_lexreps.size(); // index in lexrep vector for fast retral
-				kb.lexrep_index[lexrep.Token] = idx_lexrep;
-				if (token_segments.size()) { // collect the token segments
-					int idx_segment = 0; // segment index 
-					for_each(token_segments.begin(), token_segments.end(), [idx_lexrep, &kb, &idx_segment](string& token_segment) { kb.lexrep_segments_index[token_segment].push_back(idx_lexrep); kb.lexrep_segments_index[token_segment].push_back(idx_segment++); });
+			vector<string> tokens, token_segments;
+			if (labels.find('-') != string::npos) // token is segmented.
+				token_segments = CollectSegments(token, labels, kb);
+
+			bool is_expanded = false;
+			if (token_segments.size()) { // we have label segments
+				EnumerateTokens(token, tokens); // Do ..EnumerateTokens(token, .tokens)
+				if (tokens.size() > 1) { // if expandable and contains segments : expand for literal label rewrite
+					is_expanded = true;
+					for (int i = 0; i < tokens.size(); ++i) { // For i = 1:1 : tokens{
+						vector<string> single_token_segmens = CollectSegments(tokens[i], labels, kb);
+						kb.AddLexrep(tokens[i], meta, labels, single_token_segmens);
+					}
 				}
-				kb.kb_lexreps.push_back(lexrep); // Set lexrep.Knowledgebase = kb
 			}
-			if (!(kb.kb_lexreps.size() % 2048)) cout << char(9) << kb.kb_lexreps.size();
+			if (!is_expanded)
+				kb.AddLexrep(token, meta, labels, token_segments);
+
+			if (!(kb.kb_lexreps.size() % 2048)) cout << char(9) << kb.kb_lexreps.size(); // notify we're busy...
 		}
 		ifs.close();
 		return true;

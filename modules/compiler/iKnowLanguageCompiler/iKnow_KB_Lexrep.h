@@ -28,16 +28,13 @@ namespace iknow {
 				Token(token),
 				Labels(label + ";")
 			{}
+			iKnow_KB_Lexrep(const std::string& token, const std::string& meta, const std::string& labels) :
+				Token(token), Meta(meta), Labels(labels)
+			{}
 
 			std::string Token; // Property Token As %String(MAXLEN = 2048, XMLPROJECTION = "ATTRIBUTE")[Required];
-
 			std::string Meta; // Property Meta As %String(MAXLEN = 128, XMLPROJECTION = "ATTRIBUTE");
-
 			std::string Labels; // Property Labels As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE") [ Required ];
-
-			// Property Knowledgebase As Knowledgebase[Required];
-
-			// Index KnowledgebaseIndex On Knowledgebase;
 
 			iKnow_KB_Lexrep() : isRegex(false) {}
 			~iKnow_KB_Lexrep() {}

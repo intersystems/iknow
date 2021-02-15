@@ -43,6 +43,7 @@ namespace iknow {
 			// Index NameIndex On Name[Unique];
 
 			void loadCSVdata(std::string language = "en", bool IsCompiled = true, std::ostream& os = std::cout);
+			void writeIRISlexreps(std::string lexreps_file);
 			void generateRAW(bool IsCompiled = true);
 			void generateAHO(void);
 
@@ -55,7 +56,6 @@ namespace iknow {
 			void handle_UTF8_BOM(std::ifstream& ifs);
 
 			// The data vectors
-			
 			static std::vector<iKnow_KB_Metadata> kb_metadata;
 			static std::vector<iKnow_KB_Acronym> kb_acronyms;
 			static std::vector<iKnow_KB_Regex> kb_regex;
@@ -72,6 +72,7 @@ namespace iknow {
 			typedef std::unordered_map<std::string, int>	labelIndexTable_type;
 			labelIndexTable_type labelIndexTable; // mapping of labels to indexes
 
+			void AddLexrep(std::string& token, std::string& meta, std::string& labels, std::vector<std::string>& token_segments);
 			size_t LabelCount() {
 				return kb_labels.size();
 			}

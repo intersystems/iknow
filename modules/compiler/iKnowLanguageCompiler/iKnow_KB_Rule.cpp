@@ -154,6 +154,10 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 
 void AddLabelToLexrep(CSV_DataGenerator& kb, string& token, string& label)
 {
+	// escape the special chars.
+	str_subsitute(token, string("("), string("\\("));
+	str_subsitute(token, string("{"), string("\\{"));
+
 	// Full lexrep addition
 	auto it_lexrep = kb.lexrep_index.find(token); // &sql(select ID into : lexrepId from Lexrep where Token = : token and Knowledgebase = : kbId)
 	if (it_lexrep != kb.lexrep_index.end()) { // If(SQLCODE = 0) && lexrepId{

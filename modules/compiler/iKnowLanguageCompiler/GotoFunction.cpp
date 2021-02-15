@@ -9,7 +9,6 @@
 #include <iostream>
 #include <math.h>
 
-
 using namespace iknow::AHO;
 using namespace std;
 using iknow::base::Char;
@@ -19,71 +18,14 @@ GotoFunction::GotoFunction() : RegexEnabled(false), NextState(1)
 {
 }
 
-
 GotoFunction::~GotoFunction()
 {
 }
 
-#if 0
-/// Produces a list of alternatives of the form (a|b|cd)
-// list<String> GotoFunction::ParseAlternatives(String& input)
-template<typename T>
-list<T> GotoFunction::ParseAlternatives(T& input)
-{
-	size_t len = input.length();
-	int depth = 1; //the leading "("
-	String token; // = "";
-	list<T> tokenList; // Set tokenList = ""
-	bool escaped = false; // Set escaped = 0
-	int i = 2-1;
-	for (; i < (int)len; ++i) {
-		T::value_type char_ = input[i]; // Set char = $E(input, i)
-
-		//Process regexp characters
-		if (!escaped) {
-			if (char_ == '(') {
-				depth = depth + 1;
-			}
-			else {
-				if (char_ == ')') {
-					depth = depth - 1;
-				}
-				else {
-					if (char_ == '|' && depth == 1) {
-						tokenList.push_back(token);
-						token.clear(); // = "";
-						continue;
-					}
-					else {
-						if (char_ == '\\') {
-							escaped = true;
-							continue;
-						}
-					}
-				}
-			}
-		}
-		//Add character to current token
-		escaped = false;
-		if (depth != 0) {
-			token = token + char_;
-		}
-		else {
-			tokenList.push_back(token);
-			token.clear(); // = "";
-			break;
-		}
-	}
-	// if (depth != 0) Throw ##class(%Exception.SystemException).%New("Mismatched Parentheses")
-	input = T(input.begin() + i + 1, input.end());
-	return tokenList;
-}
-#endif
-
 // Method ConsumeInput(state As %Integer, input As %String, outputObj As %RegisteredObject, curToken As %String = "", escaping As %Boolean = 0)
 void GotoFunction::ConsumeInput(int state, String input, StateOutputFunction *outputObj, String curToken, bool escaping)
 {
-ConsumeInputStart:
+// ConsumeInputStart:
 
 	if (input.length() == 0) {
 		vector<vector<Output_Value_Struct>>& StatesGlobal_Output = outputObj->pOutputFunc->StatesGlobal_Output;
@@ -101,9 +43,19 @@ ConsumeInputStart:
 		Output_Value_Struct IKCValue = outputObj->GetValue(curToken);
 		vector<Output_Value_Struct>::iterator IKCKey = state_map.begin(); // Set IKCKey = $ORDER(outputObj.OutputFunc.StatesGlobal("Output", state, ""), 1, IKCEValue)
 		while (IKCKey != state_map.end()) { // 	While IKCKey '= "" {	
-			std::cout << "double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << endl; // W !, "double["_curToken_"]"
+			// std::cout << "double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << endl; // W !, "double["_curToken_"]"
 			if (IKCValue == *IKCKey) return; // double, but with equal output, not need to write
-			std::cout << "conflicting double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << endl; // W !, "a conflicting double["_IKCEValue_"]" : different output.
+			if (IKCValue.Labels.size() == 1 && !strncmp(IKCValue.LabelString.c_str(), "Lit_", 4)) { // Literal label entry, merge with real entry
+				IKCKey->Labels.push_back(IKCValue.Labels[0]); // add literal label id
+				IKCKey->LabelString.append(IKCValue.LabelString); // add literal label name
+				// std::cerr << "literal double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << "Labels= "; // W !, "a conflicting double["_IKCEValue_"]" : different output.
+				// std::cerr << IKCValue.LabelString << " ***conflicts with*** " << IKCKey->LabelString << endl;
+				return; // add literal label
+			}
+			else {
+				std::cerr << "conflicting double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << "Labels= "; // W !, "a conflicting double["_IKCEValue_"]" : different output.
+				std::cerr << IKCValue.LabelString << " ***conflicts with*** " << IKCKey->LabelString << endl;
+			}
 			IKCKey++; // Set IKCKey = $ORDER(outputObj.OutputFunc.StatesGlobal("Output", state, IKCKey), 1, IKCEValue)
 		}
 
@@ -150,8 +102,9 @@ ConsumeInputStart:
 		StatesGlobal_DepthMap.push_back(DepthMap(IKCdepth - 1, state, char_, nextState)); // Set ..StatesGlobal("DepthMap", IKCdepth - 1, state, char, nextState) = ""
 	}
 
-	state = nextState, input = remainingInput, curToken = curToken + char_; // Set state = nextState, input = remainingInput, curToken = curToken _ char
-	goto ConsumeInputStart; // Goto ConsumeInputStart
+	// state = nextState, input = remainingInput, curToken = curToken + char_; // Set state = nextState, input = remainingInput, curToken = curToken _ char
+	// goto ConsumeInputStart; // Goto ConsumeInputStart
+	ConsumeInput(nextState, remainingInput, outputObj, String(curToken + char_));
 }
 
 void GotoFunction::Addword(iknow::base::String word, StateOutputFunction *stateOutputFuncton)
