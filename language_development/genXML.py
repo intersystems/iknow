@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan 25 17:23:47 2021
+Updated on Mon Feb 15 2021
 @author: ISC-SDE
 
 This tool translates the output of the iKnow engine into XML files.
@@ -88,6 +88,7 @@ for text_file in f:
     
     # create output file, write header
     filename_xml = ntpath.basename(text_file) + '.xml'   # use ntpath to ensure compatibility with Windows and Linux
+
     # print(filename_xml)
     f_xml = open(os.path.join(out_path_par, filename_xml), 'wb')
 
@@ -117,9 +118,16 @@ for text_file in f:
             lit_text = html.escape(text[entity['offset_start']:entity['offset_stop']])
             index_text = html.escape(entity['index'])
             
-            # check for attribute markers
+            # check for attribute markers in order to mark them as such
             for attr_marker in sent['sent_attributes']:
-                if entity['offset_start'] <= attr_marker['offset_start'] and attr_marker['offset_stop'] <= entity['offset_stop']:
+                attr_type = str(attr_marker['type']).lower()
+                
+                # first ignore Japanese entity vectors in this stage: they must not be marked in the sentence
+                if attr_type == 'entityvector':
+                    pass
+                             
+                # then process 'real' attributes 
+                elif entity['offset_start'] <= attr_marker['offset_start'] and attr_marker['offset_stop'] <= entity['offset_stop']:
                     attr_type =str(attr_marker['type']).lower()
                     attr_type = attr_type.replace('datetime','time')
                     attr_type = attr_type.replace('positivesentiment','sentpositive')
@@ -168,8 +176,21 @@ for text_file in f:
                 write_ln(f_xml, '      </Literal>')
             write_ln(f_xml, '    </' + ent_type + '>')
             
+
+        # write entity vector (Japanese only)
+        if language_par == 'ja' and len(sent['sent_attributes']) > 0:
+            ev = sent['sent_attributes'][-1]   # EntityVector is the last attribute in sent_attributes
+            if str(ev['type'] == 'EntityVector'):
+                ev_text = ''
+                write_ln(f_xml, '    <entity_vector>')
+                for sent_index in attr_marker['entity_vector']:
+                    ev_text = ev_text + '      <ent>' + html.escape(sent['entities'][sent_index]['index']) + '</ent>\n'
+                write_ln(f_xml, ev_text + '    </entity_vector>')
+                #print(ev)
+
+
+        # write path
         if len(sent['path']):
-           # write path
             path_text = ''
             write_ln(f_xml, '    <path>')
             for sent_index in sent['path']:
@@ -241,10 +262,9 @@ for text_file in f:
                     write_ln(f_xml, '      </' + attr_name + '>')
                     
             write_ln(f_xml, '    </path>')
-
+           
         write_ln(f_xml, '  </Sentence>')
             
-
     write_ln(f_xml,'</Content>')
 
     f_xml.close()
