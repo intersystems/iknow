@@ -697,7 +697,7 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 			bNBSseparator = true;
 		  break;
 		  case token::kLine:
-			if (lexrep_vector.empty() && nBeginPos == nPosition) { // start of new sentence, ignore
+			if (lexrep_vector.size()==1 && nBeginPos == nPosition) { // start of new sentence, ignore
 				nPosition++, nBeginPos++;
 				continue;
 			}
@@ -721,7 +721,7 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 		if (bNBSseparator) { //NBS 
 			if (bSentenceSeparator) { // end of sentence condition
 				prev_type = token::kText; // reset
-				if (lexrep_vector.empty()) { // no text yet
+				if (lexrep_vector.size()==1) { // no text yet
 				  nPosition++, nBeginPos++;
 				  continue;
 				} else
@@ -729,7 +729,7 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 			}
 			const Char* val_begin = pData + nBeginPos;
 			const Char* val_end = pData + nPosition;
-			if (this_type == token::kLine) { // strip-off line terminator symbols
+			if (this_type == token::kLine && val_end > val_begin) { // strip-off line terminator symbols
 				while (token::GetType<Char>(*(val_end-1)) == token::kLine && val_end > val_begin) --val_end;
 			}
 
