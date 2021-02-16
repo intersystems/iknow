@@ -70,12 +70,11 @@ void iKnowUnitTests::runUnitTests(void)
 
 #include <fstream>
 
-void iKnowUnitTests::DP402269(const char* pMessage)
+void IndexTextFile(string file_name, string language)
 {
 	iKnowEngine engine;
 
-	// ifstream ifs = ifstream("C:/Users/jdenys/source/repos/iknow/reference_materials/input/test/cs_test.txt", ifstream::in);
-	std::ifstream is("C:/Users/jdenys/source/repos/iknow/reference_materials/input/test/cs_test.txt", std::ifstream::binary);
+	std::ifstream is(file_name, std::ifstream::binary);
 	if (is) {
 		// get length of file:
 		is.seekg(0, is.end);
@@ -87,6 +86,7 @@ void iKnowUnitTests::DP402269(const char* pMessage)
 		std::cout << "Reading " << length << " characters... ";
 		// read data as a block:
 		is.read(buffer, length);
+		// ...buffer contains the entire file...
 
 		if (is)
 			std::cout << "all characters read successfully.";
@@ -96,34 +96,19 @@ void iKnowUnitTests::DP402269(const char* pMessage)
 
 		string utf8_text = string(buffer);
 		String text_source = IkStringEncoding::UTF8ToBase(utf8_text);
-		
-		engine.index(text_source, "cs");
 
-		// ...buffer contains the entire file...
-
+		engine.index(text_source, language);
 		delete[] buffer;
 	}
-	ifstream ifs = ifstream("../../../../reference_materials/input/test/cs_test.txt", ifstream::in);
-	if (ifs.is_open()) {
-		// ifs.r
-		String text_source;
-		int count = 0; // Set count = 0
-		cout << "reading..." << endl;
-		for (string line; getline(ifs, line);) // while ('stream.AtEnd) { // Set line = $ZCONVERT(stream.ReadLine(), "O", "UTF8")
-		{
-			++count; // Set count = count + 1
-			// cout << count;
-			text_source += IkStringEncoding::UTF8ToBase(line+"\n");
-		}
-		ifs.close();
-		cout << "indexing..." << endl;
-		engine.index(text_source, "cs");
-
-	}
 	else {
-		cout << "File not found" << endl;
-		exit(0);
+		throw std::runtime_error("File:" + file_name + "cannot be read !");
 	}
+}
+
+void iKnowUnitTests::DP402269(const char* pMessage)
+{
+	iKnowEngine engine;
+
 	String text_source = IkStringEncoding::UTF8ToBase(u8"資源第一本部長（北米住友商事グループ北米資源・エネルギーグループ長）村井俊朗▽アジア大洋州総支配人補佐兼アジア大洋州住友商事グループアジア大洋州資源・化学品・メディア事業ユニット長兼アジア大洋州住友商事シンガポールユニット長（石油化学品）岡田卓也▽環境・インフラプロジェクト事業本部長（環境・インフラプロジェクト事業本部副本部長兼環境エネルギー事業第二）山埜英樹▽基礎化学品・エレクトロニクス本部副本部長、坂本好之▽ライフスタイル・リテイル事業本部副本部長兼リテイル＆ウェルネス事業部長（自動車リース事業部長）佐藤計▽電力インフラ事業本部副本部長兼電力事業第一、電池事業開発・野中紀彦▽軽金属・特殊鋼板本部副本部長、軽金属事業部長塩見圭吾▽中東支配人補佐兼イラン住友商事社長（地域総括部長）田中竹千代▽東アジア総代表補佐兼韓国住友商事社長（鋼板・建材本部長）若島浩▽米州総支配人補佐兼北米住友商事グループ北米化学品・エレクトロニクスグループ長兼米国住友商事に出向（ライフサイエンス本部長）須藤龍也▽同兼北米住友商事グループ北米資源・エネルギーグループ長兼米国住友商事に出向、林薫▽広報（ライフスタイル・リテイル事業本部長）新森健之▽電力インフラ事業本部長（電力インフラ事業本部副本部長兼タンジュン・ジャティＢプロジェクト）秋元勉▽ライフサイエンス本部長（中国住友商事グループ中国化学品・エレクトロニクス部門長兼上海住友商事蘇州事務所長）祐源通延▽欧阿中東ＣＩＳ総支配人補佐兼ＣＩＳ支配人兼ＣＩＳ住友商事社長（環境・インフラプロジェクト事業本部長）池村圭司▽地域総括部長（関西ブロック総括部長）出口雅敏▽建設不動産本部長兼総合建設開発（建設不動産本部副本部長兼不動産戦略事業部長）安藤伸樹▽船舶・航空宇宙・車輌事業本部副本部長兼船舶事業第二（欧州住友商事グループ欧州輸送機部門長）山口真▽ライフスタイル・リテイル事業本部長（ライフスタイル・リテイル事業本部副本部長兼ダイレクトマーケティング＆ソーシング事業部長）田中恵次▽アジア大洋州総支配人補佐兼インドネシア住友商事社長兼スラバヤ支店長（電力インフラ事業本部副本部長兼電力事業第一兼電力事業第二）佐橋明三▽東アジア総代表補佐兼中国住友商事グループ中国金属部門長兼上海住友商事社長、戸倉健夫▽基礎化学品・エレクトロニクス本部長（基礎化学品・エレクトロニクス本部副本部長兼資源性ケミカル第一）三輪聡▽自動車リース事業部長、自動車事業第一本部長中島正樹");
 	engine.index(text_source, "ja");
 	if (engine.m_index.sentences.size() == 0) {
