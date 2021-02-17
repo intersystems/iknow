@@ -47,7 +47,7 @@ void build_one_language(string& csv, string& aho, string& ldata, string& langdev
 	} else
 		my_csv_generator.loadCSVdata(lang, false);
 
-	my_csv_generator.writeIRISlexreps(langdev + lang + "_lexreps.csv"); // write lexreps.csv for IRIS
+	// my_csv_generator.writeIRISlexreps(langdev + lang + "_lexreps.csv"); // write lexreps.csv for IRIS
 
 	my_csv_generator.generateRAW();
 	my_csv_generator.generateAHO();

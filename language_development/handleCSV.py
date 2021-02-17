@@ -9,7 +9,7 @@ from os import walk
 from shutil import copyfile
 pp = pprint.PrettyPrinter()
 
-language_par='ja' # '*' # default to all languages
+language_par='*' # '*' # default to all languages
 if (len(sys.argv)>1):
     language_par = sys.argv[1]
 
@@ -125,7 +125,7 @@ def task1(language,path):
         for single_file in filenames:
             if (single_file.endswith('.csv')):
                 if single_file == "lexreps.csv":
-                    # filter_literal_label_from_lexreps(dirpath + single_file)
+                    filter_literal_label_from_lexreps(os.path.join(dirpath, single_file))
                     # filter_doubles_from_lexreps(dirpath + single_file)
                     filter_DELVE_rewrites_from_lexreps(os.path.join(dirpath, single_file))
     pass
