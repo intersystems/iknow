@@ -3,7 +3,7 @@
 # After the build is complete, execute this script on Linux to deploy the wheels
 # if appropriate.
 #
-# Wheels are assumed to be in ~/wheels/*/*.whl.
+# Wheels are assumed to be in ~/wheels/*.whl.
 #
 # We deploy iknowpy if and only if 3 criteria hold.
 #   1. The build is due to a push to the master branch.
@@ -49,7 +49,7 @@ then
   if git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null || \
       [ "${FORCE_DEPLOY-}" = 1 ]
   then
-    WHEELS=~/wheels/*/*.whl
+    WHEELS=~/wheels/*.whl
     if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then
       echo "Error: Expected $EXPECTED_WHEEL_COUNT wheels"
       exit 1

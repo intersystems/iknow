@@ -51,8 +51,20 @@ jobs:
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
+      - name: install
+        run: pip3 install ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
+      - name: run tests
+        working-directory: ${{ github.workspace }}/language_development
+        run: python3 ref_testing.py
+      - name: upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}-test
+          path: |
+            ${{ github.workspace }}/reference_materials/new_output
+            ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
     runs-on: ubuntu-20.04
     steps:
@@ -82,7 +94,7 @@ jobs:
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
     runs-on: ubuntu-20.04
@@ -113,7 +125,7 @@ jobs:
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
     runs-on: macos-10.15
@@ -156,8 +168,20 @@ jobs:
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+      - name: install
+        run: pip3 install ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+      - name: run tests
+        working-directory: ${{ github.workspace }}/language_development
+        run: python3 ref_testing.py
+      - name: upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}-test
+          path: |
+            ${{ github.workspace }}/reference_materials/new_output
+            ${{ github.workspace }}/reference_materials/reports
   windows_x86_64:
     runs-on: windows-2019
     defaults:
@@ -202,8 +226,21 @@ jobs:
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
+      - name: install
+        shell: powershell
+        run: pip install $(ls ${{ github.workspace }}\modules\iknowpy\wheelhouse\iknowpy-*.whl | % {$_.FullName})
+      - name: run tests
+        working-directory: ${{ github.workspace }}/language_development
+        run: python ref_testing.py
+      - name: upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}-test
+          path: |
+            ${{ github.workspace }}/reference_materials/new_output
+            ${{ github.workspace }}/reference_materials/reports
 
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
@@ -225,9 +262,30 @@ jobs:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
           path: ~/.cache/pip
-      - name: download wheel artifacts
+      - name: download manylinux2010_x86_64-wheel
         uses: actions/download-artifact@v2
         with:
+          name: manylinux2010_x86_64-wheel
+          path: ~/wheels
+      - name: download manylinux2014_aarch64-wheel
+        uses: actions/download-artifact@v2
+        with:
+          name: manylinux2014_aarch64-wheel
+          path: ~/wheels
+      - name: download manylinux2014_ppc64le-wheel
+        uses: actions/download-artifact@v2
+        with:
+          name: manylinux2014_ppc64le-wheel
+          path: ~/wheels
+      - name: download macosx_10_9_x86_64-wheel
+        uses: actions/download-artifact@v2
+        with:
+          name: macosx_10_9_x86_64-wheel
+          path: ~/wheels
+      - name: download windows_x86_64-wheel
+        uses: actions/download-artifact@v2
+        with:
+          name: windows_x86_64-wheel
           path: ~/wheels
       - name: deploy if appropriate
         run: .github/workflows/deploy.sh
