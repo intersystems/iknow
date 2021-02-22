@@ -155,7 +155,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py osx
+        run: /usr/bin/python3 $GITHUB_WORKSPACE/.github/workflows/update_python.py osx
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
