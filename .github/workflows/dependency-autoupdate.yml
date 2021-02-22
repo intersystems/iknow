@@ -17,6 +17,11 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+    inputs:
+      BUILD_PULL_REQUEST:
+        description: whether to build pull requests created by this workflow (1=yes, 0=no)
+        required: true
+        default: 1
 
 jobs:
   autoupdate-ICU:
@@ -26,6 +31,12 @@ jobs:
         uses: actions/checkout@v2
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_icu.py ${{ secrets.GITHUB_TOKEN }}
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -34,7 +45,7 @@ jobs:
           commit-message: "[autoupdate-ICU] update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
           branch: autoupdate-ICU
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update ICU from \"${{ env.ICU_NAME_OLD }}\" to \"${{ env.ICU_NAME_LATEST }}\""
           body: |-
             As of ${{ env.ICU_PUBLISHED_AT }}, a new version of ICU has been released.
@@ -54,6 +65,12 @@ jobs:
         uses: actions/checkout@v2
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -62,7 +79,7 @@ jobs:
           commit-message: "[autoupdate-buildcache] update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
           branch: autoupdate-buildcache
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
           body: |-
             As of ${{ env.BUILDCACHE_PUBLISHED_AT }}, a new version of buildcache has been released.
@@ -78,6 +95,12 @@ jobs:
         uses: actions/checkout@v2
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_cython.py
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -86,7 +109,7 @@ jobs:
           commit-message: "[autoupdate-cython] update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
           branch: autoupdate-cython
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Cython from ${{ env.CYTHON_VERSION_OLD }} to ${{ env.CYTHON_VERSION_LATEST }}"
           body: |-
             A new version of Cython is available.
@@ -104,6 +127,12 @@ jobs:
         run: pip3 install --user requests
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_manylinux.py
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -112,7 +141,7 @@ jobs:
           commit-message: "[autoupdate-manylinux] update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-manylinux
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
           body: |-
             A new manylinux image is available.
@@ -130,6 +159,12 @@ jobs:
         uses: actions/checkout@v2
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_python.py win64
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -138,7 +173,7 @@ jobs:
           commit-message: "[autoupdate-python-windows] update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-python-windows
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Python for Windows: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           body: |-
             A new version of Python for Windows is available.
@@ -156,6 +191,12 @@ jobs:
         uses: actions/checkout@v2
       - name: search for update
         run: /usr/bin/python3 $GITHUB_WORKSPACE/.github/workflows/update_python.py osx
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
         with:
@@ -164,7 +205,7 @@ jobs:
           commit-message: "[autoupdate-python-osx] update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           branch: autoupdate-python-osx
           delete-branch: true
-          token: ${{ secrets.ACTIONS_TOKEN }}
+          token: ${{ env.ACTIONS_TOKEN }}
           title: "[autoupdate] Update Python for Mac OS X: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
           body: |-
             A new version of Python for Mac OS X is available.
