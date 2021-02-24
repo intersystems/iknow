@@ -6,7 +6,6 @@ Usage: update_buildcache.py GITHUB_TOKEN"""
 import updatelib
 
 import json
-import re
 import urllib.request
 import sys
 
@@ -20,7 +19,7 @@ request = urllib.request.Request('https://api.github.com/repos/mbitsnbites/build
 url_data = urllib.request.urlopen(request)
 json_data = json.load(url_data)
 for asset in json_data['assets']:
-    if re.match(r'^.+-win-msvc\.zip$', asset['name']):
+    if asset['name'] == 'buildcache-windows.zip':
         download_url = asset['browser_download_url']
         break
 else:
