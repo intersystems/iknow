@@ -93,6 +93,8 @@ jobs:
     steps:
       - name: check out repository
         uses: actions/checkout@v2
+      - name: install Python packages
+        run: pip3 install --user requests beautifulsoup4
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_cython.py
       - name: allow building pull requests
@@ -114,7 +116,11 @@ jobs:
           body: |-
             A new version of Cython is available.
 
-            For details of the release, see https://cython.readthedocs.io/en/latest/src/changes.html.
+            Changelog (sourced from https://cython.readthedocs.io/en/latest/src/changes.html)
+            <blockquote>
+
+            ${{ env.CYTHON_CHANGELOG }}
+            </blockquote>
 
             *I am a bot, and this action was performed automatically.*
 
@@ -123,7 +129,7 @@ jobs:
     steps:
       - name: check out repository
         uses: actions/checkout@v2
-      - name: install requests Python package
+      - name: install Python packages
         run: pip3 install --user requests
       - name: search for update
         run: $GITHUB_WORKSPACE/.github/workflows/update_manylinux.py
