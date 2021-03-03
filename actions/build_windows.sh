@@ -3,7 +3,7 @@
 # Build Windows x86_64 wheels for Python 3.6 through Python 3.9. This script
 # must be executed with the repository root as the working directory.
 #
-# Usage: .github/workflows/build_windows.sh
+# Usage: actions/build_windows.sh
 #
 # Required Environment Variables:
 # - ICU_URL is the URL to a .zip pre-built release of ICU for Windows x86_64

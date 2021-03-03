@@ -30,7 +30,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_icu.py ${{ secrets.GITHUB_TOKEN }}
+        run: $GITHUB_WORKSPACE/actions/update_icu.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -64,7 +64,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
+        run: $GITHUB_WORKSPACE/actions/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -96,7 +96,7 @@ jobs:
       - name: install Python packages
         run: pip3 install --user requests beautifulsoup4
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_cython.py
+        run: $GITHUB_WORKSPACE/actions/update_cython.py
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -132,7 +132,7 @@ jobs:
       - name: install Python packages
         run: pip3 install --user requests
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_manylinux.py
+        run: $GITHUB_WORKSPACE/actions/update_manylinux.py
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -164,7 +164,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: $GITHUB_WORKSPACE/.github/workflows/update_python.py win64
+        run: $GITHUB_WORKSPACE/actions/update_python.py win64
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -196,7 +196,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v2
       - name: search for update
-        run: /usr/bin/python3 $GITHUB_WORKSPACE/.github/workflows/update_python.py osx
+        run: /usr/bin/python3 $GITHUB_WORKSPACE/actions/update_python.py osx
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV

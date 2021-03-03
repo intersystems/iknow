@@ -4,7 +4,7 @@
 # Mac OS X >= 10.9 x86_64. This script must be executed with the repository root
 # as the working directory.
 #
-# Usage: .github/workflows/build_osx.sh
+# Usage: actions/build_osx.sh
 #
 # Required Environment Variables:
 # - ICU_URL is the URL to a .zip source release of ICU

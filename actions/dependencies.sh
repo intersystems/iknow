@@ -1,12 +1,12 @@
 # This file is used as a central location for managing build-time dependencies.
 #
-# Usage: .github/workflows/dependencies.sh
+# Usage: actions/dependencies.sh
 
 set -euxo pipefail
 
 
 # If you edit the dependency-autoupdate section manually, you may also need to
-# change .github/workflows/updatelib.py.
+# change actions/updatelib.py.
 
 # START DEPENDENCY-AUTOUPDATE SECTION
 ICU_NAME="ICU 68.2"
