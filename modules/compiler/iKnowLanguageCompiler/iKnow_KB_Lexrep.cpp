@@ -28,6 +28,11 @@ static void ConsumeInput(string input, string curToken, vector<string>& tokens, 
 	if (char_ == '(' && !escaping) {
 		string rest = input;
 		list<string> alternatives = ParseAlternatives(rest);
+		{ // check if list contains multiples
+			set<string> distinct_set;
+			for_each(alternatives.begin(), alternatives.end(), [input,&distinct_set](string& alternative) { if (distinct_set.count(alternative)) { throw ExceptionFrom<iKnow_KB_Lexrep>("*** Fatal Error *** similar double \""+alternative+"\" in lexrep expansion list \""+input+"\""); } \
+																											else { distinct_set.insert(alternative); }});
+		}
 		for (list<string>::iterator it = alternatives.begin(); it != alternatives.end(); ++it) {
 			string case_ = *it; // Set case = $LI(alternatives, i)
 			ConsumeInput(case_ + rest, curToken, tokens);
