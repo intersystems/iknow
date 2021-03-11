@@ -234,9 +234,8 @@ def read_udct_file(file_,udct_):
 
 
 def f_compare(file1, file2, pair_report, language_par = 'xx'):   # compares 2 RAW files and writes reports (1 per file pair + 1 with a summary for all compared files)
-    compfilename = str(file1).split('\\')[-1]
-    compfilename = compfilename.split('\'')[0]
-   
+    compfilename = os.path.basename(file1.name)
+
     text1 = file1.readlines()
     text2 = file2.readlines()
     outputfile = open(pair_report, 'wb')
