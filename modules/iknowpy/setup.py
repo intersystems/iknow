@@ -4,12 +4,11 @@ The working directory must be the directory containing this script, and the
 iKnow engine must already be built before running this script.
 
 USAGE:
-python setup.py build_ext -i
+python setup.py build_ext -i [-f] [--annotate]
     Build the extension module in the ./iknowpy directory. This builds the
     Python interface component only.
-python setup.py build_ext -i -f
-    Rebuild the extension module in the ./iknowpy directory. This builds the
-    Python interface component only.
+    -f: rebuild the Python interface component
+    --annotate: create iknowpy/engine.html, which shows the Cython to C++ translation
 python setup.py install
     Build and install the module into your instance of Python.
 python setup.py install --fast
@@ -645,6 +644,14 @@ if '--user' in sys.argv and install_wheel:
     user_install = True
     sys.argv.remove('--user')
 
+# Check whether to annotate the Cython to C++ translation in an HTML file, which
+# is useful for analyzing performance.
+if '--annotate' in sys.argv:
+    annotate = True
+    sys.argv.remove('--annotate')
+else:
+    annotate = False
+
 # platform-specific settings
 if sys.platform == 'win32':
     library_dirs = ['../../kit/x64/Release/bin']
@@ -800,6 +807,7 @@ try:
                 extra_compile_args=extra_compile_args,
                 extra_link_args=extra_link_args
             )],
+            annotate=annotate,
             compiler_directives={'language_level': '3', 'binding': True}
         ),
         cmdclass={
