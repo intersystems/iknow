@@ -29,6 +29,8 @@ env:
 jobs:
   manylinux2010_x86_64:
     runs-on: ubuntu-20.04
+    outputs:
+      REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
         uses: actions/checkout@v2
@@ -57,9 +59,11 @@ jobs:
       - name: install
         run: pip3 install ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
       - name: run tests
+        id: tests
         working-directory: ${{ github.workspace }}/language_development
         run: python3 ref_testing.py
       - name: upload test results
+        if: steps.tests.outputs.REF_TESTING_PASSED == '0'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}-test
@@ -130,6 +134,8 @@ jobs:
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
     runs-on: macos-10.15
+    outputs:
+      REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
         uses: actions/checkout@v2
@@ -174,9 +180,11 @@ jobs:
       - name: install
         run: pip3 install ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
       - name: run tests
+        id: tests
         working-directory: ${{ github.workspace }}/language_development
         run: python3 ref_testing.py
       - name: upload test results
+        if: steps.tests.outputs.REF_TESTING_PASSED == '0'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}-test
@@ -188,6 +196,8 @@ jobs:
     defaults:
       run:
         shell: bash
+    outputs:
+      REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
         uses: actions/checkout@v2
@@ -233,15 +243,30 @@ jobs:
         shell: powershell
         run: pip install $(ls ${{ github.workspace }}\modules\iknowpy\wheelhouse\iknowpy-*.whl | % {$_.FullName})
       - name: run tests
+        id: tests
         working-directory: ${{ github.workspace }}/language_development
         run: python ref_testing.py
       - name: upload test results
+        if: steps.tests.outputs.REF_TESTING_PASSED == '0'
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.job }}-test
           path: |
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
+
+  test_result:
+    needs: [manylinux2010_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
+    runs-on: ubuntu-20.04
+    if: needs.manylinux2010_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
+    steps:
+      - name: create comment
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: >-
+            **Error**: Reference testing failed. See the build artifacts at
+            https://github.com/${{ github.repository}}/actions/runs/${{ github.run_id}}
+            for details.
 
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'

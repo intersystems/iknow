@@ -207,7 +207,8 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
                 write_ln(f_raw,path_attribute_raw)
 
     f_raw.close()
-    
+
+
 def read_udct_file(file_,udct_):
     f_udct = open(file_,"r",True,"utf8")
     for txt_line in f_udct:
@@ -233,7 +234,11 @@ def read_udct_file(file_,udct_):
     f_udct.close()
 
 
-def f_compare(file1, file2, pair_report, language_par = 'xx'):   # compares 2 RAW files and writes reports (1 per file pair + 1 with a summary for all compared files)
+def f_compare(file1, file2, pair_report, language_par = 'xx'):
+    """Compares 2 RAW files and writes reports (1 per file pair + 1 with a
+    summary for all compared files).
+
+    Return True if no difference was found, False if a difference was found."""
     compfilename = os.path.basename(file1.name)
 
     text1 = file1.readlines()
@@ -355,9 +360,12 @@ def f_compare(file1, file2, pair_report, language_par = 'xx'):   # compares 2 RA
         if undef_diff > 0:
             write_ln(outputfile,str(undef_diff) + ' are not further specified.')
             write_ln(report,str(undef_diff) + ' are not further specified.')
-            
-    outputfile.close()
 
+    outputfile.close()
+    return linecounter == 0
+
+
+test_passed = True
 
 # ---------------------------------------------------------------------------------------------------------
 # Process input in ../reference_materials/input/core and ..\reference_materials/input/test.
@@ -475,9 +483,10 @@ for elt in ref_core_list_for_comparison:
     comp_report = os.path.join('../reference_materials/reports/core', report_name)
     print('\nComparing ' + elt)
     if elt[0:2] =='ja':
-        f_compare(raw1, raw2, comp_report, 'ja')
+        # bitwise and avoids short-circuit evaluation
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report, 'ja')
     else:
-        f_compare(raw1, raw2, comp_report)
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report)
     raw1.close()
     raw2.close()
 
@@ -489,9 +498,9 @@ for elt in ref_test_list_for_comparison:
     comp_report = os.path.join('../reference_materials/reports/test', report_name)
     print('\nComparing ' + elt)
     if elt[0:2] == 'ja':
-        f_compare(raw1, raw2, comp_report, 'ja')
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report, 'ja')
     else:
-        f_compare(raw1, raw2, comp_report)
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report)
     raw1.close()
     raw2.close()
 
@@ -503,12 +512,15 @@ for elt in ref_udct_list_for_comparison:
     comp_report = os.path.join('../reference_materials/reports/udct_test', report_name)
     print('\nComparing ' + elt)
     if elt[0:2] == 'ja':
-        f_compare(raw1, raw2, comp_report, 'ja')
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report, 'ja')
     else:
-        f_compare(raw1, raw2, comp_report)
+        test_passed = test_passed & f_compare(raw1, raw2, comp_report)
     raw1.close()
     raw2.close()
 
 report.close()
 print('\nPlease check the overall report: ../reference_materials/reports/report.log.')
 
+if 'GITHUB_ENV' in os.environ:
+    # if we're running in a GitHub Actions workflow, output the test result
+    print(f'::set-output name=REF_TESTING_PASSED::{int(test_passed)}')
