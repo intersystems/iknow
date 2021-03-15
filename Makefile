@@ -7,10 +7,12 @@ LANGLIST = cs de en es fr ja nl pt ru sv uk
 PLATFORM = $(IKNOWPLAT)
 MODE ?= release
 
+include $(ROOT_DIR)/build/make/platforms/$(PLATFORM).mak
+
 all : engine
 
 test : enginetest
-	$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
+	$(RUNTIMELOADPATHVAR)=$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin:$(ICUDIR)/lib $(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
 
 languagecompiler : base core
 	$(MAKE) -f $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler/languagecompiler.mak
