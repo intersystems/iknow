@@ -30,10 +30,10 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
 fi
 
 
-##### Build iKnow engine #####
+##### Build iKnow engine and run C++ unit tests #####
 export IKNOWPLAT=macx64
 cd "$GITHUB_WORKSPACE"
-make -j $(sysctl -n hw.logicalcpu)
+make -j $(sysctl -n hw.logicalcpu) test
 
 
 ##### Build iknowpy wheels #####

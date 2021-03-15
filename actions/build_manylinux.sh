@@ -59,7 +59,7 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
 fi
 
 
-##### Build iKnow engine #####
+##### Build iKnow engine and run C++ unit tests #####
 cd /iknow
 
 case "$PROCESSOR" in
@@ -78,7 +78,7 @@ case "$PROCESSOR" in
     ;;
 esac
 
-make -j $(nproc)
+make -j $(nproc) test
 
 
 ##### Build iknowpy wheels #####

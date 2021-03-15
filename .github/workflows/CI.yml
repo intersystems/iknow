@@ -49,7 +49,7 @@ jobs:
           path: |
             ~/ccache
             ~/pipcache
-      - name: build
+      - name: build and run C++ unit tests
         run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2010_x86_64:$MANYLINUX2010_X86_64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
@@ -94,7 +94,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
-      - name: build
+      - name: build and run C++ unit tests
         run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
@@ -125,7 +125,7 @@ jobs:
         run:  |
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
-      - name: build
+      - name: build and run C++ unit tests
         run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
@@ -170,7 +170,7 @@ jobs:
           path: ${{ env.CCACHE_DIR }}
       - name: install dependencies
         run: actions/install_osx.sh
-      - name: build
+      - name: build and run C++ unit tests
         run: actions/build_osx.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
@@ -232,7 +232,7 @@ jobs:
             ~/python
       - name: install dependencies
         run: actions/install_windows.sh
-      - name: build
+      - name: build and run C++ unit tests
         run: actions/build_windows.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2

@@ -24,7 +24,7 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
 fi
 
 
-##### Build iKnow engine #####
+##### Build iKnow engine and run C++ unit tests #####
 cd modules
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin"
 BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
@@ -34,6 +34,7 @@ BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
     -p:TrackFileAccess=false \
     -p:CLToolExe=buildcache.exe \
     -p:CLToolPath="$BUILDCACHE_EXE_DIR"
+PATH="$ICUDIR/bin64:$PATH" ../kit/x64/Release/bin/iKnowEngineTest.exe
 
 
 ##### Build iknowpy wheels #####
