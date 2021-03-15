@@ -18,6 +18,10 @@ PROJECT = iknowenginetest
 
 OBJECTFLAGS = -D_DOUBLEBYTE -DCACHE_COM_DISABLE
 
+ifeq ($(findstring lnx, $(PLATFORM)), lnx)
+EXECUTABLEFLAGS = -Wl,-rpath-link=$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin:$(ICUDIR)/lib
+endif
+
 LIBRARIES = iknowengine iknowbase
 
 LIBRARYDIRS = $(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin
