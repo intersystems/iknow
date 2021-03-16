@@ -676,6 +676,9 @@ else:
         os.environ['CC'] = 'clang++'  # workaround to force setuptools to invoke C++ compiler
         os.environ['CXX'] = 'clang++'
         extra_compile_args = ['-std=c++11']
+        if sys.version_info[:2] == (3, 8):
+            # workaround for https://github.com/cython/cython/issues/3474
+            extra_compile_args.append('-Wno-deprecated-declarations')
         extra_link_args = ['-headerpad_max_install_names']
         if install_wheel:
             # set wheel target platform to that of the build platform
