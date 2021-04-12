@@ -425,6 +425,19 @@ void UserDictionary::addSEndCondition(const std::string& literal, bool b_end)
 	m_user_data.addSEndCondition(literal, b_end);
 }
 
+// Add Certainty level.
+int UserDictionary::addCertaintyLevel(const std::string& literal, int level)
+{
+	if (level < 0 || level>9)
+		return iKnowEngine::iknow_certainty_level_out_of_range;
+
+	string normalized = iKnowEngine::NormalizeText(literal, "en"); // normalize the literal
+	string meta = string("c=0");
+	meta[2] = (char) ((int)'0'+level);
+	m_user_data.addLexrepLabel(normalized, "UDCertainty", meta); // add to the udct lexreps
+	return 0;
+}
+
 // Shortcut for known UD labels
 void UserDictionary::addConceptTerm(const std::string& literal) {
 	addLabel(literal, "UDConcept");

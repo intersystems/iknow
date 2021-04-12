@@ -78,7 +78,7 @@ public:
 	RawListToKb(RawAllocator& allocator, LabelIndexMap& map, size_t& max_lexrep_size, size_t& max_token_size) : WithAllocator(allocator), WithLabelMap(map), max_lexrep_size_(max_lexrep_size), max_token_size_(max_token_size) {}
 
 	KbLexrep operator()(iKnow_KB_Lexrep kb_lexrep) {
-		KbLexrep lexrep(GetAllocator(), GetLabelMap(), kb_lexrep.Token, kb_lexrep.Labels);
+		KbLexrep lexrep(GetAllocator(), GetLabelMap(), kb_lexrep.Token, kb_lexrep.Labels, kb_lexrep.Meta);
 		size_t size = lexrep.TokenCount();
 		if (size > max_lexrep_size_) max_lexrep_size_ = size;
 		// for Japanese, we need to calculate the maximum token size, this is an unnecessary step for non-Asian languages, but it's only done while loading, so no runtime performance while indexing...
@@ -515,7 +515,8 @@ UserKnowledgeBase::UserKnowledgeBase() : m_IsDirty(true)
 	";1,$;UDNonRelevant;typeNonRelevant;;0;",
 	";1,$;UDUnit;typeAttribute;;0;",
 	";1,$;UDNumber;typeAttribute;;0;",
-	";1,$;UDTime;typeAttribute;;0;"
+	";1,$;UDTime;typeAttribute;;0;",
+	";1,$;UDCertainty;typeAttribute;;0;"
 	};
 
 	string isDefault = "";
@@ -525,7 +526,7 @@ UserKnowledgeBase::UserKnowledgeBase() : m_IsDirty(true)
 	}
 }
 
-int UserKnowledgeBase::addLexrepLabel(const std::string& token, const std::string& labels) {
+int UserKnowledgeBase::addLexrepLabel(const std::string& token, const std::string& labels, const std::string meta) {
 	size_t startIndex = 0;
 	size_t  endIndex = 0;
 	while ((endIndex = labels.find(';', startIndex)) < labels.size())
@@ -541,7 +542,11 @@ int UserKnowledgeBase::addLexrepLabel(const std::string& token, const std::strin
 		if (!IsValidLabel(label))
 			return -1;
 	}
-	kb_lexreps.push_back(iKnow_KB_Lexrep(token, labels));
+	if (meta.empty())
+		kb_lexreps.push_back(iKnow_KB_Lexrep(token, labels));
+	else
+		kb_lexreps.push_back(iKnow_KB_Lexrep(token, meta, labels));
+
 	m_IsDirty = true; // need recompilation
 	return 0;
 }

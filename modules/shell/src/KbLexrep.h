@@ -22,12 +22,13 @@ namespace iknow {
     class KbLexrep {
     public:
       template<typename MapT>
-      KbLexrep(RawAllocator& allocator, const MapT& label_map, const std::string& token, const std::string& labels) : 
-	token_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(token))) {
-	IndexPattern label_string;
-	AddIndexForLabelNameToString<MapT> adder(label_map, label_string);
-	iknow::base::IkStringAlg::Tokenize(labels, ';', adder);
-	labels_ = allocator.InsertString(label_string);
+      KbLexrep(RawAllocator& allocator, const MapT& label_map, const std::string& token, const std::string& labels, const std::string meta=std::string()) : 
+	    token_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(token))),
+        meta_(allocator.InsertString(iknow::base::IkStringEncoding::UTF8ToBase(meta))) {
+	    IndexPattern label_string;
+	    AddIndexForLabelNameToString<MapT> adder(label_map, label_string);
+	    iknow::base::IkStringAlg::Tokenize(labels, ';', adder);
+	    labels_ = allocator.InsertString(label_string);
       }
       size_t TokenCount() {
 	//It's painful how out of date the standard Rogue Wave STL implementation
@@ -41,16 +42,22 @@ namespace iknow {
 #endif
       }
       iknow::base::String Token() const {
-	return iknow::base::String(*token_);
+        return iknow::base::String(*token_);
       }
       const CountedBaseString* PointerToToken() const {
-	return token_;
+        return token_;
+      }
+      iknow::base::String Meta() const {
+        return iknow::base::String(*meta_);
+      }
+      const CountedBaseString* PointerToMeta() const {
+        return meta_;
       }
       IndexPattern Labels() const {
-	return IndexPattern(*labels_);
+	    return IndexPattern(*labels_);
       }
       const CountedIndexString* PointerToLabels() const {
-	return labels_;
+	    return labels_;
       }
       size_t maxTokenSize() const {
         struct token_cnt_symbols cnt_symbols;
@@ -61,6 +68,7 @@ namespace iknow {
 
     private:
       OffsetPtr<const CountedBaseString> token_;
+      OffsetPtr<const CountedBaseString> meta_;
       OffsetPtr<const CountedIndexString> labels_;
     };
   }

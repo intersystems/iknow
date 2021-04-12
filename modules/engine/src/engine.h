@@ -201,6 +201,8 @@ public:
 	void addPositiveSentimentTerm(const std::string& literal); // tag literal as a positive sentiment
 	void addNegativeSentimentTerm(const std::string& literal); // tag literal as a negative sentiment
 
+	int addCertaintyLevel(const std::string& literal, int level = 0); // add a certainty level
+
 private:
 	friend class iKnowEngine;
 	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
@@ -211,7 +213,8 @@ class IKNOW_API iKnowEngine
 public:
 	enum errcodes {
 		iknow_language_not_supported = -1, // unsupported language
-		iknow_unknown_label = -2	// udct addLabel : label does not exist
+		iknow_unknown_label = -2,	// udct addLabel : label does not exist
+		iknow_certainty_level_out_of_range = -3 // certainty level must be in the 0-9 range
 	};
 
 	// returns set of supported languages

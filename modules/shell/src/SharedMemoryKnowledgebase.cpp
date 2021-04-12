@@ -135,6 +135,7 @@ IkLexrep SharedMemoryKnowledgebase::NextLexrep(Lexreps::iterator& current, Lexre
     //TODO: simplify logic and remove duplication
     if (match_size == 1) {  // modify copy of existing lexrep for speed, this is a common case.
         IkLexrep output = *current++;
+        output.SetMetaData(IkStringEncoding::BaseToUTF8(kb_lexrep->Meta()).c_str()); // !new, set pointer to metatext
 
         if (!bAddOnlyAttributes) output.ClearAllLabels(); // don't clear labels if only attributes are added
         for (const FastLabelSet::Index* i = kb_lexrep->PointerToLabels()->begin(); i != kb_lexrep->PointerToLabels()->end(); ++i) {
@@ -162,6 +163,7 @@ IkLexrep SharedMemoryKnowledgebase::NextLexrep(Lexreps::iterator& current, Lexre
     if (label_segment_count == 1) {
         if (!bAddOnlyAttributes) { // normal case
             IkLexrep output = JoinLexreps(current, current + match_size, is_ideographic ? iknow::base::String() : iknow::base::SpaceString());
+            output.SetMetaData(IkStringEncoding::BaseToUTF8(kb_lexrep->Meta()).c_str()); // !new, set pointer to metatext
             for (const FastLabelSet::Index* i = kb_lexrep->PointerToLabels()->begin(); i != kb_lexrep->PointerToLabels()->end(); ++i) { // add new labels
                 output.AddLabelIndex(*i);
             }

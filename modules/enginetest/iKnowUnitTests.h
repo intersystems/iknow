@@ -24,5 +24,6 @@ namespace testing {
 		void Issue64(const char*); // Issue#64 : https://github.com/intersystems/iknow/issues/64
 		void Issue70(const char*); // Issue#70 : https://github.com/intersystems/iknow/issues/70
 		void DP402269(const char*); // https://usjira.iscinternal.com/browse/DP-402269
+		void Issue86(const char*); // UDCertainty test with certainty level
 	};
 }

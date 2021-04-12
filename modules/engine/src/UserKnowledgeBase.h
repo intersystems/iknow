@@ -57,7 +57,7 @@ namespace iknow {
 				m_IsDirty = true;
 			}
 			// assign linguistic labels to a lexical representation.
-			int addLexrepLabel(const std::string& token, const std::string& labels);
+			int addLexrepLabel(const std::string& token, const std::string& labels, const std::string meta = std::string());
 
 			// assign a sentence end condition to overrule the heuristics and language model acronyms.
 			void addSEndCondition(const std::string& literal, const bool b_end);

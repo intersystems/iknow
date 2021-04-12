@@ -33,7 +33,8 @@ vector<string> special_labels = { // language independent labels
 	";1,$;UDNonRelevant;typeNonRelevant;;0;",
 	";1,$;UDUnit;typeAttribute;;0;",
 	";1,$;UDNumber;typeAttribute;;0;",
-	";1,$;UDTime;typeAttribute;;0;"
+	";1,$;UDTime;typeAttribute;;0;",
+	";1,$;UDCertainty;typeAttribute;;0;"
 };
 
 void iKnow_KB_Label::LoadSpecialLabels(CSV_DataGenerator& kb)
