@@ -25,7 +25,7 @@ def count_matches(traces, match_key, target_count = -1, debug = False) -> int:
 
 # TODO: grab from command line args
 debug = False
-test_sentence = "some text in Fr. w/o one concept and crap one relation that's great and awfull, magic number 3 Hg from future"
+test_sentence = "some text in Fr. w/o one concept and crap one relation that's great and awfull, maybee magic number 3 Hg from future"
 
 print("\nBuilding User Dictionary using API...")
 engine = iknowpy.iKnowEngine()
@@ -44,13 +44,14 @@ user_dictionary.add_negative_sentiment("awfull")
 user_dictionary.add_unit("Hg")
 user_dictionary.add_number("magic number")
 user_dictionary.add_time("future")
+user_dictionary.add_certainty_level("maybee",2)
 
-if len(user_dictionary.entries) != 11:
+if len(user_dictionary.entries) != 12:
     print("ERROR: UD not fully loaded!")
 
 ret = engine.load_user_dictionary(user_dictionary)
 engine.index(test_sentence, "en", True) # generate Traces
-count_matches(engine.m_traces, 'UserDictionaryMatch', 11, debug)
+count_matches(engine.m_traces, 'UserDictionaryMatch', 12, debug)
 
 print("\nUnloading User Dictionary...")
 engine.unload_user_dictionary()
@@ -90,9 +91,13 @@ def read_udct_file(file_,udct_):
             lexrep, action = txt_list[0], txt_list[1]
             if (lexrep[0] == '@'):
                 literal = lexrep[1:]
-                ret = udct_.add_label(literal,action)
-                if (ret == -2):
-                    print('label ' + action + ' not valid !')
+                if action == "UDCertainty":
+                    level = txt_list[2]
+                    udct_.add_certainty_level(literal,int(level[2]))
+                else:
+                    ret = udct_.add_label(literal,action)
+                    if (ret == -2):
+                        print('label ' + action + ' not valid !')
             else: # Set end = $SELECT(command = "\end":1,command = "\noend":0,1:..Err())
                 if action == "\\end":
                     udct_.add_sent_end_condition(lexrep, True)

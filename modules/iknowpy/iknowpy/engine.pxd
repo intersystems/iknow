@@ -89,6 +89,8 @@ cdef extern from "../../engine/src/engine.h" nogil:
 		void addNumberTerm(const string& literal) except +
 		void addTimeTerm(const string& literal) except +
 
+		int addCertaintyLevel(const string& literal, int level) except +
+
 
 cdef extern from "../../engine/src/engine.h" nogil:
 	cdef cppclass CPPiKnowEngine "iKnowEngine":

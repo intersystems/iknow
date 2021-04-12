@@ -93,6 +93,13 @@ cdef class UserDictionary(object):
 		else:
 			raise ValueError(f'User Dictionary Label {UdctLabel!r} is unknown.')
 
+	def add_certainty_level(self, str literal: typing.Text, int level) -> None:
+		"""Specify a token certainty level"""
+		if self.user_dictionary.addCertaintyLevel(literal, level) == 0:
+			self._entries.append(Entry(literal, "UDCertainty"))
+		else:
+			raise ValueError(f"Certainty value {level!r} out of range")
+
 	def add_sent_end_condition(self, str literal: typing.Text, cpp_bool bSentenceEnd: bool = True) -> None:
 		"""Add a sentence end condition."""
 		self.user_dictionary.addSEndCondition(literal, bSentenceEnd)
