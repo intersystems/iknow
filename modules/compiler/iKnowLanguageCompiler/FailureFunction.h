@@ -20,7 +20,7 @@ namespace iknow {
 			FailureGlobal_Type FailureGlobal; // Property FailureGlobal As %String [ MultiDimensional ];
 			int MaxState; // Property MaxState As %Integer;
 
-			static FailureFunction* Create(GotoFunction *gotoFunc, OutputFunction *outputFunc); // ClassMethod Create(gotoFunc As GotoFunction, outputFunc As OutputFunction) As FailureFunction
+			static FailureFunction* Create(GotoFunction *gotoFunc, OutputFunction *outputFunc, bool is_ideographical); // ClassMethod Create(gotoFunc As GotoFunction, outputFunc As OutputFunction) As FailureFunction
 
 			void Set(int state, int nextState) { // Method Set(state As %Integer, nextState As %Integer)
 				FailureGlobal.insert(std::make_pair(state, nextState)); // Set ..FailureGlobal(state) = nextState

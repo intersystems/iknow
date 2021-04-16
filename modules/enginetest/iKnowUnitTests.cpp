@@ -55,7 +55,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue70(pError);
 		pError = "DP-402269 : https://usjira.iscinternal.com/browse/DP-402269";
 		test_collection.DP402269(pError);
-
+		pError = "Issue104 : https://github.com/intersystems/iknow/issues/104";
+		test_collection.Issue104(pError);
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -66,6 +67,51 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+
+/// <summary>
+/// After adding some PathRelevant entities and simple path expansion, I’ve compared the outputs between IRIS NLP and iknowpy. I’ve found one difference which seems to result from different ways that IRIS & iknowpy identiy lexreps.
+/*
+Sentence: また、大川小のある釜谷地区では住民と在勤者、来訪者計232人のうち、181人が犠牲となったとの調査結果を報告。
+
+Lexrep identification for the part "232人のうち、181人が" in IRIS :
+Lexrep("232") = Numeric
+Lexrep("人") = JPCon + JPCount + JPRule3437 + Lit_人
+Lexrep("のうち") = JPParticlePREPO
+Lexrep("、") = JPComma + Lit_、
+Lexrep("181") = Numeric
+Lexrep("人") = JPCon + JPCount + JPRule3437 + Lit_人
+Lexrep("が") = JPga + Lit_が
+
+Lexrep identification for the same part in iknowpy :
+LexrepIdentified:232 : Numeric;
+LexrepIdentified:人:JPCon; JPRule3437; JPCount; Lit_人;
+LexrepIdentified:のうち:JPParticlePREPO;
+LexrepIdentified:、:JPComma; Lit_、;
+LexrepIdentified:181人 : JPCon; JPNumber; Lit_1人;
+LexrepIdentified:が:JPga; Lit_が;
+
+As can be seen, “181人” is identified differently : IRIS identifies the whole chunk of numbers “181” first, whereas iknowpy identifies the lexrep “1人” first.This difference results in different indexing results for the character "が", now that it can sometimes be PathRelevant rather than NonRelevant.With the general left - to - right principle, the IRIS way should be kept.
+*/
+/// </summary>
+/// <param name="pMessage"></param>
+/*
++[125]	"LexrepIdentified:<lexrep id=29 type=Concept value=\"232\" index=\"232\" labels=\"Numeric;\" />;"	std::string
++[126]	"LexrepIdentified:<lexrep id=30 type=Unknown value=\"äºº\" index=\"äºº\" labels=\"JPCon;JPRule3437;JPCount;Lit_äºº;\" />;"	std::string
++[127]	"LexrepIdentified:<lexrep id=61 type=Unknown value=\"ã®ã†ã¡\" index=\"ã®ã†ã¡\" labels=\"JPParticlePREPO;\" />;"	std::string
++[128]	"LexrepIdentified:<lexrep id=34 type=Unknown value=\"ã€\" index=\"ã€\" labels=\"JPComma;Lit_ã€;\" />;"	std::string
++[129]	"LexrepIdentified:<lexrep id=35 type=Concept value=\"181\" index=\"181\" labels=\"Numeric;\" />;"	std::string
+*/
+void iKnowUnitTests::Issue104(const char* pMessage)
+{
+	iKnowEngine engine;
+	String text_source = IkStringEncoding::UTF8ToBase(u8"また、大川小のある釜谷地区では住民と在勤者、来訪者計232人のうち、181人が犠牲となったとの調査結果を報告。");
+
+	engine.index(text_source, "ja", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepIdentified") != string::npos && it->find("value=\"181\"") != string::npos) return;
+	}
+	throw std::runtime_error("Issue104 : wrong lookup for Japanese numericals !" + string(pMessage));
 }
 
 void iKnowUnitTests::DP402269(const char* pMessage)
