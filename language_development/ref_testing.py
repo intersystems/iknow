@@ -220,9 +220,13 @@ def read_udct_file(file_,udct_):
             lexrep, action = txt_list[0], txt_list[1]
             if (lexrep[0] == '@'):
                 literal = lexrep[1:]
-                ret = udct_.add_label(literal,action)
-                if (ret == -2):
-                    print('label ' + action + ' not valid !')
+                if action == "UDCertainty":
+                    level = txt_list[2]
+                    udct_.add_certainty_level(literal,int(level[2]))
+                else:
+                    ret = udct_.add_label(literal,action)
+                    if (ret == -2):
+                        print('label ' + action + ' not valid !')
             else: # Set end = $SELECT(command = "\end":1,command = "\noend":0,1:..Err())
                 if action == "\\end":
                     udct_.add_sent_end_condition(lexrep, True)
