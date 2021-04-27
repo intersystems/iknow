@@ -62,6 +62,7 @@ namespace iknowdata { // to bundle all generated data
 		DateTime = IKATTTIME,
 		PositiveSentiment = IKATTSENPOSITIVE,
 		NegativeSentiment = IKATTSENNEGATIVE,
+		EntityVector = IKATTENTITYVECTOR,
 		Frequency = IKATTFREQ,
 		Duration = IKATTDURATION,
 		Measurement = IKATTMEASURE,
@@ -73,6 +74,7 @@ namespace iknowdata { // to bundle all generated data
 		case Attribute::DateTime:			return "date_time";
 		case Attribute::PositiveSentiment:	return "positive_sentiment";
 		case Attribute::NegativeSentiment:	return "negative_sentiment";
+		case Attribute::EntityVector:		return "entity_vector";
 		case Attribute::Frequency:			return "frequency";
 		case Attribute::Duration:			return "duration";
 		case Attribute::Measurement:		return "measurement";
@@ -107,7 +109,10 @@ namespace iknowdata { // to bundle all generated data
 		Sent_Attribute(Attribute att_type,
 			size_t start, size_t stop, 
 			std::string& marker
-		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker) {}
+		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker), entity_ref(0) {}
+		
+		Sent_Attribute(Attribute att_type) : // Entity Vector attributes, no markers, no corresponding offsets
+			type_(att_type), offset_start_(NULL), offset_stop_(NULL), entity_ref(0) {}
 
 		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
@@ -115,6 +120,7 @@ namespace iknowdata { // to bundle all generated data
 		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
 
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
+		std::vector<Entity_Ref> entity_vector; // EntityVector, only used in Japanese
 	};
 
 	/*

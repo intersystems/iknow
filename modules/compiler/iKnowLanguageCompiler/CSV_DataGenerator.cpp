@@ -225,19 +225,6 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::
 	labelIndexTable["-"] = -1; //Set table("-") = -1
 }
 
-void CSV_DataGenerator::writeIRISlexreps(string lexreps_file)
-{
-	std::ofstream os(lexreps_file); // lexreps.csv file for IRIS
-	if (os.is_open()) {
-		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
-
-		for (auto it_lexrep = kb_lexreps.begin(); it_lexrep != kb_lexreps.end(); ++it_lexrep) {
-			os << ";" << it_lexrep->Meta << ";" << it_lexrep->Token << ";;" << it_lexrep->Labels << endl;
-		}
-		os.close();
-	}
-}
-
 /// Returns the pattern of a given regex index
 String CSV_DataGenerator::GetRegexPattern(String regexName) // Method GetRegexPattern(regexName As %String) As %String
 {
@@ -250,6 +237,19 @@ String CSV_DataGenerator::GetRegexPattern(String regexName) // Method GetRegexPa
 		}
 	}
 	return String();
+}
+
+void CSV_DataGenerator::writeIRISlexreps(string lexreps_file)
+{
+	std::ofstream os(lexreps_file); // lexreps.csv file for IRIS
+	if (os.is_open()) {
+		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
+
+		for (auto it_lexrep = kb_lexreps.begin(); it_lexrep != kb_lexreps.end(); ++it_lexrep) {
+			os << ";" << it_lexrep->Meta << ";" << it_lexrep->Token << ";;" << it_lexrep->Labels << endl;
+		}
+		os.close();
+	}
 }
 
 static const size_t kRawSize = 48000000;
@@ -818,7 +818,7 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	metadataTable->AddValue(hasRegex); // do metadataTable.AddValue(hasRegex)
 
 	cout << "Building failure and second output table..." << endl;
-	iknow::AHO::FailureFunction *failureFunc = iknow::AHO::FailureFunction::Create(gotoFunc, outputFunc); // Set failureFunc = ##class(FailureFunction).Create(gotoFunc, outputFunc)
+	iknow::AHO::FailureFunction *failureFunc = iknow::AHO::FailureFunction::Create(gotoFunc, outputFunc, isIdeographic); // Set failureFunc = ##class(FailureFunction).Create(gotoFunc, outputFunc)
 	// Set sc = ##class(%File).CreateDirectoryChain(outputDir)
 	// If 'sc Throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 

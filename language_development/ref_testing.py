@@ -125,6 +125,19 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
             for sent_attribute in sent['sent_attributes']:
                 # print(sent_attribute)
                 attr_name = sent_attribute['type'].lower()
+                
+                # issue #33 - for Japanese - Entity Vector emitted as an attribute ' entity_vector'
+                if attr_name == 'entityvector':
+                    entity_vec_raw = '<attr type=\"entity_vector\"'
+                    for sent_index in sent_attribute['entity_vector']:
+                        entity = sent['entities'][sent_index]
+                        lit_text = text[entity['offset_start']:entity['offset_stop']]
+                        entity_vec_raw = entity_vec_raw + ' \"' + lit_text + '\"'
+                    entity_vec_raw = entity_vec_raw + '>'
+                    write_ln(f_raw, entity_vec_raw)
+                    continue
+                
+                
                 attr_entity_literal = text[sent['entities'][sent_attribute['entity_ref']]['offset_start']:sent['entities'][sent_attribute['entity_ref']]['offset_stop']].replace("\n","") # corresponding entity index literal value, remove newlines
 
                 if (attr_name == 'datetime'):
@@ -149,17 +162,6 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
                 write_ln(f_raw, sent_attribute_raw)
 
         #
-        # if path not empty and language is Japanese, emit as attribute : "entity_vector" 
-        #
-        if (len(sent['path']) and language_par=='ja'):
-            # <attr type="time" literal="経済学部2年のセンター利用入試" token="2年">
-            entity_vec_raw = '<attr type=\"entity_vector\"'
-            for sent_index in sent['path']:
-                entity = sent['entities'][sent_index]
-                lit_text = text[entity['offset_start']:entity['offset_stop']]
-                entity_vec_raw = entity_vec_raw + ' \"' + lit_text + '\"'
-            entity_vec_raw = entity_vec_raw + '>'
-            write_ln(f_raw, entity_vec_raw)
         #
         # write entities
         #
@@ -173,7 +175,7 @@ def genRAW_for_reference_testing(txt_file, in_path_par, out_path_par):   # gener
         #
         # write path
         #
-        if (len(sent['path']) and language_par != 'ja'):
+        if (len(sent['path'])):
             path_raw = 'P\x01'
             for sent_index in sent['path']:
                 path_raw = path_raw + sent['entities'][sent_index]['index'] + ' '

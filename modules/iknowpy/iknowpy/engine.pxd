@@ -12,6 +12,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		DateTime = 2
 		PositiveSentiment = 5
 		NegativeSentiment = 6
+		EntityVector = 7
 		Frequency = 9
 		Duration = 10
 		Measurement = 11
@@ -53,6 +54,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		string marker "marker_"
 		string value "value_", unit "unit_", value2 "value2_", unit2 "unit2_"
 		Entity_Ref entity_ref
+		Path entity_vector
 
 	struct Path_Attribute:
 		Attribute type "type"
