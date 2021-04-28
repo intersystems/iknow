@@ -1,4 +1,4 @@
-#include "iKnowUnitTests.h"
+﻿#include "iKnowUnitTests.h"
 #include "engine.h"
 
 #include <cctype>
@@ -55,8 +55,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue70(pError);
 		pError = "DP-402269 : https://usjira.iscinternal.com/browse/DP-402269";
 		test_collection.DP402269(pError);
-		//pError = "Issue86 : https://github.com/intersystems/iknow/issues/86";
-		//test_collection.Issue86(pError);
+		pError = "Issue86 : https://github.com/intersystems/iknow/issues/86";
+		test_collection.Issue86(pError);
 		pError = "Issue104 : https://github.com/intersystems/iknow/issues/104";
 		test_collection.Issue104(pError);
 	}
@@ -114,6 +114,50 @@ void iKnowUnitTests::Issue104(const char* pMessage)
 		if (it->find("LexrepIdentified") != string::npos && it->find("value=\"181\"") != string::npos) return;
 	}
 	throw std::runtime_error("Issue104 : wrong lookup for Japanese numericals !" + string(pMessage));
+}
+
+void iKnowUnitTests::Issue86(const char* pMessage) { // UDCertainty test with certainty level
+	string text_source_utf8 = u8"he suggests that maybe we will be certain.";
+	String text_source(IkStringEncoding::UTF8ToBase(text_source_utf8));
+
+	iKnowEngine engine;
+	UserDictionary user_dictionary;
+
+	if (iKnowEngine::iknow_certainty_level_out_of_range == user_dictionary.addCertaintyLevel("suggests", 4)) // new: certaintly level
+		throw std::runtime_error(string("Certainty Level out of range"));
+	if (iKnowEngine::iknow_certainty_level_out_of_range == user_dictionary.addCertaintyLevel("maybe", 2)) // new: certaintly level
+		throw std::runtime_error(string("Certainty Level out of range"));
+	if (iKnowEngine::iknow_certainty_level_out_of_range == user_dictionary.addCertaintyLevel("certain", 9)) // new: certaintly level
+		throw std::runtime_error(string("Certainty Level out of range"));
+
+	engine.loadUserDictionary(user_dictionary);
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	if (engine.m_index.sentences.size() > 1) // "Fr." must not split the sentence
+		throw std::runtime_error(string(pMessage));
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		// cout << *it << endl;
+		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("suggests") != string::npos) {
+				if (trace_userdct.find("UDCertainty") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("maybe") != string::npos) {
+				if (trace_userdct.find("UDCertainty") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("certain") != string::npos) {
+				if (trace_userdct.find("UDCertainty") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+	engine.unloadUserDictionary();
 }
 
 void iKnowUnitTests::DP402269(const char* pMessage)
@@ -470,7 +514,8 @@ void iKnowUnitTests::test7(const char* pMessage) // https://github.com/intersyst
 {
 	iKnowEngine engine;
 
-	String text_source = IkStringEncoding::UTF8ToBase(u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。"); //  = > All Hiragana
+	string text_source_utf8 = u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。";
+	String text_source = IkStringEncoding::UTF8ToBase(text_source_utf8); //  = > All Hiragana
 	engine.index(text_source, "ja", true);
 	bool bFurigana = false;
 	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
