@@ -10,22 +10,17 @@ namespace iknow {
 		class iKnow_KB_Label
 		{
 		public:
-			// ClassMethod ImportFromStream(stream As %CharacterStream, kb As Knowledgebase)
 			static bool ImportFromCSV(std::string label_csv, CSV_DataGenerator& kb);
 
+			iKnow_KB_Label(std::string name, std::string type) :
+				Name(name), Type(type)
+			{}
+
 			std::string Name; // Name As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
-
 			std::string Type; // Type As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
-
 			std::string Attributes; // Attributes As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE");
 
-			// Property Knowledgebase As Knowledgebase[Required];
-
 			std::string PhaseList; // Property PhaseList As %String;
-
-			// Index KnowledgebaseIndex On Knowledgebase;
-
-			// Index NameIndex On(Knowledgebase, Name)[Unique];
 
 		private:
 			static void LoadSpecialLabels(CSV_DataGenerator& kb);

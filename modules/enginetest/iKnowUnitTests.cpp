@@ -59,6 +59,9 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue86(pError);
 		pError = "Issue104 : https://github.com/intersystems/iknow/issues/104";
 		test_collection.Issue104(pError);
+		pError = "Normalizer test";
+		test_collection.Benjamin1(pError);
+
 	}
 	catch (std::exception& e) {
 		cerr << "*** Unit Test Failure ***" << endl;
@@ -69,6 +72,14 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+
+void iKnowUnitTests::Benjamin1(const char* pMessage) {
+	string text_source_utf8 = u8"Risque d'exploitation";
+
+	string normalized = iKnowEngine::NormalizeText(text_source_utf8, "fr");
+	if (normalized != u8"risque d' exploitation")
+		throw runtime_error("Benjamin1 : Wrong normalization for French.");
 }
 
 /// <summary>

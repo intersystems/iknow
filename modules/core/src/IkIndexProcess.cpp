@@ -168,7 +168,6 @@ iknow::base::String IkIndexProcess::NormalizeText(const iknow::base::String& inp
 	  output = buffer;
   }
   else { // Alphanumerical version
-	  //TODO: duplicative with CProcess code.
 	  if (ud) {
 		  ud->FilterInput(buffer);
 	  }
@@ -177,23 +176,25 @@ iknow::base::String IkIndexProcess::NormalizeText(const iknow::base::String& inp
 	  IkStringAlg::Normalize(buffer, bLowerCase, bStripPunct);
 	  //TODO: duplicative with FindNextSentence
 
-	  bool prev_was_space = false;
 	  String current_word; current_word.reserve(16);
 	  for (String::iterator i = buffer.begin(); i != buffer.end(); ++i) {
 		  if (!u_isprint(*i)) continue; // skip non printables.
 		  bool cur_is_space = u_isblank(*i) > 0;
 		  if (cur_is_space && !current_word.empty()) {
 			  FilterAll(current_word, kb);
+			  if (!output.empty()) // space separator necessary, FilterAll will trim all spaces
+				  output += SpaceString();
 			  output += current_word;
 			  current_word.clear();
 		  }
-		  if (!cur_is_space || !prev_was_space) {
-			  current_word += *i;
+		  else {
+			  if (!cur_is_space) current_word += *i;
 		  }
-		  prev_was_space = cur_is_space;
 	  }
 	  if (!current_word.empty()) {
 		  FilterAll(current_word, kb);
+		  if (!output.empty()) // space separator necessary, FilterAll will trim all spaces
+			  output += SpaceString();
 		  output += current_word;
 	  }
 	  else {

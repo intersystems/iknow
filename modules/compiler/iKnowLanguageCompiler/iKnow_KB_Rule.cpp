@@ -58,7 +58,6 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 				str_subsitute(last_line, quot2, "\"");
 
 				rule_rewrite_indexes.insert((int)vec_rules_csv.size() - 1); // keep the index
-
 				row_rule = kb.split_row(last_line);
 			}
 			else {
@@ -67,29 +66,8 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			}
 			rule.Phase = row_rule[2 - 1]; // Set phase = $PIECE(line, ";", 2)	// Set rule.Phase = phase
 			rule.InputPattern = rule.TransformRulePattern(row_rule[3 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.InputPattern = ..TransformRulePattern($PIECE(line, ";", 3), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
-			// rule.OutputPattern = rule.TransformRulePattern(row_rule[4 - 1], rule.Phase, kb, newLabels, newLabelsIndex, SBeginPhases, SEndPhases); // Set rule.OutputPattern = ..TransformRulePattern($PIECE(line, ";", 4), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
 			rule.OutputPattern = row_rule[4 - 1]; // No need for transforming output patterns.
 
-			/*
-			If($$$IKISDEVBUILD) { // read extra data fields for linguistic tracing
-			Set rule.IdCSV = $PIECE(line, ";", 1)
-			Set rule.Comment = $PIECE(line, ";", 5) // a little confusion, comments can be on position 5 or 6
-			Set rule.Comment = rule.Comment_$PIECE(line, ";", 6)
-			}
-			//The precedence value used to be taken from the 5th field of the csv but
-			//it's simpler and more convenient to just take rules in order, adding suitable
-			//high order bits for phase. Phase and precedence are combined in a single
-			//integer field to make iteration easier from the C++ interface, which likes
-			//using integer keys.
-			Set:rule.Phase = "$" rule.Phase = 99 // prevent last_phase rules to be selected first
-			Set rule.Precedence = (rule.Phase * 1000000) + count
-			Do kb.AddToHash(rule.InputPattern)
-			Do kb.AddToHash(rule.OutputPattern)
-			Do kb.AddToHash(rule.Precedence)
-			Do kb.AddToHash(rule.Phase)
-			Set rule.Knowledgebase = kb
-			Set sc = rule.%Save()
-			*/
 			if (rule.Phase == "$") rule.Phase = "99"; // prevent last_phase rules to be selected first
 			rule.Precedence = (std::stoi(rule.Phase) * 100000) + (int)vec_rules_csv.size(); // sort on phasenumbers and count = appearance in file.
 
@@ -119,31 +97,18 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		// typedef std::vector<std::pair<std::string, std::string> > newLabels_type;
 		for (newLabels_type::iterator itLabel = newLabels.begin(); itLabel != newLabels.end(); ++itLabel) // Set key = $ORDER(newLabels(""))	// While key '= "" {	// Set key = $ORDER(newLabels(key))
 		{
-			iKnow_KB_Label labelObj; // Set labelObj = ##class(Label).%New()
-			labelObj.Name = itLabel->first; // Set labelObj.Name = $List(newLabels(key), 1)
-			// Set labelObj.Knowledgebase = kb
-			labelObj.Type = "typeLiteral"; // Set labelObj.Type = "typeLiteral"
-			labelObj.Attributes = ""; // Set labelObj.Attributes = ""
+			iKnow_KB_Label labelObj(itLabel->first, "typeLiteral"); // Set labelObj.Type = "typeLiteral"
+			// labelObj.Attributes = ""; // Set labelObj.Attributes = ""
 			labelObj.PhaseList = itLabel->second + ",$"; // Set labelObj.PhaseList = $List(newLabels(key), 2) _ ",$" // add last phase
 			kb.kb_labels.push_back(labelObj); // Set sc = labelObj.%Save()
 			// If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 		}
-		// SPhases_type SBeginPhases, SEndPhases; // collector for SBegin/SEnd phases
-		iKnow_KB_Label SBeginObj; // Set labelObj = ##class(Label).%New()
-		SBeginObj.Name = "SBegin"; // Set labelObj.Name = "SBegin"
-		// Set labelObj.Knowledgebase = kb
-		SBeginObj.Type = "typeAttribute"; // Set labelObj.Type = "typeAttribute"
-		SBeginObj.Attributes = ""; // Set labelObj.Attributes = ""
-		// Set phaselist = ""
-		for_each(SBeginPhases.begin(), SBeginPhases.end(), [&SBeginObj](string phase) { SBeginObj.PhaseList += (SBeginObj.PhaseList.size() ? "," + phase : phase); }); // For idxPhases = $listlength(SBeginPhases) :-1 : 1 Set phaselist = $list(SBeginPhases, idxPhases)_$Select($Length(phaselist) : ","_phaselist, 1 : "")
-		// Set labelObj.PhaseList = phaselist
+		iKnow_KB_Label SBeginObj("SBegin", "typeAttribute"), SEndObj("SEnd", "typeAttribute");
+		// SBeginObj.Attributes = "";
+		for_each(SBeginPhases.begin(), SBeginPhases.end(), [&SBeginObj](string phase) { SBeginObj.PhaseList += (SBeginObj.PhaseList.size() ? "," + phase : phase); });
 		kb.kb_labels.push_back(SBeginObj); // Set sc = labelObj.%Save()
-		// If 'sc throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 
-		iKnow_KB_Label SEndObj;
-		SEndObj.Name = "SEnd";
-		SEndObj.Type = "typeAttribute";
-		SEndObj.Attributes = "";
+		// SEndObj.Attributes = "";
 		for_each(SEndPhases.begin(), SEndPhases.end(), [&SEndObj](string phase) { SEndObj.PhaseList += (SEndObj.PhaseList.size() ? "," + phase : phase); });
 		kb.kb_labels.push_back(SEndObj);
 		return true;
