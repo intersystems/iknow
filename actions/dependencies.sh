@@ -12,7 +12,7 @@ set -euxo pipefail
 ICU_NAME="ICU 69.1"
 ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-69-1/icu4c-69_1-Win64-MSVC2019.zip
 ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-69-1/icu4c-69_1-src.zip
-PYVERSIONS_WIN="3.6.8 3.7.9 3.8.9 3.9.4"
+PYVERSIONS_WIN="3.6.8 3.7.9 3.8.10 3.9.5"
 PYVERSIONS_OSX="3.6.13 3.7.10 3.8.9 3.9.4"
 BUILDCACHE_NAME="Release v0.26.1"
 BUILDCACHE_URL_WIN=https://github.com/mbitsnbites/buildcache/releases/download/v0.26.1/buildcache-windows.zip
