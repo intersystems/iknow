@@ -383,12 +383,20 @@ engine = iknowpy.iKnowEngine()
 
 input_path = '../reference_materials/input/core'
 output_path = '../reference_materials/new_output/core'
+if os.path.exists(output_path):
+    pass
+else:
+    os.makedirs(output_path)
 input_core_list = os.listdir(input_path)
 for elt in input_core_list:
     genRAW_for_reference_testing(elt, input_path, output_path)
     
 input_path = '../reference_materials/input/test'
 output_path = '../reference_materials/new_output/test'
+if os.path.exists(output_path):
+    pass
+else:
+    os.makedirs(output_path)
 input_test_list = os.listdir(input_path)
 for elt in input_test_list:
     genRAW_for_reference_testing(elt, input_path, output_path)
@@ -396,6 +404,10 @@ for elt in input_test_list:
 
 input_path = '../reference_materials/input/udct_test'
 output_path = '../reference_materials/new_output/udct_test'
+if os.path.exists(output_path):
+    pass
+else:
+    os.makedirs(output_path)
 input_udct_list = os.listdir(input_path)
 for elt in input_udct_list:
     dct_name = elt[0:3] + 'udct.txt'
