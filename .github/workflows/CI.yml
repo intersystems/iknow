@@ -26,6 +26,8 @@ on:
 env:
   ICUDIR: ${{ github.workspace }}/thirdparty/icu
 
+concurrency: CI
+
 jobs:
   manylinux2010_x86_64:
     runs-on: ubuntu-20.04
