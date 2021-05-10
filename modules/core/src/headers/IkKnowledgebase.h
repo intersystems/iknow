@@ -49,6 +49,7 @@ namespace iknow
 	  AlphaBeticLabel, // Japanese only, marks alphabetic symbols
 	  SpaceLabel, // Japanese only, marks space symbols
 	  KatakanaLabel, // Japanese only, marks katakana symbols
+      CertaintyLabel, // Certainty label that influences the certainty level
       EndLabels, //Special one-past-the-end marker for iterator-like semantics
       BeginLabels = ConceptLabel //Ditto: usual begin marker
     };

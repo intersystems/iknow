@@ -107,6 +107,9 @@ static Utf8List ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
         }
         trace_data += ";";
     }
+    std::string meta_data = lexrep.GetMetaData();
+    if (meta_data != std::string(""))
+        trace_data += "\" meta=\"" + meta_data;
     trace_data += "\" />";
     out.push_back(trace_data);
     return out;
@@ -312,10 +315,6 @@ void IkIndexDebug<Utf8List>::LexrepCreated(const IkLexrep& lexrep, const IkKnowl
 
 void IkIndexDebug<Utf8List>::LexrepIdentified(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
     Utf8List out = ToList(lexrep, kb);
-    std::string meta = lexrep.GetMetaData();
-    if (!meta.empty()) {
-        out.push_back(meta);
-    }
     trace_.Add("LexrepIdentified", out);
 }
 

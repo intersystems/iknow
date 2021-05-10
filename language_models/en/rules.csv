@@ -7,6 +7,7 @@
 884;1;Punctuation;^ENPunctuation;
 /*		884.	One, (two), three.
 887;1;CapitalAll;^ENCapitalAll;
+
 /*		887.	ABCDEFG.
 888;1;CapitalInitial;^ENCapitalInitial;
 /*		888.	Each Word Starts With A Capital.
@@ -39,7 +40,7 @@
 /*		1990.UD.	In Final Fantasy IV Potion costs 30 gil, while they cost 250 gil in Final Fantasy VI and 100 gil in Final Fantasy VII.
 2180;1;ENNumberPlusUnit;+ENNumberPlusUnit2;add attribute that can be 'saved' in Joins
 /*		2180. The shares are down around 12% year-on-year.
-2567;1;UDCertainty;+ENCertainty;
+2567;1;UDCertainty;+SCertainty;
 /*		2567. The result suggests a mild autism spectrum disorder, but further examinations are needed to confirm this.  
 
 /* ==================================================================================================================================================================
@@ -839,7 +840,7 @@
 /*		1460. The state said in court papers filed earlier on Monday it intends to revise its protocols. "It was reverent," visitor Diane told CNN earlier in October following one of the tours. I enrolled for the Bonus program that was laid out early in 2006.
 1535;40;ENAdjtime:"this"|ENAdj+^ENAdjtime|ENConTime;ENAdj|*|+ENTime;
 /*		1535. the bank's earnings are likely to be hurt this financial year as fallout from the global credit crunch. SHOULD NOT WORK FOR. I will be saying more about this next week when I have a look back.
-1494;40;ENAdjtime:"this"|ENConTime+ENDate;+JoinReverse|ENAdvTime-ENCertainty;different rule for months than 1436, without "that" or Thesame
+1494;40;ENAdjtime:"this"|ENConTime+ENDate;+JoinReverse|ENAdvTime-SCertainty;different rule for months than 1436, without "that" or Thesame
 /*		1494. He called it one of the company's "foundational acquisitions" as recently as this April.
 1669;40;"the"|ENAdjtime|ENConTimePlural;+ENBeforeBeginEnd|ENAdvTime|+Join;BeforeBeginEnd so rule 478 doesn't fire
 /*		1669. On the following days patient remained assymptomatic.
@@ -853,7 +854,7 @@
 /*		1530. In the first group are patients in whom the tumor occurred in the first year after transplantation were excluded.
 1515;40;"the"|ENConTime|"of"|ENAdvTime:ENYear:ENYearNum;+ENBeforeBeginEnd|ENAdvTime|+Join|+Join;BeforeBeginEnd so rule 478 doesn't fire
 /*		1515. In the summer of 2015 Angela finally made the trip she has dreamt for. Surveillance of avian influenza virus and paramyxovirus in migratory waterfowl and shorebirds was conducted in the San-in district of western Japan from the winter of 2001 to 2008. The project should be finished completely by the first half of 2050.
-1536;40;ENConTime|"of"|ENAdvTime:ENYear;ENAdvTime-ENCertainty|+Join|+Join;
+1536;40;ENConTime|"of"|ENAdvTime:ENYear;ENAdvTime-SCertainty|+Join|+Join;
 /*		1536. In September of last year, police arrested three family members and charged them with filing false police reports.
 1440;40;"early":"earlier":"late":"later"|"in"|"the":"this":"that"|ENAdvTime:ENConTime;ENAdvTime|+Join|+Join|+Join;
 /*		1440. The photographs show some of the worst-affected areas during the big freeze earlier in the year.
@@ -863,7 +864,7 @@
 /*		2512. The Transport Secretary said the digital facility would launch before the end of the second year.
 1364;40;"the"|"start":"beginning":"end":"middle"|"of"|ENAdvTime;+ENBeforeBeginEnd|ENAdvTime|+Join|+Join;BeforeBeginEnd so rule 478 doesn't fire
 /*		1364. Its financial retail business is expected to reach 1.5 million credit cards, up from 1.02 million at the end of last year.
-1365;40;"the"|"start":"beginning":"end":"middle":ENAdvTime:ENConTime|"of"|ENDate;+ENBeforeBeginEnd|+JoinReverse|+JoinReverse|ENDate-ENCertainty;
+1365;40;"the"|"start":"beginning":"end":"middle":ENAdvTime:ENConTime|"of"|ENDate;+ENBeforeBeginEnd|+JoinReverse|+JoinReverse|ENDate-SCertainty;
 /*		1365. Public sector net debt stood at 35.9% of gross domestic product at the end of January. There was an article on the denial-of-service attack on the morning of Oct. 21 — which shut down several services. Brands will host the 10th round of the 2008/09 season, which will see drivers racing in Ferrari-powered cars, on the weekend of May 2-3.
 1508;40;ENQuarter|"of"|ENArtPosspron|ENConTime;ENAdvTime|+Join|+Join|+Join;
 /*		1508. It's expecting a buyers' market in Calgary in the first quarter of the year as the city's economic challenges drag on.
@@ -889,17 +890,17 @@
 /*		1475. Meet the real person behind this new two-part drama, starting tonight at 9pm on ITV. The Schiaparelli lander is scheduled to touch down on the Martian surface this morning at 10:48 a.m. EDT (1448 GMT). The tragic collision took place yesterday afternoon round 4pm at Riley Square.
 1476;40;"at":"around":"round"|ENAdvTime|"on"|ENAdvTime;*|ENAdvTime|+Join|+Join;
 /*		1476. The light aircraft crashed shortly after taking-off from the runway at around 5.30am on Monday.
-1772;40;"around"|ENConTime:ENHour|SEnd;+JoinReverse|ENAdvTime+ENDateTimeBegin-ENCertainty|*;
+1772;40;"around"|ENConTime:ENHour|SEnd;+JoinReverse|ENAdvTime+ENDateTimeBegin-SCertainty|*;
 /*		1772.	The Massachusetts Emergency Service expects precipitation to “taper off around midnight.”	He will tell the news shortly before dismissal time around 2:40 p.m.
-470;40;ENNumber|ENDate;+JoinReverse|ENDate-ENCertainty;to detect a date (number + month) as one concept
+470;40;ENNumber|ENDate;+JoinReverse|ENDate-SCertainty;to detect a date (number + month) as one concept
 /*		470.	Workers aged 21 to 24 have been paid the National Minimum Wage of £6.95 an hour since 1 October.
-1542;40;ENDate|ENNumber|ENAndOrBut:ENTo|ENNumber|^typeConcept;ENDate-ENCertainty|+Join|+Join|+Join|*;
+1542;40;ENDate|ENNumber|ENAndOrBut:ENTo|ENNumber|^typeConcept;ENDate-SCertainty|+Join|+Join|+Join|*;
 /*		1542. the geomagnetic storms could hit Earth on November 2 and 3 and this will cause the stunning Auroras at the poles.
-471;40;ENDate:"may"|ENNumber;ENDate+ENTime-ENCertainty|+Join;
+471;40;ENDate:"may"|ENNumber;ENDate+ENTime-SCertainty|+Join;
 /*		471.	Coles was born March 6th 1758.
 2020;40;ENDate;-ENMeasurement;to avoid that certain dates become measurements
 /*		2020. Air India has ordered 27 Dreamliners, the first of which was due for delivery in September 2008.
-472;40;ENDate|ENDate:ENAdvTime;ENDate-ENCertainty|+Join;2013.1-mvdh to detect a date (day + month in letters) as one concept
+472;40;ENDate|ENDate:ENAdvTime;ENDate-SCertainty|+Join;2013.1-mvdh to detect a date (day + month in letters) as one concept
 /*		472.	The mandate of these troops was then extended to December 30 September 2006 that the Sudanese government would allow for “logistical” support from the United Nations to help the African Union. It formally starts the two-year Brexit process by March next year.
 1486;40;ENPrep:ENOf+^"in"|ENDate|ENCon:ENInfCon:ENVerbCon|ENPrep:ENOf;*|ENCon|ENCon|*;
 /*		1486. It bought some cargoes for February delivery from  the  Asian spot market. Market expectations were for January imports of around 700,000 tons.
@@ -909,7 +910,7 @@
 /*		1487. What to expect from Apple’s October 27 event. It had already missed November targets.
 1496;40;ENAdj|ENAdj|ENDate;*|*|ENCon-ENMeasurement;
 /*		1496. Additional temperature readings from Antarctica showed it was actually the third warmest June.
-966;40;ENCon|ENAdj+ENAdvTemp|ENDate;^ENCon|+JoinReverse|ENAdvTime-ENCertainty;
+966;40;ENCon|ENAdj+ENAdvTemp|ENDate;^ENCon|+JoinReverse|ENAdvTime-SCertainty;
 /*		966.	The spokesman was smiling as he strolled into the press center late Nov. 28 for a briefing.
 1495;40;ENAdj|ENDate;*|ENCon;
 /*		1495. Earth on track for its warmest year on record after hottest September in 136 years.
@@ -921,23 +922,23 @@
 /*		1484. In particular, February load factors are expected to be broadly in line with the previous year.
 473;40;ENPrespart|ENDate;ENRel|ENDate;to make prespart before dates relations
 /*		473.	Both sides decided to hold the next, four-day round of talks in Seoul starting March 8.
-474;40;ENDate:ENConTime+^"year"|ENComma|ENYear:ENYearNum;ENAdvTime-ENCertainty|+Join|+Join;to detect a date as one concept
+474;40;ENDate:ENConTime+^"year"|ENComma|ENYear:ENYearNum;ENAdvTime-SCertainty|+Join|+Join;to detect a date as one concept
 /*		474.	The competition started on March 7, 2019, in Boston. 	SHOULD NOT WORK FOR: They has asked for more than £600m for "urgent operational requirements" for the next financial year, 2009-10.
-475;40;ENDate:ENAdvTime|ENYear:ENYearNum;ENAdvTime-ENCertainty|+Join;to detect a date as one concept
+475;40;ENDate:ENAdvTime|ENYear:ENYearNum;ENAdvTime-SCertainty|+Join;to detect a date as one concept
 /*		475.	The Olympics were held in August 2012. He probably learned of it in a letter from Theo delivered on Sunday 23 December 1888. In early January 2003 (originally reported as December 2002 by the physician).
 1488;40;ENYear:ENYearNum|ENDate;ENAdvTime|+Join;
 /*		1488. 2010 Feb 3.
-780;40;ENAdvTime|ENDate;+JoinReverse|ENAdvTime-ENCertainty;to join time expressions
+780;40;ENAdvTime|ENDate;+JoinReverse|ENAdvTime-SCertainty;to join time expressions
 /*		780.	They will be meeting on Saturday March 3 at the traditional time of 11am.
-1492;40;ENPrep|ENDate|ENAndOrBut|"may";*|*|*|ENAdvTime-ENCertainty;
+1492;40;ENPrep|ENDate|ENAndOrBut|"may";*|*|*|ENAdvTime-SCertainty;
 /*		1492. Pollutants piled up in the foothills of the Himalayas and eastern Tibetan Plateau in April and May, he explains. Its CDO portfolio lost $4.88 billion in market value in October and November.
-1490;40;ENPrep|"may";*|ENAdvTime-ENCertainty;
+1490;40;ENPrep|"may";*|ENAdvTime-SCertainty;
 /*		1490. In May, the RBA will consider the government's budget.
 1480;40;ENDate+^ENMonthAbbr+^ENMay;ENAdvTime;
 /*		1480. There will be free admission for members of the armed forces and veterans on Remembrance Sunday, 13 November. SHOULD NOT WORK FOR. Mineral apposition rate (MAR), bone formation rate (BFR).
 1544;40;^typeConcept+^SBegin|ENDay|ENComma|ENAdvTime;*|ENAdvTime|+Join|+Join;
 /*		1544. a special edition is due to go on sale on Friday, 28 October. WRONG. Thursday night, Sunday, Sunday night, Monday night, and sometimes you have teams in these night games that nobody really follows except their own fans. SHOULDN'T WORK FOR. There will be free admission for members of the armed forces and veterans on Remembrance Sunday, 13 November, in recognition of the importance of his work.
-1513;40;ENAdvbeforetime|ENMay;+JoinReverse|ENAdvTime-ENCertainty;
+1513;40;ENAdvbeforetime|ENMay;+JoinReverse|ENAdvTime-SCertainty;
 /*		1513. The patient's first hospitalization and seizure was in approximately May or June, 2011.
 1491;40;ENMay;ENCon;
 /*		1491. Mrs May says she is "ready to listen" to their ideas. British Prime Minister Theresa May has said Britain would commence formal Brexit negotiations by the end of March. However, May was a good month.
@@ -1528,7 +1529,7 @@
 /* =====================
 778;40;ENAuxCon|ENInf+ENAdj;ENmAux|ENInf;for words with labels ENInf+ENAdj
 /*		778.	The authors reported that it was known that corticoids and beta-adrenergic agents might lower the seizure threshold.
-188;40;ENNo:ENArtPosspron|ENAuxCon;*|ENCon-ENCertainty;
+188;40;ENNo:ENArtPosspron|ENAuxCon;*|ENCon-SCertainty;
 /*		188.	 There is no will. Her will was clear.
 126;40;ENPerspron_subj:ENNot:ENAdvstruct|ENAuxCon;*|ENmAux;
 /*		126.	 You will see the benefit sooner than you would think.
@@ -1542,7 +1543,7 @@
 /*		840.	I'm still confused of what Stacy can and cannot eat during pregnancy.
 842;40;ENAuxCon|ENAndOrBut|ENAuxCon;ENmAux|*|ENmAux;
 /*		842.	Anything you say can and will surely be held against you.
-382;40;ENAuxCon|ENAndOrBut;ENCon-ENCertainty|*;
+382;40;ENAuxCon|ENAndOrBut;ENCon-SCertainty|*;
 /*		382.	A handbook for must and wine analysis.
 33;40;ENAuxCon;ENmAux;
 /*		33.	 John will.
@@ -2446,7 +2447,7 @@
 /*		2096. Either of these is fine with me.
 2322;40;ENCollection14;ENDemonstr_pl;default
 /*		2322. Harvest of these crops has finished.
-2405;40;"may"+ENCon;-ENCertainty;
+2405;40;"may"+ENCon;-SCertainty;
 /*		2405. May was in charge of the Brexit.
 2463;40;ENAdvdegree:ENAdvmandeg|ENBeginconcept;*|^ENAdj;
 /*		2463. With virtually every passenger toting a smartphone, tablet or laptop, inflight Wi-Fi is opening up new ways to engage with air travelers.
@@ -2904,27 +2905,27 @@
 /*		2325. For some it is a genuine addiction. Refreshments, craft demonstrations, pipe organ music, various other stalls. So occasionally I would walk down with one or both of these.
 
 /* Preparation
-2486;65;ENNegStop+^ENCertainty+^"because";+ENAttrStop;
+2486;65;ENNegStop+^SCertainty+^"because";+ENAttrStop;
 /*		2486. The patient did not know what happened next, but apparently she was found down by her husband in their house.
 
 /* CERTAINTY ON VERB OR ADVERB -> expand to phrase
 /* Assign attributes
-2357;65;typeRelation+ENCertainty+^ENPrep;+ENCertBegin;
+2357;65;typeRelation+SCertainty+^ENPrep;+ENCertBegin;
 /*		2357. Clearly, regional measurements can provide more detailed information about morphologic changes that cannot be gained by globally averaged evaluations alone.
-2358;65;ENAdverb+^typeConcept+ENCertainty;+ENCertBegin;
+2358;65;ENAdverb+^typeConcept+SCertainty;+ENCertBegin;
 /*		2358. We will probably go by train.
-2409;65;ENNegation|.<ENInNegspan+^ENPBegin|ENPossibility+ENInNegspan;*|*|-ENCertBegin-ENCertainty;
+2409;65;ENNegation|.<ENInNegspan+^ENPBegin|ENPossibility+ENInNegspan;*|*|-ENCertBegin-SCertainty;
 /*		2409. Neither he nor his lawyers made public statements, nor could they be reached for comment.
-2410;65;ENPossibility|ENNegation:SEnd;-ENCertBegin-ENCertainty|*;
+2410;65;ENPossibility|ENNegation:SEnd;-ENCertBegin-SCertainty|*;
 /*		2410. She could not see her doctor that month. The company said it got the state the best price it could.
-2473;65;ENPerspron_subj|ENPossibility;*|-ENCertBegin-ENCertainty;
+2473;65;ENPerspron_subj|ENPossibility;*|-ENCertBegin-SCertainty;
 /*		2473. He said he could still recall the empty feeling he experienced.
-2506;65;ENPossibility+ENBe|ENRPart;-ENCertainty-ENCertBegin|*;
+2506;65;ENPossibility+ENBe|ENRPart;-SCertainty-ENCertBegin|*;
 /*		2506.  a favorable outcome could be observed in all patients. NOT_IN: They asked how many people could be affected by this rule.
 
 /* Expansion rules
 /* Exception: relation-type marker after preposition
-2359;65;^ENCertainty|ENPrep:ENOf+^"down"+^"as"|."both"|ENCertBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2|+ENDummy2;
+2359;65;^SCertainty|ENPrep:ENOf+^"down"+^"as"|."both"|ENCertBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2|+ENDummy2;
 /*		2359. Recently, the number of all-time discoveries passed the 15,000 mark, serving to highlight the importance of being able to spot and predict the paths of potentially destructive rocks in the night sky.
 
 /* Exception: marker after AndOrBut
@@ -2944,15 +2945,15 @@
 /*		2361. She had a severe rash (probably not treated yet). 
 2362;65;ENCertBegin|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|+ENCertStop;
 /*		2362. Clearly, regional measurements can provide more detailed information about morphologic changes that cannot be gained by globally averaged evaluations alone.
-2487;65;^ENCertainty+^ENAdvstruct|ENAttrStop|.^ENCertainty+^ENPBegin+^ENCertStop|ENCertStop;*|+ENCertStop|*|-ENCertStop;shorten scope at AttrStop
+2487;65;^SCertainty+^ENAdvstruct|ENAttrStop|.^SCertainty+^ENPBegin+^ENCertStop|ENCertStop;*|+ENCertStop|*|-ENCertStop;shorten scope at AttrStop
 /*		2487. Increased AF in some macular diseases may be due to unmasking of AF rather than increased fluorophores within abnormal retina.
 
 /* Special cases:
 2363;65;SBegin|ENCertBegin|","|ENPBegin+ENCertStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|-ENCertStop|*|+ENCertStop;
 /*		2363. Clearly, regional measurements can provide more detailed information about morphologic changes that cannot be gained by globally averaged evaluations alone.
-2377;65;ENCertainty|.ENNegation|ENPBegin+ENCertStop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertStop|*|+ENCertStop;
+2377;65;SCertainty|.ENNegation|ENPBegin+ENCertStop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertStop|*|+ENCertStop;
 /*		2377. But, this is perhaps what she wants.
-2493;65;ENCertainty|.ENNegation|"because":"whether"+ENPBegin+ENCertStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertStop|*|+ENCertStop;exception to r2377
+2493;65;SCertainty|.ENNegation|"because":"whether"+ENPBegin+ENCertStop|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertStop|*|+ENCertStop;exception to r2377
 /*		2493. Analysts, predicting write-downs, have been doubting whether it will make a profit of $5 billion in 2019.
 
 /* Assign InCertspan attributes
@@ -2967,11 +2968,11 @@
 
 /* CERTAINTY ON OTHER MARKERS -> expand to the right, no expansion to the left
 /* Assign attributes to (Begin)Concepts
-2379;65;typeConcept:typeBeginConcept+ENCertainty+^ENCertBegin;+ENCertConceptBegin;
+2379;65;typeConcept:typeBeginConcept+SCertainty+^ENCertBegin;+ENCertConceptBegin;
 /*		2379. There was no evidence of bleeding.
 
 /* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
-2380;65;ENPrep+ENCertainty;+ENCertConceptBegin;
+2380;65;ENPrep+SCertainty;+ENCertConceptBegin;
 /*		2380. giant gastric ulcer without evidence of active bleeding.
 
 /* Expansion rules for type(Begin)Concept, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
@@ -2983,25 +2984,25 @@
 /*		2484. We will not be complacent and are absolutely committed to taking action to tackle inequalities and increase employment rates.
 
 /* Expansion rules for Certainty attribute on adjective preceded by a linking verb -> expansion to the left
-2394;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENCertainty;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
+2394;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+SCertainty;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
 /*		2394. On 11-MAR-2013 at the clinic, symptoms were suggestive of congestive heart failure.
-2395;65;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENCertainty;*|*|+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
+2395;65;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+SCertainty;*|*|+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
 /*		2395. The second half is highly uncertain because of a number of factors.
-2396;65;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENCertainty;+ENCertBegin|-ENPBegin|*;
+2396;65;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+SCertainty;+ENCertBegin|-ENPBegin|*;
 /*		2396. I am not confident that I can give an accurate answer to that.
 
 /* Expansion rule for Certainty attribute on adverbs modifying an adjective and preceded by a linking verb -> expansion to the left
-2503;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdvmandeg+ENCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
+2503;65;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin|ENAdvmandeg+SCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
 /*		2503. The appendix is clearly visualized.
-2504;65;typeConcept+^ENAdj|*ENAuxneg+ENBe+^ENPBegin|ENAdvmandeg+ENCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
+2504;65;typeConcept+^ENAdj|*ENAuxneg+ENBe+^ENPBegin|ENAdvmandeg+SCertainty|ENAdj;+ENCertConceptBegin+ENDummy2|-ENCertConceptStop|*|*;
 /*		2504. The appendix is not clearly visualized.
 
 /* No expansion to the right for Endconcept
-2384;65;ENEndconcept+ENCertainty|^ENCertainty+^ENCertConceptBegin;*|+ENCertConceptStop;
+2384;65;ENEndconcept+SCertainty|^SCertainty+^ENCertConceptBegin;*|+ENCertConceptStop;
 /*		2384. The passion of our common involvement no doubt caused our involvement in passion for each other.
 
 /* Expansion rules for Certainty attribute on adjective or Con followed by subordinate clause with "that"
-2397;65;ENCon:ENAdj+ENCertainty+ENCertConceptBegin|.ENAdverbAfter40|ENPBegin+ENCertConceptStop+^"because"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertConceptStop-ENCertStop|*|+ENCertConceptStop;
+2397;65;ENCon:ENAdj+SCertainty+ENCertConceptBegin|.ENAdverbAfter40|ENPBegin+ENCertConceptStop+^"because"|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|-ENCertConceptStop-ENCertStop|*|+ENCertConceptStop;
 /*		2397. We are sure that this is no ordinary recession.
 
 /* Further expansion to the left to include the entire 'subject'
@@ -3031,7 +3032,7 @@
 /*		2389. They were not confident that it was an effective method of cervical cancer prevention.
 
 /* Include negation marker in span when it preceeds the marker
-2492;65;ENNegation+^ENInCertspan|ENCertainty+ENCertBegin;+ENCertBegin|-ENCertBegin;
+2492;65;ENNegation+^ENInCertspan|SCertainty+ENCertBegin;+ENCertBegin|-ENCertBegin;
 /*		2492. The truth is that it was never likely that his supporters were ever going to transform the start of his journey towards retirement into anything other than a celebration of his golden achievements.
 
 /* Include "if" in span
@@ -3045,11 +3046,11 @@
 /*		2404. Maybe the pressure is off because Francis keeps it off.
 
 /* Move CertBegin and CertStop from NR to R/C/PR
-2368;65;ENCertBegin+^typeRelation+^typeConcept+^typePathRelevant+^ENCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
+2368;65;ENCertBegin+^typeRelation+^typeConcept+^typePathRelevant+^SCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
 /*		2368. The patient probably had early esophagitis/gastritis.
 2369;65;ENCertStop+^typeRelation+^typeConcept+^typePathRelevant|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertStop|*|+ENCertStop;
 /*		2369. Improved reporting of the diseases by public health agencies could also be a contributing factor, the state said.
-2565;65;ENCertBegin+ENNonrelevant+^ENCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
+2565;65;ENCertBegin+ENNonrelevant+^SCertainty|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENCertBegin|*|+ENCertBegin;
 /*		2565. And although the losses aren't likely to hurt the company's capital position, they do pose a "definite risk."
 
 
