@@ -561,14 +561,20 @@ template<typename IterT, typename TransformerT, typename StringT, typename KeyFu
 void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& transformer, const Table<StringT, typename TransformerT::output_type>*& table, KeyFuncT key_function, RawAllocator& allocator) {
 	typedef typename TransformerT::output_type KbT;
 	typedef vector<KbT> Values;
-	Values values;
-	values.reserve(size);
-	transform(begin, end, back_inserter(values), transformer);
-	Builder<StringT, KbT> table_builder(values.size());
-	for (typename Values::const_iterator i = values.begin(); i != values.end(); ++i) {
-		table_builder.Insert(key_function(&*i), allocator.Insert(*i));
+
+	if (size == size_t(0)) { // empty table
+		table = allocator.Insert(Table<StringT, typename TransformerT::output_type>());
 	}
-	table = allocator.Insert(table_builder.Build(allocator));
+	else {
+		Values values;
+		values.reserve(size);
+		transform(begin, end, back_inserter(values), transformer);
+		Builder<StringT, KbT> table_builder(values.size());
+		for (typename Values::const_iterator i = values.begin(); i != values.end(); ++i) {
+			table_builder.Insert(key_function(&*i), allocator.Insert(*i));
+		}
+		table = allocator.Insert(table_builder.Build(allocator));
+	}
 }
 
 const unsigned char* iknow::shell::base_pointer = NULL;
