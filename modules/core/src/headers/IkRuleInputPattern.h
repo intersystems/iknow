@@ -53,8 +53,8 @@ namespace iknow {
 			usesTypeLabels_(usesTypeLabels),
 			variable_pattern_(variable_pattern),
 			lexrep_length_(static_cast<uint8_t>(lexrep_length_option)),
-		    certainty_meta_operator_(certainty_meta_operator),
 			var_narrow_(b_narrow),
+		    certainty_meta_operator_(certainty_meta_operator),
 			certainty_level_(static_cast<uint8_t>(certainty_level))
 		  {
 			if (begin_index == end_index) throw ExceptionFrom<IkRuleInputPattern>("Empty rule input pattern.");
