@@ -55,6 +55,7 @@ void GotoFunction::ConsumeInput(int state, String input, StateOutputFunction *ou
 			else {
 				std::cerr << "conflicting double:" << iknow::base::IkStringEncoding::BaseToUTF8(curToken) << "Labels= "; // W !, "a conflicting double["_IKCEValue_"]" : different output.
 				std::cerr << IKCValue.LabelString << " ***conflicts with*** " << IKCKey->LabelString << endl;
+				throw ExceptionFrom<GotoFunction>("Conflicting double in lexrep statemachine building...");
 			}
 			IKCKey++; // Set IKCKey = $ORDER(outputObj.OutputFunc.StatesGlobal("Output", state, IKCKey), 1, IKCEValue)
 		}
