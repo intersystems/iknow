@@ -155,9 +155,13 @@ namespace iknow {
       FastLabelSet::Index PrimaryLabel() const {
         return actions_[0].GetLabel();
       }
-      void SetCertaintyOperation(MetaOperator& op, uint8_t& par) {
+      void SetCertaintyOperation(MetaOperator& op, uint8_t& level) {
           certainty_meta_operator_ = op;
-          certainty_level_ = par;
+          certainty_level_ = level;
+      }
+      MetaOperator GetCertaintyOperation(uint8_t& level) const {
+          level = certainty_level_;
+          return certainty_meta_operator_;
       }
       //TODO:Why do these need to be fixed size? Why not just begin/end pointers in the KB?
       //TODO: Oh yeah, the KB can't have pointers because they need to be offsets in shared memory.
