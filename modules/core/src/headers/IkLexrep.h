@@ -138,6 +138,8 @@ namespace iknow
     public:
 
       typedef IkLabel::Type Type;
+      static const int MaxCertaintyValue = 9;
+      static const int MinCertaintyValue = 0;
 
       IkLexrep(Type type, const IkKnowledgebase* kb,
         const iknow::base::Char* val_begin,
@@ -222,28 +224,16 @@ namespace iknow
       FastLabelSet::Index GetLabelIndexAt(size_t position, Phase p = kMaxPhase) const { return LabelSet(p).At(position); } 
 
       //TODO: Don't bother adjusting phases past the current one?
-      void AddLabelIndex(const FastLabelSet::Index label_index) { //Add to all relevant phases
-        const Phase* phase = GetPhasesBegin(label_index);
-        const Phase* end = GetPhasesEnd(label_index);
-        for (; phase != end; ++phase) {
-          SetLabel(label_index, *phase);
-        }
-        LexrepContext::SeenLabels().InsertAtIndex(label_index); //Note that we saw it.
-      }
+      void AddLabelIndex(const FastLabelSet::Index label_index);
+
       template<typename IterT>
       void AddLabelIndices(IterT begin, IterT end) {
         for(;begin != end; ++begin) {
           AddLabelIndex(*begin);
         }
       }
-      void RemoveLabelIndex(const FastLabelSet::Index label_index) { //Remove from all relevant phases
-        const Phase* phase = GetPhasesBegin(label_index);
-        const Phase* end = GetPhasesEnd(label_index);
-        for (; phase != end; ++phase) {
-          ClearLabel(label_index, *phase);
-        }
-      }
-	  void RemoveLabelType(const FastLabelTypeSet::Index label_type, Phase p); // remove all labels from the specified type that exist on the p Phase
+      void RemoveLabelIndex(const FastLabelSet::Index label_index); //Remove from all relevant phases
+ 	  void RemoveLabelType(const FastLabelTypeSet::Index label_type, Phase p); // remove all labels from the specified type that exist on the p Phase
 	  void RemoveLabelType(const FastLabelTypeSet::Index label_type); // remove all labels from the specified type
 
       void ClearAllLabels() { //Clear all labels from every phase.
@@ -289,14 +279,32 @@ namespace iknow
 	  void SetAnnotated(bool mark_annotation) { is_annotated_ = mark_annotation; }
 	  bool IsAnnotated(void) { return is_annotated_; }
 
-	  // const char* GetMetaData() const { return meta_data_; }
-	  // void SetMetaData(const char* meta_data) { meta_data_ = meta_data; }
-
       std::string GetMetaData() const;
       void SetMetaData(const char* meta_data);
       char GetCertainty() const {
           return certainty_value_;
       }
+      void AddCertainty(uint8_t c) {
+          if (certainty_value_ == '\0') // is not set, set to zero
+              certainty_value_ = '0';
+          int sum = (int)(certainty_value_ - '0') + (int)c;
+          if (sum > MaxCertaintyValue)
+              sum = MaxCertaintyValue;
+          certainty_value_ = (char)('0' + sum);
+      }
+      void SubtractCertainty(uint8_t c) {
+          int diff = (int)(certainty_value_ - '0') - (int)c;
+          if (diff < MinCertaintyValue)
+              diff = MaxCertaintyValue;
+          certainty_value_ = (char)('0' + diff);
+      }
+      void SetCertainty(uint8_t c) {
+          certainty_value_ = (char)('0' + static_cast<int>(c));
+      }
+      void RemoveCertainty() {
+          certainty_value_ = '\0';
+      }
+
 
     protected:
       const FastLabelSet& LabelSet(Phase p = kMaxPhase) const { return GetLexrepStore().GetLabelSet(offset_, p); }

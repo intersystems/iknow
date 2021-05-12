@@ -24,6 +24,14 @@ namespace iknow {
 		  kOneOrMore, // one or more consecutive lexreps matching the rule
 		  kZeroOrMore // not matching (zero), or more lexreps matching the rule 
 	  };
+	  enum class MetaOperator { 
+		  idle, // idle, not active
+		  lt,   // lower then
+		  lteq, // lower then or equal
+		  eq,   // equal
+		  gteq, // greater then or equal
+		  gt    // greater then
+	  };
 	  struct VariableLength { 
 		  VariableLength() : min_match(1), max_match(INT_MAX) {} // constructor
 		  int min_match;
@@ -36,14 +44,19 @@ namespace iknow {
 		  IndexIter begin_index, IndexIter end_index,
 		  IndexIter begin_or_index, IndexIter end_or_index,
 		  OptionIter begin_option, OptionIter end_option,
-		  bool usesTypeLabels, 
-		  VariableOption variable_pattern, bool b_narrow, 
+		  bool usesTypeLabels,
+		  VariableOption variable_pattern, bool b_narrow,
 		  short lexrep_length_option,
+		  MetaOperator certainty_meta_operator = MetaOperator::idle,
+		  uint8_t certainty_level = static_cast<uint8_t>(0),
 		  const char *begin_pattern = NULL, const char *end_pattern = NULL) : /* two more parameters to pass the input rule pattern in case of trouble, at lot, i know, but this code is not critical.*/
-		  usesTypeLabels_(usesTypeLabels),
-		  variable_pattern_(variable_pattern),
-		  lexrep_length_(lexrep_length_option),
-		  var_narrow_(b_narrow) {
+			usesTypeLabels_(usesTypeLabels),
+			variable_pattern_(variable_pattern),
+			lexrep_length_(static_cast<uint8_t>(lexrep_length_option)),
+			var_narrow_(b_narrow),
+		    certainty_meta_operator_(certainty_meta_operator),
+			certainty_level_(static_cast<uint8_t>(certainty_level))
+		  {
 			if (begin_index == end_index) throw ExceptionFrom<IkRuleInputPattern>("Empty rule input pattern.");
 			size_t pattern_size = end_index - begin_index;
 			size_t option_size = end_option - begin_option;
@@ -86,6 +99,8 @@ namespace iknow {
 		this->variable_length_ = other.variable_length_;
 		this->lexrep_length_ = other.lexrep_length_; 
 		this->var_narrow_ = other.var_narrow_;
+		this->certainty_meta_operator_ = other.certainty_meta_operator_;
+		this->certainty_level_ = other.certainty_level_;
 	  }
 	  bool IsMatch(const FastLabelSet& labels) const {
 		  for (size_t i = 0; i < kPatternSize; ++i) {
@@ -182,8 +197,16 @@ namespace iknow {
 	  const MatchOption* OptionsBegin() const { return &(options_[0]); }
 	  const MatchOption* OptionsEnd() const { return &(options_[kPatternSize]); }
 
-	  short GetLexrepLengthOption() const { return lexrep_length_; }
+	  short GetLexrepLengthOption() const { return static_cast<short>(lexrep_length_); }
 	  bool IsNarrow(void) const { return var_narrow_; }
+	  bool GetCertaintyLevelCheck(uint8_t& level, MetaOperator& meta_operator) const {
+		if (certainty_meta_operator_ == MetaOperator::idle)
+		  return false;
+
+		level = certainty_level_;
+		meta_operator = certainty_meta_operator_;
+		return true;
+	  }
 
     private:
       FastLabelSet::Index labels_[kPatternSize];
@@ -193,8 +216,10 @@ namespace iknow {
 	  bool usesTypeLabels_;
 	  VariableOption variable_pattern_;
 	  VariableLength variable_length_;
-	  short lexrep_length_; // if specified, this is an extra criterion that specifies the exact length of the lexrep
+	  uint8_t lexrep_length_; // if specified, this is an extra criterion that specifies the exact length of the lexrep, max value is 255
 	  bool var_narrow_; // if true, variable lexrep selections match narrow : if next rule matches next lexrep, finish current rule selector
+	  MetaOperator certainty_meta_operator_;
+	  uint8_t certainty_level_;
     };
   }
 }

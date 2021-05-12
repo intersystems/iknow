@@ -1053,6 +1053,35 @@ struct MatchesPattern : public binary_function<const IkLexrep, const IkRuleInput
 	  if (const short lexrep_length_option = pattern.GetLexrepLengthOption()) {
 		  if (lexrep.GetNormalizedValue().length() != static_cast<size_t>(lexrep_length_option)) return false;
 	  }
+	  uint8_t c_pattern;
+	  IkRuleInputPattern::MetaOperator c_operator;
+	  if (pattern.GetCertaintyLevelCheck(c_pattern, c_operator)) { // meta data check on certainty level
+		  uint8_t c_lexrep = static_cast<uint8_t>(lexrep.GetCertainty());
+		  switch (c_operator) {
+		  case IkRuleInputPattern::MetaOperator::eq: // equal operator
+			  if (!(c_lexrep == c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::gt: // greater than
+			  if (!(c_lexrep > c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::gteq: // greater than or equal
+			  if (!(c_lexrep >= c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::lt: // lower than
+			  if (!(c_lexrep < c_pattern))
+				  return false;
+		  case IkRuleInputPattern::MetaOperator::lteq: // lower than or equal
+			  if (!(c_lexrep <= c_pattern))
+				  return false;
+			  break;
+		  default: // unknown/illegal operator
+			  throw ExceptionFrom<IkIndexProcess>("Unknown operator for certainty level check.");
+		  }
+	  }
+
 	if (!pattern.HasLabelTypes()) {
 		return pattern.IsMatch(pattern.MatchesGlobalLabelsSet() ? lexrep.GetLabels() : lexrep.GetLabels(phase_));
 	} else // send type information only if necessary

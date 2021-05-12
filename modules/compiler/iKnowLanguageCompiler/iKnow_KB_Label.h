@@ -15,7 +15,9 @@ namespace iknow {
 			iKnow_KB_Label(std::string name, std::string type) :
 				Name(name), Type(type)
 			{}
-
+			iKnow_KB_Label(const char* name, const char* type, const char* attributes) :
+				Name(name), Type(type), Attributes(attributes)
+			{}
 			std::string Name; // Name As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
 			std::string Type; // Type As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE")[Required];
 			std::string Attributes; // Attributes As %String(MAXLEN = 256, XMLPROJECTION = "ATTRIBUTE");

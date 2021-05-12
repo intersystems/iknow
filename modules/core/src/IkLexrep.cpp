@@ -35,6 +35,37 @@ FastLabelTypeSet IkLexrep::GetTypeLabels(Phase p) const {
 	return label_type_set;
 }
 
+/*
+* Add label index to lexrep labels
+* If label is "SCertainty", add zero certainty level is not set.
+*/
+void IkLexrep::AddLabelIndex(const FastLabelSet::Index label_index) { //Add to all relevant phases
+	const Phase* phase = GetPhasesBegin(label_index);
+	const Phase* end = GetPhasesEnd(label_index);
+	for (; phase != end; ++phase) {
+		SetLabel(label_index, *phase);
+	}
+	LexrepContext::SeenLabels().InsertAtIndex(label_index); //Note that we saw it.
+	if (label_index == m_kb->GetLabelIndex(iknow::core::CertaintyLabel)) { // if Certainty level is not set, set it to zero.
+		AddCertainty(0);
+	}
+}
+
+/*
+* Remove label index from lexrep labels
+* If label is "SCertainty", also remove the certainty level.
+*/
+void IkLexrep::RemoveLabelIndex(const FastLabelSet::Index label_index) { //Remove from all relevant phases
+	const Phase* phase = GetPhasesBegin(label_index);
+	const Phase* end = GetPhasesEnd(label_index);
+	for (; phase != end; ++phase) {
+		ClearLabel(label_index, *phase);
+	}
+	if (label_index == m_kb->GetLabelIndex(iknow::core::CertaintyLabel)) { // if Certainty label is deleted, also delete certainty level
+		RemoveCertainty();
+	}
+}
+
 void IkLexrep::RemoveLabelType(const FastLabelTypeSet::Index label_type)
 {
 	for (Phase p = 0; p < kPhaseCount; ++p) {

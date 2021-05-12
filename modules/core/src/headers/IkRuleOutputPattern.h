@@ -50,28 +50,60 @@ namespace iknow {
 
     class IkRuleOutputPattern {
     public:
+        enum class MetaOperator {
+            idle,  // idle, not active
+            plus,  // addition operator
+            minus, // distraction operator
+            set,   // set operator
+            del    // delete operator
+        };
+
       static const size_t kPatternSize = 8;
 
       //TODO: Remove duplication with IkRuleInputPattern
 
       template<typename ActionIter>
-      IkRuleOutputPattern(ActionIter begin_action, ActionIter end_action, IkRuleOption options) : options_(options) {
+      IkRuleOutputPattern(ActionIter begin_action, ActionIter end_action, IkRuleOption options) : options_(options), certainty_meta_operator_(MetaOperator::idle), certainty_level_(static_cast<uint8_t>(0)) {
 		if (begin_action == end_action) throw ExceptionFrom<IkRuleOutputPattern>("Empty rule output pattern.");
         size_t action_size = end_action - begin_action;
 		if (action_size > kPatternSize) throw ExceptionFrom<IkRuleOutputPattern>("Rule output pattern too large.");
 		if (begin_action->GetLabel() == FastLabelSet::NPos()) throw ExceptionFrom<IkRuleOutputPattern>("Pattern first index cannot be NPos");
         std::fill(std::copy(begin_action, end_action, ActionsBegin()), ActionsEnd(), IkRuleOutputAction());
       }
-	  IkRuleOutputPattern() : options_(IkRuleOption::kNOP) { // No Operation output pattern
+	  IkRuleOutputPattern() : options_(IkRuleOption::kNOP), certainty_meta_operator_(MetaOperator::idle), certainty_level_(static_cast<uint8_t>(0)) { // No Operation output pattern
 		  std::fill(ActionsBegin(), ActionsEnd(), IkRuleOutputAction()); // fill with non actions
 	  }
       IkRuleOutputPattern(const IkRuleOutputPattern& other) { // explicit copy constructor
           std::copy(other.actions_, other.actions_ + (sizeof other.actions_ / sizeof other.actions_[0]), this->actions_);
           this->options_ = other.options_;
+          this->certainty_meta_operator_ = other.certainty_meta_operator_;
+          this->certainty_level_ = other.certainty_level_;
+
       }
       //Apply this label output pattern to the given lexrep. Some label assignments require consulting
       //the input pattern.
       void Apply(IkLexrep& lexrep, const IkRuleInputPattern& in, Phase phase) const {
+          // whatever rule ouput operation is requested, apply lexrep metadata (if any) first:
+          switch (certainty_meta_operator_) // certainty level processing, 
+          {
+              case MetaOperator::idle:
+                  break;
+              case MetaOperator::plus:
+                  lexrep.AddCertainty(certainty_level_);
+                  break;
+              case MetaOperator::minus:
+                  lexrep.SubtractCertainty(certainty_level_);
+                  break;
+              case MetaOperator::set:
+                  lexrep.SetCertainty(certainty_level_);
+                  break;
+              case MetaOperator::del:
+                  lexrep.RemoveCertainty();
+                  break;
+              default:
+                  break;
+          }
+
 		if (GetOptions().HasOption(IkRuleOption::kNOP)) return; // No Operation, don't touch
         if (GetOptions().HasOption(IkRuleOption::kClearAllPhases)) { // Join actions must clear all labels to be backwards compatible
           lexrep.ClearAllLabels();
@@ -123,7 +155,14 @@ namespace iknow {
       FastLabelSet::Index PrimaryLabel() const {
         return actions_[0].GetLabel();
       }
-
+      void SetCertaintyOperation(MetaOperator& op, uint8_t& level) {
+          certainty_meta_operator_ = op;
+          certainty_level_ = level;
+      }
+      MetaOperator GetCertaintyOperation(uint8_t& level) const {
+          level = certainty_level_;
+          return certainty_meta_operator_;
+      }
       //TODO:Why do these need to be fixed size? Why not just begin/end pointers in the KB?
       //TODO: Oh yeah, the KB can't have pointers because they need to be offsets in shared memory.
       //All pointers require a call through the KB pointer + vtable etc. Slow.
@@ -135,6 +174,9 @@ namespace iknow {
     private:
       IkRuleOutputAction actions_[kPatternSize];
       IkRuleOption options_;
+      MetaOperator certainty_meta_operator_;
+      uint8_t certainty_level_;
+
     };
   }
 }

@@ -113,6 +113,9 @@ iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 	case KatakanaLabel:
 		return IkStringEncoding::UTF8ToBase("Katakana");
 		break;
+	case CertaintyLabel:
+		return IkStringEncoding::UTF8ToBase("SCertainty");
+		break;
 	default:
 		throw ExceptionFrom<CSV_DataGenerator>("Unknown special label requested.");
 	}
