@@ -223,6 +223,9 @@ static String ToString(const IkRuleInputPattern& pattern, const IkKnowledgebase&
             case IkRuleInputPattern::MetaOperator::gt:   // greater then
                 meta_operator_string = ">";
                 break;
+            case IkRuleInputPattern::MetaOperator::idle:    // noop
+            default:
+                break;
             };
             out += IkStringEncoding::UTF8ToBase(std::string("(c") + meta_operator_string + std::to_string(level)+")");
         }
@@ -275,6 +278,9 @@ static String ToString(const IkRuleOutputPattern& pattern, const IkKnowledgebase
       break;
   case IkRuleOutputPattern::MetaOperator::set:
       out += IkStringEncoding::UTF8ToBase(std::string("(c=")+std::to_string(certainty_level)+std::string(")"));
+      break;
+  case IkRuleOutputPattern::MetaOperator::idle: // noop
+  default:
       break;
   }
   return out;
