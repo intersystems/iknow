@@ -244,7 +244,11 @@ struct TokenProcessor {
     kb_(kb)
   {}
   void operator()(const Char* begin, const Char* end, bool bLastPiece) {    
-	if (begin == end && !bLastPiece) return; // empty tokens in list don't count
+	  if (begin == end && !bLastPiece) {
+		  if (literals_used_ == 0) // starts with a space, synchronize with literal.
+			  ++literals_used_;
+		  return; // empty tokens in list don't count
+	  }
 
     if (bLastPiece && literals_used_ < max_literal_-1) { // not all literals have been used, merge them on the current literal position
 	  text_refs_[literals_used_].second = text_refs_[max_literal_-1].second; // cover the merged text
@@ -254,6 +258,13 @@ struct TokenProcessor {
     if (literals_used_ < max_literal_) {
 	  literal_begin = text_refs_[literals_used_].first;
 	  literal_end = text_refs_[literals_used_].second;
+	  /*
+	  const Char* corrector = begin;
+	  while (*literal_end == *corrector && corrector<=end) { // correction for weak splitting
+		  literal_end++;
+		  corrector++;
+	  }
+	  */
     }
 	if (begin == end && literals_used_) { // empty token, merge literal with previous lexrep
 		result_.back().SetTextPointerEnd(literal_end); // enlarge latest literal
