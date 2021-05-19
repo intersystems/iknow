@@ -137,6 +137,10 @@ iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 #define IKATTDURATION 		10
 #define IKATTMEASURE	 	11
 #define IKATTCERTAINTY		12
+#define IKATTGENERIC_1		13
+#define IKATTGENERIC_2		14
+#define IKATTGENERIC_3		15
+
 
 /*
 Method GetProperty(key As %Integer) As %List
@@ -155,7 +159,11 @@ const std::vector<std::pair<int, string>> CSV_DataGenerator::kb_properties = {
 	make_pair(IKATTFREQ, "Frequency"),
 	make_pair(IKATTDURATION, "Duration"),
 	make_pair(IKATTMEASURE, "Measurement"),
-	make_pair(IKATTCERTAINTY, "Certainty")
+	make_pair(IKATTCERTAINTY, "Certainty"),
+	make_pair(IKATTGENERIC_1, "Generic1"),
+	make_pair(IKATTGENERIC_2, "Generic2"),
+	make_pair(IKATTGENERIC_3, "Generic3"),
+
 };
 
 void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::ostream& os)

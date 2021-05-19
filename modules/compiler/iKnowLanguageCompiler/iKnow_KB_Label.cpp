@@ -34,27 +34,20 @@ vector<string> special_labels = { // language independent labels
 	";1,$;UDUnit;typeAttribute;;0;",
 	";1,$;UDNumber;typeAttribute;;0;",
 	";1,$;UDTime;typeAttribute;;0;",
-	";1,$;UDCertainty;typeAttribute;;0;"
+	";1,$;UDCertainty;typeAttribute;;0;",
+	";1,$;UDGeneric1;typeAttribute;;0;",
+	";1,$;UDGeneric2;typeAttribute;;0;",
+	";1,$;UDGeneric3;typeAttribute;;0;"
+
 };
 
 void iKnow_KB_Label::LoadSpecialLabels(CSV_DataGenerator& kb)
 {
-	/*
-	Set labels = ..SpecialLabelList()
-	Set len = $LL(labels)
-	For i = 1:1 : len{
-	Set label = ..LabelFromString($LI(labels, i))
-	Set label.Knowledgebase = kb
-	Set sc = ..AddLabelToKB(label, kb)
-	$$$IKModelCheck(sc, "Built in label", i, $LI(labels, i))
-	}
-	*/
 	string isDefault = "";
 	for (vector<string>::iterator it = special_labels.begin(); it != special_labels.end(); ++it) {
 		vector<string> row_label = kb.split_row(*it);
 		kb.kb_labels.push_back(iKnow_KB_Label::LabelFromString(row_label,isDefault)); // create and add label object
 	}
-
 }
 
 bool iKnow_KB_Label::ImportFromCSV(string labels_csv, CSV_DataGenerator& kb)
@@ -73,11 +66,8 @@ bool iKnow_KB_Label::ImportFromCSV(string labels_csv, CSV_DataGenerator& kb)
 			vector<string> row_label = kb.split_row(line);
 			string isDefault = ""; // ByRef isDefault = ""
 			iKnow_KB_Label label = LabelFromString(row_label, isDefault);
-			// Do kb.AddToHash(isDefault)
-			// Set label.Knowledgebase = kb
 			kb.kb_labels.push_back(label); // Set sc = ..AddLabelToKB(label, kb)
 			if (isDefault[0]=='1') kb.kb_concept_label = &kb.kb_labels.back(); // If isDefault Set kb.ConceptLabel = label
-			// $$$IKModelCheck(sc,stream.Filename,count,line)
 		}
 		ifs.close();
 		return true;
