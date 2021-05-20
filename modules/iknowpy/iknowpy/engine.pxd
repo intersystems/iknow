@@ -17,6 +17,9 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		Duration = 10
 		Measurement = 11
 		Certainty = 12
+		Generic1 = 13
+		Generic2 = 14
+		Generic3 = 15
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
 	const size_t kNoConcept = <size_t>(-1)

@@ -51,6 +51,10 @@
 #define IKATTDURATION 		10
 #define IKATTMEASURE		11
 #define IKATTCERTAINTY		12
+#define IKATTGENERIC_1		13
+#define IKATTGENERIC_2		14
+#define IKATTGENERIC_3		15
+
 
 namespace iknowdata { // to bundle all generated data
 
@@ -66,7 +70,10 @@ namespace iknowdata { // to bundle all generated data
 		Frequency = IKATTFREQ,
 		Duration = IKATTDURATION,
 		Measurement = IKATTMEASURE,
-		Certainty = IKATTCERTAINTY
+		Certainty = IKATTCERTAINTY,
+		Generic1 = IKATTGENERIC_1,
+		Generic2 = IKATTGENERIC_2,
+		Generic3 = IKATTGENERIC_3
 	};
 	inline std::string AttributeName(Attribute attribute) { // translate the attribute type
 		switch (attribute) {
@@ -79,6 +86,10 @@ namespace iknowdata { // to bundle all generated data
 		case Attribute::Duration:			return "duration";
 		case Attribute::Measurement:		return "measurement";
 		case Attribute::Certainty:			return "certainty";
+		case Attribute::Generic1:			return "generic1";
+		case Attribute::Generic2:			return "generic2";
+		case Attribute::Generic3:			return "generic3";
+
 		default:							return "unknown";
 		}
 	}
