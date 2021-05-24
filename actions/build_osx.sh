@@ -38,6 +38,7 @@ make -j $(sysctl -n hw.logicalcpu) test
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 for PYTHON in python3.{6..9}; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-10.9-x86_64 --no-dependencies
