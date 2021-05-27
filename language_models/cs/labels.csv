@@ -6,9 +6,9 @@
 
 /* Variants of unified labels
 ;38,39,40,45,$;CSCapitalInitial;typeAttribute;language specific variant of unified label for capital initial;0;;
-;38,40,45,$;CSCapitalAll;typeAttribute;language specific variant of unified label for capital all;0;;
+;38,39,40,45,$;CSCapitalAll;typeAttribute;language specific variant of unified label for capital all;0;;
 ;38,45,$;CSCapitalMixed;typeAttribute;language specific variant of unified label for capital initial;0;;
-;38,40,45,66,70,80,85,90,$;CSPunctuation;typeOther;language specific variant of unified label for punctuation;0;;
+;38,39,40,45,66,70,80,85,90,$;CSPunctuation;typeOther;language specific variant of unified label for punctuation;0;;
 ;40,$;CSRelation;typeRelation;language specific variant of unified label for general relation;0;;
 ;40,$;CSNonRelevant;typeOther;language specific variant of unified label for general nonrelevant;0;;
 
@@ -53,10 +53,11 @@
 ;1,38,40;CSAdvManner;typeAmbiguous;adverbs of manner;0;;
 ;1,38,40;CSAdvModal;typeRelation;adverbs of modality;0;;
 ;1,39,40,66,70,80,85,90,$;CSAdvPlace;typePathRelevant;adverbs of place;0;;
-;1,38,40,60,65,66,70,80,85,90,$;CSAdvStruct;typeOther;adverbs of structure;0;;
+;1,38,39,40,60,65,66,70,80,85,90,$;CSAdvStruct;typeOther;adverbs of structure;0;;
 ;1,38,39,40,45,65,66,70,80,85,90,$;CSAdvTemp;typePathRelevant;adverbs of time: vague time indications;0;;
 ;1,39;CSAdvTempCon;typeAmbiguous;ambiguous: vague adverb of time OR noun;0;;
 ;1,38,39,40,45,66,70,80,85,90,$;CSAdvTime;typeBeginEndConcept;adverbs of time: concrete time indications;0;;
+;1,39;CSAfterNumber;typeAmbiguous;nouns following a number;0;;
 ;1,38,45;CSAgent;typeConcept;extra label for agent as instrumental before longpart, should stay in one concept cluster;0;;
 ;1,40;CSAlso;typeAmbiguous;for words meaning 'also' used after 'but';0;;
 ;1,38,39,40,45,60,66,70,80,85,90,$;CSAndOr;typeRelation;specific words 'i', 'a', 'nebo';0;;
@@ -78,8 +79,8 @@
 ;1,38,45;CSConGenF;typeConcept;nouns in genitive feminine singular;0;;
 ;1,38,45;CSConGenMN;typeConcept;nouns in genitive masculine/neuter singular;0;;
 ;1,38,45;CSConGenPl;typeConcept;nouns in genitive plural (ambiguous: also other cases possible);0;;
-;1,38,40;CSConIfCap;typeConcept;make concept if capitalized;0;;
-;1,38,40;CSConIfAllcaps;typeConcept;make concept if all caps;0;;
+;1,38,39,40;CSConIfCap;typeConcept;make concept if capitalized;0;;
+;1,38,39,40;CSConIfAllcaps;typeConcept;make concept if all caps;0;;
 ;1,38,45;CSConInstr;typeConcept;general extra label for nouns in instrumental case (possibly ambiguous);0;;
 ;1,38;CSConInstrAmbig;typeConcept;nouns possibly in instrumental case, possibly in other case (not genitive);0;;
 ;1,38,45;CSConInstrMN;typeConcept;nouns in instrumental masculine/neuter singular;0;;
@@ -128,7 +129,7 @@
 ;1,40,66,70;CSKtery;typeRelation;extra label for all forms of 'který' used to detect expansion for antecedent;0;;
 ;1,38,40,66,70,80,85,90,$;CSListnumber;typeBeginEndConcept;numbers for list;0;;
 ;1,38,39,40;CSLongPart;typeConcept;long nt-participles, l-participles and ci-participles;0;;
-;1,38,40;CSLongNTLPartCon;typeAmbiguous;ambiguous: long nt-participles and l-participles OR nouns;0;;
+;1,38,39,40;CSLongNTLPartCon;typeAmbiguous;ambiguous: long nt-participles and l-participles OR nouns;0;;
 ;1,38,40;CSLongLPart;typeConcept;long participles derived from l-participles;0;;
 ;1,40;CSMa;typeAmbiguous;specific word: 'má' (my,has);0;;
 ;1,39;CSMinute;typeConcept;all forms of 'minuta' for time of day;0;;
@@ -156,20 +157,21 @@
 ;1,38,39,40,45,66,70,80,85,90,$;CSPart;typeRelation;nt-participles;0;;
 ;1,38,39,40;CSCiPart;typeConcept;ci-participles;0;;
 ;1,38,40;CSCiPartCon;typeAmbiguous;ambiguous: ci-participle or noun;0;;
-;1,40;CSNTPartCon;typeAmbiguous;ambiguous: nt-participle or noun;0;;
+;1,38,40;CSNTPartCon;typeAmbiguous;ambiguous: nt-participle or noun;0;;
 ;1,40,$;CSNTPartInf;typeRelation;ambiguous: nt-participle or infinitive;0;;
 ;1,39;CSPartTime;typeConcept;label for parts of time, which behave differently from timeconcepts (semester,quarter,half...);0;;
 ;1,39,40,65,66,70,80,85,90,$;CSPerspron;typePathRelevant;personal pronouns;0;;
+;1,38;CSPlusGen;typeAmbiguous;words that are followed by a genitive;0;;
 ;1,38,45;CSPossessive;typeConcept;extra label for possessive adjectives, eg. Obamova;0;;
 ;1,39;CSPossibleMonth;typeConcept;extra label for regex with pattern digit.digit. which can be a date, to be disambiguated in the rules;0;;
 ;1,38,39,40,45,60,65,66,70,80,85,90,$;CSPosspron;typePathRelevant;possessive pronouns;0;;
 ;1,38,39,40,45,65,66,70,80,85,90,$;CSPrep;typeRelation;prepositions;0;;
 ;1,38;CSPrepInstr;typeRelation;prepositions followed by instrumental case;0;;
 ;1,40;CSPrepVerb;typeRelation;ambiguous: preposition or verb;0;;
-;1,40,45,60,65,66,70,80,85,90,$;CSPRPron;typePathRelevant;pathrelevant pronouns (independently used);0;;
+;1,39,40,45,60,65,66,70,80,85,90,$;CSPRPron;typePathRelevant;pathrelevant pronouns (independently used);0;;
 ;1,40;CSPRPronPlusAdj;typePathRelevant;extra label for pathrelevant pronouns which can be joined with adjectives;0;;
-;1,40,45,66,70,80,85,90,$;CSRAdv;typeRelation;adverbs as part of the relation;0;;
-;1,40,66,70,80,85,90,$;CSRefl;typeRelation;reflexive pronouns;0;;
+;1,38,39,40,45,66,70,80,85,90,$;CSRAdv;typeRelation;adverbs as part of the relation;0;;
+;1,39,40,66,70,80,85,90,$;CSRefl;typeRelation;reflexive pronouns;0;;
 ;1,38,39,40,66,70,80,85,90,$;CSRelpron;typeRelation;relative pronouns;0;;
 ;1,40;CSSam;typeAmbiguous;specific word: 'sám' (alone,himself);0;;
 ;1,38,40;CSSe;typeAmbiguous;specific word: 'se' (with,oneself);0;;
@@ -180,6 +182,7 @@
 ;1,40;CSTak;typeAmbiguous;specific word: 'tak' (as/thus,so);0;;
 ;1,39,40;CSTen;typePathRelevant;all forms of 'ten', for combinations with 'sám';0;;
 ;1,38,39,40,45;CSTimeConcept;typeConcept;time-related concepts (eg. 'day', 'week', ...);0;;
+;1,39,$;CSTimes;typeBeginEndConcept;time indications expressing '[number] times';0;;
 ;1,39,40,70;CSTu;typePathRelevant;specific word: 'tu' (here,that);0;;
 ;80;CSTypeConcept;typeConcept;extra label for entities with typeConcept, so exceptions can be made (contrary to using typeConcept itself);0;;
 ;1,38,39,40,45,66,70,80,85,90,$;CSVerb;typeRelation;conjugated verbs;0;;
