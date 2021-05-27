@@ -1,12 +1,67 @@
-﻿;;“;";;rewrites curly quotation marks
-;;”;";;rewrites curly quotation marks
-;;‘;';;rewrites curly quotation marks
-;;’;';;rewrites curly quotation marks
+﻿
+/* language-independent items:
+
+1;;“;";;replace curly quotes by straight quotes
+2;;”;";;replace curly quotes by straight quotes
+3;;„;";;replace curly quotes by straight quotes
+/*4;;«;";;rewrites left French quotation marks to straight ones
+/*5;;»;";;rewrites right French quotation marks to straight ones
+6;;‘;';;replace curly apostrophe by straight one
+7;;’;';;replace curly apostrophe by straight one
+8;;′;';;rewrite curly to straight apostrophe
+9;;`;';;rewrite curly to straight apostrophe
+10;;´;';;rewrite curly to straight apostrophe
+
+/*11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
+/*12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+/*16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+
+23;;,-; , -;;adds space between comma and dash
+24;;--; -- ;;isolates double dash
+26;;\-";- ;;to prevent that " hinders the processing
+27;;\- ";- ;;to prevent that " hinders the processing
+28;;"-\; -;;to prevent that " hinders the processing
+
+31;;[…]; […] ;for omissions
+32;;[...]; [...] ;for omissions
+;;(…); (…) ;for omissions
+;;(...); (...) ;for omissions
+33;;…; … ;;adds spaces to prevent … to become part of Concept 
+;;\...;;;to prevent that '...' becomes the literal of a lexrep after normalization
+34;;...; ... ;;to prevent '...' to hinder the indexing
+;;... ";..." ;;prevent that " hinders the indexing
+
+35;;".[;". [;;for footnotes
+36;;,[; , [;;for footnotes
+37;;."[;." [;;for footnotes
+38;;.[;. [;;for footnotes
+
+41;;(\;;;to make bracket attached to word NonRelevant
+42;;[\;;;to make bracket attached to word NonRelevant
+43;;\);;;to make bracket attached to word NonRelevant
+44;;\];;;to make bracket attached to word NonRelevant
+45;;\|;;;to make vertical bar attached to word NonRelevant
+46;;|\;;;to make vertical bar attached to word NonRelevant
+
+47;;\•;;;to separate • from word beginning
+
+51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
+52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
 ;;.-;. -;;adds space between period and dash
-;;--; -- ;;to detach special dash from word
-;;…; … ;;to detach suspension point from word
-;;\);;;to make bracket attached to word NonRelevant
-;;(\;;;to make bracket attached to word NonRelevant
+53;;--  --;----;;reconstruct dotted lines
+54;;--  --;----;;repeat: reconstruct dotted lines
+55;;-- - ;--- ;;reconstruct dotted lines
+56;;-- -\;---;;reconstruct dotted lines
+
+
+/* language-specific:
+
 ;;-ei\; _verbsuffix-ei_;;
 ;;-emos\; _verbsuffix-emos_;;
 ;;-ia\; _verbsuffix-ia_;;
@@ -155,3 +210,5 @@
 ;;-nos _verbsuffix; _verbsuffix-nos_ _verbsuffix;;
 ;;não-;não- ;;to mark adjectives and participles with negative prefix as negation marker
 ;;Não-;não- ;;to mark adjectives and participles with negative prefix as negation marker
+;;\-não\;- não;;to prevent that - hinders the lookup of não
+;;\-Não\;- não;;to prevent that - hinders the lookup of não

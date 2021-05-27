@@ -1,4 +1,74 @@
-﻿;;\Г.\;_letter_г_.;;to differentiate between 'year' and initial
+﻿
+/* general:
+
+1;;“;";;replace curly quotes by straight quotes
+2;;”;";;replace curly quotes by straight quotes
+3;;„;";;replace curly quotes by straight quotes
+/*		3. они мне сказали: „человек, мы просто так это не оставим.
+/*4;;«;";;rewrites left French quotation marks to straight ones
+/*5;;»;";;rewrites right French quotation marks to straight ones
+6;;‘;';;replace curly apostrophe by straight one
+7;;’;';;replace curly apostrophe by straight one
+8;;′;';;rewrite curly to straight apostrophe
+9;;`;';;rewrite curly to straight apostrophe
+10;;´;';;rewrite curly to straight apostrophe
+
+11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
+12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+
+23;;,-; , -;;adds space between comma and dash
+/*		23. эта норма не работает,- констатировал он.
+/*24;;--; -- ;;separates double dash from words
+;;--; --;;adds space before dash
+/*		Говоря-- процесс превращения мозгов в овсяную кашу.
+26;;\-";- ;;to prevent that " hinders the processing
+27;;\- ";- ;;to prevent that " hinders the processing
+28;;"-\; -;;to prevent that " hinders the processing
+
+31;;[…]; […] ;for omissions
+/*		31. они сами яростно и искренне с …ней борются.
+32;;[...]; [...] ;for omissions
+33;;…; … ;;adds spaces to prevent … to become part of Concept 
+34;;...; ... ;;to prevent '...' to hinder the indexing
+
+35;;".[;". [;;for footnotes
+36;;,[; , [;;for footnotes
+37;;."[;." [;;for footnotes
+38;;.[;. [;;for footnotes
+
+41;;(\;;;to make bracket attached to word NonRelevant
+/*		41. В типографии книгу набрали, но...( ура, придумал!).
+42;;[\;;;to make bracket attached to word NonRelevant
+/*		42. в редакции от 21 марта 2002 г.[ 23], стала членом.
+43;;\);;;to make bracket attached to word NonRelevant
+/*		43. эмитента (в случае непрямой гарантии )- ст. 27).
+44;;\];;;to make bracket attached to word NonRelevant
+/*		44. в редакции от 21 марта 2002 г. [23 ]стала членом.
+45;;\|;;;to make vertical bar attached to word NonRelevant
+/*		45. (в простейшем случае абсолютного отражателя [5, 46, 193, 210, 218]), U(x, y, t) |y=e(t) = 0.
+46;;|\;;;to make vertical bar attached to word NonRelevant
+/*		46. ( Польша)| 61, 1| 53, 9| 32, 93|.
+
+47;;\•;;;to separate • from word beginning
+
+51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
+52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
+/*53;;--  --;----;;reconstruct dotted lines
+/*54;;--  --;----;;repeat: reconstruct dotted lines
+/*55;;-- - ;--- ;;reconstruct dotted lines
+/*56;;-- -\;---;;reconstruct dotted lines
+
+
+/* language-specific:
+
+;;\Г.\;_letter_г_.;;to differentiate between 'year' and initial
 /*		53. От 11 сентября Г. К. Жуков был назначен командующим Ленинградским фронтом.
 ;;-то\; -то;;to recognize suffix -to
 /*		71. Пациентка почему-то с ним не спешила.
@@ -6,6 +76,8 @@
 /*		104. Раскинулись долины, пройденные им когда-то.
 ;;-то,; -то,;;to recognize suffix -to
 /*		105. два неглупых, в общем-то, человека.
+;;-то ; -то ;;to recognize suffix -to where a preceeding prepro item has inserted a space
+
 ;;-то:; -то:;;to recognize suffix -to
 /*		106. определенное действие, как-то: передать имущество.
 ;;-то?; -то?;;to recognize suffix -to
@@ -32,10 +104,6 @@
 /*		76. Принеси-ка коробку с нитками.
 ;;ся-ка;ся -ка;;to recognize suffix -ka
 /*		77. Занимайся-ка наукой своей.
-;;…; … ;;adds spaces to prevent … to become part of Concept 
-/*		83. они сами яростно и искренне с …ней борются.
-;;,-; , -;;adds space between comma and dash
-/*		85. эта норма не работает,- констатировал он.
 ;;0г;0 г;;to split 'year' from year number
 /*		90. В декабре 2010г.
 ;;1г;1 г;;to split 'year' from year number
@@ -58,23 +126,8 @@
 /*		93. В апреле 2009г.
 ;;ё;е;;rewrites 'yo' to 'ye'
 /*		94. предотвращён.
-;;--; --;;adds space before dash
-/*		98. Говоря-- процесс превращения мозгов в овсяную кашу.
 ;;%; %;;to split % from number
 /*		102. Частные кредиторы потеряют по имеющимся у них гособлигациям около 21% от их стоимости.
 ;;$; $ ;;to split $ from number
 /*		103. курс пары колеблется около отметки $1,4375.
-;;\);;;to make bracket attached to word NonRelevant
-/*		112. эмитента (в случае непрямой гарантии )- ст. 27).
-;;(\;;;to make bracket attached to word NonRelevant
-/*		113. В типографии книгу набрали, но...( ура, придумал!).
-;;\];;;to make bracket attached to word NonRelevant
-/*		114. в редакции от 21 марта 2002 г. [23 ]стала членом.
-;;[\;;;to make bracket attached to word NonRelevant
-/*		115. в редакции от 21 марта 2002 г.[ 23], стала членом.
-;;|\;;;to make vertical bar attached to word NonRelevant
-/*		116. ( Польша)| 61, 1| 53, 9| 32, 93|.
-;;\|;;;to make vertical bar attached to word NonRelevant
-/*		117. (в простейшем случае абсолютного отражателя [5, 46, 193, 210, 218]), U(x, y, t) |y=e(t) = 0.
-;;„;";;rewrites quotation marks
-/*		120. они мне сказали: „человек, мы просто так это не оставим.
+

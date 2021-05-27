@@ -1,55 +1,96 @@
-﻿;;“;";;rewrites double right curly quotation marks to straight ones
+﻿
+/* general:
+
+1;;“;";;replace curly quotes by straight quotes
 /*		1. „червоним октябрем“.
-;;”;";;rewrites double left curly quotation marks to straight ones
+2;;”;";;replace curly quotes by straight quotes
 /*		2. „червоним октябрем“.
-;;„;";;rewrites double curly quotation marks to straight ones
-/*		154. що їй належить „по праву“.
-;;‘;';;rewrites single right curly quotation marks to straight ones
-/*		3. Новообраний мер добре пам‘ятає про своє італійське коріння.
-;;’;';;rewrites single left curly quotation marks to straight ones
-/*		4. провідні фактори, що є підґрунтям різних форм патології, пов’язаної з пренатальною гіпоксією.
-;;´;';;rewrites quotation mark to standard one
-/*		153. що біля пам'ятної дошки письменникові з´явиться додаткова табличка.
-;;«;";;rewrites left French quotation marks to straight ones
-/*		6. «Я поважаю її як відважного, енергійного і чесного політика.
-;;»;";;rewrites right French quotation marks to straight ones
-/*		7. закономірно можна трактувати як «управлінське право».
+3;;„;";;replace curly quotes by straight quotes
+/*		3. що їй належить „по праву“.
+4;;«;";;rewrites left French quotation marks to straight ones
+/*		4. «Я поважаю її як відважного, енергійного і чесного політика.
+5;;»;";;rewrites right French quotation marks to straight ones
+/*		5. закономірно можна трактувати як «управлінське право».
+6;;‘;';;replace curly apostrophe by straight one
+/*		6. Новообраний мер добре пам‘ятає про своє італійське коріння.
+7;;’;';;replace curly apostrophe by straight one
+/*		7. провідні фактори, що є підґрунтям різних форм патології, пов’язаної з пренатальною гіпоксією.
+8;;′;';;rewrite curly to straight apostrophe
+/*		8. провідні фактори, що є підґрунтям різних форм патології, пов′язаної з пренатальною гіпоксією.
+9;;`;';;rewrite curly to straight apostrophe
+/*		9. що біля пам'ятної дошки письменникові з`явиться додаткова табличка.
+10;;´;';;rewrite curly to straight apostrophe
+/*		10. що біля пам'ятної дошки письменникові з´явиться додаткова табличка.
+
+11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
+12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+
+23;;,-; , -;;adds space between comma and dash
+/*		23. «Те, що в нас називають житловим правом, є частина цивільного права»,- стверджував він.
+/*24;;--; -- ;;separates double dash from words
+;;--; --;;adds space before dash
+26;;\-";- ;;to prevent that " hinders the processing
+27;;\- ";- ;;to prevent that " hinders the processing
+28;;"-\; -;;to prevent that " hinders the processing
+
+31;;[…]; […] ;for omissions
+32;;[...]; [...] ;for omissions
+33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		33. історіях інших людей: матері, дружини, коханки…
+34;;...; ... ;;to prevent '...' to hinder the indexing
+
+35;;".[;". [;;for footnotes
+36;;,[; , [;;for footnotes
+/*		36. Найбільша країна, чия територія повністю лежить в Європі,[3] друга країна за величиною на європейському континенті.
+37;;."[;." [;;for footnotes
+38;;.[;. [;;for footnotes
+/*		38. після постання.[11] У зв'язку з входженням останньої.
+
+41;;(\;;;to make bracket attached to word NonRelevant
+/*		41. Філіппо Ліппі( вівтарна апсида 1452-1466 рр, собор в Прато).
+42;;[\;;;to make bracket attached to word NonRelevant
+43;;\);;;to make bracket attached to word NonRelevant
+44;;\];;;to make bracket attached to word NonRelevant
+45;;\|;;;to make vertical bar attached to word NonRelevant
+46;;|\;;;to make vertical bar attached to word NonRelevant
+
+47;;\•;;;to separate • from word beginning
+/*		47. у перекладі з латинської означає •«управління»-.
+
+51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
+52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
+
+
+/* language-specific items:
+
 ;;0р;0 р;;to separate number from "year"
-/*		8. на протязі листопада 2010р.
+/*		на протязі листопада 2010р.
 ;;1р;1 р;;to separate number from "year"
-/*		9. на протязі листопада 2011р.
+/*		на протязі листопада 2011р.
 ;;2р;2 р;;to separate number from "year"
-/*		10. на протязі листопада 2012р.
+/*		на протязі листопада 2012р.
 ;;3р;3 р;;to separate number from "year"
-/*		11. на протязі листопада 2013р.
+/*		на протязі листопада 2013р.
 ;;4р;4 р;;to separate number from "year"
-/*		12. на протязі листопада 2014р.
+/*		на протязі листопада 2014р.
 ;;5р;5 р;;to separate number from "year"
-/*		13. на протязі листопада 2015р.
+/*		на протязі листопада 2015р.
 ;;6р;6 р;;to separate number from "year"
-/*		14. на протязі листопада 2016р.
+/*		на протязі листопада 2016р.
 ;;7р;7 р;;to separate number from "year"
-/*		15. на протязі листопада 2017р.
+/*		на протязі листопада 2017р.
 ;;8р;8 р;;to separate number from "year"
-/*		16. на протязі листопада 2018р.
+/*		на протязі листопада 2018р.
 ;;9р;9 р;;to separate number from "year"
-/*		17. на протязі листопада 2019р.
-;;…; … ;;puts a space before and after ...
-/*		18. історіях інших людей: матері, дружини, коханки…
-;;,-;,;;to separate - from ,
-/*		20. «Те, що в нас називають житловим правом, є частина цивільного права»,- стверджував він.
-;;"-;";;to separate - from "
-/*		21. у перекладі з латинської означає •«управління»-.
-;;\•;;;to separate • from word beginning
-/*		22. у перекладі з латинської означає •«управління»-.
-;;.[;. [;;for footnotes,
-/*		23. після постання.[11] У зв'язку з входженням останньої.
-;;,[; , [;;for footnotes,
-/*		24. Найбільша країна, чия територія повністю лежить в Європі,[3] друга країна за величиною на європейському континенті.
-;;(\;;;to make bracket attached to word NonRelevant
-/*		26. Філіппо Ліппі( вівтарна апсида 1452-1466 рр, собор в Прато).
-;;[\;;;to make bracket attached to word NonRelevant
-/*		28. на думку прогресивних фахівців та молоді, опосередковано гальмують поступ держави.[Джерело?].
+/*		на протязі листопада 2019р.
+
 ;;IА;ІА;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;IБ;ІБ;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;IВ;ІВ;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
