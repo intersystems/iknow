@@ -10,11 +10,11 @@ using namespace iknow::base;
 FailureFunction::FailureFunction() {}
 FailureFunction::~FailureFunction() {}
 
-FailureFunction* FailureFunction::Create(GotoFunction *gotoFunc, OutputFunction *outputFunc_par) // ClassMethod Create(gotoFunc As GotoFunction, outputFunc As OutputFunction) As FailureFunction
+FailureFunction* FailureFunction::Create(GotoFunction* gotoFunc, OutputFunction* outputFunc_par, bool is_ideographic) // ClassMethod Create(gotoFunc As GotoFunction, outputFunc As OutputFunction) As FailureFunction
 {
-	LexrepOutputFunction *outputFunc = static_cast<LexrepOutputFunction*>(outputFunc_par); // cast to LexrepOutputFunction*
+	LexrepOutputFunction* outputFunc = static_cast<LexrepOutputFunction*>(outputFunc_par); // cast to LexrepOutputFunction*
 
-	FailureFunction *failFunc = new FailureFunction; // Set failFunc = ..%New()
+	FailureFunction* failFunc = new FailureFunction; // Set failFunc = ..%New()
 	failFunc->MaxState = outputFunc->MaxState; // Set failFunc.MaxState = outputFunc.MaxState
 
 	/*
@@ -30,6 +30,8 @@ FailureFunction* FailureFunction::Create(GotoFunction *gotoFunc, OutputFunction 
 		int depth = it->depth;
 		int state = it->state;
 		String input = it->input;
+		if (is_ideographic && ((int)input[0] >= 0x0030 && (int)input[0] <= 0x0039)) // Numericals are handled atomically, no merging !
+			continue;
 		int nextState = it->nextstate;
 
 		int failState = 0; // Set failState = 0

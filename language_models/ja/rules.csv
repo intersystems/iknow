@@ -16,8 +16,8 @@
 /* ---------- PHASE 2 ----------
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
-4608;2;typeConcept|JPParenOpen|*JPKatakana|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
-4609;2;typeConcept|JPParenOpen|*JPNumber|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+4608;2;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+4609;2;typeConcept|"("|*JPNumber|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
 
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
@@ -47,6 +47,7 @@
 3390;3;JPNumber|"~"|JPNumber;JPNumber-JPDateNum|Join|Join;
 3626;3;JPNumber|"〜"|JPNumber;JPNumber|Join|Join;
 3531;3;JPNumber|":"|JPNumber;JPNumber|Join|Join;
+4621;3;JPNumber|"-"|JPNumber;JPNumber|Join|Join;
 3518;3;"-"|JPNumber;JPNumber|Join;
 3395;3;JPNumber+^"数"|"、"|JPNumber+^"数"|"、"|JPNumber;JPNumber|Join|Join|Join|Join;
 3394;3;^JPAlphabet+^SBegin|JPNumber+^"数"|"、"|JPNumber;+Dummy|JPNumber|Join|Join;
@@ -496,6 +497,7 @@
 3336;5;JPNumber|JPFromTo+"~"|JPNumber;JPNumber|Join|Join;
 2969;5;JPTime|JPyori;^JPTime-JPtoki|JPPartAdvNOUN+JPEndRelation;
 3220;5;JPVerbNoun+JPVerbOther|JPta|JPyori;JPVerb|Join|JPPartAdvNOUN;
+4617;5;"約"|JPNumber+JPTime;JPNumber+JPDateTime+JPTime|Join;
 977;5;JPPrefix+^JPo|JPNumber;JPNumber|Join;
 3581;5;JPyen|JPtaka|JPtoki|JPni;JPCon|Join|Join|JPParticleNI;
 1174;5;JPyen|JPtaka;JPCon|Join;
@@ -1335,10 +1337,10 @@
 4435;5;JPCon|"継続"|JPSuruVerb:"し";JPCon|Join|*;
 4429;5;=JPCon|"安定":"追加":"開発":"紹介"|JPSuruVerb:"し";JPCon|JPVerb+JPSahen|Join;
 4406;5;JPte|"以降"|JPSuruNoun;JPPartAdvNOUN|Join|*;
-4545;5;JPTime+^JPNumber|JPSuruNoun+^JPPolite|JPSuruVerb;JPCon|JPCon|*;
 4546;5;*JPTime+^JPNumber|JPSuruNoun+JPPolite|JPSuruVerb;JPCon+JPDateTime|JPVerb|Join;
 4596;5;JPCon|"卒業":"継続"|JPPunctuation;^JPCon|Join|*;
 172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPSeparateDate+^JPYear+^JPTime+JPCon|JPSuruNoun+^"開始"+^"活動"+^"殺害"+^"施行"+^"入院"+^"表明"+^"受診";JPSuruNoun|Join;
+4545;5;JPTime+^JPNumber|JPSuruNoun+^JPPolite|JPSuruVerb:JPPunctuation;JPCon+JPDateTime|JPCon|*;
 3051;5;JPNumber|JPSuruNoun+^"中止"|JPPunctuation;^JPNumber|JPCount|JPPunctuation;
 3207;5;JPNumber|"連覇"|JPSuruVerb;JPNumber|JPCount|JPVerb;
 3050;5;JPPrefix|JPSuruNoun|JPPunctuation;JPCon|Join|JPPunctuation;
@@ -1352,6 +1354,7 @@
 3063;5;JPAdvTime+JPCon|JPAdv+JPVerbNoun|JPni;JPCon+DateTime|Join|JPParticleNI;
 2;5;JPAdvTime+^JPmazu|JPAdv;JPAdvTime|Join;
 4400;5;JPAdvTime+JPCon|JPAdvTime+JPBeginRelation+^"ずっと";JPCon+DateTime|Join;
+4615;5;JPAdvTime+JPTime|JPAdvTime;JPCon+JPDateTime|Join;
 3;5;JPAdvTime|JPAdvTime;JPAdvTime|Join;
 3511;5;JPPrefix|JPnakaguro|JPAdjNoun;JPCon|Join|Join;
 3635;5;^"一切"|JPPrefix|JPnakaguro|JPCon;*|JPCon|Join|Join;
@@ -1434,7 +1437,7 @@
 2286;5;JPSuruVerb|JPAdvTime+JPCon|JPni;^JPSuruVerb|JPAdvTime|Join;
 1193;5;JPAdvTime+JPCon|JPni;JPCon+DateTime|JPni;
 1286;5;JPAdvTime+JPCon|JPVerbNoun|JPga;JPCon|Join|JPParticleGA;
-194;5;JPAdvTime|JPha;JPAdvTime|Join;
+194;5;JPAdvTime+^JPTime|JPha;JPAdvTime|Join;
 746;5;JPCon|JPha|JPAdvNR|JPVerbOther;JPCon|-JPVerbOther|JPAdvNR|JPVerbOther;
 2252;5;JPVerbOther|JPSuffixVerb|JPSuffixVerb|JPsu;JPVerb|Join|Join|Join;
 2369;5;JPVerbOther|JPSuffixVerb|JPSuffixVerb|JPru;JPVerb|Join|Join|Join;
@@ -1518,14 +1521,14 @@
 204;5;JPVerbEndOther+^JPu+^JPbi|JPSuffixNoun;^JPVerbEndOther|-JPSuffixNoun;
 1769;5;JPSuruVerb|JPSuffixNoun;^JPSuruVerb|-JPSuffixNoun;
 3111;5;JPSuruVerb|JPra;JPSuruVerb|Join;
-205;5;JPNumber|JPCount|JPAdv+^JPParticlePREPO;JPNumber|Join|Join;
+205;5;JPNumber|JPCount|JPAdv+^JPParticlePREPO+^JPyori;JPNumber|Join|Join;
 4388;5;JPNumber|"施行";*|-JPCount+JPSuruNoun;
 206;5;JPNumber|JPCount;JPNumber|Join;
 207;5;JPPunctuation|JPCount;JPPunctuation|-JPCount;
 208;5;JPMonth|JPNumber;JPMonth+JPCon|Join;
 209;5;JPNumber|JPMonth;JPMonth+DateTime|Join;
 2856;5;JPMonth|JPSuffixTime;JPMonth+JPTime+DateTime|Join;
-211;5;JPNumber|JPCon|^JPku+^JPyori+^SEnd;^JPNumber-DateTime-JPPronInterr|JPCount|+Dummy;
+211;5;JPNumber|JPCon+^JPkara|^JPku+^JPyori+^SEnd;^JPNumber-DateTime-JPPronInterr|JPCount|+Dummy;
 3488;5;JPYear|JPMonth;JPMonth+DateTime|Join;
 3521;5;JPMonth|"~"|JPMonth;JPMonth|Join|Join;
 844;5;JPMonth|JPno;+JPCon|^JPno;
@@ -2232,7 +2235,7 @@
 1086;5;JPMonth|JPni|JPVerbOther;^JPCon|JPParticleNI|^JPVerbOther;
 1163;5;JPTime|JPAdvTime+JPCon|JPni;JPCon|Join|JPParticleNI;
 1987;5;JPAdjVBase|JPkoro;JPAttributive+OtherEntity|JPPartAdvNOUN+JPEndRelation;
-402;5;JPAdvTime|JPni;JPAdv|Join;
+402;5;JPAdvTime+^JPTime|JPni;JPAdv|Join;
 1109;5;JPAttributiveNR|JPnaka;JPAttributiveNR|JPNINounOther;
 1603;5;JPAdvTime+JPCon|JPde;JPCon+DateTime|JPde;
 1870;5;JPParticleNO|JPAdv+JPCon|JPde;^JPno|JPCon|JPParticleDE;
@@ -2249,7 +2252,7 @@
 415;5;JPAdv|JPmo;JPAdv|Join;
 1597;5;JPAttributive|JPAdvTime+JPCon|JPmo;^JPAttributive|JPCon|JPParticleMO;
 4234;5;typeConcept+^"の"|"後"|JPmo;+Dummy|JPCon|JPParticleMO;
-416;5;JPAdvTime|JPmo;JPAdvTime|Join;
+416;5;JPAdvTime+^JPkoro|JPmo;JPAdvTime|Join;
 417;5;JPAdv|JPParticleWO;JPCon|JPParticleWO;
 420;5;JPComma|JPAdv|JPAdjVBase|JPComma;JPComma|JPAdj|Join|JPComma;
 784;5;JPParticlePREPO|JPAdv|JPAdjVBase;JPParticlePREPO|JPAdjVBase|Join;
@@ -2306,6 +2309,7 @@
 3863;5;JPki|JPo;-JPVerbOther|^JPo;
 3792;5;JPki|JPmi;-JPVerbOther|^JPmi;
 4191;5;"かた"|JPku;-JPVerbOther|-JPVerbOther;
+4614;5;JPTime|JPSuffixNoun+JPVerbOther|JPVerbOther;*|-JPVerbOther|*;
 438;5;JPVerbOther+^JPue+^JPkara+^JPAdvNR+^JPta+^JPten+^JPfun_kanji_1+^JPnara|JPVerbOther+^JPkara+^JPto+^JPno+^JPya+^"痛"+^JPo+^"み";JPVerbOther|Join;
 3317;5;JPue|JPkara;JPParticlePREPO|Join;
 995;5;JPSuffixVerb|JPnai;JPSuffixVerb+JPNegation|Join;
@@ -2803,8 +2807,8 @@
 2331;5;JPAdjVConjPast|JPParticleNO|JPParticleHA;JPAdjVConjPast|JPNonRelevant|JPParticleHA;
 2725;5;JPni|JPVerb|JPten;JPParticleNI|^JPVerb|JPPartAdvNOUN+JPEndRelation;
 1007;5;JPto|JPVerb|JPten;JPNonRelevant|JPEndRelation|JPNonRelevant;
-2760;5;BracketOpen+^"\("|JPVerbBase:JPAttributive+JPNegation|BracketClose;BracketOpen|JPAdj+JPNegation|BracketClose;
-1076;5;BracketOpen+^"\("|JPVerbBase:JPAttributive|BracketClose;BracketOpen|JPCon+Predicate|BracketClose;
+2760;5;BracketOpen+^"("|JPVerbBase:JPAttributive+JPNegation|BracketClose;BracketOpen|JPAdj+JPNegation|BracketClose;
+1076;5;BracketOpen+^"("|JPVerbBase:JPAttributive|BracketClose;BracketOpen|JPCon+Predicate|BracketClose;
 1853;5;JPVerbBase|JPnakaguro|JPVerbBase|JPnakaguro|JPVerbBase;JPCon|JPnakaguro|JPCon|JPnakaguro|JPCon;
 1318;5;JPda|BracketClose|JPto;^JPEndRelation|BracketClose|^JPto;
 1331;5;JPAuxVerb|BracketClose|JPto;^JPEndRelation|BracketClose|^JPto;
@@ -3307,6 +3311,7 @@
 848;5;JPTime;+JPCon-JPConjVerb;
 884;5;JPVerb|JPtoki|JPno;JPVerb|JPNINounOther|JPParticleNO;
 1240;5;JPCon|JPno|JPtoki|JPni;JPCon|JPAdvTime|Join|Join;
+4622;5;JPCon|JPno|JPtoki|^"の"+^"以上";JPEndConcept+JPTime|Join|Join|*;
 1490;5;JPCon|JPno|JPtoki;JPCon|Join|Join;
 1275;5;JPAdjNoun:JPCon|JPtoki;JPCon|Join+JPDateTime;
 1304;5;JPtoki|JPno|JPCon;JPAttributive|Join|^JPCon;
@@ -3505,6 +3510,7 @@
 1991;5;JPDate|JPAdvTime|JPComma;JPCon+DateTime|Join|JPComma;
 3039;5;JPComma|JPAdvTime+JPCon|JPComma;JPComma|JPCon+DateTime|JPComma;
 4577;5;JPTime|JPJoinDate|JPComma;JPTime+JPDateTime+DateTime|Join|*;
+4625;5;JPTime|JPAdvTime|JPComma;*|JPEndConcept+JPDateTime+DateTime|JPComma;
 965;5;JPAdvTime|JPComma;JPEndRelation|JPComma;
 1100;5;JPMonth;+JPCon;
 1929;5;JPDate|JPAdvTime+JPCon;^JPDate|Join;
@@ -4220,13 +4226,18 @@
 4045;13;"ぁ";Join;
 4047;13;"ぜ";Join;
 
+/* ---------- PHASE 17 ----------
+/*  ---------- Simple Negation Expansion ----------
+
+
+4626;17;typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|*|+JPNegStop;
+4627;17;typeConcept|JPParticleYA|typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|-JPNegBegin|*|*|+JPNegStop;
+
 /* ---------- PHASE 19 ----------
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
-4612;19;typeConcept|JPParenOpen|*JPKatakana|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
-4613;19;typeConcept|JPParenOpen|*JPNumber|JPParenClose;*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
-4610;19;JPParenOpen;-JPParenOpen;
-4611;19;JPParenClose;-JPParenClose;
+4612;19;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
+4613;19;typeConcept|"("|*JPNumber|")";*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
 
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS

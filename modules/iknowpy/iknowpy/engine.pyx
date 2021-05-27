@@ -32,6 +32,8 @@ cdef char* aType_to_str(Attribute t) except NULL:
 		return 'PositiveSentiment'
 	elif t == NegativeSentiment:
 		return 'NegativeSentiment'
+	elif t == EntityVector:
+		return 'EntityVector'
 	elif t == Frequency:
 		return 'Frequency'
 	elif t == Duration:
@@ -40,6 +42,13 @@ cdef char* aType_to_str(Attribute t) except NULL:
 		return 'Measurement'
 	elif t == Certainty:
 		return 'Certainty'
+	elif t == Generic1:
+		return 'Generic1'
+	elif t == Generic2:
+		return 'Generic2'
+	elif t == Generic3:
+		return 'Generic3'
+
 	raise ValueError(f'Attribute type {t} is unrecognized.')
 
 
@@ -274,7 +283,8 @@ cdef class iKnowEngine:
 				                       'unit': deref(sent_attr_iter).unit,
 				                       'value2': deref(sent_attr_iter).value2,
 				                       'unit2': deref(sent_attr_iter).unit2,
-				                       'entity_ref': deref(sent_attr_iter).entity_ref})
+				                       'entity_ref': deref(sent_attr_iter).entity_ref,
+									   'entity_vector': deref(sent_attr_iter).entity_vector})
 				postinc(sent_attr_iter)
 			path_attr_iter = sentence.path_attributes.begin()
 			while path_attr_iter != sentence.path_attributes.end():

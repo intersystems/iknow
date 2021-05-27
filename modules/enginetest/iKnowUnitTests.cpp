@@ -57,6 +57,10 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.DP402269(pError);
 		pError = "Issue86 : https://github.com/intersystems/iknow/issues/86";
 		test_collection.Issue86(pError);
+		pError = "Issue104 : https://github.com/intersystems/iknow/issues/104";
+		test_collection.Issue104(pError);
+		pError = "Normalizer test";
+		test_collection.Benjamin1(pError);
 
 	}
 	catch (std::exception& e) {
@@ -70,41 +74,57 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
-#include <fstream>
+void iKnowUnitTests::Benjamin1(const char* pMessage) {
+	string text_source_utf8 = u8"Risque d'exploitation";
 
-void IndexTextFile(string file_name, string language)
+	string normalized = iKnowEngine::NormalizeText(text_source_utf8, "fr");
+	if (normalized != u8"risque d' exploitation")
+		throw runtime_error("Benjamin1 : Wrong normalization for French.");
+}
+
+/// <summary>
+/// After adding some PathRelevant entities and simple path expansion, I’ve compared the outputs between IRIS NLP and iknowpy. I’ve found one difference which seems to result from different ways that IRIS & iknowpy identiy lexreps.
+/*
+Sentence: また、大川小のある釜谷地区では住民と在勤者、来訪者計232人のうち、181人が犠牲となったとの調査結果を報告。
+
+Lexrep identification for the part "232人のうち、181人が" in IRIS :
+Lexrep("232") = Numeric
+Lexrep("人") = JPCon + JPCount + JPRule3437 + Lit_人
+Lexrep("のうち") = JPParticlePREPO
+Lexrep("、") = JPComma + Lit_、
+Lexrep("181") = Numeric
+Lexrep("人") = JPCon + JPCount + JPRule3437 + Lit_人
+Lexrep("が") = JPga + Lit_が
+
+Lexrep identification for the same part in iknowpy :
+LexrepIdentified:232 : Numeric;
+LexrepIdentified:人:JPCon; JPRule3437; JPCount; Lit_人;
+LexrepIdentified:のうち:JPParticlePREPO;
+LexrepIdentified:、:JPComma; Lit_、;
+LexrepIdentified:181人 : JPCon; JPNumber; Lit_1人;
+LexrepIdentified:が:JPga; Lit_が;
+
+As can be seen, “181人” is identified differently : IRIS identifies the whole chunk of numbers “181” first, whereas iknowpy identifies the lexrep “1人” first.This difference results in different indexing results for the character "が", now that it can sometimes be PathRelevant rather than NonRelevant.With the general left - to - right principle, the IRIS way should be kept.
+*/
+/// </summary>
+/// <param name="pMessage"></param>
+/*
++[125]	"LexrepIdentified:<lexrep id=29 type=Concept value=\"232\" index=\"232\" labels=\"Numeric;\" />;"	std::string
++[126]	"LexrepIdentified:<lexrep id=30 type=Unknown value=\"äºº\" index=\"äºº\" labels=\"JPCon;JPRule3437;JPCount;Lit_äºº;\" />;"	std::string
++[127]	"LexrepIdentified:<lexrep id=61 type=Unknown value=\"ã®ã†ã¡\" index=\"ã®ã†ã¡\" labels=\"JPParticlePREPO;\" />;"	std::string
++[128]	"LexrepIdentified:<lexrep id=34 type=Unknown value=\"ã€\" index=\"ã€\" labels=\"JPComma;Lit_ã€;\" />;"	std::string
++[129]	"LexrepIdentified:<lexrep id=35 type=Concept value=\"181\" index=\"181\" labels=\"Numeric;\" />;"	std::string
+*/
+void iKnowUnitTests::Issue104(const char* pMessage)
 {
 	iKnowEngine engine;
+	String text_source = IkStringEncoding::UTF8ToBase(u8"また、大川小のある釜谷地区では住民と在勤者、来訪者計232人のうち、181人が犠牲となったとの調査結果を報告。");
 
-	std::ifstream is(file_name, std::ifstream::binary);
-	if (is) {
-		// get length of file:
-		is.seekg(0, is.end);
-		std::streamoff length = is.tellg();
-		is.seekg(0, is.beg);
-
-		char* buffer = new char[length];
-
-		std::cout << "Reading " << length << " characters... ";
-		// read data as a block:
-		is.read(buffer, length);
-		// ...buffer contains the entire file...
-
-		if (is)
-			std::cout << "all characters read successfully.";
-		else
-			std::cout << "error: only " << is.gcount() << " could be read";
-		is.close();
-
-		string utf8_text = string(buffer);
-		String text_source = IkStringEncoding::UTF8ToBase(utf8_text);
-
-		engine.index(text_source, language);
-		delete[] buffer;
+	engine.index(text_source, "ja", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("LexrepIdentified") != string::npos && it->find("value=\"181\"") != string::npos) return;
 	}
-	else {
-		throw std::runtime_error("File:" + file_name + "cannot be read !");
-	}
+	throw std::runtime_error("Issue104 : wrong lookup for Japanese numericals !" + string(pMessage));
 }
 
 void iKnowUnitTests::Issue86(const char* pMessage) { // UDCertainty test with certainty level
@@ -505,7 +525,8 @@ void iKnowUnitTests::test7(const char* pMessage) // https://github.com/intersyst
 {
 	iKnowEngine engine;
 
-	String text_source = IkStringEncoding::UTF8ToBase(u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。"); //  = > All Hiragana
+	string text_source_utf8 = u8"北海道・阿寒（あかん）湖温泉で自然体験ツアーに出かけた。";
+	String text_source = IkStringEncoding::UTF8ToBase(text_source_utf8); //  = > All Hiragana
 	engine.index(text_source, "ja", true);
 	bool bFurigana = false;
 	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
@@ -731,8 +752,10 @@ void iKnowUnitTests::test1(const char *pMessage) { // Japanese text should produ
 	engine.index(text_source, "ja");
 	if (engine.m_index.sentences.empty())
 		throw std::runtime_error(std::string(pMessage));
-	if (engine.m_index.sentences[0].path.empty()) {
+	if (engine.m_index.sentences[0].sent_attributes[0].type_ != EntityVector)
 		throw std::runtime_error(std::string(pMessage));
+	if (engine.m_index.sentences[0].path.empty()) {
+		throw std::runtime_error(std::string("Engine *must* generate Path data, even for Japanese"));
 	}
 	map<size_t, string> mapTextSource;
 	map<size_t, double> mapDominantConcepts;

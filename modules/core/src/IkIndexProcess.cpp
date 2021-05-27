@@ -136,7 +136,11 @@ void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDeb
 		} else { // path relevant style
 			BuildPathsFromPathRelevants(merged_lexrep_vector, path_vector);
 		}
-      }      
+	  }
+	  else { // Introducing path's for Japanese
+		  Paths& path_vector = sentence.GetPaths();
+		  BuildPathsFromPathRelevants(merged_lexrep_vector, path_vector);
+	  }
       SEMANTIC_ACTION(SentenceComplete(sentence, *m_pKnowledgebase));
       if (m_pKnowledgebase->GetMetadata<kHasEntityVectors>()) { 
 		IkSentence::EntityVector& eVectors = sentence.GetEntityVector();
@@ -164,7 +168,6 @@ iknow::base::String IkIndexProcess::NormalizeText(const iknow::base::String& inp
 	  output = buffer;
   }
   else { // Alphanumerical version
-	  //TODO: duplicative with CProcess code.
 	  if (ud) {
 		  ud->FilterInput(buffer);
 	  }
@@ -173,23 +176,25 @@ iknow::base::String IkIndexProcess::NormalizeText(const iknow::base::String& inp
 	  IkStringAlg::Normalize(buffer, bLowerCase, bStripPunct);
 	  //TODO: duplicative with FindNextSentence
 
-	  bool prev_was_space = false;
 	  String current_word; current_word.reserve(16);
 	  for (String::iterator i = buffer.begin(); i != buffer.end(); ++i) {
 		  if (!u_isprint(*i)) continue; // skip non printables.
 		  bool cur_is_space = u_isblank(*i) > 0;
 		  if (cur_is_space && !current_word.empty()) {
 			  FilterAll(current_word, kb);
+			  if (!output.empty()) // space separator necessary, FilterAll will trim all spaces
+				  output += SpaceString();
 			  output += current_word;
 			  current_word.clear();
 		  }
-		  if (!cur_is_space || !prev_was_space) {
-			  current_word += *i;
+		  else {
+			  if (!cur_is_space) current_word += *i;
 		  }
-		  prev_was_space = cur_is_space;
 	  }
 	  if (!current_word.empty()) {
 		  FilterAll(current_word, kb);
+		  if (!output.empty()) // space separator necessary, FilterAll will trim all spaces
+			  output += SpaceString();
 		  output += current_word;
 	  }
 	  else {
@@ -239,7 +244,11 @@ struct TokenProcessor {
     kb_(kb)
   {}
   void operator()(const Char* begin, const Char* end, bool bLastPiece) {    
-	if (begin == end && !bLastPiece) return; // empty tokens in list don't count
+	  if (begin == end && !bLastPiece) {
+		  if (literals_used_ == 0) // starts with a space, synchronize with literal.
+			  ++literals_used_;
+		  return; // empty tokens in list don't count
+	  }
 
     if (bLastPiece && literals_used_ < max_literal_-1) { // not all literals have been used, merge them on the current literal position
 	  text_refs_[literals_used_].second = text_refs_[max_literal_-1].second; // cover the merged text
@@ -249,6 +258,13 @@ struct TokenProcessor {
     if (literals_used_ < max_literal_) {
 	  literal_begin = text_refs_[literals_used_].first;
 	  literal_end = text_refs_[literals_used_].second;
+	  /*
+	  const Char* corrector = begin;
+	  while (*literal_end == *corrector && corrector<=end) { // correction for weak splitting
+		  literal_end++;
+		  corrector++;
+	  }
+	  */
     }
 	if (begin == end && literals_used_) { // empty token, merge literal with previous lexrep
 		result_.back().SetTextPointerEnd(literal_end); // enlarge latest literal
@@ -1048,6 +1064,35 @@ struct MatchesPattern : public binary_function<const IkLexrep, const IkRuleInput
 	  if (const short lexrep_length_option = pattern.GetLexrepLengthOption()) {
 		  if (lexrep.GetNormalizedValue().length() != static_cast<size_t>(lexrep_length_option)) return false;
 	  }
+	  uint8_t c_pattern;
+	  IkRuleInputPattern::MetaOperator c_operator;
+	  if (pattern.GetCertaintyLevelCheck(c_pattern, c_operator)) { // meta data check on certainty level
+		  uint8_t c_lexrep = static_cast<uint8_t>(lexrep.GetCertainty());
+		  switch (c_operator) {
+		  case IkRuleInputPattern::MetaOperator::eq: // equal operator
+			  if (!(c_lexrep == c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::gt: // greater than
+			  if (!(c_lexrep > c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::gteq: // greater than or equal
+			  if (!(c_lexrep >= c_pattern))
+				  return false;
+			  break;
+		  case IkRuleInputPattern::MetaOperator::lt: // lower than
+			  if (!(c_lexrep < c_pattern))
+				  return false;
+		  case IkRuleInputPattern::MetaOperator::lteq: // lower than or equal
+			  if (!(c_lexrep <= c_pattern))
+				  return false;
+			  break;
+		  default: // unknown/illegal operator
+			  throw ExceptionFrom<IkIndexProcess>("Unknown operator for certainty level check.");
+		  }
+	  }
+
 	if (!pattern.HasLabelTypes()) {
 		return pattern.IsMatch(pattern.MatchesGlobalLabelsSet() ? lexrep.GetLabels() : lexrep.GetLabels(phase_));
 	} else // send type information only if necessary

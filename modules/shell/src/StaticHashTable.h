@@ -87,10 +87,14 @@ namespace iknow {
       template<typename KeyT, typename ValueT>
       class Table {
       public:
-	typedef Bucket<KeyT,ValueT> BucketT;
-	typedef Pair<KeyT,ValueT> PairT;
-	Table() : begin_(0), end_(0) {}
-        Table(const BucketT* begin, size_t size) : begin_(begin), end_(begin + size) {}
+		typedef Bucket<KeyT,ValueT> BucketT;
+		typedef Pair<KeyT,ValueT> PairT;
+		Table() : begin_((iknow::shell::OffsetT)0), end_((iknow::shell::OffsetT)0) {}
+		Table(const BucketT* begin, size_t size) : begin_(begin), end_(begin + size) {}
+		Table(const Table& other) { // explicit copy constructor to avoid random bytes (due to type alignment).
+			this->begin_ = other.begin_;
+			this->end_ = other.end_;
+		}
 	//Look up a value by a range containing the key; useful when
 	//you want to use, say, a substring of an existing string without building
 	//a new one.

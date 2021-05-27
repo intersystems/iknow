@@ -113,6 +113,9 @@ iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 	case KatakanaLabel:
 		return IkStringEncoding::UTF8ToBase("Katakana");
 		break;
+	case CertaintyLabel:
+		return IkStringEncoding::UTF8ToBase("SCertainty");
+		break;
 	default:
 		throw ExceptionFrom<CSV_DataGenerator>("Unknown special label requested.");
 	}
@@ -134,6 +137,10 @@ iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 #define IKATTDURATION 		10
 #define IKATTMEASURE	 	11
 #define IKATTCERTAINTY		12
+#define IKATTGENERIC_1		13
+#define IKATTGENERIC_2		14
+#define IKATTGENERIC_3		15
+
 
 /*
 Method GetProperty(key As %Integer) As %List
@@ -152,7 +159,11 @@ const std::vector<std::pair<int, string>> CSV_DataGenerator::kb_properties = {
 	make_pair(IKATTFREQ, "Frequency"),
 	make_pair(IKATTDURATION, "Duration"),
 	make_pair(IKATTMEASURE, "Measurement"),
-	make_pair(IKATTCERTAINTY, "Certainty")
+	make_pair(IKATTCERTAINTY, "Certainty"),
+	make_pair(IKATTGENERIC_1, "Generic1"),
+	make_pair(IKATTGENERIC_2, "Generic2"),
+	make_pair(IKATTGENERIC_3, "Generic3"),
+
 };
 
 void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::ostream& os)
@@ -225,19 +236,6 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::
 	labelIndexTable["-"] = -1; //Set table("-") = -1
 }
 
-void CSV_DataGenerator::writeIRISlexreps(string lexreps_file)
-{
-	std::ofstream os(lexreps_file); // lexreps.csv file for IRIS
-	if (os.is_open()) {
-		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
-
-		for (auto it_lexrep = kb_lexreps.begin(); it_lexrep != kb_lexreps.end(); ++it_lexrep) {
-			os << ";" << it_lexrep->Meta << ";" << it_lexrep->Token << ";;" << it_lexrep->Labels << endl;
-		}
-		os.close();
-	}
-}
-
 /// Returns the pattern of a given regex index
 String CSV_DataGenerator::GetRegexPattern(String regexName) // Method GetRegexPattern(regexName As %String) As %String
 {
@@ -250,6 +248,19 @@ String CSV_DataGenerator::GetRegexPattern(String regexName) // Method GetRegexPa
 		}
 	}
 	return String();
+}
+
+void CSV_DataGenerator::writeIRISlexreps(string lexreps_file)
+{
+	std::ofstream os(lexreps_file); // lexreps.csv file for IRIS
+	if (os.is_open()) {
+		os << "\xEF\xBB\xBF"; // Force utf8 header, maybe utf8 is not the system codepage, for std::cout, use "chcp 65001" to switch
+
+		for (auto it_lexrep = kb_lexreps.begin(); it_lexrep != kb_lexreps.end(); ++it_lexrep) {
+			os << ";" << it_lexrep->Meta << ";" << it_lexrep->Token << ";;" << it_lexrep->Labels << endl;
+		}
+		os.close();
+	}
 }
 
 static const size_t kRawSize = 48000000;
@@ -561,14 +572,20 @@ template<typename IterT, typename TransformerT, typename StringT, typename KeyFu
 void LoadKbRangeAsTable(IterT begin, IterT end, size_t size, TransformerT& transformer, const Table<StringT, typename TransformerT::output_type>*& table, KeyFuncT key_function, RawAllocator& allocator) {
 	typedef typename TransformerT::output_type KbT;
 	typedef vector<KbT> Values;
-	Values values;
-	values.reserve(size);
-	transform(begin, end, back_inserter(values), transformer);
-	Builder<StringT, KbT> table_builder(values.size());
-	for (typename Values::const_iterator i = values.begin(); i != values.end(); ++i) {
-		table_builder.Insert(key_function(&*i), allocator.Insert(*i));
+
+	if (size == size_t(0)) { // empty table
+		table = allocator.Insert(Table<StringT, typename TransformerT::output_type>());
 	}
-	table = allocator.Insert(table_builder.Build(allocator));
+	else {
+		Values values;
+		values.reserve(size);
+		transform(begin, end, back_inserter(values), transformer);
+		Builder<StringT, KbT> table_builder(values.size());
+		for (typename Values::const_iterator i = values.begin(); i != values.end(); ++i) {
+			table_builder.Insert(key_function(&*i), allocator.Insert(*i));
+		}
+		table = allocator.Insert(table_builder.Build(allocator));
+	}
 }
 
 const unsigned char* iknow::shell::base_pointer = NULL;
@@ -818,7 +835,7 @@ void CSV_DataGenerator::CompileLexrepDictionaryPhase(/*kb As %iKnow.KB.Knowledge
 	metadataTable->AddValue(hasRegex); // do metadataTable.AddValue(hasRegex)
 
 	cout << "Building failure and second output table..." << endl;
-	iknow::AHO::FailureFunction *failureFunc = iknow::AHO::FailureFunction::Create(gotoFunc, outputFunc); // Set failureFunc = ##class(FailureFunction).Create(gotoFunc, outputFunc)
+	iknow::AHO::FailureFunction *failureFunc = iknow::AHO::FailureFunction::Create(gotoFunc, outputFunc, isIdeographic); // Set failureFunc = ##class(FailureFunction).Create(gotoFunc, outputFunc)
 	// Set sc = ##class(%File).CreateDirectoryChain(outputDir)
 	// If 'sc Throw ##class(%Exception.StatusException).CreateFromStatus(sc)
 

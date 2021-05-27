@@ -48,6 +48,7 @@ brew install dos2unix ccache
 # pyenv
 brew update --quiet > /dev/null
 brew install pyenv
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 # Python

@@ -107,6 +107,9 @@ static Utf8List ToList(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
         }
         trace_data += ";";
     }
+    std::string meta_data = lexrep.GetMetaData();
+    if (meta_data != std::string(""))
+        trace_data += "\" meta=\"" + meta_data;
     trace_data += "\" />";
     out.push_back(trace_data);
     return out;
@@ -198,6 +201,35 @@ static String ToString(const IkRuleInputPattern& pattern, const IkKnowledgebase&
 			out += kb.GetAtIndex(or_index).GetName();
 		}
 	}
+    // certainty level selector
+    {
+        uint8_t level;
+        IkRuleInputPattern::MetaOperator meta_operator;
+        if (pattern.GetCertaintyLevelCheck(level, meta_operator)) {
+            std::string meta_operator_string;
+            switch(meta_operator) {
+            case IkRuleInputPattern::MetaOperator::lt:   // lower then
+                meta_operator_string = "<";
+                break;
+            case IkRuleInputPattern::MetaOperator::lteq: // lower then or equal
+                meta_operator_string = "<=";
+                break;
+            case IkRuleInputPattern::MetaOperator::eq:   // equal
+                meta_operator_string = "=";
+                break;
+            case IkRuleInputPattern::MetaOperator::gteq: // greater then or equal
+                meta_operator_string = ">=";
+                break;
+            case IkRuleInputPattern::MetaOperator::gt:   // greater then
+                meta_operator_string = ">";
+                break;
+            case IkRuleInputPattern::MetaOperator::idle:    // noop
+            default:
+                break;
+            };
+            out += IkStringEncoding::UTF8ToBase(std::string("(c") + meta_operator_string + std::to_string(level)+")");
+        }
+    }
     out += '+';
   }
   if (!out.empty()) out.erase(out.size() - 1); //Delete last +
@@ -232,6 +264,24 @@ static String ToString(const IkRuleOutputPattern& pattern, const IkKnowledgebase
     if (action == IkRuleOutputAction::kAddLabel && i != pattern.ActionsBegin()) out += '+';
     if (action == IkRuleOutputAction::kRemoveLabel) out += '-';
     out += kb.GetAtIndex(index).GetName();
+  }
+  uint8_t certainty_level;
+  switch (pattern.GetCertaintyOperation(certainty_level)) {
+  case IkRuleOutputPattern::MetaOperator::del:
+      out += IkStringEncoding::UTF8ToBase(std::string("(-c)"));
+      break;
+  case IkRuleOutputPattern::MetaOperator::minus:
+      out += IkStringEncoding::UTF8ToBase(std::string("(c-")+std::to_string(certainty_level)+std::string(")"));
+      break;
+  case IkRuleOutputPattern::MetaOperator::plus:
+      out += IkStringEncoding::UTF8ToBase(std::string("(c+")+std::to_string(certainty_level)+std::string(")"));
+      break;
+  case IkRuleOutputPattern::MetaOperator::set:
+      out += IkStringEncoding::UTF8ToBase(std::string("(c=")+std::to_string(certainty_level)+std::string(")"));
+      break;
+  case IkRuleOutputPattern::MetaOperator::idle: // noop
+  default:
+      break;
   }
   return out;
 }
@@ -312,10 +362,6 @@ void IkIndexDebug<Utf8List>::LexrepCreated(const IkLexrep& lexrep, const IkKnowl
 
 void IkIndexDebug<Utf8List>::LexrepIdentified(const IkLexrep& lexrep, const IkKnowledgebase& kb) {
     Utf8List out = ToList(lexrep, kb);
-    std::string meta = lexrep.GetMetaData();
-    if (!meta.empty()) {
-        out.push_back(meta);
-    }
     trace_.Add("LexrepIdentified", out);
 }
 

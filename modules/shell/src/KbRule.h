@@ -37,6 +37,41 @@ namespace iknow {
       void operator=(const WithRuleLabelMap& other);
     };
 
+	struct RuleOutputExtraOptionParser {
+		RuleOutputExtraOptionParser(iknow::core::IkRuleOutputPattern::MetaOperator& certainty_operator, uint8_t& certainty_level) :
+			certainty_operator_(certainty_operator), certainty_level_(certainty_level)
+		{}
+		void operator()(const char* begin_token, const char* end_token) {
+			if (*begin_token == 'c') { // certainty level operation
+				switch (*(begin_token + 1)) {
+				case '=':
+					certainty_operator_ = iknow::core::IkRuleOutputPattern::MetaOperator::set;
+					break;
+				case '+':
+					certainty_operator_ = iknow::core::IkRuleOutputPattern::MetaOperator::plus;
+					break;
+				case '-':
+					certainty_operator_ = iknow::core::IkRuleOutputPattern::MetaOperator::minus;
+					break;
+				default:
+					throw ExceptionFrom<KbRule>("Illegal metadata operation output rule" + std::string(begin_token, end_token));
+				}
+				std::string c_par(begin_token+2,end_token);
+				int c_level = std::stoi(c_par);
+				if (c_level<0 || c_level>9)
+					throw ExceptionFrom<KbRule>("Illegal metadata operation output rule" + std::string(begin_token, end_token));
+				certainty_level_ = static_cast<uint8_t>(c_level);
+
+			} else {
+				throw ExceptionFrom<KbRule>("Illegal metadata operation output rule"+std::string(begin_token, end_token));
+			}
+		}
+		iknow::core::IkRuleOutputPattern::MetaOperator& certainty_operator_;
+		uint8_t& certainty_level_;
+	private:
+		void operator=(const RuleOutputExtraOptionParser& other);
+	};
+
     template<typename MapT>
     struct RuleOutputItemParser  : private WithRuleLabelMap<MapT> {
       RuleOutputItemParser(const MapT& label_map,
@@ -80,14 +115,27 @@ namespace iknow {
 		  using iknow::core::IkRuleOutputPattern;
 		  using iknow::core::IkRuleOutputAction;
 
-		  if (utf8_label_string == std::string("*")) { // No Operation output pattern : don't touch
+		  iknow::core::IkRuleOutputPattern::MetaOperator certainty_operator = iknow::core::IkRuleOutputPattern::MetaOperator::idle;
+		  uint8_t certainty_level = static_cast<uint8_t>(0);
+
+		  const char* begin_pattern = utf8_label_string.c_str();
+		  size_t pattern_extra_options = utf8_label_string.find('('); // handle lexrep metadata operations
+		  const char* end_pattern = begin_pattern + (pattern_extra_options != std::string::npos ? pattern_extra_options : utf8_label_string.length());
+
+		  if (pattern_extra_options != std::string::npos) {
+			  RuleOutputExtraOptionParser option_parser(certainty_operator, certainty_level);
+			  const char* begin_options = begin_pattern + pattern_extra_options + 1; // skip leading '('
+			  const char* end_options = &(*(utf8_label_string.end() - 1)); // skip ending ')'
+			  iknow::base::IkStringAlg::Tokenize(begin_options, end_options, ',', option_parser);
+		  }
+		  std::string utf8_label_name = std::string(begin_pattern, end_pattern); // strip-off lexrep metadata
+		  if (utf8_label_name == std::string("*")) { // No Operation output pattern : don't touch
 			  pattern_.push_back(IkRuleOutputPattern()); // Default is no operation
 			  return;
 		  }
+		  
 		  //Parse off any modifier character if present.
-		  std::string utf8_label_name = utf8_label_string;
 		  IkRuleOption options;
-
 		  if (utf8_label_name == std::string("Join")) { // to be backwards compatible, a Join action needs to remove all labels, even on different phases
             options = IkRuleOption::GetJoinRuleOptions();
 		  } else {
@@ -127,27 +175,81 @@ namespace iknow {
 		if (begin != end) item_parser(std::string(begin, end)); //Anything left over?
 
 		pattern_.push_back(IkRuleOutputPattern(actions.begin(), actions.end(), options)); // store output pattern
+		if (certainty_operator != iknow::core::IkRuleOutputPattern::MetaOperator::idle) {
+			pattern_.back().SetCertaintyOperation(certainty_operator, certainty_level);
+		}
       }
       std::vector<iknow::core::IkRuleOutputPattern>& pattern_;
     private:
       void operator=(const RuleOutputStringParser& other);
     };
 
+	inline void check_certainty_level(std::string& input, std::string& value, uint8_t& c_level) {
+		int level = std::stoi(value); // get the int range
+		if (level > 9 || level < 0)
+			throw ExceptionFrom<KbRule>("Certainty level exceeds limits [0-9]:" + input);
+		c_level = static_cast<uint8_t>(level);
+	}
+
 	struct RuleInputExtraOptionParser {
-		RuleInputExtraOptionParser(short& lexrep_length) : lexrep_length_(lexrep_length) {}
+		RuleInputExtraOptionParser(short& lexrep_length, iknow::core::IkRuleInputPattern::MetaOperator& certainty_operator, uint8_t& certainty_level) : 
+			lexrep_length_(lexrep_length), certainty_operator_(certainty_operator), certainty_level_(certainty_level)
+		{}
 		void operator()(const char* begin_token, const char* end_token) { 
-			std::string buf(begin_token, end_token); // std::string buf("len=2");
-			size_t equal_sign_offset = buf.find('=');
+			std::string buf(begin_token, end_token);
+			size_t op_lower = buf.find('<'); // std::string buf("c<2");
+			if (op_lower != std::string::npos) {
+				std::string key(begin_token, begin_token + op_lower);
+				if (buf[op_lower + 1] == '=') {  // std::string buf("c<=2");
+					size_t op_lower_or_equal = op_lower + 1;
+					std::string value(begin_token + op_lower_or_equal + 1, end_token);
+					check_certainty_level(buf, value, certainty_level_);
+					certainty_operator_ = iknow::core::IkRuleInputPattern::MetaOperator::lteq;
+					return;
+				}
+				std::string value(begin_token + op_lower + 1, end_token);
+				check_certainty_level(buf, value, certainty_level_);
+				certainty_operator_ = iknow::core::IkRuleInputPattern::MetaOperator::lt;
+				return;
+			}
+			size_t op_higher = buf.find('>'); // std::string buf("c>2");
+			if (op_higher != std::string::npos) {
+				std::string key(begin_token, begin_token + op_higher);
+				if (buf[op_higher + 1] == '=') {  // std::string buf("c>=2");
+					size_t op_higher_or_equal = op_higher + 1;
+					std::string value(begin_token + op_higher_or_equal + 1, end_token);
+					check_certainty_level(buf, value, certainty_level_);
+					certainty_operator_ = iknow::core::IkRuleInputPattern::MetaOperator::gteq;
+					return;
+				}
+				std::string value(begin_token + op_higher + 1, end_token);
+				check_certainty_level(buf, value, certainty_level_);
+				certainty_operator_ = iknow::core::IkRuleInputPattern::MetaOperator::gt;
+				return;
+			}
+			size_t equal_sign_offset = buf.find('='); // std::string buf("len=2");
 			if (equal_sign_offset != std::string::npos) {
 				std::string key(begin_token, begin_token + equal_sign_offset);
 				std::string value(begin_token + equal_sign_offset +1, end_token);
 				if (!key.compare("len")) {
-					int value_int = static_cast<int> (value[0] - '0'); // range is 0 to 9
-					if (value_int > 0 && value_int <= 9) lexrep_length_ = static_cast<short> (value_int);
+					int value_int = std::stoi(value); // get the int range
+					if (value_int > 9 || value_int < 0) 
+						throw ExceptionFrom<KbRule>("Length level exceeds limits [0-9]:" + buf);
+					lexrep_length_ = static_cast<short>(value_int);
+					return; 
+				}
+				if (!key.compare("c")) { // certainty level
+					certainty_operator_ = iknow::core::IkRuleInputPattern::MetaOperator::eq;
+					check_certainty_level(buf, value, certainty_level_);
+					return;
 				}
 			}
+			// This is the unknow parameter zone !
+			throw ExceptionFrom<KbRule>("Unknow parameter in rules.csv:" + buf);
 		}
 		short& lexrep_length_;
+		iknow::core::IkRuleInputPattern::MetaOperator& certainty_operator_;
+		uint8_t& certainty_level_;
 	private:
 		void operator=(const RuleInputExtraOptionParser& other);
 	};
@@ -255,6 +357,7 @@ namespace iknow {
     struct RuleInputStringParser : private WithRuleLabelMap<MapT> {
       RuleInputStringParser(const MapT& label_map, std::vector<iknow::core::IkRuleInputPattern>& pattern) :
         WithRuleLabelMap<MapT>(label_map), pattern_(pattern) {}
+
       void operator()(const std::string& utf8_label_pattern) {
         if (utf8_label_pattern.empty()) return; //ignore empty labels
         std::vector<iknow::core::FastLabelSet::Index> labels;
@@ -267,9 +370,12 @@ namespace iknow {
 		size_t pattern_extra_options = utf8_label_pattern.find('(');
 		const char* end_pattern = begin_pattern + (pattern_extra_options != std::string::npos ? pattern_extra_options : utf8_label_pattern.length());
 		short lexrep_length_extra_condition = static_cast<short>(0);
+		iknow::core::IkRuleInputPattern::MetaOperator certainty_operator = iknow::core::IkRuleInputPattern::MetaOperator::idle;
+		uint8_t certainty_level = static_cast<uint8_t>(0);
 		bool b_narrow = false; // variable narrow flag
+
 		if (pattern_extra_options != std::string::npos) {
-			RuleInputExtraOptionParser option_parser(lexrep_length_extra_condition);
+			RuleInputExtraOptionParser option_parser(lexrep_length_extra_condition, certainty_operator, certainty_level);
 			const char* begin_options = begin_pattern + pattern_extra_options + 1; // skip leading '('
 			const char* end_options = &(*(utf8_label_pattern.end() - 1)); // skip ending ')'
 			iknow::base::IkStringAlg::Tokenize(begin_options, end_options, ',', option_parser);
@@ -308,7 +414,7 @@ namespace iknow {
 			}
 		}
         iknow::base::IkStringAlg::Tokenize(begin_pattern, end_pattern, '+', item_parser);
-		pattern_.push_back(iknow::core::IkRuleInputPattern(labels.begin(), labels.end(), or_labels.begin(), or_labels.end(), options.begin(), options.end(), uses_label_types, rule_var, b_narrow, lexrep_length_extra_condition, begin_pattern, end_pattern));
+		pattern_.push_back(iknow::core::IkRuleInputPattern(labels.begin(), labels.end(), or_labels.begin(), or_labels.end(), options.begin(), options.end(), uses_label_types, rule_var, b_narrow, lexrep_length_extra_condition, certainty_operator, certainty_level, begin_pattern, end_pattern));
 		if (hasVariableLimits) {
 			pattern_.back().SetVariableLimits(var_length_limits);
 		}
