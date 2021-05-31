@@ -2,55 +2,75 @@
 /* general:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		¿Es que no “logra” o que no “quiera”?
 2;;”;";;replace curly quotes by straight quotes
+/*		no “logra” o que no “quiera”.
 3;;„;";;replace curly quotes by straight quotes
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		no ‘logra’ o que no ‘quiera’.
 7;;’;';;replace curly apostrophe by straight one
+/*		no ‘logra’ o que no ‘quiera’.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
 10;;´;';;rewrite curly to straight apostrophe
+/*		Juan D´Arienzo.
 
 11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+/*		La exposición de algunas obras de Dalí —incluida la célebre Persistencia...— levantó un enorme revuelo en Nueva York.
 
 16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*		La exposición de algunas obras de Dalí —incluida la célebre Persistencia...— levantó un enorme revuelo en Nueva York.
 17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*		Así se observa en muchas de sus obras —sobre todo las creadas en la década de los 50— en las cuales llegó a componer retratos individuales a partir de cuernos de rinoceronte.
 /*18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
 19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		Los potenciales empleados reciben por correo electrónico –y guardando el anonimato– las evaluaciones sobre el estilo de gestión y otra serie de contenidos.
 20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		Los potenciales empleados reciben por correo electrónico –y guardando el anonimato– las evaluaciones sobre el estilo de gestión y otra serie de contenidos.
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		Harvard–Smithsonian Center.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
 
 23;;,-; , -;;adds space between comma and dash
 /*24;;--; -- ;;separates double dash from words
 ;;.-;. -;;adds space between period and dash
+/*		(Vasco Press).- El debate interno de Batasuna se está desarrollando con tensiones.
 ;;--; — ;;to detach double dash from word
+/*		un joven músico --¡tantos músicos en ese vuelo!-- que llevaba una semana en la isla.
 26;;\-";- ;;to prevent that " hinders the processing
+/*		En el modelo aristotélico lo celestial pertenecía a la perfección -"cuerpos celestes perfectamente esféricos moviéndose en órbitas circulares perfectas"-, mientras que lo terrestre era imperfecto.
 27;;\- ";- ;;to prevent that " hinders the processing
 28;;"-\; -;;to prevent that " hinders the processing
+/*		En el modelo aristotélico lo celestial pertenecía a la perfección -"cuerpos celestes perfectamente esféricos moviéndose en órbitas circulares perfectas"-, mientras que lo terrestre era imperfecto.
 
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
 33;;…; … ;;adds spaces to prevent … to become part of Concept
+/*		Barcelona, Huesca, Madrid, Murcia… (14).
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		¿Señala con el dedo para mostrar interés, compartir...?
 
 35;;".[;". [;;for footnotes
+/*		una relación de "gobierno a gobierno".[1]
 36;;,[; , [;;for footnotes
+/*		Él mismo hablaba con el característico cantito de los cordobeses,[21] aunque luego en Cuba adoptaría un acento marcadamente cubano.
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
+/*		tres grandes unidades de paisaje.[29]
 39;;[\; [;;for footnotes
 ;;».[;». [;;for footnotes
+/*		los «más pesados que el aire».[1]
 
 41;;(\;;;to make bracket attached to word NonRelevant
+/*		dentro de la cuenta.( el debe es la parte izquierda.
 42;;[\;;;to make bracket attached to word NonRelevant
 43;;\);;;to make bracket attached to word NonRelevant
 44;;\];;;to make bracket attached to word NonRelevant
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
-
-47;;\•;;;to separate • from word beginning
 
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
@@ -60,17 +80,22 @@
 /*56;;-- -\;---;;reconstruct dotted lines
 
 ;;-,\; -,;;
+/*		En el modelo aristotélico lo celestial pertenecía a la perfección -"cuerpos celestes perfectamente esféricos moviéndose en órbitas circulares perfectas"-, mientras que lo terrestre era imperfecto.
 ;;-:\; -:;;
+/*		Así, las transferencias corrientes del Estado se redujeron un 4,4% y pesó sobre todo la menor transferencia a los Servicios Públicos de Empleo -que pagan las prestaciones por paro-: 6.843 millones frente a 9.508 millones que remitió en el mismo periodo de 2009.
 ;;-.\; -.;;
+/*		Este eclipse sera total durante unos generosos 72 minutos -de nuevo, para quien se encuentre en una zona del mundo con suerte-.
 
 
 /* language-specific items
 
 ;;\no-;no- ;;to be able to add Negation to the prefix
+/*		el automatismo mecánico de un dispositivo no-humano de producción de imágenes.
 
 ;;-¡;- ¡;;to strip off initial hyphen and inversed exclamation mark that hinder lexrep lookup, step 1
 ;;-¿;- ¿;;to strip off initial hyphen and inversed question mark that hinder lexrep lookup, step 1
 ;; ¡; ¡ ;;to strip off inversed exclamation mark after pre-processed hyphen that hinders lexrep lookup
+/*		un joven músico --¡tantos músicos en ese vuelo!-- que llevaba una semana en la isla.
 ;; ¿; ¿ ;;to strip off inversed question mark after pre-processed hyphen that hinders lexrep lookup
 ;;\-a;- a;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-á;- á;;to strip off initial hyphen that hinders lexrep lookup
@@ -103,8 +128,10 @@
 ;;\-w;- w;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-x;- x;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-y;- y;;to strip off initial hyphen that hinders lexrep lookup
+/*		la Comisión aprobó una Comunicación interpretativa -y subrayo interpretativa- sobre inversiones intracomunitarias que no sometió ni al Parlamento Europeo ni al Consejo.
 ;;\-z;- z;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-A;- A;;to strip off initial hyphen that hinders lexrep lookup
+/*		-Antes decía que la esencia del Neolítico era la actividad económica.
 ;;\-Á;- Á;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-B;- B;;to strip off initial hyphen that hinders lexrep lookup
 ;;\-C;- C;;to strip off initial hyphen that hinders lexrep lookup

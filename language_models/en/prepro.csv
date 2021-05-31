@@ -2,38 +2,53 @@
 /* general:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		John said: “It's been a long day.”
 2;;”;";;replace curly quotes by straight quotes
+/*		John said: “It's been a long day.”
 3;;„;";;replace curly quotes by straight quotes
+/*		„I'm at home”, he said.
 4;;«;";;rewrites left French quotation marks to straight ones
 5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		The ‘new’ problem of outdoor air pollution is too large to be ignored or deferred to tomorrow’s agenda.
 7;;’;';;replace curly apostrophe by straight one
+/*		I see that you’re happy.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
+/*		The patient`s cardiac failure congestive persisted.
 10;;´;';;rewrite curly to straight apostrophe
 
 /*11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 /*12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
 ;;-–; -- ;;isolates 2d+e2-80-93
-16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
-17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*		But the British Paralympic Association along with their Canadian counterparts – Canada’s Diane Roy had been awarded the gold medal -– are reviewing documentation to assess whether they can appeal.
+/*16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
 /*18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
 ;;—; - ;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters + isolate
+/*		It is a life — for her and her family, for all of the inhabitants of this grindingly poor community — that is lived on a precipice.
 19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		He filled their suite with her favourite flowers –lillies– and they married the following year.
 20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		their suite with her favourite flowers –lillies– and they married the following year.
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		a 3–1 deficit.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		ASTONISHING messages charting communications bet­ween police and a BBC reporter have been seized.
 
 23;;,-; , -;;adds space between comma and dash
 24;;--; -- ;;separates double dash from words
+/*		Shingles is caused by the varicella zoster virus--the same member of the herpes family that causes chickenpox.
 26;;\-";- ;;to prevent that " hinders the processing
 27;;\- ";- ;;to prevent that " hinders the processing
 28;;"-\; -;;to prevent that " hinders the processing
 
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
-33;;…; … ;;adds spaces to prevent … to become part of Concept 
+33;;…; … ;;adds spaces to prevent … to become part of Concept
+/*		They want… a new system.
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		The company will employ a more aggressive acquisition approach...and accept higher risk in evaluating investment targets.
 
 35;;".[;". [;;for footnotes
 36;;,[; , [;;for footnotes
@@ -47,122 +62,193 @@
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
 
-47;;\•;;;to separate • from word beginning
-
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
 53;;--  --;----;;reconstruct dotted lines
+/*		RVC = -------------- x 100 .
 54;;--  --;----;;repeat: reconstruct dotted lines
+/*		RVC = -------------- x 100 .
 55;;-- - ;--- ;;reconstruct dotted lines
+/*		RVC = -------------- x 100 .
 56;;-- -\;---;;reconstruct dotted lines
+/*		RVC = -------------- x 100 .
 
 
 /* language-specific items: 
-/*;;h/o;h /o;;history of
+;;h/o;h /o;;history of
+/*		The patient is a 66 yo man with h/o CVA in October 2016.
 ;;I'll;I 'll;;
+/*		Do you think I'll manage?
 ;;\i'll;I 'll;;
+/*		i think i’ll be there.
 ;;I've;I 've;;
+/*		He knows I've said that.
 ;;\Ive\;I 've;;
 ;;\ive\;I 've;;
 ;;I'm;I 'm;;
+/*		"I'm at home", he said.
 ;;\i'm\;I 'm;;
 ;;I'd;I 'd;;
+/*		I'd rather go to New York.
 ;;\Id\;I 'd;;
 ;;you've;you 've;;
+/*		She told that you’ve been on holiday.
 ;;\youve\;you 've;;
 ;;you're;you 're;;
+/*		I see that you’re happy.
 ;;\youre\;you 're;;
 ;;you'll;you 'll;;
+/*		I think you'll be disappointed.
 ;;\youll\;you 'll;;
 ;;you'd;you 'd;;
+/*		Perhaps you'd like to buy a flower.
 ;;\youd\;you 'd;;
 ;;You're;You 're;;
+/*		You’re too late.
 ;;\Youre\;You 're;;
 ;;You'll;You 'll;;
+/*		You’ll get a message.
 ;;\Youll\;You 'll;;
 ;;You've;You 've;;
+/*		You’ve seen it.
 ;;\Youve\;You 've;;
 ;;You'd;You 'd;;
+/*		You'd be sitting at the top of a high hill.
 ;;\Youd\;You 'd;;
 ;;he'll;he 'll;;
+/*		He said he’ll be there.
 ;;he's;he 's;;
+/*		Reportedly, she's in Spain.
 ;;\hes\;he 's;;
 ;;he'd;he 'd;;
+/*		In six short years he'd made a name for himself.
 ;;\hed\;he 'd;;
 ;;He'll;He 'll;;
+/*		He'll be there.
 ;;He's;He 's;;
+/*		He's my brother.
 ;;\Hes\;He 's;;
 ;;He'd;He 'd;;
+/*		He'd moved to Las Vegas.
 ;;\Hed\;He 'd;;
 ;;we're;we 're;;
+/*		I heard we’re almost there.
 ;;we've;we 've;;
+/*		She says we’ve ordered lunch.
 ;;\weve\;we 've;;
 ;;we'll;we 'll;;
+/*		He said we'll arrive on time.
 ;;we'd;we 'd;;
+/*		In the past we'd all be kings.
 ;;We've;We 've;;
+/*		We’ve eaten soup.
 ;;\Weve\;We 've;;
 ;;We're;We 're;;
+/*		We’re looking into it.
 ;;We'll;We 'll;;
+/*		We'll go to London.
 ;;We'd;We 'd;;
+/*		We'd like to see your performance.
 ;;They've;They 've;;
+/*		They’ve gone to Miami.
 ;;\Theyve\;They 've;;
 ;;They're;They 're;;
+/*		They're watching TV.
 ;;\Theyre\;They 're;;
 ;;They'll;They 'll;;
+/*		They’ll come soon.
 ;;\Theyll\;They 'll;;
 ;;They'd;They 'd;;
+/*		They'd also have to stop financing the research branch.
 ;;\Theyd\;They 'd;;
 ;;they've;they 've;;
+/*		He said they’ve moved out.
 ;;\theyve\;they 've;;
 ;;they're;they 're;;
+/*		He said they’re moving.
 ;;\theyre\;they 're;;
 ;;they'll;they 'll;;
+/*		He said they’ll send an e-mail.
 ;;\theyll\;they 'll;;
 ;;they'd;they 'd;;
+/*		This would be the year they'd be hauling in scholarships.
 ;;\theyd\;they 'd;;
 ;;It's;It 's;;
+/*		It's been a long day.
 ;;\it's\;it 's;;
+/*		I think it’s been a long day.
 ;;It'll;It 'll;;
+/*		It'll be raining tomorrow.
 ;;\it'll\;it 'll;;
+/*		When it'll work depends on your ambition.
 ;;Who's;Who 's;;
+/*		Who's the man next to William?
 ;;\Whos\;Who 's;;
 ;;Who'd;who 'd;;
+/*		Who'd like to go there?
 ;;\Whod\;Who 'd;;
 ;;who's;who 's;;
+/*		I've no idea who's coming to the party tonight.
 ;;\whos\;who 's;;
 ;;who'd;who 'd;;
+/*		I've asked who’d like to go there.
 ;;\whod\;who 'd;;
 ;;Who've;who 've;;
+/*		Who've read this book already?
 ;;who've;who 've;;
+/*		Students who've worked on the homework can go play now.
 ;;Who'll;who 'll;;
+/*		Who'll go to the library tomorrow?
 ;;who'll;who 'll;;
+/*		Parents who'll drive the children to the show will get parking spaces.
 ;;What's;What 's;;
+/*		What's a 'lag bolt'?
 ;;\Whats\;What 's;;
 ;;what's;what 's;;
+/*		They don't want to tell what's going on.
 ;;\whats\;what 's;;
 ;;That's;That 's;;
+/*		That's a difficult question.
 ;;\Thats\;That 's;;
 ;;that's;that 's;;
+/*		For our club, that's the event of the year.
 ;;\thats\;that 's;;
 ;;That'll;That 'll;;
+/*		That’ll be a discussion point, I’m sure.
 ;;that'll;that 'll;;
+/*		It's a theory that'll get put to the test soon.
 ;;This'll;This 'll';;
+/*		This'll stay in place.
 ;;this'll;this 'll';;
+/*		As an insert, this'll be easier to do.
 ;;There's;There 's;;
+/*		There's a supermarket in the centre.
 ;;\Theres\;There 's;;
 ;;there's;there 's;;
+/*		There used to be a supermarket but there's a shoe shop now.
 ;;\theres\;there 's;;
 ;;Here's;Here 's;;
+/*		Here's a supermarket.
 ;;\Heres\;here 's;;
 ;;here's;here 's;;
+/*		And here's a bakery.
 ;;\heres\;here 's ;;
 ;;There'd;There 'd;;
+/*		(There'd be hundreds of them.) .
 ;;\Thered\;There 'd;;
 ;;there'd;there 'd;;
+/*		Mama said there'd be days like this.
 ;;\thered\;there 'd;;
 ;;Nothing's;Nothing 's;;
+/*		Nothing's tainted as yet.
 ;;nothing's;Nothing 's;;
+/*		He says that nothing's tainted as yet.
 ;;Everything's;Everything 's;;
+/*		Everything's OK.
 ;;everything's;everything 's;;
+/*		When everything's done, there'll be more than 100 roller-coasters and rides.
 ;;ºc;°c;;
+/*		The temperature was 34ºc at the ocean.
 ;;ºf;°f;;
+/*		The temperature was below 0ºf in winter.
+

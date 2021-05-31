@@ -2,15 +2,23 @@
 /* general
 
 1;;“;";;replace curly quotes by straight quotes
+/*		1. Thomas “liest” ein Bilderbuch.
 2;;”;";;replace curly quotes by straight quotes
+/*		2. Thomas “liest” ein Bilderbuch.
 3;;„;";;replace curly quotes by straight quotes
+/*		3. „Habt ihr Elephanten gesehen?”, fragte er.
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		6. Gestern gab’s Erbsen und heute gab‘s Karotten.
 7;;’;';;replace curly apostrophe by straight one
+/*		7. Gestern gab’s Erbsen und heute gab‘s Karotten.
 8;;′;';;rewrite curly to straight apostrophe
+/*		8. Gibt′s `ne neue Zeitung?
 9;;`;';;rewrite curly to straight apostrophe
+/*		9. Gibt′s `ne neue Zeitung?
 10;;´;';;rewrite curly to straight apostrophe
+/*		10. Weiter gab sie bekannt, dass man in dieser Verkaufsphase einen ´signifikanten Interessensanstieg´ bei den Fans verzeichnet habe.
 
 11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
@@ -20,19 +28,26 @@
 /*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
 /*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		In einem späteren Schritt könne man auch über den Bau einer Tramlinie nachdenken – ein Thema, das in der Stadt nicht ganz neu ist.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		Das Deutsche Historische Museum im Zeughaus Unter den Linden ver­an­schaulicht deutsche Geschichte aus 2000 Jahren.
 
 23;;,-; , -;;adds space between comma and dash
 24;;--; -- ;;isolates double dash
 /*;;--; --;;adds space before double dash
 26;;\-";- ;;to prevent that " hinders the processing
 27;;\- ";- ;;to prevent that " hinders the processing
+/*		Der Präsident — bei der Leitung der Beratungen sind Präsident und Vizepräsidenten gleichberechtigt —“eröffnet, leitet und schließt” die Sitzungen.
 /*28;;"-\; -;;to prevent that " hinders the processing
 
 31;;[…]; […] ;for omissions
+/*		So z.B. auf die neue Informationstechnologien […] oder auf den Verlust kultureller Gewissheiten […].
 32;;[...]; [...] ;for omissions
-33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		So z. B. auf die neue Informationstechnologien [...] oder auf den Verlust kultureller Gewissheiten [...].
+33;;…; … ;;adds spaces to prevent … to become part of Concept
+/*		Das Unternehmen hat eine komplett neue Infrastruktur gebaut, damit die Ergebnisse aus mehreren Google-Suchen (Web, Video, News…) weiterhin nicht länger als eine halbe Sekunde auf sich warten ließen.
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		Das Unternehmen hat eine komplett neue Infrastruktur gebaut, damit die Ergebnisse aus mehreren Google-Suchen (Web, Video, News...) weiterhin nicht länger als eine halbe Sekunde auf sich warten ließen.
 
 35;;".[;". [;;for footnotes
 36;;,[; , [;;for footnotes
@@ -46,7 +61,6 @@
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
 
-47;;\•;;;to separate • from word beginning
 
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
@@ -59,7 +73,12 @@
 /* language-specific
 
 ;;ß;ss;;
+/*		Das "All-in-one-Konzept" genieße weiterhin Priorität.
 ;;\-\;@hyphen@;;temporary rewriting to avoid that 18 is applied on freestanding hyphen
+/*		Archiv - Freitag, 18. Dezember 2009.
 ;;-\;- @connect@;;marks words ending in hyphen for further processing
+/*		Aber Modellflug herkömmlicher Art war gestern, jetzt kommen Quadro-, Hexa-, Okto- oder einfach Minikopter.
 ;;-,\;- @connect@,;;marks words ending in hyphen + comma for further processing
+/*		Aber Modellflug herkömmlicher Art war gestern, jetzt kommen Quadro-, Hexa-, Okto- oder einfach Minikopter.
 ;;@hyphen@;-;;undo temporary rewriting
+/*		Archiv - Freitag, 18. Dezember 2009.
