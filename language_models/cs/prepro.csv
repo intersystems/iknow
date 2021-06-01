@@ -1,13 +1,90 @@
-﻿;;“;";;rewrites quotation marks
-;;”;";;rewrites quotation marks
-;;„;";;rewrites quotation marks
-;;‘;';;rewrites quotation marks
-;;’;';;rewrites quotation marks
-;;—; — ;;rewrites quotation marks
-;;…; … ;;rewrites …
-;;...; ... ;;rewrites ...
+﻿
+
+
+/* general:
+
+1;;“;";;replace curly quotes by straight quotes
+/*		1. Při současném převzetí většinového životního stylu zcela zmizely dříve jistě existující subtilnější prvky „výzdoby“, vycházející například z magických nebo ochranných funkcí.
+2;;”;";;replace curly quotes by straight quotes
+/*		2. Pro pojmy v češtině již běžně známé, např. „guru”, „jóga”, „mantra”.
+3;;„;";;replace curly quotes by straight quotes
+/*		3. „Už deset let jsem si nezahrál.
+4;;«;";;rewrites left French quotation marks to straight ones
+/*		4. Život však jen »fotografoval«, nevysvětloval jej a tak zůstal jen na jeho povrchu.
+5;;»;";;rewrites right French quotation marks to straight ones
+/*		5. To v případě » koňara « je prognóza podstatně optimističtější. 
+6;;‘;';;replace curly apostrophe by straight one
+/*		6. ‚Pastviny, to je teď hnědá zem, neroste tam nic‘.
+7;;’;';;replace curly apostrophe by straight one
+/*		7. Muž se narodil 16. září ’82.
+8;;′;';;rewrite curly to straight apostrophe
+/*		8. Dnes je všeobecné známo, že indické astronomické texty z počátku našeho letopočtu obsahují rozsáhlé tabulky hodnot sinů (s krokem 3◦45′).
+9;;`;';;rewrite curly to straight apostrophe
+10;;´;';;rewrite curly to straight apostrophe
+/*		10. (O´Kelly 1999).
+
+11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
+12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*		18. Na základě výsledků klinických studií je National Cholesterol Education Program—Third Adult Treatment Panel (NCEP ATP III) postulována a rozšiřována definice metabolického syndromu.
+19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		19. Celková výše předlužení byla –23,6 mld. Kč.
+20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		20. Úkolem čtvrté kapitoly je nastínit vývoj vnitřní migrace v České republice v letech 1991– 2012.
+21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		21. Cílem práce bylo hodnocení výsledků terapie pacientů, léčených v transplantačním centru v letech 2005–2016.
+22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+;;−;-;;rewrite to treat hyphen character e2 88 92 in the same way as similar characters
+/*		Některé druhy bakterií jsou dle výzkumů schopny přežít i ve vesmíru, tedy ve vakuu a o teplotě −270 °C. 
+
+/*23;;,-; , -;;adds space between comma and dash -> used in currency notation
+24;;--; -- ;;isolates double dash
+26;;\-";- ;;to prevent that " hinders the processing
+/*		26. Srov. též v obecné podobě úvod čl. 2c odst. 2 návrhu Smlouvy o fungování Evropské unie -„Sdílená pravomoc Unie a členských států se uplatňuje v těchto hlavních oblastech.
+27;;\- ";- ;;to prevent that " hinders the processing
+28;;"-\; -;;to prevent that " hinders the processing
+/*		28. Dialektický vztah mezi touto novou formou, její aplikací a „materiálem“- někdejším zemědělským ekosystémem včetně jeho obyvatel, se, jak je ukázáno byl asymetrický.
+
+31;;[…]; […] ;;
+/*		31. "Neplýtváme vodou […] kvůli těm ubohým lidem."
+32;;[...]; [...] ;;
+33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		33. Jízda není vůbec nepříjemná nebo bez odměny, [… avšak] nikdy nebudeme schopni směr nebo postup cesty zcela řídit.
+34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		34. jak ukazuje následující pasáž z Plutarchova díla: ...Kleanthés z Assu, současník Aristarcha.
+
+35;;".[;". [;;for footnotes
+36;;,[; , [;;for footnotes
+/*		36. Slavonice (německy Zlabings),[2] někdy přezdívané „malá Telč“, jsou město v okrese Jindřichův Hradec.
+37;;."[;." [;;for footnotes
+/*		37. K dovozu a vývozu filmů pro celé území republiky jest rovněž oprávněn výhradně stát.“[6] Po následující čtyři desetiletí tak výrobu, dovoz i distribuci filmů v plně kontroloval stát.
+38;;.[;. [;;for footnotes
+/*		38. Slovo loutka pochází patrně od slova lýko, z něhož se loutky kdysi vyráběly.[1] Tím, že se při hře oživuje, to jest hraje, „pohybuje se“ nebo „mluví“, se loutka liší od panenky.
+
+41;;(\;;;to make bracket attached to word NonRelevant
+42;;[\;;;to make bracket attached to word NonRelevant
+43;;\);;;to make bracket attached to word NonRelevant
+44;;\];;;to make bracket attached to word NonRelevant
+45;;\|;;;to make vertical bar attached to word NonRelevant
+46;;|\;;;to make vertical bar attached to word NonRelevant
+
+51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
+/*		51. Později téhož roku magazín Time pěje ódy na armádu:… armáda je skrupulózně ústavní a působí z pozice práva, nikoliv jen síly.
+52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
+/*		52. Thaletův student Anaximandros věřil, že vše je složeno z chaotické látky známé jako apeiron(bezmezno),[69] zhruba odpovídající modernímu pojmu kvantové pěny.
+53;;--  --;----;;reconstruct dotted lines -> 
+54;;--  --;----;;repeat: reconstruct dotted lines
+55;;-- - ;--- ;;reconstruct dotted lines
+56;;-- -\;---;;reconstruct dotted lines
+
+
+/* language-specific items:
+
 ;;-li\; @@condsuffix_li@@;;
-;;–li\; @@condsuffix_li@@;;
-;;.[;. [;;for footnotes
-;;."[;." [;;for footnotes
-;;,[; [;;for footnotes
+/*		Není-li v soustavě tlak, brzdy plně brzdí.
+;;–li\; @@condsuffix_li@@;;with e2 80 93 hyphen
+/*		Chtěla–li se psychologie stát uznanou vědou.
+
+
