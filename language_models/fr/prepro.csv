@@ -2,59 +2,75 @@
 /* general:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		“Les résultats sont discutables”, disait-il.
 2;;”;";;replace curly quotes by straight quotes
+/*		“Les résultats sont discutables”, disait-il.
 3;;„;";;replace curly quotes by straight quotes
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		Dans le texte on trouve le mot ‘absonant' (désagréable à l'oreille).
 7;;’;';;replace curly apostrophe by straight one
+/*		les Occidentaux ont toujours insisté sur l’obligation.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
+/*		`KLM´ est le nom d'une compagnie d'aviation.
 10;;´;';;rewrite curly to straight apostrophe
+/*		L´Europe de l´Ouest.
 
 11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
 /*16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
 /*17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
 18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*		3222 FEOGA-orientation — Adaptation et modernisation de la structure
 /*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
 /*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		Marc – représentant un club photographique – a montré quelques images extraordinaires.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		Naturellement, ce travail d’intro­spection en des temps aussi difficiles ne va pas sans poser de problèmes.
 
 23;;,-; , -;;adds space between comma and dash
 24;;--; -- ;;isolates double dash
+/*		La principale décision a été de déclarer --pour la première fois dans l' histoire du pays-- un moratoire unilatéral sur la dette publique.
 26;;\-";- ;;to prevent that " hinders the processing
 27;;\- ";- ;;to prevent that " hinders the processing
 28;;"-\; -;;to prevent that " hinders the processing
 
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
+/*		Il est bien difficile de décrire son calme, son toucher ensorcelant [...][20] ».
 33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		Un… deux… trois!
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		Je ne sais pas...
 
 35;;".[;". [;;for footnotes
 36;;,[; , [;;for footnotes
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
 ;;[\; [;;for footnotes
+/*		la plus haute juridiction est la Cour de Cassation[ 10].
 
 41;;(\;;;to make bracket attached to word NonRelevant
 /*42;;[\;;;to make bracket attached to word NonRelevant
 43;;\);;;to make bracket attached to word NonRelevant
 44;;\];;;to make bracket attached to word NonRelevant
+/*		Malgre ]'impression favorable.
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
-
-47;;\•;;;to separate • from word beginning
 
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
 53;;--  --;----;;reconstruct dotted lines
+/*		-------------------------------FRANCE--------------------------- PARIS - En dépit de l' approche de Noël, des turbulences subsistent sur le plan social en France.
 54;;--  --;----;;repeat: reconstruct dotted lines
+/*		-------------------------------FRANCE--------------------------- PARIS - En dépit de l' approche de Noël, des turbulences subsistent sur le plan social en France.
 55;;-- - ;--- ;;reconstruct dotted lines
+/*		--- Instants tragiques --- Les sports mécaniques sont souvent le théâtre de tragédies, et l' année 2001 n' a pas échappé à la règle.
 56;;-- -\;---;;reconstruct dotted lines
-
+/*		-------------------------------FRANCE--------------------------- PARIS - En dépit de l' approche de Noël, des turbulences subsistent sur le plan social en France.
 
 
 /* language-specific: 
@@ -64,50 +80,92 @@
 /* The character “µ” is inserted to be able to distinguish the split off single letter words from single characters, since the apostrophe is removed by the engine in the normalization phase.
 /* The “C” in “C’est” would look the same as the C in “niveau C” or in “C)” when no special character would be added.
 ;;C';Cµ ;;
+/*		C'était un accident.
 ;;D';Dµ ;;
+/*		D'Arlon à Liège.
 ;;J';Jµ ;;
+/*		J'ai une voiture.
 ;;L';lµ ;;
+/*		L’Europe de l’Est.
 ;;\M';Mµ ;;
+/*		M'as tu vu?
 ;;N';N' ;;
+/*		N'allume pas ta cigarette!
 ;;QU';QU' ;;
+/*		QUI A VU QUELQU'UN?
 ;;Qu';Qu' ;;
+/*		Qu'est-ce que la phénoménologie?
 ;;S';Sµ ;;
+/*		S'il y a du vent, on ne part pas.
 ;;\T';Tµ ;;
+/*		T'as vu mon blogue?
 ;;c';cµ ;;
+/*		Mais c'était un accident.
 ;;d';dµ ;;
+/*		'KLM' est le nom d'une compagnie d'aviation.
 ;;j';jµ ;;
+/*		Tu veux que j'allume les bougies?
 ;;l';lµ ;;
+/*		L'Afrique de l'Est.
 ;;\m';mµ ;;
+/*		Pourquoi m'as-tu abandonnée ?
 ;;s';sµ ;;
+/*		Il s'occupe d'eux.
 ;;n';n' ;;
+/*		Ce n'est pas vrai.
 ;;qu';qu' ;;
+/*		Louis dit qu'il a 3 enfants.
 ;;\t';tµ ;;
+/*		Je t'ai averti!
+
 
 /* Strip off pronouns to allow the first part to be recognized as a lexrep
 ;;-t-il; -t-il;;
+/*		«Le nouveau stock arrivera demain», ajoute-t-il.
 ;;-T-IL; -T-IL;;
+/*		«LE NOUVEAU STOCK ARRIVERA DEMAIN», AJOUTE-T-IL.
 ;;-t-elle; -t-elle;;
+/*		«Le nouveau stock arrivera demain», répète-t-elle immédiatement.
 ;;-T-ELLE; -T-ELLE;;
+/*		«LE NOUVEAU STOCK ARRIVERA DEMAIN», RÉPÈTE-T-ELLE IMMÉDIATEMENT.
 ;;-t-on; -t-on;;
+/*		Jouera-t-on au football ce dimanche?
 ;;-T-ON; -T-ON;;
+/*		JOUERA-T-ON AU FOOTBALL CE DIMANCHE?
 ;;-ils; -ils;;
+/*		Viendront-ils à la conférence?
 ;;-ILS; -ILS;;
+/*		VIENDRONT-ILS À LA CONFÉRENCE?
 ;;-elles; -elles;;
+/*		Comment communiquaient-elles avec les enfants?
 ;;-ELLES; -ELLES;;
+/*		COMMENT COMMUNIQUAIENT-ELLES AVEC LES ENFANTS?
 ;;-je\; -je;;
+/*		("Le poumon vous dis-je, le poumon" ...)
 ;;-JE\; -JE;;
+/*		TABAC, ALCOOL : OÙ EN SUIS-JE ?
 ;;-nous; -nous;;
+/*		Entourons-nous d'amis.
 ;;-NOUS; -NOUS;;
+/*		ENTOURONS-NOUS D'AMIS.
 ;;-tu\; -tu;;
+/*		pourquoi refuses-tu de passer sous les portiques?
 ;;-TU\; -TU;;
+/*		POURQUOI REFUSES-TU DE PASSER SOUS LES PORTIQUES?
 ;;-vous; -vous;;
+/*		Méfiez-vous des monstres marins.
 ;;-VOUS; -VOUS;;
+/*		MÉFIEZ-VOUS DES MONSTRES MARINS.
 ;;t-il;t -il;;
+/*		„Les résultats sont discutables”, disait-il.
 ;;T-IL;T -IL;;
+/*		LES RÉSULTATS SONT DISCUTABLE, ADMET-IL.
 ;;d-il;d -il;;
 ;;D-IL;D -IL;;
 ;;t-elle;t -elle;;
+/*		Les résultats sont discutable, admettent-elles.
 ;;T-ELLE;T -ELLE;;
+/*		LES RÉSULTATS SONT DISCUTABLE, ADMETTENT-ELLES.
 ;;d-elle;d -elle;;
 ;;D-ELLE;D -ELLE;;
 ;;t-on\;t -on;;
@@ -123,8 +181,11 @@
 ;;d-on.\;d -on.;;
 ;;D-ON.\;D -ON.;;
 ;;-t -on;-t-on;;
+/*		Jouera-t-on au football ce dimanche?
 ;;-T -ON;-T-ON;;
+/*		JOUERA-T-ON AU FOOTBALL CE DIMANCHE?
 ;;t-ce\;t -ce;;
+/*		Qu'est-ce que la phénoménologie?
 ;;T-CE\;T -CE;;
 ;;t-ce,\;t -ce,;;
 ;;T-CE,\;T -CE,;;
@@ -135,4 +196,7 @@
 ;;-toi\; -toi;;
 ;;-TOI\; -TOI;;
 ;;\j\;jµ;;alternative with missing apostrophe
+/*		j aimerai avoir quelques petits renseignements
 ;;\c\;cµµ;;alternative with missing apostrophe
+/*		c est vraiment une nouvelle vie meme s il faut être sérieux.
+

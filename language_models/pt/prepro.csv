@@ -1,16 +1,22 @@
 ﻿
-/* language-independent items:
+/* general items:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		Candidatas ao “Miss Bumbum Brasil” recriam “A última ceia”.
 2;;”;";;replace curly quotes by straight quotes
+/*		Candidatas ao “Miss Bumbum Brasil” recriam “A última ceia”.
 3;;„;";;replace curly quotes by straight quotes
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		Afirmam, ainda, que existe “alguma evidência bastante compreensível de que mais administradores fazem divulgação quando há ‘boas notícias’ a divulgar do que quando há ‘más notícias’”.
 7;;’;';;replace curly apostrophe by straight one
+/*		Os kc’s encontrados foram de 0,32.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
+/*		o gênero referencial identifica um referente como ´feminino`, ´masculino ou ´genericamente indefinido`”.
 10;;´;';;rewrite curly to straight apostrophe
+/*		o gênero referencial identifica um referente como ´feminino`, ´masculino ou ´genericamente indefinido`”.
 
 /*11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 /*12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
@@ -20,36 +26,48 @@
 /*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
 /*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		Essas observações – e ambas sobrevivem estatisticamente em análises multivariadas – levam a uma importante conclusão.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
 
+;;,.; ,.;;add space before ,. to prevent that , hinders the processing
 23;;,-; , -;;adds space between comma and dash
 24;;--; -- ;;isolates double dash
+/*		Com o aumento da perspectiva de vida da população e a possibilidade dessa moléstia tornar-- se problema de saúde pública.
 26;;\-";- ;;to prevent that " hinders the processing
 27;;\- ";- ;;to prevent that " hinders the processing
 28;;"-\; -;;to prevent that " hinders the processing
 
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
+/*		As Normas Brasileiras também consideram importante tal característica, definindo-a como o “atributo que faz com que o usuário aceite a informação contábil e a utilize como base de decisões [...]”.
 ;;(…); (…) ;for omissions
 ;;(...); (...) ;for omissions
-33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		O samba, a prontidão/e outras bossas,/são nossas coisas(...).
+33;;…; … ;;adds spaces to prevent … to become part of Concept
+/*		Mais tarde, em 1481, o rei confirmou a missão do príncipe em novo diploma: «…sabemos certo que ele dá, per si, e per seus oficiais, mui boa ordem à navegação destes trautos e os governa mui bem.».
 ;;\...;;;to prevent that '...' becomes the literal of a lexrep after normalization
+/*		...não, eu não retorno.
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		"Foram tempos difìceis...".
 ;;... ";..." ;;prevent that " hinders the indexing
+/*		"Foram tempos difìceis...".
 
 35;;".[;". [;;for footnotes
+/*		O poeta e crítico brasileiro Frederico Barbosa declara que Fernando Pessoa foi "o enigma em pessoa".[3]
 36;;,[; , [;;for footnotes
+*/		Ao tratar de temas subjectivos e usar a heteronímia,[2] torna-se enigmático ao extremo.
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
+/*		Porém, todos os dias entram em Lisboa cerca de meio milhão de carros, provenientes dos concelhos periféricos.[4]
 
 41;;(\;;;to make bracket attached to word NonRelevant
+/*		4 jogadores mais defensivos(   incluindo   defesas centrais.
 42;;[\;;;to make bracket attached to word NonRelevant
 43;;\);;;to make bracket attached to word NonRelevant
+/*		4 jogadores mais defensivos   )incluindo   defesas centrais.
 44;;\];;;to make bracket attached to word NonRelevant
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
-
-47;;\•;;;to separate • from word beginning
 
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
@@ -60,155 +78,258 @@
 56;;-- -\;---;;reconstruct dotted lines
 
 
+
+
 /* language-specific:
 
 ;;-ei\; _verbsuffix-ei_;;
+/*		Dar-vos-ei um exemplo.
 ;;-emos\; _verbsuffix-emos_;;
+/*		O nosso melhor escudo, encontrá-lo-emos sempre na nossa espiritualidade e nos nossos princípios.
 ;;-ia\; _verbsuffix-ia_;;
+/*		Um acordo ter-nos-ia também permitido garantir a reforma do sector agrícola.
 ;;-iam\; _verbsuffix-iam_;;
+/*		Muitos cidadãos considerá-lo-iam apenas como mais um exemplo do facto de a elite da UE fazer exactamente o que lhe apraz.
 ;;-á\; _verbsuffix-á_;;
+/*		A parte central da reconstrução de Lisboa designar-se-á por Baixa Pombalina.
 ;;-ão\; _verbsuffix-ão_;;
+/*		Grande número das melhorias que pretendemos introduzir sê-lo-ão com base nas nossas orientações em matéria de avaliação de impacto, agora revistas.
 ;;-íamos\; _verbsuffix-íamos_;;
+/*		Se estivesse nas nossas mãos, ter-lhes-íamos garantido uma protecção ainda maior.
 ;;-se-lhes; _suffix-se_lhes_;;NOTE: no end-of-word condition for this case
+/*		Fala-se-lhes em alimentos em troca de petróleo.  
 ;;-se-lhe; _suffix-se_lhe_;;NOTE: no end-of-word condition for this case
+/*		porque se incomodam a opor-se-lhes?
 ;;-se-me\; _suffix-se-me_;;
+/*		Grupos comunitários, grupos de voluntários e ONG queixam-se-me constantemente das enormes dificuldades que sentem.
 ;;-se-nos\; _suffix-se-nos_;;
+/*		O relatório afigura-se-nos muito favorável.
 ;;-lhe\; _suffix-lhe_;;
+/*		Agradeço-lhe portanto por utilizar o argumento do consenso para fazer aprovar o texto.
 ;;-lhes\; _suffix-lhes_;;
+/*		assegurar a credibilidade dos mercados e restituir-lhes credibilidade.
 ;;-lha\; _suffix-lha_;;
 ;;-lhas\; _suffix-lhas_;;
 ;;-lho\; _suffix-lho_;;
 ;;-lhos\; _suffix-lhos_;;
 ;;-me\; _suffix-me_;;
+/*		Faz-me lembrar um pouco a Sara.
 ;;-se\; _suffix-se_;;
+/*		Para o ajuste dos modelos matemáticos, realizou-se a análise de regressão não-linear e linear pelo método Gauss-Newton, utilizando-se o programa computacional.
 ;;-vos\; _suffix-vos_;;
+/*		Esta escola, como todas as escolas Regent, faz-vos aproveitar dos seus numerosos anos de experiência no ensino do Inglês.
 ;;mo-la\;mo _verbsuffix-la_;;
 ;;mo-las\;mo _verbsuffix-las_;;
 ;;mo-lo\;mo _verbsuffix-lo_;;
 ;;mo-los\;mo _verbsuffix-los_;;
 ;;-la\; _infsuffix-la_;;
+/*		desenvolver esta perspectiva e aplicá-la à produção de alimentos.
 ;;-las\; _infsuffix-las_;;
+/*		por conseguinte, apoiamo-las sem quaisquer reservas.
 ;;-lo\; _infsuffix-lo_;;
+/*		Na altura interrogámo-lo sobre o papel do FMI e do Banco Mundial.
 ;;-los\; _infsuffix-los_;;
+/*		de forma a apoiá-los na mudança de uma situação de vulnerabilidade.
 ;;-na\; _suffix-na_;;
+/*		A resposta tem-na dado a própria realidade.
 ;;-nas\; _suffix-nas_;;
+/*		Por favor analisem-nas cuidadosamente.
 ;;-no\; _suffix-no_;;
+/*		os consumidores que pretendem comprar direitos de utilização a tempo parcial de bens móveis e imóveis enquanto se encontram de férias no estrangeiro fazem-no ao abrigo da legislação do país em que se encontram.
 ;;r-nos\;r _infsuffix-nos_;;
+/*		Devemos lembrar-nos de incorporar a utilização de veículos não poluentes nas actividades relacionadas com o pacote sobre as alterações climáticas.
 ;;-nos\; _verbsuffix-nos_;;
+/*		este ano a Comissão atribui-nos um novo desafio.
 ;;-a\; _suffix-a_;;
+/*		mas apoiou-a e continua a apoiá-la totalmente.
 ;;-as\; _suffix-as_;;
+/*		Ide e ensinai todas as nações, baptizando-as no nome do Pai e do Filho e do Espírito Santo.
 ;;-o\; _suffix-o_;;
+/*		Agora ele orientava-o a colocar a reserva de tanques em pontos fixos como se fossem meras peças de artilharia.
 ;;-os\; _suffix-os_;;
+/*		creio que a introdução do euro permitiu aos cidadãos gerirem com mais sucesso os seus orçamentos familiares, ajudando-os a poupar nas despesas de bens e serviços, entre outros benefícios.
 ;;-ei.\; _verbsuffix-ei_.;;
 ;;-emos.\; _verbsuffix-emos_.;;
+/*		Encontrá-la-emos.
 ;;-ia.\; _verbsuffix-ia_.;;
+/*		o outro lado tê-las-ia.
 ;;-iam.\; _verbsuffix-iam_.;;
+/*		os benefícios para as suas economias multiplicar-se-iam.
 ;;-á.\; _verbsuffix-á_.;;
+/*		esta tendência intensificar-se-á.
 ;;-ão.\; _verbsuffix-ão_.;;
+/*		Os países que têm prazos legais inferiores a esse mantê-los-ão.
 ;;-íamos.\; _verbsuffix-íamos_.;;
 ;;-se-me.\; _suffix-se-me_.;;
 ;;-se-nos.\; _suffix-se-nos_.;;
 ;;-lhe.\; _suffix-lhe_.;;
+/*		O senhor deputado respondeu-lhe.
 ;;-lhes.\; _suffix-lhes_.;;
+/*		Não se justifica, portanto, responder-lhes.
 ;;-lha.\; _suffix-lha_.;;
+/*		eu irei transmitir-lha.
 ;;-lhas.\; _suffix-lhas_.;;
 ;;-lho.\; _suffix-lho_.;;
+/*		Esse facto foi reconhecido pelo relator e agradeço-lho.
 ;;-lhos.\; _suffix-lhos_.;;
 ;;-me.\; _suffix-me_.;;
+/*		vou optar por abster-me.
 ;;-se.\; _suffix-se_.;;
+/*		um certo número de deputados pode opor-se.
 ;;-vos.\; _suffix-vos_.;;
+/*		Esta escola, como todas as escolas Regent, faz-vos.
 ;;mo-la.\;mo _verbsuffix-la_.;;
+/*		nós saudamo-la.
 ;;mo-las.\;mo _verbsuffix-las_.;;
 ;;mo-lo.\;mo _verbsuffix-lo_.;;
+/*		Se significa analisar as operações do Banco Central Europeu, façamo-lo.
 ;;mo-los.\;mo _verbsuffix-los_.;;
 ;;-la.\; _infsuffix-la_.;;
+/*		enquanto cinco declararam não utilizá-la.
 ;;-las.\; _infsuffix-las_.;;
+/*		uma cultura democrática para estabelecer instituições democráticas nem para sustentá-las.
 ;;-lo.\; _infsuffix-lo_.;;
+/*		quadro atual e para o delineamento de ações que visem a modificá-lo.
 ;;-los.\; _infsuffix-los_.;;
+/*		as estratégias elaboradas para atingi-los.
 ;;-na.\; _suffix-na_.;;
+/*		Por favor, ajudem-na.
 ;;-nas.\; _suffix-nas_.;;
+/*		As pessoas aceitaram-nas.
 ;;-no.\; _suffix-no_.;;
+/*		apelaram muito urgentemente a tal e conseguiram-no.
 ;;r-nos.\;r _infsuffix-nos_.;;
+/*		Se queremos oferecer protecção, temos de adaptar-nos.
 ;;-nos.\; _verbsuffix-nos_.;;
+/*		A economia real apanhou-nos.
 ;;-a.\; _suffix-a_.;;
+/*		nos reconhece pela bandeira, aplaudindo-a.
 ;;-as.\; _suffix-as_.;;
+/*		A Comissão Europeia excedeu-as.
 ;;-o.\; _suffix-o_.;;
+/*		Ela sabe-o.
 ;;-os.\; _suffix-os_.;;
+/*		tomaram a iniciativa e a zona euro seguiu-os.
 ;;-ei,\; _verbsuffix-ei_,;;
+/*		Congratular-me-ei, antes de mais, com a declaração sobre a instituição de um Dia Europeu do Mar.
 ;;-emos,\; _verbsuffix-emos_,;;
+/*		se não assumirmos essa responsabilidade, tornar-nos-emos, inevitavelmente, cúmplices da degradação da qualidade da democracia.
 ;;-ia,\; _verbsuffix-ia_,;;
+/*		para aplicar mais medidas estruturais, dar-nos-ia, penso eu, um leque útil de instrumentos para apoiar este sector.
 ;;-iam,\; _verbsuffix-iam_,;;
 ;;-á,\; _verbsuffix-á_,;;
+/*		Isso proporcionar-nos-á, relativamente a actos específicos, um quadro jurídico uniforme.
 ;;-ão,\; _verbsuffix-ão_,;;
+/*		as diferença regionais tornar-se-ão, pura e simplesmente, mais pronunciadas.
 ;;-íamos,\; _verbsuffix-íamos_,;;
 ;;-se-me,\; _suffix-se-me_,;;
 ;;-se-nos,\; _suffix-se-nos_,;;
 ;;-lhe,\; _suffix-lhe_,;;
+/*		Poderei pedir-lhe, Senhor Presidente, que escreva ao comité.
 ;;-lhes,\; _suffix-lhes_,;;
+/*		Devo recordar-lhes, Senhores Deputados, que o tempo que lhes é atribuído foi determinado pelos grupos políticos.
 ;;-lha,\; _suffix-lha_,;;
+/*		Vou entregar-lha, e espero sinceramente que esta figura do representante para os direitos das mulheres seja efectivamente criada, pois precisamos realmente dessa força motriz para que haja uma verdadeira mudança.
 ;;-lhas,\; _suffix-lhas_,;;
 ;;-lho,\; _suffix-lho_,;;
+/*		Por conseguinte, voltamos agora a pedir-lho, Senhor Comissário.
 ;;-lhos,\; _suffix-lhos_,;;
 ;;-me,\; _suffix-me_,;;
+/*		Permitam-me, no entanto, esclarecer exactamente o que isso significa.
 ;;-se,\; _suffix-se_,;;
+/*		Trata-se, contudo, de uma situação totalmente artificial.
 ;;-vos,\; _suffix-vos_,;;
+/*		Esta escola, como todas as escolas Regent, faz-vos, aproveitar dos seus numerosos anos.
 ;;mo-la,\;mo _verbsuffix-la_,;;
+/*		Apoiamo-la, mas não vai suficientemente longe.
 ;;mo-las,\;mo _verbsuffix-las_,;;
 ;;mo-lo,\;mo _verbsuffix-lo_,;;
+/*		ou temos o Regimento e cumprimo-lo, ou não o cumprimos e, portanto, não precisamos dele.
 ;;mo-los,\;mo _verbsuffix-los_,;;
 ;;-la,\; _infsuffix-la_,;;
+/*		vários motivos para justificá-la, dentre os quais se destacam o ciúme.
 ;;-las,\; _infsuffix-las_,;;
+/*		plantas jovens de alguns locais ou soterrá-las, devido à deposição.
 ;;-lo,\; _infsuffix-lo_,;;
+/*		resiliência, no qual mesmo com o trauma, ele pode não superá-lo, mas controlá-lo de maneira que possa conseguir viver.
 ;;-los,\; _infsuffix-los_,;;
+/*		Vou lê-los, muito lentamente, em inglês.
 ;;-na,\; _suffix-na_,;;
+/*		Os seus membros estão cada vez mais envolvidos nela, personalidades influentes auscultam-na, o que faz com que ela vá adquirindo uma importância política crescente.
 ;;-nas,\; _suffix-nas_,;;
 ;;-no,\; _suffix-no_,;;
+/*		Ninguém negará, e aliás numerosos estudos comprovam-no, que existe de facto uma ligação entre política monetária e política comercial.
 ;;r-nos,\;r _infsuffix-nos_,;;
+/*		Portanto, não podemos limitar-nos, uma vez mais, a solicitar a responsabilidade das empresas.
 ;;-nos,\; _verbsuffix-nos_,;;
+/*		Dito isto, esta situação mostra-nos, uma vez mais, que há uma diferença entre o direito e a vida real.
 ;;-a,\; _suffix-a_,;;
+/*		Seria nomeadamente interessante alargar a proposta de teste generalizando-a, sob reserva, evidentemente, do acordo do paciente.
 ;;-as,\; _suffix-as_,;;
+/*		A maternidade, em particular, tem impacto nas perspectivas de carreira das mulheres, punindo-as, paradoxalmente, em termos da oportunidade de chegar a posições de topo.
 ;;-o,\; _suffix-o_,;;
+/*		Quando ele se funda em argumentos racionais, respeito-o, mesmo discordando.
 ;;-os,\; _suffix-os_,;;
+/*		tornando-os, frequentemente, incapazes de determinar qual a oferta financeira.
 ;;-ei:\; _verbsuffix-ei_:;;
+/*		Pois bem, di-lo-ei: é possível ser-se a favor de uma política económica europeia estrutural e não se ser a favor do aumento do défice.
 ;;-emos:\; _verbsuffix-emos_:;;
 ;;-ia:\; _verbsuffix-ia_:;;
 ;;-iam:\; _verbsuffix-iam_:;;
 ;;-á:\; _verbsuffix-á_:;;
 ;;-ão:\; _verbsuffix-ão_:;;
+/*		As parcerias financiadas ao abrigo desta acção manter-se-ão: permitirão a transferência de know-how e o intercâmbio de estudantes e professores a todos os níveis do ensino superior.
 ;;-íamos:\; _verbsuffix-íamos_:;;
 ;;-se-me:\; _suffix-se-me_:;;
 ;;-se-nos:\; _suffix-se-nos_:;;
 ;;-lhe:\; _suffix-lhe_:;;
+/*		tenho um pedido a fazer-lhe: independentemente do que negociar ou do que venha a acontecer, por favor, informe o Parlamento em tempo útil.
 ;;-lhes:\; _suffix-lhes_:;;
+/*		Pergunto-lhes: qual é a alternativa?
 ;;-lha:\; _suffix-lha_:;;
 ;;-lhas:\; _suffix-lhas_:;;
 ;;-lho:\; _suffix-lho_:;;
 ;;-lhos:\; _suffix-lhos_:;;
 ;;-me:\; _suffix-me_:;;
+/*		Poderá dizer-me: "o óptimo é inimigo do bom"...
 ;;-se:\; _suffix-se_:;;
+/*		O círculo fechou-se: as condições de instalação e de naturalização em massa nos Estados-Membros estão reunidas.
 ;;-vos:\; _suffix-vos_:;;
+/*		Esta escola, como todas as escolas Regent, faz-vos: aproveitar dos seus numerosos anos.
 ;;mo-la:\;mo _verbsuffix-la_:;;
 ;;mo-las:\;mo _verbsuffix-las_:;;
 ;;mo-lo:\;mo _verbsuffix-lo_:;;
 ;;mo-los:\;mo _verbsuffix-los_:;;
 ;;-la:\; _infsuffix-la_:;;
+/*		vários motivos para justificá-la: dentre os quais se destacam o ciúme.
 ;;-las:\; _infsuffix-las_:;;
+/*		plantas jovens de alguns locais ou soterrá-las: devido à deposição.
 ;;-lo:\; _infsuffix-lo_:;;
+/*		ele pode não superá-lo: mas controlá-lo de maneira que possa conseguir viver.
 ;;-los:\; _infsuffix-los_:;;
+/*		os benefícios que poderão vir a ter se adquiri-los: comparativamente a alternativas.
 ;;-na:\; _suffix-na_:;;
 ;;-nas:\; _suffix-nas_:;;
 ;;-no:\; _suffix-no_:;;
 ;;r-nos:\;r _infsuffix-nos_:;;
 ;;-nos:\; _verbsuffix-nos_:;;
+/*		Vossa Excelência diz-nos: "Precisamos de trabalhadores competentes".
 ;;-a:\; _suffix-a_:;;
 ;;-as:\; _suffix-as_:;;
 ;;-o:\; _suffix-o_:;;
+/*		Já o disse antes e reafirmo-o: para além da liquidez, é necessário que injectemos também credibilidade na actual situação económica.
 ;;-os:\; _suffix-os_:;;
 ;;-se _verbsuffix; _suffix-se_ _verbsuffix;;
+/*		Poder-se-ia até chamar tais condições de determinantes suaves da existência humana, já que elas influenciam significativamente como e onde as pessoas obtém seus meios de vida.
 ;;-lhe _verbsuffix; _suffix-lhe_ _verbsuffix;;
+/*		pois de contrário teríamos posto de lado todas as preocupações orçamentais e ter-lhe-íamos consagrado muito mais recursos.
 ;;-lhes _verbsuffix; _suffix-lhes_ _verbsuffix;;
+/*		Se estivesse nas nossas mãos, ter-lhes-íamos garantido uma protecção ainda maior.
 ;;-nos _verbsuffix; _verbsuffix-nos_ _verbsuffix;;
+/*		A redução de preços proposta na comunicação manter-nos-á bem abaixo dos preços de mercado mundiais.
 ;;não-;não- ;;to mark adjectives and participles with negative prefix as negation marker
+/*		Para o ajuste dos modelos matemáticos, realizou-se a análise de regressão não-linear e linear pelo método Gauss-Newton, utilizando-se o programa computacional.
 ;;Não-;não- ;;to mark adjectives and participles with negative prefix as negation marker
+/*		Tratado de Não-Proliferação Nuclear.
 ;;\-não\;- não;;to prevent that - hinders the lookup of não
 ;;\-Não\;- não;;to prevent that - hinders the lookup of não

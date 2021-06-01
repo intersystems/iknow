@@ -1,13 +1,18 @@
 ﻿
-/* language-independent items:
+/* general items:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		“De bar is open”, zei hij.
 2;;”;";;replace curly quotes by straight quotes
+/*		“De bar is open”, zei hij.
 3;;„;";;replace curly quotes by straight quotes
+/*		Bij het verzoek heeft ze aangegeven dat ze zich „per heden” in Nieuw-Zeeland gaat vestigen.
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
+/*		De plant ‘kijkt’ naar buiten. 
 7;;’;';;replace curly apostrophe by straight one
+/*		’s Morgens scheen de zon.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
 10;;´;';;rewrite curly to straight apostrophe
@@ -17,10 +22,13 @@
 /*16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
 /*17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
 18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*		Vooral de huwelijkspolitiek zorgde ervoor — vaak door toevalligheden — dat grote delen van de Nederlanden onder buitenlandse vorstenhuizen vielen.
 /*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
 /*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		Hij zei – zonder zich om te draaien – dat hij wegging.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		Dat blijkt uit een presentatie over een geheim rapport dat gisteren uit­lekte.
 
 23;;,-; , -;;adds space between comma and dash
 /*24;;--; -- ;;separates double dash from words
@@ -32,12 +40,17 @@
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
 33;;…; … ;;adds spaces to prevent … to become part of Concept 
+/*		3… 2… 1… start!
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		Ik zal je geld geven...!
 
 35;;".[;". [;;for footnotes
+/*		"van al de Galliërs zijn de Belgen de dappersten."[8]
 36;;,[; , [;;for footnotes
+/*		Van al de Galliërs zijn de Belgen de dappersten,[8] luidt het gezegde.
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
+/*		horum omnium fortissimi sunt Belgae: van al de Galliërs zijn de Belgen de dappersten.[8]
 
 41;;(\;;;to make bracket attached to word NonRelevant
 42;;[\;;;to make bracket attached to word NonRelevant
@@ -46,10 +59,10 @@
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
 
-47;;\•;;;to separate • from word beginning
-
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
+/*		Naam:.........
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
+/*		Bovendien is het eveneens noodzakelijk om een aantal aanverwante domeinen betreffende huidbehandelingen (zoals bv. chemische denervatie, augmentatie, mechanische en chemische dermabrasie,...) te reglementeren.
 /*53;;--  --;----;;reconstruct dotted lines
 /*54;;--  --;----;;repeat: reconstruct dotted lines
 /*55;;-- - ;--- ;;reconstruct dotted lines
@@ -60,3 +73,4 @@
 /* language-specific items
 
 ;;\niet-;niet- ;;to be able to give negation attribute to the prefix in adjectives or nouns
+/*		Bedrijven die werknemers inhuren via niet-gecertificeerde uitzendbureaus zullen aansprakelijk worden gesteld voor het betalen van het loon.
