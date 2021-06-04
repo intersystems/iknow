@@ -1,45 +1,60 @@
 ﻿
-/* language-independent items:
+/* general items:
 
 1;;“;";;replace curly quotes by straight quotes
+/*		I sitt resonemang kring rangordningsövningarnas fördelar ställer Redish (2003) dem i kontrast mot övningar inom “traditionell” undervisning.
 2;;”;";;replace curly quotes by straight quotes
+/*		I sitt resonemang kring rangordningsövningarnas fördelar ställer Redish (2003) dem i kontrast mot övningar inom “traditionell” undervisning.
 3;;„;";;replace curly quotes by straight quotes
+/*		Enligt Världsturismorganisationen (World Tourism Organisation, UNWTO) är en turist: ” [...] en person som för nöjes skull är minst tio mil från sin folkbokföringsadress under minst 24 timmar, enligt den kategorisering som är underlag för beräkningar av turistnäringens statistik.„
 /*4;;«;";;rewrites left French quotation marks to straight ones
 /*5;;»;";;rewrites right French quotation marks to straight ones
 6;;‘;';;replace curly apostrophe by straight one
 7;;’;';;replace curly apostrophe by straight one
+/*		Namnet Skagerrak kan alltså tolkas som ’’den raka sträckan förbi Skagen’’.
 8;;′;';;rewrite curly to straight apostrophe
 9;;`;';;rewrite curly to straight apostrophe
 10;;´;';;rewrite curly to straight apostrophe
+/*		The Student´s Guide.
 
 /*11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 /*12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
 /*16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
 /*17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
 18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*		Om det är äkta —eller inte… det finns liknande exempel med folk som är gifta, men som inte ens bor på samma adress, säger Jukka— Härkönen.
 /*19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
 /*20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		Dessa båda aktiviteter – att sända någon i ett ärende, att betala accis för en gris – är i sig kanske inte så uppseendeväckande.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		Annars räcker det med befallningar och för dem ­gäller ingen retorik.
 
 23;;,-; , -;;adds space between comma and dash
 /*24;;--; -- ;;separates double dash from words
 ;;\--;-- ;;adds space after initial double dash
+/*		--Jag tror inte att en egyptier från det forna Egypten hade uppskattat vårt obduktionsbord.
 26;;\-";- ;;to prevent that " hinders the processing
 27;;\- ";- ;;to prevent that " hinders the processing
 28;;"-\; -;;to prevent that " hinders the processing
 
 31;;[…]; […] ;for omissions
+/*		de viktigaste delgenrerna är vita […], martyrium […] och mirakel […].
 32;;[...]; [...] ;for omissions
-33;;…; … ;;adds spaces to prevent … to become part of Concept 
+33;;…; … ;;adds spaces to prevent … to become part of Concept
+/*		Om det är äkta —eller inte… det finns liknande exempel med folk som är gifta, men som inte ens bor på samma adress, säger Jukka— Härkönen.
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		”Hur gör man här...?”
 ;;... .;.... ;;to prevent dotted lines to hinder the indexing
 ;;... .;.... ;;to prevent dotted lines to hinder the indexing, repeat
 
 35;;".[;". [;;for footnotes
+/*		Av marknadsföringsskäl kallas landet stundom "de tusen öarnas land".[20]   .
 36;;,[; , [;;for footnotes
+/*		Sverige fattar fortfarande enskilt bilaterala avtal om investeringsskydd med andra stater,[21] medan EU har ett antal bilaterala och regionala handelsavtal som omfattar Sverige.
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
+*/		Dagen är en av årets stora högtidsdagar vid flertalet av Finlands och Sveriges högskolor och universitet, där man den 30 april sätter på sig studentmössan, eller sommarmössan i de sammanhang där även vinterstudentmössa används.[3]
 
 41;;(\;;;to make bracket attached to word NonRelevant
 42;;[\;;;to make bracket attached to word NonRelevant
@@ -47,8 +62,6 @@
 44;;\];;;to make bracket attached to word NonRelevant
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
-
-47;;\•;;;to separate • from word beginning
 
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
@@ -61,7 +74,12 @@
 /* language-specific:
 
 ;;\-\;@hyphen@;;temporary rewriting to avoid that 7 is applied on freestanding hyphen
+/*		Den vårdcentral som får bäst betyg i Uppsala län är Brukshälsan i Söderfors - där Leifler är verksamhetschef.
 ;;-\;- @connect@;;marks words ending in hyphen for further processing
+/*		I Göteborg anordnar teknologerna vid Chalmers tekniska högskola Cortègen, och i Uppsala arrangerar Uppsala teknolog- och naturvetarkår Forsränningen.
 ;;@hyphen@;-;;undo temporary rewriting
+/*		Den vårdcentral som får bäst betyg i Uppsala län är Brukshälsan i Söderfors - där Leifler är verksamhetschef.
 ;;icke-;icke- ;;to allow marking words with prefix icke- with negation
+/*		Med icke-dualism menas här inte en avsaknad av polariteten mellan ont och gott.
 ;;Icke-;icke- ;;to allow marking words with prefix icke- with negation, also when capitalised
+/*		Icke-allergisk astma.

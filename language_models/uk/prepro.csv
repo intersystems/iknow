@@ -2,35 +2,42 @@
 /* general:
 
 1;;“;";;replace curly quotes by straight quotes
-/*		1. „червоним октябрем“.
+/*		1. «Полювання за „Червоним Октябрем“».
 2;;”;";;replace curly quotes by straight quotes
-/*		2. „червоним октябрем“.
+/*		2. «Полювання за ”Червоним Октябрем“».
 3;;„;";;replace curly quotes by straight quotes
-/*		3. що їй належить „по праву“.
+/*		3. Центр отримав статус „комсомольської госпрозрахункової організації“.
 4;;«;";;rewrites left French quotation marks to straight ones
 /*		4. «Я поважаю її як відважного, енергійного і чесного політика.
 5;;»;";;rewrites right French quotation marks to straight ones
-/*		5. закономірно можна трактувати як «управлінське право».
+/*		5. Тому словосполучення «адміністративне право» цілком закономірно можна трактувати як «управлінське право». 
 6;;‘;';;replace curly apostrophe by straight one
 /*		6. Новообраний мер добре пам‘ятає про своє італійське коріння.
 7;;’;';;replace curly apostrophe by straight one
-/*		7. провідні фактори, що є підґрунтям різних форм патології, пов’язаної з пренатальною гіпоксією.
+/*		7. Перебудови мітохондріального апарата можуть бути позначені як провідні фактори, що є підґрунтям різних форм патології, пов’язаної з пренатальною гіпоксією.
 8;;′;';;rewrite curly to straight apostrophe
-/*		8. провідні фактори, що є підґрунтям різних форм патології, пов′язаної з пренатальною гіпоксією.
+/*		8. Перебудови мітохондріального апарата можуть бути позначені якпровідні фактори, що є підґрунтям різних форм патології, пов′язаної з пренатальною гіпоксією.
 9;;`;';;rewrite curly to straight apostrophe
-/*		9. що біля пам'ятної дошки письменникові з`явиться додаткова табличка.
+/*		9. У підсумку ж ректорат вирішив, що біля пам'ятної дошки письменникові з`явиться додаткова табличка.
 10;;´;';;rewrite curly to straight apostrophe
-/*		10. що біля пам'ятної дошки письменникові з´явиться додаткова табличка.
+/*		10. У підсумку ж ректорат вирішив, що біля пам'ятної дошки письменникові з´явиться додаткова табличка.
 
 11;;,—;, ;;ignore hyphen e2-80-94 after comma for best processing result
 12;;.—;. ;;ignore hyphen e2-80-94 after period for best processing result
+/*		12. В 2-й половині 18 ст.— 1-й половині 19 ст. було закладено основи військової та морської гігієни.
 16;;\—;- ;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*		16. Автор звернув увагу на те, що окремі духовні цінності — надбання культури —набувають усе більшого значення товару, об'єкта цивільного обігу.
 17;;—\; -;;separate hyphen e2-80-94 from word + rewrite to basic character
+/*		17. У 1615 французький економіст Антуан де Монкретьєн (1575— 1621) увів у науковий обіг термін "політична економія". 
 18;;—;-;;rewrite to treat hyphen character e2-80-94 in the same way as similar characters
+/*		18. Період 1990—1999 років був проголошений ООН десятиріччям міжнародного права.
 19;;\–;- ;;separate hyphen e2-80-93 from word + rewrite to basic character
+/*		19. Судові рішення мотивовано, зокрема, тим, що обраний позивачем спосіб захисту порушеного права не відповідає  приписам Закону України "Про авторське право і суміжні права" (далі –Закон).
 20;;–\; -;;separate hyphen e2-80-93 from word + rewrite to basic character
 21;;–;-;;rewrite to treat hyphen character e2-80-93 in the same way as similar characters
+/*		21. Вірус грипу має зовнішній діаметр 100–110 нм та внутрішнє ядро 70 нм.
 22;;­;;;delete invisible hyphen c2-ad that disturbs lexrep detection
+/*		22. Проте достеменно з'ясовано, що специфічні мовні риси української мови трапля­ються уже в пам'ятках 11—12 ст., що походять з Південної Русі.
 
 23;;,-; , -;;adds space between comma and dash
 /*		23. «Те, що в нас називають житловим правом, є частина цивільного права»,- стверджував він.
@@ -43,15 +50,16 @@
 31;;[…]; […] ;for omissions
 32;;[...]; [...] ;for omissions
 33;;…; … ;;adds spaces to prevent … to become part of Concept 
-/*		33. історіях інших людей: матері, дружини, коханки…
+/*		33. Стираються грані між тим, яку роль вона грає у історіях інших людей: матері, дружини, коханки…
 34;;...; ... ;;to prevent '...' to hinder the indexing
+/*		34. Всі країни, де виробництво перевищує споживання, спрямовують свої погляди на зовнішній ринок..., але світовий ринок так само обмежений, як і ринок кожної країни».
 
 35;;".[;". [;;for footnotes
 36;;,[; , [;;for footnotes
 /*		36. Найбільша країна, чия територія повністю лежить в Європі,[3] друга країна за величиною на європейському континенті.
 37;;."[;." [;;for footnotes
 38;;.[;. [;;for footnotes
-/*		38. після постання.[11] У зв'язку з входженням останньої.
+/*		38. Таке ж двояке значення  цього слова зберігалося і з середини XVII століття, після постання руської держави.[11] У зв'язку з входженням останньої до складу Московії, а згодом і Російської імперії, слово «Україна» закріпилося.
 
 41;;(\;;;to make bracket attached to word NonRelevant
 /*		41. Філіппо Ліппі( вівтарна апсида 1452-1466 рр, собор в Прато).
@@ -61,11 +69,9 @@
 45;;\|;;;to make vertical bar attached to word NonRelevant
 46;;|\;;;to make vertical bar attached to word NonRelevant
 
-47;;\•;;;to separate • from word beginning
-/*		47. у перекладі з латинської означає •«управління»-.
-
 51;;: ; : ;;to prevent that : hinders the processing where a preceeding prepro item has inserted a space
 52;;) ; ;;to prevent that ) hinders the processing where a preceeding prepro item has inserted a space
+/*		52. Вона страждає, як страждав пан Карраско (став жертвою сфабрикованого судового процесу)… Ми щиро захоплюємося тим, як захищає демократію.
 
 
 /* language-specific items:
@@ -163,13 +169,16 @@
 ;;iє;іє;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iж;іж;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iз;із;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		Попри широке висвiтлення протягом декiлькох мiсяцiв цих нововведень у засобах масової iнформацiї та обговорення їх безпосередньо iз зацiкавленими особами.
 ;;iі;іі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iї;ії;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iй;ій;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iк;ік;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		Уранцi 5 листопада очiкували митного оформлення 30 вантажних транспортних засобiв.
 ;;iл;іл;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iм;ім;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iн;ін;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		вимог вiдомства про застосування iнших заходiв забезпечення митного транзиту.
 ;;iо;іо;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iп;іп;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;iр;ір;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
@@ -199,8 +208,10 @@
 ;;йi;йі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;кi;кі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;лi;лі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		Ситуацiя на кордонi нормалiзувалася.
 ;;мi;мі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;нi;ні;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		Проводилася робота щодо розширення кола осiб, якi надають послуги вiд iменi поручителiв.
 ;;оi;оі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;пi;пі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;рi;рі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
@@ -210,6 +221,7 @@
 ;;фi;фі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;хi;хі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;цi;ці;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
+/*		Загалом за перший тиждень у нових умовах через цi пункти пропуску проїхали 2486 вантажних автомобiлiв.
 ;;чi;чі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;шi;ші;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
 ;;щi;щі;;to rewrite the Latin 'i' to the Ukrainian one when a Ukrainian character is next to it
