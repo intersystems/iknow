@@ -6,45 +6,10 @@
 using namespace iknow::csvdata;
 using namespace std;
 
-vector<string> special_labels = { // language independent labels
-	";1,$;Concept;typeConcept;;0;",
-	";1,$;Join;typeOther;;0;",
-	";1,$;JoinReverse;typeOther;;0;",
-	";1,$;NonRelevant;typeOther;;0;",
-	";1,$;Punctuation;typeEndConcept;;0;",
-	";1,$;Relation;typeRelation;;0;",
-	";1,$;Numeric;typeOther;;0;",
-	";1,$;Unknown;typeOther;;0;",
-	";1,$;CapitalAll;typeAttribute;;0;",
-	";1,$;CapitalInitial;typeAttribute;;0;",
-	";1,$;CapitalMixed;typeAttribute;;0;",
-	";1,$;NonSemantic;typeAttribute;;0;Entity(NonSemantic)",
-	";1,$;User1;typeAttribute;;0;",
-	";1,$;User2;typeAttribute;;0;",
-	";1,$;User3;typeAttribute;;0;",
-	";1,$;AlphaBetic;typeConcept;;0;",
-	";1,$;Space;typeOther;;0;",
-	";1,$;Katakana;typeConcept;;0;",
-	";1,$;UDNegation;typeAttribute;;0;",
-	";1,$;UDPosSentiment;typeAttribute;;0;",
-	";1,$;UDNegSentiment;typeAttribute;;0;",
-	";1,$;UDConcept;typeConcept;;0;",
-	";1,$;UDRelation;typeRelation;;0;",
-	";1,$;UDNonRelevant;typeNonRelevant;;0;",
-	";1,$;UDUnit;typeAttribute;;0;",
-	";1,$;UDNumber;typeAttribute;;0;",
-	";1,$;UDTime;typeAttribute;;0;",
-	";1,$;UDCertainty;typeAttribute;;0;",
-	";1,$;UDGeneric1;typeAttribute;;0;",
-	";1,$;UDGeneric2;typeAttribute;;0;",
-	";1,$;UDGeneric3;typeAttribute;;0;"
-
-};
-
 void iKnow_KB_Label::LoadSpecialLabels(CSV_DataGenerator& kb)
 {
 	string isDefault = "";
-	for (vector<string>::iterator it = special_labels.begin(); it != special_labels.end(); ++it) {
+	for (vector<string>::const_iterator it = special_labels.begin(); it != special_labels.end(); ++it) {
 		vector<string> row_label = kb.split_row(*it);
 		kb.kb_labels.push_back(iKnow_KB_Label::LabelFromString(row_label,isDefault)); // create and add label object
 	}
