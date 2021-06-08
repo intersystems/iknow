@@ -42,6 +42,9 @@
 /*		2180. The shares are down around 12% year-on-year.
 2567;1;UDCertainty;+SCertainty;
 /*		2567. The result suggests a mild autism spectrum disorder, but further examinations are needed to confirm this.  
+2568;1;UDGeneric1;+SGeneric1;
+
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 20: PROCESSING SPECIFIC WORDS AND NUMBERS                                                                                                                   
@@ -1213,7 +1216,7 @@
 1081;40;ENAux|ENCon:ENAdj|ENPart|typeConcept;^ENAux|*|ENAdj|*;low-frequent
 /*		1081. We included 91 consecutive patients who had non-invasively verified CVT and follow-up imaging at 4months or later.
 2079;40;ENWhich|.ENAdverb:ENPerspron_subj:ENNot:ENCapitalInitial:"since":"just"+^ENsAdj|ENPart;*|*|ENRel+ENVerb;not always good
-/*		2079. The dam gave farmers irrigation water that dramatically expanded agriculture but ended the salmon migration.
+/*		2079. The dam gave farmers irrigation water that dramatically expanded agriculture but ended the salmon migration.
 2073;40;ENPart+^ENInfCon+^ENInf|ENPerspron_obj;ENRel+ENVerb|*;
 /*		2073. What we found surprised us.
 253;40;ENToo|ENPart|ENArtPosspron;ENToo|ENRel+ENVerb|*;rare
@@ -3067,20 +3070,24 @@
 2309;70;ENNegSentiment+typeRelation+^ENNegatedPossent|"less":"a lot less":"much less"|^ENNegatedPossent+^ENNegatedNegsent;-ENNegSentiment+ENNegatedNegsent+ENPosSentiment|*|*;
 /*		2309.UD. Spending better and wasting less.
 
-/* SENTIMENT ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
-2300;70;ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd;+JoinReverse|*;merge NonRelevant sentiment marker with following lexrep
-/*		2300.UD. Then, on Tuesday, more rain allowed for a total of only 2 hours of play around the grounds.
-2354;70;ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd;+JoinReverse|*;repetition of r2300 for sequences with NonRelevant adverbs
-/*		2354.UD. Then, on Tuesday, more rain allowed for a total of only just 2 hours of play around the grounds.
-2301;70;typeConcept:typeRelation:typePathRelevant:typeBeginConcept|ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept+^typeEndConcept|ENAndOrBut:ENPunctuation:ENArtPosspron:SEnd;*|+ENNRSentmarker|*;mark sentiment markers that are followed by a lexrep to which they cannot be merged
-/*		2301.UD. common oil/water separation materials work for one type of emulsion only, says the Assistant Professor. This has become a priority for space agencies outside the United States as well.
+/* PREPARATION
+2637;70;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets
+/*		2637.UD. The novel scored a relatively disappointing $15m (£12.3m) to debut in second place. 		
 
-/* SENTIMENT ON VERB OR ADVERB -> expand to phrase
+/* SENTIMENT ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
+2300;70;ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;merge NonRelevant sentiment marker with following lexrep
+/*		2300.UD. Then, on Tuesday, more rain allowed for a total of only 2 hours of play around the grounds.
+2354;70;ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;repetition of r2300 for sequences with NonRelevant adverbs
+/*		2354.UD. Then, on Tuesday, more rain allowed for a total of only just 2 hours of play around the grounds.
+2301;70;typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeBeginRelation|ENPosSentiment:ENNegSentiment+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept+^typeEndConcept+^typeBeginConcept+^typeBeginRelation|ENAndOrBut:ENPunctuation:ENArtPosspron:SEnd:ENHyphen;*|+ENNRSentmarker|*;mark sentiment markers that are followed by a lexrep to which they cannot be merged
+/*		2301.UD. common oil/water separation materials work for one type of emulsion only, says the Assistant Professor. This has become a priority for space agencies outside the United States as well. And there are the same rules with regards to Premier League clubs as well – it goes from window to window.
+
+/* SENTIMENT ON VERB, ADVERB OR PATHRELEVANT -> expand to phrase
 /* Assign attributes
-2204;70;typeRelation+ENPosSentiment+^ENPrep;+ENPosSentimentBegin;
-/*		2204.UD. They successfully docked at 3.31 a.m. Beijing time.
-2205;70;typeRelation+ENNegSentiment+^ENPrep;+ENNegSentimentBegin;
-/*		2205.UD. The market has worsened, Ronald said.
+2204;70;typeRelation:typeBeginRelation:typePathRelevant+ENPosSentiment+^ENPrep;+ENPosSentimentBegin;
+/*		2204.UD. They successfully docked at 3.31 a.m. Beijing time. 
+2205;70;typeRelation:typeBeginRelation:typePathRelevant+ENNegSentiment+^ENPrep;+ENNegSentimentBegin;
+/*		2205.UD. The market has worsened, Ronald said. If countries tighten too soon, they risk stifling recovery. He did win with some authority and probably hit the front too soon. It is considered a very advanced dive, meaning only those with the  proper training and certifications should attempt it.
 2268;70;ENAdverb+^typeConcept+ENPosSentiment;+ENPosSentimentBegin;
 /*		2268.UD. I actually posted this question well over five weeks ago and now all of a sudden, I am getting the info I wanted.
 2269;70;ENAdverb+^typeConcept+ENNegSentiment;+ENNegSentimentBegin;
@@ -3090,13 +3097,13 @@
 
 /* Expansion rules
 /* Exception: relation-type marker after preposition
-2346;70;^ENPosSentiment|ENPrep:ENOf+^"down"+^"as"|ENPosSentimentBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;
+2346;70;^ENPosSentiment|ENPrep:ENOf+^"down"+^"as"|ENPosSentimentBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;limit left expansion
 /*		2346.UD. The man is awarded for successfully founding an educational system in the region.
-2352;70;^ENNegSentiment|ENPrep:ENOf+^"down"+^"as"|ENNegSentimentBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;
+2352;70;^ENNegSentiment|ENPrep:ENOf+^"down"+^"as"|ENNegSentimentBegin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;limit left expansion
 /*		2352.UD. Tasmanian devil mothers give birth after only a few weeks of pregnancy.
 
 /* General rules
-2541;70;*typeConcept|ENPartAfter40+ENPosSentimentBegin+^ENPBegin|"by";+ENPosSentimentBegin+ENDummy2|-ENPosSentimentBegin|*;
+2541;70;*typeConcept|ENPartAfter40+ENPosSentimentBegin+^ENPBegin|"by";+ENPosSentimentBegin+ENDummy2|-ENPosSentimentBegin|*;limit left expansion to antecedent
 /*		2541. It is known as a destination enjoyed by many celebrities.
 2542;70;*typeConcept|ENPartAfter40+ENNegSentimentBegin+^ENPBegin|"by";+ENNegSentimentBegin+ENDummy2|-ENNegSentimentBegin|*;
 /*		2542.UD. The investigation also looked at abuse suffered by his brother.
@@ -3106,11 +3113,11 @@
 /*		2207.UD. Phalaenopsis orchids hate low temperatures.
 2347;70;ENDummy2;-ENDummy2;remove temp label
 /*		2347.UD. The man is awarded for successfully founding an educational system in the region.
-2210;70;ENPosSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd;*|*|+ENPosSentimentStop;
+2210;70;ENPosSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd+^ENPosSentiment;*|*|+ENPosSentimentStop;
 /*		2210.UD. An evening like this makes me feel hopeful and optimistic and happy.
-2550;70;ENNegSentiment+ENPrespart2|.^typeConcept|*typeConcept|ENVerb;*|*|*|+ENNegSentimentStop+ENAttrStop;
+2550;70;ENNegSentiment+ENPrespart2|.^typeConcept|*typeConcept|ENVerb+^ENNegSentiment;*|*|*|+ENNegSentimentStop+ENAttrStop;
 /*		2550. But it is worrying that employment is down and more people are dropping out of the labour market.
-2211;70;ENNegSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd;*|*|+ENNegSentimentStop;
+2211;70;ENNegSentimentBegin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd+^ENNegSentiment;*|*|+ENNegSentimentStop;
 /*		2211.UD. Armed police attended and surrounded the building, only to find the men had been taking part in an organised company activity.
 
 /* Special cases:
@@ -3141,7 +3148,7 @@
 /* Assign attributes to (Begin)Concepts
 2233;70;typeConcept:typeBeginConcept+ENPosSentiment;+ENPossentConceptBegin;
 /*		2233.UD. Endoscopic resection was successfully accomplished in 25 patients.
-2234;70;typeConcept:typeBeginConcept+ENNegSentiment;+ENNegsentConceptBegin;
+2234;70;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+ENNegSentiment;+ENNegsentConceptBegin;
 /*		2234.UD. Only six companies of the 16 surveyed scored at least 50% in the poll.
 
 /* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
@@ -3150,13 +3157,28 @@
 2266;70;ENPrep+ENNegSentiment;+ENNegsentConceptBegin;
 /*		2266.UD. it is insisting on enforcing the death verdict against him and nobody objects.
 
+/*	Sentiment in enumeration
+/* Note: ENDummy2 is used to mark ENComma when the span shouldn't stop
+2638;70;ENCon+ENPosSentiment+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^ENPosSentiment:ENPosSentimentBegin;*|*|*|+ENPossentConceptStop;stop span in enumeration after noun with sentiment attribute
+/*		2638.UD. In matters of trade, any advantage, benefit, franchise, immunity or privilege applied by a Participating State or any other country shall be immediately and unconditionally extended to the like product originating in, or intended for consignment.
+2639;70;ENCon+ENNegSentiment+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^ENNegSentiment:ENNegSentimentBegin;*|*|*|+ENNegsentConceptStop;stop span in enumeration after noun with sentiment attribute
+/*		2639.UD. an 85 year old female with dementia since 1996 and behaviour problems (interfering with other people) who was admitted to a nursing home. problems with language, memory problems, or other neurological symptomology.
+2640;70;ENAdj+ENPosSentiment|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^ENPosSentiment:ENPosSentimentBegin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENPossentConceptStop;stop span after adjective with generic attribute after enumeration of nouns
+/*		2640.UD. Neurological examination revealed that the patient was alert and oriented times three with good cognition,   memory, and language. 
+2641;70;ENAdj+ENNegSentiment|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^ENNegSentiment:ENNegSentimentBegin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENNegsentConceptStop;stop span after adjective with generic attribute after enumeration of nouns
+/*		2641.UD. Neurological examination revealed that the patient was alert and oriented times three with bad cognition,  memory, and language.  
+2642;70;ENAdj+ENPosSentiment|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^ENPosSentiment:ENPosSentimentBegin;*|*|*|*|*|+ENPossentConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation
+/*		2642.UD. An outstanding defender whose superb tackling, ability to break forward and instinctive reading of the  game quickly attracted acclaim. 
+2643;70;ENAdj+ENNegSentiment|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^ENNegSentiment:ENNegSentimentBegin;*|*|*|*|*|+ENNegsentConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation
+/*		2643.UD. Today’s meeting, which had been in doubt because of a bad weather forecast, now goes ahead, but the going is heavy.
+2644;70;ENDummy2;-ENDummy2;;clean up temp label
+/*		2644.UD. Neurological examination revealed that the patient was alert and oriented times three with good cognition,   memory, and language. 
+
 /* Expansion rules for type(Begin)Concept, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
-2237;70;ENPossentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENPossentConceptStop|*;
+2237;70;ENPossentConceptBegin|"than"|ENVerb:ENPerspron_subj;*|+ENPossentConceptStop|*;
 /*		2237.UD. This is because people use emotion when making decisions, leading to some options feeling more desirable than others.
-2238;70;ENNegsentConceptBegin|"than"|ENVerb:ENPerspron_subj:ENMod;*|+ENNegsentConceptStop|*;
+2238;70;ENNegsentConceptBegin|"than"|ENVerb:ENPerspron_subj;*|+ENNegsentConceptStop|*;
 /*		2238.UD. “I’m sure he’s more disappointed than anyone else.
-2239;70;ENPossentConceptBegin|ENPrep|ENVerb;*|+ENPossentConceptStop|*;probably not ideal-> review later
-/*		2239.UD. We have been overwhelmed by the energy and drive of the students who have enrolled and it is great to teach and deliver in such a positive environment.
 2240;70;ENNegsentConceptBegin|ENPrep|ENVerb;*|+ENNegsentConceptStop|*;probably not ideal-> review later
 /*		2240.UD. The ‘new’ problem of outdoor air pollution is too large to be ignored or deferred to tomorrow’s agenda.
 2531;70;ENVerb:ENPerspron_subj:ENNegation:ENPBegin:"but":SEnd:ENAttrStop;+ENDummy2;use temp label to shorten following rules
@@ -3165,7 +3187,7 @@
 /*		2235.UD. Endoscopic resection was successfully accomplished in 25 patients.
 2236;70;ENNegsentConceptBegin|.^ENDummy2+^ENNegsentConceptStop|ENDummy2;*|*|+ENNegsentConceptStop;
 /*		2236.UD. Bad infections can even lead to blindness and/or loss of the eye.
-2297;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENPossentConceptStop|^SBegin;+ENPossentConceptStop|-ENPossentConceptStop|*;rare, correction of r2235
+2297;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENPossentConceptStop|^SBegin;+ENPossentConceptStop|-ENPossentConceptStop|*;rare, correction of r2235 to prevent span from ending with 'and' or 'than'
 /*		2297.UD. You will see the benefit sooner than you would think. WRONG: The project also proved therapeutic, helping Maria and I to come to terms with the death of our parents.
 2298;70;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENNegsentConceptStop|^SBegin;+ENNegsentConceptStop|-ENNegsentConceptStop|*;rare, correction of r2236
 /*		2298.UD. There were suggestions today that they may have forced the authorities to move against the men sooner than they wanted.
@@ -3176,17 +3198,17 @@
 2532;70;ENDummy2;-ENDummy2;clean up temp label
 /*		2532. The market has worsened, Robert said.
 
-/* Expansion rules for Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
-2251;70;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp:ENPercent|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPossentConceptBegin+ENDummy2|*|-ENPossentConceptStop|*|*;
+/* Expansion rules for Sentiment attribute on adjective or noun preceded by a linking verb -> expansion to the left
+2251;70;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPossentConceptBegin+ENDummy2|-ENPossentConceptStop|-ENPossentConceptStop|-ENPossentConceptStop|*;
 /*		2251.UD. The show was good, just not as good as we expected.
-2302;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENPosSentiment;*|*|+ENPossentConceptBegin+ENDummy2|-ENPossentConceptStop|*|*;
+2253;70;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|-ENNegsentConceptStop|-ENNegsentConceptStop|*;
+/*		2253.UD. Business is bad and despite what we're hearing, the hotels are empty. The poll found 74 per cent of  licensees said the ban had been bad for their trade.
+2302;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENPosSentiment;*|*|+ENPossentConceptBegin+ENDummy2|-ENPossentConceptStop|-ENPossentConceptStop|*;
 /*		2302.UD. His trainer is also satisfied that he will be able to clear the fences.
+2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|-ENNegsentConceptStop|*;
+/*		2303.UD. However, more detailed maps are increasingly difficult to view and explore. The patient was "deeply" jaundiced.
 2252;70;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENPosSentiment;+ENPosSentimentBegin|-ENPBegin|*;
 /*		2252.UD. When they got there it was well alight and structurally it has been destroyed.
-2253;70;typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|*|*;
-/*		2253.UD. Business is bad and despite what we're hearing, the hotels are empty.
-2303;70;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+ENNegSentiment;*|*|+ENNegsentConceptBegin+ENDummy2|-ENNegsentConceptStop|*|*;
-/*		2303.UD. However, more detailed maps are increasingly difficult to view and explore. The patient was "deeply" jaundiced.
 2254;70;ENPerspron_subj:ENPerspron:ENIt:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+ENNegSentiment;+ENNegSentimentBegin|-ENPBegin|*;
 /*		2254.UD. There are worries that this could be the beginning of an African exodus from the court, a dwindling membership on a continent with a long list of conflicts and human rights abuses to adjudicate. 
 
@@ -3204,15 +3226,15 @@
 
 /* Further expansion to the left to include the entire 'subject'
 /* Note: ENDummy2 marks ENXxxSentimentConceptBegin in left expansion of adjectives
-2255;70;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;
+2255;70;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;limit left expansion
 /*		2255.UD. The store has lost a lot of business in the last year as residents are too afraid to use it during the evenings and Bobby has been forced to close early.
 2256;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENPossentConceptBegin;*|+ENPossentConceptBegin+ENDummy2|*|-ENDummy2-ENPossentConceptBegin;extend left expansion
 /*		2256.UD. On the whole, he said the figures are very positive.
 2257;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENNegsentConceptBegin;*|+ENNegsentConceptBegin+ENDummy2|*|-ENDummy2-ENNegsentConceptBegin;extend left expansion
 /*		2257.UD. The rest of the exam was negative.
-2258;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENPossentConceptBegin;*|+ENPossentConceptBegin+ENDummy2|*|-ENDummy2-ENPossentConceptBegin;extend left expansion
-/*		2258.UD. MPs and peers say the lack of transparency on the policy is ‘not good enough’.
-2259;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENNegsentConceptBegin;*|+ENNegsentConceptBegin+ENDummy2|*|-ENDummy2-ENNegsentConceptBegin;extend left expansion
+2258;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENOf:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENPossentConceptBegin;*|+ENPossentConceptBegin+ENDummy2|*|-ENDummy2-ENPossentConceptBegin;extend left expansion
+/*		2258.UD. On the basis of dichotomized analysis of the MSQ scale (score 1-4=dissatisfied, 5-7=satisfied), 82.7% of participants were satisfied with their medication at endpoint. 
+2259;70;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENOf:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENNegsentConceptBegin;*|+ENNegsentConceptBegin+ENDummy2|*|-ENDummy2-ENNegsentConceptBegin;extend left expansion
 /*		2259.UD. All drug screens during the patient's hospitalizations were negative.
 2260;70;ENPrep|ENDummy2+ENPossentConceptBegin;+ENDummy2+ENPossentConceptBegin|-ENDummy2-ENPossentConceptBegin;extend left expansion
 /*		2260.UD. On 05-AUG-2006, at the physician's office, five out of six occult blood tests done on the patient's stool were positive.
@@ -3222,9 +3244,9 @@
 /*		2262.UD. Business is good and despite what we're hearing, the hotels are busy.
 
 /* Remove SentimentConcept markers in larger Sentiment span
-2241;70;ENPossentConceptBegin+ENInPossentspan;-ENPossentConceptBegin;
+2241;70;ENPossentConceptBegin+ENInPossentspan+^ENPosSentiment;-ENPossentConceptBegin;clean-up
 /*		2241.UD. Then there is a big question mark above what happens next.
-2242;70;ENNegsentConceptBegin+ENInNegsentspan;-ENNegsentConceptBegin;
+2242;70;ENNegsentConceptBegin+ENInNegsentspan+^ENNegSentiment;-ENNegsentConceptBegin;
 /*		2242.UD. It’s not only expensive but bad for the individual concerned.
 2243;70;ENPossentConceptStop+ENInPossentspan+^ENPBegin;-ENPossentConceptStop;
 /*		2243.UD. She points out that San Francisco, the city closest to the Great Pacific Patch, has successfully implemented policies to stop people using wasteful plastics.
@@ -3304,17 +3326,24 @@
 /*		2294.UD. He said it's worrying to hear that psychologists might be consulting the campaign.
 
 /* Move SentimentBegin from NR to R/C/PR
-2208;71;ENPosSentimentBegin+^typeRelation+^typeConcept+^typePathRelevant+^ENNRSentmarker+^ENPosSentiment|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENPosSentimentBegin|*|+ENPosSentimentBegin;
+2645;71;ENNRSentmarker:ENPosSentiment:ENAdvDurCon:ENAdvFreqCon:ENAdvTime;+ENDummy2;add Dummy2 to use as exception in the following rules with PosSentiment
+/*		2645.UD. The  building opened in 1957, a year before the village suffered major floods.
+2647;71;ENNRSentmarker:ENNegSentiment:ENAdvDurCon:ENAdvFreqCon:ENAdvTime;+ENDummy3;add Dummy3 to use as exception in the following rules with NegSentiment
+/*		2647.UD. A 21-year-old who has only reached one major quarterfinal, a year ago in Paris. 
+2208;71;ENPosSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-ENPosSentimentBegin|*|+ENPosSentimentBegin;
 /*		2208.UD. The profit result is above analysts' expectations.
-2209;71;ENNegSentimentBegin+^typeRelation+^typeConcept+^typePathRelevant+^ENNRSentmarker+^ENNegSentiment|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENNegSentimentBegin|*|+ENNegSentimentBegin;
+2209;71;ENNegSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy3|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy3|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-ENNegSentimentBegin|*|+ENNegSentimentBegin;
 /*		2209.UD. Those early balls were really rather nasty.
-2218;71;ENPosSentimentStop+^typeRelation+^typeConcept+^typePathRelevant+^ENNRSentmarker|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENPosSentimentStop|*|+ENPosSentimentStop;
+2218;71;ENPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-ENPosSentimentStop|*|+ENPosSentimentStop;
 /*		2218.UD. While not helped by crude oil prices surging 4.7% to record highs above US$100 a barrel in New York overnight, the airline said it is looking at ways to improve its faltering share price.
-2219;71;ENNegSentimentStop+^typeRelation+^typeConcept+^typePathRelevant+^ENNRSentmarker|.^typeRelation+^typeConcept+^typePathRelevant|typeRelation:typeConcept:typePathRelevant;-ENNegSentimentStop|*|+ENNegSentimentStop;
+2219;71;ENNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy3|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-ENNegSentimentStop|*|+ENNegSentimentStop;
 /*		2219.UD. Despite the fall and ongoing volatility in global equity and credit markets, the company said it is on track to meet its strategic goals.
 2353;71;ENPosSentiment:ENNegSentiment+ENAdvstruct;+ENNRSentmarker;
 /*		2353.UD. Though the pain initally involved only the right side of her throat, in the front, it spread to involve her whole throat.
-
+2646;71;ENDummy2;-ENDummy2;clean-up
+/*		2646.UD. The building opened in 1957, a year before the village suffered major floods.
+2648;71;ENDummy3;-ENDummy3;clean-up
+/*		2648.UD. A 21-year-old who has only reached one major quarterfinal, a year ago in Paris. 
 
 /* ==================================================================================================================================================================
 /* BLOCK 75: MEASUREMENT & TIME ATTRIBUTE EXPANSION                                                                                                                  
@@ -3774,6 +3803,151 @@
 1999;75;"past"+typeRelation;-ENTime;
 /*		1999.	The index could race past the 14,900-high in the next two days.
 
+/* ==================================================================================================================================================================
+/* BLOCK 77: GENERIC ATTRIBUTE                                                                                                                                             
+/* ==================================================================================================================================================================
+
+/* Preparation
+2584;77;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets, copy of r2637
+/*		2584.UD. Her edema was from therapy with rofecoxib and allergic rhinitis (incidental finding). 
+
+/* GENERIC ATTRIBUTE ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
+2611;77;SGeneric1+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;merge NonRelevant generic attribute with following lexrep, copy of r2300 from Sentiment
+/*		2611.UD. The physician reported that the patient was still being treated.
+2612;77;SGeneric1+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;repetition of r2611 for sequences with NonRelevant adverbs, copy of r2354 from Sentiment
+/*		2612.UD. The physician reported that the patient was still, obviously, being treated.
+2630;77;typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeBeginRelation|SGeneric1+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept+^typeEndConcept+^typeBeginConcept+^typeBeginRelation|ENAndOrBut:ENPunctuation:ENArtPosspron:SEnd:ENHyphen;*|+ENNRGeneric1marker|*;mark generic attributes that are followed by a lexrep to which they cannot be merged, copy of r2301 from Sentiment
+/*		2630. According to our experience and in line with the published results, conventional laparotomy is still the treatment of choice. NOT. Safeguard measures shall be applied for an initial period of no longer than one year. NOT. He explained that they were still in the early stages of figuring out how this would work.
+
+/* GENERIC ATTRIBUTE ON VERB OR ADVERB -> expand to phrase
+/* Assign attributes
+2594;77;typeRelation:typeBeginRelation:typePathRelevant+SGeneric1+^ENPrep;+SGeneric1Begin;copy of r2204 from Sentiment
+/*		2594.UD. Ciclopirox olamine (CPX) is a synthetic antifungal agent clinically used to treat mycoses of the skin and nails. The authority has stressed that the plans are still in the early stages. The  monster is still there.
+2595;77;ENAdverb+^typeConcept+SGeneric1;+SGeneric1Begin;copy of r2268 from Sentiment
+/*		2595.UD. Approximately at this time, the patient was on therapy with hydrocodone bitartrate.
+
+/* Expansion rules
+/* Exception: relation-type marker after preposition
+2632;77;^SGeneric1|ENPrep:ENOf+^"down"+^"as"|SGeneric1Begin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;limit left expansion, copy of r2346 from Sentiment
+/*		2632. Elvis fan suffered a heart attack on December 23 last year and has been recovering at home. 
+
+/* General rules
+2633;77;*typeConcept|ENPartAfter40+SGeneric1Begin+^ENPBegin|"by";+SGeneric1Begin+ENDummy2|-SGeneric1Begin|*;limit left expansion to antecedent, copy of r2541 from Sentiment
+/*		2633.UD. They found that for every 77 patients treated by doctors aged over 60, one fewer patient would die within 30 days of admission if those patients were cared for by physicians under the age of 40.
+2597;77;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^SGeneric1Begin+^ENDummy2|SGeneric1Begin+^ENPBegin+^ENDummy2;+SGeneric1Begin|*|-SGeneric1Begin;copy of r2206 from Sentiment
+/*		2597.UD. It was noted that the patient was probably allergic to statins. 
+2631;77;ENDummy2;-ENDummy2;remove temp label, copy of r2347 from Sentiment
+/*		2631.UD. They found that for every 77 patients treated by doctors aged over 60, one fewer patient would die within 30 days of admission if those patients were cared for by physicians under the age of 40.
+2599;77;SGeneric1Begin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd+^SGeneric1;*|*|+SGeneric1Stop;copy of r2210 from Sentiment
+/*		2599.UD. The physician reported that the patient was allergic to tomatoes and ate some for lunch. 
+
+/* Special case
+2604;77;SBegin:ENPunctuation:ENAndOrBut|.ENNonrelevant|SGeneric1Begin|","|ENPBegin+SGeneric1Stop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|*|-SGeneric1Stop|*|+SGeneric1Stop;copy of r2349 from Sentiment
+/*		2604.UD. Symptomatically, the patient improved within 24 hours of admission.
+
+/* Assign InGenericspan attributes
+2600;77;SGeneric1Begin|.^SGeneric1Stop|SGeneric1Stop;+ENInGeneric1span|+ENInGeneric1span|*;copy of r2214 from Sentiment
+/*		2600.UD. Lungs had mild bibasilar crackles bilaterally and trace edema was noted.
+
+/* Split Relations at boundaries of span
+2602;77;typeRelation:typeOther+^ENInGeneric1span|typeRelation+ENInGeneric1span;*|+ENBeginrelation;copy of r2212 from Sentiment
+/*		2602.UD. Islet beta cells deficient in Bcl-xL develop but are abnormally sensitive to apoptotic stimuli. 
+2601;77;typeRelation:typeOther+ENInGeneric1span|typeRelation+^ENInGeneric1span;*|+ENBeginrelation;copy of r2216 from Sentiment
+/*		2601.UD. Lungs had mild bibasilar crackles bilaterally and trace edema was noted.
+
+/* GENERIC ATTRIBUTE ON OTHER MARKERS -> expand to the right, no expansion to the left
+/* Assign attribute to (Begin)Concepts
+2569;77;typeConcept:typeBeginConcept+SGeneric1;+ENGeneric1ConceptBegin;copy of r2233 from Sentiment
+/*		2569.UD. Risk factor measurements included low-density lipoprotein cholesterol, body mass index, C-reactive protein, smoking, and family history of coronary disease in addition to MetS components. 
+
+/* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
+2616;77;ENPrep+SGeneric1;+ENGeneric1ConceptBegin;copy of r2265 from Sentiment
+/*		2616.UD. As of January the patient was still on rofecoxib without any adverse effects.
+
+/*	Generic attribute in enumeration
+/* Note: ENDummy2 is used to mark ENComma when the span shouldn't stop
+2573;77;ENCon+SGeneric1+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^SGeneric1:SGeneric1Begin;*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after noun with generic attribute, copy of r2638
+/*		2573.UD. Information has been received from a physician and consumer concerning her approximately 4 year old son with  house dust mite allergy, attention deficit disorder and cautery to both nostrils. The most common features of their medical histories were: hypertension (32 patients), drug allergy (19), sinusitis (17), thyroid disease (12), otitis media (11), asthma (11). NOT. hypertension and allergy (unspecified). NOT. The models had high predictive accuracies (78.9-90.2%) for allergic, renal, CNS, and hepatic ADRs.
+2622;77;ENAdj+SGeneric1|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^SGeneric1:SGeneric1Begin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENGeneric1ConceptStop;stop span after adjective with generic attribute after enumeration of nouns, copy of r2640
+/*		2622.UD. The more we learn about this tiny creature and its multi-layered structural designs, the more we realize how much it can help us as we design better planes, cars, sports equipment and armor.
+2580;77;ENAdj+SGeneric1|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^SGeneric1:SGeneric1Begin;*|*|*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation, copy of r2642
+/*		2580.UD. To this end we investigated the intra-host variation of canine influenza virus (CIV) during the course of  experimental infections in naïve and partially immune dogs, and in naturally infected animals. 
+2623;77;ENDummy2;-ENDummy2;;clean up temp label, copy of r2644
+/*		2623.UD. The more we learn about this tiny creature and its multi-layered structural designs, the more we realize how much it can help us as we design better planes, cars, sports equipment and armor.
+
+/* Expansion rules for type(Begin)Concept, PathRelevant, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
+/* Note: ENDummy2 is used as temp label to shorten patterns, and is then removed
+/*	Expand to the right until next verb form, negation marker or beginning of phrase
+2617;77;ENGeneric1ConceptBegin|"than"|ENVerb:ENPerspron_subj;*|+ENGeneric1ConceptStop|*;copy of r2237 from Sentiment
+/*		2617.UD. Management said Tuesday that performance at the purchased chain was "better than we expected".
+2570;77;ENVerb:ENPerspron_subj:ENNegation:ENAdvTemp:ENPBegin:"but":SEnd:ENAttrStop;+ENDummy2;use temp label to shorten following rules, copy of r2531 from Sentiment
+/*		2570.UD. The patient stated she did not want to go on raloxifene hydrochloride  because of a  family history of stroke. The patient was diagnosed as having allergic granulomatous angiitis, Churg-Strauss syndrome due to bronchial asthma with  eosinophil increase.
+2571;77;ENGeneric1ConceptBegin|.^ENDummy2+^ENGeneric1ConceptStop|ENDummy2;*|*|+ENGeneric1ConceptStop;copy of r2235 from Sentiment
+/*		2571.UD. The patient stated she did not want to go on raloxifene hydrochloride because of a family history of stroke, and she did not want to be on risedronate sodium because of a similar GI side effect profile. 
+2634;77;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENGeneric1ConceptStop|^SBegin;+ENGeneric1ConceptStop|-ENGeneric1ConceptStop|*;rare, correction of r2571 to prevent span from ending with 'and' or 'than', copy of r2297 from Sentiment
+/*		2634.UD. He is one year older than I am, to the day.
+2588;77;^ENPunctuation|ENPrespart2+ENGeneric1ConceptStop|.^ENDummy2+^ENGeneric1ConceptStop|ENDummy2;*|-ENGeneric1ConceptStop|*|+ENGeneric1ConceptStop;copy of r2530 from Sentiment
+/*		2588.UD. It provides a novel opportunity for dissecting the early pathology of AMD and the immune response contributing to this disorder. 
+2589;77;ENDummy2;-ENDummy2;clean up temp label, copy of r2532 from Sentiment 
+/*		2589.UD. It provides a novel opportunity for dissecting the early pathology of AMD and the immune response contributing to this disorder.
+
+/*	Expansion rules for Generic attribute to left on adjective or noun before linking verb -> expansion to the left
+2585;77;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+SGeneric1;+ENGeneric1ConceptBegin+ENDummy2|-ENGeneric1ConceptStop|-ENGeneric1ConceptStop|-ENGeneric1ConceptStop|*;copy of r2251 from Sentiment
+/*		2585.UD. Adverse effects are worrisome, and relapses after treatment cessation remain problematic. 
+2586;77;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+SGeneric1;*|*|+ENGeneric1ConceptBegin+ENDummy2|-ENGeneric1ConceptStop|-ENGeneric1ConceptStop|*;copy of r2302 from Sentiment
+/*		2586.UD.  Traders said the update shows that lenders are really immune from shockwaves spreading around the world  from the credit crunch.
+2619;77;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+SGeneric1;+SGeneric1Begin|-ENPBegin|*;copy of r2252 from Sentiment
+/*		2619.UD. He remained symptomatic.
+
+/* Expansion to the left for concept-type marker preceeded by noun + 'of'
+2649;77;typeConcept|"of":"for"|ENAdj:ENCon:ENEndconcept+SGeneric1;+ENGeneric1ConceptBegin|-ENGeneric1ConceptStop|*;
+
+/* No expansion to the right for Endconcept
+2620;77;ENEndconcept+SGeneric1|^SGeneric1+^ENGeneric1ConceptBegin;*|+ENGeneric1ConceptStop;copy of r2270 from Sentiment
+/*		2620.UD. During the full financial year revenue dropped 19% to EUR837 million.
+
+/* Expansion rules for Generic attribute on adjective followed by subordinate clause with "that"
+2621;77;ENAdj+SGeneric1+ENGeneric1ConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENGeneric1ConceptStop|*|+ENGeneric1ConceptStop;copy of r2263 from Sentiment
+/*		2621.UD. It is better that ten guilty persons escape than that one innocent suffer.
+
+/* Further expansion to the left to include the entire 'subject'
+/* Note: ENDummy2 marks ENGeneric1ConceptBegin in left expansion of adjectives, and is then removed
+2635;77;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;limit left expansion, copy of r2255 from Sentiment
+/*		2635.UD. As the group's results were better than feared amid the fall-out over health concerns.
+2591;77;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENGeneric1ConceptBegin;*|+ENGeneric1ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric1ConceptBegin;extend left expansion, copy of r2256 from Sentiment
+/*		2591.UD. The doctor said that his patient may be allergic.
+2592;77;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENOf:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENGeneric1ConceptBegin;*|+ENGeneric1ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric1ConceptBegin;copy of r2258 from Sentiment
+/*		2592.UD. The mother of the patient remained symptomatic. 
+2605;77;ENPrep|ENDummy2+ENGeneric1ConceptBegin;+ENDummy2+ENGeneric1ConceptBegin|-ENDummy2-ENGeneric1ConceptBegin;extend left expansion, copy r2260 from Sentiment
+/*		2605.UD. Upon exam the patient's pupils were approximately 4 mm and unreactive.
+2606;77;ENDummy2;-ENDummy2;cleanup, copy of r2262 from Sentiment
+/*		2606.UD. The doctor said that his patient may be allergic.
+
+/* Remove Generic1Concept markers in larger Generic attribute span
+2636;77;ENGeneric1ConceptBegin+ENInGeneric1span+^SGeneric1;-ENGeneric1ConceptBegin;clean-up, copy of r2241 from Sentiment
+/*		2636.UD. The doctor treated the allergic patient. NOT. But for the better part we are still using complex passwords.
+2608;77;ENGeneric1ConceptStop+ENInGeneric1span+^ENPBegin;-ENGeneric1ConceptStop;copy of r2243 from Sentiment
+/*		2608.UD. Around 38% of adults in Turkey smoke and approximately 110 billion cigarettes were consumed in the country last year.
+
+/* Rewrite GenericAttributeConcept/PathRelevant labels to interpretable Generic Attribute labels
+2577;77;ENGeneric1ConceptBegin;^SGeneric1Begin;copy of r2247 from Sentiment
+/*		2577.UD. The patient's left facial weakness was better and she was able to lift her left upper extremity. Approximately at this time, the patient was on therapy with hydrocodone bitartrate.   
+2578;77;ENGeneric1ConceptStop;^SGeneric1Stop;copy of r2249 from Sentiment
+/*		2578.UD. "We  will maintain the prudent approach to lending which has led to our customer-lending asset quality   being better than industry averages," the Chief Financial Officer said Wednesday. Approximately at this time, the patient was on therapy with hydrocodone bitartrate.  
+
+/* Move GenericBegin/Stop from NR to R/C/PR
+2627;77;ENNRGeneric1marker:SGeneric1:ENAdvDurCon:ENAdvFreqCon:ENAdvTime;+ENDummy2;add Dummy2 to use as exception in the following rules, copy of r2645 from Sentiment
+/*		2627.UD. In the past five years people suffered more from this disease.
+2603;77;SGeneric1Begin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric1Begin|*|+SGeneric1Begin;copy of r2208 from Sentiment
+/*		2603.UD. The patient had greatly improved symptomatically after one week of stopping trial drug.
+2576;77;SGeneric1Stop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric1Stop|*|+SGeneric1Stop;copy of r2218 from Sentiment
+/*		2576.UD. After establishing an allergy baseline, the participants were given quarter-size patches on the insides of their upper arms.
+2614;77;SGeneric1+ENAdvstruct;+ENNRGeneric1marker;copy of r2353 from Sentiment
+/*		2614.UD. Still, the crash-landing was a painful reminder of how hard it is to put a spacecraft on the surface of the red planet. 
+2650;77;ENAndOrBut|SGeneric1Stop;+SGeneric1Stop|-SGeneric1Stop;avoid that and/or/but is the last word of a span
+/*		2650.UD. She suffered from her allergy preoperatively and then postoperatively, she received medication.
+2628;77;ENDummy2;-ENDummy2;clean-up, copy of r2646 from Sentiment
+/*		2628. In the past five years people suffered more from this disease. During pregnancy 74 women (93%) were treated with insulin and 11 (14%) with antihypertensive medication.
 
 /* ==================================================================================================================================================================
 /* BLOCK 80/81: CLEANING                                                                                                                                             
@@ -3784,8 +3958,8 @@
 /*		856.	We want you all to come and know that it is a beautiful celebration, a beautiful party and a wonderful opportunity to know more about the beauty and depth of our culture.
 878;80;ENNegSentimentBegin+ENNegSentimentStop;-ENNegSentimentStop;
 /*		878.	She called the jail " a horrible place, not good at all".
-1434;81;ENBeginrelation:ENUnless;ENBeginrelation;deletes Rel, AndOrBut, Question etc.
-/*		1434. During the period, 9,000 units were completed and there were 600 units of ending work in process.
+1434;81;ENBeginrelation:ENUnless;ENBeginrelation-UDRelation;force BeginRelation to get priority over Relation, deletes Rel, AndOrBut, Question etc.
+/*		1434. During the period, 9,000 units were completed and there were 600 units of ending work in process. UD. He said personal-system, or PC sales, rose 24% from a year ago to $10.8 billion.
 2169;81;ENPremod2:ENAdj+ENQuestion;-ENQuestion;
 /*		2169. The physician was unsure how many alendronate the patient took.
 
@@ -3798,6 +3972,8 @@
 /*		2538. And, unfortunately, he came too late.
 2329;$;ENNRSentmarker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant sentiment markers relations
 /*		2329.UD. The osteotomy was partially healed only.
+2615;$;ENNRGeneric1marker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant generic attributes relations, copy of r2329 from Sentiment
+
 2462;$;ENAdj+ENBeginconcept;-ENAdj-ENAdjFreq;cleanup conflicting labels
 /*		2462. German astronomer Heinrich Olbers famously pondered the “dark sky paradox”: if there was an infinite number of stars in the universe, how could it get dark at night as every point in the sky would contain a star. 
 
