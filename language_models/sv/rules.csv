@@ -1861,9 +1861,9 @@
 941;70;SVNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegStop;move NegStop from nonrelevant to relevant lexrep
 /*		941. Redan på 1400-talet började staden växa utanför sina ursprungliga gränser, d.v.s. Gamla stan.
 
-/* add negation to prefix icke- on word (-> Concept) level
-/* -------------------------------------------------------
-1134;70;"icke-";+SVNegation;
+/* add negation to prefix icke- on word (-> Concept) level and join to allow filter.csv to work
+/* --------------------------------------------------------------------------------------------
+1134;70;"icke-"|^SVAndOrBut;JoinReverse|+SVNegation;
 /*		1134. Jämfört med icke-kirurgisk behandling mot fetma har obesitaskirurgi större effekt på både kroppsvikt och andra utfallsmått, men slutsatserna begränsas av kort uppföljningstid.
 
 
