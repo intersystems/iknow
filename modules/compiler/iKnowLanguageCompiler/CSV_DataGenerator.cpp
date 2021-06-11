@@ -224,7 +224,17 @@ void CSV_DataGenerator::loadCSVdata(std::string language, bool IsCompiled, std::
 	if (!os.fail()) {
 		os << left << "Rule CSV mapping:" << endl;
 		for (int idRule = 0; idRule < kb_rules.size(); idRule++) {
-			os << setw(12) << string(to_string(idRule) + ":" + kb_rules[idRule].csv_id) << "\t" << kb_rules[idRule].InputPattern << "\t->\t" << kb_rules[idRule].OutputPattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
+			string input_pattern, output_pattern;
+			for (vector<string>::iterator it = kb_rules[idRule].InputPattern.begin(); it != kb_rules[idRule].InputPattern.end(); ++it) { // reconstruct output
+				if (it != kb_rules[idRule].InputPattern.begin()) input_pattern += "|";
+				input_pattern += *it;
+			}
+			for (vector<string>::iterator it = kb_rules[idRule].OutputPattern.begin(); it != kb_rules[idRule].OutputPattern.end(); ++it) { // reconstruct output
+				if (it != kb_rules[idRule].OutputPattern.begin()) output_pattern += "|";
+				output_pattern += *it;
+			}
+
+			os << setw(12) << string(to_string(idRule) + ":" + kb_rules[idRule].csv_id) << "\t" << input_pattern << "\t->\t" << output_pattern << "\t(" << kb_rules[idRule].Phase << ")" << endl;
 		}
 	}
 	labelIndexTable_type &label_index_table = labelIndexTable;

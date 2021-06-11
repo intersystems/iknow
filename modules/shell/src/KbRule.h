@@ -7,6 +7,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 #include "RawBlock.h"
 #include "OffsetPtr.h"
 #include "utlExceptionFrom.h"
@@ -428,10 +429,11 @@ namespace iknow {
     public:
       //MapT maps label names to KbLabel*'s
       template<typename MapT, typename MapPhaseT>
-      KbRule(RawAllocator& allocator, const MapT& label_map, const MapPhaseT& label_phase_map, const std::string& input_pattern, const std::string& output_pattern, Phase phase) {
+      KbRule(RawAllocator& allocator, const MapT& label_map, const MapPhaseT& label_phase_map, const std::vector<std::string>& input_pattern, const std::vector<std::string>& output_pattern, Phase phase) {
 		std::vector<iknow::core::IkRuleInputPattern> input_pattern_vec;
 		RuleInputStringParser<MapT> input_adder(label_map, input_pattern_vec);
-		iknow::base::IkStringAlg::Tokenize(input_pattern, '|', input_adder);
+		// iknow::base::IkStringAlg::Tokenize(input_pattern, '|', input_adder);
+		std::for_each(input_pattern.begin(), input_pattern.end(), input_adder);
 
 		// check labels phase against rule phase
 		for (auto it = input_pattern_vec.begin(); it != input_pattern_vec.end(); ++it) {
@@ -457,7 +459,9 @@ namespace iknow {
 					bool bRulePhaseInLabel = false;
 					std::for_each(phase_list.begin(), phase_list.end(), [phase, &bRulePhaseInLabel](Phase p) { if (p == phase) { bRulePhaseInLabel = true; }});
 					if (!bRulePhaseInLabel) {
-						std::cerr << "*** Label (index=\"" << idx << "\") not defined in Rule Phase=\"" << (int)phase << "\" *** input_pattern=\"" << input_pattern << "\"" << std::endl;
+						std::cerr << "*** Label (index=\"" << idx << "\") not defined in Rule Phase=\"" << (int)phase << "\" *** input_pattern=\"";
+						std::for_each(input_pattern.begin(), input_pattern.end(), [](const std::string& pattern_item) { std::cerr << pattern_item + "|"; });
+						std::cerr << "\"" << std::endl;
 						std::cerr << "Pattern offset=" << (it - input_pattern_vec.begin()) + 1 << "Label offset=" << (it_label - it->LabelsBegin()) + 1 << std::endl;
 						throw ExceptionFrom<KbRule>("label phase number does not mach rule phase.");
 					}
@@ -467,7 +471,8 @@ namespace iknow {
 
 		std::vector<iknow::core::IkRuleOutputPattern> output_pattern_vec;
 		RuleOutputStringParser<MapT> output_adder(label_map, output_pattern_vec);
-		iknow::base::IkStringAlg::Tokenize(output_pattern, '|', output_adder);
+		std::for_each(output_pattern.begin(), output_pattern.end(), output_adder);
+		// iknow::base::IkStringAlg::Tokenize(output_pattern, '|', output_adder);
 		input_pattern_begin_ = allocator.InsertRange(input_pattern_vec.begin(), input_pattern_vec.end());
 		input_pattern_end_ = input_pattern_begin_ + input_pattern_vec.size();
 		output_pattern_begin_ = allocator.InsertRange(output_pattern_vec.begin(), output_pattern_vec.end());
