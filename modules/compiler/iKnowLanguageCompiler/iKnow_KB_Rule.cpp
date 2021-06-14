@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <map>
 #include <algorithm>
 
 using namespace iknow::csvdata;
@@ -45,6 +46,7 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 		int max_rule_csv_id = 0; // store the maximum rule id, to be able to generate a new, unique, one.
 		vector<string> vec_rules_csv;
 		set<int> rule_rewrite_indexes;
+		set<int> rule_id_set; // store id's to prevent double use
 		for (string line; getline(ifs, line);)
 		{
 			vec_rules_csv.push_back(line); // store in case we need to rewrite with new id's
@@ -55,8 +57,14 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			iKnow_KB_Rule rule; // Set rule = ..%New()
 			rule.csv_id = row_rule[1 - 1]; // csv identification of rule
 			int rule_csv_id = 0;
-			if (!rule.csv_id.empty())
+			if (!rule.csv_id.empty()) {
 				rule_csv_id = std::stoi(rule.csv_id);
+				if (rule_id_set.count(rule_csv_id)) { // rule ID already in use...
+					throw ExceptionFrom<iKnow_KB_Rule>("ID Not unique in Rule : " + line);
+				}
+				else
+					rule_id_set.insert(rule_csv_id);
+			}
 			if (rule_csv_id == 0) { // need a new id
 				string& last_line = vec_rules_csv.back();
 
