@@ -13,6 +13,7 @@ bool iKnow_KB_Regex::ImportFromCSV(string regex_csv, CSV_DataGenerator& kb)
 		kb.handle_UTF8_BOM(ifs);
 
 		int count = 0;
+		set<string> regex_set; // keep set of regexes, to prevent double use
 		for (string line; getline(ifs, line);)
 		{
 			++count;
@@ -20,6 +21,11 @@ bool iKnow_KB_Regex::ImportFromCSV(string regex_csv, CSV_DataGenerator& kb)
 			vector<string> row_regex = kb.split_row(line);
 			if (row_regex.size() < 2) // not valid, or comment line
 				continue;
+			if (regex_set.count(row_regex[0]))
+				throw ExceptionFrom<iKnow_KB_Regex>("Double use of regex name in : " + line);
+			else
+				regex_set.insert(row_regex[0]);
+
 			kb.kb_regex.push_back(iKnow_KB_Regex(row_regex)); // create and add label object
 			/*
 			Continue:$Find(line, "/*")'=0 // comment line
