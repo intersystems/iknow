@@ -378,7 +378,7 @@ void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexr
 				start = (end == String::npos ? end : end + 1);
 			}
 			strIndex.clear(); // reconstruct strIndex
-			for (int i = 0; i < space_split_index.size(); ++i) {
+			for (size_t i = (size_t) 0; i < space_split_index.size(); ++i) {
 				if (!strIndex.empty() && *(strIndex.end()-1) != ' ')
 					strIndex += ' '; // insert delimiting space
 				if (space_split_index[i].size() == 1) { // no need for isolation if single character
