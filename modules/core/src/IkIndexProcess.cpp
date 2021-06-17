@@ -23,6 +23,8 @@
 #include <algorithm>
 #include <functional>
 #include <cstdlib>
+#include <string>
+#include <sstream>
 // #include <fstream>      // std::ofstream
 
 //For recognizing whitespace
@@ -320,50 +322,106 @@ private:
 };
 
 // "-" -> "" : if after preprocess the result is empty, should be forced to nonrelevant ?
-void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexreps& lexrep_vector, std::string const *user_labels) // Apply preprocessing stuff
+void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexreps& lexrep_vector, std::string const* user_labels) // Apply preprocessing stuff
 {
-  if ((size_t)(val_end-val_begin)>MAX_WORD_SIZE) { // refuse words that exceed the maximum limit.
-    //Chunk to avoid very long non-semantic strings from overflowing the size limits of the direct output format.
-    const static size_t kChunkSize = 4096;
-    while (val_begin != val_end) {
-      const Char* chunk_end = val_begin + kChunkSize < val_end ? val_begin + kChunkSize : val_end;
-      lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, val_begin, chunk_end, val_begin, chunk_end, m_pKnowledgebase->GetLabelIndex(NonSemanticLabel)));
-      SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
-      val_begin = chunk_end;
-    }
-    return;
-  }
+	if ((size_t)(val_end - val_begin) > MAX_WORD_SIZE) { // refuse words that exceed the maximum limit.
+	  //Chunk to avoid very long non-semantic strings from overflowing the size limits of the direct output format.
+		const static size_t kChunkSize = 4096;
+		while (val_begin != val_end) {
+			const Char* chunk_end = val_begin + kChunkSize < val_end ? val_begin + kChunkSize : val_end;
+			lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, val_begin, chunk_end, val_begin, chunk_end, m_pKnowledgebase->GetLabelIndex(NonSemanticLabel)));
+			SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
+			val_begin = chunk_end;
+		}
+		return;
+	}
 
-  //The rules for preprocess filtering are a bit complicated.
-  //Either the preprocess filter split the original token into multiple tokens,
-  //or it was left as a single token. In the single token case, we want to use
-  //the original string as the literal. The replacement string will be normalized
-  //and used as an entity value, later often handled by EntityFilter()
-  //
-  //But in the multiple token case, as in "They've" -> "They 've", we want two
-  //literals to assign to the two corresponding entities that will be found in the
-  //normalized value. To signal to later code that might want to rebuild the sentence
-  //from the literals, we prefix the second and subsequent tokens with a space, indicating
-  //(somewhat ironically) that they should *not* have any space (including the prefix marker)
-  //between their preceding literals and themselves.
+	//The rules for preprocess filtering are a bit complicated.
+	//Either the preprocess filter split the original token into multiple tokens,
+	//or it was left as a single token. In the single token case, we want to use
+	//the original string as the literal. The replacement string will be normalized
+	//and used as an entity value, later often handled by EntityFilter()
+	//
+	//But in the multiple token case, as in "They've" -> "They 've", we want two
+	//literals to assign to the two corresponding entities that will be found in the
+	//normalized value. To signal to later code that might want to rebuild the sentence
+	//from the literals, we prefix the second and subsequent tokens with a space, indicating
+	//(somewhat ironically) that they should *not* have any space (including the prefix marker)
+	//between their preceding literals and themselves.
 
 
-  //It's a little hairy to convince GNU-like C++ standard library
-  //implementations to repeatedly use the same static buffer.
-  //"assign" throws away the current buffer and replaces it with
-  //a copy (or a ref) of the assigned buffer.
-  //"replace" always uses the current buffer if it's big enough.
-  static String strIndex(128, '\0');
-  strIndex.replace(0, strIndex.size(), val_begin, val_end - val_begin);
+	//It's a little hairy to convince GNU-like C++ standard library
+	//implementations to repeatedly use the same static buffer.
+	//"assign" throws away the current buffer and replaces it with
+	//a copy (or a ref) of the assigned buffer.
+	//"replace" always uses the current buffer if it's big enough.
+	static String strIndex(128, '\0');
+	strIndex.replace(0, strIndex.size(), val_begin, val_end - val_begin);
 
-  m_pKnowledgebase->FilterPreprocess(strIndex);
-  static String strPreprocess(128, '\0');
-  strPreprocess.replace(0, strPreprocess.size(), strIndex);
+	m_pKnowledgebase->FilterPreprocess(strIndex);
+	static String strPreprocess(128, '\0');
+	strPreprocess.replace(0, strPreprocess.size(), strIndex);
 
-  SEMANTIC_ACTION(PreprocessToken(String(val_begin, val_end), strPreprocess));
+	SEMANTIC_ACTION(PreprocessToken(String(val_begin, val_end), strPreprocess));
 
-  IkStringAlg::Normalize(strIndex);
-  SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
+		IkStringAlg::Normalize(strIndex);
+		if (strPreprocess.find(' ') == String::npos) { // preprocessor did not insert spaces, done
+			SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
+		} else {
+			vector<String> space_split_index;
+			size_t start = strIndex.find_first_not_of(' ');
+			size_t end;
+			while (start != String::npos) {
+				end = strIndex.find(' ', start);
+				size_t len = end == base::String::npos ? base::String::npos : end - start;
+				space_split_index.push_back(strIndex.substr(start, len));
+				start = (end == String::npos ? end : end + 1);
+			}
+			strIndex.clear(); // reconstruct strIndex
+			for (int i = 0; i < space_split_index.size(); ++i) {
+				if (!strIndex.empty() && *(strIndex.end()-1) != ' ')
+					strIndex += ' '; // insert delimiting space
+				if (space_split_index[i].size() == 1) { // no need for isolation if single character
+					strIndex += space_split_index[i]; // copy original
+					continue;
+				}
+				String::iterator it = std::find_if_not(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return ((c >= 0x0030 && c <= 0x0039) || IkStringAlg::IsPunctuation(c) || c=='-' || c=='.'); });
+				if (it == space_split_index[i].end()) { // combination of digits & punctuations, do *not* split.
+					strIndex += space_split_index[i]; // copy original
+					continue;
+				}
+				it = std::find_if(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+				if (it == space_split_index[i].end()) { // no punctuations found, do *not* split.
+					strIndex += space_split_index[i]; // copy original
+					continue;
+				}
+				{
+					static Char strIsolatePunctuation[128];
+					int idx = 0;
+					String strSubject(space_split_index[i]);
+					String::iterator begin_alpha = std::find_if_not(strSubject.begin(), strSubject.end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+					String::reverse_iterator rend_alpha = std::find_if_not(strSubject.rbegin(), strSubject.rend(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+					String::iterator end_alpha = rend_alpha != strSubject.rend() ? rend_alpha.base() : strSubject.end();
+					for (String::iterator it = strSubject.begin(); it != strSubject.end(); ++it) {
+						if (it < begin_alpha) { // left side punctuations
+							strIsolatePunctuation[idx++] = *it;
+							strIsolatePunctuation[idx++] = ' ';
+						}
+						if (it >= begin_alpha && it < end_alpha) { // middle token
+							strIsolatePunctuation[idx++] = *it;
+						}
+						if (it >= end_alpha) { // right side punctuations
+							strIsolatePunctuation[idx++] = ' ';
+							strIsolatePunctuation[idx++] = *it;
+						}
+					}
+					strIsolatePunctuation[idx] = '\0';
+					strIndex += strIsolatePunctuation; // copy back
+				}
+			}
+			SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
+		}
+	// }
 
   //Make this a member?
   FastLabelSet::Index conceptLabelIndex = m_pKnowledgebase->GetLabelIndex(ConceptLabel);

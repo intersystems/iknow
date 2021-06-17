@@ -471,7 +471,7 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
 				  if (*it == ')') ++cnt_close;
 				  if (*it == '(') --cnt_close;
 			  }
-			  if (cnt_close >= 1) while (*(end_alpha - 1) == ')' && cnt_close >= 1) --end_alpha, --cnt_close; // strip off right side parenthesis
+			  if (cnt_close >= 1) while (end_alpha>begin_alpha && *(end_alpha - 1) == ')' && cnt_close >= 1) --end_alpha, --cnt_close; // strip off right side parenthesis
 			  if (cnt_close <= 1 && *begin_alpha == '(') ++begin_alpha, --end_alpha; // if opening bracket, trim parenthesis.
 			  while (begin_alpha != end_alpha && !AlphaFinder()(*begin_alpha)) ++begin_alpha; // strip off left side non-alphabetics
 			  while (begin_alpha != end_alpha && !AlphaFinder()(*(end_alpha - 1))) --end_alpha; // strip off right side non-alphabetics
@@ -489,7 +489,7 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
 		  while (begin_alpha != end_alpha && !AlphaFinder()(*(end_alpha - 1))) --end_alpha; // strip off right side non-alphabetics
 	  }
 	  else {
-		  if (*(end_alpha - 1) == ']') { // ends with closing bracket
+		  if (end_alpha>begin_alpha && *(end_alpha - 1) == ']') { // ends with closing bracket
 			  int cnt_close = 1;
 			  for (String::iterator it = begin_alpha; it != end_alpha - 1; ++it) {
 				  if (*it == ']') ++cnt_close;
