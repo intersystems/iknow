@@ -392,6 +392,8 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
   if (strInput.empty()) // nothing to normalize :-)
     return;
 
+  bool bHasSpaces = (strInput.find(' ') != String::npos); // preprocessor inserted spaces, extra cleaning step
+
   //Try the fast algorithm. If it works, we don't need to do any more
   //character processing since we have pure ASCII. If it doesn't work,
   //do the more complicated ICU lower casing and normalization.
@@ -547,6 +549,60 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
       }
   }
   strInput.replace(0, strInput.size(), &(output[0]), output_off);
+
+  if (bHasSpaces) { // extra cleaning of parts
+	  vector<String> space_split_index;
+	  size_t start = strInput.find_first_not_of(' ');
+	  size_t end;
+	  while (start != String::npos) {
+		  end = strInput.find(' ', start);
+		  size_t len = end == base::String::npos ? base::String::npos : end - start;
+		  space_split_index.push_back(strInput.substr(start, len));
+		  start = (end == String::npos ? end : end + 1);
+	  }
+	  strInput.clear(); // reconstruct strIndex
+	  for (size_t i = (size_t)0; i < space_split_index.size(); ++i) {
+		  if (!strInput.empty() && *(strInput.end() - 1) != ' ')
+			  strInput += ' '; // insert delimiting space
+		  if (space_split_index[i].size() == 1) { // no need for isolation if single character
+			  strInput += space_split_index[i]; // copy original
+			  continue;
+		  }
+		  String::iterator it = std::find_if_not(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return ((c >= 0x0030 && c <= 0x0039) || IkStringAlg::IsPunctuation(c) || c == '-' || c == '.'); });
+		  if (it == space_split_index[i].end()) { // combination of digits & punctuations, do *not* split.
+			  strInput += space_split_index[i]; // copy original
+			  continue;
+		  }
+		  it = std::find_if(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+		  if (it == space_split_index[i].end()) { // no punctuations found, do *not* split.
+			  strInput += space_split_index[i]; // copy original
+			  continue;
+		  }
+		  {
+			  static Char strIsolatePunctuation[128];
+			  int idx = 0;
+			  String strSubject(space_split_index[i]);
+			  String::iterator begin_alpha = std::find_if_not(strSubject.begin(), strSubject.end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+			  String::reverse_iterator rend_alpha = std::find_if_not(strSubject.rbegin(), strSubject.rend(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
+			  String::iterator end_alpha = rend_alpha != strSubject.rend() ? rend_alpha.base() : strSubject.end();
+			  for (String::iterator it = strSubject.begin(); it != strSubject.end(); ++it) {
+				  if (it < begin_alpha) { // left side punctuations
+					  strIsolatePunctuation[idx++] = *it;
+					  strIsolatePunctuation[idx++] = ' ';
+				  }
+				  if (it >= begin_alpha && it < end_alpha) { // middle token
+					  strIsolatePunctuation[idx++] = *it;
+				  }
+				  if (it >= end_alpha) { // right side punctuations
+					  strIsolatePunctuation[idx++] = ' ';
+					  strIsolatePunctuation[idx++] = *it;
+				  }
+			  }
+			  strIsolatePunctuation[idx] = '\0';
+			  strInput += strIsolatePunctuation; // copy back
+		  }
+	  }
+  }
 }
 
 String IkStringAlg::RemoveLeadingNonDigitWords(const String& strInput)

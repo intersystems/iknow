@@ -364,64 +364,8 @@ void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexr
 
 	SEMANTIC_ACTION(PreprocessToken(String(val_begin, val_end), strPreprocess));
 
-		IkStringAlg::Normalize(strIndex);
-		if (strPreprocess.find(' ') == String::npos) { // preprocessor did not insert spaces, done
-			SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
-		} else {
-			vector<String> space_split_index;
-			size_t start = strIndex.find_first_not_of(' ');
-			size_t end;
-			while (start != String::npos) {
-				end = strIndex.find(' ', start);
-				size_t len = end == base::String::npos ? base::String::npos : end - start;
-				space_split_index.push_back(strIndex.substr(start, len));
-				start = (end == String::npos ? end : end + 1);
-			}
-			strIndex.clear(); // reconstruct strIndex
-			for (size_t i = (size_t) 0; i < space_split_index.size(); ++i) {
-				if (!strIndex.empty() && *(strIndex.end()-1) != ' ')
-					strIndex += ' '; // insert delimiting space
-				if (space_split_index[i].size() == 1) { // no need for isolation if single character
-					strIndex += space_split_index[i]; // copy original
-					continue;
-				}
-				String::iterator it = std::find_if_not(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return ((c >= 0x0030 && c <= 0x0039) || IkStringAlg::IsPunctuation(c) || c=='-' || c=='.'); });
-				if (it == space_split_index[i].end()) { // combination of digits & punctuations, do *not* split.
-					strIndex += space_split_index[i]; // copy original
-					continue;
-				}
-				it = std::find_if(space_split_index[i].begin(), space_split_index[i].end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
-				if (it == space_split_index[i].end()) { // no punctuations found, do *not* split.
-					strIndex += space_split_index[i]; // copy original
-					continue;
-				}
-				{
-					static Char strIsolatePunctuation[128];
-					int idx = 0;
-					String strSubject(space_split_index[i]);
-					String::iterator begin_alpha = std::find_if_not(strSubject.begin(), strSubject.end(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
-					String::reverse_iterator rend_alpha = std::find_if_not(strSubject.rbegin(), strSubject.rend(), [](Char c) { return IkStringAlg::IsPunctuation(c); });
-					String::iterator end_alpha = rend_alpha != strSubject.rend() ? rend_alpha.base() : strSubject.end();
-					for (String::iterator it = strSubject.begin(); it != strSubject.end(); ++it) {
-						if (it < begin_alpha) { // left side punctuations
-							strIsolatePunctuation[idx++] = *it;
-							strIsolatePunctuation[idx++] = ' ';
-						}
-						if (it >= begin_alpha && it < end_alpha) { // middle token
-							strIsolatePunctuation[idx++] = *it;
-						}
-						if (it >= end_alpha) { // right side punctuations
-							strIsolatePunctuation[idx++] = ' ';
-							strIsolatePunctuation[idx++] = *it;
-						}
-					}
-					strIsolatePunctuation[idx] = '\0';
-					strIndex += strIsolatePunctuation; // copy back
-				}
-			}
-			SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
-		}
-	// }
+	IkStringAlg::Normalize(strIndex);
+	SEMANTIC_ACTION(NormalizeToken(strPreprocess, strIndex));
 
   //Make this a member?
   FastLabelSet::Index conceptLabelIndex = m_pKnowledgebase->GetLabelIndex(ConceptLabel);
