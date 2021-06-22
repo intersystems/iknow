@@ -609,8 +609,8 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
 			  static Char strIsolatePunctuation[128];
 			  int idx = 0;
 			  String strSubject(space_split_index[i]);
-			  String::iterator begin_alpha = std::find_if_not(strSubject.begin(), strSubject.end(), [](Char c) { return (IkStringAlg::IsPunctuation(c) || IkStringAlg::IsSentenceSplit(c)); });
-			  String::reverse_iterator rend_alpha = std::find_if_not(strSubject.rbegin(), strSubject.rend(), [](Char c) { return (IkStringAlg::IsPunctuation(c) || IkStringAlg::IsSentenceSplit(c)); });
+			  String::iterator begin_alpha = std::find_if_not(strSubject.begin(), strSubject.end(), [](Char c) { return (IkStringAlg::IsPunctuation(c) || IkStringAlg::IsSentenceSplit(c) || c=='«'); });
+			  String::reverse_iterator rend_alpha = std::find_if_not(strSubject.rbegin(), strSubject.rend(), [](Char c) { return (IkStringAlg::IsPunctuation(c) || IkStringAlg::IsSentenceSplit(c) || c=='\"' || c=='»'); });
 			  String::iterator end_alpha = rend_alpha != strSubject.rend() ? rend_alpha.base() : strSubject.end();
 			  for (String::iterator it = strSubject.begin(); it != strSubject.end(); ++it) {
 				  if (it < begin_alpha) { // left side punctuations
