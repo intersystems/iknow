@@ -234,8 +234,9 @@ struct TokenProcessor {
   size_t max_literal_;
   IkIndexDebug<TraceListType>* m_pDebug; //specially named so SEMANTIC_ACTION macro works
   const IkKnowledgebase& kb_;
+  bool async_spaces_;
 
-  TokenProcessor(Lexreps& result, TextRefVector& text_refs, FastLabelSet::Index concept_label, FastLabelSet::Index punctuation_label, IkIndexDebug<TraceListType>* index_debug, const IkKnowledgebase& kb) :
+  TokenProcessor(Lexreps& result, TextRefVector& text_refs, FastLabelSet::Index concept_label, FastLabelSet::Index punctuation_label, IkIndexDebug<TraceListType>* index_debug, const IkKnowledgebase& kb, bool async_spaces) :
     result_(result),
     concept_label_(concept_label),
     punctuation_label_(punctuation_label),
@@ -243,7 +244,8 @@ struct TokenProcessor {
     literals_used_(0), //match literals with the normalized tokens
 	max_literal_(text_refs.size()), //until we run out
     m_pDebug(index_debug),
-    kb_(kb)
+    kb_(kb),
+	async_spaces_(async_spaces)
   {}
   void operator()(const Char* begin, const Char* end, bool bLastPiece) {    
 	  if (begin == end && !bLastPiece) {
@@ -257,24 +259,20 @@ struct TokenProcessor {
     }
 	const Char* literal_begin = 0;
 	const Char* literal_end = 0;
-    if (literals_used_ < max_literal_) {
-	  literal_begin = text_refs_[literals_used_].first;
-	  literal_end = text_refs_[literals_used_].second;
-	  /*
-	  const Char* corrector = begin;
-	  while (*literal_end == *corrector && corrector<=end) { // correction for weak splitting
-		  literal_end++;
-		  corrector++;
-	  }
-	  */
-    }
+		if (literals_used_ < max_literal_) {
+			literal_begin = text_refs_[literals_used_].first;
+			literal_end = text_refs_[literals_used_].second;
+		}
 	if (begin == end && literals_used_) { // empty token, merge literal with previous lexrep
 		result_.back().SetTextPointerEnd(literal_end); // enlarge latest literal
 		++literals_used_;
 	}
 	else { // normal token
 		bool literal_used = PushLexrep(result_, kb_, literal_begin, literal_end, begin, end, bLastPiece, concept_label_, punctuation_label_);
-		if (literal_used) ++literals_used_;
+		if (literal_used) {
+			if (!(async_spaces_ && (end - begin == 1 && !u_isalpha(*begin)))) // reuse literal in case of asynchronous spaces and non-alphabetic character
+				++literals_used_;
+		}
 		SEMANTIC_ACTION(LexrepCreated(result_.back(), kb_));
 	}
   }
@@ -413,7 +411,9 @@ void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexr
   LiteralVectorBuilder literalVectorBuilder(text_refs, val_begin, val_end);
   IkStringAlg::TokenizeWithLPFlag(strPreprocess.data(), strPreprocess.data() + strPreprocess.size(), static_cast<Char>(' '), literalVectorBuilder);  
 
-  TokenProcessor token_processor(lexrep_vector, text_refs, conceptLabelIndex, punctuationLabelIndex, m_pDebug, *m_pKnowledgebase);
+  bool async_spaces = text_refs.size() > 1 ? 1 + std::count_if(strIndex.begin(), strIndex.end(), [](Char c) { return c == static_cast<Char>(' '); }) != text_refs.size() : false;
+
+  TokenProcessor token_processor(lexrep_vector, text_refs, conceptLabelIndex, punctuationLabelIndex, m_pDebug, *m_pKnowledgebase, async_spaces);
   IkStringAlg::TokenizeWithLPFlag(strIndex.data(), strIndex.data() + strIndex.size(), static_cast<Char>(' '), token_processor); // extra flag indication if last piece
 }
 
