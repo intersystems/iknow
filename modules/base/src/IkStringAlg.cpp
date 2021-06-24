@@ -607,19 +607,15 @@ void IkStringAlg::Normalize(String& strInput, bool bLowerCase, bool bStripPunct)
 			  String::iterator end_alpha = rend_alpha != strSubject.rend() ? rend_alpha.base() : strSubject.end();
 			  for (String::iterator it = strSubject.begin(); it != strSubject.end(); ++it) {
 				  if (it < begin_alpha) { // left side punctuations
-					  if (IsPunctuation(*it)) { // isolate punctuation, remove everything else
-						  strIsolatePunctuation[idx++] = *it;
-						  strIsolatePunctuation[idx++] = ' ';
-					  }
+					  strIsolatePunctuation[idx++] = *it;
+					  strIsolatePunctuation[idx++] = ' ';
 				  }
 				  if (it >= begin_alpha && it < end_alpha) { // middle token
 					  strIsolatePunctuation[idx++] = *it;
 				  }
 				  if (it >= end_alpha) { // right side punctuations
-					  if (IsPunctuation(*it)) { // isolate punctuation, remove everything else
-						  strIsolatePunctuation[idx++] = ' ';
-						  strIsolatePunctuation[idx++] = *it;
-					  }
+					  strIsolatePunctuation[idx++] = ' ';
+					  strIsolatePunctuation[idx++] = *it;
 				  }
 			  }
 			  strIsolatePunctuation[idx] = '\0';
