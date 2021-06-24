@@ -411,7 +411,8 @@ void IkIndexProcess::Preprocess(const Char* val_begin, const Char* val_end, Lexr
   LiteralVectorBuilder literalVectorBuilder(text_refs, val_begin, val_end);
   IkStringAlg::TokenizeWithLPFlag(strPreprocess.data(), strPreprocess.data() + strPreprocess.size(), static_cast<Char>(' '), literalVectorBuilder);  
 
-  bool async_spaces = text_refs.size() > 1 ? 1 + std::count_if(strIndex.begin(), strIndex.end(), [](Char c) { return c == static_cast<Char>(' '); }) != text_refs.size() : false;
+  size_t cnt_index_tokens = static_cast<size_t>(1 + std::count_if(strIndex.begin(), strIndex.end(), [](Char c) { return c == static_cast<Char>(' '); }));
+  bool async_spaces = text_refs.size() > 1 ? cnt_index_tokens != text_refs.size() : false;
 
   TokenProcessor token_processor(lexrep_vector, text_refs, conceptLabelIndex, punctuationLabelIndex, m_pDebug, *m_pKnowledgebase, async_spaces);
   IkStringAlg::TokenizeWithLPFlag(strIndex.data(), strIndex.data() + strIndex.size(), static_cast<Char>(' '), token_processor); // extra flag indication if last piece
