@@ -170,6 +170,7 @@ namespace iknow
        *	\param chr, character to check
        */
       static bool IsPunctuation(Char chr);
+	  static bool IsSentenceSplit(Char chr); // Sentence splitter
       static bool IsJpnSplit(const Char chr); // Is Sentence Splitter for JPN ?
       static bool IsJpnChar(const Char chr); // Is JPN char ?
       static bool IsJpnIDSP(const Char chr) { return (chr==0x3000); } // Double space to mark a new paragraph is at the very beginning of a sentence.
