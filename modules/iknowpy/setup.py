@@ -43,6 +43,7 @@ import hashlib
 import itertools
 import os
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -601,6 +602,14 @@ def find_wheel():
     return wheel_pattern_matches[0]
 
 
+def is_canonical_version(version):
+    """Return True if version is canonical according to PEP 440, False
+    otherwise."""
+    return re.match(
+        r'^([1-9][0-9]*!)?(0|[1-9][0-9]*)(\.(0|[1-9][0-9]*))*((a|b|rc)(0|[1-9][0-9]*))?(\.post(0|[1-9][0-9]*))?(\.dev(0|[1-9][0-9]*))?$',
+        version) is not None
+
+
 # set constants
 CACHE_DIR = 'dist/cache'
 
@@ -609,6 +618,8 @@ version = {}
 with open('iknowpy/version.py') as version_file:
     exec(version_file.read(), version)
 version = version['__version__']
+if not is_canonical_version(version):
+    raise BuildError(f'Version {version!r} is not in PEP 440 canonical form')
 
 if 'ICUDIR' in os.environ:
     icudir = os.environ['ICUDIR']
