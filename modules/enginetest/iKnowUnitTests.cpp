@@ -286,7 +286,8 @@ void iKnowUnitTests::Saskia4(const char* pMessage)
 		const Sent_Attribute& attribute = *it_marker;
 
 		if (attribute.type_ == Measurement) {
-			if (attribute.value_ != string("31") || attribute.unit_ != string("year-old"))
+			// if (attribute.value_ != string("31") || attribute.unit_ != string("year-old"))
+			if (attribute.parameters_[0].first != string("31") || attribute.parameters_[0].second != string("year-old"))
 				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
 		}
 	}
@@ -437,7 +438,8 @@ void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersy
 		const Sent_Attribute& attribute = *it_marker;
 
 		if (attribute.type_ == Measurement) {
-			if (attribute.value_ != string("60") || attribute.unit_ != string("mg"))
+			// if (attribute.value_ != string("60") || attribute.unit_ != string("mg"))
+			if (attribute.parameters_[0].first != string("60") || attribute.parameters_[0].second != string("mg"))
 				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
 		}
 		if (attribute.type_ == Frequency) {
@@ -453,7 +455,8 @@ void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersy
 		const Sent_Attribute& attribute = *it_marker;
 
 		if (attribute.type_ == Measurement) {
-			if (attribute.value_ != string("8") || attribute.unit_ != string("%") || attribute.value2_ != string("10") || attribute.unit2_ != string("%"))
+			// if (attribute.value_ != string("8") || attribute.unit_ != string("%") || attribute.value2_ != string("10") || attribute.unit2_ != string("%"))
+			if (attribute.parameters_[0].first != string("8") || attribute.parameters_[0].second != string("%") || attribute.parameters_[1].first != string("10") || attribute.parameters_[1].second != string("%"))
 				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
 			break;
 		}
@@ -466,7 +469,8 @@ void iKnowUnitTests::Issue39(const char* pMessage) // https://github.com/intersy
 		const Sent_Attribute& attribute = *it_marker;
 
 		if (attribute.type_ == Measurement) {
-			if (attribute.value_ != string("two") || attribute.unit_ != string("") || attribute.value2_ != string("twenty") || attribute.unit2_ != string("milligram"))
+			// if (attribute.value_ != string("two") || attribute.unit_ != string("") || attribute.value2_ != string("twenty") || attribute.unit2_ != string("milligram"))
+			if (attribute.parameters_[0].first != string("two") || attribute.parameters_[0].second != string("") || attribute.parameters_[1].first != string("twenty") || attribute.parameters_[1].second != string("milligram"))
 				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
 			break;
 		}
@@ -490,7 +494,8 @@ void iKnowUnitTests::Issue41(const char* pMessage) // https://github.com/intersy
 		const Sent_Attribute& attribute = *it_marker;
 
 		if (attribute.type_ == Measurement) {
-			if (attribute.value_ != string("7") || attribute.unit_ != string("pounds") || attribute.value2_ != string("7") || attribute.unit2_ != "ounces")
+			// if (attribute.value_ != string("7") || attribute.unit_ != string("pounds") || attribute.value2_ != string("7") || attribute.unit2_ != "ounces")
+			if (attribute.parameters_[0].first != string("7") || attribute.parameters_[0].second != string("pounds") || attribute.parameters_[1].first != string("7") || attribute.parameters_[1].second != "ounces")
 				throw std::runtime_error("Measurement attribute not correct !" + string(pMessage));
 		}
 	}
@@ -513,7 +518,7 @@ void iKnowUnitTests::test8(const char* pMessage) // https://github.com/intersyst
 	for (AttributeMarkerIterator it_marker = sent.sent_attributes.begin(); it_marker != sent.sent_attributes.end(); ++it_marker, ++count_attributes) { // iterate over sentence attributes
 		const Sent_Attribute& attribute = *it_marker;
 
-		if (attribute.type_ == Certainty && attribute.value_ != string("0"))
+		if (attribute.type_ == Certainty && attribute.parameters_[0].first != string("0"))
 			throw std::runtime_error("Certainty attribute has no level 0 defined !" + string(pMessage));
 	}
 }
@@ -727,10 +732,10 @@ void iKnowUnitTests::test2(const char* pMessage) { // Only one measurement attri
 		string marker = attribute.marker_;
 		if (marker != "hundreds of feet")
 			throw std::runtime_error(string(pMessage));
-		string value = attribute.value_;
+		string value = attribute.parameters_[0].first;
 		if (value != "hundreds of")
 			throw std::runtime_error(string(pMessage));
-		string unit = attribute.unit_;
+		string unit = attribute.parameters_[0].second;
 		if (unit != "feet")
 			throw std::runtime_error(string(pMessage));
 	}

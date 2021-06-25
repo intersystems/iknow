@@ -196,10 +196,15 @@ void a_short_demo(void)
 			if (attribute.type_== Attribute::Measurement) {
 				std::cout << a_type << ":\"" << attribute.marker_ << "\" ";
 
-				std::cout << (!attribute.value_.empty() ? "val=\"" + attribute.value_ + "\" ": "");
-				std::cout << (!attribute.unit_.empty() ? "unit=\"" + attribute.unit_ + "\" " : "");
-				std::cout << (!attribute.value2_.empty() ? "val2=\"" + attribute.value2_ + "\" " : "");
-				std::cout << (!attribute.unit2_.empty() ? "unit2=\"" + attribute.unit2_ + "\" " : "");
+				string value = attribute.parameters_[0].first;
+				string unit = attribute.parameters_[0].second;
+				string value2 = attribute.parameters_[1].first;
+				string unit2 = attribute.parameters_[1].second;
+
+				std::cout << (!value.empty() ? "val=\"" + value + "\" ": "");
+				std::cout << (!unit.empty() ? "unit=\"" + unit + "\" " : "");
+				std::cout << (!value2.empty() ? "val2=\"" + value2 + "\" " : "");
+				std::cout << (!unit2.empty() ? "unit2=\"" + unit2 + "\" " : "");
 				std::cout << std::endl;
 				continue; 
 			}

@@ -202,17 +202,26 @@ for text_file in f_rec:
                     attr_name = 'time'
                 sent_attribute_raw = '<attr type=\"' + attr_name + '\" literal=\"' + attr_entity_literal + ('\" marker=\"' if OldStyle==False else '\" token=\"') + sent_attribute['marker'].lstrip() + '\"'
                 if attr_name == 'certainty':
-                    if sent_attribute['value']:
-                        sent_attribute_raw = sent_attribute_raw + ' level=\"' + sent_attribute['value'] + '\"'
+                    if len(sent_attribute['parameters']):
+                        value = sent_attribute['parameters'][0][0] # the certainty level is the first parameter in list of pairs, hence [0][0]
+                        if value:
+                            sent_attribute_raw = sent_attribute_raw + ' level=\"' + value + '\"'
                 else:
-                    if sent_attribute['value']:
-                        sent_attribute_raw = sent_attribute_raw + ' value=\"' + sent_attribute['value'] + '\"'
-                    if sent_attribute['unit']:
-                        sent_attribute_raw = sent_attribute_raw + ' unit=\"' + sent_attribute['unit'] + '\"'
-                    if sent_attribute['value2']:
-                        sent_attribute_raw = sent_attribute_raw + ' value2=\"' + sent_attribute['value2'] + '\"'
-                    if sent_attribute['unit2']:
-                        sent_attribute_raw = sent_attribute_raw + ' unit2=\"' + sent_attribute['unit2'] + '\"'
+                    # cnt_value_unit_pairs = len(sent_attribute['parameters'])
+                    cnt_value_unit_pairs = 0
+                    for valunit_parameter in sent_attribute['parameters']:
+                        cnt_string = ''
+                        if cnt_value_unit_pairs:
+                            cnt_string = str(cnt_value_unit_pairs + 1)
+                        cnt_value_unit_pairs = cnt_value_unit_pairs + 1
+
+                        # value/unit pairs
+                        value = valunit_parameter[0]
+                        unit = valunit_parameter[1]
+                        if value:
+                            sent_attribute_raw = sent_attribute_raw + ' value' + cnt_string + '=\"' + value + '\"'
+                        if unit:
+                            sent_attribute_raw = sent_attribute_raw + ' unit' + cnt_string + '=\"' + unit + '\"'
 
                 sent_attribute_raw = sent_attribute_raw + '>'
                 # print(sent_attribute_raw)

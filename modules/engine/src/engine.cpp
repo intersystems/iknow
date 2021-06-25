@@ -175,28 +175,33 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 						}
 						Sent_Attribute& ref = sentence_data.sent_attributes.back();
 						if (at_value.length()) {
-								if (ref.value_.empty()) // fill up first placeholder
-									ref.value_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
-								else {
-									if (ref.value2_.empty()) // fill up second placeholder
-										ref.value2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
+							if (ref.parameters_[0].first.empty()) { // value1
+								ref.parameters_[0].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
+							}
+							else {
+									if (ref.parameters_[1].first.empty()) // fill up second placeholder, value2
+										ref.parameters_[1].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
 								}
 							}
 							if (at_unit.length()) {
-								if (ref.unit_.empty() && ref.value2_.empty()) // if we have a second value, write the second unit
-									ref.unit_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
+								// if (ref.unit_.empty() && ref.value2_.empty()) // if we have a second value, write the second unit
+								if (ref.parameters_[0].second.empty() && ref.parameters_[1].first.empty())
+									// ref.unit_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
+									ref.parameters_[0].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
 								else {
-									if (ref.unit2_.empty()) // fill up second  placeholder
-										ref.unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
+									// if (ref.unit2_.empty()) // fill up second  placeholder
+									if (ref.parameters_[1].second.empty()) // fill up second  placeholder
+										ref.parameters_[1].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
 								}
 						}
 						if (at_value2.length()) {
-							if (ref.value2_.empty()) // only write if available
-								ref.value2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_value2);
+							// if (ref.value2_.empty()) // only write if available
+							if (ref.parameters_[1].first.empty())
+								ref.parameters_[1].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value2);
 						}
 						if (at_unit2.length()) {
-							if (ref.unit2_.empty()) // only write if available
-								ref.unit2_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit2);
+							if (ref.parameters_[1].second.empty()) // only write if available
+								ref.parameters_[1].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit2);
 						}
 						iPushMeasurementAttribute++;
 					}
@@ -249,7 +254,8 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 											std::string certainty_value = "0";
 											certainty_value[0] = certainty_data; // '0' to '9'
 											Sent_Attribute& ref = sentence_data.sent_attributes.back();
-											ref.value_ = certainty_value;
+											// ref.value_ = certainty_value;
+											ref.parameters_[0].first = certainty_value;
 										}
 									}
 									mapLexrepAttributes.insert(make_pair(a_type, sentence_data.sent_attributes.size()-1)); // link lexrep attribute to data structure

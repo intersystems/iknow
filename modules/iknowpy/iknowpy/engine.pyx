@@ -279,10 +279,7 @@ cdef class iKnowEngine:
 				                       'offset_start': self.idx_shift(deref(sent_attr_iter).offset_start),
 				                       'offset_stop': self.idx_shift(deref(sent_attr_iter).offset_stop),
 				                       'marker': deref(sent_attr_iter).marker,
-				                       'value': deref(sent_attr_iter).value,
-				                       'unit': deref(sent_attr_iter).unit,
-				                       'value2': deref(sent_attr_iter).value2,
-				                       'unit2': deref(sent_attr_iter).unit2,
+									   'parameters' : deref(sent_attr_iter).parameters,
 				                       'entity_ref': deref(sent_attr_iter).entity_ref,
 									   'entity_vector': deref(sent_attr_iter).entity_vector})
 				postinc(sent_attr_iter)

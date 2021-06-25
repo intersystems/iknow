@@ -117,18 +117,25 @@ namespace iknowdata { // to bundle all generated data
 	
 	struct Sent_Attribute // sentence attribute
 	{
+		typedef std::vector<std::pair<std::string, std::string>> Sent_Attribute_Parameters;
+
 		Sent_Attribute(Attribute att_type,
-			size_t start, size_t stop, 
+			size_t start, size_t stop,
 			std::string& marker
-		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker), entity_ref(0) {}
+		) : type_(att_type), offset_start_(start), offset_stop_(stop), marker_(marker), entity_ref(0) {
+			parameters_.resize(2);
+		}
 		
 		Sent_Attribute(Attribute att_type) : // Entity Vector attributes, no markers, no corresponding offsets
-			type_(att_type), offset_start_(NULL), offset_stop_(NULL), entity_ref(0) {}
+			type_(att_type), offset_start_(NULL), offset_stop_(NULL), entity_ref(0) {
+			parameters_.resize(2);
+		}
 
 		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
 		std::string marker_; // the normalized attribute textual representation, utf8 encoded
-		std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
+		// std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
+		Sent_Attribute_Parameters parameters_; // variable number of paramters, for measurement, that are value/unit pairs.
 
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 		std::vector<Entity_Ref> entity_vector; // EntityVector, only used in Japanese

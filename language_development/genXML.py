@@ -133,7 +133,7 @@ for text_file in f:
                     attr_type = attr_type.replace('positivesentiment','sentpositive')
                     attr_type = attr_type.replace('negativesentiment','sentnegative')
                     if attr_type == 'certainty':
-                        attr_prop = ' level=\"' + attr_marker['value'] + '\"'
+                        attr_prop = ' level=\"' + attr_marker['parameters'][0][0] + '\"' # level is the first parameter of the first pair, hence [0][0]
                     else:
                         attr_prop = ''
                     #print(attr_type)
