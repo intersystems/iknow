@@ -43,8 +43,11 @@
 2567;1;UDCertainty;+SCertainty;
 /*		2567. The result suggests a mild autism spectrum disorder, but further examinations are needed to confirm this.  
 2568;1;UDGeneric1;+SGeneric1;
-
-
+/*		2568.UD. There was no family history of liver disease.
+2651;1;UDGeneric2;+SGeneric2;
+/*		2651.UD. The reference price is used in a complex formula to determine the price per dry metric ton for iron ore fines.
+2701;1;UDGeneric3;+SGeneric3;
+/*		2701.UD. The share had risen as much as 7% in early trading, but the latest news caused shares to reverse direction   and fall 12% in recent trading. 
 
 /* ==================================================================================================================================================================
 /* BLOCK 20: PROCESSING SPECIFIC WORDS AND NUMBERS                                                                                                                   
@@ -3804,11 +3807,11 @@
 /*		1999.	The index could race past the 14,900-high in the next two days.
 
 /* ==================================================================================================================================================================
-/* BLOCK 77: GENERIC ATTRIBUTE                                                                                                                                             
+/* BLOCK 77: GENERIC1 ATTRIBUTE                                                                                                                                             
 /* ==================================================================================================================================================================
 
 /* Preparation
-2584;77;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets, copy of r2637
+2584;77;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets, copy of r2637 from Sentiment
 /*		2584.UD. Her edema was from therapy with rofecoxib and allergic rhinitis (incidental finding). 
 
 /* GENERIC ATTRIBUTE ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
@@ -3866,13 +3869,13 @@
 
 /*	Generic attribute in enumeration
 /* Note: ENDummy2 is used to mark ENComma when the span shouldn't stop
-2573;77;ENCon+SGeneric1+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^SGeneric1:SGeneric1Begin;*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after noun with generic attribute, copy of r2638
+2573;77;ENCon+SGeneric1+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^SGeneric1:SGeneric1Begin;*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after noun with generic attribute, copy of r2638 from Sentiment
 /*		2573.UD. Information has been received from a physician and consumer concerning her approximately 4 year old son with  house dust mite allergy, attention deficit disorder and cautery to both nostrils. The most common features of their medical histories were: hypertension (32 patients), drug allergy (19), sinusitis (17), thyroid disease (12), otitis media (11), asthma (11). NOT. hypertension and allergy (unspecified). NOT. The models had high predictive accuracies (78.9-90.2%) for allergic, renal, CNS, and hepatic ADRs.
-2622;77;ENAdj+SGeneric1|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^SGeneric1:SGeneric1Begin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENGeneric1ConceptStop;stop span after adjective with generic attribute after enumeration of nouns, copy of r2640
+2622;77;ENAdj+SGeneric1|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^SGeneric1:SGeneric1Begin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENGeneric1ConceptStop;stop span after adjective with generic attribute after enumeration of nouns, copy of r2640 from Sentiment
 /*		2622.UD. The more we learn about this tiny creature and its multi-layered structural designs, the more we realize how much it can help us as we design better planes, cars, sports equipment and armor.
-2580;77;ENAdj+SGeneric1|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^SGeneric1:SGeneric1Begin;*|*|*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation, copy of r2642
+2580;77;ENAdj+SGeneric1|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^SGeneric1:SGeneric1Begin;*|*|*|*|*|+ENGeneric1ConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation, copy of r2642 from Sentiment
 /*		2580.UD. To this end we investigated the intra-host variation of canine influenza virus (CIV) during the course of  experimental infections in naïve and partially immune dogs, and in naturally infected animals. 
-2623;77;ENDummy2;-ENDummy2;;clean up temp label, copy of r2644
+2623;77;ENDummy2;-ENDummy2;;clean up temp label, copy of r2644 from Sentiment
 /*		2623.UD. The more we learn about this tiny creature and its multi-layered structural designs, the more we realize how much it can help us as we design better planes, cars, sports equipment and armor.
 
 /* Expansion rules for type(Begin)Concept, PathRelevant, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
@@ -3899,8 +3902,9 @@
 2619;77;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+SGeneric1;+SGeneric1Begin|-ENPBegin|*;copy of r2252 from Sentiment
 /*		2619.UD. He remained symptomatic.
 
-/* Expansion to the left for concept-type marker preceeded by noun + 'of'
+/* Expansion to the left for concept-type marker preceeded by noun + 'of' or 'for'
 2649;77;typeConcept|"of":"for"|ENAdj:ENCon:ENEndconcept+SGeneric1;+ENGeneric1ConceptBegin|-ENGeneric1ConceptStop|*;
+/*		2649.UD. He developed symptoms of allergic granulomatous angiitis. Also, a trend for better overall survival was observed in these patients. 
 
 /* No expansion to the right for Endconcept
 2620;77;ENEndconcept+SGeneric1|^SGeneric1+^ENGeneric1ConceptBegin;*|+ENGeneric1ConceptStop;copy of r2270 from Sentiment
@@ -3949,6 +3953,214 @@
 2628;77;ENDummy2;-ENDummy2;clean-up, copy of r2646 from Sentiment
 /*		2628. In the past five years people suffered more from this disease. During pregnancy 74 women (93%) were treated with insulin and 11 (14%) with antihypertensive medication.
 
+==================================================================================================================================================================
+/* BLOCK 78: GENERIC2 ATTRIBUTE                                                                                                                                             
+/* ==================================================================================================================================================================
+/* Remark: For examples for rules: check Generic1 attribute in phase 77. The rules for Generic2 attribute are an exact copy of those for Generic1 attribute.
+
+/* Preparation
+2652;78;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets, copy of r2637 from Sentiment, copy of r2584 from Generic1
+
+/* GENERIC ATTRIBUTE ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
+2653;78;SGeneric2+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;merge NonRelevant generic attribute with following lexrep, copy of r2300 from Sentiment
+2654;78;SGeneric2+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;repetition of r2611 for sequences with NonRelevant adverbs, copy of r2354 from Sentiment
+2655;78;typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeBeginRelation|SGeneric2+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept+^typeEndConcept+^typeBeginConcept+^typeBeginRelation|ENAndOrBut:ENPunctuation:ENArtPosspron:SEnd:ENHyphen;*|+ENNRGeneric2marker|*;mark generic attributes that are followed by a lexrep to which they cannot be merged, copy of r2301 from Sentiment
+
+/* GENERIC ATTRIBUTE ON VERB OR ADVERB -> expand to phrase
+/* Assign attributes
+2656;78;typeRelation:typeBeginRelation:typePathRelevant+SGeneric2+^ENPrep;+SGeneric2Begin;copy of r2204 from Sentiment
+2657;78;ENAdverb+^typeConcept+SGeneric2;+SGeneric2Begin;copy of r2268 from Sentiment
+
+/* Expansion rules
+/* Exception: relation-type marker after preposition
+2658;78;^SGeneric2|ENPrep:ENOf+^"down"+^"as"|SGeneric2Begin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;limit left expansion, copy of r2346 from Sentiment
+
+/* General rules
+2659;78;*typeConcept|ENPartAfter40+SGeneric2Begin+^ENPBegin|"by";+SGeneric2Begin+ENDummy2|-SGeneric2Begin|*;limit left expansion to antecedent, copy of r2541 from Sentiment
+2660;78;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^SGeneric2Begin+^ENDummy2|SGeneric2Begin+^ENPBegin+^ENDummy2;+SGeneric2Begin|*|-SGeneric2Begin;copy of r2206 from Sentiment
+2661;78;ENDummy2;-ENDummy2;remove temp label, copy of r2347 from Sentiment
+2662;78;SGeneric2Begin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd+^SGeneric2;*|*|+SGeneric2Stop;copy of r2210 from Sentiment
+
+/* Special case
+2663;78;SBegin:ENPunctuation:ENAndOrBut|.ENNonrelevant|SGeneric2Begin|","|ENPBegin+SGeneric2Stop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|*|-SGeneric2Stop|*|+SGeneric2Stop;copy of r2349 from Sentiment
+
+/* Assign InGenericspan attributes
+2664;78;SGeneric2Begin|.^SGeneric2Stop|SGeneric2Stop;+ENInGeneric2span|+ENInGeneric2span|*;copy of r2214 from Sentiment
+
+/* Split Relations at boundaries of span
+2665;78;typeRelation:typeOther+^ENInGeneric2span|typeRelation+ENInGeneric2span;*|+ENBeginrelation;copy of r2212 from Sentiment
+2666;78;typeRelation:typeOther+ENInGeneric2span|typeRelation+^ENInGeneric2span;*|+ENBeginrelation;copy of r2216 from Sentiment
+
+/* GENERIC ATTRIBUTE ON OTHER MARKERS -> expand to the right, no expansion to the left
+/* Assign attribute to (Begin)Concepts
+2667;78;typeConcept:typeBeginConcept+SGeneric2;+ENGeneric2ConceptBegin;copy of r2233 from Sentiment
+/*		2667.UD. It estimated an average oil price of $78 per barrel in 2008. 
+
+/* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
+2668;78;ENPrep+SGeneric2;+ENGeneric2ConceptBegin;copy of r2265 from Sentiment
+
+/*	Generic attribute in enumeration
+/* Note: ENDummy2 is used to mark ENComma when the span shouldn't stop
+2669;78;ENCon+SGeneric2+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^SGeneric2:SGeneric2Begin;*|*|*|+ENGeneric2ConceptStop;stop span in enumeration after noun with generic attribute, copy of r2638 from Sentiment
+2670;78;ENAdj+SGeneric2|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^SGeneric2:SGeneric2Begin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENGeneric2ConceptStop;stop span after adjective with generic attribute after enumeration of nouns, copy of r2640 from Sentiment
+2671;78;ENAdj+SGeneric2|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^SGeneric2:SGeneric2Begin;*|*|*|*|*|+ENGeneric2ConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation, copy of r2642 from Sentiment
+2672;78;ENDummy2;-ENDummy2;;clean up temp label, copy of r2644 from Sentiment
+
+/* Expansion rules for type(Begin)Concept, PathRelevant, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
+/* Note: ENDummy2 is used as temp label to shorten patterns, and is then removed
+/*	Expand to the right until next verb form, negation marker or beginning of phrase
+2673;78;ENGeneric2ConceptBegin|"than"|ENVerb:ENPerspron_subj;*|+ENGeneric2ConceptStop|*;copy of r2237 from Sentiment
+2674;78;ENVerb:ENPerspron_subj:ENNegation:ENAdvTemp:ENPBegin:"but":SEnd:ENAttrStop;+ENDummy2;use temp label to shorten following rules, copy of r2531 from Sentiment
+2675;78;ENGeneric2ConceptBegin|.^ENDummy2+^ENGeneric2ConceptStop|ENDummy2;*|*|+ENGeneric2ConceptStop;copy of r2235 from Sentiment
+2676;78;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENGeneric2ConceptStop|^SBegin;+ENGeneric2ConceptStop|-ENGeneric2ConceptStop|*;rare, correction of r2571 to prevent span from ending with 'and' or 'than', copy of r2297 from Sentiment
+2677;78;^ENPunctuation|ENPrespart2+ENGeneric2ConceptStop|.^ENDummy2+^ENGeneric2ConceptStop|ENDummy2;*|-ENGeneric2ConceptStop|*|+ENGeneric2ConceptStop;copy of r2530 from Sentiment
+2678;78;ENDummy2;-ENDummy2;clean up temp label, copy of r2532 from Sentiment 
+
+/*	Expansion rules for Generic attribute to left on adjective or noun before linking verb -> expansion to the left
+2679;78;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+SGeneric2;+ENGeneric2ConceptBegin+ENDummy2|-ENGeneric2ConceptStop|-ENGeneric2ConceptStop|-ENGeneric2ConceptStop|*;copy of r2251 from Sentiment
+2680;78;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+SGeneric2;*|*|+ENGeneric2ConceptBegin+ENDummy2|-ENGeneric2ConceptStop|-ENGeneric2ConceptStop|*;copy of r2302 from Sentiment
+2681;78;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+SGeneric2;+SGeneric2Begin|-ENPBegin|*;copy of r2252 from Sentiment
+
+/* Expansion to the left for concept-type marker preceeded by noun + 'of' or 'for'
+2682;78;typeConcept|"of":"for"|ENAdj:ENCon:ENEndconcept+SGeneric2;+ENGeneric2ConceptBegin|-ENGeneric2ConceptStop|*;
+
+/* No expansion to the right for Endconcept
+2683;78;ENEndconcept+SGeneric2|^SGeneric2+^ENGeneric2ConceptBegin;*|+ENGeneric2ConceptStop;copy of r2270 from Sentiment
+
+/* Expansion rules for Generic attribute on adjective followed by subordinate clause with "that"
+2684;78;ENAdj+SGeneric2+ENGeneric2ConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENGeneric2ConceptStop|*|+ENGeneric2ConceptStop;copy of r2263 from Sentiment
+
+/* Further expansion to the left to include the entire 'subject'
+/* Note: ENDummy2 marks ENGeneric2ConceptBegin in left expansion of adjectives, and is then removed
+2685;78;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;limit left expansion, copy of r2255 from Sentiment
+2686;78;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENGeneric2ConceptBegin;*|+ENGeneric2ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric2ConceptBegin;extend left expansion, copy of r2256 from Sentiment
+2687;78;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENOf:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENGeneric2ConceptBegin;*|+ENGeneric2ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric2ConceptBegin;copy of r2258 from Sentiment
+2688;78;ENPrep|ENDummy2+ENGeneric2ConceptBegin;+ENDummy2+ENGeneric2ConceptBegin|-ENDummy2-ENGeneric2ConceptBegin;extend left expansion, copy r2260 from Sentiment
+2689;78;ENDummy2;-ENDummy2;cleanup, copy of r2262 from Sentiment
+
+/* Remove Generic2Concept markers in larger Generic attribute span
+2690;78;ENGeneric2ConceptBegin+ENInGeneric2span+^SGeneric2;-ENGeneric2ConceptBegin;clean-up, copy of r2241 from Sentiment
+2691;78;ENGeneric2ConceptStop+ENInGeneric2span+^ENPBegin;-ENGeneric2ConceptStop;copy of r2243 from Sentiment
+
+
+/* Rewrite GenericAttributeConcept/PathRelevant labels to interpretable Generic Attribute labels
+2692;78;ENGeneric2ConceptBegin;^SGeneric2Begin;copy of r2247 from Sentiment
+2693;78;ENGeneric2ConceptStop;^SGeneric2Stop;copy of r2249 from Sentiment
+
+
+/* Move GenericBegin/Stop from NR to R/C/PR
+2694;78;ENNRGeneric2marker:SGeneric2:ENAdvDurCon:ENAdvFreqCon:ENAdvTime;+ENDummy2;add Dummy2 to use as exception in the following rules, copy of r2645 from Sentiment
+2695;78;SGeneric2Begin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric2Begin|*|+SGeneric2Begin;copy of r2208 from Sentiment
+2696;78;SGeneric2Stop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric2Stop|*|+SGeneric2Stop;copy of r2218 from Sentiment
+2697;78;SGeneric2+ENAdvstruct;+ENNRGeneric2marker;copy of r2353 from Sentiment
+2698;78;ENAndOrBut|SGeneric2Stop;+SGeneric2Stop|-SGeneric2Stop;avoid that and/or/but is the last word of a span
+2699;78;ENDummy2;-ENDummy2;clean-up, copy of r2646 from Sentiment
+
+==================================================================================================================================================================
+/* BLOCK 79: GENERIC3 ATTRIBUTE                                                                                                                                             
+/* ==================================================================================================================================================================
+/* Remark: For examples for rules: check Generic1 attribute in phase 77. The rules for Generic3 attribute are an exact copy of those for Generic1 attribute.
+
+/* Preparation
+2702;79;"("|*typeConcept+^ENBracketsnumber|")";+ENBracketsConcept|*|+ENBracketsConcept;add marker to prevent stopping span at Concept(s) between brackets, copy of r2637 from Sentiment, copy of r2584 from Generic1
+
+/* GENERIC ATTRIBUTE ON NONRELEVANT LEXREP -> merge with neighbouring lexrep
+2703;79;SGeneric3+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;merge NonRelevant generic attribute with following lexrep, copy of r2300 from Sentiment
+2704;79;SGeneric3+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeBeginRelation|^ENAndOrBut+^ENPunctuation+^ENArtPosspron+^SEnd+^ENHyphen;+JoinReverse|*;repetition of r2611 for sequences with NonRelevant adverbs, copy of r2354 from Sentiment
+2705;79;typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeBeginRelation|SGeneric3+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept+^typeEndConcept+^typeBeginConcept+^typeBeginRelation|ENAndOrBut:ENPunctuation:ENArtPosspron:SEnd:ENHyphen;*|+ENNRGeneric3marker|*;mark generic attributes that are followed by a lexrep to which they cannot be merged, copy of r2301 from Sentiment
+
+/* GENERIC ATTRIBUTE ON VERB OR ADVERB -> expand to phrase
+/* Assign attributes
+2706;79;typeRelation:typeBeginRelation:typePathRelevant+SGeneric3+^ENPrep;+SGeneric3Begin;copy of r2204 from Sentiment
+/*		2706.UD. The outbreak was caused by an electrical fault.
+2707;79;ENAdverb+^typeConcept+SGeneric3;+SGeneric3Begin;copy of r2268 from Sentiment
+
+/* Expansion rules
+/* Exception: relation-type marker after preposition
+2708;79;^SGeneric3|ENPrep:ENOf+^"down"+^"as"|SGeneric3Begin+^ENInf+^ENAdvdir;*|+ENDummy2|+ENDummy2;limit left expansion, copy of r2346 from Sentiment
+
+/* General rules
+2709;79;*typeConcept|ENPartAfter40+SGeneric3Begin+^ENPBegin|"by";+SGeneric3Begin+ENDummy2|-SGeneric3Begin|*;limit left expansion to antecedent, copy of r2541 from Sentiment
+2710;79;ENPBegin:ENSubord:ENAndOrBut|.^ENPBegin+^ENSubord+^SGeneric3Begin+^ENDummy2|SGeneric3Begin+^ENPBegin+^ENDummy2;+SGeneric3Begin|*|-SGeneric3Begin;copy of r2206 from Sentiment
+2711;79;ENDummy2;-ENDummy2;remove temp label, copy of r2347 from Sentiment
+2712;79;SGeneric3Begin|.^ENPBegin+^SEnd|ENPBegin:ENAttrStop:SEnd+^SGeneric3;*|*|+SGeneric3Stop;copy of r2210 from Sentiment
+
+/* Special case
+2713;79;SBegin:ENPunctuation:ENAndOrBut|.ENNonrelevant|SGeneric3Begin|","|ENPBegin+SGeneric3Stop+^ENConj|.^ENPBegin+^SEnd|ENPBegin:SEnd;*|*|*|*|-SGeneric3Stop|*|+SGeneric3Stop;copy of r2349 from Sentiment
+
+/* Assign InGenericspan attributes
+2714;79;SGeneric3Begin|.^SGeneric3Stop|SGeneric3Stop;+ENInGeneric3span|+ENInGeneric3span|*;copy of r2214 from Sentiment
+
+/* Split Relations at boundaries of span
+2715;79;typeRelation:typeOther+^ENInGeneric3span|typeRelation+ENInGeneric3span;*|+ENBeginrelation;copy of r2212 from Sentiment
+2716;79;typeRelation:typeOther+ENInGeneric3span|typeRelation+^ENInGeneric3span;*|+ENBeginrelation;copy of r2216 from Sentiment
+
+/* GENERIC ATTRIBUTE ON OTHER MARKERS -> expand to the right, no expansion to the left
+/* Assign attribute to (Begin)Concepts
+2717;79;typeConcept:typeBeginConcept+SGeneric3;+ENGeneric3ConceptBegin;copy of r2233 from Sentiment
+
+/* Assign attributes to prepositions -> expansion to the left is limited to the start of the Relation of which the concerned presposition is part
+2718;79;ENPrep+SGeneric3;+ENGeneric3ConceptBegin;copy of r2265 from Sentiment
+
+/*	Generic attribute in enumeration
+/* Note: ENDummy2 is used to mark ENComma when the span shouldn't stop
+2719;79;ENCon+SGeneric3+^ENAdj|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept|^SGeneric3:SGeneric3Begin;*|*|*|+ENGeneric3ConceptStop;stop span in enumeration after noun with generic attribute, copy of r2638 from Sentiment
+2720;79;ENAdj+SGeneric3|*ENCon|ENComma|*ENList+^"and"|"and"|*ENCon|^SGeneric3:SGeneric3Begin+^typeConcept:typeEndConcept;*|*|+ENDummy2|*|*|*|+ENGeneric3ConceptStop;stop span after adjective with generic attribute after enumeration of nouns, copy of r2640 from Sentiment
+2721;79;ENAdj+SGeneric3|.ENAdj|*ENCon|.ENBracketsnumber|ENPunctuation+^ENBracketsConcept:ENDummy2|^SGeneric3:SGeneric3Begin;*|*|*|*|*|+ENGeneric3ConceptStop;stop span in enumeration after adjective with generic attribute plus noun at punctuation, copy of r2642 from Sentiment
+2722;79;ENDummy2;-ENDummy2;;clean up temp label, copy of r2644 from Sentiment
+
+/* Expansion rules for type(Begin)Concept, PathRelevant, ENPrep and remaining markers -> expand to the right until next verb form, negation marker or beginning of phrase
+/* Note: ENDummy2 is used as temp label to shorten patterns, and is then removed
+/*	Expand to the right until next verb form, negation marker or beginning of phrase
+2723;79;ENGeneric3ConceptBegin|"than"|ENVerb:ENPerspron_subj;*|+ENGeneric3ConceptStop|*;copy of r2237 from Sentiment
+2724;79;ENVerb:ENPerspron_subj:ENNegation:ENAdvTemp:ENPBegin:"but":SEnd:ENAttrStop;+ENDummy2;use temp label to shorten following rules, copy of r2531 from Sentiment
+2725;79;ENGeneric3ConceptBegin|.^ENDummy2+^ENGeneric3ConceptStop|ENDummy2;*|*|+ENGeneric3ConceptStop;copy of r2235 from Sentiment
+2726;79;ENAndOrBut:"than"+^ENNegStop|ENPerspron_subj+ENGeneric3ConceptStop|^SBegin;+ENGeneric3ConceptStop|-ENGeneric3ConceptStop|*;rare, correction of r2571 to prevent span from ending with 'and' or 'than', copy of r2297 from Sentiment
+2727;79;^ENPunctuation|ENPrespart2+ENGeneric3ConceptStop|.^ENDummy2+^ENGeneric3ConceptStop|ENDummy2;*|-ENGeneric3ConceptStop|*|+ENGeneric3ConceptStop;copy of r2530 from Sentiment
+2728;79;ENDummy2;-ENDummy2;clean up temp label, copy of r2532 from Sentiment 
+
+/*	Expansion rules for Generic attribute to left on adjective or noun before linking verb -> expansion to the left
+2729;79;typeConcept+^ENAdj|.<ENAux:ENmAux|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|.ENAdvstruct:ENAdvTemp|ENAdj:ENCon:ENEndconcept+SGeneric3;+ENGeneric3ConceptBegin+ENDummy2|-ENGeneric3ConceptStop|-ENGeneric3ConceptStop|-ENGeneric3ConceptStop|*;copy of r2251 from Sentiment
+2730;79;SBegin:ENPBegin|.ENArtPosspron:ENAdj|typeConcept+^ENAdj|*ENLinkingverb:ENBe+^ENPBegin+^ENAttrStop|ENAdverbAfter40|ENAdj:ENCon:ENEndconcept+SGeneric3;*|*|+ENGeneric3ConceptBegin+ENDummy2|-ENGeneric3ConceptStop|-ENGeneric3ConceptStop|*;copy of r2302 from Sentiment
+2731;79;ENPerspron_subj:ENIt:ENPerspron:ENMod|*ENLinkingverb:ENBe|ENAdj:ENCon:ENEndconcept+SGeneric3;+SGeneric3Begin|-ENPBegin|*;copy of r2252 from Sentiment
+
+/* Expansion to the left for concept-type marker preceeded by noun + 'of' or 'for'
+2732;79;typeConcept|"of":"for"|ENAdj:ENCon:ENEndconcept+SGeneric3;+ENGeneric3ConceptBegin|-ENGeneric3ConceptStop|*;
+
+/* No expansion to the right for Endconcept
+2733;79;ENEndconcept+SGeneric3|^SGeneric3+^ENGeneric3ConceptBegin;*|+ENGeneric3ConceptStop;copy of r2270 from Sentiment
+
+/* Expansion rules for Generic attribute on adjective followed by subordinate clause with "that"
+2734;79;ENAdj+SGeneric3+ENGeneric3ConceptBegin|"that"|.^ENPBegin+^ENAttrStop+^SEnd|ENPBegin:SEnd;*|-ENGeneric3ConceptStop|*|+ENGeneric3ConceptStop;copy of r2263 from Sentiment
+
+/* Further expansion to the left to include the entire 'subject'
+/* Note: ENDummy2 marks ENGeneric3ConceptBegin in left expansion of adjectives, and is then removed
+2735;79;ENPrep+ENPBegin|.ENPrep:ENAndOrBut:ENArtPosspron:ENPosspron:ENCon+^"but"+^ENDummy2|ENDummy2;*|*|-ENDummy2;limit left expansion, copy of r2255 from Sentiment
+2736;79;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENCon:ENList+^ENDummy2|ENDummy2+ENGeneric3ConceptBegin;*|+ENGeneric3ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric3ConceptBegin;extend left expansion, copy of r2256 from Sentiment
+2737;79;^ENArtPosspron+^ENPosspron+^ENCon|ENArtPosspron:ENPosspron:ENCon+^ENDummy2|.ENArtPosspron:ENPosspron:ENCon:ENPrep:ENOf:ENAndOrBut+^"but"+^ENDummy2+^ENPBegin|ENDummy2+ENGeneric3ConceptBegin;*|+ENGeneric3ConceptBegin+ENDummy2|*|-ENDummy2-ENGeneric3ConceptBegin;copy of r2258 from Sentiment
+2738;79;ENPrep|ENDummy2+ENGeneric3ConceptBegin;+ENDummy2+ENGeneric3ConceptBegin|-ENDummy2-ENGeneric3ConceptBegin;extend left expansion, copy r2260 from Sentiment
+2739;79;ENDummy2;-ENDummy2;cleanup, copy of r2262 from Sentiment
+
+/* Remove Generic3Concept markers in larger Generic attribute span
+2740;79;ENGeneric3ConceptBegin+ENInGeneric3span+^SGeneric3;-ENGeneric3ConceptBegin;clean-up, copy of r2241 from Sentiment
+2741;79;ENGeneric3ConceptStop+ENInGeneric3span+^ENPBegin;-ENGeneric3ConceptStop;copy of r2243 from Sentiment
+
+
+/* Rewrite GenericAttributeConcept/PathRelevant labels to interpretable Generic Attribute labels
+2742;79;ENGeneric3ConceptBegin;^SGeneric3Begin;copy of r2247 from Sentiment
+2743;79;ENGeneric3ConceptStop;^SGeneric3Stop;copy of r2249 from Sentiment
+
+
+/* Move GenericBegin/Stop from NR to R/C/PR
+2744;79;ENNRGeneric3marker:SGeneric3:ENAdvDurCon:ENAdvFreqCon:ENAdvTime;+ENDummy2;add Dummy2 to use as exception in the following rules, copy of r2645 from Sentiment
+2745;79;SGeneric3Begin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric3Begin|*|+SGeneric3Begin;copy of r2208 from Sentiment
+2746;79;SGeneric3Stop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|.^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept+^typeBeginRelation+^ENDummy2|typeConcept:typeRelation:typePathRelevant:typeBeginConcept:typeBeginEndConcept:typeBeginRelation;-SGeneric3Stop|*|+SGeneric3Stop;copy of r2218 from Sentiment
+2747;79;SGeneric3+ENAdvstruct;+ENNRGeneric3marker;copy of r2353 from Sentiment
+2748;79;ENAndOrBut|SGeneric3Stop;+SGeneric3Stop|-SGeneric3Stop;avoid that and/or/but is the last word of a span
+2749;79;ENDummy2;-ENDummy2;clean-up, copy of r2646 from Sentiment
+
+
+
 /* ==================================================================================================================================================================
 /* BLOCK 80/81: CLEANING                                                                                                                                             
 /* ==================================================================================================================================================================
@@ -3973,6 +4185,10 @@
 2329;$;ENNRSentmarker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant sentiment markers relations
 /*		2329.UD. The osteotomy was partially healed only.
 2615;$;ENNRGeneric1marker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant generic attributes relations, copy of r2329 from Sentiment
+/*		2615.UD. The year in which he jumped 18.29m, which is still the world record. 
+2700;$;ENNRGeneric2marker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant generic attributes relations, copy of r2329 from Sentiment
+
+2750;$;ENNRGeneric3marker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant generic attributes relations, copy of r2329 from Sentiment
 
 2462;$;ENAdj+ENBeginconcept;-ENAdj-ENAdjFreq;cleanup conflicting labels
 /*		2462. German astronomer Heinrich Olbers famously pondered the “dark sky paradox”: if there was an infinite number of stars in the universe, how could it get dark at night as every point in the sky would contain a star. 
