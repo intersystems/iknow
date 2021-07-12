@@ -35,7 +35,7 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 	ctypedef unsigned short Entity_Ref
 	ctypedef unsigned short Attribute_Ref
 
-cdef extern from "../../engine/src/engine.h" namespace "iknowdata:Sent_Attribute" nogil:
+cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sent_Attribute" nogil:
 	ctypedef vector[pair[string, string]] Sent_Attribute_Parameters
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Sentence" nogil:
@@ -65,9 +65,9 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		Path entity_vector
 
 	struct Path_Attribute:
-		Attribute type "type"
-		unsigned short pos "pos"
-		unsigned short span "span"
+		Attribute type
+		unsigned short pos
+		unsigned short span
 
 	struct Sentence:
 		Entities entities
