@@ -117,8 +117,11 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 			const size_t text_start = literal_start - pText;
 			const size_t text_stop = literal_end - pText;
 
+			// handle measurement attributes
 			{
-				// handle measurement attributes
+				vector<pair<String, String>> value_unit_parameters;
+				value_unit_parameters.resize(1); // make at least 1 val/unit pair 
+
 				int iPushMeasurementAttribute = 0;
 				for (IkMergedLexrep::const_iterator it = lexrep->LexrepsBegin(); it != lexrep->LexrepsEnd(); it++) { // Scan for label attributes : scroll the single lexreps
 					std::string a_marker = iknow::base::IkStringEncoding::BaseToUTF8(it->GetValue()); // the attribute marker, Literal representation
@@ -157,7 +160,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							sentence_data.sent_attributes.back().entity_ref = static_cast<unsigned short>(sentence_data.entities.size()); // connect sentence attribute to entity
 						}
 						if (iPushMeasurementAttribute > 0) { // adjust marker, except for the first.
-							sentence_data.sent_attributes.back().marker_ += " " + a_marker;
+							sentence_data.sent_attributes.back().marker_ += (bIsIdeographic ? "" : " ") + a_marker;
 							sentence_data.sent_attributes.back().offset_stop_ = it->GetTextPointerEnd() - pText;
 						}
 						// handle value & unit
@@ -173,37 +176,57 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 							if (bMarkerIsValue) at_value = it->GetNormalizedText();
 							if (bMarkerIsUnit) at_unit = it->GetNormalizedText();
 						}
-						Sent_Attribute& ref = sentence_data.sent_attributes.back();
 						if (at_value.length()) {
-							if (ref.parameters_[0].first.empty()) { // value1
-								ref.parameters_[0].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
+							if (value_unit_parameters.back().first.empty()) { // last value is empty, store
+								value_unit_parameters.back().first = at_value;
 							}
-							else {
-									if (ref.parameters_[1].first.empty()) // fill up second placeholder, value2
-										ref.parameters_[1].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value);
-								}
+							else { // create new value/unit pair
+								value_unit_parameters.push_back(make_pair(at_value, String())); // store value
 							}
-							if (at_unit.length()) {
-								// if (ref.unit_.empty() && ref.value2_.empty()) // if we have a second value, write the second unit
-								if (ref.parameters_[0].second.empty() && ref.parameters_[1].first.empty())
-									// ref.unit_ = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
-									ref.parameters_[0].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
-								else {
-									// if (ref.unit2_.empty()) // fill up second  placeholder
-									if (ref.parameters_[1].second.empty()) // fill up second  placeholder
-										ref.parameters_[1].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit);
-								}
+						}
+						if (at_unit.length()) {
+							if (value_unit_parameters.back().second.empty()) { // no unit in last value/unit pair, write it
+								value_unit_parameters.back().second = at_unit;
+							}
+							else { // unit exist, make a new pair with the unit
+								value_unit_parameters.push_back(make_pair(String(), at_unit));
+							}
 						}
 						if (at_value2.length()) {
-							// if (ref.value2_.empty()) // only write if available
-							if (ref.parameters_[1].first.empty())
-								ref.parameters_[1].first = iknow::base::IkStringEncoding::BaseToUTF8(at_value2);
+							if (value_unit_parameters.back().first.empty()) { // last value is empty, store
+								value_unit_parameters.back().first = at_value;
+							}
+							else { // create new value/unit pair
+								value_unit_parameters.push_back(make_pair(at_value2, String())); // store value
+							}
 						}
 						if (at_unit2.length()) {
-							if (ref.parameters_[1].second.empty()) // only write if available
-								ref.parameters_[1].second = iknow::base::IkStringEncoding::BaseToUTF8(at_unit2);
+							if (value_unit_parameters.back().second.empty()) { // no unit in last value/unit pair, write it
+								value_unit_parameters.back().second = at_unit;
+							}
+							else { // unit exist, make a new pair with the unit
+								value_unit_parameters.push_back(make_pair(String(), at_unit2));
+							}
 						}
 						iPushMeasurementAttribute++;
+					}
+				}
+				if (iPushMeasurementAttribute) { // only if measurement attributes
+					// write the value/unit pairs to the sentence attribute structure
+					// int idx_parameters = value_unit_parameters.size();
+					int idx_parameters = 0;
+					Sent_Attribute& ref = sentence_data.sent_attributes.back();
+					for (auto it = value_unit_parameters.begin(); it != value_unit_parameters.end(); ++it, ++idx_parameters) {
+						String& value = it->first;
+						String& unit = it->second;
+
+						if (idx_parameters < 2) { // reserved fixes space for 2 value/unit pairs
+							ref.parameters_[idx_parameters].first = iknow::base::IkStringEncoding::BaseToUTF8(value);
+							ref.parameters_[idx_parameters].second = iknow::base::IkStringEncoding::BaseToUTF8(unit);
+						}
+						else { // extra value/unit pairs
+							ref.parameters_.push_back(make_pair(iknow::base::IkStringEncoding::BaseToUTF8(value), iknow::base::IkStringEncoding::BaseToUTF8(unit)));
+						}
 					}
 				}
 			}

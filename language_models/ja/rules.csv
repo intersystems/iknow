@@ -22,6 +22,14 @@
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
 
+4668;3;"w"|JPNumber|"×"|"d"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join|Join|Join|Join;
+4670;3;"w"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join;
+4669;3;"w":"d":"h";+JPAlphabet;
+4645;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|^JPCount;*|JPCount+JPFraction|Join|*|*;
+4647;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPwari|"は":"を":"が":"も";*|JPCount+JPFraction|Join|*|*|*;
+4646;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPwari;*|JPCount+JPFraction|Join|*|-JPCount;
+4650;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPCount;*|JPCount+JPFraction|Join|*|*;
+4654;3;"回"|"避";JPSuruNoun|Join;
 4227;3;"+";JPCon;
 3368;3;SBegin|JPFurigana;*|JPNonRelevant;
 4239;3;SBegin|"の"|"どの";*|JPAttributive-JPno|Join;
@@ -44,9 +52,14 @@
 4578;3;JPYearNum|JPPeriod|JPNumber|JPPeriod|JPNumber;JPNumber+JPDateTime+DateTime|Join|Join|Join|Join;
 4092;3;JPNumber|JPPeriod|JPNumber|JPPeriod|JPNumber;JPNumber|Join|Join|Join|Join;
 3338;3;JPNumber|JPPeriod|JPNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join;
+4656;3;JPNumber|"・"|JPNumber;JPNumber|Join|Join;
+4640;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join|Join;
+4641;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join;
+4639;3;JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join;
+4671;3;JPMonthNum|"/"|JPDateNum|"~"|JPMonthNum|"/"|JPDateNum;JPDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|Join;
 3390;3;JPNumber|"~"|JPNumber;JPNumber-JPDateNum|Join|Join;
 3626;3;JPNumber|"〜"|JPNumber;JPNumber|Join|Join;
-3531;3;JPNumber|":"|JPNumber;JPNumber|Join|Join;
+3531;3;JPNumber+^"数"|":"|JPNumber;JPNumber|Join|Join;
 4621;3;JPNumber|"-"|JPNumber;JPNumber|Join|Join;
 3518;3;"-"|JPNumber;JPNumber|Join;
 3395;3;JPNumber+^"数"|"、"|JPNumber+^"数"|"、"|JPNumber;JPNumber|Join|Join|Join|Join;
@@ -56,7 +69,7 @@
 3396;3;JPAlphabet|JPApostrophe|JPAlphabet;JPAlphabet|Join|Join;
 3423;3;"1"|JPCount|"も"|"ない";JPRelation|Join|Join|Join;
 3422;3;"1"|JPCount|"も"|"なかった";JPRelation|Join|Join|Join;
-3455;3;"1"|JPCount|"="|JPNumber;JPNumber|Join|Join|Join;
+3455;3;"1"|JPCount|"="|JPNumber;JPCon|Join|Join|JPNumber+JPValue;
 3616;3;JPNumber|JPyen|"="|JPNumber;JPNumber|Join|Join|Join;
 3356;3;JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet;JPAlphabet|Join|Join|Join|Join|Join|Join|Join|Join|Join;
 3351;3;JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet;JPAlphabet|Join|Join|Join|Join|Join|Join|Join|Join;
@@ -66,12 +79,14 @@
 3355;3;JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
 3342;3;JPAlphabet|JPAlphabet|JPAlphabet|JPAlphabet;JPAlphabet|Join|Join|Join;
 3343;3;JPAlphabet|JPAlphabet|JPAlphabet;JPAlphabet|Join|Join;
-3344;3;JPAlphabet|JPAlphabet;JPAlphabet|Join;
+4672;3;JPAlphabet+JPCount|JPAlphabet+^JPCount+^"×"+^"x";JPAlphabet-JPCount|Join;
+4673;3;JPAlphabet+JPCount|"x"|^JPNumber;JPAlphabet-JPCount|Join|*;
+3344;3;JPAlphabet+^JPCount|JPAlphabet+JPCount;JPAlphabet|Join;
 3575;3;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join|Join|Join;
 3350;3;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
 3349;3;JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|JPAlphabet|JPAlphabet;
 3384;3;JPAlphabet|JPspace|JPAlphabet|JPspace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
-3385;3;JPAlphabet|JPspace|JPAlphabet;JPAlphabet|Join|Join;
+3385;3;JPAlphabet|JPspace|JPAlphabet;*|JPAlphabet|*;
 3778;3;"."|JPAlphabet|".";JPAlphabet|Join|Join;
 3775;3;"."|JPAlphabet;JPAlphabet|Join;
 3340;3;JPAlphabet;+JPCon;
@@ -88,9 +103,10 @@
 3537;3;JPNumber|JPSingleSpace|JPTime;JPNumber+DateTime|Join|Join;
 3401;3;JPNumber|JPSingleSpace|JPCount;JPNumber|Join|JPCount-JPCon;
 3497;3;JPNumber|"_"|JPAlphabet;JPAlphabet-JPDateNum-JPMonthNum|Join|Join;
-3416;3;^"/"|JPNumber+^"数"|JPSuruNoun+^JPCount;*|^JPNumber|-JPSuruNoun-JPAdv-JPSuffixVerb-JPVerbOther+JPCount;
+3416;3;^"/"|JPNumber+^"数"+^JPKanjiNumber+^JPYearNum|JPSuruNoun+^JPCount;*|^JPNumber|-JPSuruNoun-JPAdv-JPSuffixVerb-JPVerbOther+JPCount;
+4684;3;JPYearNum|"体";+JPValue|+JPUnit;
 3524;3;JPNumber|"&"|JPNumber;JPNumber|Join|Join;
-3540;3;JPNumber|"-";JPNumber+JPAlphabet|Join;
+3540;3;JPNumber|"-";JPAlphabet|Join;
 3495;3;JPAlphabet|"://"|JPAlphabet;^JPAlphabet|Join|Join;
 3496;3;JPAlphabet|"_"|JPAlphabet;^JPAlphabet-JPDateNum-JPMonthNum|Join|Join;
 3499;3;JPAlphabet|"/"|JPAlphabet|"/"|JPAlphabet;^JPAlphabet|Join|Join|Join|Join;
@@ -105,28 +121,34 @@
 3695;3;JPAlphabet|"―"|JPAlphabet;JPAlphabet|Join|Join;
 3400;3;JPAlphabet|JPSingleSpace|"="|JPSingleSpace|JPNumber;JPAlphabet|Join|Join|Join|Join;
 3536;3;JPAlphabet|JPSingleSpace|"≦"|JPSingleSpace|JPNumber;JPAlphabet|Join|Join|Join|Join;
-3457;3;JPAlphabet|"="|JPNumber;JPAlphabet|Join|Join;
+3457;3;JPAlphabet|"="|JPNumber|^"/";JPAlphabet|Join|Join|*;
 3458;3;JPAlphabet|"<"|JPNumber;JPAlphabet|Join|Join;
 3535;3;JPAlphabet|"≦"|JPNumber;JPAlphabet|Join|Join;
 3459;3;JPAlphabet|">"|JPNumber;JPAlphabet|Join|Join;
-3397;3;JPAlphabet|JPSingleSpace|JPNumber;JPAlphabet|Join|Join;
-3449;3;JPAlphabet|","|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
+3397;3;JPAlphabet|JPSingleSpace|JPNumber|^JPCount;JPAlphabet|Join|Join|*;
+3449;3;JPAlphabet+^JPCount|","|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
 3451;3;JPAlphabet|"."|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
 3438;3;JPTime+JPCount+^"日夜"+^"日"+^"年後"+^"年度"|"に"|JPNumber|JPCount+^JPyen+^"%"+^"年"+^"割"+^"歳"|"以上";JPFrequency|Join|Join|Join|Join;
 4527;3;JPTime+JPCount|"に"|"1"|JPCount+^"泊"|"以上";JPFrequency+JPEndConcept|Join|Join|Join|Join;
 3555;3;JPNumber|"月"|JPNumber|"日"|"に";+Dummy|+Dummy|+Dummy|JPDate|+Dummy;
-3557;3;^JPNumber+^SBegin|"月"|"に"|JPNumber|"回";*|JPFrequency|Join|Join|Join;
+4642;3;^JPNumber+^JPAttributive:"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円"+^"%"|JPhodo;*|JPFrequency|Join|Join|Join|Join;
+3557;3;^JPNumber+^JPAttributive:"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円"+^"%";*|JPFrequency|Join|Join|Join;
 4523;3;"前半":"後半"|JPNumber|"分";JPCon+JPDateTime+DateTime-JPSuffixTime|Join|Join;
-3437;3;JPTime+JPCount+^"年前"+^"年後"+^"日夜"+^"年度"+^"年末"|"に"|JPNumber|JPCount+^JPRule3437;JPFrequency|Join|Join|Join;
+3437;3;JPTime+JPCount+^"年前"+^"年後"+^"日夜"+^"年度"+^"年末"|"に"|"1"|JPCount+^JPRule3437;JPFrequency|Join|Join|Join;
 4522;3;"1"|JPTime+JPCount+^"年目"+^"年前"+^"年後"+^"日夜"+^"月期"|"に"|JPNumber|JPCount+^"円"+^"年";JPFrequency|Join|Join|Join|Join;
 4525;3;"、"|JPTime+JPCount+^"年目"+^"年前"+^"年後"+^"日夜"+^"月期"|"に"|JPNumber|JPCount+^"円"+^"年";*|JPFrequency|Join|Join|Join;
 3509;3;JPNumber|"か"|"国";^JPNumber|JPCount|Join;
-4210;3;JPNumber|"→"|JPNumber|JPCount;JPNumber|Join|Join|^JPCount;
-4211;3;JPNumber|JPCount|"→"|JPNumber|JPCount;JPNumber|Join|Join|Join|^JPCount;
+4685;3;"¥":"$":"us$":"hk$"|JPNumber;+JPUnit|+JPValue;
+4210;3;JPNumber+^JPValue|"→":"/"|JPNumber|JPCount;JPNumber|Join|Join|^JPCount;
+4211;3;JPNumber|JPCount+^JPTime|"→"|JPNumber|JPCount;JPNumber|Join|Join|Join|^JPCount;
 3643;3;JPNumber|JPCount+JPAlphabet;^JPNumber|-JPCon;
 4214;3;JPSuruNoun|"後"|JPAlphabet;JPEndConcept|Join|+Dummy;
 4268;3;JPAlphabet|JPSuruNoun|"せず"|"・";JPEndConcept+JPNegation-JPCon|Join|Join|+Dummy;
 4218;3;JPAlphabet|JPSuruNoun+^"対応"|"し":JPSuruVerb;JPCon|Join|JPVerb;
+4629;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber|Join|Join|Join;
+4628;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber;JPNumber|Join|Join;
+4630;3;JPNumber+^JPKanjiNumber+^"何"+^"数"|*JPKanjiNumber|^JPNumber;JPNumber|Join|*;
+4674;3;JPNumber|JPCount+"g":"w":"a"|JPCount+^"分"+^"回";*|-JPCount|-JPCount;
 4458;5;JPAttributiveNR|"人";JPAttributive|*;
 
 /* ---------- PHASE 5: PART 1 ----------
@@ -193,7 +215,7 @@
 4324;5;"日"|JPYobi|JPTimeNum;+Dummy|Join|+Dummy;
 4325;5;JPTimeNum|JPCon;-JPTimeNum-DateTime|+Dummy;
 4321;5;JPMonthNum|JPspace:JPSingleSpace|"月";JPMonthNum+JPNumber+DateTime|Join|+Dummy;
-4331;5;JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|JPspace:JPSingleSpace|JPTimeNum;JPSeparateDate|Join|Join|Join|Join|Join|Join;
+4331;5;JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|JPspace:JPSingleSpace|JPTimeNum;JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|Join;
 4330;5;^"/"+^SBegin|JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|^"/"+^"."+^"時点"+^"期間"+^SEnd;*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|+Dummy;
 4332;5;SBegin|JPYearNum|"/"|JPMonthNum|"/"|JPDateNum;*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join;
 4334;5;JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|SEnd;JPSeparateDate+DateTime|Join|Join|Join|Join|SEnd;
@@ -201,7 +223,7 @@
 4323;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|"終値":"付け";*|-JPMonthNum+DateTime|+Dummy|-JPDateNum|+Dummy|+Dummy;
 4322;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|JPCon+^"早朝"+^"未明"+^"夕"+^"夕方"+^"現在"+^"以降"+^"以来";*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|+Dummy;
 4318;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|"時点":"卒":"中";*|-JPYearNum+DateTime|+Dummy|-JPMonthNum|+Dummy|+Dummy;
-4317;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|JPCon+^"上旬"+^"中旬"+^"下旬"+^"以降"+^"以来"+^"頃";*|JPSeparateDate+DateTime|Join|Join|Join|+Dummy;
+4317;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|JPCon+^"上旬"+^"中旬"+^"下旬"+^"以降"+^"以来"+^"頃"+^"初旬";*|JPSeparateDate+DateTime|Join|Join|Join|+Dummy;
 1403;5;JPMonth|JPNumber|JPDate;JPDate+DateTime+JPDateTime|Join|Join;
 1835;5;JPMonth|JPDate;JPDate|Join;
 4605;5;^"約"+^"回"+^"比"|JPMonthNum|"/"|JPDateNum|^"未満"+^"以上"+^"以下"+^"程度"+^JPCount+^"/";*|JPTime+JPDateTime+DateTime|Join|Join|*;
@@ -209,12 +231,11 @@
 3690;5;JPNumber|JPSingleSpace|JPNumber;JPNumber|Join|^JPNumber;
 4584;5;^JPNumber+^JPTime|JPfun_kanji_1|"以上";*|-JPCount-JPTime|JPCon;
 4583;5;^JPNumber+^JPTime|JPfun_kanji_1;*|-JPCount-JPTime;
-840;5;JPNumber|JPNumber|JPCount;JPNumber|Join|Join;
 4061;5;JPNumber|"冊";JPNumber|Join;
 3480;5;SBegin|"思わず";*|+JPIgnore;
 3481;5;^JPComma+^BracketOpen+^SBegin+^"に"|"思わず"+^JPIgnore;*|JPVerb+JPNegation;
 2833;5;"あと"|JPNumber|JPCount;JPCon|JPNumber|JPCount;
-1;5;JPNumber|JPNumber;JPNumber|Join;
+1;5;JPNumber+^"数"|JPNumber;JPNumber|Join;
 1645;5;JPMonth|JPSuffixTime|JPAdvTime+JPSuffixTime|JPComma;JPMonth|JPCon|JPAdvTime|JPComma;
 1936;5;JPCon|JPCon|JPAdv+JPCon|JPComma;^JPCon|^JPCon|JPAdv|JPComma;
 2855;5;JPCount|JPAdvTime+JPCon|JPde|JPha;JPCount|Join|JPde|JPha;
@@ -234,6 +255,12 @@
 4505;5;JPCon+JPSeparateDate|JPCon+^JPAdvTime|JPCon+^JPSuffixTime|JPSuruNoun;-JPCon|*|*|*;
 4510;5;JPCon+JPYear|*JPCon+^JPAdvTime+^JPSuffixTime+^JPTime+^JPRule4510|"に";+JPSeparateDate-JPCon-JPYear|*|*;
 4496;5;JPCon+JPSeparateDate:JPYear|JPCon+^JPAdvTime+^JPTime|JPCon+^JPSuffixTime;-JPCon|*|*;
+4678;5;JPKanjiNumber|"十分";JPTime|Join;
+4680;5;"十分";-JPTime;
+4679;5;*JPKanjiNumber|"時":"月":"日"|^"手"+^"町"+^"市"+^"谷"+^"市場";JPTime|Join|*;
+4682;5;JPTime|"少し"|"前":"後":"あと";JPTime|Join|Join;
+4681;5;JPTime|"前";JPTime|Join;
+4683;5;JPTime|"頃";JPTime|Join;
 5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"|JPCon|JPCon+^JPNegation;JPCon|Join|Join;
 2782;5;SBegin|"併せて";*|JPAdv;
 3086;5;SBegin|"いきおい"|JPComma;*|JPAdv|JPComma;
@@ -356,7 +383,7 @@
 4085;5;JPNumber|"人"|"に"|"1人":"一人";JPCon+JPNumber|Join|Join|Join;
 4087;5;JPNumber|JPCount+JPTime|"近く"|"前";JPEndConcept+JPTime|Join|Join|Join;
 4086;5;JPNumber|JPCount+JPTime|"近く";JPEndConcept+JPTime|Join|Join;
-4106;5;JPNumber|"人"|JPnaka|^JPNumber+^JPAdvDegree+^SEnd;JPNumber+JPEndConcept|Join|Join|+Dummy;
+4106;5;JPNumber|"人"|JPnaka|^JPNumber+^JPAdvDegree+^JPRule172c+^SEnd;JPNumber+JPEndConcept|Join|Join|+Dummy;
 4336;5;JPCon+JPAdjVStem|JPku;-JPCon|-JPVerbOther;
 4345;5;"新":"初":"再"|"登場";JPSuruNoun|Join;
 4397;5;SBegin|JPAdvTime+JPYear|JPCon+JPKatakana;*|JPBeginEndConcept+DateTime|*;
@@ -367,7 +394,10 @@
 4495;5;JPCon+JPSeparateDate:JPimperialEra|JPCon+^JPTime+^JPSeparateDate+^JPAdvTime+^"最大"+^"型"+^"版"+^JPJoinDate;-JPCon-JPSuffixNoun-JPSuffixTime|*;
 4509;5;JPCon+JPYear|JPCon+JPTime:JPSuffixTime;-JPYear|Join;
 4511;5;JPCon+JPYear|JPCon+^JPTime+^JPSuffixTime|"が";^JPSeparateDate|*|*;
-6;5;JPCon+^JPMonth+^JPHiragana+^"多少"+^JPSeparateDate|JPCon+^JPuchi+^"外来"+^"程度";JPCon-DateTime|Join;
+4677;5;"gw"|JPCon:JPNumber+^"前半"+^"後半"+^"休暇"+^"期間";-JPDateTime-JPCount|*;
+4675;5;JPNumber|"gw":"sec";*|-JPDateTime-JPTime;
+4676;5;^JPNumber|"gw":"sec";*|-JPCount-JPTime;
+6;5;JPCon+^JPMonth+^JPHiragana+^"多少"+^JPSeparateDate+^"円"+^"銭"+^"ドル"|JPCon+^JPuchi+^"外来"+^"程度"+^JPMonth;JPCon-DateTime|Join;
 2600;5;JPde|JPki|JPru;JPSuruVerb+JPVerb+JPVerbBase+Dummy2|Join|Join;
 2724;5;JPSuruNoun|JPde|JPki|JPmasu;^JPSuruNoun|JPSuruVerb+JPVerb|Join|Join;
 2904;5;JPde|JPki|JPtara;JPSuruVerb+JPConjVerb|Join|Join;
@@ -420,7 +450,7 @@
 3305;5;JPhi|JPto;JPCon|Join;
 1130;5;JPSuruNoun|JPSuruNoun|JPCon|JPParticleWO;JPCon|Join|Join|JPParticleWO;
 1153;5;JPAdjVStem|JPku;^JPAdjVStem-JPAdjNoun|JPku;
-1928;5;JPAdjVStem+JPCon|JPni;JPCon|JPParticleNI;
+1928;5;JPAdjVStem+JPCon+^"円"|JPni;JPCon|JPParticleNI;
 1278;5;JPVerbOther+JPCon|JPbu;-JPCon|^JPbu;
 1476;5;JPVerbOther|JPgo|JPu;JPVerbOther|JPVerbEndOther|Join;
 1477;5;JPSuruNoun|JPshi|JPu|JPru;^JPSuruNoun|JPSuruVerb|Join|Join;
@@ -430,7 +460,7 @@
 4232;5;JPSuruNoun|"後"|JPSuruNoun|JPSuruVerb;JPCon|JPPartAdvNOUN+JPEndRelation|+Dummy|+Dummy;
 4579;5;SBegin|JPSuruNoun|JPSuruNoun|JPSuffixTime;*|JPCon|Join|Join+JPDateTime;
 2821;5;JPSuruNoun|JPSuffixTime;JPCon|Join+JPDateTime;
-7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1|JPCon;JPCon|Join;
+7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1+^"試合"+^"安打"|JPCon;JPCon|Join;
 2204;5;JPmade|JPno|JPaida_kanji_1;+JPEndRelation|JPNonRelevant|JPNonRelevant;
 1951;5;JPmade|JPno;+JPEndRelation|JPNonRelevant;
 2438;5;JPno|JPsaki_kanji_1;JPno|JPCon;
@@ -486,19 +516,33 @@
 1107;5;JPAdvTime+JPTime|JPTime|JPTime;JPTime|Join|Join;
 1375;5;JPAdvTime+JPTime|JPTime;JPTime+DateTime|Join;
 1147;5;JPNumber+JPPronInterr|JPCount+^"度目"|JPka;JPAdvNR|Join|Join;
+4631;5;JPNumber|JPMonth|JPSuffixTime:"半ば";JPCon+JPDateTime+DateTime|Join|Join;
 2004;5;JPNumber|JPMonth;JPMonth+DateTime+JPDateTime|Join;
 3274;5;JPNumber|"月末";JPMonth+DateTime|Join;
+4632;5;JPMonth|JPSuffixTime:"半ば";JPCon+JPDateTime+DateTime|Join;
+4633;5;JPMonth|"の"|JPSuffixTime:"半ば";JPCon+JPDateTime+DateTime|Join|Join;
 4550;5;JPYearNum|"年";JPYear+DateTime+JPDateTime|Join;
 4551;5;JPYear:JPTime|"~"|JPYear;JPYear+DateTime+JPDateTime|Join|Join;
-14;5;JPNumber|JPCount;JPNumber|Join;
+4620;5;"第"|JPNumber|JPCount;JPNumber+JPFrequency|Join|Join;
+4666;5;"φ"|JPNumber;JPNumber+JPMeasurement|Join;
+4667;5;JPNumber|"φ";JPCon+JPMeasurement|Join;
+4644;5;JPNumber|JPCount+^"キロワット"+^"ワット"|"時":"年度";JPCon+JPDateTime+DateTime|Join|Join;
+4623;5;JPNumber|JPCount|"頃":"ごろ";JPCon+JPDateTime+DateTime+JPNumber+JPValue|JPCon+JPDateTime+DateTime+JPNumber+JPUnit|JPEndConcept+JPDateTime+DateTime;
+4624;5;JPNumber|JPCount+^"%"+^"割"+^"トン"|"と"|"も";JPNumber+JPValue|JPNumber+JPUnit|JPEndConcept|Join;
+4643;5;JPNumber|JPCount+^"%"+^"割"+^"号"|JPCount+^"元"+^"本"+^"円";JPNumber+JPValue|JPNumber+JPUnit|Join;
+4664;5;"銭"|"円"|"安":"高";*|JPCon|Join;
+14;5;JPNumber|JPCount+^"%"+^"割"+^"回生"+^"号"+^"時"+^"倍"+^"分";JPNumber+JPValue|JPNumber+JPUnit;
 1232;5;JPNumber|JPFromTo|JPNumber|JPni|JPVerbOther;^JPNumber|JPParticlePREPO|^JPNumber|^JPParticleNI|^JPVerbOther;
 4328;5;JPDate|JPFromTo|JPDate|"終値":"期間":"未明":JPSuruNoun;JPDate|Join|Join|+Dummy;
 1877;5;JPDate|JPFromTo|JPDate;JPDate+JPEndConcept+DateTime|Join|Join;
-3336;5;JPNumber|JPFromTo+"~"|JPNumber;JPNumber|Join|Join;
+3336;5;JPNumber+^JPUnit|JPFromTo+"~"|JPNumber;JPNumber|Join|Join;
 2969;5;JPTime|JPyori;^JPTime-JPtoki|JPPartAdvNOUN+JPEndRelation;
 3220;5;JPVerbNoun+JPVerbOther|JPta|JPyori;JPVerb|Join|JPPartAdvNOUN;
+4618;5;"約"|JPNumber|JPUnit;JPNumber+JPValue|Join|JPUnit;
 4617;5;"約"|JPNumber+JPTime;JPNumber+JPDateTime+JPTime|Join;
-977;5;JPPrefix+^JPo|JPNumber;JPNumber|Join;
+4616;5;"約"|JPNumber;JPNumber|Join;
+977;5;JPPrefix+^JPo|JPNumber+^JPValue+^JPTime;JPNumber|Join;
+4649;5;JPPrefix+^"前"+^"後"|JPNumber+JPTime;JPNumber+JPTime|Join;
 3581;5;JPyen|JPtaka|JPtoki|JPni;JPCon|Join|Join|JPParticleNI;
 1174;5;JPyen|JPtaka;JPCon|Join;
 1862;5;JPtaka|JPma;JPVerbOther|Join;
@@ -1003,7 +1047,7 @@
 2913;5;JPmo|JPu|JPNumber|JPComma;JPCon|Join|Join|JPComma;
 3269;5;JPmo|JPu|JPNumber|JPni;JPAdv|Join|JPCon|JPParticleNI;
 3417;5;JPmo|JPu|JPNumber|JPno;JPAttributive|Join|Join|Join;
-2702;5;JPmo|JPu|JPNumber;JPAdv+JPBeginRelation|Join|Join;
+2702;5;JPmo|JPu|JPNumber;JPNumber|Join|Join;
 2048;5;JPmo|JPu|JPkatta;JPVerb+JPVerbPastAttributive|Join|Join;
 3114;5;JPmo|JPu|JPkaru;JPVerb+JPVerbBase|Join|Join;
 1433;5;JPmo|JPu|JPka;JPVerbOther|Join|Join;
@@ -1199,7 +1243,7 @@
 3883;5;JPAdjVStem+JPHiragana|JPga|JPSuruNoun;-JPAdjVStem+JPCon|JPParticleGA|^JPSuruNoun;
 2116;5;^JPita+^JPtaka+^JPchou_kanji_1+JPAdjVStem|JPga;JPVerbOther|Join;
 2005;5;SBegin|JPto|JParu|JPCon;*|JPAttributive|Join|^JPCon;
-728;5;JPNumber|JPVerbOther|JPru;JPNumber|JPVerbOther|JPru;
+728;5;JPNumber+^JPUnit|JPVerbOther|JPru;JPNumber|JPVerbOther|JPru;
 841;5;JPNumber|JPSuffixNoun|JPSuruNoun+^JPchou_kanji_1+^JPVerbNoun+^JPVerbOther;JPNumber|Join|JPSuruNoun;
 847;5;JPVerbOther+^JPno+^"かた"|JPku;-JPSuruNoun-JPSuffixNoun-JPVerbOtherRU|JPku;
 778;5;JPAdvTime|JPSuffixTime|JPniha;JPAdvTime|Join|^JPniha;
@@ -1308,7 +1352,7 @@
 2754;5;JPParticleWO|JPAdv+JPCon|JPVerbNoun|JPComma;JPParticleWO|JPAdv|JPVerb|JPComma;
 2504;5;JPCon|JPSuruNoun|JPComma;JPCon|Join|JPComma;
 2652;5;JPTime|JPAdvTime+JPCon|JPSuruNoun;^JPTime|-JPCon|JPSuruNoun;
-2691;5;JPCon|JPSuruNoun|JPSuruNoun+^"低下"|SEnd;^JPCon|Join|JPVerb+JPSahen|SEnd;
+2691;5;JPCon|JPSuruNoun|JPSuruNoun+^"低下"|SEnd;^JPCon-JPAdv|^JPCon|JPVerb+JPSahen|SEnd;
 2707;5;JPAttributive|JPCon|JPSuruNoun|JPSuruVerb;JPAttributive|JPCon|JPVerb+JPSahen|JPVerb;
 2827;5;JPSuruNoun+JPVerbNoun|JPConj+JPPartAdvNOUN;JPVerb+Predicate+JPSahen|JPVerb+Predicate+JPSahen;
 2987;5;JPParticleWO|^JPPerson+JPCon|JPSuruNoun|JPspace;JPParticleWO|JPSuruNoun|Join|JPspace;
@@ -1339,7 +1383,11 @@
 4406;5;JPte|"以降"|JPSuruNoun;JPPartAdvNOUN|Join|*;
 4546;5;*JPTime+^JPNumber|JPSuruNoun+JPPolite|JPSuruVerb;JPCon+JPDateTime|JPVerb|Join;
 4596;5;JPCon|"卒業":"継続"|JPPunctuation;^JPCon|Join|*;
-172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPSeparateDate+^JPYear+^JPTime+JPCon|JPSuruNoun+^"開始"+^"活動"+^"殺害"+^"施行"+^"入院"+^"表明"+^"受診";JPSuruNoun|Join;
+4619;5;JPNumber|JPSuffixNum;JPCon|Join;
+4634;5;JPSeparateDate:JPYear:JPTime:JPMonth;+JPRule172a;
+4635;5;"開始":"活動":"殺害":"施行":"入院":"表明":"受診":"オープン";+JPRule172b;
+172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPRule172a+^JPRule172c+JPCon|JPSuruNoun+^JPRule172b;JPSuruNoun|Join;
+4638;5;JPRule172c|JPSuruNoun;JPCon+JPMeasurement|JPCon;
 4545;5;JPTime+^JPNumber|JPSuruNoun+^JPPolite|JPSuruVerb:JPPunctuation;JPCon+JPDateTime|JPCon|*;
 3051;5;JPNumber|JPSuruNoun+^"中止"|JPPunctuation;^JPNumber|JPCount|JPPunctuation;
 3207;5;JPNumber|"連覇"|JPSuruVerb;JPNumber|JPCount|JPVerb;
@@ -1362,7 +1410,9 @@
 177;5;JPSuruNoun|JPnakaguro|JPAdjNoun|JPSuffixSuruNoun|JPshi;JPSuruNoun|Join|Join|Join|JPSuruVerb;
 3512;5;JPSuruNoun|JPnakaguro|JPSuruNoun|JPnakaguro|JPSuruNoun;JPSuruNoun|Join|Join|Join|Join;
 178;5;JPSuruNoun|JPnakaguro|JPSuruNoun;JPSuruNoun|Join|Join;
-179;5;JPNumber|JPnakaguro|JPNumber;JPNumber|Join|Join;
+4665;5;JPUnit|"/"|JPValue|JPUnit;*|JPCon|*|*;
+4686;5;JPUnit|JPValue|"/"|JPValue;*|*|-JPnakaguro|*;
+179;5;JPNumber+^JPMeasurement+^JPUnit|JPnakaguro|JPNumber+^JPTime;JPNumber|Join|Join;
 180;5;JPSuruNoun|JPno|JPSuruNoun|JPni;JPCon|Join|Join|JPni;
 1821;5;JPCon|JPno|JPSuruNoun|JPSuruVerb|JPCon;^JPCon|JPNonRelevant|JPVerb+JPSahen|JPVerb|^JPCon;
 702;5;JPCon|JPno|JPSuruNoun|JPSuruVerb;JPCon|Join|Join|JPSuruVerb;
@@ -1523,12 +1573,15 @@
 3111;5;JPSuruVerb|JPra;JPSuruVerb|Join;
 205;5;JPNumber|JPCount|JPAdv+^JPParticlePREPO+^JPyori;JPNumber|Join|Join;
 4388;5;JPNumber|"施行";*|-JPCount+JPSuruNoun;
-206;5;JPNumber|JPCount;JPNumber|Join;
+206;5;JPNumber+^JPTime+^JPUnit+^JPFrequency|JPCount+^"%"+^"割"+^"倍"+^"回生"+^"号";+JPValue|JPNumber+JPUnit;
+4651;5;JPNumber|"%":"割":"倍"|^JPru;JPNumber|Join|*;
+4652;5;JPNumber+JPTime|JPtoki;^JPNumber+DateTime+JPDateTime|Join;
 207;5;JPPunctuation|JPCount;JPPunctuation|-JPCount;
-208;5;JPMonth|JPNumber;JPMonth+JPCon|Join;
+4653;5;JPMonth|JPNumber+JPValue|"日":"日頃":"目";JPMonth+JPCon|Join|Join;
+208;5;JPMonth|JPNumber+^JPValue;JPMonth+JPCon|Join;
 209;5;JPNumber|JPMonth;JPMonth+DateTime|Join;
 2856;5;JPMonth|JPSuffixTime;JPMonth+JPTime+DateTime|Join;
-211;5;JPNumber|JPCon+^JPkara|^JPku+^JPyori+^SEnd;^JPNumber-DateTime-JPPronInterr|JPCount|+Dummy;
+211;5;JPNumber|JPCon+^JPkara+^JPUnit|^JPku+^JPyori+^SEnd;^JPNumber-DateTime-JPPronInterr|JPCount|+Dummy;
 3488;5;JPYear|JPMonth;JPMonth+DateTime|Join;
 3521;5;JPMonth|"~"|JPMonth;JPMonth|Join|Join;
 844;5;JPMonth|JPno;+JPCon|^JPno;
@@ -1602,7 +1655,7 @@
 1628;5;JPNumber|JPAdjNoun+JPAdvNR;JPNumber|-JPAdjNoun;
 239;5;JPAdjNoun+^"異常"+^"不良"|JPSuruNoun+^"軽快"+^"持続"|JPSuruVerb;JPSuruNoun|Join|JPSuruVerb;
 951;5;JPAdjNoun+JPAdv|JPNumber;JPAdjNoun|*;
-952;5;JPAttributive+JPAdv|JPNumber;JPAttributive|JPNumber;
+952;5;JPAttributive+JPAdv|JPNumber;JPAttributive|^JPNumber;
 4587;5;JPAdjNoun|"に"|JPAttributive+JPVerbBase;*|*|-JPAttributive;
 4586;5;JPAttributive+JPVerbBase|JPPartAdvNOUN:JPConj:"か":"の":JPPunctuation:SEnd:JPNonRelevant;-JPAttributive|*;
 240;5;JPAdjNoun|JPCon;-JPAdv|^JPCon-JPSuruNoun;
@@ -2959,7 +3012,7 @@
 1022;5;JPCon|JPno|JPsei;JPCon|Join|Join;
 3221;5;JPVerb|JPsei;^JPVerb|JPPartAdvNOUN;
 568;5;BracketClose|JPkoto|JPha;BracketClose|JPNonRelevant|JPha;
-1096;5;JPNumber|JPhodo;JPNumber|JPAdjNR;
+1096;5;JPNumber|JPhodo;^JPNumber-JPRule3437|JPAdjNR;
 1679;5;JPCon|JPhodo|JPComma;JPCon|JPAdv|JPComma;
 569;5;JPhodo|JPga:JPParticleGA;JPCon|JPParticleGA;
 571;5;JPhodo|JPni|JPNaruVerb;JPAttributiveNR|JPParticleNI|JPNaruVerb;
@@ -3306,7 +3359,7 @@
 3116;5;SBegin|JPSuruNoun|JPspace;*|JPCon|JPspace;
 1508;5;JPmasu|JPPunctuation;JPAuxVerb|JPPunctuation;
 1753;5;JPkara|JPda|JPPunctuation;JPEndRelation|^JPda|JPPunctuation;
-649;5;JPNumber|JPCount;^JPCon|^JPCon;
+649;5;JPNumber|JPCount;^JPCon-JPDateNum|^JPCon-JPSuffixNoun-JPSuruNoun-JPVerbOther;
 3582;5;JPCon|JPtoki|JPni;^JPCon|JPSuffixNoun|JPParticleNI;
 848;5;JPTime;+JPCon-JPConjVerb;
 884;5;JPVerb|JPtoki|JPno;JPVerb|JPNINounOther|JPParticleNO;
@@ -3355,9 +3408,10 @@
 2397;5;JPCon|JPModifyPOST+JPPartAdvNOUN;^JPCon|JPPartAdvNOUN;
 4529;5;JPTime|"以上":"未満":"以下"|JPCon:JPSuruNoun;JPEndConcept-DateTime|Join|*;
 4530;5;JPTime|"以上":"未満":"以下";JPTime-DateTime|Join;
-4534;5;JPNumber|"未満";JPNumber|Join;
-813;5;JPCon|JPModifyPOST+^JPshika;JPCon-DateTime|Join;
-1172;5;JPNumber|JPModifyPOST;JPCon+JPNumber|Join;
+4534;5;JPNumber|"未満";^JPNumber|JPNumber;
+813;5;JPCon|JPModifyPOST+^JPshika;^JPCon-DateTime|Join;
+1172;5;JPNumber+JPUnit|JPModifyPOST;JPCon+JPNumber+JPUnit|JPCon+JPNumber;
+4655;5;JPNumber+^JPUnit|JPModifyPOST;^JPCon+JPNumber|Join;
 918;5;JPkoto|JPModifyPOST+^JPshika+^JPnado;JPkoto|JPAdj;
 857;5;JPto|JPModifyPOST;JPParticleTO|JPAdv;
 2721;5;JPAdjVBase+JPVerbNoun|JPPartAdvNOUN;JPAdj|JPPartAdvNOUN;
@@ -3446,7 +3500,7 @@
 3873;5;JPSuffixNoun+JPburi;JPSuffixNoun+JPCon+JPHiragana;
 3272;5;JPConjVerb|JPVerbNoun|JPComma;^JPConjVerb|JPVerb|JPComma;
 2840;5;JPSuffixSuruNoun;JPCon;
-4405;5;JPCon|"分の"|JPCon;JPCon|Join|Join;
+4405;5;JPCon|"分"|"の"|JPCon;JPCon+JPDateTime|Join|JPCon|Join;
 4580;5;^JPNumber|JPCount+JPDate;*|-JPDate;
 823;5;JPCount+^JPten;+JPCon;
 3580;5;JPNumber+JPPronInterr|^JPCount+^SEnd;-JPNumber|+Dummy;
@@ -3543,7 +3597,7 @@
 3363;5;JPAdv+JPBeginRelation|JPVerbNoun+^JPAdjVBase;JPBeginRelation|JPVerb;
 2515;5;JPAdv+JPBeginRelation;JPBeginRelation;
 2556;5;JPAdv+JPEndRelation;JPEndRelation;
-3325;5;JPha|JPVerbPastAttributive|JPCon;JPParticleHA|JPAttributive|JPCon;
+3325;5;JPha|JPVerbPastAttributive|JPCon;JPParticleHA|JPAttributive|^JPCon-JPAdv-JPPartAdvNOUN;
 3853;5;JPAdv+JPCon|JPdake;-JPAdv|JPPartAdvNOUN;
 4077;5;JPCon|JPAdjVStem+JPAdv|JPCon;^JPCon|-JPAdv|^JPCon;
 4195;5;JPAdvDegree+^"より"|JPSuruNoun|SEnd;JPCon|Join|SEnd;
@@ -3584,7 +3638,9 @@
 3097;5;JPVerb+^JPdekinai|JPAuxVerb;-JPVerbBase|Join;
 714;5;JPCon|JPnakaguro|JPCon|JPnakaguro|JPCon;JPCon|Join|Join|Join|Join;
 3872;5;JPCon+JPHiragana|JPnakaguro|JPCon+JPHiragana;JPCon+JPHiragana|Join|Join;
-675;5;JPCon|JPnakaguro|JPCon;JPCon|Join|Join;
+4660;5;JPUnit|"/"|JPCon+^JPNumber+^JPCount;*|-JPnakaguro|*;
+4661;5;JPUnit|"/"|JPCount;JPUnit|Join|Join;
+675;5;JPCon+^JPMeasurement|JPnakaguro|JPCon+^JPTime+^JPValue;JPCon|Join|Join;
 3742;5;JPKatakana|JPnakaguro|JPVerbNoun;JPCon|Join|Join;
 4582;5;JPDate|JPnakaguro|JPDate;JPDate|Join|Join;
 1062;5;JPno|BracketOpen;JPParticleNO|BracketOpen;
@@ -3667,7 +3723,7 @@
 4515;5;JPYear:JPTime|"の"|JPTime:JPMonth:JPDate;*|+Join|+Join;
 4513;5;JPYear:JPTime|"の"|JPCon;^JPYear-JPTime-DateTime+JPDateTime|+JPCon-JPParticleNO|^JPCon;
 681;5;JPCon|JPno|JPCon|JPno|JPCon;*|JPCon|*|JPCon|*;
-1069;5;JPCon|JPno|JPCon|JPParticleYA;JPCon|JPRelation|JPCon|JPParticleYA;
+1069;5;JPCon|JPno|JPCon|JPParticleYA;^JPCon|JPRelation|JPCon|JPParticleYA;
 2613;5;JPComma|JPVerbBase+JPNegation|JPCon;JPComma|JPAttributive+JPNegation|JPCon;
 3924;5;BracketClose|JPVerb|JPCon|JPno|JPCon;^BracketClose|JPVerb|JPCon|Join|Join;
 1131;5;JPVerbBase+^JPVerbOtherTSU+^JPVerbOtherRU+^JPKuruVerb|JPCon+^JPNumber+^JPSeparateDate|JPno|JPCon+^"方";^JPVerb|JPCon|JPRelation|JPCon;
@@ -3676,7 +3732,8 @@
 1998;5;JPParticleYA|JPCon|JPno|JPCon;^JPParticleYA|JPCon|JPRelation|JPCon;
 2020;5;JPConj+^JPdemo|JPCon+^JPyen|JPno|JPCon|^"あり"+^SEnd;^JPConj|JPCon|JPRelation|JPCon|+Dummy;
 2764;5;JPCon+JPNegation|JPno|JPCon;JPCon+JPNegation|Join|Join;
-682;5;^JPSeparateDate|JPCon+^JPHiragana|JPno|JPCon+^JPEndConcept;*|^JPCon-DateTime-JPmono-JPSeparateDate-JPDate-JPYear|JPCon|+Join;
+682;5;^JPSeparateDate|JPCon+^JPHiragana|JPno|JPCon+^JPEndConcept+^JPValue;*|^JPCon-DateTime-JPmono-JPSeparateDate-JPDate-JPYear|JPCon|^JPCon-JPSuffixAdv-JPCount-JPTime-JPtoki-JPSuruNoun;
+4648;5;^JPSeparateDate|JPCon+^JPHiragana|JPno|JPValue;*|^JPCon-DateTime-JPmono-JPSeparateDate-JPDate-JPYear|^JPCon|^JPCon+JPValue;
 797;5;JPCon|JPParticleNO|JPCon|JPParticleNO|JPCon;JPCon|Join|Join|Join|Join;
 2837;5;JPni|JPVerb|JPCon|JPParticleNO|JPCon;^JPni|^JPVerb|JPEndConcept+OtherEntity|^JPParticleNO|^JPCon;
 4540;5;"が"|JPAttributive|JPRule289|JPCon;JPSuffixNoun|Join|JPCon|Join;
@@ -3695,7 +3752,7 @@
 837;5;^JPAdjVBase+^JPha+^JPParticleWO+^JPspace+^SBegin+^"の"|JPSuruNoun+^"メイク"+^"増量"+^"減量"+^"手術"+^"縫合"+^"再燃"+^"残存"|JPPunctuation;*|JPVerb+JPSahen|JPPunctuation;
 1904;5;JPSuruNoun+^JPKatakana+^JPPolite|JPspace;JPVerb+JPSahen|JPNonRelevant;
 1920;5;JPAttributive|JPSuruNoun|SEnd;^JPAttributive|JPCon|SEnd;
-2537;5;JPCon|JPSuruNoun+^"施行"|SEnd;JPCon|Join|SEnd;
+2537;5;JPCon|JPSuruNoun+^"施行"|SEnd;^JPCon|JPCon|SEnd;
 2677;5;JPto|JPSuruNoun|SEnd;^JPto|JPCon|SEnd;
 2682;5;JPniha|JPSuruNoun|SEnd;^JPniha|JPCon|SEnd;
 3069;5;JPParticlePREPO|JPVerbPastAttributive|JPSuruNoun|SEnd;^JPParticlePREPO|JPVerb|JPCon|SEnd;
@@ -4035,7 +4092,7 @@
 4242;5;JPCon|"乗り越え":"引き上げ"|JPCon;^JPCon|JPVerb|^JPCon;
 4489;5;JPAdvTime+JPCon+JPSeparateDate|^JPCon;-JPAdvTime-JPCon|*;
 4491;5;JPAdvTime+JPCon+JPSeparateDate|JPCon:JPSuruNoun|"の";-JPAdvTime-JPSeparateDate|*|*;
-4498;5;JPNumber:JPKatakana+JPCon|"の"|JPCon|"が":"で":"を";*|Join|Join|*;
+4498;5;JPNumber:JPKatakana+JPCon+^JPUnit+^JPRule172a|"の"|JPCon|"が":"で":"を";*|Join|Join|*;
 
 /* ---------- DISAMBIGUATION OF TIME-RELATED WORDS ----------
 
@@ -4064,18 +4121,22 @@
 
 3399;10;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
 3389;10;JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join;
-3398;10;JPAlphabet|JPSingleSpace|JPCon;JPCon|Join|Join;
+3398;10;JPAlphabet|JPSingleSpace|JPCon;JPCon|Join|^JPCon;
 3528;10;JPAlphabet|JPspace|JPAlphabet;JPCon|Join|Join;
 3945;10;"-"|JPAlphabet;JPNonRelevant|^JPAlphabet;
 3388;10;JPAlphabet;JPCon;
 3392;10;^"に"+^SBegin|JPCon|"-"|JPCon;*|JPCon|Join|Join;
-3415;10;JPCon|"~"|JPCon;JPCon|JPRelation|JPCon;
+4658;10;JPCon|"~"|JPValue;*|JPCon|*;
+3415;10;JPCon|"~"|JPCon+^JPValue;JPCon|JPRelation|JPCon;
 3913;10;JPCon|"-"|JPCon;JPCon|Join|Join;
 3640;10;JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon;JPCon|Join|Join|Join|Join|Join|Join|Join|Join|Join|Join;
 3639;10;JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon;JPCon|Join|Join|Join|Join|Join|Join|Join|Join;
-3523;10;JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon;JPCon|Join|Join|Join|Join|Join|Join;
+3523;10;JPCon|JPspace|JPCon|JPspace|JPCon|JPspace|JPCon;JPCon|Join|Join|Join|Join|Join|^JPCon;
 3525;10;JPCon|JPspace|JPCon|JPspace|JPCon+^JPTime;JPCon|Join|Join|Join|Join;
-3527;10;JPCon|"×"|JPCon;JPCon|Join|Join;
+4662;10;JPCon|"×"|JPCon|"×"|JPValue;JPCon+JPValue|Join|Join|Join|Join;
+3527;10;JPCon|"×"|JPCon+^JPValue;JPCon|Join|Join;
+4659;10;JPNumber+^"数"|"×"|JPValue;JPValue|Join|Join;
+4657;10;JPCon|"×"|JPValue;*|JPCon|*;
 2767;10;JPAttributive|JPCon+DateTime;JPCon+DateTime|Join;
 4538;10;SBegin|JPAdvTime|JPRule289|DateTime;*|^JPAdvTime|JPVerb|*;
 
@@ -4103,13 +4164,13 @@
 3835;10;JPnakaguro|JPHiragana;^JPnakaguro|JPCon;
 4348;10;JPCon+JPHiragana|"の"|JPCon+JPHiragana;JPCon+JPHiragana|Join|Join;
 3672;10;JPHiragana;-JPHiragana;
-3677;10;JPCon|JPKatakana;JPCon|Join;
+3677;10;JPCon+^DateTime|JPKatakana;^JPCon|JPCon;
 3687;10;JPVerbOther+^"な"+^"は"+^"よ"+^JPtomo|JPKatakana;JPCon|Join;
 3679;10;JPPrefix|JPKatakana|JPCon;JPCon|Join|Join;
 3678;10;JPKatakana|JPCon;JPCon|*;
 3676;10;JPKatakana;-JPKatakana;
 3686;10;JPVerbOther|JPnakaguro|JPCon|JPnakaguro|JPVerbOther;JPCon|Join|Join|Join|Join;
-3680;10;JPCon|JPnakaguro|JPCon;JPCon|Join|Join;
+3680;10;JPCon|JPnakaguro|JPCon;JPCon|JPCon|^JPCon;
 3683;10;JPCon|JPnakaguro|JPVerbBase|JPCon;JPCon|Join|Join|Join;
 3681;10;JPCon|JPnakaguro+^"/"|^BracketOpen+^JPAdv+^JPFurigana+^JPEndRelation+^JPNonRelevant+^JPVerb+^SEnd;JPCon|Join|+Dummy;
 3808;10;JPAdjNoun|JPnakaguro|JPCon;JPCon|Join|Join;
@@ -4156,7 +4217,7 @@
 3486;13;SBegin|JPCon|JPra|JPha:JPParticleHA;*|+Topic|JPra|JPParticleHA;
 2944;13;SBegin|JPNonRelevant|JPComma|JPCon|JPParticleHA|JPComma;*|JPNonRelevant|JPComma|+Topic|JPParticleHA|JPComma;
 2945;13;SBegin|JPNonRelevant|JPComma|JPCon|JPha|JPComma;*|JPNonRelevant|JPComma|+Topic|JPParticleHA|JPComma;
-2959;13;SBegin|BracketOpen|JPCon|JPCon|JPha;*|BracketOpen|+Topic|Join|JPParticleHA;
+2959;13;SBegin|BracketOpen|JPCon|JPCon|JPha;*|BracketOpen|+Topic|+Topic|JPParticleHA;
 2753;13;^Topic+JPCon|JPha;+Subject|^JPParticleHA;
 2794;13;^OtherEntity+^Topic+JPCon|JPParticleHA;+Subject|JPParticleHA;
 2786;13;JPCon|BracketOpen|JPCon|BracketClose|JPha;+Subject|BracketOpen|^JPCon|BracketClose|JPParticleHA;
@@ -4229,7 +4290,6 @@
 /* ---------- PHASE 17 ----------
 /*  ---------- Simple Negation Expansion ----------
 
-
 4626;17;typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|*|+JPNegStop;
 4627;17;typeConcept|JPParticleYA|typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|-JPNegBegin|*|*|+JPNegStop;
 
@@ -4238,6 +4298,8 @@
 
 4612;19;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
 4613;19;typeConcept|"("|*JPNumber|")";*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
+4663;19;JPValue|JPUnit|"/"|"税込":"税込み"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*|*;
+4687;19;JPUnit|JPValue|"/"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*;
 
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS

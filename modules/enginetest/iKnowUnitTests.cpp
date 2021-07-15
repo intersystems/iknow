@@ -61,6 +61,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue104(pError);
 		pError = "Normalizer test";
 		test_collection.Benjamin1(pError);
+		pError = "Multi Measurement test";
+		test_collection.MultiMeasurement(pError);
 
 	}
 	catch (std::exception& e) {
@@ -71,6 +73,28 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+void iKnowUnitTests::MultiMeasurement(const char* pMessage) {
+	iKnowEngine engine;
+	String text_source = IkStringEncoding::UTF8ToBase(u8"最多が１億円以上５億円未満の２１９件だった。");
+	engine.index(text_source, "ja", true);
+	for (AttributeMarkerIterator it_marker = engine.m_index.sentences.begin()->sent_attributes.begin(); it_marker != engine.m_index.sentences.begin()->sent_attributes.end(); ++it_marker) { // iterate over sentence attributes
+		const Sent_Attribute& attribute = *it_marker;
+
+		if (attribute.type_ == Measurement) {
+			String marker = IkStringEncoding::UTF8ToBase(attribute.marker_);
+
+			if (marker != IkStringEncoding::UTF8ToBase(u8"１億円５億円２１９件"))
+				throw std::runtime_error("MultiMeasurement marker not correct !" + string(pMessage));
+			if (attribute.parameters_[0].first != u8"1億" || attribute.parameters_[0].second != u8"円")
+				throw std::runtime_error("MultiMeasurement attribute 1 not correct !" + string(pMessage));
+			if (attribute.parameters_[1].first != u8"5億" || attribute.parameters_[1].second != u8"円")
+				throw std::runtime_error("MultiMeasurement attribute 2 not correct !" + string(pMessage));
+			if (attribute.parameters_[2].first != u8"219" || attribute.parameters_[2].second != u8"件")
+				throw std::runtime_error("MultiMeasurement attribute 3 not correct !" + string(pMessage));
+		}
 	}
 }
 
@@ -502,7 +526,7 @@ void iKnowUnitTests::Issue41(const char* pMessage) // https://github.com/intersy
 }
 
 /* Issue#37
-The Certainty attribute in the English language model has a marker, spanand level.When using the m_index property in the Python interface, the marker can be found through['sent_attributes'], the span through['path_attributes'].The level, currently either 0 (uncertain) or 9 (certain), should be in['sent_attributes'] too, but it is missing.
+The Certainty attribute in the English language model has a marker, span and level. When using the m_index property in the Python interface, the marker can be found through['sent_attributes'], the span through['path_attributes'].The level, currently either 0 (uncertain) or 9 (certain), should be in['sent_attributes'] too, but it is missing.
 Example :
 	Input = "This might be a problem."
 	['sent_attributes'] = [{'type': 'Certainty', 'offset_start' : 7, 'offset_stop' : 12, 'marker' : 'might', 'value' : '', 'unit' : '', 'value2' : '', 'unit2' : '', 'entity_ref' : 1}]

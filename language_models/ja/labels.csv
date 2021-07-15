@@ -20,6 +20,7 @@
 ;5,17,20,$;JPNegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
 ;$;JPDateTime;typeAttribute;time indication;0;;Entity(DateTime)
 ;$;JPFreq;typeAttribute;frequency indication;0;;Entity(Frequency)
+;$;JPDuration;typeAttribute;;0;;Entity(Duration)
 
 /* Attributes for Entity Vectors
 ;5,13,$;PrimaryRelation;typeAttribute;primary predicate of the sentence;0;;EVSlot(0,0,Topic,L,B)|EVSlot(0,1,Subject,L,B)|EVSlot(0,2,Object,L,B)
@@ -39,6 +40,9 @@
 ;5;JPJoinDate;typeAttribute;exceptions for Rule #4495;0;;
 ;3;JPRule3437;typeAttribute;exceptions for Rule #3437;0;;
 ;5,10;JPRule289;typeAttribute;exceptions for Rule #289;0;;
+;5;JPRule172a;typeAttribute;exceptions for Rule #172;0;;
+;5;JPRule172b;typeAttribute;exceptions for Rule #172;0;;
+;5;JPRule172c;typeAttribute;exceptions for Rule #172;0;;
 ;5,$;JPPolite;typeAttribute;words in polite form;0;;
 ;5,$;JPSahen;typeAttribute;SuruNoun to be kept as label in verbs;0;;
 
@@ -81,13 +85,15 @@
 ;5,10,$;JPSuffixPerson;typeConcept;Label for word that follows a person's name or something else;0;;
 ;5,$;JPSeparateDate;typeBeginEndConcept;label for date to be a concept by itself;0;;
 ;3,5,$;JPYearNum;typeConcept;Number that indicates Year;0;;
-;5,$;JPMonthNum;typeConcept;Number that indicates Month;0;;
-;5,$;JPDateNum;typeConcept;Number that indicates Date;0;;
+;3,5,$;JPMonthNum;typeConcept;Number that indicates Month;0;;
+;3,5,$;JPDateNum;typeConcept;Number that indicates Date;0;;
 ;5,$;JPTimeNum;typeConcept;Number that indicates Time;0;;
 ;5,$;JPYobi;typeOther;Day of the week;0;;
 ;5,$;JPSeason;typeAttribute;season;0;;
 ;3;JPOne;typeAttribute;"1 year", "1 day";0;;
 ;2,3,5,10,13,19,$;JPNumber;typeConcept;label for numbers;0;;
+;3,5,$;JPKanjiNumber;typeAttribute;label for Kanji Numbers;0;;
+;5,$;JPSuffixNum;typeAttribute;Counting word for non-Measurement;0;;
 ;3,$;JPListNumber;typeOther;Label for ①②③, etc.;0;;
 ;3,5,10,$;JPTime;typeConcept;label for time-related words;0;;
 ;5,10,13,$;JPDate;typeConcept;label for date-related word 日;0;;
@@ -100,7 +106,7 @@
 ;5,10,$;JPAdjNoun;typeConcept;label for adjectival nouns;0;;
 ;5,10,$;JPAdjNounSuffix;typeConcept;label for the character 的 which can attach to a noun to create an adjectival noun;0;;
 ;5,10,$;JPAdjNounTARI;typeConcept;label for Adjectival Noun TARI;0;;
-;5,10,13,$;JPAttributive;typeConcept;label for attributive;0;;
+;3,5,10,13,$;JPAttributive;typeConcept;label for attributive;0;;
 ;5,10,$;JPAttributiveNeg;typeConcept;label for negating attributive;0;;
 ;5,10,$;JPAdjVStem;typeConcept;label for adjectival verb stem ;0;;
 ;5,7,10,13,17,$;JPAdjVBase;typeConcept;label for Adjectival Verb Predicative/Attributive Form;0;;
@@ -141,7 +147,7 @@
 ;5,$;JPVerbSugi;typeConcept;label for Verbs "すぎ";0;;
 
 /* Single-Character Hiragana (prior to disambiguation)
-;3,5,10,$;JPspace;typeOther;label for double-width space character;0;;
+;3,5,10,17,$;JPspace;typeOther;label for double-width space character;0;;
 ;5,10,13,$;JPi;typeRelation;label for the character い which can be an Adjectival Verb ending or something else;0;;
 ;5,10,13,$;JPu;typeRelation;label for the character う which can be part of a Verb ending or something else;0;;
 ;5,10,$;JPe;typeOther;label for the character え, which can be a Verb Ending or something else;0;;
@@ -294,7 +300,7 @@
 ;5,10,$;JPfure;typeRelation;Label for the phrase ふれ, which can be a VerbOther or something else;0;;
 ;5,10,$;JPbeki;typeRelation;label for the phrase べき which can be an Auxilary Verb or something else;0;;
 ;5,10,$;JPhou;typeRelation;label for the phrase ほう;0;;
-;5,10,$;JPhodo;typeRelation;label for the phrase ほど;0;;
+;3,5,10,$;JPhodo;typeRelation;label for the phrase ほど, added Phase 3 - #71-mno;0;;
 ;5,10,$;JPmade;typeRelation;Label for the phrase まで;0;;
 ;5,10,$;JPmasu;typeRelation;label for the phrase ます;0;;
 ;5,10,$;JPmazu;typeRelation;Lable for the phrase まず;0;;
@@ -312,7 +318,7 @@
 
 /* Kanji (prior to disambguation)
 ;5,10,$;JPkata;typeConcept;label for 方;0;;
-;5,10,$;JPwari;typeOther;label for 割;0;;
+;3,5,10,$;JPwari;typeOther;label for 割;0;;
 ;5,10,$;JPkagiri;typeRelation;label for phrase 限り;0;;
 ;5,10,$;JPue;typeRelation;label for 上;0;;
 ;5,10,$;JPten;typeOther;label for 点;0;;
@@ -340,7 +346,7 @@
 ;5,10,$;JPtsuki_kanji_1;typeConcept;Label for 付き;0;;
 ;5,10,$;JPmi_kanji_1;typeRelation;Label for 見;0;;
 ;5,10,$;JPgyou_kanji_1;typeRelation;Label for 行;0;;
-;5,10,$;JPfun_kanji_1;typeConcept;Label for 分;0;;
+;3,5,10,$;JPfun_kanji_1;typeConcept;Label for 分;0;;
 ;5,10,$;JPsaki_kanji_1;typeConcept;Label for 先;0;;
 ;5,10,$;JPmae_kanji_1;typeOther;Label for 前;0;;
 ;5,$;JPshita_kanji_1;typeOther;Label for 下;0;;
@@ -379,7 +385,7 @@
 ;5,10,13,$;JPComma;typeOther;label for symbol 、;0;;
 ;3,10,$;JPPeriod;typeOther;label for symbol ".";0;;
 ;3,10,$;JPAlphabet;typeConcept;label for alphabets;0;;
-;3,5,10,$;JPSingleSpace;typeOther;label for single space;0;;
+;3,5,10,17,$;JPSingleSpace;typeOther;label for single space;0;;
 ;3,10,$;JPApostrophe;typeOther;Label for symbol "'";0;;
 ;3,5,10,13,$;BracketOpen;typeOther;label for opening bracket;0;;
 ;3,5,10,13,$;BracketClose;typeOther;label for closing bracket;0;;
@@ -387,3 +393,8 @@
 ;3,5,10,13,$;JPPlusMinus;typeConcept;"+" and "-";0;;
 
 
+;1,5,$;JPMeasurement;typeAttribute;general attribute fo all measurements;0;;Entity(Measurement)
+;1,5,$;JPMeasurementBegin;typeAttribute;enables path expansion;0;;Path(Begin,Measurement)
+;1,5,$;JPMeasurementStop;typeAttribute;enables path expansion;0;;Path(End,Measurement)
+;1,3,5,10,19,$;JPValue;typeAttribute;property for Measurement - value;0;;Entity(Measurement,Value)
+;1,5,19,$;JPUnit;typeAttribute;property for Measurement - unit;0;;Entity(Measurement,Unit)
