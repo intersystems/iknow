@@ -13,6 +13,10 @@ class Labels:
 	UNIT = "UDUnit"
 	NUMBER = "UDNumber"
 	TIME = "UDTime"
+	CERTAINTY = "UDCertainty"
+	GENERIC1 = "UDGeneric1"
+	GENERIC2 = "UDGeneric2"
+	GENERIC3 = "UDGeneric3"
 
 	# sentence ending (pseudo label)
 	SENTENCE_END = "UDSentenceEnd"

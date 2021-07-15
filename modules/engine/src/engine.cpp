@@ -501,6 +501,15 @@ void UserDictionary::addPositiveSentimentTerm(const std::string& literal) {
 void UserDictionary::addNegativeSentimentTerm(const std::string& literal) {
 	addLabel(literal, "UDNegSentiment");
 }
+void UserDictionary::addGeneric1(const std::string& literal) { // tag literal as generic1
+	addLabel(literal, "UDGeneric1");
+}
+void UserDictionary::addGeneric2(const std::string& literal) { // tag literal as generic2
+	addLabel(literal, "UDGeneric2");
+}
+void UserDictionary::addGeneric3(const std::string& literal) { // tag literal as generic3
+	addLabel(literal, "UDGeneric3");
+}
 
 // Load a User Dictionary into the iKnow engine
 void iKnowEngine::loadUserDictionary(UserDictionary& udct)

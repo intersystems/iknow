@@ -105,7 +105,7 @@ cdef class UserDictionary(object):
 	def add_certainty_level(self, str literal: typing.Text, int level) -> None:
 		"""Specify a token certainty level"""
 		if self.user_dictionary.addCertaintyLevel(literal, level) == 0:
-			self._entries.append(Entry(literal, "UDCertainty"))
+			self._entries.append(Entry(literal, Labels.CERTAINTY))
 		else:
 			raise ValueError(f"Certainty value {level!r} out of range")
 
@@ -161,6 +161,21 @@ cdef class UserDictionary(object):
 		"""Add a time term."""
 		self.user_dictionary.addTimeTerm(literal)
 		self._entries.append(Entry(literal, Labels.TIME))
+
+	def add_generic1(self, str literal: typing.Text) -> None:
+		"""Add generic1 label."""
+		self.user_dictionary.addGeneric1(literal)
+		self._entries.append(Entry(literal, Labels.GENERIC1))
+
+	def add_generic2(self, str literal: typing.Text) -> None:
+		"""Add generic2 label."""
+		self.user_dictionary.addGeneric2(literal)
+		self._entries.append(Entry(literal, Labels.GENERIC2))
+
+	def add_generic3(self, str literal: typing.Text) -> None:
+		"""Add generic3 label."""
+		self.user_dictionary.addGeneric3(literal)
+		self._entries.append(Entry(literal, Labels.GENERIC3))
 
 
 cdef class iKnowEngine:

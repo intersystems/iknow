@@ -101,6 +101,10 @@ cdef extern from "../../engine/src/engine.h" nogil:
 
 		int addCertaintyLevel(const string& literal, int level) except +
 
+		void addGeneric1(const string& literal) except +
+		void addGeneric2(const string& literal) except +
+		void addGeneric3(const string& literal) except +
+
 
 cdef extern from "../../engine/src/engine.h" nogil:
 	cdef cppclass CPPiKnowEngine "iKnowEngine":

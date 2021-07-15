@@ -127,7 +127,11 @@ udct_entries = [
     { 'literal': "awfull", 'label':iknowpy.Labels.NEG_SENTIMENT },
     { 'literal': "Hg", 'label':iknowpy.Labels.UNIT },
     { 'literal': "magic number", 'label':iknowpy.Labels.NUMBER },
-    { 'literal': "future", 'label':iknowpy.Labels.TIME }
+    { 'literal': "future", 'label':iknowpy.Labels.TIME },
+    { 'literal': "certain", 'label':iknowpy.Labels.CERTAINTY },
+    { 'literal': "gen1", 'label':iknowpy.Labels.GENERIC1 },
+    { 'literal': "gen2", 'label':iknowpy.Labels.GENERIC2 },
+    { 'literal': "gen3", 'label':iknowpy.Labels.GENERIC3 }
     ]
 
 #
@@ -135,7 +139,7 @@ udct_entries = [
 #
 user_dictionary.clear()
 user_dictionary.add_all(udct_entries)
-if len(user_dictionary.entries) != 11:
+if len(user_dictionary.entries) != 15:
     print("ERROR: UD not fully loaded!")
 
 ret = engine.load_user_dictionary(user_dictionary)
@@ -149,5 +153,18 @@ engine.load_user_dictionary(iknowpy.UserDictionary(udct_entries))
 engine.index(test_sentence, "en", True) # generate Traces
 count_matches(engine.m_traces, 'UserDictionaryMatch', 11, debug)
 
+#
+# test the genericX labels
+#
+user_dictionary.clear()
+user_dictionary.add_generic1("gen1")
+user_dictionary.add_generic2("gen2")
+user_dictionary.add_generic3("gen3")
+engine.load_user_dictionary(user_dictionary)
+engine.index("This gen1 followed by gen2 could be gen3.", "en", True)
+for trace in engine.m_traces:
+    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+    if (key == 'UserDictionaryMatch'):
+        print(value)
 
 print("\nDone")

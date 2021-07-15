@@ -27,6 +27,7 @@ namespace testing {
 		void Issue104(const char*); // Issue#104 : https://github.com/intersystems/iknow/issues/104
 		void Issue86(const char*); // UDCertainty test with certainty level
 		void Benjamin1(const char*); // Normalizer function test
+		void Issue117(const char*); // Issue117 : https://github.com/intersystems/iknow/issues/117
 		void MultiMeasurement(const char*); // More than 2 value/unit pairs
 
 	};

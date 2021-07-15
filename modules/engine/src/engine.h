@@ -225,6 +225,10 @@ public:
 	void addPositiveSentimentTerm(const std::string& literal); // tag literal as a positive sentiment
 	void addNegativeSentimentTerm(const std::string& literal); // tag literal as a negative sentiment
 
+	void addGeneric1(const std::string& literal); // tag literal as generic1
+	void addGeneric2(const std::string& literal); // tag literal as generic2
+	void addGeneric3(const std::string& literal); // tag literal as generic3
+
 	int addCertaintyLevel(const std::string& literal, int level = 0); // add a certainty level
 
 private:

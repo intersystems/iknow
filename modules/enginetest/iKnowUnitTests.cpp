@@ -61,6 +61,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue104(pError);
 		pError = "Normalizer test";
 		test_collection.Benjamin1(pError);
+		pError = "GenericX label test : https://github.com/intersystems/iknow/issues/117";
+		test_collection.Issue117(pError);
 		pError = "Multi Measurement test";
 		test_collection.MultiMeasurement(pError);
 
@@ -74,6 +76,40 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+
+void iKnowUnitTests::Issue117(const char* pMessage) {
+	String text_source(IkStringEncoding::UTF8ToBase(u8"This gen1 followed by gen2 could be gen3."));
+
+	iKnowEngine engine;
+	UserDictionary user_dictionary;
+
+	user_dictionary.addGeneric1("gen1");
+	user_dictionary.addGeneric2("gen2");
+	user_dictionary.addGeneric3("gen3");
+
+	engine.loadUserDictionary(user_dictionary);
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	// Check for GenericX UD labels
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("gen1") != string::npos) {
+				if (trace_userdct.find("UDGeneric1") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("gen2") != string::npos) {
+				if (trace_userdct.find("UDGeneric2") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("gen3") != string::npos) {
+				if (trace_userdct.find("UDGeneric3") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+	engine.unloadUserDictionary();
 }
 
 void iKnowUnitTests::MultiMeasurement(const char* pMessage) {
