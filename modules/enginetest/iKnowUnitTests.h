@@ -29,6 +29,6 @@ namespace testing {
 		void Benjamin1(const char*); // Normalizer function test
 		void Issue117(const char*); // Issue117 : https://github.com/intersystems/iknow/issues/117
 		void MultiMeasurement(const char*); // More than 2 value/unit pairs
-
+		void ALI(const char*); // ALI first test
 	};
 }

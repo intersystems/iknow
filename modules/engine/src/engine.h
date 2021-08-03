@@ -278,5 +278,6 @@ public:
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
-
+	std::vector<std::string> split_row(std::string row_text, char split);
+	std::string merge_row(std::vector<std::string>& row_vector, char split);
 };

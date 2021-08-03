@@ -3,6 +3,7 @@
 
 #include <numeric>
 #include <mutex>
+#include <memory>
 
 #include "Process.h"
 #include "SharedMemoryKnowledgebase.h"
@@ -372,13 +373,43 @@ iKnowEngine::~iKnowEngine() // Destructor
 {
 }
 
+//
+// Utility functions...
+//
+vector<string> iKnowEngine::split_row(string row_text, char split)
+{
+	vector<std::string> split_data;
+	istringstream f(row_text);
+	string s;
+	while (getline(f, s, split)) {
+		split_data.push_back(s);
+	}
+	return split_data;
+}
+string iKnowEngine::merge_row(vector<string>& row_vector, char split)
+{
+	string merge;
+	static const char split_string[] = { split, '\0' };
+	static const string Split(split_string);
+	for_each(row_vector.begin(), row_vector.end(), [&merge](string& piece) mutable { merge += (piece + Split);  });
+	return merge;
+}
+
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
-	if (GetLanguagesSet().count(utf8language) == 0) // language not supported
-		throw ExceptionFrom<iKnowEngine>("Language not supported");
-
+	vector<string> index_languages = split_row(utf8language, ',');
+	map<string, std::auto_ptr<CompiledKnowledgebase>> language_kb_map;
+	for_each(index_languages.begin(), index_languages.end(), [&language_kb_map](string& lang) {
+		if (GetLanguagesSet().count(lang) == 0) // language not supported
+			throw ExceptionFrom<iKnowEngine>("Language not supported");
+		iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(lang);
+		if (!kb_raw_data) { // no kb raw data in language module
+			throw ExceptionFrom<iKnowEngine>("Language:\"" + string(lang) + "\" module has no embedded model data : old stye KB used !");
+		}
+		language_kb_map[lang] = std::auto_ptr<CompiledKnowledgebase>(new CompiledKnowledgebase(kb_raw_data, lang));
+	});
 	std::unique_lock<std::mutex> lck(mtx, std::defer_lock);
 
 	m_index.sentences.clear();
@@ -386,13 +417,10 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	m_traces.clear();
 	UData udata(m_index.sentences, m_index.proximity, m_traces);
 
-	iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(utf8language);
-	if (!kb_raw_data) { // no kb raw data in language module
-		throw ExceptionFrom<iKnowEngine>("Language:\""+string(utf8language)+"\" module has no embedded model data : old stye KB used !");
-	}
-	CompiledKnowledgebase ckb(kb_raw_data, utf8language);
 	CProcess::type_languageKbMap temp_map; // storage for all KB's
-	temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(utf8language), &ckb));
+	for_each(language_kb_map.begin(), language_kb_map.end(), [&temp_map](std::pair<const string, std::auto_ptr<CompiledKnowledgebase>>& lang) {
+		temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(lang.first), lang.second.get()));
+		});
 	CProcess process(temp_map);
 
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):

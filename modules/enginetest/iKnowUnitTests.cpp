@@ -65,6 +65,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue117(pError);
 		pError = "Multi Measurement test";
 		test_collection.MultiMeasurement(pError);
+		pError = "ALI test";
+		test_collection.ALI(pError);
 
 	}
 	catch (std::exception& e) {
@@ -76,6 +78,13 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+
+void iKnowUnitTests::ALI(const char* pMessage) {
+	String text_source(IkStringEncoding::UTF8ToBase(u8"Ceci n'est pas une pipe. This is not a paper plane."));
+
+	iKnowEngine engine;
+	engine.index(text_source, "en,fr");
 }
 
 void iKnowUnitTests::Issue117(const char* pMessage) {
