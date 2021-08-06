@@ -84,7 +84,26 @@ void iKnowUnitTests::ALI(const char* pMessage) {
 	String text_source(IkStringEncoding::UTF8ToBase(u8"Ceci n'est pas une pipe. This is not a paper plane."));
 
 	iKnowEngine engine;
-	engine.index(text_source, "en,fr");
+	engine.index(text_source, "en,fr", true);
+	int switch_count = 0;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			if (it->find("en;fr") != string::npos)
+				++switch_count;
+			if (it->find("fr;en") != string::npos)
+				++switch_count;
+		}
+	}
+	if (switch_count != 2)
+		throw std::runtime_error(string(pMessage)+" 2 language switches expected: en:fr and fr:en !");
+
+	engine.index(text_source, "nl,pt,fr", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			if (it->find("nl;fr") != string::npos)
+				++switch_count;
+		}
+	}
 }
 
 void iKnowUnitTests::Issue117(const char* pMessage) {

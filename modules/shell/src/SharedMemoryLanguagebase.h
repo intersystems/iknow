@@ -4,7 +4,12 @@
 #include "LanguageBase.h"
 #include "Export.h"
 #include "OffsetPtr.h"
+#ifdef ISC_IRIS
 #include "utlCacheList.h"
+#else
+#include<vector>
+typedef std::vector<std::string> CacheList;
+#endif
 
 namespace iknow {
   namespace shell {
@@ -26,6 +31,40 @@ namespace iknow {
       virtual bool TableAtEnd() { return true; }
       virtual CacheList FetchRows(size_t) { return CacheList(); }
       virtual void CloseTable() { }
+    };
+
+    class SHELL_API FileLanguagebase : public AbstractLanguagebase {
+    public:
+        FileLanguagebase(const char* file_path, bool is_compiled=false); // constructor
+        bool IsCompiled() {
+            return is_compiled_;
+        }
+        std::string GetName() {
+            return std::string("language");
+        }
+        iknow::base::String GetHash() {
+            return iknow::base::SpaceString();
+        }
+        size_t EntryCount() {
+            return entry_count_;
+        }
+        Key NextKey(Key key = 0) {
+            if (key == token_weight_collection_.size())
+                return 0;
+            return ++key;
+        }
+        CacheList GetEntry(Key key) {
+            CacheList entry = { "dummy" };
+            entry.push_back(token_weight_collection_[key-1].first); // token
+            entry.push_back(token_weight_collection_[key-1].second); // weight
+            return entry;
+        }
+    private:
+        size_t entry_count_;
+        typedef std::pair<std::string, std::string> token_weight_unit;
+
+        std::vector<token_weight_unit> token_weight_collection_;
+        bool is_compiled_;
     };
 
     class Obj;

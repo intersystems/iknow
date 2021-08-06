@@ -24,7 +24,7 @@
 #ifdef ISC_IRIS
 #include "utlCacheList.h"
 #else
-typedef std::list<std::string> CacheList;
+typedef std::vector<std::string> CacheList;
 #endif
 #include <queue>
 #include <sstream>
