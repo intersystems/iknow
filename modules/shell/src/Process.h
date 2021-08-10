@@ -30,8 +30,8 @@ namespace iknow
     class SHELL_API CProcess
     {
     public:
-        typedef std::map<iknow::base::String, iknow::core::IkKnowledgebase*> type_languageKbMap; // maps language codes to knowledgebases
-        CProcess(const std::map<iknow::base::String, iknow::core::IkKnowledgebase*>& languageKbMap);
+        typedef std::map<const iknow::base::String, iknow::core::IkKnowledgebase*> type_languageKbMap; // maps language codes to knowledgebases
+        CProcess(const type_languageKbMap& languageKbMap);
         virtual ~CProcess();
 						
         //TODO, TRW: Three boolean parameters are a bad way to parameterize this. Also, input should be const, but bizarre IkInput prevents this

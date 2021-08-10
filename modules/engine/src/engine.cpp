@@ -404,7 +404,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 {
 	vector<string> index_languages = split_row(utf8language, ',');
 	bool b_multilingual = index_languages.size() > 1;
-	map<string, std::auto_ptr<CompiledKnowledgebase>> language_kb_map;
+	map<string, std::unique_ptr<CompiledKnowledgebase>> language_kb_map;
 	static iknow::ali::LanguagebaseMap language_lb_map; // collector of language bases
 	iknow::ali::Languagebases().clear(); // clear loaded ALI data
 	for_each(index_languages.begin(), index_languages.end(), [&language_kb_map,b_multilingual](string& lang) {
@@ -414,7 +414,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 		if (!kb_raw_data) { // no kb raw data in language module
 			throw ExceptionFrom<iKnowEngine>("Language:\"" + string(lang) + "\" module has no embedded model data : old stye KB used !");
 		}
-		language_kb_map[lang] = std::auto_ptr<CompiledKnowledgebase>(new CompiledKnowledgebase(kb_raw_data, lang));
+		language_kb_map[lang] = std::unique_ptr<CompiledKnowledgebase>(new CompiledKnowledgebase(kb_raw_data, lang));
 		if (b_multilingual) { // load ALI data
 			bool b_is_compiled = true;
 			if (lang == "ja")
@@ -446,7 +446,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	UData udata(m_index.sentences, m_index.proximity, m_traces);
 
 	CProcess::type_languageKbMap temp_map; // storage for all KB's
-	for_each(language_kb_map.begin(), language_kb_map.end(), [&temp_map](std::pair<const string, std::auto_ptr<CompiledKnowledgebase>>& lang) {
+	for_each(language_kb_map.begin(), language_kb_map.end(), [&temp_map](std::pair<const string, std::unique_ptr<CompiledKnowledgebase>>& lang) {
 		temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(lang.first), lang.second.get()));
 		});
 	CProcess process(temp_map);
