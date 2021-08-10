@@ -18,7 +18,7 @@ CREATELIBRARY = 1
 PROJECT = libiknowengine
 IS_DYLIB = 1
 
-LIBRARIES = iknowbase iknowshell iknowcore icui18n icuuc icuio icudata
+LIBRARIES = iknowbase iknowshell iknowcore iknowali icui18n icuuc icuio icudata
 LIBRARYDIRS = $(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin $(ICUDIR)/lib
 
 include $(ROOT_DIR)/build/make/master.mak
