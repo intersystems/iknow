@@ -202,5 +202,29 @@ nl, pt, ru, sv and uk.
 
 Rule numbers are in the first field of rules.csv.
 
+## verify_rules.py
+
+| Summary | |
+|-|-| 
+| **What** | Check if all examples in rules.csv are present and valid. |
+| **Usage** | ```python verify_rules.py <language> <output_file>``` <br/> Example (Windows): <br/> ```python verify_rules.py en C:\iKnow\output\en_verify_rules.txt``` <br/> Note: <br/> Run verify_rules.py from the language_development directory. It uses a xx_compiler_report.log file which is created in the language_development directory during compilation. The path to rules.csv is also hard-coded. |
+| **Parameters** | None |
+
+The script reads the rules.csv file for the given language. It checks whether each rule has an example and whether the rule actually fires in the given example. It loads the default user dictionary for rules that are related to user dictionary attributes or items. The output file is a report of the findings per rule. Possible output phrases are:<br/>
+
+| Message | Meaning |
+|---------|---------| 
+| Rule ### is applied on the example. | The example is OK. |
+| WRONG EXAMPLE for rule ### (UD-related)/(not UD-related). | The rule does not fire in its first example, so the example is wrong. |
+| CHECK EXAMPLE for rule ### (UD-related)/(not UD-related). | The rule does not fire in its non-first example. This can be an example where the rule must not fire. It requires manual evaluation. |
+| No example found for rule ###. | No example is present for this rule. |
+
+The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
+nl, pt, ru, sv and uk.
+
+Rule numbers are in the first field of rules.csv.
+
+Note: the script has not been tested yet for Japanese.
+
 
 
