@@ -406,6 +406,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	bool b_multilingual = index_languages.size() > 1;
 	map<string, std::unique_ptr<CompiledKnowledgebase>> language_kb_map;
 	static iknow::ali::LanguagebaseMap language_lb_map; // collector of language bases
+
 	iknow::ali::Languagebases().clear(); // clear loaded ALI data
 	for_each(index_languages.begin(), index_languages.end(), [&language_kb_map,b_multilingual](string& lang) {
 		if (GetLanguagesSet().count(lang) == 0) // language not supported
@@ -416,24 +417,12 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 		}
 		language_kb_map[lang] = std::unique_ptr<CompiledKnowledgebase>(new CompiledKnowledgebase(kb_raw_data, lang));
 		if (b_multilingual) { // load ALI data
-			bool b_is_compiled = true;
 			if (lang == "ja")
 				throw ExceptionFrom<iKnowEngine>("Japanese language cannot be used in a multilingual configuration");
 			iknow::ali::LanguagebaseMap::iterator i = language_lb_map.find(IkStringEncoding::UTF8ToBase(lang)); // do we have a language base for ALI ?
 			if (i == language_lb_map.end()) {
-				iknow::shell::FileLanguagebase my_lang_base(lang.c_str(), b_is_compiled);
-				const int kRawSize = b_is_compiled ? 100 : 2000000;
-				unsigned char* buf_ = new unsigned char[kRawSize];
-				iknow::shell::Raw raw(buf_, kRawSize);
-				iknow::shell::RawAllocator allocator(raw);
-				iknow::shell::SharedMemoryLanguagebase* slb = new iknow::shell::SharedMemoryLanguagebase(allocator, my_lang_base, b_is_compiled);
-				if (my_lang_base.IsCompiled()) {
-					//The unique_ptr ensures the original shared memory lb is deleted when
-					//we're done constructing the new compiled one, which needs its raw_data pointer.
-					std::unique_ptr<iknow::shell::SharedMemoryLanguagebase> original(slb);
-					slb = new iknow::shell::CompiledLanguagebase(slb, lang);
-				}
-				language_lb_map[IkStringEncoding::UTF8ToBase(lang)] = slb;
+				static iknow::shell::SharedMemoryLanguagebase slb; // as compiled : equal for all languages
+				language_lb_map[IkStringEncoding::UTF8ToBase(lang)] = new iknow::shell::CompiledLanguagebase(&slb, lang);
 			}
 			iknow::ali::Languagebases()[IkStringEncoding::UTF8ToBase(lang)] = language_lb_map[IkStringEncoding::UTF8ToBase(lang)];
 		}

@@ -33,6 +33,7 @@ namespace iknow {
       virtual void CloseTable() { }
     };
 
+    /*
     class SHELL_API FileLanguagebase : public AbstractLanguagebase {
     public:
         FileLanguagebase(const char* file_path, bool is_compiled=false); // constructor
@@ -66,6 +67,7 @@ namespace iknow {
         std::vector<token_weight_unit> token_weight_collection_;
         bool is_compiled_;
     };
+    */
 
     class Obj;
     class RawAllocator;
@@ -75,6 +77,7 @@ namespace iknow {
       SharedMemoryLanguagebase(RawAllocator& allocator, AbstractLanguagebase& lb, bool is_compiled);
       SharedMemoryLanguagebase(RawLBData* lb_data);
       SharedMemoryLanguagebase(unsigned char* lb_data);
+      SharedMemoryLanguagebase(void);
       unsigned char* RawData() { return reinterpret_cast<unsigned char*>(lb_data_); }
     protected:
       //The minimum and maximum cluster sizes for this language base.

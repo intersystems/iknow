@@ -79,7 +79,7 @@ private:
   void operator=(const TableBuilder&);
 };
 
-
+/*
 FileLanguagebase::FileLanguagebase(const char* lang, bool is_compiled) : entry_count_(0), is_compiled_(is_compiled)
 {
     if (!is_compiled) {
@@ -109,6 +109,7 @@ FileLanguagebase::FileLanguagebase(const char* lang, bool is_compiled) : entry_c
     else
         entry_count_ = 20000; // compiled is fixed at 20000
 }
+*/
 
 SharedMemoryLanguagebase::SharedMemoryLanguagebase(RawAllocator& allocator,AbstractLanguagebase& lb, bool is_compiled) {
   //The RawLBData must be the first thing in the block, we'll use its address for the base of all
@@ -136,6 +137,15 @@ SharedMemoryLanguagebase::SharedMemoryLanguagebase(RawAllocator& allocator,Abstr
   lb_data_->total_score = static_cast<unsigned long>(entry_count * (entry_count + 1) / 2);  
 }
 
+SharedMemoryLanguagebase::SharedMemoryLanguagebase(void) {
+    const int kRawSize = 100;
+    static unsigned char buf_[kRawSize];
+    iknow::shell::Raw raw(buf_, kRawSize);
+    iknow::shell::RawAllocator allocator(raw);
+    lb_data_ = allocator.Insert(RawLBData());
+    size_t entry_count = 20000;
+    lb_data_->total_score = static_cast<unsigned long>(entry_count * (entry_count + 1) / 2);
+}
 SharedMemoryLanguagebase::SharedMemoryLanguagebase(RawLBData* lb_data) : lb_data_(lb_data) {}
 SharedMemoryLanguagebase::SharedMemoryLanguagebase(unsigned char* lb_data) : lb_data_(reinterpret_cast<RawLBData*>(lb_data)) {}
 
