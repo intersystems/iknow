@@ -392,7 +392,7 @@
 
 /* to FRSRel
 25;40;FRSRelCon|FRIndefart:FRAucun:FRDefart:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
-/*		25. Elle visite une amie à Namur. Cela pose aucun problème pour la construction modulaire. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Cette masse passe ensuite de l'intestin grêle au côlon. La révolution industrielle fait son apparition. Il ne faut pas qu'il rêve être directeur d'agence sans aucune expérience. Le gouvernement fait construire trois chemins de fer transcontinentaux. «Ils étaient très bons», juge celui qui a vraiment apprécié l'émission.
+/*		25. Elle visite une amie à Namur. Cela pose aucun problème pour la construction modulaire. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Cette masse passe ensuite de l'intestin grêle au côlon. La révolution industrielle fait son apparition. Il ne faut pas qu'il rêve être directeur d'agence sans aucune expérience. Le gouvernement fait construire trois chemins de fer transcontinentaux. «Ils étaient très bons», juge celui qui a vraiment apprécié l'émission. Une vision que partage cette femme.
 59;40;FRSRelCon|FRPas:FRAdvNeg;FRSRel|FRAdvNeg;
 /*		59. Et ça fait pas de mal.
 106;40;FRSRelCon|FRDe|FRInf;FRSRel|FRSRel|FRInf;
@@ -400,7 +400,7 @@
 31;40;FRSubjpron:FRSubjpron2:FRDatpron|FRSRelCon;*|FRSRel;after pronoun
 /*		31. Il reste sur deux finales. Tout cela conduit à l'existence de fromages à forte identité. Je leur demande de ne pas respirer pendant cinq minutes.
 52;40;FRSConj:FRSRelconj|FRSRelCon;*|FRSRel;after conjunction
-/*		52. Une vision que partage cette femme. L'Homme qui marche est installé au palais Farnèse.
+/*		52. L'Homme qui marche est installé au palais Farnèse.
 515;40;FRSRelCon+FRCapitalAll;FRCon;treat capitalized RelCons as Con, place this rule after disambiguation rules because if the whole text is capaitalized, the rules must get priority
 /*		515. Madame ROCHE ne participera pas.
 475;40;FRCapitalInitial:FRCapitalMixed+FRCon|FRSRelCon+^FRCapitalInitial;^FRCon|FRSRel;detect verb after name
@@ -480,8 +480,8 @@
 /*		146. Les positions subjectives de celui qui s’y risque.
 170;40;FRDe|FRObjpron:FRDefart|FRInf;FRSConj|FRObjpron|FRInf;'de' with pronoun and infinitive
 /*		170. Prière de vous mettre en rapport avec le directeur.
-58;40;FRDe|FRRefl;FRSConj|FRRefl;'de se'
-/*		58. Les comités sont tenus de se réunir au moins deux fois par an.
+58;40;FRDe|FRRefl;FRSConj|FRRefl;'de se', very low-frequent, since se+Inf is joined into 1 lexrep already
+/*		58. Ils ont suggéré de s'en tenir à deux délégations restreintes de quatre représentants.
 156;40;FRDe|FRSRel;FRSConj|FRSRel;
 /*		156. C'est au sein des comités de suive que se manifeste le plus l'intéraction des partenaires.
 63;40;FRDe|FRNe:FRAdvNeg;FRSConj|FRNe;'de' with negation (and infinitive)
@@ -820,7 +820,7 @@
 /* ========
 /* Remove negation attribute from 'ne explétif'
 721;70;FRIgnoreNegation|*{1,3}^FRNegation|"ne":"n"+FRNegation;*|*|-FRNegation;very low-frequent
-/*		721. Avant qu'il ne puisse me répondre, une alarme se mit à sonner. Toutefois, la Commission réalise l'importance de l'application de l'articleavant que la Charte ne puisse produire tous ses effets. À moins que le réseau ferroviaire ne soit également libéralisé, nous ne pouvons pas y parvenir.
+/*		721. Avant qu'il ne puisse me répondre, une alarme se mit à sonner. Toutefois, la Commission réalise l'importance de l'application de l'article avant que la Charte ne puisse produire tous ses effets. À moins que le réseau ferroviaire ne soit également libéralisé, nous ne pouvons pas y parvenir.
 
 /* Expansion of negation to the left-hand part of the path
 361;70;FRNegation;+FRNegBegin;
@@ -870,7 +870,7 @@
 364;70;FRPunctuation|FRSRel+^FRNegation;FRPunctuation|+FRNegStop;
 /*		364. Aujourd'hui n'est pas un jour important, a souligné mme D.
 378;70;FRPunctuation+^FRList|FRPrep;FRPunctuation|+FRNegStop;
-/*		378. Outre les nombreuses animations la semaine sera surtout marquée par  les «journées sans voitures» dans plusieurs villes.
+/*		378. Il ne reflète donc pas la totalite des dépenses ichelonnées, sur plusieurs exercices.
 395;70;FRPunctuation|FRSRelconj:FRSConj;FRPunctuation|+FRNegStop;
 /*		395. L'audit n'a mis en lumière aucune erreur significative dans les opérations testées, ce qui correspond au résultat de l'audit de l'année précédente.
 733;70;FRPunctuation|FRSubjpron:FRSubjpron2:FRObjpron;FRPunctuation|+FRNegStop;
