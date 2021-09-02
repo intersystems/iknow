@@ -24,6 +24,9 @@ const std::set<std::string>& iKnowEngine::GetLanguagesSet(void) {
 
 typedef void(*OutputFunc)(iknow::core::IkIndexOutput*, iknow::core::IkIndexDebug<TraceListType>*, void*, Stemmer*);
 
+// static definition of language base collection
+std::map<iknow::base::String, LanguageBase*> iKnowEngine::m_language_lb_map;
+
 using namespace std;
 
 using iknow::shell::CProcess;
@@ -368,7 +371,7 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 
 static SharedMemoryKnowledgebase *pUserDCT = NULL; // User dictionary, one per process
 
-iKnowEngine::iKnowEngine() // Constructor
+iKnowEngine::iKnowEngine() : m_document_level_ALI(false) // Constructor, document level ALI is default false
 {
 }
 
@@ -400,15 +403,25 @@ string iKnowEngine::merge_row(vector<string>& row_vector, char split)
 
 static std::mutex mtx;           // mutex for process.IndexFunc critical section
 
+void iKnowEngine::add_lang_for_ALI(string lang)
+{
+	if (lang == "ja")
+		throw ExceptionFrom<iKnowEngine>("Japanese language cannot be used in a multilingual configuration");
+
+	std::map<iknow::base::String, LanguageBase*>::iterator i = m_language_lb_map.find(IkStringEncoding::UTF8ToBase(lang)); // do we have a language base for ALI ?
+	if (i == m_language_lb_map.end()) {
+		static iknow::shell::SharedMemoryLanguagebase slb; // as compiled : equal for all languages
+		m_language_lb_map[IkStringEncoding::UTF8ToBase(lang)] = reinterpret_cast<LanguageBase*>(((iknow::ali::LanguageBase*) new iknow::shell::CompiledLanguagebase(&slb, lang)));
+	}
+}
 void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8language, bool b_trace)
 {
 	vector<string> index_languages = split_row(utf8language, ',');
 	bool b_multilingual = index_languages.size() > 1;
 	map<string, std::unique_ptr<CompiledKnowledgebase>> language_kb_map;
-	static iknow::ali::LanguagebaseMap language_lb_map; // collector of language bases
 
 	iknow::ali::Languagebases().clear(); // clear loaded ALI data
-	for_each(index_languages.begin(), index_languages.end(), [&language_kb_map,b_multilingual](string& lang) {
+	for_each(index_languages.begin(), index_languages.end(), [&language_kb_map,b_multilingual,this](string& lang) {
 		if (GetLanguagesSet().count(lang) == 0) // language not supported
 			throw ExceptionFrom<iKnowEngine>("Language not supported");
 		iknow::model::RawDataPointer kb_raw_data = CompiledKnowledgebase::GetRawData(lang);
@@ -417,14 +430,8 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 		}
 		language_kb_map[lang] = std::unique_ptr<CompiledKnowledgebase>(new CompiledKnowledgebase(kb_raw_data, lang));
 		if (b_multilingual) { // load ALI data
-			if (lang == "ja")
-				throw ExceptionFrom<iKnowEngine>("Japanese language cannot be used in a multilingual configuration");
-			iknow::ali::LanguagebaseMap::iterator i = language_lb_map.find(IkStringEncoding::UTF8ToBase(lang)); // do we have a language base for ALI ?
-			if (i == language_lb_map.end()) {
-				static iknow::shell::SharedMemoryLanguagebase slb; // as compiled : equal for all languages
-				language_lb_map[IkStringEncoding::UTF8ToBase(lang)] = new iknow::shell::CompiledLanguagebase(&slb, lang);
-			}
-			iknow::ali::Languagebases()[IkStringEncoding::UTF8ToBase(lang)] = language_lb_map[IkStringEncoding::UTF8ToBase(lang)];
+			this->add_lang_for_ALI(lang);
+			iknow::ali::Languagebases()[IkStringEncoding::UTF8ToBase(lang)] = reinterpret_cast<iknow::ali::LanguageBase*>(m_language_lb_map[IkStringEncoding::UTF8ToBase(lang)]);
 		}
 	});
 	std::unique_lock<std::mutex> lck(mtx, std::defer_lock);
@@ -438,7 +445,7 @@ void iKnowEngine::index(iknow::base::String& text_input, const std::string& utf8
 	for_each(language_kb_map.begin(), language_kb_map.end(), [&temp_map](std::pair<const string, std::unique_ptr<CompiledKnowledgebase>>& lang) {
 		temp_map.insert(CProcess::type_languageKbMap::value_type(IkStringEncoding::UTF8ToBase(lang.first), lang.second.get()));
 		});
-	CProcess process(temp_map);
+	CProcess process(temp_map, m_document_level_ALI); // pass document level ALI to indexer
 
 	lck.lock(); // critical section (exclusive access to IndexFunc by locking lck):
 
@@ -475,6 +482,17 @@ std::string iKnowEngine::NormalizeText(const string& text_source, const std::str
 		throw ExceptionFrom<iKnowEngine>(e.what());
 	}
 	throw std::runtime_error("Failed to throw an exception.");
+}
+
+std::string iKnowEngine::IdentifyLanguage(const std::string& text_source, double& certainty) {
+	iknow::ali::Languagebases().clear(); // clear loaded ALI data
+	for_each(iKnowEngine::GetLanguagesSet().begin(), iKnowEngine::GetLanguagesSet().end(), [](const string& lang) {
+		if (lang != "ja") {
+			add_lang_for_ALI(lang);
+			iknow::ali::Languagebases()[IkStringEncoding::UTF8ToBase(lang)] = reinterpret_cast<iknow::ali::LanguageBase*>(m_language_lb_map[IkStringEncoding::UTF8ToBase(lang)]);
+		} });
+
+	return IkStringEncoding::BaseToUTF8(iknow::ali::identify(IkStringEncoding::UTF8ToBase(text_source), certainty));
 }
 
 // Constructor

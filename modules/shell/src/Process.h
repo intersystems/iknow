@@ -31,7 +31,7 @@ namespace iknow
     {
     public:
         typedef std::map<const iknow::base::String, iknow::core::IkKnowledgebase*> type_languageKbMap; // maps language codes to knowledgebases
-        CProcess(const type_languageKbMap& languageKbMap);
+        CProcess(const type_languageKbMap& languageKbMap, bool bSourceLevelALI=false);
         virtual ~CProcess();
 						
         //TODO, TRW: Three boolean parameters are a bad way to parameterize this. Also, input should be const, but bizarre IkInput prevents this
