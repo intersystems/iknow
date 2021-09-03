@@ -211,6 +211,13 @@ cdef class iKnowEngine:
 		"""Normalize the text_source."""
 		return CPPiKnowEngine.NormalizeText(text_source, language, bUserDct, bLowerCase, bStripPunct)
 
+	@staticmethod
+	def IdentifyLanguage(str text_source: typing.Text) -> typing.Tuple[typing.Text]:
+		"""Identify the language of the text source"""
+		cdef double certainty = 0.0
+		language = CPPiKnowEngine.IdentifyLanguage(text_source, certainty)
+		return (language,str(float(certainty)))
+
 	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False) -> None:
 		"""Index the text in text_source with a given language. Supported
 		languages are given by get_languages_set(). After indexing, results are
