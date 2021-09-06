@@ -93,3 +93,46 @@ if language_identified[0] != "cs":
 else:
 	print(f'Language {language_identified[0]!r} detected with certainty {language_identified[1]!r}.')
 
+#void iKnowUnitTests::ALI(const char* pMessage) {
+text_source = "Ceci n'est pas une pipe. This is not a paper plane."
+engine.index(text_source, "en|fr", traces=True)
+switch_count = 0
+for trace in engine.m_traces:
+	key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+	if (key=='SwitchKnowledgebase'):
+		switch_count += 1
+
+if switch_count != 2:
+	raise ValueError(f'2 language switches expected: en:fr and fr:en !')
+
+engine.index(text_source, "nl|pt|fr", traces=True)
+for trace in engine.m_traces:
+	key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+	if (key=='SwitchKnowledgebase'):
+		raise ValueError(f'no switching from language is expected !')
+
+#void iKnowUnitTests::SourceVersusSentenceALI(const char* pMessage)
+text_source = "Ceci n'est pas une pipe. This is not a paper plane."
+engine.index(text_source, "en|fr", traces=True, detect_language_at="document")
+switch_count = 0
+for trace in engine.m_traces:
+	key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+	if (key=='SwitchKnowledgebase'):
+		switch_count += 1
+
+if switch_count != 1:
+	raise ValueError(f'Only ONE language switch expected !')
+
+# Try all languages
+switch_count = 0
+engine.index(text_source, "*", traces=True)
+for trace in engine.m_traces:
+	key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+	if (key=='SwitchKnowledgebase'):
+		switch_count += 1
+
+if switch_count != 2:
+	raise ValueError(f'2 language switches expected in "all languages" request !')
+
+
+

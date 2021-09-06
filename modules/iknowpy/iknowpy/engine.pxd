@@ -116,6 +116,8 @@ cdef extern from "../../engine/src/engine.h" nogil:
 
 		void loadUserDictionary(CPPUserDictionary& udct) except +
 		void unloadUserDictionary() except +
+		void setALIonSourceLevel() except +
+		void setALIonSentenceLevel() except +
 
 		@staticmethod
 		const set[string]& GetLanguagesSet() except +
