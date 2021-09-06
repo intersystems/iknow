@@ -211,14 +211,44 @@ cdef class iKnowEngine:
 		"""Normalize the text_source."""
 		return CPPiKnowEngine.NormalizeText(text_source, language, bUserDct, bLowerCase, bStripPunct)
 
-	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False) -> None:
+	@staticmethod
+	def IdentifyLanguage(str text_source: typing.Text) -> typing.Tuple[typing.Text]:
+		"""Identify the language of the text source"""
+		cdef double certainty = 0.0
+		language = CPPiKnowEngine.IdentifyLanguage(text_source, certainty)
+		return (language,str(float(certainty)))
+
+	def index(self, str text_source: typing.Text, str language: typing.Text, cpp_bool traces: bool = False, str detect_language_at: typing.Text = "sentence") -> None:
 		"""Index the text in text_source with a given language. Supported
 		languages are given by get_languages_set(). After indexing, results are
 		stored in the m_index attribute. The traces argument is optional and is
 		False by default. If traces is True, then the linguistic trace
 		information is stored in the m_traces attribute."""
-		if language not in self.get_languages_set():
-			raise ValueError(f'Language {language!r} is not supported.')
+
+		# replace '|' separators
+		language = language.replace("|",",") # replace '|' separator with ',' the c++ engine uses comma separators...
+
+		# expand if all languages are requested: '*'
+		if language == '*': # select all languages
+			language = ''
+			for lang in self.get_languages_set(): # reconstruct language parameter
+				if lang == "ja": # skip Japanese in multilingual request
+					continue
+				if len(language) != 0:
+					language += ','
+				language += lang
+
+		# check for valid languages
+		language_list = language.split(",")
+		for single_language in language_list:
+			if single_language not in self.get_languages_set():
+				raise ValueError(f'Language {single_language!r} is not supported.')
+
+		# set ALI mode (detect_language_at = [ "document" | "sentence" ])
+		if detect_language_at == 'document': # switch to document(source) mode
+			self.engine.setALIonSourceLevel()
+		else:
+			self.engine.setALIonSentenceLevel()
 
 		# determine the Python indices of characters that the C++ engine will
 		# convert into surrogate pairs

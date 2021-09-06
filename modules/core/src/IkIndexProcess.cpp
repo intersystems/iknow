@@ -45,7 +45,7 @@ const size_t MAX_WORD_SIZE=150; // Maximum allowed wordsize as defined by Michae
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 IkIndexProcess::IkIndexProcess(std::map<String, IkKnowledgebase const *> const & languageKbMap)
-:m_languageKbMap(languageKbMap), m_pDebug(0)
+:m_languageKbMap(languageKbMap), m_pDebug(0), m_document_level_ALI(false)
 {
   //An index process used for normalization will have a null map
   if (!m_languageKbMap.empty()) 
@@ -93,10 +93,17 @@ void IkIndexProcess::Start(IkIndexInput* pInput, IkIndexOutput* pOut, IkIndexDeb
 
   size_t cntWordLimit = (bBinaryMode ? 0x7FFFFFFF : MAX_SENTENCE_SIZE); // set word count limit
   Lexreps lexrep_vector;
+  bool b_document_ALI = m_document_level_ALI;
+  if (b_document_ALI) // switch off for sentence 1
+	  m_document_level_ALI = false;
+
   while ( m_pKnowledgebase->GetMetadata<kIsJapanese>()
 		  ?	FindNextSentenceJP(pInput, lexrep_vector, nPosition, cntWordLimit*(size_t)5)
 		  : FindNextSentence(pInput, lexrep_vector, nPosition, cntWordLimit, delimitedSentences, kb_name, certainty, pUdct)) // split by sentences and store in a list
     {
+	  if (b_document_ALI) // reset for following sentences
+		  m_document_level_ALI = true;
+
 	  SEMANTIC_ACTION(SentenceFound(kb_name, certainty, m_pKnowledgebase->GetMetadata<kLanguageCode>(), lexrep_vector, pOut->IsJP() ? String() : SpaceString()));
       // if (!bBinaryMode && lexrep_vector.size() >= MAX_SENTENCE_SIZE) continue; // limit sentence length
 	  if (lexrep_vector.size()==2) continue; // no text, only SBegin & SEnd
@@ -818,12 +825,12 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 	}
 
 	//TODO, TRW: Is there a way we could figure out we need to switch languages earlier?
-	if ((m_languageKbMap.size() > 1) && nPosition != nPositionEndOfPreviousIteration)
+	if ((m_languageKbMap.size() > 1) && nPosition != nPositionEndOfPreviousIteration && m_document_level_ALI == false)
 	{
 		//TODO:TRW, Restore ALI sentence length limit
 		String new_language = identify(pInput->GetString()->begin() + nPositionBeginFixed,
 			pInput->GetString()->begin() + nPosition, certainty);
-		if (certainty > certaintyThresholdForChangingLanguage)
+		if ((new_language != language) && (certainty > certaintyThresholdForChangingLanguage))
 		{
 			SEMANTIC_ACTION(SwitchKnowledgebase(language, new_language, certainty));
 			language = new_language;

@@ -45,8 +45,8 @@ namespace iknow {
       T& operator*() const {
 	    return *reinterpret_cast<T*>(GetBasePointer() + offset_);
       }
-      T* operator->() const {
-	    return reinterpret_cast<T*>(GetBasePointer() + offset_);
+      const T* operator->() const {
+	    return reinterpret_cast<const T*>(GetBasePointer() + offset_);
       }
       operator const T*() const {
 	    return reinterpret_cast<const T*>(GetBasePointer() + offset_);

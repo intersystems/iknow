@@ -31,7 +31,7 @@ using namespace iknow::base;
 using namespace iknow::core;
 using namespace iknow::shell;
 
-CProcess::CProcess(const std::map<String, IkKnowledgebase*>& languageKbMap) : m_IsJapaneseInvolved(false), m_tracing_enabled(0), m_merge_relations(1), m_allow_long_sentences(0), m_delimited_sentences_mode(0), m_make_summary(0), m_max_concept_cluster_length(0), m_user_dictionary(NULL), m_stemmer(NULL)
+CProcess::CProcess(const type_languageKbMap& languageKbMap, bool bSourceLevelALI) : m_IsJapaneseInvolved(false), m_tracing_enabled(0), m_merge_relations(1), m_allow_long_sentences(0), m_delimited_sentences_mode(0), m_make_summary(0), m_max_concept_cluster_length(0), m_user_dictionary(NULL), m_stemmer(NULL)
 {
   if (languageKbMap.empty())
     throw MessageExceptionFrom<CProcess>("IKNoKBLoaded");
@@ -42,7 +42,7 @@ CProcess::CProcess(const std::map<String, IkKnowledgebase*>& languageKbMap) : m_
 
   // workaround for not being able to pass a std map in vc6
   // TODO: Probably no longer needed.
-  std::map<String, IkKnowledgebase*>::const_iterator cit;
+  type_languageKbMap::const_iterator cit;
   for (cit = languageKbMap.begin(); cit != languageKbMap.end() ; ++cit) {
     //Only "real" KBs have rules. User dictionaries don't (yet, at least)
     if (cit->second->RuleCount()) {
@@ -56,7 +56,7 @@ CProcess::CProcess(const std::map<String, IkKnowledgebase*>& languageKbMap) : m_
 
   if (!some_language_loaded) throw ExceptionFrom<CProcess>("No knowledgebases with rules loaded.");
 
-  m_pCore->FinishConstruction();
+  m_pCore->FinishConstruction(bSourceLevelALI);
 }
 
 CProcess::~CProcess()

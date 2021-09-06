@@ -65,6 +65,12 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.Issue117(pError);
 		pError = "Multi Measurement test";
 		test_collection.MultiMeasurement(pError);
+		pError = "ALI test";
+		test_collection.ALI(pError);
+		pError = "Language Identification Test";
+		test_collection.LanguageIdentification(pError);
+		pError = "Source versus Sentence ALI Test";
+		test_collection.SourceVersusSentenceALI(pError);
 
 	}
 	catch (std::exception& e) {
@@ -75,6 +81,115 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+void iKnowUnitTests::SourceVersusSentenceALI(const char* pMessage)
+{
+	String text_source(IkStringEncoding::UTF8ToBase(u8"Ceci n'est pas une pipe. This is not a paper plane."));
+
+	iKnowEngine engine;
+	engine.index(text_source, "en,fr", true);
+	int switch_count = 0;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			if (it->find("en;fr") != string::npos)
+				++switch_count;
+			if (it->find("fr;en") != string::npos)
+				++switch_count;
+		}
+	}
+	if (switch_count != 2)
+		throw std::runtime_error(string(pMessage) + " 2 language switches expected: en:fr and fr:en !");
+
+	engine.setALIonSourceLevel(); // ALI only on first sentence
+	engine.index(text_source, "en,fr", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			if (it->find("en;fr") != string::npos)
+				++switch_count;
+			if (it->find("fr;en") != string::npos)
+				++switch_count;
+		}
+	}
+	if (switch_count != 3)
+		throw std::runtime_error(string(pMessage) + " only 1 language switch expected: en:fr !");
+
+}
+
+void iKnowUnitTests::LanguageIdentification(const char* pMessage)
+{
+	string text_source, language_identified;
+	double dbl_certainty;
+
+	text_source = u8"Be the change you want to see in life.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "en")
+		throw std::runtime_error(string(pMessage) + " \"en\" language not identified...");
+	text_source = u8"Oder die Erkundung der Natur - und zwar ohne Anleitung.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "de")
+		throw std::runtime_error(string(pMessage) + " \"de\" language not identified...");
+	text_source = u8"Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "ru")
+		throw std::runtime_error(string(pMessage) + " \"ru\" language not identified...");
+	text_source = u8"En Argentina no hay estudios previos reportados en cuanto a la elaboración de vinos cítricos ni de «vino de naranja».";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "es")
+		throw std::runtime_error(string(pMessage) + " \"es\" language not identified...");
+	text_source = u8"En pratique comment le faire ?";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "fr")
+		throw std::runtime_error(string(pMessage) + " \"fr\" language not identified...");
+	text_source = u8"こんな台本でプロットされては困る、と先生は言った。";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "")
+		throw std::runtime_error(string(pMessage) + " Japanese language not part of ALI...");
+	text_source = u8"Op basis van de afzonderlijke evaluatieverslagen stelt de Commissie een synthese op communautair niveau op.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "nl")
+		throw std::runtime_error(string(pMessage) + " \"nl\" language not identified...");
+	text_source = u8"Distingue-se o mercado de um produto ou serviço dos mercados de fatores de produção, capital e trabalho.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "pt")
+		throw std::runtime_error(string(pMessage) + " \"pt\" language not identified...");
+	text_source = u8"Jag är bäst i klassen. Ingen gör efter mig, kan jag inte lämna. Var försiktig, är gräset alltid grönare på andra sidan.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "sv")
+		throw std::runtime_error(string(pMessage) + " \"sv\" language not identified...");
+	text_source = u8"грошових зобов'язань, прийнятих на себе згідно з умов цього договору.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "uk")
+		throw std::runtime_error(string(pMessage) + " \"uk\" language not identified...");
+	text_source = u8"Létající jaguár je novela spisovatele Josefa Formánka z roku 2004.";
+	language_identified = iKnowEngine::IdentifyLanguage(text_source, dbl_certainty);
+	if (language_identified != "cs")
+		throw std::runtime_error(string(pMessage) + " \"cs\" language not identified...");
+}
+
+void iKnowUnitTests::ALI(const char* pMessage) {
+	String text_source(IkStringEncoding::UTF8ToBase(u8"Ceci n'est pas une pipe. This is not a paper plane."));
+
+	iKnowEngine engine;
+	engine.index(text_source, "en,fr", true);
+	int switch_count = 0;
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			if (it->find("en;fr") != string::npos)
+				++switch_count;
+			if (it->find("fr;en") != string::npos)
+				++switch_count;
+		}
+	}
+	if (switch_count != 2)
+		throw std::runtime_error(string(pMessage)+" 2 language switches expected: en:fr and fr:en !");
+
+	engine.index(text_source, "nl,pt,fr", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("SwitchKnowledgebase") != string::npos) {
+			throw std::runtime_error(string(pMessage) + " no switching from language is \"en\" is not specified !");
+		}
 	}
 }
 

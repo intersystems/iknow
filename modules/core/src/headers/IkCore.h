@@ -52,18 +52,8 @@ namespace iknow
       virtual ~IkCore();/*!< Destructor. */
 
       // workaround for not being able to pass pointers inside std maps in vc6
-      void FinishConstruction();
-      /*{
-	m_pIndexProcess = new IkIndexProcess(m_languageKbMap, m_pOntology);
-	}*/
+      void FinishConstruction(bool bSourceLevelALI=false);
 
-      /*!
-       *	Start the indexing process
-       *	\param pInput: pointer to a IkIndexInput, so the input
-       *	\param pOutput: pointer to a IkIndexOutput, so the output
-       *	\param nMaxConceptSize: the maximum concept-size
-       *	\exception IkException: UNKNOWN ERROR
-       */
       void Index(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug<TraceListType>* pDebug, bool mergeRelations, bool binaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
 
       // workaround for not being able to pass pointers inside std maps in vc6

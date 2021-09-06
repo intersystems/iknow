@@ -62,7 +62,13 @@ namespace iknow
       void Start(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug<TraceListType>* pDebug, bool bMergeRelations, bool bBinaryMode, bool delimitedSentences, size_t max_concept_cluster_length=0, IkKnowledgebase* pUdct=NULL);
 
       iknow::base::String NormalizeText(const iknow::base::String& input, const IkKnowledgebase* kb, const IkKnowledgebase* ud, bool bLowerCase=true, bool bStripPunct=true);
-      
+      void SetDocumentALI() {
+          m_document_level_ALI = true;
+      }
+      bool GetDocumentALI() {
+          return m_document_level_ALI;
+      }
+
     private:
 		/*!
 		*	Preprocess string token into initial lexreps
@@ -157,10 +163,12 @@ namespace iknow
       size_t m_max_concept_cluster_length; // choice between external (via COS) parameter, or preferably set in the KB. Since the parameter does not change while indexing, it should be set at the highest level.
 	  size_t m_max_nonrels_in_relation; // maximum number of nonrelevants in a relation merge
 	  IkLexrep m_begin_lr, m_end_lr; // head & tail lexreps (SBegin and SEnd), always added to surround the sentence
-
+      
       typedef std::map<iknow::base::String, IkKnowledgebase const *> KbMap;
       const KbMap& m_languageKbMap;
       IkIndexDebug<TraceListType>* m_pDebug;
+      bool m_document_level_ALI; // if true : ALI on document level...
+
       //No assignment operator.
       void operator=(const IkIndexProcess& other);
     };

@@ -22,9 +22,11 @@ IkCore::~IkCore()
   delete m_pIndexProcess;
 }
 
-void IkCore::FinishConstruction()
+void IkCore::FinishConstruction(bool bSourceLevelALI)
 {
   m_pIndexProcess = new IkIndexProcess(m_languageKbMap);
+  if (bSourceLevelALI)
+	  m_pIndexProcess->SetDocumentALI();
 }
 
 void IkCore::Index(IkIndexInput* pInput, IkIndexOutput* pOutput, IkIndexDebug<TraceListType>* pDebug, bool mergeRelations, bool binaryMode, bool delimitedSentences, size_t max_concept_cluster_length, IkKnowledgebase* pUdct)

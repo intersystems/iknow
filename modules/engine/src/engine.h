@@ -236,6 +236,8 @@ private:
 	iknow::csvdata::UserKnowledgeBase m_user_data; // User dictionary
 };
 
+class LanguageBase;
+
 class IKNOW_API iKnowEngine
 {
 public:
@@ -250,6 +252,9 @@ public:
 
 	// Normalizer is exposed to engine clients, needed for User Dictonary, and iFind functionality
 	static std::string NormalizeText(const std::string& text_source, const std::string& language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+
+	// Uses ALI to detect the language of the text_source, will return one of the GetLanguagesSet() identifiers, except for Japanese !
+	static std::string IdentifyLanguage(const std::string& text_source, double& certainty);
 
 	// ctor & dtor
 	iKnowEngine();
@@ -273,10 +278,22 @@ public:
 	//     unloadUserDictionary : will unload and deactivate the active user dictionary.
 	void loadUserDictionary(UserDictionary& udct);
 	void unloadUserDictionary(void);
-
+	void setALIonSourceLevel(void) {
+		m_document_level_ALI = true;
+	}
+	void setALIonSentenceLevel(void) {
+		m_document_level_ALI = false;
+	}
 	iknowdata::Text_Source m_index; // this is where all iKnow indexed information is stored after calling the "index" method.
 	std::vector<std::string> m_traces; // optional collection of linguistic trace info, generated if b_trace equals true
 
 private:
+	std::vector<std::string> split_row(std::string row_text, char split);
+	std::string merge_row(std::vector<std::string>& row_vector, char split);
 
+	// collector of language bases, load once, use many times
+	static std::map<iknow::base::String, LanguageBase*> m_language_lb_map;
+	// helper method that makes a language ready for ALI uses.
+	static void add_lang_for_ALI(std::string lang);
+	bool m_document_level_ALI;
 };

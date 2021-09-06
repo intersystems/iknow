@@ -116,9 +116,16 @@ cdef extern from "../../engine/src/engine.h" nogil:
 
 		void loadUserDictionary(CPPUserDictionary& udct) except +
 		void unloadUserDictionary() except +
+		void setALIonSourceLevel() except +
+		void setALIonSentenceLevel() except +
 
 		@staticmethod
 		const set[string]& GetLanguagesSet() except +
 
 		@staticmethod
 		string NormalizeText(const string& text_source, const string& language, cpp_bool bUserDct, cpp_bool bLowerCase, cpp_bool bStripPunct) except +
+
+		#static std::string IdentifyLanguage(const std::string& text_source, double& certainty);
+		@staticmethod
+		string IdentifyLanguage(const string& text_source, double& certainty) except +
+
