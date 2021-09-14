@@ -193,7 +193,7 @@
 /*		1317. winter temperatures hang around -58 degrees Fahrenheit in Oymyakon.
 1265;20;ENPrep:ENRel:ENOf:ENPunctuation:ENComma:ENPrespart:ENBe:ENAdvstruct|"about":"around":"above":"below":"over":"well over":"under":"near"|ENNum:ENNumber:"one";*|ENNumber|+Join;
 /*		1265. He bought the mansion for about £60,000. These activities would incur interest, often at rates of about 18 per cent or more. Market expectations were imports of around 700,000 tons. a core operating profit of above GBP598 million. The stock was trading below $1.22 on Wednesday morning. After over 1 hour of total resuscitation attempt. They all posted final rounds of under 70. -	Navigation-device prices dropping about 20%. He was around 20 yards away from the collision. The downtown office is also about two miles from the refinery. (also reported as "around one in the morning". One Bitcoin currently equals around 708.64 Swiss Francs.
-2457;20;ENPrep:ENRel:ENOf:ENPunctuation:ENComma:ENPrespart:ENBe:ENAdvstruct|"up to"|ENNum:ENNumber:"one";*|+JoinReverse|*;
+2457;20;ENPrep:ENRel:ENOf:ENPunctuation:ENComma:ENPrespart:ENBe:ENAdvstruct|"up to"|ENNum:ENNumber:"one":ENQuantity;*|+JoinReverse|*;
 /*		2457. actually only up to 10% of people need to get that speed.
 2013;20;"several"|ENNum:ENNumber;ENNumber|+Join;
 /*		2013. It said it has identified several options that could enhance debt capacity by several hundred million euros without losing its AA credit rating.
@@ -348,6 +348,8 @@
 /*		1296. I recommended to start walking on a daily basis, starting at an 1.8 of a mile per day.
 1307;25;"less than":"more than"|ENNum:ENNumber:"one";ENNumber|+Join;
 /*		1307. luxury hotels, measuring less than 100 square miles.	Saw an insurance discount for driving less than 40 miles per day to work.	His height was less than five feet.	The rate decreases by more than twenty percent. Most SMEs have in fact less than 30% of the market share.
+2761;25;"less than":"more than"|ENQuantity;ENQuantity|+Join;
+/*		2761. More than half of the women had deficient concentrations of 25(OH)D.
 1759;25;ENBeforeWeight|ENMeasureIndicator;-ENBeforeWeight|+ENBeforeWeight+ENBeforeMeasurement-ENMeasureIndicator;
 /*		1759.	Weight was noted to be 100lbs.
 1760;25;ENBeforeTemperature|ENMeasureIndicator;-ENBeforeTemperature|+ENBeforeTemperature+ENBeforeMeasurement-ENMeasureIndicator;
@@ -1024,7 +1026,7 @@
 /*		1753.	My third thought is that ministers should resist any inclination to appeal against his decision.
 2511;40;ENOrdNum|"time";+ENFrequency|*;
 /*		2511. At 10 mg dose he developed the recurrent symptoms for the third time.
-1942;40;ENOrdNum|*typeConcept+^ENNum+^ENNumber+^ENConTime+^"time";+ENMeasurement|*;
+1942;40;ENOrdNum|*typeConcept+^ENNum+^ENConTime+^"time";+ENMeasurement|*;
 /*		1942.	The work-up done during the third hospitalization was essentially negative.
 1525;40;"the":"a":"an"|ENConTime|ENAfterTime|SEnd;ENAdvTime|+Join|+Join|*;
 /*		1525. After scoring the same number of points as the week before.
@@ -1226,6 +1228,8 @@
 /*		253.	 The americans too recognised his personal leadership.
 2062;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^ENTo+^"since"+^"as"|.ENPremod3:ENThesame|ENPart;*|*|ENAdj+ENDummy2;
 /*		2062. FAS assistance is being offered on the same reduced terms as the PPF's.
+2760;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^ENTo+^"since"+^"as"|ENNum|ENPart|ENCon:ENVerbCon;*|*|ENAdj+ENDummy2|*;
+/*		2760. It features the newly-built cathedral capped with five gilded domes.
 2066;40;ENQuantity:ENsAdj:ENDummy2|ENPart|^typeRelation+^ENArtPosspron;*|ENAdj|*;
 /*		2066. Management of displaced comminuted patellar fracture with titanium cable cerclage.
 2314;40;ENQuantity:ENsAdj:ENDummy2|ENPart|ENAndOrBut;*|ENAdj|*;exception to r2066
@@ -1725,7 +1729,7 @@
 /* JOIN ADVERBS WITH INFINITIVE
 /*=============================
 515;40;ENAdvmandeg|ENInf+^ENVerbConAdj+^ENAdj;ENInf|+Join;
-/*		515.	SConsumer-price inflation will remain high in the first half, and rising inflation expectations could boost pressure for wage increases, and "easily" result in price hikes spreading, it said.
+/*		515.	Consumer-price inflation will remain high in the first half, and rising inflation expectations could boost pressure for wage increases, and "easily" result in price hikes spreading, it said.
 517;40;ENInf|ENAdvdir;ENInf|+Join;
 /*		517.	Do you expect that these evil men should bring forth good fruit?
 1129;40;ENInf|ENAdvmandeg+^ENTimes|SEnd;ENInf|+Join|*;
@@ -1791,6 +1795,8 @@
 
 /* FURTHER DISAMBIGUATION OF ENINFCON AND INFINITIVES/PRESENT TENSE ; DEFAULT ENSO ; ENREL + OTHER LABEL: REMOVE OTHER LABELS THAN ENREL
 /* =====================================================================================================================================
+2756;40;ENmAux|ENComma|*^ENComma|ENComma|ENInfCon+^ENVerbCon;*|*|*|*|^ENInf;
+/*		2756. It may, through the contact point, request that consultations be held.
 1583;40;ENInfCon|"or"|ENRel|ENTo|ENInf;ENRel+ENVerb|*|*|*|*;
 /*		1583. if such practice causes or threatens to cause serious prejudice to the interest of that Party.
 46;40;ENCon|ENInfCon|ENAux:ENAndOrBut;*|ENCon|*;
@@ -1851,8 +1857,8 @@
 /*		601.	We have sufficient alternatives to guarantee continued production.
 603;40;ENInfCon|ENIndefpron:ENToo;ENRel+ENVerb|*;
 /*		603.	The central bank suspects some banks traded NDFs on behalf of corporate clients.
-619;40;ENInfCon|ENPerspron_refl;ENRel+ENVerb|+Join;
-/*		619.	Respect yourself.	Wrong output: The relatively peaceful election process itself has provided relief to investors.
+619;40;ENInfCon|ENPerspron_refl|^ENRel+^ENInf+^ENAux+^ENmAux;ENRel+ENVerb|+Join|*;
+/*		619.	Respect yourself.
 1094;40;SBegin|ENInfCon|"that";*|ENRel+ENVerb|*;
 /*		1094. Note that the liver enzymes were normal on admission, at which time she was taking all of the above cholesterol medicines.
 1097;40;ENInfCon|ENAdvstruct|"that";ENRel+ENVerb|*|*;
@@ -1861,6 +1867,17 @@
 /*		1734. At what time will my flight land?
 1735;40;ENComma|ENInfCon+^ENCapitalInitial|ENCon|ENRel|ENArtPosspron;*|ENRel|*|*|*;
 /*		1735. Such traditions, she believes, help Melrose preserve its unique sense of self — a bedroom community that happens to be a city.
+2751;40;ENWhich:ENPerspron_obj|ENInfCon|"that";*|ENRel+ENVerb|*;
+/*		2751. The findings support the “hygiene hypothesis” of immune-related illnesses such as asthma, which postulates that exposure to dirt and microbes in early childhood may prevent the immune system from “over-reacting” in a way that triggers allergic or auto-immune disorders.
+2754;40;ENComma|*ENCon|"and":"or"|ENInfCon;*|*|*|^ENCon;last item in enumeration, needs to be before 2755
+/*		2755. The award can go to any person, project or group that has enhanced the lives of those who live or work in the city center.
+2757;40;ENPart|ENInfCon|"that";ENRel+ENVerb|ENCon|*;
+/*		2757. The patient expressed concern that her short term memory was not what it used to be.
+2753;40;SBegin:ENColon:ENAndOrBut|.ENAdj:ENArtPosspron+^"a"|ENCon:ENInfCon|ENInfCon|"that"|^ENRel+^ENAux+^ENmAux+^ENInf;*|*|^ENCon|ENRel+ENVerb|*|*
+/*		2753. But the MPs dispute that arithmetic.
+2755;40;ENAndOrBut+^"or"|ENInfCon|"that"|^ENRel+^ENAux+^ENmAux+^ENInf;*|ENRel+ENVerb|*|*
+/*		2755. But note that the door will close at 10:00.
+
 
 /* FURTHER DISAMBIGUATION OF ENPRESPART ; ENREL + OTHER LABEL: REMOVE OTHER LABELS THAN ENREL
 /* ==========================================================================================
@@ -1918,6 +1935,11 @@
 /*		2482. Variables included cardiovascular risk factors, smoking history and lung disease.
 2481;40;ENComma|ENPrespart+ENCapitalInitial|typeConcept;*|ENAdj|*;
 /*		2481. The address is High Street 44, Building 1A in 7000 Washington.
+2758;40;ENPrep:ENOf|"or"|ENPrespart;*|*|ENRel+ENVerb;
+/*		2758. It was used as a defoliant and not as a poison designed for or targeting human populations.
+2759;40;ENBe|ENAdj|ENPrep|ENPrespart|typeConcept;*|*|*|ENRel+ENVerb|*;
+/*		2759. The elections are crucial for restoring democracy in the strife-torn country.
+
 2091;40;ENRel+ENInf;ENRel+ENInf;
 /*		2091. We can already see that attunement is not at all inside.
 580;40;ENRel+^ENOf+^ENInf+^ENLinkingverb;ENRel;to make relation of words with double label
