@@ -91,6 +91,10 @@ for text_file in f_rec:
         # store the sentence
         if (key == "SentenceFound"):
             Sentence = value.split('"')[7]
+            if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
+                for i in range(8, len(value.split('"')) - 1):
+                    Sentence = Sentence + value.split('"')[i]
+
         # check if the demanded rule is applied to process the sentence    
         elif (key == "RuleApplication"):
             # rule_id in trace refers actually to rule order -> retrieve rule order value
