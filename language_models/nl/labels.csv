@@ -22,6 +22,7 @@
 
 /* Main labels
 ;1,40,50,60,63,65,70,80,$;NLAdj;typeConcept;uninflected present participles and adjectives;0;;
+;1,40,50,60,65,70,$;NLAdjCon;typeConcept;concept or adjective;0;;
 ;1,70;NLAntecedent;typeOther;extra label to limit expansion for antecedents;0;;
 ;1,30,40,65,$;NLAdvDegree;typeOther;adverb of degree;0;;
 ;1,40,65,$;NLAdvDirection;typeRelation;adverb expressing direction;0;;
@@ -36,19 +37,19 @@
 ;1,30,40,65,70,$;NLAdvTime;typeBeginEndConcept;adverb of time, specific time expressions;0;;
 ;1,30,40,50,60,63,65,70,80,$;NLArt;typeOther;definite or indefinite article;0;;
 ;1,40,50,60,63,65,70,80,$;NLAttradj;typeConcept;attributive adjective;0;;
+;1,40,50,60,65,70,$;NLAttradjCon;typeConcept;noun or attributive adjective;0;;
 ;1,40,65,70,$;NLAux;typeRelation;forms of auxiliaries "zijn" and "hebben";0;;
 ;1,40,65,$;NLAuxCon;typeAmbiguous;auxiliary verb or noun: kan, wil;0;;
-;1,40,50,60,65,70,80,$;NLBegin;typeBeginConcept;concept word that starts a concept;0;;
+;1,40,50,60,65,70,80,$;NLBeginconcept;typeBeginConcept;concept word that starts a concept;0;update-nl;
 ;1,40,50,65,$;NLBeginEnd;typeBeginEndConcept;entire concept, not to be merged with the preceding or following concept;0;;
 ;1,50,70,80,$;NLBeginpron;typeBeginConcept;pronoun that starts a Concept;0;;
 ;70,80,$;NLBeginrel;typeBeginRelation;starts a relation, used to manage attribute expansion;0;;
+;1,40,65,$;NLCAdv;typeConcept;predicatively used adjective as Concept;0;update-nl;
 ;1,63,70,$;NLColon;typeOther;colon;0;;
-;1,40,50,60,65,70,$;NLConAttradj;typeConcept;noun or attributive adjective;0;;
 ;1,40,65,$;NLConIfCap;typeOther;concept if capitalized;0;;
 ;1,40,65,$;NLConIfAllCap;typeOther;concept if entirely capitalized;0;;
 ;1,40,60,63,70,80,$;NLConj;typeRelation;conjunction;0;;
 ;1,70,80,$;NLConj2;typeBeginRelation;certain conjunctions that start a relation;0;;
-;1,40,50,60,65,70,$;NLAdjCon;typeConcept;concept or adjective;0;;
 ;1,30;NLDate;typeConcept;date in numbers (regex);0;;
 ;1,30,40,50;NLDay;typeConcept;names of days;0;;
 ;1,40,50,63,65,$;NLDempron;typeAmbiguous;demonstrative pronouns;0;;
@@ -58,7 +59,6 @@
 ;1,50,$;NLIndefpron;typeAmbiguous;pronoun that can be PathRelevant or part of Concept;0;;
 ;1,40,50,60,63,65,70,80,$;NLInf;typeRelation;infinitive;0;;
 ;1,40,65,$;NLInfCon;typeAmbiguous;infinitive or noun;0;;
-;1,30,40,50,65,$;NLJaar;typeConcept;year numbers;0;;
 ;1,40,$;NLLayout;typeBeginEndConcept;numbered list, footnotes etc.;0;;
 ;1,40,65,70,80;NLLinkingverb;typeRelation;linking verbs, used to make adverbs Concepts;0;;
 ;1,40,63,65,70,$;NLmAux;typeRelation;modal auxiliary verbs;0;;
@@ -69,7 +69,8 @@
 ;1,30,40,50,60,65,70,$;NLNum;typeConcept;numbers;0;;
 ;1,40,50,60,65,70,$;NLObjpron;typePathRelevant;mij, jou, hem, etc.;0;;
 ;1,40,60,63,65,70,80,$;NLOndvw;typeRelation;subordinate conjunction;0;;
-;1,40,65,$;NLPart;typeRelation;past participle,label for participles before disambiguation (Adj or Partrel);0;;
+;1,40,65,70,$;NLPartAdj;typeRelation;past participle,label for participles before disambiguation (Attradj or Partrel);0;update-nl;
+;1,40,$;NLPrespartAdj;typeAmbiguous;present participle,label before disambiguation (Attradj or Partrel);0;update-nl;
 ;1,40,50,63,65,70,80,$;NLPartrel;typeRelation;past participle that is disambiguated as a relation;0;;
 ;1,40;NLPartVerb;typeAmbiguous;past participle or conjugated verb;0;;
 ;1,40;NLPartVerbInf;typeAmbiguous;past participle or conjugated verb or infinitive;0;;
@@ -82,9 +83,11 @@
 ;1,40,50,63,65,70,80,$;NLRAdv;typeRelation;adverb as relation;0;;
 ;1,40,65,70,$;NLRefl;typeRelation;zich;0;;
 ;1,40,50,63,65,70,80,85,$;NLRel;typeRelation;unambiguous relation;0;;
-;1,40,50,65,$;NLRelAdj;typeAmbiguous;relation or modifier, partly replaces NLRelMod;0;;
+;1,40,50,65,$;NLRelAdj;typeAmbiguous;verb or adjective/adverb;0;;
+;1,40;NLRelAttradj;typeAmbiguous;verb or attributive adjective;0;;
 ;1,40,65,$;NLRelCon;typeAmbiguous;verb or noun;0;;
 ;1,40,65,$;NLRelConAdj;typeAmbiguous;verb, adjective or concept;0;;
+;1,40;NLRelConAttradj;typeAmbiguous;verb, attributive adjective or concept;0;update-nl;
 ;1,40,65,$;NLRelConAdv;typeAmbiguous;verb, noun or adverb;0;;
 ;1,40,65,$;NLRelConModOth;typeAmbiguous;dat, wat, hetgeen;0;;
 ;1,40,65,$;NLRelModAdv;typeAmbiguous;verb, adjective or adverb;0;;
@@ -99,10 +102,10 @@
 ;1,30;NLTimeconcept;typeConcept;word that is used in time expressions;0;;
 ;1,40,50,60,63,65,70,80,$;NLVerb;typeRelation;conjugated verb;0;;
 ;1,30,40;NLWeek;typeConcept;deze/volgende/vorige/dezelfde week;0;;
+;1,30,40,50,65,$;NLYear;typeConcept;year numbers;0;;
 
 /* Labels for specific words; some of them cover small sets of words
 ;1,40;NLAl;typeOther;(ook) al;0;;
-;1,40,50,65,$;NLAnderen;typePathRelevant;anderen: PathRelevant or part of Concept;0;;
 ;1,40,50,63,65,70,80,85,$;NLAndOrBut;typeRelation;co-ordinative conjunctions;0;;
 ;1,40,60,63,70,80,$;NLAndOr;typeRelation;"en","of" and variations;0;;
 ;1,40,65,$;NLBij;typeAmbiguous;'bij': preposition, adverb or noun;0;;
@@ -120,11 +123,12 @@
 ;1,40,50,65,70,80,$;NLHet;typeOther;het;0;;
 ;1,40,50;NLHetzelfde;typeAmbiguous;hetzelfde;0;;
 ;1,30,40,50,63,65,70,$;NLHyphen;typeConcept;hyphen;0;;
+;1,40;NLIets;typeAmbiguous;"iets";0;;
 ;1,40,65;NLIk;typeOther;ik;0;;
 ;1,40,65;NLJe;typeOther;je;0;;
 ;1,40,65,$;NLLaat;typeAmbiguous;verb, modal auxiliary or modifier;0;;
 ;1,40,63;NLMaar;typeAmbiguous;'maar': conjunction or adverb;0;;
-;1,40,65,$;NLMeer;typeAmbiguous;meer;0;;
+;1,40,65,$;NLMeerMinder;typeAmbiguous;'meer', 'minder' and variations, for 'meer' as noun the literal label is used;0;;
 ;1,40,50,63,65,$;NLNiet;typeOther;niet;0;;
 ;1,40,65,70,80;NLOm;typeRelation;om, teneinde;0;;
 ;1,40,50,65,$;NLProcent;typeConcept;'procent' and %;0;;
@@ -179,6 +183,8 @@
 ;40;NLPlural;typeAttribute;plural form;0;;
 ;1,40,80;NLNPcomp;typeAttribute;element of noun phrase;0;;
 ;40,80;NLWithZo;typeAttribute;marker for joined lexreps with 'zo';0;;
+;65;NLNoRelation;typeAttribute;marker for colors, which shouldn't become relation;0;update-nl;
 
-
-
+;1,40,65,$;NLVerbPlusCAdv;typeAttribute;for transitive verbs that make adverbs Concept;0;update-nl;
+;1,40,$;NLComp;typeAttribute;for comparatives;0;update-nl;
+;40;NLFraction;for fractions, such as 'helft';0;update-nl;
