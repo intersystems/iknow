@@ -154,6 +154,14 @@
 /* ---------- PHASE 5: PART 1 ----------
 /* ---------- Initial Processing ----------
 
+4688;5;^typeConcept|JPha|"しけ";*|JPCon|Join;
+
+/*		4688.	普通、はしけはエンジンは積んでおらず、方向を変える舵だけがついている。
+
+4689;5;JPHiragana:JPFromTo|JPha|"しけ";*|JPCon|Join;
+
+/*		4689.	しかし、トラックやトレーラーでは運べない重い貨物を運ぶために、現在でも各地の河川や港湾ではしけは活躍している。
+
 4461;5;JPna|JPshi;JPAdjVBase+JPNegation+JPHiragana+JPnashi|Join;
 4464;5;typeConcept+^JPHiragana|"っけ";JPCon|Join;
 4465;5;"っけ";Join;
@@ -261,7 +269,10 @@
 4682;5;JPTime|"少し"|"前":"後":"あと";JPTime|Join|Join;
 4681;5;JPTime|"前";JPTime|Join;
 4683;5;JPTime|"頃";JPTime|Join;
-5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"|JPCon|JPCon+^JPNegation;JPCon|Join|Join;
+5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"|JPCon|JPCon+^JPNegation+^JPVerbOtherTSU;JPCon|Join|Join;
+
+/*		5.	企業や社会のあり方が大きく変わりつつあるときだからこそ、今まで以上に柔軟で迅速に構築できる、次のIT基盤が求められている。 SHOULD NOT WORK FOR: 毛羽立たずセンイ残りしない化粧用パフとして高いご支持を頂いています。
+
 2782;5;SBegin|"併せて";*|JPAdv;
 3086;5;SBegin|"いきおい"|JPComma;*|JPAdv|JPComma;
 3078;5;SBegin|"かた"|"や";*|JPConj|Join;
@@ -375,10 +386,30 @@
 4467;5;JPVerbOtherTSU|JPtsu|JPka|JPVerbOtherTSU|JPta|"ない"|JPka;JPVerb|Join|Join|Join|Join|Join|Join;
 4470;5;JPVerbOtherMU|JPmu|JPka|JPVerbOtherMU|JPma|"ない"|JPka;JPVerb|Join|Join|Join|Join|Join|Join;
 4471;5;JPVerbOtherRU|JPru|JPka|JPVerbOtherRU|JPra|"ない"|JPka;JPVerb|Join|Join|Join|Join|Join|Join;
+4693;5;JPCon+JPVerbOtherTSU|"た":"たる":"つ":"と";-JPCon|*;
+
+/*		4693.	上に立つ責務。
+
 3034;5;JPVerbOther|JPVerbEndOther+^JPna+^JPri;-JPCon-JPSuffixNoun|^JPVerbEndOther;
 3062;5;JPAdvTime+JPCon|JPnaka;JPCon+DateTime|Join;
 3670;5;JPAdjVStem|JPi;-JPCon|^JPi;
 4186;5;JPVerbOther+JPVerbOtherMU|JPmu;JPVerb+JPVerbBase|Join;
+4690;5;JPCon+JPVerbOtherMU|"む";-JPCon|*;
+
+/*		4690.	国際貨物のトレーラーは、特例的に26.5ﾄﾝまで積むことができる。
+
+4691;5;JPCon+JPVerbOtherKU|"く";-JPCon|*;
+
+/*		4691.	時々ひらめく。
+
+4692;5;JPCon+JPVerbOtherSU|"す";-JPCon|*;
+
+/*		4692.	税金を課す業務。
+
+4694;5;JPCon+JPVerbOtherRU+^"で"|"る";-JPCon|*;
+
+/*		4694.	大正から昭和、平成にかけ、時代を彩るスターを輩出した。
+
 3978;5;JPVerbOther+^JPVerbOtherRU|JPku;-JPCon-JPita|^JPku;
 4085;5;JPNumber|"人"|"に"|"1人":"一人";JPCon+JPNumber|Join|Join|Join;
 4087;5;JPNumber|JPCount+JPTime|"近く"|"前";JPEndConcept+JPTime|Join|Join|Join;
@@ -1021,6 +1052,10 @@
 3803;5;JPCon|JPsa|JPn|JPde;^JPCon|JPSuffixNoun|Join|JPParticleDE;
 3804;5;JPSuffixNoun|JPsa|JPn|JPde;^JPCon|JPSuffixNoun|Join|JPParticleDE;
 3806;5;JPn|JPde|JPn;JPHiragana|Join|Join;
+4695;5;JPn|JPde|"る";JPVerbEndOther|Join|Join;
+
+/*		4695.	広い窓から見下ろすと、まるで空に浮かんでるようです！
+
 85;5;JPn|JPde;JPVerbEndOther+JPConjVerb+JPHiragana|Join;
 86;5;JPte|JPi|JPki;JPVerbEndOther|Join|Join;
 87;5;JPVerbNoun|JPte|JPki|JPta;JPConjVerb+JPVerbOther|JPte|JPKuruVerb+JPSuffixVerb|Join;

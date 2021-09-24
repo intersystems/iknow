@@ -260,6 +260,11 @@
 ;;(粋|イキ);;JPAdjNoun;
 ;;ナマ;;JPAdjNoun;JPVerbOther;JPSuffixNoun;
 ;;生;;JPVerbOther;JPAdjNoun;JPVerbOther;JPSuffixNoun;JPSuruNoun;JPVerbOtherMU;
+;;僻;;JPVerbOther;JPVerbOtherMU;
+;;(ひがみ|僻み);;JPVerbNoun;
+;;ひがむ;;JPVerb;JPVerbBase;
+;;ひがんで;;JPVerb;JPConjVerb;
+;;ひがんだ;;JPVerb;JPVerbPastAttributive;
 ;;(盛ん|さかん);;JPAdjNoun;
 ;;(静か|閑か);;JPAdjNoun;
 ;;心静か;;JPAdjNoun;
@@ -3492,6 +3497,10 @@
 ;;(く|ぐ|す|つ|ぶ|む|る|う)ようになったということ;;JPVerbEndOther;-;JPPartAdvNOUN;Join;Join;Join;Join;Join;-;JPExpressionNR;Join;Join;Join;Join;
 ;;(く|ぐ|す|つ|ぶ|む|る|う)ようになったのは;;JPVerbEndOther;-;JPPartAdvNOUN;JPEndRelation;Join;Join;Join;Join;Join;-;JPNonRelevant;-;JPParticleHA;
 ;;くようになったら;;JPVerbEndOther;-;JPPartAdvNOUN;Join;Join;Join;Join;Join;Join
+;
+;;ぐようになったら;;JPVerbEndOther;-;JPPartAdvNOUN;Join;Join;Join;Join;Join;Join
+;;すようになったら;;JPVerbEndOther;-;JPPartAdvNOUN;Join;Join;Join;Join;Join;Join
+;
 ;;(く|ぐ|す|つ|ぶ|む|る|う)ようになったら;;JPVerbEndOther;-;JPPartAdvNOUN;Join;Join;Join;Join;Join;Join
 ;
 ;;(く|ぐ|す|ぶ|む|る|う)割には;;JPVerbEndOther;-;JPPartAdvNOUN;Join;-;JPParticleHA;
@@ -3704,11 +3713,17 @@
 ;;したことのない;;JPSuruVerb;JPNegation;
 ;;したことは;;JPSuruVerb;JPEndRelation;Join;-;JPkoto;Join;-;JPParticleHA;
 ;;したことはありません;;JPSuruVerb;JPNegation;
-;;したことはない;;JPSuruVerb;JPNegation;
-;;したことはないか;;JPSuruVerb;
-;;したことはないだろうか;;JPSuruVerb;
-;;したことはないですか;;JPSuruVerb;
-;;したことはなかった;;JPSuruVerb;JPNegation;
+
+;;したことは(な|無)い;;JPSuruVerb;JPNegation;
+
+;;したことは(な|無)いか;;JPSuruVerb;
+
+;;したことは(な|無)いだろうか;;JPSuruVerb;
+
+;;したことは(な|無)いですか;;JPSuruVerb;
+
+;;したことは(な|無)かった;;JPSuruVerb;JPNegation;
+
 ;;したさま;;JPSuruVerb;Join;-;JPPartAdvNOUN;Join;
 ;;したさまざま;;JPSuruVerb;Join;-;JPAdjNoun;Join;Join;Join;
 ;;した時期;;JPSuruVerb;JPVerbPastAttributive;Join;-;JPCon;Join;
@@ -4671,6 +4686,7 @@
 ;;とかじを切;;JPto;-;JPCon;Join;-;JPParticleWO;-;JPVerbOther;
 ;;とかじを切り;;JPto;-;JPCon;Join;-;JPParticleWO;-;JPVerbNoun;Join;
 ;;とかなり;;JPto;-;JPAdv;JPAdvDegree;Join;Join;
+
 ;;とかは;;JPConj;Join;-;JPParticleHA;
 ;;とかみ付;;JPto;-;JPVerbOther;Join;Join;
 ;;とかみ付き;;JPto;-;JPVerbNoun;Join;Join;Join;
@@ -11304,8 +11320,8 @@
 
 ;;はなし;;JPVerbNoun;JPSuruNoun;
 ;;はなしのつぶて;;JPParticleHA;-;JPExpressionC;Join;Join;Join;Join;Join;
-;;はなし。;;JPParticleHA;-;JPCon;JPNegation;Join;-;Punctuation;PrimaryRelation;
-;;はなし( |　);;JPParticleHA;-;JPCon;JPNegation;Join;-;Punctuation;PrimaryRelation;
+;;はなし。;;JPParticleHA;-;JPAdjVBase;JPNegation;Join;-;Punctuation;PrimaryRelation;
+;;はなし( |　);;JPParticleHA;-;JPAdjVBase;JPNegation;Join;-;Punctuation;PrimaryRelation;
 ;;おはなし;;JPCon;
 ;;ばなし;;JPSuffixNoun;
 
@@ -12077,7 +12093,8 @@
 ;;見てもら;;JPVerbOther;
 ;;揺るが;;JPVerbOther;
 ;;踏みにじ;;JPVerbOther;
-;;(積|摘);;JPVerbOther;JPCon;
+;;(積|摘);;JPVerbOther;JPCon;JPVerbOtherMU;
+
 ;;(ともな|伴な);;JPVerbOther;
 ;;伴;;JPVerbOther;JPCon;
 ;;伴う;;JPVerb;JPVerbBase;
@@ -12111,7 +12128,7 @@
 ;;目立;;JPVerbOther;
 
 ;;(役に立|役立);;JPVerbOther;JPVerbOtherTSU;
-;;立;;JPVerbOther;JPVerbOtherTSU;
+;;立;;JPCon;JPVerbOther;JPVerbOtherTSU;
 
 ;;(いらだ|いら立|苛立);;JPVerbOther;JPVerbOtherTSU;
 ;;腹立;;JPVerbOther;JPVerbOtherTSU;
@@ -12944,7 +12961,7 @@
 ;;脅;;JPVerbOther;
 ;;(うたが|疑);;JPVerbOther;
 ;;あらが;;JPVerbOther;
-;;課;;JPVerbOther;JPSuffixNoun;JPCount;
+;;課;;JPVerbOther;JPSuffixNoun;JPCount;JPVerbOtherSU;JPCon;
 ;;科;;JPVerbOther;JPSuffixNoun;JPCon;
 ;;響;;JPVerbOther;JPSuffixNoun;
 ;;くすぶ;;JPVerbOther;
@@ -15489,7 +15506,8 @@
 ;;(なだめ|宥め);;JPVerbOther;JPVerbNoun
 ;;(なまけ|怠け);;JPVerbOther;JPVerbNoun
 ;;(にぎりしめ|握りしめ);;JPVerbOther;JPVerbNoun
-;;(にじみ出|滲み出);;JPVerbOther;JPVerbNoun
+;;(にじみで|にじみ出|滲み出);;JPVerbOther;JPVerbNoun;JPVerbOtherRU;JPVerbOtherSU;
+
 ;;(にらみつけ|睨みつけ);;JPVerbOther;JPVerbNoun
 ;;(ぬぐえ|拭え);;JPVerbOther;JPVerbNoun
 ;;(のぞけ|除け);;JPVerbOther;JPVerbNoun
@@ -30845,6 +30863,7 @@
 ;;花言葉;;JPCon
 ;;物言い;;JPCon
 ;;物言う;;JPVerbBase;JPVerb;
+;;物資;;JPCon;
 
 ;;苦言;;JPCon
 ;;言い分;;JPCon
@@ -37338,6 +37357,7 @@
 ;;それにしても;;JPConj;
 ;;それによると;;JPConj;
 ;;または;;JPConj;
+;;(またはしけは|またはしけが);;JPConj;Join;-;JPCon;Join;Join;-;JPha;
 ;;それだけに;;JPConj;
 
 ;;(即ち|すなわち|すなはち);;JPConj;JPAdv;
@@ -39246,6 +39266,7 @@
 ;;おくもと;;JPCon;
 ;;えいいちろう;;JPCon;
 ;;みなと観光;;JPCon;
+;;みなと;;JPCon;
 ;;里見;;JPCon;
 ;;もとはし;;JPCon;
 ;;ぶぶか;;JPCon;
@@ -39588,6 +39609,8 @@
 ;;やまなし;;JPCon;JPHiragana;
 ;;ながさき;;JPCon;JPHiragana;
 ;;しもむら;;JPCon;JPHiragana;
+;;しけ;;JPVerbNoun;JPVerbOther;JPHiragana;
+;;時化;;JPVerbNoun;JPVerbOther;JPHiragana;
 ;;もの忘れ;;JPCon;
 ;;死にもの狂い;;JPCon;
 ;;ちどり歩き;;JPCon;
