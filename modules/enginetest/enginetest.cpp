@@ -336,7 +336,7 @@ void testing_json_c_interface()
 		j_request["method"] = "index";
 		j_request["text_source"] = u8"This is a test of the Python interface to the iKnow engine. Be the change you want to see in life. Now, I have been on many walking holidays, but never on one where I have my bags ferried\nfrom hotel to hotel while I simply get on with the job of walkingand enjoying myself.";
 		j_request["language"] = "en";
-		j_request["b_trace"] = true;
+		// j_request["b_trace"] = true;
 		cout << std::endl << std::endl << "request_json:" << std::endl;
 		cout << j_request.dump() << std::endl;
 		int ret = iknow_json(j_request.dump().c_str(), &j_response);
@@ -348,5 +348,4 @@ void testing_json_c_interface()
 			cout << j_response << std::endl;
 		}
 	}
-	exit(0);
 }
