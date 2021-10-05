@@ -8,6 +8,8 @@
 # Required Environment Variables:
 # - ICU_URL is the URL to a .zip pre-built release of ICU for Windows x86_64
 # - ICUDIR is the directory to install ICU
+# - JSON_URL is the URL of the C++ JSON project on Github
+# - JSONDIR is the directory to install the JSON header
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
 # - PYINSTALL_DIR is the directory where Python instances are installed
 
@@ -23,9 +25,19 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
 fi
 
+##### Build JSON C++
+if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
+    rm -rf "$JSONDIR"
+    cd "$GITHUB_WORKSPACE/thirdparty"
+    git clone "$JSON_URL"
+    cd json
+    git checkout v3.10.2
+    echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
+fi
+export JSON_INCLUDE="$JSONDIR/single_include"
 
 ##### Build iKnow engine and run C++ unit tests #####
-cd modules
+cd "$GITHUB_WORKSPACE/modules"
 MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin"
 BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
   MSBuild.exe iKnowEngine.sln -p:Configuration=Release -p:Platform=x64 \

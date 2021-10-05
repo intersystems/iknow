@@ -113,6 +113,17 @@ namespace iknowdata { // to bundle all generated data
 		std::string index_; // the normalized entity textual representation, utf8 encoded
 		double dominance_value_; // a dominance value for each concept in the source document is calculated, most important concepts have highest score.
 		size_t entity_id_; // unique concept index in the source document, if not concept, this value equals kNoConcept
+
+		static inline std::string TypeName(eType ent_type) { // translate the attribute type
+			switch (ent_type) {
+			case eType::NonRelevant:	return "NonRelevant";
+			case eType::Concept:		return "Concept";
+			case eType::Relation:		return "Relation";
+			case eType::PathRelevant:	return "PathRelevant";
+
+			default:					return "unknown";
+			}
+		}
 	};
 	
 	struct Sent_Attribute // sentence attribute
@@ -134,8 +145,7 @@ namespace iknowdata { // to bundle all generated data
 		Attribute type_;
 		size_t offset_start_, offset_stop_; // these refer to offsets in the text, "start" is where the textual representation starts, "stop" is where it stops.
 		std::string marker_; // the normalized attribute textual representation, utf8 encoded
-		// std::string value_, unit_, value2_, unit2_; // optional properties for measurement attribute
-		Sent_Attribute_Parameters parameters_; // variable number of paramters, for measurement, that are value/unit pairs.
+		Sent_Attribute_Parameters parameters_; // variable number of parameters, for measurement, that are value/unit pairs.
 
 		Entity_Ref entity_ref; // reference to entity vector, max number of entities in a sentence is 1028, so unsigned short should be enough
 		std::vector<Entity_Ref> entity_vector; // EntityVector, only used in Japanese
@@ -297,3 +307,10 @@ private:
 	static void add_lang_for_ALI(std::string lang);
 	bool m_document_level_ALI;
 };
+
+//
+// C interface talking json
+//
+extern "C" {
+	IKNOW_API int iknow_json(const char* request, const char** response);
+}

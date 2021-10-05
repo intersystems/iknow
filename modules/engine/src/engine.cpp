@@ -589,3 +589,146 @@ void iKnowEngine::unloadUserDictionary(void)
 		pUserDCT = NULL;
 	}
 }
+
+#include <nlohmann/json.hpp>
+using nlohmann::json;
+using namespace iknowdata;
+
+int iknow_json_index_(String text, string lang, bool b_trace, json& j_response)
+{
+	iKnowEngine engine;
+	engine.index(text, lang, b_trace);
+
+	for (size_t cnt_sentence = 1; cnt_sentence <= engine.m_index.sentences.size(); ++cnt_sentence) {
+		struct Sentence& sent = engine.m_index.sentences[cnt_sentence - 1];
+
+		json j_array_entities = json::array();
+		for_each(sent.entities.begin(), sent.entities.end(), [&j_array_entities](Entity& entity) {
+			json j_entity = {
+				{"type", Entity::TypeName(entity.type_)},
+				{"offset_start", entity.offset_start_},
+				{"offset_stop", entity.offset_stop_},
+				{"index", entity.index_},
+				{"dominance_value", entity.dominance_value_},
+				{"entity_id", entity.entity_id_}
+			};
+			j_array_entities.push_back(j_entity);
+			});
+		j_response["sentences"][std::to_string(cnt_sentence)]["entities"] = j_array_entities;
+
+		json j_array_attributes = json::array();
+		for_each(sent.sent_attributes.begin(), sent.sent_attributes.end(), [&j_array_attributes](Sent_Attribute& attribute) {
+			Sent_Attribute::Sent_Attribute_Parameters &params = attribute.parameters_;
+			json j_attribute_parameters = json::array();
+			for (auto it = params.begin(); it != params.end(); ++it) { // historically, the first 2 sets are always present, even if unused (=empty)
+				if (!it->first.empty())
+					j_array_attributes.push_back(it->first);
+				if (!it->second.empty())
+					j_array_attributes.push_back(it->second);
+			}
+			json j_attribute = {
+				{"type", AttributeName(attribute.type_)},
+				{"offset_start", attribute.offset_start_},
+				{"offset_stop", attribute.offset_stop_},
+				{"marker", attribute.marker_},
+				{"parameters", j_attribute_parameters},
+				{"entity_ref", attribute.entity_ref},
+				{"entity_vector", attribute.entity_vector}
+			};
+			j_array_attributes.push_back(j_attribute);
+			});
+		j_response["sentences"][std::to_string(cnt_sentence)]["attributes"] = j_array_attributes;
+
+		j_response["sentences"][std::to_string(cnt_sentence)]["path"] = sent.path;
+
+		// json j_path_attributes = sent.path_attributes;
+		json j_array_path_attributes = json::array();
+		for_each(sent.path_attributes.begin(), sent.path_attributes.end(), [&j_array_path_attributes](Path_Attribute& attribute) {
+			json j_path_attribute = {
+				{"type", AttributeName(attribute.type)},
+				{"position", attribute.pos},
+				{"span", attribute.span}
+			};
+			j_array_path_attributes.push_back(j_path_attribute);
+			});
+		j_response["sentences"][std::to_string(cnt_sentence)]["path_attributes"] = j_array_path_attributes;
+	}
+
+	j_response["proximity"] = engine.m_index.proximity;
+	j_response["traces"] = engine.m_traces;
+	return 0;
+}
+
+int iknow_json_(const char* request, const char** response)
+{
+	thread_local string s_response; // thread local : memory allocated will be freed if thread dies... 
+	json j_request, j_response;
+
+	int ret_val = 0;
+	try {
+		j_request = json::parse(string(request)); // parse request into json object
+	}
+	catch (std::exception& e) {
+		j_response["error"] = e.what(); // std::cout << e.what() << std::endl;
+		s_response = j_response.dump(); // from json string on thread local storage buffer
+		ret_val = -1;
+	}
+	if (ret_val == 0) { // JSON Parsing succesfull
+		if (j_request.find("method") != j_request.end()) {
+			if (j_request["method"] == string("GetLanguagesSet")) {
+				j_response["iknow_languages"] = iKnowEngine::GetLanguagesSet();
+			}
+			// static std::string NormalizeText(const std::string & text_source, const std::string & language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+			if (j_request["method"] == string("NormalizeText")) {
+				string text_source = j_request["text_source"];
+				string language = j_request["language"];
+				bool bUserDct = false; // default value
+				if (j_request.find("bUserDct") != j_request.end())
+					bUserDct = j_request["bUserDct"];
+				bool bLowerCase = true; // default value
+				if (j_request.find("bLowerCase") != j_request.end())
+					bLowerCase = j_request["bLowerCase"];
+				bool bStripPunct = true; // default value
+				if (j_request.find("bStripPunct") != j_request.end())
+					bStripPunct = j_request["bStripPunct"];
+
+				j_response["normalized"] = iKnowEngine::NormalizeText(text_source, language, bUserDct, bLowerCase, bStripPunct);
+			}
+			// static std::string IdentifyLanguage(const std::string& text_source, double& certainty);
+			if (j_request["method"] == "IdentifyLanguage") {
+				string text_source = j_request["text_source"];
+				double certainty;
+				j_response["language"] = iKnowEngine::IdentifyLanguage(text_source, certainty);
+				j_response["certainty"] = to_string(certainty);
+			}
+			// void index(iknow::base::String& text_source, const std::string& language, bool b_trace=false);
+			if (j_request["method"] == "index") {
+				string text_source = j_request["text_source"];
+				string language = j_request["language"];
+				bool b_trace = false; // default value
+				if (j_request.find("b_trace") != j_request.end())
+					b_trace = j_request["b_trace"];
+
+				iknow_json_index_(IkStringEncoding::UTF8ToBase(text_source), language, b_trace, j_response);
+			}
+		}
+		else {
+			j_response["error"] = "\"method\" key not found in JSON string, see documentation for correct parameters !";
+			ret_val = -1;
+		}
+	}
+	try {
+		s_response = j_response.dump(4); // serialize and store
+		*response = s_response.c_str(); // pass read-only buffer 
+	}
+	catch (...) {
+		ret_val = -2;
+	}
+	return ret_val;
+}
+
+extern "C" {
+	int iknow_json(const char* request, const char** response) {
+		return iknow_json_(request, response);
+	}
+}

@@ -11,9 +11,11 @@ include $(ROOT_DIR)/build/make/platforms/$(PLATFORM).mak
 
 all : engine
 
-test : enginetest
+test : enginetest engineloadtest
 	$(RUNTIMELOADPATHVAR)=$(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin:$(ICUDIR)/lib $(ROOT_DIR)/kit/$(PLATFORM)/$(MODE)/bin/iknowenginetest
 
+engineloadtest : engine base
+	$(MAKE) -f $(ROOT_DIR)/modules/iKnowExplicitTest/engineloadtest.mak
 languagecompiler : base core
 	$(MAKE) -f $(ROOT_DIR)/modules/compiler/iKnowLanguageCompiler/languagecompiler.mak
 enginetest : engine base

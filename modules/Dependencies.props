@@ -5,6 +5,7 @@
     <ICUDIR>$(SolutionDir)..\thirdparty\icu\</ICUDIR>
     <ICU_INCLUDE>$(ICUDIR)\include</ICU_INCLUDE>
     <ICU_LIB>$(ICUDIR)\lib64</ICU_LIB>
+    <JSON_INCLUDE>$(SolutionDir)..\thirdparty\json\single_include\</JSON_INCLUDE>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -14,10 +15,13 @@
     <BuildMacro Include="ICU_LIB">
       <Value>$(ICU_LIB)</Value>
     </BuildMacro>
+    <BuildMacro Include="JSON_INCLUDE">
+      <Value>$(JSON_INCLUDE)</Value>
+    </BuildMacro>
   </ItemGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ICU_INCLUDE)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ICU_INCLUDE);$(JSON_INCLUDE)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ICU_LIB)</AdditionalLibraryDirectories>

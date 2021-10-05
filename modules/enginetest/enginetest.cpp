@@ -6,6 +6,9 @@
 #include <fstream>
 #include <map>
 
+#include <nlohmann/json.hpp>
+using nlohmann::json;
+
 #include "engine.h"
 #include "iKnowUnitTests.h"
 
@@ -103,6 +106,7 @@ struct handleLanguage
 // a_short_demo shows the step in indexing and retrieving results.
 //
 void a_short_demo(void);
+void testing_json_c_interface(void);
 
 int main(int argc, char* argv[])
 {
@@ -123,6 +127,7 @@ int main(int argc, char* argv[])
 		os.close();
 
 		a_short_demo();
+		testing_json_c_interface();
 
 		cout << endl << "*** All tests passed succesfully ***" << endl;
 	}
@@ -265,4 +270,83 @@ void a_short_demo(void)
 		cout << "\"" << mapTextSource[id1] << "\":\"" << mapTextSource[id2] << "\"=" << proximity << endl;
 	}
 
+}
+
+void testing_json_c_interface()
+{
+	const char* j_response;
+
+	// static const std::set<std::string>& GetLanguagesSet(void);
+	{
+		json j_request;
+		j_request["method"] = "GetLanguagesSet";
+		cout << std::endl << std::endl << "request_json:" << std::endl;
+		cout << j_request.dump() << std::endl;
+		int ret = iknow_json(j_request.dump().c_str(), &j_response);
+		cout << std::endl << "response_json:" << std::endl;
+		if (ret == 0) {
+			cout << j_response << std::endl;
+		}
+		if (ret == -1) {
+			cout << "error in iknow_json..." << std::endl;
+			cout << j_response << std::endl;
+		}
+	}
+	// static std::string NormalizeText(const std::string & text_source, const std::string & language, bool bUserDct = false, bool bLowerCase = true, bool bStripPunct = true);
+	{
+		json j_request;
+		j_request["method"] = "NormalizeText";
+		j_request["text_source"] = u8"Risque d'exploitation";
+		j_request["language"] = "fr";
+		/* These are defaults...
+		j_request["bUserDct"] = false;
+		j_request["bLowerCase"] = true;
+		j_request["bStripPunct"] = true;
+		*/
+		cout << std::endl << std::endl << "request_json:" << std::endl;
+		cout << j_request.dump() << std::endl;
+		int ret = iknow_json(j_request.dump().c_str(), &j_response);
+		if (ret == 0) {
+			cout << j_response << std::endl;
+		}
+		if (ret == -1) {
+			cout << "error in iknow_json..." << std::endl;
+			cout << j_response << std::endl;
+		}
+	}
+	// static std::string IdentifyLanguage(const std::string& text_source, double& certainty);
+	{
+		json j_request;
+		j_request["method"] = "IdentifyLanguage";
+		j_request["text_source"] = u8"Микротерминатор может развивать скорость до 30 сантиметров за секунду, пишут калининградские СМИ.";
+		cout << std::endl << std::endl << "request_json:" << std::endl;
+		cout << j_request.dump() << std::endl;
+		int ret = iknow_json(j_request.dump().c_str(), &j_response);
+		if (ret == 0) {
+			cout << j_response << std::endl;
+		}
+		if (ret == -1) {
+			cout << "error in iknow_json..." << std::endl;
+			cout << j_response << std::endl;
+		}
+	}
+	// void index(iknow::base::String & text_source, const std::string & language, bool b_trace = false);
+	{
+		json j_request;
+		j_request["method"] = "index";
+		j_request["text_source"] = u8"This is a test of the Python interface to the iKnow engine. Be the change you want to see in life. Now, I have been on many walking holidays, but never on one where I have my bags ferried\nfrom hotel to hotel while I simply get on with the job of walkingand enjoying myself.";
+		j_request["language"] = "en";
+		j_request["b_trace"] = true;
+		cout << std::endl << std::endl << "request_json:" << std::endl;
+		cout << j_request.dump() << std::endl;
+		int ret = iknow_json(j_request.dump().c_str(), &j_response);
+		if (ret == 0) {
+			cout << j_response << std::endl;
+		}
+		if (ret == -1) {
+			cout << "error in iknow_json..." << std::endl;
+			cout << j_response << std::endl;
+		}
+	}
+	exit(0);
 }

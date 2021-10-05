@@ -10,6 +10,7 @@
 # - CCACHE_MAXSIZE is the size limit for files held with ccache
 # - PIP_CACHE_DIR is the location that pip caches files
 # - ICU_URL is the URL to a .zip source release of ICU
+# - JSON_URL is the URL of the C++ JSON project on Github 
 
 set -euxo pipefail
 
@@ -58,6 +59,17 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
 fi
 
+##### Build JSON C++
+export JSONDIR=/iknow/thirdparty/json
+if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
+    rm -rf "$JSONDIR"
+    cd /iknow/thirdparty
+    git clone "$JSON_URL"
+    cd json
+    git checkout v3.10.2
+    echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
+fi
+export JSON_INCLUDE=$JSONDIR/single_include
 
 ##### Build iKnow engine and run C++ unit tests #####
 cd /iknow

@@ -13,6 +13,7 @@ This readme file has everything you need to get started, but make sure you click
   - [From Python](#from-python)
   - [From C++](#from-c)
   - [From InterSystems IRIS](#from-intersystems-iris)
+  - [From Different Platforms](#from-other-platforms)
 - [Understanding iKnow](#understanding-iknow)
   - [Entities](#entities)
   - [Attributes](#attributes)
@@ -75,6 +76,14 @@ For many years, the iKnow engine has been available as an embedded service on th
 
 The [InterSystems IRIS Community Edition](https://docs.intersystems.com/irislatest/csp/docbook/DocBook.UI.Page.cls?KEY=ACLOUD) is available from Docker Hub free of charge.
 
+## From Different Platforms
+
+Since version 1.3, a C-interface is available, enabling communication with the iKnow engine in a JSON encoded request/response style:
+```C
+const char* j_response;
+iknow_json(R"({"method" : "index", "language" : "en", "text_source" : "Hello World"})", &j_response);
+```
+Most API functionality is available in a serialized json format.
 
 # Understanding iKnow
 
