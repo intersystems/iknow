@@ -220,6 +220,24 @@ class MergeCommand(Command):
     def finalize_options(self):
         pass
 
+    @staticmethod
+    def _get_version_from_tag(tag):
+        """Given a Python tag or ABI tag, which contains the Python version in
+        concatenated form, return a 2-tuple for the Python version. It is
+        assumed that the major version is a single digit.
+
+        Examples:
+            'cp35m' -> (3, 5)
+            'cp39' -> (3, 9)
+            'cp310' -> (3, 10)
+            'abi3' -> (3, 0)
+        """
+        digits_match = re.search(r'\d+', tag)
+        if not digits_match:
+            raise ValueError(f'Invalid Python tag or ABI tag {tag!r}')
+        digits = digits_match[0]
+        return int(digits[0]), int(digits[1:]) if digits[1:] else 0
+
     def run(self):
         metadata = None  # metadata from .dist-info/WHEEL file
         python_tags = []
@@ -267,8 +285,8 @@ class MergeCommand(Command):
             if key != 'Tag' and len(values) > 1:
                 raise BuildError(f'Wheels have conflicting metadata for key {key!r} and cannot be merged. Conflicting values are {values!r}.')
 
-        python_tags.sort()
-        abi_tags.sort()
+        python_tags.sort(key=MergeCommand._get_version_from_tag)
+        abi_tags.sort(key=MergeCommand._get_version_from_tag)
 
         # copy all engine modules into extracted contents of first wheel
         for extracted_dir in extracted_dirs[1:]:
@@ -789,6 +807,7 @@ try:
             'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
+            'Programming Language :: Python :: 3.10',
             'Programming Language :: Python :: Implementation :: CPython',
             'Operating System :: MacOS :: MacOS X',
             'Operating System :: Microsoft :: Windows',
