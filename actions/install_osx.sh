@@ -13,6 +13,8 @@
 # - PYINSTALL_DIR is the location that Python installations are installed and
 #   cached
 # - CYTHON_VERSION is the version of Cython to install
+# - JSON_URL is the URL of .zip release of JSON for Modern C++
+# - JSONDIR is the directory to install JSON for Modern C++
 
 set -euxo pipefail
 
@@ -124,6 +126,14 @@ for PYTHON in $PKG_INSTALLED_CMDS; do
   "$PYTHON" get-pip.py
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
+
+# JSON for Modern C++
+if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
+    rm -rf "$JSONDIR"
+    curl -L -o json_for_modern_cpp.zip "$JSON_URL"
+    unzip -q -d "$JSONDIR" json_for_modern_cpp.zip
+    echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
+fi
 
 # finish ccache setup
 echo /usr/local/opt/ccache/libexec >> $GITHUB_PATH

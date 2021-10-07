@@ -26,6 +26,7 @@ on:
 env:
   ICUDIR: ${{ github.workspace }}/thirdparty/icu
   JSONDIR: ${{ github.workspace }}/thirdparty/json
+  JSON_INCLUDE: ${{ github.workspace }}/thirdparty/json/single_include
 
 jobs:
   manylinux2010_x86_64:
@@ -42,6 +43,11 @@ jobs:
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v2
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
         uses: actions/cache@v2
         with:
@@ -83,6 +89,11 @@ jobs:
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v2
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
         uses: actions/cache@v2
         with:
@@ -114,6 +125,11 @@ jobs:
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v2
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
         uses: actions/cache@v2
         with:
@@ -157,6 +173,11 @@ jobs:
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}
           path: ${{ env.ICUDIR }}
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v2
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
       - name: download cached Python installations
         uses: actions/cache@v2
         with:
@@ -223,6 +244,11 @@ jobs:
         with:
           key: ${{ github.job }}-buildcache-${{ env.BUILDCACHE_URL }}
           path: ~/buildcache_exe
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v2
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
       - name: download cached buildcache files, Python installations
         uses: actions/cache@v2
         with:

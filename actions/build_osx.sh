@@ -9,9 +9,8 @@
 # Required Environment Variables:
 # - ICU_URL is the URL to a .zip source release of ICU
 # - ICUDIR is the directory to install ICU
-# - JSON_URL is the URL of the C++ JSON project on Github
-# - JSONDIR is the directory to install the JSON header
 # - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
+# - JSON_INCLUDE is the directory containing JSON for Modern C++ headers
 
 set -euxo pipefail
 
@@ -30,17 +29,6 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   make install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
 fi
-
-##### Build JSON C++
-if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
-    rm -rf "$JSONDIR"
-    cd "$GITHUB_WORKSPACE/thirdparty"
-    git clone "$JSON_URL"
-    cd json
-    git checkout v3.10.2
-    echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
-fi
-export JSON_INCLUDE="$JSONDIR/single_include"
 
 
 ##### Build iKnow engine and run C++ unit tests #####

@@ -58,6 +58,40 @@ jobs:
 
             *I am a bot, and this action was performed automatically.*
 
+  autoupdate-JSON:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v2
+      - name: search for update
+        run: $GITHUB_WORKSPACE/actions/update_json.py ${{ secrets.GITHUB_TOKEN }}
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+      - name: apply update
+        uses: peter-evans/create-pull-request@v3
+        with:
+          assignees: isc-adang
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          commit-message: "[autoupdate-JSON] update JSON for Modern C++ from \"${{ env.JSON_VERSION_OLD }}\" to \"${{ env.JSON_VERSION_LATEST }}\""
+          branch: autoupdate-JSON
+          delete-branch: true
+          token: ${{ env.ACTIONS_TOKEN }}
+          title: "[autoupdate] Update JSON for Modern C++ from \"${{ env.JSON_VERSION_OLD }}\" to \"${{ env.JSON_VERSION_LATEST }}\""
+          body: |-
+            As of ${{ env.JSON_PUBLISHED_AT }}, a new version of JSON for Modern C++ has been released.
+
+            Release Information (sourced from ${{ env.JSON_HTML_URL }})
+            <blockquote>
+
+            ${{ env.JSON_RELEASE_INFO }}
+            </blockquote>
+
+            *I am a bot, and this action was performed automatically.*
+
   autoupdate-buildcache:
     runs-on: ubuntu-latest
     steps:

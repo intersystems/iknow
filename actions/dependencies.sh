@@ -5,14 +5,16 @@
 set -euxo pipefail
 
 
-# If you edit the dependency-autoupdate section manually, you may also need to
-# change actions/updatelib.py.
+# If you add a variable to or remove a variable from the dependency-autoupdate
+# section manually, you may also need to edit the EXPECTED_VARNAMES dictionary
+# in actions/updatelib.py.
 
 # START DEPENDENCY-AUTOUPDATE SECTION
 ICU_NAME="ICU 69.1"
 ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-69-1/icu4c-69_1-Win64-MSVC2019.zip
 ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-69-1/icu4c-69_1-src.zip
-JSON_URL=https://github.com/nlohmann/json.git
+JSON_VERSION=3.10.2
+JSON_URL=https://github.com/nlohmann/json/releases/download/v3.10.2/include.zip
 PYVERSIONS_WIN="3.6.8 3.7.9 3.8.10 3.9.7"
 PYVERSIONS_OSX="3.6.14 3.7.12 3.8.12 3.9.7"
 BUILDCACHE_NAME="Release v0.27.1"
@@ -33,6 +35,7 @@ else
   echo "ICU_URL=$ICU_URL_SRC" >> $GITHUB_ENV
 fi
 
+# JSON for Modern C++
 echo "JSON_URL=$JSON_URL" >> $GITHUB_ENV
 
 # Python versions

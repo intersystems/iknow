@@ -621,10 +621,8 @@ version = version['__version__']
 if not is_canonical_version(version):
     raise BuildError(f'Version {version!r} is not in PEP 440 canonical form')
 
-if 'ICUDIR' in os.environ:
-    icudir = os.environ['ICUDIR']
-else:
-    icudir = '../../thirdparty/icu'
+icudir = os.environ.get('ICUDIR', '../../thirdparty/icu')
+jsondir = os.environ.get('JSONDIR', '../../thirdparty/json')
 
 # Do not allow creation of a source distribution, as building iknowpy and its
 # dependencies is too complex to be encoded in a source distribution. If you
@@ -760,6 +758,9 @@ try:
         if not icu_license_found:
             raise BuildError(f'ICU license not found in {icudir}')
 
+        # include JSON for Modern C++ license in distribution
+        shutil.copy2(os.path.join(jsondir, 'LICENSE.MIT'), 'LICENSE_JSON')
+
         # include git revision in distribution
         with open('iknowpy/git_revision', 'w') as f:
             subprocess.run(
@@ -833,6 +834,7 @@ finally:
     # remove created/copied files from package source
     remove('LICENSE')
     remove('LICENSE_ICU')
+    remove('LICENSE_JSON')
     remove('iknowpy/git_revision')
     if dependent_lib_names is not None:
         for lib_name in dependent_lib_names:

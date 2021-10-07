@@ -12,6 +12,7 @@
 # - JSONDIR is the directory to install the JSON header
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
 # - PYINSTALL_DIR is the directory where Python instances are installed
+# - JSON_INCLUDE is the directory containing JSON for Modern C++ headers
 
 set -euxo pipefail
 
@@ -24,17 +25,6 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   unzip -q icu4c.zip -d "$ICUDIR"
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
 fi
-
-##### Build JSON C++
-if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
-    rm -rf "$JSONDIR"
-    cd "$GITHUB_WORKSPACE/thirdparty"
-    git clone "$JSON_URL"
-    cd json
-    git checkout v3.10.2
-    echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
-fi
-export JSON_INCLUDE="$JSONDIR/single_include"
 
 ##### Build iKnow engine and run C++ unit tests #####
 cd "$GITHUB_WORKSPACE/modules"
