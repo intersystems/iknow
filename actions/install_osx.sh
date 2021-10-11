@@ -133,6 +133,7 @@ done
 # JSON for Modern C++
 if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
     rm -rf "$JSONDIR"
+    mkdir -p "$JSONDIR"
     curl -L -o json_for_modern_cpp.zip "$JSON_URL"
     unzip -q -d "$JSONDIR" json_for_modern_cpp.zip
     echo "$JSON_URL" > "$JSONDIR/iknow_json_url.txt"
