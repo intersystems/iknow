@@ -187,6 +187,8 @@ The script uses the style sheet iKnowXML.xsl. It is available in the language_de
 The two-character ISO language codes for the available language models are cs, de, en, es, fr, ja,
 nl, pt, ru, sv and uk.
 
+NOTE: to view the visualized output of genXML.py script, use your browser (such as Microsoft Edge and Google Chrome) with "--allow-file-access-from-files" option.
+
 ## find_examples_for_rule.py
 
 | Summary | |
