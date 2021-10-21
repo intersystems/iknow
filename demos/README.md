@@ -42,3 +42,13 @@ terms used in an affirmative context:
 ```Shell
 $ python strip_negation.py "*.txt" | grep fix
 ```
+
+## 日本語デモサイト（Japanese Demo Site）
+
+群馬大学病院の鳥飼幸太先生のご厚意により、以下のサイトからiknowpyによる日本語文章の解析をお試しいただけます。
+
+The following Web site can be used to try out indexing of Japanese text using iknowpy, courtesy of Dr. Kota Torikai from Gunma University Hospital. 
+
+https://fhirtestjp.med.gunma-u.ac.jp/editnlp
+
+
