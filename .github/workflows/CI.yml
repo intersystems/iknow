@@ -384,7 +384,7 @@ jobs:
         run: ${{ github.workspace }}/actions/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
       - name: create issue if PyPI project size is near limit
         if: env.DEPLOY_OCCURRED == '1' && env.CREATE_ISSUE == '1'
-        uses: peter-evans/create-issue-from-file@v2
+        uses: peter-evans/create-issue-from-file@v3
         with:
           title: "[check-pypi-limit] The PyPI size limit has almost been reached"
           content-filepath: ${{ env.HOME }}/issue.md
