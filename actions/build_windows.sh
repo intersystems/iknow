@@ -13,6 +13,8 @@
 # - BUILDCACHE_DIR is the directory where buildcache stores its cache
 # - PYINSTALL_DIR is the directory where Python instances are installed
 # - JSON_INCLUDE is the directory containing JSON for Modern C++ headers
+# - PYVERSIONS is a space-delimited string of Python versions to install with
+#   NuGet
 
 set -euxo pipefail
 
@@ -41,7 +43,8 @@ PATH="$ICUDIR/bin64:$PATH" ../kit/x64/Release/bin/iKnowEngineTest.exe
 
 ##### Build iknowpy wheels #####
 cd iknowpy
-for PYTHON in "$PYINSTALL_DIR"/python.*/tools/python.exe; do
+for PYVERSION in $PYVERSIONS; do
+  PYTHON="$PYINSTALL_DIR/python.$PYVERSION/tools/python.exe"
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
 "$PYTHON" setup.py merge --no-dependencies
