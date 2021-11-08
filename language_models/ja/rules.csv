@@ -24,6 +24,10 @@
 
 4668;3;"w"|JPNumber|"×"|"d"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join|Join|Join|Join;
 4670;3;"w"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join;
+4701;3;JPNumber|"割"|JPNumber|"分"|JPNumber|"厘"|JPNumber|"毛";JPNumber+JPMeasurement|Join|Join|Join|Join|Join|Join|Join;
+4699;3;JPNumber|"割"|JPNumber|"分"|JPNumber|"厘";JPNumber+JPMeasurement|Join|Join|Join|Join|Join;
+4698;3;JPNumber|"割"|JPNumber|"分";JPNumber+JPMeasurement|Join|Join|Join;
+4700;3;JPNumber|"分"|JPNumber|"厘";JPNumber+JPMeasurement|Join|Join|Join;
 4669;3;"w":"d":"h";+JPAlphabet;
 4645;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|^JPCount;*|JPCount+JPFraction|Join|*|*;
 4647;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPwari|"は":"を":"が":"も";*|JPCount+JPFraction|Join|*|*|*;
@@ -63,7 +67,10 @@
 4621;3;JPNumber|"-"|JPNumber;JPNumber|Join|Join;
 3518;3;"-"|JPNumber;JPNumber|Join;
 3395;3;JPNumber+^"数"|"、"|JPNumber+^"数"|"、"|JPNumber;JPNumber|Join|Join|Join|Join;
-3394;3;^JPAlphabet+^SBegin|JPNumber+^"数"|"、"|JPNumber;+Dummy|JPNumber|Join|Join;
+3394;3;^JPAlphabet+^SBegin|JPNumber+^"数"+^JPMeasurement|"、"|JPNumber;+Dummy|JPNumber|Join|Join;
+
+/*		3394.	作業を始めると、別の部屋の押し入れから５、６匹の猫が出てきた。
+
 3452;3;SBegin|JPNumber+^"数"|"、"|JPNumber;*|JPNumber|Join|Join;
 3348;3;JPAlphabet|JPPeriod|JPAlphabet;JPAlphabet|JPAlphabet|JPAlphabet;
 3396;3;JPAlphabet|JPApostrophe|JPAlphabet;JPAlphabet|Join|Join;
@@ -128,11 +135,17 @@
 3397;3;JPAlphabet|JPSingleSpace|JPNumber|^JPCount;JPAlphabet|Join|Join|*;
 3449;3;JPAlphabet+^JPCount|","|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
 3451;3;JPAlphabet|"."|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
-3438;3;JPTime+JPCount+^"日夜"+^"日"+^"年後"+^"年度"|"に"|JPNumber|JPCount+^JPyen+^"%"+^"年"+^"割"+^"歳"|"以上";JPFrequency|Join|Join|Join|Join;
+3438;3;JPTime+JPCount+^"日夜"+^"日"+^"年後"+^"年度"|"に"|JPNumber|JPCount+^JPyen+^"年"+^"割"+^"歳"|"以上";JPFrequency|Join|Join|Join|Join;
 4527;3;JPTime+JPCount|"に"|"1"|JPCount+^"泊"|"以上";JPFrequency+JPEndConcept|Join|Join|Join|Join;
 3555;3;JPNumber|"月"|JPNumber|"日"|"に";+Dummy|+Dummy|+Dummy|JPDate|+Dummy;
-4642;3;^JPNumber+^JPAttributive:"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円"+^"%"|JPhodo;*|JPFrequency|Join|Join|Join|Join;
-3557;3;^JPNumber+^JPAttributive:"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円"+^"%";*|JPFrequency|Join|Join|Join;
+4642;3;^JPNumber+^JPAttributive:"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円"|JPhodo;*|JPFrequency|Join|Join|Join|Join;
+
+/*		4642.	その後月に1度ほど発熱あるも経過観察としていた。
+
+3557;3;^JPNumber+^JPAttributive+^"同":"1"|"日":"週":"月":"年"|"に"|JPNumber|JPCount+^"円";*|JPFrequency|Join|Join|Join;
+
+/*		3557.	これまでは、各家庭がどれだけ電力を使ったかを把握できる方法は、月に１回の検針だけだった。
+
 4523;3;"前半":"後半"|JPNumber|"分";JPCon+JPDateTime+DateTime-JPSuffixTime|Join|Join;
 3437;3;JPTime+JPCount+^"年前"+^"年後"+^"日夜"+^"年度"+^"年末"|"に"|"1"|JPCount+^JPRule3437;JPFrequency|Join|Join|Join;
 4522;3;"1"|JPTime+JPCount+^"年目"+^"年前"+^"年後"+^"日夜"+^"月期"|"に"|JPNumber|JPCount+^"円"+^"年";JPFrequency|Join|Join|Join|Join;
@@ -359,7 +372,10 @@
 3096;5;JPVerbNoun|"ようがない";JPVerb+JPNegation|Join;
 3184;5;JPParticleWO|"買い"|JPni;^JPParticleWO|JPVerb+JPEndRelation|Join;
 1911;5;JPComma|JPAdvTime+JPCon|JPSuruNoun|JPga;JPComma|JPAdvTime|^JPSuruNoun|^JPga;
-2929;5;JPAdvTime+JPCon|JPSuffixTime+^JPkoro;JPAdvTime+JPCon+DateTime|Join;
+2929;5;JPAdvTime+JPCon|JPSuffixTime+^JPkoro;JPAdvTime+JPCon+DateTime+JPDateTime|Join;
+
+/*		2929.	ソフトバンクグループは2016年３月末時点で2.5兆円の現預金を抱えていた。
+
 1685;5;JPAdvTime+JPCon|JPCon|JPde;-JPCon|^JPCon|^JPde;
 1950;5;JPAdvTime+JPCon|JPhe;-JPAdvTime|^JPhe;
 2514;5;JPAdvTime+JPCon|JPmo;-JPAdvTime|^JPmo;
@@ -428,6 +444,14 @@
 4677;5;"gw"|JPCon:JPNumber+^"前半"+^"後半"+^"休暇"+^"期間";-JPDateTime-JPCount|*;
 4675;5;JPNumber|"gw":"sec";*|-JPDateTime-JPTime;
 4676;5;^JPNumber|"gw":"sec";*|-JPCount-JPTime;
+4714;5;JPNumber|JPAdvTime+JPCon|JPTime;JPCon+JPDateTime+DateTime|Join|Join;
+
+/*		4714.	平成25年3月末日現在の法令に対応。
+
+4713;5;JPAdvTime+JPCon+^"現在"|JPTime;JPCon+JPDateTime+DateTime|Join;
+
+/*		4713.	首相退任後の晩年は明らかに離脱派でした。
+
 6;5;JPCon+^JPMonth+^JPHiragana+^"多少"+^JPSeparateDate+^"円"+^"銭"+^"ドル"|JPCon+^JPuchi+^"外来"+^"程度"+^JPMonth;JPCon-DateTime|Join;
 2600;5;JPde|JPki|JPru;JPSuruVerb+JPVerb+JPVerbBase+Dummy2|Join|Join;
 2724;5;JPSuruNoun|JPde|JPki|JPmasu;^JPSuruNoun|JPSuruVerb+JPVerb|Join|Join;
@@ -560,9 +584,16 @@
 4644;5;JPNumber|JPCount+^"キロワット"+^"ワット"|"時":"年度";JPCon+JPDateTime+DateTime|Join|Join;
 4623;5;JPNumber|JPCount|"頃":"ごろ";JPCon+JPDateTime+DateTime+JPNumber+JPValue|JPCon+JPDateTime+DateTime+JPNumber+JPUnit|JPEndConcept+JPDateTime+DateTime;
 4624;5;JPNumber|JPCount+^"%"+^"割"+^"トン"|"と"|"も";JPNumber+JPValue|JPNumber+JPUnit|JPEndConcept|Join;
-4643;5;JPNumber|JPCount+^"%"+^"割"+^"号"|JPCount+^"元"+^"本"+^"円";JPNumber+JPValue|JPNumber+JPUnit|Join;
+4643;5;JPNumber|JPCount+^"割"+^"号"+^"倍"|JPCount+^"元"+^"本"+^"円"+^"カット";JPNumber+JPValue|JPNumber+JPUnit|Join;
+
+/*		4643.	またかかりつけ医よりアデムパスは7.5mg/日まで増量されていた。
+
 4664;5;"銭"|"円"|"安":"高";*|JPCon|Join;
-14;5;JPNumber|JPCount+^"%"+^"割"+^"回生"+^"号"+^"時"+^"倍"+^"分";JPNumber+JPValue|JPNumber+JPUnit;
+14;5;JPNumber+^JPUnit|JPCount+^"%"+^"割"+^"回生"+^"号"+^"時"+^"倍"+^"分";JPNumber+JPValue|JPNumber+JPUnit;
+
+/*		14.	日経平均は５月22日に付けた年初来高値（１万5627円）に一時あと20円ほどに迫った。
+/*		14.	日産自動車は2014年に車両価格を約50万円に抑えた新興国戦略車を投入する。
+
 1232;5;JPNumber|JPFromTo|JPNumber|JPni|JPVerbOther;^JPNumber|JPParticlePREPO|^JPNumber|^JPParticleNI|^JPVerbOther;
 4328;5;JPDate|JPFromTo|JPDate|"終値":"期間":"未明":JPSuruNoun;JPDate|Join|Join|+Dummy;
 1877;5;JPDate|JPFromTo|JPDate;JPDate+JPEndConcept+DateTime|Join|Join;
@@ -609,7 +640,14 @@
 2158;5;JPto|JPshite|JPVerb+^JPConjVerb;JPNonRelevant|JPBeginRelation|JPVerb;
 2159;5;JPto|JPshite;JPParticlePREPO+JPtoshite|Join;
 1330;5;JPParticlePREPO|JPno;JPParticlePREPO|JPNonRelevant;
-30;5;JPCon|JPha|JPCon;-JPVerb+Topic|-JPVerbOther|^JPCon;
+30;5;^"は"|JPCon+^JPbaai|"は"|JPCon;*|-JPVerb+Topic-JPAdv-JPAdvTime|-JPVerbOther+JPParticleHA-JPha|^JPCon;
+
+/*		30.	学園推薦、AO入試は学年により大きく異なり、学園推薦は1年48%、2年62%JAOは1年75%、2年25%となっている。
+
+4712;5;"は"|JPCon|"は"|JPCon;*|-JPVerb-JPAdv-JPAdvTime|-JPVerbOther+JPParticleHA-JPha|^JPCon;
+
+/*		4712.	赤血球に対する外因性障害は通常は後天性である。
+
 725;5;JPCon|JPha|JPVerbOther;JPCon|-JPVerbOther|^JPVerbOther;
 1658;5;JPTime|JPha|JPVerbOther;^JPTime|-JPVerbOther|^JPVerbOther;
 2046;5;JPha|JPVerbOther|JPsu;-JPVerbOther|^JPVerbOther-JPCon|^JPsu;
@@ -1362,7 +1400,10 @@
 3689;5;JPSuffixNoun+^"後"|JPVerbOther;-JPPrefix|+Dummy;
 3830;5;JPgo|JPSuruNoun+JPVerbOther;JPVerbOther|Join;
 4157;5;JPPrefix|JPVerbOther+JPVerbOtherTSU|JPVerbEndOther;JPVerbOther+JPVerbOtherTSU|Join|+Dummy;
-175;5;JPPrefix+^JPgo+^JPo|JPVerbOther+^JPi+^JPshika+^JPha+^JPki;JPVerbOther|Join;
+175;5;JPPrefix+^JPgo+^JPo|JPVerbOther+^JPi+^JPshika+^JPha+^JPki+^JPkara;JPVerbOther|Join;
+
+/*		175.	軽度の低補体および、血尿は残存。
+
 2994;5;JPmae_kanji_1|JPshika;JPCon|JPPartAdvNOUN;
 176;5;JPPrefix|JPCon;JPCon|Join;
 1198;5;JPCon|JPSuruNoun+JPVerbOther|JPru;^JPCon|-JPSuruNoun|^JPru;
@@ -1421,6 +1462,10 @@
 4619;5;JPNumber|JPSuffixNum;JPCon|Join;
 4634;5;JPSeparateDate:JPYear:JPTime:JPMonth;+JPRule172a;
 4635;5;"開始":"活動":"殺害":"施行":"入院":"表明":"受診":"オープン";+JPRule172b;
+4711;5;JPParticleHA|JPCon|JPSuruNoun|JPPunctuation;*|^JPCon|JPCon|*;
+
+/*		4711.	スキー自体は初めてではないが、クロスカントリーは初体験。
+
 172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPRule172a+^JPRule172c+JPCon|JPSuruNoun+^JPRule172b;JPSuruNoun|Join;
 4638;5;JPRule172c|JPSuruNoun;JPCon+JPMeasurement|JPCon;
 4545;5;JPTime+^JPNumber|JPSuruNoun+^JPPolite|JPSuruVerb:JPPunctuation;JPCon+JPDateTime|JPCon|*;
@@ -1429,7 +1474,18 @@
 3050;5;JPPrefix|JPSuruNoun|JPPunctuation;JPCon|Join|JPPunctuation;
 3541;5;JPta|"後"|JPSuruNoun;^JPta|-JPPrefix|^JPSuruNoun;
 4256;5;"の"|"お":"ご"|JPSuruNoun;+Dummy|JPCon|Join;
-173;5;JPPrefix|JPSuruNoun;JPSuruNoun+JPPolite|Join;
+4709;5;JPAdvDegree+^JPyori|JPPrefix|JPSuruNoun;JPCon|Join|Join;
+
+/*		4709.	東電柏崎刈羽６、７号機（新潟県）など８基はさらに再稼働が遅れそうだ。
+
+4710;5;JPPrefix:"小"|JPSuruNoun|SEnd:"。";JPCon|Join|*;
+
+/*		4710.	検察側準抗告を棄却　ゴーン元会長、25日中にも再保釈
+
+173;5;JPPrefix|JPSuruNoun|^SEnd;JPSuruNoun+JPPolite|Join|*;
+
+/*		173.	こうしてアウトサイダーはなかなか再就職ができず失業者にとどまることになる。
+
 1158;5;JPPrefix|JPAdjNoun;JPAdjNoun|Join;
 2085;5;JPAdvTime+JPCon|JPyori;JPCon+DateTime|JPParticlePREPO;
 2615;5;JPAdvTime+JPEndRelation|JPAdv;JPEndRelation|^JPAdv;
@@ -1609,7 +1665,18 @@
 205;5;JPNumber|JPCount|JPAdv+^JPParticlePREPO+^JPyori;JPNumber|Join|Join;
 4388;5;JPNumber|"施行";*|-JPCount+JPSuruNoun;
 206;5;JPNumber+^JPTime+^JPUnit+^JPFrequency|JPCount+^"%"+^"割"+^"倍"+^"回生"+^"号";+JPValue|JPNumber+JPUnit;
-4651;5;JPNumber|"%":"割":"倍"|^JPru;JPNumber|Join|*;
+4697;5;JPNumber|"%";JPNumber+JPValue|JPNumber+JPUnit;
+
+/*		4697.	オイル・ショックを機に失業率は上昇に転じ、やがて1987年5月には3%を超えた。
+
+4702;5;JPNumber|"倍";JPNumber|Join;
+
+/*		4702.	金融部門のセグメント利益が320億円と2.4倍に増えたのが大きい。
+
+4651;5;JPNumber|"割"|^JPru;JPNumber+JPMeasurement|Join|*;
+
+/*		4651.	生産能力は２割増える。
+
 4652;5;JPNumber+JPTime|JPtoki;^JPNumber+DateTime+JPDateTime|Join;
 207;5;JPPunctuation|JPCount;JPPunctuation|-JPCount;
 4653;5;JPMonth|JPNumber+JPValue|"日":"日頃":"目";JPMonth+JPCon|Join|Join;
@@ -1806,7 +1873,10 @@
 258;5;JPVerbOther|JPdaga;-JPVerbOther|JPdaga;
 259;5;JPVerbOther+^JPSuffixVerb|JPda;-JPVerbOther-JPSuffixVerb|^JPda;
 3453;5;JPParticleNO|JPNumber|JPhe|JPno|JPCon;JPCon|Join|Join|Join|Join;
-3489;5;JPNumber|JPhe|JPno|JPCon;JPCon|Join|Join|Join;
+3489;5;JPNumber|JPhe|JPno|JPCon;^JPCon|JPCon|Join|Join;
+
+/*		3489.	10%への引き上げを延期し、政策変更について国民に信を問うとのストーリーが固まった。
+
 3490;5;JPNumber|JPhe|JPno|JPSuruNoun;JPCon|Join|Join|Join;
 4099;5;JPno:JPAttributive+^"ある"|JPCon|JPhe|JPno|JPCon;*|JPCon|Join|Join|Join;
 2572;5;JPhe|JPno|JPCon;JPParticleHE|JPNonRelevant|JPCon;
@@ -2002,13 +2072,20 @@
 2335;5;JPha|JPSuruNoun;-JPVerbOther|^JPSuruNoun;
 2067;5;JPha|JPnaku;-JPVerbOther|^JPnaku;
 1743;5;JPAdjVBase|JPno|JPha;^JPAdj|JPNonRelevant|JPParticleHA;
+4707;5;JPAdvDegree|JPAdjNoun|JPna|JPno|JPha;^JPAdjNoun+Topic-JPAdv|Join|JPNonRelevant|JPNonRelevant|JPParticleHA;
+
+/*		4707.	最も特徴的なのは、12型とやや大きめな液晶ディスプレーだろう。
+
 1820;5;JPAdjNoun|JPna|JPno|JPha;^JPAdj+Topic|JPNonRelevant|JPNonRelevant|JPParticleHA;
 3199;5;JPVerbNoun|JPna|JPno|JPha;JPCon|JPNonRelevant|JPNonRelevant|JPParticleHA;
 1866;5;JPAdjVStem|JPi|JPno|JPha;^JPAdjVStem|JPi|JPNonRelevant|JPParticleHA;
 307;5;JPno|JPha;JPParticleNO|JPParticleHA;
 3656;5;JPVerbNoun|"可能"|JPna|JPCon;JPCon|Join|Join|Join;
 309;5;JPAdjNoun|JPna|JPCon+^JPAdjVStem;-JPAdv|-JPVerbOther|JPCon;
-310;5;JPCon|JPha|JPCon;^JPCon|-JPVerbOther|^JPCon;
+310;5;JPCon|JPha|JPCon;^JPCon+Topic|JPParticleHA|^JPCon;
+
+/*		310.	治験中止に伴いMMFは9月3日中止。
+
 4127;5;"が"|JPSuruNoun|JPVerbOther|JPru|JPkoto;+Dummy|^JPSuruNoun|JPSuruVerb+JPVerb+JPVerbBase|Join|^JPkoto;
 4124;5;JPSuruNoun|JPVerbOther|JPru;^JPSuruNoun|JPVerb+JPVerbBase|Join;
 3193;5;JPSuruNoun|JPSuruVerb;-JPCon-JPAlphabet+JPSahen-JPAdjNoun-JPSuffixNoun-JPVerbOther-JPCount-JPVerbNoun|^JPSuruVerb-JPVerbOther;
@@ -2047,6 +2124,10 @@
 4292;5;"と"|JPVerbNoun+JPVerbOther+JPVerbPassive|JPCon;+Dummy|JPVerb|^JPCon;
 4293;5;"と"|"あまり"|JPCon;+Dummy|JPAdv|^JPCon;
 4552;5;JPtomo:JPhodo|JPCon;-JPVerbOther|*;
+4703;5;JPVerbOther|Topic;JPCon+Topic|Join;
+
+/*		4703.	野入容疑者は容疑を否認している。
+
 314;5;JPVerbOther+^JPkatsu+^JPta+^JPtame+^JPnaku+^JPto+^JPAdvNR+^JPKuruVerb|JPCon+^JPkara;JPCon|Join;
 689;5;JPga|JPVerbOther|JPde;JPga|-JPVerbOther|JPde;
 3890;5;JPMimetic|JPSuruVerb+JPConjVerb;JPSuruVerb+JPConjVerb|Join;
@@ -3401,6 +3482,18 @@
 1240;5;JPCon|JPno|JPtoki|JPni;JPCon|JPAdvTime|Join|Join;
 4622;5;JPCon|JPno|JPtoki|^"の"+^"以上";JPEndConcept+JPTime|Join|Join|*;
 1490;5;JPCon|JPno|JPtoki;JPCon|Join|Join;
+4704;5;JPAdjNoun:JPCon|Topic+JPtoki+^"から";^JPCon|Join+Topic+JPDateTime;
+
+/*		4704.	安静時は呼吸困難を認めず、心電図ではHR104bpmのAFを認めた。
+
+4705;5;JPAdjNoun:JPCon+^JPAdjVConj+^JPAdvTime+^JPSuffixSuruNoun|Topic+^JPtoki+^"から";^JPCon-JPSuffixNoun-JPnen_kanji_1-JPKatakana-JPAdvDegree|Join+Topic;
+
+/*		4705.	また、高年齢労働者は若年労働者よりも安定した仕事を持つ傾向がある。
+
+4706;5;JPAdjNoun:JPCon|JPtoki+^Topic+^"から";^JPCon|Join+JPDateTime;
+
+/*		4706.	寝ているときに血が漏れるなど、緊急時に看護師らへ知らせるためのセンサーもつける。
+
 1275;5;JPAdjNoun:JPCon|JPtoki;JPCon|Join+JPDateTime;
 1304;5;JPtoki|JPno|JPCon;JPAttributive|Join|^JPCon;
 2869;5;JPComma|JPtoki|JPni;JPComma|JPAdvTime|Join;
@@ -3542,8 +3635,15 @@
 17;5;JPNumber;+JPCon;
 3607;5;JPNumber|"あまり";JPNumber|JPNonRelevant;
 1565;5;JPCon|JPdeno|JPCon|JPParticleTO|JPCon|JPParticleNO;JPCon|JPParticlePREPO|JPCon|JPParticleTO|JPCon|JPRelation;
-1564;5;JPCon|JPdeno|JPCon|JPParticleTO;JPCon|JPParticlePREPO|JPCon|JPParticleTO;
+1564;5;JPCon|JPdeno|JPCon|JPParticleTO;^JPCon|JPParticlePREPO|JPCon|JPParticleTO;
+
+/*		1564.	章男社長にとって大きな転機になったのは、2010年の米国での品質問題と下院公聴会への出席だ。
+
 2486;5;JPParticlePREPO|JPCon|JPdeno|JPCon;JPParticlePREPO|JPCon|JPParticlePREPO|JPCon;
+4696;5;JPUnit|JPdeno|JPCon;JPCon+JPUnit|JPCon|JPCon;
+
+/*		4696.	8日朝方の上海外国為替市場では、基準値より元安水準の7元台での取引が続いている。
+
 779;5;^JPPronDemon+^SBegin|JPCon|JPdeno|JPCon;*|JPCon|Join|Join;
 3493;5;SBegin|JPCon|JPdeno|JPCon;*|JPCon|Join|Join;
 1798;5;JPtomo|JPVerb;JPNonRelevant|JPBeginRelation;
@@ -3675,6 +3775,10 @@
 3872;5;JPCon+JPHiragana|JPnakaguro|JPCon+JPHiragana;JPCon+JPHiragana|Join|Join;
 4660;5;JPUnit|"/"|JPCon+^JPNumber+^JPCount;*|-JPnakaguro|*;
 4661;5;JPUnit|"/"|JPCount;JPUnit|Join|Join;
+4708;5;JPCon+^JPMeasurement|JPnakaguro|JPCon+Topic;JPCon+Topic|Join|Join;
+
+/*		4708.	防衛省・自衛隊は原子力災害への対処能力を強化する。
+
 675;5;JPCon+^JPMeasurement|JPnakaguro|JPCon+^JPTime+^JPValue;JPCon|Join|Join;
 3742;5;JPKatakana|JPnakaguro|JPVerbNoun;JPCon|Join|Join;
 4582;5;JPDate|JPnakaguro|JPDate;JPDate|Join|Join;
@@ -3745,14 +3849,20 @@
 767;5;JPCon|JPni|JPSuruVerb+^JPshi|JPCon;JPCon|Join|Join|Join;
 3610;5;"効率"|JPParticleGA|JPNumber;+Dummy|JPParticleGA|-JPCon;
 4474;5;JPCon|"に"|JPVerb+JPNegation|JPCon|"が";*|JPParticleNI|JPPredPhrase+JPNegation|*|JPParticleGA;
-803;5;JPCon|JPni|JPVerb|JPCon|JPParticleGA;JPCon|JPParticleNI|^JPPredPhrase-JPVerbBase|JPCon|JPParticleGA;
+803;5;JPCon|JPni|JPVerb|JPCon|JPParticleGA;^JPCon|JPParticleNI|^JPPredPhrase-JPVerbBase|JPCon|JPParticleGA;
+
+/*		803.	再稼働は来年半ば以降にずれ込む可能性がある。
+
 846;5;JPParticleWO|JPCon|JPni|JPVerb|JPCon;JPParticleWO|JPCon|JPParticleNI|JPVerb|JPCon;
 820;5;JPCon|JPde|JPVerb|JPNegation|JPCon;JPCon|Join|Join|JPCon+JPNegation|JPCon;
 753;5;JPCon|JPLinkV|JPCon|JPno|JPCon|JPya;JPCon|Join|Join|Join|Join|JPParticleYA;
 750;5;JPCon|JPLinkV|JPCon|JPCon|JPParticlePREPO;JPCon|Join|Join|Join|JPParticlePREPO;
 749;5;JPCon|JPde|JPno|JPCon|JPParticleGA;JPCon|Join|Join|Join|JPParticleGA;
 739;5;JPCon|JPya|JPCon;JPCon|JPParticleYA|^JPCon;
-835;5;JPCon|JPParticleTO|JPCon|JPParticleWO;JPCon|JPParticlePREPO|JPCon|JPParticleWO;
+835;5;JPCon|JPParticleTO|JPCon|JPParticleWO;^JPCon|JPParticlePREPO|JPCon|JPParticleWO;
+
+/*		835.	解放した中頭蓋窩からの操作と経迷路の操作を併用しながら真珠腫を摘出。
+
 836;5;JPCon|JPto|JPSuruNoun+^"メイク"|JPPunctuation;JPCon|JPParticlePREPO|JPVerb|JPPunctuation;
 2093;5;JPCon|JPParticleGA|JPCon+^JPNumber|JPno;^JPCon|JPParticleGA|JPEndConcept|JPParticleNO;
 4515;5;JPYear:JPTime|"の"|JPTime:JPMonth:JPDate;*|+Join|+Join;
@@ -3864,7 +3974,10 @@
 1037;5;JPto|JPVerb;JPBeginEndRelation|^JPVerb;
 2694;5;JPParticleTO|JPVerb;JPNonRelevant|JPVerb+JPBeginRelation;
 2001;5;JPto|JPEndRelation;JPNonRelevant|JPBeginEndRelation;
-2229;5;JPNumber|JPAdjVBase|JPCon;^JPNumber-DateTime|JPAdjVBase+JPEndConcept|JPCon;
+2229;5;JPNumber|JPAdjVBase|JPCon;^JPNumber-DateTime|JPAdjVBase+JPEndConcept|^JPCon;
+
+/*		2229.	グーグルは日産より３年早い17年にも実用化できるとしているが、開発が加速する可能性もある。
+
 4512;5;JPYear|JPno|JPAdjVBase|JPCon;JPAttributive+DateTime+JPDateTime|JPAttributive|Join|*;
 2366;5;JPno|JPAdjVBase|JPCon;^JPno|JPAdjVBase+JPEndConcept|^JPCon;
 2285;5;JPCon|JPno|JPAdjVConjPast|JPCon;JPCon|JPParticleGA|JPEndConcept|JPCon;
@@ -4159,7 +4272,10 @@
 3398;10;JPAlphabet|JPSingleSpace|JPCon;JPCon|Join|^JPCon;
 3528;10;JPAlphabet|JPspace|JPAlphabet;JPCon|Join|Join;
 3945;10;"-"|JPAlphabet;JPNonRelevant|^JPAlphabet;
-3388;10;JPAlphabet;JPCon;
+3388;10;JPAlphabet;^JPCon;
+
+/*		3388.	欧州連合（ＥＵ）は日本時間８日未明に開いたユーロ圏首脳会議で、ギリシャへの支援策について12日の最終合意を目指す方針で一致した。
+
 3392;10;^"に"+^SBegin|JPCon|"-"|JPCon;*|JPCon|Join|Join;
 4658;10;JPCon|"~"|JPValue;*|JPCon|*;
 3415;10;JPCon|"~"|JPCon+^JPValue;JPCon|JPRelation|JPCon;
@@ -4242,7 +4358,10 @@
 /* ---------- Entity Vector Attributes ----------
 
 2771;13;JPCon|JPParticleYA|JPCon;^JPCon|+AndOr|^JPCon;
-1396;13;JPCon|JPga;+Subject-DateTime|^JPga;
+1396;13;JPCon|JPga;+Subject-DateTime|JPParticleGA;
+
+/*		1396.	登場から7年が経過し、成熟期を迎えつつあるクラウドコンピューティングは、次のIT基盤の核になる。
+
 1400;13;JPCon|JPParticleGA;+Subject-DateTime|^JPParticleGA;
 2781;13;JPCon|JPnado|JPga;+Subject|JPnado|JPParticleGA;
 2802;13;JPCon|JPnado|JPParticleGA;+Subject|JPnado|JPParticleGA;
@@ -4283,7 +4402,10 @@
 3248;13;JPAttributive|JPLinkV|JPPunctuation;+Object|+PrimaryRelation|JPPunctuation;
 2804;13;JPCon|JPExpressionNR|JPLinkV|JPPunctuation;+Object|^JPExpressionNR|+PrimaryRelation|JPPunctuation;
 2807;13;JPCon|Dummy|JPLinkV|JPPunctuation;+Object|-Dummy|+PrimaryRelation|JPPunctuation;
-2757;13;JPCon|JPPunctuation;+Object|JPPunctuation+PrimaryRelation;
+2757;13;JPCon|JPPunctuation;+Object-JPSahen-JPVerb|JPPunctuation+PrimaryRelation;
+
+/*		2757.	仕事にも暮らしにも役立つお金の知識が身につくことで、働く女性に人気のFP3級。
+
 3210;13;JPCon|BracketClose|JPPunctuation;+Object|+PrimaryRelation|JPPunctuation;
 2843;13;JPVerbNoun+^JPExpressionNR|JPPunctuation;+Object|JPPunctuation+PrimaryRelation;
 2791;13;JPAdjVBase|JPPunctuation;+Object|+PrimaryRelation;

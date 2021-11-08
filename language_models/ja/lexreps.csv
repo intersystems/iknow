@@ -5381,7 +5381,7 @@
 ;;の下を;;JPSuffixNoun;Join;-;JPParticleWO;
 ;;のやや;;JPParticleNO;-;JPAdvDegree;Join;
 ;;のようだ;;JPExpressionNR;Join;Join;-;JPLinkV;
-;;のようである。;;JPExpressionNR;Join;Join;;-;JPLinkV;Join;Join;;-;JPPunctuation;
+;;のようである。;;JPExpressionNR;Join;Join;-;JPLinkV;Join;Join;-;JPPunctuation;
 ;;のような;;JPPartAdvNOUN;JPParticlePREPO;
 ;;のような感じ;;JPExpressionNR;
 ;;のようなもの;;JPExpressionNR;
@@ -6589,6 +6589,13 @@
 ;;(渋々|しぶしぶ);;JPAdv;
 ;;(初めて|はじめて);;JPAdv;JPBeginRelation;JPDateTime;
 
+;;初めてでは;;JPAdjNoun;JPDateTime;DateTime;Join;Join;-;JPdeha;Join;
+;;はじめてでは;;JPAdjNoun;JPDateTime;DateTime;Join;Join;Join;-;JPdeha;Join;
+;;初めてではない;;JPAdjNoun;JPDateTime;DateTime;Join;Join;-;JPLinkV;JPNegation;Join;Join;Join;
+;;はじめてではない;;JPAdjNoun;JPDateTime;DateTime;Join;Join;Join;-;JPLinkV;JPNegation;Join;Join;Join;
+;;初めてではないか;;JPAdjNoun;JPDateTime;DateTime;Join;Join;-;JPLinkV;Join;Join;Join;-;JPka;
+;;はじめてではないか;;JPAdjNoun;JPDateTime;DateTime;Join;Join;Join;-;JPLinkV;Join;Join;Join;-;JPka;
+
 ;;しはじめて;;JPSuruVerb;JPConjVerb;
 
 
@@ -7193,6 +7200,10 @@
 ;;年初めから;;JPCount;-;JPCon;Join;-;JPParticlePREPO;Join;
 ;;初めまで;;JPCon;Join;-;JPParticlePREPO;Join;
 ;;はじめに;;JPAdv;
+
+;;年初;;JPCon;JPDateTime;
+;;年初め;;JPCount;JPTime;-;JPCon;JPDateTime;Join;
+;;年初来;;JPCon;JPDateTime;
 
 
 ;;筈;;JPAdv;
@@ -8905,7 +8916,8 @@
 
 ;;℃;;JPCount;
 ;;台;;JPCount;JPCon;JPRule3437;
-
+;;台半(|ば);;JPCount;
+;;毛;;JPCon;
 ;;ミリシーベルト;;JPCount;
 ;;シーベルト;;JPCount;
 ;;ミリメートル;;JPCount;
@@ -9039,6 +9051,7 @@
 ;;豪ドル;;JPCount;JPRule3437;
 ;;台湾ドル;;JPCount;JPRule3437;
 ;;銭;;JPCount;JPCon;JPRule3437;
+;;厘;;JPCount;JPCon;
 ;;nzドル;;JPCount;JPRule3437;
 ;;ペソ;;JPCount;JPRule3437;
 ;;セント;;JPCount;JPRule3437;
@@ -9077,6 +9090,7 @@
 ;;ml;;JPCount;JPAlphabet;
 ;;ms;;JPCount;JPAlphabet;
 ;;μs;;JPCount;JPAlphabet;
+;;bpm;;JPCount;JPAlphabet
 
 ;;グラム;;JPCount;
 ;;ミリグラム;;JPCount;
@@ -17903,6 +17917,9 @@
 ;;荷造り;;JPSuruNoun;
 ;;荷担;;JPSuruNoun;
 ;;課金;;JPSuruNoun;
+;;年金;;JPCon;
+;;フッ化;;JPSuruNoun;JPCon;
+;;フッ素;;JPCon;
 ;;課税;;JPSuruNoun;
 ;;過食;;JPSuruNoun;
 ;;過熱;;JPSuruNoun;
@@ -19676,7 +19693,9 @@
 ;;是正;;JPSuruNoun;
 ;;是認;;JPSuruNoun;
 ;;制圧;;JPSuruNoun;
+
 ;;制限;;JPSuruNoun;
+
 ;;制御;;JPSuruNoun;
 ;;制裁;;JPSuruNoun;
 
@@ -26050,7 +26069,11 @@
 ;;捏造;;JPSuruNoun;
 ;;てっ収;;JPSuruNoun;
 ;;焦そう;;JPSuruNoun;
+
 ;;塁打;;JPSuruNoun;
+;;本塁打;;JPCon;JPCount;
+;;打席;;JPCon;JPCount;
+
 ;;浮き沈み;;JPSuruNoun;
 ;;補職;;JPSuruNoun;
 ;;前払い;;JPSuruNoun;
@@ -34713,6 +34736,10 @@
 ;;全日;;JPCon;
 ;;土・日曜;;JPCon;
 ;;日がな;;JPCon;
+
+;;日が当たらない;;JPAttributive;JPNegation;
+;;日の当たらない;;JPAttributive;JPNegation;
+
 ;;日ソ;;JPCon;
 
 ;;日陰;;JPCon;
@@ -38283,6 +38310,7 @@
 ;;喜楽;;JPCon;
 ;;喜三郎;;JPCon;
 ;;慶喜;;JPCon;
+;;好信;;JPCon;
 ;;喜八;;JPCon;
 ;;喜美;;JPCon;
 ;;喜一;;JPCon;
@@ -39696,8 +39724,10 @@
 ;;真;;JPshin_kanji_1;JPCon;JPPrefix;
 ;;間;;JPaida_kanji_1;JPSuffixNoun;JPCon;
 ;;理;;JPri_kanji_1;
-;;初;;JPCon;
+
+;;初;;JPCon;JPPrefix
 ;;三権の長;;JPCon;
+;;小;;JPCon;JPPrefix;
 
 
 
