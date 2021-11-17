@@ -3,7 +3,8 @@
 /* ==================================================================================================================================================================
 /* BLOCK 1: USER-DEFINED LABELS                                                                                                                                      
 /* ==================================================================================================================================================================
-/* REWRITE MANDATORY LABELS TO LANGUAGE-SPECIFIC LABELS
+
+/** REWRITE MANDATORY LABELS TO LANGUAGE-SPECIFIC LABELS
 884;1;Punctuation;^ENPunctuation;
 /*		884.	One, (two), three.
 887;1;CapitalAll;^ENCapitalAll;
@@ -48,6 +49,7 @@
 /*		2651.UD. The reference price is used in a complex formula to determine the price per dry metric ton for iron ore fines.
 2701;1;UDGeneric3;+SGeneric3;
 /*		2701.UD. The share had risen as much as 7% in early trading, but the latest news caused shares to reverse direction   and fall 12% in recent trading. 
+
 
 /* ==================================================================================================================================================================
 /* BLOCK 20: PROCESSING SPECIFIC WORDS AND NUMBERS                                                                                                                   
@@ -299,6 +301,8 @@
 /*		724.	Once, the newspaper business growth was solid.
 1756;20;"once"|SEnd;ENFrequency+ENBeginrelation-ENConj|*;
 /*		1756.	He already errantly passed on this type of player once.
+2762;20;"once"|ENArtPosspron:"one"|*<^ENRel+^ENComma+^ENPunctuation+^ENHyphen|ENAux:ENmAux:ENVerb:ENAuxCon;ENRel+ENConj+ENNegStop|*|*|*;
+/*		2762. The current chairman is due to retire once the split is completed.
 
 /* RULES FOR 'LATER','LAST'
 /*=========================
