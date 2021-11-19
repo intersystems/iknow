@@ -19,9 +19,9 @@ on:
   workflow_dispatch:
     inputs:
       FORCE_DEPLOY:
-        description: Set to 1 to force deployment (effective for master branch only)
-        required: true
-        default: 0
+        type: boolean
+        description: Force deployment (Allowed from master branch only)
+        default: false
 
 env:
   ICUDIR: ${{ github.workspace }}/thirdparty/icu
