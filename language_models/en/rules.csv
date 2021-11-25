@@ -992,7 +992,7 @@
 /*		1679. Decision shall be automatically enforceable thirty (30) days after the date of their signature the Chairman of the Assembly.
 1680;40;ENBracketsnumber+ENListnumber;-ENBracketsnumber;
 /*		1680. WCTE treatment to PC-3 cells resulted in (1) induction of WAF1/p21 and KIP1/p27, (2) decrease in cyclins D1.
-479;40;ENYearNum:ENYear+^ENBracketsnumber;ENNum;to make years behave like numbers
+479;40;ENYearNum:ENYear+^ENBracketsnumber;+ENNum;to make years behave like numbers
 /*		479. The rise in the 2008 combined ratio is "nothing dramatic". SHOULD NOT WORK FOR. effusion surgery with an anterior approach for the removal of the cervical discs (1982).
 2018;40;^ENNumber|ENNumber|*{1,3}ENNumber;*|^ENNumber|+Join;consider consecutive numbers (mainly telephone numbers) as one, has side-effects
 /*		2018. For more information about article 2 1 call 0121 525 6671. He was imprisoned in Diyarbakir for 4 1/2 years in the aftermath of a military coup.
@@ -1232,8 +1232,8 @@
 /*		253.	 The americans too recognised his personal leadership.
 2062;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^ENTo+^"since"+^"as"|.ENPremod3:ENThesame|ENPart;*|*|ENAdj+ENDummy2;
 /*		2062. FAS assistance is being offered on the same reduced terms as the PPF's.
-2760;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^ENTo+^"since"+^"as"|ENNum|ENPart|ENCon:ENVerbCon;*|*|ENAdj+ENDummy2|*;
-/*		2760. It features the newly-built cathedral capped with five gilded domes.
+2760;40;ENArtPosspron:ENToo:ENNo:ENOf:ENPrep+^ENTo+^"since"+^"as"|ENNum+^ENYear|ENPart|ENCon:ENVerbCon+^ENNumberPlusUnit;*|*|ENAdj+ENDummy2|*;
+/*		2760. It features the newly-built cathedral capped with five gilded domes. SHOULD NOT FIRE IN. In 2005 frustrated residents found cars left in their roads.
 2066;40;ENQuantity:ENsAdj:ENDummy2|ENPart|^typeRelation+^ENArtPosspron;*|ENAdj|*;
 /*		2066. Management of displaced comminuted patellar fracture with titanium cable cerclage.
 2314;40;ENQuantity:ENsAdj:ENDummy2|ENPart|ENAndOrBut;*|ENAdj|*;exception to r2066
@@ -1861,7 +1861,7 @@
 /*		601.	We have sufficient alternatives to guarantee continued production.
 603;40;ENInfCon|ENIndefpron:ENToo;ENRel+ENVerb|*;
 /*		603.	The central bank suspects some banks traded NDFs on behalf of corporate clients.
-619;40;ENInfCon|ENPerspron_refl|^ENRel+^ENInf+^ENAux+^ENmAux;ENRel+ENVerb|+Join|*;
+619;40;ENInfCon|ENPerspron_refl|^ENInf+^ENAux+^ENmAux;ENRel+ENVerb|+Join|*;
 /*		619.	Respect yourself.
 1094;40;SBegin|ENInfCon|"that";*|ENRel+ENVerb|*;
 /*		1094. Note that the liver enzymes were normal on admission, at which time she was taking all of the above cholesterol medicines.
@@ -1875,7 +1875,7 @@
 /*		2751. The findings support the “hygiene hypothesis” of immune-related illnesses such as asthma, which postulates that exposure to dirt and microbes in early childhood may prevent the immune system from “over-reacting” in a way that triggers allergic or auto-immune disorders.
 2754;40;ENComma|*ENCon|"and":"or"|ENInfCon;*|*|*|^ENCon;last item in enumeration, needs to be before 2755
 /*		2755. The award can go to any person, project or group that has enhanced the lives of those who live or work in the city center.
-2757;40;ENPart|ENInfCon|"that";ENRel+ENVerb|ENCon|*;
+2757;40;^ENPrespart|ENPart|ENInfCon|"that";*|ENRel+ENVerb|ENCon|*;
 /*		2757. The patient expressed concern that her short term memory was not what it used to be.
 2753;40;SBegin:ENColon:ENAndOrBut|.ENAdj:ENArtPosspron+^"a"|ENCon:ENInfCon|ENInfCon|"that"|^ENRel+^ENAux+^ENmAux+^ENInf;*|*|^ENCon|ENRel+ENVerb|*|*
 /*		2753. But the MPs dispute that arithmetic.
@@ -1941,7 +1941,7 @@
 /*		2481. The address is High Street 44, Building 1A in 7000 Washington.
 2758;40;ENPrep:ENOf|"or"|ENPrespart;*|*|ENRel+ENVerb;
 /*		2758. It was used as a defoliant and not as a poison designed for or targeting human populations.
-2759;40;ENBe|ENAdj|ENPrep|ENPrespart|typeConcept;*|*|*|ENRel+ENVerb|*;
+2759;40;ENBe|ENAdj|ENPrep|ENPrespart+^ENV1|typeConcept;*|*|*|ENRel+ENVerb|*;TO DO: ^V1 should be replaced by V2 once this information is added in the lexreps file
 /*		2759. The elections are crucial for restoring democracy in the strife-torn country.
 
 2091;40;ENRel+ENInf;ENRel+ENInf;
