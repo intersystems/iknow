@@ -19,6 +19,7 @@ Ren waren
 C2veel gewonden
 Pkwamen honderd mensen om het leven en waren veel gewonden
 SHoeveel uren zwaar werk <ik> daar gedaan heb, weet <ik> niet precies.
+<attr type="time" literal="uren zwaar werk" token="uren">
 <attr type="negation" literal="niet precies." token="niet">
 Rhoeveel
 C3uren zwaar werk
@@ -55,6 +56,7 @@ C1boek
 Pontbreken twee pagina's in boek
 <attr type="negation" span="ontbreken twee pagina's in boek">
 SVictor was gisteren afwezig.
+<attr type="time" literal="gisteren" token="gisteren">
 <attr type="negation" literal="afwezig." token="afwezig.">
 C1victor
 Rwas
@@ -115,12 +117,28 @@ Raldus
 C1renner
 Pik was heel tevreden over mijn tijdrit aldus renner
 <attr type="PositiveSentiment" span="ik was heel tevreden over mijn tijdrit">
-SABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste winst op Euronext Brussel.
+SABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste meevaller op Euronext Brussel.
+<attr type="positivesentiment" literal="winst" token="winst">
+C1abcd
+Rdoet
+C2nog beter
+Rmet
+C1winst
+Rvan
+C29,6 procent
+Rtot
+C215,75 euro
+C2grootste meevaller
+Rop
+C2euronext brussel
+Pabcd doet nog beter met winst van 9,6 procent tot 15,75 euro grootste meevaller op euronext brussel
+<attr type="PositiveSentiment" span="winst van 9,6 procent tot 15,75 euro">
+SABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste winst op Euronext Brussel.
 <attr type="positivesentiment" literal="winst" token="winst">
 <attr type="positivesentiment" literal="grootste winst" token="winst">
 C1abcd
 Rdoet
-C1beter
+C2nog beter
 Rmet
 C1winst
 Rvan
@@ -130,7 +148,7 @@ C215,75 euro
 C2grootste winst
 Rop
 C2euronext brussel
-Pabcd doet beter met winst van 9,6 procent tot 15,75 euro grootste winst op euronext brussel
+Pabcd doet nog beter met winst van 9,6 procent tot 15,75 euro grootste winst op euronext brussel
 <attr type="PositiveSentiment" span="winst van 9,6 procent tot 15,75 euro grootste winst op euronext brussel">
 SABCD krikte de netto courante winst, de winst uit de verhuringen, met 25 procent op tot 10,7 miljoen euro of 2,67 euro per aandeel.
 <attr type="positivesentiment" literal="netto courante winst," token="winst,">
@@ -151,12 +169,14 @@ Rper
 C1aandeel
 Pabcd krikte netto courante winst winst uit verhuringen met 25 procent op tot 10,7 miljoen euro of 2,67 euro per aandeel
 <attr type="PositiveSentiment" span="netto courante winst winst uit verhuringen">
-SAan een herberekening zijn heel wat kosten en risico' s verbonden.
-<attr type="negativesentiment" literal="zijn heel wat kosten" token="kosten">
+SAan een herberekening zijn heel wat kosten en risico' s verbonden.
+<attr type="negativesentiment" literal="kosten" token="kosten">
 <attr type="negativesentiment" literal="risico' s" token="risico'">
 Raan
 C1herberekening
-Rzijn heel wat kosten
+Rzijn
+C2heel wat
+Rkosten
 Ren
 C2risico s
 Rverbonden
@@ -176,7 +196,7 @@ C1winst
 Paldus wordt gezondheid kwestie van kosten en winst
 <attr type="PositiveSentiment" span="winst">
 <attr type="NegativeSentiment" span="kosten">
-SAls woorden in <ons> geheugen beschikbaar zijn in verschillende talen, dan zal de activering van die woorden gemakkelijker verlopen.
+SAls woorden in <ons> geheugen beschikbaar zijn in verschillende talen, dan zal de activering van die woorden gemakkelijker verlopen.
 <attr type="positivesentiment" literal="beschikbaar" token="beschikbaar">
 Rals
 C1woorden
@@ -190,7 +210,8 @@ Rdan zal
 C1activering
 Rvan
 C1woorden
-Rgemakkelijker verlopen
+C1gemakkelijker
+Rverlopen
 Pals woorden in ons geheugen beschikbaar zijn in verschillende talen dan zal activering van woorden gemakkelijker verlopen
 <attr type="PositiveSentiment" span="als woorden in ons geheugen beschikbaar zijn in verschillende talen">
 S <Altijd> on the road maar zonder het hoofd te verliezen.
@@ -205,6 +226,17 @@ Rte verliezen
 Paltijd on the road maar zonder hoofd te verliezen
 <attr type="negation" span="maar zonder hoofd te verliezen">
 <attr type="NegativeSentiment" span="altijd on the road maar zonder hoofd te verliezen">
+SAortaklep: Verdikt en verkalkt maar goed beweeglijk, piekgradiënt 32 mmHg.
+<attr type="positivesentiment" literal="goed beweeglijk," token="goed beweeglijk,">
+C1aortaklep
+Rverdikt
+Ren
+C1verkalkt
+Rmaar
+C2goed beweeglijk
+C3piekgradiënt 32 mmhg
+Paortaklep verdikt en verkalkt maar goed beweeglijk piekgradiënt 32 mmhg
+<attr type="PositiveSentiment" span="maar goed beweeglijk">
 SBij 86 procent is het risico zelfs erg groot omdat het speelgoed meer dan 100 decibel (dB) produceert.
 <attr type="negativesentiment" literal="risico" token="risico">
 Rbij
@@ -241,32 +273,96 @@ Ris voor
 C2buitenlandse spelers
 Pdat bewijst dat belgische voetbal minder aantrekkelijk is voor buitenlandse spelers
 <attr type="NegativeSentiment" span="dat belgische voetbal minder aantrekkelijk is voor buitenlandse spelers">
-S <Dat> bewijst dat het Belgische voetbal minder aantrekkelijk is voor buitenlandse spelers.
-<attr type="positivesentiment" literal="minder aantrekkelijk" token="minder aantrekkelijk">
-PR<dat>
-Rbewijst
+SDe Europese beurzen kunnen <voorlopig> geen vervolg breien aan de mooie winsten van een dag eerder.
+<attr type="time" literal="voorlopig" token="voorlopig">
+<attr type="negation" literal="geen vervolg" token="geen">
+<attr type="positivesentiment" literal="mooie winsten" token="mooie">
+<attr type="time" literal="een dag eerder." token="een dag eerder.">
+C2europese beurzen
+Rkunnen
+PR<voorlopig>
+C2geen vervolg
+Rbreien aan
+C2mooie winsten
+Rvan
+C3een dag eerder
+Peuropese beurzen kunnen voorlopig geen vervolg breien aan mooie winsten van een dag eerder
+<attr type="negation" span="geen vervolg breien aan mooie winsten van een dag eerder">
+<attr type="PositiveSentiment" span="mooie winsten van een dag eerder">
+SDe Europese financiële waarden hebben het algemeen lastig, na de sombere woorden van de topman gisteravond in de VS.
+<attr type="negativesentiment" literal="algemeen lastig," token="algemeen lastig,">
+<attr type="time" literal="gisteravond" token="gisteravond">
+C3europese financiële waarden
+Rhebben
+C2algemeen lastig
+Rna
+C2sombere woorden
+Rvan
+C1topman
+C1gisteravond
+Rin
+C1vs
+Peuropese financiële waarden hebben algemeen lastig na sombere woorden van topman gisteravond in vs
+<attr type="NegativeSentiment" span="europese financiële waarden hebben algemeen lastig">
+SDe Europese vermogensbeheerders schroeven het aantal fondsen terug om de kosten in lijn te brengen met de dalende opbrengsten.
+<attr type="negativesentiment" literal="kosten" token="kosten">
+C2europese vermogensbeheerders
+Rschroeven
+C2aantal fondsen
+Rterug om
+C1kosten
+Rin
+C1lijn
+Rte brengen met
+C2dalende opbrengsten
+Peuropese vermogensbeheerders schroeven aantal fondsen terug om kosten in lijn te brengen met dalende opbrengsten
+<attr type="NegativeSentiment" span="kosten in lijn">
+SDe ambulancebroeders zijn ontevreden dat het openbaar ministerie (OM) ondanks de landelijke campagne tegen het toenemend geweld aan het adres van hulpverleners weigert een drugsverslaafde te vervolgen die vlak voor Kerstmis <één van hen> dwars door <zijn> kleren heen in de buik heeft gebeten.
+<attr type="negativesentiment" literal="ontevreden" token="ontevreden">
+C1ambulancebroeders
+Rzijn
+C1ontevreden
 Rdat
-C2belgische voetbal
-C2minder aantrekkelijk
-Ris voor
-C2buitenlandse spelers
-Pdat bewijst dat belgische voetbal minder aantrekkelijk is voor buitenlandse spelers
-<attr type="NegativeSentiment" span="dat belgische voetbal minder aantrekkelijk is voor buitenlandse spelers">
-SDe gids vindt het goed om Belgische kunst te tonen in het buitenland.
-<attr type="positivesentiment" literal="vindt het goed" token="goed">
+C2openbaar ministerie
+C1om
+Rondanks
+C2landelijke campagne
+Rtegen
+C2toenemend geweld
+Raan het adres van
+C1hulpverleners
+Rweigert
+C1drugsverslaafde
+Rte vervolgen
+Rdie vlak voor
+C1kerstmis
+PR<één van hen>
+Rdwars door
+PR<zijn>
+C1kleren
+Rheen in
+C1buik
+Rheeft gebeten
+Pambulancebroeders zijn ontevreden dat openbaar ministerie om ondanks landelijke campagne tegen toenemend geweld aan het adres van hulpverleners weigert drugsverslaafde te vervolgen die vlak voor kerstmis één van hen dwars door zijn kleren heen in buik heeft gebeten
+<attr type="NegativeSentiment" span="ontevreden dat openbaar ministerie om ondanks landelijke campagne tegen toenemend geweld aan het adres van hulpverleners weigert drugsverslaafde te vervolgen">
+SDe gids vindt het goed om Belgische kunst te tonen in het buitenland.
+<attr type="positivesentiment" literal="goed" token="goed">
 C1gids
-Rvindt goed
+Rvindt
+C1goed
 Rom
 C2belgische kunst
 Rte tonen in
 C1buitenland
 Pgids vindt goed om belgische kunst te tonen in buitenland
-<attr type="PositiveSentiment" span="gids vindt goed">
-SDe oortjes zijn ook nog niet zo goed ontwikkeld, waardoor <die> toch veel gevoeliger zijn.
-<attr type="negation" literal="zijn ook nog niet zo goed ontwikkeld," token="nog niet zo">
-<attr type="positivesentiment" literal="zijn ook nog niet zo goed ontwikkeld," token="goed">
+<attr type="PositiveSentiment" span="goed">
+SDe oortjes zijn ook nog niet zo goed ontwikkeld, waardoor <die> toch veel gevoeliger zijn.
+<attr type="negation" literal="nog niet zo goed" token="nog niet zo">
+<attr type="positivesentiment" literal="nog niet zo goed" token="goed">
 C1oortjes
-Rzijn nog niet zo goed ontwikkeld
+Rzijn
+C4nog niet zo goed
+Rontwikkeld
 Rwaardoor
 PR<die>
 C2veel gevoeliger
@@ -274,10 +370,12 @@ Rzijn
 Poortjes zijn nog niet zo goed ontwikkeld waardoor die veel gevoeliger zijn
 <attr type="negation" span="oortjes zijn nog niet zo goed ontwikkeld">
 <attr type="NegativeSentiment" span="oortjes zijn nog niet zo goed ontwikkeld">
-SDe operatie bleek goed gelukt en er trad een goede wondgenezing op.
-<attr type="positivesentiment" literal="bleek goed gelukt" token="goed">
+SDe operatie bleek goed gelukt en er trad een goede wondgenezing op.
+<attr type="positivesentiment" literal="goed" token="goed">
 C1operatie
-Rbleek goed gelukt
+Rbleek
+C1goed
+Rgelukt
 Ren trad
 C2goede wondgenezing
 Rop
@@ -355,7 +453,28 @@ Ren
 C1onberekenbaar
 Rzijn
 Pverdachte zou gevaarlijk en onberekenbaar zijn
-<attr type="NegativeSentiment" span="gevaarlijk en onberekenbaar">
+<attr type="NegativeSentiment" span="verdachte zou gevaarlijk en onberekenbaar zijn">
+SDe verzwakking van de dollar ten opzichte van de yen is slecht nieuws voor bedrijven die een groot deel van <hun> inkomsten uit de VS halen.
+<attr type="negativesentiment" literal="slecht nieuws" token="slecht">
+C1verzwakking
+Rvan
+C1dollar
+Rten opzichte van
+C1yen
+Ris
+C2slecht nieuws
+Rvoor
+C1bedrijven
+Rdie
+C2groot deel
+Rvan
+PR<hun>
+C1inkomsten
+Ruit
+C1vs
+Rhalen
+Pverzwakking van dollar ten opzichte van yen is slecht nieuws voor bedrijven die groot deel van hun inkomsten uit vs halen
+<attr type="NegativeSentiment" span="verzwakking van dollar ten opzichte van yen is slecht nieuws voor bedrijven">
 SDe voorstelling werd geen noemenswaardig succes in Frankrijk.
 <attr type="negation" literal="geen noemenswaardig succes" token="geen">
 <attr type="positivesentiment" literal="geen noemenswaardig succes" token="succes">
@@ -367,22 +486,12 @@ C1frankrijk
 Pvoorstelling werd geen noemenswaardig succes in frankrijk
 <attr type="negation" span="geen noemenswaardig succes in frankrijk">
 <attr type="NegativeSentiment" span="geen noemenswaardig succes in frankrijk">
-SDe werken zijn heel lastig geweest maar het resultaat is de moeite waard.
-<attr type="negativesentiment" literal="heel lastig" token="heel lastig">
-C1werken
-Rzijn
-C2heel lastig
-Rgeweest
-Rmaar
-C1resultaat
-Ris
-C2moeite waard
-Pwerken zijn heel lastig geweest maar resultaat is moeite waard
-<attr type="NegativeSentiment" span="werken zijn heel lastig geweest">
-SDe wonden zijn reeds goed genezen.
-<attr type="positivesentiment" literal="zijn reeds goed genezen." token="goed">
+SDe wonden zijn reeds goed genezen.
+<attr type="positivesentiment" literal="goed" token="goed">
 C1wonden
-Rzijn goed genezen
+Rzijn
+C1goed
+Rgenezen
 Pwonden zijn goed genezen
 <attr type="PositiveSentiment" span="wonden zijn goed genezen">
 SDe zwakke dollar woog op het resultaat.
@@ -412,6 +521,7 @@ Pdertig procent van 15- tot 17-jarigen denkt dat waterpijp van vijf tabaksprodu
 SDeze benaming was niet populair en werd in 1946 afgeschaft.
 <attr type="negation" literal="niet populair" token="niet">
 <attr type="positivesentiment" literal="niet populair" token="populair">
+<attr type="time" literal="1946" token="1946">
 C1benaming
 Rwas
 C2niet populair
@@ -421,16 +531,21 @@ Rafgeschaft
 Pbenaming was niet populair en werd in 1946 afgeschaft
 <attr type="negation" span="benaming was niet populair">
 <attr type="NegativeSentiment" span="benaming was niet populair">
-SDeze techniek wordt als minder schadelijk gezien.
-<attr type="negativesentiment" literal="wordt als minder schadelijk gezien." token="minder schadelijk">
+SDeze techniek wordt als minder schadelijk gezien.
+<attr type="negativesentiment" literal="minder schadelijk" token="minder schadelijk">
 C1techniek
-Rwordt als minder schadelijk gezien
+Rwordt
+Rals
+C2minder schadelijk
+Rgezien
 Ptechniek wordt als minder schadelijk gezien
-<attr type="PositiveSentiment" span="techniek wordt als minder schadelijk gezien">
-S <Die> zijn minder goed beveiligd dan de nieuwere modellen.
-<attr type="positivesentiment" literal="zijn minder goed beveiligd dan" token="minder goed">
+<attr type="PositiveSentiment" span="als minder schadelijk gezien">
+S <Die> zijn minder goed beveiligd dan de nieuwere modellen.
+<attr type="positivesentiment" literal="minder goed" token="minder goed">
 PR<die>
-Rzijn minder goed beveiligd dan
+Rzijn
+C2minder goed
+Rbeveiligd dan
 C2nieuwere modellen
 Pdie zijn minder goed beveiligd dan nieuwere modellen
 <attr type="NegativeSentiment" span="die zijn minder goed beveiligd dan nieuwere modellen">
@@ -445,10 +560,11 @@ C1inflatie
 Pdit biedt geen goed vooruitzicht voor inflatie
 <attr type="negation" span="geen goed vooruitzicht voor inflatie">
 <attr type="NegativeSentiment" span="geen goed vooruitzicht voor inflatie">
-S <Dit> maakt het alleen maar gevaarlijk om hulp te bieden in echte noodsituaties.
-<attr type="negativesentiment" literal="maakt het alleen maar gevaarlijk" token="gevaarlijk">
+S <Dit> maakt het alleen maar gevaarlijk om hulp te bieden in echte noodsituaties.
+<attr type="negativesentiment" literal="gevaarlijk" token="gevaarlijk">
 PR<dit>
-Rmaakt gevaarlijk
+Rmaakt
+C1gevaarlijk
 Rom
 C1hulp
 Rte bieden in
@@ -463,7 +579,21 @@ C3veel minder goed
 Rtegen
 C1kou
 Pte magere coureur kan veel minder goed tegen kou
-<attr type="NegativeSentiment" span="veel minder goed">
+<attr type="NegativeSentiment" span="te magere coureur kan veel minder goed tegen kou">
+SElk goed nieuws over de huizenmarkt is goed nieuws voor bedrijven in die sector.
+<attr type="positivesentiment" literal="Elk goed nieuws" token="goed">
+<attr type="positivesentiment" literal="goed nieuws" token="goed">
+C3elk goed nieuws
+Rover
+C1huizenmarkt
+Ris
+C2goed nieuws
+Rvoor
+C1bedrijven
+Rin
+C1sector
+Pelk goed nieuws over huizenmarkt is goed nieuws voor bedrijven in sector
+<attr type="PositiveSentiment" span="elk goed nieuws over huizenmarkt is goed nieuws voor bedrijven in sector">
 SElk goed nieuws over de huizenmarkt is goed nieuws voor bedrijven.
 <attr type="positivesentiment" literal="Elk goed nieuws" token="goed">
 <attr type="positivesentiment" literal="goed nieuws" token="goed">
@@ -481,7 +611,6 @@ SEn dus dan wordt het al lastig.
 Rdan wordt
 C1lastig
 Pdan wordt lastig
-<attr type="NegativeSentiment" span="lastig">
 SEnkele soorten verspreiden ook ziektes onder vee, zoals blauwtong, dat vooral bij schapen gevaarlijk is.
 <attr type="negativesentiment" literal="gevaarlijk" token="gevaarlijk">
 C2enkele soorten
@@ -523,6 +652,18 @@ C2voldoende betrouwbaar
 Ris
 Pzijn regels die ervoor zorgen dat webshop voldoende betrouwbaar is
 <attr type="PositiveSentiment" span="dat webshop voldoende betrouwbaar is">
+SExperts waarschuwen voor de inburgering van de Zwarte weduwe, een gevaarlijk giftige spinnensoort, in België.
+<attr type="negativesentiment" literal="gevaarlijk giftige spinnensoort," token="gevaarlijk">
+C1experts
+Rwaarschuwen voor
+C1inburgering
+Rvan
+C2zwarte weduwe
+C3gevaarlijk giftige spinnensoort
+Rin
+C1belgië
+Pexperts waarschuwen voor inburgering van zwarte weduwe gevaarlijk giftige spinnensoort in belgië
+<attr type="NegativeSentiment" span="gevaarlijk giftige spinnensoort">
 SFysiek geen last.
 <attr type="negation" literal="geen last." token="geen">
 <attr type="negativesentiment" literal="geen last." token="last.">
@@ -554,7 +695,6 @@ Rtot
 C4permanente centrale veneuze toegang
 Pgezien preparaat niet in orale vorm beschikbaar is en gezien noodzakelijke frequentie van toediening was wens tot permanente centrale veneuze toegang
 <attr type="negation" span="preparaat niet in orale vorm beschikbaar is">
-<attr type="PositiveSentiment" span="gezien preparaat niet in orale vorm beschikbaar is en gezien noodzakelijke frequentie van toediening was wens tot permanente centrale veneuze toegang">
 <attr type="NegativeSentiment" span="preparaat niet in orale vorm beschikbaar is">
 SHet aandeel verloor 2 procent tot 2.990 yen.
 <attr type="negativesentiment" literal="verloor" token="verloor">
@@ -588,17 +728,91 @@ C1zwembad
 Ris
 Pis goed dat zwembad is
 <attr type="PositiveSentiment" span="goed dat zwembad is">
-SHet is wel heel erg lastig dat het licht <altijd> uitgaat.
+SHet is misschien een succes geweest maar <dat> is <lang geleden.>
+<attr type="positivesentiment" literal="succes" token="succes">
+<attr type="time" literal="lang geleden." token="lang geleden.">
+Ris misschien
+C1succes
+Rgeweest
+Rmaar
+PR<dat>
+Ris
+PR<lang geleden>
+Pis misschien succes geweest maar dat is lang geleden
+<attr type="PositiveSentiment" span="succes geweest">
+SHet is wel heel erg lastig dat het <licht altijd> uitgaat.
 <attr type="negativesentiment" literal="heel erg lastig" token="heel erg lastig">
-<attr type="time" literal="altijd" token="altijd">
+<attr type="time" literal="licht altijd" token="licht altijd">
 Ris
 C3heel erg lastig
 Rdat
-C1licht
-PR<altijd>
+PR<licht altijd>
 Ruitgaat
 Pis heel erg lastig dat licht altijd uitgaat
 <attr type="NegativeSentiment" span="heel erg lastig dat licht altijd uitgaat">
+SHet project is een risico geweest maar het resultaat is de moeite waard.
+<attr type="negativesentiment" literal="risico" token="risico">
+C1project
+Ris
+C1risico
+Rgeweest
+Rmaar
+C1resultaat
+Ris
+C2moeite waard
+Pproject is risico geweest maar resultaat is moeite waard
+<attr type="NegativeSentiment" span="risico geweest">
+SHet was echter zo gevaarlijk dat deze poging veel risico inhield.
+<attr type="negativesentiment" literal="zo gevaarlijk" token="zo gevaarlijk">
+<attr type="negativesentiment" literal="veel risico" token="risico">
+Rwas
+C2zo gevaarlijk
+Rdat
+C1poging
+C2veel risico
+Rinhield
+Pwas zo gevaarlijk dat poging veel risico inhield
+<attr type="NegativeSentiment" span="zo gevaarlijk dat poging veel risico inhield">
+SHet was echter zo populair dat <dit> streven weinig succes heeft gehad, zelfs niet bij het strengst protestantse volksdeel.
+<attr type="positivesentiment" literal="zo populair" token="zo populair">
+<attr type="positivesentiment" literal="weinig succes" token="succes">
+<attr type="negation" literal="niet bij" token="niet">
+Rwas
+C2zo populair
+Rdat
+PR<dit>
+Rstreven
+C2weinig succes
+Rheeft gehad
+Rniet bij
+C3strengst protestantse volksdeel
+Pwas zo populair dat dit streven weinig succes heeft gehad niet bij strengst protestantse volksdeel
+<attr type="negation" span="niet bij strengst protestantse volksdeel">
+<attr type="NegativeSentiment" span="weinig succes">
+SHet werd echter maar in één maat gemaakt en had een afwijkende vormgeving, waardoor sommige standaardonderdelen niet pasten, het frame werd dan ook slecht verkocht en de productie is na een paar jaar gestopt.
+<attr type="negation" literal="niet pasten," token="niet">
+<attr type="negativesentiment" literal="slecht" token="slecht">
+<attr type="time" literal="paar jaar" token="paar jaar">
+Rwerd maar in
+C2één maat
+Rgemaakt
+Ren had
+C2afwijkende vormgeving
+Rwaardoor
+C2sommige standaardonderdelen
+Rniet pasten
+C1frame
+Rwerd
+C1slecht
+Rverkocht
+Ren
+C1productie
+Ris na
+C2paar jaar
+Rgestopt
+Pwerd maar in één maat gemaakt en had afwijkende vormgeving waardoor sommige standaardonderdelen niet pasten frame werd slecht verkocht en productie is na paar jaar gestopt
+<attr type="negation" span="waardoor sommige standaardonderdelen niet pasten">
+<attr type="NegativeSentiment" span="frame werd slecht verkocht">
 S <Hij> voelde zich er minder verloren dan vorige keer.
 <attr type="negativesentiment" literal="voelde zich er minder verloren dan" token="verloren">
 PR<hij>
@@ -620,6 +834,21 @@ Rhebben op
 C1bedrijf
 Phij zegt dat ontwikkelingen van wereldeconomie waaronder zwakke dollar effect hebben op bedrijf
 <attr type="NegativeSentiment" span="zwakke dollar">
+S <Ik> begrijp heel goed dat <ze> niet alle supermarkten voor <mij> alleen gaan aanpassen.
+<attr type="positivesentiment" literal="heel goed" token="heel goed">
+<attr type="negation" literal="niet alle supermarkten" token="niet alle">
+PR<ik>
+Rbegrijp
+C2heel goed
+Rdat
+PR<ze>
+C3niet alle supermarkten
+Rvoor
+PR<mij>
+Rgaan aanpassen
+Pik begrijp heel goed dat ze niet alle supermarkten voor mij gaan aanpassen
+<attr type="negation" span="dat ze niet alle supermarkten voor mij gaan aanpassen">
+<attr type="PositiveSentiment" span="ik begrijp heel goed">
 S <Ik> ben Geraldueerd en <ik> woon in Vlissingen.
 PR<ik>
 Rben
@@ -641,6 +870,13 @@ C1bank
 Rzitten
 Pik ben moe zucht hij en gaat op bank zitten
 <attr type="NegativeSentiment" span="ik ben moe">
+S <Ik> geniet van een lekker glaasje wijn.
+<attr type="positivesentiment" literal="geniet van" token="geniet">
+PR<ik>
+Rgeniet van
+C3lekker glaasje wijn
+Pik geniet van lekker glaasje wijn
+<attr type="PositiveSentiment" span="ik geniet van lekker glaasje wijn">
 S <Ik> hoor dat de toeschouwers tevreden zijn.
 <attr type="positivesentiment" literal="tevreden" token="tevreden">
 PR<ik>
@@ -673,30 +909,33 @@ C3absoluut niet storend
 Pik vind dat geluid absoluut niet storend
 <attr type="negation" span="ik vind dat geluid absoluut niet storend">
 <attr type="PositiveSentiment" span="ik vind dat geluid absoluut niet storend">
-S <Ik> vind het jammer dat de rozen uitgebloeid zijn.
-<attr type="negativesentiment" literal="vind het jammer dat" token="jammer">
+S <Ik> vind het jammer dat de rozen uitgebloeid zijn.
+<attr type="negativesentiment" literal="jammer" token="jammer">
 PR<ik>
-Rvind jammer dat
+Rvind
+C1jammer
+Rdat
 C1rozen
 Ruitgebloeid zijn
 Pik vind jammer dat rozen uitgebloeid zijn
-<attr type="NegativeSentiment" span="ik vind jammer dat rozen uitgebloeid zijn">
-S <Ikzelf> ben van mening dat dit volkomen ontoereikend is en dat, als <dit> niet met een richtlijn geregeld wordt, de lidstaten die <momenteel> achterop hinken geen aandrang zullen voelen om ook maar <iets> te doen.
-<attr type="negativesentiment" literal="ontoereikend" token="ontoereikend">
+<attr type="NegativeSentiment" span="jammer dat rozen uitgebloeid zijn">
+S <Ikzelf> ben van mening dat <dit> volkomen ontoereikend is en dat, als <dit> niet met een richtlijn geregeld wordt, de lidstaten die <momenteel> achterop hinken geen aandrang zullen voelen om ook maar <iets> te doen.
+<attr type="negativesentiment" literal="volkomen ontoereikend" token="volkomen ontoereikend">
 <attr type="negation" literal="niet met" token="niet">
 <attr type="time" literal="momenteel" token="momenteel">
 <attr type="negation" literal="geen aandrang" token="geen">
 PR<ikzelf>
-Rben van mening dat
-C1volkomen
-C1ontoereikend
+Rben van mening
+Rdat
+PR<dit>
+C2volkomen ontoereikend
 Ris
 Ren dat
 Rals
 PR<dit>
 Rniet met
-C2richtlijn geregeld
-Rwordt
+C1richtlijn
+Rgeregeld wordt
 C1lidstaten
 Rdie
 PR<momenteel>
@@ -707,10 +946,10 @@ Rzullen voelen
 Rom
 PR<iets>
 Rte doen
-Pikzelf ben van mening dat volkomen ontoereikend is en dat als dit niet met richtlijn geregeld wordt lidstaten die momenteel achterop hinken geen aandrang zullen voelen om iets te doen
+Pikzelf ben van mening dat dit volkomen ontoereikend is en dat als dit niet met richtlijn geregeld wordt lidstaten die momenteel achterop hinken geen aandrang zullen voelen om iets te doen
 <attr type="negation" span="als dit niet met richtlijn geregeld wordt">
 <attr type="negation" span="geen aandrang zullen voelen">
-<attr type="NegativeSentiment" span="volkomen ontoereikend is">
+<attr type="NegativeSentiment" span="dat dit volkomen ontoereikend is">
 SIn totaal was er sprake van een verlies van 2,7 procentpunt, tot 74,8%.
 <attr type="negativesentiment" literal="verlies" token="verlies">
 Rin totaal was sprake van
@@ -721,18 +960,22 @@ Rtot
 C174,8%
 Pin totaal was sprake van verlies van 2,7 procentpunt tot 74,8%
 <attr type="NegativeSentiment" span="verlies van 2,7 procentpunt">
-SLambiek is immers een zuur bier en met jongere hop zou het te bitter smaken en met minder hop zou het niet goed bewaren.
-<attr type="negation" literal="zou het niet goed bewaren." token="niet">
-<attr type="positivesentiment" literal="zou het niet goed bewaren." token="goed">
+SLambiek is immers een zuur bier en met jongere hop zou het te bitter smaken en met minder hop zou het niet goed bewaren.
+<attr type="negation" literal="niet goed" token="niet">
+<attr type="positivesentiment" literal="niet goed" token="goed">
 C1lambiek
 Ris
 C2zuur bier
 Ren met
 C2jongere hop
-Rzou te bitter smaken
+Rzou
+C2te bitter
+Rsmaken
 Ren met
 C2minder hop
-Rzou niet goed bewaren
+Rzou
+C2niet goed
+Rbewaren
 Plambiek is zuur bier en met jongere hop zou te bitter smaken en met minder hop zou niet goed bewaren
 <attr type="negation" span="zou niet goed bewaren">
 <attr type="NegativeSentiment" span="zou niet goed bewaren">
@@ -744,6 +987,15 @@ PR<ik>
 Rgroeiden uit elkaar
 Plisa en ik groeiden uit elkaar
 <attr type="NegativeSentiment" span="lisa en ik groeiden uit elkaar">
+SMaar minder slecht doen, volstaat niet.
+<attr type="negativesentiment" literal="minder slecht" token="minder slecht">
+<attr type="negation" literal="volstaat niet." token="niet.">
+C2minder slecht
+Rdoen
+Rvolstaat niet
+Pminder slecht doen volstaat niet
+<attr type="negation" span="volstaat niet">
+<attr type="PositiveSentiment" span="minder slecht">
 SNa een succesvolle tournee stonden beide dames op de theaterkaart.
 <attr type="positivesentiment" literal="succesvolle tournee" token="succesvolle">
 Rna
@@ -754,11 +1006,11 @@ Rop
 C1theaterkaart
 Pna succesvolle tournee stonden beide dames op theaterkaart
 <attr type="PositiveSentiment" span="succesvolle tournee">
-SNatuurlijk is <dat> niet altijd nodig, maar als <hij> <dat> doet, geniet <hij> wel van een zeer concurrentiële eenheidsprijs.
+SNatuurlijk is <dat> niet altijd nodig, maar als <hij> <dat> doet, geniet <hij> wel van een zeer concurrentiële eenheidsprijs.
 <attr type="negation" literal="niet altijd nodig," token="niet altijd">
+<attr type="time" literal="niet altijd nodig," token="niet altijd">
 <attr type="positivesentiment" literal="geniet" token="geniet">
-C1natuurlijk
-Ris
+Rnatuurlijk is
 PR<dat>
 Rniet altijd nodig
 Rmaar als
@@ -772,33 +1024,50 @@ C3zeer concurrentiële eenheidsprijs
 Pnatuurlijk is dat niet altijd nodig maar als hij dat doet geniet hij van zeer concurrentiële eenheidsprijs
 <attr type="negation" span="natuurlijk is dat niet altijd nodig">
 <attr type="PositiveSentiment" span="geniet hij van zeer concurrentiële eenheidsprijs">
-SNochtans begon het duo niet slecht.
+SNiet slecht toch voor een boek dat voor vijftig procent verzonnen is.
+<attr type="negation" literal="Niet slecht" token="Niet">
+<attr type="negativesentiment" literal="Niet slecht" token="slecht">
+C2niet slecht
+Rvoor
+C1boek
+Rdat voor
+C2vijftig procent
+Rverzonnen is
+Pniet slecht voor boek dat voor vijftig procent verzonnen is
+<attr type="negation" span="niet slecht voor boek">
+<attr type="PositiveSentiment" span="niet slecht voor boek">
+SNochtans begon het duo niet slecht.
 <attr type="negation" literal="niet slecht." token="niet">
 <attr type="negativesentiment" literal="niet slecht." token="slecht.">
 Rbegon
 C1duo
-Rniet slecht
+C2niet slecht
 Pbegon duo niet slecht
 <attr type="negation" span="begon duo niet slecht">
 <attr type="PositiveSentiment" span="begon duo niet slecht">
-S <Nu> kan <ze> <haar> arm mooi en goed spontaan bewegen.
-<attr type="time" literal="Nu" token="Nu">
-<attr type="positivesentiment" literal="mooi" token="mooi">
-<attr type="positivesentiment" literal="en goed spontaan bewegen." token="goed spontaan">
-PR<nu>
-Rkan
-PR<ze>
-PR<haar>
-C1arm
-Rmooi
-Ren goed spontaan bewegen
-Pnu kan ze haar arm mooi en goed spontaan bewegen
-<attr type="PositiveSentiment" span="nu kan ze haar arm mooi en goed spontaan bewegen">
-SOlga is waarschijnlijk slecht ten val gekomen en <daarna> vertrappeld door een <andere> olifant.
-<attr type="negativesentiment" literal="is waarschijnlijk slecht ten val gekomen" token="slecht">
+SNochtans viel er vanochtend weinig goed nieuws te rapen in de Europese banksector.
+<attr type="time" literal="vanochtend" token="vanochtend">
+<attr type="positivesentiment" literal="weinig goed nieuws" token="weinig goed">
+Rviel
+C1vanochtend
+C3weinig goed nieuws
+Rte rapen in
+C2europese banksector
+Pviel vanochtend weinig goed nieuws te rapen in europese banksector
+<attr type="NegativeSentiment" span="weinig goed nieuws">
+SNot_in: De politie kwam te paard.
+C1not_in
+C1politie
+Rkwam te
+C1paard
+Pnot_in politie kwam te paard
+SOlga is waarschijnlijk slecht ten val gekomen en <daarna> vertrappeld door een <andere> olifant.
+<attr type="negativesentiment" literal="slecht" token="slecht">
 <attr type="time" literal="daarna" token="daarna">
 C1olga
-Ris waarschijnlijk slecht ten val gekomen
+Ris waarschijnlijk
+C1slecht
+Rten val gekomen
 Ren
 PR<daarna>
 Rvertrappeld door
@@ -808,6 +1077,7 @@ Polga is waarschijnlijk slecht ten val gekomen en daarna vertrappeld door ander
 <attr type="NegativeSentiment" span="olga is waarschijnlijk slecht ten val gekomen">
 SOlieaandelen sloten met winst, ook al omdat de olieprijs vandaag weer in goede doen was.
 <attr type="positivesentiment" literal="winst," token="winst,">
+<attr type="time" literal="vandaag" token="vandaag">
 C1olieaandelen
 Rsloten met
 C1winst
@@ -820,6 +1090,19 @@ C1goede
 Rdoen was
 Polieaandelen sloten met winst omdat olieprijs vandaag weer in goede doen was
 <attr type="PositiveSentiment" span="winst">
+SOmdat <hij> niet zo hard getraind had, verloor <hij> deze keer de match.
+<attr type="negation" literal="niet zo hard getraind had," token="niet zo">
+<attr type="negativesentiment" literal="verloor" token="verloor">
+Romdat
+PR<hij>
+Rniet zo hard getraind had
+Rverloor
+PR<hij>
+C1keer
+C1match
+Pomdat hij niet zo hard getraind had verloor hij keer match
+<attr type="negation" span="omdat hij niet zo hard getraind had">
+<attr type="NegativeSentiment" span="verloor hij keer match">
 SOok beleggers zijn niet tevreden.
 <attr type="negation" literal="niet tevreden." token="niet">
 <attr type="positivesentiment" literal="niet tevreden." token="tevreden.">
@@ -835,18 +1118,20 @@ C1buurtbewoners
 Rhebben gewonnen
 Pbuurtbewoners hebben gewonnen
 <attr type="PositiveSentiment" span="buurtbewoners hebben gewonnen">
-SOok zijn er slangen die niet spontaan aanvallen en daardoor minder gevaarlijk zijn.
-<attr type="negation" literal="die niet spontaan aanvallen" token="niet">
+SOok zijn er slangen die niet spontaan aanvallen en daardoor minder gevaarlijk zijn.
+<attr type="negation" literal="niet spontaan" token="niet">
 <attr type="negativesentiment" literal="minder gevaarlijk" token="minder gevaarlijk">
 Rzijn
 C1slangen
-Rdie niet spontaan aanvallen
+Rdie
+C2niet spontaan
+Raanvallen
 Ren daardoor
 C2minder gevaarlijk
 Rzijn
 Pzijn slangen die niet spontaan aanvallen en daardoor minder gevaarlijk zijn
 <attr type="negation" span="slangen die niet spontaan aanvallen">
-<attr type="PositiveSentiment" span="minder gevaarlijk">
+<attr type="PositiveSentiment" span="en daardoor minder gevaarlijk zijn">
 SOp de vergadering in Antwerpen zijn <nog maar eens> tevreden klanten geciteerd.
 <attr type="time" literal="nog maar eens" token="nog maar eens">
 <attr type="positivesentiment" literal="tevreden klanten" token="tevreden">
@@ -860,9 +1145,10 @@ C2tevreden klanten
 Rgeciteerd
 Pop vergadering in antwerpen zijn nog maar eens tevreden klanten geciteerd
 <attr type="PositiveSentiment" span="antwerpen zijn nog maar eens tevreden klanten">
-SOver moties van vertrouwen en wantrouwen kan slechts gestemd worden na verloop van achtenveertig uur, volgend op de indiening van de motie.
+SOver moties van vertrouwen en wantrouwen kan slechts gestemd worden na verloop van achtenveertig uur, volgend op de indiening van de motie.
 <attr type="positivesentiment" literal="vertrouwen" token="vertrouwen">
 <attr type="negativesentiment" literal="wantrouwen" token="wantrouwen">
+<attr type="time" literal="achtenveertig uur," token="achtenveertig uur,">
 Rover
 C1moties
 Rvan
@@ -871,15 +1157,34 @@ Ren
 C1wantrouwen
 Rkan gestemd worden na verloop van
 C2achtenveertig uur
-C1volgend
-Rop
+Rvolgend op
 C1indiening
 Rvan
 C1motie
 Pover moties van vertrouwen en wantrouwen kan gestemd worden na verloop van achtenveertig uur volgend op indiening van motie
 <attr type="PositiveSentiment" span="vertrouwen">
 <attr type="NegativeSentiment" span="wantrouwen">
+SPatiënten die volgens de richtlijn behandeld worden hebben al na drie maanden beduidend minder last van jeuk dan patiënten die alleen de normale behandeling ondergaan.
+<attr type="time" literal="drie maanden" token="drie maanden">
+<attr type="negativesentiment" literal="beduidend minder last" token="last">
+C1patiënten
+Rdie volgens
+C1richtlijn
+Rbehandeld worden
+Rhebben na
+C2drie maanden
+C3beduidend minder last
+Rvan
+C1jeuk
+Rdan
+C1patiënten
+Rdie
+C2normale behandeling
+Rondergaan
+Ppatiënten die volgens richtlijn behandeld worden hebben na drie maanden beduidend minder last van jeuk dan patiënten die normale behandeling ondergaan
+<attr type="PositiveSentiment" span="beduidend minder last">
 SPatiënten die volgens de richtlijn behandeld worden hebben al na drie maanden beduidend minder last van jeuk.
+<attr type="time" literal="drie maanden" token="drie maanden">
 <attr type="negativesentiment" literal="beduidend minder last" token="last">
 C1patiënten
 Rdie volgens
@@ -899,7 +1204,7 @@ Rwordt
 C1populair
 Prustgevend kruid wordt populair
 <attr type="PositiveSentiment" span="rustgevend kruid wordt populair">
-SSlechts 1% van de jongeren vindt acne absoluut niet storend.
+SSlechts 1% van de jongeren vindt acne absoluut niet storend.
 <attr type="negation" literal="absoluut niet storend." token="absoluut niet">
 <attr type="negativesentiment" literal="absoluut niet storend." token="storend.">
 C11%
@@ -907,7 +1212,7 @@ Rvan
 C1jongeren
 Rvindt
 C1acne
-Rabsoluut niet storend
+C3absoluut niet storend
 P1% van jongeren vindt acne absoluut niet storend
 <attr type="negation" span="1% van jongeren vindt acne absoluut niet storend">
 <attr type="PositiveSentiment" span="1% van jongeren vindt acne absoluut niet storend">
@@ -929,24 +1234,38 @@ Ren
 C1schorpioenen
 Psommige dieren zijn gevaarlijk zoals giftige slangen en schorpioenen
 <attr type="NegativeSentiment" span="sommige dieren zijn gevaarlijk">
-S <Sommige> worden vrij goed door het lichaam opgenomen.
-<attr type="positivesentiment" literal="worden vrij goed door" token="goed">
+S <Sommige> worden vrij goed door het lichaam opgenomen.
+<attr type="positivesentiment" literal="vrij goed" token="goed">
 PR<sommige>
-Rworden vrij goed door
+Rworden
+C2vrij goed
+Rdoor
 C1lichaam
 Ropgenomen
 Psommige worden vrij goed door lichaam opgenomen
-<attr type="PositiveSentiment" span="sommige worden vrij goed door lichaam opgenomen">
-S <Sommigen> vinden het mooi, <anderen> niet.
-<attr type="positivesentiment" literal="vinden het mooi," token="mooi,">
+<attr type="PositiveSentiment" span="vrij goed door lichaam">
+S <Sommigen> vinden het mooi, <anderen> niet.
+<attr type="positivesentiment" literal="mooi," token="mooi,">
 <attr type="negation" literal="niet." token="niet.">
 PR<sommigen>
-Rvinden mooi
+Rvinden
+C1mooi
 PR<anderen>
 Rniet
 Psommigen vinden mooi anderen niet
 <attr type="negation" span="anderen niet">
 <attr type="PositiveSentiment" span="sommigen vinden mooi">
+SSteunmechanisme voor gascentrales is goed nieuws voor stroomfactuur.
+<attr type="positivesentiment" literal="goed nieuws" token="goed">
+C1steunmechanisme
+Rvoor
+C1gascentrales
+Ris
+C2goed nieuws
+Rvoor
+C1stroomfactuur
+Psteunmechanisme voor gascentrales is goed nieuws voor stroomfactuur
+<attr type="PositiveSentiment" span="steunmechanisme voor gascentrales is goed nieuws voor stroomfactuur">
 STitanium kan niet roesten dus de frames zullen <zeer lang> mooi blijven.
 <attr type="negation" literal="kan niet roesten" token="niet">
 <attr type="time" literal="zeer lang" token="zeer lang">
@@ -960,7 +1279,20 @@ C1mooi
 Rblijven
 Ptitanium kan niet roesten frames zullen zeer lang mooi blijven
 <attr type="negation" span="titanium kan niet roesten frames zullen zeer lang mooi blijven">
-<attr type="PositiveSentiment" span="mooi">
+<attr type="PositiveSentiment" span="titanium kan niet roesten frames zullen zeer lang mooi blijven">
+STwee gemotiveerde burgers zijn erin geslaagd om te bewijzen dat de miljardenmachine niet in staat is goede plannen te maken.
+<attr type="negation" literal="niet in staat is" token="niet">
+<attr type="positivesentiment" literal="plannen te maken." token="plannen">
+C3twee gemotiveerde burgers
+Rzijn erin geslaagd om te bewijzen
+Rdat
+C1miljardenmachine
+Rniet in staat is
+C1goede
+Rplannen te maken
+Ptwee gemotiveerde burgers zijn erin geslaagd om te bewijzen dat miljardenmachine niet in staat is goede plannen te maken
+<attr type="negation" span="dat miljardenmachine niet in staat is goede plannen te maken">
+<attr type="NegativeSentiment" span="dat miljardenmachine niet in staat is goede plannen te maken">
 SVoor de handige vingers toont de lesgeefster nog een mooie afwerking om de ketting te sluiten.
 <attr type="positivesentiment" literal="mooie afwerking" token="mooie">
 Rvoor
@@ -973,8 +1305,9 @@ C1ketting
 Rte sluiten
 Pvoor handige vingers toont lesgeefster mooie afwerking om ketting te sluiten
 <attr type="PositiveSentiment" span="mooie afwerking">
-SVoordeel is dat de laatstgenoemde installaties maar een keer de investering hoeven te doen, met andere woorden het kan <nu> in één keer goed gebeuren.
+SVoordeel is dat de laatstgenoemde installaties maar een keer de investering hoeven te doen, met andere woorden het kan <nu> in één keer goed gebeuren.
 <attr type="time" literal="nu" token="nu">
+<attr type="time" literal="één keer" token="één keer">
 <attr type="positivesentiment" literal="goed gebeuren." token="goed">
 C1voordeel
 Ris dat
@@ -987,9 +1320,9 @@ Rkan
 PR<nu>
 Rin
 C2één keer
-Rgoed gebeuren
+C2goed gebeuren
 Pvoordeel is dat laatstgenoemde installaties maar keer investering hoeven te doen kan nu in één keer goed gebeuren
-<attr type="PositiveSentiment" span="kan nu in één keer goed gebeuren">
+<attr type="PositiveSentiment" span="goed gebeuren">
 S <We> genoten zelfs van de extra aandacht.
 <attr type="positivesentiment" literal="genoten zelfs van" token="genoten">
 PR<we>
@@ -1004,6 +1337,18 @@ C2belgische politie
 Rgewezen op van
 C1sandra
 Pwe hebben belgische politie gewezen op van sandra
+S <We> hebben grijs gekozen, wat bij dit huis mooi is.
+<attr type="positivesentiment" literal="mooi" token="mooi">
+PR<we>
+Rhebben
+C1grijs
+Rgekozen
+Rwat bij
+C1huis
+C1mooi
+Ris
+Pwe hebben grijs gekozen wat bij huis mooi is
+<attr type="PositiveSentiment" span="wat bij huis mooi is">
 S <We> hebben in Nederland dan ook geen marktaandeel verloren, stelt <hij.>
 <attr type="negation" literal="geen marktaandeel" token="geen">
 <attr type="negativesentiment" literal="verloren," token="verloren,">
@@ -1015,6 +1360,17 @@ Rverloren
 Rstelt
 PR<hij>
 Pwe hebben in nederland geen marktaandeel verloren stelt hij
+<attr type="negation" span="geen marktaandeel verloren">
+<attr type="PositiveSentiment" span="geen marktaandeel verloren">
+S <We> hebben in Nederland dan ook geen marktaandeel verloren.
+<attr type="negation" literal="geen marktaandeel" token="geen">
+<attr type="negativesentiment" literal="verloren." token="verloren.">
+PR<we>
+Rhebben in
+C1nederland
+C2geen marktaandeel
+Rverloren
+Pwe hebben in nederland geen marktaandeel verloren
 <attr type="negation" span="geen marktaandeel verloren">
 <attr type="PositiveSentiment" span="geen marktaandeel verloren">
 S <We> hebben minder genoten van het tweede optreden.
@@ -1049,31 +1405,45 @@ Repibreren
 Rzei
 PR<hij>
 Pwe moeten systeem epibreren zei hij
-SWetenschappers vrezen dat <hetzelfde> mechanisme <wel eens> schadelijk zou kunnen zijn bij de mens.
+SWetenschappers vrezen dat <hetzelfde> mechanisme <wel eens> schadelijk zou kunnen zijn bij de mens.
 <attr type="time" literal="wel eens" token="wel eens">
-<attr type="negativesentiment" literal="schadelijk zou kunnen zijn bij" token="schadelijk">
+<attr type="negativesentiment" literal="schadelijk" token="schadelijk">
 C1wetenschappers
 Rvrezen
 Rdat
 PR<hetzelfde>
 C1mechanisme
 PR<wel eens>
-Rschadelijk zou kunnen zijn bij
+C1schadelijk
+Rzou kunnen zijn bij
 C1mens
 Pwetenschappers vrezen dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij mens
 <attr type="NegativeSentiment" span="dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij mens">
-SWie daardoor wordt getroffen is misschien kortstondig mooi geweest maar is <daarna> langdurig ziek.
+SWie daardoor wordt getroffen is misschien kortstondig mooi geweest maar is <daarna> <langdurig> ziek.
 <attr type="positivesentiment" literal="kortstondig mooi" token="kortstondig mooi">
 <attr type="time" literal="daarna" token="daarna">
+<attr type="time" literal="langdurig" token="langdurig">
 Rwie daardoor wordt getroffen
 Ris misschien
 C2kortstondig mooi
 Rgeweest
 Rmaar is
 PR<daarna>
-C2langdurig ziek
+PR<langdurig>
+C1ziek
 Pwie daardoor wordt getroffen is misschien kortstondig mooi geweest maar is daarna langdurig ziek
-<attr type="PositiveSentiment" span="kortstondig mooi geweest">
+<attr type="PositiveSentiment" span="wie daardoor wordt getroffen is misschien kortstondig mooi geweest">
+SWie met kweken start doet er slecht aan om te bezuinigen op de bodem.
+<attr type="negativesentiment" literal="slecht" token="slecht">
+Rwie met
+C2kweken start
+Rdoet
+C1slecht
+Raan
+Rom te bezuinigen op
+C1bodem
+Pwie met kweken start doet slecht aan om te bezuinigen op bodem
+<attr type="NegativeSentiment" span="wie met kweken start doet slecht aan">
 S <Wij> mogen geen tijd meer verliezen.
 <attr type="negation" literal="geen tijd meer" token="geen">
 <attr type="negativesentiment" literal="verliezen." token="verliezen.">
@@ -1095,14 +1465,16 @@ Rverloren
 Pze hebben in nederland geen marktaandeel verloren
 <attr type="negation" span="geen marktaandeel verloren">
 <attr type="PositiveSentiment" span="geen marktaandeel verloren">
-S <Ze> vinden het goed dat er een zwembad is.
-<attr type="positivesentiment" literal="vinden het goed dat" token="goed">
+S <Ze> vinden het goed dat er een zwembad is.
+<attr type="positivesentiment" literal="goed" token="goed">
 PR<ze>
-Rvinden goed dat
+Rvinden
+C1goed
+Rdat
 C1zwembad
 Ris
 Pze vinden goed dat zwembad is
-<attr type="PositiveSentiment" span="ze vinden goed dat zwembad is">
+<attr type="PositiveSentiment" span="goed">
 S <Ze> zeiden dat <ze> nooit een wedstrijd verloren hadden.
 <attr type="negation" literal="nooit" token="nooit">
 <attr type="negativesentiment" literal="verloren hadden." token="verloren">
@@ -1126,6 +1498,21 @@ PR<hun>
 C2nieuwe tv
 Pze zijn tevreden over hun nieuwe tv
 <attr type="PositiveSentiment" span="ze zijn tevreden over hun nieuwe tv">
+S <Zijn> opvolgster doet er goed aan om een duidelijke scheiding aan te brengen tussen het subsidiëren van individuen en het organiseren van het literaire veld.
+<attr type="positivesentiment" literal="goed" token="goed">
+PR<zijn>
+C1opvolgster
+Rdoet
+C1goed
+Raan
+Rom
+C2duidelijke scheiding
+Raan te brengen tussen subsidiëren van
+C1individuen
+Ren organiseren van
+C2literaire veld
+Pzijn opvolgster doet goed aan om duidelijke scheiding aan te brengen tussen subsidiëren van individuen en organiseren van literaire veld
+<attr type="PositiveSentiment" span="zijn opvolgster doet goed aan">
 S <Zijn> zoon kende minder succes.
 <attr type="positivesentiment" literal="minder succes." token="succes.">
 PR<zijn>
