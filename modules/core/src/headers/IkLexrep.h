@@ -200,17 +200,29 @@ namespace iknow
       bool Contains(FastLabelSet::Index label_index, Phase p = kMaxPhase) const { return LabelSet(p).Contains(label_index); }
 
 	  bool hasSBeginLabel(Phase p) const;
+      bool hasQBeginLabel(Phase p) const;
 	  bool hasSEndLabel(Phase p) const;
+      bool hasQEndLabel(Phase p) const;
+
 	  void setSBeginLabel();
+      void setQBeginLabel();
 	  void setSEndLabel();
+      void setQEndLabel();
+
 	  void resetSBeginLabel() {
 		  ClearAllLabels();
 		  setSBeginLabel();
 	  }
+      // Set affirmative sentence end label
 	  void resetSEndLabel() {
 		  ClearAllLabels();
 		  setSEndLabel();
 	  }
+      // Set question end label
+      void resetQEndLabel() {
+          ClearAllLabels();
+          setQEndLabel();
+      }
 
       //Returns the index of a label on this lexrep which contains the attribute
       FastLabelSet::Index FindAttributeWithType(AttributeId attribute, Phase p = kMaxPhase) const;
