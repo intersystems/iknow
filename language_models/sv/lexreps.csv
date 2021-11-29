@@ -93558,6 +93558,11 @@
 ;;fredagen;;SVDay;SVCon;
 ;;lördagen;;SVDay;SVCon;
 ;;söndagen;;SVDay;SVCon;
+;;(måndag|tisdag|onsdag|torsdag|fredag|lördag|söndag) morgon;;SVDay;SVCon;
+;;(måndag|tisdag|onsdag|torsdag|fredag|lördag|söndag) eftermiddag;;SVDay;SVCon;
+;;(måndag|tisdag|onsdag|torsdag|fredag|lördag|söndag) kväll;;SVDay;SVCon;
+;;(måndags|tisdags|onsdags|torsdags|fredags|lördags|söndags) kväll;;SVDay;SVCon;
+
 ;;hälften;;SVNumber;SVCon;
 ;;en tredjedel;;SVNumber;
 ;;en fjärdedel;;SVNumber;
@@ -95408,7 +95413,6 @@
 ;;ett par dagar tidigare;;SVAdvTime;SVAdv;
 ;;ett år tidigare;;SVAdvTime;SVAdv;
 ;;fordomdags;;SVAdvTime;SVAdv
-;;för att sedan;;SVConj;Join;-;SVAdvTemp;SVAdv;
 ;;hela natten;;SVAdvTime;SVAdv;
 ;;hurdags;;SVAdvTime;SVAdv
 ;;i dag;;SVAdvTime;SVAdv;
@@ -95444,7 +95448,7 @@
 ;;något år tidigare;;SVAdvTime;SVAdv;
 ;;några dagar tidigare;;SVAdvTime;SVAdv;
 ;;några år senare;;SVAdvTime;SVAdv;
-;;om och om igen;;SVAdvTemp;SVAdv;
+;;samma dag;;SVAdvTime;SVAdv;
 ;;sedan flera år tillbaka;;SVAdvTime;SVAdv;
 ;;sedan i somras;;SVPrep;-;SVAdvTime;SVAdv;Join;
 ;;sedan i vintras;;SVPrep;-;SVAdvTime;SVAdv;Join;
@@ -95477,6 +95481,7 @@
 ;;tidtals;;SVAdvTime;SVAdv
 ;;tillförne;;SVAdvTime;SVAdv
 ;;ultimo;;SVAdvCon;SVAdvTime
+;;under åren;;SVAdvTime;SVAdv;
 ;;veckan dessförinnan;;SVAdvTime;SVAdv;
 ;;vintertid;;SVAdvTime;SVAdv;
 ;;vips;;SVAdvCon;SVAdvStruct;SVAdvTime
@@ -95519,6 +95524,7 @@
 ;;evinnerligen;;SVAdvTemp;SVAdv
 ;;f.n.;;SVAdvTemp;SVAdv
 ;;flera år framöver;;SVAdvTemp;SVAdv;
+;;för att sedan;;SVConj;Join;-;SVAdvTemp;SVAdv;
 ;;fordom;;SVAdv;SVAdvTemp;
 ;;fortfarande;;SVAdvTemp;SVAdv
 ;;fortsättningsvis;;SVAdvTemp;SVAdv
@@ -95527,6 +95533,7 @@
 ;;framgent;;SVAdvTemp;SVAdv
 ;;frampå;;SVPrepAdv;SVAdvTemp;
 ;;framöver;;SVAdvTemp;SVAdv;
+;;från en dag till en annan;;SVAdvTemp;SVAdv;
 ;;för en tid sedan;;SVAdvTemp;SVAdv;
 ;;för länge sedan;;SVAdvTemp;SVAdv;
 ;;för så länge sedan;;SVAdvTemp;SVAdv;
@@ -95559,6 +95566,7 @@
 ;;inom en inte alltför avlägsen framtid;;SVAdvTemp;SVAdv;
 ;;inte sällan;;SVAdvTemp;SVAdv;
 ;;jättelänge;;SVAdvTemp;SVAdv
+;;kort därefter;;SVAdvTemp;SVAdv
 ;;längesedan;;SVAdvTemp;SVAdv
 ;;längesen;;SVAdvTemp;SVAdv
 ;;lika länge;;SVAdvAdj;SVAdvTemp;
@@ -95587,12 +95595,15 @@
 ;;omgående;;SVAdvTemp;SVAdv
 ;;omigen;;SVAdvTemp;SVAdv
 ;;omsider;;SVAdvTemp;SVAdv
+;;om och om igen;;SVAdvTemp;SVAdv;
 ;;oupphörligen;;SVAdvTemp;SVAdv
 ;;permanent;;SVAdvAdj;SVAdvTemp;
 ;;plötsligen;;SVAdvTemp;SVAdv
 ;;plötsligt;;SVAdvAdj;SVAdvTemp;
 ;;på förhand;;SVAdvTemp;SVAdv;
 ;;på kort tid;;SVAdvTemp;SVAdv;
+;;på kvällen;;SVAdvTemp;SVAdv;
+;;på morgonen;;SVAdvTemp;SVAdv;
 
 ;;samtidigt;;SVAdvTemp;SVAdv;
 ;;sedan dess;;SVAdvTemp;SVAdv;
@@ -95617,6 +95628,7 @@
 
 ;;tillfälligtvis;;SVAdvTemp;SVAdv
 ;;tillsvidare;;SVAdvTemp;SVAdv
+;;under mellantiden;;SVAdvTemp;SVAdv;
 ;;ungefär samtidigt;;SVAdvTemp;SVAdv;
 ;;ursprungligen;;SVAdvTemp;SVAdv
 ;;vid det här laget;;SVAdvTemp;SVAdv;
