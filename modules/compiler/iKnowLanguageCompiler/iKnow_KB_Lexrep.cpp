@@ -149,6 +149,9 @@ vector<string> CollectSegments(string& token, const string& labels, CSV_DataGene
 	string label_segment;
 	for (auto it = list_labels.begin(); it != list_labels.end(); it++) {
 		if (*it == "-") { // segment splitter
+			if (it == list_labels.begin()) { // error, separator symbol cannot be first
+				throw ExceptionFrom<iKnow_KB_Lexrep>("While reading lexreps : Separator symbol cannot be first:\"" + token + "\":\"" + labels + "\"");
+			}
 			label_segments.push_back(label_segment);
 			label_segment.clear();
 			continue;
@@ -196,6 +199,10 @@ bool iKnow_KB_Lexrep::ImportFromCSV(string lexreps_csv, CSV_DataGenerator& kb)
 
 			string meta = row_lexrep[2 - 1]; // Set meta = $Piece(line, ";", 2) // new !, metadata linked to lexrep
 			string token = row_lexrep[3 - 1]; // Set token = $PIECE(line, ";", 3)
+			//string empty = row_lexrep[4 - 1]; // Empty *must* be empty, if not = typo
+			//if (empty != "") {
+			//	throw ExceptionFrom<iKnow_KB_Lexrep>("While reading lexreps : Field 4 must be empty:\"" + token + "\":\"" + line + "\"");
+			//}
 			string labels;
 			for_each(row_lexrep.begin() + 5 - 1, row_lexrep.end(), [&labels](std::string& label) { labels += label + ";"; }); // Set labels = $PIECE(line, ";", 5, 99)
 
