@@ -54,6 +54,10 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			if ((std::count(line.begin(), line.end(), ';') + 1) < 4) continue; // Continue : ($L(line, ";") < 4)
 
 			vector<string> row_rule = kb.split_row(line);
+			if (row_rule.size() == 4) { // no pending comment
+				if (line[line.size()-1] != ';') // last symbol must be terminating ';'
+					throw ExceptionFrom<iKnow_KB_Rule>("Missing terminator symbol \";\" in line: " + line);
+			}
 			iKnow_KB_Rule rule; // Set rule = ..%New()
 			rule.csv_id = row_rule[1 - 1]; // csv identification of rule
 			int rule_csv_id = 0;
