@@ -88,6 +88,10 @@
 /*		858. Den första maj, då solen genomlöper Oxens tecken.
 859;40;"den"|SVNum|SVMonth;SVAdvTime+SVAdv+SVDate|Join|Join;
 /*		859. Det senaste dödsbudet kom den 6 december.
+1226;40;SVOrdnumber:SVNum|SVMonth;SVMonth+SVAdvTime+SVAdv+SVDate|Join;
+/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
+1227;40;SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join;
+/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
 736;40;"senast"|"år"|SVYear;SVAdvTime+SVAdv|Join|Join;time indication, specific exception for 735
 /*		736. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 737;40;"senast"|SVMonth;SVAdvTime+SVAdv|+Join;
@@ -100,6 +104,7 @@
 /*		735. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
 922;40;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
 /*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
+
 
 /* Disambiguate specific words
 /* ---------------------------
@@ -1500,8 +1505,8 @@
 /*		44. Hon var glad och positiv, empatisk och väldigt mån om alla, oss och vännerna, ville att man skulle tala väl om människor.
 555;40;SVConIfAllCap;-SVConIfAllCap;
 /*		555. I nästa fas i det världsunika forskningsprojektet ska sju kvinnor genomgå IVF-behandling med målet att bli gravida.
-306;40;SVTimeconcept+SVCon;-SVTimeconcept;
-/*		306. Resan med fyra hästspårvagnar, påbörjades kl. 16.00 och tog cirka 15 minuter.
+/*306;40;SVTimeconcept+SVCon;-SVTimeconcept;
+/*306. Resan med fyra hästspårvagnar, påbörjades kl. 16.00 och tog cirka 15 minuter.
 617;40;"&";SVCon;
 /*		617. Gruppen deltog under namnet Björn & Benny, Agnetha & Anni-Frid i Melodifestivalen 1973 med Ring ring.
 865;40;"-";SVPunctuation;
@@ -1512,8 +1517,33 @@
 /*		889. Men arbetet har fått en del oväntade konsekvenser.
 
 
+1223;42;"kl":"kl.":"klockan"|SVClocktime;SVAdvTime+SVAdv+SVClocktime|Join;for time written in 2+2 numbers
+/*		1223. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1232;42;"kl":"kl.":"klockan"|."halv"|SVHour;SVAdvTime+SVAdv+SVClocktime|Join|Join;for time written in letters or max 2 numbers
+/*		1232. Klockan halv tio återvände vagnen till Stigbergsliden, ut till Klippan och gjorde sin returresa klockan 11.
+1233;42;SVHour|SVAdvTime;SVAdvTime+SVAdv+SVClocktime-SVNumber-SVNum|Join;
+/*		. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel.
+1231;42;SVYearpart|SVYear;SVYearpart+SVAdv+SVAdvTime|Join;
+/*		1231. Under senare delen av hösten 2008 fortsatte njurfunktionen att försämras med stigande kreatinin, ökande proteinuri och svårreglerat blodtryck.
 1222;42;SVAdvTime:SVDay:SVMonth:SVYear:SVDate;+SVTime;
 /*		1222. Jag skrev tidigare i veckan att den kunde bli rörigare än rörig.
+1224;42;SVAdvTime:SVDay:SVMonth:SVYear:SVDate|SVClocktime;SVAdv+SVAdvTime+SVTime|Join;
+/*		1224. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1225;42;SVClocktime|SVAdvTime:SVDay:SVMonth:SVYear:SVDate;SVAdv+SVAdvTime+SVTime|Join;
+/*		1225. När Gustaf VI Adolf avled klockan 20:35 den 15 september 1973, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1228;42;SVClocktime|SVAdvTemp;SVAdv+SVAdvTime+SVTime|Join;
+/*		1228. Första turen gjordes klockan nio på morgonen.
+1230;42;"var":"vart"|SVOrdnumber|SVTimeconcept;+SVTime|+SVTime|+SVTime;evaluate later if there is a more general way to deal with var(t)+Ordnumber
+/*		1230. Behandling med acetylsalicylsyra, ASA, i lågdos kan förhindra vart fjärde fall av havandeskapsförgiftning hos riskgrupper.
+/*1229;42;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;+SVTime|SVTimeconcept+SVCon+SVTime;
+1229;42;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;JoinReverse|+SVTime;
+/*		1229. Det var inte ovanligt kallt i juni fastän det kan vara vad många minns av den gångna månaden.
+1234;42;SVAdvTemp|SVAdvTime;JoinReverse|*;
+/*		. En 18-årig man greps senare på kvällen misstänkt för grov misshandel.
+
+/* Expansion
+/*1223;42;SVTimeprep|*SVTime|^SVCon;+SVbRel+SVTimeBegin|*|+SVTimeStop;;
+/*		. I oktober hade andelen ökat till 31 procent.
 
 
 /* ======================================================
@@ -1988,6 +2018,10 @@
 /* =============================
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
+/*1224;$;SVTimeStop+SVPunctuation|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
+/*		. 3,4 procent i november, tre procent månaden innan.
+/*1225;$;SVTimeStop+typeAmbiguous:typeOther|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
+
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 

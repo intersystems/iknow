@@ -12,8 +12,9 @@ Regex(String(Regex40Str, 7)), Regex(String(Regex41Str, 7)), Regex(String(Regex42
 Regex(String(Regex44Str, 14)), Regex(String(Regex45Str, 13)), Regex(String(Regex46Str, 14)), Regex(String(Regex47Str, 20)), 
 Regex(String(Regex48Str, 13)), Regex(String(Regex49Str, 14)), Regex(String(Regex50Str, 14)), Regex(String(Regex51Str, 13)), 
 Regex(String(Regex52Str, 14)), Regex(String(Regex53Str, 13)), Regex(String(Regex54Str, 13)), Regex(String(Regex55Str, 15)), 
-Regex(String(Regex56Str, 14)), Regex(String(Regex57Str, 11)), Regex(String(Regex58Str, 33)), Regex(String(Regex59Str, 17)), 
-Regex(String(Regex60Str, 9)), Regex(String(Regex61Str, 5)), Regex(String(Regex62Str, 3)), Regex(String(Regex63Str, 7)), 
-Regex(String(Regex64Str, 4)), Regex(String(Regex65Str, 5)), Regex(String(Regex66Str, 4)), Regex(String(Regex67Str, 6)), 
-Regex(String(Regex68Str, 5)), Regex(String(Regex69Str, 5)), Regex(String(Regex70Str, 5)), Regex(String(Regex71Str, 6)), 
-Regex(String(Regex72Str, 17)), Regex(String(Regex73Str, 21)), Regex()
+Regex(String(Regex56Str, 14)), Regex(String(Regex57Str, 43)), Regex(String(Regex58Str, 43)), Regex(String(Regex59Str, 11)), 
+Regex(String(Regex60Str, 33)), Regex(String(Regex61Str, 17)), Regex(String(Regex62Str, 9)), Regex(String(Regex63Str, 5)), 
+Regex(String(Regex64Str, 3)), Regex(String(Regex65Str, 7)), Regex(String(Regex66Str, 4)), Regex(String(Regex67Str, 5)), 
+Regex(String(Regex68Str, 4)), Regex(String(Regex69Str, 6)), Regex(String(Regex70Str, 5)), Regex(String(Regex71Str, 5)), 
+Regex(String(Regex72Str, 5)), Regex(String(Regex73Str, 6)), Regex(String(Regex74Str, 17)), Regex(String(Regex75Str, 26)), 
+Regex(String(Regex76Str, 21)), Regex()
