@@ -292,7 +292,7 @@ void GotoFunction::ToC(std::string dir)
 					String regexName = String(regex.begin() + 1, regex.end() - 1);  //	Set regexName = $E(regex, 2, *-1) //remove {}
 					String pattern = RegexDictionary->Lookup(regexName); //	Set pattern = ..RegexDictionary.Lookup(regexName)
 
-					if (pattern.empty()) throw ExceptionFrom<GotoFunction>("Unknown regex specified."); // 	If pattern = "" Throw ##class(%Exception.SystemException).%New("Unknown regex specified.")
+					if (pattern.empty()) throw ExceptionFrom<GotoFunction>("Unknown regex specified:\"" + iknow::base::IkStringEncoding::BaseToUTF8(regexName) + "\""); // 	If pattern = "" Throw ##class(%Exception.SystemException).%New("Unknown regex specified.")
 					ofs.o() << "static const Char Regex" << i << "Str[] = {"; // Write "static const Char Regex"_i_"Str[] = {"
 					for (int j = 1; j <= pattern.length(); j++) {	// For j = 1 :1 : $L(pattern) {
 						ofs.o() << static_cast<int>(pattern[j - 1]) << ", "; // W $A(pattern, j)_", "
