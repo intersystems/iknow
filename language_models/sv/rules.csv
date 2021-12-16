@@ -39,10 +39,212 @@
 /*		547.  Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod.
 
 
+/* *** senare ***
+565;25;SVAdvDegree|SVNumber:SVNum:SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join|Join;
+/*		565. Kompletterande formuleringar infördes nästan hundra år senare i Kristoffers landslag (JB kap. 1) från 1442. Nästan ett år senare är ledarskapsutbildningen färdig. Knappt 50 år senare invigdes Åhléns City, som ligger i hörnet Drottninggatan/Klarabergsgatan, nära Sergels torg.
+562;25;SVNumber:SVNum|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
+/*		562. Två år senare började hon på den då nystartade Guldsmedsskolan i Strålsnäs. Det är då intressant om den förespråkas 2000 år senare i en annan social miljö.
+569;25;SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
+/*		569. Produktionsstart beräknas nu till i slutet av 2019, ett år senare än tidigare plan.
+850;25;SVAttrpron|SVTimeconcept|"senare";SVAdvTime+SVAdv-SVAdjpron-SVObjpron-SVEttform|Join|Join;
+/*		850. Några dagar senare hade omkring fyrtio personer investerat 500 dollar.
+851;25;SVTimeconcept|"senare";SVAdvTime+SVAdv|Join;
+/*		851. Anta att om Karl XII hade lyckats undgå den kula som faktiskt dödade honom så hade han ändå dött sekunderna senare av en annan kula.
+847;25;SVDefart|"senare"|SVmAux:SVAux:SVVerb;SVSubjpron+SVObjpron|Join|*;
+/*		847. Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod. Det senare har nu bland annat uttryckts i regeringsformen som en av riksdagsutskottens uppgifter (4 kap. 8 § RF). Hos de senare ökar fotorespirationen med stigande temperatur.
+564;25;"senare";SVAdvAdj+SVAdvTemp+SVTimeadj+SVPosttime;
+/*		564. Sten och grus är tyngst och avlagras först, medan sand, dy och botten-slam fälls ut senare under den 3000 kilometer långa resan.
+
+/* *** (för ...) sedan ***
+852;25;"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|Join|Join;
+/*		852. – Jag var och hälsade på henne för ett par veckor sedan så jag visste ju.
+932;25;"för"|*{1,4}^SVTimeconcept+^"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|+Join|Join|Join;
+/*		932. För många år sedan medverkade jag i ett radioprogram.
+
+/* *** sedan ... tillbaka ***
+916;25;"sedan"|SVTimeconcept|"tillbaka";SVAdvTime|Join|Join;
+/*		916. Har ett intresse av aktier sedan tag tillbaka och börjar så smått lära mig mer och mer.
+933;25;"sedan"|*{1,3}^SVTimeconcept|SVTimeconcept|"tillbaka";SVAdvTime+SVAdv|+Join|Join|Join;
+/*		933. Årligen har de en omsättning på sju miljarder kronor årligen och sedan tre år tillbaka ägs de av ABCD Invest. SVT har följt dem tätt sedan väldigt många år tillbaka.
+
+/* *** sedan: other cases ***
+309;25;SVSedan|SVCon:SVAdj:SVYear:SVAdvTime;SVPrep|*;
+/*		309. Det har gått 40 år sedan Monty Python senast stod på scen i Storbritannien. Där arbetade hon sedan hela livet. De rättsliga och politiska ramarna för styrningen av den offentliga förvaltningen har sedan 1974 genomgått omfattande förändringar. Kunskap ger tillväxt, det är mitt nya slagord, sade Katrin, som sedan den 12 maj dessutom är vd för ABCD Invest.
+323;25;SVSedan|SVSubjpron+^SVAttrpron;SVConj|*;
+/*		323. Försurningen har ökat beroende på en minskning med 0.1 pH enheter sedan den industriella revolutionen startade.
+1245;25;^SVVerb+^SVVerbPart+^SVAux+^SVmAux|SVSedan|SVSubjpron+SVAttrpron;*|SVConj|*;
+/*		. Nu har det gått tjugofem sedan detta inträffade.
+325;25;SVPunctuation|SVSedan|SVIndefart;SVPunctuation|SVAdvStruct+SVAdv|*;
+/*		325. Han refererar också till det didaktiska kontrakt i en matematikundervisning som inleds med att läraren går igenom nytt stoff, sedan ett urval av uppgifter varefter eleverna räknar på uppgifterna individuellt eller i grupp.
+324;25;SVSedan|SVIndefart:SVPosspron;SVConj|*;
+/*		324. Stora förväntningar ställs sedan ett drygt decennium på att den nya tekniken på olika sätt ska förändra och förbättra undervisningen (Almqvist 2006). Sedan en läktare rasat samman under den första spelningen, flyttades den andra till Söderstadion i juni.
+326;25;SVSedan|SVNum:SVNumber;SVPrep|*;
+/*		326. Det första fallet var en 32-årig kvinna med diabetes mellitus typ 1 sedan 17 års ålder. Carl XVI Gustaf, Carl Gustaf Folke Hubertus, född 30 april 1946 på Haga slott i Solna, Stockholms län, är Sveriges konung och statschef sedan 15 september 1973 då han efterträdde sin farfar Gustaf VI Adolf.
+330;25;SVSedan|"slutet";SVPrep|SVCon;
+/*		330. Dödligheten i kranskärlssjukdom har minskat kraftigt sedan slutet av 1980-talet.
+331;25;SVSedan|"i";SVPrep|SVPrep;
+/*		331. Den undersöks sedan i mikroskop.
+/*1245;25;SVSedan|SVVerb:SVAux:SVmAux;SVAdvStruct+SVAdv|*;
+/*. Sedan undersöks vävnad från en sjuk släkting för att se om det finns en genförändring.
+311;25;SVSedan+^SVPrep+^SVAdv;^SVAdvStruct+SVAdv;
+/*311;25;SVSedan+^SVPrep+^SVAdv|^SVAttrpron;SVAdvStruct+SVAdv|*;
+/*		311. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
+
+/* *** dagen efter ***
+476;25;"dagen"|"efter"|SVVerb:SVVerbPart:SEnd;SVAdvTime+SVAdv|Join|*;
+/*		476. Författaren R.T. var tillsammans med sin hustru på väg för att uppvakta dottern som skulle fylla år dagen efter. Dagen efter kom patienten tillbaka och det slutade med operation för tarmvred. Men dagen efter läste han i lokaltidningen att någon hade vunnit en storvinst på 734 590 i samma spelbutik.
+479;25;"dagen";SVCon;
+/*		479. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
+
+
+615;25;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*;
+/*		615. En person som avses i första stycket får bedriva undervisning under högst ett år i sänder.
+
+*/ ==============
+*/ BLOCK 30: TIME
+*/ ==============
+
+1248;30;SVNum:SVNumber|*SVCon|"per"|SVTimeconcept;-SVYear+SVAdj|*|SVCon-SVConIfCap|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
+/*		. Ca 1500 kvinnor per år utvecklar en spridd sjukdom.
+
+/* Make multiword time indications one entity
+/* ------------------------------------------
+860;30;"den"|SVOrdnumber:SVNum|SVMonth|SVYear:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*		860. — Den första januari 2022 blir jag pensionär. Dessa lagändringar trädde i kraft den 1 april 2011. Den lägsta -31 °C, den 20 januari i år.
+/*861;30;"den"|SVNum|SVMonth|SVYear;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*861. Dessa lagändringar trädde i kraft den 1 april 2011.
+862;30;"den"|SVOrdnumber:SVNum|SVMonth|"år"|SVYear;JoinReverse|JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*		862. — Den första januari år 2022 blir jag pensionär. Den lägsta -31 °C, den 20 januari år 1814.
+/*863;30;"den"|SVNum|SVMonth|"år"|SVYear;JoinReverse|JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*863. Den lägsta -31 °C, den 20 januari år 1814.
+908;30;"den"|SVOrdnumber|SVMonth|SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*		908. Här mördades en sjuttonårig pojke och en tjugoåttaårig man den fjärde september i år.
+/*909;30;"den"|SVNum|SVMonth|SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*909. Den lägsta -31 °C, den 20 januari i år.
+858;30;"den"|SVOrdnumber:SVNum|SVMonth;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*		858. Den första maj, då solen genomlöper Oxens tecken. Det senaste dödsbudet kom den 6 december.
+/*859;30;"den"|SVNum|SVMonth;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
+/*859. Det senaste dödsbudet kom den 6 december.
+/*1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|SVAdvTime+SVAdv+SVDate;
+1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|+SVDate;
+/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
+/*1227;30;SVMonth|SVYear;JoinReverse|SVAdvTime+SVAdv+SVDate;
+1227;30;SVMonth|SVYear;JoinReverse|+SVDate;
+/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
+736;30;"senast"|"år"|SVYear;JoinReverse|JoinReverse|SVAdvTime+SVAdv;time indication, specific exception for 735
+/*		736. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
+737;30;"senast"|SVMonth;JoinReverse|SVAdvTime+SVAdv;
+/*		737. Vi vill att minst hälften av maten i skola och vård är ekologisk senast april år 2020.
+914;30;SVYear|"och"|"framåt";SVYear|Join|Join;
+/*		914. Vi talar trots allt om en period från 2013 och framåt.
+915;30;SVMonth|"och"|"framåt";SVMonth|Join|Join;
+/*		915. När väl växelkursen har fastställts, dvs. från och med juli och framåt, måste landet visa att det inte bara är intresserat av sitt eget medlemskap i euroområdet, utan även tar ansvar för de övriga länderna i regionen.
+735;30;^SVMonth+^SVbCon+^SBegin|"år"|SVYear;*|SVAdvTime+SVAdv+SVDate|Join;
+/*		735. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
+922;30;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
+/*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
+1247;30;SVMonth:SVYear+SVDate;SVAdvTime+SVAdv+SVDate;
+/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
+
+1243;30;SVDefart:SVDemonstr|*SVTimeadj:SVNum:SVNumber:SVOrdnumber|SVTimeconcept:SVYearpart:SVMonth:SVDay;-SVSubjpron-SVObjpron-SVAttrpron|*|*;
+/*		. 
+
+1223;30;"kl":"kl.":"klockan"|SVClocktime:SVClocktime2;SVAdvTime+SVAdv+SVClocktime|Join;for time written in 2+2 numbers
+/*		1223. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1232;30;"kl":"kl.":"klockan"|."halv"|SVHour:SVClocktime2;SVAdvTime+SVAdv+SVClocktime|Join|Join;for time written in letters or max 2 numbers
+/*		1232. Klockan halv tio återvände vagnen till Stigbergsliden, ut till Klippan och gjorde sin returresa klockan 11.
+1251;30;SVClocktime|SVAndOrBut:"respektive"|SVHour:SVClocktime;SVAdvTime+SVAdv+SVClocktime|*|SVAdvTime+SVAdv+SVClocktime;
+/*		. Därefter avgick vagnarna var 15:e minut, fram till kl. 21.00 respektive 21.30.
+1252;30;"halv"|SVHour;SVAdvTime+SVAdv+SVClocktime|Join;
+/*		. Olyckan inträffade strax före halv elva.
+1253;30;^SVIndefart+^SVDefart|"kvart"|"i"|SVHour;*|SVAdvTime+SVAdv+SVClocktime|Join|Join;
+/*		. Klockan har kanske precis slagit kvart i tre fast slagit har den ju inte gjort.
+1233;30;SVHour|SVAdvTime;SVAdvTime+SVAdv+SVClocktime-SVNumber-SVNum|Join;
+/*		1233. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel.
+1254;30;SVTimeprep:"vid"|SVClocktime;*|SVAdvTime+SVAdv+SVClocktime;
+/*		. De träffade på varandra vid etttiden på Skanstorget.
+1231;30;SVYearpart|SVYear;SVYearpart+SVAdv+SVAdvTime|Join;
+/*		1231. Under senare delen av hösten 2008 fortsatte njurfunktionen att försämras med stigande kreatinin, ökande proteinuri och svårreglerat blodtryck.
+/*1222;30;SVAdvTime:SVMonth:SVYear:SVDate;+SVTime;
+1222;30;SVAdvTime:SVDay:SVMonth:SVYear:SVDate;+SVTime;
+/*		1222. Jag skrev tidigare i veckan att den kunde bli rörigare än rörig. 
+1224;30;SVAdvTime:SVDay:SVMonth:SVYear:SVDate|SVClocktime;SVAdv+SVAdvTime+SVTime|Join;
+/*		1224. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1225;30;SVClocktime|SVAdvTime:SVDay:SVMonth:SVYear:SVDate;SVAdv+SVAdvTime+SVTime|Join;
+/*		1225. När Gustaf VI Adolf avled klockan 20:35 den 15 september 1973, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
+1228;30;SVClocktime|SVAdvTemp+^SVTimeprep;SVAdv+SVAdvTime+SVTime|Join;
+/*		1228. Första turen gjordes klockan nio på morgonen.
+1230;30;"var":"vart"|SVOrdnumber|SVTimeconcept;+SVTimeadj+SVTime|+SVTime|+SVTime;frequency, evaluate later if there is a more general way to deal with var(t)+Ordnumber
+/*		1230. Behandling med acetylsalicylsyra, ASA, i lågdos kan förhindra vart fjärde fall av havandeskapsförgiftning hos riskgrupper.
+1235;30;"varje"|SVTimeconcept:SVYearpart;SVAdv+SVAdvTime+SVTime-SVAdjpron-SVAttrpron|Join;frequency, separate rule needed to make 'varje' BeginConcept
+/*		1235. 30 till 40 män får sjukdomen varje år i Sverige.
+/*1239;30;SVGen:SVNum:SVNumber|SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTime|+SVTime|+SVTime;
+1239;30;SVGen:SVNum:SVNumber+^SVDecinum|SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTimeadj+SVTime|+SVTime|+SVTime;
+/*		. Under 2000-talets första decennium skedde en smärre revolution på det litterära mediaområdet. Hon har ett program klart för sina hundra första dagar.
+/*1229;30;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;+SVTime|SVTimeconcept+SVCon+SVTime;
+/*1229;30;*SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay;JoinReverse|+SVTime;period, point in time or frequency
+/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|+SVTime;period, point in time or frequency
+/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;SVAdv+SVAdvTime+SVTime-SVAdjpron-SVAttrpron|Join;period, point in time or frequency => last part doesn't get 'joined' if there is more than one lexrep for the first part of the pattern
+/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|SVAdv+SVAdvTime+SVTime;period, point in time or frequency
+/*1229;30;*SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|SVAdv+SVAdvTime+SVTime;period, point in time or frequency
+1242;30;SVTimeadj|SVNum:SVNumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTime|+SVTimeadj+SVTime|+SVTime;
+/*		1242. Men de senaste två åren har det varit överfullt.
+1229;30;*SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVTime;JoinReverse|SVAdv+SVAdvTime+SVTime;period, point in time or frequency
+/*		1229. Det var inte ovanligt kallt i juni fastän det kan vara vad många minns av den gångna månaden.
+/*1234;30;SVAdvTemp|SVAdvTime;JoinReverse|*;
+/*1234;30;SVAdvTemp:SVAdvTime|SVAdvTime;JoinReverse|*;
+/*1234;30;SVAdvTemp:SVTime+^SVYear|SVAdvTime;JoinReverse|*;
+1234;30;SVAdvTemp:SVYearpart:SVTime+^SVYear+^SVTimeprep|SVAdvTime;JoinReverse|*;
+/*		. En 18-årig man greps senare på kvällen misstänkt för grov misshandel. – Under hösten förra året såg utvecklingen väldigt bra ut.
+/*1236;30;SVNum:SVNumber|SVTimeconcept;+SVTime|+SVTime; -> needs more filtering: can be age -> add later
+/*. Efter 46 timmar börjar en intensiv klåda, som kan pågå i mer än en vecka.
+1236;30;SVTimeprep|SVTimeconcept;*|+SVTime;fires also on measurements like '5000 kronor i månaden' -> replace by Measurement later
+/*		.
+1237;30;SVTimemodifier|SVTime;JoinReverse|*;
+/*		.
+/*1241;30;SVAdvTime|SVTime;JoinReverse|*;
+/*1241;30;SVTime|SVTime;JoinReverse|*;
+1241;30;SVAdvTime:SVTimeconcept+SVTime|SVTime;JoinReverse|*;
+/*		1241. Det påminner om den magiska färg tomtenissen använder i det teveprogram många tittar på varje julafton ungefär klockan 15.07.
+1250;30;SVAdvTime:SVTimeconcept|SVAdvTemp+SVTimeprep|SVAndOrBut:SVPunctuation:SEnd;+SVTime|Join|*;
+/*		1250. Utvecklingen innebär också ett trendbrott eftersom övriga kvartal under året hade lägre sparande än motsvarande period året före.
+1256;30;SVNum:SVNumber:SVIndefart|SVTimeconcept|SVPosttime;+SVTime|+SVTime|+SVTime;
+/*		1256. Kortison gavs i 1 vecka postoperativt.
+/*1255;30;SVAdvTime:SVTimeconcept|SVPosttime;+SVTime|Join;
+1255;30;SVAdvTime:SVTimeconcept:SVTime|SVPosttime;+SVTime|Join;
+/*		1255. Kortison gavs i 1 vecka postoperativt. Från 800-talet e.kr. kan man börja spåra den västerländska konstmusiken i källmaterialet tack vare bevarade notdokument
+/*1257;30;SVAdvTemp:SVAdvTime:SVTimeadj|SVTimeprep|SVAdvTime:SVAdvTemp:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;rules profiler
+/*1257;30;SVAdvTemp:SVAdvTime:SVTimeadj|SVTimeprep|SVAdvTime:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;rules profiler
+1257;30;SVAdvTemp:SVTimeadj|SVTimeprep|SVAdvTime:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
+/*		1257. Tidigare i februari hölls nyval i landet.
+
+1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
+/*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
+
+/*1249;30;SVYear|SVCon;*|*;rules profiler
+
+/* temporary rules
+/*1235;42;SVTimeprep|SVDay;*|+SVTime;
+/*;42;SVDate|SVDay;*|+SVTime;
+/*;42;SVTime|SVPunctuation|SVDay;*|*|+SVTime;
+
+/* Expansion
+1258;30;SVAdvTime|SVTimeprep|*SVAdvTime:SVTimeconcept:SVTime|^SVTime;+SVTimeBegin|*|*|+SVTimeStop;
+/*		. Patienten hade ätit rökt vakuumförpackad sik ungefär klockan 19 på midsommaraftonen.
+1261;30;"mellan"|*SVTime|SVAndOrBut|*SVTime|^SVTime;+SVTimeBegin|*|*|*|+SVTimeStop;
+/*		. Fotbolls-VM kommer spelas mellan november och januari.
+/*;30;SVTimeprep|*SVTime|^SVCon;+SVbRel+SVTimeBegin|*|+SVTimeStop;;
+/*		. I oktober hade andelen ökat till 31 procent.
+
+
 
 /* ========================
 /* PHASE 40: DISAMBIGUATION
 /* ========================
+
+1246;40;"sedan"+SVConj|SVAdvTime;SVPrep|*;
+/*		. Bokningarna till den franska huvudstaden har faktiskt ökat med 64 % sedan samma period förra året.
+
 /* Disambiguate through capitalization
 /* -----------------------------------
 16;40;SBegin|SVCapitalInitial;*|-SVCapitalInitial;ignore capital at beginning of sentence
@@ -70,40 +272,6 @@
 1089;40;"-";+SVPunctuation;Punctuation is not assigned automatically since "-" is used in rules
 /*		1089. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
-/* Make multiword time indications one entity
-/* ------------------------------------------
-860;40;"den"|SVOrdnumber|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
-/*		860. — Den första januari 2022 blir jag pensionär.
-861;40;"den"|SVNum|SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
-/*		861. Dessa lagändringar trädde i kraft den 1 april 2011.
-862;40;"den"|SVOrdnumber|SVMonth|"år"|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join|Join;
-/*		862. — Den första januari år 2022 blir jag pensionär.
-863;40;"den"|SVNum|SVMonth|"år"|SVYear;SVAdvTime+SVAdv+SVDate|Join|Join|Join|Join;
-/*		863. Den lägsta -31 °C, den 20 januari år 1814.
-908;40;"den"|SVOrdnumber|SVMonth|SVAdvTime;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
-/*		908. Här mördades en sjuttonårig pojke och en tjugoåttaårig man den fjärde september i år.
-909;40;"den"|SVNum|SVMonth|SVAdvTime;SVAdvTime+SVAdv+SVDate|Join|Join|Join;
-/*		909. Den lägsta -31 °C, den 20 januari i år.
-858;40;"den"|SVOrdnumber|SVMonth;SVAdvTime+SVAdv+SVDate|Join|Join;
-/*		858. Den första maj, då solen genomlöper Oxens tecken.
-859;40;"den"|SVNum|SVMonth;SVAdvTime+SVAdv+SVDate|Join|Join;
-/*		859. Det senaste dödsbudet kom den 6 december.
-1226;40;SVOrdnumber:SVNum|SVMonth;SVMonth+SVAdvTime+SVAdv+SVDate|Join;
-/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
-1227;40;SVMonth|SVYear;SVAdvTime+SVAdv+SVDate|Join;
-/*		. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
-736;40;"senast"|"år"|SVYear;SVAdvTime+SVAdv|Join|Join;time indication, specific exception for 735
-/*		736. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
-737;40;"senast"|SVMonth;SVAdvTime+SVAdv|+Join;
-/*		737. Vi vill att minst hälften av maten i skola och vård är ekologisk senast april år 2020.
-914;40;SVYear|"och"|"framåt";SVYear|Join|Join;
-/*		914. Vi talar trots allt om en period från 2013 och framåt.
-915;40;SVMonth|"och"|"framåt";SVMonth|Join|Join;
-/*		915. När väl växelkursen har fastställts, dvs. från och med juli och framåt, måste landet visa att det inte bara är intresserat av sitt eget medlemskap i euroområdet, utan även tar ansvar för de övriga länderna i regionen.
-735;40;^SVMonth+^SVbCon+^SBegin|"år"|SVYear;*|SVAdvTime+SVAdv+SVDate|Join;
-/*		735. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
-922;40;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
-/*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
 
 
 /* Disambiguate specific words
@@ -222,57 +390,6 @@
 500;40;"var"|SVOrdnumber+^"första";+SVAttrpron+SVAdjpron|^SVOrdnumber;
 /*		500. Omkring var femte bröstcancer innehåller stora mängder av tillväxtfaktorn HER2, som stimulerar cancerns tillväxt.
 
-/* *** senare ***
-565;40;SVAdvDegree|SVNumber:SVNum:SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join|Join;
-/*		565. Kompletterande formuleringar infördes nästan hundra år senare i Kristoffers landslag (JB kap. 1) från 1442. Nästan ett år senare är ledarskapsutbildningen färdig. Knappt 50 år senare invigdes Åhléns City, som ligger i hörnet Drottninggatan/Klarabergsgatan, nära Sergels torg.
-562;40;SVNumber:SVNum|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
-/*		562. Två år senare började hon på den då nystartade Guldsmedsskolan i Strålsnäs. Det är då intressant om den förespråkas 2000 år senare i en annan social miljö.
-569;40;SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join;
-/*		569. Produktionsstart beräknas nu till i slutet av 2019, ett år senare än tidigare plan.
-850;40;SVAttrpron|SVTimeconcept|"senare";SVAdvTime+SVAdv-SVAdjpron|Join|Join;
-/*		850. Några dagar senare hade omkring fyrtio personer investerat 500 dollar.
-851;40;SVTimeconcept|"senare";SVAdvTime+SVAdv|Join;
-/*		851. Anta att om Karl XII hade lyckats undgå den kula som faktiskt dödade honom så hade han ändå dött sekunderna senare av en annan kula.
-847;40;SVDefart|"senare"|SVmAux:SVAux:SVVerb;SVSubjpron+SVObjpron|Join|*;
-/*		847. Det senare kan visa sig som lättblödande tandkött eller extra lätt att få näsblod. Det senare har nu bland annat uttryckts i regeringsformen som en av riksdagsutskottens uppgifter (4 kap. 8 § RF). Hos de senare ökar fotorespirationen med stigande temperatur.
-564;40;"senare";SVAdvAdj+SVAdvTemp;
-/*		564. Sten och grus är tyngst och avlagras först, medan sand, dy och botten-slam fälls ut senare under den 3000 kilometer långa resan.
-
-/* *** (för ...) sedan ***
-852;40;"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|Join|Join;
-/*		852. – Jag var och hälsade på henne för ett par veckor sedan så jag visste ju.
-932;40;"för"|*{1,4}^SVTimeconcept+^"för"|SVTimeconcept|"sedan";SVAdvTime+SVAdv|+Join|Join|Join;
-/*		932. För många år sedan medverkade jag i ett radioprogram.
-
-/* *** sedan ... tillbaka ***
-916;40;"sedan"|SVTimeconcept|"tillbaka";SVAdvTime|Join|Join;
-/*		916. Har ett intresse av aktier sedan tag tillbaka och börjar så smått lära mig mer och mer.
-933;40;"sedan"|*{1,3}^SVTimeconcept|SVTimeconcept|"tillbaka";SVAdvTime+SVAdv|+Join|Join|Join;
-/*		933. Årligen har de en omsättning på sju miljarder kronor årligen och sedan tre år tillbaka ägs de av ABCD Invest. SVT har följt dem tätt sedan väldigt många år tillbaka.
-
-/* *** sedan: other cases ***
-309;40;SVSedan|SVCon:SVAdj:SVYear:SVAdvTime;SVPrep|*;
-/*		309. Det har gått 40 år sedan Monty Python senast stod på scen i Storbritannien. Där arbetade hon sedan hela livet. De rättsliga och politiska ramarna för styrningen av den offentliga förvaltningen har sedan 1974 genomgått omfattande förändringar. Kunskap ger tillväxt, det är mitt nya slagord, sade Katrin, som sedan den 12 maj dessutom är vd för ABCD Invest.
-323;40;SVSedan|SVSubjpron+^SVAttrpron;SVConj|*;
-/*		323. Försurningen har ökat beroende på en minskning med 0.1 pH enheter sedan den industriella revolutionen startade.
-325;40;SVPunctuation|SVSedan|SVIndefart;SVPunctuation|SVAdvStruct+SVAdv|*;
-/*		325. Han refererar också till det didaktiska kontrakt i en matematikundervisning som inleds med att läraren går igenom nytt stoff, sedan ett urval av uppgifter varefter eleverna räknar på uppgifterna individuellt eller i grupp.
-324;40;SVSedan|SVIndefart:SVPosspron;SVConj|*;
-/*		324. Stora förväntningar ställs sedan ett drygt decennium på att den nya tekniken på olika sätt ska förändra och förbättra undervisningen (Almqvist 2006). Sedan en läktare rasat samman under den första spelningen, flyttades den andra till Söderstadion i juni.
-326;40;SVSedan|SVNum:SVNumber;SVPrep|*;
-/*		326. Det första fallet var en 32-årig kvinna med diabetes mellitus typ 1 sedan 17 års ålder. Carl XVI Gustaf, Carl Gustaf Folke Hubertus, född 30 april 1946 på Haga slott i Solna, Stockholms län, är Sveriges konung och statschef sedan 15 september 1973 då han efterträdde sin farfar Gustaf VI Adolf.
-330;40;SVSedan|"slutet";SVPrep|SVCon;
-/*		330. Dödligheten i kranskärlssjukdom har minskat kraftigt sedan slutet av 1980-talet.
-331;40;SVSedan|"i";SVPrep|SVPrep;
-/*		331. Den undersöks sedan i mikroskop.
-311;40;SVSedan+^SVPrep+^SVAdv;SVAdvStruct+SVAdv;
-/*		311. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
-
-/* *** dagen efter ***
-476;40;"dagen"|"efter"|SVVerb:SVVerbPart:SEnd;SVAdvTime+SVAdv|Join|*;
-/*		476. Författaren R.T. var tillsammans med sin hustru på väg för att uppvakta dottern som skulle fylla år dagen efter. Dagen efter kom patienten tillbaka och det slutade med operation för tarmvred. Men dagen efter läste han i lokaltidningen att någon hade vunnit en storvinst på 734 590 i samma spelbutik.
-479;40;"dagen";SVCon;
-/*		479. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
 
 /* *** nå(go)nting ***
 340;40;"någonting":"nånting"|SVAdvAdj:SVPart:SVAdvAdj;SVAttrpron|SVAdj;to avoid that prep-någonting becomes NR when någonting belongs to an adjective
@@ -339,7 +456,8 @@
 /*		761. Denna mekanism ska sättas in ifall det blir nödvändigt att säkerställa hela euroområdets stabilitet och då alla medlemsstaterna är överens om det.
 636;40;SBegin|"då"|SVSubjpron:SVCon:SVAdj;*|SVRelpron-SVAdvStruct-SVAdv|*;
 /*		636. Då de skapande krafterna frigjorts är befrielse möjlig. Då jordbruket tjänar som växelvaluta såväl i relationer med tredje land som på den inre marknaden, ges företräde åt den fria konkurrensen.
-639;40;SVYear|"då";*|SVRelpron-SVAdvStruct-SVAdv;
+/*639;40;SVYear|"då";*|SVRelpron-SVAdvStruct-SVAdv;
+639;40;SVAdvTime:SVYear|"då"|^SEnd+^SVPunctuation;*|SVRelpron-SVAdvStruct-SVAdv|*;
 /*		639. Detta skedde 2010 då de var 95 år gamla.
 929;40;SVCon|"där"|SEnd;*|+SVDummy|*;
 /*		929. vad gäller som kunskap där?
@@ -384,7 +502,7 @@
 /*		612. Vi hade också en boll som vi har undrat lite över, ett runt paket inlindat väldigt snyggt.
 610;40;SVRunt;SVPrep;
 /*		610. Runt matbord samlas människor för att äta, medan mötesbord används vid diskussioner, förhandlingar och beslut.
-615;40;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*;
+/*615;40;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*; -> moved  up
 /*		615. En person som avses i första stycket får bedriva undervisning under högst ett år i sänder.
 713;40;^SVCon+^SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 /*		713. den gick från ca 15 procent 1980 till över 50 procent 2004.
@@ -529,7 +647,8 @@
 /*		86. Försurningen kan medföra att granen slås ut på de torraste, våtaste, blåsigaste och kallaste av de lokaler där den annars hjälpligt klarar sig.
 81;40;SVDefart|SVVerbInfCon+^SVSForm;SVDefart|SVAdjCon;
 /*		81. Påfallande ofta hade män en yrkestitel som inte överensstämde med den syssla som de påstods göra eller vilja göra.
-82;40;SVIndefart|SVVerbInfCon;*|SVAdjCon;
+/*82;40;SVIndefart|SVVerbInfCon;*|SVAdjCon;
+82;40;SVIndefart|.SVPart|SVVerbInfCon;*|*|SVAdjCon;
 /*		82. Några år senare försökte hertig Karl införa sin uppfattning om hävdens natur i en stadga och denna togs sedermera in i Johan III:s förslag till ordning vid tillämpning av adelns privilegier.
 678;40;SVAdj|SVVerbInfCon;*|SVCon;
 /*		678. Det är i synnerhet dessa typer av sediment som har skapat det kolossala delta som utgör större delen av landet Bangladesh.
@@ -545,7 +664,8 @@
 /*		807. Om jag började dansa på bordet under ett viktigt möte skulle de andra deltagarna förmodligen tro att jag var korkad, galen, ignorant eller obildad.
 551;40;SVVerbInfCon+SVSForm;SVVerb;
 /*		551. De var i mångt och mycket samma andas barn.
-89;40;SVVerbInfCon;SVCon;
+/*89;40;SVVerbInfCon;SVCon;
+89;40;SVVerbInfCon;^SVCon-SVmAux;removes mAux from 'tro' but keeps Timeconcept on 'vecka'
 /*		89. Inställd färja på grund av hårt väder.
 
 /* Disambiguate vara
@@ -833,6 +953,8 @@
 746;40;SVVerbCon+SVPreferRelation;SVVerb;default for selected forms, see lexreps
 /*		746. Verbmetoden handlar alltså ytterst sett om att registrera människors tidsanvändning.
 747;40;SVCon+^SVPossibleGennoun+^SVAdj|SVVerbCon|^SVCon+^SEnd;*|SVVerb|*;
+/*		.
+1244;40;^SVVerb+^SVAux+^SVmAux|SVAdvTime+^SVPossibleGennoun+^SVAdj|SVVerbCon|^SVCon+^SEnd;*|*|SVVerb|*;
 /*		747. Varje år strömmar 971 kubikkilometer vatten ut i Bengaliska viken från Ganges-Brahmaputra.
 750;40;SVCon+^SVPossibleGennoun+^SVAdj|SVAdvAdj|SVVerbCon|^SVCon+^SEnd;*|*|SVVerb|*;
 /*		750. Det har gått 40 år sedan Monty Python senast stod på scen i Storbritannien.
@@ -923,7 +1045,8 @@
 /*		244. Man ska undvika att klia, gnugga eller riva på den irriterade huden eftersom det förvärrar besvären. WRONG: Fram till dess låg antalet disputerade ganska oförändrat på omkring 600–700 per år.
 554;40;SVVerbAdj|SVAdj;SVAdj|SVAdj;
 /*		554. psykosociala faktorer, låg fysisk aktivitet och bukfetma.
-231;40;SVVerbAdj+^SVVerbAdjCon;SVVerb;default
+/*231;40;SVVerbAdj+^SVVerbAdjCon;SVVerb;default
+231;40;SVVerbAdj;SVVerb;default - removed restriction ^SVVerbAdjCon because this label has been rewritten to SVCon already
 /*		231. Erytropoesstimulerande läkemedel (darbe-poetin alfa) och metoprolol, där doserna successivt ökades, insattes.
 
 /* Disambiguate SVVerbPartSup
@@ -1014,7 +1137,8 @@
 /*		126. Det intressanta är att budskapet överensstämde.
 247;40;SVDefart|SVPrep|SVCon|SVVerbPart;SVDefart|SVAdj|SVAdj|SVAdj;
 /*		247. I vilken mån kan den i Sverige tillämpade forskningsetiska vägledningen vara tillämplig och tillräcklig för studenters självständiga arbeten?
-256;40;SVAdvDegree|SVVerbPart+^SVsVerbPart|SVCon;SVAdj|SVAdj|*;
+/*256;40;SVAdvDegree|SVVerbPart+^SVsVerbPart|SVCon;SVAdj|SVAdj|*;
+256;40;SVAdvDegree|SVVerbPart|SVCon;SVAdj|SVAdj|*;removed restriction: sVerbPart has become Verb
 /*		256. Vid ökande halt tillkommer alltfler och alltmer förvärrade skadeeffekter.
 246;40;SVCon|SVVerbPart|SVCon;SVCon|SVVerb|*;
 /*		246. Sådana upptäckter motiverade spektrallinjeavsökningar.
@@ -1279,7 +1403,8 @@
 /*		196. Blir det inte så måste regeringen i regel avgå.
 197;40;SVInte|SVSaa;SVbCon|Join;
 /*		197. Uppmärksamheten kom dock inte så mycket att fokusera på resultatet som metoderna.
-180;40;SVCon|SVSaa|SVmAux:SVpAux:SVVerb;SVCon|SVConj|*;
+/*180;40;SVCon|SVSaa|SVmAux:SVpAux:SVVerb;SVCon|SVConj|*;
+180;40;SVCon:SVAdvTime|SVSaa|SVmAux:SVpAux:SVVerb;*|SVConj|*;
 /*		180. Men om marken har eller kommer att få ett alternativvärde så bör nuvarande politik omprövas. När det kom till kritan så var det varken husbonden eller matmodern som gick till acciskammaren, utan ett barn. Inom akademin finns inga påtagliga könsskillnader i utgångsläget, men på grund av att män har en högre avkastning än kvinnor på sina post-doc år så växer inkomstskillnaderna över tiden när man väl disputerat.
 184;40;SVSaa|SVCon;SVbCon|SVCon;
 /*		184. Den är syntetisk på så vis att den anser dessa principer vara två komplementära sidor av samma mänskliga tillvaro, vilka befinner sig i ständigt samspel och är av lika stor vikt.
@@ -1354,15 +1479,38 @@
 
 /* Connections with partial words
 /* ------------------------------
-717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;SVCon|Join|Join|+Join;e.g. läs- och skrivsvårigheter
-/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
-748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;SVAdj|Join|Join|+Join;
-/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
-923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;SVYear|Join|Join|+Join;
-/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
-718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;SVvRel|Join|Join|+Join;Does it make sense to keep this rule?
-719;40;"@connect@";SVCon;to avoid that concepts get split if no AndOrBut is present
-/*		719. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
+/*717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;SVCon|Join|Join|+Join;e.g. läs- och skrivsvårigheter
+/*/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
+/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;SVAdj|Join|Join|+Join;
+/*/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
+/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;SVYear|Join|Join|+Join;
+/*/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
+/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;SVvRel|Join|Join|+Join;Does it make sense to keep this rule?
+/*719;40;"@connect@";SVCon;to avoid that concepts get split if no AndOrBut is present
+/*/*		719. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
+
+/*717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
+/*/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
+/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;JoinReverse|JoinReverse|JoinReverse|*;
+/*/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
+/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;JoinReverse|JoinReverse|JoinReverse|*;
+/*/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
+/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;JoinReverse|JoinReverse|JoinReverse|*;Does it make sense to keep this rule?
+/*1244;40;SVCon|"@connect@"|SVAndOrBut|^SEnd;*|*|*|*;rules profiler
+/*719;40;"@connect@";SVCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
+/*/*		719. ETEC- bakterien vanlig orsak till turistdiarré. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
+
+717;40;SVCon|"@connect@"|SVAndOrBut|SVCon:SVAdj:SVAdvAdj:SVYear:SVNum:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
+/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
+/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;JoinReverse|JoinReverse|JoinReverse|*;
+/*748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
+/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;JoinReverse|JoinReverse|JoinReverse|*;
+/*923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
+/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;JoinReverse|JoinReverse|JoinReverse|*;Does it make sense to keep this rule?
+/*1244;40;SVCon|"@connect@"|SVAndOrBut|^SEnd;*|*|*|*;rules profiler
+719;40;"@connect@";SVCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
+/*		719. ETEC- bakterien vanlig orsak till turistdiarré. Grundläggande sång- och i vissa fall instrumentfärdighet är en idag en relativt utbredd kunskap, och anses ofta som en del av allmänbildningen.
+
 
 /* Defaults part 2
 /* ---------------
@@ -1517,33 +1665,6 @@
 /*		889. Men arbetet har fått en del oväntade konsekvenser.
 
 
-1223;42;"kl":"kl.":"klockan"|SVClocktime;SVAdvTime+SVAdv+SVClocktime|Join;for time written in 2+2 numbers
-/*		1223. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
-1232;42;"kl":"kl.":"klockan"|."halv"|SVHour;SVAdvTime+SVAdv+SVClocktime|Join|Join;for time written in letters or max 2 numbers
-/*		1232. Klockan halv tio återvände vagnen till Stigbergsliden, ut till Klippan och gjorde sin returresa klockan 11.
-1233;42;SVHour|SVAdvTime;SVAdvTime+SVAdv+SVClocktime-SVNumber-SVNum|Join;
-/*		. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel.
-1231;42;SVYearpart|SVYear;SVYearpart+SVAdv+SVAdvTime|Join;
-/*		1231. Under senare delen av hösten 2008 fortsatte njurfunktionen att försämras med stigande kreatinin, ökande proteinuri och svårreglerat blodtryck.
-1222;42;SVAdvTime:SVDay:SVMonth:SVYear:SVDate;+SVTime;
-/*		1222. Jag skrev tidigare i veckan att den kunde bli rörigare än rörig.
-1224;42;SVAdvTime:SVDay:SVMonth:SVYear:SVDate|SVClocktime;SVAdv+SVAdvTime+SVTime|Join;
-/*		1224. När Gustaf VI Adolf avled den 15 september 1973 klockan 20:35, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
-1225;42;SVClocktime|SVAdvTime:SVDay:SVMonth:SVYear:SVDate;SVAdv+SVAdvTime+SVTime|Join;
-/*		1225. När Gustaf VI Adolf avled klockan 20:35 den 15 september 1973, blev kronprins Carl Gustaf, 27 år gammal, Sveriges konung.
-1228;42;SVClocktime|SVAdvTemp;SVAdv+SVAdvTime+SVTime|Join;
-/*		1228. Första turen gjordes klockan nio på morgonen.
-1230;42;"var":"vart"|SVOrdnumber|SVTimeconcept;+SVTime|+SVTime|+SVTime;evaluate later if there is a more general way to deal with var(t)+Ordnumber
-/*		1230. Behandling med acetylsalicylsyra, ASA, i lågdos kan förhindra vart fjärde fall av havandeskapsförgiftning hos riskgrupper.
-/*1229;42;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;+SVTime|SVTimeconcept+SVCon+SVTime;
-1229;42;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;JoinReverse|+SVTime;
-/*		1229. Det var inte ovanligt kallt i juni fastän det kan vara vad många minns av den gångna månaden.
-1234;42;SVAdvTemp|SVAdvTime;JoinReverse|*;
-/*		. En 18-årig man greps senare på kvällen misstänkt för grov misshandel.
-
-/* Expansion
-/*1223;42;SVTimeprep|*SVTime|^SVCon;+SVbRel+SVTimeBegin|*|+SVTimeStop;;
-/*		. I oktober hade andelen ökat till 31 procent.
 
 
 /* ======================================================
@@ -1588,6 +1709,7 @@
 /*		928. Därför är det ingen alldeles hopplös uppgift.
 1018;45;SVOrdnumber;+SVAdj;treat ordinal numbers like adjectives in following phases
 /*		1018. Första och andra stycket gäller inte vattenverksamhet som förorsakar endast obetydlig miljöpåverkan.
+
 
 /* PathRelevant pronouns
 /* ---------------------
@@ -1874,9 +1996,9 @@
 /*		1064. Redan på 1400-talet började staden växa utanför sina ursprungliga gränser, d.v.s. Gamla stan.
 1091;70;SVAndOrBut+SVPBegin+SVNegBegin;+SVbRel;
 /*		1091. Vi kommer att ha olja, men inte till de låga priserna. Detsamma gäller, oavsett temperatur, om barnet är slött och inte vill äta eller dricka.
-1083;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;move NegBegin from nonrelevant to relevant lexrep
+1083;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept|^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept|typeConcept:typeRelation:typePathRelevant:typeBeginEndConcept+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;move NegBegin from nonrelevant to relevant lexrep
 /*		1083. Ännu i dag vet jag inte om den senare hänvändelsen var samordnad med uppvaktningen från konsultfirman.
-1067;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|+SVNegBegin;
+1067;70;SVNegBegin+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept|typeConcept:typeRelation:typePathRelevant:typeBeginEndConcept+^SVNegStop+^SVNegStart;*|+SVNegBegin;
 /*		1067. Den motsvarar inte ens 10 procent av vår produktion.
 1131;70;SVNegBegin+SVbRel:SVAndOr|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;ad hoc rule for men and och
 /*		1131. Men på sätt och vis är det inte alls ett bord.
@@ -2013,11 +2135,21 @@
 /*		1190.UD. Den andra kommunen ska skriftligen och utan dröjsmål meddela sin inställning.
 
 
-/* =============================
-/* PHASE 80 and PHASE $: CLEANUP
-/* =============================
+/* =======================================
+/* PHASE 85, PHASE 90 and PHASE $: CLEANUP
+/* =======================================
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
+
+/* re-position SVTimeStop if needed
+1259;90;typeConcept+SVTimeStop|*typeConcept|^typeConcept;-SVTimeStop|*|+SVTimeStop;
+/*		. 
+/*;90;SVAdvAmount:SVAdvStruct:SVAttrpron:SVComma:SVDefart:SVDemonstr:SVIndefart+SVTimeStop|
+1260;90;typeOther+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop
+/*		. 
+1262;90;typeRelation+^SVTime|typeRelation+SVTimeBegin;*|SVbRel+SVTimeBegin;
+/*		. Ett exempel är avbildat på Vädersoltavlan, som visar ett halofenomen över Stockholm som varade mellan kl 7 och 9 på morgonen den 20 april 1535.
+
 /*1224;$;SVTimeStop+SVPunctuation|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
 /*		. 3,4 procent i november, tre procent månaden innan.
 /*1225;$;SVTimeStop+typeAmbiguous:typeOther|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
