@@ -107,6 +107,11 @@
 1248;30;SVNum:SVNumber|*SVCon|"per"|SVTimeconcept;-SVYear+SVAdj|*|SVCon-SVConIfCap|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
 /*		. Ca 1500 kvinnor per år utvecklar en spridd sjukdom.
 
+/* FREQUENCY
+/*1263;30;SVIndefart:SVNum:SVNumber|SVTimeconcept:"gång":"gångar"|"i"|SVTimeconcept;SVAdvFreq+SVAdv+SVTime|Join|Join|Join;
+1263;30;SVIndefart:SVNum:SVNumber|SVTimeconcept:"gång":"gångar"|"i"|SVTimeconcept;SVAdvTime+SVAdv+SVTime|Join|Join|Join;
+/*		. Vi har undersökt kvinnorna två gånger i veckan under första månaden.
+
 /* Make multiword time indications one entity
 /* ------------------------------------------
 860;30;"den"|SVOrdnumber:SVNum|SVMonth|SVYear:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
@@ -164,6 +169,7 @@
 1254;30;SVTimeprep:"vid"|SVClocktime;*|SVAdvTime+SVAdv+SVClocktime;
 /*		. De träffade på varandra vid etttiden på Skanstorget.
 1231;30;SVYearpart|SVYear;SVYearpart+SVAdv+SVAdvTime|Join;
+/*1263;30;^SVNum+^SVNumber|SVYearpart:SVTimeconcept|SVYear;*|SVYearpart+SVAdv+SVAdvTime|Join;
 /*		1231. Under senare delen av hösten 2008 fortsatte njurfunktionen att försämras med stigande kreatinin, ökande proteinuri och svårreglerat blodtryck.
 /*1222;30;SVAdvTime:SVMonth:SVYear:SVDate;+SVTime;
 1222;30;SVAdvTime:SVDay:SVMonth:SVYear:SVDate;+SVTime;
@@ -198,7 +204,7 @@
 /*		. En 18-årig man greps senare på kvällen misstänkt för grov misshandel. – Under hösten förra året såg utvecklingen väldigt bra ut.
 /*1236;30;SVNum:SVNumber|SVTimeconcept;+SVTime|+SVTime; -> needs more filtering: can be age -> add later
 /*. Efter 46 timmar börjar en intensiv klåda, som kan pågå i mer än en vecka.
-1236;30;SVTimeprep|SVTimeconcept;*|+SVTime;fires also on measurements like '5000 kronor i månaden' -> replace by Measurement later
+1236;30;SVTimeprep|SVTimeconcept:SVYearpart;*|+SVTime;fires also on measurements like '5000 kronor i månaden' -> replace by Measurement later
 /*		.
 1237;30;SVTimemodifier|SVTime;JoinReverse|*;
 /*		.
@@ -221,6 +227,7 @@
 1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
 
+
 /*1249;30;SVYear|SVCon;*|*;rules profiler
 
 /* temporary rules
@@ -233,7 +240,7 @@
 /*		. Patienten hade ätit rökt vakuumförpackad sik ungefär klockan 19 på midsommaraftonen.
 1261;30;"mellan"|*SVTime|SVAndOrBut|*SVTime|^SVTime;+SVTimeBegin|*|*|*|+SVTimeStop;
 /*		. Fotbolls-VM kommer spelas mellan november och januari.
-/*;30;SVTimeprep|*SVTime|^SVCon;+SVbRel+SVTimeBegin|*|+SVTimeStop;;
+1264;30;SVTimeprep|*SVTime|^SVTime;+SVTimeBegin|*|+SVTimeStop;
 /*		. I oktober hade andelen ökat till 31 procent.
 
 
@@ -2146,6 +2153,8 @@
 /*		. 
 /*;90;SVAdvAmount:SVAdvStruct:SVAttrpron:SVComma:SVDefart:SVDemonstr:SVIndefart+SVTimeStop|
 1260;90;typeOther+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop
+/*		. 
+1265;90;SVPunctuation+SVTimeStop|.typeOther|^typeOther+^SVPunctuation;-SVTimeStop|*|+SVTimeStop
 /*		. 
 1262;90;typeRelation+^SVTime|typeRelation+SVTimeBegin;*|SVbRel+SVTimeBegin;
 /*		. Ett exempel är avbildat på Vädersoltavlan, som visar ett halofenomen över Stockholm som varade mellan kl 7 och 9 på morgonen den 20 april 1535.
