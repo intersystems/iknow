@@ -94,12 +94,8 @@ else:
 vars = updatelib.get_vars()
 if platform == 'win64':
     current_versions = vars['PYVERSIONS_WIN'].split()
-    ignored_versions = ()
 else:
     current_versions = vars['PYVERSIONS_OSX'].split()
-    
-    # pyenv encounters error when installing version 3.6.15
-    ignored_versions = ('3.6.15',)
 
 # Get list of available Python versions.
 if platform == 'win64':
@@ -113,7 +109,7 @@ if platform == 'win64':
         raise ValueError('PackageBaseAddress/3.0.0 not found')
     url_data = urllib.request.urlopen(f'{base_url}python/index.json')
     json_data = json.load(url_data)
-    available_versions = [version for version in json_data['versions'] if re.match(VERSION_REGEX, version) and version not in ignored_versions]
+    available_versions = [version for version in json_data['versions'] if re.match(VERSION_REGEX, version)]
 else:  # platform == 'osx'
     if sys.platform != 'darwin':
         raise EnvironmentError('Must be run on Mac OS X')
@@ -122,7 +118,7 @@ else:  # platform == 'osx'
     p = subprocess.run(['pyenv', 'install', '--list'],
                        stdout=subprocess.PIPE, universal_newlines=True,
                        check=True)
-    available_versions = [version for version in p.stdout.split() if re.match(VERSION_REGEX, version) and version not in ignored_versions]
+    available_versions = [version for version in p.stdout.split() if re.match(VERSION_REGEX, version)]
 
 # find updates to current versions
 update_info = []
