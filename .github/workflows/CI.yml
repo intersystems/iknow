@@ -150,7 +150,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
-    runs-on: macos-10.15
+    runs-on: macos-11
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
@@ -162,6 +162,7 @@ jobs:
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
           echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
+          echo "MACOSX_VERSION=$(sw_vers -productVersion | cut -d '.' -f 1,2)" >> $GITHUB_ENV
           mkdir -p $HOME/cache
           echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
           echo "CCACHE_MAXSIZE=400M" >> $GITHUB_ENV
@@ -171,7 +172,7 @@ jobs:
       - name: download cached ICU installation
         uses: actions/cache@v2
         with:
-          key: ${{ github.job }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}
           path: ${{ env.ICUDIR }}
       - name: download cached JSON for Modern C++ installation
         uses: actions/cache@v2
@@ -181,14 +182,14 @@ jobs:
       - name: download cached Python installations
         uses: actions/cache@v2
         with:
-          key: ${{ github.job }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
           path: ${{ env.PYINSTALL_DIR }}
       - name: download cached ccache files
         uses: actions/cache@v2
         with:
-          key: ${{ github.job }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
           path: ${{ env.CCACHE_DIR }}
       - name: install dependencies
         run: actions/install_osx.sh
