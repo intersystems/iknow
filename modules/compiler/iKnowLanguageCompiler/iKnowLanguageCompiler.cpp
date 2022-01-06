@@ -36,7 +36,7 @@ void workingdir(string& work_dir) {
 
 set<string> SetOfLanguages = { "en", "de", "ru", "es", "fr", "ja", "nl", "pt", "sv", "uk", "cs" };
 
-void build_one_language(string& csv, string& aho, string& ldata, string& langdev, string lang)
+void build_one_language(string& csv, string& aho, string& ldata, string& langdev, string lang, bool b_iris=false)
 {
 	CSV_DataGenerator my_csv_generator(csv, aho, ldata);
 	std::ofstream os(langdev + lang + "_compiler_report.log"); // logging file for indexing results
@@ -47,7 +47,8 @@ void build_one_language(string& csv, string& aho, string& ldata, string& langdev
 	} else
 		my_csv_generator.loadCSVdata(lang, false);
 
-	// my_csv_generator.writeIRISlexreps(langdev + lang + "_lexreps.csv"); // write lexreps.csv for IRIS
+	if (b_iris)
+		my_csv_generator.writeIRISlexreps(langdev + lang + "_lexreps.csv"); // write lexreps.csv for IRIS
 
 	my_csv_generator.generateRAW();
 	my_csv_generator.generateAHO();
@@ -80,9 +81,14 @@ int main(int argc, char* argv[])
 	string langdev_path = repo_root + "language_development/";
 
 	string language_to_build;
+	bool b_generate_IRIS = false; // if true, generate the csv-files for IRIS
 
 	if (argc == 2) {
 		language_to_build = argv[1];
+		if (*language_to_build.rbegin() == '+') { // request for generating IRIS csv files
+			b_generate_IRIS = true;
+			language_to_build.resize(2); // strip off the '+' symbol
+		}
 		if (!SetOfLanguages.count(language_to_build)) { // unsupported language
 			cerr << "***error*** language \"" << language_to_build << "\" not supported !" << endl;
 			cerr << "Supported languages are : " << endl;
@@ -95,11 +101,11 @@ int main(int argc, char* argv[])
 		
 		if (language_to_build.empty()) { // build them all
 			for (auto it = SetOfLanguages.begin(); it != SetOfLanguages.end(); ++it) {
-				build_one_language(csv_path, aho_path, ldata_path, langdev_path, *it);
+				build_one_language(csv_path, aho_path, ldata_path, langdev_path, *it, b_generate_IRIS);
 			}
 		}
 		else { // build one
-			build_one_language(csv_path, aho_path, ldata_path, langdev_path, language_to_build);
+			build_one_language(csv_path, aho_path, ldata_path, langdev_path, language_to_build, b_generate_IRIS);
 		}
 	}
 	catch (std::exception& e)
