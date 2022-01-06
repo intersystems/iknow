@@ -71,6 +71,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.LanguageIdentification(pError);
 		pError = "Source versus Sentence ALI Test";
 		test_collection.SourceVersusSentenceALI(pError);
+		pError = "Question sentence detected";
+		test_collection.QuestionDetected(pError);
 
 	}
 	catch (std::exception& e) {
@@ -81,6 +83,29 @@ void iKnowUnitTests::runUnitTests(void)
 	catch (...) {
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
+	}
+}
+
+/*
++[8]	"LexrepIdentified:<lexrep id=1 type=Nonrelevant value=\"\" index=\"B\" labels=\"SBegin;QBegin;\" />;"	std::string
++[15]	"LexrepIdentified:<lexrep id=10 type=Nonrelevant value=\"\" index=\"E\" labels=\"SEnd;QEnd;\" />;"	std::string
+*/
+void iKnowUnitTests::QuestionDetected(const char* pMessage)
+{
+	String text_source(IkStringEncoding::UTF8ToBase(u8"Are you a little confused ?"));
+	iKnowEngine engine;
+	engine.index(text_source, "en", true);
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) {
+		if (it->find("LexrepIdentified") != string::npos) {
+			if (it->find("index=\"B\"") != string::npos) {
+				if (!it->find("labels=\"SBegin;QBegin;\""))
+					throw std::runtime_error(string(pMessage) + "B should have these: labels=\"SBegin;QBegin;\"");
+			}
+			if (it->find("index=\"E\"") != string::npos) {
+				if (!it->find("labels=\"SEnd;QEnd;\""))
+					throw std::runtime_error(string(pMessage) + "E should have these: labels=\"SEnd;QEnd;\"");
+			}
+		}
 	}
 }
 

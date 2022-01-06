@@ -9,7 +9,7 @@
 #   1. The build is due to a push to the master branch.
 #   2. Variables PYPI_TOKEN and TESTPYPI_TOKEN are nonempty. 
 #   3. The commit that the current build is testing contains a change to
-#      modules/iknowpy/iknowpy/version.py, or FORCE_DEPLOY=1.
+#      modules/iknowpy/iknowpy/version.py, or FORCE_DEPLOY=true.
 #
 # If the version specified in version.py is a developmental release version as
 # defined in PEP 440, then we deploy to TestPyPI. Otherwise, we deploy to PyPI.
@@ -29,7 +29,7 @@
 #   deployment is skipped.
 # - TESTPYPI_TOKEN is an API token to the iknowpy repository on TestPyPI. If
 #   unset, deployment is skipped.
-# - FORCE_DEPLOY, if set to 1, indicates that deployment should occur even
+# - FORCE_DEPLOY, if set to true, indicates that deployment should occur even
 #   if no change to version.py occurred.
 #
 # Output Variables:
@@ -47,7 +47,7 @@ if [ "$GITHUB_EVENT_NAME" = push ] || [ "$GITHUB_EVENT_NAME" = workflow_dispatch
     [ -n "${PYPI_TOKEN-}" ] && [ -n "${TESTPYPI_TOKEN-}" ]
 then
   if git diff-tree --no-commit-id --name-only -r "$GITHUB_SHA" | grep modules/iknowpy/iknowpy/version.py > /dev/null || \
-      [ "${FORCE_DEPLOY-}" = 1 ]
+      [ "${FORCE_DEPLOY-}" = true ]
   then
     WHEELS=~/wheels/*.whl
     if [ $(echo $WHEELS | wc -w) -ne $EXPECTED_WHEEL_COUNT ]; then

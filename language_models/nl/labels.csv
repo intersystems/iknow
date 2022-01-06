@@ -7,7 +7,7 @@
 ;1,$;PrimaryRelation;typeAttribute;;0;;
 
 /* NL Equivalents of mandatory labels
-;40,50,60,63,65,70,80,$;NLPunctuation;typeEndConcept;copy of mandatory label;0;;
+;30,40,50,60,63,65,70,80,$;NLPunctuation;typeEndConcept;copy of mandatory label;0;;
 ;40;NLUDConcept;typeConcept;copy of mandatory label;0;;
 ;40;NLUDRelation;typeRelation;copy of mandatory label;0;;
 
@@ -18,120 +18,125 @@
 
 
 /* Default label
-;1,30,40,50,60,63,65,70,80,85,$;NLCon;typeConcept;concept;1;;
+;1,20,30,40,50,60,63,65,70,80,85,$;NLCon;typeConcept;concept;1;;
 
 /* Main labels
-;1,40,50,60,63,65,70,80,$;NLAdj;typeConcept;uninflected present participles and adjectives;0;;
+;1,20,30,40,50,60,63,65,70,80,$;NLAdj;typeConcept;uninflected present participle and adjective, or adverb;0;;
+;1,20,30,40,50,60,65,70,$;NLAdjCon;typeConcept;concept or adjective;0;;
 ;1,70;NLAntecedent;typeOther;extra label to limit expansion for antecedents;0;;
-;1,30,40,65,$;NLAdvDegree;typeOther;adverb of degree;0;;
-;1,40,65,$;NLAdvDirection;typeRelation;adverb expressing direction;0;;
+;1,20,30,40,65,$;NLAdvDegree;typeOther;adverb of degree;0;;
+;1,30,40,65,$;NLAdvDirection;typeRelation;adverb expressing direction;0;;
 ;1,40,65,$;NLAdvManner;typeRelation;adverbs of manner;0;;
 ;1,40,63,65,70,$;NLAdvModality;typeRelation;modal adverb;0;;
-;1,40,65,$;NLAdvTempCon;typeOther;adverb or noun, expressing time;0;;
+;1,30,40,65,$;NLAdvTempCon;typeOther;adverb or noun, expressing time;0;;
 ;1,40;NLAdvTempConj;typeAmbiguous;extra label for 'nu', 'telkens';0;;
-;1,40,50,65,$;NLAdvPlace;typePathRelevant;adverb of place;0;;
+;1,30,40,50,65,$;NLAdvPlace;typePathRelevant;adverb of place;0;;
 ;1,40,65,70,$;NLAdvRestriction;typeOther;alleen, enkel;0;;
-;1,40,50,60,63,65,70,80,$;NLAdvStruct;typeAmbiguous;structural, nonrelevant words;0;;
-;1,40,50,65,70,80,$;NLAdvTemp;typePathRelevant;adverb of time, vague time expressions;0;;
-;1,30,40,65,70,$;NLAdvTime;typeBeginEndConcept;adverb of time, specific time expressions;0;;
-;1,30,40,50,60,63,65,70,80,$;NLArt;typeOther;definite or indefinite article;0;;
-;1,40,50,60,63,65,70,80,$;NLAttradj;typeConcept;attributive adjective;0;;
+;1,30,40,50,60,63,65,70,80,$;NLAdvStruct;typeAmbiguous;structural, nonrelevant words;0;;
+;1,30,40,50,65,70,80,$;NLAdvTemp;typePathRelevant;adverb of time, vague time expressions;0;;
+;1,20,30,40,65,70,$;NLAdvTime;typeBeginEndConcept;adverb of time, specific time expressions;0;;
+;1,20,30,40,50,60,63,65,70,80,$;NLArt;typeOther;definite or indefinite article;0;;
+;1,20,30,40,50,60,63,65,70,80,$;NLAttradj;typeConcept;attributive adjective;0;;
+;1,30,40,50,60,65,70,$;NLAttradjCon;typeConcept;noun or attributive adjective;0;;
 ;1,40,65,70,$;NLAux;typeRelation;forms of auxiliaries "zijn" and "hebben";0;;
 ;1,40,65,$;NLAuxCon;typeAmbiguous;auxiliary verb or noun: kan, wil;0;;
-;1,40,50,60,65,70,80,$;NLBegin;typeBeginConcept;concept word that starts a concept;0;;
-;1,40,50,65,$;NLBeginEnd;typeBeginEndConcept;entire concept, not to be merged with the preceding or following concept;0;;
-;1,50,70,80,$;NLBeginpron;typeBeginConcept;pronoun that starts a Concept;0;;
+;1,30,40,50,60,65,70,80,$;NLBeginconcept;typeBeginConcept;concept word that starts a concept;0;;
+;1,40,50,60,63,65,70,80,$;NLBeginEndconcept;typeBeginEndConcept;entire concept, not to be merged with the preceding or following concept;0;;
+;1,20,30,50,70,80,$;NLBeginpron;typeBeginConcept;pronoun that starts a Concept;0;;
 ;70,80,$;NLBeginrel;typeBeginRelation;starts a relation, used to manage attribute expansion;0;;
-;1,63,70,$;NLColon;typeOther;colon;0;;
-;1,40,50,60,65,70,$;NLConAttradj;typeConcept;noun or attributive adjective;0;;
+;1,40,50,65,70,80,$;NLCAdv;typeConcept;predicatively used adjective as Concept;0;;
+;1,40,63,70,$;NLColon;typeOther;colon;0;;
 ;1,40,65,$;NLConIfCap;typeOther;concept if capitalized;0;;
 ;1,40,65,$;NLConIfAllCap;typeOther;concept if entirely capitalized;0;;
 ;1,40,60,63,70,80,$;NLConj;typeRelation;conjunction;0;;
 ;1,70,80,$;NLConj2;typeBeginRelation;certain conjunctions that start a relation;0;;
-;1,40,50,60,65,70,$;NLAdjCon;typeConcept;concept or adjective;0;;
-;1,30;NLDate;typeConcept;date in numbers (regex);0;;
 ;1,30,40,50;NLDay;typeConcept;names of days;0;;
-;1,40,50,63,65,$;NLDempron;typeAmbiguous;demonstrative pronouns;0;;
-;1,30;NLDigitaltime;typeConcept;digital time;0;;
-;1,30,40,50,65,70,80,$;NLEnd;typeEndConcept;last word of a concept;0;;
+;1,30,40,50,63,65,$;NLDempron;typeAmbiguous;demonstrative pronouns;0;;
+;1,30,40,50,65,70,80,$;NLEndconcept;typeEndConcept;last word of a concept;0;;
 ;1,40,65,$;NLFirstname;typeConcept;first name;0;;
-;1,50,$;NLIndefpron;typeAmbiguous;pronoun that can be PathRelevant or part of Concept;0;;
-;1,40,50,60,63,65,70,80,$;NLInf;typeRelation;infinitive;0;;
-;1,40,65,$;NLInfCon;typeAmbiguous;infinitive or noun;0;;
-;1,30,40,50,65,$;NLJaar;typeConcept;year numbers;0;;
+;1,20,30,40,50,$;NLIndefpron;typeAmbiguous;pronoun that can be PathRelevant or part of Concept;0;;
+;1,30,40,50,60,63,65,70,80,$;NLInf;typeRelation;infinitive;0;;
+;1,30,40,65,$;NLInfCon;typeAmbiguous;infinitive or noun;0;;
 ;1,40,$;NLLayout;typeBeginEndConcept;numbered list, footnotes etc.;0;;
 ;1,40,65,70,80;NLLinkingverb;typeRelation;linking verbs, used to make adverbs Concepts;0;;
 ;1,40,63,65,70,$;NLmAux;typeRelation;modal auxiliary verbs;0;;
-;1,40,50,65,$;NLMeasure;typeConcept;words that express a measure or amount;0;;
+;1,20,30,40,50,65,$;NLMeasure;typeConcept;words that express a measure or amount;0;;
 ;1,30,40,50;NLMonth;typeConcept;month name;0;;
 ;1,70;NLNominf;typeRelation;extra label for nominal infinitive, assigned in rules, preliminary typeRelation;0;;
-;1,40,65,$;NLNooit;typeRelation;nooit;0;;
-;1,30,40,50,60,65,70,$;NLNum;typeConcept;numbers;0;;
-;1,40,50,60,65,70,$;NLObjpron;typePathRelevant;mij, jou, hem, etc.;0;;
+;1,30,40,65,$;NLNooit;typeRelation;nooit;0;;
+;1,20,30,40,50,60,65,70,80,$;NLNum;typeConcept;numbers;0;;
+;1,30,40,50,60,65,70,$;NLObjpron;typePathRelevant;mij, jou, hem, etc.;0;;
 ;1,40,60,63,65,70,80,$;NLOndvw;typeRelation;subordinate conjunction;0;;
-;1,40,65,$;NLPart;typeRelation;past participle,label for participles before disambiguation (Adj or Partrel);0;;
+;1,20,30,40,65,70,$;NLPartAdj;typeRelation;past participle,label for participles before disambiguation (Attradj or Partrel);0;;
+;1,30,40,$;NLPrespartAdj;typeAmbiguous;present participle,label before disambiguation (Attradj or Partrel);0;;
 ;1,40,50,63,65,70,80,$;NLPartrel;typeRelation;past participle that is disambiguated as a relation;0;;
 ;1,40;NLPartVerb;typeAmbiguous;past participle or conjugated verb;0;;
 ;1,40;NLPartVerbInf;typeAmbiguous;past participle or conjugated verb or infinitive;0;;
 ;1,40,65,$;NLPartCon;typeAmbiguous;past participle or noun;0;;
-;1,30;NLPartofyear;typeConcept;used in time expressions;0;;
 ;1,40,50,60,70,80,$;NLPathRelevant;typePathRelevant;label for miscellaneous PathRelevant entities;0;;
-;1,40,50,60,63,65,70,80,$;NLPoss;typePathRelevant;mijn, jouw, uw, onze;0;;
-;1,40,50,60,63,65,70,80,85,$;NLPrep;typeRelation;prepositions and preposition-like word groups;0;;
-;1,40,50,65,70,80;NLPrep2;typeRelation;prepositions that can be followed by verbs;0;;
-;1,40,50,63,65,70,80,$;NLRAdv;typeRelation;adverb as relation;0;;
-;1,40,65,70,$;NLRefl;typeRelation;zich;0;;
+;1,30,40,50,60,63,65,70,80,$;NLPoss;typePathRelevant;mijn, jouw, uw, onze;0;;
+;1,20,30,40,50,60,63,65,70,80,85,$;NLPrep;typeRelation;prepositions and preposition-like word groups;0;;
+;1,20,30,40,50,65,70,80;NLPrep2;typeRelation;prepositions that can be followed by verbs;0;;
+;1,20,30,40,50,63,65,70,80,$;NLRAdv;typeRelation;adverb as relation;0;;
+;1,30,40,65,70,$;NLRefl;typeRelation;zich;0;;
 ;1,40,50,63,65,70,80,85,$;NLRel;typeRelation;unambiguous relation;0;;
-;1,40,50,65,$;NLRelAdj;typeAmbiguous;relation or modifier, partly replaces NLRelMod;0;;
-;1,40,65,$;NLRelCon;typeAmbiguous;verb or noun;0;;
+;1,30,40,50,65,$;NLRelAdj;typeAmbiguous;verb or adjective/adverb;0;;
+;1,30,40;NLRelAttradj;typeAmbiguous;verb or attributive adjective;0;;
+;1,30,40,65,$;NLRelCon;typeAmbiguous;verb or noun;0;;
 ;1,40,65,$;NLRelConAdj;typeAmbiguous;verb, adjective or concept;0;;
+;1,30,40;NLRelConAttradj;typeAmbiguous;verb, attributive adjective or concept;0;;
 ;1,40,65,$;NLRelConAdv;typeAmbiguous;verb, noun or adverb;0;;
-;1,40,65,$;NLRelConModOth;typeAmbiguous;dat, wat, hetgeen;0;;
-;1,40,65,$;NLRelModAdv;typeAmbiguous;verb, adjective or adverb;0;;
+;1,30,40,65,$;NLRelConModOth;typeAmbiguous;dat, wat, hetgeen;0;;
 ;1,40,65,70,80,$;NLRelOndvwPrep;typeRelation;verb, subordinate conjunction or preposition;0;;
-;1,40,50,63,65,70,$;NLRelAux;typeRelation;main verb verb or auxiliary;0;;
-;1,40,65,70,$;NLRelAuxCon;typeAmbiguous;main verb, auxiliary or noun: was;0;;
+;1,30,40,50,63,65,70,$;NLRelAux;typeRelation;main verb verb or auxiliary;0;;
+;1,30,40,65,70,$;NLRelAuxCon;typeAmbiguous;main verb, auxiliary or noun: was;0;;
 ;1,40,65,$;NLRelPrepAdj;typeAmbiguous;verb, preposition or adjective;0;;
-;1,63,70,80,$;NLRelpron;typeRelation;relative pronouns for negation expansion, only as extra label;0;;
-;1,40,65,$;NLStemCon;typeAmbiguous;verb stem or noun;0;;
-;1,40,50,60,63,65,70,80,$;NLSubjpron;typePathRelevant;personal pronoun in subject form;0;;
+;1,30,63,70,80,$;NLRelpron;typeRelation;relative pronouns for negation expansion, only as extra label;0;;
+;1,30,40,65,$;NLStemCon;typeAmbiguous;verb stem or noun;0;;
+;1,30,40,50,60,63,65,70,80,$;NLSubjpron;typePathRelevant;personal pronoun in subject form;0;;
 ;1,40;NLteAux;typeRelation;for pattern 'te Inf teAux.' e.g. (te horen) kregen;0;;
-;1,30;NLTimeconcept;typeConcept;word that is used in time expressions;0;;
-;1,40,50,60,63,65,70,80,$;NLVerb;typeRelation;conjugated verb;0;;
+;1,20,30,40,50,80,$;NLTimeconcept;typeConcept;word that is used in time expressions;0;;
+;1,30,40,50,60,63,65,70,80,$;NLVerb;typeRelation;conjugated verb;0;;
 ;1,30,40;NLWeek;typeConcept;deze/volgende/vorige/dezelfde week;0;;
+;1,30;NLWeer;typeAmbiguous;weer;0;;
+;1,30;NLYear;typeConcept;for 'jaar';0;;
 
 /* Labels for specific words; some of them cover small sets of words
 ;1,40;NLAl;typeOther;(ook) al;0;;
-;1,40,50,65,$;NLAnderen;typePathRelevant;anderen: PathRelevant or part of Concept;0;;
-;1,40,50,63,65,70,80,85,$;NLAndOrBut;typeRelation;co-ordinative conjunctions;0;;
-;1,40,60,63,70,80,$;NLAndOr;typeRelation;"en","of" and variations;0;;
+;1,20,40,50,63,65,70,80,85,$;NLAndOrBut;typeRelation;co-ordinative conjunctions;0;;
+;1,20,30,40,60,63,70,80,$;NLAndOr;typeRelation;"en","of" and variations;0;;
 ;1,40,65,$;NLBij;typeAmbiguous;'bij': preposition, adverb or noun;0;;
-;1,40,50,60,63,65,70,80,$;NLComma;typeEndConcept;comma;0;;
-;1,40,65,$;NLDan;typeAmbiguous;'dan': adverb or comparative conjunction;0;;
-;1,40,65,70,80,$;NLDe;typeOther;definite article 'de';0;;
-;1,40,65;NLDie;typeAmbiguous;die;0;;
-;1,40,65;NLDit;typeOther;dit;0;;
+;1,30,40,50,60,63,65,70,80,$;NLComma;typeEndConcept;comma;0;;
+;1,20,40,65,$;NLDan;typeAmbiguous;'dan': adverb or comparative conjunction;0;;
+;1,20,40,65,70,80,$;NLDe;typeOther;definite article 'de';0;;
+;1,30,40,65;NLDie;typeAmbiguous;die;0;;
+;1,30,40,65;NLDit;typeOther;dit;0;;
 ;1,40,$;NLDus;typeAmbiguous;dus;0;;
-;1,30,40,65,70,80,$;NLEen;typeOther;infetinite article/numeral 'een';0;;
+;1,20,30,40,65,70,80,$;NLEen;typeOther;infetinite article/numeral 'een';0;;
 ;1,40,63,65,70,80,$;NLEr;typeOther;er;0;;
-;1,40,50,60,65,70,80,$;NLGeen;typeBeginConcept;geen;0;;
+;1,30;NLEven;typeAmbiguous;'even': adverb of time or adverb of degree;0;;
+;1,30,40,50,60,65,70,80,$;NLGeen;typeBeginConcept;geen;0;;
+;1,30;NLGeregeld;typeAmbiguous;'geregeld': adverb of time or participle;0;;
 ;1,40,50,65,$;NLHaar;typeConcept;haar: possessive or personal pronoun, or noun;0;;
 ;1,40,50,65,$;NLHeel;typeConcept;heel;0;;
-;1,40,50,65,70,80,$;NLHet;typeOther;het;0;;
-;1,40,50;NLHetzelfde;typeAmbiguous;hetzelfde;0;;
+;1,30,40,50,65,70,80,$;NLHet;typeOther;het;0;;
+;1,30,40,50;NLHetzelfde;typeAmbiguous;hetzelfde;0;;
 ;1,30,40,50,63,65,70,$;NLHyphen;typeConcept;hyphen;0;;
+;1,20,30,40;NLIets;typeAmbiguous;"iets";0;;
 ;1,40,65;NLIk;typeOther;ik;0;;
 ;1,40,65;NLJe;typeOther;je;0;;
-;1,40,65,$;NLLaat;typeAmbiguous;verb, modal auxiliary or modifier;0;;
 ;1,40,63;NLMaar;typeAmbiguous;'maar': conjunction or adverb;0;;
-;1,40,65,$;NLMeer;typeAmbiguous;meer;0;;
-;1,40,50,63,65,$;NLNiet;typeOther;niet;0;;
+;1,20,30,40,65,$;NLMeerMinder;typeAmbiguous;'meer', 'minder' and variations, for 'meer' as noun the literal label is used;0;;
+;1,30;NLNet;typeAmbiguous;'net';0;;
+;1,20,30,40,50,63,65,$;NLNiet;typeOther;niet;0;;
 ;1,40,65,70,80;NLOm;typeRelation;om, teneinde;0;;
+;1,40;NLPas;typeAmbiguous;'pas';0;;
 ;1,40,50,65,$;NLProcent;typeConcept;'procent' and %;0;;
-;1,40,65,$;NLTe;typeAmbiguous;te, terug te;0;;
+;1,30,40,65,$;NLTe;typeAmbiguous;te, terug te;0;;
 ;1,40,50,60,63,65,70,80,$;NLRTe;typeRelation;'te' as Relation;0;;
-;1,40,65,$;NLVan;typeAmbiguous;van;0;;
-;1,40,$;NLVeelWeinig;typeAmbiguous;veel, weinig;0;;
+;1,20,30,40,65,$;NLVan;typeAmbiguous;van;0;;
+;1,20,40,$;NLVeelWeinig;typeAmbiguous;veel, weinig;0;;
+;1,30;NLVroegLaat;typeAmbiguous;words 'vroeg' and 'laat';0;;
 ;1,40,65,$;NLWilde;typeAmbiguous;wilde;0;;
 ;1,40,65,$;NLZe;typeOther;ze;0;;
 ;1,40,65,$;NLZijn;typeAmbiguous;zijn;0;;
@@ -140,7 +145,7 @@
 
 /* NL attributesv
 ;40,63,65,70,80,85,$;NLDummy;typeAttribute;meaningless attribute, can be used as a temporary marker in rules;0;;
-;50,$;NLTime;typeAttribute;attribute for vague time and frequency indications;0;;Entity(DateTime)
+;$;NLTime;typeAttribute;attribute for vague time and frequency indications;0;;Entity(DateTime)
 
 ;70,80,85,$;NLNegation;typeAttribute;to mark certain entities as negation;0;;Entity(Negation)
 ;70,85,$;NLNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
@@ -180,5 +185,26 @@
 ;1,40,80;NLNPcomp;typeAttribute;element of noun phrase;0;;
 ;40,80;NLWithZo;typeAttribute;marker for joined lexreps with 'zo';0;;
 
+;1,40,65,$;NLVerbPlusCAdv;typeAttribute;for transitive verbs that make adverbs Concept;0;;
+;1,30,40,$;NLComp;typeAttribute;for comparatives;0;;
+;20,30,40;NLFraction;typeAttribute;for fractions, such as 'helft';0;;
+;30;NLTimes;typeAttribute;for 'keer', 'maal' and variations, for detection of time indications;0;
+;20,30;NLQuantity;typeAttribute;for words expressing a quantity, such as 'een paar';0;;
 
+;1,20,$;NLNumeric;typeAttribute;numeric number;0;;
+;1,30,$;NLOrdnum;typeAttribute;ordinal number;0;;
+;1,20,$;NLDecimalnum;typeAttribute;decimal number;0;;
+;1,20,50,$;CStarter;typeAttribute;concept-starter -> can become beginconcept depending on context;0;;
+;1,30,40,50,65,$;NLYearnum;typeAttribute;possible year numbers;0;;
+;1,30;NLDate;typeAttribute;date in numbers (regex);0;;
+;1,30;NLPossibledate;typeAttribute;possible date in numbers (regex), to be disambiguated;0;;
+;1,20,30;NLPossiblehour;typeAttribute;possible hour in numbers (regex), to be disambiguated;0;;
+;1,30;NLDigitaltime;typeAttribute;digital time;0;;
+;1,30;NLHour;typeAttribute;hour of day;0;;
+;1,30;NLTimeofday;typeAttribute;time of day;0;;
+;1,30;ENAdvbeforetime;typeAttribute;Adverbs that modify Timeconcept;0;;
+;1,20,30;NLBeginTime;typeAttribute;occurs at the beginning of a time indication;0;;
+;1,20,30;NLEndTime;typeAttribute;occurs at the end of a time indication;0;;
+;1,20,30;NLCompTime;typeAttribute;comparatives used in time indications;0;;
+;1,30;NLPrepTime;typeAttribute;prepositions used in time indications;0;;
 

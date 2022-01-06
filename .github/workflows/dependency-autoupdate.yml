@@ -19,9 +19,9 @@ on:
   workflow_dispatch:
     inputs:
       BUILD_PULL_REQUEST:
-        description: whether to build pull requests created by this workflow (1=yes, 0=no)
-        required: true
-        default: 1
+        type: boolean
+        description: Build pull requests created by this workflow
+        default: true
 
 jobs:
   autoupdate-ICU:
@@ -32,10 +32,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_icu.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -66,10 +66,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_json.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -100,10 +100,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -132,10 +132,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_cython.py
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -168,10 +168,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_manylinux.py
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -200,10 +200,10 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_python.py win64
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3
@@ -232,10 +232,10 @@ jobs:
       - name: search for update
         run: /usr/bin/python3 $GITHUB_WORKSPACE/actions/update_python.py osx
       - name: allow building pull requests
-        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 1
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
-        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST != 1
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
         uses: peter-evans/create-pull-request@v3

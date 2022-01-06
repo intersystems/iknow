@@ -30,7 +30,7 @@ fi
 
 ##### Build iKnow engine and run C++ unit tests #####
 cd "$GITHUB_WORKSPACE/modules"
-MSBUILD_PATH="/c/Program Files (x86)/Microsoft Visual Studio/2019/Enterprise/MSBuild/Current/Bin"
+MSBUILD_PATH="/c/Program Files/Microsoft Visual Studio/2022/Enterprise/MSBuild/Current/Bin"
 BUILDCACHE_IMPERSONATE=cl.exe PATH="$MSBUILD_PATH:$PATH" \
   MSBuild.exe iKnowEngine.sln -p:Configuration=Release -p:Platform=x64 \
     -maxcpucount \
