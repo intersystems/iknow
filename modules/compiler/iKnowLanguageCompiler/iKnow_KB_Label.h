@@ -37,7 +37,15 @@ namespace iknow {
 			";1,$;UDCertainty;typeAttribute;;0;",
 			";1,$;UDGeneric1;typeAttribute;;0;",
 			";1,$;UDGeneric2;typeAttribute;;0;",
-			";1,$;UDGeneric3;typeAttribute;;0;"
+			";1,$;UDGeneric3;typeAttribute;;0;",
+			";1,$;UDIgnoreNegation;typeAttribute;;0;",
+			";1,$;UDIgnoreSentiment;typeAttribute;;0;",
+			";1,$;UDIgnorePosSentiment;typeAttribute;;0;",
+			";1,$;UDIgnoreNegSentiment;typeAttribute;;0;",
+			";1,$;UDIgnoreNumber;typeAttribute;;0;",
+			";1,$;UDIgnoreTime;typeAttribute;;0;",
+			";1,$;UDIgnoreUnit;typeAttribute;;0;",
+			";1,$;UDIgnoreCertainty;typeAttribute;;0;"
 		};
 		class iKnow_KB_Label
 		{
