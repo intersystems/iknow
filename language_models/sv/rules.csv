@@ -126,11 +126,8 @@
 /*		330. Dödligheten i kranskärlssjukdom har minskat kraftigt sedan slutet av 1980-talet.
 331;25;SVSedan|"i";SVPrep|SVPrep;
 /*		331. Den undersöks sedan i mikroskop.
-/*1245;25;SVSedan|SVVerb:SVAux:SVmAux;SVAdvStruct+SVAdv|*;
-/*. Sedan undersöks vävnad från en sjuk släkting för att se om det finns en genförändring.
 311;25;SVSedan+^SVPrep+^SVAdv;^SVAdvStruct+SVAdv;
 /*		311. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
-/*311;25;SVSedan+^SVPrep+^SVAdv|^SVAttrpron;SVAdvStruct+SVAdv|*;
 
 /* *** dagen efter ***
 476;25;"dagen"|"efter"|SVVerb:SVVerbPart:SEnd;SVAdvTime+SVAdv|Join|*;
@@ -167,45 +164,27 @@
 /* Make multiword time indications one entity
 /* ------------------------------------------
 860;30;"den"|SVOrdnumber:SVNum|SVMonth|SVYear:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
-/*		860. — Den första januari 2022 blir jag pensionär. Dessa lagändringar trädde i kraft den 1 april 2011. Den lägsta -31 °C, den 20 januari i år.
-/*861;30;"den"|SVNum|SVMonth|SVYear;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
-/*861. Dessa lagändringar trädde i kraft den 1 april 2011.
+/*		860. — Den första januari 2022 blir jag pensionär. Dessa lagändringar trädde i kraft den 1 april 2011. Den lägsta -31 °C, den 20 januari i år. Här mördades en sjuttonårig pojke och en tjugoåttaårig man den fjärde september i år.
 862;30;"den"|SVOrdnumber:SVNum|SVMonth|"år"|SVYear;JoinReverse|JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
 /*		862. — Den första januari år 2022 blir jag pensionär. Den lägsta -31 °C, den 20 januari år 1814.
-/*863;30;"den"|SVNum|SVMonth|"år"|SVYear;JoinReverse|JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
-/*863. Den lägsta -31 °C, den 20 januari år 1814.
-/*908;30;"den"|SVOrdnumber|SVMonth|SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate; - covered by r860 now
-/*908. Här mördades en sjuttonårig pojke och en tjugoåttaårig man den fjärde september i år.
-/*909;30;"den"|SVNum|SVMonth|SVAdvTime;JoinReverse|JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
-/*909. Den lägsta -31 °C, den 20 januari i år.
 858;30;"den"|SVOrdnumber:SVNum|SVMonth;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
 /*		858. Den första maj, då solen genomlöper Oxens tecken. Det senaste dödsbudet kom den 6 december.
-/*859;30;"den"|SVNum|SVMonth;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
-/*859. Det senaste dödsbudet kom den 6 december.
 /*1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|SVAdvTime+SVAdv+SVDate;
 1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|+SVDate;
 /*		1226. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
 1269;30;SVMonth|"månad";*|Join;
 /*		1269. Beredningen inkom under juni månad 1877 till stadsfullmäktige med förslag till koncessionsbestämmelser för hästspårväg inom staden.
-/*1227;30;SVMonth|SVYear;JoinReverse|SVAdvTime+SVAdv+SVDate;
 1227;30;SVMonth:SVTimeconcept|SVYear;JoinReverse|+SVDate;
 /*		1227. Det nyaste kommer att invigas i Borlänge 25 oktober 2013. År 1609 togs det första steget mot modern astronomisk forskning av Galileo Galilei.
-/*1274;30;SVTimeconcept|SVYear;*|Join+SVDate;
 
-/*736;30;"senast"|"år"|SVYear;JoinReverse|JoinReverse|SVAdvTime+SVAdv;time indication, specific exception for 735 - cannot fire anymore: år+year = 1C after r1227
-/*736. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 737;30;"senast"|SVMonth;JoinReverse|SVAdvTime+SVAdv;
 /*		737. Vi vill att minst hälften av maten i skola och vård är ekologisk senast april år 2020.
 914;30;SVYear|"och"|"framåt";SVYear|Join|Join;
 /*		914. Vi talar trots allt om en period från 2013 och framåt.
 915;30;SVMonth|"och"|"framåt";SVMonth|Join|Join;
 /*		915. När väl växelkursen har fastställts, dvs. från och med juli och framåt, måste landet visa att det inte bara är intresserat av sitt eget medlemskap i euroområdet, utan även tar ansvar för de övriga länderna i regionen.
-/*735;30;^SVMonth+^SVbCon+^SBegin|"år"|SVYear;*|SVAdvTime+SVAdv+SVDate|Join; - cannot fire anymore: år+year = 1C after r1227
-/*735. Begreppet behöver vara avgränsat så att det fungerar både år 1550 och år 1800, för alla samhällsskikt, och för båda könen.
 922;30;SVMonth|SVAdvTime+SVAdv;SVAdvTime+SVAdv+SVDate|Join;
 /*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
-/* move down: 1247;30;SVMonth:SVYear+SVDate;SVAdvTime+SVAdv+SVDate;
-/*. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
 1270;30;"vecka"|SVWeeknum;SVTimeconcept+SVTime|SVTimeconcept+SVTime;
 /*		1270. I vecka 32 noterades snabb viktökning.
 
@@ -234,8 +213,6 @@
 
 1231;30;SVYearpart|SVYear;SVYearpart+SVAdv+SVAdvTime|Join;
 /*		1231. Under senare delen av hösten 2008 fortsatte njurfunktionen att försämras med stigande kreatinin, ökande proteinuri och svårreglerat blodtryck.
-/*1263;30;^SVNum+^SVNumber|SVYearpart:SVTimeconcept|SVYear;*|SVYearpart+SVAdv+SVAdvTime|Join;
-/*1222;30;SVAdvTime:SVMonth:SVYear:SVDate;+SVTime;
 1247;30;SVMonth:SVYear+SVDate;SVAdvTime+SVAdv+SVDate;
 /*		1247. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
 1222;30;SVAdvTime:SVDay:SVMonth:SVYear:SVDate;+SVTime;
@@ -252,15 +229,8 @@
 /*		1230. En fotbollsklubb i Sverige ska statistiskt sett ta fram en elitspelare vart 30:e år.
 1235;30;"varje"|SVTimeconcept:SVYearpart;SVAdv+SVAdvTime+SVTime-SVAdjpron-SVAttrpron|Join;frequency, separate rule needed to make 'varje' BeginConcept
 /*		1235. 30 till 40 män får sjukdomen varje år i Sverige.
-/*1239;30;SVGen:SVNum:SVNumber|SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTime|+SVTime|+SVTime;
 1239;30;SVGen:SVNum:SVNumber+^SVDecinum|SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTimeadj+SVTime|+SVTime|+SVTime;
 /*		1239. Under 2000-talets första decennium skedde en smärre revolution på det litterära mediaområdet. Hon har ett program klart för sina hundra första dagar.
-/*1229;30;SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart;+SVTime|SVTimeconcept+SVCon+SVTime;
-/*1229;30;*SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay;JoinReverse|+SVTime;period, point in time or frequency
-/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|+SVTime;period, point in time or frequency
-/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;SVAdv+SVAdvTime+SVTime-SVAdjpron-SVAttrpron|Join;period, point in time or frequency => last part doesn't get 'joined' if there is more than one lexrep for the first part of the pattern
-/*1229;30;*SVTimeadj:SVOrdnumber+^SVTime|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|SVAdv+SVAdvTime+SVTime;period, point in time or frequency
-/*1229;30;*SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;JoinReverse|SVAdv+SVAdvTime+SVTime;period, point in time or frequency
 1288;30;SVDemonstr|SVTimeconcept+SVDefnoun;+JoinReverse|SVAdv+SVAdvTime+SVTime;
 /*		1288. Han fyller sjuttioett i slutet av den här månaden och det går knappt att begripa.
 1242;30;SVTimeadj|SVNum:SVNumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTime|+SVTimeadj+SVTime|+SVTime;
@@ -270,18 +240,10 @@
 1281;30;*SVTimeadj:SVOrdnumber|SVTimespan|SVAv|*SVTime:SVDay;JoinReverse|JoinReverse|JoinReverse|*;
 /*		1281. Under senare delen av 1600-talet kom rocken, s.k. just-au-corps, i bruk.
 1298;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept|SVAdvTime;SVAdvTime+SVAdv+SVTime|Join|Join;
-/*		1298. Men hon kan inte undgå att fundera på vad den kan ha haft för sig sedan den rullade i väg den där dagen för 20 år sedan.
-/*1288;30;SVDemonstr|SVTimeconcept;+JoinReverse|SVAdv+SVAdvTime+SVTime;
-/*.
-
-/*1299;30;"över"|SVTimeconcept:SVAdvTime:SVDay:SVYear:SVYearpart:SVTime;*|*;rules profiler
-
+/*		1298. Under året har även en kortare propagandafilm framställts vilken kommer att visas på biograferna under 8 veckor nästa år .
 
 1287;30;SVTimespan|SVAv|*SVTime:SVDay;JoinReverse|JoinReverse|*;
 /*		1287. Om du äter en halv avokado till din lunch kan det hjälpa till att tanka på energin resten av eftermiddagen, enligt en studie i Nutrition Journal.
-/*1234;30;SVAdvTemp|SVAdvTime;JoinReverse|*;
-/*1234;30;SVAdvTemp:SVAdvTime|SVAdvTime;JoinReverse|*;
-/*1234;30;SVAdvTemp:SVTime+^SVYear|SVAdvTime;JoinReverse|*;
 1234;30;SVAdvTemp:SVYearpart:SVTime+^SVYear+^SVTimeprep|SVAdvTime;JoinReverse|*;
 /*		1234. Det är en ökning med 25,7 procent jämfört med motsvarande månad förra året. – Under hösten förra året såg utvecklingen väldigt bra ut.
 /*1236;30;SVNum:SVNumber|SVTimeconcept;+SVTime|+SVTime; -> needs more filtering: can be age -> add later
@@ -290,21 +252,16 @@
 /*		1236. Restrycket hit är starkt inför vintersäsongen.
 1237;30;SVTimemodifier|SVTime;JoinReverse|*;
 /*		1237. Under nästan hela 1700-talet bar männen håret långt och hopfäst i en hästsvans.
-/*1241;30;SVAdvTime|SVTime;JoinReverse|*;
-/*1241;30;SVTime|SVTime;JoinReverse|*;
 1241;30;SVAdvTime:SVTimeconcept+SVTime|SVTime;JoinReverse|*;
 /*		1241. Det påminner om den magiska färg tomtenissen använder i det teveprogram många tittar på varje julafton ungefär klockan 15.07.
 1250;30;SVAdvTime:SVTimeconcept|SVAdvTemp+SVTimeprep|SVAndOrBut:SVPunctuation:SEnd;+SVTime|Join|*;
 /*		1250. Utvecklingen innebär också ett trendbrott eftersom övriga kvartal under året hade lägre sparande än motsvarande period året före.
 1256;30;SVNum:SVNumber:SVIndefart|SVTimeconcept|SVPosttime;+SVTime|+SVTime|+SVTime;
 /*		1256. Kortison gavs i 1 vecka postoperativt.
-/*1255;30;SVAdvTime:SVTimeconcept|SVPosttime;+SVTime|Join;
 1274;30;SVYear|*SVPosttime;SVAdv+SVAdvTime+SVTime|Join;
 /*		1274. Från 800-talet e.kr. kan man börja spåra den västerländska konstmusiken i källmaterialet tack vare bevarade notdokument.
 1255;30;SVAdvTime:SVTimeconcept:SVTime|*SVPosttime;+SVTime|Join;
 /*		1255. Kortison gavs i 1 vecka postoperativt.
-/*1257;30;SVAdvTemp:SVAdvTime:SVTimeadj|SVTimeprep|SVAdvTime:SVAdvTemp:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;rules profiler
-/*1257;30;SVAdvTemp:SVAdvTime:SVTimeadj|SVTimeprep|SVAdvTime:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;rules profiler
 1257;30;SVAdvTemp:SVTimeadj|SVTimeprep|SVAdvTime:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
 /*		1257. Tidigare i februari hölls nyval i landet.
 
@@ -312,21 +269,8 @@
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
 
 
-/*1249;30;SVYear|SVCon;*|*;rules profiler
-
-/* temporary rules
-/*1235;42;SVTimeprep|SVDay;*|+SVTime;
-/*;42;SVDate|SVDay;*|+SVTime;
-/*;42;SVTime|SVPunctuation|SVDay;*|*|+SVTime;
-
 /* Expansion
 /* ---------
-/*1281;30;*SVTimeadj:SVOrdnumber|SVTimespan|SVAv|SVTime;+SVTime|+SVTimeconcept+SVTime|+SVTimeprep|*;
-/*1281;30;*SVTimeadj:SVOrdnumber|SVTimespan|SVAv|*SVTime|^SVTime;+SVTimeBegin|*|*|*|+SVTimeStop;
-/*. Under senare delen av 1600-talet kom rocken, s.k. just-au-corps, i bruk.
-/*1282;30;SVTimeprep|*SVTimeadj:SVOrdnumber|SVTimespan|SVAv|*SVTime|^SVTime;+SVTimeBegin|-SVTimeBegin|*|*|*|+SVTimeStop;
-/*. Under senare delen av 1600-talet kom rocken, s.k. just-au-corps, i bruk.
-/*1277;30;"mellan":SVTimeprep|"mellan":SVTimeprep;*|*;rules profiler
 1275;30;SVTime|"-"|SVTime;*|SVTimeprep|*;
 /*		1275. Från de tidigaste muntliga berättelserna ledde skriftspråkets uppfinnande omkring 2100 f.Kr. - 2000 f.Kr. till övergången från muntlig tradition till nerskriven.
 1258;30;SVAdvTime|SVTimeprep:SVHyphen|*SVAdvTime:SVTimeconcept:SVTime|^SVTime;+SVTimeBegin|*|*|+SVTimeStop;
@@ -344,14 +288,7 @@
 1299;30;"över"|*SVTime:SVTimeconcept+^SVYear|^SVTime+^"års";+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
 /*		1299. Lasarettet i Ystad har ställt in alla planerade operationer i dag och i morgon för patienter som behöver stanna kvar på sjukhuset över natten.
 1264;30;SVTimeprep+^"över"|*SVTime:SVTimeconcept|^SVTime+^"års";+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
-/*		1264. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel.
-/*1264;30;SVTimeprep|*SVTime:SVTimeconcept|^SVTime;+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
-/*1264;30;SVTimeprep|*SVTime|^SVTime;+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
-/*1264;30;SVTimeprep|*SVTime|^SVTime;+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
-/*1264;30;SVTimeprep|.SVDefart|*SVTime+^SVYear|^SVTime;+SVTimeBegin|*|*|+SVTimeStop;
-/*		1264. I oktober hade andelen ökat till 31 procent.
-/*1280;30;*SVTime|SVAv|SVTime;*|*|*;rules profiler
-/*1280;30;^SVTimeBegin+^SVTime|*SVTime|SVPrep:SVAndOrBut:SVComma|*SVTime|^SVTime;*|+SVTimeBegin|-SVTimeStop|*|+SVTimeStop;
+/*		1264. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel. I oktober hade andelen ökat till 31 procent.
 1291;30;SVTimeprep|*SVTime+^SVYear|*SVNum|^SVTime;+SVTimeBegin-SVTimeStop|-SVTimeStop|-SVTimeStop|+SVTimeStop;fine-tuning r1264
 /*		1291. Under åren 20092011 registrerades dubbelt så många ingrepp. NOT_IN. Merv i Turkmenistan hade på 1200-talet 12 000 personer
 1280;30;^SVTime|*SVTime|SVPrep:SVAndOrBut:SVComma:"respektive"|*SVTime|^SVTime;*|+SVTimeBegin|-SVTimeStop|*|+SVTimeStop;
@@ -365,11 +302,8 @@
 1292;90;SVAndOrBut+SVTimeStop|SVTimeBegin;-SVTimeStop|-SVTimeBegin;
 /*		1292. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige.
 
-
 1283;30;SVAdvTimeFreq;^SVAdvTime;rules in following phases don't know SVAdvTimeFreq
 /*		1283. Dialysbehandlingen kunde minskas till 5 gånger per vecka på grund av god dialyseffekt och restfunktion.
-
-/*1271;30;SVTimeprep|SVNum:SVYear:SVNumber|SVTimeconcept;*|*|*;rules profiler
 
 
 /* ========================
@@ -378,34 +312,6 @@
 
 1246;40;"sedan"+SVConj|SVAdvTime;SVPrep|*;
 /*		1246. Bokningarna till den franska huvudstaden har faktiskt ökat med 64 % sedan samma månad förra året.
-
-/*/* Disambiguate through capitalization
-/*/* -----------------------------------
-/*16;40;SBegin|SVCapitalInitial;*|-SVCapitalInitial;ignore capital at beginning of sentence
-/*/*		16.  Daniel flög iväg med hjälp av 120 ballonger.
-/*17;40;":"|SVCapitalInitial+^SVConIfCap;SVPunctuation|-SVCapitalInitial;ignore capital after colon
-/*/*		17.  Larmet: Varannan kör för fort på vägarbeten.
-/*18;40;"-"|SVCapitalInitial;*|-SVCapitalInitial;ignore capital after -
-/*/*		18.  - Men vinden avtar en bit in på eftermiddagen.
-/*882;40;SBegin|SVLayout|SVCapitalInitial;*|SVLayout|-SVCapitalInitial;ignore capital after *
-/*/*		882. * Undvik nära kontakt med personer som du vet är sjuka.
-/*19;40;SVCapitalInitial+^SVIgnoreCap|SVCapitalInitial+^SVIgnoreCap;SVCon+SVCapitalInitial|SVCon+SVCapitalInitial;make capitalized words Concept
-/*/*		19.  Knappt 50 år senare invigdes Åhléns City, som ligger i hörnet Drottninggatan/Klarabergsgatan, nära Sergels torg.
-/*813;40;SVsVerbPart+SVCapitalInitial+SVRegex;SVAdj+SVGen;to account for names
-/*/*		813.  I går hade han ännu inte informerat Fairtrades ägare.
-/*172;40;SVConIfAllCap+SVCapitalAll;SVCon;make capitalized words Concept
-/*/*		172.  Akut diagnostik med DT eller MRT är nödvändig för att med säkerhet kunna skilja ischemisk stroke från intracerebral blödning (klass I, nivå A).
-/*21;40;SVConIfCap+SVCapitalInitial;SVCon+SVCapitalInitial;make capitalized words Concept
-/*/*		21.  2 § Annan arbetstvist än som avses i 1 § skall upptagas och avgöras av tingsrätt.
-/*556;40;SVCapitalInitial|"i"+SVCapitalAll;SVCon|SVCon;recognize names with roman numeral I
-/*/*		556.  Den 8 november 1913 efterträdde Ludvig formellt Otto I som kung under namnet Ludvig III av Bayern.
-/*616;40;SVCapitalInitial|"&"|SVCapitalInitial;SVCon|Join|+Join;recognize names with &
-/*/*		616.  (till exempel Cuban 1986, Dev & Walker 1999).
-/*14;40;":";+SVPunctuation;Punctuation is not assigned automatically since ":" is used in rules
-/*/*		14.  Ett något mindre dramatiskt exempel: vi kan använda mötesbordet som matbord och vice versa.
-/*1089;40;"-";+SVPunctuation;Punctuation is not assigned automatically since "-" is used in rules
-/*/*		1089. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
-
 
 
 /* Disambiguate specific words
@@ -636,8 +542,6 @@
 /*		612. Vi hade också en boll som vi har undrat lite över, ett runt paket inlindat väldigt snyggt.
 610;40;SVRunt;SVPrep;
 /*		610. Runt matbord samlas människor för att äta, medan mötesbord används vid diskussioner, förhandlingar och beslut.
-/*615;40;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*; -> moved  up
-/*615. En person som avses i första stycket får bedriva undervisning under högst ett år i sänder.
 713;40;^SVCon+^SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 /*		713. den gick från ca 15 procent 1980 till över 50 procent 2004.
 714;40;SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
@@ -799,7 +703,6 @@
 /*		807. Om jag började dansa på bordet under ett viktigt möte skulle de andra deltagarna förmodligen tro att jag var korkad, galen, ignorant eller obildad.
 551;40;SVVerbInfCon+SVSForm;SVVerb;
 /*		551. De var i mångt och mycket samma andas barn.
-/*89;40;SVVerbInfCon;SVCon;
 89;40;SVVerbInfCon;^SVCon-SVmAux;removes mAux from 'tro' but keeps Timeconcept on 'vecka'
 /*		89. Inställd färja på grund av hårt väder.
 
@@ -1183,7 +1086,6 @@
 /*		244. Man ska undvika att klia, gnugga eller riva på den irriterade huden eftersom det förvärrar besvären. WRONG: Fram till dess låg antalet disputerade ganska oförändrat på omkring 600–700 per år.
 554;40;SVVerbAdj|SVAdj;SVAdj|SVAdj;
 /*		554. psykosociala faktorer, låg fysisk aktivitet och bukfetma.
-/*231;40;SVVerbAdj+^SVVerbAdjCon;SVVerb;default
 231;40;SVVerbAdj;SVVerb;default - removed restriction ^SVVerbAdjCon because this label has been rewritten to SVCon already
 /*		231. Erytropoesstimulerande läkemedel (darbe-poetin alfa) och metoprolol, där doserna successivt ökades, insattes.
 
@@ -1353,7 +1255,7 @@
 /*		109. Ledamot har rätt att bli entledigad, om särskilda omständigheter föranleder det.
 117;40;SVCon|SVPart|SVPrep;*|SVRelpart|SVPrep;
 /*		117. Så är det emellertid inte, eftersom den andra grafiska meningen består av fyra syntaktiska meningar (makrosyntagmer), i ett fall åtskilda av kommatecken.
-1221;40;^SVIndefart+^SVPrep|SVPart|SVAdvTime;*|SVRelpart|*;rules profiler
+1221;40;^SVIndefart+^SVPrep|SVPart|SVAdvTime;*|SVRelpart|*;
 /*		1221. MEST DELAD IDAG: ...
 110;40;SVPart;SVAdj;default
 /*		110. Inställd färja på grund av hårt väder.
@@ -1615,40 +1517,6 @@
 658;40;SVExample+^SVAdvStruct;SVConj;default
 /*		658. För trettio år sedan var nyckelord till exempel lekmannainflytande och decentralisering.
 
-/*/* Connections with partial words
-/*/* ------------------------------
-/*/*717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;SVCon|Join|Join|+Join;e.g. läs- och skrivsvårigheter
-/*/*/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
-/*/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;SVAdj|Join|Join|+Join;
-/*/*/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
-/*/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;SVYear|Join|Join|+Join;
-/*/*/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
-/*/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;SVvRel|Join|Join|+Join;Does it make sense to keep this rule?
-/*/*719;40;"@connect@";SVCon;to avoid that concepts get split if no AndOrBut is present
-/*/*/*		719. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
-/*
-/*/*717;40;SVCon|"@connect@"|SVAndOrBut|SVCon;JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
-/*/*/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre.
-/*/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;JoinReverse|JoinReverse|JoinReverse|*;
-/*/*/*		748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
-/*/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;JoinReverse|JoinReverse|JoinReverse|*;
-/*/*/*		923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
-/*/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;JoinReverse|JoinReverse|JoinReverse|*;Does it make sense to keep this rule?
-/*/*1244;40;SVCon|"@connect@"|SVAndOrBut|^SEnd;*|*|*|*;rules profiler
-/*/*719;40;"@connect@";SVCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
-/*/*/*		719. ETEC- bakterien vanlig orsak till turistdiarré. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
-/*
-/*717;40;SVCon|"@connect@"|SVAndOrBut|SVCon:SVAdj:SVAdvAdj:SVYear:SVNum:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
-/*/*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
-/*/*748;40;SVCon|"@connect@"|SVAndOrBut|SVAdj;JoinReverse|JoinReverse|JoinReverse|*;
-/*/*748. Genom bokföringen får Skatteverket uppgifter om den bokförande partens in- och utgående moms.
-/*/*923;40;SVCon|"@connect@"|SVAndOrBut|SVYear;JoinReverse|JoinReverse|JoinReverse|*;
-/*/*923. På 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin (anti-PC).
-/*/*718;40;SVCon|"@connect@"|SVAndOrBut|SVvRel;JoinReverse|JoinReverse|JoinReverse|*;Does it make sense to keep this rule?
-/*/*1244;40;SVCon|"@connect@"|SVAndOrBut|^SEnd;*|*|*|*;rules profiler
-/*719;40;"@connect@";SVCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
-/*/*		719. ETEC- bakterien vanlig orsak till turistdiarré. Grundläggande sång- och i vissa fall instrumentfärdighet är en idag en relativt utbredd kunskap, och anses ofta som en del av allmänbildningen.
-
 
 /* Defaults part 2
 /* ---------------
@@ -1791,8 +1659,6 @@
 /*		44. Hon var glad och positiv, empatisk och väldigt mån om alla, oss och vännerna, ville att man skulle tala väl om människor.
 555;40;SVConIfAllCap;-SVConIfAllCap;
 /*		555. I nästa fas i det världsunika forskningsprojektet ska sju kvinnor genomgå IVF-behandling med målet att bli gravida.
-/*306;40;SVTimeconcept+SVCon;-SVTimeconcept;
-/*306. Resan med fyra hästspårvagnar, påbörjades kl. 16.00 och tog cirka 15 minuter.
 617;40;"&";SVCon;
 /*		617. Gruppen deltog under namnet Björn & Benny, Agnetha & Anni-Frid i Melodifestivalen 1973 med Ring ring.
 865;40;"-";SVPunctuation;
@@ -1835,12 +1701,6 @@
 /*		521. Vi är fyra helt olika personer som tycker helt olika saker. Den första helt datoranimerade långfilmen var Toy Story, producerad av Pixar Animation Studios, från 1995.
 768;45;SVYear|SVNum:SVNumber:SVAdj:SVGen+^"års"+^SVYear;SVeCon|*;
 /*		768. Sammanlagt har 1000 svenska singlar deltagit i undersökningen. Detsamma gäller det redan 1974 upptäckta skadesyndromet M74 som slår ut laxyngel. Fullmäktige sammanträder var tredje vecka i Rådssalen i Stockholms stadshus och har sedan 1971 101 ledamöter. Enligt International Congress and Convention Association (ICCA) var Stockholm 2008 åtta på världsrankingen.
-/*	770;45;SVMonth|SVYear|^"kl."+^"klockan"+^"kl"+^SEnd;^SVMonth|SVeCon|*; - covered by r1227
-/*770. Redan andra dagen på jobbet i slutet av januari 1986 ringde mig chefen för ett stort konsultföretag i Stockholm.
-/*920;45;SVDate|"klockan";SVbCon-SVAdvTime-SVAdv|*; - covered by phase 20
-/*920. Vid valborg (Vappen) inleds festligheterna den 30 april klockan 18.00 i Helsingfors.
-/*890;45;SVCon+^SVMonth+^SVDay|"klockan";*|SVbCon; - covered by phase 20
-/*890. Två båtturer mellan Visby och Nynäshamn har ställts in på grund av vindarna, en från Visby klockan 7 i morse och vändande tur vid 11-tiden.
 772;45;SVPluralnoun|SVAdj;SVeCon|SVAdj;
 /*		772. Strax före klockan ett var alla platserna upptagna och ett hundratal person satt sida vid sida med handbuketter och väntade på att ceremonin skulle börja.
 928;45;SVCPron|SVbCon;SVbCon|SVCon;
@@ -2290,26 +2150,17 @@
 1282;90;SVTimeBegin:SVTime+SVTimeStop;-SVTimeStop;
 /*		1282. Genom nationalismen kom vikingen att bli föremål för hämningslös beundran, i synnerhet under andra hälften av 1800-talet fram till långt in på 1900-talet.
 
-/*1293;90;typeBeginConcept:typeConcept+SVTime|typeConcept:typeEndConcept+SVTimeStop;*|SVbCon+SVTimeStop;rules profiler
-/*1293;90;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept:typeEndConcept+SVTimeStop+^"års";*|SVbCon+SVTimeStop;rules profiler
 1293;90;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop+^"års";*|SVbCon+SVTimeStop;
 /*		1293. Här etablerades sedan 1950-talet småindustrier som så småningom liknade en kåkstad.
 
 /*1268;90;typeConcept+SVTimeStop+^SVGen+^SVPossibleGennoun|^SVTime;SVbCon+SVTimeStop|*; -> better in some cases, worse in others, r1268 needs fine-tuning
-/*1268;90;typeConcept+SVTimeStop+^"års"|typeConcept+^SVTime;SVbCon+SVTimeStop|*;
-/*1259;90;typeConcept+SVTimeStop|*typeConcept|^typeConcept;-SVTimeStop|*|+SVTimeStop;
-/*;90;SVAdvAmount:SVAdvStruct:SVAttrpron:SVComma:SVDefart:SVDemonstr:SVIndefart+SVTimeStop|
 1260;90;typeOther+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
 /*		1260. I dag, onsdag, meddelade bolaget att de primära effektmåtten inte uppnåddes i fas III-studien.
-/*1265;90;SVPunctuation+SVTimeStop|.typeOther|^typeOther+^SVPunctuation;-SVTimeStop|*|+SVTimeStop;
 1265;90;SVPunctuation+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
 /*		1265. Formatet började bli populärt på allvar i början av 1990-talet - bland annat utsågs cd-spelaren till årets julklapp 1991 och cd-skivan fick samma utmärkelse 1995.
 1262;90;typeRelation:typeBeginRelation+^SVTime|.typeOther|typeRelation+SVTimeBegin;*|*|SVbRel+SVTimeBegin;
 /*		1262. Ett exempel är avbildat på Vädersoltavlan, som visar ett halofenomen över Stockholm som varade mellan kl 7 och 9 på morgonen den 20 april 1535.
 
-/*1224;$;SVTimeStop+SVPunctuation|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
-/*. 3,4 procent i november, tre procent månaden innan.
-/*1225;$;SVTimeStop+typeAmbiguous:typeOther|^typeAmbiguous+^typeOther;-SVTimeStop|+SVTimeStop;
 
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
