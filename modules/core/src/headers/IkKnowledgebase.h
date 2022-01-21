@@ -36,6 +36,8 @@ namespace iknow
       PunctuationLabel,
       SentenceBeginLabel,
       SentenceEndLabel,
+      QuestionBeginLabel,
+      QuestionEndLabel,
       JoinLabel,
 	  JoinReverse,	// New, reverse join of the lexreps 
       CapitalInitialLabel,
@@ -52,6 +54,12 @@ namespace iknow
       CertaintyLabel, // Certainty label that influences the certainty level
       EndLabels, //Special one-past-the-end marker for iterator-like semantics
       BeginLabels = ConceptLabel //Ditto: usual begin marker
+    };
+
+    enum class SentenceType {
+        None = 0,
+        Affirmative,
+        Question
     };
 
     class CORE_API IkKnowledgebase
@@ -90,15 +98,13 @@ namespace iknow
       virtual AttributeId GetAttributeType(FastLabelSet::Index /* index */, size_t /* position */) const { return 0; }
 
       virtual const AttributeId* GetAttributeParamsBegin(FastLabelSet::Index /* index */, size_t /* position */) const { return 0; }
-
       virtual const AttributeId* GetAttributeParamsEnd(FastLabelSet::Index /* index */, size_t /* position */) const { return 0; }
 
       LabelAttributeIterator LabelAttributesBegin(FastLabelSet::Index index) const {
-	return LabelAttributeIterator(LabelAttribute(index, 0));
+        return LabelAttributeIterator(LabelAttribute(index, 0));
       }
-
       LabelAttributeIterator LabelAttributesEnd(FastLabelSet::Index index) const {
-	return LabelAttributeIterator(LabelAttribute(index, GetAttributeCount(index)));
+        return LabelAttributeIterator(LabelAttribute(index, GetAttributeCount(index)));
       }
 
       //Returns the phases to which the label applies
@@ -130,12 +136,15 @@ namespace iknow
       virtual short       IsNonSentenceSeparator(const iknow::base::String &strLabel ) const = 0; /*!< checks if the char is a non sentence separator */
       virtual short       IsSentenceSeparator   (const iknow::base::String &strLabel ) const = 0; /*!< checks if the string is a sentence separator */
       
-      bool FastIsSentenceSeparator(iknow::base::Char c) const { //Most language models will be happy with this. Avoid the virtual call for now.
+      bool FastIsSentenceSeparator(iknow::base::Char c, SentenceType& sent_type) const { //Most language models will be happy with this. Avoid the virtual call for now.
 	    switch (c) {
 	    case '.':
 	    case ';':
 	    case '!':
+            sent_type = SentenceType::Affirmative;
+            return true;
 	    case '?':
+            sent_type = SentenceType::Question;
 	        return true;
 	    default:
 	        return false;

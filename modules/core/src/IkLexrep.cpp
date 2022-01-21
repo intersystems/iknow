@@ -111,15 +111,30 @@ bool IkLexrep::hasSBeginLabel(Phase p) const {
 	const FastLabelSet::Index SBeginLabelIndex = m_kb->GetLabelIndex(SentenceBeginLabel);
 	return this->GetLabels(p).Contains(SBeginLabelIndex);
 }
+bool IkLexrep::hasQBeginLabel(Phase p) const {
+	const FastLabelSet::Index SBeginLabelIndex = m_kb->GetLabelIndex(QuestionBeginLabel);
+	return this->GetLabels(p).Contains(SBeginLabelIndex);
+}
 bool IkLexrep::hasSEndLabel(Phase p) const {
 	const FastLabelSet::Index SEndLabelIndex = m_kb->GetLabelIndex(SentenceEndLabel);
 	return this->GetLabels(p).Contains(SEndLabelIndex);
 }
+bool IkLexrep::hasQEndLabel(Phase p) const {
+	const FastLabelSet::Index SEndLabelIndex = m_kb->GetLabelIndex(QuestionEndLabel);
+	return this->GetLabels(p).Contains(SEndLabelIndex);
+}
+
 void IkLexrep::setSBeginLabel() {
 	this->AddLabelIndex(m_kb->GetLabelIndex(SentenceBeginLabel));
 }
+void IkLexrep::setQBeginLabel() {
+	this->AddLabelIndex(m_kb->GetLabelIndex(QuestionBeginLabel));
+}
 void IkLexrep::setSEndLabel() {
 	this->AddLabelIndex(m_kb->GetLabelIndex(SentenceEndLabel));
+}
+void IkLexrep::setQEndLabel() {
+	this->AddLabelIndex(m_kb->GetLabelIndex(QuestionEndLabel));
 }
 
 FastLabelSet::Index IkLexrep::FindAttributeWithType(AttributeId type, Phase p) const {

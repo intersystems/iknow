@@ -110,6 +110,8 @@ namespace iknow {
         }
 		bool hasSBegin = lexrep.hasSBeginLabel(phase); // if present, these must be reset.
 		bool hasSEnd = lexrep.hasSEndLabel(phase);
+        bool hasQBegin = lexrep.hasQBeginLabel(phase);
+        bool hasQEnd = lexrep.hasQEndLabel(phase);
 
         if (GetOptions().HasOption(IkRuleOption::kClearAll)) {
           lexrep.ClearLabels(phase);
@@ -146,7 +148,9 @@ namespace iknow {
           actions_[i].Apply(lexrep);
         }
 		if (hasSEnd) lexrep.setSEndLabel(); // reset SEnd & SBegin labels
+        if (hasQEnd) lexrep.setQEndLabel();
 		if (hasSBegin) lexrep.setSBeginLabel();
+        if (hasQBegin) lexrep.setQBeginLabel();
       }
       IkRuleOption GetOptions() const {
         return options_;

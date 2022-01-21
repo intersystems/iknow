@@ -74,6 +74,12 @@ iknow::base::String CSV_DataGenerator::GetSpecialLabel(SpecialLabel label) {
 	case SentenceEndLabel:
 		return IkStringEncoding::UTF8ToBase("SEnd");
 		break;
+	case QuestionBeginLabel:
+		return IkStringEncoding::UTF8ToBase("QBegin");
+		break;
+	case QuestionEndLabel:
+		return IkStringEncoding::UTF8ToBase("QEnd");
+		break;
 	case JoinLabel:
 		return IkStringEncoding::UTF8ToBase("Join");
 		break;
