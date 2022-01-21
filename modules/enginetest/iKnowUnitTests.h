@@ -33,5 +33,6 @@ namespace testing {
 		void LanguageIdentification(const char*); // Language Identification
 		void SourceVersusSentenceALI(const char*); // Source versus Sentence ALI detection
 		void QuestionDetected(const char*); // Is the question detected
+		void DP3340(const char*); // https://usjira.iscinternal.com/browse/DP-3340
 	};
 }

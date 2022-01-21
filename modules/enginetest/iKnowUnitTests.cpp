@@ -73,6 +73,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.SourceVersusSentenceALI(pError);
 		pError = "Question sentence detected";
 		test_collection.QuestionDetected(pError);
+		pError = "DP-3340";
+		test_collection.DP3340(pError);
 
 	}
 	catch (std::exception& e) {
@@ -86,6 +88,47 @@ void iKnowUnitTests::runUnitTests(void)
 	}
 }
 
+/// <summary>
+/// Next to the already existing label "UDPosSentiment" and "UDNegSentiment" we need a "UDNeutralSentiment" label for multiwords that include a sentiment marker but must not be considered sentiment markers themselves, e.g.
+/// @good, UDPosSentiment
+/// @immovable good, UDNeutralSentiment
+///
+/// This prodlog is somewhat similar to 159698. The difference is that the current prodlog only concerns markers from a user dictionary, not built - in markers.If this difference is not relevant in the engine, solving the issue as part of 159698 with a "UDIgnoreSentiment" label rather than @UDNeutralSentiment would be OK too.
+/// </summary>
+/// +		[29]	"UserDictionaryMatch:<lexrep id=10 type=Unknown value=\"good,\" index=\"good\" labels=\"UDIgnoreSentiment;ENCon;\" />;"	std::string
+/// +		[34]	"UserDictionaryMatch:<lexrep id=15 type=Unknown value=\"good\" index=\"good\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+/// <param name="pMessage"></param>
+void iKnowUnitTests::DP3340(const char* pMessage)
+{
+	String text_source(IkStringEncoding::UTF8ToBase(u8"Referencing property, we call it immovable good, that is a good way of expressing."));
+
+	iKnowEngine engine;
+	UserDictionary user_dictionary;
+	user_dictionary.addLabel("good", "UDPosSentiment"); // @good,UDPosSentiment
+	user_dictionary.addLabel("immovable good", "UDIgnoreSentiment"); // @immovable good,UDIgnore 
+	engine.loadUserDictionary(user_dictionary);
+	engine.index(text_source, "en", true); // traces should show UDPosSentiment
+
+	// Check for Positive Sentiment markers
+	for (auto it = engine.m_traces.begin(); it != engine.m_traces.end(); ++it) { // scan the traces
+		// cout << *it << endl;
+		// +[12]	"UserDictionaryMatch:<lexrep id=6 type=Unknown value=\"er/pr\" index=\"er/pr\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		// +[13]	"UserDictionaryMatch:<lexrep id=7 type=Unknown value=\"positive.\" index=\"positive\" labels=\"UDPosSentiment;ENCon;\" />;"	std::string
+		if (it->find("UserDictionaryMatch") != string::npos) {
+			string& trace_userdct = (*it);
+			if (trace_userdct.find("value=\"good,\"") != string::npos) {
+				if (trace_userdct.find("UDIgnoreSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+			if (trace_userdct.find("value=\"good\"") != string::npos) {
+				if (trace_userdct.find("UDPosSentiment") == string::npos)
+					throw std::runtime_error(string(pMessage));
+			}
+		}
+	}
+	engine.unloadUserDictionary();
+
+}
 /*
 +[8]	"LexrepIdentified:<lexrep id=1 type=Nonrelevant value=\"\" index=\"B\" labels=\"SBegin;QBegin;\" />;"	std::string
 +[15]	"LexrepIdentified:<lexrep id=10 type=Nonrelevant value=\"\" index=\"E\" labels=\"SEnd;QEnd;\" />;"	std::string
