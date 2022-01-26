@@ -37,8 +37,8 @@
 /*		1674. Smartphone doet je 15 uur extra werken. NOT. Het festival heeft de voorbije twee maanden meer dan 248.000 bezoekers naar de Scheldestad gelokt.
 1825;20;"om"|"de"|NLNumberConcept:NLQuantity|NLTimeconcept;+NLAddExpansion|NLPathRelevant|NLAdvTime|+Join;mark that expansion should be added in phase 55
 /*		1825. Het cijfer van de bevolking van elke kieskring wordt om de tien jaar vastgesteld door een volkstelling of door enig ander middel, bepaald door de wet.
-1859;20;"op"|."een":NLNumberConcept|NLTimeconcept;+NLAddExpansion|*|*;
-/*		1859. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Op weekdagen piekt de verkoop tussen 16 en 17 uur.
+1859;20;"op"|."een":NLNumberConcept:NLBeginTime|NLTimeconcept;+NLAddExpansion|*|+NLTime;mark preposition to be included in time expansion of ambiguous time concept such as 'termijn'
+/*		1859. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Op weekdagen piekt de verkoop tussen 16 en 17 uur. Er bestaat een wezenlijke onzekerheid over de vraag of het bedrijf in staat is om de activiteiten op middellange termijn voort te zetten.
 
 /* process numbers
 1663;20;NLNumberConcept|"miljoen":"miljard";^NLNumberConcept|+Join;
@@ -103,6 +103,16 @@
 1732;30;NLEven;NLAdvTemp;
 /*		1732. Het verlies liep zelfs even op tot meer dan 3 procent.
 
+/* Disambiguate word DIRECT: adverb of time or adjective without time meaning
+1934;30;NLAdvDegree|NLDirect;*|NLAdj;
+/*		1934. Ik ben nogal direct, maar ook altijd diplomatiek, correct, beleefd.
+1935;30;NLDirect|NLAndOr|NLAdj;NLAdj|*|*;
+/*		1935. De bank houdt momenteel een belang (direct en indirect) van 70%. 
+1932;30;NLArt:NLPoss:NLAndOr|NLDirect|NLCon;*|NLAttradj|*;
+/*		1932. Analisten voorzagen een sterkere daling van het direct resultaat. Verschillende insecten kunnen via beten, steken of direct huidcontact lokaal hevige jeuk en ontstekingsverschijnselen veroorzaken.
+1933;30;NLDirect;NLAdvTemp;
+/*		1933. De arts van de opgeroepen traumahelikopter begon direct met reanimeren.
+
 /* Adverb of time in noun phrase (before join rules)
 1721;30;NLArt|NLAdvTime:NLDay|*NLPartAdj|NLAttradj:NLCon;*|NLAttradj+NLTime|NLAttradj|*;
 /*		1721. De zaterdagavond opgeroepen politiemensen zouden zich achterwaarts de duinen in hebben willen terugtrekken. Dat laat het bedrijf donderdag weten, naar aanleiding van de vandaag gehouden algemene aandeelhoudersvergadering.
@@ -150,24 +160,40 @@
 /*		1786. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
 1890;30;NLNumber|NLAndOr:NLPrep|*NLNumber|"jaar"|NLPrepTime;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
 /*		1890. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1914;30;NLNumber|NLTimeconcept|"en"|NLNumber|NLTimeconcept;*|*|+NLAddExpansion|*|*;
+/*		1914. De minimaal vereiste reistijd bedraagt 1 uur en 30 minuten voor zowel inkomende als uitgaande passagiers.
+1916;30;"aan":"bij"|"het"|"eind":"einde":"begin"|"van";+NLAddExpansion|*|*|*;
+/*		1916. Zondag aan het begin van de avond werd dit kennelijk door de buurman ontdekt.
 
-/* Disambiguate TIJD
+/* Disambiguate TIJD, MOMENT, OGENBLIK
 1893;30;NLBeginTime|"tijd"|NLEndTime;NLAdvTemp+NLTime|Join|Join;
 /*		1893. Het graafschap Vlaanderen, dat onder de aanvankelijk zwakke koning van Frankrijk viel, was aanvankelijk en ook nog lange tijd daarna het belangrijkste gewest.
-1894;30;NLPrepTime:"tot"+^"voor":"over":"uit"|NLDempron:NLHetzelfde|"tijd"|^"van";NLAdvTemp+NLTime|Join|Join|*;
-/*		1894. De Hollandse zeevaart kende in deze tijd ook een opvallend sterke groei. Tot die tijd blijven de verloven van kracht. NOT. Daarnaast verwacht hij hogere kosten, terwijl veel pubs het toch al moeilijk hebben in deze tijd van recessie. In dezelfde tijd werd ook een mastopexie uitgevoerd.
+1944;30;NLPrepTime:"tot":"op"|NLArt|"zeker":"bepaald":"gegeven"|"moment":"ogenblik";NLAdvTemp+NLTime|Join|Join|Join;
+/*		1944. Dat stond op een bepaald moment 0-1 achter en bovendien was de thuisploeg ook al tot tien man herleid.
+1894;30;NLPrepTime:"tot":"op"+^"voor":"over":"uit"|NLDempron:NLHetzelfde|"tijd":"moment":"ogenblik"|^"van";NLAdvTemp+NLTime|Join|Join|*;
+/*		1894. De Hollandse zeevaart kende in deze tijd ook een opvallend sterke groei. Tot die tijd blijven de verloven van kracht. NOT. Daarnaast verwacht hij hogere kosten, terwijl veel pubs het toch al moeilijk hebben in deze tijd van recessie. In dezelfde tijd werd ook een mastopexie uitgevoerd. In het weekend kreeg hij dieven over de vloer en op ongeveer hetzelfde moment werd ook in Nederland een grote duivendiefstal gepleegd. Een  controle CT hersenen toont op dat ogenblik een discreet diffuus oedeem.
 1899;30;NLPrep|.NLArt:NLDempron|NLBeginTime|"tijd";*|*|NLAdvTime|Join;
 /*		1899. Voor de renner is het de tweede keer in korte tijd dat hij zwaar valt. 
 1892;30;NLBeginTime|"tijd";NLAdvTemp+NLTime|Join;
 /*		1892. Hij verklaarde dat de verhoudingen met de buren al enige tijd gespannen zijn.
+1945;30;NLBeginTime:NLOrdnum|"moment":"ogenblik";NLAdvTime|Join;
+/*		1945. Doet u dat op het laatste moment, als alle plannen getekend zijn, of doet u dat bij aanvang, als u nog samen aan de tekentafel zit? Vanaf het eerste moment klikte het tussen ons.
+1943;30;NLPrepTime:"tot":"op"|NLArt|NLPartAdj:NLPartCon:NLAdj:NLAttradj|"moment":"ogenblik";*|*|NLAttradj|+NLTime;
+/*		1943. De foto werd genomen op een onbewaakt moment.
+
+/* Disambiguate ambiguous Time concepts (e.g. TERMIJN, PERIODE, ...)
+1891;30;NLTimeconcept|"van"|NLNumber|"tot"|NLNumber|NLTimeconcept;+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|Join;disambiguate ambiguous time concept (and 'jaar')
+/*		1891. Als er een akkoord wordt bereikt dan is over een periode van vijf tot zes jaar circa EUR3 miljard nodig.
+1895;30;NLTimeconcept|"van":"min"|NLNumber|NLTimeconcept;+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|Join;disambiguate ambiguous time concept
+/*		1895. Het is voor een termijn van 9 jaar geleased. De Koning maakt binnen een termijn van zes maanden de uitslagen bekend. De duur van het boekjaar mag nooit langer zijn dan 24 maanden min één kalenderdag.
 
 /* Disambiguate NUMBER plus JAAR: detect time indications, and remove time attribute when used as 'age'
+1920;30;"tot"|NLNumber|"jaar"|typeConcept;-NLPrepTime|*|*|*;don't include 'tot' in expansion for this pattern
+/*		1920. De man, veroordeeld tot 30 jaar cel, verlaat ten laatste morgen de gevangenis.
+1918;30;"van"|NLNumber|"tot"|NLNumber|"jaar";*|*|-NLPrepTime|*|-NLTimeconcept;'tot' before Number + 'jaar' is usually used for age
+/*		1918. Gespecialiseerde normalisatie-instituten zullen geluidsplafonds bepalen die rekening houden met de gevoelige oortjes van kinderen tot drie jaar.
 1896;30;NLGeen|.NLNumberConcept|"jaar"|NLEndTime;+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;
 /*		1896. De overeenkomst voor bananen is nog geen zeven jaar geleden in werking getreden.
-1891;30;NLTimeconcept|"van"|NLNumber|"tot"|NLNumber|"jaar";+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|Join;
-/*		1891. Als er een akkoord wordt bereikt dan is over een periode van vijf tot zes jaar circa EUR3 miljard nodig.
-1895;30;NLTimeconcept|"van"|NLNumber|"jaar";+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|Join;
-/*		1895. Het is voor een termijn van 9 jaar geleased.
 1885;30;NLPrepTime|NLNumber|NLHyphen|NLNumber|"jaar";*|NLAdvTime|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1885. Daarenboven ziet men dat het aantal gevallen van kinkhoest bij adolescenten en volwassenen na 10 – 15 jaar is toegenomen.
 1886;30;NLBeginTime|NLNumber|NLHyphen|NLNumber|"jaar";NLAdvTime|Join|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
@@ -184,9 +210,9 @@
 /*		1884. Hun toestand werd onderzocht na 9, 10-11 en 14 jaar door middel van een vragenlijst ingevuld door ouders, leerkrachten en de kinderen zelf.
 1883;30;NLPrepTime|*NLNumber|NLAndOr:"tot"|*NLNumber:NLQuantity|"jaar";*|+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1883. Hun toestand werd onderzocht na 9 en 14 jaar door middel van een vragenlijst ingevuld door ouders, leerkrachten en de kinderen zelf.
-1843;30;NLPrepTime:NLOrdnum:"al":"reeds"|.NLArt|NLNumber:NLQuantity:NLOrdnum|"jaar"|^"oud":"ouder";*|*|NLTimeconcept+NLTime|Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
-/*		1843. De vader en de moeder van het meisje steunen haar plan voor twee jaar durende reis. Dit instituut had gedurende twintig jaar in zestig gevallen professoren omgekocht. Binnen de twee jaar zal het systeem uitgebreid worden naar alle commissariaten van de politiezone. Met de aanpassing van de voorwaarden voor middeldure huurwoningen geldt dat voor deze woningen in de eerste 20 jaar na erfpachtuitgifte een jaarlijkse huurverhoging toegestaan is van maximaal CPI+1%-punt. Het letsel zou reeds meer dan 1 jaar aanwezig zijn. NOT. Bovendien is de patiënte reeds 87 jaar oud en gaat ze zelf niet akkoord om de ingreep te laten uitvoeren.
-1887;30;NLNumber:NLQuantity:NLOrdnum|"jaar"|NLPrepTime;NLTimeconcept+NLTime|Join|*;
+1843;30;NLPrepTime:NLOrdnum:"al":"reeds"+^"tot"|.NLArt|NLNumber:NLQuantity:NLOrdnum|"jaar"|^"oud":"ouder";*|*|NLTimeconcept+NLTime|Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
+/*		1843. De vader en de moeder van het meisje steunen haar plan voor twee jaar durende reis. Dit instituut had gedurende twintig jaar in zestig gevallen professoren omgekocht. Binnen de twee jaar zal het systeem uitgebreid worden naar alle commissariaten van de politiezone. Met de aanpassing van de voorwaarden voor middeldure huurwoningen geldt dat voor deze woningen in de eerste 20 jaar na erfpachtuitgifte een jaarlijkse huurverhoging toegestaan is van maximaal CPI+1%-punt. Het letsel zou reeds meer dan 1 jaar aanwezig zijn. NOT. Bovendien is de patiënte reeds 87 jaar oud en gaat ze zelf niet akkoord om de ingreep te laten uitvoeren. NOT. Het zijn slechts enkele observaties die de kindacteurs (8 tot 14 jaar) de volwassenen naar het hoofd slingeren.
+1887;30;NLNumber:NLQuantity:NLOrdnum|"jaar"|NLPrepTime:"nadat":"voordat";NLTimeconcept+CStarter+NLTime|Join|*;
 /*		1887. Veertig jaar na datum is en blijft Woodstock een krachtig symbool van de sixties.
 1876;30;NLNumber:NLGeen|"jaar";*|-NLTimeconcept-NLTime;remove time from 'jaar'
 /*		1876. Je mag niet vergeten dat hij maar zestien jaar is en dat de verwachtingen groot zijn.
@@ -203,16 +229,20 @@
 /*		1695. Nochtans is Sint-Nicolaas geboren in Patara te Lycië dat tegenwoordig in Turkije ligt, maar in het jaar 280 bij het toenmalige Byzantijnse Rijk hoorde. NOT. De joint venture heeft gedurende het jaar twee belangrijke investeringen gedaan.
 
 /*	Add Time attribute to range of numbers
+1927;30;NLNumber|NLTimeconcept|"op"|NLNumber|^typeConcept;NLAdvTime|+Join|+NLAddExpansion|+NLTime|*;
+/*		1927. U kunt 5 dagen op 7 terecht bij een speciaal callcenter (voor interventies 6 dagen op 7). Alcoholische dranken zijn er daardoor voortaan 24 uur op 24 op straat verboden.
+1928;30;NLHour|"op"|NLNumber|^typeConcept;*|+NLAddExpansion|+NLTime|*;
+/*		1928. De camera's bestrijken de volledige oppervlakte en zullen 24u op 24 filmen. 
 1860;30;NLYearnum|NLHyphen|NLYearnum;+NLTime|*|+NLTime;
 /*		1860. In de 17e eeuw (1630 - circa 1637) ontstond er in de Republiek der Zeven Verenigde Nederlanden rond de tulpenbol een bizarre tulpenmanie.
 1813;30;NLNumber|NLHyphen|NLNumber|NLTimeconcept:NLTimes:NLMonth;NLAdvTime|+Join|+Join|+Join;
 /*		1813. Het geneesmiddel heeft pas effect na 6 - 12 maanden.
-1774;30;NLNumber|NLAndOr:NLPrep|*NLNumber|NLTimeconcept:NLTimes:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*;
+1774;30;NLNumber|NLPrep|*NLNumber|NLTimeconcept:NLTimes:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*;
 /*		1774. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. Dat is drie tot vier keer zo vaak als gemiddeld. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je in Haïti drie tot vier keer op een halfuur mee. NOT. Onderzoekers analyseerden het gedrag van 562 volwassenen tussen 19 en 90 jaar.
 1787;30;NLOrdnum|NLComma|NLOrdnum|NLAndOr|NLOrdnum|NLTimeconcept:NLTimes;+NLTime+CStarter+NLAddExpansion|*|+NLTime+CStarter|*|*|*;
 /*		1787. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
-1777;30;NLOrdnum|"tot":"tot en met":NLAndOr|."de"|NLOrdnum|NLTimeconcept:NLTimes;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
-/*		1777. In de 16de en 17de eeuw is het beeld eigenlijk uitgevonden in Antwerpen. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam.
+1777;30;NLOrdnum:NLNumber:NLQuantity|"tot":"tot en met":NLAndOr|."de"|NLOrdnum:NLNumber:NLQuantity|NLTimeconcept:NLTimes:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
+/*		1777. In de 16de en 17de eeuw is het beeld eigenlijk uitgevonden in Antwerpen. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Omwille van de recente chemotherapie dient de interventie een 2 tot 3-tal weken uitgesteld te worden. De Dodentocht die dit jaar op 14 en 15 augustus plaats vindt, hoopt om voor het eerst de grens van 10.000 deelnemers te overschrijden.
 
 /*	special cases
 1903;30;NLGeen|.NLNumberConcept|NLTimeconcept|NLEndTime;+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;
@@ -261,6 +291,12 @@
 /*		1762. De kaarten werden tussen eind 2006 en midden 2008 gekopieerd. Over het gehele jaar 2007 bedroegen de belastingen EUR 42 miljoen.
 1770;30;NLTimeconcept:NLFraction:NLBeginTime|"van"|NLYearnum;*|*|NLTimeconcept+NLYearnum+NLTime;make year number time concept so it can be joined with other time indications in the following rules
 /*		1770. De recurrente bedrijfswinst (rebit) was na de eerste drie maanden van 2008 50 procent hoger dan in dezelfde periode vorig jaar. Bovendien was het financieel resultaat 6,8 miljoen euro negatief, tegenover 1,7 miljoen euro negatief in de eerste helft van 2008. Zijn herstructureringsprogramma's zullen tegen het einde van 2010 resulteren in 75 miljoen euro aan 'duurzame jaarlijkse besparingen'.
+1919;30;"over":"tot"|NLYearnum|NLCon;-NLPrepTime|-NLYearnum-NLTime|*;correction to r1766 and r1767
+/*		1919. Het RIVM schat dat 600 tot 1600 mensen rond Schiphol een verhoogde bloeddruk door vliegtuiggeluid hebben. In een samenwerkingsproject van de Nederlandse kinderartsen werden perinatale gegevens bijeengebracht over 1338 kinderen.
+1930;30;"van"|NLNumber|"tot":"tot en met"|NLNumber|"v.chr.":"n.chr.":"na christus":"voor christus";*|+NLTime|*|NLAdvTime|Join;
+/*		1930. Dat gebeurde tijdens de Tang-dynastie (van 618 tot 907 na Christus).
+1929;30;NLNumber|"v.chr.":"n.chr.":"na christus":"voor christus":"geleden";NLAdvTime|Join;
+/*		1929. In de Commentarii rerum in Gallia gestarum beschrijft de generaal Julius Caesar zijn gevechten in 57 v.Chr. tegen de Belgae. 'Het is van 1991 geleden dat België nog de top-15 haalde.
 1766;30;NLPrepTime|NLYearnum;*|NLTimeconcept+NLYearnum+NLTime;make year number time concept so it can be joined with other time indications in the following rules
 /*		1766. Rond 1050 brak een periode van economische groei aan.
 
@@ -305,7 +341,6 @@
 /*		577. Opgemaakt te Halen op 17 december 2014. NOT. Het fonds verkocht op donderdag 20 augustus meer dan 1,3 miljoen aandelen. De organisatie meldde maandag verder dat het uiterlijk 1 november aanstaande een besluit neemt over de vraag.
 579;30;NLDay|NLNumberConcept|NLMonth;NLAdvTime+NLDate|Join|Join;
 /*		579. Volgende week maandag 31 augustus loopt het woonrecht af in Doel.
-
 584;30;NLNumberConcept|NLMonth;NLAdvTime+NLMonth+NLDate|Join;
 /*		584. De senatrice stelt zich bij de voorzittersverkiezingen van 27 maart kandidaat. Tussen 16 november vorig jaar en 29 februari 2010 controleerde de Overheidsdienst 174 zonnecentra.
 585;30;NLMonth|NLYearnum;NLAdvTime+NLMonth|Join;
@@ -314,6 +349,8 @@
 /*		1486. De volgende voorstelling vindt plaats op vrijdag 25-01-2019 in Turnhout.
 
 /*	detect time indications with time concepts (e.g. 'day', 'week', 'year')
+1939;30;NLPrepTime:"met"|.NLArt|NLHoliday;*|*|NLAdvTime;
+/*		1939. Tegenover die ene beursintroductie in Brussel van een half miljoen euro staan sinds Nieuwjaar 298 miljoen euro aan kapitaalverhogingen.
 1779;30;"dezelfde"|NLTimeconcept|."van"|NLAdvTime:NLYearnum;NLAdvTime|+Join|+Join|+Join;
 /*		1779. Het bedrijf slaagde erin de nettowinst met 20 procent op te krikken tegenover dezelfde periode een jaar geleden. In dezelfde periode een jaar geleden bedroeg de groei nog 3,1%.
 1789;30;NLBeginTime:NLOrdnum|NLMonth:"maand"+^NLAdvTime;NLAdvTime+NLMonth|+Join;
@@ -328,7 +365,7 @@
 /*		1753. In hetzelfde kwartaal vorig jaar bedroeg deze nog 3,1%. Wie niet meteen slaagde voor zijn theoretisch rijexamen, kon deze week dezelfde dag proberen tot het lukte. NOT. Het bedrijf heeft de afgelopen jaren ieder jaar een aantal overnames gedaan. In het laatste kwartaal van 2007 boekte hij een nettowinst van EUR 175 miljoen, vergeleken met een verlies van EUR 1 miljoen in het vierde kwartaal vorig jaar.
 1846;30;"op"|NLBeginTime:NLOrdnum:NLDempron|"dag";*|NLAdvTime+NLDay|+Join;add Day to be used in Expansion rules in phase 55
 /*		1846. Net op die dag plaatste het bedrijf zijn aandelen in de markt.
-1744;30;NLDempron|NLMonth:NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
+1744;30;NLDempron+^"dat"|NLMonth:NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
 /*		1744. De Nederlandse brandwondencentra hebben dit jaar weer veel mensen opgenomen met brandwonden die veroorzaakt zijn door een ongeval met een barbecue.
 1748;30;"een":NLNumber:NLQuantity|NLTimeconcept|"langer";NLAdvTime|+Join|+Join;
 /*		1748. Wie van Gent naar Brussel rijdt doet daar anderhalf uur langer over.
@@ -350,9 +387,13 @@
 /*		1755. De economie van de eurozone groeide in het eerste kwartaal 0,8 procent tegenover het vierde kwartaal van 2007. Daarvan zouden er in het eerste kwartaal 8 worden uitgevoerd. Daarvan zouden er in het eerste kwartaal 8 worden uitgevoerd.
 1672;30;NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|NLTimeconcept;NLTimeconcept+CStarter+NLTime|+Join|+Join;time indication as beginconcept
 /*		1672. De vrouw had al een paar dagen last van zogenoemde oefenweeën. De proefpersonen leden aan matige hoge bloeddruk en moesten dagelijks een half uur naar (trage) muziek luisteren. Na één maand was de systolische bloeddruk met gemiddeld 3 punten gezakt. De batterij gaat ongeveer 5 hele dagen mee. Vanaf het vierde kwartaal stellen we prijsdalingen vast gedurende meerdere opeenvolgende kwartalen. NOT. Een stijging van 21% vergeleken met EUR 133,7 miljoen vorig jaar.
+1931;30;NLNumber:NLQuantity:NLOrdnum|NLAttradj:NLPartVerb:NLPartAdj+^"vorig"|NLTimeconcept;+NLTime|NLAttradj|*;
+/*		1931. Na drie intensieve weken mocht hij mee naar huis. Indien het een huis betreft, voor twee vervallen jaren.
 1897;30;NLNiet|.NLAdvDegree|NLBeginTime|NLTimeconcept+^NLAdvTime;NLCon+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;'niet' should get label Con for further processing of Negation
 /*		1897. Ik hoop ook dat op niet al te lange termijn een fundamentele en leesbare tekst zal worden opgesteld. 
-1747;30;NLBeginTime:NLOrdnum|NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
+1922;30;NLBeginTime|NLTimeconcept|NLAndOr|NLTimeconcept;*|*|+NLAddExpansion|*;
+/*		1922. Dat gebeurt waarschijnlijk de komende weken of maanden, maar het kan tot een jaar duren.
+1747;30;NLBeginTime|NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
 /*		1747. De wind is, vergeleken met de toestand afgelopen weekend, sterk in kracht afgenomen maar de situatie is allerminst geruststellend.
 
 /*	further join combinations of time indications
@@ -372,8 +413,8 @@
 /*		1760. Het was niet het ideale begin van het jaar.
 1758;30;"begin":"einde":"eind":"midden"|"van"|."de":"het"|NLTimeconcept:NLAdvTime:NLMonth;NLAdvTime|+Join|+Join|+Join;
 /*		1758. Daardoor kan ook deze club geen wedstrijden organiseren op het einde van de zomer. Maar op het eind van de negentiende eeuw scheurde het museum zich af. In het midden van de jaren tachtig werd een nieuwe wijk ontworpen door de architect.
-1847;30;NLAdvTime|"van"|."de":"het"|NLTimeconcept:NLAdvTime+^NLDate;^NLAdvTime|+Join|+Join|+Join;
-/*		1847. Het ongeval gebeurde op 10 mei van vorig jaar op de Brusselse ring.
+1847;30;NLAdvTime:"rest"|"van"|."de":"het"|NLTimeconcept:NLAdvTime+^NLDate;^NLAdvTime|+Join|+Join|+Join;
+/*		1847. Het ongeval gebeurde op 10 mei van vorig jaar op de Brusselse ring. Voor de rest van het lopende boekjaar gaf het bedrijf een sterke verwachting af.
 1761;30;NLMonth|"van"|NLAdvTime;NLAdvTime|+Join|+Join;
 /*		1761. Om 16.00 komen de hangende huizenverkopen over januari van dit jaar naar buiten.
 1778;30;NLAttradj|"periode"|."van"|NLAdvTime:NLYearnum;*|NLTimeconcept+NLTime|+Join|+Join;
@@ -386,8 +427,8 @@
 /*		1769. Met de subsidie kunnen tussen 2009 en 2013 vijftig studenten promotieonderzoek doen.
 1771;30;"van":"tot":"over"|NLYearnum|^NLCon;*|NLAdvTime+NLYearnum|*;
 /*		1771. In economisch opzicht was er zelfs sprake van een algemene malaise die tot ca. 1475 duurde. Een ingrijpende ramp was de stormvloed van 1134, waarbij Zeeland in een archipel veranderde. NOT. Het RIVM schat dat 600 tot 1600 mensen rond Schiphol een verhoogde bloeddruk door vliegtuiggeluid hebben.
-1767;30;NLPrepTime+^"over"|NLYearnum;*|NLAdvTime+NLYearnum;make year number beginendconcept after certain prepositions (after rules to join year number with other time indications)
-/*		1767. Het bedrijf verwierf in 2007 nieuwe opdrachten voor een bedrag van EUR2,9 miljard. NOT. In een samenwerkingsproject van de Nederlandse kinderartsen werden perinatale gegevens bijeengebracht over 1338 kinderen.
+1767;30;NLPrepTime|NLYearnum;*|NLAdvTime+NLYearnum;make year number beginendconcept after certain prepositions (after rules to join year number with other time indications)
+/*		1767. Het bedrijf verwierf in 2007 nieuwe opdrachten voor een bedrag van EUR2,9 miljard.
 1706;30;NLArt|NLDay|NLAttradj|NLCon;*|NLAttradj|NLAttradj|*;noun phrase
 /*		1706. Het zaterdagmorgen gelanceerde ruimteveer Discovery heeft zich maandagochtend gekoppeld aan het Internationaal Ruimtestation ISS voor een logistieke opdracht en een beperkte bemanningsruil.
 
@@ -1756,101 +1797,6 @@
 /*		1373. Als de buitenlandse vraag in de komende kwartalen terugvalt, zal de groei weinig steun ondervinden van de consumentenbestedingen.
 
 
-/* PHASE 55: TIME ATTRIBUTE EXPANSION
-/* ==================================
-/* Preparation: remove Time attribute for Season and Time of day without time meaning
-1818;55;NLAttradj|NLSeason:NLTimeofday;*|-NLTime;
-/*		1818. Economen wezen toen onder andere de zachte winter aan als verklaring. Tulpen kunnen niet in een warm klimaat worden gekweekt, omdat ze een koude nacht en een koude winter nodig hebben om te kunnen groeien.
-1819;55;NLPrep|NLArt|NLAttradj|NLSeason:NLTimeofday;*|*|*|+NLTime;correction of r1818
-/*		1819. Ze keek op de partijbijeenkomst in Nieuwpoort vooruit naar het politieke najaar.
-
-/* Add expansion for 'om' plus HOUR
-1822;55;"om"+^NLTimeBegin|NLHour:NLDigitaltime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
-/*		1822. De verkoop van nieuwe woningen volgt om 16 uur. Patiënt overlijdt om 17u10.
-1826;55;"om"+NLAddExpansion+^NLTimeBegin|NLPathRelevant|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1826. Het cijfer van de bevolking van elke kieskring wordt om de tien jaar vastgesteld door een volkstelling of door enig ander middel, bepaald door de wet.
-
-/* Add expansion for 'voor het eerst'
-1828;55;"voor het eerst"|"in"|NLTimeconcept:NLCon+NLTime|.typeConcept|^typeConcept;+NLTimeBegin+NLTime|*|*|*|+NLTimeStop;
-/*		1828. 2009 is een kantelmoment, voor het eerst in jaren stellen we een negatieve evolutie vast van de gemiddelde prijs. In de bouw lijkt het dieptepunt bereikt: voor het eerst in meer dan een jaar tijd verbeterde deze deelindicator voor twee maanden op rij.
-1831;55;"voor het eerst"|"sinds"|NLAdvTime|^NLAnyLabel;+NLTimeBegin+NLTime|*|*|+NLTimeStop;
-/*		1831. De index nestelde zich voor het eerst sinds oktober vorig jaar comfortabel boven de 2.300 punten-grens.
-
-/* Add expansion after specific prepositions (including range of numbers)
-1841;55;"van"+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|"tot":"tot en met"|.NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1841. De bus rijdt alleen op werkdagen, van 6 tot 21 uur. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Geringe hoogteverschillen komen voor in het oosten en zuiden van het land, grotendeels veroorzaakt tijdens de voorlaatste ijstijd, het Saalien van 238.000 tot 128.000 jaar geleden.
-1857;55;"van"+^NLTimeBegin|*NLTime|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1857. Het officiële vertrekpunt van de route is een vierkantshoeve waar men van woensdag tot en met zondag telkens van 10 tot 18 uur terecht kan voor uitleg. Van 1989 tot 1994 zetelde hij in het Europees parlement.
-1840;55;^NLTimeBegin|NLNumber+NLAddExpansion|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;*|+NLTimeBegin|*|*|+NLTimeStop;
-/*		1840. We raden haar aan om 4 tot 6 weken geen sport te doen. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. 
-1850;55;"op"+^NLTimeBegin|NLDay|NLComma|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1850. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag.
-1851;55;"op"+^NLTimeBegin|NLNumber|NLComma|NLNumber|NLAndOr|NLAdvTime+NLMonth|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1851. Kunstenaars en experts komen samen op 24, 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten.
-1849;55;"op"+^NLTimeBegin|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1849. De trekkingen van de lotto zijn op donderdag en zaterdag.
-1848;55;"op":"tussen"+^NLTimeBegin|NLNumber|NLAndOr|NLMonth:NLHour|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1848. Kunstenaars en experts komen samen op 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten. Op weekdagen piekt de verkoop tussen 16 en 17 uur.
-1845;55;"op"+^NLTimeBegin|NLAdvTime+NLDay:NLMonth:NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
-/*		1845. Hoewel hij er nogal weigerachtig tegenover staat, wordt hij toch bedacht met een kleine muzikale hommage op 16 juli om 15.00 uur.
-1858;55;"op"+NLAddExpansion+^NLTimeBegin|."een"|NLCon:NLTimeconcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1858. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Momenteel staat hij nog altijd op negen seconden van zijn opvolger. NOT. De officier bepaalde haar eis gisteren op vier jaar cel.
-1870;55;"op"+^NLTimeBegin|"een":"de"|.NLAttradj|NLTimeconcept+^NLSeason|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1870. Of een stevige pasta op de avond vóór de koers. NOT. De lente volgt op de winter en wordt gevolgd door de zomer.
-1869;55;"op"+^NLTimeBegin|.NLArt|.NLAttradj|NLAdvTime+^NLTimes|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1869. Maar op het eind van de negentiende eeuw scheurde het museum zich af. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. NOT. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag. NOT. De totale overnameprijs is gebaseerd op circa vijf maal de EBIT en wordt in contanten voldaan.
-
-/* Expansion for consecutive time indications (including range of numbers)
-1864;55;NLPrep+NLPrepTime+^NLTimeBegin|NLArt|*NLTime|NLAndOr|NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|+NLTimeStop;
-/*		1864. In de jaren '50 en '60 van de vorige eeuw had het paard ook al een naam: "Majestueuzo".
-1836;55;NLPrep+NLPrepTime:"op"+^NLTimeBegin|NLArt|*NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1836. Sinterklaas en zijn helper komen volgens de overlevering in de nacht van 5 december in Nederland en 6 december in België langs de schoorsteen binnen in alle huizen om geschenken te brengen voor de kinderen die er wonen. Het IT-bedrijf heeft in het eerste kwartaal van zijn gebroken boekjaar 18 procent minder omzet geboekt. Op de eerste dag van het nieuwe schooljaar werd, geheel volgens traditie, de vlag gehesen. Deze maat was proefondervindelijk ontstaan en passend bij de gemiddelde lengte van wielrenners in de jaren vijftig en zestig in de 20e eeuw.
-1868;55;NLTimeconcept:NLBeginconcept|"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1868. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt. De eerste dag van de meteorologische lente. NOT. De balanstraining bestond uit drie trainingssessies per week van maximaal dertig minuten.
-1856;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|+NLTimeStop;
-/*		1856. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
-1839;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1839. Dat moest het mogelijk maken dat militairen hun volledige werkweek presteerden in vier in plaats van vijf dagen.
-1888;55;NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1888. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
-1889;55;NLNumber:NLOrdnum+NLAddExpansion|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|+NLTimeStop;
-/*		1889. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
-1837;55;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1837. De patiënt wordt op 29 januari 2006 in de vroege morgen opgenomen als een polytrauma patiënt na een verkeersongeval.
-1855;55;"nacht"|"van"|*NLTime|"op"|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1855. Nacht van 19/6 op 20/6: zelf extubatie met opgeblazen ballon. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt.
-1835;55;NLPrep+NLPrepTime+^NLTimeBegin|*NLTime|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime+^NLAttradj|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1835. Daarna werden in december 2002 en begin januari 2003 de nodige miljoenen overgemaakt. Tulpenbollen worden gewoonlijk in oktober en november geplant. De omzet bedroeg over het vierde kwartaal EUR1,008 miljard tegen EUR956,5 miljoen over dezelfde periode in 2006. NOT. Raadpleegt via spoedopname tijdens nacht wegens plots opgetreden blafhoest.
-1833;55;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1833. In het recyclagebedrijf, dat wagens en metalen recycleert, is maandag kort voor de middag een omvangrijke brand ontstaan.
-1815;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1815. De service provider gaf meer inzicht in de groei van het aantal abonnees in het fiscale vierde kwartaal, en dat wordt door de markt positief ontvangen. De bloeiperiode vond plaats in de 'gouden' zeventiende eeuw. Het verhaal dat zich binnen de 24 uur voltrekt, speelt zich af in Mexico.
-1821;55;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1821. Het vertrouwen van de ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen. Indien de griep in de komende weken sterke uitbreiding zou nemen in ons land, zal de overheid overschakelen naar een distributiesysteem waarbij de huisartsen rechtstreeks bevoorraad worden. Het bedrijf staat woensdag rond 10.45 uur 1,1% hoger op EUR34,65.
-1873;55;"voor"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1873. Het vertrouwen van de Belgische ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen.
-1866;55;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLAdvStruct:NLArt:NLAttradj:NLGeen|."periode"|*typeConcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1866. Eerder raakte al bekend dat de Duitse economie in het eerste kwartaal het sterkst groeide in twaalf jaar tijd. Na twaalf dagen Intensieve Zorgen kan hij getransfereerd worden naar de afdeling Thoracovasculaire Heelkunde voor verdere follow up. De pers zit hem op de hielen, want het is nu al de zoveelste diefstal in nog geen week tijd. 
-1880;55;NLDay|"tot":"tot en met"|NLDay|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
-/*		1880. Sinds 1 september 2008 rijdt de parkshuttle weer maandag tot en met vrijdag.
-1881;55;NLMonth|"tot":"tot en met"|NLMonth|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
-/*		1881. In de periode januari tot juni steeg de verkoop van de fotoboeken met 75 procent.
-
-/* Expand further left
-1853;55;NLAdvTime+^NLTimeBegin|NLTimeBegin;+NLTimeBegin|*;
-/*		1853. Donderdag om half twaalf werd de laatste stembus geleegd.
-
-/* Move attribute markers to relevant entity
-1863;55;NLCon:NLTimeconcept+NLTime|.typeConcept+^NLTime:NLTimeStop|typeConcept+NLTimeStop|.typeConcept|typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|-NLTimeStop|*|+NLTimeStop;correction: move TimeStop to next relevant entity when a Time attribute is on the same Concept
-/*		1863. Dit zou dus wel eens kunnen betekenen dat mensen eigenlijk maar zo'n 4 tot 5 uur slaap nodig hebben per nacht. Na een presentatie over de batterijstrategie van het concern schoot het aandeel in enkele dagen tijd bijna 20 procent hoger.
-1867;55;typeConcept+NLTime|.typeConcept+^NLTimeStop|typeConcept+NLTimeStop|.typeConcept|^typeConcept;*|*|-NLTimeStop|*|+NLTimeStop;
-/*		1867. Vooral het duurdere segment, de villa's, kenden een sterke prijsdalingen van 5,6 procent in een jaar tijd. Na een jaar afwezigheid - nodig om me op te laden voor een vervolg van mijn theaterdroom - kom ik een zeer persoonlijk programma.
-1816;55;NLTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|+NLTimeStop;
-/*		1816. De Amerikaanse keten heeft in het vierde kwartaal van het gebroken boekjaar 2008/09 de nettowinst met 16 procent zien stijgen. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
-
-/* Clean-up
-1854;55;NLTimeBegin+NLTimeStop;-NLTimeStop;
-/*		1854. Ik heb een afspraak gemaakt op donderdag 04.11.2004 om 14.00 uur.
 
 
 /* PHASE 60: DETECT ENUMERATIONS
@@ -1955,6 +1901,149 @@
 /*		1386. De besmetting wordt niet alleen van de moeder op het jong overgebracht, maar ook via de velden en de weilanden.
 1392;63;NLRelAux|NLPartrel|NLVerb+^NLRelAux+^NLmAux;*|*|+NLPBegin;
 /*		1392. Ook als die diagnose wordt bijgesteld ziet het er niet goed uit voor de 29-jarige Pool.
+
+/* PHASE 64: TIME ATTRIBUTE EXPANSION
+/* ==================================
+/* Preparation: remove Time attribute for Season and Time of day without time meaning
+1818;64;NLAttradj|NLSeason:NLTimeofday;*|-NLTime;
+/*		1818. Economen wezen toen onder andere de zachte winter aan als verklaring. Tulpen kunnen niet in een warm klimaat worden gekweekt, omdat ze een koude nacht en een koude winter nodig hebben om te kunnen groeien.
+1819;64;NLPrep|NLArt|NLAttradj|NLSeason:NLTimeofday;*|*|*|+NLTime;correction of r1818
+/*		1819. Ze keek op de partijbijeenkomst in Nieuwpoort vooruit naar het politieke najaar.
+
+/* Add expansion for 'om' plus HOUR
+1822;64;"om"+^NLTimeBegin|NLHour:NLDigitaltime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1822. De verkoop van nieuwe woningen volgt om 16 uur. Patiënt overlijdt om 17u10.
+1826;64;"om"+NLAddExpansion+^NLTimeBegin|NLPathRelevant|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1826. Het cijfer van de bevolking van elke kieskring wordt om de tien jaar vastgesteld door een volkstelling of door enig ander middel, bepaald door de wet.
+
+/* Add expansion for 'voor het eerst'
+1828;64;"voor het eerst"|"in"|NLTimeconcept:NLCon+NLTime|.typeConcept|^typeConcept;+NLTimeBegin+NLTime|*|*|*|+NLTimeStop;
+/*		1828. 2009 is een kantelmoment, voor het eerst in jaren stellen we een negatieve evolutie vast van de gemiddelde prijs. In de bouw lijkt het dieptepunt bereikt: voor het eerst in meer dan een jaar tijd verbeterde deze deelindicator voor twee maanden op rij.
+1831;64;"voor het eerst"|"sinds"|NLAdvTime|^NLAnyLabel;+NLTimeBegin+NLTime|*|*|+NLTimeStop;
+/*		1831. De index nestelde zich voor het eerst sinds oktober vorig jaar comfortabel boven de 2.300 punten-grens.
+
+/* Add expansion after specific prepositions (including range of numbers)
+1921;64;"tussen"|*NLTime|"en":"tot"|*NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1921. De kaarten werden tussen eind 2006 en midden 2008 gekopieerd. Ergens tussen 3,5 tot 4,5 miljard jaar geleden ontstond er leven op aarde.
+1841;64;"van"+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|"tot":"tot en met"|.NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1841. De bus rijdt alleen op werkdagen, van 6 tot 21 uur. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Geringe hoogteverschillen komen voor in het oosten en zuiden van het land, grotendeels veroorzaakt tijdens de voorlaatste ijstijd, het Saalien van 238.000 tot 128.000 jaar geleden.
+1857;64;"van"+^NLTimeBegin|.NLArt|*NLTime|"tot":"tot en met"|."in":NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1857. Het officiële vertrekpunt van de route is een vierkantshoeve waar men van woensdag tot en met zondag telkens van 10 tot 18 uur terecht kan voor uitleg. Van 1989 tot 1994 zetelde hij in het Europees parlement. Pompeï was ook de naam van een Romeinse provinciestad met ongeveer 20.000 inwoners die bestond van de 7e eeuw voor Christus tot in de eerste eeuw na Christus.
+1840;64;^NLTimeBegin|NLNumber+NLAddExpansion|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;*|+NLTimeBegin|*|*|+NLTimeStop;
+/*		1840. We raden haar aan om 4 tot 6 weken geen sport te doen. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. 
+1926;64;typeConcept:typeBeginEndConcept+NLTime|"op"|*NLTime|^NLAnyLabel;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1926. De camera's bestrijken de volledige oppervlakte en zullen 24u op 24 en 7 dagen op 7 filmen.
+1850;64;"op"+^NLTimeBegin|NLDay|NLComma|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1850. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag.
+1851;64;"op"+^NLTimeBegin|NLNumber|NLComma|NLNumber|NLAndOr|NLAdvTime+NLMonth|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1851. Kunstenaars en experts komen samen op 24, 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten.
+1938;64;"op"+^NLTimeBegin|NLDate|NLAndOr|NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1938. Lichte dooi met zacht ijs was er tijdens de tochten op 2 januari 1909 en 7 februari 1912.
+1849;64;"op"+^NLTimeBegin|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1849. De trekkingen van de lotto zijn op donderdag en zaterdag.
+1848;64;"op":"tussen"+^NLTimeBegin|NLNumber|NLAndOr|NLMonth:NLHour|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1848. Kunstenaars en experts komen samen op 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten. Op weekdagen piekt de verkoop tussen 16 en 17 uur.
+1845;64;"op"+^NLTimeBegin|NLAdvTime+NLDay:NLMonth:NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1845. Hoewel hij er nogal weigerachtig tegenover staat, wordt hij toch bedacht met een kleine muzikale hommage op 16 juli om 15.00 uur.
+1858;64;"op"+NLAddExpansion+^NLTimeBegin|."een"|NLCon:NLTimeconcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1858. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Momenteel staat hij nog altijd op negen seconden van zijn opvolger. NOT. De officier bepaalde haar eis gisteren op vier jaar cel.
+1870;64;"op"+^NLTimeBegin|."een":"de":"niet"|.NLAttradj|NLTimeconcept+^NLSeason|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1870. Of een stevige pasta op de avond vóór de koers. Ik hoop ook dat op niet al te lange termijn een fundamentele en leesbare tekst zal worden opgesteld. NOT. De lente volgt op de winter en wordt gevolgd door de zomer.
+1869;64;"op"+^NLTimeBegin|.NLArt|NLAdvTime+^NLTimes|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1869. Maar op het eind van de negentiende eeuw scheurde het museum zich af. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. NOT. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag. NOT. De totale overnameprijs is gebaseerd op circa vijf maal de EBIT en wordt in contanten voldaan.
+1917;64;"aan":"bij"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1917. De orderportefeuille is licht gedaald ten opzichte van het recordniveau aan het einde van 2007. De vrouwen komen hier bij het begin van de zomer om te bruinen. 
+
+/* Expansion for consecutive time indications (including range of numbers)
+1915;64;typeConcept:typeBeginEndConcept+NLTime|NLAndOr+NLAddExpansion|typeConcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1915. De studie bevroeg de ouders van 5.000 kinderen die zes maanden en één jaar na de geboorte een vragenlijst moesten invullen. Dat gebeurt waarschijnlijk de komende weken of maanden, maar het kan tot een jaar duren.
+1864;64;NLPrep+NLPrepTime+^NLTimeBegin|NLArt|*NLTime|NLAndOr|NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|+NLTimeStop;
+/*		1864. In de jaren '50 en '60 van de vorige eeuw had het paard ook al een naam: "Majestueuzo".
+1836;64;NLPrep+NLPrepTime:"op"+^NLTimeBegin|.NLArt|*NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1836. Sinterklaas en zijn helper komen volgens de overlevering in de nacht van 5 december in Nederland en 6 december in België langs de schoorsteen binnen in alle huizen om geschenken te brengen voor de kinderen die er wonen. Het IT-bedrijf heeft in het eerste kwartaal van zijn gebroken boekjaar 18 procent minder omzet geboekt. Op de eerste dag van het nieuwe schooljaar werd, geheel volgens traditie, de vlag gehesen. Deze maat was proefondervindelijk ontstaan en passend bij de gemiddelde lengte van wielrenners in de jaren vijftig en zestig in de 20e eeuw.
+1868;64;NLTimeconcept|NLPrepTime:"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1868. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt. In de vergelijkbare periode in 2007 was dat 0%. NOT. De balanstraining bestond uit drie trainingssessies per week van maximaal dertig minuten.
+1940;64;NLBeginconcept+NLTime|NLPrepTime:"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1940. De eerste dag van de meteorologische lente. De dagen in de lente worden ten opzichte van de voorgaande winter langer, en het zonlicht wordt sterker.
+1856;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|+NLTimeStop;
+/*		1856. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
+1839;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1839. Dat moest het mogelijk maken dat militairen hun volledige werkweek presteerden in vier in plaats van vijf dagen.
+1888;64;NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1888. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1889;64;NLNumber:NLOrdnum+NLAddExpansion|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1889. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1837;64;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1837. De patiënt wordt op 29 januari 2006 in de vroege morgen opgenomen als een polytrauma patiënt na een verkeersongeval.
+1855;64;"nacht"|"van"|*NLTime|"op"|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1855. Nacht van 19/6 op 20/6: zelf extubatie met opgeblazen ballon. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt.
+1835;64;NLPrep+NLPrepTime+^NLTimeBegin|*NLTime|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime+^NLAttradj|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1835. Daarna werden in december 2002 en begin januari 2003 de nodige miljoenen overgemaakt. Tulpenbollen worden gewoonlijk in oktober en november geplant. De omzet bedroeg over het vierde kwartaal EUR1,008 miljard tegen EUR956,5 miljoen over dezelfde periode in 2006. NOT. Raadpleegt via spoedopname tijdens nacht wegens plots opgetreden blafhoest.
+1833;64;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1833. In het recyclagebedrijf, dat wagens en metalen recycleert, is maandag kort voor de middag een omvangrijke brand ontstaan.
+1815;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1815. De service provider gaf meer inzicht in de groei van het aantal abonnees in het fiscale vierde kwartaal, en dat wordt door de markt positief ontvangen. De bloeiperiode vond plaats in de 'gouden' zeventiende eeuw. Het verhaal dat zich binnen de 24 uur voltrekt, speelt zich af in Mexico.
+1821;64;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1821. Het vertrouwen van de ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen. Indien de griep in de komende weken sterke uitbreiding zou nemen in ons land, zal de overheid overschakelen naar een distributiesysteem waarbij de huisartsen rechtstreeks bevoorraad worden. Het bedrijf staat woensdag rond 10.45 uur 1,1% hoger op EUR34,65. NOT. We kunnen niet spreken van een goed rapport voor 2009.
+1873;64;"voor"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1873. Het vertrouwen van de Belgische ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen.
+1866;64;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLAdvStruct:NLArt:NLAttradj:NLGeen|."periode"|*NLCon:NLTimeconcept:NLNumber:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1866. Eerder raakte al bekend dat de Duitse economie in het eerste kwartaal het sterkst groeide in twaalf jaar tijd. Na twaalf dagen Intensieve Zorgen kan hij getransfereerd worden naar de afdeling Thoracovasculaire Heelkunde voor verdere follow up. De pers zit hem op de hielen, want het is nu al de zoveelste diefstal in nog geen week tijd. 
+1880;64;NLDay|"tot":"tot en met"|NLDay|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1880. Sinds 1 september 2008 rijdt de parkshuttle weer maandag tot en met vrijdag.
+1881;64;NLMonth|"tot":"tot en met"|NLMonth|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1881. In de periode januari tot juni steeg de verkoop van de fotoboeken met 75 procent.
+
+/* Expand further left
+1853;64;NLAdvTime+^NLTimeBegin|NLTimeBegin;+NLTimeBegin|*;
+/*		1853. Donderdag om half twaalf werd de laatste stembus geleegd.
+
+/* Expand to non-time-related Concepts
+1912;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+^NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;add expansion
+/*		1912. Eén jaar na de bankencrisis blijkt dat de grootbanken hun personeelsbeleid in België scherp hebben bijgestuurd.
+1913;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+^NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|*|*|*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1913. Een maand na de lancering van het sms-ticket heeft de vervoersmaatschappij al 50.000 sms-tickets verkocht.
+1910;64;"dag"|"van"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1910. Dat zegt weinig over het weer op de dag van het evenement en de kwaliteit van het ijs. 
+1908;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van"|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|*|*|*|*|*|*|+NLTimeStop;expand further to the right
+/*		1908. De verkiezing wordt, behoudens in geval van ontbinding der kamer, gehouden binnen drie maanden na de verkiezing van de leden van provinciale staten. 
+1907;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|*|*|*|+NLTimeStop;expand further to the right
+/*		1907. De behandeling dient in ieder geval binnen de 48 uur na optreden van de symptomen te worden gestart. De nieuwe kamers komen binnen vier maanden na het overlijden of de afstand in verenigde vergadering bijeen ten einde te besluiten omtrent de benoeming van een Koning. 
+1906;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1906. Met name in het eerste jaar na een enkelverstuiking bestaat er een verhoogd risico op herhaling van dit letsel. In de maand vóór de herdenking organiseren wij altijd een retrospectieve hier in Hollywood, en dan zit de zaal afgeladen vol. NOT. Patiënt werd opgenomen op 24 juli na een val van een ladder ongeveer 6 meter hoog.
+1941;64;"tijdens":"gedurende"+typeRelation|.NLArt:NLPoss:NLAttradj|*typeConcept|"van"|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"naar":"en":"of"|.NLArt|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|*|+NLTimeStop;
+/*		1941. Tijdens de eerste vrije vergadering van de Staten van Holland werd Oranje bevestigd als stadhouder. Zijn leven speelde zich af tijdens de overgang van de Romeinse Republiek naar het keizerrijk. Tijdens de regeringen van de toenmalige premiers Rabin en Peres van 1992 tot 1996.
+1937;64;"tijdens":"gedurende"+typeRelation|.NLArt:NLPoss:NLAttradj|*typeConcept|"van"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1937. Tijdens de crisis van de derde eeuw verdween het centrale gezag vrijwel geheel.
+1936;64;"tijdens":"gedurende"+typeRelation|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1936. Tijdens de Franse Revolutie was het religieus verzet zeer sterk.
+1942;64;NLPrepTime:"op"+typeRelation|NLArt|NLTimeconcept|"dat"|*^NLPBegin:SEnd|NLPBegin:SEnd;+NLBeginrel+NLTimeBegin|*|*|-NLTimeStop|*|+NLTimeStop;
+/*		1942. Tegenwoordig is het Sinterklaasfeest een familiefeest en zetten kinderen hun schoen klaar vanaf het moment dat de Sint in het land is aangekomen. De onderhoudsplichtige echtgenoot kan de verzorgingskosten pas inbrengen als onderhoudsuitkering vanaf het jaar dat volgt op dat van de opname. Op het moment dat hij zijn wapen bovenhaalde, kon een alerte voorbijganger hem echter overmeesteren.
+
+/* Expand to time-related subclause
+1909;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLHour|"nadat":"voordat"|.^NLPBegin:SEnd|NLPBegin:SEnd;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1909. En hele mooie dag, want het was prachtig strandweer en de laatste vrije dag voordat de basisscholen in het midden van het land weer begonnen. NOT. Patiënte overlijdt op 05/04/2005 nadat de familie afscheid heeft genomen. NOT. De viering werd ingesteld in 1950 nadat de vergadering alle landen die lid waren van de VN uitnodigde om deze gebeurtenis te vieren. NOT. De politie vond de houten hut rond 3 uur 's nachts nadat er een noodoproep was binnengekomen.
+
+
+/* Move attribute markers to relevant entity
+1863;64;NLCon:NLTimeconcept+NLTime|.typeConcept+^NLTime:NLTimeStop|typeConcept+NLTimeStop|.typeConcept|typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|-NLTimeStop|*|+NLTimeStop;correction: move TimeStop to next relevant entity when a Time attribute is on the same Concept
+/*		1863. Dit zou dus wel eens kunnen betekenen dat mensen eigenlijk maar zo'n 4 tot 5 uur slaap nodig hebben per nacht. Na een presentatie over de batterijstrategie van het concern schoot het aandeel in enkele dagen tijd bijna 20 procent hoger.
+1867;64;typeConcept+NLTime|.typeConcept+^NLTimeStop|typeConcept+NLTimeStop|.typeConcept|^typeConcept;*|*|-NLTimeStop|*|+NLTimeStop;
+/*		1867. Vooral het duurdere segment, de villa's, kenden een sterke prijsdalingen van 5,6 procent in een jaar tijd. Na een jaar afwezigheid - nodig om me op te laden voor een vervolg van mijn theaterdroom - kom ik een zeer persoonlijk programma.
+1816;64;NLTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|+NLTimeStop;
+/*		1816. De Amerikaanse keten heeft in het vierde kwartaal van het gebroken boekjaar 2008/09 de nettowinst met 16 procent zien stijgen. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
+
+/* Remove TimeStop in time span
+1923;64;NLTimeBegin|*^NLTimeStop|NLTimeStop;*|+NLInTimeSpan-NLTimeBegin|*;Remove TimeBegin from other positions than the first position of the span
+/*		1923. Het bedrijf organiseert sinds 1997 in april van de oneven jaren een Toer waarbij alle aangesloten brouwerijen en stekerijen te bezoeken zijn. 
+1924;64;NLTimeBegin;+NLInTimeSpan;also add InTimeSpan to TimeBegin
+/*		1924. Het bedrijf organiseert sinds 1997 in april van de oneven jaren een Toer waarbij alle aangesloten brouwerijen en stekerijen te bezoeken zijn. 
+1925;64;NLTimeStop|*^NLTimeBegin:NLTimeStop|NLTimeStop;-NLTimeStop|*|*;
+/*		1925. Ik heb een afspraak gemaakt op donderdag 04.11.2004 om 14.00 uur. 
+
+/* Clean-up
+1911;64;NLNiet|NLBeginrel+NLPrep+NLTimeBegin;NLBeginrel|-NLBeginrel;correction to keep negation and preposition in time expansion together
+/*		1911. De Koning heeft enkel het recht de Kamer van volksvertegenwoordigers te ontbinden wanneer zij een motie van vertrouwen in de federale Regering verwerpt en niet binnen een termijn van drie dagen een opvolger voor de Eerste Minister voor benoeming aan de Koning voordraagt. 
 
 
 /* PHASE 65: NEGATION ATTRIBUTES
