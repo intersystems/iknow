@@ -18,5 +18,5 @@ Regex(String(Regex64Str, 11)), Regex(String(Regex65Str, 33)), Regex(String(Regex
 Regex(String(Regex68Str, 5)), Regex(String(Regex69Str, 3)), Regex(String(Regex70Str, 7)), Regex(String(Regex71Str, 4)), 
 Regex(String(Regex72Str, 5)), Regex(String(Regex73Str, 4)), Regex(String(Regex74Str, 6)), Regex(String(Regex75Str, 5)), 
 Regex(String(Regex76Str, 5)), Regex(String(Regex77Str, 5)), Regex(String(Regex78Str, 6)), Regex(String(Regex79Str, 17)), 
-Regex(String(Regex80Str, 23)), Regex(String(Regex81Str, 22)), Regex(String(Regex82Str, 32)), Regex(String(Regex83Str, 21)), 
-Regex(String(Regex84Str, 46)), Regex(String(Regex85Str, 21)), Regex()
+Regex(String(Regex80Str, 23)), Regex(String(Regex81Str, 22)), Regex(String(Regex82Str, 32)), Regex(String(Regex83Str, 24)), 
+Regex(String(Regex84Str, 21)), Regex(String(Regex85Str, 21)), Regex(String(Regex86Str, 46)), Regex()

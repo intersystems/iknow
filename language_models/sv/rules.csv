@@ -79,6 +79,9 @@
 1089;15;"-";+SVPunctuation;Punctuation is not assigned automatically since "-" is used in rules
 /*		1089. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
+/* =================================================
+/* PHASE 25: DISAMBIGUATE SPECIFIC WORDS AND PHRASES
+/* =================================================
 
 
 /* *** senare ***
@@ -135,13 +138,23 @@
 479;25;"dagen";SVCon+SVTimeconcept;
 /*		479. Till havs väntas det under morgonen blåsa från syd-sydväst mellan 15-20 m/s men vinden avtar troligen mitt på dagen.
 
+/* *** så länge ***
+/* remark: så länge som = lexrep SVConj, för så länge sedan = lexrep SVAdvTemp+SVAdv, än så länge = lexrep SVAdvTemp+SVAdv
+1301;25;SVSaa|"länge"|^SVAtt+^SVPrep;SVConj|Join|*;
+/*		1301. Så länge vi inte jagar varg kommer antalet att öka.
+1302;25;SVSaa|"länge";SVAdvTime+SVAdv|Join;
+/*		1302. Att vara så länge i Madrid är komplicerat.
 
 615;25;SVAdvDegree|SVIndefart|SVTimeconcept;*|SVNumber|*;
 /*		615. En person som avses i första stycket får bedriva undervisning under högst ett år i sänder.
 
+
 */ ==============
 */ BLOCK 30: TIME
 */ ==============
+
+1310;30;SVTimeconcept|"per"+^SVCon;*|SVPrep;preliminary rule: improve overall treatment of 'per' later
+/*		1310. Dialystiden ökades till 3 timmar per dialystillfälle.
 
 /* FREQUENCY
 1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
@@ -242,6 +255,22 @@
 1298;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept|SVAdvTime;SVAdvTime+SVAdv+SVTime|Join|Join;
 /*		1298. Under året har även en kortare propagandafilm framställts vilken kommer att visas på biograferna under 8 veckor nästa år .
 
+/*1309;30;SVPrep|SVTimeprep|SVNum:SVNumber|SVTimeconcept;*|-SVPrep-SVTimeprep+SVTimemodifier+SVAdvDegree+SVAdv|*|*;disambiguate Timemodifier
+1309;30;SVPrep|SVTimeprep|SVNum:SVNumber|SVTimeconcept;*|JoinReverse|*|*;disambiguate Timemodifier
+/*		1309. 9 av dem har under det senaste året genomförts i Göteborg inom ramen för ett forskningsprojekt som pågått i över 10 år.
+1304;30;SVAgenoun:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept;*|*|-SVTimeprep|*|+SVAgenoun;
+/*		1304. I observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar. Om barnet är under tre månader och man misstänker att barnet har en infektion bör man ringa sjukvårdsrådgivningen eller kontakta vårdcentralen.
+1303;30;^SVAgenoun|SVTimeprep+^SVAgeprep|SVNum:SVNumber|SVTimeconcept|^SVAgenoun;*|*|+SVTime|+SVTime|*;
+/*		1303. Buggen har varit oupptäckt i två år.
+/*1305;30;SVCon+^SVAgenoun|SVTimeprep|SVNum:SVNumber+^SVTime|SVTimeconcept;*|*|+SVTime|+SVTime;
+1305;30;^SVAgenoun|SVTimeprep|SVNum:SVNumber+^SVTime|SVTimeconcept;*|*|+SVTime|+SVTime;
+/*		. Om patienten sedan är fri från cancer under tre år kan det bli aktuellt med njurtransplantation.
+/*1306;30;SVTimeprep|SVNum:SVNumber|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*|*;rules profiler
+/*1306;30;SVNum:SVNumber|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*;rules profiler
+/*1306;30;^SEnd|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*;rules profiler
+1306;30;^SVAgenoun|SVNum:SVNumber:SVIndefart|"till"|SVNum:SVNumber|SVTimeconcept;*|^SVNumber+SVTime|Join|Join|+SVTime;rules profiler
+/*		Han blir borta från spel i fyra till sex veckor.
+
 1287;30;SVTimespan|SVAv|*SVTime:SVDay;JoinReverse|JoinReverse|*;
 /*		1287. Om du äter en halv avokado till din lunch kan det hjälpa till att tanka på energin resten av eftermiddagen, enligt en studie i Nutrition Journal.
 1234;30;SVAdvTemp:SVYearpart:SVTime+^SVYear+^SVTimeprep|SVAdvTime;JoinReverse|*;
@@ -252,7 +281,7 @@
 /*		1236. Restrycket hit är starkt inför vintersäsongen.
 1237;30;SVTimemodifier|SVTime;JoinReverse|*;
 /*		1237. Under nästan hela 1700-talet bar männen håret långt och hopfäst i en hästsvans.
-1241;30;SVAdvTime:SVTimeconcept+SVTime|SVTime;JoinReverse|*;
+1241;30;SVAdvTime:SVTimeconcept+SVTime|SVTime+^SVAdvTimeFreq;JoinReverse|*;
 /*		1241. Det påminner om den magiska färg tomtenissen använder i det teveprogram många tittar på varje julafton ungefär klockan 15.07.
 1250;30;SVAdvTime:SVTimeconcept|SVAdvTemp+SVTimeprep|SVAndOrBut:SVPunctuation:SEnd;+SVTime|Join|*;
 /*		1250. Utvecklingen innebär också ett trendbrott eftersom övriga kvartal under året hade lägre sparande än motsvarande period året före.
@@ -262,12 +291,16 @@
 /*		1274. Från 800-talet e.kr. kan man börja spåra den västerländska konstmusiken i källmaterialet tack vare bevarade notdokument.
 1255;30;SVAdvTime:SVTimeconcept:SVTime|*SVPosttime;+SVTime|Join;
 /*		1255. Kortison gavs i 1 vecka postoperativt.
-1257;30;SVAdvTemp:SVTimeadj|SVTimeprep|SVAdvTime:SVTimeconcept:SVTime;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
-/*		1257. Tidigare i februari hölls nyval i landet.
+1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
+/*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader.
+
+1307;30;SVAdvTime|SVTimeconcept;*|*;rules profiler
 
 1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
 
+/*1303;30;SVAdvTemp+^SVTimeadj+^SVTimeprep;+SVTime;experiment
+/*1303;30;SVTimeprep|SVAdvTemp+^SVTimeadj+^SVTimeprep;*|+SVTime;experiment
 
 /* Expansion
 /* ---------
@@ -295,7 +328,7 @@
 /*		1280. Frågan är bl a hur synen på förvaltningen har utvecklats från 1970-talet till det andra decenniet av 2000-talet.
 /* INTRODUCE LATER: 1290;30;SVTimeconcept|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*
-1272;30;SVTimemodifier|SVTimeprep+SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
+1272;30;SVTimemodifier:SVAdvTemp|SVTimeprep+SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*		1272. Lärarutbildning, med praktisk pedagogik, skedde vid särskilda högskolor sent in i 1900-talet.
 1294;30;SVTimeprep+^"sedan"+^"över"|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*		1294. Vid 10-tiden på måndagen noterades aktien dock något lägre till drygt 137 kronor.
@@ -546,7 +579,8 @@
 /*		713. den gick från ca 15 procent 1980 till över 50 procent 2004.
 714;40;SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 /*		714. Över 20 peteckier på en 2,5 kvadratcentimeters area anses onormalt.
-618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join;
+/*618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join;
+618;40;"över":"under"|SVNum+^SVDecinum|"år"+SVAgenoun;SVCon|Join|Join;
 /*		618. Privat familjesparande av stamceller har varit möjligt i USA i över 20 år och finns i de flesta europeiska länder. Detta gäller dock bara för personer som är under 65 år.
 650;40;SVGen|"andra";*|SVAdj;
 /*		650. Sambandet mellan energi och exergi framgår av termodynamikens andra huvudsats.

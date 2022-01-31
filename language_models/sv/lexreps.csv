@@ -51,6 +51,8 @@
 
 ;;(två|tre|fyra|fem|sex|sju|åtta|nio|tio|elva|tolv) och en halv;;SVNumber;
 ;;(två|tre|fyra|fem|sex|sju|åtta|nio|tio|elva|tolv) och ett halvt;;SVNumber;
+;;en halv;;SVAdj;SVNumber;
+;;ett halvt;;SVAdj;SVNumber;
 
 ;;(1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)-årige;;SVAdj;SVCon;;
 ;;10-årige man;;SVAdj;-;SVCon;
@@ -165,7 +167,7 @@
 ;;genom;;SVPrep;
 ;;, genom att;;SVComma;SVPunctuation;-;SVConj;SVAtt;Join;
 ;;omkring;;SVPrep;SVTimeprep;SVTimemodifier;
-;;under;;SVPrep;SVTimeprep;
+;;under;;SVPrep;SVTimeprep;SVAgeprep;
 ;;vid;;SVPrep;SVTimeprep;
 ;;åt;;SVPrep;
 ;;ty;;SVConj;
@@ -65113,7 +65115,7 @@
 ;;utvalda;;SVPart
 ;;vidbrända;;SVPart
 ;;vridna;;SVPart
-;;vuxna;;SVPartCon;
+;;vuxna;;SVPartCon;SVAgenoun;
 ;;välvda;;SVPart
 ;;åtgångna;;SVPart
 ;;överdrivna;;SVPart
@@ -80758,6 +80760,7 @@
 ;;ändå;;SVAdvStruct;SVAdv;
 ;;ännu;;SVAdvStruct;SVAdv
 ;;in;;SVVerbpt2;
+;;upp till;not always 1 prep, but not too many side-effects;SVPrep;SVTimeprep;SVAgeprep;
 ;;upp;;SVVerbpt2;
 ;;ut;;SVVerbpt2;
 ;;härigenom;;SVAdvStruct;SVAdv;
@@ -81362,7 +81365,7 @@
 
 ;;härnäst;;SVAdvStruct;SVAdv
 ;;jättesällan;;SVInte;SVNegation;
-;;länge;;SVAdvAdj;
+;;länge;;SVAdvAdj;SVAdvTemp;
 ;;normaliter;;SVAdvStruct;SVAdv
 ;;sällan;;SVInte;SVNegation;
 ;;strax;;SVAdvDegree;SVAdv;
@@ -81402,6 +81405,7 @@
 ;;såväl;;SVAdv;
 ;;såvida;;SVConj
 ;;såvitt;;SVConj
+;;så länge som;;SVConj;
 
 ;;inräknas;;SVInf
 ;;leva;;SVInf
@@ -82132,6 +82136,7 @@
 ;;fr.;;SVPrep
 ;;fr.o.m.;;SVPrep
 ;;framemot;;SVPrep
+;;frånsett;;SVPrep;
 ;;gentemot;;SVPrep
 ;;hänemot;;SVPrep
 ;;inemot;;SVPrep
@@ -82143,13 +82148,13 @@
 ;;m.a.p.;;SVPrep
 ;;map;;SVPrep
 ;;medelst;;SVPrep
-;;mellan;;SVPrep
+;;mellan;;SVPrep;SVTimeprep;SVAgeprep;
 ;;mittibland;;SVPrep
 ;;nedemot;;SVPrep
 ;;neremot;;SVPrep
 ;;oppemot;;SVPrep
 ;;till/från;;SVPrep;
-;;till;;SVPrep;SVTimeprep;
+;;till;;SVPrep;SVTimeprep;SVAgeprep;
 ;;uppå;;SVPrep
 ;;uppefter;;SVPrep
 ;;utav;;SVPrep
@@ -90384,6 +90389,10 @@
 ;;leddes in;;SVVerb
 ;;leder in;;SVVerb
 ;;leds in;;SVVerb
+;;leda till;till is not Timeprep or Ageprep here;SVInf;-;SVPrep;
+;;leder till;;SVVerb;-;SVPrep;
+;;ledde till;;SVVerb;-;SVPrep;
+;;lett till;;SVSup;-;SVPrep;
 ;;legat i;;SVSup
 ;;legats i;;SVSup
 ;;leta dig in;;SVVerb
@@ -93449,7 +93458,9 @@
 ;;åratals;;SVTimeconcept;SVCon;
 ;;åren;;SVTimeconcept;SVCon;SVDefnoun;
 ;;året;;SVTimeconcept;SVCon;SVDefnoun;
+;;århundrade;;SVTimeconcept;SVCon;
 ;;århundraden;;SVTimeconcept;SVCon;
+;;århundradena;;SVTimeconcept;SVCon;SVDefnoun;
 ;;århundradet;;SVTimeconcept;SVCon;SVDefnoun;
 ;;årstid;;SVTimeconcept;SVCon;
 ;;årstiden;;SVTimeconcept;SVCon;SVDefnoun;
@@ -93701,6 +93712,8 @@
 ;;helgdag;;SVDay;SVCon;
 ;;helgdagen;;SVDay;SVCon;
 ;;trettondedag jul;;SVDay;SVCon;
+;;valborgsmässoafton;;SVDay;SVCon;
+;;valborg;abbreviation of valborgsmässoafton;SVTimeconcept;SVCon;SVConIfCap;
 ;;eftermiddagen;;SVDay;SVCon;
 ;;förmiddagen;;SVDay;SVCon;
 ;;morgonen;;SVDay;SVCon;
@@ -93977,7 +93990,6 @@
 ;;månader gammalt;;SVAdj;SVCon;
 ;;år gammalt;;SVAdj;SVCon;
 ;;timmar långt;;SVAdj;SVCon;
-;;en halv;;SVAdj;SVNumber;
 ;;fullt;;SVAdvDegree;SVAdv;
 ;;jätte bra;;SVAdvAdj;SVAdvManner;
 ;;har fortsatt;;SVAux;-;SVSup;
@@ -94174,7 +94186,7 @@
 ;;fram;;SVVerbpt2;
 ;;ikapp;;SVVerbpt2;
 ;;ned;;SVVerbpt2;
-;;över;;SVPrep;SVTimeprep;
+;;över;;SVPrep;SVTimeprep;SVAgeprep;
 ;;emot;;SVPrep;
 ;;kom hit;;SVVerb;-;SVAdvDirection;SVAdv;
 ;;komma hit;;SVInf;-;SVAdvDirection;SVAdv;
@@ -95802,6 +95814,8 @@
 
 ;;tidigare;;SVAdvAdj;SVAdvTemp;SVTimeadj;SVPosttime;
 ;;tidigt;;SVAdvAdj;SVAdvTemp;SVTimeadj;
+;;för tidigt;;SVAdvAdj;SVAdvTemp;SVTimeadj;
+;;så tidigt som möjligt;;SVAdvTemp;SVAdv;
 ;;tidvis;;SVAdvTemp;SVAdv
 
 ;;tillfälligtvis;;SVAdvTemp;SVAdv
@@ -95885,6 +95899,7 @@
 ;;lång;;SVAdj;SVPosttime;
 
 ;;per;;SVConIfCap;
+/*new: to be introduced later;;per;;SVConIfCap;SVPrep;
 ;;kvart;;SVCon;
 
 ;;här;;SVAdvPlace;SVAdv;
@@ -96223,10 +96238,26 @@
 ;;mm;;SVUnit;SVCon;
 ;;ppm;;SVUnit;SVCon;
 ;;rpm;;SVUnit;SVCon;
+;;procent;;SVUnit;SVCon;
+
+;;barn;;SVAgenoun;SVCon;
+;;flickor;;SVAgenoun;SVCon;
+;;genomsnittsålder;;SVAgenoun;SVCon;
+;;individer;;SVAgenoun;SVCon;
+;;kvinnor;;SVAgenoun;SVCon;
+;;män;;SVAgenoun;SVCon;
+;;patienter;;SVAgenoun;SVCon;
+;;person;;SVAgenoun;SVCon;
+;;personer;;SVAgenoun;SVCon;
+;;ungdomar;;SVAgenoun;SVCon;
+;;ålder;;SVAgenoun;SVCon;
+;;åldern;;SVAgenoun;SVCon;
+;;åldersgrupperna;;SVAgenoun;SVCon;
+;;åldrar;;SVAgenoun;SVCon;
+;;åldrarna;;SVAgenoun;SVCon;
 
 
-
-
+/* LEXREPS THAT MUST NOT BE COVERED BY REGULAR EXPRESSIONS
 
 ;;konkurrens;;SVCon;
 ;;valkrets;;SVCon;
@@ -96318,7 +96349,7 @@
 ;;medeltidsmänniska;;SVCon;
 ;;medmänniska;;SVCon;
 ;;morgonmänniska;;SVCon;
-;;människa;;SVCon;
+;;människa;;SVCon;SVAgenoun;
 ;;naturmänniska;;SVCon;
 ;;neandertalmänniska;;SVCon;
 ;;niuiska;;SVCon;
@@ -96383,7 +96414,6 @@
 ;;botanistspade;;SVCon;
 ;;tårtspade;;SVCon;
 ;;planteringsspade;;SVCon;
-;;århundrade;;SVCon;
 ;;jade;;SVCon;
 ;;infanterispade;;SVCon;
 ;;signalspade;;SVCon;
@@ -96654,7 +96684,7 @@
 
 
 
-
+/* change later, when possible -> reduce list to 1 lexrep by adding regex .*kudde = Con, .*grädde = Con
 ;;udde;;SVCon;
 ;;kudde;;SVCon;
 ;;ejderdunskudde;;SVCon;
@@ -96673,7 +96703,7 @@
 ;;vispgrädde;;SVCon;
 ;;matlagningsgrädde;;SVCon;
 
-
+/* change later, when possible -> reduce lexrep list by adding regex .*buske = Con and .*handske = Con
 ;;albuske;;SVCon;
 ;;björnbärsbuske;;SVCon;
 ;;blåbärsbuske;;SVCon;
@@ -98316,10 +98346,11 @@
 
 
 
-;;{year01};year-talet;SVYear;
-;;{year01}s;year-talets;SVAdj;SVGen;SVTimeadj;
-;;{year02};year-year or year/year;SVNum;SVYear;
-;;{year03};year-talen;SVYear;
+;;{year01};year-tal;SVYear;
+;;{year02};year-talen;SVYear;
+;;{year03};year-talet;SVYear;
+;;{year03}s;year-talets;SVAdj;SVGen;SVTimeadj;
+;;{year04};year-year or year/year;SVNum;SVYear;
 ;;{date01};yyyy-mm-dd;SVCon;SVDate;
 ;;{date02};dd-mm-yyyy;SVCon;SVDate;
 ;;{date03};yyyy.mm.dd;SVCon;SVDate;
