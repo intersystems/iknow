@@ -157,18 +157,18 @@
 /*		1310. Dialystiden ökades till 3 timmar per dialystillfälle.
 
 /* FREQUENCY
-1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
+1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under":"om"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
 /*		1295. Om man har astmabesvär mer än två gånger per vecka, bör man regelbundet använda inflammationshämmande medel.
 /*1263;30;SVIndefart:SVNum:SVNumber|SVTimeconcept:"gång":"gångar"|"i"|SVTimeconcept;SVAdvFreq+SVAdv+SVTime|Join|Join|Join;
-1263;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join;
-/*		1263. Vi har undersökt kvinnorna två gånger i veckan under första månaden.
+1263;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under":"om"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime-SVAdjpron-SVSubjpron-SVObjpron|Join|Join|Join;
+/*		1263. Vi har undersökt kvinnorna två gånger i veckan under första månaden. Som museibesökare kan man i denna historiska miljö, vissa dagar om året vid klart väder, observera stjärnhimlen.
 1296;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
 /*		1296. Temperatur och nederbörd har mätts mer än tre gånger dagligen.
 1297;30;SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join;
 /*		1297. Denna trappades ned till en underhållsdos om 10 mg två gånger dagligen under de närmaste veckorna.
 
 /* NO TIME ATTRIBUTE
-1248;30;SVNum:SVNumber|*SVCon|"per"|SVTimeconcept:SVDay;-SVYear+SVAdj|*|SVCon-SVConIfCap|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
+1248;30;SVNum:SVNumber:SVIndefart|*SVCon|"per":"om"|SVTimeconcept:SVDay;-SVYear+SVAdj-SVIndefart|*|SVCon-SVConIfCap-SVConj-SVCondition-SVPrep|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
 /*		1248. Ca 1500 kvinnor per år utvecklar en spridd sjukdom.
 1284;30;SVYear|SVUnit;-SVYear+SVNum|*;
 /*		1284. Regnskog är skog med hög årlig nederbörd, åtminstone 1700–2000 millimeter, och hög temperatur, mellan 27 och 35 grader Celsius.
@@ -255,28 +255,22 @@
 1298;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept|SVAdvTime;SVAdvTime+SVAdv+SVTime|Join|Join;
 /*		1298. Under året har även en kortare propagandafilm framställts vilken kommer att visas på biograferna under 8 veckor nästa år .
 
-/*1309;30;SVPrep|SVTimeprep|SVNum:SVNumber|SVTimeconcept;*|-SVPrep-SVTimeprep+SVTimemodifier+SVAdvDegree+SVAdv|*|*;disambiguate Timemodifier
-1309;30;SVPrep|SVTimeprep|SVNum:SVNumber|SVTimeconcept;*|JoinReverse|*|*;disambiguate Timemodifier
+1309;30;SVTimeprep:SVPrep+^"över"|SVTimeprep|SVNum:SVNumber:SVIndefart|SVTimeconcept;*|JoinReverse|*|*;disambiguate Timemodifier, Timeprep:Prep for Timepreps that have AdvPrep as first label
 /*		1309. 9 av dem har under det senaste året genomförts i Göteborg inom ramen för ett forskningsprojekt som pågått i över 10 år.
+1306;30;^SVAgenoun|SVNum:SVNumber:SVIndefart|"till"|SVNum:SVNumber|SVTimeconcept;*|^SVNumber+SVTime|Join|Join|+SVTime;
+/*		Han blir borta från spel i fyra till sex veckor.
 1304;30;SVAgenoun:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept;*|*|-SVTimeprep|*|+SVAgenoun;
 /*		1304. I observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar. Om barnet är under tre månader och man misstänker att barnet har en infektion bör man ringa sjukvårdsrådgivningen eller kontakta vårdcentralen.
-1303;30;^SVAgenoun|SVTimeprep+^SVAgeprep|SVNum:SVNumber|SVTimeconcept|^SVAgenoun;*|*|+SVTime|+SVTime|*;
-/*		1303. Buggen har varit oupptäckt i två år.
-/*1305;30;SVCon+^SVAgenoun|SVTimeprep|SVNum:SVNumber+^SVTime|SVTimeconcept;*|*|+SVTime|+SVTime;
-1305;30;^SVAgenoun|SVTimeprep|SVNum:SVNumber+^SVTime|SVTimeconcept;*|*|+SVTime|+SVTime;
-/*		. Om patienten sedan är fri från cancer under tre år kan det bli aktuellt med njurtransplantation.
-/*1306;30;SVTimeprep|SVNum:SVNumber|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*|*;rules profiler
-/*1306;30;SVNum:SVNumber|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*;rules profiler
-/*1306;30;^SEnd|"till"|SVNum:SVNumber|SVTimeconcept;*|*|*|*;rules profiler
-1306;30;^SVAgenoun|SVNum:SVNumber:SVIndefart|"till"|SVNum:SVNumber|SVTimeconcept;*|^SVNumber+SVTime|Join|Join|+SVTime;rules profiler
-/*		Han blir borta från spel i fyra till sex veckor.
+1303;30;^SVAgenoun|"om":SVTimeprep|SVNum:SVNumber|SVTimeconcept|^SVAgenoun;*|+SVTimeprep|+SVTime|+SVTime|*;+SVTimeprep for 'om'
+/*		1303. Buggen har varit oupptäckt i två år. Om patienten sedan är fri från cancer under tre år kan det bli aktuellt med njurtransplantation.
+1305;30;^SVAgenoun|"om":SVTimeprep|SVIndefart|SVTimeconcept|^SVAgenoun;*|+SVTimeprep|SVNumber+SVTime|+SVTime|*;+SVTimeprep for 'om', ^SVNumber for Indefart
+/*		1305. Buggen har varit oupptäckt i ett år.
+/* NOTE: When merging r1303 and r1305, there are side-effects on "över"+SVNum.
 
 1287;30;SVTimespan|SVAv|*SVTime:SVDay;JoinReverse|JoinReverse|*;
 /*		1287. Om du äter en halv avokado till din lunch kan det hjälpa till att tanka på energin resten av eftermiddagen, enligt en studie i Nutrition Journal.
 1234;30;SVAdvTemp:SVYearpart:SVTime+^SVYear+^SVTimeprep|SVAdvTime;JoinReverse|*;
 /*		1234. Det är en ökning med 25,7 procent jämfört med motsvarande månad förra året. – Under hösten förra året såg utvecklingen väldigt bra ut.
-/*1236;30;SVNum:SVNumber|SVTimeconcept;+SVTime|+SVTime; -> needs more filtering: can be age -> add later
-/*. Efter 46 timmar börjar en intensiv klåda, som kan pågå i mer än en vecka.
 1236;30;SVTimeprep|SVTimeconcept:SVYearpart;*|+SVTime;fires also on measurements like '5000 kronor i månaden' -> replace by Measurement later
 /*		1236. Restrycket hit är starkt inför vintersäsongen.
 1237;30;SVTimemodifier|SVTime;JoinReverse|*;
@@ -294,13 +288,9 @@
 1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
 /*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader.
 
-1307;30;SVAdvTime|SVTimeconcept;*|*;rules profiler
-
 1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
 
-/*1303;30;SVAdvTemp+^SVTimeadj+^SVTimeprep;+SVTime;experiment
-/*1303;30;SVTimeprep|SVAdvTemp+^SVTimeadj+^SVTimeprep;*|+SVTime;experiment
 
 /* Expansion
 /* ---------
@@ -332,8 +322,6 @@
 /*		1272. Lärarutbildning, med praktisk pedagogik, skedde vid särskilda högskolor sent in i 1900-talet.
 1294;30;SVTimeprep+^"sedan"+^"över"|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*		1294. Vid 10-tiden på måndagen noterades aktien dock något lägre till drygt 137 kronor.
-1292;90;SVAndOrBut+SVTimeStop|SVTimeBegin;-SVTimeStop|-SVTimeBegin;
-/*		1292. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige.
 
 1283;30;SVAdvTimeFreq;^SVAdvTime;rules in following phases don't know SVAdvTimeFreq
 /*		1283. Dialysbehandlingen kunde minskas till 5 gånger per vecka på grund av god dialyseffekt och restfunktion.
@@ -1600,11 +1588,11 @@
 /*		1122. Syftet kan istället vara att informera om och belysa ett samhälleligt skeende.
 1121;40;SBegin|"för"|^SVAtt;*|-SVConj|*;
 /*		1121. För äldre barn finns även tabletter.
-1035;40;"om"|*^SVvRel+^SVConj+^"men"+^SVPunctuation+^SVAtt|SVvRel+^SVInf;+SVConj-SVPrep|*|*;
+1035;40;"om"+^SVCon|*^SVvRel+^SVConj+^"men"+^SVPunctuation+^SVAtt|SVvRel+^SVInf;+SVConj-SVPrep|*|*;restriction for SVCon assigned by r1248
 /*		1035. Ja, jag vet inte om det här är något jag vill prata med dig om innan jag vet vad det är som gått galet, säger han.
 1112;40;"om"|SVAtt;+SVConj-SVPrep|*;
 /*		1112. Verbmetoden handlar alltså ytterst sett om att registrera människors tidsanvändning.
-1113;40;"om"|*^SVvRel+^SVConj+^SVAtt+^SVPunctuation|SVAtt|SVInf|*^SVvRel+^SVConj+^SVPunctuation|SVvRel+^SVInf;+SVConj-SVPrep|*|*|*|*|*;special case of r1035
+1113;40;"om"+^SVCon|*^SVvRel+^SVConj+^SVAtt+^SVPunctuation|SVAtt|SVInf|*^SVvRel+^SVConj+^SVPunctuation|SVvRel+^SVInf;+SVConj-SVPrep|*|*|*|*|*;special case of r1035, restriction for SVCon assigned by r1248
 /*		1113. Utgivningsbevis får återkallas om förutsättningar att utfärda sådant bevis inte längre finns.
 1105;40;"om"|SVObjpron+^SVSubjpron;-SVConj+SVPrep|*;correction of r1035
 /*		1105. De som skötte om mig sade att jag enligt deras åsikt hade drabbats av legionellabakterier.
@@ -2173,6 +2161,7 @@
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
+
 /* avoid that hyphen becomes EndConcept in time span
 1276;90;"-"+SVTimeprep;-SVPunctuation+SVPrep;
 /*		1276. Från de tidigaste muntliga berättelserna ledde skriftspråkets uppfinnande omkring 2100 f.Kr. - 2000 f.Kr. till övergången från muntlig tradition till nerskriven.
@@ -2180,7 +2169,9 @@
 1290;90;SVAdj+SVNonRelevant;-SVAdj;needed for attribute repositioning
 /*		1290. I de flesta sjöar och hav så bildas under sommarmånaderna ett så kallat temperatursprångskikt.
 
-/* re-position SVTimeStop if needed
+/* remove or re-position SVTimeStop if needed
+1292;90;SVAndOrBut+SVTimeStop|SVTimeBegin;-SVTimeStop|-SVTimeBegin;
+/*		1292. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige.
 1282;90;SVTimeBegin:SVTime+SVTimeStop;-SVTimeStop;
 /*		1282. Genom nationalismen kom vikingen att bli föremål för hämningslös beundran, i synnerhet under andra hälften av 1800-talet fram till långt in på 1900-talet.
 
