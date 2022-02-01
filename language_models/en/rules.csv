@@ -52,26 +52,26 @@
 2763;1;UDIgnoreNegation;-ENNegation;
 /*		2763.UD. He spoke about him without once mentioning the billionaire by name.
 2764;1;UDIgnoreSentiment;-ENNegSentiment-ENPosSentiment;
-/*		2764. Landlord's option to tax the letting of an immovable good where previous lettings were exempt.
+/*		2764.UD. Landlord's option to tax the letting of an immovable good where previous lettings were exempt.
 2765;1;UDIgnoreNegSentiment;-ENNegSentiment;
-/*		2765. In these advertising campaigns nobody looks bad and nobody drinks alone.
+/*		2765.UD. It was an awful experience.
 2766;1;UDIgnorePosSentiment;-ENPosSentiment;
-/*		2766. It's not beautiful skiing but it's big and with plenty of challenges. We want you all to come and know that it is a beautiful celebration, a beautiful party and a wonderful opportunity to know more about the beauty and depth of our culture.
+/*		2766.UD. Devin enjoys the swimming pool.
 2767;1;UDIgnoreCertainty;-SCertainty;
-/*		2767. It was noted that that the patient was probably allergic to statins.
+/*		2767.UD. It was noted that that the patient was probably allergic to statins.
 2768;1;UDIgnoreTime;-ENTime-ENTemp-ENDuration-ENFrequency;NOTE: r2771 in phase $ is needed to remove time attributes from UDIgnoreTime when assigned by rules
-/*		2768. We went shopping on Black Friday in the afternoon. What happened in 2001?
+/*		2768.UD. We went shopping on Black Friday in the afternoon. What happened in 2001?
 2773;1;UDIgnoreTime;-ENAdjTimeGen-ENConTimePlural-ENQuarter-ENMonthAbbr-ENDay;
-/*		2773. It posted its sixth consecutive quarter of profitability for the three months to Dec 31.
+/*		2773.UD. It posted its sixth consecutive quarter of profitability for the three months to Dec 31.
 2774;1;ENConTime+UDIgnoreTime;^ENCon+UDIgnoreTime;
-/*		2774. The growth remained strong in the fourth quarter of 2007.
+/*		2774.UD. The growth remained strong in the fourth quarter of 2007.
 /* NOTE: Don't remove ENDate: undesired side-effects on spans for other attributes.
 2775;1;ENYear:ENYearNum+UDIgnoreTime;^ENNumber+UDIgnoreTime;
-/*		2775. Please pick a number between 1971 and 2001.
-2769;1;UDIgnoreNumber;-ENNumber;-ENNum;+ENCon;
-/*		2769. The next stop is at 25 km from here. The next stop is at twenty-five kilometers from here.
+/*		2775.UD. Please pick a number between 1971 and 2001.
+2769;1;UDIgnoreNumber;-ENNumber-ENNum+ENCon;
+/*		2769.UD. The next stop is at 25 km from here. The next stop is at twenty-five kilometers from here.
 2770;1;UDIgnoreUnit;-ENUnit;
-/*		2770. I want to buy a 64 gigabyte SD card.
+/*		2770.UD. I want to buy a 64 gigabyte SD card.
 
 
 /* ==================================================================================================================================================================
@@ -1868,8 +1868,8 @@
 /*		818.	 While avoiding giving specific sales figures.
 264;40;ENmAux|ENAdvstruct|ENInf;ENmAux|ENAdvstruct|ENRel+ENInf;
 /*		264.	 Tom would also select smaller pieces.
-1096;40;ENmAux|ENComma|ENAdvstruct|ENComma|ENInfCon;ENmAux|ENComma|ENAdvstruct|ENComma|ENRel+ENInf;overruled by r2756 -> delete in next update
-/*		1096. The States Parties to this Agreement shall, nevertheless, endeavour to avoid the imposition.
+/*1096;40;ENmAux|ENComma|ENAdvstruct|ENComma|ENInfCon;ENmAux|ENComma|ENAdvstruct|ENComma|ENRel+ENInf;overruled by r2756 -> deleted
+/*1096. The States Parties to this Agreement shall, nevertheless, endeavour to avoid the imposition.
 284;40;ENInfCon|ENPrep+^"to"|ENComma;ENRel+ENVerb|*|ENComma;
 /*		284.	 More Britons decamp from the capital than move in, according to a new report. SHOULD NOT WORK FOR: establish among themselves a customs union, as a transitional stage to, and an integral part of the Community.
 1099;40;"please"|ENInfCon;*|ENRel+ENVerb;
@@ -4232,11 +4232,10 @@
 2315;81;SEnd|SEnd;NonRelevant|*;to restore literal for punctuation after space at the end of a sentence
 /*		2315. No silver lining, yet, for Cindy .
 
-/*2772;$;ENDateTimeBegin+^ENTime|.^ENTime+^ENDateTimeStop|ENDateTimeStop;-ENDateTimeBegin|*|-ENDateTimeStop;remove time span for UDIgnoreTime
 2772;$;ENDateTimeBegin|.^ENTime+^ENDuration+^ENFrequency+^UDIgnoreTime|UDIgnoreTime;-ENDateTimeBegin|*|*;remove time span for UDIgnoreTime
-/*		. We went shopping on Black Friday in the afternoon.
+/*		2772.UD. Its loan book increased by 19% to S$72.8 billion as of Dec 31, boosted by growth in corporate and small-to-medium-enterprise loans.
 2771;$;UDIgnoreTime;-ENTime-ENTemp-ENDuration-ENFrequency-ENDateTimeBegin;
-/*		2771. We went shopping on Black Friday in the afternoon.
+/*		2771.UD. We went shopping on Black Friday in the afternoon.
 2538;$;ENAndOrBut+ENNonrelevant+ENPosSentimentBegin:ENNegSentimentBegin;-ENNonrelevant;avoid that attribute span gets lost due to nonrelevant first word
 /*		2538. And, unfortunately, he came too late.
 2329;$;ENNRSentmarker+typeOther:typeAmbiguous:typeNonRelevant;+ENEndrelation-ENArtPosspron-ENNonrelevant-ENAdvstruct-ENToo;make NonRelevant sentiment markers relations
