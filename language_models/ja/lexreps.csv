@@ -14,6 +14,8 @@
 ;;(|0|1)(0|1|2|3|4|5|6|7|8|9):(0|1|2|3|4|5|6)(0|1|2|3|4|5|6|7|8|9);;JPTimeNum;JPNumber;DateTime;
 ;;2(0|1|2|3|4):(0|1|2|3|4|5|6)(0|1|2|3|4|5|6|7|8|9);;JPTimeNum;JPNumber;DateTime;
 
+;;×10^;;JPNumber;
+
 
 
 
@@ -2551,6 +2553,7 @@
 
 ;;低;;JPAdjVStem;JPPrefix;
 ;;中低;;JPPrefix;
+;;低・中;;JPPrefix;
 
 ;;土臭;;JPAdjVStem;
 ;;等し;;JPAdjVStem;
@@ -6954,8 +6957,8 @@
 ;;こんなに;;JPAdvNR;
 ;;こんなのは;;JPExpressionNR;
 ;;こんもり;;JPAdv;
-;;再三;;JPAdv;
-;;再度;;JPAdvTime;
+;;再三;;JPAdv;JPFrequency;
+;;再度;;JPAdvTime;JPFrequency;
 ;;さえ;;JPAdvNR;JPVerbOther;JPVerbNoun;
 ;;さえも;;JPAdvNR;
 ;;先々;;JPAdv;
@@ -8807,6 +8810,7 @@
 ;;百分率;;JPCon;
 ;;五分五分;;JPCon;
 ;;カ月;;JPTime;JPCount;
+;;カ月間;;JPTime;JPCount;
 
 
 ;;(カ条|か条);;JPCount;
@@ -8814,6 +8818,7 @@
 ;;月物;;JPCount;
 ;;月現在;;JPMonth;JPCon;
 ;;(ヶ月|ヵ月|ケ月);;JPCount;JPTime;
+;;(ヶ月|ヵ月|ケ月)間;;JPCount;JPTime;
 ;;(ヶ月時|ヵ月時);;JPMonth;JPCount;
 ;;年;;JPTime;JPCount;JPnen_kanji_1;JPRule3437;
 ;;週;;JPTime;JPCount;
@@ -8924,17 +8929,19 @@
 ;;ミリメートル四方;;JPCount;
 ;;ナノメートル;;JPCount;
 ;;nm;;JPCount;JPAlphabet;
-;;ps;;JPCount;JPAlphabet;
+;;ps;;JPCount;JPAlphabet;JPUnitCapital;
 ;;kgm;;JPCount;JPAlphabet;
 ;;rpm;;JPCount;JPAlphabet;
 ;;v/μs;;JPCount;JPAlphabet;
 ;;ミリ;;JPCount;
 ;;ミリ四方;;JPCount;
-;;mm;;JPCount;JPAlphabet;
+;;mm;;JPCount;JPAlphabet;JPUnitCapital;
+;;vm;;JPCount;JPAlphabet;JPUnitCapital;
 ;;センチメートル;;JPCount;
 ;;センチメートル四方;;JPCount;
 ;;cm;;JPCount;JPAlphabet;
 ;;cm2;;JPCount;JPAlphabet;
+;;cm3;;JPCount;JPAlphabet;
 ;;センチ;;JPCount;
 ;;センチ四方;;JPCount;
 ;;メートル;;JPCount;
@@ -8943,23 +8950,34 @@
 ;;キロメートル;;JPCount;
 ;;キロメートル四方;;JPCount;
 ;;キロ四方;;JPCount;
-;;km;;JPCount;JPAlphabet;
+;;km;;JPCount;JPAlphabet;JPUnitCapital;
+;;km2;;JPCount;JPAlphabet;
 ;;平方メートル;;JPCount;
+;;平方キロメートル;;JPCount;
 ;;ナノメートル;;JPCount
 ;;マイクロメートル;;JPCount;
 ;;立方メートル;;JPCount;
+;;ヘクタール;;JPCount;
+;;キロアール;;JPCount;
+;;アール;;JPCount;
+;;センチアール;;JPCount;
+;;ミリアール;;JPCount;
+;;平方デシメートル;;JPCount;
+;;平方デカメートル;;JPCount;
+;;平方ヘクトメートル;;JPCount;
+
 ;;%;;JPCount;JPRule3437;
 ;;パーセント;;JPCount;
 ;;ワット;;JPCount;
 ;;キロワット;;JPCount;
-;;w;;JPCount;JPAlphabet;
+;;w;;JPCount;JPAlphabet;JPUnitCapital;
 ;;w/m2;;JPCount;
 ;;w/m3;;JPCount;
 ;;w/mk;;JPCount;
-;;mw;;JPCount;JPCon;JPAlphabet;
+;;mw;;JPCount;JPCon;JPAlphabet;JPUnitCapital;
 ;;ミリワット;;JPCount;
 ;;メガワット;;JPCount;
-;;gw;;JPCount;JPCon;JPAlphabet;JPDateTime;
+;;gw;;JPCount;JPCon;JPAlphabet;JPDateTime;JPUnitCapital;
 ;;ギガワット;;JPCount;
 ;;ヘルツ;;JPCount;
 ;;キロヘルツ;;JPCount;
@@ -8986,8 +9004,8 @@
 ;;$/t;;JPCount;JPCon;
 ;;$/b;;JPCount;JPCon;
 ;;gs/s;;JPCount;JPCon;
-;;hk$;;JPCount;JPCon;
-;;us$;;JPCount;JPCon;
+;;hk$;;JPCount;JPCon;JPUnitFirst;JPUnitCapital;
+;;us$;;JPCount;JPCon;JPAlphabet;JPUnitFirst;JPUnitCapital;
 ;;ギガサンプリング/秒;;JPCount;JPCon;
 ;;ギガビット/秒;;JPCount;JPCon;
 ;;ビット;;JPCount;JPCon;
@@ -8995,47 +9013,67 @@
 ;;mbit/s;;JPCount;JPAlphabet;
 ;;mbps;;JPCount;JPAlphabet;
 ;;ギガバイト/秒;;JPCount;JPCon;
-;;v;;JPCount;JPAlphabet;
-;;va;;JPCount;JPAlphabet;
+;;v;;JPCount;JPAlphabet;JPUnitCapital;
+;;v型;;JPCount;JPAlphabet;JPUnitCapital;
+;;va;;JPCount;JPAlphabet;JPUnitCapital;
 ;;kva;;JPCount;JPAlphabet;
 ;;mv;;JPCount;JPAlphabet;
-;;v型;;JPCount;JPCon;
 ;;アンペア;;JPCount;JPCon;
 ;;ミリアンペア;;JPCount;JPCon;
 ;;マイクロアンペア;;JPCount;JPCon;
 ;;ボルトアンペア;;JPCount;JPCon;
 ;;キロボルトアンペア;;JPCount;JPCon;
 ;;μa;;JPCount;JPAlphabet;
-;;a;;JPCount;JPAlphabet;
+;;a;;JPCount;JPAlphabet;JPUnitCapital;
 ;;ma;;JPCount;JPAlphabet;
 ;;メガバイト;;JPCount;JPCon;
 ;;ギガバイト;;JPCount;JPCon;
 ;;テラバイト;;JPCount;JPCon;
-;;gb;;JPCount;JPCon;JPAlphabet;
+;;gb;;JPCount;JPCon;JPAlphabet;JPUnitCapital;
 ;;平米;;JPCount;
-;;kw;;JPCount;
+;;kw;;JPCount;JPUnitCapital;
 ;;倍;;JPCount;JPCon;JPRule3437;
 ;;剤;;JPCount;JPCon;
 ;;例;;JPCount;JPCon;
+;;敗;;JPCount;JPCon;
 ;;(率| 率);;JPSuffixNoun;JPCon;
 ;; 群;;JPSuffixNoun;JPCon;
 ;;(\/日|\/ 日);;JPCount;
 ;;世代;;JPCount;JPCon;
 ;;カラット;;JPCount;JPCon;
 ;;錠;;JPCount;JPCon;
+;;カプセル;;JPCount;JPCon;
 ;;g/dl;;JPCount;JPAlphabet;
+;;g /day;;JPCount;JPAlphabet;
 ;;mmol/l;;JPCount;JPAlphabet;
 ;;mmhg;;JPCount;JPAlphabet;
 ;;meq/l;;JPCount;JPAlphabet;
-;;iu/l;;JPCount;JPAlphabet;
+;;iu/l;;JPCount;JPAlphabet;JPUnitCapital;
 ;;μg/ml;;JPCount;JPAlphabet;
 ;;μl;;JPCount;JPAlphabet;
-;;/sec;;JPCount;JPAlphabet;JPTime;
-;;/分;;JPCount;JPAlphabet;JPTime;
-;;/秒;;JPCount;JPAlphabet;JPTime;
-;;/min;;JPCount;JPAlphabet;JPTime;
+;;/sec;;JPCount;JPAlphabet;JPFrequency;
+;;/時;;JPCount;JPFrequency;
+;;/時間;;JPCount;JPFrequency;
+;;/時間の;;JPnakaguro;-;JPCon;Join;-;JPno;
+;;/分;;JPCount;JPAlphabet;JPFrequency;
+;;/秒;;JPCount;JPAlphabet;JPFrequency;
+;;/min;;JPCount;JPAlphabet;JPFrequency;
+;;/day;;JPCount;JPAlphabet;JPFrequency;
 ;;/μl;;JPCount;JPAlphabet;
-;;sec;;JPCount;JPAlphabet;JPTime;
+;;ml/分/u;;JPCount;JPAlphabet;
+;;sec;;JPCount;JPAlphabet;
+;;wu;;JPCount;JPAlphabet;JPUnitCapital;
+;;dyne・sec・cm-5;;JPCount;JPAlphabet;
+;;kwh;;JPCount;JPAlphabet;
+;;kcal;;JPCount;JPAlphabet;
+;;kcal/h;;JPCount;JPAlphabet;
+
+;;ac;;JPCapitalPrefix;JPAlphabet;
+;;dc;;JPCapitalPrefix;JPAlphabet;
+;;ck;;JPCapitalPrefix;JPAlphabet;
+;;alp;;JPCapitalPrefix;JPAlphabet;
+;;gtp;;JPCapitalPrefix;JPAlphabet;
+;;ram;;JPCapitalPrefix;JPAlphabet;
 
 ;;スクリブナー;;JPCount;
 
@@ -9052,7 +9090,7 @@
 ;;台湾ドル;;JPCount;JPRule3437;
 ;;銭;;JPCount;JPCon;JPRule3437;
 ;;厘;;JPCount;JPCon;
-;;nzドル;;JPCount;JPRule3437;
+;;nzドル;;JPCount;JPRule3437;JPUnitCapital;
 ;;ペソ;;JPCount;JPRule3437;
 ;;セント;;JPCount;JPRule3437;
 ;;¢;;JPCount;JPRule3437;
@@ -9082,12 +9120,21 @@
 ;;ルピー;;JPCount;JPRule3437;
 ;;フラン;;JPCount;JPCon;JPRule3437;
 
+;;db;;JPCount;JPAlphabet;
+;;デシベル;;JPCount;
+;;フィート;;JPCount;
+;;ヤード;;JPCount;
+;;マイル;;JPCount;JPCon;
+;;インチ;;JPCount;
 ;;リットル;;JPCount;
 ;;ミリリットル;;JPCount;
 ;;キロリットル;;JPCount;
 ;;キロ;;JPCount;
-;;l;;JPCount;JPAlphabet;
+;;l;;JPCount;JPAlphabet;JPUnitCapital;
 ;;ml;;JPCount;JPAlphabet;
+;;ml/day;;JPCount;JPAlphabet;
+;;ml/分/m^2;;JPCount;
+;;fl;;JPCount;JPAlphabet;
 ;;ms;;JPCount;JPAlphabet;
 ;;μs;;JPCount;JPAlphabet;
 ;;bpm;;JPCount;JPAlphabet
@@ -9098,11 +9145,59 @@
 ;;マイクログラム;;JPCount;
 ;;ナノグラム;;JPCount;
 ;;g;;JPCount;JPAlphabet;
+;;m2;;JPCount;JPAlphabet;
+;;m3;;JPCount;JPAlphabet;
 ;;mg;;JPCount;JPAlphabet;
+;;mg/dl;;JPCount;JPAlphabet;
+;;mg/gcr;;JPCount;JPAlphabet;
+;;mg/g・cr;;JPCount;JPAlphabet;
+;;μg;;JPCount;JPAlphabet;
+;;μg/day;;JPCount;JPAlphabet;
+;;μg/gcr;;JPCount;JPAlphabet;
+;;μg/g・cr;;JPCount;JPAlphabet;
+;;u/l;;JPCount;JPAlphabet;JPUnitCapital;
+;;m6/ul;;JPNumber;Join;-;JPCount;JPAlphabet;Join;Join;
+;;m3/ul;;JPNumber;Join;-;JPCount;JPAlphabet;Join;Join;
+;;u/ml;;JPCount;JPAlphabet;
+;;/ul;;JPCount;JPAlphabet;
 ;;kg;;JPCount;JPAlphabet;
+;;ng;;JPCount;JPAlphabet;JPUnitCapital;
+;;ng/ml;;JPCount;JPAlphabet;
+;;pg;;JPCount;JPAlphabet;
+;;hpf;;JPCount;JPAlphabet;JPUnitCapital;
+;;lpf;;JPCount;JPAlphabet;JPUnitCapital;
 ;;トン;;JPCount;
 ;;オンス;;JPCount;
 ;;トロイオンス;;JPCount;
+;;分画;;JPCon;
+
+;;艘;;JPCount;
+;;隻;;JPCount;
+;;斤;;JPCount;
+;;両;;JPCount;JPCon;
+;;両月;;JPCon;JPMonth;
+;;両年;;JPCount;JPTime;
+;;両年度;;JPCount;JPTime;
+;;両年限;;JPCount;JPTime;
+;;両会計年度;;JPCount;JPTime;
+;;両国;;JPCon;
+;;匁;;JPCount;
+;;石;;JPCount;JPCon;
+;;斗;;JPCount;
+;;升;;JPCount;
+;;中升;;JPCon;
+;;勺;;JPCount;
+;;段;;JPCount;JPCon;
+;;畝;;JPCount;JPCon;
+;;坪;;JPCount;
+;;列;;JPCount;JPCon;
+;;系列;;JPCon;
+;;時系列;;JPCon;
+;;里;;JPCount;JPCon;
+;;丈;;JPCount;JPCon;
+;;尺;;JPCount;JPCon;
+;;寸;;JPCount;JPCon;
+
 
 ;;本;;JPCount;JPCon;JPRule3437;
 ;;本体;;JPCon;
@@ -9120,6 +9215,34 @@
 ;;euro(| )6;;JPCon;JPAlphabet;
 ;;af-timi(| )48;;JPCon;JPAlphabet;
 
+;;ca19-9;;JPCon;JPAlphabet;
+;;cd3+cd4+;;JPCon;JPAlphabet;
+;;cd3+cd8+;;JPCon;JPAlphabet;
+;;o2;;JPCon;JPAlphabet;
+;;pao2;;JPCon;JPAlphabet;
+;;paco2;;JPCon;JPAlphabet;
+;;so2;;JPCon;JPAlphabet;
+;;ts-1;;JPCon;JPAlphabet;
+;;4/8比;;JPCon;
+;;pm2.5;;JPCon;JPAlphabet;
+;;リーバクト4.15;;JPCon;
+;;rsvp;;JPAlphabet;JPCon;
+;;mpap;;JPAlphabet;JPCon;
+;;qtc;;JPAlphabet;JPCon;
+
+;;ph;;JPTestNoUnit;JPAlphabet;JPCon;
+;;pco2;;JPTestNoUnit;JPAlphabet;JPCon;
+;;po2;;JPTestNoUnit;JPAlphabet;JPCon;
+;;be;;JPTestNoUnit;JPAlphabet;JPCon;
+;;lac;;JPTestNoUnit;JPAlphabet;JPCon;
+;;hco3;;JPTestNoUnit;JPAlphabet;JPCon;
+;;pt-inr;;JPTestNoUnit;JPAlphabet;JPCon;
+;;pt比;;JPTestNoUnit;JPAlphabet;JPCon;
+;;尿tp/cre比;;JPTestNoUnit;JPAlphabet;JPCon;
+;;hva/cre;;JPTestNoUnit;JPAlphabet;JPCon;
+;;vma/cre;;JPTestNoUnit;JPAlphabet;JPCon;
+;;ノルアドレナリン;;JPTestNoUnit;JPCon;
+;;bmi;;JPTestNoUnit;JPAlphabet;JPCon;
 
 
 
@@ -12539,7 +12662,8 @@
 
 ;;舞い戻;;JPVerbOther;
 ;;立ち戻;;JPVerbOther;
-;;貫;;JPVerbOther;
+;;貫;;JPVerbOther;JPCount;
+
 ;;退;;JPVerbOther;
 ;;立ち退;;JPVerbOther;
 ;;奪;;JPVerbOther;JPPrefix;
@@ -14350,7 +14474,7 @@
 ;;付かない;;JPVerb;JPVerbBase;JPNegation;
 
 ;;綴;;JPVerbOther;
-;;包;;JPVerbOther;
+;;包;;JPVerbOther;JPCount;
 ;;潰;;JPVerbOther;
 ;;つぶ;;JPVerbOther;JPCon;
 ;;つづる;;JPVerbBase;JPVerb;
@@ -14448,7 +14572,7 @@
 
 ;;のさばる;;JPVerb;JPVerbBase;
 
-;;畳;;JPVerbOther;JPCon;
+;;畳;;JPVerbOther;JPCon;JPCount;
 ;;たたむ;;JPVerb;JPVerbBase;
 
 ;;蒸;;JPVerbOther;
@@ -17968,7 +18092,9 @@
 ;;回診;;JPSuruNoun;
 ;;回生;;JPSuruNoun;
 ;;回想;;JPSuruNoun;
-;;回転;;JPSuruNoun;
+;;回転;;JPSuruNoun;JPCount;
+
+;;回転半;;JPCount;
 ;;回答;;JPSuruNoun;
 ;;回頭;;JPSuruNoun;
 
@@ -19244,6 +19370,11 @@
 ;;狩猟;;JPSuruNoun;
 ;;種まき;;JPSuruNoun;
 ;;種別;;JPSuruNoun;
+;;種;;JPCount;
+;;一種;;JPCon;
+;;種類;;JPCount;
+;;他業種;;JPCon;
+;;中種;;JPCon;
 ;;首肯;;JPSuruNoun;
 ;;受給;;JPSuruNoun;
 ;;受刑;;JPSuruNoun;
@@ -21142,7 +21273,7 @@
 ;;平方;;JPSuruNoun;
 ;;平癒;;JPSuruNoun;
 ;;並立;;JPSuruNoun;
-;;並列;;JPSuruNoun;
+;;並列;;JPSuruNoun;JPCount;
 ;;閉会;;JPSuruNoun;
 ;;閉館;;JPSuruNoun;
 ;;閉経;;JPSuruNoun;
@@ -30442,7 +30573,7 @@
 ;;重工;;JPCon
 ;;荷重;;JPCon
 ;;重油;;JPCon
-;;比重;;JPCon
+;;比重;;JPCon;JPTestNoUnit;
 ;;重体;;JPCon
 ;;重文;;JPCon
 ;;重り;;JPCon
@@ -31053,7 +31184,9 @@
 ;;気色;;JPCon;
 ;;気性;;JPCon;
 ;;気前;;JPCon;
-;;気筒;;JPCon;
+;;気筒;;JPCon;JPCount;
+;;直列;;JPCon;JPCount;
+;;封止;;JPSuruNoun;JPCon;
 ;;気泡;;JPCon;
 ;;気密;;JPCon;
 ;;脚気;;JPCon;
@@ -35597,10 +35730,10 @@
 ;;末裔;;JPCon;
 ;;目的;;JPCon;
 ;;目標;;JPCon;
-;;項目;;JPCon;
+;;項目;;JPCon;JPCount;
 ;;品目;;JPCon;JPCount;
-;;科目;;JPCon;
-;;種目;;JPCon;
+;;科目;;JPCon;JPCount;
+;;種目;;JPCon;JPCount;
 ;;目隠し;;JPCon;
 ;;目玉;;JPCon;
 ;;名目;;JPCon;
@@ -36252,6 +36385,8 @@
 ;;車いす;;JPCon;
 ;;彼我;;JPCon;
 ;;日中韓;;JPCon;
+;;日ロ;;JPCon;
+;;日露;;JPCon
 ;;伸びしろ;;JPCon;
 ;;箱もの;;JPCon;
 ;;広範囲;;JPCon;
@@ -37515,7 +37650,8 @@
 ;;頃から;;JPCon;-;JPParticlePREPO;Join;
 
 ;;付き;;JPSuffixNoun;JPVerbNoun;JPtsuki_kanji_1;
-;;層;;JPSuffixNoun;JPCon;
+;;層;;JPSuffixNoun;JPCon;JPCount;
+
 ;;とおり;;JPSuffixNoun;JPAdv;JPVerbNoun;JPCount;JPModifyPOST;JPHiragana;
 
 ;;通り;;JPSuffixNoun;JPAdv;JPVerbNoun;JPCount;JPModifyPOST;JPdoori;
@@ -39671,6 +39807,7 @@
 ;;みね子;;JPCon;
 ;;てんかん;;JPCon;
 ;;りぼん;;JPCon;
+;;四貫島;;JPCon;
 
 
 ;;はたき込み;;JPVerbNoun;
@@ -39722,7 +39859,8 @@
 ;;点;;JPten;JPNINounOther;JPSuffixNoun;JPVerbOther;JPCount;
 ;;気;;JPki_kanji_1;
 ;;真;;JPshin_kanji_1;JPCon;JPPrefix;
-;;間;;JPaida_kanji_1;JPSuffixNoun;JPCon;
+;;間;;JPaida_kanji_1;JPSuffixNoun;JPCon;JPCount;
+
 ;;理;;JPri_kanji_1;
 
 ;;初;;JPCon;JPPrefix
