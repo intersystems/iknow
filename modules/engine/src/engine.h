@@ -164,17 +164,38 @@ namespace iknowdata { // to bundle all generated data
 		unsigned short span; // attibute span (number of path entities)
 	};
 
+	/*
+	** CRC represents the Concept/Relation/Concept chains detected in the sentence.
+	** "head_concept" : index (in iKnow_Entities vector) of the head concept
+	** "relation" : index of the relation that links head and tail concept
+	** "tail_concept" : index of the tail concept.
+	*/
+	struct CRC // Concept - Relation - Concept chain
+	{
+		CRC(std::string& head_concept, std::string& relation, std::string& tail_concept) :
+			head_token(head_concept),
+			relation_token(relation),
+			tail_token(tail_concept)
+		{}
+
+		std::string head_token; // head concept
+		std::string relation_token;
+		std::string tail_token; // tail concept
+	};
+
 	struct Sentence
 	{
 		typedef std::vector<Entity> Entities;
 		typedef std::vector<Sent_Attribute> Sent_Attributes;
 		typedef std::vector<Entity_Ref> Path;	// unsigned short indexes the Entity in the iKnow_Entities vector 
 		typedef std::vector<Path_Attribute> Path_Attributes;	// expanded attributes in path 
+		typedef std::vector<CRC> CRCs; // the collection of CRC's in the sentence
 
 		Entities			entities;	// the sentence entities
 		Sent_Attributes		sent_attributes;	// the sentence attributes
 		Path				path;		// the sentence path
 		Path_Attributes		path_attributes;	// expanded attributes in the path
+		CRCs				crc_chains; // the concept-relation-concept chains
 
 		// utility functions : return text source offsets of the sentence : start and stop.
 		size_t offset_start() const { return entities.begin()->offset_start_; }

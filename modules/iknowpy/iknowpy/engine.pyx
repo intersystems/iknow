@@ -335,5 +335,5 @@ cdef class iKnowEngine:
 									   'span': deref(path_attr_iter).span})
 				postinc(path_attr_iter)
 			sentences_mod.append({'entities': entities_mod, 'sent_attributes': sent_attrs_mod, 'path': sentence.path,
-			                      'path_attributes': path_attrs_mod})
+			                      'path_attributes': path_attrs_mod, 'crcs' : sentence.crc_chains})
 		return {'sentences': sentences_mod, 'proximity': self.engine.m_index.proximity}

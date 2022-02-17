@@ -111,6 +111,22 @@ static void iKnowEngineOutputCallback(iknow::core::IkIndexOutput* data, iknow::c
 		RegExHandler.swich_kb(kb); // Switch to the correct KB
 
 		iknowdata::Sentence sentence_data;
+	
+		if (true) { // emit CRC data into sentence_data
+			MergedLexreps& lexreps = sentence->GetLexreps();
+			CRCs& crcs = sentence->GetCRCs();
+			for (CRCs::iterator it = crcs.begin(); it != crcs.end(); ++it) {
+				if (it->head == iknow::core::path::NullOffset() || it->tail == iknow::core::path::NullOffset()) // only collect full CRC's
+					continue;
+
+				iknowdata::CRC crc(	iknow::base::IkStringEncoding::BaseToUTF8(lexreps[it->head].GetNormalizedText()),
+									iknow::base::IkStringEncoding::BaseToUTF8(lexreps[it->relation].GetNormalizedText()),
+									iknow::base::IkStringEncoding::BaseToUTF8(lexreps[it->tail].GetNormalizedText())
+								);
+
+				sentence_data.crc_chains.push_back(crc);
+			}
+		}
 		for (MergedLexreps::const_iterator j = sentence->GetLexrepsBegin(); j != sentence->GetLexrepsEnd(); ++j) { // iterate entities
 			const IkMergedLexrep *lexrep = &(*j);
 

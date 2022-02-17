@@ -32,5 +32,6 @@ namespace testing {
 		void ALI(const char*); // ALI first test
 		void LanguageIdentification(const char*); // Language Identification
 		void SourceVersusSentenceALI(const char*); // Source versus Sentence ALI detection
+		void Issue205(const char* pMessage);  // Issue205 : https://github.com/intersystems/iknow/issues/205
 	};
 }

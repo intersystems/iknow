@@ -71,6 +71,8 @@ void iKnowUnitTests::runUnitTests(void)
 		test_collection.LanguageIdentification(pError);
 		pError = "Source versus Sentence ALI Test";
 		test_collection.SourceVersusSentenceALI(pError);
+		pError = "CRC generation output : https://github.com/intersystems/iknow/issues/205";
+		test_collection.Issue205(pError);
 
 	}
 	catch (std::exception& e) {
@@ -82,6 +84,29 @@ void iKnowUnitTests::runUnitTests(void)
 		cerr << "Unit Test \"" << pError << "\" failed !" << endl;
 		exit(-1);
 	}
+}
+
+void iKnowUnitTests::Issue205(const char* pMessage)
+{
+	String text_source(IkStringEncoding::UTF8ToBase(u8"The head concept is linked to the tail concept. The concept-relation-concept link is called a CRC."));
+
+	iKnowEngine engine;
+	engine.index(text_source, "en", true);
+	for (auto s = engine.m_index.sentences.begin(); s != engine.m_index.sentences.end(); ++s) {
+		for (auto crc = s->crc_chains.begin(); crc != s->crc_chains.end(); ++crc) {
+			const std::string& head = crc->head_token;
+			const std::string& relation = crc->relation_token;
+			const std::string& tail = crc->tail_token;
+
+			std::cout << "<" << head << "><" << relation << "><" << tail << ">" <<  std::endl;
+		}
+	}
+	std::string head = engine.m_index.sentences[0].crc_chains[0].head_token;
+	std::string relation = engine.m_index.sentences[0].crc_chains[0].relation_token;
+	std::string tail = engine.m_index.sentences[1].crc_chains[0].tail_token;
+
+	if (head != "head concept" || relation != "is linked to" || tail != "crc")
+		throw std::runtime_error(string(pMessage) + " CRC data incorrect !");
 }
 
 void iKnowUnitTests::SourceVersusSentenceALI(const char* pMessage)
