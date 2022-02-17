@@ -172,7 +172,7 @@ namespace iknowdata { // to bundle all generated data
 	*/
 	struct CRC // Concept - Relation - Concept chain
 	{
-		CRC(std::string& head_concept, std::string& relation, std::string& tail_concept) :
+		CRC(std::string head_concept, std::string relation, std::string tail_concept) :
 			head_token(head_concept),
 			relation_token(relation),
 			tail_token(tail_concept)
