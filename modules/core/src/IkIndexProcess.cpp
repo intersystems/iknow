@@ -437,6 +437,7 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 	LexrepContext::SeenLabels().Clear();
 	lexrep_vector.push_back(m_begin_lr); // insert SBegin to mark beginning of sentence
 	LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(SentenceBeginLabel)); // mark SBegin in lexrep context
+	bool bIsQuestion = false;
 
 	// int const nPositionBeginFixed = nPosition; // store start position
 	while ((size_t)nPosition < input_size) {
@@ -636,6 +637,7 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 				}
 				nBeginPos = nPosition; // advance to current position
 			}
+			bIsQuestion = (cCur == '?'); // detect question sentence
 			break; // End the sentence
 		}
 		continue;
@@ -660,6 +662,12 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 	  }
 	  nPosition++; // increment position counters
 	}
+	if (bIsQuestion) { // add extra labels to identify the question
+		m_end_lr.setQEndLabel(); // add QEnd label
+		lexrep_vector[0].setQBeginLabel(); // add QBegin label
+		LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(QuestionEndLabel)); // mark QEnd in lexrep context
+		LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(QuestionBeginLabel)); // mark QBegin in lexrep context
+	}
 	lexrep_vector.push_back(m_end_lr); // add SEnd lexrep
 	LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(SentenceEndLabel)); // mark SEnd in lexrep context
 
@@ -680,7 +688,8 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 
 	int const nPositionBeginFixed = nPosition;
 	bool bEndFound = false;
-	bool bSeparatorFound = false;
+	// bool bSeparatorFound = false;
+	SentenceType sent_type = SentenceType::None; // None = no sentence separator detected.
 	int nBeginPos = nPosition;
 	const int nFixedBeginPos = nBeginPos;
 	const Char *pData = (pInput->GetString())->c_str(); // pointer to text data
@@ -771,22 +780,22 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 				//Guard all calls to things that would detect sentence ends with "delimitedSentence" check.
 				//In delimited sentences mode we want only double line breaks to end sentences.
 				if (!delimitedSentences && m_pKnowledgebase->IsSentenceSeparator(trimmedValue)) // KB: sentence separator
-					bSeparatorFound = true;
+					sent_type = SentenceType::Affirmative; // bSeparatorFound = true;
 				if (!delimitedSentences && m_pKnowledgebase->IsNonSentenceSeparator(trimmedValue)) {
-					bSeparatorFound = false; // KB: not sentence separator
+					sent_type = SentenceType::None; // bSeparatorFound = false; // KB: not sentence separator
 				}
 				//In delimited sentence mode we ignore the user dictionary, too.
 				if (!delimitedSentences && pUdct) { // check user dct (higher priority)
 					if (pUdct->IsSentenceSeparator(trimmedValue))  // is it a sentence separator
-						bSeparatorFound = true;
+						sent_type = SentenceType::Affirmative; // bSeparatorFound = true;
 					if (pUdct->IsNonSentenceSeparator(trimmedValue)) { // is it NOT a non-separator
-						bSeparatorFound = false;
+						sent_type = SentenceType::None; // bSeparatorFound = false;
 					}
 				}
-				if (bSeparatorFound) // UDCT has first priority
+				if (sent_type != SentenceType::None) // UDCT has first priority
 					bEndFound = true; // break the sentence
 				if (bIsAlfaNum) Preprocess(val_begin, val_end, lexrep_vector); // contains text
-				else { // not text in token
+				else { // no text in token
 					lexrep_vector.push_back(IkLexrep(IkLabel::Nonrelevant, m_pKnowledgebase, val_begin, val_end, val_begin, val_end, m_pKnowledgebase->GetLabelIndex(PunctuationLabel)));
 					SEMANTIC_ACTION(LexrepCreated(lexrep_vector.back(), *m_pKnowledgebase));
 				}
@@ -796,13 +805,14 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 				nBeginPos = nPosition + 1;
 		}
 		else { // not NBS separator
-			if (!delimitedSentences && m_pKnowledgebase->FastIsSentenceSeparator(cCur)) {
-				bSeparatorFound = true;
+			// SentenceType sent_type;
+			if (!delimitedSentences && m_pKnowledgebase->FastIsSentenceSeparator(cCur, sent_type)) {
+				// bSeparatorFound = true;
 			}
 			else {
-				if (bSeparatorFound) { // previous is sentence separator, check quotes
+				if (sent_type != SentenceType::None /*bSeparatorFound*/) { // previous is sentence separator, check quotes
 					if (!IkStringAlg::IsQuote(pData[nPosition]))
-						bSeparatorFound = false; // call off sentence separator condition
+						sent_type = SentenceType::None;  // bSeparatorFound = false; // call off sentence separator condition
 				}
 			}
 		}
@@ -894,11 +904,17 @@ bool IkIndexProcess::FindNextSentence(IkIndexInput* pInput, Lexreps& lexrep_vect
 		}
 	}
 	m_end_lr.resetSEndLabel(); // reset the SEnd labels
+	if (sent_type == SentenceType::Question) {
+		m_end_lr.setQEndLabel(); // add QEnd label
+		lexrep_vector[0].setQBeginLabel(); // add QBegin label
+		LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(QuestionEndLabel)); // mark QEnd in lexrep context
+		LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(QuestionBeginLabel)); // mark QBegin in lexrep context
+	}
+
 	lexrep_vector.push_back(m_end_lr); // add SEnd lexrep
 	LexrepContext::SeenLabels().InsertAtIndex(m_pKnowledgebase->GetLabelIndex(SentenceEndLabel)); // mark SEnd in lexrep context
 
 	return nPosition != nFixedBeginPos; //Did we make any progress? If not, we're done.
-
 }
 
 IkLexrep IkIndexProcess::NextLexrep(Lexreps::iterator& current, Lexreps::iterator end, IkKnowledgebase* pkb)

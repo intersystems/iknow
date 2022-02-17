@@ -10,9 +10,11 @@
 3346;1;Space;^JPSingleSpace;
 3367;1;Unknown;^JPFurigana;
 3688;1;Katakana;^JPKatakana;
+4738;1;CapitalAll;^JPCapitalAll;
 4548;1;UDConcept;^UDConcept+JPCon;
 4549;1;UDNegation;^UDNegation+JPNegation;
 
+/*		4738.	UV分析による実態から失業の特徴を考える。
 /* ---------- PHASE 2 ----------
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
@@ -21,6 +23,23 @@
 
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
+
+4741;3;^JPNumber|JPUnitCapital+^JPUnitFirst|JPNumber|JPUnitCapital;*|-JPUnitCapital|*|-JPUnitCapital;
+
+/*		4741.	昭和５９年腰椎椎間板ヘルニアに対し前方固定（L4L5S1）施行。
+
+4740;3;JPUnitCapital+^JPUnitFirst|JPNumber;-JPUnitCapital|*;
+4742;3;JPUnitFirst+JPUnitCapital|JPNumber;+JPUnit-JPCon|*;
+
+/*		4742.	（３）総投資額　　　　US$12,600千
+
+4743;3;JPAlphabet+^JPCapitalPrefix|JPNumber|JPUnitCapital;*|*|-JPUnitCapital;
+
+/*		4743.	Ptf１aやAtoh１が神経幹細胞に固有の位置情報を与える。
+
+4739;3;JPCount+JPCapitalAll+^JPUnitCapital;-JPCount+JPAlphabet;
+
+/*		4739.	ＧＨかどうかは」はっきりしない、意識の過敏にともなうもののような感じもする。
 
 4668;3;"w"|JPNumber|"×"|"d"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join|Join|Join|Join;
 4670;3;"w"|JPNumber|"×"|"h"|JPNumber;JPNumber-JPAlphabet|Join|Join|Join|Join;
@@ -90,13 +109,19 @@
 4673;3;JPAlphabet+JPCount|"x"|^JPNumber;JPAlphabet-JPCount|Join|*;
 3344;3;JPAlphabet+^JPCount|JPAlphabet+JPCount;JPAlphabet|Join;
 3575;3;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join|Join|Join;
-3350;3;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
-3349;3;JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|JPAlphabet|JPAlphabet;
+3350;3;JPAlphabet|JPSingleSpace|JPAlphabet|JPSingleSpace|JPAlphabet+^JPUnitFirst;JPAlphabet|Join|Join|Join|Join;
+
+/*		3350.	Enbala Power Netrworks社は、アンシラリーサービスを展開する。 SHOULD NOT WORK FOR. It cost $us 1.
+
+3349;3;JPAlphabet|JPSingleSpace|JPAlphabet;^JPAlphabet|JPAlphabet|^JPAlphabet;
 3384;3;JPAlphabet|JPspace|JPAlphabet|JPspace|JPAlphabet;JPAlphabet|Join|Join|Join|Join;
 3385;3;JPAlphabet|JPspace|JPAlphabet;*|JPAlphabet|*;
 3778;3;"."|JPAlphabet|".";JPAlphabet|Join|Join;
 3775;3;"."|JPAlphabet;JPAlphabet|Join;
-3340;3;JPAlphabet;+JPCon;
+3340;3;JPAlphabet+^JPUnitFirst;+JPCon;
+
+/*		3340.	安倍政権は今国会で、地方創生や女性の活躍を実現するための関連法案や、総理自らが旗を振る統合型リゾート（特定複合観光施設、ＩＲ）整備を促す「カジノ解禁法案」などの成立を目指す。 SHOULD NOT WORK FOR. US$1かかった。
+
 3341;3;JPAlphabet|JPPeriod|JPNumber;^JPAlphabet|JPNumber|Join;
 4354;3;^typeConcept+^SBegin|JPNumber|","|JPNumber|","|JPNumber|","|JPNumber|","|JPNumber;*|JPNumber|Join|Join|Join|Join|Join|Join|Join|Join;
 4355;3;SBegin|JPNumber|","|JPNumber|","|JPNumber|","|JPNumber|","|JPNumber;*|JPNumber|Join|Join|Join|Join|Join|Join|Join|Join;
@@ -128,11 +153,45 @@
 3695;3;JPAlphabet|"―"|JPAlphabet;JPAlphabet|Join|Join;
 3400;3;JPAlphabet|JPSingleSpace|"="|JPSingleSpace|JPNumber;JPAlphabet|Join|Join|Join|Join;
 3536;3;JPAlphabet|JPSingleSpace|"≦"|JPSingleSpace|JPNumber;JPAlphabet|Join|Join|Join|Join;
-3457;3;JPAlphabet|"="|JPNumber|^"/";JPAlphabet|Join|Join|*;
+4722;3;JPAlphabet|"="|JPNumber|JPCount;^JPAlphabet|Join|+JPValue|+JPUnit;
+
+/*		4722.	Ccr＝95.8ｍL/min
+
+3457;3;JPAlphabet+^JPTestNoUnit|"="|JPNumber|^"/";JPAlphabet|Join|Join|*;
+
+/*		3457.	ヤマハ・レディース葛城第１日（３日・静岡県葛城ＧＣ＝6540ﾔｰﾄﾞ、パー72）昨季賞金女王で今季２勝目を狙う森田理香子が７バーディー、１ボギーの66をマークして首位発進した。 SHOULD NOT WORK FOR. 体重100kg(BMI=25.0)
+
 3458;3;JPAlphabet|"<"|JPNumber;JPAlphabet|Join|Join;
 3535;3;JPAlphabet|"≦"|JPNumber;JPAlphabet|Join|Join;
 3459;3;JPAlphabet|">"|JPNumber;JPAlphabet|Join|Join;
-3397;3;JPAlphabet|JPSingleSpace|JPNumber|^JPCount;JPAlphabet|Join|Join|*;
+4715;3;JPNumber|JPSingleSpace|"×10^"|JPNumber;JPNumber|Join|Join|Join;
+
+/*		4715.	Ht39.4%,Hb13.1g/dl,RBC4.21×10^6/μL,(MCV93.6fl,MCH31.1pg,MCHC33.2g/dl),WBC5.5×10^3/μL,Plt99×10^3/μL,(Neu51.6%,Eos6.1%,Bas0.9%,Mo4.2%,Lym37.2%),T-Bil0.9mg/dl,AST29U/L,ALT21U/L,LDH226U/L,ALP126U/L,γ-GTP26U/L,CK475U/L,AMY113U/L,BUN16mg/dl,CRE1.14mg/dl,Na139mEq/L,K5.1mEq/L,Cl104mEq/L,BS93mg/dl,eGFR47.0ml/分/m^2,CRP0.02mg/dl
+
+4725;3;JPTestNoUnit|JPSingleSpace|JPNumber|JPSingleSpace|",":SEnd;*|JPCon|+JPValue+JPEndConcept-JPAlphabet-JPCon|*|+JPComma;
+
+/*		4725.	色調黄色,清濁清,比重1.021,pH5.5
+
+4724;3;JPTestNoUnit|JPSingleSpace:":"|JPNumber|",":JPspace:SEnd;*|JPCon|+JPValue+JPEndConcept-JPAlphabet-JPCon|+JPComma;
+
+/*		4724.	(O2 1L) pH:7.479　PCO2:33.7　PO2:76.4　HCO3:24.5　BE:1.0
+
+4726;3;JPTestNoUnit|JPNumber|"、";*|+JPValue|*;
+
+/*		4726.	PT活性%95%､PT比1.01､PT-INR1.01､APTT29.8秒
+
+4730;3;JPTestNoUnit|"="|JPNumber|")":"(";*|JPCon|+JPValue|*;
+
+/*		4730.	体重100kg(BMI=25.0)
+
+4731;3;JPTestNoUnit|"="|JPNumber|"の";*|JPCon|+JPValue|*;
+
+/*		4731.	ｐＨ＝９.３のトロトロの美人湯を貸切で。
+
+3397;3;JPAlphabet+^JPCount|JPSingleSpace|JPNumber|^JPCount+^JPSingleSpace;JPAlphabet|Join|Join|*;
+
+/*		3397.	iOS 6+Xcode4.6対応。
+
 3449;3;JPAlphabet+^JPCount|","|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
 3451;3;JPAlphabet|"."|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join|Join;
 3438;3;JPTime+JPCount+^"日夜"+^"日"+^"年後"+^"年度"|"に"|JPNumber|JPCount+^JPyen+^"年"+^"割"+^"歳"|"以上";JPFrequency|Join|Join|Join|Join;
@@ -154,10 +213,17 @@
 4685;3;"¥":"$":"us$":"hk$"|JPNumber;+JPUnit|+JPValue;
 4210;3;JPNumber+^JPValue|"→":"/"|JPNumber|JPCount;JPNumber|Join|Join|^JPCount;
 4211;3;JPNumber|JPCount+^JPTime|"→"|JPNumber|JPCount;JPNumber|Join|Join|Join|^JPCount;
-3643;3;JPNumber|JPCount+JPAlphabet;^JPNumber|-JPCon;
+3643;3;JPNumber+^JPKanjiNumber|JPCount+JPAlphabet;^JPNumber+JPValue|-JPCon+JPUnit;
+
+/*		3643.	続いて200mmいっぱいまで寄せ、鮮やかな宝冠をとらえる。 SHOULD NOT WORK FOR. 十mmの針を使った。
+
 4214;3;JPSuruNoun|"後"|JPAlphabet;JPEndConcept|Join|+Dummy;
 4268;3;JPAlphabet|JPSuruNoun|"せず"|"・";JPEndConcept+JPNegation-JPCon|Join|Join|+Dummy;
-4218;3;JPAlphabet|JPSuruNoun+^"対応"|"し":JPSuruVerb;JPCon|Join|JPVerb;
+4737;3;JPAlphabet+JPCount|JPSuruNoun|"し":JPSuruVerb;*|JPCon|JPVerb;
+
+/*		4737.	コラーゲンを１袋に６０００mg配合し、小腹満たしにもちょうどよい女性に嬉しいグミです。
+
+4218;3;JPAlphabet+^JPCount|JPSuruNoun+^"対応"|"し":JPSuruVerb;JPCon|Join|JPVerb;
 4629;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber|Join|Join|Join;
 4628;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber;JPNumber|Join|Join;
 4630;3;JPNumber+^JPKanjiNumber+^"何"+^"数"|*JPKanjiNumber|^JPNumber;JPNumber|Join|*;
@@ -186,9 +252,13 @@
 3854;5;JPde|JPno;JPdeno+JPParticlePREPO|Join;
 3855;5;JPde|JPParticleNO;JPdeno+JPParticlePREPO|Join;
 3685;5;JPCon|JPnakaguro|JPKatakana;JPCon|Join|Join;
-3435;5;JPFrequency;+DateTime+JPFreq;
+3435;5;JPFrequency;+JPFreq;
 3970;5;JPFrequency|JPCon+JPPartAdvNOUN;JPFrequency|Join;
-3436;5;JPFrequency|JPno|^JPmi+^SEnd;JPAttributive|Join|*;
+3436;5;^JPCount|JPFrequency|JPno|^JPmi+^SEnd;*|JPAttributive|Join|*;
+4734;5;JPCount|JPFrequency|JPno;*|*|JPCon;
+
+/*		4734.	約３mの距離から約１２．５リットル／分の水を３分以上注水する。
+
 2740;5;JPAdjVStem|JPsou|JPde|JPAdjVStem|JPku|JPna;JPAdjVStem|Join|Join|Join|Join|Join;
 4153;5;JPAdvDegree+^JPAdv+^JPAdvTime|JPAdjNoun;JPAdjNoun|Join;
 4154;5;JPAdvDegree+JPCon+^"多少"|JPCon:JPSuruNoun:BracketOpen:JPHiragana;-JPAdvDegree|+Dummy;
@@ -249,7 +319,10 @@
 1835;5;JPMonth|JPDate;JPDate|Join;
 4605;5;^"約"+^"回"+^"比"|JPMonthNum|"/"|JPDateNum|^"未満"+^"以上"+^"以下"+^"程度"+^JPCount+^"/";*|JPTime+JPDateTime+DateTime|Join|Join|*;
 4606;5;JPTime|JPSingleSpace|JPTimeNum;JPTime+JPDateTime+DateTime|Join|Join;
-3690;5;JPNumber|JPSingleSpace|JPNumber;JPNumber|Join|^JPNumber;
+3690;5;JPNumber+^"数"|JPSingleSpace|JPNumber;JPNumber|Join|^JPNumber;
+
+/*		3690.	海外の機関投資家に対して幅広い運用商品を提供しており、投資運用額は300 億ユーロ超。 SHOULD NOT WORK FOR. 投資運用額は数 ユーロ超。
+
 4584;5;^JPNumber+^JPTime|JPfun_kanji_1|"以上";*|-JPCount-JPTime|JPCon;
 4583;5;^JPNumber+^JPTime|JPfun_kanji_1;*|-JPCount-JPTime;
 4061;5;JPNumber|"冊";JPNumber|Join;
@@ -452,6 +525,10 @@
 
 /*		4713.	首相退任後の晩年は明らかに離脱派でした。
 
+4732;5;JPCount:JPUnit|JPFrequency;JPCount+JPFreq+JPFrequency|Join;
+
+/*		4732.	1200mg/dayにupして１日後より安静時と姿勢時振戦の訴えあり。
+
 6;5;JPCon+^JPMonth+^JPHiragana+^"多少"+^JPSeparateDate+^"円"+^"銭"+^"ドル"|JPCon+^JPuchi+^"外来"+^"程度"+^JPMonth;JPCon-DateTime|Join;
 2600;5;JPde|JPki|JPru;JPSuruVerb+JPVerb+JPVerbBase+Dummy2|Join|Join;
 2724;5;JPSuruNoun|JPde|JPki|JPmasu;^JPSuruNoun|JPSuruVerb+JPVerb|Join|Join;
@@ -515,7 +592,10 @@
 4232;5;JPSuruNoun|"後"|JPSuruNoun|JPSuruVerb;JPCon|JPPartAdvNOUN+JPEndRelation|+Dummy|+Dummy;
 4579;5;SBegin|JPSuruNoun|JPSuruNoun|JPSuffixTime;*|JPCon|Join|Join+JPDateTime;
 2821;5;JPSuruNoun|JPSuffixTime;JPCon|Join+JPDateTime;
-7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1+^"試合"+^"安打"|JPCon;JPCon|Join;
+7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1+^"試合"+^"安打"+^"回転"|JPCon;JPCon|Join;
+
+/*		7.	佐藤さんは2012年のロンドン・パラリンピックなどへの参加を通じて、障害者が自然に街の中を歩き、周りの人が手を貸す海外の風景を目にしてきました。 SHOULD NOT WORK FOR. 次に高い３回転ルッツは６．０点。
+
 2204;5;JPmade|JPno|JPaida_kanji_1;+JPEndRelation|JPNonRelevant|JPNonRelevant;
 1951;5;JPmade|JPno;+JPEndRelation|JPNonRelevant;
 2438;5;JPno|JPsaki_kanji_1;JPno|JPCon;
@@ -589,6 +669,38 @@
 /*		4643.	またかかりつけ医よりアデムパスは7.5mg/日まで増量されていた。
 
 4664;5;"銭"|"円"|"安":"高";*|JPCon|Join;
+4717;5;"<"|JPNumber:JPCon|">";*|JPBeginEndConcept-JPAlphabet|+Dummy2;
+
+/*		4717.	＜PMCT＞※死亡確認後約２時間後に撮影
+
+4718;5;"<"|JPNumber|typeConcept;+Dummy2|*|*;
+
+/*		4718.	黄色，清，比重1.010,pH6.0,蛋白(-),糖(-),ｳﾛﾋﾞﾘﾉｰｹﾞﾝ0.1mg/dl,ﾋﾞﾘﾙﾋﾞﾝ(-),ｹﾄﾝ体(-),潜血(-),亜硝酸塩(-),白血球(-),赤血球1個/HPF,白血球1個/HPF,尿細管上皮細胞1個/HPF,扁平上皮細胞1個/HPF,硝子円柱<1個/LPF
+
+4720;5;">"|JPTime;+Dummy2|*;
+
+/*		4720.	＜発売日＞２０１４年１月２２日（水）
+
+4719;5;typeConcept|">"|JPNumber;*|+Dummy2|*;
+
+/*		4719.	ハウス「とんがりコーン」＜ケチャップ＆マヨネーズ味＞７５g（箱入り）、３７g（袋入り）４月２１日から全国で発売
+
+4716;5;^SBegin|"<":">"+^Dummy2|JPNumber;*|JPCon-JPNonRelevant|*;
+
+/*		4716.	黄色です<６いかがでしょうか。
+
+4721;5;JPSingleSpace|"<":">"|JPNumber;*|JPNumber-JPNonRelevant|Join;
+
+/*		4721.	色調黄色,清濁清,比重1.028,pH6.0,蛋白-mg/dl,糖+-mg/dl,ｳﾛﾋﾞﾘﾉｰｹﾞﾝ0.1mg/dl,ﾋﾞﾘﾙﾋﾞﾝ-,ｹﾄﾝ体-,潜血-,亜硝酸塩-,白血球-,[尿沈渣]赤血球1個/HPF,白血球1,扁平上皮細胞1個/HPF,硝子円柱<1個/LPF,細菌+-,
+
+4733;5;JPNumber|JPCount+JPFrequency;JPFrequency+JPFreq+OtherEntity|Join;
+
+/*		4733.	かかりつけ医のしもむらクリニック馬場Dr.とも相談し200mg/dayへと増量した。
+
+4736;5;^JPNumber|JPCount+JPFrequency;*|-JPFrequency-JPFreq;
+
+/*		4736.	ﾎﾓﾊﾞﾆｰﾙ酸 mg/day
+
 14;5;JPNumber+^JPUnit|JPCount+^"%"+^"割"+^"回生"+^"号"+^"時"+^"倍"+^"分";JPNumber+JPValue|JPNumber+JPUnit;
 
 /*		14.	日経平均は５月22日に付けた年初来高値（１万5627円）に一時あと20円ほどに迫った。
@@ -1317,6 +1429,10 @@
 2116;5;^JPita+^JPtaka+^JPchou_kanji_1+JPAdjVStem|JPga;JPVerbOther|Join;
 2005;5;SBegin|JPto|JParu|JPCon;*|JPAttributive|Join|^JPCon;
 728;5;JPNumber+^JPUnit|JPVerbOther|JPru;JPNumber|JPVerbOther|JPru;
+4745;5;JPUnit|JPSuffixNoun|JPSuruNoun;JPNumber+JPUnit|JPCount|^JPSuruNoun;
+
+/*		4745.	つまり、２人にすれば、45万円くらい得するということです。
+
 841;5;JPNumber|JPSuffixNoun|JPSuruNoun+^JPchou_kanji_1+^JPVerbNoun+^JPVerbOther;JPNumber|Join|JPSuruNoun;
 847;5;JPVerbOther+^JPno+^"かた"|JPku;-JPSuruNoun-JPSuffixNoun-JPVerbOtherRU|JPku;
 778;5;JPAdvTime|JPSuffixTime|JPniha;JPAdvTime|Join|^JPniha;
@@ -2982,7 +3098,10 @@
 1318;5;JPda|BracketClose|JPto;^JPEndRelation|BracketClose|^JPto;
 1331;5;JPAuxVerb|BracketClose|JPto;^JPEndRelation|BracketClose|^JPto;
 1580;5;BracketClose|JPto|JPVerbBase|JPCon;BracketClose|JPNonRelevant|JPVerb+JPBeginRelation|JPCon;
-1747;5;BracketClose|JPto|JPAdv;BracketClose|JPNonRelevant|^JPBeginRelation;
+1747;5;BracketClose|JPto|JPAdv;BracketClose|JPNonRelevant|^JPBeginRelation-JPFrequency;
+
+/*		1747.	テレビの冬季オリンピックで見た選手たちの姿を頭の中にイメージしながら、自分では「すいー、すいー」と進んでいるつもりだったが、実際は「エッチラオッチラ」。推薦する社民党内などには一本化を求める声もある中、「政策論争をやっていきたい」と繰り返し、出馬取りやめを否定した。
+
 3008;5;BracketClose|JPto|JPVerb|JPga;BracketClose|JPNonRelevant|^JPBeginRelation+Predicate|JPConj;
 1945;5;BracketClose|JPto|JPVerb;BracketClose|JPNonRelevant|^JPBeginRelation+Predicate;
 3215;5;BracketClose|JPto|JPAdvClause;BracketClose|JPNonRelevant|+JPBeginRelation;
@@ -3736,7 +3855,10 @@
 3853;5;JPAdv+JPCon|JPdake;-JPAdv|JPPartAdvNOUN;
 4077;5;JPCon|JPAdjVStem+JPAdv|JPCon;^JPCon|-JPAdv|^JPCon;
 4195;5;JPAdvDegree+^"より"|JPSuruNoun|SEnd;JPCon|Join|SEnd;
-4304;5;JPCon|JPVerbNoun+^JPdake|SEnd;JPCon|Join|SEnd;
+4304;5;JPCon|JPVerbNoun+^JPdake|SEnd;^JPCon-JPAdv|JPCon|SEnd;
+
+/*		4304.	やれていること：夕ご飯　　リフレックス飲んでいたときはできたが、体重増加あり
+
 4485;5;^SBegin|JPAdv+^"いかが"+^"どう"+^"一方"+^"そう"+^"くらい"|"だ";*|JPCon|-JPHiragana;
 669;5;JPAdv+^JPshika+^JPHiragana;JPAdv;
 1963;5;JPCon+JPPrefix;JPCon;
@@ -3778,6 +3900,10 @@
 4708;5;JPCon+^JPMeasurement|JPnakaguro|JPCon+Topic;JPCon+Topic|Join|Join;
 
 /*		4708.	防衛省・自衛隊は原子力災害への対処能力を強化する。
+
+4723;5;JPNumber|"/"|JPCount|^JPNumber;+JPValue|JPCon+JPUnit|Join|*;
+
+/*		4723.	検査時間　　　：３０分／枚（検査エリア１４２mm　x　１４２mm）
 
 675;5;JPCon+^JPMeasurement|JPnakaguro|JPCon+^JPTime+^JPValue;JPCon|Join|Join;
 3742;5;JPKatakana|JPnakaguro|JPVerbNoun;JPCon|Join|Join;
@@ -3834,6 +3960,10 @@
 3314;5;SBegin|JPNonRelevant|JPVerb+JPNegation|JPCon;*|JPNonRelevant|JPCon+JPNegation|Join;
 756;5;SBegin|JPNonRelevant|JPVerb+^Dummy2|JPCon;*|JPNonRelevant|JPCon|Join;
 3959;5;JPni|JPConjVerb|JPCon+JPNegation;^JPni|-JPVerb|JPExpressionC+JPNegation;
+4744;5;JPni|JPConjVerb|JPValue;^JPni|-JPVerb|-JPCon;
+
+/*		4744.	昨年１年間でみると、岡山県全体では、用水路などに落ちて１２人が亡くなっている。
+
 907;5;JPni|JPConjVerb|JPCon;^JPni|-JPVerb|JPCon;
 825;5;JPCon|JPni|JPVerb|JPCon|JPParticleWO|JPConjVerb|JPCon|JPParticleWO;JPCon|Join|Join|Join|JPParticleWO|JPConjVerb|^JPCon|JPParticleWO;
 741;5;JPCon|JPni|JPVerb|JPka|JPni|JPVerb;JPAttributive|Join|Join|Join|Join|Join;
@@ -4241,7 +4371,21 @@
 4489;5;JPAdvTime+JPCon+JPSeparateDate|^JPCon;-JPAdvTime-JPCon|*;
 4491;5;JPAdvTime+JPCon+JPSeparateDate|JPCon:JPSuruNoun|"の";-JPAdvTime-JPSeparateDate|*|*;
 4498;5;JPNumber:JPKatakana+JPCon+^JPUnit+^JPRule172a|"の"|JPCon|"が":"で":"を";*|Join|Join|*;
+4727;5;","|JPSingleSpace|*typeConcept|JPSingleSpace|JPValue|JPUnit;*|*|*|JPCon|*|*;
 
+/*		4727.	色調 黄色 , 清濁 清 , 比重 1.021 , pH 5.5 , 蛋白 - mg/dl, 糖 - mg/dl, ｳﾛﾋﾞﾘﾉｰｹﾞﾝ 0.1 mg/dl, ﾋﾞﾘﾙﾋﾞﾝ - , ｹﾄﾝ体 - ,
+
+4729;5;"〕":"、"|*typeConcept|JPSingleSpace|JPValue|JPUnit|",":"、";*|*|JPCon|*|*|*;
+
+/*		4729.	ﾚﾎﾞﾌﾛｷｻｼﾝ500mg、ミヤBM錠 3錠、ﾘｰﾊﾞｸﾄ4.15 3包、ﾊﾟﾘｴｯﾄ10mg、ｾﾝﾉｼﾄﾞ24mg
+
+4728;5;typeConcept|":"|JPValue|JPUnit|",":"(";*|JPCon|*|*|*;
+
+/*		4728.	甲状腺の大きさは，峡部：2.7mm，右葉：17x14mm，左葉：20x12mmです．
+
+4735;5;typeConcept|":":JPSingleSpace|JPFrequency;*|JPCon|*;
+
+/*		4735.	ﾎﾓﾊﾞﾆｰﾙ酸 2.77mg/day
 /* ---------- DISAMBIGUATION OF TIME-RELATED WORDS ----------
 
 4492;5;JPCon+JPSeparateDate|JPCon:JPSuruNoun+^JPYear|"が":"で";-JPAdvTime-JPCon|*|*;
