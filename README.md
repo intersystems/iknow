@@ -108,6 +108,12 @@ In the following sample sentence, we've highlighted **concepts**, <u>relations</
 
 [Read more...](https://github.com/intersystems/iknow/wiki/Entities)
 
+## CRC's
+
+As of v1.4, the iKnow engine now also produces Concept-Relation-Concept clusters (aka CRC's)
+
+[Read more...](https://github.com/intersystems/iknow/wiki/Concept-Relation-Concept)
+
 ## Attributes
 
 Beyond this simple phrase recognition, iKnow also captures the context of these entities through **semantic attributes**. Attributes label spans (of entities) within a sentence that share a semantic context. Most attributes start from a *marker term* and are then, through linguistic rules, expanded left and right as appropriate per the syntactic structure of the sentence. iKnow's main contribution is in this fine-grained expansion, which has been shown to be more accurate than many ML-based techniques.
