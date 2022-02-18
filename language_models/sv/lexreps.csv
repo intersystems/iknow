@@ -20,7 +20,9 @@
 ;;(54|55|56|57|58|59);;SVNum;
 ;;(6|7|8|9)(0|1|2|3|4|5|6|7|8|9);60 to 99;SVNum;
 
-;;(.|)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);3-digit number;SVNum;
+;;000;Numpart2 for numbers like '800 000';SVNum;SVNumpart2;
+/*;;(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);3-digit number;SVNum; - replaced by regular expression to avoid conflict for '000'
+;;.(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);3-digit number;SVNum;
 ;;(.|)(0|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);4-digit number, not starting with 1 or 2;SVNum;
 ;;1(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;SVNum;SVYear;
 ;;(.|)2(2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;SVNum;
@@ -42,10 +44,10 @@
 ;;åttatusen;;SVNumber;
 ;;niotusen;;SVNumber;
 ;;miljonen;;SVNumber;
-;;miljoner;;SVNumber;
-;;miljonerna;;SVNumber;
-;;miljard;;SVNumber;
-;;miljarder;;SVNumber;
+;;miljoner;;SVNumber;SVNumpart2;
+;;miljonerna;;SVNumber;SVNumpart2;
+;;miljard;;SVNumber;SVNumpart2;
+;;miljarder;;SVNumber;SVNumpart2;
 ;;en halv miljon;;SVNumber;
 ;;en halv miljard;;SVNumber;
 
@@ -151,14 +153,15 @@
 ;;*;;SVLayout;
 ;;\(;;SVBracket1;Punctuation;
 ;;\);;SVBracket2;Punctuation;
-
+;;<;;SVNummodifier;SVCon;
+;;>;;SVNummodifier;SVCon;
 
 /* Other lexreps
 
 ;;av;;SVPrep;SVAv;
 ;;bakom;;SVPrep;
-;;efter;;SVPrep;SVTimeprep;
-;;strax efter;;SVPrep;SVTimeprep;
+;;efter;;SVPrep;SVTimeprep;SVTimespanprep;
+;;strax efter;;SVPrep;SVTimeprep;SVTimespanprep;
 ;;framför;;SVPrep;
 ;;ifran;;SVPrep;
 ;;fram till;;SVPrep;SVTimeprep;
@@ -166,7 +169,10 @@
 ;;för;;SVPrep;SVConj;
 ;;genom;;SVPrep;
 ;;, genom att;;SVComma;SVPunctuation;-;SVConj;SVAtt;Join;
-;;omkring;;SVPrep;SVTimeprep;SVTimemodifier;
+;;mer än;other cases are treated with rules;SVNummodifier;-;SVNummodifier;
+;;mindre än;other cases are treated with rules;SVNummodifier;-;SVNummodifier;
+;;omkring;;SVPrep;SVTimeprep;SVTimemodifier;SVNummodifier;
+;;under och efter;;SVPrep;SVTimeprep;
 ;;under;;SVPrep;SVTimeprep;SVAgeprep;
 ;;vid;;SVPrep;SVTimeprep;
 ;;åt;;SVPrep;
@@ -175,9 +181,10 @@
 ;;utan också;;SVAndOrBut;SVNegStop;
 ;;utan även;;SVAndOrBut;SVNegStop;
 ;;som;;SVConj;SVSom;
-
+;;på det sätt som;;SVConj;
 
 ;;i;;SVPrep;SVTimeprep;
+;;i snitt;;SVAdvDegree;SVAdv;SVNummodifier;
 ;;i väg;;SVAdv;
 ;;i stället för;;SVPrep;
 ;;i stället;;SVAdvStruct;SVAdv;
@@ -16950,7 +16957,7 @@
 ;;frysta;;SVPart
 ;;frälsta;;SVPart
 ;;frånskilda;;SVPart
-;;fyllda;;SVPart
+;;fyllda;;SVPart;SVAge;
 ;;födda;;SVPart
 ;;förberedda;;SVPart
 ;;förbigångna;;SVPart
@@ -21067,7 +21074,7 @@
 ;;finputsat;;SVPartSup
 ;;finslipat;;SVPartSup
 ;;fintat;;SVPartSup
-;;firat;;SVPartSup
+;;firat;;SVPartSup;SVAge;
 ;;fiskat;;SVPartSup
 ;;fixat;;SVPartSup
 ;;fjällat;;SVPartSup
@@ -22149,7 +22156,7 @@
 ;;frånskilt;;SVPartSup
 ;;fulländat;;SVPartSup
 ;;fyllt år;;SVPartSup
-;;fyllt;;SVPartSup
+;;fyllt;;SVPartSup;SVAge;
 ;;fyrdelat;;SVPartSup
 ;;färgat;;SVPartSup
 ;;förandligat;;SVPartSup
@@ -24925,7 +24932,7 @@
 ;;finslipar;;SVVerb
 ;;fintar;;SVVerb
 ;;fipplar;;SVVerb
-;;firar;;SVVerb
+;;firar;;SVVerb;SVAge;
 ;;fiser;;SVVerb
 ;;fixerar;;SVVerb
 ;;fjällar;;SVVerb
@@ -25139,7 +25146,7 @@
 ;;fuskar;;SVVerb
 ;;fylkar;;SVVerb
 ;;fyller år;;SVVerb
-;;fyller;;SVVerb
+;;fyller;;SVVerb;SVAge;
 ;;fyllnar;;SVVerb
 ;;fyndar;;SVVerb
 ;;fyrdelar;;SVVerb
@@ -28287,7 +28294,7 @@
 ;;finslipa;;SVVerbInf
 ;;finta;;SVVerbInf
 ;;fippla;;SVVerbInf
-;;fira;;SVVerbInf
+;;fira;;SVVerbInf;SVAge;
 ;;fiska;;SVVerbInf
 ;;fixera;;SVVerbInf
 ;;fjanta;;SVVerbInf
@@ -30809,7 +30816,7 @@
 ;;finputsade;;SVVerbPart
 ;;finslipade;;SVVerbPart
 ;;fintade;;SVVerbPart
-;;firade;;SVVerbPart
+;;firade;;SVVerbPart;SVAge;
 ;;fiskade;;SVVerbPart
 ;;fixade;;SVVerbPart
 ;;fjällade;;SVVerbPart
@@ -32664,7 +32671,7 @@
 ;;munhuggas;;SVInf
 ;;mysa;;SVInf
 ;;mysas;;SVInf
-;;miljon;;SVNumber
+;;miljon;;SVNumber;SVNumpart2;
 ;;miljons;;SVNumber
 ;;miljontals;;SVNumber
 ;;million;;SVNumber
@@ -64954,7 +64961,7 @@
 ;;trettioåtta;;SVNumber
 ;;tretton;;SVNumber
 ;;tu;;SVNumber
-;;tusen;;SVNumber
+;;tusen;;SVNumber;SVNumpart2;
 ;;tvenne;;SVNumber
 ;;tvåhundra;;SVNumber
 ;;åtti;;SVNumber
@@ -65115,7 +65122,7 @@
 ;;utvalda;;SVPart
 ;;vidbrända;;SVPart
 ;;vridna;;SVPart
-;;vuxna;;SVPartCon;SVAgenoun;
+;;vuxna;;SVPartCon;SVAge;
 ;;välvda;;SVPart
 ;;åtgångna;;SVPart
 ;;överdrivna;;SVPart
@@ -80359,7 +80366,7 @@
 
 
 
-
+;;anmärkningsvärt;;SVAdvAdj;SVAdvManner;SVAdvDegree
 ;;bakåfram;;SVAdvAdj;SVAdvManner
 ;;bakfram;;SVAdvAdj;SVAdvManner
 ;;bakochfram;;SVAdvAdj;SVAdvManner
@@ -80380,12 +80387,14 @@
 ;;föga eller inte alls;;SVInte;SVNegation;
 ;;föga eller intet;;SVSubjpron;SVObjpron;SVCPron;SVNegation;
 ;;helt;;SVAdvDegree;SVAdv;
-;;högst;;SVAdvAdj;SVAdvDegree
+;;högst;;SVAdvAdj;SVAdvDegree;SVNummodifier;
+;;i median;;SVAdv;SVAdvDegree;SVNummodifier;
 ;;jävligt;;SVAdvAdj;SVAdvDegree
 ;;just;;SVAdvStruct;SVAdv;
 ;;knappast;;SVAdv;SVAdvDegree;SVNegation;
-;;knappt;;SVAdvAdj;SVAdvDegree
+;;knappt;;SVAdvAdj;SVAdvDegree;SVNummodifier;
 ;;lagom;;SVAdvAdj;SVAdvDegree
+;;lägst;;SVAdvAdj;SVAdvDegree;SVNummodifier;
 ;;längst;;SVAdvAdj;SVAdvDegree
 ;;lite;;SVAdvAdj;SVAdvDegree
 ;;litet;;SVAdvAdj;SVAdvDegree
@@ -80394,7 +80403,7 @@
 ;;mera;;SVAdvAdj;SVAdvDegree
 ;;mest;;SVAdvAdj;SVAdvDegree
 
-;;minst;;SVAdvAdj;SVAdvDegree;SVTimemodifier;
+;;minst;;SVAdvAdj;SVAdvDegree;SVTimemodifier;SVNummodifier;
 ;;mycket;;SVAdvAdj;SVAdvDegree
 ;;oherrans;;SVAdvAdj;SVAdvDegree
 ;;precis;;SVAdvAdj;SVAdvDegree
@@ -80405,7 +80414,7 @@
 ;;urbota;;SVAdvAdj;SVAdvDegree
 ;;vansinnigt;;SVAdvAdj;SVAdvDegree
 ;;vida;;SVAdvAdj;SVAdvDegree
-;;ytterligare;;SVAdvAdj;SVAdvDegree;
+;;ytterligare;;SVAdvAdj;SVAdvDegree;SVNummodifier;
 ;;långt;;SVAdvAdj;SVAdvDegree;SVTimemodifier;
 ;;långt in;;SVAdv;SVAdvDegree;SVTimemodifier;
 
@@ -80549,7 +80558,7 @@
 ;;direkt;;SVAdvAdj;SVAdvManner;
 ;;snarare;;SVAdvAdj;SVAdvModal
 ;;borta;;SVAdvC;
-;;närmare;;SVAdvAdj;SVAdvDegree;SVAdvManner;
+;;närmare;;SVAdvAdj;SVAdvDegree;SVAdvManner;SVNummodifier;
 ;;närmast;;SVAdvAdj;SVAdvDegree;SVAdvManner;
 ;;ovan;;SVAdvAdj;SVAdvManner;
 ;;allena;;SVAdvAdj;SVAdvStruct
@@ -80558,10 +80567,10 @@
 ;;dygnsvis;;SVAdvAdj;SVAdvManner;
 ;;genast;;SVAdvAdj;SVAdvManner;
 ;;halvårsvis;;SVAdvAdj;SVAdvManner;
-;;snart;;SVAdvAdj;SVAdvManner;
+;;snart;;SVAdvAdj;SVAdvManner;SVTimemodifier;
 ;;stundvis;;SVAdvAdj;SVAdvManner;
 ;;tidigast;;SVAdvAdj;SVAdvDegree;
-;;längre;;SVAdvAdj;SVAdvManner;SVTimemodifier;
+;;längre;;SVAdvAdj;SVAdvManner;SVTimemodifier;SVPosttime;
 
 ;;årsvis;;SVAdvAdj;SVAdvManner
 ;;kvartalsvis;;SVAdvAdj;SVAdvManner;
@@ -80600,10 +80609,10 @@
 ;;hundratals;;SVAdvCon;SVAdvDegree
 ;;kloss;;SVAdvCon;SVAdvDegree
 ;;livs;;SVAdvCon;SVAdvDegree
-;;max;;SVAdvCon;SVAdvDegree
+;;max;;SVAdvCon;SVAdvDegree;SVConIfCap;SVNummodifier;
 ;;mol;;SVAdvCon;SVAdvDegree
 ;;näst;;SVAdvDegree;SVAdv;
-;;nästan;;SVAdvDegree;SVAdv;SVTimemodifier;
+;;nästan;;SVAdvDegree;SVAdv;SVTimemodifier;SVNummodifier;
 
 ;;överhuvud;;SVAdvCon;SVAdvDegree
 ;;prick;;SVAdvCon;SVAdvDegree
@@ -80698,8 +80707,8 @@
 ;;åtminstonde;;SVAdvDegree;SVAdv
 ;;åtminstone;;SVAdvDegree;SVAdv;SVTimemodifier;
 ;;c:a;;SVAdvDegree;SVAdv
-;;ca;;SVAdvDegree;SVAdv
-;;cirka;;SVAdvDegree;SVAdv
+;;ca;;SVAdvDegree;SVAdv;SVNummodifier;
+;;cirka;;SVAdvDegree;SVAdv;SVNummodifier;
 ;;desto;;SVAdvStruct;SVAdv
 ;;ellande;;SVAdvDegree;SVAdv
 ;;enbart;;SVAdvStruct;SVAdvRestrict;SVAdv;
@@ -80745,7 +80754,7 @@
 ;;tillfyllest;;SVAdvDegree;SVAdv
 ;;tillnärmelsevis;;SVAdvDegree;SVAdv
 ;;totaliter;;SVAdvDegree;SVAdv
-;;ungefär;;SVAdvDegree;SVAdv;SVTimemodifier;
+;;ungefär;;SVAdvDegree;SVAdv;SVTimemodifier;SVNummodifier;
 ;;ungefärligen;;SVAdvDegree;SVAdv
 ;;uppemot;;SVAdvDegree;SVAdv
 ;;uppskattningsvis;;SVAdvDegree;SVAdv
@@ -81431,7 +81440,7 @@
 ;;lösas;;SVInfAdj
 
 
-;;nära;;SVAdvAdj;SVAdvDegree;
+;;nära;;SVAdvAdj;SVAdvDegree;SVNummodifier;
 ;;näras;;SVInfAdj
 ;;pryda;;SVInfAdj
 ;;prydas;;SVInfAdj
@@ -81471,7 +81480,7 @@
 ;;fräta;;SVInfCon
 ;;frätas;;SVInfCon;SVSInfCon;
 ;;fylla år;;SVInf;
-;;fylla;;SVInfCon
+;;fylla;;SVInfCon;SVAge;
 ;;fyllas;;SVInfCon;SVSInfCon;
 ;;gala;;SVInfCon
 ;;galas;;SVInfCon;SVSInfCon;
@@ -81619,7 +81628,7 @@
 ;;halvannans;;SVNumber
 ;;halvtannat;;SVNumber
 ;;halvtannats;;SVNumber
-;;hundra;;SVNumber
+;;hundra;;SVNumber;SVNumpart2;
 ;;noll;;SVNumber
 /*;;sex;;SVNumber
 ;;sjutton;;SVNumber
@@ -81633,7 +81642,7 @@
 ;;trillions;;SVNumber
 ;;tusentals;;SVNumber
 ;;nittonhundraåttiofyras;;SVNumber;SVYear
-;;hundrade;;SVOrdnumber
+;;hundrade;;SVOrdnumber;
 ;;hundrades;;SVOrdnumber
 ;;tionde;;SVOrdnumber
 ;;tiondes;;SVOrdnumber
@@ -82224,7 +82233,9 @@
 ;;kommande;;SVPrespart;SVTimeadj;
 ;;kvarvarande;;SVPrespart
 ;;motstående;;SVPrespart
+;;på motsvarande sätt;;SVAdvManner;SVAdv;
 ;;motsvarande;;SVPrespart;SVTimeadj;
+/*;;motsvarande;;SVAdvAdj;SVTimeadj;
 ;;närvarande;;SVPrespart
 ;;nedslående;;SVPrespart
 ;;nerslående;;SVPrespart
@@ -85042,7 +85053,7 @@
 ;;fulländade;;SVVerbPart
 ;;fulländades;;SVVerbPart;SVsVerbPart;
 ;;fyllde år;;SVVerbPart
-;;fyllde;;SVVerbPart
+;;fyllde;;SVVerbPart;SVAge;
 ;;fyrdelade;;SVVerbPart
 ;;fyrdelades;;SVVerbPart;SVsVerbPart;
 ;;gängade;;SVVerbPart
@@ -88595,7 +88606,7 @@
 ;;hörts av;;SVSup
 ;;ifyllande;;SVPrespart
 ;;ifylld;;SVPart
-;;ifyllda;;SVPart
+;;ifyllda;;SVPart;
 ;;ifyllt;;SVPart
 ;;ihopblandad;;SVPart
 ;;ihopblandade;;SVPart
@@ -93303,11 +93314,17 @@
 ;;nästa alla;;SVAdvDegree;SVAdv;-;SVAdj
 ;;nästan alla;;SVAdvDegree;SVAdv;-;SVAdj
 ;;ett plus;;SVIndefart;-;SVCon;
-;;ta fasta;;SVVerb;
+/*;;ta fasta;;SVVerb;
+;;ta fasta;;SVInf;
 ;;tar fasta;;SVVerb;
 ;;tager fasta;;SVVerb;
 ;;tog fasta;;SVVerb;
 ;;tagit fasta;;SVSup;
+;;ta över;;SVInf;
+;;tar över;;SVVerb;
+;;tager över;;SVVerb;
+;;tog över;;SVVerb;
+;;tagit över;;SVSup;
 ;;leda till;;SVInf;-;SVPrep;
 ;;lett till;;SVSup;-;SVPrep;
 ;;är fråga om;;SVVerb;
@@ -93431,11 +93448,13 @@
 ;;mängd;;SVConpart1;SVCon;
 ;;slags;;SVConpart1;SVCon;
 ;;flest;;SVAdvAdj;SVAdvDegree;
-;;innan;;SVPrep;SVConj;
+;;strax innan;;SVPrep;SVTimeprep;
+;;innan;;SVPrep;SVConj;SVTimeprep;
+
 
 /*;;före;;SVPrep;
-;;före;;SVPrepAdv;SVTimeprep;SVAdvTemp;
-;;strax före;;SVPrepAdv;SVTimeprep;SVAdvTemp;
+;;före;;SVPrepAdv;SVTimeprep;SVAdvTemp;SVTimespanprep;
+;;strax före;;SVPrepAdv;SVTimeprep;SVAdvTemp;SVTimespanprep;
 ;;före eller efter;;SVPrep;SVTimeprep;
 ;;före och efter;;SVPrep;SVTimeprep;
 ;;hur ofta;;SVConj;
@@ -93469,6 +93488,8 @@
 ;;midsommar;;SVTimeconcept;SVCon;
 ;;ramadan;;SVTimeconcept;SVCon;
 ;;framtiden;;SVTimeconcept;SVCon;SVDefnoun;
+;;kort tid;;SVAdj;SVTimeadj;-;SVTimeconcept;SVCon;
+;;längre tid;;SVAdj;SVTimeadj;-;SVTimeconcept;SVCon;
 ;;medeltiden;;SVTimeconcept;SVCon;SVDefnoun;
 /*;;gång;;SVTimeconcept;SVCon;
 ;;gång;;SVCon;
@@ -93485,6 +93506,7 @@
 ;;ett par månader;;SVTimeconcept;SVCon;
 ;;veckan;;SVTimeconcept;SVCon;SVDefnoun;
 ;;veckor;;SVTimeconcept;SVCon;
+;;veckorna;;SVTimeconcept;SVCon;
 /*;;vecka postoperativt;;SVCon;SVTimeconcept;
 /*;;veckor postoperativt;;SVCon;SVTimeconcept;
 ;;ett par veckor;;SVTimeconcept;SVCon;
@@ -93515,6 +93537,7 @@
 ;;sekunder;;SVTimeconcept;SVCon;
 ;;sekunderna;;SVTimeconcept;SVCon;
 ;;ett par sekunder;;SVTimeconcept;SVCon;
+;;milllenieskiftet;;SVTimeconcept;SVCon;SVDefnoun;
 ;;säsongen;;SVTimeconcept;SVCon;SVDefnoun;
 ;;vardag;;SVTimeconcept;SVCon;
 ;;i vardagen;nl: in het dagelijks leven;SVPrep;-;SVCon;SVDefnoun;
@@ -93805,7 +93828,8 @@
 
 
 ;;närmare bestämt;;SVExample;SVAdv;
-;;drygt;;SVAdvAdj;SVAdvDegree;
+;;drygt;;SVAdvAdj;SVAdvDegree;SVNummodifier;
+;;lite drygt;;SVAdvAdj;SVAdvDegree;SVNummodifier;
 
 ;;gifta sig;;SVInf;
 ;;gifter sig;;SVVerb;
@@ -93827,7 +93851,7 @@
 ;;fast anställning;;SVAdj;-;SVCon;
 ;;fast egendom;;SVAdj;-;SVCon;
 ;;fast föda;;SVAdj;-;SVCon;
-;;runt;;SVRunt;
+;;runt;;SVRunt;SVNummodifier;
 ;;beträffande;;SVPrep;
 
 
@@ -93948,9 +93972,18 @@
 ;;varit inne på;;SVSup;
 ;;annorlunda;;SVAdvAdj;SVAdvManner;
 ;;ett år gammalt;;SVAdj;
-;;år gammal;;SVAdj;
-
+/*;;år gammal;;SVAdj;
+;;år gammal;;SVAdj;SVCon;SVAge;
+;;år gamla;;SVAdj;SVCon;SVAge;
+;;år yngre;;SVAdj;SVCon;SVAge;
+;;år äldre;;SVAdj;SVCon;SVAge;
 ;;månader gammal;;SVAdj;
+;;månader gamla;;SVAdj;SVCon;SVAge;
+;;månader yngre;;SVAdj;SVCon;SVAge;
+;;månader äldre;;SVAdj;SVCon;SVAge;
+;;yngre än;;SVAdj;SVAge;-;SVPrep;SVAge;
+;;äldre än;;SVAdj;SVAge;-;SVPrep;SVAge;
+
 
 ;;sveriges;;SVAdj;SVGen;
 ;;exklusive;;SVPrep;
@@ -94075,6 +94108,7 @@
 
 ;;inre;;SVAdj;SVCon;
 ;;fler;;SVAdj;
+;;sen;NOTE actually AdvAdj, probably needs special treatment, see also rules.csv;SVTimeadj;SVCon;
 ;;sena;;SVAdj;SVCon;SVTimeadj;
 ;;hektar åker;;SVCon;
 ;;massiv;;SVAdj;SVCon;
@@ -94473,7 +94507,7 @@
 ;;rakt;;SVAdvAdj;SVAdvManner;
 ;;rättvist;;SVAdvAdj;SVAdvManner;
 ;;intimt;;SVAdvAdj;SVAdvManner;
-;;exakt;;SVAdvAdj;SVAdvManner;SVTimemodifier;
+;;exakt;;SVAdvAdj;SVAdvManner;SVTimemodifier;SVNummodifier;
 ;;självklart;;SVAdvAdj;SVAdvModal;
 ;;abrupt;;SVAdvAdj;SVAdvManner;
 ;;svårare;;SVAdvAdj;SVAdvManner;
@@ -94758,15 +94792,17 @@
 ;;alla våra;;SVAdjpron;SVAttrpron;
 ;;alla våras;;SVAdjpron;SVAttrpron;
 ;;alla vår;;SVAdjpron;SVAttrpron;
-;;alla;;SVAttrpron;SVSubjpron;SVObjpron;SVAdjpron;;
+;;alla;;SVAttrpron;SVSubjpron;SVObjpron;SVAdjpron;
 
-;;allas;;SVSubjpron;SVObjpron;SVAttrpron;;
+;;allas;;SVSubjpron;SVObjpron;SVAttrpron;
 ;;alla och envar;;SVSubjpron;SVObjpron;
-;;alla andra;;SVSubjpron;SVObjpron;SVAdjpron;SVAttrpron;;
+;;alla andra;;SVSubjpron;SVObjpron;SVAdjpron;SVAttrpron;
 ;;alla sådana;;SVAdjpron;SVAttrpron;
 ;;allt detta;;SVSubjpron;SVObjpron;SVAttrpron;SVAdjpron;
 ;;allt det;;SVSubjpron;SVObjpron;SVAttrpron;SVAdjpron;
 ;;allt;;SVSubjpron;SVObjpron;SVAttrpron;SVAdjpron;SVEttform;
+;;i allt;;SVPrep;SVTimeprep;SVNummodifier;-;SVAdjpron;SVAttrpron;SVObjpron;SVSubjpron;SVEttform;SVNummodifier;
+;;i allt det;;SVPrep;-;SVSubjpron;SVObjpron;SVAttrpron;SVAdjpron;Join;
 
 
 ;;dens;;SVAttrpron;
@@ -94909,6 +94945,10 @@
 ;;flera av vår;;SVAdjpron;SVAttrpron;
 ;;flera av våra;;SVAdjpron;SVAttrpron;
 ;;flera av;;SVAdjpron;SVAttrpron;
+;;flera hundra;;SVAdj;SVNummodifier;-;SVNumber;
+;;flera miljarder;;SVAdj;SVNummodifier;-;SVNumber;
+;;flera miljoner;;SVAdj;SVNummodifier;-;SVNumber;
+;;flera tusen;;SVAdj;SVNummodifier;-;SVNumber;
 ;;flera;;SVAdjpron;SVAttrpron;
 ;;jättemånga;;SVSubjpron;SVObjpron;SVAdjpron;SVAttrpron;SVCPron;
 ;;lite andra;;SVSubjpron;SVObjpron;SVAdjpron;SVAttrpron;;
@@ -95548,7 +95588,7 @@
 ;;mitt emellan;;SVPrep;
 ;;mitt för;;SVPrep;
 ;;mitt i;;SVPrep;SVTimeprep;
-;;mitt på;;SVPrep;
+;;mitt på;;SVPrep;SVTimeprep;
 ;;i form av;;SVPrep;
 ;;bestående av;;SVPrep;
 ;;med hänsyn till;;SVPrep;
@@ -95665,8 +95705,8 @@
 ;;veckan innan E;;SVAdvTime;SVAdv;Join;-;SEnd;
 ;;vintertid;;SVAdvTime;SVAdv;
 ;;vips;;SVAdvCon;SVAdvStruct;SVAdvTime
-;;år framåt;;SVCon;
-;;år tidigare;;SVCon;
+;;år framåt;;SVCon;;SVTimeconcept;-;SVCon;SVPosttime;
+;;år tidigare;;SVCon;SVTimeconcept;-;SVCon;SVPosttime;
 ;;året därpå;;SVAdvTime;SVAdv;
 ;;året innan ,;;SVAdvTime;SVAdv;Join;-;SVComma;Punctuation;
 ;;året innan E;;SVAdvTime;SVAdv;Join;-;SEnd;
@@ -95701,7 +95741,7 @@
 ;;då och då;;SVAdvTemp;SVAdv;
 ;;dåförtiden;;SVAdvTemp;SVAdv
 ;;efterhand;;SVAdvTemp;SVAdv;
-;;efteråt;;SVAdvTemp;SVAdv
+;;efteråt;;SVAdvTemp;SVAdv;SVPosttime;
 ;;en gång för alla;;SVAdvTemp;SVAdv;
 ;;en gång till;en: once more;SVAdvTemp;SVAdv;
 ;;evinnerligen;;SVAdvTemp;SVAdv
@@ -95725,6 +95765,7 @@
 ;;försent;;SVAdvTemp;SVAdv
 ;;förut;;SVAdvTemp;SVAdv;
 ;;från dag till dag;;SVAdvTemp;SVAdv;
+;;från den ena dagen till den andra;;SVAdvTemp;SVAdv;
 ;;från år till år;;SVAdvTemp;SVAdv;
 ;;hela tiden;;SVAdvTemp;SVAdv;
 ;;hitintills;;SVAdvTemp;SVAdv
@@ -95802,7 +95843,7 @@
 ;;sedan tidigare;;SVAdvTemp;SVAdv;
 ;;sedermera;;SVAdvTemp;SVAdv
 
-;;senast;;SVAdvAdj;SVAdvTemp;
+;;senast;;SVAdvAdj;SVAdvTemp;SVTimemodifier;
 ;;sist;;SVAdvTemp;SVAdv
 ;;småningom;;SVAdvTemp;SVAdv
 ;;snarast;;SVAdvAdj;SVAdvTemp;
@@ -96235,28 +96276,32 @@
 ;;hz;;SVUnit;SVCon;
 ;;km;;SVUnit;SVCon;
 ;;kronor;;SVUnit;SVCon;
+;;ljusår;;SVUnit;SVCon;
 ;;millimeter;;SVUnit;SVCon;
 ;;mm;;SVUnit;SVCon;
 ;;ppm;;SVUnit;SVCon;
 ;;rpm;;SVUnit;SVCon;
 ;;procent;;SVUnit;SVCon;
 
-;;barn;;SVAgenoun;SVCon;
-;;flickor;;SVAgenoun;SVCon;
-;;genomsnittsålder;;SVAgenoun;SVCon;
-;;individer;;SVAgenoun;SVCon;
-;;kvinnor;;SVAgenoun;SVCon;
-;;män;;SVAgenoun;SVCon;
-;;patienter;;SVAgenoun;SVCon;
-;;person;;SVAgenoun;SVCon;
-;;personer;;SVAgenoun;SVCon;
-;;ungdomar;;SVAgenoun;SVCon;
-;;ålder;;SVAgenoun;SVCon;
-;;åldern;;SVAgenoun;SVCon;
-;;åldersgrupperna;;SVAgenoun;SVCon;
-;;åldrar;;SVAgenoun;SVCon;
-;;åldrarna;;SVAgenoun;SVCon;
-
+;;barn;;SVAge;SVCon;
+;;flickor;;SVAge;SVCon;
+;;genomsnittsålder;;SVAge;SVCon;
+;;individer;;SVAge;SVCon;
+;;kvinnor;;SVAge;SVCon;
+;;män;;SVAge;SVCon;
+;;männen;;SVAge;SVCon;
+;;patienter;;SVAge;SVCon;
+;;person;;SVAge;SVCon;
+;;personer;;SVAge;SVCon;
+;;ungdomar;;SVAge;SVCon;
+;;ålder;;SVAge;SVCon;
+;;åldern;;SVAge;SVCon;
+;;åldersgruppen;;SVAge;SVCon;
+;;åldersgrupperna;;SVAge;SVCon;
+;;åldrar;;SVAge;SVCon;
+;;åldrarna;;SVAge;SVCon;
+;;åldersgräns;;SVAge;SVCon;
+;;åldersgränsen;;SVAge;SVCon;
 
 /* LEXREPS THAT MUST NOT BE COVERED BY REGULAR EXPRESSIONS
 
@@ -96350,7 +96395,7 @@
 ;;medeltidsmänniska;;SVCon;
 ;;medmänniska;;SVCon;
 ;;morgonmänniska;;SVCon;
-;;människa;;SVCon;SVAgenoun;
+;;människa;;SVCon;SVAge;
 ;;naturmänniska;;SVCon;
 ;;neandertalmänniska;;SVCon;
 ;;niuiska;;SVCon;
@@ -97659,7 +97704,7 @@
 ;;marknadsliberalt;;SVAdvAdj;SVAdvManner;
 ;;massmedialt;;SVAdvAdj;SVAdvManner;
 ;;matriarkalt;;SVAdvAdj;SVAdvManner;
-;;maximalt;;SVAdvAdj;SVAdvManner;
+;;maximalt;;SVAdvAdj;SVAdvManner;SVNummodifier;
 ;;medialt;;SVAdvAdj;SVAdvManner;
 ;;mellankommunalt;;SVAdvAdj;SVAdvManner;
 ;;mentalt;;SVAdvAdj;SVAdvManner;
@@ -98338,9 +98383,14 @@
 ;;{advadj12};-fritt;SVAdvAdj;SVAdvManner;SVRegex;
 ;;{advadj13};-samt;SVAdvAdj;SVAdvManner;SVRegex;
 
+;;{3dnumber};;SVNum;
 ;;{numberdecimal};;SVNum;SVDecinum;
 ;;{numberordinal};;SVOrdnumber;
 ;;{bignumber01};;SVNum;
+
+;;{range01};1digit-1digit;SVNumber;
+;;{range02};1digit-2digits;SVNumber;
+;;{range03};2digit-2digits;SVNumber;
 
 ;;{noun01};-[aeo]rna;SVCon;SVPluralnoun;
 
