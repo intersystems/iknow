@@ -161,6 +161,8 @@
 /*		1331. Kräver övervakning av barnet ca 30 min efteråt.
 1335;30;SVNum:SVNumber|SVNumpart2;JoinReverse|*;
 /*		1335. Under de följande 350 miljoner åren fram till idag låg Baltika hela tiden över havsytenivå.
+1356;30;SVRunt|SVTimeconcept;SVPrep+SVTimeprep|*;better for CRC-pattern
+/*		1356. Miljardsvinn runt jul.
 
 /* FREQUENCY
 1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under":"om"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
@@ -364,6 +366,8 @@
 /*		1273. Från slutet av 600-talet fram till början av 1400-talet blomstrade den muslimska vetenskapen och kulturen.
 1286;30;"från"|.SVDefart|SVNum|"till"|SVDate|^SVTime;+SVTimeBegin|*|*|*|*|+SVTimeStop;
 /*		1286. Euromelanoma pågår i Sverige från den 5 till den 9 maj.
+1352;30;"från"|*{1,4}^SVPrep|"fram till":"och fram till"|*SVTime:SVTimeadj:SVTimeconcept|^SVTime;+SVTimeprep+SVTimeBegin|*|-SVTimeStop|*|+SVTimeStop;
+/*		1352. Undersökningen gäller tiden från november förra året fram till i dag.
 1279;30;SVTimeprep|SVDefart:SVIndefart|*SVTime:SVYearpart+^SVYear|^SVTime;+SVTimeBegin-SVTimeStop|*|*|+SVTimeStop;
 /*		1279. Det projektet har under de senaste åren publicerat flera studier.
 1299;30;"över"|*SVTime:SVTimeconcept+^SVYear|^SVTime+^"års";+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
@@ -371,7 +375,7 @@
 1264;30;SVTimeprep+^"över"|*SVTime:SVTimeconcept|^SVTime+^"års";+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
 /*		1264. Från tio på kvällen fram till klockan tolv nästa dag är det en stendöd sajt som inte tar emot ett enda spel. I oktober hade andelen ökat till 31 procent.
 1291;30;SVTimeprep|*SVTime+^SVYear|*SVNum|^SVTime;+SVTimeBegin-SVTimeStop|-SVTimeStop|-SVTimeStop|+SVTimeStop;fine-tuning r1264
-/*		1291. Under åren 20092011 registrerades dubbelt så många ingrepp. NOT_IN. Merv i Turkmenistan hade på 1200-talet 12 000 personer
+/*		1291. Under åren 20092011 registrerades dubbelt så många ingrepp. NOT_IN. Merv i Turkmenistan hade på 1200-talet 12 000 personer.
 1280;30;^SVTime|*SVTime|SVPrep:SVAndOrBut:SVComma:"respektive"|*SVTime|^SVTime;*|+SVTimeBegin|-SVTimeStop|*|+SVTimeStop;
 /*		1280. Frågan är bl a hur synen på förvaltningen har utvecklats från 1970-talet till det andra decenniet av 2000-talet.
 1334;30;SVTimeprep|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime|^SVTime;+SVTimeBegin|*|^SVTimeconcept+SVCon-SVAdv|+SVTimeStop;avoid that noun phrases are split
@@ -383,6 +387,13 @@
 /*		1272. Lärarutbildning, med praktisk pedagogik, skedde vid särskilda högskolor sent in i 1900-talet.
 1294;30;SVTimeprep+^"sedan"+^"över"|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*		1294. Vid 10-tiden på måndagen noterades aktien dock något lägre till drygt 137 kronor.
+
+1353;30;SVAdvFreq;+SVTime;
+/*		1353. Olympiska sommarspelen var under 1970- och 80-talen ofta föremål för olika former av bojkott.
+1354;30;SVAdvFreq|SVTimeBegin;+SVTimeBegin|*;
+/*		1354. Symtomen varar ofta i ett par minuter.
+1355;30;SVAdvFreq+SVTimeStop|^SVTime+^SVTimeBegin;-SVTimeStop|+SVTimeStop;
+/*		1355. Olympiska sommarspelen var under 1970- och 80-talen ofta föremål för olika former av bojkott.
 
 1283;30;SVAdvTimeFreq;^SVAdvTime;rules in following phases don't know SVAdvTimeFreq
 /*		1283. Dialysbehandlingen kunde minskas till 5 gånger per vecka på grund av god dialyseffekt och restfunktion.
@@ -1922,7 +1933,7 @@
 1321;65;SVIndefart|*SVAdj:SVCon|"och"|*SVAdj:SVCon|SVvRel;*|*|+SVPBegin|*|*;
 /*		1321. Hon avled två dagar efter en bal och obduktionen visade att hennes korsett hade snörts så hårt att levern genomborrats av tre revben.
 1324;65;^SVIndefart|*SVAdj:SVCon|"och"|SVIndefart|*SVAdj:SVCon|SVvRel;*|*|+SVPBegin|*|*|*;
-/*		1324. Hon avled två dagar efter bal och en obduktion visade att hennes korsett hade snörts så hårt att levern genomborrats av tre revben.
+/*		1324. Hon avled två dagar efter balen och en obduktion visade att hennes korsett hade snörts så hårt att levern genomborrats av tre revben.
 1055;65;SVAtt|^SVInf+^SVVerbInf;+SVConj+SVPBegin|*;
 /*		1055. Vi vill att minst hälften av maten i skola och vård är ekologisk senast år 2020.
 1107;65;"för"+SVConj|SVAtt;+SVPBegin|+SVPBegin;
@@ -2161,7 +2172,7 @@
 1346;75;SVNegation+^SVSubjpron+^SVConj+^"nej"|*SVTime|^SVTime;+SVTimeBegin|-SVTimeBegin|+SVTimeStop;
 /*		1346. Om den nye läraren vill ändra kontraktet genom att använda andra undervisningsformer så går det inte från den ena dagen till den andra.
 
-1332;75;SVYear:SVNumber:SVNum+SVbCon;-SVNumber-SVNum-SVYear;
+1332;75;SVYear:SVNumber:SVNum+SVbCon;-SVNumber-SVNum-SVYear-SVAdj;
 /*		1332. Kräver övervakning av barnet ca 30 min efteråt.
 1344;75;SVTime|SVbCon+SVTime;*|^SVCon+SVTime;
 /*		1344. Speltid: 1 timme 2 minuter.
