@@ -29,14 +29,16 @@ Rhotar
 C1västkusten
 Pasiatiska krabbor hotar västkusten
 <attr type="NegativeSentiment" span="asiatiska krabbor hotar västkusten">
-SBara <det> inte brusar alltför starkt, alltför länge och <alltför ofta> återkommande, då blir användaren irriterad.
+SBara <det> inte brusar alltför starkt, <alltför länge> och <alltför ofta> återkommande, då blir användaren irriterad.
 <attr type="negation" literal="inte brusar alltför starkt," token="inte">
 <attr type="negativesentiment" literal="inte brusar alltför starkt," token="alltför starkt,">
-<attr type="negativesentiment" literal="alltför länge" token="alltför">
+<attr type="negativesentiment" literal="alltför länge" token="alltför länge">
+<attr type="time" literal="alltför länge" token="alltför länge">
+<attr type="time" literal="alltför ofta" token="alltför ofta">
 <attr type="negativesentiment" literal="alltför ofta" token="alltför ofta">
 PR<det>
 Rinte brusar alltför starkt
-C2alltför länge
+PR<alltför länge>
 Roch
 PR<alltför ofta>
 C1återkommande
@@ -45,9 +47,11 @@ C2användaren irriterad
 Pdet inte brusar alltför starkt alltför länge och alltför ofta återkommande blir användaren irriterad
 <attr type="negation" span="det inte brusar alltför starkt alltför länge och alltför ofta återkommande">
 <attr type="NegativeSentiment" span="det inte brusar alltför starkt alltför länge och alltför ofta återkommande">
-SBenskörhet har <ofta> många olika orsaker <det> kan vara en följd av att <man> i ungdomen byggde upp en alltför liten benmassa, men också bero på att <man> av någon orsak förlorat benmassa relativt snabbt under en längre tid.
+SBenskörhet har <ofta> många olika orsaker <det> kan vara en följd av att <man> i ungdomen byggde upp en alltför liten benmassa, men också bero på att <man> av någon orsak förlorat benmassa relativt snabbt under en längre tid.
+<attr type="time" literal="ofta" token="ofta">
 <attr type="negativesentiment" literal="alltför liten benmassa," token="alltför">
-<attr type="positivesentiment" literal="relativt snabbt under" token="relativt snabbt">
+<attr type="positivesentiment" literal="relativt snabbt" token="relativt snabbt">
+<attr type="time" literal="längre tid." token="längre tid.">
 C1benskörhet
 Rhar
 PR<ofta>
@@ -69,9 +73,11 @@ Rav
 C1orsak
 Rförlorat
 C1benmassa
-Rrelativt snabbt under
+Rrelativt snabbt
+Runder
 C2längre tid
 Pbenskörhet har ofta många olika orsaker det kan vara följd av att man i ungdomen byggde upp alltför liten benmassa men också bero på att man av orsak förlorat benmassa relativt snabbt under längre tid
+<attr type="time" span="under längre tid">
 <attr type="PositiveSentiment" span="att man av orsak förlorat benmassa relativt snabbt under längre tid">
 <attr type="NegativeSentiment" span="alltför liten benmassa">
 SBra bevisning hjälper föga om <det> som bevisas är ointressant.
@@ -203,6 +209,7 @@ Rhade försämrats märkbart på grund av
 C2progredierande hematom
 Phade försämrats märkbart på grund av progredierande hematom
 S <För det mesta> läker sjukdomen snabbt.
+<attr type="time" literal="För det mesta" token="För det mesta">
 <attr type="positivesentiment" literal="snabbt." token="snabbt.">
 PR<för det mesta>
 Rläker
@@ -428,6 +435,7 @@ C1karaktärsdygderna
 Pstorhet är möjligt för den som är verkligt bra människa som är förträfflig som människa d v s besitter karaktärsdygderna
 <attr type="PositiveSentiment" span="verkligt bra människa">
 SNär <man> blir magsjuk av bakterier är <det> vanligt att <man> har blivit smittad utomlands, <ofta> där den hygieniska standarden är dålig.
+<attr type="time" literal="ofta" token="ofta">
 <attr type="negativesentiment" literal="dålig." token="dålig.">
 Rnär
 PR<man>
@@ -615,6 +623,7 @@ Pjag tror att det är bra för det visar att vi agerar
 SBehandlingstid:
 C1behandlingstid
 S3-5 dygn.
+<attr type="time" literal="3-5 dygn." token="3-5 dygn.">
 C23-5 dygn
 S1. Från flexibilitet till bevarande
 C11.
