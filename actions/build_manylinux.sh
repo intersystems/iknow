@@ -28,6 +28,8 @@ if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
   yum install -y epel-release
   # this mirror is often slow, so disable it
   echo "exclude=csc.mcs.sdsmt.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
+elif [ "$PROCESSOR" = x86_64 ]; then
+  echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
 fi
 yum install -y dos2unix ccache
 mkdir -p /opt/ccache
@@ -36,11 +38,6 @@ ln -s /usr/bin/ccache /opt/ccache/c++
 ln -s /usr/bin/ccache /opt/ccache/gcc
 ln -s /usr/bin/ccache /opt/ccache/g++
 export PATH="/opt/ccache:$PATH"
-if [ "$PROCESSOR" = x86_64 ]; then
-  # On manylinux2010_x86_64, the version of ccache is too old to recognize the
-  # CCACHE_MAXSIZE environment variable, so set the max cache size manually.
-  ccache --max-size "$CCACHE_MAXSIZE"
-fi
 
 
 ##### Build ICU if it's not cached #####
@@ -53,7 +50,7 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
 
   dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
   export CXXFLAGS="-std=c++11"
-  PYTHON=/opt/python/cp39-cp39/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
+  PYTHON=/opt/python/cp310-cp310/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
   gmake -j $(nproc)
   gmake install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"

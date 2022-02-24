@@ -29,7 +29,7 @@ env:
   JSON_INCLUDE: ${{ github.workspace }}/thirdparty/json/single_include
 
 jobs:
-  manylinux2010_x86_64:
+  manylinux2014_x86_64:
     runs-on: ubuntu-20.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -57,7 +57,7 @@ jobs:
             ~/ccache
             ~/pipcache
       - name: build and run C++ unit tests
-        run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2010_x86_64:$MANYLINUX2010_X86_64_TAG /iknow/actions/build_manylinux.sh
+        run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_x86_64:$MANYLINUX2014_X86_64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
@@ -107,7 +107,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
       - name: build and run C++ unit tests
-        run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/actions/build_manylinux.sh
+        run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
@@ -143,7 +143,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y qemu-user-static binfmt-support
       - name: build and run C++ unit tests
-        run: docker run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/actions/build_manylinux.sh
+        run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
         uses: actions/upload-artifact@v2
         with:
@@ -284,9 +284,9 @@ jobs:
             ${{ github.workspace }}/reference_materials/reports
 
   test_result:
-    needs: [manylinux2010_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
+    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
     runs-on: ubuntu-20.04
-    if: needs.manylinux2010_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
+    if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
     steps:
       - name: create comment
         uses: peter-evans/commit-comment@v1
@@ -298,7 +298,7 @@ jobs:
 
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
-    needs: [manylinux2010_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
+    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
     runs-on: ubuntu-20.04
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
@@ -316,10 +316,10 @@ jobs:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
           path: ~/.cache/pip
-      - name: download manylinux2010_x86_64-wheel
+      - name: download manylinux2014_x86_64-wheel
         uses: actions/download-artifact@v2
         with:
-          name: manylinux2010_x86_64-wheel
+          name: manylinux2014_x86_64-wheel
           path: ~/wheels
       - name: download manylinux2014_aarch64-wheel
         uses: actions/download-artifact@v2
