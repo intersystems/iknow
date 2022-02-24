@@ -156,6 +156,7 @@ for text_file in f:
             write_ln(f_trace, key + ':' + updated_value)
 #            pass
         elif (key == "RuleApplicationResult"):  # use this only when the code for 'RuleApplication' is activated too
+            updated_value = 'rule_id=' + rule_id + value[first_semicolon:]
             write_ln(f_trace, key + ':' + updated_value)
             # pass
         elif (key == "JoinResult"):
