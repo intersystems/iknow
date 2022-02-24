@@ -27,6 +27,13 @@
 /*		731.UD. Därigenom får fastighetsägare det underlag inför beslut som de behöver.
 732;1;UDNonRelevant;NonRelevant;
 /*		732.UD. En patient hade försämrats märkbart på grund av progredierande hematom.
+1357;1;SVCon+UDTime;+SVTimeconcept+SVTime;
+/*		1357.UD. Detta är en viktig pusselbit för att förstå hjärnskador under graviditeten.
+1358;1;SVAdj+UDTime;+SVTimeadj+SVTime;
+/*		1358.UD. Vid olympiska sommarspelen 1972 i München slog terrorister till.
+1359;1;UDTime;+SVTime;
+/*		1359.UD. Då hade den redan funnits i 30 år. Frågan är om dessa nya diagnostiska kriterier kan vara till hjälp i vår dagliga praktiska verksamhet redan i dag.
+
 
 /*1312;1;UDGeneric1;+SGeneric1;
 
@@ -368,7 +375,7 @@
 /*		1286. Euromelanoma pågår i Sverige från den 5 till den 9 maj.
 1352;30;"från"|*{1,4}^SVPrep|"fram till":"och fram till"|*SVTime:SVTimeadj:SVTimeconcept|^SVTime;+SVTimeprep+SVTimeBegin|*|-SVTimeStop|*|+SVTimeStop;
 /*		1352. Undersökningen gäller tiden från november förra året fram till i dag.
-1279;30;SVTimeprep|SVDefart:SVIndefart|*SVTime:SVYearpart+^SVYear|^SVTime;+SVTimeBegin-SVTimeStop|*|*|+SVTimeStop;
+1279;30;SVTimeprep|SVDefart:SVIndefart:SVDemonstr|*SVTime:SVYearpart+^SVYear|^SVTime;+SVTimeBegin-SVTimeStop|*|*|+SVTimeStop;
 /*		1279. Det projektet har under de senaste åren publicerat flera studier.
 1299;30;"över"|*SVTime:SVTimeconcept+^SVYear|^SVTime+^"års";+SVTimeBegin-SVTimeStop|-SVTimeStop|+SVTimeStop;
 /*		1299. Lasarettet i Ystad har ställt in alla planerade operationer i dag och i morgon för patienter som behöver stanna kvar på sjukhuset över natten.
@@ -585,7 +592,6 @@
 /*		667. Den tyske filosofen Jürgen Habermas menar dock att de tre disciplinerna skall hållas åtskilda då de representerar tre olika mänskliga strävanden.
 /*668;40;^SVmAux+^SVpAux+^SVDefart+^SBegin|"då"|*SVCon|^SEnd;*|SVRelpron-SVAdvStruct-SVAdv|*|*;
 /* WRONG: Hur ser då bakgrunden ut för några av de smeder som jag nämnde inledningsvis?
-/*668;40;^SVmAux+^SVpAux+^SVDefart+^SBegin|"då"|.<SVConj+^SVvRel|SVVerb:SVmAux:SVpAux:SVPartSup:SVSup;*|SVRelpron-SVAdvStruct-SVAdv|*|*;
 668;40;^SVmAux+^SVpAux+^SVDefart+^SBegin|"då"|*SVCon|.<^SVConj|SVVerb:SVmAux:SVpAux:SVAux:SVPartSup:SVSup;*|SVRelpron-SVAdvStruct-SVAdv|*|*|*;
 /*		668. Hittills har samband med kemisk påverkan som regel erkänts på ett alldeles för sent stadium då skadan är mer eller mindre irreparabel.
 1313;40;^SVmAux+^SVpAux+^SVDefart+^SBegin|"då"|*SVCon|SVVerbPart:SVsVerbPart:SVVerbAdjCon:SVVerbCon;*|SVRelpron-SVAdvStruct-SVAdv|*|*;
@@ -929,7 +935,7 @@
 /*		100. Man ska alltid ringa 112 efter ambulans.
 140;40;SVmAux|SVInte|SVVerbInfAdj;SVmAux|SVNegrel|SVInf;
 /*		140. En del studenter verkar inte gilla att skriva för hand.;
-548;40;SVpAux|SVVerbInfAdj;SVpAux|SVAdj;
+548;40;SVpAux|.SVAdvStruct|SVVerbInfAdj;SVpAux|*|SVAdj;
 /*		548. En röntgenundersökning kan visa om det finns tecken på att slemhinnorna är svullna eller om det finns vätska i bihålorna.
 745;40;SVpAux|SVSaa|SVVerbInfAdj;SVpAux|*|SVAdj;
 /*		745. Annars har vi bara den här stereotypa bilden av att killar gillar krig och att slåss och ska vara så tuffa.
@@ -1996,6 +2002,13 @@
 /*		1213. Renhjorden höll sig således inom ett begränsat område på 0,5-1 mil, beroende på storleken på hjorden.
 
 
+/* ====================================
+/* PHASE 69: PREPARATION FOR ATTRIBUTES
+/* ====================================
+1290;69;SVAdj+SVNonRelevant;-SVAdj;needed for attribute repositioning
+/*		1290. I de flesta sjöar och hav så bildas under sommarmånaderna ett så kallat temperatursprångskikt.
+
+
 /* ==================
 /* PHASE 70: NEGATION
 /* ==================
@@ -2133,9 +2146,9 @@
 /*		1134. Jämfört med icke-kirurgisk behandling mot fetma har obesitaskirurgi större effekt på både kroppsvikt och andra utfallsmått, men slutsatserna begränsas av kort uppföljningstid.
 
 
-/* ==========================
-/* PHASE 75: TIME EXPANSION 2
-/* ==========================
+/* =================================
+/* PHASE 75 and 76: TIME EXPANSION 2
+/* =================================
 /* Detection of time markers and basic expansion are done in phase 30.
 /* Calculation of spans for time-expressing prepositions and conjunctions is done here.
 /* ------------------------------------------------------------------------------------
@@ -2176,6 +2189,41 @@
 /*		1332. Kräver övervakning av barnet ca 30 min efteråt.
 1344;75;SVTime|SVbCon+SVTime;*|^SVCon+SVTime;
 /*		1344. Speltid: 1 timme 2 minuter.
+/* avoid that hyphen becomes EndConcept in time span
+1276;75;"-"+SVTimeprep;-SVPunctuation+SVPrep;
+/*		1276. Från de tidigaste muntliga berättelserna ledde skriftspråkets uppfinnande omkring 2100 f.Kr. - 2000 f.Kr. till övergången från muntlig tradition till nerskriven.
+
+/*1361;75;SVAdvAmount:SVAdvStruct:SVAttrpron:SVDefart:SVDemonstr:SVIndefart+SVTime|^typeOther;+JoinReverse|*;to cover UDTime on Nonrelevant lexreps
+1361;75;SVAdvAmount:SVAdvStruct:SVAttrpron:SVDefart:SVDemonstr:SVIndefart+SVTime|^typeOther+^SVAndOrBut+^SVPunctuation+^SEnd;+JoinReverse|*;to cover UDTime on Nonrelevant lexreps
+/*		1361.UD. Det gemensamma för dessa är att man satsar (pengar, normalt) på en framtida händelse som kan inträffa eller ej, eller på en redan inträffad händelse vars utfall är åtminstone delvis obekant. 
+1364;75;^typeOther+^SVPunctuation+^SBegin|SVAdvAmount:SVAdvStruct:SVAttrpron:SVDefart:SVDemonstr:SVIndefart+SVTime;+SVTime|Join;
+/*		1364.UD. Hans företag har redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
+1363;75;SVAdvAmount:SVAdvStruct:SVAttrpron:SVDefart:SVDemonstr:SVIndefart+SVTime;^SVAdvTemp+SVTime-SVAdv;NR time marker followed by NR lexrep, punctuation or SEnd
+/*		1363.UD. Hans företag har också redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
+
+/* remove or re-position SVTimeStop if needed
+1292;75;SVAndOrBut+SVTimeStop|SVTimeBegin;-SVTimeStop|-SVTimeBegin;
+/*		1292. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige.
+
+/* Phase 76: following rules leave labels SVNegation and SVPBegin (a.o.) untouched.
+
+1293;76;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop+^"års";*|SVbCon+SVTimeStop;
+/*		1293. Här etablerades sedan 1950-talet småindustrier som så småningom liknade en kåkstad.
+/*1362;90;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop|*typeConcept|^typeConcept;*|-SVTimeStop|*|+SVTimeStop;
+1362;76;typeBeginConcept:typeConcept+SVTime+SVTimeStop|*typeConcept|^typeConcept;-SVTimeStop|*|+SVTimeStop;
+/*		1362.UD. Det gemensamma för dessa är att man satsar (pengar, normalt) på en framtida händelse som kan inträffa eller ej, eller på en redan inträffad händelse vars utfall är åtminstone delvis obekant. 
+
+1282;76;SVTimeBegin:SVTime+SVTimeStop;-SVTimeStop;
+/*		1282. Genom nationalismen kom vikingen att bli föremål för hämningslös beundran, i synnerhet under andra hälften av 1800-talet fram till långt in på 1900-talet.
+
+/*1268;90;typeConcept+SVTimeStop+^SVGen+^SVPossibleGennoun|^SVTime;SVbCon+SVTimeStop|*; -> better in some cases, worse in others, r1268 needs fine-tuning
+1260;76;typeOther+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
+/*		1260. I dag, onsdag, meddelade bolaget att de primära effektmåtten inte uppnåddes i fas III-studien.
+1265;76;SVPunctuation+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
+/*		1265. Formatet började bli populärt på allvar i början av 1990-talet - bland annat utsågs cd-spelaren till årets julklapp 1991 och cd-skivan fick samma utmärkelse 1995.
+1262;76;typeRelation:typeBeginRelation+^SVTime|.typeOther|typeRelation+SVTimeBegin;*|*|SVbRel+SVTimeBegin;
+/*		1262. Ett exempel är avbildat på Vädersoltavlan, som visar ett halofenomen över Stockholm som varade mellan kl 7 och 9 på morgonen den 20 april 1535.
+
 
 
 /* ===================
@@ -2287,38 +2335,15 @@
 /*		1190.UD. Den andra kommunen ska skriftligen och utan dröjsmål meddela sin inställning.
 
 
-/* =======================================
-/* PHASE 85, PHASE 90 and PHASE $: CLEANUP
-/* =======================================
+/* =============================
+/* PHASE 85 and PHASE $: CLEANUP
+/* =============================
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
 
-/* avoid that hyphen becomes EndConcept in time span
-1276;90;"-"+SVTimeprep;-SVPunctuation+SVPrep;
-/*		1276. Från de tidigaste muntliga berättelserna ledde skriftspråkets uppfinnande omkring 2100 f.Kr. - 2000 f.Kr. till övergången från muntlig tradition till nerskriven.
-
-1290;90;SVAdj+SVNonRelevant;-SVAdj;needed for attribute repositioning
-/*		1290. I de flesta sjöar och hav så bildas under sommarmånaderna ett så kallat temperatursprångskikt.
-
-/* remove or re-position SVTimeStop if needed
-1292;90;SVAndOrBut+SVTimeStop|SVTimeBegin;-SVTimeStop|-SVTimeBegin;
-/*		1292. Under resten av 1970-talet och under hela 1980-talet bodde de halvårsvis i Holland eller i Sverige.
-1282;90;SVTimeBegin:SVTime+SVTimeStop;-SVTimeStop;
-/*		1282. Genom nationalismen kom vikingen att bli föremål för hämningslös beundran, i synnerhet under andra hälften av 1800-talet fram till långt in på 1900-talet.
-
-1293;90;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop+^"års";*|SVbCon+SVTimeStop;
-/*		1293. Här etablerades sedan 1950-talet småindustrier som så småningom liknade en kåkstad.
-
-/*1268;90;typeConcept+SVTimeStop+^SVGen+^SVPossibleGennoun|^SVTime;SVbCon+SVTimeStop|*; -> better in some cases, worse in others, r1268 needs fine-tuning
-1260;90;typeOther+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
-/*		1260. I dag, onsdag, meddelade bolaget att de primära effektmåtten inte uppnåddes i fas III-studien.
-1265;90;SVPunctuation+SVTimeStop|.typeOther|^typeOther;-SVTimeStop|*|+SVTimeStop;
-/*		1265. Formatet började bli populärt på allvar i början av 1990-talet - bland annat utsågs cd-spelaren till årets julklapp 1991 och cd-skivan fick samma utmärkelse 1995.
-1262;90;typeRelation:typeBeginRelation+^SVTime|.typeOther|typeRelation+SVTimeBegin;*|*|SVbRel+SVTimeBegin;
-/*		1262. Ett exempel är avbildat på Vädersoltavlan, som visar ett halofenomen över Stockholm som varade mellan kl 7 och 9 på morgonen den 20 april 1535.
-
-
+1360;$;UDTime+^SVTime;+SVTime;
+/*		1360.UD. no example.
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 
