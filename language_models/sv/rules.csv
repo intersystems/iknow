@@ -252,6 +252,8 @@
 /*		1342. Många har i dag semestrar på 6 eller 7 veckor.
 1343;30;SVIndefart:SVNumber|"eller"|SVNumber|SVTimeconcept;JoinReverse|JoinReverse|JoinReverse|*;
 /*		1343. Många har i dag semestrar på sex eller sju veckor.
+1365;30;SVAdjpron|SVNum:SVNumber|SVTimeconcept;JoinReverse|*|*;
+/*		1365. Stockholms stadslandskap och stadsbild som vi uppfattar dem idag har formats under många hundratals år.
 
 1243;30;SVDefart:SVDemonstr|*SVTimeadj:SVNum:SVNumber:SVOrdnumber|SVTimeconcept:SVYearpart:SVMonth:SVDay;-SVSubjpron-SVObjpron-SVAttrpron|+SVTime|+SVTime;
 /*		1243. På fredagens agenda kvarstår bland annat en definitiv BNP-siffra för det tredje kvartalet.
@@ -302,8 +304,8 @@
 /*		1306. Han blir borta från spel i fyra till sex veckor.
 1304;30;SVAge:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept;*|*|-SVTimeprep|*|+SVAge;
 /*		1304. I observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar. Om barnet är under tre månader och man misstänker att barnet har en infektion bör man ringa sjukvårdsrådgivningen eller kontakta vårdcentralen.
-/*1303;30;^SVAge|"om":SVTimeprep|."de här"|SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|SVAdj+SVTimeadj+SVTime-SVSubjpron-SVAttrpron|+SVTime|+SVTime|*;+SVTimeprep for 'om'
-1303;30;^SVAge|"om":SVTimeprep|."de här"|SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime|+SVTime|*;+SVTimeprep for 'om'
+/*1303;30;^SVAge|"om":SVTimeprep|."de här"|SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime|+SVTime|*;+SVTimeprep for 'om'
+1303;30;^SVAge|"om":SVTimeprep|."de här"|SVAdjpron:SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime-SVSubjpron-SVObjpron|+SVTime|*;+SVTimeprep for 'om'
 /*		1303. Buggen har varit oupptäckt i två år. Om patienten sedan är fri från cancer under tre år kan det bli aktuellt med njurtransplantation.
 1305;30;^SVAge|"om":SVTimeprep|SVIndefart|SVTimeconcept|^SVAge;*|+SVTimeprep|SVNumber+SVTime|+SVTime|*;+SVTimeprep for 'om', ^SVNumber for Indefart
 /*		1305. Buggen har varit oupptäckt i ett år.
@@ -350,8 +352,8 @@
 /*		1274. Från 800-talet e.kr. kan man börja spåra den västerländska konstmusiken i källmaterialet tack vare bevarade notdokument.
 1255;30;SVAdvTime:SVTimeconcept:SVTime|*SVPosttime;+SVTime|Join;
 /*		1255. Kortison gavs i 1 vecka postoperativt.
-1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
-/*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader.
+1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber+^SVAdjpron;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
+/*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader. NOT_IN. Barnet blir friskt igen efter några dagar.
 
 1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
