@@ -34,6 +34,15 @@
 1359;1;UDTime;+SVTime;
 /*		1359.UD. Då hade den redan funnits i 30 år. Frågan är om dessa nya diagnostiska kriterier kan vara till hjälp i vår dagliga praktiska verksamhet redan i dag.
 
+1366;1;UDIgnoreNegation;-SVNegation-SVNegBegin-SVNegWord-SVNegadj;
+/*		1366.UD. Sjukdomen behöver sällan behandlas med antibiotika.
+1369;1;UDIgnoreTime;-SVTimeconcept-SVTimeadj-SVTimespan-SVYearpart-SVDay-SVHour-SVClocktime;
+/*		1369.UD. Alla julförberedelser skulle vara klara till luciadagen och det firade man med att äta och dricka lite extra.
+1370;1;UDIgnoreTime;-SVTimeprep-SVTimespanprep-SVTimemodifier-SVPosttime-SVTime;
+/*		1370.UD. Liknande förhållanden har naturligtvis funnits även längre tillbaka i tiden.
+1371;1;UDIgnoreTime+SVYear;-SVYear+SVCon;
+/*		1371.UD. Det blev en mycket inflytelserik text under närmare 1000 år.
+
 
 /*1312;1;UDGeneric1;+SGeneric1;
 
@@ -1180,7 +1189,7 @@
 239;40;SVVerbAdj|SVVerbpt2;SVVerb|SVVerbpt2;
 /*		239. Heat shock-proteiner är inflammatoriska och läcker ut från döda celler.
 235;40;SVCon|SVVerbAdj;SVCon|SVVerb;
-/*		235. Under lång tid låg fokus på användningen inom elitidrotten. Det temporala och spatiala avståndet mellan Bibeln och Legender löses därmed upp, så att berättelserna präglas av en mytisk tidlöshet.
+/*		235. Två personer låg och sov där, men ingen av dem skadades. Det temporala och spatiala avståndet mellan Bibeln och Legender löses därmed upp, så att berättelserna präglas av en mytisk tidlöshet.
 236;40;"de"|SVVerbAdj;SVSubjpron|SVVerbAdj;
 /*		236. De löses bäst upp i sura lösningar och reagerar med metallsalter, så använd en rostfri kastrull.
 237;40;SVSubjpron+^SVDefart|SVVerbAdj;SVSubjpron|SVVerb;
@@ -2343,9 +2352,25 @@
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
-
 1360;$;UDTime+^SVTime;+SVTime;
 /*		1360.UD. no example.
+1367;$;UDIgnoreNegation;-SVNegation-SVNegBegin;
+/*		1367.UD. Sjukdomen behöver sällan behandlas med antibiotika.
+1368;$;SVNegBegin+^SVNegation|.^SVNegation+^SVNegStop|SVNegStop;-SVNegBegin|*|*;
+/*		1368.UD. Språkhandlingskategorierna är framför allt pragmatiska kategorier, och som sådana kan de inte uttömmande beskrivas utan hänvisning till den diskursiva praktiken.
+1372;$;UDIgnoreTime;-SVTime-SVTimeBegin;
+/*		1372.UD. Vanligen används ved eller elektricitet. Området runt sjön är vintertid känt för att vara snörikt.
+/*1373;$;SVTimeBegin+^SVTime|.^SVTime+^SVTimeStop|SVTimeStop;-SVTimeBegin|*|*;
+1373;$;SVTimeBegin+^SVTime|.^SVTime+^UDIgnoreTime|UDIgnoreTime;-SVTimeBegin|*|*;
+/*		1373.UD. Så er vi officielt gået på vintertid!
+
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 
+
+/*2772;$;ENDateTimeBegin|.^ENTime+^ENDuration+^ENFrequency+^UDIgnoreTime|UDIgnoreTime;-ENDateTimeBegin|*|*;remove time span for UDIgnoreTime
+/*/*		2772.UD. Its loan book increased by 19% to S$72.8 billion as of Dec 31, boosted by growth in corporate and small-to-medium-enterprise loans.
+/*2771;$;UDIgnoreTime;-ENTime-ENTemp-ENDuration-ENFrequency-ENDateTimeBegin;
+/*/*		2771.UD. We went shopping on Black Friday in the afternoon.
+/*2783;$;UDIgnoreNumber;-ENNumber-ENNum;
+/*/*		2783.UD. The rise in the 2000 combined ratio is "nothing dramatic".
