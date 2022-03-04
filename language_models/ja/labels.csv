@@ -8,7 +8,7 @@
 ;5,7,10,13,17,20,$;JPPunctuation;typeEndConcept;mandatory label;0;;
 ;5,20,$;JPRelation;typeRelation;mandatory label;0;;
 ;5,10,13,20,$;JPNonRelevant;typeOther;for CRC-detection in testframework;0;;
-;3;JPCapitalAll;typeAttribute;mandatory label;0;;
+;3;JPCapitalAll;typeAttribute;non-mandatory label for Japanese;0;;
 
 ;5,10,13,$;JPBeginConcept;typeBeginConcept;do not merge with previous Concept;0;;
 ;5,$;JPBeginEndConcept;typeBeginEndConcept;do not merge with other Concepts;0;;
@@ -29,13 +29,14 @@
 ;5,10,13,$;Object;typeAttribute;object of a verb;0;;EVValue(0,2,Object,L,B)
 ;5,13,$;AndOr;typeAttribute;and/or;0;;
 ;5,13,$;Predicate;typeAttribute;predicate of the clause;0;;EVSlot(0,1,Subject,L,B)|EVSlot(0,2,Object,L,B)
-;10,13,15,$;DateTime;typeAttribute;Concept that indicates date or time;0;;EVValue(0,3,Time,R,B)
+;3,10,13,15,$;DateTime;typeAttribute;Concept that indicates date or time;0;;EVValue(0,3,Time,R,B)
 ;5,10,13,$;Topic;typeAttribute;topic of the sentenc;0;;EVValue(0,0,Topic,L,B)
 ;13,$;OtherEntity;typeAttribute;Concpet that is not Subject, Object, or Topic;0;;EVValue(0,4,Other,L,B)
 
 /* Interim Attributes
 ;7,13,$;Dummy;typeAttribute;;0;;
 ;5;Dummy2;typeAttribute;;0;;
+;10;Dummy3;typeAttribute;;0;;
 ;5,$;JPIgnore;typeOther;Temporary *EXPERIMENTAL* label for 思わず;0;;
 ;5;JPRule4510;typeAttribute;exceptions for Rule #4510;0;;
 ;5;JPJoinDate;typeAttribute;exceptions for Rule #4495;0;;
@@ -102,7 +103,7 @@
 ;5,10,$;JPFraction;typeConcept;label for fractions;0;;
 ;5,$;JPFrequency;typeConcept;Label for frequencies;0;;
 ;5,$;JPimperialEra;typeConcept;Imperial Era Names;0;;
-;3,5,$;JPTestNoUnit;typeConcept;label for ph, be, lac;0;;
+;3,5,$;JPTestNoUnit;typeConcept;label for ph, be, lac, etc.;0;;
 
 /* Flavors of Adjectives
 ;5,10,$;JPAdjNoun;typeConcept;label for adjectival nouns;0;;
@@ -393,6 +394,7 @@
 ;3,5,10,13,$;BracketClose;typeOther;label for closing bracket;0;;
 ;5,10,$;DotDotDot;typeOther;label for "…";0;;
 ;3,5,10,13,$;JPPlusMinus;typeConcept;"+" and "-";0;;
+;10;JPMinus;typeOther;"-";0;;
 
 
 ;1,3,5,$;JPMeasurement;typeAttribute;general attribute fo all measurements;0;;Entity(Measurement)

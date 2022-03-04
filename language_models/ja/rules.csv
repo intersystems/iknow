@@ -84,7 +84,10 @@
 3626;3;JPNumber|"〜"|JPNumber;JPNumber|Join|Join;
 3531;3;JPNumber+^"数"|":"|JPNumber;JPNumber|Join|Join;
 4621;3;JPNumber|"-"|JPNumber;JPNumber|Join|Join;
-3518;3;"-"|JPNumber;JPNumber|Join;
+3518;3;"-"|JPNumber;JPNumber-JPMinus|Join;
+
+/*		3518.	上の写真と同じく70-200mmの望遠レンズで、最大までズームイン。
+
 3395;3;JPNumber+^"数"|"、"|JPNumber+^"数"|"、"|JPNumber;JPNumber|Join|Join|Join|Join;
 3394;3;^JPAlphabet+^SBegin|JPNumber+^"数"+^JPMeasurement|"、"|JPNumber;+Dummy|JPNumber|Join|Join;
 
@@ -132,8 +135,14 @@
 3347;3;JPNumber|","|JPNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join;
 3386;3;JPNumber|JPAlphabet+^JPCount;JPCon+JPAlphabet-JPDateNum-JPMonthNum|Join;
 3387;3;JPNumber|"."|JPAlphabet;JPAlphabet|Join|Join;
-3537;3;JPNumber|JPSingleSpace|JPTime;JPNumber+DateTime|Join|Join;
-3401;3;JPNumber|JPSingleSpace|JPCount;JPNumber|Join|JPCount-JPCon;
+3537;3;JPNumber|JPSingleSpace|JPTime;JPNumber+DateTime+JPDateTime|Join|Join;
+
+/*		3537.	軽の人気によって小型車の需要を食われた日産も三菱自動車と組んで2013 年から軽に本腰を入れている。
+
+3401;3;JPNumber+^DateTime|JPSingleSpace|JPCount;JPNumber|Join|JPCount-JPCon;
+
+/*		3401.	4 月15 日から全国のサークルＫとサンクスで販売
+
 3497;3;JPNumber|"_"|JPAlphabet;JPAlphabet-JPDateNum-JPMonthNum|Join|Join;
 3416;3;^"/"|JPNumber+^"数"+^JPKanjiNumber+^JPYearNum|JPSuruNoun+^JPCount;*|^JPNumber|-JPSuruNoun-JPAdv-JPSuffixVerb-JPVerbOther+JPCount;
 4684;3;JPYearNum|"体";+JPValue|+JPUnit;
@@ -355,6 +364,10 @@
 4682;5;JPTime|"少し"|"前":"後":"あと";JPTime|Join|Join;
 4681;5;JPTime|"前";JPTime|Join;
 4683;5;JPTime|"頃";JPTime|Join;
+4746;5;JPCon|JPCon|"以外";JPCon|Join|Join;
+
+/*		4746.	都市部以外についても「値上がり」派と「横ばい・値下がり」派はほぼ拮抗した。
+
 5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"|JPCon|JPCon+^JPNegation+^JPVerbOtherTSU;JPCon|Join|Join;
 
 /*		5.	企業や社会のあり方が大きく変わりつつあるときだからこそ、今まで以上に柔軟で迅速に構築できる、次のIT基盤が求められている。 SHOULD NOT WORK FOR: 毛羽立たずセンイ残りしない化粧用パフとして高いご支持を頂いています。
@@ -3675,7 +3688,10 @@
 4532;5;BracketOpen|JPSuruNoun|BracketClose;*|-JPVerb-JPVerbPastAttributive-JPBeginRelation-JPEndRelation-Predicate|*;
 671;5;JPSuruNoun;+JPCon;
 4555;5;BracketClose|JPVerbBase+^Dummy2|JPCon;*|^JPAttributive-JPVerb-JPSuruVerb|^JPCon;
-1772;5;SBegin|JPVerbBase|JPCon;*|^JPAttributive-JPVerb-JPSuruVerb|^JPCon;
+1772;5;SBegin|JPVerbBase|JPCon:JPValue;*|^JPAttributive-JPVerb-JPSuruVerb|*;
+
+/*		1772.	利用するソフトによってキーボードは違うのに、プラスチックのキーボードはいつもそこにある。残る１基は年間５万ﾄﾝ分の増強工事を実施する。
+
 1974;5;JPParticleNO|JPVerbPastAttributive|JPCon;JPParticleNO|JPAttributive|JPCon;
 2007;5;JPVerbPastAttributive|JPga;^JPVerbPastAttributive|JPParticleGA+JPEndRelation;
 2479;5;JPComma|JPVerbPastAttributive|JPCon;JPComma|JPAttributive|^JPCon;
@@ -4415,7 +4431,10 @@
 3389;10;JPAlphabet|JPSingleSpace|JPAlphabet;JPAlphabet|Join|Join;
 3398;10;JPAlphabet|JPSingleSpace|JPCon;JPCon|Join|^JPCon;
 3528;10;JPAlphabet|JPspace|JPAlphabet;JPCon|Join|Join;
-3945;10;"-"|JPAlphabet;JPNonRelevant|^JPAlphabet;
+3945;10;^SBegin|"-"|JPAlphabet;*|JPNonRelevant|^JPAlphabet;
+
+/*		3945.	色　　　　　：－W（ホワイト）／－K（ブラック）
+
 3388;10;JPAlphabet;^JPCon;
 
 /*		3388.	欧州連合（ＥＵ）は日本時間８日未明に開いたユーロ圏首脳会議で、ギリシャへの支援策について12日の最終合意を目指す方針で一致した。
@@ -4487,9 +4506,19 @@
 3929;10;"-"|JPPunctuation;JPExpressionNR|JPPunctuation;
 4226;10;typeConcept|BracketOpen|"-":"+"|BracketClose;+Dummy|Concept|Join|Join;
 4602;10;typeConcept|JPSingleSpace|BracketOpen|"-":"+"|BracketClose;+Dummy|Concept|Join|Join|Join;
-3943;10;"-"|SEnd;JPExpressionNR|SEnd;
+4747;10;typeConcept|JPMinus:"+"|JPSingleSpace:JPspace:SEnd;*|+JPCon|*;
+
+/*		4747.	月経：11歳初経、不定期発来（2ヶ月に1回くらい）月経痛＋
+
+3943;10;SBegin|JPMinus:"-"|*^JPMinus|JPMinus:"-"|SEnd;*|*|*|-JPCon|*;
+
+/*		3943.	－マイメティックス社から導入した呼吸器合胞体ウイルス感染予防ワクチンの開発に投資－
+
 3944;10;SBegin|"-";*|JPNonRelevant;
-3946;10;"-";JPNonRelevant;
+3946;10;"-"+^JPCon;JPNonRelevant;
+
+/*		3946.	そして齋藤氏が“日本語の乱れ”よりも警戒すべきだと指摘したものは－。
+
 3930;10;"ー"|JPPunctuation;JPExpressionNR|JPPunctuation;
 3932;10;BracketOpen|"と";^BracketOpen|JPNonRelevant;
 3936;10;"*";JPNonRelevant;
