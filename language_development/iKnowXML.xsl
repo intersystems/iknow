@@ -22,23 +22,30 @@
 		.cluster { background-color:lightblue; }
 		.evector { border: 1px solid; }
 		<!-- currently expandable attributes -->
-		.path_negation { font-weight:bold; background-color:red; }
-		.negation { color:red; border: 2px solid red; }
-		.path_sentpositive { color:purple; text-decoration:overline }
-		.sentpositive { color:purple; text-decoration:overline }
-		.path_sentnegative { color:brown; text-decoration:overline }
-		.sentnegative { color:brown; text-decoration:overline }
-		.path_time { font-weight:bold; background-color:green; }
-		.time { color:green; border: 2px solid green; }	
-		.path_frequency { font-weight:bold; background-color:purple; }
-		.frequency { color:purple; border: 2px solid purple; }
-		.path_duration { font-weight:bold; background-color:pink; }
-		.duration { color:pink; border: 2px solid pink; }
-		.path_measurement { font-weight:bold; background-color:grey; }
-		.measurement { color:grey; border: 2px solid grey; }
-		.path_certainty { font-weight:bold; background-color:yellow; }
-		.certainty { border: 2px solid yellow; }
-	</style>
+    .path_negation { font-weight:bold; background-color:red; }
+    .negation { color:red; border: 2px solid red; }
+    .path_sentpositive { color:purple; text-decoration:overline }
+    .sentpositive { color:purple; text-decoration:overline }
+    .path_sentnegative { color:brown; text-decoration:overline }
+    .sentnegative { color:brown; text-decoration:overline }
+    .path_time { font-weight:bold; background-color:green; }
+    .time { color:green; border: 2px solid green; }
+    .path_frequency { font-weight:bold; background-color:purple; }
+    .frequency { color:purple; border: 2px solid purple; }
+    .path_duration { font-weight:bold; background-color:pink; }
+    .duration { color:pink; border: 2px solid pink; }
+    .path_measurement { font-weight:bold; background-color:grey; }
+    .measurement { color:grey; border: 2px solid grey; }
+    .path_certainty { font-weight:bold; background-color:yellow; }
+    .certainty { border: 2px solid yellow; }
+    .generic1 { border: 10px solid red; }
+    .path_generic1 { border: 4px solid red; }
+    .generic2 { border: 10px solid green; }
+    .path_generic2 { border: 4px solid green; }
+    .generic3 { border: 10px solid blue; }
+    .path_generic3 { border: 4px solid blue; }
+
+  </style>
 	</head>
 	<body>
 	<!--
@@ -175,6 +182,8 @@
 				<xsl:text> </xsl:text>
 			  </xsl:for-each>
 			</xsl:for-each>
+      
+      <!-- Path duration -->
 			<xsl:for-each select="duration">
 			  <br /><i><xsl:text>(duration) </xsl:text></i>
 			  <xsl:for-each select="*">
@@ -189,6 +198,8 @@
 				<xsl:text> </xsl:text>
 			  </xsl:for-each>
 			</xsl:for-each>
+      
+      <!-- Path certainty -->
 			<xsl:for-each select="certainty">
 			  <br /><i><xsl:text>(certainty) </xsl:text></i>
 			  <xsl:for-each select="*">
@@ -204,7 +215,70 @@
 			  </xsl:for-each>
 			</xsl:for-each>
 
-			<!--
+      <!-- Path generic1 -->
+      <xsl:for-each select="generic1">
+        <br />
+        <i>
+          <xsl:text>(generic_1) </xsl:text>
+        </i>
+        <xsl:for-each select="*">
+          <xsl:choose>
+            <xsl:when test="starts-with(name(),'no')">
+              <xsl:value-of select="./text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <span class="path_generic1">
+                <xsl:value-of select="./text()" />
+              </span>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text> </xsl:text>
+        </xsl:for-each>
+      </xsl:for-each>
+      
+      <!-- Path generic2 -->
+      <xsl:for-each select="generic2">
+        <br />
+        <i>
+          <xsl:text>(generic_2) </xsl:text>
+        </i>
+        <xsl:for-each select="*">
+          <xsl:choose>
+            <xsl:when test="starts-with(name(),'no')">
+              <xsl:value-of select="./text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <span class="path_generic2">
+                <xsl:value-of select="./text()" />
+              </span>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text> </xsl:text>
+        </xsl:for-each>
+      </xsl:for-each>
+      
+      <!-- Path generic3 -->
+      <xsl:for-each select="generic3">
+        <br />
+        <i>
+          <xsl:text>(generic_3) </xsl:text>
+        </i>
+        <xsl:for-each select="*">
+          <xsl:choose>
+            <xsl:when test="starts-with(name(),'no')">
+              <xsl:value-of select="./text()"/>
+            </xsl:when>
+            <xsl:otherwise>
+              <span class="path_generic3">
+                <xsl:value-of select="./text()" />
+              </span>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text> </xsl:text>
+        </xsl:for-each>
+      </xsl:for-each>
+
+      <!--
 			<xsl:value-of select="$nodes[number($idxNode)]/p_begin/text()" />
 			<xsl:text> </xsl:text>
 			<span class="nconcept"><xsl:value-of select="$nodes[number($idxNode)]/negation/text()" /></span>
@@ -713,13 +787,36 @@
 	      <xsl:when test="starts-with(name(),'measurement')">
 		      <span class="measurement" title="measurement"><xsl:value-of select="./text()"/></span>
 		  </xsl:when>
-	      <xsl:when test="starts-with(name(),'certainty')">
-			<xsl:variable name="level_of_certainty"><xsl:value-of select="@level"/></xsl:variable>
-			<xsl:variable name="tit_of_cert">(c=<xsl:value-of select="$level_of_certainty"/>)</xsl:variable>
 
+        <!-- Certainty attribute -->
+	      <xsl:when test="starts-with(name(),'certainty')">
+					<xsl:variable name="level_of_certainty"><xsl:value-of select="@level"/></xsl:variable>
+					<xsl:variable name="tit_of_cert">(c=<xsl:value-of select="$level_of_certainty"/>)</xsl:variable>
 		      <span class="certainty" title="certainty"><xsl:value-of select="./text()"/><xsl:value-of select="$tit_of_cert"/></span>
-		  </xsl:when>		  
-		  <xsl:otherwise><xsl:value-of select="./text()"/></xsl:otherwise>
+				</xsl:when>
+        
+        <!-- Generic 1 attribute -->
+        <xsl:when test="starts-with(name(),'generic1')">
+          <span class="generic1" title="Generic_1">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+        
+        <!-- Generic 2 attribute -->
+        <xsl:when test="starts-with(name(),'generic2')">
+          <span class="generic2" title="Generic_2">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+        
+        <!-- Generic 3 attribute -->
+        <xsl:when test="starts-with(name(),'generic3')">
+          <span class="generic3" title="Generic_3">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+
+        <xsl:otherwise><xsl:value-of select="./text()"/></xsl:otherwise>
 	    </xsl:choose>
 		<xsl:text> </xsl:text>
 	</xsl:for-each>
@@ -760,8 +857,29 @@
 			
 		      <span class="certainty" title="certainty"><xsl:value-of select="./text()"/><xsl:value-of select="$tit_of_cert"/></span>
 		  </xsl:when>
-		  
-		  <xsl:otherwise><xsl:value-of select="./text()"/></xsl:otherwise>
+        
+        <!-- Generic 1 attribute -->
+        <xsl:when test="starts-with(name(),'generic1')">
+          <span class="generic1" title="Generic_1">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+
+        <!-- Generic 2 attribute -->
+        <xsl:when test="starts-with(name(),'generic2')">
+          <span class="generic2" title="Generic_2">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+
+        <!-- Generic 3 attribute -->
+        <xsl:when test="starts-with(name(),'generic3')">
+          <span class="generic3" title="Generic_3">
+            <xsl:value-of select="./text()"/>
+          </span>
+        </xsl:when>
+
+        <xsl:otherwise><xsl:value-of select="./text()"/></xsl:otherwise>
 	    </xsl:choose>
 		<xsl:text> </xsl:text>
 	</xsl:for-each>
