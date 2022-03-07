@@ -566,6 +566,8 @@
 /*		1297. We zullen na het jaar 2020 minder steun kunnen ontvangen.
 1035;40;NLSubjpron|NLPartVerb;*|NLVerb;
 /*		1035. Zij omschreven de sfeer als volgt.
+1968;40;"dat":"dit":"het":NLAndOrBut|NLPartVerb+^NLRelCon|NLArt:NLPoss:NLDempron;*|NLVerb|*;
+/*		1968. Dat vereist het geduld van Job. Hij werkt nog steeds op basis van foto's, maar bewerkt die nu ook op een coherente stilerende manier.
 1055;40;NLArt:NLAttradj:NLGeen:NLDempron|NLRelCon+NLPartVerb|^NLCon;*|NLCon|*;
 /*		1055. De 40 naakte ontslagen zijn wel veel minder dan de aangekondigde 109 jobs die moesten verdwijnen. dat er van de Griekse autoriteiten tot op heden nog geen enkel bericht is ontvangen. NOT. Dat bericht Le Soir.
 1054;40;NLPartVerb|NLLinkingverb;NLPartrel|*;
@@ -574,8 +576,8 @@
 /*		1129. Daarna begonnen mensen over straat te rennen en schreeuwden ze het uit.
 1130;40;NLPartVerb|NLObjpron:"haar";NLVerb|*;
 /*		1130. die verweten haar voortdurend dat zij veel te onbuigzaam was.
-1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep;*|*|NLAttradj|*;
-/*		1289. Na de desastreus verlopen veldtocht verlieten de troepen het land. Gezien de nogal beladen voorgeschiedenis.
+1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep:NLAux:SEnd:NLPunctuation;*|*|NLAttradj|*;
+/*		1289. Na de desastreus verlopen veldtocht verlieten de troepen het land. Gezien de nogal beladen voorgeschiedenis. NOT. Een zwaar onweer (donder en bliksem, stortbuien en felle wind) zouden de ramp mee veroorzaakt hebben. NOT. Tenzij een  wet, bepaald in artikel 4, laatste lid, er anders over beschikt, vinden de verkiezingen plaats op dezelfde dag.
 1290;40;SBegin|*NLAttradj:NLAdj:NLCon|NLPartVerb+^NLRelCon;*|*|NLVerb;
 /*		1290. Regenten begonnen het politieke klimaat te beheersen.
 1034;40;NLPartVerb+^NLRelCon;NLPartAdj;
@@ -598,6 +600,12 @@
 /*		2. Heb je het instructieboekje gelezen? Wil je een snoepje? Volgende week kan je de resultaten bekijken. Kan je er de sterren zien?
 1365;40;NLPrep+^NLOndvw+^NLConj|NLJe|NLAttradj:NLCon;*|NLPoss|*;
 /*		1365. met een felbegeerde doctorstitel voor je naam.
+
+/* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
+1196;40;NLBepaalde|NLConj:NLPoss:NLArt:"haar":NLDat;NLVerb|*;
+/*		1196. Hoewel de rechter bepaalde dat hij de rest van zijn leven achter tralies moet doorbrengen. Die bepaalde de  koers.
+1963;40;NLBepaalde;NLAttradj;
+/*		1963. Kan worden verricht door één bepaalde groep.
 
 /* Disambiguate AdjCon
 1499;40;NLAdvDegree|NLAdjCon;*|NLAdj;
@@ -797,12 +805,6 @@
 /*		515. Twaalf tieners overleefden de brand niet, 23 anderen raakten gewond. We gingen met een aantal anderen op stap. Zijn monnikenwerk kan makkelijk de grondstof vormen voor een tiental andere boeken.
 525;40;"onder"|"andere"|^NLCon+^SEnd;NLAdvStruct|Join|*;
 /*		525. Het omvat onder andere een luchthavengebouw. NOT. 1 juli 2004 is tevens de termijn voor vaartuigen die onder andere vlaggen varen dan die van de lidstaten van de Unie.
-
-/* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
-1196;40;NLBepaalde|NLConj:NLPoss:NLArt:"haar":NLDat;NLVerb|*;
-/*		1196. Hoewel de rechter bepaalde dat hij de rest van zijn leven achter tralies moet doorbrengen. Die bepaalde de  koers.
-1963;40;NLBepaalde;NLAttradj;
-/*		1963. Kan worden verricht door één bepaalde groep.
 
 /* Disambiguate the words WELKE ... OOK
 1140;40;"welke":"welk"|.NLAdj:NLAttradj:NLAttradjCon:NLSubjpron:NLPathRelevant|NLCon|"ook";NLSubjpron+NLObjpron|*|*|NLSubjpron+NLObjpron;
@@ -1072,12 +1074,14 @@
 /*		113. Iedere zondag gaan wij koersen. Ik zweer het je.
 364;40;NLNiet+^"nauwelijks"|NLRelCon;*|^NLVerb;
 /*		364. als we die tenminste niet verliezen aan moties van orde. NOT. Niets is aan mijn aandacht ontsnapt maar ik kan niet puntsgewijs reageren omdat er nauwelijks vragen zijn gesteld.
-38;40;NLRelAdj:NLRelAttradj|NLDat;NLVerb|NLOndvw;
+38;40;NLRelAdj:NLRelAttradj+^NLPartAdj|NLDat;NLVerb|NLOndvw;
 /*		38. In Nederland stelde men al vast dat kinderen stelselmatig snoep krijgen tijdens de lessen.
 40;40;^NLTe|NLRelCon|NLVerb+^NLAux|NLPrep;*|NLCon|*|*;
 /*		40. Het bedrijf, dat werk bood aan 141 mensen, ging failliet. NOT. Tegen half april wil de minister een nota met maatregelen om de achterstand weg te werken voorleggen aan de vakbonden.
 41;40;NLRelCon|NLRelAdj+NLPartAdj|NLOm;NLCon|NLPartrel|*;
 /*		41. Er zijn gisteren vooral voorstellen gelanceerd om het geldprobleem op te lossen.
+1971;40;"die":"dat"|NLPrep|.NLArt:NLPoss:NLAttradj:NLAdj|NLCon|NLRelCon|NLVerb;*|*|*|*|NLVerb|*;
+/*		1971. Vooral werknemers die in Brussel werken laten hun wagen al sneller in de garage staan.
 42;40;^NLTe+^NLRelAdj:NLRelAttradj|NLRelCon|NLVerb:NLPartrel:NLInfCon+^NLRelAux;*|NLCon|*;
 /*		42. We moeten 100 euro kosten betalen. NOT. Twee verkeerde zetten heffen elkaar niet op.
 1388;40;NLRelAdj:NLRelAttradj|NLRelCon|NLAux;NLAttradj|NLCon|*;combination of r567 and r187 to assure correct processing of this specific pattern
@@ -1337,6 +1341,8 @@
 /*		1534. Olie was sinds 20 oktober vorig jaar niet zo duur. NOT. Op enkele uitzonderingen na zijn er dus geen "Belgische" scholen meer. NOT. Zij betaalden hier ruim tweeduizend euro voor. NOT. Wel is volgens haar insecteneiwit potentieel geschikt voor de winning van bloedrukverlagende stoffen.
 1605;40;NLPrep|.NLPoss:NLArt:NLAttradj|NLCon|NLAttradjCon|NLPrep;*|*|+NLEndconcept|*|*;
 /*		1605. Hij uitte in zijn feestrede kritiek op de onwil van Nederland om op cultureel vlak samen te werken.
+1969;40;NLOndvw|NLEr|NLPrep|.NLPoss:NLArt:NLAttradj|NLCon:NLAttradjCon|NLCon|NLVerb;*|*|*|*|+NLEndconcept|*|*;
+/*		1969. Zodra er over een bepaalde onderneming geruchten doen over een kapitaalverhoging, duikt de beurskoers traditioneel vaak naar beneden. 
 1148;40;NLAttradjCon;NLAttradj;
 /*		1148. Mensen in een minimaal bewuste staat zijn zich veel meer van allerhande prikkels uit hun omgeving bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is.
 
@@ -1405,6 +1411,8 @@
 481;40;^NLNumberConcept|NLCon+^NLMeasure+^NLProcent+^NLNumberConcept|.NLAdvDegree:NLVeelWeinig|NLAdj|^NLCon+^SEnd;*|+NLEndconcept|*|*|*;
 /*		481. Even verder moest ze stoppen omdat de schade aan de auto te groot was. Zo komt het dat de partij veel sterker is dan vroeger. NOT. Geen enkel systeem is honderd procent perfect. NOT. De oefengroep van 256 sporters kreeg een acht weken durend neuromusculair oefenprogramma aangeboden. NOT. Bovendien is dit staaltje documentair erfgoed zowel nationaal als internationaal het omvangrijkste in zijn soort.
 /*		481.UD. We hopen dat het weer snel beter wordt. 
+1970;40;NLVerb|NLSubjpron|.NLArt:NLPoss:NLAttradj:NLAdj|NLCon|NLAttradj|.NLAttradj|NLCon;*|*|*|+NLEndconcept|*|*|*;
+/*		1970. Ook door toevoegingen geeft men de kleimassa bepaalde gewenste hoedanigheden.
 393;40;SBegin|NLAndOrBut;*|NLAdvStruct;
 /*		393. En toch zie je dat veel ondernemingen nu online diensten aanbieden.
 1118;40;"daar"|NLSubjpron|NLRel:NLNiet;NLOndvw|*|*;
@@ -1615,8 +1623,8 @@
 /* Defaults for Part and RelAdj
 571;40;SBegin|NLRelAdj:NLRelAttradj|NLCon;*|NLAttradj|*;
 /*		571. Gestolen kunstwerk uit 1980 teruggevonden.
-709;40;NLAux|NLRAdv|NLPartAdj;*|*|NLPartrel;
-/*		709. Duizenden mensen in heel Europa hebben ervoor gekozen producten te kopen die geen GGO's bevatten.
+709;40;NLAux:NLRelAux|NLRAdv:"dan"|NLPartAdj;*|*|NLPartrel;
+/*		709. Duizenden mensen in heel Europa hebben ervoor gekozen producten te kopen die geen GGO's bevatten. Er wordt dan beslist huid te preleveren ter hoogte van het abdomen rechts.
 846;40;NLArt|"door"|*NLArt:NLAttradj:NLCon:NLObjpron|NLRelAdj:NLRelAttradj|NLAttradj:NLCon;*|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|*;
 /*		846. de Lycische bisschop uit de door Grieken bewoonde antieke stad Myra. de door een of meer leden verlangde inlichtingen. een door haar ingediend voorstel.
 833;40;NLArt:NLPrep+^"om"|NLRAdv|*NLAttradj:NLRelAdj:NLRelAttradj:NLPartAdj|NLCon|^"te";*|NLAttradj|NLAttradj|*|*;
@@ -1633,6 +1641,8 @@
 /*		1634. Het  Belgische federalisme is voor niet-ingewijden ingewikkeld en onoverzichtelijk, omdat het unitaire kenmerken vertoont.
 711;40;NLPartAdj;NLPartrel;
 /*		711. Met die niet mis te verstane waarschuwing werd ons dit programma aangereikt.
+1967;40;NLRelAdj+NLRAdv;NLRAdv;
+/*		1967. Ze dachten dat ze voor eeuwig in dat hol vast zouden zitten. 
 92;40;NLRelAdj:NLRelAttradj;NLVerb;
 /*		92. Het verlies liep zelfs even op tot meer dan 3 procent, maar het aandeel herstelde daarna weer. Bijna alle kamers hebben een subliem uitzicht op het sprookje dat Tivoli heet.
 
@@ -1693,10 +1703,10 @@
 /* Reflexive pronoun
 124;40;NLRefl|NLVerb;NLVerb|+Join;
 /*		124. Zie hoe de kat zich wast!
-157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
-/*		157. De portier heeft zich niet vergist.
 125;40;NLVerb|NLRefl;NLVerb|+Join;
 /*		125. De groep bereidt zich voor op de beursintroductie.
+157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
+/*		157. De portier heeft zich niet vergist.
 500;40;"ik"|NLVerb|"me":"mij";NLSubjpron|NLVerb|+Join;
 /*		500. Ik verveel me.
 
@@ -1864,8 +1874,8 @@
 /*		1954. Al is dat verbeterd sinds hij een kritische journalist van de Chicago Tribune uitdaagde tot een bokswedstrijd.
 1956;63;"sinds"|.NLArt|NLAdvTime:NLTimeconcept:NLCon+NLTime;+NLDummy2|*|*;use Dummy2 to mark when a time indication directly follows 'sinds'
 /*		1956. Sinds vorig jaar woedt er een mazelen-epidemie in Zwitserland. De taalgrens in België komt ruwweg overeen met de Romeinse heirbaan, die sinds de 4de eeuw als culturele grens fungeerde.
-1957;63;^NLOndvw|"sinds"+^NLDummy2|*NLDummy|NLVerb+NLAux:NLRelAux|NLPartrel;*|-NLPrep-NLPrepTime+NLOndvw|*|*|*;use Dummy to use pattern of more than 8 elements
-/*		1957. Sinds de dienstplicht is opgeschort bestaat de krijgsmacht volledig uit vrijwillig dienend personeel. NOT. Middenin het land ligt het IJsselmeer, de voormalige Zuiderzee, een grote binnenzee die sinds de voltooiing   van de Afsluitdijk in 1932 van de Waddenzee is afgesloten en sindsdien zoetwater bevat. 
+1957;63;^NLOndvw:NLVerb|"sinds"+^NLDummy2|*NLDummy|NLVerb+NLAux:NLRelAux|NLPartrel;*|-NLPrep-NLPrepTime+NLOndvw|*|*|*;use Dummy to use pattern of more than 8 elements
+/*		1957. Sinds de dienstplicht is opgeschort bestaat de krijgsmacht volledig uit vrijwillig dienend personeel. NOT. Middenin het land ligt het IJsselmeer, de voormalige Zuiderzee, een grote binnenzee die sinds de voltooiing   van de Afsluitdijk in 1932 van de Waddenzee is afgesloten en sindsdien zoetwater bevat. NOT. Gezien patient geen bijkomende complicaties deed sinds zijn opname werd besloten hem te transferen. 
 1952;63;"sinds"+^NLDummy2|*NLDummy|NLVerb+^NLAux:NLmAux:NLRelAux;-NLPrep-NLPrepTime+NLOndvw|*|*;use Dummy to use pattern of more than 8 elements
 /*		1952. Sinds de instelling sloot, zorgen mijn vrouw en ik voor hem.
 1955;63;NLDummy:NLDummy2;-NLDummy-NLDummy2;clean-up Dummies
@@ -1884,12 +1894,10 @@
 /*		1481. Er komen buien, waarschijnlijk met smeltende sneeuw.
 1301;63;"maar"+NLAndOrBut;+NLPBegin;
 /*		1301. Soms deden we alsof we sliepen, maar dat hielp niet.
-1291;63;NLOndvw;+NLPBegin;
-/*		1291. Een hele eer, want zij zijn onze grote voorbeelden.
 1296;63;"gezien"+NLOndvw;+NLPBegin;
 /*		1296. Dat kan ik ook begrijpen, gezien zijn financiële handel en wandel.
-1288;63;NLOndvw:NLRelpron|.^NLVerb+^NLInf+^NLPBegin|*NLVerb;+NLPBegin|*|+NLPEnd;
-/*		1288. Zij heeft aangegeven dat ze zich per heden in Nieuw-Zeeland gaat vestigen.
+1288;63;NLOndvw:NLRelpron+^"als"|.^NLVerb+^NLInf+^NLPBegin|*NLVerb;+NLPBegin|*|+NLPEnd;
+/*		1288. Zij heeft aangegeven dat ze zich per heden in Nieuw-Zeeland gaat vestigen. Een hele eer, want zij zijn onze grote voorbeelden. NOT. In november vorig jaar is hij benoemd tot directeur, nadat hij onder druk van de raad was opgestapt als chief executive officer van het bedrijf. NOT. Hij zou al ontevreden zijn sinds de uitgeverij zijn 25-jarig jubileum als schrijver in stilte liet passeren. 
 1308;63;"om"+NLOndvw|.^NLVerb+^NLInf+^NLPBegin+^NLRTe|NLRTe|*NLInf;+NLPBegin|*|*|+NLPEnd;
 /*		1308. Ik denk dat ze alles doen om dat te voorkomen.
 1314;63;NLPEnd|NLPrep+^NLConj+^NLOndvw|.NLArt:NLPoss|*NLAttradj:NLCon|NLVerb;-NLPEnd|*|*|+NLPEnd|+NLPBegin;
@@ -1912,8 +1920,10 @@
 /*		1380. Hij doet dat alleen maar als de productiefactoren ter plaatse gunstig zijn en blijven.
 1385;63;NLRTe|NLInf|NLArt:NLPoss:NLNiet;*|*|+NLPBegin;
 /*		1385. Ik betreur het dat de mogelijkheid zijn gevangenisstraf op humanitaire gronden uit te stellen niet is benut. Aannemers en ontwikkelaars moeten om te overleven de minderopbrengsten van de sociale woningen compenseren door de prijs van niet-sociale woningen te verhogen.
-1309;63;NLOndvw:NLRelpron:NLConj|*^NLInf+^NLOndvw+^NLConj+^NLRelpron|*NLInf|NLVerb:NLRelAux+^NLInf|^NLAndOrBut+^NLPunctuation+^SEnd;*|*|*|+NLPBegin|*;
-/*		1309. Er is immers geen wet en ook geen contract, dus privépersonen kunnen zich niet tot een rechter wenden.
+1309;63;NLOndvw:NLRelpron:NLConj|*^NLInf+^NLOndvw+^NLConj+^NLRelpron|*NLInf|NLVerb:NLRelAux+^NLInf|^"zijn":"worden":NLAndOrBut:NLPunctuation:SEnd;*|*|*|+NLBeginrel+NLPBegin|*;
+/*		1309. Sinds we elkaar kennen bellen we regelmatig. NOT. De analist merkt op dat zo'n stap wel moeilijk te verkopen zou zijn. NOT. Indien uit deze schatting blijkt dat meer dan één van de criteria zullen overschreden worden gedurende het eerste boekjaar.
+1966;63;NLOndvw:NLRelpron:NLConj|*^NLVerb+^NLOndvw+^NLConj+^NLRelpron|NLVerb|NLVerb:NLRelAux+^NLInf:NLPartrel|^"zijn":"worden":NLAndOrBut:NLPunctuation:SEnd;*|*|*|+NLBeginrel+NLPBegin|*;
+/*		1966. Nadat ze een aspirientje nam loste haar gezicht als het ware op. NOT. De bestuursvoorzitter, die zegt dat hij strenger is geworden in het beoordelen van de projecten.
 1310;63;NLPEnd|NLPunctuation+^NLList|^NLPBegin;*|*|+NLPBegin;
 /*		1310. En dat kan, wat bevoegdheden betreft, in de toekomst alleen maar toenemen.
 1383;63;NLPartrel|NLPunctuation+^NLList|^NLPBegin+^NLPartrel+^SEnd;*|*|+NLPBegin+NLDummy;
@@ -2059,6 +2069,12 @@
 /* Expand to time-related subclause
 1909;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLHour|"nadat":"voordat":"gedurende hetwelk":"waarin"|.^NLPBegin:SEnd|NLPBegin:SEnd;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
 /*		1909. En hele mooie dag, want het was prachtig strandweer en de laatste vrije dag voordat de basisscholen in het midden van het land weer begonnen. De gevolgen gaan in dat geval in vanaf het boekjaar dat volgt op het boekjaar gedurende hetwelk meer dan één van de criteria voor de tweede keer werden overschreden of niet meer werden overschreden. NOT. Patiënte overlijdt op 05/04/2005 nadat de familie afscheid heeft genomen. NOT. De viering werd ingesteld in 1950 nadat de vergadering alle landen die lid waren van de VN uitnodigde om deze gebeurtenis te vieren. NOT. De politie vond de houten hut rond 3 uur 's nachts nadat er een noodoproep was binnengekomen.
+1964;64;"sinds":"nadat":"voordat"+NLOndvw+^NLTimeBegin|*^NLPBegin:SEnd|NLPBegin:SEnd;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1964. Een man liep op een camping brandwonden op nadat een gasvuurtje was ontploft.
+
+/* Split relation
+1965;64;typeRelation|typeRelation+NLTimeStop;*|+NLBeginrel;
+/*		1965. Die schiet liefst 30 procent hoger nadat de moederholding bevestigde dat het zich garant stelt voor eventuele verliezen. 
 
 /* Move attribute markers to relevant entity
 1863;64;NLCon:NLTimeconcept+NLTime|.typeConcept+^NLTime:NLTimeStop|typeConcept+NLTimeStop|.typeConcept|typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|-NLTimeStop|*|+NLTimeStop;correction: move TimeStop to next relevant entity when a Time attribute is on the same Concept
