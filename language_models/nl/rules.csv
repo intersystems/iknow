@@ -27,6 +27,15 @@
 1814;1;UDTime;+NLTime;
 /*		1814.UD. Trajectcontrole, dat wordt in de toekomst het middel om hardrijders in bedwang te houden.
 
+/* Connections with partial words (rule block should precede disambiguation of Adj)
+1972;1;NLCon|"@connect@"|NLAndOrBut:"tot":"noch"|NLCon:NLAdj:NLAttradj:NLNumber:NLVerb;+JoinReverse|JoinReverse|JoinReverse|*;
+/*		1972. Zo’n vier- tot vijfhonderd jongeren zijn opgedaagd. Daarbij vielen twee licht- en twee zwaargewonden. Verder pleit hij voor een landelijk onderzoek naar het gebruik van geweld tijdens grote muziek- en sportevenementen. In bieren van spontane gisting moet ten minste 30% van het totale gewicht van de verwerkte zetmeel- of suikerhoudende grondstoffen, uit tarwe bestaan. Per- en postoperatief verloop waren ongecompliceerd. De maaltijd moet vet- en vezelarm zijn omdat vetten en vezels minder snel verteren. De proefpersonen leden aan matige hoge bloeddruk en moesten dagelijks een half uur naar (trage) muziek luisteren terwijl ze rustig in- en uitademden. Geen belangrijke ritme- noch toenemende geleidingsstoornissen.
+1974;1;NLCon|"@connect@"|NLAndOrBut:"noch"|"andere";NLAttradj|Join|Join|Join;
+/*		1974. Bovenop die kosten mag de aannemer een winstmarge rekenen om zijn werf- en andere kosten te laten vergoeden.
+1973;1;"@connect@";NLCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
+/*		1973. Rond twintig over negen werd hij met een MUG- ambulance naar het ziekenhuis overgebracht.
+
+
 /* PHASE 20: DETECT NUMBERS
 /* ========================
 
@@ -1603,7 +1612,7 @@
 /*		1645. De Romeinse landbouw met villae verdween volledig.
 1628;40;NLAdj+^NLRAdv|NLPunctuation:SEnd:NLOndvw:NLAndOr;NLBeginEndconcept|*;separate adverb should be Concept
 /*		1628. Verbaliseren op basis van trajectcontrole is wettelijk nog niet mogelijk. Het wordt nooit volledig hard en blijft zelfs bij temperaturen beneden –20°C nog vervormbaar. NOT. 85 van hen gebruikten het middel ook daadwerkelijk.
-1621;40;^SBegin:NLPunctuation|NLAdj|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;*|NLBeginEndconcept|*|*;
+1621;40;^SBegin:NLPunctuation:NLAndOrBut|NLAdj|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;*|NLBeginEndconcept|*|*;
 /*		1621. De mate waarin echtgenoten verschillen in hun geldgedrag bleek direct in relatie te staan met de mate waarin zij gelukkig zijn in het huwelijk. Afgaande op de voorinschrijvingen moet dat mogelijk zijn. De gevolgen zijn toch wel heel zwaar geweest. Verder stelt de bouwer in de trading update dat het 'niet zeker' is dat de divisie een positief resultaat zal behalen. De bob glijdt over twee onafhankelijke loperparen, waarvan het voorste draaibaar is. Terwijl het omgekeerde evenzeer mogelijk zou zijn. NOT. Gelukkig is in de zaal niets afgebroken. NOT. Dat komt vooral doordat vrouwen meer zijn gaan roken.
 1800;40;NLAdj+^NLRAdv:NLAdvTemp:NLAdvModality|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;NLBeginEndconcept|*|*;
 /*		1800. Opmerkelijk is echter dat dit bureau tot voor kort gewoon stond ingeschreven als nevenvestiging.
