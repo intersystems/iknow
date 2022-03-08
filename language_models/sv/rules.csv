@@ -147,6 +147,8 @@
 /*		330. Dödligheten i kranskärlssjukdom har minskat kraftigt sedan slutet av 1980-talet.
 331;25;SVSedan|"i";SVPrep|SVPrep;
 /*		331. Den undersöks sedan i mikroskop.
+1376;25;SVSedan|SVVerb:SVVerbPart:SVAux:SVmAux:SVpAux;SVAdv+SVAdvStruct+SVAdvPR-SVPrep-SVConj|*;sedan will become PR at the beginning of a sentence (see final phase)
+/*		1376. Sedan kom nästa problem.
 311;25;SVSedan+^SVPrep+^SVAdv;^SVAdvStruct+SVAdv;
 /*		311. Studenten signerar sedan alla sidor och lämnar in till tentavakten.
 
@@ -1742,8 +1744,8 @@
 /*		396. Däremot kan man komma ett litet steg på vägen om man inte talar om texter generellt utan i stället om olika genrer.
 406;40;SVPrep|SVAdvManner;SVPrep|SVCon;
 /*		406. Många uppsatser och därtill hörande empiriinsamling fungerar väl i enlighet med forskningsetisk vägledning med nogsamt iakttagande av hänsyn och etisk uppmärksamhet.
-407;40;SVAttrpron|SVAdvManner;*|SVCon;
-/*		407. kommer du aldrig att kunna hitta en bättre fusk för Sudoku ∙ än våra helst.
+407;40;SVAttrpron|SVAdvManner;*|SVCon;TO BE CHECKED: still applicable?
+/*		407. no example.
 408;40;SVIndefart|SVAdvManner;SVIndefart|SVCon;
 /*		408. Rökning är en väl etablerad riskfaktor.
 409;40;SVAdvManner|SVAdj;SVAdj|SVAdj;
@@ -2352,6 +2354,13 @@
 947;85;SVbRel;SVbRel;remove conflicting labels
 /*		947. Smör är i fast form vid rumstemperatur men smälter till en tunn gulaktig vätska vid 32 - 35 °C.
 
+
+1374;$;SBegin|typeOther+SVAdvPR;*|-SVAdv-SVAdvStruct+SVAdvPR;
+/*		1374. Då ser vi mer av ett växelspel. Exempelvis kan det uppkomma frågor om likabehandling, förutsebarhet och överklagande.
+1375;$;^SBegin|SVAdvPR;*|-SVAdvPR;
+/*		1375. Det ruskigare vädret väntas dock fortsätta.
+
+
 1360;$;UDTime+^SVTime;+SVTime;
 /*		1360.UD. no example.
 1367;$;UDIgnoreNegation;-SVNegation-SVNegBegin;
@@ -2368,9 +2377,3 @@
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 
 
-/*2772;$;ENDateTimeBegin|.^ENTime+^ENDuration+^ENFrequency+^UDIgnoreTime|UDIgnoreTime;-ENDateTimeBegin|*|*;remove time span for UDIgnoreTime
-/*/*		2772.UD. Its loan book increased by 19% to S$72.8 billion as of Dec 31, boosted by growth in corporate and small-to-medium-enterprise loans.
-/*2771;$;UDIgnoreTime;-ENTime-ENTemp-ENDuration-ENFrequency-ENDateTimeBegin;
-/*/*		2771.UD. We went shopping on Black Friday in the afternoon.
-/*2783;$;UDIgnoreNumber;-ENNumber-ENNum;
-/*/*		2783.UD. The rise in the 2000 combined ratio is "nothing dramatic".
