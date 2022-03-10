@@ -36,7 +36,7 @@
 /* Interim Attributes
 ;7,13,$;Dummy;typeAttribute;;0;;
 ;5;Dummy2;typeAttribute;;0;;
-;10;Dummy3;typeAttribute;;0;;
+;5,10;Dummy3;typeAttribute;added phase 5 - #75-mno;0;;
 ;5,$;JPIgnore;typeOther;Temporary *EXPERIMENTAL* label for 思わず;0;;
 ;5;JPRule4510;typeAttribute;exceptions for Rule #4510;0;;
 ;5;JPJoinDate;typeAttribute;exceptions for Rule #4495;0;;
@@ -85,12 +85,13 @@
 ;5,10,$;JPPerson;typeConcept;Label for a Person's Name;0;;
 ;5,10,$;JPSuffixNoun;typeConcept;label for word that can be a noun suffix or something else;0;;
 ;5,10,$;JPSuffixPerson;typeConcept;Label for word that follows a person's name or something else;0;;
-;5,$;JPSeparateDate;typeBeginEndConcept;label for date to be a concept by itself;0;;
+;5,19,$;JPSeparateDate;typeBeginEndConcept;label for date to be a concept by itself;0;;
 ;3,5,$;JPYearNum;typeConcept;Number that indicates Year;0;;
 ;3,5,$;JPMonthNum;typeConcept;Number that indicates Month;0;;
 ;3,5,$;JPDateNum;typeConcept;Number that indicates Date;0;;
-;5,$;JPTimeNum;typeConcept;Number that indicates Time;0;;
-;5,$;JPYobi;typeOther;Day of the week;0;;
+;5,$;JPImperialYear;typeConcept;- #75-mno;0;;
+;3,5,$;JPTimeNum;typeConcept;Number that indicates Time, added phase 3 - #75-mno;0;;
+;5,19,$;JPYobi;typeOther;Day of the week, added phase 19 - #75-mno;0;;
 ;5,$;JPSeason;typeAttribute;season;0;;
 ;3;JPOne;typeAttribute;"1 year", "1 day";0;;
 ;2,3,5,10,13,19,$;JPNumber;typeConcept;label for numbers;0;;
@@ -98,7 +99,7 @@
 ;5,$;JPSuffixNum;typeAttribute;Counting word for non-Measurement;0;;
 ;3,$;JPListNumber;typeOther;Label for ①②③, etc.;0;;
 ;3,5,10,$;JPTime;typeConcept;label for time-related words;0;;
-;5,10,13,$;JPDate;typeConcept;label for date-related word 日;0;;
+;5,10,13,19,$;JPDate;typeConcept;label for date-related word 日, added phase 19 - #75-mno;0;;
 ;3,5,10,$;JPCount;typeConcept;label for counting words;0;;
 ;5,10,$;JPFraction;typeConcept;label for fractions;0;;
 ;5,$;JPFrequency;typeConcept;Label for frequencies;0;;
@@ -406,3 +407,8 @@
 ;3,$;JPUnitCapital;typeAttribute;can be capital letter;0;;
 ;3,$;JPUnitFirst;typeAttribute;;0;;
 ;3,$;JPCapitalPrefix;typeAttribute;;0;;
+
+
+;3,$;JPHour;typeAttribute;Time - Hour numbers;0;;
+;3,$;JPMinute;typeAttribute;Time - Minute numbers;0;;
+;3,$;JPSecond;typeAttribute;Time - Second numbers;0;;

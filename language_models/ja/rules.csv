@@ -24,6 +24,22 @@
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
 
+4754;3;"http://":"https://"|*JPAlphabet:JPNumber:"="|^JPAlphabet+^JPNumber+^"=";JPCon+JPAlphabet|Join|Join;
+
+/*		4754.	交通規制の詳細は日本道路交通情報センターのホームページ内（http://www.jartic.or.jp/）に掲載。
+
+4749;3;JPHour|":"|JPMinute|":"|JPSecond;JPNumber+JPTimeNum+JPDateTime+DateTime|Join|Join|Join|Join;
+
+/*		4749.	タイムは2:35:07でした。
+
+4750;3;JPHour|":"|JPMinute;JPNumber+JPTimeNum+JPDateTime+DateTime|Join|Join;
+
+/*		4750.	本日　１７：３０～明日　１３：００まで
+
+4753;3;JPTimeNum|"~"|JPTimeNum;JPNumber+JPTimeNum+JPDateTime+DateTime|Join|Join;
+
+/*		4753.	営業時間：10:00～20:00
+
 4741;3;^JPNumber|JPUnitCapital+^JPUnitFirst|JPNumber|JPUnitCapital;*|-JPUnitCapital|*|-JPUnitCapital;
 
 /*		4741.	昭和５９年腰椎椎間板ヘルニアに対し前方固定（L4L5S1）施行。
@@ -72,14 +88,21 @@
 3530;3;JPNumber|":"|JPNumber|"~"|JPNumber|":"|JPNumber;JPTime+DateTime|Join|Join|Join|Join|Join|Join;
 3532;3;JPNumber|"*"|"j";JPCon|Join|Join;
 4093;3;JPNumber|JPPeriod|JPNumber|JPPeriod|JPNumber|JPPeriod|JPNumber;JPNumber|Join|Join|Join|Join|Join|Join;
-4578;3;JPYearNum|JPPeriod|JPNumber|JPPeriod|JPNumber;JPNumber+JPDateTime+DateTime|Join|Join|Join|Join;
+4578;3;JPYearNum|"-":"/":JPPeriod|JPMonthNum|"-":"/":JPPeriod|JPDateNum;JPNumber+JPDateNum+JPDateTime+DateTime+Dummy3|Join|Join|Join|Join;
+
+/*		4578.	【所見１０】2019.8.29のMRIを参照しています。	2019/8/29のMRIを参照しています。	2019-8-29のMRIを参照しています。
+
 4092;3;JPNumber|JPPeriod|JPNumber|JPPeriod|JPNumber;JPNumber|Join|Join|Join|Join;
-3338;3;JPNumber|JPPeriod|JPNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join;
+3338;3;JPNumber|JPPeriod|JPNumber;JPNumber-JPDateNum-JPMonthNum-JPImperialYear|Join|Join;
+
+/*		3338.	８日の日経平均株価の終値は前日比638円（3.1％）安の１万9737円と、ほぼ２カ月ぶりの安値になった。	SHOULD NOT WORK FOR. 清，比重 1.010, pH 6.0, 蛋白(-)
+
 4656;3;JPNumber|"・"|JPNumber;JPNumber|Join|Join;
 4640;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join|Join;
 4641;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join|Join;
 4639;3;JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join;
 4671;3;JPMonthNum|"/"|JPDateNum|"~"|JPMonthNum|"/"|JPDateNum;JPDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|Join;
+4751;3;JPDateNum|"~"|JPDateNum;^JPDateNum+JPNumber|Join|Join;
 3390;3;JPNumber|"~"|JPNumber;JPNumber-JPDateNum|Join|Join;
 3626;3;JPNumber|"〜"|JPNumber;JPNumber|Join|Join;
 3531;3;JPNumber+^"数"|":"|JPNumber;JPNumber|Join|Join;
@@ -96,7 +119,7 @@
 3452;3;SBegin|JPNumber+^"数"|"、"|JPNumber;*|JPNumber|Join|Join;
 3348;3;JPAlphabet|JPPeriod|JPAlphabet;JPAlphabet|JPAlphabet|JPAlphabet;
 3396;3;JPAlphabet|JPApostrophe|JPAlphabet;JPAlphabet|Join|Join;
-3423;3;"1"|JPCount|"も"|"ない";JPRelation|Join|Join|Join;
+3423;3;"1"|JPCount|"も"|"ない";JPRelation+JPNegation-JPImperialYear|Join|Join|Join;
 3422;3;"1"|JPCount|"も"|"なかった";JPRelation|Join|Join|Join;
 3455;3;"1"|JPCount|"="|JPNumber;JPCon|Join|Join|JPNumber+JPValue;
 3616;3;JPNumber|JPyen|"="|JPNumber;JPNumber|Join|Join|Join;
@@ -308,17 +331,20 @@
 4273;5;JPSuruNoun|JPno:JPParticleNO|"為";JPCon|JPPartAdvNOUN|Join;
 1678;5;JPVerbOther|JPNumber;-JPVerbOther+Dummy|^JPNumber;
 830;5;JPNumber|JPFraction|JPNumber;JPNumber|Join|Join;
-4319;5;"明治":"大正":"昭和":"平成"|JPDateNum;JPYearNum+JPNumber+DateTime|Join;
+4319;5;"明治":"大正":"昭和":"平成"|JPImperialYear;JPYearNum+JPNumber+DateTime|Join;
 4329;5;JPYearNum|JPFurigana|"年";JPYearNum|Join|+Dummy;
 4320;5;JPYearNum|BracketOpen|JPYearNum|BracketClose;JPYearNum+JPNumber+DateTime|Join|Join|Join;
 4326;5;JPYearNum|JPspace:JPSingleSpace|BracketOpen|JPYearNum|BracketClose;JPYearNum+JPNumber+DateTime|Join|Join|Join|Join;
+4758;5;"日"|JPspace:JPSingleSpace|JPYobi|JPspace:JPSingleSpace|JPTimeNum;+Dummy|Join|Join|Join|+Dummy;
 4324;5;"日"|JPYobi|JPTimeNum;+Dummy|Join|+Dummy;
 4325;5;JPTimeNum|JPCon;-JPTimeNum-DateTime|+Dummy;
 4321;5;JPMonthNum|JPspace:JPSingleSpace|"月";JPMonthNum+JPNumber+DateTime|Join|+Dummy;
-4331;5;JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|JPspace:JPSingleSpace|JPTimeNum;JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|Join;
-4330;5;^"/"+^SBegin|JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|^"/"+^"."+^"時点"+^"期間"+^SEnd;*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|+Dummy;
-4332;5;SBegin|JPYearNum|"/"|JPMonthNum|"/"|JPDateNum;*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join;
-4334;5;JPYearNum|"/"|JPMonthNum|"/"|JPDateNum|SEnd;JPSeparateDate+DateTime|Join|Join|Join|Join|SEnd;
+4331;5;JPDateNum+Dummy3|JPspace:JPSingleSpace|JPTimeNum;JPSeparateDate+DateTime+JPDateTime|Join|Join;
+4756;5;"の"|JPDateNum+Dummy3;*|-Dummy3;
+4330;5;^"/"+^SBegin+^JPspace+^BracketClose|JPDateNum+Dummy3|^"/"+^"."+^"時点"+^"期間"+^SEnd;*|JPSeparateDate+DateTime+JPDateTime|+Dummy;
+4755;5;JPDateNum+Dummy3|"の";-Dummy3|*;
+4332;5;SBegin|JPDateNum+Dummy3;*|JPSeparateDate+DateTime+JPDateTime;
+4334;5;JPDateNum+Dummy3|SEnd;JPSeparateDate+DateTime|SEnd;
 4316;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|JPDateNum|"日":"日頃":"日ごろ"|JPCon+^"早朝"+^"未明"+^"夕方"+^"現在"+^"以降"+^"以来"+^"付け";*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|+Dummy;
 4323;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|"終値":"付け";*|-JPMonthNum+DateTime|+Dummy|-JPDateNum|+Dummy|+Dummy;
 4322;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|JPCon+^"早朝"+^"未明"+^"夕"+^"夕方"+^"現在"+^"以降"+^"以来";*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|+Dummy;
@@ -326,8 +352,8 @@
 4317;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|JPCon+^"上旬"+^"中旬"+^"下旬"+^"以降"+^"以来"+^"頃"+^"初旬";*|JPSeparateDate+DateTime|Join|Join|Join|+Dummy;
 1403;5;JPMonth|JPNumber|JPDate;JPDate+DateTime+JPDateTime|Join|Join;
 1835;5;JPMonth|JPDate;JPDate|Join;
-4605;5;^"約"+^"回"+^"比"|JPMonthNum|"/"|JPDateNum|^"未満"+^"以上"+^"以下"+^"程度"+^JPCount+^"/";*|JPTime+JPDateTime+DateTime|Join|Join|*;
-4606;5;JPTime|JPSingleSpace|JPTimeNum;JPTime+JPDateTime+DateTime|Join|Join;
+4605;5;^"約"+^"回"+^"比"|JPMonthNum|"/"|JPDateNum|^"未満"+^"以上"+^"以下"+^"程度"+^JPCount+^"/";*|JPDateNum+JPTime+JPDateTime+DateTime-JPHour|Join|Join|*;
+4606;5;JPTime:JPDateNum|JPSingleSpace|JPTimeNum;JPTime+JPDateTime+DateTime|Join|Join;
 3690;5;JPNumber+^"数"|JPSingleSpace|JPNumber;JPNumber|Join|^JPNumber;
 
 /*		3690.	海外の機関投資家に対して幅広い運用商品を提供しており、投資運用額は300 億ユーロ超。 SHOULD NOT WORK FOR. 投資運用額は数 ユーロ超。
@@ -436,7 +462,7 @@
 4203;5;SBegin|JPAdvTime+JPCon|JPNumber|JPDate;*|JPDate|Join|Join;
 4206;5;SBegin|JPAdvTime+JPCon|"夕"|JPde:JPni:JPno;*|JPCon+DateTime|Join|+Dummy;
 4547;5;JPAdvTime+JPCon+^"以前"|JPAdvTime+JPCon;JPTime+JPDateTime|Join;
-1739;5;SBegin|JPAdvTime+JPCon+^JPPrefix+^JPYear+^JPSeparateDate|^JPParticlePREPO+^"外来"+^"受診"+^"退院"+^JPyori+^SEnd;SBegin|JPAdvTime|*;
+1739;5;SBegin|JPAdvTime+JPCon+^JPPrefix+^JPYear+^JPSeparateDate+^JPDateNum|^JPParticlePREPO+^"外来"+^"受診"+^"退院"+^JPyori+^SEnd;SBegin|JPAdvTime|*;
 4202;5;JPAdvTime+JPCon|"外来":"受診":"退院";JPCon|Join;
 2137;5;SBegin|JPAdv+JPAdjNoun|JPna;*|-JPAdv|JPna;
 2508;5;SBegin|JPAdv+JPAdjNoun|JPSuruNoun|JPCon|JPde;*|JPCon|Join|Join|JPParticleDE;
@@ -3848,6 +3874,8 @@
 3443;5;JPAdvTime+JPCon|JPLinkV;-JPAdvTime|^JPLinkV;
 4535;5;JPVerb|JPAdvTime+JPSuffixTime;+JPDateTime|+JPDateTime;
 4607;5;JPTime|"現在";^JPTime|Join;
+4752;5;JPDateNum|JPspace:JPSingleSpace|JPTimeNum;JPTimeNum-JPAdvTime|Join|Join;
+4759;5;JPTimeNum|"～":"~"|JPTimeNum;JPTimeNum|Join|Join;
 670;5;JPAdvTime+^JPTime+^JPSeparateDate;JPAdvTime-DateTime;
 2857;5;JPAdvTime+JPTime;-JPAdvTime+DateTime;
 3965;5;JPAdv+JPNegation|JPComma;JPEndRelation+JPNegation|JPComma;
@@ -4627,9 +4655,10 @@
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
 4612;19;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
-4613;19;typeConcept|"("|*JPNumber|")";*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
+4613;19;typeConcept|"("|*JPNumber:JPSeparateDate|")";*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
 4663;19;JPValue|JPUnit|"/"|"税込":"税込み"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*|*;
 4687;19;JPUnit|JPValue|"/"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*;
+4757;19;JPDate|JPYobi;JPDate|Join;
 
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS

@@ -1,17 +1,25 @@
 ﻿;;(18|19|20)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9);;JPYearNum;JPNumber;
 
-;;(|0)(1|2|3|4|5|6|7|8|9);;JPMonthNum;JPNumber;JPDateNum;
+;;(0|1|2|3|4|5|6|7|8|9);;JPMonthNum;JPNumber;JPHour;JPDateNum;JPImperialYear;
 
+;;00;;JPNumber;JPHour;JPMinute;JPSecond;
 
-;;1(0|1|2);;JPMonthNum;JPNumber;JPDateNum;
+;;0(1|2|3|4|5|6|7|8|9);;JPMonthNum;JPNumber;JPDateNum;JPHour;JPMinute;JPSecond;JPImperialYear;
 
-;;1(3|4|5|6|7|8|9);;;JPNumber;JPDateNum;
+;;1(0|1|2);;JPMonthNum;JPNumber;JPDateNum;JPHour;JPMinute;JPImperialYear;
 
-;;2(0|1|2|3|4|5|6|7|8|9);;JPNumber;JPDateNum;
+;;1(3|4|5|6|7|8|9);;;JPNumber;JPDateNum;JPMinute;JPSecond;JPHour;JPImperialYear;
 
-;;3(0|1);;JPNumber;JPDateNum;
+;;2(0|1|2|3|4);;JPNumber;JPDateNum;JPMinute;JPSecond;JPHour;JPImperialYear;
 
-;;(|0|1)(0|1|2|3|4|5|6|7|8|9):(0|1|2|3|4|5|6)(0|1|2|3|4|5|6|7|8|9);;JPTimeNum;JPNumber;DateTime;
+;;2(5|6|7|8|9);;JPNumber;JPDateNum;JPMinute;JPSecond;JPImperialYear;
+
+;;3(0|1);;JPNumber;JPDateNum;JPMinute;JPSecond;JPImperialYear;
+
+;;3(2|3|4|5|6|7|8|9);;JPMinute;JPSecond;JPNumber;JPImperialYear;
+;;(4|5)(0|1|2|3|4|5|6|7|8|9);;JPMinute;JPSecond;JPNumber;JPImperialYear;
+;;6(0|1|2|3|4);;JPNumber;JPImperialYear;
+
 ;;2(0|1|2|3|4):(0|1|2|3|4|5|6)(0|1|2|3|4|5|6|7|8|9);;JPTimeNum;JPNumber;DateTime;
 
 ;;×10^;;JPNumber;
@@ -7682,7 +7690,7 @@
 ;;(明々後日|明明後日);;JPCon;DateTime;JPDateTime;JPTime;
 ;;明後日;;JPCon;DateTime;JPDateTime;JPTime;
 ;;あさって;;JPTime;JPConjVerb;
-;;(明日|あした|あす);;JPCon;DateTime;JPDateTime;JPTime;
+;;(明日|あした|あす);;JPCon;DateTime;JPDateTime;JPTime;JPDateNum;
 
 ;;(予め|あらかじめ);;JPAdvTime;
 ;;相前後して;;JPAdvTime;
@@ -7893,7 +7901,7 @@
 
 ;;半日;;JPAdvTime;JPCon;JPDateTime;
 ;;平日;;JPAdvTime;JPCon;JPDateTime;
-;;本日;;JPAdvTime;JPCon;JPDateTime;
+;;本日;;JPCon;DateTime;JPDateTime;JPTime;JPDateNum;
 ;;翌日;;JPAdvTime;JPCon;JPDateTime;
 ;;翌々日;;JPAdvTime;JPCon;JPDateTime;
 ;;1夜;;JPAdvTime;JPCon;;
@@ -8716,6 +8724,7 @@
 ;;?;;Punctuation;
 ;;―;;JPMinus;
 
+;;_;;JPAlphabet;
 ;;▼;;NonRelevant;
 ;;▽;;NonRelevant;
 ;;──;;NonRelevant;
