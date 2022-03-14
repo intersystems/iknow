@@ -1,18 +1,38 @@
 ﻿
 /* Extra numbers
-3dnumber;\d\d\d
-numberdecimal;\d+[,]\d+
+/*3dnumber;\d\d\d
+/*numberdecimal;\d+[,]\d+
+numberdecimal;[≥=\-\<\>\+]?\d+[,]\d+
+numberdecimalperiod;[≥=\-\<\>\+]?\d+\.\d+
 
 /* Ordinal numbers
 numberordinal;\d+:e
 
-/* Range < 100
-range01;[0-9]\-[0-9]
-range02;[0-9]\-[0-9][0-9]
-range03;[0-9][0-9]\-[0-9][0-9]
+/* Remaining numbers
+othernumber;[≥=\-\<\>\+]?\d+
+numberwithplusminus;\d+([,]\d+)?±\d+([,]\d+)?
+
+/* Measurements
+meas01;\d+[gklmst]
+meas02;\d+[mkµn][gklm]
+meas03;\d+år
+meas04;\d+[mkµn][gklm]\/(h|kg|km|l|m2|m3|m²|m³|m)
+meas05;\d+\.\d+%
+
+
+/* Range < 1000
+range01;\d+\-\d+
+
+/* Range with decimal number(s)
+range02;\d+[,]\d+\-\d+([,]\d+)?
+range03;\d+([,]\d+)?\-\d+[,]\d+
 
 /* Big numbers
-bignumber01;\d\d\d\d+
+/*bignumber01;\d\d\d\d+
+
+/* Age
+age01;\d+\-årig(a|e)?
+age02;\d+([\-,]\d+)?\-åring(arna|ar|en)?
 
 /* Year
 year01;[1-9][0-9][0-9][0-9]-tal
@@ -32,6 +52,19 @@ date06;[0123][0-9]\/[01][0-9]\/[12][0-9][0-9][0-9]
 time01;[012]?[0-9]\.[0-5][0-9]
 time02;[012]?[0-9]:[0-5][0-9]
 time03;[012]?[0-9][\.:][0-5][0-9]-tiden
+
+/* Amount of money
+meas06;[3-9][0-9]:[0-9][0-9]
+meas07;\d{1,2}:[6-9][0-9]
+meas08;\d\d\d+:\d+
+
+/* Fraction
+meas09;[0-9]+\/[0-9]+
+
+/* Other measurements
+meas10;[≥\-\<\>\+]?\d+([,]\d+)?\/l
+meas11;[≥\-\<\>\+]?\d+([,]\d+)?\/min
+meas12;\d+:\-
 
 
 /* Layout

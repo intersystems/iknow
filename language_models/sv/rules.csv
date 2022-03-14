@@ -177,25 +177,31 @@
 /*		1310. Dialystiden ökades till 3 timmar per dialystillfälle.
 1331;30;SVNum|"min";*|-SVPossCon+SVTimeconcept+SVCon;
 /*		1331. Kräver övervakning av barnet ca 30 min efteråt.
-1335;30;SVNum:SVNumber|SVNumpart2;JoinReverse|*;
+1387;30;SV12dNum:SV3dNum|*SV3dNum;*|Join;
+/*		1387. Vi evakuerade 1 400 människor men det finns nära 250 000 till om man ser till alla de belägrade områdena.
+/*1335;30;SVNum:SVNumber|SVNumpart2;JoinReverse|*;
+1335;30;SVNum:SVNumber:SVQuantity|SVNumpart2;JoinReverse|*;
 /*		1335. Under de följande 350 miljoner åren fram till idag låg Baltika hela tiden över havsytenivå.
 1356;30;SVRunt|SVTimeconcept;SVPrep+SVTimeprep|*;better for CRC-pattern
 /*		1356. Miljardsvinn runt jul.
 
 /* FREQUENCY
-1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under":"om"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
+1295;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger":"ggr"|"i":"per":"under":"om":"/"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
 /*		1295. Om man har astmabesvär mer än två gånger per vecka, bör man regelbundet använda inflammationshämmande medel.
-/*1263;30;SVIndefart:SVNum:SVNumber|SVTimeconcept:"gång":"gångar"|"i"|SVTimeconcept;SVAdvFreq+SVAdv+SVTime|Join|Join|Join;
-1263;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger"|"i":"per":"under":"om"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime-SVAdjpron-SVSubjpron-SVObjpron|Join|Join|Join;
+1263;30;SVIndefart:SVNum:SVNumber:SVAttrpron|SVTimeconcept:"gång":"gånger":"ggr"|"i":"per":"under":"om":"/"|SVTimeconcept:SVDay;SVAdvTimeFreq+SVAdv+SVTime-SVAdjpron-SVSubjpron-SVObjpron|Join|Join|Join;
 /*		1263. Vi har undersökt kvinnorna två gånger i veckan under första månaden. Som museibesökare kan man i denna historiska miljö, vissa dagar om året vid klart väder, observera stjärnhimlen.
-1296;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
+1408;30;SVNumX|"i":"per":"under":"om":"/"|SVTimeconcept:SVDay;+SVTime|JoinReverse|+SVTime;
+/*		1408. Hemodialys har traditionellt ordinerats 3× per vecka.
+1296;30;"mer"|"än"|SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger":"ggr"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join|Join|Join;TEMPORARY RULE: find a more general solution later
 /*		1296. Temperatur och nederbörd har mätts mer än tre gånger dagligen.
-1297;30;SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join;
+1297;30;SVIndefart:SVNum:SVNumber:SVAttrpron|"gång":"gånger":"ggr"|SVAdvTime;SVAdvTimeFreq+SVAdv+SVTime|Join|Join;
 /*		1297. Denna trappades ned till en underhållsdos om 10 mg två gånger dagligen under de närmaste veckorna.
 
 /* NO TIME ATTRIBUTE
-1248;30;SVNum:SVNumber:SVIndefart|*SVCon|"per":"om"|SVTimeconcept:SVDay;-SVYear+SVAdj-SVIndefart|*|SVCon-SVConIfCap-SVConj-SVCondition-SVPrep|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
+1248;30;SVNum:SVNumber:SVIndefart|*SVCon+^SVUnit|"per":"om":"/"|SVTimeconcept:SVDay;-SVYear+SVAdj-SVIndefart|*|SVCon-SVConIfCap-SVConj-SVCondition-SVPrep|SVCon-SVTimeconcept-SVVerbInfCon;preliminary rule - implement as Measurement later
 /*		1248. Ca 1500 kvinnor per år utvecklar en spridd sjukdom.
+1409;30;SVNum:SVNumber:SVIndefart|SVUnit|"per":"om":"i":"/"|SVTimeconcept:SVDay;-SVYear+SVAdj-SVIndefart|*|Join|Join;prepare for measurement detection, no Time
+/*		1409. Hyran var bara 480 kr per månad.
 1284;30;SVYear|SVUnit;-SVYear+SVNum|*;
 /*		1284. Regnskog är skog med hög årlig nederbörd, åtminstone 1700–2000 millimeter, och hög temperatur, mellan 27 och 35 grader Celsius.
 
@@ -256,6 +262,7 @@
 
 /* Detect complex numbers before detecting other time indications
 /* --------------------------------------------------------------
+
 /*1340;30;SVNum|SVAv|SVNum;JoinReverse|JoinReverse|*;
 1340;30;SVNum:SVNumber:SVIndefart|SVAv|SVNum:SVNumber|SVTimeconcept;JoinReverse|JoinReverse|*|*;temporary version of rule: delete right context later
 /*		1340. I Sverige har ungefär 8 av 100 personer någon form av astma. I Sverige har ungefär åtta av hundra personer någon form av astma.
@@ -313,7 +320,7 @@
 /*		1309. 9 av dem har under det senaste året genomförts i Göteborg inom ramen för ett forskningsprojekt som pågått i över 10 år.
 1306;30;^SVAge|SVNum:SVNumber:SVIndefart|"till"|SVNum:SVNumber|SVTimeconcept;*|^SVNumber+SVTime|Join|Join|+SVTime;
 /*		1306. Han blir borta från spel i fyra till sex veckor.
-1304;30;SVAge:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept;*|*|-SVTimeprep|*|+SVAge;
+1304;30;SVAge:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept|^SVTimeprep;*|*|-SVTimeprep|*|+SVAge|*;
 /*		1304. I observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar. Om barnet är under tre månader och man misstänker att barnet har en infektion bör man ringa sjukvårdsrådgivningen eller kontakta vårdcentralen.
 /*1303;30;^SVAge|"om":SVTimeprep|."de här"|SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime|+SVTime|*;+SVTimeprep for 'om'
 1303;30;^SVAge|"om":SVTimeprep|."de här"|SVAdjpron:SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime-SVSubjpron-SVObjpron|+SVTime|*;+SVTimeprep for 'om'
@@ -323,7 +330,7 @@
 /* NOTE: When merging r1303 and r1305, there are side-effects on "över"+SVNum.
 1338;30;SVAge|.SVPrep|SVNum:SVNumber|SVTimeconcept;*|*|*|+SVAge;
 /*		1338. Projektet saknar mätningar på barn i åldern 06 månader. För barn som inte har fyllt 15 år får kontaktperson utses endast om barnets vårdnadshavare begär eller samtycker till det.
-1349;30;SVAge:SVpAux|"mellan"|SVIndefart:SVNum:SVNumber|.SVTimeconcept|"och"|SVNum:SVNumber|SVTimeconcept;*|*|*|*|*|*|+SVAge;
+1349;30;SVAge:SVpAux|"mellan"|SVIndefart:SVNum:SVNumber|.SVTimeconcept|"och"|SVNum:SVNumber|SVTimeconcept;*|*|*|*|*|*|+SVAge+SVUnit;
 /*		1349. Projektet saknar mätningar på barn i åldern mellan 5 och 6 månader.
 1348;30;SVpAux:SVBracket1|SVNum:SVNumber|"år";*|*|+SVAge;
 /*		1348. Han blev 18 år.
@@ -331,7 +338,7 @@
 /*		1339. Data visar en letalitet på 28 procent tre månader efter strokeinsjuknandet.
 1345;30;SVGen:SVOrdnumber:SVTimeadj|SVNum:SVNumber+SVbCon;*|-SVbCon;correction for r1339
 /*		1345. Den avyttrade verksamheten hade en omsättning på 199 miljoner och en vinst före skatt på 34 miljoner under årets första nio månader.
-1350;30;^SVAv+^SVTimemodifier|SVNum|"år"+^SVTime|^SVTimeprep;*|*|+SVAge|*;
+1350;30;^SVAv+^SVTimemodifier|SVNum|"år"+^SVTime|^SVTimeprep+^SVPosttime;*|*|+SVAge+SVUnit|*;
 /*		1350. Vid tiden för intervjun var Sara 24 år. WRONG. Har det gått 20 år?
 1351;30;SVNum:SVNumber|"år"+^SVAge;+SVTime|+SVTime;
 /*		1351. Fem år efter tvingades hon bort från sin post. En kost rik på animaliskt protein innebär nämligen fyra gånger större risk att dö i cancer inom en tidsperiod av 18 år. Vädret observerats kontinuerligt i snart 250 år. WRONG. De två småbröderna, tre och fem år, brann inne.
@@ -417,6 +424,68 @@
 
 1283;30;SVAdvTimeFreq;^SVAdvTime;rules in following phases don't know SVAdvTimeFreq
 /*		1283. Dialysbehandlingen kunde minskas till 5 gånger per vecka på grund av god dialyseffekt och restfunktion.
+
+1398;30;SVClocktime+^SVTime;+SVNum+SVDecinum;
+/*		1398. Barn 6 - 12 år: 0.05 mg/kg (maxdos < 10 mg).
+
+/* ======================
+/* PHASE 35: MEASUREMENTS
+/* ======================
+/*1408;35;SVQuantity|SVNumpart2;SVNummodifier+SVAdj-SVAttrpron-SVSubjpron-SVObjpron|*;
+/*. Nágra tusen kronor väntas gå förlorat på snatterier och svinn i julhandeln.
+1381;35;SVNum:SVNumber|"respektive"|SVNum:SVNumber|SVUnit;+Measurement+ValueProperty|SVAdj|+Measurement+ValueProperty|+Measurement+UnitProperty;one concept with two values and one unit
+/*		1381. Andelen som hade sådan andning var 21 respektive 40 procent.
+1406;35;SVNum:SVNumber|"x":"×"|SVNum:SVNumber:ValueProperty;JoinReverse|JoinReverse|+Measurement+ValueProperty;
+/*		1406. Där visas ett partytält, 3 x 3 m och priset 345:-. Laboratorieanalyserna visade ett trombocyvärde på 92 × 109/l, CRP som stigit till 225 mg/l, natrium på 130 mmol/l och kalium på 4,3 mmol/l.
+1382;35;"mellan"|SVNum:SVNumber|"och"|SVNum:SVNumber|SVUnit;JoinReverse|JoinReverse|JoinReverse|+SVbCon+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1382. Baserat på obduktionsmaterial har incidensen av WFS angivits till mellan 0,12 och 1,1 procent.
+1385;35;SVNum:SVNumber:SVIndefart+^SVTime|"till"|SVNum:SVNumber|SVUnit;+Measurement+ValueProperty|*|+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1385. Man räknar med att 25 till 30 procent av världens utsläpp av växthusgaser kommer från jordbruk.
+1396;35;SVIndefart:SVQuantity|SVNumpart2|SVUnit;JoinReverse|*|*;
+/*		1396. En miljard kronor väntas gå förlorat på snatterier och svinn i julhandeln.
+1377;35;SVNum:SVNumber:SVIndefart|SVUnit;-SVIndefart+SVNum+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1377. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
+1388;35;SVColonnumber:SVClocktime2+^SVTime|SVCurrency;+SVNumber+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1388. Ukrainas hryvnia var på en historisk bottennivå i måndags, med en kurs på 11:65 hryvnia per dollar.
+1389;35;SVColonnumber:SVClocktime2+^SVTime|SVPrep|SVCurrency;+SVNumber+Measurement+ValueProperty|*|*;
+/*		1389. Under förmiddagen har kronan försvagats 3 öre till 6:55 mot dollarn, medan den har försvagats 4 öre till 8:91 mot euron.
+1380;35;"över":"under"+SVAgeprep|SVNum:SVNumber|SVAge;JoinReverse|*|*;
+/*		1380. Med barn avses varje människa under 18 år.
+1384;35;SVPrep|"över":"under"|SVNum;*|JoinReverse|*;
+/*		1384. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
+/*1392;35;SVpAux|"över":"under"|SVNum+^SVTime;*|JoinReverse|*;
+/*1392. Förekomsten av kontaktallergi oftast är under 1 procent. NOT_IN. Världens 300 rikaste människor blev under 2013 ännu rikare.
+1394;35;"över":"under"|SVNum:SVNumber|SVUnit;JoinReverse|*|*;
+/*		1394. Förekomsten av kontaktallergi oftast är under 1 procent.
+1379;35;SVNum:SVNumber|SVTimeconcept+SVAge;+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1379. Projektet saknar mätningar på barn i åldern mellan 5 och 6 månader.
+1402;35;SVAge|SVNum:SVNumber;*|+Measurement+ValueProperty;
+/*		1402. Urvalet representerar kvinnor i åldern 18-74 i EU.
+1395;35;SVNum+^Measurement|SVComma|SVNum+^Measurement|"och"|SVNum+Measurement;+ValueProperty|*|+ValueProperty|*|*;
+/*		1395. De fyra anhållna är 16, 18, 18 och 19 år gamla.
+1378;35;*SVNummodifier|ValueProperty;JoinReverse|+SVbCon;
+/*		1378. I fjol inbringade välgörenhetssatsningen drygt 23,3 miljoner kronor för rent vatten i slumområden och i år växlade givarna upp ytterligare fem miljoner kronor.
+/*1390;35;*SVNummodifier|SVNumberPlusUnit;JoinReverse|*; -> ValUnitRegexSplitter makes the Nummodifier part of the unit, e.g. value 30, unit ca%
+1390;35;*SVNummodifier|SVNumberPlusUnit;-SVPrep+SVAdvDegree|*;
+/*		1390. Ca 30% blir symtomfria efter en vecka utan antibiotikabehandling.
+1403;35;SVNum:SVNumber|SVCompareprep|ValueProperty;+Measurement+ValueProperty|*|*;
+/*		1403. (89 jämfört med 53 procent).
+1391;35;SVQuantity|SVUnit;+SVAdj-SVAttrpron-SVSubjpron-SVObjpron+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		1391. Tumören har vuxit och blivit flera centimeter stor.
+1383;35;SVNum:SVNumber|SVUnit|SVPostmeas;*|*|+Join;
+/*		1383. Motsvarande siffra för Frankfurtbörsen ligger på en nedgång om 0,2 procent medan Parisbörsen ser ut att gå mot en öppning 0,2 procent högre.
+1404;35;SVUnit|"per"|SVUnit+^SVAge;*|Join|Join;
+/*		1404. Vid nuvarande virkespriser ger gran som växer 13 m3 en årlig markersättning på ca 1 000 kr per hektar sedan alla kostnader är täckta.
+1401;35;Measindicator|.SVpAux|SVNum:SVNumber;*|*|+Measurement+ValueProperty;
+/*		1401. Vid denna tidpunkt var patienten kraftigt överviktig (BMI 45).
+1405;35;Measindicator|.SVpAux|*SVNummodifier:"över":"under"|SVNum:SVNumber;*|*|JoinReverse|+Measurement+ValueProperty;
+/*		1405. Vid denna tidpunkt var patienten kraftigt överviktig (BMI cirka 45).
+/*1407;35;ValueProperty|UnitProperty|"x":"×"|SV12dNum;*|*|JoinReverse|+Measurement+ValueProperty;
+1407;35;ValueProperty|UnitProperty|"x":"×"|SV12dNum;*|*|+Measurement+UnitProperty|+Measurement+ValueProperty;
+/*		1407. Intravenös behandling med hydrokortison, initialt 100 mg × 4, initierades.
+
+1393;35;SVNumber+SVRegex+^SVTime+^Measurement;+SVCon;remove SVRegex from range01 and numberdecimalperiod, preliminary rule
+/*		1393. Hon sopade henne av banan i två raka set med 6-2, 6-2.
 
 
 /* ========================
@@ -588,13 +657,13 @@
 524;40;SVPrep|"visst";^SVPrep|SVAttrpron;
 /*		524. Jämte fiske och jakt lever de på visst småskaligt jordbruk.
 583;40;"mer":"mindre"|"än"|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|Join|*;
-/*		583. Det är därför antalet passagerare med Kustpilen har ökat med mer än 100 % sedan starten-92. Ingen får utses till ledamot för mer än två mandatperioder i följd. Undersökningen visade att hälften av författningarna var mindre än 10 år gamla. Mindre än hälften av de röstberättigade röstade.
+/*		583. Ingen får utses till ledamot för mer än två mandatperioder i följd. Mindre än hälften av de röstberättigade röstade.
 585;40;"mer":"mindre";SVAdvAdj+SVAdvDegree;default
 /*		585. Det är de mindre snabbåtarna som berörs, eftersom de är mer väderkänsliga än de större färjorna. Ju större avståndet till bergen blir, desto mindre blir storleken på den typ av sediment som transporteras.
 853;40;SVAdvTemp:SVAdvFreq|"än";SVAndOrBut|Join;
 /*		853. De tror nu att räntan sänks i juli, men att räntehöjningen sen kommer tidigare än vad Riksbanken bedömer. Nyval får dessutom inte utlysas oftare än en gång årligen.
 904;40;"fler"|"än"|SVNum:SVNumber;SVAdvDegree|Join|*;
-/*		904. Enligt befolkningsbaserade studier är analcancer vanligare hos kvinnor än hos män, fler än 60 procent av fallen ses hos kvinnor (6). En pandemi är en epidemi som finns på fler än två kontinenter och smittar lätt mellan människor.
+/*		904. En pandemi är en epidemi som finns på fler än två kontinenter och smittar lätt mellan människor.
 963;40;"än"|SVSaa;SVAndOrBut|SVAdv+SVAdvTemp;TO BE EVALUATED: remove AdvTemp?
 /*		963. Vår erfarenhet från projektet är dock att användningsområdet är mycket bredare än så.
 586;40;"än";SVAndOrBut;
@@ -656,20 +725,20 @@
 607;40;SVFast;SVVerbpt2;ignoring that it can be an R-adverb
 /*		607. På ett otroligt filmklipp syns det hur han har spänt fast sig i en liten trädgårdsstol samtidigt som de färgglada ballongerna lyfter honom mot skyn.
 608;40;SVRunt|SVNumber:SVNum+^SVYear;SVAdvDegree+SVAdv|*;
-/*		608. Patienten var cirkulatoriskt stabil med ett blodtryck på 150/80 mm Hg samt en puls på runt 100 slag/minut. I området blåser runt tio meter per sekund.
+/*		608. Totalt stöder plattformen runt 300 000 användare på 1 400 förskolor och skolor.
 612;40;SVIndefart|SVRunt;*|SVAdj;
 /*		612. Vi hade också en boll som vi har undrat lite över, ett runt paket inlindat väldigt snyggt.
 610;40;SVRunt;SVPrep;
 /*		610. Runt matbord samlas människor för att äta, medan mötesbord används vid diskussioner, förhandlingar och beslut.
 /*713;40;^SVCon+^SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 713;40;^SVCon+^SBegin|"över"|SVNum:SVNumber+^SVDecinum;*|SVAdvDegree+SVAdv|*;
-/*		713. den gick från ca 15 procent 1980 till över 50 procent 2004.
+/*		713. Stockholms city förfogade år 2000 över 82 hotell med 8 663 hotellrum. WRONG. Listan består av 22 bolag utspridda över sju sektorer.
 /*714;40;SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 714;40;SBegin|"över"|SVNum:SVNumber+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 /*		714. Över 20 peteckier på en 2,5 kvadratcentimeters area anses onormalt.
 /*618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join;
-618;40;"över":"under"|SVNum+^SVDecinum|"år"+SVAge;SVCon|Join|Join;
-/*		618. Med barn avses varje människa under 18 år. Detta gäller dock bara för personer som är under 65 år.
+618;40;"över":"under"|SVNum+^SVDecinum|"år"+SVAge;SVCon|Join|Join;TO BE CHECKED: probably obsolete.
+/*		618. no example.
 650;40;SVGen|"andra";*|SVAdj;
 /*		650. Sambandet mellan energi och exergi framgår av termodynamikens andra huvudsats.
 682;40;"rent"|SVAdvAdj;SVAdvDegree+SVAdv|*;
@@ -688,7 +757,7 @@
 /*		733. 2 § Annan arbetstvist än som avses i 1 § skall upptagas och avgöras av tingsrätt.
 734;40;"§"+^SVeCon;SVCon;default
 /*		734. Inledningsvis ges en historisk tillbakablick på institutet ’urminnes hävd’ varefter jag analyserar dess betydelse i relation till 1983 års vattenlag (jämte promulgationslag), miljöbalkens promulgationslag och 24 kap. 1 § miljöbalken.
-22;40;SVNum|"-"|SVNum;SVCon|Join|Join;avoid that hyphen becomes nonrelevant between numbers
+22;40;SVNum|"-"|SVNum;SVCon|Join|+Join;avoid that hyphen becomes nonrelevant between numbers, +Join needed to keep Measurement or Time attribute
 /*		22. För samtal till texttelefon när du är utomlands, ring + 46 771 - 11 77 99.
 13;40;SVPrepCon;SVPrep;preliminary default
 /*		13. Trots det väcker programmet ett brett spann av känslor och tankar om livets yttre och inre domare.
@@ -1275,7 +1344,7 @@
 /*		811. Det är som det skulle finnas en magisk färg som automatiskt ”mönstrade sig själv” när man målade ut den på väggen.
 293;40;SVPrep+^SVConj|SVDefart+^SVSubjpron|SVVerbPart;SVPrep|SVDefart|SVAdj;
 /*		293. Medicin uppvisade den absolut sett snabbaste ökningen av kvinnoandelen bland de disputerade.
-295;40;SVVerbPart|SVIndefart:SVSubjpron:SVSubjpron;SVVerb|*;
+295;40;SVVerbPart|SVIndefart:SVSubjpron:SVSubjpron:SVQuantity;SVVerb|*;
 /*		295. Det statliga konjunkturstödet spelade en viss roll för det höga resultatet åren 2010–11. Utanför, sida vid sida, väntade alla som inte fick plats i kyrkan för att få ta farväl.
 292;40;SVPrep+^SVConj|SVVerbPart;SVPrep|SVPart;
 /*		292. De handlade inte bara om försörjning i snäv ekonomisk bemärkelse, utan var också delar i komplicerade sociala samspel.
@@ -1769,7 +1838,7 @@
 475;40;SVAdvDegree|SVNumber;SVbCon|SVNumber;
 /*		475. Resultatet visar att cirka fyra av tio höll hastighetsbegränsningen förbi vägarbeten.
 480;40;SVAdvDegree|SVIndefart;SVbCon|SVNumber;
-/*		480. Men i stället drog vinden i väg honom i en annan riktning och det slutade med att han fick slita sig loss från stolen och öppna fallskärmen och landa ungefär en kilometer i från den tänka landningsplatsen.
+/*		480. Det blir cirka 2 400 turer och runt 36 000 km, nästan ett varv runt jorden per dag sammanlagt.
 757;40;SVGen|SVbCon;SVAdj|SVCon;
 /*		757. Slutpriset för diktatorns delvis självbiografiska bok, i två band, landade på drygt 420 000 kronor.
 
@@ -2333,7 +2402,7 @@
 1171;80;SVNegSentimentBegin+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVNegSentimentBegin;
 /*		1171.UD. Om ingreppet inte lyckas, eller bedöms alltför riskfyllt, bör bronkotomi övervägas.
 1172;80;SVPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVPosSentimentStop;
-/*		1172.UD. Hon har gått runt och förklarat hemma – inte ens tre år gammal – att pappa mår bättre nu.
+/*		1172.UD. Vi vet, slutligen, att många yrkestitlar var vaga, mångtydiga och därmed inte så upplysande.
 1173;80;SVPosSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|+SVPosSentimentStop;
 /*		1173.UD. De vill snabbt ha lärarens erkännande, tex om uppgifter var rätt lösta.
 1174;80;SVNegSentimentStop+^typeConcept+^typeRelation+^typePathRelevant|^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeRelation:typePathRelevant;*|*|+SVNegSentimentStop;
