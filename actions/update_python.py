@@ -43,36 +43,8 @@ def get_first_nonnumeric(s):
 def compare_versions(a, b):
     """Compare 2 Python version strings. Return -1 if a < b, 0 if a == b, and
     1 if a > b. Version string must match the regex VERSION_REGEX."""
-    a = a.split('.')
-    b = b.split('.')
-    a[0] = int(a[0])
-    b[0] = int(b[0])
-    a[1] = int(a[1])
-    b[1] = int(b[1])
-    nonnumeric_i = get_first_nonnumeric(a[2])
-    if nonnumeric_i == -1:
-        a[2] = int(a[2])
-        a.append('zz')
-    else:
-        micro = a[2]
-        a[2] = int(micro[:nonnumeric_i])
-        nonnumeric_i += micro[nonnumeric_i] == '-'
-        after_micro = micro[nonnumeric_i:]
-        numeric_i = get_first_numeric(after_micro)
-        a.append(after_micro[:numeric_i])
-        a.append(int(after_micro[numeric_i:]))
-    nonnumeric_i = get_first_nonnumeric(b[2])
-    if nonnumeric_i == -1:
-        b[2] = int(b[2])
-        b.append('zz')
-    else:
-        micro = b[2]
-        b[2] = int(micro[:nonnumeric_i])
-        nonnumeric_i += micro[nonnumeric_i] == '-'
-        after_micro = micro[nonnumeric_i:]
-        numeric_i = get_first_numeric(after_micro)
-        b.append(after_micro[:numeric_i])
-        b.append(int(after_micro[numeric_i:]))
+    a = [int(i) for i in a.split('.')]
+    b = [int(i) for i in b.split('.')]
     if a < b:
         return -1
     elif a == b:
@@ -80,16 +52,9 @@ def compare_versions(a, b):
     return 1
 
 
-ALLOW_PRERELEASE = False  # flag for whether to allow updates to prerelease Python versions
-
 platform = sys.argv[1]
 assert platform in ('win64', 'osx'), f'{platform} is not supported'
-if platform == 'win64' and ALLOW_PRERELEASE:
-    VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+(-(a|b|rc)[0-9]+)?$'
-elif platform == 'osx' and ALLOW_PRERELEASE:
-    VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+((a|b|rc)[0-9]+)?$'
-else:
-    VERSION_REGEX = r'^([0-9]+\.){2}[0-9]+$'
+VERSION_REGEX = r'^([0-9]+\.){2,}[0-9]+$'
 
 vars = updatelib.get_vars()
 if platform == 'win64':
