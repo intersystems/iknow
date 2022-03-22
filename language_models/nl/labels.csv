@@ -63,7 +63,7 @@
 ;1,30,40,50,64,65,$;NLNooit;typeRelation;nooit;0;;
 ;1,20,30,40,50,60,64,65,70,80,$;NLNumberConcept;typeConcept;label for numbers in lexreps file, when rewritten to another type than Concept the number attribute can be used to detect them;0;;
 ;1,30,40,50,60,63,64,65,70,$;NLObjpron;typePathRelevant;mij, jou, hem, etc.;0;;
-;1,40,50,60,63,64,65,70,80,$;NLOndvw;typeRelation;subordinate conjunction;0;;
+;1,30,40,50,60,63,64,65,70,80,$;NLOndvw;typeRelation;subordinate conjunction;0;;
 ;1,20,30,40;NLPartAdj;typeRelation;past participle,label for participles before disambiguation (Attradj or Partrel);0;;
 ;1,30,40,50,64,$;NLPrespartAdj;typeAmbiguous;present participle,label before disambiguation (Attradj or Partrel);0;;
 ;1,40,50,63,64,65,70,80,$;NLPartrel;typeRelation;past participle that is disambiguated as a relation;0;;
@@ -185,7 +185,7 @@
 
 ;63,64,80,85;NLPBegin;typeAttribute;beginning of phrase;0;;
 ;63,85;NLPEnd;typeAttribute;end of phrase;0;;
-;80;NLCBegin;typeAttribute;beginning of concept, for attribute expansion;0;;
+;64,80;NLCBegin;typeAttribute;beginning of concept, for attribute expansion;0;;
 
 ;40;NLSingular;typeAttribute;singular form;0;;
 ;40;NLPlural;typeAttribute;plural form;0;;
@@ -196,19 +196,19 @@
 ;1,30,40,$;NLComp;typeAttribute;for comparatives;0;;
 ;20,30,40;NLFraction;typeAttribute;for fractions, such as 'helft';0;;
 ;30,64;NLTimes;typeAttribute;for 'keer', 'maal' and variations, for detection of time indications;0;
-;20,30;NLQuantity;typeAttribute;for words expressing a quantity, such as 'een paar';0;;
+;20,30,40;NLQuantity;typeAttribute;for words expressing a quantity, such as 'een paar';0;;
 
 ;1,20,$;NLNumeric;typeAttribute;numeric number;0;;
 ;1,30,64,$;NLOrdnum;typeAttribute;ordinal number;0;;
 ;1,20,$;NLDecimalnum;typeAttribute;decimal number;0;;
-;1,20,30,40,60,64,65,70;NLNumber;typeAttribute;attribute for numbers, covers numbers with type BeginConcept, EndConcept or BeginEndConcept;0;;
+;1,20,30,40,60,63,64,65,70;NLNumber;typeAttribute;attribute for numbers, covers numbers with type BeginConcept, EndConcept or BeginEndConcept;0;;
 ;1,20,50,$;CStarter;typeAttribute;concept-starter -> can become beginconcept depending on context;0;;
 ;1,30,40,50,64,65,$;NLYearnum;typeAttribute;possible year numbers;0;;
 ;1,30,64;NLDate;typeAttribute;date in numbers (regex);0;;
 ;1,30;NLPossibledate;typeAttribute;possible date in numbers (regex), to be disambiguated;0;;
 ;1,20,30;NLPossiblehour;typeAttribute;possible hour in numbers (regex), to be disambiguated;0;;
 ;1,30,64;NLDigitaltime;typeAttribute;digital time;0;;
-;1,30;NLHoliday;holidays;0;;
+;1,30,64;NLHoliday;holidays;0;;
 ;1,30,64;NLHour;typeAttribute;hour of day;0;;
 ;1,30,40,64;NLDay;typeAttribute;names of days;0;;
 ;1,30,40,50,64;NLMonth;typeAttribute;month name;0;;
