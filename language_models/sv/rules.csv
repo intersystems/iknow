@@ -33,7 +33,16 @@
 /*		1358.UD. Vid olympiska sommarspelen 1972 i München slog terrorister till.
 1359;1;UDTime;+SVTime;
 /*		1359.UD. Då hade den redan funnits i 30 år. Frågan är om dessa nya diagnostiska kriterier kan vara till hjälp i vår dagliga praktiska verksamhet redan i dag.
-
+1415;1;UDNumber;UDNumber+SVNumber+Measurement+ValueProperty;
+/*		1415.UD. Alla andra som var med på bokturnén säljer jättemånga böcker. Jag minns att jag läste en artikel om en rockgrupp som sålde jättemånga skivor och hade jättemånga beundrare.
+1416;1;UDUnit;UDUnit+SVUnit+SVCon;
+/*		1416.UD. En tiokronorssedel värderades till tolv jetonger.
+1410;1;UDIgnoreNumber;-SVDecinum-SV12dNum-SV3dNum-SVNumpart2-SVNumX-SVNumberPlusUnit-SVQuantity;
+/*		1410.UD. Tumören har vuxit och blivit flera centimeter stor.
+1411;1;SVNum:SVNumber+UDIgnoreNumber;-SVNum-SVNumber+SVCon;add Con to avoid that the entity becomes nonrelevant
+/*		1411.UD. Stockholms stadslandskap och stadsbild som vi uppfattar dem idag har formats under många hundratals år.
+1412;1;UDIgnoreUnit;-SVUnit-SVCurrency-SVNumberPlusUnit;
+/*		1412.UD. I oktober hade andelen ökat till 31 procent.
 1366;1;UDIgnoreNegation;-SVNegation-SVNegBegin-SVNegWord-SVNegadj;
 /*		1366.UD. Sjukdomen behöver sällan behandlas med antibiotika.
 1369;1;UDIgnoreTime;-SVTimeconcept-SVTimeadj-SVTimespan-SVYearpart-SVDay-SVHour-SVClocktime;
@@ -2440,8 +2449,11 @@
 /*		1372.UD. Vanligen används ved eller elektricitet. Området runt sjön är vintertid känt för att vara snörikt.
 /*1373;$;SVTimeBegin+^SVTime|.^SVTime+^SVTimeStop|SVTimeStop;-SVTimeBegin|*|*;
 1373;$;SVTimeBegin+^SVTime|.^SVTime+^UDIgnoreTime|UDIgnoreTime;-SVTimeBegin|*|*;
-/*		1373.UD. Så er vi officielt gået på vintertid!
-
+/*		1373.UD. Sommaren är slut och vi går över till vintertid (normaltid) natten mellan lördag och söndag.
+1413;$;UDIgnoreNumber|^SBegin;-Measurement-ValueProperty|-Measurement-UnitProperty;
+/*		1413.UD. Tack vare de eroderande krafterna samlar en vanlig flod upp flera miljoner ton sediment på sin väg.
+1414;$;UDIgnoreUnit;-Measurement-UnitProperty;
+/*		1414.UD. I oktober hade andelen ökat till 31 procent.
 15;$;SVPunctuation;Punctuation;rewrite language-specific label back to default
 /*		15. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
 
