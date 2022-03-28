@@ -1,6 +1,6 @@
 
 /* PHASE 1: RELABEL MANDATORY LABELS AND USER DICTIONARY ITEMS
-/*============================================================
+/* ===========================================================
 /* Rewrite mandatory labels to language-specific labels
 428;1;Punctuation;^NLPunctuation;
 /*		428. Eén (anderhalf) twee.
@@ -26,6 +26,21 @@
 /*		438.UD. We hebben de Belgische politie gewezen op de verdwijning van Sandra.
 1814;1;UDTime;+NLTime;
 /*		1814.UD. Trajectcontrole, dat wordt in de toekomst het middel om hardrijders in bedwang te houden.
+1992;1;UDIgnoreNegation;-NLNegation-NLNegBegin-NLNegWord;
+/*		1992.UD. De meeste winkeliers zitten al enkele weken zonder omdat er heel veel vraag naar is. Onherstelbare schade werd er echter nergens gemeld.
+1994;1;UDIgnoreTime;-NLTime-NLTimeconcept-NLTimes-NLDate-NLDigitaltime-NLTimeofday-NLYear-NLYearnum;
+/*		1994.UD. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. Dat is drie tot vier keer zo vaak als gemiddeld. AMSTERDAM 11/08/2018 18:00.
+1997;1;UDIgnoreTime;-NLPossiblehour-NLHour-NLDay-NLMonth;
+/*		1997.UD. Hij eindigde met een tijd van 6.00. Inwoners die behoefte hebben om te reageren op de brief, kunnen tot donderdag contact opnemen met de deelgemeente. 
+
+/* Connections with partial words (rule block should precede disambiguation of Adj)
+1972;1;NLCon|"@connect@"|NLAndOrBut:"tot":"noch"|NLCon:NLAdj:NLAttradj:NLNumber:NLVerb;+JoinReverse|JoinReverse|JoinReverse|*;
+/*		1972. Zo’n vier- tot vijfhonderd jongeren zijn opgedaagd. Daarbij vielen twee licht- en twee zwaargewonden. Verder pleit hij voor een landelijk onderzoek naar het gebruik van geweld tijdens grote muziek- en sportevenementen. In bieren van spontane gisting moet ten minste 30% van het totale gewicht van de verwerkte zetmeel- of suikerhoudende grondstoffen, uit tarwe bestaan. Per- en postoperatief verloop waren ongecompliceerd. De maaltijd moet vet- en vezelarm zijn omdat vetten en vezels minder snel verteren. De proefpersonen leden aan matige hoge bloeddruk en moesten dagelijks een half uur naar (trage) muziek luisteren terwijl ze rustig in- en uitademden. Geen belangrijke ritme- noch toenemende geleidingsstoornissen.
+1974;1;NLCon|"@connect@"|NLAndOrBut:"noch"|"andere";NLAttradj|Join|Join|Join;
+/*		1974. Bovenop die kosten mag de aannemer een winstmarge rekenen om zijn werf- en andere kosten te laten vergoeden.
+1973;1;"@connect@";NLCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
+/*		1973. Rond twintig over negen werd hij met een MUG- ambulance naar het ziekenhuis overgebracht.
+
 
 /* PHASE 20: DETECT NUMBERS
 /* ========================
@@ -35,10 +50,10 @@
 /*		1691. Consumenten kunnen sinds een maand of vijf op de website de voordeligste tarieven voor mobiele en vaste telefonie opzoeken.
 1674;20;NLNumberConcept|NLTimeconcept|"meer":"minder":"extra"|^"dan";NLAdvTime|+Join|+Join|*;
 /*		1674. Smartphone doet je 15 uur extra werken. NOT. Het festival heeft de voorbije twee maanden meer dan 248.000 bezoekers naar de Scheldestad gelokt.
-1825;20;"om"|"de"|NLNumberConcept:NLQuantity|NLTimeconcept;+NLAddExpansion|NLPathRelevant|NLAdvTime|+Join;mark that expansion should be added in phase 55
+1825;20;"om"|"de"|NLNumberConcept:NLQuantity|NLTimeconcept;NLAdvTime|+Join|+Join|+Join;mark that expansion should be added in phase 55
 /*		1825. Het cijfer van de bevolking van elke kieskring wordt om de tien jaar vastgesteld door een volkstelling of door enig ander middel, bepaald door de wet.
-1859;20;"op"|."een":NLNumberConcept|NLTimeconcept;+NLAddExpansion|*|*;
-/*		1859. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Op weekdagen piekt de verkoop tussen 16 en 17 uur.
+1859;20;NLOp|."een":NLNumberConcept:NLBeginTime|NLTimeconcept;+NLAddExpansion|*|+NLTime;mark preposition to be included in time expansion of ambiguous time concept such as 'termijn'
+/*		1859. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Op weekdagen piekt de verkoop tussen 16 en 17 uur. Er bestaat een wezenlijke onzekerheid over de vraag of het bedrijf in staat is om de activiteiten op middellange termijn voort te zetten.
 
 /* process numbers
 1663;20;NLNumberConcept|"miljoen":"miljard";^NLNumberConcept|+Join;
@@ -69,6 +84,8 @@
 /*		1217. Het Noordzeebekken vormde zich vanaf het Krijt, ca. 60 miljoen jaar geleden.
 1741;20;NLAdvDegree:"zeker"|NLNumberConcept;+JoinReverse+CStarter+NLNumber|*;
 /*		1741. Zeker tien minuten lag ik doodsbang op de grond. De Commissie heeft beslist dat draagbare muziekspelers maximaal 80 decibel mogen produceren bij iemand die 8 uur per dag of veertig uur per week luistert.
+1950;20;^NLLinkingverb:NLAdvDegree|NLNet:"juist":NLAdvDegree+^NLAdjCon:NLRelConAdj:NLMeerMinder|NLPrep+^"om";*|+JoinReverse|^NLPrep;
+/*		1950. Net op die dag plaatste het bedrijf zijn aandelen in de markt. NOT. Wees matig met alcohol. NOT. De tocht op 30 januari door het besneeuwde landschap was zeer zwaar vanwege de stormachtige oostenwind. NOT. Dat brengt het totaal op 193. NOT. De Ministerraad heeft het licht op groen gezet. NOT. De vermogensbeheerders boden eind juni zowat 700 beleggingsfondsen minder aan dan een half jaar geleden. 
 
 
 /* PHASE 30: DETECT TIME INDICATIONS
@@ -76,8 +93,8 @@
 /* Disambiguate word NET: adverb of time or noun
 1186;30;NLArt:NLAttradj:NLGeen|.NLPartAdj|NLNet;*|NLAttradj|NLCon;
 /*		1186. Het katholieke net is daarbij het grootst. Het achterland van deze havens wordt ondersteund door een uitgebreid net van rivieren.
-1185;30;NLNet|.NLAdvStruct|NLPrep;NLRAdv|*|*;
-/*		1185. Het aandeel strandde in Londen tussentijds net onder de 75 dollar. Pas op Schiphol kwam hij erachter, net nog op tijd om snel even terug te rijden.
+1185;30;NLNet|NLAdvStruct|NLPrep;NLRAdv|*|*;
+/*		1185. Pas op Schiphol kwam hij erachter, net nog op tijd om snel even terug te rijden.
 1188;30;NLNet|NLAdvStruct;NLAdvStruct|+Join;
 /*		1188. Net daarom kunnen bestaande aandeelhouders in de meeste gevallen rekenen op gunstige voorwaarden.
 319;30;NLNet;NLAdvTemp;
@@ -98,21 +115,31 @@
 /* Disambiguate word EVEN: adverb of time or degree
 1731;30;NLEven|NLAdj:NLAdjCon:NLAdvDegree:NLAdvDirection:NLAdvTemp:NLPartAdj;NLAdvDegree|*;
 /*		1731. Dus denk ik dat we minstens even sterk gewapend zijn als vorig jaar. Het organiseren van de sector, beleidsondersteuning, of promotie van het boek loopt niet altijd even vlot. Even voordien moest de Britse topgroep in extremis een optreden in Parijs annuleren. Deze eisen worden voor het algemeen vormend lager onderwijs zodanig geregeld, dat de deugdelijkheid van het openbaar onderwijs even afdoende wordt gewaarborgd. De lucht is even verontreinigd als in het Ruhrgebied in Duitsland.
-1733;30;NLArt|NLEven|NLAttradj:NLRelAttradj;*|JoinReverse|+NLAttradj;
+1733;30;NLArt|NLEven|NLAttradj:NLRelAttradj;*|+JoinReverse|+NLAttradj;
 /*		1733. In de even grote controlegroep krijgen 90 mensen in die tijd longontsteking.
 1732;30;NLEven;NLAdvTemp;
 /*		1732. Het verlies liep zelfs even op tot meer dan 3 procent.
 
+/* Disambiguate word DIRECT: adverb of time or adjective without time meaning
+1934;30;NLAdvDegree|NLDirect;*|NLAdj;
+/*		1934. Ik ben nogal direct, maar ook altijd diplomatiek, correct, beleefd.
+1935;30;NLDirect|NLAndOr|NLAdj;NLAdj|*|*;
+/*		1935. De bank houdt momenteel een belang (direct en indirect) van 70%. 
+1932;30;NLArt:NLPoss:NLAndOr:NLGeen|NLDirect|NLAdj:NLCon;*|NLAttradj|*;
+/*		1932. Analisten voorzagen een sterkere daling van het direct resultaat. Verschillende insecten kunnen via beten, steken of direct huidcontact lokaal hevige jeuk en ontstekingsverschijnselen veroorzaken. Deze belangen leveren mij echter geen enkel direct financieel voordeel op als de amendementen aangenomen zouden worden.
+1933;30;NLDirect;NLAdvTemp;
+/*		1933. De arts van de opgeroepen traumahelikopter begon direct met reanimeren.
+
 /* Adverb of time in noun phrase (before join rules)
-1721;30;NLArt|NLAdvTime:NLDay|*NLPartAdj|NLAttradj:NLCon;*|NLAttradj+NLTime|NLAttradj|*;
-/*		1721. De zaterdagavond opgeroepen politiemensen zouden zich achterwaarts de duinen in hebben willen terugtrekken. Dat laat het bedrijf donderdag weten, naar aanleiding van de vandaag gehouden algemene aandeelhoudersvergadering.
+1721;30;NLArt|*NLAdvTime:NLDay|*NLPartAdj:NLAttradj|NLCon;*|NLAttradj+NLTime|NLAttradj|*;
+/*		1721. De zaterdagavond opgeroepen politiemensen zouden zich achterwaarts de duinen in hebben willen terugtrekken. Dat laat het bedrijf donderdag weten, naar aanleiding van de vandaag gehouden algemene aandeelhoudersvergadering. In het gisteren nabeurs gepubliceerde jaarverslag bevestigde het farmabedrijf de verlaagde verwachtingen voor 2008.
 
 /* Disambiguate words VROEG, LAAT and TE
 1803;30;"iets":"veel"|"te"|^NLInf;NLTe|+Join|*;
 /*		1803. Het meisje is iets te vroeg geboren, maar moeder en dochter maken het goed. NOT. Je moet met veel meer zijn om iets te veranderen.
 20;30;NLEen|NLVroegLaat;*|NLAttradj;
 /*		20. Op de website staat een laat verslag van de vorige vergadering.
-1802;30;NLAdvDegree:NLTe|NLVroegLaat|^NLInf;JoinReverse|NLAdvTime+NLEndTime|*;
+1802;30;NLAdvDegree:NLTe|NLVroegLaat|^NLInf;+JoinReverse|NLAdvTime+NLEndTime|*;
 /*		1802. Al speelt de paprika een belangrijke rol in de Hongaarse keuken, hij is pas relatief laat in Hongarije ingevoerd. NOT. Dat het bedrijf iets meer laat liggen ten opzichte van de marktgroei dan in andere kwartalen is hier aan te wijten.
 1804;30;NLVroegLaat|NLVerb:NLRelAdj+^NLInf;NLAdvTime|*;
 /*		1804. De enige uitzonderingen zijn sterren die het publiek nooit oud heeft zien worden, omdat ze in tragische omstandigheden vroeg overleden: James Dean, Marilyn Monroe, Tyrone Power, Judy Garland.
@@ -140,7 +167,7 @@
 /*		1820. De keten heeft in het vierde kwartaal van het gebroken boekjaar 2008/09 de nettowinst met 16 procent zien stijgen, bij een dalende omzet.
 
 /* Preparation for time expansion
-1900;30;NLAdvDegree|NLBeginTime;JoinReverse|+NLBeginTime-NLEndTime;
+1900;30;NLAdvDegree|NLBeginTime;+JoinReverse|+NLBeginTime-NLEndTime;
 /*		1900. De medicatie lijkt bij hallucinaties bij de ziekte van Parkinson in relatief korte tijd verbetering te geven zonder veel bijwerkingen.
 1872;30;"voor"|."de":"het"|NLOrdnum|NLTimeconcept:"keer"+^"kwartaal";+NLAddExpansion|*|*|*;
 /*		1872. En ook de neerwaartse prijzenspiraal lijkt gestuit: in mei stegen de prijzen voor residentieel vastgoed voor de eerste keer sinds juli 2006 op maandbasis. Aantal rokers stijgt voor tweede jaar op rij. Voor het tweede jaar op rij is het aantal rokers in België beduidend gestegen. NOT. Woensdag maakt de zakenbank haar cijfers voor het tweede kwartaal bekend.
@@ -150,44 +177,64 @@
 /*		1786. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
 1890;30;NLNumber|NLAndOr:NLPrep|*NLNumber|"jaar"|NLPrepTime;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
 /*		1890. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1914;30;NLNumber|NLTimeconcept|"en"|NLNumber|NLTimeconcept;*|*|+NLAddExpansion|*|*;
+/*		1914. De minimaal vereiste reistijd bedraagt 1 uur en 30 minuten voor zowel inkomende als uitgaande passagiers.
+1916;30;"aan":"bij"|"het"|"eind":"einde":"begin"|"van";+NLAddExpansion|*|*|*;
+/*		1916. Zondag aan het begin van de avond werd dit kennelijk door de buurman ontdekt.
 
-/* Disambiguate TIJD
-1893;30;NLBeginTime|"tijd"|NLEndTime;NLAdvTemp+NLTime|Join|Join;
+/* Disambiguate TIJD, MOMENT, OGENBLIK
+1893;30;NLBeginTime|"tijd"|NLEndTime;NLAdvTemp|+Join|+Join;
 /*		1893. Het graafschap Vlaanderen, dat onder de aanvankelijk zwakke koning van Frankrijk viel, was aanvankelijk en ook nog lange tijd daarna het belangrijkste gewest.
-1894;30;NLPrepTime:"tot"+^"voor":"over":"uit"|NLDempron:NLHetzelfde|"tijd"|^"van";NLAdvTemp+NLTime|Join|Join|*;
-/*		1894. De Hollandse zeevaart kende in deze tijd ook een opvallend sterke groei. Tot die tijd blijven de verloven van kracht. NOT. Daarnaast verwacht hij hogere kosten, terwijl veel pubs het toch al moeilijk hebben in deze tijd van recessie. In dezelfde tijd werd ook een mastopexie uitgevoerd.
-1899;30;NLPrep|.NLArt:NLDempron|NLBeginTime|"tijd";*|*|NLAdvTime|Join;
+1944;30;NLPrepTime:"tot":NLOp|NLArt|"zeker":"bepaald":"gegeven"|"moment":"ogenblik";NLAdvTemp|+Join|+Join|+Join;
+/*		1944. Dat stond op een bepaald moment 0-1 achter en bovendien was de thuisploeg ook al tot tien man herleid.
+1946;30;NLPrepTime:NLOp|.NLArt|"zekere":NLBepaalde|"tijd";*|*|NLAdvTime+NLTime|+Join;
+/*		1946. Dit komt doordat de vullers na een bepaalde tijd geresorbeerd worden door het lichaam.
+1894;30;NLPrepTime:"tot":NLOp+^"voor":"over":"uit"|NLDempron:NLHetzelfde|"tijd":"moment":"ogenblik"|^"van";NLAdvTemp|+Join|+Join|*;
+/*		1894. De Hollandse zeevaart kende in deze tijd ook een opvallend sterke groei. Tot die tijd blijven de verloven van kracht. NOT. Daarnaast verwacht hij hogere kosten, terwijl veel pubs het toch al moeilijk hebben in deze tijd van recessie. In dezelfde tijd werd ook een mastopexie uitgevoerd. In het weekend kreeg hij dieven over de vloer en op ongeveer hetzelfde moment werd ook in Nederland een grote duivendiefstal gepleegd. Een  controle CT hersenen toont op dat ogenblik een discreet diffuus oedeem.
+1899;30;NLPrep|.NLArt:NLDempron|NLBeginTime|"tijd";*|*|NLAdvTime|+Join;
 /*		1899. Voor de renner is het de tweede keer in korte tijd dat hij zwaar valt. 
-1892;30;NLBeginTime|"tijd";NLAdvTemp+NLTime|Join;
+1892;30;NLBeginTime|"tijd";NLAdvTemp|+Join;
 /*		1892. Hij verklaarde dat de verhoudingen met de buren al enige tijd gespannen zijn.
+1945;30;NLBeginTime:NLOrdnum|"moment":"ogenblik";NLAdvTime|+Join;
+/*		1945. Doet u dat op het laatste moment, als alle plannen getekend zijn, of doet u dat bij aanvang, als u nog samen aan de tekentafel zit? Vanaf het eerste moment klikte het tussen ons.
+1943;30;NLPrepTime:"tot":NLOp|NLArt|NLPartAdj:NLPartCon:NLAdj:NLAttradj|"moment":"ogenblik";*|*|NLAttradj|+NLTime;
+/*		1943. De foto werd genomen op een onbewaakt moment.
+1988;30;"op"|"tijd";+NLAddExpansion|+NLTime;
+/*		1988. Twee andere kinderen konden op tijd door een buurman van een dakterras worden gehaald.
+
+/* Disambiguate ambiguous Time concepts (e.g. TERMIJN, PERIODE, ...)
+1891;30;NLTimeconcept|"van"|NLNumber|"tot"|NLNumber|NLTimeconcept;+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|+Join;disambiguate ambiguous time concept (and 'jaar')
+/*		1891. Als er een akkoord wordt bereikt dan is over een periode van vijf tot zes jaar circa EUR3 miljard nodig.
+1895;30;NLTimeconcept|"van":"min"|NLNumber|NLTimeconcept;+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|+Join;disambiguate ambiguous time concept
+/*		1895. Het is voor een termijn van 9 jaar geleased. De Koning maakt binnen een termijn van zes maanden de uitslagen bekend. De duur van het boekjaar mag nooit langer zijn dan 24 maanden min één kalenderdag.
 
 /* Disambiguate NUMBER plus JAAR: detect time indications, and remove time attribute when used as 'age'
-1896;30;NLGeen|.NLNumberConcept|"jaar"|NLEndTime;+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;
+1920;30;"tot"|NLNumber|"jaar"|typeConcept;-NLPrepTime|*|*|*;don't include 'tot' in expansion for this pattern
+/*		1920. De man, veroordeeld tot 30 jaar cel, verlaat ten laatste morgen de gevangenis.
+1918;30;"van"|NLNumber|"tot"|NLNumber|"jaar";*|*|-NLPrepTime|*|-NLTimeconcept;'tot' before Number + 'jaar' is usually used for age
+/*		1918. Bij kinderen van 2 tot 6 jaar moet het gebruik van deze producten strikt beperkt blijven.
+1896;30;NLGeen|.NLNumberConcept|"jaar"|NLEndTime;+NLTime|+JoinReverse|+JoinReverse|NLTimeconcept+NLTime;
 /*		1896. De overeenkomst voor bananen is nog geen zeven jaar geleden in werking getreden.
-1891;30;NLTimeconcept|"van"|NLNumber|"tot"|NLNumber|"jaar";+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|Join;
-/*		1891. Als er een akkoord wordt bereikt dan is over een periode van vijf tot zes jaar circa EUR3 miljard nodig.
-1895;30;NLTimeconcept|"van"|NLNumber|"jaar";+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|Join;
-/*		1895. Het is voor een termijn van 9 jaar geleased.
-1885;30;NLPrepTime|NLNumber|NLHyphen|NLNumber|"jaar";*|NLAdvTime|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1885;30;NLPrepTime|NLNumber|NLHyphen|NLNumber|"jaar";*|NLAdvTime|+Join|+Join|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1885. Daarenboven ziet men dat het aantal gevallen van kinkhoest bij adolescenten en volwassenen na 10 – 15 jaar is toegenomen.
-1886;30;NLBeginTime|NLNumber|NLHyphen|NLNumber|"jaar";NLAdvTime|Join|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1886;30;NLBeginTime|NLNumber|NLHyphen|NLNumber|"jaar";NLAdvTime|+Join|+Join|+Join|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1886. Daarenboven ziet men dat het aantal gevallen van kinkhoest bij adolescenten en volwassenen de laatste 10 – 15 jaar is toegenomen.
-1877;30;NLBeginTime|NLNumber:NLQuantity|.NLAttradj+NLBeginTime+^"vorig"|"jaar";NLAdvTime|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1877;30;NLBeginTime|NLNumber:NLQuantity|.NLAttradj+NLBeginTime+^"vorig"|"jaar";NLAdvTime|+Join|+Join|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1877. Volgens de krant zou het de komende paar jaar gaan om banen bij human resource, bemiddeling en IT.
-1882;30;NLNumber|NLAndOr:NLPrep|*NLNumber|"jaar"|NLEndTime;+NLTime+CStarter+NLAddExpansion|*|NLAdvTime|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1882;30;NLNumber|NLAndOr:NLPrep|*NLNumber|"jaar"|NLEndTime;+NLTime+CStarter+NLAddExpansion|*|NLAdvTime|+Join|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1882. Ergens tussen 3,5 tot 4,5 miljard jaar geleden ontstond er leven op aarde.
-1878;30;"een":NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|"jaar"|NLEndTime;NLAdvTime|Join|Join|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1878;30;"een":NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|"jaar"|NLEndTime;NLAdvTime|+Join|+Join|+Join-NLEndTime;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1878. Zeshonderd Nederlandse schoolkinderen krijgen vanaf december anderhalf jaar lang gratis limonade. Het passagiersvervoer is in april 2008 met 1,0% gestegen ten opzichte van dezelfde maand twee jaar eerder. 
-1879;30;^NLNumber|"tot"|NLNumber:NLQuantity:NLOrdnum|"jaar"|^NLAttradj:NLComp;*|*|NLTimeconcept+NLTime|Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1879;30;^NLNumber|"tot"|NLNumber:NLQuantity:NLOrdnum|"jaar"|^NLAttradj:NLComp;*|*|NLTimeconcept+NLTime|+Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1879. De miljonair, veroordeeld tot 30 jaar cel, verlaat ten laatste morgen de gevangenis. NOT. Bovendien bleek het brein van de proefpersonen met overgewicht er tot 16 jaar ouder uit te zien.
-1884;30;NLPrepTime|*NLNumber|NLComma|*NLNumber|NLAndOr:"tot"|*NLNumber:NLQuantity|"jaar";*|+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1884;30;NLPrepTime|*NLNumber|NLComma|*NLNumber|NLAndOr:"tot"|*NLNumber:NLQuantity|"jaar";*|+NLTime+NLAddExpansion|*|+NLTime|*|NLTimeconcept+NLTime|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1884. Hun toestand werd onderzocht na 9, 10-11 en 14 jaar door middel van een vragenlijst ingevuld door ouders, leerkrachten en de kinderen zelf.
-1883;30;NLPrepTime|*NLNumber|NLAndOr:"tot"|*NLNumber:NLQuantity|"jaar";*|+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
+1883;30;NLPrepTime|*NLNumber|NLAndOr:"tot"|*NLNumber:NLQuantity|"jaar";*|+NLTime+NLAddExpansion|*|NLTimeconcept+NLTime|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1883. Hun toestand werd onderzocht na 9 en 14 jaar door middel van een vragenlijst ingevuld door ouders, leerkrachten en de kinderen zelf.
-1843;30;NLPrepTime:NLOrdnum:"al":"reeds"|.NLArt|NLNumber:NLQuantity:NLOrdnum|"jaar"|^"oud":"ouder";*|*|NLTimeconcept+NLTime|Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
-/*		1843. De vader en de moeder van het meisje steunen haar plan voor twee jaar durende reis. Dit instituut had gedurende twintig jaar in zestig gevallen professoren omgekocht. Binnen de twee jaar zal het systeem uitgebreid worden naar alle commissariaten van de politiezone. Met de aanpassing van de voorwaarden voor middeldure huurwoningen geldt dat voor deze woningen in de eerste 20 jaar na erfpachtuitgifte een jaarlijkse huurverhoging toegestaan is van maximaal CPI+1%-punt. Het letsel zou reeds meer dan 1 jaar aanwezig zijn. NOT. Bovendien is de patiënte reeds 87 jaar oud en gaat ze zelf niet akkoord om de ingreep te laten uitvoeren.
-1887;30;NLNumber:NLQuantity:NLOrdnum|"jaar"|NLPrepTime;NLTimeconcept+NLTime|Join|*;
-/*		1887. Veertig jaar na datum is en blijft Woodstock een krachtig symbool van de sixties.
+1843;30;NLPrepTime:NLOrdnum:"al":"reeds"+^"tot"|.NLArt|NLNumber:NLQuantity:NLOrdnum|"jaar"|^"oud":"ouder";*|*|NLTimeconcept+NLTime|+Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
+/*		1843. De vader en de moeder van het meisje steunen haar plan voor twee jaar durende reis. Dit instituut had gedurende twintig jaar in zestig gevallen professoren omgekocht. Binnen de twee jaar zal het systeem uitgebreid worden naar alle commissariaten van de politiezone. Met de aanpassing van de voorwaarden voor middeldure huurwoningen geldt dat voor deze woningen in de eerste 20 jaar na erfpachtuitgifte een jaarlijkse huurverhoging toegestaan is van maximaal CPI+1%-punt. Het letsel zou reeds meer dan 1 jaar aanwezig zijn. NOT. Bovendien is de patiënte reeds 87 jaar oud en gaat ze zelf niet akkoord om de ingreep te laten uitvoeren. NOT. Het zijn slechts enkele observaties die de kindacteurs (8 tot 14 jaar) de volwassenen naar het hoofd slingeren.
+1887;30;NLNumber:NLQuantity:NLOrdnum|"jaar"|NLPrepTime:"nadat":"voordat";NLTimeconcept+CStarter+NLTime|+Join|*;
+/*		1887. Veertig jaar na datum is en blijft Woodstock een krachtig symbool van de sixties. 
 1876;30;NLNumber:NLGeen|"jaar";*|-NLTimeconcept-NLTime;remove time from 'jaar'
 /*		1876. Je mag niet vergeten dat hij maar zestien jaar is en dat de verwachtingen groot zijn.
 
@@ -203,27 +250,33 @@
 /*		1695. Nochtans is Sint-Nicolaas geboren in Patara te Lycië dat tegenwoordig in Turkije ligt, maar in het jaar 280 bij het toenmalige Byzantijnse Rijk hoorde. NOT. De joint venture heeft gedurende het jaar twee belangrijke investeringen gedaan.
 
 /*	Add Time attribute to range of numbers
+1927;30;NLNumber|NLTimeconcept|"op"|NLNumber|^typeConcept;NLAdvTime|+Join|+NLAddExpansion|+NLTime|*;
+/*		1927. U kunt 5 dagen op 7 terecht bij een speciaal callcenter (voor interventies 6 dagen op 7). Alcoholische dranken zijn er daardoor voortaan 24 uur op 24 op straat verboden.
+1928;30;NLHour|"op"|NLNumber|^typeConcept;*|+NLAddExpansion|+NLTime|*;
+/*		1928. De camera's bestrijken de volledige oppervlakte en zullen 24u op 24 filmen. 
 1860;30;NLYearnum|NLHyphen|NLYearnum;+NLTime|*|+NLTime;
 /*		1860. In de 17e eeuw (1630 - circa 1637) ontstond er in de Republiek der Zeven Verenigde Nederlanden rond de tulpenbol een bizarre tulpenmanie.
 1813;30;NLNumber|NLHyphen|NLNumber|NLTimeconcept:NLTimes:NLMonth;NLAdvTime|+Join|+Join|+Join;
 /*		1813. Het geneesmiddel heeft pas effect na 6 - 12 maanden.
-1774;30;NLNumber|NLAndOr:NLPrep|*NLNumber|NLTimeconcept:NLTimes:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*;
-/*		1774. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. Dat is drie tot vier keer zo vaak als gemiddeld. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je in Haïti drie tot vier keer op een halfuur mee. NOT. Onderzoekers analyseerden het gedrag van 562 volwassenen tussen 19 en 90 jaar.
 1787;30;NLOrdnum|NLComma|NLOrdnum|NLAndOr|NLOrdnum|NLTimeconcept:NLTimes;+NLTime+CStarter+NLAddExpansion|*|+NLTime+CStarter|*|*|*;
 /*		1787. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
-1777;30;NLOrdnum|"tot":"tot en met":NLAndOr|."de"|NLOrdnum|NLTimeconcept:NLTimes;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
-/*		1777. In de 16de en 17de eeuw is het beeld eigenlijk uitgevonden in Antwerpen. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam.
+1777;30;NLOrdnum:NLNumber:NLQuantity|"tot":"tot en met":NLAndOr|."de"|NLOrdnum:NLNumber:NLQuantity|NLTimeconcept:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
+/*		1777. In de 16de en 17de eeuw is het beeld eigenlijk uitgevonden in Antwerpen. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Omwille van de recente chemotherapie dient de interventie een 2 tot 3-tal weken uitgesteld te worden. De Dodentocht die dit jaar op 14 en 15 augustus plaats vindt, hoopt om voor het eerst de grens van 10.000 deelnemers te overschrijden.
+1998;30;NLNumber|"tot"|NLNumber|NLTimes|^NLComp;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
+/*		1998. Dat is drie tot vier keer zo vaak als gemiddeld. NOT. Het is niet uitzonderlijk dat, afhankelijk van de formule en het profiel, België tussen drie en vier keer duurder is.
+1987;30;NLNumber|"op":"in plaats van"|."de"|NLNumber|NLTimeconcept:NLTimes:NLMonth;+NLTime+CStarter+NLAddExpansion|*|*|*|*;
+/*		1987. Uit de kerk werd in de nacht van 25 op 26 juni een dertigtal religieuze voorwerpen van een uitzonderlijke tentoonstelling gestolen. Dat moest het mogelijk maken dat militairen hun volledige werkweek presteerden in vier in plaats van vijf dagen. 
 
 /*	special cases
-1903;30;NLGeen|.NLNumberConcept|NLTimeconcept|NLEndTime;+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;
+1903;30;NLGeen|.NLNumberConcept|NLTimeconcept|NLEndTime;+NLTime|+JoinReverse|+JoinReverse|NLTimeconcept+NLTime;
 /*		1903. De tocht had geen dag later georganiseerd moeten worden, want toen woedde er een zware sneeuwstorm. 
-1788;30;NLGeen|.NLNumberConcept|NLTimeconcept;+NLTime|JoinReverse|NLTimeconcept+NLTime;
+1788;30;NLGeen|.NLNumberConcept|NLTimeconcept;+NLTime|+JoinReverse|NLTimeconcept+NLTime;
 /*		1788. Als monarchie onder de Oranjes echter bestaat Nederland nog geen twee eeuwen.
 1665;30;"eerder":"vroeg":"vroeger":"laat":"later":"midden"|"in":"op"|"het":"de"|NLTimeconcept;NLAdvTime|+Join|+Join|+Join;
 /*		1665. Eerder op de dag noteerde het aandeel met verlies. Bij zoogdieren, zoals bijvoorbeeld schapen, worden de jongen vroeg in de lente geboren. Bij een eerste recept komt daar EUR1 bovenop en bij een recept dat midden in de nacht wordt uitgevoerd EUR10.
 1754;30;"per":"elk":"elke":"ieder":"iedere"|NLTimeconcept|NLNumber:"een"|NLTimes;NLAdvTime+NLTimes|+Join|+Join|+Join;
 /*		1754. Wanneer kinderen met ernstig eczeem elke week twee keer een bad nemen met verdund bleekwater, vermindert hun eczeem.
-1668;30;NLNumber|NLTimeconcept:"keer":"maal"|"per"|NLTimeconcept;JoinReverse|JoinReverse|JoinReverse|NLAdvTime+NLTimes;
+1668;30;NLNumber|NLTimeconcept:"keer":"maal"|"per"|NLTimeconcept;+JoinReverse|+JoinReverse|+JoinReverse|NLAdvTime+NLTimes;
 /*		1668. De Europese Commissie heeft beslist dat draagbare muziekspelers maximaal 80 decibel mogen produceren bij iemand die 8 uur per dag of veertig uur per week luistert. Start 90 mg 1 maal per maand ter behandeling van carcinoïd syndroom. Elk biljet keert gemiddeld één tot drie keer per jaar terug naar de loketten van de Nationale Bank.
 1776;30;NLNumber:NLOrdnum:NLQuantity|NLTimes|NLEndTime;NLAdvTime+NLTimes|+Join|+Join;
 /*		1776. Hij won (2-0) voor de tweede keer op rij en staat nu achtste.
@@ -261,21 +314,27 @@
 /*		1762. De kaarten werden tussen eind 2006 en midden 2008 gekopieerd. Over het gehele jaar 2007 bedroegen de belastingen EUR 42 miljoen.
 1770;30;NLTimeconcept:NLFraction:NLBeginTime|"van"|NLYearnum;*|*|NLTimeconcept+NLYearnum+NLTime;make year number time concept so it can be joined with other time indications in the following rules
 /*		1770. De recurrente bedrijfswinst (rebit) was na de eerste drie maanden van 2008 50 procent hoger dan in dezelfde periode vorig jaar. Bovendien was het financieel resultaat 6,8 miljoen euro negatief, tegenover 1,7 miljoen euro negatief in de eerste helft van 2008. Zijn herstructureringsprogramma's zullen tegen het einde van 2010 resulteren in 75 miljoen euro aan 'duurzame jaarlijkse besparingen'.
+1919;30;"over":"tot"|NLYearnum|NLCon;-NLPrepTime|-NLYearnum-NLTime|*;correction to r1766 and r1767
+/*		1919. Het RIVM schat dat 600 tot 1600 mensen rond Schiphol een verhoogde bloeddruk door vliegtuiggeluid hebben. In een samenwerkingsproject van de Nederlandse kinderartsen werden perinatale gegevens bijeengebracht over 1338 kinderen.
+1930;30;"van"|NLNumber|"tot":"tot en met":"t.e.m."|NLNumber|"v.chr.":"n.chr.":"na christus":"voor christus";*|+NLTime|*|NLAdvTime|+Join;
+/*		1930. Dat gebeurde tijdens de Tang-dynastie (van 618 tot 907 na Christus).
+1929;30;NLNumber|"v.chr.":"n.chr.":"na christus":"voor christus":"geleden";NLAdvTime|+Join;
+/*		1929. In de Commentarii rerum in Gallia gestarum beschrijft de generaal Julius Caesar zijn gevechten in 57 v.Chr. tegen de Belgae. 'Het is van 1991 geleden dat België nog de top-15 haalde.
 1766;30;NLPrepTime|NLYearnum;*|NLTimeconcept+NLYearnum+NLTime;make year number time concept so it can be joined with other time indications in the following rules
 /*		1766. Rond 1050 brak een periode van economische groei aan.
 
 /*	detect (and join) dates and hour
-1773;30;"van"|NLPossibledate|"op":"tot"|NLPossibledate;*|NLAdvTime+NLDate|*|NLAdvTime+NLDate;
+1773;30;"van"|NLPossibledate|"op":"tot":"tot en met":"t.e.m."|NLPossibledate;*|NLAdvTime+NLDate|*|NLAdvTime+NLDate;
 /*		1773. Nacht van 19/6 op 20/6: zelf extubatie met opgeblazen ballon.
-1757;30;"op"|NLPossibledate;*|NLAdvTime+NLDate;
+1757;30;NLOp|NLPossibledate;*|NLAdvTime+NLDate;
 /*		1757. Op 13/2 opname via spoedgevallen nav acute hartdecompensatie.
 1487;30;NLDate|NLDigitaltime;NLAdvTime+NLDate+NLDigitaltime|+Join;
 /*		1487. AMSTERDAM 11/08/2018 18:00.
 1488;30;NLDigitaltime:NLPossiblehour:NLHour|."uur"|NLAttradj:NLAttradjCon:NLPoss|"tijd";NLAdvTime+NLHour|+Join|+Join|+Join;
 /*		1488. Om 17u00 Belgische tijd wordt er meer uitleg gegeven. Het Amerikaanse geologische instituut USGS heeft vastgesteld dat de aardbeving plaats had om 16.53 uur (22.53 Nederlandse tijd). De shuttle koppelde zich om 02.54 uur onze tijd vast, zowat 350 km boven de Atlantische Oceaan. Om 17u Belgische tijd wordt er meer uitleg gegeven.
-1783;30;"om":"omstreeks":"rond":"vanaf":"voor":"vóór":"na"|NLPossiblehour|"u":"uur";*|NLAdvTime+NLHour|+Join;
+1783;30;"om":"omstreeks":"rond":"vanaf":NLVoor:NLNa|NLPossiblehour|"u":"uur";*|NLAdvTime+NLHour|+Join;
 /*		1783. Het aandeel noteert rond 11.30 uur 0,6% hoger op EUR 17,90. De euro kost maandagmorgen om circa 8.15 uur $1,5389, tegen $1,5403 vrijdag om circa 18.00 uur.
-1782;30;"om":"omstreeks":"rond":"vanaf":"voor":"vóór":"na"|NLPossiblehour;*|NLAdvTime+NLHour;
+1782;30;"om":"omstreeks":"rond":"vanaf":NLVoor:NLNa|NLPossiblehour;*|NLAdvTime+NLHour;
 /*		1782. Om 16.00 komen de hangende huizenverkopen over januari van dit jaar naar buiten.
 1784;30;"van"|NLPossiblehour|"tot"|NLPossiblehour|"u":"uur";*|NLAdvTime+NLHour|*|NLAdvTime+NLHour|+Join;
 /*		1784. Sinds 1 september rijdt de parkshuttle weer maandag tot en met vrijdag van 6.00 tot 21.00 uur.
@@ -285,7 +344,7 @@
 /*		1689. Het aanbieden van grof huishoudelijk afval op de weg is toegestaan tussen 21:00 uur op de dag voorafgaande aan de dag van inzameling en 07:30 uur op de dag van inzameling.
 1711;30;"om":"omstreeks":"rond"|"half"|NLNumberConcept;*|NLAdvTime+NLHour|+Join;
 /*		1711. Rond half elf was de brand onder controle.
-1712;30;"om":"omstreeks":"rond"|"kwart"|"voor":"over":"na"|NLNumberConcept;*|NLAdvTime+NLHour|+Join|+Join;
+1712;30;"kwart"|"voor":"over":"na"|NLNumberConcept;NLAdvTime+NLHour|+Join|+Join;
 /*		1712. Hij bereikte het hotel in Brussel om kwart over twaalf.
 1823;30;"om":"omstreeks":"rond"|NLNumberConcept|"uur";*|NLAdvTime+NLHour|+Join;
 /*		1823. De verkoop van nieuwe woningen volgt om 16 uur.
@@ -299,13 +358,13 @@
 /*		1709. De landingsbaan van de luchthaven werd 48 uur lang bezet door een twintigtal plaatselijke bewoners.
 
 /*	join dates written in full
+/*don't keep other labels with '+' when joining to prevent conflicts
 578;30;NLDay|NLNumberConcept|NLMonth|NLYearnum;NLAdvTime+NLDate|Join|Join|Join;
 /*		578. De AEX opent maandag 10 maart 2008 naar verwachting lager.
 577;30;NLNumberConcept|NLMonth|NLEndTime:NLNumberConcept+^NLBeginconcept;NLAdvTime+NLDate|Join|Join;
 /*		577. Opgemaakt te Halen op 17 december 2014. NOT. Het fonds verkocht op donderdag 20 augustus meer dan 1,3 miljoen aandelen. De organisatie meldde maandag verder dat het uiterlijk 1 november aanstaande een besluit neemt over de vraag.
 579;30;NLDay|NLNumberConcept|NLMonth;NLAdvTime+NLDate|Join|Join;
 /*		579. Volgende week maandag 31 augustus loopt het woonrecht af in Doel.
-
 584;30;NLNumberConcept|NLMonth;NLAdvTime+NLMonth+NLDate|Join;
 /*		584. De senatrice stelt zich bij de voorzittersverkiezingen van 27 maart kandidaat. Tussen 16 november vorig jaar en 29 februari 2010 controleerde de Overheidsdienst 174 zonnecentra.
 585;30;NLMonth|NLYearnum;NLAdvTime+NLMonth|Join;
@@ -314,6 +373,8 @@
 /*		1486. De volgende voorstelling vindt plaats op vrijdag 25-01-2019 in Turnhout.
 
 /*	detect time indications with time concepts (e.g. 'day', 'week', 'year')
+1939;30;NLPrepTime:"met"|.NLArt|NLHoliday;*|*|NLAdvTime;
+/*		1939. Tegenover die ene beursintroductie in Brussel van een half miljoen euro staan sinds Nieuwjaar 298 miljoen euro aan kapitaalverhogingen.
 1779;30;"dezelfde"|NLTimeconcept|."van"|NLAdvTime:NLYearnum;NLAdvTime|+Join|+Join|+Join;
 /*		1779. Het bedrijf slaagde erin de nettowinst met 20 procent op te krikken tegenover dezelfde periode een jaar geleden. In dezelfde periode een jaar geleden bedroeg de groei nog 3,1%.
 1789;30;NLBeginTime:NLOrdnum|NLMonth:"maand"+^NLAdvTime;NLAdvTime+NLMonth|+Join;
@@ -326,13 +387,13 @@
 /*		1781. Zijn verblijf duurde zowat een maand minder dan gepland.
 1753;30;NLDempron:NLBeginTime:NLOrdnum+^"elk":"elke":"ieder":"iedere"|NLTimeconcept|NLDempron:NLBeginTime+^"elk":"elke":"ieder":"iedere"|NLTimeconcept;NLAdvTime|+Join|+Join|+Join;
 /*		1753. In hetzelfde kwartaal vorig jaar bedroeg deze nog 3,1%. Wie niet meteen slaagde voor zijn theoretisch rijexamen, kon deze week dezelfde dag proberen tot het lukte. NOT. Het bedrijf heeft de afgelopen jaren ieder jaar een aantal overnames gedaan. In het laatste kwartaal van 2007 boekte hij een nettowinst van EUR 175 miljoen, vergeleken met een verlies van EUR 1 miljoen in het vierde kwartaal vorig jaar.
-1846;30;"op"|NLBeginTime:NLOrdnum:NLDempron|"dag";*|NLAdvTime+NLDay|+Join;add Day to be used in Expansion rules in phase 55
+1846;30;NLOp|NLBeginTime:NLOrdnum:NLDempron|"dag";*|NLAdvTime+NLDay|+Join;add Day to be used in Expansion rules in phase 55
 /*		1846. Net op die dag plaatste het bedrijf zijn aandelen in de markt.
-1744;30;NLDempron|NLMonth:NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
+1744;30;NLDempron+^NLDat|NLMonth:NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
 /*		1744. De Nederlandse brandwondencentra hebben dit jaar weer veel mensen opgenomen met brandwonden die veroorzaakt zijn door een ongeval met een barbecue.
 1748;30;"een":NLNumber:NLQuantity|NLTimeconcept|"langer";NLAdvTime|+Join|+Join;
 /*		1748. Wie van Gent naar Brussel rijdt doet daar anderhalf uur langer over.
-1661;30;"een":NLNumber:NLQuantity:NLIndefpron:NLOrdnum|NLTimeconcept|NLEndTime;JoinReverse|JoinReverse|NLAdvTime;
+1661;30;"een":NLNumber:NLQuantity:NLIndefpron:NLOrdnum|NLTimeconcept|NLEndTime;+JoinReverse|+JoinReverse|NLAdvTime;
 /*		1661. Dit betekent dat ook de macro-economische items een uur eerder worden gepubliceerd dan gebruikelijk. Multipele fracturen na val met motor enkele jaren geleden. De Europese beurzen klommen maandag voor de vierde dag op rij. Men mag er ten slotte zeker ook van uitgaan dat een aantal mensen die erbij waren een paar decennia later hoge posities bekleedden bij 's werelds banken en beurzen.
 1657;30;NLDay:NLMonth:NLTimeconcept+^NLYearnum|NLEndTime;NLAdvTime|+Join;
 /*		1657. De chemiegroep publiceert donderdag nabeurs zijn halfjaarcijfers. NOT. Op 21 augustus zal hij de resultaten over het eerste halfjaar van 2008 voorbeurs presenteren.
@@ -340,19 +401,29 @@
 /*		1699. De divisie vormt een positieve uizondering en zal het beter doen dan een jaar terug. NOT. Wellicht vecht hij zijn uitlevering aan ons land uit en komt hij pas over een jaar terug om zijn straf hier verder uit te zitten.
 1675;30;^NLPrep|NLNumber:NLQuantity|NLTimeconcept|NLEndTime:"terug";*|NLAdvTime|+Join|+Join;
 /*		1675. Daarin zit de opbrengst uit de plaatsing van een converteerbare obligatie enkele maanden terug niet begrepen.
-1677;30;ENAdvbeforetime:NLIndefpron+^NLBeginTime|.NLNumberConcept:NLQuantity|NLTimeconcept;NLTimeconcept+CStarter+NLTime|+Join|+Join;
-/*		1677. Patient werd respiratoir insufficient enkele dagen na opname. Krabben is een eerste, reflexmatige reactie op jeuk en geeft gewoonlijk voor enkele minuten verlichting. NOT. Lang niet alle winters wordt de tocht gehouden, dit is afhankelijk van de toestand van het ijs.
 1743;30;NLAttradj:NLAdj:NLAdjCon+^NLBeginTime|NLNumberConcept:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|NLTimeconcept;*|NLTimeconcept+NLTime|+Join|+Join;time indication as concept
 /*		1743. Een dik half uur werd er onder de televisiemast gebeden, gezongen, gepreveld en beleden. De nettowinst over het fiscale vierde kwartaal steeg gering. De  televisiegroep verwacht na een goed eerste halfjaar een uitstekende tweede jaarhelft.
 1768;30;NLOrdnum|"kwartaal"|."van"|NLYearnum;NLAdvTime+NLYearnum|+Join|+Join|+Join;
 /*		1768. De teruggang in de verkoop van woningen heeft zich ook in het eerste kwartaal van 2008 doorgezet.
 1755;30;NLOrdnum|"kwartaal";NLAdvTime|+Join;
 /*		1755. De economie van de eurozone groeide in het eerste kwartaal 0,8 procent tegenover het vierde kwartaal van 2007. Daarvan zouden er in het eerste kwartaal 8 worden uitgevoerd. Daarvan zouden er in het eerste kwartaal 8 worden uitgevoerd.
+1948;30;NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|NLTimeconcept|"voor";NLTimeconcept+CStarter+NLTime+NLAddExpansion|+Join|+Join|*;time indication as beginconcept, mark this pattern with 'voor' to add expansion
+/*		1948. Alle voordrachten worden openbaar gemaakt ten minste vijftien dagen voor de benoeming.
+1978;30;NLVerb|.NLArt:NLAttradj:NLCon|NLPrepTime|NLNumber:NLQuantity:NLOrdnum|NLTimeconcept|typeConcept+^"tijd";*|*|*|NLAdvTime|+Join|*;time indication as beginendconcept after preposition
+/*		1978. Wordt in de commissie geen overeenstemming bereikt, dan moet de Kamer binnen zestig dagen uitspraak doen. NOT. Hij was een nauwe vriend van de president, die de aanvraag toch afhandelde en toekende in minder dan tien maanden tijd.
+1980;30;NLOndvw:"dat"|*NLArt:NLAttradj:NLCon:NLPrep|NLNumber:NLQuantity:NLOrdnum|NLTimeconcept|*typeConcept|NLVerb;*|*|NLAdvTime|+Join|*|*|;
+/*		1980. Dat België net in het Europees jaar tegen armoede zes maanden EU-voorzitter zal zijn, opent volgens hen perspectieven.
 1672;30;NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|NLTimeconcept;NLTimeconcept+CStarter+NLTime|+Join|+Join;time indication as beginconcept
 /*		1672. De vrouw had al een paar dagen last van zogenoemde oefenweeën. De proefpersonen leden aan matige hoge bloeddruk en moesten dagelijks een half uur naar (trage) muziek luisteren. Na één maand was de systolische bloeddruk met gemiddeld 3 punten gezakt. De batterij gaat ongeveer 5 hele dagen mee. Vanaf het vierde kwartaal stellen we prijsdalingen vast gedurende meerdere opeenvolgende kwartalen. NOT. Een stijging van 21% vergeleken met EUR 133,7 miljoen vorig jaar.
-1897;30;NLNiet|.NLAdvDegree|NLBeginTime|NLTimeconcept+^NLAdvTime;NLCon+NLTime|JoinReverse|JoinReverse|NLTimeconcept+NLTime;'niet' should get label Con for further processing of Negation
+1931;30;NLNumber:NLQuantity:NLOrdnum|NLAttradj:NLAdj:NLPartVerb:NLPartAdj+^"vorig"|NLTimeconcept;+NLTime|NLAttradj|+NLTime;add Time attribute for Timeconcepts without Time attribute
+/*		1931. Na drie intensieve weken mocht hij mee naar huis. Indien het een huis betreft, voor twee vervallen jaren.
+1897;30;NLNiet|.NLAdvDegree|NLBeginTime|NLTimeconcept+^NLAdvTime;NLCon+NLTime|+JoinReverse|+JoinReverse|NLTimeconcept+NLTime;'niet' should get label Con for further processing of Negation
 /*		1897. Ik hoop ook dat op niet al te lange termijn een fundamentele en leesbare tekst zal worden opgesteld. 
-1747;30;NLBeginTime:NLOrdnum|NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
+1922;30;NLBeginTime|NLTimeconcept|NLAndOr|NLTimeconcept;*|*|+NLAddExpansion|*;
+/*		1922. Dat gebeurt waarschijnlijk de komende weken of maanden, maar het kan tot een jaar duren.
+1982;30;NLBeginTime|NLAttradj|NLTimeconcept+^NLAdvTime;+NLTime|*|+NLTime;
+/*		1982. Via een headhuntbureau zoekt de overheid een witte raaf die de openbare omroep door de komende moeilijke jaren kan loodsen.
+1747;30;NLBeginTime|NLTimeconcept+^NLAdvTime;NLAdvTime|+Join;
 /*		1747. De wind is, vergeleken met de toestand afgelopen weekend, sterk in kracht afgenomen maar de situatie is allerminst geruststellend.
 
 /*	further join combinations of time indications
@@ -372,8 +443,8 @@
 /*		1760. Het was niet het ideale begin van het jaar.
 1758;30;"begin":"einde":"eind":"midden"|"van"|."de":"het"|NLTimeconcept:NLAdvTime:NLMonth;NLAdvTime|+Join|+Join|+Join;
 /*		1758. Daardoor kan ook deze club geen wedstrijden organiseren op het einde van de zomer. Maar op het eind van de negentiende eeuw scheurde het museum zich af. In het midden van de jaren tachtig werd een nieuwe wijk ontworpen door de architect.
-1847;30;NLAdvTime|"van"|."de":"het"|NLTimeconcept:NLAdvTime+^NLDate;^NLAdvTime|+Join|+Join|+Join;
-/*		1847. Het ongeval gebeurde op 10 mei van vorig jaar op de Brusselse ring.
+1847;30;NLAdvTime:"rest"|"van"|."de":"het"|NLTimeconcept:NLAdvTime+^NLDate;^NLAdvTime|+Join|+Join|+Join;
+/*		1847. Het ongeval gebeurde op 10 mei van vorig jaar op de Brusselse ring. Voor de rest van het lopende boekjaar gaf het bedrijf een sterke verwachting af.
 1761;30;NLMonth|"van"|NLAdvTime;NLAdvTime|+Join|+Join;
 /*		1761. Om 16.00 komen de hangende huizenverkopen over januari van dit jaar naar buiten.
 1778;30;NLAttradj|"periode"|."van"|NLAdvTime:NLYearnum;*|NLTimeconcept+NLTime|+Join|+Join;
@@ -386,13 +457,13 @@
 /*		1769. Met de subsidie kunnen tussen 2009 en 2013 vijftig studenten promotieonderzoek doen.
 1771;30;"van":"tot":"over"|NLYearnum|^NLCon;*|NLAdvTime+NLYearnum|*;
 /*		1771. In economisch opzicht was er zelfs sprake van een algemene malaise die tot ca. 1475 duurde. Een ingrijpende ramp was de stormvloed van 1134, waarbij Zeeland in een archipel veranderde. NOT. Het RIVM schat dat 600 tot 1600 mensen rond Schiphol een verhoogde bloeddruk door vliegtuiggeluid hebben.
-1767;30;NLPrepTime+^"over"|NLYearnum;*|NLAdvTime+NLYearnum;make year number beginendconcept after certain prepositions (after rules to join year number with other time indications)
-/*		1767. Het bedrijf verwierf in 2007 nieuwe opdrachten voor een bedrag van EUR2,9 miljard. NOT. In een samenwerkingsproject van de Nederlandse kinderartsen werden perinatale gegevens bijeengebracht over 1338 kinderen.
+1767;30;NLPrepTime|NLYearnum;*|NLAdvTime+NLYearnum;make year number beginendconcept after certain prepositions (after rules to join year number with other time indications)
+/*		1767. Het bedrijf verwierf in 2007 nieuwe opdrachten voor een bedrag van EUR2,9 miljard.
 1706;30;NLArt|NLDay|NLAttradj|NLCon;*|NLAttradj|NLAttradj|*;noun phrase
-/*		1706. Het zaterdagmorgen gelanceerde ruimteveer Discovery heeft zich maandagochtend gekoppeld aan het Internationaal Ruimtestation ISS voor een logistieke opdracht en een beperkte bemanningsruil.
+/*		1706. Het bedrijf zal de eerder dinsdag aangekondigde kapitaaluitbreiding opschorten, als gevolg van de negatieve koersreactie op het nieuws. 
 
 /*	time preposition
-1871;30;"nog"|"voor"|.NLArt|NLAdvTime;NLPrep+NLPrepTime|Join|*|*;
+1871;30;"nog"|"voor"|.NLArt|NLAdvTime;NLPrep+NLPrepTime|+Join|*|*;
 /*		1871. Daarom wil de directie haar herstructureringsplan voor de goederenactiviteiten nog voor eind dit jaar in gang zetten.
 
 /*	defaults
@@ -407,7 +478,7 @@
 
 
 /* PHASE 40: DISAMBIGUATION RULES
-/*===============================
+/* ==============================
 /* Preparation
 359;40;":";+NLPunctuation;Punctuation is not assigned automatically since ":" is used in rules
 /*		359. We maken drie taarten: chocoladetaart, kaastaart en citroentaart.
@@ -419,7 +490,7 @@
 /*		1088. Wie geen basiskennis heeft weet ook niet waar hij verdere kennis moet zoeken.
 1089;40;"niet"+^NLRel|"waar";*|NLAttradj;
 /*		1089. En dat is natuurlijk niet waar, daarvoor bestaat geen enkel bewijs.
-1095;40;NLLinkingverb|"waar"|"dat";*|NLCAdv|NLOndvw;
+1095;40;NLLinkingverb|"waar"|NLDat;*|NLCAdv|NLOndvw;
 /*		1095. Het is waar dat niet precies wordt aangegeven welk percentage de binnenkomende schepen in rekening moet worden gebracht.
 1277;40;"waar"|.NLLinkingverb|NLPunctuation:SEnd;NLCAdv|*|*;
 /*		1277. Als dat waar is, ziet de toekomst er goed uit.
@@ -479,7 +550,7 @@
 /*		165. De twee kandidaten, een vrouw uit Zele en een man uit De Pinte, mochten een korte speech houden.
 190;40;NLDe+NLCapitalInitial|^NLCapitalInitial+^SEnd;-NLCapitalInitial|*;probably a missing sentence end
 /*		190. Titel zonder punt De eerste zin.
-188;40;NLCapitalInitial|NLCapitalInitial;NLCon|NLCon+NLCapitalInitial;make capitalized words Concept
+188;40;NLCapitalInitial|NLCapitalInitial;NLCon-NLPrepTime|NLCon+NLCapitalInitial-NLPrepTime;make capitalized words Concept
 /*		188. We werden voorgesteld aan Ben Pelckmans.
 198;40;NLConIfAllCap+NLCapitalAll;NLCon;
 /*		198. Is er al iemand van het OM aanwezig?
@@ -490,7 +561,7 @@
 
 /* Disambiguate PrespartAdj
 /*Dummy is used to mark participle after linking verb
-1506;40;NLComma|"die":"dat":NLAdvManner|NLPrespartAdj|^NLLinkingverb;*|*|+NLPartrel|*;
+1506;40;NLComma|"die":NLDat:NLAdvManner|NLPrespartAdj|^NLLinkingverb;*|*|+NLPartrel|*;
 /*		1506. Toch was er ook zondag opnieuw een vrouw, die zwijgend bloemen legde bij zijn graf. De nieuwe Kamers, samen beraadslagend, voorzien voorgoed in het bezetten van de troon.
 1501;40;SBegin|NLPrespartAdj|^NLAdj:NLCon:NLRelCon:"om";*|+NLPartrel|*;
 /*		1501. Happend naar adem. NOT. Persisterend subcoma na VD plaatsing ondanks progressief toenemende CSV drainage. NOT. Schitterend om op een zomeravond het lichtspel van de zon op de eeuwenoude gevels te zien.
@@ -510,14 +581,14 @@
 /* Disambiguate ambiguous past participle OR conjugated verb (OR infinitive)
 1132;40;"te"|NLPartVerbInf;*|NLVerb+NLInf;
 /*		1132. zonder de bevoegdheidssfeer van de Raad te betreden.
-1588;40;"het"|.NLAdvDirection:NLAdvManner:NLAdj:NLAdjCon|NLPartVerbInf|NLPrep;*|NLRAdv|NLVerb+NLInf|*;
-/*		1588. Wel zijn ruim tweehonderd mensen opgepakt voor onder meer drugsbezit, diefstal en het illegaal betreden van het festivalterrein.
-1298;40;NLDie:NLRelConModOth|NLZe:NLJe:NLSubjpron+NLPlural|NLPartVerbInf|^NLRelAux;*|*|NLVerb|*;
-/*		1298. Alle teksten die ze herzien, worden in de lijst vermeld.
+1588;40;"het"|.NLAdvDirection:NLAdvManner|NLPartVerbInf|NLPrep;*|NLRAdv|NLVerb+NLInf|*;
+/*		1588. Het genezen van de huident t.h.v. de donorside verloopt naar wens.
 1297;40;NLmAux|.^NLInf+^NLInfCon+^NLPartVerbInf+^NLRelAux+^NLAux+^NLOndvw|NLPartVerbInf;*|*|NLInf;
 /*		1297. We zullen na het jaar 2020 minder steun kunnen ontvangen.
 1035;40;NLSubjpron|NLPartVerb;*|NLVerb;
 /*		1035. Zij omschreven de sfeer als volgt.
+1968;40;"dat":"dit":"het":NLAndOrBut|NLPartVerb+^NLRelCon|NLArt:NLPoss:NLDempron;*|NLVerb|*;
+/*		1968. Dat vereist het geduld van Job. Hij werkt nog steeds op basis van foto's, maar bewerkt die nu ook op een coherente stilerende manier.
 1055;40;NLArt:NLAttradj:NLGeen:NLDempron|NLRelCon+NLPartVerb|^NLCon;*|NLCon|*;
 /*		1055. De 40 naakte ontslagen zijn wel veel minder dan de aangekondigde 109 jobs die moesten verdwijnen. dat er van de Griekse autoriteiten tot op heden nog geen enkel bericht is ontvangen. NOT. Dat bericht Le Soir.
 1054;40;NLPartVerb|NLLinkingverb;NLPartrel|*;
@@ -526,10 +597,14 @@
 /*		1129. Daarna begonnen mensen over straat te rennen en schreeuwden ze het uit.
 1130;40;NLPartVerb|NLObjpron:"haar";NLVerb|*;
 /*		1130. die verweten haar voortdurend dat zij veel te onbuigzaam was.
-1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep;*|*|NLAttradj|*;
-/*		1289. Na de desastreus verlopen veldtocht verlieten de troepen het land. Gezien de nogal beladen voorgeschiedenis.
+1289;40;NLArt:NLPrep|.NLAdj:NLAdvTemp:NLAdvStruct:NLAdvManner:NLAdvDegree:NLAdvModality:NLAdvDirection|NLPartVerb+^NLRelCon|^NLPrep:NLAux:SEnd:NLPunctuation;*|*|NLAttradj|*;
+/*		1289. Na de desastreus verlopen veldtocht verlieten de troepen het land. Gezien de nogal beladen voorgeschiedenis. NOT. Een zwaar onweer (donder en bliksem, stortbuien en felle wind) zouden de ramp mee veroorzaakt hebben. NOT. Tenzij een  wet, bepaald in artikel 4, laatste lid, er anders over beschikt, vinden de verkiezingen plaats op dezelfde dag.
 1290;40;SBegin|*NLAttradj:NLAdj:NLCon|NLPartVerb+^NLRelCon;*|*|NLVerb;
 /*		1290. Regenten begonnen het politieke klimaat te beheersen.
+1991;40;NLArt:NLDempron:"andere":NLAttradj|.NLRAdv:NLAttradj:NLAdj|NLPrep|.NLArt:NLDempron|NLCon|NLPartVerb|NLCon;*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
+/*		1991. Daarbij kan worden afgeweken van de grondwetsbepalingen inzake de bevoegdheden van de besturen, voor zover dit de uitoefening buiten gebouwen en besloten plaatsen van het in dit artikel omschreven recht betreft.
+1990;40;NLCon|NLPartVerb|NLAdj:NLAttradj:NLCon;*|NLVerb|*;
+/*		1990. Zijn gedrag veroorzaakt groeiend wantrouwen bij zijn collega's.
 1034;40;NLPartVerb+^NLRelCon;NLPartAdj;
 /*		1034. ik vind dat maatregelen die verder gaan dan deze omschreven taken niet doelgericht zijn. een expositie gemaakt van miljoenen tulpen die vooral door toeristen goed wordt bezocht.
 
@@ -537,15 +612,25 @@
 1052;40;^NLGeen:NLArt:NLAttradj:NLAttradjCon:NLPoss|"gebruik":"plaats":"baat"|NLmAux|NLInf;*|NLVerb|*|*;
 /*		1052. op een goede dag plaats moet maken voor bestaande EU-richtlijnen. geen echte concurrentiestrijd op het gebied van de elektronische handel plaats zou vinden. NOT. ondernemingen die van het stelsel geen gebruik kunnen maken. NOT. dat dit bureau op een centrale plaats moet komen.
 
+/* Disambiguate the word MIJN: possessive pronoun or noun
+1962;40;NLArt:NLAttradj|NLMijn;*|NLCon;second label of 'mijn' is Poss
+/*		1962. De mijnbouw is sinds de laatste mijn sloot in 1991, stopgezet.
+
 /* Disambiguate the word JE: possessive OR personal pronoun
 339;40;NLStemCon|NLJe;NLVerb|NLSubjpron;
 /*		339. Wat voor onzin kraam jij nu weer uit?
 129;40;NLJe|NLJe;NLSubjpron|NLPoss;
 /*		129. Heb je je zwempak meegebracht?
-2;40;NLJe|NLArt:NLEr:NLPrep:NLVerb:NLmAux:NLRelConModOth;NLSubjpron|*;
+2;40;NLJe|NLArt:NLEr:NLPrep:NLVerb:NLmAux;NLSubjpron|*;
 /*		2. Heb je het instructieboekje gelezen? Wil je een snoepje? Volgende week kan je de resultaten bekijken. Kan je er de sterren zien?
 1365;40;NLPrep+^NLOndvw+^NLConj|NLJe|NLAttradj:NLCon;*|NLPoss|*;
 /*		1365. met een felbegeerde doctorstitel voor je naam.
+
+/* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
+1196;40;NLBepaalde|NLConj:NLPoss:NLArt:"haar":NLDat;NLVerb|*;
+/*		1196. Hoewel de rechter bepaalde dat hij de rest van zijn leven achter tralies moet doorbrengen. Die bepaalde de  koers.
+1963;40;NLBepaalde;NLAttradj;
+/*		1963. Kan worden verricht door één bepaalde groep.
 
 /* Disambiguate AdjCon
 1499;40;NLAdvDegree|NLAdjCon;*|NLAdj;
@@ -645,14 +730,14 @@
 /*		250. De meeste kosten bij ABCD zijn vast, omzetverlies werkt dus onmiddellijk door tot de bottomline.
 193;40;NLZijn|NLRelAdj:NLRelAttradj:NLPartAdj|NLCon;NLPoss|NLAttradj|*;
 /*		193. Wat onmiddellijk opviel was zijn bedrukte stemming.
-192;40;NLZijn|NLRelConModOth:NLIndefpron:NLEr;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+192;40;NLZijn|NLDat:NLIndefpron:NLEr;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 /*		192. Volgens mij zijn dat zoete aardappelen. Sinds de campagne voor de federale verkiezingen van 2007 zijn alle politieke commentatoren het erover eens. Op enkele uitzonderingen na zijn er dus geen "Belgische" scholen meer.
 48;40;NLPrep|NLZijn|^SEnd;*|NLPoss|*;
 /*		48. De kleuter speelde met zijn nieuwe tractor. NOT. Er moet in ieder geval geen enkele financiële stimulans voor zijn.
 1387;40;NLZijn|NLAdj|^NLCon+^NLAndOrBut;NLRelAux+NLAux+NLLinkingverb+NLVerb|*|*;
 /*		1387. De meeste promoties zijn volledig in orde.
-130;40;NLZijn|SEnd:NLArt:NLDempron:NLPathRelevant:NLHeel:NLNiet:NLGeen;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
-/*		130. De kinderen zullen heel blij zijn. Maar het zijn de sponsordeals en het startgeld die het meeste opleveren. Slechts vier jongeren zijn heel ontevreden. Godsdienst en wetenschap zijn niet zomaar totaal verschillende disciplines. Het interieur van de barokke jezuïetenkerk liep schade op, maar er zijn geen topstukken vernield.
+130;40;NLZijn|NLHyphen:SEnd:NLArt:NLDempron:NLPathRelevant:NLHeel:NLNiet:NLGeen;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		130. De kinderen zullen heel blij zijn. Maar het zijn de sponsordeals en het startgeld die het meeste opleveren. Slechts vier jongeren zijn heel ontevreden. Godsdienst en wetenschap zijn niet zomaar totaal verschillende disciplines. Het interieur van de barokke jezuïetenkerk liep schade op, maar er zijn geen topstukken vernield. De gsm zou een mogelijk bindmiddel kunnen zijn - bijvoorbeeld via die service - maar de organisatoren willen niks overhaasten.
 50;40;NLZijn|NLPrep:NLRelPrepAdj;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|^NLPrep;
 /*		50. Flitspalen zullen voor bepaalde punten in het verkeer altijd complementair zijn met trajectcontrole. De cijfers over 2007 zijn conform de verwachtingen.
 1597;40;NLZijn|NLAdjCon:NLRelConAdj|NLVerb;NLPoss|NLCon|*;
@@ -663,7 +748,7 @@
 /*		56. Om acht uur zijn wij aan de beurt. Zijn ze nog in het land? Een hele eer, want zij zijn onze grote voorbeelden. Je kunt bang zijn je machteloos te voelen. De ondernemingen zijn zich dus bewust van wat zij kopen. "Er zal een tolk aanwezig zijn", zei hij. Dat zou een resultaat zijn waarvoor we op geen enkele manier een natuurlijke verklaring kunnen vinden. Dus denk ik dat we minstens even sterk gewapend zijn als vorig jaar.
 64;40;NLDit|NLZijn;NLDempron|NLRelAux+NLAux+NLLinkingverb+NLVerb;
 /*		64. De directeur probeert echter de schade te beperken: „Dit zijn individuele gevallen.
-668;40;NLZijn|NLAdvTime:NLEndconcept:NLDay:NLWeek:NLMonth;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+668;40;NLZijn|NLAdvTime:NLEndconcept:NLDay:NLMonth;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 /*		668. In Irak zijn vandaag zeker 15 mensen gedood bij twee bomaanslagen. De toonaangevende indexen in Japan zijn dinsdag lager de dag uitgegaan.
 1070;40;NLRAdv|NLZijn|^typeConcept;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
 /*		1070. Restanten hiervan zijn te zien in symbolen. we schrappen bepalingen die niet meer van toepassing zijn en we regelen de bepalingen voor "eenmalig vervoer" van gevaarlijke goederen.
@@ -695,7 +780,7 @@
 /*		608. Nu Fontaine het Vlaams Huis leidt, heeft de vennootschap blijkbaar haar activiteiten uitgebreid.
 609;40;SBegin|NLAdvTempConj|NLArt:NLDit;*|NLOndvw|*;
 /*		609. Nu de wonde mooi genezen is kan eerstdaags gestart worden met de radiotherapie.
-731;40;SBegin:NLComma|NLAdvTempConj|NLVerb+^NLRelAux|NLRelConModOth:NLConj;*|NLOndvw|*|*;
+731;40;SBegin:NLComma|NLAdvTempConj|NLVerb+^NLRelAux|NLDat:"wat":"wie":NLConj;*|NLOndvw|*|*;
 /*		731. Eerder deze week ontstond er al heisa in Frankrijk, toen bekendraakte dat de Bibiothèque National in Parijs voor de digitalisering van haar boekenarsenaal in zee gaat met Google. NOT. Nu blijkt dat hieraan niet voldaan is en dat de instelling in Frankfurt volledig is verlamd.
 610;40;NLPunctuation|NLAdvTempConj|NLArt;*|NLOndvw|*;
 /*		610. Vlaanderen wil de heffing bij voorkeur invoeren in overleg met de buurlanden, maar moet rekening houden met vertraging, nu de Nederlandse regering is gevallen.
@@ -727,7 +812,7 @@
 /*		965. En je moet me beloven dat je later, als ik dood ben, naar mijn graf komt en met mij komt praten zodat ik niet alleen ben.
 970;40;NLNiet|"alleen"|NLVerb|SEnd;*|NLAdj|*|*;
 /*		970. Lokale hulpdiensten kunnen het echter niet alleen redden.
-244;40;NLNiet|"alleen"+^NLAdj;NLRel+NLNegation+NLNietAlleen|+Join;
+244;40;NLNiet|"alleen"+^NLAdj;NLRel+NLNietAlleen|+Join;
 /*		244. De kliniek heeft ons echter verzekerd dat hij nooit alleen naar buiten gaat. Pakjesavond is er al lang niet meer alleen voor kinderen. Daar gaat het niet alleen om mensenrechten en milieu.
 504;40;"alleen"+^NLRAdv|NLAux;NLAdj|*;
 /*		504. Maar we moeten een verklaring onder ede invoeren waarin de aankomende promovendus belooft dat hij zijn onderzoek alleen heeft gedaan.
@@ -745,14 +830,6 @@
 /*		515. Twaalf tieners overleefden de brand niet, 23 anderen raakten gewond. We gingen met een aantal anderen op stap. Zijn monnikenwerk kan makkelijk de grondstof vormen voor een tiental andere boeken.
 525;40;"onder"|"andere"|^NLCon+^SEnd;NLAdvStruct|Join|*;
 /*		525. Het omvat onder andere een luchthavengebouw. NOT. 1 juli 2004 is tevens de termijn voor vaartuigen die onder andere vlaggen varen dan die van de lidstaten van de Unie.
-
-/* Disambiguate the word BEPAALDE: indefinite pronoun, adjective or verb
-1196;40;"bepaalde"|NLConj:NLPoss:NLArt:"haar":"dat";NLVerb|*;
-/*		1196. Hoewel de rechter bepaalde dat hij de rest van zijn leven achter tralies moet doorbrengen. Die bepaalde de  koers.
-1199;40;NLNumberConcept|"bepaalde";*|NLCon;
-/*		1199. Kan worden verricht door één bepaalde groep.
-1200;40;NLArt|.NLAdvTemp|"bepaalde"|^NLAttradj:NLAttradjCon:NLCon:NLRelCon;*|*|NLAttradj|*;
-/*		1200. Met inachtneming, zo nodig, van het bepaalde in artikel 91, derde lid.
 
 /* Disambiguate the words WELKE ... OOK
 1140;40;"welke":"welk"|.NLAdj:NLAttradj:NLAttradjCon:NLSubjpron:NLPathRelevant|NLCon|"ook";NLSubjpron+NLObjpron|*|*|NLSubjpron+NLObjpron;
@@ -779,8 +856,8 @@
 /*		383. Zo moet de werknemer de cheques altijd op zak hebben.
 384;40;NLZo;NLAdvDegree;
 /*		384. Een burenruzie in Sprang Capelle, is zo geëscaleerd dat de politie moest ingrijpen.
-824;40;NLAdvDegree|NLAdvDegree+^NLRelConAdj;JoinReverse|+NLAdvDegree;
-/*		824. Onder de aartshertogen Albrecht en Isabella verdween de invloed van het protestantisme vrijwel volledig en werd het katholicisme vernieuwd door de besluiten van het Concilie van Trente. NOT. De huidige graad van esthetische schade kan vastgesteld worden op 2 op 7 of "zéér licht" volgens de klassieke schaal.
+824;40;NLAdvDegree+^NLAdjCon|NLAdvDegree+^NLRelConAdj;JoinReverse|+NLAdvDegree;
+/*		824. Het wordt nooit volledig hard en blijft zelfs bij temperaturen beneden –20°C nog vervormbaar. NOT. De huidige graad van esthetische schade kan vastgesteld worden op 2 op 7 of "zéér licht" volgens de klassieke schaal. NOT. Mountainbikes wijken in bouw en uiterlijk sterk af van de overige modellen en hebben doorgaans vering, zeer brede noppenbanden en een recht stuur.
 81;40;"zolang"|NLArt:NLEr:NLSubjpron:NLJe:NLZe:NLDempron;NLOndvw-NLTime|*;
 /*		81. De behandeling moet voortgezet worden zolang de jeuk aanhoudt.
 576;40;NLAdvDegree:NLIets:"vrij"|NLAdvTemp;NLAdvTemp|+Join;
@@ -815,55 +892,53 @@
 /*		1046. Wat precies de gevolgen zullen zijn weten we echter nog niet.
 
 /* Disambiguate the word DAT: demonstrative pronoun or subordinate conjunction
-531;40;"dat"|NLRelAux|^NLPartAdj+^SEnd;NLSubjpron+NLObjpron-NLRelpron|*|*;
+531;40;NLDat|NLRelAux|^NLPartAdj+^SEnd;NLSubjpron+NLObjpron-NLRelpron|*|*;
 /*		531. Dat is een nieuw model.
-847;40;SBegin|NLRelAux|"dat"|NLGeen:NLArt:NLPoss:NLNiet;*|*|NLSubjpron+NLObjpron-NLRelpron|*;
+847;40;SBegin|NLRelAux|NLDat|NLGeen:NLArt:NLPoss:NLNiet;*|*|NLSubjpron+NLObjpron-NLRelpron|*;
 /*		847. Is dat geen inbreuk op de privacy? Is dat niet schitterend?
-534;40;SBegin:"maar":"en"|"dat"|NLRelAux;*|NLSubjpron+NLObjpron-NLRelpron|*;
+534;40;SBegin:"maar":"en"|NLDat|NLRelAux;*|NLSubjpron+NLObjpron-NLRelpron|*;
 /*		534. Dat heeft gewerkt, zie ik.
-533;40;^NLCon+^NLRelCon+^NLComma+^SBegin+^NLVerb|"dat"|NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*;
-/*		533. Soms deden we alsof we sliepen, maar dat hielp niet. NOT. Sommige collega's zijn namelijk van mening dat de brief geen voorstel bevat dat overeenkomt met de eisen van het Reglement.
-861;40;^NLCon|NLComma|"dat"|NLVerb|^NLPrep;*|*|NLSubjpron+NLObjpron|*|*;
+533;40;^NLCon+^NLRelCon+^NLComma+^SBegin+^NLVerb+^NLPartAdj|NLDat|NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*;
+/*		533. Soms deden we alsof we sliepen, maar dat hielp niet. NOT. Sommige collega's zijn namelijk van mening dat de brief geen voorstel bevat dat overeenkomt met de eisen van het Reglement. NOT. Volgens de krant zou de koninklijke opdrachthouder een plan hebben uitgewerkt dat bestaat uit drie punten.
+861;40;^NLCon|NLComma|NLDat|NLVerb|^NLPrep;*|*|NLSubjpron+NLObjpron|*|*;
 /*		861. Als wij deze bedrijven niet kunnen verplichten dezelfde diensten te bieden als nu door de overheid worden verzorgd, dat wil zeggen een universele dienst. NOT. over een zeer belangrijk probleem gesproken, dat samenhangt met het feit dat de voorlichting niet gecentraliseerd kan worden.
-532;40;SBegin|"dat"|NLVerb;*|NLSubjpron+NLObjpron|*;
+532;40;SBegin|NLDat|NLVerb;*|NLSubjpron+NLObjpron|*;
 /*		532. Dat meldde de brandweer.
-909;40;SBegin:NLAndOrBut:NLPunctuation:NLSubjpron+^NLComma|"dat"|NLmAux;*|NLSubjpron+NLObjpron|*;
-/*		909. Dat zou intern tot gemor kunnen leiden. Nochtans zouden we dat moeten doen.
-535;40;NLmAux+^"wil"+^"wilt"+^"wilden"+^"willen"|"dat";*|NLSubjpron+NLObjpron+NLDempron-NLRelpron;
+535;40;NLmAux+^"wil"+^"wilt"+^"wilden"+^"willen"|NLDat;*|NLSubjpron+NLObjpron+NLDempron-NLRelpron;
 /*		535. Ze kan dat in de Gemeentewet regelen. "Geuzestekers" kopen lambiek, maken daarvan een eigen mengsel en laten dat rijpen tot een geuze.
-538;40;"dat"|NLmAux|NLSubjpron;NLObjpron|*|*;
+538;40;NLDat|NLmAux|NLSubjpron;NLObjpron|*|*;
 /*		538. Met de camper door de VS, dat zouden we ook graag nog eens doen.
-642;40;NLVeelWeinig|"dat";NLSubjpron+NLObjpron|NLOndvw;
-/*		642. er is veel dat hopeloos lijkt in deze wereld.
-995;40;NLSubjpron|"dat"|NLNiet:NLPartAdj;*|NLObjpron|*;
+642;40;NLVeelWeinig|NLDat;NLSubjpron+NLObjpron|NLOndvw;
+/*		642. Er is veel dat hopeloos lijkt in deze wereld.
+995;40;NLSubjpron|NLDat|NLNiet:NLPartAdj;*|NLObjpron|*;
 /*		995. Er zijn veel dingen die ik graag zou willen garanderen, maar helaas kan ik dat niet. Dan had ik dat aanvaard en goedgekeurd.
-1018;40;^"er":"het":NLVerb|NLNiet|NLPrep|"dat"|NLCon;*|*|*|NLArt|*;
+1018;40;^"er":"het":NLVerb|NLNiet|NLPrep|NLDat|NLCon;*|*|*|NLArt|*;
 /*		1018. We moeten de balletjes zoeken die niet door dat buisje gevallen zijn. NOT. ik twijfel er niet aan dat Duitsland er zeer nauwlettend op zal toezien.
-1090;40;NLmAux:NLRelAux|"dat"|.NLNiet|NLInf;*|NLSubjpron+NLObjpron|*|*;
-/*		1090. wij willen dat allesbehalve "voortzetten en versnellen" maar juist stopzetten. en we laten dat rijpen tot een geuze met een eigen typische smaak.
-1120;40;NLPrep|"dat"|"van";*|NLObjpron-NLRelpron|*;
+1090;40;NLmAux:NLRelAux|NLDat|.NLNiet|NLInf;*|NLSubjpron+NLObjpron|*|*;
+/*		1090. Wij willen dat allesbehalve "voortzetten en versnellen" maar juist stopzetten. Gaat dat zien, gaat dat zien!
+1120;40;NLPrep|NLDat|"van";*|NLObjpron-NLRelpron|*;
 /*		1120. Noch op dit gebied, noch op dat van het Handvest van de grondrechten.
-1136;40;NLSubjpron:NLRelConModOth:"die":SBegin:NLRelAux|.NLAdvTemp|NLPrep|"dat"|NLCon;*|*|*|NLArt|*;
-/*		1136. dus ijvert hij om dat plafond te halen. per stoomboot, hetgeen in dat perspectief niet verwonderlijk is. maar tegelijkertijd werd in dat mandaat gewezen op de noodzaak.
-1137;40;NLPrep|"dat"|NLCon|SEnd;*|NLArt|*|*;
-/*		1137. overduidelijk is dat hij geen recht heeft op dat geld.
-1138;40;NLOm|"dat"|NLCon;*|NLArt|*;
-/*		1138. de verantwoordelijkheid die de nationale overheid heeft om dat project te realiseren.
-1139;40;NLRelConModOth|.NLArt|NLCon|NLPrep|"dat"|NLCon;*|*|*|*|NLArt-NLRelpron|*;
+1136;40;NLSubjpron:"die":"dat":NLWatWie:SBegin:NLRelAux|.NLAdvTemp|NLPrep|NLDat|NLCon;*|*|*|NLArt|*;
+/*		1136. dus ijvert hij om dat plafond te halen. per stoomboot, hetgeen in dat perspectief niet verwonderlijk is. maar tegelijkertijd werd in dat mandaat gewezen op de noodzaak. Sinterklaas arriveert in België en Nederland per stoomboot, hetgeen in dat perspectief niet verwonderlijk is. 
+1137;40;NLPrep|NLDat|NLCon|SEnd;*|NLArt|*|*;
+/*		1137. De ministerraad beraadslaagt en besluit over het algemeen regeringsbeleid en bevordert de eenheid van dat beleid.
+1138;40;NLOm|NLDat|NLCon;*|NLArt|*;
+/*		1138. De Bel20 had het moeilijk om dat tempo te volgen.
+1139;40;NLDat:NLWatWie|.NLArt|NLCon|NLPrep|NLDat|NLCon;*|*|*|*|NLArt-NLRelpron|*;
 /*		1139. De lidstaten hebben te verstaan gegeven dat het Verdrag op dat terrein niet zal worden gewijzigd.
-1121;40;"dat"|.NLAdvStruct|NLPrep|SEnd;NLObjpron-NLRelpron|*|*|*;
+1121;40;NLDat|.NLAdvStruct|NLPrep|SEnd;NLObjpron-NLRelpron|*|*|*;
 /*		1121. Noch de Verdragen, noch de begrotingsregels staan ons dat echter toe.
-1209;40;NLVerb:NLRelAux:NLPrep|"dat":"die"|.NLAttradj:NLAdj|NLCon|.NLAdvStruct:NLAdvModality:NLAdj|NLNiet|.NLPrep|SEnd:NLPunctuation;*|NLArt|*|*|*|*|*|*;
+1209;40;NLVerb:NLRelAux:NLPrep|NLDat:"die"|.NLAttradj:NLAdj|NLCon|.NLAdvStruct:NLAdvModality:NLAdj|NLNiet|.NLPrep|SEnd:NLPunctuation;*|NLArt|*|*|*|*|*|*;
 /*		1209. Voor veel beleggers weegt dat risico voorlopig niet op. Een grote verrassing is dat eindresultaat niet. Ik begrijp die uitspraak niet. ﻿Ik vergeet die brandende pijn nooit.
-1204;40;NLVerb:NLRelAux:NLInfCon|"dat":"die"|.NLAdvStruct:NLAdvModality|NLNiet|.NLRAdv:NLAdvManner|SEnd:NLPunctuation;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*|*;
+1204;40;NLVerb:NLRelAux:NLInfCon|NLDat:"die"|.NLAdvStruct:NLAdvModality|NLNiet|.NLRAdv:NLAdvManner|SEnd:NLPunctuation;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*|*;
 /*		1204. In het verleden gebeurde dat niet. ik ben dat in elk geval niet. Hij stelt die niet teleur.
-1205;40;NLRelAux|"dat":"die"|.NLAdvTemp:NLAdvStruct|NLNiet|NLPartAdj;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+1205;40;NLRelAux|NLDat:"die"|.NLAdvTemp:NLAdvStruct|NLNiet|NLPartAdj;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
 /*		1205. Ondertussen is dat nog altijd niet gebeurd. Moody's heeft zijn ratings onder heroverweging voor een mogelijke verlaging, maar heeft die nog niet doorgevoerd.
-1206;40;NLmAux:NLAux|"dat"|.NLAdvTemp:NLAdvStruct|NLGeen:"nauwelijks";*|NLSubjpron+NLObjpron-NLRelpron|*|*;
+1206;40;NLmAux:NLAux|NLDat|.NLAdvTemp:NLAdvStruct|NLGeen:"nauwelijks";*|NLSubjpron+NLObjpron-NLRelpron|*|*;
 /*		1206. Uiteraard is dat geen enkel probleem. In Wallonië en Brussel is dat geen 1,5%.
-1208;40;NLAndOrBut|"dat"|NLCon:NLRelCon|*NLmAux:NLRelAux|NLPartAdj:NLPartCon;*|NLOndvw|NLCon|*|*;
+1208;40;NLAndOrBut|NLDat|NLCon:NLRelCon|*NLmAux:NLRelAux|NLPartAdj:NLPartCon;*|NLOndvw|NLCon|*|*;
 /*		1208. Dit is inderdaad lovenswaardig, maar belangrijker is dat er niet alleen een omlijsting wordt gecreëerd, maar dat inhoud wordt gegeven aan het onderwijs.
-1207;40;SBegin:NLAndOrBut|"dat"+^NLOndvw|NLCon:NLRelCon|NLVerb;*|NLArt|NLCon|*;
+1207;40;SBegin:NLAndOrBut|NLDat"+^NLOndvw|NLCon:NLRelCon|NLVerb;*|NLArt|NLCon|*;
 /*		1207. Dat plan bevat sociale maatregelen die de grote legertransformatie verteerbaar moesten maken.
 1280;40;NLComma|NLPrep|"wie";*|NLConj|Join;
 /*		1280. Twee mensen, onder wie een kind, zijn nog vermist.
@@ -917,7 +992,7 @@
 /*		251. Wanneer hij de zaak overneemt, verwacht Paul een toename van het cliënteel. Na de overname van het Nederlandse energiebedrijf Essent, versterkt RWE zich ook in België.
 225;40;NLPunctuation|NLPartAdj+^NLRelPrepAdj|NLCon;*|NLAttradj|*;
 /*		225. We aten soep, gebakken vis met puree, en ijstaart.
-254;40;NLRelAdj+NLPartAdj|NLCon+NLCapitalInitial:NLCapitalAll;NLVerb|*;
+254;40;^NLRelAux|NLRelAdj+NLPartAdj|NLCon+NLCapitalInitial:NLCapitalAll;*|NLVerb|*;
 /*		254. Verwacht Paul een toename van het cliënteel? Verwacht JBC een toename van de kosten?
 530;40;NLComma|NLRelAdj:NLRelAttradj|NLCapitalInitial;*|NLVerb|*;
 /*		530. Maar daar hebben politie en justitie geen voordeel van ondervonden, benadrukte Jansen.
@@ -930,7 +1005,7 @@
 416;40;NLArt|NLAdj+^NLAdvDegree+^NLAdvTemp|NLAdj+^NLAdvDegree|NLCon:NLRelCon;*|NLAttradj|+Join|NLCon;
 /*		416. Er komt een nieuw gerechtelijk onderzoek door de geheime dienst.
 1051;40;NLGeen|NLAdj+NLAdvTemp|NLAdj:NLCon;*|NLAttradj|NLAttradj;
-/*		1051. Deze belangen leveren mij echter geen enkel direct financieel voordeel op als de amendementen aangenomen zouden worden.
+/*		1051. Hysterie rond gestorven sterren is geen recent fenomeen.
 1274;40;NLAttradj|NLCon:NLRelCon|NLAndOrBut|NLRelAdj:NLRelAttradj|NLCon:NLRelCon;*|*|*|NLAttradj|*;
 /*		1274. ten hoogste 150 echte vrienden en vertrouwde kennissen.
 1275;40;NLAttradj|NLAndOrBut|NLRelAdj:NLRelAttradj|NLCon:NLRelCon;*|*|NLAttradj|*;
@@ -1005,9 +1080,9 @@
 /*		201. Het boekjaar is afgesloten zonder verliezen.
 1641;40;NLVerb:NLRelCon|NLDempron|NLRelCon;^NLVerb|*|NLCon;
 /*		1641. De grootste bank van Zwitsersland maakt die plannen bekend samen met een verwacht kwartaalverlies. Soms lijken die kosten laag in vergelijking met de concurrentie.
-1575;40;"die":"dat":"er":"daar"|NLRelCon|NLPrep|NLRelCon;*|*|NLCon|^NLVerb;
+1575;40;"die":NLDat:"er":"daar"|NLRelCon|NLPrep|NLRelCon;*|*|NLCon|^NLVerb;
 /*		1575. Sommige mensen zeggen dat ze er troost uit putten.
-1574;40;"die":"dat":"er":"daar"|NLNiet:NLAdvTemp:NLCon:NLRAdv|NLPrep|NLRelCon;*|*|*|^NLVerb;
+1574;40;"die":NLDat:"er":"daar"|NLNiet:NLAdvTemp:NLCon:NLRAdv|NLPrep|NLRelCon;*|*|*|^NLVerb;
 /*		1574. Het kan fataal zijn voor veertig procent van de patiënten die hier aan lijden. Het feit dat zij dergelijke negatieve opvattingen stimuleren of er niet tegen optreden, maakt het nog erger. Een andere  interpretatie dan wij er altijd aan gaven. Het is ons de afgelopen weken zeer duidelijk geworden dat die twee werknemers daar niet in slagen.
 1273;40;NLPrep|NLRelCon;*|NLCon;
 /*		1273. De liederen, hoewel terug te vinden op geluidsdragers en in boeken, worden in de eerste plaats oraal doorgegeven van ouder op kind. Pijn op de borst sinds een paar dagen, aanvankelijk bij inspanning, laatste uren ook in rust.
@@ -1021,14 +1096,14 @@
 /*		113. Iedere zondag gaan wij koersen. Ik zweer het je.
 364;40;NLNiet+^"nauwelijks"|NLRelCon;*|^NLVerb;
 /*		364. als we die tenminste niet verliezen aan moties van orde. NOT. Niets is aan mijn aandacht ontsnapt maar ik kan niet puntsgewijs reageren omdat er nauwelijks vragen zijn gesteld.
-710;40;NLRelAdj+NLPartAdj|NLRelConModOth;NLPartrel|NLOndvw;
-/*		710. Ik heb gewenst dat het mooi weer zou worden.
-38;40;NLRelAdj:NLRelAttradj|NLRelConModOth;NLVerb|NLOndvw;
-/*		38. Hij was kwaad toen bleek dat het voor stemmingen benodigde quorum niet aanwezig was.
+38;40;NLRelAdj:NLRelAttradj+^NLPartAdj|NLDat;NLVerb|NLOndvw;
+/*		38. In Nederland stelde men al vast dat kinderen stelselmatig snoep krijgen tijdens de lessen.
 40;40;^NLTe|NLRelCon|NLVerb+^NLAux|NLPrep;*|NLCon|*|*;
 /*		40. Het bedrijf, dat werk bood aan 141 mensen, ging failliet. NOT. Tegen half april wil de minister een nota met maatregelen om de achterstand weg te werken voorleggen aan de vakbonden.
 41;40;NLRelCon|NLRelAdj+NLPartAdj|NLOm;NLCon|NLPartrel|*;
 /*		41. Er zijn gisteren vooral voorstellen gelanceerd om het geldprobleem op te lossen.
+1971;40;"die":"dat"|NLPrep|.NLArt:NLPoss:NLAttradj:NLAdj|NLCon|NLRelCon|NLVerb;*|*|*|*|NLVerb|*;
+/*		1971. Vooral werknemers die in Brussel werken laten hun wagen al sneller in de garage staan.
 42;40;^NLTe+^NLRelAdj:NLRelAttradj|NLRelCon|NLVerb:NLPartrel:NLInfCon+^NLRelAux;*|NLCon|*;
 /*		42. We moeten 100 euro kosten betalen. NOT. Twee verkeerde zetten heffen elkaar niet op.
 1388;40;NLRelAdj:NLRelAttradj|NLRelCon|NLAux;NLAttradj|NLCon|*;combination of r567 and r187 to assure correct processing of this specific pattern
@@ -1106,7 +1181,7 @@
 
 /* Disambiguate PartCon
 1580;40;NLArt:NLPoss:NLAdj:NLAttradj:NLPrep:"dit":"deze":NLVerb+^NLRelAux|NLPartCon|NLCon;*|NLAttradj|*;
-/*		1580. Op een gegeven moment is hij vanuit een boom in het water gesprongen.
+/*		1580. Tegen constante valutakoersen presteert het bedrijf in lijn met de eerder gegeven guidance, waarbij de omzet in het gehele boekjaar 10-15% lager zou uitkomen.
 1585;40;NLNumber:NLMeasure:NLGeen|NLPartCon|NLCon;*|NLAttradj|*;
 /*		1585. Er liggen 50 gevallen appels op de grond.
 1577;40;NLArt:NLPoss:NLAttradj:NLPrep:"dit":"deze":NLVerb+^NLRelAux|NLPartCon;*|NLCon;
@@ -1119,8 +1194,8 @@
 /*		1576. Blijkbaar heeft de facturatiedienst van ons ziekenhuis U de verkeerde informatie gegeven.
 
 /* Disambiguate RelConAttradj, AdjCon and ConAttradj
-1570;40;NLPoss:NLArt|.NLAdvDegree:NLAdj+^NLAdjCon|NLRelConAttradj:NLAdjCon|^NLCon:NLAdjCon:NLAdj:NLAdvManner:NLAdvModality:NLPartAdj;*|*|NLCon|*;
-/*		1570. Ook bleef onduidelijk waarom men de man van zijn dood beschuldigde. Ik maak deel van een zeer plezant geheel.
+1570;40;NLPoss:NLArt|.NLAdvDegree:NLAttradj:NLAdj+^NLAdjCon|NLRelConAttradj:NLAdjCon|^NLCon:NLAdjCon:NLAdj:NLAdvManner:NLAdvModality:NLPartAdj;*|*|NLCon|*;
+/*		1570. Ook bleef onduidelijk waarom men de man van zijn dood beschuldigde. Ik maak deel van een zeer plezant geheel. Zijn pogingen de macht naar zich toe te trekken resulteerden na zijn onverwachte dood in 1650 tot  het  eerste stadhouderloze tijdperk.
 1567;40;^NLVerb|NLSubjpron:NLCon|NLRelConAttradj|NLArt:NLObjpron:NLRefl:NLPrep:SEnd;*|*|NLVerb|*;
 /*		1567. De Italiaanse minister beschuldigde de dame er op een bepaald moment van dat ze valse verklaringen had afgelegd. Het bedrijf verzekerde zich van meer dan 700.000 vierkante meter aan bouwrechten. Zijn bekering tot het katholicisme (497) verzekerde hem van de steun van de Kerk. Een historische bestuursvorm waarbij de leenheer zich van  de  persoonlijke afhankelijkheid van zijn vazallen of leenmannen verzekerde door het uitgeven van lenen. NOT. Wekenlang domineert Valentino's dood het nieuws.
 1568;40;SBegin|NLCon|NLRelConAttradj|NLCon:NLRefl;*|*|NLVerb|*;
@@ -1137,36 +1212,39 @@
 /* Disambiguate the word ZELF
 1071;40;NLCon|"zelf"|SEnd:NLVerb:NLPunctuation:NLLinkingverb:NLAdvDegree:NLAndOr;*|NLAdvStruct|*;
 /*		1071. Dat tweede gebeurt beter niet door de letterensector zelf. De route zelf is volledig gratis. De man zelf was gewond in het aangezicht. Hoewel de Meester zelf nogal weigerachtig staat tegenover te veel 'Weelde en Feestgedruis'.
-1072;40;NLCon|"zelf"|"die":"dat"|^NLCon+^NLEndconcept;*|NLAdvStruct|NLOndvw|*;
+1072;40;NLCon|"zelf"|"die":NLDat|^NLCon+^NLEndconcept;*|NLAdvStruct|NLOndvw|*;
 /*		1072. Het was de FOD Mobiliteit zelf die met een rondzendbrief de examencentra begin deze week op de hoogte bracht van de mogelijkheid. Het was de rechter zelf die een verhoor eiste van de kinderen. Dit is niet zozeer te danken aan de voorlichting en de reclame als wel aan de projecten zelf die werden gefinancierd. Het is per slot van rekening het Parlement zelf dat sinds lange tijd al een regeling eist.
 
 /* Disambiguate the words DAT, WAT, WIE
-546;40;NLRelConModOth|NLDie:NLDit;NLOndvw|NLDempron-NLRelpron;
-/*		546. de Consumentenbond vindt dat die niet werkt.
-1259;40;NLVerb+^NLRelAux+^NLAux|NLRelConModOth|NLNiet|NLCon;*|NLOndvw|*|*;
+546;40;NLDat:NLWatWie|NLDie:NLDit;NLOndvw|NLDempron-NLRelpron;
+/*		546. Uiteraard was het allermeest verrassend dat die tegengestelde karakters aangetrokken worden tot elkaar. Wat die opties precies zijn, wil hij verder niet verduidelijken. 
+1259;40;NLVerb+^NLRelAux+^NLAux|NLDat|NLNiet|NLCon;*|NLOndvw|*|*;
 /*		1259. Panetta zei dat niet gebeurtenissen uit het verleden, maar die van het heden en de toekomst de uitdaging voor zijn organisatie zijn.
-1252;40;NLVerb|NLRelConModOth|^NLSubjpron+^NLVerb+^NLRelAux+^NLRelCon|.^NLVerb+^NLRelAux+^NLRelCon+^NLOndvw+^SEnd|SEnd:NLOndvw+^NLRelOndvwPrep;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
-/*		1252. Oppassen betekent dat voor Anna.
-1257;40;NLVerb|NLRelConModOth|*^NLSubjpron+^NLVerb+^NLRelAux+^NLPunctuation|NLPunctuation|NLAndOrBut:NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+1252;40;NLVerb|NLDat|^NLSubjpron+^NLVerb+^NLRelAux+^NLRelCon|.^NLVerb+^NLRelAux+^NLRelCon+^NLOndvw+^SEnd|SEnd:NLOndvw+^NLRelOndvwPrep;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
+/*		1252. Maar de meesten houden dat stil, omdat ze niemand voor het hoofd willen stoten. Klopt dat, volgens u?
+1257;40;NLVerb|NLDat|*^NLSubjpron+^NLVerb+^NLRelAux+^NLPunctuation|NLPunctuation|NLAndOrBut:NLVerb;*|NLSubjpron+NLObjpron-NLRelpron|*|*|*;
 /*		1257. We hebben dat getest, en de eerste bestelling is geplaatst op 7 mei 2007.
-1258;40;NLAux:NLRelAux+^NLVerb|NLRelConModOth|^NLVerb+^NLRelAux+^NLPartrel+^NLPunctuation|NLPunctuation:SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*|*;
+1258;40;NLAux:NLRelAux+^NLVerb|NLDat|^NLVerb+^NLRelAux+^NLPartrel+^NLPunctuation|NLPunctuation:SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*|*;
 /*		1258. Was dat maar zo!
-1254;40;NLVerb|NLRelConModOth|SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*;
+1254;40;NLVerb|NLDat:NLWatWie|SEnd;*|NLSubjpron+NLObjpron-NLRelpron|*;
 /*		1254. Volgens mij klopt dat.
-46;40;NLVerb|NLRelConModOth;*|NLOndvw;
-/*		46. De weermannen voorspellen dat het een zachte winter wordt.
-47;40;NLRelConModOth|NLPrep;NLOndvw|*;
-/*		47. Ben jij het type dat in de middagpauze snel een dutje doet?
-560;40;NLDie:NLRelConModOth:NLOm|"dat";NLOndvw|NLDempron-NLRelpron;
-/*		560. Het gaat om mensen die dat nog niet wisten. Het is vermoedelijk maar een kwestie van tijd dat dat gebeurt en de arts geschorst zal worden. tenzij het openbaar ministerie duidelijke redenen heeft om dat niet te doen.
-645;40;NLOndvw:NLConj+^"gezien"|"dat";*|NLDempron-NLRelpron;
-/*		645. Deze mensen zijn zich veel meer van allerhande prikkels bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is. Ik verzoek de diensten van het Parlement na te gaan waarom dat niet is gebeurd.
-1587;40;SBegin:NLPunctuation|NLPrep|"dat";*|*|NLDempron-NLRelpron;
-/*		1587. In dat complex bevond zich tot halfweg de achttiende eeuw ook een jezuïetenklooster.
-936;40;NLPunctuation:NLHyphen:NLAndOrBut|NLNiet|"dat"|NLPrep;*|*|NLDempron|*;
+46;40;NLVerb|NLDat:NLWatWie;*|NLOndvw;
+/*		46. De weermannen voorspellen dat het een zachte winter wordt. Dat is wat er daar aan de hand is. Niemand weet wie erachter zit.
+936;40;NLPunctuation:NLHyphen:NLAndOrBut|NLNiet|NLDat|NLPrep;*|*|NLDempron|*;
 /*		936. Ik ken geen enkel ander gebied - niet dat van de euro of het vrije verkeer van personen.
-1294;40;NLRelConModOth:NLDie|NLSubjpron|NLInf;*|*|-NLInf+NLVerb;
-/*		1294. Het gaat erom dat wij doen wat technisch mogelijk is.
+797;40;NLConj:NLOndvw:"zolang"|NLSubjpron+^NLObjpron|NLDie:NLDat;*|*|NLDempron-NLRelpron;
+/*		797. Als we die lijn niet volgen, zullen we geen doelmatig ontwikkelingsbeleid kunnen voeren. Juist omdat ik geloof dat wij dat politiek tekort nauwelijks kunnen opvullen. Zolang ze dat met succes kunnen doen hoeven ze niet zelf te werken aan het verkleinen van de overlast. NOT. De doelisten zagen Willem IV als degene die het bestuur kon hervormen.
+47;40;NLDat:NLWatWie|NLPrep;NLOndvw|*;
+/*		47. Ben jij het type dat in de middagpauze snel een dutje doet? Wie in de file staat, kan voortaan mee wegdromen op de stem van de beste Nederlandstalige vertellers. Uit het onderzoek blijkt echter dat dit niet correct is, maar dat DEET het zenuwstelsel van de mug aanvalt, wat bij hoge concentraties zelfs tot de dood van het insect kan leiden.
+560;40;NLDie:NLDat:NLWatWie:NLOm|"dat";NLOndvw|NLDempron-NLRelpron;use literal for 'dat' instead of label Dat, so the rule always fires
+/*		560. Het gaat om mensen die dat nog niet wisten. Het is vermoedelijk maar een kwestie van tijd dat dat gebeurt en de arts geschorst zal worden. tenzij het openbaar ministerie duidelijke redenen heeft om dat niet te doen. Wie dat abonnement gebruikt voor woon-werkverplaatsingen, heeft ook recht  op een korting in de vorm van een werkgeversbijdrage. 
+645;40;NLOndvw:NLConj+^"gezien"|"dat";*|NLDempron-NLRelpron;use literal for 'dat' instead of label Dat, so the rule always fires
+/*		645. Deze mensen zijn zich veel meer van allerhande prikkels bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is. Ik verzoek de diensten van het Parlement na te gaan waarom dat niet is gebeurd. Beiden worden zo laag mogelijk gemaakt, voor zover dat binnen  de reglementen mogelijk is.
+1587;40;SBegin:NLPunctuation|NLPrep|"dat";*|*|NLDempron-NLRelpron;use literal for 'dat' instead of label Dat, so the rule always fires
+/*		1587. In dat complex bevond zich tot halfweg de achttiende eeuw ook een jezuïetenklooster. Er bevindt zich onder meer het tweede grootste petrochemisch complex ter wereld, na dat in Houston. 
+/*936
+1294;40;NLDat:NLWatWie:NLDie|NLSubjpron|NLInf;*|*|-NLInf+NLVerb;
+/*		1294. Het gaat erom dat wij doen wat technisch mogelijk is. Dit voorval is het laatste wat we nodig hebben. Het is tragisch dat zoveel mensen niet de behandeling krijgen die ze verdienen.
 
 /* Further disambiguate the word DIE
 1264;40;SBegin|.NLAdvDirection:NLAdvManner:NLAdvModality:NLAdvPlace:NLAdvStruct:NLAdvTemp:NLAdvTime|NLVerb:NLInf:NLRelCon|NLDie;*|*|^NLVerb-NLInfCon|-NLDie-NLRelpron;
@@ -1209,16 +1287,17 @@
 /*		553. De winst van begin vorige week, evenals die van dinsdag, zouden meer lijken op een rally in een dalende markt dan op het begin van een stijgende markt. NOT. Er zijn mensen die in de stad wonen, maar die niet te voet naar de winkel kunnen gaan.
 547;40;NLPrep+^"mee"+^"toe"|NLDie;*|NLDempron-NLRelpron;
 /*		547. Een concrete aanleiding voor die stijging is er niet, maar het aandeel was de laatste tijd fors terrein verloren na een stroom van negatieve berichten. De Elfstedentocht van 1997 was de zwaarste sinds die legendarische van 1963.
-797;40;NLConj:NLOndvw:"zolang"|NLSubjpron+^NLObjpron|NLDie:"dat";*|*|NLDempron-NLRelpron;
-/*		797. Als we die lijn niet volgen, zullen we geen doelmatig ontwikkelingsbeleid kunnen voeren. Juist omdat ik geloof dat wij dat politiek tekort nauwelijks kunnen opvullen. Zolang ze dat met succes kunnen doen hoeven ze niet zelf te werken aan het verkleinen van de overlast. NOT. De doelisten zagen Willem IV als degene die het bestuur kon hervormen.
+/*797
 935;40;NLNiet:NLRel|"die"|NLPrep:NLAttradj:NLCon;*|NLDempron|*;
 /*		935. Ik heb namelijk niet die indruk. Ik denk dat ze in de eerste plaats hun eigen belangen en niet die van hun onderneming dienen. We kunnen de uitdagingen die ons te wachten staan nooit aangaan, zeker niet die van de uitbreiding.
-937;40;"noch"|"die":"dat"|NLPrep;*|NLDempron|*;
+937;40;"noch"|"die":"dat"|NLPrep;*|NLDempron|*;use literal for 'die' and 'dat' instead of labels Dit and Dat, so the rule always fires
 /*		937. Dat is niet het standpunt van Frankrijk, noch dat van Italië. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
 1267;40;NLVerb|NLDie|.^NLVerb+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|NLDempron-NLRelpron|*|*;
 /*		1267. De sterke huizencijfers geven die winsten een extra duw in de rug.
 1593;40;NLSubjpron:NLCon|NLRelCon|NLDie|.^NLVerb+^NLPunctuation+^SEnd|NLPunctuation:SEnd;*|^NLVerb|NLDempron-NLRelpron|*|*;
 /*		1593. Ze zet die foto's online.
+1951;40;"dat"|NLDempron|NLRelCon;*|NLArt|NLCon;
+/*		1951. Daarbij gaan we ervan uit dat die wagen elk jaar in totaal 20.000 kilometer aflegt (dus niet enkel woon-werkverkeer).
 
 /* Disambiguation of and with TE
 65;40;^"er"|NLEen:NLDe|NLTe|NLVerb:NLRelCon+^NLUDRelation|NLCon;*|*|NLAttradj|NLAttradj|*;
@@ -1229,7 +1308,7 @@
 /*		267. Provinciale staten en de gemeenteraad stellen, behoudens bij de wet of door hen krachtens de wet te bepalen uitzonderingen, de provinciale onderscheidenlijk de gemeentelijke verordeningen vast. De leden van beide kamers worden gekozen op de grondslag van evenredige vertegenwoordiging binnen door de wet te stellen grenzen.
 74;40;NLTe|NLRelCon;NLRTe|^NLInf+NLVerb;
 /*		74. De fototentoonstelling is te bezoeken t.e.m. zaterdag 6 mei.
-1307;40;NLRelConModOth|.^NLTe|NLTe|NLInf+^"zijn"|NLLinkingverb:NLAux:NLteAux;*|*|NLRel+NLRTe|NLRel|NLVerb;
+1307;40;NLDat:NLWatWie|.^NLTe|NLTe|NLInf+^"zijn"|NLLinkingverb:NLAux:NLteAux;*|*|NLRel+NLRTe|NLRel|NLVerb;
 /*		1307. Maar dit is een punt dat gemakkelijk op te lossen is.
 1306;40;NLOndvw+^"om"|.^NLTe+^NLRTe+^NLOndvw+^"om"|NLTe:NLRTe|NLInf+^"zijn"|NLLinkingverb:NLAux:NLteAux;*|*|NLRel+NLRTe|NLRel|NLVerb;
 /*		1306. Pagina's die online gratis te lezen zijn.
@@ -1257,21 +1336,19 @@
 1738;40;NLArt:NLPoss|NLAttradjCon;*|NLCon;
 /*		1738. Als ze in de klei blijven kunnen de stenen opgeblazen of gebroken worden door gasvorming. Onder de voorwaarden en op de wijze bepaald bij de wet.
 1561;40;NLArt:NLAttradjCon:NLAttradj:NLPrep:NLDempron:NLPoss:NLAdj|NLAttradjCon:NLAdjCon+^NLAdvDegree|NLVerb:NLPrep:NLRAdv:NLNiet:NLVeelWeinig:NLArt:NLAdvManner:"te";*|NLCon|*;
-/*		1561. De Nederlandse en Europese politiek reageert verbijsterd. Traditionele lambiekbieren zijn vanwege hun zure smaak bij het grote publiek niet erg geliefd. In 1993 werd de zware crimineel samen met zijn kompaan veroordeeld. NOT. Het huidige glas, dat ruim een halve liter bier kan bevatten.
+/*		1561. De Nederlandse en Europese politiek reageert verbijsterd. In 1993 werd de zware crimineel samen met zijn kompaan veroordeeld. NOT. Het huidige glas, dat ruim een halve liter bier kan bevatten.
 1648;40;"als"|NLAdjCon|NLVerb:NLPrep:NLRAdv:NLNiet:NLVeelWeinig:NLArt:"te":NLOndvw;*|NLCon|*;
 /*		1648. Een vonnis waarin onze blokkade als illegaal wordt bestempeld en dient te worden opgeheven. Na de Opstand bleven de benamingen Belgium en 't Nederlandt in gebruik voor zowel de Nederlanden als geheel als voor de beide afzonderlijke staten.
 1584;40;NLArt:NLAttradjCon:NLAttradj:NLPoss:NLAdj|NLAdjCon+NLAdvDegree|NLVerb:NLPrep;*|NLCon|*;variation on r1561 for AdjCon+AdvDegree
-/*		1584. Menselijk ingrijpen heeft grote invloed op het huidige uiterlijk van landschap en vegetatie. Recent hebben de erven in onderling overleg beslist dat het literaire archief één onverdeelbaar geheel wordt beschouwd.
+/*		1584. Recent hebben de erven in onderling overleg beslist dat het literaire archief één onverdeelbaar geheel wordt beschouwd.
 1562;40;NLArt:NLAttradjCon:NLAttradj:NLPrep:NLDempron:"als":NLPoss:NLGeen|NLAdjCon|SEnd:NLPunctuation;*|NLCon|*;
 /*		1562. Verder was er niets: geen IT-systeem, geen management, geen standaard.
 1647;40;NLArt:NLAttradjCon:NLAttradj:NLPrep:NLDempron:"als":NLPoss:NLGeen|NLAdjCon|NLComma:NLAndOr|^NLAdj:NLRAdv:NLNiet;*|NLCon|*|*;
-/*		1647. Onder de vorm van een jaaroverzicht brengt hij het typische, atypische, het anekdotische van de Belgische politiek en economie. NOT. Als derde zijn er de permanente rimpelvullers, die geheel of gedeeltelijk niet door het lichaam worden afgebroken.
+/*		1647. Het gebruik van titanium als framemateriaal lijkt thans een pas op de plaats gemaakt te hebben ten faveure van aluminium en, vooral, carbon, waarvan het gebruik inmiddels heel snel toeneemt. NOT. Als derde zijn er de permanente rimpelvullers, die geheel of gedeeltelijk niet door het lichaam worden afgebroken.
 1535;40;NLArt:NLPoss:NLAttradj:NLPrep:NLObjpron|NLAdjCon|NLInf;*|NLCon|*;variation on r1536 for infinitive (no verb in first position)
 /*		1535. Mocht iemand hen kwaad berokkenen, we zouden het niet ongestraft laten.
 1555;40;NLArt:NLPoss:NLAttradjCon:NLAttradj|NLAdjCon+^"meer"|.NLAdvDegree|NLPartAdj|^NLAttradj:NLAdj:NLCon;*|NLCon|*|*|*;
-/*		1555. Ik heb onmiddellijk de parallel getrokken met de plastische kunst. Ik denk niet dat het gewone publiek zo geïnteresseerd is. NOT. bij een licht gestegen bezettingsgraad.
-1554;40;NLAdjCon|NLLinkingverb|NLPartAdj+^NLLinkingverb;NLRAdv|*|*;
-/*		1554. Als zulke experimenten goed worden uitgevoerd, dan zou ik verplicht zijn om het resultaat ervan te aanvaarden.
+/*		1555. Ik heb onmiddellijk de parallel getrokken met de plastische kunst. NOT. bij een licht gestegen bezettingsgraad.
 1538;40;NLHetzelfde|NLAdjCon;NLSubjpron|NLCon;
 /*		1538. Dat ze dezelfde voornaam heeft als haar concurrent doet haar allesbehalve slecht.
 1546;40;NLLinkingverb|NLZijn:NLPoss|NLAdjCon;*|NLPoss|NLCon;
@@ -1286,6 +1363,8 @@
 /*		1534. Olie was sinds 20 oktober vorig jaar niet zo duur. NOT. Op enkele uitzonderingen na zijn er dus geen "Belgische" scholen meer. NOT. Zij betaalden hier ruim tweeduizend euro voor. NOT. Wel is volgens haar insecteneiwit potentieel geschikt voor de winning van bloedrukverlagende stoffen.
 1605;40;NLPrep|.NLPoss:NLArt:NLAttradj|NLCon|NLAttradjCon|NLPrep;*|*|+NLEndconcept|*|*;
 /*		1605. Hij uitte in zijn feestrede kritiek op de onwil van Nederland om op cultureel vlak samen te werken.
+1969;40;NLOndvw|NLEr|NLPrep|.NLPoss:NLArt:NLAttradj|NLCon:NLAttradjCon|NLCon|NLVerb;*|*|*|*|+NLEndconcept|*|*;
+/*		1969. Zodra er over een bepaalde onderneming geruchten doen over een kapitaalverhoging, duikt de beurskoers traditioneel vaak naar beneden. 
 1148;40;NLAttradjCon;NLAttradj;
 /*		1148. Mensen in een minimaal bewuste staat zijn zich veel meer van allerhande prikkels uit hun omgeving bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is.
 
@@ -1293,25 +1372,25 @@
 /*	NIET ALLE, NIET VEEL
 1062;40;"niet"|"veel"|*typeConcept+^"meer"|"meer";*|*|*|NLAttradj;
 /*		1062. Er zijn al niet veel joden meer die een keppeltje dragen.
-701;40;NLNiet+^NLNooit|"alle";NLBeginconcept+NLNegation|+Join;
+701;40;NLNiet+^NLNooit|"alle";NLBeginconcept|+Join;
 /*		701. Ik begrijp heel goed dat ze niet alle supermarkten voor mij alleen gaan aanpassen. NOT. Dat toont aan dat goed groenbeheer nooit alle risico's kan uitsluiten. NOT. In de geschiedenis van de club werden nog nooit alle prijzen gepakt.
-1649;40;NLNiet+^NLNooit|"veel"|NLAdj;NLBeginconcept+NLNegation|+Join|NLCAdv;
+1649;40;NLNiet+^NLNooit|"veel"|NLAdj;NLBeginconcept|+Join|NLCAdv;
 /*		1649. Dat wil zeggen dat de resultaten van dit jaar 'niet veel lager' zullen zijn dan de recordresultaten.
-702;40;NLNiet+^NLNooit|"veel"|NLCon:NLBeginconcept;NLBeginconcept+NLNegation|+Join|NLCon;
+702;40;NLNiet+^NLNooit|"veel"|NLCon:NLBeginconcept;NLBeginconcept|+Join|NLCon;
 /*		702. Als renners tijdens de week losrijden, verbruiken ze niet zo veel calorieën. NOT. We laten ook nooit veel geld in de kassa.
 703;40;NLNiet+^NLNooit|"veel";NLNiet|+Join;
 /*		703. Hij stelde vast dat zijn indrukwekkende kennis van de Franse cultuur eigenlijk niet veel verder reikte dan de buitenste boulevards van Parijs. NOT. Over die angstige periode heeft zij nooit veel willen vertellen.
 
 /*	NIET ALLES, NIET ALLEMAAL, NIET IEDEREEN
-708;40;NLNiet+^NLNooit|"alles":"allemaal":"iedereen";NLPathRelevant+NLNegation|+Join;
+708;40;NLNiet+^NLNooit|"alles":"allemaal":"iedereen";NLPathRelevant|+Join;
 /*		708. Ik weet dat ik lang niet alles gezegd heb. Het is niet meer allemaal zo eenvoudig. de toegenomen rijkdom bereikt niet iedereen. NOT. En iedereen weet dat Jef nooit alles zal terugbetalen.
 
 /*	NIET DEZELFDE, NIET HETZELFDE
-720;40;NLNiet|NLHetzelfde|"te"|NLInf;NLPathRelevant+NLNegation|+Join|*|*;
+720;40;NLNiet|NLHetzelfde|"te"|NLInf;NLPathRelevant|+Join|*|*;
 /*		720. Ze hoeft daarom ook niet hetzelfde te verdienen als haar populaire tegenspeelster. Ze hoeft daarom ook niet precies hetzelfde te verdienen.
-705;40;NLNiet|NLHetzelfde|NLCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant+NLNegation|+Join|*;
+705;40;NLNiet|NLHetzelfde|NLCon:NLAttradj:NLVerb:NLmAux:NLPrep;NLPathRelevant|+Join|*;
 /*		705. Vroeger had een trage omzetting niet dezelfde gevolgen als nu.
-704;40;NLNiet|.NLAdvDegree|NLHetzelfde;NLRel+NLNegation|+Join|+Join;
+704;40;NLNiet|.NLAdvDegree|NLHetzelfde;NLRel|+Join|+Join;
 /*		704. Deze situatie is helaas niet meer dezelfde.
 
 /*	HETZELFDE
@@ -1354,6 +1433,10 @@
 481;40;^NLNumberConcept|NLCon+^NLMeasure+^NLProcent+^NLNumberConcept|.NLAdvDegree:NLVeelWeinig|NLAdj|^NLCon+^SEnd;*|+NLEndconcept|*|*|*;
 /*		481. Even verder moest ze stoppen omdat de schade aan de auto te groot was. Zo komt het dat de partij veel sterker is dan vroeger. NOT. Geen enkel systeem is honderd procent perfect. NOT. De oefengroep van 256 sporters kreeg een acht weken durend neuromusculair oefenprogramma aangeboden. NOT. Bovendien is dit staaltje documentair erfgoed zowel nationaal als internationaal het omvangrijkste in zijn soort.
 /*		481.UD. We hopen dat het weer snel beter wordt. 
+1970;40;NLVerb|NLSubjpron|.NLArt:NLPoss:NLAttradj:NLAdj|NLCon|NLAttradj|.NLAttradj|NLCon;*|*|*|+NLEndconcept|*|*|*;
+/*		1970. Ook door toevoegingen geeft men de kleimassa bepaalde gewenste hoedanigheden.
+1976;40;NLPrep|NLArt|NLCon+^NLCapitalInitial:NLQuantity|NLNumber|.NLAttradj|NLCon;*|*|+NLEndconcept|*|*|*;
+/*		1976. Volgens de diaken zijn er in de drie grote glasramen achter het hoofdaltaar tien gaten vastgesteld. NOT. Dat heeft de directeur woensdag tegen het Radio 1 Journaal gezegd. NOT. Dat is een onaangename verrassing, omdat zijn jaarlijkse elektriciteitsfactuur beperkt had moeten blijven tot het betalen van het forfaitaire prosumententarief van "een paar honderd euro".
 393;40;SBegin|NLAndOrBut;*|NLAdvStruct;
 /*		393. En toch zie je dat veel ondernemingen nu online diensten aanbieden.
 1118;40;"daar"|NLSubjpron|NLRel:NLNiet;NLOndvw|*|*;
@@ -1425,7 +1508,7 @@
 /*		1616. Vertegenwoordigers suggereerden dat geen van de biedingen financieel afdoende was.
 1125;40;NLNiet|NLAdvDegree:NLAdvModality+^"te":"zo"|NLLinkingverb|^NLPartAdj:NLPartrel:"te";*|NLCAdv|*|*;
 /*		1125. Een aanbeveling over alcoholgebruik onder jongeren zal toch echt niet genoeg zijn om de zaak in te dammen. NOT. dat de deugdelijkheid van het geheel even afdoende wordt gewaarborgd.
-1548;40;NLLinkingverb|.NLAdvModality:NLAdvStruct|NLAdvDegree+^"te":"zo"|.NLAdvStruct|^NLPrep:NLPartAdj:NLPartrel:NLOndvw:NLRelConModOth:NLArt:"te";*|*|NLCAdv|*|*;
+1548;40;NLLinkingverb|.NLAdvModality:NLAdvStruct|NLAdvDegree+^"te":"zo"|.NLAdvStruct|^NLPrep:NLPartAdj:NLPartrel:NLOndvw:NLDat:NLWatWie:NLArt:"te";*|*|NLCAdv|*|*;
 /*		1548. De verwoestingen in de circa twee miljoen inwoners tellende hoofdstad van het armste land op het westelijk halfrond zijn enorm. NOT. De meeste promoties zijn volledig in orde. NOT. De erfenis van de sixties is in hoge mate wat men ervan maakt. NOT. Schiphol is verreweg de grootste luchthaven van Nederland.
 1549;40;NLAdj|NLComma|NLAdvDegree|NLComma:SEnd;*|*|NLAdj|*;
 /*		1549. De klassieke schaal van esthetische schade gaande van onopvallend, zéér licht, licht, middelmatig, ernstig, zéér ernstig, enorm.
@@ -1440,22 +1523,23 @@
 1084;40;NLNumberConcept+^NLYearnum|NLBeginconcept;NLBeginconcept+NLNumber|NLAttradj;
 /*		1084. Hij zei ook andere verantwoordelijkheden te hebben, met name als vader van een gezin van drie heel jonge kinderen. NOT. Volgens de conservatieven zijn in de revolutionaire jaren zestig zowat alle kwalen van deze tijd ontsproten.
 1513;40;"zowel":"noch"|NLAdj;*|NLCAdv;
-/*		1513. Menselijk ingrijpen, zowel direct (kap van bossen, ontginningen, wegenaanleg, etc) als indirect (vermesting) heeft grote invloed op het huidige uiterlijk van landschap en vegetatie.
+/*		1513. Bovendien is dit staaltje documentair erfgoed zowel nationaal als internationaal het omvangrijkste en rijkste in zijn soort voor de vroegmoderne wereldgeschiedenis. Maar wel in de uitgaven voor prestigeprojecten, die economisch noch sociaal noch cultureel een meerwaarde zijn.
 
 /* Adverbs: time - place
 /*	time/place adverb as part of noun phrase
 1715;40;NLArt:NLPrep:NLPoss|.NLAttradj:NLAdj+^NLAdvTime|NLAdj+NLAdvTime|.NLRelAdj:NLRelAttradj|NLAttradj:NLCon:NLRelCon;*|NLAttradj|NLAttradj+NLTime|NLAttradj|NLCon;concrete time
 /*		1715. De gijzeling eindigde met een urenlang vuurgevecht tussen de terroristen en veiligheidstroepen.
-1717;40;"de":"een":"van":NLPoss|.NLAttradj:NLAdj+^NLAdvTemp|NLAdvTemp|NLAttradj:NLCon:NLRelCon;*|NLAttradj|NLAttradj+NLTime|NLCon;vague time
+1717;40;"de":"een":"van":NLPoss|.NLAttradj:NLAdj+^NLAdvTemp|NLAdvTemp|NLAttradj:NLCon:NLRelCon+^NLQuantity;*|NLAttradj|NLAttradj+NLTime|*;vague time
 /*		1717. Dat was de lijfspreuk van een staatshoofd van een inmiddels teloorgegaan systeem. Ik heb mijn voorlopig rijbewijs. Ongeveer 3 maand na het voorval klaagt zij nog steeds van regelmatig optredende kortstondige en scherpe pijnscheuten in het litteken.
 1718;40;"het"|.NLAttradj:NLAdj+^NLAdvTemp|NLAdvTemp|*NLAttradj:NLCon:NLRelCon|NLPrep:SEnd;*|NLAttradj|NLAttradj+NLTime|*|*;vague time
-/*		1718. Voor wat het uiteindelijk aspect van de littekens betreft moet de patiënte minstens een 6-tal maanden geduld uitoefenen. Analisten voorzagen een sterkere daling van het direct resultaat.
+/*		1718. Voor wat het uiteindelijk aspect van de littekens betreft moet de patiënte minstens een 6-tal maanden geduld uitoefenen. 
 1722;40;SBegin|"het"|.NLAttradj:NLAdj+^NLAdvTemp|NLAdvTemp|.NLAttradj:NLAdj|NLCon:NLRelCon;*|*|NLAttradj|NLAttradj+NLTime|NLAttradj|NLCon;vague time
 /*		1722. Het onmiddellijk post-operatief verloop was onverwikkeld zodat patiënt ’s anderendaags het ziekenhuis kon verlaten.
-1720;40;NLRelConModOth|NLAdvTemp|NLCon;*|NLAttradj+NLTime|*;
+1720;40;NLDat:NLWatWie|NLAdvTemp|NLCon;*|NLAttradj+NLTime|*;
 /*		1720. Evenmin vonden de onderzoekers aanwijzingen dat langdurig statinegebruik gepaard zou gaan met een hogere kans op kanker. Wat continu geluid betreft, trekken we de leeftijdsgrens op.
-603;40;NLArt|NLAdvTemp|*NLAttradj:NLRelAdj:NLRelAttradj|NLCon;*|NLAttradj+NLTime|NLAttradj|*;
-/*		603. De onlangs overleden acteur.
+603;40;NLArt|NLAdvTemp|*NLAttradj:NLRelAdj:NLRelAttradj+^NLQuantity|NLCon;*|NLAttradj+NLTime|NLAttradj|*;
+/*		603. De onlangs overleden acteur. NOT. Ze hebben de afgelopen tijd veel vragen van leden gekregen over de kilometerheffing.
+
 1719;40;NLArt|NLAdvPlace|NLAttradj:NLRelAdj:NLRelAttradj;*|NLAttradj|*;
 /*		1719. Dit brood is bijna gaar gebakken en kan in een broodjeszaak worden afgebakken waarbij de verse geur en de warmte suggeren dat het om een ter plaatse geproduceerd product gaat.
 613;40;NLArt:NLPrep+^"om"|NLAdj+NLRAdv|typeConcept;*|NLAttradj|*;
@@ -1466,9 +1550,9 @@
 /*		1560. Cultureel en natuurlijk erfgoed.
 
 /*	time/place adverb and negation
-836;40;NLVerb:NLPartAdj|NLNiet+^NLNooit|NLAdvTemp|NLAttradj;*|NLRel+NLNegation|Join|*;
+836;40;NLVerb:NLPartAdj|NLNiet+^NLNooit|NLAdvTemp|NLAttradj;*|NLRel|Join|*;
 /*		836. Men kan niet direct al die aanvragen als bedrog betitelen. Om de effectiviteit niet te belemmeren, hebben wij voorgesteld niet vooraf financiële grenzen af te bakenen.
-837;40;NLNiet|NLAdvTemp|"meer"|NLArt;NLRel+NLNegation|Join|Join|*;
+837;40;NLNiet|NLAdvTemp|"meer"|NLArt;NLRel|Join|Join|*;
 /*		837. Herbenoeming van een burgemeester is niet altijd meer een automatisme.
 1024;40;NLNiet|NLAdvTemp:"overal"|NLAndOr|NLAdvTemp:"overal";NLNiet|Join|Join|Join;
 /*		1024. Het gebruik van ftalaten is verboden, niet voor altijd en overal op ons grondgebied, maar alleen voor de fabricage van kinderspeelgoed.
@@ -1512,7 +1596,7 @@
 /*		1079. Dan komt de in artikel 82 bedoelde parlementaire overlegcommissie binnen vijftien dagen bijeen.
 1793;40;"een":"de":"geen":"een van de"|.NLAdvStruct:NLNiet|NLPrep|.NLArt:NLAttradj:NLAdvTemp:NLNumberConcept|*NLCon|"te"|NLInf|.NLAdj:NLAttradj:NLAdvTemp|NLCon;*|*|NLAttradj|NLAttradj|*|NLAttradj|NLAttradj|NLAttradj|*;
 /*		1793. De artikelen 57a en 129, derde lid, tweede volzin treden eerst na vier jaar of op een bij of krachtens de wet te bepalen eerder tijdstip in werking.
-262;40;NLArt:NLDempron:"andere":NLAttradj|.NLRAdv:NLAttradj:NLAdj|NLPrep|.NLArt:NLDempron|NLCon|NLPartAdj:NLAdj|NLCon;*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
+262;40;NLArt:NLDempron:"andere":NLAttradj|.NLRAdv:NLAttradj:NLAdj|NLPrep|.NLArt:NLDempron|NLCon|NLPartAdj:NLAdj:NLPartVerb|NLCon;*|NLAttradj|NLAttradj|NLAttradj|NLAttradj|NLAttradj|*;
 /*		262. Van het kiesrecht is uitgesloten hij die wegens het begaan van een daartoe bij de wet aangewezen delict bij onherroepelijke rechterlijke uitspraak is veroordeeld tot een vrijheidsstraf van ten minste een jaar en hierbij tevens is ontzet van het kiesrecht. Op termijn zien de onderzoekers mogelijkheden om de op deze manier gewonnnen peptiden in te zetten. Deze apparaatjes zenden een voor zeezoogdieren irritant geluid uit dat de vissen op afstand houdt. Een buitenlandse overheidsinstantie of een buitenlandse van overheidswege aangewezen instantie, die is belast met het toezicht op financiële markten. Van het verst in de duinen gelegen paviljoen zouden alle ramen zijn gesneuveld. bestuursorganen van het Rijk en van andere bij of krachtens de wet aangewezen bestuursorganen. De zaak kan bij het Hof aanhangig worden gemaakt door iedere bij wet aangewezen overheid.
 218;40;NLDe|NLCon|NLPartAdj|NLCon;*|NLAttradj|NLAttradj|*;
 /*		218. De combinatie van ultrageluid met antibiotica zorgt ervoor dat de levensvatbaarheid van bacteriën afneemt, terwijl het tegelijkertijd de  hoeveelheid afgegeven antibiotica vergroot.
@@ -1544,7 +1628,7 @@
 /*		1645. De Romeinse landbouw met villae verdween volledig.
 1628;40;NLAdj+^NLRAdv|NLPunctuation:SEnd:NLOndvw:NLAndOr;NLBeginEndconcept|*;separate adverb should be Concept
 /*		1628. Verbaliseren op basis van trajectcontrole is wettelijk nog niet mogelijk. Het wordt nooit volledig hard en blijft zelfs bij temperaturen beneden –20°C nog vervormbaar. NOT. 85 van hen gebruikten het middel ook daadwerkelijk.
-1621;40;^SBegin:NLPunctuation|NLAdj|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;*|NLBeginEndconcept|*|*;
+1621;40;^SBegin:NLPunctuation:NLAndOrBut|NLAdj|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;*|NLBeginEndconcept|*|*;
 /*		1621. De mate waarin echtgenoten verschillen in hun geldgedrag bleek direct in relatie te staan met de mate waarin zij gelukkig zijn in het huwelijk. Afgaande op de voorinschrijvingen moet dat mogelijk zijn. De gevolgen zijn toch wel heel zwaar geweest. Verder stelt de bouwer in de trading update dat het 'niet zeker' is dat de divisie een positief resultaat zal behalen. De bob glijdt over twee onafhankelijke loperparen, waarvan het voorste draaibaar is. Terwijl het omgekeerde evenzeer mogelijk zou zijn. NOT. Gelukkig is in de zaal niets afgebroken. NOT. Dat komt vooral doordat vrouwen meer zijn gaan roken.
 1800;40;NLAdj+^NLRAdv:NLAdvTemp:NLAdvModality|*NLLinkingverb|^NLPartrel:NLPartAdj:NLInf;NLBeginEndconcept|*|*;
 /*		1800. Opmerkelijk is echter dat dit bureau tot voor kort gewoon stond ingeschreven als nevenvestiging.
@@ -1564,8 +1648,8 @@
 /* Defaults for Part and RelAdj
 571;40;SBegin|NLRelAdj:NLRelAttradj|NLCon;*|NLAttradj|*;
 /*		571. Gestolen kunstwerk uit 1980 teruggevonden.
-709;40;NLAux|NLRAdv|NLPartAdj;*|*|NLPartrel;
-/*		709. Duizenden mensen in heel Europa hebben ervoor gekozen producten te kopen die geen GGO's bevatten.
+709;40;NLAux:NLRelAux|NLRAdv:"dan"|NLPartAdj;*|*|NLPartrel;
+/*		709. Duizenden mensen in heel Europa hebben ervoor gekozen producten te kopen die geen GGO's bevatten. Er wordt dan beslist huid te preleveren ter hoogte van het abdomen rechts.
 846;40;NLArt|"door"|*NLArt:NLAttradj:NLCon:NLObjpron|NLRelAdj:NLRelAttradj|NLAttradj:NLCon;*|NLAttradj|NLAttradj-NLBeginpron|NLAttradj|*;
 /*		846. de Lycische bisschop uit de door Grieken bewoonde antieke stad Myra. de door een of meer leden verlangde inlichtingen. een door haar ingediend voorstel.
 833;40;NLArt:NLPrep+^"om"|NLRAdv|*NLAttradj:NLRelAdj:NLRelAttradj:NLPartAdj|NLCon|^"te";*|NLAttradj|NLAttradj|*|*;
@@ -1582,6 +1666,8 @@
 /*		1634. Het  Belgische federalisme is voor niet-ingewijden ingewikkeld en onoverzichtelijk, omdat het unitaire kenmerken vertoont.
 711;40;NLPartAdj;NLPartrel;
 /*		711. Met die niet mis te verstane waarschuwing werd ons dit programma aangereikt.
+1967;40;NLRelAdj+NLRAdv;NLRAdv;
+/*		1967. Ze dachten dat ze voor eeuwig in dat hol vast zouden zitten. 
 92;40;NLRelAdj:NLRelAttradj;NLVerb;
 /*		92. Het verlies liep zelfs even op tot meer dan 3 procent, maar het aandeel herstelde daarna weer. Bijna alle kamers hebben een subliem uitzicht op het sprookje dat Tivoli heet.
 
@@ -1598,7 +1684,7 @@
 /*		908. Die vrachtschepen varen op het Albertkanaal.
 93;40;NLRelCon;NLVerb;
 /*		93. Wie kijkt die ziet, wie niet wil zien, die staart.
-94;40;NLRelConModOth;NLOndvw;
+94;40;NLDat:NLWatWie;NLOndvw;
 /*		94. Het is onzin dat bezoekers niet op de parking mogen staan.
 544;40;NLDie;NLOndvw;
 /*		544. Dat er amper bedrijven zijn die via een beursintroductie kapitaal willen ophalen, is niet echt verrassend.
@@ -1612,12 +1698,14 @@
 /*		1371. Voor de samenhang tussen hoge bloeddruk en het geluid van wegverkeer zijn vergelijkbare risico’s gevonden.
 131;40;NLZijn|*NLVerb:NLPartrel:NLRTe|SEnd;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*|*;
 /*		131. In dat geval zou alle moeite en de tot nu toe gevoerde dialoog voor niets zijn geweest.
-990;40;NLZijn|NLRAdv;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
-/*		990. Want die zijn ongetwijfeld ook ontoerekeningsvatbaar.
+990;40;NLZijn|NLRAdv:NLAdvTemp;NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;
+/*		990. Want die zijn ongetwijfeld ook ontoerekeningsvatbaar. De snelweg werd afgesloten in beide richtingen maar intussen zijn weer twee rijstroken open. 
 327;40;NLAdj:NLCon:NLAttradj:NLBeginEndconcept|NLZijn|^NLAttradj+^NLAdj+^NLCon+^NLNumberConcept+^SEnd;*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf|*;update-nl
 /*		327. Deze 4 littekens zijn soepel en functioneel niet hinderend. NOT. De wiskunde als abstracte wetenschap werd het eerst beoefend in het klassieke Griekenland, waar bijvoorbeeld Euclides zijn 5 axioma's formuleerde die meer dan twintig eeuwen stand hielden.  NOT. Hij zou al ontevreden zijn sinds de uitgeverij zijn 25-jarig jubileum als schrijver liet passeren.
 1595;40;SBegin|.NLArt|*NLAttradj:NLAdj:NLPathRelevant:NLBeginconcept:NLCon|NLZijn;*|*|*|NLRelAux+NLAux+NLLinkingverb+NLVerb+NLInf;
 /*		1595. Andere typische Belgische gerechten zijn stoofvlees, paling in 't groen, hutsepot en bloedworst met appelmoes. Iets meer dan de helft zijn vaartuigen onder de tien meter.
+1977;40;NLZijn|.NLAttradj|NLCon|"te";NLPoss|*|*|*;
+/*		1977. Rond 1600 werd het in Delft verboden zijn feestdag te vieren. 
 829;40;NLPartrel+^NLPrespartAdj|NLZijn;*|NLRelAux+NLAux+NLLinkingverb+NLVerb;
 /*		829. In bepaalde omstandigheden zal zij gedwongen zijn aanvullend verlof te nemen. NOT. Omdat hij al lachend zijn kaart in ontvangst nam én naderhand toegaf dat het met voorbedachten rade was, volgde de sanctie.
 1596;40;NLPartrel+NLPrespartAdj;NLPartrel;
@@ -1642,10 +1730,10 @@
 /* Reflexive pronoun
 124;40;NLRefl|NLVerb;NLVerb|+Join;
 /*		124. Zie hoe de kat zich wast!
-157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
-/*		157. De portier heeft zich niet vergist.
 125;40;NLVerb|NLRefl;NLVerb|+Join;
 /*		125. De groep bereidt zich voor op de beursintroductie.
+157;40;NLRefl|.NLAdvTemp|NLNiet;NLVerb|*|*;
+/*		157. Met de secularisering groeide het deel van de bevolking dat zich niet rekende tot een van de zuilen.
 500;40;"ik"|NLVerb|"me":"mij";NLSubjpron|NLVerb|+Join;
 /*		500. Ik verveel me.
 
@@ -1756,103 +1844,6 @@
 /*		1373. Als de buitenlandse vraag in de komende kwartalen terugvalt, zal de groei weinig steun ondervinden van de consumentenbestedingen.
 
 
-/* PHASE 55: TIME ATTRIBUTE EXPANSION
-/* ==================================
-/* Preparation: remove Time attribute for Season and Time of day without time meaning
-1818;55;NLAttradj|NLSeason:NLTimeofday;*|-NLTime;
-/*		1818. Economen wezen toen onder andere de zachte winter aan als verklaring. Tulpen kunnen niet in een warm klimaat worden gekweekt, omdat ze een koude nacht en een koude winter nodig hebben om te kunnen groeien.
-1819;55;NLPrep|NLArt|NLAttradj|NLSeason:NLTimeofday;*|*|*|+NLTime;correction of r1818
-/*		1819. Ze keek op de partijbijeenkomst in Nieuwpoort vooruit naar het politieke najaar.
-
-/* Add expansion for 'om' plus HOUR
-1822;55;"om"+^NLTimeBegin|NLHour:NLDigitaltime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
-/*		1822. De verkoop van nieuwe woningen volgt om 16 uur. Patiënt overlijdt om 17u10.
-1826;55;"om"+NLAddExpansion+^NLTimeBegin|NLPathRelevant|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1826. Het cijfer van de bevolking van elke kieskring wordt om de tien jaar vastgesteld door een volkstelling of door enig ander middel, bepaald door de wet.
-
-/* Add expansion for 'voor het eerst'
-1828;55;"voor het eerst"|"in"|NLTimeconcept:NLCon+NLTime|.typeConcept|^typeConcept;+NLTimeBegin+NLTime|*|*|*|+NLTimeStop;
-/*		1828. 2009 is een kantelmoment, voor het eerst in jaren stellen we een negatieve evolutie vast van de gemiddelde prijs. In de bouw lijkt het dieptepunt bereikt: voor het eerst in meer dan een jaar tijd verbeterde deze deelindicator voor twee maanden op rij.
-1831;55;"voor het eerst"|"sinds"|NLAdvTime|^NLAnyLabel;+NLTimeBegin+NLTime|*|*|+NLTimeStop;
-/*		1831. De index nestelde zich voor het eerst sinds oktober vorig jaar comfortabel boven de 2.300 punten-grens.
-
-/* Add expansion after specific prepositions (including range of numbers)
-1841;55;"van"+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|"tot":"tot en met"|.NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1841. De bus rijdt alleen op werkdagen, van 6 tot 21 uur. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Geringe hoogteverschillen komen voor in het oosten en zuiden van het land, grotendeels veroorzaakt tijdens de voorlaatste ijstijd, het Saalien van 238.000 tot 128.000 jaar geleden.
-1857;55;"van"+^NLTimeBegin|*NLTime|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1857. Het officiële vertrekpunt van de route is een vierkantshoeve waar men van woensdag tot en met zondag telkens van 10 tot 18 uur terecht kan voor uitleg. Van 1989 tot 1994 zetelde hij in het Europees parlement.
-1840;55;^NLTimeBegin|NLNumber+NLAddExpansion|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;*|+NLTimeBegin|*|*|+NLTimeStop;
-/*		1840. We raden haar aan om 4 tot 6 weken geen sport te doen. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. 
-1850;55;"op"+^NLTimeBegin|NLDay|NLComma|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1850. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag.
-1851;55;"op"+^NLTimeBegin|NLNumber|NLComma|NLNumber|NLAndOr|NLAdvTime+NLMonth|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1851. Kunstenaars en experts komen samen op 24, 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten.
-1849;55;"op"+^NLTimeBegin|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1849. De trekkingen van de lotto zijn op donderdag en zaterdag.
-1848;55;"op":"tussen"+^NLTimeBegin|NLNumber|NLAndOr|NLMonth:NLHour|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1848. Kunstenaars en experts komen samen op 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten. Op weekdagen piekt de verkoop tussen 16 en 17 uur.
-1845;55;"op"+^NLTimeBegin|NLAdvTime+NLDay:NLMonth:NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
-/*		1845. Hoewel hij er nogal weigerachtig tegenover staat, wordt hij toch bedacht met een kleine muzikale hommage op 16 juli om 15.00 uur.
-1858;55;"op"+NLAddExpansion+^NLTimeBegin|."een"|NLCon:NLTimeconcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1858. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Momenteel staat hij nog altijd op negen seconden van zijn opvolger. NOT. De officier bepaalde haar eis gisteren op vier jaar cel.
-1870;55;"op"+^NLTimeBegin|"een":"de"|.NLAttradj|NLTimeconcept+^NLSeason|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1870. Of een stevige pasta op de avond vóór de koers. NOT. De lente volgt op de winter en wordt gevolgd door de zomer.
-1869;55;"op"+^NLTimeBegin|.NLArt|.NLAttradj|NLAdvTime+^NLTimes|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1869. Maar op het eind van de negentiende eeuw scheurde het museum zich af. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. NOT. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag. NOT. De totale overnameprijs is gebaseerd op circa vijf maal de EBIT en wordt in contanten voldaan.
-
-/* Expansion for consecutive time indications (including range of numbers)
-1864;55;NLPrep+NLPrepTime+^NLTimeBegin|NLArt|*NLTime|NLAndOr|NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|+NLTimeStop;
-/*		1864. In de jaren '50 en '60 van de vorige eeuw had het paard ook al een naam: "Majestueuzo".
-1836;55;NLPrep+NLPrepTime:"op"+^NLTimeBegin|NLArt|*NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
-/*		1836. Sinterklaas en zijn helper komen volgens de overlevering in de nacht van 5 december in Nederland en 6 december in België langs de schoorsteen binnen in alle huizen om geschenken te brengen voor de kinderen die er wonen. Het IT-bedrijf heeft in het eerste kwartaal van zijn gebroken boekjaar 18 procent minder omzet geboekt. Op de eerste dag van het nieuwe schooljaar werd, geheel volgens traditie, de vlag gehesen. Deze maat was proefondervindelijk ontstaan en passend bij de gemiddelde lengte van wielrenners in de jaren vijftig en zestig in de 20e eeuw.
-1868;55;NLTimeconcept:NLBeginconcept|"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1868. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt. De eerste dag van de meteorologische lente. NOT. De balanstraining bestond uit drie trainingssessies per week van maximaal dertig minuten.
-1856;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|+NLTimeStop;
-/*		1856. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
-1839;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1839. Dat moest het mogelijk maken dat militairen hun volledige werkweek presteerden in vier in plaats van vijf dagen.
-1888;55;NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1888. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
-1889;55;NLNumber:NLOrdnum+NLAddExpansion|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|+NLTimeStop;
-/*		1889. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
-1837;55;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1837. De patiënt wordt op 29 januari 2006 in de vroege morgen opgenomen als een polytrauma patiënt na een verkeersongeval.
-1855;55;"nacht"|"van"|*NLTime|"op"|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|*|+NLTimeStop;
-/*		1855. Nacht van 19/6 op 20/6: zelf extubatie met opgeblazen ballon. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt.
-1835;55;NLPrep+NLPrepTime+^NLTimeBegin|*NLTime|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime+^NLAttradj|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1835. Daarna werden in december 2002 en begin januari 2003 de nodige miljoenen overgemaakt. Tulpenbollen worden gewoonlijk in oktober en november geplant. De omzet bedroeg over het vierde kwartaal EUR1,008 miljard tegen EUR956,5 miljoen over dezelfde periode in 2006. NOT. Raadpleegt via spoedopname tijdens nacht wegens plots opgetreden blafhoest.
-1833;55;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1833. In het recyclagebedrijf, dat wagens en metalen recycleert, is maandag kort voor de middag een omvangrijke brand ontstaan.
-1815;55;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1815. De service provider gaf meer inzicht in de groei van het aantal abonnees in het fiscale vierde kwartaal, en dat wordt door de markt positief ontvangen. De bloeiperiode vond plaats in de 'gouden' zeventiende eeuw. Het verhaal dat zich binnen de 24 uur voltrekt, speelt zich af in Mexico.
-1821;55;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1821. Het vertrouwen van de ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen. Indien de griep in de komende weken sterke uitbreiding zou nemen in ons land, zal de overheid overschakelen naar een distributiesysteem waarbij de huisartsen rechtstreeks bevoorraad worden. Het bedrijf staat woensdag rond 10.45 uur 1,1% hoger op EUR34,65.
-1873;55;"voor"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
-/*		1873. Het vertrouwen van de Belgische ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen.
-1866;55;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLAdvStruct:NLArt:NLAttradj:NLGeen|."periode"|*typeConcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
-/*		1866. Eerder raakte al bekend dat de Duitse economie in het eerste kwartaal het sterkst groeide in twaalf jaar tijd. Na twaalf dagen Intensieve Zorgen kan hij getransfereerd worden naar de afdeling Thoracovasculaire Heelkunde voor verdere follow up. De pers zit hem op de hielen, want het is nu al de zoveelste diefstal in nog geen week tijd. 
-1880;55;NLDay|"tot":"tot en met"|NLDay|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
-/*		1880. Sinds 1 september 2008 rijdt de parkshuttle weer maandag tot en met vrijdag.
-1881;55;NLMonth|"tot":"tot en met"|NLMonth|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
-/*		1881. In de periode januari tot juni steeg de verkoop van de fotoboeken met 75 procent.
-
-/* Expand further left
-1853;55;NLAdvTime+^NLTimeBegin|NLTimeBegin;+NLTimeBegin|*;
-/*		1853. Donderdag om half twaalf werd de laatste stembus geleegd.
-
-/* Move attribute markers to relevant entity
-1863;55;NLCon:NLTimeconcept+NLTime|.typeConcept+^NLTime:NLTimeStop|typeConcept+NLTimeStop|.typeConcept|typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|-NLTimeStop|*|+NLTimeStop;correction: move TimeStop to next relevant entity when a Time attribute is on the same Concept
-/*		1863. Dit zou dus wel eens kunnen betekenen dat mensen eigenlijk maar zo'n 4 tot 5 uur slaap nodig hebben per nacht. Na een presentatie over de batterijstrategie van het concern schoot het aandeel in enkele dagen tijd bijna 20 procent hoger.
-1867;55;typeConcept+NLTime|.typeConcept+^NLTimeStop|typeConcept+NLTimeStop|.typeConcept|^typeConcept;*|*|-NLTimeStop|*|+NLTimeStop;
-/*		1867. Vooral het duurdere segment, de villa's, kenden een sterke prijsdalingen van 5,6 procent in een jaar tijd. Na een jaar afwezigheid - nodig om me op te laden voor een vervolg van mijn theaterdroom - kom ik een zeer persoonlijk programma.
-1816;55;NLTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|+NLTimeStop;
-/*		1816. De Amerikaanse keten heeft in het vierde kwartaal van het gebroken boekjaar 2008/09 de nettowinst met 16 procent zien stijgen. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
-
-/* Clean-up
-1854;55;NLTimeBegin+NLTimeStop;-NLTimeStop;
-/*		1854. Ik heb een afspraak gemaakt op donderdag 04.11.2004 om 14.00 uur.
-
-
 /* PHASE 60: DETECT ENUMERATIONS
 /* ===============================
 784;60;*NLArt:NLPoss:NLAttradj:NLCon:NLNumberConcept|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLCon:NLNumberConcept|NLComma|*NLArt:NLPoss:NLAdvStruct:NLAttradj:NLCon:NLNumberConcept|NLAndOr|.NLArt:NLPoss:NLAdvStruct|NLAttradj:NLNumberConcept:NLCon;+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList|+NLList;4-element enumeration
@@ -1903,24 +1894,40 @@
 
 /* PHASE 63: DETECT SENTENCE STRUCTURE
 /* =====================================
+/* Preparation: disambiguation 'sinds'
+1953;63;NLArt:NLPoss:NLAttradj:NLCon:NLPrep:NLAdvTime:NLAdvTemp:NLEr;+NLDummy;use Dummy to use pattern of more than 8 elements
+/*		1953. De leider verscheen niet meer in het openbaar sinds ernstige gezondheidsproblemen hem er eind juli 1996 toe dwongen de macht over te dragen aan zijn broer.
+1954;63;NLSubjpron:NLObjpron:NLPoss:"als";+NLDummy;use Dummy to use pattern of more than 8 elements
+/*		1954. Al is dat verbeterd sinds hij een kritische journalist van de Chicago Tribune uitdaagde tot een bokswedstrijd.
+1956;63;"sinds"|.NLArt|NLAdvTime:NLTimeconcept:NLCon+NLTime;+NLDummy2|*|*;use Dummy2 to mark when a time indication directly follows 'sinds'
+/*		1956. Sinds vorig jaar woedt er een mazelen-epidemie in Zwitserland. De taalgrens in België komt ruwweg overeen met de Romeinse heirbaan, die sinds de 4de eeuw als culturele grens fungeerde.
+1957;63;^NLOndvw:NLVerb|"sinds"+^NLDummy2|*NLDummy|NLVerb+NLAux:NLRelAux|NLPartrel;*|-NLPrep-NLPrepTime+NLOndvw|*|*|*;use Dummy to use pattern of more than 8 elements
+/*		1957. Sinds de dienstplicht is opgeschort bestaat de krijgsmacht volledig uit vrijwillig dienend personeel. NOT. Middenin het land ligt het IJsselmeer, de voormalige Zuiderzee, een grote binnenzee die sinds de voltooiing   van de Afsluitdijk in 1932 van de Waddenzee is afgesloten en sindsdien zoetwater bevat. NOT. Gezien patient geen bijkomende complicaties deed sinds zijn opname werd besloten hem te transferen. 
+1952;63;"sinds"+^NLDummy2|*NLDummy|NLVerb+^NLAux:NLmAux:NLRelAux;-NLPrep-NLPrepTime+NLOndvw|*|*;use Dummy to use pattern of more than 8 elements
+/*		1952. Sinds de instelling sloot, zorgen mijn vrouw en ik voor hem.
+1955;63;NLDummy:NLDummy2;-NLDummy-NLDummy2;clean-up Dummies
+/*		1955. Sinds maart gaan het container- en het staalvervoer er wel licht op vooruit.
+
+/* Add markers to detect the beginning of a phrase
+/*	Punctuation
 1247;63;SBegin:NLColon:"-"|^NLVerb;*|+NLPBegin;
 /*		1247. Walvissen zijn zoogdieren.
-1249;63;SBegin:NLColon:"-":NLComma|NLVerb;*|+NLPBegin;
-/*		1249. Zijn er nog nootjes?
+1249;63;SBegin:NLColon:"-":NLComma|NLVerb:NLPartrel;*|+NLPBegin;
+/*		1249. Zijn er nog nootjes? Voordat de klei gebruikt kan worden voor het maken van bakstenen, worden eventuele metaaldelen uit de klei met een elektromagneet verwijderd. Auteursrechten worden pas zes maanden na afsluiting van het boekjaar van het jaar waarin hij zijn boek publiceerde, uitbetaald. 
 1263;63;NLComma:NLAndOrBut+^NLList|NLSubjpron|^"van";*|+NLPBegin|*;
 /*		1263. Al kan je niets zien, je kan het wel horen.
 1303;63;NLComma+^NLList|"dan":"zo":"aldus";*|+NLPBegin;
 /*		1303. Als deze sector niet horen wil, dan moet ze maar voelen.
 1481;63;NLComma|NLAdvModality;*|+NLPBegin;
 /*		1481. Er komen buien, waarschijnlijk met smeltende sneeuw.
+
+/*	Conjunctions
 1301;63;"maar"+NLAndOrBut;+NLPBegin;
 /*		1301. Soms deden we alsof we sliepen, maar dat hielp niet.
-1291;63;NLOndvw;+NLPBegin;
-/*		1291. Een hele eer, want zij zijn onze grote voorbeelden.
 1296;63;"gezien"+NLOndvw;+NLPBegin;
 /*		1296. Dat kan ik ook begrijpen, gezien zijn financiële handel en wandel.
-1288;63;NLOndvw:NLRelpron|.^NLVerb+^NLInf+^NLPBegin|*NLVerb;+NLPBegin|*|+NLPEnd;
-/*		1288. Zij heeft aangegeven dat ze zich per heden in Nieuw-Zeeland gaat vestigen.
+1288;63;NLOndvw:NLRelpron+^"als"|.^NLVerb+^NLInf+^NLPBegin|*NLVerb;+NLPBegin|*|+NLPEnd;
+/*		1288. Zij heeft aangegeven dat ze zich per heden in Nieuw-Zeeland gaat vestigen. Een hele eer, want zij zijn onze grote voorbeelden. NOT. Hij was onder druk van de raad opgestapt als chief executive officer van het bedrijf.
 1308;63;"om"+NLOndvw|.^NLVerb+^NLInf+^NLPBegin+^NLRTe|NLRTe|*NLInf;+NLPBegin|*|*|+NLPEnd;
 /*		1308. Ik denk dat ze alles doen om dat te voorkomen.
 1314;63;NLPEnd|NLPrep+^NLConj+^NLOndvw|.NLArt:NLPoss|*NLAttradj:NLCon|NLVerb;-NLPEnd|*|*|+NLPEnd|+NLPBegin;
@@ -1941,10 +1948,20 @@
 /*		1379. Als de behandeling beter wordt, blijven patiënten immers langer leven en wordt ook de mogelijke besmettingshaard groter.
 1380;63;NLInf+^NLmAux|NLAndOr+NLPBegin|*NLmAux:NLRelAux|NLPunctuation:SEnd;*|-NLPBegin|*|*;
 /*		1380. Hij doet dat alleen maar als de productiefactoren ter plaatse gunstig zijn en blijven.
+
+/*	subclause that doesn't start with a conjunction
 1385;63;NLRTe|NLInf|NLArt:NLPoss:NLNiet;*|*|+NLPBegin;
 /*		1385. Ik betreur het dat de mogelijkheid zijn gevangenisstraf op humanitaire gronden uit te stellen niet is benut. Aannemers en ontwikkelaars moeten om te overleven de minderopbrengsten van de sociale woningen compenseren door de prijs van niet-sociale woningen te verhogen.
-1309;63;NLOndvw:NLRelpron:NLConj|*^NLInf+^NLOndvw+^NLConj+^NLRelpron|*NLInf|NLVerb:NLRelAux+^NLInf|^NLAndOrBut+^NLPunctuation+^SEnd;*|*|*|+NLPBegin|*;
-/*		1309. Er is immers geen wet en ook geen contract, dus privépersonen kunnen zich niet tot een rechter wenden.
+1309;63;NLOndvw:NLRelpron:NLConj|*^NLInf+^NLOndvw+^NLConj+^NLRelpron|*NLInf|NLVerb:NLRelAux+^NLInf:NLPartrel|^"zijn":"worden":NLAndOrBut:NLPunctuation:SEnd;*|*|*|+NLBeginrel+NLPBegin|*;
+/*		1309. Sinds we elkaar kennen bellen we regelmatig. NOT. De analist merkt op dat zo'n stap wel moeilijk te verkopen zou zijn. NOT. Indien uit deze schatting blijkt dat meer dan één van de criteria zullen overschreden worden gedurende het eerste boekjaar.
+1966;63;NLOndvw:NLRelpron:NLConj|*^NLVerb+^NLOndvw+^NLConj+^NLRelpron|NLVerb|NLVerb:NLRelAux+^NLInf:NLPartrel|^"zijn":"worden":NLAndOrBut:NLPunctuation:SEnd;*|*|*|+NLBeginrel+NLPBegin|*;
+/*		1966. Nadat ze een aspirientje nam loste haar gezicht als het ware op. NOT. De bestuursvoorzitter, die zegt dat hij strenger is geworden in het beoordelen van de projecten.
+1392;63;NLRelAux|NLPartrel|NLVerb+^NLRelAux+^NLmAux;*|*|+NLPBegin;
+/*		1392. Ook als die diagnose wordt bijgesteld ziet het er niet goed uit voor de 29-jarige Pool.
+1975;63;NLOndvw|NLVerb|NLPrep|NLAdvTime|.NLArt:NLPoss|*NLAttradj:NLNumber:NLCon;*|*|*|*|+NLPBegin|*;
+/*		1975. Hij verwacht voor het boekjaar dat eindigt op 30 juni 2008 een jaaromzet van EUR103 miljoen ($150 miljoen) en heeft 300.000 klanten. 
+
+/*	punctuation, part 2
 1310;63;NLPEnd|NLPunctuation+^NLList|^NLPBegin;*|*|+NLPBegin;
 /*		1310. En dat kan, wat bevoegdheden betreft, in de toekomst alleen maar toenemen.
 1383;63;NLPartrel|NLPunctuation+^NLList|^NLPBegin+^NLPartrel+^SEnd;*|*|+NLPBegin+NLDummy;
@@ -1953,8 +1970,182 @@
 /*		1384. U hebt dit zojuist zelf onderstreept, mevrouw de commissaris.
 1386;63;NLDummy;-NLDummy;
 /*		1386. De besmetting wordt niet alleen van de moeder op het jong overgebracht, maar ook via de velden en de weilanden.
-1392;63;NLRelAux|NLPartrel|NLVerb+^NLRelAux+^NLmAux;*|*|+NLPBegin;
-/*		1392. Ook als die diagnose wordt bijgesteld ziet het er niet goed uit voor de 29-jarige Pool.
+
+/* PHASE 64: TIME ATTRIBUTE EXPANSION
+/* ==================================
+/* Preparation: remove Time attribute for Season and Time of day without time meaning
+1818;64;NLAttradj|NLSeason:NLTimeofday;*|-NLTime;
+/*		1818. Economen wezen toen onder andere de zachte winter aan als verklaring. Tulpen kunnen niet in een warm klimaat worden gekweekt, omdat ze een koude nacht en een koude winter nodig hebben om te kunnen groeien.
+1819;64;NLPrep|NLArt|NLAttradj|NLSeason:NLTimeofday;*|*|*|+NLTime;correction of r1818
+/*		1819. Ze keek op de partijbijeenkomst in Nieuwpoort vooruit naar het politieke najaar.
+ 
+/* Add expansion for 'om' plus HOUR
+1822;64;"om"+^NLTimeBegin|NLHour:NLDigitaltime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1822. De verkoop van nieuwe woningen volgt om 16 uur. Patiënt overlijdt om 17u10.
+
+/* Add expansion for 'voor het eerst'
+1828;64;"voor het eerst"|"in"|NLTimeconcept:NLCon+NLTime|.typeConcept|^typeConcept;+NLTimeBegin+NLTime|*|*|*|+NLTimeStop;
+/*		1828. 2009 is een kantelmoment, voor het eerst in jaren stellen we een negatieve evolutie vast van de gemiddelde prijs. In de bouw lijkt het dieptepunt bereikt: voor het eerst in meer dan een jaar tijd verbeterde deze deelindicator voor twee maanden op rij.
+1831;64;"voor het eerst"|"sinds":"na"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1831. De index nestelde zich voor het eerst sinds oktober vorig jaar comfortabel boven de 2.300 punten-grens. Nu, na vier jaar, is haar gezicht weer normaal en toont ze zichzelf voor het eerst na de ziekte weer aan de buitenwereld.
+
+/* Add expansion after specific prepositions (including range of numbers)
+1921;64;"tussen"|*NLTime|"en":"tot"|*NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1921. De kaarten werden tussen eind 2006 en midden 2008 gekopieerd. Ergens tussen 3,5 tot 4,5 miljard jaar geleden ontstond er leven op aarde.
+1841;64;"van"+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|"tot":"tot en met":"t.e.m."|.NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1841. De bus rijdt alleen op werkdagen, van 6 tot 21 uur. De pest is een infectieziekte die van de 14e tot en met de 19e eeuw in Europa veelvuldig voorkwam. Geringe hoogteverschillen komen voor in het oosten en zuiden van het land, grotendeels veroorzaakt tijdens de voorlaatste ijstijd, het Saalien van 238.000 tot 128.000 jaar geleden.
+1857;64;"van"+^NLTimeBegin|.NLArt|*NLTime|"tot":"tot en met":"t.e.m.":"tot in"|."in":NLArt|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1857. Het officiële vertrekpunt van de route is een vierkantshoeve waar men van woensdag tot en met zondag telkens van 10 tot 18 uur terecht kan voor uitleg. Van 1989 tot 1994 zetelde hij in het Europees parlement. Pompeï was ook de naam van een Romeinse provinciestad met ongeveer 20.000 inwoners die bestond van de 7e eeuw voor Christus tot in de eerste eeuw na Christus.
+1840;64;^NLTimeBegin|NLNumber+NLAddExpansion|"tot":"tot en met"|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;*|+NLTimeBegin|*|*|+NLTimeStop;
+/*		1840. We raden haar aan om 4 tot 6 weken geen sport te doen. Het geneesmiddel heeft pas effect na 6 tot 12 maanden, en moet levenslang worden ingenomen. 
+1926;64;typeConcept:typeBeginEndConcept+NLTime|"op"|*NLTime|^NLAnyLabel;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1926. De camera's bestrijken de volledige oppervlakte en zullen 24u op 24 en 7 dagen op 7 filmen.
+1850;64;NLOp+^NLTimeBegin|NLDay|NLComma|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1850. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag.
+1851;64;NLOp+^NLTimeBegin|NLNumber|NLComma|NLNumber|NLAndOr|NLAdvTime+NLMonth|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1851. Kunstenaars en experts komen samen op 24, 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten.
+1938;64;NLOp+^NLTimeBegin|NLDate|NLAndOr|NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1938. Lichte dooi met zacht ijs was er tijdens de tochten op 2 januari 1909 en 7 februari 1912.
+1849;64;NLOp+^NLTimeBegin|NLDay|NLAndOr|NLDay|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1849. De trekkingen van de lotto zijn op donderdag en zaterdag.
+1848;64;NLOp:"tussen"+^NLTimeBegin|NLNumber|NLAndOr|NLMonth:NLHour|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1848. Kunstenaars en experts komen samen op 25 en 26 januari in Brussel om de betrokkenheid bij het probleem te vergroten.
+1845;64;NLOp+^NLTimeBegin|NLAdvTime+NLDay:NLMonth:NLDate|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1845. Hoewel hij er nogal weigerachtig tegenover staat, wordt hij toch bedacht met een kleine muzikale hommage op 16 juli om 15.00 uur.
+1858;64;NLOp+NLAddExpansion+^NLTimeBegin|."een"|NLCon:NLTimeconcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1858. Wat je in België op de spoedafdeling twee keer per jaar meemaakt, maakte je daar drie tot vier keer op een halfuur mee. Momenteel staat hij nog altijd op negen seconden van zijn opvolger. NOT. De officier bepaalde haar eis gisteren op vier jaar cel.
+1870;64;NLOp+^NLTimeBegin|."een":"de":"niet"|.NLAttradj|NLTimeconcept+^NLSeason|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTime|+NLTimeStop;add Time attribute for Timeconcepts without Time attribute
+/*		1870. Of een stevige pasta op de avond vóór de koers. Ik hoop ook dat op niet al te lange termijn een fundamentele en leesbare tekst zal worden opgesteld. NOT. De lente volgt op de winter en wordt gevolgd door de zomer.
+1869;64;NLOp+^NLTimeBegin|.NLArt|NLAdvTime+^NLTimes|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1869. Maar op het eind van de negentiende eeuw scheurde het museum zich af. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. NOT. De trekkingen van de lotto zijn op dinsdag, donderdag en zaterdag. NOT. De totale overnameprijs is gebaseerd op circa vijf maal de EBIT en wordt in contanten voldaan.
+1917;64;"aan":"bij"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1917. De orderportefeuille is licht gedaald ten opzichte van het recordniveau aan het einde van 2007. De vrouwen komen hier bij het begin van de zomer om te bruinen. 
+1989;64;"op"+NLAddExpansion|"tijd"|^NLAnyLabel;+NLTimeBegin|*|+NLTimeStop;
+/*		1989. Het obstakeldetectiesysteem trad wel in werking, maar omdat dit is berekend op stilstaande obstakels op de weg en niet op een naderende shuttle, stonden ze niet meer op tijd stil.
+
+/* Expansion for consecutive time indications (including range of numbers)
+1915;64;typeConcept:typeBeginEndConcept+NLTime|NLAndOr+NLAddExpansion|typeConcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1915. De studie bevroeg de ouders van 5.000 kinderen die zes maanden en één jaar na de geboorte een vragenlijst moesten invullen. Dat gebeurt waarschijnlijk de komende weken of maanden, maar het kan tot een jaar duren.
+1864;64;NLPrep+NLPrepTime+^NLTimeBegin|NLArt|*NLTime|NLAndOr|NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|+NLTimeStop;
+/*		1864. In de jaren '50 en '60 van de vorige eeuw had het paard ook al een naam: "Majestueuzo".
+1836;64;NLPrep+NLPrepTime:NLOp+^NLTimeBegin|.NLArt|*NLTime|"van":NLAndOr|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;
+/*		1836. Sinterklaas en zijn helper komen volgens de overlevering in de nacht van 5 december in Nederland en 6 december in België langs de schoorsteen binnen in alle huizen om geschenken te brengen voor de kinderen die er wonen. Het IT-bedrijf heeft in het eerste kwartaal van zijn gebroken boekjaar 18 procent minder omzet geboekt. Op de eerste dag van het nieuwe schooljaar werd, geheel volgens traditie, de vlag gehesen. Deze maat was proefondervindelijk ontstaan en passend bij de gemiddelde lengte van wielrenners in de jaren vijftig en zestig in de 20e eeuw.
+1868;64;NLTimeconcept+^NLHoliday|NLPrepTime:"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin+NLTime|*|*|*|+NLTimeStop;add Time attribute for Timeconcepts without Time attribute
+/*		1868. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt. In de vergelijkbare periode in 2007 was dat 0%. NOT. De balanstraining bestond uit drie trainingssessies per week van maximaal dertig minuten. NOT. Hij  wijst er op dat de identieke omzetgroei behalve door de vroege Pasen positief werd beinvloed door het feit dat oudjaarsdag in het eerste kwartaal viel en door de inflatie van de voedselprijzen.
+1940;64;NLBeginconcept+NLTime|NLPrepTime:"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1940. De eerste dag van de meteorologische lente. 
+1856;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|+NLTimeStop;
+/*		1856. Zo ontstond de enorme collectie, die een uniek beeld geeft van de internationale en intercontinentale relaties en contacten in de 16de, 17de en 18de eeuw.
+1839;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt|NLNumber:NLOrdnum+NLAddExpansion|NLPrep:NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1839. Dat moest het mogelijk maken dat militairen hun volledige werkweek presteerden in vier in plaats van vijf dagen.
+1888;64;NLNumber:NLOrdnum+NLAddExpansion|NLComma|NLNumber:NLOrdnum|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1888. Niet alleen zijn deze patiënten nog altijd in leven, bijna zes, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1889;64;NLNumber:NLOrdnum+NLAddExpansion|NLAndOr|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|NLPrep+NLPrepTime;+NLTimeBegin|*|*|+NLTimeStop;
+/*		1889. Niet alleen zijn deze patiënten nog altijd in leven, vijf en twee jaar na hun transplantatie, geen enkele patiënt heeft tot op heden enige tekens van afstoting vertoond.
+1837;64;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1837. De patiënt wordt op 29 januari 2006 in de vroege morgen opgenomen als een polytrauma patiënt na een verkeersongeval.
+1855;64;"nacht"|"van"|*NLTime|"op"|NLAdvTime|^NLAnyLabel;+NLTimeBegin|*|*|*|*|+NLTimeStop;
+/*		1855. Nacht van 19/6 op 20/6: zelf extubatie met opgeblazen ballon. Voorlopig hebben de goede skiomstandigen, dankzij de sneeuwval in de nacht van vrijdag op zaterdag, nog geen enorme toeloop veroorzaakt.
+1835;64;NLPrep+NLPrepTime+^NLTimeBegin|*NLTime|NLPrep|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime+^NLAttradj|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1835. De omzet bedroeg over het vierde kwartaal EUR1,008 miljard tegen EUR956,5 miljoen over dezelfde periode in 2006. NOT. Raadpleegt via spoedopname tijdens nacht wegens plots opgetreden blafhoest.
+1833;64;NLAdvTime|NLPrep+NLPrepTime|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1833. In het recyclagebedrijf, dat wagens en metalen recycleert, is maandag kort voor de middag een omvangrijke brand ontstaan.
+1815;64;NLPrep+NLPrepTime+^NLTimeBegin|.NLArt:NLAttradj|*typeConcept+NLTime|^typeConcept;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1815. De service provider gaf meer inzicht in de groei van het aantal abonnees in het fiscale vierde kwartaal, en dat wordt door de markt positief ontvangen. De bloeiperiode vond plaats in de 'gouden' zeventiende eeuw. Het verhaal dat zich binnen de 24 uur voltrekt, speelt zich af in Mexico.
+1821;64;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLArt:NLAttradj|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1821. Het vertrouwen van de ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen. Indien de griep in de komende weken sterke uitbreiding zou nemen in ons land, zal de overheid overschakelen naar een distributiesysteem waarbij de huisartsen rechtstreeks bevoorraad worden. Het bedrijf staat woensdag rond 10.45 uur 1,1% hoger op EUR34,65. NOT. We kunnen niet spreken van een goed rapport voor 2009.
+1873;64;"voor"+NLAddExpansion+^NLTimeBegin|.NLArt|NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|+NLTimeStop;
+/*		1873. Het vertrouwen van de Belgische ondernemers in de economie is in augustus voor de vijfde maand op rij gestegen.
+1866;64;NLPrep+NLPrepTime+^"voor":NLTimeBegin|.NLAdvStruct:NLArt:NLAttradj:NLGeen|."periode"|*NLCon:NLTimeconcept:NLNumber:NLEndconcept+NLTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1866. Eerder raakte al bekend dat de Duitse economie in het eerste kwartaal het sterkst groeide in twaalf jaar tijd. Na twaalf dagen Intensieve Zorgen kan hij getransfereerd worden naar de afdeling Thoracovasculaire Heelkunde voor verdere follow up. De pers zit hem op de hielen, want het is nu al de zoveelste diefstal in nog geen week tijd. 
+1981;64;NLCon+NLTime+^NLTimes|"van"|.NLArt:NLPoss:NLAttradj|NLTimeconcept:NLCon:NLAdvTime:NLEndconcept+NLTime|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1981. De fusiegroep sprak in mei al de verwachting uit dat de eerste twee kwartalen van het boekjaar 2009/2010 moeilijk zouden worden en blijft bij die prognose.
+1880;64;NLDay|"tot":"tot en met":"t.e.m."|NLDay|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1880. Sinds 1 september 2008 rijdt de parkshuttle weer maandag tot en met vrijdag.
+1881;64;NLMonth|"tot":"tot en met":"t.e.m."|NLMonth|^NLAnyLabel;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1881. In de periode januari tot juni steeg de verkoop van de fotoboeken met 75 procent.
+
+/* Expand further left
+1853;64;NLAdvTime+^NLTimeBegin|NLTimeBegin;+NLTimeBegin|*;
+/*		1853. Donderdag om half twaalf werd de laatste stembus geleegd.
+
+/* Expand to non-time-related Concepts
+/*	NA, VOOR
+1949;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+NLAddExpansion|"voor"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;add expansion
+/*		1949. Een Belgische school heeft drie dagen voor het weekend een e-mail gestuurd aan alle ouders.
+1912;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+^NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLTimeBegin|*|*|*|+NLTimeStop;add expansion
+/*		1912. Eén jaar na de bankencrisis blijkt dat de grootbanken hun personeelsbeleid in België scherp hebben bijgestuurd.
+1913;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+^NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|*|*|*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1913. Een maand na de lancering van het sms-ticket heeft de vervoersmaatschappij al 50.000 sms-tickets verkocht.
+1910;64;typeConcept+NLTime|"van"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1910. Dat zegt weinig over het weer op de dag van het evenement en de kwaliteit van het ijs. 
+1908;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van"|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|*|*|*|*|*|*|+NLTimeStop;expand further to the right
+/*		1908. De verkiezing wordt, behoudens in geval van ontbinding der kamer, gehouden binnen drie maanden na de verkiezing van de leden van provinciale staten. 
+1907;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|"van":"of"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|*|*|*|+NLTimeStop;expand further to the right
+/*		1907. De behandeling dient in ieder geval binnen de 48 uur na optreden van de symptomen te worden gestart. De nieuwe kamers komen binnen vier maanden na het overlijden of de afstand in verenigde vergadering bijeen ten einde te besluiten omtrent de benoeming van een Koning. 
+1906;64;^NLYearnum:NLDate:NLMonth:NLDay|"na":"vóór"+NLTimeStop|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;*|-NLTimeStop|*|*|+NLTimeStop;expand further to the right
+/*		1906. Met name in het eerste jaar na een enkelverstuiking bestaat er een verhoogd risico op herhaling van dit letsel. In de maand vóór de herdenking organiseren wij altijd een retrospectieve hier in Hollywood, en dan zit de zaal afgeladen vol. NOT. Patiënt werd opgenomen op 24 juli na een val van een ladder ongeveer 6 meter hoog.
+
+/*	TIJDENS, GEDURENDE, SINDS
+/*Dummy is used to mark certain prepositions and 'en'/'of' to detect time expansion
+1983;64;"aan":"naar":"over":"van":"voor":"tegen":"met":"tussen";+NLDummy;add Dummy to use more than 8 elements in pattern in following rules
+/*		1983. In een tweede tijd kan dan eventueel hartchirurgie overwogen worden na overleg met patient en familie.
+1984;64;NLAndOr;+NLDummy;add Dummy to use more than 8 elements in pattern in following rules
+/*		1984. Opname ter observatie na neurotrauma en thoraxtrauma door aanrijding met fiets door derden.
+1960;64;"tijdens":"gedurende":"sinds":NLNa+NLPrepTime+^NLTimeBegin|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|*|*|*|*|+NLTimeStop;three prepositions or 'en'/'of'
+/*		1960. Even uitstappen tijdens een ritje van het circuit naar het station van Zandvoort, pakte zondagavond niet goed uit voor de chauffeur van een pendelbus. De trein kwam echter pas goed onder stoom na de publicatie van de Amerikaanse cijfers over de verkoop van bestaande woningen.
+1958;64;"tijdens":"gedurende":"sinds":NLNa+NLPrepTime+^NLTimeBegin|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|*|*|*|+NLTimeStop;two prepositions or 'en'/'of'
+/*		1958. "Ik voel dat de spanning afneemt, sinds het recente bezoek van ex-president Bill Clinton aan Pyongyang. Tijdens de regeringen van de toenmalige premiers Rabin en Peres van 1992 tot 1996. Na het advies van de Raad van State en de Nationale Arbeidsraad kunnen de uitgevers het systeem technisch realiseren. 
+1937;64;"tijdens":"gedurende":"sinds":NLNa+NLPrepTime+^NLTimeBegin|.NLArt:NLPoss:NLAttradj|*typeConcept|NLDummy|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|*|*|+NLTimeStop;1 preposition or 'en'/'of'
+/*		1937. Tijdens de crisis van de derde eeuw verdween het centrale gezag vrijwel geheel. Middenin het land ligt het IJsselmeer, de voormalige Zuiderzee, een grote binnenzee die sinds de voltooiing van de Afsluitdijk in 1932 van de Waddenzee is afgesloten en sindsdien zoetwater bevat. Beleggers denken dat de waarderingen op de beurs, na de recente rally van de aandelenmarkten, de verwachte winstcijfers te ver overtreffen. De afgelopen jaren zijn er verschillende berichten verschenen over ernstige bijwerkingen na behandeling met rimpelvullers. NOT. Patiënte verbleef gedurende 5 weken op de dienst Cardiologie. 
+1936;64;"tijdens":"gedurende":"sinds":NLNa+NLPrepTime+^NLTimeBegin|.NLArt:NLPoss:NLAttradj:NLList+^NLCon:NLVerb|*typeConcept|.NLAdvTime|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|*|*|+NLTimeStop;
+/*		1936. Tijdens de Franse Revolutie was het religieus verzet zeer sterk. Sinds de publicatie op 6 augustus ging het aandeel ruimschoots de helft hoger. Daarom is het wenselijk ze in een gecombineerde behandeling gedurende een zo kort mogelijke periode te gebruiken. Gedurende een eerste, verkennende ronde kwamen de luisteraars met maar liefst 1500 suggesties op de proppen. Het betreft een litteken opgelopen na een verwonding tijdens een skivakantie 2 jaar geleden. Na het warme weer van de afgelopen dagen, volgt er een afkoeling. Vlak na het ongeval werd zijn toestand nog als levensbedreigend aanschouwd. NOT. Tijdens de kick-off van het programma op 13 januari zullen ze starten met het koken van een gezonde maaltijd.
+1985;64;NLDummy;-NLDummy;clean-up temporary label
+/*		1985. In een tweede tijd kan dan eventueel hartchirurgie overwogen worden na overleg met patient en familie.
+
+/*	(ambiguous) time concept plus 'dat' or 'van'
+1986;64;NLPrepTime:NLOp+typeRelation|NLArt|NLTimeconcept|"van"|.NLArt:NLPoss:NLAttradj|*typeConcept|^NLAnyLabel;+NLBeginrel+NLTimeBegin|*|+NLTime|-NLTimeStop|*|*|+NLTimeStop;add Time attribute for Timeconcepts without Time attribute
+/*		1986. Bij klinisch onderzoek op het moment van opname was er partiële huidnecrose opgetreden.
+1942;64;NLPrepTime:NLOp+typeRelation|NLArt|NLTimeconcept|"dat"|*^NLPBegin:SEnd|NLPBegin:SEnd;+NLBeginrel+NLTimeBegin|*|+NLTime|-NLTimeStop|*|+NLTimeStop;add Time attribute for Timeconcepts without Time attribute
+/*		1942. Tegenwoordig is het Sinterklaasfeest een familiefeest en zetten kinderen hun schoen klaar vanaf het moment dat de Sint in het land is aangekomen. De onderhoudsplichtige echtgenoot kan de verzorgingskosten pas inbrengen als onderhoudsuitkering vanaf het jaar dat volgt op dat van de opname. Op het moment dat hij zijn wapen bovenhaalde, kon een alerte voorbijganger hem echter overmeesteren. 
+
+/* Include time indication following time span
+1959;64;NLPrep+NLTimeStop|.NLArt|NLAdvTime:NLTimeconcept|^NLAnyLabel;-NLTimeStop|*|*|+NLTimeStop;
+/*		1959. Sinds de Schoolpact-wet van 29 mei 1959 worden de katholieke scholen ook grotendeels door de staat gesubsidieerd.
+
+/* Expand to time-related subclause
+1909;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+NLTime+^NLYearnum:NLDate:NLMonth:NLHour|"nadat":"voordat":"gedurende hetwelk":"waarin"|.^NLPBegin:SEnd|NLPBegin:SEnd;+NLTimeBegin|-NLTimeStop|*|+NLTimeStop;
+/*		1909. En hele mooie dag, want het was prachtig strandweer en de laatste vrije dag voordat de basisscholen in het midden van het land weer begonnen. De gevolgen gaan in dat geval in vanaf het boekjaar dat volgt op het boekjaar gedurende hetwelk meer dan één van de criteria voor de tweede keer werden overschreden of niet meer werden overschreden. NOT. Patiënte overlijdt op 05/04/2005 nadat de familie afscheid heeft genomen. NOT. De viering werd ingesteld in 1950 nadat de vergadering alle landen die lid waren van de VN uitnodigde om deze gebeurtenis te vieren. NOT. De politie vond de houten hut rond 3 uur 's nachts nadat er een noodoproep was binnengekomen.
+1964;64;"sinds":"nadat":"voordat"+NLOndvw+^NLTimeBegin|*^NLPBegin:SEnd|NLPBegin:SEnd;+NLBeginrel+NLTimeBegin|*|+NLTimeStop;
+/*		1964. Een man liep op een camping brandwonden op nadat een gasvuurtje was ontploft.
+1979;64;"na"+NLTimeBegin|NLAdvTime|.NLPrep:NLArt:NLAttradj:NLCon|"te"|NLInf|.^NLPBegin:SEnd|NLPBegin:SEnd;*|*|-NLTimeStop|-NLTimeStop|*|*|+NLTimeStop;
+/*		1979. Het aandeel staat 1,1% hoger op EUR4,45 na eerder op de dag boven de EUR4,55 te hebben genoteerd. 
+
+/* Split relation
+1965;64;typeRelation|typeRelation+NLTimeStop;*|+NLBeginrel;
+/*		1965. Die schiet liefst 30 procent hoger nadat de moederholding bevestigde dat het zich garant stelt voor eventuele verliezen. 
+
+/* Move attribute markers to relevant entity
+1863;64;NLCon:NLTimeconcept+NLTime|.typeConcept+^NLTime:NLTimeStop|typeConcept+NLTimeStop+^NLCBegin|.typeConcept|typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|-NLTimeStop|*|+NLTimeStop;correction: move TimeStop to next relevant entity when a Time attribute is on the same Concept
+/*		1863. Dit zou dus wel eens kunnen betekenen dat mensen eigenlijk maar zo'n 4 tot 5 uur slaap nodig hebben per nacht. Na een presentatie over de batterijstrategie van het concern schoot het aandeel in enkele dagen tijd bijna 20 procent hoger.
+1867;64;typeConcept+NLTime|.typeConcept+^NLTimeStop|typeConcept+NLTimeStop+^NLCBegin|.typeConcept|^typeConcept;*|*|-NLTimeStop|*|+NLTimeStop;move TimeStop to next relevant entity when a Time attribute is on the same Concept
+/*		1867. Vooral het duurdere segment, de villa's, kenden een sterke prijsdalingen van 5,6 procent in een jaar tijd. Na een jaar afwezigheid - nodig om me op te laden voor een vervolg van mijn theaterdroom - kom ik een zeer persoonlijk programma. NOT. De joint venture heeft gedurende het jaar twee belangrijke investeringen gedaan. 
+1961;64;^NLDate|NLPunctuation+NLTimeStop|NLDate|NLPunctuation|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|-NLTimeStop|*|*|+NLTimeStop;move TimeStop from NonRelevant to next relevant entity, include date between punctuation marks
+/*		1961. Deze dame zou enkele uren voor de opname, 11/01/2006, gestuipt hebben en gedaald bewustzijn vertonen. Het boek zou uitkomen tijdens de 'Foire du Livre' (4-8 maart) in Brussel. 
+1816;64;NLTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;-NLTimeStop|*|+NLTimeStop;move TimeStop from NonRelevant to next relevant entity 
+/*		1816. De Amerikaanse keten heeft in het vierde kwartaal van het gebroken boekjaar 2008/09 de nettowinst met 16 procent zien stijgen. We spreken over de bescherming van de consument in de eenentwintigste eeuw, niet de consumentenbescherming in de negentiende noch die in de twintigste eeuw.
+
+/* Remove TimeStop in time span
+1923;64;NLTimeBegin|*^NLTimeStop|NLTimeStop;*|+NLInTimeSpan-NLTimeBegin|*;Remove TimeBegin from other positions than the first position of the span
+/*		1923. Het bedrijf organiseert sinds 1997 in april van de oneven jaren een Toer waarbij alle aangesloten brouwerijen en stekerijen te bezoeken zijn. 
+1924;64;NLTimeBegin;+NLInTimeSpan;also add InTimeSpan to TimeBegin
+/*		1924. Het bedrijf organiseert sinds 1997 in april van de oneven jaren een Toer waarbij alle aangesloten brouwerijen en stekerijen te bezoeken zijn. 
+1925;64;NLTimeStop|*^NLTimeBegin:NLTimeStop|NLTimeStop;-NLTimeStop|*|*;
+/*		1925. Hij maakte het manuscript nog persklaar voordat hij op paasmaandag aan kanker overleed.
+
+/* Clean-up
+1911;64;NLNiet|NLBeginrel+NLPrep+NLTimeBegin;*|-NLBeginrel;correction to keep negation and preposition in time expansion together
+/*		1911. De Koning heeft enkel het recht de Kamer van volksvertegenwoordigers te ontbinden wanneer zij een motie van vertrouwen in de federale Regering verwerpt en niet binnen een termijn van drie dagen een opvolger voor de Eerste Minister voor benoeming aan de Koning voordraagt. 
 
 
 /* PHASE 65: NEGATION ATTRIBUTES
@@ -1980,9 +2171,9 @@
 /*		105. Hoe het incident kon gebeuren, is nog niet duidelijk.
 1613;65;NLNiet+^NLNooit|NLBeginEndconcept;NLBeginconcept|NLCAdv;
 /*		1613. Uit het onderzoek blijkt echter dat dit niet correct is.
-732;65;"niet":NLNiet|"genoeg"+typeRelation;NLRel+NLNegation|+Join;
+732;65;"niet":NLNiet|"genoeg"+typeRelation;NLRel|+Join;
 /*		732. Het belang van deze hervorming kan niet genoeg worden benadrukt. Het kan niet vaak genoeg gezegd worden.
-734;65;"niet":NLNiet+^NLNooit+typeBeginConcept|"genoeg"+typeConcept;NLBeginconcept+NLNegation|+Join;
+734;65;"niet":NLNiet+^NLNooit+typeBeginConcept|"genoeg"+typeConcept;NLBeginconcept|+Join;
 /*		734. Maar omdat die niet genoeg brandstof had, heeft een Sea King hem verder gevoerd naar het brandwondencentrum.
 119;65;NLNiet;NLRel;
 /*		119. De belangrijkste gast lustte het hoofdgerecht niet.
@@ -1990,6 +2181,7 @@
 
 /* PHASE 70: NEGATION ATTRIBUTES AND EXPANSION
 /* ============================================
+/*Remark: always use Negation or NegBegin in context in left part to define the negation span, to make sure IgnoreNegation never gets a negation span
 1331;70;"zoals"+NLRel;+NLConj;
 /*		1331. Zoals de markt had verwacht, hebben we uitstekende resultaten gerapporteerd.
 1332;70;NLNominf;+NLVerb;
@@ -2049,7 +2241,7 @@
 /*		1213. In Wallonië en Brussel is dat nauwelijks 1,5%.
 
 /* expansion to conjunction before GEEN
-843;70;*NLRelpron:NLOndvw|.typeOther:typeAmbiguous|NLGeen;+NLNegBegin|*|*;
+843;70;*NLRelpron:NLOndvw|.typeOther:typeAmbiguous|NLGeen+NLNegation;+NLNegBegin|*|*;Geen should have Negation attribute (shouldn't fire in case of UDIgnore label)
 /*		843. Het lijkt gerechtvaardigd dit dossier af te sluiten aangezien er geen veranderingen meer te verwachten zijn in de toekomst. Ik ben van oordeel dat het geen zin heeft om een bijkomende plastische chirurgische correctie uit te voeren. Ze zoeken mannen die geen of weinig cosmetica gebruiken. Als geen rekening wordt gehouden met wisselkoersschommelingen, was de daling te verwaarlozen. Dat zei de topman, die eveneens geen raming van de verwachte opbrengst wil geven.
 
 /* expansion to verb
@@ -2099,7 +2291,7 @@
 753;70;*NLCon:NLNumberConcept:NLAttradj|NLComma|"die":"dewelke"+NLNegBegin+^typePathRelevant;+NLNegBegin+NLAntecedent|*|*;
 /*		753. Wij moeten ervoor waken dat de burger zijn keuze kan bepalen aan de hand van een nauwkeurige en duidelijke etikettering, die hem niet in verwarring brengt of misleidt. Beleggers herontdekten de nutssector, die tot hiertoe niet volop meedeed aan de beursrally.
 755;70;*NLCon:NLNumberConcept:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|NLNegation;+NLNegBegin+NLAntecedent|*|*|*;
-/*		755. aBadgasten trokken het meisje, dat niet kon zwemmen en geen opblaasvleugeltjes droeg, op de kant.
+/*		755. Badgasten trokken het meisje, dat niet kon zwemmen en geen opblaasvleugeltjes droeg, op de kant.
 754;70;*NLCon:NLNumberConcept:NLAttradj|NLComma|"dat"+NLNegBegin+^typePathRelevant|*NLCon:NLNumberConcept:NLAttradj:NLPrep:NLArt:NLPoss|NLNegation;+NLNegBegin+NLAntecedent|*|*|*|*;
 /*		754. Dit betreft dus amendement 2, dat om twee redenen niet geaccepteerd kan worden. NOT. 310 miljoen voor zestien landen, dat is niet echt veel minder dan 400 miljoen. NOT. Het valt ook niet te ontkennen, mijnheer de commissaris, dat er nauwelijks alternatieven bestaan.
 
@@ -2139,7 +2331,7 @@
 /*		802. En die strijd dienen we niet door lukraak computers te plaatsen zonder de docenten op te leiden in het gebruik ervan. De problemen in de eindfase van de levenscyclus van PVC moeten worden opgelost en de industrie kan dat niet zelf en niet alleen. Een andere conclusie kunnen wij niet trekken. Het hele navigatieprobleem hoeven wij nu niet uit te diepen. Een dubbelfunctie wijst hij niet bij voorbaat af. NOT. Door hun meningsverschillen en hoogoplopende ruzies zijn ze niet in staat opdrachten naar behoren uit te voeren.
 
 /* concept, enumeration with "noch"
-1109;70;NLCon|NLComma|*NLCon:NLAttradj:NLArt:NLPoss|"noch";+NLNegBegin|*|*|*;
+1109;70;NLCon|NLComma|*NLCon:NLAttradj:NLArt:NLPoss|"noch"+NLNegation;+NLNegBegin|*|*|*;'noch' should have Negation attribute (shouldn't fire in case of UDIgnore label)
 /*		1109. Industrialisering, kernenergie noch biotechnologie hebben ons welvaart en vrijheid voor iedereen gebracht.
 
 /* expansion to pattern concept-'als'-concept
@@ -2283,13 +2475,13 @@
 /*		894. de vraag of we tropische bossen werkelijk duurzaam kunnen beheren, zonder daarbij duurzame schade aan te richten, is nog steeds niet werkelijk beantwoord. Van zodra die achter een wolk verdwenen, begonnen de wandelaars zonder het te merken in cirkeltjes te lopen. Het bedrijf zegt dat de lang verwachte kapitaalverhoging 'in de komende weken' zal worden gelanceerd, zonder verdere details vrij te geven. Deze doelstellingen kunnen niet altijd worden bereikt zonder inspanningen te doen en zonder aan comfort in te boeten, maar vaak is het ook heel eenvoudig. Het bedrijf zegt dat de langverwachte kapitaalverhoging zal worden gelanceerd, zonder verdere details vrij te geven.
 1028;70;"zonder"|*NLVerb|*"en":NLPrep|^NLVerb;*|*|NLBeginrel+NLNegStop|*;TO BE CHECKED: delete?
 /*		1028. WRONG. Na de wedstrijd gaf de doelman van Club Brugge zonder verpinken toe dat hij liever nu geschorst is dan in de play-off.
-899;70;"zonder dat"|."er":NLRAdv|.NLArt:NLAttradj:NLCon:NLPrep:NLAdvStruct:NLSubjpron|.NLRAdv|*NLVerb:NLPartrel+^NLNegation|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegStop;
+899;70;"zonder dat"+NLNegation|."er":NLRAdv|.NLArt:NLAttradj:NLCon:NLPrep:NLAdvStruct:NLSubjpron|.NLRAdv|*NLVerb:NLPartrel+^NLNegation|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegBegin+NLInNegspanZonder|+NLNegStop;'zonder dat' should have Negation attribute (shouldn't fire in case of UDIgnore label)
 /*		899. Daarna werd de wond behandeld, zonder dat een infectie optrad. Zonder dat het opvalt zijn dieren bovendien massaal het slachtoffer van natuurlijke rampen en vooral ook oorlogen. zonder dat er aandacht wordt geschonken aan de argumenten inzake economisch rendement die op het concurrentievermogen van invloed zijn.
 1011;70;NLVerb:NLPartrel+NLInNegspanZonder|*NLArt:NLAttradj:NLCon:NLPrep;*|+NLInNegspanZonder;
 /*		1011. Wanneer bedrijven een economische machtspositie creëren of consolideren, zonder dat zij de noodzakelijke voorstellen doen voor de wijze waarop zij de ongunstige effecten daarvan denken op te vangen, hebben wij geen andere keuze dan de fusie te blokkeren.
 1010;70;NLInNegspanZonder|NLOndvw:NLConj:"die":"dat"+typeRelation+^NLNegBegin+^NLNegation;*|^NLConj2+NLNegStop-NLInNegspan;
 /*		1010. Hun leven en dat van degenen die zij liefhebben verkeert voortdurend in gevaar, zonder dat zij maar iets gedaan hebben waarom zij dat lot zouden verdienen en zonder dat zij iets kunnen doen om het te vermijden.
-1238;70;"zonder dat";NLConj2+NLNegation+NLNegBegin+NLPBegin;
+1238;70;"zonder dat"+NLNegation;NLConj2+NLNegation+NLNegBegin+NLPBegin;'zonder dat' should have Negation attribute (shouldn't fire in case of UDIgnore label)
 /*		1238. Maar na ontvangst van hun betalingen werden de boekingen stiekem geannuleerd, zonder dat zij hiervan op de hoogte werden gesteld.
 
 /*	Expansion before 'zonder' plus noun phrase
@@ -2297,12 +2489,12 @@
 /*		852. Voor een langdurige economische ontwikkeling zonder inflatie moeten wij nu een noodzakelijke productiviteitsverbetering doorvoeren. Wij zullen daarom voor paragraaf 1 zonder deze aanbevelingen stemmen. Veertig dagen zonder vlees, het hoeft daarom geen vasten te zijn.
 888;70;NLPrep+NLNegation+^NLInNegspan|.NLArt|*NLAttradj:NLCon:NLAndOr|"van"|.NLArt|*NLAttradj:NLCon:NLBeginpron:NLPathRelevant|"van"+^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder;+NLNegBegin|*|*|+NLInNegspan|*|*|+NLInNegspanZonder;
 /*		888. Ze vragen een verkorting van de arbeidstijd, zonder inlevering van loon en zonder verslechtering van de kwaliteit van het werk.
-887;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|+NLInNegspan|*|+NLNegStop;
-/*		887. Het grootste deel van de in België geproduceerde chocolade bestaat uit kwaliteitschocolade met cacaoboter zonder toevoeging van andere (plantaardige of dierlijke) vetten.
+887;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr:NLAdvTime|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|+NLInNegspan|*|+NLNegStop;
+/*		887. Het grootste deel van de in België geproduceerde chocolade bestaat uit kwaliteitschocolade met cacaoboter zonder toevoeging van andere (plantaardige of dierlijke) vetten. In werkelijkheid bedroeg de stijging 2,3%, zonder het effect van de extra dag in februari.
 889;70;NLPrep+NLNegation+^NLInNegspan|*NLAttradj:NLCon:NLArt:NLAndOr|"van"|*NLAttradj:NLCon:NLArt:NLBeginpron:NLPathRelevant:NLAndOr|NLNegBegin;+NLNegBegin|*|+NLInNegspan|+NLInNegspanZonder|*;
 /*		889. Zonder de medewerking van de slachtoffers kunnen we nooit garanderen dat degenen die munt slaan uit dit soort praktijken voor het gerecht worden gebracht.
-880;70;NLPrep+NLNegation+^NLInNegspan|.NLAdvStruct:NLPoss:NLArt|*NLAttradj:NLCon:NLAndOr:NLList:NLBeginconcept|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|*|+NLNegStop;
-/*		880. De resultaten van 2008 evenaren in een jaar zonder grote sportevents zou een uitstekende prestatie zijn. De man zonder vaste woon- of verblijfplaats had bij twee winkels in de gemeente stenen door de ruiten gegooid. Hij verliet de koers gisteravond zonder ritzege, gouden leiderstrui of puntenshirt. Afzonderlijke landen of bedrijfstakken kunnen zonder al te veel moeite ontkomen aan de effecten die de afgelopen dagen onder de aandacht zijn gebracht.
+880;70;NLPrep+NLNegation+^NLInNegspan|.NLAdvStruct:NLPoss:NLArt|*NLAttradj:NLCon:NLAndOr:NLList:NLBeginconcept:NLNumber|^NLNegation:NLNegBegin:NLInNegspan:NLInNegspanZonder:NLRTe;+NLNegBegin|*|*|+NLNegStop;
+/*		880. De resultaten van 2008 evenaren in een jaar zonder grote sportevents zou een uitstekende prestatie zijn. De man zonder vaste woon- of verblijfplaats had bij twee winkels in de gemeente stenen door de ruiten gegooid. Hij verliet de koers gisteravond zonder ritzege, gouden leiderstrui of puntenshirt. Afzonderlijke landen of bedrijfstakken kunnen zonder al te veel moeite ontkomen aan de effecten die de afgelopen dagen onder de aandacht zijn gebracht. Maakte zijn romandebuut met Heilig zonder moeite (1987). 
 890;70;NLInNegspanZonder+^NLInNegspan|NLPartrel:NLVerb+^NLNegBegin;*|+NLNegStop;
 /*		890. Zij heeft onze collega er namelijk zonder enige vorm van bewijs van beschuldigd zich te verrijken met de illegale handel in diamanten.
 891;70;^typeRelation|NLAndOr+^NLNegBegin|NLNegStop;*|+NLNegStop|*;
@@ -2319,7 +2511,6 @@
 /*		159. No example.
 751;70;NLRelpron+NLConj2;-NLRelpron;
 /*		751. Ik beklemtoon nogmaals hetgeen ik zei over het gedrag van Oscar. Hij wijst op de gestegen grondstofprijzen zoals van olie en metaal, "hetgeen de koersen van deze bedrijven normaal gesproken zou moeten stimuleren".
-/*958;70;NLNegStop+^typeConcept+^typeRelation+^typePathRelevant|*typeOther:typeAmbiguous|typeConcept:typeBeginConcept:typeRelation:typePathRelevant+^NLNegation;*|*|+NLNegStop;move NegStop from nonrelevant to next lexrep
 958;70;NLNegStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;*|*|+NLNegStop;move NegStop from nonrelevant to next lexrep
 /*		958. De wereldwijde vertraging in de economie en de gevolgen van de kredietcrisis hebben gevolgen voor het vertrouwen in de sector en het reisvolume, terwijl de inflatie een wissel trekt op het inkomen van consumenten.
 818;70;NLNegStop+^typeConcept+^typeRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeBeginEndConcept:typeRelation:typePathRelevant+^NLNegation;*|+NLNegStop;move NegStop from nonrelevant to next lexrep
@@ -2618,4 +2809,9 @@
 /*		432. Oost west, thuis best.
 1295;$;"allemaal";-NLAdvStruct+NLObjpron;force 'allemaal' to become PR for the moment
 /*		1295. Die worden allemaal in twee weken tijd geplukt.
-
+1993;$;UDIgnoreNegation;-NLNegation-NLNegBegin-NLNegWord;
+/*		1993.UD. Die concepten moeten niet-gelovigen aantrekken.
+1996;$;NLTimeBegin+^NLTime|.^NLTime:UDIgnoreTime|UDIgnoreTime|^NLInTimeSpan;-NLTimeBegin|*|*|*;remove time span for UDIgnoreTime
+/*		1996.UD. Wie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt, kent na een paar keer proberen dus de antwoorden uit het hoofd. 
+1995;$;UDIgnoreTime;-NLTime-NLTimeBegin;
+/*		1995.UD. De financiële sector moet met andere woorden nog lang geen victorie kraaien. De levensverwachting ligt op 75 jaar voor de mannen en 81 jaar voor de vrouwen.
