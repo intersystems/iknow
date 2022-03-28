@@ -32,6 +32,7 @@ env:
 
 jobs:
   manylinux2014_x86_64:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
     runs-on: ubuntu-20.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -80,6 +81,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
@@ -116,6 +118,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
@@ -152,6 +155,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-python-osx'
     runs-on: macos-11
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -217,6 +221,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   windows_x86_64:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-python-windows'
     runs-on: windows-2022
     defaults:
       run:
@@ -299,7 +304,7 @@ jobs:
             for details.
 
   deploy:
-    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/master'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master'
     needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
     runs-on: ubuntu-20.04
     env:
