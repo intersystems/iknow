@@ -15,29 +15,10 @@ Usage:
 import updatelib
 
 import json
-import os
 import re
 import subprocess
 import sys
 import urllib.request
-
-
-def get_first_numeric(s):
-    """Return the index of the first numeric character in s, -1 if none
-    exists."""
-    for i in range(len(s)):
-        if s[i] in '0123456789':
-            return i
-    return -1
-
-
-def get_first_nonnumeric(s):
-    """Return the index of the first non-numeric character in s, -1 if all
-    characters are numeric."""
-    for i in range(len(s)):
-        if s[i] not in '0123456789':
-            return i
-    return -1
 
 
 def compare_versions(a, b):
