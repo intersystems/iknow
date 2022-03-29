@@ -7,6 +7,29 @@
 Dsv_test.txt../reference_materials/input/test/sv_test.txt
 S***RULES***
 C1***rules***
+S <"Generellt sett> borde en film av denna karaktär nå ett resultat, som försiktigt räknat, vara 30 procent bättre, det vill säga cirka 130 000 biljetter med en förbättrad intäkt på ytterligare 1 000 000 kronor".
+<attr type="measurement" literal="30 procent" token="30 procent" value="30" unit="procent">
+<attr type="measurement" literal="ytterligare 1 000 000 kronor"." token="ytterligare 1 000 000 kronor"." value="ytterligare 1 000 000" unit="kronor">
+PR<generellt sett>
+Rborde
+C1film
+Rav
+C1karaktär
+Rnå
+C1resultat
+Rsom försiktigt räknat
+Rvara
+C230 procent
+Rbättre
+Rdet vill säga
+C4cirka 130 000 biljetter
+Rmed
+C2förbättrad intäkt
+Rpå
+C5ytterligare 1 000 000 kronor
+Pgenerellt sett borde film av karaktär nå resultat som försiktigt räknat vara 30 procent bättre det vill säga cirka 130 000 biljetter med förbättrad intäkt på ytterligare 1 000 000 kronor
+<attr type="measurement" span="30 procent bättre">
+<attr type="measurement" span="förbättrad intäkt på ytterligare 1 000 000 kronor">
 S(89 jämfört med 53 procent).
 <attr type="measurement" literal="(89" token="(89" value="89">
 <attr type="measurement" literal="53 procent)." token="53 procent)." value="53" unit="procent">
@@ -14,6 +37,7 @@ C189
 Rjämfört med
 C253 procent
 P89 jämfört med 53 procent
+<attr type="measurement" span="89 jämfört med 53 procent">
 S(till exempel Cuban 1986, Dev & Walker 1999).
 <attr type="time" literal="Cuban 1986," token="1986,">
 <attr type="time" literal="Dev & Walker 1999)." token="1999).">
@@ -32,6 +56,16 @@ Rvet
 Rär
 C1sjuka
 Pundvik nära kontakt med personer som du vet är sjuka
+S- 6 mån - 5 år: 0,05 - 0,1 mg/kg
+<attr type="measurement" literal="6 mån" token="6 mån" value="6" unit="mån">
+<attr type="measurement" literal="5 år:" token="5 år:" value="5" unit="år">
+<attr type="measurement" literal="0,05 - 0,1 mg/kg" token="0,05 - 0,1 mg/kg" value="0,05 - 0,1" unit="mg/kg">
+C26 mån
+R-
+C25 år
+C40,05 - 0,1 mg/kg
+P6 mån - 5 år 0,05 - 0,1 mg/kg
+<attr type="measurement" span="6 mån - 5 år">
 S- Den oklarheten kan bara <de> reda ut, <det> kan inte <vi.>
 <attr type="negation" literal="kan inte" token="inte">
 C1oklarheten
@@ -137,6 +171,20 @@ C2varje år
 Ri
 C1sverige
 P30 till 40 män får sjukdomen varje år i sverige
+S46 % av <dem> säger att <de> druckit alkohol det senaste året.
+<attr type="measurement" literal="46 %" token="46 %" value="46" unit="%">
+<attr type="time" literal="senaste året." token="senaste året.">
+C246 %
+Rav
+PR<dem>
+Rsäger
+Ratt
+PR<de>
+Rdruckit
+C1alkohol
+C2senaste året
+P46 % av dem säger att de druckit alkohol senaste året
+<attr type="measurement" span="46 % av dem">
 S9 av <dem> har under det senaste året genomförts i Göteborg inom ramen för ett forskningsprojekt som pågått i över 10 år.
 <attr type="time" literal="senaste året" token="senaste året">
 <attr type="time" literal="över 10 år." token="över 10 år.">
@@ -312,6 +360,7 @@ C1andning
 Rvar
 C421 respektive 40 procent
 Pandelen som hade andning var 21 respektive 40 procent
+<attr type="measurement" span="21 respektive 40 procent">
 SAndra åtgärder vid slakten får inte vidtas innan djuret är dött.
 <attr type="negation" literal="får inte vidtas" token="inte">
 C2andra åtgärder
@@ -420,6 +469,21 @@ Roch kyl ner
 C1maten
 Rsnabbt
 Panvänd olika skärbrädor och kyl ner maten snabbt
+SArbetslösheten sjunker, enligt finansdepartementets prognoser, från 8 procent 2013 till 7,7 procent 2014.
+<attr type="measurement" literal="8 procent 2013" token="8 procent" value="8" unit="procent">
+<attr type="time" literal="8 procent 2013" token="2013">
+<attr type="measurement" literal="7,7 procent 2014." token="7,7 procent" value="7,7" unit="procent">
+<attr type="time" literal="7,7 procent 2014." token="2014.">
+C1arbetslösheten
+Rsjunker
+Renligt
+C2finansdepartementets prognoser
+Rfrån
+C38 procent 2013
+Rtill
+C37,7 procent 2014
+Parbetslösheten sjunker enligt finansdepartementets prognoser från 8 procent 2013 till 7,7 procent 2014
+<attr type="measurement" span="från 8 procent 2013 till 7,7 procent 2014">
 SAsiatiska krabbor hotar västkusten.
 C2asiatiska krabbor
 Rhotar
@@ -557,6 +621,20 @@ C3antalet tre vanligt
 Ri
 C1skämt
 Pav orsaken är antalet tre vanligt i skämt
+SAvhandlingen visar att fyra procent av <alla> över 65 har social fobi.
+<attr type="measurement" literal="fyra procent" token="fyra procent" value="fyra" unit="procent">
+<attr type="measurement" literal="över 65" token="över 65" value="över 65">
+C1avhandlingen
+Rvisar
+Ratt
+C2fyra procent
+Rav
+PR<alla>
+C2över 65
+Rhar
+C2social fobi
+Pavhandlingen visar att fyra procent av alla över 65 har social fobi
+<attr type="measurement" span="fyra procent av alla över 65">
 SAvseende detaljer så är dock <allting> avbildat så noga <det> har låtit sig göras och med ambitionen att göra så få generaliseringar som möjligt.
 Ravseende
 C1detaljer
@@ -622,6 +700,21 @@ Rblir
 C2användaren irriterad
 Pdet inte brusar alltför starkt alltför länge och alltför ofta återkommande blir användaren irriterad
 <attr type="negation" span="det inte brusar alltför starkt alltför länge och alltför ofta återkommande">
+SBarn 10-15 kg (ca 1-3 år): 5 ml var 4-6 timme, högst 4 gånger per dygn.
+<attr type="measurement" literal="Barn 10-15 kg" token="10-15 kg" value="10-15" unit="kg">
+<attr type="measurement" literal="(ca 1-3 år):" token="(ca 1-3 år):" value="ca 1-3" unit="år">
+<attr type="measurement" literal="5 ml" token="5 ml" value="5" unit="ml">
+<attr type="time" literal="var 4-6 timme," token="var 4-6 timme,">
+<attr type="time" literal="högst 4 gånger per dygn." token="högst 4 gånger per dygn.">
+C3barn 10-15 kg
+C3ca 1-3 år
+C25 ml
+C3var 4-6 timme
+C5högst 4 gånger per dygn
+Pbarn 10-15 kg ca 1-3 år 5 ml var 4-6 timme högst 4 gånger per dygn
+<attr type="time" span="var 4-6 timme högst 4 gånger per dygn">
+<attr type="measurement" span="barn 10-15 kg">
+<attr type="measurement" span="5 ml var 4-6 timme högst 4 gånger per dygn">
 SBarn 6 - 12 år: 0.05 mg/kg (maxdos < 10 mg).
 <attr type="measurement" literal="Barn 6 - 12 år:" token="6 - 12 år:" value="6 - 12" unit="år">
 <attr type="measurement" literal="0.05 mg/kg" token="0.05 mg/kg" value="0.05" unit="mg/kg">
@@ -631,6 +724,8 @@ C20.05 mg/kg
 C1maxdos
 C3< 10 mg
 Pbarn 6 - 12 år 0.05 mg/kg maxdos < 10 mg
+<attr type="measurement" span="barn 6 - 12 år">
+<attr type="measurement" span="maxdos < 10 mg">
 SBarn med kronisk sjukdom eller infektion de senaste tio dagarna ombads att inte delta.
 <attr type="negation" literal="att inte delta." token="inte">
 C1barn
@@ -656,6 +751,17 @@ PR<de>
 Rkan sova
 C2korta stunder
 Pbarn som är under sex månader kan få svårt att dia och snabba andningen gör att de kan sova korta stunder
+SBarnet blir friskt <igen> efter några dagar.
+<attr type="time" literal="igen" token="igen">
+<attr type="time" literal="några dagar." token="några dagar.">
+C1barnet
+Rblir
+C1friskt
+PR<igen>
+Refter
+C2några dagar
+Pbarnet blir friskt igen efter några dagar
+<attr type="time" span="igen efter några dagar">
 SBarnmorskor bör rådgöra med läkare innan <de> förskriver kombinerade hormonpreparat.
 C1barnmorskor
 Rbör rådgöra med
@@ -805,6 +911,7 @@ Rsedan
 C4samma månad förra året
 Pbokningarna till franska huvudstaden har ökat med 64 % sedan samma månad förra året
 <attr type="time" span="sedan samma månad förra året">
+<attr type="measurement" span="64 % sedan samma månad förra året">
 SBort med bromsen som cancertumören har satt dit.
 Rbort med
 C1bromsen
@@ -870,7 +977,7 @@ Rutvecklar
 C2spridd sjukdom
 Pca 1500 kvinnor per år utvecklar spridd sjukdom
 SCa 30% blir symtomfria efter en vecka utan antibiotikabehandling.
-<attr type="measurement" literal="Ca 30%" token="30%" value="30" unit="%">
+<attr type="measurement" literal="Ca 30%" token="Ca 30%" value="30" unit="%">
 <attr type="time" literal="en vecka" token="en vecka">
 <attr type="negation" literal="utan" token="utan">
 C2ca 30%
@@ -973,6 +1080,7 @@ C1högsommardagar
 Rinträffar
 C6i genomsnitt 16 gånger per år
 Pdagstemperaturer på över 25 °c högsommardagar inträffar i genomsnitt 16 gånger per år
+<attr type="measurement" span="dagstemperaturer på över 25 °c">
 SDaniel flög iväg med hjälp av 120 ballonger.
 C1daniel
 Rflög iväg med hjälp av
@@ -991,6 +1099,7 @@ Refter
 C1strokeinsjuknandet
 Pdata visar letalitet på 28 procent tre månader efter strokeinsjuknandet
 <attr type="time" span="tre månader efter strokeinsjuknandet">
+<attr type="measurement" span="letalitet på 28 procent tre månader efter strokeinsjuknandet">
 SDe allra första persondatorerna saknade fläkt eller hade <det> endast i nätaggregaten, när processorkraften ökade så ökade även temperaturen, vilket gjorde att <man> behövde kylflänsar och <senare> även fläktar på processorerna.
 <attr type="time" literal="senare" token="senare">
 C3allra första persondatorerna
@@ -1036,6 +1145,17 @@ C2båda filmmaterialen
 Rhar kompletterat varandra på
 C2bra sätt
 Pbåda filmmaterialen har kompletterat varandra på bra sätt
+SDe fem största koncernerna har marknadsandelar från fem procent och uppåt.
+<attr type="measurement" literal="fem procent" token="fem procent" value="fem" unit="procent">
+C3fem största koncernerna
+Rhar
+C1marknadsandelar
+Rfrån
+C2fem procent
+Roch
+C1uppåt
+Pfem största koncernerna har marknadsandelar från fem procent och uppåt
+<attr type="measurement" span="fem procent och uppåt">
 S <De flesta av oss> tänker förmodligen på någon typ av skiva på tre eller fler ben.
 PR<de flesta av oss>
 Rtänker förmodligen på
@@ -1081,6 +1201,19 @@ C1usb-minne
 Roch
 C1hårddisk
 Pde flesta studenter har tillräcklig datorvana och vet hur man säkerhetssparar på flera enheter exempelvis usb-minne och hårddisk
+S <De flesta> är ganska små men fyra är större än 10 km².
+<attr type="measurement" literal="10 km²." token="10 km²." value="10" unit="km²">
+PR<de flesta>
+Rär
+C2ganska små
+Rmen
+C1fyra
+Rär
+C1större
+Rän
+C210 km²
+Pde flesta är ganska små men fyra är större än 10 km²
+<attr type="measurement" span="större än 10 km²">
 S <De> framhåller också att problemställningarna är relativt lätta för studenterna att förstå.
 PR<de>
 Rframhåller
@@ -1092,17 +1225,20 @@ Rför
 C1studenterna
 Ratt förstå
 Pde framhåller att problemställningarna är relativt lätta för studenterna att förstå
-SDe tre anhållna är 16, 18 och 19 år gamla.
+SDe fyra anhållna är 16, 18, 18 och 19 år gamla.
 <attr type="measurement" literal="16," token="16," value="16">
+<attr type="measurement" literal="18," token="18," value="18">
 <attr type="measurement" literal="18" token="18" value="18">
 <attr type="measurement" literal="19 år gamla." token="19 år gamla." value="19" unit="år gamla">
-C2tre anhållna
+C2fyra anhållna
 Rär
 C116
 C118
+C118
 Roch
 C319 år gamla
-Ptre anhållna är 16 18 och 19 år gamla
+Pfyra anhållna är 16 18 18 och 19 år gamla
+<attr type="measurement" span="16 18 18 och 19 år gamla">
 S <De> gick i ett fackeltåg till kommunhuset där <de> stoppade och ropade slagord.
 PR<de>
 Rgick i
@@ -1295,6 +1431,18 @@ C2humanistiska området
 Rvid
 C2studerade lärosätet
 Ptio intervjuade lärarna kommer från olika institutioner inom samhällvetenskapliga och humanistiska området vid studerade lärosätet
+SDe tre anhållna är 16, 18 och 19 år gamla.
+<attr type="measurement" literal="16," token="16," value="16">
+<attr type="measurement" literal="18" token="18" value="18">
+<attr type="measurement" literal="19 år gamla." token="19 år gamla." value="19" unit="år gamla">
+C2tre anhållna
+Rär
+C116
+C118
+Roch
+C319 år gamla
+Ptre anhållna är 16 18 och 19 år gamla
+<attr type="measurement" span="16 18 och 19 år gamla">
 S <De> tror <nu> att räntan sänks i juli, men att räntehöjningen sen kommer tidigare än vad Riksbanken bedömer.
 <attr type="time" literal="nu" token="nu">
 <attr type="time" literal="juli," token="juli,">
@@ -1513,9 +1661,11 @@ C2vissa gränser
 Rmot
 C2andra discipliner
 Pden här lösa och allmänna definitionen drar vissa gränser mot andra discipliner
-SDen höga kostnaden per jobb generellt beror enligt rapporten på att en stor andel av sänkningen hamnade hos unga som redan hade jobb eller som skulle ha fått jobb även utan <den.>
+SDen höga kostnaden per jobb generellt beror enligt rapporten på att en stor andel av sänkningen hamnade hos unga som redan hade jobb eller som skulle ha fått jobb även utan <den.>
 <attr type="negation" literal="utan" token="utan">
-C4höga kostnaden per jobb
+C2höga kostnaden
+Rper
+C1jobb
 Rgenerellt beror enligt
 C1rapporten
 Rpå
@@ -1578,6 +1728,7 @@ PR<vår>
 C1produktion
 Pden motsvarar inte ens 10 procent av vår produktion
 <attr type="negation" span="den motsvarar inte ens 10 procent av vår produktion">
+<attr type="measurement" span="inte ens 10 procent av vår produktion">
 SDen stora svårigheten bestod i att mikrovågsspektroskopi inte kunde göras på grund av CH-radikalens korta livslängd i laboratoriet.
 <attr type="negation" literal="inte kunde göras på grund av" token="inte">
 C2stora svårigheten
@@ -1645,6 +1796,21 @@ C2ständigt samspel
 Roch är av
 C3lika stor vikt
 Pden är syntetisk på så vis att den anser principer vara två komplementära sidor av samma mänskliga tillvaro vilka befinner sig i ständigt samspel och är av lika stor vikt
+SDen årliga utdelningen ska uppgå till 50 kronor per preferensaktie, motsvarande 10 procent av teckningskursen, lovar bolaget.
+<attr type="measurement" literal="50 kronor" token="50 kronor" value="50" unit="kronor">
+<attr type="measurement" literal="motsvarande 10 procent" token="motsvarande 10 procent" value="motsvarande 10" unit="procent">
+C2årliga utdelningen
+Rska uppgå till
+C250 kronor
+Rper
+C1preferensaktie
+C3motsvarande 10 procent
+Rav
+C1teckningskursen
+Rlovar
+C1bolaget
+Pårliga utdelningen ska uppgå till 50 kronor per preferensaktie motsvarande 10 procent av teckningskursen lovar bolaget
+<attr type="measurement" span="50 kronor per preferensaktie motsvarande 10 procent av teckningskursen">
 SDenna anpassning till atmosfärens ändrade sammansättning har skett <ganska nyligen,> geologiskt sett.
 <attr type="time" literal="ganska nyligen," token="ganska nyligen,">
 C1anpassning
@@ -1689,6 +1855,7 @@ Runder
 C2närmaste veckorna
 Pdenna trappades ned till underhållsdos om 10 mg två gånger dagligen under närmaste veckorna
 <attr type="time" span="under närmaste veckorna">
+<attr type="measurement" span="underhållsdos om 10 mg två gånger dagligen under närmaste veckorna">
 SDepressionssjukdom drabbar omkring varannan kvinna och var fjärde man.
 C1depressionssjukdom
 Rdrabbar omkring
@@ -1950,6 +2117,7 @@ C4diabetes mellitus typ 1
 Rsedan
 C317 års ålder
 Pförsta fallet var 32-årig kvinna med diabetes mellitus typ 1 sedan 17 års ålder
+<attr type="measurement" span="32-årig kvinna med diabetes mellitus typ 1">
 SDet första varuhuset utanför Sverige – och tillika Ikeas andra varuhus – öppnades 1963 i Asker utanför Oslo.
 <attr type="time" literal="1963" token="1963">
 C2första varuhuset
@@ -2109,6 +2277,27 @@ C2oerhörd mångfald
 Rav
 C1böcker
 Pdet ledde till att det skrevs oerhörd mångfald av böcker
+S <Det> innebär att under året var 3,2 procent av alla barn med gifta eller sambo­föräldrar med om en separation.
+<attr type="time" literal="året" token="året">
+<attr type="measurement" literal="3,2 procent" token="3,2 procent" value="3,2" unit="procent">
+PR<det>
+Rinnebär
+Ratt
+Runder
+C1året
+Rvar
+C23,2 procent
+Rav
+C2alla barn
+Rmed
+C1gifta
+Reller
+C1samboföräldrar
+Rmed om
+C1separation
+Pdet innebär att under året var 3,2 procent av alla barn med gifta eller samboföräldrar med om separation
+<attr type="time" span="under året">
+<attr type="measurement" span="3,2 procent av alla barn med gifta eller samboföräldrar">
 SDet internationella samfundet berömde sig periodvis av att av den anledningen förbjuda truppminor.
 <attr type="time" literal="periodvis" token="periodvis">
 C2internationella samfundet
@@ -2560,6 +2749,7 @@ C225,7 procent
 Rjämfört med
 C4motsvarande månad förra året
 Pdet är ökning med 25,7 procent jämfört med motsvarande månad förra året
+<attr type="measurement" span="ökning med 25,7 procent jämfört med motsvarande månad förra året">
 S <Det> är för komplext för att kunna observeras.
 PR<det>
 Rär
@@ -2828,6 +3018,17 @@ PR<de>
 Rvar
 C395 år gamla
 Pdetta skedde 2010 då de var 95 år gamla
+S <Detta> skulle ge <vår> sol en maximal ålder av högst 100 miljoner år.
+<attr type="measurement" literal="högst 100 miljoner år." token="högst 100 miljoner år." value="högst 100 miljoner" unit="år">
+PR<detta>
+Rskulle ge
+PR<vår>
+C1sol
+C2maximal ålder
+Rav
+C4högst 100 miljoner år
+Pdetta skulle ge vår sol maximal ålder av högst 100 miljoner år
+<attr type="measurement" span="maximal ålder av högst 100 miljoner år">
 S <Detta> syns framför allt i de unika arbeten som <de> bland annat tar fram till utställningarna.
 PR<detta>
 Rsyns i
@@ -2949,37 +3150,20 @@ C1frigörelse
 Rfrån
 C1strukturer
 Pdär naturvetenskapen söker behärska naturen humanioran söker förståelse för människan och kritiska samhällsvetenskapen söker frigörelse från strukturer
-S <Där> visas ett partytält, 3 x 3 m och priset 345:-.
+S <Där> visas ett partytält, 3 x 3 m och priset 345:- står över bilden av tältet.
 <attr type="measurement" literal="3 x 3 m" token="3 x 3 m" value="3 x 3" unit="m">
-<attr type="measurement" literal="priset 345:-." token="345:-." value="345:-">
+<attr type="measurement" literal="priset 345:-" token="345:-" value="345:-">
 PR<där>
 Rvisas
 C1partytält
 C43 x 3 m
 Roch
 C2priset 345:-
-Pdär visas partytält 3 x 3 m och priset 345:-
-SLaboratorieanalyserna visade ett trombocyvärde på 92 × 109/l, CRP som stigit till 225 mg/l, natrium på 130 mmol/l och kalium på 4,3 mmol/l.
-<attr type="measurement" literal="92 × 109/l," token="92 × 109/l," value="92 × 109/l">
-<attr type="measurement" literal="225 mg/l," token="225 mg/l," value="225" unit="mg/l">
-<attr type="measurement" literal="130 mmol/l" token="130 mmol/l" value="130" unit="mmol/l">
-<attr type="measurement" literal="4,3 mmol/l." token="4,3 mmol/l." value="4,3" unit="mmol/l">
-C1laboratorieanalyserna
-Rvisade
-C1trombocyvärde
-Rpå
-C392 × 109/l
-C1crp
-Rsom stigit till
-C2225 mg/l
-C1natrium
-Rpå
-C2130 mmol/l
-Roch
-C1kalium
-Rpå
-C24,3 mmol/l
-Plaboratorieanalyserna visade trombocyvärde på 92 × 109/l crp som stigit till 225 mg/l natrium på 130 mmol/l och kalium på 4,3 mmol/l
+Rstår över
+C1bilden
+Rav
+C1tältet
+Pdär visas partytält 3 x 3 m och priset 345:- står över bilden av tältet
 S <Därefter> avgick vagnarna var 15:e minut, fram till kl. 21.00 respektive 21.30.
 <attr type="time" literal="Därefter" token="Därefter">
 <attr type="time" literal="var 15:e minut," token="var 15:e minut,">
@@ -3021,6 +3205,7 @@ C2flera fall
 Rav
 C1misshandel
 Pdäremot kan jag bekräfta att 34-årig kvinna sitter häktad och är misstänkt för försök till mord i två fall och sen är det flera fall av misshandel
+<attr type="measurement" span="34-årig kvinna">
 S <Däremot> kan <man> försöka sänka barnets kroppstemperatur genom att ha <det> svalt, men inte kallt, i rummet.
 <attr type="negation" literal="men inte" token="inte">
 PR<däremot>
@@ -3207,6 +3392,7 @@ C1medeltemperatur
 Rpå
 C225 grader
 Pdå kan man spela i temperaturer som är jämförbara med varm vår i europa med medeltemperatur på 25 grader
+<attr type="measurement" span="medeltemperatur på 25 grader">
 S <Då> ser <vi> mer av ett växelspel.
 PR<då>
 Rser
@@ -3343,6 +3529,7 @@ C1halsen
 Roch
 C1huvudet
 P29-årig man fick föras till sjukhus med ambulans med djupa sår på halsen och huvudet
+<attr type="measurement" span="29-årig man">
 SEn annan viktig upptäckt var maserstrålning.
 C3annan viktig upptäckt
 Rvar
@@ -3598,6 +3785,7 @@ Roch
 C1känslor
 Pstudie kan medföra utpekande och känslor av stigmatisering för ingående informanterna och observerade personerna eller väcka obehagliga minnen och känslor
 SEn svensk man i 20-årsåldern.
+<attr type="measurement" literal="20-årsåldern." token="20-årsåldern." value="20" unit="årsåldern">
 C2svensk man
 Ri
 C120-årsåldern
@@ -3613,6 +3801,7 @@ C1tjocktarmen
 Roch tas upp
 PR<där>
 Pen till två liter går över i tjocktarmen och tas upp där
+<attr type="measurement" span="en till två liter">
 SEn tiokronorssedel värderades till tolv jetonger.
 C1tiokronorssedel
 Rvärderades till
@@ -3722,6 +3911,7 @@ Rses hos
 C1kvinnor
 C1(6)
 Penligt befolkningsbaserade studier är analcancer vanligare hos kvinnor än hos män fler än 60 procent av fallen ses hos kvinnor (6)
+<attr type="measurement" span="fler än 60 procent av fallen">
 SEnligt denna fysiska lag kan energi varken skapas (produceras) eller förintas.
 <attr type="negation" literal="varken skapas" token="varken">
 <attr type="negation" literal="eller förintas." token="eller">
@@ -3801,6 +3991,15 @@ C2utvald del
 Rav
 C1kulturen
 Petnografi är sätt att fördjupa sig i utvald del av kulturen
+SEtt annat alternativ som möjliggör horisontella prioriteringar är att beräkna den inkrementella kostnaden per kvalitetsjusterat levnadsår.
+C2annat alternativ
+Rsom möjliggör
+C2horisontella prioriteringar
+Rär att beräkna
+C2inkrementella kostnaden
+Rper
+C2kvalitetsjusterat levnadsår
+Pannat alternativ som möjliggör horisontella prioriteringar är att beräkna inkrementella kostnaden per kvalitetsjusterat levnadsår
 SEtt annat stort framsteg från <samma> tid var insikten att kloroplasterna härstammar från cyanobakterier.
 C3annat stort framsteg
 Rfrån
@@ -4415,6 +4614,7 @@ Rbegär eller samtycker till
 PR<det>
 Pför barn som inte har fyllt 15 år får kontaktperson utses om barnets vårdnadshavare begär eller samtycker till det
 <attr type="negation" span="som inte har fyllt 15 år">
+<attr type="measurement" span="som inte har fyllt 15 år">
 S <För det andra> är <det> på statsrättens område nödvändigt att beakta <det> nära sambandet mellan politiska och juridiska överväganden.
 PR<för det andra>
 Rär
@@ -4585,6 +4785,20 @@ Rförkorta eller förläng
 C1bråken
 Roch lägg samman
 Pförkorta eller förläng bråken och lägg samman
+SFörlängningen får inte avse längre tid än som är oundgängligen nödvändig och får omfatta sammanlagt högst två veckor.
+<attr type="negation" literal="får inte avse" token="inte">
+<attr type="time" literal="längre tid" token="längre tid">
+<attr type="time" literal="sammanlagt högst två veckor." token="högst två veckor.">
+C1förlängningen
+Rfår inte avse
+C2längre tid
+Rän som är
+C2oundgängligen nödvändig
+Roch får omfatta
+C4sammanlagt högst två veckor
+Pförlängningen får inte avse längre tid än som är oundgängligen nödvändig och får omfatta sammanlagt högst två veckor
+<attr type="negation" span="förlängningen får inte avse längre tid">
+<attr type="time" span="sammanlagt högst två veckor">
 SFörslagen skall utformas så, att <de> kan besvaras med ja eller nej.
 <attr type="negation" literal="nej." token="nej.">
 C1förslagen
@@ -4854,6 +5068,7 @@ C2livstids fängelse
 Phan framförde under rättegången att han inte såg annan tänkbar påföljd än livstids fängelse
 <attr type="negation" span="att han inte såg annan tänkbar påföljd än livstids fängelse">
 S <Han> fyller sjuttioett i slutet av den här månaden och <det> går knappt att begripa.
+<attr type="measurement" literal="sjuttioett" token="sjuttioett" value="sjuttioett">
 <attr type="time" literal="slutet av den här månaden" token="slutet av den här månaden">
 PR<han>
 Rfyller
@@ -4865,6 +5080,7 @@ PR<det>
 Rgår knappt att begripa
 Phan fyller sjuttioett i slutet av den här månaden och det går knappt att begripa
 <attr type="time" span="i slutet av den här månaden">
+<attr type="measurement" span="fyller sjuttioett i slutet av den här månaden">
 S <Han> har inte hört av sig, de anhöriga är oroliga och <det> har ju blåst i området.
 <attr type="negation" literal="har inte hört av sig," token="inte">
 PR<han>
@@ -4964,7 +5180,7 @@ Rpå
 C1utvecklade
 C2etablerade storheten
 Phan är exemplet på utvecklade etablerade storheten
-S <Hans> företag har redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
+S <Hans> företag har också redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
 PR<hans>
 C1företag
 Rhar
@@ -4972,7 +5188,7 @@ C2åtminstone tillfälligt
 Rtappat
 C2viktigt samarbetsavtal
 Phans företag har åtminstone tillfälligt tappat viktigt samarbetsavtal
-S <Hans> företag har också redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
+S <Hans> företag har redan, åtminstone tillfälligt, tappat ett viktigt samarbetsavtal.
 PR<hans>
 C1företag
 Rhar
@@ -5024,6 +5240,7 @@ C1hemodialys
 Rhar traditionellt ordinerats
 C33× per vecka
 Phemodialys har traditionellt ordinerats 3× per vecka
+<attr type="measurement" span="3× per vecka">
 S <Hitintills> har 140 personer i år smittats av salmonellabakterien som annars brukar kallas den ovanligare sorten, 80 av <dessa> har drabbats efter ett besök på bykrogen i Löttorp på Norra Öland.
 <attr type="time" literal="Hitintills" token="Hitintills">
 <attr type="time" literal="i år" token="i år">
@@ -5131,6 +5348,7 @@ C1bättre
 PR<nu>
 Phon har gått runt och förklarat hemma inte ens tre år gammal att pappa mår bättre nu
 <attr type="negation" span="inte ens tre år gammal">
+<attr type="measurement" span="inte ens tre år gammal">
 S <Hon> har inte gjort <något> för att skada <sitt> barn.
 <attr type="negation" literal="har inte gjort" token="inte">
 PR<hon>
@@ -5151,6 +5369,33 @@ Rutveckla
 PR<sitt>
 C1inlägg
 Phon har ställt frågor och bett henne utveckla sitt inlägg
+S <Hon> menar ändå att <vi> måste prata mer om <det> för idag når inte alltid informationen om yngre barns vikt, alltså barn i 2 till 9-årsåldern, fram till föräldrar.
+<attr type="time" literal="idag" token="idag">
+<attr type="negation" literal="når inte alltid" token="inte alltid">
+<attr type="measurement" literal="2" token="2" value="2">
+<attr type="measurement" literal="9-årsåldern," token="9-årsåldern," value="9" unit="årsåldern">
+PR<hon>
+Rmenar
+Ratt
+PR<vi>
+Rmåste prata mer om
+PR<det>
+Rför
+C1idag
+Rnår inte alltid
+C1informationen
+Rom
+C3yngre barns vikt
+C1barn
+Ri
+C12
+Rtill
+C19-årsåldern
+Rfram till
+C1föräldrar
+Phon menar att vi måste prata mer om det för idag når inte alltid informationen om yngre barns vikt barn i 2 till 9-årsåldern fram till föräldrar
+<attr type="negation" span="når inte alltid informationen om yngre barns vikt">
+<attr type="measurement" span="i 2 till 9-årsåldern">
 S <Hon> påbörjade dalteparinbehandling i hög dos.
 PR<hon>
 Rpåbörjade
@@ -5466,24 +5711,20 @@ C1öar
 Roch
 C1holmar
 Pi 15:3 stadgades att hävd gäller ifråga om utjord eller urfjäll samt kvar eller kvarnställe eller annat vattenverk eller öar och holmar
-SI Sverige har ungefär 8 av 100 personer någon form av astma.
+SI Sverige har ungefär 8 av 100 personer någon form av astma.
 Ri
 C1sverige
 Rhar
-C2ungefär 8
-Rav
-C2100 personer
+C5ungefär 8 av 100 personer
 C1form
 Rav
 C1astma
 Pi sverige har ungefär 8 av 100 personer form av astma
-SI Sverige har ungefär åtta av hundra personer någon form av astma.
+SI Sverige har ungefär åtta av hundra personer någon form av astma.
 Ri
 C1sverige
 Rhar
-C2ungefär åtta
-Rav
-C2hundra personer
+C5ungefär åtta av hundra personer
 C1form
 Rav
 C1astma
@@ -5640,6 +5881,18 @@ PR<varandra>
 Roch antagligen göra
 C2ömsesidiga eftergifter
 Pi processen får båda anpassa sig till varandra lära sig av varandra och antagligen göra ömsesidiga eftergifter
+SI den senare arealen ingår 0,2 miljoner hektar träda där <ingenting> produceras.
+<attr type="measurement" literal="0,2 miljoner hektar träda" token="0,2 miljoner hektar" value="0,2 miljoner" unit="hektar">
+<attr type="negation" literal="ingenting" token="ingenting">
+Ri
+C2senare arealen
+Ringår
+C40,2 miljoner hektar träda
+Rdär
+PR<ingenting>
+Rproduceras
+Pi senare arealen ingår 0,2 miljoner hektar träda där ingenting produceras
+<attr type="measurement" span="0,2 miljoner hektar träda">
 SI detta sammanhang hänger <det> inte på om ett land är medlem eller inte utan på om medlemslandet ifråga har vissa bestämda intressen.
 <attr type="negation" literal="inte på" token="inte">
 <attr type="negation" literal="eller inte" token="inte">
@@ -5681,6 +5934,19 @@ C1givarna
 Rupp
 C4ytterligare fem miljoner kronor
 Pi fjol inbringade välgörenhetssatsningen drygt 23,3 miljoner kronor för rent vatten i slumområden och i år växlade givarna upp ytterligare fem miljoner kronor
+SI fredags meddelade <de> att totalt 21.6 ton kött som sålts till Sverige återkallas.
+<attr type="time" literal="I fredags" token="I fredags">
+<attr type="measurement" literal="totalt 21.6 ton kött" token="21.6 ton" value="21.6" unit="ton">
+C2i fredags
+Rmeddelade
+PR<de>
+Ratt
+C4totalt 21.6 ton kött
+Rsom sålts till
+C1sverige
+Råterkallas
+Pi fredags meddelade de att totalt 21.6 ton kött som sålts till sverige återkallas
+<attr type="measurement" span="totalt 21.6 ton kött">
 SI fråga om andra direktsända radioprogram än <sådana> som avses i 1 kap. 8 § får i lag föreskrivas att <den> som framträder i programmet skall ansvara för <sina> yttranden själv.
 Ri fråga om
 C3andra direktsända radioprogram
@@ -5797,6 +6063,7 @@ C4åldrar över 60 år
 Rjämfört med i
 C2yngre åldrar
 Pi observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar
+<attr type="measurement" span="i åldrar över 60 år">
 SI oktober hade andelen ökat till 31 procent.
 <attr type="time" literal="oktober" token="oktober">
 <attr type="measurement" literal="31 procent." token="31 procent." value="31" unit="procent">
@@ -5809,7 +6076,7 @@ C231 procent
 Pi oktober hade andelen ökat till 31 procent
 <attr type="time" span="i oktober">
 SI området blåser runt tio meter per sekund.
-<attr type="measurement" literal="runt tio meter per sekund." token="runt tio meter" value="runt tio" unit="meter">
+<attr type="measurement" literal="runt tio meter per sekund." token="runt tio meter per sekund." value="runt tio" unit="meter per sekund">
 Ri
 C1området
 Rblåser
@@ -5859,6 +6126,16 @@ Rför
 C1mänskligheten
 Pi sitt testamente daterat den 27 november 1895 stadfäste nobel att stiftelse skulle grundas av hans förmögenhet och att räntan skulle utdelas som pris åt personer som under föregående år gjort mest nytta för mänskligheten
 <attr type="time" span="under föregående år">
+SI strokeriktlinjerna anges en övre åldersgräns på ca 60 år.
+<attr type="measurement" literal="ca 60 år." token="ca 60 år." value="ca 60" unit="år">
+Ri
+C1strokeriktlinjerna
+Ranges
+C2övre åldersgräns
+Rpå
+C3ca 60 år
+Pi strokeriktlinjerna anges övre åldersgräns på ca 60 år
+<attr type="measurement" span="övre åldersgräns på ca 60 år">
 SI tentamenssvar kan <man> återfinna märkliga meningar, där syftningsfel kommit att innebära vetenskapliga tokigheter.
 Ri
 C1tentamenssvar
@@ -6106,6 +6383,7 @@ C1hydrokortison
 C5initialt 100 mg × 4
 Rinitierades
 Pintravenös behandling med hydrokortison initialt 100 mg × 4 initierades
+<attr type="measurement" span="initialt 100 mg × 4">
 SIshockey-VM tillbaka i SVT.
 C1ishockey-vm
 Rtillbaka i
@@ -6420,6 +6698,17 @@ C1alternativ
 Rtill
 C1lärarmonologen
 Pkanske är förhandlingsperspektivet särskilt fruktbart i undervisningssituation som alternativ till lärarmonologen
+SKarminrött är en spektrallinje från syreatomer O och bildas på höjder över cirka 200 km.
+<attr type="measurement" literal="höjder över cirka 200 km." token="över cirka 200 km." value="över cirka 200" unit="km">
+C1karminrött
+Rär
+C1spektrallinje
+Rfrån
+C2syreatomer o
+Roch bildas på
+C5höjder över cirka 200 km
+Pkarminrött är spektrallinje från syreatomer o och bildas på höjder över cirka 200 km
+<attr type="measurement" span="höjder över cirka 200 km">
 SKlockan halv tio återvände vagnen till Stigbergsliden, ut till Klippan och gjorde <sin> returresa klockan 11.
 <attr type="time" literal="Klockan halv tio" token="Klockan halv tio">
 <attr type="time" literal="klockan 11." token="klockan 11.">
@@ -6597,6 +6886,40 @@ C1mord
 Roch
 C1misshandel
 Pkvinnan har häktats på sannolika skäl misstänkt för försök till mord och misshandel
+SLaboratorieanalyserna visade ett trombocyvärde på 92 × 109/l, CRP som stigit till 225 mg/l, natrium på 130 mmol/l och kalium på 4,3 mmol/l.
+<attr type="measurement" literal="92 × 109/l," token="92 × 109/l," value="92 × 109/l">
+<attr type="measurement" literal="225 mg/l," token="225 mg/l," value="225" unit="mg/l">
+<attr type="measurement" literal="130 mmol/l" token="130 mmol/l" value="130" unit="mmol/l">
+<attr type="measurement" literal="4,3 mmol/l." token="4,3 mmol/l." value="4,3" unit="mmol/l">
+C1laboratorieanalyserna
+Rvisade
+C1trombocyvärde
+Rpå
+C392 × 109/l
+C1crp
+Rsom stigit till
+C2225 mg/l
+C1natrium
+Rpå
+C2130 mmol/l
+Roch
+C1kalium
+Rpå
+C24,3 mmol/l
+Plaboratorieanalyserna visade trombocyvärde på 92 × 109/l crp som stigit till 225 mg/l natrium på 130 mmol/l och kalium på 4,3 mmol/l
+<attr type="measurement" span="trombocyvärde på 92 × 109/l">
+<attr type="measurement" span="natrium på 130 mmol/l och kalium på 4,3 mmol/l">
+SLandstingen erbjuder alla kvinnor mellan 50 och 69 år möjlighet att genomgå mammografiundersökning.
+<attr type="measurement" literal="mellan 50 och 69 år" token="mellan 50 och 69 år" value="mellan 50 och 69" unit="år">
+C1landstingen
+Rerbjuder
+C2alla kvinnor
+C5mellan 50 och 69 år
+C1möjlighet
+Ratt genomgå
+C1mammografiundersökning
+Plandstingen erbjuder alla kvinnor mellan 50 och 69 år möjlighet att genomgå mammografiundersökning
+<attr type="measurement" span="alla kvinnor mellan 50 och 69 år">
 SLarmet: Varannan kör för fort på vägarbeten.
 C1larmet
 C2varannan kör
@@ -6677,6 +7000,12 @@ C1h
 R+
 C1cl
 Plipofila ämnen fettlösliga är mycket stora grupperna av kolväten c + h och klorkolväten c + h + cl
+SListan består av 22 bolag utspridda över sju sektorer.
+C1listan
+Rbestår av
+C322 bolag utspridda
+C3över sju sektorer
+Plistan består av 22 bolag utspridda över sju sektorer
 SLitteratur är ett omfattande begrepp med vaga gränser mot åt ett håll vardagliga konversationer och åt ett annat håll andra typer av kultur.
 C1litteratur
 Rär
@@ -6988,6 +7317,7 @@ C1växthusgaser
 Rkommer från
 C1jordbruk
 Pman räknar med att 25 till 30 procent av världens utsläpp av växthusgaser kommer från jordbruk
+<attr type="measurement" span="25 till 30 procent av världens utsläpp av växthusgaser">
 S <Man> ska <alltid> ringa 112 efter ambulans.
 <attr type="time" literal="alltid" token="alltid">
 PR<man>
@@ -7116,6 +7446,7 @@ C1barn
 Ravses
 C5varje människa under 18 år
 Pmed barn avses varje människa under 18 år
+<attr type="measurement" span="varje människa under 18 år">
 SMed dagens mätverktyg kan arrangörerna dagen efter en tävling gå in och titta närmare på siffror som sticker ut.
 Rmed
 C2dagens mätverktyg
@@ -7283,6 +7614,7 @@ Rav
 C1fordonen
 Rsom åker förbi kör alldeles för fort
 Potäcka siffran visar att hela 58 procent av fordonen som åker förbi kör alldeles för fort
+<attr type="measurement" span="hela 58 procent av fordonen">
 SMen <det> var bankerna som drabbades värst eftersom <de> tvingades täcka upp alla uttag.
 PR<det>
 Rvar
@@ -7340,6 +7672,26 @@ PR<den>
 Rtänka
 C1landningsplatsen
 Pdrog vinden i väg honom i annan riktning och det slutade med att han fick slita sig loss från stolen och öppna fallskärmen och landa ungefär en kilometer i från den tänka landningsplatsen
+SMen <ibland> kan <man> smitta andra personer upp till tre veckor efter <det> att <man> blivit frisk <igen.>
+<attr type="time" literal="ibland" token="ibland">
+<attr type="measurement" literal="upp till tre veckor" token="upp till tre veckor" value="upp till tre" unit="veckor">
+<attr type="time" literal="igen." token="igen.">
+PR<ibland>
+Rkan
+PR<man>
+Rsmitta
+C2andra personer
+C4upp till tre veckor
+Refter
+PR<det>
+Ratt
+PR<man>
+Rblivit
+C1frisk
+PR<igen>
+Pibland kan man smitta andra personer upp till tre veckor efter det att man blivit frisk igen
+<attr type="time" span="upp till tre veckor efter det att man blivit frisk igen">
+<attr type="measurement" span="andra personer upp till tre veckor efter det att man blivit frisk igen">
 SMen om marken har eller kommer att få ett alternativvärde så bör nuvarande politik omprövas.
 Rom
 C1marken
@@ -7456,6 +7808,17 @@ C11200-talet
 C312 000 personer
 Pmerv i turkmenistan hade på 1200-talet 12 000 personer
 <attr type="time" span="på 1200-talet">
+SMest uppmärksammad är en höjning av snusskatten på 22 procent.
+<attr type="measurement" literal="22 procent." token="22 procent." value="22" unit="procent">
+C2mest uppmärksammad
+Rär
+C1höjning
+Rav
+C1snusskatten
+Rpå
+C222 procent
+Pmest uppmärksammad är höjning av snusskatten på 22 procent
+<attr type="measurement" span="höjning av snusskatten på 22 procent">
 SMidskepps finns en större lucka i däcket.
 C1midskepps
 Rfinns
@@ -7506,6 +7869,24 @@ Rsom kyler
 C2flera delar
 PR<samtidigt>
 Pmoderna bärbara datorer har oftast fläkt som kyler flera delar samtidigt
+SMotsvarande andel för personer 65 år eller äldre är 21, 10 och 4 procent.
+<attr type="measurement" literal="personer 65 år" token="65 år" value="65" unit="år">
+<attr type="measurement" literal="21," token="21," value="21">
+<attr type="measurement" literal="10" token="10" value="10">
+<attr type="measurement" literal="4 procent." token="4 procent." value="4" unit="procent">
+C2motsvarande andel
+Rför
+C3personer 65 år
+Reller
+C1äldre
+Rär
+C121
+C110
+Roch
+C24 procent
+Pmotsvarande andel för personer 65 år eller äldre är 21 10 och 4 procent
+<attr type="measurement" span="för personer 65 år eller äldre">
+<attr type="measurement" span="21 10 och 4 procent">
 SMotsvarande siffra för Frankfurtbörsen ligger på en nedgång om 0,2 procent medan Parisbörsen ser ut att gå mot en öppning 0,2 procent högre.
 <attr type="measurement" literal="0,2 procent" token="0,2 procent" value="0,2" unit="procent">
 <attr type="measurement" literal="öppning 0,2 procent högre." token="0,2 procent högre." value="0,2" unit="procent högre">
@@ -7521,6 +7902,8 @@ C1parisbörsen
 Rser ut att gå mot
 C4öppning 0,2 procent högre
 Pmotsvarande siffra för frankfurtbörsen ligger på nedgång om 0,2 procent medan parisbörsen ser ut att gå mot öppning 0,2 procent högre
+<attr type="measurement" span="nedgång om 0,2 procent">
+<attr type="measurement" span="öppning 0,2 procent högre">
 SMänniskor kan göra mycket med hjälp av texter, men knappast allt.
 <attr type="negation" literal="knappast allt." token="knappast">
 C1människor
@@ -8605,6 +8988,8 @@ C1puls
 Rpå
 C3runt 100 slag/minut
 Ppatienten var cirkulatoriskt stabil med blodtryck på 150/80 mm hg samt puls på runt 100 slag/minut
+<attr type="measurement" span="blodtryck på 150/80 mm hg">
+<attr type="measurement" span="puls på runt 100 slag/minut">
 SPatienten var förtvivlad över <sin> cancerdiagnos och nästan lika ledsen över att möjligheten att bära en graviditet och föda ett eget barn <nu> var helt borta.
 <attr type="time" literal="nu" token="nu">
 C1patienten
@@ -8637,6 +9022,14 @@ Refter
 C1operationen
 Ppatienten återhämtade sig och kunde lämna sjukhuset två veckor efter operationen
 <attr type="time" span="två veckor efter operationen">
+SPer den 30 juni 2012 hade Stockholms kommun 871 952 invånare.
+<attr type="time" literal="den 30 juni 2012" token="den 30 juni 2012">
+Rper
+C4den 30 juni 2012
+Rhade
+C5stockholms kommun 871 952 invånare
+Pper den 30 juni 2012 hade stockholms kommun 871 952 invånare
+<attr type="time" span="per den 30 juni 2012">
 SPersoner med samsjuklighet mellan missbruk eller beroende och annan psykisk eller somatisk sjukdom är en särskilt utsatt grupp.
 C1personer
 Rmed
@@ -8729,6 +9122,7 @@ C1barn
 Ri
 C3åldern 06 månader
 Pprojektet saknar mätningar på barn i åldern 06 månader
+<attr type="measurement" span="i åldern 06 månader">
 SProjektet saknar mätningar på barn i åldern mellan 5 och 6 månader.
 <attr type="measurement" literal="mellan 5 och 6 månader." token="mellan 5 och 6 månader." value="mellan 5 och 6" unit="månader">
 C1projektet
@@ -8740,6 +9134,7 @@ Ri
 C1åldern
 C5mellan 5 och 6 månader
 Pprojektet saknar mätningar på barn i åldern mellan 5 och 6 månader
+<attr type="measurement" span="i åldern mellan 5 och 6 månader">
 SPunktskatter har <ofta> använts för att höja priset och på det viset styra bort konsumtion från <sådant> som anses ohälsosamt, miljöfarligt eller olämpligt på något annat sätt.
 <attr type="time" literal="ofta" token="ofta">
 C1punktskatter
@@ -8787,6 +9182,17 @@ C1fosforylkolin
 C1anti-pc
 Ppå 1970- och 1980-talet upptäcktes antikroppar mot fosforylkolin anti-pc
 <attr type="time" span="på 1970- och 1980-talet">
+SPå den plana bottnen 103 meter under ytan stod ett äldre tvåmastat segelfartyg.
+<attr type="measurement" literal="103 meter" token="103 meter" value="103" unit="meter">
+Rpå
+C2plana bottnen
+C2103 meter
+Runder
+C1ytan
+Rstod
+C3äldre tvåmastat segelfartyg
+Ppå plana bottnen 103 meter under ytan stod äldre tvåmastat segelfartyg
+<attr type="measurement" span="103 meter under ytan">
 SPå ett otroligt filmklipp syns <det> hur <han> har spänt fast sig i en liten trädgårdsstol samtidigt som de färgglada ballongerna lyfter <honom> mot skyn.
 Rpå
 C2otroligt filmklipp
@@ -8972,6 +9378,7 @@ C1storleken
 Rpå
 C1hjorden
 Prenhjorden höll sig inom begränsat område på 0,5-1 mil beroende på storleken på hjorden
+<attr type="measurement" span="begränsat område på 0,5-1 mil">
 SRent praktiskt kan <det> gå till så att studenten skriver på en arbetsstation, som inte har uppkopplingsmöjligheter till nätverk.
 <attr type="negation" literal="som inte har" token="inte">
 Rrent praktiskt kan
@@ -9007,13 +9414,11 @@ Rinför
 C1vintersäsongen
 Prestrycket hit är starkt inför vintersäsongen
 <attr type="time" span="inför vintersäsongen">
-SResultatet visar att cirka fyra av tio höll hastighetsbegränsningen förbi vägarbeten.
+SResultatet visar att cirka fyra av tio höll hastighetsbegränsningen förbi vägarbeten.
 C1resultatet
 Rvisar
 Ratt
-C2cirka fyra
-Rav
-C1tio
+C4cirka fyra av tio
 Rhöll
 C1hastighetsbegränsningen
 Rförbi
@@ -9264,6 +9669,11 @@ PR<man>
 Robserverat och identifiera
 C1signalerna
 Psedan kom nästa problem när man skulle kunna tolka vad man observerat och identifiera signalerna
+S <Sedan> kom nästa problem.
+PR<sedan>
+Rkom
+C2nästa problem
+Psedan kom nästa problem
 S <Sedan> åkte 21-åringen vidare till tågstationen i Umeå.
 <attr type="measurement" literal="21-åringen" token="21-åringen" value="21" unit="åringen">
 PR<sedan>
@@ -9381,6 +9791,22 @@ Rbehöver sällan behandlas med
 C1antibiotika
 Psjukdomen behöver sällan behandlas med antibiotika
 <attr type="negation" span="sjukdomen behöver sällan behandlas med antibiotika">
+SSkagerraks yta är 33 400 km², volymen är 7 280 km³ och medeldjupet är 218 m.
+<attr type="measurement" literal="33 400 km²," token="33 400 km²," value="33 400" unit="km²">
+<attr type="measurement" literal="7 280 km³" token="7 280 km³" value="7 280" unit="km³">
+<attr type="measurement" literal="218 m." token="218 m." value="218" unit="m">
+C2skagerraks yta
+Rär
+C333 400 km²
+C1volymen
+Rär
+C37 280 km³
+Roch
+C1medeldjupet
+Rär
+C2218 m
+Pskagerraks yta är 33 400 km² volymen är 7 280 km³ och medeldjupet är 218 m
+<attr type="measurement" span="skagerraks yta är 33 400 km² volymen är 7 280 km³ och medeldjupet är 218 m">
 SSkall landet kalla sig för en rättsstat måste lagarna skydda människors rätt att yttra sig och fritt utöva <sin> religion.
 Rskall
 C1landet
@@ -9616,6 +10042,28 @@ C1söndag
 Psommaren är slut och vi går över till vintertid normaltid natten mellan lördag och söndag
 <attr type="time" span="till vintertid">
 <attr type="time" span="natten mellan lördag och söndag">
+SSomrarna i Stockholm är <oftast> varma med medeltemperaturer på 20–23 °C och 11–13 °C på natten.
+<attr type="time" literal="oftast" token="oftast">
+<attr type="measurement" literal="20–23 °C" token="20–23 °C" value="20-23" unit="°c">
+<attr type="measurement" literal="11–13 °C" token="11–13 °C" value="11-13" unit="°c">
+<attr type="time" literal="natten." token="natten.">
+C1somrarna
+Ri
+C1stockholm
+Rär
+PR<oftast>
+C1varma
+Rmed
+C1medeltemperaturer
+Rpå
+C220-23 °c
+Roch
+C211-13 °c
+Rpå
+C1natten
+Psomrarna i stockholm är oftast varma med medeltemperaturer på 20-23 °c och 11-13 °c på natten
+<attr type="time" span="på natten">
+<attr type="measurement" span="medeltemperaturer på 20-23 °c och 11-13 °c på natten">
 SSpeltid: 1 timme 2 minuter.
 <attr type="time" literal="1 timme 2 minuter." token="1 timme 2 minuter.">
 C1speltid
@@ -9686,6 +10134,16 @@ PR<senare>
 Runder
 C43000 kilometer långa resan
 Psten och grus är tyngst och avlagras först medan sand dy och botten-slam fälls ut senare under 3000 kilometer långa resan
+<attr type="measurement" span="3000 kilometer långa resan">
+SStockholms city förfogade år 2000 över 82 hotell med 8 663 hotellrum.
+<attr type="time" literal="år 2000" token="år 2000">
+C2stockholms city
+Rförfogade
+C2år 2000
+C3över 82 hotell
+Rmed
+C38 663 hotellrum
+Pstockholms city förfogade år 2000 över 82 hotell med 8 663 hotellrum
 SStockholms stadslandskap och stadsbild som <vi> uppfattar <dem> idag har formats under många hundratals år.
 <attr type="time" literal="idag" token="idag">
 <attr type="time" literal="många hundratals år." token="många hundratals år.">
@@ -9773,6 +10231,31 @@ C3d v s
 Rbesitter
 C1karaktärsdygderna
 Pstorhet är möjligt för den som är verkligt bra människa som är förträfflig som människa d v s besitter karaktärsdygderna
+SStrax före klockan ett var 99 procent av platserna upptagna och ett hundratal person satt sida vid sida med handbuketter och väntade på att ceremonin skulle börja.
+<attr type="time" literal="klockan ett" token="klockan ett">
+<attr type="measurement" literal="99 procent" token="99 procent" value="99" unit="procent">
+Rstrax före
+C2klockan ett
+Rvar
+C299 procent
+Rav
+C1platserna
+C1upptagna
+Roch
+C2hundratal person
+Rsatt
+C1sida
+Rvid
+C1sida
+Rmed
+C1handbuketter
+Roch väntade på
+Ratt
+C1ceremonin
+Rskulle börja
+Pstrax före klockan ett var 99 procent av platserna upptagna och hundratal person satt sida vid sida med handbuketter och väntade på att ceremonin skulle börja
+<attr type="time" span="strax före klockan ett">
+<attr type="measurement" span="99 procent av platserna">
 SStrax före klockan ett var alla platserna upptagna och ett hundratal person satt sida vid sida med handbuketter och väntade på att ceremonin skulle börja.
 <attr type="time" literal="klockan ett" token="klockan ett">
 Rstrax före
@@ -9810,6 +10293,21 @@ C1grad
 Rreglerat
 Pstudenternas uppsatsarbete är inte i samma grad reglerat
 <attr type="negation" span="studenternas uppsatsarbete är inte i samma grad reglerat">
+SStudiedeltagarna genomgick transplantationer när <de> var i åldern 13 till 18 år.
+<attr type="measurement" literal="åldern 13" token="13" value="13">
+<attr type="measurement" literal="18 år." token="18 år." value="18" unit="år">
+C1studiedeltagarna
+Rgenomgick
+C1transplantationer
+Rnär
+PR<de>
+Rvar
+Ri
+C2åldern 13
+Rtill
+C218 år
+Pstudiedeltagarna genomgick transplantationer när de var i åldern 13 till 18 år
+<attr type="measurement" span="i åldern 13 till 18 år">
 SStudier av stjärnors bildande kräver observationer med radioteleskop i stället för optiska teleskop, eftersom stjärnor föds inuti stora, kalla och täta gasmoln som effektivt absorberar allt synligt ljus.
 C1studier
 Rav
@@ -9842,6 +10340,28 @@ Rom
 C2bättre liv
 Pstängslen höjdes till sex meter men stoppar inte människors hopp om bättre liv
 <attr type="negation" span="men stoppar inte människors hopp om bättre liv">
+SSummeras den årliga virkestillväxtens substitutionseffekt med den genomsnittliga kolinlagringen i träd och mark fördelad på 100 år motsvarar <detta> ca 12 ton koldioxid per hektar beskogad jordbruksmark och år.
+<attr type="time" literal="100 år" token="100 år">
+<attr type="measurement" literal="ca 12 ton koldioxid per hektar beskogad jordbruksmark" token="ca 12 ton" value="ca 12" unit="ton">
+Rsummeras
+C3årliga virkestillväxtens substitutionseffekt
+Rmed
+C2genomsnittliga kolinlagringen
+Ri
+C1träd
+Roch
+C1mark
+Rfördelad
+Rpå
+C2100 år
+Rmotsvarar
+PR<detta>
+C8ca 12 ton koldioxid per hektar beskogad jordbruksmark
+Roch
+C1år
+Psummeras årliga virkestillväxtens substitutionseffekt med genomsnittliga kolinlagringen i träd och mark fördelad på 100 år motsvarar detta ca 12 ton koldioxid per hektar beskogad jordbruksmark och år
+<attr type="time" span="på 100 år">
+<attr type="measurement" span="ca 12 ton koldioxid per hektar beskogad jordbruksmark och år">
 SSyftet kan istället vara att informera om och belysa ett samhälleligt skeende.
 C1syftet
 Rkan vara att informera om och belysa
@@ -10001,6 +10521,7 @@ Rpå
 PR<sin>
 C1väg
 Ptack vare de eroderande krafterna samlar vanlig flod upp flera miljoner ton sediment på sin väg
+<attr type="measurement" span="flera miljoner ton sediment">
 STeamet som utförde transplantationen saknade forskningsförberedelser inom fältet.
 C1teamet
 Rsom utförde
@@ -10137,6 +10658,7 @@ C20,4 procent
 Rtill
 C2202:60 kronor
 Ptobaksaktien steg 0,4 procent till 202:60 kronor
+<attr type="measurement" span="0,4 procent till 202:60 kronor">
 SToppmötet kan bli ett tillfälle att träffa nya val, och lyfta fram ännu oprövade alternativ.
 C1toppmötet
 Rkan bli
@@ -10146,6 +10668,15 @@ C2nya val
 Roch lyfta fram
 C2oprövade alternativ
 Ptoppmötet kan bli tillfälle att träffa nya val och lyfta fram oprövade alternativ
+STotalt stöder plattformen runt 300 000 användare på 1 400 förskolor och skolor.
+Rtotalt stöder
+C1plattformen
+C4runt 300 000 användare
+Rpå
+C31 400 förskolor
+Roch
+C1skolor
+Ptotalt stöder plattformen runt 300 000 användare på 1 400 förskolor och skolor
 STraditionen tros ha kommit under sent 1700-tal från Tyskland, där en flicka kläddes upp för att vara Christkindlein, med tända ljus i håret som föreställde en gloria.
 <attr type="time" literal="sent 1700-tal" token="sent 1700-tal">
 C1traditionen
@@ -10185,6 +10716,7 @@ C1tätt
 C5sedan väldigt många år tillbaka
 Ptre kronor är något av mest folkkära vi har i sverige och svt har följt dem tätt sedan väldigt många år tillbaka
 STrettioårsräntan steg 2 punkter till 3,40 procent.
+<attr type="measurement" literal="2 punkter" token="2 punkter" value="2" unit="punkter">
 <attr type="measurement" literal="3,40 procent." token="3,40 procent." value="3,40" unit="procent">
 C1trettioårsräntan
 Rsteg
@@ -10192,6 +10724,29 @@ C22 punkter
 Rtill
 C23,40 procent
 Ptrettioårsräntan steg 2 punkter till 3,40 procent
+<attr type="measurement" span="2 punkter till 3,40 procent">
+STrots bidrag och opinionen har åkerarealen i Sverige minskat från 2,8 miljoner hektar år 1995 till 2,6 miljoner hektar år 2010.
+<attr type="measurement" literal="2,8 miljoner hektar" token="2,8 miljoner hektar" value="2,8 miljoner" unit="hektar">
+<attr type="time" literal="år 1995" token="år 1995">
+<attr type="measurement" literal="2,6 miljoner hektar" token="2,6 miljoner hektar" value="2,6 miljoner" unit="hektar">
+<attr type="time" literal="år 2010." token="år 2010.">
+Rtrots
+C1bidrag
+Roch
+C1opinionen
+Rhar
+C1åkerarealen
+Ri
+C1sverige
+Rminskat
+Rfrån
+C32,8 miljoner hektar
+C2år 1995
+Rtill
+C32,6 miljoner hektar
+C2år 2010
+Ptrots bidrag och opinionen har åkerarealen i sverige minskat från 2,8 miljoner hektar år 1995 till 2,6 miljoner hektar år 2010
+<attr type="measurement" span="från 2,8 miljoner hektar år 1995 till 2,6 miljoner hektar år 2010">
 STrots <den> något dramatiska landningen fick inte Daniel några allvarliga skador.
 <attr type="negation" literal="fick inte" token="inte">
 Rtrots
@@ -10223,6 +10778,7 @@ C1tumören
 Rhar vuxit och blivit
 C3flera centimeter stor
 Ptumören har vuxit och blivit flera centimeter stor
+<attr type="measurement" span="flera centimeter stor">
 STuren gjordes klockan nio häromkvällen.
 <attr type="time" literal="klockan nio häromkvällen." token="klockan nio häromkvällen.">
 C1turen
@@ -10298,6 +10854,7 @@ C1kurs
 Rpå
 C411:65 hryvnia per dollar
 Pukrainas hryvnia var på historisk bottennivå i måndags med kurs på 11:65 hryvnia per dollar
+<attr type="measurement" span="kurs på 11:65 hryvnia per dollar">
 SUlv hade en utskjutande höft, på <den> kunde Bolde vila <sin> armbåge, Bolde hade en djup grop vid halsen, <där> kunde Ulv värma <sin> hand.
 C1ulv
 Rhade
@@ -10413,6 +10970,8 @@ Rmot
 C1euron
 Punder förmiddagen har kronan försvagats 3 öre till 6:55 mot dollarn medan den har försvagats 4 öre till 8:91 mot euron
 <attr type="time" span="under förmiddagen">
+<attr type="measurement" span="3 öre till 6:55">
+<attr type="measurement" span="4 öre till 8:91">
 SUnder ljusets medverkan omvandlas de flesta föreningar direkt eller indirekt via fotokemiska reaktioner.
 Runder
 C2ljusets medverkan
@@ -10607,6 +11166,17 @@ Ricke till
 C2grundläggande rättsfaktum
 Pundén konstaterar på samma linje men mer krasst att vid urminnes hävd försvaras äganderätten uteslutande genom hänvisning till långvarigt besittningsförhållande icke till grundläggande rättsfaktum
 <attr type="negation" span="icke till grundläggande rättsfaktum">
+SUngefär 20% av <dem> som söker för akut cystit har en recidivinfektion.
+<attr type="measurement" literal="Ungefär 20%" token="Ungefär 20%" value="20" unit="%">
+C2ungefär 20%
+Rav
+PR<dem>
+Rsom söker för
+C2akut cystit
+Rhar
+C1recidivinfektion
+Pungefär 20% av dem som söker för akut cystit har recidivinfektion
+<attr type="measurement" span="ungefär 20% av dem som söker för akut cystit">
 SUppförandekoderna var alltså länkade till människors grupptillhörighet.
 C1uppförandekoderna
 Rvar länkade till
@@ -10666,6 +11236,7 @@ C2åldern 18-74
 Ri
 C1eu
 Purvalet representerar kvinnor i åldern 18-74 i eu
+<attr type="measurement" span="i åldern 18-74 i eu">
 SUtan teleskop hade astronomiforskningen varit mycket begränsad.
 <attr type="negation" literal="Utan" token="Utan">
 Rutan
@@ -11194,6 +11765,7 @@ Rvar
 C3patienten kraftigt överviktig
 C2bmi 45
 Pvid tidpunkt var patienten kraftigt överviktig bmi 45
+<attr type="measurement" span="bmi 45">
 SVid denna tidpunkt var patienten kraftigt överviktig (BMI cirka 45).
 <attr type="measurement" literal="(BMI cirka 45)." token="cirka 45)." value="cirka 45">
 Rvid
@@ -11202,6 +11774,7 @@ Rvar
 C3patienten kraftigt överviktig
 C3bmi cirka 45
 Pvid tidpunkt var patienten kraftigt överviktig bmi cirka 45
+<attr type="measurement" span="bmi cirka 45">
 SVid färdigställandet hade OSO då en spektrometer som var dubbelt så bred som <den> på Kitt Peak-teleskopet nära Tuscon, Arizona.
 Rvid
 C1färdigställandet
@@ -11257,6 +11830,7 @@ C2alla kostnader
 Rär
 C1täckta
 Pvid nuvarande virkespriser ger gran som växer 13 m3 årlig markersättning på ca 1 000 kr per hektar sedan alla kostnader är täckta
+<attr type="measurement" span="årlig markersättning på ca 1 000 kr per hektar">
 SVid olympiska sommarspelen 1972 i München slog terrorister till.
 <attr type="time" literal="olympiska sommarspelen 1972" token="1972">
 Rvid
@@ -11267,6 +11841,18 @@ Rslog
 C1terrorister
 Rtill
 Pvid olympiska sommarspelen 1972 i münchen slog terrorister till
+SVid sommarsolståndet står solen som högst 54,1 grader över horisonten.
+<attr type="measurement" literal="högst 54,1 grader" token="högst 54,1 grader" value="högst 54,1" unit="grader">
+Rvid
+C1sommarsolståndet
+Rstår
+C1solen
+Rsom
+C3högst 54,1 grader
+Röver
+C1horisonten
+Pvid sommarsolståndet står solen som högst 54,1 grader över horisonten
+<attr type="measurement" span="högst 54,1 grader över horisonten">
 SVid tiden för intervjun var Sara 24 år.
 <attr type="measurement" literal="Sara 24 år." token="24 år." value="24" unit="år">
 Rvid
@@ -11276,6 +11862,7 @@ C1intervjun
 Rvar
 C3sara 24 år
 Pvid tiden för intervjun var sara 24 år
+<attr type="measurement" span="sara 24 år">
 SVid tiden kring 1600-talets slut bestämdes även ett enhetligt system med namn, så kallade kategorinamn.
 Rvid
 C1tiden
@@ -11580,17 +12167,19 @@ PR<de>
 Rpåstår sig vilja betrakta sig med
 C2konstens ögon
 Pde påstår sig vilja betrakta sig med konstens ögon
-S <den> gick från ca 15 procent 1980 till över 50 procent 2004.
+S <den> gick från ca 15 procent 1980 till över 50 procent 2004.
 <attr type="measurement" literal="ca 15 procent 1980" token="ca 15 procent" value="ca 15" unit="procent">
 <attr type="time" literal="ca 15 procent 1980" token="1980">
 <attr type="measurement" literal="över 50 procent 2004." token="över 50 procent" value="över 50" unit="procent">
 <attr type="time" literal="över 50 procent 2004." token="2004.">
 PR<den>
-Rgick från
+Rgick
+Rfrån
 C4ca 15 procent 1980
 Rtill
 C4över 50 procent 2004
 Pden gick från ca 15 procent 1980 till över 50 procent 2004
+<attr type="measurement" span="från ca 15 procent 1980 till över 50 procent 2004">
 Sden nya rollen speglar den unga cancerdrabbades vilja att visa <sin> omgivning en annorlunda bild av <sig själv.>
 C2nya rollen
 Rspeglar
@@ -12020,6 +12609,7 @@ Rfram till
 C2oktober 2003
 Päven om konkurrensen på bredbandsmarknaden fortfarande är svag ökade antalet fasta bredbandslinjer med nästan 80 procent under året fram till oktober 2003
 <attr type="time" span="under året fram till oktober 2003">
+<attr type="measurement" span="nästan 80 procent under året fram till oktober 2003">
 SÅk ut på landet och besök en bondgård.
 Råk ut på
 C1landet
@@ -12066,7 +12656,7 @@ Rsänktes
 C1avgifterna
 Rytterligare
 Påret efter sänktes avgifterna ytterligare
-SÅret med flest underbalanserade kommuner var 1996, då 237 av 279 kommuner redovisade underskott.
+SÅret med flest underbalanserade kommuner var 1996, då 237 av 279 kommuner redovisade underskott.
 <attr type="time" literal="1996," token="1996,">
 C1året
 Rmed
@@ -12074,9 +12664,7 @@ C3flest underbalanserade kommuner
 Rvar
 C11996
 Rdå
-C1237
-Rav
-C2279 kommuner
+C4237 av 279 kommuner
 Rredovisade
 C1underskott
 Påret med flest underbalanserade kommuner var 1996 då 237 av 279 kommuner redovisade underskott
@@ -12100,6 +12688,7 @@ Rav
 C2abcd invest
 Pårligen har de omsättning på sju miljarder kronor årligen och sedan tre år tillbaka ägs de av abcd invest
 <attr type="time" span="årligen och sedan tre år tillbaka">
+<attr type="measurement" span="omsättning på sju miljarder kronor årligen och sedan tre år tillbaka">
 SÖkade kostnader kan bli ett problem då varje dator kräver underhåll.
 C2ökade kostnader
 Rkan bli
@@ -12799,6 +13388,7 @@ C1högsommardagar
 Rinträffar
 C6i genomsnitt 16 gånger per år
 Pdagstemperaturer på över 25 °c högsommardagar inträffar i genomsnitt 16 gånger per år
+<attr type="measurement" span="dagstemperaturer på över 25 °c">
 S <Jag> frågade en pensionerad matematikprofessor på St. Johns College i Cambridge om <han> mindes Alan Turing.
 PR<jag>
 Rfrågade
@@ -13163,6 +13753,7 @@ C1~
 C11
 C1km/s
 Pspektralupplösning motsvarar enligt dopplerprincipen hastighetsbredd av 300 000 km/s × 0,01 mhz/3200 mhz ~ 1 km/s
+<attr type="measurement" span="hastighetsbredd av 300 000 km/s ×">
 S1.
 C11
 SVid inklusion <(alla> hade anamnes på buksmärta och feber) hade 97 procent lågtsittande vänstersidig buksmärta och 90 procent en temperatur på ≥ 38 °C.
@@ -13186,6 +13777,7 @@ C1temperatur
 Rpå
 C3≥ 38 °c
 Pvid inklusion alla hade anamnes på buksmärta och feber hade 97 procent lågtsittande vänstersidig buksmärta och 90 procent temperatur på ≥ 38 °c
+<attr type="measurement" span="97 procent lågtsittande vänstersidig buksmärta">
 S3.
 C13
 SFlygande bäckasiner söka hwila på mjuka tuvor.
@@ -13300,6 +13892,7 @@ Roch
 C1år
 Psummeras årliga virkestillväxtens substitutionseffekt med genomsnittliga kolinlagringen i träd och mark fördelad på 100 år motsvarar detta ca 12 ton koldioxid per hektar beskogad jordbruksmark och år
 <attr type="time" span="på 100 år">
+<attr type="measurement" span="ca 12 ton koldioxid per hektar beskogad jordbruksmark och år">
 S6+8.
 C16+8
 SHar <vi> information om Lågom1 Lågom2 LÅGOM3 Lågom4 Lågom5 LÅGOM6 Lågom7 Lågom8 Lågom9?
@@ -13663,6 +14256,7 @@ C1läskigt
 Roch
 C2så bra
 Pbarnen 10 & 12 år tyckte det var läskigt och så bra
+<attr type="measurement" span="barnen 10 & 12 år">
 S <Hon> fick även smärtor i ena skuldran och <hennes> ena fot släpade efter då <hon> gick.
 <attr type="measurement" literal="ena fot" token="ena fot" value="ena" unit="fot">
 PR<hon>
@@ -13677,3 +14271,32 @@ Rsläpade efter då
 PR<hon>
 Rgick
 Phon fick smärtor i ena skuldran och hennes ena fot släpade efter då hon gick
+SUnder fjolårets brutna räkenskapsår redovisades en nedgång i den globala försäljningen på 18 procent.
+<attr type="measurement" literal="18 procent." token="18 procent." value="18" unit="procent">
+Runder
+C3fjolårets brutna räkenskapsår
+Rredovisades
+C1nedgång
+Ri
+C2globala försäljningen
+Rpå
+C218 procent
+Punder fjolårets brutna räkenskapsår redovisades nedgång i globala försäljningen på 18 procent
+<attr type="measurement" span="globala försäljningen på 18 procent">
+SEn 67-årig man med prostatacancer och malignt mesoteliom skrevs in i ASIH för hjälp med smärtbehandling i hemmet.
+<attr type="measurement" literal="67-årig man" token="67-årig" value="67" unit="årig">
+C267-årig man
+Rmed
+C1prostatacancer
+Roch
+C2malignt mesoteliom
+Rskrevs in i
+C1asih
+Rför
+C1hjälp
+Rmed
+C1smärtbehandling
+Ri
+C1hemmet
+P67-årig man med prostatacancer och malignt mesoteliom skrevs in i asih för hjälp med smärtbehandling i hemmet
+<attr type="measurement" span="67-årig man med prostatacancer">
