@@ -32,7 +32,7 @@ env:
 
 jobs:
   manylinux2014_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
     runs-on: ubuntu-20.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -81,7 +81,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
@@ -118,7 +118,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-manylinux'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
@@ -155,7 +155,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows'
     runs-on: macos-11
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -221,7 +221,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   windows_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref == 'autoupdate-python-windows'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-osx'
     runs-on: windows-2022
     defaults:
       run:
