@@ -22,6 +22,6 @@ To run, choose "Tools\Visual Studio Command prompt" in Visual Studio, then navig
 
 - **lang_update_iris.bat** : Automation script for building and testing a language model in an InterSystem IRIS installation : 
 
-Usage = "lang_update_iris <lang> <IRIS installation directory>"
+Usage = "lang_update_iris \<lang\> \<IRIS installation directory\>"
 
 example = "lang_update_iris en C:\InterSystems\NLP117"
