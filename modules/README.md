@@ -25,3 +25,5 @@ To run, choose "Tools\Visual Studio Command prompt" in Visual Studio, then navig
 Usage = "lang_update_iris \<lang\> \<IRIS installation directory\>"
 
 example = "lang_update_iris en C:\InterSystems\NLP117"
+
+This batch file must also be copied to the binary directory (&lt;git_repo_dir&gt;\iknow\kit\x64\Release\bin), since it needs the language compiler executable. It will rebuild and recompile the specified language model, and copy the necessary dll-files into the IRIS installation. Beware, if IRIS is running iKnow, the copy action will fail, because of write protections. You need to close ("halt") the IRIS terminal, and restart a new one.
