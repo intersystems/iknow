@@ -19,3 +19,9 @@ popd
 
 This batch file must be copied to the binary directory (&lt;git_repo_dir&gt;\iknow\kit\x64\Release\bin), it will run the language compiler, and rebuild the language modules. It will run the test program, and then reinstall iknowpy. If the process does not report any errors, the language update can immediately be tested.
 To run, choose "Tools\Visual Studio Command prompt" in Visual Studio, then navigate to the "bin" directory. For the English language, run "lang_update en", choose another language code for other languages. If no language parameter is passed, all languages will be rebuild.
+
+- **lang_update_iris.bat** : Automation script for building and testing a language model in an InterSystem IRIS installation : 
+
+Usage = "lang_update_iris <lang> <IRIS installation directory>"
+
+example = "lang_update_iris en C:\InterSystems\NLP117"

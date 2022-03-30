@@ -1,10 +1,10 @@
 echo off
 REM
-REM usage = lang_update_iris <language> <IRIS binary directory>, example: "lang_update_iris en C:\InterSystems\NLP117\bin"
+REM usage = lang_update_iris <language> <IRIS binary directory>, example: "lang_update_iris en C:\InterSystems\NLP117"
 REM
 REM First argument is language = "en" for English, "nl" for Dutch, "ja" for Japanese, etc...
 set lang=%1
-REM Second argument is InterSystems IRIS binary directory, like "C:\InterSystems\NLP117\bin"
+REM Second argument is InterSystems IRIS installation directory, like "C:\InterSystems\NLP117"
 set irisbindir=%2
 shift
 iKnowLanguageCompiler %lang%
@@ -18,8 +18,8 @@ if %errorlevel% NEQ 0 (
 	goto exit
 )
 
-copy iKnowModel%lang%.dll %irisbindir%
-copy iKnowModel%lang%x.dll %irisbindir%
+copy iKnowModel%lang%.dll %irisbindir%\bin
+copy iKnowModel%lang%x.dll %irisbindir%\bin
 
 :exit
 echo Done...
