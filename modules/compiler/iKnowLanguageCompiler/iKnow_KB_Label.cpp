@@ -46,7 +46,10 @@ iKnow_KB_Label iKnow_KB_Label::LabelFromString(vector<string>& row_label, string
 	iKnow_KB_Label label(row_label[3 - 1], row_label[4 - 1]);
 	isDefault = row_label[6 - 1]; // Set isDefault = $PIECE(line, ";", 6)
 
-	if (row_label.size()>7) label.Attributes = row_label[8 - 1]; // Set label.Attributes = $PIECE(line, ";", 8)
+	if (row_label.size() > 7) {
+		label.Attributes = row_label[8 - 1]; // Set label.Attributes = $PIECE(line, ";", 8)
+		_checkattribute(label.Attributes.c_str());
+	}
 	label.PhaseList = row_label[2 - 1]; // Set label.PhaseList = $PIECE(line, ";", 2)
 	return label;
 }

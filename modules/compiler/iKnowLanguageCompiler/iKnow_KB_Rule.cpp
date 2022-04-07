@@ -58,7 +58,7 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 
 			vector<string> row_rule = kb.split_row(line);
 			if (row_rule.size() == 4) { // no pending comment
-				if (line[line.size()-1] != ';') // last symbol must be terminating ';'
+				if (line[line.size() - 1] != ';') // last symbol must be terminating ';'
 					throw ExceptionFrom<iKnow_KB_Rule>("Missing terminator symbol \";\" in line: " + line);
 			}
 			iKnow_KB_Rule rule; // Set rule = ..%New()
@@ -88,7 +88,11 @@ bool iKnow_KB_Rule::ImportFromCSV(string rules_csv, CSV_DataGenerator& kb)
 			}
 			rule.Phase = row_rule[2 - 1]; // Set phase = $PIECE(line, ";", 2)	// Set rule.Phase = phase
 			rule.InputPattern = rule.TransformRulePattern(row_rule[3 - 1], rule.Phase, kb, newLabels, newLabelsIndex, auto_generated_labels); // Set rule.InputPattern = ..TransformRulePattern($PIECE(line, ";", 3), phase, kb, .newLabels, .newLabelsIndex, .SBeginPhases, .SEndPhases)
-			rule.OutputPattern = kb.split_row(row_rule[4 - 1], '|'); // No need for transforming output patterns.
+			string rewrite_pattern = row_rule[4 - 1];
+			if (*rewrite_pattern.rbegin() == '|') {
+				throw ExceptionFrom<iKnow_KB_Rule>("Rule rewrite \"" + rewrite_pattern + "\" has empty end...");
+			}
+			rule.OutputPattern = kb.split_row(rewrite_pattern, '|'); // No need for transforming output patterns.
 			if (rule.InputPattern.size() != rule.OutputPattern.size()) {
 				throw ExceptionFrom<iKnow_KB_Rule>("Rule input (" + std::to_string(rule.InputPattern.size()) + ") & output pattern (" + std::to_string(rule.OutputPattern.size()) + ") items count do not match:\"" + line + "\"");
 			}
@@ -232,6 +236,10 @@ vector<string> iKnow_KB_Rule::TransformRulePattern(string& pattern, string& phas
 				it_label->second.insert(phase); // collect the phase
 		}
 		if (label.find("\"") != string::npos) { // convert literal to literal label
+			size_t n = std::count(label.begin(), label.end(), '\"');
+			if (n % 2) { // odd number of quotes in literal label
+				throw ExceptionFrom<iKnow_KB_Rule>("Illegal formed literal label: |" + label + "|");
+			}
 			string newLabel;
 			int lastQuote = 0;
 			for (string::iterator ic = label.begin(); ic != label.end(); ++ic) { // scan the label selector
