@@ -23,6 +23,16 @@
 353;1;UDNonRelevant;NonRelevant;
 /*		353.UD; Der Patient ist ansprechbar, blass, kaltschweißig und offenbar unter starkem Alkoholeinfluss.
 
+657;1;UDIgnoreNegation;+IgnoreNegation;copy of the udct attribute for use in specific phases other than 1 and $
+/*		657.UD; Auf keinen Fall sollten Sie in Ihrer Aufregung das Kind schütteln.
+/* NOTE: Since DENegation is mostly asssigned by rules, it doesn't make sense to remove the attribute here for items with UDIgnoreNegation.
+/*       The label IgnoreNegation will be used in phase 70.
+/* NOTE: Add rule(s) for UDTime here later, when addressing the Time attribute. 
+/*       If DETime is assigned here, it can be deleted by the current rules, so we add it only at the end of the processing for now.
+/* NOTE: DETime is not in the lexreps file, so it doesn't make sense to remove the attribute here for items with UDIgnoreTime.
+/*       A rule is added in the last phase.
+
+
 /* DISAMBIGUATE THE WORD noch
 /* --------------------------
 /* noch is a negative conjunction after weder; detection of weder...noch with up to 8 elements in between them
@@ -691,13 +701,17 @@
 /*===========================
 /*647;70;DEGeoadj;+DEAttradj; - moved to phase 40
 /*647; eine Reise durch drei deutsche Großstädte.
-206;70;DENicht;DERel+DENegation;default
+/* Apply exception
+658;70;IgnoreNegation;-DENegation;
+/*		658.UD; Auf keinen Fall sollten Sie in Ihrer Aufregung das Kind schütteln.
+
+206;70;DENicht+^IgnoreNegation;DERel+DENegation;default
 /*		206; In Bayern gilt diese Regelung nicht.
-232;70;DEKein;+DENegation;
+232;70;DEKein+^IgnoreNegation;+DENegation;
 /*		232; Der Gewinn der Weltmeisterschaft wäre kein wirtschaftlicher Erfolg.
-264;70;DENegRel;DERel+DENegation;
+264;70;DENegRel+^IgnoreNegation;DERel+DENegation;
 /*		264; In diesem Zustand will sie auf keinen Fall das hilflose Kind alleine lassen.
-587;70;DERelconj+DENegation;DEConj+DENegWord;for Relconj created by r513
+587;70;DERelconj+DENegation+^IgnoreNegation;DEConj+DENegWord;for Relconj created by r513
 /*		587; Es wird möglich sein, gemeinsam die zustimmungsfähigen Lösungen zu finden, ohne die die Union auf Dauer außerstande bleiben wird, ihre politischen Ambitionen zu finanzieren.
 283;70;SBegin:DEKomma:DEAndOr|"ohne"|.^"zu"|"zu"|DERel:DERelAux;*|+DERel|*|*|*;for ohne
 /*		283; Man lebt Jahre wie ein König, ohne den Preis zu bezahlen.
@@ -707,8 +721,9 @@
 /*		588; Das Braten roher Würste erfordert mehr Geschick, da die Wurst vollständig durchgegart werden muss ohne außen anzubrennen.
 589;70;"ohne dass";+DERel;
 /*		589; Vielleicht hat sich Ihr Kind auch einen Knochen gebrochen, ohne dass Sie es bemerkt haben.
-590;70;"ohne"+^DERel;DEPrep+DENegation;(assign NegBegin later to avoid that expansion rules are applied)
+590;70;"ohne"+^DERel+^IgnoreNegation;DEPrep+DENegation;(assign NegBegin later to avoid that expansion rules are applied)
 /*		590; „Primäre Medien“ sind ohne technische Hilfsmittel verwendbar, z.B. direkte mündliche Rede.
+
 
 /* Expansion of negation scope
 233;70;DEKein;+DENegBegin;
@@ -931,3 +946,10 @@
 /* Rewrite language-specific label to general mandatory label
 347;$;DEPunctuation;^Punctuation;
 /*		347; Eins, zwei.
+
+/* Interpret UDTime
+655;$;UDTime;+DETime;
+/*		655.UD; Es gibt heute keine Eier.
+656;$;UDIgnoreTime;-DETime;
+/*		656.UD; Seither können Straftäter, von denen nach Ansicht der Richter weiterhin eine Gefährdung für die Öffentlichkeit ausgeht, unbegrenzt in Haft kommen.
+
