@@ -138,7 +138,7 @@
 ;1,39;CSMonth;typeConcept;names of months;0;;
 ;1,40;CSMultiwordAdverb;typeAmbiguous;extra label for multiword adverbs of time, which shouldn't be part of the concept;0;;
 ;1,40;CSNavic;typeAmbiguous;specific word: 'navíc';0;;
-;1,40,65,66,70;CSNe;typeAmbiguous;negation markers (no,not,hardly,seldom);0;;
+;1,40,65,66,70,$;CSNe;typeAmbiguous;negation markers (no,not,hardly,seldom);0;;
 ;1,70,80,85,90,$;CSNegBCon;typeBeginConcept;negation marker as beginconcept ;0;;
 ;1,66,70,80,85,90,$;CSNegCon;typeConcept;negation marker as concept;0;;
 ;1,66,70,80,85,90,$;CSNegPR;typePathRelevant;negation marker as pathrelevant;0;;
@@ -197,7 +197,8 @@
 ;70,85,$;CSNegBegin;typeAttribute;to begin the negation path;0;;Path(Begin,Negation)
 ;70,85,$;CSNegStop;typeAttribute;to end the negation path;0;;Path(End,Negation)
 ;70,80;CSNoExpansion;typeAttribute;to mark certain entities for which there shouldn't be expansion;0;;
-;70,85;CSInNegspan;typeAttribute;temporary marker for entities in a negation span;0;;
+;70,85,$;CSInNegspan;typeAttribute;temporary marker for entities in a negation span;0;;
+;$;CSInSecondNegspan;typeAttribute;temporary marker for entities in a negation span for negation marker without IgnoreNegation;0;;
 ;$;CSTime;typeAttribute;attribute for time indications;0;;Entity(DateTime)
 ;60,66,70,80;CSList;typeAttribute;attribute for items in an enumeration;0;;
 ;80,85,$;CSPosSentiment;typeAttribute;for positive sentiment markers;0;;Entity(PositiveSentiment)
