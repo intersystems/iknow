@@ -26,6 +26,14 @@
 /*		373.UD. právnická osoba.
 374;1;UDNonRelevant;CSNonRelevant;
 /*		374.UD. Přesto nese paměť na předmoderní zemědělství.
+877;1;UDTime;+CSTime;
+/*		877.UD. Letošní Vánoce budou opravdu bohaté, ovšem zřejmě jen na překvapení.
+878;1;UDIgnoreTime;-CSTime-CSTimeConcept-CSCentury-CSDay-CSDen-CSBeginTime-CSEndTime-CSHour;
+/*		878.UD. Měsíc vyjde nad les až někdy ve 22.30, takže těsně před koncem úplného zatmění. Průměrný návštěvník strávil na síti za měsíc dvě hodiny 50 minut, což je o dvě minuty více než v květnu. Sedmá kapitola se zabývá středověkou indickou algebrou, v níž indičtí matematici patrně dosáhli největších úspěchů, tj. pojednává o období od 6. do 14. století. Výraznější pokles domácí trh naposledy vykázal v posledním dubnovém týdnu, kdy propadl dokonce o 2,4 %.
+880;1;UDIgnoreTime;-CSMinute-CSMonth-CSPossibleMonth-CSTimes-CSYearNum-CSYear;
+/*		880.UD. Změny, ke kterým od 1. ledna 2011 došlo v uspořádání dohledu v souvislosti se vznikem nových Evropských orgánů dohledu. V případě rychlostí nárazů větru se podle WMO většinou uvažuje délka časového intervalu 3 s, zatímco v případě rychlostí větru 10 nebo 15 minut.
+881;1;UDIgnoreNegation;-CSNegation-CSNegPrep;
+/*		881.UD. Ti, kteří na finanční trhy vstoupili nepřipraveni, bez dostatečných znalostí, zaplatili mnohem větší "školné" ve formě ztrát, které na burze realizovali.
 
 
 /*PHASE 38: disambiguation participles, adjectives and nouns - using case information
@@ -1725,7 +1733,7 @@
 763;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSPosSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSPosSentimentConceptStop|+CSInSentimentConceptSpan|+CSPosSentimentConceptStop;so span doesn't stop in enumeration of adjectives
 /*		763.UD. Celková jmenovitá hodnota čisté emise střednědobých a dlouhodobých státních dluhopisů na domácím trhu tak v druhém čtvrtletí roku 2018 činila 111,2 mld. Kč.. NOT. Stejně tak mnoho technologií spojených s kryptoměnami přináší různá vylepšení, ale jejich implementace není dostatečně rychlá a nemalá část projektů je tak odsouzena k nezdaru.
 764;80;CSAdj+CSInSentimentConceptSpan|.CSAdj:CSComma|CSAndOr+CSNegSentimentConceptStop+^CSPBegin|*CSList|^typeConcept:typeEndConcept:CSInSentimentConceptSpan;*|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan-CSNegSentimentConceptStop|+CSInSentimentConceptSpan|+CSNegSentimentConceptStop;so span doesn't stop in enumeration of adjectives
-/*		764.UD. Velká hospodářská krize z přelomu dvacátých a třicátých let 20. století podnítila vznik nových ekonomických teorií. Jenže voliči jako by po letech zmítání se v krizi ekonomické i politické chtěli přinejmenším v úřadu prezidenta klidnější politiky s jasnou hodnotovou orientací na Západ.
+/*		764.UD. Jenže voliči jako by po letech zmítání se v krizi ekonomické i politické chtěli přinejmenším v úřadu prezidenta klidnější politiky s jasnou hodnotovou orientací na Západ.
 
 /*  Sentiment attribute on adjective preceded by a linking verb -> expansion to the left
 709;80;CSPosspron:CSAdj:CSCon+^CSNoExpansion|.CSPosspron:CSPrep:CSAdj:CSCon|CSCopula|.CSAdvTemp|CSAdj+CSPosSentiment|CSInSentimentConceptSpan+^CSCon:CSAdj;+CSPosSentimentConceptBegin|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|+CSInSentimentConceptSpan|*|*;left expansion for adjective in sentiment span - don't add sentiment stop
@@ -1802,14 +1810,14 @@
 769;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegPosSent|.CSInNegspan+^CSNegPosSent|CSInNegspan+CSNegPosSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSNegSentimentBegin-CSPosSentimentBegin|-CSPosSentimentBegin-CSNegSentimentStop|-CSNegPosSent-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentBegin-CSNegSentimentStop|-CSPosSentimentStop+CSNegSentimentStop;reverse sentiment
 /*		769.UD. Jeho zdravotní stav není optimální.
 770;85;^CSInNegspan:CSNegBegin|CSInNegspan:CSNegBegin+^CSNegNegSent|.CSInNegspan+^CSNegNegSent|CSInNegspan+CSNegNegSent|.^CSNegStop:SEnd|*CSNegStop:SEnd;*|+CSPosSentimentBegin-CSNegSentimentBegin|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegNegSent-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentBegin-CSPosSentimentStop|-CSNegSentimentStop+CSPosSentimentStop;reverse sentiment
-/*		770.UD. VŠE v roce 2017 nevlastnila žádné majetkové ani dluhové cenné papíry a nedisponovala jinými majetkovými právy.
+/*		770.UD. Individuálně žádný z nich problém neindikuje, dohromady by v tom však, lidově řečeno, musel být čert, aby se v nejbližších dvou letech něco nestalo.
 
 /* Clean-up: move SentimentStop and SentimentBegin to next relevant entity, 2nd part
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 776;85;typeOther+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 /*		776.UD. Byl prokázán statisticky významný rozdíl v prodloužení doby na WL oproti pacientům bez terapie FPSAD, což poskytuje vyšší šance na zotavení nebo provedení LT.
 777;85;typeOther+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
-/*		777.UD. Jízda není vůbec nepříjemná nebo bez odměny, [… avšak] nikdy nebudeme schopni směr nebo postup cesty zcela řídit.
+/*		777.UD. Ale psychicky na tom nejsme dobře, ten zápas se na  nás asi podepsal.
 778;85;CSBracket1:CSBracket2+CSPosSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSPosSentiment;*|*|+CSPosSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
 /*		778.UD. Dokud se toto číslo nezmění, nemůžeme očekávat změnu ve využívání svobodného softwaru (a tím snížení nákladů) ve státní sféře.
 779;85;CSBracket1:CSBracket2+CSNegSentimentStop|.typeOther|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typePathRelevant:typeAmbiguous+^CSNegSentiment;*|*|+CSNegSentimentStop;move SentimentStop from nonrelevant to next relevant lexrep
@@ -1828,3 +1836,23 @@
 /*		302. Vybaven plod uložený v poloze podélné hlavičkou, první postavení, ženského pohlaví, 3370g neměřena a předán pediatrovi.
 787;90;CSNum+CSAdvTime;-CSNum;
 /*		787. např. příspěvek 7/2007.
+
+
+/*PHASE 99: FINAL CLEANUP
+/*=======================
+879;$;UDIgnoreTime;-CSTime;
+/*		879.UD. Na území České republiky je Natura 2000 tvořena vymezenými ptačími oblastmi a vyhlášenými evropsky významnými lokalitami.
+887;$;CSNegBegin+^CSNegation|.^CSNegation:UDIgnoreNegation|CSVerb+UDIgnoreNegation|.CSInf|CSNegRel;-CSNegBegin|*|*|*|-CSNegBegin;remove negation span for negated verb as IgnoreNegation plus other negation marker
+/*		887.UD. Já jsem neměl nikdy moc rád parlament a politické strany. To by ale nemělo být nijak překvapivé.
+888;$;CSNegBegin+^CSNegation|.^CSNegation|CSNegRel|.CSCopula:CSPRPron:CSInf|CSVerb+UDIgnoreNegation;-CSNegBegin|*|-CSNegBegin|*|*;remove negation span for negated verb as IgnoreNegation plus other negation marker
+/*		888.UD. V tomto smyslu by nijak neměl být narušen plán ukončit v závěru letošního roku program nákupů aktiv. S tou ženou jsem nikdy nic neměl. Můj další závodní program by to nijak narušit nemělo.
+889;$;CSNegRel|.CSCopula:CSPRPron:CSInf|CSVerb+UDIgnoreNegation;-CSNegBegin|*|*;remove negation span for negated verb as IgnoreNegation plus other negation marker
+/*		889.UD. Když už o parlamentu, tak ještě toto: nikdy jsem neměl důvěru ke kandidátům tak zvaně z centra.
+884;$;*CSInNegspan+^CSNegRel:CSNegVerb|CSNegRel:CSNegVerb+CSNegation+^UDIgnoreNegation;+CSInSecondNegspan|+CSInSecondNegspan;add extra marker for negation span of negation marker without IgnoreNegation
+/*		884.UD. Je třeba zdůraznit, že slabika bez tónu není úplná. Bez ní by vajíčka do koruny asi 15 metrů vysokého Skořápkovníku bludovského dostávali jen stěží. Právní osobnosti ani svéprávnosti se nikdo nemůže vzdát ani zčásti.
+883;$;CSNegBegin+^CSNegation|.^CSNegation:UDIgnoreNegation|UDIgnoreNegation|^CSInSecondNegspan;-CSNegBegin|*|*|*;remove negation span for UDIgnoreNegation, unless it's part of negation span
+/*		883.UD. Akutní selhání jater (ASJ) je řídce se vyskytující a vysoce devastující onemocnění, které je charakterizované náhlým nástupem závažné jaterní dysfunkce u jedinců bez předchozího onemocnění jater a špatnou prognózou. NOT. Je třeba zdůraznit, že slabika bez tónu není úplná. 
+885;$;UDIgnoreNegation+^CSInSecondNegspan|^CSInSecondNegspan:CSNegation;-CSNegBegin|*;remove negation span for UDIgnoreNegation, unless it's part of negation span
+/*		885.UD. Kult není o politice, o té se píše jinde, ani o hvězdách, které všichni znali a znají dodnes, protože jsou stále vidět a píše se o nich také jinde. NOT. Ani při startování nemusíte nic nikam zasouvat, otáčí se napevno umístěným knoflíkem.
+
+
