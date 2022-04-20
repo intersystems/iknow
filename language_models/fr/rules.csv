@@ -18,12 +18,25 @@
 /*		522.UD. Par suite, les paiements en question n’ont pas été imputés au bon exercice budgétaire.
 523;1;UDNegSentiment;+FRNegSentiment+FRNegSentimentBegin;
 /*		523.UD. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d’entre eux ont mal fonctionné.
+/* NOTE: Add rule(s) for UDTime here later, when addressing the Time attribute. 
+/*       If FRTime is assigned here, it can be deleted by the current rules, so we add it only at the end of the processing for now.
+
 524;1;UDConcept;FRCon+FRUDConcept;
 /*		524.UD. La stérilisation des équipements, les cadences d'opération qui n'auraient, selon l' accusation, pas permis de travailler dans des conditions d'hygiène satisfaisantes et la qualification du personnel paramédical ont été mises en cause.
 525;1;UDRelation;UDRelation+FRRelation;
 /*		525.UD. Homme soulevant le globe terrestre.
 526;1;UDNonRelevant;FRNonRelevant;
 /*		526.UD. Dès qu'ils aperçoivent une pièce de vêtement, un fragment d'uniforme ou sentent une odeur suspecte, ils stoppent tout.
+
+838;1;FRPas+UDIgnoreNegation;^FRAdvCon+FRAdvModal+UDIgnoreNegation;
+/*		838.UD. On se rendit compte que la situation n'avait guère évolué favorablement pour Steve.
+839;1;FRPlus+UDIgnoreNegation;^FRAdvCon+FRAdvDegree+UDIgnoreNegation;only in case "plus" is defined as UDIgnoreNegation, which is unlikely to happen
+/*		839.UD. No example.
+836;1;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord+FRNoNegWord;
+/*		836.UD. à ce jour, nul n'a compris mieux qu'eux la misère et la condition humaines. Aucun autre parti ne sera représenté.
+/* NOTE: FRTime is not in the lexreps file, so it doesn't make sense to remove the attribute here for items with UDIgnoreTime.
+/*       A rule is added in the last phase.
+
 
 /* DETECT NEGATION WITH ne + 2nd NEGATION MARKER
 /* Don't mark negation in questions with inversion
@@ -54,23 +67,25 @@
 788;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
 /*		788. Dans ce cas, ne pouvait-on vraiment pas en faire un peu plus pour surmonter le blocage actuel?
 789;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
+/*		789. no example.
 
 /* 2nd marker gets label FRAdvNeg. If no 'ne' is found, all lexreps labeled FRPas (except for 'pas' itself) get the label FRAdvNeg anyway.
 /* The words 'pas', 'plus' and 'jamais' are disambiguated further in the next phases.
 /* note: pas moins = FRPlus;-;FRAdvDegree;FRAdv
-640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg;
-/*		640. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat.
-639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg;
-/*		639. Que cela ne vous arrête surtout pas dans votre exercice professionnel.
-638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg;
-/*		638. Il n'y a apparemment pas d'autre solution.
-637;20;FRNe|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
-/*		637. L'influence n'était pas suffisamment documentée.
+/*640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg; -> integrated in r637
+/*640. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat.
+/*639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg; -> integrated in r637
+/*639. Que cela ne vous arrête surtout pas dans votre exercice professionnel.
+/*638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg; -> integrated in r637
+/*638. Il n'y a apparemment pas d'autre solution.
+/*637;20;FRNe|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
+637;20;FRNe+^FRNoNegWord|*{1,4}^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
+/*		637. L'influence n'était pas suffisamment documentée. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat. Que cela ne vous arrête surtout pas dans votre exercice professionnel. Il n'y a apparemment pas d'autre solution.
 636;20;FRNe|FRPlus:FRPas;FRNe+FRAdvNeg+FRNegation|FRAdvNeg;
 /*		636. Ne pas se contenter de constater mais agir.
 700;20;FRPas+^"pas"+^FRJamais+^"non";FRAdvNeg;make unambiguous negation markers AdvNeg
 /*		700. "Les opérateurs ont ajusté les prix en fonction du type de change qu'ils anticipent comme le plus probable", à savoir une nouvelle monnaie pas encore en circulation mais déjà dépréciée dans les esprits.
-730;20;FRRien:FRNegWord:FRAucun:FRPersonne:FRNegation;+FRNegindicator;
+730;20;FRRien:FRNegWord:FRAucun:FRPersonne:FRNegation+^FRNoNegWord;+FRNegindicator;restriction NoNegWord for UDIgnoreNegation
 /*		730. Rien ne va plus.
 785;20;FRNoNegWord;-FRNegindicator;
 /*		785. Il ne s'agit plus seulement des arrestations arbitraires.
@@ -78,14 +93,15 @@
 /*		725. C’est donc magnifique de ne rien ressentir de particulier.
 726;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|FRNegindicator+^FRSans;FRNe+FRNegation|*|*;
 /*		726. Les forces locales affirment régulièrement ne recevoir aucune aide.
-727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
-/*		727. L'adaptation doit bien sûr dans ce cas ne déroger à aucune des règles régissant la contactologie pédiatrique.
-728;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*;
-/*		728. Quelquefois, la pratique ne repose donc sur aucune raison médicale.
-729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*;
-/*		729. Ne fait-il preuve d'aucun respect ?
-731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*;
-/*		731. Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
+/*727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
+727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|*{1,4}^FRNegindicator+^FRAndOrBut+^FRQue+^FRNoNegWord|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
+/*		727. L'adaptation doit bien sûr dans ce cas ne déroger à aucune des règles régissant la contactologie pédiatrique. Quelquefois, la pratique ne repose donc sur aucune raison médicale. Ne fait-il preuve d'aucun respect ? Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
+/*728;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*; -> integrated in r727
+/*728. Quelquefois, la pratique ne repose donc sur aucune raison médicale.
+/*729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*; -> integrated in r727
+/*729. Ne fait-il preuve d'aucun respect ?
+/*731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*; -> integrated in r727
+/*731. Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
 831;20;"nulle";-FRNegWord;
 /*		831. Sept États vinicoles de l'Union européen appliquent toujours une taxe nulle sur le vin.
 
@@ -165,7 +181,8 @@
 95;40;FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel|FRPostsubjpron;FRSRel|Join;verb with -t-il etc.
 /*		95. Demande-t-il des renseignements? "Un mode de vie malsain", critique-t-elle. Ajoutera-t-il des commentaires?
 166;40;FRCon+^FRUDConcept|FRPostsubjpron;FRSRel|Join;unknown verb with -t-il etc.
-/*		166. Un prix ridicule, susurre-t-on à Paris. 166.UD. Not_in: Travailler-vous à Paris?
+/*		166. Un prix ridicule, susurre-t-on à Paris.
+/*		166.UD. Not_in: Travailler-vous à Paris?
 98;40;FRSRelAux|FRPostsubjpron;FRSRelAux|Join;auxiliary verb with -t-il etc.
 /*		98. Mais sont-ils de meilleurs hommes politiques?
 
@@ -992,6 +1009,16 @@
 /*		718. L'organisation s’est engagée à définir plus clairement les coûts.
 719;$;FRAdv+FRAdvTemp:FRAdvLoc:FRMod;-FRAdv;
 /*		719. Cependant, les déficiences restantes signalées ci-après ont été décelées dans les systèmes de contrôle et de surveillance.
+
+/* last step for user dictionary labels
+841;$;UDTime;+FRTime;
+/*		841.UD. Celles qui, hier, n'ont pas obtenu de fréquences devront cesser d'émettre.
+835;$;FRTime+UDIgnoreTime;-FRTime;
+/*		835.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny.
+837;$;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord;
+/*		837.UD. Pour l’instant, je ne ressens rien de particulier.
+840;$;FRNegBegin+^FRNegation+^FRNegWord|.<^FRNegation+^FRNegWord+^FRNegStop|FRNegStop:SEnd;-FRNegBegin|*|*;remove span from UDIgnoreNegation (rare)
+/*		840.UD. no example.
 
 /* Rewrite language specific labels to unified labels
 /*===================================================
