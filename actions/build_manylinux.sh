@@ -90,6 +90,7 @@ make -j $(nproc) test
 
 
 ##### Build iknowpy wheels #####
+git config --global --add safe.directory /iknow
 cd modules/iknowpy
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib"
 
