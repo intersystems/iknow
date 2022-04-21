@@ -24,6 +24,11 @@
 625;1;UDNonRelevant;ESNonRelevant;
 /*		625.UD. El lenguaje combinaría recurrencias (repeticiones) y desvíos de la norma para alejarse de la lengua estándar, causar extrañeza, renovarse, impresionar la imaginación y la memoria y llamar la atención sobre su forma expresiva.
 
+1102;1;ESNoAdj+UDIgnoreNegation;^ESAdj+UDIgnoreNegation;
+/*		1102.UD. Por ejemplo, experiencias como caminar sin tropezarse o vestirse, etc., involucran a una awareness en su estado prereflexivo o no-perceptual.
+1101;1;UDIgnoreNegation;-ESNegation-ESNegBegin-ESNo2+IgnoreNegation;
+/*		1101.UD. Una reunión a las seis de la tarde es difícilmente concebible sin luz.
+
 
 /*PHASE 40: DISAMBIGUATION AND PREPARATION FOR ATTRIBUTE ASSIGNMENT
 /*=================================================================
@@ -503,7 +508,7 @@
 /*NEGATION
 252;40;ESNoAdj|ESAdj;ESNoInCon+ESNegation|*;
 /*		252. Esta manera de caracterizar la relación entre norma y ley es de especial importancia porque evidencia la condición no-institucional de la civilidad.
-253;40;"no-"|^ESAndOrBut;JoinReverse|-ESNoAdj+ESNoInCon+ESNegation;to recognise adjectives with negative part as negational entities
+253;40;"no-"|^ESAndOrBut;+JoinReverse|-ESNoAdj+ESNoInCon+ESNegation;to recognise adjectives with negative part as negational entities
 /*		253. La libertad como no-dominación.
 254;40;ESNoAdj|ESPart;ESNoInCon+ESNegation|ESAdj;to recognise adjectives with negative part as negational entities
 /*		254. No tenía ningún sentido del dinero personal, para entendernos, ningún interés por él.
@@ -846,6 +851,10 @@
 /*PREPARATION
 1040;70;ESNo2+^ESAdj;^ESNo+ESNegBegin;
 /*		1040. Eso difícilmente constituye una cuestión de orden.
+1103;70;ESNoAdj:ESNoInCon+IgnoreNegation;-ESNegation-ESNegBegin;
+/*		1103.UD. Por ejemplo, experiencias como caminar sin tropezarse o vestirse, etc., involucran a una awareness en su estado prereflexivo o no-perceptual.
+1105;70;ESNegPR+IgnoreNegation;^ESIndefpronPR+IgnoreNegation;avoid that NegPR hinders span calculation for other markers
+/*		1105.UD. La cinta no tenía nada que ver con los carteles llenos de misterio que colgaban en la fachada del cine.
 
 /* O NO with or without negation/*
 1033;70;"si":"sí"|*^"o"|"o"|"no"|SEnd;*|*|ESAdvstruct|Join|*;make 'o no' NO at the end of a sentence when 'si' or 'sí' precedes
@@ -855,7 +864,7 @@
 1039;70;ESVerb:ESAux:ESInf:ESPartrel:ESColon|"no"|SEnd;*|-ESNo+ESNoInCon-ESNegBegin|*;'no' as opposite of 'sí' at the end of a sentence
 /*		1039. Dije no.
 
-/* NO x SINO inf without negation/*
+/* NO x SINO without negation/*
 1061;70;"no"|ESVerb:ESAux:ESmAux|"sino"|^ESVerb;-ESNegation-ESNegBegin|*|*|*;
 /*		1061. El entrenador lo rechaza y le confi esa que no es sino el aguador.
 
@@ -1051,3 +1060,11 @@
 /*===================================================
 619;$;ESPunctuation;Punctuation;
 /*		619. La mayoría son jóvenes, en torno a los 20 años, y por lo tanto carecen de largos historiales como defensores del derecho de autodeterminación. 
+
+1100;$;UDTime;+ESTime;
+/*		1100.UD. Un agricultor normal, pequeño o grande, que hoy compra piensos no tiene ni una sola posibilidad razonable de saber qué contienen.
+1104;$;UDIgnoreNegation;-ESNegation-ESNegBegin;
+/*		1104.UD. Y sin ser perfectos, hay buenos sistemas de regulación financiera.
+1106;$;UDIgnoreTime;-ESTime;
+/*		1106.UD. El faro romano cambiará de aspecto el próximo martes a las siete y media de la tarde, al mismo tiempo que otros monumentos europeos.
+
