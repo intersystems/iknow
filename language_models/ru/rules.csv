@@ -24,6 +24,14 @@
 /*		823.UD. Не потому, что там глубже, а потому что на большом расстоянии труднее определить на глазок и запомнить истинное место падения бутылки В хоре он держал тридцать шесть человек.
 824;1;UDNonRelevant;RUNonRelevant;
 /*		824.UD. Опытная проверка критериев литературного развития требует учёта многих показателей, обусловливаемых как характером воспринимаемого литературного произведения (вид, жанр, стиль, язык).
+1388;1;UDTime;+RUTime;
+/*		1388.UD. Литургический год начинается от Недели Пасхи, которая занимает совершенно особое и исключительное положение в числе праздников.
+1389;1;UDIgnoreTime;-RUTime-RUCentury-RUDay-RUDate-RUMonth-RUQuarter-RURoman-RUSeason;
+/*		1389.UD. Они на основе отдельных достижений 17 -- 18 вв. заложили начала вероятностей, теории. Цены на продукты питания в период с января по октябрь 2020 года увеличились на 4,1%. Во II квартале 2003 г. в силу определённых причин существенные условия заключённых договоров претерпели изменения. 
+1391;1;UDIgnoreTime;-RUTimeConcept-RUTimes-RUYear-RUYearNum-RUYearNumHyphen;
+/*		1391.UD. За последние двенадцать лет валюта в последний месяц года шесть раз укреплялась.
+1392;1;UDIgnoreNegation;-RUNegation-RUNegBegin-RUNegPrep;
+/*		1392.UD. На ранних этапах болезнь может развиваться без проявления симптомов, так что обнаружить ее получится только при помощи рентгена или диагностических исследований.
 
 
 /*PHASE 38: VARIOUS PREPARATORY RULES
@@ -370,19 +378,19 @@
 /*		1342. получение награды этого года.
 1345;40;RUDempron:RUIndefpron:RUNeskolko|RUTimeConcept:RUYear:RUSeason;RUAdvTime|+Join;
 /*		1345. Мукой тот год выдавали.
-1379;40;RUNum|"по":"до":"на":RUAndOr:RUHyphen|RUNum|RUMonth|RUYearNum|RUYear;+RUTime|*|JoinReverse|JoinReverse|JoinReverse|RUAdvTime;
+1379;40;RUNum|"по":"до":"на":RUAndOr:RUHyphen|RUNum|RUMonth|RUYearNum|RUYear;+RUTime|*|+JoinReverse|+JoinReverse|+JoinReverse|RUAdvTime;
 /*		1379. в ночь с 3 на 4 октября 1993 г. .
-1376;40;"в"|"ночь"|"с"|RUNum|"на"|RUNum|*RUTimeConcept:RUYearNum;*|*|*|+RUTime|*|JoinReverse|RUTimeEndConcept;
+1376;40;"в"|"ночь"|"с"|RUNum|"на"|RUNum|*RUTimeConcept:RUYearNum;*|*|*|+RUTime|*|+JoinReverse|RUTimeEndConcept;
 /*		1376. В ночь с 7 на 8 августа 2008.
 1381;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUYear|RUNum:RUOrdNum|RUTimeConcept;+RUTime|*|*|*|*|*;
 /*		1381. в 60 — 70-е гг. ХХ века.
 1380;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUBeginTime:RUPartTime:RUNum:RUIndefpron:RUOrdNum:RUIndefpronAdvdegree|RUTimes:RUTimeConcept+^RUYear;+RUTime|*|*|*;
 /*		1380. в русской литературе XVIII и начала XIX веков.
-1375;40;*RUYearNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUYear+RUTimeConcept:RUAcro;+RUTime|*|JoinReverse|RUAdvTime;
+1375;40;*RUYearNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUYear+RUTimeConcept:RUAcro;+RUTime|*|+JoinReverse|RUAdvTime;
 /*		1375. С 1925 до 1947 года. Результаты исследований портала 2003 и 2007 г. свидетельствуют.
-1382;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUCentury+RUAcro;+RUTime|*|JoinReverse|RUAdvTime;
+1382;40;*RUNum:RUOrdNum:RUBeginTime:RUPartTime+^RUAdv:RUIndefpron:RUVsego:RUVsjo|"по":"до":RUAndOr:RUHyphen|*RUOrdNum:RUNum:RUBeginTime:RUPartTime|*RUCentury+RUAcro;+RUTime|*|+JoinReverse|RUAdvTime;
 /*		1382. Они на основе отдельных достижений 17 -- 18 вв. заложили начала вероятностей, теории. Они на основе отдельных достижений с 4 по конец 8 в. заложили начала вероятностей, теории.
-1359;40;*RUNum:RUOrdNum|RUQuarter|RUNum|RUYear;JoinReverse|JoinReverse|JoinReverse|RUAdvTime;
+1359;40;*RUNum:RUOrdNum|RUQuarter|RUNum|RUYear;+JoinReverse|+JoinReverse|+JoinReverse|RUAdvTime;
 /*		1359. во втором квартале 2011 г объемы вскрыши упали на 22 проц.
 1362;40;RUNum:RUOrdNum|RUYear|RUNum:RUOrdNum|RUCentury;RUAdvTime|+Join|+Join|+Join;
 /*		1362. в 60-90ые годы XVIII века.
@@ -398,15 +406,15 @@
 /*		1319. К этой конвенции был приложен акт 1795 года.
 1315;40;RUYearNum|RUYear;RUAdvTime|+Join;
 /*		1315. В 2011 году Норвегия впервые запретила использование натурального меха.
-1354;40;"за":"после":"через":"спустя":"на":"на протяжении":"по истечении":RUAdj|.RUAdvdegree|RUNum|RUYear;*|JoinReverse|JoinReverse|RUTimeConcept+RUTime;
+1354;40;"за":"после":"через":"спустя":"на":"на протяжении":"по истечении":RUAdj|.RUAdvdegree|RUNum|RUYear;*|+JoinReverse|+JoinReverse|RUTimeConcept+RUTime;
 /*		1354. после десяти лет работы в фирме. На это ушли долгие семь лет.
 1355;40;RUOrdNum|"лет";RUTimeConcept+RUTime|+Join;
 /*		1355. С самых первых лет своего существования.
 1316;40;RUNum:RUOrdNum|RUMonth;RUAdvTime|+Join;
 /*		1316. 16 июля адвокаты сообщили. Зачисление на платной основе продолжалось до первого сентября.
-1344;40;"в":"с"|*RUOrdNum:RUNum|"годах":"году":"годы"|^RUOrdNum:RUNum;*|JoinReverse|RUTimeEndConcept|*;
+1344;40;"в":"с"|*RUOrdNum:RUNum|"годах":"году":"годы"|^RUOrdNum:RUNum;*|+JoinReverse|RUTimeEndConcept|*;
 /*		1344. В 1780-1790-х годах работы продолжили. 
-1346;40;"в":"с"|*RUOrdNum:RUNum|RUYear+^RUTimeConcept:"лет";*|JoinReverse|RUTimeEndConcept;
+1346;40;"в":"с"|*RUOrdNum:RUNum|RUYear+^RUTimeConcept:"лет";*|+JoinReverse|RUTimeEndConcept;
 /*		1346. В 60-80-х гг. прошлого века. Основная причина — размещение с 1950-1960-х гг. гиганстких «грязных» производств. NOT. Гражданин может осуществлять свои права и обязанности с 18 лет.
 1348;40;"в":"с"|RUYearNum|^typeConcept;*|RUAdvTime|*;
 /*		1348. в 1991 разгорелся конфликт. NOT. станет легче в 1000 раз.
@@ -414,9 +422,9 @@
 /*		1349. в 2008-2009 учебном году. в минувшем учебном году.
 1347;40;"в":"с"|RUYearNumHyphen;*|RUAdvTime;
 /*		1347. В 1941—1945 ряд народов были организованы.
-1350;40;*RUOrdNum:RUNum+RUBCon|RUTimeConcept:"гг.":"гг";JoinReverse|RUTimeBeginConcept;
+1350;40;*RUOrdNum:RUNum+RUBCon|RUTimeConcept:"гг.":"гг";+JoinReverse|RUTimeBeginConcept;
 /*		1350. в срок наказания из расчета один день пребывания в стационаре.
-1326;40;*RUOrdNum:RUNum|RUTimeConcept:"гг.":"гг";JoinReverse|RUTimeConcept+RUTime;
+1326;40;*RUOrdNum:RUNum|RUTimeConcept:"гг.":"гг";+JoinReverse|RUTimeConcept+RUTime;
 /*		1326. За 8 месяцев сего года в федеральный бюджет. за первые шесть месяцев с.г.. назначил в 1 год лишения свободы. За период 1990-2009 гг. в республике произошло снижение.
 1309;40;RUTimeConcept|RUNum:RUOrdNum|RUYear;RUAdvTime|+Join|+Join;
 /*		1309. нарушение произошло в мае 201 г..
@@ -462,13 +470,13 @@
 /*		1351. климатическая зима составила 178 дней, то есть половину года.
 1329;40;RUAdvTime:RUTimeEndConcept:RUBeginTime|RUAdvTime:RUTimeEndConcept;RUAdvTime|+Join;
 /*		1329. глава была задержана утром 17 июля. мы же каждый год 31 декабря ходим в баню. выборы назначены на 5 октября этого года. Данная температура побила рекорд 26 июля этого же года.
-1338;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUTimeConcept;JoinReverse|RUTimeConcept+RUTime;
+1338;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUTimeConcept;+JoinReverse|RUTimeConcept+RUTime;
 /*		1338. Он её не видел почти два месяца. 
-1387;40;RUAdvdegree|RURaz;JoinReverse|RUTimeEndConcept;
+1387;40;RUAdvdegree|RURaz;+JoinReverse|RUTimeEndConcept;
 /*		1387. столько же раз приходили отписки.
-1352;40;RUAdvdegree:RUVsego:RUOkolo:RUNum:RUIndefpron|RUTimeEndConcept;JoinReverse|RUTimeEndConcept;
+1352;40;RUAdvdegree:RUVsego:RUOkolo:RUNum:RUIndefpron|RUTimeEndConcept;+JoinReverse|RUTimeEndConcept;
 /*		1352. так как более половины дней в году были постными.
-1339;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUAdvTime+^RUSingleWord;JoinReverse|RUAdvTime;
+1339;40;RUAdvdegree:RUVsego:RUOkolo:RUIndefpron|RUAdvTime+^RUSingleWord;+JoinReverse|RUAdvTime;
 /*		1339. в среднем 9 января — 4 мая. NOT. это более или менее сегодня уже понятно.
 1366;40;RUNe|RUComp|RUAdvTime:RUTimeEndConcept:RUTimeConcept;RUAdvTime-RUNegBegin|+Join|+Join;
 /*		1366. вступают в силу не ранее 1 января года. не ранее одного месяца со дня их официального опубликования.
@@ -664,7 +672,7 @@
 /*		242. Примерно тот же социальный контингент.
 979;40;RUAdvdegree|RUIndefpronPRNR;RUNRPron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or nonrelevant are joined as nonrelevant pronoun
 /*		979. Примерно таковой социальный контингент.
-1025;40;RUAdvdegree|RUAdvPR;JoinReverse|+RUAdvPR;
+1025;40;RUAdvdegree|RUAdvPR;+JoinReverse|+RUAdvPR;
 /*		1025. Очень скоро архитектурные «новинки» палаццо были «занесены в реестр самых модных».
 356;40;RUAdvdegree|RUIndefpronPRCon;RUIndefpronPRCon+RUIndefpron|+Join;adverb of degree plus indefinite pronoun as pathrelevant or concept are joined as indefinite pronoun as pathrelevant or concept
 /*		356. Он добился в жизни практически всего и теперь может посвятить себя работе на благо родины.
@@ -1137,7 +1145,7 @@
 /*		1084. Мне никакой не понравился.
 1254;65;RUConGen|RUNikakoy|SEnd:RUPunctuation;*|RUNegCon|*;
 /*		1254. Очень тонкие перегородки между номерами, шумоизоляции никакой.
-561;65;RUNikakoy;RUBCon+RUNegBCon;default for 'nikakoy': becomes beginconcept
+561;65;RUNikakoy;+RUBCon+RUNegBCon;default for 'nikakoy': becomes beginconcept
 /*		561. но никакого результата не давали.
 
 /*'ни'
@@ -1184,6 +1192,7 @@
 /*		1275. (3) гетерогенностью исследуемых групп населения и больных.
 1276;66;*{2}RUPunctuation|^RUPunctuation;*|+RUPBegin;
 /*		1276. не может рассматриваться как препятствующее экономическим субъектам осуществлять деятельность по реализации товаров (выполнению работ, оказанию услуг), а также получать из бюджета возмещение излишне уплаченного налога.
+/*1278;66;RUBracket1|*{1,2}^RUPunctuation|RUBracket2|^SEnd+^RUPunctuation;-RUPunctuation|*|+RUAdvStruct-RUPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence, add NonRelevant label
 1278;66;RUBracket1|*{1,2}^RUPunctuation|RUBracket2|^SEnd+^RUPunctuation;-RUPunctuation|*|-RUPunctuation|*;treat one or two entities between brackets as non-disturbing part of the sentence
 /*		1278. Глава крестьянского (фермерского) хозяйства, осуществляющего деятельность без образования юридического лица.
 1277;66;RUBracket1:RUBracket2+RUPunctuation|^SEnd:RUPunctuation;*|+RUPBegin;isolate part of sentence between ()
@@ -1269,7 +1278,7 @@
 /*		1384. расходы по прошлому году пока не обнародованы.
 
 /*expansion to personal/demonstrative/indefinite pronoun / concept before negation marker
-1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUPossibleNegSpan|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to bcon/con/perspron/posspron/indefpron-prep-con, '+NegBegin' as condition to avoid expansion for Negation Concepts without expansion
+1108;70;*RUBCon:RUCon:RUPerspron:RUPosspron:RUPRPron+^RUNoExpansion|.RUAdvStruct|RUPrep|*RUAdj:RUPosspron:RUNRPron:RUPRPron:RUCon:RUPerspron:RUPossibleNegSpan|RUNegRel:RUNegCon:RUNegBCon:RUNegPred:RUNegPR+RUNegBegin+^RUNikakoy;+RUNegBegin|+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to bcon/con/perspron/posspron/indefpron-prep-con, '+NegBegin' as condition to avoid expansion for Negation Concepts without expansion, exception for Nikakoy
 /*		1108. Значительную роль религий в истории нашей цивилизации не станет отрицать никто. Она ведь от этой идеи не отказывалась. Во всяком случае, мы с тобой для переименования еще не готовы. И когда кто-либо по каким-либо причинам не уступает дорогу транспорту со спецсигналом, он грубейшим образом нарушает правила. Во-вторых, даже самая высокая мера наказания за административное правонарушение не настолько тяжка для правонарушителя, как в уголовном праве, чтобы её имело смысл дифференцировать». это самые свежие данные, расходы по прошлому году пока не обнародованы.  столько же раз приходили отписки о том, что оснований для привлечения её к ответственности нет. она должна обслуживать эти противоположные интересы -- других задач перед ней никто не ставит.
 1153;70;RUBCon:RUCon+^RUNoExpansion|RUNRPron|*RUAdj:RUCon+^RUNoExpansion|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to con
 /*		1153. образование исполнительных органов общества и досрочное прекращение их полномочий, если уставом общества решение этих вопросов не отнесено к компетенции совета директоров (наблюдательного совета).
@@ -1291,9 +1300,9 @@
 /*		1115. Это не может быть правдой.
 1167;70;*RUPerspron:RUCon+^RUNoExpansion|.RUAdvStruct|RUPunctuation+RUConj|RUNegRel;+RUNegBegin|+RUNegBegin|+RUNegBegin|*;expansion to subject before dash + 'ne'
 /*		1167. Свою миссию он видел в том, чтобы быть издателем для народа, когда коммерция – не цель, а средство.
-1215;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart|.RUCon|RUNegRel:RUNegCon:RUNegBCon+RUNegBegin|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*|*;expansion to object before ne+inf
+1215;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart|.RUCon|RUNegRel:RUNegCon:RUNegBCon+RUNegBegin+^RUNikakoy|RUInf|RUPunctuation:RUAndOr:SEnd;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*|*;expansion to object before ne+inf
 /*		1215. Выставки стараюсь не пропускать, в кино и театре почти не бываю -- кажется, что ничего достойного там не происходит.
-1110;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart:RUAdvPR+^RUNegPred|.RUCon|RUNegRel:RUNegCon:RUNegBCon:RUNegPR+RUNegBegin|^RUInf;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*;expansion to subject, with possibly a relation preceding 'ne', +NegBegin as condition to avoid expansion for Negation Concepts without expansion, exception: NegPred
+1110;70;*RUPerspron:RUPosspron:RUPRPron:RUCon:RUAdj+^RUNoExpansion|.RURAdv:RUAdvStruct:RUPred:RUInf:RUVerb:RUPart:RUAdvPR+^RUNegPred|.RUCon|RUNegRel:RUNegCon:RUNegBCon:RUNegPR+RUNegBegin+^RUNikakoy|^RUInf;+RUNegBegin|+RUNegBegin|+RUNegBegin|*|*;expansion to subject, with possibly a relation preceding 'ne', +NegBegin as condition to avoid expansion for Negation Concepts without expansion, exception: NegPred, exception for Nikakoy
 /*		1110. Его он ещё не промотал. Он её не видел почти два месяца. Он терпеть не может чёрствого хлеба. пришли к выводу, что они не так хороши, как могли бы быть. в пределах населённых пунктов она появляется очень редко. Четвёртое место было не занято. Договором в пользу третьего лица признается договор, в котором стороны установили, что должник обязан произвести исполнение не кредитору. Своим ходом троллейбусы идти не могли. Этим довольны не все.  Я же не опаздываю! NOT. Во-первых, когда баня протопилась там нет никакого дыма.
 1106;70;RUBCon|RUNegRel;+RUNegBegin|*;expansion to beginconcept
 /*		1106. В случаях, когда в возмездном договоре цена не предусмотрена и не может быть определена исходя из условий договора, исполнение договора должно быть оплачено.
@@ -1309,11 +1318,11 @@
 /*include verb in left expansion
 1164;70;.RUPosspron:RUCon:RUPRPron|RUVerb|RUPerspron+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
 /*		1164. Вид его показался мне не особенно гневным, и у меня мелькнуло.
-1177;70;RUVerb|.RUAdvStruct:RURAdv|RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1177;70;RUVerb|.RUAdvStruct:RURAdv|RUNegCon+RUNegBegin+^RUNikakoy;+RUNegBegin|+RUNegBegin|*;exception for Nikakoy
 /*		1177. В 2002 г. мексиканские исследователи обнаружили не просто новый, никем ранее не виданный и не описанный кактус -- они нашли растение, невообразимо отличающееся от всех, до сих пор известных.
-1186;70;RUCon+^RUNoExpansion|RUAux|RUNegCon:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1186;70;RUCon+^RUNoExpansion|RUAux|RUNegCon:RUNegBCon+RUNegBegin+^RUNikakoy;+RUNegBegin|+RUNegBegin|*;exception for Nikakoy
 /*		1186. Мы стремимся, чтобы островной регион были не просто красивым и обустроенным местом, а чтобы люди здесь оставались жить и воспитывать детей. Рассуждения гетмана были не всеми поняты и не всеми приняты.
-1213;70;RUInf:RUPred|.RUAdvPR:RUAdvStruct|RUNegRel:RUNegCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;
+1213;70;RUInf:RUPred|.RUAdvPR:RUAdvStruct|RUNegRel:RUNegCon+RUNegBegin+^RUNikakoy;+RUNegBegin|+RUNegBegin|*;exception for Nikakoy
 /*		1213. приглушённым голосом он объясняет, что приехать сейчас не может -- больна жена. 
 
 /*subject before negation predicate / short adjective
@@ -1325,7 +1334,7 @@
 /*		1197. В интервью она честно признается: у романа героев "Двух дней" нет будущего.
 
 /*expansion to preposition 'у'
-1113;70;"у"|RUPerspron|*RUAdj:RUCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;for expansion of negation: 'у' + perspron + concept + negation marker
+1113;70;"у"|RUPerspron|*RUAdj:RUCon:RUNegBCon+RUNegBegin;+RUNegBegin|+RUNegBegin|*;for expansion of negation: 'у' + perspron + concept + negation marker
 /*		1113. То есть там, позади, оставался список на букву Г, но от этого списка мы оторвались, и теперь у нас списка не было.
 1107;70;"у"|RUAdj:RUPerspron:RUCon+RUNegBegin;+RUNegBegin|*;for expansion of negation: 'у' + perspron/noun + negation marker
 /*		1107. При ней давным-давно состоял другой кавалер, у неё вообще не было в них недостатка. У следователя не было материалов, по которым он мог бы принять решение.
@@ -1398,7 +1407,8 @@
 /*		1198. Могут быть мёртвые знания, которые не используются в новых актах восприятия и деятельности или используются стандартно, путём абсолютного отождествления новой ситуации с той, в которой эти знания впервые применялись, то есть не творчески.
 
 /* Assign a temp marker to all words in a negation span
-1201;70;RUNegBegin:RUInNegspan|^RUNegStop;*|+RUInNegspan;assign a temp marker to all words in a negation span
+/*1201;70;RUNegBegin:RUInNegspan|^RUNegStop;*|+RUInNegspan;assign a temp marker to all words in a negation span
+1201;70;RUNegBegin:RUInNegspan|^RUNegStop;+RUInNegspan|+RUInNegspan;assign a temp marker to all words in a negation span
 /*		1201. Надо было показывать, что я ничего не боюсь и верю в своё быстрое возвращение.
 
 /*Expansion 'без'
@@ -1478,3 +1488,16 @@
 /*===================================================
 822;$;RUPunctuation;Punctuation;
 /*		822. Срок приостановления службы в органах и учреждениях, указанных в части третьей настоящей статьи.
+
+/* UDIgnore labels
+/*================
+1390;$;UDIgnoreTime;-RUTime;
+/*		1390.UD. Столько же раз приходили отписки о том, что оснований для привлечения её к ответственности нет. 
+1396;$;UDIgnoreNegation;-RUNegation;
+/*		1396.UD. Однако эти мысли были сейчас ни к чему, с ними не заснёшь.
+1395;$;*RUInNegspan+^RUNegRel:RUNegPred|RUNegRel:RUNegPred+^UDIgnoreNegation;+RUInSecondNegspan|+RUInSecondNegspan;add extra marker for negation span of negation marker without IgnoreNegation
+/*		1395. Любовь -- это кислород, без которого нет жизни, это красота, это сила, это желание работать, самореализоваться.
+1393;$;RUNegBegin+^RUNegation:RUInSecondNegspan|.^RUNegation:UDIgnoreNegation|UDIgnoreNegation|^RUInSecondNegspan;-RUNegBegin|*|*|*;remove negation span for UDIgnoreNegation
+/*		1393.UD. Курс на строительство демократического правового государства и гражданского общества несовместим ни с клерикализацией государственных институтов, ни с законодательным закреплением жёсткого контроля и неравенства конфессий. 
+1394;$;RUInNegspan;-RUInNegspan;clean-up, label InNegspan in last phase has unwanted effect on brackets
+/*		1394. Период нахождения физического лица не прерывается на периоды его выезда за пределы для краткосрочного (менее шести месяцев) лечения или обучения.
