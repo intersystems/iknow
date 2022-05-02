@@ -855,7 +855,7 @@ Match(&(Labels637[0]),3,1),	/* 1082 */
 Match(&(Labels637[0]),3,2),Match(&(Labels638[0]),4,1),	/* 1083 */
 Match(&(Labels637[0]),3,4),	/* 1085 */
 Match(&(Labels638[0]),4,1),	/* 1086 */
-Match(&(Labels640[0]),2,1),	/* 1087 */
+Match(&(Labels640[0]),3,1),	/* 1087 */
 Match(&(Labels641[0]),2,1),	/* 1088 */
 Match(&(Labels642[0]),2,1),	/* 1089 */
 Match()

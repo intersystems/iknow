@@ -26,6 +26,14 @@
 /*		924.UD. наскільки людина знайома і як ставиться до життя українського народу.
 925;1;UDNonRelevant;UKNonRelevant;
 /*		925.UD. Більшість відомостей про мову розглядали крізь призму чужоземних концепцій.
+1522;1;UDTime;+UKTime;
+/*		1522.UD. Ковбаси, зазвичай, робили перед Великоднем, і вони були обов'язковою й почесною стравою на святковому столі.
+1523;1;UDIgnoreTime;-UKTime-UKTimeConcept-UKDay-UKCentury-UKMonth-UKBeginTime-UKEndDate-UKEndTime;
+/*		1523.UD. Ейнтговен став фундатором електрокардіографії, вперше 1906 року застосувавши її для медичної діагностики. В цей день будуть зіграні чергові матчі відбору на Чемпіонат Європи. Для порівняння, 11 листопада 2017 року абоненти зробили на суму трохи більше 9 млн долларов. 
+1524;1;UDIgnoreTime;-UKRaz-UKRoman-UKTimeConceptAmbiguous-UKTimeEndConcept-UKTimes-UKYear-UKYearNum;
+/*		1524.UD. Платник податків має право повідомити про використання або про відмову від використання єдиного рахунку один раз протягом календарного року. Однак в дуже суворі та тривалі зими північна частина моря може покриватися льодом, проте це буває не частіше, ніж раз на кілька десятків років. Термін "козак" вперше згаданий у «Таємній історії монголів» 1240р.
+1526;1;UDIgnoreNegation;-UKNegation-UKNegBegin-UKNegPrep-UKNegPred;
+/*		1526.UD. Процедура таїнства хрещення, що здійснюється у православних храмах, залишається майже без змін більше 1500 років. Хоча саме по собі подібний винахід навряд чи б щось дав. 
 
 
 /*PHASE 38: prepare negation
@@ -197,7 +205,7 @@
 /*=====================
 1513;39;UKNum|"з"|"половиною";UKNum+UKCon|+Join|+Join;
 /*		1513. у два з половиною рази.
-1250;39;UKDigit|UKMoreLess|UKThan;UKNum+UKCon|Join|UKRelpron;
+1250;39;UKDigit|UKMoreLess|UKThan;UKNum+UKCon|+Join|UKRelpron;
 /*		1250. на 20% більше ніж у 2010 році.
 640;39;UKNum|UKAndOrBut|UKMoreLess;^UKNum|+Join|+Join;
 /*		640. Слід відзначити, що переважна більшість мікроорганізмів (82 %) були резистентними до двох та більше антибіотиків.
@@ -1700,3 +1708,17 @@
 /*= = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 922;$;UKPunctuation;Punctuation;
 /*		922. Зокрема, за запасами і видобутком залізних, марганцевих, титано-цирконієвих руд. 
+
+/*Ignore labels
+1525;$;UDIgnoreTime;-UKTime;
+/*		1525.UD. Близько 2,3 млн. га земель (на кінець 2000 р.) знаходиться під забудовою. 
+
+1530;$;UDIgnoreNegation;-UKNegation;
+/*		1530.UD. Але ж ні в кого не викликає сумніву.
+1528;$;*UKInNegspan+^UKNegRel|UKNegRel+^UDIgnoreNegation;+UKInSecondNegspan|+UKInSecondNegspan;add extra marker for negation span of negation marker without IgnoreNegation
+/*		1528.UD. Верховна Рада прийняла постанову про ратифікацію Договору і протоколу до нього, підписаного в Лісабоні з певними застереженнями, без урахування яких ратифікації не відбудеться. 
+1527;$;UKNegBegin+^UKNegation:UKInSecondNegspan|.^UKNegation:UDIgnoreNegation|UDIgnoreNegation|^UKInSecondNegspan;-UKNegBegin|*|*|*;remove negation span for UDIgnoreNegation
+/*		1527.UD. На думку експертів, інші держави регіону навряд чи зможуть допомогти. 
+1529;$;UKInNegspan:UKInSecondNegspan;-UKInNegspan-UKInSecondNegspan;clean-up, label InNegspan in last phase has unwanted effect on brackets
+/*		1529. Турецька лазня (хамам) Турецька лазня не є суто турецьким винаходом.
+
