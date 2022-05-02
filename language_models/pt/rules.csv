@@ -25,6 +25,11 @@
 384;1;UDNonRelevant;PTNonRelevant;
 /*		384.UD. - É um dos membros da Comunidade dos Países de Língua Portuguesa (CPLP).
 
+931;1;PTNaoAdj+UDIgnoreNegation;^PTAdj+UDIgnoreNegation;
+/*		931.UD. Porque nenhum deputado desta Câmara vai tomar medidas contra esto documento vergonhoso.
+932;1;UDIgnoreNegation;-PTNegation-PTNegBegin-PTNegation2+IgnoreNegation;
+/*		932.UD. No entanto, a adubação orgânica dificilmente prescinde da adubação química com outras fontes orgânicas de N para que produções satisfatórias sejam alcançadas. Deve-se definir um ecossistema como uma entidade coletiva de plantas e animais que interagem uns com os outros e com o ambiente não-vivente.
+
 
 /* PHASE 40: GENERAL DISAMBIGUATION
 /*=================================
@@ -82,11 +87,11 @@
 /*		291. A matriz energética é baseada em fontes renováveis, sobretudo a energia hidrelétrica e o etanol, além de fontes não-renováveis de energia, como o petróleo e o gás natural.
 
 /* "ou não: distinguish between negation-or-no-negation (via label PTOuNao) and ...-or-negation
-826;40;PTAux:PTVerb:PTAuxCon:PTPart|"ou"|"não"|^PTAux+^PTVerb;*|PTAdv+PTOuNao+PTNegation|Join|*;
+826;40;PTAux:PTVerb:PTAuxCon:PTPart|"ou"|"não"|^PTAux+^PTVerb;*|PTAdv+PTOuNao+PTNegation|+Join|*;
 /*		826. Agora cabe aos governos decidir se seremos ou não capazes de acabar com a poluição do rio. NOT. Seria obsceno discutir os grandes temas da finança mundial e ignorar as necessidades daqueles que não têm o suficiente para comer ou não têm acesso a água potável.
-830;40;"ou"|"não"|SEnd:PTPunctuation:PTDe:PTComma;PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
+830;40;"ou"|"não"|SEnd:PTPunctuation:PTDe:PTComma;PTAdv+PTOuNao+PTNegation-PTNegStop|+Join|*;
 /*		830. A habitação coletiva, com as casas dispostas em relação a um espaço cerimonial que pode ser no centro ou não. Há dúvidas sobre se cursaria, ou não, os estudos oficiais de aquelas eras, na universidade.
-838;40;PTCon:PTAdj|"ou"|"não"|PTPrep:PTPrepart+^PTDe;*|PTAdv+PTOuNao+PTNegation-PTNegStop|Join|*;
+838;40;PTCon:PTAdj|"ou"|"não"|PTPrep:PTPrepart+^PTDe;*|PTAdv+PTOuNao+PTNegation-PTNegStop|+Join|*;
 /*		838. A coerência ou não deste grau de correlação depende de outro fator não analisado nessa pesquisa que é a taxa de juros.
 
 /* Detect comparisons
@@ -485,7 +490,7 @@
 /*		567. À Minha Querida Mamã.
 
 /* NEGATION PLUS INDEFINITE PRONOUN
-687;40;PTNaoAdj|PTIndefpronPR|PTCon;^PTNaoAdj|+Join|*;
+687;40;PTNaoAdj|PTIndefpronPR|PTAdj:PTCon;^PTNaoAdj|+Join|*;
 /*		687. Nenhuma outra profissão, ou atividade, poderá reivindicar tais atributos.
 688;40;PTNaoAdj|PTIndefpronPR;PTNegPR+PTNegBegin+PTNegation|+Join;
 /*		688. Com as suas respectivas variantes estéticas o azulejo vai ser utilizado em outros países europeus como os Países Baixos, a Itália e mesmo a Inglaterra, mas em nenhum outro acaba por assumir a posição de destaque no universo artístico nacional.
@@ -911,8 +916,13 @@
 /* INDEFINITE PRONOUNS AS NEGATION
 686;40;PTNaoAdj|PTPrepart|PTPosspron;^PTNaoAdj|+Join|+Join;
 /*		686. Eu não vi nenhum dos seus filmes.
-853;40;"nunhum":"nenhuma"|PTVerb:PTAux;PTPerspron+PTNegation-PTNegBegin|*;
+853;40;"nenhum":"nenhuma"|PTVerb:PTAux;PTPerspron+PTNegation-PTNegBegin|*;
 /*		853. Algumas são promissoras, mas nenhuma está madura para a escala industrial.
+/* nenhum(a) dos/das
+856;40;"nenhum":"nenhuma"|"das":"dos"|.PTIndefpronPR|PTCon:PTAdj;+PTBeginconcept-PTNaoAdj-PTAdj-PTCon|PTAdj|PTAdj|*;-PTAdj-PTCon is for PTNaoAdj+UDIgnoreNgation
+/*		856. Cabe destacar que os critérios de cálculo de lucratividade não apresentaram correlação significativa com nenhuma das outras questões analisadas.
+857;40;"nenhum":"nenhuma"|PTDe|PTPerspron;PTPerspron+PTNegation-PTNaoAdj|Join|Join;
+/*		857. Nenhum de nós deseja um aumento da pobreza.
 
 /* DEFART AS PERSONAL PRONOUN
 803;40;PTDefart|PTInf;PTPerspron|*;
@@ -1036,6 +1046,13 @@
 /* PHASE 70: NEGATION
 /*===================
 /* PREPARATION
+934;70;PTNao+IgnoreNegation;PTAdv+PTAdvdegree+PTAdv70+IgnoreNegation;
+/*		934.UD. Tais relevos jamais voltarão a ser produzidos em toda a extensão da zona costeira.
+935;70;PTNegation+IgnoreNegation;-PTNegation-PTNegBegin;
+/*		935.UD. Com o advento da cultura de massas, tal fascínio atingiu uma amplitude jamais vivenciada, sendo a fotografia precursora nesse processo de representações.
+936;70;IgnoreNegation+^PTAdj|^PTPunctuation|PTNegation;*|*|-PTNegation-PTNegBegin;remove negation attribute from double negation when first word is defined as UDIgnoreNegation
+/*		936.UD.  no example.  NOT_IN. Podem transportar mais passageiros do que um ônibus não-articulado e não poluem diretamente o meio ambiente.
+
 /* add/remove labels that are needed for the expansion rules
 345;70;PTAdj;+PTCon;
 /*		345. Quando toca a sirene, toda a estratégia de segurança já deve estar definida.
@@ -1047,6 +1064,9 @@
 /*		898. Essa ‘elegância’ não se nota ao primeiro olhar.
 899;70;PTAdv+PTNegation+^PTOuNao;PTNao+PTNegation+PTNegBegin-PTNaoAdj;for "dificilmente"
 /*		899. Os sorotipos 1 e 5 são muito raramente resistentes à penicilina.
+933;70;PTNegPR+IgnoreNegation;^PTIndefpronPR+IgnoreNegation;avoid that NegPR hinders span calculation for other markers
+/*		933.UD. La cinta no tenía nada que ver con los carteles llenos de misterio que colgaban en la fachada del cine.
+
 
 /* não só/meramente/apenas
 929;70;PTNao+^PTNegation2|PTVerb:PTAux:PTInf:PTPartrel|PTAdvrestrict|^PTNumber;PTAdv|*|PTAdv|*;removing negation from Nao and making Advrestrict Relation when both occur together with a verb in between
@@ -1128,12 +1148,6 @@
 /*		852. A comida ficasse sem sabor.
 850;70;^PTDo|PTCon|PTPrep+PTNegation|PTNPC;*|+PTNegBegin|*|*;
 /*		850. Um ano após a instalação das torres de vigilância, os registros de acidentes sem vitimas fatais reduziram de 298 para 149 casos.
-
-/* nenhum(a) dos/das
-856;70;"nenhum":"nenhuma"|"das":"dos"|.PTIndefpronPR|PTCon;+PTBeginconcept-PTNaoAdj|PTAdj|PTAdj|*;
-/*		856. Cabe destacar que os critérios de cálculo de lucratividade não apresentaram correlação significativa com nenhuma das outras questões analisadas.
-857;70;"nenhum":"nenhuma"|PTDe|PTPerspron;PTPerspron+PTNegation-PTNaoAdj|Join|Join;
-/*		857. Nenhum de nós deseja um aumento da pobreza.
 
 /* Include antecedent of relative clause with negation
 900;70;^PTPrep+^PTPrepart|*PTCon+^PTAdj+^PTNegBegin|PTRelpron|PTNegBegin+^PTPerspron+^PTNPC;*|+PTNegBegin|-PTBeginrel|*;
@@ -1269,6 +1283,15 @@
 770;95;PTBeginrel;PTBeginrel;deletes Conj, Refl, etc. to avoid conflict with Beginrel
 /*		770. No entanto, não se pode precisar o quanto este genótipo é superior.
 
-/* REWRITE LANGUAGE SPECIFIC LABELS TO UNIFIED LABELS
+
+/* PHASE $
+/* =======
 378;$;PTPunctuation;Punctuation;
 /*		378. Segundo Moacyr Duarte, coordenador do grupo, quando toca a sirene, toda a estratégia de segurança já deve estar definida.
+
+930;$;UDTime;+PTTime;
+/*		930.UD. No mesmo sentido, a maturidade a três meses atingiu, hoje, os 1,464%.
+937;$;UDIgnoreTime;-PTTime;
+/*		937.UD. Seja em Janeiro, Fevereiro, Dezembro ou Agosto, as atrações e shows vão estar sempre lá.
+
+
