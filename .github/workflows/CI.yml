@@ -38,21 +38,21 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
       - name: download cached JSON for Modern C++ installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
@@ -62,7 +62,7 @@ jobs:
       - name: build and run C++ unit tests
         run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_x86_64:$MANYLINUX2014_X86_64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
@@ -74,7 +74,7 @@ jobs:
         run: python3 ref_testing.py
       - name: upload test results
         if: steps.tests.outputs.REF_TESTING_PASSED == '0'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-test
           path: |
@@ -85,21 +85,21 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
       - name: download cached JSON for Modern C++ installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
@@ -113,7 +113,7 @@ jobs:
       - name: build and run C++ unit tests
         run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_aarch64:$MANYLINUX2014_AARCH64_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
@@ -122,21 +122,21 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
       - name: download cached JSON for Modern C++ installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
       - name: download cached ccache and pip files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
@@ -150,7 +150,7 @@ jobs:
       - name: build and run C++ unit tests
         run: docker container run --rm -e CCACHE_DIR=/ccache -e PIP_CACHE_DIR=/pipcache -e CCACHE_MAXSIZE=500M -e ICU_URL -e JSON_URL -e CYTHON_VERSION -v ~/ccache:/ccache -v ~/pipcache:/pipcache -v $GITHUB_WORKSPACE:/iknow quay.io/pypa/manylinux2014_ppc64le:$MANYLINUX2014_PPC64LE_TAG /iknow/actions/build_manylinux.sh
       - name: upload wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
@@ -161,7 +161,7 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: set up environment
         run: |
           echo "XCODE_SELECTED=/Applications/Xcode_13.2.1.app" >> $GITHUB_ENV
@@ -176,23 +176,23 @@ jobs:
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}
           path: ${{ env.ICUDIR }}
       - name: download cached JSON for Modern C++ installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
       - name: download cached Python installations
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
           restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
           path: ${{ env.PYINSTALL_DIR }}
       - name: download cached ccache files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
           restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
@@ -202,7 +202,7 @@ jobs:
       - name: build and run C++ unit tests
         run: actions/build_osx.sh
       - name: upload wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
@@ -214,7 +214,7 @@ jobs:
         run: python3 ref_testing.py
       - name: upload test results
         if: steps.tests.outputs.REF_TESTING_PASSED == '0'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-test
           path: |
@@ -230,7 +230,7 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: set up environment
         run: |
           mkdir -p $HOME/buildcache_exe
@@ -243,22 +243,22 @@ jobs:
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
       - name: download cached buildcache installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-buildcache-${{ env.BUILDCACHE_URL }}
           path: ~/buildcache_exe
       - name: download cached JSON for Modern C++ installation
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
       - name: download cached buildcache files, Python installations
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
@@ -270,7 +270,7 @@ jobs:
       - name: build and run C++ unit tests
         run: actions/build_windows.sh
       - name: upload wheel artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
@@ -283,7 +283,7 @@ jobs:
         run: python ref_testing.py
       - name: upload test results
         if: steps.tests.outputs.REF_TESTING_PASSED == '0'
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-test
           path: |
@@ -296,7 +296,7 @@ jobs:
     if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
     steps:
       - name: create comment
-        uses: peter-evans/commit-comment@v1
+        uses: peter-evans/commit-comment@v2
         with:
           body: >-
             **Error**: Reference testing failed. See the build artifacts at
@@ -314,37 +314,37 @@ jobs:
       FORCE_DEPLOY: ${{ github.event.inputs.FORCE_DEPLOY }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 21  # github.event.commits has limit of 20 commits, so we need at least 21 to perform diffs
       - name: download cached pip files
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
           path: ~/.cache/pip
       - name: download manylinux2014_x86_64-wheel
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: manylinux2014_x86_64-wheel
           path: ~/wheels
       - name: download manylinux2014_aarch64-wheel
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: manylinux2014_aarch64-wheel
           path: ~/wheels
       - name: download manylinux2014_ppc64le-wheel
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: manylinux2014_ppc64le-wheel
           path: ~/wheels
       - name: download macosx_10_9_x86_64-wheel
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: macosx_10_9_x86_64-wheel
           path: ~/wheels
       - name: download windows_x86_64-wheel
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: windows_x86_64-wheel
           path: ~/wheels
@@ -352,7 +352,7 @@ jobs:
         run: actions/deploy.sh
       - name: warn if version.py was changed but not in last commit
         if: env.WARN_COMMIT
-        uses: peter-evans/commit-comment@v1
+        uses: peter-evans/commit-comment@v2
         with:
           sha: ${{ env.WARN_COMMIT }}
           body: >-
@@ -392,7 +392,7 @@ jobs:
         run: ${{ github.workspace }}/actions/check_pypi_limit.py ${{ secrets.GITHUB_TOKEN }}
       - name: create issue if PyPI project size is near limit
         if: env.DEPLOY_OCCURRED == '1' && env.CREATE_ISSUE == '1'
-        uses: peter-evans/create-issue-from-file@v3
+        uses: peter-evans/create-issue-from-file@v4
         with:
           title: "[check-pypi-limit] The PyPI size limit has almost been reached"
           content-filepath: ${{ env.HOME }}/issue.md

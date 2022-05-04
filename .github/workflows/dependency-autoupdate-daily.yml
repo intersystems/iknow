@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_icu.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
@@ -37,7 +37,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_json.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
@@ -71,7 +71,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -95,7 +95,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
@@ -105,7 +105,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -125,7 +125,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: install Python packages
         run: pip3 install --user requests beautifulsoup4
       - name: search for update
@@ -137,7 +137,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -161,7 +161,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_python.py win64
       - name: allow building pull requests
@@ -171,7 +171,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
@@ -193,7 +193,7 @@ jobs:
     runs-on: macos-10.15
     steps:
       - name: check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: search for update
         run: /usr/bin/python3 $GITHUB_WORKSPACE/actions/update_python.py osx
       - name: allow building pull requests
@@ -203,7 +203,7 @@ jobs:
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
