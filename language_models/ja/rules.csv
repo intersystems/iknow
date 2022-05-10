@@ -24,7 +24,15 @@
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
 
-4754;3;"http://":"https://"|*JPAlphabet:JPNumber:"="|^JPAlphabet+^JPNumber+^"=";JPCon+JPAlphabet|Join|Join;
+4669;3;"w":"d":"h";+JPAlphabet;
+
+/*		4669.	ホンダが欧州で売るＨＶは小型車「ジャズ（日本名フィット）」のみとなる。
+
+4760;3;JPNumber|"/"|JPNumber|"/"|JPNumber|"/"|JPNumber;JPNumber|Join|Join|Join|Join|Join|Join;
+
+/*		4760.	https://www.city.hachioji.tokyo.jp/kankobunka/003/003/001/001/p005201.html（八王子市）
+
+4754;3;"http://":"https://"|*JPAlphabet:JPNumber:"=":".":"/":"-":"~"|^JPAlphabet+^JPNumber+^"="+^"."+^"/"+^"-"+^"~";JPCon+JPAlphabet|Join|*;
 
 /*		4754.	交通規制の詳細は日本道路交通情報センターのホームページ内（http://www.jartic.or.jp/）に掲載。
 
@@ -63,7 +71,6 @@
 4699;3;JPNumber|"割"|JPNumber|"分"|JPNumber|"厘";JPNumber+JPMeasurement|Join|Join|Join|Join|Join;
 4698;3;JPNumber|"割"|JPNumber|"分";JPNumber+JPMeasurement|Join|Join|Join;
 4700;3;JPNumber|"分"|JPNumber|"厘";JPNumber+JPMeasurement|Join|Join|Join;
-4669;3;"w":"d":"h";+JPAlphabet;
 4645;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|^JPCount;*|JPCount+JPFraction|Join|*|*;
 4647;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPwari|"は":"を":"が":"も";*|JPCount+JPFraction|Join|*|*|*;
 4646;3;^JPCount|JPfun_kanji_1|"の"|JPNumber|JPwari;*|JPCount+JPFraction|Join|*|-JPCount;
@@ -103,6 +110,9 @@
 4639;3;JPNumber+^JPKanjiNumber|JPKanjiNumber;JPNumber-JPDateNum-JPMonthNum|Join;
 4671;3;JPMonthNum|"/"|JPDateNum|"~"|JPMonthNum|"/"|JPDateNum;JPDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|Join;
 4751;3;JPDateNum|"~"|JPDateNum;^JPDateNum+JPNumber|Join|Join;
+
+/*		4751.	20～21日は報道機関向けの事前公開です。
+
 3390;3;JPNumber|"~"|JPNumber;JPNumber-JPDateNum|Join|Join;
 3626;3;JPNumber|"〜"|JPNumber;JPNumber|Join|Join;
 3531;3;JPNumber+^"数"|":"|JPNumber;JPNumber|Join|Join;
@@ -120,6 +130,9 @@
 3348;3;JPAlphabet|JPPeriod|JPAlphabet;JPAlphabet|JPAlphabet|JPAlphabet;
 3396;3;JPAlphabet|JPApostrophe|JPAlphabet;JPAlphabet|Join|Join;
 3423;3;"1"|JPCount|"も"|"ない";JPRelation+JPNegation-JPImperialYear|Join|Join|Join;
+
+/*		3423.	スヌーピーの部屋にはチョコレートは１個もない。
+
 3422;3;"1"|JPCount|"も"|"なかった";JPRelation|Join|Join|Join;
 3455;3;"1"|JPCount|"="|JPNumber;JPCon|Join|Join|JPNumber+JPValue;
 3616;3;JPNumber|JPyen|"="|JPNumber;JPNumber|Join|Join|Join;
@@ -332,19 +345,40 @@
 1678;5;JPVerbOther|JPNumber;-JPVerbOther+Dummy|^JPNumber;
 830;5;JPNumber|JPFraction|JPNumber;JPNumber|Join|Join;
 4319;5;"明治":"大正":"昭和":"平成"|JPImperialYear;JPYearNum+JPNumber+DateTime|Join;
+
+/*		4319.	個人情報保護法は、平成１7年4月から施行される。
+
 4329;5;JPYearNum|JPFurigana|"年";JPYearNum|Join|+Dummy;
 4320;5;JPYearNum|BracketOpen|JPYearNum|BracketClose;JPYearNum+JPNumber+DateTime|Join|Join|Join;
 4326;5;JPYearNum|JPspace:JPSingleSpace|BracketOpen|JPYearNum|BracketClose;JPYearNum+JPNumber+DateTime|Join|Join|Join|Join;
 4758;5;"日"|JPspace:JPSingleSpace|JPYobi|JPspace:JPSingleSpace|JPTimeNum;+Dummy|Join|Join|Join|+Dummy;
+
+/*		4758.	平成２５年１２月３０日 （月） ７：１０～平成２６年４月１日（火）５：５５
+
 4324;5;"日"|JPYobi|JPTimeNum;+Dummy|Join|+Dummy;
 4325;5;JPTimeNum|JPCon;-JPTimeNum-DateTime|+Dummy;
 4321;5;JPMonthNum|JPspace:JPSingleSpace|"月";JPMonthNum+JPNumber+DateTime|Join|+Dummy;
 4331;5;JPDateNum+Dummy3|JPspace:JPSingleSpace|JPTimeNum;JPSeparateDate+DateTime+JPDateTime|Join|Join;
+
+/*		4331.	[2014/6/17 10:50]
+
 4756;5;"の"|JPDateNum+Dummy3;*|-Dummy3;
 4330;5;^"/"+^SBegin+^JPspace+^BracketClose|JPDateNum+Dummy3|^"/"+^"."+^"時点"+^"期間"+^SEnd;*|JPSeparateDate+DateTime+JPDateTime|+Dummy;
+
+/*		4330.	2012/3/26胃瘻増設術、気管切開、2012/3/30頸部食道婁/下部食道離断術を施工した。
+
 4755;5;JPDateNum+Dummy3|"の";-Dummy3|*;
+
+/*		4755.	両側乳癌術後　2018.10.4のＣＴを参照しています．
+
 4332;5;SBegin|JPDateNum+Dummy3;*|JPSeparateDate+DateTime+JPDateTime;
+
+/*		4332.	2012/4/20心外国友先生から当科外来へ紹介。
+
 4334;5;JPDateNum+Dummy3|SEnd;JPSeparateDate+DateTime|SEnd;
+
+/*		4334.	経腹腔的根治的左腎摘除術　2015/8/12
+
 4316;5;SBegin|JPYearNum:"同"|"年"|JPMonthNum|"月"|JPDateNum|"日":"日頃":"日ごろ"|JPCon+^"早朝"+^"未明"+^"夕方"+^"現在"+^"以降"+^"以来"+^"付け";*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|Join|Join|+Dummy;
 4323;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|"終値":"付け";*|-JPMonthNum+DateTime|+Dummy|-JPDateNum|+Dummy|+Dummy;
 4322;5;SBegin|JPMonthNum|"月"|JPDateNum|"日"|JPCon+^"早朝"+^"未明"+^"夕"+^"夕方"+^"現在"+^"以降"+^"以来";*|JPSeparateDate+DateTime+JPDateTime|Join|Join|Join|+Dummy;
@@ -353,7 +387,13 @@
 1403;5;JPMonth|JPNumber|JPDate;JPDate+DateTime+JPDateTime|Join|Join;
 1835;5;JPMonth|JPDate;JPDate|Join;
 4605;5;^"約"+^"回"+^"比"|JPMonthNum|"/"|JPDateNum|^"未満"+^"以上"+^"以下"+^"程度"+^JPCount+^"/";*|JPDateNum+JPTime+JPDateTime+DateTime-JPHour|Join|Join|*;
+
+/*		4605.	9/28～レボフロキサシン内服へ変更し、やや解熱傾向となったが10/2にも39℃代発熱あり、10/5当科紹介受診。
+
 4606;5;JPTime:JPDateNum|JPSingleSpace|JPTimeNum;JPTime+JPDateTime+DateTime|Join|Join;
+
+/*		4606.	1/13 18：06に経膣分娩で出生した。
+
 3690;5;JPNumber+^"数"|JPSingleSpace|JPNumber;JPNumber|Join|^JPNumber;
 
 /*		3690.	海外の機関投資家に対して幅広い運用商品を提供しており、投資運用額は300 億ユーロ超。 SHOULD NOT WORK FOR. 投資運用額は数 ユーロ超。
@@ -463,6 +503,9 @@
 4206;5;SBegin|JPAdvTime+JPCon|"夕"|JPde:JPni:JPno;*|JPCon+DateTime|Join|+Dummy;
 4547;5;JPAdvTime+JPCon+^"以前"|JPAdvTime+JPCon;JPTime+JPDateTime|Join;
 1739;5;SBegin|JPAdvTime+JPCon+^JPPrefix+^JPYear+^JPSeparateDate+^JPDateNum|^JPParticlePREPO+^"外来"+^"受診"+^"退院"+^JPyori+^SEnd;SBegin|JPAdvTime|*;
+
+/*		1739.	翌年、血糖コントロール不良や浮腫、足の感覚異常出現した。
+
 4202;5;JPAdvTime+JPCon|"外来":"受診":"退院";JPCon|Join;
 2137;5;SBegin|JPAdv+JPAdjNoun|JPna;*|-JPAdv|JPna;
 2508;5;SBegin|JPAdv+JPAdjNoun|JPSuruNoun|JPCon|JPde;*|JPCon|Join|Join|JPParticleDE;
@@ -1658,7 +1701,7 @@
 178;5;JPSuruNoun|JPnakaguro|JPSuruNoun;JPSuruNoun|Join|Join;
 4665;5;JPUnit|"/"|JPValue|JPUnit;*|JPCon|*|*;
 4686;5;JPUnit|JPValue|"/"|JPValue;*|*|-JPnakaguro|*;
-179;5;JPNumber+^JPMeasurement+^JPUnit|JPnakaguro|JPNumber+^JPTime;JPNumber|Join|Join;
+179;5;JPNumber+^JPMeasurement+^JPUnit|JPnakaguro|JPNumber+^JPTime;JPNumber-JPHour|Join|Join;
 180;5;JPSuruNoun|JPno|JPSuruNoun|JPni;JPCon|Join|Join|JPni;
 1821;5;JPCon|JPno|JPSuruNoun|JPSuruVerb|JPCon;^JPCon|JPNonRelevant|JPVerb+JPSahen|JPVerb|^JPCon;
 702;5;JPCon|JPno|JPSuruNoun|JPSuruVerb;JPCon|Join|Join|JPSuruVerb;
@@ -3875,7 +3918,13 @@
 4535;5;JPVerb|JPAdvTime+JPSuffixTime;+JPDateTime|+JPDateTime;
 4607;5;JPTime|"現在";^JPTime|Join;
 4752;5;JPDateNum|JPspace:JPSingleSpace|JPTimeNum;JPTimeNum-JPAdvTime|Join|Join;
+
+/*		4752.	本日　１７：３０～明日　１３：００まで
+
 4759;5;JPTimeNum|"～":"~"|JPTimeNum;JPTimeNum|Join|Join;
+
+/*		4759.	本日　１７：３０～明日　１３：００まで
+
 670;5;JPAdvTime+^JPTime+^JPSeparateDate;JPAdvTime-DateTime;
 2857;5;JPAdvTime+JPTime;-JPAdvTime+DateTime;
 3965;5;JPAdv+JPNegation|JPComma;JPEndRelation+JPNegation|JPComma;
@@ -4656,10 +4705,14 @@
 
 4612;19;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
 4613;19;typeConcept|"("|*JPNumber:JPSeparateDate|")";*|JPCon-BracketOpen-JPPlusMinus|^JPCon-DateTime|Join;
+
+/*		4613.	市立Ｓ中学校のプールで、同校教諭の森口悠子さんの長女、愛美ちゃん（４）が死亡しているのが発見された。
+
 4663;19;JPValue|JPUnit|"/"|"税込":"税込み"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*|*;
 4687;19;JPUnit|JPValue|"/"|JPValue|JPUnit;*|*|JPCon-JPNonRelevant|*|*;
 4757;19;JPDate|JPYobi;JPDate|Join;
 
+/*		4757.	11月17日(日)　東京　サントリーホール
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS
 
