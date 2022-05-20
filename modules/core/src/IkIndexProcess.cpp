@@ -645,6 +645,7 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 	  if (u_iscntrl(cCur)) { // double newline ends the sentence
 		Char cPattern[4] = { cCur, 0x00, 0x00, 0x00 };
 		static const Char winPattern[] = { '\r', '\n', '\r', '\n' };
+		static const Char win2Pattern[] = { '\n', '\r', '\n' }; // this pattern also breaks the sentence for non-Japanese
 		static const Char UnixPattern[] = { '\n', '\n' };
 		static const Char MacOSPattern[] = { '\r', '\r' }; 
 		for (size_t i=1; ((size_t)nPosition+i<input_size) && (i<4); i++) {  // read control marker, but don't exceed buffer
@@ -653,6 +654,9 @@ bool IkIndexProcess::FindNextSentenceJP(IkIndexInput* pInput, Lexreps& lexrep_ve
 		int c=0;
 		for (; c<4; c++) { if (cPattern[c] != winPattern[c]) break; }
 		if (c==4) { nPosition+=4; break; } // windows double newline, skip control mark and end the sentence
+		for (c=0; c < 3; c++) { if (cPattern[c] != win2Pattern[c]) break; }
+		if (c == 3) { nPosition += 3; break; } // windows double newline, skip control mark and end the sentence
+
 		for (c=0; c<2; c++) { if (cPattern[c] != UnixPattern[c]) break; }
 		if (c==2) { nPosition+=2; break; } // windows double newline, skip control mark and end the sentence
 		for (c=0; c<2; c++) { if (cPattern[c] != MacOSPattern[c]) break; }

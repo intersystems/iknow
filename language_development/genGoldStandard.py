@@ -114,8 +114,15 @@ print('genGoldStandard input_dir=\"'+in_path_par+'\" output_dir=\"'+out_path_par
 #
 # function to write to output file
 # 
-def write_ln(file_,text_):
+def write_ln(file_,text_=""):
     file_.write((text_+"\r\n").encode('utf8'))
+
+def read_text_file(file_name):
+    input = open(file_name,encoding="utf8")
+    text = input.read()
+    input.close()
+    return text
+
 #
 # collect text documents in one of both input directories (depending on action parameter)
 #
@@ -136,21 +143,13 @@ f_input = []  # non-recursive list of files, .txt only
 for (dirpath, dirnames, filenames) in walk(in_path_par):
     for single_file in filenames:
         if (single_file.endswith('.txt')):
-            # f_input.append(single_file)
-            full_path = dirpath + single_file
-            f_input.append(full_path)
+            f_input.append(os.path.join(dirpath, single_file))
     break
 
 if action_par == 'create':
     for text_file in f_input:
-        f_text = open(text_file, "rb")
-        header = f_text.read(3)
-        if (header == b'\xef\xbb\xbf'): #Utf8 BOM
-            header = b''    # remove BOM
-        text = header + f_text.read() # read text, must be utf8 encoded
-        text = text.decode('utf8') # decode text to Unicode
-        f_text.close()
-        #    
+        text = read_text_file(text_file)
+
         # create output directories   
         if not os.path.exists(os.path.join(out_path_par, 'gold_standard_ready')):
             os.mkdir(os.path.join(out_path_par, 'gold_standard_ready'))
@@ -200,8 +199,8 @@ if action_par == 'create':
                 engine.index(single_sentence, language_par)
                 for sent in engine.m_index['sentences']:
                     sentence_order +=1        
-                    for sentence in sentence_list:
-                        sentence = 'Sentence ' + str(sentence_order) + ';' + single_sentence
+                    # for sentence in sentence_list:
+                    sentence = 'Sentence ' + str(sentence_order) + ';' + single_sentence
                     write_ln(f_wip, sentence)
                     #
                     # write entities
@@ -210,12 +209,14 @@ if action_par == 'create':
                         for entity in sent['entities']:
                             if entity['type'] == 'Concept':
                                 write_ln(f_wip, 'C;' + entity['index'])
-                            if entity['type'] == 'Relation':
+                            elif entity['type'] == 'Relation':
                                 write_ln(f_wip, 'R;' + entity['index'])
-                            if entity['type'] == 'PathRelevant':
+                            elif entity['type'] == 'PathRelevant':
                                 write_ln(f_wip, 'PR;' + entity['index'])
-                            if entity['type'] == 'NonRelevant':
-                                write_ln(f_wip, 'NR;' + entity['index'])    
+                            elif entity['type'] == 'NonRelevant':
+                                write_ln(f_wip, 'NR;' + entity['index'])
+                            else:
+                                pass
                     #
                     # sentence attributes
                     #
@@ -557,10 +558,7 @@ if action_par == 'finish':
     for (dirpath, dirnames, filenames) in walk(in_path_ready):
         for single_file in filenames:
             if (single_file.endswith('.csv')):
-                # f_ready.append(single_file)
-                full_path = dirpath + single_file
-                f_ready.append(full_path)
-
+                f_ready.append(os.path.join(dirpath, single_file))
         break
 
     print('input directory is ' + in_path_ready)
@@ -590,9 +588,12 @@ if action_par == 'finish':
             f_gold_input = open(os.path.join(out_path_gold_input, gold_input_file), 'wb')
             f_gold_input.write(b'\xef\xbb\xbf') # Utf8 BOM
             for line in read_file:
+                line = line.rstrip() # remove '\r\n' at end of line
                 if line.startswith('Sentence'):
                     sentence_text = line.split(';',1)[1] # split at first ';' and only keep second part (= strip 'Sentence [number];')
                     write_ln(f_gold_input, sentence_text)
+                    write_ln(f_gold_input) # double newline forces end_of_sentence condition
+
             read_file.close()
             f_gold_input.close()
     #
@@ -623,20 +624,12 @@ f_gold_input = []  # non-recursive list of files, .txt only
 for (dirpath, dirnames, filenames) in walk(in_path_gold_input):
     for single_file_gs in filenames:
         if (single_file_gs.endswith('.txt')):
-            # f_gold_input.append(single_file)
-            full_path = dirpath + single_file_gs
-            f_gold_input.append(full_path)
+            f_gold_input.append(os.path.join(dirpath, single_file_gs))
     break   
 
 if action_par == 'compare':
     for text_file in f_gold_input:
-        f_text = open(text_file, "rb")
-        header = f_text.read(3)
-        if (header == b'\xef\xbb\xbf'): #Utf8 BOM
-            header = b''    # remove BOM
-        text = header + f_text.read() # read text, must be utf8 encoded
-        text = text.decode('utf8') # decode text to Unicode
-        f_text.close()    
+        text = read_text_file(text_file)
         #
         # create output directory   
         #
@@ -689,12 +682,14 @@ if action_par == 'compare':
                         for entity in sent['entities']:
                             if entity['type'] == 'Concept':
                                 write_ln(f_current, 'C;' + entity['index'])
-                            if entity['type'] == 'Relation':
+                            elif entity['type'] == 'Relation':
                                 write_ln(f_current, 'R;' + entity['index'])
-                            if entity['type'] == 'PathRelevant':
+                            elif entity['type'] == 'PathRelevant':
                                 write_ln(f_current, 'PR;' + entity['index'])
-                            if entity['type'] == 'NonRelevant':
+                            elif entity['type'] == 'NonRelevant':
                                 write_ln(f_current, 'NR;' + entity['index'])    
+                            else:
+                                pass
                     #
                     # sentence attributes
                     #
@@ -1030,16 +1025,9 @@ lexrep_info = []
 # process files one by one
 #
 if action_par == 'create':
-
     for text_file in f_input:
         print('processing ' + ntpath.basename(text_file) + ' for XML output')
-        f_text = open(text_file, "rb")
-        header = f_text.read(3)
-        if (header == b'\xef\xbb\xbf'): #Utf8 BOM
-            header = b''    # remove BOM
-        text = header + f_text.read() # read text, must be utf8 encoded
-        text = text.decode('utf8') # decode text to Unicode
-        f_text.close()
+        text = read_text_file(text_file)
         #
         # create output file, write header
         #
