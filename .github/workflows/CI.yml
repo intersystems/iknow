@@ -33,7 +33,7 @@ env:
 jobs:
   manylinux2014_x86_64:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
@@ -82,7 +82,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: check out repository
         uses: actions/checkout@v3
@@ -119,7 +119,7 @@ jobs:
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: check out repository
         uses: actions/checkout@v3
@@ -292,7 +292,7 @@ jobs:
 
   test_result:
     needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
     steps:
       - name: create comment
@@ -306,7 +306,7 @@ jobs:
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master'
     needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
       TESTPYPI_TOKEN: ${{ secrets.TESTPYPI_TOKEN }}
