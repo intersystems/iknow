@@ -56,7 +56,7 @@ import iknowpy
 #
 in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"
-language_par = "ja"
+language_par = "en"
 action_par = "create"
 type_par = "type"
 certainty_par = "cert"
@@ -118,10 +118,8 @@ def write_ln(file_,text_=""):
     file_.write((text_+"\r\n").encode('utf8'))
 
 def read_text_file(file_name):
-    input = open(file_name,encoding="utf8")
-    text = input.read()
-    input.close()
-    return text
+    with open(file_name, encoding="utf8") as f_text:
+        return f_text.read()
 
 #
 # collect text documents in one of both input directories (depending on action parameter)
@@ -159,12 +157,10 @@ if action_par == 'create':
         os.mkdir(os.path.join(out_path_par, 'xml_output'))
 
     for text_file in f_input:
-        text = read_text_file(text_file)
         #
         # check whether output file for input file already exists, otherwise: process input
         #
-        # output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
-        output_file = ntpath.basename(text_file) + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
 
         if os.path.exists(os.path.join(out_path_wip, output_file)): 
             print('output file for ' + ntpath.basename(text_file) + ' already exists and processing for this file was skipped')
@@ -180,16 +176,24 @@ if action_par == 'create':
                 #
                 # reconstruct sentence literal from trace
                 #
+                text = read_text_file(text_file)
                 engine.index(text, language_par, traces=True)
-                for trace in engine.m_traces:
-                    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+                if language_par == "ja":
+                    for sent in engine.m_index['sentences']:
+                        cnt_entities = len(sent['entities']) # number of entities in the sentence
+                        sent_offset_start = sent['entities'][0]['offset_start']
+                        sent_offset_stop = sent['entities'][cnt_entities-1]['offset_stop']
+                        sentence_list.append(text[sent_offset_start:sent_offset_stop].replace("\n"," "))
+                else:
+                    for trace in engine.m_traces:
+                        key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
                 
-                    if (key == "SentenceFound"):
-                        sentence_composed = value.split('"')[7]
-                        if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
-                            for i in range(8, len(value.split('"')) - 1):
-                                sentence_composed = sentence_composed + '"' + value.split('"')[i]
-                        sentence_list.append(sentence_composed)
+                        if (key == "SentenceFound"):
+                            sentence_composed = value.split('"')[7]
+                            if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
+                                for i in range(8, len(value.split('"')) - 1):
+                                    sentence_composed = sentence_composed + '"' + value.split('"')[i]
+                            sentence_list.append(sentence_composed)
                 #
                 # write sentence
                 #       
@@ -545,7 +549,7 @@ if action_par == 'create':
                                     f_wip.write(generic3_span.strip() + '\n')
                     
                 f_wip.write('\n')
-            f_wip.write('\n') # end file with whiteline to match output of 'compare' function
+                f_wip.write('\n') # end file with whiteline to match output of 'compare' function
 #
 # Second option: generate Gold Standard input and output files ready for use to compare output with (action_par = 'finish')
 #
