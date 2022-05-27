@@ -56,7 +56,7 @@ import iknowpy
 #
 in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"
-language_par = "en"
+language_par = "ja"
 action_par = "create"
 type_par = "type"
 certainty_par = "cert"
@@ -147,408 +147,405 @@ for (dirpath, dirnames, filenames) in walk(in_path_par):
     break
 
 if action_par == 'create':
+    # create output directories   
+    if not os.path.exists(os.path.join(out_path_par, 'gold_standard_ready')):
+        os.mkdir(os.path.join(out_path_par, 'gold_standard_ready'))
+
+    out_path_wip = os.path.join(out_path_par, 'gold_standard_wip') # Work In Progress
+    if not os.path.exists(out_path_wip):
+        os.mkdir(out_path_wip)
+
+    if not os.path.exists(os.path.join(out_path_par, 'xml_output')):
+        os.mkdir(os.path.join(out_path_par, 'xml_output'))
+
     for text_file in f_input:
         text = read_text_file(text_file)
-
-        # create output directories   
-        if not os.path.exists(os.path.join(out_path_par, 'gold_standard_ready')):
-            os.mkdir(os.path.join(out_path_par, 'gold_standard_ready'))
-
-        if not os.path.exists(os.path.join(out_path_par, 'gold_standard_wip')):
-            os.mkdir(os.path.join(out_path_par, 'gold_standard_wip'))
-
-        if not os.path.exists(os.path.join(out_path_par, 'xml_output')):
-            os.mkdir(os.path.join(out_path_par, 'xml_output'))
-
-        out_path_wip = os.path.join(out_path_par, 'gold_standard_wip') 
         #
         # check whether output file for input file already exists, otherwise: process input
         #
-        output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        # output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        output_file = ntpath.basename(text_file) + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
 
         if os.path.exists(os.path.join(out_path_wip, output_file)): 
             print('output file for ' + ntpath.basename(text_file) + ' already exists and processing for this file was skipped')
 
         else:
             print('processing ' + ntpath.basename(text_file) + ' for CSV output')
-            f_wip = open(os.path.join(out_path_wip, output_file), 'wb')
-            f_wip.write(b'\xef\xbb\xbf') # Utf8 BOM
-            #
-            # count sentences per file
-            #
-            sentence_order = 0
-            sentence_list = []
-            #
-            # reconstruct sentence literal from trace
-            #
-            engine.index(text, language_par, traces=True)
-            for trace in engine.m_traces:
-                key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
+            with open(os.path.join(out_path_wip, output_file), 'w', encoding='utf-8-sig') as f_wip:
+                #
+                # count sentences per file
+                #
+                sentence_order = 0
+                sentence_list = []
+                #
+                # reconstruct sentence literal from trace
+                #
+                engine.index(text, language_par, traces=True)
+                for trace in engine.m_traces:
+                    key, value = trace.split(':', 1)[0],trace.split(':', 1)[1]
                 
-                if (key == "SentenceFound"):
-                    sentence_composed = value.split('"')[7]
-                    if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
-                        for i in range(8, len(value.split('"')) - 1):
-                            sentence_composed = sentence_composed + '"' + value.split('"')[i]
-                    sentence_list.append(sentence_composed)
-            #
-            # write sentence
-            #       
-            write_ln(f_wip, '\n') # start file with whiteline, otherwise first sentence will not be found with 'finish' option because of BOM
-            for single_sentence in sentence_list:
-                engine.index(single_sentence, language_par)
-                for sent in engine.m_index['sentences']:
-                    sentence_order +=1        
-                    # for sentence in sentence_list:
-                    sentence = 'Sentence ' + str(sentence_order) + ';' + single_sentence
-                    write_ln(f_wip, sentence)
-                    #
-                    # write entities
-                    #
-                    if type_par == 'type':
-                        for entity in sent['entities']:
-                            if entity['type'] == 'Concept':
-                                write_ln(f_wip, 'C;' + entity['index'])
-                            elif entity['type'] == 'Relation':
-                                write_ln(f_wip, 'R;' + entity['index'])
-                            elif entity['type'] == 'PathRelevant':
-                                write_ln(f_wip, 'PR;' + entity['index'])
-                            elif entity['type'] == 'NonRelevant':
-                                write_ln(f_wip, 'NR;' + entity['index'])
-                            else:
-                                pass
-                    #
-                    # sentence attributes
-                    #
-                    write_ln(f_wip, '***Attributes***')
+                    if (key == "SentenceFound"):
+                        sentence_composed = value.split('"')[7]
+                        if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
+                            for i in range(8, len(value.split('"')) - 1):
+                                sentence_composed = sentence_composed + '"' + value.split('"')[i]
+                        sentence_list.append(sentence_composed)
+                #
+                # write sentence
+                #       
+                f_wip.write('\n') # start file with whiteline, otherwise first sentence will not be found with 'finish' option because of BOM
+                for single_sentence in sentence_list:
+                    engine.index(single_sentence, language_par)
+                    for sent in engine.m_index['sentences']:
+                        sentence_order +=1        
+                        sentence = 'Sentence ' + str(sentence_order) + ';' + single_sentence
+                        f_wip.write(sentence+'\n')
+                        #
+                        # write entities
+                        #
+                        if type_par == 'type':
+                            for entity in sent['entities']:
+                                if entity['type'] == 'Concept':
+                                    f_wip.write('C;' + entity['index'] + '\n')
+                                elif entity['type'] == 'Relation':
+                                    f_wip.write('R;' + entity['index'] + '\n')
+                                elif entity['type'] == 'PathRelevant':
+                                    f_wip.write('PR;' + entity['index'] + '\n')
+                                elif entity['type'] == 'NonRelevant':
+                                    f_wip.write('NR;' + entity['index'] + '\n')
+                                else:
+                                    pass
+                        #
+                        # sentence attributes
+                        #
+                        f_wip.write('***Attributes***\n')
 
-                    if certainty_par == 'cert':
-                        if (len(sent['sent_attributes'])):
-                            certainty_attribute = ''
+                        if certainty_par == 'cert':
+                            if (len(sent['sent_attributes'])):
+                                certainty_attribute = ''
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                                if attr_name == 'Certainty':
-                                    if len(sent_attribute['parameters']):
-                                        value = sent_attribute['parameters'][0][0] # the certainty level is the first parameter in list of pairs, hence [0][0]
-                                        # print('certainty level: ' + value)
-                                    if value:
-                                        certainty_attribute = certainty_attribute + 'Cert;' + sent_attribute['marker'].lstrip() + ';level;' + value + '\n'
-                                    else:
-                                        certainty_attribute = certainty_attribute + 'Cert;' + sent_attribute['marker'].lstrip() + '\n'
-
-                            if (certainty_attribute != ''):
-                                write_ln(f_wip, certainty_attribute.rstrip())
-
-                    if measurement_par == 'meas':
-                        if (len(sent['sent_attributes'])):
-                            measurement_attribute = ''
-
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
-
-                                if attr_name == 'Measurement':
-                                    if (measurement_attribute == ''):
+                                    if attr_name == 'Certainty':
                                         if len(sent_attribute['parameters']):
-                                            #print(sent_attribute['parameters'])
-                                            cnt_value_unit_pairs = 0
-                                            value_unit_pairs = ''
-                                            for valunit_parameter in sent_attribute['parameters']:
-                                                cnt_string = ''
-                                                if cnt_value_unit_pairs:
-                                                    cnt_string = str(cnt_value_unit_pairs + 1)
-                                                cnt_value_unit_pairs = cnt_value_unit_pairs + 1
-                                                # value/unit pairs
-                                                value = valunit_parameter[0]
-                                                unit = valunit_parameter[1]
-                                                if value:
-                                                    value_unit_pairs = value_unit_pairs + ';value' + cnt_string + ';' + value
-                                                if unit:
-                                                    value_unit_pairs = value_unit_pairs + ';unit' + cnt_string + ';' + unit
-                                            measurement_attribute = measurement_attribute + 'Meas;' + sent_attribute['marker'].lstrip() + value_unit_pairs + '\n'
-                                    else:
-                                        if len(sent_attribute['parameters']):
-                                            #print(sent_attribute['parameters'])
-                                            cnt_value_unit_pairs = 0
-                                            value_unit_pairs = ''
-                                            for valunit_parameter in sent_attribute['parameters']:
-                                                cnt_string = ''
-                                                if cnt_value_unit_pairs:
-                                                    cnt_string = str(cnt_value_unit_pairs + 1)
-                                                cnt_value_unit_pairs = cnt_value_unit_pairs + 1
-                                                # value/unit pairs
-                                                value = valunit_parameter[0]
-                                                unit = valunit_parameter[1]
-                                                if value:
-                                                    value_unit_pairs = value_unit_pairs + ';value' + cnt_string + ';' + value
-                                                if unit:
-                                                    value_unit_pairs = value_unit_pairs + ';unit' + cnt_string + ';' + unit
-                                            measurement_attribute = measurement_attribute + 'Meas;' + sent_attribute['marker'].lstrip() + value_unit_pairs + '\n'
+                                            value = sent_attribute['parameters'][0][0] # the certainty level is the first parameter in list of pairs, hence [0][0]
+                                            # print('certainty level: ' + value)
+                                        if value:
+                                            certainty_attribute = certainty_attribute + 'Cert;' + sent_attribute['marker'].lstrip() + ';level;' + value
+                                        else:
+                                            certainty_attribute = certainty_attribute + 'Cert;' + sent_attribute['marker'].lstrip()
 
-                            if (measurement_attribute != ''):
-                                write_ln(f_wip, measurement_attribute.rstrip())
+                                if (certainty_attribute != ''):
+                                    f_wip.write(certainty_attribute + '\n')
 
-                    if negation_par == 'neg':
-                        if (len(sent['sent_attributes'])):
-                            negation_attribute = ''
+                        if measurement_par == 'meas':
+                            if (len(sent['sent_attributes'])):
+                                measurement_attribute = ''
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                                if (attr_name == 'Negation'):
-                                    negation_attribute = negation_attribute + 'Neg;' + sent_attribute['marker'].lstrip() + '\n'
+                                    if attr_name == 'Measurement':
+                                        if (measurement_attribute == ''):
+                                            if len(sent_attribute['parameters']):
+                                                #print(sent_attribute['parameters'])
+                                                cnt_value_unit_pairs = 0
+                                                value_unit_pairs = ''
+                                                for valunit_parameter in sent_attribute['parameters']:
+                                                    cnt_string = ''
+                                                    if cnt_value_unit_pairs:
+                                                        cnt_string = str(cnt_value_unit_pairs + 1)
+                                                    cnt_value_unit_pairs = cnt_value_unit_pairs + 1
+                                                    # value/unit pairs
+                                                    value = valunit_parameter[0]
+                                                    unit = valunit_parameter[1]
+                                                    if value:
+                                                        value_unit_pairs = value_unit_pairs + ';value' + cnt_string + ';' + value
+                                                    if unit:
+                                                        value_unit_pairs = value_unit_pairs + ';unit' + cnt_string + ';' + unit
+                                                measurement_attribute = measurement_attribute + 'Meas;' + sent_attribute['marker'].lstrip() + value_unit_pairs
+                                        else:
+                                            if len(sent_attribute['parameters']):
+                                                #print(sent_attribute['parameters'])
+                                                cnt_value_unit_pairs = 0
+                                                value_unit_pairs = ''
+                                                for valunit_parameter in sent_attribute['parameters']:
+                                                    cnt_string = ''
+                                                    if cnt_value_unit_pairs:
+                                                        cnt_string = str(cnt_value_unit_pairs + 1)
+                                                    cnt_value_unit_pairs = cnt_value_unit_pairs + 1
+                                                    # value/unit pairs
+                                                    value = valunit_parameter[0]
+                                                    unit = valunit_parameter[1]
+                                                    if value:
+                                                        value_unit_pairs = value_unit_pairs + ';value' + cnt_string + ';' + value
+                                                    if unit:
+                                                        value_unit_pairs = value_unit_pairs + ';unit' + cnt_string + ';' + unit
+                                                measurement_attribute = measurement_attribute + 'Meas;' + sent_attribute['marker'].lstrip() + value_unit_pairs
 
-                            if (negation_attribute != ''):
-                                write_ln(f_wip, negation_attribute.rstrip())
+                                if (measurement_attribute != ''):
+                                    f_wip.write(measurement_attribute + '\n')
 
-                    if sentiment_par == 'sent':
-                        if (len(sent['sent_attributes'])):
-                            negsentiment_attribute = ''
-                            possentiment_attribute = ''
+                        if negation_par == 'neg':
+                            if (len(sent['sent_attributes'])):
+                                negation_attribute = ''
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                                if (attr_name == 'NegativeSentiment'):
-                                    negsentiment_attribute = negsentiment_attribute + 'NegSent;' + sent_attribute['marker'].lstrip() + '\n'
+                                    if (attr_name == 'Negation'):
+                                        negation_attribute = negation_attribute + 'Neg;' + sent_attribute['marker'].lstrip()
 
-                                if (attr_name == 'PositiveSentiment'):
-                                    possentiment_attribute = possentiment_attribute + 'PosSent;' + sent_attribute['marker'].lstrip() + '\n'
+                                if (negation_attribute != ''):
+                                    f_wip.write(negation_attribute + '\n')
 
-                            if (negsentiment_attribute != ''):
-                                write_ln(f_wip, negsentiment_attribute.rstrip())
-                            if (possentiment_attribute != ''):
-                                write_ln(f_wip, possentiment_attribute.rstrip())
+                        if sentiment_par == 'sent':
+                            if (len(sent['sent_attributes'])):
+                                negsentiment_attribute = ''
+                                possentiment_attribute = ''
 
-                    if time_par == 'time':
-                        if (len(sent['sent_attributes'])):
-                            duration_attribute = ''
-                            frequency_attribute = ''
-                            time_attribute = ''
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                    if (attr_name == 'NegativeSentiment'):
+                                        negsentiment_attribute = negsentiment_attribute + 'NegSent;' + sent_attribute['marker'].lstrip()
 
-                                if (attr_name == 'Duration'):
-                                    duration_attribute = duration_attribute + 'Dur;' + sent_attribute['marker'].lstrip() + '\n'
+                                    if (attr_name == 'PositiveSentiment'):
+                                        possentiment_attribute = possentiment_attribute + 'PosSent;' + sent_attribute['marker'].lstrip()
 
-                                if (attr_name == 'Frequency'):
-                                    frequency_attribute = frequency_attribute + 'Freq;' + sent_attribute['marker'].lstrip() + '\n'
+                                if (negsentiment_attribute != ''):
+                                    f_wip.write(negsentiment_attribute + '\n')
+                                if (possentiment_attribute != ''):
+                                    f_wip.write(possentiment_attribute + '\n')
 
-                                if (attr_name == 'DateTime'):
-                                    time_attribute = time_attribute + 'Time;' + sent_attribute['marker'].lstrip() + '\n'
+                        if time_par == 'time':
+                            if (len(sent['sent_attributes'])):
+                                duration_attribute = ''
+                                frequency_attribute = ''
+                                time_attribute = ''
 
-                            if (duration_attribute != ''):
-                                write_ln(f_wip, duration_attribute.rstrip())
-                            if (frequency_attribute != ''):
-                                write_ln(f_wip, frequency_attribute.rstrip())
-                            if (time_attribute != ''):
-                                write_ln(f_wip, time_attribute.rstrip())
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                    if generic_par == 'gen':
-                        if (len(sent['sent_attributes'])):
-                            generic1_attribute = ''
-                            generic2_attribute = ''
-                            generic3_attribute = ''
+                                    if (attr_name == 'Duration'):
+                                        duration_attribute = duration_attribute + 'Dur;' + sent_attribute['marker'].lstrip()
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                    elif (attr_name == 'Frequency'):
+                                        frequency_attribute = frequency_attribute + 'Freq;' + sent_attribute['marker'].lstrip()
 
-                                if (attr_name == 'Generic1'):
-                                    generic1_attribute = generic1_attribute + 'Gen1;' + sent_attribute['marker'].lstrip() + '\n'
+                                    elif (attr_name == 'DateTime'):
+                                        time_attribute = time_attribute + 'Time;' + sent_attribute['marker'].lstrip()
+
+                                if (duration_attribute != ''):
+                                    f_wip.write(duration_attribute + '\n')
+                                elif (frequency_attribute != ''):
+                                    f_wip.write(frequency_attribute + '\n')
+                                elif (time_attribute != ''):
+                                    f_wip.write(time_attribute + '\n')
+
+                        if generic_par == 'gen':
+                            if (len(sent['sent_attributes'])):
+                                generic1_attribute = ''
+                                generic2_attribute = ''
+                                generic3_attribute = ''
+
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
+
+                                    if (attr_name == 'Generic1'):
+                                        generic1_attribute = generic1_attribute + 'Gen1;' + sent_attribute['marker'].lstrip()
                                     
-                                if (attr_name == 'Generic2'):
-                                    generic2_attribute = generic2_attribute + 'Gen2;' + sent_attribute['marker'].lstrip() + '\n'
+                                    elif (attr_name == 'Generic2'):
+                                        generic2_attribute = generic2_attribute + 'Gen2;' + sent_attribute['marker'].lstrip()
 
-                                if (attr_name == 'Generic3'):
-                                    generic3_attribute = generic3_attribute + 'Gen3;' + sent_attribute['marker'].lstrip() + '\n'
+                                    elif (attr_name == 'Generic3'):
+                                        generic3_attribute = generic3_attribute + 'Gen3;' + sent_attribute['marker'].lstrip()
 
-                            if (generic1_attribute != ''):
-                                write_ln(f_wip, generic1_attribute.rstrip())
-                            if (generic2_attribute != ''):
-                                write_ln(f_wip, generic2_attribute.rstrip())
-                            if (generic3_attribute != ''):
-                                write_ln(f_wip, generic3_attribute.rstrip())
+                                if (generic1_attribute != ''):
+                                    f_wip.write(generic1_attribute+ '\n')
+                                elif (generic2_attribute != ''):
+                                    f_wip.write(generic2_attribute+ '\n')
+                                elif (generic3_attribute != ''):
+                                    f_wip.write(generic3_attribute+ '\n')
                                                    
-                    if entityvector_par == 'vec':  # only for Japanese
-                        if (len(sent['sent_attributes'])): 
+                        if entityvector_par == 'vec':  # only for Japanese
+                            if (len(sent['sent_attributes'])): 
 
-                            for sent_attribute in sent['sent_attributes']:
-                                attr_name = sent_attribute['type']
+                                for sent_attribute in sent['sent_attributes']:
+                                    attr_name = sent_attribute['type']
 
-                                if attr_name == 'EntityVector':
-                                    entity_vector_attribute = 'Vec; '
-                                    for sent_index in sent_attribute['entity_vector']:                                    
-                                        entity = sent['entities'][sent_index]
-                                        lit_text = single_sentence[entity['offset_start']:entity['offset_stop']]
-                                        entity_vector_attribute = entity_vector_attribute + ' \"' + lit_text + '\"'
+                                    if attr_name == 'EntityVector':
+                                        entity_vector_attribute = 'Vec; '
+                                        for sent_index in sent_attribute['entity_vector']:                                    
+                                            entity = sent['entities'][sent_index]
+                                            lit_text = single_sentence[entity['offset_start']:entity['offset_stop']]
+                                            entity_vector_attribute = entity_vector_attribute + ' \"' + lit_text + '\"'
 
-                            if (entity_vector_attribute != ''):                
-                                write_ln(f_wip, entity_vector_attribute.rstrip())                  
-                    #
-                    # path attributes
-                    #
-                    write_ln(f_wip, '***Expansion***')
-                    if certaintyspan_par == 'certspan':
-                        if (len(sent['path_attributes'])):
-                            certainty_span = ''
+                                if (entity_vector_attribute != ''):                
+                                    f_wip.write(entity_vector_attribute.rstrip() + '\n')                  
+                        #
+                        # path attributes
+                        #
+                        f_wip.write('***Expansion***\n')
+                        if certaintyspan_par == 'certspan':
+                            if (len(sent['path_attributes'])):
+                                certainty_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'Certainty':
-                                    certainty_span = certainty_span + '\nCertSpan;'
-                                    for sent_index in attr_path:
-                                        certainty_span = certainty_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
+                                    if attr_name == 'Certainty':
+                                        certainty_span = certainty_span + '\nCertSpan;'
+                                        for sent_index in attr_path:
+                                            certainty_span = certainty_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
 
-                            if (certainty_span != ''):
-                                certainty_span = certainty_span.replace(' \n','\n')
-                                write_ln(f_wip, certainty_span.strip())
+                                if (certainty_span != ''):
+                                    certainty_span = certainty_span.replace(' \n','\n')
+                                    f_wip.write(certainty_span.strip() + '\n')
 
-                    if measurementspan_par == 'measspan':
-                        if (len(sent['path_attributes'])):
-                            measurement_span = ''
+                        if measurementspan_par == 'measspan':
+                            if (len(sent['path_attributes'])):
+                                measurement_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'Measurement':
-                                    measurement_span = measurement_span + '\nMeasSpan;'
-                                    for sent_index in attr_path:
-                                        measurement_span = measurement_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    if attr_name == 'Measurement':
+                                        measurement_span = measurement_span + '\nMeasSpan;'
+                                        for sent_index in attr_path:
+                                            measurement_span = measurement_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                            if (measurement_span != ''):
-                                measurement_span = measurement_span.replace(' \n','\n')
-                                write_ln(f_wip, measurement_span.strip())
+                                if (measurement_span != ''):
+                                    measurement_span = measurement_span.replace(' \n','\n')
+                                    f_wip.write(measurement_span.strip() + '\n')
 
-                    if negationspan_par == 'negspan':
-                        if (len(sent['path_attributes'])):
-                            negation_span = ''
+                        if negationspan_par == 'negspan':
+                            if (len(sent['path_attributes'])):
+                                negation_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'Negation':
-                                    negation_span = negation_span + '\nNegSpan;'
-                                    for sent_index in attr_path:
-                                        negation_span = negation_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    if attr_name == 'Negation':
+                                        negation_span = negation_span + '\nNegSpan;'
+                                        for sent_index in attr_path:
+                                            negation_span = negation_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                            if (negation_span != ''):
-                                negation_span = negation_span.replace(' \n','\n')
-                                write_ln(f_wip, negation_span.strip())
+                                if (negation_span != ''):
+                                    negation_span = negation_span.replace(' \n','\n')
+                                    f_wip.write(negation_span.strip() + '\n')
 
-                    if sentimentspan_par == 'sentspan':
-                        if (len(sent['path_attributes'])):
-                            negsentiment_span = ''
-                            possentiment_span = ''
+                        if sentimentspan_par == 'sentspan':
+                            if (len(sent['path_attributes'])):
+                                negsentiment_span = ''
+                                possentiment_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'NegativeSentiment':
-                                    negsentiment_span = negsentiment_span + '\nNegSentSpan;'
-                                    for sent_index in attr_path:
-                                        negsentiment_span = negsentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                                if attr_name == 'PositiveSentiment':
-                                    possentiment_span = possentiment_span + '\nPosSentSpan;'
-                                    for sent_index in attr_path:
-                                        possentiment_span = possentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
+                                    if attr_name == 'NegativeSentiment':
+                                        negsentiment_span = negsentiment_span + '\nNegSentSpan;'
+                                        for sent_index in attr_path:
+                                            negsentiment_span = negsentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    elif attr_name == 'PositiveSentiment':
+                                        possentiment_span = possentiment_span + '\nPosSentSpan;'
+                                        for sent_index in attr_path:
+                                            possentiment_span = possentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
 
-                            if (negsentiment_span != ''):
-                                negsentiment_span = negsentiment_span.replace(' \n','\n')
-                                write_ln(f_wip, negsentiment_span.strip())
-                            if (possentiment_span != ''):
-                                possentiment_span = possentiment_span.replace(' \n','\n')
-                                write_ln(f_wip, possentiment_span.strip())
+                                if (negsentiment_span != ''):
+                                    negsentiment_span = negsentiment_span.replace(' \n','\n')
+                                    f_wip.write(negsentiment_span.strip() + '\n')
+                                elif (possentiment_span != ''):
+                                    possentiment_span = possentiment_span.replace(' \n','\n')
+                                    f_wip.write(possentiment_span.strip() + '\n')
 
-                    if timespan_par == 'timespan':
-                        if (len(sent['path_attributes'])):
-                            duration_span = ''
-                            frequency_span = ''
-                            time_span = ''
+                        if timespan_par == 'timespan':
+                            if (len(sent['path_attributes'])):
+                                duration_span = ''
+                                frequency_span = ''
+                                time_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'Duration':
-                                    duration_span = duration_span + '\nDurSpan;'
-                                    for sent_index in attr_path:
-                                        duration_span = duration_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                                if attr_name == 'Frequency':
-                                    frequency_span = frequency_span + '\nFreqSpan;'
-                                    for sent_index in attr_path:                                        
-                                        frequency_span = frequency_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                                if attr_name == 'DateTime':
-                                    time_span = time_span + '\nTimeSpan;'
-                                    for sent_index in attr_path:                                         
-                                        time_span = time_span + sent['entities'][sent_index]['index'].lstrip() + ' '   
+                                    if attr_name == 'Duration':
+                                        duration_span = duration_span + '\nDurSpan;'
+                                        for sent_index in attr_path:
+                                            duration_span = duration_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    elif attr_name == 'Frequency':
+                                        frequency_span = frequency_span + '\nFreqSpan;'
+                                        for sent_index in attr_path:                                        
+                                            frequency_span = frequency_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    elif attr_name == 'DateTime':
+                                        time_span = time_span + '\nTimeSpan;'
+                                        for sent_index in attr_path:                                         
+                                            time_span = time_span + sent['entities'][sent_index]['index'].lstrip() + ' '   
 
-                            if (duration_span != ''):
-                                duration_span = duration_span.replace(' \n','\n')
-                                write_ln(f_wip, duration_span.strip())
-                            if (frequency_span != ''):
-                                frequency_span = frequency_span.replace(' \n','\n')
-                                write_ln(f_wip, frequency_span.strip())
-                            if (time_span != ''):
-                                time_span = time_span.replace(' \n','\n')
-                                write_ln(f_wip, time_span.strip())
+                                if (duration_span != ''):
+                                    duration_span = duration_span.replace(' \n','\n')
+                                    f_wip.write(duration_span.strip() + '\n')
+                                elif (frequency_span != ''):
+                                    frequency_span = frequency_span.replace(' \n','\n')
+                                    f_wip.write(frequency_span.strip() + '\n')
+                                elif (time_span != ''):
+                                    time_span = time_span.replace(' \n','\n')
+                                    f_wip.write(time_span.strip() + '\n')
 
-                    if genericspan_par == 'genspan':
-                        if (len(sent['path_attributes'])):
-                            generic1_span = ''
-                            generic2_span = ''
-                            generic3_span = ''
+                        if genericspan_par == 'genspan':
+                            if (len(sent['path_attributes'])):
+                                generic1_span = ''
+                                generic2_span = ''
+                                generic3_span = ''
 
-                            for path_attribute in sent['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
+                                for path_attribute in sent['path_attributes']:
+                                    attr_name = path_attribute['type']
+                                    start_position = path_attribute['pos']
+                                    attribute_span = path_attribute['span']
+                                    attr_path = sent['path'][start_position:start_position+attribute_span]
 
-                                if attr_name == 'Generic1':
-                                    generic1_span = generic1_span + '\nGen1Span;'
-                                    for sent_index in attr_path:
-                                        Gen1_span = Gen1_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    if attr_name == 'Generic1':
+                                        generic1_span = generic1_span + '\nGen1Span;'
+                                        for sent_index in attr_path:
+                                            Gen1_span = Gen1_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                                if attr_name == 'Generic2':
-                                    generic2_span = generic2_span + '\nGen2Span;'
-                                    for sent_index in attr_path:
-                                        Gen2_span = Gen2_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+                                    elif attr_name == 'Generic2':
+                                        generic2_span = generic2_span + '\nGen2Span;'
+                                        for sent_index in attr_path:
+                                            Gen2_span = Gen2_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                                if attr_name == 'Generic3':
-                                    generic3_span = generic3_span + '\nGen3Span;'
-                                    for sent_index in attr_path:
-                                        Gen3_span = Gen3_span + sent['entities'][sent_index]['index'].lstrip() + ' '  
+                                    elif attr_name == 'Generic3':
+                                        generic3_span = generic3_span + '\nGen3Span;'
+                                        for sent_index in attr_path:
+                                            Gen3_span = Gen3_span + sent['entities'][sent_index]['index'].lstrip() + ' '  
 
-                            if (generic1_span != ''):
-                                generic1_span = generic1_span.replace(' \n','\n')
-                                write_ln(f_wip, generic1_span.strip())
-                            if (generic2_span != ''):
-                                generic2_span = generic2_span.replace(' \n','\n')
-                                write_ln(f_wip, generic2_span.strip())
-                            if (generic3_span != ''):
-                                generic3_span = generic3_span.replace(' \n','\n')
-                                write_ln(f_wip, generic3_span.strip())
+                                if (generic1_span != ''):
+                                    generic1_span = generic1_span.replace(' \n','\n')
+                                    f_wip.write(generic1_span.strip() + '\n')
+                                elif (generic2_span != ''):
+                                    generic2_span = generic2_span.replace(' \n','\n')
+                                    f_wip.write(generic2_span.strip() + '\n')
+                                elif (generic3_span != ''):
+                                    generic3_span = generic3_span.replace(' \n','\n')
+                                    f_wip.write(generic3_span.strip() + '\n')
                     
-                write_ln(f_wip, '\n')
-            write_ln(f_wip, '\n') # end file with whiteline to match output of 'compare' function
-            f_wip.close()
+                f_wip.write('\n')
+            f_wip.write('\n') # end file with whiteline to match output of 'compare' function
 #
 # Second option: generate Gold Standard input and output files ready for use to compare output with (action_par = 'finish')
 #
@@ -585,14 +582,12 @@ if action_par == 'finish':
         else:
             print('processing ' + ntpath.basename(csv_file) + ' to extract gold standard input')
             read_file = open(csv_file, encoding='utf-8')
-            f_gold_input = open(os.path.join(out_path_gold_input, gold_input_file), 'wb')
-            f_gold_input.write(b'\xef\xbb\xbf') # Utf8 BOM
+            f_gold_input = open(os.path.join(out_path_gold_input, gold_input_file), 'w', encoding='utf-8-sign')
             for line in read_file:
                 line = line.rstrip() # remove '\r\n' at end of line
                 if line.startswith('Sentence'):
                     sentence_text = line.split(';',1)[1] # split at first ';' and only keep second part (= strip 'Sentence [number];')
-                    write_ln(f_gold_input, sentence_text)
-                    write_ln(f_gold_input) # double newline forces end_of_sentence condition
+                    f_gold_input.write(sentence_text + '\n\n') # double newline forces end_of_sentence condition
 
             read_file.close()
             f_gold_input.close()
@@ -607,13 +602,13 @@ if action_par == 'finish':
         else:
             print('processing ' + ntpath.basename(csv_file) + ' to create gold standard output')
             read_file = open(csv_file, encoding='utf-8')
-            f_gold_standard = open(os.path.join(out_path_gold_standard, gold_standard_file), 'wb')
+            f_gold_standard = open(os.path.join(out_path_gold_standard, gold_standard_file), 'w', encoding='utf-8-sign')
             for line in read_file:
                 if line.startswith('Sentence'):
                     sentence_text = line.split(';',1)[1] # split at first ';' and only keep second part (= strip 'Sentence [number];')
-                    write_ln(f_gold_standard, sentence_text.rstrip())
+                    f_gold_standard.write(sentence_text.rstrip() + '\n')
                 else:
-                    write_ln(f_gold_standard, line.rstrip())
+                    f_gold_standard.write(line.rstrip() + '\n')
             read_file.close()
             f_gold_standard.close()    
 #
