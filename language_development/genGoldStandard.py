@@ -57,7 +57,7 @@ import iknowpy
 in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"
 language_par = "ja"
-action_par = "finish" # "create" # "compare" # "finish" # "create" # "compare" # "finish" # "create"
+action_par = "create"
 type_par = "type"
 certainty_par = "cert"
 measurement_par = "meas"
@@ -501,8 +501,8 @@ if action_par == 'create':
         #
         # check whether output file for input file already exists, otherwise: process input
         #
-        #output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
-        output_file = ntpath.basename(text_file) + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        output_file = ntpath.basename(text_file).removesuffix('.txt') + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        #output_file = ntpath.basename(text_file) + '.csv'   # use ntpath to ensure compatibility with Windows and Linux
 
         if os.path.exists(os.path.join(out_path_wip, output_file)): 
             print('output file for ' + ntpath.basename(text_file) + ' already exists and processing for this file was skipped')
@@ -597,8 +597,8 @@ if action_par == 'finish':
     # check whether Gold Standard input already exists, otherwise: generated it
     #
     for csv_file in f_ready:
-        #gold_input_file = ntpath.basename(csv_file).removesuffix('.csv') + '_gold_input.txt'   # use ntpath to ensure compatibility with Windows and Linux
-        gold_input_file = ntpath.basename(csv_file) + '_gold_input.txt'   # use ntpath to ensure compatibility with Windows and Linux
+        gold_input_file = ntpath.basename(csv_file).removesuffix('.csv') + '_gold_input.txt'   # use ntpath to ensure compatibility with Windows and Linux
+        #gold_input_file = ntpath.basename(csv_file) + '_gold_input.txt'   # use ntpath to ensure compatibility with Windows and Linux
         if os.path.exists(os.path.join(out_path_gold_input, gold_input_file)): 
             print('gold standard input file for ' + ntpath.basename(csv_file) + ' already exists and processing for this file was skipped')
 
@@ -617,8 +617,8 @@ if action_par == 'finish':
     # check whether Gold Standard output already exists, otherwise: generated it
     #
     for csv_file in f_ready:
-        #gold_standard_file = ntpath.basename(csv_file).removesuffix('.csv') + '_gold_standard.csv'   # use ntpath to ensure compatibility with Windows and Linux
-        gold_standard_file = ntpath.basename(csv_file) + '_gold_standard.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        gold_standard_file = ntpath.basename(csv_file).removesuffix('.csv') + '_gold_standard.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        #gold_standard_file = ntpath.basename(csv_file) + '_gold_standard.csv'   # use ntpath to ensure compatibility with Windows and Linux
         if os.path.exists(os.path.join(out_path_gold_standard, gold_standard_file)): 
             print('gold standard output file for ' + ntpath.basename(csv_file) + ' already exists and processing for this file was skipped')
 
@@ -658,8 +658,8 @@ if action_par == 'compare':
         #
         # check whether output file for input file already exists, otherwise: process input
         #
-        # output_file = ntpath.basename(text_file).removesuffix('_gold_input.txt') + '_current_output.csv'   # use ntpath to ensure compatibility with Windows and Linux
-        output_file = ntpath.basename(text_file) + '_current_output.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        output_file = ntpath.basename(text_file).removesuffix('_gold_input.txt') + '_current_output.csv'   # use ntpath to ensure compatibility with Windows and Linux
+        #output_file = ntpath.basename(text_file) + '_current_output.csv'   # use ntpath to ensure compatibility with Windows and Linux
 
         if os.path.exists(os.path.join(out_path_current, output_file)): 
             print('output file for ' + ntpath.basename(text_file) + ' already exists and processing for this file was skipped')
