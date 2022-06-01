@@ -57,7 +57,7 @@ import iknowpy
 in_path_par = "C:/tmp/text_input_data/"
 out_path_par = "C:/tmp/output/"
 language_par = "ja"
-action_par = "create" # "compare" # "finish" # "create"
+action_par = "finish" # "create" # "compare" # "finish" # "create" # "compare" # "finish" # "create"
 type_par = "type"
 certainty_par = "cert"
 measurement_par = "meas"
@@ -336,133 +336,133 @@ def write_path_certainty_span(sentence,file):
 
 # write the path 'measurement' span
 def write_path_measurement_span(sentence,file):
-                    if (len(sentence['path_attributes'])):
-                        measurement_span = ''
+    if (len(sentence['path_attributes'])):
+        measurement_span = ''
 
-                        for path_attribute in sentence['path_attributes']:
-                            attr_name = path_attribute['type']
-                            start_position = path_attribute['pos']
-                            attribute_span = path_attribute['span']
-                            attr_path = sent['path'][start_position:start_position+attribute_span]
-                            if attr_name == 'Measurement':
-                                measurement_span = measurement_span + '\nMeasSpan;'
-                                for sent_index in attr_path:
-                                    measurement_span = measurement_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+        for path_attribute in sentence['path_attributes']:
+            attr_name = path_attribute['type']
+            start_position = path_attribute['pos']
+            attribute_span = path_attribute['span']
+            attr_path = sent['path'][start_position:start_position+attribute_span]
+            if attr_name == 'Measurement':
+                measurement_span = measurement_span + '\nMeasSpan;'
+                for sent_index in attr_path:
+                    measurement_span = measurement_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                        if (measurement_span != ''):
-                            measurement_span = measurement_span.replace(' \n','\n')
-                            file.write(measurement_span.strip() + '\n')
+        if (measurement_span != ''):
+            measurement_span = measurement_span.replace(' \n','\n')
+            file.write(measurement_span.strip() + '\n')
 
 # write the path 'negation' span
 def write_path_negation_span(sentence,file):
-                    if (len(sentence['path_attributes'])):
-                        negation_span = ''
+    if (len(sentence['path_attributes'])):
+        negation_span = ''
 
-                        for path_attribute in sentence['path_attributes']:
-                            attr_name = path_attribute['type']
-                            start_position = path_attribute['pos']
-                            attribute_span = path_attribute['span']
-                            attr_path = sent['path'][start_position:start_position+attribute_span]
-                            if attr_name == 'Negation':
-                                negation_span = negation_span + '\nNegSpan;'
-                                for sent_index in attr_path:
-                                    negation_span = negation_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
+        for path_attribute in sentence['path_attributes']:
+            attr_name = path_attribute['type']
+            start_position = path_attribute['pos']
+            attribute_span = path_attribute['span']
+            attr_path = sent['path'][start_position:start_position+attribute_span]
+            if attr_name == 'Negation':
+                negation_span = negation_span + '\nNegSpan;'
+                for sent_index in attr_path:
+                    negation_span = negation_span + sent['entities'][sent_index]['index'].lstrip() + ' ' 
 
-                        if (negation_span != ''):
-                            negation_span = negation_span.replace(' \n','\n')
-                            file.write(negation_span.strip() + '\n')
+        if (negation_span != ''):
+            negation_span = negation_span.replace(' \n','\n')
+            file.write(negation_span.strip() + '\n')
 
 # write the path 'sentiment' span
 def write_path_sentiment_span(sentence,file):
-                if (len(sentence['path_attributes'])):
-                    negsentiment_span = possentiment_span = ''
+    if (len(sentence['path_attributes'])):
+        negsentiment_span = possentiment_span = ''
 
-                    for path_attribute in sentence['path_attributes']:
-                        attr_name = path_attribute['type']
-                        start_position = path_attribute['pos']
-                        attribute_span = path_attribute['span']
-                        attr_path = sent['path'][start_position:start_position+attribute_span]
-                        if attr_name == 'NegativeSentiment':
-                            negsentiment_span = negsentiment_span + '\nNegSentSpan;'
-                            for sent_index in attr_path:
-                                negsentiment_span = negsentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                        elif attr_name == 'PositiveSentiment':
-                            possentiment_span = possentiment_span + '\nPosSentSpan;'
-                            for sent_index in attr_path:
-                                possentiment_span = possentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+        for path_attribute in sentence['path_attributes']:
+            attr_name = path_attribute['type']
+            start_position = path_attribute['pos']
+            attribute_span = path_attribute['span']
+            attr_path = sent['path'][start_position:start_position+attribute_span]
+            if attr_name == 'NegativeSentiment':
+                negsentiment_span = negsentiment_span + '\nNegSentSpan;'
+                for sent_index in attr_path:
+                    negsentiment_span = negsentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+            elif attr_name == 'PositiveSentiment':
+                possentiment_span = possentiment_span + '\nPosSentSpan;'
+                for sent_index in attr_path:
+                    possentiment_span = possentiment_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                    if (negsentiment_span != ''):
-                        negsentiment_span = negsentiment_span.replace(' \n','\n')
-                        file.write(negsentiment_span.strip() + '\n')
-                    if (possentiment_span != ''):
-                        possentiment_span = possentiment_span.replace(' \n','\n')
-                        file.write(possentiment_span.strip() + '\n')
+        if (negsentiment_span != ''):
+            negsentiment_span = negsentiment_span.replace(' \n','\n')
+            file.write(negsentiment_span.strip() + '\n')
+        if (possentiment_span != ''):
+            possentiment_span = possentiment_span.replace(' \n','\n')
+            file.write(possentiment_span.strip() + '\n')
 
 # write the path 'time' span
 def write_path_time_span(sentence,file):
-                        if (len(sentence['path_attributes'])):
-                            duration_span = frequency_span = time_span = ''
+    if (len(sentence['path_attributes'])):
+        duration_span = frequency_span = time_span = ''
 
-                            for path_attribute in sentence['path_attributes']:
-                                attr_name = path_attribute['type']
-                                start_position = path_attribute['pos']
-                                attribute_span = path_attribute['span']
-                                attr_path = sent['path'][start_position:start_position+attribute_span]
-                                if attr_name == 'Duration':
-                                    duration_span = duration_span + '\nDurSpan;'
-                                    for sent_index in attr_path:
-                                        duration_span = duration_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                                elif attr_name == 'Frequency':
-                                    frequency_span = frequency_span + '\nFreqSpan;'
-                                    for sent_index in attr_path:
-                                        frequency_span = frequency_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                                elif attr_name == 'DateTime':
-                                    time_span = time_span + '\nTimeSpan;'
-                                    for sent_index in attr_path:
-                                        time_span = time_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+        for path_attribute in sentence['path_attributes']:
+            attr_name = path_attribute['type']
+            start_position = path_attribute['pos']
+            attribute_span = path_attribute['span']
+            attr_path = sent['path'][start_position:start_position+attribute_span]
+            if attr_name == 'Duration':
+                duration_span = duration_span + '\nDurSpan;'
+                for sent_index in attr_path:
+                    duration_span = duration_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+            elif attr_name == 'Frequency':
+                frequency_span = frequency_span + '\nFreqSpan;'
+                for sent_index in attr_path:
+                    frequency_span = frequency_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+            elif attr_name == 'DateTime':
+                time_span = time_span + '\nTimeSpan;'
+                for sent_index in attr_path:
+                    time_span = time_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                            if (duration_span != ''):
-                                duration_span = duration_span.replace(' \n','\n')
-                                file.write(duration_span.strip() + '\n')
-                            if (frequency_span != ''):
-                                frequency_span = frequency_span.replace(' \n','\n')
-                                file.write(frequency_span.strip() + '\n')
-                            if (time_span != ''):
-                                time_span = time_span.replace(' \n','\n')
-                                file.write(time_span.strip() + '\n')
+        if (duration_span != ''):
+            duration_span = duration_span.replace(' \n','\n')
+            file.write(duration_span.strip() + '\n')
+        if (frequency_span != ''):
+            frequency_span = frequency_span.replace(' \n','\n')
+            file.write(frequency_span.strip() + '\n')
+        if (time_span != ''):
+            time_span = time_span.replace(' \n','\n')
+            file.write(time_span.strip() + '\n')
 
 # write the path 'generic attribute' span
 def write_path_generic_span(sentence,file):
-                    if (len(sentence['path_attributes'])):
-                        generic1_span = generic2_span = generic3_span = ''
+    if (len(sentence['path_attributes'])):
+        generic1_span = generic2_span = generic3_span = ''
 
-                        for path_attribute in sentence['path_attributes']:
-                            attr_name = path_attribute['type']
-                            start_position = path_attribute['pos']
-                            attribute_span = path_attribute['span']
-                            attr_path = sent['path'][start_position:start_position+attribute_span]
-                            if attr_name == 'Generic1':
-                                generic1_span = generic1_span + '\nGen1Span;'
-                                for sent_index in attr_path:
-                                    Gen1_span = Gen1_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                            elif attr_name == 'Generic2':
-                                generic2_span = generic2_span + '\nGen2Span;'
-                                for sent_index in attr_path:
-                                    Gen2_span = Gen2_span + sent['entities'][sent_index]['index'].lstrip() + ' '
-                            elif attr_name == 'Generic3':
-                                generic3_span = generic3_span + '\nGen3Span;'
-                                for sent_index in attr_path:
-                                    Gen3_span = Gen3_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+        for path_attribute in sentence['path_attributes']:
+            attr_name = path_attribute['type']
+            start_position = path_attribute['pos']
+            attribute_span = path_attribute['span']
+            attr_path = sent['path'][start_position:start_position+attribute_span]
+            if attr_name == 'Generic1':
+                generic1_span = generic1_span + '\nGen1Span;'
+                for sent_index in attr_path:
+                    Gen1_span = Gen1_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+            elif attr_name == 'Generic2':
+                generic2_span = generic2_span + '\nGen2Span;'
+                for sent_index in attr_path:
+                     Gen2_span = Gen2_span + sent['entities'][sent_index]['index'].lstrip() + ' '
+            elif attr_name == 'Generic3':
+                generic3_span = generic3_span + '\nGen3Span;'
+                for sent_index in attr_path:
+                    Gen3_span = Gen3_span + sent['entities'][sent_index]['index'].lstrip() + ' '
 
-                        if (generic1_span != ''):
-                            generic1_span = generic1_span.replace(' \n','\n')
-                            file.write_ln(generic1_span.strip() + '\n')
-                        if (generic2_span != ''):
-                            generic2_span = generic2_span.replace(' \n','\n')
-                            file.write(generic2_span.strip() + '\n')
-                        if (generic3_span != ''):
-                            generic3_span = generic3_span.replace(' \n','\n')
-                            file.write(generic3_span.strip() + '\n')
+        if (generic1_span != ''):
+            generic1_span = generic1_span.replace(' \n','\n')
+            file.write_ln(generic1_span.strip() + '\n')
+        if (generic2_span != ''):
+            generic2_span = generic2_span.replace(' \n','\n')
+            file.write(generic2_span.strip() + '\n')
+        if (generic3_span != ''):
+            generic3_span = generic3_span.replace(' \n','\n')
+            file.write(generic3_span.strip() + '\n')
 
 #
 # collect text documents in one of both input directories (depending on action parameter)
@@ -485,16 +485,17 @@ for (dirpath, dirnames, filenames) in walk(in_path_par):
     break
 
 if action_par == 'create':
-    # create output directories   
-    if not os.path.exists(os.path.join(out_path_par, 'gold_standard_ready')):
-        os.mkdir(os.path.join(out_path_par, 'gold_standard_ready'))
+    # create output directories
+    out_path_ready = os.path.join(out_path_par, 'gold_standard_ready') # Copy WIP to ready after manual editing
+    out_path_wip = os.path.join(out_path_par, 'gold_standard_wip') # Work In Progress in CSV format
+    out_path_wip_xml = os.path.join(out_path_par, 'xml_output') # Work In Progress in XML format
 
-    out_path_wip = os.path.join(out_path_par, 'gold_standard_wip') # Work In Progress
+    if not os.path.exists(out_path_ready):
+        os.mkdir(out_path_ready)
     if not os.path.exists(out_path_wip):
         os.mkdir(out_path_wip)
-
-    if not os.path.exists(os.path.join(out_path_par, 'xml_output')):
-        os.mkdir(os.path.join(out_path_par, 'xml_output'))
+    if not os.path.exists(out_path_wip_xml):
+        os.mkdir(out_path_wip_xml)
 
     for text_file in f_input:
         #
@@ -566,14 +567,12 @@ if action_par == 'create':
                         if genericspan_par == 'genspan':
                             write_path_generic_span(sent,f_wip)
                     
-                f_wip.write('\n')
-                f_wip.write('\n') # end file with whiteline to match output of 'compare' function
 #
 # Second option: generate Gold Standard input and output files ready for use to compare output with (action_par = 'finish')
 #
 if action_par == 'finish':
     f_ready = []  # non-recursive list of files, .csv only
-    in_path_ready = os.path.join(in_path_par, 'gold_standard_ready\\') # input file is 'gold standard ready' output
+    in_path_ready = os.path.join(in_path_par, 'gold_standard_ready') # input file is 'gold standard ready' output
     for (dirpath, dirnames, filenames) in walk(in_path_ready):
         for single_file in filenames:
             if (single_file.endswith('.csv')):
@@ -584,13 +583,14 @@ if action_par == 'finish':
     #    
     # create output directories   
     #
-    if not os.path.exists(os.path.join(in_path_par, 'gold_input')):
-        os.mkdir(os.path.join(in_path_par, 'gold_input'))
-    if not os.path.exists(os.path.join(in_path_par, 'gold_standard')):
-        os.mkdir(os.path.join(in_path_par, 'gold_standard'))    
+    out_path_gold_input = os.path.join(in_path_par, 'gold_input') # sentence divised input text
+    out_path_gold_standard = os.path.join(in_path_par, 'gold_standard') # per text verified csv output
 
-    out_path_gold_input = os.path.join(in_path_par, 'gold_input\\') 
-    out_path_gold_standard = os.path.join(in_path_par, 'gold_standard\\')
+    if not os.path.exists(out_path_gold_input):
+        os.mkdir(out_path_gold_input)
+    if not os.path.exists(out_path_gold_standard):
+        os.mkdir(out_path_gold_standard)    
+
     print('output directory for gold standard input is ' + out_path_gold_input)
     print('output directory for gold standard output is ' + out_path_gold_standard)
     #
@@ -607,10 +607,9 @@ if action_par == 'finish':
             read_file = open(csv_file, encoding='utf-8')
             f_gold_input = open(os.path.join(out_path_gold_input, gold_input_file), 'w', encoding='utf-8-sig')
             for line in read_file:
-                line = line.rstrip() # remove '\r\n' at end of line
                 if line.startswith('Sentence'):
                     sentence_text = line.split(';',1)[1] # split at first ';' and only keep second part (= strip 'Sentence [number];')
-                    f_gold_input.write(sentence_text + '\n\n') # double newline forces end_of_sentence condition
+                    f_gold_input.write(sentence_text + '\n') # double newline forces end_of_sentence condition
 
             read_file.close()
             f_gold_input.close()
@@ -626,19 +625,19 @@ if action_par == 'finish':
         else:
             print('processing ' + ntpath.basename(csv_file) + ' to create gold standard output')
             read_file = open(csv_file, encoding='utf-8')
-            f_gold_standard = open(os.path.join(out_path_gold_standard, gold_standard_file), 'w', encoding='utf-8-sig')
+            f_gold_standard = open(os.path.join(out_path_gold_standard, gold_standard_file), 'w', encoding='utf-8')
             for line in read_file:
                 if line.startswith('Sentence'):
                     sentence_text = line.split(';',1)[1] # split at first ';' and only keep second part (= strip 'Sentence [number];')
-                    f_gold_standard.write(sentence_text.rstrip() + '\n')
+                    f_gold_standard.write(sentence_text)
                 else:
-                    f_gold_standard.write(line.rstrip() + '\n')
+                    f_gold_standard.write(line)
             read_file.close()
             f_gold_standard.close()    
 #
 # Third option: compare output with Gold Standard (action_par = 'compare')
 #
-in_path_gold_input = os.path.join(out_path_par, 'gold_input\\')
+in_path_gold_input = os.path.join(out_path_par, 'gold_input')
 f_gold_input = []  # non-recursive list of files, .txt only
 for (dirpath, dirnames, filenames) in walk(in_path_gold_input):
     for single_file_gs in filenames:
@@ -652,10 +651,10 @@ if action_par == 'compare':
         #
         # create output directory   
         #
-        if not os.path.exists(os.path.join(out_path_par, 'current_output')):
-            os.mkdir(os.path.join(out_path_par, 'current_output'))
-
-        out_path_current = os.path.join(out_path_par, 'current_output') 
+        out_path_current = os.path.join(out_path_par, 'current_output')
+        if not os.path.exists(out_path_current):
+            os.mkdir(out_path_current)
+        
         #
         # check whether output file for input file already exists, otherwise: process input
         #
@@ -720,9 +719,7 @@ if action_par == 'compare':
                         if timespan_par == 'timespan':
                             write_path_time_span(sent,f_current)
                         if genericspan_par == 'genspan':
-                            write_path_generic_span(sent,f_current)
-                    
-                    f_current.write('\n')
+                            write_path_generic_span(sent,f_current)                    
 
 # PART 2: GENERATE XML OUTPUT (only with action 'create')
 #
