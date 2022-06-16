@@ -1,36 +1,41 @@
 ﻿
-/*number-all;[\-\<\>\+]?(\d+([\.\,]\d+)?)|((\d{1,3}[\,])?(\d{1,3}[\,])?\d+([\.\,]\d+)|(\.?\d+))
-number-all;[\-\<\>\+]?((\d{1,3}(\.\d{3}))+|\d+)([\.\,\-]\d+)?
+/* numbers
 number-simple;\d+
-/*number-big1;\d{1,3}[\,]\d\d\d
-/*number-big2;\d{1,3}[\,]\d\d\d[\,]\d\d\d
-number-decimal;\d+[\.]\d+
-number-year_range_1;([1]\d{3})(\-)(([1]\d{3})|([2][0]\d{2})|\d{1,2})
-number-year_range_2;([2][0]\d{2})(\-)(([2][0]\d{2})|\d{1,2})
-number-ordinal1;\d+(e|de|-ste|ste)
+number-all;[≤≥=\-\<\>\+]?\d+([\.\,]\d+)?([\.\,]\d+)?
+number-range;[≤≥=\-\<\>\+]?\d+([\.\,]\d+)?\-\d+([\.\,]\d+)?
+number-times-number;\d+x\d+
+number-times;\d+x
+
+/* ordinal numbers
+number-ordinal;\d+(e|-e|de|-de|-ste|ste)
+
+/* fraction
+number-fraction;\d+\/\d+
+
+/* roman numbers
 numberroman_hyphen;(i|v|x){1,5}[\-](i|v|x){1,5}
 numberroman;(i|v|x){1,5}
 ordnumberroman;(i|v|x){1,5}(\-)?(e)
 
-number-percentage1;(\-|)\d+([\.\,]\d+)?(%|)?(\-\d+)?%
+/* time
+number-year_range_1;([1]\d{3})(\-)(([1]\d{3})|([2][0]\d{2})|\d{1,2})
+number-year_range_2;([2][0]\d{2})(\-)(([2][0]\d{2})|\d{1,2})
 
 z_date;([1-9]|0[1-9]|[1,2]\d|3[0,1])((-([1-9]|0[1-9]|[1][0-2])-)|(/([1-9]|0[1-9]|[1][0-2])/)|(\.([1-9]|0[1-9]|[1][0-2])\.))[0-9][0-9]([0-9][0-9])?
-z_date_slash;([1-9]|0[1-9]|[1,2]\d|3[0,1])\/((0)?\d|1[1-2])
+/*z_date_slash;([1-9]|0[1-9]|[1,2]\d|3[0,1])\/((0)?\d|1[0-2])
+z_date_slash;([0-9]|[012][0-9]|3[0-1])\/(0[0-9]|1[0-2]|[0-9])
 
 z_digitaltime;(([0-1])?\d|[2][0-3])\.[0-5]\d
 digitaltime1;([0-1]\d|[2][0-3])\:[0-5]\d(\:[0-5]\d)?
 digitaltime2;([0-1]\d|[2][0-3]|\d)[\:\.]([0-5]\d|\d)u
 digitaltime3;([0-1]\d|[2][0-3]|\d)u([0-5]\d|\d)
 
+/* Age
+age_adj;\d+\-jarig
+age_attradj;\d+\-jarige
+age_con;\d+\-jarigen
 
-footnote;\[\d{1,2}\]
-layout01;[#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=]+
-
-/*adj01;\d+-daags[e]?
-/*adj03;\d+-jarig[e]?
-/*adj05;\d+-koppig[e]?
-
-
+/* Participle
 part01;aange.{3,}[rsflmb]d
 part02;aange.{3,}[kfshp]t
 part03;afge.{3,}[rsflmb]d
@@ -42,3 +47,7 @@ part08;bijge.{3,}[kfshp]t
 part09;doorge.{3,}[rsflmb]d
 part10;doorge.{3,}[kfshp]t
 part11;ge.{3,}eerd
+
+/* General
+footnote;\[\d{1,2}\]
+layout01;[#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=][#*\-+=]+

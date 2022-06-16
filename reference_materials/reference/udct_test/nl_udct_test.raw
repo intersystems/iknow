@@ -92,7 +92,7 @@ C1betrokkenheid
 PR<altijd>
 Rgenegeerd
 Phij heeft zijn betrokkenheid altijd genegeerd
-<attr type="negation" span="genegeerd">
+<attr type="negation" span="zijn betrokkenheid altijd genegeerd">
 <attr type="NegativeSentiment" span="hij heeft zijn betrokkenheid altijd genegeerd">
 SPlannen A. en B. een feestje in de schuur?
 <attr type="positivesentiment" literal="Plannen" token="Plannen">
@@ -119,6 +119,8 @@ Pik was heel tevreden over mijn tijdrit aldus renner
 <attr type="PositiveSentiment" span="ik was heel tevreden over mijn tijdrit">
 SABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste meevaller op Euronext Brussel.
 <attr type="positivesentiment" literal="winst" token="winst">
+<attr type="measurement" literal="9,6 procent" token="9,6 procent" value="9,6" unit="procent">
+<attr type="measurement" literal="15,75 euro," token="15,75 euro," value="15,75" unit="euro">
 C1abcd
 Rdoet
 C2nog beter
@@ -135,6 +137,8 @@ Pabcd doet nog beter met winst van 9,6 procent tot 15,75 euro grootste meevalle
 <attr type="PositiveSentiment" span="winst van 9,6 procent tot 15,75 euro">
 SABCD doet nog beter met een winst van 9,6 procent tot 15,75 euro, de grootste winst op Euronext Brussel.
 <attr type="positivesentiment" literal="winst" token="winst">
+<attr type="measurement" literal="9,6 procent" token="9,6 procent" value="9,6" unit="procent">
+<attr type="measurement" literal="15,75 euro," token="15,75 euro," value="15,75" unit="euro">
 <attr type="positivesentiment" literal="grootste winst" token="winst">
 C1abcd
 Rdoet
@@ -153,6 +157,9 @@ Pabcd doet nog beter met winst van 9,6 procent tot 15,75 euro grootste winst op
 SABCD krikte de netto courante winst, de winst uit de verhuringen, met 25 procent op tot 10,7 miljoen euro of 2,67 euro per aandeel.
 <attr type="positivesentiment" literal="netto courante winst," token="winst,">
 <attr type="positivesentiment" literal="winst" token="winst">
+<attr type="measurement" literal="25 procent" token="25 procent" value="25" unit="procent">
+<attr type="measurement" literal="10,7 miljoen euro" token="10,7 miljoen euro" value="10,7 miljoen" unit="euro">
+<attr type="measurement" literal="2,67 euro" token="2,67 euro" value="2,67" unit="euro">
 C1abcd
 Rkrikte
 C3netto courante winst
@@ -228,19 +235,23 @@ C1hoofd
 Rte verliezen
 Paltijd on the road maar zonder hoofd te verliezen
 <attr type="NegativeSentiment" span="altijd on the road maar zonder hoofd te verliezen">
-SAortaklep: Verdikt en verkalkt maar goed beweeglijk, piekgradiënt 32 mmHg.
+SAortaklep: Verdikt en verkalkt maar goed beweeglijk, piekgradiënt 32 mmHg.
 <attr type="positivesentiment" literal="goed beweeglijk," token="goed beweeglijk,">
+<attr type="measurement" literal="32 mmHg." token="32 mmHg." value="32" unit="mmhg">
 C1aortaklep
 Rverdikt
 Ren
 C1verkalkt
 Rmaar
 C2goed beweeglijk
-C3piekgradiënt 32 mmhg
+C1piekgradiënt
+C232 mmhg
 Paortaklep verdikt en verkalkt maar goed beweeglijk piekgradiënt 32 mmhg
 <attr type="PositiveSentiment" span="maar goed beweeglijk">
 SBij 86 procent is het risico zelfs erg groot omdat het speelgoed meer dan 100 decibel (dB) produceert.
+<attr type="measurement" literal="86 procent" token="86 procent" value="86" unit="procent">
 <attr type="negativesentiment" literal="risico" token="risico">
+<attr type="measurement" literal="meer dan 100 decibel" token="meer dan 100 decibel" value="meer dan 100" unit="decibel">
 Rbij
 C286 procent
 Ris
@@ -419,6 +430,25 @@ PR<lang>
 C3geen victorie kraaien
 Pfinanciële sector moet lang geen victorie kraaien
 <attr type="negation" span="geen victorie kraaien">
+SDe financiële sector moet met andere woorden nog <lang> geen victorie kraaien.
+<attr type="negation" literal="geen victorie kraaien." token="geen">
+C2financiële sector
+Rmoet
+PR<lang>
+C3geen victorie kraaien
+Pfinanciële sector moet lang geen victorie kraaien
+<attr type="negation" span="geen victorie kraaien">
+SDe levensverwachting ligt op 75 jaar voor de mannen en 81 jaar voor de vrouwen.
+C1levensverwachting
+Rligt op
+C275 jaar
+Rvoor
+C1mannen
+Ren
+C281 jaar
+Rvoor
+C1vrouwen
+Plevensverwachting ligt op 75 jaar voor mannen en 81 jaar voor vrouwen
 SDe gids vindt het goed om Belgische kunst te tonen in het buitenland.
 <attr type="positivesentiment" literal="goed" token="goed">
 C1gids
@@ -451,6 +481,22 @@ Romdat
 C3heel veel vraag
 Rnaar is
 Pmeeste winkeliers zitten enkele weken zonder omdat heel veel vraag naar is
+SDe meeste winkeliers zitten al enkele weken zonder omdat er heel veel vraag naar is.
+<attr type="time" literal="enkele weken" token="enkele weken">
+C2meeste winkeliers
+Rzitten
+C2enkele weken
+Rzonder
+Romdat
+C3heel veel vraag
+Rnaar is
+Pmeeste winkeliers zitten enkele weken zonder omdat heel veel vraag naar is
+SOnherstelbare schade werd er echter <nergens> gemeld.
+C2onherstelbare schade
+Rwerd
+PR<nergens>
+Rgemeld
+Ponherstelbare schade werd nergens gemeld
 SDe oefengroep van 256 sporters kreeg een acht weken durend neuromusculair oefenprogramma aangeboden.
 <attr type="time" literal="acht weken durend neuromusculair oefenprogramma" token="acht weken">
 C1oefengroep
@@ -610,11 +656,10 @@ Rwoog op
 C1resultaat
 Pzwakke dollar woog op resultaat
 <attr type="NegativeSentiment" span="zwakke dollar">
-SDertig procent van de 15- tot 17-jarigen denkt bovendien dat waterpijp van vijf tabaksproducten het minst schadelijk is voor de gezondheid.
+SDertig procent van de 15- tot 17-jarigen denkt bovendien dat waterpijp van vijf tabaksproducten het minst schadelijk is voor de gezondheid.
+<attr type="measurement" literal="Dertig procent van de 15- tot 17-jarigen" token="Dertig procent 15- tot 17-jarigen" value="dertig" unit="procent" value2="15- tot 17-jarigen">
 <attr type="negativesentiment" literal="schadelijk" token="schadelijk">
-C2dertig procent
-Rvan
-C315- tot 17-jarigen
+C7dertig procent van de 15- tot 17-jarigen
 Rdenkt dat
 C1waterpijp
 Rvan
@@ -623,7 +668,7 @@ C1minst
 C1schadelijk
 Ris voor
 C1gezondheid
-Pdertig procent van 15- tot 17-jarigen denkt dat waterpijp van vijf tabaksproducten minst schadelijk is voor gezondheid
+Pdertig procent van de 15- tot 17-jarigen denkt dat waterpijp van vijf tabaksproducten minst schadelijk is voor gezondheid
 <attr type="NegativeSentiment" span="denkt dat waterpijp van vijf tabaksproducten minst schadelijk is voor gezondheid">
 SDeze benaming was niet populair en werd in 1946 afgeschaft.
 <attr type="negation" literal="niet populair" token="niet">
@@ -696,6 +741,26 @@ C2lange termijn
 C2aangeleerde reactie
 Rworden
 Pkrabgedrag kan op lange termijn aangeleerde reactie worden
+SDit krabgedrag kan op lange termijn een aangeleerde reactie worden.
+C1krabgedrag
+Rkan op
+C2lange termijn
+C2aangeleerde reactie
+Rworden
+Pkrabgedrag kan op lange termijn aangeleerde reactie worden
+S <Dat> is drie tot vier keer zo vaak als gemiddeld.
+PR<dat>
+Ris
+C1drie
+Rtot
+C4vier keer zo vaak
+Rals
+C1gemiddeld
+Pdat is drie tot vier keer zo vaak als gemiddeld
+SAMSTERDAM 11/08/2018 18:00.
+C1amsterdam
+C211/08/2018 18:00
+Pamsterdam 11/08/2018 18:00
 S <Dit> maakt het alleen maar gevaarlijk om hulp te bieden in echte noodsituaties.
 <attr type="negativesentiment" literal="gevaarlijk" token="gevaarlijk">
 PR<dit>
@@ -819,12 +884,12 @@ C2geen last
 Pfysiek geen last
 <attr type="negation" span="geen last">
 <attr type="PositiveSentiment" span="geen last">
-SGeen enkel systeem is honderd procent perfect.
+SGeen enkel systeem is honderd procent perfect.
 <attr type="negation" literal="Geen enkel systeem" token="Geen enkel">
+<attr type="measurement" literal="honderd procent perfect." token="honderd procent" value="honderd" unit="procent">
 C3geen enkel systeem
 Ris
-C2honderd procent
-C1perfect
+C3honderd procent perfect
 Pgeen enkel systeem is honderd procent perfect
 <attr type="negation" span="geen enkel systeem is honderd procent perfect">
 SGeen noemenswaardig succes.
@@ -853,6 +918,8 @@ Pgezien preparaat niet in orale vorm beschikbaar is en gezien noodzakelijke fre
 <attr type="NegativeSentiment" span="preparaat niet in orale vorm beschikbaar is">
 SHet aandeel verloor 2 procent tot 2.990 yen.
 <attr type="negativesentiment" literal="verloor" token="verloor">
+<attr type="measurement" literal="2 procent" token="2 procent" value="2" unit="procent">
+<attr type="measurement" literal="2.990 yen." token="2.990 yen." value="2.990" unit="yen">
 C1aandeel
 Rverloor
 C22 procent
@@ -860,13 +927,6 @@ Rtot
 C22.990 yen
 Paandeel verloor 2 procent tot 2.990 yen
 <attr type="NegativeSentiment" span="aandeel verloor 2 procent tot 2.990 yen">
-S <Hij> eindigde met een tijd van 6.00.
-PR<hij>
-Reindigde met
-C1tijd
-Rvan
-C16.00
-Phij eindigde met tijd van 6.00
 SHet is bovendien een mooi voorbeeld van hoe de eID niet voor een overheidstoepassing gebruikt wordt.
 <attr type="positivesentiment" literal="mooi voorbeeld" token="mooi">
 <attr type="negation" literal="niet voor" token="niet">
@@ -949,7 +1009,7 @@ C3strengst protestantse volksdeel
 Pwas zo populair dat streven weinig succes heeft gehad niet bij strengst protestantse volksdeel
 <attr type="negation" span="niet bij strengst protestantse volksdeel">
 <attr type="NegativeSentiment" span="weinig succes">
-SHet werd echter maar in één maat gemaakt en had een afwijkende vormgeving, waardoor sommige standaardonderdelen niet pasten, het frame werd dan ook slecht verkocht en de productie is na een paar jaar gestopt.
+SHet werd echter maar in één maat gemaakt en had een afwijkende vormgeving, waardoor sommige standaardonderdelen niet pasten, het frame werd dan ook slecht verkocht en de productie is na een paar jaar gestopt.
 <attr type="negation" literal="niet pasten," token="niet">
 <attr type="negativesentiment" literal="slecht" token="slecht">
 Rwerd maar in
@@ -968,11 +1028,18 @@ Ren
 C1productie
 Ris
 Rna
-C2paar jaar
+C3een paar jaar
 Rgestopt
-Pwerd maar in één maat gemaakt en had afwijkende vormgeving waardoor sommige standaardonderdelen niet pasten frame werd slecht verkocht en productie is na paar jaar gestopt
+Pwerd maar in één maat gemaakt en had afwijkende vormgeving waardoor sommige standaardonderdelen niet pasten frame werd slecht verkocht en productie is na een paar jaar gestopt
 <attr type="negation" span="waardoor sommige standaardonderdelen niet pasten">
 <attr type="NegativeSentiment" span="frame werd slecht verkocht">
+S <Hij> eindigde met een tijd van 6.00.
+PR<hij>
+Reindigde met
+C1tijd
+Rvan
+C16.00
+Phij eindigde met tijd van 6.00
 S <Hij> voelde zich er minder verloren dan vorige keer.
 <attr type="negativesentiment" literal="voelde zich er minder verloren dan" token="verloren">
 PR<hij>
@@ -1112,6 +1179,7 @@ Pikzelf ben van mening dat dit volkomen ontoereikend is en dat als dit niet met
 <attr type="NegativeSentiment" span="dat dit volkomen ontoereikend is">
 SIn totaal was er sprake van een verlies van 2,7 procentpunt, tot 74,8%.
 <attr type="negativesentiment" literal="verlies" token="verlies">
+<attr type="measurement" literal="74,8%." token="74,8%." value="74,8" unit="%">
 Rin totaal was sprake van
 C1verlies
 Rvan
@@ -1178,6 +1246,30 @@ C1theaterkaart
 Pna succesvolle tournee stonden beide dames op theaterkaart
 <attr type="time" span="na succesvolle tournee">
 <attr type="PositiveSentiment" span="succesvolle tournee">
+SNa een succesvolle tournee stonden beide dames op de theaterkaart.
+<attr type="positivesentiment" literal="succesvolle tournee" token="succesvolle">
+Rna
+C2succesvolle tournee
+Rstonden
+C2beide dames
+Rop
+C1theaterkaart
+Pna succesvolle tournee stonden beide dames op theaterkaart
+<attr type="time" span="na succesvolle tournee">
+<attr type="PositiveSentiment" span="succesvolle tournee">
+SOp de vergadering in Antwerpen zijn <nog maar eens> tevreden klanten geciteerd.
+<attr type="time" literal="nog maar eens" token="nog maar eens">
+<attr type="positivesentiment" literal="tevreden klanten" token="tevreden">
+Rop
+C1vergadering
+Rin
+C1antwerpen
+Rzijn
+PR<nog maar eens>
+C2tevreden klanten
+Rgeciteerd
+Pop vergadering in antwerpen zijn nog maar eens tevreden klanten geciteerd
+<attr type="PositiveSentiment" span="antwerpen zijn nog maar eens tevreden klanten">
 SNatuurlijk is <dat> niet altijd nodig, maar als <hij> <dat> doet, geniet <hij> wel van een zeer concurrentiële eenheidsprijs.
 <attr type="negation" literal="niet altijd nodig," token="niet altijd">
 <attr type="time" literal="niet altijd nodig," token="niet altijd">
@@ -1199,6 +1291,7 @@ Pnatuurlijk is dat niet altijd nodig maar als hij dat doet geniet hij van zeer 
 SNiet slecht toch voor een boek dat voor vijftig procent verzonnen is.
 <attr type="negation" literal="Niet slecht" token="Niet">
 <attr type="negativesentiment" literal="Niet slecht" token="slecht">
+<attr type="measurement" literal="vijftig procent" token="vijftig procent" value="vijftig" unit="procent">
 C2niet slecht
 Rvoor
 C1boek
@@ -1300,6 +1393,30 @@ C1goede
 Rdoen was
 Polieaandelen sloten met winst omdat olieprijs vandaag weer in goede doen was
 <attr type="PositiveSentiment" span="winst">
+SOlieaandelen sloten met winst, ook al omdat de olieprijs vandaag weer in goede doen was.
+<attr type="positivesentiment" literal="winst," token="winst,">
+<attr type="time" literal="vandaag" token="vandaag">
+C1olieaandelen
+Rsloten met
+C1winst
+Romdat
+C1olieprijs
+C1vandaag
+C1weer
+Rin
+C1goede
+Rdoen was
+Polieaandelen sloten met winst omdat olieprijs vandaag weer in goede doen was
+<attr type="PositiveSentiment" span="winst">
+SDaarnaast plaatste <hij> zonder geldige licentie ook piercings.
+<attr type="positivesentiment" literal="geldige licentie" token="geldige">
+Rplaatste
+PR<hij>
+Rzonder
+C2geldige licentie
+C1piercings
+Pplaatste hij zonder geldige licentie piercings
+<attr type="PositiveSentiment" span="geldige licentie">
 SOmdat <hij> niet zo hard getraind had, verloor <hij> <deze keer> de match.
 <attr type="negation" literal="niet zo hard getraind had," token="niet zo">
 <attr type="negativesentiment" literal="verloor" token="verloor">
@@ -1426,18 +1543,17 @@ Rwordt
 C1populair
 Prustgevend kruid wordt populair
 <attr type="PositiveSentiment" span="rustgevend kruid wordt populair">
-SSlechts 1% van de jongeren vindt acne absoluut niet storend.
+SSlechts 1% van de jongeren vindt acne absoluut niet storend.
+<attr type="measurement" literal="1% van de jongeren" token="1%" value="1" unit="%">
 <attr type="negation" literal="absoluut niet storend." token="absoluut niet">
 <attr type="negativesentiment" literal="absoluut niet storend." token="storend.">
-C11%
-Rvan
-C1jongeren
+C41% van de jongeren
 Rvindt
 C1acne
 C3absoluut niet storend
-P1% van jongeren vindt acne absoluut niet storend
-<attr type="negation" span="1% van jongeren vindt acne absoluut niet storend">
-<attr type="PositiveSentiment" span="1% van jongeren vindt acne absoluut niet storend">
+P1% van de jongeren vindt acne absoluut niet storend
+<attr type="negation" span="1% van de jongeren vindt acne absoluut niet storend">
+<attr type="PositiveSentiment" span="1% van de jongeren vindt acne absoluut niet storend">
 SSlechts vier jongeren zijn heel ontevreden.
 <attr type="negativesentiment" literal="heel ontevreden." token="heel ontevreden.">
 C2vier jongeren
@@ -1678,7 +1794,7 @@ Rzou kunnen zijn bij
 C1mens
 Pwetenschappers vrezen dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij mens
 <attr type="NegativeSentiment" span="dat hetzelfde mechanisme wel eens schadelijk zou kunnen zijn bij mens">
-SWie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt, kent na een paar keer proberen dus de antwoorden uit het hoofd.
+SWie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt, kent na een paar keer proberen dus de antwoorden uit het hoofd.
 Rwie bij
 C2herhaalde pogingen
 C3minder dan eenenveertig
@@ -1687,12 +1803,12 @@ C1vijftig
 Rhaalt
 Rkent
 Rna
-C2paar keer
+C3een paar keer
 Rproberen
 C1antwoorden
 Ruit
 C1hoofd
-Pwie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt kent na paar keer proberen antwoorden uit hoofd
+Pwie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt kent na een paar keer proberen antwoorden uit hoofd
 SWie daardoor wordt getroffen is misschien kortstondig mooi geweest maar is <daarna> <langdurig> ziek.
 <attr type="positivesentiment" literal="kortstondig mooi" token="kortstondig mooi">
 <attr type="time" literal="daarna" token="daarna">
@@ -1795,12 +1911,13 @@ Rkende
 C2minder succes
 Pzijn zoon kende minder succes
 <attr type="NegativeSentiment" span="minder succes">
-SZo komt het dat de partij veel sterker is dan vroeger.
+SZo komt het dat de partij veel sterker is dan <vroeger.>
+<attr type="time" literal="vroeger." token="vroeger.">
 Rkomt dat
 C1partij
 C2veel sterker
 Ris dan
-C1vroeger
+PR<vroeger>
 Pkomt dat partij veel sterker is dan vroeger
 Shet is niet slecht is voor de tanden en het is veilig voor diabetici.
 <attr type="negation" literal="niet slecht" token="niet">
