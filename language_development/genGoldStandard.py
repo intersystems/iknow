@@ -43,7 +43,7 @@
         -> sentimentspan_par: write parameter 'sentspan' to output sentiment span; write another parameter, e.g. 'no_sentspan', if not
         -> timespan_par: write parameter 'timespan' to output time span; write another parameter, e.g. 'no_timespan', if not
         -> genericspan_par: write parameter 'genspan' to output generic attributes; write another parameter, e.g. 'no_genspan', if not
-    Example (on Windows): "python genGoldStandard.py C:\gs_en_general\input\ C:\gs_en_general\ en create type cert meas neg sent time gen certspan measspan negspan sentspan timespan genspan"
+    Example (on Windows): "python genGoldStandard.py C:\gs_en_general\input\ C:\gs_en_general\ en create type cert meas neg sent time gen vec certspan measspan negspan sentspan timespan genspan"
 '''
 import sys, os, ntpath
 import html
