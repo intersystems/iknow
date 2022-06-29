@@ -149,7 +149,7 @@ def generate_list_of_single_sentences(file_name,language_par):
                 if len(value.split('"')) > 9:  # i.e. if the sentence contains quotes (")
                     for i in range(8, len(value.split('"')) - 1):
                         sentence_composed = sentence_composed + '"' + value.split('"')[i]
-                    sentence_list.append(sentence_composed)
+                sentence_list.append(sentence_composed)
 
     return sentence_list
 
@@ -303,6 +303,7 @@ def write_generic_attributes(sentence,file):
 
 # write the sentence 'entity vector' attributes
 def write_entity_vector_attributes(sentence,file,text):
+    entity_vector_attribute = ''
     if (len(sentence['sent_attributes'])): 
         for sent_attribute in sentence['sent_attributes']:
             if sent_attribute['type'] == 'EntityVector':
@@ -566,6 +567,7 @@ if action_par == 'create':
                             write_path_time_span(sent,f_wip)
                         if genericspan_par == 'genspan':
                             write_path_generic_span(sent,f_wip)
+                        f_wip.write('\n\n')
                     
 #
 # Second option: generate Gold Standard input and output files ready for use to compare output with (action_par = 'finish')
