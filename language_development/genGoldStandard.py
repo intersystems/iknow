@@ -721,7 +721,8 @@ if action_par == 'compare':
                         if timespan_par == 'timespan':
                             write_path_time_span(sent,f_current)
                         if genericspan_par == 'genspan':
-                            write_path_generic_span(sent,f_current)                    
+                            write_path_generic_span(sent,f_current)  
+                        f_current.write('\n\n')
 
 # PART 2: GENERATE XML OUTPUT (only with action 'create')
 #
