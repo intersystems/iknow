@@ -72,9 +72,9 @@
 /*		1189. Ze hadden net genoeg geld ingezameld om verf te kopen. De reële groei is, rekening houdend met de bevolkingsgroei, net iets meer dan nul. Die discussie bleef achteraf net iets te lang naar onze zin aanslepen. 
 1681;20;NLAdvDegree:"iets"|NLMeerMinder:"langer"|"dan"|NLNumber:NLNumberPlusUnit:"een";NLBeginconcept+NLNumber|+Join|+Join|+Join;
 /*		1681. De bierbrouwer ziet een winst van iets meer dan 1 procent teruglopen tot een plus van 0,2 procent op 29,53 euro.
-2056;20;NLAdvDegree:"iets":"net"|"onder":"boven"|"de"|NLNumber|NLUnit;+JoinReverse|+JoinReverse|+JoinReverse|*|*;
+2056;20;NLAdvDegree:"iets":"net"|"beneden":"onder":"boven"|"de"|NLNumber|NLUnit;+JoinReverse|+JoinReverse|+JoinReverse|*|*;
 /*		2056. De Brusselse sterindex bleef nipt onder de 2 procent winst.
-2055;20;"onder":"boven"|"de"|NLNumber|NLUnit;+JoinReverse|+JoinReverse|*|*;
+2055;20;"beneden":"onder":"boven"|"de"|NLNumber|NLUnit;+JoinReverse|+JoinReverse|*|*;
 /*		2055. Ook kleinere schepen onder de tien meter mogen nog maar een beperkt aantal dagen de zee op.
 1688;20;"niet":"wat":"iets":"steeds":"veel":"nog"|NLCompNum:NLNummodifier|"dan"|NLNumber:"een";NLBeginconcept+NLNumber-NLNegation-NLNegBegin|+Join|+Join|+Join;
 /*		1688. Maar die afhandeling wordt een formaliteit die niet later dan 3 weken na de afspraak moet gebeuren. Zijn schuilplaats, niet groter dan 9 vierkante meter, kon enkel worden bereikt via een geheime deur. Bij klinisch onderzoek ziet men op de neusvleugel rechts een nodule van iets kleiner dan een cm.
@@ -86,7 +86,7 @@
 /*		2088. Dit zou betekenen dat anno 2009 het kerkbezoek in Vlaanderen minder dan 8% bedraagt.
 1739;20;NLNumber:NLEen+^NLPossiblehour|"van":"op"|"de"|NLNumber+^NLPossiblehour;^NLConNum+CStarter-NLArt|+Join|+Join|+Join;use number attribute to include multiword numbers
 /*		1739. Slechts 155 van de 303 deelnemers haalden de eindstreep. Onderzoek van de Brandwonden Stichting toont aan dat één op de vijf mensen de barbecue op een onveilige manier aansteekt met bijvoorbeeld brandgel of spiritus. Volgens de professor komt deze allergische reactie bij een op de miljoen mensen voor. Meer dan vier op de vijf kinderen voelen zich goed op de lagere school. NOT. Dat is 7.806 euro per seconde bekeken over de twee wedstrijden (9.58 op de 100 meter, 19.19 op de 200 meter).
-1740;20;NLNumber+^NLPossiblehour|"of":"à"|NLNumber+^NLPossiblehour;+CStarter|+Join|+Join;
+1740;20;^NLComma|NLNumber+^NLPossiblehour|"of":"à"|NLNumber+^NLPossiblehour;*|+CStarter|+Join|+Join;
 /*		1740. De eerste groep bestond uit vrouwen die dagelijks twee of drie glazen rode wijn dronken. Toch wordt een reële stijging niet uitgesloten, omdat de immuniteit verworven door vaccinatie begint te dalen na 3 à 5 jaar, en bescherming is niet meer aantoonbaar na 10 à 12 jaar.
 
 /* join numbers
@@ -103,7 +103,7 @@
 /*		2007. Bijna helft comadiagnoses is fout. Bijna een derde van de leerlingen zegt dat de leraren niet naar hun mening vragen.
 2039;20;NLNummodifier|NLNumberPlusUnit+CBeginEndConcept;JoinReverse-NLNegation-NLNegBegin|-NLNumber-NLConNum-NLNumpart2;
 /*		2039. Als er een akkoord wordt bereikt dan is over een periode van vijf tot zes jaar circa EUR3 miljard nodig.
-2058;20;NLAgeIndicator|NLNummodifier+NLOperator|NLNumber:NLNumberPlusUnit|NLAge;*|JoinReverse|+Measurement+ValueProperty|+UnitProperty+Measurement-NLTime-NLTimeconcept;
+2058;20;Ageindicator|NLNummodifier+NLOperator|NLNumber:NLNumberPlusUnit|NLAge;*|JoinReverse|+Measurement+ValueProperty|+UnitProperty+Measurement-NLTime-NLTimeconcept;
 /*		2058. Kinderen < 1 jaar: 4 à 6 mg/kg/dag in 2 giften.
 2047;20;NLNummodifier+NLOperator|NLNumber:NLNumberPlusUnit;JoinReverse|*;
 /*		2047. Bij aankomst regelmatige pols maar bloeddruk < 60.
@@ -147,21 +147,25 @@
 /* measurement 'age' (to distinguish from time before rules for time indications)
 2032;20;NLGeen|.NLNumber|NLAge|"oud";+ValueProperty+Measurement-NLNegation-NLNegBegin|+Join|+UnitProperty+Measurement-NLTime-NLTimeconcept|Join;
 /*		2032. Het jongste kind is nog geen jaar oud.
+2148;20;NLNumber|NLComma|NLNumber|NLComma|NLNumber|"en":"of":"tot":"tot en met"|NLNumber|NLAge|"oud":"jonger":"ouder";+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|+Join;
+/*		2148. De vier arrestanten zijn 16, 17, 18 en 19 jaar oud.
+2149;20;NLNumber|NLComma|NLNumber|"en":"of":"tot":"tot en met"|NLNumber|NLAge|"oud":"jonger":"ouder";+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|+Join;
+/*		2149. De vier arrestanten zijn 17, 18 en 19 jaar oud.
 2029;20;NLNumber:NLQuantity|"en":"of":"tot":"tot en met"|NLNumber:NLQuantity|NLAge|"oud":"jonger":"ouder";+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|+Join;
 /*		2029. Een groep van 522 geblesseerde sporters (274 mannen en 248 vrouwen) tussen de 12 en 70 jaar oud werden verdeeld over twee groepen.
 2069;20;NLNumber|NLAge|"of"|"jonger":"ouder";+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|+Join|+Join;
 /*		2069. Het geneesmiddel kan een verhoogd risico op sterfte geven bij patiënten van 65 jaar of jonger.
 2025;20;NLNumber:NLQuantity|NLAge|"oud":"oude":"jonger":"ouder";+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|+Join;
 /*		2025. Een vrouwelijke autobestuurster raakte lichtgewond en haar baby van enkele dagen oud werd voor een check-up naar het ziekenhuis gebracht.
-2027;20;NLAgeIndicator|"van":"tussen"|."de"|NLNumber:NLQuantity|.NLAge|"en":"of":"tot":"tot en met"|NLNumber:NLQuantity|NLAge;*|*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
+2027;20;Ageindicator|"van":"tussen"|."de"|NLNumber:NLQuantity|.NLAge|"en":"of":"tot":"tot en met"|NLNumber:NLQuantity|NLAge;*|*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
 /*		2027. Onderzoekers analyseerden het gedrag van 562 volwassenen tussen 19 en 90 jaar. Dat blijkt uit onderzoek in Amerika bij kinderen van 6 maanden tot 17 jaar oud.
-2024;20;NLAgeIndicator|"tot":"tot en met":"van":"is":"zijn"|NLNumber:NLQuantity|NLAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
+2024;20;Ageindicator|"tot":"tot en met":"van":"is":"zijn"|NLNumber:NLQuantity|NLAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
 /*		2024. Het risico op dit soort kanker neemt toe na de leeftijd van 50 jaar. Gespecialiseerde instituten zullen geluidsplafonds bepalen die rekening houden met de gevoelige oortjes van kinderen tot drie jaar.
-2028;20;NLAgeIndicator|"van"|NLNumber:NLQuantity;*|*|+ValueProperty+Measurement;
+2028;20;Ageindicator|"van"|NLNumber:NLQuantity;*|*|+ValueProperty+Measurement;
 /*		2028. Man van 40 heeft alle landen van de wereld bezocht.
-2031;20;NLAgeIndicator|."van"|"onder":"boven"|."de"|NLNumber:NLQuantity|NLAge;*|*|+JoinReverse|+JoinReverse|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
+2031;20;Ageindicator|."van"|"beneden":"onder":"boven"|."de"|NLNumber:NLQuantity|NLAge;*|*|+JoinReverse|+JoinReverse|+ValueProperty+Measurement|+UnitProperty+Measurement-NLTime-NLTimeconcept;
 /*		2031. De huidige richtlijn adviseert antibiotica bij een selecte groep van kinderen onder de 2 jaar, en een afwachtend beleid bij kinderen boven de 2 jaar.
-2057;20;NLAgeIndicator|."van"|"onder":"boven"|."de"|NLNumber:NLQuantity;*|*|+JoinReverse|+JoinReverse|+ValueProperty+Measurement;
+2057;20;Ageindicator|."van"|"beneden":"onder":"boven"|."de"|NLNumber:NLQuantity;*|*|+JoinReverse|+JoinReverse|+ValueProperty+Measurement;
 /*		2057. Lezers van boven de negentig herinneren zich ongetwijfeld nog levendig de commotie rond de dood van romantische held.
 2026;20;"jonger":"ouder"|"dan"|NLNumber:NLQuantity|NLAge;JoinReverse|JoinReverse|+ValueProperty+Measurement+CStarter|+UnitProperty+Measurement-NLTime-NLTimeconcept;
 /*		2026. In Zwitserland is meer dan de helft van de besmetten ouder dan 15 jaar.
@@ -590,10 +594,14 @@
 /*		2034. In werkelijkheid bedroeg de stijging 2,3%, zonder het effect van de extra dag in februari.
 2036;35;NLCon:NLRelCon|NLNumberPlusUnit|NLVerb:NLLinkingverb:NLmAux;*|+CStarter|*;
 /*		2036. Over het gehele jaar steeg de omzet met 3% tot 2,54 miljard dollar, waarbij de vergelijkbare omzetgroei 1,2% bedroeg.
-2021;35;NLNumber|"tot":"op":"bij":"naar":"en":"of"|NLNumber|NLUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;
+2144;35;NLNumber|NLComma|NLNumber|NLComma|NLNumber|"en":"of"|NLNumber|NLUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;enumeration
+/*		2144. Het maakt niet uit of je er 1, 10, 100 of 1000 km in rijdt, je komt altijd uitgerust aan.
+2146;35;NLNumber|NLComma|NLNumber|"en":"of"|NLNumber|NLUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;enumeration
+/*		2146. De investeringen lopen al flink op bij het aankopen van zwaardere goudbaren van bijvoorbeeld 5, 10 of 20 gram.
+2021;35;NLNumber|"tot":"op":"bij":"naar":"en":"of":"-"|NLNumber|NLUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;
 /*		2021. Het biljet meet 21,6 op 13,3 centimeter. De waarde van het album werd voor de veiling geschat tussen de 12.000 en 15.000 euro.
-2037;35;NLNumber|"tot":"op":"bij":"naar":"à":"en":"of"|NLNumberPlusUnit;+ValueProperty+Measurement|*|*;
-/*		2037. Deze afname ligt tussen de 10 en 15%.
+2037;35;NLNumber|"tot":"op":"bij":"naar":"à":"en":"of":"-"|NLNumberPlusUnit;+ValueProperty+Measurement|*|*;
+/*		2037. Deze afname ligt tussen de 10 en 15%. 
 2050;35;NLCon|NLNumber+NLTimes|NLUnit+^NLPercent:NLCurrency;*|+ValueProperty+Measurement|+UnitProperty+Measurement;exception to r2003: don't split Concept when number expresses frequency
 /*		2050. Kredex 25 mg 2x 11/2 co. per dag.
 2051;35;NLCon+NLCapitalInitial:NLCapitalMixed:NLWeight|NLNumber+^NLTimes|NLUnit+^NLPercent:NLCurrency;*|+ValueProperty+Measurement|+UnitProperty+Measurement;exception to r2003: don't split Concept when previous word is capitalized or is a weight unit
@@ -618,7 +626,6 @@
 /*		2016. Het aandeel ruilde een winst van meerdere procenten voor 3,75 procent verlies.
 2020;35;NLUnit|"per"|NLUnit;*|Join|Join;
 /*		2020. Dit gebruik van relatief veel (5 gram per liter) en oude hop is typisch voor lambiek.
-
 2046;35;Measindicator|.NLLinkingverb:NLOperator:NLColon|NLNumber;*|*|+ValueProperty+Measurement;
 /*		2046. Gewicht: 98.00 kg, Gestalte: 174.00 cm, (bsa = 2.18m² en bmi = 32). De indicatie voor een operatie is een BMI groter dan 40 of BMI groter dan 35 met 2 bijkomende aandoeningen bijv. Hoge bloeddruk en diabetes.
 
@@ -1946,9 +1953,9 @@
 /*		2068. In dat ene kanton wordt een derde van alle straffen uitgesproken.
 2067;50;NLFraction+^NLOrdnum|"van"|NLArt:NLIndefpron:NLDempron|.NLAttradj|NLCon;*|+Join|+Join|*|*;
 /*		2067. Als de helft van de nierfunctie wegvalt, spreekt men van nierinsufficiëntie. Die was goed voor bijna een kwart van de totale groepswinst. Ongeveer de helft van die vrouwen heeft er helemaal geen last van.
-2090;50;NLNumberPlusUnit+NLPercent|"van"|NLArt:NLIndefpron:NLDempron|.NLAttradj|NLCon;*|NLAttradj|+Join|*|*;
+2090;50;NLNumberPlusUnit+NLPercent|"van"|NLArt:NLIndefpron:NLDempron|.NLAttradj:NLNumber|NLCon;*|NLAttradj+NLAddExpansion|+Join|-CStarter|*;
 /*		2090. In België lijdt 80% van de adolescenten aan acne.
-2091;50;NLNumber|NLUnit+NLPercent|"van"|NLArt:NLIndefpron:NLDempron|.NLAttradj|NLCon;*|*|NLAttradj|+Join|*|*;
+2091;50;NLNumber|NLUnit+NLPercent|"van"|NLArt:NLIndefpron:NLDempron|.NLAttradj:NLNumber|NLCon;*|*|NLAttradj+NLAddExpansion|+Join|-CStarter|*;
 /*		2091. De afwijking komt gemiddeld bij 20 procent van de bevolking voor.
 509;50;NLIndefpron|typeRelation;NLSubjpron|*;
 /*		509. Sommige worden vrij snel door het lichaam afgebroken.
@@ -2141,8 +2148,10 @@
 1386;63;NLDummy;-NLDummy;
 /*		1386. De besmetting wordt niet alleen van de moeder op het jong overgebracht, maar ook via de velden en de weilanden.
 
-/* PHASE 64: TIME ATTRIBUTE EXPANSION
-/* ==================================
+/* PHASE 64: TIME & MEASUREMENT ATTRIBUTE EXPANSION
+/* ================================================
+/* TIME EXPANSION
+/* --------------
 /* Preparation: remove Time attribute for Season and Time of day without time meaning
 1818;64;NLAttradj|NLSeason:NLTimeofday;*|-NLTime;
 /*		1818. Economen wezen toen onder andere de zachte winter aan als verklaring. Tulpen kunnen niet in een warm klimaat worden gekweekt, omdat ze een koude nacht en een koude winter nodig hebben om te kunnen groeien.
@@ -2317,6 +2326,107 @@
 1911;64;NLNiet|NLBeginrel+NLPrep+NLTimeBegin;*|-NLBeginrel;correction to keep negation and preposition in time expansion together
 /*		1911. De Koning heeft enkel het recht de Kamer van volksvertegenwoordigers te ontbinden wanneer zij een motie van vertrouwen in de federale Regering verwerpt en niet binnen een termijn van drie dagen een opvolger voor de Eerste Minister voor benoeming aan de Koning voordraagt.
 
+/* MEASUREMENT EXPANSION
+/* ---------------------
+/* Include Time in Measurement expansion, part 1
+2130;64;UnitProperty+^NLAge|NLTime+^typePathRelevant|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|+NLMeasurementStop;
+/*		2130. De poolstokspringster tekende een contract dat haar naar verluidt 1,5 miljoen dollar per jaar opbrengt. In het eerste kwartaal versnelde de groei tot 2,2 procent jaar op jaar. NOT. In Vlaanderen kan elke vrouw van 50 tot en met 69 jaar om de twee jaar gratis een mammografie laten nemen.
+
+/* Measurement preposition/conjunction Measurement
+2095;64;"van":"vanaf":"tussen"|."de"|ValueProperty|.UnitProperty|"tot":"tot en met":"t.e.m.":"naar":"-"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2095. De aangepaste jaarwinst per aandeel nam toe van 1,38 tot 1,48 dollar in het vorige boekjaar. Zo zijn er units van 224 tot 3.859 vierkante meter. Hij doet nog beter met een winst van 9,6 procent tot 15,75 euro.
+2097;64;"van":"vanaf":"tussen"|."de"|ValueProperty:NLNumberPlusUnit|.UnitProperty|"tot":"tot en met":"t.e.m.":"naar":"-"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2097. Je hoeft geen Nobelprijs voor de economie te hebben om te begrijpen dat de huidige werkhypothese van de financiële markten - een verwachte jaarlijkse winstgroei van 15 tot 25% - op middellange termijn eenvoudigweg irrealistisch is. Dit zal tot een boekwinst van tussen de EUR200 miljoen tot EUR225 miljoen leiden. Daarnaast richt het bedrijf zich op een gemiddelde omzetgroei van 6% - 7%.
+2132;64;"tot":"naar"|."de"|ValueProperty|.UnitProperty|"van"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2132. De marge nam vanwege hogere arbeidskosten af tot 12,5 % van 13,1 %. 
+2133;64;"tot":"naar"|."de"|ValueProperty:NLNumberPlusUnit|.UnitProperty|"van"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2133. De omzet is met 25,7% gestegen naar EUR1,803 miljard van EUR1,434 miljard.
+2100;64;"tussen"|."de"|ValueProperty|.UnitProperty|"en"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2100. De waarde van het cilindervormige kunstvoorwerp in verguld zilver wordt tussen 50.000 en 100.000 euro geschat. 
+2101;64;"tussen"|."de"|ValueProperty:NLNumberPlusUnit|.UnitProperty|"en"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLBeginrel+NLMeasurementBegin|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2101. Deze afname ligt tussen de 10 en 15%.
+2098;64;^NLMeasurementBegin|ValueProperty|.UnitProperty|"tot":"tot en met":"t.e.m.":"en":"of":"-"|.NLAdvStruct|ValueProperty|UnitProperty|.typeConcept|^typeConcept;*|+NLMeasurementBegin|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2098. Vroeger was 15 tot 20 procent van de automobilisten in overtreding. Ze zou ook al 25 bedrijven bereid hebben gevonden om de juridische procedure, die 100.000 tot 150.000 euro kost, te financieren.
+2099;64;^NLMeasurementBegin|ValueProperty:NLNumberPlusUnit|.UnitProperty|"tot":"tot en met":"t.e.m.":"en":"of":"-"|.NLAdvStruct|NLNumberPlusUnit|.typeConcept|^typeConcept;*|+NLMeasurementBegin|*|*|*|*|*|+NLMeasurementStop;
+/*		2099. Als de begroting wordt aangenomen met de plafonds die zijn vastgelegd, kunnen de uitgaven sowieso al met 5 tot 6% groeien. 
+
+/* Concept before Measurement
+2121;64;"van":"in":"op":"per"|.NLArt:NLPoss:NLAttradj|*NLCon;+NLDummy|+NLDummy|+NLDummy;temporary mark lexreps to detect pattern for expansion
+/*		2121. Een oplossing van koolhydraten in water van 4 tot 8% (of 40 tot 80 g per liter water) is perfect omdat dit de opname van zowel het vocht als van de suikers maximaal toelaat.
+2137;64;^NLPrep|NLArt:NLPoss|.NLAttradj|*NLCon;*|*|+NLDummy|+NLDummy;temporary mark lexreps to detect pattern for expansion
+/*		2137. Ik weet niet of er een oorzakelijk verband is, maar stel wel vast dat het aantal vrouwelijke afgevaardigden in het parlement van 25,7% in 1994 tot 29,9% in 1999 is gestegen. 
+2122;64;"van"|NLMeasurementBegin:NLNumberPlusUnit;-NLDummy|*;remove temporary marker from 'van' right before a measurement
+/*		2122. Daarnaast richt het bedrijf zich op een gemiddelde omzetgroei van 6% à 7%, een vergelijkbare omzetgroei van 2% tot 3% en een gemiddelde groei van de winst per aandeel van 15%.
+2123;64;"van"+NLMeasurementBegin;-NLDummy;remove temporary marker from 'van' right before a measurement
+/*		2123. Een oplossing van koolhydraten in water van 4 tot 8% (of 40 tot 80 g per liter water) is perfect omdat dit de opname van zowel het vocht als van de suikers maximaal toelaat.
+2124;64;"van"|ValueProperty|UnitProperty;-NLDummy|*|*;remove temporary marker from 'van' right before a measurement
+/*		2124. In sommige landen wordt daarom een systematische herhalingsinenting tegen kinkhoest bij alle adolescenten (op de leeftijd van 12 à 17 jaar) aanbevolen.
+2125;64;NLCon|.NLDummy|"van"|NLMeasurementBegin;+NLMeasurementBegin|*|*|-NLMeasurementBegin;left expansion for existing span
+/*		2125. Dit zal in 2008 tot een boekwinst van tussen de EUR200 miljoen tot EUR225 miljoen leiden.
+2126;64;NLCon|.NLDummy|"van"+NLMeasurementBegin;+NLMeasurementBegin|*|-NLMeasurementBegin;left expansion for existing span for Concepts like '50% van de'
+/*		2126. Een inbreuk kan een gevangenisstraf van zes maanden tot vijf jaar opleveren en een boete van 200 tot 2.000 euro.
+2127;64;NLCon+^NLMeasurementBegin|.NLDummy|"van"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|*|+NLMeasurementStop;left expansion for existing span
+/*		2127. Veel boerenbedrijven hebben daarom een eigen, kleine verbrandingsinstallatie met een capaciteit van minder dan 50 kilo per uur.
+2128;64;NLCon+^NLMeasurementBegin|.NLDummy|"van"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;left expansion for existing span
+/*		2128. In 2006 behaalde het vastgoedfonds nog een direct resultaat per aandeel van EUR5,14.
+2129;64;NLDummy;-NLDummy;remove temporary marker
+/*		2129. In 2006 behaalde het vastgoedfonds nog een direct resultaat per aandeel van EUR5,14.
+
+/* Expansion based on indicator
+2109;64;Ageindicator|ValueProperty|UnitProperty+NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|+NLMeasurementStop;
+/*		2109. De huidige richtlijn adviseert antibiotica bij een selecte groep van kinderen onder de 2 jaar, en een afwachtend beleid bij kinderen boven de 2 jaar. 
+2111;64;Measindicator|."is":"was":"zijn":"waren":":":"beneden":"onder":"boven"|ValueProperty|UnitProperty+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
+/*		2111. In deze groep van zuigelingen wordt aangeraden de zuurstofsaturatie > 93 % te houden. De prijs is 24,95 euro. Bloeddruk: 17/8 cm/Hg.
+2112;64;Measindicator|."is":"was":"zijn":"waren":":":"beneden":"onder":"boven"|NLNumberPlusUnit+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|+NLMeasurementStop;
+/*		2112. De bloeddruk bedroeg 130/80 mmHg en de pols 80/min, regulair. Het wordt nooit volledig hard en blijft zelfs bij temperaturen beneden –20°C nog vervormbaar.
+2142;64;Measindicator:Ageindicator|NLMeasurementBegin;+NLMeasurementBegin|-NLMeasurementBegin;
+/*		2142. Onderzoekers analyseerden het gedrag van 562 volwassenen tussen 19 en 90 jaar.
+
+/* Concept after Measurement
+2107;64;NLPercent|"van"|.NLPoss:NLAttradj|NLCon|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
+/*		2107. Hierdoor ga je op een langzamer energiesysteem over zodat je nog slechts 50% van je maximale vermogen kunt behalen.
+2108;64;NLPercent|NLAttradj+NLAddExpansion|.NLAttradj:NLNumber|NLCon|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
+/*		2108. De fiets doet het echter enkel goed in Vlaanderen, waar het goed is voor 12,8% van de woon-werkverplaatsingen. Bijna 60% van de vier miljoen ton bananen die jaarlijks binnen de Unie wordt geconsumeerd, wordt niet door producenten uit de Unie geleverd.
+2141;64;ValueProperty|UnitProperty|*typeConcept|^typeConcept;+NLMeasurementBegin|*|*|+NLMeasurementStop;
+/*		2141. Om de natuurschade te compenseren die zou veroorzaakt worden door die baggerwerken planden ze om de polder, die ruim 300 hectare land beslaat te ontpolderen. 
+2140;64;NLAttradj+NLNumberPlusUnit|*typeConcept|^typeConcept;+NLMeasurementBegin|*|+NLMeasurementStop;
+/*		2140. De 23-jarige vrouwtjesolifant Olga overleed donderdagavond na een opstootje tussen de olifanten.
+
+/* Enumeration
+2150;64;ValueProperty|.UnitProperty|NLComma|ValueProperty|.UnitProperty|NLComma|ValueProperty|.UnitProperty|"en":"of"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2150. De vier arrestanten zijn 16, 17, 18 en 19 jaar oud.
+2152;64;NLNumberPlusUnit|NLComma|NLNumberPlusUnit|NLComma|NLNumberPlusUnit|"en":"of"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2152. Grote stijgers zijn vier bedrijven met plussen van achtereenvolgens 9,7%, 6,9%, 6,5% en 6,3%. 
+2151;64;ValueProperty|.UnitProperty|NLComma|ValueProperty|.UnitProperty|"en":"of"|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|*|*|*|*|+NLMeasurementStop;
+/*		2151. De investeringen lopen al flink op bij het aankopen van zwaardere goudbaren van bijvoorbeeld 5, 10 of 20 gram.
+2153;64;NLNumberPlusUnit|NLComma|NLNumberPlusUnit|"en":"of"|NLNumberPlusUnit|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|*|+NLMeasurementStop;
+/*		2153. Grote stijgers zijn drie bedrijven met plussen van achtereenvolgens 9,7%, 6,9% en 6,3%. 
+
+/* Include Time in Measurement expansion, part 2
+2134;64;NLTimeBegin+NLMeasurementStop|.^NLTimeStop|NLTimeStop;-NLMeasurementStop|*|+NLMeasurementStop;include time on the right 
+/*		2134. Vooral het duurdere segment, de villa's, kenden een sterke prijsdalingen van 5,6 procent in een jaar tijd. 
+2135;64;"tot":"tot en met":"t.e.m.":"en":"of"+NLMeasurementStop|ValueProperty|UnitProperty|.typeConcept|^typeConcept;-NLMeasurementStop|*|*|*|+NLMeasurementStop;include measurement on the right
+/*		2135. Wel de productiebedrijven met een verbruik van minstens 5 gigawattuur elektriciteit of 10 gigawattuur aardgas. 
+2136;64;"tot":"tot en met":"t.e.m.":"en":"of"+NLMeasurementStop|NLNumberPlusUnit|.typeConcept|^typeConcept;-NLMeasurementStop|*|*|+NLMeasurementStop;include measurement on the right
+/*		2136. Door een gunstige zeewatertemperatuur van 3°C in de winter en 16°C in de zomer zijn vooral de Waddenzee en de Oosterschelde belangrijk als kraamkamer van onder meer schol, tong en mosselen. 
+2138;64;NLTimeBegin+NLMeasurementStop|.^NLTimeStop|NLTimeStop;-NLMeasurementStop|*|+NLMeasurementStop;include time span on the right (longer pattern)
+/*		2138. Door een gunstige zeewatertemperatuur van 3°C in de winter en 16°C in de zomer zijn vooral de Waddenzee en de Oosterschelde belangrijk als kraamkamer van onder meer schol, tong en mosselen. 
+2139;64;^NLAge|NLAdvTime+NLMeasurementStop|^NLMeasurementBegin;*|-NLMeasurementStop|+NLMeasurementStop;
+/*		2139. Voor het hele jaar lag dat op 45,9% tegen een groei van 17,8% een jaar eerder. NOT. In Vlaanderen kan elke vrouw van 50 tot en met 69 jaar om de twee jaar gratis een mammografie laten nemen.
+
+/* Expansion for specific words
+2131;64;"per"+NLMeasurementStop|*typeConcept|^typeConcept;-NLMeasurementStop|*|+NLMeasurementStop;
+/*		2131. Voor een wedstrijd moet men voldoende koolhydraten (2,5 tot 3 g koolhydraten per kg lichaamsgewicht) eten om goed voorbereid aan de inspanning te beginnen. Daardoor daalde het nettoresultaat met 40 procent tot 12,8 miljoen euro of 3,2 euro per aandeel. 
+2143;64;NLPercent|"van"|"degenen":"diegenen"|"die"|*^NLPBegin:SEnd|NLPBegin:SEnd;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
+/*		2143. Minimaal 15 procent van degenen die voor hun huidaandoening de huisarts raadplegen, heeft een risicoprofiel voor het ervaren van vrij ernstige psychische problemen. 
+
+/* Move attribute markers to relevant entity
+2096;64;NLMeasurementStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;-NLMeasurementStop|*|+NLMeasurementStop;move MeasurementStop from NonRelevant to next relevant entity
+/*		2096. In een grote Europese studie werd onderzocht of mensen van 45 tot 70 jaar, die veel blootstaan aan geluid van vliegverkeer, vaker een hogere bloeddruk hebben dan mensen die weinig aan dit geluid blootstaan.
+
+/* Clean-up
+2154;64;NLMeasurementBegin+NLMeasurementStop;-NLMeasurementStop;
+/*		2154. Omdat er van een eenmalige premie van 975 euro  tussen 40 en 50 procent euro overblijft.
 
 /* PHASE 65: NEGATION ATTRIBUTES
 /*================================

@@ -102,7 +102,7 @@
 ;1,20,30,40,50,60,63,64,70,80,$;NLAndOr;typeRelation;"en","of" and variations;0;;
 ;1,30,40;NLBepaalde;typeAmbiguous;'bepaalde': verb or indefinite pronoun;0;;
 ;1,40;NLBij;typeAmbiguous;'bij': preposition, adverb or noun;0;;
-;1,30,40,50,60,63,64,65,70,80,$;NLComma;typeOther;comma;0;;
+;1,20,30,35,40,50,60,63,64,65,70,80,$;NLComma;typeOther;comma;0;;
 ;1,20,40;NLDan;typeAmbiguous;'dan': adverb or comparative conjunction;0;;
 ;1,30,40;NLDat;typeAmbiguous;'dat': relative or demonstrative pronoun;0;;
 ;1,20,40,50,64,65,70,80,$;NLDe;typeOther;definite article 'de';0;;
@@ -234,17 +234,18 @@
 ;1,35,$;NLGeo;typeAttribute;geographical lexreps;0;;
 
 ;1,35,50,$;Measurement;typeAttribute;general attribute for all measurements;0;;Entity(Measurement)
-;1,35,$;UnitProperty;typeAttribute;attribute for the Unit property;0;;Entity(Measurement,Unit)
-;1,35,$;ValueProperty;typeAttribute;attribute for measurement values;0;;Entity(Measurement,Value)
-;1,20,30,35,40,50,$;NLUnit;typeAttribute;attribute for measurement units;0;;
-;1,20,30,35,50,70,$;NLNumberPlusUnit;typeAttribute;general attribute for all numbers plus units without space;0;;Entity(Measurement,Value,Unit)
+;1,35,64,$;UnitProperty;typeAttribute;attribute for the Unit property;0;;Entity(Measurement,Unit)
+;1,35,64,$;ValueProperty;typeAttribute;attribute for measurement values;0;;Entity(Measurement,Value)
+;1,64,$;NLMeasurementBegin;typeAttribute;added for enabling path expansion;0;;Path(Begin,Measurement)
+;1,64,$;NLMeasurementStop;typeAttribute;added for enabling path expansion;0;;Path(End,Measurement)
+;1,20,30,35,40,50,64,$;NLUnit;typeAttribute;attribute for measurement units;0;;
+;1,20,30,35,50,64,70,$;NLNumberPlusUnit;typeAttribute;general attribute for all numbers plus units without space;0;;Entity(Measurement,Value,Unit)
 ;1,35;NLPossibleNumberPlusUnit;typeAttribute;possible number plus unit: [number]°;0;;
-;1,35;NLMeasIndicator;typeAttribute;indicates the presence of a measurement;0;
-;1,20;NLAgeIndicator;typeAttribute;indicates the presence of an age;0;
 ;1,35;NLUnitBeforeValue;typeAttribute;attribute for units preceding the value, e.g. 'USD';0;;
-;1,20;NLAge;typeAttribute;possible unit of age, e.g. 'jaar' (overlap with Time);0;;
+;1,20,64;NLAge;typeAttribute;possible unit of age, e.g. 'jaar' (overlap with Time);0;;
 ;1,35,40;NLCurrency;typeAttribute;currency name;0;;
 ;1,35,40,50,64,65,$;NLPercent;typeAttribute;'procent' and %;0;;
 ;1,35;NLWeight;typeAttribute;units that express weight (different approach for Concept boundaries for medication dosage);0;;
 ;1,35;NLPostmeas;typeAttribute;speficies a unit, e.g. hoger, minder;0;;
-;1,35;Measindicator;typeAttribute;indicates that the following number is a measurement;0;
+;1,20,64;Ageindicator;typeAttribute;indicates the presence of an age;0;
+;1,35,64;Measindicator;typeAttribute;indicates that the following number is a measurement;0;
