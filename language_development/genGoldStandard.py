@@ -123,7 +123,7 @@ def write_ln(file_,text_=""):
 
 # function to read a complete text file
 def read_text_file(file_name):
-    with open(file_name, encoding="utf8") as f_text:
+    with open(file_name, encoding="utf-8-sig") as f_text:
         return f_text.read()
 
 # function to generate a list of single sentences from a text file
