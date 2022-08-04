@@ -21,6 +21,7 @@ updatelib.set_vars(vars)
 
 # obtain changelog
 r = requests.get('https://cython.readthedocs.io/en/stable/src/changes.html')
+r.encoding = 'utf-8'
 soup = bs4.BeautifulSoup(r.text, 'html.parser')
 for h2_element in soup.find_all('h2'):
     if any(s.startswith(latest_version) for s in h2_element.stripped_strings):
