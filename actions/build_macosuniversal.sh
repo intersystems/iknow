@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build universal2 wheels for Python 3.8 through Python 3.10, compatible with
+# Build universal2 wheels for Python 3.8 through Python 3.11, compatible with
 # Mac OS >= 11 x86_64/arm64. This script must be executed with the repository
 # root as the working directory.
 #
@@ -38,7 +38,7 @@ make -j $(sysctl -n hw.logicalcpu) test
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-for PYTHON in python3.{8..10}; do
+for PYTHON in python3.{8..11}; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-universal2 --no-dependencies
 done
 "$PYTHON" setup.py merge

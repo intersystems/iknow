@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build Windows x86_64 wheels for Python 3.6 through Python 3.10. This script
+# Build Windows x86_64 wheels for Python 3.6 through Python 3.11. This script
 # must be executed with the repository root as the working directory.
 #
 # Usage: actions/build_windows.sh
