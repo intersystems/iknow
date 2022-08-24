@@ -57,7 +57,6 @@
 
 /* Connections with partial words
 /* ------------------------------
-/*717;1;SVCon|"@connect@"|SVAndOrBut:"eller"|SVCon:SVAdj:SVAdvAdj:SVYear:SVNum:SVAdvTime;JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
 717;1;SVCon|"@connect@"|SVAndOrBut:"eller":"respektive"|SVCon:SVAdj:SVAdvAdj:SVYear:SVNum:SVAdvTime:SVPrespart:SVPart;+JoinReverse|JoinReverse|JoinReverse|*;e.g. läs- och skrivsvårigheter
 /*		717. Man kan också tänka sig att personer med läs- och skrivsvårigheter klarar sig bättre. Fördelarna med den elektroniska förvaltningen uttrycks ofta av statsmakterna i termer såsom kostnads- och arbetseffektivt, rationellt, inkluderande och demokratigynnande.
 719;1;"@connect@";SVCon;uncovered patterns + avoid that concepts get split if no AndOrBut is present
@@ -109,7 +108,6 @@
 /* =================================================
 /* PHASE 25: DISAMBIGUATE SPECIFIC WORDS AND PHRASES
 /* =================================================
-
 
 /* *** senare ***
 565;25;SVAdvDegree|SVNumber:SVNum:SVIndefart|SVTimeconcept|"senare";SVAdvTime+SVAdv|Join|Join|Join;
@@ -179,7 +177,7 @@
 
 
 */ ==============
-*/ BLOCK 30: TIME
+*/ PHASE 30: TIME
 */ ==============
 
 1310;30;SVTimeconcept|"per"+^SVCon;*|SVPrep;preliminary rule: improve overall treatment of 'per' later
@@ -188,7 +186,6 @@
 /*		1331. Kräver övervakning av barnet ca 30 min efteråt.
 1387;30;SV12dNum:SV3dNum|*SV3dNum;*|Join;
 /*		1387. Vi evakuerade 1 400 människor men det finns nära 250 000 till om man ser till alla de belägrade områdena.
-/*1335;30;SVNum:SVNumber|SVNumpart2;JoinReverse|*;
 1335;30;SVNum:SVNumber:SVQuantity|SVNumpart2;JoinReverse|*;
 /*		1335. Under de följande 350 miljoner åren fram till idag låg Baltika hela tiden över havsytenivå.
 1356;30;SVRunt|SVTimeconcept;SVPrep+SVTimeprep|*;better for CRC-pattern
@@ -227,7 +224,6 @@
 /*		862. — Den första januari år 2022 blir jag pensionär. Den lägsta -31 °C, den 20 januari år 1814.
 858;30;"den"|SVOrdnumber:SVNum|SVMonth;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVDate;
 /*		858. Den första maj, då solen genomlöper Oxens tecken. Det senaste dödsbudet kom den 6 december.
-/*1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|SVAdvTime+SVAdv+SVDate;
 1226;30;SVOrdnumber:SVNum|SVMonth;JoinReverse|+SVDate;
 /*		1226. Det nyaste kommer att invigas i Borlänge 25 oktober 2013.
 1269;30;SVMonth|"månad";*|Join;
@@ -245,9 +241,6 @@
 /*		922. Mannen sökte för yrsel på sin vårdcentral i februari i år.
 1270;30;"vecka"|SVWeeknum;SVTimeconcept+SVTime|SVTimeconcept+SVTime;
 /*		1270. I vecka 32 noterades snabb viktökning.
-
-/* moved: 1243;30;SVDefart:SVDemonstr|*SVTimeadj:SVNum:SVNumber:SVOrdnumber|SVTimeconcept:SVYearpart:SVMonth:SVDay;-SVSubjpron-SVObjpron-SVAttrpron|+SVTime|+SVTime;
-/*1243. På fredagens agenda kvarstår bland annat en definitiv BNP-siffra för det tredje kvartalet.
 
 /* Clock
 /* -----
@@ -273,8 +266,6 @@
 
 /* Detect complex numbers before detecting other time indications
 /* --------------------------------------------------------------
-
-/*1340;30;SVNum|SVAv|SVNum;JoinReverse|JoinReverse|*;
 /*1340;30;SVNum:SVNumber:SVIndefart|SVAv|SVNum:SVNumber|SVTimeconcept;JoinReverse|JoinReverse|*|*;temporary version of rule: delete right context later
 1340;30;SVNum:SVNumber:SVIndefart+^SVYear|SVAv|SVNum:SVNumber+^SVYear;JoinReverse|JoinReverse|*;
 /*		1340. I Sverige har ungefär 8 av 100 personer någon form av astma. I Sverige har ungefär åtta av hundra personer någon form av astma.
@@ -287,8 +278,6 @@
 
 1243;30;SVDefart:SVDemonstr|*SVTimeadj:SVNum:SVNumber:SVOrdnumber|SVTimeconcept:SVYearpart:SVMonth:SVDay;-SVSubjpron-SVObjpron-SVAttrpron|+SVTime|+SVTime;
 /*		1243. På fredagens agenda kvarstår bland annat en definitiv BNP-siffra för det tredje kvartalet.
-
-
 
 /* Other time indications
 /* ----------------------
@@ -317,6 +306,7 @@
 /*		1322. Profilen slutade i somras efter drygt fem år.
 
 /* Pattern number - timeconcept -> distinguish between age and time
+/* ----------------------------------------------------------------
 1489;30;SVNum|"mån";*|+SVUnit+SVAge;often used in medical context
 /*		1489. - 6 mån - 5 år: 0,05 - 0,1 mg/kg.
 1239;30;SVGen:SVNum:SVNumber+^SVDecinum|SVTimeadj:SVOrdnumber|SVTimeconcept:SVYearpart:SVDay:SVTime;+SVTimeadj+SVTime|+SVTime|+SVTime;
@@ -338,7 +328,6 @@
 /*		1306. Han blir borta från spel i fyra till sex veckor.
 1304;30;SVAge:SVpAux|.SVNum:SVNumber:SVAndOrBut|SVAgeprep|SVNum:SVNumber|SVTimeconcept|^SVTimeprep;*|*|-SVTimeprep|*|+SVAge|*;
 /*		1304. I observationsstudier har risken för död varit klart ökad i åldrar över 60 år jämfört med i yngre åldrar. Om barnet är under tre månader och man misstänker att barnet har en infektion bör man ringa sjukvårdsrådgivningen eller kontakta vårdcentralen.
-/*1303;30;^SVAge|"om":SVTimeprep|."de här"|SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime|+SVTime|*;+SVTimeprep for 'om'
 1303;30;^SVAge|"om":SVTimeprep|."de här"|SVAdjpron:SVNum:SVNumber|SVTimeconcept|^SVAge;*|+SVTimeprep|JoinReverse|+SVTime-SVSubjpron-SVObjpron|+SVTime|*;+SVTimeprep for 'om'
 /*		1303. Buggen har varit oupptäckt i två år. Om patienten sedan är fri från cancer under tre år kan det bli aktuellt med njurtransplantation.
 1305;30;^SVAge|"om":SVTimeprep|SVIndefart|SVTimeconcept|^SVAge;*|+SVTimeprep|SVNumber+SVTime|+SVTime|*;+SVTimeprep for 'om', ^SVNumber for Indefart
@@ -361,14 +350,8 @@
 1351;30;SVNum:SVNumber|"år"+^SVAge;+SVTime|+SVTime;
 /*		1351. Fem år efter tvingades hon bort från sin post. En kost rik på animaliskt protein innebär nämligen fyra gånger större risk att dö i cancer inom en tidsperiod av 18 år. Vädret observerats kontinuerligt i snart 250 år. WRONG. De två småbröderna, tre och fem år, brann inne.
 
-/* Alternative implementation:
-/*1350;30;SVNum:SVNumber|"år"+^SVTime+^SVAge|SVTimeprep;+SVbCon+SVTime|+SVTime|*;
-/*1350. Fem år efter tvingades hon bort från sin post.
-/*1351;30;SVAv:SVTimemodifier|SVNum:SVNumber|"år"+^SVAge;*|+SVTime|+SVTime;
-/*1351. En kost rik på animaliskt protein innebär nämligen fyra gånger större risk att dö i cancer inom en tidsperiod av 18 år. Vädret observerats kontinuerligt i snart 250 år.
-/*1352;30;SVNumber+^SVNum|"år"+^SVAge;+SVTime|+SVTime;
-/*1352. Ämnesrådens ledamöter ska utses för tre år. WRONG. De två småbröderna, tre och fem år, brann inne.
-
+/* Time indications without SVNum(ber)
+/* -----------------------------------
 1287;30;SVTimespan|SVAv|*SVTime:SVDay;JoinReverse|JoinReverse|*;
 /*		1287. Om du äter en halv avokado till din lunch kan det hjälpa till att tanka på energin resten av eftermiddagen, enligt en studie i Nutrition Journal.
 1234;30;SVAdvTemp:SVYearpart:SVTime+^SVYear+^SVTimeprep|SVAdvTime;JoinReverse|*;
@@ -381,19 +364,21 @@
 /*		1241. Det påminner om den magiska färg tomtenissen använder i det teveprogram många tittar på varje julafton ungefär klockan 15.07.
 1250;30;SVAdvTime:SVTimeconcept|SVAdvTemp+SVTimeprep|SVAndOrBut:SVPunctuation:SEnd;+SVTime|Join|*;
 /*		1250. Utvecklingen innebär också ett trendbrott eftersom övriga kvartal under året hade lägre sparande än motsvarande period året före.
+1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber+^SVNum+^SVAdjpron;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
+/*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader. NOT_IN. Barnet blir friskt igen efter några dagar.
 
+/* Time indications with SVPosttime
+/* --------------------------------
 1256;30;SVNum:SVNumber:SVIndefart|SVTimeconcept|SVPosttime;+SVTime|+SVTime|+SVTime;
 /*		1256. Kortison gavs i 1 vecka postoperativt.
 1274;30;SVYear|*SVPosttime;SVAdv+SVAdvTime+SVTime|Join;
 /*		1274. Från 800-talet e.kr. kan man börja spåra den västerländska konstmusiken i källmaterialet tack vare bevarade notdokument.
 1255;30;SVAdvTime:SVTimeconcept:SVTime|*SVPosttime;+SVTime|Join;
 /*		1255. Kortison gavs i 1 vecka postoperativt.
-1257;30;SVAdvTemp:SVTimeadj|SVTimeprep+^"mellan"|SVAdvTime:SVTimeconcept:SVTime+^SVNumber+^SVNum+^SVAdjpron;JoinReverse|JoinReverse|SVAdvTime+SVAdv+SVTime;
-/*		1257. Tidigare i februari hölls nyval i landet. NOT_IN. De flesta kan börja arbeta igen efter en till tre månader. NOT_IN. Barnet blir friskt igen efter några dagar.
+
 
 1240;30;SVDefart:SVIndefart|*SVAdj:SVAdvAdj+^SVGen+^SVTime|SVAdvTime;*|*|^SVTimeconcept+SVCon-SVAdv;avoid that noun phrases are split
 /*		1240. Det blev en dramatisk tredje dag av Oscars vittnesmål.
-
 
 /* Expansion
 /* ---------
@@ -429,7 +414,7 @@
 /*		1438. Per den 30 juni 2012 hade Stockholms kommun 871 952 invånare.
 
 /* INTRODUCE LATER: 1290;30;SVTimeconcept|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
-/*
+
 1272;30;SVTimemodifier:SVAdvTemp|SVTimeprep+SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
 /*		1272. Lärarutbildning, med praktisk pedagogik, skedde vid särskilda högskolor sent in i 1900-talet.
 1294;30;SVTimeprep+^"sedan"+^"över"|SVTimeBegin;+SVTimeBegin|-SVTimeBegin;
@@ -450,11 +435,10 @@
 1398;30;SVClocktime+^SVTime;+SVNum+SVDecinum;
 /*		1398. Barn 6 - 12 år: 0.05 mg/kg (maxdos < 10 mg).
 
+
 /* ======================
 /* PHASE 35: MEASUREMENTS
 /* ======================
-/*1408;35;SVQuantity|SVNumpart2;SVNummodifier+SVAdj-SVAttrpron-SVSubjpron-SVObjpron|*;
-/*. Nágra tusen kronor väntas gå förlorat på snatterier och svinn i julhandeln.
 1381;35;SVNum:SVNumber|"respektive"|SVNum:SVNumber|SVUnit;+Measurement+ValueProperty|SVAdj|+Measurement+ValueProperty|+Measurement+UnitProperty;one concept with two values and one unit
 /*		1381. Andelen som hade sådan andning var 21 respektive 40 procent.
 1406;35;SVNum:SVNumber|"x":"×"|SVNum:SVNumber:ValueProperty;JoinReverse|JoinReverse|+Measurement+ValueProperty;
@@ -477,8 +461,6 @@
 /*		1380. Med barn avses varje människa under 18 år.
 1384;35;SVPrep|"över":"under"|SVNum;*|JoinReverse|*;
 /*		1384. Dagstemperaturer på över 25 °C (s.k. högsommardagar) inträffar i genomsnitt 16 gånger per år.
-/*1392;35;SVpAux|"över":"under"|SVNum+^SVTime;*|JoinReverse|*;
-/*1392. Förekomsten av kontaktallergi oftast är under 1 procent. NOT_IN. Världens 300 rikaste människor blev under 2013 ännu rikare.
 1394;35;"över":"under"|SVNum:SVNumber|SVUnit;JoinReverse|*|*;
 /*		1394. Förekomsten av kontaktallergi oftast är under 1 procent.
 1379;35;SVNum:SVNumber|SVTimeconcept+SVAge;+Measurement+ValueProperty|+Measurement+UnitProperty;
@@ -487,7 +469,6 @@
 /*		1402. Urvalet representerar kvinnor i åldern 18-74 i EU.
 1472;35;SVNum|SVComma|SVNum|SVComma|SVNum|"och":"respektive"|SVNum+Measurement;+ValueProperty|*|+ValueProperty|*|+ValueProperty|*|*;
 /*		1472. De fyra anhållna är 16, 18, 18 och 19 år gamla.
-/*1395;35;SVNum+^Measurement|SVComma|SVNum+^Measurement|"och"|SVNum+Measurement;+ValueProperty|*|+ValueProperty|*|*;
 1395;35;SVNum|SVComma|SVNum|"och":"respektive"|SVNum+Measurement;+ValueProperty|*|+ValueProperty|*|*;
 /*		1395. De fyra anhållna är 16, 18, 18 och 19 år gamla.
 1378;35;*SVNummodifier|ValueProperty;JoinReverse|+SVbCon;
@@ -506,12 +487,10 @@
 /*		1404. Vid nuvarande virkespriser ger gran som växer 13 m3 en årlig markersättning på ca 1 000 kr per hektar sedan alla kostnader är täckta.
 1401;35;Measindicator|.SVpAux|SVNum:SVNumber+^SVTime;*|*|+Measurement+ValueProperty;
 /*		1401. Vid denna tidpunkt var patienten kraftigt överviktig (BMI 45).
-/*1405;35;Measindicator|.SVpAux|*SVNummodifier:"över":"under"|SVNum:SVNumber;*|*|JoinReverse|+Measurement+ValueProperty;
 1405;35;Measindicator|.SVpAux|*SVNummodifier|SVNum:SVNumber;*|*|JoinReverse|+Measurement+ValueProperty;
 /*		1405. Vid denna tidpunkt var patienten kraftigt överviktig (BMI cirka 45).
 1457;35;Measindicator|.SVpAux|"över":"under"|SVNum:SVNumber|^SVTime;*|*|JoinReverse|+Measurement+ValueProperty|*;
 /*		1457. Karminrött är en spektrallinje från syreatomer O och bildas på höjder över cirka 200 km.
-/*1407;35;ValueProperty|UnitProperty|"x":"×"|SV12dNum;*|*|JoinReverse|+Measurement+ValueProperty;
 1407;35;ValueProperty|UnitProperty|"x":"×"|SV12dNum;*|*|+Measurement+UnitProperty|+Measurement+ValueProperty;
 /*		1407. Intravenös behandling med hydrokortison, initialt 100 mg × 4, initierades.
 1491;35;SVNumberPlusUnit+SVAge|"man";*|-SVSubjpron+SVCon;
@@ -522,21 +501,6 @@
 
 1393;35;SVNumber+SVRegex+^SVTime+^Measurement;+SVCon;remove SVRegex from range01 and numberdecimalperiod, preliminary rule
 /*		1393. Hon sopade henne av banan i två raka set med 6-2, 6-2.
-
-
-/* Expansion
-/* ---------
-/*1417;35;SVAge|.<SVAge|*Measurement|^Measurement;+MeasurementBegin|*|*|+MeasurementStop;
-/*1417.
-/* too much 1422;35;SVPrep|*Measurement|^Measurement;+MeasurementBegin|*|+MeasurementStop;
-/*1420;35;SVAgeprep|*Measurement|^Measurement;-MeasurementStop+MeasurementBegin|*|+MeasurementStop;
-/*1420;35;SVAgeprep+MeasurementStop|*Measurement|^Measurement;-MeasurementStop|*|+MeasurementStop;
-/*1420.
-/*;35;Percentage|"av"|
-
-/*1418;35;SVPunctuation+MeasurementStop|^SEnd;-MeasurementStop|+MeasurementStop;
-/*.
-/*;35;MeasurementStop+^typeConcept+^typeRelation+^typePathRelevant+^typeBeginConcept+^typeBeginEndConcept|^typeConcept+^typeRelation+^typePathRelevant+^typeBeginEndConcept|typeConcept:typeRelation:typePathRelevant:typeBeginEndConcept+^SVNegStop+^SVNegStart;*|*|+SVNegBegin;move NegBegin from nonrelevant to relevant lexrep
 
 
 /* ========================
@@ -787,9 +751,7 @@
 /*714;40;SBegin|"över"|SVNum+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 714;40;SBegin|"över"|SVNum:SVNumber+^SVDecinum;*|SVAdvDegree+SVAdv|*;
 /*		714. Över 20 peteckier på en 2,5 kvadratcentimeters area anses onormalt.
-/*618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join;
-/*618;40;"över":"under"|SVNum+^SVDecinum|"år"+SVAge;SVCon|Join|Join;TO BE CHECKED: probably obsolete.
-/*618. no example.
+/*618;40;"över":"under"|SVNum+^SVDecinum|"år";SVCon|Join|Join; -> obsolete
 650;40;SVGen|"andra";*|SVAdj;
 /*		650. Sambandet mellan energi och exergi framgår av termodynamikens andra huvudsats.
 682;40;"rent"|SVAdvAdj;SVAdvDegree+SVAdv|*;
@@ -1688,7 +1650,6 @@
 /*		196. Blir det inte så måste regeringen i regel avgå.
 197;40;SVInte|SVSaa;SVbCon|Join;
 /*		197. Uppmärksamheten kom dock inte så mycket att fokusera på resultatet som metoderna.
-/*180;40;SVCon|SVSaa|SVmAux:SVpAux:SVVerb;SVCon|SVConj|*;
 180;40;SVCon:SVAdvTime|SVSaa|SVmAux:SVpAux:SVVerb;*|SVConj|*;
 /*		180. Men om marken har eller kommer att få ett alternativvärde så bör nuvarande politik omprövas. När det kom till kritan så var det varken husbonden eller matmodern som gick till acciskammaren, utan ett barn. Inom akademin finns inga påtagliga könsskillnader i utgångsläget, men på grund av att män har en högre avkastning än kvinnor på sina post-doc år så växer inkomstskillnaderna över tiden när man väl disputerat.
 184;40;SVSaa|SVCon;SVbCon|SVCon;
@@ -1744,8 +1705,6 @@
 /*		192. Det är inte självklart vad man skall mena med arbete. Trots den något dramatiska landningen fick inte Daniel några allvarliga skador.
 199;40;SVInte|SVAdj+^SVCon;SVbCon|SVCon;
 /*		199. Alla har vi nog fått lära oss att vi ska tänka positivt för att prestera bättre, även i situationer som inbjuder till allt annat än glada tankar och känslor.
-/*857;40;SVInte|SVAdvTemp;SVNegrel|SVAdvManner;
-/*857. Forskarna konstaterade att hennes luftvägar var fulla av ett fågelvirus, H10N8, som inte tidigare infekterat människa.
 
 /* SVExample
 /* ---------
@@ -2300,15 +2259,19 @@
 1327;75;SVNum:SVNumber|SVTimeconcept|SVTimespanprep|.SVAdvStruct|SVvRel:SVAndOrBut:SEnd;+SVTime|+SVTime|Join|*|*;belongs to marker detection, but is done here, because disambiguation of possible verbs is not done yet in phase 30.
 /*		1327. Fem år efter tvingades hon bort från sin post.
 
+/* time1 and/or time2
 1333;75;SVTimeprep|SVTime|SVAndOr+^SVPBegin|SVTimeconcept:SVYearpart|^SVTime;*|*|-SVTimeStop|+SVTime|+SVTimeStop;
 /*		1333. Efter en ganska trög utveckling under vintern och våren ser vi nu ett möjligt trendbrott.
 
+/* time1 före/efter concept
 1315;75;SVTimeconcept:SVTime|SVTimespanprep+^SVTimeBegin+^SVTime|.SVIndefart:SVDefart:SVPosspron|*SVAdj:SVNum:SVNumber:SVCon|SVvRel:SVConj:SVIndefart:SVDefart:"än":SEnd;+SVTimeBegin|-SVTimeStop|*|*|+SVTimeStop;
 /*		1315. Mätningarna av barnens lungfunktion gjordes inom 72 timmar efter födseln.
 1316;75;SVTimeconcept:SVTime|SVTimespanprep+^SVTimeBegin+^SVTime|.SVIndefart:SVDefart:SVPosspron|*SVAdj:SVNum:SVNumber:SVCon|SVPrep|.SVIndefart:SVDefart:SVPosspron|*SVAdj:SVNum:SVNumber:SVCon|SVvRel:SVConj:SVIndefart:SVDefart:SVPrep:"än":SEnd;+SVTimeBegin|-SVTimeStop|*|*|-SVTimeStop|*|*|+SVTimeStop;
 /*		1316. Det finns en långsammare typ av allergisk reaktionsom kommer först fem till sex timmar efter kontakt med det allergiframkallande ämnet.
 1320;75;SVTimeconcept:SVTime|SVTimespanprep+^SVTimeBegin+^SVTime|.SVIndefart:SVDefart:SVPosspron|*SVAdj:SVNum:SVNumber:SVCon|.<^SVvRel+^SVConj+^SVTimeStop|SVPBegin:SVTimeStop:"än":SEnd;+SVTimeBegin|-SVTimeStop|*|*|*|+SVTimeStop;
 /*		1320. Den andra dagen efter ankomsten till sjukhuset och nio dagar efter operationen försämrades patienten med dyspné, hög feber och desorientering.
+
+/* concept boundary detection
 1317;75;SVCon|SVNum:SVNumber:SVDecinum|SVTimeconcept+SVTimeBegin;*|^SVbCon+SVTimeBegin|-SVTimeBegin;
 /*		1317. Patienten återhämtade sig och kunde lämna sjukhuset två veckor efter operationen.
 /*1318;75;SVTimemodifier|SVNum:SVNumber|SVTimeconcept+SVTimeBegin;+SVTimeBegin|*|-SVTimeBegin; - r1237 makes Timemodifier part of number
@@ -2316,14 +2279,17 @@
 1319;75;SVCon|SVTimeconcept+SVTimeBegin;*|^SVbCon+SVTimeBegin-SVCon;
 /*		1319. Med dagens mätverktyg kan arrangörerna dagen efter en tävling gå in och titta närmare på siffror som sticker ut.
 
+/* time1 före/efter att
 1325;75;SVTimeconcept:SVTime|SVTimespanprep|SVAtt|*^SVPBegin+^SEnd|SVPBegin:SEnd;+SVTimeBegin|-SVTimeStop|-SVTimeStop|*|+SVTimeStop;
 /*		1325. Det är förklaringen till att man kan få besvär först flera timmar efter att man har varit i kontakt med något man är allergisk mot.
 1329;75;SVTimeconcept:SVTime|SVTimespanprep|"det"|SVAtt|*^SVPBegin+^SEnd|SVPBegin:SEnd;+SVTimeBegin|-SVTimeStop|-SVTimeStop|-SVTimeStop|*|+SVTimeStop;
 /*		1329. Inom 1-3 månader efter det att man utsatts för smittan, bildas ett sår på det ställe där bakterierna har varit i kontakt med hud eller slemhinnor.
 
+/* negation
 1346;75;SVNegation+^SVSubjpron+^SVConj+^"nej"|*SVTime|^SVTime;+SVTimeBegin|-SVTimeBegin|+SVTimeStop;
 /*		1346. Om den nye läraren vill ändra kontraktet genom att använda andra undervisningsformer så går det inte från den ena dagen till den andra.
 
+/* fine-tuning, avoiding conflicting labels
 1332;75;SVYear:SVNumber:SVNum+SVbCon;-SVNumber-SVNum-SVYear-SVAdj;
 /*		1332. Kräver övervakning av barnet ca 30 min efteråt.
 1344;75;SVTime|SVbCon+SVTime;*|^SVCon+SVTime;
@@ -2348,7 +2314,6 @@
 
 1293;76;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop+^"års";*|SVbCon+SVTimeStop;
 /*		1293. Här etablerades sedan 1950-talet småindustrier som så småningom liknade en kåkstad.
-/*1362;90;typeBeginConcept:typeConcept+^SVTimeStop|typeConcept+SVTimeStop|*typeConcept|^typeConcept;*|-SVTimeStop|*|+SVTimeStop;
 1362;76;typeBeginConcept:typeConcept+SVTime+SVTimeStop|*typeConcept|^typeConcept;-SVTimeStop|*|+SVTimeStop;
 /*		1362.UD. Det gemensamma för dessa är att man satsar (pengar, normalt) på en framtida händelse som kan inträffa eller ej, eller på en redan inträffad händelse vars utfall är åtminstone delvis obekant. 
 
@@ -2373,22 +2338,20 @@
 1486;77;SVNumberPlusUnit;+Measurement;
 /*		1486. Ca 30% blir symtomfria efter en vecka utan antibiotikabehandling.
 
+/* Age
 1417;77;SVAge|.<SVAge|*Measurement|^Measurement;+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1417. Med barn avses varje människa under 18 år.
 1465;77;SVNumberPlusUnit:SVUnit+SVAge|*typeConcept|^typeConcept;+MeasurementBegin|+InMeasspan|+MeasurementStop;
 /*		1465. En 29-årig man fick föras till sjukhus med ambulans med djupa sår på halsen och huvudet.
 /*1476;77;Measurement:SVNumberPlusUnit|.Measurement+^SVPostmeas|*SVPostmeas|^SVPostmeas;+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop; - only relevant with other version of r1383
 /*1476. Motsvarande siffra för Frankfurtbörsen ligger på en nedgång om 0,2 procent medan Parisbörsen ser ut att gå mot en öppning 0,2 procent högre.
-
-/* too much 1422;35;SVPrep|*Measurement|^Measurement;+MeasurementBegin|*|+MeasurementStop;
-/*1420;35;SVAgeprep|*Measurement|^Measurement;-MeasurementStop+MeasurementBegin|*|+MeasurementStop;
 1420;77;SVAgeprep+MeasurementStop|*Measurement|^Measurement;-MeasurementStop|+InMeasspan|+MeasurementStop;
 /*		1420. Studiedeltagarna genomgick transplantationer när de var i åldern 13 till 18 år.
 1432;77;Measurement+SVAge|SVAndOr|"äldre"|^SBegin;*|-MeasurementStop+InMeasspan|-SVCon-SVAdj+SVeCon+InMeasspan|+MeasurementStop;
 /*		1432. Motsvarande andel för personer 65 år eller äldre är 21, 10 och 4 procent.
+
 1483;77;Measurement|"och"|"uppåt"|^SBegin;+InMeasspan|-MeasurementStop+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1483. De fem största koncernerna har marknadsandelar från fem procent och uppåt.
-
 
 /* Percentage
 1422;77;Percentage+Measurement:SVNumberPlusUnit|"av"|.SVIndefart:SVDefart:SVPosspron:SVAttrpron|*typeBeginConcept:typeConcept|^typeConcept;+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
@@ -2423,43 +2386,43 @@
 /*		1452. Den höga kostnaden per jobb generellt beror enligt rapporten på att en stor andel av sänkningen hamnade hos unga som redan hade jobb eller som skulle ha fått jobb även utan den.
 1439;77;*Measurement|.typeConcept|"per"|SVUnit:SVTimeconcept|^SBegin;+MeasurementBegin+InMeasspan|-MeasurementStop+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1439. Summeras den årliga virkestillväxtens substitutionseffekt med den genomsnittliga kolinlagringen i träd och mark fördelad på 100 år motsvarar detta ca 12 ton koldioxid per hektar beskogad jordbruksmark och år.
-/*1445;77;SVUnit|"per"|*SVCon|^typeConcept;+InMeasspan|SVPrep+InMeasspan|+InMeasspan|+MeasurementStop;
 1445;77;SVUnit|"per"|*typeConcept|^typeConcept;+InMeasspan|SVPrep+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1445. Den årliga utdelningen ska uppgå till 50 kronor per preferensaktie, motsvarande 10 procent av teckningskursen, lovar bolaget.
+
+/* other measurement-related prepositions
 1434;77;^Measurement|Measurement|.Measurement|SVMeasspanprep|*Measurement:InMeasspan|^Measurement;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1434. Den motsvarar inte ens 10 procent av vår produktion.
-
 /*1436;77;SVMeasspanprep|MeasurementBegin;+MeasurementBegin|-MeasurementBegin+InMeasspan; - not bad, but it includes verbs in spans, which is inconsistent with other spans
 /*1436;77;^SVvRel|SVMeasspanprep|MeasurementBegin;*|+MeasurementBegin|-MeasurementBegin+InMeasspan;
 1436;77;^SVvRel|SVMeasspanprep|MeasurementBegin;*|+MeasurementBegin+SVbRel|-MeasurementBegin+InMeasspan;
 /*		1436. Projektet saknar mätningar på barn i åldern 06 månader.
 1481;77;SVpAux|SVMeasspanprep|MeasurementBegin;*|+MeasurementBegin+SVbRel|-MeasurementBegin+InMeasspan;exception to ^SVvRel in r1436
 /*		1481. Studiedeltagarna genomgick transplantationer när de var i åldern 13 till 18 år.
-/*1482;77;SVMeasspanprep|*Measurement:SVNumberPlusUnit+^MeasurementBegin+^InMeasspan|^Measurement;+MeasurementBegin+SVbRel|+InMeasspan|+MeasurementStop;
 1482;77;SVMeasspanprep|ValueProperty+^MeasurementBegin|SVAge|.Measurement|^Measurement;+MeasurementBegin+SVbRel|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1482. Detta skulle ge vår sol en maximal ålder av högst 100 miljoner år.
 
-/*1440;77;Measindicator+^InMeasspan|*Measurement:InMeasspan|^Measurement+^InMeasspan;+MeasurementBegin|+InMeasspan|+MeasurementStop;
+/* Measindicator
 1440;77;Measindicator:Measindicator2+^InMeasspan|*Measurement:InMeasspan:SVNumberPlusUnit+^SVTime|^Measurement+^InMeasspan;+MeasurementBegin|+InMeasspan|+MeasurementStop;
 /*		1440. Vid denna tidpunkt var patienten kraftigt överviktig (BMI cirka 45).
 1456;77;Measindicator+^InMeasspan|"av":SVpAux|*Measurement:InMeasspan:SVNumberPlusUnit|^Measurement+^InMeasspan;+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1456. Skagerraks yta är 33 400 km², volymen är 7 280 km³ och medeldjupet är 218 m.
+
+/* från - till
 1449;77;"från"|*<Measurement:InMeasspan|"till"|Measurement;+MeasurementBegin+SVbRel|-MeasurementBegin|*|*;
 /*		1449. Arbetslösheten sjunker, enligt finansdepartementets prognoser, från 8 procent 2013 till 7,7 procent 2014.
 
+/* comparison
 1461;77;Meascomparative+^InMeasspan|"än"|*Measurement:SVNumberPlusUnit|^Measurement+^InMeasspan;+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1461. De flesta är ganska små men fyra är större än 10 km².
 1487;77;*Measurement:MeasurementBegin|.Measurement:InMeasspan|Meascomparative+^InMeasspan|^Measurement;+MeasurementBegin|+InMeasspan|+InMeasspan-MeasurementStop|+MeasurementStop;
 /*		1487. "Generellt sett borde en film av denna karaktär nå ett resultat, som försiktigt räknat, vara 30 procent bättre, det vill säga cirka 130 000 biljetter med en förbättrad intäkt på ytterligare 1 000 000 kronor".
 
+/* detecting the subject of a measurement
 /*1446;77;SVDefart:SVIndefart:SVvRel|*typeConcept|"på"|*Measurement:SVNumberPlusUnit;*|*|*|*;no errors, but less results
-/*1446;77;^typeConcept+^SVPrep|*typeConcept|"på"|.SVAdvRestrict|*Measurement:SVNumberPlusUnit|^Measurement;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 1446;77;^typeConcept+^SVPrep+^SVAndOr|*typeConcept|"på":"av"|.SVAdvRestrict:Measindicator2|*Measurement:SVNumberPlusUnit:InMeasspan|^Measurement;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1446. I strokeriktlinjerna anges en övre åldersgräns på ca 60 år.
 1464;77;Measurement|SVAndOr|*typeConcept|"på":"av"|.SVAdvRestrict:Measindicator2|*Measurement:SVNumberPlusUnit|^Measurement;*|*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;fine-tuning r1446
 /*		1464. Laboratorieanalyserna visade ett trombocyvärde på 92 × 109/l, CRP som stigit till 225 mg/l, natrium på 130 mmol/l och kalium på 4,3 mmol/l.
-/*1451;77;^typeConcept+^SVPrep|*typeConcept|"om":"med"|.SVAdvRestrict|*<Measurement:SVNumberPlusUnit|Percentage+Measurement|^Measurement;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
-/*1451;77;SVIndefart|*typeConcept|"om":"med"|.SVAdvRestrict|*<Measurement:SVNumberPlusUnit|Percentage+Measurement|^Measurement;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 1451;77;SVIndefart|*typeConcept|"om":"med"|.SVAdvRestrict|*Measurement:SVNumberPlusUnit:InMeasspan|^Measurement+^InMeasspan;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1451. Denna trappades ned till en underhållsdos om 10 mg två gånger dagligen under de närmaste veckorna.
 1448;77;^SVCon|SVPrep|*typeConcept|"på"|*Measurement:SVNumberPlusUnit|^Measurement;*|*|+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
@@ -2469,13 +2432,10 @@
 /*		1447. Mest uppmärksammad är en höjning av snusskatten på 22 procent.
 /*1486;77;^typeConcept+^SVPrep|*typeConcept|SVPrep|*SVList+^MeasurementBegin|"på"|*Measurement:SVNumberPlusUnit|^Measurement+^"av";*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop; - only 1 example -> not enough to evaluate the rule
 /*1486. Redan tio år efter disputation har denna avkastningsskillnad genererat en inkomstskillnad mellan disputerade män och kvinnor på ca 18 procent och skillnaden fortsätter sedan att växa.
-/*1485;77;SVpAux:SVIndefart:SVPunctuation|*typeConcept+^Measurement+^SVNumberPlusUnit+^InMeasspan|.SVAdvRestrict|*Measurement:SVNumberPlusUnit:InMeasspan|^Measurement+^InMeasspan;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
-/*1485;77;^typeConcept|*typeConcept+^Measurement+^SVNumberPlusUnit+^InMeasspan+^MeasurementBegin|.SVAdvRestrict|*Measurement:SVNumberPlusUnit:InMeasspan|^Measurement+^InMeasspan;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
 1485;77;SBegin:SVpAux:SVAndOrBut:SVMeasspanprep:SVIndefart:SVPunctuation|*typeConcept+^Measurement+^SVNumberPlusUnit+^InMeasspan|.SVAdvRestrict|*Measurement:SVNumberPlusUnit:InMeasspan|^Measurement+^InMeasspan;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1485. Vid tiden för intervjun var Sara 24 år.
 
-/*1425;77;SVPrep+SVMeasspanprep+MeasurementStop|*typeConcept|^typeConcept;-MeasurementStop|*|+MeasurementStop;
-/*1426;77;SVPrep|*Measurement:MeasurementBegin|SVPrep+SVMeasspanprep+MeasurementStop|*typeConcept|^typeConcept;*|*|-MeasurementStop|*|+MeasurementStop;
+/* extend span
 1428;77;Measurement|.<Measurement|MeasurementBegin;+MeasurementBegin|+InMeasspan|-MeasurementBegin+InMeasspan;
 /*		1428. Den motsvarar inte ens 10 procent av vår produktion.
 1459;77;SVNegation+^SVAdj+^SVAdjCon|*Measurement:MeasurementBegin:SVNumberPlusUnit|^Measurement+^SVNumberPlusUnit+^InMeasspan;+MeasurementBegin|+InMeasspan|+MeasurementStop;
@@ -2488,15 +2448,14 @@
 /*		1443. I den senare arealen ingår 0,2 miljoner hektar träda där ingenting produceras.
 1444;77;*Measurement+^InMeasspan|*InMeasspan|MeasurementStop;+MeasurementBegin|*|*;
 /*		1444. I den senare arealen ingår 0,2 miljoner hektar träda där ingenting produceras.
-/*1450;77;SVPrep+MeasurementBegin;+SVbRel;
 1463;77;MeasurementBegin+Measindicator:Measindicator2|SVbCon;*|^SVCon;
 /*		1463. Karminrött är en spektrallinje från syreatomer O och bildas på höjder över cirka 200 km.
 
 /* include time indication in measurement span
-/*1466;77;*MeasurementBegin:Measurement:InMeasspan+^SVDummy|.SVPrep|*SVTime+^SVAdvFreq;+SVDummy|*|*;rule profiler
 1466;77;^MeasurementBegin+^Measurement+^InMeasspan|MeasurementBegin:Measurement+^SVNumberPlusUnit|.MeasurementBegin:Measurement:InMeasspan|.SVPrep|*SVTime:InTimespan+^SVAdvFreq+^InMeasspan|^SVTime+^InTimespan;*|+MeasurementBegin|+InMeasspan|+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1466. Data visar en letalitet på 28 procent tre månader efter strokeinsjuknandet.
 
+/* extend span
 1474;77;InMeasspan|SVAndOr+MeasurementStop|*typeConcept|SVConj:"som":SVPunctuation:SEnd;*|+InMeasspan-MeasurementStop|+InMeasspan|+MeasurementStop;
 /*		1474. Summeras den årliga virkestillväxtens substitutionseffekt med den genomsnittliga kolinlagringen i träd och mark fördelad på 100 år motsvarar detta ca 12 ton koldioxid per hektar beskogad jordbruksmark och år.
 1475;77;InMeasspan|SVAndOr+MeasurementStop|MeasurementBegin;*|+InMeasspan-MeasurementStop|+InMeasspan;
@@ -2505,7 +2464,6 @@
 /*		1490. - 6 mån - 5 år: 0,05 - 0,1 mg/kg
 
 /* Measurement followed by över/under
-/*1476;77;Measurement|"över":"under"|^InMeasspan;*|*|*;rules profiler
 1476;77;^Measurement+^SVNumberPlusUnit+^InMeasspan|MeasurementBegin:Measurement:SVNumberPlusUnit|.Measurement:InMeasspan|"över":"under"+^InMeasspan|*typeConcept|^typeConcept;*|+MeasurementBegin+SVDummy|+InMeasspan|-MeasurementStop+InMeasspan|+InMeasspan|+MeasurementStop;
 /*		1476. På den plana bottnen 103 meter under ytan stod ett äldre tvåmastat segelfartyg.
 1477;77;typeConcept:typeBeginConcept|typeConcept+MeasurementBegin+SVDummy;*|+SVbCon-SVNum-SVDummy;fine-tuning result of r1476
@@ -2520,7 +2478,6 @@
 /*		1469. Data visar en letalitet på 28 procent tre månader efter strokeinsjuknandet.
 1478;77;SVDummy;-SVDummy;
 /*		1478. Vid sommarsolståndet står solen som högst 54,1 grader över horisonten.
-/*1452;77;^SBegin|"per"+^SVPrep+^SVCon+^SVCapitalInitial|^SVTimeconcept+^SVUnit+^SEnd;*|+SVPrep+SVMeasspanprep|*;
 
 
 /* ===================
@@ -2661,7 +2618,6 @@
 /*		1368.UD. Språkhandlingskategorierna är framför allt pragmatiska kategorier, och som sådana kan de inte uttömmande beskrivas utan hänvisning till den diskursiva praktiken.
 1372;$;UDIgnoreTime;-SVTime-SVTimeBegin;
 /*		1372.UD. Vanligen används ved eller elektricitet. Området runt sjön är vintertid känt för att vara snörikt.
-/*1373;$;SVTimeBegin+^SVTime|.^SVTime+^SVTimeStop|SVTimeStop;-SVTimeBegin|*|*;
 1373;$;SVTimeBegin+^SVTime|.^SVTime+^UDIgnoreTime|UDIgnoreTime;-SVTimeBegin|*|*;
 /*		1373.UD. Sommaren är slut och vi går över till vintertid (normaltid) natten mellan lördag och söndag.
 1413;$;UDIgnoreNumber|^SBegin;-Measurement-ValueProperty|-Measurement-UnitProperty;
