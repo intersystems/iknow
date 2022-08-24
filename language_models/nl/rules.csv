@@ -26,12 +26,22 @@
 /*		438.UD. We hebben de Belgische politie gewezen op de verdwijning van Sandra.
 1814;1;UDTime;+NLTime;
 /*		1814.UD. Trajectcontrole, dat wordt in de toekomst het middel om hardrijders in bedwang te houden.
+2155;1;UDUnit;+NLUnit;
+/*		2155.UD. We meten dat er een stroom loopt met een sterkte van 0,5 ampère. 
+2156;1;UDNumber;+NLConNum+NLNumber;
+/*		2156.UD. De Niagariawatervallen pompen elke 210.000 jaar een triljoen liter water rond.
 1992;1;UDIgnoreNegation;-NLNegation-NLNegBegin-NLNegWord;
 /*		1992.UD. De meeste winkeliers zitten al enkele weken zonder omdat er heel veel vraag naar is. Onherstelbare schade werd er echter nergens gemeld.
 1994;1;UDIgnoreTime;-NLTime-NLTimeconcept-NLTimes-NLDate-NLDigitaltime-NLTimeofday-NLYear-NLYearnum;
 /*		1994.UD. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. Dat is drie tot vier keer zo vaak als gemiddeld. AMSTERDAM 11/08/2018 18:00.
 1997;1;UDIgnoreTime;-NLPossiblehour-NLHour-NLDay-NLMonth;
 /*		1997.UD. Hij eindigde met een tijd van 6.00. Inwoners die behoefte hebben om te reageren op de brief, kunnen tot donderdag contact opnemen met de deelgemeente.
+2157;1;UDIgnoreUnit;-NLUnit;
+/*		2157.UD. Het meest gehoorde is dat de drie G 7 landen met de euro, Duitsland, Italië en Frankrijk, fuseren tot één enkel lidmaatschap. 
+2159;1;UDIgnoreNumber;-NLNumber-NLNumeric-NLNumpart2-NLConNum-NLOrdnum-NLBracketsnumber+NLCon;replace ConNum by Con
+/*		2159.UD. Chronische nierinsufficiëntie blijft stabiel onder IV medicatie. 
+2160;1;UDIgnoreNumber;-NL12dNum-NL3dNum;
+/*		2160.UD. In Australië is het alarmnummer 000, uitgesproken als 'triple zero'.
 
 /* Connections with partial words (rule block should precede disambiguation of Adj)
 1972;1;NLCon|"@connect@"|NLAndOrBut:"tot":"noch"|NLCon:NLAdj:NLAttradj:NLNumber:NLVerb;+JoinReverse|JoinReverse|JoinReverse|*;
@@ -3097,3 +3107,7 @@
 /*		1996.UD. Wie bij herhaalde pogingen minder dan eenenveertig op vijftig haalt, kent na een paar keer proberen dus de antwoorden uit het hoofd.
 1995;$;UDIgnoreTime;-NLTime-NLTimeBegin;
 /*		1995.UD. De financiële sector moet met andere woorden nog lang geen victorie kraaien. De levensverwachting ligt op 75 jaar voor de mannen en 81 jaar voor de vrouwen.
+2158;$;Measurement+ValueProperty|UDIgnoreUnit;-Measurement-ValueProperty|*;
+/*		2158.UD. Onderhoudsmedicatie: 3 x 4 mg dd.
+
+
