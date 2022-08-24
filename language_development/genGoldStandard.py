@@ -241,8 +241,8 @@ def write_negation_attributes(sentence,file):
             if (sent_attribute['type'] == 'Negation'):
                 negation_attribute = negation_attribute + 'Neg;' + sent_attribute['marker'].lstrip() + '\n'
 
-            if (negation_attribute != ''):
-                file.write(negation_attribute)
+        if (negation_attribute != ''):
+            file.write(negation_attribute)
 
 # write the sentence 'sentiment' attributes
 def write_sentiment_attributes(sentence,file):
