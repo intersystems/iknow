@@ -1,4 +1,8 @@
 ﻿
+/*numbers
+number-simple;\d+
+number-all;[≤≥=\-\<\>\+\.]?\d+([\,]\d+)?([\,]\d+)?
+
 number-big1;\.?\d\d\d\d\d+
 number-big2;\d{1,3}[\.]\d\d\d
 number-big3;\d{1,3}[\.]\d{1,3}[\.]\d\d\d
@@ -8,6 +12,16 @@ number-percentage3;\d+[\.]\d+%
 
 numberwithbrackets;\(\d{1,2}\)
 
+/* roman numbers
+numberroman_hyphen;(i|v|x){1,5}[\-](i|v|x){1,5}
+numberroman;(i|v|x){1,5}
+ordnumberroman;(i|v|x){1,5}(\-)?(e)
+
+/*time
+timeofday;\d{1,2}h(\d{2})?
+timeofday_brackets;\d{1,2}h(\d{2})?[-]\d{1,2}h(\d{2})?
+
+/*verbs
 verb01;.{4,}eraient
 verb02;.{4,}erait
 verb03;.{4,}eront
