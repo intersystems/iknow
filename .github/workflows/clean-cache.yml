@@ -1,0 +1,24 @@
+# Configuration for cleaning the GitHub Actions cache.
+#
+# Once a day, at 11 PM UTC, clear the cache of single-use items that are meant
+# to be used only by 2 neighboring runs and will never be used again. This keeps
+# the cache clear of items that we know we will never use again, reducing the
+# chance that GitHub Actions will evict items that we still need.
+
+name: Clean Cache
+
+on:
+  schedule:
+    - cron: '0 11 * * *'
+  workflow_dispatch:
+
+jobs:
+  clean-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v3
+      - name: install Python packages
+        run: pip3 install --user requests
+      - name: clean cache
+        run: $GITHUB_WORKSPACE/actions/clean_cache.py ${{ secrets.GITHUB_TOKEN }}

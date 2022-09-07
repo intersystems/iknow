@@ -188,13 +188,13 @@ jobs:
       - name: download cached Python installations
         uses: actions/cache@v3
         with:
-          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
           path: ${{ env.PYINSTALL_DIR }}
       - name: download cached ccache files
         uses: actions/cache@v3
         with:
-          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-${{ github.run_number }}
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
           path: ${{ env.CCACHE_DIR }}
       - name: install dependencies
