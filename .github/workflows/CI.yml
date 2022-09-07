@@ -164,7 +164,7 @@ jobs:
         uses: actions/checkout@v3
       - name: set up environment
         run: |
-          echo "XCODE_SELECTED=/Applications/Xcode_13.4.1.app" >> $GITHUB_ENV
+          echo "XCODE_SELECTED=/Applications/Xcode_14.0.app" >> $GITHUB_ENV
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
           echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
@@ -189,13 +189,13 @@ jobs:
         uses: actions/cache@v3
         with:
           key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
+          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-
           path: ${{ env.PYINSTALL_DIR }}
       - name: download cached ccache files
         uses: actions/cache@v3
         with:
-          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.MACOSX_DEPLOYMENT_TARGET }}-
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-
           path: ${{ env.CCACHE_DIR }}
       - name: install dependencies
         run: actions/install_osx.sh
