@@ -48,7 +48,7 @@ pyinstall_fallback () {
 sudo xcode-select -s "$XCODE_SELECTED"
 
 # Homebrew packages
-brew install dos2unix ccache
+brew install ccache
 
 # pyenv
 brew update --quiet > /dev/null

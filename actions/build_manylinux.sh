@@ -9,7 +9,7 @@
 # Required Environment Variables:
 # - CCACHE_MAXSIZE is the size limit for files held with ccache
 # - PIP_CACHE_DIR is the location that pip caches files
-# - ICU_URL is the URL to a .zip source release of ICU
+# - ICU_URL is the URL to a .tgz source release of ICU
 # - JSON_URL is the URL of .zip release of JSON for Modern C++
 
 set -euxo pipefail
@@ -18,9 +18,6 @@ set -euxo pipefail
 ##### Install and configure dependencies #####
 # epel-release
 #   Needed to install ccache on some platforms.
-# dos2unix
-#   Give ICU build scripts Unix line endings so that they can be executed. For
-#   some reason, ICU source releases use Windows line endings.
 # ccache
 #   Speed up build times by caching results from previous builds.
 PROCESSOR="$(uname -p)"
@@ -31,7 +28,7 @@ if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
 elif [ "$PROCESSOR" = x86_64 ]; then
   echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
 fi
-yum install -y dos2unix ccache
+yum install -y ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
 ln -s /usr/bin/ccache /opt/ccache/c++
@@ -44,11 +41,9 @@ export PATH="/opt/ccache:$PATH"
 export ICUDIR=/iknow/thirdparty/icu
 if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
   rm -rf "$ICUDIR"
-  curl -L -o icu4c-src.zip "$ICU_URL"
-  unzip -q icu4c-src.zip
+  curl -L -o icu4c-src.tgz "$ICU_URL"
+  tar xfz icu4c-src.tgz
   cd icu/source
-
-  dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
   export CXXFLAGS="-std=c++11"
   PYTHON=/opt/python/cp310-cp310/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
   gmake -j $(nproc)

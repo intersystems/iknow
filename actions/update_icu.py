@@ -24,7 +24,7 @@ src_url = None
 for asset in json_data['assets']:
     if re.match(r'^icu4c-.+-Win64-.+\.zip$', asset['name']):
         win_url = asset['browser_download_url']
-    elif re.match(r'^icu4c-.+-src\.zip$', asset['name']):
+    elif re.match(r'^icu4c-.+-src\.tgz$', asset['name']):
         src_url = asset['browser_download_url']
 if win_url is None:
     print('Warning: ICU Win64 URL for latest version was not found')

@@ -7,7 +7,7 @@
 # Usage: actions/build_osx.sh
 #
 # Required Environment Variables:
-# - ICU_URL is the URL to a .zip source release of ICU
+# - ICU_URL is the URL to a .tgz source release of ICU
 # - ICUDIR is the directory to install ICU
 # - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
 # - JSON_INCLUDE is the directory containing JSON for Modern C++ headers
@@ -18,10 +18,9 @@ set -euxo pipefail
 ##### Build ICU if it's not cached #####
 if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
   rm -rf "$ICUDIR"
-  curl -L -o icu4c-src.zip "$ICU_URL"
-  unzip -q icu4c-src.zip
+  curl -L -o icu4c-src.tgz "$ICU_URL"
+  tar xfz icu4c-src.tgz
   cd icu/source
-  dos2unix -f *.m4 config.* configure* *.in install-sh mkinstalldirs runConfigureICU
   export CXXFLAGS="-std=c++11"
   export LDFLAGS="-headerpad_max_install_names"
   ./runConfigureICU MacOSX --prefix="$ICUDIR"
