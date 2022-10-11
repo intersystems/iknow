@@ -547,6 +547,7 @@ for elt in ref_udct_list_for_comparison:
 report.close()
 print('\nPlease check the overall report: ../reference_materials/reports/report.log.')
 
-if 'GITHUB_ENV' in os.environ:
+if os.environ.get('GITHUB_ACTIONS') == 'true':
     # if we're running in a GitHub Actions workflow, output the test result
-    print(f'::set-output name=REF_TESTING_PASSED::{int(test_passed)}')
+    with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+        f.write(f'REF_TESTING_PASSED={int(test_passed)}\n')
