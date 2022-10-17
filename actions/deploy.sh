@@ -40,7 +40,7 @@
 
 set -euxo pipefail
 
-EXPECTED_WHEEL_COUNT=5  # 5 platforms
+EXPECTED_WHEEL_COUNT=6  # 6 platforms
 
 if [ "$GITHUB_EVENT_NAME" = push ] || [ "$GITHUB_EVENT_NAME" = workflow_dispatch ] && \
     [ "$GITHUB_REF" = refs/heads/master ] && \

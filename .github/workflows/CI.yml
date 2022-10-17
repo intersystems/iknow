@@ -32,7 +32,7 @@ env:
 
 jobs:
   manylinux2014_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -81,7 +81,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
@@ -118,7 +118,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
@@ -155,7 +155,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: macos-12
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -220,8 +220,67 @@ jobs:
           path: |
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
+  macos_11_universal:
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
+    runs-on: macos-12
+    outputs:
+      REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v3
+      - name: set up environment
+        run: |
+          echo "XCODE_SELECTED=/Applications/Xcode_14.0.1.app" >> $GITHUB_ENV
+          echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
+          echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
+          echo "MACOSX_DEPLOYMENT_TARGET=11.0" >> $GITHUB_ENV
+          echo "MACOSX_VERSION=$(sw_vers -productVersion | cut -d '.' -f 1,2)" >> $GITHUB_ENV
+          mkdir -p $HOME/cache
+          echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
+          echo "CCACHE_MAXSIZE=400M" >> $GITHUB_ENV
+      - name: get list of dependencies
+        run: actions/dependencies.sh
+      - name: download cached ICU installation
+        uses: actions/cache@v3
+        with:
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ICU-${{ env.ICU_URL }}-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}
+          path: ${{ env.ICUDIR }}
+      - name: download cached JSON for Modern C++ installation
+        uses: actions/cache@v3
+        with:
+          key: anyjob-JSON-${{ env.JSON_URL }}
+          path: ${{ env.JSONDIR }}
+      - name: download cached ccache files
+        uses: actions/cache@v3
+        with:
+          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
+          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-
+          path: ${{ env.CCACHE_DIR }}
+      - name: install dependencies
+        run: actions/install_macosuniversal.sh
+      - name: build and run C++ unit tests
+        run: actions/build_macosuniversal.sh
+      - name: upload wheel artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.job }}-wheel
+          path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+      - name: install
+        run: pip3 install ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+      - name: run tests
+        id: tests
+        working-directory: ${{ github.workspace }}/language_development
+        run: python3 ref_testing.py
+      - name: upload test results
+        if: steps.tests.outputs.REF_TESTING_PASSED == '0'
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.job }}-test
+          path: |
+            ${{ github.workspace }}/reference_materials/new_output
+            ${{ github.workspace }}/reference_materials/reports
   windows_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: windows-2022
     defaults:
       run:
@@ -291,9 +350,9 @@ jobs:
             ${{ github.workspace }}/reference_materials/reports
 
   test_result:
-    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
+    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, macos_11_universal, windows_x86_64]
     runs-on: ubuntu-22.04
-    if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
+    if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macosx_10_9_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macos_11_universal.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
     steps:
       - name: create comment
         uses: peter-evans/commit-comment@v2
@@ -305,7 +364,7 @@ jobs:
 
   deploy:
     if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref_name == 'master'
-    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, windows_x86_64]
+    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, macos_11_universal, windows_x86_64]
     runs-on: ubuntu-22.04
     env:
       PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
@@ -342,6 +401,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: macosx_10_9_x86_64-wheel
+          path: ~/wheels
+      - name: download macos_11_universal-wheel
+        uses: actions/download-artifact@v3
+        with:
+          name: macos_11_universal-wheel
           path: ~/wheels
       - name: download windows_x86_64-wheel
         uses: actions/download-artifact@v3

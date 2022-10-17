@@ -5,6 +5,7 @@
 # - buildcache
 # - Python for Windows
 # - Python for Mac OS X
+# - Python for macOS universal
 # - Cython
 #
 # For each dependency that has an update, we create a pull request containing a
@@ -218,5 +219,39 @@ jobs:
             ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
 
             For details of the updated versions, see https://github.com/pyenv/pyenv/releases/v${{ env.PYENV_TOOL_VERSION }}.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-python-macosuniversal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v3
+      - name: search for update
+        run: |
+          pip3 install bs4
+          $GITHUB_WORKSPACE/actions/update_python.py macos
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+      - name: apply update
+        uses: peter-evans/create-pull-request@v4
+        with:
+          assignees: isc-adang
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          commit-message: "[autoupdate-python-macosuniversal] update Python for macOS universal: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          branch: autoupdate-python-macosuniversal
+          delete-branch: true
+          token: ${{ env.ACTIONS_TOKEN }}
+          title: "[autoupdate] Update Python for macOS universal: ${{ env.PYTHON_UPDATE_INFO_ONELINE }}"
+          body: |-
+            A new version of Python for macOS universal is available.
+
+            ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
+
+            For details of all Python releases, see https://www.python.org/downloads/macos/.
 
             *I am a bot, and this action was performed automatically.*

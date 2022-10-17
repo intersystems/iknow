@@ -711,7 +711,7 @@ else:
             # set wheel target platform to that of the build platform
             macosx_version = '.'.join(platform.mac_ver()[0].split('.')[:2])
             os.environ['MACOSX_DEPLOYMENT_TARGET'] = macosx_version
-            sys.argv.append(f'--plat-name=macosx-{macosx_version}-x86_64')
+            sys.argv.append(f'--plat-name=macosx-{macosx_version}-{"arm64" if platform.processor() == "arm" else "x86_64"}')
     else:
         iculibs_name_pattern = 'libicu*.so*'
         enginelibs_name_pattern = 'libiknow*.so'

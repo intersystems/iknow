@@ -4,7 +4,7 @@
 #
 # Required environment variables:
 #
-# - XCODE_SELECTED is the path to the XCode application to use
+# - XCODE_SELECTED is the path to the Xcode application to use
 # - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS X version
 # - GITHUB_EVENT_NAME is the event that triggered the workflow
 # - GITHUB_REF is the branch ref that triggered the workflow
