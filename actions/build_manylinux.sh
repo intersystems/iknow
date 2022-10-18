@@ -49,6 +49,7 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   gmake -j $(nproc)
   gmake install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
+  unset CXXFLAGS
 fi
 
 ##### Install JSON for Modern C++ if it's not cached #####
