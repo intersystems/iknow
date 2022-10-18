@@ -82,7 +82,7 @@ else:  # platform == 'macos'
         url_data = urllib.request.urlopen(url).read()
         soup2 = bs4.BeautifulSoup(url_data, 'html.parser')
         for anchor in soup2.find_all('a'):
-            if anchor.text.endswith('-macos11.pkg'):
+            if anchor.text.endswith(f'-{version}-macos11.pkg'):
                 available_versions[version] = url + anchor.text
                 break
 
