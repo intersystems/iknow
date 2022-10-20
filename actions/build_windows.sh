@@ -23,8 +23,14 @@ set -euxo pipefail
 if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") != "$ICU_URL" ]; then
   rm -rf "$ICUDIR"
   curl -L -o icu4c.zip "$ICU_URL"
+  mkdir .icu_extract
+  unzip -q icu4c.zip -d .icu_extract
   mkdir -p "$ICUDIR"
-  unzip -q icu4c.zip -d "$ICUDIR"
+  if compgen -G ".icu_extract/*/icu-windows.zip" > /dev/null; then
+    unzip -q .icu_extract/*/icu-windows.zip -d "$ICUDIR"
+  else
+    mv .icu_extract/* "$ICUDIR"
+  fi
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
 fi
 
