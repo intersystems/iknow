@@ -22,12 +22,10 @@ set -euxo pipefail
 #   Speed up build times by caching results from previous builds.
 PROCESSOR="$(uname -p)"
 if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
-  yum install -y epel-release
-  # this mirror is often slow, so disable it
-  echo "exclude=csc.mcs.sdsmt.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
-elif [ "$PROCESSOR" = x86_64 ]; then
-  echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
+  yum -y install epel-release
 fi
+# this mirror is often slow, so disable it
+echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
 yum install -y ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
