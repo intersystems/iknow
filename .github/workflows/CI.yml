@@ -301,6 +301,9 @@ jobs:
           echo "BUILDCACHE_MAX_CACHE_SIZE=2147483648" >> $GITHUB_ENV
           mkdir -p $HOME/python
           echo "PYINSTALL_DIR=$HOME/python" >> $GITHUB_ENV
+      - name: Use GNU tar to speed up cache restore
+        shell: cmd
+        run: echo C:\Program Files\Git\usr\bin>>"%GITHUB_PATH%"
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
