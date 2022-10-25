@@ -36,7 +36,7 @@ done
 for PYVERSION in $PYVERSIONS; do
   # extract Python version in MAJOR.MINOR form
   PYTHON=python$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
-  "$PYTHON" -m pip install -U pip
+  "$PYTHON" -m pip install -U pip --no-warn-script-location
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 
