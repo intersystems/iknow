@@ -23,9 +23,11 @@ set -euxo pipefail
 PROCESSOR="$(uname -p)"
 if [ "$PROCESSOR" = aarch64 ] || [ "$PROCESSOR" = ppc64le ]; then
   yum -y install epel-release
+  # this mirror is often slow, so disable it
+  echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
+else
+  echo "exclude=mirror.es.its.nyu.edu mirrors.tripadvisor.com" >> /etc/yum/pluginconf.d/fastestmirror.conf
 fi
-# this mirror is often slow, so disable it
-echo "exclude=mirror.es.its.nyu.edu" >> /etc/yum/pluginconf.d/fastestmirror.conf
 yum install -y ccache
 mkdir -p /opt/ccache
 ln -s /usr/bin/ccache /opt/ccache/cc
