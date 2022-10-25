@@ -117,15 +117,8 @@ done
 pyenv global $PYENV_INSTALLED_VERSIONS
 
 # Python packages
-for PYTHON in $PYENV_INSTALLED_CMDS; do
+for PYTHON in $PYENV_INSTALLED_CMDS $PKG_INSTALLED_CMDS; do
   "$PYTHON" -m pip install -U pip
-  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
-done
-for PYTHON in $PKG_INSTALLED_CMDS; do
-  if ! [ -f get-pip.py ]; then
-    curl -L -O https://bootstrap.pypa.io/get-pip.py
-  fi
-  "$PYTHON" get-pip.py
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 

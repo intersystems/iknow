@@ -36,10 +36,7 @@ done
 for PYVERSION in $PYVERSIONS; do
   # extract Python version in MAJOR.MINOR form
   PYTHON=python$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
-  if ! [ -f get-pip.py ]; then
-    curl -L -O https://bootstrap.pypa.io/get-pip.py
-  fi
-  "$PYTHON" get-pip.py
+  "$PYTHON" -m pip install -U pip
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 
