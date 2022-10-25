@@ -803,7 +803,7 @@ try:
         author='InterSystems Corporation',
         license='MIT',
         classifiers=[
-            'Development Status :: 4 - Beta',
+            'Development Status :: 5 - Production/Stable',
             'License :: OSI Approved :: MIT License',
             'Topic :: Scientific/Engineering :: Information Analysis',
             'Programming Language :: C++',
