@@ -37,7 +37,7 @@ make -j $(sysctl -n hw.logicalcpu) test
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
 eval "$(pyenv init -)"
-for PYTHON in python3.{6..11}; do
+for PYTHON in python3.{6..7}; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-x86_64 --no-dependencies
 done
 "$PYTHON" setup.py merge

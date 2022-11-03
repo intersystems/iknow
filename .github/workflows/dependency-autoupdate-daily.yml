@@ -196,7 +196,7 @@ jobs:
       - name: check out repository
         uses: actions/checkout@v3
       - name: search for update
-        run: /usr/bin/python3 $GITHUB_WORKSPACE/actions/update_python.py osx
+        run: $GITHUB_WORKSPACE/actions/update_python.py osx
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV

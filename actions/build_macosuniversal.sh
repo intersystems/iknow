@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # Build universal2 wheels for Python 3.8 through Python 3.11, compatible with
-# Mac OS >= 11 x86_64/arm64. This script must be executed with the repository
-# root as the working directory.
+# Mac OS X 10.9+ x86_64 and macOS 11.0+ arm64. This script must be executed with
+# the repository root as the working directory.
 #
 # Usage: actions/build_macosuniversal.sh
 #
 # Required Environment Variables:
 # - ICU_URL is the URL to a .tgz source release of ICU
 # - ICUDIR is the directory to install ICU
-# - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS version
+# - MACOSX_DEPLOYMENT_TARGET is the minimum supported Mac OS version for x86_64
 # - JSON_INCLUDE is the directory containing JSON for Modern C++ headers
 
 set -euxo pipefail
