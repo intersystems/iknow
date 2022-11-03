@@ -44,12 +44,10 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   curl -L -o icu4c-src.tgz "$ICU_URL"
   tar xfz icu4c-src.tgz
   cd icu/source
-  export CXXFLAGS="-std=c++11"
-  PYTHON=/opt/python/cp310-cp310/bin/python ./runConfigureICU Linux --prefix="$ICUDIR"
-  gmake -j $(nproc)
-  gmake install
+  PYTHON=/opt/python/cp311-cp311/bin/python CXXFLAGS=-std=c++11 ./runConfigureICU Linux --prefix="$ICUDIR"
+  make -j $(nproc)
+  make install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
-  unset CXXFLAGS
 fi
 
 ##### Install JSON for Modern C++ if it's not cached #####

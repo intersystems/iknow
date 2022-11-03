@@ -21,13 +21,10 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   curl -L -o icu4c-src.tgz "$ICU_URL"
   tar xfz icu4c-src.tgz
   cd icu/source
-  export CXXFLAGS="-std=c++11"
-  export LDFLAGS="-headerpad_max_install_names"
-  ./runConfigureICU MacOSX --prefix="$ICUDIR"
+  CXXFLAGS=-std=c++11 LDFLAGS=-headerpad_max_install_names ./runConfigureICU MacOSX --prefix="$ICUDIR"
   make -j $(sysctl -n hw.logicalcpu)
   make install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
-  unset CXXFLAGS LDFLAGS
 fi
 
 

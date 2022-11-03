@@ -21,14 +21,10 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   curl -L -o icu4c-src.tgz "$ICU_URL"
   tar xfz icu4c-src.tgz
   cd icu/source
-  export CFLAGS="-arch x86_64 -arch arm64"
-  export CXXFLAGS="-std=c++11 -arch x86_64 -arch arm64"
-  export LDFLAGS="-headerpad_max_install_names"
-  ./runConfigureICU MacOSX --prefix="$ICUDIR"
+  CFLAGS="-arch x86_64 -arch arm64" CXXFLAGS="-std=c++11 -arch x86_64 -arch arm64" LDFLAGS=-headerpad_max_install_names ./runConfigureICU MacOSX --prefix="$ICUDIR"
   make -j $(sysctl -n hw.logicalcpu)
   make install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
-  unset CFLAGS CXXFLAGS LDFLAGS
 fi
 
 ##### Build iKnow engine and run C++ unit tests #####
