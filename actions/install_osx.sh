@@ -110,7 +110,7 @@ pyenv global $PYENV_INSTALLED_VERSIONS
 # Python packages
 for PYTHON in $PYENV_INSTALLED_CMDS $PKG_INSTALLED_CMDS; do
   "$PYTHON" -m pip install -U pip --no-warn-script-location
-  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel==0.37.1 --no-warn-script-location
 done
 
 # JSON for Modern C++
