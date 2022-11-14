@@ -1,7 +1,7 @@
 ## Windows only files
 
 - **Dependencies.props** : Loaded by iKnowEngine.sln to track module dependencies.
-- **EnableBuildCache.props** : Loaded by iKnowEngine.sln to speed up module building.
+- **EnableCcache.props** : Used by CI to speed up building iKnowEngine.sln.
 - **iKnowEngine.sln** : Microsoft Visual Studio 2019 solution file, to build all modules.
 - **lang_update.bat** : Utility for building and testing language model changes : 
 

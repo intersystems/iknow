@@ -9,15 +9,20 @@
 # - CYTHON_VERSION is the version of Cython to install
 # - JSON_URL is the URL of .zip release of JSON for Modern C++
 # - JSONDIR is the directory to install JSON for Modern C++
+# - CCACHE_URL is the URL to a .zip release of ccache
+# - CCACHE_EXE_DIR is the directory containing ccache versions of cl.exe and
+#   link.exe
 
 set -euxo pipefail
 
-# buildcache
-if ! [ -f "$BUILDCACHE_EXE_DIR/iknow_buildcache_url.txt" ] || [ $(cat "$BUILDCACHE_EXE_DIR/iknow_buildcache_url.txt") != "$BUILDCACHE_URL" ]; then
-  rm -rf "$BUILDCACHE_EXE_DIR"
-  curl -L -o buildcache.zip "$BUILDCACHE_URL"
-  unzip -qj buildcache.zip -d "$BUILDCACHE_EXE_DIR"
-  echo "$BUILDCACHE_URL" > "$BUILDCACHE_EXE_DIR/iknow_buildcache_url.txt"
+# ccache
+if ! [ -f "$CCACHE_EXE_DIR/iknow_cache_url.txt" ] || [ $(cat "$CCACHE_EXE_DIR/iknow_ccache_url.txt") != "$CCACHE_URL" ]; then
+  rm -rf "$CCACHE_EXE_DIR"
+  curl -L -o ccache.zip "$CCACHE_URL"
+  unzip -qj ccache.zip -d "$CCACHE_EXE_DIR"
+  cp "$CCACHE_EXE_DIR/ccache.exe" "$CCACHE_EXE_DIR/cl.exe"
+  cp "$CCACHE_EXE_DIR/ccache.exe" "$CCACHE_EXE_DIR/link.exe"
+  echo "$CCACHE_URL" > "$CCACHE_EXE_DIR/iknow_ccache_url.txt"
 fi
 
 # Python

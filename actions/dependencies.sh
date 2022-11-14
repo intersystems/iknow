@@ -19,8 +19,8 @@ PYVERSIONS_WIN="3.6.8 3.7.9 3.8.10 3.9.13 3.10.8 3.11.0"
 PYVERSIONS_OSX="3.6.15 3.7.15"
 PYVERSIONS_MACOSUNIVERSAL="3.8.10 3.9.13 3.10.8 3.11.0"
 PYURLS_MACOSUNIVERSAL="https://www.python.org/ftp/python/3.8.10/python-3.8.10-macos11.pkg https://www.python.org/ftp/python/3.9.13/python-3.9.13-macos11.pkg https://www.python.org/ftp/python/3.10.8/python-3.10.8-macos11.pkg https://www.python.org/ftp/python/3.11.0/python-3.11.0-macos11.pkg"
-BUILDCACHE_NAME="Release v0.28.2"
-BUILDCACHE_URL_WIN=https://github.com/mbitsnbites/buildcache/releases/download/v0.28.2/buildcache-windows.zip
+CCACHE_VERSION=4.7.3
+CCACHE_URL=https://github.com/ccache/ccache/releases/download/v4.7.3/ccache-4.7.3-windows-x86_64.zip
 CYTHON_VERSION=0.29.32
 MANYLINUX2014_X86_64_TAG=2022-11-06-7be974c
 MANYLINUX2014_AARCH64_TAG=2022-11-06-7be974c
@@ -57,14 +57,14 @@ elif [ "$RUNNER_OS" = macOS ]; then
   fi
 fi
 
-# buildcache
+# ccache
 if [ "$RUNNER_OS" = Windows ]; then
-  # URL to .zip release of buildcache
-  echo "BUILDCACHE_URL=$BUILDCACHE_URL_WIN" >> $GITHUB_ENV
+  # URL to .zip release of ccache
+  echo "CCACHE_URL=$CCACHE_URL" >> $GITHUB_ENV
 fi
 
 
-# set variables that will be needed in later steps
+# set other variables that will be needed in later steps
 echo "CYTHON_VERSION=$CYTHON_VERSION" >> $GITHUB_ENV
 echo "MANYLINUX2014_X86_64_TAG=$MANYLINUX2014_X86_64_TAG" >> $GITHUB_ENV
 echo "MANYLINUX2014_AARCH64_TAG=$MANYLINUX2014_AARCH64_TAG" >> $GITHUB_ENV

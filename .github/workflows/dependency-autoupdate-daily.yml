@@ -2,7 +2,7 @@
 #
 # Once a day, at midnight UTC, we check for updates to
 # - ICU
-# - buildcache
+# - ccache for Windows
 # - Python for Windows
 # - Python for Mac OS X
 # - Python for macOS universal
@@ -92,13 +92,15 @@ jobs:
 
             *I am a bot, and this action was performed automatically.*
 
-  autoupdate-buildcache:
+  autoupdate-ccache:
     runs-on: ubuntu-latest
     steps:
       - name: check out repository
         uses: actions/checkout@v3
+      - name: install Python packages
+        run: pip3 install --user beautifulsoup4
       - name: search for update
-        run: $GITHUB_WORKSPACE/actions/update_buildcache.py ${{ secrets.GITHUB_TOKEN }}
+        run: $GITHUB_WORKSPACE/actions/update_ccache.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
@@ -110,15 +112,19 @@ jobs:
         with:
           assignees: isc-adang
           author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
-          commit-message: "[autoupdate-buildcache] update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
-          branch: autoupdate-buildcache
+          commit-message: "[autoupdate-ccache] update ccache from ${{ env.CCACHE_VERSION_OLD }} to ${{ env.CCACHE_VERSION }}"
+          branch: autoupdate-ccache
           delete-branch: true
           token: ${{ env.ACTIONS_TOKEN }}
-          title: "[autoupdate] Update buildcache from \"${{ env.BUILDCACHE_NAME_OLD }}\" to \"${{ env.BUILDCACHE_NAME_LATEST }}\""
+          title: "[autoupdate] Update ccache from ${{ env.CCACHE_VERSION_OLD }} to ${{ env.CCACHE_VERSION }}"
           body: |-
-            As of ${{ env.BUILDCACHE_PUBLISHED_AT }}, a new version of buildcache has been released.
+            As of ${{ env.CCACHE_PUBLISHED_AT }}, a new version of ccache for Windows has been released.
 
-            For details of the release, see ${{ env.BUILDCACHE_HTML_URL }}.
+            Changelog (sourced from ${{ env.CCACHE_CHANGELOG_URL }})
+            <blockquote>
+
+            ${{ env.CCACHE_CHANGELOG }}
+            </blockquote>
 
             *I am a bot, and this action was performed automatically.*
 

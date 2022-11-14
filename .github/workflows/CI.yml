@@ -34,7 +34,7 @@ env:
 
 jobs:
   manylinux2014_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-buildcache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -83,7 +83,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/new_output
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-buildcache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
@@ -120,7 +120,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-buildcache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
@@ -157,7 +157,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   macosx_10_9_x86_64:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-buildcache' && github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-macosuniversal'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-macosuniversal'
     runs-on: macos-12
     steps:
       - name: check out repository
@@ -207,7 +207,7 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
   macos_10_9_universal:
-    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-buildcache' && github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
+    if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
     runs-on: macos-12
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
@@ -278,11 +278,11 @@ jobs:
         uses: actions/checkout@v3
       - name: set up environment
         run: |
-          mkdir -p $HOME/buildcache_exe
-          echo "BUILDCACHE_EXE_DIR=$HOME/buildcache_exe" >> $GITHUB_ENV
-          mkdir -p $HOME/buildcache
-          echo "BUILDCACHE_DIR=$HOME/buildcache" >> $GITHUB_ENV
-          echo "BUILDCACHE_MAX_CACHE_SIZE=2147483648" >> $GITHUB_ENV
+          mkdir -p $HOME/ccache_exe
+          echo "CCACHE_EXE_DIR=$HOME/ccache_exe" >> $GITHUB_ENV
+          mkdir -p $HOME/ccache
+          echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
+          echo "CCACHE_MAXSIZE=2G" >> $GITHUB_ENV
           mkdir -p $HOME/python
           echo "PYINSTALL_DIR=$HOME/python" >> $GITHUB_ENV
       - name: Use GNU tar to speed up cache restore
@@ -295,23 +295,23 @@ jobs:
         with:
           key: ${{ github.job }}-ICU-${{ env.ICU_URL }}
           path: ${{ env.ICUDIR }}
-      - name: download cached buildcache installation
+      - name: download cached ccache installation
         uses: actions/cache@v3
         with:
-          key: ${{ github.job }}-buildcache-${{ env.BUILDCACHE_URL }}
-          path: ~/buildcache_exe
+          key: ${{ github.job }}-ccache-${{ env.CCACHE_URL }}
+          path: ~/ccache_exe
       - name: download cached JSON for Modern C++ installation
         uses: actions/cache@v3
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
-      - name: download cached buildcache files, Python installations
+      - name: download cached ccache files, Python installations
         uses: actions/cache@v3
         with:
           key: ${{ github.job }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-run-
           path: |
-            ~/buildcache
+            ~/ccache
             ~/python
       - name: install dependencies
         run: actions/install_windows.sh
