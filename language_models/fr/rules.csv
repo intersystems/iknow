@@ -1,8 +1,10 @@
 
+/* PHASE 1: RELABEL MANDATORY LABELS AND USER DICTIONARY ITEMS
+/* ===========================================================
 /*Rewrite unified labels to language specific labels
 /*==================================================
 516;1;CapitalInitial;^FRCapitalInitial;
-/*		516. La Cour a également constaté que l’évaluation et le suivi de projets présentés par certains États membres étaient confiés à des experts nationaux.
+/*		516. La Cour a également constaté que l'évaluation et le suivi de projets présentés par certains États membres étaient confiés à des experts nationaux.
 517;1;CapitalAll;^FRCapitalAll;
 /*		517. Règlement (CE) no 2236/95.
 518;1;CapitalMixed;^FRCapitalMixed;
@@ -15,14 +17,13 @@
 521;1;UDNegation;+FRNegation+FRNegBegin;
 /*		521.UD. Ils préfèrent discuter plutôt que de nier les difficultés.
 522;1;UDPosSentiment;+FRPosSentiment+FRPosSentimentBegin;
-/*		522.UD. Par suite, les paiements en question n’ont pas été imputés au bon exercice budgétaire.
+/*		522.UD. Par suite, les paiements en question n'ont pas été imputés au bon exercice budgétaire.
 523;1;UDNegSentiment;+FRNegSentiment+FRNegSentimentBegin;
-/*		523.UD. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d’entre eux ont mal fonctionné.
-/* NOTE: Add rule(s) for UDTime here later, when addressing the Time attribute. 
-/*       If FRTime is assigned here, it can be deleted by the current rules, so we add it only at the end of the processing for now.
-
+/*		523.UD. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d'entre eux ont mal fonctionné.
+1087;1;UDTime;+FRTimeconcept+FRTime;add Timeconcept so the rules for time expansion will be applied
+/*		1087.UD. Elles peuvent être déclenchées même si la reprise n’est pas envisagée dans un futur proche, afin de permettre d’organiser au mieux cette reprise, d’envisager un aménagement du poste de travail.
 524;1;UDConcept;FRCon+FRUDConcept;
-/*		524.UD. La stérilisation des équipements, les cadences d'opération qui n'auraient, selon l' accusation, pas permis de travailler dans des conditions d'hygiène satisfaisantes et la qualification du personnel paramédical ont été mises en cause.
+/*		524.UD. La stérilisation des équipements, les cadences d'opération qui n'auraient, selon l'accusation, pas permis de travailler dans des conditions d'hygiène satisfaisantes et la qualification du personnel paramédical ont été mises en cause.
 525;1;UDRelation;UDRelation+FRRelation;
 /*		525.UD. Homme soulevant le globe terrestre.
 526;1;UDNonRelevant;FRNonRelevant;
@@ -34,14 +35,18 @@
 /*		839.UD. No example.
 836;1;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord+FRNoNegWord;
 /*		836.UD. à ce jour, nul n'a compris mieux qu'eux la misère et la condition humaines. Aucun autre parti ne sera représenté.
-/* NOTE: FRTime is not in the lexreps file, so it doesn't make sense to remove the attribute here for items with UDIgnoreTime.
-/*       A rule is added in the last phase.
+1088;1;UDIgnoreTime;-FRTimeconcept-FRHoliday-FRSeason-FRDay-FRMonth-FRTimes-FRTime+FRIgnoreTime;add extra IgnoreTime label to use in other phases
+/*		1088.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny. Le jour de Noël a toute une histoire, qui remonte aux Celtes et aux Romains. Les joueurs du Club ont, eux, surtout voyagé pendant l'été. Avec ce projet, la société a pour ambition d'emmener des humains et jusqu'à 100 tonnes de fret sur la Lune et sur mars lors de futures missions.
+1089;1;UDIgnoreTime;-FRYear-FRYearnum-FRPossibleYearnum;
+/*		1089.UD. "On a un puits artésien mais on ne sait pas si on peut boire l'eau", dit-elle entourée de ses trois enfants de cinq, trois et un an. La Cour a examiné le fonctionnement des systèmes de gestion mis en place pour le contrôle des conventions de cofinancement nationales sur la base d'une sélection de dix projets dans cinq pays (17) issus du programme Phare 2000.
 
 
+/* PHASE 20: NEGATION
+/* ==================
 /* DETECT NEGATION WITH ne + 2nd NEGATION MARKER
 /* Don't mark negation in questions with inversion
 /* Note: long context needed, since inversion (with 'real' negation) can occur after certain adverbs, "Peut-être ne s'agit-il pas d'un énorme problème".
-/*       for more information, see http://forum.wordreference.com/threads/inversion-sujet-verbe-dans-la-phrase-affirmative.538175/
+/*    for more information, see http://forum.wordreference.com/threads/inversion-sujet-verbe-dans-la-phrase-affirmative.538175/
 776;20;SBegin|FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|FRAdv+FRAdvModal;
 /*		776. Ne pensez-vous pas qu'il serait utile?
 777;20;SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
@@ -55,7 +60,7 @@
 779;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal;
 /*		779. Dès lors, ne devrions-nous donc pas les considérer comme un instrument improductif?
 782;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|FRPas:FRPlus:FRJamais|^SEnd;*|*|+FRNoNegWord|*|*|*|FRAdv+FRAdvModal|*;
-/*		782. Est-il possible d' avoir un fonds spécifique pour le bétail, et ne s' agit-il pas d' une distorsion de la concurrence? Not_in: Mais pourquoi n'y avait-il pas un docteur? Not_in: Peut-être ne s'agit-il pas d'un énorme problème.
+/*		782. Est-il possible d'avoir un fonds spécifique pour le bétail, et ne s'agit-il pas d'une distorsion de la concurrence? Not_in: Mais pourquoi n'y avait-il pas un docteur? Not_in: Peut-être ne s'agit-il pas d'un énorme problème.
 783;20;SBegin|*^FRNe+^FRAdvModal+^FRQuestion|FRNe|^FRNe|^FRNe|FRPostsubjpron|^FRPas+^FRPlus+^FRJamais|FRPas:FRPlus:FRJamais;*|*|+FRNoNegWord|*|*|*|*|FRAdv+FRAdvModal;
 /*		783. L'échec enregistré en Allemagne ne nous suffit-il donc pas? Not_in: Mais pourquoi n'y avait-il alors pas un docteur?
 
@@ -67,18 +72,11 @@
 788;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|-FRNegindicator|*;
 /*		788. Dans ce cas, ne pouvait-on vraiment pas en faire un peu plus pour surmonter le blocage actuel?
 789;20;^FRAdv+^"pourquoi"+^SBegin|FRNe|^FRNe|FRNegindicator|FRPostsubjpron;*|+FRNoNegWord|*|-FRNegindicator|*;
-/*		789. no example.
+/*		789. No example.
 
 /* 2nd marker gets label FRAdvNeg. If no 'ne' is found, all lexreps labeled FRPas (except for 'pas' itself) get the label FRAdvNeg anyway.
 /* The words 'pas', 'plus' and 'jamais' are disambiguated further in the next phases.
 /* note: pas moins = FRPlus;-;FRAdvDegree;FRAdv
-/*640;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|*|FRAdvNeg; -> integrated in r637
-/*640. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat.
-/*639;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|*|FRAdvNeg; -> integrated in r637
-/*639. Que cela ne vous arrête surtout pas dans votre exercice professionnel.
-/*638;20;FRNe+^FRNoNegWord|^FRPlus+^FRPas+^FRJamais+^FRQue|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|*|FRAdvNeg; -> integrated in r637
-/*638. Il n'y a apparemment pas d'autre solution.
-/*637;20;FRNe|^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
 637;20;FRNe+^FRNoNegWord|*{1,4}^FRPlus+^FRPas+^FRJamais+^FRQue|FRPlus:FRPas;FRNe+FRNegation|*|FRAdvNeg;
 /*		637. L'influence n'était pas suffisamment documentée. Il n'y aura donc très probablement pas d'emprisonnement dans l'immédiat. Que cela ne vous arrête surtout pas dans votre exercice professionnel. Il n'y a apparemment pas d'autre solution.
 636;20;FRNe|FRPlus:FRPas;FRNe+FRAdvNeg+FRNegation|FRAdvNeg;
@@ -90,47 +88,43 @@
 785;20;FRNoNegWord;-FRNegindicator;
 /*		785. Il ne s'agit plus seulement des arrestations arbitraires.
 725;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|FRNegindicator+^FRSans|^FRQue+^SEnd;FRNe+FRNegation|*|*;
-/*		725. C’est donc magnifique de ne rien ressentir de particulier.
+/*		725. C'est donc magnifique de ne rien ressentir de particulier.
 726;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|FRNegindicator+^FRSans;FRNe+FRNegation|*|*;
 /*		726. Les forces locales affirment régulièrement ne recevoir aucune aide.
-/*727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
 727;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|*{1,4}^FRNegindicator+^FRAndOrBut+^FRQue+^FRNoNegWord|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*;
 /*		727. L'adaptation doit bien sûr dans ce cas ne déroger à aucune des règles régissant la contactologie pédiatrique. Quelquefois, la pratique ne repose donc sur aucune raison médicale. Ne fait-il preuve d'aucun respect ? Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
-/*728;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*; -> integrated in r727
-/*728. Quelquefois, la pratique ne repose donc sur aucune raison médicale.
-/*729;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*; -> integrated in r727
-/*729. Ne fait-il preuve d'aucun respect ?
-/*731;20;FRNe+^FRNegation+^FRAdvNeg+^FRNoNegWord|^FRNegindicator|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|^FRNegindicator+^FRAndOrBut+^FRQue|FRNegindicator+^FRSans;FRNe+FRNegation|*|*|*|*|*|*; -> integrated in r727
-/*731. Ce patient d'ailleurs ne s'est rendu aux obsèques ni de son père ni de sa mère.
 831;20;"nulle";-FRNegWord;
 /*		831. Sept États vinicoles de l'Union européen appliquent toujours une taxe nulle sur le vin.
 
+
+/* PHASE 30: ADVERBS
+/* =================
 /* PrepAdv
 609;30;FRPrepAdv|FRComma;-FRPrep-FRPrepAdv|^FRComma;
 /*		609. Depuis, un compromis s'est dégagé lors de la visite à Rome mardi et le sommet devrait entériner ce résultat.
 610;30;FRPrepAdv|SEnd;-FRPrep-FRPrepAdv|*;
-/*		610. De nombreux Européens craignent toujours des hausses des prix au moment du changement d' étiquettes ou peu après.
+/*		610. De nombreux Européens craignent toujours des hausses des prix au moment du changement d'étiquettes ou peu après.
 674;30;FRSRelAux|FRPrepAdv|FRPart;FRSRelAux|+FRAdv-FRPrepAdv|FRPart;
 /*		674. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé, qui a depuis changé de nom et de propriétaires.
 653;30;FRPrepAdv;FRPrep;
-/*		653. En ce qui concerne plus particulièrement les études, lesformulaires de demande contiennent depuis l’année 2000 des informations sur les coûts externes et internes.
+/*		653. En ce qui concerne plus particulièrement les études, les formulaires de demande contiennent depuis l'année 2000 des informations sur les coûts externes et internes.
 
 /* AdvCon
 711;30;FRIndefart:FRDefart:FRPoss:FRDemonstr|FRAdvCon;*|FRCon;
 /*		711. Le mal est décidément profond et la décision d'abandonner doit être considérée comme judicieuse.
-713;30;FRAuDu:FRDe:FRMod|FRAdvCon;*|FRCon;
-/*		713. Nécessité d'une meilleure vue d'ensemble.
+713;30;FRAuDu:FRDe:FRMod:FRQuantpron|FRAdvCon;*|FRCon;
+/*		713. Nécessité d'une meilleure vue d'ensemble. En ouverture des débats, le MR a exposé tout le mal qu'il pense d'un texte.
 712;30;FRAdvCon;^FRAdv;default: result is Adv+AdvXxx
-/*		712. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d’entre eux ont mal fonctionné.
+/*		712. Des tests portant sur les contrôles clés opérationnels ont révélé que certains dentre eux ont mal fonctionné.
 
 /* ADVERBS (PART 1)
-686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;FRAdvNR+FRAdv|Join|Join|^FRNum;"pas moins" not preceded by "ne"
-/*		686. La raison est la suivante : le sujet concerne pas moins de 1 800 000 salariés dans l' Union européenne.
+686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;JoinReverse|JoinReverse|JoinReverse|*;"pas moins" not preceded by "ne"
+/*		686. La raison est la suivante : le sujet concerne pas moins de 1 800 000 salariés dans l'Union européenne.
 687;30;"pas"+FRPlus|"moins"|FRDe|FRCon;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" not preceded by "ne"
 /*		687. Cela signifie plus d'intégration et pas moins d'intégration.
 688;30;FRAdvNeg|"moins"|FRDe|FRCon+^FRNum;^FRAdvNeg|FRMod|Join|^FRCon;"pas moins" preceded by "ne"
 /*		688. Cette nouvelle politique en matière de recherche ne requerra pas moins de chercheurs, mais deux fois plus.
-689;30;"à"|"moins"|"de":"dµ"|FRInf;-FRPrep+FRSConj+FRNegation|Join|Join|^FRInf;cannot be done with a lexrep because of ambiguity
+689;30;"à"|"moins"|FRDe|FRInf;-FRPrep+FRSConj+FRNegation|Join|Join|^FRInf;cannot be done with a lexrep because of ambiguity
 /*		689. Nous ne pouvons pas nous engager en toute crédibilité dans le processus et trouver des solutions réellement constructives à moins de commencer par nous-mêmes.
 635;30;FRPlus|FRAdvManner:FRAdvTemp:FRAdvModal:FRAdvLoc;FRAdvDegree+FRAdv|*;
 /*		635. Il demande plus précisément une enquête sur cette transaction.
@@ -159,12 +153,334 @@
 257;30;FRAdvManner;+FRAdvCR;treat adverbs expressing manner in the same way as time adverbs for now
 /*		257. Par cette fausse mesure il a stupidement renoncé à tous ses avantages.
 
-/* TIME EXPRESSIONS
-673;30;"il y a"|FRNum|FRTimeconcept;-FRSRel+FRAdvTime+FRAdv|+Join|+Join;
-/*		673. Après sa greffe du foie, il y a 10 ans, elle cherchait un moyen de donner au suivant.
 
-/* DISAMBIGUATION RULES
-/* ====================
+/* PHASE 33: DETECT NUMBERS
+/* ========================
+1045;33;"tous les"|FRNum|^FRCon:FRAndOr;JoinReverse|FRSubjpron|*;
+/*		1045. Ils ont tous les deux passé une bonne partie de leur enfance en internat ou en famille d'accueil. Not_in: Il semble que nous soyons condamnés à débattre de la même question tous les six ou trois mois.
+865;33;FRNum|FRNumpart2;*|+Join;
+/*		865. Mais ce n'est que pendant la période quaternaire il y a 1,6 million d'années que le climat devint excessivement froid et que les variations du niveau de la mer provoquèrent l'apparition des Grands Lacs.
+868;33;FRNumplusde|FRDe:FRDes|.FRPoss:FRIndefpron|FRCon:FRNum+^FRTimeconcept:FRYear;*|Join|JoinReverse|*;
+/*		868. L'arrivée du roi, accompagné par une dizaine de ses notables, se fait au son cadencé du tambour royal. Ils n'attirent à eux deux que la moitié des intentions de vote au premier tour, face à une douzaine d'autres candidats.
+866;33;FRNuminfull:FRQuantpron|.FRDe|FRNuminfull;+JoinReverse|+JoinReverse|*;
+/*		866. Mais, les pressions de Paris, aux environs de vingt deux heures, auraient fini par convaincre certains élus d'annuler le voyage. 185 millions sont affectés au football européen au sein de l'institution et le reste (une trentaine de millions) va garnir les caisses des Ligues professionnelles des associations participantes. La partie occidentale forma ce qui devint plus tard l'Amérique du Nord et dériva pendant plusieurs millions d'années jusqu'à son emplacement actuel. 
+850;33;"pas":"beaucoup":FRNummodifier|"plus":"moins"|FRAllformsDe:"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|JoinReverse|*;
+/*		850. Une population fatiguée de devoir passer plusieurs heures dans une chaleur torride pour récupérer pas plus de 1.000 pesos par mois.
+849;33;"plus":"moins"|"de":"des":"du":"dµ":"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|+FRBegin;
+/*		849. L'instruction qui a duré plus de dix ans a conclu que les infections dont elles ont été affectées ont été causées par une bactérie. Aujourd'hui, ils ne sont plus qu'un quart. Parmi ces patients plus de 4 sur 10 prennent quotidiennement des psychotropes.
+1020;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|"un"|FRTimeconcept:"an";JoinReverse|JoinReverse|*|*;
+/*		1020. Nous pouvons généralement régler le problème rapidement, mais un délai supérieur à un mois peut être nécessaire.
+964;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|FRNum;JoinReverse|JoinReverse|*;
+/*		964. Si la durée de l'arrêt est supérieure à 6 mois, il faudra également justifier de douze mois d'immatriculation.
+851;33;FRNummodifier|.FRIndefart:FRDefart|FRNum:FRQuantpron;JoinReverse|JoinReverse|*;
+/*		851. La Bourse a terminé la séance de mercredi en forte hausse de 1,17% et a atteint son plus haut niveau en près de huit semaines. Tout comme les autres nations modernes et industrialisées, l'économie canadienne est dominée par l'industrie des services, laquelle emploie environ les trois quarts des Canadiens. Selon un des correspondants, le tremblement de terre a duré un peu plus d'une minute.
+933;33;FRNum|.FRTimeconcept:FRYear|"au"|"minimum":"maximum";*|*|JoinReverse|FRMod+FREndTime;
+/*		933. Les membres du Sénat sont choisis par le Premier ministre et assermentés à vie par le gouverneur général en conseil pour servir jusqu'à l'âge de 75 ans au maximum.
+
+/* 'en moyenne'
+1038;33;FRNummodifier:"moyenne"|FRAllformsDe|FRNum;JoinReverse|JoinReverse|*;
+/*		1038. Le ministère de l'Intérieur a estimé à plus de 50 millions le nombre des pièces d'armes aux mains de la population, soit en moyenne de 2,5 armes par habitant.
+1041;33;"en"|"moyenne"|FRNum;JoinReverse|FRMod+FRNummodifier|*;
+/*		1041. Elle affirme recevoir en moyenne 35 appels téléphoniques par jour tandis que les sept personnes responsables du service téléphonique en reçoivent une soixantaine par jour.
+1039;33;FRNum|.FRCon|"en"|"moyenne";*|*|JoinReverse|FRMod+FRNummodifier;
+/*		1039. Les chutes de neige annuelles peuvent atteindre plusieurs centaines de centimètre en moyenne.
+1040;33;FRVerb|"en"|"moyenne";*|JoinReverse|FRAdv+FRAdvDegree;
+/*		1040. Ils présentaient en moyenne des taux de PCB doubles de ceux relevés dans la population.
+
+/* process 'de'
+924;33;^FRBeginTime|FRDe|FRNum+^FROrdnum;*|^FRPrep|*;keep attribute AllformsDe
+/*		924. Il a écopé en Belgique de dix ans de réclusion. Not_in: La Commission reconnaît néanmoins que jusqu'à la fin de 2001, seul l'État membre était avisé et que l'État membre informait le bénéficiaire.
+
+
+/* PHASE 35: DETECT TIME INDICATIONS
+/* =================================
+/* join with number
+936;35;"un":"une"|FRTimeconcept:FRYear|"ou"|"deux";JoinReverse|*|Join|Join;
+/*		936. Au retour cependant, il remarque pendant une semaine ou deux un meilleur sommeil. Il y a un an ou deux, le gouvernement n'a rien trouvé de mieux à lui offrir qu'une télé à écran plat.
+
+/* 'suivant'
+1019;35;FRCon|"suivant"|.FRAdv|FRDefart:FRIndefart:FRPoss:FRNuminfull;*|FRPrep+FRPrepTime|*|*;
+/*		1019. Ce budget privilégie l'éducation, la sécurité, la justice et l'environnement, avec l'emploi comme fil rouge, après six mois consécutifs de hausse du chômage suivant quatre ans de baisse.
+
+/* 'fois'
+981;35;"une":FRNum|FRTimes|"sur"|FRNum|^typeConcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime|*;
+/*		981. Il échoue neuf fois sur dix selon certaines études.
+982;35;FRNum|FRTimes|FRComp;*|FRCon|Join;
+/*		982. Le tournesol est la plante qui offre le meilleur rendement (six fois supérieur au gazoil).
+987;35;FRIndefart:FRNum|FRUntil|FRNum|FRTimes:FRTimeconcept|"par"|FRTimeconcept;FRNum+FRTime|*|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		987. J'ai passé l'automne à Ottawa, deux à trois jours par semaine.
+1037;35;FRIndefart:FRNum:FRQuantpron|FRTimes|"par"|FRTimeconcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRAfterA;
+/*		1037. Par rapport à 2007, la fréquence de l'utilisation a doublé et s'élève actuellement à 10,1 fois par semaine.
+986;35;FRIndefart:FRNum:FRQuantpron|FRTimeconcept|"par"|FRTimeconcept:FRYear;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		986. Psychologues, banquiers, musiciens ou étudiants se retrouvent plusieurs soirs par semaine dans ce petit club.
+1011;35;"pour"|"la"|FRNum|FRTimes;+FRAddExpansion|*|JoinReverse|FRAdvTime;
+/*		1011. C'est en 1828 que Chopin quitte pour la première fois son pays.
+1014;35;SBegin|"une"|"fois";*|FRSRelconj|Join;
+/*		1014. Une fois désigné, le formateur doit alors constituer sa majorité dans un délai de 42 jours.
+913;35;"une":FRNum|FRTimes;JoinReverse|FRAdvTime;
+/*		913. Pour tenter de redresser la situation, il est intervenu par deux fois en novembre.
+
+/* 'par' + time indication (including disambiguation of 'year')
+980;35;FRAdvTime|"par"|FRYear:FRTimeconcept;*|Join|Join;
+/*		980. En general, les comites de suivi sont tenus de se reunir au moins deux fois par an.
+979;35;typeConcept|"par"|FRYear:FRTimeconcept;*|JoinReverse|FRCon+FRTime;
+/*		979. Pourtant l’avion est certainement le moyen de transport le plus sûr au monde puisqu’on ne dénombre qu’une trentaine d’accidents par an.
+
+/* prepare for expansion
+1052;35;^FRToutLe:FRDemonstr:"chaque"|FRTimeconcept:"la veille":"le lendemain"+^FRDay|.FREndTime:"et demi":"et demie"|FRAllformsDe;*|*|*|+FRAddExpansion;
+/*		1052. Ce budget privilégie l'éducation, la sécurité, la justice et l'environnement, avec l'emploi comme fil rouge, après six mois consécutifs de hausse du chômage suivant quatre ans de baisse. À une heure et demie de la clôture, seuls quatre des 477 électeurs inscrits avaient glissé leur bulletin dans l'urne. Malgré la lassitude de leurs adhérents après un mois de grève et à l'approche des fêtes, les deux organisations non-signataires estiment que le mouvement ne s'arrête pas. Alors que l'ancien cours, facultatif, comprenait environ 12 heures de formation théorique et autant d'heures de formation pratique, le nouveau totalise 39 heures. Sorti blessé à la 88e minute de cette partie, le milieu de terrain souffre d'une rupture du tendon d'Achille gauche. Not_in: Il faut vraiment avoir le moral pour attendre toute la journée des électeurs qui ne viennent pas.
+1026;35;FRNum:FRIndefart:FRQuantity:FRQuantpron+^FRToutLe|FRYear|.FREndTime|FRAllformsDe;*|*|*|+FRAddExpansion;
+/*		1026. Il aura le choix entre purger ses cinq ans de prison ou bien avoir un nouveau procès. 
+
+/* distinguish 'an(s)' as time attribute
+931;35;Ageindicator|.FRAllformsDe|"un":FRNum|FRYear:FRTimeconcept;*|*|*|-FRYear-FRTimeconcept-FRTime+FRAge;
+/*		931. Chopin révéla très tôt de grandes dispositions pour la musique, rejouant dès l'âge de cinq ans les airs que joue sa mère au piano. Les bovins doivent être identifiés dans une période définie par l'Etat membre à compter de la date de naissance de l'animal, au plus tard à l'âge de 20 jours et impérativement avant que l'animal ne quitte l'exploit.
+925;35;FRYear:FRTimeconcept|FRAllformsDe|."lµ"|"âge";-FRYear-FRTimeconcept-FRTime+FRAge|*|*|*;
+/*		925. Mais selon les analystes, l'un des centres de production, de cinq ans d'âge, nécessite quelque $450 millions pour sa modernisation.
+921;35;FRNum:"un"|FRYear|"et demi":"et demie";JoinReverse|*|Join;
+/*		921. Pour la plupart des économistes qui se risquent à établir des prévisions chiffrées, le pays, déjà plongé dans une récession depuis trois ans et demi.
+919;35;FRDemonstr:FRQuantpron:FRBeginTime|.FRNum:"un":"des"|FRYear;JoinReverse|JoinReverse|FRAdvTime;
+/*		919. En région wallonne, ce service a fait peau neuve il y a deux ans.
+922;35;FRPrepTime:"sur"+^FRPrepAge|."un":"des":FRNum|FRYear|FRDe;+FRAddExpansion|JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+/*		922. On ne reprend pas une cigarette après 1 an d'abstinence par besoin de nicotine.
+920;35;FRPrepTime:"sur"+^FRPrepAge:FRUntil|."un":"des":FRNum|FRYear;+FRAddExpansion|JoinReverse|FRAdvTime;
+/*		920. La surconsommation de psychotropes est patente depuis dix-neuf ans. Not_in: Assez fréquents vers 65 ans. Les premiers «diplômés de la route» sont attendus dans un an. Not_in: L'âge pour l'éducation obligatoire varie au travers le Canada, mais se situe généralement aux alentours de 5–7 ans jusqu'à 16–18 ans.
+1084;35;FRNummodifier|."un":"une"|FRYear;JoinReverse|FRNum|*;
+/*		1084. Après près d'un an de fermeture, le cinéma rouvre ses portes !
+923;35;"un":"des":FRNum|FRYear|FRDe;JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+/*		923. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé. Il aura le choix entre purger ses cinq ans de prison ou bien avoir un nouveau procès.
+928;35;FRYear|FREndTime+FRNummodifier;*|Join;
+/*		928. C'est un an environ après le décès de sa fille et de sa mère que s'installe le tableau actuel.
+927;35;FRNum:"un"|FRYear|FREndTime;JoinReverse|FRAdvTime|Join;
+/*		927. Si bien qu'en 2000, le niveau de sécurité était au même niveau que 20 ans auparavant. Mais la crise étudiante et sociale de mai 1968 met en avant l'archaïsme d'un régime qui semble déconnecté des aspirations de son temps, et d'un président qui démissionne un an plus tard.
+926;35;FRYear|FREndTime;FRAdvTime|Join;
+/*		926. La société a réalisé l'an dernier un chiffre d'affaires et un bénéfice d'entreprise en baisse.
+935;35;FRNum:"un":"une"|FRYear:FRTimeconcept|.FRAdv|"après":"avant"|FRPunctuation:SEnd;JoinReverse|FRAdvTime|Join|Join|*;
+/*		935. La perte nette attribuable aux actionnaires ordinaires a été de 122 M$ et 22 cents par titre, contre un déficit de 196 M$ et 41 cents par action un an avant.
+930;35;FRNum:"un"|FRYear|.FRAdv|"après":"avant":"depuis";JoinReverse|FRAdvTime|*|*;
+/*		930. Le traité de Lisbonne est signé six ans après Laeken, en décembre 2007. Dans la même note, les dépenses prévues au titre du cofinancement parallèle étaient acceptées jusqu'à un an après la date d'expiration du protocole de financement. Le nombre de points requis sera soustrait un an exactement après la dernière édition de l'épreuve.
+932;35;"dure":"durait":"durera":"durant":"durer":"duré"+^"des"|"un":"des":FRNum|FRYear;*|JoinReverse|FRAdvTime;
+/*		932. Une telle procédure peut durer quinze ans.
+1058;35;^Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|FRNum:"un"|FRYear|"et"|FRNum|FRTimeconcept;*|*|*|*|*|*|-FRTime-FRTimeconcept;age
+/*		1058. Des jeunes de 12 ans consomment déjà du cannabis, l'âge moyen auquel la consommation commence étant de 14 ans et 2 mois.
+962;35;Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|"un":"des":FRNum|FRYear;*|*|JoinReverse|FRAdvTime;
+/*		962. Dans un délai de 60 jours et pour une durée d'un an au moins. La mise en oeuvre des principales mesures résultant de l'adoption des normes de contrôle interne est maintenant étalée sur une periode de deux ans. Le processus, négocié en secret dans la capitale norvégienne, prévoyait une période transitoire d'autonomie de cinq ans. Les pays tiennent un sommet dimanche et lundi à pour "avancer" de deux ans la création de leur union douanière, déjà en retard de quinze ans.
+960;35;FRIndefart|FRYear|^typeConcept;FRNum|*|*;
+/*		960. "On a un puits artésien mais on ne sait pas si on peut boire l'eau", dit-elle entourée de ses trois enfants de cinq, trois et un an.
+
+/* preparation
+/*not time
+/*remove Time from name
+872;35;"le"|"soir"+FRCapitalInitial;JoinReverse|FRCon+FRCapitalInitial-FRTime;
+/*		872. La société vient de gagner une nouvelle manche dans le combat judiciaire qui l'oppose aux Etats-Unis au groupe pétrolier brésilien, rapporte mardi Le Soir.
+906;35;^SBegin|FRTimeconcept:"mars"+FRCapitalInitial+^FRDay:"noël";*|-FRMonth-FRTimeconcept-FRTime;
+/*		906. Une évolution prometteuse, car en 2010 nous attendent de nouveau de grands projets comme les Jeux Olympiques d'Hiver. Les taxis étaient environ 150 à 11h30 constituer un cortège entre la gare du Midi et la place Madou. Avec ce projet, la société a pour ambition d'emmener des humains et jusqu'à 100 tonnes de fret sur la Lune et sur Mars lors de futures missions.
+
+/* disambiguate 'été'
+904;35;"en":FRAllformsDe|.FRMod:FRCon:FRIndefart:FRDefart|FREte;+FRAddExpansion|*|FRTimeconcept+FRCon+FRTime;
+/*		904. Ces gens y passent l'hiver, généralement six mois, et reviennent au Canada en été afin de conserver leur statut légal de résidence. En plein été, certaines plantes, certains animaux et même l'homme souffrent.
+905;35;FRMod+FRBeginTime|FREte;JoinReverse|FRTimeconcept+FRCon+FRTime;
+/*		905. Ces dernières années, son agence de production organisait les programmes français du Festival, ce festival se déroule chaque été depuis 2003.
+
+/* holidays, seasons
+1036;35;"à"|FRDefart|FRSeason;+FRAddExpansion|*|+FRTime;
+/*		1036. L'action valait mercredi 59 cents pour encore près de 100 dollars à l'été 2000.
+997;35;FRPrepTime|.FRCon:FRMod:FRDefart:FRIndefart+^FRHoliday:FRSeason|FRHoliday:FRSeason;+FRAddExpansion|*|+FRTime;
+/*		997. Beaucoup de commerces proposent d'importantes réductions de prix et ont étendu leurs horaires d'ouverture le week-end dernier - le dernier avant Noël - espérant des ventes de dernière minute malgré une clientèle plus soucieuse d'économies. Lors de l'hiver austral, le nombre de cas de grippe confirmé en laboratoires a triplé par rapport aux cinq années précédentes.
+1006;35;FRHoliday:FRSeason|FRPossibleYearnum:FRYearnum;FRAdvTime|Join;
+/*		1006. Entre la grippe qui l'abat pendant l'hiver 1845 et le printemps 1846, et la phtisie qui progresse, le musicien est de plus en plus affaibli. 
+
+/* 'temps'
+1070;35;FRPrepTimeSpan|."un"|"certain":"quelque":"quelques"|"temps";JoinReverse|JoinReverse|JoinReverse|FRAdvTemp+FRTime;
+/*		1070. L'inflation devrait rester contenue pendant un certain temps, alors que les anticipations de plus long terme relatives à l'inflation demeurent stables. 
+1072;35;"certain":"quelque":"quelques"|"temps";JoinReverse|FRAdvTemp+FRTime;
+/*		1072. Mais les températures journalières n'augmentent de façon marquée que plusieurs semaines après le 7 février, car la terre et la mer mettent un certain temps à se réchauffer.
+
+/* preparation: 'à' as part of time expansion
+1030;35;"à"|.FRDefart:FRBeginTime:FRNum+^"fin":FRAfterA|FRAfterA;+FRAddExpansion|*|*;
+/*		1030. Avec sa lettre, le front commun entend peser sur une réunion interministérielle portant sur le sujet à la fin de la semaine. Plus de 500 courageux ont bravé la bise hivernale dès dimanche soir pour attendre l'arrivée à minuit pile des premiers sachets de pièces. Un délai supplémentaire serait «extrêmement grave», puisque le réacteur des Pays-Bas, qui avait augmenté sa production pour pallier l'arrêt de celui du Canada, doit fermer à la mi-février pour être réparé à son tour.
+
+/* possible year number
+894;35;FRAllformsDe|FRNum|FRUntil|FRNum|typeConcept;*|-FRPossibleYearnum|*|-FRPossibleYearnum|*;
+/*		894. Les valeurs seuils actuellement proposées par les équipes sont un taux de 1000 à 1500 ug/l pour la férritinémie.
+893;35;FRAllformsDe|FRPossibleYearnum:FRYearnum|FRUntil|FRPossibleYearnum:FRYearnum|^typeConcept;*|FRCon+FRNum+FRYearnum+FRTime|*|FRCon+FRNum+FRYearnum+FRTime|*;
+/*		893. De 1836 à 1847, il fut le compagnon de l'écrivaine George Sand. Le pays a obtenu son indépendance du Royaume-Uni et ce pacifiquement, dans un processus qui s'est étalé de 1867 à 1982.
+890;35;FRPrepTime:FRMonth:FRTimeconcept|FRPossibleYearnum;*|FRCon+FRNum+FRYearnum+FRTime;
+/*		890. La société familiale, créée en 1682, se recapitalise après de sérieuses difficultés financières l'an dernier. Comme la très grande majorité des familles pionnières du Canada, il arrive en Nouvelle-France au courant des années 1650. Frédéric Chopin est né à Żelazowa Wola le 1er mars 1810 près de Varsovie.
+1069;35;FRNum|FRAfterYearnum;FRAdvTime|Join;
+/*		1069. En 600 av. J.-C., des Grecs originaires de la ville de Phocée fondent la ville de Marseille, au bord de la Méditerranée. Des dates placent les origines de la fabrication du fromage aux alentours de 8000 avant l'ère commune.
+897;35;"entre"|FRNum|"et"|FRNum|typeConcept;*|-FRPossibleYearnum|*|-FRPossibleYearnum|*;
+/*		897. Le 1er confinement pourrait entraîner entre 1000 et 6000 décès supplémentaires en France.
+898;35;"entre"|FRPossibleYearnum:FRYearnum|"et"|FRPossibleYearnum:FRYearnum|^typeConcept;*|FRAdvTime+FRYearnum+FRTime|*|FRAdvTime+FRYearnum+FRTime|*;
+/*		898. Entre 1654 et 1656, le coureur des bois Médard Chouart des Groseilliers élargit les limites de la Nouvelle-France.
+892;35;FRAllformsDe|FRPossibleYearnum|^typeConcept;*|FRCon+FRNum+FRYearnum+FRTime|*;
+/*		892. De plus, la Magna Carta de 1215 et la Déclaration des droits (Bill of Rights) de 1689 octroient certains droits fondamentaux aux Canadiens.
+889;35;FRPossibleYearnum|FRCon+^FRYearnum:FRPossibleYearnum;-FRYearnum-FRTime|*;
+/*		889. Sur l'année 2009, ce service a mené 1500 interventions.
+891;35;FRYearnum|FRAndOr:"-"|FRPossibleYearnum;*|*|FRCon+FRNum+FRYearnum+FRTime;
+/*		891. Les villes sont fondées respectivement en 1795 et 1843 par la Compagnie de la Baie d'Hudson. C'est dans la période de 1865 - 1870 qu'il débute sa collaboration avec le sculpteur.
+1068;35;FRYearnum|"-"|FRYearnum;FRAdvTime|Join|Join;
+/*		1068. C'est dans la période de 1865 - 1870 qu'il débute sa collaboration avec Carrier-Belleuse, sculpteur renommé du Second Empire.
+
+/* process 'de' and 'des'
+870;35;FRDay|FRDe:FRDes;*|^FRPrep;keep attribute AllformsDe
+/*		870. Il a été convenu vendredi soir qu'on serait confiné à son domicile, a-t-on appris samedi de source politique.
+909;35;FRCon:FRSRelCon+FRCapitalInitial|FRDe|FRMonth+FRCapitalInitial|.FRAllformsDe|FRYearnum:FRPossibleYearnum;*|FRCon|FRCon+FRTimeconcept+FRTime|Join|Join;
+/*		909. La Révolution de Juillet 1830 sembla rejouer celle de 1789.
+908;35;FRCon:FRSRelCon+FRCapitalInitial|FRDe|FRMonth+FRCapitalInitial;*|FRCon|*;
+/*		908. Le Rassemblement pour l'indépendance nationale sera quant à lui formé d'une faction indépendantiste qui disparaîtra peu après la Crise d'Octobre.
+
+/* don't split time concept plus adjective
+949;35;FRDay:FRTimeconcept|.FRAdvDegree:FRTres|FRMod:FRCon:FRPart+^FREndTime:FRNum:FRTimeconcept:FRCapitalInitial|SEnd:FRPunctuation:FRComma:FRRefl:FRVerb:FRSRelAux:FRSConj:FRSRelconj;*|*|FRMod+FRJoinwithcon|*;
+/*		949. Mais selon lui, les indicateurs économiques devraient dans les prochaines semaines confirmer que la remontée en puissance de l'économie va commencer à se matérialiser au début de l'année nouvelle. En ce dimanche ensoleillé, les Librevillois se sont rendus en masse à la plage. Not_in: Une société vient de gagner une nouvelle manche dans le combat judiciaire qui l'oppose aux Etats-Unis au groupe pétrolier brésilien, rapporte mardi Le Soir.
+
+/* join time indications
+1042;35;^FRInf:FRVerb:FRPart|"à"|FRNum:FRQuantpron|FRTimeconcept|FRAllformsDe;*|+FRAddExpansion|*|*|+FRAddExpansion;
+/*		1042. Le médecin du travail établit normalement 2 certificats à 15 jours d’intervalle. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales. Not_in: Il poursuivait sa mission de médiation pour tenter de mettre fin à quinze mois de violences.
+1032;35;FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|"et demie";JoinReverse|JoinReverse|FRAdvTime+FRTimeofday;
+/*		1032. A une heure et demie de la clôture, seuls quatre des 477 électeurs inscrits avaient glissé leur bulletin dans l'urne.
+862;35;FRNum:"un":"une"|FRTimeconcept|"et demi":"et demie";JoinReverse|JoinReverse|FRAdvTime;
+/*		862. Ce décalage d'un mois et demi environ par rapport à l'Europe continentale est dû au fait que les équinoxes et solstices se situent à mi-saison.
+958;35;FRIndefart|FRTimeconcept+^"periode":"période"|^FRCon:FRMod:FRPlus:FRDe:FRNum;FRNum|*|*;
+/*		958. Il y a juste un décalage d'un mois dans l'ajustement des prix à la sortie des soldes. J'ai envoyé ma demande il y a un mois. Not_in: Et le 19 juillet a établi un nouveau record avec un jour plus court de 1,4602 milliseconde.
+959;35;FRIndefart|FRTimeconcept+^"periode":"période"|FRDe;FRNum|*|+FRJoinwithcon;
+/*		959. L'affrontement constitue l'un des chocs au sommet un peu inattendu de la 8e journée de l'Euroligue, et marquée par une minute de silence dans toutes les salles.
+916;35;FRNum|FRTimeconcept|"sur"|FRNum|^typeConcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime|*;
+/*		916. La présence d'un poste de distribution de carburant (ouvert 7 jours sur 7 et 24 heures sur 24) est précisé le plus souvent par l'emblème ou le logotype du pétrolier.
+917;35;"un":"une"|FRTimeconcept|"de"|"plus";FRAdvTime|+Join|Join|Join;
+/*		917. Pour recouvrer l'intégralité de ses capacités, cela prend ensuite un mois de plus.
+854;35;"plus":"moins":FRNumplusde|FRDe|."un":"une"|FRTimeconcept;JoinReverse|JoinReverse|JoinReverse|*;
+/*		854. Ces traditions se perdent en Occident depuis un quart de siècle. Bien qu'il ne fasse pas partie intégrante du matériel nécessaire à la pratique du ski alpin, le casque est depuis une dizaine d'années une pièce d'équipement prisée par un grand nombre de débutants et d'experts.
+884;35;FRNummodifier|."un":"une"|FRTimeconcept;JoinReverse|JoinReverse|FRAdvTime;
+/*		884. Par la suite, il semble que les Basques viendront pêcher sur les grands bancs de morue au large de l'île de Terre-Neuve pendant près d'un demi-siècle.
+861;35;FRNum|FRTimeconcept|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
+/*		861. Le groupe souligne néanmoins que le chiffre d'affaires au quatrième trimestre 2009 a progressé de 35%.
+2nd semestre 2010;La société projette également de lancer un OPCI grand public au cours du 2nd semestre 2010.
+903;35;"année":"années":"annee":"annees"|FRYearnum:FRDecade;*|Join;
+/*		903. De plus, en cette même année 1848, l'Institut est fondé avec pour mission la promotion de la culture francophone. Si la France a connu durant les Trente Glorieuses une situation proche du plein emploi — au cours des seules années 1960, l'économie française a créé 1,6 millions d'emplois. Depuis les années 50, d'énormes progrès ont été réalisés dans de nombreux domaines et entreprises du «nouveau monde». Ce système est utilisé par tous les manufacturiers depuis le milieu des années soixante-dix, lorsque le monde du ski a vu un effort concerté pour mettre de l'avant une interface chaussure-fixation.
+912;35;FRNum|FRComma|FRNum|FRAndOr|FRNum|FRTimeconcept:FRMonth+^FRDay;+FRTime|*|+FRTime|*|*|*;
+/*		912. Les paysans bénéficient de l'essor économique des XIe, XIIe et XIIIe siècles.
+966;35;FRBeginTime+FRNum|FRAndOr|FRNum|FRTimeconcept:FRMonth+^FRDay;+FRBegin+FRTime|*|JoinReverse|FRAdvTime;
+/*		966. Il semble qu'ils soient tous les deux condamnés à débattre de la même question tous les six ou trois mois.
+1003;35;FROrdnum|FRAndOr:FRUntil|.FRPrepTime:"la":"le":"lµ"|FROrdnum|FRTimeconcept:FRMonth+^FRDay;+FRTime|*|*|*|*;
+/*		1003. La grippe débarque chez nous entre la 41e et la 45e semaine de l'année.
+911;35;^FRCon|FRMinutes:FRDaynum|FRAndOr:FRUntil|.FRPrepTime:"la":"le":"lµ"|FRNum+^FROrdnum|FRTimeconcept:FRMonth:"h"+^FRDay;*|+FRTime|*|*|*|*;
+/*		911. Il faut savoir attendre qu'il soit efficace, entre 2 et 4 semaines, et adapter la dose si besoin. Il serait resté à dans les montagnes jusqu'au 25 ou au 26 novembre. Le patch met 1 à 2 h à avoir sa pleine puissance.
+907;35;FRNum|.FRBeginTime:FROrdnum|FRTimeconcept+^FRDay|FRAllformsDe|FRMonth:FRTimeconcept;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		907. Créée par le gouvernement cette monnaie, non convertible, doit être mise en circulation dans les premières semaines de janvier.
+953;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
+/*		953. La patrouille est entrée à l'heure où leur ronde de trois heures prévue devait prendre fin, à 13H00. Il vient de traverser deux années très difficiles.
+957;35;FRMod|FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay;*|JoinReverse|JoinReverse|*;
+/*		957. Sur le seul quatrième trimestre, la croissance est de 4% en rythme annualisé.
+1034;35;FRNum:"une"|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime+FRTimeofday|*;
+/*		1034. Le président fera une déclaration sur cette affaire lundi à 10 heures dans la salle de presse de l’Elysée. 
+848;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime|*;
+/*		848. Ils reculent de -0,4% au cours des 3 derniers mois par rapport aux 3 précédents. Les autres amétropies, même importantes, sont dans bon nombre de cas susceptibles de régresser partiellement durant ces deux premières années de la vie. Not_in: L'euro s'inscrivait à 1,3719 USD dans la matinée de lundi, contre 1,3737 vendredi dernier. La secousse, d'une magnitude de 7,0 sur l'échelle de Richter, aurait duré pas plus d'une minute. Not_in: Ce sanctuaire où les malades affluent par milliers chaque année dans l'espoir d'une guérison.
+871;35;FRDay|FRDaypart;*|Join;
+/*		871. Une réunion de crise est en cours ce vendredi matin.
+873;35;^FRPrep:FRDe|FRDefart|"matin":"après-midi":"soir":"jour":"nuit"|^FRAllformsDe;*|JoinReverse|FRAdvTime|*;
+/*		873. Longtemps, le sujet s'habitue à lutter contre des envies de s'endormir et s'accorde à penser qu'il est bon dormeur car il s'endort le soir sans problème.
+951;35;FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay:FRTimeconcept:FRTimes|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
+/*		951. Elle craint qu'une pénurie prolongée mette trop de pressions sur les professionnels, qui doivent déjà faire de nombreuses heures supplémentaires. J'avoue avoir vécu, pour la première fois en sept ans, quelques semaines très difficiles.
+1008;35;FRDefart:FRIndefart|FRMod|FRBeginTime|FRDay:FRTimeconcept:FRTimes;*|+FRJoinwithcon|JoinReverse|*;
+/*		1008. L'Insee prévoyait en effet un plongeon du PIB d'environ 9%, mais l'économie française a mieux résisté au deuxième confinement à l'automne, avec un recul du PIB de 1,3% sur le seul dernier trimestre.
+869;35;"mois"|FRDe|FRMonth;JoinReverse|JoinReverse|+FRTimeconcept;
+/*		869. Chaque année, vers le mois de février, les experts analysent des milliers d'échantillons et doivent sélectionner les trois souches en circulation qui semblent présenter le maximum de risques.
+1067;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|"periode":"période"|FRAllformsDe;*|JoinReverse|JoinReverse|*|+FRJoinwithcon;'de' after 'period' should be in the same Concept
+/*		1067. Dans la même période d'exploration qui s’étend vers le Pays des Illinois en Louisiane, Laumet fonde en 1701 la ville de Détroit.
+1016;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRDay|*;
+/*		1016. Une réunion de crise est en cours ce vendredi matin.
+1035;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRTimeofday|*;
+/*		1035. Pendant plusieurs heures, le pays de neuf millions d'habitants a pratiquement été coupé du monde.
+846;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept:FRTimes|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime|*;
+/*		846. Une série d'événements de ce type ont été organisés ces dernières semaines. Il y avait déjà des rumeurs depuis plusieurs mois. Quelques avancées de la recherche ont aussi émaillé cette année. En ce mois de janvier, la France fête les 10 ans de la loi Copé-Zimmermann.
+855;35;FRBeginTime|FRAdvTime;JoinReverse|FRAdvTime;
+/*		855. Mais les divergences sur les raisons de cette explosion des prix, qui ont frôlé il y a quelques jours les 140 dollars le baril, sont apparues au grand jour.
+881;35;FRHour|"h"|FRMinutes;FRAdvTime+FRTimeofday|Join|Join;
+/*		881. Il est 5 h 30 du matin quand, avec trois heures de retard sur l'horaire prévu, la délégation est accueillie par une centaine de fans.
+1015;35;FRHour|"h";FRAdvTime|Join;
+/*		1015. Comme le CO disparaît en 24 h, dès que les patients ont arrêté de fumer, ils visualisent que des toxiques ont disparu de l’organisme.
+880;35;FRTimeofday|"du"|FRDaypart;*|Join|Join;
+/*		880. L'agence de la caisse d'épargne s'est vue contrainte dès 11h du matin d'afficher une pancarte pour réorienter les amateurs vers d'autres agences.
+1031;35;"à"|.FRDefart|FRTimeofday;+FRAddExpansion|*|*;
+/*		1031. L’enregistrement fermera à 18h45 au départ de Londres, et ce jusqu’à nouvel ordre.
+
+/* join dates
+859;35;FRDay|FRNum|FRMonth|FRYearnum;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		859. Son ultime concert à Paris eut lieu le mercredi 16 février 1848 et resta un instant fabuleux.
+858;35;FRDay|FRNum|FRMonth;JoinReverse|JoinReverse|FRAdvTime;
+/*		858. La bourse sera fermée le lundi 31 décembre.
+857;35;FRNum:FRBeginTime|FRMonth|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
+/*		857. Tous ces éléments ont été inclus dans un plan d'action consolidé adopté le 8 novembre 2004 par le secrétariat général. Ce montant résulte de l'application du pacte entre les générations, conclu fin décembre 2005.
+856;35;FRNum:FRBeginTime|FRMonth;JoinReverse|FRAdvTime;
+/*		856. Le dividende sera payable aux actionnaires enregistrés le 15 avril, et sera réglé le 30 avril. Le gouvernement a dévalué la livre, début août, pour la deuxième fois en six mois, par rapport au billet vert.
+860;35;FRBeginTime:FRMonth|FRYearnum;JoinReverse|FRAdvTime;
+/*		860. Aussi longtemps que le chômage demeurera élevé – et il pourrait atteindre 10 % d'ici fin 2009 –, il n'y aura pas d'autres tentatives pour réformer le marché du travail.
+874;35;"plus tard":"tard":"plus tôt":"tôt"|."dans"|"le":"la":"lµ"|FRDaypart;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		874. Une usine a brulé dans un incendie plus tôt dans la matinée.
+844;35;FRAdvTime:FRDaypart:FRTimeconcept:FRMonth:FRDay|FRAllformsDe|.FRDefart|FRDay:FRTimeconcept:FRAdvTime|^"à";JoinReverse|JoinReverse|JoinReverse|*|*;special case for r833,834
+/*		844. L'euro s'inscrivait à 1,3778 USD dans la matinée de mercredi. La Bourse a terminé la journée de mercredi en forte hausse. Mais ç'est surtout le premier tour qui retient l'attention, car les rapports de force au soir du 21 avril seront déterminants pour le résultat final. Groupe industriel a édicté les grandes lignes d'un plan de redressement à mettre en place dans les premiers mois de l'année prochaine. Not_in: Venez chatter avec la journaliste, ce jeudi de 12h10 à 13h.
+942;35;"le"|FRDay|FRDaynum|^typeConcept;*|FRAdvTime|Join|*;
+/*		942. La hausse spectaculaire de l'indice le jeudi 20 s'est expliquée en grande partie par une forte demande d'actions comme couverture dans l'anticipation d'une éventuelle fin de la convertibilité.
+
+/* further join time indications
+882;35;"un":"une"|FRTimeconcept|FREndTime;FRAdvTime|+Join|Join;
+/*		882. Ils partent pour une mission d'un mois minimum.
+934;35;FRMod|FRTimeconcept|FREndTime:FRDaypart;*|*|Join;
+/*		934. Mardi, au sortir d'un long week-end férié, la presse a enfoncé le clou.
+852;35;FRAdvTime:FRTimeconcept:FRMonth|FREndTime:FRDaypart;FRAdvTime|Join;
+/*		852. Il est clair que l'Allemagne a accompli un extrêmement bon travail au cours des dix dernières années environ, améliorant la compétitivité. En mai dernier, nous avons analysé objectivement la situation.
+883;35;"première":"seconde":"deuxième"|"moitié"|FRDe:"du"|."la"|FRTimeconcept:FRMonth:FRAdvTime;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		883. Les villes seront fondées lors de la découverte de mines de fer dans la seconde moitié du XXe siècle.
+952;35;FRNumplusde:"début":"debut":"milieu":"fin"+^FROrdnum|FRDe:"du":"des"|."la":"lµ"|FRTimeconcept:FRMonth:FRAdvTime:FRYearnum+^"seconde"|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|JoinReverse|*|*|*;
+/*		952. Débutée en fin de matinée dorée, la manifestation s'était jusque là déroulée dans une ambiance plutôt calme.
+864;35;FRNumplusde:"début":"debut":"milieu":"fin"+^FROrdnum|FRDe:"du":"des"|."la":"lµ"|FRTimeconcept:FRMonth:FRAdvTime:FRYearnum+^"seconde"|^FRJoinwithcon;JoinReverse|JoinReverse|JoinReverse|FRAdvTime|*;
+/*		864. Si, par malchance, l'économie mettait plus de temps à redémarrer (fin du 4e trimestre 2002 au lieu du début du 2e semestre), de sévères déconvenues surviendront. Aucun incident majeur n'était signalé en milieu d'après-midi. Avec sa lettre, le front commun entend peser sur une réunion interministérielle portant sur le sujet à la fin de la semaine. D'autre part, dès la fin de la première moitié du XIXe siècle, la révolution industrielle fait son apparition au Canada. Depuis le début de l'année, nous devons répercuter des hausses de prix de 7 à 8 % à nos clients.
+996;35;FRAdvTime|FRAllformsDe|FRYearnum;*|Join|Join;
+/*		996. Le ministre a affirmé que l'accroissement de l'offre mondiale de brut avait été supérieure à l'augmentation de la demande mondiale entre le deuxième trimestre de 2007 et le deuxième trimestre de 2008, donc qu'il n'y avait pas de pénurie.
+1000;35;"entre":FRPrepTime:FRDefart|FRNum|FRAndOr|.FRPrepTime:"la":"le":"lµ"|FRAdvTime;*|+FRTime|*|*|*;
+/*		1000. Le rôle du médecin a beaucoup changé dans les 30 ou 40 dernières années. Le XIVe et la première moitié du XVe siècle voient la France plonger dans une crise grave, dont les expressions sont multiples
+
+/* day
+681;35;^FRMod:FRIndefart|FRDay|^FRJoinwithcon;*|FRAdvTime+FRDay|*;
+/*		681. Selon des sources du palais présidentiel, le président a convoqué ses conseillers mardi afin d'analyser les issues politiques possibles à ce match nul électoral. Not_in: Comme leurs homologues asiatiques, les Bourses européennes connaissaient un lundi noir.
+
+/* year number
+899;35;FRPrepTime|FRYearnum;*|FRAdvTime;
+/*		899. Ces derogations ont rendu disponibles en 1986 environ 200 Mio ECU de credits d'engagement.
+900;35;FRYearnum+^FRNumrange:FRNumbrackets:FRAdvTime|FRCon+^FRYearnum;-FRYearnum-FRTime|*;
+/*		900. Il souhaite aussi ramener ses joueurs de soccer et ses footballeurs sur son campus avec un projet de 4,5 millions $ de terrain synthétique multisports doté de gradins pouvant accueillir 2000 personnes. Not_in: Gestion de la période de programmation 2000-2006 5.41-5.56 4.125.
+1007;35;FRSeason:FRMonth:FRTimeconcept|FRAllformsDe|FRYearnum;FRAdvTime|Join|Join;
+/*		1007. Montréal a accueilli l’exposition universelle de 1967 et les Jeux olympiques d'été de 1976.
+
+/* number: add general Con label
+1085;35;FRNum+^FRNuminfull:FRPercent:FROrdnum;+FRCon;
+/*		1085. Selon la Commission électorale, le Congrès et le parti ont chacun remporté 18 des 36 sièges de l'assemblée. Not_in: Vainqueur de neuf des 17 GP de la saison, le leader a battu le record de victoires en F1 en portant son total de succès à 53. 
+
+/* process 'de' and 'des'
+843;35;^FRDaypart+^SBegin|FRDe|FRDay;*|^FRPrep|*;keep attribute AllformsDe
+/*		843. Les Bourses asiatiques avaient commencé par donner le ton de ce lundi noir.
+847;35;FRAdvTime:FRMonth+^FRAdv|FRDe:FRDes+^FRJoinwithcon;*|^FRPrep;keep attribute AllformsDe
+/*		847. Les opérateurs ont aussi pris connaissance ce jour des derniers chiffres des prix US à la production. Not_in: Elle connait annuellement des évolutions publiées sur le site de l'Agence technique. L'opération concernait des villages, théâtres de février à août d'affrontements entre les forces governementales et un mouvement armé.
+
+/* add time attribute and general label to Month
+918;35;FRAdvTime:FRAdvTemp+^FRIgnoreTime;+FRTime;
+/*		918. Il faut savoir qu'une telle procédure peut durer quinze ans. Il conviendrait ensuite d'actualiser régulièrement les procédures opérationnelles. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé, qui a depuis changé de nom et de propriétaires.
+/*		918.UD. Not_in: Les tensions sont particulièrement sensibles à Marseille, où les kébabs flanquent l’avenue autrefois élégante de la Canebière.
+1009;35;FRMonth;+FRTimeconcept;
+/*		1009. Entre octobre et novembre, l'hémorragie d'emplois atteint quasiment 800.000. 
+
+/* 'à'
+1017;35;"a"|"la";FRPrep+FRUntil+FRPrepTime|FRDefart;not in lexreps because it interferes with multiwords starting with 'la'
+/*		1017. A la fin du XVIIe siècle, après la révélation par le drapier Antonie Van Leeuwenhoek du monde invisible des animalcules grâce au pouvoir grossissant de la lentille optique, les savants se mirent en quête de vies minuscules.
+1029;35;SBegin|.FRPunctuation|"a":"à"+FRCapitalAll|.FRIndefart:FRDefart|FRAdvTime:FRTimeconcept;*|*|FRPrep+FRPrepTime|*|*;
+/*		1029. A quatre mois des élections, le gouvernement a choisi de garder le même cap pour financer les 35 heures, assurant qu'il ne remboursera pas les sommes qu'il doit à la Sécurité sociale.
+1047;35;SBegin|FRPunctuation|"a"+FRCapitalAll|^FRPunctuation;*|*|FRPrep|*;
+/*		1047. « A chaque mauvaise réponse, vous recevrez une punition.
+
+
+/* PHASE 40: DISAMBIGUATION RULES
+/* ==============================
 /* DISAMBIGUATE THROUGH CAPITALIZATION
 331;40;SBegin|FRLetter;*|-FRConIfAllCap;discard capitalization of a letter at the beginning of a sentence
 /*		331. A-t-il fait une choix?
@@ -176,6 +492,8 @@
 /*		332. Le canal de Suez est un canal situé en Égypte.
 333;40;FRConIfAllCap+FRCapitalAll;FRCon;
 /*		333. La CE a pris une décision.
+1018;40;^SBegin|"de"+FRCapitalInitial|"la"|FRCapitalInitial;*|FRCon|Join|Join;
+/*		1018. Dimanche, le président De la Rua a encore une fois rejeté toute idée de dollarisation et de dévaluation. 
 
 /* HANDLE PERSONAL PRONOUNS THAT ARE ATTACHED TO A VERB FORM
 95;40;FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel|FRPostsubjpron;FRSRel|Join;verb with -t-il etc.
@@ -223,10 +541,6 @@
 631;40;SBegin|"bien"|FRQue;*|FRSConj|Join;
 /*		631. Bien que le cours débute dans un peu plus d'une semaine, l'organisation n'a pas terminé ses devoirs.
 
-/* près de
-684;40;"près de":"près dµ":"près des"|FRNum;FRAdvDegree+FRAdv|^FRNum;
-/*		684. Près de 25.000 personnes ont participé vendredi à la manifestation.
-
 /* Conj3 (parce que)
 797;40;FRVerb:FRPart|FRSConj3;*|^FRSConj2;prepare to make Conj3 Beginrelation in the given context
 /*		797. Ils l'éloignaient parce qu'il n'y avait pas de lieu de refuge.
@@ -234,20 +548,24 @@
 /*		819. Ils ne les ont pas invités parce qu'avec ses deux bébés, it serait difficile à venir.
 
 /* en plus (d..), plus d'un(e)
-810;40;"en"|"plus"|FRDe|FRNum;*|FRMod|Join|*;
-/*		810. L' indice a terminé la séance de jeudi à son plus bas niveau en plus de trois ans.
 811;40;typeConcept|"en"|"plus"|SEnd;*|FRCon|Join|*;
 /*		811. Dans deux semaines, l'organisation comptera douze membres en plus. Celle-ci aura 18 millions d'enfants et de jeunes en moins et 52 % de personnes de plus de 65 ans en plus. Not_in: Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
 812;40;"en"|"plus"|FRDe:FRDes:"du";FRPrep|Join|Join;
 /*		812. Avons-nous besoin d'un billet de 1 euro en plus de la pièce de 1 euro?
 813;40;"en"|"plus";FRAdv+FRAdvNR|Join;
 /*		813. Il persiste en plus à ne respecter aucun des engagements qu'il a pris. Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
-814;40;FRPlus|FRDe|FRIndefart;FRMod|Join|FRNum;
-/*		814. Il habite à Quebec depuis plus d'une trentaine d'années.
+
+/* très
+1010;40;FRTres|FRPrep;FRAdvDegree|*;
+/*		1010. J'ai été très en colère quand on a volé l'élection. 
+
+/* encore
+1046;40;"encore"|FRComp;JoinReverse|*;
+/*		1046. Le magistrat avait déjà dénoncé la situation voici dix ans et estime que la situation est encore pire à l'heure actuelle.
 
 /* DISAMBIGUATION AMBIGUOUS AUXILIARIES
 101;40;FRDe|FRSRelCon;FRDe|FRCon;disambiguate 'avions' before rules for FRSRelAux can fire
-/*		101. La déclaration de dépenses inéligibles pour les subventions directes aux investissements est peu susceptible d’entraîner un paiement indu.
+/*		101. La déclaration de dépenses inéligibles pour les subventions directes aux investissements est peu susceptible d'entraîner un paiement indu.
 184;40;FRPas:FRAdvNeg|FREte;FRAdvNeg|FRSRelAux;negation with été
 /*		184. Les fournisseurs de données suivants n'ont pas été correctement actualisés.
 667;40;FRPrep+^FRSRel|FRDefart|FREst;^FRPrep|+FRDefart|^FRCon-FRSRelAux;
@@ -262,42 +580,50 @@
 /*		604. Mais c'est un vrai sport, qui demande beaucoup d'entraînement pour parvenir au haut niveau.
 611;40;FRBeaucoup|FRPartConMod;FRMod|+Join;
 /*		611. Le chef, bien que peu connu, est favorablement considéré.
-606;40;FRBeaucoup|FRVerb:FRSRelAux;FRQuantpron|*;
-/*		606. Beaucoup sont en prison déjà.
+606;40;FRBeaucoup|FRVerb:FRSRelAux:FRSRelCon;FRQuantpron|*;
+/*		606. Beaucoup sont en prison déjà. Beaucoup reste à faire.
 605;40;FRBeaucoup;FRAdv+FRAdvDegree;default rule
-/*		605. De Paris à Londres en un peu plus de deux heures.
+/*		605. Les gens sont très perspicaces et savent calculer beaucoup mieux qu'on le croit.
+
+/* plus
+1057;40;FRIndefart|FRDes|"plus";JoinReverse|JoinReverse|FRMod+FRBegin;
+/*		1057. La croissance démographique française est aujourd'hui l’une des plus dynamiques d’Europe.
+1055;40;FRPlus|FRPartMod;JoinReverse|FRMod;
+/*		1055. Pour autant, la recette du tourisme international est plus élevée aux États-Unis.
+1054;40;FRPlus|FRPart;FRAdvDegree|*;
+/*		1054. Dès l'été, un bloc essence d'une puissance de 200 chevaux plus adaptée aux prétentions sportives complètera l'offre.
 
 /* ADVERBS
 307;40;FRAdvDegree|FRSRelMod:FRSRelConMod;FRCon|FRCon;adverb of degree belongs to adjective
 /*		307. La preuve au dossier démontre que l'intimé a substantiellement satisfait à ses obligations. En mucus, le tissu prend l'aspect d'une masse cystique, relativement liquide.
-309;40;FRSRelAux|FRAdvDegree|FRCon:FRPPart;FRSRelAux|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary
+309;40;FRSRelAux|FRAdvDegree|FRCon:FRPPart;*|FRCon|FRCon;adverb of degree belongs to adjective after auxiliary
 /*		309. La pente était tellement forte que les deux jeunes gens ne pouvaient pas avancer. En raison de ces insuffisances, les mesures adoptées étaient largement inadaptées dès le départ et se sont avérées inefficaces dans de nombreux domaines.
-289;40;FRAdvDegree|FRPPart;FRCon|FRCon;adverb of degree before present participle
-/*		289. Le premier résultat est inimaginable et tellement touchant.
-292;40;FREtre|FRAdvDegree|FRCon;FRInf|FRCon|FRCon;adverb of degree belongs to adjective after être
+289;40;FRAdvDegree:FRTres|FRPPart;FRCon|FRCon;adverb of degree before present participle
+/*		289. Le premier résultat est inimaginable et tellement touchant. Ainsi, le premier, très intéressant dimanche contre l'Italie pour sa première titularisation.
+292;40;FREtre|FRAdvDegree|FRCon:FRMod;FRInf|FRCon|*;adverb of degree belongs to adjective after être
 /*		292. Le coût social marginal du transport peut aussi être considérablement supérieur à son coût moyen.
-291;40;FRSRel|FRAdvDegree|FRCon;FRSRel|FRCon|FRCon;adverb of degree belongs to adjective after FRSRel
-/*		291. Cela semble complètement contraire à la fois à la politique gouvernementale et également à l'harmonisation européenne.
-288;40;FRComma|FRAdvDegree|FRCon;FRComma|FRCon|FRCon;adverb of degree belongs to adjective after comma
-/*		288. Il est possible d’espérer des restitutions très proches de la normale, à peine détectable.
-481;40;FRAdvDegree|FRNum;FRCon|FRCon;adverb of degree belongs to number
-/*		481. Crise oblige, à peine trois Européens sur cinq prévoient des vacances d'été.
-285;40;FRAdvDegree|FRPlus;FRPlus|Join;adverb of degree can modify plus
-/*		285. Il avançait considérablement plus vite que les vieux bus.
-284;40;FRSRelAux|FRAdvCR|FRAdvDegree|FRCon;FRSRelAux|FRAdvCR|FRCon|FRCon;
+291;40;FRSRel|FRAdvDegree|FRCon+^FRTimeconcept;FRSRel|FRCon|*;adverb of degree belongs to adjective after FRSRel
+/*		291. Cela veut aussi dire que si ils sont moins motivés, sa trace devient de plus en plus difficile à suivre, a-t-il admis.
+288;40;FRComma|FRAdvDegree|FRCon;*|FRCon|*;adverb of degree belongs to adjective after comma
+/*		288. Il est possible d'espérer des restitutions très proches de la normale, à peine détectable.
+285;40;FRAdvDegree|FRPlus:FRAdvDegree;JoinReverse|*;adverb of degree can modify plus
+/*		285. Il avançait considérablement plus vite que les vieux bus. C'est la plus vaste commune de la région Île-de-France, et elle est presque entièrement recouverte d'une forêt.
+284;40;FRSRelAux|FRAdvCR|FRAdvDegree|FRCon;*|*|FRCon|*;
 /*		284. Il était physiquement totalement passif.
-287;40;FRAdvDegree;FRAdvCR+FRAdvDegree;treat adverbs of degree in the same way as time adverbs for now
+876;40;FRAdvDegreeplusde|FRDe|typeConcept;*|FRCon|*;
+/*		876. Très en forme, l'écrivain a pris énormément de plaisir à se plier, au centre de notre rédaction, à un exercice inédit pour lui: celui de commenter l'actualité.
+888;40;FRAdvDegree+FRMoreLess;FRAdvCR+FRAdvDegree+FRMoreLess;
+/*		888. Il est en 2010 le parti le plus représenté dans les institutions politiques nationales.
+287;40;FRAdvDegree+^FRMoreLess;FRAdvCR+FRAdvDegree;treat adverbs of degree in the same way as time adverbs for now
 /*		287. C'était un été complètement fou.
-286;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;modal adverb belongs to adjective after comma
+286;40;FRComma|FRAdvCR|FRCon;*|FRCon|*;modal adverb belongs to adjective after comma
 /*		286. C'était incroyable, vraiment incroyable !
-316;40;FRAdvCR|FRAndOrBut|FRAdvCR;^FRAdvCR|Join|+Join;merge adjoint adverbs
-/*		316. La gouvernance locale relève directement et uniquement des législatures provinciales.
-297;40;FRDefart:FRIndefart|FRAdvCR|FRCon;*|FRMod|FRCon;adverb preceded by article
+316;40;FRAdvCR|FRAndOrBut|FRAdvCR;*|Join|+Join;merge adjoint adverbs
+/*		316. C'est donc une personne capable d'être brillante pour son entourage, physiquement ou cognitivement, mais peu autonome en réalité.
+297;40;FRDefart:FRIndefart|FRAdvCR|FRCon;*|FRMod|*;adverb preceded by article
 /*		297. Malgré la probablement grande difficulté de la troisième partie, le jury est déçu que les étudiants ne maîtrisent plus que très approximativement l'électrochimie. Ce pays a accompli un extrêmement bon travail.
-293;40;FRPrep|FRAdvCR|FRCon;FRPrep|FRMod|FRCon;
+293;40;FRPrep|FRAdvCR|FRCon;*|FRMod|*;
 /*		293. Le pays a fait un saut que même les diplomates expérimentés tenaient pour à peine possible.
-479;40;FRPrep|FRAdvCR|FRNum;FRPrep|FRMod|FRCon;adverb modifying a number, low-frequent since AdvDegree is covered by r481
-/*		479. Les résultats peuvent être expectés après probablement deux mois.
 650;40;FRAdvCR;+FRAdv;
 /*		650. Les plants de riz n'en ont biologiquement besoin.
 
@@ -311,15 +637,15 @@
 659;40;FRInfCon;^FRInf;
 /*		659. Si ce n'est pas une blague, cela fera certainement sourire les lecteurs des journaux de vendredi.
 433;40;FRRien|FRPart:FRPartCon:FRPartConMod;FRRien|FRSRel;participle preceded by rien
-/*		433. Le gouverneur n'a rien dévoilé de ses projets d'avenir. Et si on ne retrouve rien, c’est qu’en général on n’a rien perdu.
+/*		433. Le gouverneur n'a rien dévoilé de ses projets d'avenir. Et si on ne retrouve rien, c'est qu'en général on n'a rien perdu.
 629;40;FREte|FRPart:FRPartCon:FRPartConMod;FRSRel|FRSRel;
 /*		629. Une autre procédure a à nouveau été tranchée à son avantage.
 654;40;FREtre|FRPart:FRPartCon:FRPartConMod;-FREtre|FRSRel;
 /*		654. Le bateau apparaissait être vendu.
 656;40;FRAvoir|FRPart:FRPartCon:FRPartConMod;-FRAvoir|FRSRel;
 /*		656. Le pouvoir semble avoir accepté un compromis.
-1;40;FRSRelAux|.FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRelAux|*|FRSRel;auxiliary with met participle
-/*		1. Ils ont présenté la nouvelle collection à Bruxelles. Tout est parti d'un informaticien de la Banque. Il avait en effet recommandé deux ordinateurs. Il a ainsi déjà commencé ses réflexions sur le sujet.
+1;40;FRSRelAux|.FRAdv:FRQuantpron|FRPart:FRPartCon:FRPartConMod;FRSRelAux|*|FRSRel;auxiliary with met participle
+/*		1. Ils ont présenté la nouvelle collection à Bruxelles. Tout est parti d'un informaticien de la Banque. Il avait en effet recommandé deux ordinateurs. Il a ainsi déjà commencé ses réflexions sur le sujet. Pleine d'autodérision, elle n'a cependant pas hésité à se moquer d'elle-même, ce qui a beaucoup fait rire les candidats.
 53;40;FRSRelAux|FRSRel|FRPart;FRSRelAux|^FRSRel|FRSRel;remaining cases
 /*		53. Elle a par exemple rédigé un acte de défense de 206 pages.
 597;40;FRSRelAux|FRSubjpron|FRPart:FRPartCon:FRPartConMod;FRSRelAux|FRSubjpron|FRSRel;
@@ -327,7 +653,7 @@
 
 /* PAST PARTICIPLES WITH NEGATION
 83;40;FRSRelAux|FRPas:FRAdvNeg+^FRJamais|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|FRSRel;auxiliary with negation and potential participle
-/*		83. Les mesures d'interdiction de fumer dans les lieux publics n'ont pas eu de réel effet sur le tabagisme actif. Ils déclarent qu'ils n'auraient pas accusé un innocent. Not_in: Il s agirait du plus fort séisme qu'on a jamais ressenti. Il ne serait pas intéressé par les activités à l’étranger.
+/*		83. Les mesures d'interdiction de fumer dans les lieux publics n'ont pas eu de réel effet sur le tabagisme actif. Ils déclarent qu'ils n'auraient pas accusé un innocent. Not_in: Il s agirait du plus fort séisme qu'on a jamais ressenti. Il ne serait pas intéressé par les activités à l'étranger.
 103;40;FRSRelAux|FRPas:FRAdvNeg|FRAdv|FRPart:FRPartCon:FRPartConMod;FRSRel|FRAdvNeg|*|FRSRel;auxiliary with negation, adverb and potential participle
 /*		103. Ils n'ont pas simplement agi comme professeurs, mais comme magistrats. Tout le personnel recruté n'est pas simultanément employé. Nous n'avons pas vraiment vécu la crise économique.
 79;40;FRSRelAux|FRAdv|FRPas:FRAdvNeg|FRPart:FRPartCon:FRPartConMod;FRSRelAux|^FRAdv|FRAdvNeg|FRSRel;adverb between verb and negation
@@ -344,7 +670,7 @@
 76;40;FRSRel|FRAdv|FRPas;FRSRel|^FRAdv|FRAdvNeg;adverb between verb and negation
 /*		76. Cette année ne sera pas terrible mais sans doute pas aussi mauvais que d autres.
 16;40;FRNe|FRSRelAux:FRSRelCon:FRSRelConMod:FRSRelMod:FRPPart;FRNe|FRSRel;ne preceeds verb
-/*		16. Ils ne sont arrivés qu'à dix heures. L' irresponsabilité de la classe politique locale ne porte pas à l' optimisme. Il ne lâche rien de ses ambitions présidentielles. La France ne manque déjà pas de textes pour s'attaquer aux employeurs sans scrupules. Le roi était un nomade qui se déplace avec toute son administration, ne restant jamais plus de quelques semaines dans la même résidence.
+/*		16. Ils ne sont arrivés qu'à dix heures. L'irresponsabilité de la classe politique locale ne porte pas à l'optimisme. Il ne lâche rien de ses ambitions présidentielles. La France ne manque déjà pas de textes pour s'attaquer aux employeurs sans scrupules. Le roi était un nomade qui se déplace avec toute son administration, ne restant jamais plus de quelques semaines dans la même résidence.
 173;40;FRNe|FRObjpron|FRSRelCon;FRNe|FRObjpron|FRSRel;
 /*		173. Le tribunal ne lui donne pas tort.
 691;40;FRNe|FRDefart:FRObjpron|FRPPart;FRNe|*|FRSRel;ne with object and present participle
@@ -374,13 +700,15 @@
 632;40;FRAndOrBut|FRAdvCR|FRPart;^FRAndOrBut|FRMod|FRCon;
 /*		632. La chef de zone venait d'arriver, escortée par trois enquêteurs et visiblement éreintée par sa nuit au cachot.
 160;40;FRDefart:FRIndefart:FRPoss:FRDes:FRDe|FRPart:FRPartCon:FRPartConMod;*|FRCon;
-/*		160. Ce modéré soit connu de l'Alliance. A 3-1, le New-Yorkais voyait enfin une éclaircie. La France préfère renouer avec son passé. En ce qui concerne l’évaluation et le suivi, la séparation des fonctions est insuffisante. L'harmonisation de la procédure d'octroi du statut de réfugié.
+/*		160. Ce modéré soit connu de l'Alliance. A 3-1, le New-Yorkais voyait enfin une éclaircie. La France préfère renouer avec son passé. En ce qui concerne l'évaluation et le suivi, la séparation des fonctions est insuffisante. L'harmonisation de la procédure d'octroi du statut de réfugié.
 161;40;FRPrep|FRPart:FRPartCon;FRPrep|FRCon;(tested PartConMod, decided not to add it)
 /*		161. Preuve pour l'aide social avec contrainte sévère a l'emploi.
 663;40;FRNum:FRQuantpron|FRPartCon:FRPartConMod;*|FRCon;
-/*		663. Celui-ci a cependant été condamnée à plusieurs reprises par la Cour.  WRONG: Les dirigeants de l'opposition, dont certains interrogés par l'AFP, ont refusé de se prononcer.
+/*		663. Celui-ci a cependant été condamnée à plusieurs reprises par la Cour. WRONG: Les dirigeants de l'opposition, dont certains interrogés par l'AFP, ont refusé de se prononcer.
 662;40;FRPart:FRPartCon:FRPartConMod|"par";FRSRel|^FRPrep;
 /*		662. Chaque weekend il y a des accidents causés par des chauffeurs ivres.
+1053;40;FRPPart:FRPart:FRPartCon:FRPartConMod+FRPartPlusA|"à":"au":"aux":"a";FRSRel|*;
+/*		1053. Le groupe espère réaliser pour au moins 2 milliards d'euros de cessions en 2002, opérations destinées à réduire l'endettement.
 
 /* JOIN REFLEXIVE PRONOUN AND VERB
 21;40;FRRefl|FRSRelCon:FRSRelMod:FRSRelConMod:FRSRel;FRSRel|+Join;merge reflexive pronoun with verb
@@ -390,33 +718,39 @@
 20;40;FRRefl|FRSRelAux;FRSRel|FRSRelAux;don't merge se with auxiliary verb
 /*		20. Ils se sont rencontrés dans la gare.
 
-/* DISAMBIGUATION OF FRSRelCon
+/* DISAMBIGUATION OF RelCon and RelMod
 /* to FRSRel
-661;40;FRNe|FRDefart|FRSRelCon;^FRNe|FRObjpron|FRSRel;
+661;40;FRNe|FRDefart|FRSRelCon:FRSRelMod;^FRNe|FRObjpron|FRSRel;
 /*		661. Personne ne la remarque.
-
-/* to FRSRel
-174;40;FRSubjpron|FRObjpron|FRSRelCon;FRSubjpron|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
+174;40;FRSubjpron|FRObjpron|FRSRelCon:FRSRelMod;FRSubjpron|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
 /*		174. On lui offre la possibilité.
-172;40;FRSubjpron2|FRObjpron|FRSRelCon;FRSubjpron2|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
+172;40;FRSubjpron2|FRObjpron|FRSRelCon:FRSRelMod;FRSubjpron2|FRObjpron|FRSRel;pronoun with 'leur' and ambiguous noun/verb, has to come before r28
 /*		172. Ça me révolte.
+1079;40;^FRDefart:FRIndefart:FRPoss:FRPrep|FRSRelCon:FRSRelMod+FRRelConPlusA|"à":"au":"aux":"a";*|FRVerb|*;
+/*		1079. Le dernier net recul des ventes de tabac remonte à la période 2003-2004, suite aux fortes hausses des prix décidées par le gouvernement. 
 
 /* to FRCon
-28;40;FRDefart:FRIndefart:FRAucun:FRPoss:FRDes:FRPrep:FRMod:FRQuantpron|FRSRelCon;*|FRCon;
-/*		28. La coupe brésilienne était délicieuse. Nous y sommes restés une nuit. Le scénario français n'offre aucune marge de manoeuvre. J'ai envoyé un e-mail dans ma pause de midi. Des mesures créatives permettant de démarrer une période de prénégociation. On a averti la police par téléphone. Par cette fausse mesure il a stupidement renoncé à tous ses avantages. Toute bande noire d'un seul ongle doit faire l'objet d'une biopsie sauf si sa cause est évidente (mélanonychie de friction par exemple).
+28;40;FRDefart:FRIndefart:FRAucun:FRPoss:FRDes:FRPrep:FRQuantpron:FRMoreLess|FRSRelCon;*|FRCon;
+/*		28. La coupe brésilienne était délicieuse. Le scénario français n'offre aucune marge de manoeuvre. J'ai envoyé un e-mail dans ma pause de midi. Des mesures créatives permettant de démarrer une période de prénégociation. On a averti la police par téléphone. Toute bande noire d'un seul ongle doit faire l'objet d'une biopsie sauf si sa cause est évidente (mélanonychie de friction par exemple).
+886;40;^FRCon|FRMod|FRSRelCon;*|*|FRCon;
+/*		886. Par cette fausse mesure il a stupidement renoncé à tous ses avantages. Not_in: La gouvernance locale relève directement et uniquement des législatures provinciales.
 514;40;FRSRelCon+FRCapitalInitial;FRCon;
-/*		514. Inspiré par la décision relative au Fonds de cohésion.
+/*		514. Elle précise notamment la fonction de recueil d’information médicale dans le cadre du Programme de Médicalisation des Systèmes Informatiques.
 
 /* to FRSRel
-25;40;FRSRelCon|FRIndefart:FRAucun:FRDefart:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
-/*		25. Elle visite une amie à Namur. Cela pose aucun problème pour la construction modulaire. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Cette masse passe ensuite de l'intestin grêle au côlon. La révolution industrielle fait son apparition. Il ne faut pas qu'il rêve être directeur d'agence sans aucune expérience. Le gouvernement fait construire trois chemins de fer transcontinentaux. «Ils étaient très bons», juge celui qui a vraiment apprécié l'émission. Une vision que partage cette femme.
+867;40;FRNum+^FRNumroman|FRSRelCon;*|FRCon;
+/*		867. Avant de rentrer dans sa phase finale, avec à peine trois rencontres encore au programme. Not_in: Afin de diriger la colonie, le roi Louis XIII place le gouverneur de la Nouvelle-France directement sous l'autorité du cardinal de Richelieu.
+954;40;FRSRelCon|FRDefart|^FRAdvTime;FRSRel|*|*;
+/*		954. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Not_in: De lune des plus mauvaises équipes lan passé, ils sont devenues la meilleure.
+25;40;FRSRelCon|FRIndefart:FRAucun:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
+/*		25. Elle visite une amie à Namur. Cela pose aucun problème pour la construction modulaire. Cette masse passe ensuite de l'intestin grêle au côlon. La révolution industrielle fait son apparition. Il ne faut pas qu'il rêve être directeur d'agence sans aucune expérience. Le gouvernement fait construire trois chemins de fer transcontinentaux. «Ils étaient très bons», juge celui qui a vraiment apprécié l'émission.
 59;40;FRSRelCon|FRPas:FRAdvNeg;FRSRel|FRAdvNeg;
 /*		59. Et ça fait pas de mal.
 106;40;FRSRelCon|FRDe|FRInf;FRSRel|FRSRel|FRInf;
 /*		106. Les négociations qu'elle tente de mettre en place. Le gouvernement actuel tente de s'aligner avec la Coopération économique.
-31;40;FRSubjpron:FRSubjpron2:FRDatpron|FRSRelCon;*|FRSRel;after pronoun
+31;40;FRSubjpron:FRSubjpron2:FRDatpron|FRSRelCon:FRSRelMod;*|FRSRel;after pronoun
 /*		31. Il reste sur deux finales. Tout cela conduit à l'existence de fromages à forte identité. Je leur demande de ne pas respirer pendant cinq minutes.
-52;40;FRSConj:FRSRelconj|FRSRelCon;*|FRSRel;after conjunction
+52;40;FRSConj:FRSRelconj|FRSRelCon:FRSRelMod;*|FRSRel;after conjunction
 /*		52. L'Homme qui marche est installé au palais Farnèse.
 515;40;FRSRelCon+FRCapitalAll;FRCon;treat capitalized RelCons as Con, place this rule after disambiguation rules because if the whole text is capaitalized, the rules must get priority
 /*		515. Madame ROCHE ne participera pas.
@@ -425,21 +759,23 @@
 
 /* THE WORD 'plus' WITH AN ADJECTIVE AFTER A NOUN
 239;40;FRCon|FRPlus|FRCon:FRPart;FRCon|FRMod|FRCon;'plus' becomes part of the concept after a noun
-/*		239. Réflexion à ce sujet sur des bases plus utiles pour le soignant. Il empêche également la réalisation d'essais plus poussés que ceux auxquels les autres ont déjà procédé.
-223;40;FRCon|FRAdv|FRPlus|FRCon:FRPart;FRCon|FRMod|FRMod|FRCon;'plus' becomes part of the concept after a noun
-/*		223. Leur intérêt est de faire prescrire par les médecins des molécules toujours plus nombreuses et plus coûteuses. Des mesures de sécurité toujours plus étudiées.
+/*		239. Réflexion à ce sujet sur des bases plus utiles pour le soignant. 
 225;40;FRCon|FRPlus|FRDe|FRCon;FREnd|FRMod|FRMod|FRCon;'plus de' after a noun starts a new concept
-/*		225. On a huit fois plus de chance d'avoir un accident corporel si on est somnolent.
+/*		225. Le Canada possède sur son territoire plus de lacs que tout autre pays dans le monde.
 
 /* FURTHER DISAMBIGUATION OF PAST PARTICIPLES
 /* These rules must come after 239 and 223 (noun - plus - participle).
 675;40;FRAdvDegree|FRPartMod;FRCon|FRCon;
-/*		675. Ces phases de construction préliminaires comportent l’élément de risque le plus élevé d’un projet et sont nécessaires pour l’octroi de permis de construire.
+/*		675. Lors des assemblées organisées ce jeudi, le personnel s'est montré assez discipliné.
 483;40;FRCon|FRPartMod|FRDes:"du";FRCon|FRCon|FRPrep;noun with adjective before des or du
 /*		483. Le directeur demande un rapport détaillé des circonstances. La porte ouverte du jardin collectif.
-683;40;FRMod|FRPart;*|FRCon;
+683;40;FRMoreLess|FRPart;*|FRCon;
 /*		683. Partout, les valeurs bancaires étaient les plus malmenées.
-92;40;FRPart|FREn;FRSRel|FREn;participle followed by 'en'
+1078;40;FRVerb:FRPrep+^"de":"dµ"|FRNum|FRPart;*|*|FRCon;
+/*		1078. En général le malade subit deux saignées par semaine afin d’obtenir une ferritinémie infèrieure à 100 ug/l.
+887;40;^FRCon|FRMod|FRPart;*|*|FRCon;
+/*		887. A noter que le dernier nommé n'a manqué qu'une vingtaine de rencontres en 17 ans! Not_in: La France s'appuie sur ce réseau, composé de plus d'un millier d'associations de droit local implantées dans 136 pays.
+92;40;FRPart|FREn;FRSRel|*;participle followed by 'en'
 /*		92. Il s'agit d'un homme remis en liberté sous caution.
 5;40;FRPart|FRPrep;FRSRel|*;participle followed by preposition
 /*		5. Les gouvernements ont eux aussi cherché à apaiser les esprits.
@@ -447,7 +783,7 @@
 /*		312. Ils sont détachés, sur des projets exécutés individuellement ou en équipe.
 6;40;FRPart|FRAdv|FRPrep;FRSRel|^FRAdv|FRPrep;
 /*		6. L'inégalité de la taille d'image perçue subjectivement par chacun des deux yeux.
-157;40;FRPart|FRDefart:FRAucun:FRSubjpron2;FRSRel|*;participle becomes relation before article, aucun, celui etc.
+157;40;FRPart|FRDefart:FRAucun:FRSubjpron2:FRAdvTime;FRSRel|*;participle becomes relation before article, aucun, celui etc.
 /*		157. Tous ces éléments ont été inclus dans un plan d'action consolidé adopté le 8 novembre. Il n'a, jusqu'ici, donné aucune consigne de vote. Soudain, j'ai senti une main sur le dos de ma veste et entendu quelqu'un dire.
 682;40;FRPart+^FRPartMod|FRCon;FRSRel|^FRCon;Part is probably a relation before a concept
 /*		682. Le nombre d'erreurs constaté ex post était très mineur.
@@ -455,14 +791,14 @@
 /*		104. La réorganisation de la connectivité, observée chez l'aveugle précoce, n'est pas observée à la suite d'une perte tardive de la vision.
 
 /* DISAMBIGUATION OF FRSRelMod
-46;40;FRSRelMod|FRDefart:FRIndefart:FRAdv:FRPoss:FRMod;FRSRel|*;
-/*		46. La codification des lois intègre les principes de droit commun. Il présente un budget très austère. Les autorités de contrôle ont classé cet incident au niveau 1 de l’échelle internationale des événements, soit comme anomalie, précise encore le directeur. La télévision publique diffuse ses programmes à destination de l’étranger. L'affectivité fausse tous les raisonnements en effet.
+46;40;FRSRelMod|FRDefart:FRIndefart:FRAdv:FRPoss:FRMod:FRToutLe;FRSRel|*;
+/*		46. La codification des lois intègre les principes de droit commun. Les autorités de contrôle ont classé cet incident au niveau 1 de l'échelle internationale des événements, soit comme anomalie, précise encore le directeur. La télévision publique diffuse ses programmes à destination de l'étranger. L'affectivité fausse tous les raisonnements en effet. L'affectivité fausse tous les raisonnements en effet.
 
 /* DISAMBIGUATION OF FRSRelConMod
 391;40;FRSRelconj|FRSRelConMod;FRSRelconj|FRSRel;
 /*		391. Une crise profonde qui dure depuis le troisième trimestre 1998.
-774;40;^FRDefart:FRIndefart+^SBegin|FRSRelConMod|FRDefart:FRIndefart|FRCon;*|FRSRel|*|^FRCon;
-/*		774. Le chirurgien plasticien du 21ème siècle, qui se spécialise dans la chirurgie plastique du nez, pratique la chirurgie esthétique du nez au quotidien.
+774;40;^FRDefart:FRIndefart+^SBegin|FRSRelConMod|FRDefart:FRIndefart:FRAdvTime;*|FRSRel|*;
+/*		774. Le chirurgien plasticien du 21ème siècle, qui se spécialise dans la chirurgie plastique du nez, pratique la chirurgie esthétique du nez au quotidien. Dans la pratique, il arrive que cela dure plusieurs années.
 350;40;FRSRelConMod;FRCon;default
 /*		350. Elle est marchande de fleurs.
 
@@ -470,19 +806,21 @@
 23;40;FRPartCon;FRCon;default
 /*		23. Le Grand Marché était plein de gens.
 22;40;FRSRelCon;FRCon;default
-/*		22. Il y avaient trois équipes françaises.
+/*		22. Wall Street reste orienté en légère hausse en pré-séance ce mercredi.
 
 /* des BETWEEN CONCEPTS
-114;40;FRCon|FRDes|FRCon:FRNum;^FRCon|FRPrep|*;
-/*		114. Les gouverneurs des provinces de Buenos Aires et Cordoba. Les noms des cinq vainqueurs seront annoncés après le diner.
+1086;40;^FRCon|FRNum+^FRYearnum|FRDes|FRCon:FRNum:FRMod;*|*|FRCon|*;
+/*		1086. A ce chapitre, 17 des 25 postes/articles repondent aux criteres appliqués dans ce tableau. Devenir citoyen canadien nécessite de parler aisément soit le français ou l'anglais – 98,5 % des Canadiens parlent au moins une des deux langues (anglais seulement: 67,5 %, français seulement: 13,3 %, les deux: 17,7 %). Not_in: La rubrique 5 des perspectives financières Dépenses administratives regroupe les crédits de fonctionnement des institutions et organes communautaires.
+114;40;FRCon|FRDes|FRCon:FRNum:FRAdvTime:FRMod;*|FRPrep|*;
+/*		114. Les gouverneurs des provinces de Buenos Aires et Cordoba. Les noms des cinq vainqueurs seront annoncés après le diner. Dans son discours d'une demi-heure, il n'a ignoré aucune des revendications qui avaient provoqué les révoltes populaires des derniers jours.
 
 /* MISCELLANEOUS
 171;40;FRPrep|FRObjpron|FRInf;FRSConj|FRObjpron|FRInf;'pour' and 'à' with pronoun and infinitive
 /*		171. Un courrier a été envoyé pour leur informer.
-340;40;FRSRelAux;FRSRel+FRVerb;default rewriting for auxiliary verbs after the last rule that applies specifically to FRSRelAux
-/*		340. Il est le président.
+340;40;FRSRelAux;^FRSRel+FRVerb;default rewriting for auxiliary verbs after the last rule that applies specifically to FRSRelAux
+/*		340. Il est le président. Elle a interdit à sa mère de le lire. 
 143;40;FRPPart|FRInf;FRSRel|FRInf;present participle followed by infinitive
-/*		143. L'organisation effectue un service très limité, avec très peu de trains et des temps d’attente pouvant atteindre plusieurs heures entre deux trains.
+/*		143. L'organisation effectue un service très limité, avec très peu de trains et des temps d'attente pouvant atteindre plusieurs heures entre deux trains.
 
 /* De
 767;40;^FRAndOrBut+^FRPas+^FRAdvNeg+^SBegin|FRDe|FRInf|^FRSConj+^SEnd;*|FRSConj+FRSConj2|FRInf|*;refining r33
@@ -494,7 +832,7 @@
 112;40;FRDe|FRDemonstr;FRDe|FRDefart;'de' with demonstrative pronoun
 /*		112. La prévention de ces pathologies liées au travail.
 146;40;FRDe|FRSubjpron2;FRPrep|FRSubjpron2;'de' with 'cela', 'quelqu un' etc.
-/*		146. Les positions subjectives de celui qui s’y risque.
+/*		146. Les positions subjectives de celui qui s'y risque.
 170;40;FRDe|FRObjpron:FRDefart|FRInf;FRSConj|FRObjpron|FRInf;'de' with pronoun and infinitive
 /*		170. Prière de vous mettre en rapport avec le directeur.
 58;40;FRDe|FRRefl;FRSConj|FRRefl;'de se', very low-frequent, since se+Inf is joined into 1 lexrep already
@@ -503,8 +841,12 @@
 /*		156. C'est au sein des comités de suive que se manifeste le plus l'intéraction des partenaires.
 63;40;FRDe|FRNe:FRAdvNeg;FRSConj|FRNe;'de' with negation (and infinitive)
 /*		63. Il faut leur donner les moyens de ne pas reprendre.
-121;40;FRDe|FRIndefart:FRAucun:FRMod:FRQuantpron;FRPrep|*;'d un(e)' between concepts
-/*		121. Elle a joué un rôle dans la définition d'une nouvelle gastronomie. On ne peut le dire d'aucun homme, d'aucune situation, d'aucun discours. La méthode consiste à préserver la sensibilité de chaque élève. Cette défaite est dans la mémoire de tous.
+885;40;SBegin|FRDe|FRMod:FRQuantpron;*|FRAdvNR|*;
+/*		885. De nombreuses pathologies trouvent leur origine dans le travail.
+955;40;FRDe|FRMod+^FRTres|typeConcept;FRPrep|*|*;'d(e)' as preposition before adjective plus noun
+/*		955. La méthode consiste à préserver la sensibilité de chaque élève. Not_in: On parle de magistrats assis de très haut niveau.
+121;40;FRDe|FRIndefart:FRAucun:FRQuantpron:FRMonth;FRPrep|*;'d(e)' as preposition between concepts
+/*		121. Elle a joué un rôle dans la définition d'une nouvelle gastronomie. On ne peut le dire d'aucun homme, d'aucune situation, d'aucun discours. Cette défaite est dans la mémoire de tous. Pour le second tour il a vu l'écart se réduire au premier semestre, notamment lors des municipales de mars.
 575;40;typeConcept|FRDe|FRIndefpron;*|FRPrep|FRIndefpron;
 /*		575. D'autres mesures visent à faciliter l'abandon volontaire de la culture du tabac au profit d'autres cultures.
 600;40;FRQuantpron|FRDe;FRQuantpron|FRPrep;
@@ -514,11 +856,13 @@
 589;40;FREn|FRDefart:FREn:FRRefl|FRPPart;FRSConj|*|FRSRel;
 /*		589. Ces symptômes peuvent évoquer des troubles fonctionnels intestinaux en s'intégrant parfaitement dans les critères du syndrom du colon irritable.
 117;40;FRDefart:FRIndefart:FRAucun:FRPoss+^FRObjpron|FRPPart;*|FRCon;after article or FRAucun
-/*		117. Un montant de 1 428 235 euros. La mise en production échelonnée d'un nouveau système de paie dans le courant de l'année 2003. Aucun représentant de l'organisation a été invité. Appelez-nous et nous vous enverrons notre représentant qui vous fera part de nos conditions avantageuses.
+/*		117. Un montant de 1 428 235 euros. Aucun représentant de l'organisation a été invité. Appelez-nous et nous vous enverrons notre représentant qui vous fera part de nos conditions avantageuses.
 178;40;FREn|FRDatpron:FRObjpron|FRPPart;FRPrep|FRNonconcept|FRSRel;en lui/me/vous etc., has to come before r40
 /*		178. Le fils annonce la décision à son père, qui proteste en vain en lui rappelant les sacrifiees qu'il a faits à son profit. Elle sourit en me disant cela.
 40;40;FRPPart|FRDefart:FRIndefart:FRAucun:FRPoss:FRMod:FRQuantpron:FRSubjpron2:FRAdv;FRSRel|*;
-/*		40. Les declarations produites par l'instance de certification devraient toujours etre fondêes sur des depenses correspondantes justifiant la declaration. Une publication récente a confirmé la difficulté du diagnostic en trouvant une prévalence de 5 % de la maladie coeliaque chez l’adulte qui consulte en gastro-entérologie pour des troubles fonctionnels intestinaux. Lorsque je le questionnai à ce sujet bien plus tard il me répondit qu'il ne savait pas non plus pourquoi, ne se rappelant aucune dispute entre nous. Ils pourraient s'approvisionner en augmentant leurs importations. Cet accord avec l'entreprise démontre le pouvoir durable de sa musique, dépassant toutes les références précédentes. De plus, les terres continentales du Nord Canadien sont bordées au nord d'un grand archipel, l'archipel arctique canadien comprenant certaines des plus grandes îles du monde. Il finit son discours en avertissant ceux pour qui il l'écrivait. La reconstruction se fait en respectant toujours les grands principes de la rhinopoïèse.
+/*		40. Les declarations produites par l'instance de certification devraient toujours etre fondêes sur des depenses correspondantes justifiant la declaration. Une publication récente a confirmé la difficulté du diagnostic en trouvant une prévalence de 5 % de la maladie coeliaque chez l'adulte qui consulte en gastro-entérologie pour des troubles fonctionnels intestinaux. Lorsque je le questionnai à ce sujet bien plus tard il me répondit qu'il ne savait pas non plus pourquoi, ne se rappelant aucune dispute entre nous. Ils pourraient s'approvisionner en augmentant leurs importations. Cet accord avec l'entreprise démontre le pouvoir durable de sa musique, dépassant toutes les références précédentes. De plus, les terres continentales du Nord Canadien sont bordées au nord d'un grand archipel, l'archipel arctique canadien comprenant certaines des plus grandes îles du monde. Il finit son discours en avertissant ceux pour qui il l'écrivait. La reconstruction se fait en respectant toujours les grands principes de la rhinopoïèse.
+965;40;FRPPart|FRAdvTime:FRBegin;FRSRel|*;
+/*		965. Les cycles de 20mn incarnant le jour ou la nuit sont très bien fait. L’intestin humain abrite ainsi de 10 à 100 milliards de bactéries comprenant plus de 2000 espèces.
 191;40;FRComma|FRPPartCon;FRComma|FRCon;e.g. commandant, dirigeant, tenant, has to come after r157
 /*		191. Le salariat est devenu la principale forme d'emploi, représentant 89,5 % des emplois.
 189;40;FRComma|FRPPart;FRComma|FRSRel;after comma
@@ -526,7 +870,7 @@
 65;40;FREn|FRPPart;FRPrep|FRSRel;
 /*		65. Réaliser régulièrement des contrôles de la qualité des informations produites en vérifiant que les informations sont présentes dans les dossiers des patients.
 66;40;FRRefl|FRPPart;FRSRel|Join;
-/*		66. Le bruit de pas, de portes s’ouvrant et se refermant ou de voix, sont parfois des manifestations effrayantes de la paralysie du sommeil.
+/*		66. Le bruit de pas, de portes s'ouvrant et se refermant ou de voix, sont parfois des manifestations effrayantes de la paralysie du sommeil.
 118;40;FRPrep|FRPPart;FRPrep|FRCon;
 /*		118. Les taux par habitant sont très élévés.
 116;40;FRPPart|FRDes;FRSRel|FRDes;
@@ -534,17 +878,17 @@
 
 /* MISCELLANEOUS
 70;40;FRPrep|FRAvoir|FRSRel;FRPrep|FRSRel|FRSRel;'avoir' between preposition and past participle (labeled as Rel by now)
-/*		70. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu' avant le début de l' été le site devrait être entièrement dégagé.
+/*		70. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé.
 746;40;typeRelation|FRPrep|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
-/*		746. Le rôle délétère de la sieste dans un cas et salvateur dans l’autre y est curieusement occulté, comme s’il s’agissait simplement de mieux s’endormir pour ne pas risquer d’être somnolent.
+/*		746. Le rôle délétère de la sieste dans un cas et salvateur dans l'autre y est curieusement occulté, comme s'il s'agissait simplement de mieux s'endormir pour ne pas risquer d'être somnolent.
 747;40;^typeRelation+^SBegin|FRPrep+^"à"|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
 /*		747. C'est dans ces zones d'ombre que doivent être dissimulées les cicatrices pour ne pas être visibles. WRONG: Le g n'a aucun son devant n.
 44;40;FRCon|FRDefart:FRIndefart:FRAucun:FRPoss;FREnd|*;detect concept boundaries
-/*		44. Dans les trois principaux pays producteurs, un comportement anticoncurrentiel, matérialisé par des ententes sur les prix, a en outre mis en péril la valeur de la production. Le marché a été réformé en profondeur une première fois en 1992. L'audit n'a mis en lumière aucune erreur significative. Le Luxembourg a trouvé pendant les dernières décennies sa place dans l'industrie audiovisuelle.
+/*		44. Dans les trois principaux pays producteurs, un comportement anticoncurrentiel, matérialisé par des ententes sur les prix, a en outre mis en péril la valeur de la production. Le marché a été réformé en profondeur une première fois en 1992. L'audit n'a mis en lumière aucune erreur significative.
 113;40;FRDe|FRDefart;FRDe|FRNonconcept;must come after r117
 /*		113. Elle est née chez des cuisiniers formés par les grands chefs de la Haute cuisine.
 122;40;FRDe|FRPoss;FRPrep|FRPoss;
-/*		122. Afin d’élucider le vague à l’âme de leurs 102 000 salariés, ils ont décidé de leur envoyer un questionnaire.
+/*		122. Afin délucider le vague à lâme de leurs 102 000 salariés, ils ont décidé de leur envoyer un questionnaire.
 
 /* INFINITIVES
 142;40;FRInf|FRDe;FRInf|FRPrep;
@@ -565,18 +909,24 @@
 /*		177. Ce garçon est amoureux d'elle.
 
 /* Un(e) AS A NUMERAL (CONCEPT)
+1064;40;FRIndefart|"de"|FRPoss;FRBegin|Join|Join;
+/*		1064. L’an dernier, lors d’un tournoi pourri par la pluie, il avait mis jusqu’à trois jours pour finir un de ses matchs.
 342;40;FRIndefart|FRAndOrBut:FRPrep:FRSRel:FRComma:SEnd;FRCon|*;
-/*		342. Il a visité un ou deux cafés. Un à un, les foyers d' incendie souterrains qui couvent sous les décombres et continuent d' enfumer l' athmosphère sont maîtrisés. Il y a trois tableaux dans la collection de cet amateur, dont un vient du Cabinet M. J'en ai un. J'en ai un, mon frère en a deux.
+/*		342. Il a visité un ou deux cafés. Un à un, les foyers d'incendie souterrains qui couvent sous les décombres et continuent d'enfumer l'athmosphère sont maîtrisés. Il y a trois tableaux dans la collection de cet amateur, dont un vient du Cabinet M. J'en ai un. J'en ai un, mon frère en a deux.
 343;40;FRIndefart|FRPas;FRCon|FRCon;
 /*		343. Pour l'instant, nous concentrons notre attention sur les méthodes à un pas.
-344;40;FRIndefart|FRDes;FRCon|FRCon;
+344;40;FRIndefart|FRDes;FRBegin|FRCon;
 /*		344. Sa création est une des tâches du designer.
 
 /* MISCELLANEOUS
 376;40;FRPrep;+FRSRel;
 /*		376. On force ces deux organisations de poursuivre leurs activités sous un autre nom.
-50;40;FRPartMod;FRCon;default to implicitly delete conflicting labels
+1080;40;FRSRel|"ou":"et"|FRPartMod|^FRMod:FRCon;*|*|FRSRel|*;
+/*		1080. En aucun cas je n'ai apporté ou pris quoi que ce soit, ajoute le témoin avant que la question ne lui soit posée.
+50;40;FRPartMod;FRMod;default to implicitly delete conflicting labels
 /*		50. Ce petit club à l'atmosphère feutré.
+1065;40;FRPrep|FRBegin;*|FRCon;
+/*		1065. Le Parquet a annoncé l’ouverture d’une enquête sur la sécurité aérienne après l’accident d’un de ses avions dimanche.
 
 /* plus AS A RELATION
 235;40;FRPlus|FRIndefart:FRDefart:FRSubjpron;FRSRel|*;plus as a (mathematical) relation or as a conjunction
@@ -584,22 +934,22 @@
 
 /* ADVERBS
 73;40;FRCon:"tout"|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
-/*		73. Ce travail d’intro­spection en des temps aussi difficiles ne va pas sans poser de problèmes. Voici la liste des utilisateurs actuellement en ligne.
-72;40;FRMod|FRAdv|FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
+/*		73. Ce travail d'intro­spection en des temps aussi difficiles ne va pas sans poser de problèmes. Voici la liste des utilisateurs actuellement en ligne.
+72;40;FRMod|FRAdv|FRMod:FRCon;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
 /*		72. Le vin et le procédé de vinification les plus anciennement attestés.
 74;40;FRCon|FRAdv|FRMod;FRCon|FRCon|FRCon;don't split clusters with a modifying adverb
 /*		74. Le cheveu gris et l'allure toujours un peu raide.
 75;40;FRSRel|FRAdv|FRSRel;^FRSRel|^FRAdv|^FRSRel;adverb between relations becomes relation
 /*		75. Il vit ici avec son épouse et les quatre enfants qui lui restent.
-715;40;FRCon|FRAdv|FRAdvCR|FRCon;FRCon|FRCon|FRCon|FRCon;adverb between concepts becomes concept
-/*		715. L' accès aux traitements reste très limité et les traitements encore trop chers pour la grande majorité des populations.
+715;40;FRCon|FRAdv|FRAdvCR|FRCon:FRMod;FRCon|FRCon|FRCon|FRCon;adverb between concepts becomes concept
+/*		715. L'accès aux traitements reste très limité et les traitements encore trop chers pour la grande majorité des populations. Le second tour avec un score toutefois sensiblement inférieur à celui de 2004.
 324;40;FRCon|FRAdv|FRPart:FRPartConMod;FRCon|FRCon|FRCon;adverb between concept and past participle becomes concept
 /*		324. Ou elle peut être mise en acte de façon plus ou moins élaborée et maladroite.
 325;40;FRAussi|FRCon:FRSRelMod|FRQue;FRSRel|FRCon|FRQue;'aussi' is not nonrelevant in aussi X que
 /*		325. Pour qui est dépendant, fumer est aussi indispensable que respirer. Sa guérison est fréquemment aussi brusque que son invasion.
 613;40;FRComma|"même";FRComma|FRSConj;
 /*		613. Il est très violent, même dangereux.
-303;40;FRComma|FRAdvCR|FRCon;FRComma|FRCon|FRCon;relevant adverb becomes part of concept between comma and concept
+303;40;FRComma|FRAdvCR|FRMod:FRCon;FRComma|FRCon|FRCon;relevant adverb becomes part of concept between comma and concept
 /*		303. Dès son arrivée à Lourdes, il avait tenu à parcourir, visiblement ému, le chemin du pèlerin.
 306;40;FRComma|FRAdvCR|FRSRel;FRComma|^FRAdvCR|FRSRel;relevant adverb becomes part of relation between comma and relation
 /*		306. Les tumeurs glomiques sont rares et se rencontrent surtout aux ongles des mains, plutôt chez des femmes dans leur cinquième décennie.
@@ -613,9 +963,11 @@
 /*		603. Le renforcement des règles va donc de soi.
 
 /* DEFAULTS ETC.
+1082;40;FRComma|FRPartConMod|FRPrep:FRDe:FRDes;*|FRSRel|*;
+/*		1082. Ancien général communiste, connu pour la versatilité de ses fidélités éphémères. Un décret administratif définit le terme «fromage» comme étant réservé au «produit fermenté ou non, obtenu par coagulation du lait, de la crème ou de leur mélange, suivi d’égouttage».
 351;40;FRPartConMod;FRCon;default
 /*		351. Je t'aime, chéri!
-648;40;FRNum+FRCon;FRNum;remove Con-label
+648;40;FRNum+FRCon;-FRCon;remove Con-label
 /*		648. L'article 462 du C.pén. doit être appliqué.
 352;40;FRIndefart;+FRNonconcept;don't remove Indefart label: needed later
 /*		352. Elle lit un livre.
@@ -623,17 +975,19 @@
 /*		105. Les citoyens bénéficient de cette nouvelle règle.
 192;40;FRDe|FRNonconcept;FRSRel|FRNonconcept;
 /*		192. C'était le début de ce voyage.
-353;40;FRDe|FRAdvCR;FRPrep|^FRAdvCR;
-/*		353. Ces fameux isotopes ont une durée de vie d'à peine quelques jours.
+969;40;FRPunctuation:FRComma|FRNonconcept|*FRCon:FRMod;*|FRNonconcept|*;
+/*		969. Le promoteur a déposé, en novembre, un rapport d'ingénieurs démontrant selon lui que la forêt est malade.
+353;40;FRDe|FRAdvCR;FRPrep|*;
+/*		353. Au regard de tels résultats les médecins et en particulier les médecins libéraux payés à l’acte seraient coupables de trop et de mal prescrire.
 193;40;FRDe|FRSConj:FRSRelconj;FRSRel|FRSRel;
 /*		193. C'était un réel bon exemple de ce que la coopération internationale devrait être.
-480;40;^FRPlus+^SBegin|FRDe|FRNum;*|FRPrep|FRMod;
-/*		480. Ce père de quatre enfants a eu un accident.
+480;40;^FRPlus+^SBegin|FRDe|FRNum+^FROrdnum;*|FRPrep|*;
+/*		480. Nous vous proposons, toute cette semaine, le début de six romans attendus de cette rentrée. Not_in: Contrairement au procès de première instance, des témoins sont venus déposer à charge lors de l'audience devant la cour d'appel.
 354;40;FRComma|FRDe;FRComma|FRSRel;
 /*		354. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
 377;40;FRPrep;FRPrep;to implicitly delete conflicting labels
 /*		377. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
-685;40;FRDe|FRPrep;FRPrep|FRPrep;
+685;40;FRDe|FRPrep;FRPrep|*;
 /*		685. Le gel de jusqu'à 30 millions de dollars taïwanais.
 111;40;FRDemonstr;FRDefart;default
 /*		111. Ce confort a disparu.
@@ -653,49 +1007,47 @@
 /*		577. Et de plus en plus d'autres services sont mis à la disposition. Les huit autres provinces sont habitées par des fortes majorités anglophones.
 358;40;FRDe|FRPunctuation;FRSRel|FRPunctuation;
 /*		358. Ceci est une pipe de (René) Magritte.
-500;40;SBegin|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;
-/*		500. Des paiements intermédiaires et finals ont également été autorisés.
-501;40;SBegin|FRDes|FRNum;*|FRPrep|*;
+501;40;SBegin|FRDes|FRNum+^FRPlural;*|FRPrep|*;
 /*		501. Des cinq candidats finalistes, il est le seul qui n'a pas de voiture.
-505;40;^FRNum+^SBegin|FRDes|FRNum;*|FRPrep|*;
-/*		505. Les rapports corrigés des seize dernières années.
-504;40;FRPunctuation|FRDes|^FRNum+^SEnd;*|FRNonconcept|*;
+500;40;SBegin|FRDes|^SEnd;*|FRNonconcept|*;
+/*		500. Des paiements intermédiaires et finals ont également été autorisés. Des millions d'Européens doivent acheter leur pain, faire des courses au supermarché ou acheter quelques fruits au marché, mais avec un nouveau venu, l'euro.
+505;40;^FRNum+^SBegin|FRDes|FRNum+^FRPlural;*|FRPrep|*;
+/*		505. Reste à présent à savoir qui va bénéficier des 400 millions. Not_in: Voilà une décision qui fait bon effet, alors que des millions de Français ne trouvent pas de travail.
+504;40;FRPunctuation|FRDes|^SEnd;*|FRNonconcept|*;
 /*		504. Actuellement, des équipes mixtes fouillent celle-ci afin de détecter un éventuel objet suspect.
-502;40;FRPrep|FRDes;FRPrep|FRNonconcept;
+502;40;FRPrep|FRDes;*|FRNonconcept;
 /*		502. Ils s'attendent à des grands changements.
-608;40;FRQue|FRDes;FRQue|FRNonconcept;
+608;40;FRQue|FRDes;*|FRNonconcept;
 /*		608. Ils disent que des grands changements sont à expecter.
 508;40;^FRPrep|FRSRelconj|FRDes;*|*|FRPrep;
 /*		508. Ils ont décidé lesquels des grands changements seront réalisés.
 506;40;FRAdv|FRDes;*|FRNonconcept;
 /*		506. Ils attendent donc des grands changements.
 692;40;typeRelation|FRDes;*|FRNonconcept;
-/*		692. L'hôpital produit des soins, pas des ordinateurs ! Ils attendent des grands changements. la notion de néoténie, selon laquelle des caractères morphologiques se prolongent à l'état adulte.
-576;40;typeConcept|FRDes|FRIndefpron;*|FRPrep|FRIndefpron;
+/*		692. L'hôpital produit des soins, pas des ordinateurs ! Ils attendent des grands changements. la notion de néoténie, selon laquelle des caractères morphologiques se prolongent à l'état adulte.
+576;40;typeConcept|FRDes|FRIndefpron;*|FRPrep|*;
 /*		576. Puis ce sera le tour des autres romans nommés ci-dessus.
-510;40;SBegin|FRDe|FRCapitalInitial;*|FRPrep|^FRCapitalInitial;
+510;40;SBegin|FRDe|FRCapitalInitial;*|FRPrep|*;
 /*		510. De Paris à Londres en un peu plus de deux heures.
-512;40;SBegin|FRDe|FRNum;*|FRPrep|^FRNum;
-/*		512. De 1850 à 1860, la maison était un auberge.
 511;40;SBegin|FRDe;*|FRAdvNR;
-/*		511. De nombreux groups ont visité le musée.
+/*		511. De nouveaux médicaments vont arriver sur le marché.
 716;40;^typeConcept+^FRPas+^FRBegin+^SBegin|FRDe|typeConcept;*|FRPrep|*;
-/*		716. Il s’agit parfois de véritables actes manqués, quand on n’invoque pas, de façon peu convaincante, les difficultés économiques.
+/*		716. Il s'agit parfois de véritables actes manqués, quand on n'invoque pas, de façon peu convaincante, les difficultés économiques.
 717;40;FRDe|"autres";FRAutre|+Join;
 /*		717. Celui-ci a précisé que d'autres procédures juridiques étaient encore en cours.
-732;40;FRPrep|"lequel":"laquelle":"lesquels":"lesquelles";FRSConj+FRSConj2|+Join;
-/*		732. L'amélioration des traitements doit notamment aller de pair avec un renforcement de la prévention, à laquelle elle peut donner selon les spécialistes une motivation supplémentaire.
+732;40;FRPrep|"lequel":"laquelle":"lesquels":"lesquelles";FRSConj+FRSConj2-FRPrepTimeSpan|+Join;
+/*		732. L'amélioration des traitements doit notamment aller de pair avec un renforcement de la prévention, à laquelle elle peut donner selon les spécialistes une motivation supplémentaire. Dans son projet, il avance une période de 2 ans pendant laquelle les écoles pourraient opter pour l’examen unique en lieu et place de leurs propres tests.
+970;40;FRSRelMod;FRMod;
+/*		970. Cette disposition n'est pas conforme à la reglementation communautaire.
 
 /* RULES WITH REGARD TO NEGATION ATTRIBUTES
 /* Assign negation attribute to labels
-426;40;SBegin:FRPunctuation|FRJamais;*|+FRNegation;
+426;40;SBegin:FRPunctuation|FRJamais;*|FRPas+FRNegation;
 /*		426. Ainsi, la consonne s intervocalique sera toujours prononcé [s], jamais [z]. Jamais il ne les provoqua à des actes impuissants de fureur.
 428;40;FRJamais;FRAdvTemp+FRTime-FRPas-FRAdvNeg;remove label Pas
-/*		428. Jamais il ne les provoqua à des actes impuissants de fureur. Il s'agirait du plus fort séisme qu'on a jamais ressenti.
+/*		428. Il s'agirait du plus fort séisme qu'on a jamais ressenti.
 690;40;FRPas|FRDe;FRBegin+FRNegation|*;
 /*		690. Au supermarché, pas de problème puisqu'il paie en carte bancaire.
-693;40;FRPas|FRPlus;FRCon+FRNegation|*;low-frequent
-/*		693. Une population fatiguée de devoir passer plusieurs heures dans une chaleur torride devant des agences bancaires et des distributeurs automatiques pour récupérer le peu d'argent auquel le gouvernement l'autorise, pas plus de 1.000 pesos par mois.
 696;40;FRAdvCR|FRPas;*|FRAdvNeg;
 /*		696. Certainement pas.
 736;40;FRIndefart|FRCon|FRPas|FRAdv;*|FRCon|FRCon+FRNegation|*;
@@ -711,7 +1063,7 @@
 699;40;FRPas;FRCon;remaining cases: 'pas' as noun
 /*		699. Cependant, il ne s'agit ni plus ni moins que du premier pas sur un parcours où, selon moi, nous devons atteindre trois objectifs.
 422;40;FRAucun;+FRNegation;
-/*		422. Les nombreux citoyens marginalisés ne bénéficient d’aucune formation.
+/*		422. Les nombreux citoyens marginalisés ne bénéficient d'aucune formation.
 706;40;FRRien|FRDe|FRCon:FRPlus;FRCon+FRNegWord|*|*;
 /*		706. Ces catastrophes répétitives n'ont rien de naturel. Rien de plus facile.
 434;40;FRRien;FRSubjpron+FRObjpron+FRNegWord;
@@ -723,24 +1075,10 @@
 /* =======
 /* Give adverbs their label type and make sure they keep the label Adv for later phases.
 /* (FRAdv and FRAdvCR are not defined in the last phase -> no risk for conflicting labels.)
-634;50;FRDe|FRAdvTime;FRPrep|FRAdvTime+FRAdv;
-/*		634. Le retour du colbertisme en France ne date pas d’hier.
-677;50;"ce"|FRDay|^typeConcept;FRAdvTime|+Join|*;
-/*		677. Il doit témoigner ce mercredi devant le Comité des services financiers. Suite des auditions des témoins ce mercredi après-midi.
-833;50;^FRDaypart+^SBegin|FRDe|FRDay;*|FRPrep|*;
-/*		833. La Bourse a terminé la séance de mercredi en forte hausse.
-834;50;FRDaypart|FRDe|FRDay;FRCon+FRDay|Join|Join;special case for r833
-/*		834. La Bourse a terminé la journée de mercredi en forte hausse.
-679;50;"cette"|"semaine":"année"|^typeConcept;FRAdvTime|+Join|*;
-/*		679. Cette technologie a été  testée cette année durant un match de hockey. Le gouvernement a promis une réponse pour cette semaine.
-672;50;FRCon|FRAdvTime|FRCon;*|FRCon|*;make attribute part of concept
-/*		672. Grâce aux technologies aujourd'hui disponibles, les chercheurs peuvent analyser ces variations infimes de la lumière.
-681;50;^FRMod+^SBegin|FRDay;*|FRBegin;
-/*		681. Les débats en séance plénière et en groupes de travail doivent débuter lundi.
+634;50;FRDe:FRDes|FRAdvTime;FRPrep|*;
+/*		634. Le retour du colbertisme en France ne date pas d'hier. Les rapports corrigés des seize dernières années.
 620;50;FRCon|FRAdvTemp|FRCon;*|FRCon|*;make attribute part of concept
 /*		620. Ces aberrations sont responsables d'images rétiniennes de qualité souvent médiocre.
-619;50;FRAdvTemp;FRAdv+FRAdvTemp+FRTime;assign attribute
-/*		619. Le diagnostic est souvent retardé.
 621;50;FRCon|FRAdvLoc|FRCon;^FRCon|FRCon|^FRCon;make attribute part of concept
 /*		621. Cette pratique a des impacts localement significatifs sur l'aménagement du territoire et des espaces naturels publics.
 622;50;FRAdvLoc;FRAdv+FRAdvLoc;delete conflicting labels
@@ -753,12 +1091,12 @@
 /*		646. C'est un des virus par e-mails les plus incroyablement rapides.
 647;50;FRAdvManner+FRAdv|FRCon+FRCapitalInitial;FRAdvManner|*;don't add Adv here to avoid interference with r644
 /*		647. Élément qui liait profondément Chopin à la France et le changeait de la mentalité viennoise.
-644;50;FRAdvManner+FRAdv|FRCon:FRPart:FREnd:FRSRelMod;FRMod|*;
+644;50;FRAdvManner+FRAdv|FRCon:FRPart:FREnd:FRMod;FRMod|*;
 /*		644. Il était physiquement totalement passif.
 645;50;FRAdvManner+FRAdv;FRAdv+FRAdvManner;assure correct labels
 /*		645. Les tests portant sur les contrôles clés opérationnels ont révélé que certains d'entre eux ont mal fonctionné.
-676;50;FRAdvDegree|typeConcept+^FRDe;FRCon|*;
-/*		676. On s'aperçoit qu'il y a un problème mais il est parfois trop tard.
+676;50;FRAdvDegree|typeConcept+^FRDe:FRNonconcept;FRCon|*;
+/*		676. Il est vrai que cette situation n'est pas entièrement satisfaisante et la surveillance assurée par la hiérarchie est censée limiter les risques.
 
 /* PATHRELEVANT ENTITIES
 /* =====================
@@ -766,7 +1104,7 @@
 614;50;"même"+FRSConj;FRSConj;(Conj as a result of r613)
 /*		614. Il est très violent, même dangereux.
 616;50;"même"+FRMod;FRAutre;
-/*		616. Il est important de savoir bien distinguer les différences qui opposent la plainte de somnolence et celle de fatigue car la conduite à tenir n’est pas de même nature.
+/*		616. Il est important de savoir bien distinguer les différences qui opposent la plainte de somnolence et celle de fatigue car la conduite à tenir n'est pas de même nature.
 615;50;SBegin|"même":"mêmes"|FRCon;*|FRAutre|FRCon;
 /*		615. Même constat dans le 1er siège du 2ème arrondissement.
 617;50;"mêmes"|FRCon;FRAutre|FRCon;overlap with r615 and with lexreps
@@ -778,21 +1116,23 @@
 570;50;FRIndefpron|typeRelation;FRSubjpron|*;
 /*		570. Un accord dit "swap" permet aux banques centrales de se prêter réciproquement des liquidités à court terme, lorsque l'une ou l'autre en a besoin pour stabiliser le système financier de son pays.
 580;50;typeRelation|FRIndefpron|SEnd;*|FRSubjpron|*;
-/*		580. Rien, dans ce que nous avons appris dans l' audition des commissaires, n' est susceptible de justifier, à cette étape, un veto sur tel ou tel.
+/*		580. Rien, dans ce que nous avons appris dans l'audition des commissaires, n'est susceptible de justifier, à cette étape, un veto sur tel ou tel.
 572;50;FRIndefpron|FRPunctuation;FRSubjpron|FRPunctuation;
 /*		572. Que ce soit l'un ou l'autre, le dégel des relations entre ces parties est certain.
 595;50;FRCon|"chacun":"chacune";^FRCon|Join;
-/*		595. Certains spécimens pouvaient atteindre un poids d'environ cent livres chacun. 
+/*		595. Certains spécimens pouvaient atteindre un poids d'environ cent livres chacun.
 574;50;FRQuantpron:FRDemonstr|typeRelation;FRSubjpron|*;
 /*		574. Tout est parti d'un informaticien de la Banque.
 581;50;typeRelation|FRQuantpron:FRDemonstr|SEnd;*|FRSubjpron|*;
-/*		581. La présence d' une force internationale de paix  devrait être l' une des premières préoccupations de ce nouveau régime dont la population attend tout.
+/*		581. La présence d'une force internationale de paix devrait être l'une des premières préoccupations de ce nouveau régime dont la population attend tout.
 583;50;typeRelation|FRQuantpron:FRDemonstr|FRPunctuation;*|FRObjpron|*;
 /*		583. Je ne sais pas si tout cet intérêt est dû au fait que ce syndrome se répand de plus en plus ou au fait que plus de gens veulent discuter de quelque chose qui, aux yeux de certains, peut ressembler à un trouble mental.
 594;50;SBegin|FRQuantpron:FRDemonstr|FRPunctuation;*|FRSubjpron|*;
 /*		594. Certains, comme le général, ont déjà critiqué la composition du pouvoir.
 585;50;FRQuantpron|FRNonconcept;FRSubjpron|*;
 /*		585. Nous portons tous une part de responsabilité.
+990;50;typeConcept+^"seul":"seule":"seuls":"seules"|FRQuantpron+^FRTout;*|FRBegin;
+/*		990. Les membres ont interprété de facon divergente certains éléments de la réglementation communautaire. Not_in: L'objectif serait de contrecarrer les plans, qui envisagent une solution stratégique toute autre. Not_in: Seules quelques turbulences ou trous d’air peuvent causer quelques perturbations.
 587;50;typePathRelevant|FRDes;*|FRNonconcept;
 /*		587. Elles constituent toutes des entorses au principe de l'universalité du budget.
 590;50;"quelque chose"|"de"|typeConcept;FRMod|Join|*;
@@ -801,16 +1141,16 @@
 /*		823. Il ne faut pas l'ignorer ou l'écarter comme un simple jeu.
 665;50;FRNonconcept|typeRelation;FRSubjpron+FRObjpron-FRIndefart|*;
 /*		665. C'était un été complètement fou.
-601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;very low frequent, mostly covered by other rules 
+601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;very low frequent, mostly covered by other rules
 /*		601. La répétition a banalisé les choses pour nous de telle façon que nous ne regardons plus ce que nous sommes habitués à voir.
 
 /* DETECT ENUMERATIONS
 /* ===================
 766;60;"de"+^FRList|*FRCon|FRAndOr|"de"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		766. C'est un réseau professionnel indépendant constitué de managers et de consultants en management expérimentés, aptes à proposer des solutions dans tous les principaux domaines de fonction des entreprises et organisations.
-396;60;FRCon|FRDe|FRCon+^"non";^FRCon|+Join|+Join;merge concepts containing de, keep negation attribute
-/*		396. Lieutenant de vaisseau est un grade dans la marine.
-768;60;FRIndefart|*FRCon|FRComma|FRIndefart|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+396;60;FRCon+^FRTimeconcept:FRAdvTime|FRDe|FRCon+^"non":FRTimeconcept:FRAdvTime;^FRCon|+Join|+Join;merge concepts containing de, keep negation attribute
+/*		396. Lieutenant de vaisseau est un grade dans la marine. Not_in: L'accord a mis fin à sept mois d'affrontements. Not_in: Le Cabinet du Budget prépare le contrôle de juillet.
+768;60;FRNonconcept|*FRCon|FRComma|FRNonconcept|*FRCon|FRAndOr|FRNonconcept|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		768. Il y a là une école, une église et une mairie flanquée de la classique boîte aux lettres française de couleur jaune.
 769;60;FRDefart|*FRCon|FRComma|FRDefart|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		769. Les plus grands producteurs de l'UE sont par ordre d'importance l'Italie, la Grèce et l'Espagne, qui représentent ensemble 87 % de la production totale.
@@ -832,9 +1172,116 @@
 /*		772. Il s'agit bien, ici, de la même chose car le coucher va lui procurer la double satisfaction de se reposer et de s'endormir.
 795;60;"de"|FRObjpron|FRSRel|FRAndOr|"de"|FRObjpron|FRSRel;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		795. La très haute sécurité liée au port de lentilles rigides permet de les adapter et de les prescrire chez des enfants, même fort jeunes, qui souhaitent, pour des raisons fonctionnelles ou esthétiques, remplacer leurs lunettes par des lentilles.
+937;60;FRNum|FRComma|FRNum|FRComma|FRNum|FRComma|FRNum|FRAndOr|FRNum;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+/*		937. La commission n'a pas encore publie les resultats de ses examens de l'additionnalite pour les objectifs 1, 2, 3, 4 et 5.
+938;60;FRNum|FRComma|FRNum|FRComma|FRNum|FRAndOr|FRNum;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
+/*		938. La commission n'a pas encore publie les resultats de ses examens de l'additionnalite pour les objectifs 1, 2, 3 et 4.
+939;60;FRNum|FRComma|FRNum|FRAndOr|FRNum;+FRList|+FRList|+FRList|+FRList|+FRList;
+/*		939. La commission n'a pas encore publie les resultats de ses examens de l'additionnalite pour les objectifs 1, 2 et 3.
+940;60;FRNum|FRAndOr|FRNum;+FRList|+FRList|+FRList;
+/*		940. La commission n'a pas encore publie les resultats de ses examens de l'additionnalite pour les objectifs 1 et 2.
 
-/* NEGATION
-/* ========
+
+/* PHASE 64: TIME ATTRIBUTE EXPANSION
+/* ==================================
+/* expand to preposition and include different patterns of time indications
+976;64;FRPrepTime:FRAllformsDe|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|FRUntil:FRAndOr|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|+FRTimeStop;pattern with and, or, until 
+/*		976. La labyrinthite est une infection ou une inflammation de l'oreille interne qui provoque de graves vertiges durant 1 à 2 jours. Le ministre a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées. Les volumes de production sont augmentés, afin de satisfaire les besoins de la population européenne des années 50 aux années 1970.
+1001;64;FRNum+FRTime|FRComma|FRNum+FRTime|FRUntil:FRAndOr|.FRNonconcept|FRAdvTime|^FRAnyLabel;+FRTimeBegin|*|*|*|*|*|+FRTimeStop;pattern with number plus comma plus and, or, until
+/*		1001. Les paysans — dont une part croissante est assujettie à un seigneur par l'intermédiaire du servage — bénéficient de l'essor économique des XIe, XIIe et XIIIe siècles.
+988;64;^FRTimeBegin|FRNum+FRTime|FRUntil:FRAndOr|.FRNonconcept|FRAdvTime|^FRAnyLabel:FRTimeStop;*|+FRTimeBegin|*|*|*|+FRTimeStop;pattern with number plus and, or, until
+/*		988. Mais, en cas de fatigue importante, la pause détente peut ne pas suffire, pour vraiment récupérer il faut alors essayer de dormir 10 à 15 minutes.
+975;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|FRAndOr|.FRPrepTime:FRNonconcept|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|+FRTimeStop;pattern with and, or, possibly including article and/or preposition
+/*		975. Des élections doivent se dérouler en février ou en mars. Le mouvement ne concernait initialement que les gardes de nuit mais il s'est étendu depuis le 11 décembre aux week-ends et aux jours fériés, provoquant un afflux d'appels vers le 15, le numéro d'urgence.
+1002;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept+FRTime|FRComma|typeConcept+FRTime|FRComma:FRAndOr|typeConcept+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;pattern with comma plus and/or
+/*		1002. Suivant le cycle des saisons, le printemps correspond dans l'usage courant aux mois de mars, avril et mai (dans l'hémisphère nord d'où il est issu) et aux mois de septembre, octobre, novembre dans l'hémisphère sud.
+967;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|^FRAnyLabel:FRTimeStop;+FRBeginrel+FRTimeBegin|*|+FRIntimespan|+FRTimeStop;expand to preposition 
+/*		967. Le rapport couvrant le rapport annuel 2003 de la Cour doit être publié au cours de l'automne 2005. Le mariage, annoncé en septembre, a pour but de créer le plus gros groupe informatique mondial. On ne reprend pas une cigarette après 1 an d'abstinence par besoin de nicotine. Ces derogations ont rendu disponibles en 1986 environ 200 Mio ECU de credits d'engagement.
+1005;64;FRPrepTime+FRAddExpansion|.FRNonconcept|FRMod:FRCon|FRCon:FRTimeconcept+FRTime|.typeConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|+FRIntimespan|*|+FRTimeStop;expand to preposition, for adjective plus Concept
+/*		1005. Il a des comportements aberrants comme de sortir à moitié nu en plein hiver
+1012;64;FRPrep+FRAddExpansion|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept:FRCon+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|+FRTimeStop;
+/*		1012. Pour la première fois en 400 ans, un extraordinaire platane oriental a été planté.
+
+/* 'après', 'avant'
+1021;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+FRTime|"après":"avant"|.FRNonconcept:FRPoss|*typeConcept|^FRAnyLabel;+FRTimeBegin|*|*|*|+FRTimeStop;
+/*		1021. Quatre mois après le vol, les enquêteurs ne sont toujours pas parvenus à remettre la main sur les 2,5 millions d'euros manquants.
+1022;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+FRTime|"après":"avant"|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|^FRAnyLabel;*|*|*|*|-FRTimeStop|*|*|+FRTimeStop;expand further to the right
+/*		1022. En cas de décès d'un animal, le passeport est restitué par le détenteur a l'autorité compétente au plus tard sept jours après le décès de l'animal.
+1023;64;typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept+FRTime|"après":"avant"|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|*FRAllformsDe:FRAndOr|.FRNonconcept:FRPoss|*typeConcept|^FRAnyLabel;*|*|*|*|*|*|*|-FRTimeStop|*|*|+FRTimeStop;expand further to the right
+/*		1023. Paradoxe suprême, l'armée a été parmi les premiers à revenir en force, douze ans après la cinglante défaite des troupes de l'armée.
+
+/* 'entre' ... 'et' AND enumerations
+998;64;"entre"|.FRNonconcept|FRNum+FRTime|"et"|.FRNonconcept|FRTimeconcept:FRAdvTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|+FRTimeStop;
+/*		998. La grippe débarque chez nous entre la 41e et la 45e semaine de l'année.
+992;64;FRAdvTime:FRYearnum:FRTimeconcept|FRComma|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|FRAndOr|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|^FRAnyLabel;+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;
+/*		992. Les decisions pour 1994, 1995 et 1996, autorisant le cofinancement national, n'ont ete approuvees que les 26 septembre 1995, 30 octobre 1995 et 25 juillet 1996, respectivement.
+994;64;"entre"|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|"et"|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|+FRTimeStop;
+/*		994. Ils devraient téléphoner pour prendre rendez-vous entre le 31 janvier et le premier février pour une consultation entre le 31 janvier et le premier février. 
+991;64;FRAdvTime:FRYearnum:FRTimeconcept|FRAndOr|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|^FRAnyLabel;+FRTimeBegin|*|*|*|+FRTimeStop;
+/*		991. Les pays tiennent un sommet dimanche et lundi.
+977;64;FRAdvTime:FRTimeconcept+^FRIntimespan|FRAllformsDe:FRPrepTime:"entre"+FRTimeBegin;+FRTimeBegin|*;further expand to time indication on the left of time span
+/*		977. L'euro s'inscrivait à 1,3719 USD dans la matinée de lundi, contre 1,3737 vendredi dernier vers 16H30. Le gouvernement a dévalué la livre, début août, pour la deuxième fois en six mois, par rapport au billet vert. Rendez-vous ce jeudi de 8 heures à 12 heures. Pas d'heures de glace le soir du 27 au 31 décembre. Ce festival se déroule chaque été depuis 2003. Ces chutes de neige, qui n’ont pas faibli de la nuit entre vendredi et samedi, ont placé cinq régions du centre du pays en alerte rouge samedi matin.
+1033;64;FRAdvTime:FRTimeconcept|FRPrep+FRTimeBegin;+FRTimeBegin|*;
+/*		1033. Cette étape finale est prévue jeudi à midi.
+
+/* 'de'
+1073;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|FREnd|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|+FRTimeStop;
+/*		1073. Les Quinze ont "unanimement" décidé de participer à une force multinationale, a annoncé au premier jour du sommet le ministre.
+1025;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|*|+FRTimeStop;
+/*		1025. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé. Selon Pline l'Ancien, la pratique s'est sophistiquée durant la période de la Rome Antique.
+1028;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|*|*|*|-FRTimeStop|*|*|*|+FRTimeStop;
+/*		1028. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales. A deux semaines de la disparition du deutschemark au profit de la monnaie européenne, les Allemands se sont rués ce matin dans leurs banques pour y acheter les premiers sachets de pièces en euros. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales.
+1060;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|*|*|*|-FRTimeStop|*|*|-FRTimeStop|*|*|*|+FRTimeStop;
+/*		1060. Environ 80.000 personnes ont participé jeudi dans les rues de Bruxelles à l'euro-manifestation organisée par la Confédération européenne des syndicats (CES) pour réclamer plus d'Europe sociale, à la veille de l'ouverture du sommet de l'UE à Laeken.
+1076;64;typeConcept|FRAllformsDe+FRTimeBegin|.FRNonconcept|FRAdvTime:FRYearnum|^FRAnyLabel;+FRTimeBegin|-FRTimeBegin|*|*|*;if 'de' already starts a time span, move beginning of span to Concept before 'de' (don't add Stop, because it will interupt existing span)
+/*		1076. Globalement pour le domaine de l’éducation et de la culture, les reports de 2000 à 2001, première année de mise en œuvre de quatre programmes n’ont représenté que 2,6 % des crédits disponibles.
+1077;64;typeConcept|FRAllformsDe|.FRNonconcept|FRAdvTime:FRYearnum+FRTimeBegin|^FRAnyLabel;+FRTimeBegin|*|*|-FRTimeBegin|*;if time indication already starts a time span, move beginning of span to Concept before 'de' (don't add Stop, because it will interupt existing span)
+/*		1077. L'affrontement constitue l'un des chocs au sommet un peu inattendu de la 8e journée de l'Euroligue de basket-ball messieurs, mercredi et jeudi, et marquée par une minute de silence.
+1048;64;typeConcept+^FRTimeBegin|FRAllformsDe|.FRNonconcept|FRAdvTime:FRYearnum|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|+FRTimeStop;
+/*		1048. En realite, les Etats membres ne sont pas en mesure de rembourser l'integralite de cette avance dans le delai de trois mois qui leur est imparti. Le réacteur nucléaire doit reprendre du service au mois de mars après un arrêt de 10 mois en raison d'une fuite d'eau lourde. La Cour est arrivée a la conclusion que le processus d'élaboration des propositions de la Commission pour la réforme de 1998 était fondé sur des données qui n'étaient pas fiables. La caractéristique de la grippe, est de muter en permanence, rendant la protection de l'année passée quasi nulle. La loi n° 2020-766 du 24 juin 2020 visant à lutter contre les contenus haineux sur internet.
+1051;64;typeConcept|FRAndOr:FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept|FRAdvTime|^FRAnyLabel;+FRTimeBegin|*|*|-FRTimeBegin|*|*|*|+FRTimeStop;
+/*		1051. Le peuple a montré sa bravoure en votant majoritairement aux élections présidentielle et législatives du 29 mars, qui ont infligé une déroute historique au régime. Le ministre de la Santé a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées, avec le paiement de samedi au tarif d'une demi-garde.
+
+/* time expansion without time indication
+1062;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|*|*|*|+FRTimeStop;
+/*		1062. Après l'omniprésence des phoques du Groenland, ce sont maintenant les phoques gris qui envahissent le territoire des Îles-de-la-Madeleine et du sud de l'Atlantique.
+1063;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;
+/*		1063. Après l'évaluation du risque, une autre vérification peut avoir lieu au stade de la cloture des comptes. 
+1074;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|.FRNonconcept:FRPoss|FREnd|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;
+/*		1074. Depuis la défaite du régime le 29 mars, plus de 20.000 maisons ont été brûlées.
+1061;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|+FRTimeStop;
+/*		1061. Il faut ne pas hésiter à proposer de repousser le démarrage de l’arrêt après un début d’amélioration. En revanche un patient qui développe comme 20% des opérés après un geste de chirurgie cardiaque lourde un véritable syndrome de stress post-traumatique pourra être soulagé par quelques séances d’EMDR. Not_in: Le chômage a augmenté de 0,3 point à 5,7% le mois dernier après une hausse de 0,5 point en octobre pour atteindre son niveau le plus élevé depuis août 1995.
+
+/* and/or/until
+1043;64;FRAndOr:"à"+FRTimeStop|FRTimeBegin;-FRTimeStop|-FRBeginrel;
+/*		1043. Savoir notamment comment une des femmes de service de l’école a attrapé la tuberculose fin décembre, ce qui lui a valu quatre semaines d’hospitalisation et plusieurs mois de traitement. Aussi urgente apparaît la décision de trouver la personne qui assurera l'intérim de samedi soir à fin mars ou de samedi soir jusqu'au 10 décembre.
+
+/* Resolve conflict
+1083;64;FRAdvTime|FRComma+^FRTimeStop|FRTimeBegin;+FRTimeBegin|*|-FRTimeBegin;
+/*		1083. Cette transaction serait survenue en-dehors de la bourse le 28 mars 2008, trois jours avant l'assemblée générale des actionnaires. Not_in: Sur un an, après deux années de baisses consécutives, la baisse des prix poursuit son ralentissement.
+1075;64;FRNonconcept:FRPunctuation+FRTimeStop|FRAdvTime|^FRAnyLabel;-FRTimeStop|*|+FRTimeStop;
+/*		1075. Vers 17H00 (16H00 GMT), les forces de police ont commencé en effet à s'éloigner des portes du complexe. Depuis la défaite du régime le 29 mars, plus de 20.000 maisons ont été brûlées.
+978;64;FRTimeBegin+FRTimeStop;-FRTimeStop;
+/*		978. Le gouvernement a dévalué la livre, début août, pour la deuxième fois en six mois, par rapport au billet vert.
+1024;64;FRAdvTime+FRTimeStop|^FRAnyLabel;-FRTimeStop|+FRTimeStop;
+/*		1024. La Réserve fédérale américaine a réduit mardi ses deux taux directeurs pour la onzième fois cette année afin de tirer l'économie de la récession.
+
+/* Move attribute markers to relevant entity
+1066;64;typeConcept|.typeConcept:typeEndConcept+^FRTimeStop|typeConcept:typeEndConcept+FRTimeStop|FRAdvTime|^typeConcept;*|*|-FRTimeStop|*|+FRTimeStop;move TimeStop to next relevant entity after 2nd time indication
+/*		1066. Mais ce n'est que pendant la période quaternaire il y a 1,6 million d'années que le climat devint excessivement froid et que les variations du niveau de la mer provoquèrent l'apparition des Grands Lacs. 
+995;64;typeConcept|.typeConcept:typeEndConcept+^FRTimeStop|typeConcept:typeEndConcept+FRTimeStop|.typeConcept|^typeConcept;*|*|-FRTimeStop|*|+FRTimeStop;move TimeStop to next relevant entity when a Time attribute is on the same Concept
+/*		995. Mais l'hiver terrible enduré par ces premiers colons le conduit, au mois d’août 1605,à la fondation de Port Royal. Après la division de la Pangée au début de l'ère mésozoïque, la partie septentrionale de celle-ci, la Laurasie, se divisa en deux lors de la période jurassique. 
+968;64;FRTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;-FRTimeStop|*|+FRTimeStop;move TimeStop from NonRelevant to next relevant entity
+/*		968. Le Conseil de sécurité a voté, en mars, un troisième volet de sanctions.
+
+/* Remove TimeStop in time span and add InTimeSpan label
+1050;64;FRTimeStop|*^FRTimeBegin:FRTimeStop|FRTimeStop;-FRTimeStop|*|*;
+/*		1050. Le ministre de la Santé a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées, avec le paiement de samedi au tarif d'une demi-garde.
+1090;64;FRTimeBegin|*^FRTimeStop|FRTimeStop;*|+FRInTimeSpan|*;
+
+
+/* PHASE 70: NEGATION
+/* ==================
 /* Remove negation attribute from 'ne explétif'
 721;70;FRIgnoreNegation|*{1,3}^FRNegation|"ne":"n"+FRNegation;*|*|-FRNegation;very low-frequent
 /*		721. Avant qu'il ne puisse me répondre, une alarme se mit à sonner. Toutefois, la Commission réalise l'importance de l'application de l'article avant que la Charte ne puisse produire tous ses effets. À moins que le réseau ferroviaire ne soit également libéralisé, nous ne pouvons pas y parvenir.
@@ -852,15 +1299,15 @@
 /*		405. Jusqu'au moment où on n'y pensera plus de tout.
 365;70;FRBegin:FRAutre|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;
 /*		365. L'autre n'a pas encore reçu de réponse.
-805;70;*FRCon|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;
-/*		805. En conséquence, les paiements correspondants n’ont pas été imputés au bon exercice budgétaire.
+805;70;*FRCon:FRMod:FRNum:FRPPart|.FRAdvTime|FRNegation+^FRSConj+^"sans";+FRNegBegin|*|*;
+/*		805. En conséquence, les paiements correspondants n'ont pas été imputés au bon exercice budgétaire. Les salariés arrêtés pour longue maladie ne seront désormais plus indemnisés. Puisque même un succès lundi prochain ne lui garantirait pas un billet pour les quarts. 2009 n'était pas une année facile.
 375;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;
 /*		375. Par suite, les paiements en question n'ont pas été imputés au bon exercice budgétaire.
-743;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;
+743;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|*|*|-FRNegBegin;
 /*		743. Le report de crédits sur cette ligne budgétaire n'est pas structurel.
-744;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;repetition of r375 after application of r743
+744;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|*|-FRNegBegin;repetition of r375 after application of r743
 /*		744. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
-745;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|^FRPrep|*|-FRNegBegin;repetition of r743
+745;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|*|*|-FRNegBegin;repetition of r743
 /*		745. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
 720;70;FRCon:"quelqu un"|"sans"+FRNegation|FRCon:FREnd|^SEnd;+FRNegBegin|*|*|*;
 /*		720. Il prend un café sans sucre, comme d'habitude.
@@ -875,51 +1322,51 @@
 794;70;FRCondition|^FRNegStop|FRNegBegin;-FRNegStop+FRNegBegin+FRBeginrel|*|*;
 /*		794. En effet, si nous ne pouvons changer notre âge ou notre hérédité, nous pouvons cesser de fumer, boire moins d alcool, manger moins de charcuteries mais plus de légumes, et faire plus de sport.
 800;70;*FRList+^FRNegBegin+^FRNegStop|FRList+FRNegBegin;+FRNegBegin|*;
-/*		800. Il est évident que la limite entre les travaux de construction préparatoires et les travaux de construction proprement dits n’est pas toujours facile à définir.
+/*		800. Il est évident que la limite entre les travaux de construction préparatoires et les travaux de construction proprement dits n'est pas toujours facile à définir.
 
 /* Stop negation in the right-hand part of the path
 710;70;FRPrep+FRNegation|typeConcept|typeRelation+^FRPrep+^"et"+^FRNegation+^FRNegBegin;*|*|+FRNegStop;
 /*		710. Le régime sans gluten apparaît comme le seul traitement préventif vis-à-vis de la survenue de ces atteintes malignes.
 362;70;FRPunctuation|FRAndOrBut;FRPunctuation|+FRNegStop;
-/*		362. La situation se détériore, ne s' améliore pas, et nous devrions regarder vers l'avenir.
-363;70;FRPunctuation+^FRList|*FRCon;FRPunctuation|+FRNegStop;
-/*		363. Je n'ai pas parlé au responsable, monsieur D.
+/*		362. La situation se détériore, ne s'améliore pas, et nous devrions regarder vers l'avenir.
+363;70;FRPunctuation+^FRList|*typeConcept;FRPunctuation|+FRNegStop;
+/*		363. Je n'ai pas parlé au responsable, monsieur Durand. Pour 10 femmes nées en France au début des années 1960, une n'a pas eu d'enfant, deux en ont eu un, quatre en ont eu deux, deux en eu trois et une en a eu quatre ou plus.
 364;70;FRPunctuation|FRSRel+^FRNegation;FRPunctuation|+FRNegStop;
-/*		364. Aujourd'hui n'est pas un jour important, a souligné mme D.
+/*		364. Aujourd'hui n'est pas un jour important, a souligné mme Dumont.
 378;70;FRPunctuation+^FRList|FRPrep;FRPunctuation|+FRNegStop;
 /*		378. Il ne reflète donc pas la totalite des dépenses ichelonnées, sur plusieurs exercices.
 395;70;FRPunctuation|FRSRelconj:FRSConj;FRPunctuation|+FRNegStop;
 /*		395. L'audit n'a mis en lumière aucune erreur significative dans les opérations testées, ce qui correspond au résultat de l'audit de l'année précédente.
 733;70;FRPunctuation|FRSubjpron:FRSubjpron2:FRObjpron;FRPunctuation|+FRNegStop;
-/*		733. Il n’avait pas fait grand cas, on s’en souvient.
+/*		733. Il n'avait pas fait grand cas, on s'en souvient.
 704;70;^"ni"+^"non"+^SBegin|FRSConj+FRSConj2|^SEnd;*|-FRSConj+FRNegStop|*;
 /*		704. Or le risque, selon eux, "c'est que ni la consommation ni les investissements en actifs immobilisés ne semblent bien placés pour être la locomotive d'une reprise durable".
 406;70;FRPunctuation|FRQue;FRPunctuation|+FRNegStop;
 /*		406. Il dit qu'il n'a rien entendu, qu'il a bien dormi.
-474;70;FRPunctuation|FRAdv|FRSRel;FRPunctuation|+FRNegStop|+FRNegStop;
-/*		474. L' information sensorielle n'est pas dirigée au cortex aléatoirement, bien au contraire.
-385;70;FRPunctuation+^FRList|FRNonconcept|*FRCon:FRMod;FRPunctuation|FRNonconcept|+FRNegStop;
+474;70;FRPunctuation|FRAdv|FRSRel:FRAdvNR;FRPunctuation|+FRNegStop|+FRNegStop;
+/*		474. Les procédés de reconstruction complexes (greffe composé, lambeau) d’une perte de substance ne se font jamais à chaud, surtout en cas de plaie infectée ou d’ablation de tumeur. L'information sensorielle n'est pas dirigée au cortex aléatoirement, bien au contraire.
+385;70;FRPunctuation+^FRList|FRNonconcept|*FRCon:FRMod;*|*|+FRNegStop;
 /*		385. Toutefois, ces données n'étant pas vérifiées, des insuffisances affectant le cofinancement et des dépenses inéligibles risquent de passer longtemps inapercues.
 387;70;FRPunctuation|FRSubjpron:FRObjpron:FRSubjpron2|FRSRel:FRObjpron;FRPunctuation|+FRNegStop|*;
-/*		387. Ainsi, s’il n’y pas un unique coupable, nous portons tous une part de responsabilité.
+/*		387. Ainsi, s'il n'y pas un unique coupable, nous portons tous une part de responsabilité.
 820;70;FRAdvTemp:FRAdvTime|FRPunctuation|^FRAdvTemp+^FRAdvTime+^SEnd;*|*|+FRNegStop;
 /*		820. Elle n'a pas appelé hier, j'en suis sûre.
 821;70;^FRAdvTemp+^FRAdvTime+^SBegin|FRPunctuation|FRAdvTemp:FRAdvTime|^SEnd;*|*|+FRNegStop|*;
 /*		821. L'engouement des Français pour le dispositif de l'autoentrepreneur ne se dément donc pas, plus d'un an après sa création".
 374;70;FRAndOrBut|FRAdvNR;+FRNegStop+FRBeginrel|*;
-/*		374. Il ne s’agit pas de l’entraîner dans des positions anti-morales ou anti-esthétiques mais de dégager un espace où ces positions ne sont pas nécessaires et même nuisent à l’action personnelle.
+/*		374. Il ne s'agit pas de l'entraîner dans des positions anti-morales ou anti-esthétiques mais de dégager un espace où ces positions ne sont pas nécessaires et même nuisent à l'action personnelle.
 423;70;FRAndOrBut|FRMod;+FRNegStop|*;
-/*		423. Tout se passe ensuite comme si ce deuil à la ritualité duquel on n’a pas participé était alors impossible ou plutôt durablement évité.
+/*		423. Tout se passe ensuite comme si ce deuil à la ritualité duquel on n'a pas participé était alors impossible ou plutôt durablement évité.
 379;70;FRAndOrBut|FRSubjpron:FRSubjpron2:FRPunctuation;+FRNegStop|*;
 /*		379. En outre, il convient d'assurer le suivi des cas où les Etats membres n'effectuent pas les contrôles prévus par la réglementation et, dans la mesure du possible, de procéder a des corrections.
-380;70;FRAndOrBut+^FRList|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;
+380;70;FRAndOrBut+^FRList|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel-FRSRel|^FRSConj;
 /*		380. Il dit qu'il n'a rien entendu et qu'il a bien dormi.
 796;70;"mais"|FRSConj:FRSConj2+^FRNegation;+FRNegStop+FRBeginrel|^FRSConj;variant of r380
-/*		796. Je ne monte pas encore assez souvent mais quand je viens au filet, mes volées sont en général très bonnes. Mais si personne ne peut accuser ce président hyperactif d’oisiveté, de plus en plus de signes attestent de l’affaiblissement de sa motivation à réformer le pays.
+/*		796. Je ne monte pas encore assez souvent mais quand je viens au filet, mes volées sont en général très bonnes. Mais si personne ne peut accuser ce président hyperactif d'oisiveté, de plus en plus de signes attestent de l'affaiblissement de sa motivation à réformer le pays.
 709;70;FRAndOrBut|FRSRelconj;+FRNegStop+FRBeginrel|FRSRelconj;
-/*		709. Parmi ces derniers, 45 000 concernent des personnes qui n’ont pas eu d’enfants ensemble ou dont les enfants sont majeurs.
+/*		709. Parmi ces derniers, 45 000 concernent des personnes qui n'ont pas eu d'enfants ensemble ou dont les enfants sont majeurs.
 381;70;FRAndOrBut|FRNonconcept:FRIndefart+^FRList;+FRNegStop|*;
-/*		381. Il est vrai que cette situation n’est pas entièrement satisfaisante et la surveillance assurée par la hiérarchie est censée limiter les risques.
+/*		381. Il est vrai que cette situation n'est pas entièrement satisfaisante et la surveillance assurée par la hiérarchie est censée limiter les risques.
 424;70;FRCon|FRAndOrBut|FRSRel;^FRCon|+FRNegStop|^FRSRel;
 /*		424. La Commission doit reviser sans delai et de maniere approfondie la mise en oeuvre de cet objectif.
 815;70;FRAdvNeg+^"non"|FRAndOrBut|^FRNegation+^SEnd;*|+FRNegStop+FRBeginrel|*;
@@ -937,13 +1384,11 @@
 792;70;FRAdvNeg+^"non"|FRQue:"si"|FRIndefart:FRNonconcept:FRPoss|*FRCon|FRSRel;*|+FRBeginrel+FRNegStop|*|*|*;
 /*		792. A bord, les quatre policiers ne savent pas encore qu'un braquage vient d'être commis, mais ils décident de rattraper le véhicule pour le contrôler.
 793;70;FRAdvNeg+^"non"|FRQue:"si":"sµ"|FRSubjpron;*|+FRBeginrel+FRNegStop|*;
-/*		793. D’un coup, maintenant que c’est possible, il ne sait plus s’il a vraiment envie d’y aller.
+/*		793. D'un coup, maintenant que c'est possible, il ne sait plus s'il a vraiment envie d'y aller.
 822;70;FRAdvNeg+^"non"|FRSRel|FRQue:"si"|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;
 /*		822. Il ne faut pas oublier qu'il y a d'autres solutions.
 828;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|+FRBeginrel+FRNegStop;
 /*		828. Cette tâche n'est pas aussi aisée qu'il pourrait le sembler.
-829;70;FRAdvNeg+^"non"|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRAdv:FRSRel:FRCon+^FRQue|FRQue:"si";*|*|*|*|+FRBeginrel+FRNegStop;
-/*		829. Il s’installe au contraire durablement dans l’illusion qu’il n’est pas vraiment parti et que son séjour est temporaire.
 824;70;FRSConj:FRPrep+FRNegation|FRSRel|FRQue|^FRNegBegin+^SEnd;*|*|+FRBeginrel+FRNegStop|*;
 /*		824. Sans compter que de nombreux artistes viennent aussi se tailler une place.
 825;70;FRSConj:FRPrep+FRNegation|typeRelation:typeOther|typeRelation|FRQue|^FRNegBegin+^SEnd;*|*|*|+FRBeginrel+FRNegStop|*;
@@ -961,13 +1406,20 @@
 830;70;FRCon|FRSubjpron+^FRNegWord+^"y";*|+FRNegStop;
 /*		830. J'ai pas faim j'ai soif.
 
+/* Make negation span recognizable in next phases
+973;70;FRNegBegin|.^FRNegStop:SEnd|FRNegStop:SEnd;+FRInNegspan|+FRInNegspan|*;
+/*		973. Le savoir est très important pour ne pas s’inquiéter et ne pas craquer car ce besoin disparaît très vite.
+
 /* Cleaning
-740;70;^typeRelation+^SBegin|FRAndOrBut|FRBeginrel;*|*|-FRBeginrel;
-/*		740. Ce système n'est pas nouveau et ne nécessite donc pas de mesures spécifiques de contrôle.
+972;70;FRAndOr+^FRInNegspan|FRNegBegin+FRBeginrel;+FRBeginrel+FRNegBegin|-FRBeginrel;
+/*		972. La commission doit maintenant se prononcer définitivement et n'est pas obligée de suivre l'avis de l'auditeur.
+974;70;FRAndOr+FRInNegspan|FRNegBegin+FRBeginrel;*|-FRBeginrel;
+/*		974. Le médicament miracle qui fait tout n’existe pas et n’existera jamais car il y a autant de raisons de fumer que de fumeurs.
 386;70;FRNegation+FRNegStop;-FRNegStop;
 /*		386. Œil rouge, douloureux, sans baisse d'acuité visuelle.
 403;70;FRNegBegin;-FRNegStop;
 /*		403. Il ne sait plus s'il a vraiment envie d'y aller.
+
 
 /* SENTIMENT
 /* =========
@@ -976,49 +1428,55 @@
 528;80;FRSRel|FRNegSentiment;+FRNegSentimentBegin|^FRNegSentiment;
 /* Stop sentiment in the right-hand part of the path
 806;80;FRPunctuation|typeRelation;*|+FRPosSentimentStop+FRNegSentimentStop;
-531;80;FRPunctuation|*FRCon;FRPunctuation|+FRPosSentimentStop;
-532;80;FRPunctuation|*FRCon;FRPunctuation|+FRNegSentimentStop;
-543;80;FRPunctuation|FRAdv|FRSRel;FRPunctuation|^FRAdv|+FRPosSentimentStop;
-544;80;FRPunctuation|FRAdv|FRSRel;FRPunctuation|^FRAdv|+FRNegSentimentStop;
-549;80;FRPunctuation|FRNonconcept|*FRCon;FRPunctuation|FRNonconcept|+FRPosSentimentStop;
-550;80;FRPunctuation|FRNonconcept|*FRCon;FRPunctuation|FRNonconcept|+FRNegSentimentStop;
-551;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;FRPunctuation|+FRPosSentimentStop|*;
-552;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;FRPunctuation|+FRNegSentimentStop|*;
+531;80;FRPunctuation|*FRCon;*|+FRPosSentimentStop;
+532;80;FRPunctuation|*FRCon;*|+FRNegSentimentStop;
+543;80;FRPunctuation|FRAdv|FRSRel;*|*|+FRPosSentimentStop;
+544;80;FRPunctuation|FRAdv|FRSRel;*|*|+FRNegSentimentStop;
+549;80;FRPunctuation|FRNonconcept|*FRCon;*|*|+FRPosSentimentStop;
+550;80;FRPunctuation|FRNonconcept|*FRCon;*|*|+FRNegSentimentStop;
+551;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;*|+FRPosSentimentStop|*;
+552;80;FRPunctuation|FRSubjpron:FRObjpron|FRSRel;*|+FRNegSentimentStop|*;
 553;80;FRAndOrBut|FRAdv;+FRPosSentimentStop|*;
 554;80;FRAndOrBut|FRAdv;+FRNegSentimentStop|*;
 555;80;FRAndOrBut|FRMod;+FRPosSentimentStop|*;
 556;80;FRAndOrBut|FRMod;+FRNegSentimentStop|*;
-559;80;FRAndOrBut|FRSConj;+FRPosSentimentStop|FRSConj;
-560;80;FRAndOrBut|FRSConj;+FRNegSentimentStop|FRSConj;
+559;80;FRAndOrBut|FRSConj;+FRPosSentimentStop|*;
+560;80;FRAndOrBut|FRSConj;+FRNegSentimentStop|*;
 561;80;FRAndOrBut|FRNonconcept:FRIndefart:FRPunctuation:FRSubjpron;+FRPosSentimentStop|*;
 562;80;FRAndOrBut|FRNonconcept:FRIndefart:FRPunctuation:FRSubjpron;+FRNegSentimentStop|*;
 567;80;FRCon|FRAndOrBut|FRSRel;*|+FRPosSentimentStop|*;
 568;80;FRCon|FRAndOrBut|FRSRel;*|+FRNegSentimentStop|*;
 
-/* Clean-up conflicting labels
-/*============================
+
+/* PHASE 90: Clean-up conflicting labels
+/*======================================
 703;90;FRSConj+FRSConj2;-FRSConj2;default to avoid conflicting labels
 /*		703. Pour parvenir à un tel résultat, l'Etat souhaiterait limiter à 1% par an.
 705;90;FRSConj2+FRSRel;-FRSConj2;default to avoid conflicting labels
 /*		705. On a huit fois plus de chance d'avoir un accident corporel si on est somnolent.
 742;90;FRBeginrel|FRBeginrel;^FRBeginrel|-FRBeginrel;
 /*		742. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé.
-738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase)
+738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase), make sure to add phase 90 to relevant labels
 /*		738. Ce n'est pas que les gens conduisent mal, mais c'est qu'ils ont un mauvais comportement.
+989;90;FRBegin;-FRNum-FRCon-FRMod;
+/*		989. Le président a affirmé qu’il ne tolérerait pas que la même personne reste à la direction d’une région plus de trois mandats successifs. La banque a fourni aux banques un million de sachets d'une valeur de 10 euros.
+
+/* PHASE $
+/*========
 718;$;FRAdv+FRAdvManner:FRAdvDegree:FRAdvTime:FRAdvModal;-FRAdv;
-/*		718. L'organisation s’est engagée à définir plus clairement les coûts.
+/*		718. L'organisation s'est engagée à définir plus clairement les coûts.
 719;$;FRAdv+FRAdvTemp:FRAdvLoc:FRMod;-FRAdv;
 /*		719. Cependant, les déficiences restantes signalées ci-après ont été décelées dans les systèmes de contrôle et de surveillance.
 
 /* last step for user dictionary labels
-841;$;UDTime;+FRTime;
-/*		841.UD. Celles qui, hier, n'ont pas obtenu de fréquences devront cesser d'émettre.
-835;$;FRTime+UDIgnoreTime;-FRTime;
-/*		835.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny.
+835;$;FRAdvTemp+FRTime+UDIgnoreTime;-FRTime;for ambiguous lexreps that get Time attribute in the rules file
+/*		835.UD. Certains vignerons se sont même mis, depuis quelques temps à y faire tremper des copeaux de bois afin d'accélérer le processus et cette pratique touve des défenseurs.
 837;$;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord;
-/*		837.UD. Pour l’instant, je ne ressens rien de particulier.
+/*		837.UD. Pour l'instant, je ne ressens rien de particulier.
 840;$;FRNegBegin+^FRNegation+^FRNegWord|.<^FRNegation+^FRNegWord+^FRNegStop|FRNegStop:SEnd;-FRNegBegin|*|*;remove span from UDIgnoreNegation (rare)
-/*		840.UD. no example.
+/*		840.UD. No example.
+1091;$;FRTimeBegin+^FRTime|.FRInTimeSpan+^FRTime:UDIgnoreTime|UDIgnoreTime+^FRAdvTime|^FRInTimeSpan;-FRTimeBegin|*|*|*;remove time span for UDIgnoreTime
+/*		1091.UD. Les joueurs du Club ont, eux, surtout voyagé pendant l'été. Not_in: Les villes de Fermont et de Schefferville au Québec seront fondées lors de la découverte de mines de fer dans la seconde moitié du XXe siècle.
 
 /* Rewrite language specific labels to unified labels
 /*===================================================
