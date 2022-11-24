@@ -35,8 +35,10 @@
 /*		839.UD. No example.
 836;1;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord+FRNoNegWord;
 /*		836.UD. à ce jour, nul n'a compris mieux qu'eux la misère et la condition humaines. Aucun autre parti ne sera représenté.
-/* NOTE: FRTime is not in the lexreps file, so it doesn't make sense to remove the attribute here for items with UDIgnoreTime.
-/*       A rule is added in the last phase.
+1088;1;UDIgnoreTime;-FRTimeconcept-FRHoliday-FRSeason-FRDay-FRMonth-FRTimes-FRTime+FRIgnoreTime;add extra IgnoreTime label to use in other phases
+/*		1088.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny. Le jour de Noël a toute une histoire, qui remonte aux Celtes et aux Romains. Les joueurs du Club ont, eux, surtout voyagé pendant l'été. Avec ce projet, la société a pour ambition d'emmener des humains et jusqu'à 100 tonnes de fret sur la Lune et sur mars lors de futures missions.
+1089;1;UDIgnoreTime;-FRYear-FRYearnum-FRPossibleYearnum;
+/*		1089.UD. "On a un puits artésien mais on ne sait pas si on peut boire l'eau", dit-elle entourée de ses trois enfants de cinq, trois et un an. La Cour a examiné le fonctionnement des systèmes de gestion mis en place pour le contrôle des conventions de cofinancement nationales sur la base d'une sélection de dix projets dans cinq pays (17) issus du programme Phare 2000.
 
 
 /* PHASE 20: NEGATION
@@ -1272,9 +1274,10 @@
 968;64;FRTimeStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;-FRTimeStop|*|+FRTimeStop;move TimeStop from NonRelevant to next relevant entity
 /*		968. Le Conseil de sécurité a voté, en mars, un troisième volet de sanctions.
 
-/* Remove TimeStop in time span
+/* Remove TimeStop in time span and add InTimeSpan label
 1050;64;FRTimeStop|*^FRTimeBegin:FRTimeStop|FRTimeStop;-FRTimeStop|*|*;
 /*		1050. Le ministre de la Santé a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées, avec le paiement de samedi au tarif d'une demi-garde.
+1090;64;FRTimeBegin|*^FRTimeStop|FRTimeStop;*|+FRInTimeSpan|*;
 
 
 /* PHASE 70: NEGATION
@@ -1466,12 +1469,14 @@
 /*		719. Cependant, les déficiences restantes signalées ci-après ont été décelées dans les systèmes de contrôle et de surveillance.
 
 /* last step for user dictionary labels
-835;$;FRTime+UDIgnoreTime;-FRTime;
-/*		835.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny.
+835;$;FRAdvTemp+FRTime+UDIgnoreTime;-FRTime;for ambiguous lexreps that get Time attribute in the rules file
+/*		835.UD. Certains vignerons se sont même mis, depuis quelques temps à y faire tremper des copeaux de bois afin d'accélérer le processus et cette pratique touve des défenseurs.
 837;$;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord;
 /*		837.UD. Pour l'instant, je ne ressens rien de particulier.
 840;$;FRNegBegin+^FRNegation+^FRNegWord|.<^FRNegation+^FRNegWord+^FRNegStop|FRNegStop:SEnd;-FRNegBegin|*|*;remove span from UDIgnoreNegation (rare)
 /*		840.UD. No example.
+1091;$;FRTimeBegin+^FRTime|.FRInTimeSpan+^FRTime:UDIgnoreTime|UDIgnoreTime+^FRAdvTime|^FRInTimeSpan;-FRTimeBegin|*|*|*;remove time span for UDIgnoreTime
+/*		1091.UD. Les joueurs du Club ont, eux, surtout voyagé pendant l'été. Not_in: Les villes de Fermont et de Schefferville au Québec seront fondées lors de la découverte de mines de fer dans la seconde moitié du XXe siècle.
 
 /* Rewrite language specific labels to unified labels
 /*===================================================
