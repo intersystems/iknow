@@ -205,7 +205,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.job }}-wheel
-          path: ${{ github.workspace }}/modules/iknowpy/dist/merged/iknowpy-*.whl
+          path: ${{ github.workspace }}/modules/iknowpy/dist/iknowpy-*.whl
   macos_10_9_universal:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-manylinux' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx'
     runs-on: macos-12

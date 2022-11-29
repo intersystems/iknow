@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
-# Build wheels for Python 3.6 through Python 3.11, compatible with
-# Mac OS X >= 10.9 x86_64. This script must be executed with the repository root
-# as the working directory.
+# Build wheel for Python 3.7, compatible with Mac OS X >= 10.9 x86_64. This
+# script must be executed with the repository root as the working directory.
 #
 # Usage: actions/build_osx.sh
 #
@@ -37,11 +36,7 @@ make -j $(sysctl -n hw.logicalcpu) test
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
 eval "$(pyenv init -)"
-for PYTHON in python3.{6..7}; do
-  "$PYTHON" setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-x86_64 --no-dependencies
-done
-"$PYTHON" setup.py merge
-rm -r dist/cache
+python3.7 setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-x86_64
 
 
 ##### Report cache statistics #####

@@ -22,9 +22,6 @@ set -euxo pipefail
 # official package installer. Return 1 if the version is not supported.
 pyinstall_fallback () {
   case "$1" in
-    3.6)
-      echo https://www.python.org/ftp/python/3.6.8/python-3.6.8-macosx10.9.pkg
-      ;;
     3.7)
       echo https://www.python.org/ftp/python/3.7.9/python-3.7.9-macosx10.9.pkg
       ;;
@@ -110,7 +107,7 @@ pyenv global $PYENV_INSTALLED_VERSIONS
 # Python packages
 for PYTHON in $PYENV_INSTALLED_CMDS $PKG_INSTALLED_CMDS; do
   "$PYTHON" -m pip install -U pip --no-warn-script-location
-  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel==0.37.1 --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 
 # JSON for Modern C++

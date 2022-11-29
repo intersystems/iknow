@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Build manylinux wheels for Python 3.6 through Python 3.11. This script must be
+# Build manylinux wheels for Python 3.7 through Python 3.11. This script must be
 # executed inside a manylinux container in which /iknow is the root of the
 # repository.
 #
@@ -90,9 +90,9 @@ export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/iknow/kit/$IKNOWPLAT/release/bin:$ICUD
 
 # install Python package dependencies and build initial wheels
 chown -R root "$PIP_CACHE_DIR"
-for PYTHON in /opt/python/{cp36-cp36m,cp37-cp37m,cp38-cp38,cp39-cp39,cp310-cp310,cp311-cp311}/bin/python
+for PYTHON in /opt/python/{cp37-cp37m,cp38-cp38,cp39-cp39,cp310-cp310,cp311-cp311}/bin/python
 do
-  "$PYTHON" -m pip install --user cython=="$CYTHON_VERSION" setuptools wheel==0.37.1 --no-warn-script-location
+  "$PYTHON" -m pip install --user cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
   "$PYTHON" setup.py bdist_wheel --no-dependencies
 done
 "$PYTHON" setup.py merge --no-dependencies

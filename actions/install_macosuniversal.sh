@@ -37,7 +37,7 @@ for PYVERSION in $PYVERSIONS; do
   # extract Python version in MAJOR.MINOR form
   PYTHON=python$(echo "$PYVERSION" | awk -F '.' '{print $1"."$2}')
   "$PYTHON" -m pip install -U pip --no-warn-script-location
-  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel==0.37.1 --no-warn-script-location
+  "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
 
 # JSON for Modern C++
