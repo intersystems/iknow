@@ -334,11 +334,23 @@
 949;35;FRDay:FRTimeconcept|.FRAdvDegree:FRTres|FRMod:FRCon:FRPart+^FREndTime:FRNum:FRTimeconcept:FRCapitalInitial|SEnd:FRPunctuation:FRComma:FRRefl:FRVerb:FRSRelAux:FRSConj:FRSRelconj;*|*|FRMod+FRJoinwithcon|*;
 /*		949. Mais selon lui, les indicateurs économiques devraient dans les prochaines semaines confirmer que la remontée en puissance de l'économie va commencer à se matérialiser au début de l'année nouvelle. En ce dimanche ensoleillé, les Librevillois se sont rendus en masse à la plage. Not_in: Une société vient de gagner une nouvelle manche dans le combat judiciaire qui l'oppose aux Etats-Unis au groupe pétrolier brésilien, rapporte mardi Le Soir.
 
+/* clock time
+1093;35;"midi":"minuit"|."et":"moins"|"une":FRMinutes|"minute":"minutes";JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*		1093. Cette pièce évoque par ces motifs le passage à la nouvelle année: l'horloge indiquant minuit moins 5 minutes, les flutes et la bouteille de champagne.
+1094;35;"midi":"minuit"|."et":"moins"|"une":FRMinutes|^typeConcept;JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+/*		1094. À minuit et vingt on a entendu un blast.
+1092;35;"une":FRNum|"heure":"heures"|"et":"moins"|"le"|"quart";JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*		1092. Il est cinq heures moins le quart du matin (4h45).
+1095;35;"une":FRNum|"heure":"heures"|."et":"moins"|"une":FRMinutes|"minute":"minutes";JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*		1095. C'était donc le jeudi, 13 septembre 1759, vers dix heures et vingt minutes.
+1096;35;"une":FRNum|"heure":"heures"|."et":"moins"|"quart":"une":FRMinutes|^typeConcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+/*		1096. Il est une heure cinq du matin. Vingt-deux heures vingt.
+1032;35;FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|"et demie";JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*		1032. A une heure et demie de la clôture, seuls quatre des 477 électeurs inscrits avaient glissé leur bulletin dans l'urne.
+
 /* join time indications
 1042;35;^FRInf:FRVerb:FRPart|"à"|FRNum:FRQuantpron|FRTimeconcept|FRAllformsDe;*|+FRAddExpansion|*|*|+FRAddExpansion;
 /*		1042. Le médecin du travail établit normalement 2 certificats à 15 jours d’intervalle. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales. Not_in: Il poursuivait sa mission de médiation pour tenter de mettre fin à quinze mois de violences.
-1032;35;FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|"et demie";JoinReverse|JoinReverse|FRAdvTime+FRTimeofday;
-/*		1032. A une heure et demie de la clôture, seuls quatre des 477 électeurs inscrits avaient glissé leur bulletin dans l'urne.
 862;35;FRNum:"un":"une"|FRTimeconcept|"et demi":"et demie";JoinReverse|JoinReverse|FRAdvTime;
 /*		862. Ce décalage d'un mois et demi environ par rapport à l'Europe continentale est dû au fait que les équinoxes et solstices se situent à mi-saison.
 958;35;FRIndefart|FRTimeconcept+^"periode":"période"|^FRCon:FRMod:FRPlus:FRDe:FRNum;FRNum|*|*;
@@ -372,13 +384,13 @@
 /*		953. La patrouille est entrée à l'heure où leur ronde de trois heures prévue devait prendre fin, à 13H00. Il vient de traverser deux années très difficiles.
 957;35;FRMod|FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay;*|JoinReverse|JoinReverse|*;
 /*		957. Sur le seul quatrième trimestre, la croissance est de 4% en rythme annualisé.
-1034;35;FRNum:"une"|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime+FRTimeofday|*;
+1034;35;FRNum:"une"|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
 /*		1034. Le président fera une déclaration sur cette affaire lundi à 10 heures dans la salle de presse de l’Elysée. 
 848;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime|*;
 /*		848. Ils reculent de -0,4% au cours des 3 derniers mois par rapport aux 3 précédents. Les autres amétropies, même importantes, sont dans bon nombre de cas susceptibles de régresser partiellement durant ces deux premières années de la vie. Not_in: L'euro s'inscrivait à 1,3719 USD dans la matinée de lundi, contre 1,3737 vendredi dernier. La secousse, d'une magnitude de 7,0 sur l'échelle de Richter, aurait duré pas plus d'une minute. Not_in: Ce sanctuaire où les malades affluent par milliers chaque année dans l'espoir d'une guérison.
 871;35;FRDay|FRDaypart;*|Join;
 /*		871. Une réunion de crise est en cours ce vendredi matin.
-873;35;^FRPrep:FRDe|FRDefart|"matin":"après-midi":"soir":"jour":"nuit"|^FRAllformsDe;*|JoinReverse|FRAdvTime|*;
+873;35;^FRPrep:FRDe|FRDefart|"matin":"après-midi":"soir":"jour":"nuit"|^FRAllformsDe:FRNum;*|JoinReverse|FRAdvTime|*;
 /*		873. Longtemps, le sujet s'habitue à lutter contre des envies de s'endormir et s'accorde à penser qu'il est bon dormeur car il s'endort le soir sans problème.
 951;35;FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay:FRTimeconcept:FRTimes|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
 /*		951. Elle craint qu'une pénurie prolongée mette trop de pressions sur les professionnels, qui doivent déjà faire de nombreuses heures supplémentaires. J'avoue avoir vécu, pour la première fois en sept ans, quelques semaines très difficiles.
@@ -390,26 +402,36 @@
 /*		1067. Dans la même période d'exploration qui s’étend vers le Pays des Illinois en Louisiane, Laumet fonde en 1701 la ville de Détroit.
 1016;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRDay|*;
 /*		1016. Une réunion de crise est en cours ce vendredi matin.
-1035;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRTimeofday|*;
+1035;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
 /*		1035. Pendant plusieurs heures, le pays de neuf millions d'habitants a pratiquement été coupé du monde.
 846;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept:FRTimes|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime|*;
 /*		846. Une série d'événements de ce type ont été organisés ces dernières semaines. Il y avait déjà des rumeurs depuis plusieurs mois. Quelques avancées de la recherche ont aussi émaillé cette année. En ce mois de janvier, la France fête les 10 ans de la loi Copé-Zimmermann.
 855;35;FRBeginTime|FRAdvTime;JoinReverse|FRAdvTime;
 /*		855. Mais les divergences sur les raisons de cette explosion des prix, qui ont frôlé il y a quelques jours les 140 dollars le baril, sont apparues au grand jour.
-881;35;FRHour|"h"|FRMinutes;FRAdvTime+FRTimeofday|Join|Join;
+
+/* clock time, part 2
+881;35;FRHour|"h"|FRMinutes;FRAdvTime+FRClocktime|Join|Join;
 /*		881. Il est 5 h 30 du matin quand, avec trois heures de retard sur l'horaire prévu, la délégation est accueillie par une centaine de fans.
 1015;35;FRHour|"h";FRAdvTime|Join;
 /*		1015. Comme le CO disparaît en 24 h, dès que les patients ont arrêté de fumer, ils visualisent que des toxiques ont disparu de l’organisme.
-880;35;FRTimeofday|"du"|FRDaypart;*|Join|Join;
+880;35;FRClocktime|"du"|FRDaypart;*|Join|Join;
 /*		880. L'agence de la caisse d'épargne s'est vue contrainte dès 11h du matin d'afficher une pancarte pour réorienter les amateurs vers d'autres agences.
-1031;35;"à"|.FRDefart|FRTimeofday;+FRAddExpansion|*|*;
+1031;35;"à"|.FRDefart|FRClocktime;+FRAddExpansion|*|*;
 /*		1031. L’enregistrement fermera à 18h45 au départ de Londres, et ce jusqu’à nouvel ordre.
 
+/* week
+1098;35;"semaine"|FRWeeknum|.FRMonth|FRYearnum;FRAdvTime|Join|Join|Join;
+/*		1098. Planning semaine 25 2022.
+1097;35;"semaine"|FRWeeknum;FRAdvTime|Join;
+/*		1097. Semaine 50 débute lundi 12 décembre 2022.
+
 /* join dates
-859;35;FRDay|FRNum|FRMonth|FRYearnum;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+859;35;FRDay:"jour"|FRNum|."de":"d'"|FRMonth|FRYearnum;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
 /*		859. Son ultime concert à Paris eut lieu le mercredi 16 février 1848 et resta un instant fabuleux.
-858;35;FRDay|FRNum|FRMonth;JoinReverse|JoinReverse|FRAdvTime;
-/*		858. La bourse sera fermée le lundi 31 décembre.
+858;35;FRDay:"jour"|FRNum|."de":"d'"|FRMonth;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*		858. La bourse sera fermée le lundi 31 décembre. En elle, le jour 13 de Décembre et le numéro de la semaine 50 de l'année 2021 est affiché.
+1099;35;"jour"|FRDaynum;FRAdvTime|Join;
+/*		1099. Disparition: jour trois des recherches à Québec.
 857;35;FRNum:FRBeginTime|FRMonth|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
 /*		857. Tous ces éléments ont été inclus dans un plan d'action consolidé adopté le 8 novembre 2004 par le secrétariat général. Ce montant résulte de l'application du pacte entre les générations, conclu fin décembre 2005.
 856;35;FRNum:FRBeginTime|FRMonth;JoinReverse|FRAdvTime;
@@ -1195,9 +1217,9 @@
 /*		975. Des élections doivent se dérouler en février ou en mars. Le mouvement ne concernait initialement que les gardes de nuit mais il s'est étendu depuis le 11 décembre aux week-ends et aux jours fériés, provoquant un afflux d'appels vers le 15, le numéro d'urgence.
 1002;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept+FRTime|FRComma|typeConcept+FRTime|FRComma:FRAndOr|typeConcept+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;pattern with comma plus and/or
 /*		1002. Suivant le cycle des saisons, le printemps correspond dans l'usage courant aux mois de mars, avril et mai (dans l'hémisphère nord d'où il est issu) et aux mois de septembre, octobre, novembre dans l'hémisphère sud.
-967;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|^FRAnyLabel:FRTimeStop;+FRBeginrel+FRTimeBegin|*|+FRIntimespan|+FRTimeStop;expand to preposition 
+967;64;FRPrepTime+^FRTimeBegin|.FRNonconcept|typeConcept:typeBeginEndConcept:typeEndConcept+FRTime|^FRAnyLabel:FRTimeStop;+FRBeginrel+FRTimeBegin|*|+FRInTimeSpan|+FRTimeStop;expand to preposition 
 /*		967. Le rapport couvrant le rapport annuel 2003 de la Cour doit être publié au cours de l'automne 2005. Le mariage, annoncé en septembre, a pour but de créer le plus gros groupe informatique mondial. On ne reprend pas une cigarette après 1 an d'abstinence par besoin de nicotine. Ces derogations ont rendu disponibles en 1986 environ 200 Mio ECU de credits d'engagement.
-1005;64;FRPrepTime+FRAddExpansion|.FRNonconcept|FRMod:FRCon|FRCon:FRTimeconcept+FRTime|.typeConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|+FRIntimespan|*|+FRTimeStop;expand to preposition, for adjective plus Concept
+1005;64;FRPrepTime+FRAddExpansion|.FRNonconcept|FRMod:FRCon|FRCon:FRTimeconcept+FRTime|.typeConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|+FRInTimeSpan|*|+FRTimeStop;expand to preposition, for adjective plus Concept
 /*		1005. Il a des comportements aberrants comme de sortir à moitié nu en plein hiver
 1012;64;FRPrep+FRAddExpansion|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept:FRCon+FRTime|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|+FRTimeStop;
 /*		1012. Pour la première fois en 400 ans, un extraordinaire platane oriental a été planté.
@@ -1219,7 +1241,7 @@
 /*		994. Ils devraient téléphoner pour prendre rendez-vous entre le 31 janvier et le premier février pour une consultation entre le 31 janvier et le premier février. 
 991;64;FRAdvTime:FRYearnum:FRTimeconcept|FRAndOr|.FRNonconcept|FRAdvTime:FRYearnum:FRTimeconcept|^FRAnyLabel;+FRTimeBegin|*|*|*|+FRTimeStop;
 /*		991. Les pays tiennent un sommet dimanche et lundi.
-977;64;FRAdvTime:FRTimeconcept+^FRIntimespan|FRAllformsDe:FRPrepTime:"entre"+FRTimeBegin;+FRTimeBegin|*;further expand to time indication on the left of time span
+977;64;FRAdvTime:FRTimeconcept+^FRInTimeSpan|FRAllformsDe:FRPrepTime:"entre"+FRTimeBegin;+FRTimeBegin|*;further expand to time indication on the left of time span
 /*		977. L'euro s'inscrivait à 1,3719 USD dans la matinée de lundi, contre 1,3737 vendredi dernier vers 16H30. Le gouvernement a dévalué la livre, début août, pour la deuxième fois en six mois, par rapport au billet vert. Rendez-vous ce jeudi de 8 heures à 12 heures. Pas d'heures de glace le soir du 27 au 31 décembre. Ce festival se déroule chaque été depuis 2003. Ces chutes de neige, qui n’ont pas faibli de la nuit entre vendredi et samedi, ont placé cinq régions du centre du pays en alerte rouge samedi matin.
 1033;64;FRAdvTime:FRTimeconcept|FRPrep+FRTimeBegin;+FRTimeBegin|*;
 /*		1033. Cette étape finale est prévue jeudi à midi.
@@ -1278,7 +1300,7 @@
 1050;64;FRTimeStop|*^FRTimeBegin:FRTimeStop|FRTimeStop;-FRTimeStop|*|*;
 /*		1050. Le ministre de la Santé a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées, avec le paiement de samedi au tarif d'une demi-garde.
 1090;64;FRTimeBegin|*^FRTimeStop|FRTimeStop;*|+FRInTimeSpan|*;
-
+/*		1090. Or, de nombreuses exceptions ont été introduites au cours des dernieres années.
 
 /* PHASE 70: NEGATION
 /* ==================

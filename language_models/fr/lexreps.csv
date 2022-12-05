@@ -12,20 +12,21 @@
 
 
 /* Numbers etc.
-;;(deux|trois|quatre|cinq|six|sept|huit|neuf);;FRNum;FRNuminfull;FRDaynum;
-;;(onze|douze|treize|quatorze|quinze|seize|dix-sept|dix-huit|dix-neuf);;FRNum;FRNuminfull;FRDaynum;
+;;(deux|trois|quatre|cinq|six|sept|huit|neuf);;FRNum;FRNuminfull;FRDaynum;FRMinutes;
+;;(onze|douze|treize|quatorze|quinze|seize|dix-sept|dix-huit|dix-neuf);;FRNum;FRNuminfull;FRDaynum;FRMinutes;
 
-;;(vingt-et-un|vingt-et-une|vingt-deux|vingt-trois|vingt-quatre|vingt-cinq|vingt-six|vingt-sept|vingt-huit|vingt-neuf|trente-et-un|trente-et-une);;FRNum;FRNuminfull;FRDaynum;
-;;(trente-deux|trente-trois|trente-quatre|trente-cinq|trente-six|trente-sept|trente-huit|trente-neuf);;FRNum;FRNuminfull;
-;;(quarante-et-un|quarante-et-une|quarante-deux|quarante-trois|quarante-quatre|quarante-cinq|quarante-six|quarante-sept|quarante-huit|quarante-neuf);;FRNum;FRNuminfull;
-;;(cinquante-et-un|cinquante-et-une|cinquante-deux|cinquante-trois|cinquante-quatre|cinquante-cinq|cinquante-six|cinquante-sept|cinquante-huit|cinquante-neuf);;FRNum;FRNuminfull;
+;;(vingt-et-un|vingt-et-une|vingt-deux|vingt-trois|vingt-quatre|vingt-cinq|vingt-six|vingt-sept|vingt-huit|vingt-neuf|trente-et-un|trente-et-une);;FRNum;FRNuminfull;FRDaynum;FRMinutes;
+;;(trente-deux|trente-trois|trente-quatre|trente-cinq|trente-six|trente-sept|trente-huit|trente-neuf);;FRNum;FRNuminfull;FRMinutes;
+;;(quarante-et-un|quarante-et-une|quarante-deux|quarante-trois|quarante-quatre|quarante-cinq|quarante-six|quarante-sept|quarante-huit|quarante-neuf);;FRNum;FRNuminfull;FRMinutes;
+;;(cinquante-et-un|cinquante-et-une|cinquante-deux|cinquante-trois|cinquante-quatre|cinquante-cinq|cinquante-six|cinquante-sept|cinquante-huit|cinquante-neuf);;FRNum;FRNuminfull;FRMinutes;
 ;;(soixante-et-un|soixante-et-une|soixante-deux|soixante-trois|soixante-quatre|soixante-cinq|soixante-six|soixante-sept|soixante-huit|soixante-neuf);;FRNum;FRNuminfull;
 ;;(soixante-et-onze|soixante-douze|soixante-treize|soixante-quatorze|soixante-quinze|soixante-seize|soixante-dix-sept|soixante-dix-huit|soixante-dix-neuf);;FRNum;FRNuminfull;
 ;;(septante-et-un|septante-et-une|septante-deux|septante-trois|septante-quatre|septante-cinq|septante-six|septante-sept|septante-huit|septante-neuf);;FRNum;FRNuminfull;
 ;;(quatre-vingt-un|quatre-vingt-une|quatre-vingt-deux|quatre-vingt-trois|quatre-vingt-quatre|quatre-vingt-cinq|quatre-vingt-six|quatre-vingt-sept|quatre-vingt-huit|quatre-vingt-neuf);;FRNum;FRNuminfull;
 ;;(quatre-vingt-onze|quatre-vingt-douze|quatre-vingt-treize|quatre-vingt-quatorze|quatre-vingt-quinze|quatre-vingt-seize|quatre-vingt-dix-sept|quatre-vingt-dix-huit|quatre-vingt-dix-neuf|cent);;FRNum;FRNuminfull;
 ;;(nonante-et-un|nonante-et-une|nonante-deux|nonante-trois|nonante-quatre|nonante-cinq|nonante-six|nonante-sept|nonante-huit|nonante-neuf);;FRNum;FRNuminfull;
-;;(dix|vingt|trente|quarante|cinquante|soixante|septante|soixante-dix|quatre-vingt|quatre-vingt-dix|nonante);;FRNum;FRNuminfull;FRDecade;
+;;(dix|vingt|trente|quarante|cinquante);;FRNum;FRNuminfull;FRDecade;FRMinutes;
+;;(soixante|septante|soixante-dix|quatre-vingt|quatre-vingt-dix|nonante);;FRNum;FRNuminfull;FRDecade;
 ;;un cent;;FRIndefart;-;FRCon;
 
 ;;(1|2|3|4|5|6|7|8|9|)(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9) pour cent;;FRNum;FRPercent;
@@ -1725,7 +1726,6 @@
 ;;allaitent;;FRSRel;FRVerb;
 ;;allaiter;;FRInf;
 ;;allant de soi;;FRPPart;
-/*;;allant;;FRSRelConMod;
 ;;allant;;FRPPart;
 ;;aller de soi;;FRInf;
 ;;aller;;FRInfCon;
@@ -108917,7 +108917,12 @@
 ;;matins;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;matinée;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;matinées;;FRCon;FRDaypart;FRTimeconcept;FRTime;
-;;midi;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRAfterA;
+;;midi;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;midi et demi;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;midi et le quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;midi et quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;midi moins le quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;midi moins quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
 ;;midis;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;après-midi;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;après-midis;;FRCon;FRDaypart;FRTimeconcept;FRTime;
@@ -108931,7 +108936,12 @@
 ;;soirs;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;nuit;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;nuits;;FRCon;FRDaypart;FRTimeconcept;FRTime;
-;;minuit;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRAfterA;
+;;minuit;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;minuit et demi;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;minuit et le quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;minuit et quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;minuit moins le quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
+;;minuit moins quart;;FRCon;FRDaypart;FRTimeconcept;FRTime;FRClocktime;
 ;;minuits;;FRCon;FRDaypart;FRTimeconcept;FRTime;
 ;;au lendemain;;FRPrep;FRPrepTime;-;FRCon;FRTimeconcept;FRTime;
 ;;année;;FRTimeconcept;FRCon;FRTime;FRAfterA;
@@ -109199,22 +109209,24 @@
 ;;\(20(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)\);;FRNum;FRYearnum;FRTime;FRNumbrackets;
 ;;\(20(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(-|/)(0|1|2|3)(0|1|2|3|4|5|6|7|8|9)\);;FRNum;FRYearnum;FRTime;FRNumrange;FRNumbrackets;
 ;;\(20(0|1|2|3|4|5|6|7|8|9)(0|1|2|3|4|5|6|7|8|9)(-|/)20(0|1|2|3)(0|1|2|3|4|5|6|7|8|9)\);;FRNum;FRYearnum;FRTime;FRNumrange;FRNumbrackets;
-;;{timeofday};;FRAdvTime;FRTime;FRTimeofday;
-;;{timeofday_brackets};;FRAdvTime;FRTime;FRTimeofday;
+;;{timeofday};;FRAdvTime;FRTime;FRClocktime;
+;;{timeofday_brackets};;FRAdvTime;FRTime;FRClocktime;
 ;;{z_date};;FRAdvTime;FRTime;
 ;;'(10|20|30|40|50|60|70|80|90);;FRNum;FRDecade;
-;;(10|20);;FRNum;FRDecade;FRMinutes;FRDaynum;FRHour
-;;30;;FRNum;FRDecade;FRMinutes;FRDaynum;
-;;(40|50);;FRNum;FRDecade;FRMinutes;
+;;(10|20);;FRNum;FRDecade;FRMinutes;FRDaynum;FRHour;FRWeeknum;
+;;30;;FRNum;FRDecade;FRMinutes;FRDaynum;FRWeeknum;
+;;(40|50);;FRNum;FRDecade;FRMinutes;FRWeeknum;
 ;;(60|70|80|90);;FRNum;FRDecade;
-;;(1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;
-;;(0)(0|1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;
-;;1(1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;
-;;2(1|2|3|4);;FRNum;FRHour;FRMinutes;FRDaynum;
-;;2(5|6|7|8|9);;FRNum;FRMinutes;FRDaynum;
-;;31;;FRNum;FRMinutes;FRDaynum;
-;;(3)(2|3|4|5|6|7|8|9);;FRNum;FRMinutes;
-;;(4|5)(1|2|3|4|5|6|7|8|9);;FRNum;FRMinutes;
+;;(1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;FRWeeknum;
+;;(0)(0|1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;FRWeeknum;
+;;1(1|2|3|4|5|6|7|8|9);;FRNum;FRHour;FRMinutes;FRDaynum;FRWeeknum;
+;;2(1|2|3|4);;FRNum;FRHour;FRMinutes;FRDaynum;FRWeeknum;
+;;2(5|6|7|8|9);;FRNum;FRMinutes;FRDaynum;FRWeeknum;
+;;31;;FRNum;FRMinutes;FRDaynum;FRWeeknum;
+;;(3)(2|3|4|5|6|7|8|9);;FRNum;FRMinutes;FRWeeknum;
+;;(4)(1|2|3|4|5|6|7|8|9);;FRNum;FRMinutes;FRWeeknum;
+;;(5)(1|2|3);;FRNum;FRMinutes;FRWeeknum;
+;;(5)(4|5|6|7|8|9);;FRNum;FRMinutes;
 ;;{numberroman_hyphen};;FRNum;
 ;;{numberroman};;FRNum;FRNumroman;
 ;;{ordnumberroman};;FRNum;FROrdnum;
@@ -109820,5 +109832,3 @@
 ;;seules;;FRMod;
 ;;avant tout;;FRAdv;FRAdvManner;
 ;;en avant;;FRAdv;FRAdvManner;
-
-/*;;de son vivant;;FRAdvTime;FRAdv;
