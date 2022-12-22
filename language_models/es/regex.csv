@@ -2,14 +2,25 @@
 
 /*GENERAL REG EX
 /*==============
-number-all;[\-\<\>\+]?(\d+([\.\,]\d+)?)|((\d{1,3}[\,])?(\d{1,3}[\,])?\d+([\.\,]\d+)|(\.?\d+))
-year1;1\d{3}([-|−]1\d{3})?
-year2;2[01]\d{2}([-|−]2[01]\d{2})?
-number-percentage;(\-|)\d+([\.\,]\d+)?(%|)?(\-\d+)?%
-number-decimal;\d+[,|.]\d+
 footnote;\[\d{1,2}\]
 
-numberroman;(cm|cd|d?c{0,3})(xc|xl|x{0,3})(ix|iv|v?i{0,3})$
+/*numbers
+number-simple;\d+
+number-all;[≤≥=\-\<\>\+\.]?\d+([\.\,]\d+)?([\,]\d+)?
+number-range;[≤≥=\-\<\>\+]?\d+([\.\,]\d+)?\-\d+([\.\,]\d+)?
+
+number-big1;\.?\d\d\d\d\d+
+number-big2;\d{1,3}[\.]\d\d\d
+number-big3;\d{1,3}[\.]\d{1,3}[\.]\d\d\d
+number_3digits;\d{1,3}
+number-percentage;(\-|)\d+([\.\,]\d+)?(%|)?(\-\d+)?%
+numberroman_hyphen;(i|v|x){2,5}[\-](i|v|x){2,5}
+numberroman;(i|v|x){2,5}
+
+
+/*time
+time;[012]?[0-9][\:][0-5][0-9]
+
 
 /*REGEX FOR SPANISH 
 /*================= 

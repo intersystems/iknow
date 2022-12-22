@@ -30,6 +30,283 @@
 /*		1101.UD. Una reunión a las seis de la tarde es difícilmente concebible sin luz.
 
 
+/* PHASE 33: DETECT NUMBERS
+/* ========================
+
+/*******COPY FR***********
+/*join numbers
+/*1045;33;"tous les"|FRNum|^FRCon:FRAndOr;JoinReverse|FRSubjpron|*;
+1141;33;ESNum|ESNumpart2;+JoinReverse|*;
+/*		1141. El asma generó la pérdida de 10,5 millones de días de escuela y 14,2 millones de días laborales en el 2008. El ejercicio de 1920 arrastraba una deuda del año anterior de 4 642 163 m$n que luego fue reducida a 3 252 494 m$n. 
+1158;33;ESNuminfull|ESNuminfull;+JoinReverse|*;
+/*		1158. El día cinco de noviembre de dos mil dieciseis.
+/*865;33;FRNum|FRNumpart2;*|+Join;
+/*868;33;FRNumplusde|FRDe:FRDes|.FRPoss:FRIndefpron|FRCon:FRNum+^FRTimeconcept:FRYear;*|Join|JoinReverse|*;
+/*866;33;FRNuminfull:FRQuantpron|.FRDe|FRNuminfull;+JoinReverse|+JoinReverse|*;
+/*850;33;"pas":"beaucoup":FRNummodifier|"plus":"moins"|FRAllformsDe:"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;/*849;33;"plus":"moins"|"de":"des":"du":"dµ":"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|+FRBegin;
+/*1020;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|"un"|FRTimeconcept:"an";JoinReverse|JoinReverse|*|*;
+/*964;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|FRNum;JoinReverse|JoinReverse|*;
+/*851;33;FRNummodifier|.FRIndefart:FRDefart|FRNum:FRQuantpron;JoinReverse|JoinReverse|*;
+/*933;33;FRNum|.FRTimeconcept:FRYear|"au"|"minimum":"maximum";*|*|JoinReverse|FRMod+FREndTime;
+/*******COPY FR***********
+
+/*MAS/MENOS
+892;33;ESNum+^ESConTime|ESAndOrBut|ESMasmenos|^ESAdj+^SEnd;ESNum|+Join|+Join|*;
+/*		892. Esa estructura creada entre dos o más personas. NOT. en cuanto a la primera y más importante fuente de formación.
+675;33;ESBeforeNum|ESDe:ESPrepart|ESNum;ESNum|+Join|+Join;
+/*		675. Porque sigue habiendo más de cuatro millones de personas en paro por las que seguir trabajando. Ha caído en menos de 24 horas tanta agua como la prevista para todo el mes. Varios ángulos, ya que se debe enfatizar en que es más del 55 por ciento de la población. En Europa, menos del 14% de las personas que padecen el mal tiene trabajo.
+677;33;ESBeforeNum|ESDe:ESPrepart|ESUn;ESNum|+Join|+Join;
+/*		677. La diligencia tardó menos de una hora.
+674;33;ESNum:ESNumber|ESAfterBCon;ESBeginconcept|ESCon;veces más/menos
+/*		674. Se vió que contenía en ese momento 40 veces más gliadina que la de los daneses.
+
+
+/* PHASE 35: DETECT TIME INDICATIONS
+/* =================================
+
+/* preparatory rules
+1107;35;^SBegin|"domingo"+ESCapitalInitial;*|-ESDay;'domingo' as name
+/*		1107. Pepe Domingo Castaño fue el único que levantó la voz.
+1127;35;ESTodo|ESDefart:ESDemonstr:ESEste|ESTimeconcept:ESDay:ESYear;ESTodo+ESBeginTime|Join|*;'todo los' etc. as BeginTime
+/*		1127. Y eso te da la oportunidad de estar un rato con tus hijos casi todos los días por la mañana y un rato por la noche. Estaríamos ante la mayor ampliación de capital en los mercados europeos de todo el año 2010. Fueron también afectadas con víctimas mortales, urbanizaciones de lujo usadas para veranear, aunque en general las zonas más afectadas fueron donde las autoridades locales han dejado todos estos años construir a los más pobres, a pesar de ser zonas de riego.
+1129;35;ESOrdnum+ESTimeconcept|ESCon:ESConVerb:ESAdjCon:ESAdj;-ESTimeconcept|*;disambiguate 'segundo'
+/*		1129. La emoción registrada en este segundo encierro se repetió.
+1146;35;^ESDefart|ESAux:ESLinkingverb|.ESAdv:ESAdvPR|ESPart+ESBeginTime;*|*|*|ESPartrel;disambiguate ambiguous participle which can also start a time indication
+/*		1146. Está a la vista que han pasado 35 años y no se ha resuelto la situación. NOT. Certificado de Recuperación: donde se especifica el haber pasado la enfermedad dentro de los últimos 180 días.
+
+/*******COPY FR***********
+/* possible year number
+/*894;35;FRAllformsDe|FRNum|FRUntil|FRNum|typeConcept;*|-FRPossibleYearnum|*|-FRPossibleYearnum|*;
+/*893;35;FRAllformsDe|FRPossibleYearnum:FRYearnum|FRUntil|FRPossibleYearnum:FRYearnum|^typeConcept;*|FRCon+FRNum+FRYearnum+FRTime|*|FRCon+FRNum+FRYearnum+FRTime|*;
+1118;35;ESMonth:"mes":"meses":"década":"décadas"|.ESAllformsDe:ESEste:ESDemonstr:ESYear|ESPossibleYearnum;*|*|-ESPossibleYearnum+ESYearnum+ESTime;
+/*		1118. En mayo de 1581 Cervantes se trasladó a Portugal. Dado el auge que estaba cobrando, la ciudad fue destruida por Almanzor el 10 de agosto del año 997, el cual sólo respetó el sepulcro del apóstol. Su padre decidió a encerrarla en Tordesillas el mes de febrero del año 1509, para evitar que se formase un partido nobiliario en torno de su hija.
+/*890;35;FRPrepTime:FRMonth:FRTimeconcept|FRPossibleYearnum;*|FRCon+FRNum+FRYearnum+FRTime;
+/*1069;35;FRNum|FRAfterYearnum;FRAdvTime|Join;
+/*897;35;"entre"|FRNum|"et"|FRNum|typeConcept;*|-FRPossibleYearnum|*|-FRPossibleYearnum|*;
+/*898;35;"entre"|FRPossibleYearnum:FRYearnum|"et"|FRPossibleYearnum:FRYearnum|^typeConcept;*|FRAdvTime+FRYearnum+FRTime|*|FRAdvTime+FRYearnum+FRTime|*;
+/*892;35;FRAllformsDe|FRPossibleYearnum|^typeConcept;*|FRCon+FRNum+FRYearnum+FRTime|*;
+/*889;35;FRPossibleYearnum|FRCon+^FRYearnum:FRPossibleYearnum;-FRYearnum-FRTime|*;
+/*891;35;FRYearnum|FRAndOr:"-"|FRPossibleYearnum;*|*|FRCon+FRNum+FRYearnum+FRTime;
+/*1068;35;FRYearnum|"-"|FRYearnum;FRAdvTime|Join|Join;
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* distinguish 'año(s)' as time attribute
+/*931;35;Ageindicator|.FRAllformsDe|"un":FRNum|FRYear:FRTimeconcept;*|*|*|-FRYear-FRTimeconcept-FRTime+FRAge;
+/*925;35;FRYear:FRTimeconcept|FRAllformsDe|."lµ"|"âge";-FRYear-FRTimeconcept-FRTime+FRAge|*|*|*;
+/*921;35;FRNum:"un"|FRYear|"et demi":"et demie";JoinReverse|*|Join;
+1144;35;ESNum|ESBeginTime:ESOrdnum+^"cada"|ESYear;JoinReverse|JoinReverse|-ESCon+ESAdvTime+ESTime;
+/*		1144. En los tres últimos años el consumo legal anual de cigarrillos bajó en Colombia de 19 a 17,3 billones de unidades. NOT. Al contrario, con esta medida se busca reducir el número de nuevas infecciones se calcula que se producen dos millones cada año.
+1147;35;ESEste:ESDemonstr:ESBeginTime|ESYear|ESAdj:"más":"menos";JoinReverse|+ESTime|*;
+/*		1147. Partiendo de la hipótesis generalmente aceptada que sostiene que la concentración de capitales se produce en periodos de retracción, no es extraño que en esos años difíciles para la industria textil, uno de sus grupos fundadores se retire de ella. Otro año más, viajar en avión durante las Navidades puede convertirse en un calvario ante la amenaza de huelga de los pilotos.
+1143;35;*ESEste:ESDemonstr:ESBeginTime:ESOrdnum|.ESNum:ESUn|ESYear|^"más":"menos";JoinReverse|JoinReverse|-ESCon+ESAdvTime+ESTime|*;add FRQuantpron?
+/*		1143. En estos primeros años del siglo se empieza a dar el apelativo de género ínfimo a las representaciones conocidas como revistas. Los países en desarrollo aportarán casi la mitad del crecimiento mundial durante los próximos dos años, con una expansión prevista del 6% y el 6,1%, frente al 7% de 2010. El impuesto para los cigarrillos creció este año 2,6 por ciento y el ad valórem el 3 por ciento. Con la película inventa un nuevo género de película de danza y contribuye con ello a la extraordinaria divulgación que experimenta estos últimos años el baile español en el mundo. En los primeros años del siglo XX, se componen obras de mayor calidad musical.
+/*919;35;FRDemonstr:FRQuantpron:FRBeginTime|.FRNum:"un":"des"|FRYear;JoinReverse|JoinReverse|FRAdvTime;
+/*922;35;FRPrepTime:"sur"+^FRPrepAge|."un":"des":FRNum|FRYear|FRDe;+FRAddExpansion|JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+/*920;35;FRPrepTime:"sur"+^FRPrepAge:FRUntil|."un":"des":FRNum|FRYear;+FRAddExpansion|JoinReverse|FRAdvTime;
+/*1084;35;FRNummodifier|."un":"une"|FRYear;JoinReverse|FRNum|*;
+/*923;35;"un":"des":FRNum|FRYear|FRDe;JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+/*928;35;FRYear|FREndTime+FRNummodifier;*|Join;
+1131;35;ESNum:ESUn|ESYear|ESEndTime;JoinReverse|ESAdvTime+ESTime|Join;
+/*		1131. Aproximadamente dos años después comienza su etapa como novillero. Un año antes, en 2008, lo consiguieron otros dos arquitectos asentados en Barcelona. En una información legal elaborada ocho años más tarde se dice.
+/*927;35;FRNum:"un"|FRYear|FREndTime;JoinReverse|FRAdvTime|Join;
+1139;35;ESYear|ESEndTime;ESAdvTime+ESTime|Join;
+/*		1139. El último caso conocido se produjo en enero del año pasado en la ciudad de Mashhad. Recibió el año pasado 2,5 millones de visitantes. El hombre había sido el director de la entidad bancaria años atrás.
+/*926;35;FRYear|FREndTime;FRAdvTime|Join;
+/*935;35;FRNum:"un":"une"|FRYear:FRTimeconcept|.FRAdv|"après":"avant"|FRPunctuation:SEnd;JoinReverse|FRAdvTime|Join|Join|*;
+1148;35;ESNum:"un"|ESYear|.ESAdv|"después del":"después de":"antes del":"antes de";JoinReverse|ESAdvTime+ESTime|*|*;add :"desde del":"desde de"
+/*		1148. No tiene sentido presentar una tesis 20 años después de completado el periodo formativo. En nuestro país la supervivencia cinco años después del tratamiento es, aproximadamente, de un 78 %.
+/*930;35;FRNum:"un"|FRYear|.FRAdv|"après":"avant":"depuis";JoinReverse|FRAdvTime|*|*;
+/*932;35;"dure":"durait":"durera":"durant":"durer":"duré"+^"des"|"un":"des":FRNum|FRYear;*|JoinReverse|FRAdvTime;
+/*1058;35;^Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|FRNum:"un"|FRYear|"et"|FRNum|FRTimeconcept;*|*|*|*|*|*|-FRTime-FRTimeconcept;age
+/*962;35;Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|"un":"des":FRNum|FRYear;*|*|JoinReverse|FRAdvTime;
+/*960;35;FRIndefart|FRYear|^typeConcept;FRNum|*|*;
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* clock time
+/*1093;35;"midi":"minuit"|."et":"moins"|"une":FRMinutes|"minute":"minutes";JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*1094;35;"midi":"minuit"|."et":"moins"|"une":FRMinutes|^typeConcept;JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+/*1092;35;"une":FRNum|"heure":"heures"|"et":"moins"|"le"|"quart";JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*1095;35;"une":FRNum|"heure":"heures"|."et":"moins"|"une":FRMinutes|"minute":"minutes";JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*1096;35;"une":FRNum|"heure":"heures"|."et":"moins"|"quart":"une":FRMinutes|^typeConcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+/*1032;35;FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|"et demie";JoinReverse|JoinReverse|FRAdvTime+FRClocktime;
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* join time indications
+1153;35;"día"|ESDaynum;JoinReverse|+ESTime;
+/*		1153. La Torre se iluminará de color rosa el próximo día 19 para conmemorar el Día Mundial contra el Cáncer de Mama. Los observadores en Europa, Oeste de África y Sudamérica llegarán a ver sólo una parte del eclipse antes de que éste sea interrumpido por el amanecer del día 21.
+/*1042;35;^FRInf:FRVerb:FRPart|"à"|FRNum:FRQuantpron|FRTimeconcept|FRAllformsDe;*|+FRAddExpansion|*|*|+FRAddExpansion;
+/*862;35;FRNum:"un":"une"|FRTimeconcept|"et demi":"et demie";JoinReverse|JoinReverse|FRAdvTime;
+/*958;35;FRIndefart|FRTimeconcept+^"periode":"période"|^FRCon:FRMod:FRPlus:FRDe:FRNum;FRNum|*|*;
+/*959;35;FRIndefart|FRTimeconcept+^"periode":"période"|FRDe;FRNum|*|+FRJoinwithcon;
+/*916;35;FRNum|FRTimeconcept|"sur"|FRNum|^typeConcept;JoinReverse|JoinReverse|JoinReverse|FRAdvTime|*;
+/*917;35;"un":"une"|FRTimeconcept|"de"|"plus";FRAdvTime|+Join|Join|Join;
+/*854;35;"plus":"moins":FRNumplusde|FRDe|."un":"une"|FRTimeconcept;JoinReverse|JoinReverse|JoinReverse|*;
+/*884;35;FRNummodifier|."un":"une"|FRTimeconcept;JoinReverse|JoinReverse|FRAdvTime;
+1136;35;*{1,2}ESNum|ESTimeconcept|.ESDe|ESYearnum;JoinReverse|JoinReverse|JoinReverse|ESAdvTime;
+/*		1136. En el noveno mes de 2010 se registraron 31.763 transacciones de inmuebles libres. Ecuador anotó un déficit comercial de USD 1.460 millones en los primeros 11 meses de 2010, informó el Banco Central.
+/*861;35;FRNum|FRTimeconcept|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
+1142;35;ESAdj|ESYear|ESYearnum:ESDecade+^ESNumbrackets;*|+ESTime|Join;
+/*		1142. Se siguió una conducta estricta en cuanto al mantenimiento del respaldo oro en los difíciles años 1920–1925.
+1145;35;^ESAdj|ESYear:"década":"décadas"|ESYearnum:ESDecade+^ESNumbrackets;*|ESAdvTime+ESYear+ESTime|Join;
+/*		1145. Estaríamos ante la mayor ampliación de capital en los mercados europeos de todo el año 2010. En los años cincuenta, los científicos que estudiaban los efectos de las explosiones comprobaron que esas partículas eran potencialmente letales. En los años sesenta del siglo pasado los usuarios realizaban copias en sus domicilios mediante las musicassettes.
+1156;35;^ESAdj|ESYear:"década":"décadas"|ESNum+^ESNumbrackets|^ESAdj:ESCon:ESAllformsDe;*|ESAdvTime+ESYear+ESTime|Join|*;
+/*		1156. Día uno de marzo del año dos mil. NOT. Según los datos hechos públicos ayer, España exportó en el primer semestre del año 2,2 millones de tonelada de hortalizas.
+/*903;35;"année":"années":"annee":"annees"|FRYearnum:FRDecade;*|Join;
+/*912;35;FRNum|FRComma|FRNum|FRAndOr|FRNum|FRTimeconcept:FRMonth+^FRDay;+FRTime|*|+FRTime|*|*|*;
+/*966;35;FRBeginTime+FRNum|FRAndOr|FRNum|FRTimeconcept:FRMonth+^FRDay;+FRBegin+FRTime|*|JoinReverse|FRAdvTime;
+/*1003;35;FROrdnum|FRAndOr:FRUntil|.FRPrepTime:"la":"le":"lµ"|FROrdnum|FRTimeconcept:FRMonth+^FRDay;+FRTime|*|*|*|*;
+/*911;35;^FRCon|FRMinutes:FRDaynum|FRAndOr:FRUntil|.FRPrepTime:"la":"le":"lµ"|FRNum+^FROrdnum|FRTimeconcept:FRMonth:"h"+^FRDay;*|+FRTime|*|*|*|*;
+/*907;35;FRNum|.FRBeginTime:FROrdnum|FRTimeconcept+^FRDay|FRAllformsDe|FRMonth:FRTimeconcept;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*953;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
+/*957;35;FRMod|FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay;*|JoinReverse|JoinReverse|*;
+/*1034;35;FRNum:"une"|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+886;35;ESCentury|ESNumroman;ESAdvTime+ESTime|Join;
+/*		886. Desde la Antigua Grecia o Egipto a España y Sicilia en el siglo VIII. Los colonizadores empiezan a venir a partir del 1.000 antes de Cristo, pero aquí los documentos más antiguos en lengua ibérica son de finales del siglo VI.
+1150;35;^ESNum|*ESEste:ESDemonstr:ESBeginTime:ESQuantity|.ESNum+^ESTimeconcept|ESTimeconcept:ESDaypart|ESAdj|^ESCon:ESConVerb;*|JoinReverse|JoinReverse|+ESTime|*|*;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1150. En los pocos minutos restantes, las ocasiones para el ridículo del torpe novato deseoso de popularidad se repiten. NOT. Otra opción es quedarse en El Gran Roque, la isla principal de poco más de un kilómetro de longitud, y desde aquí hacer cada día pequeños viajes a otras islas.
+1120;35;^ESNum|*ESEste:ESDemonstr:ESBeginTime:ESQuantity|.ESNum+^ESTimeconcept|ESTimeconcept:ESDaypart;*|JoinReverse|JoinReverse|ESAdvTime+ESTime;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1120. Asimismo, el presidente ha ordenado la puesta en libertad de todos los detenidos durante la ola de protestas contra la subida de los precios y la falta de oportunidades laborales en el país de los últimos días. En esas dos décadas de renovación surgieron también otros autores e intérpretes de gran importancia. Pero persiste en su empeño y en los últimos segundos, en los que el suspense se incrementa por la incertidumbre del resultado. La Tierra completa un giro cada día. Durante algunas décadas ambos estilos se disputaron la primacía del público, saliendo victorioso el modelo andaluz. Al margen de un retraso de unas dos horas en el inicio de la operación, el rescate de los mineros sigue los tiempos previstos. Tranquila, con gafas oscuras, media sonrisa y sin hacer declaraciones, la atleta declara esta mañana. Las dos últimas caídas se han producido esta misma semana, una en un hotel de Mallorca y otra en un apartamento de Ibiza, aunque en ambos casos el suceso no ha acabado, por fortuna, con un desenlace fatal. 
+1121;35;ESNum:ESUn|.ESBeginTime:ESNum+^ESTimeconcept|ESTimeconcept|ESEndTime;JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESTime;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1121. Esta caída pone fin a cuatro meses consecutivos de crecimiento del desempleo y supone, además, el mejor dato en un mes de diciembre desde el año 2000. Muy cerca de la anterior, quince minutos antes, con una afección "mínima" en  un coche cercano. Muchas de las biografías de Ernesto Guevara sostienen que nació por azar en la ciudad argentina de Rosario, en la provincia de Santa Fe, el 14 de junio de 1928, pero según otras fuentes, habría nacido el 14 de mayo de 1928, exactamente un mes antes.
+1133;35;ESYear|ESNum|"a.c.":"a. c.":"d.c.":"d. c.";ESAdvTime+ESTime|Join|Join;
+/*		1133. Los deportes se convirtieron en una parte tan importante de su cultura que los griegos crearon los Juegos Olímpicos, una competición que se disputó desde el año 776 a. C. hasta el año 394 d. C. cada cuatro años en Olimpia.
+1132;35;ESNum|"a.c.":"a. c.":"d.c.":"d. c.";ESAdvTime+ESTime|Join;
+/*		1132. La datación por carbono mostró que una uva deshidratada encontrada cerca de una prensa de uvas se cultivó hacia el 4,000 a.C., dijo su equipo.
+1122;35;*ESNum+^ESTimeconcept|ESTimeconcept|ESAdj:ESAdjVerb:ESPart|^typeConcept;JoinReverse|+ESTime|*|*;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1122. Se enfrenta a una multa de entre 40.000 y 500.000 euros por cambiar el día de emisión de con un margen inferior a los tres días reglamentarios. La prueba se consideró excepcionalmente satisfactoria, en especial porque las inserciones se completaron en casi la mitad de tiempo de las 24 horas asignadas, con una configuración de sistema básica.
+1123;35;^ESCon|ESAdj:ESAdjVerb|*ESNum+^ESTimeconcept|ESTimeconcept;*|*|JoinReverse|+ESTime;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1123. Este eclipse sera total durante unos generosos 72 minutos - de nuevo, para quien se encuentre en una zona del mundo con suerte.
+1155;35;ESNum:ESIndefpronPR|.ESBeginTime:ESNum+^ESTimeconcept|ESTimeconcept|"más":"menos";JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESTime;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1155. Así, cada día le lleva a la Tierra alrededor de 50 minutos más para estar de frente con la Luna nuevamente (lo cual significa que se puede ver la Luna en el cielo).
+1151;35;ESNum|.ESBeginTime:ESNum+^ESTimeconcept|ESTimeconcept|ESAdj|^ESCon:ESConVerb;JoinReverse|JoinReverse|+ESTime|*|*;Num followed by Timeconcept: Num with exception of Timeconcept, otherwise rule won't fire for 'segundo(s)'
+/*		1151. Una medida en vigor a las ocho de la tarde hasta las seis de la mañana (de 22.00 a 4.00 hora peninsular española) y que cientos de personas han desafiado durante la noche.
+1119;35;ESNum|.ESBeginTime:ESNum+^ESTimeconcept|ESTimeconcept;JoinReverse|JoinReverse|ESAdvTime+ESTime;
+/*		1119. Fue el destino del Getafe, que perdió demasiados balones en los primeros minutos y se expuso a los contragolpes. Otra pérdida en el medio campo propició la respuesta del Madrid antes de que se cumplieran 20 minutos. En el acumulado de los cinco primeros meses del año, la media de viajeros bajó el 0,8% y, por tipos de transporte, todos los modos presentan tasas medias negativas, excepto el transporte urbano, que sube el 0,7%. Así, la recaudación por este impuesto en julio casi se duplicó (subió un 95,4%) con respecto al mismo mes del año anterior, mientras que la acumulada de los primeros siete meses se elevó el 42,2%, hasta 31.900 millones. En una carrera que duró 6 minutos y 23 segundos, un mozo fue corneado en un muslo en el tramo de Mercaderes.
+1124;35;ESDay:"ayer":"hoy"|"por"|"la"|ESDaypart;-ESCon+ESAdvTime+ESTime|Join|Join|Join;
+/*		1124. Rápidamente, el fuego se extendió por el muelle y las llamas estuvieron ardiendo durante 15 horas hasta que cientos de bomberos consiguieron por fin sofocarlo el sábado por la mañana. Ayer por la mañana, el juez cuarto de Instancia Penal escuchó a uno de los dos testigos del  ataque. El vertido comenzó el pasado viernes por la tarde.
+1125;35;ESDaypart|"del"|ESDay;JoinReverse|JoinReverse|-ESCon+ESAdvTime+ESTime;
+/*		1125. La presidenta de Argentina recibió en la noche del lunes a la selección española.
+/*848;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime|*;
+/*871;35;FRDay|FRDaypart;*|Join;
+/*873;35;^FRPrep:FRDe|FRDefart|"matin":"après-midi":"soir":"jour":"nuit"|^FRAllformsDe:FRNum;*|JoinReverse|FRAdvTime|*;
+/*951;35;FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay:FRTimeconcept:FRTimes|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
+/*1008;35;FRDefart:FRIndefart|FRMod|FRBeginTime|FRDay:FRTimeconcept:FRTimes;*|+FRJoinwithcon|JoinReverse|*;
+/*869;35;"mois"|FRDe|FRMonth;JoinReverse|JoinReverse|+FRTimeconcept;
+/*1067;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|"periode":"période"|FRAllformsDe;*|JoinReverse|JoinReverse|*|+FRJoinwithcon;'de' after 'period' should be in the same Concept
+1126;35;ESEste:ESDemonstr:ESBeginTime|ESDay;JoinReverse|ESAdvTime+ESTime;copy 1016
+/*		1126. En tanto, en la central de Fukushima continuaban este lunes las tareas para enfriar los reactores dañados. La sociedad pública de gestión aeroportuaria dijo que la situación parecía mejorar este martes por la mañana. Y es que se busca desde el pasado martes a una tercera persona también implicada en el suceso.
+/*1016;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRDay|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRDay|*;
+/*1035;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
+/*846;35;^FRJoinwithcon|FRDemonstr:FRQuantpron:FRBeginTime:FRQuantity|.FRNum:"un":"une"|FRTimeconcept:FRTimes|^FRJoinwithcon;*|JoinReverse|JoinReverse|FRAdvTime|*;
+/*855;35;FRBeginTime|FRAdvTime;JoinReverse|FRAdvTime;use later
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* join dates
+/*859;35;FRDay:"jour"|FRNum|."de":"d'"|FRMonth|FRYearnum;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+1111;35;ESDay|ESNum|.ESAllformsDe|ESMonth|.ESAllformsDe|ESYearnum;JoinReverse|JoinReverse|JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESDate+ESTime;
+/*		1111. En 1749, un acontecimiento hoy casi olvidado y escasamente estudiado por los historiadores ha sido La Gran Redada, que se inició de manera sincronizada en todo el territorio español el miércoles 30 de agosto de 1749.
+/*858;35;FRDay:"jour"|FRNum|."de":"d'"|FRMonth;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+914;35;ESDay:"día"|ESNum:"uno"|.ESAllformsDe|ESMonth;JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESDate+ESTime;rule should precede rule 45
+/*		914. Su selección no se concentra en Barcelona hasta el día dos de septiembre. Día uno de marzo del año dos mil.
+/*1099;35;"jour"|FRDaynum;FRAdvTime|Join;
+1135;35;ESDay|ESDaynum;ESAdvTime+ESTime|Join;
+/*		1135. Todavía el sábado 18 y el domingo 19 guardó la ciudad una cierta normalidad.
+/*857;35;FRNum:FRBeginTime|FRMonth|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
+1112;35;ESNum|.ESAllformsDe|ESMonth|.ESAllformsDe|ESYearnum:ESPossibleYearnum;JoinReverse|JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESDate+ESTime;
+/*		1112. Dalí se negó, quizás por temor a ser expulsado del grupo surrealista, y fue echado violentamente de casa el 28 de diciembre de 1929. No hay eventos programados para 20 abril 2007. Asimismo, fue publicado el 30 de noviembre del 2006 como estándar ISO 26300, alcanzando la fase 60.60 del proceso de estandarización. Según denuncian en lugar de facilitarles las facturas correspondientes a estos expedientes se les ha dado "un papel que habían fabricado tres días antes", ya que en el mismo aparece la fecha de 7 de marzo de 2013, cuando los gastos se originaron entre 2010 y 2012.
+/*860;35;FRBeginTime:FRMonth|FRYearnum;JoinReverse|FRAdvTime;
+1115;35;ESBeginTime|ESMonth|.ESAllformsDe|ESYearnum;JoinReverse|JoinReverse|JoinReverse|ESAdvTime;
+/*		1115. El pasado mes de diciembre de 2008 se cumplían 60 años de la proclamación de la Declaración Universal de los Derechos Humanos.
+281;35;ESNum:"uno"|ESAllformsDe|ESMonth;JoinReverse|JoinReverse|ESAdvTime+ESDate+ESTime;makes 'de' Concept between number and month
+/*		281. Los populares celebraron el doce de octubre. Uno de marzo de dos mil dieciséis. Las fechas límite comienzan el 9 de agosto y finalizan el 6 de septiembre.
+1116;35;ESBeginTime|ESMonth;JoinReverse|ESAdvTime+ESTime;
+/*		1116. El próximo mes de enero será investido doctor honoris causa por la Universidad a Distancia (UNED), a propuesta de su Facultad de Filosofía.
+1113;35;ESMonth|.ESAllformsDe|ESYearnum;ESAdvTime+ESTime|+Join|+Join;
+/*		1113. En términos nominales, señalan los relatores del informe, el precio de los alimentos sigue un 7% por debajo respecto al máximo de junio de 2008. La última gran erupción de este volcán tuvo lugar en mayo de 2008.
+/*874;35;"plus tard":"tard":"plus tôt":"tôt"|."dans"|"le":"la":"lµ"|FRDaypart;JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+1137;35;ESAdvTime:ESTimeconcept:ESMonth:ESDay+^ESOrdnum|ESAllformsDe|.ESDefart|ESDay:ESTimeconcept:ESAdvTime:ESYear;JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESTime;add ESDaypart?
+/*		1137. Al producirse en las primeras horas de la mañana, en el este del país se podrá ver "más claramente que en la zona oeste". Esta disminución de la actividad volcánica ha permitido la reapertura esta mañana del aeropuerto de Catania, la segunda ciudad más importante de Sicilia, que fue cerrado por precaución a última hora de la tarde de ayer ante la posibilidad de que el Etna pudiera expulsar también cenizas. Resulta entonces extraño el obstinado deseo de ciertos cineastas de las primeras décadas del siglo pasado que apuntan a lograr el ballet mecánico en el cine. El estallido de la Guerra Civil española tuvo lugar en Melilla a media tarde del viernes 17 de julio y fue siendo conocido en Madrid en las horas siguientes. El hombre murió el 4 de agosto de ese año de un infarto al corazón. En el acumulado de los cinco primeros meses del año, la media de viajeros bajó el 0,8%. La ciudad fue destruida el 10 de agosto del año 997. Un periodo de transición durante la primera década del siglo XX.
+/*844;35;FRAdvTime:FRDaypart:FRTimeconcept:FRMonth:FRDay|FRAllformsDe|.FRDefart|FRDay:FRTimeconcept:FRAdvTime|^"à";JoinReverse|JoinReverse|JoinReverse|*|*;special case for r833,834
+/*942;35;"le"|FRDay|FRDaynum|^typeConcept;*|FRAdvTime|Join|*;
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* further join time indications
+1149;35;ESBeginTime:ESQuantity|ESAdvTime;JoinReverse|+ESTime;
+/*		1149. El otro lugareño que intercambió pocas palabras con este diario, contó que desde su llegada a esta zona, el pasado 4 de enero, los jóvenes caminaban tomando fotografías y filmando aves, peces y la vegetación del lugar. Esta comunidad – poblamiento de aproximadamente 6.000 habitantes – es uno de los más antiguos de la ciudad de Paraná, ya que fue conformándose desde principios y a lo largo de todo el siglo XX. En ambas décadas 1980 y 1990 se construyeron menos escuelas.
+/*855;35;FRBeginTime|FRAdvTime;JoinReverse|FRAdvTime;moved down
+/*882;35;"un":"une"|FRTimeconcept|FREndTime;FRAdvTime|+Join|Join;
+/*934;35;FRMod|FRTimeconcept|FREndTime:FRDaypart;*|*|Join;
+1134;35;ESAdvTime:ESTimeconcept:ESMonth|ESEndTime;ESAdvTime+ESTime|Join;add ESDaypart?
+/*		1134. Así pues, siguiendo ese presupuesto teórico, para confirmar la continuidad del ciclo faltaba detectar la etapa de contracción en cementerios romanos del solar hispano a partir de mediados del siglo I a. C., cuando la República romana agonizaba y daba paso a la época alto-imperial. La prima de riesgo española se reducía en unos cinco puntos básicos frente al nivel de ayer hasta los 235 puntos, con lo que vuelve al nivel que tenía al inicio de este último episodio de turbulencias a mediados de la semana pasada.
+/*852;35;FRAdvTime:FRTimeconcept:FRMonth|FREndTime:FRDaypart;FRAdvTime|Join;
+/*883;35;"première":"seconde":"deuxième"|"moitié"|FRDe:"du"|."la"|FRTimeconcept:FRMonth:FRAdvTime;JoinReverse|JoinReverse|JoinReverse|JoinReverse|FRAdvTime;
+/*952;35;FRNumplusde:"début":"debut":"milieu":"fin"+^FROrdnum|FRDe:"du":"des"|."la":"lµ"|FRTimeconcept:FRMonth:FRAdvTime:FRYearnum+^"seconde"|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|JoinReverse|*|*|*;
+1130;35;"principios":"mediados":"finales":"final":"fines"|"de":"del"|."la"|ESTimeconcept:ESMonth:ESAdvTime:ESYearnum;JoinReverse|JoinReverse|JoinReverse|ESAdvTime+ESTime;
+/*		1130. A mediados del siglo X se cultiva esta planta en España. Según informó ayer el colegio, a finales de diciembre de 2006, el condenado acudió a colegiarse presentando una titulación obtenida en Japón de Traumatología. Los colonizadores empiezan a venir a partir del 1.000 antes de Cristo, pero aquí los documentos más antiguos en lengua ibérica son de finales del siglo VI.
+1140;35;ESNumplusde|ESAllformsDe|ESAdvTime:ESTimeconcept;JoinReverse|JoinReverse|ESAdvTime+ESTime;add :"début":"debut":"milieu":"fin"+^FROrdnum, ."la":"lµ", :ESMonth:ESYearnum
+/*		1140. La Luna se formó relativamente poco después (aproximadamente 20 millones de años más tarde, hace 4.530 millones de años). El asma generó la pérdida de 10,5 millones de días de escuela y 14,2 millones de días laborales en el 2008. 
+/*864;35;FRNumplusde:"début":"debut":"milieu":"fin"+^FROrdnum|FRDe:"du":"des"|."la":"lµ"|FRTimeconcept:FRMonth:FRAdvTime:FRYearnum+^"seconde"|^FRJoinwithcon;JoinReverse|JoinReverse|JoinReverse|FRAdvTime|*;
+/*996;35;FRAdvTime|FRAllformsDe|FRYearnum;*|Join|Join;
+/*1000;35;"entre":FRPrepTime:FRDefart|FRNum|FRAndOr|.FRPrepTime:"la":"le":"lµ"|FRAdvTime;*|+FRTime|*|*|*;
+1154;35;ESClocktime|ESHora;JoinReverse|ESAdvTime+ESTime;
+/*		1154. Mañana sábado, a partir de las 23:00 horas, comenzará una fiesta musical.
+
+/*******COPY FR***********
+
+/*******COPY FR***********
+/* year number
+/*899;35;FRPrepTime|FRYearnum;*|FRAdvTime;
+/*900;35;FRYearnum+^FRNumrange:FRNumbrackets:FRAdvTime|FRCon+^FRYearnum;-FRYearnum-FRTime|*;
+1152;35;ESMonth:ESTimeconcept:ESAdvTime|ESAllformsDe|ESYearnum;ESAdvTime+ESTime|Join|Join;add ESSeason?
+/*		1152. La década de 1970 es la primera etapa en la que hay una importante prefabricación de escuelas. El país registró una baja comercial de USD 431 millones en noviembre 2010, lo que se compara con un déficit de 43 millones en el mismo mes de 2009. 
+1157;35;ESMonth:ESTimeconcept:ESAdvTime|ESAllformsDe|ESNum|^ESAdj:ESCon:ESAllformsDe;ESAdvTime+ESTime|Join|Join|*;
+
+/*1007;35;FRSeason:FRMonth:FRTimeconcept|FRAllformsDe|FRYearnum;FRAdvTime|Join|Join;
+/*******COPY FR***********
+
+/***************old ES rules**************
+/*TIME: CONCRETE POINT IN TIME
+845;35;ESAdvTime|ESDay;ESAdvTime|+Join;
+/*		845. Durante la actividad, anunció que hoy lunes enviará a la Asamblea Nacional.
+852;35;ESDay|ESBeginTime;ESAdvTime|+Join;
+/*		852. El conquistaba el jueves pasado el gran premio de las letras: el Nobel de Literatura.
+284;35;ESAdvTime|ESAdvTime;ESAdvTime|+Join;makes dates one concept
+/*		284. El próximo jueves 22 de julio, a las 10:00 horas, el Bilbao Exhibition Center (BEC) abrirá sus puertas.
+873;35;ESConTime|"del":"al"|ESConTime+^ESNum;ESConTime|+Join|+Join;
+/*		873. Una hora al día. NOT. Los 3 años del segundo ciclo suponen un estudio general.
+863;35;ESDemonstr:ESEste|ESAdvTime|^ESAdj;ESAdvTime|+Join|*;
+/*		863. En este siglo XXI el cólera continúa siendo un problema de salud para muchos países en el mundo. NOT. En esos años difíciles para la industria textil.
+849;35;ESDay;ESCon+ESEndCon;
+/*		849. El pierde de lunes a  viernes 328.000 oyentes.
+
+/*TIME - AMBIGUOUS: CONCRETE OR VAGUE TIME INDICATION
+946;40;ESDefart:ESPrepart|ESAdvPR|ESCon;*|ESAdj|*;
+/*		946. ¿Es la primera lengua que se hablaba en la franja costera de la ahora España?
+870;40;ESCon|ESAdvPR|ESAdj|^ESPrep+^ESComo;^ESCon|ESAdj-ESTime|^ESAdj|*;
+/*		870. Quimioterapia, un tratamiento en ocasiones agresivo y largo. Para reemplazar los cepos actualmente existentes.
+872;40;ESCon|ESAdvPR|ESPart|ESPunctuation:ESComma;^ESCon|ESAdj-ESTime|ESAdj|*;
+/*		872. La novedad respecto a la interpretación anteriormente postulada — que ya podríamos denominar básicamente.
+868;40;ESDe|ESConAdvPR+ESAdj:ESNum|ESCon:ESConVerb;^ESDe|ESAdj|^ESCon;
+/*		868. Los artículos focalizados en desarrollo de nuevo producto.
+866;40;ESCon:ESConVerb|ESDe|ESConAdvPR+ESCon;^ESCon|^ESDe|ESCon;
+/*		866. La mayoría de los crímenes son por ajustes de cuentas, enfrentamientos por cuestiones de momento, y homicidios culposos.
+867;40;ESDe|ESConAdvPR;ESAdvPR+ESTime|+Join;
+/*		867. Si bien de momento nuestra exposición, únicamente, se ha limitado a su presentación.
+865;40;ESAdvdeg:ESMasmenos|ESAdvPR;ESAdvPR+ESTime|+Join;
+/*		865. Había decaído casi de inmediato y “con rapidez vertiginosa”. Plutón ha pasado a clasificarse como planeta enano, y más recientemente considerado como asteroide.
+862;40;ESAdvdeg:ESMasmenos|ESTimePRCon;ESTimePRCon|+Join;
+/*		862. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
+859;40;ESTimePRCon;ESAdvPR+ESTime;
+/*		859. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
+861;40;ESConTime+ESNum;-ESConTime;
+/*		861. No interfería en los segundos niveles de los ministerios.
+/***************old ES rules**************
+
 /*PHASE 40: DISAMBIGUATION AND PREPARATION FOR ATTRIBUTE ASSIGNMENT
 /*=================================================================
 /*CAPITALISATION
@@ -59,8 +336,6 @@
 /*vi VERSUS ROMAN NUMERAL VI
 887;40;ESCon+ESCapitalInitial|ESVi;^ESCon|ESCon;
 /*		887. La residencia del rey Alfonso VI tras conquistar Toledo.
-888;40;"siglo"|ESVi;ESConTime+ESCon|+Join;
-/*		888. En el siglo vi.
 890;40;ESVi+ESCapitalAll;ESCon;
 /*		890. VI Titán 23/1 con relación a Saturno.
 889;40;ESVi;ESVerb;
@@ -113,20 +388,10 @@
 /*		909. Secretarios de la Presidencia. Una llamada del secretario de Defensa. NOT. La tasa base es la cantidad de algo, sin importar su precio.
 
 /*MAS/MENOS
-892;40;ESNum+^ESConTime|ESAndOrBut|ESMasmenos|^ESAdj+^SEnd;ESNum|+Join|+Join|*;
-/*		892. Esa estructura creada entre dos o más personas. NOT. en cuanto a la primera y más importante fuente de formación.
 828;40;^ESNum+^ESNumber+^SBegin|ESMasmenos|ESDe|ESLo;*|ESAdv|^ESDe|^ESLo;
 /*		828. Ha durado más de lo que se pensaba.
-675;40;ESBeforeNum|ESDe:ESPrepart|ESNum;ESNum|+Join|+Join;
-/*		675. Porque sigue habiendo más de cuatro millones de personas en paro por las que seguir trabajando.
-676;40;ESBeforeNum|ESDe:ESPrepart|ESNumber;ESNumber|+Join|+Join;
-/*		676. Ha caído en menos de 24 horas tanta agua como la prevista para todo el mes. Varios ángulos, ya que se debe enfatizar en que es más del 55 por ciento de la población.
-677;40;ESBeforeNum|ESDe:ESPrepart|ESUn;ESNum|+Join|+Join;
-/*		677. La diligencia tardó menos de una hora.
 827;40;ESVerb:ESInf|ESMasmenos|"que";*|+Join|ESRelpron;mainly comparisons
 /*		827. La luz del flash sorprende y saca una imagen donde nos reconocemos menos que con la luz natural. Un favor u usarlo para asuntos que tienen mas que ver con lo personal o con lo grupal.
-674;40;ESNum:ESNumber|ESAfterBCon;ESBeginconcept|ESCon;veces más/menos
-/*		674. Se vió que contenía en ese momento 40 veces más gliadina que la de los daneses.
 
 /*NEGATION OR NO NEGATION?
 /* MÁS XXX QUE NUNCA
@@ -139,13 +404,13 @@
 /*		924. Situará este caso como el de mayor fraude jamás cometido contra Europa en el ámbito de la Política Agraria Común. Luego resultó ser una de las mejores Asambleas que hemos celebrado jamás. Se trata del acuerdo más amplio que la Unión Europea ha concluido jamás con un tercer país y no debemos arrojar por la borda los principios que caracterizan una cooperación de futuro.
 
 /* APENAS WITHOUT NEGATION
-926;40;"apenas":"apenas si"|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron;+ESAdvdeg-ESNegation-ESNegBegin|*;
+926;40;"apenas":"apenas si"|ESNum:ESNumber:ESNumberNotyear:ESUn:ESAdvTime:ESIndefpron;+ESAdvdeg-ESNegation-ESNegBegin|*;
 /*		926. Apenas unas decenas de millones de años.
-927;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*;
+927;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESAdvTime:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*;
 /*		927. (Apenas contamos seis o siete mujeres).
-928;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESTempBeginEnd:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*;
+928;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESUn:ESAdvTime:ESIndefpron+^ESAlgo;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*;
 /*		928. Sus ventas apenas llegaron a unos centenares de unidades.
-1031;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESTempBeginEnd;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*|*;
+1031;40;"apenas":"apenas si"+^ESAdvdeg|^ESNum|^ESNum|^ESNum|ESNum:ESNumber:ESNumberNotyear:ESAdvTime;+ESAdvdeg-ESNegation-ESNegBegin|*|*|*|*;
 /*		1031. No se puede seguir admitiendo que la tasa global de participación en el programa apenas haya superado el 50%.
 
 /*ADVERBS - part 1
@@ -178,76 +443,7 @@
 /*		1099. El ha actuado todo menos dignamente.
 
 /*TIME: CONCRETE POINT IN TIME
-914;40;"día"|ESNum|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join|+Join;rule should precede rule 45
-/*		914. Su selección no se concentra en Barcelona hasta el día dos de septiembre.
-45;40;ESNumber+^ESNumberNotyear|ESDe|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
-/*		45. Las fechas límite comienzan el 9 de agosto y finalizan el 6 de septiembre.
-281;40;ESNum:"uno"|ESDe:"del"|ESMonth;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
-/*		281. Los populares celebraron el doce de octubre. Uno de marzo de dos mil dieciséis.
-43;40;ESMonth|ESDe|ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join|+Join;makes 'de' Concept between number and month
-/*		43. La última gran erupción de este volcán tuvo lugar en mayo de 2008.
-282;40;ESTempBeginEnd|ESDe|ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join|+Join;
-/*		282. Según denuncian en lugar de facilitarles las facturas correspondientes a estos expedientes se les ha dado "un papel que habían fabricado tres días antes", ya que en el mismo aparece la fecha de 7 de marzo de 2013, cuando los gastos se originaron entre 2010 y 2012.
-911;40;ESMonth:ESTempBeginEnd|ESDe|*{2,3}ESNum;ESTempBeginEnd|+Join|+Join;
-/*		911. El día cinco de noviembre de dos mil. El día cinco de noviembre de dos mil dieciseis.
-845;40;ESTempBeginEnd|ESDay;ESTempBeginEnd|+Join;
-/*		845. Durante la actividad, anunció que hoy lunes enviará a la Asamblea Nacional.
-851;40;^ESConTime+^SBegin|ESAdjtemp|ESDay:ESConTime;*|ESTempBeginEnd|+Join;
-/*		851. La Tierra completa un giro cada día.
-852;40;ESDay|ESAdjtemp;ESTempBeginEnd|+Join;
-/*		852. El conquistaba el jueves pasado el gran premio de las letras: el Nobel de Literatura.
-854;40;ESDay|ESTempBeginEnd;ESTempBeginEnd|+Join;
-/*		854. Todo el territorio español el miércoles 30 de agosto de 1749.
-855;40;ESDay|ESNum:ESNumber+^ESNumberNotyear;ESTempBeginEnd|+Join;
-/*		855. Todavía el sábado 18 y el domingo 19 guardó la ciudad una cierta normalidad.
-284;40;ESTempBeginEnd|ESTempBeginEnd;ESTempBeginEnd|+Join;makes dates one concept
-/*		284. El próximo jueves 22 de julio, a las 10:00 horas, el Bilbao Exhibition Center (BEC) abrirá sus puertas.
-877;40;"año"|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join;
-/*		877. Los primeros meses del año 1977 destacaron por la agitación política. NOT. El impuesto para los cigarrillos creció este año 2,6 por ciento y el ad valórem el 3 por ciento.
-886;40;"siglo"|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join;
-/*		886. Desde la Antigua Grecia o Egipto a España y Sicilia en el siglo VIII.
-913;40;ESMonth:ESTempBeginEnd|"del"|"año"|*{2,3}ESNum;ESConTime|+Join|+Join|+Join;
-/*		913. Día uno de marzo del año dos mil. día uno de marzo del año dos mil dieciseis.
-879;40;ESMonth:ESTempBeginEnd|"del"|ESConTime;ESConTime|+Join|+Join;
-/*		879. Se produjo en enero del año pasado en la ciudad. La ciudad fue destruida el 10 de agosto del año 997.
-878;40;"mes"|ESDe:ESPrepart|ESNumber+^ESNumberNotyear;ESConTime+ESCon|+Join|+Join;
-/*		878. En el noveno mes de 2010 se registraron 31.763 transacciones.
-880;40;ESIndefpronPRNR:ESIndefpronPR|ESConTime;ESConTime|+Join;
-/*		880. A cualquier hora fuera del horario laboral, cualquier día del año. Ese mismo año, el continuó exponiendo regularmente, ya como profesional, y se unió oficialmente al grupo surrealista.
-874;40;ESConTime|ESAdjtemp|^ESConTime;ESConTime|+Join|*;
-/*		874. Recibió el año pasado 2,5 millones de visitantes. NOT. La Luna se retrasa del orden de 50 minutos cada día.
-873;40;ESConTime|"del":"al"|ESConTime+^ESNum;ESConTime|+Join|+Join;
-/*		873. Un periodo de transición durante la primera década del siglo XX. Una hora al día. NOT. Los 3 años del segundo ciclo suponen un estudio general.
-863;40;ESDemonstr|ESConTime+^ESNum|^ESAdj;ESTempBeginEnd|+Join|*;
-/*		863. Los cigarrillos creció este año 2,6 por ciento. Estará en cartelera todo este mes. NOT. En esos años difíciles para la industria textil.
-849;40;ESDay;ESCon+ESEndCon;
-/*		849. El pierde de lunes a  viernes 328.000 oyentes.
 
-/*TIME - AMBIGUOUS: CONCRETE OR VAGUE TIME INDICATION
-946;40;ESDefart:ESPrepart|ESAdvPR|ESCon;*|ESAdj|*;
-/*		946. ¿Es la primera lengua que se hablaba en la franja costera de la ahora España?
-870;40;ESCon|ESAdvPR|ESAdj|^ESPrep+^ESComo;^ESCon|ESAdj-ESTime|^ESAdj|*;
-/*		870. Quimioterapia, un tratamiento en ocasiones agresivo y largo. Para reemplazar los cepos actualmente existentes.
-872;40;ESCon|ESAdvPR|ESPart|ESPunctuation:ESComma;^ESCon|ESAdj-ESTime|ESAdj|*;
-/*		872. La novedad respecto a la interpretación anteriormente postulada — que ya podríamos denominar básicamente.
-868;40;ESDe|ESConAdvPR+ESAdj:ESNum|ESCon:ESConVerb;^ESDe|ESAdj|^ESCon;
-/*		868. Los artículos focalizados en desarrollo de nuevo producto.
-866;40;ESCon:ESConVerb|ESDe|ESConAdvPR+ESCon;^ESCon|^ESDe|ESCon;
-/*		866. La mayoría de los crímenes son por ajustes de cuentas, enfrentamientos por cuestiones de momento, y homicidios culposos.
-867;40;ESDe|ESConAdvPR;ESAdvPR+ESTime|+Join;
-/*		867. Si bien de momento nuestra exposición, únicamente, se ha limitado a su presentación.
-865;40;ESAdvdeg:ESMasmenos|ESAdvPR;ESAdvPR+ESTime|+Join;
-/*		865. Había decaído casi de inmediato y “con rapidez vertiginosa”. Plutón ha pasado a clasificarse como planeta enano, y más recientemente considerado como asteroide.
-862;40;ESAdvdeg:ESMasmenos|ESTimePRCon;ESTimePRCon|+Join;
-/*		862. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
-860;40;ESConTime|ESTimePRCon;ESEndCon|+Join;
-/*		860. Muy cerca de la anterior, quince minutos antes, con una afección "mínima" en  un coche cercano.
-881;40;ESCon|ESNum|ESConTime;^ESCon|ESTempBeginEnd|+Join;
-/*		881. En nuestro país la supervivencia cinco años después del tratamiento es, aproximadamente, de un 78 %.
-859;40;ESTimePRCon;ESAdvPR+ESTime;
-/*		859. Mucho antes, el 5 de enero, disfrutaremos de un eclipse de Sol parcial.
-861;40;ESConTime+ESNum;-ESConTime;
-/*		861. No interfería en los segundos niveles de los ministerios.
 
 /*BAJO - PREPOSITION
 214;40;ESBajo|ESConVerb:ESConPart;ESBajo|ESCon;makes ConVerb Concept after 'bajo'
@@ -290,17 +486,13 @@
 /*		812. Se producía de unos cuantos de estos hombres porque intentaban reconstruir su organización.
 
 /*ESNUM
-152;40;ESNum|ESDe|ESNum;ESNum|ESNum|ESNum;
-/*		152. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra.
-856;40;ESNum|ESEndCon;ESTempBeginEnd|+Join;
-/*		856. En una información legal elaborada ocho años más tarde se dice.
-853;40;ESAdjtemp:ESIndefpronPRCon|ESTempBeginEnd;ESTempBeginEnd|+Join;
-/*		853. El vertido comenzó el pasado viernes por la tarde.
+152;40;ESNum|ESDe|ESNum+^ESYearnum;ESNum|ESNum|ESNum;
+/*		152. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra. 
 151;40;ESNum|ESDe|ESCon:ESEndCon:ESAdj;ESNum|ESNum|*;makes Concept of preposition 'de' between numeral and Concept
-/*		151. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra. aproximadamente 20 millones de años más tarde. Al comienzo de la medida, centenares de jóvenes tomaron las calles del barrio en una protesta.
+/*		151. Es posible que al convertirse nuestra estrella en una gigante roja dentro de varios miles de millones de años, la proximidad de su superficie al sistema Tierra-Luna haga que la órbita lunar se vaya cerrando hasta que la Luna esté a alrededor de 18.000 kilómetros de la Tierra. Al comienzo de la medida, centenares de jóvenes tomaron las calles del barrio en una protesta.
 795;40;ESNum|ESDe|ESIndefpron;ESAdj|ESAdj|*;
 /*		795. Un quinto de todas las especies de aves del mundo.
-716;40;ESCon|ESAdjVerb|ESNum;^ESCon|ESVerb|*;
+716;40;ESCon|ESAdjVerb|ESAdvTime;^ESCon|ESVerb|*;
 /*		716. La excursión dura tres horas y es apta para toda la familia.
 792;40;ESNum;ESAdj;
 /*		792. El avión solar completa su primer vuelo nocturno.
@@ -472,7 +664,7 @@
 /*		842. Griegos y fenicios creyeron que esta zona era el Dorado, que había mucho oro y plata. Tenemos mucho aprecio. Esta fue una generación intelectualmente muy aguda, de mucho peso en la historia cultural.
 708;40;ESDefart:ESIndefart:ESPrepart|ESAdvdeg|ESConVerb;*|ESAdj|ESCon;
 /*		708. En la época la épica podía escribirse también en prosa, y con el precedente en el teatro del poco respeto a los modelos clásicos.
-740;40;ESAdvdeg|ESTempBeginEnd;ESTempBeginEnd|+Join;
+740;40;ESAdvdeg|ESAdvTime;ESAdvTime|+Join;
 /*		740. Desde aproximadamente 12 de febrero de 1561.
 666;40;ESCon|ESAdvdeg|ESAdj:ESPart|ESAndOrBut|ESAdj:ESPart;ESCon|ESAdj|ESAdj|ESAndOrBut|ESAdj;
 /*		666. No le impide mantener una relación "absolutamente estrecha y normalizada" con afiliados.
@@ -523,7 +715,7 @@
 
 /*ADVERB MANNER
 673;40;ESAdv:"nada"|ESAdj;ESAdj-ESNegBegin|*;same as rule 259 to cover subsequent adverbs
-/*		673. Aproximadamente 20 millones de años más tarde.
+/*		673. Cuando un cubano tiene que comprar “por la libre”, algo que no viene en la tarjeta de racionamiento, tiene que pagar un precio muy superior, dos, cinco y hasta veinte veces más alto.
 259;40;ESAdv|ESAdj;ESAdj|*;
 /*		259. Esta fue una generación intelectualmente muy aguda, de mucho peso en la historia cultural.
 715;40;ESCon|ESAdv|ESNo|ESAdj;*|ESAdj|ESNoInCon+ESNegation|*;
@@ -605,7 +797,7 @@
 785;40;ESIndefpronPRCon|ESAndOrBut|ESAdj:ESNoInCon;ESAdj|*|*;
 /*		785. Muchos e importantes estudiosos de las ciencias políticas.
 772;40;ESIndefpronPRCon|ESCon:ESEndCon;ESAdj|*;
-/*		772. Si la arquitectura es ante todo espacio y luz. Pocas semanas después de la transmisibilidad de humano a humano, la estrategia global de control se centra inicialmente en la contención de los brotes epidémicos.
+/*		772. Si la arquitectura es ante todo espacio y luz. Hay precios de algunos productos y servicios que no suben con el inicio de año.
 786;40;ESIndefpronPRCon|ESConVerb;ESAdj|ESCon;
 /*		786. Lo único que me ha decepcionado es su sonido, muy poca cosa para un coche como este.
 773;40;ESIndefpronPRCon|ESPosspron;ESAdj|ESAdj;
@@ -716,7 +908,7 @@
 /*		129. Espero que esta sea la primera y la última vez que me toque nominarte.
 157;40;"que"|ESConVerb;ESRelpron|ESVerb;makes Relation of ConVerb after relative pronoun 'que'
 /*		157. Un planeta es un cuerpo sólido celeste que gira alrededor de una estrella y que se hace visible por la luz que refleja.
-1043;40;ESRelpron|ESTempBeginEnd|ESConVerb;*|*|ESVerb;
+1043;40;ESRelpron|ESAdvTime|ESConVerb;*|*|ESVerb;
 /*		1043. Un agricultor normal, pequeño o grande, que hoy compra piensos no tiene ni una sola posibilidad razonable de saber qué contienen.
 824;40;ESRelpron|ESConVerb|ESRelpron:ESComo:ESDefart:ESIndefart;*|ESVerb|*;
 /*		824. En septiembre, cuando espera que el mercado haya mejorado.
@@ -1008,8 +1200,8 @@
 /*		606. El portavoz le ha pedido a las autoridades que "no pierda el tiempo" hablando con el presidente.
 309;70;ESCon|ESAndOrBut|*ESCon|ESNo+ESNegation;+ESNegBegin|ESAndOrBut|^ESCon|*;
 /*		309. El embalsamamiento será obligatorio cuando la inhumación o cremación no pueda realizarse antes de las 72 horas desde el momento del fallecimiento.
-1022;70;*ESCon:ESDe:ESDefart:ESPosspron:ESIndefpronPR|ESNo+ESNegation;+ESNegBegin|*;
-/*		1022. A este bajo número de priori no parecía la más adecuada para cubrir la demanda.
+1022;70;*ESCon:ESDe:ESDefart:ESPosspron:ESIndefpronPR|.ESAdvTime|ESNo+ESNegation;+ESNegBegin|*|*;
+/*		1022. A este bajo número de priori no parecía la más adecuada para cubrir la demanda. El plazo de seis meses no suele cumplirse nunca.
 1025;70;*ESCon+ESNegBegin+^ESNegation+^ESAfterSin|ESDefart:ESPosspron+ESNegBegin;-ESNegBegin+ESNegStop|*;restriction on r1022
 /*		1025. En éste proceso de decisión de compra los consumidores nunca tienen a su disposición la totalidad de la información requerida.
 1026;70;*ESDe:ESDefart:ESPosspron:ESCon+ESNegBegin|ESCon+ESNegStop;-ESNegBegin|*;
