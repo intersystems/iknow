@@ -450,3 +450,11 @@ jobs:
           title: "[check-pypi-limit] The PyPI size limit has almost been reached"
           content-filepath: ${{ env.HOME }}/issue.md
           assignees: isc-adang
+
+  ci_status:
+    needs: [manylinux2014_x86_64, manylinux2014_aarch64, manylinux2014_ppc64le, macosx_10_9_x86_64, macos_10_9_universal, windows_x86_64, test_result, deploy]
+    if: always()
+    runs-on: ubuntu-22.04
+    steps:
+      - name: report CI status
+        run: "[ ${{ contains(needs.*.result, 'success') && !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') && needs.test_result.result == 'skipped' }} = true ]"

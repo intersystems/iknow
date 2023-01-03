@@ -32,12 +32,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_icu.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -57,6 +59,13 @@ jobs:
             </blockquote>
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-JSON:
     runs-on: ubuntu-latest
@@ -66,12 +75,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_json.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -91,6 +102,13 @@ jobs:
             </blockquote>
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-ccache:
     runs-on: ubuntu-latest
@@ -102,12 +120,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_ccache.py ${{ secrets.GITHUB_TOKEN }}
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -127,6 +147,13 @@ jobs:
             </blockquote>
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-cython:
     runs-on: ubuntu-latest
@@ -138,12 +165,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_cython.py
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -163,6 +192,13 @@ jobs:
             </blockquote>
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-python-windows:
     runs-on: ubuntu-latest
@@ -172,12 +208,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_python.py win64
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -195,6 +233,13 @@ jobs:
             For details of all Python releases, see https://www.nuget.org/packages/python.
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-python-osx:
     runs-on: macos-latest
@@ -204,12 +249,14 @@ jobs:
       - name: search for update
         run: $GITHUB_WORKSPACE/actions/update_python.py osx
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -227,6 +274,13 @@ jobs:
             For details of the updated versions, see https://github.com/pyenv/pyenv/releases/v${{ env.PYENV_TOOL_VERSION }}.
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
 
   autoupdate-python-macosuniversal:
     runs-on: ubuntu-latest
@@ -238,12 +292,14 @@ jobs:
           pip3 install beautifulsoup4
           $GITHUB_WORKSPACE/actions/update_python.py macos
       - name: allow building pull requests
+        id: allow
         if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
         run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
       - name: prevent building pull requests
         if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
         run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       - name: apply update
+        id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
           assignees: isc-adang
@@ -261,3 +317,10 @@ jobs:
             For details of all Python releases, see https://www.python.org/downloads/macos/.
 
             *I am a bot, and this action was performed automatically.*
+      - name: enable automerge
+        if: steps.allow.outcome == 'success' && steps.cpr.outputs.pull-request-operation == 'created'
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ env.ACTIONS_TOKEN }}
+          pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+          merge-method: rebase
