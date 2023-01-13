@@ -172,7 +172,6 @@ jobs:
           mkdir -p $HOME/cache
           echo "CCACHE_DIR=$HOME/ccache" >> $GITHUB_ENV
           echo "CCACHE_MAXSIZE=400M" >> $GITHUB_ENV
-          echo "PYINSTALL_DIR=$HOME/.pyenv/versions" >> $GITHUB_ENV
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
@@ -185,18 +184,16 @@ jobs:
         with:
           key: anyjob-JSON-${{ env.JSON_URL }}
           path: ${{ env.JSONDIR }}
-      - name: download cached Python installations
-        uses: actions/cache@v3
-        with:
-          key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
-          restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-Python-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-
-          path: ${{ env.PYINSTALL_DIR }}
       - name: download cached ccache files
         uses: actions/cache@v3
         with:
           key: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-${{ github.run_number }}
           restore-keys: ${{ github.job }}-${{ env.MACOSX_VERSION }}-ccache-${{ env.XCODE_SELECTED }}-${{ env.MACOSX_DEPLOYMENT_TARGET }}-run-
           path: ${{ env.CCACHE_DIR }}
+      - name: set up Python 3.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
       - name: install dependencies
         run: actions/install_osx.sh
       - name: build and run C++ unit tests

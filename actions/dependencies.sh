@@ -16,7 +16,6 @@ ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-72-1/ic
 JSON_VERSION=3.11.2
 JSON_URL=https://github.com/nlohmann/json/releases/download/v3.11.2/include.zip
 PYVERSIONS_WIN="3.7.9 3.8.10 3.9.13 3.10.9 3.11.1"
-PYVERSIONS_OSX=3.7.16
 PYVERSIONS_MACOSUNIVERSAL="3.8.10 3.9.13 3.10.9 3.11.1"
 PYURLS_MACOSUNIVERSAL="https://www.python.org/ftp/python/3.8.10/python-3.8.10-macos11.pkg https://www.python.org/ftp/python/3.9.13/python-3.9.13-macos11.pkg https://www.python.org/ftp/python/3.10.9/python-3.10.9-macos11.pkg https://www.python.org/ftp/python/3.11.1/python-3.11.1-macos11.pkg"
 CCACHE_VERSION=4.7.4
@@ -41,20 +40,14 @@ fi
 echo "JSON_URL=$JSON_URL" >> $GITHUB_ENV
 
 # Python versions
-# Availability of certain versions can differ between NuGet, pyenv, and
-# python.org.
+# Availability of certain versions can differ between NuGet and python.org.
 if [ "$RUNNER_OS" = Windows ]; then
   # space-delimited Python versions to install with NuGet, old to new
   echo "PYVERSIONS=$PYVERSIONS_WIN" >> $GITHUB_ENV
-elif [ "$RUNNER_OS" = macOS ]; then
-  if [ "$GITHUB_JOB" = macosx_10_9_x86_64 ]; then
-    # space-delimited Python versions to install with pyenv, old to new
-    echo "PYVERSIONS=$PYVERSIONS_OSX" >> $GITHUB_ENV
-  else
-    # space-delimited Python versions to install from python.org, old to new
-    echo "PYVERSIONS=$PYVERSIONS_MACOSUNIVERSAL" >> $GITHUB_ENV
-    echo "PYURLS=$PYURLS_MACOSUNIVERSAL" >> $GITHUB_ENV
-  fi
+elif [ "$RUNNER_OS" = macOS ] && [ "$GITHUB_JOB" = macos_10_9_universal ]; then
+  # space-delimited Python versions to install from python.org, old to new
+  echo "PYVERSIONS=$PYVERSIONS_MACOSUNIVERSAL" >> $GITHUB_ENV
+  echo "PYURLS=$PYURLS_MACOSUNIVERSAL" >> $GITHUB_ENV
 fi
 
 # ccache

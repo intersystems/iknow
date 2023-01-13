@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
-"""Search for an update to Python for a given OS.
+"""Search for an update to Python for a given OS. This script can be run on
+any platform, not just the target OS.
 
 For Windows, we search for updates using NuGet.
-For Mac OS X, we search for updates using pyenv.
-For newer macOS, we search for updates on python.org.
+For macOS, we search for updates on python.org.
 
 Usage:
     update_python.py win64
-        (can be run on any platform)
-    update_python.py osx
-        (must be run on Mac OS X)
     update_python.py macos
-        (can be run on any platform)
 """
 
 import updatelib
@@ -42,8 +38,6 @@ VERSION_REGEX = r'^([0-9]+\.){2,}[0-9]+$'
 vars = updatelib.get_vars()
 if platform == 'win64':
     current_versions = vars['PYVERSIONS_WIN'].split()
-elif platform == 'osx':
-    current_versions = vars['PYVERSIONS_OSX'].split()
 else:  # platform == 'macos'
     current_versions = vars['PYVERSIONS_MACOSUNIVERSAL'].split()
 
@@ -60,15 +54,6 @@ if platform == 'win64':
     url_data = urllib.request.urlopen(f'{base_url}python/index.json')
     json_data = json.load(url_data)
     available_versions = [version for version in json_data['versions'] if re.match(VERSION_REGEX, version)]
-elif platform == 'osx':
-    if sys.platform != 'darwin':
-        raise EnvironmentError('Must be run on Mac OS X')
-    subprocess.run(['brew', 'update'], check=True)
-    subprocess.run(['brew', 'install', 'pyenv'], check=True)
-    p = subprocess.run(['pyenv', 'install', '--list'],
-                       stdout=subprocess.PIPE, universal_newlines=True,
-                       check=True)
-    available_versions = [version for version in p.stdout.split() if re.match(VERSION_REGEX, version)]
 else:  # platform == 'macos'
     import bs4
     url_data = urllib.request.urlopen('https://www.python.org/ftp/python/').read()
@@ -106,8 +91,6 @@ for current_version in current_versions:
 # set variables
 if platform == 'win64':
     vars['PYVERSIONS_WIN'] = ' '.join(latest_versions)
-elif platform == 'osx':
-    vars['PYVERSIONS_OSX'] = ' '.join(latest_versions)
 else:  # platform == 'macos'
     vars['PYVERSIONS_MACOSUNIVERSAL'] = ' '.join(latest_versions)
     vars['PYURLS_MACOSUNIVERSAL'] = ' '.join(latest_urls)
@@ -119,9 +102,3 @@ for i in range(len(update_info)):
     update_info[i] = ' can be updated to '.join(update_info[i])
     update_info[i] = f'- {update_info[i]}'
 updatelib.setenv('PYTHON_UPDATE_INFO_MULTILINE', '\n'.join(update_info))
-if platform == 'osx':
-    p = subprocess.run(['brew', 'list', '--versions', 'pyenv'],
-                       stdout=subprocess.PIPE, universal_newlines=True,
-                       check=True)
-    pyenv_tool_version = p.stdout.split()[1]
-    updatelib.setenv('PYENV_TOOL_VERSION', pyenv_tool_version)
