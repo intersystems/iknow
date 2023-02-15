@@ -1,5 +1,5 @@
-static const LabelId Labels0[] = {49,210,} /* FRCon;FRNumberPlusUnit; */; 
-static const LabelId Labels1[] = {49,210,172,} /* FRCon;FRNumberPlusUnit;FRPercent; */; 
+static const LabelId Labels0[] = {49,216,} /* FRCon;FRNumberPlusUnit; */; 
+static const LabelId Labels1[] = {49,216,172,} /* FRCon;FRNumberPlusUnit;FRPercent; */; 
 static const LabelId Labels2[] = {61,146,} /* FRAdvTime;FRTime; */; 
 static const LabelId Labels3[] = {61,146,159,} /* FRAdvTime;FRTime;FRClocktime; */; 
 static const LabelId Labels4[] = {96,} /* FRNum; */; 
