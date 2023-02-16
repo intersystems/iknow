@@ -10,7 +10,7 @@
 518;1;CapitalMixed;^FRCapitalMixed;
 /*		518. La ligne de contrôle (LoC).
 519;1;Punctuation;FRPunctuation;
-/*		519. Le déclin sera néanmoins rapide : après une éphémère abdication puis un bref retour au pouvoir, l'Empereur est définitivement vaincu.
+/*		519. Finale : dimanche 29 juin (20h45) à Vienne.
 
 /*Rewrite user dictionary labels
 /*==============================
@@ -22,6 +22,10 @@
 /*		523.UD. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d'entre eux ont mal fonctionné.
 1087;1;UDTime;+FRTimeconcept+FRTime;add Timeconcept so the rules for time expansion will be applied
 /*		1087.UD. Elles peuvent être déclenchées même si la reprise n’est pas envisagée dans un futur proche, afin de permettre d’organiser au mieux cette reprise, d’envisager un aménagement du poste de travail.
+2247;1;UDUnit;+FRUnit;
+/*		2247.UD. La Colonne de Marc-Aurèle est haute de cent pieds.
+2248;1;UDNumber;+FRNum;
+/*		2248.UD. Personne qui possède un trillion de francs.
 524;1;UDConcept;FRCon+FRUDConcept;
 /*		524.UD. La stérilisation des équipements, les cadences d'opération qui n'auraient, selon l'accusation, pas permis de travailler dans des conditions d'hygiène satisfaisantes et la qualification du personnel paramédical ont été mises en cause.
 525;1;UDRelation;UDRelation+FRRelation;
@@ -39,6 +43,12 @@
 /*		1088.UD. Chopin étudia la musique tout d'abord avec Wojciech Zywny. Le jour de Noël a toute une histoire, qui remonte aux Celtes et aux Romains. Les joueurs du Club ont, eux, surtout voyagé pendant l'été. Avec ce projet, la société a pour ambition d'emmener des humains et jusqu'à 100 tonnes de fret sur la Lune et sur mars lors de futures missions.
 1089;1;UDIgnoreTime;-FRYear-FRYearnum-FRPossibleYearnum;
 /*		1089.UD. "On a un puits artésien mais on ne sait pas si on peut boire l'eau", dit-elle entourée de ses trois enfants de cinq, trois et un an. La Cour a examiné le fonctionnement des systèmes de gestion mis en place pour le contrôle des conventions de cofinancement nationales sur la base d'une sélection de dix projets dans cinq pays (17) issus du programme Phare 2000.
+2244;1;UDIgnoreUnit;-FRUnit;
+/*		2244.UD. La 4 G permet d'accéder rapidement à internet principalement sur un téléphone mobile. La 4G permet d'accéder rapidement à internet principalement sur un téléphone mobile.
+2245;1;UDIgnoreNumber;-FRNum-FRNumpart2-FRNuminfull-FRNumplusde-FROrdnum-FRNumroman-FRNumrange+FRCon;add Con, otherwise no label left
+/*		2245.UD. Une douzaine de chiots sont nés chez Marguerite ce matin.
+2246;1;UDIgnoreNumber;-FRNumbrackets-FR12dNumbrackets-FR12dNum-FR3dNum-FRNumberPlusUnit+FRCon;add Con, otherwise no label left
+/*		2246.UD. Les décisions sont exécutoires de plein droit trente (30) jours après la date de leur signature par le Président de l'Assemblée.
 
 
 /* PHASE 20: NEGATION
@@ -115,7 +125,7 @@
 713;30;FRAuDu:FRDe:FRMod:FRQuantpron|FRAdvCon;*|FRCon;
 /*		713. Nécessité d'une meilleure vue d'ensemble. En ouverture des débats, le MR a exposé tout le mal qu'il pense d'un texte.
 712;30;FRAdvCon;^FRAdv;default: result is Adv+AdvXxx
-/*		712. Des tests portant sur les contrôles clés opérationnels ont révélé que certains dentre eux ont mal fonctionné.
+/*		712. Des tests portant sur les contrôles clés opérationnels ont révélé que certains d'entre eux ont mal fonctionné.
 
 /* ADVERBS (PART 1)
 686;30;"pas"+FRPlus|"moins"|FRDe|FRNum:FRIndefart;JoinReverse|JoinReverse|JoinReverse|*;"pas moins" not preceded by "ne"
@@ -134,7 +144,7 @@
 /*		623. Il s'accrochera d'autant plus solidement.
 624;30;FRAdvDegree|FRAdvTemp;FRAdv+FRAdvTemp|+Join;
 /*		624. Les femmes sont de plus en plus âgées lors de leur première maternité — 30 ans en 2009 — et de moins en moins souvent mariées.
-625;30;FRAdvNR|FRAdvNR;FRAdv+FRAdvNR|+Join;
+625;30;FRAdvStruct|FRAdvStruct;FRAdv+FRAdvStruct|+Join;
 /*		625. Les enfants éventuels du couple sont alors généralement confiés à la mère par la justice.
 304;30;FRTres|FRAdvManner;FRAdv+FRAdvManner|+Join;
 /*		304. Le développement de l'export varie très fortement d'un secteur à un autre.
@@ -156,44 +166,74 @@
 
 /* PHASE 33: DETECT NUMBERS
 /* ========================
+2152;33;"de":"dµ":"du":"des";+FRAllformsDe;add general label to forms of 'de' (add in rules to cover all forms used in multiwords)
+/*		2152. L'enfant, âgé de 10 ans, aurait surgi devant le véhicule qui n'aurait pas eu l'occasion de l'éviter.
 1045;33;"tous les"|FRNum|^FRCon:FRAndOr;JoinReverse|FRSubjpron|*;
 /*		1045. Ils ont tous les deux passé une bonne partie de leur enfance en internat ou en famille d'accueil. Not_in: Il semble que nous soyons condamnés à débattre de la même question tous les six ou trois mois.
-865;33;FRNum|FRNumpart2;*|+Join;
-/*		865. Mais ce n'est que pendant la période quaternaire il y a 1,6 million d'années que le climat devint excessivement froid et que les variations du niveau de la mer provoquèrent l'apparition des Grands Lacs.
-868;33;FRNumplusde|FRDe:FRDes|.FRPoss:FRIndefpron|FRCon:FRNum+^FRTimeconcept:FRYear;*|Join|JoinReverse|*;
-/*		868. L'arrivée du roi, accompagné par une dizaine de ses notables, se fait au son cadencé du tambour royal. Ils n'attirent à eux deux que la moitié des intentions de vote au premier tour, face à une douzaine d'autres candidats.
-866;33;FRNuminfull:FRQuantpron|.FRDe|FRNuminfull;+JoinReverse|+JoinReverse|*;
-/*		866. Mais, les pressions de Paris, aux environs de vingt deux heures, auraient fini par convaincre certains élus d'annuler le voyage. 185 millions sont affectés au football européen au sein de l'institution et le reste (une trentaine de millions) va garnir les caisses des Ligues professionnelles des associations participantes. La partie occidentale forma ce qui devint plus tard l'Amérique du Nord et dériva pendant plusieurs millions d'années jusqu'à son emplacement actuel. 
+2164;33;FR12dNum:FR3dNum|*FR3dNum;*|Join;
+/*		2164. Le montant ayant fait l’objet d’un report de crédit (112 900 euros, soit 10,3 % de la dotation de la ligne) était destiné à financer deux dossiers prêts.
+2190;33;FRNumberPlusUnit|FRNumpart2;*|Join;
+/*		2190. Mais selon les analystes, l'un des centres de production, de cinq ans d'âge, nécessite quelque $450 millions pour sa modernisation.
+2165;33;FRQuantity|FRNumpart2;JoinReverse|*;
+/*		2165. Des expériences spécifiques[11] ainsi que les domestications contemporaines montrent qu'avec une forte sélection, les transformations caractéristiques de la domestication peuvent apparaître relativement rapidement, dans l'intervalle d'une dizaine à quelques dizaines de générations.
+2235;33;FRSeul|FRNum;FRAdvStruct|*;
+/*		2235. Seuls quatre des 477 électeurs inscrits avaient glissé leur bulletin dans l'urne.
+2230;33;"une":"un"|"ou"|FRNum;JoinReverse|JoinReverse|+FRBegin;
+/*		2230. Aller chercher le bus une ou deux stations plus loin, ne plus prendre l’ascenseur.
+2168;33;"un":"1"|"franc":"cent":"degré"|^FRCon:FRSRelCon:FRPartCon;*|FRCon+FRUnit|*;franc, cent, degré as unit
+/*		2168. Les nombreuses coupures utilisées pour les achats de tous les jours disparaîtront au profit de pièces de un franc. 
+2166;33;FRNum+^FROrdnum|."de"|"cents":"livre":"livres":"couronne":"couronnes"|^FRCon:FRSRelCon:FRPartCon;*|*|FRCon+FRUnit|*;ambiguous currency
+/*		2166. L'action valait mercredi 59 cents pour encore près de 100 dollars à l'été 2000. La banque britannique a annoncé jeudi le rachat de sa consoeur pour 12,2 milliards de livres (15,4 milliards d'euros), une opération entièrement en actions. Billet de banque de 500 000 couronnes pendant l'hyperinflation, type 1923. Not_in: Les huit cents places disparaissent en un éclair et le concert est un triomphe.
+865;33;FRNum|."de"|FRNumpart2;*|+Join|+Join;
+/*		865. Mais ce n'est que pendant la période quaternaire il y a 1,6 million d'années que le climat devint excessivement froid et que les variations du niveau de la mer provoquèrent l'apparition des Grands Lacs. 185 millions sont affectés au football européen au sein de l'institution et le reste (une trentaine de millions) va garnir les caisses des Ligues professionnelles des associations participantes.
+868;33;FRNumplusde|FRDe:FRDes|.FRPoss:FRIndefpron:FRDefart|FRCon:FRNum+^FRTimeconcept:FRYear:FRUnit;*|^FRCon|JoinReverse|*;keep AllformsDe label
+/*		868. L'arrivée du roi, accompagné par une dizaine de ses notables, se fait au son cadencé du tambour royal. Ils n'attirent à eux deux que la moitié des intentions de vote au premier tour, face à une douzaine d'autres candidats. La peste noire tue à partir de 1347 au moins un tiers de la population du royaume.
+866;33;FRNuminfull:FRQuantpron|.FRDe|FRNuminfull;+JoinReverse|+JoinReverse|+FRBegin;
+/*		866. Mais, les pressions de Paris, aux environs de vingt deux heures, auraient fini par convaincre certains élus d'annuler le voyage. La partie occidentale forma ce qui devint plus tard l'Amérique du Nord et dériva pendant plusieurs millions d'années jusqu'à son emplacement actuel. Les aires de repos sont généralement implantées tous les quinze kilomètres et les aires de service tous les quarante-cinq kilomètres.
 850;33;"pas":"beaucoup":FRNummodifier|"plus":"moins"|FRAllformsDe:"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|JoinReverse|*;
 /*		850. Une population fatiguée de devoir passer plusieurs heures dans une chaleur torride pour récupérer pas plus de 1.000 pesos par mois.
-849;33;"plus":"moins"|"de":"des":"du":"dµ":"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|+FRBegin;
-/*		849. L'instruction qui a duré plus de dix ans a conclu que les infections dont elles ont été affectées ont été causées par une bactérie. Aujourd'hui, ils ne sont plus qu'un quart. Parmi ces patients plus de 4 sur 10 prennent quotidiennement des psychotropes.
-1020;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|"un"|FRTimeconcept:"an";JoinReverse|JoinReverse|*|*;
+2180;33;FRMoreLessThan|"de":"des":"du":"dµ"|"un":"une"|FRTimeconcept:"an";JoinReverse|JoinReverse|FRNum+FRNuminfull+FRBegin|*;
+/*		2180. Pour sa réouverture après plus d'une semaine de suspension de ses opérations, la Bourse de Buenos Aires a terminé la journée de vendredi en net repli. L'engouement des Français pour le dispositif de l'autoentrepreneur ne se dément donc pas, plus d'un an après sa création.
+2179;33;^"en"|FRMoreLessThan|"de":"des":"du":"dµ"|"un":"une";*|FRNum+FRNuminfull+FRBegin|Join|Join;
+/*		2179. Plus d'une actrice a été primée aux oscars cette année. Le grand homme aura le privilège d’écouter le très jeune Chopin des heures durant et trouvera plus d’une fois la paix ainsi. Not_in: Ces derniers fondent entre autres, après la redécouverte par Christoph Colomb, la colonie de Plaisance qui s'étendra sur les îles Saint-Pierre-et-Miquelon et laquelle deviendra plus tard un refuge pour les pêcheurs français en plus d'une colonie satellite pour l'Acadie et le Canada.
+2187;33;FRMoreLessThan|"de":"des":"du":"dµ":"que":"qu"|FRNumberPlusUnit;JoinReverse|JoinReverse|+FRBegin;
+/*		2187. Les dépenses de santé devront quant à elles croître de moins de 3% par an en valeur à partir de 2011. Le volume des échanges commerciaux entre les pays est très modeste, avec moins de 10% du total de leurs échanges.
+849;33;FRMoreLessThan|"de":"des":"du":"dµ":"que":"qu"|.FRDefart:FRIndefart|FRNum:FRNumplusde;JoinReverse|JoinReverse|JoinReverse|+FRBegin;
+/*		849. L'instruction qui a duré plus de dix ans a conclu que les infections dont elles ont été affectées ont été causées par une bactérie. Aujourd'hui, ils ne sont plus qu'un quart. Parmi ces patients plus de 4 sur 10 prennent quotidiennement des psychotropes. Si la pêche a aujourd'hui un poids dérisoire tant au niveau européen que mondial et ne concernent plus que 6 000 navires pour environ 20 500 marins embarqués, les élevages marins sont en constante croissance puisque leur production a doublé depuis le début des années 1980.
+2181;33;SBegin:FRPunctuation:FRComma|"plus"|"que":"qu";*|FRSConj|Join;
+/*		2181. Et alors, plus qu’un souvenir, c’est en fait un défilé quasi-cinématographique d’images qui s’impose à lui, qu’il ne peut plus interrompre («comme un film, une cassette»).
+1020;33;FRMoreLessThan+^"plus":"moins"|"à"|"un"|FRTimeconcept:"an";JoinReverse|JoinReverse|*|*;
 /*		1020. Nous pouvons généralement régler le problème rapidement, mais un délai supérieur à un mois peut être nécessaire.
-964;33;"inférieur":"inférieure":"supérieur":"supérieure"|"à"|FRNum;JoinReverse|JoinReverse|*;
+964;33;FRMoreLessThan|"à"|FRNum;JoinReverse|JoinReverse|*;
 /*		964. Si la durée de l'arrêt est supérieure à 6 mois, il faudra également justifier de douze mois d'immatriculation.
-851;33;FRNummodifier|.FRIndefart:FRDefart|FRNum:FRQuantpron;JoinReverse|JoinReverse|*;
-/*		851. La Bourse a terminé la séance de mercredi en forte hausse de 1,17% et a atteint son plus haut niveau en près de huit semaines. Tout comme les autres nations modernes et industrialisées, l'économie canadienne est dominée par l'industrie des services, laquelle emploie environ les trois quarts des Canadiens. Selon un des correspondants, le tremblement de terre a duré un peu plus d'une minute.
-933;33;FRNum|.FRTimeconcept:FRYear|"au"|"minimum":"maximum";*|*|JoinReverse|FRMod+FREndTime;
-/*		933. Les membres du Sénat sont choisis par le Premier ministre et assermentés à vie par le gouverneur général en conseil pour servir jusqu'à l'âge de 75 ans au maximum.
+2186;33;FRAllformsDe|.FRNummodifier|FRNumberPlusUnit;+FRPrep-FRDe-FRDes|*|*;
+/*		2186. La carte détaillée du génome humain a été solennellement dévoilée dans les grandes capitales, même si les scientifiques déclarent ignorer la fonction d'environ 40% des gènes et si la recherche en ce domaine se conjugue encore au futur lointain.
+2185;33;FRNummodifier|FRNumberPlusUnit;FRMod+FRBegin|*;
+/*		2185. L’évolution vers un carcinome invasif se fait dans environ 5% des cas.
+2197;33;FRNummodifier|FRIndefart:FRDefart|FRNum:FRQuantpron+^"cent";JoinReverse|JoinReverse|*;
+/*		2197. Il existe environ une quarantaine de sociétés de production dans le pays. Tout comme les autres nations modernes et industrialisées, l'économie canadienne est dominée par l'industrie des services, laquelle emploie environ les trois quarts des Canadiens.
+851;33;FRNummodifier|FRNum:FRQuantpron;JoinReverse|+FRBegin;
+/*		851. La Bourse a terminé la séance de mercredi en forte hausse de 1,17% et a atteint son plus haut niveau en près de huit semaines. Selon un des correspondants, le tremblement de terre a duré un peu plus d'une minute.
 
 /* 'en moyenne'
+2188;33;FRNummodifier:"moyenne"|FRAllformsDe|FRNumberPlusUnit;JoinReverse|FRMod+FRNummodifier|*;
+/*		2188. Il voulait lancer la seconde phase de la conversion totale de la dette le 20 janvier après avoir réussi une première restructuration de 55 milliards de dollars de titres en faisant baisser les taux d'intérêt de 11% en moyenne à un maximum de 7%.
 1038;33;FRNummodifier:"moyenne"|FRAllformsDe|FRNum;JoinReverse|JoinReverse|*;
 /*		1038. Le ministère de l'Intérieur a estimé à plus de 50 millions le nombre des pièces d'armes aux mains de la population, soit en moyenne de 2,5 armes par habitant.
-1041;33;"en"|"moyenne"|FRNum;JoinReverse|FRMod+FRNummodifier|*;
+1041;33;"en"|"moyenne"|FRNum:FRNumberPlusUnit;JoinReverse|FRMod+FRNummodifier|*;
 /*		1041. Elle affirme recevoir en moyenne 35 appels téléphoniques par jour tandis que les sept personnes responsables du service téléphonique en reçoivent une soixantaine par jour.
-1039;33;FRNum|.FRCon|"en"|"moyenne";*|*|JoinReverse|FRMod+FRNummodifier;
-/*		1039. Les chutes de neige annuelles peuvent atteindre plusieurs centaines de centimètre en moyenne.
+1039;33;FRNum:FRNumberPlusUnit|.FRCon|"en"|"moyenne";*|*|JoinReverse|FRMod+FRNummodifier;
+/*		1039. Sur un an, après deux années de baisses consécutives (-3,1% en 2008, et -4,9% en 2009), la baisse des prix poursuit son ralentissement : -2,8% en moyenne annuelle à fin février 2010.
 1040;33;FRVerb|"en"|"moyenne";*|JoinReverse|FRAdv+FRAdvDegree;
 /*		1040. Ils présentaient en moyenne des taux de PCB doubles de ceux relevés dans la population.
 
 /* process 'de'
-924;33;^FRBeginTime|FRDe|FRNum+^FROrdnum;*|^FRPrep|*;keep attribute AllformsDe
+924;33;^FRBeginTime|FRDe|FRNum:FRPercent+^FROrdnum;*|^FRPrep|*;keep attribute AllformsDe
 /*		924. Il a écopé en Belgique de dix ans de réclusion. Not_in: La Commission reconnaît néanmoins que jusqu'à la fin de 2001, seul l'État membre était avisé et que l'État membre informait le bénéficiaire.
 
 
-/* PHASE 35: DETECT TIME INDICATIONS
-/* =================================
+/* PHASE 35: DETECT TIME INDICATIONS AND MEASUREMENTS: AGE
+/* =======================================================
 /* join with number
 936;35;"un":"une"|FRTimeconcept:FRYear|"ou"|"deux";JoinReverse|*|Join|Join;
 /*		936. Au retour cependant, il remarque pendant une semaine ou deux un meilleur sommeil. Il y a un an ou deux, le gouvernement n'a rien trouvé de mieux à lui offrir qu'une télé à écran plat.
@@ -217,14 +257,14 @@
 /*		1011. C'est en 1828 que Chopin quitte pour la première fois son pays.
 1014;35;SBegin|"une"|"fois";*|FRSRelconj|Join;
 /*		1014. Une fois désigné, le formateur doit alors constituer sa majorité dans un délai de 42 jours.
-913;35;"une":FRNum|FRTimes;JoinReverse|FRAdvTime;
+913;35;"une":FRNum|."de"|FRTimes;JoinReverse|JoinReverse|FRAdvTime;
 /*		913. Pour tenter de redresser la situation, il est intervenu par deux fois en novembre.
 
 /* 'par' + time indication (including disambiguation of 'year')
 980;35;FRAdvTime|"par"|FRYear:FRTimeconcept;*|Join|Join;
 /*		980. En general, les comites de suivi sont tenus de se reunir au moins deux fois par an.
-979;35;typeConcept|"par"|FRYear:FRTimeconcept;*|JoinReverse|FRCon+FRTime;
-/*		979. Pourtant l’avion est certainement le moyen de transport le plus sûr au monde puisqu’on ne dénombre qu’une trentaine d’accidents par an.
+979;35;FRCon:FRPartCon:FRPPartCon:FRInfCon:FRSRelCon:FRAdvCon:FRPart:FRNum|"par"|FRYear:FRTimeconcept;FRCon|JoinReverse|FRCon+FRTime+FRPar;
+/*		979. Pourtant l’avion est certainement le moyen de transport le plus sûr au monde puisqu’on ne dénombre qu’une trentaine d’accidents par an. Face aux juges, le président du club se présente aujourd'hui comme «consultant» et déclare 30 000 euros de revenus par mois. En général le malade subit deux saignées par semaine afin d’obtenir une ferritinémie infèrieure à 100 ug/l. À l'ouverture de chaque session parlementaire (deux par année), le gouverneur prononce le discours.
 
 /* prepare for expansion
 1052;35;^FRToutLe:FRDemonstr:"chaque"|FRTimeconcept:"la veille":"le lendemain"+^FRDay|.FREndTime:"et demi":"et demie"|FRAllformsDe;*|*|*|+FRAddExpansion;
@@ -232,41 +272,62 @@
 1026;35;FRNum:FRIndefart:FRQuantity:FRQuantpron+^FRToutLe|FRYear|.FREndTime|FRAllformsDe;*|*|*|+FRAddExpansion;
 /*		1026. Il aura le choix entre purger ses cinq ans de prison ou bien avoir un nouveau procès. 
 
-/* distinguish 'an(s)' as time attribute
-931;35;Ageindicator|.FRAllformsDe|"un":FRNum|FRYear:FRTimeconcept;*|*|*|-FRYear-FRTimeconcept-FRTime+FRAge;
-/*		931. Chopin révéla très tôt de grandes dispositions pour la musique, rejouant dès l'âge de cinq ans les airs que joue sa mère au piano. Les bovins doivent être identifiés dans une période définie par l'Etat membre à compter de la date de naissance de l'animal, au plus tard à l'âge de 20 jours et impérativement avant que l'animal ne quitte l'exploit.
-925;35;FRYear:FRTimeconcept|FRAllformsDe|."lµ"|"âge";-FRYear-FRTimeconcept-FRTime+FRAge|*|*|*;
-/*		925. Mais selon les analystes, l'un des centres de production, de cinq ans d'âge, nécessite quelque $450 millions pour sa modernisation.
-921;35;FRNum:"un"|FRYear|"et demi":"et demie";JoinReverse|*|Join;
+/* year
+/*preparation: number plus year
+921;35;FRNum|FRYear|"et demi":"et demie";JoinReverse|*|Join;
 /*		921. Pour la plupart des économistes qui se risquent à établir des prévisions chiffrées, le pays, déjà plongé dans une récession depuis trois ans et demi.
-919;35;FRDemonstr:FRQuantpron:FRBeginTime|.FRNum:"un":"des"|FRYear;JoinReverse|JoinReverse|FRAdvTime;
+2159;35;FRNummodifier|."un"|FRYear;JoinReverse|FRNum|*;
+/*		2159. Après près d'un an de fermeture, le cinéma rouvre ses portes !
+2157;35;FRIndefart|FRYear;FRNum+FRNuminfull|*;
+/*		2157. On a un puits artésien mais on ne sait pas si on peut boire l' eau, dit-elle entourée de ses trois enfants de cinq, trois et un an. Dans le cas où la période de référence est inférieure à un an.
+2154;35;FRNum:FRQuantity|FRYear:FRTimeconcept|"au maximum":"au minimum"|^typeConcept;*|*|Join|*;
+/*		2154. Les membres du Sénat, dont le siège est octroyé sur une base régionale, sont choisis par le Premier ministre et assermentés à vie par le gouverneur général en conseil pour servir jusqu'à l'âge de 75 ans au maximum.
+2155;35;FRNum:FRQuantity|FRYear:FRTimeconcept|"et"|"plus"|^typeConcept;*|*|Join|Join|*;
+/*		2155. Sondage réalisé les 12 et 13 mars par téléphone auprès d'un échantillon national représentatif de 950 personnes âgées de 18 ans et plus (méthode des quotas).
+
+/*distinguish 'an(s)' as measurement atttribute (age)
+2156;35;Ageindicator|FRAllformsDe|FRNum:FRQuantity|.FRAge|FRComma|FRNum:FRQuantity|.FRAge|FRAndOr:FRUntil|FRNum:FRQuantity|FRAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		2156. On a un puits artésien mais on ne sait pas si on peut boire l' eau, dit-elle entourée de ses trois enfants de cinq, trois et un an.
+2153;35;Ageindicator|FRAllformsDe|FRNum:FRQuantity|.FRAge|FRAndOr:FRUntil|.FRAllformsDe|FRNum:FRQuantity|FRAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear|*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		2153. Malgré les plans de prévention, l'illettrisme touche 3,1 millions de personnes, soit 9% de la population âgée de 18 à 65 ans ayant été scolarisée en France.
+2151;35;Ageindicator|.FRAllformsDe|FRNum:FRQuantity|FRAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		2151. Les membres du Sénat, dont le siège est octroyé sur une base régionale, sont choisis par le Premier ministre et assermentés à vie par le gouverneur général en conseil pour servir jusqu'à l'âge de 75 ans au maximum.
+2162;35;"de"|FRNum|"à"|FRNum|FRYear:FRTimeconcept|FRAllformsDe|."lµ"|"âge";*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear|*|*|*;
+/*		2162. L'abaissement de 21 à 18 ans de l'âge de la majorité.
+1058;35;^Timeindicator|FRAllformsDe|FRNum|FRAge|"et"|FRNum|FRAge;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		1058. Des jeunes de 12 ans consomment déjà du cannabis, l'âge moyen auquel la consommation commence étant de 14 ans et 2 mois.
+
+/*distinguish 'an(s)' as time attribute
+919;35;FRDemonstr:FRQuantpron:FRBeginTime|.FRNum:"des"|FRYear;JoinReverse|JoinReverse|FRAdvTime;
 /*		919. En région wallonne, ce service a fait peau neuve il y a deux ans.
-922;35;FRPrepTime:"sur"+^FRPrepAge|."un":"des":FRNum|FRYear|FRDe;+FRAddExpansion|JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+922;35;FRPrepTime:"sur"+^FRPrepAge|."des":FRNum|FRYear|FRDe;+FRAddExpansion|JoinReverse|FRCon+FRTimeconcept+FRTime|*;
 /*		922. On ne reprend pas une cigarette après 1 an d'abstinence par besoin de nicotine.
-920;35;FRPrepTime:"sur"+^FRPrepAge:FRUntil|."un":"des":FRNum|FRYear;+FRAddExpansion|JoinReverse|FRAdvTime;
+920;35;FRPrepTime:"sur"+^FRPrepAge:FRUntil|."des":FRNum|FRYear;+FRAddExpansion|JoinReverse|FRAdvTime;
 /*		920. La surconsommation de psychotropes est patente depuis dix-neuf ans. Not_in: Assez fréquents vers 65 ans. Les premiers «diplômés de la route» sont attendus dans un an. Not_in: L'âge pour l'éducation obligatoire varie au travers le Canada, mais se situe généralement aux alentours de 5–7 ans jusqu'à 16–18 ans.
-1084;35;FRNummodifier|."un":"une"|FRYear;JoinReverse|FRNum|*;
-/*		1084. Après près d'un an de fermeture, le cinéma rouvre ses portes !
-923;35;"un":"des":FRNum|FRYear|FRDe;JoinReverse|FRCon+FRTimeconcept+FRTime|*;
+923;35;"des":FRNum|FRYear|FRDe;JoinReverse|FRCon+FRTimeconcept+FRTime|*;
 /*		923. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé. Il aura le choix entre purger ses cinq ans de prison ou bien avoir un nouveau procès.
 928;35;FRYear|FREndTime+FRNummodifier;*|Join;
 /*		928. C'est un an environ après le décès de sa fille et de sa mère que s'installe le tableau actuel.
-927;35;FRNum:"un"|FRYear|FREndTime;JoinReverse|FRAdvTime|Join;
+927;35;FRNum|FRYear|FREndTime;JoinReverse|FRAdvTime|Join;
 /*		927. Si bien qu'en 2000, le niveau de sécurité était au même niveau que 20 ans auparavant. Mais la crise étudiante et sociale de mai 1968 met en avant l'archaïsme d'un régime qui semble déconnecté des aspirations de son temps, et d'un président qui démissionne un an plus tard.
 926;35;FRYear|FREndTime;FRAdvTime|Join;
 /*		926. La société a réalisé l'an dernier un chiffre d'affaires et un bénéfice d'entreprise en baisse.
-935;35;FRNum:"un":"une"|FRYear:FRTimeconcept|.FRAdv|"après":"avant"|FRPunctuation:SEnd;JoinReverse|FRAdvTime|Join|Join|*;
+935;35;FRNum:"une"|FRYear:FRTimeconcept|.FRAdv|"après":"avant"|FRPunctuation:SEnd;JoinReverse|FRAdvTime|Join|Join|*;
 /*		935. La perte nette attribuable aux actionnaires ordinaires a été de 122 M$ et 22 cents par titre, contre un déficit de 196 M$ et 41 cents par action un an avant.
-930;35;FRNum:"un"|FRYear|.FRAdv|"après":"avant":"depuis";JoinReverse|FRAdvTime|*|*;
+930;35;FRNum|FRYear|.FRAdv|"après":"avant":"depuis";JoinReverse|FRAdvTime|*|*;
 /*		930. Le traité de Lisbonne est signé six ans après Laeken, en décembre 2007. Dans la même note, les dépenses prévues au titre du cofinancement parallèle étaient acceptées jusqu'à un an après la date d'expiration du protocole de financement. Le nombre de points requis sera soustrait un an exactement après la dernière édition de l'épreuve.
-932;35;"dure":"durait":"durera":"durant":"durer":"duré"+^"des"|"un":"des":FRNum|FRYear;*|JoinReverse|FRAdvTime;
+2158;35;"dure":"durait":"durera":"durant":"durer":"duré"|FRAllformsDe|"des":FRNum|.FRYear|FRUntil|"un":"des":FRNum|FRYear;*|*|FRAdvTime|Join|*|FRAdvTime|Join;
+/*		2158. Il entretiendra une relation artistique et amoureuse passionnée et tumultueuse qui durera de 10 à 15 ans.
+932;35;"dure":"durait":"durera":"durant":"durer":"duré"|"des":FRNum|FRYear;*|JoinReverse|FRAdvTime;
 /*		932. Une telle procédure peut durer quinze ans.
-1058;35;^Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|FRNum:"un"|FRYear|"et"|FRNum|FRTimeconcept;*|*|*|*|*|*|-FRTime-FRTimeconcept;age
-/*		1058. Des jeunes de 12 ans consomment déjà du cannabis, l'âge moyen auquel la consommation commence étant de 14 ans et 2 mois.
-962;35;Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|"un":"des":FRNum|FRYear;*|*|JoinReverse|FRAdvTime;
+962;35;Timeindicator|*FRAllformsDe:FRMod:FRCon+^FRNum|"des":FRNum|FRYear;*|*|JoinReverse|FRAdvTime;
 /*		962. Dans un délai de 60 jours et pour une durée d'un an au moins. La mise en oeuvre des principales mesures résultant de l'adoption des normes de contrôle interne est maintenant étalée sur une periode de deux ans. Le processus, négocié en secret dans la capitale norvégienne, prévoyait une période transitoire d'autonomie de cinq ans. Les pays tiennent un sommet dimanche et lundi à pour "avancer" de deux ans la création de leur union douanière, déjà en retard de quinze ans.
-960;35;FRIndefart|FRYear|^typeConcept;FRNum|*|*;
-/*		960. "On a un puits artésien mais on ne sait pas si on peut boire l'eau", dit-elle entourée de ses trois enfants de cinq, trois et un an.
+
+/*default: age
+2160;35;^Timeindicator|FRAllformsDe|FRNum|FRYear;*|*|+ValueProperty+Measurement|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		2160. Ce coiffeur de 44 ans a quitté l’Algérie, il y a onze ans, pour venir s’installer à Marseille.
+2161;35;^Timeindicator|FRAllformsDe|"une"|FRNum|"dµ"|"années";*|*|*|+ValueProperty+Measurement|*|+UnitProperty+Measurement-FRTime-FRTimeconcept-FRYear;
+/*		2161. Quelques heures plus tard, un homme d'une trentaine d'années se présente au centre commercial.
 
 /* preparation
 /*not time
@@ -298,7 +359,7 @@
 
 /* preparation: 'à' as part of time expansion
 1030;35;"à"|.FRDefart:FRBeginTime:FRNum+^"fin":FRAfterA|FRAfterA;+FRAddExpansion|*|*;
-/*		1030. Avec sa lettre, le front commun entend peser sur une réunion interministérielle portant sur le sujet à la fin de la semaine. Plus de 500 courageux ont bravé la bise hivernale dès dimanche soir pour attendre l'arrivée à minuit pile des premiers sachets de pièces. Un délai supplémentaire serait «extrêmement grave», puisque le réacteur des Pays-Bas, qui avait augmenté sa production pour pallier l'arrêt de celui du Canada, doit fermer à la mi-février pour être réparé à son tour.
+/*		1030. Avec sa lettre, le front commun entend peser sur une réunion interministérielle portant sur le sujet à la fin de la semaine. Un délai supplémentaire serait «extrêmement grave», puisque le réacteur des Pays-Bas, qui avait augmenté sa production pour pallier l'arrêt de celui du Canada, doit fermer à la mi-février pour être réparé à son tour.
 
 /* possible year number
 894;35;FRAllformsDe|FRNum|FRUntil|FRNum|typeConcept;*|-FRPossibleYearnum|*|-FRPossibleYearnum|*;
@@ -366,8 +427,7 @@
 884;35;FRNummodifier|."un":"une"|FRTimeconcept;JoinReverse|JoinReverse|FRAdvTime;
 /*		884. Par la suite, il semble que les Basques viendront pêcher sur les grands bancs de morue au large de l'île de Terre-Neuve pendant près d'un demi-siècle.
 861;35;FRNum|FRTimeconcept|FRYearnum;JoinReverse|JoinReverse|FRAdvTime;
-/*		861. Le groupe souligne néanmoins que le chiffre d'affaires au quatrième trimestre 2009 a progressé de 35%.
-2nd semestre 2010;La société projette également de lancer un OPCI grand public au cours du 2nd semestre 2010.
+/*		861. Le groupe souligne néanmoins que le chiffre d'affaires au quatrième trimestre 2009 a progressé de 35%. 2nd semestre 2010;La société projette également de lancer un OPCI grand public au cours du 2nd semestre 2010.
 903;35;"année":"années":"annee":"annees"|FRYearnum:FRDecade;*|Join;
 /*		903. De plus, en cette même année 1848, l'Institut est fondé avec pour mission la promotion de la culture francophone. Si la France a connu durant les Trente Glorieuses une situation proche du plein emploi — au cours des seules années 1960, l'économie française a créé 1,6 millions d'emplois. Depuis les années 50, d'énormes progrès ont été réalisés dans de nombreux domaines et entreprises du «nouveau monde». Ce système est utilisé par tous les manufacturiers depuis le milieu des années soixante-dix, lorsque le monde du ski a vu un effort concerté pour mettre de l'avant une interface chaussure-fixation.
 912;35;FRNum|FRComma|FRNum|FRAndOr|FRNum|FRTimeconcept:FRMonth+^FRDay;+FRTime|*|+FRTime|*|*|*;
@@ -383,7 +443,7 @@
 953;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept|.FRAdvDegree:FRTres|FRJoinwithcon;JoinReverse|JoinReverse|*|*|*;
 /*		953. La patrouille est entrée à l'heure où leur ronde de trois heures prévue devait prendre fin, à 13H00. Il vient de traverser deux années très difficiles.
 957;35;FRMod|FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay;*|JoinReverse|JoinReverse|*;
-/*		957. Sur le seul quatrième trimestre, la croissance est de 4% en rythme annualisé.
+/*		957. Il s'agit selon le ministre d'une avancée formidable en termes de repos de sécurité avec en moyenne 55 jours de repos supplémentaires pour chaque interne.
 1034;35;FRNum:"une"|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+"heure":"heures"|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime+FRClocktime|*;
 /*		1034. Le président fera une déclaration sur cette affaire lundi à 10 heures dans la salle de presse de l’Elysée. 
 848;35;FRNum|.FRBeginTime:FROrdnum+^"chaque"|FRTimeconcept+^FRDay|^FRJoinwithcon;JoinReverse|JoinReverse|FRAdvTime|*;
@@ -417,7 +477,7 @@
 880;35;FRClocktime|"du"|FRDaypart;*|Join|Join;
 /*		880. L'agence de la caisse d'épargne s'est vue contrainte dès 11h du matin d'afficher une pancarte pour réorienter les amateurs vers d'autres agences.
 1031;35;"à"|.FRDefart|FRClocktime;+FRAddExpansion|*|*;
-/*		1031. L’enregistrement fermera à 18h45 au départ de Londres, et ce jusqu’à nouvel ordre.
+/*		1031. L’enregistrement fermera à 18h45 au départ de Londres, et ce jusqu’à nouvel ordre. Plus de 500 courageux ont bravé la bise hivernale dès dimanche soir pour attendre l'arrivée à minuit pile des premiers sachets de pièces.
 
 /* week
 1098;35;"semaine"|FRWeeknum|.FRMonth|FRYearnum;FRAdvTime|Join|Join|Join;
@@ -476,7 +536,7 @@
 /*		1007. Montréal a accueilli l’exposition universelle de 1967 et les Jeux olympiques d'été de 1976.
 
 /* number: add general Con label
-1085;35;FRNum+^FRNuminfull:FRPercent:FROrdnum;+FRCon;
+1085;35;FRNum+^FRNuminfull:FROrdnum;+FRCon;
 /*		1085. Selon la Commission électorale, le Congrès et le parti ont chacun remporté 18 des 36 sièges de l'assemblée. Not_in: Vainqueur de neuf des 17 GP de la saison, le leader a battu le record de victoires en F1 en portant son total de succès à 53. 
 
 /* process 'de' and 'des'
@@ -499,6 +559,46 @@
 /*		1029. A quatre mois des élections, le gouvernement a choisi de garder le même cap pour financer les 35 heures, assurant qu'il ne remboursera pas les sommes qu'il doit à la Sécurité sociale.
 1047;35;SBegin|FRPunctuation|"a"+FRCapitalAll|^FRPunctuation;*|*|FRPrep|*;
 /*		1047. « A chaque mauvaise réponse, vous recevrez une punition.
+
+
+/* PHASE 37: MEASUREMENTS
+/* ======================
+2172;37;FRNum|"m"+FRCapitalAll|.FRAllformsDe|FRUnit;*|Join|*|*;'M' as 'million'
+/*		2172. Au troisième trimestre 2001, il avait réalisé une perte d'exploitation de 120 millions d'euros, aggravée par rapport à la perte de 91 M EUR affiché 12 mois plus tôt. Longtemps déficitaire, accumulant des pertes de plus de 76,3 M d'euros (26 milliards de drachmes).
+2169;37;FRNumplusde|FRAllformsDe|."un":"une"|FRNum|.FRAllformsDe|FRUnit;JoinReverse|JoinReverse|JoinReverse|+ValueProperty+Measurement|*|+UnitProperty+Measurement;
+/*		2169. Plus de la moitié des 1,2 million de tonnes de gravats a été évacuée par une noria de camions.
+2184;37;FRNum:"un":"une"|FRUnit|."de"|FRComp;*|*|+Join|+Join;
+/*		2184. Une augmentation de 67 % par rapport à 2006 et 245 % de plus que la moyenne annuelle des quinze dernières années !
+2195;37;FRNum:FRIndefart|FRUnit|."trop":FRAllformsDe|FRPostmeas;*|*|Join|Join;
+/*		2195. Certains chanceux ont aussi eu le droit d'attaquer au pic un bloc de glace de 3 mètres de large dans lequel étaient enfouies 250 pièces en euros.
+2196;37;FRNumberPlusUnit|."trop":FRAllformsDe|FRPostmeas;+FRBegin|Join|Join;
+/*		2196. Son œuvre la plus monumentale de 7m de haut et 8 tonnes, qui ne sera ni livrée ni fondue en bronze de son vivant et à laquelle il travaillera seul jusqu’à la fin de ses jours.
+2183;37;FRNum|FRComma|FRNum|FRComma|FRNum|FRAndOr|FRNum|FRUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;enumeration
+/*		2183. Parmi les dix premiers exportateurs, seuls l'Irlande, la Nouvelle-Zélande, les Pays-Bas et l'Australie ont une production de fromage principalement orientée vers l'export : respectivement 95, 90, 72 et 65 % de leur production fromagère est exportée.
+2171;37;FRNum|FRComma|FRNum|FRAndOr|FRNum|FRUnit;+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|+UnitProperty+Measurement;enumeration
+/*		2171. Elles sont généralement indiquées à 5, 2 ou 1 kilomètres à l'avance.
+2170;37;^FRCon|FRNum+^FRYearnum|FRUntil:FRAndOr:"-"|FRNum|.FRAllformsDe|FRUnit;*|+ValueProperty+Measurement|*|+ValueProperty+Measurement|*|+UnitProperty+Measurement;
+/*		2170. Le bénéfice d'entreprise a connu une forte baisse, plongeant de 6,9 millions à 500.000 euros, et la perte nette du groupe se chiffre à 2,4 millions d'euros. Not_in: 14,1 % contre 13,9 % en juin 07 et 9,69 % aux régionales.
+2189;37;^FRCon|FRNum+^FRYearnum|FRUntil:FRAndOr:"-"|FRNumberPlusUnit;*|+ValueProperty+Measurement|*|*;
+/*		2189. Comme attendu, la Banque Centrale a annoncé hier soir sa décision de maintenir le taux des fonds fédéraux au plus bas, entre zéro et 0,25%.
+2191;37;FRNum|"m":"mètre"|FRNum|^typeConcept;+ValueProperty+Measurement|+UnitProperty+Measurement|+ValueProperty+Measurement|*;
+/*		2191. Elle mesure 1 m 70 et pèse 85 kg.
+2198;37;"un"|"cent":"franc"|^typeConcept;FRCon+ValueProperty+Measurement|+UnitProperty+Measurement|*;
+/*		2198. Le dollar a gagné près d'un cent jeudi à l'annonce d'une action coordonnée des grandes banques centrales.
+2167;37;FRIndefart|FRUnit;FRCon+ValueProperty+Measurement|+UnitProperty+Measurement;
+/*		2167. Mais vendredi, c'est l'anticipation de l'éventuelle dépréciation de l'argentino, censé valoir un peso ou un dollar, aux côtés desquels il doit parallèlement circuler, sans être convertible, qui a conduit les opérateurs à vendre les actions en masse.
+2240;37;FRNum|.FRAllformsDe|FRUnit|FRAndOr|FRUnit;+ValueProperty+Measurement|*|+UnitProperty+Measurement|*|+UnitProperty+Measurement;
+/*		2240. Les échanges ont totalisé quelque 24,6 millions de pesos ou dollars, ont-elles précisé.
+2163;37;FRNum|."de":"dµ"|FRUnit;+ValueProperty+Measurement|*|+UnitProperty+Measurement;
+/*		2163. Le chiffre d'affaires, déjà publié, ressort à 176,5 millions d'euros en hausse de 29%. L'établissement le plus nordique du Canada, et du monde, se situe à Alert (Nunavut), base des Forces canadiennes, au sommet de l'Île d'Ellesmere (latitude 82.5ºN à 834 kilomètres – 450 milles marins – du Pôle Nord). Il transporte un chargement de 24.000 tonnes de maïs, dont Washington a exceptionnellement autorisé la vente. Il est mis en demeure par le fisc de payer des arriérés – on parle de plusieurs centaines de milliers d’euros – aurait manifesté certaines réticences.
+2192;37;FRQuantity|FRUnit;FRMod+FRBegin+Measurement+ValueProperty|+Measurement+UnitProperty;
+/*		2192. Elle est utilisée uniquement dans les pertes de substances de quelques millimètres, à distance des orifices narinaires pour éviter leur rétraction.
+2193;37;FRUnit|"par"|FRUnit;*|Join|Join;
+/*		2193. Il en existe toujours à des doses variant de 35 à 350 mg par litre.
+2194;37;Measindicator|.FROperator:FRColon:FRAllformsDe|FRNum;*|*|+ValueProperty+Measurement;
+/*		2194. Une femme mesurant 1,63 mètre et pesant 53 kilogrammes présente quant à elle un IMC de 19,9.
+2215;37;FRNum:"un":"une"|.FRAllformsDe|FRUnit|FRAllformsDe;*|*|*|-FRDe-FRDes+FRPrep;'de' after unit should be relation
+/*		2215. Plus de la moitié des 1,2 million de tonnes de gravats a été évacuée par une noria de camions. En 1990, le prix d’un litre de diesel s’élevait à 0,55 euro, soit 17 centimes de moins qu’un litre d’essence.
 
 
 /* PHASE 40: DISAMBIGUATION RULES
@@ -574,7 +674,7 @@
 /*		811. Dans deux semaines, l'organisation comptera douze membres en plus. Celle-ci aura 18 millions d'enfants et de jeunes en moins et 52 % de personnes de plus de 65 ans en plus. Not_in: Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
 812;40;"en"|"plus"|FRDe:FRDes:"du";FRPrep|Join|Join;
 /*		812. Avons-nous besoin d'un billet de 1 euro en plus de la pièce de 1 euro?
-813;40;"en"|"plus";FRAdv+FRAdvNR|Join;
+813;40;"en"|"plus";FRAdv+FRAdvStruct|Join;
 /*		813. Il persiste en plus à ne respecter aucun des engagements qu'il a pris. Vous le saviez il y a vingt ans, revenez à vos pensées d'antan - et ça rime en plus.
 
 /* très
@@ -611,7 +711,7 @@
 1057;40;FRIndefart|FRDes|"plus";JoinReverse|JoinReverse|FRMod+FRBegin;
 /*		1057. La croissance démographique française est aujourd'hui l’une des plus dynamiques d’Europe.
 1055;40;FRPlus|FRPartMod;JoinReverse|FRMod;
-/*		1055. Pour autant, la recette du tourisme international est plus élevée aux États-Unis.
+/*		1055. Des indications plus détaillées sur l’éligibilité des coûts figurent dans le glossaire du comité du concours financier.
 1054;40;FRPlus|FRPart;FRAdvDegree|*;
 /*		1054. Dès l'été, un bloc essence d'une puissance de 200 chevaux plus adaptée aux prétentions sportives complètera l'offre.
 
@@ -760,8 +860,8 @@
 /*		514. Elle précise notamment la fonction de recueil d’information médicale dans le cadre du Programme de Médicalisation des Systèmes Informatiques.
 
 /* to FRSRel
-867;40;FRNum+^FRNumroman|FRSRelCon;*|FRCon;
-/*		867. Avant de rentrer dans sa phase finale, avec à peine trois rencontres encore au programme. Not_in: Afin de diriger la colonie, le roi Louis XIII place le gouverneur de la Nouvelle-France directement sous l'autorité du cardinal de Richelieu.
+867;40;^FRCon|FRNum+^FRNumroman|FRSRelCon;*|*|FRCon;
+/*		867. Avant de rentrer dans sa phase finale, avec à peine trois rencontres encore au programme. Not_in: Afin de diriger la colonie, le roi Louis XIII place le gouverneur de la Nouvelle-France directement sous l'autorité du cardinal de Richelieu. Not_in: Le tableau 7.1 montre l'utilisation par les Etats membres des montants prevus en 1994.
 954;40;FRSRelCon|FRDefart|^FRAdvTime;FRSRel|*|*;
 /*		954. Les premiers signes de ce malaise qui touche les agriculteurs ont été perçus fin du mois de mai. Not_in: De lune des plus mauvaises équipes lan passé, ils sont devenues la meilleure.
 25;40;FRSRelCon|FRIndefart:FRAucun:FRAdv:FRPoss:FREtre:FRInf:FRSubjpron2;FRSRel|*;
@@ -794,7 +894,7 @@
 683;40;FRMoreLess|FRPart;*|FRCon;
 /*		683. Partout, les valeurs bancaires étaient les plus malmenées.
 1078;40;FRVerb:FRPrep+^"de":"dµ"|FRNum|FRPart;*|*|FRCon;
-/*		1078. En général le malade subit deux saignées par semaine afin d’obtenir une ferritinémie infèrieure à 100 ug/l.
+/*		1078. Une capsule d’inhaler diffuse 2 à 3 mg sur les dix mg notés (cela répartis en 100 à 200 bouffées).
 887;40;^FRCon|FRMod|FRPart;*|*|FRCon;
 /*		887. A noter que le dernier nommé n'a manqué qu'une vingtaine de rencontres en 17 ans! Not_in: La France s'appuie sur ce réseau, composé de plus d'un millier d'associations de droit local implantées dans 136 pays.
 92;40;FRPart|FREn;FRSRel|*;participle followed by 'en'
@@ -803,7 +903,7 @@
 /*		5. Les gouvernements ont eux aussi cherché à apaiser les esprits.
 312;40;FRCon|FRPart|FRAdvCR|FRAndOrBut;FRCon|FRCon|FRCon|FRAndOrBut;
 /*		312. Ils sont détachés, sur des projets exécutés individuellement ou en équipe.
-6;40;FRPart|FRAdv|FRPrep;FRSRel|^FRAdv|FRPrep;
+6;40;FRPart:FRPartCon:FRPartConMod|FRAdv|FRPrep:SEnd;FRSRel|^FRAdv|FRPrep;
 /*		6. L'inégalité de la taille d'image perçue subjectivement par chacun des deux yeux.
 157;40;FRPart|FRDefart:FRAucun:FRSubjpron2:FRAdvTime;FRSRel|*;participle becomes relation before article, aucun, celui etc.
 /*		157. Tous ces éléments ont été inclus dans un plan d'action consolidé adopté le 8 novembre. Il n'a, jusqu'ici, donné aucune consigne de vote. Soudain, j'ai senti une main sur le dos de ma veste et entendu quelqu'un dire.
@@ -830,9 +930,9 @@
 22;40;FRSRelCon;FRCon;default
 /*		22. Wall Street reste orienté en légère hausse en pré-séance ce mercredi.
 
-/* des BETWEEN CONCEPTS
-1086;40;^FRCon|FRNum+^FRYearnum|FRDes|FRCon:FRNum:FRMod;*|*|FRCon|*;
-/*		1086. A ce chapitre, 17 des 25 postes/articles repondent aux criteres appliqués dans ce tableau. Devenir citoyen canadien nécessite de parler aisément soit le français ou l'anglais – 98,5 % des Canadiens parlent au moins une des deux langues (anglais seulement: 67,5 %, français seulement: 13,3 %, les deux: 17,7 %). Not_in: La rubrique 5 des perspectives financières Dépenses administratives regroupe les crédits de fonctionnement des institutions et organes communautaires.
+/* forms of 'de' BETWEEN CONCEPTS
+2174;40;^FRCon|FRNum+^FRYearnum|"de":"dµ":"du":"des"|FRNum;*|*|FRCon|*;
+/*		2174. Vainqueur de neuf des 17 GP de la saison, le leader a battu le record de victoires en F1. Not_in: La rubrique 5 des perspectives financières Dépenses administratives regroupe les crédits de fonctionnement des institutions et organes communautaires.
 114;40;FRCon|FRDes|FRCon:FRNum:FRAdvTime:FRMod;*|FRPrep|*;
 /*		114. Les gouverneurs des provinces de Buenos Aires et Cordoba. Les noms des cinq vainqueurs seront annoncés après le diner. Dans son discours d'une demi-heure, il n'a ignoré aucune des revendications qui avaient provoqué les révoltes populaires des derniers jours.
 
@@ -863,14 +963,14 @@
 /*		156. C'est au sein des comités de suive que se manifeste le plus l'intéraction des partenaires.
 63;40;FRDe|FRNe:FRAdvNeg;FRSConj|FRNe;'de' with negation (and infinitive)
 /*		63. Il faut leur donner les moyens de ne pas reprendre.
-885;40;SBegin|FRDe|FRMod:FRQuantpron;*|FRAdvNR|*;
-/*		885. De nombreuses pathologies trouvent leur origine dans le travail.
+885;40;SBegin|FRDe|FRMod:FRQuantpron+^FRBegin;*|FRAdvStruct|*;
+/*		885. De nombreuses pathologies trouvent leur origine dans le travail. Not_in: De l’une des plus mauvaises équipes l’an passé, les Celtics sont devenues la meilleure.
 955;40;FRDe|FRMod+^FRTres|typeConcept;FRPrep|*|*;'d(e)' as preposition before adjective plus noun
 /*		955. La méthode consiste à préserver la sensibilité de chaque élève. Not_in: On parle de magistrats assis de très haut niveau.
 121;40;FRDe|FRIndefart:FRAucun:FRQuantpron:FRMonth;FRPrep|*;'d(e)' as preposition between concepts
 /*		121. Elle a joué un rôle dans la définition d'une nouvelle gastronomie. On ne peut le dire d'aucun homme, d'aucune situation, d'aucun discours. Cette défaite est dans la mémoire de tous. Pour le second tour il a vu l'écart se réduire au premier semestre, notamment lors des municipales de mars.
 575;40;typeConcept|FRDe|FRIndefpron;*|FRPrep|FRIndefpron;
-/*		575. D'autres mesures visent à faciliter l'abandon volontaire de la culture du tabac au profit d'autres cultures.
+/*		575. En plus des candidats aux postes de ministre, le Premier ministre peut recommander la nomination d'autres personnes au titre de conseillers privés telles que des personnalités de marque, d'anciens membres du gouvernement ou tout simplement des gens à titre honorifique.
 600;40;FRQuantpron|FRDe;FRQuantpron|FRPrep;
 /*		600. Il faudrait même ajouter des incitatifs pour les encourager à le faire, le tout de façon strictement volontaire.
 
@@ -894,7 +994,7 @@
 66;40;FRRefl|FRPPart;FRSRel|Join;
 /*		66. Le bruit de pas, de portes s'ouvrant et se refermant ou de voix, sont parfois des manifestations effrayantes de la paralysie du sommeil.
 118;40;FRPrep|FRPPart;FRPrep|FRCon;
-/*		118. Les taux par habitant sont très élévés.
+/*		118. La taille du contenant : la norme étant 75 centilitres.
 116;40;FRPPart|FRDes;FRSRel|FRDes;
 /*		116. La très grande sécurité des équipements actuels permet également de les prescrire chez des enfants et des jeunes adolescents désirant des lentilles pour des raisons esthétiques ou fonctionnelles.
 
@@ -905,8 +1005,8 @@
 /*		746. Le rôle délétère de la sieste dans un cas et salvateur dans l'autre y est curieusement occulté, comme s'il s'agissait simplement de mieux s'endormir pour ne pas risquer d'être somnolent.
 747;40;^typeRelation+^SBegin|FRPrep+^"à"|FRNe:FRAdvNeg;*|FRSConj|FRNe;preposition and negation (preceding an infinitive)
 /*		747. C'est dans ces zones d'ombre que doivent être dissimulées les cicatrices pour ne pas être visibles. WRONG: Le g n'a aucun son devant n.
-44;40;FRCon|FRDefart:FRIndefart:FRAucun:FRPoss;FREnd|*;detect concept boundaries
-/*		44. Dans les trois principaux pays producteurs, un comportement anticoncurrentiel, matérialisé par des ententes sur les prix, a en outre mis en péril la valeur de la production. Le marché a été réformé en profondeur une première fois en 1992. L'audit n'a mis en lumière aucune erreur significative.
+44;40;FRCon|FRAucun;FREnd|*;detect concept boundaries
+/*		44. L'audit n'a mis en lumière aucune erreur significative.
 113;40;FRDe|FRDefart;FRDe|FRNonconcept;must come after r117
 /*		113. Elle est née chez des cuisiniers formés par les grands chefs de la Haute cuisine.
 122;40;FRDe|FRPoss;FRPrep|FRPoss;
@@ -927,16 +1027,22 @@
 /* PERSONAL PRONOUNS: SPECIAL CASES
 150;40;FRSubjpron2|FRDes:FRDe;FRSubjpron2|FRPrep;
 /*		150. Celle des navires de charge classiques a continué de diminuer. La modalité d'expression de cette perte est celle de la nostalgie.
-177;40;FRDe|FRDatpron;FRPrep|FRObjpron;
-/*		177. Ce garçon est amoureux d'elle.
+177;40;FRDe|FRDatpron:FRObjpron:FRSubjpron;FRPrep|FRObjpron;
+/*		177. Ce garçon est amoureux d'elle. S'expliquant sur le cas de deux sociétés financières a concédé que "dans le cas de l'une d'entre elles la plus petite, nous avons choisi, sur une base entièrement professionnelle, de retenir une méthode d'analyse comptable qui s'est révélée erronée". Il s’agit seulement de bien déterminer les indications de l’une et de l’autre pour une plus grande efficacité.
 
 /* Un(e) AS A NUMERAL (CONCEPT)
 1064;40;FRIndefart|"de"|FRPoss;FRBegin|Join|Join;
 /*		1064. L’an dernier, lors d’un tournoi pourri par la pluie, il avait mis jusqu’à trois jours pour finir un de ses matchs.
 342;40;FRIndefart|FRAndOrBut:FRPrep:FRSRel:FRComma:SEnd;FRCon|*;
-/*		342. Il a visité un ou deux cafés. Un à un, les foyers d'incendie souterrains qui couvent sous les décombres et continuent d'enfumer l'athmosphère sont maîtrisés. Il y a trois tableaux dans la collection de cet amateur, dont un vient du Cabinet M. J'en ai un. J'en ai un, mon frère en a deux.
+/*		342. Un à un, les foyers d'incendie souterrains qui couvent sous les décombres et continuent d'enfumer l'athmosphère sont maîtrisés. Il y a trois tableaux dans la collection de cet amateur, dont un vient du Cabinet M. J'en ai un. J'en ai un, mon frère en a deux.
 343;40;FRIndefart|FRPas;FRCon|FRCon;
 /*		343. Pour l'instant, nous concentrons notre attention sur les méthodes à un pas.
+2177;40;FRNummodifier|"un":"une"|FRDes;FRBegin|Join|Join;
+/*		2177. 98,5 % des Canadiens parlent au moins une des deux langues (anglais seulement : 67,5 %, français seulement : 13,3 %, les deux : 17,7 %).
+2178;40;FRNummodifier|"un":"une";JoinReverse|FRNum+FRNuminfull;
+/*		2178. Au moins un hélicoptère, accompagné d' un avion de surveillance, a tiré cinq roquettes sur un complexe de la police.
+2182;40;FRNum|*FRMod:FRCon|"sur"|FRNum|^typeConcept;*|*|FRCon|*|*;
+/*		2182. Deux personnes sur cent vivent une expérience plus ou moins claire de ce type au moins une fois par mois. Not_in: Les Celtics avaient remporté 11 titres sur 13 possibles.
 344;40;FRIndefart|FRDes;FRBegin|FRCon;
 /*		344. Sa création est une des tâches du designer.
 
@@ -947,8 +1053,8 @@
 /*		1080. En aucun cas je n'ai apporté ou pris quoi que ce soit, ajoute le témoin avant que la question ne lui soit posée.
 50;40;FRPartMod;FRMod;default to implicitly delete conflicting labels
 /*		50. Ce petit club à l'atmosphère feutré.
-1065;40;FRPrep|FRBegin;*|FRCon;
-/*		1065. Le Parquet a annoncé l’ouverture d’une enquête sur la sécurité aérienne après l’accident d’un de ses avions dimanche.
+1065;40;FRPrep|FRBegin;*|^FRCon;
+/*		1065. Le Parquet a annoncé l’ouverture d’une enquête sur la sécurité aérienne après l’accident d’un de ses avions dimanche. Elle y consacre annuellement un budget d'environ un milliard d'euros.
 
 /* plus AS A RELATION
 235;40;FRPlus|FRIndefart:FRDefart:FRSubjpron;FRSRel|*;plus as a (mathematical) relation or as a conjunction
@@ -975,7 +1081,7 @@
 /*		303. Dès son arrivée à Lourdes, il avait tenu à parcourir, visiblement ému, le chemin du pèlerin.
 306;40;FRComma|FRAdvCR|FRSRel;FRComma|^FRAdvCR|FRSRel;relevant adverb becomes part of relation between comma and relation
 /*		306. Les tumeurs glomiques sont rares et se rencontrent surtout aux ongles des mains, plutôt chez des femmes dans leur cinquième décennie.
-327;40;FRAdvNR|FRDe;FRAdvNR|FRPrep;de is mostly a relation after a NonRelevant adverb
+327;40;FRAdvStruct|FRDe;FRAdvStruct|FRPrep;de is mostly a relation after a NonRelevant adverb
 /*		327. Il y a toujours de l'ostéoclastogènèse et donc de la destruction osseuse.
 
 /* de soi
@@ -1003,7 +1109,7 @@
 /*		353. Au regard de tels résultats les médecins et en particulier les médecins libéraux payés à l’acte seraient coupables de trop et de mal prescrire.
 193;40;FRDe|FRSConj:FRSRelconj;FRSRel|FRSRel;
 /*		193. C'était un réel bon exemple de ce que la coopération internationale devrait être.
-480;40;^FRPlus+^SBegin|FRDe|FRNum+^FROrdnum;*|FRPrep|*;
+480;40;^FRPlus+^SBegin|FRDe|FRNum:FRPercent+^FROrdnum;*|FRPrep|*;
 /*		480. Nous vous proposons, toute cette semaine, le début de six romans attendus de cette rentrée. Not_in: Contrairement au procès de première instance, des témoins sont venus déposer à charge lors de l'audience devant la cour d'appel.
 354;40;FRComma|FRDe;FRComma|FRSRel;
 /*		354. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
@@ -1017,7 +1123,7 @@
 /*		402. La pianiste a 20 ans.
 167;40;FRComma;+FRPunctuation;don't remove Comma label: needed later
 /*		167. Les autorites ont decide, a la suite du contrôle de la Cour, de proceder a un examen minutieux.
-330;40;SBegin|FRAndOrBut;*|FRAdvNR;et, ou, mais aussi, mais surtout are NonRelevant at the beginning of a sentence
+330;40;SBegin|FRAndOrBut;*|FRAdvStruct;et, ou, mais aussi, mais surtout are NonRelevant at the beginning of a sentence
 /*		330. Mais aussi en devenant l'un des plus grands seigneurs et propriétaires terriens.
 355;40;FRConIfCap;-FRConIfCap;avoid that words become NonRelevant because of double labels
 /*		355. Aujourd'hui, mon père me donne de l'argent de poche.
@@ -1051,7 +1157,7 @@
 /*		576. Puis ce sera le tour des autres romans nommés ci-dessus.
 510;40;SBegin|FRDe|FRCapitalInitial;*|FRPrep|*;
 /*		510. De Paris à Londres en un peu plus de deux heures.
-511;40;SBegin|FRDe;*|FRAdvNR;
+511;40;SBegin|FRDe;*|FRAdvStruct;
 /*		511. De nouveaux médicaments vont arriver sur le marché.
 716;40;^typeConcept+^FRPas+^FRBegin+^SBegin|FRDe|typeConcept;*|FRPrep|*;
 /*		716. Il s'agit parfois de véritables actes manqués, quand on n'invoque pas, de façon peu convaincante, les difficultés économiques.
@@ -1131,7 +1237,7 @@
 /*		615. Même constat dans le 1er siège du 2ème arrondissement.
 617;50;"mêmes"|FRCon;FRAutre|FRCon;overlap with r615 and with lexreps
 /*		617. Cette règle est suivie en cas de cofinancement mixte, où la contribution nationale est gérée selon les mêmes modalités que les fonds du programme.
-569;50;FRAutre;FRAutre;
+569;50;FRAutre;FRAutre+FRSubjpron;
 /*		569. Un autre ex-membre a à nouveau été abonné.
 578;50;"entre"|"autres"|typeRelation:typeOther;FRSRel|Join|*;
 /*		578. Mais la Régie des Bâtiments a rendu un rapport négatif, soulignant notamment le coût important du projet en raison entre autres de la dépollution nécessaire du site. Bien que cette organisation n'ait pas été institutionnalisée, elle permet aux provinces et territoires de consolider leurs forces et de travailler en collaboration sur tous sujets tombant dans leur juridiction législative en favorisant entre autres les échanges interprovinciaux.
@@ -1141,7 +1247,7 @@
 /*		580. Rien, dans ce que nous avons appris dans l'audition des commissaires, n'est susceptible de justifier, à cette étape, un veto sur tel ou tel.
 572;50;FRIndefpron|FRPunctuation;FRSubjpron|FRPunctuation;
 /*		572. Que ce soit l'un ou l'autre, le dégel des relations entre ces parties est certain.
-595;50;FRCon|"chacun":"chacune";^FRCon|Join;
+595;50;FRCon|"chacun":"chacune";*|FRCon;
 /*		595. Certains spécimens pouvaient atteindre un poids d'environ cent livres chacun.
 574;50;FRQuantpron:FRDemonstr|typeRelation;FRSubjpron|*;
 /*		574. Tout est parti d'un informaticien de la Banque.
@@ -1163,14 +1269,12 @@
 /*		823. Il ne faut pas l'ignorer ou l'écarter comme un simple jeu.
 665;50;FRNonconcept|typeRelation;FRSubjpron+FRObjpron-FRIndefart|*;
 /*		665. C'était un été complètement fou.
-601;50;FRSubjpron:FRObjpron|FRDe;*|FRPrep;very low frequent, mostly covered by other rules
-/*		601. La répétition a banalisé les choses pour nous de telle façon que nous ne regardons plus ce que nous sommes habitués à voir.
 
 /* DETECT ENUMERATIONS
 /* ===================
 766;60;"de"+^FRList|*FRCon|FRAndOr|"de"|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		766. C'est un réseau professionnel indépendant constitué de managers et de consultants en management expérimentés, aptes à proposer des solutions dans tous les principaux domaines de fonction des entreprises et organisations.
-396;60;FRCon+^FRTimeconcept:FRAdvTime|FRDe|FRCon+^"non":FRTimeconcept:FRAdvTime;^FRCon|+Join|+Join;merge concepts containing de, keep negation attribute
+396;60;FRCon+^FRTimeconcept:FRAdvTime:FRUnit|FRDe|FRCon+^"non":FRTimeconcept:FRAdvTime;*|FRCon|*;merge concepts containing de, keep negation attribute
 /*		396. Lieutenant de vaisseau est un grade dans la marine. Not_in: L'accord a mis fin à sept mois d'affrontements. Not_in: Le Cabinet du Budget prépare le contrôle de juillet.
 768;60;FRNonconcept|*FRCon|FRComma|FRNonconcept|*FRCon|FRAndOr|FRNonconcept|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		768. Il y a là une école, une église et une mairie flanquée de la classique boîte aux lettres française de couleur jaune.
@@ -1182,8 +1286,8 @@
 /*		770. Aujourd hui, sur l'internet, vous êtes cordialement invité à donner votre avis sur des voisins, des médecins ou des profs.
 771;60;*FRCon|FRComma|*FRCon|FRAndOr|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		771. L'objectif est d'exploiter 250 MW de projets de production d'énergie verte d'origine éolienne, solaire, biomasse et hydroélectrique.
-763;60;FRIndefart+^FRList|*FRCon|FRAndOr|FRIndefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
-/*		763. Leur vote de fermeture traduit une peur et une ignorance qu'il faudra comprendre et combattre.
+763;60;FRIndefart+^FRList|*FRCon:FRNum|FRAndOr|FRIndefart|*FRCon:FRNum;+FRList|+FRList|+FRList|+FRList|+FRList;
+/*		763. Leur vote de fermeture traduit une peur et une ignorance qu'il faudra comprendre et combattre. C'est le premier véhicule particulier de la marque au lion à ne pas utiliser la numérotation avec un zéro ou un double zéro central.
 764;60;FRDefart+^FRList|*FRCon|FRAndOr|FRDefart|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
 /*		764. Le cadre général du système a été défini par le Parlement et le Conseil.
 802;60;FRPoss+^FRList|*FRCon|FRAndOr|FRPoss|*FRCon;+FRList|+FRList|+FRList|+FRList|+FRList;
@@ -1247,10 +1351,8 @@
 /*		1033. Cette étape finale est prévue jeudi à midi.
 
 /* 'de'
-1073;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|FREnd|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|+FRTimeStop;
-/*		1073. Les Quinze ont "unanimement" décidé de participer à une force multinationale, a annoncé au premier jour du sommet le ministre.
-1025;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|*|+FRTimeStop;
-/*		1025. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé. Selon Pline l'Ancien, la pratique s'est sophistiquée durant la période de la Rome Antique.
+1025;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept+^Measurement|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|-FRTimeStop|*|*|*|+FRTimeStop;
+/*		1025. Après avoir prédit un an de travaux, les ingénieurs ont révisé leurs plans et estiment qu'avant le début de l'été le site devrait être entièrement dégagé. Selon Pline l'Ancien, la pratique s'est sophistiquée durant la période de la Rome Antique. Not_in: Il est passé au cours de l'année de 7 % à 5 %.
 1028;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|*|*|*|-FRTimeStop|*|*|*|+FRTimeStop;
 /*		1028. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales. A deux semaines de la disparition du deutschemark au profit de la monnaie européenne, les Allemands se sont rués ce matin dans leurs banques pour y acheter les premiers sachets de pièces en euros. La reprise de l'industriel en difficulté est un véritable enjeu politique, à quelques jours du second tour des élections régionales.
 1060;64;FRTimeconcept:FRAdvTime+FRTime|FRAllformsDe+FRAddExpansion|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRTimeBegin|*|*|*|-FRTimeStop|*|*|-FRTimeStop|*|*|*|+FRTimeStop;
@@ -1265,12 +1367,10 @@
 /*		1051. Le peuple a montré sa bravoure en votant majoritairement aux élections présidentielle et législatives du 29 mars, qui ont infligé une déroute historique au régime. Le ministre de la Santé a refusé de satisfaire la revendication des internes portant sur l'aménagement de leur temps de travail, à savoir une diminution du temps de service obligatoire de 11 demi-journées par semaine à 10 demi-journées, avec le paiement de samedi au tarif d'une demi-garde.
 
 /* time expansion without time indication
-1062;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|*|*|*|+FRTimeStop;
+1062;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|-FRTimeStop|*|*|*|+FRTimeStop;
 /*		1062. Après l'omniprésence des phoques du Groenland, ce sont maintenant les phoques gris qui envahissent le territoire des Îles-de-la-Madeleine et du sud de l'Atlantique.
 1063;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;
 /*		1063. Après l'évaluation du risque, une autre vérification peut avoir lieu au stade de la cloture des comptes. 
-1074;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|FRAllformsDe|.FRNonconcept:FRPoss|.FRNonconcept:FRPoss|FREnd|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|*|*|*|+FRTimeStop;
-/*		1074. Depuis la défaite du régime le 29 mars, plus de 20.000 maisons ont été brûlées.
 1061;64;FRPrepTimeSpan+^FRTimeBegin|.FRNonconcept:FRPoss|*typeConcept|.typeEndConcept|^FRAnyLabel;+FRBeginrel+FRTimeBegin|*|*|*|+FRTimeStop;
 /*		1061. Il faut ne pas hésiter à proposer de repousser le démarrage de l’arrêt après un début d’amélioration. En revanche un patient qui développe comme 20% des opérés après un geste de chirurgie cardiaque lourde un véritable syndrome de stress post-traumatique pourra être soulagé par quelques séances d’EMDR. Not_in: Le chômage a augmenté de 0,3 point à 5,7% le mois dernier après une hausse de 0,5 point en octobre pour atteindre son niveau le plus élevé depuis août 1995.
 
@@ -1302,6 +1402,105 @@
 1090;64;FRTimeBegin|*^FRTimeStop|FRTimeStop;*|+FRInTimeSpan|*;
 /*		1090. Or, de nombreuses exceptions ont été introduites au cours des dernieres années.
 
+
+/* PHASE 65: MEASUREMENT EXPANSION
+/* -------------------------------
+/* Include Time in Measurement expansion, part 1
+2243;65;UnitProperty+^FRAge|FRPar+FRTime+^typePathRelevant|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|+FRMeasurementStop;
+/*		2243. Pour parvenir à un tel résultat, l'Etat souhaiterait limiter à 1 % par an dès 2011 la croissance en volume de la dépense publique globale via un gel du budget des ministères.
+
+/* adverb of degree following unit
+2231;65;ValueProperty|.FRAllformsDe|UnitProperty|FRNummodifier|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|+FRMeasurementStop;
+/*		2231. L'agence précise que l'hélicoptère s'est écrasé à 35 km environ de la capitale.
+2232;65;FRNumberPlusUnit|FRNummodifier|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|+FRMeasurementStop;
+/*		2232. Il voulait lancer la seconde phase de la conversion totale de la dette le 20 janvier après avoir réussi une première restructuration de 55 milliards de dollars de titres en faisant baisser les taux d'intérêt de 11% en moyenne à un maximum de 7%.
+2233;65;ValueProperty|.FRAllformsDe|UnitProperty|"en"|"moyenne"|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|+FRMeasurementStop;
+/*		2233. Les chutes de neige annuelles peuvent atteindre plusieurs centaines de centimètre en moyenne (par exemple, une moyenne de 337 cm à Québec).
+
+/* expansion to preposition
+2201;65;FRAllformsDe|ValueProperty|.UnitProperty:FRAllformsDe|FRUntil|ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin+FRInMeasSpan|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2201. Le bénéfice d'entreprise a connu une forte baisse, plongeant de 6,9 millions à 500.000 euros. Le seul syndicat signataire de la convention des généralistes, demande pour sa part une augmentation de la consultation d'un euro à 18,5 euros (121 francs) contre les 17,53 euros actuels (115 francs).
+2199;65;FRAllformsDe|ValueProperty:FRNumberPlusUnit|.UnitProperty:FRAllformsDe|FRUntil|FRNumberPlusUnit|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin|*|*|*|*|*|+FRMeasurementStop;
+/*		2199. Le fumeur d’un paquet de cigarettes a ainsi à sa disposition une réserve de 80 à 300mg de nicotine.
+2238;65;FRAllformsDe|ValueProperty|.UnitProperty:FRAllformsDe|FRUntil|FRNumberPlusUnit|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin+FRInMeasSpan|*|*|*|*|*|+FRMeasurementStop;combination of numberplusunit and value plus unit
+/*		2238. Une forte baisse, plongeant de 100 à 500m.
+2239;65;FRAllformsDe|FRNumberPlusUnit|FRUntil|ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin+FRInMeasSpan|*|*|*|*|*|*|+FRMeasurementStop;combination of numberplusunit and value plus unit
+/*		2239. Le chiffre d'affaires d'IBA a lui augmenté de 8% à 360 millions d'euros.
+2202;65;"entre"|ValueProperty|.UnitProperty:FRAllformsDe|FRAndOr|ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2202. Or, les taux reels d'aide publique se situaient entre 55 et 94 %. Les places européennes avaient quant à elles perdu entre 3 % et 5 % de leur valeur en fin de journée. Il fera sensiblement plus doux avec des maxima compris entre 7 ou 8 degrés. Il souhaite stimuler la croissance à long terme en émettant des bons et en investissant entre 25 et 50 milliards d’euros dans la recherche, l’innovation et les infrastructures de pointe.
+2203;65;"entre"|ValueProperty:FRNumberPlusUnit|.UnitProperty:FRAllformsDe|FRAndOr|FRNumberPlusUnit|.typeConcept|^typeConcept;+FRBeginrel+FRMeasurementBegin|*|*|*|*|*|+FRMeasurementStop;
+/*		2203. Comme attendu, la banque a annoncé hier soir, à l'issue de la réunion de son Comité de politique monétaire, sa décision de maintenir le taux des fonds fédéraux au plus bas, entre zéro et 0,25%.
+2205;65;^FRMeasurementBegin|ValueProperty:FRNumberPlusUnit|.UnitProperty:FRAllformsDe|FRUntil:FRAndOr|FRNumberPlusUnit|.typeConcept|^typeConcept;*|+FRMeasurementBegin|*|*|*|*|+FRMeasurementStop;
+/*		2205. On estime que 30 à 50% des patients développeront secondairement de telles lésions. La groupe a déclaré avoir franchi en hausse, le 14 mars 2010, les seuils de 20% et 25% des droits de vote.
+2236;65;FRUntil:"pour"|ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|^typeConcept+^FRMeasurementStop;+FRBeginrel+FRMeasurementBegin+FRInMeasSpan|*|*|*|*|+FRMeasurementStop;
+/*		2236. S’agissant des mesures en matière d’infrastructures énergétiques, la valeur totale des 55 engagements pour lesquels la date d’échéance était dépassée fin 2001 s’élevait à 23,7 millions d’euros, alors que la totalité des crédits de paiement pour 2001 ne représentait que 18,0 millions d’euros. La monnaie egyptienne est passée de 3,90 l'an dernier à 4,25 livres pour un dollar.
+2237;65;FRUntil:"pour"|FRNumberPlusUnit|.typeConcept|^typeConcept+^FRMeasurementStop;+FRBeginrel+FRMeasurementBegin+FRInMeasSpan|*|*|+FRMeasurementStop;
+/*		2237. La contribution communautaire est limitée à 10% de la totalité des coûts d’investissement.
+
+/* Concept before Measurement
+2218;65;"à":"au":"aux":"pour":"avec"|.FRNonconcept|*typeConcept+^Measurement;*|*|+FRIndirectObject;mark indirect object as exception for left expansion
+/*		2218. Le promoteur de concert avait proposé en 2007 et 2008 aux deux artistes des contrats de 120 et 150 millions de dollars pour produire leurs albums, tournées et produits dérivés.
+2208;65;FRAllformsDe:"en":"à"|.FRNonconcept:FRPoss:FRMod|*FRCon;+FRDummy|+FRDummy|+FRDummy;temporary mark lexreps to detect pattern for expansion
+/*		2208. Les valeurs seuils actuellement proposées par les équipes sont un taux de 1000 à 1500 ug/l pour la férritinémie et/ou une C.H.F par IRM déduite du degré de l’hyposignal en T2 de l’ordre de 400 à 500 umol/g. L'accord à l'amiable de 250.000 euros a été proposé par l'auditeur.
+2210;65;FRAllformsDe|FRMeasurementBegin:FRNumberPlusUnit;-FRDummy|*;remove temporary marker from 'van' right before a measurement
+/*		2210. La groupe a déclaré avoir franchi en hausse, le 14 mars 2010, les seuils de 20% et 25% des droits de vote.
+2212;65;FRAllformsDe+FRMeasurementBegin;-FRDummy;remove temporary marker from 'de' right before a measurement
+/*		2212. Le seul syndicat signataire de la convention des généralistes, demande pour sa part une augmentation de la consultation d'un euro à 18,5 euros (121 francs) contre les 17,53 euros actuels (115 francs) et une rémunération au forfait des gardes et astreintes.
+2214;65;FRCon:FRMod+^FRMeasurementBegin|.FRDummy|FRAllformsDe+^FRInMeasSpan|ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|+FRMeasurementStop;left expansion for existing span
+/*		2214. Des engagements afferents a des depenses d'un montant de 216 437 ECU n'ont ete etablis et vises qu'apres reception des factures et execution du travail ou de la livraison. Unique "première" de l'année - et encore, en demi-teinte - la pose, aux Etats-Unis, du premier coeur artificiel autonome, chez un malade de 59 ans. Not_in: Le seul syndicat signataire de la convention des généralistes, demande pour sa part une augmentation de la consultation d'un euro à 18,5 euros (121 francs) contre les 17,53 euros actuels (115 francs) et une rémunération au forfait des gardes et astreintes. Ces rectifications se sont traduites par des recouvrements s'élevant a un montant total de quelque 1,9 million d'euros pour l'ensemble des institutions.
+2204;65;^FRMeasurementBegin|ValueProperty|.UnitProperty:FRAllformsDe|FRUntil:FRAndOr|.FRAllformsDe:ValueProperty|UnitProperty|.typeConcept|^typeConcept;*|+FRMeasurementBegin|*|-FRMeasurementStop|*|*|*|+FRMeasurementStop;
+/*		2204. Les fromages frais (fromages blancs, suisses, demi-sel …) sont riches en eau (70 à 82 %), et ne subissent pas d’affinage. Il fera sensiblement plus doux avec des maxima compris entre 7 ou 8 degrés sur les hauteurs de l'Ardenne et 11 ou 12 degrés en plaine, selon les prévisions de l'Institut royal météorologique. L'État français lui commande La Porte de l'enfer inspirée par La Divine Comédie de Dante et une transposition des Fleurs du mal de Charles Baudelaire pour le futur musée des Arts décoratifs du Musée du Louvre, son œuvre la plus monumentale de 7 m de haut et 8 tonnes.
+
+/* Expansion based on indicator
+2226;65;FRCon:FRMod:FRSubjpron|.FRComma:FRAdvStruct|FRSRel+Measindicator:Ageindicator|.FRAllformsDe|ValueProperty|.FRAndOr:ValueProperty:FRAllformsDe|UnitProperty|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2226. L'homme âgé de 32 ans, a été blessé à la jambe mais ses jours ne sont pas en danger. Le pape allemand, âgé de 81 ans, qui a confirmé sa réputation de théologien rigoureux dans un discours devant le monde de la culture à Paris, a voulu montrer son attachement au culte populaire de la Vierge. Il revient à ce qui a “bâti” ses victoires électorales: “insécurité, immigration, identité”, auprès de ses électeurs, “surtout” âgés de plus de 65 ans. Les deux hommes, âgés de 28 et  32 ans, ont tous deux été transportés à l'hôpital.
+2225;65;FRMod:FRCon+Measindicator:Ageindicator|.FRAllformsDe|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|+FRMeasurementStop;
+/*		2225. Prise de poids moyenne : Hommes 2.8 kg Femmes 3.8 kg. Par ailleurs, l'espérance de vie a augmenté d'une douzaine d'années comparativement aux années 1960 et les personnes de 75 ans, aujourd'hui, sont en meilleure santé que celles de 65 ans à cette époque.
+
+/* Concept after Measurement
+2216;65;ValueProperty|.FRAllformsDe|UnitProperty|.typeConcept|FRAllformsDe+^typeConcept|.FRNonconcept:FRPoss:FRMod|FRCon|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2216. Depuis sa création, la Force d'hélicoptères a assuré le transport de 15 000 personnes et d'un million de livres de cargo. La réserve va mettre pour 180 milliards de dollars de liquidites sur les marchés. Le gasoil est donc clairement le carburant préféré puisqu’il représente 60 % de l’ensemble du parc de voitures contre 38 % seulement pour les «essence».
+2228;65;FRNumberPlusUnit|.typeConcept|FRAllformsDe+^typeConcept|.FRNonconcept:FRPoss:FRMod|FRCon|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|+FRMeasurementStop;
+/*		2228. 60% des petites et moyennes entreprises qui ont eu un sinistre informatique disparaissent dans les cinq ans.
+2217;65;FRAllformsDe+FRMeasurementStop|.FRNonconcept:FRPoss:FRMod|FRCon|.typeConcept|^typeConcept;-FRMeasurementStop|*|*|*|+FRMeasurementStop;make right span longer for patterns with 'de' + Concept
+/*		2217. La France souhaite que de 20% à 30% des financements de ce fonds puissent aller aux traitements anti-sida.
+
+/* Enumeration
+2219;65;ValueProperty|.UnitProperty|FRComma|.FRAllformsDe|ValueProperty|.UnitProperty|FRComma|.FRAllformsDe|ValueProperty|.UnitProperty|FRAndOr|.FRAllformsDe|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|*|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2219. Parmi les dix premiers exportateurs, seuls l'Irlande, la Nouvelle-Zélande, les Pays-Bas et l'Australie ont une production de fromage principalement orientée vers l'export : respectivement 95, 90, 72 et 65 % de leur production fromagère est exportée.
+2220;65;FRNumberPlusUnit|FRComma|.FRAllformsDe|FRNumberPlusUnit|FRComma|.FRAllformsDe|FRNumberPlusUnit|FRAndOr|.FRAllformsDe|FRNumberPlusUnit|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2220. Parmi les dix premiers exportateurs, seuls l'Irlande, la Nouvelle-Zélande, les Pays-Bas et l'Australie ont une production de fromage principalement orientée vers l'export : respectivement 95%, 90%, 72% et 65% de leur production fromagère est exportée.
+2221;65;ValueProperty|.UnitProperty|FRComma|.FRAllformsDe|ValueProperty|.UnitProperty|FRAndOr|.FRAllformsDe|ValueProperty|UnitProperty|.typeConcept|^typeConcept;+FRMeasurementBegin|*|-FRMeasurementStop|*|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2221. Les nombreuses coupures de 1.000 lires (0,52 euro) et de 5.000 lires (2,58 euros) utilisées pour les achats de tous les jours disparaîtront au profit de pièces de un euro, deux euros ou 50 cents. La consommation des credits d'engagement initiaux pour l'objectif n° 3 a ete de 126 %, avec des taux respectifs de 69 %, de 51 % et de 41 %.
+2222;65;FRNumberPlusUnit|FRComma|.FRAllformsDe|FRNumberPlusUnit|FRAndOr|.FRAllformsDe|FRNumberPlusUnit|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|*|*|*|+FRMeasurementStop;
+/*		2222. Généralement, une aire de service est présignalisé à 16km, 8km et 1,6km ainsi qu'à l'aire de service précédente. Des pays profitent  encore des effets de la prime à la casse avec des hausses spectaculaires des immatriculations respectivement de 18,2%, 20,6% et de 26,4%.
+2224;65;FRCon|FRAndOr:FRComma+FRMeasurementStop|typeConcept+FRMeasurementBegin|.typeConcept|^typeConcept;*|-FRMeasurementStop|*|*|*;
+/*		2224. Le consensus de place était logé à 7 cents de bpa et 603 M$ de revenus. 
+Cette vente initiale d'une valeur de 2,2 millions de dollars sera suivie d'autres livraisons, également par bateau dans les prochaines semaines, dont notamment 50.000 tonnes de blé, 12.500 tonnes de riz, 12.000 tonnes de soja, 20.000 tonnes de tourteaux de soja et 5.000 tonnes d'huile de soja.
+2223;65;FRCon+^UnitProperty|FRAndOr+FRMeasurementStop|typeConcept+^FRMeasurementBegin|.typeConcept|^typeConcept;*|-FRMeasurementStop|*|*|+FRMeasurementStop;
+/*		2223. Pour le reste, il appelait surtout l'attention de la Commission sur un volume global de 463,9 Mio ECU de recettes ou creances non recouvrees. Not_in: 40.000 Passeports mobilité seront délivrés qui offriront la gratuité dans les bus pendant une semaine, ainsi que des bons de voyage d'une valeur de 5 euros et réduction sur les services de carsharing.
+2241;65;FRCon+UnitProperty|FRAndOr+FRMeasurementStop|typeConcept+ValueProperty|.typeConcept|^typeConcept;*|-FRMeasurementStop|*|*|+FRMeasurementStop;
+/*		2241. Les études et les subventions directes aux investissements, qui s’élèvent respectivement à 1 331 millions d’euros et 1 417 millions d’euros, forment l’essentiel des actions.
+
+/* further left expansion
+2207;65;FRCon:FRMod+^FRTimeconcept|.FRDummy|FRAllformsDe+FRMeasurementBegin;+FRMeasurementBegin|*|-FRMeasurementBegin;left expansion for existing span for Concepts
+/*		2207. Si elles sont peu utilisées dans cette indication avant l'âge de 4 à 5 ans, elles font ensuite partie de la panoplie des traitements médicaux du strabisme. Selon une source, la proposition faite au numéro un de l'entreprises publique prévoit une baisse de 25 à 30%. Not_in: Il est passé au cours de l'année de 7 % à 5 %.
+2206;65;FRCon:FRMod+^FRIndirectObject|FRAllformsDe|FRMeasurementBegin;+FRMeasurementBegin|*|-FRMeasurementBegin;left expansion for existing span
+/*		2206. La groupe a déclaré avoir franchi en hausse, le 14 mars 2010, les seuils de 20% et 25% des droits de vote.
+2227;65;^FRIndirectObject|FRCon:FRMod+^FRIndirectObject|FRAllformsDe|.FRNonconcept:FRCon:FRMod:FRPoss+^FRMeasurementBegin|FRMeasurementBegin;*|+FRMeasurementBegin|*|*|-FRMeasurementBegin;left expansion for existing span
+/*		2227. Impopulaire dans sa circonscription, le président de la Commission bancaire du sénat, âgé de 65 ans, a choisi de ne pas se représenter en novembre. Not_in: L'entreprise a signé avec les exécuteurs testamentaires du chanteur un accord de 200 millions de dollars pour sortir dix projets dans les sept années à venir.
+2209;65;FRDummy;-FRDummy;remove temporary marker
+/*		2209. Le seul syndicat signataire de la convention des généralistes, demande pour sa part une augmentation de la consultation d'un euro à 18,5 euros (121 francs) contre les 17,53 euros actuels (115 francs) et une rémunération au forfait des gardes et astreintes.
+2242;65;Measindicator+^FRMeasurementBegin|.FRDummy|FRAllformsDe+^FRInMeasSpan|ValueProperty+|.typeConcept|^typeConcept;+FRMeasurementBegin|*|*|*|*|+FRMeasurementStop;left expansion to Measurement indicator
+/*		2242. Une femme mesurant 1,63 mètre et pesant 53 kilogrammes présente quant à elle un IMC de 19,9.
+
+/* Move attribute markers to relevant entity
+2200;65;FRMeasurementStop+^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|.^typeConcept+^typeBeginConcept+^typeEndConcept+^typeBeginEndConcept+^typeRelation+^typeBeginRelation+^typePathRelevant|typeConcept:typeBeginConcept:typeEndConcept:typeBeginEndConcept:typeRelation:typeBeginRelation:typePathRelevant;-FRMeasurementStop|*|+FRMeasurementStop;move MeasurementStop from NonRelevant to next relevant entity
+/*		2200. L'expérience a montré une diminution significative des événements osseux (fracture, compression médullaire, radiothérapie antalgique ou préventive de tassement fracture, chirurgie osseuse ou hypercalcémie) de 44% à 33% (25%) et un retard de survenue de ces événements de 6 mois.
+2173;65;FRPercent|FRAllformsDe|.FRNonconcept:FRPoss|typeConcept;*|FRCon|Join|*;
+/*		2173. Les études de développement pour les applications de gestion du trafic ou les travaux de construction préparatoires liés à l’exploration du site de construction, la construction de tunnels d’essai, le forage ou les enquêtes géotechniques sont considérées comme des mesures d’appui technique éligibles pouvant bénéficier jusqu’à 50 % d’une aide financière communautaire. La contribution communautaire est limitée à 10 % de la totalité des coûts d’investissement. Ce paquet d'actions représente 7,5% du capital de la Banque Nationale. Devenir citoyen canadien nécessite de parler aisément soit le français ou l'anglais – 98,5 % des Canadiens parlent au moins une des deux langues (anglais seulement: 67,5 %, français seulement: 13,3 %, les deux: 17,7 %). Les entreprises touristiques ont licencié environ 10% de leurs employés depuis le 11 septembre. C'est un sport principalement masculin (seulement 14 % des licenciés sont des femmes en France).
+
+
 /* PHASE 70: NEGATION
 /* ==================
 /* Remove negation attribute from 'ne explétif'
@@ -1321,13 +1520,13 @@
 /*		405. Jusqu'au moment où on n'y pensera plus de tout.
 365;70;FRBegin:FRAutre|FRNegation+^FRSConj+^"sans";+FRNegBegin|*;
 /*		365. L'autre n'a pas encore reçu de réponse.
-805;70;*FRCon:FRMod:FRNum:FRPPart|.FRAdvTime|FRNegation+^FRSConj+^"sans";+FRNegBegin|*|*;
-/*		805. En conséquence, les paiements correspondants n'ont pas été imputés au bon exercice budgétaire. Les salariés arrêtés pour longue maladie ne seront désormais plus indemnisés. Puisque même un succès lundi prochain ne lui garantirait pas un billet pour les quarts. 2009 n'était pas une année facile.
-375;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;
-/*		375. Par suite, les paiements en question n'ont pas été imputés au bon exercice budgétaire.
+805;70;*FRCon:FRMod:FRNum:FRPPart:FRObjpron|.FRAdvTime|FRNegation+^FRSConj+^"sans";+FRNegBegin|*|*;
+/*		805. En conséquence, les paiements correspondants n'ont pas été imputés au bon exercice budgétaire. Les salariés arrêtés pour longue maladie ne seront désormais plus indemnisés. Puisque même un succès lundi prochain ne lui garantirait pas un billet pour les quarts. 2009 n'était pas une année facile. Toutefois on sait maintenant qu’une cellule cancéreuse par elle-même n’est pas capable de détruire l’os.
+375;70;*FRCon:FRBegin:FRMod|FRPrep|FRNegBegin+^"non";+FRNegBegin|^FRPrep|-FRNegBegin;
+/*		375. Par suite, les paiements en question n'ont pas été imputés au bon exercice budgétaire. Ils ont l'occasion de prouver que leur présence en haut du tableau n'est pas le fait du hasard lors d'un déplacement difficile justement à Barcelone.
 743;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|*|*|-FRNegBegin;
 /*		743. Le report de crédits sur cette ligne budgétaire n'est pas structurel.
-744;70;*FRCon:FRBegin|FRPrep|FRNegBegin+^"non";+FRNegBegin|*|-FRNegBegin;repetition of r375 after application of r743
+744;70;*FRCon:FRBegin:FRMod|FRPrep|FRNegBegin+^"non";+FRNegBegin|*|-FRNegBegin;repetition of r375 after application of r743
 /*		744. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
 745;70;*FRCon:FRBegin|FRPrep|FRNonconcept|FRNegBegin+^"non";+FRNegBegin|*|*|-FRNegBegin;repetition of r743
 /*		745. Les changements dans l'organisation du travail du personnel navigant ne passent décidément pas.
@@ -1365,7 +1564,7 @@
 /*		704. Or le risque, selon eux, "c'est que ni la consommation ni les investissements en actifs immobilisés ne semblent bien placés pour être la locomotive d'une reprise durable".
 406;70;FRPunctuation|FRQue;FRPunctuation|+FRNegStop;
 /*		406. Il dit qu'il n'a rien entendu, qu'il a bien dormi.
-474;70;FRPunctuation|FRAdv|FRSRel:FRAdvNR;FRPunctuation|+FRNegStop|+FRNegStop;
+474;70;FRPunctuation|FRAdv|FRSRel:FRAdvStruct;FRPunctuation|+FRNegStop|+FRNegStop;
 /*		474. Les procédés de reconstruction complexes (greffe composé, lambeau) d’une perte de substance ne se font jamais à chaud, surtout en cas de plaie infectée ou d’ablation de tumeur. L'information sensorielle n'est pas dirigée au cortex aléatoirement, bien au contraire.
 385;70;FRPunctuation+^FRList|FRNonconcept|*FRCon:FRMod;*|*|+FRNegStop;
 /*		385. Toutefois, ces données n'étant pas vérifiées, des insuffisances affectant le cofinancement et des dépenses inéligibles risquent de passer longtemps inapercues.
@@ -1374,8 +1573,8 @@
 820;70;FRAdvTemp:FRAdvTime|FRPunctuation|^FRAdvTemp+^FRAdvTime+^SEnd;*|*|+FRNegStop;
 /*		820. Elle n'a pas appelé hier, j'en suis sûre.
 821;70;^FRAdvTemp+^FRAdvTime+^SBegin|FRPunctuation|FRAdvTemp:FRAdvTime|^SEnd;*|*|+FRNegStop|*;
-/*		821. L'engouement des Français pour le dispositif de l'autoentrepreneur ne se dément donc pas, plus d'un an après sa création".
-374;70;FRAndOrBut|FRAdvNR;+FRNegStop+FRBeginrel|*;
+/*		821. L'engouement des Français pour le dispositif de l'autoentrepreneur ne se dément donc pas, plus d'un an après sa création.
+374;70;FRAndOrBut|FRAdvStruct;+FRNegStop+FRBeginrel|*;
 /*		374. Il ne s'agit pas de l'entraîner dans des positions anti-morales ou anti-esthétiques mais de dégager un espace où ces positions ne sont pas nécessaires et même nuisent à l'action personnelle.
 423;70;FRAndOrBut|FRMod;+FRNegStop|*;
 /*		423. Tout se passe ensuite comme si ce deuil à la ritualité duquel on n'a pas participé était alors impossible ou plutôt durablement évité.
@@ -1417,7 +1616,7 @@
 /*		825. J'ai vécu normalement sans même penser que je pourrais un jour être concernée.
 798;70;FRNegation|*^FRCon|*FRCon+^FRNegation|FRSRelconj;*|*|*|+FRNegStop;
 /*		798. Aucune autre explication ne peut justifier les preuves d'origine qui servent à la fois aux produits manufacturiers et agricoles.
-799;70;FRNegation|*^FRCon+^FRPunctuation|*FRCon|*^FRSRelconj+^FRNegation+^FRNegStop+^FRNegBegin+^FRPunctuation+^FRSubjpron2|FRSRelconj;*|*|*|*|+FRNegStop;
+799;70;FRNegation|*^FRCon:FRMod+^FRPunctuation|*FRCon:FRMod|.^FRSRelconj+^FRNegation+^FRNegStop+^FRNegBegin+^FRPunctuation+^FRSubjpron2|FRSRelconj;*|*|*|*|+FRNegStop;
 /*		799. Nous ne disposons pas encore d'estimations précises qui nous permettent de connaître précisément l'effet que produira le plan hydrologique national sur les prix.
 832;70;FRCon|FRSRelconj+^FRNegation+^FRNegBegin|FRVerb+^FRNegation+^FRNegBegin;*|+FRNegStop|*;
 /*		832. Ils ont voté dimanche sans grande passion pour le second tour des élections législatives qui devraient consacrer la domination du Parti démocratique.
@@ -1425,7 +1624,7 @@
 /*		804. Le téléphone n'était plus qu'un souvenir.
 803;70;FRNegation|*FRCon|FRQue;*|*|+FRNegStop;
 /*		803. Mais il n'est pas sûr que la France y gagne, et encore moins les autres pays.
-830;70;FRCon|FRSubjpron+^FRNegWord+^"y";*|+FRNegStop;
+830;70;FRCon|FRSubjpron+^FRNegWord+^"y"+^FRAutre;*|+FRNegStop;
 /*		830. J'ai pas faim j'ai soif.
 
 /* Make negation span recognizable in next phases
@@ -1443,8 +1642,8 @@
 /*		403. Il ne sait plus s'il a vraiment envie d'y aller.
 
 
-/* SENTIMENT
-/* =========
+/* PHASE 80: SENTIMENT
+/* ===================
 /* Expansion of sentiment to the left-hand part of the path
 527;80;FRSRel|FRPosSentiment;+FRPosSentimentBegin|^FRPosSentiment;
 528;80;FRSRel|FRNegSentiment;+FRNegSentimentBegin|^FRNegSentiment;
@@ -1480,7 +1679,7 @@
 /*		742. Il était notamment reproché aux prévenus d'avoir négligé de prévenir les patients lorsque le problème a été identifié, afin de ne pas troubler les affaires de cet établissement privé.
 738;90;FRBeginrel;FRBeginrel;delete conflicting labels but keep attributes (not defined in this phase), make sure to add phase 90 to relevant labels
 /*		738. Ce n'est pas que les gens conduisent mal, mais c'est qu'ils ont un mauvais comportement.
-989;90;FRBegin;-FRNum-FRCon-FRMod;
+989;90;FRBegin;-FRNum-FRCon-FRMod-FRQuantpron;
 /*		989. Le président a affirmé qu’il ne tolérerait pas que la même personne reste à la direction d’une région plus de trois mandats successifs. La banque a fourni aux banques un million de sachets d'une valeur de 10 euros.
 
 /* PHASE $
@@ -1492,7 +1691,7 @@
 
 /* last step for user dictionary labels
 835;$;FRAdvTemp+FRTime+UDIgnoreTime;-FRTime;for ambiguous lexreps that get Time attribute in the rules file
-/*		835.UD. Certains vignerons se sont même mis, depuis quelques temps à y faire tremper des copeaux de bois afin d'accélérer le processus et cette pratique touve des défenseurs.
+/*		835.UD. Pendant le mois de juillet 1847, le couple, qui ne connaissait plus depuis un certain temps la passion de ses débuts, se sépara définitivement.
 837;$;UDIgnoreNegation;-FRNegation-FRNegBegin-FRNegWord;
 /*		837.UD. Pour l'instant, je ne ressens rien de particulier.
 840;$;FRNegBegin+^FRNegation+^FRNegWord|.<^FRNegation+^FRNegWord+^FRNegStop|FRNegStop:SEnd;-FRNegBegin|*|*;remove span from UDIgnoreNegation (rare)
