@@ -36,11 +36,11 @@
 /*		1994.UD. Dit krabgedrag kan op lange termijn een aangeleerde reactie worden. Dat is drie tot vier keer zo vaak als gemiddeld. AMSTERDAM 11/08/2018 18:00.
 1997;1;UDIgnoreTime;-NLPossiblehour-NLHour-NLDay-NLMonth;
 /*		1997.UD. Hij eindigde met een tijd van 6.00. Inwoners die behoefte hebben om te reageren op de brief, kunnen tot donderdag contact opnemen met de deelgemeente.
-2157;1;UDIgnoreUnit;-NLUnit;
-/*		2157.UD. Het meest gehoorde is dat de drie G 7 landen met de euro, Duitsland, Italië en Frankrijk, fuseren tot één enkel lidmaatschap. 
+2157;1;UDIgnoreUnit;-NLUnit-NLNumberPlusUnit;
+/*		2157.UD. Het meest gehoorde is dat de drie G 7 landen met de euro, Duitsland, Italië en Frankrijk, fuseren tot één enkel lidmaatschap. Industriële waarden als 3M (+1,8%) trekken zich op aan het cijfer.
 2159;1;UDIgnoreNumber;-NLNumber-NLNumeric-NLNumpart2-NLConNum-NLOrdnum-NLBracketsnumber+NLCon;replace ConNum by Con
 /*		2159.UD. Chronische nierinsufficiëntie blijft stabiel onder IV medicatie. 
-2160;1;UDIgnoreNumber;-NL12dNum-NL3dNum;
+2160;1;UDIgnoreNumber;-NL12dNum-NL3dNum-NLNumberPlusUnit;
 /*		2160.UD. In Australië is het alarmnummer 000, uitgesproken als 'triple zero'.
 
 /* Connections with partial words (rule block should precede disambiguation of Adj)
@@ -321,7 +321,7 @@
 1882;30;NLNumber|NLAndOr:NLPrep|*NLNumber|"jaar"|NLEndTime;+NLTime+CStarter+NLAddExpansion|*|NLAdvTime|+Join|+Join;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1882. Ergens tussen 3,5 tot 4,5 miljard jaar geleden ontstond er leven op aarde.
 2006;30;^NLPrepTime|"een":NLNumber:NLQuantity|"jaar"|"terug";*|NLAdvTime|+Join|+Join-NLEndTime;time indication with 'jaar', don't keep Year attribute (meant for dates)
-
+/*		2006. Ook de omzet hield beter stand dan verwacht op 712,5 miljoen euro, bijna de helft minder dan een jaar terug.
 1878;30;"een":NLNumber:NLQuantity:NLOrdnum|.NLAttradj+NLBeginTime+^"vorig"|"jaar"|NLEndTime;NLAdvTime|+Join|+Join|+Join-NLEndTime;time indication with 'jaar', don't keep Year attribute (meant for dates)
 /*		1878. Zeshonderd Nederlandse schoolkinderen krijgen vanaf december anderhalf jaar lang gratis limonade. Het passagiersvervoer is in april 2008 met 1,0% gestegen ten opzichte van dezelfde maand twee jaar eerder.
 1879;30;^NLNumber|"tot"|NLNumber:NLQuantity:NLOrdnum|"jaar"|^NLAttradj:NLComp;*|*|NLTimeconcept+NLTime|+Join|*;time indication with 'jaar', don't keep Year attribute (meant for dates)
@@ -636,12 +636,8 @@
 /*		2016. Het aandeel ruilde een winst van meerdere procenten voor 3,75 procent verlies.
 2020;35;NLUnit|"per"|NLUnit;*|Join|Join;
 /*		2020. Dit gebruik van relatief veel (5 gram per liter) en oude hop is typisch voor lambiek.
-2046;35;Measindicator|.NLLinkingverb:NLOperator:NLColon|NLNumber;*|*|+ValueProperty+Measurement;
+2046;35;Measindicator|.NLLinkingverb:NLOperator:NLColon:"van"|NLNumber;*|*|+ValueProperty+Measurement;
 /*		2046. Gewicht: 98.00 kg, Gestalte: 174.00 cm, (bsa = 2.18m² en bmi = 32). De indicatie voor een operatie is een BMI groter dan 40 of BMI groter dan 35 met 2 bijkomende aandoeningen bijv. Hoge bloeddruk en diabetes.
-
-
-/*1401;35;Measindicator|.SVpAux|SVNum:SVNumber;*|*|+Measurement+ValueProperty;
-/*1405;35;Measindicator|.SVpAux|*SVNummodifier:"över":"under"|SVNum:SVNumber;*|*|JoinReverse|+Measurement+ValueProperty;
 
 
 /* PHASE 40: DISAMBIGUATION RULES
@@ -1411,7 +1407,6 @@
 /*		645. Deze mensen zijn zich veel meer van allerhande prikkels bewust dan vegetatief levende mensen, hoewel dat niet altijd duidelijk is. Ik verzoek de diensten van het Parlement na te gaan waarom dat niet is gebeurd. Beiden worden zo laag mogelijk gemaakt, voor zover dat binnen  de reglementen mogelijk is.
 1587;40;SBegin:NLPunctuation|NLPrep|"dat";*|*|NLDempron-NLRelpron;use literal for 'dat' instead of label Dat, so the rule always fires
 /*		1587. In dat complex bevond zich tot halfweg de achttiende eeuw ook een jezuïetenklooster. Er bevindt zich onder meer het tweede grootste petrochemisch complex ter wereld, na dat in Houston.
-/*936
 1294;40;NLDat:NLWatWie:NLDie|NLSubjpron|NLInf;*|*|-NLInf+NLVerb;
 /*		1294. Het gaat erom dat wij doen wat technisch mogelijk is. Dit voorval is het laatste wat we nodig hebben. Het is tragisch dat zoveel mensen niet de behandeling krijgen die ze verdienen.
 
@@ -1456,7 +1451,6 @@
 /*		553. De winst van begin vorige week, evenals die van dinsdag, zouden meer lijken op een rally in een dalende markt dan op het begin van een stijgende markt. NOT. Er zijn mensen die in de stad wonen, maar die niet te voet naar de winkel kunnen gaan.
 547;40;NLPrep+^"mee"+^"toe"|NLDie;*|NLDempron-NLRelpron;
 /*		547. Een concrete aanleiding voor die stijging is er niet, maar het aandeel was de laatste tijd fors terrein verloren na een stroom van negatieve berichten. De Elfstedentocht van 1997 was de zwaarste sinds die legendarische van 1963.
-/*797
 935;40;NLNiet:NLRel|"die"|NLPrep:NLAttradj:NLCon;*|NLDempron|*;
 /*		935. Ik heb namelijk niet die indruk. Ik denk dat ze in de eerste plaats hun eigen belangen en niet die van hun onderneming dienen. We kunnen de uitdagingen die ons te wachten staan nooit aangaan, zeker niet die van de uitbreiding.
 937;40;"noch"|"die":"dat"|NLPrep;*|NLDempron|*;use literal for 'die' and 'dat' instead of labels Dit and Dat, so the rule always fires
@@ -2385,8 +2379,12 @@
 /* Expansion based on indicator
 2109;64;Ageindicator|ValueProperty|UnitProperty+NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|+NLMeasurementStop;
 /*		2109. De huidige richtlijn adviseert antibiotica bij een selecte groep van kinderen onder de 2 jaar, en een afwachtend beleid bij kinderen boven de 2 jaar. 
+2161;64;Measindicator|"van"|ValueProperty|.UnitProperty+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
+/*		2161. Bij een bloeddruk van 135/85 heb je een hoge bloeddruk.
 2111;64;Measindicator|."is":"was":"zijn":"waren":":":"beneden":"onder":"boven"|ValueProperty|UnitProperty+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|*|+NLMeasurementStop;
 /*		2111. In deze groep van zuigelingen wordt aangeraden de zuurstofsaturatie > 93 % te houden. De prijs is 24,95 euro. Bloeddruk: 17/8 cm/Hg.
+2162;64;Measindicator|"van"|NLNumberPlusUnit+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|+NLMeasurementStop;
+/*		2162. Het wordt nooit volledig hard en blijft zelfs bij temperaturen van –20°C nog vervormbaar.
 2112;64;Measindicator|."is":"was":"zijn":"waren":":":"beneden":"onder":"boven"|NLNumberPlusUnit+^NLAge|.typeConcept|^typeConcept;+NLMeasurementBegin|*|*|*|+NLMeasurementStop;
 /*		2112. De bloeddruk bedroeg 130/80 mmHg en de pols 80/min, regulair. Het wordt nooit volledig hard en blijft zelfs bij temperaturen beneden –20°C nog vervormbaar.
 2142;64;Measindicator:Ageindicator|NLMeasurementBegin;+NLMeasurementBegin|-NLMeasurementBegin;
