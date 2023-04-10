@@ -35,7 +35,8 @@ make -j $(sysctl -n hw.logicalcpu) test
 
 ##### Build iknowpy wheels #####
 cd modules/iknowpy
-python setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-x86_64
+python setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-x86_64 --no-dependencies
+DYLD_LIBRARY_PATH="$GITHUB_WORKSPACE/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib" python -m delocate.cmd.delocate_wheel -w wheelhouse dist/iknowpy-*.whl
 
 
 ##### Report cache statistics #####

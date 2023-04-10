@@ -39,6 +39,7 @@ for PYVERSION in $PYVERSIONS; do
   "$PYTHON" -m pip install -U pip --no-warn-script-location
   "$PYTHON" -m pip install -U cython=="$CYTHON_VERSION" setuptools wheel --no-warn-script-location
 done
+"$PYTHON" -m pip install -U delocate --no-warn-script-location
 
 # JSON for Modern C++
 if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then

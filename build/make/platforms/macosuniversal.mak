@@ -52,8 +52,7 @@ LIBRARYDIRFLAG = -L
 LIBRARYSEARCHFLAG = -l
 
 LFLAGS = $(PLATARCH) -Wl,-multiply_defined,suppress -Wl,-headerpad_max_install_names -stdlib=$(STDLIB)
-# Note that dylib's need a -install_name to be set
-LIBRARYFLAGSDYN = -dynamiclib -install_name @loader_path/$(@F)
+LIBRARYFLAGSDYN = -dynamiclib
 LIBRARYFLAGSSO = -dynamic -bundle
 
 LIBRARYFLAGS += $(LFLAGS) $(if $(IS_DYLIB), $(LIBRARYFLAGSDYN), $(LIBRARYFLAGSSO))

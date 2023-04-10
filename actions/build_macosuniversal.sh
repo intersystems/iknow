@@ -37,8 +37,8 @@ cd modules/iknowpy
 for PYTHON in python3.{8..11}; do
   "$PYTHON" setup.py bdist_wheel --plat-name=macosx-$MACOSX_DEPLOYMENT_TARGET-universal2 --no-dependencies
 done
-"$PYTHON" setup.py merge
-rm -r dist/cache
+"$PYTHON" setup.py merge --no-dependencies
+DYLD_LIBRARY_PATH="$GITHUB_WORKSPACE/kit/$IKNOWPLAT/release/bin:$ICUDIR/lib" "$PYTHON" -m delocate.cmd.delocate_wheel -w wheelhouse dist/merged/iknowpy-*.whl
 
 
 ##### Report cache statistics #####

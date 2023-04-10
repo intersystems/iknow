@@ -23,7 +23,7 @@ brew install ccache
 echo /usr/local/opt/ccache/libexec >> $GITHUB_PATH
 
 # Python packages
-pip install -U cython=="$CYTHON_VERSION" setuptools wheel
+pip install -U cython=="$CYTHON_VERSION" setuptools wheel delocate
 
 # JSON for Modern C++
 if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.txt") != "$JSON_URL" ]; then
