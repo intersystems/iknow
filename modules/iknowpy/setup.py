@@ -514,8 +514,9 @@ def patch_wheel(whl_path, extracted=False):
     to interfere with each other.
 
     To patch the wheel, we rename the iKnow engine and ICU shared libraries by
-    adding a hash to the file names, and then we re-link them to the newly
-    renamed libraries. This way, we can guarantee that the correct library is
+    adding a hash to the file names on Windows and Linux. (This step is not
+    necessary on macOS.) On all platforms, we re-link the libraries so that they
+    are found at runtime. This way, we can guarantee that the correct library is
     loaded when iknowpy is imported."""
 
     print('repairing wheel')
@@ -560,7 +561,8 @@ def patch_wheel(whl_path, extracted=False):
     lib_rename = {}  # dict from old lib name to new lib name
     for lib_path in repair_lib_paths:
         lib_name = os.path.basename(lib_path)
-        if lib_name.startswith('engine.'):  # don't rename main module file
+        if lib_name.startswith('engine.') or sys.platform == 'darwin':
+            # don't rename main module file or if we're on macOS
             lib_rename[lib_name] = lib_name
         else:
             lib_name_split = lib_name.split('.')
