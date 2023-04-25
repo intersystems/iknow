@@ -144,7 +144,7 @@ endif
 #Strict flags
 ifeq ($(STRICT),1)
 #"long long" is used in sysTypes.h
-OBJECTFLAGS += -Wno-long-long -Werror -Wall -Wextra -pedantic-errors -fdiagnostics-show-option -Wno-parentheses -Wno-missing-field-initializers -Wno-unused-parameter -Wno-unused-local-typedef -Wno-unknown-warning-option -Wno-deprecated-copy -Wno-unused-but-set-variable
+OBJECTFLAGS += -Wno-long-long -Werror -Wall -Wextra -pedantic-errors -fdiagnostics-show-option -Wno-parentheses -Wno-missing-field-initializers -Wno-unused-parameter -Wno-unused-local-typedef -Wno-unknown-warning-option -Wno-deprecated-copy -Wno-unused-but-set-variable -Wno-deprecated-declarations
 #OBJECTFLAGS += -Wno-long-long -Werror -Wall -Wextra -pedantic-errors -fdiagnostics-show-option
 LIBRARYFLAGS +=  -Werror -Wall -Wextra -Werror
 EXECUTABLEFLAGS += -Werror -Wall -Wextra
