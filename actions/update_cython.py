@@ -20,7 +20,7 @@ vars['CYTHON_VERSION'] = latest_version
 updatelib.set_vars(vars)
 
 # obtain changelog
-r = requests.get('https://cython.readthedocs.io/en/stable/src/changes.html')
+r = requests.get('https://cython.readthedocs.io/en/latest/src/changes.html')
 r.encoding = 'utf-8'
 soup = bs4.BeautifulSoup(r.text, 'html.parser')
 for h2_element in soup.find_all('h2'):
