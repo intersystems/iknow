@@ -372,7 +372,6 @@
 ;;(様々|さまざま);;JPAdjNoun;
 ;;(さまざまな|様々な);;JPAttributive;
 
-
 ;;(利口|りこう);;JPAdjNoun;
 ;;(離ればなれ|離れ離れ);;JPAdjNoun;
 ;;(立派|りっぱ);;JPAdjNoun;
@@ -1093,6 +1092,7 @@
 ;;自然に近い;;JPAdjVBase;
 ;;な自然に;;JPCon;Join;Join;-;JPni;
 ;;の自然に;;JPno;-;JPCon;Join;-;JPni;
+;;大自然に;;JPCon;Join;Join;-;JPni;
 
 ;;自明;;JPAdjNoun;
 ;;自由;;JPAdjNoun;JPCon;
@@ -2219,6 +2219,7 @@
 ;;おぼつかな;;JPAdjVStem;
 ;;かったる;;JPAdjVStem;
 ;;かつてな;;JPAdjVStem;
+
 ;;かびくさ;;JPAdjVStem;
 ;;がめつ;;JPAdjVStem;
 ;;関心(が|も|の)高;;JPAdjVStem;
@@ -2328,6 +2329,10 @@
 ;;間違いな;;JPAdjVStem;
 ;;間違いありません;;JPAdj;
 ;;間違いなの;;JPCon;Join;Join;-;JPNonRelevant;Join;
+;;まごうことなき;;JPAttributive;
+;;紛うことなき;;JPAttributive;
+;;まごうことなく;;JPAttributive;
+;;紛うことなく;;JPAttributive;
 
 ;;違いな;;JPAdjVStem;
 ;;真似しようにも真似できな;;JPAdjVStem;JPNegation;
@@ -6043,12 +6048,12 @@
 ;;(やむにやまれぬ|已むに已まれぬ);;JPAttributive;
 ;;もやっとした;;JPAttributive;
 
-;;しかるべき;;JPAttributive;
+;;しかるべき;;JPAttributive;JPAttributiveTime;
 ;;でしかるべき;;JPParticleDE;-;JPAttributive;Join;Join;Join;Join;
 
 ;;やんごとなき;;JPAttributive;
 
-;;次なる;;JPAttributive;
+;;次なる;;JPAttributive;JPAttributiveTime;
 ;;有数の;;JPAttributive;
 ;;指折りの;;JPAttributive;
 
@@ -6168,7 +6173,7 @@
 ;;ほかの;;JPAttributive;
 ;;れっきとした;;JPAttributive;
 ;;何の;;JPAttributive;JPExpressionR;JPnanino;
-;;次の;;JPAttributive;
+;;次の;;JPAttributive;JPAttributiveTime;
 ;;次のような;;JPAttributiveNR;
 ;;次のようなもの;;JPCon;-;JPExpressionNR;Join;Join;Join;Join;Join;
 ;;あまりの;;JPAttributive;
@@ -6270,7 +6275,7 @@
 ;;これまでに(|は);;JPAdvTime;JPBeginRelation;
 ;;(これまでにな|これまでに無);;JPAdjVStem;JPNegation;
 ;;これまでになされて;;JPAdvTime;Join;Join;Join;Join;-;JPVerb;JPConjVerb;Join;Join;Join;
-;;これまでの;;JPAttributive;
+;;これまでの;;JPAttributive;JPAttributiveTime;
 ;;これまでの「;;JPAttributiveNR;Join;Join;Join;Join;-;BracketOpen;
 ;;これまでのところ;;JPAdv;
 ;;これまでより;;JPAdv;
@@ -6660,7 +6665,7 @@
 ;;全てが;;JPCon;Join;-;JPParticleGA;
 ;;すべてではない;;JPCon;Join;Join;-;JPLinkV;-;NonRelevant;-;JPAuxVerb;JPNegation;Join;
 ;;全てではない;;JPCon;Join;-;JPLinkV;-;NonRelevant;-;JPAuxVerb;JPNegation;Join;
-;;(すべての|全ての);;JPAttributive;
+;;(すべての|全ての);;JPAttributive;JPAttributiveTime;
 ;;すべては;;JPCon;Join;Join;-;JPParticleHA;
 ;;全ては;;JPCon;Join;JPParticleHA;
 ;;すべてを;;JPCon;Join;Join;-;JPParticleWO;
@@ -7489,6 +7494,7 @@
 ;;(いくぶん|幾分);;JPAdv;
 ;;(終わり頃|終り頃);;JPAdv;JPCon;
 ;;(もう一つ|もう1つ|もうひとつ);;JPAdv;JPCon;;
+;;(ただ一つ|ただ1つ|たった一つ|たった1つ|ただひとつ|たったひとつ);;JPCon;
 
 ;;一体;;JPAdv;JPCon;
 ;;一体として;;JPCon;Join;-;JPtoshite;Join;Join;
@@ -7853,15 +7859,16 @@
 ;;時期;;JPCon;
 
 ;;春;;JPCon;JPTime;DateTime;JPSeason;
-
+;;春季;;JPCon;JPTime;DateTime;JPSeason;
 ;;夏;;JPCon;JPTime;DateTime;JPSeason;
-
+;;夏季;;JPCon;JPTime;DateTime;JPSeason;
 ;;夏場;;JPCon;JPTime;DateTime;JPSeason;
 ;;秋;;JPCon;JPTime;DateTime;JPSeason;
-
+;;秋季;;JPCon;JPTime;DateTime;JPSeason;
 ;;冬;;JPCon;JPTime;DateTime;JPSeason;
-
+;;冬季;;JPCon;JPTime;DateTime;JPSeason;
 ;;冬場;;JPCon;JPTime;DateTime;JPSeason;
+;;年賀;;JPCon;JPTime;DateTime;JPSeason;
 
 
 ;;時期が;;JPCon;Join;-;JPParticleGA;
@@ -7926,7 +7933,8 @@
 ;;晩霞;;JPCon;
 ;;(晩御飯|晩ご飯|晩ごはん);;JPCon;
 ;;只今;;JPAdvTime;JPCon;;
-;;今夜;;JPAdvTime;JPCon;JPRule172a;;
+
+;;今夜;;JPAdvTime;JPCon;JPRule172a;
 ;;同夜;;JPAdvTime;JPCon;;
 ;;夜;;JPAdvTime;JPCon;JPTime;JPSuffixNoun;
 
@@ -8079,6 +8087,7 @@
 ;;ことしか;;JPkoto;Join;-;JPshika;Join;
 ;;ことしは;;JPCon;DateTime;Join;Join;-;JPParticleHA;
 ;;ことしも;;JPCon;DateTime;Join;Join;-;JPParticleMO;
+;;こと(しゃべるな|しゃべんな);;JPkoto;Join;-;JPVerb;JPNegation;Join;Join;Join;Join;
 
 ;;最後には;;JPAdvTime;
 ;;の最後;;JPParticleNO;-;JPCon;Join;
@@ -8828,7 +8837,10 @@
 
 ;;(カ条|か条);;JPCount;
 ;;月;;JPMonth;JPCount;JPCon;JPRule3437;
-;;月物;;JPCount;
+;;年物;;JPCon;JPDuration;
+;;月物;;JPCount;JPCon;
+;;限月;;JPCon;
+;;期近;;JPCon;
 ;;月現在;;JPMonth;JPCon;
 ;;(ヶ月|ヵ月|ケ月);;JPCount;JPTime;
 ;;(ヶ月|ヵ月|ケ月)間;;JPCount;JPTime;
@@ -8844,11 +8856,29 @@
 
 ;;月度;;JPTime;JPCount;
 ;;年度;;JPTime;JPCount;
-;;年次;;JPCon;
+;;年次;;JPCon;JPFrequency
+
+;;年次生;;JPCount;
+;;年次以降生;;JPCount;
 ;;年度末;;JPTime;JPCount;
+;;年度中;;JPTime;JPCount;
 ;;年間;;JPTime;JPCon;
 ;;年比;;JPCon;
 ;;年前;;JPCount;JPTime;
+;;年数;;JPCon;JPDuration;
+;;年数兆;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数億;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数万;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数千;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数百;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数十;;JPTime;JPCount;-;JPKanjiNumber;Join;
+;;年数回;;JPTime;JPCount;-;JPKanjiNumber;-;JPCount;
+;;年数%;;JPTime;JPCount;-;JPKanjiNumber;-;JPCount;
+;;年限;;JPCon;JPDuration;
+;;年限り;;JPTime;JPCount;
+;;年産;;JPCount;JPCon;
+;;年齢;;JPCon;
+;;年輪;;JPCon;
 ;;年前後;;JPCount;JPTime;-;JPPartAdvNOUN;Join;
 ;;年前半;;JPCount;JPTime;
 ;;年先;;JPTime;JPCount;
@@ -9404,7 +9434,10 @@
 ;;について来い;;JPParticleNI;JPEndRelation;-;JPVerb;Join;Join;Join;Join;
 ;;についての;;JPnitsuite;Join;Join;Join;-;NonRelevant;
 ;;についてのみ;;JPnitsuite;Join;Join;Join;-;JPPartAdvNOUN;Join;
-;;において;;JPParticlePREPO;JPEndRelation;
+;;において;;JPParticlePREPO;;JPEndRelation;
+;;へ向け;;JPParticlePREPO;
+;;へ向けた;;JPParticlePREPO;JPEndRelation;
+
 
 ;;うえ;;JPParticlePREPO;JPAdv;JPue;
 ;;ため;;JPParticlePREPO;JPtame;JPVerbOther;JPVerbNoun;
@@ -11786,6 +11819,10 @@
 ;;感じ;;JPVerbOther;JPVerbNoun;
 ;;重んじ;;JPVerbOther;JPVerbNoun;
 ;;軽んじ;;JPVerbOther;JPVerbNoun;
+;;うとんじ;;JPVerbOther;JPVerbNoun;
+;;疎んじ;;JPVerbOther;JPVerbNoun;
+;;そらんじ;;JPVerbOther;JPVerbNoun;
+;;諳んじ;;JPVerbOther;JPVerbNoun;
 ;;案じ;;JPVerbOther;JPVerbNoun;
 ;;詠じ;;JPVerbOther;JPVerbNoun;
 ;;興じ;;JPVerbOther;JPVerbNoun;
@@ -12495,7 +12532,6 @@
 ;;、またの名;;JPComma;-;JPCon;Join;Join;Join;
 ;;そのまた;;JPAttributive;
 
-
 ;;相次;;JPVerbOther;
 ;;(あいついで|相次いで);;JPAdv;
 ;;相次がない;;JPVerb;JPNegation;
@@ -12934,7 +12970,6 @@
 ;;見習;;JPVerbOther;JPCon;
 ;;習;;JPVerbOther;JPCon;
 ;;(拘|こだわ);;JPVerbOther;
-
 ;;押;;JPVerbOther;
 ;;推;;JPVerbOther;
 ;;休;;JPVerbOther;JPSuruNoun;
@@ -13878,6 +13913,7 @@
 ;;(さぼ|サボ);;JPVerbOther;
 ;;しゃべ;;JPVerbOther;
 ;;しゃべれ;;JPVerbNoun;JPVerbOther;
+;;(しゃべるな|しゃべんな);;JPVerb;JPNegation;
 ;;たたず;;JPVerbOther;
 ;;ただよ;;JPVerbOther;
 ;;つつし;;JPVerbOther;
@@ -15388,7 +15424,10 @@
 ;;唱え;;JPVerbOther;JPVerbNoun;
 ;;(てがけ|手掛け|手がけ);;JPVerbOther;JPVerbNoun;
 ;;(あふれ|溢れ);;JPVerbOther;JPVerbNoun;JPVerbOtherRU;
+
+
 ;;臨場感あふれる;;JPAttributive;
+
 ;;あぶれ;;JPVerbOther;JPVerbNoun;
 ;;(行なえ|行え);;JPVerbOther;JPVerbNoun;
 ;;(まじえ|交え|混じえ);;JPVerbOther;JPVerbNoun;
@@ -17024,6 +17063,7 @@
 ;;役立たせ;;JPVerbOther;JPVerbNoun
 ;;躍り出;;JPVerbOther;JPVerbNoun
 ;;癒され;;JPVerbOther;JPVerbNoun
+;;心癒され;;JPVerbOther;JPVerbNoun;
 ;;諭され;;JPVerbOther;JPVerbNoun
 ;;誘え;;JPVerbOther;JPVerbNoun
 ;;誘われ;;JPVerbOther;JPVerbNoun
@@ -22204,7 +22244,7 @@
 ;;喫;;JPSuruNoun;JPVerbOther;
 
 ;;制;;JPSuruNoun;JPVerbOther;JPSuffixNoun;
-;;期;;JPSuruNoun;JPVerbOther;JPCount;JPSuffixNoun;JPRule3437;
+;;期;;JPSuruNoun;JPVerbOther;JPCount;JPSuffixNoun;JPRule3437;Dummy2;
 ;;面;;JPSuruNoun;
 ;;介;;JPSuruNoun;JPVerbOther;
 ;;発;;JPSuruNoun;JPVerbOther;JPSuffixNoun;
@@ -29656,6 +29696,7 @@
 ;;ぞっかい;;JPSuruNoun;
 ;;たく鉢;;JPSuruNoun;
 ;;とうかつ;;JPSuruNoun;
+;;とうかつな;;JPParticleTO;-;JPAttributive;Join;Join;Join;
 ;;しゅっ棺;;JPSuruNoun;
 ;;詳記;;JPSuruNoun;
 ;;訳読;;JPSuruNoun;
@@ -30490,6 +30531,7 @@
 ;;団長;;JPCon;
 ;;学長;;JPCon;
 ;;(長芋|長いも);;JPCon;
+;;長いものが;;JPAdjVStem;-;JPi;-;JPmono;Join;-;JPga;
 ;;長いものに;;JPAdjVStem;-;JPi;-;JPmono;Join;-;JPni;
 ;;長者;;JPCon;
 ;;長袖;;JPCon;
@@ -30849,7 +30891,8 @@
 ;;次戦;;JPCon
 ;;次弟;;JPCon
 ;;目次;;JPCon
-;;月次;;JPCon
+;;月次;;JPFrequency;JPCon;
+
 ;;二の次三の次;;JPCon
 ;;次項;;JPCon
 ;;次姉;;JPCon
@@ -33815,8 +33858,10 @@
 ;;間接;;JPCon;
 ;;夜間;;JPCon;
 ;;居間;;JPCon;
+
 ;;手間;;JPCon;
 ;;手間のかかる;;JPAttributive;
+
 ;;(隙間|すき間);;JPCon;
 ;;区間;;JPCon;
 ;;間隔;;JPCon;
@@ -34702,6 +34747,8 @@
 ;;時空;;JPCon;
 ;;日時;;JPCon;
 ;;日時点;;JPCount;JPDate;-;JPSuffixTime;JPDateTime;DateTime;Join;
+;;日次;;JPFrequency;
+;;週次;;JPFrequency;
 ;;往時;;JPCon;
 ;;定時;;JPCon;
 ;;平時;;JPCon;DateTime;
@@ -37940,7 +37987,6 @@
 ;;アイパッド;;JPCon;
 ;;なにわ;;JPCon;JPHiragana;
 
-
 ;;長島;;JPCon;
 ;;清水;;JPCon;
 ;;河野;;JPCon;
@@ -37981,7 +38027,6 @@
 ;;シブがき隊;;JPCon;
 ;;やっくん;;JPCon;
 ;;五月山;;JPCon;
-
 ;;太郎;;JPCon;
 ;;ゆかり;;JPCon;
 ;;義偉;;JPCon;

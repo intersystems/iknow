@@ -15,14 +15,11 @@
 4549;1;UDNegation;^UDNegation+JPNegation;
 
 /*		4738.	UV分析による実態から失業の特徴を考える。
-
-
 /* ---------- PHASE 2 ----------
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
 4608;2;typeConcept|"("|*JPKatakana|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
 4609;2;typeConcept|"("|*JPNumber|")";*|JPCon-BracketOpen-JPPlusMinus|Join|Join;
-
 
 /* ---------- PHASE 3 ----------
 /* ---------- Initial Processing of AlphaNumeric Characters and Furigana ----------
@@ -87,6 +84,14 @@
 3409;3;JPListNumber|"と"|JPListNumber;JPCon+DateTime|JPParticlePREPO|JPCon+DateTime;
 4420;3;JPListNumber|JPCount;JPNumber|Join;
 3519;3;"※"|JPNumber+^JPAlphabet+^JPYearNum;JPListNumber|Join;
+4785;3;JPNumber|"年産":"月物";*|+JPTime-JPCon;
+
+/*		4785.	きっかけは日経平均先物12月物に入った大規模な売り注文。
+
+4786;3;JPNumber|"年物";JPCon+JPDuration|+JPDuration;
+
+/*		4786.	米10年物国債利回りは1.72%と16年11月以来の低水準に下がった。
+
 3533;3;BracketOpen|"*"|JPNumber|BracketClose;JPListNumber|Join|Join|Join;
 3520;3;SBegin|JPNumber|JPPeriod|^JPNumber+^SEnd;*|JPListNumber|Join|+Dummy;
 3408;3;JPListNumber|"について";JPCon+DateTime|JPPartAdvNOUN;
@@ -283,16 +288,11 @@
 4628;3;JPNumber+^JPKanjiNumber|JPKanjiNumber|JPNumber+^JPKanjiNumber;JPNumber|Join|Join;
 4630;3;JPNumber+^JPKanjiNumber+^"何"+^"数"|*JPKanjiNumber|^JPNumber;JPNumber|Join|*;
 4763;3;*JPKanjiNumber;JPNumber;
-
-/*		4763.	この戦争は、一千万人もの戦死者を出した。
-
 4674;3;JPNumber|JPCount+"g":"w":"a"|JPCount+^"分"+^"回";*|-JPCount|-JPCount;
-
+4458;5;JPAttributiveNR|"人";JPAttributive|*;
 
 /* ---------- PHASE 5: PART 1 ----------
 /* ---------- Initial Processing ----------
-
-4458;5;JPAttributiveNR|"人";JPAttributive|*;
 
 4688;5;^typeConcept|JPha|"しけ";*|JPCon|Join;
 
@@ -433,7 +433,10 @@
 2525;5;JPParticleWO|JPCon+JPVerbNoun;JPParticleWO|-JPCon;
 3112;5;SBegin|"当時"|JPCon;*|-JPCon|^JPCon;
 3478;5;SBegin|"なんでも";*|JPNonRelevant;
-4;5;JPCon+^JPCount+^JPSeparateDate|JPCon|JPCon|JPCon+^"外来";JPCon-DateTime|Join|Join|Join;
+4;5;JPCon+^JPCount+^JPSeparateDate+^JPDuration|JPCon+^JPDuration|JPCon+^JPDuration|JPCon+^"外来";JPCon-DateTime|Join|Join|Join;
+
+/*		4.	利休が大成したとされる茶の湯を、表千家歴代はそれぞれの時代の要請に合わせてどのように受け継いでいったのか。
+
 3614;5;"回"|JPra|JPnai;-JPCon|^JPra|^JPnai;
 3811;5;JPNumber|JPtsu+JPHiragana;JPNumber|Join;
 4000;5;JPHiragana|JPHiragana|JPCon|JPCon;^JPHiragana|-JPCon|^JPCon|^JPCon;
@@ -462,7 +465,7 @@
 
 /*		4769.	愛美が亡くなる一週間ほど前です。
 
-5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"|JPCon|JPCon+^JPNegation+^JPVerbOtherTSU;JPCon|Join|Join;
+5;5;JPCon+^JPCount+^JPSuffixAdv+^"それまで"+^JPDuration|JPCon+^JPDuration|JPCon+^JPNegation+^JPVerbOtherTSU+^JPDuration;JPCon|Join|Join;
 
 /*		5.	企業や社会のあり方が大きく変わりつつあるときだからこそ、今まで以上に柔軟で迅速に構築できる、次のIT基盤が求められている。 SHOULD NOT WORK FOR: 毛羽立たずセンイ残りしない化粧用パフとして高いご支持を頂いています。
 
@@ -658,7 +661,18 @@
 
 /*		4770.	十三日午後六時三十分頃、市立Ｓ中学校のプールで、愛美ちゃん（４）が死亡しているのが発見された。
 
-6;5;JPCon+^JPMonth+^JPHiragana+^"多少"+^JPSeparateDate+^"円"+^"銭"+^"ドル"|JPCon+^JPuchi+^"外来"+^"程度"+^JPMonth;JPCon-DateTime|Join;
+4782;5;JPSeason+JPSeason(len=2)|JPCon;+JPMonth|*;
+
+/*		4782.	7%の上げ幅は、流通などの労働組合が加盟するUAゼンセンが春季労使交渉で求める5%を上回る。
+
+4788;5;"多少":"円":"銭":"ドル":"年物";+JPRule5;
+
+/*		4788.	時給は平均約70円上がり、年収は約8万円増える見通し。
+
+6;5;JPCon+^JPMonth+^JPHiragana+^JPSeparateDate+^JPRule5|JPCon+^JPuchi+^"外来"+^"程度"+^JPMonth+^JPDuration;JPCon-DateTime|Join;
+
+/*		6.	佐藤さんは2012年のロンドン・パラリンピックなどへの参加を通じて、障害者が自然に街の中を歩き、周りの人が手を貸す海外の風景を目にしてきました。	自分として多少肩がこっていると思うが、それほどではない。
+
 2600;5;JPde|JPki|JPru;JPSuruVerb+JPVerb+JPVerbBase+Dummy2|Join|Join;
 2724;5;JPSuruNoun|JPde|JPki|JPmasu;^JPSuruNoun|JPSuruVerb+JPVerb|Join|Join;
 2904;5;JPde|JPki|JPtara;JPSuruVerb+JPConjVerb|Join|Join;
@@ -721,7 +735,7 @@
 4232;5;JPSuruNoun|"後"|JPSuruNoun|JPSuruVerb;JPCon|JPPartAdvNOUN+JPEndRelation|+Dummy|+Dummy;
 4579;5;SBegin|JPSuruNoun|JPSuruNoun|JPSuffixTime;*|JPCon|Join|Join+JPDateTime;
 2821;5;JPSuruNoun|JPSuffixTime;JPCon|Join+JPDateTime;
-7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1+^"試合"+^"安打"+^"回転"|JPCon;JPCon|Join;
+7;5;JPSuruNoun+^JPAdv+^JPfun_kanji_1+^"試合"+^"安打"+^"回転"|JPCon+^JPDuration;JPCon|Join;
 
 /*		7.	佐藤さんは2012年のロンドン・パラリンピックなどへの参加を通じて、障害者が自然に街の中を歩き、周りの人が手を貸す海外の風景を目にしてきました。 SHOULD NOT WORK FOR. 次に高い３回転ルッツは６．０点。
 
@@ -772,6 +786,10 @@
 1567;5;JPDate|JPno;+JPCon|^JPno;
 4094;5;JPCon|JPno|"半ば"|JPVerbNoun+JPVerbOther|JPta|JPCon;JPCon|Join|Join|Join|Join|Join;
 4543;5;^JPya+^JPku+^JPbu+^JPru|JPCon|JPno|JPCon|JPto|JPshite;*|*|JPCon|JPCon|*|*;
+4779;5;typeConcept|"における"|typeConcept;*|JPCon+JPno_join_Con|*;
+
+/*		4779.	共同文書に「平時における共同の取り組みの決定的な重要性」と記した。
+
 799;5;JPCon+^JPSuffixTime|JPno|JPCon|^JPu+^JPku+^JPsu+^JPtsu+^JPmu+^JPru+^SEnd;^JPCon-DateTime-JPVerb|^JPno_join_Con+JPno|-JPAdvTime-JPAdv-JPVerbOther-JPVerbNoun|+Dummy;
 
 /*		799.	佐藤さんは2012年のロンドン・パラリンピックなどへの参加を通じて、障害者が自然に街の中を歩き、周りの人が手を貸す海外の風景を目にしてきました。
@@ -1029,7 +1047,14 @@
 3741;5;JPKatakana+^JPVerbNoun|JPni|JPku;+Dummy|JPParticleNI|^JPku;
 2262;5;JPni|JPku;JPSuffixAdjVStem|Join;
 55;5;BracketClose|JPya|JPCon;BracketClose|-JPVerbOther|JPCon;
-56;5;JPCon|JPya|JPCon;JPCon|-JPVerbOther|^JPCon;
+56;5;JPCon|JPya|JPCon;^JPCon-JPCount-JPSuffixNoun-JPaida_kanji_1-JPAdvTime-JPRule4510-JPnaka|-JPVerbOther|^JPCon;
+
+/*		56.	企業や社会のあり方が大きく変わりつつあるときだからこそ、今まで以上に柔軟で迅速に構築できる、次のIT基盤が求められている。
+
+4784;5;JPCon|JPya|JPCon;^JPCon-JPAdv-JPSuruNoun-JPmono|*|*;
+
+/*		4784.	堅調な企業業績や雇用者数の伸びが背景にある。
+
 752;5;JPSuruNoun|JPya|JPCon;^JPSuruNoun|-JPVerbOther|JPCon;
 57;5;JPya|JPAdjVStem|JPsa;-JPVerbOther|^JPAdjVStem|^JPsa;
 798;5;JPya|JPCon;-JPVerbOther|^JPCon;
@@ -1614,7 +1639,10 @@
 3149;5;JPSuffixNoun+JPVerbOther|JPsu;-JPSuffixNoun|+Dummy;
 3554;5;JPSuffixNoun+JPVerbOther|JPka|JPnai;-JPSuffixNoun|^JPka|^JPnai;
 3973;5;JPHiragana+^JPru|JPCon+JPHiragana|JPSuffixNoun;JPCon|Join|Join;
-4460;5;JPCon|JPSuffixNoun+JPNegation;JPCon+JPNegation|Join;
+4460;5;JPCon|JPSuffixNoun+JPNegation;^JPCon+JPNegation|JPCon+JPNegation;
+
+/*		4460.	米国はＴＰＰなしで、どうやって経済秩序をつくるのか」
+
 4553;5;JPCon|JPSuffixNoun+Dummy2;JPCon|Join+JPDateTime;
 751;5;JPCon+^JPPerson+^JPSeparateDate|JPSuffixNoun;JPCon|Join;
 129;5;JPCon:JPSuruNoun|JPsa|JPn;JPCon|JPSuffixPerson+JPCon+JPHiragana|Join;
@@ -1687,7 +1715,7 @@
 3526;5;JPCon|JPno|"価値"|JPSuruNoun;JPExpressionC|Join|Join|^JPSuruNoun;
 4084;5;^"が"+^SBegin|JPCon:JPSuruNoun|JPno|JPCon:JPSuruNoun|JPCon:JPSuruNoun|JPSuruNoun|JPPunctuation;-Dummy|-Dummy|^JPno|JPCon|Join|Join|JPPunctuation;
 4572;5;JPSeason|JPno|JPCon;-JPCon|*|*;
-2218;5;JPCon|JPno|JPCon|JPSuruNoun;JPCon-DateTime|^JPCon|^JPCon|*;
+2218;5;JPCon+^JPDuration|JPno|JPCon|JPSuruNoun;JPCon-DateTime|^JPCon|^JPCon|*;
 
 /*		2218.	午後１時現在の日経平均は前週末比174円15銭（1.13％）高の１万5555円87銭。
 
@@ -1732,7 +1760,14 @@
 
 /*		4711.	スキー自体は初めてではないが、クロスカントリーは初体験。
 
-172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPRule172a+^JPRule172c+JPCon|JPSuruNoun+^JPRule172b;JPSuruNoun|Join;
+4780;5;JPno_join_Con|JPSuruNoun+^JPCon;*|JPCon;
+
+/*		4780.	関節リウマチにおけるエコーの意義は、関節炎の有無を明確にすることだ。
+
+172;5;^JPPerson+^JPPrefix+^JPSuffixPerson+^JPHiragana+^JPRule172a+^JPRule172c+^JPNegation+JPCon|JPSuruNoun+^JPRule172b;JPSuruNoun|Join;
+
+/*		172.	「もし車いす生活になったら、今の日本で暮らしたいとは思わない」。
+
 4638;5;JPRule172c|JPSuruNoun;JPCon+JPMeasurement|JPCon;
 4545;5;JPTime+^JPNumber|JPSuruNoun+^JPPolite|JPSuruVerb:JPPunctuation;JPCon+JPDateTime|JPCon|*;
 3051;5;JPNumber|JPSuruNoun+^"中止"|JPPunctuation;^JPNumber|JPCount|JPPunctuation;
@@ -2145,7 +2180,10 @@
 
 3490;5;JPNumber|JPhe|JPno|JPSuruNoun;JPCon|Join|Join|Join;
 4099;5;JPno:JPAttributive+^"ある"|JPCon|JPhe|JPno|JPCon;*|JPCon|Join|Join|Join;
-2572;5;JPhe|JPno|JPCon;JPParticleHE|JPNonRelevant|JPCon;
+2572;5;JPhe|JPno|JPCon;JPParticleHE|JPNonRelevant|*;
+
+/*		2572.	京浜・阪神港にある国際コンテナ戦略港湾の機能を拡充して物流網を整えるほか、電子輸出入申告の24時間化を急ぎ首都圏へのヒト・モノの集約をはかる。
+
 260;5;^BracketOpen+^SBegin|JPhe|JPVerbOther+^JPno;+Dummy|JPParticleHE|-JPSuffixNoun;
 261;5;JPAdv|JPVerbNoun|JPComma;^JPAdv|JPVerb|JPComma;
 1010;5;JPAdv|JPVerbNoun+JPVerbOther|JPParticlePREPO+^"に対し";^JPAdv|JPVerb|^JPParticlePREPO;
@@ -2347,7 +2385,10 @@
 1866;5;JPAdjVStem|JPi|JPno|JPha;^JPAdjVStem|JPi|JPNonRelevant|JPParticleHA;
 307;5;JPno|JPha;JPParticleNO|JPParticleHA;
 3656;5;JPVerbNoun|"可能"|JPna|JPCon;JPCon|Join|Join|Join;
-309;5;JPAdjNoun|JPna|JPCon+^JPAdjVStem;-JPAdv|-JPVerbOther|JPCon;
+309;5;JPAdjNoun|JPna|JPCon+^JPAdjVStem;-JPAdv|-JPVerbOther|^JPCon-JPSeparateDate-JPAdv-JPCount-JPRule172a-JPSuffixNoun-JPPrefix-JPmono;
+
+/*		309.	住宅投資については「（消費税率引き上げがあった）1997年に比べると大きな駆け込みと大きな反動減になっていない」と語り、住宅投資が比較的順調な背景には金融緩和などの要因があるとの見方を示した。
+
 310;5;JPCon|JPha|JPCon;^JPCon+Topic|JPParticleHA|^JPCon;
 
 /*		310.	治験中止に伴いMMFは9月3日中止。
@@ -2394,7 +2435,10 @@
 
 /*		4703.	野入容疑者は容疑を否認している。
 
-314;5;JPVerbOther+^JPkatsu+^JPta+^JPtame+^JPnaku+^JPto+^JPAdvNR+^JPKuruVerb|JPCon+^JPkara;JPCon|Join;
+314;5;JPVerbOther+^JPkatsu+^JPta+^JPtame+^JPnaku+^JPto+^JPAdvNR+^JPKuruVerb|JPCon+^JPkara+^JPDuration;JPCon|Join;
+
+/*		314.	日経平均は５月22日に付けた年初来高値（１万5627円）に一時あと20円ほどに迫った。任意型は、外からはなかなか分かりません。
+
 689;5;JPga|JPVerbOther|JPde;JPga|-JPVerbOther|JPde;
 3890;5;JPMimetic|JPSuruVerb+JPConjVerb;JPSuruVerb+JPConjVerb|Join;
 4155;5;JPMimetic|JPSuruVerb+JPVerbPastAttributive;JPSuruVerb+JPVerbPastAttributive|Join;
@@ -2420,7 +2464,10 @@
 2717;5;JPga:JPParticleGA|JPAdjNoun|JPna|JPCon:JPSeason;JPParticleGA|JPAdjNoun|JPLinkV|JPCon;
 2329;5;JPni+^JPniha|JPAdjNoun+^JPKatakana|JPna|JPCon;JPni|JPAdjNoun|JPLinkV|JPCon;
 2623;5;JPni|JPAdjNoun|JPna|JPSuruNoun;JPni|JPAdjNoun|JPLinkV|JPCon;
-320;5;JPAdjNoun|JPna|JPCon+^JPAdjVStem;JPAttributive|Join|JPCon;
+320;5;JPAdjNoun|JPna|JPCon+^JPAdjVStem;JPAttributive|Join|^JPCon;
+
+/*		320.	住宅投資については「（消費税率引き上げがあった）1997年に比べると大きな駆け込みと大きな反動減になっていない」と語り、住宅投資が比較的順調な背景には金融緩和などの要因があるとの見方を示した。
+
 2712;5;JPAdvDegree|JPAdjNoun|JPLinkV;JPAttributive|JPAdj|^JPLinkV;
 2617;5;JPAdvDegree|JPAdjNoun|JPna|JPSuruNoun;JPAttributive|Join|Join|JPCon;
 321;5;JPAdjNoun|JPna|JPSuruNoun+^JPAdjVStem|^JPi+^SEnd;JPCon|Join|Join|+Dummy;
@@ -3699,7 +3746,14 @@
 2458;5;JPAttributive+JPNegation|JPCon;JPCon+JPNegation|Join;
 3454;5;JPParticleNI|JPAttributive+JPVerb|JPCon;JPParticleNI|JPVerb|JPCon;
 4409;5;JPAttributive+JPNegation|JPTime;JPTime+JPNegation|Join;
-2873;5;JPAttributive|JPTime;JPTime+DateTime|Join;
+4783;5;JPAttributiveTime|JPTime;JPTime+DateTime|Join;
+
+/*		4783.	これまでの15年を5年ずつ3期に区切って考えてみる。
+
+2873;5;JPAttributive|JPTime;^JPCon-JPVerbBase|JPTime+DateTime;
+
+/*		2873.	上位と下位、それぞれの21年度の純利益合計額を3期前と比べる。
+
 3662;5;JPCon+JPVerbNoun|JPAttributive|JPCon;JPAttributive|Join|JPCon;
 4134;5;JPmo:JPParticleMO:JPParticleWO|JPVerbPastAttributive|JPCon+^"こと";+Dummy|^JPVerb-JPAttributive|^JPCon;
 4386;5;JPSuffixNoun:JPComma|*JPAdjVConj|JPAttributive|JPCon;*|JPCon|Join|Join;
@@ -3710,7 +3764,10 @@
 
 /*		4774.	最初の月命日に、父が好きだった故郷の地酒を置いた。
 
-763;5;JPAttributive|JPCon;JPCon|Join;
+763;5;JPAttributive|JPCon+^JPDuration+^"毎日";JPCon|Join;
+
+/*		763.	「もし車いす生活になったら、今の日本で暮らしたいとは思わない」。
+
 930;5;JPNegation|JPshi|^JPHiragana+^SEnd;^JPNegation|JPConj|+Dummy;
 921;5;JPAdjVBase|JPshi;JPAdjVBase|JPConj;
 2689;5;JPnai+JPEndConcept;JPAdjVBase+JPNegation+JPEndConcept;
@@ -3724,7 +3781,10 @@
 4145;5;JPParticleGA:JPni:JPParticleNI|JPVerbBase+JPVerbOtherKU|^JPVerb|JPno;JPParticleGA|^JPVerb|+Dummy|+Dummy;
 1114;5;JPga|JPVerbBase+^JPVerbOtherKU|JPCon;^JPParticleGA|^JPVerb|^JPCon;
 2115;5;JPParticleWO|JPVerbBase+^JPVerbOtherTSU+^JPVerbOtherRU|JPCon|JPno|^"方"+^SEnd;JPParticleWO|^JPVerb|JPCon|JPRelation|+Dummy;
-1159;5;JPParticleWO|JPVerbBase|JPCon;JPParticleWO|^JPVerb|JPCon;
+1159;5;JPParticleWO|JPVerbBase|JPCon;JPParticleWO|^JPVerb|-JPAdvTime-JPVerbOther-JPgun_kanji_1;
+
+/*		1159.	吉野家ホールディングス傘下で、たこ焼きチェーンなどを運営するピーターパンコモコが手がける「ピッツァ ナポレターノ カフェ」がそれだ。
+
 938;5;JPVerbBase|JPCon|JPya;JPAttributive|JPCon|JPParticleYA;
 1539;5;JPNaruVerb|JPVerbBase|JPCon|JPmo;^JPNaruVerb|JPVerb|JPCon|JPParticleMO;
 1496;5;JPVerbBase|JPCon|JPmo;JPAttributive|JPCon|JPParticleMO;
@@ -3817,7 +3877,10 @@
 1033;5;JPNumber|JPshika|JPAdjVBase+JPNegation;JPCon|Join|JPAdjVBase+JPNegation;
 3669;5;JPNumber|"以上"|JPParticleGA;JPNumber|Join|JPParticleGA;
 4425;5;JPNumber|"くらい";^JPNumber|Join;
-1119;5;JPCon+^JPTime|JPModifyPOST+JPAdv+^JPshika;JPCon|JPParticlePREPO;
+1119;5;JPCon+^JPTime|JPModifyPOST+JPAdv+^JPshika;^JPCon|JPParticlePREPO;
+
+/*		1119.	周辺国を威圧する異形の地図の矛先は「アジア回帰」戦略を取る米国に向けられている。
+
 4312;5;JPExpressionNR|JPshika|JPVerb+JPNegation;JPExpressionNR|Join|-JPNegation;
 3471;5;JPVerbNoun|JPshika|JPVerb+JPNegation;JPCon|JPPartAdvNOUN|-JPNegation;
 3474;5;JPshika|JPVerb+JPNegation;JPPartAdvNOUN|JPVerb-JPNegation;
@@ -4177,7 +4240,7 @@
 846;5;JPParticleWO|JPCon|JPni|JPVerb|JPCon;JPParticleWO|JPCon|JPParticleNI|JPVerb|JPCon;
 820;5;JPCon|JPde|JPVerb|JPNegation|JPCon;JPCon|Join|Join|JPCon+JPNegation|JPCon;
 753;5;JPCon|JPLinkV|JPCon|JPno|JPCon|JPya;JPCon|Join|Join|Join|Join|JPParticleYA;
-750;5;JPCon|JPLinkV|JPCon|JPCon|JPParticlePREPO;JPCon|Join|Join|Join|JPParticlePREPO;
+750;5;JPCon|JPLinkV|JPCon+^"どの"|JPCon|JPParticlePREPO;JPCon|Join|Join|Join|JPParticlePREPO;
 749;5;JPCon|JPde|JPno|JPCon|JPParticleGA;JPCon|Join|Join|Join|JPParticleGA;
 739;5;JPCon|JPya|JPCon;JPCon|JPParticleYA|^JPCon;
 835;5;JPCon|JPParticleTO|JPCon|JPParticleWO;^JPCon|JPParticlePREPO|JPCon|JPParticleWO;
@@ -4607,7 +4670,6 @@
 4497;5;JPCon+JPSeparateDate|JPCon+JPKatakana:"旬":JPAdjNoun:"朝";-JPCon|-JPAdjNoun;
 4487;5;JPAdvTime+JPSeparateDate;-JPAdvTime;
 
-
 /* ---------- PHASE 7 ----------
 /* ---------- Identifying Predicates ----------
 
@@ -4618,7 +4680,7 @@
 2792;7;JPtoshita|JPPunctuation;^PrimaryRelation|JPPunctuation;
 2793;7;JPtoshita;^JPParticlePREPO;
 
-
+/*		4763.	この戦争は、一千万人もの戦死者を出した。
 /* ---------- PHASE 10: PART 1 ----------
 /* ---------- Additional Processing of AlphaNumeric Characters and Furigana AFTER disambiguation of other entities ----------
 
@@ -4648,7 +4710,6 @@
 4657;10;JPCon|"×"|JPValue;*|JPCon|*;
 2767;10;JPAttributive|JPCon+DateTime;JPCon+DateTime|Join;
 4538;10;SBegin|JPAdvTime|JPRule289|DateTime;*|^JPAdvTime|JPVerb|*;
-
 
 /* ---------- PHASE 10: PART 2 ----------
 /* ---------- Merging Hiragana characters if they have not been processed -----------
@@ -4726,7 +4787,6 @@
 3939;10;"あれ"+^JPEndRelation;JPPronDemon;
 4062;10;^"で"+^"と"+^"は"+^JPComma+^SBegin|"うち";*|JPPartAdvNOUN;
 4034;10;JPchou_kanji_1|JPCon;JPCon|Join;
-
 
 /* ---------- PHASE 13 ----------
 /* ---------- Entity Vector Attributes ----------
@@ -4818,14 +4878,20 @@
 4045;13;"ぁ";Join;
 4047;13;"ぜ";Join;
 
-
 /* ---------- PHASE 17 ----------
 /*  ---------- Simple Negation Expansion ----------
 
 4626;17;typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|*|+JPNegStop;
+
+/*		4626.	肝内に明らかな異常集積はありません。
+
 4627;17;typeConcept|JPParticleYA|typeConcept|JPParticleGA:JPParticleHA:JPParticleMO|JPAdjVBase+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|-JPNegBegin|*|*|+JPNegStop;
 
+/*		4627.	咳や発熱はない。
 
+4781;17;*typeConcept|JPParticleHA:JPParticleWO|typeRelation+JPNegation|SEnd:JPPunctuation;+JPNegBegin|*|*|+JPNegStop;
+
+/*		4781.	入国時の検査義務をより精度の高いPCR検査などに切り替えたが、ビザの発給は止めていない。
 /* ---------- PHASE 19 ----------
 /*  ---------- Special handling of Parentheses whose content is all-Katakana or all-Number ----------
 
@@ -4839,8 +4905,6 @@
 4757;19;JPDate|JPYobi;JPDate|Join;
 
 /*		4757.	11月17日(日)　東京　サントリーホール
-
-
 /* ---------- PHASE 20 ----------
 /* ---------- REWRITE LANGUAGE-SPECIFIC LABELS BACK TO MANDATORY LABELS
 
