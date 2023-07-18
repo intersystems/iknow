@@ -833,7 +833,7 @@ try:
         version=version,
         python_requires='>=3.7',
         setup_requires=[
-            'cython',
+            'cython>=3',
             'wheel',
             'setuptools>=20.6.8',
             'pefile; sys_platform == "win32"',
@@ -850,8 +850,7 @@ try:
                 extra_compile_args=extra_compile_args,
                 extra_link_args=extra_link_args
             )],
-            annotate=annotate,
-            compiler_directives={'language_level': '3', 'binding': True}
+            annotate=annotate
         ),
         cmdclass={
             'clean': CleanCommand,
