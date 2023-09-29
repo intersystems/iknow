@@ -24,7 +24,6 @@ cdef extern from "../../engine/src/engine.h" namespace "iknowdata" nogil:
 		Generic3 = 15
 
 cdef extern from "../../engine/src/engine.h" namespace "iknowdata::Entity" nogil:
-	const size_t kNoConcept = <size_t>(-1)
 	enum eType:
 		NonRelevant = 0,
 		Concept

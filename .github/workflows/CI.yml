@@ -40,7 +40,7 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
@@ -124,7 +124,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: get list of dependencies
         run: actions/dependencies.sh
       - name: download cached ICU installation
@@ -161,10 +161,10 @@ jobs:
     runs-on: macos-13
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: set up environment
         run: |
-          echo "XCODE_SELECTED=/Applications/Xcode_14.3.app" >> $GITHUB_ENV
+          echo "XCODE_SELECTED=/Applications/Xcode_15.0.app" >> $GITHUB_ENV
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
           echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
@@ -210,10 +210,10 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: set up environment
         run: |
-          echo "XCODE_SELECTED=/Applications/Xcode_14.3.app" >> $GITHUB_ENV
+          echo "XCODE_SELECTED=/Applications/Xcode_15.0.app" >> $GITHUB_ENV
           echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $GITHUB_ENV
           echo "HOMEBREW_NO_INSTALL_CLEANUP=1" >> $GITHUB_ENV
           echo "MACOSX_DEPLOYMENT_TARGET=10.9" >> $GITHUB_ENV
@@ -272,7 +272,7 @@ jobs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: set up environment
         run: |
           mkdir -p $HOME/ccache_exe
@@ -341,7 +341,7 @@ jobs:
     if: needs.manylinux2014_x86_64.outputs.REF_TESTING_PASSED == '0' || needs.macos_10_9_universal.outputs.REF_TESTING_PASSED == '0' || needs.windows_x86_64.outputs.REF_TESTING_PASSED == '0'
     steps:
       - name: create comment
-        uses: peter-evans/commit-comment@v2
+        uses: peter-evans/commit-comment@v3
         with:
           body: >-
             **Error**: Reference testing failed. See the build artifacts at
@@ -359,7 +359,7 @@ jobs:
       FORCE_DEPLOY: ${{ github.event.inputs.FORCE_DEPLOY }}
     steps:
       - name: check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 21  # github.event.commits has limit of 20 commits, so we need at least 21 to perform diffs
       - name: download cached pip files
@@ -402,7 +402,7 @@ jobs:
         run: actions/deploy.sh
       - name: warn if version.py was changed but not in last commit
         if: env.WARN_COMMIT
-        uses: peter-evans/commit-comment@v2
+        uses: peter-evans/commit-comment@v3
         with:
           sha: ${{ env.WARN_COMMIT }}
           body: >-

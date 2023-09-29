@@ -15,15 +15,15 @@ ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-73-2/ic
 ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz
 JSON_VERSION=3.11.2
 JSON_URL=https://github.com/nlohmann/json/releases/download/v3.11.2/include.zip
-PYVERSIONS_WIN="3.7.9 3.8.10 3.9.13 3.10.11 3.11.4"
-PYVERSIONS_MACOSUNIVERSAL="3.8.10 3.9.13 3.10.11 3.11.4"
-PYURLS_MACOSUNIVERSAL="https://www.python.org/ftp/python/3.8.10/python-3.8.10-macos11.pkg https://www.python.org/ftp/python/3.9.13/python-3.9.13-macos11.pkg https://www.python.org/ftp/python/3.10.11/python-3.10.11-macos11.pkg https://www.python.org/ftp/python/3.11.4/python-3.11.4-macos11.pkg"
-CCACHE_VERSION=4.8.2
-CCACHE_URL=https://github.com/ccache/ccache/releases/download/v4.8.2/ccache-4.8.2-windows-x86_64.zip
-CYTHON_VERSION=0.29.36
-MANYLINUX2014_X86_64_TAG=2023-07-06-73b0312
-MANYLINUX2014_AARCH64_TAG=2023-07-06-73b0312
-MANYLINUX2014_PPC64LE_TAG=2023-07-06-73b0312
+PYVERSIONS_WIN="3.7.9 3.8.10 3.9.13 3.10.11 3.11.5"
+PYVERSIONS_MACOSUNIVERSAL="3.8.10 3.9.13 3.10.11 3.11.5"
+PYURLS_MACOSUNIVERSAL="https://www.python.org/ftp/python/3.8.10/python-3.8.10-macos11.pkg https://www.python.org/ftp/python/3.9.13/python-3.9.13-macos11.pkg https://www.python.org/ftp/python/3.10.11/python-3.10.11-macos11.pkg https://www.python.org/ftp/python/3.11.5/python-3.11.5-macos11.pkg"
+CCACHE_VERSION=4.8.3
+CCACHE_URL=https://github.com/ccache/ccache/releases/download/v4.8.3/ccache-4.8.3-windows-x86_64.zip
+CYTHON_VERSION=3.0.2
+MANYLINUX2014_X86_64_TAG=2023-09-24-36b93e4
+MANYLINUX2014_AARCH64_TAG=2023-09-24-36b93e4
+MANYLINUX2014_PPC64LE_TAG=2023-09-24-36b93e4
 # END DEPENDENCY-AUTOUPDATE SECTION
 
 
