@@ -13,8 +13,8 @@ set -euxo pipefail
 ICU_NAME="ICU 74.1"
 ICU_URL_WIN=https://github.com/unicode-org/icu/releases/download/release-74-1/icu4c-74_1-Win64-MSVC2022.zip
 ICU_URL_SRC=https://github.com/unicode-org/icu/releases/download/release-74-1/icu4c-74_1-src.tgz
-JSON_VERSION=3.11.2
-JSON_URL=https://github.com/nlohmann/json/releases/download/v3.11.2/include.zip
+JSON_VERSION=3.11.3
+JSON_URL=https://github.com/nlohmann/json/releases/download/v3.11.3/include.zip
 PYVERSIONS_WIN="3.7.9 3.8.10 3.9.13 3.10.11 3.11.6 3.12.0"
 PYVERSIONS_MACOSUNIVERSAL="3.8.10 3.9.13 3.10.11 3.11.6 3.12.0"
 PYURLS_MACOSUNIVERSAL="https://www.python.org/ftp/python/3.8.10/python-3.8.10-macos11.pkg https://www.python.org/ftp/python/3.9.13/python-3.9.13-macos11.pkg https://www.python.org/ftp/python/3.10.11/python-3.10.11-macos11.pkg https://www.python.org/ftp/python/3.11.6/python-3.11.6-macos11.pkg https://www.python.org/ftp/python/3.12.0/python-3.12.0-macos11.pkg"
