@@ -51,4 +51,4 @@ if ! [ -f "$JSONDIR/iknow_json_url.txt" ] || [ $(cat "$JSONDIR/iknow_json_url.tx
 fi
 
 # finish ccache setup
-echo /usr/local/opt/ccache/libexec >> $GITHUB_PATH
+echo /opt/homebrew/opt/ccache/libexec >> $GITHUB_PATH
