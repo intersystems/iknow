@@ -812,7 +812,6 @@ try:
             'Programming Language :: Cython',
             'Programming Language :: Python :: 3',
             'Programming Language :: Python :: 3 :: Only',
-            'Programming Language :: Python :: 3.7',
             'Programming Language :: Python :: 3.8',
             'Programming Language :: Python :: 3.9',
             'Programming Language :: Python :: 3.10',
@@ -832,7 +831,7 @@ try:
         packages=['iknowpy'],
         package_data=package_data,
         version=version,
-        python_requires='>=3.7',
+        python_requires='>=3.8',
         setup_requires=[
             'cython>=3',
             'wheel',
