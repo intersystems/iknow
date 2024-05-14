@@ -1,21 +1,19 @@
-# Configuration for autoupdating dependencies daily.
+# Configuration for updating dependencies.
 #
-# Once a day, at midnight UTC, we check for updates to
+# Check for updates to
 # - ICU
 # - ccache for Windows
 # - Python for Windows
-# - Python for Mac OS X
 # - Python for macOS universal
 # - Cython
+# - manylinux
 #
 # For each dependency that has an update, we create a pull request containing a
 # single commit that updates the dependency.
 
-name: Dependency Autoupdate Daily
+name: Dependency Update
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
       BUILD_PULL_REQUEST:
@@ -227,5 +225,39 @@ jobs:
             ${{ env.PYTHON_UPDATE_INFO_MULTILINE }}
 
             For details of all Python releases, see https://www.python.org/downloads/macos/.
+
+            *I am a bot, and this action was performed automatically.*
+
+  autoupdate-manylinux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check out repository
+        uses: actions/checkout@v4
+      - name: install Python packages
+        run: pip3 install --user requests
+      - name: search for update
+        run: $GITHUB_WORKSPACE/actions/update_manylinux.py
+      - name: allow building pull requests
+        if: github.event_name == 'schedule' || github.event.inputs.BUILD_PULL_REQUEST == 'true'
+        run: echo "ACTIONS_TOKEN=${{ secrets.ACTIONS_TOKEN }}" >> $GITHUB_ENV
+      - name: prevent building pull requests
+        if: github.event_name != 'schedule' && github.event.inputs.BUILD_PULL_REQUEST == 'false'
+        run: echo "ACTIONS_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+      - name: apply update
+        uses: peter-evans/create-pull-request@v6
+        with:
+          assignees: isc-adang
+          author: "github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>"
+          commit-message: "[autoupdate-manylinux] update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
+          branch: autoupdate-manylinux
+          delete-branch: true
+          token: ${{ env.ACTIONS_TOKEN }}
+          title: "[autoupdate] Update manylinux: ${{ env.MANYLINUX_UPDATE_INFO_ONELINE }}"
+          body: |-
+            A new manylinux image is available.
+
+            ${{ env.MANYLINUX_UPDATE_INFO_MULTILINE }}
+
+            For details regarding manylinux images, see https://github.com/pypa/manylinux.
 
             *I am a bot, and this action was performed automatically.*
