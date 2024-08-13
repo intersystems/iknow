@@ -35,7 +35,7 @@ env:
 jobs:
   manylinux2014_x86_64:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     outputs:
       REF_TESTING_PASSED: ${{ steps.tests.outputs.REF_TESTING_PASSED }}
     steps:
@@ -69,11 +69,13 @@ jobs:
           name: ${{ github.job }}-wheel
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
       - name: install
-        run: pip3 install ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
+        run: |
+          python -m venv venv
+          ${{ github.workspace }}/venv/bin/pip install ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
       - name: run tests
         id: tests
         working-directory: ${{ github.workspace }}/language_development
-        run: python3 ref_testing.py
+        run: ${{ github.workspace }}/venv/bin/python ref_testing.py
       - name: upload test results
         if: steps.tests.outputs.REF_TESTING_PASSED == '0'
         uses: actions/upload-artifact@v4
@@ -84,7 +86,7 @@ jobs:
             ${{ github.workspace }}/reference_materials/reports
   manylinux2014_aarch64:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: check out repository
         uses: actions/checkout@v4
@@ -121,7 +123,7 @@ jobs:
           path: ${{ github.workspace }}/modules/iknowpy/wheelhouse/iknowpy-*.whl
   manylinux2014_ppc64le:
     if: github.event_name != 'pull_request' || !startsWith(github.head_ref, 'autoupdate-') || github.head_ref != 'autoupdate-ccache' && github.head_ref != 'autoupdate-python-windows' && github.head_ref != 'autoupdate-python-osx' && github.head_ref != 'autoupdate-python-macosuniversal'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: check out repository
         uses: actions/checkout@v4
