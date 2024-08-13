@@ -44,7 +44,7 @@ if ! [ -f "$ICUDIR/iknow_icu_url.txt" ] || [ $(cat "$ICUDIR/iknow_icu_url.txt") 
   curl -L -o icu4c-src.tgz "$ICU_URL"
   tar xfz icu4c-src.tgz
   cd icu/source
-  PYTHON=/opt/python/cp311-cp311/bin/python CXXFLAGS=-std=c++11 ./runConfigureICU Linux --prefix="$ICUDIR"
+  PYTHON=/opt/python/cp312-cp312/bin/python CXXFLAGS=-std=c++11 ./runConfigureICU Linux --prefix="$ICUDIR"
   make -j $(nproc)
   make install
   echo "$ICU_URL" > "$ICUDIR/iknow_icu_url.txt"
