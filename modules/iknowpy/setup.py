@@ -281,8 +281,9 @@ class MergeCommand(Command):
         # the Tag key, which is expected to be different between wheels that
         # target different Python versions. This way, we don't merge wheels that
         # might be incompatible with each other.
+        # BDB: also ignore the 'Generator' metadata key
         for key, values in metadata.items():
-            if key != 'Tag' and len(values) > 1:
+            if key != 'Tag' and key != 'Generator' and len(values) > 1:
                 raise BuildError(f'Wheels have conflicting metadata for key {key!r} and cannot be merged. Conflicting values are {values!r}.')
 
         python_tags.sort(key=MergeCommand._get_version_from_tag)
