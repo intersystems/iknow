@@ -87,7 +87,7 @@ class PatchLib:
                 raise BuildError(f'Unable to parse patchelf version {p.stdout.rstrip()!r}')
             if version < (0, 9):
                 raise BuildError(f'patchelf >=0.9 is needed, but found version {p.stdout.rstrip()!r}')
-            if platform.processor() == 'aarch64' and version < (0, 12):
+            if platform.processor() == 'aarch64' and version < (0, 13):
                 # work around patchelf bug (https://github.com/NixOS/patchelf/pull/216)
                 self._patchelf = ['patchelf', '--page-size', '65536']
             else:
@@ -818,6 +818,7 @@ try:
             'Programming Language :: Python :: 3.10',
             'Programming Language :: Python :: 3.11',
             'Programming Language :: Python :: 3.12',
+            'Programming Language :: Python :: 3.13',
             'Programming Language :: Python :: Implementation :: CPython',
             'Operating System :: MacOS :: MacOS X',
             'Operating System :: Microsoft :: Windows',
